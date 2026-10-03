@@ -16,10 +16,14 @@ import 'models/document_conversion.dart';
 import 'importers/import_failure.dart';
 import 'models/source_document_style.dart';
 import 'utils/import_budget.dart';
+import '../../utils/file_extension.dart';
 import '../markdown_safety.dart';
 import '../web_asset_store.dart';
+import 'importers/csv/csv_document_importer.dart';
 import 'importers/docx/docx_document_importer.dart';
+import 'importers/ods/ods_document_importer.dart';
 import 'importers/odt/odt_document_importer.dart';
+import 'importers/xlsx/xlsx_document_importer.dart';
 
 /// De uitkomst van een documentimport: de Markdown mét de huisstijl van de
 /// bron (#2119), of de reden van een mislukking.
@@ -59,7 +63,7 @@ class DocumentImportFailure {
 }
 
 /// Welk documentformaat de service herkent.
-enum DocumentImportFormat { docx, odt }
+enum DocumentImportFormat { docx, odt, xlsx, ods, csv }
 
 /// Herkent aan de bestandsnaam of dit een document is dat de import kan
 /// omzetten. Gebruikt door de UI om de bestandskiezer te filteren.
@@ -73,7 +77,7 @@ bool isImportableDocumentName(String name) {
 
 /// De bestandsextensies die de documentimport kent (zonder punt). Eén bron
 /// voor de bestandskiezer en de herkenning.
-const documentImportExtensions = ['docx', 'odt'];
+const documentImportExtensions = ['docx', 'odt', 'xlsx', 'ods', 'csv'];
 
 /// Zet [bytes] (een `.docx` of `.odt`) om in Markdown.
 ///
@@ -89,14 +93,29 @@ DocumentImportResult importDocumentBytes(
   if (format == null) {
     return DocumentImportResult.failed(
       DocumentImportFailure(
-        'Onbekend formaat: $filename. Alleen .docx en .odt worden ondersteund.',
+        'Onbekend formaat: $filename. Alleen .docx, .odt, .xlsx, .ods en '
+        '.csv worden ondersteund.',
       ),
     );
   }
+  // Spreadsheets kennen geen eigen documenttitel; de bestandsnaam is dan de
+  // titel die boven de tabel komt.
+  final title = stemOfFileName(filename);
   try {
     final conversion = switch (format) {
       DocumentImportFormat.docx => convertDocxDetailed(bytes, budget: budget),
       DocumentImportFormat.odt => convertOdtDetailed(bytes, budget: budget),
+      DocumentImportFormat.xlsx => convertXlsxDetailed(
+        bytes,
+        title: title,
+        budget: budget,
+      ),
+      DocumentImportFormat.ods => convertOdsDetailed(
+        bytes,
+        title: title,
+        budget: budget,
+      ),
+      DocumentImportFormat.csv => convertCsvDetailed(bytes, title: title),
     };
     final materialized = _materializeImages(conversion);
     // Fail-closed: de importer produceert zelf Markdown, maar de brontekst
@@ -144,6 +163,9 @@ DocumentImportFormat? _detectFormat(String filename) {
   return switch (ext) {
     'docx' => DocumentImportFormat.docx,
     'odt' => DocumentImportFormat.odt,
+    'xlsx' => DocumentImportFormat.xlsx,
+    'ods' => DocumentImportFormat.ods,
+    'csv' => DocumentImportFormat.csv,
     _ => null,
   };
 }

@@ -1628,6 +1628,592 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Team…': 'Tým…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktoři kromě vás, kteří jsou v každém bundle, aby i oni mohli otevírat odeslání. Někoho přidáte jeho kartou redaktora a znovu zadáte otisk této karty.',
+  'Er is nog niemand naast jou.': 'Kromě vás zatím nikdo není.',
+  'Plak de kaart van de redacteur': 'Vložte kartu redaktora',
+  'Kaart controleren': 'Zkontrolovat kartu',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karta: {naam}. Zadejte otisk této karty, který vám {naam} předal jinou cestou, například telefonem.',
+  'Redacteur verwijderen': 'Odebrat redaktora',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Odebrat {naam} z týmu? Bundle, které jste už zveřejnili, zůstanou, jaké jsou, dokud nezveřejníte znovu; co už bylo zapečetěno pro {naam}, zůstává pro tuto osobu čitelné.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} byl(a) přidán(a). Zveřejněte bundle znovu, aby zahrnul {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} byl(a) odebrán(a). Zveřejněte bundle znovu, aby {naam} vynechal.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Nejprve vytvořte vlastní klíč redakce v Klíč redakce….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Váš klíč redakce nelze použít. Podívejte se do Klíč redakce….',
+  'Dit is geen redacteurskaart.': 'Toto není karta redaktora.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Tato karta je z novější verze OciDeck. Aktualizujte OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Karta obsahuje něco nepřípustného. Požádejte redaktora o novou kartu.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Tento otisk neodpovídá kartě: karta byla změněna nebo není od toho, koho si myslíte. Požádejte redaktora znovu o otisk a kartu.',
+  'Dit is je eigen kaart.': 'Toto je vaše vlastní karta.',
+  'Deze redacteur staat er al.': 'Tento redaktor už v týmu je.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tým je plný: bundle nese nejvýše 64 organizátorů, včetně vás.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Soubor team.json v pracovní složce nelze přečíst. Nic nebylo změněno; opravte ho nebo smažte.',
+  'Het team kon niet worden opgeslagen.': 'Tým se nepodařilo uložit.',
+  'Deze redacteur staat niet meer in het team.':
+      'Tento redaktor už v týmu není.',
+  'Naast jou in de bundel: {namen}.': 'Kromě vás v bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Nejdřív zkontrolujte klíč pro obnovení v Klíč redakce… nebo přidejte druhého redaktora v Tým…. Bez cesty zpět budou všechna odeslání nečitelná, když se toto zařízení pokazí.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Soubor team.json v pracovní složce nelze přečíst. Nic se nepodepíše.',
+  'Redacteurskaart maken…': 'Vytvořit kartu redaktora…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Pomocí karty redaktora vás vlastník formuláře přidá do bundle, abyste i vy mohli otevírat odeslání. Kartu lze poslat e-mailem.',
+  'Jouw naam op de kaart': 'Vaše jméno na kartě',
+  'Kaart maken': 'Vytvořit kartu',
+  'Kaart kopiëren': 'Kopírovat kartu',
+  'Vingerafdruk van de kaart': 'Otisk karty',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Předejte vlastníkovi tento otisk jinou cestou než kartu, například telefonem. Před přidáním vás ho znovu zadá.',
+  'Verzegeld opslaan…': 'Uložit zapečetěné…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Šifrovaný soubor (.zip.age), který může otevřít jen organizátor. K tomu potřebujete soubor bundle a otisk z pozvánky.',
+  'Kies het bundelbestand van de organisator':
+      'Vyberte soubor bundle organizátora',
+  'Vingerafdruk van de organisator': 'Otisk organizátora',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Zadejte otisk z pozvánky. V souboru bundle záměrně není: tak můžete ověřit, od koho pochází.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'To není otisk. Má 52 znaků, obvykle ve skupinách po čtyřech.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Tento soubor není bundle, který by OciDeck uměl přečíst.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Tento formulář nebo bundle je z novější verze OciDeck. Aktualizujte OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Otisk neodpovídá tomuto bundle: formulář nepochází od toho, koho uvádí pozvánka. Zkontrolujte otisk a soubor bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Podpis bundle není správný: byl změněn nebo nepochází od toho, koho uvádí otisk. Požádejte organizátora o nový bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Tento bundle nepatří k tomuto formuláři. Použijte soubor bundle, který patří právě k tomuto formuláři.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Platnost tohoto bundle vypršela. Požádejte organizátora o nový.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Tento bundle je starší než bundle, který jste dříve dostali od tohoto organizátora. Požádejte organizátora o nejnovější.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle obsahuje něco nepřípustného. Požádejte organizátora o nový bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Tento formulář je uzavřen: poslední den byl {datum}. Obraťte se na organizátora.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Přihláška je větší, než organizátor povoluje ({mb} MB). Odstraňte fotku nebo jednu zmenšete.',
+  'De inzending kon niet worden verzegeld.':
+      'Přihlášku se nepodařilo zapečetit.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Uloženo zapečetěné jako {naam}, otevřít ji může jen: {organisatoren}.',
+  'Bundel publiceren…': 'Zveřejnit bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle je to, čemu ten, kdo vyplňuje, věří o vaší redakci: ke kterému klíči pečetit a ke kterému textu patří. Ukládá se vedle formuláře.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'V pracovní složce není žádný formulář, pro který by šlo vytvořit bundle.',
+  'Naam voor de invuller': 'Jméno pro vyplňujícího',
+  'Geldig tot (jjjj-mm-dd)': 'Platný do (rrrr-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Poslední den, kdy vyplňující tomuto bundle věří. Ne dříve než v den uzavření formuláře.',
+  'Bundel maken': 'Vytvořit bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle vytvořen (pořadové číslo {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Předejte vyplňujícímu otisk jinou cestou než souborem bundle, například v pozvánce. Kdo má jen soubor bundle, nemůže ověřit, od koho pochází.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Tato platforma nemá klíčenku pro klíč redakce; bundle tu nelze podepsat.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Klíč redakce zatím neexistuje. Vytvořte ho v Klíč redakce…, než bundle zveřejníte.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Klíčenku nelze přečíst. Nic nebylo podepsáno.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Uložený klíč redakce nelze přečíst. Smažte ho v Klíč redakce… a obnovte ho ze svého klíče pro obnovení.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Bundle tohoto formuláře v pracovní složce nelze přečíst, nebo nepatří k ostatním. Pak nelze určit pořadové číslo a nic se nepodepíše. Zkontrolujte: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Zadejte jméno o nejvýše 80 znacích.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Platný do musí být existující datum ve tvaru rrrr-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Platný do nesmí být dříve než den uzavření formuláře.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle se nepodařilo vytvořit ({veld}). Zkontrolujte, zda formulář uvádí platný den uzavření a dobu uchování.',
+  'formulier': 'formulář',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle se nepodařilo uložit do pracovní složky.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Vytvořte a podepište bundle, kterému vyplňující věří o vaší redakci.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: zapečetěný balíček otevřen a importován.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: tento balíček je zapečetěný a tato platforma nemá klíčenku pro klíč redakce.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: tento balíček je zapečetěný a zatím neexistuje klíč redakce, kterým by se otevřel. Vytvořte ho v Klíč redakce… nebo ho obnovte ze svého klíče pro obnovení.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: tento balíček je zapečetěný a klíčenku nelze přečíst. Nic nebylo zkoušeno.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: tento balíček je zapečetěný a uložený klíč redakce nelze přečíst. Smažte ho v Klíč redakce… a obnovte ho ze svého klíče pro obnovení.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: tento balíček nebyl zapečetěn pro váš klíč redakce.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: tento balíček byl změněn nebo useknut a nebude otevřen.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: tento balíček je větší, než může odeslání být.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: uložený klíč redakce není klíč, který by OciDeck mohl použít.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: není zapečetěný balíček, který by OciDeck uměl přečíst.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Zapečetěný soubor (.zip.age) se otevírá vaším klíčem redakce.',
+  'Herstelsleutel controleren': 'Zkontrolovat klíč pro obnovení',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Klíč redakce byl vytvořen. Teď si zapište klíč pro obnovení.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Klíčenka klíč nepřijala. Nic nebylo vytvořeno.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Klíč redakce už existuje. Nebyl dotčen.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Klíčenku se nepodařilo přečíst. Nic nebylo předpokládáno a nic nebylo vytvořeno.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'V klíčence je něco, co není klíč redakce. Nebylo to přepsáno.',
+  'Dit platform heeft geen sleutelhanger.': 'Tato platforma nemá klíčenku.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Správně: klíč pro obnovení byl zkontrolován.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Toto je platný klíč pro obnovení, ale ne k tomuto klíči redakce.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Klíč pro obnovení je správný, ale nepodařilo se ho uložit.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Není žádný klíč redakce, s kterým by se dalo porovnat.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Toto není klíč pro obnovení klíče redakce.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Je v něm překlep: kontrolní součet nesouhlasí.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tento klíč pro obnovení pochází z novější verze OciDecku.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Tento klíč pro obnovení byl vytvořen pro něco jiného.',
+  'Hersteld uit de herstelsleutel.': 'Obnoveno z klíče pro obnovení.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Klíčenka klíč nepřijala. Nic nebylo obnoveno.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Uložit klíč redakce jako soubor klíče age',
+  'Het bestand kon niet worden opgeslagen.': 'Soubor se nepodařilo uložit.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Uloženo jako {pad}. Kdo má tento soubor, může otevřít všechno.',
+  'Redactiesleutel verwijderd.': 'Klíč redakce byl smazán.',
+  'Redactiesleutel': 'Klíč redakce',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Tato platforma nemá klíčenku. Klíč redakce zde nelze uchovat; použijte desktopovou aplikaci.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Klíčenku se nepodařilo přečíst (zamčená, nebo přístup odepřen). Nic nebylo předpokládáno a nic nebylo vytvořeno.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'V klíčence je něco, co není klíč redakce. Nebylo to přepsáno. Smažte to a obnovte klíč ze svého klíče pro obnovení.',
+  'Redactiesleutel verwijderen…': 'Smazat klíč redakce…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Klíč redakce otevírá zapečetěná odeslání a podepisuje balíčky vašich formulářů. Je v klíčence tohoto operačního systému. Pokud ztratíte všechny klíče redakce, všechna dosud nevyzvednutá odeslání se stanou nečitelnými: to je cena serveru, který nic nepřečte.',
+  'Redactiesleutel aanmaken': 'Vytvořit klíč redakce',
+  'Herstellen uit herstelsleutel…': 'Obnovit z klíče pro obnovení…',
+  'Vingerafdruk': 'Otisk',
+  'Ontvanger (age)': 'Příjemce (age)',
+  'Aangemaakt op {datum}.': 'Vytvořeno {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Klíč pro obnovení byl zkontrolován.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Klíč pro obnovení ještě nebyl zkontrolován: zapište si ho a napište ho znovu.',
+  'Herstelsleutel tonen…': 'Zobrazit klíč pro obnovení…',
+  'Vingerafdruk kopiëren': 'Kopírovat otisk',
+  'Exporteren als age-sleutelbestand…': 'Exportovat jako soubor klíče age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Zapište si tento klíč pro obnovení a uschovejte ho na bezpečném místě mimo toto zařízení. Kdo ho má, může otevřít všechna odeslání a podepisovat balíčky vaším jménem. Pokud ztratíte toto zařízení, je to vše, co zbude.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Napište klíč pro obnovení sem ještě jednou',
+  'Later': 'Později',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Napište nebo vložte klíč pro obnovení. Co zadáte, se uloží do klíčenky jako klíč redakce; nic se nepřepisuje.',
+  'Herstelsleutel': 'Klíč pro obnovení',
+  'Redactiesleutel verwijderen': 'Smazat klíč redakce',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Klíč bude z klíčenky vymazán a může se vrátit jen z klíče pro obnovení. Pokud ho nemáte, odeslání zapečetěná jen pro tento klíč zůstanou nečitelná navždy.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Klíč, který otevírá zapečetěná odeslání a podepisuje balíčky.',
+  'Redactiesleutel…': 'Klíč redakce…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Pracovní kopie byla zahozena. To, co přišlo, se posuzuje znovu.',
+  'Er is geen werkkopie.': 'Žádná pracovní kopie není.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Pracovní kopii se nepodařilo zahodit.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Smaže pracovní kopii. To, co přišlo, zůstane a posuzuje se znovu.',
+  'Werkkopie weggooien…': 'Zahodit pracovní kopii…',
+  'Werkkopie weggooien': 'Zahodit pracovní kopii',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Pracovní kopie s úpravami bude smazána a nelze ji vrátit. To, co přišlo, zůstane a posuzuje se znovu. Je-li pracovní kopie ještě otevřená na kartě, nejprve ji zavřete.',
+  'Weggooien': 'Zahodit',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Toto odeslání bylo staženo, a proto nepřijde do žádné kapitoly.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Toto odeslání nelze přečíst, nebo formulář, k němuž patří, není v pracovní složce.',
+  'Het controledocument kon niet worden geschreven.':
+      'Kontrolní dokument se nepodařilo zapsat.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Váš příspěvek do knihy: prosíme o kontrolu',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Tady je váš příspěvek tak, jak se objeví v knize (viz příloha). Je všechno v pořádku? Odpovězte ‘souhlasím’, nebo s opravami do {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'E-mail je připraven ve vašem poštovním programu. Přiložte PDF a odešlete ho.',
+  'Controle door de maker…': 'Kontrola autorem…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Kontrolní dokument je kapitola tohoto jednoho odeslání. Exportujte ho jako PDF (zvolte úplný profil), přiložte PDF k e-mailu a odešlete ho. Pokud autor odpoví ‘souhlasím’, nastavte stav sami na maker-approved: ta odpověď je zároveň potvrzením, že příspěvek skutečně pochází od této osoby.',
+  'Controledocument maken en openen':
+      'Vytvořit kontrolní dokument a otevřít ho',
+  'E-mailadres van de maker': 'E-mailová adresa autora',
+  'Antwoord vóór (jjjj-mm-dd)': 'Odpovědět do (rrrr-mm-dd)',
+  'Mail schrijven': 'Napsat e-mail',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Tento formulář nezná stav maker-check-sent, takže ho zde nelze nastavit.',
+  'Controle verstuurd': 'Kontrola odeslána',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Vytvoří kapitolu z tohoto odeslání a připraví e-mail, kterým ji autor zkontroluje.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Toto odeslání není v registru. Opravte overview.md a zkuste to znovu.',
+  'Kies het hoofdstuksjabloon': 'Vybrat šablonu kapitoly',
+  'Kies eerst een hoofdstuksjabloon.': 'Nejprve vyberte šablonu kapitoly.',
+  'Kies minstens één status.': 'Vyberte alespoň jeden stav.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Kniha byla sestavena. Kapitol: {n}. Fotografií: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Stažená, a proto vynechaná: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Přeskočená (jiná verze nebo nečitelná): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotografie, které v pracovní složce chyběly: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'V názvu používejte jen písmena, číslice, pomlčky a podtržítka (nejvýše 64 znaků).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Kniha s tímto názvem už existuje. Zvolte jiný název.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Šablona uvádí pole, která formulář nemá: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Není co vložit do knihy: žádné odeslání s vybraným stavem. Stažená: {w}; přeskočená: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registr nelze přečíst. Opravte overview.md.',
+  'Het boek kon niet worden geschreven.': 'Knihu se nepodařilo zapsat.',
+  'Boek samenstellen…': 'Sestavit knihu…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Kniha přijde do složky book v pracovní složce a zůstane obyčejným dokumentem, který pak můžete sami upravovat.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'V pracovní složce není žádný použitelný formulář.',
+  'Formulier': 'Formulář',
+  'Hoofdstuksjabloon': 'Šablona kapitoly',
+  'Nog geen sjabloon gekozen.': 'Zatím nebyla vybrána žádná šablona.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'V šabloně {veld-id} znamená odpověď na dané pole.',
+  'Hoofdstuksjabloon kiezen…': 'Vybrat šablonu kapitoly…',
+  'Welke inzendingen?': 'Která odeslání?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Do knihy se dostanou jen odeslání s jedním z těchto stavů. Stažená odeslání zůstávají vždy mimo.',
+  'Ordenen op': 'Seřadit podle',
+  'Groeperen op': 'Seskupit podle',
+  'Naam van het boek': 'Název knihy',
+  'Boek openen': 'Otevřít knihu',
+  'Samenstellen': 'Sestavit',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Pracovní kopii se nepodařilo vytvořit.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Otevře kopii odeslání k vylepšení. To, co přišlo, zůstává beze změny.',
+  'Werkkopie openen': 'Otevřít pracovní kopii',
+  'Status gewijzigd naar {status}.': 'Stav změněn na {status}.',
+  'Intrekking opgeslagen.': 'Stažení uloženo.',
+  'Intrekking ongedaan gemaakt.': 'Stažení vráceno zpět.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Odeslání smazáno; záznam zůstává.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Odeslání smazáno, ale registr se nepodařilo aktualizovat. Upravte overview.md ručně.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Odeslání nebylo v pracovní složce nalezeno.',
+  'De inzending kon niet worden verwijderd.': 'Odeslání se nepodařilo smazat.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registr nelze přečíst. Opravte overview.md; nic se nezměnilo.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registr se nepodařilo aktualizovat.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Tuto změnu nešlo provést: odeslání není v registru.',
+  'Status wijzigen': 'Změnit stav',
+  'Intrekking ongedaan maken': 'Vrátit stažení zpět',
+  'Intrekken…': 'Stáhnout…',
+  'Verwijderen…': 'Smazat…',
+  'Inzending intrekken': 'Stáhnout odeslání',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Zadejte den, kdy odesílatel odeslání stáhl. Stažené odeslání se nikdy nedostane do knihy.',
+  'Dag (jjjj-mm-dd)': 'Den (rrrr-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Neplatný den. Použijte rok-měsíc-den, například {voorbeeld}.',
+  'Inzending verwijderen': 'Smazat odeslání',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Odpovědi, pracovní kopie a fotky tohoto odeslání se z pracovní složky smažou. Zůstane jen minimální záznam: číslo, dny přijetí a souhlasu a stav. Nelze to vrátit zpět.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Zůstává také to, co formulář předem oznámil: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'S tímto odesláním není něco v pořádku.',
+  'Verplicht, maar leeg gelaten.': 'Povinné, ale ponecháno prázdné.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} slov; je potřeba alespoň {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} slov; povoleno nejvýše {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} znaků; je potřeba alespoň {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} znaků; povoleno nejvýše {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ není v seznamu možností.',
+  '“{value}” is geen getal.': '„{value}“ není číslo.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ není datum ve tvaru rok-měsíc-den.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotka široká {actual} pixelů; požadováno {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'V odeslání chybí soubor fotky.',
+  'De beschrijving van de foto ontbreekt.': 'Chybí popis fotky.',
+  'De maker van de foto ontbreekt.': 'Chybí autor fotky.',
+  'De foto is niet gecontroleerd.': 'Fotka nebyla zkontrolována.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Fotka HEIC: nezkontrolována ani vyčištěna; může obsahovat polohu.',
+  'Toestemming niet gegeven.': 'Souhlas nebyl udělen.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Odpověď obsahuje řádek, který vypadá jako řídicí kód formuláře.',
+  'Het antwoord bevat HTML.': 'Odpověď obsahuje HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Odpověď obsahuje neuzavřený blok kódu.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Odpověď odkazuje na obrázek, který k tomuto odeslání nepatří.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Odpověď obsahuje odkaz, který není povolen.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Tento formulář nebo tato verze není v pracovní složce.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Odesílatel pracoval s jiným textem formuláře, než je zveřejněný.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Souhlas v manifestu neodpovídá zveřejněnému formuláři.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Text formuláře byl změněn mimo odpovědi.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Text formuláře byl změněn u tohoto pole.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Toto pole ve zveřejněném formuláři neexistuje.',
+  'Dit veld ontbreekt in de inzending.': 'Toto pole v odeslání chybí.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Odeslání verze {submission}; zveřejněna je verze {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formulář vyžaduje novější verzi OciDecku.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Zveřejněný formulář v pracovní složce nelze použít.',
+  'De inzending hoort bij een ander formulier.':
+      'Odeslání patří k jinému formuláři.',
+  'De opbouw van de inzending is beschadigd.':
+      'Struktura odeslání je poškozená.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registr nelze přečíst. Opravte overview.md; odeslání jsou níže zobrazena bez údajů z registru.',
+  'Nog geen inzendingen.': 'Zatím žádná odeslání.',
+  'Om na te lopen': 'Ke kontrole',
+  'Verwijderd': 'Smazáno',
+  'Zonder regel in het register': 'Bez řádku v registru',
+  'Ontvangen {datum}': 'Přijato {datum}',
+  'Ingetrokken {datum}': 'Staženo {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Obsah tohoto odeslání byl smazán; zůstal jen záznam.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Toto odeslání nelze přečíst. Zkontrolujte soubory v pracovní složce.',
+  'Beoordeeld tegen {formulier}.': 'Posouzeno vůči {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Posouzení se týká pracovní kopie (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Žádné body ke kontrole.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotky, které žádná odpověď nezmiňuje: {n}.',
+  'Inzendingen': 'Odeslání',
+  'Werkmap': 'Pracovní složka',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Zatím není vybrána pracovní složka. Vyberte složku, do které se uloží odeslání a registr.',
+  'Werkmap kiezen…': 'Vybrat pracovní složku…',
+  'Kies de werkmap voor inzendingen': 'Vyberte pracovní složku pro odeslání',
+  'Formulieren': 'Formuláře',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Zatím nebyl přidán žádný formulář. Přidejte formulář tak, jak jste ho zveřejnili: odeslání se proti němu kontroluje.',
+  'Formulier toevoegen…': 'Přidat formulář…',
+  'Kies het formulier om toe te voegen':
+      'Vyberte formulář, který chcete přidat',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Tento soubor není formulář, který by šlo zveřejnit.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Tento formulář tu už je s jiným textem. Jiný text je nová verze: dejte formuláři vyšší číslo verze.',
+  'Formulier toegevoegd: {naam}.': 'Formulář přidán: {naam}.',
+  'Dit formulier stond er al.': 'Tento formulář tu už byl.',
+  'Het formulier kon niet worden opgeslagen.': 'Formulář se nepodařilo uložit.',
+  'Inzendingen in de werkmap: {n}': 'Odeslání v pracovní složce: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Obyčejný zip se při přenosu nešifruje.',
+  'Pakketten binnenhalen…': 'Importovat balíčky…',
+  'Kies de pakketten om binnen te halen': 'Vyberte balíčky k importu',
+  'Register openen': 'Otevřít registr',
+  '{naam}: binnengehaald.': '{naam}: importováno.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importováno, ale jsou tu body ke kontrole.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importováno, ale registr se nepodařilo aktualizovat. Zkontrolujte overview.md.',
+  '{naam}: stond er al.': '{naam}: už tu bylo.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: není balíček odeslání, který by OciDeck uměl přečíst.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: tento formulář nebyl přidán, nebo ne v této verzi. Nejprve přidejte formulář.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nepodařilo se uložit do pracovní složky.',
+  'Formulieren en inzendingen': 'Formuláře a odeslání',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importujte odeslání formuláře, kontrolujte je proti zveřejněnému formuláři a uchovávejte je s registrem. Vyplnění formuláře funguje i tehdy, když je toto vypnuto. Ve výchozím stavu vypnuto.',
+  'Inzending opslaan als zip…': 'Uložit přihlášku jako zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Soubor zip s vašimi odpověďmi a fotkami, který pošlete e-mailem organizátorovi.',
+  'Inzending opgeslagen als {naam}.': 'Přihláška byla uložena jako {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Vyberte formulář tak, jak jste jej dostali',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Toto není formulář, ke kterému patří vaše odpovědi. Vyberte soubor, který jste dostali od organizátora.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Fotku se nepodařilo přečíst: {pad}. Přidejte ji znovu.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Přihláška se nevejde do jednoho balíčku: příliš mnoho fotek nebo příliš velká fotka.',
+  'De inzending kon niet worden opgeslagen.': 'Přihlášku se nepodařilo uložit.',
+  'Inzending opslaan': 'Uložit přihlášku',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Údaje o poloze byly z této fotografie odstraněny.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Tuto fotografii se nepodařilo přidat. Vyberte soubor JPEG, PNG, WebP nebo HEIC s fotografií.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Nejprve uložte dokument, abyste mohli přidávat fotografie.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck může tento soubor importovat do nového dokumentu.',
+  'Kies een datum': 'Vybrat datum',
+  'Anders, namelijk:': 'Jiné, a to:',
+  'Punt {n}': 'Bod {n}',
+  'Punt {n} verwijderen': 'Odstranit bod {n}',
+  'Rij {n} verwijderen': 'Odstranit řádek {n}',
+  'Foto {n} verwijderen': 'Odstranit fotografii {n}',
+  'Wat is er te zien op de foto?': 'Co je na fotografii vidět?',
+  'Van wie is de foto?': 'Čí je fotografie?',
+  'Foto toevoegen': 'Přidat fotografii',
+  'Verplicht': 'Povinné',
+  'Alles is ingevuld.': 'Vše je vyplněno.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Zbývá ještě {n}, než budete moci odeslat:',
+  'klaar': 'hotovo',
+  '{n} open': '{n} otevřeno',
+  'Dit formulier kan niet worden ingevuld.': 'Tento formulář nelze vyplnit.',
+  'Naar de bron': 'Ke zdroji',
+  'Woorden': 'Slova',
+  'Tekens': 'Znaky',
+  'Keuzes': 'Volby',
+  'Rijen': 'Řádky',
+  'Foto’s': 'Fotografie',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (alespoň {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (nejvýše {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (alespoň {min}, nejvýše {max})',
+  'Invullen': 'Vyplnit',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'S tímto formulářem není něco v pořádku. Obraťte se na toho, kdo ho vytvořil.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Toto pole je povinné. Vyplňte ho, abyste mohli odeslat.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Napsali jste {actual} slov; je potřeba alespoň {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Napsali jste {actual} slov; povoleno je nejvýše {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Napsali jste {actual} znaků; je potřeba alespoň {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Napsali jste {actual} znaků; povoleno je nejvýše {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}“ není v seznamu. Vyberte jednu z možností.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}“ není číslo. Používejte pouze číslice, případně s čárkou nebo tečkou pro desetinná místa.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Tato fotografie je {actual} pixelů široká; zde se vyžaduje {min}. Pravděpodobně se zmenšila při odeslání přes aplikaci pro zprávy. Pokud ještě máte originál, použijte ho. Pokud ne, přesto ji pošlete: organizátor se vám ozve.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Tato fotografie má {actual} MB; maximum je {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Obsah tohoto souboru neodpovídá jeho typu.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Tento typ souboru zde není povolen.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Soubor této fotografie už nelze najít. Přidejte fotografii znovu.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Popište jednou krátkou větou, co je na fotografii vidět.',
+  'Geef aan van wie de foto is.': 'Uveďte, čí je fotografie.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Tato fotografie ještě nebyla zkontrolována. Chvíli počkejte nebo ji přidejte znovu.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Tato fotografie je soubor HEIC. OciDeck ho zde nemůže zkontrolovat ani vyčistit, a proto se odešle tak, jak je. Může obsahovat místo, kde byla fotografie pořízena. Pokud to nechcete sdílet, vyberte v nastavení fotoaparátu „Nejkompatibilnější“ nebo fotografii sdílejte jako JPEG a přidejte ji znovu.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Na této fotografii je vidět {actual} tváří; očekávalo se {expected}. Je to jen upozornění.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Zaškrtněte políčko pro souhlas; bez souhlasu odeslat nemůžete.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Tento formulář vyžaduje novější verzi OciDeck. Aktualizujte aplikaci, abyste ho mohli vyplnit.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'V samotném formuláři se omylem něco změnilo. Obnovte formulář; vaše odpovědi zůstanou.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Tento řádek vypadá jako řídicí kód formuláře a nesmí být v odpovědi. Změňte ho.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML není v odpovědi povoleno. Použijte obyčejný text a jednoduché formátování.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blok kódu není uzavřen. Uzavřete ho pomocí ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'V odpovědi mohou být jen fotografie, které přidáte v tomto formuláři; obrázek z internetu ne.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'V odpovědi jsou povoleny jen odkazy začínající https:// a e-mailové adresy.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Tento soubor byl vytvořen jinou verzí formuláře (verze {submission}; nyní platí verze {published}). Zkontrolujte své odpovědi.',
+  'Punt {item}: {bericht}': 'Bod {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Nyní jich je {actual}; musí jich být mezi {min} a {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Nyní jich je {actual}; smí jich být nejvýše {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Nyní jich je {actual}; musí jich být alespoň {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Číslo musí být násobkem {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Číslo musí být mezi {min} a {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Číslo smí být nejvýše {max}.',
+  'Het getal moet minstens {min} zijn.': 'Číslo musí být alespoň {min}.',
+  'De datum moet op of na {min} liggen.': 'Datum musí být {min} nebo pozdější.',
+  'De datum moet op of vóór {max} liggen.':
+      'Datum musí být {max} nebo dřívější.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}“ není datum. Napište datum ve tvaru rok-měsíc-den, například 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Toto není platná e-mailová adresa.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Toto není platná webová adresa. Začněte https://.',
+  'Dit is geen geldig telefoonnummer.': 'Toto není platné telefonní číslo.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Toto není platné nizozemské PSČ, například 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Sem se vejde jen jeden řádek. Odstraňte zalomení řádků.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Používejte jen zaškrtávací pole této otázky: jedno pole na možnost.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Napište každý bod na vlastní řádek, s pomlčkou nebo číslem na začátku.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabulka už není správná: nechte řádek záhlaví, jak byl, a dejte každému řádku stejný počet sloupců.',
+  'Dezelfde foto staat hier twee keer.': 'Tatáž fotografie je zde dvakrát.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Do tohoto pole patří jen fotografie, žádný volný text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Políčko vašeho souhlasu je poškozeno. Obnovte formulář.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Tato odpověď nemá podobu, která patří k této otázce.',
   'Downloaden…': 'Stáhnout…',
   'Afbeelding opgeslagen als': 'Obrázek uložen jako',
   '{naam}: ingesteld': '{naam}: nastaveno',

@@ -27,7 +27,7 @@ import '../../models/deck.dart' show TlpLevelX;
 import '../export_bundle.dart';
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
-import '../document_export_service.dart' show projectedDocumentBody;
+import '../document_export_service.dart' show projectedDocumentBodyForRendering;
 import 'markdown_to_xhtml.dart';
 import '../../utils/xml_escape.dart';
 
@@ -51,7 +51,7 @@ Future<Uint8List> buildDocumentExportEpub(
   String? sourcePath,
   String outputPath = '',
 }) async {
-  final body = projectedDocumentBody(bundle);
+  final body = projectedDocumentBodyForRendering(bundle);
   final meta = metadata ?? ExportDocumentMetadata.fromDeck(bundle.audience);
   final title = meta.displayTitle('Document');
 

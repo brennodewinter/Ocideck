@@ -10,6 +10,9 @@ part of '../document_editor_screen.dart';
 /// breedte, DOCUMENT_MODE.md §8).
 class _DocEditorToolbar extends StatelessWidget {
   final _DocViewMode mode;
+
+  /// Of het document een formulier is: dan komt er een stand Invullen bij.
+  final bool hasForm;
   final ValueChanged<_DocViewMode> onModeChanged;
 
   /// Staan de pagina-einden in de schrijfstand aan, en de schakelaar ervoor.
@@ -80,6 +83,7 @@ class _DocEditorToolbar extends StatelessWidget {
 
   const _DocEditorToolbar({
     required this.mode,
+    required this.hasForm,
     required this.onModeChanged,
     required this.showPageBreaks,
     required this.onShowPageBreaksChanged,
@@ -118,6 +122,37 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onStyleChanged,
   });
 
+  /// De stand-keuze: Invullen (alleen bij een formulier), Visueel, Bron, Pagina's.
+  Widget _modeSwitch(AppLocalizations l10n) => SegmentedButton<_DocViewMode>(
+    segments: [
+      if (hasForm)
+        ButtonSegment(
+          value: _DocViewMode.fill,
+          label: Text(l10n.d('Invullen')),
+          icon: const Icon(Icons.edit_note, size: 15),
+        ),
+      ButtonSegment(
+        value: _DocViewMode.visual,
+        label: Text(l10n.d('Visueel')),
+        icon: const Icon(Icons.visibility_outlined, size: 15),
+      ),
+      ButtonSegment(
+        value: _DocViewMode.source,
+        label: Text(l10n.d('Bron')),
+        icon: const Icon(Icons.code, size: 15),
+      ),
+      ButtonSegment(
+        value: _DocViewMode.pages,
+        label: Text(l10n.d("Pagina's")),
+        icon: const Icon(Icons.menu_book_outlined, size: 15),
+      ),
+    ],
+    selected: {mode},
+    showSelectedIcon: false,
+    style: const ButtonStyle(visualDensity: VisualDensity.compact),
+    onSelectionChanged: (s) => onModeChanged(s.first),
+  );
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -137,37 +172,7 @@ class _DocEditorToolbar extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      SegmentedButton<_DocViewMode>(
-                        segments: [
-                          ButtonSegment(
-                            value: _DocViewMode.visual,
-                            label: Text(l10n.d('Visueel')),
-                            icon: const Icon(
-                              Icons.visibility_outlined,
-                              size: 15,
-                            ),
-                          ),
-                          ButtonSegment(
-                            value: _DocViewMode.source,
-                            label: Text(l10n.d('Bron')),
-                            icon: const Icon(Icons.code, size: 15),
-                          ),
-                          ButtonSegment(
-                            value: _DocViewMode.pages,
-                            label: Text(l10n.d("Pagina's")),
-                            icon: const Icon(
-                              Icons.menu_book_outlined,
-                              size: 15,
-                            ),
-                          ),
-                        ],
-                        selected: {mode},
-                        showSelectedIcon: false,
-                        style: const ButtonStyle(
-                          visualDensity: VisualDensity.compact,
-                        ),
-                        onSelectionChanged: (s) => onModeChanged(s.first),
-                      ),
+                      _modeSwitch(l10n),
                       if (mode == _DocViewMode.visual) ...[
                         const SizedBox(width: 8),
                         _widthMenu(l10n),
@@ -196,7 +201,8 @@ class _DocEditorToolbar extends StatelessWidget {
                               width == DocumentEditorWidth.page,
                         ),
                       ],
-                      if (mode != _DocViewMode.source) ...[
+                      if (mode != _DocViewMode.source &&
+                          mode != _DocViewMode.fill) ...[
                         const SizedBox(width: 8),
                         ..._zoomControls(l10n),
                       ],
@@ -219,8 +225,10 @@ class _DocEditorToolbar extends StatelessWidget {
                         icon: const Icon(Icons.search, size: 18),
                         visualDensity: VisualDensity.compact,
                       ),
-                      const SizedBox(width: 8),
-                      _insertMenu(l10n),
+                      if (mode != _DocViewMode.fill) ...[
+                        const SizedBox(width: 8),
+                        _insertMenu(l10n),
+                      ],
                       const SizedBox(width: 4),
                       _styleMenu(l10n),
                       const SizedBox(width: 4),

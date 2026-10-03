@@ -5,6 +5,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../models/storage_connection.dart';
+import '../utils/chmod.dart';
 import '../utils/log.dart';
 import 'asset_staging.dart';
 import 'git/outbox.dart';
@@ -254,17 +255,7 @@ class DiskTraces {
     for (final dir in dirs) {
       if (dir == null || !await dir.exists()) continue;
       try {
-        // De SAST-regel bewaakt netwerkverkeer dat NetGuard niet ziet. `chmod`
-        // is niet netwerkvaardig: vaste argv, geen schil, geen invoer van
-        // buiten (het pad komt van `path_provider`), en alleen op Linux. Dart
-        // heeft geen permissie-API, dus het alternatief is een FFI-binding naar
-        // libc — méér aanvalsoppervlak voor minder.
-        //
-        // De uitzondering staat bewust op déze regel en niet op dit bestand:
-        // een tweede subproces hier moet wél alarm geven. Zie #521.
-        // nosemgrep: ocideck-subproces-buiten-de-gitlaag
-        final result = await Process.run('chmod', ['700', dir.path]);
-        if (result.exitCode == 0) hardened++;
+        if (await chmodPath('700', dir.path)) hardened++;
       } catch (e) {
         logWarning('DiskTraces: map niet op eigenaar-alleen gezet', e);
       }

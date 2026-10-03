@@ -1,6 +1,7 @@
 import '../services/table_of_contents.dart';
 import '../services/document_timeline.dart';
 import '../services/markdown_table_lines.dart';
+import '../services/form_document_blocks.dart';
 import '../services/pentest_blocks.dart';
 
 /// Inline-code-spans: `` `…` `` op één regel. De inhoud reist als `code`-
@@ -62,13 +63,14 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
   // echte Markdown-parse: deze functie draait per toetsaanslag over de hele
   // documenttekst.
   final pentest = scanPentestBlocks(markdown);
+  final forms = scanFormBlocks(markdown);
   var fenced = false;
   var inTable = false;
   for (var index = 0; index < lines.length; index++) {
     final line = lines[index];
     // Wat als één embed reist, gaat nooit door de rijke-tekstconversie en kan
     // daar dus ook niet stukgaan.
-    if (pentest.isAtomicLine(index)) continue;
+    if (pentest.isAtomicLine(index) || forms.isAtomicLine(index)) continue;
     if (RegExp(r'^\s*```').hasMatch(line)) {
       fenced = !fenced;
       inTable = false;
@@ -148,11 +150,12 @@ bool markdownRoundTripsVisually(String markdown) =>
 VisualLimitationHit? firstVisualLimitation(String markdown) {
   final lines = markdown.split('\n');
   final pentest = scanPentestBlocks(markdown);
+  final forms = scanFormBlocks(markdown);
   var fenced = false;
   var inTable = false;
   for (var index = 0; index < lines.length; index++) {
     final line = lines[index];
-    if (pentest.isAtomicLine(index)) continue;
+    if (pentest.isAtomicLine(index) || forms.isAtomicLine(index)) continue;
     if (RegExp(r'^\s*```').hasMatch(line)) {
       fenced = !fenced;
       inTable = false;

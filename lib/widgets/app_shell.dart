@@ -87,6 +87,7 @@ import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/document_provider.dart';
 import '../state/elearning_provider.dart';
+import '../state/forms_provider.dart';
 import 'document_editor_screen.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/image_privacy_provider.dart';
@@ -167,6 +168,9 @@ import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
 import 'shell/document_save_actions.dart';
 import 'shell/open_failure_message.dart';
+import '../services/import/document_import_service.dart'
+    show isImportableDocumentName;
+import 'forms/form_inbox_dialog.dart';
 import 'shell/document_import_action.dart';
 import 'shell/new_document_action.dart';
 import 'shell/openkat_import_action.dart';
@@ -590,7 +594,7 @@ class _AppShellState extends ConsumerState<AppShell> {
     final homeDir = ref.read(settingsProvider).homeDirectory;
     final tabs = ref.read(tabsProvider.notifier);
     final images = <String>[];
-    final presentations = <PickedPresentation>[];
+    final imports = <PickedPresentation>[];
     for (final path in paths) {
       final ext = p.extension(path).toLowerCase();
       // Vangnet per bestand: deze open-weg is fire-and-forget (Finder-"Open met",
@@ -623,9 +627,10 @@ class _AppShellState extends ConsumerState<AppShell> {
         } else if (droppedImageExtensions.contains(ext)) {
           final adopted = await _adoptDroppedImage(path);
           if (adopted != null) images.add(adopted);
-        } else if (isImportablePresentationName(path)) {
+        } else if (isImportablePresentationName(path) ||
+            isImportableDocumentName(path)) {
           final bytes = await File(path).readAsBytes();
-          presentations.add((bytes: bytes, name: p.basename(path)));
+          imports.add((bytes: bytes, name: p.basename(path)));
         }
       } catch (e, s) {
         logError('AppShell._onFilesDropped: openen van $path mislukt', e, s);
@@ -639,9 +644,7 @@ class _AppShellState extends ConsumerState<AppShell> {
       }
     }
     if (images.isNotEmpty) _addImagesToActiveDeck(images);
-    if (presentations.isNotEmpty && mounted) {
-      await importDroppedPresentations(context, ref, presentations);
-    }
+    if (mounted) await importDroppedFiles(context, ref, imports);
   }
 
   /// Neem een gesleepte afbeelding op in het deck in plaats van naar de plek op

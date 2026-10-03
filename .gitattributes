@@ -49,3 +49,13 @@ CHANGELOG.md merge=union
 # documenten toetsen. LF overal neemt die hele klasse verschillen weg bij de
 # bron, in plaats van hem test-voor-test te verdragen.
 * text=auto eol=lf
+
+# ── De age-testvectoren ──────────────────────────────────────────────────────
+#
+# Byte voor byte zoals het C2SP-project ze publiceert: `armor_crlf` en `header_crlf`
+# bestaan juist om hun CRLF. Zonder deze regel mag git bij een checkout of een commit
+# regeleinden omzetten, en dan toetst de poort een bestand dat niemand heeft gemaakt.
+# De test `form_seal_vectors_test.dart` rekent daarom elk bestand na tegen `SHA256SUMS`.
+packages/ocideck_form_core/test/fixtures/age_testkit/* binary
+packages/ocideck_form_core/test/fixtures/age_testkit/PROVENANCE.md text
+packages/ocideck_form_core/test/fixtures/age_testkit/SHA256SUMS text

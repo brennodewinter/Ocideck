@@ -1627,6 +1627,594 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Team…': 'Ekipa…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Uredniki poleg tebe, ki so v vsakem bundlu, da lahko tudi oni odpirajo oddaje. Nekoga dodaš z njegovo kartico urednika in ponovno vpišeš prstni odtis te kartice.',
+  'Er is nog niemand naast jou.': 'Poleg tebe še nikogar ni.',
+  'Plak de kaart van de redacteur': 'Prilepi kartico urednika',
+  'Kaart controleren': 'Preveri kartico',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kartica: {naam}. Vpiši prstni odtis te kartice, ki ti ga je {naam} dal po drugi poti, na primer po telefonu.',
+  'Redacteur verwijderen': 'Odstrani urednika',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Odstranim {naam} iz ekipe? Bundli, ki si jih že objavil, ostanejo, kakršni so, dokler ne objaviš znova; kar je že zapečateno za {naam}, ostane za to osebo berljivo.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} je dodan. Znova objavi bundle, da vključiš {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} je odstranjen. Znova objavi bundle, da izključiš {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Najprej ustvari svoj ključ uredništva v Ključ uredništva….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Tvojega ključa uredništva ni mogoče uporabiti. Poglej v Ključ uredništva….',
+  'Dit is geen redacteurskaart.': 'To ni kartica urednika.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ta kartica je iz novejše različice OciDecka. Posodobi OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kartica vsebuje nekaj nedovoljenega. Prosi urednika za novo kartico.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Ta prstni odtis ne ustreza kartici: kartica je spremenjena ali ni od tistega, za katerega misliš. Znova prosi urednika za prstni odtis in kartico.',
+  'Dit is je eigen kaart.': 'To je tvoja lastna kartica.',
+  'Deze redacteur staat er al.': 'Ta urednik je že v ekipi.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Ekipa je polna: bundle nosi največ 64 organizatorjev, vključno s teboj.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Datoteke team.json v delovni mapi ni mogoče prebrati. Nič ni spremenjeno; popravi jo ali izbriši.',
+  'Het team kon niet worden opgeslagen.': 'Ekipe ni bilo mogoče shraniti.',
+  'Deze redacteur staat niet meer in het team.':
+      'Tega urednika ni več v ekipi.',
+  'Naast jou in de bundel: {namen}.': 'Poleg tebe v bundlu: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Najprej preveri obnovitveni ključ v Ključ uredništva… ali dodaj drugega urednika v Ekipa…. Brez poti nazaj bodo vse oddaje neberljive, če se ta naprava pokvari.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Datoteke team.json v delovni mapi ni mogoče prebrati. Nič se ne podpiše.',
+  'Redacteurskaart maken…': 'Ustvari kartico urednika…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'S kartico urednika te lastnik obrazca doda v bundle, da lahko tudi ti odpiraš oddaje. Kartico je dovoljeno poslati po e-pošti.',
+  'Jouw naam op de kaart': 'Tvoje ime na kartici',
+  'Kaart maken': 'Ustvari kartico',
+  'Kaart kopiëren': 'Kopiraj kartico',
+  'Vingerafdruk van de kaart': 'Prstni odtis kartice',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Lastniku daj ta prstni odtis po drugi poti kot s kartico, na primer po telefonu. Ponovno ga vpiše, preden te doda.',
+  'Verzegeld opslaan…': 'Shrani zapečateno…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Šifrirana datoteka (.zip.age), ki jo lahko odpre samo organizator. Za to potrebuješ datoteko bundla in prstni odtis iz vabila.',
+  'Kies het bundelbestand van de organisator':
+      'Izberi datoteko bundla organizatorja',
+  'Vingerafdruk van de organisator': 'Prstni odtis organizatorja',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Vpiši prstni odtis iz vabila. V datoteki bundla ga namenoma ni: tako lahko preveriš, od koga prihaja.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'To ni prstni odtis. Sestavlja ga 52 znakov, običajno v skupinah po štiri.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Ta datoteka ni bundle, ki bi ga OciDeck lahko prebral.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ta obrazec ali bundle je iz novejše različice OciDecka. Posodobi OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Prstni odtis ne ustreza temu bundlu: obrazec ne prihaja od tistega, ki ga navaja vabilo. Preveri prstni odtis in datoteko bundla.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Podpis bundla ni pravilen: spremenjen je ali ni od tistega, ki ga navaja prstni odtis. Prosi organizatorja za nov bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Ta bundle ne spada k temu obrazcu. Uporabi datoteko bundla, ki spada prav k temu obrazcu.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Ta bundle je potekel. Prosi organizatorja za novega.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Ta bundle je starejši od bundla, ki si ga prej prejel od tega organizatorja. Prosi organizatorja za najnovejšega.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle vsebuje nekaj nedovoljenega. Prosi organizatorja za nov bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Ta obrazec je zaprt: zadnji dan je bil {datum}. Obrni se na organizatorja.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Oddaja je večja, kot dovoljuje organizator ({mb} MB). Odstrani fotografijo ali eno zmanjšaj.',
+  'De inzending kon niet worden verzegeld.':
+      'Oddaje ni bilo mogoče zapečatiti.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Shranjeno zapečateno kot {naam}, odpre ga lahko samo: {organisatoren}.',
+  'Bundel publiceren…': 'Objavi bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle je tisto, čemur izpolnjevalec verjame o vašem uredništvu: s katerim ključem zapečati in h kateremu besedilu spada. Shrani se ob obrazcu.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'V delovni mapi ni obrazca, za katerega bi lahko ustvarili bundle.',
+  'Naam voor de invuller': 'Ime za izpolnjevalca',
+  'Geldig tot (jjjj-mm-dd)': 'Velja do (llll-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Zadnji dan, ko izpolnjevalec verjame temu bundlu. Ne pred dnem zaprtja obrazca.',
+  'Bundel maken': 'Ustvari bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle ustvarjen (zaporedna številka {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Izpolnjevalcu daj prstni odtis po drugi poti kot z datoteko bundla, na primer v vabilu. Kdor ima samo datoteko bundla, ne more preveriti, od koga prihaja.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Ta platforma nima obeska za ključe za ključ uredništva; bundla tu ni mogoče podpisati.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Ključa uredništva še ni. Ustvari ga v Ključ uredništva…, preden objaviš bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Obeska za ključe ni mogoče prebrati. Nič ni bilo podpisano.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Shranjenega ključa uredništva ni mogoče prebrati. Izbriši ga v Ključ uredništva… in ga obnovi iz obnovitvenega ključa.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Bundla tega obrazca v delovni mapi ni mogoče prebrati ali ne spada k drugim. Potem zaporedne številke ni mogoče določiti in nič se ne podpiše. Preveri: {pad}',
+  'Vul een naam in van hooguit 80 tekens.': 'Vnesi ime z največ 80 znaki.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Velja do mora biti obstoječ datum v obliki llll-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Velja do ne sme biti pred dnem zaprtja obrazca.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundla ni bilo mogoče ustvariti ({veld}). Preveri, ali obrazec navaja veljaven dan zaprtja in rok hrambe.',
+  'formulier': 'obrazec',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundla ni bilo mogoče shraniti v delovno mapo.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Ustvari in podpiši bundle, ki mu izpolnjevalec verjame o vašem uredništvu.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: zapečaten paket odprt in uvožen.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: ta paket je zapečaten, ta platforma pa nima obeska za ključe za ključ uredništva.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: ta paket je zapečaten in ključa uredništva, s katerim bi ga odprli, še ni. Ustvari ga v Ključ uredništva… ali ga obnovi iz obnovitvenega ključa.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: ta paket je zapečaten, obeska za ključe pa ni mogoče prebrati. Nič ni bilo poskušeno.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: ta paket je zapečaten, shranjenega ključa uredništva pa ni mogoče prebrati. Izbriši ga v Ključ uredništva… in ga obnovi iz obnovitvenega ključa.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: ta paket ni bil zapečaten za tvoj ključ uredništva.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: ta paket je bil spremenjen ali prekinjen in se ne bo odprl.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: ta paket je večji, kot je lahko oddaja.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: shranjeni ključ uredništva ni ključ, ki ga lahko uporabi OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ni zapečaten paket, ki bi ga OciDeck lahko prebral.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Zapečatena datoteka (.zip.age) se odpre s tvojim ključem uredništva.',
+  'Herstelsleutel controleren': 'Preveri obnovitveni ključ',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Ključ uredništva je ustvarjen. Zdaj zapiši obnovitveni ključ.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Obesek za ključe ni sprejel ključa. Nič ni bilo ustvarjeno.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Ključ uredništva že obstaja. Ni bil dotaknjen.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Obeska za ključe ni bilo mogoče prebrati. Nič ni bilo predpostavljeno in nič ustvarjeno.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'V obesku za ključe je nekaj, kar ni ključ uredništva. Ni bilo prepisano.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Ta platforma nima obeska za ključe.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Pravilno: obnovitveni ključ je preverjen.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'To je veljaven obnovitveni ključ, vendar ne za ta ključ uredništva.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Obnovitveni ključ je pravilen, vendar tega ni bilo mogoče shraniti.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Ni ključa uredništva, s katerim bi primerjali.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'To ni obnovitveni ključ ključa uredništva.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'V njem je tipkarska napaka: kontrolna vsota se ne ujema.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ta obnovitveni ključ izvira iz novejše različice OciDecka.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Ta obnovitveni ključ je bil narejen za nekaj drugega.',
+  'Hersteld uit de herstelsleutel.': 'Obnovljeno iz obnovitvenega ključa.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Obesek za ključe ni sprejel ključa. Nič ni bilo obnovljeno.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Shrani ključ uredništva kot datoteko ključa age',
+  'Het bestand kon niet worden opgeslagen.':
+      'Datoteke ni bilo mogoče shraniti.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Shranjeno kot {pad}. Kdor ima to datoteko, lahko odpre vse.',
+  'Redactiesleutel verwijderd.': 'Ključ uredništva je izbrisan.',
+  'Redactiesleutel': 'Ključ uredništva',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ta platforma nima obeska za ključe. Ključa uredništva tu ni mogoče hraniti; uporabi namizno aplikacijo.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Obeska za ključe ni bilo mogoče prebrati (zaklenjen ali dostop zavrnjen). Nič ni bilo predpostavljeno in nič ustvarjeno.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'V obesku za ključe je nekaj, kar ni ključ uredništva. Ni bilo prepisano. Izbriši to in obnovi ključ iz svojega obnovitvenega ključa.',
+  'Redactiesleutel verwijderen…': 'Izbriši ključ uredništva…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ključ uredništva odpre zapečatene oddaje in podpiše pakete tvojih obrazcev. Nahaja se v obesku za ključe tega operacijskega sistema. Če izgubiš vse ključe uredništva, vse še neprevzete oddaje postanejo neberljive: to je cena strežnika, ki ničesar ne more prebrati.',
+  'Redactiesleutel aanmaken': 'Ustvari ključ uredništva',
+  'Herstellen uit herstelsleutel…': 'Obnovi iz obnovitvenega ključa…',
+  'Vingerafdruk': 'Prstni odtis',
+  'Ontvanger (age)': 'Prejemnik (age)',
+  'Aangemaakt op {datum}.': 'Ustvarjeno {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Obnovitveni ključ je preverjen.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Obnovitveni ključ še ni preverjen: zapiši ga in ga ponovno vtipkaj.',
+  'Herstelsleutel tonen…': 'Pokaži obnovitveni ključ…',
+  'Vingerafdruk kopiëren': 'Kopiraj prstni odtis',
+  'Exporteren als age-sleutelbestand…': 'Izvozi kot datoteko ključa age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Zapiši ta obnovitveni ključ in ga shrani na varnem, zunaj te naprave. Kdor ga ima, lahko odpre vse oddaje in podpisuje pakete v vašem imenu. Če izgubiš to napravo, je to vse, kar ostane.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tukaj ponovno vtipkaj obnovitveni ključ',
+  'Later': 'Pozneje',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Vtipkaj ali prilepi obnovitveni ključ. Kar vneseš, se v obesek za ključe shrani kot ključ uredništva; nič se ne prepiše.',
+  'Herstelsleutel': 'Obnovitveni ključ',
+  'Redactiesleutel verwijderen': 'Izbriši ključ uredništva',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Ključ se izbriše iz obeska za ključe in se lahko vrne le iz obnovitvenega ključa. Če ga nimaš, oddaje, zapečatene samo za ta ključ, ostanejo neberljive za vedno.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Ključ, ki odpre zapečatene oddaje in podpiše pakete.',
+  'Redactiesleutel…': 'Ključ uredništva…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Delovna kopija je zavržena. Kar je prispelo, se ponovno ocenjuje.',
+  'Er is geen werkkopie.': 'Delovne kopije ni.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Delovne kopije ni bilo mogoče zavreči.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Izbriše delovno kopijo. Kar je prispelo, ostane in se ponovno ocenjuje.',
+  'Werkkopie weggooien…': 'Zavrzi delovno kopijo…',
+  'Werkkopie weggooien': 'Zavrzi delovno kopijo',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Delovna kopija s popravki bo izbrisana in je ni mogoče povrniti. Kar je prispelo, ostane in se ponovno ocenjuje. Če je delovna kopija še odprta v zavihku, ga najprej zaprite.',
+  'Weggooien': 'Zavrzi',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Ta oddaja je bila umaknjena in zato ne pride v nobeno poglavje.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Te oddaje ni mogoče prebrati ali pa obrazca, za katerega je bila oddana, ni v delovni mapi.',
+  'Het controledocument kon niet worden geschreven.':
+      'Dokumenta za preverjanje ni bilo mogoče zapisati.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Vaš prispevek h knjigi: prosimo, preverite ga',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Tukaj je vaš prispevek, kot se bo pojavil v knjigi (glejte prilogo). Ali je vse prav? Odgovorite ‘se strinjam’ ali s svojimi popravki pred {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Sporočilo je pripravljeno v vašem poštnem programu. Priložite PDF in ga pošljite.',
+  'Controle door de maker…': 'Preverjanje pri avtorju…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Dokument za preverjanje je poglavje te ene oddaje. Izvozite ga kot PDF (izberite poln profil), priložite PDF sporočilu in ga pošljite. Če avtor odgovori ‘se strinjam’, sami nastavite status na maker-approved: ta odgovor hkrati potrjuje, da prispevek res prihaja od te osebe.',
+  'Controledocument maken en openen':
+      'Ustvari dokument za preverjanje in ga odpri',
+  'E-mailadres van de maker': 'E-poštni naslov avtorja',
+  'Antwoord vóór (jjjj-mm-dd)': 'Odgovor pred (llll-mm-dd)',
+  'Mail schrijven': 'Napiši sporočilo',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ta obrazec ne pozna statusa maker-check-sent, zato ga tu ni mogoče nastaviti.',
+  'Controle verstuurd': 'Preverjanje poslano',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Ustvari poglavje te oddaje in pripravi sporočilo, s katerim ga avtor preveri.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Te oddaje ni v registru. Popravi overview.md in poskusi znova.',
+  'Kies het hoofdstuksjabloon': 'Izberi predlogo poglavja',
+  'Kies eerst een hoofdstuksjabloon.': 'Najprej izberi predlogo poglavja.',
+  'Kies minstens één status.': 'Izberi vsaj en status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Knjiga je sestavljena. Poglavja: {n}. Fotografije: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Umaknjene in zato izpuščene: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Preskočene (druga različica ali neberljive): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotografije, ki so manjkale v delovni mapi: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'V imenu uporabi samo črke, številke, vezaje in podčrtaje (največ 64 znakov).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Knjiga s tem imenom že obstaja. Izberi drugo ime.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Predloga navaja polja, ki jih obrazec nima: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'V knjigo ni ničesar dati: nobene oddaje z izbranim statusom. Umaknjene: {w}; preskočene: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registra ni mogoče prebrati. Popravi overview.md.',
+  'Het boek kon niet worden geschreven.': 'Knjige ni bilo mogoče zapisati.',
+  'Boek samenstellen…': 'Sestavi knjigo…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Knjiga gre v mapo book v delovni mapi in ostane navaden dokument, ki ga lahko pozneje sam urejaš.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'V delovni mapi ni uporabnega obrazca.',
+  'Formulier': 'Obrazec',
+  'Hoofdstuksjabloon': 'Predloga poglavja',
+  'Nog geen sjabloon gekozen.': 'Predloga še ni izbrana.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'V predlogi {veld-id} pomeni odgovor na to polje.',
+  'Hoofdstuksjabloon kiezen…': 'Izberi predlogo poglavja…',
+  'Welke inzendingen?': 'Katere oddaje?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'V knjigo pridejo samo oddaje z enim od teh statusov. Umaknjene oddaje ostanejo vedno zunaj.',
+  'Ordenen op': 'Razvrsti po',
+  'Groeperen op': 'Združi po',
+  'Naam van het boek': 'Ime knjige',
+  'Boek openen': 'Odpri knjigo',
+  'Samenstellen': 'Sestavi',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Delovne kopije ni bilo mogoče ustvariti.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Odpre kopijo oddaje za izboljšavo. Kar je prispelo, ostane nespremenjeno.',
+  'Werkkopie openen': 'Odpri delovno kopijo',
+  'Status gewijzigd naar {status}.': 'Stanje spremenjeno v {status}.',
+  'Intrekking opgeslagen.': 'Umik shranjen.',
+  'Intrekking ongedaan gemaakt.': 'Umik razveljavljen.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Oddaja izbrisana; zapis ostane.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Oddaja izbrisana, vendar registra ni bilo mogoče posodobiti. Uredite overview.md ročno.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Oddaje ni bilo mogoče najti v delovni mapi.',
+  'De inzending kon niet worden verwijderd.':
+      'Oddaje ni bilo mogoče izbrisati.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registra ni mogoče prebrati. Popravite overview.md; nič ni bilo spremenjeno.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registra ni bilo mogoče posodobiti.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Te spremembe ni bilo mogoče izvesti: oddaje ni v registru.',
+  'Status wijzigen': 'Spremeni stanje',
+  'Intrekking ongedaan maken': 'Razveljavi umik',
+  'Intrekken…': 'Umakni…',
+  'Verwijderen…': 'Izbriši…',
+  'Inzending intrekken': 'Umakni oddajo',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Vnesite dan, ko je oddajalec umaknil oddajo. Umaknjena oddaja nikoli ne pride v knjigo.',
+  'Dag (jjjj-mm-dd)': 'Dan (llll-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Neveljaven dan. Uporabite leto-mesec-dan, na primer {voorbeeld}.',
+  'Inzending verwijderen': 'Izbriši oddajo',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Odgovori, delovna kopija in fotografije te oddaje se izbrišejo iz delovne mape. Ostane le minimalen zapis: številka, dneva prejema in privolitve ter stanje. Tega ni mogoče razveljaviti.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Ostane tudi tisto, kar je obrazec vnaprej napovedal: {velden}.',
+  'Er klopt iets niet aan deze inzending.': 'S to oddajo je nekaj narobe.',
+  'Verplicht, maar leeg gelaten.': 'Obvezno, a pustili prazno.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} besed; potrebnih je vsaj {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} besed; dovoljenih je največ {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} znakov; potrebnih je vsaj {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} znakov; dovoljenih je največ {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '»{value}« ni na seznamu možnosti.',
+  '“{value}” is geen getal.': '»{value}« ni število.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '»{value}« ni datum v obliki leto-mesec-dan.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotografija široka {actual} slikovnih pik; zahtevanih je bilo {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'V oddaji manjka datoteka fotografije.',
+  'De beschrijving van de foto ontbreekt.': 'Manjka opis fotografije.',
+  'De maker van de foto ontbreekt.': 'Manjka avtor fotografije.',
+  'De foto is niet gecontroleerd.': 'Fotografija ni bila preverjena.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Fotografija HEIC: ni preverjena ali očiščena; lahko vsebuje lokacijo.',
+  'Toestemming niet gegeven.': 'Privolitev ni dana.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Odgovor vsebuje vrstico, ki izgleda kot nadzorna koda obrazca.',
+  'Het antwoord bevat HTML.': 'Odgovor vsebuje HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Odgovor vsebuje nezaprt blok kode.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Odgovor se sklicuje na sliko, ki ne spada k tej oddaji.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Odgovor vsebuje povezavo, ki ni dovoljena.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Tega obrazca ali te različice ni v delovni mapi.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Oddajalec je delal z drugačnim besedilom obrazca, kot je objavljeno.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Privolitev v manifestu ne ustreza objavljenemu obrazcu.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Besedilo obrazca je bilo spremenjeno zunaj odgovorov.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Besedilo obrazca je bilo spremenjeno pri tem polju.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Tega polja v objavljenem obrazcu ni.',
+  'Dit veld ontbreekt in de inzending.': 'Tega polja v oddaji manjka.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Oddaja različice {submission}; objavljena je različica {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Obrazec zahteva novejšo različico OciDecka.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Objavljeni obrazec v delovni mapi ni uporaben.',
+  'De inzending hoort bij een ander formulier.':
+      'Oddaja spada k drugemu obrazcu.',
+  'De opbouw van de inzending is beschadigd.': 'Zgradba oddaje je poškodovana.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registra ni mogoče prebrati. Popravite overview.md; oddaje so spodaj prikazane brez podatkov iz registra.',
+  'Nog geen inzendingen.': 'Še ni oddaj.',
+  'Om na te lopen': 'Za pregled',
+  'Verwijderd': 'Izbrisano',
+  'Zonder regel in het register': 'Brez vrstice v registru',
+  'Ontvangen {datum}': 'Prejeto {datum}',
+  'Ingetrokken {datum}': 'Umaknjeno {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Vsebina te oddaje je izbrisana; ostal je le zapis.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Te oddaje ni mogoče prebrati. Preverite datoteke v delovni mapi.',
+  'Beoordeeld tegen {formulier}.': 'Ocenjeno glede na {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Ocena se nanaša na delovno kopijo (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Ni točk za pregled.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotografije, ki jih noben odgovor ne omenja: {n}.',
+  'Inzendingen': 'Oddaje',
+  'Werkmap': 'Delovna mapa',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Delovna mapa še ni izbrana. Izberite mapo, v kateri bodo shranjene oddaje in register.',
+  'Werkmap kiezen…': 'Izberi delovno mapo…',
+  'Kies de werkmap voor inzendingen': 'Izberite delovno mapo za oddaje',
+  'Formulieren': 'Obrazci',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Obrazec še ni dodan. Dodajte obrazec, kakršnega ste objavili: oddaja se preverja glede nanj.',
+  'Formulier toevoegen…': 'Dodaj obrazec…',
+  'Kies het formulier om toe te voegen': 'Izberite obrazec za dodajanje',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ta datoteka ni obrazec, ki bi ga bilo mogoče objaviti.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ta obrazec že obstaja z drugačnim besedilom. Drugačno besedilo je nova različica: obrazcu dajte višjo številko različice.',
+  'Formulier toegevoegd: {naam}.': 'Obrazec dodan: {naam}.',
+  'Dit formulier stond er al.': 'Ta obrazec je že bil.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Obrazca ni bilo mogoče shraniti.',
+  'Inzendingen in de werkmap: {n}': 'Oddaje v delovni mapi: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Navaden zip med prenosom ni šifriran.',
+  'Pakketten binnenhalen…': 'Uvozi pakete…',
+  'Kies de pakketten om binnen te halen': 'Izberite pakete za uvoz',
+  'Register openen': 'Odpri register',
+  '{naam}: binnengehaald.': '{naam}: uvoženo.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: uvoženo, vendar je nekaj točk za pregled.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: uvoženo, vendar registra ni bilo mogoče posodobiti. Preverite overview.md.',
+  '{naam}: stond er al.': '{naam}: je že bilo.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ni paket oddaje, ki bi ga OciDeck lahko prebral.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ta obrazec ni dodan ali ni v tej različici. Najprej dodajte obrazec.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: ni bilo mogoče shraniti v delovno mapo.',
+  'Formulieren en inzendingen': 'Obrazci in oddaje',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Uvozite oddaje obrazca, preverite jih glede na objavljeni obrazec in jih hranite z registrom. Izpolnjevanje obrazca deluje tudi, ko je to izklopljeno. Privzeto izklopljeno.',
+  'Inzending opslaan als zip…': 'Shrani prijavo kot zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Datoteka zip z vašimi odgovori in fotografijami, ki jo po e-pošti pošljete organizatorju.',
+  'Inzending opgeslagen als {naam}.': 'Prijava je shranjena kot {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Izberite obrazec, kot ste ga prejeli',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'To ni obrazec, kateremu pripadajo vaši odgovori. Izberite datoteko, ki ste jo prejeli od organizatorja.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Fotografije ni bilo mogoče prebrati: {pad}. Dodajte jo znova.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Prijava ne gre v en paket: preveč fotografij ali prevelika fotografija.',
+  'De inzending kon niet worden opgeslagen.':
+      'Prijave ni bilo mogoče shraniti.',
+  'Inzending opslaan': 'Shrani prijavo',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Podatki o lokaciji so bili odstranjeni s te fotografije.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Te fotografije ni bilo mogoče dodati. Izberite datoteko JPEG, PNG, WebP ali HEIC s fotografijo.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Najprej shranite dokument, da boste lahko dodajali fotografije.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck lahko uvozi to datoteko v nov dokument.',
+  'Kies een datum': 'Izberi datum',
+  'Anders, namelijk:': 'Drugo, in sicer:',
+  'Punt {n}': 'Točka {n}',
+  'Punt {n} verwijderen': 'Odstrani točko {n}',
+  'Rij {n} verwijderen': 'Odstrani vrstico {n}',
+  'Foto {n} verwijderen': 'Odstrani fotografijo {n}',
+  'Wat is er te zien op de foto?': 'Kaj je videti na fotografiji?',
+  'Van wie is de foto?': 'Čigava je fotografija?',
+  'Foto toevoegen': 'Dodaj fotografijo',
+  'Verplicht': 'Obvezno',
+  'Alles is ingevuld.': 'Vse je izpolnjeno.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Še {n} je treba narediti, preden lahko pošljete:',
+  'klaar': 'končano',
+  '{n} open': '{n} odprtih',
+  'Dit formulier kan niet worden ingevuld.':
+      'Tega obrazca ni mogoče izpolniti.',
+  'Naar de bron': 'Na vir',
+  'Woorden': 'Besede',
+  'Tekens': 'Znaki',
+  'Keuzes': 'Izbire',
+  'Rijen': 'Vrstice',
+  'Foto’s': 'Fotografije',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (vsaj {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (največ {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (vsaj {min}, največ {max})',
+  'Invullen': 'Izpolni',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Nekaj ni v redu s tem obrazcem. Obrnite se na osebo, ki ga je ustvarila.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'To polje je obvezno. Izpolnite ga, da boste lahko poslali.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Napisali ste {actual} besed; potrebnih je vsaj {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Napisali ste {actual} besed; dovoljenih je največ {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Napisali ste {actual} znakov; potrebnih je vsaj {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Napisali ste {actual} znakov; dovoljenih je največ {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '»{value}« ni na seznamu. Izberite eno od možnosti.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '»{value}« ni število. Uporabite samo števke, po potrebi z vejico ali piko za decimalke.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Ta fotografija je široka {actual} slikovnih pik; tukaj se zahteva {min}. Verjetno se je zmanjšala, ko je bila poslana prek aplikacije za sporočila. Če imate izvirnik še vedno, uporabite tega. Če ne, jo vseeno pošljite: organizator se vam bo oglasil.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Ta fotografija ima {actual} MB; največ je {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Vsebina te datoteke se ne ujema z njeno vrsto.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Ta vrsta datoteke tukaj ni dovoljena.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Datoteke te fotografije ni več mogoče najti. Fotografijo dodajte znova.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'V enem kratkem stavku opišite, kaj je videti na fotografiji.',
+  'Geef aan van wie de foto is.': 'Navedite, čigava je fotografija.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Ta fotografija še ni preverjena. Počakajte trenutek ali jo dodajte znova.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Ta fotografija je datoteka HEIC. OciDeck je tukaj ne more preveriti ali počistiti, zato se pošlje takšna, kot je. Morda vsebuje, kje je bila fotografija posneta. Če tega ne želite deliti, v nastavitvah kamere izberite »Najbolj združljivo« ali fotografijo delite kot JPEG in jo dodajte znova.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Na tej fotografiji je videti {actual} obrazov; pričakovanih je bilo {expected}. To je le opomnik.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Označite polje, da se strinjate; brez soglasja ne morete poslati.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Ta obrazec zahteva novejšo različico OciDeck. Posodobite aplikacijo, da ga izpolnite.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'V samem obrazcu je bilo nekaj pomotoma spremenjeno. Obnovite obrazec; vaši odgovori ostanejo.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Ta vrstica je videti kot nadzorna koda obrazca in ne sme biti v odgovoru. Spremenite jo.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML v odgovoru ni dovoljen. Uporabite navadno besedilo in preprosto oblikovanje.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blok kode ni zaprt. Zaprite ga z ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'V odgovoru so lahko samo fotografije, ki jih dodate v tem obrazcu; slika z interneta ne more.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'V odgovoru so dovoljene samo povezave, ki se začnejo s https://, in e-poštni naslovi.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Ta datoteka je bila ustvarjena z drugo različico obrazca (različica {submission}; zdaj velja različica {published}). Preverite svoje odgovore.',
+  'Punt {item}: {bericht}': 'Točka {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Zdaj jih je {actual}; biti jih mora med {min} in {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Zdaj jih je {actual}; lahko jih je največ {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Zdaj jih je {actual}; biti jih mora vsaj {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Število mora biti večkratnik števila {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Število mora biti med {min} in {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Število je lahko največ {max}.',
+  'Het getal moet minstens {min} zijn.': 'Število mora biti vsaj {min}.',
+  'De datum moet op of na {min} liggen.': 'Datum mora biti {min} ali pozneje.',
+  'De datum moet op of vóór {max} liggen.': 'Datum mora biti {max} ali prej.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '»{value}« ni datum. Datum zapišite kot leto-mesec-dan, na primer 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'To ni veljaven e-poštni naslov.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'To ni veljaven spletni naslov. Začnite s https://.',
+  'Dit is geen geldig telefoonnummer.': 'To ni veljavna telefonska številka.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'To ni veljavna nizozemska poštna številka, kot je 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Tukaj je prostora samo za eno vrstico. Odstranite prelome vrstic.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Uporabite samo potrditvena polja tega vprašanja: eno polje na možnost.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Vsako točko napišite v svojo vrstico, spredaj s pomišljajem ali številko.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabela ni več pravilna: pustite vrstico z naslovi, kakršna je bila, in vsaki vrstici dajte enako število stolpcev.',
+  'Dezelfde foto staat hier twee keer.':
+      'Ista fotografija se tukaj pojavi dvakrat.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'V to polje spadajo samo fotografije, brez posameznega besedila.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Polje vašega soglasja je poškodovano. Obnovite obrazec.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Ta odgovor nima oblike, ki spada k temu vprašanju.',
   'Downloaden…': 'Prenesi…',
   'Afbeelding opgeslagen als': 'Slika shranjena kot',
   '{naam}: ingesteld': '{naam}: nastavljen',

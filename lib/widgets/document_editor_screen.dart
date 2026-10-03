@@ -34,6 +34,7 @@ import '../services/document_style.dart';
 import '../services/export_bundle.dart';
 import '../services/export_metadata.dart';
 import '../services/file_service.dart';
+import '../services/form_document_blocks.dart';
 import '../services/html_image_embedder.dart';
 import '../services/image_service.dart' show ImageImportFailure, ImageService;
 import '../services/markdown_table_codec.dart';
@@ -84,6 +85,9 @@ import 'editors/find_replace_session.dart';
 import 'editors/markdown_find_bar.dart';
 import 'editors/markdown_smart_input_formatter.dart';
 import 'editors/markdown_source_controller.dart';
+import 'forms/form_export_picker.dart';
+import 'forms/form_fill_view.dart';
+import 'forms/form_image_picker.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'markdown_editor/table_embed_binding.dart';
 import 'reader/document_markdown_view.dart';
@@ -95,6 +99,7 @@ import 'shell/document_import_action.dart';
 
 part 'parts/document_editor_toolbar.dart';
 part 'parts/document_fields_dialog.dart';
+part 'parts/document_editor_form.dart';
 part 'parts/document_editor_layouts.dart';
 part 'parts/document_source_field.dart';
 part 'parts/document_source_rewrites.dart';
@@ -230,7 +235,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // verliesvrij aankan, dan start direct in de Bron-modus. De gebruiker hoeft
     // niet eerst de visuele modus te zien falen om te begrijpen dat hij in de
     // bron hoort te werken.
-    if (!markdownRoundTripsVisually(initialBody)) {
+    if (!scanFormBlocks(initialBody).isEmpty) {
+      _viewMode = _DocViewMode.fill;
+    } else if (!markdownRoundTripsVisually(initialBody)) {
       _viewMode = _DocViewMode.source;
     }
   }
@@ -471,6 +478,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                       tlp: documentTlp,
                       fields: fields,
                     ),
+                    _DocViewMode.fill => _fillLayout(
+                      source,
+                      tlp: documentTlp,
+                      fields: fields,
+                    ),
                     _DocViewMode.pages => _documentPagesLayout(
                       context,
                       ref,
@@ -651,6 +663,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     String? docStyleName,
   ) => _DocEditorToolbar(
     mode: _viewMode,
+    hasForm: !scanFormBlocks(_controller.text).isEmpty,
     onModeChanged: _changeViewMode,
     onInsertChart: _insertChart,
     onInsertPageBreak: _insertPageBreak,
@@ -1131,7 +1144,7 @@ void _setDocumentTlp(WidgetRef ref, TlpLevel level) {
 /// als de andere twee — alleen op vellen van de gekozen maat, met de marges en
 /// de pagina-einden erin. Een eigen tekenaar voor pagina's zou precies de
 /// afwijking opleveren die §2.1 verbiedt.
-enum _DocViewMode { visual, source, pages }
+enum _DocViewMode { visual, source, pages, fill }
 
 class _DocSmartPasteIntent extends Intent {
   const _DocSmartPasteIntent();

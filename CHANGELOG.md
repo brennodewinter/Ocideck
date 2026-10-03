@@ -10,6 +10,206 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Het **team van de redactie** (formaat §7.6, fase 3): Inbox → *Team…* beheert `team.json` in de werkmap — de redacteurs naast de eigenaar, in elke bundel
+  die de eigenaar ondertekent. **Toevoegen in twee stappen**: de kaart (§5.1) plakken, waarna alleen de naam in beeld staat, en de **vingerafdruk van de
+  kaart** terugtypen die de redacteur langs een andere weg gaf — hij wordt bewust niet eerst getoond. Een foute vingerafdruk wordt vóór elke andere
+  weigering gemeld; geweigerd worden ook de eigen kaart, een dubbele en een vol team (63 + de eigenaar = de 64 van een bundel). Een `team.json` dat niet
+  te lezen is wordt nooit overschreven en houdt het publiceren tegen. Verwijderen vraagt een bevestiging die zegt wat blijft (eerder gepubliceerde bundels
+  tot er opnieuw wordt gepubliceerd; wat al verzegeld is blijft leesbaar). **De publiceerregel van §7.6 is nu volledig**: herstelsleutel teruggetypt *of*
+  minstens één redacteur in het team (twee sleutels). `publishFormBundle` zet de eigenaar eerst en de redacteurs in volgorde in de bundel; het
+  bundelvenster zegt *Naast jou in de bundel: …*. Het bericht bij een ontbrekende herstelweg is aangepast (de oude zin is uit alle 30 talen verwijderd). 27
+  nieuwe teksten in 30 talen.
+- De **redacteurskaart** (formaat §5.1, fase 3): in *Redactiesleutel…* maakt een nieuwe redacteur een kaart — `{v, name, age, sign, kid}` als canonieke
+  JSON op één regel — met zijn naam, om te kopiëren, en de **vingerafdruk van de kaart** om aan de eigenaar van het formulier door te geven langs een
+  andere weg dan de kaart. De vingerafdruk (`base32(SHA-256("ocideck-editor-card-v1\n" + tekst))`) dekt de **hele kaart**: met een vingerafdruk over de
+  ondertekeningssleutel alleen kon wie de kaart droeg het age-adres verwisselen en bleef de vingerafdruk kloppen. De kaart wordt strikt gelezen (alleen
+  die sleutels, een `kid` die bij het adres hoort, een sleutel van 32 bytes in kleine letters, geen spaties rond de naam) en staat vast in een
+  testvector (CC0), onafhankelijk met `hashlib` nagerekend. Het team zelf (de eigenaar plakt de kaart en typt de vingerafdruk terug) en de
+  twee-sleutelsregel volgen. 7 nieuwe teksten in 30 talen.
+- De invuller kan een inzending **verzegeld opslaan** (formaat §5.1, §5.6, fase 3): *Verzegeld opslaan…* vraagt om het bundelbestand van de
+  organisator en om de **vingerafdruk** uit de uitnodiging, gelooft de bundel pas als hij daarmee klopt (handtekening, de eigen tekst van het
+  formulier, geldigheid, volgnummer ten opzichte van de bundels die de invuller al zag) en verzegelt dan naar **alle** organisatoren die de bundel
+  noemt: een `.zip.age` dat de organisator in de Inbox opent (en ook zonder OciDeck). Het hoogste geziene volgnummer per formulier en organisator
+  blijft bewaard (voorkeuren), zodat een oude bundel waarin nog een vertrokken redacteur staat wordt geweigerd. Gestopt, met de reden: een
+  vingerafdruk die er geen is of niet past, een veranderde of verlopen bundel, een bundel bij een andere tekst, een gesloten formulier (de laatste
+  dag zelf mag nog) en een inzending groter dan `max_package_bytes`. Wat werkte wordt voor dit formulier onthouden tot de sessie eindigt, maar pas na
+  een opgeslagen bestand. **Niet in de webversie**: `dartage` draait niet onder dart2js, daar wordt de knop niet getoond. 18 nieuwe teksten in 30 talen.
+- De Inbox **publiceert een bundel** (formaat §5.1, §7.6, fase 3): *Bundel publiceren…* maakt en ondertekent met de redactiesleutel de
+  bundel van één gepubliceerd sjabloon en bewaart hem ernaast als `template.<taal>.bundle.json`; daarna staat in het venster de
+  **vingerafdruk** om de invuller langs een andere weg dan het bundelbestand te geven. De naam voor de invuller en *geldig tot* komen uit
+  het formulier (`controller`, `closes`) en zijn aanpasbaar; `closes` en `retain_unused` van de bundel komen uit het formulier zelf. Er wordt
+  niets ondertekend als er geen bruikbare sleutel is, als de **herstelsleutel niet is teruggetypt** (de publiceerregel van §7.6; twee
+  sleutels als alternatief komt met het team), als de naam of de geldigheid niet deugt (ook een geldigheid vóór de sluitingsdag), of als er
+  al een bundel van dit formulier staat die niet te lezen is of een ander `fid` noemt — het volgende `bundle_seq` is dan niet te weten, en een
+  invuller die het hogere zag weigert een lager stilletjes. `fid` en `bundle_seq` lopen per formulier door over talen en versies.
+  **Afwijking van het bevroren §7.1:** daar stond één `bundle.json` per versie; een bundel bindt de hash van één tekst en elke taal is een eigen
+  tekst, dus het wordt één bundel per sjabloon (staat nu zo in §7.1). 22 nieuwe teksten in 30 talen.
+- De Inbox haalt **verzegelde bestanden** (`.zip.age`) binnen (formaat §5.6/§7.2, fase 3): *Pakketten binnenhalen…* kiest nu ook
+  `.zip.age`, herkent het aan de kop (`looksLikeAge` in `ocideck_form_core`), opent het met de redactiesleutel en laat het daarna
+  door dezelfde keten als een gewoon pakket. Elk bestand krijgt een regel; gaat het niet open dan zegt die waarom en wordt er niets
+  binnengehaald: nog geen redactiesleutel, een sleutelhanger die niet te lezen is (er is dan niets geprobeerd), een beschadigde
+  bewaarde sleutel, een pakket voor andermans sleutel, een veranderd of afgebroken pakket, een te groot pakket, een bestand met
+  pantser of anderszins onleesbaar, en een bestand dat opent maar geen pakket bevat. Een bestand met een `age`-kop gaat nooit naar
+  de zip-lezer en een zip nooit naar de sleutel. 11 nieuwe teksten in 30 talen. Daarbij: de Friese knop *Redactiesleutel
+  aanmaken* stond in de verleden tijd.
+- De **redactiesleutel** staat in de app (formaat §5.9, fase 3): Inbox → *Redactiesleutel…* maakt de age-identiteit en het
+  Ed25519-ondertekeningszaad aan in de sleutelhanger, in een zichtbare stap die eerst zegt wat verlies kost, en toont dan de
+  herstelsleutel, die je terug moet typen (*gecontroleerd* is wat het publiceren straks vraagt). Herstellen uit de
+  herstelsleutel (alleen waar nog geen sleutel is), de vingerafdruk kopiëren, de sleutel exporteren als gewoon age-sleutelbestand
+  (naast het doel aangemaakt, `chmod 600`, dán beschreven en verplaatst) en verwijderen achter een bevestiging. **Een sleutel wordt nooit overschreven:**
+  een sleutelhanger die niet te lezen is, geldt niet als leeg (`SecretStore.readFormEditorialKey` gooit de fout door waar elke
+  andere getter hem inslikt), een opgeslagen tekst die niet als sleutel te lezen is evenmin, en een aanmaak leest zichzelf terug
+  zodat niemand een herstelsleutel opschrijft bij een sleutel die er niet is. Op het web biedt het venster niets aan. De keten
+  naar het publiceren van een bundel loopt nog niet door: het team en de twee-sleutelsregel volgen. Gevonden bij het keuren in
+  het Engels: de knop *Controleren* kwam uit een ander venster en luidde daar *Check syntax*; hij heet nu *Herstelsleutel
+  controleren*.
+- De **herstelsleutel van de redactiesleutel** (formaat §5.9) staat in `ocideck_form_core`: de twee geheimen — het Ed25519-zaad
+  dat bundels ondertekent en de age-identiteit die inzendingen opent — als één tekst om op te schrijven en elders weer in te
+  typen (Crockford-base32 in groepjes van vier, CRC-16, 109 tekens). Hij heeft **een eigen doelbyte**: de herstelsleutel van de
+  samenwerkingsidentiteit heeft er geen en is een byte korter, dus de ene in het veld van de andere plakken wordt aan beide kanten
+  geweigerd voor er iets wordt geïnstalleerd (`test/form_recovery_key_collab_test.dart`). De decoder zegt apart: niet deze
+  sleutel, een typefout, een nieuwere versie, voor iets anders gemaakt. Daarvoor staat nu ook `form_bech32.dart` in het pakket
+  (BIP-173 met zijn testvectoren): de age-bibliotheek houdt zijn eigen bech32 privé. Nog niet verbonden met de app.
+- Het **bundelbestand** (formaat §5.1, fase 3) staat in `ocideck_form_core`: de eigenaar van een formulier ondertekent met
+  Ed25519 de organisatoren en hun sleutels, de sjabloonhash, het volgnummer, de verloopdag en het beleid; een invuller
+  controleert dat tegen een vingerafdruk die langs een andere weg kwam dan het bundelbestand. **Zonder vingerafdruk wordt een
+  bundel geweigerd** (geen vraag aan de invuller: die kan een naam uit de bundel zelf niet beoordelen). De controle loopt in vaste
+  volgorde — grootte en JSON, vingerafdruk, ondertekenaar, handtekening, strikte structuur, sjabloon, verloop, host, pin — en
+  gelooft niets uit de bundel vóór de handtekening klopt. Een lager volgnummer dan het hoogste dat is gezien is een terugval en
+  wordt geweigerd. `createFormBundle` controleert wat het maakte voor het het teruggeeft. De details die het ontwerp openliet
+  (base32 voor sleutels, handtekening, `kid` en vingerafdruk; de eigenaar is de organisator wiens sleutel de vingerafdruk
+  noemt; `kid` afgeleid van de `age1…`-ontvanger; een JCS-deelverzameling met alleen gehele getallen) staan in §5.1.
+  Een testvector (CC0) legt het formaat byte voor byte vast; zijn handtekening is ook met Node/OpenSSL onafhankelijk
+  gecontroleerd. Nog niet verbonden met de app. Gevonden bij het draaien in de browser: dartage 0.3.0 werkt in een dart2js-build
+  niet (`setUint64` bestaat daar niet) en onder WebAssembly wel; de webinvuller (fase 4) heeft dus een wasm-build of een
+  herstel bovenstrooms nodig.
+- Formulier-inzendingen kunnen nu **verzegeld** worden (formaat §5.6, fase 3): `ocideck_form_core` kent een
+  age-bestand (`<sid>.zip.age`) met X25519-ontvangers, gemaakt met de bibliotheek **dartage 0.3.0** (MIT, exact vastgezet;
+  besluit D9). Openen controleert eerst de grootte, dan de header-MAC en elk blok, leest dan het pakket en toetst tot slot
+  het manifest aan wat de aanroeper *vroeg* (inzending, formulier, versie) — age heeft geen geassocieerde data, dus een
+  bestand dat een server van het ene formulier naar het andere schuift opent wel en faalt daar. Armor, wachtwoorden en
+  de hybride en tag-ontvangers worden geweigerd, niet genegeerd. Het corpus van de age-gemeenschap (C2SP CCTV, 143
+  vectoren, vastgezet op een commit) draait bij elke controle; de test met het referentieprogramma `age` slaat zichtbaar
+  over als dat niet aanwezig is. Een nieuwe regel in `make check-packages` houdt de cryptografische bibliotheken
+  buiten elk bestand dat er niet voor bedoeld is. Nog niet verbonden met de app: de sleutels, het bundelbestand en het
+  verzegelde bestand komen in de volgende stappen. dartage vraagt Dart 3.13 (de vastgezette toolchain levert 3.13.4); de verklaarde `sdk`-grens blijft ^3.12.0, want verhogen herformatteert de halve repository en is een aparte stap.
+- In de Inbox brengt **Werkkopie weggooien…** een inzending terug naar wat binnenkwam. De bevestiging zegt wat gaat (de
+  werkkopie met haar verbeteringen, voorgoed) en wat blijft (wat binnenkwam, de foto's, het register), en vraagt de
+  werkkopie eerst te sluiten als ze nog openstaat. Daarna wordt de inzending weer op het origineel beoordeeld. Het werkt
+  ook voor een werkkopie die niet te lezen is — daar was tot nu toe geen uitweg uit — en nooit voor een verwijderde
+  inzending. 8 nieuwe zinnen in 30 talen.
+- Het boek legt per foto **het bewijs waaronder ze er mag staan** vast in `<naam>.compile.json`: de sha-256 van de bytes
+  (de sleutel van de rechtenopslag voor afbeeldingen), de maker, en als licentie `form-consent` met als bewijs het
+  formulier, de inzending en de hash van elke toestemmingstekst waarmee de inzender instemde — in de vorm van
+  `AssetRightsProvenance`. Een formulier zonder toestemmingsveld geeft geen licentie en geen bewijs, en dat staat er
+  zo. Dit is een vastlegging, geen controle: de rechtencontrole kijkt nog niet naar de foto's van een document.
+- In de Inbox opent **Controle door de maker…** de controle van §7.4: drie losse stappen. Het **controledocument** is het
+  hoofdstuk van die ene inzending, gemaakt met dezelfde samensteller als het boek (dus de maker ziet wat er gedrukt
+  wordt) en geopend in een tabblad, waar je het met de gewone export als pdf wegschrijft — de export die het
+  privacyprofiel, de classificatie en de lettertypen al kent, geen tweede. **Mail schrijven** opent een concept aan het
+  adres dat de maker opgaf (het eerste ingevulde e-mailveld; aan te passen) met de uiterste antwoorddag; het adres wordt
+  percent-gecodeerd, zodat wat een inzender als adres intikt geen `bcc` of onderwerp aan jouw concept kan toevoegen.
+  **Controle verstuurd** zet de status op `maker-check-sent`. Een document krijgt een nieuw nummer en overschrijft nooit
+  een eerder. 17 nieuwe zinnen in 30 talen.
+- In de Inbox maakt **Boek samenstellen…** van de goedgekeurde inzendingen één document (formaat §7.5). Je kiest het
+  formulier, een hoofdstuksjabloon, welke statussen erin komen (`maker-approved` staat al aan als het formulier die kent),
+  eventueel een veld om op te ordenen en een om op te groeperen, en een naam. Het boek komt als **nieuw document** in de
+  map `book` van de werkmap — nooit over een bestaand heen — met de foto's ernaast onder `images/<id>-<veld>-<n>.<ext>`;
+  wat het boek *over zichzelf* weet (welke inzendingen, onder welke toestemming, wie welke foto maakte) staat in
+  `<naam>.compile.json` ernaast, niet in de tekst. Een ingetrokken inzending komt er nooit in; een inzending van een andere
+  versie of die niet te lezen is wordt overgeslagen en geteld; een sjabloon met een onbekend veld wordt geweigerd bij naam.
+  28 nieuwe zinnen in 30 talen.
+- De **kern van het samenstellen van een boek** (formaat §7.5) staat in `ocideck_form_core`: een hoofdstuksjabloon
+  met `{veld-id}`-plaatsvervangers wordt per inzending ingevuld en tot één document samengevoegd. Een antwoord gaat erin
+  **als de Markdown die het al is, per veldtype en zonder iets af te kappen** (de oude kop-en-voetresolver kapte op 4096
+  tekens af en escapete alle leestekens); elk ingevoegd antwoord krijgt zijn codeblokken in balans, zodat één slecht
+  antwoord niet elk volgend hoofdstuk in een codeblok verandert; een regel waarvan alle plaatsvervangers leeg zijn en
+  die verder alleen opmaak draagt, vervalt; foto's krijgen `images/<nummer>-<veld>-<n>.<ext>`; en **een ingetrokken
+  inzending komt nooit in het boek**. Gesloten vocabulaire: selectie, ordenen op één veld en een kop per groep van één
+  veld. Een sjabloon dat een onbekend veld noemt wordt geweigerd. Het schrijven (werkmap lezen, foto's kopiëren, het boek
+  opslaan) en het dialoogvenster volgen.
+- In de Inbox opent **Werkkopie openen** een inzending om te verbeteren zonder aan te raken wat binnenkwam: OciDeck
+  maakt `submission.edit.md` (een letterlijke kopie, nooit over een bestaande heen) en opent die in een tabblad. De
+  inzending wordt daarna opnieuw beoordeeld op de werkkopie, dus een herstelde fout verdwijnt uit de lijst. 3 nieuwe
+  zinnen in 30 talen.
+- In de Inbox kun je een inzending nu **een andere status geven**, **intrekken** (met een dag; ongedaan maken kan)
+  en **verwijderen**. Verwijderen zegt eerst wat er wordt gewist en wat blijft — het minimale record plus de velden
+  die het formulier vooraf aankondigde — en kan niet ongedaan worden gemaakt. Een register dat niet te lezen is
+  wordt nooit overschreven, en verwijderen wacht er niet op: wat persoonlijk is gaat weg, en de melding zegt dat
+  de rij met de hand moet. 21 nieuwe zinnen in 30 talen.
+- De **Inbox** toont nu elke inzending als een regel — naam uit de overzichtskolommen van het formulier, status,
+  dag van ontvangst en eventuele intrekking — en klapt open tot **wat er mis mee is**, in gewone woorden over de
+  inzender ("90 woorden; minstens 150 nodig") en onder de naam van het veld. De punten worden telkens opnieuw
+  uitgerekend uit wat in de werkmap staat, dus een correctie in de werkkopie `submission.edit.md` haalt een punt
+  weg. Een register dat niet te lezen is wordt gemeld en de inzendingen blijven zichtbaar. 46 nieuwe zinnen in 30
+  talen; `readFormManifest` in `ocideck_form_core` leest een bewaard manifest los.
+- Een **voorbeeldformulier** om de formulierfunctie mee uit te proberen: `examples/forms/recept.nl.md` en
+  `recept.en.md` (een receptinzending met alle soorten vragen, foto's en toestemming). Een test houdt ze
+  bruikbaar — geen fouten of waarschuwingen, invulbaar tot en met de poort — en de twee talen op dezelfde
+  regels.
+- Een organisator kan **inzendingen binnenhalen**: de nieuwe uitbreiding *Formulieren en inzendingen*
+  (Instellingen → Uitbreidingen, standaard uit) geeft het beginscherm een knop **Inzendingen**. Daar kies je
+  een werkmap, voeg je het formulier toe zoals je het publiceerde en haal je de `.zip`-pakketten binnen die
+  zijn aangekomen. Elk pakket wordt gelezen onder limieten, elke foto echt gedecodeerd en nog eens gezuiverd,
+  en de inzending gehouden tegen het **gepubliceerde** formulier. De inzending komt in één stap in
+  `submissions/<nummer>/` (nooit over een bestaande heen, een crash laat geen halve achter), een rij komt in
+  het register `overview.md`, en één met een fout komt er wel in als `needs-fixing`. Het venster zegt per bestand
+  wat er van geworden is en dat een gewone zip onderweg niet versleuteld is.
+- Het **register van een organisator** (`overview.md`, formaat §7.3) heeft zijn motor in
+  `ocideck_form_core`: één Markdown-tabel met een rij per inzending (kolommen uit `overview=` van het
+  formulier, dan ontvangen, status, toestemming, ingetrokken en bewaren-tot), die de Inbox bijhoudt en
+  die de redactie ook met de hand mag bewerken. Een tabel die niet te lezen is wordt als beschadigd
+  gemeld en met rust gelaten in plaats van herschreven; tekst eromheen en kolommen die iemand erbij
+  zette blijven staan. Inhoud uit een inzending komt als gewone tekst in een cel — nooit als link,
+  afbeelding of tabelbreuk — en bij verwijderen blijft alleen het minimale record over (§7.3).
+- De **beoordeling van een binnengekomen inzending** (kant van de organisator, formaat §4.11 en
+  §7.2) heeft haar motor in `ocideck_form_core`: een pakket wordt gehouden tegen het
+  **gepubliceerde** formulier — nooit tegen de regels in de inzending zelf, zodat een client die een
+  regel in zijn eigen kopie verzwakte toch aan de echte regel wordt gehouden — met controle van de
+  tekst buiten de antwoorden, van de toestemmingsregistratie in het manifest en van elk veld. Elke
+  foto wordt opnieuw gezuiverd en de beoordeling meldt waar de client nog iets had laten zitten. Er
+  is nog geen scherm voor; dat volgt.
+- Een ingevuld formulier kun je nu **opslaan als inzendpakket**: onderaan de invulpagina maakt
+  **Inzending opslaan als zip…** één zip met je antwoorden, de foto's en een manifest, om naar de
+  organisator te mailen. De knop is altijd te bedienen — staat er nog iets open, dan laat de pagina
+  zien wat — en de foto's worden onderweg nog een keer gezuiverd. OciDeck onthoudt het formulier zoals
+  het gepubliceerd werd vanaf het moment dat je het leeg opent; een half ingevuld document dat je
+  later opent vraagt om het originele bestand, en een formulier waarvan de tekst buiten de antwoorden
+  is veranderd wordt geweigerd (dezelfde controle als die van de organisator).
+- Het **inzendpakket** van een formulier (formaat §5.2–§5.4, eerste fase: een gewone zip
+  met `submission.md`, `manifest.json` en de foto's) heeft zijn motor in
+  `ocideck_form_core`. Het bouwen is deterministisch — dezelfde invoer geeft dezelfde
+  bytes, dus `sha256sum` klopt — en de lezer van de organisator weigert alles wat niet
+  precies zo'n pakket is: zip64, versleuteling, symbolische verwijzingen, dubbele of
+  overlappende bestanden, een kop die een andere naam noemt dan de index, een foute
+  checksum of grootte, een manifest dat iets anders zegt dan het pakket bevat, en een
+  zipbom (de uitpakker stopt bij de opgegeven grootte). Er is nog geen knop in de app
+  voor; die volgt.
+- In een formulier kun je nu **foto's toevoegen** aan een fotoveld (zodra het document is
+  opgeslagen). De foto wordt gezuiverd voor hij in het document komt — locatie, tijdstip en
+  apparaat eruit, zonder de foto opnieuw te coderen; kleurprofiel en draairichting blijven —
+  en echt gedecodeerd, zodat een bestand met een geldige kop maar geen foto erachter wordt
+  geweigerd. De foto krijgt een naam zonder persoonsgegevens (`images/<veld>-<nummer>`), de
+  pagina zegt dat de locatiegegevens zijn verwijderd, en per foto vul je een beschrijving en
+  een maker in als het veld daarom vraagt. Een HEIC wordt zoals hij is verstuurd en heet niet
+  gecontroleerd. Foto's die al in het document staan worden gemeten voor de controle van de
+  breedte.
+- Spreadsheets importeren als document (#2225): **Document importeren…** neemt
+  naast `.docx`/`.odt` nu ook `.xlsx`, `.ods` en `.csv` — elk werkblad wordt een
+  kop met een GFM-tabel (formules als hun laatst berekende waarde, datums als
+  `yyyy-mm-dd`). Een via **Openen** gekozen of gesleepte spreadsheet krijgt de
+  import als uitweg; grafieken, afbeeldingen en samengevoegde cellen tellen mee
+  in *niet overgenomen*. Gesleepte `.docx`/`.odt` gaan nu ook de import in.
+
+- Een document met een formulier opent op een nieuw tabblad **Invullen**: de titel, wat
+  de auteur boven de vragen schreef, de notice en elke vraag met zijn eigen invoer (regel,
+  verhaal, keuze, meerdere keuzes, lijst, tabel, datum, getal, toestemming; foto's volgen).
+  Onder elke vraag staat in gewone woorden wat er nog mis is en wat je eraan kunt doen, in
+  alle 31 talen, en een teller loopt mee (**Woorden: 90 (minimaal 150, maximaal 300)**).
+  Bovenaan staat hoeveel er nog te doen is, met per vraag een sprong; een verplichte vraag
+  die je niet hebt aangeraakt is niet rood. Alles wat je typt gaat direct in het document en
+  verandert alleen de bytes tussen de antwoordmarkers; ongedaan maken draait een heel woord
+  per vraag terug. Een beschadigd formulier zegt waarom het niet kan en wijst naar de bron.
 - Een versiecheck meldt subtiel wanneer er een nieuwere OciDeck-release is:
   het versienummer op het openscherm krijgt dan een amber indicator die bij
   hover de nieuwe versie noemt en de releasepagina opent. Zolang er nog nooit
@@ -80,6 +280,42 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- Voor de formulierdocumenten (ontwerp: `docs/design/FORM_INTAKE.md`) staat er nu
+  een eerste pakket onder `packages/`: `ocideck_form_core`, puur Dart zonder
+  Flutter, zodat de app, een webvormschil en een losse server dezelfde engine
+  kunnen delen. Nog geen zichtbare functie — het pakket kan een formulier-
+  sjabloon lezen (`parseForm`: markers, tien veldtypen met hun regels, alle
+  auteursfouten tegelijk), antwoorden uitlezen en valideren (woord- en
+  tekentelling met een gedeeld vectorbestand, benoemde patronen, de
+  veiligheidsregels voor antwoorden, een inzending tegen het *gepubliceerde*
+  formulier), een antwoord terugschrijven in zijn zone (alleen de bytes van die
+  zone veranderen; een antwoord dat het formulier zelf zou wijzigen wordt
+  geweigerd) en controleren of de sjabloontekst van een inzending nog de
+  gepubliceerde is. Een foto kan worden gecontroleerd en schoongemaakt voor hij een
+  inzending in gaat: het bestandstype komt uit de eerste bytes (nooit uit de naam),
+  locatie, tijdstip, apparaat en tekstblokken gaan eruit zonder de foto opnieuw te
+  coderen, het kleurprofiel en de draairichting blijven, en alles na het einde van
+  het beeld wordt afgesneden. Een lopende invulsessie (`FormFill`) is één onveranderlijke
+  waarde: de pagina in documentvolgorde, het antwoord en de problemen per veld,
+  tellers (woorden, tekens, punten) en of er verstuurd mag worden. Elke melding
+  van de validatie heeft nu een zin voor de invuller in alle 31 talen
+  (`formIssueMessage`). Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
+  regels voor `packages/`) en `make test-packages` (tests + dekkingsvloer; onderdeel
+  van `make check`), en de SBOM kent voortaan een eigen groep voor first-party
+  pakketten.
+- Een formulierdocument (ontwerp: `docs/design/FORM_INTAKE.md`) is nu in OciDeck
+  zelf leesbaar zonder dat de markers zichtbaar zijn. Voor andere Markdown-lezers
+  waren `<!-- form -->`, `<!-- field -->` en `<!-- notice -->` al onzichtbaar
+  commentaar; OciDeck's eigen lezer toonde ze als alinea en de visuele editor
+  viel er terug op brontekst. Nu laat de lezer label, antwoord en notice zien
+  zonder marker, tekent de visuele editor de kop, de notice en elk veld als één
+  alleen-lezen blok waarvan de bron byte-gelijk door een rondgang komt (ook een
+  antwoord met `##`, `1.` of een backslash), en laten alle exports behalve `.md`
+  de markers weg — `.md` bewaart ze, want die zijn bron. Een formulier dat niet
+  klopt (een veld zonder sluitmarker) blijft zichtbaar kapot in plaats van stil
+  iets te verliezen. De rijke-tekstlaag schrijft de lege regels om een blok
+  zelf; een formulier daar opslaan telt daarom als het wijzigen van sjabloontekst.
+  Het formaat staat in FILE_FORMAT.md §14.14. Het invullen zelf volgt.
 - Documenttijdlijnen beginnen voortaan met **Datum** in plaats van **Tijd** en
   bieden in de eerste kolom aparte keuzes voor een datum of een datum met tijd.
   Een datum blijft zonevrij; een exact tijdstip wordt als ISO-8601 UTC bewaard
@@ -175,6 +411,34 @@ All notable changes to OciDeck are documented in this file.
   heeft geen byte-identiteitsbelofte; een BOM wordt daar, zoals altijd, bij het
   opslaan weggelaten; dat is de vorm die OciDeck voor een deck kiest, geen eis van
   Marp (Marp CLI en Pandoc lezen beide vormen gelijk).
+- Een inzendpakket (of een antwoord) kan geen foto meer noemen onder een naam die Windows
+  voor apparaten bewaart — `con`, `prn`, `aux`, `nul`, `com0`–`com9`, `lpt0`–`lpt9`, met welke
+  extensie ook (`images/nul.jpg` op de schijf van een Windows-organisator is het nulapparaat, geen
+  bestand). Het ontwerp (§5.4) zei het al; de naamgrammatica liet het door. Een naam die er alleen
+  op begint (`con-1.jpg`) blijft gewoon. Bij het binnenhalen bewaart de lezer ook het manifest en
+  de inzending byte voor byte zoals ze aankwamen, zodat `sha256sum` klopt.
+- In een pentestrapport groeide het aantal lege regels na de kop van een
+  bevinding en na de ondertekening met elke visuele rondgang — drie
+  regelovergangen erbij per keer, onbegrensd — zodat het bestand opzwol terwijl
+  de gebruiker niets typte. De scanner en de embed-syntaxen namen de lege regels
+  vlak voor de volgende kop of envelop mee in het atomaire blok, en de conversie
+  voegde daar zelf een scheiding aan toe. Ze delen nu één regel
+  (`pentestTrimBlankTail`) en laten die staart bij de scheiding; een tweede
+  rondgang is byte-gelijk aan de eerste, voor elke atomaire envelop even veel
+  lege regels. De tabelenveloppen deden dit al nooit. De rondgangstests
+  vouwden lege-regelruns samen en zagen het daarom niet; ze toetsen nu strikt.
+
+- Een pentestrapport kwam na één visuele bewerking niet meer byte-gelijk
+  terug. De kop van een bevinding (scopeobject, hertestnotitie) en de vier
+  enveloppen die in hun geheel atomair zijn (checklist, scope, samenvatting,
+  ondertekening) reizen als één embed door de rijke-tekstlaag, maar de
+  opslagnormalisatie liep daarna alsnog over die tekst: `\*` werd `*`, een
+  NBSP werd een spatie en een zacht koppelteken, dunne spatie of BOM
+  verdween — zo werd `a \* b` in een scopeobject stil `a * b`. Die
+  normalisatie slaat het atomaire bereik nu over, net als sinds het
+  formulierblok al voor formulieren gold; de sectieteksten onder een
+  bevinding blijven gewone, genormaliseerde Markdown. De bestaande
+  rondgangstest gebruikte alleen `<br>` als kanarie en zag dit daarom niet.
 
 - De eLearning-onderdelen hingen aan de verkeerde schakelaar. "eLearning
   volgen" (de OciServe-koppeling) is de dienst van de cursist, maar het

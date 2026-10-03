@@ -1630,6 +1630,604 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'D Redaktore näb dir, wo i jedem Bundle sin, dass au si d Iischickige chönne ufmache. Du fügsch öpper mit synere Redaktorekarte zue und tippsch dr Fingerabdruck vo dr Karte zrügg.',
+  'Er is nog niemand naast jou.': 'Usser dir isch no niemer dr bi.',
+  'Plak de kaart van de redacteur': 'Füeg d Karte vom Redaktor ii',
+  'Kaart controleren': 'Karte prüefe',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karte vo {naam}. Tipp dr Fingerabdruck vo dere Karte ii, wo {naam} dir uf eme andere Wäg gä het, zum Bispiil am Telefon.',
+  'Redacteur verwijderen': 'Redaktor entferne',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} us em Team entferne? Bundles, wo du scho veröffentlicht hesch, blybe wie si sin, bis du nöi veröffentlichsch; was scho für {naam} verschlüsslet isch, blybt für die Person läsbar.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} isch zuegfüegt worde. Veröffentlich s Bundle nöi, zum {naam} ufznäh.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} isch entfernt worde. Veröffentlich s Bundle nöi, zum {naam} usezneh.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Erstell zersch dy eigete Redaktionsschlüssel under Redaktionsschlüssel….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Dr Redaktionsschlüssel isch nid brauchbar. Lueg under Redaktionsschlüssel… na.',
+  'Dit is geen redacteurskaart.': 'Das isch kei Redaktorekarte.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Die Karte chunnt vo me neuere OciDeck. Aktualisier OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'D Karte enthaltet öppis, wo nid erlaubt isch. Bitt dr Redaktor um e neui Karte.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Dä Fingerabdruck passt nid zu dr Karte: D Karte isch veränderet worde oder isch nid vo däm, wo du meinsch. Bitt dr Redaktor nomal um dr Fingerabdruck und d Karte.',
+  'Dit is je eigen kaart.': 'Das isch dini eigeti Karte.',
+  'Deze redacteur staat er al.': 'Dä Redaktor isch scho im Team.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'S Team isch voll: Es Bundle treit höchschtens 64 Organisatore, di iigrechnet.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'D Datei team.json im Arbeitsordner lat sich nid läse. Es isch nüt gänderet worde; reparier si oder lösch si.',
+  'Het team kon niet worden opgeslagen.':
+      'S Team het nid chönne gspeicheret wärde.',
+  'Deze redacteur staat niet meer in het team.':
+      'Dä Redaktor isch nümme im Team.',
+  'Naast jou in de bundel: {namen}.': 'Näb dir im Bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Prüef zersch dy Wiederherstelligsschlüssel under Redaktionsschlüssel… oder füeg under Team… e zwäite Redaktor zue. Ohni Wäg zrügg sin alli Iischickige nümme läsbar, wenn das Gerät kaputt got.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'D Datei team.json im Arbeitsordner lat sich nid läse. Es wird nüt signiert.',
+  'Redacteurskaart maken…': 'Redaktorekarte erstelle…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Mit ere Redaktorekarte fügt di dr Bsitzer vo emene Formular zum Bundle zue, dass au du d Iischickige chasch ufmache. D Karte darf per E-Mail verschickt wärde.',
+  'Jouw naam op de kaart': 'Din Name uf dr Karte',
+  'Kaart maken': 'Karte erstelle',
+  'Kaart kopiëren': 'Karte kopiere',
+  'Vingerafdruk van de kaart': 'Fingerabdruck vo dr Karte',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Gib em Bsitzer dä Fingerabdruck uf eme andere Wäg as d Karte, zum Bispiil am Telefon. Är tippt ne zrügg, bevor är di zuefüegt.',
+  'Verzegeld opslaan…': 'Verschlüsslet speichere…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Es verschlüsslets Fäil (.zip.age), won nume dr Organisator cha ufmache. Dezue bruuchsch du s Bundle-Fäil und dr Fingerabdruck us dr Iiladig.',
+  'Kies het bundelbestand van de organisator':
+      'Wähl s Bundle-Fäil vom Organisator',
+  'Vingerafdruk van de organisator': 'Fingerabdruck vom Organisator',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Gib dr Fingerabdruck us dr Iiladig ii. Är isch mit Absicht nid im Bundle-Fäil: so chasch prüefe, vo wem es chunnt.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Das isch kei Fingerabdruck. Är bestoht us 52 Zeiche, meischtens i Vierergruppe.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Das Fäil isch kes Bundle, wo OciDeck cha läse.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Das Formular oder das Bundle chunnt vo me neuere OciDeck. Aktualisier OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Dr Fingerabdruck passt nid zu däm Bundle: S Formular chunnt nid vo däm, wo d Iiladig seit. Prüef dr Fingerabdruck und s Bundle-Fäil.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'D Signatur vom Bundle stimmt nid: Es isch veränderet worde oder isch nid vo däm, wo dr Fingerabdruck seit. Bitt dr Organisator um es neus Bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Das Bundle ghört nid zu däm Formular. Bruuch s Bundle-Fäil, wo genau zu däm Formular ghört.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Das Bundle isch abgloffe. Bitt dr Organisator um es neus.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Das Bundle isch elter as eis, wo du früecher vo däm Organisator becho hesch. Bitt dr Organisator um s neuschte.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'S Bundle enthaltet öppis, wo nid erlaubt isch. Bitt dr Organisator um es neus Bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Das Formular isch gschlosse: Dr letscht Tag isch dr {datum} gsi. Mäld di bim Organisator.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'S Iischicku isch grösser, as dr Organisator erlaubt ({mb} MB). Nimm es Foti ewäg oder mach eis chlyner.',
+  'De inzending kon niet worden verzegeld.':
+      'S Iischicku het nid chönne verschlüsslet wärde.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Verschlüsslet gspeicheret as {naam}, nume z öffne dur: {organisatoren}.',
+  'Bundel publiceren…': 'Bundle veröffentliche…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'S Bundle isch das, wo e Iischicker über öiji Redaktion gloubt: a weli Schlüssel är verschlüsslet und zu welem Text es ghört. Es wird näbe em Formular gspeicheret.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Im Arbeitsordner het es kes Formular, wo me es Bundle dezue chönnti mache.',
+  'Naam voor de invuller': 'Name für e Iischicker',
+  'Geldig tot (jjjj-mm-dd)': 'Gültig bis (JJJJ-MM-TT)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Dr letscht Tag, a däm e Iischicker däm Bundle gloubt. Nid vor em Abschlusstag vom Formular.',
+  'Bundel maken': 'Bundle erstelle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle erstellt (Laufnummere {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Gib em Iischicker dr Fingerabdruck uf eme andere Wäg as d Bundle-Datei, zum Bispiil i dr Iiladig. Wär nume d Bundle-Datei het, cha nid prüefe, vo wem si chunnt.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Die Plattform het kei Schlüsselbund für e Redaktionsschlüssel; es Bundle cha da nid signiert wärde.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Es git no keine Redaktionsschlüssel. Erstell under Redaktionsschlüssel… eine, bevor du es Bundle veröffentlichsch.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Dr Schlüsselbund lat sich nid läse. Es isch nüt signiert worde.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Dr gspeicheret Redaktionsschlüssel lat sich nid läse. Lösch ne under Redaktionsschlüssel… und stell ne us dim Wiederherstelligsschlüssel wieder häre.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'S Bundle vo däm Formular im Arbeitsordner lat sich nid läse oder ghört nid zu de andere. Dermit lat sich d Laufnummere nid bestimme, und es wird nüt signiert. Prüef: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Gib e Name mit höchschtens 80 Zeiche ii.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Gültig bis muess es existierends Datum si, als JJJJ-MM-TT.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Gültig bis dörf nid vor em Abschlusstag vom Formular lige.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'S Bundle het nid chönne erstellt wärde ({veld}). Prüef, öb s Formular e gültige Abschlusstag und e Ufbewahrigsfrischt nennt.',
+  'formulier': 'Formular',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'S Bundle het nid chönne im Arbeitsordner gspeicheret wärde.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Erstell und signier s Bundle, wo e Iischicker über öiji Redaktion gloubt.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: verschlüsslets Paket göffnet und importiert.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: Das Paket isch verschlüsslet, und die Plattform het kei Schlüsselbund für e Redaktionsschlüssel.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: Das Paket isch verschlüsslet, und es git no kei Redaktionsschlüssel zum\'s Uufmache. Erstell under Redaktionsschlüssel… eine oder stell ne us dim Wiederherstelligsschlüssel wieder häre.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: Das Paket isch verschlüsslet, und dr Schlüsselbund lat sich nid läse. Es isch nüt versuecht worde.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: Das Paket isch verschlüsslet, und dr gspeicheret Redaktionsschlüssel lat sich nid läse. Lösch ne under Redaktionsschlüssel… und stell ne us dim Wiederherstelligsschlüssel wieder häre.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: Das Paket isch nid für dy Redaktionsschlüssel verschlüsslet worde.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: Das Paket isch veränderet oder abbroche worde und wird nid göffnet.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: Das Paket isch grösser, als e Iischickig cha si.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: Dr gspeicheret Redaktionsschlüssel isch ke Schlüssel, wo OciDeck cha bruuche.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ke verschlüsslets Paket, wo OciDeck cha läse.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'E verschlüsslet Datei (.zip.age) wird mit dym Redaktionsschlüssel göffnet.',
+  'Herstelsleutel controleren': 'Wiederherstelligsschlüssel prüefe',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redaktionsschlüssel erstellt. Schrib jetz dr Wiederherstelligsschlüssel uf.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Dr Schlüsselbund het dr Schlüssel nid aagnoh. Es isch nüt erstellt worde.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Es git scho en Redaktionsschlüssel. Är isch nid aaglängt worde.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Dr Schlüsselbund het nid chönne gläse wärde. Es isch nüt aagnoh und nüt erstellt worde.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Im Schlüsselbund isch öppis, wo kei Redaktionsschlüssel isch. Es isch nid überschribe worde.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Die Plattform het kei Schlüsselbund.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Rächt: dr Wiederherstelligsschlüssel isch prüeft worde.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Das isch en gültige Wiederherstelligsschlüssel, aber nid dä zu däm Redaktionsschlüssel.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Dr Wiederherstelligsschlüssel stimmt, aber das het nid chönne gspeicheret wärde.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Es git kei Redaktionsschlüssel zum Vergliiche.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Das isch nid dr Wiederherstelligsschlüssel vomene Redaktionsschlüssel.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Do isch en Tippfähler: d Prüefsumme stimmt nid.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Dä Wiederherstelligsschlüssel chunnt us ere neuere Version vo OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Dä Wiederherstelligsschlüssel isch für öppis anders gmacht worde.',
+  'Hersteld uit de herstelsleutel.':
+      'Us em Wiederherstelligsschlüssel wiederhärgstellt.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Dr Schlüsselbund het dr Schlüssel nid aagnoh. Es isch nüt wiederhärgstellt worde.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Redaktionsschlüssel als age-Schlüsseldatei spychere',
+  'Het bestand kon niet worden opgeslagen.':
+      'D Datei het nid chönne gspeicheret wärde.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Gspeicheret als {pad}. Wär die Datei het, cha alles ufmache.',
+  'Redactiesleutel verwijderd.': 'Redaktionsschlüssel glöscht.',
+  'Redactiesleutel': 'Redaktionsschlüssel',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Die Plattform het kei Schlüsselbund. Dr Redaktionsschlüssel cha do nid ufbewahrt wärde; bruch d Desktop-App.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Dr Schlüsselbund het nid chönne gläse wärde (gsperrt oder Zuegriff verweigeret). Es isch nüt aagnoh und nüt erstellt worde.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Im Schlüsselbund isch öppis, wo kei Redaktionsschlüssel isch. Es isch nid überschribe worde. Lösch es und stell dr Schlüssel us dim Wiederherstelligsschlüssel wieder här.',
+  'Redactiesleutel verwijderen…': 'Redaktionsschlüssel lösche…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'En Redaktionsschlüssel macht die verschlüssleten Iischickige uf und signiert d Bundles vo dine Formulär. Är isch im Schlüsselbund vo däm Betriebssystem. Verlisch alli Schlüssel vo dr Redaktion, sin alli no nid abghole Iischickige nümme läsbar: das isch dr Priis vomene Server, wo nüt cha läse.',
+  'Redactiesleutel aanmaken': 'Redaktionsschlüssel erstelle',
+  'Herstellen uit herstelsleutel…':
+      'Us Wiederherstelligsschlüssel wiederhärstelle…',
+  'Vingerafdruk': 'Fingerabdruck',
+  'Ontvanger (age)': 'Empfänger (age)',
+  'Aangemaakt op {datum}.': 'Erstellt am {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Dr Wiederherstelligsschlüssel isch prüeft worde.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Dr Wiederherstelligsschlüssel isch no nid prüeft worde: schrib en uf und tipp en nomal ii.',
+  'Herstelsleutel tonen…': 'Wiederherstelligsschlüssel aazeige…',
+  'Vingerafdruk kopiëren': 'Fingerabdruck kopiere',
+  'Exporteren als age-sleutelbestand…': 'Als age-Schlüsseldatei exportiere…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Schrib dä Wiederherstelligsschlüssel uf und bewahr ne a eme sichere Ort uf, usserhalb vo däm Gerät. Wär ne het, cha alli Iischickige ufmache und i öiem Name Bundles signiere. Verlisch das Gerät, isch är alles, wo blibt.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tipp dr Wiederherstelligsschlüssel do nomal ii',
+  'Later': 'Spöter',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Tipp oder füeg dr Wiederherstelligsschlüssel ii. Was du iigisch, wird als Redaktionsschlüssel im Schlüsselbund abgleit; es wird nüt überschribe.',
+  'Herstelsleutel': 'Wiederherstelligsschlüssel',
+  'Redactiesleutel verwijderen': 'Redaktionsschlüssel lösche',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Dr Schlüssel wird us em Schlüsselbund glöscht und cha nume us em Wiederherstelligsschlüssel zruggcho. Häsch ne nid, sin Iischickige, wo nume für dä Schlüssel verschlüsslet worde sind, für immer unläsbar.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Dr Schlüssel, wo verschlüssleti Iischickige ufmacht und Bundles signiert.',
+  'Redactiesleutel…': 'Redaktionsschlüssel…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'D Arbeitskopie isch verworfe worde. Was iigange isch, wird wider beurteilt.',
+  'Er is geen werkkopie.': 'Es git kei Arbeitskopie.',
+  'De werkkopie kon niet worden weggegooid.':
+      'D Arbeitskopie het nid chöne verworfe wärde.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Lösche d Arbeitskopie. Was iigange isch, blibt und wird wider beurteilt.',
+  'Werkkopie weggooien…': 'Arbeitskopie verwärfe…',
+  'Werkkopie weggooien': 'Arbeitskopie verwärfe',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'D Arbeitskopie mit de Verbesserige wird glöscht und cha nid zrugg gholt wärde. Was iigange isch, blibt und wird wider beurteilt. Isch d Arbeitskopie no iemne Tab offe, schliess dä zersch.',
+  'Weggooien': 'Verwärfe',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Die Iischickig isch zruggzoge worde und chunnt drum i kes Kapitel.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Die Iischickig cha nid gläse wärde, oder s Formular, wo si dezue iigreicht worde isch, isch nid im Arbeitsordner.',
+  'Het controledocument kon niet worden geschreven.':
+      'S Prüefdokumänt het nid chöne gschribe wärde.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Dä Biitrag fürs Buech: bitte churz prüefe',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Do isch dä Biitrag, so win er im Buech chunnt (lueg dr Aahang). Stimmt alles? Antwort ‚iiverstande‘ oder mit dine Korrektur vor em {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'D Mail lit i dim Mailprogramm parat. Häng s PDF aa und schick si ab.',
+  'Controle door de maker…': 'Prüefig dur d Person, wo dr Biitrag gmacht het…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'S Prüefdokumänt isch s Kapitel vo dere einte Iischickig. Exportier es als PDF (wähl s vollständige Profil), häng s PDF a d Mail aa und schick si ab. Antwortet d Person ‚iiverstande‘, stell dr Status sälber uf maker-approved: Die Antwort bestätigt au, dass dr Biitrag würkli vo dere Person chunnt.',
+  'Controledocument maken en openen': 'Prüefdokumänt erstelle und ufmache',
+  'E-mailadres van de maker':
+      'E-Mail-Adrässe vo dr Person, wo dr Biitrag gmacht het',
+  'Antwoord vóór (jjjj-mm-dd)': 'Antwort vor em (JJJJ-MM-TT)',
+  'Mail schrijven': 'Mail schribe',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Das Formular kennt dr Status maker-check-sent nid, drum cha er do nid gsetzt wärde.',
+  'Controle verstuurd': 'Prüefig verschickt',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Macht s Kapitel vo dere Iischickig und bereitet d Mail vor, womit d Person, wo dr Biitrag gmacht het, en prüeft.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Die Iischickig staat nid im Register. Reparier overview.md und probier s nomal.',
+  'Kies het hoofdstuksjabloon': 'Kapitelvorlag uswähle',
+  'Kies eerst een hoofdstuksjabloon.': 'Wähl zersch e Kapitelvorlag us.',
+  'Kies minstens één status.': 'Wähl mindeschtens ein Status us.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Buech zämmegstellt. Kapitel: {n}. Foti: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Zruggzoge und drum wäggloh: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Übersprunge (anderi Version oder nid läsbar): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Foti, wo im Arbeitsordner gfählt hei: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Bruch im Name nume Buechstabe, Ziffere, Binde- und Understrich (höchschtens 64 Zeiche).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Es git scho es Buech mit däm Name. Wähl en andere Name.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'D Vorlag nennt Fälder, wo s Formular nid het: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Es hät nüt, wo is Buech chunnt: kei Iischickig mit emne gwählte Status. Zruggzoge: {w}; übersprunge: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'S Register cha nid gläse wärde. Reparier overview.md.',
+  'Het boek kon niet worden geschreven.':
+      'S Buech het nid chöne gschribe wärde.',
+  'Boek samenstellen…': 'Buech zämmestelle…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'S Buech chunnt in e Ordner book vom Arbeitsordner und blibt es gwöhnlichs Dokument, wo du nachhär sälber chasch bearbeite.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Im Arbeitsordner het es kei brüchbars Formular.',
+  'Formulier': 'Formular',
+  'Hoofdstuksjabloon': 'Kapitelvorlag',
+  'Nog geen sjabloon gekozen.': 'No kei Vorlag gwählt.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'In dr Vorlag staat {veld-id} für d Antwort uf das Fäld.',
+  'Hoofdstuksjabloon kiezen…': 'Kapitelvorlag uswähle…',
+  'Welke inzendingen?': 'Weli Iischickige?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Nume Iischickige mit eim vo dene Status chömme is Buech. Zruggzogeni Iischickige blibe immer dusse.',
+  'Ordenen op': 'Sortiere nach',
+  'Groeperen op': 'Gruppiere nach',
+  'Naam van het boek': 'Name vom Buech',
+  'Boek openen': 'Buech ufmache',
+  'Samenstellen': 'Zämmestelle',
+  'De werkkopie kon niet worden aangemaakt.':
+      'D Arbeitskopie het nid chönne erstellt wärde.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Macht e Kopie vo dr Iischickig uf zum Verbessere. Was iigange isch, blibt unveränderet.',
+  'Werkkopie openen': 'Arbeitskopie ufmache',
+  'Status gewijzigd naar {status}.': 'Status gänderet uf {status}.',
+  'Intrekking opgeslagen.': 'Zrugzieh gspeicheret.',
+  'Intrekking ongedaan gemaakt.': 'Zrugzieh rückgängig gmacht.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Iischickig glöscht; dr Iitrag blibt.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Iischickig glöscht, aber s Register het nid chönne aktualisiert wärde. Bearbeit overview.md vo Hand.',
+  'De inzending is niet gevonden in de werkmap.':
+      'D Iischickig isch im Arbeitsordner nid gfunde worde.',
+  'De inzending kon niet worden verwijderd.':
+      'D Iischickig het nid chönne glöscht wärde.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'S Register cha nid gläse wärde. Reparier overview.md; es isch nüt gänderet worde.',
+  'Het register kon niet worden bijgewerkt.':
+      'S Register het nid chönne aktualisiert wärde.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Die Änderig isch nid möglech gsi: D Iischickig staht nid im Register.',
+  'Status wijzigen': 'Status ändere',
+  'Intrekking ongedaan maken': 'Zrugzieh rückgängig mache',
+  'Intrekken…': 'Zrugzieh…',
+  'Verwijderen…': 'Lösche…',
+  'Inzending intrekken': 'Iischickig zrugzieh',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Gib dr Tag y, a däm dr Iisänder d Iischickig zrugzoge het. E zrugzogeni Iischickig chunnt nie is Buech.',
+  'Dag (jjjj-mm-dd)': 'Tag (jjjj-mm-tt)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Ungültige Tag. Bruuch Johr-Monet-Tag, zum Byspil {voorbeeld}.',
+  'Inzending verwijderen': 'Iischickig lösche',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'D Antworte, d Arbeitskopie und d Foti vo dere Iischickig wärde us em Arbeitsordner glöscht. Nume e minimale Iitrag blibt: d Nummere, d Täg vom Iigang und vo dr Iiwilligung und dr Status. Das cha me nid rückgängig mache.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Au blibt stah, was s Formular vorhär aagkündigt het: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Mit dere Iischickig stimmt öppis nid.',
+  'Verplicht, maar leeg gelaten.': 'Pflicht, aber läär glah.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} Wörter; mindestens {min} nötig.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} Wörter; höchstens {max} erlaubt.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} Zeiche; mindestens {min} nötig.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} Zeiche; höchstens {max} erlaubt.',
+  '“{value}” staat niet in de lijst met opties.':
+      '«{value}» staht nid i dr Lischte vo de Optione.',
+  '“{value}” is geen getal.': '«{value}» isch kei Zahl.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '«{value}» isch kes Datum i dr Form Johr-Monet-Tag.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foti mit {actual} Pixel Breiti; gfragt gsi sind {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'D Datei vom Foti fählt i dr Iischickig.',
+  'De beschrijving van de foto ontbreekt.': 'D Beschrybig vom Foti fählt.',
+  'De maker van de foto ontbreekt.': 'Dr Urhäber vom Foti fählt.',
+  'De foto is niet gecontroleerd.': 'S Foti isch nid prüeft worde.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-Foti: nid prüeft oder putzt; es cha en Ort enthalte.',
+  'Toestemming niet gegeven.': 'Iiwilligung nid gä.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'D Antwort enthaltet e Zile, wo wie e Steuerzeiche vom Formular uusgseht.',
+  'Het antwoord bevat HTML.': 'D Antwort enthaltet HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'D Antwort enthaltet e nid abgschlossene Codeblock.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'D Antwort verwiist uf es Bild, wo nid zu dere Iischickig ghört.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'D Antwort enthaltet e nid erlaubte Link.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Das Formular oder die Version isch nid im Arbeitsordner.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Dr Iisänder het mit emene andere Text vom Formular gschafft as mit em veröffentlichte.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'D Iiwilligung im Manifest passt nid zum veröffentlichte Formular.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Dr Text vom Formular isch usserhalb vo de Antworte gänderet worde.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Dr Text vom Formular isch bi däm Fäld gänderet worde.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Das Fäld git s im veröffentlichte Formular nid.',
+  'Dit veld ontbreekt in de inzending.': 'Das Fäld fählt i dr Iischickig.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Iischickig vo dr Version {submission}; veröffentlicht isch d Version {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'S Formular bruucht e nöiere Version vo OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'S veröffentlichte Formular im Arbeitsordner isch nid bruchbar.',
+  'De inzending hoort bij een ander formulier.':
+      'D Iischickig ghört zu emene andere Formular.',
+  'De opbouw van de inzending is beschadigd.':
+      'Dr Ufbau vo dr Iischickig isch beschädigt.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'S Register cha nid gläse wärde. Reparier overview.md; d Iischickige stöh unde ohni Aagabe us em Register.',
+  'Nog geen inzendingen.': 'No kei Iischickige.',
+  'Om na te lopen': 'Z prüefe',
+  'Verwijderd': 'Glöscht',
+  'Zonder regel in het register': 'Ohni Zile im Register',
+  'Ontvangen {datum}': 'Becho {datum}',
+  'Ingetrokken {datum}': 'Zrugzoge {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Dr Inhalt vo dere Iischickig isch glöscht worde; nume dr Iitrag blibt.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Die Iischickig cha nid gläse wärde. Prüef d Dateie im Arbeitsordner.',
+  'Beoordeeld tegen {formulier}.': 'Beurteilt gäge {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'D Beurteilig betrifft d Arbeitskopie (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Kei Punkt z prüefe.',
+  'Foto’s die geen antwoord noemt: {n}.': 'Foti, won e Antwort nid nennt: {n}.',
+  'Inzendingen': 'Iischickige',
+  'Werkmap': 'Arbeitsordner',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Es isch no ke Arbeitsordner gwählt. Wähl en Ordner, wo d Iischickige und s Register drin lige.',
+  'Werkmap kiezen…': 'Arbeitsordner wähle…',
+  'Kies de werkmap voor inzendingen': 'Wähl dr Arbeitsordner für d Iischickige',
+  'Formulieren': 'Formulare',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'No ke Formular zuegfüegt. Füeg s Formular zue, wie du s veröffentlicht hesch: E Iischickig wird dergäge prüeft.',
+  'Formulier toevoegen…': 'Formular zuefüege…',
+  'Kies het formulier om toe te voegen': 'Wähl s Formular zum Zuefüege',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Die Datei isch ke Formular, wo me cha veröffentliche.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Das Formular het s scho mit emene andere Text. En andere Text isch e neui Version: Gib em Formular e höcheri Versionsnummere.',
+  'Formulier toegevoegd: {naam}.': 'Formular zuegfüegt: {naam}.',
+  'Dit formulier stond er al.': 'Das Formular isch scho da gsi.',
+  'Het formulier kon niet worden opgeslagen.':
+      'S Formular het nid chönne gspeicheret wärde.',
+  'Inzendingen in de werkmap: {n}': 'Iischickige im Arbeitsordner: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Es eifachs Zip isch uf em Wäg nid verschlüsslet.',
+  'Pakketten binnenhalen…': 'Pakete importiere…',
+  'Kies de pakketten om binnen te halen': 'Wähl d Pakete zum Importiere',
+  'Register openen': 'Register öffne',
+  '{naam}: binnengehaald.': '{naam}: importiert.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importiert, aber es hät Punkt zum Prüefe.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importiert, aber s Register het nid chönne aktualisiert wärde. Prüef overview.md.',
+  '{naam}: stond er al.': '{naam}: isch scho da gsi.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ke Iischickigspaket, wo OciDeck cha läse.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: Das Formular isch nid zuegfüegt, oder nid i dere Version. Füeg zersch s Formular zue.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: het nid chönne im Arbeitsordner gspeicheret wärde.',
+  'Formulieren en inzendingen': 'Formulare und Iischickige',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importier Iischickige vo emene Formular, prüef si gäge s veröffentlichte Formular und füehr si mit emene Register. S Formular uusfülle goht au, wenn das uus isch. Standardmässig uus.',
+  'Inzending opslaan als zip…': 'Iischicku als zip speichere…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Es zip-Fäil mit dine Antworte und Foti, zum em Organisator per Mail schicke.',
+  'Inzending opgeslagen als {naam}.': 'Iischicku gspeicheret als {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Wähl s Formular so, win du s becho hesch',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Das isch nid s Formular, zu däm dini Antworte ghöre. Wähl s Fäil, wo du vom Organisator becho hesch.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Es Foti het nid chönne glese wärde: {pad}. Füeg es nomal dezue.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'S Iischicku passt nid i es Paket: z vil Foti, oder es z grosses Foti.',
+  'De inzending kon niet worden opgeslagen.':
+      'S Iischicku het nid chönne gspeicheret wärde.',
+  'Inzending opslaan': 'Iischicku speichere',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'D Standortdate sind us dem Foti entfernt worde.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Das Foti het nöd chöne zuegfüegt wärde. Wähl e JPEG-, PNG-, WebP- oder HEIC-Datei vomene Foti.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Spichere s Dokumänt zersch, zum Foti zuefüege.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck cha die Datei als neus Dokumänt importiere.',
+  'Kies een datum': 'Datum uuswähle',
+  'Anders, namelijk:': 'Anders, nämlich:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Punkt {n} entferne',
+  'Rij {n} verwijderen': 'Zile {n} entferne',
+  'Foto {n} verwijderen': 'Foti {n} entferne',
+  'Wat is er te zien op de foto?': 'Was isch uf em Foti z gseh?',
+  'Van wie is de foto?': 'Vo wem isch s Foti?',
+  'Foto toevoegen': 'Foti dezuefüege',
+  'Verplicht': 'Pflicht',
+  'Alles is ingevuld.': 'Alles isch uusgfüllt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'No {n} z mache, bevor du chasch schicke:',
+  'klaar': 'erledigt',
+  '{n} open': '{n} offe',
+  'Dit formulier kan niet worden ingevuld.':
+      'Das Formular cha nöd uusgfüllt wärde.',
+  'Naar de bron': 'Zur Quelle',
+  'Woorden': 'Wörter',
+  'Tekens': 'Zeiche',
+  'Keuzes': 'Uswahle',
+  'Rijen': 'Zile',
+  'Foto’s': 'Foti',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mindestens {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (höchstens {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mindestens {min}, höchstens {max})',
+  'Invullen': 'Uusfülle',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Mit dem Formular stimmt öppis nöd. Nimm Kontakt uf mit dem, wo\'s gmacht het.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Das Fäld isch Pflicht. Füll\'s uus, damit du chasch schicke.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Du hesch {actual} Wörter gschribe; es bruucht mindestens {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Du hesch {actual} Wörter gschribe; erlaubt sind höchstens {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Du hesch {actual} Zeiche gschribe; es bruucht mindestens {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Du hesch {actual} Zeiche gschribe; erlaubt sind höchstens {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '«{value}» staht nöd i de Lischte. Wähl eini vo de Optione.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '«{value}» isch kei Zahl. Bruuch nume Ziffere, wänn nötig mit Komma oder Punkt für d Dezimale.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Das Foti isch {actual} Pixel breit; da wärded {min} verlangt. Wahrschindlich isch es chliiner worde, wo\'s über e Messenger-App gschickt worde isch. Wänn du s Original no hesch, nimm das. Susch schick\'s trotzdem mit: D Organisation meldet sich bi dir.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Das Foti isch {actual} MB gross; s Maximum isch {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'De Inhalt vo dere Datei passt nöd zum Dateityp.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Dä Dateityp isch da nöd erlaubt.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'D Datei vo dem Foti isch nümme z finde. Füeg s Foti nomal dezue.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Beschriib i eim churze Satz, was uf em Foti z gseh isch.',
+  'Geef aan van wie de foto is.': 'Gib a, vo wem s Foti isch.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Das Foti isch na nöd prüeft worde. Wart en Augeblick oder füeg\'s nomal dezue.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Das Foti isch e HEIC-Datei. OciDeck cha si da wedr prüefe no putze, drum wird si so gschickt, wie si isch. Es chan dri stah, wo s Foti gmacht worde isch. Wänn du das nöd wotsch teile, wähl i de Kamera-Istellige «Maximal kompatibel» oder teil s Foti als JPEG und füeg\'s nomal dezue.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Uf dem Foti sind {actual} Gsichter z gseh; erwartet worde sind {expected}. Das isch nume en Erinnerig.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Setz s Häkli, zum zuestimme; ohni Iwilligung chasch nöd schicke.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Das Formular bruucht e neuer Version vo OciDeck. Aktualisier d App, zum s uusfülle.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Im Formular sälber isch us Versehe öppis gänderet worde. Stell s Formular wider här; dini Antworte bliibed.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Die Zile gseht uus wie en Steuercode vom Formular und darf nöd i ere Antwort stah. Ändere sie.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML isch i ere Antwort nöd erlaubt. Bruuch normale Text und eifachi Formatierig.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'En Codeblock isch nöd gschlosse. Schliess en mit ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'I ere Antwort sind nume Foti möglich, wo du i dem Formular dezuefüegsch; es Bild us em Internet nöd.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'I ere Antwort sind nume Links erlaubt, wo mit https:// afanged, und E-Mail-Adresse.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Die Datei isch mit ere andere Version vom Formular gmacht worde (Version {submission}; jetzt gilt Version {published}). Prüef dini Antworte.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Es sind jetzt {actual}; es müend zwüschet {min} und {max} sii.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Es sind jetzt {actual}; es dörfed höchstens {max} sii.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Es sind jetzt {actual}; es müend mindestens {min} sii.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'D Zahl muess es Vilfachs vo {step} sii.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'D Zahl muess zwüschet {min} und {max} lige.',
+  'Het getal mag hoogstens {max} zijn.': 'D Zahl darf höchstens {max} sii.',
+  'Het getal moet minstens {min} zijn.': 'D Zahl muess mindestens {min} sii.',
+  'De datum moet op of na {min} liggen.':
+      'S Datum muess am oder nach em {min} lige.',
+  'De datum moet op of vóór {max} liggen.':
+      'S Datum muess am oder vor em {max} lige.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '«{value}» isch kei Datum. Schrib s Datum als Jahr-Monat-Tag, zum Bispil 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Das isch kei gültigi E-Mail-Adrässe.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Das isch kei gültigi Web-Adrässe. Fang mit https:// aa.',
+  'Dit is geen geldig telefoonnummer.': 'Das isch kei gültigi Telefonnummere.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Das isch kei gültigi niderländischi Poschtleitzahl, wie 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Da passt nume ei Zile. Nimm d Zilebrüch use.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Bruuch nume d Chäschtli vo dere Frag: ei Chäschtli pro Option.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Schrib jede Punkt i en eigeni Zile, mit eme Strich oder ere Nummere vorane.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'D Tabälle stimmt nümme: lah d Chopfzile, wie si gsi isch, und gib jeder Zile gliich viel Spalte.',
+  'Dezelfde foto staat hier twee keer.': 'Dasselbe Foti staht da zwümal.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'I das Fäld ghöred nume Foti, kei lose Text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'S Chäschtli für dini Iwilligung isch kaputt. Stell s Formular wider här.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Die Antwort hät nöd d Form, wo zu dere Frag ghört.',
   'Downloaden…': 'Abelade…',
   'Afbeelding opgeslagen als': 'Bild gschpeicheret als',
   '{naam}: ingesteld': '{naam}: iigrichtet',

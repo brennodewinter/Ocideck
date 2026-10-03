@@ -1645,6 +1645,604 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Team…': 'Tim…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'L-edituri minbarra int li jinsabu f’kull bundle, biex huma wkoll ikunu jistgħu jiftħu s-sottomissjonijiet. Tżid lil xi ħadd bil-karta tal-editur tiegħu u terġa’ tittajpja l-marka tas-swaba’ ta’ dik il-karta.',
+  'Er is nog niemand naast jou.': 'Għad m’hemm ħadd minbarra int.',
+  'Plak de kaart van de redacteur': 'Waħħal il-karta tal-editur',
+  'Kaart controleren': 'Iċċekkja l-karta',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karta ta’ {naam}. Ittajpja l-marka tas-swaba’ ta’ din il-karta li {naam} tak b’mod ieħor, pereżempju bit-telefon.',
+  'Redacteur verwijderen': 'Neħħi l-editur',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Tneħħi lil {naam} mit-tim? Bundles li diġà ppubblikajt jibqgħu kif inhuma sakemm terġa’ tippubblika; dak li diġà ġie ssiġillat għal {naam} jibqa’ jinqara minn dak il-persuna.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} ġie miżjud. Erġa’ ippubblika l-bundle biex jiddaħħal {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} ġie mneħħi. Erġa’ ippubblika l-bundle biex joħroġ {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'L-ewwel oħloq iċ-ċavetta tar-redazzjoni tiegħek stess taħt Ċavetta tar-redazzjoni….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Iċ-ċavetta tar-redazzjoni tiegħek ma tistax tintuża. Ara taħt Ċavetta tar-redazzjoni….',
+  'Dit is geen redacteurskaart.': 'Din mhijiex karta ta’ editur.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Din il-karta hija minn verżjoni aktar ġdida ta’ OciDeck. Aġġorna OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Il-karta fiha xi ħaġa li ma hijiex permessa. Itlob lill-editur karta ġdida.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Din il-marka tas-swaba’ ma taqbilx mal-karta: il-karta inbidlet jew mhijiex minn dak li taħseb. Itlob mill-ġdid lill-editur il-marka tas-swaba’ u l-karta.',
+  'Dit is je eigen kaart.': 'Din hija l-karta tiegħek stess.',
+  'Deze redacteur staat er al.': 'Dan l-editur diġà jinsab fit-tim.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'It-tim huwa mimli: bundle iġorr l-aktar 64 organizzatur, int inkluż.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Il-fajl team.json fil-cartella tax-xogħol ma jistax jinqara. Ma nbidel xejn; irranġah jew ħassru.',
+  'Het team kon niet worden opgeslagen.': 'It-tim ma setax jinħażen.',
+  'Deze redacteur staat niet meer in het team.':
+      'Dan l-editur m’għadux fit-tim.',
+  'Naast jou in de bundel: {namen}.': 'Minbarra int fil-bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'L-ewwel iċċekkja ċ-ċavetta tal-irkupru tiegħek taħt Ċavetta tar-redazzjoni…, jew żid it-tieni editur taħt Tim…. Mingħajr triq lura, is-sottomissjonijiet kollha jsiru illeġibbli jekk dan l-apparat jitkisser.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Il-fajl team.json fil-cartella tax-xogħol ma jistax jinqara. Ma jiġi ffirmat xejn.',
+  'Redacteurskaart maken…': 'Oħloq karta tal-editur…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'B’karta tal-editur, is-sid ta’ formola jżiedek mal-bundle, biex int ukoll tkun tista’ tiftaħ is-sottomissjonijiet. Il-karta tista’ tintbagħat bl-email.',
+  'Jouw naam op de kaart': 'Ismek fuq il-karta',
+  'Kaart maken': 'Oħloq karta',
+  'Kaart kopiëren': 'Ikkopja l-karta',
+  'Vingerafdruk van de kaart': 'Marka tas-swaba’ tal-karta',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Agħti lis-sid din il-marka tas-swaba’ b’mod ieħor mhux permezz tal-karta, pereżempju bit-telefon. Hu jittajpjaha mill-ġdid qabel ma jżiedek.',
+  'Verzegeld opslaan…': 'Ħażen issiġillat…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Fajl ikkriptat (.zip.age) li jista’ jinfetaħ biss mill-organizzatur. Għal dan għandek bżonn il-fajl tal-bundle u l-marka tas-swaba’ mill-istedina.',
+  'Kies het bundelbestand van de organisator':
+      'Agħżel il-fajl tal-bundle tal-organizzatur',
+  'Vingerafdruk van de organisator': 'Marka tas-swaba’ tal-organizzatur',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Ittajpja l-marka tas-swaba’ mill-istedina. Ma hijiex fil-fajl tal-bundle apposta: b’hekk tista’ tivverifika minn ħa tiġi.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Din mhijiex marka tas-swaba’. Hija magħmula minn 52 karattru, normalment f’gruppi ta’ erbgħa.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Dan il-fajl mhuwiex bundle li OciDeck jista’ jaqra.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Din il-formola jew dan il-bundle huma minn verżjoni aktar ġdida ta’ OciDeck. Aġġorna OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Il-marka tas-swaba’ ma taqbilx ma’ dan il-bundle: il-formola ma tiġix minn dak li tgħid l-istedina. Iċċekkja l-marka tas-swaba’ u l-fajl tal-bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Il-firma tal-bundle mhijiex tajba: inbidel jew mhuwiex minn dak li tgħid il-marka tas-swaba’. Itlob lill-organizzatur bundle ġdid.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Dan il-bundle ma jappartjenix lil din il-formola. Uża l-fajl tal-bundle li jappartjeni eżattament lil din il-formola.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Dan il-bundle skada. Itlob wieħed ġdid lill-organizzatur.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Dan il-bundle huwa eqdem minn bundle li rċevejt qabel minn dan l-organizzatur. Itlob l-aħħar wieħed lill-organizzatur.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Il-bundle fih xi ħaġa li ma hijiex permessa. Itlob lill-organizzatur bundle ġdid.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Din il-formola magħluqa: l-aħħar jum kien {datum}. Ikkuntattja lill-organizzatur.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Is-sottomissjoni hija akbar milli jippermetti l-organizzatur ({mb} MB). Neħħi ritratt jew żgħir wieħed.',
+  'De inzending kon niet worden verzegeld.':
+      'Is-sottomissjoni ma setgħetx tiġi ssiġillata.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Maħżun issiġillat bħala {naam}, jista’ jinfetaħ biss minn: {organisatoren}.',
+  'Bundel publiceren…': 'Ippubblika bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Il-bundle huwa dak li min jimla l-formola jemmen dwar ir-redazzjoni tagħkom: għal liema ċavetta jissiġilla u lil liema test jappartjeni. Jinħażen ħdejn il-formola.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Ma hemm l-ebda formola fil-cartella tax-xogħol li għaliha jista\' jinħoloq bundle.',
+  'Naam voor de invuller': 'Isem għal min jimla l-formola',
+  'Geldig tot (jjjj-mm-dd)': 'Validu sa (jjjj-xx-jj)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'L-aħħar jum li fih min jimla l-formola jemmen dan il-bundle. Mhux qabel il-jum tal-għeluq tal-formola.',
+  'Bundel maken': 'Oħloq bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle maħluq (numru sekwenzjali {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Agħti l-marka tas-swaba\' lil min jimla l-formola b\'mod ieħor mhux permezz tal-fajl tal-bundle, pereżempju fl-istedina. Min għandu l-fajl tal-bundle biss ma jistax jivverifika minn ħa jiġi.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Din il-pjattaforma m\'għandhiex keychain taċ-ċavetta tar-redazzjoni; bundle ma jistax jiġi ffirmat hawn.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Għad m\'hemmx ċavetta tar-redazzjoni. Oħloq waħda taħt Ċavetta tar-redazzjoni… qabel tippubblika bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Il-keychain ma jistax jinqara. Ma ġie ffirmat xejn.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Iċ-ċavetta tar-redazzjoni maħżuna ma tistax tinqara. Neħħiha taħt Ċavetta tar-redazzjoni… u irkuprha miċ-ċavetta tal-irkupru tiegħek.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Bundle ta\' din il-formola fil-cartella tax-xogħol ma jistax jinqara jew ma jappartjenix mal-oħrajn. B\'hekk in-numru sekwenzjali ma jistax jiġi ddeterminat u ma jiġi ffirmat xejn. Iċċekkja: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Daħħal isem ta\' mhux aktar minn 80 karattru.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Validu sa jrid ikun data eżistenti, bħala jjjj-xx-jj.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Validu sa ma jistax ikun qabel il-jum tal-għeluq tal-formola.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Il-bundle ma setax jinħoloq ({veld}). Iċċekkja li l-formola ssemmi jum tal-għeluq u perjodu ta\' żamma validu.',
+  'formulier': 'formola',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Il-bundle ma setax jinħażen fil-cartella tax-xogħol.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Oħloq u ffirma l-bundle li min jimla l-formola jemmen dwar ir-redazzjoni tagħkom.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: pakkett issiġillat miftuħ u importat.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: dan il-pakkett huwa ssiġillat u din il-pjattaforma m\'għandhiex keychain taċ-ċavetta tar-redazzjoni.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: dan il-pakkett huwa ssiġillat u għad m\'hemmx ċavetta tar-redazzjoni biex jinfetaħ. Oħloq waħda taħt Ċavetta tar-redazzjoni… jew irkuprha miċ-ċavetta tal-irkupru tiegħek.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: dan il-pakkett huwa ssiġillat u l-keychain ma jistax jinqara. Ma ġie ppruvat xejn.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: dan il-pakkett huwa ssiġillat u ċ-ċavetta tar-redazzjoni maħżuna ma tistax tinqara. Neħħiha taħt Ċavetta tar-redazzjoni… u irkuprha miċ-ċavetta tal-irkupru tiegħek.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: dan il-pakkett ma ġiex issiġillat għaċ-ċavetta tar-redazzjoni tiegħek.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: dan il-pakkett inbidel jew inqata’ u mhux se jinfetaħ.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: dan il-pakkett huwa akbar milli tista’ tkun sottomissjoni.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: iċ-ċavetta tar-redazzjoni maħżuna mhijiex ċavetta li OciDeck jista’ juża.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: mhuwiex pakkett issiġillat li OciDeck jista’ jaqra.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Fajl issiġillat (.zip.age) jinfetaħ biċ-ċavetta tar-redazzjoni tiegħek.',
+  'Herstelsleutel controleren': 'Ikkontrolla ċ-ċavetta tal-irkupru',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'L-ċavetta tar-redazzjoni ġiet maħluqa. Issa ikteb iċ-ċavetta tal-irkupru.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Il-keychain ma aċċettax iċ-ċavetta. Ma nħoloq xejn.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Diġà teżisti ċavetta tar-redazzjoni. Ma ntmessitx.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Il-keychain ma setax jinqara. Ma ġie preżunt xejn u ma nħoloq xejn.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Hemm xi ħaġa fil-keychain li mhijiex ċavetta tar-redazzjoni. Ma ġietx miktuba fuqha.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Din il-pjattaforma m\'għandhiex keychain.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Tajjeb: iċ-ċavetta tal-irkupru ġiet ikkontrollata.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Din hija ċavetta tal-irkupru valida, iżda mhux dik ta\' din iċ-ċavetta tar-redazzjoni.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Iċ-ċavetta tal-irkupru hija korretta, iżda ma setgħetx tinħażen.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'M\'hemm l-ebda ċavetta tar-redazzjoni biex tqabbel magħha.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Din mhijiex iċ-ċavetta tal-irkupru ta\' ċavetta tar-redazzjoni.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Hemm żball tat-tajpjar: is-somma ta\' kontroll ma taqbilx.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Din iċ-ċavetta tal-irkupru ġejja minn verżjoni aktar ġdida ta\' OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Din iċ-ċavetta tal-irkupru saret għal xi ħaġa oħra.',
+  'Hersteld uit de herstelsleutel.': 'Irkuprat miċ-ċavetta tal-irkupru.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Il-keychain ma aċċettax iċ-ċavetta. Ma ġie rkuprat xejn.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Aħżen iċ-ċavetta tar-redazzjoni bħala fajl taċ-ċavetta age',
+  'Het bestand kon niet worden opgeslagen.': 'Il-fajl ma setax jinħażen.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Maħżun bħala {pad}. Min għandu dan il-fajl jista\' jiftaħ kollox.',
+  'Redactiesleutel verwijderd.': 'Iċ-ċavetta tar-redazzjoni tħassret.',
+  'Redactiesleutel': 'Ċavetta tar-redazzjoni',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Din il-pjattaforma m\'għandhiex keychain. Iċ-ċavetta tar-redazzjoni ma tistax tinżamm hawn; uża l-app tad-desktop.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Il-keychain ma setax jinqara (maqful, jew aċċess miċħud). Ma ġie preżunt xejn u ma nħoloq xejn.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Hemm xi ħaġa fil-keychain li mhijiex ċavetta tar-redazzjoni. Ma ġietx miktuba fuqha. Ħassarha u rkupra ċ-ċavetta miċ-ċavetta tal-irkupru tiegħek.',
+  'Redactiesleutel verwijderen…': 'Ħassar iċ-ċavetta tar-redazzjoni…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ċavetta tar-redazzjoni tiftaħ is-sottomissjonijiet issiġillati u tiffirma l-fuljetti tal-formoli tiegħek. Tinsab fil-keychain ta\' din is-sistema operattiva. Jekk titlef iċ-ċwievet kollha tar-redazzjoni, is-sottomissjonijiet kollha li għadhom ma ttellgħux isiru illeġibbli: dan huwa l-prezz ta\' server li ma jistax jaqra xejn.',
+  'Redactiesleutel aanmaken': 'Oħloq ċavetta tar-redazzjoni',
+  'Herstellen uit herstelsleutel…': 'Irkupra miċ-ċavetta tal-irkupru…',
+  'Vingerafdruk': 'Marka tas-swaba\'',
+  'Ontvanger (age)': 'Riċevitur (age)',
+  'Aangemaakt op {datum}.': 'Maħluqa fl-{datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Iċ-ċavetta tal-irkupru ġiet ikkontrollata.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Iċ-ċavetta tal-irkupru għadha ma ġietx ikkontrollata: ikteb u erġa\' ikteb.',
+  'Herstelsleutel tonen…': 'Uri ċ-ċavetta tal-irkupru…',
+  'Vingerafdruk kopiëren': 'Ikkopja l-marka tas-swaba\'',
+  'Exporteren als age-sleutelbestand…': 'Esporta bħala fajl taċ-ċavetta age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Ikteb din iċ-ċavetta tal-irkupru u żommha f\'post sikur, \'il bogħod minn dan l-apparat. Min għandha jista\' jiftaħ is-sottomissjonijiet kollha u jiffirma fuljetti f\'ismek. Jekk titlef dan l-apparat, din hija kulma jibqa\'.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Erġa\' ikteb iċ-ċavetta tal-irkupru hawn',
+  'Later': 'Aktar tard',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Ikteb jew waħħal iċ-ċavetta tal-irkupru. Dak li tidħol jitqiegħed fil-keychain bħala ċavetta tar-redazzjoni; xejn ma jinkiteb fuqu.',
+  'Herstelsleutel': 'Ċavetta tal-irkupru',
+  'Redactiesleutel verwijderen': 'Ħassar iċ-ċavetta tar-redazzjoni',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Iċ-ċavetta titħassar mill-keychain u tista\' terġa\' lura biss miċ-ċavetta tal-irkupru. Jekk m\'għandekx, is-sottomissjonijiet issiġillati għal din iċ-ċavetta biss jibqgħu illeġibbli għal dejjem.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Iċ-ċavetta li tiftaħ is-sottomissjonijiet issiġillati u tiffirma l-fuljetti.',
+  'Redactiesleutel…': 'Ċavetta tar-redazzjoni…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Il-kopja tax-xogħol tilfet. Dak li wasal jerġa\' jiġi vvalutat.',
+  'Er is geen werkkopie.': 'M\'hemm l-ebda kopja tax-xogħol.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Il-kopja tax-xogħol ma setgħetx tintrema.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Tħassar il-kopja tax-xogħol. Dak li wasal jibqa\' u jerġa\' jiġi vvalutat.',
+  'Werkkopie weggooien…': 'Armi l-kopja tax-xogħol…',
+  'Werkkopie weggooien': 'Armi l-kopja tax-xogħol',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Il-kopja tax-xogħol bit-titjib titħassar u ma tistax tinġieb lura. Dak li wasal jibqa\' u jerġa\' jiġi vvalutat. Jekk il-kopja tax-xogħol għadha miftuħa f\'tab, agħlaqha l-ewwel.',
+  'Weggooien': 'Armi',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Din is-sottomissjoni ġiet irtirata u għalhekk ma tidħol fl-ebda kapitlu.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Din is-sottomissjoni ma tistax tinqara jew il-formola li għaliha ntbagħtet mhijiex fil-cartella tax-xogħol.',
+  'Het controledocument kon niet worden geschreven.':
+      'Id-dokument ta\' kontroll ma setax jinkiteb.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Il-kontribuzzjoni tiegħek għall-ktieb: jekk jogħġbok iċċekkjaha',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Hawn il-kontribuzzjoni tiegħek kif se tidher fil-ktieb (ara l-anness). Kollox tajjeb? Wieġeb ‘naqbel’ jew bil-korrezzjonijiet tiegħek qabel il-{datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Il-mejl lest fil-programm tal-mejl tiegħek. Waħħal il-PDF u ibgħat.',
+  'Controle door de maker…': 'Kontroll mill-awtur…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Id-dokument ta\' kontroll huwa l-kapitlu ta\' din is-sottomissjoni waħda. Esportah bħala PDF (agħżel il-profil sħiħ), waħħal il-PDF mal-mejl u ibgħat. Jekk l-awtur iwieġeb ‘naqbel’, issettja int stess l-istat fuq maker-approved: dik it-tweġiba hija wkoll il-konferma li l-kontribuzzjoni tassew tiġi minn din il-persuna.',
+  'Controledocument maken en openen': 'Oħloq id-dokument ta\' kontroll u iftaħ',
+  'E-mailadres van de maker': 'Indirizz elettroniku tal-awtur',
+  'Antwoord vóór (jjjj-mm-dd)': 'Wieġeb qabel (ssss-xx-jj)',
+  'Mail schrijven': 'Ikteb il-mejl',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Din il-formola ma tafx l-istat maker-check-sent, għalhekk ma jistax jiġi ssettjat hawn.',
+  'Controle verstuurd': 'Kontroll mibgħut',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Toħloq il-kapitlu ta\' din is-sottomissjoni u tipprepara l-mejl li bih l-awtur jiċċekkjah.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Din is-sottomissjoni mhijiex fir-reġistru. Irranġa overview.md u erġa\' pprova.',
+  'Kies het hoofdstuksjabloon': 'Agħżel mudell tal-kapitlu',
+  'Kies eerst een hoofdstuksjabloon.': 'Agħżel mudell tal-kapitlu qabel xejn.',
+  'Kies minstens één status.': 'Agħżel mill-inqas stat wieħed.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Ktieb ikkompilat. Kapitli: {n}. Ritratti: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Irtirati u għalhekk imħallija barra: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Maqbuża (verżjoni oħra jew mhux li jinqara): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Ritratti li kienu nieqsa mill-cartella tax-xogħol: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Fl-isem uża biss ittri, ċifri, linji u underscores (massimu ta\' 64 karattru).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Diġà jeżisti ktieb b\'dan l-isem. Agħżel isem ieħor.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Il-mudell isemmi oqsma li l-formola m\'għandhiex: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Ma hemm xejn x\'jiddaħħal fil-ktieb: l-ebda sottomissjoni b\'stat magħżul. Irtirati: {w}; maqbuża: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Ir-reġistru ma jistax jinqara. Irranġa overview.md.',
+  'Het boek kon niet worden geschreven.': 'Il-ktieb ma setax jinkiteb.',
+  'Boek samenstellen…': 'Ikkompila ktieb…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Il-ktieb jidħol fil-cartella book tal-cartella tax-xogħol u jibqa\' dokument ordinarju li tista\' wara teditja int stess.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'M\'hemm l-ebda formola li tista\' tintuża fil-cartella tax-xogħol.',
+  'Formulier': 'Formola',
+  'Hoofdstuksjabloon': 'Mudell tal-kapitlu',
+  'Nog geen sjabloon gekozen.': 'Għadu ma ntgħażel l-ebda mudell.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Fil-mudell, {veld-id} tfisser it-tweġiba għal dak il-qasam.',
+  'Hoofdstuksjabloon kiezen…': 'Agħżel mudell tal-kapitlu…',
+  'Welke inzendingen?': 'Liema sottomissjonijiet?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Fil-ktieb jidħlu biss is-sottomissjonijiet b\'wieħed minn dawn l-istati. Is-sottomissjonijiet irtirati dejjem jibqgħu barra.',
+  'Ordenen op': 'Ordna skont',
+  'Groeperen op': 'Igruppa skont',
+  'Naam van het boek': 'Isem il-ktieb',
+  'Boek openen': 'Iftaħ il-ktieb',
+  'Samenstellen': 'Ikkompila',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Il-kopja tax-xogħol ma setgħetx tinħoloq.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Jiftaħ kopja tas-sottomissjoni biex titjieb. Dak li wasal jibqa’ mhux mibdul.',
+  'Werkkopie openen': 'Iftaħ il-kopja tax-xogħol',
+  'Status gewijzigd naar {status}.': 'L-istatus inbidel għal {status}.',
+  'Intrekking opgeslagen.': 'L-irtirar inżamm.',
+  'Intrekking ongedaan gemaakt.': 'L-irtirar ġie mħassar.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Is-sottomissjoni tħassret; ir-rekord jibqa’.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Is-sottomissjoni tħassret, iżda r-reġistru ma setax jiġi aġġornat. Editja overview.md bl-idejn.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Is-sottomissjoni ma nstabitx fil-cartella tax-xogħol.',
+  'De inzending kon niet worden verwijderd.':
+      'Is-sottomissjoni ma setgħetx titħassar.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Ir-reġistru ma jistax jinqara. Irranġa overview.md; ma nbidel xejn.',
+  'Het register kon niet worden bijgewerkt.':
+      'Ir-reġistru ma setax jiġi aġġornat.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Din il-bidla ma setgħetx issir: is-sottomissjoni mhijiex fir-reġistru.',
+  'Status wijzigen': 'Biddel l-istatus',
+  'Intrekking ongedaan maken': 'Ħassar l-irtirar',
+  'Intrekken…': 'Irtira…',
+  'Verwijderen…': 'Ħassar…',
+  'Inzending intrekken': 'Irtira s-sottomissjoni',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Daħħal il-jum li fih min bagħat irtira s-sottomissjoni. Sottomissjoni rtirata qatt ma tidħol fil-ktieb.',
+  'Dag (jjjj-mm-dd)': 'Jum (ssss-xx-jj)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Jum invalidu. Uża sena-xahar-jum, pereżempju {voorbeeld}.',
+  'Inzending verwijderen': 'Ħassar is-sottomissjoni',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'It-tweġibiet, il-kopja tax-xogħol u r-ritratti ta’ din is-sottomissjoni jitħassru mill-cartella tax-xogħol. Jibqa’ biss rekord minimu: in-numru, il-jiem tal-wasla u tal-kunsens, u l-istatus. Dan ma jistax jitreġġa’ lura.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Jibqa’ wkoll dak li l-formola ħabbret minn qabel: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Hemm xi ħaġa żbaljata b’din is-sottomissjoni.',
+  'Verplicht, maar leeg gelaten.': 'Meħtieġ, imma ħalla vojt.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} kliem; mill-inqas {min} meħtieġa.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} kliem; l-aktar {max} permessa.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karattri; mill-inqas {min} meħtieġa.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karattri; l-aktar {max} permessa.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” mhijiex fil-lista tal-għażliet.',
+  '“{value}” is geen getal.': '“{value}” mhuwiex numru.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” mhijiex data fil-forma sena-xahar-jum.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Ritratt wiesa’ {actual} pixel; intalbu {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Il-fajl tar-ritratt jinsab nieqes fis-sottomissjoni.',
+  'De beschrijving van de foto ontbreekt.':
+      'Id-deskrizzjoni tar-ritratt hija nieqsa.',
+  'De maker van de foto ontbreekt.': 'Il-ħallieq tar-ritratt huwa nieqes.',
+  'De foto is niet gecontroleerd.': 'Ir-ritratt ma ġiex ikkontrollat.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Ritratt HEIC: mhux ikkontrollat jew indifni; jista’ jkun fih post.',
+  'Toestemming niet gegeven.': 'Il-kunsens ma ngħatax.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'It-tweġiba fiha linja li tidher bħal kodiċi ta’ kontroll tal-formola.',
+  'Het antwoord bevat HTML.': 'It-tweġiba fiha HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'It-tweġiba fiha blokk ta’ kodiċi mhux magħluq.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'It-tweġiba tirreferi għal immaġni li ma tappartjenix għal din is-sottomissjoni.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'It-tweġiba fiha link li mhuwiex permess.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Din il-formola jew din il-verżjoni mhijiex fil-cartella tax-xogħol.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Min bagħat ħadem b’test differenti tal-formola minn dak ippubblikat.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Il-kunsens fil-manifest ma jaqbilx mal-formola ppubblikata.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'It-test tal-formola nbidel barra mit-tweġibiet.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'It-test tal-formola nbidel f’dan il-qasam.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Dan il-qasam ma jeżistix fil-formola ppubblikata.',
+  'Dit veld ontbreekt in de inzending.':
+      'Dan il-qasam huwa nieqes mis-sottomissjoni.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Sottomissjoni tal-verżjoni {submission}; ippubblikata hija l-verżjoni {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Il-formola teħtieġ verżjoni aktar ġdida ta’ OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Il-formola ppubblikata fil-cartella tax-xogħol mhijiex użabbli.',
+  'De inzending hoort bij een ander formulier.':
+      'Is-sottomissjoni tappartjeni għal formola oħra.',
+  'De opbouw van de inzending is beschadigd.':
+      'L-istruttura tas-sottomissjoni hija bil-ħsara.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Ir-reġistru ma jistax jinqara. Irranġa overview.md; is-sottomissjonijiet jidhru hawn taħt mingħajr data mir-reġistru.',
+  'Nog geen inzendingen.': 'Għad m’hemm l-ebda sottomissjoni.',
+  'Om na te lopen': 'Biex jiġi rivedut',
+  'Verwijderd': 'Imħassar',
+  'Zonder regel in het register': 'Mingħajr ringiela fir-reġistru',
+  'Ontvangen {datum}': 'Riċevut {datum}',
+  'Ingetrokken {datum}': 'Irtirat {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Il-kontenut ta’ din is-sottomissjoni tħassar; fadal biss ir-rekord.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Din is-sottomissjoni ma tistax tinqara. Iċċekkja l-fajls fil-cartella tax-xogħol.',
+  'Beoordeeld tegen {formulier}.': 'Evalwat kontra {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'L-evalwazzjoni hija dwar il-kopja tax-xogħol (submission.edit.md).',
+  'Geen punten om na te lopen.': 'L-ebda punt biex jiġi rivedut.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Ritratti li l-ebda tweġiba ma ssemmi: {n}.',
+  'Inzendingen': 'Sottomissjonijiet',
+  'Werkmap': 'Cartella tax-xogħol',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Għadha ma ntgħażlitx cartella tax-xogħol. Agħżel cartella fejn se jinżammu s-sottomissjonijiet u r-reġistru.',
+  'Werkmap kiezen…': 'Agħżel il-cartella tax-xogħol…',
+  'Kies de werkmap voor inzendingen':
+      'Agħżel il-cartella tax-xogħol għas-sottomissjonijiet',
+  'Formulieren': 'Formoli',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Għadha ma żdiedet l-ebda formola. Żid il-formola kif ippubblikajtha: sottomissjoni tiġi ċċekkjata kontriha.',
+  'Formulier toevoegen…': 'Żid formola…',
+  'Kies het formulier om toe te voegen': 'Agħżel il-formola li trid iżżid',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Dan il-fajl mhuwiex formola li tista’ tiġi ppubblikata.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Din il-formola diġà teżisti b’test differenti. Test differenti huwa verżjoni ġdida: agħti lill-formola numru ta’ verżjoni ogħla.',
+  'Formulier toegevoegd: {naam}.': 'Formola miżjuda: {naam}.',
+  'Dit formulier stond er al.': 'Din il-formola kienet diġà hemm.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Il-formola ma setgħetx tinħażen.',
+  'Inzendingen in de werkmap: {n}':
+      'Sottomissjonijiet fil-cartella tax-xogħol: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Zip sempliċi ma jiġix ikkriptat waqt it-trasferiment.',
+  'Pakketten binnenhalen…': 'Importa pakketti…',
+  'Kies de pakketten om binnen te halen': 'Agħżel il-pakketti li trid timporta',
+  'Register openen': 'Iftaħ ir-reġistru',
+  '{naam}: binnengehaald.': '{naam}: importat.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importat, iżda hemm punti x’jiġu riveduti.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importat, iżda r-reġistru ma setax jiġi aġġornat. Iċċekkja overview.md.',
+  '{naam}: stond er al.': '{naam}: kien diġà hemm.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: mhuwiex pakkett ta’ sottomissjoni li OciDeck jista’ jaqra.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: din il-formola ma ġietx miżjuda, jew mhux f’din il-verżjoni. Żid il-formola l-ewwel.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: ma setax jinħażen fil-cartella tax-xogħol.',
+  'Formulieren en inzendingen': 'Formoli u sottomissjonijiet',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importa sottomissjonijiet ta’ formola, iċċekkjahom kontra l-formola ppubblikata u żommhom b’reġistru. Il-mili ta’ formola jaħdem ukoll meta dan ikun mitfi. Mitfi awtomatikament.',
+  'Inzending opslaan als zip…': 'Issejvja s-sottomissjoni bħala zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Fajl zip bit-tweġibiet u r-ritratti tiegħek, biex tibgħatu bl-email lill-organizzatur.',
+  'Inzending opgeslagen als {naam}.':
+      'Is-sottomissjoni tissejvja bħala {naam}.',
+  'Kies het formulier zoals je het kreeg': 'Agħżel il-formola kif irċevejtha',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Din mhijiex il-formola li għaliha jappartjenu t-tweġibiet tiegħek. Agħżel il-fajl li rċevejt mingħand l-organizzatur.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Ritratt ma setax jinqara: {pad}. Żidu mill-ġdid.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Is-sottomissjoni ma tidħolx f’pakkett wieħed: wisq ritratti, jew ritratt kbir wisq.',
+  'De inzending kon niet worden opgeslagen.':
+      'Is-sottomissjoni ma setgħetx tissejvja.',
+  'Inzending opslaan': 'Issejvja s-sottomissjoni',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Id-data tal-pożizzjoni tneħħiet minn dan ir-ritratt.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Dan ir-ritratt ma setax jiżdied. Agħżel fajl JPEG, PNG, WebP jew HEIC ta\' ritratt.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Ewwel salva d-dokument biex iżżid ritratti.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck jista\' jimporta dan il-fajl f\'dokument ġdid.',
+  'Kies een datum': 'Agħżel data',
+  'Anders, namelijk:': 'Oħra, jiġifieri:',
+  'Punt {n}': 'Element {n}',
+  'Punt {n} verwijderen': 'Neħħi l-element {n}',
+  'Rij {n} verwijderen': 'Neħħi r-ringiela {n}',
+  'Foto {n} verwijderen': 'Neħħi r-ritratt {n}',
+  'Wat is er te zien op de foto?': 'X\'jidher fir-ritratt?',
+  'Van wie is de foto?': 'Ta\' min huwa r-ritratt?',
+  'Foto toevoegen': 'Żid ritratt',
+  'Verplicht': 'Meħtieġ',
+  'Alles is ingevuld.': 'Kollox ġie mimli.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Fadal {n} x\'tagħmel qabel ma tkun tista\' tibgħat:',
+  'klaar': 'lest',
+  '{n} open': '{n} miftuħa',
+  'Dit formulier kan niet worden ingevuld.':
+      'Din il-formola ma tistax tiġi mimlija.',
+  'Naar de bron': 'Mur għas-sors',
+  'Woorden': 'Kelmiet',
+  'Tekens': 'Karattri',
+  'Keuzes': 'Għażliet',
+  'Rijen': 'Ringieli',
+  'Foto’s': 'Ritratti',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mill-inqas {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (l-aktar {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mill-inqas {min}, l-aktar {max})',
+  'Invullen': 'Imla',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Xi ħaġa mhix sewwa f\'din il-formola. Ikkuntattja lil dak li ħarġuha.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Dan il-qasam huwa meħtieġ. Imlieh biex tkun tista\' tibgħat.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Ktibt {actual} kelmiet; meħtieġa mill-inqas {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Ktibt {actual} kelmiet; huma permessi l-aktar {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Ktibt {actual} karattri; meħtieġa mill-inqas {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Ktibt {actual} karattri; huma permessi l-aktar {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” mhuwiex fil-lista. Agħżel waħda mill-għażliet.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” mhuwiex numru. Uża ċifri biss, jekk meħtieġ b\'virgola jew b\'punt għad-deċimali.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Dan ir-ritratt huwa {actual} pixel wiesa\'; hawn jintalbu {min}. Probabbilment sar iżgħar meta intbagħat permezz ta\' app tal-messaġġi. Jekk għad għandek l-oriġinal, uża dak. Jekk le, ibgħatu xorta waħda: l-organizzazzjoni se tikkuntattjak.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Dan ir-ritratt huwa {actual} MB; il-massimu huwa {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Il-kontenut ta\' dan il-fajl ma jaqbilx mat-tip tiegħu.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Dan it-tip ta\' fajl mhuwiex permess hawn.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Il-fajl ta\' dan ir-ritratt ma jinstabx aktar. Żid ir-ritratt mill-ġdid.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Iddeskrivi f\'sentenza qasira x\'jidher fir-ritratt.',
+  'Geef aan van wie de foto is.': 'Indika ta\' min huwa r-ritratt.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Dan ir-ritratt għadu ma ġiex iċċekkjat. Stenna ftit jew żidu mill-ġdid.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Dan ir-ritratt huwa fajl HEIC. OciDeck ma jistax jiċċekkjah jew inaddfu hawn, għalhekk jintbagħat kif inhu. Jista\' jkun fih fejn ittieħed ir-ritratt. Jekk ma tridx taqsam dan, agħżel “L-aktar kompatibbli” fl-issettjar tal-kamera jew aqsam ir-ritratt bħala JPEG u żidu mill-ġdid.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'F\'dan ir-ritratt jidhru {actual} uċuħ; kienu mistennija {expected}. Din hija biss tfakkira.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Immarka l-kaxxa biex taqbel; mingħajr kunsens ma tistax tibgħat.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Din il-formola teħtieġ verżjoni aktar riċenti ta\' OciDeck. Aġġorna l-app biex timlieha.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Xi ħaġa fil-formola nnifisha nbidlet bi żball. Irrestawra l-formola; it-tweġibiet tiegħek jibqgħu.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Din il-linja tidher bħal kodiċi ta\' kontroll tal-formola u ma tistax tidher f\'tweġiba. Biddilha.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'L-HTML mhuwiex permess f\'tweġiba. Uża test sempliċi u formattjar sempliċi.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blokk tal-kodiċi mhuwiex magħluq. Agħlqu b\'```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'F\'tweġiba jistgħu jidhru biss ritratti li żżid f\'din il-formola; stampa mill-internet ma tistax.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'F\'tweġiba huma permessi biss links li jibdew b\'https:// u indirizzi tal-email.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Dan il-fajl inħoloq b\'verżjoni differenti tal-formola (verżjoni {submission}; issa tapplika l-verżjoni {published}). Iċċekkja t-tweġibiet tiegħek.',
+  'Punt {item}: {bericht}': 'Element {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Il-għadd issa huwa {actual}; irid ikun bejn {min} u {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Il-għadd issa huwa {actual}; jista\' jkun l-aktar {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Il-għadd issa huwa {actual}; irid ikun mill-inqas {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'In-numru jrid ikun multiplu ta\' {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'In-numru jrid ikun bejn {min} u {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'In-numru jista\' jkun l-aktar {max}.',
+  'Het getal moet minstens {min} zijn.': 'In-numru jrid ikun mill-inqas {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Id-data trid tkun {min} jew aktar tard.',
+  'De datum moet op of vóór {max} liggen.':
+      'Id-data trid tkun {max} jew aktar kmieni.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” mhijiex data. Ikteb id-data bħala sena-xahar-jum, pereżempju 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Dan mhuwiex indirizz tal-email validu.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Dan mhuwiex indirizz web validu. Ibda b\'https://.',
+  'Dit is geen geldig telefoonnummer.': 'Dan mhuwiex numru tat-telefon validu.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Dan mhuwiex kodiċi postali Olandiż validu, bħal 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Hawn tidħol linja waħda biss. Neħħi l-qsim tal-linji.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Uża biss il-kaxxi ta\' din il-mistoqsija: kaxxa waħda għal kull għażla.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Ikteb kull punt f\'linja tiegħu, b\'sing jew b\'numru quddiemu.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'It-tabella m\'għadhiex korretta: ħalli r-ringiela tat-titlu kif kienet u agħti lil kull ringiela l-istess numru ta\' kolonni.',
+  'Dezelfde foto staat hier twee keer.':
+      'L-istess ritratt jidher hawn darbtejn.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'F\'dan il-qasam jappartjenu ritratti biss, mhux test maħlul.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Il-kaxxa tal-kunsens tiegħek hija mħassra. Irrestawra l-formola.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Din it-tweġiba m\'għandhiex il-forma li tappartjeni għal din il-mistoqsija.',
   'Downloaden…': 'Niżżel…',
   'Afbeelding opgeslagen als': 'Immaġini ssejvjata bħala',
   '{naam}: ingesteld': '{naam}: issettjat',

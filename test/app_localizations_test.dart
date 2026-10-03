@@ -12,6 +12,14 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  // Het Engels heeft hetzelfde woord als het Nederlands ("Later" op de knop die een stap
+  // uitstelt); de andere talen niet, dus alleen hier.
+  'Later',
+  // "Team" is in het Engels en het Nederlands hetzelfde woord (de knop en het venster van de redactie).
+  'Team',
+  'Team…',
+  'YYYY-MM-DD',
+  '{id} · v{versie}',
   'Marp',
   'Markdown',
   'Accent',
@@ -272,6 +280,8 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'YYYY-MM-DD',
+  '{id} · v{versie}',
   'Marp',
   'Markdown',
   'Accent',

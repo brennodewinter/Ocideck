@@ -1634,6 +1634,590 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Team…': 'Komanda…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktoriai, be jūsų, kurie yra kiekviename bundle, kad ir jie galėtų atidaryti pateikimus. Jūs pridedate ką nors su jo redaktoriaus kortele ir dar kartą įvedate tos kortelės kontrolinį kodą.',
+  'Er is nog niemand naast jou.': 'Be jūsų dar nieko nėra.',
+  'Plak de kaart van de redacteur': 'Įklijuokite redaktoriaus kortelę',
+  'Kaart controleren': 'Patikrinti kortelę',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} kortelė. Įveskite šios kortelės kontrolinį kodą, kurį {naam} jums davė kitu keliu, pavyzdžiui, telefonu.',
+  'Redacteur verwijderen': 'Pašalinti redaktorių',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Pašalinti {naam} iš komandos? Jau paskelbti bundle lieka tokie, kokie yra, kol paskelbsite iš naujo; tai, kas jau užplombuota {naam}, šiam asmeniui lieka skaitoma.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} pridėtas. Paskelbkite bundle iš naujo, kad {naam} būtų įtrauktas.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} pašalintas. Paskelbkite bundle iš naujo, kad {naam} būtų išimtas.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Pirmiausia sukurkite savo redakcijos raktą skiltyje Redakcijos raktas….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Jūsų redakcijos rakto naudoti negalima. Žiūrėkite skiltyje Redakcijos raktas….',
+  'Dit is geen redacteurskaart.': 'Tai nėra redaktoriaus kortelė.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ši kortelė iš naujesnės OciDeck versijos. Atnaujinkite OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kortelėje yra kažkas neleistino. Paprašykite redaktoriaus naujos kortelės.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Šis kontrolinis kodas netinka kortelei: kortelė pakeista arba ne nuo to, ką manote. Dar kartą paprašykite redaktoriaus kontrolinio kodo ir kortelės.',
+  'Dit is je eigen kaart.': 'Tai jūsų pačių kortelė.',
+  'Deze redacteur staat er al.': 'Šis redaktorius jau komandoje.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Komanda pilna: bundle nešioja daugiausia 64 organizatorius, įskaitant jus.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Failo team.json darbo aplanke nepavyksta perskaityti. Nieko nepakeista; sutaisykite arba ištrinkite.',
+  'Het team kon niet worden opgeslagen.': 'Komandos nepavyko išsaugoti.',
+  'Deze redacteur staat niet meer in het team.':
+      'Šio redaktoriaus komandoje nebėra.',
+  'Naast jou in de bundel: {namen}.': 'Be jūsų bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Pirmiausia patikrinkite atkūrimo raktą skiltyje Redakcijos raktas… arba pridėkite antrą redaktorių skiltyje Komanda…. Be kelio atgal visi pateikimai taps neperskaitomi, jei šis įrenginys sugestų.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Failo team.json darbo aplanke nepavyksta perskaityti. Nieko nepasirašoma.',
+  'Redacteurskaart maken…': 'Sukurti redaktoriaus kortelę…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Redaktoriaus kortele formos savininkas prideda jus prie bundle, kad ir jūs galėtumėte atidaryti pateikimus. Kortelę galima siųsti el. paštu.',
+  'Jouw naam op de kaart': 'Jūsų vardas kortelėje',
+  'Kaart maken': 'Sukurti kortelę',
+  'Kaart kopiëren': 'Kopijuoti kortelę',
+  'Vingerafdruk van de kaart': 'Kortelės kontrolinis kodas',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Perduokite savininkui šį kontrolinį kodą kitu keliu nei kortelę, pavyzdžiui, telefonu. Jis įves jį dar kartą, prieš jus pridėdamas.',
+  'Verzegeld opslaan…': 'Įrašyti užplombuotą…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Šifruotas failas (.zip.age), kurį gali atidaryti tik organizatorius. Tam reikia bundle failo ir kontrolinio kodo iš kvietimo.',
+  'Kies het bundelbestand van de organisator':
+      'Pasirinkite organizatoriaus bundle failą',
+  'Vingerafdruk van de organisator': 'Organizatoriaus kontrolinis kodas',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Įveskite kontrolinį kodą iš kvietimo. Jo tyčia nėra bundle faile: taip galite patikrinti, iš ko jis.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Tai nėra kontrolinis kodas. Jį sudaro 52 simboliai, dažniausiai po keturis grupėse.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Šis failas nėra bundle, kurį OciDeck gali perskaityti.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ši forma arba šis bundle yra iš naujesnės OciDeck versijos. Atnaujinkite OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Kontrolinis kodas netinka šiam bundle: forma ne nuo to, kurį nurodo kvietimas. Patikrinkite kontrolinį kodą ir bundle failą.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundle parašas neteisingas: jis pakeistas arba ne nuo to, kurį nurodo kontrolinis kodas. Paprašykite organizatoriaus naujo bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Šis bundle nepriklauso šiai formai. Naudokite bundle failą, priklausantį būtent šiai formai.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Šio bundle galiojimas pasibaigė. Paprašykite organizatoriaus naujo.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Šis bundle senesnis nei bundle, kurį anksčiau gavote iš šio organizatoriaus. Paprašykite organizatoriaus naujausio.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle turi kažką neleistino. Paprašykite organizatoriaus naujo bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Ši forma uždaryta: paskutinė diena buvo {datum}. Kreipkitės į organizatorių.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Pateikimas didesnis, nei leidžia organizatorius ({mb} MB). Pašalinkite nuotrauką arba sumažinkite vieną.',
+  'De inzending kon niet worden verzegeld.': 'Pateikimo nepavyko užplombuoti.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Įrašyta užplombuota kaip {naam}, gali atidaryti tik: {organisatoren}.',
+  'Bundel publiceren…': 'Paskelbti bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle yra tai, kuo pildytojas tiki apie jūsų redakciją: kuriam raktui užplombuoti ir kuriam tekstui jis priklauso. Jis išsaugomas šalia formos.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Darbo aplanke nėra formos, kuriai būtų galima sukurti bundle.',
+  'Naam voor de invuller': 'Pildytojo vardas',
+  'Geldig tot (jjjj-mm-dd)': 'Galioja iki (mmmm-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Paskutinė diena, kai pildytojas tiki šiuo bundle. Ne anksčiau nei formos uždarymo diena.',
+  'Bundel maken': 'Sukurti bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle sukurtas (eilės numeris {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Perduokite kontrolinį kodą pildytojui kitu keliu nei bundle failą, pavyzdžiui, kvietime. Kas turi tik bundle failą, negali patikrinti, iš ko jis.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Šioje platformoje nėra raktų pakabuko redakcijos raktui; bundle čia pasirašyti negalima.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Redakcijos rakto dar nėra. Sukurkite jį skiltyje Redakcijos raktas…, prieš skelbdami bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Raktų pakabuko nepavyksta perskaityti. Nieko nepasirašyta.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Išsaugoto redakcijos rakto nepavyksta perskaityti. Ištrinkite jį skiltyje Redakcijos raktas… ir atkurkite iš atkūrimo rakto.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Šios formos bundle darbo aplanke nepavyksta perskaityti arba jis nepriklauso kitiems. Tada eilės numerio nustatyti neįmanoma ir nieko nepasirašoma. Patikrinkite: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Įveskite ne ilgesnį nei 80 simbolių vardą.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Galioja iki turi būti esama data, formatu mmmm-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Galioja iki negali būti anksčiau nei formos uždarymo diena.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle nepavyko sukurti ({veld}). Patikrinkite, ar formoje nurodyta galiojanti uždarymo diena ir saugojimo laikotarpis.',
+  'formulier': 'forma',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle nepavyko išsaugoti darbo aplanke.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Sukurkite ir pasirašykite bundle, kuriuo pildytojas tiki apie jūsų redakciją.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: užplombuotas paketas atidarytas ir importuotas.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: šis paketas užplombuotas, o šioje platformoje nėra raktų pakabuko redakcijos raktui.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: šis paketas užplombuotas, ir dar nėra redakcijos rakto jam atidaryti. Sukurkite jį skiltyje Redakcijos raktas… arba atkurkite iš atkūrimo rakto.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: šis paketas užplombuotas, o raktų pakabuko nepavyksta perskaityti. Nieko nebuvo bandyta.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: šis paketas užplombuotas, o išsaugoto redakcijos rakto nepavyksta perskaityti. Ištrinkite jį skiltyje Redakcijos raktas… ir atkurkite iš atkūrimo rakto.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: šis paketas nebuvo užplombuotas jūsų redakcijos raktui.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: šis paketas pakeistas arba nutrauktas ir nebus atidarytas.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: šis paketas didesnis, nei gali būti pateikimas.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: išsaugotas redakcijos raktas nėra raktas, kurį gali naudoti OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: tai nėra užplombuotas paketas, kurį OciDeck gali perskaityti.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Užplombuotas failas (.zip.age) atidaromas jūsų redakcijos raktu.',
+  'Herstelsleutel controleren': 'Patikrinti atkūrimo raktą',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redakcijos raktas sukurtas. Dabar užsirašykite atkūrimo raktą.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Raktų pakabukas rakto nepriėmė. Nieko nesukurta.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Redakcijos raktas jau yra. Jis nepaliestas.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Raktų pakabuko nepavyko perskaityti. Nieko nepriimta ir nieko nesukurta.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Raktų pakabuke yra kažkas, kas nėra redakcijos raktas. Tai neperrašyta.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Ši platforma neturi raktų pakabuko.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Teisingai: atkūrimo raktas patikrintas.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Tai galiojantis atkūrimo raktas, bet ne šio redakcijos rakto.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Atkūrimo raktas teisingas, bet to nepavyko išsaugoti.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nėra redakcijos rakto, su kuriuo būtų galima palyginti.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Tai nėra redakcijos rakto atkūrimo raktas.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Jame yra rašybos klaida: kontrolinė suma nesutampa.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Šis atkūrimo raktas yra iš naujesnės OciDeck versijos.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Šis atkūrimo raktas sukurtas kažkam kitam.',
+  'Hersteld uit de herstelsleutel.': 'Atkurta iš atkūrimo rakto.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Raktų pakabukas rakto nepriėmė. Nieko neatkurta.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Išsaugoti redakcijos raktą kaip age rakto failą',
+  'Het bestand kon niet worden opgeslagen.': 'Failo nepavyko išsaugoti.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Išsaugota kaip {pad}. Kas turi šį failą, gali atidaryti viską.',
+  'Redactiesleutel verwijderd.': 'Redakcijos raktas ištrintas.',
+  'Redactiesleutel': 'Redakcijos raktas',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ši platforma neturi raktų pakabuko. Redakcijos rakto čia laikyti negalima; naudokite darbalaukio programą.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Raktų pakabuko nepavyko perskaityti (užrakintas arba prieiga uždrausta). Nieko nepriimta ir nieko nesukurta.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Raktų pakabuke yra kažkas, kas nėra redakcijos raktas. Tai neperrašyta. Ištrinkite tai ir atkurkite raktą iš savo atkūrimo rakto.',
+  'Redactiesleutel verwijderen…': 'Ištrinti redakcijos raktą…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Redakcijos raktas atidaro užplombuotus pateikimus ir pasirašo jūsų formų paketus. Jis laikomas šios operacinės sistemos raktų pakabuke. Jei prarasite visus redakcijos raktus, visi dar neparsisiųsti pateikimai taps neperskaitomi: tokia yra serverio, kuris nieko negali perskaityti, kaina.',
+  'Redactiesleutel aanmaken': 'Sukurti redakcijos raktą',
+  'Herstellen uit herstelsleutel…': 'Atkurti iš atkūrimo rakto…',
+  'Vingerafdruk': 'Kontrolinis kodas',
+  'Ontvanger (age)': 'Gavėjas (age)',
+  'Aangemaakt op {datum}.': 'Sukurta {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Atkūrimo raktas patikrintas.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Atkūrimo raktas dar nepatikrintas: užsirašykite jį ir įveskite dar kartą.',
+  'Herstelsleutel tonen…': 'Rodyti atkūrimo raktą…',
+  'Vingerafdruk kopiëren': 'Kopijuoti kontrolinį kodą',
+  'Exporteren als age-sleutelbestand…': 'Eksportuoti kaip age rakto failą…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Užsirašykite šį atkūrimo raktą ir laikykite jį saugioje vietoje, ne šiame įrenginyje. Kas jį turi, gali atidaryti visus pateikimus ir pasirašyti paketus jūsų vardu. Jei prarasite šį įrenginį, tai bus viskas, kas liks.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Įveskite atkūrimo raktą čia dar kartą',
+  'Later': 'Vėliau',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Įveskite arba įklijuokite atkūrimo raktą. Tai, ką įvesite, bus įdėta į raktų pakabuką kaip redakcijos raktas; nieko neperrašoma.',
+  'Herstelsleutel': 'Atkūrimo raktas',
+  'Redactiesleutel verwijderen': 'Ištrinti redakcijos raktą',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Raktas ištrinamas iš raktų pakabuko ir gali sugrįžti tik iš atkūrimo rakto. Jei jo neturite, pateikimai, užplombuoti tik šiam raktui, lieka neperskaitomi visam laikui.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Raktas, kuris atidaro užplombuotus pateikimus ir pasirašo paketus.',
+  'Redactiesleutel…': 'Redakcijos raktas…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Darbinė kopija išmesta. Tai, kas gauta, vertinama iš naujo.',
+  'Er is geen werkkopie.': 'Darbinės kopijos nėra.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Darbinės kopijos nepavyko išmesti.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Ištrina darbinę kopiją. Tai, kas gauta, lieka ir vertinama iš naujo.',
+  'Werkkopie weggooien…': 'Išmesti darbinę kopiją…',
+  'Werkkopie weggooien': 'Išmesti darbinę kopiją',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Darbinė kopija su patobulinimais bus ištrinta ir jos nebus galima atkurti. Tai, kas gauta, lieka ir vertinama iš naujo. Jei darbinė kopija dar atidaryta skirtuke, pirmiausia jį uždarykite.',
+  'Weggooien': 'Išmesti',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Šis pateikimas atsiimtas, todėl į jokį skyrių nepatenka.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Šio pateikimo neįmanoma perskaityti arba formos, kuriai jis pateiktas, nėra darbo aplanke.',
+  'Het controledocument kon niet worden geschreven.':
+      'Patikros dokumento nepavyko įrašyti.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Jūsų indėlis į knygą: maloniai prašome jį peržiūrėti',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Štai jūsų indėlis tokia forma, kokia jis atsiras knygoje (žr. priedą). Ar viskas teisinga? Atsakykite ‘sutinku’ arba su savo pataisomis iki {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Laiškas paruoštas jūsų pašto programoje. Pridėkite PDF ir išsiųskite.',
+  'Controle door de maker…': 'Autoriaus patikra…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Patikros dokumentas yra šio vieno pateikimo skyrius. Eksportuokite jį kaip PDF (pasirinkite visą profilį), pridėkite PDF prie laiško ir išsiųskite. Jei autorius atsako ‘sutinku’, patys nustatykite būseną maker-approved: tas atsakymas taip pat patvirtina, kad indėlis tikrai yra šio asmens.',
+  'Controledocument maken en openen':
+      'Sukurti patikros dokumentą ir jį atidaryti',
+  'E-mailadres van de maker': 'Autoriaus el. pašto adresas',
+  'Antwoord vóór (jjjj-mm-dd)': 'Atsakyti iki (mmmm-mm-dd)',
+  'Mail schrijven': 'Rašyti laišką',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ši forma nežino būsenos maker-check-sent, todėl jos čia nustatyti negalima.',
+  'Controle verstuurd': 'Patikra išsiųsta',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Sukuria šio pateikimo skyrių ir paruošia laišką, kuriuo autorius jį tikrina.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Šio pateikimo nėra registre. Pataisykite overview.md ir bandykite dar kartą.',
+  'Kies het hoofdstuksjabloon': 'Pasirinkti skyriaus šabloną',
+  'Kies eerst een hoofdstuksjabloon.':
+      'Pirmiausia pasirinkite skyriaus šabloną.',
+  'Kies minstens één status.': 'Pasirinkite bent vieną būseną.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Knyga sudaryta. Skyrių: {n}. Nuotraukų: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Atsiimta, todėl praleista: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Praleista (kita versija arba neįskaitoma): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Nuotraukos, kurių trūko darbo aplanke: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Pavadinime naudokite tik raides, skaitmenis, brūkšnelius ir pabraukimus (daugiausia 64 simboliai).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Knyga tokiu pavadinimu jau yra. Pasirinkite kitą pavadinimą.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Šablone minimi laukai, kurių formoje nėra: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nėra ką dėti į knygą: nėra pateikimo su pasirinkta būsena. Atsiimta: {w}; praleista: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registro nepavyksta perskaityti. Pataisykite overview.md.',
+  'Het boek kon niet worden geschreven.': 'Knygos nepavyko įrašyti.',
+  'Boek samenstellen…': 'Sudaryti knygą…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Knyga patenka į darbo aplanko aplanką book ir lieka paprastu dokumentu, kurį vėliau galite pats redaguoti.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Darbo aplanke nėra tinkamos formos.',
+  'Formulier': 'Forma',
+  'Hoofdstuksjabloon': 'Skyriaus šablonas',
+  'Nog geen sjabloon gekozen.': 'Šablonas dar nepasirinktas.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Šablone {veld-id} reiškia atsakymą į tą lauką.',
+  'Hoofdstuksjabloon kiezen…': 'Pasirinkti skyriaus šabloną…',
+  'Welke inzendingen?': 'Kurie pateikimai?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Į knygą patenka tik pateikimai su viena iš šių būsenų. Atsiimti pateikimai visada lieka už jos ribų.',
+  'Ordenen op': 'Rikiuoti pagal',
+  'Groeperen op': 'Grupuoti pagal',
+  'Naam van het boek': 'Knygos pavadinimas',
+  'Boek openen': 'Atidaryti knygą',
+  'Samenstellen': 'Sudaryti',
+  'De werkkopie kon niet worden aangemaakt.': 'Darbo kopijos nepavyko sukurti.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Atidaro pateikimo kopiją tobulinimui. Tai, kas gauta, lieka nepakeista.',
+  'Werkkopie openen': 'Atidaryti darbo kopiją',
+  'Status gewijzigd naar {status}.': 'Būsena pakeista į {status}.',
+  'Intrekking opgeslagen.': 'Atsiėmimas išsaugotas.',
+  'Intrekking ongedaan gemaakt.': 'Atsiėmimas atšauktas.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Pateikimas ištrintas; įrašas lieka.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Pateikimas ištrintas, bet registro nepavyko atnaujinti. Redaguokite overview.md rankiniu būdu.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Pateikimo darbo aplanke nerasta.',
+  'De inzending kon niet worden verwijderd.': 'Pateikimo nepavyko ištrinti.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registro nepavyksta perskaityti. Pataisykite overview.md; niekas nepakeista.',
+  'Het register kon niet worden bijgewerkt.': 'Registro nepavyko atnaujinti.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Šio pakeitimo nepavyko atlikti: pateikimo nėra registre.',
+  'Status wijzigen': 'Keisti būseną',
+  'Intrekking ongedaan maken': 'Atšaukti atsiėmimą',
+  'Intrekken…': 'Atsiimti…',
+  'Verwijderen…': 'Ištrinti…',
+  'Inzending intrekken': 'Atsiimti pateikimą',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Įveskite dieną, kurią pateikėjas atsiėmė pateikimą. Atsiimtas pateikimas niekada nepatenka į knygą.',
+  'Dag (jjjj-mm-dd)': 'Diena (mmmm-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Netinkama diena. Naudokite metai-mėnuo-diena, pavyzdžiui, {voorbeeld}.',
+  'Inzending verwijderen': 'Ištrinti pateikimą',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Šio pateikimo atsakymai, darbo kopija ir nuotraukos ištrinami iš darbo aplanko. Lieka tik minimalus įrašas: numeris, gavimo ir sutikimo dienos bei būsena. To negalima atšaukti.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Taip pat lieka tai, ką forma paskelbė iš anksto: {velden}.',
+  'Er klopt iets niet aan deze inzending.': 'Su šiuo pateikimu kažkas negerai.',
+  'Verplicht, maar leeg gelaten.': 'Privaloma, bet palikta tuščia.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} žodžiai; reikia bent {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} žodžiai; leidžiama daugiausia {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} simboliai; reikia bent {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} simboliai; leidžiama daugiausia {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ nėra parinkčių sąraše.',
+  '“{value}” is geen getal.': '„{value}“ nėra skaičius.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ nėra data pavidalu metai-mėnuo-diena.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Nuotrauka {actual} pikselių pločio; prašyta {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Pateikime trūksta nuotraukos failo.',
+  'De beschrijving van de foto ontbreekt.': 'Trūksta nuotraukos aprašo.',
+  'De maker van de foto ontbreekt.': 'Trūksta nuotraukos autoriaus.',
+  'De foto is niet gecontroleerd.': 'Nuotrauka nebuvo patikrinta.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC nuotrauka: nepatikrinta ir neišvalyta; joje gali būti vieta.',
+  'Toestemming niet gegeven.': 'Sutikimas nesuteiktas.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Atsakyme yra eilutė, panaši į formos valdymo kodą.',
+  'Het antwoord bevat HTML.': 'Atsakyme yra HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Atsakyme yra neuždarytas kodo blokas.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Atsakyme nurodomas paveikslėlis, kuris nepriklauso šiam pateikimui.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Atsakyme yra nuoroda, kuri neleidžiama.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Šios formos arba šios versijos nėra darbo aplanke.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Pateikėjas dirbo su kitu formos tekstu nei paskelbtasis.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Sutikimas manifeste neatitinka paskelbtos formos.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Formos tekstas pakeistas už atsakymų ribų.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Formos tekstas pakeistas prie šio lauko.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Šio lauko paskelbtoje formoje nėra.',
+  'Dit veld ontbreekt in de inzending.': 'Šio lauko pateikime trūksta.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Pateikimas versijos {submission}; paskelbta versija {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Forma reikalauja naujesnės OciDeck versijos.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Paskelbta forma darbo aplanke netinkama naudoti.',
+  'De inzending hoort bij een ander formulier.':
+      'Pateikimas priklauso kitai formai.',
+  'De opbouw van de inzending is beschadigd.': 'Pateikimo sandara pažeista.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registro nepavyksta perskaityti. Pataisykite overview.md; pateikimai rodomi žemiau be registro duomenų.',
+  'Nog geen inzendingen.': 'Pateikimų dar nėra.',
+  'Om na te lopen': 'Reikia peržiūrėti',
+  'Verwijderd': 'Ištrinta',
+  'Zonder regel in het register': 'Be eilutės registre',
+  'Ontvangen {datum}': 'Gauta {datum}',
+  'Ingetrokken {datum}': 'Atšaukta {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Šio pateikimo turinys ištrintas; liko tik įrašas.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Šio pateikimo nepavyksta perskaityti. Patikrinkite failus darbo aplanke.',
+  'Beoordeeld tegen {formulier}.': 'Įvertinta pagal {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Vertinimas taikomas darbo kopijai (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nėra punktų peržiūrai.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Nuotraukos, kurių nemini joks atsakymas: {n}.',
+  'Inzendingen': 'Pateikimai',
+  'Werkmap': 'Darbo aplankas',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Darbo aplankas dar nepasirinktas. Pasirinkite aplanką, kuriame bus saugomi pateikimai ir registras.',
+  'Werkmap kiezen…': 'Pasirinkti darbo aplanką…',
+  'Kies de werkmap voor inzendingen': 'Pasirinkite darbo aplanką pateikimams',
+  'Formulieren': 'Formos',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Dar nepridėta jokia forma. Pridėkite formą tokią, kokią ją paskelbėte: pateikimas tikrinamas pagal ją.',
+  'Formulier toevoegen…': 'Pridėti formą…',
+  'Kies het formulier om toe te voegen': 'Pasirinkite pridedamą formą',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Šis failas nėra forma, kurią galima paskelbti.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ši forma jau yra su kitu tekstu. Kitas tekstas yra nauja versija: suteikite formai aukštesnį versijos numerį.',
+  'Formulier toegevoegd: {naam}.': 'Forma pridėta: {naam}.',
+  'Dit formulier stond er al.': 'Ši forma jau buvo.',
+  'Het formulier kon niet worden opgeslagen.': 'Formos nepavyko išsaugoti.',
+  'Inzendingen in de werkmap: {n}': 'Pateikimai darbo aplanke: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Paprastas zip perduodant nešifruojamas.',
+  'Pakketten binnenhalen…': 'Importuoti paketus…',
+  'Kies de pakketten om binnen te halen': 'Pasirinkite importuojamus paketus',
+  'Register openen': 'Atidaryti registrą',
+  '{naam}: binnengehaald.': '{naam}: importuota.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importuota, bet yra punktų, kuriuos reikia peržiūrėti.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importuota, bet registro nepavyko atnaujinti. Patikrinkite overview.md.',
+  '{naam}: stond er al.': '{naam}: jau buvo.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: tai nėra pateikimo paketas, kurį OciDeck gali perskaityti.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ši forma nepridėta arba nėra šioje versijoje. Pirmiausia pridėkite formą.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nepavyko išsaugoti darbo aplanke.',
+  'Formulieren en inzendingen': 'Formos ir pateikimai',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importuokite formos pateikimus, tikrinkite juos pagal paskelbtą formą ir saugokite su registru. Formos užpildymas veikia ir tada, kai tai išjungta. Pagal numatytąją išjungta.',
+  'Inzending opslaan als zip…': 'Išsaugoti siuntinį kaip zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip failas su jūsų atsakymais ir nuotraukomis, kurį el. paštu išsiųsite organizatoriui.',
+  'Inzending opgeslagen als {naam}.': 'Siuntinys išsaugotas kaip {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Pasirinkite formą tokią, kokią gavote',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Tai ne ta forma, kuriai priklauso jūsų atsakymai. Pasirinkite failą, kurį gavote iš organizatoriaus.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Nepavyko perskaityti nuotraukos: {pad}. Pridėkite ją dar kartą.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Siuntinys netelpa į vieną paketą: per daug nuotraukų arba per didelė nuotrauka.',
+  'De inzending kon niet worden opgeslagen.': 'Nepavyko išsaugoti siuntinio.',
+  'Inzending opslaan': 'Išsaugoti siuntinį',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Vietos duomenys pašalinti iš šios nuotraukos.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Šios nuotraukos nepavyko pridėti. Pasirinkite nuotraukos JPEG, PNG, WebP arba HEIC failą.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Pirmiausia išsaugokite dokumentą, kad galėtumėte pridėti nuotraukų.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck gali importuoti šį failą į naują dokumentą.',
+  'Kies een datum': 'Pasirinkti datą',
+  'Anders, namelijk:': 'Kita, būtent:',
+  'Punt {n}': 'Punktas {n}',
+  'Punt {n} verwijderen': 'Pašalinti punktą {n}',
+  'Rij {n} verwijderen': 'Pašalinti eilutę {n}',
+  'Foto {n} verwijderen': 'Pašalinti nuotrauką {n}',
+  'Wat is er te zien op de foto?': 'Kas matyti nuotraukoje?',
+  'Van wie is de foto?': 'Kieno nuotrauka?',
+  'Foto toevoegen': 'Pridėti nuotrauką',
+  'Verplicht': 'Privaloma',
+  'Alles is ingevuld.': 'Viskas užpildyta.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Dar {n} reikia atlikti, kad galėtumėte siųsti:',
+  'klaar': 'atlikta',
+  '{n} open': '{n} atvira',
+  'Dit formulier kan niet worden ingevuld.': 'Šios formos užpildyti negalima.',
+  'Naar de bron': 'Į šaltinį',
+  'Woorden': 'Žodžiai',
+  'Tekens': 'Ženklai',
+  'Keuzes': 'Pasirinkimai',
+  'Rijen': 'Eilutės',
+  'Foto’s': 'Nuotraukos',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (bent {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (daugiausia {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (bent {min}, daugiausia {max})',
+  'Invullen': 'Užpildyti',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Su šia forma kažkas negerai. Susisiekite su tuo, kas ją sukūrė.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Šis laukas privalomas. Užpildykite jį, kad galėtumėte siųsti.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Parašėte {actual} žodžių; reikia bent {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Parašėte {actual} žodžių; leidžiama daugiausia {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Parašėte {actual} ženklų; reikia bent {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Parašėte {actual} ženklų; leidžiama daugiausia {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}“ nėra sąraše. Pasirinkite vieną iš parinkčių.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}“ nėra skaičius. Naudokite tik skaitmenis, prireikus kableliu ar tašku dešimtainėms dalims.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Ši nuotrauka {actual} pikselių pločio; čia reikalaujama {min}. Tikriausiai ji sumažėjo siunčiant per žinučių programėlę. Jei dar turite originalą, naudokite jį. Jei ne, vis tiek ją siųskite: organizatorius susisieks su jumis.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Šios nuotraukos dydis {actual} MB; didžiausias leidžiamas {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Šio failo turinys neatitinka jo tipo.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Šio tipo failas čia neleidžiamas.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Šios nuotraukos failo nebegalima rasti. Pridėkite nuotrauką iš naujo.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Vienu trumpu sakiniu aprašykite, kas matyti nuotraukoje.',
+  'Geef aan van wie de foto is.': 'Nurodykite, kieno nuotrauka.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Ši nuotrauka dar nepatikrinta. Šiek tiek luktelėkite arba pridėkite ją iš naujo.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Ši nuotrauka yra HEIC failas. OciDeck čia negali jo nei patikrinti, nei išvalyti, todėl jis siunčiamas toks, koks yra. Jame gali būti nurodyta, kur nuotrauka padaryta. Jei nenorite to dalytis, fotoaparato nustatymuose pasirinkite „Labiausiai suderinama“ arba pasidalykite nuotrauka kaip JPEG ir pridėkite ją iš naujo.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Šioje nuotraukoje matyti {actual} veidų; tikėtasi {expected}. Tai tik priminimas.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Pažymėkite langelį, kad sutiktumėte; be sutikimo siųsti negalite.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Šiai formai reikia naujesnės OciDeck versijos. Atnaujinkite programą, kad ją užpildytumėte.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Pačioje formoje kažkas netyčia pakeista. Atkurkite formą; jūsų atsakymai išlieka.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Ši eilutė panaši į formos valdymo kodą ir negali būti atsakyme. Pakeiskite ją.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML atsakyme neleidžiamas. Naudokite paprastą tekstą ir paprastą formatavimą.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Kodo blokas neuždarytas. Uždarykite jį su ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Atsakyme gali būti tik nuotraukos, kurias pridedate šioje formoje; paveikslėlio iš interneto negalima.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Atsakyme leidžiamos tik nuorodos, prasidedančios https://, ir el. pašto adresai.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Šis failas sukurtas su kita formos versija (versija {submission}; dabar galioja versija {published}). Patikrinkite savo atsakymus.',
+  'Punt {item}: {bericht}': 'Punktas {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Dabar jų yra {actual}; turi būti nuo {min} iki {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Dabar jų yra {actual}; gali būti daugiausia {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Dabar jų yra {actual}; turi būti bent {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Skaičius turi būti skaičiaus {step} kartotinis.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Skaičius turi būti nuo {min} iki {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Skaičius gali būti daugiausia {max}.',
+  'Het getal moet minstens {min} zijn.': 'Skaičius turi būti bent {min}.',
+  'De datum moet op of na {min} liggen.': 'Data turi būti {min} arba vėlesnė.',
+  'De datum moet op of vóór {max} liggen.':
+      'Data turi būti {max} arba ankstesnė.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}“ nėra data. Įrašykite datą kaip metai-mėnuo-diena, pavyzdžiui, 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Tai nėra tinkamas el. pašto adresas.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Tai nėra tinkamas interneto adresas. Pradėkite nuo https://.',
+  'Dit is geen geldig telefoonnummer.': 'Tai nėra tinkamas telefono numeris.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Tai nėra tinkamas Nyderlandų pašto kodas, pavyzdžiui, 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Čia telpa tik viena eilutė. Pašalinkite eilučių lūžius.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Naudokite tik šio klausimo žymimuosius langelius: vienas langelis kiekvienai parinkčiai.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Kiekvieną punktą rašykite savo eilutėje, su brūkšniu ar numeriu priekyje.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Lentelė nebėra teisinga: palikite antraštės eilutę tokią, kokia buvo, ir kiekvienoje eilutėje palikite tiek pat stulpelių.',
+  'Dezelfde foto staat hier twee keer.':
+      'Ta pati nuotrauka čia pasirodo du kartus.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Į šį lauką tinka tik nuotraukos, jokio laisvo teksto.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Jūsų sutikimo langelis pažeistas. Atkurkite formą.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Šis atsakymas neturi formos, kuri tinka šiam klausimui.',
   'Downloaden…': 'Atsisiųsti…',
   'Afbeelding opgeslagen als': 'Vaizdas išsaugotas kaip',
   '{naam}: ingesteld': '{naam}: sukonfigūruotas',

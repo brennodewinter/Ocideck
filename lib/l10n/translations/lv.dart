@@ -1625,6 +1625,591 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Team…': 'Komanda…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktori bez jums, kas ir katrā bundle, lai arī viņi varētu atvērt iesūtījumus. Jūs pievienojat kādu ar viņa redaktora karti un vēlreiz ievadāt šīs kartes pirkstu nospiedumu.',
+  'Er is nog niemand naast jou.': 'Bez jums vēl neviena nav.',
+  'Plak de kaart van de redacteur': 'Ielīmējiet redaktora karti',
+  'Kaart controleren': 'Pārbaudīt karti',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} karte. Ievadiet šīs kartes pirkstu nospiedumu, ko {naam} jums iedeva citā ceļā, piemēram, pa tālruni.',
+  'Redacteur verwijderen': 'Noņemt redaktoru',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Noņemt {naam} no komandas? Bundle, ko jau esat publicējis, paliek tādi, kādi ir, līdz publicējat vēlreiz; tas, kas jau aizzīmogots {naam}, šai personai paliek lasāms.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} ir pievienots. Publicējiet bundle vēlreiz, lai iekļautu {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} ir noņemts. Publicējiet bundle vēlreiz, lai izņemtu {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Vispirms izveidojiet savu redakcijas atslēgu sadaļā Redakcijas atslēga….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Jūsu redakcijas atslēgu nevar izmantot. Skatiet sadaļā Redakcijas atslēga….',
+  'Dit is geen redacteurskaart.': 'Šī nav redaktora karte.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Šī karte ir no jaunākas OciDeck versijas. Atjauniniet OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Karte satur kaut ko nepieļaujamu. Lūdziet redaktoram jaunu karti.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Šis pirkstu nospiedums neatbilst kartei: karte ir mainīta vai nav no tā, kuru domājat. Vēlreiz lūdziet redaktoram pirkstu nospiedumu un karti.',
+  'Dit is je eigen kaart.': 'Šī ir jūsu pašu karte.',
+  'Deze redacteur staat er al.': 'Šis redaktors jau ir komandā.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Komanda ir pilna: bundle nes ne vairāk kā 64 organizatorus, ieskaitot jūs.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Faila team.json darba mapē nevar nolasīt. Nekas nav mainīts; salabojiet vai dzēsiet to.',
+  'Het team kon niet worden opgeslagen.': 'Komandu neizdevās saglabāt.',
+  'Deze redacteur staat niet meer in het team.':
+      'Šī redaktora komandā vairs nav.',
+  'Naast jou in de bundel: {namen}.': 'Bez jums bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Vispirms pārbaudiet atkopšanas atslēgu sadaļā Redakcijas atslēga… vai pievienojiet otru redaktoru sadaļā Komanda…. Bez ceļa atpakaļ visi iesūtījumi kļūs nelasāmi, ja šī ierīce salūzīs.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Faila team.json darba mapē nevar nolasīt. Nekas netiek parakstīts.',
+  'Redacteurskaart maken…': 'Izveidot redaktora karti…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Ar redaktora karti veidlapas īpašnieks pievieno jūs bundle, lai arī jūs varētu atvērt iesūtījumus. Karti drīkst nosūtīt pa e-pastu.',
+  'Jouw naam op de kaart': 'Jūsu vārds kartē',
+  'Kaart maken': 'Izveidot karti',
+  'Kaart kopiëren': 'Kopēt karti',
+  'Vingerafdruk van de kaart': 'Kartes pirkstu nospiedums',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Dodiet īpašniekam šo pirkstu nospiedumu citā ceļā nekā karti, piemēram, pa tālruni. Viņš to ievada vēlreiz, pirms pievieno jūs.',
+  'Verzegeld opslaan…': 'Saglabāt aizzīmogotu…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Šifrēts fails (.zip.age), ko var atvērt tikai organizators. Tam jums vajadzīgs bundle fails un pirkstu nospiedums no uzaicinājuma.',
+  'Kies het bundelbestand van de organisator':
+      'Izvēlieties organizatora bundle failu',
+  'Vingerafdruk van de organisator': 'Organizatora pirkstu nospiedums',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Ievadiet pirkstu nospiedumu no uzaicinājuma. Tā tīši nav bundle failā: tā varat pārbaudīt, no kā tas nāk.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Tas nav pirkstu nospiedums. Tas sastāv no 52 rakstzīmēm, parasti pa četrām grupās.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Šis fails nav bundle, ko OciDeck var nolasīt.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Šī veidlapa vai šis bundle ir no jaunākas OciDeck versijas. Atjauniniet OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Pirkstu nospiedums neatbilst šim bundle: veidlapa nenāk no tā, ko norāda uzaicinājums. Pārbaudiet pirkstu nospiedumu un bundle failu.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundle paraksts nav pareizs: tas ir mainīts vai nav no tā, ko norāda pirkstu nospiedums. Lūdziet organizatoram jaunu bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Šis bundle nepieder šai veidlapai. Izmantojiet bundle failu, kas pieder tieši šai veidlapai.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Šī bundle derīgums ir beidzies. Lūdziet organizatoram jaunu.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Šis bundle ir vecāks par bundle, ko iepriekš saņēmāt no šī organizatora. Lūdziet organizatoram jaunāko.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle satur kaut ko nepieļaujamu. Lūdziet organizatoram jaunu bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Šī veidlapa ir slēgta: pēdējā diena bija {datum}. Sazinieties ar organizatoru.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Iesūtījums ir lielāks, nekā organizators atļauj ({mb} MB). Noņemiet fotoattēlu vai samaziniet vienu.',
+  'De inzending kon niet worden verzegeld.': 'Iesūtījumu neizdevās aizzīmogot.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Saglabāts aizzīmogots kā {naam}, atvērt var tikai: {organisatoren}.',
+  'Bundel publiceren…': 'Publicēt bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle ir tas, kam aizpildītājs tic par jūsu redakciju: kādai atslēgai aizzīmogot un pie kura teksta tas pieder. To saglabā blakus veidlapai.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Darba mapē nav veidlapas, kurai varētu izveidot bundle.',
+  'Naam voor de invuller': 'Vārds aizpildītājam',
+  'Geldig tot (jjjj-mm-dd)': 'Derīgs līdz (gggg-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Pēdējā diena, kad aizpildītājs tic šim bundle. Ne pirms veidlapas slēgšanas dienas.',
+  'Bundel maken': 'Izveidot bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle izveidots (kārtas numurs {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Dodiet aizpildītājam pirkstu nospiedumu citā ceļā nekā bundle failu, piemēram, uzaicinājumā. Kam ir tikai bundle fails, tas nevar pārbaudīt, no kā tas nāk.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Šai platformai nav atslēgu saišķa redakcijas atslēgai; bundle šeit nevar parakstīt.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Redakcijas atslēgas vēl nav. Izveidojiet to sadaļā Redakcijas atslēga…, pirms publicējat bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Atslēgu saišķi nevar nolasīt. Nekas netika parakstīts.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Saglabāto redakcijas atslēgu nevar nolasīt. Dzēsiet to sadaļā Redakcijas atslēga… un atjaunojiet no atkopšanas atslēgas.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Šīs veidlapas bundle darba mapē nevar nolasīt, vai arī tas nepieder pie pārējiem. Tad kārtas numuru nevar noteikt un nekas netiek parakstīts. Pārbaudiet: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Ievadiet vārdu, kas nav garāks par 80 rakstzīmēm.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Derīgs līdz jābūt esošam datumam formātā gggg-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Derīgs līdz nedrīkst būt pirms veidlapas slēgšanas dienas.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle neizdevās izveidot ({veld}). Pārbaudiet, vai veidlapā ir norādīta derīga slēgšanas diena un glabāšanas termiņš.',
+  'formulier': 'veidlapa',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle neizdevās saglabāt darba mapē.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Izveidojiet un parakstiet bundle, kam aizpildītājs tic par jūsu redakciju.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: aizzīmogotā pakotne atvērta un importēta.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: šī pakotne ir aizzīmogota, un šai platformai nav atslēgu saišķa redakcijas atslēgai.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: šī pakotne ir aizzīmogota, un vēl nav redakcijas atslēgas, ar ko to atvērt. Izveidojiet to sadaļā Redakcijas atslēga… vai atjaunojiet no atkopšanas atslēgas.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: šī pakotne ir aizzīmogota, un atslēgu saišķi nevar nolasīt. Nekas netika mēģināts.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: šī pakotne ir aizzīmogota, un saglabāto redakcijas atslēgu nevar nolasīt. Dzēsiet to sadaļā Redakcijas atslēga… un atjaunojiet no atkopšanas atslēgas.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: šī pakotne nav aizzīmogota jūsu redakcijas atslēgai.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: šī pakotne ir mainīta vai pārtraukta, un tā netiks atvērta.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: šī pakotne ir lielāka, nekā var būt iesūtījums.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: saglabātā redakcijas atslēga nav atslēga, ko OciDeck var izmantot.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: nav aizzīmogota pakotne, ko OciDeck var nolasīt.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Aizzīmogotu failu (.zip.age) atver ar jūsu redakcijas atslēgu.',
+  'Herstelsleutel controleren': 'Pārbaudīt atkopšanas atslēgu',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redakcijas atslēga izveidota. Tagad pierakstiet atkopšanas atslēgu.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Atslēgu saišķis atslēgu nepieņēma. Nekas netika izveidots.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Redakcijas atslēga jau pastāv. Tā netika aiztikta.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Atslēgu saišķi nevarēja nolasīt. Nekas netika pieņemts un nekas netika izveidots.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Atslēgu saišķī ir kaut kas, kas nav redakcijas atslēga. Tas netika pārrakstīts.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Šai platformai nav atslēgu saišķa.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Pareizi: atkopšanas atslēga ir pārbaudīta.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Šī ir derīga atkopšanas atslēga, bet ne šīs redakcijas atslēgas atkopšanas atslēga.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Atkopšanas atslēga ir pareiza, bet to nevarēja saglabāt.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nav redakcijas atslēgas, ar ko salīdzināt.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Šī nav redakcijas atslēgas atkopšanas atslēga.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Tajā ir drukas kļūda: kontrolsumma nesakrīt.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Šī atkopšanas atslēga ir no jaunākas OciDeck versijas.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Šī atkopšanas atslēga ir izveidota kaut kam citam.',
+  'Hersteld uit de herstelsleutel.': 'Atjaunots no atkopšanas atslēgas.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Atslēgu saišķis atslēgu nepieņēma. Nekas netika atjaunots.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Saglabāt redakcijas atslēgu kā age atslēgas failu',
+  'Het bestand kon niet worden opgeslagen.': 'Failu nevarēja saglabāt.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Saglabāts kā {pad}. Kam ir šis fails, tas var atvērt visu.',
+  'Redactiesleutel verwijderd.': 'Redakcijas atslēga izdzēsta.',
+  'Redactiesleutel': 'Redakcijas atslēga',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Šai platformai nav atslēgu saišķa. Redakcijas atslēgu šeit nevar glabāt; izmantojiet darbvirsmas lietotni.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Atslēgu saišķi nevarēja nolasīt (bloķēts vai piekļuve liegta). Nekas netika pieņemts un nekas netika izveidots.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Atslēgu saišķī ir kaut kas, kas nav redakcijas atslēga. Tas netika pārrakstīts. Izdzēsiet to un atjaunojiet atslēgu no savas atkopšanas atslēgas.',
+  'Redactiesleutel verwijderen…': 'Dzēst redakcijas atslēgu…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Redakcijas atslēga atver aizzīmogotos iesūtījumus un paraksta jūsu veidlapu pakotnes. Tā atrodas šīs operētājsistēmas atslēgu saišķī. Ja zaudēsiet visas redakcijas atslēgas, visi vēl neiegūtie iesūtījumi kļūs nelasāmi: tā ir cena serverim, kas neko nevar nolasīt.',
+  'Redactiesleutel aanmaken': 'Izveidot redakcijas atslēgu',
+  'Herstellen uit herstelsleutel…': 'Atjaunot no atkopšanas atslēgas…',
+  'Vingerafdruk': 'Pirkstu nospiedums',
+  'Ontvanger (age)': 'Saņēmējs (age)',
+  'Aangemaakt op {datum}.': 'Izveidota {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Atkopšanas atslēga ir pārbaudīta.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Atkopšanas atslēga vēl nav pārbaudīta: pierakstiet to un ievadiet vēlreiz.',
+  'Herstelsleutel tonen…': 'Rādīt atkopšanas atslēgu…',
+  'Vingerafdruk kopiëren': 'Kopēt pirkstu nospiedumu',
+  'Exporteren als age-sleutelbestand…': 'Eksportēt kā age atslēgas failu…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Pierakstiet šo atkopšanas atslēgu un glabājiet to drošā vietā, ārpus šīs ierīces. Kam tā ir, tas var atvērt visus iesūtījumus un parakstīt pakotnes jūsu vārdā. Ja zaudēsiet šo ierīci, tā ir viss, kas paliek.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Ievadiet atkopšanas atslēgu šeit vēlreiz',
+  'Later': 'Vēlāk',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Ievadiet vai ielīmējiet atkopšanas atslēgu. Ko ievadīsiet, tiks ievietots atslēgu saišķī kā redakcijas atslēga; nekas netiek pārrakstīts.',
+  'Herstelsleutel': 'Atkopšanas atslēga',
+  'Redactiesleutel verwijderen': 'Dzēst redakcijas atslēgu',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Atslēga tiek izdzēsta no atslēgu saišķa un var atgriezties tikai no atkopšanas atslēgas. Ja tās jums nav, iesūtījumi, kas aizzīmogoti tikai šai atslēgai, paliek nelasāmi uz visiem laikiem.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Atslēga, kas atver aizzīmogotos iesūtījumus un paraksta pakotnes.',
+  'Redactiesleutel…': 'Redakcijas atslēga…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Darba kopija ir izmesta. Tas, kas ienāca, tiek vērtēts no jauna.',
+  'Er is geen werkkopie.': 'Darba kopijas nav.',
+  'De werkkopie kon niet worden weggegooid.': 'Darba kopiju nevarēja izmest.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Dzēš darba kopiju. Tas, kas ienāca, paliek un tiek vērtēts no jauna.',
+  'Werkkopie weggooien…': 'Izmest darba kopiju…',
+  'Werkkopie weggooien': 'Izmest darba kopiju',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Darba kopija ar uzlabojumiem tiek izdzēsta, un to nevar atgūt. Tas, kas ienāca, paliek un tiek vērtēts no jauna. Ja darba kopija vēl ir atvērta cilnē, vispirms aizveriet to.',
+  'Weggooien': 'Izmest',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Šis iesūtījums ir atsaukts, tāpēc tas neiekļūst nevienā nodaļā.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Šo iesūtījumu nevar nolasīt, vai arī veidlapas, kurai tas iesniegts, nav darba mapē.',
+  'Het controledocument kon niet worden geschreven.':
+      'Pārbaudes dokumentu nevarēja ierakstīt.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Jūsu ieguldījums grāmatā: lūdzu, pārbaudiet to',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Lūk, jūsu ieguldījums tādā veidā, kādā tas parādīsies grāmatā (skatiet pielikumu). Vai viss ir pareizi? Atbildiet ‘piekrītu’ vai ar saviem labojumiem līdz {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Ziņojums ir gatavs jūsu pasta programmā. Pievienojiet PDF un nosūtiet to.',
+  'Controle door de maker…': 'Autora pārbaude…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Pārbaudes dokuments ir šī viena iesūtījuma nodaļa. Eksportējiet to kā PDF (izvēlieties pilno profilu), pievienojiet PDF ziņojumam un nosūtiet to. Ja autors atbild ‘piekrītu’, pats iestatiet statusu maker-approved: šī atbilde arī apliecina, ka ieguldījums patiešām ir no šīs personas.',
+  'Controledocument maken en openen':
+      'Izveidot pārbaudes dokumentu un atvērt to',
+  'E-mailadres van de maker': 'Autora e-pasta adrese',
+  'Antwoord vóór (jjjj-mm-dd)': 'Atbildēt līdz (gggg-mm-dd)',
+  'Mail schrijven': 'Rakstīt ziņojumu',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Šī veidlapa nepazīst statusu maker-check-sent, tāpēc to šeit nevar iestatīt.',
+  'Controle verstuurd': 'Pārbaude nosūtīta',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Izveido šī iesūtījuma nodaļu un sagatavo ziņojumu, ar kuru autors to pārbauda.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Šī iesūtījuma nav reģistrā. Salabojiet overview.md un mēģiniet vēlreiz.',
+  'Kies het hoofdstuksjabloon': 'Izvēlēties nodaļas veidni',
+  'Kies eerst een hoofdstuksjabloon.': 'Vispirms izvēlieties nodaļas veidni.',
+  'Kies minstens één status.': 'Izvēlieties vismaz vienu statusu.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Grāmata sastādīta. Nodaļas: {n}. Fotogrāfijas: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Atsauktie un tāpēc izlaistie: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Izlaistie (cita versija vai nelasāmi): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotogrāfijas, kuru darba mapē trūka: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Nosaukumā izmantojiet tikai burtus, ciparus, defises un pasvītras (ne vairāk kā 64 rakstzīmes).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Grāmata ar šādu nosaukumu jau pastāv. Izvēlieties citu nosaukumu.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Veidnē minēti lauki, kuru veidlapā nav: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Grāmatā nav ko ievietot: nav neviena iesūtījuma ar izvēlēto statusu. Atsauktie: {w}; izlaistie: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Reģistru nevar nolasīt. Salabojiet overview.md.',
+  'Het boek kon niet worden geschreven.': 'Grāmatu nevarēja ierakstīt.',
+  'Boek samenstellen…': 'Sastādīt grāmatu…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Grāmata nonāk darba mapes mapē book un paliek parasts dokuments, ko pēc tam varat rediģēt paši.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Darba mapē nav neviennas izmantojamas veidlapas.',
+  'Formulier': 'Veidlapa',
+  'Hoofdstuksjabloon': 'Nodaļas veidne',
+  'Nog geen sjabloon gekozen.': 'Veidne vēl nav izvēlēta.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Veidnē {veld-id} apzīmē atbildi uz šo lauku.',
+  'Hoofdstuksjabloon kiezen…': 'Izvēlēties nodaļas veidni…',
+  'Welke inzendingen?': 'Kuri iesūtījumi?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Grāmatā nonāk tikai iesūtījumi ar kādu no šiem statusiem. Atsauktie iesūtījumi vienmēr paliek ārpus tās.',
+  'Ordenen op': 'Kārtot pēc',
+  'Groeperen op': 'Grupēt pēc',
+  'Naam van het boek': 'Grāmatas nosaukums',
+  'Boek openen': 'Atvērt grāmatu',
+  'Samenstellen': 'Sastādīt',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Darba kopiju neizdevās izveidot.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Atver iesūtījuma kopiju uzlabošanai. Saņemtais paliek nemainīts.',
+  'Werkkopie openen': 'Atvērt darba kopiju',
+  'Status gewijzigd naar {status}.': 'Statuss nomainīts uz {status}.',
+  'Intrekking opgeslagen.': 'Atsaukums saglabāts.',
+  'Intrekking ongedaan gemaakt.': 'Atsaukums atcelts.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Iesūtījums dzēsts; ieraksts paliek.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Iesūtījums dzēsts, bet reģistru neizdevās atjaunināt. Pārlabojiet overview.md ar roku.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Iesūtījums darba mapē netika atrasts.',
+  'De inzending kon niet worden verwijderd.': 'Iesūtījumu neizdevās dzēst.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Reģistru nevar nolasīt. Salabojiet overview.md; nekas nav mainīts.',
+  'Het register kon niet worden bijgewerkt.': 'Reģistru neizdevās atjaunināt.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Šo izmaiņu neizdevās veikt: iesūtījuma nav reģistrā.',
+  'Status wijzigen': 'Mainīt statusu',
+  'Intrekking ongedaan maken': 'Atcelt atsaukumu',
+  'Intrekken…': 'Atsaukt…',
+  'Verwijderen…': 'Dzēst…',
+  'Inzending intrekken': 'Atsaukt iesūtījumu',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Ievadiet dienu, kad iesūtītājs atsauca iesūtījumu. Atsaukts iesūtījums nekad neiekļūst grāmatā.',
+  'Dag (jjjj-mm-dd)': 'Diena (gggg-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Nederīga diena. Izmantojiet gads-mēnesis-diena, piemēram, {voorbeeld}.',
+  'Inzending verwijderen': 'Dzēst iesūtījumu',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Šī iesūtījuma atbildes, darba kopija un fotoattēli tiek dzēsti no darba mapes. Paliek tikai minimāls ieraksts: numurs, saņemšanas un piekrišanas dienas un statuss. To nevar atcelt.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Paliek arī tas, ko veidlapa iepriekš paziņoja: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Ar šo iesūtījumu kaut kas nav kārtībā.',
+  'Verplicht, maar leeg gelaten.': 'Obligāts, bet atstāts tukšs.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} vārdi; vajag vismaz {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} vārdi; atļauti ne vairāk kā {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} rakstzīmes; vajag vismaz {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} rakstzīmes; atļautas ne vairāk kā {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” nav opciju sarakstā.',
+  '“{value}” is geen getal.': '“{value}” nav skaitlis.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” nav datums formā gads-mēnesis-diena.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotoattēls {actual} pikseļu platumā; prasīti {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Iesūtījumā trūkst fotoattēla faila.',
+  'De beschrijving van de foto ontbreekt.': 'Trūkst fotoattēla apraksta.',
+  'De maker van de foto ontbreekt.': 'Trūkst fotoattēla autora.',
+  'De foto is niet gecontroleerd.': 'Fotoattēls netika pārbaudīts.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC fotoattēls: nav pārbaudīts vai attīrīts; tajā var būt atrašanās vieta.',
+  'Toestemming niet gegeven.': 'Piekrišana nav dota.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Atbilde satur rindu, kas izskatās pēc veidlapas vadības koda.',
+  'Het antwoord bevat HTML.': 'Atbilde satur HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Atbilde satur neaizvērtu koda bloku.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Atbilde norāda uz attēlu, kas nepieder šim iesūtījumam.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Atbilde satur saiti, kas nav atļauta.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Šīs veidlapas vai šīs versijas nav darba mapē.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Iesūtītājs strādāja ar citu veidlapas tekstu nekā publicēto.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Piekrišana manifestā neatbilst publicētajai veidlapai.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Veidlapas teksts mainīts ārpus atbildēm.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Veidlapas teksts mainīts pie šī lauka.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Šī lauka publicētajā veidlapā nav.',
+  'Dit veld ontbreekt in de inzending.': 'Šī lauka iesūtījumā trūkst.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Iesūtījums no versijas {submission}; publicēta ir versija {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Veidlapai vajadzīga jaunāka OciDeck versija.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Publicētā veidlapa darba mapē nav lietojama.',
+  'De inzending hoort bij een ander formulier.':
+      'Iesūtījums pieder citai veidlapai.',
+  'De opbouw van de inzending is beschadigd.':
+      'Iesūtījuma struktūra ir bojāta.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Reģistru nevar nolasīt. Salabojiet overview.md; iesūtījumi zemāk redzami bez reģistra datiem.',
+  'Nog geen inzendingen.': 'Iesūtījumu vēl nav.',
+  'Om na te lopen': 'Jāpārbauda',
+  'Verwijderd': 'Dzēsts',
+  'Zonder regel in het register': 'Bez rindas reģistrā',
+  'Ontvangen {datum}': 'Saņemts {datum}',
+  'Ingetrokken {datum}': 'Atsaukts {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Šī iesūtījuma saturs ir dzēsts; palicis tikai ieraksts.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Šo iesūtījumu nevar nolasīt. Pārbaudiet failus darba mapē.',
+  'Beoordeeld tegen {formulier}.': 'Novērtēts attiecībā pret {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Novērtējums attiecas uz darba kopiju (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nav punktu, ko pārbaudīt.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotoattēli, ko neviena atbilde nemin: {n}.',
+  'Inzendingen': 'Iesūtījumi',
+  'Werkmap': 'Darba mape',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Darba mape vēl nav izvēlēta. Izvēlieties mapi, kurā glabāsies iesūtījumi un reģistrs.',
+  'Werkmap kiezen…': 'Izvēlēties darba mapi…',
+  'Kies de werkmap voor inzendingen': 'Izvēlieties darba mapi iesūtījumiem',
+  'Formulieren': 'Veidlapas',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Veidlapa vēl nav pievienota. Pievienojiet veidlapu tādu, kādu to publicējāt: iesūtījums tiek pārbaudīts pret to.',
+  'Formulier toevoegen…': 'Pievienot veidlapu…',
+  'Kies het formulier om toe te voegen': 'Izvēlieties pievienojamo veidlapu',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Šis fails nav veidlapa, ko varētu publicēt.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Šī veidlapa jau ir ar citu tekstu. Cits teksts ir jauna versija: piešķiriet veidlapai augstāku versijas numuru.',
+  'Formulier toegevoegd: {naam}.': 'Veidlapa pievienota: {naam}.',
+  'Dit formulier stond er al.': 'Šī veidlapa jau bija.',
+  'Het formulier kon niet worden opgeslagen.': 'Veidlapu neizdevās saglabāt.',
+  'Inzendingen in de werkmap: {n}': 'Iesūtījumi darba mapē: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Parasts zip pārsūtīšanas laikā netiek šifrēts.',
+  'Pakketten binnenhalen…': 'Importēt pakotnes…',
+  'Kies de pakketten om binnen te halen': 'Izvēlieties importējamās pakotnes',
+  'Register openen': 'Atvērt reģistru',
+  '{naam}: binnengehaald.': '{naam}: importēts.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importēts, bet ir punkti, kas jāpārbauda.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importēts, bet reģistru neizdevās atjaunināt. Pārbaudiet overview.md.',
+  '{naam}: stond er al.': '{naam}: jau bija.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: nav iesūtījuma pakotne, ko OciDeck var nolasīt.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: šī veidlapa nav pievienota vai nav šajā versijā. Vispirms pievienojiet veidlapu.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: neizdevās saglabāt darba mapē.',
+  'Formulieren en inzendingen': 'Veidlapas un iesūtījumi',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importējiet veidlapas iesūtījumus, pārbaudiet tos pret publicēto veidlapu un glabājiet ar reģistru. Veidlapas aizpildīšana darbojas arī tad, ja tas ir izslēgts. Pēc noklusējuma izslēgts.',
+  'Inzending opslaan als zip…': 'Saglabāt iesūtījumu kā zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip fails ar jūsu atbildēm un fotoattēliem, ko nosūtīt organizatoram pa e-pastu.',
+  'Inzending opgeslagen als {naam}.': 'Iesūtījums saglabāts kā {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Izvēlieties veidlapu tādu, kādu to saņēmāt',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Šī nav veidlapa, kurai pieder jūsu atbildes. Izvēlieties failu, ko saņēmāt no organizatora.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Fotoattēlu nevarēja nolasīt: {pad}. Pievienojiet to vēlreiz.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Iesūtījums neietilpst vienā pakotnē: pārāk daudz fotoattēlu vai pārāk liels fotoattēls.',
+  'De inzending kon niet worden opgeslagen.': 'Iesūtījumu nevarēja saglabāt.',
+  'Inzending opslaan': 'Saglabāt iesūtījumu',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Atrašanās vietas dati ir noņemti no šīs fotogrāfijas.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Šo fotogrāfiju neizdevās pievienot. Izvēlieties fotogrāfijas JPEG, PNG, WebP vai HEIC failu.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Vispirms saglabājiet dokumentu, lai pievienotu fotogrāfijas.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck var importēt šo failu kā jaunu dokumentu.',
+  'Kies een datum': 'Izvēlēties datumu',
+  'Anders, namelijk:': 'Cits, proti:',
+  'Punt {n}': 'Punkts {n}',
+  'Punt {n} verwijderen': 'Noņemt punktu {n}',
+  'Rij {n} verwijderen': 'Noņemt rindu {n}',
+  'Foto {n} verwijderen': 'Noņemt fotogrāfiju {n}',
+  'Wat is er te zien op de foto?': 'Kas redzams fotogrāfijā?',
+  'Van wie is de foto?': 'Kam pieder fotogrāfija?',
+  'Foto toevoegen': 'Pievienot fotogrāfiju',
+  'Verplicht': 'Obligāts',
+  'Alles is ingevuld.': 'Viss ir aizpildīts.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Vēl {n} jāizdara, pirms varat nosūtīt:',
+  'klaar': 'gatavs',
+  '{n} open': '{n} atvērti',
+  'Dit formulier kan niet worden ingevuld.': 'Šo veidlapu nevar aizpildīt.',
+  'Naar de bron': 'Uz avotu',
+  'Woorden': 'Vārdi',
+  'Tekens': 'Rakstzīmes',
+  'Keuzes': 'Izvēles',
+  'Rijen': 'Rindas',
+  'Foto’s': 'Fotogrāfijas',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (vismaz {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (ne vairāk kā {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (vismaz {min}, ne vairāk kā {max})',
+  'Invullen': 'Aizpildīt',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Ar šo veidlapu kaut kas nav kārtībā. Sazinieties ar to, kurš to izveidoja.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Šis lauks ir obligāts. Aizpildiet to, lai varētu nosūtīt.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Jūs uzrakstījāt {actual} vārdus; nepieciešami vismaz {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Jūs uzrakstījāt {actual} vārdus; atļauti ne vairāk kā {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Jūs uzrakstījāt {actual} rakstzīmes; nepieciešamas vismaz {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Jūs uzrakstījāt {actual} rakstzīmes; atļautas ne vairāk kā {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” nav sarakstā. Izvēlieties vienu no iespējām.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” nav skaitlis. Izmantojiet tikai ciparus, vajadzības gadījumā ar komatu vai punktu decimāldaļām.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Šīs fotogrāfijas platums ir {actual} pikseļi; šeit tiek prasīti {min}. Visticamāk, tā tika samazināta, sūtot caur ziņojumapmaiņas lietotni. Ja jums joprojām ir oriģināls, izmantojiet to. Ja nav, tomēr nosūtiet to: organizators sazināsies ar jums.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Šī fotogrāfija ir {actual} MB; maksimums ir {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Šī faila saturs neatbilst tā tipam.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Šis faila tips šeit nav atļauts.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Šīs fotogrāfijas failu vairs nevar atrast. Pievienojiet fotogrāfiju vēlreiz.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Vienā īsā teikumā aprakstiet, kas redzams fotogrāfijā.',
+  'Geef aan van wie de foto is.': 'Norādiet, kam pieder fotogrāfija.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Šī fotogrāfija vēl nav pārbaudīta. Mazliet uzgaidiet vai pievienojiet to vēlreiz.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Šī fotogrāfija ir HEIC fails. OciDeck to šeit nevar ne pārbaudīt, ne notīrīt, tāpēc tas tiek nosūtīts tāds, kāds tas ir. Tajā var būt norādīts, kur fotogrāfija uzņemta. Ja nevēlaties to dalīties, kameras iestatījumos izvēlieties “Visvairāk saderīgs” vai kopīgojiet fotogrāfiju kā JPEG un pievienojiet to vēlreiz.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Šajā fotogrāfijā redzamas {actual} sejas; tika gaidītas {expected}. Tas ir tikai atgādinājums.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Atzīmējiet rūtiņu, lai piekristu; bez piekrišanas nosūtīt nevar.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Šai veidlapai nepieciešama jaunāka OciDeck versija. Atjauniniet lietotni, lai to aizpildītu.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Pašā veidlapā kaut kas nejauši mainīts. Atjaunojiet veidlapu; jūsu atbildes paliek.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Šī rinda izskatās pēc veidlapas vadības koda, un tai nedrīkst būt atbildē. Mainiet to.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML atbildē nav atļauts. Izmantojiet parastu tekstu un vienkāršu formatējumu.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Koda bloks nav aizvērts. Aizveriet to ar ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Atbildē var būt tikai fotogrāfijas, ko pievienojat šajā veidlapā; attēls no interneta nav atļauts.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Atbildē atļautas tikai saites, kas sākas ar https://, un e-pasta adreses.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Šis fails izveidots ar citu veidlapas versiju ({submission}. versija; tagad ir spēkā {published}. versija). Pārbaudiet savas atbildes.',
+  'Punt {item}: {bericht}': 'Punkts {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Pašlaik to ir {actual}; jābūt no {min} līdz {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Pašlaik to ir {actual}; drīkst būt ne vairāk kā {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Pašlaik to ir {actual}; jābūt vismaz {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Skaitlim jābūt skaitļa {step} daudzkārtnim.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Skaitlim jābūt no {min} līdz {max}.',
+  'Het getal mag hoogstens {max} zijn.':
+      'Skaitlis drīkst būt ne lielāks par {max}.',
+  'Het getal moet minstens {min} zijn.': 'Skaitlim jābūt vismaz {min}.',
+  'De datum moet op of na {min} liggen.': 'Datumam jābūt {min} vai vēlākam.',
+  'De datum moet op of vóór {max} liggen.': 'Datumam jābūt {max} vai agrākam.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” nav datums. Ierakstiet datumu kā gads-mēnesis-diena, piemēram, 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Šī nav derīga e-pasta adrese.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Šī nav derīga tīmekļa adrese. Sāciet ar https://.',
+  'Dit is geen geldig telefoonnummer.': 'Šis nav derīgs tālruņa numurs.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Šis nav derīgs Nīderlandes pasta indekss, piemēram, 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Šeit der tikai viena rinda. Noņemiet rindu pārtraukumus.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Izmantojiet tikai šī jautājuma izvēles rūtiņas: viena rūtiņa katrai iespējai.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Rakstiet katru punktu savā rindā, ar domuzīmi vai numuru priekšā.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabula vairs nav pareiza: atstājiet galvenes rindu tādu, kāda tā bija, un katrā rindā liciet vienādu skaitu kolonnu.',
+  'Dezelfde foto staat hier twee keer.':
+      'Tā pati fotogrāfija šeit parādās divreiz.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Šajā laukā pieder tikai fotogrāfijas, nevis atsevišķs teksts.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Jūsu piekrišanas rūtiņa ir bojāta. Atjaunojiet veidlapu.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Šai atbildei nav tās formas, kas atbilst šim jautājumam.',
   'Downloaden…': 'Lejupielādēt…',
   'Afbeelding opgeslagen als': 'Attēls saglabāts kā',
   '{naam}: ingesteld': '{naam}: iestatīts',

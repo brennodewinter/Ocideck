@@ -58,4 +58,13 @@ paths = [
   '''^lib/services/privacy/privacy_digital_rules\.dart$''',
   '''^test/privacy_[a-z_]+_test\.dart$''',
   '''^test/native_git_mirror_test\.dart$''',
+
+  # ── De age-testvectoren ────────────────────────────────────────────────────
+  # Het gepubliceerde C2SP-corpus (CCTV) bevat per vector een `identity: AGE-SECRET-KEY-1…`
+  # — de sleutel waarmee dat ene testbestand opent, publiek sinds het in CCTV staat, en
+  # nergens anders mee te openen. Gitleaks heeft er een regel voor en vond er 98.
+  # Alleen die map, en alleen de bestanden met een vectornaam (geen `.md`): wie hier een
+  # eigen sleutel in zet, loopt gewoon tegen de poort aan. `form_seal_vectors_test`
+  # rekent elk bestand na tegen `SHA256SUMS`, dus er komt hier ook niets ongemerkt bij.
+  '''^packages/ocideck_form_core/test/fixtures/age_testkit/[a-z0-9_]+$''',
 ]

@@ -667,6 +667,606 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Die Redakteure neben dir, die in jedem Bundle stehen, damit auch sie die Einsendungen öffnen können. Du fügst jemanden mit seiner Redakteurskarte hinzu und tippst den Fingerabdruck dieser Karte zurück.',
+  'Er is nog niemand naast jou.': 'Außer dir ist noch niemand dabei.',
+  'Plak de kaart van de redacteur': 'Füge die Karte des Redakteurs ein',
+  'Kaart controleren': 'Karte prüfen',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karte von {naam}. Tippe den Fingerabdruck dieser Karte ein, den {naam} dir auf einem anderen Weg gegeben hat, zum Beispiel am Telefon.',
+  'Redacteur verwijderen': 'Redakteur entfernen',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} aus dem Team entfernen? Bundles, die du schon veröffentlicht hast, bleiben, wie sie sind, bis du erneut veröffentlichst; was schon für {naam} verschlüsselt wurde, bleibt für diese Person lesbar.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} wurde hinzugefügt. Veröffentliche das Bundle erneut, um {naam} aufzunehmen.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} wurde entfernt. Veröffentliche das Bundle erneut, um {naam} herauszunehmen.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Erstelle zuerst deinen eigenen Redaktionsschlüssel unter Redaktionsschlüssel….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Dein Redaktionsschlüssel ist nicht verwendbar. Sieh unter Redaktionsschlüssel… nach.',
+  'Dit is geen redacteurskaart.': 'Das ist keine Redakteurskarte.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Diese Karte stammt aus einer neueren Version von OciDeck. Aktualisiere OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Die Karte enthält etwas, das nicht zulässig ist. Bitte den Redakteur um eine neue Karte.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Dieser Fingerabdruck passt nicht zur Karte: Die Karte wurde verändert oder ist nicht von dem, den du meinst. Bitte den Redakteur erneut um den Fingerabdruck und die Karte.',
+  'Dit is je eigen kaart.': 'Das ist deine eigene Karte.',
+  'Deze redacteur staat er al.': 'Dieser Redakteur ist schon im Team.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Das Team ist voll: Ein Bundle trägt höchstens 64 Organisatoren, dich eingerechnet.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Die Datei team.json im Arbeitsordner lässt sich nicht lesen. Es wurde nichts geändert; repariere oder lösche sie.',
+  'Het team kon niet worden opgeslagen.':
+      'Das Team konnte nicht gespeichert werden.',
+  'Deze redacteur staat niet meer in het team.':
+      'Dieser Redakteur ist nicht mehr im Team.',
+  'Naast jou in de bundel: {namen}.': 'Neben dir im Bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Prüfe zuerst deinen Wiederherstellungsschlüssel unter Redaktionsschlüssel… oder füge unter Team… einen zweiten Redakteur hinzu. Ohne Weg zurück sind alle Einsendungen unlesbar, wenn dieses Gerät kaputtgeht.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Die Datei team.json im Arbeitsordner lässt sich nicht lesen. Es wird nichts signiert.',
+  'Redacteurskaart maken…': 'Redakteurskarte erstellen…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Mit einer Redakteurskarte fügt dich der Eigentümer eines Formulars zum Bundle hinzu, damit auch du die Einsendungen öffnen kannst. Die Karte darf per E-Mail verschickt werden.',
+  'Jouw naam op de kaart': 'Dein Name auf der Karte',
+  'Kaart maken': 'Karte erstellen',
+  'Kaart kopiëren': 'Karte kopieren',
+  'Vingerafdruk van de kaart': 'Fingerabdruck der Karte',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Gib dem Eigentümer diesen Fingerabdruck auf einem anderen Weg als die Karte, zum Beispiel am Telefon. Er tippt ihn zurück, bevor er dich hinzufügt.',
+  'Verzegeld opslaan…': 'Verschlüsselt speichern…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Eine verschlüsselte Datei (.zip.age), die nur der Organisator öffnen kann. Dafür brauchst du die Bundle-Datei und den Fingerabdruck aus der Einladung.',
+  'Kies het bundelbestand van de organisator':
+      'Wähle die Bundle-Datei des Organisators',
+  'Vingerafdruk van de organisator': 'Fingerabdruck des Organisators',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Gib den Fingerabdruck aus der Einladung ein. Er steht bewusst nicht in der Bundle-Datei: So kannst du prüfen, von wem sie kommt.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Das ist kein Fingerabdruck. Er besteht aus 52 Zeichen, meist in Vierergruppen.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Diese Datei ist kein Bundle, das OciDeck lesen kann.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Dieses Formular oder dieses Bundle stammt aus einer neueren Version von OciDeck. Aktualisiere OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Der Fingerabdruck passt nicht zu diesem Bundle: Das Formular kommt nicht von dem, den die Einladung nennt. Prüfe den Fingerabdruck und die Bundle-Datei.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Die Signatur des Bundles stimmt nicht: Es wurde verändert oder stammt nicht von dem, den der Fingerabdruck nennt. Bitte den Organisator um ein neues Bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Dieses Bundle gehört nicht zu diesem Formular. Verwende die Bundle-Datei, die genau zu diesem Formular gehört.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Dieses Bundle ist abgelaufen. Bitte den Organisator um ein neues.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Dieses Bundle ist älter als eines, das du früher von diesem Organisator bekommen hast. Bitte den Organisator um das neueste.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Das Bundle enthält etwas, das nicht zulässig ist. Bitte den Organisator um ein neues Bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Dieses Formular ist geschlossen: Der letzte Tag war der {datum}. Wende dich an den Organisator.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Die Einsendung ist größer, als der Organisator erlaubt ({mb} MB). Entferne ein Foto oder verkleinere eines.',
+  'De inzending kon niet worden verzegeld.':
+      'Die Einsendung konnte nicht verschlüsselt werden.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Verschlüsselt gespeichert als {naam}, nur zu öffnen von: {organisatoren}.',
+  'Bundel publiceren…': 'Bundle veröffentlichen…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Das Bundle ist das, was ein Einsender über eure Redaktion glaubt: an welchen Schlüssel er verschlüsselt und zu welchem Text es gehört. Es wird neben dem Formular gespeichert.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Im Arbeitsordner gibt es kein Formular, für das ein Bundle erstellt werden könnte.',
+  'Naam voor de invuller': 'Name für den Einsender',
+  'Geldig tot (jjjj-mm-dd)': 'Gültig bis (JJJJ-MM-TT)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Der letzte Tag, an dem ein Einsender diesem Bundle glaubt. Nicht vor dem Abschlusstag des Formulars.',
+  'Bundel maken': 'Bundle erstellen',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle erstellt (laufende Nummer {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Gib dem Einsender den Fingerabdruck auf einem anderen Weg als die Bundle-Datei, zum Beispiel in der Einladung. Wer nur die Bundle-Datei hat, kann nicht prüfen, von wem sie kommt.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Diese Plattform hat keinen Schlüsselbund für den Redaktionsschlüssel; ein Bundle kann hier nicht signiert werden.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Es gibt noch keinen Redaktionsschlüssel. Erstelle unter Redaktionsschlüssel… einen, bevor du ein Bundle veröffentlichst.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Der Schlüsselbund lässt sich nicht lesen. Es wurde nichts signiert.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Der gespeicherte Redaktionsschlüssel lässt sich nicht lesen. Lösche ihn unter Redaktionsschlüssel… und stelle ihn aus deinem Wiederherstellungsschlüssel wieder her.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Ein Bundle dieses Formulars im Arbeitsordner lässt sich nicht lesen oder gehört nicht zu den anderen. Damit lässt sich die laufende Nummer nicht bestimmen, und es wird nichts signiert. Prüfe: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Gib einen Namen mit höchstens 80 Zeichen ein.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Gültig bis muss ein existierendes Datum sein, als JJJJ-MM-TT.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Gültig bis darf nicht vor dem Abschlusstag des Formulars liegen.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Das Bundle konnte nicht erstellt werden ({veld}). Prüfe, ob das Formular einen gültigen Abschlusstag und eine Aufbewahrungsfrist nennt.',
+  'formulier': 'Formular',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Das Bundle konnte nicht im Arbeitsordner gespeichert werden.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Erstelle und signiere das Bundle, dem ein Einsender über eure Redaktion glaubt.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: verschlüsseltes Paket geöffnet und importiert.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: Dieses Paket ist verschlüsselt, und diese Plattform hat keinen Schlüsselbund für den Redaktionsschlüssel.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: Dieses Paket ist verschlüsselt, und es gibt noch keinen Redaktionsschlüssel, um es zu öffnen. Erstelle unter Redaktionsschlüssel… einen oder stelle ihn aus deinem Wiederherstellungsschlüssel wieder her.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: Dieses Paket ist verschlüsselt, und der Schlüsselbund lässt sich nicht lesen. Es wurde nichts versucht.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: Dieses Paket ist verschlüsselt, und der gespeicherte Redaktionsschlüssel lässt sich nicht lesen. Lösche ihn unter Redaktionsschlüssel… und stelle ihn aus deinem Wiederherstellungsschlüssel wieder her.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: Dieses Paket wurde nicht für deinen Redaktionsschlüssel verschlüsselt.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: Dieses Paket wurde verändert oder abgeschnitten und wird nicht geöffnet.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: Dieses Paket ist größer, als eine Einsendung sein kann.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: Der gespeicherte Redaktionsschlüssel ist kein Schlüssel, den OciDeck verwenden kann.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: kein verschlüsseltes Paket, das OciDeck lesen kann.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Eine verschlüsselte Datei (.zip.age) wird mit deinem Redaktionsschlüssel geöffnet.',
+  'Herstelsleutel controleren': 'Wiederherstellungsschlüssel prüfen',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redaktionsschlüssel erstellt. Schreibe jetzt den Wiederherstellungsschlüssel auf.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Der Schlüsselbund hat den Schlüssel nicht angenommen. Es wurde nichts erstellt.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Es gibt bereits einen Redaktionsschlüssel. Er wurde nicht angerührt.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Der Schlüsselbund konnte nicht gelesen werden. Es wurde nichts angenommen und nichts erstellt.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Im Schlüsselbund liegt etwas, das kein Redaktionsschlüssel ist. Es wurde nicht überschrieben.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Diese Plattform hat keinen Schlüsselbund.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Richtig: Der Wiederherstellungsschlüssel wurde geprüft.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Das ist ein gültiger Wiederherstellungsschlüssel, aber nicht der zu diesem Redaktionsschlüssel.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Der Wiederherstellungsschlüssel stimmt, aber das konnte nicht gespeichert werden.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Es gibt keinen Redaktionsschlüssel zum Vergleichen.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Das ist nicht der Wiederherstellungsschlüssel eines Redaktionsschlüssels.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Da ist ein Tippfehler: Die Prüfsumme stimmt nicht.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Dieser Wiederherstellungsschlüssel stammt aus einer neueren Version von OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Dieser Wiederherstellungsschlüssel wurde für etwas anderes erstellt.',
+  'Hersteld uit de herstelsleutel.':
+      'Aus dem Wiederherstellungsschlüssel wiederhergestellt.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Der Schlüsselbund hat den Schlüssel nicht angenommen. Es wurde nichts wiederhergestellt.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Redaktionsschlüssel als age-Schlüsseldatei speichern',
+  'Het bestand kon niet worden opgeslagen.':
+      'Die Datei konnte nicht gespeichert werden.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Gespeichert als {pad}. Wer diese Datei hat, kann alles öffnen.',
+  'Redactiesleutel verwijderd.': 'Redaktionsschlüssel gelöscht.',
+  'Redactiesleutel': 'Redaktionsschlüssel',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Diese Plattform hat keinen Schlüsselbund. Der Redaktionsschlüssel kann hier nicht aufbewahrt werden; nutze die Desktop-App.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Der Schlüsselbund konnte nicht gelesen werden (gesperrt oder Zugriff verweigert). Es wurde nichts angenommen und nichts erstellt.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Im Schlüsselbund liegt etwas, das kein Redaktionsschlüssel ist. Es wurde nicht überschrieben. Lösche es und stelle den Schlüssel aus deinem Wiederherstellungsschlüssel wieder her.',
+  'Redactiesleutel verwijderen…': 'Redaktionsschlüssel löschen…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ein Redaktionsschlüssel öffnet die verschlüsselten Einsendungen und signiert die Bundles deiner Formulare. Er liegt im Schlüsselbund dieses Betriebssystems. Verlierst du alle Schlüssel der Redaktion, sind alle noch nicht abgeholten Einsendungen unlesbar: das ist der Preis eines Servers, der nichts lesen kann.',
+  'Redactiesleutel aanmaken': 'Redaktionsschlüssel erstellen',
+  'Herstellen uit herstelsleutel…':
+      'Aus Wiederherstellungsschlüssel wiederherstellen…',
+  'Vingerafdruk': 'Fingerabdruck',
+  'Ontvanger (age)': 'Empfänger (age)',
+  'Aangemaakt op {datum}.': 'Erstellt am {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Der Wiederherstellungsschlüssel wurde geprüft.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Der Wiederherstellungsschlüssel wurde noch nicht geprüft: Schreibe ihn auf und tippe ihn erneut ein.',
+  'Herstelsleutel tonen…': 'Wiederherstellungsschlüssel anzeigen…',
+  'Vingerafdruk kopiëren': 'Fingerabdruck kopieren',
+  'Exporteren als age-sleutelbestand…': 'Als age-Schlüsseldatei exportieren…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Schreibe diesen Wiederherstellungsschlüssel auf und bewahre ihn an einem sicheren Ort auf, getrennt von diesem Gerät. Wer ihn hat, kann alle Einsendungen öffnen und in eurem Namen Bundles signieren. Verlierst du dieses Gerät, ist er alles, was bleibt.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tippe den Wiederherstellungsschlüssel hier noch einmal ein',
+  'Later': 'Später',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Tippe oder füge den Wiederherstellungsschlüssel ein. Was du eingibst, wird als Redaktionsschlüssel im Schlüsselbund abgelegt; nichts wird überschrieben.',
+  'Herstelsleutel': 'Wiederherstellungsschlüssel',
+  'Redactiesleutel verwijderen': 'Redaktionsschlüssel löschen',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Der Schlüssel wird aus dem Schlüsselbund gelöscht und kann nur aus dem Wiederherstellungsschlüssel zurückkommen. Hast du ihn nicht, sind Einsendungen, die nur für diesen Schlüssel verschlüsselt wurden, für immer unlesbar.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Der Schlüssel, der verschlüsselte Einsendungen öffnet und Bundles signiert.',
+  'Redactiesleutel…': 'Redaktionsschlüssel…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Die Arbeitskopie wurde verworfen. Was eingegangen ist, wird wieder beurteilt.',
+  'Er is geen werkkopie.': 'Es gibt keine Arbeitskopie.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Die Arbeitskopie konnte nicht verworfen werden.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Löscht die Arbeitskopie. Was eingegangen ist, bleibt und wird wieder beurteilt.',
+  'Werkkopie weggooien…': 'Arbeitskopie verwerfen…',
+  'Werkkopie weggooien': 'Arbeitskopie verwerfen',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Die Arbeitskopie mit den Verbesserungen wird gelöscht und lässt sich nicht zurückholen. Was eingegangen ist, bleibt und wird wieder beurteilt. Ist die Arbeitskopie noch in einem Tab geöffnet, schließe ihn zuerst.',
+  'Weggooien': 'Verwerfen',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Diese Einsendung wurde zurückgezogen und kommt daher in kein Kapitel.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Diese Einsendung kann nicht gelesen werden, oder das Formular, für das sie eingereicht wurde, liegt nicht im Arbeitsordner.',
+  'Het controledocument kon niet worden geschreven.':
+      'Das Prüfdokument konnte nicht geschrieben werden.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Dein Beitrag für das Buch: bitte kurz prüfen',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Hier ist dein Beitrag, so wie er im Buch erscheint (siehe Anhang). Stimmt alles? Antworte ‚einverstanden‘ oder mit deinen Korrekturen vor dem {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Die Mail liegt in deinem Mailprogramm bereit. Hänge das PDF an und sende sie ab.',
+  'Controle door de maker…': 'Prüfung durch die beitragende Person…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Das Prüfdokument ist das Kapitel dieser einen Einsendung. Exportiere es als PDF (wähle das vollständige Profil), hänge das PDF an die Mail an und sende sie ab. Antwortet die beitragende Person ‚einverstanden‘, setze den Status selbst auf maker-approved: Diese Antwort ist auch die Bestätigung, dass der Beitrag wirklich von dieser Person stammt.',
+  'Controledocument maken en openen': 'Prüfdokument erstellen und öffnen',
+  'E-mailadres van de maker': 'E-Mail-Adresse der beitragenden Person',
+  'Antwoord vóór (jjjj-mm-dd)': 'Antwort vor dem (JJJJ-MM-TT)',
+  'Mail schrijven': 'Mail schreiben',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Dieses Formular kennt den Status maker-check-sent nicht, daher lässt er sich hier nicht setzen.',
+  'Controle verstuurd': 'Prüfung verschickt',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Erstellt das Kapitel dieser Einsendung und bereitet die Mail vor, mit der die beitragende Person es prüft.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Diese Einsendung steht nicht im Register. Repariere overview.md und versuche es erneut.',
+  'Kies het hoofdstuksjabloon': 'Kapitelvorlage wählen',
+  'Kies eerst een hoofdstuksjabloon.': 'Wähle zuerst eine Kapitelvorlage.',
+  'Kies minstens één status.': 'Wähle mindestens einen Status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Buch zusammengestellt. Kapitel: {n}. Fotos: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Zurückgezogen und daher weggelassen: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Übersprungen (andere Version oder nicht lesbar): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotos, die im Arbeitsordner fehlten: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Verwende im Namen nur Buchstaben, Ziffern, Bindestriche und Unterstriche (höchstens 64 Zeichen).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Es gibt bereits ein Buch mit diesem Namen. Wähle einen anderen Namen.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Die Vorlage nennt Felder, die das Formular nicht hat: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Es gibt nichts, was ins Buch kommt: keine Einsendung mit einem gewählten Status. Zurückgezogen: {w}; übersprungen: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Das Register kann nicht gelesen werden. Repariere overview.md.',
+  'Het boek kon niet worden geschreven.':
+      'Das Buch konnte nicht geschrieben werden.',
+  'Boek samenstellen…': 'Buch zusammenstellen…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Das Buch kommt in den Ordner book des Arbeitsordners und bleibt ein gewöhnliches Dokument, das du danach selbst bearbeiten kannst.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Im Arbeitsordner gibt es kein brauchbares Formular.',
+  'Formulier': 'Formular',
+  'Hoofdstuksjabloon': 'Kapitelvorlage',
+  'Nog geen sjabloon gekozen.': 'Noch keine Vorlage gewählt.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'In der Vorlage steht {veld-id} für die Antwort auf dieses Feld.',
+  'Hoofdstuksjabloon kiezen…': 'Kapitelvorlage wählen…',
+  'Welke inzendingen?': 'Welche Einsendungen?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Nur Einsendungen mit einem dieser Status kommen ins Buch. Zurückgezogene Einsendungen bleiben immer draußen.',
+  'Ordenen op': 'Sortieren nach',
+  'Groeperen op': 'Gruppieren nach',
+  'Naam van het boek': 'Name des Buches',
+  'Boek openen': 'Buch öffnen',
+  'Samenstellen': 'Zusammenstellen',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Die Arbeitskopie konnte nicht erstellt werden.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Öffnet eine Kopie der Einsendung zum Verbessern. Was eingegangen ist, bleibt unverändert.',
+  'Werkkopie openen': 'Arbeitskopie öffnen',
+  'Status gewijzigd naar {status}.': 'Status geändert auf {status}.',
+  'Intrekking opgeslagen.': 'Zurückziehung gespeichert.',
+  'Intrekking ongedaan gemaakt.': 'Zurückziehung rückgängig gemacht.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Einsendung gelöscht; der Eintrag bleibt.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Einsendung gelöscht, aber das Register konnte nicht aktualisiert werden. Bearbeite overview.md von Hand.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Die Einsendung wurde im Arbeitsordner nicht gefunden.',
+  'De inzending kon niet worden verwijderd.':
+      'Die Einsendung konnte nicht gelöscht werden.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Das Register kann nicht gelesen werden. Repariere overview.md; es wurde nichts geändert.',
+  'Het register kon niet worden bijgewerkt.':
+      'Das Register konnte nicht aktualisiert werden.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Diese Änderung war nicht möglich: Die Einsendung steht nicht im Register.',
+  'Status wijzigen': 'Status ändern',
+  'Intrekking ongedaan maken': 'Zurückziehung rückgängig machen',
+  'Intrekken…': 'Zurückziehen…',
+  'Verwijderen…': 'Löschen…',
+  'Inzending intrekken': 'Einsendung zurückziehen',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Gib den Tag ein, an dem die einsendende Person die Einsendung zurückgezogen hat. Eine zurückgezogene Einsendung kommt nie ins Buch.',
+  'Dag (jjjj-mm-dd)': 'Tag (jjjj-mm-tt)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Ungültiger Tag. Verwende Jahr-Monat-Tag, zum Beispiel {voorbeeld}.',
+  'Inzending verwijderen': 'Einsendung löschen',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Die Antworten, die Arbeitskopie und die Fotos dieser Einsendung werden aus dem Arbeitsordner gelöscht. Nur ein minimaler Eintrag bleibt: die Nummer, die Tage von Eingang und Einwilligung und der Status. Das lässt sich nicht rückgängig machen.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Ebenfalls bleibt stehen, was das Formular vorab angekündigt hat: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Mit dieser Einsendung stimmt etwas nicht.',
+  'Verplicht, maar leeg gelaten.': 'Pflichtfeld, aber leer gelassen.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} Wörter; mindestens {min} nötig.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} Wörter; höchstens {max} erlaubt.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} Zeichen; mindestens {min} nötig.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} Zeichen; höchstens {max} erlaubt.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ steht nicht in der Liste der Optionen.',
+  '“{value}” is geen getal.': '„{value}“ ist keine Zahl.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ ist kein Datum in der Form Jahr-Monat-Tag.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto mit {actual} Pixeln Breite; gefragt waren {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Die Datei des Fotos fehlt in der Einsendung.',
+  'De beschrijving van de foto ontbreekt.': 'Die Beschreibung des Fotos fehlt.',
+  'De maker van de foto ontbreekt.':
+      'Die Urheberin oder der Urheber des Fotos fehlt.',
+  'De foto is niet gecontroleerd.': 'Das Foto wurde nicht geprüft.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-Foto: nicht geprüft oder bereinigt; es kann einen Ort enthalten.',
+  'Toestemming niet gegeven.': 'Einwilligung nicht erteilt.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Die Antwort enthält eine Zeile, die wie ein Steuerzeichen des Formulars aussieht.',
+  'Het antwoord bevat HTML.': 'Die Antwort enthält HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Die Antwort enthält einen nicht abgeschlossenen Codeblock.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Die Antwort verweist auf ein Bild, das nicht zu dieser Einsendung gehört.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Die Antwort enthält einen nicht erlaubten Link.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Dieses Formular oder diese Version ist nicht im Arbeitsordner.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Die einsendende Person hat mit einem anderen Text des Formulars gearbeitet als dem veröffentlichten.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Die Einwilligung im Manifest passt nicht zum veröffentlichten Formular.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Der Text des Formulars wurde außerhalb der Antworten geändert.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Der Text des Formulars wurde bei diesem Feld geändert.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Dieses Feld gibt es im veröffentlichten Formular nicht.',
+  'Dit veld ontbreekt in de inzending.': 'Dieses Feld fehlt in der Einsendung.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Einsendung in Version {submission}; veröffentlicht ist Version {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Das Formular braucht eine neuere Version von OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Das veröffentlichte Formular im Arbeitsordner ist nicht verwendbar.',
+  'De inzending hoort bij een ander formulier.':
+      'Die Einsendung gehört zu einem anderen Formular.',
+  'De opbouw van de inzending is beschadigd.':
+      'Der Aufbau der Einsendung ist beschädigt.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Das Register kann nicht gelesen werden. Repariere overview.md; die Einsendungen stehen unten ohne Angaben aus dem Register.',
+  'Nog geen inzendingen.': 'Noch keine Einsendungen.',
+  'Om na te lopen': 'Zu prüfen',
+  'Verwijderd': 'Gelöscht',
+  'Zonder regel in het register': 'Ohne Zeile im Register',
+  'Ontvangen {datum}': 'Erhalten {datum}',
+  'Ingetrokken {datum}': 'Zurückgezogen {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Der Inhalt dieser Einsendung wurde gelöscht; nur der Eintrag bleibt.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Diese Einsendung kann nicht gelesen werden. Prüfe die Dateien im Arbeitsordner.',
+  'Beoordeeld tegen {formulier}.': 'Beurteilt gegen {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Die Beurteilung betrifft die Arbeitskopie (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Keine Punkte zu prüfen.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotos, die keine Antwort nennt: {n}.',
+  'Inzendingen': 'Einsendungen',
+  'Werkmap': 'Arbeitsordner',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Noch kein Arbeitsordner gewählt. Wähle einen Ordner, in dem die Einsendungen und das Register liegen sollen.',
+  'Werkmap kiezen…': 'Arbeitsordner wählen…',
+  'Kies de werkmap voor inzendingen': 'Arbeitsordner für Einsendungen wählen',
+  'Formulieren': 'Formulare',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Noch kein Formular hinzugefügt. Füge das Formular so hinzu, wie du es veröffentlicht hast: Eine Einsendung wird dagegen geprüft.',
+  'Formulier toevoegen…': 'Formular hinzufügen…',
+  'Kies het formulier om toe te voegen': 'Das hinzuzufügende Formular wählen',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Diese Datei ist kein Formular, das veröffentlicht werden kann.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Dieses Formular ist bereits mit anderem Text vorhanden. Ein anderer Text ist eine neue Version: Gib dem Formular eine höhere Versionsnummer.',
+  'Formulier toegevoegd: {naam}.': 'Formular hinzugefügt: {naam}.',
+  'Dit formulier stond er al.': 'Dieses Formular war schon vorhanden.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Das Formular konnte nicht gespeichert werden.',
+  'Inzendingen in de werkmap: {n}': 'Einsendungen im Arbeitsordner: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Ein einfaches ZIP ist auf dem Weg nicht verschlüsselt.',
+  'Pakketten binnenhalen…': 'Pakete importieren…',
+  'Kies de pakketten om binnen te halen': 'Die zu importierenden Pakete wählen',
+  'Register openen': 'Register öffnen',
+  '{naam}: binnengehaald.': '{naam}: importiert.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importiert, aber es gibt Punkte zu prüfen.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importiert, aber das Register konnte nicht aktualisiert werden. Prüfe overview.md.',
+  '{naam}: stond er al.': '{naam}: war schon vorhanden.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: kein Einsendungspaket, das OciDeck lesen kann.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: Dieses Formular wurde nicht hinzugefügt, oder nicht in dieser Version. Füge zuerst das Formular hinzu.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: konnte nicht im Arbeitsordner gespeichert werden.',
+  'Formulieren en inzendingen': 'Formulare und Einsendungen',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importiere Einsendungen eines Formulars, prüfe sie gegen das veröffentlichte Formular und führe sie mit einem Register. Ein Formular auszufüllen geht auch, wenn dies aus ist. Standardmäßig aus.',
+  'Inzending opslaan als zip…': 'Einsendung als ZIP speichern…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Eine ZIP-Datei mit deinen Antworten und Fotos, die du per E-Mail an die Organisatoren schickst.',
+  'Inzending opgeslagen als {naam}.': 'Einsendung gespeichert als {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Wähle das Formular so, wie du es bekommen hast',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Das ist nicht das Formular, zu dem deine Antworten gehören. Wähle die Datei, die du vom Organisator bekommen hast.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Ein Foto konnte nicht gelesen werden: {pad}. Füge es erneut hinzu.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Die Einsendung passt nicht in ein Paket: zu viele Fotos oder ein zu großes Foto.',
+  'De inzending kon niet worden opgeslagen.':
+      'Die Einsendung konnte nicht gespeichert werden.',
+  'Inzending opslaan': 'Einsendung speichern',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Die Standortdaten wurden aus diesem Foto entfernt.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Dieses Foto konnte nicht hinzugefügt werden. Wähle eine JPEG-, PNG-, WebP- oder HEIC-Datei eines Fotos.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Speichere das Dokument zuerst, um Fotos hinzuzufügen.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck kann diese Datei als neues Dokument importieren.',
+  'Kies een datum': 'Datum wählen',
+  'Anders, namelijk:': 'Andere, nämlich:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Punkt {n} entfernen',
+  'Rij {n} verwijderen': 'Zeile {n} entfernen',
+  'Foto {n} verwijderen': 'Foto {n} entfernen',
+  'Wat is er te zien op de foto?': 'Was ist auf dem Foto zu sehen?',
+  'Van wie is de foto?': 'Von wem ist das Foto?',
+  'Foto toevoegen': 'Foto hinzufügen',
+  'Verplicht': 'Pflichtfeld',
+  'Alles is ingevuld.': 'Alles ist ausgefüllt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Noch {n} zu erledigen, bevor du senden kannst:',
+  'klaar': 'erledigt',
+  '{n} open': '{n} offen',
+  'Dit formulier kan niet worden ingevuld.':
+      'Dieses Formular kann nicht ausgefüllt werden.',
+  'Naar de bron': 'Zur Quelle',
+  'Woorden': 'Wörter',
+  'Tekens': 'Zeichen',
+  'Keuzes': 'Auswahlen',
+  'Rijen': 'Zeilen',
+  'Foto’s': 'Fotos',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mindestens {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (höchstens {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mindestens {min}, höchstens {max})',
+  'Invullen': 'Ausfüllen',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Mit diesem Formular stimmt etwas nicht. Wende dich an die Person, die es erstellt hat.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Dieses Feld ist erforderlich. Fülle es aus, um senden zu können.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Du hast {actual} Wörter geschrieben; es werden mindestens {min} gebraucht.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Du hast {actual} Wörter geschrieben; erlaubt sind höchstens {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Du hast {actual} Zeichen geschrieben; es werden mindestens {min} gebraucht.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Du hast {actual} Zeichen geschrieben; erlaubt sind höchstens {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}“ steht nicht in der Liste. Wähle eine der Optionen.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}“ ist keine Zahl. Verwende nur Ziffern, gegebenenfalls mit Komma oder Punkt für die Dezimalstellen.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Dieses Foto ist {actual} Pixel breit; hier werden {min} verlangt. Wahrscheinlich wurde es beim Senden über eine Messenger-App verkleinert. Wenn du das Original noch hast, nimm das. Wenn nicht, sende es trotzdem mit: Die Organisation meldet sich bei dir.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Dieses Foto ist {actual} MB groß; das Maximum ist {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Der Inhalt dieser Datei passt nicht zu ihrem Dateityp.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Dieser Dateityp ist hier nicht erlaubt.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Die Datei zu diesem Foto ist nicht mehr zu finden. Füge das Foto erneut hinzu.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Beschreibe in einem kurzen Satz, was auf dem Foto zu sehen ist.',
+  'Geef aan van wie de foto is.': 'Gib an, von wem das Foto ist.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Dieses Foto wurde noch nicht geprüft. Warte einen Moment oder füge es erneut hinzu.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Dieses Foto ist eine HEIC-Datei. OciDeck kann sie hier weder prüfen noch bereinigen, deshalb wird sie so gesendet, wie sie ist. Sie kann enthalten, wo das Foto aufgenommen wurde. Wenn du das nicht teilen möchtest, wähle in den Kameraeinstellungen „Maximale Kompatibilität“ oder teile das Foto als JPEG und füge es erneut hinzu.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Auf diesem Foto sind {actual} Gesichter zu sehen; erwartet wurden {expected}. Das ist nur eine Erinnerung.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Setze das Häkchen, um zuzustimmen; ohne Einwilligung kannst du nicht senden.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Dieses Formular erfordert eine neuere Version von OciDeck. Aktualisiere die App, um es auszufüllen.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Im Formular selbst wurde versehentlich etwas verändert. Stelle das Formular wieder her; deine Antworten bleiben erhalten.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Diese Zeile sieht aus wie ein Steuercode des Formulars und darf nicht in einer Antwort stehen. Ändere sie.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML ist in einer Antwort nicht erlaubt. Verwende normalen Text und einfache Formatierung.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Ein Codeblock ist nicht geschlossen. Schließe ihn mit ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'In einer Antwort sind nur Fotos möglich, die du in diesem Formular hinzufügst; ein Bild aus dem Internet nicht.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'In einer Antwort sind nur Links erlaubt, die mit https:// beginnen, sowie E-Mail-Adressen.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Diese Datei wurde mit einer anderen Version des Formulars erstellt (Version {submission}; jetzt gilt Version {published}). Prüfe deine Antworten.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Es sind jetzt {actual}; es müssen zwischen {min} und {max} sein.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Es sind jetzt {actual}; es dürfen höchstens {max} sein.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Es sind jetzt {actual}; es müssen mindestens {min} sein.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Die Zahl muss ein Vielfaches von {step} sein.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Die Zahl muss zwischen {min} und {max} liegen.',
+  'Het getal mag hoogstens {max} zijn.': 'Die Zahl darf höchstens {max} sein.',
+  'Het getal moet minstens {min} zijn.': 'Die Zahl muss mindestens {min} sein.',
+  'De datum moet op of na {min} liggen.':
+      'Das Datum muss am oder nach dem {min} liegen.',
+  'De datum moet op of vóór {max} liggen.':
+      'Das Datum muss am oder vor dem {max} liegen.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}“ ist kein Datum. Schreibe das Datum als Jahr-Monat-Tag, zum Beispiel 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Das ist keine gültige E-Mail-Adresse.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Das ist keine gültige Webadresse. Beginne mit https://.',
+  'Dit is geen geldig telefoonnummer.': 'Das ist keine gültige Telefonnummer.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Das ist keine gültige niederländische Postleitzahl, wie 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Hier passt nur eine Zeile. Entferne die Zeilenumbrüche.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Verwende nur die Kontrollkästchen dieser Frage: ein Kästchen pro Option.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Schreibe jeden Punkt in eine eigene Zeile, mit einem Strich oder einer Nummer davor.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Die Tabelle stimmt nicht mehr: Lass die Kopfzeile, wie sie war, und gib jeder Zeile gleich viele Spalten.',
+  'Dezelfde foto staat hier twee keer.': 'Dasselbe Foto steht hier zweimal.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'In dieses Feld gehören nur Fotos, kein loser Text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Das Kästchen für deine Einwilligung ist beschädigt. Stelle das Formular wieder her.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Diese Antwort hat nicht die Form, die zu dieser Frage gehört.',
   'Downloaden…': 'Herunterladen…',
   'Afbeelding opgeslagen als': 'Bild gespeichert als',
   '{naam}: ingesteld': '{naam}: eingerichtet',

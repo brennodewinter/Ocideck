@@ -2,24 +2,25 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.6.13+39** (licence EUPL-1.2) and every third-party component it ships (220 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.6.13+39** (licence EUPL-1.2) and every third-party component it ships (223 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **780 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **789 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
 | BSD-3-Clause | 127 |
-| MIT | 63 |
+| MIT | 65 |
 | Apache-2.0 | 19 |
 | OFL-1.1 | 7 |
 | BSD | 3 |
 | MPL-2.0 | 1 |
+| EUPL-1.2 | 1 |
 
 ## Components
 
-### Dart / Flutter packages (202)
+### Dart / Flutter packages (204)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -50,6 +51,7 @@ The JSON documents carry **780 dependency relations** between these components: 
 | cupertino_ui _(transitive)_ | 1.1.0 | BSD-3-Clause | flutter | `pkg:pub/cupertino_ui@1.1.0` |
 | dart_quill_delta _(transitive)_ | 10.8.3 | MIT | FlutterQuill | `pkg:pub/dart_quill_delta@10.8.3` |
 | dart_webrtc _(transitive)_ | 1.8.2 | MIT | flutter-webrtc | `pkg:pub/dart_webrtc@1.8.2` |
+| dartage _(transitive)_ | 0.3.0 | MIT | tinyrack-net | `pkg:pub/dartage@0.3.0` |
 | dartcv4 _(direct main)_ | 2.3.1 | Apache-2.0 | rainyl | `pkg:pub/dartcv4@2.3.1` |
 | dbus _(transitive)_ | 0.7.15 | MPL-2.0 | canonical | `pkg:pub/dbus@0.7.15` |
 | desktop_drop _(direct main)_ | 0.8.4 | Apache-2.0 | MixinNetwork | `pkg:pub/desktop_drop@0.8.4` |
@@ -151,6 +153,7 @@ The JSON documents carry **780 dependency relations** between these components: 
 | plugin_platform_interface _(direct dev)_ | 2.1.8 | BSD-3-Clause | flutter | `pkg:pub/plugin_platform_interface@2.1.8` |
 | pointycastle _(transitive)_ | 4.0.0 | MIT | bcgit | `pkg:pub/pointycastle@4.0.0` |
 | posix _(transitive)_ | 6.5.2 | MIT | onepub-dev | `pkg:pub/posix@6.5.2` |
+| pqcrypto _(transitive)_ | 0.4.2 | MIT | turkananation | `pkg:pub/pqcrypto@0.4.2` |
 | process _(transitive)_ | 5.0.6 | BSD-3-Clause | dart-lang | `pkg:pub/process@5.0.6` |
 | provider _(transitive)_ | 6.1.5+1 | MIT | rrousselGit | `pkg:pub/provider@6.1.5+1` |
 | pub_semver _(transitive)_ | 2.2.1 | BSD-3-Clause | dart-lang | `pkg:pub/pub_semver@2.2.1` |
@@ -225,6 +228,12 @@ The JSON documents carry **780 dependency relations** between these components: 
 | xdg_directories _(transitive)_ | 1.1.0 | BSD-3-Clause | flutter | `pkg:pub/xdg_directories@1.1.0` |
 | xml _(direct main)_ | 7.0.1 | MIT | renggli | `pkg:pub/xml@7.0.1` |
 | yaml _(direct dev)_ | 3.1.4 | MIT | dart-lang | `pkg:pub/yaml@3.1.4` |
+
+### First-party packages (packages/) (1)
+
+| Component | Version | Licence | Supplier | Source |
+| --- | --- | --- | --- | --- |
+| ocideck_form_core _(direct main)_ | 0.0.1 | EUPL-1.2 | Stichting LibreKAT | First-party package in packages/ocideck_form_core, part of this repository and released with it; it has no archive hash of its own. |
 
 ### Vendored plugin forks (third_party/) (2)
 

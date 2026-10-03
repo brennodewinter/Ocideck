@@ -78,6 +78,47 @@ void main() {
     });
   });
 
+  group('first-party packages', () {
+    // A path dependency under packages/ is OUR code, not a vendored fork: it has
+    // no upstream, no MODIFICATIONS.md, and it changes with every commit. An
+    // archive/tree hash would therefore go stale at each edit and fail the
+    // freshness gate for no supply-chain reason.
+    Map<String, dynamic> component(String name) =>
+        cdxComponents.firstWhere((c) => c['name'] == name);
+
+    String? property(Map<String, dynamic> c, String key) =>
+        ((c['properties'] as List?) ?? const [])
+            .cast<Map<String, dynamic>>()
+            .where((p) => p['name'] == key)
+            .map((p) => p['value'] as String?)
+            .firstOrNull;
+
+    test('ocideck_form_core is a first-party component, not a fork', () {
+      final c = component('ocideck_form_core');
+      expect(property(c, 'ocideck:group'), 'first-party');
+      expect(c['bom-ref'], startsWith('first-party:'));
+    });
+
+    test('carries our licence and no hash that goes stale on every edit', () {
+      final c = component('ocideck_form_core');
+      expect(
+        ((c['licenses'] as List).first as Map<String, dynamic>)['license'],
+        containsPair('id', 'EUPL-1.2'),
+      );
+      expect(c['hashes'], isNull);
+    });
+
+    test('the application depends on it', () {
+      final app = cdx['metadata']!['component'] as Map<String, dynamic>;
+      final deps = (cdx['dependencies'] as List).cast<Map<String, dynamic>>();
+      final appDeps = deps.firstWhere((d) => d['ref'] == app['bom-ref']);
+      expect(
+        (appDeps['dependsOn'] as List).cast<String>(),
+        contains(component('ocideck_form_core')['bom-ref']),
+      );
+    });
+  });
+
   group('validity', () {
     test('CycloneDX carries the mandatory header fields', () {
       expect(cdx['bomFormat'], 'CycloneDX');

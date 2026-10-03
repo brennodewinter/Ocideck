@@ -39,6 +39,7 @@ const mdOutputPath = 'sbom/ocideck.sbom.md';
 const _groupLabels = <String, String>{
   'application': 'Application',
   'dart-package': 'Dart / Flutter packages',
+  'first-party': 'First-party packages (packages/)',
   'vendored-fork': 'Vendored plugin forks (third_party/)',
   'npm-bundle': 'Vendored JavaScript bundles (HTML export)',
   'export-asset': 'Vendored export assets',
@@ -248,8 +249,8 @@ class SbomComponent {
   /// Stable, unique identifier used as the CycloneDX `bom-ref`.
   final String ref;
 
-  /// Origin bucket: dart-package, vendored-fork, npm-bundle, export-asset,
-  /// font, or sdk. Surfaced as a property for filtering.
+  /// Origin bucket: dart-package, first-party, vendored-fork, npm-bundle,
+  /// export-asset, font, or sdk. Surfaced as a property for filtering.
   final String group;
 
   /// CycloneDX/SPDX component type: library, framework, file, application.
@@ -345,11 +346,7 @@ Inventory buildInventory() {
   // is exactly the state that makes an SBOM unusable for impact questions.
   final rootEdges =
       components
-          .where(
-            (c) => c.group == 'dart-package' || c.group == 'vendored-fork'
-                ? c.isDirect
-                : true,
-          )
+          .where((c) => _packageGroups.contains(c.group) ? c.isDirect : true)
           .map((c) => c.ref)
           .toList()
         ..sort();
@@ -397,6 +394,21 @@ Map<String, Directory> _packageRoots() {
   return roots;
 }
 
+/// The component groups that come from the Dart dependency graph (and so are
+/// only the application's *direct* dependencies when it lists them).
+const _packageGroups = <String>{'dart-package', 'first-party', 'vendored-fork'};
+
+/// The `path:` a path dependency has in pubspec.lock, repository-relative.
+String _lockPath(YamlMap lockEntry) {
+  final desc = lockEntry['description'];
+  return desc is YamlMap ? desc['path'].toString() : '';
+}
+
+/// Whether a path dependency is our own code (under `packages/`) rather than a
+/// vendored fork of someone else's (under `third_party/`).
+bool _isFirstParty(YamlMap lockEntry) =>
+    _lockPath(lockEntry).startsWith('packages/');
+
 /// All resolved Dart/Flutter packages from pubspec.lock (direct + transitive).
 ///
 /// Every package carries **its own** dependency edges, read from its own
@@ -423,7 +435,10 @@ List<SbomComponent> _dartPackages() {
     final source = data['source'].toString();
     refByName[name] = switch (source) {
       'hosted' => 'pkg:pub/$name@$version',
-      'path' => 'fork:$name@$version',
+      'path' =>
+        _isFirstParty(data)
+            ? 'first-party:$name@$version'
+            : 'fork:$name@$version',
       _ => '$source:$name@$version',
     };
   }
@@ -476,6 +491,29 @@ List<SbomComponent> _dartPackages() {
           supplier: supplier?.name,
           supplierUrl: supplier?.url,
           dependsOn: edges,
+        ),
+      );
+    } else if (source == 'path' && _isFirstParty(data)) {
+      // Our own code under packages/: no upstream, no fork bookkeeping, and no
+      // content hash — it changes with every commit, so a tree hash would fail
+      // the freshness gate on each edit without telling anyone anything. What
+      // the lock pins is the path; what the reviewer reads is the repository.
+      out.add(
+        SbomComponent(
+          ref: refByName[name]!,
+          group: 'first-party',
+          type: 'library',
+          name: name,
+          version: version,
+          license: license,
+          scope: scope,
+          supplier: 'Stichting LibreKAT',
+          supplierUrl: 'https://librekat.nl',
+          dependsOn: edges,
+          note:
+              'First-party package in ${_lockPath(data)}, part of this '
+              'repository and released with it; it has no archive hash of '
+              'its own.',
         ),
       );
     } else if (source == 'path') {

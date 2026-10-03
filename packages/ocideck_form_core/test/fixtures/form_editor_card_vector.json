@@ -1,0 +1,9 @@
+{
+  "note": "A frozen editor card (FORM_INTAKE.md §5.1). The age recipient is the public half of the C2SP CCTV x25519 test identity; the signing key comes from the seed 0x01..0x20. text is the canonical JSON; fingerprint is base32(SHA-256(\"ocideck-editor-card-v1\\n\" + text)).",
+  "name": "Tweede redacteur",
+  "age": "age1xmwwc06ly3ee5rytxm9mflaz2u56jjj36s0mypdrwsvlul66mv4q47ryef",
+  "sign": "pg2vmlup4zkpsqdywejorkmlu6ib7bj242k35v7a4oiqxlieszsa",
+  "kid": "t2opkkyz3ksutmups5g5e764pi",
+  "text": "{\"age\":\"age1xmwwc06ly3ee5rytxm9mflaz2u56jjj36s0mypdrwsvlul66mv4q47ryef\",\"kid\":\"t2opkkyz3ksutmups5g5e764pi\",\"name\":\"Tweede redacteur\",\"sign\":\"pg2vmlup4zkpsqdywejorkmlu6ib7bj242k35v7a4oiqxlieszsa\",\"v\":1}",
+  "fingerprint": "hkbe5v2ofo4acsmaqr52szwkk454rz6emqt7gjih54uyrmnjwfqq"
+}

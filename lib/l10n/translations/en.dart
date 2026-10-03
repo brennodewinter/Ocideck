@@ -827,6 +827,594 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'The editors besides you who are in every bundle, so they can open the submissions too. You add someone with their editor card and type back the fingerprint of that card.',
+  'Er is nog niemand naast jou.': 'There is nobody besides you yet.',
+  'Plak de kaart van de redacteur': 'Paste the editor\'s card',
+  'Kaart controleren': 'Check card',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Card of {naam}. Type the fingerprint of this card that {naam} gave you by another route, for example over the phone.',
+  'Redacteur verwijderen': 'Remove editor',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Remove {naam} from the team? Bundles you have already published stay as they are until you publish again; what was already sealed for {naam} stays readable to that person.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} has been added. Publish the bundle again to include {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} has been removed. Publish the bundle again to take {naam} out.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'First create your own editorial key under Editorial key….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Your editorial key cannot be used. Look under Editorial key….',
+  'Dit is geen redacteurskaart.': 'This is not an editor card.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'This card is from a newer version of OciDeck. Update OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'The card contains something that is not allowed. Ask the editor for a new card.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'This fingerprint does not match the card: the card has been changed or is not from who you think. Ask the editor for the fingerprint and the card again.',
+  'Dit is je eigen kaart.': 'This is your own card.',
+  'Deze redacteur staat er al.': 'This editor is already in the team.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'The team is full: a bundle carries at most 64 organisers, you included.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'The file team.json in the workspace cannot be read. Nothing was changed; repair or delete it.',
+  'Het team kon niet worden opgeslagen.': 'The team could not be saved.',
+  'Deze redacteur staat niet meer in het team.':
+      'This editor is no longer in the team.',
+  'Naast jou in de bundel: {namen}.': 'Besides you in the bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'First check your recovery key under Editorial key…, or add a second editor under Team…. Without a way back, every submission is unreadable if this device breaks.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'The file team.json in the workspace cannot be read. Nothing is signed.',
+  'Redacteurskaart maken…': 'Create editor card…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'With an editor card, the owner of a form adds you to the bundle, so you can open the submissions too. The card may be sent by email.',
+  'Jouw naam op de kaart': 'Your name on the card',
+  'Kaart maken': 'Create card',
+  'Kaart kopiëren': 'Copy card',
+  'Vingerafdruk van de kaart': 'Fingerprint of the card',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Give the owner this fingerprint by another route than the card, for example over the phone. They type it back before adding you.',
+  'Verzegeld opslaan…': 'Save sealed…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'An encrypted file (.zip.age) that only the organiser can open. For this you need the bundle file and the fingerprint from the invitation.',
+  'Kies het bundelbestand van de organisator':
+      'Choose the organiser\'s bundle file',
+  'Vingerafdruk van de organisator': 'The organiser\'s fingerprint',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Type the fingerprint from the invitation. It is deliberately not in the bundle file: that is how you can tell who it comes from.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'That is not a fingerprint. It is 52 characters long, usually in groups of four.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'This file is not a bundle OciDeck can read.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'This form or this bundle is from a newer version of OciDeck. Update OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'The fingerprint does not match this bundle: the form does not come from who the invitation says. Check the fingerprint and the bundle file.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'The bundle\'s signature is not right: it has been changed or is not from who the fingerprint says. Ask the organiser for a new bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'This bundle does not belong to this form. Use the bundle file that belongs to exactly this form.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'This bundle has expired. Ask the organiser for a new one.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'This bundle is older than one you received earlier from this organiser. Ask the organiser for the latest.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'The bundle contains something that is not allowed. Ask the organiser for a new bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'This form is closed: the last day was {datum}. Contact the organiser.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'The submission is larger than the organiser allows ({mb} MB). Remove a photo or make one smaller.',
+  'De inzending kon niet worden verzegeld.':
+      'The submission could not be sealed.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Saved sealed as {naam}, can only be opened by: {organisatoren}.',
+  'Bundel publiceren…': 'Publish bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'The bundle is what a respondent believes about your editorial team: which key to seal to and which text it belongs to. It is saved next to the form.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'There is no form in the workspace to make a bundle for.',
+  'Naam voor de invuller': 'Name for the respondent',
+  'Geldig tot (jjjj-mm-dd)': 'Valid until (yyyy-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'The last day a respondent believes this bundle. Not before the form\'s closing day.',
+  'Bundel maken': 'Create bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle created (sequence number {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Give the fingerprint to the respondent by another route than the bundle file, for example in the invitation. Whoever has only the bundle file cannot tell who it comes from.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'This platform has no keychain for the editorial key; a bundle cannot be signed here.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'There is no editorial key yet. Create one under Editorial key… before you publish a bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'The keychain cannot be read. Nothing was signed.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'The stored editorial key cannot be read. Delete it under Editorial key… and restore it from your recovery key.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'A bundle of this form in the workspace cannot be read or does not belong with the others. That makes the sequence number impossible to determine, so nothing is signed. Check: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Enter a name of at most 80 characters.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Valid until must be an existing date, as yyyy-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Valid until must not be before the form\'s closing day.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'The bundle could not be made ({veld}). Check that the form names a valid closing day and retention period.',
+  'formulier': 'form',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'The bundle could not be saved in the workspace.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Create and sign the bundle that a respondent believes about your editorial team.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: sealed package opened and imported.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: this package is sealed, and this platform has no keychain for the editorial key.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: this package is sealed and there is no editorial key yet to open it. Create one under Editorial key… or restore it from your recovery key.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: this package is sealed and the keychain cannot be read. Nothing was tried.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: this package is sealed and the stored editorial key cannot be read. Delete it under Editorial key… and restore it from your recovery key.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: this package was not sealed for your editorial key.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: this package has been changed or cut short and will not be opened.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: this package is larger than a submission can be.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: the stored editorial key is not a key OciDeck can use.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: not a sealed package OciDeck can read.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'A sealed file (.zip.age) is opened with your editorial key.',
+  'Herstelsleutel controleren': 'Check recovery key',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Editorial key created. Now write down the recovery key.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'The keychain did not accept the key. Nothing was created.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'There already is an editorial key. It was not touched.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'The keychain could not be read. Nothing was assumed and nothing was created.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'There is something in the keychain that is not an editorial key. It was not overwritten.',
+  'Dit platform heeft geen sleutelhanger.': 'This platform has no keychain.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Correct: the recovery key has been checked.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'This is a valid recovery key, but not the one for this editorial key.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'The recovery key is correct, but that could not be saved.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'There is no editorial key to check against.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'This is not the recovery key of an editorial key.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'There is a typo in it: the checksum does not match.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'This recovery key comes from a newer version of OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'This recovery key was made for something else.',
+  'Hersteld uit de herstelsleutel.': 'Restored from the recovery key.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'The keychain did not accept the key. Nothing was restored.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Save editorial key as age key file',
+  'Het bestand kon niet worden opgeslagen.': 'The file could not be saved.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Saved as {pad}. Whoever has this file can open everything.',
+  'Redactiesleutel verwijderd.': 'Editorial key deleted.',
+  'Redactiesleutel': 'Editorial key',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'This platform has no keychain. The editorial key cannot be kept here; use the desktop app.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'The keychain could not be read (locked, or access denied). Nothing was assumed and nothing was created.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'There is something in the keychain that is not an editorial key. It was not overwritten. Delete it and restore the key from your recovery key.',
+  'Redactiesleutel verwijderen…': 'Delete editorial key…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'An editorial key opens the sealed submissions and signs the bundles of your forms. It lives in this operating system\'s keychain. If you lose all of the team\'s keys, every submission not yet fetched becomes unreadable: that is the price of a server that cannot read anything.',
+  'Redactiesleutel aanmaken': 'Create editorial key',
+  'Herstellen uit herstelsleutel…': 'Restore from recovery key…',
+  'Vingerafdruk': 'Fingerprint',
+  'Ontvanger (age)': 'Recipient (age)',
+  'Aangemaakt op {datum}.': 'Created on {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'The recovery key has been checked.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'The recovery key has not been checked yet: write it down and type it back.',
+  'Herstelsleutel tonen…': 'Show recovery key…',
+  'Vingerafdruk kopiëren': 'Copy fingerprint',
+  'Exporteren als age-sleutelbestand…': 'Export as age key file…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Write this recovery key down and keep it somewhere safe, away from this device. Whoever has it can open all submissions and sign bundles in your name. If you lose this device, it is all that remains.',
+  'Typ de herstelsleutel hier opnieuw in': 'Type the recovery key here again',
+  'Later': 'Later',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Type or paste the recovery key. What you enter is put in the keychain as the editorial key; nothing is overwritten.',
+  'Herstelsleutel': 'Recovery key',
+  'Redactiesleutel verwijderen': 'Delete editorial key',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'The key is erased from the keychain and can only come back from the recovery key. If you do not have it, submissions sealed only to this key become unreadable for good.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'The key that opens sealed submissions and signs bundles.',
+  'Redactiesleutel…': 'Editorial key…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'The working copy was thrown away. What arrived is judged again.',
+  'Er is geen werkkopie.': 'There is no working copy.',
+  'De werkkopie kon niet worden weggegooid.':
+      'The working copy could not be thrown away.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Deletes the working copy. What arrived stays and is judged again.',
+  'Werkkopie weggooien…': 'Throw away working copy…',
+  'Werkkopie weggooien': 'Throw away working copy',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'The working copy with the improvements is deleted and cannot be brought back. What arrived stays and is judged again. If the working copy is still open in a tab, close that first.',
+  'Weggooien': 'Throw away',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'This submission has been withdrawn and so goes into no chapter.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'This submission cannot be read, or the form it was submitted for is not in the workspace.',
+  'Het controledocument kon niet worden geschreven.':
+      'The check document could not be written.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Your contribution to the book: please check it',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Here is your contribution as it will appear in the book (see the attachment). Is everything right? Reply ‘agreed’ or with your corrections before {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'The mail is ready in your mail program. Attach the PDF and send it.',
+  'Controle door de maker…': 'Check by the contributor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'The check document is the chapter of this one submission. Export it as a PDF (choose the full profile), attach the PDF to the mail and send it. If the contributor replies ‘agreed’, set the status to maker-approved yourself: that reply is also the confirmation that the contribution really comes from this person.',
+  'Controledocument maken en openen': 'Create check document and open it',
+  'E-mailadres van de maker': 'Contributor\'s e-mail address',
+  'Antwoord vóór (jjjj-mm-dd)': 'Reply before (yyyy-mm-dd)',
+  'Mail schrijven': 'Write mail',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'This form does not know the status maker-check-sent, so it cannot be set here.',
+  'Controle verstuurd': 'Check sent',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Makes the chapter of this submission and prepares the mail with which the contributor checks it.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'This submission is not in the register. Repair overview.md and try again.',
+  'Kies het hoofdstuksjabloon': 'Choose the chapter template',
+  'Kies eerst een hoofdstuksjabloon.': 'Choose a chapter template first.',
+  'Kies minstens één status.': 'Choose at least one status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Book compiled. Chapters: {n}. Photos: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Withdrawn and therefore left out: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Skipped (other version or unreadable): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Photos missing from the workspace: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Use only letters, digits, hyphens and underscores in the name (at most 64 characters).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'A book with this name already exists. Choose another name.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'The template mentions fields the form does not have: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'There is nothing to put in the book: no submission with a chosen status. Withdrawn: {w}; skipped: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'The register cannot be read. Repair overview.md.',
+  'Het boek kon niet worden geschreven.': 'The book could not be written.',
+  'Boek samenstellen…': 'Compile book…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'The book goes into the book folder of the workspace and remains an ordinary document that you can edit afterwards.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'There is no usable form in the workspace.',
+  'Formulier': 'Form',
+  'Hoofdstuksjabloon': 'Chapter template',
+  'Nog geen sjabloon gekozen.': 'No template chosen yet.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'In the template, {veld-id} stands for the answer to that field.',
+  'Hoofdstuksjabloon kiezen…': 'Choose chapter template…',
+  'Welke inzendingen?': 'Which submissions?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Only submissions with one of these statuses go into the book. Withdrawn submissions are always left out.',
+  'Ordenen op': 'Sort by',
+  'Groeperen op': 'Group by',
+  'Naam van het boek': 'Name of the book',
+  'Boek openen': 'Open book',
+  'Samenstellen': 'Compile',
+  'De werkkopie kon niet worden aangemaakt.':
+      'The working copy could not be created.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Opens a copy of the submission to improve. What arrived stays unchanged.',
+  'Werkkopie openen': 'Open working copy',
+  'Status gewijzigd naar {status}.': 'Status changed to {status}.',
+  'Intrekking opgeslagen.': 'Withdrawal saved.',
+  'Intrekking ongedaan gemaakt.': 'Withdrawal undone.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Submission deleted; the record remains.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Submission deleted, but the register could not be updated. Edit overview.md by hand.',
+  'De inzending is niet gevonden in de werkmap.':
+      'The submission was not found in the workspace.',
+  'De inzending kon niet worden verwijderd.':
+      'The submission could not be deleted.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'The register cannot be read. Repair overview.md; nothing was changed.',
+  'Het register kon niet worden bijgewerkt.':
+      'The register could not be updated.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'This change could not be made: the submission is not in the register.',
+  'Status wijzigen': 'Change status',
+  'Intrekking ongedaan maken': 'Undo withdrawal',
+  'Intrekken…': 'Withdraw…',
+  'Verwijderen…': 'Delete…',
+  'Inzending intrekken': 'Withdraw submission',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Enter the day on which the respondent withdrew the submission. A withdrawn submission never goes into the book.',
+  'Dag (jjjj-mm-dd)': 'Day (yyyy-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Invalid day. Use year-month-day, for example {voorbeeld}.',
+  'Inzending verwijderen': 'Delete submission',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'The answers, the working copy and the photos of this submission are erased from the workspace. Only a minimal record remains: the number, the days of receipt and consent, and the status. This cannot be undone.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Also kept, as the form announced beforehand: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'There is something wrong with this submission.',
+  'Verplicht, maar leeg gelaten.': 'Required, but left empty.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} words; at least {min} needed.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} words; at most {max} allowed.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} characters; at least {min} needed.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} characters; at most {max} allowed.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” is not in the list of options.',
+  '“{value}” is geen getal.': '“{value}” is not a number.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” is not a date in the form year-month-day.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Photo {actual} pixels wide; {min} requested.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'The photo’s file is missing from the submission.',
+  'De beschrijving van de foto ontbreekt.':
+      'The description of the photo is missing.',
+  'De maker van de foto ontbreekt.': 'The maker of the photo is missing.',
+  'De foto is niet gecontroleerd.': 'The photo was not checked.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC photo: not checked or cleaned; it may contain a location.',
+  'Toestemming niet gegeven.': 'Consent not given.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'The answer contains a line that looks like a control code of the form.',
+  'Het antwoord bevat HTML.': 'The answer contains HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'The answer contains an unclosed code block.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'The answer refers to an image that does not belong to this submission.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'The answer contains a link that is not allowed.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'This form or this version is not in the workspace.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'The respondent worked with a different text of the form than the published one.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'The consent in the manifest does not match the published form.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'The text of the form was changed outside the answers.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'The text of the form was changed at this field.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'This field does not exist in the published form.',
+  'Dit veld ontbreekt in de inzending.':
+      'This field is missing from the submission.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Submission of version {submission}; published is version {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'The form needs a newer version of OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'The published form in the workspace is not usable.',
+  'De inzending hoort bij een ander formulier.':
+      'The submission belongs to a different form.',
+  'De opbouw van de inzending is beschadigd.':
+      'The structure of the submission is damaged.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'The register cannot be read. Repair overview.md; the submissions are shown below without data from the register.',
+  'Nog geen inzendingen.': 'No submissions yet.',
+  'Om na te lopen': 'To review',
+  'Verwijderd': 'Deleted',
+  'Zonder regel in het register': 'Without a row in the register',
+  'Ontvangen {datum}': 'Received {datum}',
+  'Ingetrokken {datum}': 'Withdrawn {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'The content of this submission has been deleted; only the record remains.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'This submission cannot be read. Check the files in the workspace.',
+  'Beoordeeld tegen {formulier}.': 'Assessed against {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'The assessment is about the working copy (submission.edit.md).',
+  'Geen punten om na te lopen.': 'No points to review.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Photos that no answer mentions: {n}.',
+  'Inzendingen': 'Submissions',
+  'Werkmap': 'Workspace',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'No workspace chosen yet. Choose a folder where the submissions and the register will be kept.',
+  'Werkmap kiezen…': 'Choose workspace…',
+  'Kies de werkmap voor inzendingen': 'Choose the workspace for submissions',
+  'Formulieren': 'Forms',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'No form added yet. Add the form as you published it: a submission is checked against it.',
+  'Formulier toevoegen…': 'Add form…',
+  'Kies het formulier om toe te voegen': 'Choose the form to add',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'This file is not a form that can be published.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'This form is already there with different text. Different text is a new version: give the form a higher version number.',
+  'Formulier toegevoegd: {naam}.': 'Form added: {naam}.',
+  'Dit formulier stond er al.': 'This form was already there.',
+  'Het formulier kon niet worden opgeslagen.': 'The form could not be saved.',
+  'Inzendingen in de werkmap: {n}': 'Submissions in the workspace: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'A plain zip is not encrypted in transit.',
+  'Pakketten binnenhalen…': 'Import packages…',
+  'Kies de pakketten om binnen te halen': 'Choose the packages to import',
+  'Register openen': 'Open register',
+  '{naam}: binnengehaald.': '{naam}: imported.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: imported, but there are points to review.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: imported, but the register could not be updated. Check overview.md.',
+  '{naam}: stond er al.': '{naam}: was already there.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: not a submission package OciDeck can read.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: this form has not been added, or not in this version. Add the form first.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: could not be saved in the workspace.',
+  'Formulieren en inzendingen': 'Forms and submissions',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Import submissions of a form, check them against the published form and keep them with a register. Filling in a form also works when this is off. Off by default.',
+  'Inzending opslaan als zip…': 'Save submission as zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'A zip file with your answers and photos, to email to the organiser.',
+  'Inzending opgeslagen als {naam}.': 'Submission saved as {naam}.',
+  'Kies het formulier zoals je het kreeg': 'Choose the form as you received it',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'This is not the form your answers belong to. Choose the file you received from the organiser.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'A photo could not be read: {pad}. Add it again.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'The submission does not fit in a package: too many photos, or a photo that is too large.',
+  'De inzending kon niet worden opgeslagen.':
+      'The submission could not be saved.',
+  'Inzending opslaan': 'Save submission',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Location data has been removed from this photo.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'This photo could not be added. Choose a JPEG, PNG, WebP or HEIC file of a photo.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Save the document first to add photos.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck can import this file into a new document.',
+  'Kies een datum': 'Choose a date',
+  'Anders, namelijk:': 'Other, namely:',
+  'Punt {n}': 'Item {n}',
+  'Punt {n} verwijderen': 'Remove item {n}',
+  'Rij {n} verwijderen': 'Remove row {n}',
+  'Foto {n} verwijderen': 'Remove photo {n}',
+  'Wat is er te zien op de foto?': 'What can be seen in the photo?',
+  'Van wie is de foto?': 'Who is the photo by?',
+  'Foto toevoegen': 'Add photo',
+  'Verplicht': 'Required',
+  'Alles is ingevuld.': 'Everything is filled in.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      '{n} left to do before you can send:',
+  'klaar': 'done',
+  '{n} open': '{n} to do',
+  'Dit formulier kan niet worden ingevuld.': 'This form cannot be filled in.',
+  'Naar de bron': 'Go to the source',
+  'Woorden': 'Words',
+  'Tekens': 'Characters',
+  'Keuzes': 'Choices',
+  'Rijen': 'Rows',
+  'Foto’s': 'Photos',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (at least {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (at most {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (at least {min}, at most {max})',
+  'Invullen': 'Fill in',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Something is wrong with this form. Please contact whoever made it.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'This field is required. Fill it in to be able to send.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'You wrote {actual} words; at least {min} are needed.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'You wrote {actual} words; no more than {max} are allowed.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'You wrote {actual} characters; at least {min} are needed.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'You wrote {actual} characters; no more than {max} are allowed.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” is not in the list. Choose one of the options.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” is not a number. Use digits only, optionally with a comma or period for decimals.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'This photo is {actual} pixels wide; {min} are requested here. It was probably shrunk when it was sent through a messaging app. If you still have the original, use that. If not, send it anyway: the organisers will get in touch with you.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'This photo is {actual} MB; the maximum is {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'The content of this file does not match its file type.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'This file type is not allowed here.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'The file for this photo can no longer be found. Add the photo again.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Describe in a short sentence what can be seen in the photo.',
+  'Geef aan van wie de foto is.': 'Say who the photo is by.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'This photo has not been checked yet. Wait a moment or add it again.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'This photo is a HEIC file. OciDeck cannot check or clean it here, so it is sent as it is. It may contain where the photo was taken. If you would rather not share that, choose “Most Compatible” in your camera settings or share the photo as a JPEG, then add it again.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'This photo shows {actual} faces; {expected} were expected. This is only a reminder.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Tick the box to agree; without consent you cannot send.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'This form needs a newer version of OciDeck. Update the app to fill it in.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Something in the form itself was changed by accident. Restore the form; your answers stay.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'This line looks like a control code of the form and may not appear in an answer. Change it.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML is not allowed in an answer. Use plain text and simple formatting.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'A code block is not closed. Close it with ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Only photos you add in this form can go in an answer; an image from the internet cannot.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Only links that start with https:// and email addresses are allowed in an answer.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'This file was made with a different version of the form (version {submission}; version {published} applies now). Check your answers.',
+  'Punt {item}: {bericht}': 'Item {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'The count is now {actual}; it must be between {min} and {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'The count is now {actual}; it may be at most {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'The count is now {actual}; it must be at least {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'The number must be a multiple of {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'The number must be between {min} and {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'The number may be at most {max}.',
+  'Het getal moet minstens {min} zijn.': 'The number must be at least {min}.',
+  'De datum moet op of na {min} liggen.': 'The date must be on or after {min}.',
+  'De datum moet op of vóór {max} liggen.':
+      'The date must be on or before {max}.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” is not a date. Write the date as year-month-day, for example 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'This is not a valid email address.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'This is not a valid web address. Start with https://.',
+  'Dit is geen geldig telefoonnummer.': 'This is not a valid phone number.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'This is not a valid Dutch postcode, such as 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Only one line fits here. Remove the line breaks.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Use only the checkboxes of this question: one box per option.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Write each item on its own line, with a dash or a number in front.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'The table is no longer correct: keep the header row as it was and give every row the same number of columns.',
+  'Dezelfde foto staat hier twee keer.': 'The same photo appears here twice.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Only photos belong in this field, no loose text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'The box for your consent is damaged. Restore the form.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'This answer does not have the shape that belongs to this question.',
   'Downloaden…': 'Download…',
   'Afbeelding opgeslagen als': 'Image saved as',
   '{naam}: ingesteld': '{naam}: set up',

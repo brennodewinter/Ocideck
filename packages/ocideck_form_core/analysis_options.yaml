@@ -1,0 +1,13 @@
+# Pure Dart: no Flutter lints here. The package has no dependency on the Flutter
+# SDK, so a stray `package:flutter` import fails analysis by construction.
+include: package:lints/recommended.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-raw-types: true
+    strict-inference: true
+
+linter:
+  rules:
+    unawaited_futures: true

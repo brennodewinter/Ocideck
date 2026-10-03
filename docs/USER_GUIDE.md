@@ -5067,9 +5067,19 @@ not, and why conversion is deliberately lossy — is written up in
 ### Importing a Word or LibreOffice document
 
 **Document importeren…** (welcome screen, or the document toolbar) opens a
-`.docx` or `.odt` as a new document: headings, paragraphs, lists, tables,
-bold/italic and links become Markdown. The import is best-effort and never
-writes to the source file. *(Added 2026-09-18, #2101.)*
+`.docx`, `.odt`, `.xlsx`, `.ods` or `.csv` as a new document: headings,
+paragraphs, lists, tables, bold/italic and links become Markdown. The import
+is best-effort and never writes to the source file. *(Added 2026-09-18,
+#2101.)*
+
+**Spreadsheets.** Since 2026-10-02 (#2225) the same action also accepts
+`.xlsx`, `.ods` and `.csv`: each worksheet becomes a heading followed by a
+GFM table whose first row is the header. Formulas land as the value the sheet
+last computed, dates as `yyyy-mm-dd`; images, charts, merged cells and
+formatting have no Markdown shape and are reported in the *not taken along*
+count rather than dropped silently. A spreadsheet dropped on the window takes
+the same route, and a spreadsheet picked via **Openen** gets a snackbar
+offering the import instead of a dead end.
 
 **Taking the house style along.** Since 2026-09-19 (#2119) the import also reads
 what the document carries as house style, and when it finds anything, one
@@ -5778,6 +5788,219 @@ a marker. **LaTeX** turns the marker into `\tableofcontents` and lets TeX build
 the contents itself, with page numbers. The list is generated *after* the privacy
 projection, so a heading removed from the redacted copy is absent from that copy's
 contents as well.
+
+### Filling in a form
+
+A document that contains a form (see FILE_FORMAT §14.14) opens on the **Fill in**
+tab instead of the editor. The page shows the title, whatever the author wrote
+above the questions, the notice about your details, and then every question with
+its own input: a line for a short answer, a larger box for a story, radio buttons
+for one choice, checkboxes for several, a list or a table you can add rows to, a
+date with a calendar, and a box you tick to give consent. No markers are visible.
+
+Under each question the page tells you what is still wrong, in plain words and
+saying what to do about it — "You wrote 90 words; at least 150 are needed" — and
+counts as you type (**Words: 90 (at least 150, at most 300)**). A required question
+you have not touched yet is not marked red; it is once you have been there or
+jumped to it. At the top the page says how many things are left before you can
+send, with a button for each that takes you to the question; every section heading
+shows whether it is done.
+
+A photo question has an **Add photo** button once the document is saved. The photo is
+cleaned before it goes into the document — its position, time and device are taken out
+without re-encoding the picture, and the page tells you when location data was removed —
+and checked for real, so a file that only pretends to be a photo is refused. It is stored
+as `images/<question>-<number>`, never under its original file name. Where the form asks
+for it you describe what is in the photo and say who it is by. A HEIC photo cannot be
+checked or cleaned here and is sent as it is; the page says so.
+
+Everything you type goes straight into the document: only the part between the
+answer markers changes, everything else stays byte for byte as the author wrote it.
+**Undo** takes back a whole word at a time per question, and **Visual** and **Source**
+show the same document. A form that is damaged — a closing marker is gone — cannot
+be filled in; the page says why and offers to go to the source.
+
+**Want to try it?** The repository has an example form in `examples/forms/` (`recept.nl.md`,
+`recept.en.md`): a recipe submission with every kind of question, including photos and a consent
+box. Copy it, open the copy and it opens on **Fill in**. Open the empty original once first (in the
+same session) so OciDeck remembers the published form for the next step.
+
+**Saving your submission.** At the bottom of the page, **Save submission as zip…** makes
+one zip file with your answers and photos, which you email to the organiser. The button is
+always there: while something is still open it shows what, instead of saving. The zip holds
+`submission.md` (your filled-in form), the photos and a small `manifest.json` that says which
+form and version the answers belong to and carries a checksum of every file, so the organiser
+can verify it with `sha256sum`. Nothing about your device goes in it. The photos are cleaned
+once more on the way out, even if you placed a file in the `images` folder yourself. The
+organiser needs the form exactly as it was published: OciDeck remembers it from the moment
+you opened the empty form; if you reopen a half-filled document later, it asks you to choose
+the original file you received. It refuses a form whose text outside the answers was changed.
+
+**Saving it sealed.** When the organiser sent you a **bundle file** (`….bundle.json`, next to the form) and a
+**fingerprint** (in the invitation, not in the bundle file), **Save sealed…** makes an *encrypted* file,
+`….zip.age`, that only the organiser — everyone the bundle names — can open. OciDeck asks for the bundle file,
+then for the fingerprint, and checks that the bundle really is from who the invitation says, is for exactly this
+form, has not expired, and is not older than a bundle you already received from this organiser. Only then is
+anything sealed, and the message afterwards says who can open it. OciDeck remembers the bundle and fingerprint for
+this form until you close it, so a second submission does not ask again; the *highest sequence number it has seen* it
+remembers for good, so an organiser — or someone in between — cannot hand you an old bundle that still lists someone
+who has left. It stops, and says why, when: the fingerprint is not a fingerprint or does not fit the bundle; the
+bundle was changed, belongs to another form or text, or has expired; the form has closed (the bundle names the last
+day); or the submission is larger than the organiser allows. The plain zip stays available beside it. **Not in the
+web version:** the encryption library does not run there yet, so there the button is not offered.
+
+### Receiving submissions (organiser)
+
+The other side of a form is receiving what comes back. It is an optional extension: switch on
+**Settings → Uitbreidingen (Extensions) → Formulieren en inzendingen** (it is off by default;
+filling in a form never needs it). The welcome screen then has an **Inzendingen** button.
+
+1. **Choose a workspace** — a folder where the submissions and the register will be kept. OciDeck
+   remembers it. Everything in it is a plain file you can also read without OciDeck.
+2. **Add the form** as you published it (*Formulier toevoegen…*, a `.md` file). Every submission is
+   checked against *this* text — never against the rules the submission itself carries, so a
+   respondent's copy that weakened a rule changes nothing. A published version never changes: other
+   text under the same id and version is refused; change the form, change its version number.
+3. **Import packages** (*Pakketten binnenhalen…*, the `.zip` and `.zip.age` files that arrived). A plain zip is not
+   encrypted in transit; the window says so. A **sealed** file (`.zip.age`) is opened with your editorial key
+   (*Editorial key…*, below) and from there on is an ordinary package — the line says *sealed package opened and
+   imported*. When it cannot be opened the line says why, and nothing is imported: there is no editorial key yet
+   (create or restore one), the keychain cannot be read (nothing was tried), the stored key is damaged, the package
+   was sealed for somebody else's key, or it was changed or cut short. A file with an `age` header is never handed
+   to the zip reader, and a zip is never offered to the key. Each file gets a line: *imported*, *imported, but there
+   are points to review*, *already there*, *not a package OciDeck can read*, *form not added* (add it
+   first) or *not saved*. Every photo is cleaned again and really decoded; a file that only pretends
+   to be a photo is flagged.
+
+Below the buttons the window lists **every submission**, the newest first: the columns the form names
+in `overview=` (a name, a dish) as its title, then its status — *Om na te lopen* (to review) when it has
+an error, *Verwijderd* (deleted) when only the record is left, otherwise the status from the form — the
+day received and, when set, the day withdrawn. Open a line to see **what is wrong with it**, in plain
+words about the respondent ("90 words; at least 150 needed"), each point under the name of its field,
+with an icon for how serious it is, and which form and version it was judged against. The points are
+worked out again every time from what is in the workspace: correct the working copy
+(`submission.edit.md`) and the point is gone, with a note that the judgement is about the working copy.
+
+Under an opened submission are its **actions**:
+- **Change status** — a choice from the form's own list of states (`received`, `edited`, …). You cannot
+  choose a state the form does not name, and a deleted submission has none.
+- **Withdraw…** — enter the day the respondent withdrew it (today is proposed). A withdrawn submission never
+  goes into the book. **Undo withdrawal** takes it back.
+- **Delete…** — erases the answers, the working copy and the photos from the workspace. First a
+  confirmation says what is erased and what stays: a **minimal record** (the number, the days of receipt
+  and consent and the status — and the fields the form announced beforehand in its notice, `keep-record`).
+  It cannot be undone. If the register cannot be read, the content is still erased, and OciDeck says the
+  row has to be adjusted by hand.
+- **Open working copy** — improve a submission without touching what arrived. OciDeck makes
+  `submission.edit.md`, a literal copy, and opens *that* in a tab (the Inbox closes). Fix an answer, leave a
+  name out; the form opens on **Fill in** like any form. What arrived (`submission.md`) is never opened for
+  editing. Back in the Inbox the submission is judged again on the working copy — a point you fixed is gone, and
+  the line says the judgement is about the working copy — and you can then move its status on. Change the form's
+  own text in the working copy and the Inbox says so: that is not an answer.
+- **Throw away working copy…** (only when there is one) — back to what arrived. The confirmation says what goes
+  (the working copy and its improvements, for good) and what stays (what arrived, the photos, the register), and
+  asks you to close the working copy first if it is still open in a tab, or saving it would bring it back. The
+  submission is then judged on what arrived again. It also works for a working copy that cannot be read, which is
+  how you get out of one; never for a deleted submission.
+- **Compile book…** — turn the accepted submissions into one document. Choose the form, a **chapter template**
+  (an ordinary `.md` file in which `{field-id}` stands for the answer to that field), which **statuses** go in (with
+  the form's `maker-approved` state, that one is already ticked; otherwise nothing is and you choose), optionally
+  one field to **sort** by and one to **group** by, and a name. The book is written as a **new document** in the
+  `book` folder of the workspace and never over an existing one; the photos are copied next to it as
+  `images/<id>-<field>-<n>.<ext>`. An answer goes in as the Markdown it is, whole; **a withdrawn submission never
+  goes in**; a template that names a field the form does not have is refused, naming the field. What the book was
+  made from — which submissions, under which consent, and per photo its fingerprint, its maker and the evidence
+  it may be there under (the consent the respondent gave, with the hash of its text) — is written next to it in
+  `<name>.compile.json`, not in the text. The asset rights check does not look at the photos of a document yet;
+  this records the evidence so it is there when it does. The sentence afterwards says how many chapters and photos went in and
+  how many submissions were withdrawn or skipped (another form version, or unreadable), and offers to open the
+  book.
+- **Maker check…** — before a contribution is published, the maker sees what it will look like and says whether it
+  is right (FORM_INTAKE.md §7.4). It is an **integrity control**: an anonymous respondent cannot be authenticated,
+  so only an answer from the address the submission gave confirms that the contribution is that person's. Three
+  steps, each on its own: **Create check document and open it** makes the chapter of *this one submission* from a
+  chapter template — the same maker as the book, so the maker sees what will be printed — and opens it in a tab
+  (the Inbox closes); you export it as a PDF with the usual export (choose the **full** profile: the content is the
+  maker's own). **Write mail** opens a draft in your mail program, addressed to the address the maker gave in the
+  form (the first e-mail field that was filled in; you can type another), with a short text and the day to answer
+  by (two weeks, you can change it); attach the PDF yourself. **Check sent** sets the status to
+  `maker-check-sent`. When the maker answers ‘agreed’, set the status to `maker-approved` yourself — compile takes
+  only that status by default. The draft is in your interface language; edit it in your mail program. Not for a
+  withdrawn or deleted submission, and **Check sent** only when the form has that status.
+Each action says how it went. A register that cannot be read is never written over.
+
+**The editorial key** (*Editorial key…*, at the bottom of the Inbox; it also opens without a workspace). An
+organiser has one key that opens sealed submissions and signs the bundles of their forms (FORM_INTAKE.md §5.9). It
+lives in the keychain of your operating system, so there is nothing to create on the web; there the window says that
+and offers nothing.
+
+- **Create editorial key** — a step you take on purpose, never silently. The window first says what the key is and
+  what losing it costs: every submission not yet fetched that was sealed only to it becomes unreadable. Straight
+  after, it shows the **recovery key** — 109 characters in groups of four. Write it down and keep it somewhere
+  other than this device.
+- **Show recovery key…** and **Check recovery key** — type the recovery key back in. When it is right, the key is
+  marked *checked*; that is what publishing a form will ask for. A key you did not check says so in the overview.
+  It forgives case, spaces and hyphens, and `I`/`L` for `1` and `O` for `0`; the recovery key of a *collaboration*
+  identity is refused as such.
+- **Restore from recovery key…** — only where there is no key yet. A restored key counts as checked: whoever typed
+  it has it.
+- **Copy fingerprint** — what you give a respondent through another channel than the bundle itself.
+- **Export as age key file…** — writes the key as an ordinary `age` key file (readable by the `age` command), made
+  so that only you can read it. With it a sealed file can be opened without OciDeck.
+- **Create editor card…** — for an **editor who joins** a form's team: the owner of the form lists them in the
+  bundle so they can open the submissions too. Type your name, then **Create card**: the window shows the card (a line
+  of text to **copy** and send, by mail if you like) and the **fingerprint of the card**. Give that fingerprint to
+  the owner **by another route than the card** — over the phone, in person. The owner types it back before adding you.
+  The fingerprint covers the whole card, not only your signing key, so nobody who carries the card can swap in a
+  different address to open your submissions.
+- **Delete editorial key…** — after a confirmation that says again what goes with it.
+
+**A key is never overwritten.** When the keychain cannot be read, OciDeck says so and creates nothing — a keychain
+that does not answer is not an empty keychain — and the same when what is stored cannot be read as a key. Nothing
+you type is repeated in a message.
+
+**Team…** (at the bottom of the Inbox; needs a workspace). A form's team is the editors **besides you** who are listed
+in every bundle you sign, so they can open the submissions too. It is the file `team.json` in the workspace, so a
+shared workspace shares its team. **To add an editor**, they make a card (*Create editor card…* in their *Editorial
+key…* window) and send it to you. Paste it and choose **Check card**: the window shows only their name. Then **type
+the card's fingerprint** that they gave you *by another route than the card* — over the phone, in person — and choose
+**Add**. The fingerprint is not shown to you first, on purpose: copying it off the screen would check nothing. It
+stops, and says why, when the fingerprint does not fit the card (the card was changed, or is not from who you think),
+the card is your own, the editor is there already, the team is full (a bundle names at most 64 organisers, you
+included), or `team.json` cannot be read (it is left alone). **Remove** asks first and says what stays: bundles you
+published earlier stay as they are until you publish again, and what was already sealed for that person stays
+readable to them. Publish again after any change: the bundle lists you first, then the editors in the order they were
+added, and says *Besides you in the bundle: …* in the window.
+
+**Publishing needs a way back**: your recovery key typed back, *or* a second editor in the team.
+
+**Publish bundle…** (under the forms in the Inbox). A respondent does not take a form on trust: the **bundle**
+says which key to seal to and which text it belongs to, and is signed with your editorial key. Pick the form —
+**every language is its own text and gets its own bundle** — the *name for the respondent* (the form's
+`controller`, else *Redactie*) and *valid until* (the form's closing day, else a year on; never before the
+closing day). **Create bundle** stores `template.<language>.bundle.json` beside the form and shows the
+**fingerprint** of your signing key. Give the fingerprint to the respondent **by another route than the bundle
+file** — in the invitation, say. The bundle alone cannot show who it comes from; the fingerprint can.
+Publishing again makes a bundle with the next sequence number, over the old one; the number runs on across the
+languages and versions of one form, because a respondent refuses a lower number than they have seen.
+
+Nothing is signed, and the window says why, when: there is no usable editorial key; **there is no way back** — the recovery
+key has not been typed back and the team has no second editor (without one, every submission is unreadable if this device
+breaks — *Editorial key…*, *Team…*); `team.json` cannot be read; the name
+is empty or longer than 80 characters; *valid until* is not a date or lies before the closing day; or a bundle of
+this form in the workspace cannot be read, which makes the next sequence number impossible to know. Closing day and
+retention period are taken from the form itself.
+
+A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it
+arrived plus its photos, in one step: a crash never leaves half a submission, and a submission that
+is already there is never overwritten. One with an error still lands, with the status `needs-fixing`,
+so you can work on it in a copy; nothing is accepted or dropped silently.
+
+**The register** (`overview.md`, *Register openen*) is one Markdown table with a row per submission:
+its id, the columns the form names in `overview=`, the day received, the status, the day of consent,
+withdrawn and delete-after. It is an ordinary document: edit it with the table editor, add columns of
+your own. If you break it so that it can no longer be read, OciDeck reports it and leaves it alone
+instead of writing over your changes. Answers appear in it as plain text, never as links or images.
 
 ### Converting between a presentation and a document
 

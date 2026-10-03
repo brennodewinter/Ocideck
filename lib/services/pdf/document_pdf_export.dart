@@ -20,6 +20,7 @@ import '../../models/deck.dart' show TlpLevel, TlpLevelX;
 import '../../models/page_size.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../document_deck_bridge.dart';
+import '../form_document_blocks.dart';
 import '../document_chrome_template.dart';
 import '../export_bundle.dart';
 import '../export_metadata.dart';
@@ -163,7 +164,9 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   ExportDocumentMetadata? metadata,
 }) async {
   final deck = bundle.audience.deck;
-  final body = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+  final body = stripFormMarkers(
+    DocumentDeckBridge.deckToDocumentMarkdown(deck),
+  );
   final theme = deck.themeProfile;
   final blocks = markdownToPdfBlocks(
     body,

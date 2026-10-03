@@ -666,6 +666,595 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'E redaktornan banda di bo ku ta den kada bundel, pa nan tambe por habri e envionan. Bo ta agregá un persona ku su karta di redaktor i bo ta tipa e huella digital di e karta atrás.',
+  'Er is nog niemand naast jou.': 'Ainda no tin ningun persona banda di bo.',
+  'Plak de kaart van de redacteur': 'Pega e karta di e redaktor',
+  'Kaart controleren': 'Kontrolá karta',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karta di {naam}. Tipa e huella digital di e karta akí ku {naam} a duna bo via un otro kaminda, por ehèmpel pa telefòn.',
+  'Redacteur verwijderen': 'Kita redaktor',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Kita {naam} for di e team? Bundelnan ku bo a publiká kaba ta keda manera nan ta te ora bo publiká di nobo; loke kaba a wòrdu sellá pa {naam} ta keda lesibel pa e persona ei.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} a wòrdu agregá. Publiká e bundel di nobo pa inkluí {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} a wòrdu kitá. Publiká e bundel di nobo pa kita {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Krea promé bo propio yave di redakshon bou di Yave di redakshon….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Bo yave di redakshon no por wòrdu usá. Wak bou di Yave di redakshon….',
+  'Dit is geen redacteurskaart.': 'Esaki no ta un karta di redaktor.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'E karta akí ta di un vershon mas nobo di OciDeck. Aktualisá OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'E karta ta kontené algu ku no ta permití. Pidi e redaktor pa un karta nobo.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'E huella digital akí no ta bai ku e karta: e karta a wòrdu kambia of no ta di ken bo ta pensa. Pidi e redaktor di nobo pa e huella digital i e karta.',
+  'Dit is je eigen kaart.': 'Esaki ta bo propio karta.',
+  'Deze redacteur staat er al.': 'E redaktor akí ta den e team kaba.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'E team ta yen: un bundel ta karga máksimo 64 organisadó, bo inkluí.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'E archivo team.json den e mapa di trabou no por wòrdu lesá. Nada no a wòrdu kambia; repará of eliminá e.',
+  'Het team kon niet worden opgeslagen.': 'No por a warda e team.',
+  'Deze redacteur staat niet meer in het team.':
+      'E redaktor akí no ta den e team mas.',
+  'Naast jou in de bundel: {namen}.': 'Banda di bo den e bundel: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrolá promé bo yave di rekuperashon bou di Yave di redakshon…, òf agregá un di dos redaktor bou di Team…. Sin kaminda di bèk, tur envio ta bira ilegibel si e aparato akí kibra.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'E archivo team.json den e mapa di trabou no por wòrdu lesá. Nada no ta wòrdu firmá.',
+  'Redacteurskaart maken…': 'Krea karta di redaktor…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Ku un karta di redaktor e dueño di un formulario ta agregá bo na e bundel, pa bo tambe por habri e envionan. E karta por wòrdu mandá pa e-mail.',
+  'Jouw naam op de kaart': 'Bo nòmber riba e karta',
+  'Kaart maken': 'Krea karta',
+  'Kaart kopiëren': 'Kopia karta',
+  'Vingerafdruk van de kaart': 'Huella digital di e karta',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Duna e dueño e huella digital akí via un otro kaminda ku e karta, por ehèmpel pa telefòn. E ta tipa e atrás promé ku e agregá bo.',
+  'Verzegeld opslaan…': 'Warda sellá…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Un archivo kodifiká (.zip.age) ku solamente e organisadó por habri. Pa esei bo mester e archivo di e bundel i e huella digital di e invitashon.',
+  'Kies het bundelbestand van de organisator':
+      'Skohe e archivo di e bundel di e organisadó',
+  'Vingerafdruk van de organisator': 'Huella digital di e organisadó',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Tipa e huella digital di e invitashon. E no ta den e archivo di e bundel a propósito: asina bo por verifiká di ken e ta bin.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Esei no ta un huella digital. E ta konsistí di 52 karakter, normalmente den grupo di kuater.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'E archivo akí no ta un bundel ku OciDeck por lesa.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'E formulario of e bundel akí ta di un vershon mas nobo di OciDeck. Aktualisá OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'E huella digital no ta bai ku e bundel akí: e formulario no ta bin di ken e invitashon ta men. Kontrolá e huella digital i e archivo di e bundel.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'E firma di e bundel no ta korekto: e a wòrdu kambia of e no ta di ken e huella digital ta men. Pidi e organisadó pa un bundel nobo.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'E bundel akí no ta pertenesé na e formulario akí. Usa e archivo di e bundel ku ta pertenesé na eksaktamente e formulario akí.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'E bundel akí a bensé. Pidi e organisadó pa un nobo.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'E bundel akí ta mas bieu ku un bundel ku bo a risibí promé di e organisadó akí. Pidi e organisadó pa e mas resien.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'E bundel ta kontené algu ku no ta permití. Pidi e organisadó pa un bundel nobo.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'E formulario akí ta sera: e último dia tabata {datum}. Tuma kontakto ku e organisadó.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'E envio ta mas grandi ku loke e organisadó ta permití ({mb} MB). Kita un potret òf haci un mas chikí.',
+  'De inzending kon niet worden verzegeld.': 'No por a sella e envio.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Warda sellá komo {naam}, solamente por wòrdu habrí pa: {organisatoren}.',
+  'Bundel publiceren…': 'Publiká bundel…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'E bundel ta loke e invulador di bo redakshon ta kere: na ki yave e ta sella i ki teksto e ta pertenesé na dje. E ta wòrdu warda banda di e formulario.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'No tin ningun formulario den e mapa di trabou pa krea un bundel pa dje.',
+  'Naam voor de invuller': 'Nòmber pa e invulador',
+  'Geldig tot (jjjj-mm-dd)': 'Bálido te (aaaa-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'E último dia ku un invulador ta kere e bundel akí. No promé ku e dia di sera di e formulario.',
+  'Bundel maken': 'Krea bundel',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundel kreá (number di sekuensia {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Duna e invulador e huella digital via un otro kaminda ku e archivo di e bundel, por ehèmpel den e invitashon. Ken tin solamente e archivo di e bundel no por verifiká di ken e ta bin.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'E plataforma akí no tin yavero pa e yave di redakshon; no por firma un bundel aki.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Ainda no tin yave di redakshon. Krea un bou di Yave di redakshon… promé ku bo publiká un bundel.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'E yavero no por wòrdu lesá. Nada no a wòrdu firmá.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'E yave di redakshon warda no por wòrdu lesá. Eliminá e bou di Yave di redakshon… i rekuperá e for di bo yave di rekuperashon.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Un bundel di e formulario akí den e mapa di trabou no por wòrdu lesá of no ta pertenesé na e otronan. Ta ku esei no por determiná e number di sekuensia i no ta firma nada. Kontrolá: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Yena un nòmber di máksimo 80 karakter.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Bálido te mester ta un fecha ku ta existí, komo aaaa-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Bálido te no por ta promé ku e dia di sera di e formulario.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'No por a krea e bundel ({veld}). Wak si e formulario ta menshoná un dia di sera i un periodo di warda válido.',
+  'formulier': 'formulario',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'No por a warda e bundel den e mapa di trabou.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Krea i firma e bundel ku un invulador ta kere tokante bo redakshon.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: paket sellá habrí i importá.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: e paket akí ta sellá i e plataforma akí no tin yavero pa e yave di redakshon.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: e paket akí ta sellá i ainda no tin yave di redakshon pa habri e. Krea un bou di Yave di redakshon… òf rekuperá e for di bo yave di rekuperashon.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: e paket akí ta sellá i e yavero no por wòrdu lesá. Nada no a wòrdu purba.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: e paket akí ta sellá i e yave di redakshon warda no por wòrdu lesá. Eliminá e bou di Yave di redakshon… i rekuperá e for di bo yave di rekuperashon.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: e paket akí no a wòrdu sellá pa bo yave di redakshon.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: e paket akí a wòrdu kambia of kortá i e no ta wòrdu habrí.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: e paket akí ta mas grandi ku loke un envio por ta.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: e yave di redakshon warda no ta un yave ku OciDeck por usa.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: no ta un paket sellá ku OciDeck por lesa.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Un archivo sellá (.zip.age) ta habri ku bo yave di redakshon.',
+  'Herstelsleutel controleren': 'Verifiká e yave di rekuperashon',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Yave di redakshon krea. Skirbi awor e yave di rekuperashon.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'E yavero no a aseptá e yave. Nada no a krea.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Ya tin un yave di redakshon. No a mishi ku dje.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'No por a lesa e yavero. Nada no a asumí i nada no a krea.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Tin algu den e yavero ku no ta un yave di redakshon. No a skirbi riba dje.',
+  'Dit platform heeft geen sleutelhanger.': 'E plataforma akí no tin yavero.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Korekto: e yave di rekuperashon a wòrdu verifiká.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Esaki ta un yave di rekuperashon válido, pero no e un di e yave di redakshon akí.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'E yave di rekuperashon ta korekto, pero no por a gardu.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'No tin ningun yave di redakshon pa kompará ku dje.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Esaki no ta e yave di rekuperashon di un yave di redakshon.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Tin un eror di tipo: e suma di kontròl no ta kuadra.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'E yave di rekuperashon akí ta bin di un versho mas nobo di OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'E yave di rekuperashon akí a wòrdu hasi pa algu otro.',
+  'Hersteld uit de herstelsleutel.': 'Restourá for di e yave di rekuperashon.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'E yavero no a aseptá e yave. Nada no a wòrdu restourá.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Warda e yave di redakshon komo archivo di yave age',
+  'Het bestand kon niet worden opgeslagen.': 'No por a warda e archivo.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Wardá komo {pad}. Ken tin e archivo akí por habri tur kos.',
+  'Redactiesleutel verwijderd.': 'Yave di redakshon kita.',
+  'Redactiesleutel': 'Yave di redakshon',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'E plataforma akí no tin yavero. E yave di redakshon no por wòrdu wardá aki; usa e app di desktop.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'No por a lesa e yavero (blokiá, of akseso nenegá). Nada no a asumí i nada no a krea.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Tin algu den e yavero ku no ta un yave di redakshon. No a skirbi riba dje. Kita e i restourá e yave for di bo yave di rekuperashon.',
+  'Redactiesleutel verwijderen…': 'Kita yave di redakshon…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Un yave di redakshon ta habri e envionan sellá i ta firma e pakete di bo formularionan. E ta den e yavero di e sistema operativo akí. Si bo perde tur yave di e redakshon, tur envio ku ainda no a bai buska ta bira ilegibel: esei ta e preis di un sirbidó ku no por lesa nada.',
+  'Redactiesleutel aanmaken': 'Krea yave di redakshon',
+  'Herstellen uit herstelsleutel…': 'Restourá for di yave di rekuperashon…',
+  'Vingerafdruk': 'Huella digital',
+  'Ontvanger (age)': 'Risibidó (age)',
+  'Aangemaakt op {datum}.': 'Krea riba {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'E yave di rekuperashon a wòrdu verifiká.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'E yave di rekuperashon ainda no a wòrdu verifiká: skirbi e i tipia di nobo.',
+  'Herstelsleutel tonen…': 'Mustra yave di rekuperashon…',
+  'Vingerafdruk kopiëren': 'Kopia huella digital',
+  'Exporteren als age-sleutelbestand…': 'Eksportá komo archivo di yave age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Skirbi e yave di rekuperashon akí i warda e na un lugá sigur, afó di e aparato akí. Ken tin dje por habri tur envio i firma pakete na bo nòmber. Si bo perde e aparato akí, esaki ta tur loke ta keda.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tipia e yave di rekuperashon aki di nobo',
+  'Later': 'Mas tarde',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Tipia of pega e yave di rekuperashon. Loke bo yena ta wòrdu pone den e yavero komo yave di redakshon; nada no ta wòrdu skirbi riba dje.',
+  'Herstelsleutel': 'Yave di rekuperashon',
+  'Redactiesleutel verwijderen': 'Kita yave di redakshon',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'E yave ta wòrdu kita for di e yavero i por bin bèk solamente for di e yave di rekuperashon. Si bo no tin dje, envionan ku a wòrdu sellá so pa e yave akí ta bira ilegibel pa semper.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'E yave ku ta habri envionan sellá i ta firma pakete.',
+  'Redactiesleutel…': 'Yave di redakshon…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'A tira e kopia di trabou. Loke a drenta ta wòrdu evaluá di nobo.',
+  'Er is geen werkkopie.': 'No tin kopia di trabou.',
+  'De werkkopie kon niet worden weggegooid.':
+      'No por a tira e kopia di trabou.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Ta kita e kopia di trabou. Loke a drenta ta keda i ta wòrdu evaluá di nobo.',
+  'Werkkopie weggooien…': 'Tira kopia di trabou…',
+  'Werkkopie weggooien': 'Tira kopia di trabou',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'E kopia di trabou ku e mehoransanan ta wòrdu kitá i no por wòrdu rekuperá. Loke a drenta ta keda i ta wòrdu evaluá di nobo. Si e kopia di trabou ainda ta habrí den un tab, sera esei promé.',
+  'Weggooien': 'Tira',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'E envio akí a wòrdu retirá i p\'esei e no ta drenta den ningun kapítulo.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'No por lesa e envio akí, òf e formulario pa kual e a wòrdu mandá no ta den e mapa di trabou.',
+  'Het controledocument kon niet worden geschreven.':
+      'No por a skirbi e dokumento di kontròl.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Bo kontribushon pa e buki: por fabor kontrolá',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Aki ta bo kontribushon manera e ta aparesé den e buki (wak e anekso). Tur kos ta korekto? Kontestá ‘di akuerdo’ òf ku bo korekshonnan promé ku {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'E mail ta kla den bo programa di mail. Anekshá e PDF i mandé.',
+  'Controle door de maker…': 'Kontròl door di e outor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'E dokumento di kontròl ta e kapítulo di e envio akí so. Eksportá e komo PDF (skohe e perfil kompleto), anekshá e PDF na e mail i mandé. Si e outor kontestá ‘di akuerdo’, pone bo mes e status riba maker-approved: e kontesta ei ta tambe e konfirmashon ku e kontribushon realmente ta di e persona akí.',
+  'Controledocument maken en openen': 'Krea e dokumento di kontròl i habri',
+  'E-mailadres van de maker': 'Adrès di e-mail di e outor',
+  'Antwoord vóór (jjjj-mm-dd)': 'Kontestá promé ku (aaaa-mm-dd)',
+  'Mail schrijven': 'Skirbi mail',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'E formulario akí no konosé e status maker-check-sent, p\'esei no por pone esaki aki.',
+  'Controle verstuurd': 'Kontròl mandá',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Ta krea e kapítulo di e envio akí i ta prepará e mail ku kual e outor ta kontrolá e.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'E envio akí no ta den e rehistro. Ripará overview.md i purba di nobo.',
+  'Kies het hoofdstuksjabloon': 'Skohe e mòdelo di kapítulo',
+  'Kies eerst een hoofdstuksjabloon.': 'Skohe promé un mòdelo di kapítulo.',
+  'Kies minstens één status.': 'Skohe por lo menos un status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Buki kompilá. Kapítulonan: {n}. Potonan: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Retirá i p\'esei laga afó: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Saltá (otro versho of no por lesa): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Potonan ku tabata falta den e mapa di trabou: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Usa den e nòmber só lèter, number, strepi i strepi abou (máksimo 64 karakter).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Ya tin un buki ku e nòmber akí. Skohe un otro nòmber.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'E mòdelo ta menshon kampo ku e formulario no tin: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'No tin nada pa pone den e buki: ningun envio ku un status skohé. Retirá: {w}; saltá: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'No por lesa e rehistro. Ripará overview.md.',
+  'Het boek kon niet worden geschreven.': 'No por a skirbi e buki.',
+  'Boek samenstellen…': 'Kompilá buki…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'E buki ta drenta den e mapa book di e mapa di trabou i ta keda un dokumento normal ku bo por edita despues.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'No tin ningun formulario útil den e mapa di trabou.',
+  'Formulier': 'Formulario',
+  'Hoofdstuksjabloon': 'Mòdelo di kapítulo',
+  'Nog geen sjabloon gekozen.': 'Ainda no a skohe ningun mòdelo.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Den e mòdelo, {veld-id} ta paara pa e kontesta riba e kampo ei.',
+  'Hoofdstuksjabloon kiezen…': 'Skohe mòdelo di kapítulo…',
+  'Welke inzendingen?': 'Kua envionan?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Ta solamente envionan ku un di e statusnan aki ta drenta den e buki. Envionan retirá ta keda semper afó.',
+  'Ordenen op': 'Ordená segun',
+  'Groeperen op': 'Agrupá segun',
+  'Naam van het boek': 'Nòmber di e buki',
+  'Boek openen': 'Habri buki',
+  'Samenstellen': 'Kompilá',
+  'De werkkopie kon niet worden aangemaakt.':
+      'No a por a krea e kopia di trabou.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Ta habri un kopia di e envio pa mehorá. Loke a yega ta keda sin kambio.',
+  'Werkkopie openen': 'Habri kopia di trabou',
+  'Status gewijzigd naar {status}.': 'Status kambiá pa {status}.',
+  'Intrekking opgeslagen.': 'Retiro warda.',
+  'Intrekking ongedaan gemaakt.': 'Retiro desfèt.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Envio eliminá; e rekord ta keda.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Envio eliminá, ma no a por a aktualisá e rehistro. Edità overview.md ku man.',
+  'De inzending is niet gevonden in de werkmap.':
+      'No a hañ e envio den e mapa di trabou.',
+  'De inzending kon niet worden verwijderd.': 'No a por a eliminá e envio.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'No por lesa e rehistro. Drecha overview.md; nada no a kambia.',
+  'Het register kon niet worden bijgewerkt.':
+      'No a por a aktualisá e rehistro.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'No a por a hasi e kambio aki: e envio no ta den e rehistro.',
+  'Status wijzigen': 'Kambia status',
+  'Intrekking ongedaan maken': 'Desfé retiro',
+  'Intrekken…': 'Retirá…',
+  'Verwijderen…': 'Eliminá…',
+  'Inzending intrekken': 'Retirá envio',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Yena e dia ku esun ku a manda a retirá e envio. Un envio retirá nunka ta drenta e buki.',
+  'Dag (jjjj-mm-dd)': 'Dia (aaaa-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Dia inválido. Usa aña-luna-dia, por ehèmpel {voorbeeld}.',
+  'Inzending verwijderen': 'Eliminá envio',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'E repsuestanan, e kopia di trabou i e potretnan di e envio aki ta wòrdu borá for di e mapa di trabou. Solamente un rekord mínimo ta keda: e número, e dianan di risibimentu i konsentimentu i e status. Esaki no por wòrdu desfèt.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Tambe ta keda loke e formulario a anunsiá di promé: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Tin algu cos ku no ta bon ku e envio aki.',
+  'Verplicht, maar leeg gelaten.': 'Obligatorio, ma a laga bashí.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} palabranan; mínimo {min} ta nesesario.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} palabranan; máksimo {max} ta pèrmití.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karakternan; mínimo {min} ta nesesario.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karakternan; máksimo {max} ta pèrmití.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” no ta den e lista di opshonnan.',
+  '“{value}” is geen getal.': '“{value}” no ta un número.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” no ta un fecha den e forma aña-luna-dia.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Potret di {actual} pixel di ancho; a pidi {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'E archivo di e potret ta falta den e envio.',
+  'De beschrijving van de foto ontbreekt.':
+      'E deskripshon di e potret ta falta.',
+  'De maker van de foto ontbreekt.': 'E hasi di e potret ta falta.',
+  'De foto is niet gecontroleerd.': 'E potret no a wòrdu verifiká.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Potret HEIC: no verifiká ni limpiá; por kontené un lokalisashon.',
+  'Toestemming niet gegeven.': 'Konsentimentu no duná.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'E repsuesta ta kontené un reglon ku ta parse un kódigo di kontròl di e formulario.',
+  'Het antwoord bevat HTML.': 'E repsuesta ta kontené HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'E repsuesta ta kontené un blòkki di kódigo no serrá.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'E repsuesta ta referí na un imágen ku no ta pertenesé na e envio aki.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'E repsuesta ta kontené un link ku no ta pèrmití.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'E formulario of e vershon aki no ta den e mapa di trabou.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Esun ku a manda a traha ku un teksto di e formulario ku no ta e un publiká.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'E konsentimentu den e manifesto no ta konkordá ku e formulario publiká.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'A kambia e teksto di e formulario for di e repsuestanan.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'A kambia e teksto di e formulario na e kampo aki.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'E kampo aki no ta eksistí den e formulario publiká.',
+  'Dit veld ontbreekt in de inzending.': 'E kampo aki ta falta den e envio.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Envio di vershon {submission}; publiká ta vershon {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'E formulario ta nesesitá un vershon mas nobo di OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'E formulario publiká den e mapa di trabou no ta útil.',
+  'De inzending hoort bij een ander formulier.':
+      'E envio ta pertenesé na un otro formulario.',
+  'De opbouw van de inzending is beschadigd.':
+      'E struktura di e envio ta daña.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'No por lesa e rehistro. Drecha overview.md; e envionan ta mustrá abou sin datonan di e rehistro.',
+  'Nog geen inzendingen.': 'Ainda no tin envionan.',
+  'Om na te lopen': 'Pa revisá',
+  'Verwijderd': 'Eliminá',
+  'Zonder regel in het register': 'Sin reglon den e rehistro',
+  'Ontvangen {datum}': 'Risibí {datum}',
+  'Ingetrokken {datum}': 'Retirá {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'A eliminá e kontenido di e envio aki; so e rekord ta keda.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'No por lesa e envio aki. Kontrolá e archivonan den e mapa di trabou.',
+  'Beoordeeld tegen {formulier}.': 'Evaluá kontra {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'E evaluashon ta tokante e kopia di trabou (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Ningun punto pa revisá.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Potretnan ku ningun repsuesta no menshoná: {n}.',
+  'Inzendingen': 'Envionan',
+  'Werkmap': 'Mapa di trabou',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Ainda no a skohe un mapa di trabou. Skohe un mapa kaminda e envionan i e rehistro lo keda warda.',
+  'Werkmap kiezen…': 'Skohe mapa di trabou…',
+  'Kies de werkmap voor inzendingen': 'Skohe e mapa di trabou pa envionan',
+  'Formulieren': 'Formularionan',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Ainda no a agregá ningun formulario. Agregá e formulario manera bo a publik’é: un envio ta wòrdu verifiká kontra dje.',
+  'Formulier toevoegen…': 'Agregá formulario…',
+  'Kies het formulier om toe te voegen': 'Skohe e formulario pa agregá',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'E archivo aki no ta un formulario ku por wòrdu publiká.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'E formulario aki ta eksistí kaba ku un otro teksto. Un otro teksto ta un vershon nobo: duna e formulario un número di vershon mas haltu.',
+  'Formulier toegevoegd: {naam}.': 'Formulario agregá: {naam}.',
+  'Dit formulier stond er al.': 'E formulario aki tabata eksistí kaba.',
+  'Het formulier kon niet worden opgeslagen.': 'No a por a warda e formulario.',
+  'Inzendingen in de werkmap: {n}': 'Envionan den e mapa di trabou: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Un zip simpel no ta kodifiká durante e transporte.',
+  'Pakketten binnenhalen…': 'Importá paketenan…',
+  'Kies de pakketten om binnen te halen': 'Skohe e paketenan pa importá',
+  'Register openen': 'Habri rehistro',
+  '{naam}: binnengehaald.': '{naam}: importá.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importá, ma tin punto pa revisá.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importá, ma no a por a aktualisá e rehistro. Kontrolá overview.md.',
+  '{naam}: stond er al.': '{naam}: tabata eksistí kaba.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: no ta un paket di envio ku OciDeck por lesa.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: e formulario aki no a wòrdu agregá, of no den e vershon aki. Agregá e formulario promé.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: no a por a warda den e mapa di trabou.',
+  'Formulieren en inzendingen': 'Formularionan i envionan',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importá envionan di un formulario, verifiká nan kontra e formulario publiká i warda nan ku un rehistro. Yena un formulario tambe ta funshoná ora esaki ta paga. Paga pa default.',
+  'Inzending opslaan als zip…': 'Warda e envio komo zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Un archivo zip ku bo repsuestanan i potret, pa manda pa email na e organisadó.',
+  'Inzending opgeslagen als {naam}.': 'Envio warda komo {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Skohe e formulario manera bo a risibié',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Esaki no ta e formulario kaminda bo repsuestanan ta pertenesé. Skohe e archivo ku bo a risibí di e organisadó.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'No a por a lesa un potret: {pad}. Agregé di nobo.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'E envio no ta kaba den un pakete: demasiado potret, òf un potret ku ta demasiado grandi.',
+  'De inzending kon niet worden opgeslagen.': 'No a por a warda e envio.',
+  'Inzending opslaan': 'Warda envio',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Ku a kita e datonan di lokalisashon for di e potret aki.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'No por a agregá e potret aki. Skohe un archivo JPEG, PNG, WebP of HEIC di un potret.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Warda e dokumento promé pa agregá potret.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck por importá e archi vo aki pa un dokumento nobo.',
+  'Kies een datum': 'Skohe un fecha',
+  'Anders, namelijk:': 'Otro, ku ta:',
+  'Punt {n}': 'Punto {n}',
+  'Punt {n} verwijderen': 'Kita punto {n}',
+  'Rij {n} verwijderen': 'Kita fila {n}',
+  'Foto {n} verwijderen': 'Kita potret {n}',
+  'Wat is er te zien op de foto?': 'Kiko ta mira riba e potret?',
+  'Van wie is de foto?': 'Di ken e potret ta?',
+  'Foto toevoegen': 'Agregá potret',
+  'Verplicht': 'Obligatorio',
+  'Alles is ingevuld.': 'Tur kos ta yená.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Ainda {n} pa hasi promé ku bo por manda:',
+  'klaar': 'kla',
+  '{n} open': '{n} habrí',
+  'Dit formulier kan niet worden ingevuld.':
+      'E formulario aki no por wòrdu yená.',
+  'Naar de bron': 'Bai na e fuente',
+  'Woorden': 'Palabranan',
+  'Tekens': 'Karakternan',
+  'Keuzes': 'Opshonnan',
+  'Rijen': 'Filanan',
+  'Foto’s': 'Potretnan',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (mínimo {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (máksimo {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mínimo {min}, máksimo {max})',
+  'Invullen': 'Yena',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Tin algu cos ku no ta bon na e formulario aki. Tuma kontakto ku e persona ku a hasié.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'E kampo aki ta obligatorio. Yena e pa por manda.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Abo a skirbi {actual} palabra; mester di mínimo {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Abo a skirbi {actual} palabra; ta permití máksimo {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Abo a skirbi {actual} karakter; mester di mínimo {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Abo a skirbi {actual} karakter; ta permití máksimo {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” no ta den e lista. Skohe un di e opshonnan.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” no ta un número. Usa sifra so, si ta nesesario ku un komá òf punto pa e desimalnan.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'E potret aki ta {actual} pixel ancho; aki ta pidi {min}. Probablemente e a bira mas chikitu ora e a wòrdu manda via un aplikashon di mensahe. Si abo ainda tin e original, usa esei. Si no, manda e tòg: e organisashon lo tuma kontakto ku abo.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'E potret aki ta {actual} MB; e máksimo ta {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'E kontenido di e archivo aki no ta kuadra ku su tipo di archivo.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'E tipo di archivo aki no ta permití aki.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'No por haña mas e archivo di e potret aki. Agregá e potret di nobo.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Deskribí den un frase kòrtiku kiko ta mira riba e potret.',
+  'Geef aan van wie de foto is.': 'Bisa di ken e potret ta.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'E potret aki ainda no a wòrdu kontrolá. Warda un momentu of agregá e di nobo.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'E potret aki ta un archivo HEIC. OciDeck no por kontrolá of limpia esaki aki, i p\'esei e ta wòrdu manda manera e ta. E por kontené unda e potret a wòrdu tumá. Si bo no ke kompartí esei, skohe “Mas kompatibel” den e konfigurashon di kamera of kompartí e potret komo JPEG i agregá e di nobo.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Riba e potret aki tin {actual} kara; tabata spera {expected}. Esaki ta un rekordatorio so.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Marka e kuadro pa duna bo konsentimentu; sin konsentimentu bo no por manda.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'E formulario aki ta pidi un versho mas nobo di OciDeck. Aktualisá e aplikashon pa yena e.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Algu den e formulario mes a wòrdu kambia pa aksidente. Restaurá e formulario; bo repsuestanan ta keda.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'E liña aki ta parse un kódigo di kontrol di e formulario i no mag aparesé den un repsuesta. Kambia e.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML no ta permití den un repsuesta. Usa teksto normal i formato simpel.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Un blòki di kódigo no ta sera. Sera e ku ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Den un repsuesta por tin solamente potret ku bo agregá den e formulario aki; un imagen di internet no.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Den un repsuesta ta permití solamente link ku ta kuminsá ku https:// i adres di e-mail.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'E archivo aki a wòrdu hasi ku un otro versho di e formulario (versho {submission}; awor ta balidu versho {published}). Kontrolá bo repsuestanan.',
+  'Punt {item}: {bericht}': 'Punto {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Awor tin {actual}; mester ta entre {min} i {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Awor tin {actual}; por ta máksimo {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Awor tin {actual}; mester ta mínimo {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'E número mester ta un múltiplo di {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'E número mester ta entre {min} i {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'E número por ta máksimo {max}.',
+  'Het getal moet minstens {min} zijn.': 'E número mester ta mínimo {min}.',
+  'De datum moet op of na {min} liggen.':
+      'E fecha mester ta riba of despues di {min}.',
+  'De datum moet op of vóór {max} liggen.':
+      'E fecha mester ta riba of promé ku {max}.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” no ta un fecha. Skirbi e fecha komo aña-luna-dia, por ehèmpel 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Esaki no ta un adres di e-mail válido.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Esaki no ta un adres di web válido. Kuminsá ku https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Esaki no ta un número di telefòn válido.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Esaki no ta un kódigo postal hulandes válido, manera 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Aki ta kabe un liña so. Kita e saltunan di liña.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Usa solamente e kuadronan di e pregunta aki: un kuadro pa kada opshon.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Skirbi kada punto riba su mes liña, ku un streepi of un número dilanti.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'E tabèl no ta korekto mas: laga e liña di kabes manera e tabata i duna kada liña e mesun kantidat di kolòm.',
+  'Dezelfde foto staat hier twee keer.':
+      'E mesun potret ta aparesé aki dos biaha.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Den e kampo aki ta pertenesé potret so, no teksto suelto.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'E kuadro pa bo konsentimentu ta daña. Restaurá e formulario.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'E repsuesta aki no tin e forma ku ta pertenesé na e pregunta aki.',
   'Downloaden…': 'Baha…',
   'Afbeelding opgeslagen als': 'Imagen warda komo',
   '{naam}: ingesteld': '{naam}: konfigurá',

@@ -1626,6 +1626,590 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktörerna förutom du som står i varje bundle, så att de också kan öppna inlämningarna. Du lägger till någon med deras redaktörskort och skriver in kortets fingeravtryck igen.',
+  'Er is nog niemand naast jou.': 'Det finns ingen förutom du ännu.',
+  'Plak de kaart van de redacteur': 'Klistra in redaktörens kort',
+  'Kaart controleren': 'Kontrollera kort',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kort från {naam}. Skriv in fingeravtrycket för det här kortet som {naam} gav dig på ett annat sätt, till exempel i telefon.',
+  'Redacteur verwijderen': 'Ta bort redaktör',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Ta bort {naam} från teamet? Bundles du redan har publicerat förblir som de är tills du publicerar igen; det som redan förseglats för {naam} förblir läsbart för den personen.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} har lagts till. Publicera bundlen igen för att ta med {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} har tagits bort. Publicera bundlen igen för att ta bort {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Skapa först din egen redaktionsnyckel under Redaktionsnyckel….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Din redaktionsnyckel går inte att använda. Titta under Redaktionsnyckel….',
+  'Dit is geen redacteurskaart.': 'Det här är inte ett redaktörskort.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Det här kortet är från en nyare version av OciDeck. Uppdatera OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kortet innehåller något som inte är tillåtet. Be redaktören om ett nytt kort.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Det här fingeravtrycket passar inte kortet: kortet har ändrats eller är inte från den du tror. Be redaktören om fingeravtrycket och kortet igen.',
+  'Dit is je eigen kaart.': 'Det här är ditt eget kort.',
+  'Deze redacteur staat er al.': 'Den här redaktören finns redan i teamet.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Teamet är fullt: en bundle bär högst 64 arrangörer, dig inräknad.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Filen team.json i arbetsmappen går inte att läsa. Inget har ändrats; reparera eller ta bort den.',
+  'Het team kon niet worden opgeslagen.': 'Teamet kunde inte sparas.',
+  'Deze redacteur staat niet meer in het team.':
+      'Den här redaktören finns inte längre i teamet.',
+  'Naast jou in de bundel: {namen}.': 'Förutom du i bundlen: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrollera först din återställningsnyckel under Redaktionsnyckel… eller lägg till en andra redaktör under Team…. Utan väg tillbaka blir alla inlämningar oläsliga om den här enheten går sönder.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Filen team.json i arbetsmappen går inte att läsa. Inget signeras.',
+  'Redacteurskaart maken…': 'Skapa redaktörskort…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Med ett redaktörskort lägger ägaren av ett formulär till dig i bundlen, så att du också kan öppna inlämningarna. Kortet får skickas med e-post.',
+  'Jouw naam op de kaart': 'Ditt namn på kortet',
+  'Kaart maken': 'Skapa kort',
+  'Kaart kopiëren': 'Kopiera kort',
+  'Vingerafdruk van de kaart': 'Kortets fingeravtryck',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Ge ägaren det här fingeravtrycket på ett annat sätt än kortet, till exempel i telefon. Ägaren skriver in det igen innan du läggs till.',
+  'Verzegeld opslaan…': 'Spara förseglat…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'En krypterad fil (.zip.age) som bara arrangören kan öppna. För det behöver du bundle-filen och fingeravtrycket från inbjudan.',
+  'Kies het bundelbestand van de organisator': 'Välj arrangörens bundle-fil',
+  'Vingerafdruk van de organisator': 'Arrangörens fingeravtryck',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Skriv in fingeravtrycket från inbjudan. Det finns med avsikt inte i bundle-filen: så kan du kontrollera vem den kommer från.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Det är inget fingeravtryck. Det består av 52 tecken, oftast i grupper om fyra.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Den här filen är ingen bundle som OciDeck kan läsa.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Det här formuläret eller den här bundlen är från en nyare version av OciDeck. Uppdatera OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Fingeravtrycket passar inte den här bundlen: formuläret kommer inte från den inbjudan anger. Kontrollera fingeravtrycket och bundle-filen.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundlens signatur stämmer inte: den har ändrats eller kommer inte från den fingeravtrycket anger. Be arrangören om en ny bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Den här bundlen hör inte till det här formuläret. Använd bundle-filen som hör till just det här formuläret.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Den här bundlen har gått ut. Be arrangören om en ny.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Den här bundlen är äldre än en bundle du tidigare fick av den här arrangören. Be arrangören om den senaste.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundlen innehåller något som inte är tillåtet. Be arrangören om en ny bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Det här formuläret är stängt: sista dagen var {datum}. Kontakta arrangören.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Inlämningen är större än arrangören tillåter ({mb} MB). Ta bort ett foto eller gör ett mindre.',
+  'De inzending kon niet worden verzegeld.':
+      'Inlämningen kunde inte förseglas.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Sparat förseglat som {naam}, kan bara öppnas av: {organisatoren}.',
+  'Bundel publiceren…': 'Publicera bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundlen är det en inlämnare tror om er redaktion: vilken nyckel den förseglar till och vilken text den hör till. Den sparas bredvid formuläret.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Det finns inget formulär i arbetsmappen att göra en bundle för.',
+  'Naam voor de invuller': 'Namn för inlämnaren',
+  'Geldig tot (jjjj-mm-dd)': 'Giltigt till (åååå-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Den sista dagen en inlämnare tror på den här bundlen. Inte före formulärets slutdag.',
+  'Bundel maken': 'Skapa bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle skapad (löpnummer {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Ge inlämnaren fingeravtrycket på ett annat sätt än bundle-filen, till exempel i inbjudan. Den som bara har bundle-filen kan inte kontrollera vem den kommer från.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Den här plattformen har ingen nyckelring för redaktionsnyckeln; en bundle kan inte signeras här.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Det finns ännu ingen redaktionsnyckel. Skapa en under Redaktionsnyckel… innan du publicerar en bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Nyckelringen går inte att läsa. Inget har signerats.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Den sparade redaktionsnyckeln går inte att läsa. Ta bort den under Redaktionsnyckel… och återställ den från din återställningsnyckel.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'En bundle för det här formuläret i arbetsmappen går inte att läsa eller hör inte ihop med de andra. Då går löpnumret inte att avgöra och inget signeras. Kontrollera: {pad}',
+  'Vul een naam in van hooguit 80 tekens.': 'Ange ett namn på högst 80 tecken.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Giltigt till måste vara ett existerande datum, som åååå-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Giltigt till får inte ligga före formulärets slutdag.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundlen kunde inte skapas ({veld}). Kontrollera att formuläret anger en giltig slutdag och lagringstid.',
+  'formulier': 'formulär',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundlen kunde inte sparas i arbetsmappen.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Skapa och signera den bundle som en inlämnare tror om er redaktion.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: förseglat paket öppnat och importerat.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: det här paketet är förseglat, och den här plattformen har ingen nyckelring för redaktionsnyckeln.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: det här paketet är förseglat, och det finns ännu ingen redaktionsnyckel att öppna det med. Skapa en under Redaktionsnyckel… eller återställ den från din återställningsnyckel.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: det här paketet är förseglat, och nyckelringen går inte att läsa. Inget har försökts.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: det här paketet är förseglat, och den sparade redaktionsnyckeln går inte att läsa. Ta bort den under Redaktionsnyckel… och återställ den från din återställningsnyckel.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: det här paketet är inte förseglat för din redaktionsnyckel.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: det här paketet har ändrats eller avbrutits och öppnas inte.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: det här paketet är större än en inlämning kan vara.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: den sparade redaktionsnyckeln är inte en nyckel som OciDeck kan använda.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: inte ett förseglat paket som OciDeck kan läsa.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'En förseglad fil (.zip.age) öppnas med din redaktionsnyckel.',
+  'Herstelsleutel controleren': 'Kontrollera återställningsnyckeln',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redaktionsnyckeln har skapats. Skriv nu ner återställningsnyckeln.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Nyckelringen tog inte emot nyckeln. Inget skapades.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Det finns redan en redaktionsnyckel. Den har inte rörts.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Nyckelringen kunde inte läsas. Inget antogs och inget skapades.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Det finns något i nyckelringen som inte är en redaktionsnyckel. Det skrevs inte över.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Den här plattformen har ingen nyckelring.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Rätt: återställningsnyckeln har kontrollerats.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Det här är en giltig återställningsnyckel, men inte den till den här redaktionsnyckeln.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Återställningsnyckeln stämmer, men det gick inte att spara.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Det finns ingen redaktionsnyckel att jämföra med.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Det här är inte återställningsnyckeln till en redaktionsnyckel.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Det finns ett skrivfel: kontrollsumman stämmer inte.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Den här återställningsnyckeln kommer från en nyare version av OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Den här återställningsnyckeln gjordes för något annat.',
+  'Hersteld uit de herstelsleutel.': 'Återställd från återställningsnyckeln.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Nyckelringen tog inte emot nyckeln. Inget återställdes.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Spara redaktionsnyckeln som age-nyckelfil',
+  'Het bestand kon niet worden opgeslagen.': 'Filen kunde inte sparas.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Sparad som {pad}. Den som har den här filen kan öppna allt.',
+  'Redactiesleutel verwijderd.': 'Redaktionsnyckeln har tagits bort.',
+  'Redactiesleutel': 'Redaktionsnyckel',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Den här plattformen har ingen nyckelring. Redaktionsnyckeln kan inte förvaras här; använd skrivbordsappen.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Nyckelringen kunde inte läsas (låst, eller åtkomst nekad). Inget antogs och inget skapades.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Det finns något i nyckelringen som inte är en redaktionsnyckel. Det skrevs inte över. Ta bort det och återställ nyckeln från din återställningsnyckel.',
+  'Redactiesleutel verwijderen…': 'Ta bort redaktionsnyckeln…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'En redaktionsnyckel öppnar de förseglade inlämningarna och signerar paketen för dina formulär. Den finns i nyckelringen i det här operativsystemet. Förlorar du alla redaktionens nycklar blir alla ännu inte hämtade inlämningar oläsliga: det är priset för en server som inte kan läsa något.',
+  'Redactiesleutel aanmaken': 'Skapa redaktionsnyckel',
+  'Herstellen uit herstelsleutel…': 'Återställ från återställningsnyckel…',
+  'Vingerafdruk': 'Fingeravtryck',
+  'Ontvanger (age)': 'Mottagare (age)',
+  'Aangemaakt op {datum}.': 'Skapad {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Återställningsnyckeln har kontrollerats.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Återställningsnyckeln har inte kontrollerats än: skriv ner den och skriv in den igen.',
+  'Herstelsleutel tonen…': 'Visa återställningsnyckeln…',
+  'Vingerafdruk kopiëren': 'Kopiera fingeravtryck',
+  'Exporteren als age-sleutelbestand…': 'Exportera som age-nyckelfil…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Skriv ner den här återställningsnyckeln och förvara den på ett säkert ställe, utanför den här enheten. Den som har den kan öppna alla inlämningar och signera paket i ert namn. Förlorar du den här enheten är det allt som finns kvar.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Skriv in återställningsnyckeln här igen',
+  'Later': 'Senare',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Skriv eller klistra in återställningsnyckeln. Det du anger läggs i nyckelringen som redaktionsnyckel; inget skrivs över.',
+  'Herstelsleutel': 'Återställningsnyckel',
+  'Redactiesleutel verwijderen': 'Ta bort redaktionsnyckeln',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Nyckeln raderas ur nyckelringen och kan bara komma tillbaka från återställningsnyckeln. Har du den inte blir inlämningar som bara förseglats för den här nyckeln oläsliga för alltid.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Nyckeln som öppnar förseglade inlämningar och signerar paket.',
+  'Redactiesleutel…': 'Redaktionsnyckel…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Arbetskopian är kastad. Det som kom in bedöms på nytt.',
+  'Er is geen werkkopie.': 'Det finns ingen arbetskopia.',
+  'De werkkopie kon niet worden weggegooid.': 'Arbetskopian kunde inte kastas.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Tar bort arbetskopian. Det som kom in finns kvar och bedöms på nytt.',
+  'Werkkopie weggooien…': 'Kasta arbetskopian…',
+  'Werkkopie weggooien': 'Kasta arbetskopian',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Arbetskopian med förbättringarna tas bort och kan inte hämtas tillbaka. Det som kom in finns kvar och bedöms på nytt. Är arbetskopian fortfarande öppen i en flik, stäng den först.',
+  'Weggooien': 'Kasta',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Den här inlämningen har återkallats och hamnar därför i inget kapitel.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Den här inlämningen kan inte läsas, eller så finns formuläret den lämnades in till inte i arbetsmappen.',
+  'Het controledocument kon niet worden geschreven.':
+      'Kontrolldokumentet kunde inte skrivas.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Ditt bidrag till boken: titta gärna igenom det',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Här är ditt bidrag så som det kommer att se ut i boken (se bilagan). Stämmer allt? Svara ‘godkänt’ eller med dina rättelser före {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Mejlet ligger klart i ditt mejlprogram. Bifoga pdf-filen och skicka det.',
+  'Controle door de maker…': 'Kontroll av bidragsgivaren…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Kontrolldokumentet är kapitlet för just den här inlämningen. Exportera det som pdf (välj den fullständiga profilen), bifoga pdf-filen till mejlet och skicka det. Svarar bidragsgivaren ‘godkänt’, ställ då själv in statusen på maker-approved: svaret bekräftar också att bidraget verkligen kommer från den här personen.',
+  'Controledocument maken en openen': 'Skapa kontrolldokument och öppna det',
+  'E-mailadres van de maker': 'Bidragsgivarens e-postadress',
+  'Antwoord vóór (jjjj-mm-dd)': 'Svara före (åååå-mm-dd)',
+  'Mail schrijven': 'Skriv mejl',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Det här formuläret känner inte till statusen maker-check-sent, så den kan inte sättas här.',
+  'Controle verstuurd': 'Kontroll skickad',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Skapar kapitlet för den här inlämningen och gör i ordning mejlet som bidragsgivaren kontrollerar det med.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Den här inlämningen finns inte i registret. Reparera overview.md och försök igen.',
+  'Kies het hoofdstuksjabloon': 'Välj kapitelmall',
+  'Kies eerst een hoofdstuksjabloon.': 'Välj först en kapitelmall.',
+  'Kies minstens één status.': 'Välj minst en status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Boken är sammanställd. Kapitel: {n}. Foton: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Återkallade och därför utelämnade: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Överhoppade (annan version eller oläsliga): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Foton som saknades i arbetsmappen: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Använd bara bokstäver, siffror, bindestreck och understreck i namnet (högst 64 tecken).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Det finns redan en bok med det här namnet. Välj ett annat namn.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Mallen nämner fält som formuläret inte har: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Det finns inget att lägga i boken: ingen inlämning med vald status. Återkallade: {w}; överhoppade: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registret kan inte läsas. Reparera overview.md.',
+  'Het boek kon niet worden geschreven.': 'Boken kunde inte skrivas.',
+  'Boek samenstellen…': 'Sammanställ bok…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Boken hamnar i mappen book i arbetsmappen och förblir ett vanligt dokument som du sedan kan redigera själv.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Det finns inget användbart formulär i arbetsmappen.',
+  'Formulier': 'Formulär',
+  'Hoofdstuksjabloon': 'Kapitelmall',
+  'Nog geen sjabloon gekozen.': 'Ingen mall vald ännu.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'I mallen står {veld-id} för svaret på det fältet.',
+  'Hoofdstuksjabloon kiezen…': 'Välj kapitelmall…',
+  'Welke inzendingen?': 'Vilka inlämningar?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Bara inlämningar med någon av dessa statusar hamnar i boken. Återkallade inlämningar lämnas alltid utanför.',
+  'Ordenen op': 'Sortera efter',
+  'Groeperen op': 'Gruppera efter',
+  'Naam van het boek': 'Bokens namn',
+  'Boek openen': 'Öppna boken',
+  'Samenstellen': 'Sammanställ',
+  'De werkkopie kon niet worden aangemaakt.': 'Arbetskopian kunde inte skapas.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Öppnar en kopia av inlämningen att förbättra. Det som kom in förblir oförändrat.',
+  'Werkkopie openen': 'Öppna arbetskopia',
+  'Status gewijzigd naar {status}.': 'Status ändrad till {status}.',
+  'Intrekking opgeslagen.': 'Återkallelsen sparades.',
+  'Intrekking ongedaan gemaakt.': 'Återkallelsen ångrades.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Inlämning raderad; posten finns kvar.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Inlämning raderad, men registret kunde inte uppdateras. Ändra overview.md för hand.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Inlämningen hittades inte i arbetsmappen.',
+  'De inzending kon niet worden verwijderd.': 'Inlämningen kunde inte raderas.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registret kan inte läsas. Reparera overview.md; inget ändrades.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registret kunde inte uppdateras.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Ändringen kunde inte göras: inlämningen finns inte i registret.',
+  'Status wijzigen': 'Ändra status',
+  'Intrekking ongedaan maken': 'Ångra återkallelsen',
+  'Intrekken…': 'Återkalla…',
+  'Verwijderen…': 'Radera…',
+  'Inzending intrekken': 'Återkalla inlämning',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Ange dagen då den som skickade in återkallade inlämningen. En återkallad inlämning kommer aldrig med i boken.',
+  'Dag (jjjj-mm-dd)': 'Dag (åååå-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Ogiltig dag. Använd år-månad-dag, till exempel {voorbeeld}.',
+  'Inzending verwijderen': 'Radera inlämning',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Svaren, arbetskopian och fotona från den här inlämningen raderas från arbetsmappen. Bara en minimal post finns kvar: numret, dagarna för mottagande och samtycke samt statusen. Det går inte att ångra.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Det formuläret kungjorde i förväg finns också kvar: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Något är fel med den här inlämningen.',
+  'Verplicht, maar leeg gelaten.': 'Obligatoriskt, men lämnat tomt.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} ord; minst {min} behövs.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} ord; högst {max} tillåtna.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} tecken; minst {min} behövs.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} tecken; högst {max} tillåtna.',
+  '“{value}” staat niet in de lijst met opties.':
+      '”{value}” finns inte i listan med alternativ.',
+  '“{value}” is geen getal.': '”{value}” är inte ett tal.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '”{value}” är inte ett datum på formen år-månad-dag.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto som är {actual} pixlar brett; {min} efterfrågades.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fotots fil saknas i inlämningen.',
+  'De beschrijving van de foto ontbreekt.': 'Beskrivningen av fotot saknas.',
+  'De maker van de foto ontbreekt.': 'Fotografen saknas.',
+  'De foto is niet gecontroleerd.': 'Fotot kontrollerades inte.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-foto: varken kontrollerat eller rensat; det kan innehålla en plats.',
+  'Toestemming niet gegeven.': 'Samtycke inte givet.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Svaret innehåller en rad som liknar en styrkod i formuläret.',
+  'Het antwoord bevat HTML.': 'Svaret innehåller HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Svaret innehåller ett oavslutat kodblock.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Svaret hänvisar till en bild som inte hör till den här inlämningen.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Svaret innehåller en länk som inte är tillåten.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Det här formuläret eller den här versionen finns inte i arbetsmappen.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Den som skickade in arbetade med en annan text av formuläret än den publicerade.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Samtycket i manifestet stämmer inte med det publicerade formuläret.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Formulärets text har ändrats utanför svaren.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Formulärets text har ändrats vid det här fältet.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Det här fältet finns inte i det publicerade formuläret.',
+  'Dit veld ontbreekt in de inzending.': 'Det här fältet saknas i inlämningen.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Inlämning av version {submission}; publicerad är version {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formuläret kräver en nyare version av OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Det publicerade formuläret i arbetsmappen går inte att använda.',
+  'De inzending hoort bij een ander formulier.':
+      'Inlämningen hör till ett annat formulär.',
+  'De opbouw van de inzending is beschadigd.':
+      'Inlämningens uppbyggnad är skadad.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registret kan inte läsas. Reparera overview.md; inlämningarna visas nedan utan uppgifter från registret.',
+  'Nog geen inzendingen.': 'Inga inlämningar än.',
+  'Om na te lopen': 'Att granska',
+  'Verwijderd': 'Raderad',
+  'Zonder regel in het register': 'Utan rad i registret',
+  'Ontvangen {datum}': 'Mottagen {datum}',
+  'Ingetrokken {datum}': 'Återkallad {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Innehållet i den här inlämningen har raderats; bara posten finns kvar.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Den här inlämningen kan inte läsas. Kontrollera filerna i arbetsmappen.',
+  'Beoordeeld tegen {formulier}.': 'Bedömd mot {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Bedömningen gäller arbetskopian (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Inga punkter att granska.',
+  'Foto’s die geen antwoord noemt: {n}.': 'Foton som inget svar nämner: {n}.',
+  'Inzendingen': 'Inlämningar',
+  'Werkmap': 'Arbetsmapp',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Ingen arbetsmapp vald ännu. Välj en mapp där inlämningarna och registret ska ligga.',
+  'Werkmap kiezen…': 'Välj arbetsmapp…',
+  'Kies de werkmap voor inzendingen': 'Välj arbetsmapp för inlämningar',
+  'Formulieren': 'Formulär',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Inget formulär har lagts till ännu. Lägg till formuläret så som du publicerade det: en inlämning kontrolleras mot det.',
+  'Formulier toevoegen…': 'Lägg till formulär…',
+  'Kies het formulier om toe te voegen': 'Välj formuläret som ska läggas till',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Den här filen är inte ett formulär som kan publiceras.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Det här formuläret finns redan med en annan text. En annan text är en ny version: ge formuläret ett högre versionsnummer.',
+  'Formulier toegevoegd: {naam}.': 'Formulär tillagt: {naam}.',
+  'Dit formulier stond er al.': 'Det här formuläret fanns redan.',
+  'Het formulier kon niet worden opgeslagen.': 'Formuläret kunde inte sparas.',
+  'Inzendingen in de werkmap: {n}': 'Inlämningar i arbetsmappen: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'En vanlig zip är inte krypterad under överföringen.',
+  'Pakketten binnenhalen…': 'Importera paket…',
+  'Kies de pakketten om binnen te halen': 'Välj paketen som ska importeras',
+  'Register openen': 'Öppna registret',
+  '{naam}: binnengehaald.': '{naam}: importerad.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importerad, men det finns punkter att granska.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importerad, men registret kunde inte uppdateras. Kontrollera overview.md.',
+  '{naam}: stond er al.': '{naam}: fanns redan.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: inte ett inlämningspaket som OciDeck kan läsa.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: det här formuläret har inte lagts till, eller inte i den här versionen. Lägg till formuläret först.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: kunde inte sparas i arbetsmappen.',
+  'Formulieren en inzendingen': 'Formulär och inlämningar',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importera inlämningar från ett formulär, kontrollera dem mot det publicerade formuläret och förvara dem med ett register. Att fylla i ett formulär fungerar även när detta är av. Av som standard.',
+  'Inzending opslaan als zip…': 'Spara inlämningen som zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'En zip-fil med dina svar och foton, att mejla till arrangören.',
+  'Inzending opgeslagen als {naam}.': 'Inlämningen sparades som {naam}.',
+  'Kies het formulier zoals je het kreeg': 'Välj formuläret som du fick det',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Det här är inte formuläret som dina svar hör till. Välj filen som du fick av arrangören.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Ett foto kunde inte läsas: {pad}. Lägg till det igen.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Inlämningen ryms inte i ett paket: för många foton eller ett foto som är för stort.',
+  'De inzending kon niet worden opgeslagen.': 'Inlämningen kunde inte sparas.',
+  'Inzending opslaan': 'Spara inlämning',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Platsuppgifterna har tagits bort från det här fotot.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Det här fotot kunde inte läggas till. Välj en JPEG-, PNG-, WebP- eller HEIC-fil med ett foto.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Spara dokumentet först för att lägga till foton.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck kan importera den här filen till ett nytt dokument.',
+  'Kies een datum': 'Välj ett datum',
+  'Anders, namelijk:': 'Annat, nämligen:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Ta bort punkt {n}',
+  'Rij {n} verwijderen': 'Ta bort rad {n}',
+  'Foto {n} verwijderen': 'Ta bort foto {n}',
+  'Wat is er te zien op de foto?': 'Vad syns på fotot?',
+  'Van wie is de foto?': 'Vem har tagit fotot?',
+  'Foto toevoegen': 'Lägg till foto',
+  'Verplicht': 'Obligatoriskt',
+  'Alles is ingevuld.': 'Allt är ifyllt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Det återstår {n} innan du kan skicka:',
+  'klaar': 'klart',
+  '{n} open': '{n} öppna',
+  'Dit formulier kan niet worden ingevuld.':
+      'Det här formuläret kan inte fyllas i.',
+  'Naar de bron': 'Till källan',
+  'Woorden': 'Ord',
+  'Tekens': 'Tecken',
+  'Keuzes': 'Val',
+  'Rijen': 'Rader',
+  'Foto’s': 'Foton',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minst {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (högst {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minst {min}, högst {max})',
+  'Invullen': 'Fyll i',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Något är fel med det här formuläret. Kontakta den som har skapat det.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Det här fältet är obligatoriskt. Fyll i det för att kunna skicka.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Du har skrivit {actual} ord; det krävs minst {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Du har skrivit {actual} ord; högst {max} är tillåtna.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Du har skrivit {actual} tecken; det krävs minst {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Du har skrivit {actual} tecken; högst {max} är tillåtna.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” finns inte i listan. Välj ett av alternativen.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” är inte ett tal. Använd bara siffror, eventuellt med komma eller punkt för decimaler.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Det här fotot är {actual} pixlar brett; här efterfrågas {min}. Troligen blev det mindre när det skickades via en meddelandeapp. Har du originalet kvar, använd det. Annars, skicka det ändå: arrangören kontaktar dig.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Det här fotot är {actual} MB; maxgränsen är {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Innehållet i den här filen stämmer inte med filtypen.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Den här filtypen är inte tillåten här.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Filen till det här fotot går inte längre att hitta. Lägg till fotot igen.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Beskriv med en kort mening vad som syns på fotot.',
+  'Geef aan van wie de foto is.': 'Ange vem som har tagit fotot.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Det här fotot har inte kontrollerats än. Vänta en stund eller lägg till det igen.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Det här fotot är en HEIC-fil. OciDeck kan inte kontrollera eller rensa den här, så den skickas som den är. Den kan innehålla var fotot togs. Vill du inte dela det, välj “Mest kompatibel” i kamerainställningarna eller dela fotot som JPEG och lägg till det igen.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'På det här fotot syns {actual} ansikten; {expected} förväntades. Det här är bara en påminnelse.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Bocka i rutan för att samtycka; utan samtycke kan du inte skicka.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Det här formuläret kräver en nyare version av OciDeck. Uppdatera appen för att fylla i det.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Något i själva formuläret har ändrats av misstag. Återställ formuläret; dina svar finns kvar.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Den här raden liknar en styrkod i formuläret och får inte finnas i ett svar. Ändra den.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML är inte tillåtet i ett svar. Använd vanlig text och enkel formatering.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Ett kodblock är inte stängt. Stäng det med ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'I ett svar kan bara foton som du lägger till i det här formuläret användas; en bild från internet går inte.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'I ett svar är bara länkar som börjar med https:// och e-postadresser tillåtna.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Den här filen har skapats med en annan version av formuläret (version {submission}; nu gäller version {published}). Kontrollera dina svar.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Antalet är nu {actual}; det måste vara mellan {min} och {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Antalet är nu {actual}; det får vara högst {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Antalet är nu {actual}; det måste vara minst {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Talet måste vara en multipel av {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Talet måste ligga mellan {min} och {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Talet får vara högst {max}.',
+  'Het getal moet minstens {min} zijn.': 'Talet måste vara minst {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Datumet måste vara den {min} eller senare.',
+  'De datum moet op of vóór {max} liggen.':
+      'Datumet måste vara den {max} eller tidigare.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” är inte ett datum. Skriv datumet som år-månad-dag, till exempel 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Det här är inte en giltig e-postadress.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Det här är inte en giltig webbadress. Börja med https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Det här är inte ett giltigt telefonnummer.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Det här är inte ett giltigt nederländskt postnummer, som 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Här ryms bara en rad. Ta bort radbrytningarna.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Använd bara kryssrutorna i den här frågan: en ruta per alternativ.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Skriv varje punkt på en egen rad, med ett streck eller ett nummer framför.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabellen stämmer inte längre: låt rubrikraden vara som den var och ge varje rad lika många kolumner.',
+  'Dezelfde foto staat hier twee keer.': 'Samma foto finns här två gånger.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'I det här fältet hör bara foton hemma, ingen lös text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Rutan för ditt samtycke är skadad. Återställ formuläret.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Det här svaret har inte den form som hör till den här frågan.',
   'Downloaden…': 'Ladda ned…',
   'Afbeelding opgeslagen als': 'Bild sparad som',
   '{naam}: ingesteld': '{naam}: konfigurerad',
