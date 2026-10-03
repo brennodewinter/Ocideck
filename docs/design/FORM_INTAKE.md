@@ -1301,7 +1301,7 @@ The organiser's workspace is plain files with **English structure names**
 <workspace>/
 ├── forms/<form-id>/v1/
 │   ├── template.nl.md   template.en.md      # the published templates, per language
-│   └── bundle.json                          # the signed bundle of that version
+│   └── template.nl.bundle.json  …           # the signed bundle of each template (see below)
 ├── submissions/<sid>/
 │   ├── submission.md          # as received — never edited
 │   ├── submission.edit.md     # the working copy redaction happens in (optional)
@@ -1310,6 +1310,15 @@ The organiser's workspace is plain files with **English structure names**
 ├── overview.md                # the register: one Markdown table (§7.3)
 └── book/                      # compile output: an ordinary document (§7.5)
 ```
+
+*Amended 2026-10-03 (first publishing of a bundle):* the layout above said `bundle.json`, one per
+version. A bundle binds the SHA-256 of **one text** (`template_sha256`, §5.1) and each language is its
+own text, so a version with two languages needs two bundles: **`template.<lang>.bundle.json`, beside
+its template** — the name `bundleFileNameFor` gives, which is also what a respondent finds next to the
+form they were sent. `fid` is per form id and `bundle_seq` runs on across the languages **and**
+versions of one form, because a respondent pins the highest `bundle_seq` per (`fid`, owner): a bundle
+for another language at a lower number would be refused by someone who saw the higher one. A new bundle
+replaces the one beside the same template.
 
 - **Received files are never modified**, so `manifest.files[].sha256` stays true and
   "verify with `sha256sum`" stays honest. Edits live in `submission.edit.md`.
@@ -1887,7 +1896,15 @@ package sealed for another key, a package changed or cut short, one that is too 
 otherwise unreadable file, and a file that opens but holds no package. The Inbox does not yet record the
 SHA-256 of the sealed file or mark a *replaced* one (§5.6) — a second file for the same `sid` is simply
 *already there*.
-**Still to build:** the team of organisers and the two-key rule, publishing a bundle, sending sealed
+**Built since, in the Inbox:** publishing a bundle (§5.1, §7.6): `publishFormBundle` makes and signs
+the bundle of one published template with the editorial key and stores it beside the template; the
+window shows the fingerprint to give the respondent by another route. The team is the owner alone for
+now, so the publishing rule of §7.6 is met by the **recovery key typed back**; "two organiser keys" as
+the alternative comes with the team. The name the respondent sees and *valid until* are what the
+organiser fills in (prefilled from the form's `controller` and `closes`); `closes` and `retain_unused`
+come from the form itself. An existing bundle of the form that cannot be read stops everything — the
+next `bundle_seq` cannot be known.
+**Still to build:** the team of organisers (add an editor) and the two-key rule, sending sealed
 files, and the dossier for the external review.
 
 *New (app, `lib/`):*

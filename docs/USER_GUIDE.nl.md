@@ -6001,6 +6001,22 @@ dat en biedt het niets aan.
 een sleutelhanger die niet antwoordt is geen lege sleutelhanger — en hetzelfde als wat er staat niet als sleutel te
 lezen is. Wat je intikt wordt in geen enkele melding herhaald.
 
+**Bundel publiceren…** (onder de formulieren in de Inbox). Een invuller neemt een formulier niet zomaar aan: de
+**bundel** zegt naar welke sleutel hij verzegelt en welke tekst erbij hoort, en is ondertekend met je
+redactiesleutel. Kies het formulier — **elke taal is een eigen tekst en krijgt een eigen bundel** —, de *naam voor de
+invuller* (de `controller` van het formulier, anders *Redactie*) en *geldig tot* (de sluitingsdag van het formulier,
+anders een jaar verder; nooit vóór de sluitingsdag). **Bundel maken** zet `template.<taal>.bundle.json` naast het
+formulier en toont de **vingerafdruk** van je ondertekeningssleutel. Geef die vingerafdruk de invuller **langs een
+andere weg dan het bundelbestand** — in de uitnodiging, bijvoorbeeld. De bundel alleen kan niet laten zien van wie hij
+komt; de vingerafdruk wel. Opnieuw publiceren geeft een bundel met het volgende volgnummer, over de oude heen; het
+nummer loopt door over de talen en versies van één formulier, want een invuller weigert een lager nummer dan hij zag.
+
+Er wordt niets ondertekend, en het venster zegt waarom, als: er geen bruikbare redactiesleutel is; de
+**herstelsleutel niet is teruggetypt** (zonder weg terug is elke inzending onleesbaar als dit apparaat stuk gaat —
+*Redactiesleutel…*); de naam leeg is of langer dan 80 tekens; *geldig tot* geen datum is of vóór de sluitingsdag
+ligt; of een bundel van dit formulier in de werkmap niet te lezen is, waardoor het volgende volgnummer niet te weten
+is. Sluitingsdag en bewaartermijn komen uit het formulier zelf.
+
 Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor
 byte zoals ze aankwamen plus de foto's, in één stap: een crash laat nooit een halve inzending achter,
 en een inzending die er al is wordt nooit overschreven. Eén met een fout komt er wel in, met de status

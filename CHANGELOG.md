@@ -10,6 +10,16 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De Inbox **publiceert een bundel** (formaat §5.1, §7.6, fase 3): *Bundel publiceren…* maakt en ondertekent met de redactiesleutel de
+  bundel van één gepubliceerd sjabloon en bewaart hem ernaast als `template.<taal>.bundle.json`; daarna staat in het venster de
+  **vingerafdruk** om de invuller langs een andere weg dan het bundelbestand te geven. De naam voor de invuller en *geldig tot* komen uit
+  het formulier (`controller`, `closes`) en zijn aanpasbaar; `closes` en `retain_unused` van de bundel komen uit het formulier zelf. Er wordt
+  niets ondertekend als er geen bruikbare sleutel is, als de **herstelsleutel niet is teruggetypt** (de publiceerregel van §7.6; twee
+  sleutels als alternatief komt met het team), als de naam of de geldigheid niet deugt (ook een geldigheid vóór de sluitingsdag), of als er
+  al een bundel van dit formulier staat die niet te lezen is of een ander `fid` noemt — het volgende `bundle_seq` is dan niet te weten, en een
+  invuller die het hogere zag weigert een lager stilletjes. `fid` en `bundle_seq` lopen per formulier door over talen en versies.
+  **Afwijking van het bevroren §7.1:** daar stond één `bundle.json` per versie; een bundel bindt de hash van één tekst en elke taal is een eigen
+  tekst, dus het wordt één bundel per sjabloon (staat nu zo in §7.1). 22 nieuwe teksten in 30 talen.
 - De Inbox haalt **verzegelde bestanden** (`.zip.age`) binnen (formaat §5.6/§7.2, fase 3): *Pakketten binnenhalen…* kiest nu ook
   `.zip.age`, herkent het aan de kop (`looksLikeAge` in `ocideck_form_core`), opent het met de redactiesleutel en laat het daarna
   door dezelfde keten als een gewoon pakket. Elk bestand krijgt een regel; gaat het niet open dan zegt die waarom en wordt er niets
