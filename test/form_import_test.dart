@@ -414,7 +414,7 @@ void main() {
 
       Future<void> expectNeedsKey(
         FormKeyService use,
-        FormImportKeyProblem problem,
+        FormKeyProblem problem,
       ) async {
         final outcome = await import(sealed, use: use);
         expect((outcome as FormImportNeedsKey).problem, problem);
@@ -425,25 +425,25 @@ void main() {
       test('er is nog geen sleutel', () async {
         await expectNeedsKey(
           FormKeyService(SecretStore(storage: FormKeyVault(), canStore: true)),
-          FormImportKeyProblem.absent,
+          FormKeyProblem.absent,
         );
       });
 
       test('dit platform heeft geen sleutelhanger', () async {
         await expectNeedsKey(
           FormKeyService(SecretStore(storage: vault, canStore: false)),
-          FormImportKeyProblem.unavailable,
+          FormKeyProblem.unavailable,
         );
       });
 
       test('de sleutelhanger geeft geen antwoord', () async {
         vault.failRead = true;
-        await expectNeedsKey(keys, FormImportKeyProblem.unreadable);
+        await expectNeedsKey(keys, FormKeyProblem.unreadable);
       });
 
       test('wat er staat is geen sleutel', () async {
         vault.data[SecretStore.formEditorialKeyKey] = 'geen sleutel';
-        await expectNeedsKey(keys, FormImportKeyProblem.damaged);
+        await expectNeedsKey(keys, FormKeyProblem.damaged);
       });
     });
   });

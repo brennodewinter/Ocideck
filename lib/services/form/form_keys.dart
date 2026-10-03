@@ -138,6 +138,31 @@ Future<FormKeyInfo> formKeyInfoOf(FormEditorialKey key) async {
   );
 }
 
+/// Waarom er geen bruikbare redactiesleutel is: wat een aanroeper die de sleutel nodig heeft aan
+/// de gebruiker moet kunnen zeggen.
+enum FormKeyProblem {
+  /// Dit platform heeft geen sleutelhanger.
+  unavailable,
+
+  /// Er is nog geen redactiesleutel aangemaakt of hersteld.
+  absent,
+
+  /// De sleutelhanger gaf geen antwoord: wat erin staat is onbekend.
+  unreadable,
+
+  /// Er staat iets, maar het is geen redactiesleutel van deze versie.
+  damaged,
+}
+
+/// Waarom [state] geen sleutel geeft, of `null` als er een is.
+FormKeyProblem? keyProblemOf(FormKeyState state) => switch (state) {
+  FormKeyPresent() => null,
+  FormKeyUnavailable() => FormKeyProblem.unavailable,
+  FormKeyAbsent() => FormKeyProblem.absent,
+  FormKeyUnreadable() => FormKeyProblem.unreadable,
+  FormKeyDamaged() => FormKeyProblem.damaged,
+};
+
 /// Wat de sleutelhanger over de redactiesleutel zegt.
 sealed class FormKeyState {
   const FormKeyState();
