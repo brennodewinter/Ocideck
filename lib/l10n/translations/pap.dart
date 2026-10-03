@@ -666,6 +666,45 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bundel publiceren…': 'Publiká bundel…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'E bundel ta loke e invulador di bo redakshon ta kere: na ki yave e ta sella i ki teksto e ta pertenesé na dje. E ta wòrdu warda banda di e formulario.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'No tin ningun formulario den e mapa di trabou pa krea un bundel pa dje.',
+  'Naam voor de invuller': 'Nòmber pa e invulador',
+  'Geldig tot (jjjj-mm-dd)': 'Bálido te (aaaa-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'E último dia ku un invulador ta kere e bundel akí. No promé ku e dia di sera di e formulario.',
+  'Bundel maken': 'Krea bundel',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundel kreá (number di sekuensia {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Duna e invulador e huella digital via un otro kaminda ku e archivo di e bundel, por ehèmpel den e invitashon. Ken tin solamente e archivo di e bundel no por verifiká di ken e ta bin.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'E plataforma akí no tin yavero pa e yave di redakshon; no por firma un bundel aki.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Ainda no tin yave di redakshon. Krea un bou di Yave di redakshon… promé ku bo publiká un bundel.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'E yavero no por wòrdu lesá. Nada no a wòrdu firmá.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'E yave di redakshon warda no por wòrdu lesá. Eliminá e bou di Yave di redakshon… i rekuperá e for di bo yave di rekuperashon.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrolá promé bo yave di rekuperashon bou di Yave di redakshon…. Sin kaminda di bèk, tur envio ta bira ilegibel si e aparato akí kibra.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Un bundel di e formulario akí den e mapa di trabou no por wòrdu lesá of no ta pertenesé na e otronan. Ta ku esei no por determiná e number di sekuensia i no ta firma nada. Kontrolá: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Yena un nòmber di máksimo 80 karakter.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Bálido te mester ta un fecha ku ta existí, komo aaaa-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Bálido te no por ta promé ku e dia di sera di e formulario.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'No por a krea e bundel ({veld}). Wak si e formulario ta menshoná un dia di sera i un periodo di warda válido.',
+  'formulier': 'formulario',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'No por a warda e bundel den e mapa di trabou.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Krea i firma e bundel ku un invulador ta kere tokante bo redakshon.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: paket sellá habrí i importá.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

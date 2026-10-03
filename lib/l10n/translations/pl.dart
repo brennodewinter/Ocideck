@@ -1639,6 +1639,44 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bundel publiceren…': 'Opublikuj bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle to to, czemu wierzy osoba wypełniająca w sprawie waszej redakcji: do którego klucza zapieczętować i do jakiego tekstu należy. Zapisuje się obok formularza.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'W folderze roboczym nie ma formularza, dla którego można by utworzyć bundle.',
+  'Naam voor de invuller': 'Nazwa dla osoby wypełniającej',
+  'Geldig tot (jjjj-mm-dd)': 'Ważny do (rrrr-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Ostatni dzień, w którym osoba wypełniająca wierzy temu bundle. Nie przed dniem zamknięcia formularza.',
+  'Bundel maken': 'Utwórz bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle utworzony (numer kolejny {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Przekaż odcisk palca osobie wypełniającej inną drogą niż plik bundle, na przykład w zaproszeniu. Kto ma tylko plik bundle, nie może sprawdzić, od kogo pochodzi.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Ta platforma nie ma pęku kluczy na klucz redakcji; bundle nie można tu podpisać.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Nie ma jeszcze klucza redakcji. Utwórz go w Klucz redakcji…, zanim opublikujesz bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Pęku kluczy nie da się odczytać. Niczego nie podpisano.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Zapisanego klucza redakcji nie da się odczytać. Usuń go w Klucz redakcji… i przywróć z klucza odzyskiwania.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Najpierw sprawdź klucz odzyskiwania w Klucz redakcji…. Bez drogi powrotnej wszystkie zgłoszenia będą nieczytelne, jeśli to urządzenie się zepsuje.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Bundle tego formularza w folderze roboczym nie da się odczytać albo nie pasuje do pozostałych. Wtedy nie można ustalić numeru kolejnego i niczego nie podpisano. Sprawdź: {pad}',
+  'Vul een naam in van hooguit 80 tekens.': 'Wpisz nazwę do 80 znaków.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Ważny do musi być istniejącą datą w formacie rrrr-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Ważny do nie może być przed dniem zamknięcia formularza.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Nie udało się utworzyć bundle ({veld}). Sprawdź, czy formularz podaje prawidłowy dzień zamknięcia i okres przechowywania.',
+  'formulier': 'formularz',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Nie udało się zapisać bundle w folderze roboczym.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Utwórz i podpisz bundle, któremu wierzy osoba wypełniająca w sprawie waszej redakcji.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: zapieczętowana paczka otwarta i zaimportowana.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

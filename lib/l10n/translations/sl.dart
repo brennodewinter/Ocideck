@@ -1627,6 +1627,44 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bundel publiceren…': 'Objavi bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle je tisto, čemur izpolnjevalec verjame o vašem uredništvu: s katerim ključem zapečati in h kateremu besedilu spada. Shrani se ob obrazcu.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'V delovni mapi ni obrazca, za katerega bi lahko ustvarili bundle.',
+  'Naam voor de invuller': 'Ime za izpolnjevalca',
+  'Geldig tot (jjjj-mm-dd)': 'Velja do (llll-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Zadnji dan, ko izpolnjevalec verjame temu bundlu. Ne pred dnem zaprtja obrazca.',
+  'Bundel maken': 'Ustvari bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle ustvarjen (zaporedna številka {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Izpolnjevalcu daj prstni odtis po drugi poti kot z datoteko bundla, na primer v vabilu. Kdor ima samo datoteko bundla, ne more preveriti, od koga prihaja.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Ta platforma nima obeska za ključe za ključ uredništva; bundla tu ni mogoče podpisati.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Ključa uredništva še ni. Ustvari ga v Ključ uredništva…, preden objaviš bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Obeska za ključe ni mogoče prebrati. Nič ni bilo podpisano.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Shranjenega ključa uredništva ni mogoče prebrati. Izbriši ga v Ključ uredništva… in ga obnovi iz obnovitvenega ključa.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Najprej preveri obnovitveni ključ v Ključ uredništva…. Brez poti nazaj bodo vse oddaje neberljive, če se ta naprava pokvari.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Bundla tega obrazca v delovni mapi ni mogoče prebrati ali ne spada k drugim. Potem zaporedne številke ni mogoče določiti in nič se ne podpiše. Preveri: {pad}',
+  'Vul een naam in van hooguit 80 tekens.': 'Vnesi ime z največ 80 znaki.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Velja do mora biti obstoječ datum v obliki llll-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Velja do ne sme biti pred dnem zaprtja obrazca.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundla ni bilo mogoče ustvariti ({veld}). Preveri, ali obrazec navaja veljaven dan zaprtja in rok hrambe.',
+  'formulier': 'obrazec',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundla ni bilo mogoče shraniti v delovno mapo.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Ustvari in podpiši bundle, ki mu izpolnjevalec verjame o vašem uredništvu.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: zapečaten paket odprt in uvožen.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

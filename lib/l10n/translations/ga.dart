@@ -1657,6 +1657,45 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bundel publiceren…': 'Foilsigh bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Is é an bundle an rud a chreideann an líontóir faoi bhur n-eagarthóireacht: cén eochair a shéalaíonn sé di agus cén téacs lena mbaineann sé. Stóráiltear é in aice leis an bhfoirm.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Níl aon fhoirm san fhillteán oibre ar féidir bundle a dhéanamh di.',
+  'Naam voor de invuller': 'Ainm don líontóir',
+  'Geldig tot (jjjj-mm-dd)': 'Bailí go dtí (bbbb-mm-lll)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'An lá deireanach a chreideann an líontóir an bundle seo. Ní roimh lá deiridh na foirme.',
+  'Bundel maken': 'Cruthaigh bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Cruthaíodh an bundle (sraithuimhir {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Tabhair an méarlorg don líontóir ar bhealach eile seachas comhad an bundle, mar shampla sa chuireadh. Ní féidir leis an té nach bhfuil aige ach comhad an bundle a sheiceáil cé uaidh a thagann sé.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Níl slabhra eochrach ag an ardán seo don eochair eagarthóireachta; ní féidir bundle a shíniú anseo.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Níl eochair eagarthóireachta ann fós. Cruthaigh ceann faoi Eochair eagarthóireachta… sula bhfoilsíonn tú bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Ní féidir an slabhra eochrach a léamh. Níor síníodh tada.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Ní féidir an eochair eagarthóireachta stóráilte a léamh. Scrios faoi Eochair eagarthóireachta… í agus athchóirigh ó d’eochair athshlánaithe í.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Seiceáil d’eochair athshlánaithe ar dtús faoi Eochair eagarthóireachta…. Gan bealach ar ais, éiríonn gach aighneacht do-léite má bhriseann an gléas seo.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Ní féidir bundle den fhoirm seo san fhillteán oibre a léamh nó ní bhaineann sé leis na cinn eile. Mar sin ní féidir an tsraithuimhir a chinneadh agus ní shínítear tada. Seiceáil: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Cuir isteach ainm nach faide ná 80 carachtar.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Caithfidh Bailí go dtí a bheith ina dháta atá ann, mar bbbb-mm-lll.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Ní fhéadfaidh Bailí go dtí a bheith roimh lá deiridh na foirme.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Níorbh fhéidir an bundle a chruthú ({veld}). Seiceáil go n-ainmníonn an fhoirm lá deiridh agus tréimhse choinneála bhailí.',
+  'formulier': 'foirm',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Níorbh fhéidir an bundle a stóráil san fhillteán oibre.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Cruthaigh agus sínigh an bundle a chreideann an líontóir faoi bhur n-eagarthóireacht.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: osclaíodh agus iompórtáladh an pacáiste séalaithe.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

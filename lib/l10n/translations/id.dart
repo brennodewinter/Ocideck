@@ -1627,6 +1627,45 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bundel publiceren…': 'Terbitkan bundel…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundel adalah apa yang dipercayai pengisi tentang redaksi Anda: ke kunci mana ia menyegel dan teks mana yang menjadi miliknya. Bundel disimpan di samping formulir.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Tidak ada formulir di folder kerja untuk dibuatkan bundel.',
+  'Naam voor de invuller': 'Nama untuk pengisi',
+  'Geldig tot (jjjj-mm-dd)': 'Berlaku hingga (tttt-bb-hh)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Hari terakhir pengisi mempercayai bundel ini. Tidak sebelum hari penutupan formulir.',
+  'Bundel maken': 'Buat bundel',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundel dibuat (nomor urut {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Berikan sidik jari kepada pengisi lewat jalur lain selain berkas bundel, misalnya dalam undangan. Siapa pun yang hanya memiliki berkas bundel tidak dapat memeriksa dari siapa bundel itu berasal.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Platform ini tidak punya gantungan kunci untuk kunci redaksi; bundel tidak dapat ditandatangani di sini.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Belum ada kunci redaksi. Buat satu di Kunci redaksi… sebelum Anda menerbitkan bundel.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Gantungan kunci tidak dapat dibaca. Tidak ada yang ditandatangani.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Kunci redaksi yang tersimpan tidak dapat dibaca. Hapus di Kunci redaksi… lalu pulihkan dari kunci pemulihan Anda.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Periksa dulu kunci pemulihan Anda di Kunci redaksi…. Tanpa jalan kembali, semua kiriman tidak dapat dibaca jika perangkat ini rusak.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Sebuah bundel formulir ini di folder kerja tidak dapat dibaca atau tidak termasuk dengan yang lain. Dengan begitu nomor urut tidak dapat ditentukan dan tidak ada yang ditandatangani. Periksa: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Masukkan nama paling banyak 80 karakter.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Berlaku hingga harus berupa tanggal yang ada, dengan format tttt-bb-hh.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Berlaku hingga tidak boleh sebelum hari penutupan formulir.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundel tidak dapat dibuat ({veld}). Periksa apakah formulir menyebut hari penutupan dan masa penyimpanan yang valid.',
+  'formulier': 'formulir',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundel tidak dapat disimpan di folder kerja.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Buat dan tandatangani bundel yang dipercayai pengisi tentang redaksi Anda.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: paket tersegel dibuka dan diimpor.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

@@ -1630,6 +1630,45 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bundel publiceren…': 'Bundle veröffentliche…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'S Bundle isch das, wo e Iischicker über öiji Redaktion gloubt: a weli Schlüssel är verschlüsslet und zu welem Text es ghört. Es wird näbe em Formular gspeicheret.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Im Arbeitsordner het es kes Formular, wo me es Bundle dezue chönnti mache.',
+  'Naam voor de invuller': 'Name für e Iischicker',
+  'Geldig tot (jjjj-mm-dd)': 'Gültig bis (JJJJ-MM-TT)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Dr letscht Tag, a däm e Iischicker däm Bundle gloubt. Nid vor em Abschlusstag vom Formular.',
+  'Bundel maken': 'Bundle erstelle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle erstellt (Laufnummere {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Gib em Iischicker dr Fingerabdruck uf eme andere Wäg as d Bundle-Datei, zum Bispiil i dr Iiladig. Wär nume d Bundle-Datei het, cha nid prüefe, vo wem si chunnt.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Die Plattform het kei Schlüsselbund für e Redaktionsschlüssel; es Bundle cha da nid signiert wärde.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Es git no keine Redaktionsschlüssel. Erstell under Redaktionsschlüssel… eine, bevor du es Bundle veröffentlichsch.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Dr Schlüsselbund lat sich nid läse. Es isch nüt signiert worde.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Dr gspeicheret Redaktionsschlüssel lat sich nid läse. Lösch ne under Redaktionsschlüssel… und stell ne us dim Wiederherstelligsschlüssel wieder häre.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Prüef zersch dy Wiederherstelligsschlüssel under Redaktionsschlüssel…. Ohni Wäg zrügg sin alli Iischickige nümme läsbar, wenn das Gerät kaputt got.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'S Bundle vo däm Formular im Arbeitsordner lat sich nid läse oder ghört nid zu de andere. Dermit lat sich d Laufnummere nid bestimme, und es wird nüt signiert. Prüef: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Gib e Name mit höchschtens 80 Zeiche ii.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Gültig bis muess es existierends Datum si, als JJJJ-MM-TT.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Gültig bis dörf nid vor em Abschlusstag vom Formular lige.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'S Bundle het nid chönne erstellt wärde ({veld}). Prüef, öb s Formular e gültige Abschlusstag und e Ufbewahrigsfrischt nennt.',
+  'formulier': 'Formular',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'S Bundle het nid chönne im Arbeitsordner gspeicheret wärde.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Erstell und signier s Bundle, wo e Iischicker über öiji Redaktion gloubt.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: verschlüsslets Paket göffnet und importiert.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

@@ -664,6 +664,45 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bundel publiceren…': 'Pubblica bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Il bundle è ciò a cui crede chi compila riguardo alla vostra redazione: con quale chiave sigillare e a quale testo appartiene. Viene salvato accanto al modulo.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Nella cartella di lavoro non c\'è nessun modulo per cui creare un bundle.',
+  'Naam voor de invuller': 'Nome per chi compila',
+  'Geldig tot (jjjj-mm-dd)': 'Valido fino al (aaaa-mm-gg)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'L\'ultimo giorno in cui chi compila crede a questo bundle. Non prima del giorno di chiusura del modulo.',
+  'Bundel maken': 'Crea bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle creato (numero progressivo {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Dai l\'impronta digitale a chi compila per una via diversa dal file del bundle, per esempio nell\'invito. Chi ha solo il file del bundle non può verificare da chi proviene.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Questa piattaforma non ha un portachiavi per la chiave della redazione; qui non si può firmare un bundle.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Non c\'è ancora una chiave della redazione. Creane una in Chiave della redazione… prima di pubblicare un bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Il portachiavi non è leggibile. Non è stato firmato nulla.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'La chiave della redazione salvata non è leggibile. Eliminala in Chiave della redazione… e ripristinala dalla tua chiave di ripristino.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Controlla prima la tua chiave di ripristino in Chiave della redazione…. Senza una via di ritorno, tutti gli invii diventano illeggibili se questo dispositivo si rompe.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Un bundle di questo modulo nella cartella di lavoro non è leggibile o non appartiene agli altri. Così il numero progressivo non si può determinare e non viene firmato nulla. Controlla: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Inserisci un nome di al massimo 80 caratteri.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Valido fino al deve essere una data esistente, nel formato aaaa-mm-gg.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Valido fino al non può essere prima del giorno di chiusura del modulo.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Non è stato possibile creare il bundle ({veld}). Controlla che il modulo indichi un giorno di chiusura e un periodo di conservazione validi.',
+  'formulier': 'modulo',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Non è stato possibile salvare il bundle nella cartella di lavoro.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Crea e firma il bundle a cui crede chi compila riguardo alla vostra redazione.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: pacchetto sigillato aperto e importato.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

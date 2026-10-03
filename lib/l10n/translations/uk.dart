@@ -1642,6 +1642,45 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bundel publiceren…': 'Опублікувати комплект…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Комплект — це те, чому той, хто заповнює, вірить щодо вашої редакції: до якого ключа запечатувати і до якого тексту він належить. Його зберігають поруч із формою.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'У робочій папці немає форми, для якої можна створити комплект.',
+  'Naam voor de invuller': 'Ім’я для того, хто заповнює',
+  'Geldig tot (jjjj-mm-dd)': 'Дійсний до (рррр-мм-дд)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Останній день, коли той, хто заповнює, вірить цьому комплекту. Не раніше дня закриття форми.',
+  'Bundel maken': 'Створити комплект',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Комплект створено (порядковий номер {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Передайте відбиток тому, хто заповнює, іншим шляхом, ніж файл комплекту, наприклад в запрошенні. Хто має лише файл комплекту, не може перевірити, від кого він.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Ця платформа не має зв’язки ключів для ключа редакції; комплект тут не можна підписати.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Ключа редакції ще немає. Створіть його в розділі Ключ редакції…, перш ніж публікувати комплект.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Зв’язку ключів не вдається прочитати. Нічого не підписано.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Збережений ключ редакції не вдається прочитати. Видаліть його в розділі Ключ редакції… і відновіть із ключа відновлення.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Спершу перевірте ключ відновлення в розділі Ключ редакції…. Без шляху назад усі надсилання стануть нечитабельними, якщо цей пристрій зламається.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Комплект цієї форми в робочій папці не вдається прочитати, або він не належить до інших. Тоді порядковий номер визначити неможливо, і нічого не підписано. Перевірте: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Введіть ім’я не довше за 80 символів.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Дійсний до має бути існуючою датою у форматі рррр-мм-дд.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Дійсний до не може бути раніше за день закриття форми.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Не вдалося створити комплект ({veld}). Перевірте, чи форма вказує дійсний день закриття і строк зберігання.',
+  'formulier': 'форма',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Не вдалося зберегти комплект у робочій папці.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Створіть і підпишіть комплект, якому той, хто заповнює, вірить щодо вашої редакції.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: запечатаний пакет відкрито й імпортовано.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

@@ -1629,6 +1629,45 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bundel publiceren…': 'Bundle közzététele…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'A bundle az, amiben a kitöltő hisz a szerkesztőségetekről: melyik kulcsra zár, és melyik szöveghez tartozik. Az űrlap mellett tárolódik.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'A munkamappában nincs űrlap, amelyhez bundle-t lehetne készíteni.',
+  'Naam voor de invuller': 'Név a kitöltőnek',
+  'Geldig tot (jjjj-mm-dd)': 'Érvényes eddig (éééé-hh-nn)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Az utolsó nap, amikor a kitöltő hisz ennek a bundle-nek. Nem az űrlap zárónapja előtt.',
+  'Bundel maken': 'Bundle létrehozása',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle létrehozva (sorszám: {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Add át az ujjlenyomatot a kitöltőnek más úton, mint a bundle fájlt, például a meghívóban. Aki csak a bundle fájlt birtokolja, nem tudja ellenőrizni, kitől származik.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Ennek a platformnak nincs kulcstartója a szerkesztőségi kulcshoz; bundle-t itt nem lehet aláírni.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Még nincs szerkesztőségi kulcs. Hozz létre egyet a Szerkesztőségi kulcs… alatt, mielőtt bundle-t teszel közzé.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'A kulcstartó nem olvasható. Semmi nem lett aláírva.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'A tárolt szerkesztőségi kulcs nem olvasható. Töröld a Szerkesztőségi kulcs… alatt, és állítsd helyre a helyreállító kulcsodból.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Először ellenőrizd a helyreállító kulcsodat a Szerkesztőségi kulcs… alatt. Visszaút nélkül minden beküldés olvashatatlanná válik, ha ez az eszköz tönkremegy.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Az űrlap egyik bundle-je a munkamappában nem olvasható, vagy nem tartozik a többihez. Így a sorszám nem határozható meg, és semmi nem lesz aláírva. Ellenőrizd: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Adj meg legfeljebb 80 karakteres nevet.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Az Érvényes eddig létező dátum legyen, éééé-hh-nn formában.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Az Érvényes eddig nem lehet az űrlap zárónapja előtt.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'A bundle-t nem sikerült létrehozni ({veld}). Ellenőrizd, hogy az űrlap érvényes zárónapot és megőrzési időt ad meg.',
+  'formulier': 'űrlap',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'A bundle-t nem sikerült a munkamappában tárolni.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Hozd létre és írd alá a bundle-t, amelyben a kitöltő hisz a szerkesztőségetekről.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: a lezárt csomag megnyitva és importálva.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

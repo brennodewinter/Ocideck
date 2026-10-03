@@ -1652,6 +1652,45 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bundel publiceren…': 'Δημοσίευση δέσμης…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Η δέσμη είναι ό,τι πιστεύει όποιος συμπληρώνει για τη συντακτική σας ομάδα: με ποιο κλειδί σφραγίζει και σε ποιο κείμενο ανήκει. Αποθηκεύεται δίπλα στη φόρμα.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Δεν υπάρχει φόρμα στον φάκελο εργασίας για την οποία να δημιουργηθεί δέσμη.',
+  'Naam voor de invuller': 'Όνομα για όποιον συμπληρώνει',
+  'Geldig tot (jjjj-mm-dd)': 'Ισχύει έως (εεεε-μμ-ηη)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Η τελευταία ημέρα που όποιος συμπληρώνει πιστεύει αυτή τη δέσμη. Όχι πριν από την ημέρα λήξης της φόρμας.',
+  'Bundel maken': 'Δημιουργία δέσμης',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Η δέσμη δημιουργήθηκε (σειριακός αριθμός {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Δώστε το δακτυλικό αποτύπωμα σε όποιον συμπληρώνει με άλλον τρόπο από το αρχείο της δέσμης, π.χ. στην πρόσκληση. Όποιος έχει μόνο το αρχείο της δέσμης δεν μπορεί να ελέγξει από ποιον προέρχεται.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Αυτή η πλατφόρμα δεν έχει κλειδοθήκη για το κλειδί συντακτικής ομάδας· η δέσμη δεν μπορεί να υπογραφεί εδώ.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Δεν υπάρχει ακόμη κλειδί συντακτικής ομάδας. Δημιουργήστε ένα στο Κλειδί συντακτικής ομάδας… πριν δημοσιεύσετε δέσμη.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Η κλειδοθήκη δεν μπορεί να διαβαστεί. Δεν υπογράφηκε τίποτα.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Το αποθηκευμένο κλειδί συντακτικής ομάδας δεν μπορεί να διαβαστεί. Διαγράψτε το στο Κλειδί συντακτικής ομάδας… και επαναφέρετέ το από το κλειδί ανάκτησης.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Ελέγξτε πρώτα το κλειδί ανάκτησης στο Κλειδί συντακτικής ομάδας…. Χωρίς δρόμο επιστροφής, όλες οι υποβολές γίνονται δυσανάγνωστες αν χαλάσει αυτή η συσκευή.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Μια δέσμη αυτής της φόρμας στον φάκελο εργασίας δεν μπορεί να διαβαστεί ή δεν ανήκει στις υπόλοιπες. Έτσι ο σειριακός αριθμός δεν μπορεί να προσδιοριστεί και δεν υπογράφεται τίποτα. Ελέγξτε: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Εισαγάγετε όνομα έως 80 χαρακτήρες.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Το Ισχύει έως πρέπει να είναι υπαρκτή ημερομηνία, ως εεεε-μμ-ηη.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Το Ισχύει έως δεν μπορεί να είναι πριν από την ημέρα λήξης της φόρμας.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Η δέσμη δεν μπόρεσε να δημιουργηθεί ({veld}). Ελέγξτε ότι η φόρμα αναφέρει έγκυρη ημέρα λήξης και περίοδο διατήρησης.',
+  'formulier': 'φόρμα',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Η δέσμη δεν μπόρεσε να αποθηκευτεί στον φάκελο εργασίας.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Δημιουργήστε και υπογράψτε τη δέσμη που πιστεύει όποιος συμπληρώνει για τη συντακτική σας ομάδα.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: το σφραγισμένο πακέτο ανοίχτηκε και εισήχθη.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

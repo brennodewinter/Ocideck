@@ -667,6 +667,45 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bundel publiceren…': 'Bondel publisearje…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'De bondel is wat in ynstjoerder fan jim redaksje leaut: nei hokker kaai hy fersegelet en by hokker tekst it heart. Hy komt njonken it formulier te stean.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Der is gjin formulier yn de wurkmap om in bondel foar te meitsjen.',
+  'Naam voor de invuller': 'Namme foar de ynstjoerder',
+  'Geldig tot (jjjj-mm-dd)': 'Jildich oant (jjjj-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'De lêste dei dat in ynstjoerder dizze bondel leaut. Net foar de slutingsdei fan it formulier.',
+  'Bundel maken': 'Bondel meitsje',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bondel makke (folchnûmer {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Jou de fingerôfdruk oan de ynstjoerder op in oare wei as it bondelbestân, bygelyks yn de útnoeging. Wa\'t allinnich it bondelbestân hat, kin net neigean fan wa\'t it komt.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Dit platfoarm hat gjin kaaiering foar de redaksjekaai; in bondel kin hjir net ûndertekene wurde.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Der is noch gjin redaksjekaai. Meitsje der ien oan ûnder Redaksjekaai… foardat jo in bondel publisearje.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'De kaaiering is net te lêzen. Der is neat ûndertekene.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'De bewarre redaksjekaai is net te lêzen. Wiskje him ûnder Redaksjekaai… en herstel him út dyn herstelkaai.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrolearje earst dyn herstelkaai ûnder Redaksjekaai…. Sûnder wei werom binne alle ynstjoeringen net te lêzen as dit apparaat stikken giet.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'In bondel fan dit formulier yn de wurkmap is net te lêzen of heart net by de oare. Dêrmei is it folchnûmer net te bepalen en wurdt der neat ûndertekene. Kontrolearje: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Folje in namme yn fan op it measte 80 tekens.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Jildich oant moat in besteande datum wêze, as jjjj-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Jildich oant mei net foar de slutingsdei fan it formulier lizze.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'De bondel koe net makke wurde ({veld}). Sjoch of it formulier in jildige slutingsdei en bewarringstermyn neamt.',
+  'formulier': 'formulier',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'De bondel koe net bewarre wurde yn de wurkmap.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Meitsje en ûndertekenje de bondel dy\'t in ynstjoerder fan jim redaksje leaut.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: fersegele pakket iepene en ynhelle.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

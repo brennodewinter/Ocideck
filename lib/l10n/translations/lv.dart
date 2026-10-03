@@ -1625,6 +1625,45 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bundel publiceren…': 'Publicēt bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle ir tas, kam aizpildītājs tic par jūsu redakciju: kādai atslēgai aizzīmogot un pie kura teksta tas pieder. To saglabā blakus veidlapai.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Darba mapē nav veidlapas, kurai varētu izveidot bundle.',
+  'Naam voor de invuller': 'Vārds aizpildītājam',
+  'Geldig tot (jjjj-mm-dd)': 'Derīgs līdz (gggg-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Pēdējā diena, kad aizpildītājs tic šim bundle. Ne pirms veidlapas slēgšanas dienas.',
+  'Bundel maken': 'Izveidot bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle izveidots (kārtas numurs {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Dodiet aizpildītājam pirkstu nospiedumu citā ceļā nekā bundle failu, piemēram, uzaicinājumā. Kam ir tikai bundle fails, tas nevar pārbaudīt, no kā tas nāk.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Šai platformai nav atslēgu saišķa redakcijas atslēgai; bundle šeit nevar parakstīt.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Redakcijas atslēgas vēl nav. Izveidojiet to sadaļā Redakcijas atslēga…, pirms publicējat bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Atslēgu saišķi nevar nolasīt. Nekas netika parakstīts.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Saglabāto redakcijas atslēgu nevar nolasīt. Dzēsiet to sadaļā Redakcijas atslēga… un atjaunojiet no atkopšanas atslēgas.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Vispirms pārbaudiet atkopšanas atslēgu sadaļā Redakcijas atslēga…. Bez ceļa atpakaļ visi iesūtījumi kļūs nelasāmi, ja šī ierīce salūzīs.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Šīs veidlapas bundle darba mapē nevar nolasīt, vai arī tas nepieder pie pārējiem. Tad kārtas numuru nevar noteikt un nekas netiek parakstīts. Pārbaudiet: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Ievadiet vārdu, kas nav garāks par 80 rakstzīmēm.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Derīgs līdz jābūt esošam datumam formātā gggg-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Derīgs līdz nedrīkst būt pirms veidlapas slēgšanas dienas.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle neizdevās izveidot ({veld}). Pārbaudiet, vai veidlapā ir norādīta derīga slēgšanas diena un glabāšanas termiņš.',
+  'formulier': 'veidlapa',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle neizdevās saglabāt darba mapē.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Izveidojiet un parakstiet bundle, kam aizpildītājs tic par jūsu redakciju.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: aizzīmogotā pakotne atvērta un importēta.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

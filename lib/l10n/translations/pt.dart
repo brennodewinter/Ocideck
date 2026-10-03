@@ -1655,6 +1655,45 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bundel publiceren…': 'Publicar bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'O bundle é aquilo em que quem preenche acredita sobre a vossa redação: para que chave sela e a que texto pertence. Fica guardado junto ao formulário.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Não há nenhum formulário na pasta de trabalho para o qual criar um bundle.',
+  'Naam voor de invuller': 'Nome para quem preenche',
+  'Geldig tot (jjjj-mm-dd)': 'Válido até (aaaa-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'O último dia em que quem preenche acredita neste bundle. Não antes do dia de encerramento do formulário.',
+  'Bundel maken': 'Criar bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle criado (número de sequência {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Dê a impressão digital a quem preenche por outro caminho que não o ficheiro do bundle, por exemplo no convite. Quem tem só o ficheiro do bundle não consegue verificar de quem vem.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Esta plataforma não tem porta-chaves para a chave da redação; aqui não é possível assinar um bundle.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Ainda não há chave da redação. Crie uma em Chave da redação… antes de publicar um bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'O porta-chaves não pode ser lido. Nada foi assinado.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'A chave da redação guardada não pode ser lida. Apague-a em Chave da redação… e restaure-a a partir da sua chave de recuperação.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Verifique primeiro a sua chave de recuperação em Chave da redação…. Sem caminho de volta, todos os envios ficam ilegíveis se este dispositivo avariar.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Um bundle deste formulário na pasta de trabalho não pode ser lido ou não pertence aos outros. Assim não é possível determinar o número de sequência e nada é assinado. Verifique: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Introduza um nome com no máximo 80 caracteres.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Válido até tem de ser uma data existente, no formato aaaa-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Válido até não pode ser anterior ao dia de encerramento do formulário.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Não foi possível criar o bundle ({veld}). Verifique se o formulário indica um dia de encerramento e um prazo de conservação válidos.',
+  'formulier': 'formulário',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Não foi possível guardar o bundle na pasta de trabalho.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Crie e assine o bundle em que quem preenche acredita sobre a vossa redação.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: pacote selado aberto e importado.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
