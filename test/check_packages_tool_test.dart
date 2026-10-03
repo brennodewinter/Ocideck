@@ -245,9 +245,19 @@ dev_dependencies:
           'src/form_seal.dart': "import 'package:dartage/dartage.dart';\n",
           'src/form_bundle.dart':
               "import 'package:cryptography/cryptography.dart';\n",
+          'src/intake_request.dart':
+              "import 'package:cryptography/cryptography.dart';\n",
         },
       );
       expect(problems(), isEmpty);
+    });
+
+    test('the set of files meant to touch them is exactly these three', () {
+      expect(primitiveFiles, {
+        'lib/src/form_seal.dart',
+        'lib/src/form_bundle.dart',
+        'lib/src/intake_request.dart',
+      });
     });
 
     test('the same file name in another folder may not', () {

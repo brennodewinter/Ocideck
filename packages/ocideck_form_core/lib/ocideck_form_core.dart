@@ -41,4 +41,6 @@ export 'src/form_team.dart';
 export 'src/form_template_text.dart';
 export 'src/form_validator.dart';
 export 'src/form_words.dart';
+export 'src/intake_protocol.dart';
+export 'src/intake_request.dart';
 export 'src/rules_version.dart';
