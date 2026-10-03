@@ -775,6 +775,41 @@ beside the template (`<template-name>.bundle.json`, the existing sidecar naming)
 - **Retained per form version.** The organiser keeps each published version — the
   template(s), bundle and hash — under `forms/` (§7.1), because "judged against the
   version it names" needs the text to compare with.
+- **As built (phase 3), where the text above left a detail open** — `form_bundle.dart`,
+  `form_jcs.dart`, `form_base32.dart`:
+  - *Encodings.* Every binary field is **lower-case base32 without padding** (RFC 4648, the
+    alphabet of a `sid`): `sign` (32-byte public key, 52 characters), `sig` (64 bytes, 103),
+    `kid` (16 bytes, 26) and the fingerprint (32 bytes, 52). Hashes stay hex. Decoding is
+    canonical: nothing but `[a-z2-7]`, a length a byte string can have, leftover bits zero.
+  - *Fingerprint.* The SHA-256 of the owner's 32-byte public key in that base32; written in
+    groups of four for people (`abcd-efgh-…`), read back whatever case or separators it was
+    typed with.
+  - *Who is the owner.* The signer is the **organiser whose `sign` key hashes to the
+    fingerprint**; the owner is therefore one of `organisers`, and a bundle that lists no
+    such key is a fingerprint mismatch.
+  - *`kid`* is derived, never chosen: the first 128 bits of the SHA-256 of the organiser's
+    canonical `age1…` recipient, as base32 (the grammar of a `sid`). A bundle that carries
+    another value is refused, so a server cannot attribute a key to an organiser who does
+    not hold it.
+  - *JCS subset.* RFC 8785 for objects, arrays, strings, booleans, `null` and **integers**.
+    A number with a fraction or exponent, or an integer beyond ±(2⁵³−1), is refused — no
+    bundle field needs one, and ECMAScript's number printing would be a second thing to get
+    wrong. A lone surrogate is refused (I-JSON).
+  - *Strictness.* Exactly the members of the example above, in the bundle, `form`, `policy`
+    and each organiser; an unknown member is refused, not ignored. Caps: ≤ 64 organisers,
+    names ≤ 80 characters without control characters, `max_package_bytes` ≤ the 120 MiB hard
+    cap, `retain_unused` ≤ 200 characters, the whole bundle ≤ 256 KiB.
+  - *Order of checks.* size and JSON → fingerprint → signer → signature → structure →
+    template (hash, id, version, rules) → rules supported → expiry → host → pin. Nothing in a
+    bundle is believed before the signature, not even "this form is closed". `expires` is the
+    last day it is believed (UTC); `bundle_seq` equal to the pin is accepted, lower is a
+    rollback; a pin belongs to one (`fid`, owner fingerprint).
+  - *Making one.* `createFormBundle` verifies what it made, against the owner's own
+    fingerprint, before returning it: a bundle that would not pass what a respondent does is
+    not handed out (that includes one already expired, or for rules this engine does not know).
+  - *Vector.* `test/fixtures/form_bundle_vector.json` (CC0, D5): a seed, a template, the signed
+    bundle, its canonical form and nine cases. Its signature was also verified independently,
+    with Node's OpenSSL Ed25519, when it was made.
 
 ### 5.2 The package
 
@@ -918,6 +953,15 @@ points.
   native X25519 recipients, rather than ignoring it. Risks accepted: a 0.x release from
   July 2026 with one maintainer — which is why the pin is exact, the corpus below runs on
   every `make check`, and the external review covers it.
+- **In a browser, only as WebAssembly (found 2026-10-03).** `dartage` 0.3.0 builds the
+  64-bit chunk counter with `ByteData.setUint64`, which **dart2js does not support**: sealing
+  and opening throw `Unsupported operation: Uint64 accessor not supported by dart2js`. Under
+  dart2wasm in Chrome the whole `form_seal_test.dart` and `form_bundle_test.dart` pass
+  (`dart test -p chrome -c dart2wasm`); `form_base32`, `form_jcs` and the bundle pass under
+  dart2js too. `make build-web` is a dart2js build, so **the web respondent shell (§6.6) cannot
+  seal with this release as it is**: it needs either a wasm build or a fix upstream (two
+  `setUint32` calls) before phase 4's web smoke test. This does not touch the desktop app, the
+  organiser, or the file route from a desktop respondent.
 - **Verified against the world, not against ourselves.** Phase 3's gate includes the
   public `age` test vectors and an **interoperability test** with the reference `age`
   binary (seal here / open there and back). Where the binary is absent the gate
@@ -1789,7 +1833,11 @@ and `test/fixtures/form_vectors.json` (words, characters and patterns; the range
 vectors still live in the engine's own tests).
 **Built since:** `form_seal.dart` (age over `dartage`; the only file touching the age
 implementation — `check_packages` rule 10 keeps it so).
-**Still to build:** `form_bundle.dart` (bundle, JCS, signing).
+`form_bundle.dart` (bundle, signing, verifying, pins), `form_jcs.dart` (RFC 8785 subset) and
+`form_base32.dart`; `form_bundle.dart` is the second file `check_packages` lets touch the
+cryptographic primitives (Ed25519 from `package:cryptography`).
+**Still to build:** the organiser's keys in the app (§5.9), publishing a bundle, importing and
+sending sealed files, and the dossier for the external review.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
