@@ -667,6 +667,46 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'De redakteurs njonken dy dy’t yn elke bondel steane, sadat ek sy de ynstjoeringen iepenje kinne. Do foegest immen ta mei syn redakteurkaart en typst de fingerôfdruk fan dy kaart werom.',
+  'Er is nog niemand naast jou.': 'Der is noch nimmen njonken dy.',
+  'Plak de kaart van de redacteur': 'Plak de kaart fan de redakteur',
+  'Kaart controleren': 'Kaart kontrolearje',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kaart fan {naam}. Typ de fingerôfdruk fan dizze kaart dy’t {naam} dy op in oare wei joech, bygelyks oan de tillefoan.',
+  'Redacteur verwijderen': 'Redakteur fuortsmite',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} út it team heljen? Bondels dy’t do al publisearre hast, bliuwe sa’t se binne oant do opnij publisearrest; wat al foar {naam} fersegele is, bliuwt foar dy persoan lêsber.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} is tafoege. Publisearje de bondel opnij om {naam} derin op te nimmen.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} is fuortsmiten. Publisearje de bondel opnij om {naam} derút te heljen.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Meitsje earst dyn eigen redaksjekaai oan ûnder Redaksjekaai….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Dyn redaksjekaai is net te brûken. Sjoch ûnder Redaksjekaai….',
+  'Dit is geen redacteurskaart.': 'Dit is gjin redakteurkaart.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Dizze kaart is fan in nijere ferzje fan OciDeck. Wurkje OciDeck by.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'De kaart befettet wat net kin. Freegje de redakteur om in nije kaart.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Dizze fingerôfdruk past net by de kaart: de kaart is feroare of net fan wa’t do tinkst. Freegje de redakteur wer om de fingerôfdruk en de kaart.',
+  'Dit is je eigen kaart.': 'Dit is dyn eigen kaart.',
+  'Deze redacteur staat er al.': 'Dizze redakteur sit der al yn.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'It team is fol: in bondel draacht op it measte 64 organisatoaren, dy meiteld.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'It bestân team.json yn de wurkmap is net te lêzen. Der is neat feroare; herstel of wiskje it.',
+  'Het team kon niet worden opgeslagen.': 'It team koe net bewarre wurde.',
+  'Deze redacteur staat niet meer in het team.':
+      'Dizze redakteur sit net mear yn it team.',
+  'Naast jou in de bundel: {namen}.': 'Njonken dy yn de bondel: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrolearje earst dyn herstelkaai ûnder Redaksjekaai…, of foegje in twadde redakteur ta ûnder Team…. Sûnder wei werom binne alle ynstjoeringen net te lêzen as dit apparaat stikken giet.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'It bestân team.json yn de wurkmap is net te lêzen. Der wurdt neat ûndertekene.',
   'Redacteurskaart maken…': 'Redakteurkaart meitsje…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Mei in redakteurkaart foeget de eigener fan in formulier dy ta oan de bondel, sadat ek do de ynstjoeringen iepenje kinst. De kaart mei per e-mail.',
@@ -732,8 +772,6 @@ const _dutchSourceAddFy = {
       'De kaaiering is net te lêzen. Der is neat ûndertekene.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'De bewarre redaksjekaai is net te lêzen. Wiskje him ûnder Redaksjekaai… en herstel him út dyn herstelkaai.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Kontrolearje earst dyn herstelkaai ûnder Redaksjekaai…. Sûnder wei werom binne alle ynstjoeringen net te lêzen as dit apparaat stikken giet.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'In bondel fan dit formulier yn de wurkmap is net te lêzen of heart net by de oare. Dêrmei is it folchnûmer net te bepalen en wurdt der neat ûndertekene. Kontrolearje: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

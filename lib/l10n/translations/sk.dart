@@ -1633,6 +1633,46 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Team…': 'Tím…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktori okrem vás, ktorí sú v každom bundle, aby aj oni mohli otvárať odoslania. Niekoho pridáte jeho kartou redaktora a znova zadáte odtlačok tejto karty.',
+  'Er is nog niemand naast jou.': 'Okrem vás zatiaľ nikto nie je.',
+  'Plak de kaart van de redacteur': 'Vložte kartu redaktora',
+  'Kaart controleren': 'Skontrolovať kartu',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karta: {naam}. Zadajte odtlačok tejto karty, ktorý vám {naam} odovzdal inou cestou, napríklad telefonicky.',
+  'Redacteur verwijderen': 'Odstrániť redaktora',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Odstrániť {naam} z tímu? Bundle, ktoré ste už zverejnili, zostanú, aké sú, kým nezverejníte znova; čo už bolo zapečatené pre {naam}, zostáva pre túto osobu čitateľné.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} bol(a) pridaný(á). Zverejnite bundle znova, aby zahŕňal {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} bol(a) odstránený(á). Zverejnite bundle znova, aby {naam} vynechal.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Najprv vytvorte vlastný kľúč redakcie v Kľúč redakcie….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Váš kľúč redakcie nemožno použiť. Pozrite sa do Kľúč redakcie….',
+  'Dit is geen redacteurskaart.': 'Toto nie je karta redaktora.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Táto karta je z novšej verzie OciDeck. Aktualizujte OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Karta obsahuje niečo neprípustné. Požiadajte redaktora o novú kartu.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Tento odtlačok nezodpovedá karte: karta bola zmenená alebo nie je od toho, koho si myslíte. Požiadajte redaktora znova o odtlačok a kartu.',
+  'Dit is je eigen kaart.': 'Toto je vaša vlastná karta.',
+  'Deze redacteur staat er al.': 'Tento redaktor už v tíme je.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tím je plný: bundle nesie najviac 64 organizátorov, vrátane vás.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Súbor team.json v pracovnom priečinku nemožno prečítať. Nič sa nezmenilo; opravte ho alebo zmažte.',
+  'Het team kon niet worden opgeslagen.': 'Tím sa nepodarilo uložiť.',
+  'Deze redacteur staat niet meer in het team.':
+      'Tento redaktor už v tíme nie je.',
+  'Naast jou in de bundel: {namen}.': 'Okrem vás v bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Najprv skontrolujte kľúč na obnovenie v Kľúč redakcie… alebo pridajte druhého redaktora v Tím…. Bez cesty späť budú všetky odoslania nečitateľné, ak sa toto zariadenie pokazí.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Súbor team.json v pracovnom priečinku nemožno prečítať. Nič sa nepodpíše.',
   'Redacteurskaart maken…': 'Vytvoriť kartu redaktora…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Pomocou karty redaktora vás vlastník formulára pridá do bundle, aby ste aj vy mohli otvárať odoslania. Kartu možno poslať e-mailom.',
@@ -1698,8 +1738,6 @@ const _dutchSourceAddSk = <String, String>{
       'Kľúčenku nemožno prečítať. Nič sa nepodpísalo.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Uložený kľúč redakcie nemožno prečítať. Odstráňte ho v Kľúč redakcie… a obnovte ho zo svojho kľúča na obnovenie.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Najprv skontrolujte kľúč na obnovenie v Kľúč redakcie…. Bez cesty späť budú všetky odoslania nečitateľné, ak sa toto zariadenie pokazí.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Bundle tohto formulára v pracovnom priečinku nemožno prečítať, alebo nepatrí k ostatným. Potom sa nedá určiť poradové číslo a nič sa nepodpíše. Skontrolujte: {pad}',
   'Vul een naam in van hooguit 80 tekens.': 'Zadajte meno s najviac 80 znakmi.',

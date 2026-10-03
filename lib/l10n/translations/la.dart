@@ -1642,6 +1642,46 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Team…': 'Manus…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redactores praeter te qui in omni fasce sunt, ut et ipsi missa aperire possint. Aliquem cum charta redactoris addis et vestigium digitale illius chartae rursus scribis.',
+  'Er is nog niemand naast jou.': 'Nondum quisquam praeter te est.',
+  'Plak de kaart van de redacteur': 'Chartam redactoris insere',
+  'Kaart controleren': 'Chartam probare',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Charta {naam}. Vestigium digitale huius chartae quod {naam} tibi alia via dedit scribe, exempli gratia telephono.',
+  'Redacteur verwijderen': 'Redactorem removere',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} ex manu removere? Fasces iam publicati manent ut sunt donec iterum publices; quod iam pro {naam} obsignatum est, illi legibile manet.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} additus est. Fascem iterum publica ut {naam} includatur.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} remotus est. Fascem iterum publica ut {naam} eximatur.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Primum clavem redactionis tuam sub Clavis redactionis… crea.',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Clavis redactionis tua uti non potest. Vide sub Clavis redactionis….',
+  'Dit is geen redacteurskaart.': 'Haec non est charta redactoris.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Haec charta ex versione OciDeck recentiore est. OciDeck renova.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Charta aliquid continet quod non licet. Redactorem roga ut novam chartam det.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Hoc vestigium digitale cum charta non congruit: charta mutata est vel non ab eo est quem putas. Redactorem iterum roga ut vestigium digitale et chartam det.',
+  'Dit is je eigen kaart.': 'Haec est charta tua.',
+  'Deze redacteur staat er al.': 'Hic redactor iam in manu est.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Manus plena est: fascis ad summum sexaginta quattuor ordinatores portat, te incluso.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Fasciculus team.json in fasciculo operis legi non potest. Nihil mutatum est; eum repara vel dele.',
+  'Het team kon niet worden opgeslagen.': 'Manus servari non potuit.',
+  'Deze redacteur staat niet meer in het team.':
+      'Hic redactor iam in manu non est.',
+  'Naast jou in de bundel: {namen}.': 'Praeter te in fasce: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Primum clavem recuperationis tuam sub Clavis redactionis… proba, vel secundum redactorem sub Manus… adde. Sine via reditus omnia missa illegibilia fiunt si hoc instrumentum frangitur.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Fasciculus team.json in fasciculo operis legi non potest. Nihil subscribitur.',
   'Redacteurskaart maken…': 'Chartam redactoris creare…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Charta redactoris dominus formae te ad fascem addit, ut et tu missa aperire possis. Charta per epistulam electronicam mitti potest.',
@@ -1706,8 +1746,6 @@ const _dutchSourceAddLa = <String, String>{
       'Circulus clavium legi non potest. Nihil subscriptum est.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Clavis redactionis servata legi non potest. Eam sub Clavis redactionis… dele et ex clave recuperationis tua restitue.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Primum clavem recuperationis tuam sub Clavis redactionis… proba. Sine via reditus omnia missa illegibilia fiunt si hoc instrumentum frangitur.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Fascis huius formae in fasciculo operis legi non potest vel ad ceteros non pertinet. Ita numerus ordinis definiri non potest et nihil subscribitur. Proba: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

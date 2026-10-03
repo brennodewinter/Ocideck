@@ -5959,6 +5959,21 @@ and offers nothing.
 that does not answer is not an empty keychain — and the same when what is stored cannot be read as a key. Nothing
 you type is repeated in a message.
 
+**Team…** (at the bottom of the Inbox; needs a workspace). A form's team is the editors **besides you** who are listed
+in every bundle you sign, so they can open the submissions too. It is the file `team.json` in the workspace, so a
+shared workspace shares its team. **To add an editor**, they make a card (*Create editor card…* in their *Editorial
+key…* window) and send it to you. Paste it and choose **Check card**: the window shows only their name. Then **type
+the card's fingerprint** that they gave you *by another route than the card* — over the phone, in person — and choose
+**Add**. The fingerprint is not shown to you first, on purpose: copying it off the screen would check nothing. It
+stops, and says why, when the fingerprint does not fit the card (the card was changed, or is not from who you think),
+the card is your own, the editor is there already, the team is full (a bundle names at most 64 organisers, you
+included), or `team.json` cannot be read (it is left alone). **Remove** asks first and says what stays: bundles you
+published earlier stay as they are until you publish again, and what was already sealed for that person stays
+readable to them. Publish again after any change: the bundle lists you first, then the editors in the order they were
+added, and says *Besides you in the bundle: …* in the window.
+
+**Publishing needs a way back**: your recovery key typed back, *or* a second editor in the team.
+
 **Publish bundle…** (under the forms in the Inbox). A respondent does not take a form on trust: the **bundle**
 says which key to seal to and which text it belongs to, and is signed with your editorial key. Pick the form —
 **every language is its own text and gets its own bundle** — the *name for the respondent* (the form's
@@ -5969,8 +5984,9 @@ file** — in the invitation, say. The bundle alone cannot show who it comes fro
 Publishing again makes a bundle with the next sequence number, over the old one; the number runs on across the
 languages and versions of one form, because a respondent refuses a lower number than they have seen.
 
-Nothing is signed, and the window says why, when: there is no usable editorial key; the **recovery key has not been
-typed back** (without a way back, every submission is unreadable if this device breaks — *Editorial key…*); the name
+Nothing is signed, and the window says why, when: there is no usable editorial key; **there is no way back** — the recovery
+key has not been typed back and the team has no second editor (without one, every submission is unreadable if this device
+breaks — *Editorial key…*, *Team…*); `team.json` cannot be read; the name
 is empty or longer than 80 characters; *valid until* is not a date or lies before the closing day; or a bundle of
 this form in the workspace cannot be read, which makes the next sequence number impossible to know. Closing day and
 retention period are taken from the form itself.

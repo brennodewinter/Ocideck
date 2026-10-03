@@ -408,6 +408,68 @@ void main() {
     },
   );
 
+  group('het team', () {
+    Future<FormEditorCard> editor(String name) async {
+      final other = FormKeyService(
+        SecretStore(storage: FormKeyVault(), canStore: true),
+      );
+      await other.create();
+      return editorCardOf((await other.read() as FormKeyPresent).info, name);
+    }
+
+    test(
+      'de redacteurs staan na de eigenaar in de bundel, in volgorde',
+      () async {
+        final a = await editor('Eerste');
+        final b = await editor('Tweede');
+        await workspace.saveTeam(FormTeam([a, b]));
+        final bundle = await verified(published(await publish()), form);
+        expect(
+          [for (final o in bundle.organisers) o.name],
+          ['Indo IT Kookboek-team', 'Eerste', 'Tweede'],
+        );
+        expect(bundle.organisers[1].age, a.age);
+        expect(bundle.organisers[1].sign, a.sign);
+        expect(bundle.organisers[1].kid, a.kid);
+        expect(bundle.organisers[0].age, mine.recipient);
+      },
+    );
+
+    test(
+      'een tweede sleutel is een herstelweg: de herstelsleutel hoeft niet terug',
+      () async {
+        final fresh = FormKeyService(
+          SecretStore(storage: FormKeyVault(), canStore: true),
+        );
+        final info = ((await fresh.create()) as FormKeyWritten).info;
+        expect(await publish(use: fresh), isA<FormBundleRecoveryNotChecked>());
+        await workspace.saveTeam(FormTeam([await editor('Tweede')]));
+        final done = published(await publish(use: fresh));
+        final text = File(done.path).readAsStringSync();
+        final result = await verifyFormBundle(
+          text,
+          templateText: form.text,
+          fingerprint: info.fingerprint,
+          now: now,
+        );
+        expect((result as FormBundleVerified).bundle.organisers, hasLength(2));
+      },
+    );
+
+    test('zonder team blijft het de eigenaar alleen', () async {
+      final bundle = await verified(published(await publish()), form);
+      expect(bundle.organisers, hasLength(1));
+    });
+
+    test('een team dat niet te lezen is: niets wordt ondertekend', () async {
+      Directory(workspace.root).createSync(recursive: true);
+      File(workspace.teamPath).writeAsStringSync('geen team');
+      expect(await publish(), isA<FormBundleTeamUnreadable>());
+      expect(File(workspace.bundlePathOf(form)).existsSync(), isFalse);
+      expect(File(workspace.teamPath).readAsStringSync(), 'geen team');
+    });
+  });
+
   group('wat de redacteur invult', () {
     Future<void> expectBad(
       FormBundleInputField field, {

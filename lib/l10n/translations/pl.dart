@@ -1639,6 +1639,46 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Team…': 'Zespół…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktorzy poza Tobą, którzy są w każdym bundle, żeby oni też mogli otwierać zgłoszenia. Dodajesz kogoś jego kartą redaktora i ponownie wpisujesz odcisk palca tej karty.',
+  'Er is nog niemand naast jou.': 'Poza Tobą nie ma jeszcze nikogo.',
+  'Plak de kaart van de redacteur': 'Wklej kartę redaktora',
+  'Kaart controleren': 'Sprawdź kartę',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karta: {naam}. Wpisz odcisk palca tej karty, który {naam} przekazał Ci inną drogą, na przykład przez telefon.',
+  'Redacteur verwijderen': 'Usuń redaktora',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Usunąć {naam} z zespołu? Bundle, które już opublikowałeś, zostają, jakie są, dopóki nie opublikujesz ponownie; to, co już zapieczętowano dla {naam}, pozostaje dla tej osoby czytelne.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      'Dodano: {naam}. Opublikuj bundle ponownie, żeby uwzględnić tę osobę.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      'Usunięto: {naam}. Opublikuj bundle ponownie, żeby wyłączyć tę osobę.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Najpierw utwórz własny klucz redakcji w Klucz redakcji….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Twojego klucza redakcji nie można użyć. Zajrzyj do Klucz redakcji….',
+  'Dit is geen redacteurskaart.': 'To nie jest karta redaktora.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ta karta pochodzi z nowszej wersji OciDeck. Zaktualizuj OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Karta zawiera coś niedozwolonego. Poproś redaktora o nową kartę.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Ten odcisk palca nie pasuje do karty: karta została zmieniona albo nie pochodzi od osoby, o której myślisz. Poproś redaktora ponownie o odcisk palca i kartę.',
+  'Dit is je eigen kaart.': 'To Twoja własna karta.',
+  'Deze redacteur staat er al.': 'Ten redaktor jest już w zespole.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Zespół jest pełny: bundle niesie najwyżej 64 organizatorów, wliczając Ciebie.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Pliku team.json w folderze roboczym nie da się odczytać. Nic nie zmieniono; napraw go albo usuń.',
+  'Het team kon niet worden opgeslagen.': 'Nie udało się zapisać zespołu.',
+  'Deze redacteur staat niet meer in het team.':
+      'Tego redaktora nie ma już w zespole.',
+  'Naast jou in de bundel: {namen}.': 'Poza Tobą w bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Najpierw sprawdź klucz odzyskiwania w Klucz redakcji… albo dodaj drugiego redaktora w Zespół…. Bez drogi powrotnej wszystkie zgłoszenia będą nieczytelne, jeśli to urządzenie się zepsuje.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Pliku team.json w folderze roboczym nie da się odczytać. Niczego nie podpisano.',
   'Redacteurskaart maken…': 'Utwórz kartę redaktora…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Dzięki karcie redaktora właściciel formularza dodaje Cię do bundle, żebyś Ty też mógł otwierać zgłoszenia. Kartę można wysłać e-mailem.',
@@ -1704,8 +1744,6 @@ const _dutchSourceAddPl = <String, String>{
       'Pęku kluczy nie da się odczytać. Niczego nie podpisano.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Zapisanego klucza redakcji nie da się odczytać. Usuń go w Klucz redakcji… i przywróć z klucza odzyskiwania.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Najpierw sprawdź klucz odzyskiwania w Klucz redakcji…. Bez drogi powrotnej wszystkie zgłoszenia będą nieczytelne, jeśli to urządzenie się zepsuje.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Bundle tego formularza w folderze roboczym nie da się odczytać albo nie pasuje do pozostałych. Wtedy nie można ustalić numeru kolejnego i niczego nie podpisano. Sprawdź: {pad}',
   'Vul een naam in van hooguit 80 tekens.': 'Wpisz nazwę do 80 znaków.',

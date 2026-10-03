@@ -1657,6 +1657,47 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Team…': 'Foireann…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Na heagarthóirí seachas tú atá i ngach bundle, ionas gur féidir leo siúd na haighneachtaí a oscailt freisin. Cuireann tú duine leis lena chárta eagarthóra agus clóscríobhann tú méarlorg an chárta sin arís.',
+  'Er is nog niemand naast jou.': 'Níl aon duine ann fós seachas tú.',
+  'Plak de kaart van de redacteur': 'Greamaigh cárta an eagarthóra',
+  'Kaart controleren': 'Seiceáil an chárta',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Cárta {naam}. Clóscríobh méarlorg an chárta seo a thug {naam} duit ar bhealach eile, mar shampla ar an teileafón.',
+  'Redacteur verwijderen': 'Bain eagarthóir',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Bain {naam} den fhoireann? Fanann na bundles atá foilsithe agat cheana mar atá siad go dtí go bhfoilseoidh tú arís; fanann an méid atá séalaithe cheana do {naam} inléite don duine sin.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      'Cuireadh {naam} leis. Foilsigh an bundle arís chun {naam} a áireamh.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      'Baineadh {naam}. Foilsigh an bundle arís chun {naam} a fhágáil amach.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Cruthaigh d’eochair eagarthóireachta féin ar dtús faoi Eochair eagarthóireachta….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Ní féidir d’eochair eagarthóireachta a úsáid. Féach faoi Eochair eagarthóireachta….',
+  'Dit is geen redacteurskaart.': 'Ní cárta eagarthóra é seo.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Is ó leagan níos nuaí de OciDeck an chárta seo. Nuashonraigh OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Tá rud éigin sa chárta nach gceadaítear. Iarr cárta nua ar an eagarthóir.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Ní oireann an méarlorg seo don chárta: athraíodh an chárta nó ní ón té a cheapann tú é. Iarr an méarlorg agus an chárta arís ar an eagarthóir.',
+  'Dit is je eigen kaart.': 'Is é seo do chárta féin.',
+  'Deze redacteur staat er al.': 'Tá an t-eagarthóir seo san fhoireann cheana.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tá an fhoireann lán: iompraíonn bundle 64 eagraí ar a mhéad, tusa san áireamh.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Ní féidir an comhad team.json san fhillteán oibre a léamh. Níor athraíodh tada; deisigh nó scrios é.',
+  'Het team kon niet worden opgeslagen.':
+      'Níorbh fhéidir an fhoireann a shábháil.',
+  'Deze redacteur staat niet meer in het team.':
+      'Níl an t-eagarthóir seo san fhoireann a thuilleadh.',
+  'Naast jou in de bundel: {namen}.': 'Seachas tú sa bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Seiceáil d’eochair athshlánaithe ar dtús faoi Eochair eagarthóireachta…, nó cuir an dara heagarthóir leis faoi Foireann…. Gan bealach ar ais, éiríonn gach aighneacht do-léite má bhriseann an gléas seo.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Ní féidir an comhad team.json san fhillteán oibre a léamh. Ní shínítear tada.',
   'Redacteurskaart maken…': 'Cruthaigh cárta eagarthóra…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Le cárta eagarthóra cuireann úinéir foirme thú leis an bundle, ionas gur féidir leatsa na haighneachtaí a oscailt freisin. Is féidir an chárta a sheoladh trí ríomhphost.',
@@ -1722,8 +1763,6 @@ const _dutchSourceAddGa = <String, String>{
       'Ní féidir an slabhra eochrach a léamh. Níor síníodh tada.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Ní féidir an eochair eagarthóireachta stóráilte a léamh. Scrios faoi Eochair eagarthóireachta… í agus athchóirigh ó d’eochair athshlánaithe í.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Seiceáil d’eochair athshlánaithe ar dtús faoi Eochair eagarthóireachta…. Gan bealach ar ais, éiríonn gach aighneacht do-léite má bhriseann an gléas seo.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Ní féidir bundle den fhoirm seo san fhillteán oibre a léamh nó ní bhaineann sé leis na cinn eile. Mar sin ní féidir an tsraithuimhir a chinneadh agus ní shínítear tada. Seiceáil: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

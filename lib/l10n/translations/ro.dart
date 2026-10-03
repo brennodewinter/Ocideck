@@ -1643,6 +1643,46 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Team…': 'Echipă…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redactorii în afară de tine care sunt în fiecare bundle, ca să poată deschide și ei trimiterile. Adaugi pe cineva cu fișa lui de redactor și tastezi din nou amprenta acelei fișe.',
+  'Er is nog niemand naast jou.': 'Nu mai este nimeni în afară de tine.',
+  'Plak de kaart van de redacteur': 'Lipește fișa redactorului',
+  'Kaart controleren': 'Verifică fișa',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Fișa lui {naam}. Tastează amprenta acestei fișe pe care ți-a dat-o {naam} pe altă cale, de exemplu la telefon.',
+  'Redacteur verwijderen': 'Elimină redactorul',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Elimini pe {naam} din echipă? Bundle-urile pe care le-ai publicat deja rămân cum sunt până publici din nou; ce a fost deja sigilat pentru {naam} rămâne lizibil pentru acea persoană.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} a fost adăugat. Publică din nou bundle-ul ca să îl incluzi pe {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} a fost eliminat. Publică din nou bundle-ul ca să îl scoți pe {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Creează mai întâi propria cheie a redacției în Cheia redacției….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Cheia ta a redacției nu poate fi folosită. Uită-te în Cheia redacției….',
+  'Dit is geen redacteurskaart.': 'Aceasta nu este o fișă de redactor.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Această fișă este dintr-o versiune mai nouă de OciDeck. Actualizează OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Fișa conține ceva nepermis. Cere redactorului o fișă nouă.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Această amprentă nu se potrivește cu fișa: fișa a fost modificată sau nu este de la cine crezi. Cere din nou redactorului amprenta și fișa.',
+  'Dit is je eigen kaart.': 'Aceasta este propria ta fișă.',
+  'Deze redacteur staat er al.': 'Acest redactor este deja în echipă.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Echipa este plină: un bundle poartă cel mult 64 de organizatori, inclusiv tine.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Fișierul team.json din folderul de lucru nu poate fi citit. Nu s-a modificat nimic; repară-l sau șterge-l.',
+  'Het team kon niet worden opgeslagen.': 'Echipa nu a putut fi salvată.',
+  'Deze redacteur staat niet meer in het team.':
+      'Acest redactor nu mai este în echipă.',
+  'Naast jou in de bundel: {namen}.': 'Pe lângă tine în bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Verifică mai întâi cheia de recuperare în Cheia redacției… sau adaugă un al doilea redactor în Echipă…. Fără drum înapoi, toate trimiterile devin ilizibile dacă acest dispozitiv se strică.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Fișierul team.json din folderul de lucru nu poate fi citit. Nu se semnează nimic.',
   'Redacteurskaart maken…': 'Creează fișa redactorului…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Cu o fișă a redactorului, proprietarul unui formular te adaugă la bundle, ca să poți deschide și tu trimiterile. Fișa poate fi trimisă prin e-mail.',
@@ -1708,8 +1748,6 @@ const _dutchSourceAddRo = <String, String>{
       'Brelocul de chei nu poate fi citit. Nu s-a semnat nimic.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Cheia redacției salvată nu poate fi citită. Șterge-o în Cheia redacției… și restaureaz-o din cheia de recuperare.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Verifică mai întâi cheia de recuperare în Cheia redacției…. Fără drum înapoi, toate trimiterile devin ilizibile dacă acest dispozitiv se strică.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Un bundle al acestui formular din folderul de lucru nu poate fi citit sau nu aparține celorlalte. Atunci numărul de ordine nu poate fi stabilit și nu se semnează nimic. Verifică: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

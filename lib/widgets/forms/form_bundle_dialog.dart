@@ -58,6 +58,7 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
   bool _busy = false;
   String? _message;
   FormBundlePublished? _published;
+  FormTeam? _team;
 
   DateTime get _today => (widget.now ?? DateTime.now)();
 
@@ -65,6 +66,15 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
   void initState() {
     super.initState();
     _fillDefaults();
+    _loadTeam();
+  }
+
+  /// Wie er naast de eigenaar in de bundel komt te staan; `null` als dat niet te lezen is (de
+  /// bundel weigert dan zelf, met de reden).
+  Future<void> _loadTeam() async {
+    final stored = await widget.workspace.readTeam();
+    if (!mounted) return;
+    setState(() => _team = stored is FormTeamStored ? stored.team : null);
   }
 
   @override
@@ -149,7 +159,10 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
       ),
     },
     FormBundleRecoveryNotChecked() => l10n.d(
-      'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.',
+      'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.',
+    ),
+    FormBundleTeamUnreadable() => l10n.d(
+      'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.',
     ),
     FormBundleExistingUnreadable(:final paths) =>
       l10n
@@ -269,6 +282,18 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
       ],
       onChanged: _busy ? null : _chooseForm,
     ),
+    if (_team case final team? when team.editors.isNotEmpty) ...[
+      const SizedBox(height: 8),
+      Text(
+        l10n
+            .d('Naast jou in de bundel: {namen}.')
+            .replaceAll(
+              '{namen}',
+              [for (final e in team.editors) e.name].join(', '),
+            ),
+        style: theme.textTheme.bodySmall,
+      ),
+    ],
     const SizedBox(height: 12),
     TextField(
       controller: _name,

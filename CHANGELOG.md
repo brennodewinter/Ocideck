@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Het **team van de redactie** (formaat §7.6, fase 3): Inbox → *Team…* beheert `team.json` in de werkmap — de redacteurs naast de eigenaar, in elke bundel
+  die de eigenaar ondertekent. **Toevoegen in twee stappen**: de kaart (§5.1) plakken, waarna alleen de naam in beeld staat, en de **vingerafdruk van de
+  kaart** terugtypen die de redacteur langs een andere weg gaf — hij wordt bewust niet eerst getoond. Een foute vingerafdruk wordt vóór elke andere
+  weigering gemeld; geweigerd worden ook de eigen kaart, een dubbele en een vol team (63 + de eigenaar = de 64 van een bundel). Een `team.json` dat niet
+  te lezen is wordt nooit overschreven en houdt het publiceren tegen. Verwijderen vraagt een bevestiging die zegt wat blijft (eerder gepubliceerde bundels
+  tot er opnieuw wordt gepubliceerd; wat al verzegeld is blijft leesbaar). **De publiceerregel van §7.6 is nu volledig**: herstelsleutel teruggetypt *of*
+  minstens één redacteur in het team (twee sleutels). `publishFormBundle` zet de eigenaar eerst en de redacteurs in volgorde in de bundel; het
+  bundelvenster zegt *Naast jou in de bundel: …*. Het bericht bij een ontbrekende herstelweg is aangepast (de oude zin is uit alle 30 talen verwijderd). 27
+  nieuwe teksten in 30 talen.
 - De **redacteurskaart** (formaat §5.1, fase 3): in *Redactiesleutel…* maakt een nieuwe redacteur een kaart — `{v, name, age, sign, kid}` als canonieke
   JSON op één regel — met zijn naam, om te kopiëren, en de **vingerafdruk van de kaart** om aan de eigenaar van het formulier door te geven langs een
   andere weg dan de kaart. De vingerafdruk (`base32(SHA-256("ocideck-editor-card-v1\n" + tekst))`) dekt de **hele kaart**: met een vingerafdruk over de

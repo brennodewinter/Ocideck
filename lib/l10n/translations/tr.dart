@@ -2538,6 +2538,46 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Team…': 'Ekip…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Sizin dışınızda her bundle’da bulunan editörler, böylece onlar da gönderileri açabilir. Birini editör kartıyla eklersiniz ve o kartın parmak izini yeniden yazarsınız.',
+  'Er is nog niemand naast jou.': 'Sizden başka henüz kimse yok.',
+  'Plak de kaart van de redacteur': 'Editörün kartını yapıştırın',
+  'Kaart controleren': 'Kartı kontrol et',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} kartı. {naam} adlı kişinin size başka bir yoldan, örneğin telefonla verdiği bu kartın parmak izini yazın.',
+  'Redacteur verwijderen': 'Editörü kaldır',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} ekipten kaldırılsın mı? Önceden yayımladığınız bundle’lar siz yeniden yayımlayana kadar olduğu gibi kalır; {naam} için zaten mühürlenmiş olan, o kişi için okunabilir kalır.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} eklendi. {naam} adlı kişiyi dahil etmek için bundle’ı yeniden yayımlayın.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} kaldırıldı. {naam} adlı kişiyi çıkarmak için bundle’ı yeniden yayımlayın.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Önce Yayın kurulu anahtarı… altında kendi yayın kurulu anahtarınızı oluşturun.',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Yayın kurulu anahtarınız kullanılamıyor. Yayın kurulu anahtarı… altına bakın.',
+  'Dit is geen redacteurskaart.': 'Bu bir editör kartı değil.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Bu kart OciDeck’in daha yeni bir sürümünden. OciDeck’i güncelleyin.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kart izin verilmeyen bir şey içeriyor. Editörden yeni bir kart isteyin.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Bu parmak izi karta uymuyor: kart değiştirilmiş ya da sandığınız kişiden değil. Editörden parmak izini ve kartı yeniden isteyin.',
+  'Dit is je eigen kaart.': 'Bu sizin kendi kartınız.',
+  'Deze redacteur staat er al.': 'Bu editör zaten ekipte.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Ekip dolu: bir bundle en fazla 64 organizatör taşır, siz dahil.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Çalışma klasöründeki team.json dosyası okunamıyor. Hiçbir şey değiştirilmedi; onarın ya da silin.',
+  'Het team kon niet worden opgeslagen.': 'Ekip kaydedilemedi.',
+  'Deze redacteur staat niet meer in het team.':
+      'Bu editör artık ekipte değil.',
+  'Naast jou in de bundel: {namen}.': 'Sizin dışınızda bundle’da: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Önce kurtarma anahtarınızı Yayın kurulu anahtarı… altında kontrol edin ya da Ekip… altında ikinci bir editör ekleyin. Geri dönüş yolu olmadan, bu cihaz bozulursa tüm gönderimler okunamaz hale gelir.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Çalışma klasöründeki team.json dosyası okunamıyor. Hiçbir şey imzalanmaz.',
   'Redacteurskaart maken…': 'Editör kartı oluştur…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Editör kartıyla bir formun sahibi sizi bundle’a ekler, böylece siz de gönderileri açabilirsiniz. Kart e-postayla gönderilebilir.',
@@ -2602,8 +2642,6 @@ const _dutchSourceAddTr = <String, String>{
       'Anahtarlık okunamıyor. Hiçbir şey imzalanmadı.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Kayıtlı yayın kurulu anahtarı okunamıyor. Yayın kurulu anahtarı… altında silin ve kurtarma anahtarınızdan geri yükleyin.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Önce kurtarma anahtarınızı Yayın kurulu anahtarı… altında kontrol edin. Geri dönüş yolu olmadan, bu cihaz bozulursa tüm gönderimler okunamaz hale gelir.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Çalışma klasöründeki bu formun bir bundle\'ı okunamıyor ya da diğerlerine ait değil. Bu durumda sıra numarası belirlenemez ve hiçbir şey imzalanmaz. Kontrol edin: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

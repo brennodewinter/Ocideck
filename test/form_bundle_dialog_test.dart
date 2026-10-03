@@ -2,6 +2,7 @@
 // die erna komt en elke zin die zegt waarom er niets is ondertekend.
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
@@ -464,6 +465,88 @@ void main() {
     await waitFor(tester, containing('Bundle created (sequence number 1)'));
     expect(text('Fingerprint'), findsOneWidget);
     expect(text('Copy fingerprint'), findsOneWidget);
+  });
+
+  group('het team', () {
+    Future<FormEditorCard> editor(WidgetTester tester, String name) async =>
+        (await tester.runAsync(() async {
+          final other = FormKeyService(
+            SecretStore(storage: FormKeyVault(), canStore: true),
+          );
+          await other.create();
+          return editorCardOf(
+            (await other.read() as FormKeyPresent).info,
+            name,
+          );
+        }))!;
+
+    testWidgets(
+      'zonder team staat er geen regel over wie er nog meer in staat',
+      (tester) async {
+        await show(tester, await prepare(tester));
+        expect(containing('Naast jou in de bundel'), findsNothing);
+      },
+    );
+
+    testWidgets('met een team staan de namen erbij, en in de bundel', (
+      tester,
+    ) async {
+      final forms = await prepare(tester);
+      final a = await editor(tester, 'Eerste');
+      final b = await editor(tester, 'Tweede');
+      await tester.runAsync(() => workspace.saveTeam(FormTeam([a, b])));
+      await show(tester, forms);
+      await waitFor(tester, text('Naast jou in de bundel: Eerste, Tweede.'));
+      await make(tester);
+      await waitFor(tester, containing('Bundel gemaakt (volgnummer 1)'));
+      final stored = (await tester.runAsync(
+        () => workspace.bundlesOf('kook'),
+      ))!;
+      expect(
+        [
+          for (final o
+              in (jsonDecode(stored.bundles.single.text) as Map)['organisers']
+                  as List)
+            (o as Map)['name'],
+        ],
+        ['Indo IT Kookboek-team', 'Eerste', 'Tweede'],
+      );
+    });
+
+    testWidgets(
+      'een tweede redacteur is een herstelweg: de herstelsleutel hoeft niet terug',
+      (tester) async {
+        final forms = await prepare(tester, verified: false);
+        await show(tester, forms);
+        await make(tester);
+        await waitFor(
+          tester,
+          containing('of voeg een tweede redacteur toe onder Team…'),
+        );
+        final a = await editor(tester, 'Tweede');
+        await tester.runAsync(() => workspace.saveTeam(FormTeam([a])));
+        await tester.pump();
+        await make(tester);
+        await waitFor(tester, containing('Bundel gemaakt (volgnummer 1)'));
+      },
+    );
+
+    testWidgets('een team dat niet te lezen is: niets ondertekend', (
+      tester,
+    ) async {
+      final forms = await prepare(tester);
+      File(workspace.teamPath).writeAsStringSync('geen team');
+      await show(tester, forms);
+      await make(tester);
+      await waitFor(
+        tester,
+        text(
+          'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.',
+        ),
+      );
+      expect(containing('Naast jou in de bundel'), findsNothing);
+      expect(File(workspace.bundlePathOf(forms.single)).existsSync(), isFalse);
+    });
   });
 
   testWidgets('Sluiten sluit het venster', (tester) async {

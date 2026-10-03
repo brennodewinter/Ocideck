@@ -1630,6 +1630,47 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'D Redaktore näb dir, wo i jedem Bundle sin, dass au si d Iischickige chönne ufmache. Du fügsch öpper mit synere Redaktorekarte zue und tippsch dr Fingerabdruck vo dr Karte zrügg.',
+  'Er is nog niemand naast jou.': 'Usser dir isch no niemer dr bi.',
+  'Plak de kaart van de redacteur': 'Füeg d Karte vom Redaktor ii',
+  'Kaart controleren': 'Karte prüefe',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karte vo {naam}. Tipp dr Fingerabdruck vo dere Karte ii, wo {naam} dir uf eme andere Wäg gä het, zum Bispiil am Telefon.',
+  'Redacteur verwijderen': 'Redaktor entferne',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} us em Team entferne? Bundles, wo du scho veröffentlicht hesch, blybe wie si sin, bis du nöi veröffentlichsch; was scho für {naam} verschlüsslet isch, blybt für die Person läsbar.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} isch zuegfüegt worde. Veröffentlich s Bundle nöi, zum {naam} ufznäh.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} isch entfernt worde. Veröffentlich s Bundle nöi, zum {naam} usezneh.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Erstell zersch dy eigete Redaktionsschlüssel under Redaktionsschlüssel….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Dr Redaktionsschlüssel isch nid brauchbar. Lueg under Redaktionsschlüssel… na.',
+  'Dit is geen redacteurskaart.': 'Das isch kei Redaktorekarte.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Die Karte chunnt vo me neuere OciDeck. Aktualisier OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'D Karte enthaltet öppis, wo nid erlaubt isch. Bitt dr Redaktor um e neui Karte.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Dä Fingerabdruck passt nid zu dr Karte: D Karte isch veränderet worde oder isch nid vo däm, wo du meinsch. Bitt dr Redaktor nomal um dr Fingerabdruck und d Karte.',
+  'Dit is je eigen kaart.': 'Das isch dini eigeti Karte.',
+  'Deze redacteur staat er al.': 'Dä Redaktor isch scho im Team.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'S Team isch voll: Es Bundle treit höchschtens 64 Organisatore, di iigrechnet.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'D Datei team.json im Arbeitsordner lat sich nid läse. Es isch nüt gänderet worde; reparier si oder lösch si.',
+  'Het team kon niet worden opgeslagen.':
+      'S Team het nid chönne gspeicheret wärde.',
+  'Deze redacteur staat niet meer in het team.':
+      'Dä Redaktor isch nümme im Team.',
+  'Naast jou in de bundel: {namen}.': 'Näb dir im Bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Prüef zersch dy Wiederherstelligsschlüssel under Redaktionsschlüssel… oder füeg under Team… e zwäite Redaktor zue. Ohni Wäg zrügg sin alli Iischickige nümme läsbar, wenn das Gerät kaputt got.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'D Datei team.json im Arbeitsordner lat sich nid läse. Es wird nüt signiert.',
   'Redacteurskaart maken…': 'Redaktorekarte erstelle…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Mit ere Redaktorekarte fügt di dr Bsitzer vo emene Formular zum Bundle zue, dass au du d Iischickige chasch ufmache. D Karte darf per E-Mail verschickt wärde.',
@@ -1695,8 +1736,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Dr Schlüsselbund lat sich nid läse. Es isch nüt signiert worde.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Dr gspeicheret Redaktionsschlüssel lat sich nid läse. Lösch ne under Redaktionsschlüssel… und stell ne us dim Wiederherstelligsschlüssel wieder häre.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Prüef zersch dy Wiederherstelligsschlüssel under Redaktionsschlüssel…. Ohni Wäg zrügg sin alli Iischickige nümme läsbar, wenn das Gerät kaputt got.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'S Bundle vo däm Formular im Arbeitsordner lat sich nid läse oder ghört nid zu de andere. Dermit lat sich d Laufnummere nid bestimme, und es wird nüt signiert. Prüef: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

@@ -1627,6 +1627,46 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Team…': 'Tim…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktur selain Anda yang ada di setiap bundel, agar mereka juga dapat membuka kiriman. Anda menambahkan seseorang dengan kartu redakturnya dan mengetik ulang sidik jari kartu itu.',
+  'Er is nog niemand naast jou.': 'Belum ada siapa pun selain Anda.',
+  'Plak de kaart van de redacteur': 'Tempel kartu redaktur',
+  'Kaart controleren': 'Periksa kartu',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kartu {naam}. Ketik sidik jari kartu ini yang diberikan {naam} kepada Anda lewat jalur lain, misalnya lewat telepon.',
+  'Redacteur verwijderen': 'Hapus redaktur',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Hapus {naam} dari tim? Bundel yang sudah Anda terbitkan tetap seperti adanya sampai Anda menerbitkan lagi; yang sudah disegel untuk {naam} tetap dapat dibaca oleh orang itu.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} telah ditambahkan. Terbitkan bundel lagi untuk menyertakan {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} telah dihapus. Terbitkan bundel lagi untuk mengeluarkan {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Buat dulu kunci redaksi Anda sendiri di Kunci redaksi….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Kunci redaksi Anda tidak dapat dipakai. Lihat di Kunci redaksi….',
+  'Dit is geen redacteurskaart.': 'Ini bukan kartu redaktur.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Kartu ini berasal dari OciDeck versi yang lebih baru. Perbarui OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kartu berisi sesuatu yang tidak diizinkan. Minta redaktur membuat kartu baru.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Sidik jari ini tidak cocok dengan kartu: kartu telah diubah atau bukan dari orang yang Anda kira. Minta lagi sidik jari dan kartunya kepada redaktur.',
+  'Dit is je eigen kaart.': 'Ini kartu Anda sendiri.',
+  'Deze redacteur staat er al.': 'Redaktur ini sudah ada di tim.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tim sudah penuh: satu bundel membawa paling banyak 64 penyelenggara, termasuk Anda.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Berkas team.json di folder kerja tidak dapat dibaca. Tidak ada yang diubah; perbaiki atau hapus.',
+  'Het team kon niet worden opgeslagen.': 'Tim tidak dapat disimpan.',
+  'Deze redacteur staat niet meer in het team.':
+      'Redaktur ini tidak lagi ada di tim.',
+  'Naast jou in de bundel: {namen}.': 'Selain Anda di bundel: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Periksa dulu kunci pemulihan Anda di Kunci redaksi…, atau tambahkan redaktur kedua di Tim…. Tanpa jalan kembali, semua kiriman tidak dapat dibaca jika perangkat ini rusak.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Berkas team.json di folder kerja tidak dapat dibaca. Tidak ada yang ditandatangani.',
   'Redacteurskaart maken…': 'Buat kartu redaktur…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Dengan kartu redaktur, pemilik formulir menambahkan Anda ke bundel, sehingga Anda juga dapat membuka kiriman. Kartu boleh dikirim lewat email.',
@@ -1691,8 +1731,6 @@ const _dutchSourceAddId = <String, String>{
       'Gantungan kunci tidak dapat dibaca. Tidak ada yang ditandatangani.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Kunci redaksi yang tersimpan tidak dapat dibaca. Hapus di Kunci redaksi… lalu pulihkan dari kunci pemulihan Anda.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Periksa dulu kunci pemulihan Anda di Kunci redaksi…. Tanpa jalan kembali, semua kiriman tidak dapat dibaca jika perangkat ini rusak.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Sebuah bundel formulir ini di folder kerja tidak dapat dibaca atau tidak termasuk dengan yang lain. Dengan begitu nomor urut tidak dapat ditentukan dan tidak ada yang ditandatangani. Periksa: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

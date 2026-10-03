@@ -28,6 +28,26 @@ import 'package:path/path.dart' as p;
 
 import '../../utils/atomic_file.dart';
 
+/// De naam van het teambestand in de werkmap (FORM_INTAKE.md §7.6).
+const String kFormTeamFile = 'team.json';
+
+/// Wat [FormWorkspace.readTeam] vond.
+sealed class FormTeamRead {
+  const FormTeamRead();
+}
+
+/// Het team: leeg als er nog geen bestand is.
+class FormTeamStored extends FormTeamRead {
+  const FormTeamStored(this.team);
+
+  final FormTeam team;
+}
+
+/// Er staat een `team.json`, maar het is geen team dat deze lezer opent.
+class FormTeamDamaged extends FormTeamRead {
+  const FormTeamDamaged();
+}
+
 /// Een gepubliceerd formulier zoals de organisator het bewaart.
 class PublishedForm {
   const PublishedForm({
@@ -503,6 +523,37 @@ class FormWorkspace {
       }
     }
     return true;
+  }
+
+  // ── team ──────────────────────────────────────────────────────────────────
+
+  String get teamPath => p.join(root, kFormTeamFile);
+
+  /// Het team zoals het op schijf staat: leeg als er geen `team.json` is, [FormTeamDamaged]
+  /// als er een staat die niet te lezen is (geen UTF-8, geen team van deze versie).
+  Future<FormTeamRead> readTeam() async {
+    final file = File(teamPath);
+    if (!await file.exists()) return const FormTeamStored(FormTeam());
+    final text = await _readText(file);
+    if (text == null) return const FormTeamDamaged();
+    return switch (parseFormTeam(text)) {
+      FormTeamParsed(:final team) => FormTeamStored(team),
+      FormTeamRefused() => const FormTeamDamaged(),
+    };
+  }
+
+  /// Bewaart [team]. Een `team.json` dat er al is maar niet te lezen valt wordt niet
+  /// overschreven (`false`), zoals het register: wie het bijhield verliest niets omdat een
+  /// programma er niets van begrijpt.
+  Future<bool> saveTeam(FormTeam team) async {
+    if (await readTeam() case FormTeamDamaged()) return false;
+    try {
+      await Directory(root).create(recursive: true);
+      await writeStringAtomic(File(teamPath), team.toJsonText());
+      return true;
+    } on FileSystemException {
+      return false;
+    }
   }
 
   // ── register ──────────────────────────────────────────────────────────────

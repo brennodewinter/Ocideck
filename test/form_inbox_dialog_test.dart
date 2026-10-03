@@ -636,6 +636,35 @@ void main() {
     expect(find.byType(Dialog), findsNothing);
   });
 
+  group('team', () {
+    OutlinedButton button(WidgetTester tester) => tester.widget<OutlinedButton>(
+      find.ancestor(of: text('Team…'), matching: find.byType(OutlinedButton)),
+    );
+
+    testWidgets('zonder werkmap is er geen team om te beheren', (tester) async {
+      await open(tester, _Picks());
+      expect(button(tester).onPressed, isNull);
+    });
+
+    testWidgets('met een werkmap opent het het teamvenster', (tester) async {
+      await open(tester, _Picks(), workspace: root);
+      expect(button(tester).onPressed, isNotNull);
+      // Onderaan een venster dat scrolt: met een werkmap is er veel boven.
+      await tester.ensureVisible(text('Team…'));
+      await tester.pump();
+      await tester.tap(text('Team…'));
+      await tester.pump();
+      await pumpUntil(
+        tester,
+        () => text('Er is nog niemand naast jou.').evaluate().isNotEmpty,
+      );
+      expect(
+        find.widgetWithText(TextField, 'Plak de kaart van de redacteur'),
+        findsOneWidget,
+      );
+    });
+  });
+
   group('bundel publiceren', () {
     OutlinedButton button(WidgetTester tester) => tester.widget<OutlinedButton>(
       find.ancestor(

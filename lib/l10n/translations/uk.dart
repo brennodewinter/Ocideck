@@ -1642,6 +1642,46 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Team…': 'Команда…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Редактори, крім вас, які є в кожному комплекті, щоб і вони могли відкривати заявки. Ви додаєте когось за його карткою редактора й заново вводите відбиток цієї картки.',
+  'Er is nog niemand naast jou.': 'Крім вас, поки нікого немає.',
+  'Plak de kaart van de redacteur': 'Вставте картку редактора',
+  'Kaart controleren': 'Перевірити картку',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Картка {naam}. Введіть відбиток цієї картки, який {naam} передав вам іншим шляхом, наприклад телефоном.',
+  'Redacteur verwijderen': 'Видалити редактора',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Видалити {naam} з команди? Комплекти, які ви вже опублікували, залишаються як є, доки ви не опублікуєте знову; те, що вже запечатано для {naam}, залишається читабельним для цієї особи.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} додано. Опублікуйте комплект знову, щоб включити {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} видалено. Опублікуйте комплект знову, щоб прибрати {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Спершу створіть власний ключ редакції в розділі Ключ редакції….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Ваш ключ редакції не можна використати. Подивіться в розділі Ключ редакції….',
+  'Dit is geen redacteurskaart.': 'Це не картка редактора.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ця картка з новішої версії OciDeck. Оновіть OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Картка містить щось недозволене. Попросіть редактора про нову картку.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Цей відбиток не підходить до картки: картку змінили, або вона не від того, про кого ви думаєте. Знову попросіть редактора про відбиток і картку.',
+  'Dit is je eigen kaart.': 'Це ваша власна картка.',
+  'Deze redacteur staat er al.': 'Цей редактор уже в команді.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Команда заповнена: комплект несе щонайбільше 64 організатори, разом із вами.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Файл team.json у робочій папці не вдається прочитати. Нічого не змінено; полагодьте його або видаліть.',
+  'Het team kon niet worden opgeslagen.': 'Команду не вдалося зберегти.',
+  'Deze redacteur staat niet meer in het team.':
+      'Цього редактора вже немає в команді.',
+  'Naast jou in de bundel: {namen}.': 'Крім вас у комплекті: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Спершу перевірте ключ відновлення в розділі Ключ редакції… або додайте другого редактора в розділі Команда…. Без шляху назад усі надсилання стануть нечитабельними, якщо цей пристрій зламається.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Файл team.json у робочій папці не вдається прочитати. Нічого не підписано.',
   'Redacteurskaart maken…': 'Створити картку редактора…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'За допомогою картки редактора власник форми додає вас до комплекту, щоб і ви могли відкривати заявки. Картку можна надіслати електронною поштою.',
@@ -1706,8 +1746,6 @@ const _dutchSourceAddUk = <String, String>{
       'Зв’язку ключів не вдається прочитати. Нічого не підписано.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Збережений ключ редакції не вдається прочитати. Видаліть його в розділі Ключ редакції… і відновіть із ключа відновлення.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Спершу перевірте ключ відновлення в розділі Ключ редакції…. Без шляху назад усі надсилання стануть нечитабельними, якщо цей пристрій зламається.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Комплект цієї форми в робочій папці не вдається прочитати, або він не належить до інших. Тоді порядковий номер визначити неможливо, і нічого не підписано. Перевірте: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

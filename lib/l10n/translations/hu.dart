@@ -1629,6 +1629,46 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Team…': 'Csapat…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'A szerkesztők rajtad kívül, akik minden bundle-ben szerepelnek, hogy ők is megnyithassák a beküldéseket. Valakit a szerkesztői kártyájával adsz hozzá, és újra beírod a kártya ujjlenyomatát.',
+  'Er is nog niemand naast jou.': 'Rajtad kívül még senki nincs.',
+  'Plak de kaart van de redacteur': 'Illeszd be a szerkesztő kártyáját',
+  'Kaart controleren': 'Kártya ellenőrzése',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} kártyája. Írd be a kártya ujjlenyomatát, amelyet {naam} más úton adott neked, például telefonon.',
+  'Redacteur verwijderen': 'Szerkesztő eltávolítása',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Eltávolítod {naam} nevű tagot a csapatból? A már közzétett bundle-ök változatlanok maradnak, amíg újra nem teszed közzé őket; ami már le van zárva {naam} számára, az számára olvasható marad.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} hozzáadva. Tedd újra közzé a bundle-t, hogy {naam} is benne legyen.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} eltávolítva. Tedd újra közzé a bundle-t, hogy {naam} kikerüljön belőle.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Először hozd létre a saját szerkesztőségi kulcsodat a Szerkesztőségi kulcs… alatt.',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'A szerkesztőségi kulcsod nem használható. Nézd meg a Szerkesztőségi kulcs… alatt.',
+  'Dit is geen redacteurskaart.': 'Ez nem szerkesztői kártya.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ez a kártya az OciDeck újabb verziójából való. Frissítsd az OciDeckot.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'A kártya valami meg nem engedettet tartalmaz. Kérj a szerkesztőtől új kártyát.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Ez az ujjlenyomat nem illik a kártyához: a kártyát megváltoztatták, vagy nem attól való, akire gondolsz. Kérd újra a szerkesztőtől az ujjlenyomatot és a kártyát.',
+  'Dit is je eigen kaart.': 'Ez a saját kártyád.',
+  'Deze redacteur staat er al.': 'Ez a szerkesztő már a csapatban van.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'A csapat megtelt: egy bundle legfeljebb 64 szervezőt hordoz, téged is beleértve.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'A munkamappában lévő team.json fájl nem olvasható. Semmi nem változott; javítsd vagy töröld.',
+  'Het team kon niet worden opgeslagen.': 'A csapatot nem sikerült elmenteni.',
+  'Deze redacteur staat niet meer in het team.':
+      'Ez a szerkesztő már nincs a csapatban.',
+  'Naast jou in de bundel: {namen}.': 'Rajtad kívül a bundle-ben: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Először ellenőrizd a helyreállító kulcsodat a Szerkesztőségi kulcs… alatt, vagy adj hozzá egy második szerkesztőt a Csapat… alatt. Visszaút nélkül minden beküldés olvashatatlanná válik, ha ez az eszköz tönkremegy.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'A munkamappában lévő team.json fájl nem olvasható. Semmi nem lesz aláírva.',
   'Redacteurskaart maken…': 'Szerkesztői kártya létrehozása…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'A szerkesztői kártyával az űrlap tulajdonosa hozzáad téged a bundle-höz, hogy te is megnyithasd a beküldéseket. A kártya elküldhető e-mailben.',
@@ -1694,8 +1734,6 @@ const _dutchSourceAddHu = <String, String>{
       'A kulcstartó nem olvasható. Semmi nem lett aláírva.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'A tárolt szerkesztőségi kulcs nem olvasható. Töröld a Szerkesztőségi kulcs… alatt, és állítsd helyre a helyreállító kulcsodból.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Először ellenőrizd a helyreállító kulcsodat a Szerkesztőségi kulcs… alatt. Visszaút nélkül minden beküldés olvashatatlanná válik, ha ez az eszköz tönkremegy.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Az űrlap egyik bundle-je a munkamappában nem olvasható, vagy nem tartozik a többihez. Így a sorszám nem határozható meg, és semmi nem lesz aláírva. Ellenőrizd: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

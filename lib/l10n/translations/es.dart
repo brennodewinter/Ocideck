@@ -664,6 +664,46 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Team…': 'Equipo…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Los redactores además de ti que están en cada bundle, para que también puedan abrir los envíos. Añades a alguien con su tarjeta de redactor y vuelves a escribir la huella digital de esa tarjeta.',
+  'Er is nog niemand naast jou.': 'Todavía no hay nadie además de ti.',
+  'Plak de kaart van de redacteur': 'Pega la tarjeta del redactor',
+  'Kaart controleren': 'Comprobar tarjeta',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Tarjeta de {naam}. Escribe la huella digital de esta tarjeta que {naam} te dio por otro camino, por ejemplo por teléfono.',
+  'Redacteur verwijderen': 'Quitar redactor',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '¿Quitar a {naam} del equipo? Los bundles ya publicados siguen como están hasta que publiques de nuevo; lo que ya se selló para {naam} sigue siendo legible para esa persona.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} se ha añadido. Publica de nuevo el bundle para incluir a {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} se ha quitado. Publica de nuevo el bundle para sacar a {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Crea primero tu propia clave de la redacción en Clave de la redacción….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Tu clave de la redacción no se puede usar. Mira en Clave de la redacción….',
+  'Dit is geen redacteurskaart.': 'Esto no es una tarjeta de redactor.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Esta tarjeta es de una versión más nueva de OciDeck. Actualiza OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'La tarjeta contiene algo que no está permitido. Pide al redactor una tarjeta nueva.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Esta huella digital no coincide con la tarjeta: la tarjeta ha sido modificada o no es de quien crees. Pide de nuevo al redactor la huella digital y la tarjeta.',
+  'Dit is je eigen kaart.': 'Esta es tu propia tarjeta.',
+  'Deze redacteur staat er al.': 'Este redactor ya está en el equipo.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'El equipo está completo: un bundle lleva como máximo 64 organizadores, incluido tú.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'El archivo team.json de la carpeta de trabajo no se puede leer. No se ha cambiado nada; repáralo o elimínalo.',
+  'Het team kon niet worden opgeslagen.': 'No se pudo guardar el equipo.',
+  'Deze redacteur staat niet meer in het team.':
+      'Este redactor ya no está en el equipo.',
+  'Naast jou in de bundel: {namen}.': 'Además de ti en el bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Comprueba primero tu clave de recuperación en Clave de la redacción…, o añade un segundo redactor en Equipo…. Sin camino de vuelta, todos los envíos quedan ilegibles si este dispositivo se estropea.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'El archivo team.json de la carpeta de trabajo no se puede leer. No se firma nada.',
   'Redacteurskaart maken…': 'Crear tarjeta de redactor…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Con una tarjeta de redactor, el propietario de un formulario te añade al bundle, para que tú también puedas abrir los envíos. La tarjeta se puede enviar por correo.',
@@ -728,8 +768,6 @@ const _dutchSourceAddEs = {
       'El llavero no se puede leer. No se ha firmado nada.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'La clave de la redacción guardada no se puede leer. Elimínala en Clave de la redacción… y restáurala desde tu clave de recuperación.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Comprueba primero tu clave de recuperación en Clave de la redacción…. Sin camino de vuelta, todos los envíos quedan ilegibles si este dispositivo se estropea.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Un bundle de este formulario en la carpeta de trabajo no se puede leer o no pertenece a los demás. Así no se puede determinar el número de secuencia y no se firma nada. Comprueba: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

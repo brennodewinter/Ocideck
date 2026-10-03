@@ -667,6 +667,47 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Die Redakteure neben dir, die in jedem Bundle stehen, damit auch sie die Einsendungen öffnen können. Du fügst jemanden mit seiner Redakteurskarte hinzu und tippst den Fingerabdruck dieser Karte zurück.',
+  'Er is nog niemand naast jou.': 'Außer dir ist noch niemand dabei.',
+  'Plak de kaart van de redacteur': 'Füge die Karte des Redakteurs ein',
+  'Kaart controleren': 'Karte prüfen',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karte von {naam}. Tippe den Fingerabdruck dieser Karte ein, den {naam} dir auf einem anderen Weg gegeben hat, zum Beispiel am Telefon.',
+  'Redacteur verwijderen': 'Redakteur entfernen',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} aus dem Team entfernen? Bundles, die du schon veröffentlicht hast, bleiben, wie sie sind, bis du erneut veröffentlichst; was schon für {naam} verschlüsselt wurde, bleibt für diese Person lesbar.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} wurde hinzugefügt. Veröffentliche das Bundle erneut, um {naam} aufzunehmen.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} wurde entfernt. Veröffentliche das Bundle erneut, um {naam} herauszunehmen.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Erstelle zuerst deinen eigenen Redaktionsschlüssel unter Redaktionsschlüssel….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Dein Redaktionsschlüssel ist nicht verwendbar. Sieh unter Redaktionsschlüssel… nach.',
+  'Dit is geen redacteurskaart.': 'Das ist keine Redakteurskarte.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Diese Karte stammt aus einer neueren Version von OciDeck. Aktualisiere OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Die Karte enthält etwas, das nicht zulässig ist. Bitte den Redakteur um eine neue Karte.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Dieser Fingerabdruck passt nicht zur Karte: Die Karte wurde verändert oder ist nicht von dem, den du meinst. Bitte den Redakteur erneut um den Fingerabdruck und die Karte.',
+  'Dit is je eigen kaart.': 'Das ist deine eigene Karte.',
+  'Deze redacteur staat er al.': 'Dieser Redakteur ist schon im Team.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Das Team ist voll: Ein Bundle trägt höchstens 64 Organisatoren, dich eingerechnet.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Die Datei team.json im Arbeitsordner lässt sich nicht lesen. Es wurde nichts geändert; repariere oder lösche sie.',
+  'Het team kon niet worden opgeslagen.':
+      'Das Team konnte nicht gespeichert werden.',
+  'Deze redacteur staat niet meer in het team.':
+      'Dieser Redakteur ist nicht mehr im Team.',
+  'Naast jou in de bundel: {namen}.': 'Neben dir im Bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Prüfe zuerst deinen Wiederherstellungsschlüssel unter Redaktionsschlüssel… oder füge unter Team… einen zweiten Redakteur hinzu. Ohne Weg zurück sind alle Einsendungen unlesbar, wenn dieses Gerät kaputtgeht.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Die Datei team.json im Arbeitsordner lässt sich nicht lesen. Es wird nichts signiert.',
   'Redacteurskaart maken…': 'Redakteurskarte erstellen…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Mit einer Redakteurskarte fügt dich der Eigentümer eines Formulars zum Bundle hinzu, damit auch du die Einsendungen öffnen kannst. Die Karte darf per E-Mail verschickt werden.',
@@ -732,8 +773,6 @@ const _dutchSourceAddDe = {
       'Der Schlüsselbund lässt sich nicht lesen. Es wurde nichts signiert.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Der gespeicherte Redaktionsschlüssel lässt sich nicht lesen. Lösche ihn unter Redaktionsschlüssel… und stelle ihn aus deinem Wiederherstellungsschlüssel wieder her.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Prüfe zuerst deinen Wiederherstellungsschlüssel unter Redaktionsschlüssel…. Ohne Weg zurück sind alle Einsendungen unlesbar, wenn dieses Gerät kaputtgeht.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Ein Bundle dieses Formulars im Arbeitsordner lässt sich nicht lesen oder gehört nicht zu den anderen. Damit lässt sich die laufende Nummer nicht bestimmen, und es wird nichts signiert. Prüfe: {pad}',
   'Vul een naam in van hooguit 80 tekens.':
