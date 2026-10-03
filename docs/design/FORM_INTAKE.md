@@ -902,10 +902,22 @@ salt/info labels, a chunked AEAD (ChaCha20-Poly1305 in 64 KiB chunks) so a
 points.
 
 - **No new primitives.** X25519, HKDF-SHA-256, HMAC-SHA-256 and ChaCha20-Poly1305
-  are all in `package:cryptography`, which the app already depends on. The work is
-  **implementing the age format over them in pure Dart** — if a maintained,
-  licence-compatible pure-Dart `age` implementation exists at phase 3, prefer it
-  (run it through `check-licenses` and the SBOM); we have not verified that one does.
+  are all in `package:cryptography`, which the app already depends on. The age format
+  over them is **`dartage` 0.3.0** (MIT, pure Dart, web-ready; decision D9, 2026-10-03),
+  pinned exactly and imported by `form_seal.dart` alone. Considered and not chosen: `dage`
+  (BSD-3, 1.0.10) — last released February 2024, no web support, a parser-combinator
+  dependency for a format that needs none; and writing the format ourselves over
+  `package:cryptography`, which is the same work with nobody else's review behind it.
+  What was read before choosing it: the whole of its `age.dart`, `header.dart`,
+  `stream.dart`, `x25519*.dart` and `primitives.dart` — the header MAC is checked before a
+  byte of payload is read and compared without an early exit, an all-zero X25519 shared
+  secret is refused, the header is bounded, the final-chunk flag is enforced, random bytes
+  come from `Random.secure`. What it brings that this engine does not use: scrypt, armor,
+  the hybrid post-quantum and tag recipient types (and `pqcrypto`, MIT, no dependencies,
+  under them). `form_seal.dart` therefore **refuses** everything but the binary format with
+  native X25519 recipients, rather than ignoring it. Risks accepted: a 0.x release from
+  July 2026 with one maintainer — which is why the pin is exact, the corpus below runs on
+  every `make check`, and the external review covers it.
 - **Verified against the world, not against ourselves.** Phase 3's gate includes the
   public `age` test vectors and an **interoperability test** with the reference `age`
   binary (seal here / open there and back). Where the binary is absent the gate
@@ -1734,6 +1746,8 @@ The review asked that the cost be written down, not discovered.
   from the first submission; the calendar cost is stated in §12.
 - **D8 — Identity after deletion: none by default**; a form may declare `keep-record` and
   disclose it in the notice (§7.3).
+- **D9 — The age implementation: `dartage`** (2026-10-03, on the owner's instruction to use
+  an age library). See §5.6 for what was read, what was not chosen and what is accepted.
 
 **Smaller questions, with defaults:**
 
@@ -1773,8 +1787,9 @@ organiser's judgement of a received package against the published form, §4.11 r
 `form_register.dart` (the `overview.md` table, §7.3), `form_compile.dart` (chapter template and book, §7.5), `form_maker_check.dart` (maker address and mail link, §7.4), `rules_version.dart`,
 and `test/fixtures/form_vectors.json` (words, characters and patterns; the range, number and date
 vectors still live in the engine's own tests).
-**Still to build:** `form_seal.dart` (age; the only file touching the primitives),
-`form_bundle.dart` (bundle, JCS, signing).
+**Built since:** `form_seal.dart` (age over `dartage`; the only file touching the age
+implementation — `check_packages` rule 10 keeps it so).
+**Still to build:** `form_bundle.dart` (bundle, JCS, signing).
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
