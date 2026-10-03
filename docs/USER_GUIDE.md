@@ -5836,6 +5836,19 @@ organiser needs the form exactly as it was published: OciDeck remembers it from 
 you opened the empty form; if you reopen a half-filled document later, it asks you to choose
 the original file you received. It refuses a form whose text outside the answers was changed.
 
+**Saving it sealed.** When the organiser sent you a **bundle file** (`….bundle.json`, next to the form) and a
+**fingerprint** (in the invitation, not in the bundle file), **Save sealed…** makes an *encrypted* file,
+`….zip.age`, that only the organiser — everyone the bundle names — can open. OciDeck asks for the bundle file,
+then for the fingerprint, and checks that the bundle really is from who the invitation says, is for exactly this
+form, has not expired, and is not older than a bundle you already received from this organiser. Only then is
+anything sealed, and the message afterwards says who can open it. OciDeck remembers the bundle and fingerprint for
+this form until you close it, so a second submission does not ask again; the *highest sequence number it has seen* it
+remembers for good, so an organiser — or someone in between — cannot hand you an old bundle that still lists someone
+who has left. It stops, and says why, when: the fingerprint is not a fingerprint or does not fit the bundle; the
+bundle was changed, belongs to another form or text, or has expired; the form has closed (the bundle names the last
+day); or the submission is larger than the organiser allows. The plain zip stays available beside it. **Not in the
+web version:** the encryption library does not run there yet, so there the button is not offered.
+
 ### Receiving submissions (organiser)
 
 The other side of a form is receiving what comes back. It is an optional extension: switch on

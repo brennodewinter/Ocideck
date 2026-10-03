@@ -12,6 +12,7 @@ import 'package:ocideck/widgets/forms/form_export_support.dart';
 import 'package:ocideck/widgets/forms/form_text_helpers.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/form_photo_fixtures.dart';
 
@@ -34,12 +35,16 @@ void main() {
     String? projectPath,
     Future<String?> Function(String)? pick,
     FormExportDestination? destination,
+    String? bundleTitle,
+    Future<String?> Function(String)? pickBundle,
   }) => formExportSupportFor(
     projectPath: projectPath,
     frontMatter: '---\na: b\n---\n',
     pickTitle: 'Kies het formulier',
     saveTitle: 'Opslaan',
+    bundleTitle: bundleTitle,
     pick: pick,
+    pickBundle: pickBundle,
     destination: destination,
   );
 
@@ -173,6 +178,83 @@ void main() {
       debugDownloadSink = (_, _, _) => false;
       expect(await support().save('kook.zip', Uint8List(1)), isNull);
     });
+  });
+
+  group('verzegeld opslaan', () {
+    setUp(() => SharedPreferences.setMockInitialValues({}));
+
+    test(
+      'zonder titel voor de bundelkiezer is er geen verzegel-ondersteuning',
+      () {
+        expect(support().seal, isNull);
+      },
+    );
+
+    test('met een titel is die er, en de kiezer krijgt hem mee', () async {
+      String? asked;
+      final seal = support(
+        bundleTitle: 'Kies de bundel',
+        pickBundle: (title) async {
+          asked = title;
+          return '{}';
+        },
+      ).seal!;
+      expect(await seal.pickBundle(), '{}');
+      expect(asked, 'Kies de bundel');
+    });
+
+    test('annuleren geeft geen bundel', () async {
+      final seal = support(
+        bundleTitle: 'Kies de bundel',
+        pickBundle: (_) async => null,
+      ).seal!;
+      expect(await seal.pickBundle(), isNull);
+    });
+
+    test('bundel en vingerafdruk worden per formulier en versie onthouden', () {
+      final seal = support(bundleTitle: 't').seal!;
+      final v1 = specOf('kook', 1);
+      final v2 = specOf('kook', 2);
+      expect(seal.recall(v1), isNull);
+      seal.remember(v1, 'bundel', 'afdruk');
+      expect(seal.recall(v1), (bundle: 'bundel', fingerprint: 'afdruk'));
+      expect(
+        seal.recall(v2),
+        isNull,
+        reason: 'een andere versie is een ander formulier',
+      );
+      expect(
+        support(bundleTitle: 't').seal!.recall(v1),
+        isNotNull,
+        reason: 'het geheugen hoort bij de sessie, niet bij één ondersteuning',
+      );
+      seal.forget(v1);
+      expect(seal.recall(v1), isNull);
+      seal.remember(v2, 'b2', 'a2');
+      debugClearPublishedForms();
+      expect(seal.recall(v2), isNull);
+    });
+
+    test('de pins blijven staan: schrijven en weer lezen', () async {
+      final seal = support(bundleTitle: 't').seal!;
+      expect((await seal.readPins()).seqFor('abc', 'fp'), isNull);
+      await seal.writePins(FormBundlePins.fromJson({'abc@fp': 7}));
+      final back = await seal.readPins();
+      expect(back.seqFor('abc', 'fp'), 7);
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString(kFormBundlePinsKey), '{"abc@fp":7}');
+    });
+
+    test(
+      'pins die niet te lezen zijn: een lege lijst, geen uitzondering',
+      () async {
+        SharedPreferences.setMockInitialValues({
+          kFormBundlePinsKey: 'geen json',
+        });
+        final pins = await support(bundleTitle: 't').seal!.readPins();
+        expect(pins.toJson(), isEmpty);
+      },
+    );
   });
 
   test('een gekozen bestand is UTF-8 of het is geen formulier', () {

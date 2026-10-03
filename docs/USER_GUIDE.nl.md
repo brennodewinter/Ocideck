@@ -5891,6 +5891,20 @@ formulier opende; open je later een half ingevuld document opnieuw, dan vraagt h
 bestand te kiezen dat je kreeg. Een formulier waarvan de tekst buiten de antwoorden is veranderd
 wordt geweigerd.
 
+**Verzegeld opslaan.** Heeft de organisator je een **bundelbestand** gestuurd (`….bundle.json`, naast het
+formulier) en een **vingerafdruk** (in de uitnodiging, niet in het bundelbestand), dan maakt **Verzegeld opslaan…**
+een *versleuteld* bestand, `….zip.age`, dat alleen de organisator — iedereen die de bundel noemt — kan openen.
+OciDeck vraagt om het bundelbestand en dan om de vingerafdruk, en controleert dat de bundel echt van wie de
+uitnodiging zegt komt, precies voor dit formulier is, niet verlopen is en niet ouder is dan een bundel die je al van
+deze organisator kreeg. Pas dan wordt er iets verzegeld, en het bericht erna zegt wie het kan openen. OciDeck
+onthoudt de bundel en de vingerafdruk voor dit formulier tot je het sluit, zodat een tweede inzending niet opnieuw
+vraagt; het *hoogste volgnummer dat het zag* onthoudt het blijvend, zodat een organisator — of iemand ertussen — je
+geen oude bundel kan geven waarin nog iemand staat die is vertrokken. Het stopt, en zegt waarom, als: de
+vingerafdruk geen vingerafdruk is of niet bij de bundel past; de bundel is veranderd, bij een ander formulier of een
+andere tekst hoort, of is verlopen; het formulier is gesloten (de bundel noemt de laatste dag); of de inzending
+groter is dan de organisator toestaat. De gewone zip blijft ernaast bestaan. **Niet in de webversie:** de
+versleutelbibliotheek draait daar nog niet, dus daar wordt de knop niet getoond.
+
 ### Inzendingen ontvangen (organisator)
 
 De andere kant van een formulier is ontvangen wat terugkomt. Dat is een optionele uitbreiding: zet

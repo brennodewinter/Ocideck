@@ -1904,8 +1904,16 @@ the alternative comes with the team. The name the respondent sees and *valid unt
 organiser fills in (prefilled from the form's `controller` and `closes`); `closes` and `retain_unused`
 come from the form itself. An existing bundle of the form that cannot be read stops everything — the
 next `bundle_seq` cannot be known.
-**Still to build:** the team of organisers (add an editor) and the two-key rule, sending sealed
-files, and the dossier for the external review.
+**Built since, on the respondent's side:** sealed export (§5.1, §5.6): `sealFormSubmission` believes the
+bundle against the fingerprint the respondent types (never prefilled; deliberately not in the bundle file),
+checks it against the respondent's own template, its validity and the highest sequence number already seen
+(the pins, kept in preferences), and only then seals — to every organiser the bundle names. A form past its
+`closes` day (the last day is still open) and a package above `max_package_bytes` stop with the reason. The
+web build offers no sealed export: `dartage` does not run under dart2js (a `wasm` build or an upstream fix is a
+precondition of the web respondent, phase 4). The respondent's side of the file route is done; the server
+route is phase 4.
+**Still to build:** the team of organisers (add an editor) and the two-key rule, and the dossier for the
+external review.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip

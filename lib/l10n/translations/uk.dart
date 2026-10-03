@@ -1642,6 +1642,39 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Verzegeld opslaan…': 'Зберегти запечатаним…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Зашифрований файл (.zip.age), який може відкрити лише організатор. Для цього потрібні файл комплекту і відбиток із запрошення.',
+  'Kies het bundelbestand van de organisator':
+      'Виберіть файл комплекту організатора',
+  'Vingerafdruk van de organisator': 'Відбиток організатора',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Введіть відбиток із запрошення. Його навмисно немає у файлі комплекту: так ви можете перевірити, від кого він.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Це не відбиток. Він складається з 52 символів, зазвичай групами по чотири.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Цей файл — не комплект, який OciDeck може прочитати.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ця форма або цей комплект — із новішої версії OciDeck. Оновіть OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Відбиток не підходить до цього комплекту: форма не від того, кого називає запрошення. Перевірте відбиток і файл комплекту.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Підпис комплекту хибний: його змінили, або він не від того, кого називає відбиток. Попросіть організатора про новий комплект.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Цей комплект не належить до цієї форми. Використайте файл комплекту, що належить саме до цієї форми.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Термін дії цього комплекту минув. Попросіть в організатора новий.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Цей комплект старіший за той, який ви раніше отримали від цього організатора. Попросіть в організатора найновіший.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Комплект містить щось недозволене. Попросіть організатора про новий комплект.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Цю форму закрито: останній день був {datum}. Зверніться до організатора.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Заявка більша, ніж дозволяє організатор ({mb} МБ). Приберіть фото або зменште одне з них.',
+  'De inzending kon niet worden verzegeld.': 'Заявку не вдалося запечатати.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Збережено запечатаним як {naam}, відкрити може лише: {organisatoren}.',
   'Bundel publiceren…': 'Опублікувати комплект…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Комплект — це те, чому той, хто заповнює, вірить щодо вашої редакції: до якого ключа запечатувати і до якого тексту він належить. Його зберігають поруч із формою.',

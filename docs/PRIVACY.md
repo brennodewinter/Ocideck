@@ -383,6 +383,13 @@ text to write down, *Export as age key file…* writes it to a file only you can
 read. Losing it means losing the submissions that were sealed to it and not yet
 fetched; OciDeck says so before it creates the key.
 
+**Which organiser's bundles you have seen** — if you save a submission sealed — is kept in the preferences, not
+the keychain: for each form and organiser the highest sequence number of a bundle you accepted
+(`form_bundle_pins`, a form id and the fingerprint of the organiser's signing key, both public, and a number). It
+is what stops an organiser, or someone in between, from handing you an older bundle that still lists a person who
+has left. It names no answer, no photo and nothing about you. Clearing the preferences clears it, and with it that
+protection until the next bundle.
+
 Three boundaries of that sentence are worth naming, because "in the keychain" is
 easy to over-read:
 

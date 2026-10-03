@@ -1626,6 +1626,39 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Verzegeld opslaan…': 'Spara förseglat…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'En krypterad fil (.zip.age) som bara arrangören kan öppna. För det behöver du bundle-filen och fingeravtrycket från inbjudan.',
+  'Kies het bundelbestand van de organisator': 'Välj arrangörens bundle-fil',
+  'Vingerafdruk van de organisator': 'Arrangörens fingeravtryck',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Skriv in fingeravtrycket från inbjudan. Det finns med avsikt inte i bundle-filen: så kan du kontrollera vem den kommer från.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Det är inget fingeravtryck. Det består av 52 tecken, oftast i grupper om fyra.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Den här filen är ingen bundle som OciDeck kan läsa.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Det här formuläret eller den här bundlen är från en nyare version av OciDeck. Uppdatera OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Fingeravtrycket passar inte den här bundlen: formuläret kommer inte från den inbjudan anger. Kontrollera fingeravtrycket och bundle-filen.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundlens signatur stämmer inte: den har ändrats eller kommer inte från den fingeravtrycket anger. Be arrangören om en ny bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Den här bundlen hör inte till det här formuläret. Använd bundle-filen som hör till just det här formuläret.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Den här bundlen har gått ut. Be arrangören om en ny.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Den här bundlen är äldre än en bundle du tidigare fick av den här arrangören. Be arrangören om den senaste.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundlen innehåller något som inte är tillåtet. Be arrangören om en ny bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Det här formuläret är stängt: sista dagen var {datum}. Kontakta arrangören.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Inlämningen är större än arrangören tillåter ({mb} MB). Ta bort ett foto eller gör ett mindre.',
+  'De inzending kon niet worden verzegeld.':
+      'Inlämningen kunde inte förseglas.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Sparat förseglat som {naam}, kan bara öppnas av: {organisatoren}.',
   'Bundel publiceren…': 'Publicera bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundlen är det en inlämnare tror om er redaktion: vilken nyckel den förseglar till och vilken text den hör till. Den sparas bredvid formuläret.',

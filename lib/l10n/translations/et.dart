@@ -1620,6 +1620,38 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Verzegeld opslaan…': 'Salvesta pitseeritult…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Krüpteeritud fail (.zip.age), mille saab avada ainult korraldaja. Selleks on vaja bundle’i faili ja kutse sõrmejälge.',
+  'Kies het bundelbestand van de organisator': 'Vali korraldaja bundle’i fail',
+  'Vingerafdruk van de organisator': 'Korraldaja sõrmejälg',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Sisesta kutse sõrmejälg. Seda ei ole bundle’i failis meelega: nii saad kontrollida, kellelt see pärineb.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'See ei ole sõrmejälg. See koosneb 52 märgist, tavaliselt neljaste rühmadena.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'See fail ei ole bundle, mida OciDeck suudab lugeda.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'See vorm või bundle on OciDecki uuemast versioonist. Uuenda OciDecki.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Sõrmejälg ei sobi selle bundle’iga: vorm ei pärine sellelt, keda kutse nimetab. Kontrolli sõrmejälge ja bundle’i faili.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundle’i allkiri ei ole õige: see on muudetud või ei ole sellelt, keda sõrmejälg nimetab. Palu korraldajalt uut bundle’it.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'See bundle ei kuulu sellele vormile. Kasuta bundle’i faili, mis kuulub täpselt sellele vormile.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'See bundle on aegunud. Palu korraldajalt uut.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'See bundle on vanem kui bundle, mille said varem sellelt korraldajalt. Palu korraldajalt uusimat.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle sisaldab midagi lubamatut. Palu korraldajalt uut bundle’it.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'See vorm on suletud: viimane päev oli {datum}. Võta korraldajaga ühendust.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Saadetis on suurem, kui korraldaja lubab ({mb} MB). Eemalda foto või tee üks väiksemaks.',
+  'De inzending kon niet worden verzegeld.': 'Saadetist ei saanud pitseerida.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Salvestatud pitseeritult nimega {naam}, avada saab ainult: {organisatoren}.',
   'Bundel publiceren…': 'Avalda bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle on see, mida vormi täitja teie toimetuse kohta usub: millisele võtmele pitseerida ja millise tekstiga see kuulub kokku. See salvestatakse vormi kõrvale.',

@@ -1642,6 +1642,39 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Verzegeld opslaan…': 'Obsignatum servare…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Fasciculus cryptatus (.zip.age) quem solus ordinator aperire potest. Ad hoc fasciculum fascis et vestigium digitale ex invitatione necesse est.',
+  'Kies het bundelbestand van de organisator':
+      'Fasciculum fascis ordinatoris elige',
+  'Vingerafdruk van de organisator': 'Vestigium digitale ordinatoris',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Vestigium digitale ex invitatione scribe. De industria in fasciculo fascis non est: sic explorare potes unde veniat.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Hoc vestigium digitale non est. Ex 52 signis constat, plerumque in quaternis.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Hic fasciculus non est fascis quem OciDeck legere possit.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Haec forma vel hic fascis ex versione OciDeck recentiore est. OciDeck renova.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Vestigium digitale cum hoc fasce non congruit: forma non ab eo venit quem invitatio nominat. Vestigium digitale et fasciculum fascis proba.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Subscriptio fascis recta non est: mutatus est vel non ab eo est quem vestigium digitale nominat. Ordinatorem roga ut novum fascem det.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Hic fascis ad hanc formam non pertinet. Fasciculum fascis utere qui ad hanc ipsam formam pertinet.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Hic fascis exspiravit. Ordinatorem roga ut novum det.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Hic fascis vetustior est quam fascis quem antea ab hoc ordinatore accepisti. Ordinatorem roga ut recentissimum det.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Fascis aliquid continet quod non licet. Ordinatorem roga ut novum fascem det.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Haec forma clausa est: ultimus dies erat {datum}. Ordinatorem conveni.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Missum maius est quam ordinator permittit ({mb} MB). Imaginem remove vel minorem fac.',
+  'De inzending kon niet worden verzegeld.': 'Missum obsignari non potuit.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Obsignatum servatum est ut {naam}, solus aperire potest: {organisatoren}.',
   'Bundel publiceren…': 'Fascem publicare…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Fascis est quod is qui implet de redactione vestra credit: ad quam clavem obsignet et ad quem textum pertineat. Iuxta formam servatur.',

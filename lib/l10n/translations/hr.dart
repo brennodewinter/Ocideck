@@ -1631,6 +1631,40 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Verzegeld opslaan…': 'Spremi zapečaćeno…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Šifrirana datoteka (.zip.age) koju može otvoriti samo organizator. Za to su vam potrebni datoteka bundlea i otisak prsta iz pozivnice.',
+  'Kies het bundelbestand van de organisator':
+      'Odaberite datoteku bundlea organizatora',
+  'Vingerafdruk van de organisator': 'Otisak prsta organizatora',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Upišite otisak prsta iz pozivnice. Namjerno nije u datoteci bundlea: tako možete provjeriti od koga dolazi.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'To nije otisak prsta. Ima 52 znaka, obično u skupinama po četiri.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Ova datoteka nije bundle koji OciDeck može pročitati.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ovaj obrazac ili bundle potječe iz novije verzije OciDecka. Ažurirajte OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Otisak prsta ne odgovara ovom bundleu: obrazac ne dolazi od onoga koga navodi pozivnica. Provjerite otisak prsta i datoteku bundlea.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Potpis bundlea nije ispravan: promijenjen je ili nije od onoga koga navodi otisak prsta. Zatražite od organizatora novi bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Ovaj bundle ne pripada ovom obrascu. Upotrijebite datoteku bundlea koja pripada upravo ovom obrascu.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Ovaj bundle je istekao. Zatražite od organizatora novi.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Ovaj bundle je stariji od bundlea koji ste ranije dobili od ovog organizatora. Zatražite od organizatora najnoviji.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle sadrži nešto što nije dopušteno. Zatražite od organizatora novi bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Ovaj je obrazac zatvoren: zadnji dan bio je {datum}. Obratite se organizatoru.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Prijava je veća nego što organizator dopušta ({mb} MB). Uklonite fotografiju ili smanjite jednu.',
+  'De inzending kon niet worden verzegeld.':
+      'Prijavu nije bilo moguće zapečatiti.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Spremljeno zapečaćeno kao {naam}, može ga otvoriti samo: {organisatoren}.',
   'Bundel publiceren…': 'Objavi bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle je ono u što osoba koja ispunjava vjeruje o vašoj redakciji: kojim se ključem pečati i kojem tekstu pripada. Sprema se pokraj obrasca.',

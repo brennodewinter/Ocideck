@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De invuller kan een inzending **verzegeld opslaan** (formaat §5.1, §5.6, fase 3): *Verzegeld opslaan…* vraagt om het bundelbestand van de
+  organisator en om de **vingerafdruk** uit de uitnodiging, gelooft de bundel pas als hij daarmee klopt (handtekening, de eigen tekst van het
+  formulier, geldigheid, volgnummer ten opzichte van de bundels die de invuller al zag) en verzegelt dan naar **alle** organisatoren die de bundel
+  noemt: een `.zip.age` dat de organisator in de Inbox opent (en ook zonder OciDeck). Het hoogste geziene volgnummer per formulier en organisator
+  blijft bewaard (voorkeuren), zodat een oude bundel waarin nog een vertrokken redacteur staat wordt geweigerd. Gestopt, met de reden: een
+  vingerafdruk die er geen is of niet past, een veranderde of verlopen bundel, een bundel bij een andere tekst, een gesloten formulier (de laatste
+  dag zelf mag nog) en een inzending groter dan `max_package_bytes`. Wat werkte wordt voor dit formulier onthouden tot de sessie eindigt, maar pas na
+  een opgeslagen bestand. **Niet in de webversie**: `dartage` draait niet onder dart2js, daar wordt de knop niet getoond. 18 nieuwe teksten in 30 talen.
 - De Inbox **publiceert een bundel** (formaat §5.1, §7.6, fase 3): *Bundel publiceren…* maakt en ondertekent met de redactiesleutel de
   bundel van één gepubliceerd sjabloon en bewaart hem ernaast als `template.<taal>.bundle.json`; daarna staat in het venster de
   **vingerafdruk** om de invuller langs een andere weg dan het bundelbestand te geven. De naam voor de invuller en *geldig tot* komen uit

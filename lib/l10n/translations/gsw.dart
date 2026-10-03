@@ -1630,6 +1630,40 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Verzegeld opslaan…': 'Verschlüsslet speichere…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Es verschlüsslets Fäil (.zip.age), won nume dr Organisator cha ufmache. Dezue bruuchsch du s Bundle-Fäil und dr Fingerabdruck us dr Iiladig.',
+  'Kies het bundelbestand van de organisator':
+      'Wähl s Bundle-Fäil vom Organisator',
+  'Vingerafdruk van de organisator': 'Fingerabdruck vom Organisator',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Gib dr Fingerabdruck us dr Iiladig ii. Är isch mit Absicht nid im Bundle-Fäil: so chasch prüefe, vo wem es chunnt.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Das isch kei Fingerabdruck. Är bestoht us 52 Zeiche, meischtens i Vierergruppe.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Das Fäil isch kes Bundle, wo OciDeck cha läse.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Das Formular oder das Bundle chunnt vo me neuere OciDeck. Aktualisier OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Dr Fingerabdruck passt nid zu däm Bundle: S Formular chunnt nid vo däm, wo d Iiladig seit. Prüef dr Fingerabdruck und s Bundle-Fäil.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'D Signatur vom Bundle stimmt nid: Es isch veränderet worde oder isch nid vo däm, wo dr Fingerabdruck seit. Bitt dr Organisator um es neus Bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Das Bundle ghört nid zu däm Formular. Bruuch s Bundle-Fäil, wo genau zu däm Formular ghört.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Das Bundle isch abgloffe. Bitt dr Organisator um es neus.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Das Bundle isch elter as eis, wo du früecher vo däm Organisator becho hesch. Bitt dr Organisator um s neuschte.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'S Bundle enthaltet öppis, wo nid erlaubt isch. Bitt dr Organisator um es neus Bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Das Formular isch gschlosse: Dr letscht Tag isch dr {datum} gsi. Mäld di bim Organisator.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'S Iischicku isch grösser, as dr Organisator erlaubt ({mb} MB). Nimm es Foti ewäg oder mach eis chlyner.',
+  'De inzending kon niet worden verzegeld.':
+      'S Iischicku het nid chönne verschlüsslet wärde.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Verschlüsslet gspeicheret as {naam}, nume z öffne dur: {organisatoren}.',
   'Bundel publiceren…': 'Bundle veröffentliche…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'S Bundle isch das, wo e Iischicker über öiji Redaktion gloubt: a weli Schlüssel är verschlüsslet und zu welem Text es ghört. Es wird näbe em Formular gspeicheret.',

@@ -1652,6 +1652,40 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Verzegeld opslaan…': 'Αποθήκευση σφραγισμένου…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Ένα κρυπτογραφημένο αρχείο (.zip.age) που μπορεί να ανοίξει μόνο ο διοργανωτής. Για αυτό χρειάζεστε το αρχείο της δέσμης και το δακτυλικό αποτύπωμα από την πρόσκληση.',
+  'Kies het bundelbestand van de organisator':
+      'Επιλέξτε το αρχείο δέσμης του διοργανωτή',
+  'Vingerafdruk van de organisator': 'Δακτυλικό αποτύπωμα του διοργανωτή',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Πληκτρολογήστε το δακτυλικό αποτύπωμα από την πρόσκληση. Δεν υπάρχει σκόπιμα στο αρχείο της δέσμης: έτσι μπορείτε να ελέγξετε από ποιον προέρχεται.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Αυτό δεν είναι δακτυλικό αποτύπωμα. Αποτελείται από 52 χαρακτήρες, συνήθως σε ομάδες των τεσσάρων.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Αυτό το αρχείο δεν είναι δέσμη που μπορεί να διαβάσει το OciDeck.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Αυτή η φόρμα ή αυτή η δέσμη είναι από νεότερη έκδοση του OciDeck. Ενημερώστε το OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Το δακτυλικό αποτύπωμα δεν ταιριάζει με αυτή τη δέσμη: η φόρμα δεν προέρχεται από αυτόν που λέει η πρόσκληση. Ελέγξτε το δακτυλικό αποτύπωμα και το αρχείο της δέσμης.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Η υπογραφή της δέσμης δεν είναι σωστή: έχει αλλάξει ή δεν προέρχεται από αυτόν που λέει το δακτυλικό αποτύπωμα. Ζητήστε από τον διοργανωτή νέα δέσμη.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Αυτή η δέσμη δεν ανήκει σε αυτή τη φόρμα. Χρησιμοποιήστε το αρχείο δέσμης που ανήκει ακριβώς σε αυτή τη φόρμα.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Αυτή η δέσμη έχει λήξει. Ζητήστε από τον διοργανωτή μια νέα.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Αυτή η δέσμη είναι παλαιότερη από μια δέσμη που λάβατε νωρίτερα από αυτόν τον διοργανωτή. Ζητήστε από τον διοργανωτή την πιο πρόσφατη.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Η δέσμη περιέχει κάτι που δεν επιτρέπεται. Ζητήστε από τον διοργανωτή νέα δέσμη.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Αυτή η φόρμα έχει κλείσει: η τελευταία ημέρα ήταν η {datum}. Επικοινωνήστε με τον διοργανωτή.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Η υποβολή είναι μεγαλύτερη από όσο επιτρέπει ο διοργανωτής ({mb} MB). Αφαιρέστε μια φωτογραφία ή μικρύνετε μία.',
+  'De inzending kon niet worden verzegeld.':
+      'Η υποβολή δεν μπόρεσε να σφραγιστεί.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Αποθηκεύτηκε σφραγισμένη ως {naam}, ανοίγει μόνο από: {organisatoren}.',
   'Bundel publiceren…': 'Δημοσίευση δέσμης…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Η δέσμη είναι ό,τι πιστεύει όποιος συμπληρώνει για τη συντακτική σας ομάδα: με ποιο κλειδί σφραγίζει και σε ποιο κείμενο ανήκει. Αποθηκεύεται δίπλα στη φόρμα.',

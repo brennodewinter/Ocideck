@@ -1657,6 +1657,40 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Verzegeld opslaan…': 'Sábháil séalaithe…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Comhad criptithe (.zip.age) nach féidir ach leis an eagraí a oscailt. Chuige sin tá comhad an bundle agus an méarlorg ón gcuireadh de dhíth ort.',
+  'Kies het bundelbestand van de organisator':
+      'Roghnaigh comhad bundle an eagraí',
+  'Vingerafdruk van de organisator': 'Méarlorg an eagraí',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Clóscríobh an méarlorg ón gcuireadh. Níl sé i gcomhad an bundle d’aon turas: ar an mbealach sin is féidir leat a sheiceáil cé uaidh a thagann sé.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Ní méarlorg é sin. Tá 52 carachtar ann, i ngrúpaí de cheathair de ghnáth.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Ní bundle é an comhad seo is féidir le OciDeck a léamh.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Is ó leagan níos nuaí de OciDeck an fhoirm seo nó an bundle seo. Nuashonraigh OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Ní oireann an méarlorg don bundle seo: ní ón té a ainmníonn an cuireadh an fhoirm. Seiceáil an méarlorg agus comhad an bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Níl síniú an bundle ceart: athraíodh é nó ní ón té a ainmníonn an méarlorg é. Iarr bundle nua ar an eagraí.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Ní bhaineann an bundle seo leis an bhfoirm seo. Úsáid comhad an bundle a bhaineann leis an bhfoirm seo go beacht.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Tá an bundle seo as feidhm. Iarr ceann nua ar an eagraí.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Tá an bundle seo níos sine ná bundle a fuair tú roimhe seo ón eagraí seo. Iarr an ceann is déanaí ar an eagraí.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Tá rud éigin sa bundle nach gceadaítear. Iarr bundle nua ar an eagraí.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Tá an fhoirm seo dúnta: ba é {datum} an lá deireanach. Déan teagmháil leis an eagraí.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Tá an aighneacht níos mó ná mar a cheadaíonn an t-eagraí ({mb} MB). Bain grianghraf amach nó laghdaigh ceann acu.',
+  'De inzending kon niet worden verzegeld.':
+      'Níorbh fhéidir an aighneacht a shéalú.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Sábháilte séalaithe mar {naam}, ní féidir ach le: {organisatoren} é a oscailt.',
   'Bundel publiceren…': 'Foilsigh bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Is é an bundle an rud a chreideann an líontóir faoi bhur n-eagarthóireacht: cén eochair a shéalaíonn sé di agus cén téacs lena mbaineann sé. Stóráiltear é in aice leis an bhfoirm.',

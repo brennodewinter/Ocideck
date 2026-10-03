@@ -1634,6 +1634,39 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Verzegeld opslaan…': 'Įrašyti užplombuotą…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Šifruotas failas (.zip.age), kurį gali atidaryti tik organizatorius. Tam reikia bundle failo ir kontrolinio kodo iš kvietimo.',
+  'Kies het bundelbestand van de organisator':
+      'Pasirinkite organizatoriaus bundle failą',
+  'Vingerafdruk van de organisator': 'Organizatoriaus kontrolinis kodas',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Įveskite kontrolinį kodą iš kvietimo. Jo tyčia nėra bundle faile: taip galite patikrinti, iš ko jis.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Tai nėra kontrolinis kodas. Jį sudaro 52 simboliai, dažniausiai po keturis grupėse.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Šis failas nėra bundle, kurį OciDeck gali perskaityti.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ši forma arba šis bundle yra iš naujesnės OciDeck versijos. Atnaujinkite OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Kontrolinis kodas netinka šiam bundle: forma ne nuo to, kurį nurodo kvietimas. Patikrinkite kontrolinį kodą ir bundle failą.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundle parašas neteisingas: jis pakeistas arba ne nuo to, kurį nurodo kontrolinis kodas. Paprašykite organizatoriaus naujo bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Šis bundle nepriklauso šiai formai. Naudokite bundle failą, priklausantį būtent šiai formai.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Šio bundle galiojimas pasibaigė. Paprašykite organizatoriaus naujo.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Šis bundle senesnis nei bundle, kurį anksčiau gavote iš šio organizatoriaus. Paprašykite organizatoriaus naujausio.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle turi kažką neleistino. Paprašykite organizatoriaus naujo bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Ši forma uždaryta: paskutinė diena buvo {datum}. Kreipkitės į organizatorių.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Pateikimas didesnis, nei leidžia organizatorius ({mb} MB). Pašalinkite nuotrauką arba sumažinkite vieną.',
+  'De inzending kon niet worden verzegeld.': 'Pateikimo nepavyko užplombuoti.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Įrašyta užplombuota kaip {naam}, gali atidaryti tik: {organisatoren}.',
   'Bundel publiceren…': 'Paskelbti bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle yra tai, kuo pildytojas tiki apie jūsų redakciją: kuriam raktui užplombuoti ir kuriam tekstui jis priklauso. Jis išsaugomas šalia formos.',

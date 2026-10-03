@@ -1643,6 +1643,40 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Verzegeld opslaan…': 'Salvează sigilat…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Un fișier criptat (.zip.age) pe care îl poate deschide doar organizatorul. Pentru asta ai nevoie de fișierul bundle și de amprenta din invitație.',
+  'Kies het bundelbestand van de organisator':
+      'Alege fișierul bundle al organizatorului',
+  'Vingerafdruk van de organisator': 'Amprenta organizatorului',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Scrie amprenta din invitație. Nu se află intenționat în fișierul bundle: așa poți verifica de la cine provine.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Aceasta nu este o amprentă. Are 52 de caractere, de obicei în grupuri de patru.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Acest fișier nu este un bundle pe care OciDeck îl poate citi.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Acest formular sau acest bundle provine dintr-o versiune mai nouă de OciDeck. Actualizează OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Amprenta nu se potrivește cu acest bundle: formularul nu vine de la cine spune invitația. Verifică amprenta și fișierul bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Semnătura bundle-ului nu este corectă: a fost modificat sau nu este de la cine spune amprenta. Cere organizatorului un bundle nou.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Acest bundle nu aparține acestui formular. Folosește fișierul bundle care aparține exact acestui formular.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Acest bundle a expirat. Cere organizatorului unul nou.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Acest bundle este mai vechi decât un bundle primit mai devreme de la acest organizator. Cere organizatorului cel mai recent bundle.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle-ul conține ceva nepermis. Cere organizatorului un bundle nou.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Acest formular este închis: ultima zi a fost {datum}. Contactează organizatorul.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Trimiterea este mai mare decât permite organizatorul ({mb} MB). Elimină o fotografie sau micșorează una.',
+  'De inzending kon niet worden verzegeld.':
+      'Trimiterea nu a putut fi sigilată.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Salvat sigilat ca {naam}, poate fi deschis doar de: {organisatoren}.',
   'Bundel publiceren…': 'Publică bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle-ul este ceea ce crede cel care completează despre redacția voastră: pentru ce cheie sigilează și cărui text îi aparține. Se salvează lângă formular.',

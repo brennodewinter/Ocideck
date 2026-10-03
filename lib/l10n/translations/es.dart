@@ -664,6 +664,39 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Verzegeld opslaan…': 'Guardar sellado…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Un archivo cifrado (.zip.age) que solo el organizador puede abrir. Para ello necesitas el archivo del bundle y la huella digital de la invitación.',
+  'Kies het bundelbestand van de organisator':
+      'Elige el archivo del bundle del organizador',
+  'Vingerafdruk van de organisator': 'Huella digital del organizador',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Escribe la huella digital de la invitación. A propósito no está en el archivo del bundle: así puedes comprobar de quién procede.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Eso no es una huella digital. Tiene 52 caracteres, normalmente en grupos de cuatro.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Este archivo no es un bundle que OciDeck pueda leer.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Este formulario o este bundle es de una versión más nueva de OciDeck. Actualiza OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'La huella digital no coincide con este bundle: el formulario no viene de quien dice la invitación. Comprueba la huella digital y el archivo del bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'La firma del bundle no es correcta: ha sido modificado o no es de quien dice la huella digital. Pide al organizador un bundle nuevo.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Este bundle no pertenece a este formulario. Usa el archivo del bundle que corresponde exactamente a este formulario.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Este bundle ha caducado. Pide uno nuevo al organizador.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Este bundle es más antiguo que uno que recibiste antes de este organizador. Pide al organizador el más reciente.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'El bundle contiene algo que no está permitido. Pide al organizador un bundle nuevo.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Este formulario está cerrado: el último día fue el {datum}. Ponte en contacto con el organizador.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'El envío es mayor de lo que permite el organizador ({mb} MB). Quita una foto o haz una más pequeña.',
+  'De inzending kon niet worden verzegeld.': 'No se pudo sellar el envío.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Guardado sellado como {naam}, solo lo puede abrir: {organisatoren}.',
   'Bundel publiceren…': 'Publicar bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'El bundle es lo que cree quien rellena sobre vuestra redacción: con qué clave sellar y a qué texto pertenece. Se guarda junto al formulario.',

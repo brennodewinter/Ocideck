@@ -666,6 +666,39 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Verzegeld opslaan…': 'Warda sellá…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Un archivo kodifiká (.zip.age) ku solamente e organisadó por habri. Pa esei bo mester e archivo di e bundel i e huella digital di e invitashon.',
+  'Kies het bundelbestand van de organisator':
+      'Skohe e archivo di e bundel di e organisadó',
+  'Vingerafdruk van de organisator': 'Huella digital di e organisadó',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Tipa e huella digital di e invitashon. E no ta den e archivo di e bundel a propósito: asina bo por verifiká di ken e ta bin.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Esei no ta un huella digital. E ta konsistí di 52 karakter, normalmente den grupo di kuater.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'E archivo akí no ta un bundel ku OciDeck por lesa.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'E formulario of e bundel akí ta di un vershon mas nobo di OciDeck. Aktualisá OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'E huella digital no ta bai ku e bundel akí: e formulario no ta bin di ken e invitashon ta men. Kontrolá e huella digital i e archivo di e bundel.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'E firma di e bundel no ta korekto: e a wòrdu kambia of e no ta di ken e huella digital ta men. Pidi e organisadó pa un bundel nobo.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'E bundel akí no ta pertenesé na e formulario akí. Usa e archivo di e bundel ku ta pertenesé na eksaktamente e formulario akí.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'E bundel akí a bensé. Pidi e organisadó pa un nobo.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'E bundel akí ta mas bieu ku un bundel ku bo a risibí promé di e organisadó akí. Pidi e organisadó pa e mas resien.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'E bundel ta kontené algu ku no ta permití. Pidi e organisadó pa un bundel nobo.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'E formulario akí ta sera: e último dia tabata {datum}. Tuma kontakto ku e organisadó.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'E envio ta mas grandi ku loke e organisadó ta permití ({mb} MB). Kita un potret òf haci un mas chikí.',
+  'De inzending kon niet worden verzegeld.': 'No por a sella e envio.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Warda sellá komo {naam}, solamente por wòrdu habrí pa: {organisatoren}.',
   'Bundel publiceren…': 'Publiká bundel…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'E bundel ta loke e invulador di bo redakshon ta kere: na ki yave e ta sella i ki teksto e ta pertenesé na dje. E ta wòrdu warda banda di e formulario.',

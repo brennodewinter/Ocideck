@@ -32,6 +32,7 @@ FormFillView _formFillView(
       frontMatter: ref.read(documentProvider).document?.frontMatter ?? '',
       pickTitle: l10n.d('Kies het formulier zoals je het kreeg'),
       saveTitle: l10n.d('Inzending opslaan'),
+      bundleTitle: l10n.d('Kies het bundelbestand van de organisator'),
     ),
   );
 }

@@ -827,6 +827,40 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Verzegeld opslaan…': 'Save sealed…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'An encrypted file (.zip.age) that only the organiser can open. For this you need the bundle file and the fingerprint from the invitation.',
+  'Kies het bundelbestand van de organisator':
+      'Choose the organiser\'s bundle file',
+  'Vingerafdruk van de organisator': 'The organiser\'s fingerprint',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Type the fingerprint from the invitation. It is deliberately not in the bundle file: that is how you can tell who it comes from.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'That is not a fingerprint. It is 52 characters long, usually in groups of four.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'This file is not a bundle OciDeck can read.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'This form or this bundle is from a newer version of OciDeck. Update OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'The fingerprint does not match this bundle: the form does not come from who the invitation says. Check the fingerprint and the bundle file.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'The bundle\'s signature is not right: it has been changed or is not from who the fingerprint says. Ask the organiser for a new bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'This bundle does not belong to this form. Use the bundle file that belongs to exactly this form.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'This bundle has expired. Ask the organiser for a new one.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'This bundle is older than one you received earlier from this organiser. Ask the organiser for the latest.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'The bundle contains something that is not allowed. Ask the organiser for a new bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'This form is closed: the last day was {datum}. Contact the organiser.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'The submission is larger than the organiser allows ({mb} MB). Remove a photo or make one smaller.',
+  'De inzending kon niet worden verzegeld.':
+      'The submission could not be sealed.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Saved sealed as {naam}, can only be opened by: {organisatoren}.',
   'Bundel publiceren…': 'Publish bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'The bundle is what a respondent believes about your editorial team: which key to seal to and which text it belongs to. It is saved next to the form.',
