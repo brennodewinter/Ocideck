@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **herstelsleutel van de redactiesleutel** (formaat §5.9) staat in `ocideck_form_core`: de twee geheimen — het Ed25519-zaad
+  dat bundels ondertekent en de age-identiteit die inzendingen opent — als één tekst om op te schrijven en elders weer in te
+  typen (Crockford-base32 in groepjes van vier, CRC-16, 109 tekens). Hij heeft **een eigen doelbyte**: de herstelsleutel van de
+  samenwerkingsidentiteit heeft er geen en is een byte korter, dus de ene in het veld van de andere plakken wordt aan beide kanten
+  geweigerd voor er iets wordt geïnstalleerd (`test/form_recovery_key_collab_test.dart`). De decoder zegt apart: niet deze
+  sleutel, een typefout, een nieuwere versie, voor iets anders gemaakt. Daarvoor staat nu ook `form_bech32.dart` in het pakket
+  (BIP-173 met zijn testvectoren): de age-bibliotheek houdt zijn eigen bech32 privé. Nog niet verbonden met de app.
 - Het **bundelbestand** (formaat §5.1, fase 3) staat in `ocideck_form_core`: de eigenaar van een formulier ondertekent met
   Ed25519 de organisatoren en hun sleutels, de sjabloonhash, het volgnummer, de verloopdag en het beleid; een invuller
   controleert dat tegen een vingerafdruk die langs een andere weg kwam dan het bundelbestand. **Zonder vingerafdruk wordt een
