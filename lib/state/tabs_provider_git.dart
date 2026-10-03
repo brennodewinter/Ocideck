@@ -52,16 +52,16 @@ extension TabsNotifierGit on TabsNotifier {
       return OpenResult.unreadable;
     }
 
-    final String raw;
+    final DecodedUtf8 decoded;
     try {
-      raw = utf8.decode(bytes);
+      decoded = decodeUtf8KeepingBomFlag(bytes);
     } on FormatException catch (e) {
       logWarning('openDeckFromGit: deck.md is geen geldige UTF-8', e);
       return OpenResult.unreadable;
     }
 
     final label = '${config.slug} · $deckName';
-    final gated = _gateAndParseContent(raw, sourceName: label);
+    final gated = _gateAndParseContent(decoded, sourceName: label);
     final parsed = gated.deck;
     if (parsed == null) return gated.failure;
     if (!mounted) return OpenResult.unreadable;
@@ -151,15 +151,15 @@ extension TabsNotifierGit on TabsNotifier {
     if (bytes.length > FileService.maxDeckMarkdownBytes) {
       return (deck: null, failure: OpenResult.unreadable, label: label);
     }
-    final String raw;
+    final DecodedUtf8 decoded;
     try {
-      raw = utf8.decode(bytes);
+      decoded = decodeUtf8KeepingBomFlag(bytes);
     } on FormatException catch (e) {
       logWarning('readVersionDeck: deck.md is geen geldige UTF-8', e);
       return (deck: null, failure: OpenResult.unreadable, label: label);
     }
 
-    final gated = _gateAndParseContent(raw, sourceName: label);
+    final gated = _gateAndParseContent(decoded, sourceName: label);
     final parsed = gated.deck;
     if (parsed == null) {
       return (deck: null, failure: gated.failure, label: label);

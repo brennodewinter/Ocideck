@@ -4501,7 +4501,8 @@ een andere weg heeft — het auditdossier, een e-mail, een tijdstempeltoken.
 
 **Wat het zegel precies dekt** *(vastgesteld 2026-07-22)*: de bytes van de
 opgeslagen `.md`. Een ontvanger kan het opnieuw controleren met `sha512sum` en heeft daarvoor niets van
-ons nodig. Het dekt **niet** de bestanden ernaast — de tekeningen
+ons nodig. Dat is bewust streng: zelfs een onzichtbare byte-order-mark die een ander
+programma voor het bestand zette, laat het zegel als *gewijzigd* lezen. Het dekt **niet** de bestanden ernaast — de tekeningen
 (`.ink.json`), de sprekersnotities, grafiekdata onder `data/`, de bewijsafbeeldingen,
 of de verzegel-sidecar zelf. Vervang de CSV van een grafiek of een bewijs-screenshot en
 het zegel blijft groen.
