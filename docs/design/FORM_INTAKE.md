@@ -1075,8 +1075,9 @@ editor. Four things the code insists on:
 
 *Export as age key file…* writes the identity in age's own file format
 (`# created` / `# public key` / `AGE-SECRET-KEY-1…`) so a sealed file can be opened with the `age`
-command line without OciDeck; the file is created empty, `chmod 600`, and only then written, and is
-removed again if any step fails. Where there is no keychain (the web build) the dialog says so and
+command line without OciDeck; it is written next to the target — created exclusively and empty, `chmod 600`, and only then
+filled — and moved into place, so an existing file survives a failure and no half-written copy of
+the key is left behind. Where there is no keychain (the web build) the dialog says so and
 offers nothing: a web page has nowhere to keep this secret (§9).
 
 ---

@@ -273,6 +273,26 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
   String _label(PublishedForm form) =>
       '${form.id} · v${form.version}${form.lang == null ? '' : ' · ${form.lang}'}';
 
+  /// Onderaan: de redactiesleutel (die ook zonder werkmap open moet kunnen) en Sluiten.
+  Widget _bottomRow(AppLocalizations l10n) => Row(
+    children: [
+      Tooltip(
+        message: l10n.d(
+          'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.',
+        ),
+        child: OutlinedButton(
+          onPressed: _busy ? null : () => showFormKeysDialog(context),
+          child: Text(l10n.d('Redactiesleutel…')),
+        ),
+      ),
+      const Spacer(),
+      TextButton(
+        onPressed: () => Navigator.of(context).pop(),
+        child: Text(l10n.d('Sluiten')),
+      ),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -406,26 +426,7 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
                   ),
                 ],
                 const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Tooltip(
-                      message: l10n.d(
-                        'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.',
-                      ),
-                      child: OutlinedButton(
-                        onPressed: _busy
-                            ? null
-                            : () => showFormKeysDialog(context),
-                        child: Text(l10n.d('Redactiesleutel…')),
-                      ),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text(l10n.d('Sluiten')),
-                    ),
-                  ],
-                ),
+                _bottomRow(l10n),
               ],
             ),
           ),
