@@ -8,9 +8,11 @@
 // Wat deze stap weigert, en waarom:
 //
 // * **Geen bruikbare sleutel**: er valt niets mee te ondertekenen.
-// * **Een herstelsleutel die niet is teruggetypt** (§7.6): een bundel die verzegelt naar één sleutel
-//   zonder herstelweg maakt elke inzending onleesbaar zodra dit apparaat stuk gaat. Het team telt
-//   hier nog één sleutel; twee sleutels als alternatief komt met het team zelf.
+// * **Geen herstelweg** (§7.6): een bundel die verzegelt naar één sleutel zonder herstelweg maakt elke
+//   inzending onleesbaar zodra dit apparaat stuk gaat. Een herstelweg is een herstelsleutel die is
+//   teruggetypt, of een tweede sleutel: een redacteur in het team (`team.json`).
+// * **Een team dat niet te lezen is**: wie erin staat is dan niet te weten, en een bundel zonder hen
+//   zou hen stilletjes uitsluiten.
 // * **Een bundel die al in de werkmap staat en niet te lezen is**: het volgnummer (`bundle_seq`)
 //   moet boven alles uitkomen wat al is uitgegeven, en dat is niet te weten. Een lager nummer
 //   wordt door een invuller die de hogere ooit zag stilletjes geweigerd (§5.1: terugval).
@@ -56,9 +58,15 @@ class FormBundleNeedsKey extends FormBundleOutcome {
   final FormKeyProblem problem;
 }
 
-/// De herstelsleutel is nog niet teruggetypt (§7.6).
+/// Er is geen herstelweg (§7.6): de herstelsleutel is niet teruggetypt, en er is geen redacteur in het
+/// team die de inzendingen ook kan openen.
 class FormBundleRecoveryNotChecked extends FormBundleOutcome {
   const FormBundleRecoveryNotChecked();
+}
+
+/// `team.json` in de werkmap is niet te lezen: er is niets ondertekend.
+class FormBundleTeamUnreadable extends FormBundleOutcome {
+  const FormBundleTeamUnreadable();
 }
 
 /// Er staan bundels van dit formulier in de werkmap die niet te lezen zijn, of die
@@ -114,7 +122,7 @@ String defaultBundleOrganiserName(FormSpec spec) =>
     spec.controller?.trim() ?? 'Redactie';
 
 /// Maakt en bewaart de bundel van [form] in [workspace], ondertekend met de redactiesleutel uit
-/// [keys]. [organiserName] en [expires] zijn wat de redacteur invult; `closes` en `retain_unused`
+/// [keys]; de organisatoren zijn de eigenaar en het team uit `team.json`. [organiserName] en [expires] zijn wat de redacteur invult; `closes` en `retain_unused`
 /// komen uit het formulier zelf — één bron. [random] is de bron van een nieuw `fid`; [now] de dag.
 Future<FormBundleOutcome> publishFormBundle(
   FormWorkspace workspace,
@@ -129,7 +137,10 @@ Future<FormBundleOutcome> publishFormBundle(
   final problem = keyProblemOf(state);
   if (problem != null) return FormBundleNeedsKey(problem);
   final present = state as FormKeyPresent;
-  if (!present.info.recoveryVerified) {
+  final stored = await workspace.readTeam();
+  if (stored is! FormTeamStored) return const FormBundleTeamUnreadable();
+  final editors = stored.team.editors;
+  if (!present.info.recoveryVerified && editors.isEmpty) {
     return const FormBundleRecoveryNotChecked();
   }
 
@@ -167,6 +178,12 @@ Future<FormBundleOutcome> publishFormBundle(
         age: present.info.recipient,
         signPublicKey: signing.publicKey,
       ),
+      for (final editor in editors)
+        FormBundleOrganiserInput(
+          name: editor.name,
+          age: editor.age,
+          signPublicKey: base32Decode(editor.sign)!,
+        ),
     ],
     owner: signing,
     bundleSeq: existing.highestSeq + 1,
