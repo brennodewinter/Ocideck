@@ -10,6 +10,16 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Formulier-inzendingen kunnen nu **verzegeld** worden (formaat §5.6, fase 3): `ocideck_form_core` kent een
+  age-bestand (`<sid>.zip.age`) met X25519-ontvangers, gemaakt met de bibliotheek **dartage 0.3.0** (MIT, exact vastgezet;
+  besluit D9). Openen controleert eerst de grootte, dan de header-MAC en elk blok, leest dan het pakket en toetst tot slot
+  het manifest aan wat de aanroeper *vroeg* (inzending, formulier, versie) — age heeft geen geassocieerde data, dus een
+  bestand dat een server van het ene formulier naar het andere schuift opent wel en faalt daar. Armor, wachtwoorden en
+  de hybride en tag-ontvangers worden geweigerd, niet genegeerd. Het corpus van de age-gemeenschap (C2SP CCTV, 143
+  vectoren, vastgezet op een commit) draait bij elke controle; de test met het referentieprogramma `age` slaat zichtbaar
+  over als dat niet aanwezig is. Een nieuwe regel in `make check-packages` houdt de cryptografische bibliotheken
+  buiten elk bestand dat er niet voor bedoeld is. Nog niet verbonden met de app: de sleutels, het bundelbestand en het
+  verzegelde bestand komen in de volgende stappen. dartage vraagt Dart 3.13 (de vastgezette toolchain levert 3.13.4); de verklaarde `sdk`-grens blijft ^3.12.0, want verhogen herformatteert de halve repository en is een aparte stap.
 - In de Inbox brengt **Werkkopie weggooien…** een inzending terug naar wat binnenkwam. De bevestiging zegt wat gaat (de
   werkkopie met haar verbeteringen, voorgoed) en wat blijft (wat binnenkwam, de foto's, het register), en vraagt de
   werkkopie eerst te sluiten als ze nog openstaat. Daarna wordt de inzending weer op het origineel beoordeeld. Het werkt
