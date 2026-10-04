@@ -5864,16 +5864,6 @@ published form and the bundle, so saving the submission — also sealed — asks
 Opening an invitation sends the server nothing but two plain requests; the token and the fingerprint in the link never
 leave your computer.
 
-**Sending it.** A form you opened from an invitation has a **Send…** button as well. OciDeck seals the submission
-first, on your computer, and only if the form's bundle holds — it is signed by the organiser the invitation names, for
-exactly the server in the link, and the form has not closed. Then one question stands between your answers and the
-network: *Send to the editors of …? Your submission goes encrypted to the server; only … can open it.* The fingerprint is
-under *Details*. After the upload the window shows when it arrived and the editors' contact line, and the first characters
-of a checksum you can quote. **Keep receipt…** saves a small file with the secret that can withdraw the submission; keep it
-somewhere safe, and note that **the arrival note is not a proof against the server** — the server could write anything on
-it. If sending fails, your answers stay in the form: *Try again* sends the same submission once more (a repeat is safe: the
-server knows it by its number and cannot end up with two), or *Save sealed…* makes the encrypted file to email instead.
-
 ### Receiving submissions (organiser)
 
 The other side of a form is receiving what comes back. It is an optional extension: switch on

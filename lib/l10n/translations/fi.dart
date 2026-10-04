@@ -1627,30 +1627,6 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
-  'Versturen…': 'Lähetä…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Lähetä salattuna järjestäjän palvelimelle, jotta sinun ei tarvitse lähettää mitään sähköpostilla.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'Lähetetäänkö toimitukselle {naam}? Lähetyksesi menee salattuna osoitteeseen {host}; vain {namen} voivat avata sen.',
-  'De inzending wordt verstuurd…': 'Lähetystä lähetetään…',
-  'Je inzending is aangekomen.': 'Lähetyksesi on perillä.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Perillä {tijd}. Jos sinulla on kysyttävää, kirjoita osoitteeseen {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'Palvelimen vastaanottaman sisällön tarkistussumma alkaa {hash}. Mainitse se, jos kirjoitat asiasta.',
-  'Bewijs bewaren…': 'Tallenna kuitti…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'Kuitti sisältää salaisuuden, jolla voit perua lähetyksen. Säilytä se turvallisessa paikassa.',
-  'Bewijs opgeslagen als {naam}.': 'Kuitti tallennettu nimellä {naam}.',
-  'Het bewijs kon niet worden opgeslagen.': 'Kuittia ei voitu tallentaa.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'Kutsu ei ole enää voimassa: järjestäjä on perunut tai korvannut sen. Pyydä uusi kutsu.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Palvelin ei ota tätä lähetystä vastaan, koska se on liian suuri. Poista kuva tai pienennä yksi.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Palvelin vahvisti jotain muuta kuin mitä lähetit. Yritä uudelleen tai tallenna sinetöity lähetys ja lähetä se sähköpostilla.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Palvelin hylkäsi lähetyksen. Yritä myöhemmin uudelleen tai tallenna sinetöity lähetys ja lähetä se sähköpostilla.',
   'Uitnodiging openen…': 'Avaa kutsu…',
   'Uitnodiging openen': 'Avaa kutsu',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

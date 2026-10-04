@@ -44,7 +44,6 @@ Future<void> openFormInvitation(
     template: variant.template,
     bundleText: variant.bundleText,
     fingerprint: variant.verified.fingerprint,
-    invite: choice.opened.invite,
   );
   container
       .read(tabsProvider.notifier)

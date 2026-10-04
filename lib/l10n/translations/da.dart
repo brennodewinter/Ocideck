@@ -1627,30 +1627,6 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
-  'Versturen…': 'Send…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Send krypteret til arrangørens server, så du ikke skal sende noget på mail.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'Send til redaktionen hos {naam}? Din indsendelse sendes krypteret til {host}; kun {namen} kan åbne den.',
-  'De inzending wordt verstuurd…': 'Indsendelsen sendes…',
-  'Je inzending is aangekomen.': 'Din indsendelse er fremme.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Fremme {tijd}. Har du spørgsmål, så skriv til {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'Kontrolsummen på det, serveren modtog, begynder med {hash}. Nævn den, hvis du skriver om det.',
-  'Bewijs bewaren…': 'Gem kvittering…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'Kvitteringen indeholder den hemmelighed, du kan bruge til at trække indsendelsen tilbage. Opbevar den et sikkert sted.',
-  'Bewijs opgeslagen als {naam}.': 'Kvittering gemt som {naam}.',
-  'Het bewijs kon niet worden opgeslagen.': 'Kvitteringen kunne ikke gemmes.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'Invitationen er ikke længere gyldig: arrangøren har trukket den tilbage eller erstattet den. Bed om en ny invitation.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Serveren tager ikke imod denne indsendelse, fordi den er for stor. Fjern et foto, eller gør et mindre.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Serveren bekræftede noget andet, end du sendte. Prøv igen, eller gem den forseglede indsendelse og send den på mail.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Serveren afviste indsendelsen. Prøv igen senere, eller gem den forseglede indsendelse og send den på mail.',
   'Uitnodiging openen…': 'Åbn invitation…',
   'Uitnodiging openen': 'Åbn invitation',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

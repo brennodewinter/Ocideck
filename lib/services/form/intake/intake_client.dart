@@ -7,7 +7,6 @@ library;
 
 import 'dart:convert';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
@@ -33,17 +32,12 @@ enum IntakeProblem {
   /// De server stuurde een formulier dat niet te lezen is: [IntakeFailed.formIssue].
   formMalformed,
 
-  /// De server zegt `200` of `201` maar zijn aankomstbericht is geen bericht, of gaat over iets
-  /// anders dan wat is verstuurd: een ander inzendnummer of een andere hash. Wat de server
-  /// ontving is dan niet wat de invuller stuurde.
-  noteMismatch,
-
   /// Geen enkele bundel werd geloofd: [IntakeFailed.bundleIssue] is de reden van de eerste.
   bundleRefused,
 }
 
 /// Een bewerking die niet slaagde.
-class IntakeFailed implements IntakeOpenResult, IntakeSubmitResult {
+class IntakeFailed implements IntakeOpenResult {
   const IntakeFailed(
     this.problem, {
     this.http,
@@ -66,23 +60,6 @@ class IntakeFailed implements IntakeOpenResult, IntakeSubmitResult {
 /// Wat [IntakeClient.openInvitation] opleverde.
 sealed class IntakeOpenResult {
   const IntakeOpenResult();
-}
-
-/// Wat [IntakeClient.submit] opleverde.
-sealed class IntakeSubmitResult {
-  const IntakeSubmitResult();
-}
-
-/// De inzending staat bij de server, en het bericht gaat over precies wat is verstuurd.
-class IntakeSubmitted extends IntakeSubmitResult {
-  const IntakeSubmitted({required this.note, required this.alreadyHeld});
-
-  /// Wat de server zegt ontvangen te hebben. **Geen bewijs tegen de server**: hij zou alles
-  /// ondertekenen; de invuller kan er de hash en de tijd aan noemen.
-  final IntakeArrivalNote note;
-
-  /// De server had deze inzending al (een herhaling, `200`): het eerste antwoord ging verloren.
-  final bool alreadyHeld;
 }
 
 /// Eén sjabloon waarvan de bundel is geloofd.
@@ -228,57 +205,6 @@ class IntakeClient {
       variants: variants,
       pins: accepted,
     );
-  }
-
-  /// Stuurt het verzegelde pakket [sealed] onder [sid] naar de server van [invite]
-  /// (INTAKE_PROTOCOL.md §4.3).
-  ///
-  /// De server krijgt de uitnodigingstoken, het formulier en **alleen de hash** van het
-  /// intrekgeheim: wat hij niet heeft kan hij niet lekken. Een herhaling met hetzelfde [sid] en
-  /// dezelfde bytes is veilig (`200`, hetzelfde bericht); een ander pakket onder hetzelfde [sid]
-  /// weigert de server. Het bericht dat terugkomt moet gaan over wat is verstuurd, anders is het
-  /// [IntakeProblem.noteMismatch].
-  Future<IntakeSubmitResult> submit({
-    required InviteLink invite,
-    required String sid,
-    required Uint8List sealed,
-    required String withdrawalSecret,
-  }) async {
-    final IntakeHttpResponse response;
-    try {
-      response = await _http.send(
-        method: 'PUT',
-        url: Uri.parse(
-          'https://${invite.apiHost}${intakeSubmissionTarget(sid)}',
-        ),
-        headers: {
-          'accept': 'application/json',
-          'content-type': 'application/octet-stream',
-          'intake-form': invite.fid,
-          'intake-token': invite.token,
-          'intake-withdrawal': withdrawalSecretHash(withdrawalSecret),
-        },
-        body: sealed,
-        maxResponseBytes: 64 * 1024,
-        timeout: timeout ?? const Duration(minutes: 10),
-      );
-    } on IntakeHttpException catch (e) {
-      return IntakeFailed(IntakeProblem.unreachable, http: e.failure);
-    }
-    if (response.statusCode != 200 && response.statusCode != 201) {
-      return IntakeFailed(
-        IntakeProblem.serverRefused,
-        error: parseIntakeError(response.statusCode, _text(response)),
-        retryAfter: _retryAfter(response.headers['retry-after']),
-      );
-    }
-    final note = parseIntakeArrivalNote(_text(response));
-    if (note == null ||
-        note.sid != sid ||
-        note.ciphertextSha256 != sha256Hex(sealed)) {
-      return const IntakeFailed(IntakeProblem.noteMismatch);
-    }
-    return IntakeSubmitted(note: note, alreadyHeld: response.statusCode == 200);
   }
 
   /// Een `GET`: het antwoord bij 200, anders de mislukking.

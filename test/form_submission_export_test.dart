@@ -92,8 +92,6 @@ void main() {
         built.fileName,
         'kook-${opened.manifest.submissionId.substring(0, 6)}.zip',
       );
-      // Het nummer waaronder de server de inzending kent is het nummer in het manifest.
-      expect(built.sid, opened.manifest.submissionId);
     },
   );
 

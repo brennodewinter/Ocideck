@@ -1642,31 +1642,6 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
-  'Versturen…': 'Надіслати…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Надіслати зашифровано на сервер організатора, щоб нічого не треба було надсилати електронною поштою.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'Надіслати до редакції {naam}? Ваше надсилання піде зашифрованим на {host}; відкрити його можуть лише {namen}.',
-  'De inzending wordt verstuurd…': 'Надсилання…',
-  'Je inzending is aangekomen.': 'Ваше надсилання дійшло.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Дійшло {tijd}. Якщо маєте запитання, пишіть на {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'Контрольна сума того, що отримав сервер, починається з {hash}. Назвіть її, якщо пишете про це.',
-  'Bewijs bewaren…': 'Зберегти підтвердження…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'Підтвердження містить секрет, яким можна відкликати надсилання. Зберігайте його в надійному місці.',
-  'Bewijs opgeslagen als {naam}.': 'Підтвердження збережено як {naam}.',
-  'Het bewijs kon niet worden opgeslagen.':
-      'Не вдалося зберегти підтвердження.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'Запрошення більше не дійсне: організатор відкликав або замінив його. Попросіть нове запрошення.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Сервер не приймає це надсилання, бо воно завелике. Приберіть фото або зменшіть одне з них.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Сервер підтвердив не те, що ви надіслали. Спробуйте ще раз або збережіть запечатане надсилання й надішліть його поштою.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Сервер відхилив надсилання. Спробуйте пізніше або збережіть запечатане надсилання й надішліть його поштою.',
   'Uitnodiging openen…': 'Відкрити запрошення…',
   'Uitnodiging openen': 'Відкрити запрошення',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

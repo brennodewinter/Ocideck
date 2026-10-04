@@ -667,31 +667,6 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
-  'Versturen…': 'Senden…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Verschlüsselt an den Server des Organisators senden, damit du nichts per E-Mail schicken musst.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'An die Redaktion von {naam} senden? Deine Einsendung geht verschlüsselt an {host}; nur {namen} können sie öffnen.',
-  'De inzending wordt verstuurd…': 'Die Einsendung wird gesendet…',
-  'Je inzending is aangekomen.': 'Deine Einsendung ist angekommen.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Angekommen am {tijd}. Bei Fragen schreibe an {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'Die Prüfsumme dessen, was der Server erhalten hat, beginnt mit {hash}. Nenne sie, wenn du darüber schreibst.',
-  'Bewijs bewaren…': 'Beleg aufbewahren…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'Der Beleg enthält das Geheimnis, mit dem du die Einsendung zurückziehen kannst. Bewahre ihn an einem sicheren Ort auf.',
-  'Bewijs opgeslagen als {naam}.': 'Beleg als {naam} gespeichert.',
-  'Het bewijs kon niet worden opgeslagen.':
-      'Der Beleg konnte nicht gespeichert werden.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'Die Einladung ist nicht mehr gültig: Der Organisator hat sie zurückgezogen oder ersetzt. Bitte um eine neue Einladung.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Der Server nimmt diese Einsendung nicht an, weil sie zu groß ist. Entferne ein Foto oder mache eines kleiner.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Der Server hat etwas anderes bestätigt als das, was du gesendet hast. Versuche es erneut oder speichere die versiegelte Einsendung und schicke sie per E-Mail.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Der Server hat die Einsendung abgelehnt. Versuche es später erneut oder speichere die versiegelte Einsendung und schicke sie per E-Mail.',
   'Uitnodiging openen…': 'Einladung öffnen…',
   'Uitnodiging openen': 'Einladung öffnen',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

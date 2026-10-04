@@ -1625,30 +1625,6 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
-  'Versturen…': 'Sūtīt…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Sūtīt šifrētu uz organizatora serveri, lai nekas nebūtu jāsūta pa e-pastu.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'Sūtīt {naam} redakcijai? Jūsu iesniegums aiziet šifrēts uz {host}; to var atvērt tikai {namen}.',
-  'De inzending wordt verstuurd…': 'Iesniegums tiek sūtīts…',
-  'Je inzending is aangekomen.': 'Jūsu iesniegums ir nonācis.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Nonāca {tijd}. Ja ir jautājumi, rakstiet uz {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'Servera saņemtā satura kontrolsumma sākas ar {hash}. Minējiet to, ja rakstāt par to.',
-  'Bewijs bewaren…': 'Saglabāt kvīti…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'Kvīts satur noslēpumu, ar kuru varat atsaukt iesniegumu. Glabājiet to drošā vietā.',
-  'Bewijs opgeslagen als {naam}.': 'Kvīts saglabāta kā {naam}.',
-  'Het bewijs kon niet worden opgeslagen.': 'Kvīti neizdevās saglabāt.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'Uzaicinājums vairs nav derīgs: organizators to ir atsaucis vai aizstājis. Lūdziet jaunu uzaicinājumu.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Serveris šo iesniegumu nepieņem, jo tas ir par lielu. Noņemiet fotoattēlu vai samaziniet kādu.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Serveris apstiprināja ko citu, nevis to, ko nosūtījāt. Mēģiniet vēlreiz vai saglabājiet aizzīmogoto iesniegumu un nosūtiet to pa e-pastu.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Serveris noraidīja iesniegumu. Mēģiniet vēlāk vēlreiz vai saglabājiet aizzīmogoto iesniegumu un nosūtiet to pa e-pastu.',
   'Uitnodiging openen…': 'Atvērt uzaicinājumu…',
   'Uitnodiging openen': 'Atvērt uzaicinājumu',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

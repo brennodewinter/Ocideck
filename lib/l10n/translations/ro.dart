@@ -1643,30 +1643,6 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
-  'Versturen…': 'Trimite…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Trimite criptat pe serverul organizatorului, ca să nu trebuiască să trimiți nimic prin e-mail.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'Trimiți către redacția {naam}? Trimiterea ta merge criptată către {host}; doar {namen} o pot deschide.',
-  'De inzending wordt verstuurd…': 'Trimiterea se trimite…',
-  'Je inzending is aangekomen.': 'Trimiterea ta a ajuns.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'A ajuns la {tijd}. Dacă ai întrebări, scrie la {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'Suma de control a ceea ce a primit serverul începe cu {hash}. Menționeaz-o dacă scrii despre asta.',
-  'Bewijs bewaren…': 'Păstrează dovada…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'Dovada conține secretul cu care poți retrage trimiterea. Păstreaz-o într-un loc sigur.',
-  'Bewijs opgeslagen als {naam}.': 'Dovada a fost salvată ca {naam}.',
-  'Het bewijs kon niet worden opgeslagen.': 'Dovada nu a putut fi salvată.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'Invitația nu mai este valabilă: organizatorul a retras-o sau a înlocuit-o. Cere o invitație nouă.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Serverul nu acceptă această trimitere pentru că este prea mare. Scoate o fotografie sau micșorează una.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Serverul a confirmat altceva decât ce ai trimis. Încearcă din nou sau salvează trimiterea sigilată și trimite-o prin e-mail.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Serverul a refuzat trimiterea. Încearcă din nou mai târziu sau salvează trimiterea sigilată și trimite-o prin e-mail.',
   'Uitnodiging openen…': 'Deschide invitația…',
   'Uitnodiging openen': 'Deschide invitația',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

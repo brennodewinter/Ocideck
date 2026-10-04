@@ -1642,30 +1642,6 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
-  'Versturen…': 'Mittere…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Occultatum ad servum ordinatoris mittere, ne quid per epistulam electronicam mittas.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'Ad redactionem {naam} mittere? Missio tua occultata ad {host} it; soli {namen} eam aperire possunt.',
-  'De inzending wordt verstuurd…': 'Missio mittitur…',
-  'Je inzending is aangekomen.': 'Missio tua pervenit.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Pervenit die {tijd}. Si quaestiones habes, scribe ad {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'Summa probationis eius quod servus accepit incipit ab {hash}. Eam nomina si de ea scribis.',
-  'Bewijs bewaren…': 'Testimonium servare…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'Testimonium secretum continet quo missionem revocare potes. Id in loco tuto serva.',
-  'Bewijs opgeslagen als {naam}.': 'Testimonium servatum ut {naam}.',
-  'Het bewijs kon niet worden opgeslagen.': 'Testimonium servari non potuit.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'Invitatio non iam valet: ordinator eam revocavit vel mutavit. Novam invitationem roga.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Servus hanc missionem non accipit quia nimis magna est. Imaginem tolle vel minorem fac.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Servus aliud confirmavit quam quod misisti. Iterum conare, vel missionem signatam serva et per epistulam electronicam mitte.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Servus missionem recusavit. Postea iterum conare, vel missionem signatam serva et per epistulam electronicam mitte.',
   'Uitnodiging openen…': 'Invitationem aperire…',
   'Uitnodiging openen': 'Invitationem aperire',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

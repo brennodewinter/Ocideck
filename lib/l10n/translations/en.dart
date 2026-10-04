@@ -827,30 +827,6 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
-  'Versturen…': 'Send…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Send encrypted to the organiser\'s server, so you do not have to email anything.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'Send to the editors of {naam}? Your submission goes encrypted to {host}; only {namen} can open it.',
-  'De inzending wordt verstuurd…': 'Sending the submission…',
-  'Je inzending is aangekomen.': 'Your submission has arrived.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Arrived on {tijd}. If you have questions, write to {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'The checksum of what the server received starts with {hash}. Quote it if you write about it.',
-  'Bewijs bewaren…': 'Keep receipt…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'The receipt holds the secret you can use to withdraw the submission. Keep it somewhere safe.',
-  'Bewijs opgeslagen als {naam}.': 'Receipt saved as {naam}.',
-  'Het bewijs kon niet worden opgeslagen.': 'The receipt could not be saved.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'The invitation is no longer valid: the organiser has withdrawn or replaced it. Ask for a new invitation.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'The server does not accept this submission because it is too large. Remove a photo or make one smaller.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'The server confirmed something other than what you sent. Try again, or save the sealed submission and email it.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'The server refused the submission. Try again later, or save the sealed submission and email it.',
   'Uitnodiging openen…': 'Open invitation…',
   'Uitnodiging openen': 'Open invitation',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

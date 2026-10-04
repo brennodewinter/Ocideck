@@ -70,7 +70,5 @@ String intakeFailureText(
   IntakeProblem.formMalformed => l10n.d(
     'De server stuurde een formulier dat OciDeck niet kan lezen.',
   ),
-  // Een bericht over iets anders dan wat is verstuurd hoort bij het versturen, niet bij het openen.
-  IntakeProblem.noteMismatch => l10n.d('De server weigerde het verzoek.'),
   IntakeProblem.bundleRefused => formBundleIssueText(l10n, failed.bundleIssue!),
 };

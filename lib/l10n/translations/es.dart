@@ -664,31 +664,6 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
-  'Versturen…': 'Enviar…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Enviar cifrado al servidor del organizador, para no tener que enviar nada por correo electrónico.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      '¿Enviar a la redacción de {naam}? Tu envío va cifrado a {host}; solo {namen} pueden abrirlo.',
-  'De inzending wordt verstuurd…': 'Enviando…',
-  'Je inzending is aangekomen.': 'Tu envío ha llegado.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Llegó el {tijd}. Si tienes preguntas, escribe a {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'La suma de comprobación de lo que recibió el servidor empieza por {hash}. Menciónala si escribes sobre ello.',
-  'Bewijs bewaren…': 'Guardar el justificante…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'El justificante contiene el secreto con el que puedes retirar el envío. Guárdalo en un lugar seguro.',
-  'Bewijs opgeslagen als {naam}.': 'Justificante guardado como {naam}.',
-  'Het bewijs kon niet worden opgeslagen.':
-      'No se pudo guardar el justificante.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'La invitación ya no es válida: el organizador la retiró o la sustituyó. Pide una invitación nueva.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'El servidor no acepta este envío porque es demasiado grande. Quita una foto o haz una más pequeña.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'El servidor confirmó algo distinto de lo que enviaste. Inténtalo de nuevo, o guarda el envío sellado y envíalo por correo electrónico.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'El servidor rechazó el envío. Inténtalo de nuevo más tarde, o guarda el envío sellado y envíalo por correo electrónico.',
   'Uitnodiging openen…': 'Abrir invitación…',
   'Uitnodiging openen': 'Abrir invitación',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

@@ -1645,30 +1645,6 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
-  'Versturen…': 'ibgħat…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'ibgħat ikkriptat lis-server tal-organizzatur, biex ma jkollokx għalfejn tibgħat xejn bl-email.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'Tibgħat lir-redazzjoni ta’ {naam}? Is-sottomissjoni tiegħek tmur ikkriptata lejn {host}; {namen} biss jistgħu jiftħuha.',
-  'De inzending wordt verstuurd…': 'Is-sottomissjoni qed tinbagħat…',
-  'Je inzending is aangekomen.': 'Is-sottomissjoni tiegħek waslet.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Waslet fi {tijd}. Jekk għandek mistoqsijiet, ikteb lil {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'Is-somma ta’ kontroll ta’ dak li rċieva s-server tibda b’{hash}. Semmiha jekk tkun qed tikteb dwar dan.',
-  'Bewijs bewaren…': 'Żomm l-irċevuta…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'L-irċevuta fiha s-sigriet li bih tista’ tirtira s-sottomissjoni. Żommha f’post sigur.',
-  'Bewijs opgeslagen als {naam}.': 'L-irċevuta nżammet bħala {naam}.',
-  'Het bewijs kon niet worden opgeslagen.': 'L-irċevuta ma setgħetx tinżamm.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'L-istedina m’għadhiex valida: l-organizzatur irtiraha jew ibdilha. Itlob stedina ġdida.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Is-server ma jaċċettax din is-sottomissjoni għax hija kbira wisq. Neħħi ritratt jew żgħar wieħed.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Is-server ikkonferma xi ħaġa differenti minn dak li bgħatt. Erġa’ pprova, jew żomm is-sottomissjoni siġillata u ibgħatha bl-email.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Is-server irrifjuta s-sottomissjoni. Erġa’ pprova aktar tard, jew żomm is-sottomissjoni siġillata u ibgħatha bl-email.',
   'Uitnodiging openen…': 'Iftaħ l-istedina…',
   'Uitnodiging openen': 'Iftaħ l-istedina',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

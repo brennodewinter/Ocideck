@@ -1630,31 +1630,6 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
-  'Versturen…': 'Schicke…',
-  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
-      'Verschlüsselt an Server vom Organisator schicke, damit du nüt per E-Mail muesch schicke.',
-  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
-      'An d Redaktion vo {naam} schicke? Dini Iisändig gaat verschlüsselt an {host}; nume {namen} chönd sie ufmache.',
-  'De inzending wordt verstuurd…': 'D Iisändig wird gschickt…',
-  'Je inzending is aangekomen.': 'Dini Iisändig isch acho.',
-  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
-      'Acho am {tijd}. Bi Frage schriib a {contact}.',
-  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
-      'D Prüefsumme vo däm, wo dr Server übercho het, fangt aa mit {hash}. Nänn sie, wenn du drüber schribsch.',
-  'Bewijs bewaren…': 'Bleg ufbewahre…',
-  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
-      'Dr Bleg het s Gheimnis, mit däm du d Iisändig chasch zruggzieh. Bewahr n a eme sichere Ort uf.',
-  'Bewijs opgeslagen als {naam}.': 'Bleg gspeichert als {naam}.',
-  'Het bewijs kon niet worden opgeslagen.':
-      'Dr Bleg het nid chönne gspeichert wärde.',
-  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
-      'D Iiladig isch nid meh gültig: dr Organisator het sie zruggzoge oder ersetzt. Bitt um e neui Iiladig.',
-  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
-      'Dr Server nimmt die Iisändig nid aa, will sie z gross isch. Nimm es Foti use oder mach eis chliner.',
-  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Dr Server het öppis anders bestätigt as das, wo du gschickt hesch. Probier s nomol, oder speicher di versiegleti Iisändig und schick sie per E-Mail.',
-  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
-      'Dr Server het d Iisändig abglehnt. Probier s speter nomol, oder speicher di versiegleti Iisändig und schick sie per E-Mail.',
   'Uitnodiging openen…': 'Iiladig ufmache…',
   'Uitnodiging openen': 'Iiladig ufmache',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
