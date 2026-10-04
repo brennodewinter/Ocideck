@@ -1657,6 +1657,180 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Ní thug an freastalaí le fios cén fhoirm a bhaineann leis an aighneacht seo — ní féidir í a líonadh anseo.',
+  ', {n} niet binnengehaald': ', {n} gan bhailiú',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Níl na tréimhsí coinneála ceart: dréacht {draft} lá ar a mhéid, aighneacht {submitted} lá ar a mhéid.',
+  'Formulier gepubliceerd als versie {n}.': 'Foirm foilsithe mar leagan {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Leagan nua {n} foilsithe.',
+  'Organisatie: {organisatie}': 'Eagraíocht: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Díreach chuig an eagraí ar {server}. Deimhníonn tú san fhuinneog a osclaíonn; ní sheoltar aon rud riamh as féin.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Leagan: {versie} — fanann leaganacha roimhe seo do-athraithe.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Trí OciServe · leagan {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Méarlorg: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} nua, {bijgewerkt} nuashonraithe, {ingetrokken} tarraingthe siar{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Ní féidir teacht ar an bhfreastalaí faoi láthair. Bain triail eile as níos déanaí; níor seoladh aon rud.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'An iomarca iarrachtaí as a chéile. Fan tamall agus bain triail eile as.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Ní cosúil go bhfuil an seoladh nó an cód seo ceart. Seiceáil é agus bain triail eile as.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Níor oibrigh sé. Níor seoladh aon rud — bain triail eile as.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Ní chruthaíonn do sheoladh ríomhphoist ach gur féidir leat an bhosca poist a rochtain — ní cuntas é agus ní sheoltar aon rud go dtí go ndeimhníonn tú tú féin.',
+  'Je e-mailadres': 'Do sheoladh ríomhphoist',
+  'Code aanvragen': 'Iarr cód',
+  'Opnieuw versturen': 'Seol arís',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Is féidir atsheoladh i {seconden} soicind.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Tá cód ar a bhealach chuig an seoladh sin (fiú mura bhfuil an seoladh ann — ní chloisfidh tú é sin anseo).',
+  'Code uit de e-mail': 'Cód ón ríomhphost',
+  'Code controleren': 'Seiceáil an cód',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Ní féidir an t-aighneacht seo a sheoladh anois — tá sí dúnta, tarraingthe siar nó níl babhta ceartaithe ar oscailt. Tá do chuid oibre sábháilte sa chomhad seo; sábháil é mar zip chun é a sheoladh.',
+  'Het pakket wordt verstuurd…': 'Ag seoladh an phacáiste…',
+  'De inzending wordt vastgelegd…': 'Ag taifeadadh na haigní…',
+  'De inzending wordt ingetrokken…': 'Á tharraingt siar na haigní…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Tá an rochtain imithe in éag. Iarr cód nua tríd an nasc fillte; tá do chuid oibre sábháilte sa chomhad seo.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Tá an pacáiste ró-mhór le seoladh. Bain grianghraf amach agus bain triail eile as — nó sábháil é mar zip agus seol sin.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Ní bhfuair an freastalaí go díreach a seoladh. Níor taifeadadh aon rud; bain triail eile as.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'D\'fhreagair an freastalaí rud éigin gan choinne. Níor taifeadadh aon rud; bain triail eile as níos déanaí.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Ní féidir teacht ar an bhfreastalaí faoi láthair. Níor seoladh aon rud — tá do chuid oibre sábháilte sa chomhad seo.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Theip ar an seoladh. Níor taifeadadh aon rud — tá do chuid oibre sábháilte sa chomhad seo; sábháil é mar zip chun é a sheoladh.',
+  'Verzenden via OciServe': 'Seol trí OciServe',
+  'Bestemming: {server}': 'Ceann scríbe: {server}',
+  'Doel: {doelen}': 'Cuspóir: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Coinneáil: {dagen} lá tar éis aighneachta.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Ní ghlacann an fhoirm seo le haighneachtaí nua faoi láthair.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Níorbh fhéidir an fhoirm a fháil. Is féidir leat do chuid oibre a shábháil mar zip fós.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Ní sheoltar aon rud go dtí go ndeimhníonn tú thíos. Is féidir a shábháil mar chomhad zip i gcónaí.',
+  'Insturen…': 'Aighnigh…',
+  'Correctie insturen…': 'Aighnigh an ceartú…',
+  'Inzending bijwerken…': 'Nuashonraigh an aighneacht…',
+  'Inzending intrekken…': 'Tarraing siar an aighneacht…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Éireoidh sé seo an leagan {n} de d\'aighneacht ar {server}. Tar éis aighneachta ní féidir leat é a athrú níos mó — déantar botún a cheartú le babhta ceartaithe nua.',
+  'Definitief insturen': 'Aighnigh go deimhneach',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Baineann an tarraingt siar d\'aighneacht ón eagraí agus ní féidir é a chur ar ceal. Ar mhaith leat leanúint ar aghaidh?',
+  'Verstuurd als revisie {n}.': 'Seolta mar leagan {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Gheobhaidh tú nasc fillte trí ríomhphost. Ní osclaíonn an nasc sin d\'aighneacht ach mar aon le cód nua — ní eochair é an nasc as a chéile.',
+  'Je inzending is ingetrokken.': 'Tá d\'aighneacht tarraingthe siar.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Ní féidir teacht ar an bhfreastalaí faoi láthair. Seiceáil an nasc agus bain triail eile as níos déanaí.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Níor oibrigh an nasc. Seiceáil é agus bain triail eile as.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Ní nasc cuirí nó fillte é sin a aithníonn OciDeck. Tosnaíonn nasc le https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Níl foirm sa fhoilseachán seo ar féidir le OciDeck a líonadh.',
+  'Bewaar het formulier om in te vullen': 'Sábháil an fhoirm le líonadh',
+  'Formulieruitnodiging': 'Cuireadh foirme',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Greamaigh an nasc cuirí nó fillte a fuair tú. Ní eochair é an nasc é féin — teastaíonn cód nua i gcónaí le haghaidh d\'aighneachta.',
+  'Uitnodigings- of terugkeerlink': 'Nasc cuirí nó fillte',
+  'Link openen': 'Oscail an nasc',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Treoraíonn an nasc seo chuig d\'aighneacht ar {server}. Chun é a oscailt teastaíonn cód nua — ní leor an nasc as a chéile riamh.',
+  'Deze link wijst naar {server}.': 'Treoraíonn an nasc seo chuig {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Tá dréacht agat anseo (leagan {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Tá d\'aighneacht tagtha (leagan {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'D\'iarr an t-eagraí ceartú: is í d\'athrú an leagan {n}.',
+  'Deze inzending is ingetrokken.': 'Tá an aighneacht seo tarraingthe siar.',
+  'Formulier invullen': 'Líon an fhoirm',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Líonann tú ar d\'fheiste féin; ní sheoltar aon rud go dtí go ndeimhníonn tú tú féin.',
+  'Als behandeld gemarkeerd op de server.':
+      'Marcáilte mar a láimhseáladh ar an bhfreastalaí.',
+  'Als behandeld markeren': 'Marcáil mar láimhseáilte',
+  'Als nieuwe versie publiceren': 'Foilsigh mar leagan nua',
+  'Correctie achteraf toestaan': 'Ceadaigh ceartú ina dhiaidh sin',
+  'Correctieronde geopend op de server.':
+      'Osclaíodh babhta ceartaithe ar an bhfreastalaí.',
+  'Correctieronde openen': 'Oscail babhta ceartaithe',
+  'Correctieronde openen…': 'Oscail babhta ceartaithe…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Sprioc cheartaithe (laethanta, folamh = gan deireadh)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Níor oibrigh sé ar an bhfreastalaí. Níor athraigh aon rud.',
+  'De correctietermijn klopt niet.': 'Níl an sprioc cheartaithe ceart.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Féadfaidh an líonóir leagan nua a sheoladh ansin. Fanann a aighneacht roimhe seo gan athrú.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Imíonn an aighneacht ag OciServe; coinníonn an clár glanta ansin cuntas ar a bhfuil imithe. Fanann a bhfuil i do fhillteán oibre — glanann tú sin ar leith.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Ní féidir teacht ar an bhfreastalaí faoi láthair. Níor foilsíodh aon rud — bain triail eile as níos déanaí.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Ní féidir teacht ar an bhfreastalaí faoi láthair. Níor athraigh aon rud — bain triail eile as níos déanaí.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Comhroinn an nasc cuirí seo le cibé duine ar mhaith leat an fhoirm a líonadh. Ní dhíríonn an nasc ach ar an bhfoirm — ní osclaíonn sé aighneachtaí.',
+  'Dit gaat er naartoe': 'Seo chuige a théann sé',
+  'Doelen (één per regel)': 'Cuspóirí (ceann in aghaidh an líne)',
+  'Inzending bewaren (dagen)': 'Coinnigh an aighneacht (laethanta)',
+  'Inzending opschonen op de server': 'Glan an aighneacht ar an bhfreastalaí',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Ní ceadmhach duit an fhoirm seo a fhoilsiú ansin. Seiceáil an eagraíocht agus do chearta.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Ní féidir leat é sin a dhéanamh ar an bhfreastalaí. Seiceáil an eagraíocht agus do chearta.',
+  'Link kopiëren': 'Cóipeáil an nasc',
+  'Naam voor de organisatie': 'Ainm don eagraíocht',
+  'Ontwerp bewaren (dagen)': 'Coinnigh dréacht (laethanta)',
+  'Opschonen ingepland op de server.':
+      'Glantachán sceidealaithe ar an bhfreastalaí.',
+  'Opschonen op de server': 'Glan ar an bhfreastalaí',
+  'Opschonen op de server…': 'Glan ar an bhfreastalaí…',
+  'Privacytekst': 'Téacs príobháideachta',
+  'Publiceren': 'Foilsigh',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Theip ar an bhfoilsiú. Níor athraigh aon rud ar an bhfreastalaí.',
+  'Publiceren via OciServe': 'Foilsigh trí OciServe',
+  'Server: {server}': 'Freastalaí: {server}',
+  'Titel die de invuller ziet': 'Teideal a fheiceann an líonóir',
+  'Vul een naam en een titel in.': 'Cuir isteach ainm agus teideal.',
+  'Vul minstens één doel in — per regel één.':
+      'Cuir isteach cuspóir amháin ar a laghad — ceann in aghaidh an líne.',
+  'Waarom (niet verplicht)': 'Cén fáth (roghnach)',
+  'Weer als open gemarkeerd op de server.':
+      'Marcáilte arís mar oscailte ar an bhfreastalaí.',
+  'Weer als open markeren': 'Marcáil arís mar oscailte',
+  'correctieronde open': 'ceartú oscailte',
+  'ingediend': 'aighnithe',
+  'ingetrokken': 'tarraingthe siar',
+  'ontwerp': 'dréacht',
+  'Insturen via OciServe…': 'Aighnigh trí OciServe…',
+  'Ophalen van OciServe': 'Faigh ó OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Foilsigh foirm mar leagan prionntáilte ar bhur OciServe agus comhroinn an nasc cuirí.',
+  'Publiceren via OciServe…': 'Foilsigh trí OciServe…',
+  'Uitnodiging openen…': 'Oscail cuireadh…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'ní féidir teacht ar an bhfreastalaí anois; níor athraigh aon rud.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'ní féidir leat na haighneachtaí seo a léamh ansin — seiceáil an eagraíocht agus do chearta.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'theip ar an bhfáil; níor athraigh aon rud.',
   'Offline uitnodigingspakket maken…': 'Cruthaigh pacáiste cuirí as líne…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       'Cuireadh {naam} leis. Cruthaigh an pacáiste cuirí arís chun {naam} a áireamh.',

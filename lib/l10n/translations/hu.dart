@@ -1629,6 +1629,178 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'A szerver nem jelezte, melyik űrlap tartozik ehhez a benyújtáshoz — a kitöltés itt nem lehetséges.',
+  ', {n} niet binnengehaald': ', {n} nem letölthető',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'A megőrzési idők nem megfelelőek: piszkozat legfeljebb {draft} nap, benyújtás legfeljebb {submitted} nap.',
+  'Formulier gepubliceerd als versie {n}.': 'Űrlap közzétéve {n}. verzióként.',
+  'Nieuwe versie {n} gepubliceerd.': 'Új verzió {n} közzétéve.',
+  'Organisatie: {organisatie}': 'Szervezet: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Egyenesen a szervezőhöz a(z) {server} szerveren. A megnyíló ablakban erősítesz; soha semmi nem megy el magától.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Verzió: {versie} — a korábbi verziók sérthetetlenek maradnak.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'OciServe-en keresztül · {n}. változat · {toestand}',
+  'Vingerafdruk: {hash}…': 'Ujjlenyomat: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} új, {bijgewerkt} frissített, {ingetrokken} visszavont{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'A szerver most nem érhető el. Próbáld később újra; semmi sem lett elküldve.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Túl sok próbálkozás egymás után. Várj egy kicsit, és próbáld újra.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Ez a cím vagy kód nem tűnik helyesnek. Ellenőrizd, és próbáld újra.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Ez nem sikerült. Semmi sem lett elküldve — próbáld újra.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Az e-mail-címed csak azt bizonyítja, hogy eléred a postafiókot — nem fiók, és semmi sem kerül elküldésre, amíg te magad meg nem erősíted.',
+  'Je e-mailadres': 'Az e-mail-címed',
+  'Code aanvragen': 'Kód kérése',
+  'Opnieuw versturen': 'Újraküldés',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Az újraküldés {seconden} másodperc múlva lehetséges.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Egy kód már úton van a címre (még akkor is, ha a cím nem létezik — ezt itt nem fogod megtudni).',
+  'Code uit de e-mail': 'Kód az e-mailből',
+  'Code controleren': 'Kód ellenőrzése',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Ez a benyújtás most nem küldhető el — lezárt, visszavont, vagy nincs nyitott javítási kör. A munkád biztonságban van ebben a fájlban; mentsd el zip-ként az elküldéshez.',
+  'Het pakket wordt verstuurd…': 'A csomag küldése…',
+  'De inzending wordt vastgelegd…': 'A benyújtás rögzítése…',
+  'De inzending wordt ingetrokken…': 'A benyújtás visszavonása…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'A hozzáférés lejárt. Kérj új kódot a visszatérési linken keresztül; a munkád biztonságban van ebben a fájlban.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'A csomag túl nagy a küldéshez. Távolíts el egy fotót, és próbáld újra — vagy mentsd el zip-ként, és küldd el azt.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'A szerver nem pontosan azt kapta, amit elküldtek. Semmi sem lett rögzítve; próbáld újra.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'A szerver valami váratlant válaszolt. Semmi sem lett rögzítve; próbáld később újra.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'A szerver most nem érhető el. Semmi sem lett elküldve — a munkád biztonságban van ebben a fájlban.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'A küldés nem sikerült. Semmi sem lett rögzítve — a munkád biztonságban van ebben a fájlban; mentsd el zip-ként az elküldéshez.',
+  'Verzenden via OciServe': 'Küldés OciServe-en keresztül',
+  'Bestemming: {server}': 'Cél: {server}',
+  'Doel: {doelen}': 'Cél: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Megőrzés: {dagen} nap a benyújtás után.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Ez az űrlap most nem fogad új benyújtásokat.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Az űrlap nem tölthető le. A munkádat ettől még elmentheted zip-ként.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Semmi sem kerül elküldésre, amíg alább nem erősíted meg. Zip-ként menteni mindig lehetséges.',
+  'Insturen…': 'Benyújtás…',
+  'Correctie insturen…': 'Javítás benyújtása…',
+  'Inzending bijwerken…': 'Benyújtás frissítése…',
+  'Inzending intrekken…': 'Benyújtás visszavonása…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Ez lesz a benyújtásod {n}. változata a(z) {server} szerveren. Benyújtás után már nem módosíthatod — a hibát egy új javítási kör javítja.',
+  'Definitief insturen': 'Végleges benyújtás',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'A visszavonás eltávolítja a benyújtásod a szervezőnél, és nem vonható vissza. Folytatod?',
+  'Verstuurd als revisie {n}.': 'Elküldve {n}. változatként.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Kapsz egy visszatérési linket e-mailben. Ez a link csak egy új kóddal együtt nyitja meg a benyújtásod — a link önmagában nem kulcs.',
+  'Je inzending is ingetrokken.': 'A benyújtásod visszavonásra került.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'A szerver most nem érhető el. Ellenőrizd a linket, és próbáld később újra.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'A link nem működött. Ellenőrizd, és próbáld újra.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Ez nem meghívó- vagy visszatérési link, amit az OciDeck ismer. A link https://-vel kezdődik.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Ez a közzététel nem tartalmaz űrlapot, amit az OciDeck ki tudna tölteni.',
+  'Bewaar het formulier om in te vullen': 'Űrlap mentése kitöltésre',
+  'Formulieruitnodiging': 'Űrlap-meghívó',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Illeszd be a kapott meghívó- vagy visszatérési linket. A link önmagában nem kulcs — a benyújtásodhoz mindig új kód kell.',
+  'Uitnodigings- of terugkeerlink': 'Meghívó- vagy visszatérési link',
+  'Link openen': 'Link megnyitása',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Ez a link a(z) {server} szerveren lévő benyújtásodra mutat. Megnyitásához új kód kell — a link önmagában sosem elég.',
+  'Deze link wijst naar {server}.': 'Ez a link a(z) {server} szerverre mutat.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Itt van egy piszkozatod ({n}. változat).',
+  'Je inzending is binnen (revisie {n}).':
+      'A benyújtásod megérkezett ({n}. változat).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'A szervező javítást kért: a módosításod lesz a(z) {n}. változat.',
+  'Deze inzending is ingetrokken.': 'Ez a benyújtás visszavonásra került.',
+  'Formulier invullen': 'Űrlap kitöltése',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'A saját eszközödön töltesz ki; semmi sem kerül elküldésre, amíg te magad meg nem erősíted.',
+  'Als behandeld gemarkeerd op de server.':
+      'Kezeltként megjelölve a szerveren.',
+  'Als behandeld markeren': 'Megjelölés kezeltként',
+  'Als nieuwe versie publiceren': 'Közzététel új verzióként',
+  'Correctie achteraf toestaan': 'Utólagos javítás engedélyezése',
+  'Correctieronde geopend op de server.': 'Javítási kör megnyitva a szerveren.',
+  'Correctieronde openen': 'Javítási kör megnyitása',
+  'Correctieronde openen…': 'Javítási kör megnyitása…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Javítási határidő (napok, üres = nincs vége)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Ez nem sikerült a szerveren. Semmi sem változott.',
+  'De correctietermijn klopt niet.': 'A javítási határidő nem megfelelő.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'A kitöltő ekkor benyújthat egy új verziót. Korábbi benyújtása változatlanul megmarad.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'A benyújtás eltűnik az OciServe-nél; az ottani törlési nyilvántartás vezeti, mi szűnt meg. Ami a te munkamappádban van, megmarad — azt külön takarítod el.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'A szerver most nem érhető el. Semmi sem lett közzétéve — próbáld később újra.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'A szerver most nem érhető el. Semmi sem változott — próbáld később újra.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Oszd meg ezt a meghívólinket azzal, akivel ki szeretnéd töltetni az űrlapot. A link csak az űrlapra mutat — nem nyit meg benyújtásokat.',
+  'Dit gaat er naartoe': 'Ide megy',
+  'Doelen (één per regel)': 'Célok (soronként egy)',
+  'Inzending bewaren (dagen)': 'Benyújtás megőrzése (napok)',
+  'Inzending opschonen op de server': 'Benyújtás törlése a szerveren',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Ezt az űrlapot ott nem teheted közzé. Ellenőrizd a szervezetet és a jogaidat.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Ezt a szerveren nem teheted meg. Ellenőrizd a szervezetet és a jogaidat.',
+  'Link kopiëren': 'Link másolása',
+  'Naam voor de organisatie': 'A szervezet neve',
+  'Ontwerp bewaren (dagen)': 'Piszkozat megőrzése (napok)',
+  'Opschonen ingepland op de server.': 'Törlés ütemezve a szerveren.',
+  'Opschonen op de server': 'Törlés a szerveren',
+  'Opschonen op de server…': 'Törlés a szerveren…',
+  'Privacytekst': 'Adatvédelmi szöveg',
+  'Publiceren': 'Közzététel',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'A közzététel nem sikerült. A szerveren semmi sem változott.',
+  'Publiceren via OciServe': 'Közzététel OciServe-en keresztül',
+  'Server: {server}': 'Szerver: {server}',
+  'Titel die de invuller ziet': 'A kitöltő által látott cím',
+  'Vul een naam en een titel in.': 'Adj meg egy nevet és egy címet.',
+  'Vul minstens één doel in — per regel één.':
+      'Adj meg legalább egy célt — soronként egyet.',
+  'Waarom (niet verplicht)': 'Miért (nem kötelező)',
+  'Weer als open gemarkeerd op de server.':
+      'Ismét nyitottként megjelölve a szerveren.',
+  'Weer als open markeren': 'Újra nyitottként jelölés',
+  'correctieronde open': 'javítás nyitva',
+  'ingediend': 'benyújtva',
+  'ingetrokken': 'visszavonva',
+  'ontwerp': 'piszkozat',
+  'Insturen via OciServe…': 'Benyújtás OciServe-en keresztül…',
+  'Ophalen van OciServe': 'Letöltés OciServe-ről',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Tegyél közzé egy űrlapot rögzített verzióként a saját OciServe-otokon, és oszd meg a meghívólinket.',
+  'Publiceren via OciServe…': 'Közzététel OciServe-en keresztül…',
+  'Uitnodiging openen…': 'Meghívó megnyitása…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'a szerver most nem érhető el; semmi sem változott.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'ezeket a benyújtásokat ott nem olvashatod — ellenőrizd a szervezetet és a jogaidat.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'a letöltés nem sikerült; semmi sem változott.',
   'Offline uitnodigingspakket maken…': 'Offline meghívócsomag létrehozása…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} hozzáadva. Készítsd újra a meghívócsomagot, hogy {naam} is benne legyen.',

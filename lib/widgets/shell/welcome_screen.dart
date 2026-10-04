@@ -391,17 +391,34 @@ class _WelcomeScreen extends ConsumerWidget {
     AppLocalizations l10n,
     ButtonStyle secondaryStyle,
   ) {
-    if (!supportsLocalProjectFolders || !ref.watch(formsRevealProvider)) {
+    if (!ref.watch(formsRevealProvider)) {
       return const [];
     }
     return [
+      // De respondentreis werkt ook op het web — het formulier wordt een
+      // document in een tabblad; pas de Inbox vraagt echte bestanden.
       _wideSecondaryButton(
         style: secondaryStyle,
-        icon: Icons.inbox_outlined,
-        label: Text(l10n.d('Inzendingen')),
-        onPressed: () => showFormInboxDialog(context),
+        icon: Icons.mail_outline,
+        label: Text(l10n.d('Uitnodiging openen…')),
+        onPressed: () => showFormIntakeInvitationDialog(
+          context,
+          onOpenPath: (path) =>
+              ref.read(tabsProvider.notifier).openFileByPath(path).then((_) {}),
+          onOpenText: (text) =>
+              ref.read(tabsProvider.notifier).newDocumentFromMarkdown(text),
+        ),
       ),
       const SizedBox(height: 10),
+      if (supportsLocalProjectFolders) ...[
+        _wideSecondaryButton(
+          style: secondaryStyle,
+          icon: Icons.inbox_outlined,
+          label: Text(l10n.d('Inzendingen')),
+          onPressed: () => showFormInboxDialog(context),
+        ),
+        const SizedBox(height: 10),
+      ],
     ];
   }
 

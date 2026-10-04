@@ -1647,6 +1647,180 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Сървърът не посочи кой формуляр принадлежи към това подаване — попълването тук не е възможно.',
+  ', {n} niet binnengehaald': ', {n} неизтеглени',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Сроковете за съхранение не са правилни: чернова най-много {draft} дни, подаване най-много {submitted} дни.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Формулярът е публикуван като версия {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Нова версия {n} е публикувана.',
+  'Organisatie: {organisatie}': 'Организация: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Директно към организатора на {server}. Потвърждаваш в отворения прозорец; нищо никога не се изпраща само.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Версия: {versie} — предишните версии остават неприкосновени.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Чрез OciServe · редакция {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Пръстов отпечатък: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} нови, {bijgewerkt} актуализирани, {ingetrokken} оттеглени{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Сървърът не е достъпен в момента. Опитай отново по-късно; нищо не е изпратено.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Твърде много опити поред. Изчакай малко и опитай отново.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Този адрес или код не изглежда правилен. Провери го и опитай отново.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Това не успя. Нищо не е изпратено — опитай отново.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Твоят имейл адрес доказва само, че имаш достъп до пощенската кутия — не е акаунт и нищо не се изпраща, докато сам не потвърдиш.',
+  'Je e-mailadres': 'Твоят имейл адрес',
+  'Code aanvragen': 'Поискай код',
+  'Opnieuw versturen': 'Изпрати отново',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Повторно изпращане е възможно след {seconden} секунди.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Код е на път към този адрес (дори ако адресът не съществува — тук няма да разбереш).',
+  'Code uit de e-mail': 'Код от имейла',
+  'Code controleren': 'Провери кода',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Това подаване не може да се изпрати сега — то е затворено, оттеглено или няма отворен кръг за корекции. Работата ти е в безопасност в този файл; запази я като zip, за да я изпратиш.',
+  'Het pakket wordt verstuurd…': 'Пакетът се изпраща…',
+  'De inzending wordt vastgelegd…': 'Подаването се записва…',
+  'De inzending wordt ingetrokken…': 'Подаването се оттегля…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Достъпът изтече. Поискай нов код чрез връзката за връщане; работата ти е в безопасност в този файл.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Пакетът е твърде голям за изпращане. Премахни снимка и опитай отново — или го запази като zip и изпрати него.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Сървърът не получи точно това, което беше изпратено. Нищо не е записано; опитай отново.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Сървърът отговори нещо неочаквано. Нищо не е записано; опитай по-късно.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Сървърът не е достъпен в момента. Нищо не е изпратено — работата ти е в безопасност в този файл.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Изпращането не успя. Нищо не е записано — работата ти е в безопасност в този файл; запази я като zip, за да я изпратиш.',
+  'Verzenden via OciServe': 'Изпрати чрез OciServe',
+  'Bestemming: {server}': 'Дестинация: {server}',
+  'Doel: {doelen}': 'Цел: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Съхранение: {dagen} дни след подаване.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Този формуляр в момента не приема нови подавания.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Формулярът не можа да бъде изтеглен. Все пак можеш да запазиш работата си като zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Нищо не се изпраща, докато не потвърдиш по-долу. Запазването като zip винаги е възможно.',
+  'Insturen…': 'Изпрати…',
+  'Correctie insturen…': 'Изпрати корекция…',
+  'Inzending bijwerken…': 'Актуализирай подаването…',
+  'Inzending intrekken…': 'Оттегли подаването…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Това става редакция {n} на твоето подаване на {server}. След изпращане вече не можеш да го променяш — грешка се поправя с нов кръг за корекции.',
+  'Definitief insturen': 'Изпрати окончателно',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Оттеглянето премахва подаването ти при организатора и не може да бъде отменено. Искаш ли да продължиш?',
+  'Verstuurd als revisie {n}.': 'Изпратено като редакция {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Ще получиш връзка за връщане по имейл. Тази връзка отваря подаването ти само заедно с нов код — самата връзка не е ключ.',
+  'Je inzending is ingetrokken.': 'Подаването ти е оттеглено.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Сървърът не е достъпен в момента. Провери връзката и опитай по-късно.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Връзката не сработи. Провери я и опитай отново.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Това не е покана или връзка за връщане, която OciDeck познава. Връзката започва с https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Тази публикация не съдържа формуляр, който OciDeck може да попълни.',
+  'Bewaar het formulier om in te vullen': 'Запази формуляра за попълване',
+  'Formulieruitnodiging': 'Покана за формуляр',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Постави поканата или връзката за връщане, която получи. Самата връзка не е ключ — за твоето подаване винаги е нужен нов код.',
+  'Uitnodigings- of terugkeerlink': 'Покана или връзка за връщане',
+  'Link openen': 'Отвори връзката',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Тази връзка сочи към твоето подаване на {server}. За отварянето ѝ е нужен нов код — самата връзка никога не е достатъчна.',
+  'Deze link wijst naar {server}.': 'Тази връзка сочи към {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Имаш чернова тук (редакция {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Подаването ти е получено (редакция {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Организаторът поиска корекция: твоята промяна става редакция {n}.',
+  'Deze inzending is ingetrokken.': 'Това подаване е оттеглено.',
+  'Formulier invullen': 'Попълни формуляра',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Попълваш на собственото си устройство; нищо не се изпраща, докато сам не потвърдиш.',
+  'Als behandeld gemarkeerd op de server.':
+      'Маркирано като обработено на сървъра.',
+  'Als behandeld markeren': 'Маркирай като обработено',
+  'Als nieuwe versie publiceren': 'Публикувай като нова версия',
+  'Correctie achteraf toestaan': 'Разреши последваща корекция',
+  'Correctieronde geopend op de server.':
+      'Кръг за корекции отворен на сървъра.',
+  'Correctieronde openen': 'Отвори кръг за корекции',
+  'Correctieronde openen…': 'Отвори кръг за корекции…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Срок за корекции (дни, празно = без край)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Това не успя на сървъра. Нищо не се промени.',
+  'De correctietermijn klopt niet.': 'Срокът за корекции не е правилен.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Попълващият тогава може да изпрати нова версия. Предишното му подаване остава непроменено.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Подаването изчезва при OciServe; регистърът за изчистване там отбелязва какво е отишло. Това, което е в твоята работна папка, остава — почистваш го отделно.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Сървърът не е достъпен в момента. Нищо не е публикувано — опитай по-късно.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Сървърът не е достъпен в момента. Нищо не се промени — опитай по-късно.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Сподели тази покана с тези, които искаш да попълнят формуляра. Връзката сочи само към формуляра — тя не отваря подавания.',
+  'Dit gaat er naartoe': 'Там отива',
+  'Doelen (één per regel)': 'Цели (по една на ред)',
+  'Inzending bewaren (dagen)': 'Пази подаване (дни)',
+  'Inzending opschonen op de server': 'Изчисти подаването на сървъра',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Нямаш право да публикуваш този формуляр там. Провери организацията и правата си.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Нямаш право да правиш това на сървъра. Провери организацията и правата си.',
+  'Link kopiëren': 'Копирай връзката',
+  'Naam voor de organisatie': 'Име за организацията',
+  'Ontwerp bewaren (dagen)': 'Пази чернова (дни)',
+  'Opschonen ingepland op de server.': 'Изчистването е планирано на сървъра.',
+  'Opschonen op de server': 'Изчисти на сървъра',
+  'Opschonen op de server…': 'Изчисти на сървъра…',
+  'Privacytekst': 'Текст за поверителност',
+  'Publiceren': 'Публикувай',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Публикуването не успя. Нищо не се промени на сървъра.',
+  'Publiceren via OciServe': 'Публикувай чрез OciServe',
+  'Server: {server}': 'Сървър: {server}',
+  'Titel die de invuller ziet': 'Заглавие, което попълващият вижда',
+  'Vul een naam en een titel in.': 'Въведи име и заглавие.',
+  'Vul minstens één doel in — per regel één.':
+      'Въведи поне една цел — по една на ред.',
+  'Waarom (niet verplicht)': 'Защо (незадължително)',
+  'Weer als open gemarkeerd op de server.':
+      'Отново маркирано като отворено на сървъра.',
+  'Weer als open markeren': 'Маркирай отново като отворено',
+  'correctieronde open': 'корекция отворена',
+  'ingediend': 'подадено',
+  'ingetrokken': 'оттеглено',
+  'ontwerp': 'чернова',
+  'Insturen via OciServe…': 'Изпрати чрез OciServe…',
+  'Ophalen van OciServe': 'Изтегли от OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Публикувай формуляр като фиксирана версия на вашия OciServe и сподели поканата.',
+  'Publiceren via OciServe…': 'Публикувай чрез OciServe…',
+  'Uitnodiging openen…': 'Отвори поканата…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'сървърът не е достъпен сега; нищо не се промени.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'нямаш право да четеш тези подавания там — провери организацията и правата си.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'изтеглянето не успя; нищо не се промени.',
   'Offline uitnodigingspakket maken…': 'Създаване на офлайн пакет за покана…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} е добавен. Направете пакета за покана отново, за да включите {naam}.',

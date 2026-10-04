@@ -1633,6 +1633,177 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Server neuviedol, ktorý formulár patrí k tomuto podaniu — vyplniť ho tu nie je možné.',
+  ', {n} niet binnengehaald': ', {n} nestiahnuté',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Doby uchovania nie sú správne: koncept maximálne {draft} dní, podanie maximálne {submitted} dní.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formulár publikovaný ako verzia {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Nová verzia {n} publikovaná.',
+  'Organisatie: {organisatie}': 'Organizácia: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Priamo organizátorovi na {server}. Potvrdíš v okne, ktoré sa otvorí; nikdy sa nič neposiela samo.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Verzia: {versie} — predchádzajúce verzie zostávajú nedotknuteľné.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Cez OciServe · revízia {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Odtlačok: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} nových, {bijgewerkt} aktualizovaných, {ingetrokken} stiahnutých{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Server nie je teraz dostupný. Skús to neskôr znova; nič nebolo odoslané.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Príliš veľa pokusov za sebou. Počkaj chvíľu a skús to znova.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Táto adresa alebo kód nevyzerá správne. Skontroluj ho a skús to znova.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'To sa nepodarilo. Nič nebolo odoslané — skús to znova.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Tvoja e-mailová adresa dokazuje len to, že máš prístup k schránke — nie je to účet a nič sa neodošle, kým sám nepotvrdíš.',
+  'Je e-mailadres': 'Tvoja e-mailová adresa',
+  'Code aanvragen': 'Vyžiadať kód',
+  'Opnieuw versturen': 'Odoslať znova',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Znova odoslať môžeš o {seconden} sekúnd.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Kód je na ceste na túto adresu (aj keď adresa neexistuje — to sa tu nedozvieš).',
+  'Code uit de e-mail': 'Kód z e-mailu',
+  'Code controleren': 'Overiť kód',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Toto podanie sa teraz nedá odoslať — je uzavreté, stiahnuté alebo nie je otvorené kolo opráv. Tvoja práca je v tomto súbore v bezpečí; ulož ho ako zip, aby sa dal poslať.',
+  'Het pakket wordt verstuurd…': 'Balík sa odosiela…',
+  'De inzending wordt vastgelegd…': 'Podanie sa zaznamenáva…',
+  'De inzending wordt ingetrokken…': 'Podanie sa sťahuje…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Prístup vypršal. Požiadaj o nový kód cez spätný odkaz; tvoja práca je v tomto súbore v bezpečí.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Balík je príliš veľký na odoslanie. Odoberte fotku a skúste to znova — alebo ho uložte ako zip a pošlite ten.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Server nedostal presne to, čo bolo odoslané. Nič sa nezaznamenalo; skús to znova.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Server odpovedal niečo nečakané. Nič sa nezaznamenalo; skús to neskôr.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Server nie je teraz dostupný. Nič nebolo odoslané — tvoja práca je v tomto súbore v bezpečí.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Odoslanie sa nepodarilo. Nič sa nezaznamenalo — tvoja práca je v tomto súbore v bezpečí; ulož ho ako zip, aby sa dal poslať.',
+  'Verzenden via OciServe': 'Odoslať cez OciServe',
+  'Bestemming: {server}': 'Cieľ: {server}',
+  'Doel: {doelen}': 'Účel: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.': 'Uchovanie: {dagen} dní po podaní.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Tento formulár teraz neprijíma nové podania.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Formulár sa nepodarilo načítať. Svoju prácu si môžeš aj tak uložiť ako zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Nič sa neodošle, kým nižšie nepotvrdíš. Uloženie ako zip je vždy možné.',
+  'Insturen…': 'Odoslať…',
+  'Correctie insturen…': 'Odoslať opravu…',
+  'Inzending bijwerken…': 'Aktualizovať podanie…',
+  'Inzending intrekken…': 'Stiahnuť podanie…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Toto sa stane revíziou {n} tvojho podania na {server}. Po odoslaní ho už nemôžeš meniť — chybu napraví nové kolo opráv.',
+  'Definitief insturen': 'Odoslať definitívne',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Stiahnutie odstráni tvoje podanie u organizátora a nedá sa vrátiť späť. Chceš pokračovať?',
+  'Verstuurd als revisie {n}.': 'Odoslané ako revízia {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Dostaneš spätný odkaz e-mailom. Ten odkaz otvorí tvoje podanie iba spolu s novým kódom — samotný odkaz nie je kľúč.',
+  'Je inzending is ingetrokken.': 'Tvoje podanie bolo stiahnuté.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Server nie je teraz dostupný. Skontroluj odkaz a skús to neskôr.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Odkaz nefungoval. Skontroluj ho a skús to znova.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'To nie je pozývací ani spätný odkaz, ktorý OciDeck pozná. Odkaz začína na https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Táto publikácia neobsahuje formulár, ktorý OciDeck vie vyplniť.',
+  'Bewaar het formulier om in te vullen': 'Ulož formulár na vyplnenie',
+  'Formulieruitnodiging': 'Pozvánka k formuláru',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Vlož pozývací alebo spätný odkaz, ktorý si dostal. Samotný odkaz nie je kľúč — na tvoje podanie je vždy potrebný nový kód.',
+  'Uitnodigings- of terugkeerlink': 'Pozývací alebo spätný odkaz',
+  'Link openen': 'Otvoriť odkaz',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Tento odkaz smeruje na tvoje podanie na {server}. Na jeho otvorenie je potrebný nový kód — samotný odkaz nikdy nestačí.',
+  'Deze link wijst naar {server}.': 'Tento odkaz smeruje na {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Máš tu koncept (revízia {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Tvoje podanie dorazilo (revízia {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Organizátor požiadal o opravu: tvoja zmena sa stane revíziou {n}.',
+  'Deze inzending is ingetrokken.': 'Toto podanie bolo stiahnuté.',
+  'Formulier invullen': 'Vyplniť formulár',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Vyplňuješ na vlastnom zariadení; nič sa neodošle, kým sám nepotvrdíš.',
+  'Als behandeld gemarkeerd op de server.': 'Na serveri označené ako vybavené.',
+  'Als behandeld markeren': 'Označiť ako vybavené',
+  'Als nieuwe versie publiceren': 'Publikovať ako novú verziu',
+  'Correctie achteraf toestaan': 'Povoliť neskoršiu opravu',
+  'Correctieronde geopend op de server.': 'Kolo opráv otvorené na serveri.',
+  'Correctieronde openen': 'Otvoriť kolo opráv',
+  'Correctieronde openen…': 'Otvoriť kolo opráv…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Lehota na opravy (dni, prázdne = bez konca)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Na serveri sa to nepodarilo. Nič sa nezmenilo.',
+  'De correctietermijn klopt niet.': 'Lehota na opravy nie je správna.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Vyplňujúci potom môže odoslať novú verziu. Jeho skoršie podanie zostáva nezmenené.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Podanie zmizne na OciServe; register čistenia tam zaznamenáva, čo odišlo. Čo je v tvojom pracovnom priečinku, ostáva — to upraceš osobitne.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Server nie je teraz dostupný. Nič nebolo publikované — skús to neskôr.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Server nie je teraz dostupný. Nič sa nezmenilo — skús to neskôr.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Zdieľaj tento pozývací odkaz s tým, koho chceš nechať vyplniť formulár. Odkaz smeruje len na formulár — neotvára podania.',
+  'Dit gaat er naartoe': 'Tam to ide',
+  'Doelen (één per regel)': 'Účely (jeden na riadok)',
+  'Inzending bewaren (dagen)': 'Uchovávať podanie (dni)',
+  'Inzending opschonen op de server': 'Vyčistiť podanie na serveri',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Tento formulár tam publikovať nesmieš. Skontroluj organizáciu a svoje práva.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Toto na serveri nesmieš. Skontroluj organizáciu a svoje práva.',
+  'Link kopiëren': 'Skopírovať odkaz',
+  'Naam voor de organisatie': 'Názov pre organizáciu',
+  'Ontwerp bewaren (dagen)': 'Uchovávať koncept (dni)',
+  'Opschonen ingepland op de server.': 'Vyčistenie naplánované na serveri.',
+  'Opschonen op de server': 'Vyčistiť na serveri',
+  'Opschonen op de server…': 'Vyčistiť na serveri…',
+  'Privacytekst': 'Text o súkromí',
+  'Publiceren': 'Publikovať',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Publikovanie sa nepodarilo. Na serveri sa nič nezmenilo.',
+  'Publiceren via OciServe': 'Publikovať cez OciServe',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Názov, ktorý vidí vyplňujúci',
+  'Vul een naam en een titel in.': 'Zadaj názov a titulok.',
+  'Vul minstens één doel in — per regel één.':
+      'Zadaj aspoň jeden účel — jeden na riadok.',
+  'Waarom (niet verplicht)': 'Prečo (nepovinné)',
+  'Weer als open gemarkeerd op de server.':
+      'Na serveri znova označené ako otvorené.',
+  'Weer als open markeren': 'Označiť znova ako otvorené',
+  'correctieronde open': 'oprava otvorená',
+  'ingediend': 'odoslané',
+  'ingetrokken': 'stiahnuté',
+  'ontwerp': 'koncept',
+  'Insturen via OciServe…': 'Odoslať cez OciServe…',
+  'Ophalen van OciServe': 'Načítať z OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Publikuj formulár ako pripnutú verziu na vašom OciServe a zdieľaj pozývací odkaz.',
+  'Publiceren via OciServe…': 'Publikovať cez OciServe…',
+  'Uitnodiging openen…': 'Otvoriť pozvánku…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'server nie je teraz dostupný; nič sa nezmenilo.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'tieto podania tam čítať nesmieš — skontroluj organizáciu a svoje práva.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'načítanie sa nepodarilo; nič sa nezmenilo.',
   'Offline uitnodigingspakket maken…': 'Vytvoriť offline balík pozvánky…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} bol(a) pridaný(á). Vytvorte balík pozvánky znova, aby zahŕňal {naam}.',

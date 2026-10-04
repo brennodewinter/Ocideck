@@ -29,10 +29,6 @@ const Set<String> deadCodeAllowlist = {
   // CLI-entrypoint `tool/scan_asset_rights.dart` imports this package library;
   // the checker starts at Flutter mains and therefore cannot see that edge.
   'services/asset_rights_repository_scanner.dart',
-  // #2262 lands the Managed-Intake respondent transport as contract boundary;
-  // #2260 (the user journey, same epic) is its first consumer — this entry
-  // expires the moment that issue wires it into a screen or provider.
-  'services/ociserve/ociserve_intake_respondent.dart',
   // An entry here is a promise that the
   // file is reached by a mechanism the static walk cannot follow; it is not a
   // parking spot for "not wired up yet". `services/cvss/cvss4.dart` sat here

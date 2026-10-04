@@ -666,6 +666,178 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'E servidor no a indiká ki formular ta perené na e entrega aki — no ta posible pa yene\'é akí.',
+  ', {n} niet binnengehaald': ', {n} no hañá',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'E terminonan di konservashon no ta korekto: un brouw maksimo {draft} dia, un entrega maksimo {submitted} dia.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formulario publiká komo vershon {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Vershon nobo {n} publiká.',
+  'Organisatie: {organisatie}': 'Organisashon: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Direkto na e organisadó na {server}. Bo ta konfirmá den e bentana ku ta habri; nada ta wordu mandá outomátikamente.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Vershon: {versie} — vershonnan anterior ta keda intokabel.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Via OciServe · revishon {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Sello: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} nobo, {bijgewerkt} aktualisá, {ingetrokken} retirá{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'E servidor no ta alkansá awor. Purba atrobe despues; nada a wordu mandá.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Demasiado intento un tras di otro. Spera un rato i purba atrobe.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'E adres of e kodigo aki no ta korekto. Verifik\'é i purba atrobe.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'E no a fungi. Nada a wordu mandá — purba atrobe.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Bo e-mail ta pruhbá so ku bo por yega na e buzon — no ta un kuenta i nada ta wordu mandá te ora bo konfirmá.',
+  'Je e-mailadres': 'Bo e-mail',
+  'Code aanvragen': 'Pidi kodigo',
+  'Opnieuw versturen': 'Manda atrobe',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Bo por manda atrobe den {seconden} sekunde.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Un kodigo ta kaminda pa e adres aki (asta si e adres no eksistí — esey bo n\' ta haña aki).',
+  'Code uit de e-mail': 'Kodigo for di e-mail',
+  'Code controleren': 'Verifiká kodigo',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'E entrega aki no por wordu mandá awor — e ta será, keda di bèk of no tin un rondon di korekshon habrí. Bo trabou ta seif den e artíkulo aki; ward\'e komo zip pa mand\'é.',
+  'Het pakket wordt verstuurd…': 'E pakete ta wordu mandá…',
+  'De inzending wordt vastgelegd…': 'E entrega ta wordu registrá…',
+  'De inzending wordt ingetrokken…': 'E entrega ta wordu retirá…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'E akseso a kaduká. Pidi un kodigo nobo via e link di regreso; bo trabou ta seif den e artíkulo aki.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'E pakete ta muchu grandi pa mandá. Kit\' un potrèt i purba atrobe — of ward\'e komo zip i mand\'esey.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'E servidor no a risibí eksaktamente loke a wordu mandá. Nada a wordu registrá; purba atrobe.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'E servidor a kontestá algu inesperá. Nada a wordu registrá; purba atrobe despues.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'E servidor no ta alkansá awor. Nada a wordu mandá — bo trabou ta seif den e artíkulo aki.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Manda no a fungi. Nada a wordu registrá — bo trabou ta seif den e artíkulo aki; ward\'e komo zip pa mand\'é.',
+  'Verzenden via OciServe': 'Manda via OciServe',
+  'Bestemming: {server}': 'Destino: {server}',
+  'Doel: {doelen}': 'Meta: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Konservá: {dagen} dia despues di entrega.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'E formulario aki no ta aseptá entrega nobo awor.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'E formulario no por a wordu haña. Bo por warda bo trabou komo zip atrobe.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Nada ta wordu mandá te ora bo konfirmá abou. Ward\'a komo zip semper ta posibel.',
+  'Insturen…': 'Manda…',
+  'Correctie insturen…': 'Manda korekshon…',
+  'Inzending bijwerken…': 'Aktualisá entrega…',
+  'Inzending intrekken…': 'Retirá entrega…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Esaki ta bira revishon {n} di bo entrega na {server}. Despues di mand\'a bo no por kambi\'é mas — un fout ta wordu drechá ku un rondon di korekshon nobo.',
+  'Definitief insturen': 'Manda definitivamente',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Retirá ta kita bo entrega di e organisadó i no por wordu deshasé. Bo kier sigui?',
+  'Verstuurd als revisie {n}.': 'Mandá komo revishon {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Bo ta haña un link di regreso via e-mail. E link aki ta habri bo entrega solamente huntu ku un kodigo nobo — e link so no ta un yabi.',
+  'Je inzending is ingetrokken.': 'Bo entrega a wordu retirá.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'E servidor no ta alkansá awor. Verifiká e link i purba atrobe despues.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'E link no a fungi. Verifik\'é i purba atrobe.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Esey no ta un link di invitashon òf di regreso ku OciDeck konosé. Un link ta kuminsá ku https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'E publikashon aki no ta kontené un formulario ku OciDeck por yena.',
+  'Bewaar het formulier om in te vullen': 'Ward\'a e formulario pa yena',
+  'Formulieruitnodiging': 'Invitashon di formulario',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Pega e link di invitashon òf di regreso ku bo a risibí. E link mes no ta un yabi — pa bo entrega semper un kodigo nobo ta nesesario.',
+  'Uitnodigings- of terugkeerlink': 'Link di invitashon òf di regreso',
+  'Link openen': 'Habri link',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'E link aki ta punt\'ra na bo entrega na {server}. Pa habr\'é un kodigo nobo ta nesesario — e link so nunka ta sufisiente.',
+  'Deze link wijst naar {server}.': 'E link aki ta punt\'ra na {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Bo tin un brouw aki (revishon {n}).',
+  'Je inzending is binnen (revisie {n}).': 'Bo entrega a yega (revishon {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'E organisadó a pidi un korekshon: bo kambio ta bira revishon {n}.',
+  'Deze inzending is ingetrokken.': 'E entrega aki a wordu retirá.',
+  'Formulier invullen': 'Yena formulario',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Bo ta yena na bo mesun aparato; nada ta wordu mandá te ora bo mes konfirmá.',
+  'Als behandeld gemarkeerd op de server.': 'Marká komo atendí na e servidor.',
+  'Als behandeld markeren': 'Marká komo atendí',
+  'Als nieuwe versie publiceren': 'Publiká komo vershon nobo',
+  'Correctie achteraf toestaan': 'Permití korekshon despues',
+  'Correctieronde geopend op de server.':
+      'Rondon di korekshon habrí na e servidor.',
+  'Correctieronde openen': 'Habri rondon di korekshon',
+  'Correctieronde openen…': 'Habri rondon di korekshon…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Termino di korekshon (dia, bashí = sin fin)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'E no a fungi na e servidor. Nada a kambia.',
+  'De correctietermijn klopt niet.': 'E termino di korekshon no ta korekto.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'E yena\'lo por manda un vershon nobo. Su entrega anterior ta keda sin kambio.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'E entrega ta disparsé na OciServe; e registro di limpiesa ei ta tene nota di loke a bai. Loke tin den bo karpeta ta keda — esey bo ta limpia apart.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'E servidor no ta alkansá awor. Nada a wordu publiká — purba atrobe despues.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'E servidor no ta alkansá awor. Nada a kambia — purba atrobe despues.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Kompártí e link di invitashon aki ku ken bo kier a yena e formulario. E link ta punt\'ra so na e formulario — e no ta habri entreganan.',
+  'Dit gaat er naartoe': 'Pa unda e ta bai',
+  'Doelen (één per regel)': 'Metanan (un pa liña)',
+  'Inzending bewaren (dagen)': 'Ward\'a entrega (dia)',
+  'Inzending opschonen op de server': 'Limpia entrega na e servidor',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Bo no por publiká e formulario aki ei. Verifiká e organisashon i bo derechenan.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Bo no por hasi esaki na e servidor. Verifiká e organisashon i bo derechenan.',
+  'Link kopiëren': 'Kopia link',
+  'Naam voor de organisatie': 'Nòmber pa e organisashon',
+  'Ontwerp bewaren (dagen)': 'Ward\'a brouw (dia)',
+  'Opschonen ingepland op de server.': 'Limpiesa planifika na e servidor.',
+  'Opschonen op de server': 'Limpia na e servidor',
+  'Opschonen op de server…': 'Limpia na e servidor…',
+  'Privacytekst': 'Teksto di privashon',
+  'Publiceren': 'Publiká',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Publiká no a fungi. Nada a kambia na e servidor.',
+  'Publiceren via OciServe': 'Publiká via OciServe',
+  'Server: {server}': 'Servidor: {server}',
+  'Titel die de invuller ziet': 'Título ku e yena\'lo ta mira',
+  'Vul een naam en een titel in.': 'Yena un nòmber i un título.',
+  'Vul minstens één doel in — per regel één.':
+      'Yena por lo menos un meta — un pa liña.',
+  'Waarom (niet verplicht)': 'Pakiko (no obligatorio)',
+  'Weer als open gemarkeerd op de server.':
+      'Marká komo habrí atrobe na e servidor.',
+  'Weer als open markeren': 'Marká komo habrí atrobe',
+  'correctieronde open': 'korekshon habrí',
+  'ingediend': 'mandá',
+  'ingetrokken': 'retirá',
+  'ontwerp': 'brouw',
+  'Insturen via OciServe…': 'Manda via OciServe…',
+  'Ophalen van OciServe': 'Haña di OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Publiká un formulario komo vershon fihá na boso OciServe i kompartí e link di invitashon.',
+  'Publiceren via OciServe…': 'Publiká via OciServe…',
+  'Uitnodiging openen…': 'Habri invitashon…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'e servidor no ta alkansá; nada a kambia.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'bo no por lesa e entreganan aki ei — verifiká e organisashon i bo derechenan.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'haña no a fungi; nada a kambia.',
   'Offline uitnodigingspakket maken…':
       'Krea un pakete di invitashon sin konekshon…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':

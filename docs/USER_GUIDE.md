@@ -5851,6 +5851,22 @@ bundle was changed, belongs to another form or text, or has expired; the form ha
 day); or the submission is larger than the organiser allows. The plain zip stays available beside it. **Not in the
 web version:** the encryption library does not run there yet, so there the button is not offered.
 
+**Submitting via OciServe.** If you received an **invitation link** (starts with `https://`, for example
+`…/api/v1/intake/forms/…`), open it with **Uitnodiging openen…** on the welcome screen — including in the
+web version, where the form becomes an ordinary document in a tab. On a regular computer you save the form
+as an `.md` file; OciDeck places a small `….md.intake.json` file beside it holding only *references*
+(which server, which form, which submission) — no codes, no keys. Fill in the form as usual and choose
+**Insturen via OciServe…** on the Fill tab. That button only appears on a document that came from an
+invitation. The window first shows where it is going — which server, which form, how long the organiser
+keeps it — and sends only after you confirm. At every step that touches the submission (submitting,
+resuming, correcting, withdrawing) OciDeck asks for your **email address** and the server mails a
+**one-time code**; that code only proves you can reach the mailbox — it is not an account, a password or
+a key. After submitting you receive a **return link** by email; it opens your submission together with a
+fresh code — the link alone is not a key and can safely be kept. When a **correction round** is open you
+submit a new version; earlier versions stay on the server. **Inzending intrekken…** removes it from the
+organiser. If something fails — server down, code expired — the window says that nothing was recorded and
+your work is safe in your document; saving as a zip and sending it yourself always remains possible.
+
 ### Receiving submissions (organiser)
 
 The other side of a form is receiving what comes back. It is an optional extension: switch on
@@ -5998,6 +6014,23 @@ A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json`
 arrived plus its photos, in one step: a crash never leaves half a submission, and a submission that
 is already there is never overwritten. One with an error still lands, with the status `needs-fixing`,
 so you can work on it in a copy; nothing is accepted or dropped silently.
+
+**Publishing via OciServe.** When you are signed in to OciServe (the same server as for eLearning), the
+forms row also has **Publiceren via OciServe…**. You pick the form and the organisation, and fill in what
+the respondent will see: title, purposes, privacy text, how long a draft and a submitted submission are
+kept, and whether correcting afterwards is allowed (and within how many days). Every publication is a
+**fixed version**: a changed text becomes version n+1, earlier versions never change. The window then
+shows the **invitation link** to share — it points only at the form and opens no submissions. The link
+lives in `forms/<form>/intake.json` in the workspace and travels with the folder.
+
+**Ophalen van OciServe** fetches submissions on request — there is no background task and nothing is
+polled. Per form the line below reports how many came in new, updated or withdrawn and how many failed;
+what arrives lands through the same import as a zip and gets the same rules (the original is never
+overwritten). Below an OciServe submission sit three server buttons: **Correctieronde openen…** (the
+respondent may submit a new version; the old one stays), **Als behandeld markeren** / **Weer als open
+markeren**, and **Opschonen op de server…** — that asks for a confirmation and clears the submission only
+at OciServe; what sits in your workspace stays and you clean it separately. If the server or your rights
+fail, the button says nothing changed.
 
 **The register** (`overview.md`, *Register openen*) is one Markdown table with a row per submission:
 its id, the columns the form names in `overview=`, the day received, the status, the day of consent,

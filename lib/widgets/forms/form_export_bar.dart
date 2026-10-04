@@ -13,10 +13,12 @@ import 'package:material_ui/material_ui.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../services/form/form_intake_context.dart';
 import '../../services/form/form_submission_export.dart';
 import '../../services/form/form_submission_seal.dart';
 import 'form_export_support.dart';
 import 'form_fingerprint_dialog.dart';
+import 'form_intake_send_dialog.dart';
 
 class FormExportBar extends StatefulWidget {
   const FormExportBar({
@@ -230,6 +232,72 @@ class _FormExportBarState extends State<FormExportBar> {
     FormSubmissionSealed() => '',
   };
 
+  /// Insturen via OciServe (FORM_INTAKE.md §6.4): hetzelfde pakket als de
+  /// zip, maar dan naar de server uit de uitnodiging. Versturen is een eigen
+  /// bevestigde stap in het venster; hier wordt alleen het pakket gebouwd.
+  Future<void> _send(FormIntakeContext intakeContext) async {
+    final fill = widget.fill;
+    if (!fill.canSend) {
+      widget.onBlocked();
+      return;
+    }
+    setState(() => _busy = true);
+    try {
+      final result = await _build(fill, widget.support);
+      if (result == null || !mounted) return;
+      final built = result.built;
+      if (built is! FormSubmissionBuilt) {
+        _reportBuildFailure(built);
+        return;
+      }
+      final updated = await showFormIntakeSendDialog(
+        context,
+        intakeContext: intakeContext,
+        package: built.bytes,
+      );
+      if (updated != null) {
+        await widget.support.intake?.save(fill.spec, updated);
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  /// De verzendknop als dit document bij een OciServe-uitnodiging hoort; de
+  /// context van een padloos document zit in het sessiegeheugen, een gewoon
+  /// document heeft hem niet en dan is er gewoon geen knop.
+  Widget _sendSection(AppLocalizations l10n, ThemeData theme) {
+    final intake = widget.support.intake;
+    if (intake == null) return const SizedBox.shrink();
+    return FutureBuilder<FormIntakeContext?>(
+      future: intake.load(widget.fill.spec),
+      builder: (context, snapshot) {
+        final intakeContext = snapshot.data;
+        if (intakeContext == null) return const SizedBox.shrink();
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            Text(
+              l10n
+                  .d(
+                    'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.',
+                  )
+                  .replaceAll('{server}', intakeContext.baseUrl),
+              style: theme.textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 12),
+            OutlinedButton.icon(
+              onPressed: _busy ? null : () => _send(intakeContext),
+              icon: const Icon(Icons.send_outlined),
+              label: Text(l10n.d('Insturen via OciServe…')),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   /// Het pakket, met het gepubliceerde formulier waarmee het gebouwd is. `null` als
   /// de invuller geen formulier kiest.
   Future<({FormSubmissionResult built, String published})?> _build(
@@ -314,6 +382,7 @@ class _FormExportBarState extends State<FormExportBar> {
               label: Text(l10n.d('Verzegeld opslaan…')),
             ),
           ],
+          _sendSection(l10n, theme),
         ],
       ),
     );
