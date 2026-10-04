@@ -1,5 +1,14 @@
 # OciDeck — Intake protocol, version 1
 
+> **SUPERSEDED — DO NOT BUILD ON THIS (2026-10-04).** The standalone blind intake
+> server (*OciIntake*) is replaced by **OciServe Managed Intake** —
+> [`FORM_INTAKE.md`](FORM_INTAKE.md) revision 4, whose contract is upstream
+> (OciServe ADR 0016 and `docs/openapi.yaml`, tags `Intake`/`IntakeRespondent`).
+> This protocol was merged but **never released**; it is kept here only as
+> history and is removed together with its code under issue #2263. Nothing in it
+> — the `/v1` routes, the invite token, signed organiser requests, ciphertext
+> receipts, the withdrawal secret — is a source of truth for what gets built.
+>
 > **Status:** the contract of phase 4 of [`FORM_INTAKE.md`](FORM_INTAKE.md) (§6, §12) — **specified; the server is not built yet** · **Status last reviewed:** 2026-10-03 · **Published by:** Stichting LibreKAT
 >
 > **Licence:** this document is **CC-BY-4.0**; the test vectors in
