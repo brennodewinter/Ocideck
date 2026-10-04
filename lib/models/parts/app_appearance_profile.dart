@@ -38,52 +38,29 @@ class AppAppearanceProfile extends foundation.AppAppearanceProfile {
   /// pubspec.yaml so they work on desktop, the hardened web build, and export.
   static const uiFonts = ['Roboto', 'Inter', 'Lora', 'EB Garamond'];
 
-  static const basic = AppAppearanceProfile(
-    name: 'Basic',
-    isBuiltIn: true,
-    primaryColor: '#1C2B47',
-    accentColor: '#2563EB',
-    backgroundColor: '#F8F9FA',
-    surfaceColor: '#FFFFFF',
-    textColor: '#1E293B',
-    mutedTextColor: '#64748B',
-    // EU-vlagblauw voor de bovenbalk/panelen (huisstijl), i.p.v. near-black.
-    panelColor: '#003399',
-    panelTextColor: '#FFFFFF',
+  static final basic = _fromFoundation(foundation.AppAppearanceProfile.basic);
+  static final europa = _fromFoundation(foundation.AppAppearanceProfile.europa);
+  static final dark = _fromFoundation(foundation.AppAppearanceProfile.dark);
+
+  static final builtIns = <AppAppearanceProfile>[basic, europa, dark];
+
+  static AppAppearanceProfile _fromFoundation(
+    foundation.AppAppearanceProfile profile,
+  ) => AppAppearanceProfile(
+    name: profile.name,
+    isBuiltIn: profile.isBuiltIn,
+    isDark: profile.isDark,
+    primaryColor: profile.primaryColor,
+    accentColor: profile.accentColor,
+    backgroundColor: profile.backgroundColor,
+    surfaceColor: profile.surfaceColor,
+    textColor: profile.textColor,
+    mutedTextColor: profile.mutedTextColor,
+    panelColor: profile.panelColor,
+    panelTextColor: profile.panelTextColor,
+    // OciDeck bundles Roboto; AppFoundation deliberately has no font policy.
+    fontFamily: 'Roboto',
   );
-
-  static const europa = AppAppearanceProfile(
-    name: 'Europa',
-    isBuiltIn: true,
-    primaryColor: '#003399',
-    accentColor: '#FFCC00',
-    backgroundColor: '#F4F7FC',
-    surfaceColor: '#FFFFFF',
-    textColor: '#003399',
-    mutedTextColor: '#5D6B85',
-    // Zelfde EU-vlagblauw als de bovenbalk-keuze in het Basic-profiel.
-    panelColor: '#003399',
-    panelTextColor: '#FFFFFF',
-  );
-
-  static const dark = AppAppearanceProfile(
-    name: 'Donker',
-    isBuiltIn: true,
-    isDark: true,
-    primaryColor: '#111827',
-    accentColor: '#60A5FA',
-    backgroundColor: '#0F172A',
-    surfaceColor: '#1E293B',
-    textColor: '#F1F5F9',
-    mutedTextColor: '#94A3B8',
-    panelColor: '#090E1A',
-    panelTextColor: '#E2E8F0',
-  );
-
-  static const builtIns = [basic, europa, dark];
-
-  @override
-  String get fontFamily => super.fontFamily!;
 
   @override
   AppAppearanceProfile copyWith({
@@ -113,9 +90,7 @@ class AppAppearanceProfile extends foundation.AppAppearanceProfile {
       mutedTextColor: mutedTextColor ?? this.mutedTextColor,
       panelColor: panelColor ?? this.panelColor,
       panelTextColor: panelTextColor ?? this.panelTextColor,
-      // OciDeck bundelt en vereist een expliciet font; de productneutrale
-      // `useSystemFont`-keuze van de basislaag past niet bij dit contract.
-      fontFamily: useSystemFont ? 'Roboto' : fontFamily ?? this.fontFamily,
+      fontFamily: useSystemFont ? null : fontFamily ?? this.fontFamily,
     );
   }
 
@@ -140,7 +115,12 @@ class AppAppearanceProfile extends foundation.AppAppearanceProfile {
       mutedTextColor: shared.mutedTextColor,
       panelColor: shared.panelColor,
       panelTextColor: shared.panelTextColor,
-      fontFamily: json['fontFamily'] as String? ?? 'Roboto',
+      // Een ontbrekend veld is een bestand uit vóór de lettertypekeuze en
+      // krijgt OciDecks historische standaard. Expliciet null bewaart juist
+      // de gedeelde keuze voor het systeemfont.
+      fontFamily: json.containsKey('fontFamily')
+          ? json['fontFamily'] as String?
+          : 'Roboto',
     );
   }
 }

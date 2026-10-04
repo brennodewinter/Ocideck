@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app_appearance/app_appearance.dart' as foundation;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart' show TlpLevel;
 import 'package:ocideck/models/page_size.dart';
@@ -921,6 +922,19 @@ void main() {
         Map<String, Object?>.from(custom.toJson())..remove('fontFamily'),
       );
       expect(legacy.fontFamily, 'Roboto');
+
+      final system = custom.copyWith(useSystemFont: true);
+      expect(system.fontFamily, isNull);
+      expect(system.toJson(), containsPair('fontFamily', null));
+      expect(AppAppearanceProfile.fromJson(system.toJson()).fontFamily, isNull);
+    });
+
+    test('built-ins derive their shared values from AppFoundation', () {
+      final shared = foundation.AppAppearanceProfile.builtIns;
+      for (var i = 0; i < shared.length; i++) {
+        final local = AppAppearanceProfile.builtIns[i];
+        expect(local.toJson()..remove('fontFamily'), shared[i].toJson());
+      }
     });
 
     test('saving a custom app theme persists its font', () async {

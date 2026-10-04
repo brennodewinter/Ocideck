@@ -78,7 +78,10 @@ class AppSettings {
   final String? exportDirectory;
   final List<ThemeProfile> themeProfiles;
   final String selectedThemeProfileName;
-  final List<AppAppearanceProfile> appAppearanceProfiles;
+  final List<AppAppearanceProfile>? _appAppearanceProfiles;
+
+  List<AppAppearanceProfile> get appAppearanceProfiles =>
+      _appAppearanceProfiles ?? AppAppearanceProfile.builtIns;
   final String selectedAppAppearanceProfileName;
 
   /// Documentmodus: de standaard stijl (naam van een [ThemeProfile]) voor
@@ -355,7 +358,7 @@ class AppSettings {
     this.exportDirectory,
     this.themeProfiles = ThemeProfile.builtIns,
     this.selectedThemeProfileName = 'LibreKAT',
-    this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
+    List<AppAppearanceProfile>? appAppearanceProfiles,
     this.selectedAppAppearanceProfileName = 'Europa',
     this.documentDefaultStyle,
     this.documentStyleEnforced = false,
@@ -395,7 +398,7 @@ class AppSettings {
     this.updateChecksEnabled = false,
     this.aiSettings = const AiSettings(),
     this.libreplanSettings = const LibreplanSettings(),
-  });
+  }) : _appAppearanceProfiles = appAppearanceProfiles;
 
   ThemeProfile get themeProfile {
     return themeProfiles.firstWhere(
