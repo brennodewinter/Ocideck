@@ -27,7 +27,7 @@
 > `age`-sealed package survives, repositioned as the **offline transfer route**
 > (§5, issue #2261). The phase-4 OciIntake code merged into `main` was never
 > released and is reverted before it ships (issue #2263); `INTAKE_PROTOCOL.md`
-> and `INTAKE_SERVER_REQUIREMENTS.md` are superseded and go with it. Sections
+> and `INTAKE_SERVER_REQUIREMENTS.md` are removed with it. Sections
 > rewritten: §1–§3, §5 (scope), §6, §8, §9, §10–§12, §14–§17, §19.
 >
 > **Revision 2 (2026-09-30)** folds in an eight-lens review (keeper of the core
