@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:secret_storage/secret_storage.dart' as foundation;
 
 import '../models/storage_connection.dart';
 import '../utils/log.dart';
@@ -17,7 +17,7 @@ import '../utils/log.dart';
 /// Daarom slaat OciDeck op het web geen enkel geheim op. Weigeren is hier de
 /// eerlijke uitkomst: het alternatief is een belofte die de opslag niet waar
 /// kan maken, en `docs/PRIVACY.md` doet die belofte met zoveel woorden.
-bool get platformCanStoreSecrets => !kIsWeb;
+bool get platformCanStoreSecrets => foundation.platformCanStoreSecrets;
 
 /// Wordt geworpen wanneer er een geheim weggeschreven wordt op een platform
 /// zonder sleutelbos. Draagt geen geheim mee — alleen wélk geheim het betrof.
@@ -37,11 +37,12 @@ class SecretStoreUnsupported implements Exception {
 /// app hoeft zo niets van de keychain te weten en er belandt nooit een geheim
 /// in het onversleutelde prefs-domein.
 ///
-/// Bewaart het WebDAV/Nextcloud-app-wachtwoord, de optionele API-sleutel van een
-/// AI-backend, en het personal access token van een git-forge. Elke sleutel is
-/// afgeleid van de genormaliseerde server-URL plus de identiteit erbinnen
-/// (gebruiker, respectievelijk repo-eigenaar), zodat meerdere accounts en
-/// servers naast elkaar kunnen bestaan zonder elkaar te overschrijven.
+/// De generieke opslagoperaties komen uit AppFoundation; deze facade houdt de
+/// OciDeck-sleutelcatalogus en de foutsemantiek per soort geheim bij elkaar.
+/// Waar een geheim bij een externe dienst hoort, is zijn sleutel afgeleid van
+/// de genormaliseerde server-URL plus de identiteit erbinnen, zodat meerdere
+/// accounts en servers naast elkaar kunnen bestaan zonder elkaar te
+/// overschrijven.
 ///
 /// **Fail-closed zonder sleutelbos** (zie [platformCanStoreSecrets]). Deze
 /// klasse is de enige plek waar dat hoeft te worden afgedwongen, want ze is de
@@ -56,29 +57,28 @@ class SecretStoreUnsupported implements Exception {
 /// deze laag is het vangnet, niet de melding.
 class SecretStore {
   SecretStore({FlutterSecureStorage? storage, bool? canStore})
-    : _storage =
-          storage ??
-          const FlutterSecureStorage(
-            // OciDeck is deliberately not sandboxed and release artefacts are
-            // signed only after Flutter builds them. The data-protection
-            // keychain requires a provisioning entitlement at build time and
-            // otherwise fails with errSecMissingEntitlement (-34018). The
-            // login keychain still encrypts and access-controls these items.
-            mOptions: MacOsOptions(usesDataProtectionKeychain: false),
-          ),
-      _canStore = canStore ?? platformCanStoreSecrets;
+    : _backend = foundation.FlutterSecretStore(
+        storage:
+            storage ??
+            const FlutterSecureStorage(
+              // OciDeck is deliberately not sandboxed and release artefacts are
+              // signed only after Flutter builds them. The data-protection
+              // keychain requires a provisioning entitlement at build time and
+              // otherwise fails with errSecMissingEntitlement (-34018). The
+              // login keychain still encrypts and access-controls these items.
+              mOptions: MacOsOptions(usesDataProtectionKeychain: false),
+            ),
+        canStore: canStore,
+      );
 
-  final FlutterSecureStorage _storage;
-
-  /// Injecteerbaar, zodat de weigering toetsbaar is zonder een webbrowser.
-  final bool _canStore;
+  final foundation.SecretStore _backend;
 
   /// Of geheimen op dit platform bewaard kunnen worden.
-  bool get canStore => _canStore;
+  bool get canStore => _backend.canStore;
 
   /// De poort vóór elke schrijfactie.
   void _requireStorage(String label) {
-    if (!_canStore) throw SecretStoreUnsupported(label);
+    if (!canStore) throw SecretStoreUnsupported(label);
   }
 
   /// Keychain-sleutel voor het WebDAV-wachtwoord van [username] op [baseUrl].
@@ -96,7 +96,7 @@ class SecretStore {
   ) async {
     _requireStorage('writeWebdavPassword');
     try {
-      await _storage.write(key: webdavKey(baseUrl, username), value: password);
+      await _backend.write(webdavKey(baseUrl, username), password);
     } catch (e) {
       logError('SecretStore.writeWebdavPassword: keychain write failed', e);
       rethrow;
@@ -104,9 +104,9 @@ class SecretStore {
   }
 
   Future<String?> readWebdavPassword(String baseUrl, String username) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: webdavKey(baseUrl, username));
+      return await _backend.read(webdavKey(baseUrl, username));
     } catch (e) {
       logError('SecretStore.readWebdavPassword: keychain read failed', e);
       return null;
@@ -114,9 +114,9 @@ class SecretStore {
   }
 
   Future<void> deleteWebdavPassword(String baseUrl, String username) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: webdavKey(baseUrl, username));
+      await _backend.delete(webdavKey(baseUrl, username));
     } catch (e) {
       // Wissen mag nooit fataal zijn: log en ga door.
       logWarning('SecretStore.deleteWebdavPassword: keychain delete failed', e);
@@ -134,7 +134,7 @@ class SecretStore {
   Future<void> writeAiApiKey(String baseUrl, String apiKey) async {
     _requireStorage('writeAiApiKey');
     try {
-      await _storage.write(key: aiApiKeyKey(baseUrl), value: apiKey);
+      await _backend.write(aiApiKeyKey(baseUrl), apiKey);
     } catch (e) {
       logError('SecretStore.writeAiApiKey: keychain write failed', e);
       rethrow;
@@ -142,9 +142,9 @@ class SecretStore {
   }
 
   Future<String?> readAiApiKey(String baseUrl) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: aiApiKeyKey(baseUrl));
+      return await _backend.read(aiApiKeyKey(baseUrl));
     } catch (e) {
       logError('SecretStore.readAiApiKey: keychain read failed', e);
       return null;
@@ -152,9 +152,9 @@ class SecretStore {
   }
 
   Future<void> deleteAiApiKey(String baseUrl) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: aiApiKeyKey(baseUrl));
+      await _backend.delete(aiApiKeyKey(baseUrl));
     } catch (e) {
       logWarning('SecretStore.deleteAiApiKey: keychain delete failed', e);
     }
@@ -176,10 +176,7 @@ class SecretStore {
   ) async {
     _requireStorage('writeS3SecretKey');
     try {
-      await _storage.write(
-        key: s3SecretKeyKey(endpoint, accessKeyId),
-        value: secretKey,
-      );
+      await _backend.write(s3SecretKeyKey(endpoint, accessKeyId), secretKey);
     } catch (e) {
       logError('SecretStore.writeS3SecretKey: keychain write failed', e);
       rethrow;
@@ -187,9 +184,9 @@ class SecretStore {
   }
 
   Future<String?> readS3SecretKey(String endpoint, String accessKeyId) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: s3SecretKeyKey(endpoint, accessKeyId));
+      return await _backend.read(s3SecretKeyKey(endpoint, accessKeyId));
     } catch (e) {
       logError('SecretStore.readS3SecretKey: keychain read failed', e);
       return null;
@@ -197,9 +194,9 @@ class SecretStore {
   }
 
   Future<void> deleteS3SecretKey(String endpoint, String accessKeyId) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: s3SecretKeyKey(endpoint, accessKeyId));
+      await _backend.delete(s3SecretKeyKey(endpoint, accessKeyId));
     } catch (e) {
       // Wissen mag nooit fataal zijn: log en ga door.
       logWarning('SecretStore.deleteS3SecretKey: keychain delete failed', e);
@@ -218,7 +215,7 @@ class SecretStore {
   Future<void> writeGitToken(String baseUrl, String owner, String token) async {
     _requireStorage('writeGitToken');
     try {
-      await _storage.write(key: gitTokenKey(baseUrl, owner), value: token);
+      await _backend.write(gitTokenKey(baseUrl, owner), token);
     } catch (e) {
       logError('SecretStore.writeGitToken: keychain write failed', e);
       rethrow;
@@ -226,9 +223,9 @@ class SecretStore {
   }
 
   Future<String?> readGitToken(String baseUrl, String owner) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: gitTokenKey(baseUrl, owner));
+      return await _backend.read(gitTokenKey(baseUrl, owner));
     } catch (e) {
       logError('SecretStore.readGitToken: keychain read failed', e);
       return null;
@@ -236,9 +233,9 @@ class SecretStore {
   }
 
   Future<void> deleteGitToken(String baseUrl, String owner) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: gitTokenKey(baseUrl, owner));
+      await _backend.delete(gitTokenKey(baseUrl, owner));
     } catch (e) {
       // Wissen mag nooit fataal zijn: log en ga door.
       logWarning('SecretStore.deleteGitToken: keychain delete failed', e);
@@ -260,10 +257,7 @@ class SecretStore {
   ) async {
     _requireStorage('writeXmppPassword');
     try {
-      await _storage.write(
-        key: xmppPasswordKey(serverUrl, jid),
-        value: password,
-      );
+      await _backend.write(xmppPasswordKey(serverUrl, jid), password);
     } catch (e) {
       logError('SecretStore.writeXmppPassword: keychain write failed', e);
       rethrow;
@@ -271,9 +265,9 @@ class SecretStore {
   }
 
   Future<String?> readXmppPassword(String serverUrl, String jid) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: xmppPasswordKey(serverUrl, jid));
+      return await _backend.read(xmppPasswordKey(serverUrl, jid));
     } catch (e) {
       logError('SecretStore.readXmppPassword: keychain read failed', e);
       return null;
@@ -281,9 +275,9 @@ class SecretStore {
   }
 
   Future<void> deleteXmppPassword(String serverUrl, String jid) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: xmppPasswordKey(serverUrl, jid));
+      await _backend.delete(xmppPasswordKey(serverUrl, jid));
     } catch (e) {
       logWarning('SecretStore.deleteXmppPassword: keychain delete failed', e);
     }
@@ -305,10 +299,7 @@ class SecretStore {
   ) async {
     _requireStorage('writeCollabDeviceSeeds');
     try {
-      await _storage.write(
-        key: collabDeviceSeedsKey(homeserver, userId),
-        value: seeds,
-      );
+      await _backend.write(collabDeviceSeedsKey(homeserver, userId), seeds);
     } catch (e) {
       logError('SecretStore.writeCollabDeviceSeeds: keychain write failed', e);
       rethrow;
@@ -319,9 +310,9 @@ class SecretStore {
     String homeserver,
     String userId,
   ) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: collabDeviceSeedsKey(homeserver, userId));
+      return await _backend.read(collabDeviceSeedsKey(homeserver, userId));
     } catch (e) {
       logError('SecretStore.readCollabDeviceSeeds: keychain read failed', e);
       return null;
@@ -329,9 +320,9 @@ class SecretStore {
   }
 
   Future<void> deleteCollabDeviceSeeds(String homeserver, String userId) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: collabDeviceSeedsKey(homeserver, userId));
+      await _backend.delete(collabDeviceSeedsKey(homeserver, userId));
     } catch (e) {
       logWarning(
         'SecretStore.deleteCollabDeviceSeeds: keychain delete failed',
@@ -361,10 +352,7 @@ class SecretStore {
   ) async {
     _requireStorage('writeCollabTrust');
     try {
-      await _storage.write(
-        key: collabTrustKey(homeserver, userId),
-        value: trust,
-      );
+      await _backend.write(collabTrustKey(homeserver, userId), trust);
     } catch (e) {
       logError('SecretStore.writeCollabTrust: keychain write failed', e);
       rethrow;
@@ -372,9 +360,9 @@ class SecretStore {
   }
 
   Future<String?> readCollabTrust(String homeserver, String userId) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: collabTrustKey(homeserver, userId));
+      return await _backend.read(collabTrustKey(homeserver, userId));
     } catch (e) {
       logError('SecretStore.readCollabTrust: keychain read failed', e);
       return null;
@@ -382,9 +370,9 @@ class SecretStore {
   }
 
   Future<void> deleteCollabTrust(String homeserver, String userId) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: collabTrustKey(homeserver, userId));
+      await _backend.delete(collabTrustKey(homeserver, userId));
     } catch (e) {
       logWarning('SecretStore.deleteCollabTrust: keychain delete failed', e);
     }
@@ -400,7 +388,7 @@ class SecretStore {
   Future<void> writeFormEditorialKey(String json) async {
     _requireStorage('writeFormEditorialKey');
     try {
-      await _storage.write(key: formEditorialKeyKey, value: json);
+      await _backend.write(formEditorialKeyKey, json);
     } catch (e) {
       logError('SecretStore.writeFormEditorialKey: keychain write failed', e);
       rethrow;
@@ -413,9 +401,9 @@ class SecretStore {
   /// cannot be typed again, and a read that failed and was taken for "there is none" would be
   /// followed by a *new* key written over the one that could not be read.
   Future<String?> readFormEditorialKey() async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: formEditorialKeyKey);
+      return await _backend.read(formEditorialKeyKey);
     } catch (e) {
       logError('SecretStore.readFormEditorialKey: keychain read failed', e);
       rethrow;
@@ -423,9 +411,9 @@ class SecretStore {
   }
 
   Future<void> deleteFormEditorialKey() async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: formEditorialKeyKey);
+      await _backend.delete(formEditorialKeyKey);
     } catch (e) {
       logWarning(
         'SecretStore.deleteFormEditorialKey: keychain delete failed',
@@ -450,10 +438,7 @@ class SecretStore {
   ) async {
     _requireStorage('writeLibreplanPassword');
     try {
-      await _storage.write(
-        key: libreplanKey(baseUrl, username),
-        value: password,
-      );
+      await _backend.write(libreplanKey(baseUrl, username), password);
     } catch (e) {
       logError('SecretStore.writeLibreplanPassword: keychain write failed', e);
       rethrow;
@@ -461,9 +446,9 @@ class SecretStore {
   }
 
   Future<String?> readLibreplanPassword(String baseUrl, String username) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: libreplanKey(baseUrl, username));
+      return await _backend.read(libreplanKey(baseUrl, username));
     } catch (e) {
       logError('SecretStore.readLibreplanPassword: keychain read failed', e);
       return null;
@@ -471,9 +456,9 @@ class SecretStore {
   }
 
   Future<void> deleteLibreplanPassword(String baseUrl, String username) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: libreplanKey(baseUrl, username));
+      await _backend.delete(libreplanKey(baseUrl, username));
     } catch (e) {
       // Wissen mag nooit fataal zijn: log en ga door.
       logWarning(
@@ -489,7 +474,7 @@ class SecretStore {
   Future<void> writeLibreplanPasswordByKey(String key, String password) async {
     _requireStorage('writeLibreplanPasswordByKey');
     try {
-      await _storage.write(key: key, value: password);
+      await _backend.write(key, password);
     } catch (e) {
       logError(
         'SecretStore.writeLibreplanPasswordByKey: keychain write failed',
@@ -500,9 +485,9 @@ class SecretStore {
   }
 
   Future<String?> readLibreplanPasswordByKey(String key) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: key);
+      return await _backend.read(key);
     } catch (e) {
       logError(
         'SecretStore.readLibreplanPasswordByKey: keychain read failed',
@@ -513,9 +498,9 @@ class SecretStore {
   }
 
   Future<void> deleteLibreplanPasswordByKey(String key) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: key);
+      await _backend.delete(key);
     } catch (e) {
       logWarning(
         'SecretStore.deleteLibreplanPasswordByKey: keychain delete failed',
@@ -534,7 +519,7 @@ class SecretStore {
   Future<void> writeOpenKatToken(String installationId, String token) async {
     _requireStorage('writeOpenKatToken');
     try {
-      await _storage.write(key: openKatTokenKey(installationId), value: token);
+      await _backend.write(openKatTokenKey(installationId), token);
     } catch (e) {
       logError('SecretStore.writeOpenKatToken: keychain write failed', e);
       rethrow;
@@ -542,9 +527,9 @@ class SecretStore {
   }
 
   Future<String?> readOpenKatToken(String installationId) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: openKatTokenKey(installationId));
+      return await _backend.read(openKatTokenKey(installationId));
     } catch (e) {
       logError('SecretStore.readOpenKatToken: keychain read failed', e);
       return null;
@@ -552,9 +537,9 @@ class SecretStore {
   }
 
   Future<void> deleteOpenKatToken(String installationId) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: openKatTokenKey(installationId));
+      await _backend.delete(openKatTokenKey(installationId));
     } catch (e) {
       logWarning('SecretStore.deleteOpenKatToken: keychain delete failed', e);
     }
@@ -573,10 +558,7 @@ class SecretStore {
   ) async {
     _requireStorage('writeOciServeRefreshToken');
     try {
-      await _storage.write(
-        key: ociServeRefreshTokenKey(baseUrl),
-        value: refreshToken,
-      );
+      await _backend.write(ociServeRefreshTokenKey(baseUrl), refreshToken);
     } catch (e) {
       logError(
         'SecretStore.writeOciServeRefreshToken: keychain write failed',
@@ -587,9 +569,9 @@ class SecretStore {
   }
 
   Future<String?> readOciServeRefreshToken(String baseUrl) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: ociServeRefreshTokenKey(baseUrl));
+      return await _backend.read(ociServeRefreshTokenKey(baseUrl));
     } catch (e) {
       logError('SecretStore.readOciServeRefreshToken: keychain read failed', e);
       return null;
@@ -597,9 +579,9 @@ class SecretStore {
   }
 
   Future<void> deleteOciServeRefreshToken(String baseUrl) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: ociServeRefreshTokenKey(baseUrl));
+      await _backend.delete(ociServeRefreshTokenKey(baseUrl));
     } catch (e) {
       logWarning(
         'SecretStore.deleteOciServeRefreshToken: keychain delete failed',
@@ -617,7 +599,7 @@ class SecretStore {
   Future<void> writeOciServeOutbox(String baseUrl, String encoded) async {
     _requireStorage('writeOciServeOutbox');
     try {
-      await _storage.write(key: ociServeOutboxKey(baseUrl), value: encoded);
+      await _backend.write(ociServeOutboxKey(baseUrl), encoded);
     } catch (e) {
       logError('SecretStore.writeOciServeOutbox: keychain write failed', e);
       rethrow;
@@ -625,9 +607,9 @@ class SecretStore {
   }
 
   Future<String?> readOciServeOutbox(String baseUrl) async {
-    if (!_canStore) return null;
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: ociServeOutboxKey(baseUrl));
+      return await _backend.read(ociServeOutboxKey(baseUrl));
     } catch (e) {
       logError('SecretStore.readOciServeOutbox: keychain read failed', e);
       return null;
@@ -635,9 +617,9 @@ class SecretStore {
   }
 
   Future<void> deleteOciServeOutbox(String baseUrl) async {
-    if (!_canStore) return;
+    if (!canStore) return;
     try {
-      await _storage.delete(key: ociServeOutboxKey(baseUrl));
+      await _backend.delete(ociServeOutboxKey(baseUrl));
     } catch (e) {
       logWarning('SecretStore.deleteOciServeOutbox: keychain delete failed', e);
       rethrow;
@@ -657,11 +639,12 @@ class SecretStore {
   /// mislukte schrijf, zodat de aanroeper de prefs-migratie kan uitstellen in
   /// plaats van de gegevens kwijt te raken.
   Future<bool> writePrivacyOwnIdentity(String value) async {
+    if (!canStore) return false;
     try {
       if (value.trim().isEmpty) {
-        await _storage.delete(key: privacyOwnIdentityKey);
+        await _backend.delete(privacyOwnIdentityKey);
       } else {
-        await _storage.write(key: privacyOwnIdentityKey, value: value);
+        await _backend.write(privacyOwnIdentityKey, value);
       }
       return true;
     } catch (e) {
@@ -671,8 +654,9 @@ class SecretStore {
   }
 
   Future<String?> readPrivacyOwnIdentity() async {
+    if (!canStore) return null;
     try {
-      return await _storage.read(key: privacyOwnIdentityKey);
+      return await _backend.read(privacyOwnIdentityKey);
     } catch (e) {
       logError('SecretStore.readPrivacyOwnIdentity: keychain read failed', e);
       return null;
@@ -680,8 +664,9 @@ class SecretStore {
   }
 
   Future<void> deletePrivacyOwnIdentity() async {
+    if (!canStore) return;
     try {
-      await _storage.delete(key: privacyOwnIdentityKey);
+      await _backend.delete(privacyOwnIdentityKey);
     } catch (e) {
       logWarning(
         'SecretStore.deletePrivacyOwnIdentity: keychain delete failed',
