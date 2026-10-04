@@ -1192,7 +1192,7 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/secret_storage"
-      ref: ac46741489d60c011377e27e0df9152b164f0701
+      ref: "secret_storage-v0.1.0"
       resolved-ref: ac46741489d60c011377e27e0df9152b164f0701
       url: "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
     source: git
