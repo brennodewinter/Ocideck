@@ -27,7 +27,7 @@ The JSON documents carry **792 dependency relations** between these components: 
 | _fe_analyzer_shared _(transitive)_ | 108.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/_fe_analyzer_shared@108.0.0` |
 | analyzer _(direct dev)_ | 14.4.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@14.4.0` |
 | android_file_picker _(transitive)_ | 2.0.0 | MIT | vicajilau | `pkg:pub/android_file_picker@2.0.0` |
-| app_appearance _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | Source: git. |
+| app_appearance _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82` (packages/app_appearance) |
 | archive _(direct main)_ | 4.3.0 | MIT | brendan-duncan | `pkg:pub/archive@4.3.0` |
 | args _(transitive)_ | 2.7.0 | BSD-3-Clause | dart-lang | `pkg:pub/args@2.7.0` |
 | asn1lib _(transitive)_ | 1.6.5 | BSD | wstrange | `pkg:pub/asn1lib@1.6.5` |
@@ -39,7 +39,7 @@ The JSON documents carry **792 dependency relations** between these components: 
 | characters _(direct main)_ | 1.4.1 | BSD-3-Clause | dart-lang | `pkg:pub/characters@1.4.1` |
 | charcode _(transitive)_ | 1.4.0 | BSD-3-Clause | lrhn | `pkg:pub/charcode@1.4.0` |
 | clock _(transitive)_ | 1.1.3 | Apache-2.0 | dart-lang | `pkg:pub/clock@1.1.3` |
-| cnativeapi _(direct overridden)_ | 0.1.4 | MIT | libnativeapi | Source: git. |
+| cnativeapi _(direct overridden)_ | 0.1.4 | MIT | brennodewinter | https://github.com/brennodewinter/nativeapi-flutter.git @ `0b3aafa797dafd3012a4fdb74f403d6cb20288b1` (packages/cnativeapi) |
 | code_assets _(transitive)_ | 2.1.0 | BSD-3-Clause | dart-lang | `pkg:pub/code_assets@2.1.0` |
 | collection _(transitive)_ | 1.19.1 | BSD-3-Clause | dart-lang | `pkg:pub/collection@1.19.1` |
 | convert _(transitive)_ | 3.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/convert@3.1.2` |
@@ -128,7 +128,7 @@ The JSON documents carry **792 dependency relations** between these components: 
 | material_ui _(direct main)_ | 1.5.0 | BSD-3-Clause | flutter | `pkg:pub/material_ui@1.5.0` |
 | meta _(transitive)_ | 1.19.0 | BSD-3-Clause | dart-lang | `pkg:pub/meta@1.19.0` |
 | native_toolchain_cmake _(transitive)_ | 0.3.2 | Apache-2.0 | rainyl | `pkg:pub/native_toolchain_cmake@0.3.2` |
-| nativeapi _(direct main)_ | 0.1.4 | MIT | libnativeapi | Source: git. |
+| nativeapi _(direct main)_ | 0.1.4 | MIT | brennodewinter | https://github.com/brennodewinter/nativeapi-flutter.git @ `0b3aafa797dafd3012a4fdb74f403d6cb20288b1` (packages/nativeapi) |
 | nested _(transitive)_ | 1.0.0 | MIT | rrousselGit | `pkg:pub/nested@1.0.0` |
 | objective_c _(transitive)_ | 9.6.0 | BSD-3-Clause | dart-lang | `pkg:pub/objective_c@9.6.0` |
 | openid_client _(direct main)_ | 0.4.10+2 | BSD-3-Clause | appsup-dart | `pkg:pub/openid_client@0.4.10+2` |

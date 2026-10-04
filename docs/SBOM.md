@@ -1,6 +1,6 @@
 # OciDeck — Software Bill of Materials (SBOM)
 
-> **Status:** current-state description of a generated artefact · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of a generated artefact · **Status last reviewed:** 2026-10-04 · **Published by:** Stichting LibreKAT
 
 OciDeck ships a machine-readable **Software Bill of Materials**: a complete,
 version-pinned inventory of every third-party component in the product. It is
@@ -62,7 +62,7 @@ machine whose Flutter differs from the pin.)*
 
 | Group | Source of truth | Per-component data |
 | --- | --- | --- |
-| **Dart/Flutter packages** (direct + transitive) | `pubspec.lock` + each package's own `pubspec.yaml` | version, `pkg:pub` purl, archive SHA-256, hosted URL, dependency scope, licence, supplier, **its own dependencies** |
+| **Dart/Flutter packages** (direct + transitive) | `pubspec.lock` + each package's own `pubspec.yaml` | version, `pkg:pub` purl, archive SHA-256, hosted URL, dependency scope, licence, supplier, **its own dependencies**; Git packages additionally retain repository URL, package subpath and resolved commit |
 | **Vendored JS/CSS export bundles** | `assets/web_export/MANIFEST.json` | version, `pkg:npm` purl, SHA-256, source URL, licence |
 
 Each vendored bundle is an **unmodified upstream build**, and you do not have to

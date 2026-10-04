@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:57af7221-cdd7-5d7b-8642-46dce58a0073",
+  "serialNumber": "urn:uuid:9adfda82-1e3c-5a9a-821e-746751433071",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-04T19:01:53.695398Z",
+    "timestamp": "2026-10-04T19:02:01.992607Z",
     "tools": {
       "components": [
         {
@@ -206,6 +206,12 @@
           }
         }
       ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
+        }
+      ],
       "properties": [
         {
           "name": "ocideck:group",
@@ -214,6 +220,14 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct main"
+        },
+        {
+          "name": "ocideck:resolved-revision",
+          "value": "d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82"
+        },
+        {
+          "name": "ocideck:package-subpath",
+          "value": "packages/app_appearance"
         },
         {
           "name": "ocideck:note",
@@ -687,9 +701,9 @@
       "bom-ref": "git:cnativeapi@0.1.4",
       "type": "library",
       "supplier": {
-        "name": "libnativeapi",
+        "name": "brennodewinter",
         "url": [
-          "https://github.com/libnativeapi"
+          "https://github.com/brennodewinter"
         ]
       },
       "name": "cnativeapi",
@@ -701,6 +715,12 @@
           }
         }
       ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/brennodewinter/nativeapi-flutter.git"
+        }
+      ],
       "properties": [
         {
           "name": "ocideck:group",
@@ -709,6 +729,14 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct overridden"
+        },
+        {
+          "name": "ocideck:resolved-revision",
+          "value": "0b3aafa797dafd3012a4fdb74f403d6cb20288b1"
+        },
+        {
+          "name": "ocideck:package-subpath",
+          "value": "packages/cnativeapi"
         },
         {
           "name": "ocideck:note",
@@ -4353,9 +4381,9 @@
       "bom-ref": "git:nativeapi@0.1.4",
       "type": "library",
       "supplier": {
-        "name": "libnativeapi",
+        "name": "brennodewinter",
         "url": [
-          "https://github.com/libnativeapi"
+          "https://github.com/brennodewinter"
         ]
       },
       "name": "nativeapi",
@@ -4367,6 +4395,12 @@
           }
         }
       ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/brennodewinter/nativeapi-flutter.git"
+        }
+      ],
       "properties": [
         {
           "name": "ocideck:group",
@@ -4375,6 +4409,14 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct main"
+        },
+        {
+          "name": "ocideck:resolved-revision",
+          "value": "0b3aafa797dafd3012a4fdb74f403d6cb20288b1"
+        },
+        {
+          "name": "ocideck:package-subpath",
+          "value": "packages/nativeapi"
         },
         {
           "name": "ocideck:note",

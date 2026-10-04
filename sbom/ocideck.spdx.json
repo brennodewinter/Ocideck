@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.6.13+39",
-  "documentNamespace": "https://ocideck.app/spdx/017772ef-e969-597f-8b82-0f52861d3749",
+  "documentNamespace": "https://ocideck.app/spdx/09d98d3f-b27b-52db-8d9a-3249218ae6e3",
   "creationInfo": {
-    "created": "2026-10-04T19:01:53.695398Z",
+    "created": "2026-10-04T19:02:01.992607Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -104,10 +104,11 @@
       "name": "app_appearance",
       "versionInfo": "0.1.0",
       "supplier": "Organization: pawprint.vigilis.online",
-      "downloadLocation": "NOASSERTION",
+      "downloadLocation": "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git",
       "filesAnalyzed": false,
       "licenseConcluded": "EUPL-1.2",
       "licenseDeclared": "EUPL-1.2",
+      "sourceInfo": "Resolved from https://pawprint.vigilis.online/LibreKAT/AppFoundation.git at commit d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82; package subpath packages/app_appearance.",
       "comment": "Source: git."
     },
     {
@@ -367,11 +368,12 @@
       "SPDXID": "SPDXRef-16-cnativeapi",
       "name": "cnativeapi",
       "versionInfo": "0.1.4",
-      "supplier": "Organization: libnativeapi",
-      "downloadLocation": "NOASSERTION",
+      "supplier": "Organization: brennodewinter",
+      "downloadLocation": "https://github.com/brennodewinter/nativeapi-flutter.git",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
+      "sourceInfo": "Resolved from https://github.com/brennodewinter/nativeapi-flutter.git at commit 0b3aafa797dafd3012a4fdb74f403d6cb20288b1; package subpath packages/cnativeapi.",
       "comment": "Source: git."
     },
     {
@@ -2318,11 +2320,12 @@
       "SPDXID": "SPDXRef-105-nativeapi",
       "name": "nativeapi",
       "versionInfo": "0.1.4",
-      "supplier": "Organization: libnativeapi",
-      "downloadLocation": "NOASSERTION",
+      "supplier": "Organization: brennodewinter",
+      "downloadLocation": "https://github.com/brennodewinter/nativeapi-flutter.git",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
+      "sourceInfo": "Resolved from https://github.com/brennodewinter/nativeapi-flutter.git at commit 0b3aafa797dafd3012a4fdb74f403d6cb20288b1; package subpath packages/nativeapi.",
       "comment": "Source: git."
     },
     {

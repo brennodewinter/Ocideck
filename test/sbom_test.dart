@@ -119,6 +119,56 @@ void main() {
     });
   });
 
+  group('Git packages', () {
+    Map<String, dynamic> cdxComponent(String name) =>
+        cdxComponents.singleWhere((component) => component['name'] == name);
+
+    test('records repository, package path and immutable commit', () {
+      final component = cdxComponent('app_appearance');
+      final lock = loadYaml(File('pubspec.lock').readAsStringSync()) as YamlMap;
+      final locked = (lock['packages'] as YamlMap)['app_appearance'] as YamlMap;
+      final description = locked['description'] as YamlMap;
+      final refs = (component['externalReferences'] as List)
+          .cast<Map<String, dynamic>>();
+      expect(
+        refs,
+        contains(
+          containsPair(
+            'url',
+            'https://pawprint.vigilis.online/LibreKAT/AppFoundation.git',
+          ),
+        ),
+      );
+      final properties = {
+        for (final property
+            in (component['properties'] as List).cast<Map<String, dynamic>>())
+          property['name']: property['value'],
+      };
+      expect(
+        properties['ocideck:resolved-revision'],
+        description['resolved-ref'],
+      );
+      expect(properties['ocideck:package-subpath'], description['path']);
+    });
+
+    test('SPDX and Markdown retain the same Git provenance', () {
+      final lock = loadYaml(File('pubspec.lock').readAsStringSync()) as YamlMap;
+      final locked = (lock['packages'] as YamlMap)['app_appearance'] as YamlMap;
+      final description = locked['description'] as YamlMap;
+      final package = (spdx['packages'] as List)
+          .cast<Map<String, dynamic>>()
+          .singleWhere((component) => component['name'] == 'app_appearance');
+      expect(package['downloadLocation'], contains('AppFoundation.git'));
+      expect(package['sourceInfo'], contains(description['resolved-ref']));
+      expect(package['sourceInfo'], contains(description['path']));
+
+      final markdown = File('sbom/ocideck.sbom.md').readAsStringSync();
+      expect(markdown, contains('AppFoundation.git'));
+      expect(markdown, contains(description['resolved-ref']));
+      expect(markdown, contains(description['path']));
+    });
+  });
+
   group('validity', () {
     test('CycloneDX carries the mandatory header fields', () {
       expect(cdx['bomFormat'], 'CycloneDX');

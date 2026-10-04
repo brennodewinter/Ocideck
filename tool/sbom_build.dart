@@ -239,6 +239,8 @@ class SbomComponent {
     this.downloadUrl,
     this.vcsUrl,
     this.upstreamRevision,
+    this.resolvedRevision,
+    this.packageSubpath,
     this.scope,
     this.note,
     this.supplier,
@@ -265,6 +267,13 @@ class SbomComponent {
   /// Upstream commit a vendored fork descends from, or null for anything that
   /// has a version-pinned archive instead.
   final String? upstreamRevision;
+
+  /// Exact commit resolved for a Git dependency.
+  final String? resolvedRevision;
+
+  /// Package directory inside a Git repository, when the dependency is a
+  /// package from a monorepo rather than its repository root.
+  final String? packageSubpath;
 
   /// Classified licence family or SPDX expression (e.g. `Apache-2.0 OR MPL-2.0`).
   final String license;
@@ -463,6 +472,8 @@ List<SbomComponent> _dartPackages() {
       edges = [...?edges, 'runtime:pdfium@chromium-7811'];
     }
     final fork = _forkOrigins[name];
+    final gitDescription = source == 'git' && desc is YamlMap ? desc : null;
+    final gitUrl = gitDescription?['url']?.toString();
     // A fork's upstream URL is the stronger statement of origin than whatever
     // the vendored copy's own pubspec still says, so it wins where we have one;
     // an SDK-shipped package is supplied by that SDK whatever its own pubspec
@@ -470,6 +481,7 @@ List<SbomComponent> _dartPackages() {
     final supplier = supplierFromUrl(
       fork?.vcs ??
           (source == 'sdk' ? _sdkVcsUrls[desc?.toString()] : null) ??
+          gitUrl ??
           facts?.sourceUrl,
     );
 
@@ -545,7 +557,8 @@ List<SbomComponent> _dartPackages() {
         ),
       );
     } else {
-      // sdk / git — carry name+version+licence; no archive hash to pin.
+      // SDK packages have no archive hash. Git packages instead carry the
+      // immutable resolved commit and monorepo subpath from pubspec.lock.
       out.add(
         SbomComponent(
           ref: refByName[name]!,
@@ -554,6 +567,9 @@ List<SbomComponent> _dartPackages() {
           name: name,
           version: version,
           license: license,
+          vcsUrl: gitUrl,
+          resolvedRevision: gitDescription?['resolved-ref']?.toString(),
+          packageSubpath: gitDescription?['path']?.toString(),
           scope: scope,
           supplier: supplier?.name,
           supplierUrl: supplier?.url,
@@ -861,6 +877,10 @@ Map<String, dynamic> _cdxComponent(SbomComponent c) {
     if (c.scope != null) {'name': 'cdx:pub:scope', 'value': c.scope!},
     if (c.upstreamRevision != null)
       {'name': 'ocideck:upstream-revision', 'value': c.upstreamRevision!},
+    if (c.resolvedRevision != null)
+      {'name': 'ocideck:resolved-revision', 'value': c.resolvedRevision!},
+    if (c.packageSubpath != null)
+      {'name': 'ocideck:package-subpath', 'value': c.packageSubpath!},
     if (c.note != null) {'name': 'ocideck:note', 'value': c.note!},
   ];
   m['properties'] = props;
@@ -971,6 +991,14 @@ Map<String, dynamic> _spdxPackage(SbomComponent c, String spdxId) {
         'Vendored from ${c.vcsUrl} at commit '
         '${c.upstreamRevision}.';
   }
+  if (c.resolvedRevision != null) {
+    final subpath = c.packageSubpath == null
+        ? ''
+        : '; package subpath ${c.packageSubpath}';
+    pkg['sourceInfo'] =
+        'Resolved from ${c.vcsUrl ?? 'an unrecorded Git repository'} at '
+        'commit ${c.resolvedRevision}$subpath.';
+  }
   if (c.note != null) pkg['comment'] = c.note;
   return pkg;
 }
@@ -1031,6 +1059,10 @@ String toSpdx(Inventory inv, String timestamp) {
 /// A short, scan-friendly source hint for the last table column.
 String _sourceHint(SbomComponent c) {
   if (c.purl != null) return '`${c.purl}`';
+  if (c.resolvedRevision != null) {
+    final path = c.packageSubpath == null ? '' : ' (${c.packageSubpath})';
+    return '${c.vcsUrl ?? 'Git'} @ `${c.resolvedRevision}`$path';
+  }
   if (c.vcsUrl != null) return c.vcsUrl!;
   if (c.note != null) return c.note!;
   return '—';
