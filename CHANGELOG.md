@@ -8,6 +8,17 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- Het uiterlijk van de applicatieschil gebruikt nu de gedeelde
+  `app_appearance`-package uit AppFoundation voor profielvelden, Material-thema,
+  palet en contrastcontrole. OciDeck houdt alleen zijn productbeleid lokaal:
+  de gebundelde lettertypen met Roboto als terugval en de eigen
+  dia-, cockpit-, presenter- en exportkleuren. Bestaande instellingen zonder
+  `fontFamily` blijven daardoor als Roboto laden en hetzelfde JSON-formaat
+  schrijven. De zelfstandige officiële `material_ui`-package is tegelijk naar
+  de onderhouden 1.5-reeks gebracht.
+
 ### Added
 
 - De **Managed-Intake-contractpoort** (#2262, OciServe ADR 0016): OciDeck spreekt nu het Managed Intake-contract dat OciServe vastlegde (gepinde

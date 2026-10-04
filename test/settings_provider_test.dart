@@ -915,6 +915,7 @@ void main() {
         'Inter',
       );
       expect(custom.copyWith(fontFamily: 'Lora').fontFamily, 'Lora');
+      expect(custom.toJson()['fontFamily'], 'Inter');
       // Legacy JSON without the field falls back to Roboto.
       final legacy = AppAppearanceProfile.fromJson(
         Map<String, Object?>.from(custom.toJson())..remove('fontFamily'),

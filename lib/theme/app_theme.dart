@@ -1,79 +1,10 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:app_appearance/app_appearance.dart' as foundation;
 import '../models/settings.dart';
 
-@immutable
-class AppPalette extends ThemeExtension<AppPalette> {
-  final Color panel;
-  final Color panelText;
-  final Color mutedText;
+export 'package:app_appearance/app_appearance.dart' show AppPalette;
 
-  /// The ink for a link, a list marker or a small accent icon — anything that
-  /// must be *read* rather than merely seen.
-  ///
-  /// Not `colorScheme.primary`, which is where these used to come from. A
-  /// profile's primary colour is a brand colour, and a dark profile's brand
-  /// colour is dark: the built-in *Donker* profile puts `#111827` on a `#1E293B`
-  /// surface, which is 1.21:1 — gone (#744). In light mode primary *is* the
-  /// right ink (14:1), so this follows the same rule the outlined button
-  /// already used: the profile's text colour when dark, its primary when light.
-  ///
-  /// `secondary` was the obvious alternative and is wrong: in the *Europa*
-  /// profile the accent is EU yellow, which on that profile's white surface is
-  /// no better than the problem being fixed.
-  final Color accentInk;
-
-  const AppPalette({
-    required this.panel,
-    required this.panelText,
-    required this.mutedText,
-    required this.accentInk,
-  });
-
-  /// The palette [theme] carries, or one derived from it.
-  ///
-  /// `theme.extension<AppPalette>()!` is what the app-owned widgets used, and it
-  /// is a trap outside the app: a bare `MaterialApp` in a test or a preview has
-  /// no extension, and the `!` turns a missing accent colour into a crash. The
-  /// derived fallback keeps the *rule* rather than the values — light ink on a
-  /// dark theme, the primary on a light one — so a widget lifted out of the app
-  /// still renders legibly instead of not at all.
-  static AppPalette of(ThemeData theme) =>
-      theme.extension<AppPalette>() ??
-      AppPalette(
-        panel: theme.colorScheme.surfaceContainerHighest,
-        panelText: theme.colorScheme.onSurface,
-        mutedText: theme.colorScheme.onSurfaceVariant,
-        accentInk: theme.brightness == Brightness.dark
-            ? theme.colorScheme.onSurface
-            : theme.colorScheme.primary,
-      );
-
-  @override
-  AppPalette copyWith({
-    Color? panel,
-    Color? panelText,
-    Color? mutedText,
-    Color? accentInk,
-  }) {
-    return AppPalette(
-      panel: panel ?? this.panel,
-      panelText: panelText ?? this.panelText,
-      mutedText: mutedText ?? this.mutedText,
-      accentInk: accentInk ?? this.accentInk,
-    );
-  }
-
-  @override
-  AppPalette lerp(covariant AppPalette? other, double t) {
-    if (other == null) return this;
-    return AppPalette(
-      panel: Color.lerp(panel, other.panel, t)!,
-      panelText: Color.lerp(panelText, other.panelText, t)!,
-      mutedText: Color.lerp(mutedText, other.mutedText, t)!,
-      accentInk: Color.lerp(accentInk, other.accentInk, t)!,
-    );
-  }
-}
+typedef AppPalette = foundation.AppPalette;
 
 /// Materiaalkleuren voor de authentieke cockpitmeter, als één set zodat de
 /// painter licht/donker in één keuze omschakelt in plaats van per kleur.
@@ -506,12 +437,7 @@ class AppTheme {
   /// wéten dat de invoer niet deugde, neemt `tryParseHexColor` uit
   /// `utils/color_contrast.dart`; die is strenger en geeft `null`.
   static Color parseHexColor(String hex, {Color fallback = Colors.white}) {
-    final cleaned = hex.replaceFirst('#', '');
-    final value = int.tryParse(
-      cleaned.length == 6 ? 'FF$cleaned' : cleaned,
-      radix: 16,
-    );
-    return value == null ? fallback : Color(value);
+    return foundation.parseHexColor(hex, fallback: fallback);
   }
 
   /// De kleur waarmee Material zijn interactieve onderdelen schildert: de
@@ -538,12 +464,6 @@ class AppTheme {
   /// Alleen in donkere modus. In een licht profiel ís de merkkleur de goede
   /// accentkleur (14,1:1 bij Basic), en omschakelen zou de lichte modus
   /// onnodig verkleuren.
-  static Color _interactiveColor(
-    AppAppearanceProfile profile,
-    Color primary,
-    Color accentColor,
-  ) => profile.isDark ? accentColor : primary;
-
   /// Zwart of wit op [fill] — welke van de twee er het best op leest.
   ///
   /// Puur een som over [fill] zelf. Hier stond een regel die óók naar de
@@ -557,8 +477,7 @@ class AppTheme {
   /// altijd wit, en op de lichte oranje/amber ernstbanden (High/Medium) is dat
   /// bij een klein label 3,2 tot 3,6:1. Op een dia is datzelfde label groot
   /// (3:1 volstaat); in de editor niet. Dezelfde som beslist het daar nu ook.
-  static Color labelOn(Color fill) =>
-      fill.computeLuminance() > 0.179 ? Colors.black : Colors.white;
+  static Color labelOn(Color fill) => foundation.labelOnColor(fill);
 
   /// Het vlakje achter **inline** `code`: [textColor] op [_inlineCodeTint].
   ///
@@ -575,189 +494,14 @@ class AppTheme {
   /// contrast van de alinea — in elk profiel, in beide modi, en ook onder een
   /// eigen kleurenschema dat niemand hier heeft voorzien.
   static Color inlineCodeBackground(Color textColor) =>
-      textColor.withValues(alpha: _inlineCodeTint);
-
-  /// Genoeg om het vlakje te zien, weinig genoeg om de letter niet te raken.
-  static const double _inlineCodeTint = 0.12;
+      foundation.inlineCodeBackground(textColor);
 
   static ThemeData fromProfile(AppAppearanceProfile profile) {
-    final primary = parseHexColor(profile.primaryColor, fallback: navy);
-    final accentColor = parseHexColor(profile.accentColor, fallback: accent);
-    final background = parseHexColor(
-      profile.backgroundColor,
-      fallback: surface,
-    );
-    final surfaceColor = parseHexColor(profile.surfaceColor);
-    final text = parseHexColor(
-      profile.textColor,
-      fallback: const Color(0xFF1E293B),
-    );
-    final muted = parseHexColor(
-      profile.mutedTextColor,
-      fallback: const Color(0xFF64748B),
-    );
-    final panel = parseHexColor(profile.panelColor, fallback: panelBg);
-    final panelText = parseHexColor(profile.panelTextColor, fallback: panelFg);
-    final brightness = profile.isDark ? Brightness.dark : Brightness.light;
-
-    final interactive = _interactiveColor(profile, primary, accentColor);
-
-    final scheme = ColorScheme.fromSeed(
-      // De kiem blijft de mérkkleur: die bepaalt de hele harmonie van het
-      // schema (containers, outlines, onPrimary). Alleen de rol `primary` komt
-      // er niet meer uit.
-      seedColor: primary,
-      brightness: brightness,
-      primary: interactive,
-      secondary: accentColor,
-      surface: surfaceColor,
-    );
-
-    return ThemeData(
-      useMaterial3: true,
-      brightness: brightness,
-      // The interface font from the appearance profile (one of the bundled
-      // [AppAppearanceProfile.uiFonts]). Bundled in pubspec.yaml so the CanvasKit
-      // web engine never fetches it from fonts.gstatic.com — keeping the web
-      // build self-contained under a strict connect-src 'self' CSP.
-      fontFamily: profile.fontFamily,
-      colorScheme: scheme,
-      scaffoldBackgroundColor: background,
-      canvasColor: surfaceColor,
-      cardColor: surfaceColor,
-      dialogTheme: DialogThemeData(
-        backgroundColor: surfaceColor,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(18)),
-        ),
-      ),
-      textTheme: ThemeData(
-        brightness: brightness,
-      ).textTheme.apply(bodyColor: text, displayColor: text),
-      appBarTheme: AppBarTheme(
-        backgroundColor: primary,
-        foregroundColor: panelText,
-        elevation: 0,
-        centerTitle: false,
-        iconTheme: IconThemeData(color: panelText),
-        actionsIconTheme: IconThemeData(color: panelText),
-        titleTextStyle: TextStyle(
-          color: panelText,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.5,
-        ),
-      ),
-      dividerTheme: DividerThemeData(
-        color: scheme.outlineVariant,
-        thickness: 1,
-        space: 1,
-      ),
-      // Er stond er geen, en zonder deze regel neemt Flutter
-      // `colorScheme.primary` voor de cursor. Dat is precies de kleur die
-      // hierboven de bálkkleur bleek te zijn: in donkere modus stond de cursor
-      // op 1,21:1 tegen de vulling van het veld — in een tekstverwerker weet je
-      // dan niet waar je typt. Nu expliciet, en aan dezelfde rol gekoppeld als
-      // de rest van de interactie.
-      textSelectionTheme: TextSelectionThemeData(
-        cursorColor: interactive,
-        selectionColor: interactive.withValues(alpha: 0.35),
-        selectionHandleColor: interactive,
-      ),
-      inputDecorationTheme: _inputDecorationTheme(scheme, muted, accentColor),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: accentColor,
-          foregroundColor: labelOn(accentColor),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        // In donkere modus is [primary] donker (onleesbaar op donker); gebruik
-        // dan de lichte tekstkleur.
-        style: OutlinedButton.styleFrom(
-          foregroundColor: profile.isDark ? text : primary,
-        ),
-      ),
-      // Dezelfde regel, en hij ontbrak hier. Material geeft een TextButton
-      // standaard [primary] als voorgrond, dus elke tekstknop en elke link in
-      // de app stond in donkere modus op 1,21:1 — terwijl de omlijnde knop
-      // ernaast, door de regel hierboven, gewoon leesbaar was (#744).
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: profile.isDark ? text : primary,
-        ),
-      ),
-      // Elke melding in de app krijgt een sluitknop. Een snackbar mét een
-      // actieknop blijft standaard liggen (`persist` volgt `action != null`),
-      // en zonder dit icoon was er dan letterlijk geen weg hem weg te doen —
-      // ook niet voor wie toegankelijkheidsnavigatie aan heeft staan (#2149).
-      // De kleur komt uit de standaard (inverseSurface uit het schema), dus
-      // hier alleen de schakelaar.
-      snackBarTheme: const SnackBarThemeData(showCloseIcon: true),
-      extensions: [
-        AppPalette(
-          panel: panel,
-          panelText: panelText,
-          mutedText: muted,
-          accentInk: profile.isDark ? text : primary,
-        ),
-      ],
-    );
+    return const foundation.AppThemeBuilder(
+      styleFocusIndicators: false,
+      styleFilledButtons: false,
+    ).build(profile);
   }
 
   static ThemeData get light => fromProfile(AppAppearanceProfile.basic);
-}
-
-/// Het uiterlijk van elk invoerveld in de app: een *outlined* tekstveld zoals
-/// Material 3 dat bedoelt — een rand, en geen vulling.
-///
-/// Los van [AppTheme.fromProfile] omdat het daar niet paste: die methode kwam
-/// er met dit blok erin over de 150 regels van `check_method_length`.
-InputDecorationTheme _inputDecorationTheme(
-  ColorScheme scheme,
-  Color muted,
-  Color accentColor,
-) {
-  // De rand doet hier al het werk, dus die moet het ook kunnen dragen:
-  // `outline` en niet `outlineVariant`. Die laatste haalde 1,58–1,92:1 tegen de
-  // achtergrond waar het veld op staat, `outline` haalt 4,18–5,61:1 — over de
-  // 3:1 die WCAG 1.4.11 voor de grens van een bedieningselement vraagt, en de
-  // rol die Material 3 hier zelf voorschrijft. Bewaakt door
-  // `test/input_field_border_test.dart`.
-  final rand = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(6),
-    borderSide: BorderSide(color: scheme.outline),
-  );
-
-  return InputDecorationTheme(
-    // Geen vulling. Een zwevend label staat half boven de bovenrand van het
-    // veld en half erin; met een vulling loopt er dus altijd een kleurovergang
-    // dwars door de letters, want de gap van een [OutlineInputBorder]
-    // onderbreekt alleen de lijn en niet het vlak. In het lichte profiel viel
-    // dat niet op (#F4F7FC tegen #FFFFFF), in het donkere las het als een
-    // afgesneden onderste letterhelft: #0F172A tegen #1E293B (#811). Zonder
-    // vulling neemt het veld over waar het op staat, en dan is er niets om
-    // doorheen te lopen.
-    filled: false,
-    // Een tip moet er als een tip uitzien. Zonder deze regel erft `hintText` de
-    // gewone tekstkleur, en dan is een leeg veld met een voorbeeldwaarde niet
-    // te onderscheiden van een ingevuld veld. Dat kostte een scorecard-dia: het
-    // formulier oogde gevuld, de dia renderde wit, en dat bleek pas op de
-    // beamer. Bewaakt door `test/input_hint_contrast_test.dart`.
-    //
-    // `muted` en niet `scheme.onSurfaceVariant`: die laatste ligt maar 0,04
-    // luminantie van de gewone tekstkleur af — een verschil dat je met een
-    // kleurenkiezer ziet en met het oog niet.
-    hintStyle: TextStyle(color: muted),
-    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-    border: rand,
-    enabledBorder: rand,
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(6),
-      borderSide: BorderSide(color: accentColor, width: 1.5),
-    ),
-  );
 }

@@ -100,7 +100,14 @@ dependencies:
   flutter_webrtc: ^1.5.2
   file_selector: ^1.1.0
   re_highlight: ^0.0.3
-  material_ui: ^1.0.1
+  material_ui: ^1.5.0
+  # Productneutrale profielen, Material-thema-opbouw en contrastcontrole.
+  # De commit blijft onveranderlijk; releases worden per package getagd.
+  app_appearance:
+    git:
+      url: ssh://git@pawprint.vigilis.online:2222/LibreKAT/AppFoundation.git
+      ref: d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82
+      path: packages/app_appearance
   timezone: ^0.11.1
 
 # dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.
