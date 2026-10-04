@@ -246,7 +246,7 @@ The JSON documents carry **789 dependency relations** between these components: 
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
-| dompurify | 3.4.13 | Apache-2.0 OR MPL-2.0 | — | `pkg:npm/dompurify@3.4.13` |
+| dompurify | 3.4.16 | Apache-2.0 OR MPL-2.0 | — | `pkg:npm/dompurify@3.4.16` |
 | highlight.js | 11.11.1 | BSD-3-Clause | — | `pkg:npm/highlight.js@11.11.1` |
 | marked | 18.0.5 | MIT | — | `pkg:npm/marked@18.0.5` |
 | mathjax | 3.2.2 | Apache-2.0 | — | `pkg:npm/mathjax@3.2.2` |

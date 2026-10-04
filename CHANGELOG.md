@@ -419,6 +419,9 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- De meegeleverde DOMPurify voor offline HTML-export is bijgewerkt van 3.4.13
+  naar 3.4.16. Daarmee is `GHSA-p98j-92pf-mc4p` verholpen; bron en SHA-256
+  blijven exact vastgelegd in het manifest.
 - **Een document met een UTF-8-BOM blijft na openen en opslaan byte-identiek
   (§3.1 van DOCUMENT_MODE).** Dart's `readAsString()` en `utf8.decode` gooien
   een leidende BOM (`EF BB BF`) stilzwijgend weg en `utf8.encode` schrijft hem
