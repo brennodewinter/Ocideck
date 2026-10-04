@@ -1634,6 +1634,178 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Serveris nenurodė, kokia forma priklauso šiam pateikimui — užpildyti jos čia negalima.',
+  ', {n} niet binnengehaald': ', {n} negauta',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Saugojimo terminai neteisingi: juodraštis ne daugiau kaip {draft} dienas, pateikimas ne daugiau kaip {submitted} dienas.',
+  'Formulier gepubliceerd als versie {n}.': 'Forma paskelbta kaip versija {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Nauja versija {n} paskelbta.',
+  'Organisatie: {organisatie}': 'Organizacija: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Tiesiai organizatoriui serveryje {server}. Patvirtini atsidarančiame lange; nieko niekada nesiunčiama savaime.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Versija: {versie} — ankstesnės versijos lieka nepakeičiamos.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Per OciServe · versija {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Kontrolinė suma: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} nauji, {bijgewerkt} atnaujinti, {ingetrokken} atšaukti{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Serveris šiuo metu nepasiekiamas. Pabandyk vėliau dar kartą; nieko neišsiųsta.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Per daug bandymų iš eilės. Palauk truputį ir bandyk dar kartą.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Šis adresas arba kodas atrodo neteisingas. Patikrink ir bandyk dar kartą.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Tai nepavyko. Nieko neišsiųsta — bandyk dar kartą.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Tavo el. pašto adresas įrodo tik tai, kad gali pasiekti pašto dėžutę — tai nėra paskyra ir nieko nesiunčiama, kol pats nepatvirtini.',
+  'Je e-mailadres': 'Tavo el. pašto adresas',
+  'Code aanvragen': 'Prašyti kodo',
+  'Opnieuw versturen': 'Siųsti dar kartą',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Pakartotinai išsiųsti galėsi po {seconden} sekundžių.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Kodas jau kelyje į tą adresą (net jei adreso nėra — to čia neišgirsi).',
+  'Code uit de e-mail': 'Kodas iš el. laiško',
+  'Code controleren': 'Tikrinti kodą',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Šio pateikimo dabar siųsti negalima — jis uždarytas, atšauktas arba neatidarytas taisymų etapas. Tavo darbas saugus šiame faile; išsaugok jį kaip zip, kad galėtum nusiųsti.',
+  'Het pakket wordt verstuurd…': 'Paketas siunčiamas…',
+  'De inzending wordt vastgelegd…': 'Pateikimas registruojamas…',
+  'De inzending wordt ingetrokken…': 'Pateikimas atšaukiamas…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Prieiga baigėsi. Paprašyk naujo kodo per grįžimo nuorodą; tavo darbas saugus šiame faile.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Paketas per didelis siųsti. Pašalink vieną nuotrauką ir bandyk dar kartą — arba išsaugok jį kaip zip ir siųsk jį.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Serveris negavo būtent to, kas buvo išsiųsta. Nieko neužfiksuota; bandyk dar kartą.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Serveris atsakė kažką netikėto. Nieko neužfiksuota; bandyk vėliau.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Serveris šiuo metu nepasiekiamas. Nieko neišsiųsta — tavo darbas saugus šiame faile.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Siuntimas nepavyko. Nieko neužfiksuota — tavo darbas saugus šiame faile; išsaugok jį kaip zip, kad galėtum nusiųsti.',
+  'Verzenden via OciServe': 'Siųsti per OciServe',
+  'Bestemming: {server}': 'Paskirtis: {server}',
+  'Doel: {doelen}': 'Tikslas: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Saugojimas: {dagen} dienų po pateikimo.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Ši forma šiuo metu nepriima naujų pateikimų.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Formos nepavyko gauti. Savo darbą vis tiek gali išsaugoti kaip zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Nieko nesiunčiama, kol nepatvirtini žemiau. Išsaugoti kaip zip visada įmanoma.',
+  'Insturen…': 'Pateikti…',
+  'Correctie insturen…': 'Pateikti pataisą…',
+  'Inzending bijwerken…': 'Atnaujinti pateikimą…',
+  'Inzending intrekken…': 'Atšaukti pateikimą…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Tai taps tavo pateikimo {n} versija serveryje {server}. Po pateikimo jo nebegalėsi keisti — klaida ištaisoma nauju taisymų etapu.',
+  'Definitief insturen': 'Pateikti galutinai',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Atšaukimas panaikina tavo pateikimą pas organizatorių ir jo nebegalima atšaukti. Ar nori tęsti?',
+  'Verstuurd als revisie {n}.': 'Išsiųsta kaip {n} versija.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Gausi grįžimo nuorodą el. laišku. Ta nuoroda atidaro tavo pateikimą tik kartu su nauju kodu — pati nuoroda nėra raktas.',
+  'Je inzending is ingetrokken.': 'Tavo pateikimas atšauktas.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Serveris šiuo metu nepasiekiamas. Patikrink nuorodą ir bandyk vėliau.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Nuoroda neveikė. Patikrink ją ir bandyk dar kartą.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Tai nėra pakvietimo ar grįžimo nuoroda, kurią OciDeck pažįsta. Nuoroda prasideda https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Šiame leidinyje nėra formos, kurią OciDeck galėtų užpildyti.',
+  'Bewaar het formulier om in te vullen': 'Išsaugoti formą užpildymui',
+  'Formulieruitnodiging': 'Pakvietimas į formą',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Įklijuok gautą pakvietimo ar grįžimo nuorodą. Pati nuoroda nėra raktas — tavo pateikimui visada reikalingas naujas kodas.',
+  'Uitnodigings- of terugkeerlink': 'Pakvietimo ar grįžimo nuoroda',
+  'Link openen': 'Atidaryti nuorodą',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Ši nuoroda nukreipia į tavo pateikimą serveryje {server}. Jos atidarymui reikalingas naujas kodas — pati nuoroda niekada neužtenka.',
+  'Deze link wijst naar {server}.': 'Ši nuoroda nukreipia į {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Čia turi juodraštį (versija {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Tavo pateikimas gautas (versija {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Organizatorius paprašė pataisos: tavo pakeitimas taps versija {n}.',
+  'Deze inzending is ingetrokken.': 'Šis pateikimas atšauktas.',
+  'Formulier invullen': 'Užpildyti formą',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Pildai savo įrenginyje; nieko nesiunčiama, kol pats nepatvirtini.',
+  'Als behandeld gemarkeerd op de server.': 'Serveryje pažymėta kaip apdorota.',
+  'Als behandeld markeren': 'Pažymėti kaip apdorotą',
+  'Als nieuwe versie publiceren': 'Paskelbti kaip naują versiją',
+  'Correctie achteraf toestaan': 'Leisti vėlesnę pataisą',
+  'Correctieronde geopend op de server.':
+      'Taisymų etapas atidarytas serveryje.',
+  'Correctieronde openen': 'Atidaryti taisymų etapą',
+  'Correctieronde openen…': 'Atidaryti taisymų etapą…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Taisymų terminas (dienos, tuščia = be pabaigos)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Tai nepavyko serveryje. Nieko nepasikeitė.',
+  'De correctietermijn klopt niet.': 'Taisymų terminas neteisingas.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Užpildytojas tuomet gali pateikti naują versiją. Jo ankstesnis pateikimas lieka nepakitęs.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Pateikimas dingsta OciServe; ten esantis valymo registras žymi, kas dingo. Kas yra tavo darbinėje aplankalyje, lieka — tai išvalai atskirai.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Serveris šiuo metu nepasiekiamas. Nieko nepaskelbta — bandyk vėliau.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Serveris šiuo metu nepasiekiamas. Nieko nepasikeitė — bandyk vėliau.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Pasidalyk šia pakvietimo nuoroda su tais, kuriems nori leisti užpildyti formą. Nuoroda nukreipia tik į formą — ji neatidaro pateikimų.',
+  'Dit gaat er naartoe': 'Ten tai nueina',
+  'Doelen (één per regel)': 'Tikslai (po vieną eilutėje)',
+  'Inzending bewaren (dagen)': 'Saugoti pateikimą (dienos)',
+  'Inzending opschonen op de server': 'Išvalyti pateikimą serveryje',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Šios formos ten skelbti negali. Patikrink organizaciją ir savo teises.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'To serveryje daryti negali. Patikrink organizaciją ir savo teises.',
+  'Link kopiëren': 'Kopijuoti nuorodą',
+  'Naam voor de organisatie': 'Organizacijos pavadinimas',
+  'Ontwerp bewaren (dagen)': 'Saugoti juodraštį (dienos)',
+  'Opschonen ingepland op de server.': 'Valymas suplanuotas serveryje.',
+  'Opschonen op de server': 'Išvalyti serveryje',
+  'Opschonen op de server…': 'Išvalyti serveryje…',
+  'Privacytekst': 'Privatumo tekstas',
+  'Publiceren': 'Paskelbti',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Paskelbti nepavyko. Serveryje nieko nepasikeitė.',
+  'Publiceren via OciServe': 'Paskelbti per OciServe',
+  'Server: {server}': 'Serveris: {server}',
+  'Titel die de invuller ziet': 'Pavadinimas, kurį mato užpildytojas',
+  'Vul een naam en een titel in.': 'Įvesk pavadinimą ir antraštę.',
+  'Vul minstens één doel in — per regel één.':
+      'Įvesk bent vieną tikslą — po vieną eilutėje.',
+  'Waarom (niet verplicht)': 'Kodėl (neprivaloma)',
+  'Weer als open gemarkeerd op de server.':
+      'Serveryje vėl pažymėta kaip atvira.',
+  'Weer als open markeren': 'Vėl pažymėti kaip atvirą',
+  'correctieronde open': 'pataisa atvira',
+  'ingediend': 'pateikta',
+  'ingetrokken': 'atšaukta',
+  'ontwerp': 'juodraštis',
+  'Insturen via OciServe…': 'Pateikti per OciServe…',
+  'Ophalen van OciServe': 'Gauti iš OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Paskelbk formą kaip užfiksuotą versiją jūsų OciServe ir pasidalyk pakvietimo nuoroda.',
+  'Publiceren via OciServe…': 'Paskelbti per OciServe…',
+  'Uitnodiging openen…': 'Atidaryti pakvietimą…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'serveris šiuo metu nepasiekiamas; nieko nepasikeitė.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'šių pateikimų ten skaityti negali — patikrink organizaciją ir savo teises.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'gauti nepavyko; nieko nepasikeitė.',
   'Offline uitnodigingspakket maken…': 'Sukurti neprisijungus kvietimo paketą…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} pridėtas. Sukurkite kvietimo paketą iš naujo, kad {naam} būtų įtrauktas.',

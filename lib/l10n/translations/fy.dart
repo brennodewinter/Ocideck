@@ -667,6 +667,180 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'De server joech net oan hokker formulier by dizze ynstjoering heart — ynfoljen is hjir net mooglik.',
+  ', {n} niet binnengehaald': ', {n} net binnenhelle',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'De bewaartermynen klopje net: in ûntwurpsk maksimaal {draft} dagen, in ynstjoering maksimaal {submitted} dagen.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formulier publisearre as ferzje {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Nije ferzje {n} publisearre.',
+  'Organisatie: {organisatie}': 'Organisaasje: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Streekrjocht nei de organisator op {server}. Do befêstigest yn it finster dat iepent; der wurdt nea fanssels eat ferstjoerd.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Ferzje: {versie} — eardere ferzjes bliuwe ûnoantaastber.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Fia OciServe · revyzje {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Fingerôfdruk: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} nij, {bijgewerkt} bywurke, {ingetrokken} ynlutsen{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'De server is no net berikber. Probearje it letter opnij; der is neat ferstjoerd.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Te folle besykjen efter elkoar. Wachtsje even en probearje it opnij.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Dit adres of dizze koade kloppet sa net. Kontrolearje it en probearje it opnij.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Dat is net slagge. Der is neat ferstjoerd — probearje it opnij.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Jo e-mailadres bewiist allinnich datst by de mailbox kinst — it is gjin account en der wurdt neat ferstjoerd foardatst sels befêstigest.',
+  'Je e-mailadres': 'Jo e-mailadres',
+  'Code aanvragen': 'Koade oanfreegje',
+  'Opnieuw versturen': 'Opnij ferstjoere',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Opnij ferstjoere kin oer {seconden} sekonden.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Der is in koade ûnderweis nei dat adres (ek as it adres net bestiet — dat hearst hjir net).',
+  'Code uit de e-mail': 'Koade út de e-mail',
+  'Code controleren': 'Koade kontrolearje',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Dizze ynstjoering kin no net ferstjoerd wurde — hy is sluten, ynlutsen of der rint gjin korreksjeronde. Jo wurk stiet feilich yn dit bestân; bewarje it as zip om it mei te stjoeren.',
+  'Het pakket wordt verstuurd…': 'It pakke wurde ferstjoerd…',
+  'De inzending wordt vastgelegd…': 'De ynstjoering wurdt fêstlein…',
+  'De inzending wordt ingetrokken…': 'De ynstjoering wurdt ynlutsen…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'De tagong is ferrûn. Freegje in nije koade oan fia de weromkearlink; jo wurk stiet feilich yn dit bestân.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'It pakke is te grut om te ferstjoeren. Helje in foto fuort en probearje it opnij — of bewarje it as zip en stjoer dat mei.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'De server ûntfong net krekt wat der ferstjoerd is. Der is neat fêstlein; probearje it opnij.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'De server antwurde eat ûnferwachts. Der is neat fêstlein; probearje it letter opnij.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'De server is no net berikber. Der is neat ferstjoerd — jo wurk stiet feilich yn dit bestân.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Ferstjoeren is net slagge. Der is neat fêstlein — jo wurk stiet feilich yn dit bestân; bewarje it as zip om it mei te stjoeren.',
+  'Verzenden via OciServe': 'Ferstjoere fia OciServe',
+  'Bestemming: {server}': 'Bestimming: {server}',
+  'Doel: {doelen}': 'Doel: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Bewarje: {dagen} dagen nei ynstjoeren.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Dit formulier nimt no gjin nije ynstjoeringen oan.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'It formulier koe net ophelle wurde. Do kinst jo wurk dochs noch as zip bewarje.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Der wurdt pas eat ferstjoerd ast hjirûnder befêstigest. Bewarje as zipbestân bliuwt altyd mooglik.',
+  'Insturen…': 'Ynstjoere…',
+  'Correctie insturen…': 'Korreksje ynstjoere…',
+  'Inzending bijwerken…': 'Ynstjoering bywurkje…',
+  'Inzending intrekken…': 'Ynstjoering ynlûke…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Dit wurdt revyzje {n} fan jo ynstjoering op {server}. Nei it ynstjoeren kinne jo him net mear oanpasse — in flater reparearje jo mei in nije korreksjeronde.',
+  'Definitief insturen': 'Definityf ynstjoere',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Ynlûken heljt jo ynstjoering fuort by de organisator en kin net ûndien makke wurde. Wolle jo trochgean?',
+  'Verstuurd als revisie {n}.': 'Ferstjoerd as revyzje {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Do krijst in weromkearlink per e-mail. Dy link iepent jo ynstjoering allinnich tegearre mei in nije koade — de link allinnich is gjin kaai.',
+  'Je inzending is ingetrokken.': 'Jo ynstjoering is ynlutsen.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'De server is no net berikber. Kontrolearje de link en probearje it letter opnij.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'De link die net. Kontrolearje him en probearje it opnij.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Dat is gjin útnûgings- of weromkearlink dy\'t OciDeck kent. In link begjint mei https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Dizze publikaasje befettet gjin formulier dat OciDeck ynfolje kin.',
+  'Bewaar het formulier om in te vullen':
+      'Bewarje it formulier om yn te foljen',
+  'Formulieruitnodiging': 'Formulierútnoeging',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Plak de útnûgings- of weromkearlink dy\'tst krige. De link sels is gjin kaai — foar jo ynstjoering is altyd in nije koade nedich.',
+  'Uitnodigings- of terugkeerlink': 'Útnûgings- of weromkearlink',
+  'Link openen': 'Link iepenje',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Dizze link wiist nei jo ynstjoering op {server}. Om him te iepenjen is in nije koade nedich — de link allinnich is nea genôch.',
+  'Deze link wijst naar {server}.': 'Dizze link wiist nei {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Do hast hjir in ûntwurpsk stean (revyzje {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Jo ynstjoering is binnen (revyzje {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'De organisator frege in korreksje: jo wiziging wurdt revyzje {n}.',
+  'Deze inzending is ingetrokken.': 'Dizze ynstjoering is ynlutsen.',
+  'Formulier invullen': 'Formulier ynfolje',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Do follest yn op jo eigen apparaat; der wurdt pas eat ferstjoerd ast sels befêstigest.',
+  'Als behandeld gemarkeerd op de server.':
+      'Markearre as behannele op de server.',
+  'Als behandeld markeren': 'As behannele markearje',
+  'Als nieuwe versie publiceren': 'As nije ferzje publisearje',
+  'Correctie achteraf toestaan': 'Korreksje efterôf tastean',
+  'Correctieronde geopend op de server.': 'Korreksjeronde iepene op de server.',
+  'Correctieronde openen': 'Korreksjeronde iepenje',
+  'Correctieronde openen…': 'Korreksjeronde iepenje…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Korreksjetermyn (dagen, leech = gjin ein)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Dat die net op de server. Der is neat feroare.',
+  'De correctietermijn klopt niet.': 'De korreksjetermyn kloppet net.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'De ynvuller mei dan in nije ferzje ynstjoere. Syn eardere ynstjoering bliuwt ûnferoare stean.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'De ynstjoering ferdwynt by OciServe; it opskoanregister dêr hâldt by wat der wei is. Wat der yn jo wurkmap stiet bliuwt — dat rume jo apart op.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'De server is no net berikber. Der is neat publisearre — probearje it letter opnij.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'De server is no net berikber. Der is neat feroare — probearje it letter opnij.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Diel dizze útnûgingslink mei wa\'tst it formulier ynfolje litte wolst. De link wiist allinnich nei it formulier — hy iepent gjin ynstjoeringen.',
+  'Dit gaat er naartoe': 'Dêr giet it hinne',
+  'Doelen (één per regel)': 'Doelen (ien per rigel)',
+  'Inzending bewaren (dagen)': 'Ynstjoering bewarje (dagen)',
+  'Inzending opschonen op de server': 'Ynstjoering opskoanje op de server',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Do meist dit formulier dêr net publisearje. Kontrolearje de organisaasje en jo rjochten.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Do meist dit op de server net. Kontrolearje de organisaasje en jo rjochten.',
+  'Link kopiëren': 'Link kopiearje',
+  'Naam voor de organisatie': 'Namme foar de organisaasje',
+  'Ontwerp bewaren (dagen)': 'Ûntwurpsk bewarje (dagen)',
+  'Opschonen ingepland op de server.': 'Opskoanje ynpland op de server.',
+  'Opschonen op de server': 'Opskoanje op de server',
+  'Opschonen op de server…': 'Opskoanje op de server…',
+  'Privacytekst': 'Privacytekst',
+  'Publiceren': 'Publisearje',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Publisearjen is net slagge. Der is op de server neat feroare.',
+  'Publiceren via OciServe': 'Publisearje fia OciServe',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Titel dy\'t de ynvuller sjocht',
+  'Vul een naam en een titel in.': 'Folje in namme en in titel yn.',
+  'Vul minstens één doel in — per regel één.':
+      'Folje teminsten ien doel yn — per rigel ien.',
+  'Waarom (niet verplicht)': 'Wêrom (net ferplichte)',
+  'Weer als open gemarkeerd op de server.':
+      'Wer as iepen markearre op de server.',
+  'Weer als open markeren': 'Wer as iepen markearje',
+  'correctieronde open': 'korreksjerondte iepen',
+  'ingediend': 'ynstjoerd',
+  'ingetrokken': 'ynlutsen',
+  'ontwerp': 'ûntwurpsk',
+  'Insturen via OciServe…': 'Ynstjoere fia OciServe…',
+  'Ophalen van OciServe': 'Ophelje fan OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Publisearje in formulier as fêstleine ferzje op jim OciServe en diel de útnûgingslink.',
+  'Publiceren via OciServe…': 'Publisearje fia OciServe…',
+  'Uitnodiging openen…': 'Útnoeging iepenje…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'de server is no net berikber; der is neat feroare.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'do meist dizze ynstjoeringen dêr net lêze — kontrolearje de organisaasje en jo rjochten.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'opheljen is net slagge; der is neat feroare.',
   'Offline uitnodigingspakket maken…': 'Offline útnoegingspakke meitsje…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} is tafoege. Meitsje it útnoegingspakke opnij om {naam} derin op te nimmen.',

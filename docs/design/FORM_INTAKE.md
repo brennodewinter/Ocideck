@@ -2170,10 +2170,14 @@ controlled commits before it could ship.
 **To build (4b, #2262):** the renewed pinned spec and the gateway extension for tags
 `Intake`/`IntakeRespondent` — `ociserve_gateway_intake.dart` beside the exam and planning
 gateways, respondent transport under `IntakeGrant`, drift tests over every used route.
-**To build (4c, #2260):** the publish dialog (§7.8), the respondent chain in the fill
+**Built (4c, #2260):** the publish dialog (§7.8), the respondent chain in the fill
 view (challenge → code → grant → draft/submit/withdraw), return-link resume, correction
 rounds, the organiser fetch/`mark-handled` in the Inbox — plus their l10n, widget and
-contract tests.
+contract tests. `form_intake_context.dart` carries the respondent sidecar,
+`form_intake_snapshot.dart` the published envelope and `form_intake_organiser.dart`
+the workspace records and the explicit fetch round; `form_intake_*.dart` under
+`lib/widgets/forms/` are the invitation, challenge, send, publish and row-action
+windows.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip

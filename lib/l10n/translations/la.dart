@@ -1642,6 +1642,179 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Servitorium non indicavit quae forma ad hanc missionem pertineat — replere hic non potest.',
+  ', {n} niet binnengehaald': ', {n} non acceptae',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Tempora retentionis recta non sunt: draftum ad summum {draft} dies, missio ad summum {submitted} dies.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formularium ut versio {n} publicatum est.',
+  'Nieuwe versie {n} gepubliceerd.': 'Nova versio {n} publicata est.',
+  'Organisatie: {organisatie}': 'Ordinatio: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Directe ad ordinatorem in {server}. Confirmas in fenestra quae aperitur; numquam sponte quidquam mittitur.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Versio: {versie} — versiones priores intactae manent.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Per OciServe · revisio {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Impressio: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} novae, {bijgewerkt} renovatae, {ingetrokken} retractatae{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Servitorium nunc attingi non potest. Postea iterum tempta; nihil missum est.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Nimis multae contentiones continuae. Paululum exspecta et iterum tempta.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Haec directio vel hic codex rectus non videtur. Inspice et iterum tempta.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Non successit. Nihil missum est — iterum tempta.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Directio tua solum probat te ad arcam litterarum accedere posse — non est ratio tua nec quidquam mittitur antequam ipse confirmes.',
+  'Je e-mailadres': 'Directio tua',
+  'Code aanvragen': 'Codicem pete',
+  'Opnieuw versturen': 'Iterum mitte',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Iterum mittere poteris post {seconden} secundas.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Codex ad illam directionem it (etiamsi directio non est — id hic non audies).',
+  'Code uit de e-mail': 'Codex ex epistula',
+  'Code controleren': 'Codicem proba',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Haec missio nunc mitti non potest — clausa, retractata est vel nulla correctio patet. Opus tuum in hoc file tutum est; serva ut zip ut mittatur.',
+  'Het pakket wordt verstuurd…': 'Fascis mittitur…',
+  'De inzending wordt vastgelegd…': 'Missio reponitur…',
+  'De inzending wordt ingetrokken…': 'Missio retractatur…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Aditus exspiravit. Novum codicem per nexum reditus pete; opus tuum in hoc file tutum est.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Fascis nimis magnus est ad mittendum. Unam imaginem aufer et iterum tempta — vel serva ut zip et illud mitte.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Servitorium non precise accepit quod missum est. Nihil repositum est; iterum tempta.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Servitorium aliquid inexpectatum respondit. Nihil repositum est; postea iterum tempta.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Servitorium nunc attingi non potest. Nihil missum est — opus tuum in hoc file tutum est.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Mittere non successit. Nihil repositum est — opus tuum in hoc file tutum est; serva ut zip ut mittatur.',
+  'Verzenden via OciServe': 'Mitte per OciServe',
+  'Bestemming: {server}': 'Destinatio: {server}',
+  'Doel: {doelen}': 'Propositum: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Retentio: {dagen} dies post missionem.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Hoc formularium nunc novas missiones non accipit.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Formularium accipi non potuit. Opus tuum tamen ut zip servare potes.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Nihil mittitur nisi infra confirmes. Ut zip servare semper licet.',
+  'Insturen…': 'Mitte…',
+  'Correctie insturen…': 'Correctionem mitte…',
+  'Inzending bijwerken…': 'Missionem renova…',
+  'Inzending intrekken…': 'Missionem retracta…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Haec fiet revisio {n} missionis tuae in {server}. Post missum eam mutare iam non potes — error nova correctione corrigitur.',
+  'Definitief insturen': 'Definitive mitte',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Retractatio missionem tuam apud ordinatorem tollit nec rescindi potest. Pergere vis?',
+  'Verstuurd als revisie {n}.': 'Missum ut revisio {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Nexum reditus per litteras accipies. Ille nexus missionem tuam solum cum novo codice aperit — nexus solus clavis non est.',
+  'Je inzending is ingetrokken.': 'Missio tua retractata est.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Servitorium nunc attingi non potest. Nexum inspice et postea iterum tempta.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Nexus non operatus est. Inspice et iterum tempta.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Hic non est nexus invitationis vel reditus quem OciDeck novit. Nexus incipit ab https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Haec publicatio formularium non continet quod OciDeck complere potest.',
+  'Bewaar het formulier om in te vullen': 'Formularium serva ad complendum',
+  'Formulieruitnodiging': 'Invitatio formularii',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Nexum invitationis vel reditus quem accepisti pone. Nexus ipse clavis non est — missio tua semper novum codicem poscit.',
+  'Uitnodigings- of terugkeerlink': 'Nexus invitationis vel reditus',
+  'Link openen': 'Nexum aperi',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Hic nexus ad missionem tuam in {server} spectat. Ad aperiendum novus codex necesse est — nexus solus numquam sufficit.',
+  'Deze link wijst naar {server}.': 'Hic nexus ad {server} spectat.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Draftum hic habes (revisio {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Missio tua recepta est (revisio {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Ordinator correctionem petiit: mutatio tua fiet revisio {n}.',
+  'Deze inzending is ingetrokken.': 'Haec missio retractata est.',
+  'Formulier invullen': 'Formularium comple',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'In tuo ipso instrumento comples; nihil mittitur nisi ipse confirmes.',
+  'Als behandeld gemarkeerd op de server.':
+      'In servitorio ut tractatum signatum.',
+  'Als behandeld markeren': 'Ut tractatum signa',
+  'Als nieuwe versie publiceren': 'Ut novam versionem publica',
+  'Correctie achteraf toestaan': 'Correctionem postea admitte',
+  'Correctieronde geopend op de server.': 'Correctio in servitorio aperta est.',
+  'Correctieronde openen': 'Correctionem aperi',
+  'Correctieronde openen…': 'Correctionem aperi…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Terminus correctionis (dies, vacuum = sine fine)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'In servitorio non successit. Nihil mutatum est.',
+  'De correctietermijn klopt niet.': 'Terminus correctionis rectus non est.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Complens deinde novam versionem mittere potest. Missio eius prior immutata manet.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Missio apud OciServe evanescit; ibi purgationis index notat quid abierit. Quod in tua area est manet — id seorsum purgas.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Servitorium nunc attingi non potest. Nihil publicatum est — postea iterum tempta.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Servitorium nunc attingi non potest. Nihil mutatum est — postea iterum tempta.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Hunc nexum invitationis comunica cum quo vis formularium compleri. Nexus ad formularium solum spectat — missiones non aperit.',
+  'Dit gaat er naartoe': 'Hoc illuc it',
+  'Doelen (één per regel)': 'Proposita (unum per lineam)',
+  'Inzending bewaren (dagen)': 'Missionem serva (dies)',
+  'Inzending opschonen op de server': 'Missionem in servitorio purga',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Hoc formularium ibi publicare non licet. Ordinationem et iura tua inspice.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Hoc in servitorio facere non licet. Ordinationem et iura tua inspice.',
+  'Link kopiëren': 'Nexum transcribe',
+  'Naam voor de organisatie': 'Nomen ordinationi',
+  'Ontwerp bewaren (dagen)': 'Draftum serva (dies)',
+  'Opschonen ingepland op de server.': 'Purgatio in servitorio destinata est.',
+  'Opschonen op de server': 'In servitorio purga',
+  'Opschonen op de server…': 'In servitorio purga…',
+  'Privacytekst': 'Textus privatus',
+  'Publiceren': 'Publica',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Publicare non successit. Nihil in servitorio mutatum est.',
+  'Publiceren via OciServe': 'Publica per OciServe',
+  'Server: {server}': 'Servitorium: {server}',
+  'Titel die de invuller ziet': 'Titulus quem complens videt',
+  'Vul een naam en een titel in.': 'Nomen et titulum pone.',
+  'Vul minstens één doel in — per regel één.':
+      'Saltem unum propositum pone — unum per lineam.',
+  'Waarom (niet verplicht)': 'Cur (non necessarium)',
+  'Weer als open gemarkeerd op de server.':
+      'In servitorio iterum ut apertum signatum.',
+  'Weer als open markeren': 'Iterum ut apertum signa',
+  'correctieronde open': 'correctio aperta',
+  'ingediend': 'missa',
+  'ingetrokken': 'retractata',
+  'ontwerp': 'draftum',
+  'Insturen via OciServe…': 'Mitte per OciServe…',
+  'Ophalen van OciServe': 'Ex OciServe accipe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Formularium ut versionem defixam in OciServe vestro publica et nexum invitationis communica.',
+  'Publiceren via OciServe…': 'Publica per OciServe…',
+  'Uitnodiging openen…': 'Invitationem aperi…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'servitorium nunc attingi non potest; nihil mutatum est.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'has missiones ibi legere non licet — ordinationem et iura tua inspice.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'accipere non successit; nihil mutatum est.',
   'Offline uitnodigingspakket maken…':
       'Fasciculum invitationis sine nexu creare…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':

@@ -1620,6 +1620,176 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Server ei teatanud, milline vorm selle esituse juurde kuulub — täitmine pole siin võimalik.',
+  ', {n} niet binnengehaald': ', {n} laadimata',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Säilitusajad pole õiged: mustand kõige rohkem {draft} päeva, esitus kõige rohkem {submitted} päeva.',
+  'Formulier gepubliceerd als versie {n}.': 'Vorm avaldatud versioonina {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Uus versioon {n} avaldatud.',
+  'Organisatie: {organisatie}': 'Organisatsioon: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Otse korraldajale serveris {server}. Kinnitad avanevas aknas; midagi ei saadeta kunagi iseenesest.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Versioon: {versie} — varasemad versioonid jäävad puutumatuks.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'OciServe kaudu · redaktsioon {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Sõrmejälg: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} uut, {bijgewerkt} uuendatud, {ingetrokken} tagasi võetud{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Server ei ole praegu kättesaadav. Proovi hiljem uuesti; midagi ei saadetud.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Liiga palju katseid järjest. Oota veidi ja proovi uuesti.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'See aadress või kood ei tundu õige. Kontrolli ja proovi uuesti.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'See ei õnnestunud. Midagi ei saadetud — proovi uuesti.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Sinu e-posti aadress tõestab ainult, et pääsed postkasti — see ei ole konto ja midagi ei saadeta enne, kui ise kinnitad.',
+  'Je e-mailadres': 'Sinu e-posti aadress',
+  'Code aanvragen': 'Küsi koodi',
+  'Opnieuw versturen': 'Saada uuesti',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Uuesti saata saad {seconden} sekundi pärast.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Kood on teel sellele aadressile (isegi kui aadressi ei ole — seda sa siit ei kuule).',
+  'Code uit de e-mail': 'Kood e-kirjast',
+  'Code controleren': 'Kontrolli koodi',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Seda esitust ei saa praegu saata — see on suletud, tagasi võetud või parandusvoor pole avatud. Sinu töö on selles failis kaitstud; salvesta see zipina, et saata.',
+  'Het pakket wordt verstuurd…': 'Paketti saadetakse…',
+  'De inzending wordt vastgelegd…': 'Esitust kinnitatakse…',
+  'De inzending wordt ingetrokken…': 'Esitust võetakse tagasi…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Juurdepääs aegus. Küsi uus kood tagasilinkimise kaudu; sinu töö on selles failis kaitstud.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Pakett on saatmiseks liiga suur. Eemalda üks foto ja proovi uuesti — või salvesta see zipina ja saada see.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Server ei saanud täpselt seda, mis saadeti. Midagi ei fikseeritud; proovi uuesti.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Server vastas midagi ootamatut. Midagi ei fikseeritud; proovi hiljem uuesti.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Server ei ole praegu kättesaadav. Midagi ei saadetud — sinu töö on selles failis kaitstud.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Saatmine ei õnnestunud. Midagi ei fikseeritud — sinu töö on selles failis kaitstud; salvesta see zipina, et saata.',
+  'Verzenden via OciServe': 'Saada OciServe kaudu',
+  'Bestemming: {server}': 'Sihtkoht: {server}',
+  'Doel: {doelen}': 'Eesmärk: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Säilitamine: {dagen} päeva pärast esitamist.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'See vorm ei võta praegu uusi esitusi vastu.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Vormi ei saanud alla laadida. Saad oma töö siiski zipina salvestada.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Midagi ei saadeta enne kui allpool kinnitad. Zipina salvestamine on alati võimalik.',
+  'Insturen…': 'Esita…',
+  'Correctie insturen…': 'Esita parandus…',
+  'Inzending bijwerken…': 'Uuenda esitust…',
+  'Inzending intrekken…': 'Võta esitus tagasi…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Sellest saab sinu esituse redaktsioon {n} serveris {server}. Pärast esitamist ei saa sa seda enam muuta — vea parandab uus parandusvoor.',
+  'Definitief insturen': 'Esita lõplikult',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Tagasivõtmine eemaldab sinu esituse korraldaja juurest ja seda ei saa tagasi võtta. Kas soovid jätkata?',
+  'Verstuurd als revisie {n}.': 'Saadetud redaktsioonina {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Saad tagasilinkimise e-kirja teel. See link avab sinu esituse ainult koos uue koodiga — link üksi ei ole võti.',
+  'Je inzending is ingetrokken.': 'Sinu esitus on tagasi võetud.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Server ei ole praegu kättesaadav. Kontrolli linki ja proovi hiljem uuesti.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Link ei töötanud. Kontrolli seda ja proovi uuesti.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'See ei ole OciDecki tuntud kutse- ega tagasilink. Link algab https://-ega.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'See avaldus ei sisalda vormi, mida OciDeck saaks täita.',
+  'Bewaar het formulier om in te vullen': 'Salvesta vorm täitmiseks',
+  'Formulieruitnodiging': 'Vormi kutse',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Kleebi saadud kutse- või tagasilink. Link ise pole võti — sinu esituse jaoks on alati vaja uut koodi.',
+  'Uitnodigings- of terugkeerlink': 'Kutse- või tagasilink',
+  'Link openen': 'Ava link',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'See link viitab sinu esitusele serveris {server}. Selle avamiseks on vaja uut koodi — link üksi ei piisa kunagi.',
+  'Deze link wijst naar {server}.': 'See link viitab serverile {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Sul on siin mustand (redaktsioon {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Sinu esitus on kohal (redaktsioon {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Korraldaja palus parandust: sinu muudatusest saab redaktsioon {n}.',
+  'Deze inzending is ingetrokken.': 'See esitus on tagasi võetud.',
+  'Formulier invullen': 'Täida vorm',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Täidad oma seadmes; midagi ei saadeta enne, kui ise kinnitad.',
+  'Als behandeld gemarkeerd op de server.': 'Serveris märgitud käsitletuks.',
+  'Als behandeld markeren': 'Märgi käsitletuks',
+  'Als nieuwe versie publiceren': 'Avalda uue versioonina',
+  'Correctie achteraf toestaan': 'Luba hilisem parandus',
+  'Correctieronde geopend op de server.': 'Parandusvoor avatud serveris.',
+  'Correctieronde openen': 'Ava parandusvoor',
+  'Correctieronde openen…': 'Ava parandusvoor…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Paranduse tähtaeg (päeva, tühi = lõputa)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'See ei õnnestunud serveris. Midagi ei muutunud.',
+  'De correctietermijn klopt niet.': 'Paranduse tähtaeg pole õige.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Täitja võib seejärel esitada uue versiooni. Tema varasem esitus jääb muutmata.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Esitus kaob OciServe\'is; sealne puhastusregister hoiab arvet, mis kadus. Mis sinu töökaustas on, jääb — selle koristad eraldi.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Server ei ole praegu kättesaadav. Midagi ei avaldatud — proovi hiljem uuesti.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Server ei ole praegu kättesaadav. Midagi ei muutunud — proovi hiljem uuesti.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Jaga seda kutselinki nendega, keda tahad vormi täitma panna. Link viitab ainult vormile — see ei ava esitusi.',
+  'Dit gaat er naartoe': 'Sinna see läheb',
+  'Doelen (één per regel)': 'Eesmärgid (üks rea kohta)',
+  'Inzending bewaren (dagen)': 'Säilita esitust (päeva)',
+  'Inzending opschonen op de server': 'Puhasta esitus serveris',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Sa ei tohi seda vormi seal avaldada. Kontrolli organisatsiooni ja oma õigusi.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Seda sa serveris teha ei tohi. Kontrolli organisatsiooni ja oma õigusi.',
+  'Link kopiëren': 'Kopeeri link',
+  'Naam voor de organisatie': 'Organisatsiooni nimi',
+  'Ontwerp bewaren (dagen)': 'Säilita mustandit (päeva)',
+  'Opschonen ingepland op de server.': 'Puhastus serveris planeeritud.',
+  'Opschonen op de server': 'Puhasta serveris',
+  'Opschonen op de server…': 'Puhasta serveris…',
+  'Privacytekst': 'Privaatsustekst',
+  'Publiceren': 'Avalda',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Avaldamine ei õnnestunud. Serveris ei muutunud midagi.',
+  'Publiceren via OciServe': 'Avalda OciServe kaudu',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Pealkiri, mida täitja näeb',
+  'Vul een naam en een titel in.': 'Sisesta nimi ja pealkiri.',
+  'Vul minstens één doel in — per regel één.':
+      'Sisesta vähemalt üks eesmärk — üks rea kohta.',
+  'Waarom (niet verplicht)': 'Miks (vabatahtlik)',
+  'Weer als open gemarkeerd op de server.': 'Serveris taas avatuks märgitud.',
+  'Weer als open markeren': 'Märgi taas avatuks',
+  'correctieronde open': 'parandus avatud',
+  'ingediend': 'esitatud',
+  'ingetrokken': 'tagasi võetud',
+  'ontwerp': 'mustand',
+  'Insturen via OciServe…': 'Esita OciServe kaudu…',
+  'Ophalen van OciServe': 'Hangi OciServe\'ist',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Avalda vorm kinnitatud versioonina teie OciServe\'is ja jaga kutselinki.',
+  'Publiceren via OciServe…': 'Avalda OciServe kaudu…',
+  'Uitnodiging openen…': 'Ava kutse…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'server ei ole praegu kättesaadav; midagi ei muutunud.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'sa ei tohi neid esitusi seal lugeda — kontrolli organisatsiooni ja oma õigusi.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'laadimine ei õnnestunud; midagi ei muutunud.',
   'Offline uitnodigingspakket maken…': 'Loo võrguta kutsepakett…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} on lisatud. Loo kutsepakett uuesti, et {naam} kaasata.',

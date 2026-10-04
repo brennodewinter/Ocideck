@@ -1627,6 +1627,179 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Palvelin ei kertonut, mikä lomake kuuluu tähän lähetykseen — täyttäminen ei ole mahdollista täällä.',
+  ', {n} niet binnengehaald': ', {n} ei noudettu',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Säilytysajat eivät ole oikein: luonnos enintään {draft} päivää, lähetys enintään {submitted} päivää.',
+  'Formulier gepubliceerd als versie {n}.': 'Lomake julkaistu versiona {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Uusi versio {n} julkaistu.',
+  'Organisatie: {organisatie}': 'Organisaatio: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Suoraan järjestäjälle palvelimella {server}. Vahvistat avautuvassa ikkunassa; mitään ei koskaan lähetetä itsestään.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Versio: {versie} — aiemmat versiot pysyvät koskemattomina.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'OciServen kautta · versio {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Sormenjälki: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} uutta, {bijgewerkt} päivitettyä, {ingetrokken} peruutettua{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Palvelin ei ole tavoitettavissa juuri nyt. Yritä myöhemmin uudelleen; mitään ei lähetetty.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Liian monta yritystä peräkkäin. Odota hetki ja yritä uudelleen.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Tämä osoite tai koodi ei näytä oikealta. Tarkista ja yritä uudelleen.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Se ei onnistunut. Mitään ei lähetetty — yritä uudelleen.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Sähköpostiosoitteesi todistaa vain, että pääset postilaatikkoon — se ei ole tili, eikä mitään lähetetä ennen kuin vahvistat itse.',
+  'Je e-mailadres': 'Sähköpostiosoitteesi',
+  'Code aanvragen': 'Pyydä koodi',
+  'Opnieuw versturen': 'Lähetä uudelleen',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Uudelleenlähetys on mahdollinen {seconden} sekunnin kuluttua.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Koodi on matkalla kyseiseen osoitteeseen (vaikka osoitetta ei olisikaan — sitä et saa täällä tietää).',
+  'Code uit de e-mail': 'Sähköpostista saatu koodi',
+  'Code controleren': 'Tarkista koodi',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Tätä lähetystä ei voi nyt lähettää — se on suljettu, peruutettu tai korjauskierros ei ole auki. Työsi on turvassa tässä tiedostossa; tallenna se zip-muodossa lähettääksesi sen.',
+  'Het pakket wordt verstuurd…': 'Pakettia lähetetään…',
+  'De inzending wordt vastgelegd…': 'Lähetystä kirjataan…',
+  'De inzending wordt ingetrokken…': 'Lähetystä peruutetaan…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Käyttöoikeus on vanhentunut. Pyydä uusi koodi paluulinkin kautta; työsi on turvassa tässä tiedostossa.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Paketti on liian suuri lähetettäväksi. Poista yksi kuva ja yritä uudelleen — tai tallenna se zip-muodossa ja lähetä se.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Palvelin ei vastaanottanut täsmälleen sitä, mitä lähetettiin. Mitään ei kirjattu; yritä uudelleen.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Palvelin vastasi jotain odottamatonta. Mitään ei kirjattu; yritä myöhemmin uudelleen.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Palvelin ei ole tavoitettavissa juuri nyt. Mitään ei lähetetty — työsi on turvassa tässä tiedostossa.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Lähettäminen ei onnistunut. Mitään ei kirjattu — työsi on turvassa tässä tiedostossa; tallenna se zip-muodossa lähettääksesi sen.',
+  'Verzenden via OciServe': 'Lähetä OciServen kautta',
+  'Bestemming: {server}': 'Kohde: {server}',
+  'Doel: {doelen}': 'Tarkoitus: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Säilytys: {dagen} päivää lähetyksen jälkeen.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Tämä lomake ei ota vastaan uusia lähetyksiä juuri nyt.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Lomaketta ei voitu hakea. Voit silti tallentaa työsi zip-muodossa.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Mitään ei lähetetä ennen kuin vahvistat alla. Zip-tiedostona tallentaminen on aina mahdollista.',
+  'Insturen…': 'Lähetä…',
+  'Correctie insturen…': 'Lähetä korjaus…',
+  'Inzending bijwerken…': 'Päivitä lähetys…',
+  'Inzending intrekken…': 'Peruuta lähetys…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Tästä tulee lähetyksesi versio {n} palvelimella {server}. Lähettämisen jälkeen et voi enää muuttaa sitä — virhe korjataan uudella korjauskierroksella.',
+  'Definitief insturen': 'Lähetä lopullisesti',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Peruuttaminen poistaa lähetyksesi järjestäjältä eikä sitä voi kumota. Haluatko jatkaa?',
+  'Verstuurd als revisie {n}.': 'Lähetetty versiona {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Saat paluulinkin sähköpostitse. Linkki avaa lähetyksesi vain yhdessä uuden koodin kanssa — pelkkä linkki ei ole avain.',
+  'Je inzending is ingetrokken.': 'Lähetyksesi on peruutettu.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Palvelin ei ole tavoitettavissa juuri nyt. Tarkista linkki ja yritä myöhemmin uudelleen.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Linkki ei toiminut. Tarkista se ja yritä uudelleen.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Se ei ole OciDeckin tuntema kutsu- tai paluulinkki. Linkki alkaa https://-alkuisena.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Tämä julkaisu ei sisällä lomaketta, jonka OciDeck voi täyttää.',
+  'Bewaar het formulier om in te vullen': 'Tallenna lomake täytettäväksi',
+  'Formulieruitnodiging': 'Lomakekutsu',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Liitä saamasi kutsu- tai paluulinkki. Linkki itsessään ei ole avain — lähetyksesi vaatii aina uuden koodin.',
+  'Uitnodigings- of terugkeerlink': 'Kutsu- tai paluulinkki',
+  'Link openen': 'Avaa linkki',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Tämä linkki osoittaa lähetykseesi palvelimella {server}. Sen avaaminen vaatii uuden koodin — pelkkä linkki ei koskaan riitä.',
+  'Deze link wijst naar {server}.':
+      'Tämä linkki osoittaa palvelimeen {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Sinulla on täällä luonnos (versio {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Lähetyksesi on saapunut (versio {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Järjestäjä pyysi korjausta: muutoksestasi tulee versio {n}.',
+  'Deze inzending is ingetrokken.': 'Tämä lähetys on peruutettu.',
+  'Formulier invullen': 'Täytä lomake',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Täytät omalla laitteellasi; mitään ei lähetetä ennen kuin vahvistat itse.',
+  'Als behandeld gemarkeerd op de server.':
+      'Merkitty käsitellyksi palvelimella.',
+  'Als behandeld markeren': 'Merkitse käsitellyksi',
+  'Als nieuwe versie publiceren': 'Julkaise uutena versiona',
+  'Correctie achteraf toestaan': 'Salli jälkikorjaus',
+  'Correctieronde geopend op de server.': 'Korjauskierros avattu palvelimella.',
+  'Correctieronde openen': 'Avaa korjauskierros',
+  'Correctieronde openen…': 'Avaa korjauskierros…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Korjausmääräaika (päivää, tyhjä = ei loppua)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Se ei onnistunut palvelimella. Mikään ei muuttunut.',
+  'De correctietermijn klopt niet.': 'Korjausmääräaika ei ole oikein.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Täyttäjä saa sitten lähettää uuden version. Hänen aiempi lähetyksensä pysyy muuttumattomana.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Lähetys katoaa OciServeltä; siellä oleva puhdistusrekisteri pitää kirjaa siitä, mikä on poissa. Työkansiossasi oleva jää — sen siivoat erikseen.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Palvelin ei ole tavoitettavissa juuri nyt. Mitään ei julkaistu — yritä myöhemmin uudelleen.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Palvelin ei ole tavoitettavissa juuri nyt. Mikään ei muuttunut — yritä myöhemmin uudelleen.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Jaa tämä kutsulinkki niiden kanssa, joiden haluat täyttävän lomakkeen. Linkki osoittaa vain lomakkeeseen — se ei avaa lähetyksiä.',
+  'Dit gaat er naartoe': 'Tämä menee tänne',
+  'Doelen (één per regel)': 'Tarkoitukset (yksi per rivi)',
+  'Inzending bewaren (dagen)': 'Säilytä lähetys (päivää)',
+  'Inzending opschonen op de server': 'Puhdista lähetys palvelimella',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Et saa julkaista tätä lomaketta siellä. Tarkista organisaatio ja oikeutesi.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Et saa tehdä tätä palvelimella. Tarkista organisaatio ja oikeutesi.',
+  'Link kopiëren': 'Kopioi linkki',
+  'Naam voor de organisatie': 'Organisaation nimi',
+  'Ontwerp bewaren (dagen)': 'Säilytä luonnos (päivää)',
+  'Opschonen ingepland op de server.': 'Puhdistus ajoitettu palvelimella.',
+  'Opschonen op de server': 'Puhdista palvelimella',
+  'Opschonen op de server…': 'Puhdista palvelimella…',
+  'Privacytekst': 'Tietosuojateksti',
+  'Publiceren': 'Julkaise',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Julkaisu ei onnistunut. Palvelimella ei muuttunut mikään.',
+  'Publiceren via OciServe': 'Julkaise OciServen kautta',
+  'Server: {server}': 'Palvelin: {server}',
+  'Titel die de invuller ziet': 'Täyttäjän näkemä otsikko',
+  'Vul een naam en een titel in.': 'Anna nimi ja otsikko.',
+  'Vul minstens één doel in — per regel één.':
+      'Anna vähintään yksi tarkoitus — yksi per rivi.',
+  'Waarom (niet verplicht)': 'Miksi (vapaaehtoinen)',
+  'Weer als open gemarkeerd op de server.':
+      'Merkitty uudelleen avoimeksi palvelimella.',
+  'Weer als open markeren': 'Merkitse uudelleen avoimeksi',
+  'correctieronde open': 'korjaus auki',
+  'ingediend': 'lähetetty',
+  'ingetrokken': 'peruutettu',
+  'ontwerp': 'luonnos',
+  'Insturen via OciServe…': 'Lähetä OciServen kautta…',
+  'Ophalen van OciServe': 'Hae OciServeltä',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Julkaise lomake kiinnitettynä versiona OciServellänne ja jaa kutsulinkki.',
+  'Publiceren via OciServe…': 'Julkaise OciServen kautta…',
+  'Uitnodiging openen…': 'Avaa kutsu…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'palvelin ei ole tavoitettavissa nyt; mikään ei muuttunut.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'et saa lukea näitä lähetyksiä siellä — tarkista organisaatio ja oikeutesi.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'haku ei onnistunut; mikään ei muuttunut.',
   'Offline uitnodigingspakket maken…': 'Luo offline-kutsupaketti…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} on lisätty. Luo kutsupaketti uudelleen, jotta {naam} tulee mukaan.',

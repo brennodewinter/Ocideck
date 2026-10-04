@@ -77,10 +77,22 @@ void main() {
     ('gsw', 'Branch (optional)'),
     // Het Deens zegt zelf `Multiple choice`; de losse sleutel `Meerkeuze` doet
     // dat in ditzelfde bestand ook. `Stop` en `Top` zijn eveneens Deens — vgl.
-    // `Stoppen` → `Stop` een paar duizend regels hoger.
+    // `Stoppen` → `Stop` een paar duizend regels hoger. `Send` en
+    // `Destination` zijn gewone Deense woorden; het Zweeds deelt het tweede.
     ('da', 'Multiple choice'),
     ('da', 'Stop (Esc)'),
     ('da', 'Top (mm)'),
+    ('da', 'Send via OciServe'),
+    ('da', 'Destination: {server}'),
+    ('sv', 'Destination: {server}'),
+    // `Organisation` is het woord in het Deens, Duits, Zweeds en Zwitserduits;
+    // `via` en `revision` zijn het in Deens en Zweeds eveneens.
+    ('da', 'Organisation: {organisatie}'),
+    ('de', 'Organisation: {organisatie}'),
+    ('gsw', 'Organisation: {organisatie}'),
+    ('sv', 'Organisation: {organisatie}'),
+    ('da', 'Via OciServe · revision {n} · {toestand}'),
+    ('sv', 'Via OciServe · revision {n} · {toestand}'),
     // Frans. `fraction`, `confirmation`, `reproduction`, `image` en `images`
     // zijn stuk voor stuk Franse woorden; er valt niets aan te vertalen.
     ('fr', 'Fraction p'),

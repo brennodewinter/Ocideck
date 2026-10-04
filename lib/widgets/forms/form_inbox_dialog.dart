@@ -15,14 +15,19 @@ import 'package:ocideck_form_core/ocideck_form_core.dart' show FormUnsealIssue;
 import '../../l10n/app_localizations.dart';
 import '../../platform/platform_features.dart';
 import '../../services/form/form_import.dart';
+import '../../services/form/form_intake_organiser.dart';
 import '../../services/form/form_keys.dart' show FormKeyProblem;
 import '../../services/form/form_workspace.dart';
+import '../../services/ociserve/ociserve_http.dart';
 import '../../state/form_keys_provider.dart';
 import '../../state/forms_provider.dart';
+import '../../state/ociserve_provider.dart';
 import '../../state/tabs_provider.dart';
 import 'form_book_dialog.dart';
 import 'form_bundle_dialog.dart';
 import 'form_inbox_list.dart';
+import 'form_intake_publish_dialog.dart';
+import 'form_intake_row_actions.dart';
 import 'form_keys_dialog.dart';
 import 'form_team_dialog.dart';
 import 'form_text_helpers.dart' show formTextOf;
@@ -107,6 +112,10 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
   List<PublishedForm> _forms = const [];
   int _submissions = 0;
 
+  /// De Managed-Intake-publicaties van deze werkmap, lokaal formulier-id →
+  /// record. Leeg: de werkmap kent alleen de lokale route.
+  Map<String, IntakeOrganiserRecord> _records = const {};
+
   /// Telt op bij elke verversing, zodat de lijst opnieuw wordt gelezen.
   int _version = 0;
   bool _busy = false;
@@ -129,10 +138,12 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
     if (workspace == null) return;
     final forms = (await workspace.publishedForms()).forms;
     final submissions = (await workspace.submissionIds()).length;
+    final records = await readIntakeRecords(workspace);
     if (!mounted) return;
     setState(() {
       _forms = forms;
       _submissions = submissions;
+      _records = records;
       _version++;
     });
   }
@@ -355,7 +366,8 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
   String _label(PublishedForm form) =>
       '${form.id} · v${form.version}${form.lang == null ? '' : ' · ${form.lang}'}';
 
-  /// Onder de lijst met formulieren: een formulier toevoegen, en een bundel voor wat er staat.
+  /// Onder de lijst met formulieren: een formulier toevoegen, een bundel voor
+  /// wat er staat, en — als OciServe gekoppeld is — publiceren naar de server.
   Widget _formButtons(AppLocalizations l10n) => Wrap(
     spacing: 8,
     runSpacing: 8,
@@ -373,8 +385,115 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
           child: Text(l10n.d('Offline uitnodigingspakket maken…')),
         ),
       ),
+      if (ref.watch(ociServeAuthenticatedProvider))
+        Tooltip(
+          message: l10n.d(
+            'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.',
+          ),
+          child: OutlinedButton(
+            onPressed: _busy || _forms.isEmpty ? null : _publishToServer,
+            child: Text(l10n.d('Publiceren via OciServe…')),
+          ),
+        ),
     ],
   );
+
+  Future<void> _publishToServer() async {
+    final workspace = _workspace;
+    if (workspace == null) return;
+    final published = await showFormIntakePublishDialog(
+      context,
+      workspace: workspace,
+      forms: _forms,
+    );
+    if (published == true) await _refresh();
+  }
+
+  /// Haalt expliciet de toegewezen inzendingen op (§7.8): een knop, nooit een
+  /// achtergrondtaak. Per gepubliceerd formulier één ronde; de regels onder
+  /// de knop vertellen wat er binnenkwam.
+  Future<void> _fetchFromServer() async {
+    final workspace = _workspace;
+    if (workspace == null || _busy) return;
+    setState(() {
+      _busy = true;
+      _lines.clear();
+    });
+    for (final MapEntry(key: formId, value: record) in _records.entries) {
+      try {
+        final result = await ref
+            .read(ociServeProvider.notifier)
+            .withIntakeGateway(
+              record.organizationId,
+              (api, token) => fetchIntakeSubmissions(
+                workspace: workspace,
+                api: api,
+                accessToken: token,
+                record: record,
+                now: (widget.now ?? DateTime.now)(),
+                recordChanged: (updated) =>
+                    writeIntakeRecord(workspace, formId, updated),
+              ),
+            );
+        if (!mounted) return;
+        setState(
+          () => _lines.add(
+            _Line(
+              result.failed == 0,
+              context.l10n
+                  .d(
+                    '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.',
+                  )
+                  .replaceAll('{naam}', formId)
+                  .replaceAll('{nieuw}', '${result.fetched}')
+                  .replaceAll('{bijgewerkt}', '${result.updated}')
+                  .replaceAll('{ingetrokken}', '${result.withdrawn}')
+                  .replaceAll(
+                    '{mislukt}',
+                    result.failed == 0
+                        ? ''
+                        : context.l10n
+                              .d(', {n} niet binnengehaald')
+                              .replaceAll('{n}', '${result.failed}'),
+                  ),
+            ),
+          ),
+        );
+      } on Object catch (error) {
+        if (!mounted) return;
+        setState(
+          () => _lines.add(
+            _Line(
+              false,
+              context.l10n
+                  .d('{naam}: {fout}')
+                  .replaceAll('{naam}', formId)
+                  .replaceAll('{fout}', _fetchError(error)),
+            ),
+          ),
+        );
+      }
+    }
+    if (!mounted) return;
+    setState(() => _busy = false);
+    await _refresh();
+  }
+
+  String _fetchError(Object error) {
+    final l10n = context.l10n;
+    if (error is OciServeException) {
+      return switch (error.code) {
+        'unauthorized' || 'forbidden' => l10n.d(
+          'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.',
+        ),
+        'unavailable' || 'network_error' => l10n.d(
+          'de server is nu niet bereikbaar; er is niets veranderd.',
+        ),
+        _ => l10n.d('ophalen lukte niet; er is niets veranderd.'),
+      };
+    }
+    return l10n.d('ophalen lukte niet; er is niets veranderd.');
+  }
 
   /// Onderaan: de redactiesleutel (die ook zonder werkmap open moet kunnen) en Sluiten.
   Widget _bottomRow(AppLocalizations l10n) => Row(
@@ -455,80 +574,7 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
                   ],
                   const SizedBox(height: 20),
                   _section(theme, l10n.d('Inzendingen')),
-                  Text(
-                    l10n
-                        .d('Inzendingen in de werkmap: {n}')
-                        .replaceAll('{n}', '$_submissions'),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${l10n.d('Een gewone zip is onderweg niet versleuteld.')} ${l10n.d('Een verzegeld bestand (.zip.age) opent met je redactiesleutel.')}',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      FilledButton(
-                        onPressed: _busy || _forms.isEmpty
-                            ? null
-                            : _importPackages,
-                        child: Text(l10n.d('Pakketten binnenhalen…')),
-                      ),
-                      OutlinedButton(
-                        onPressed: _busy ? null : _openRegister,
-                        child: Text(l10n.d('Register openen')),
-                      ),
-                      OutlinedButton(
-                        onPressed: _busy || _forms.isEmpty
-                            ? null
-                            : _compileBook,
-                        child: Text(l10n.d('Boek samenstellen…')),
-                      ),
-                    ],
-                  ),
-                  if (_busy) ...[
-                    const SizedBox(height: 12),
-                    const LinearProgressIndicator(),
-                  ],
-                  if (_lines.isNotEmpty) ...[
-                    const SizedBox(height: 12),
-                    Semantics(
-                      liveRegion: true,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for (final line in _lines)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    line.ok
-                                        ? Icons.check_circle_outline
-                                        : Icons.error_outline,
-                                    size: 18,
-                                    color: line.ok
-                                        ? theme.colorScheme.primary
-                                        : theme.colorScheme.error,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Expanded(child: Text(line.text)),
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 12),
-                  FormInboxList(
-                    workspace: FormWorkspace(root),
-                    version: _version,
-                    onOpenFile: _open,
-                  ),
+                  ..._submissionSection(l10n, theme, root),
                 ],
                 const SizedBox(height: 20),
                 _bottomRow(l10n),
@@ -539,6 +585,100 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
       ),
     );
   }
+
+  /// Het deel onder de sectiekop *Inzendingen*: teller, waarschuwing, de
+  /// actieknoppen (inclusief OciServe als er records zijn), de
+  /// resultaatregels van de laatste ronde en de lijst zelf.
+  List<Widget> _submissionSection(
+    AppLocalizations l10n,
+    ThemeData theme,
+    String root,
+  ) => [
+    Text(
+      l10n
+          .d('Inzendingen in de werkmap: {n}')
+          .replaceAll('{n}', '$_submissions'),
+    ),
+    const SizedBox(height: 4),
+    Text(
+      '${l10n.d('Een gewone zip is onderweg niet versleuteld.')} ${l10n.d('Een verzegeld bestand (.zip.age) opent met je redactiesleutel.')}',
+      style: theme.textTheme.bodySmall,
+    ),
+    const SizedBox(height: 8),
+    Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        FilledButton(
+          onPressed: _busy || _forms.isEmpty ? null : _importPackages,
+          child: Text(l10n.d('Pakketten binnenhalen…')),
+        ),
+        OutlinedButton(
+          onPressed: _busy ? null : _openRegister,
+          child: Text(l10n.d('Register openen')),
+        ),
+        OutlinedButton(
+          onPressed: _busy || _forms.isEmpty ? null : _compileBook,
+          child: Text(l10n.d('Boek samenstellen…')),
+        ),
+        if (_records.isNotEmpty && ref.watch(ociServeAuthenticatedProvider))
+          OutlinedButton(
+            onPressed: _busy ? null : _fetchFromServer,
+            child: Text(l10n.d('Ophalen van OciServe')),
+          ),
+      ],
+    ),
+    if (_busy) ...[const SizedBox(height: 12), const LinearProgressIndicator()],
+    if (_lines.isNotEmpty) ...[
+      const SizedBox(height: 12),
+      Semantics(
+        liveRegion: true,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (final line in _lines)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      line.ok
+                          ? Icons.check_circle_outline
+                          : Icons.error_outline,
+                      size: 18,
+                      color: line.ok
+                          ? theme.colorScheme.primary
+                          : theme.colorScheme.error,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text(line.text)),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    ],
+    const SizedBox(height: 12),
+    FormInboxList(
+      workspace: FormWorkspace(root),
+      version: _version,
+      onOpenFile: _open,
+      extraActions: _records.isEmpty
+          ? null
+          : (sid) => FormIntakeRowActions(
+              workspace: FormWorkspace(root),
+              sid: sid,
+              onDone: (message) {
+                setState(() {
+                  _formMessage = message;
+                  _version++;
+                });
+              },
+            ),
+    ),
+  ];
 
   Widget _section(ThemeData theme, String title) => Padding(
     padding: const EdgeInsets.only(bottom: 6),

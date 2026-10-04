@@ -667,6 +667,180 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Der Server hat nicht angegeben, welches Formular zu dieser Einreichung gehört — ein Ausfüllen ist hier nicht möglich.',
+  ', {n} niet binnengehaald': ', {n} nicht abgeholt',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Die Aufbewahrungsfristen stimmen nicht: ein Entwurf höchstens {draft} Tage, eine Einreichung höchstens {submitted} Tage.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formular als Version {n} veröffentlicht.',
+  'Nieuwe versie {n} gepubliceerd.': 'Neue Version {n} veröffentlicht.',
+  'Organisatie: {organisatie}': 'Organisation: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Direkt zum Veranstalter auf {server}. Du bestätigst im Fenster, das sich öffnet; es wird nie von selbst etwas gesendet.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Version: {versie} — frühere Versionen bleiben unantastbar.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Über OciServe · Revision {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Fingerabdruck: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} neu, {bijgewerkt} aktualisiert, {ingetrokken} zurückgezogen{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Der Server ist gerade nicht erreichbar. Versuche es später erneut; es wurde nichts gesendet.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Zu viele Versuche hintereinander. Warte kurz und versuche es erneut.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Diese Adresse oder dieser Code stimmt so nicht. Prüfe es und versuche es erneut.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Das hat nicht geklappt. Es wurde nichts gesendet — versuche es erneut.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Deine E-Mail-Adresse beweist nur, dass du das Postfach erreichen kannst — sie ist kein Konto, und es wird nichts gesendet, bevor du selbst bestätigst.',
+  'Je e-mailadres': 'Deine E-Mail-Adresse',
+  'Code aanvragen': 'Code anfordern',
+  'Opnieuw versturen': 'Erneut senden',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Erneut senden ist in {seconden} Sekunden möglich.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Ein Code ist zu dieser Adresse unterwegs (auch wenn die Adresse nicht existiert — das erfährst du hier nicht).',
+  'Code uit de e-mail': 'Code aus der E-Mail',
+  'Code controleren': 'Code prüfen',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Diese Einreichung kann jetzt nicht gesendet werden — sie ist geschlossen, zurückgezogen oder es läuft keine Korrekturrunde. Deine Arbeit ist in dieser Datei sicher; speichere sie als Zip, um sie mitzuschicken.',
+  'Het pakket wordt verstuurd…': 'Das Paket wird gesendet…',
+  'De inzending wordt vastgelegd…': 'Die Einreichung wird festgehalten…',
+  'De inzending wordt ingetrokken…': 'Die Einreichung wird zurückgezogen…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Der Zugang ist abgelaufen. Fordere über den Rückkehrlink einen neuen Code an; deine Arbeit ist in dieser Datei sicher.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Das Paket ist zu groß zum Senden. Entferne ein Foto und versuche es erneut — oder speichere es als Zip und schicke das mit.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Der Server hat nicht genau das empfangen, was gesendet wurde. Es wurde nichts festgehalten; versuche es erneut.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Der Server hat etwas Unerwartetes geantwortet. Es wurde nichts festgehalten; versuche es später erneut.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Der Server ist gerade nicht erreichbar. Es wurde nichts gesendet — deine Arbeit ist in dieser Datei sicher.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Das Senden hat nicht geklappt. Es wurde nichts festgehalten — deine Arbeit ist in dieser Datei sicher; speichere sie als Zip, um sie mitzuschicken.',
+  'Verzenden via OciServe': 'Über OciServe senden',
+  'Bestemming: {server}': 'Ziel: {server}',
+  'Doel: {doelen}': 'Zweck: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Aufbewahrung: {dagen} Tage nach Einreichung.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Dieses Formular nimmt derzeit keine neuen Einreichungen an.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Das Formular konnte nicht abgerufen werden. Du kannst deine Arbeit trotzdem als Zip speichern.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Es wird erst etwas gesendet, wenn du unten bestätigst. Als Zip-Datei speichern bleibt immer möglich.',
+  'Insturen…': 'Einreichen…',
+  'Correctie insturen…': 'Korrektur einreichen…',
+  'Inzending bijwerken…': 'Einreichung aktualisieren…',
+  'Inzending intrekken…': 'Einreichung zurückziehen…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Dies wird Revision {n} deiner Einreichung auf {server}. Nach dem Einreichen kannst du sie nicht mehr ändern — ein Fehler wird mit einer neuen Korrekturrunde behoben.',
+  'Definitief insturen': 'Endgültig einreichen',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Das Zurückziehen entfernt deine Einreichung beim Veranstalter und kann nicht rückgängig gemacht werden. Möchtest du fortfahren?',
+  'Verstuurd als revisie {n}.': 'Als Revision {n} gesendet.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Du erhältst einen Rückkehrlink per E-Mail. Dieser Link öffnet deine Einreichung nur zusammen mit einem neuen Code — der Link allein ist kein Schlüssel.',
+  'Je inzending is ingetrokken.': 'Deine Einreichung wurde zurückgezogen.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Der Server ist gerade nicht erreichbar. Prüfe den Link und versuche es später erneut.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Der Link hat nicht funktioniert. Prüfe ihn und versuche es erneut.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Das ist kein Einladungs- oder Rückkehrlink, den OciDeck kennt. Ein Link beginnt mit https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Diese Veröffentlichung enthält kein Formular, das OciDeck ausfüllen kann.',
+  'Bewaar het formulier om in te vullen': 'Formular zum Ausfüllen speichern',
+  'Formulieruitnodiging': 'Formulareinladung',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Füge den Einladungs- oder Rückkehrlink ein, den du erhalten hast. Der Link selbst ist kein Schlüssel — für deine Einreichung ist immer ein neuer Code nötig.',
+  'Uitnodigings- of terugkeerlink': 'Einladungs- oder Rückkehrlink',
+  'Link openen': 'Link öffnen',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Dieser Link verweist auf deine Einreichung auf {server}. Zum Öffnen ist ein neuer Code nötig — der Link allein reicht nie.',
+  'Deze link wijst naar {server}.': 'Dieser Link verweist auf {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Hier liegt ein Entwurf von dir vor (Revision {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Deine Einreichung ist eingegangen (Revision {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Der Veranstalter hat eine Korrektur angefragt: deine Änderung wird Revision {n}.',
+  'Deze inzending is ingetrokken.': 'Diese Einreichung wurde zurückgezogen.',
+  'Formulier invullen': 'Formular ausfüllen',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Du füllst auf deinem eigenen Gerät aus; es wird erst etwas gesendet, wenn du selbst bestätigst.',
+  'Als behandeld gemarkeerd op de server.':
+      'Auf dem Server als behandelt markiert.',
+  'Als behandeld markeren': 'Als behandelt markieren',
+  'Als nieuwe versie publiceren': 'Als neue Version veröffentlichen',
+  'Correctie achteraf toestaan': 'Korrektur nachträglich erlauben',
+  'Correctieronde geopend op de server.':
+      'Korrekturrunde auf dem Server geöffnet.',
+  'Correctieronde openen': 'Korrekturrunde öffnen',
+  'Correctieronde openen…': 'Korrekturrunde öffnen…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Korrekturfrist (Tage, leer = kein Ende)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Das hat auf dem Server nicht geklappt. Es hat sich nichts geändert.',
+  'De correctietermijn klopt niet.': 'Die Korrekturfrist stimmt nicht.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Der Ausfüllende darf dann eine neue Version einreichen. Seine frühere Einreichung bleibt unverändert bestehen.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Die Einreichung verschwindet bei OciServe; das Bereinigungsregister dort hält fest, was weg ist. Was in deinem Arbeitsbereich steht, bleibt — das räumst du separat auf.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Der Server ist gerade nicht erreichbar. Es wurde nichts veröffentlicht — versuche es später erneut.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Der Server ist gerade nicht erreichbar. Es hat sich nichts geändert — versuche es später erneut.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Teile diesen Einladungslink mit wem du das Formular ausfüllen lassen willst. Der Link verweist nur auf das Formular — er öffnet keine Einreichungen.',
+  'Dit gaat er naartoe': 'Dorthin geht es',
+  'Doelen (één per regel)': 'Zwecke (einer pro Zeile)',
+  'Inzending bewaren (dagen)': 'Einreichung aufbewahren (Tage)',
+  'Inzending opschonen op de server': 'Einreichung auf dem Server bereinigen',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Du darfst dieses Formular dort nicht veröffentlichen. Prüfe die Organisation und deine Rechte.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Das darfst du auf dem Server nicht. Prüfe die Organisation und deine Rechte.',
+  'Link kopiëren': 'Link kopieren',
+  'Naam voor de organisatie': 'Name für die Organisation',
+  'Ontwerp bewaren (dagen)': 'Entwurf aufbewahren (Tage)',
+  'Opschonen ingepland op de server.': 'Bereinigung auf dem Server eingeplant.',
+  'Opschonen op de server': 'Auf dem Server bereinigen',
+  'Opschonen op de server…': 'Auf dem Server bereinigen…',
+  'Privacytekst': 'Datenschutztext',
+  'Publiceren': 'Veröffentlichen',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Das Veröffentlichen hat nicht geklappt. Auf dem Server hat sich nichts geändert.',
+  'Publiceren via OciServe': 'Über OciServe veröffentlichen',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Titel, den der Ausfüllende sieht',
+  'Vul een naam en een titel in.': 'Gib einen Namen und einen Titel ein.',
+  'Vul minstens één doel in — per regel één.':
+      'Gib mindestens einen Zweck ein — einer pro Zeile.',
+  'Waarom (niet verplicht)': 'Warum (freiwillig)',
+  'Weer als open gemarkeerd op de server.':
+      'Auf dem Server wieder als offen markiert.',
+  'Weer als open markeren': 'Wieder als offen markieren',
+  'correctieronde open': 'Korrektur offen',
+  'ingediend': 'eingereicht',
+  'ingetrokken': 'zurückgezogen',
+  'ontwerp': 'Entwurf',
+  'Insturen via OciServe…': 'Über OciServe einreichen…',
+  'Ophalen van OciServe': 'Von OciServe abrufen',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Veröffentliche ein Formular als festgelegte Version auf eurem OciServe und teile den Einladungslink.',
+  'Publiceren via OciServe…': 'Über OciServe veröffentlichen…',
+  'Uitnodiging openen…': 'Einladung öffnen…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'der Server ist gerade nicht erreichbar; nichts hat sich geändert.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'du darfst diese Einreichungen dort nicht lesen — prüfe die Organisation und deine Rechte.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'das Abrufen hat nicht geklappt; nichts hat sich geändert.',
   'Offline uitnodigingspakket maken…': 'Offline-Einladungspaket erstellen…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} wurde hinzugefügt. Erstelle das Einladungspaket erneut, um {naam} aufzunehmen.',

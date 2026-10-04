@@ -10,6 +10,18 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **Managed-Intake-gebruikersreis** (#2260): formulieren kunnen nu optioneel via OciServe lopen, naast en nooit in plaats van de lokale route.
+  De **respondent** opent een uitnodigings- of terugkeerlink via *Uitnodiging openen…* op het beginscherm — alleen `https`, ook in de webversie, waar het
+  formulier een gewoon document in een tabblad wordt — en vult lokaal in zoals altijd. Op het bureaublad staat de intake-context als
+  `….md.intake.json` naast het document, met uitsluitend verwijzingen (server, form_ref, locator, revisie, toestand): geen codes, geen sleutels.
+  *Insturen via OciServe…* op het tabblad Invullen bestaat alleen op zo'n document en toont eerst bestemming, formulier en bewaartermijn voordat
+  er iets gaat; elke stap die de inzending raakt eist een verse mailboxcode (bewijs van mailboxbezit, geen account), en ontwerp-upload, indienen,
+  corrigeren en intrekken dragen digest-controle en idempotency-keys — een locator alleen opent nooit iets. Faalt de server, dan staat er dat er
+  niets is vastgelegd en je werk veilig is; opslaan als zip blijft altijd. De **organisator** publiceert via *Publiceren via OciServe…* in de
+  Inbox als immutable snapshotversies (titel, doelen, privacytekst, retentie, correctiebeleid; een wijziging wordt versie n+1), deelt de
+  uitnodigingslink, haalt inzendingen binnen met de expliciete *Ophalen van OciServe*-knop — nooit een achtergrondtaak — en beheert per
+  inzending correctierondes, de behandeld-status en het opschonen op de server, terwijl het lokale werk bewust blijft staan. De koppeling ligt
+  als `forms/<form>/intake.json` in de werkmap en reist mee met de map. 117 nieuwe teksten in 30 talen.
 - De **Managed-Intake-contractpoort** (#2262, OciServe ADR 0016): OciDeck spreekt nu het Managed Intake-contract dat OciServe vastlegde (gepinde
   spec op commit `45d9a87`, capabilitycatalogus v10). De **organisatorzijde** loopt over de bestaande OIDC-gateway: twaalf routes onder
   `…/organizations/{org}/intake-forms` met `ETag`/`If-Match`-hervalidatie, een eigen idempotency-key per mutatie en Digest- plus
