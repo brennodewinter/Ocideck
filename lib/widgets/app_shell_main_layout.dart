@@ -307,8 +307,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     return AppBar(
       title: Row(
         children: [
-          const Icon(Icons.slideshow_outlined, size: 22),
-          const SizedBox(width: 10),
           Flexible(child: Text(deck.title, overflow: TextOverflow.ellipsis)),
           if (deckState.isDirty) ...[
             const SizedBox(width: 6),
