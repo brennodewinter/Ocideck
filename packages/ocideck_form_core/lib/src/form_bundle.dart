@@ -399,11 +399,6 @@ final RegExp _host = RegExp(
   r'^[a-z0-9](?:[a-z0-9.-]{0,251}[a-z0-9])?(?::[0-9]{1,5})?$',
 );
 
-/// Whether [host] is the grammar of a bundle's `policy.api_host` and of the host of an intake
-/// request: lower-case letters, digits, dots and hyphens, an optional `:port`, at most 253
-/// characters before the port.
-bool isValidApiHost(String host) => _host.hasMatch(host);
-
 const Set<String> _topKeys = {
   'v',
   'fid',

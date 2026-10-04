@@ -63,12 +63,10 @@ final RegExp _primitiveImport = RegExp(
 );
 
 /// The files of a package's `lib/` that may import the cryptographic primitives, relative
-/// to the package. `form_bundle.dart` is the Ed25519 signing of the bundle (§5.1) and
-/// `intake_request.dart` the Ed25519 signing of an organiser's request (§6.3).
+/// to the package. `form_bundle.dart` is the Ed25519 signing of the bundle (§5.1).
 const Set<String> primitiveFiles = {
   'lib/src/form_seal.dart',
   'lib/src/form_bundle.dart',
-  'lib/src/intake_request.dart',
 };
 
 /// Every violation found under [packagesDir], one readable line each. Empty
