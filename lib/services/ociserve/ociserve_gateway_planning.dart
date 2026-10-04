@@ -66,33 +66,6 @@ abstract class OciServePlanningApi {
   });
 }
 
-/// Leest een RFC 7807-probleemantwoord (`type`, `detail`) plus `Retry-After`
-/// uit een foutresponse; `null` als er niets bruikbaars in staat. Faalt
-/// stil — een kapot probleemantwoord mag de eigenlijke fout niet verbergen.
-OciServeProblem? _problemDetails(OciServeHttpResponse response) {
-  try {
-    String? type;
-    String? detail;
-    final decoded = jsonDecode(utf8.decode(response.body));
-    if (decoded is Map) {
-      type = (decoded['type'] as String?)?.trim();
-      detail = (decoded['detail'] as String?)?.trim();
-    }
-    Duration? retryAfter;
-    final raw = response.headers['retry-after']?.trim();
-    final seconds = raw == null ? null : int.tryParse(raw);
-    if (seconds != null && seconds > 0) {
-      retryAfter = Duration(seconds: seconds);
-    }
-    if (type == null && detail == null && retryAfter == null) return null;
-    return OciServeProblem(type: type, detail: detail, retryAfter: retryAfter);
-  } on FormatException {
-    // Probleemdetails zijn best-effort: een kapotte body mag de eigenlijke
-    // foutstatus niet overschrijven.
-    return null;
-  }
-}
-
 /// Planning self-service: het `me/`-oppervlak waarmee een cursist aanbod
 /// bekijkt, zich inschrijft en de eigen boekingen beheert (issues
 /// #2122–#2127). Alle methoden zijn zelf-gescoped — de server leent de

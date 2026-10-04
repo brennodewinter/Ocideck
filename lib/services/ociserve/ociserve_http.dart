@@ -1,4 +1,41 @@
+import 'dart:convert';
 import 'dart:typed_data';
+
+/// Leest een RFC 9457-probleemantwoord (`type`, `detail`) plus `Retry-After`
+/// uit een foutresponse; `null` als er niets bruikbaars in staat. Faalt
+/// stil — een kapot probleemantwoord mag de eigenlijke fout niet verbergen.
+OciServeProblem? ociServeProblemOf(OciServeHttpResponse response) {
+  try {
+    String? type;
+    String? detail;
+    final decoded = jsonDecode(utf8.decode(response.body));
+    if (decoded is Map) {
+      type = (decoded['type'] as String?)?.trim();
+      detail = (decoded['detail'] as String?)?.trim();
+    }
+    Duration? retryAfter;
+    final raw = response.headers['retry-after']?.trim();
+    final seconds = raw == null ? null : int.tryParse(raw);
+    if (seconds != null && seconds > 0) {
+      retryAfter = Duration(seconds: seconds);
+    }
+    if (type == null && detail == null && retryAfter == null) return null;
+    return OciServeProblem(type: type, detail: detail, retryAfter: retryAfter);
+  } on FormatException {
+    // Probleemdetails zijn best-effort: een kapotte body mag de eigenlijke
+    // foutstatus niet overschrijven.
+    return null;
+  }
+}
+
+/// Een GET-antwoord plus zijn `ETag` — wat de caller nodig heeft voor
+/// `If-Match`-mutaties en `If-None-Match`-hervalidatie.
+class OciServeEtag<T> {
+  const OciServeEtag(this.value, this.etag);
+
+  final T value;
+  final String? etag;
+}
 
 class OciServeHttpResponse {
   const OciServeHttpResponse({

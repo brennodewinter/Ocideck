@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **Managed-Intake-contractpoort** (#2262, OciServe ADR 0016): OciDeck spreekt nu het Managed Intake-contract dat OciServe vastlegde (gepinde
+  spec op commit `45d9a87`, capabilitycatalogus v10). De **organisatorzijde** loopt over de bestaande OIDC-gateway: twaalf routes onder
+  `…/organizations/{org}/intake-forms` met `ETag`/`If-Match`-hervalidatie, een eigen idempotency-key per mutatie en Digest- plus
+  sha256-verificatie op gedownloade revisies — een afwijkende hash is een harde fout, geen retry. De **respondentzijde** is bewust een aparte,
+  dunne client (`IntakeRespondentClient`) die nooit een OIDC-token vasthoudt, alleen de kortlevende `IntakeGrant` die een geverifieerde
+  mailboxcode oplevert: publieke formulierweergave, challenge → verify → grant, ontwerp-upload, indienen, eigen inzending lezen en intrekken.
+  Locator, code, grant en idempotency-key reizen uitsluitend in het pad of in headers, nooit in query, log of fouttekst. Alle modellen lezen
+  strikt — een onbekende status, purpose, grant-rol of sleutel wordt geweigerd. De drift-test dekt nu ook securityscheme per route, de
+  intake-capabilities (`intake:publish|manage|read`), 202-responsen en array-itemvelden. Er is nog geen knop; de gebruikersreis volgt in #2260.
 - De **verzegelde formulierroute is expliciet offline** (#2261): *Bundel publiceren…* heet nu *Offline uitnodigingspakket
   maken…*, en de bundel — `….bundle.json` naast het formulier — is volledig een bestandsoverdracht: per mail, drive of andere
   bestandsweg, zonder server. Het veld `api_host` is uit het bundelformaat; een bundel die het nog draagt (alleen gemaakt
