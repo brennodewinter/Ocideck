@@ -1,5 +1,13 @@
 # OciDeck — Intake server: requirements
 
+> **SUPERSEDED — DO NOT BUILD ON THIS (2026-10-04).** The standalone blind intake
+> server (*OciIntake*) these requirements describe is replaced by **OciServe
+> Managed Intake** — [`FORM_INTAKE.md`](FORM_INTAKE.md) revision 4, whose contract
+> is upstream (OciServe ADR 0016 and `docs/openapi.yaml`, tags
+> `Intake`/`IntakeRespondent`). This document was merged but **never released**;
+> it is kept here only as history and is removed together with the protocol and
+> its code under issue #2263.
+>
 > **Status:** requirements for the intake server of phase 4 of [`FORM_INTAKE.md`](FORM_INTAKE.md) — **the server is not built** · **Status last reviewed:** 2026-10-03 · **Published by:** Stichting LibreKAT
 >
 > **Licence:** this document is **CC-BY-4.0**, like [`INTAKE_PROTOCOL.md`](INTAKE_PROTOCOL.md) (D5). A third party may build a

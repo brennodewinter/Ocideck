@@ -1,5 +1,12 @@
 # OciDeck — Form intake: dossier for the external cryptographic review
 
+> **Scope note (2026-10-04).** Since `FORM_INTAKE.md` revision 4 the work under
+> review is the **offline transfer route** (`.zip.age`) — the same sealing,
+> bundle, key and team code this dossier already scoped itself to ("the file
+> route"). Every reference to "phase 4" or "the server" below concerns the
+> superseded OciIntake direction and is void; the review scope itself is
+> unchanged.
+>
 > **Status:** prepared for the external review that closes phase 3 of
 > [`FORM_INTAKE.md`](FORM_INTAKE.md) (§12, D7) · **Status last reviewed:** 2026-10-03 · **Published by:** Stichting LibreKAT
 >

@@ -1,17 +1,34 @@
-# OciDeck — Form intake: fill-in Markdown forms and sealed submissions (Design)
+# OciDeck — Form intake: fill-in Markdown forms and managed submissions (Design)
 
-> **Status:** design proposal, revision 3 — unbuilt · **Status last reviewed:** 2026-10-01 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal, revision 4 — unbuilt · **Status last reviewed:** 2026-10-04 · **Published by:** Stichting LibreKAT
 
 > **A design proposal — not yet implemented.**
 > This document describes a *future* capability: a **form** that is an ordinary
 > Markdown document, filled in by a respondent in OciDeck (images included),
 > checked against rules the form author wrote down (required, minimum and maximum
-> words, options, image size), and **delivered** — as a file or through a small
-> separate intake server that only ever stores ciphertext. It is kept apart from
+> words, options, image size), and **delivered** — as a file, or optionally
+> submitted to **OciServe Managed Intake**, an intake domain of the OciServe
+> product the organiser already uses. It is kept apart from
 > the current-state docs ([`ARCHITECTURE.md`](../ARCHITECTURE.md),
 > [`SOURCE_MAP.md`](../SOURCE_MAP.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) so
 > those keep describing what exists. When a phase ships, fold its facts into them
 > and into the user guide, and update the [`CHANGELOG.md`](../../CHANGELOG.md).
+>
+> **Revision 4 (2026-10-04)** changes the server direction. The standalone blind
+> intake server (*OciIntake*, revisions 1–3) is replaced by **OciServe Managed
+> Intake**: an isolated intake domain inside the OciServe product, whose contract
+> is fixed upstream by [OciServe ADR 0016](https://pawprint.vigilis.online/brenno/OciServe/src/branch/main/docs/adr/0016-managed-intake.md)
+> and `docs/openapi.yaml` (tags `Intake` and `IntakeRespondent`). The reason is
+> honest: the journey this product wants — verify a mailbox, optionally send,
+> receive a return link, fetch or correct later under a fresh code — cannot be
+> served by a dropbox that cryptographically cannot read anything, and the blind
+> claim was never a product promise. OciServe is a **processor that can read the
+> content**; the design says so everywhere and claims nothing stronger. The
+> `age`-sealed package survives, repositioned as the **offline transfer route**
+> (§5, issue #2261). The phase-4 OciIntake code merged into `main` was never
+> released and is reverted before it ships (issue #2263); `INTAKE_PROTOCOL.md`
+> and `INTAKE_SERVER_REQUIREMENTS.md` are superseded and go with it. Sections
+> rewritten: §1–§3, §5 (scope), §6, §8, §9, §10–§12, §14–§17, §19.
 >
 > **Revision 2 (2026-09-30)** folds in an eight-lens review (keeper of the core
 > idea, product, legal, security, usability, test, privacy, architecture). Every
@@ -117,8 +134,11 @@ organiser — sees one card per question with a live counter ("132 words — nee
 150–250"), attaches photos, and is told exactly what is still open. What they hand
 in is the *same* Markdown document with the answers filled in plus an `images/`
 folder — readable in any text editor and any Markdown reader. It travels as a
-**file** (e-mail, shared drive) or, optionally, through a **separate intake
-server** that stores ciphertext and cannot read it. The organiser's OciDeck
+**file** (e-mail, shared drive — plain, or sealed with `age` as the offline
+route) or, optionally, is **submitted to OciServe Managed Intake**: the
+respondent verifies a mailbox once per visit, sends a draft or a definitive
+submission, and receives a return link that — always behind a fresh code — lets
+them fetch, correct or withdraw it later. The organiser's OciDeck
 **re-validates** every submission against the form *it published* (the
 respondent's client is never trusted), scans it, lands it as a plain folder, tracks
 it in a Markdown table, and compiles the accepted ones into one document (a book, a
@@ -137,27 +157,32 @@ what a recipe is.
 - **G2 — Rules are data in the file**, not code in the app: required, min/max words
   or characters, options, counts, image dimensions.
 - **G3 — Images travel with the submission**, inside one package.
-- **G4 — Delivery is pluggable.** A file is enough; a server is an upgrade, never a
-  requirement (§6.7).
-- **G5 — What the server stores, it cannot read.** A break-in or a court order
-  directed at the server reveals metadata and ciphertext, not the content of stored
-  submissions (§9). This is deliberately *not* a claim about code a respondent's
-  browser runs — see §2.1 condition 3.
-- **G6 — Reproducible.** Another organisation can publish its own form and run its
-  own server with no change to OciDeck and no involvement of ours.
+- **G4 — Delivery is pluggable.** A file is enough; OciServe Managed Intake is an
+  upgrade, never a requirement (§6.7). *Not sending* is a complete user outcome,
+  not a degraded one.
+- **G5 — The server is a processor, honestly described.** OciServe can
+  technically read what it stores; protection comes from transport, encrypted
+  storage, minimal retention and strict access — not from a blindness claim the
+  product cannot keep (§9). No screen and no document promises otherwise.
+- **G6 — Reproducible.** Another organisation runs its own OciServe (or uses an
+  existing tenant with the intake capability) with no change to OciDeck and no
+  involvement of ours.
 
 ### 1.2 Non-goals (v1)
 
 - Not a survey/analytics product; no branching logic, no repeating groups (§4.8).
-- Not a hosted service. The foundation runs no intake server and no default one.
-- No payment, no login wall, no CAPTCHA.
+- Not a hosted service. The foundation runs no intake server and OciDeck ships no
+  default OciServe host.
+- No payment, no OIDC account for the respondent, no CAPTCHA.
 - No handwritten-signature capture. A checked consent box, recorded with its date
   and the exact text version, is the v1 acceptance record (§9.4 says what that
   record does and does not amount to).
-- **No authentication of the respondent as a person** (§5.7), and therefore no
-  cryptographic proof of *who* sent a submission.
-- No real-time co-filling; no correction loop back to the respondent other than the
-  mail-based *maker check* of §7.4.
+- **No authentication of the respondent as a person.** A verified e-mail code
+  proves temporary possession of a mailbox (§6.4) — not an identity, not an
+  account, and not a key.
+- No real-time co-filling. A correction loop back to the respondent exists only
+  when an organiser opens one through OciServe (§7.8); on the file routes the
+  mail-based *maker check* of §7.4 is the loop.
 
 ---
 
@@ -169,92 +194,111 @@ happens when we stop.
 
 | Question | Answer |
 |---|---|
-| Can the user take it with them? | Template and filled document are plain `.md` + `images/`. A sealed package is a standard **`age`** file (§5.6): it opens with the reference `age` tool, without OciDeck. Everything inside is a plain zip. |
+| Can the user take it with them? | Template and filled document are plain `.md` + `images/`. The submission package is a plain zip; its sealed offline form is a standard **`age`** file (§5.6): it opens with the reference `age` tool, without OciDeck. |
 | What is added to the `.md`? | Only HTML comments in the established unprefixed style of `<!-- toc -->` and `<!-- finding -->` (§4.3). No front-matter key, no `kind:` marker, no `ocideck_`-prefixed key. A foreign reader ignores them. |
-| Whom must we trust? | The organiser's own keys, OciDeck, and **the origin that serves the web form shell** (if the respondent uses the web). The intake server is *not* trusted with content. |
-| Can others take it over? | The protocol (§6) is specified; the reference server is a separate open repository; the format is a documented standard plus a documented zip. |
-| What if the project stops? | Templates, submissions and the organiser's register are plain files; sealed files open with `age`; a missing server degrades to "send the sealed file by mail". |
+| Whom must we trust? | OciDeck and the organiser's own keys (offline route). If the respondent chooses to send: **OciServe as a processor that can read the content** (§6, §9), and the origin that serves the web respondent (if the web shell is used). |
+| Can others take it over? | The contract is a pinned copy of the upstream OciServe OpenAPI (§6.1); OciServe is an existing open product; the package format is a documented zip. |
+| What if the project stops? | Templates, submissions and the organiser's register are plain files; sealed files open with `age`; no OciServe degrades to "save the package and mail it". |
 
-### 2.1 The collision: "no backend" versus "an intake server"
+### 2.1 The collision: "no backend" versus "a managed intake"
 
 A core value of the product is *no backend, no account, no telemetry; outbound
 traffic only where the user points it, off by default.* A form that strangers fill
-in **cannot** be received by an app that has no inbox. The owner has decided that a
-separate server is acceptable to do this safely (2026-09-30).
+in **cannot** be received by an app that has no inbox — and the journey this
+product wants (verify a mailbox, optionally send, fetch or correct later behind a
+fresh code) needs server-held state a blind dropbox cannot honestly provide. The
+owner has decided that sending to **OciServe Managed Intake** is acceptable as an
+optional route (2026-10-04).
 
 **Which value yields, and how far.** *"No server at all"* yields for this one
 optional feature, under **seven conditions**. Each is a design rule below, and **if
 any of them fails, §2.1 re-opens with the owner** — it is not a list of intentions:
 
 1. **Optional and off by default.** The app contains only a *client*. No server code
-   ships in the app. With no server configured, OciDeck makes no request.
-2. **Never the only route.** Every submission can travel as a file (§5, §6.7).
-3. **Blind to stored content, and the code that sees plaintext never comes from the
-   intake host.** The server stores age ciphertext (§5.6). The client code that a
-   respondent's browser runs is served from **an origin the organiser controls**
-   (§6.6), never from the intake server and never from the foundation's public demo.
-   If one operator serves both the client and the server, that operator could read
-   web respondents' input — and then the documentation must say so, and this
-   condition is reported as *not met* for that deployment.
-4. **Self-hostable and independent.** The reference server is a separate repository
-   under the same licence; nothing in OciDeck names a foundation-run host; there is
-   **no default server URL**.
+   ships in the app. With no OciServe configured, OciDeck makes no request.
+2. **Never the only route.** Every submission can travel as a file — plain `.zip`,
+   or `.zip.age` on the offline transfer route (§5, §6.7). *Not sending* is a
+   complete, tested outcome with no hidden feature loss.
+3. **The processor position is honest, everywhere.** OciServe can technically
+   process the content it stores. No screen, document or claim says it
+   cryptographically cannot. Protection comes from transport, encrypted storage,
+   minimal retention, and the capability × grant access model (§6.3) — and the
+   respondent is always offered the file route on which OciServe sees nothing.
+4. **No default server.** Nothing in OciDeck names a foundation-run host; the
+   organiser publishes to the OciServe tenant they are already signed in to.
 5. **Nothing the respondent entered moves until they press Send**, after the
-   destination is shown (§6.6). Tapping an invite link necessarily tells its host
-   that the link was opened (IP address, time); that is accepted and stated, not
-   hidden.
-6. **No accounts and no respondent state on the server** beyond rate-limiting
-   (§6.3). The server keeps the hash of a withdrawal secret, never an identity.
+   destination is shown (§6.6). Opening an invitation or return link necessarily
+   tells its host that the link was opened (IP address, time); that is accepted
+   and stated, not hidden.
+6. **No accounts and no cross-submission identity on the server.** A respondent
+   has no account. The verified mailbox is transport/access metadata for one
+   challenge chain (§6.4); it is not a record id, not a login and not a key —
+   and a server-side "list my forms by e-mail" is refused (§6.8).
 7. **No background traffic without a user action.** Retrying a queued submission
    happens only while the app is open and only for something the user pressed Send
    on. There is no polling.
 
-**We would change our mind if** the server ever needs plaintext to function (then
-it is a backend — §6.8 refuses that mode), if a default or foundation-run host
-appears in the client, or if a condition above cannot be kept.
+**We would change our mind if** a default or foundation-run host appears in the
+client, if a screen starts claiming the server cannot read the content, or if a
+condition above cannot be kept.
 
-### 2.2 Why not OciServe (owner's note, 2026-09-30)
+### 2.2 Why OciServe after all
 
-OciServe exists and is **learning-oriented**: tenants, accounts, OIDC login, course
-packages, progress, exams. Intake is the opposite shape — a write-mostly dropbox
-for people who hold a link, with no accounts and no view of the content. Bolting it
-onto OciServe would drag accounts and tenancy into something that should have none.
-So the intake server is **its own small product** (working name *OciIntake*, §15).
+Revision 3 argued the opposite: OciServe is *learning-oriented* — tenants, OIDC
+accounts, courses, exams — while intake looked like an accountless dropbox, so a
+separate blind server (*OciIntake*) seemed the right shape. Three things broke
+that reasoning:
 
-It borrows OciServe's *conventions*, not its code or release cycle: a typed gateway
-behind an interface (`OciServeApi` → `IntakeApi`), host acceptance, `NetGuard`. The
-**outbox is not borrowed**: `ociserve_exam_outbox.dart` holds small retry records
-(bounded to 100 items / 64 KiB in the keychain), which does not fit a package of
-tens of megabytes (§6.6). OciServe could later expose the same protocol; that is an
-option, not a dependency.
+- **The desired journey needs server-held state.** Resuming a draft on another
+  device, a return link that opens a correction round, and a withdrawal the
+  organiser actually hears about all require the server to know the submission.
+  A dropbox that cryptographically cannot read anything can store such state only
+  beside the ciphertext — re-implementing a backend while claiming not to be one.
+- **The blind claim was never the product promise.** What the product owes is
+  honest minimality: the respondent chooses to send, sees where it goes, and can
+  always take the file route instead. Pretending the server *cannot* read while
+  building features that need it to read is the dishonest version.
+- **OciServe already is the organiser's product.** The upstream decision
+  ([OciServe issue #629](https://pawprint.vigilis.online/brenno/OciServe/issues/629),
+  [ADR 0016](https://pawprint.vigilis.online/brenno/OciServe/src/branch/main/docs/adr/0016-managed-intake.md))
+  made Managed Intake an **isolated domain inside the same OciServe process and
+  deployment**, with its own access model — tenant capabilities × per-form grants
+  for organisers, a separate public purpose-bound grant chain for respondents
+  (§6.3). No second product, no second maintainer (the old precondition of §14 is
+  gone), no protocol OciDeck must defend alone.
+
+OciDeck still does not build the server; it is a **client of the pinned
+contract** (§6.1), exactly as it already is for the OciServe exam routes.
 
 ---
 
 ## 3. Architecture at a glance
 
-Four artefacts, two roles, one optional server.
+Four artefacts, two roles, one optional managed domain.
 
 ```mermaid
 flowchart LR
   subgraph Org[Organiser — OciDeck desktop]
     T[Form template .md<br/>markers in comments]
-    B[Bundle: hash, organiser keys,<br/>policy, signed]
-    IN[Inbox: decrypt, re-validate,<br/>scan, land as folders]
+    P[Publish: immutable snapshot<br/>to OciServe]
+    B[Bundle: hash, organiser keys,<br/>policy, signed — offline route]
+    IN[Inbox: fetch or import, re-validate,<br/>scan, land as folders]
     CP[Compile: chapter template<br/>to one document]
   end
   subgraph Resp[Respondent]
-    FL[Fill view: desktop app or<br/>web form shell on the organiser's host]
-    PK[Package: submission.md +<br/>images + manifest, sealed with age]
+    FL[Fill view: desktop app or<br/>web respondent]
+    PK[Package: submission.md +<br/>images + manifest]
   end
-  S[(Intake server<br/>ciphertext + metadata only)]
-  F[[Sealed file<br/>mail / shared drive]]
+  S[(OciServe Managed Intake<br/>optional — processor)]
+  F[[File: .zip or .zip.age<br/>mail / shared drive]]
+  T --> P
+  P -- "invitation link (form_ref)" --> FL
   T --> B
-  B -- "invite link" --> FL
   B -. "bundle next to the .md" .-> FL
   FL --> PK
-  PK -- PUT --> S
-  PK -. "export" .-> F
-  S -- "list / fetch / ack" --> IN
+  PK -- "challenge → grant → submit" --> S
+  PK -. "save / export" .-> F
+  S -- "list / fetch revisions" --> IN
   F -. "import" .-> IN
   IN --> CP
 ```
@@ -262,12 +306,13 @@ flowchart LR
 | Artefact | What it is | Section |
 |---|---|---|
 | **Form template** | A plain `.md` with `form` / `field` / `answer` markers carrying the rules | §4 |
-| **Bundle** | Signed JSON: template hash, organiser keys, policy. Travels from the server, or as a file beside the template | §5.1 |
-| **Submission package** | `submission.md` + `images/` + `manifest.json`, sealed to the organisers' keys as an `age` file | §5.2–§5.6 |
-| **Intake protocol** | A small HTTPS API for publishing a form, receiving sealed packages, listing and fetching them | §6 |
+| **Form snapshot** | The immutable published version on OciServe: envelope (title, purposes, privacy text, retention, correction policy) + opaque `definition` | §6.2 |
+| **Bundle** | Signed JSON for the **offline route only**: template hash, organiser `age` keys, policy — no server semantics | §5.1 |
+| **Submission package** | `submission.md` + `images/` + `manifest.json` — a plain zip; `.zip.age` is its sealed offline form | §5.2–§5.6 |
+| **Managed Intake contract** | The OciServe OpenAPI routes tagged `Intake` and `IntakeRespondent`, pinned in OciDeck | §6 |
 
-Everything in §4, §5 and §7 works **without** the server. The server (§6) is the
-last phase.
+Everything in §4, §5 and §7 works **without** OciServe. Managed Intake (§6) is
+the optional last phase.
 
 ---
 
@@ -391,12 +436,14 @@ range      := N | N ".." M | N ".." | ".." M      ; inclusive, N and M non-negat
   inside a quoted value: `options="Makkelijk|Gemiddeld|Gevorderd"`.
 - **Attributes of `form`:** `id` (slug), `version` (integer), `rules` (integer, §4.7),
   `lang` (BCP-47, informational), `controller`, `contact`, `retain-unused` (the notice
-  of §8 and §9.3), `closes` (ISO date, informational — the server is authoritative),
+  of §8 and §9.3), `closes` (ISO date, informational — on Managed Intake the
+  server's operational status is authoritative),
   `overview` (comma-separated field ids shown as register columns, §7.3), `states`
   (the closed list of workflow states, §7.3) and `keep-record` (comma-separated field
   ids whose values stay in the minimal record after a submission is deleted or
-  withdrawn, §7.3; **default none**, and it must be disclosed in the `notice`). **There is no `target` attribute**: the API
-  host comes only from the signed bundle (§6.6).
+  withdrawn, §7.3; **default none**, and it must be disclosed in the `notice`). **There is no `target` attribute**: a template
+  can never cause a request — the host comes from the organiser's configured
+  OciServe or the invitation's host, shown to the respondent (§6.6).
 - **`form`** is the first marker in the file: the first marker *after an optional
   BOM and an optional front-matter block* (OciDeck writes front matter above the
   body as soon as a document style is chosen; a form must survive that). At most
@@ -695,7 +742,8 @@ Future<Map<String, FormImageFact>> probeFormImages(...);   // I/O, off the UI is
    old* respondent client cannot weaken a rule by editing the rules in its copy:
    the organiser never calls `parseForm(submission.md)` to decide what the rules
    are. Failures mark the submission *needs fixing*, never "dropped silently";
-4. optionally by a server operating in the clear — refused in v1 (§6.8).
+4. by the server — deliberately **not**: the contract treats the package as opaque
+   (§6.2); the authoritative judgement stays with the organiser who published.
 
 **Issue codes** (stable; used by UI, tests, organiser): `required-empty`,
 `too-few-words`, `too-many-words`, `too-short`, `too-long`, `not-an-option`,
@@ -718,14 +766,26 @@ what to do (§8) — a bare code is never shown.
 
 ---
 
-## 5. Part B — Bundle, package, sealing
+## 5. Part B — Package, sealing and the offline transfer route
 
-### 5.1 The bundle: how a respondent learns the organisers' keys
+> **Scope, revision 4.** Everything in §5 is the **offline transfer route**: a
+> sealed `.zip.age` that travels by mail or a shared drive. It has its own name,
+> its own keys (`age` X25519 + Ed25519, §5.9) and its own trust model (out-of-band
+> fingerprint, §5.1) — none of which is OciServe's, and none of which authorises
+> anything on OciServe. Managed Intake authorisation comes only from the server
+> contract (§6). The `.zip.age` route stays optional beside the plain `.zip`;
+> whether it is kept at all is an explicit product decision recorded under
+> issue #2261 — this design recommends keeping it and describes it as kept.
+
+### 5.1 The bundle: how a respondent learns the organisers' keys (offline route)
 
 A template `.md` contains **no keys**, so on its own it can never be sealed — and a
-loose file carries nothing to check authenticity against. The **bundle** fixes both,
-and it is the same artefact whether it comes from the server or sits as a file
-beside the template (`<template-name>.bundle.json`, the existing sidecar naming).
+loose file carries nothing to check authenticity against. The **bundle** fixes both:
+a file beside the template (`<template-name>.bundle.json`, the existing sidecar
+naming). A bundle is **never** a route to a server: it names no host and carries
+no server metadata (issue #2261 removes `policy.api_host` from the format —
+bundles made before then were never released and their migration is decided and
+tested there).
 
 ```json
 {
@@ -737,7 +797,6 @@ beside the template (`<template-name>.bundle.json`, the existing sidecar naming)
     { "name": "Redactie", "age": "age1…", "sign": "<ed25519 public key>", "kid": "…" }
   ],
   "policy": {
-    "api_host": "intake.example.org",
     "closes": "2027-01-31",
     "max_package_bytes": 62914560,
     "retain_unused": "6 maanden na sluiting"
@@ -754,24 +813,23 @@ beside the template (`<template-name>.bundle.json`, the existing sidecar naming)
   object.
 - **Freshness and binding.** `bundle_seq` is monotonic and `expires` is mandatory;
   a client **pins the highest `bundle_seq` seen per (`fid`, owner fingerprint)** and
-  refuses a lower one — so a server cannot replay an older bundle that still lists
-  a departed organiser, or an older consent text. `policy.api_host` is signed and
-  must equal the host the client actually talks to. Removing an organiser is a new
+  refuses a lower one — so a forwarded older bundle that still lists a departed
+  organiser, or an older consent text, is refused. Removing an organiser is a new
   bundle with a higher `bundle_seq`.
 - **The fingerprint never comes from the same channel as the bundle.** It is the
-  SHA-256 of the owner's public key, shown in the invite link (§6.4) and printed in
-  the organiser's call text; the client checks the bundle's signing key against it.
-  On the **file route** the organiser sends the template, the bundle file, and quotes
-  the fingerprint in the message itself. Without an out-of-band fingerprint a bundle
-  is **refused** (§6.4), not accepted with a prompt.
+  SHA-256 of the owner's public key, printed in the organiser's call text and read
+  out by another route; the client checks the bundle's signing key against it.
+  The organiser sends the template, the bundle file, and quotes the fingerprint in
+  the message itself. Without an out-of-band fingerprint a bundle is **refused**,
+  not accepted with a prompt.
 - **`template_sha256` is defined over decoded text**: the template as a Unicode
   string with any BOM removed, line endings *as they are*, encoded as UTF-8. Not over
   raw file bytes (which a BOM-dropping round trip would change).
-- **A published bundle is plaintext on the server.** It holds the template, the
-  organisers' public keys and the policy. The default `fid` is a 128-bit random
-  value; a readable alias is optional. A form whose *existence* is sensitive (a
-  pentest scoping intake naming a client) must not use a guessable `fid` and must
-  treat the bundle as readable by anyone holding the link (§6.2).
+- **A bundle travels with the message that carries it.** It holds the template
+  hash, the organisers' public keys and the policy. The default `fid` is a 128-bit
+  random value; a readable alias is optional. A form whose *existence* is sensitive
+  (a pentest scoping intake naming a client) must not use a guessable `fid` and
+  must treat the bundle as readable by anyone the message reaches.
 - **Retained per form version.** The organiser keeps each published version — the
   template(s), bundle and hash — under `forms/` (§7.1), because "judged against the
   version it names" needs the text to compare with.
@@ -800,7 +858,7 @@ beside the template (`<template-name>.bundle.json`, the existing sidecar naming)
     names ≤ 80 characters without control characters, `max_package_bytes` ≤ the 120 MiB hard
     cap, `retain_unused` ≤ 200 characters, the whole bundle ≤ 256 KiB.
   - *Order of checks.* size and JSON → fingerprint → signer → signature → structure →
-    template (hash, id, version, rules) → rules supported → expiry → host → pin. Nothing in a
+    template (hash, id, version, rules) → rules supported → expiry → pin. Nothing in a
     bundle is believed before the signature, not even "this form is closed". `expires` is the
     last day it is believed (UTC); `bundle_seq` equal to the pin is accepted, lower is a
     rollback; a pin belongs to one (`fid`, owner fingerprint).
@@ -888,10 +946,11 @@ Decrypting yields the plain zip; from there on nothing is proprietary.
 | Bytes per image / per package | 25 MB / 120 MB hard cap; open-link forms default to a lower `max_package_bytes` (above: 60 MB) | a 2000 px portrait is 2–8 MB; leave headroom, not a free disk |
 | **Extracted bytes** | an absolute cap **counted while extracting** (reuse `ImportBudget`, `lib/services/import/utils/import_budget.dart`) | a ratio alone (20× of 120 MB = 2.4 GB) is not a bound, and zip headers can lie; the existing bomb test builds honest headers only |
 | Entry names | `submission.md`, `manifest.json`, or `images/<field-id>-<n>.(jpg\|png\|webp\|heic)` — lower-case, `[a-z0-9-]{1,64}`; **no duplicates after case-fold + NFC**, no reserved Windows names, no symlinks, no `..`, no absolute paths | containment; `A.jpg` and `a.jpg` collide on APFS/NTFS after the hash check |
-| Identifiers | `sid` and `fid`: exactly 26 characters `[a-z2-7]`; form `id`: the slug grammar. Enforced by client **and** server; **a landing directory name comes from the validated `sid`, never from an answer** | a client-chosen id is a path |
+| Identifiers | `sid` and `fid`: exactly 26 characters `[a-z2-7]`; form `id`: the slug grammar. **A landing directory name comes from the validated `sid`, never from an answer** | a client-chosen id is a path |
 | Image formats | JPEG, PNG, WebP; **HEIC** as decided in D4 (§5.5) | **no SVG** (active content), no animated formats. Entry names may end in `.heic` |
 
-Defaults are overridable **downwards** by the form and the server policy, never
+Defaults are overridable **downwards** by the form's policy and, on the Managed
+Intake route, by the server contract (120 MiB, §6.3), never
 upwards past the hard caps in the client.
 
 ### 5.5 Images: metadata, trailers, dimensions
@@ -901,7 +960,7 @@ owner/artist — XMP, and PNG text chunks. The Kookboek even asks for "the origi
 file", which was read as "original bytes". It does not need location data; it needs
 resolution and a colour profile. Therefore:
 
-- **Strip on the respondent's device, before hashing and sealing**, losslessly at the
+- **Strip on the respondent's device, before packaging and sending**, losslessly at the
   segment level (no re-encoding): JPEG APP1 (EXIF, XMP) and APP13, PNG
   `tEXt`/`iTXt`/`zTXt`/`eXIf`, WebP EXIF/XMP. **Keep the ICC profile and the
   orientation** (a minimal EXIF carrying only `Orientation`). The fill view says
@@ -978,9 +1037,10 @@ points.
   and opening throw `Unsupported operation: Uint64 accessor not supported by dart2js`. Under
   dart2wasm in Chrome the whole `form_seal_test.dart` and `form_bundle_test.dart` pass
   (`dart test -p chrome -c dart2wasm`); `form_base32`, `form_jcs` and the bundle pass under
-  dart2js too. `make build-web` is a dart2js build, so **the web respondent shell (§6.6) cannot
-  seal with this release as it is**: it needs either a wasm build or a fix upstream (two
-  `setUint32` calls) before phase 4's web smoke test. This does not touch the desktop app, the
+  dart2js too. `make build-web` is a dart2js build, so **sealing is desktop-only**: the
+  web respondent of Managed Intake does not need it (the package travels over TLS to a
+  processor, §6.4), and the offline `.zip.age` route on the web needs either a wasm build
+  or an upstream fix (two `setUint32` calls). This does not touch the desktop app, the
   organiser, or the file route from a desktop respondent.
 - **Verified against the world, not against ourselves.** Phase 3's gate includes the
   public `age` test vectors and an **interoperability test** with the reference `age`
@@ -990,71 +1050,68 @@ points.
 - **Binding the plaintext to its context.** `age` has no associated data; binding is
   done by the content: after opening, the organiser's client requires
   `manifest.submission_id`, `manifest.form.id`/`version` to equal what it asked for
-  (the `sid` it fetched, the form it is importing for). A ciphertext moved by a
-  server from form A to form B of the same organiser opens fine but **fails that
-  check**. The organiser's client records `sid → ciphertext_sha256` at first fetch
+  (the `sid` on the file, the form it is importing for). A ciphertext moved
+  between two forms of one organiser opens fine but **fails that
+  check**. The organiser's client records `sid → ciphertext_sha256` at first import
   and flags a different hash later as `replaced`.
 - **One file touches the primitives** (`form_seal.dart`). `CollabCrypto._wrapTo` is
   private, epoch-bound and authority-signed; it cannot be reused for an anonymous
   sender, and pretending it can would produce a second file with its own HKDF
   parameters. Red lines are the relay's: no bespoke primitive, no ratchet.
 - **Requires the same external review** as the relay design before it ships
-  (phase 3 gate): the `age` implementation, the request/bundle signing of §6.3, and
+  (phase 3 gate): the `age` implementation, the bundle signing of §5.1, and
   key handling.
 
 ### 5.7 What is authenticated — and what cannot be
 
 **Sealing gives confidentiality and integrity of the package. It does not
 authenticate the sender.** The organisers' public keys are public by design, so
-*anyone* — including a compromised server — can create a valid package for any `sid`
-and put any name in it. Revision 1 implied more; this is the honest statement:
+*anyone* holding the bundle — including whoever forwarded it — can create a valid
+package for any `sid` and put any name in it. Revision 1 implied more; this is the
+honest statement:
 
-- A malicious server **can** withhold, delay, delete — and **forge or replace** a
+- A party in the delivery chain (a mailbox provider, a shared-drive member, a
+  forwarded stranger) **can** withhold, delay, delete — and **forge or replace** a
   submission in a respondent's name. Sealing cannot prevent that for anonymous
-  respondents.
+  senders.
 - **What the design does about it:**
-  - the server refuses a second body under the same `sid` (`409`, §6.3), and the
-    organiser's client flags a changed hash (`replaced`);
-  - the respondent sees the package hash in the arrival note (§5.8) and can quote it;
   - **the maker check (§7.4) is an integrity control, not a courtesy**: before a
     contribution is published, the maker confirms it **through the address they gave
-    in the form**, out of band from the server. Compile therefore selects only
-    `maker-approved` rows by default.
+    in the form**, out of band from the delivery channel. Compile therefore selects
+    only `maker-approved` rows by default;
+  - the manifest's `submission_id`, `form.id`/`version` are re-checked after opening,
+    so a package swapped between forms of one organiser fails the binding (§5.6).
 - A per-submission signing key inside the package was considered and **rejected**: it
   is self-asserted by the very party who could forge it and proves nothing.
 
-### 5.8 Arrival note and withdrawal
+(Managed Intake's answer is different: the mailbox verification chain of §6.4 —
+which also cannot prove *who* a person is, but does bind the act to a mailbox and
+to one submission.)
 
-On a successful upload the server answers with a small, **unsigned** note: `sid`,
-server time, `ciphertext_sha256`, and the organiser's contact address. It is **an
-arrival note, not proof against the server** (the server holds its own key and would
-sign anything). The fill view offers "keep a copy of your submission": the plain zip
-(their own data) plus this note.
+### 5.8 Keeping a copy, and withdrawal on the offline route
+
+The fill view offers "keep a copy of your submission": the plain zip — the
+respondent's own data — beside the sealed file they send. On the offline route
+that copy is all there is; there is no server to ask.
 
 **Withdrawal** is a *signal to the controller*, not a deletion (§9.3, art. 7(3) GDPR:
-consent can always be withdrawn):
+consent can always be withdrawn). On the offline route it is a short message to the
+contact address named in the `notice`; the organiser marks the row withdrawn by
+hand, the Inbox excludes it from compile unconditionally, and offers to delete it
+(§7.3). A withdrawal is accepted **after the form's closing date** too, and then
+flagged "possibly already in print" rather than refused. The Managed Intake
+withdrawal is a server action with its own guarantees (§6.5).
 
-- The client makes a random **withdrawal secret** and sends only its hash with the
-  upload; the secret is kept in the copy the respondent saves. (Server-generated
-  tokens, as revision 1 had, conflict with idempotent retry: if the first response is
-  lost, the retry cannot return a token the server stored only hashed.)
-- `POST /v1/submissions/{sid}/withdraw` with the secret deletes the ciphertext *if
-  still present* and records a **tombstone** `{sid, at}` that survives the purge. The
-  organiser's list shows tombstones; the Inbox marks the local folder **withdrawn**,
-  excludes it from compile unconditionally, and offers to delete it (§7.3).
-- On the **file route** a withdrawal is a short message to the contact address named
-  in the notice; the organiser marks the row withdrawn by hand.
-- A withdrawal is accepted **after the form's closing date** too, and then flagged
-  "possibly already in print" rather than refused.
-
-### 5.9 Organiser keys
+### 5.9 Organiser keys (offline route)
 
 An organiser has an **`age` X25519 identity** (to decrypt) and an **Ed25519 signing
-key** (to sign bundles and requests), in `SecretStore` (the OS keychain), generated
+key** (to sign bundles), in `SecretStore` (the OS keychain), generated
 in a **visible step** ("Create your editorial key"), not silently on first use. The
 age identity is exportable as a standard age identity string, so a sealed file can
-be opened without OciDeck. **Losing every organiser key means losing every
-unfetched submission** — the price of a blind server — and the UI says so plainly.
+be opened without OciDeck. **Losing every organiser key means losing every sealed
+submission not yet imported** — the price of end-to-end sealing on a route with no
+server — and the UI says so plainly. These keys secure **only** the offline route;
+they are not an OciServe credential and the server trust model does not use them.
 
 The **recovery format carries its own purpose byte.** `collab_recovery_key.dart`'s
 payload has none; an organiser pasting a *collab* recovery key into "restore editorial
@@ -1103,227 +1160,243 @@ offers nothing: a web page has nowhere to keep this secret (§9).
 
 ---
 
-## 6. Part C — The intake server and protocol
+## 6. Part C — OciServe Managed Intake (optional)
 
-### 6.1 Shape and ownership
+### 6.1 Shape, ownership and the honest claim
 
-A **small standalone service**, **separate repository** (working name
-`ocideck-intake`, §15), same licence as OciDeck. One process, a directory for blobs
-and an embedded database (SQLite) for metadata, TLS in front. Written in **Dart
-(`shelf`)** so it can depend on the standalone core package of §4.10 instead of
-keeping a second implementation in step. The contract is §6.3; nothing in the app
-depends on the server's language.
+Managed Intake is an **isolated domain inside the OciServe product the organiser
+already uses** — the same process, the same deployment, its own access model. Its
+contract is upstream and fixed: [OciServe ADR
+0016](https://pawprint.vigilis.online/brenno/OciServe/src/branch/main/docs/adr/0016-managed-intake.md)
+and `docs/openapi.yaml` in the OciServe repository, tags `Intake` and
+`IntakeRespondent`. OciDeck pins a copy of that specification
+(`test/fixtures/ociserve_openapi.yaml`) and tests drift against it
+(`test/ociserve_api_drift_test.dart`), exactly as it does for the exam routes;
+the pin records the source commit, the spec hash and the capability-catalogue
+version (issue #2262). The superseded OciIntake `/v1` documents are **not** a
+source of truth and are removed with the code that implemented them (issue
+#2263).
 
-The server **never parses package contents**: it cannot (ciphertext) and must not try.
-It reads only HTTP metadata — `sid`, `fid`, size, invite token, withdrawal hash — and
-enforces what it can see: size, count, time window, rate, and who holds a valid invite.
-**The detailed server requirements (§6.5) are written here so the contract is reviewed
-with the format, and are to be carried over into the server repository's own design**
-(product review: a second product should own its own spec). They are now written out as numbered,
-testable requirements in [`INTAKE_SERVER_REQUIREMENTS.md`](INTAKE_SERVER_REQUIREMENTS.md).
+**OciServe is a processor and can technically read what it stores.** Protection
+comes from transport, encrypted storage, minimal retention and strict access —
+this is the contract's own position and this document claims nothing stronger.
+No screen, no dialog and no document may promise that the server
+cryptographically cannot read a submission. A respondent who does not want the
+server to see their answers takes the file route (§5, §6.7), which is always
+offered and never punished.
 
-### 6.2 Who sees what
+**No server code ships in OciDeck; there is no default host.** The organiser
+publishes to the OciServe tenant they are signed in to; a respondent's client
+talks only to the host the invitation names, shown before any content moves.
 
-| Party | Sees | Cannot see |
-|---|---|---|
-| Respondent | the form, their own answers, their arrival note | other submissions |
-| Organiser (key holder) | everything in the packages | — |
-| Server operator | `fid`, `sid`, ciphertext size, upload time, **the full form bundle in plaintext** (template, organiser names and public keys, policy), invite-token hashes, withdrawal hashes, tombstones, and — **unless the operator configures otherwise (§6.5) — full IP addresses and user-agents in the reverse proxy's access log** | answers, images, names or e-mail addresses in the form |
-| Operator of the **web form shell** origin | what a web respondent types, **before** it is sealed (it serves the code that runs in the tab) | — (hence condition 3: this is the organiser, not a third party) |
-| Anyone holding the invite link | the published form (template and policy) | any submission |
-| Network observer | TLS metadata, host | content |
+### 6.2 Publication: the immutable snapshot
 
-### 6.3 Protocol (v1)
+Publishing is an organiser action from the existing form/Inbox context
+(`POST /api/v1/organizations/{organization_id}/intake-forms`, then
+`…/versions` for later versions). One publish call carries **one immutable
+snapshot** — the envelope OciServe validates plus the `definition` it treats as
+opaque:
 
-HTTPS; JSON except the ciphertext body. The **shape** is the contract; paths are
-illustrative.
-
-| Operation | Who | Notes |
-|---|---|---|
-| `GET /v1/info` | anyone | `{protocol: 1, limits, source_url, operator_contact}`. A client refuses a server that is too old rather than misbehaving. The `source_url` is where EUPL-1.2's source-offer obligation for a modified, network-run server is met. |
-| `GET /v1/forms/{fid}` | respondent | `{bundle, template, assets}`; the client checks `sha256(template) == bundle.template_sha256`, the signature against the fingerprint from the invite, `api_host` against the host it called, and `bundle_seq` against its pin (§5.1). |
-| `PUT /v1/submissions/{sid}` | respondent | Body: the `age` ciphertext, streamed. Headers: invite token, `fid`, withdrawal-secret **hash**. `201` + arrival note; **same `sid` and same ciphertext hash → `200` and the same note** (idempotent retry); **same `sid`, different hash → `409`**, never overwrite. |
-| `POST /v1/submissions/{sid}/withdraw` | respondent | Body: the secret. Deletes the ciphertext if present; records a tombstone (§5.8). |
-| `PUT /v1/forms/{fid}` | organiser | Publish/update the signed bundle; set `open`/`closed`. **A new `fid` is accepted only if the signer is on the operator's allowlist of organiser keys** (otherwise the server is an anonymous 120 MB-per-request storage service and a squatting target). An existing `fid` is updated only by its owner key. The ACL for the other operations comes from the signed bundle's organiser list. |
-| `GET /v1/forms/{fid}/submissions?after=` | organiser | Metadata list, paged: `sid`, size, time, acknowledged-by `kid`s, **and tombstones**. |
-| `GET /v1/submissions/{sid}/blob` | organiser | The sealed package. |
-| `POST /v1/submissions/{sid}/ack` | organiser | "Landed safely", per `kid`. The purge rule is in §6.5. |
-| `DELETE /v1/submissions/{sid}` | organiser | Remove a server copy **without fetching** it (spam). |
-| `PUT /v1/forms/{fid}/token` | organiser | Rotate or revoke the open invite token. |
-
-*As specified in phase 4 (2026-10-03).* The normative text of this section is now
-[`INTAKE_PROTOCOL.md`](INTAKE_PROTOCOL.md) (CC-BY-4.0, with CC0 vectors); where it says more than the table
-above, it governs. Five things the table left open or got wrong are settled there:
-(1) **`GET /v1/forms/{fid}` returns `variants`**, one `{bundle, template}` per template, because a bundle binds
-one text and each language is its own (§7.1, as amended); the `assets` member is gone — nothing in a form
-references a file in v1. (2) **`PUT /v1/forms/{fid}` publishes the whole set of variants atomically**, and the
-server verifies each bundle itself against the signer of the request. (3) **The invite token travels in a
-header and is stored only as its hash**: the organiser's client makes it and sends `token_sha256`, so the server
-never holds one. (4) **The tombstone keeps the withdrawal hash**, so a withdrawal whose answer was lost can be
-repeated; a withdrawal after the organisers collected the submission has nothing to match and the client sends
-the respondent to the contact line. (5) **`state` (`open`/`closed`) in the form response is advisory**; the
-server enforces it on upload.
-
-**Organiser requests are signed, not bearer-authenticated.** The preimage is
-`["ocideck-intake-req-v1", host, method, path, body_sha256, ts, nonce]`, Ed25519
-over its canonical JSON, with a ±5 minute window and a server-side **nonce cache**
-for replay. The domain tag separates it from bundle signatures and from collab
-signatures (`signProvenance` does the same on purpose); the keys are separate where
-practicable and the tags are distinct in any case.
-
-**Design rules for the protocol.** No accounts, no sessions, no cookies. Versioned
-(`/v1/`). Every cap has a default in the policy, enforced server-side *and*
-pre-checked client-side (§5.4). Errors carry a machine code **and** a human sentence
-the client shows ("The form closed on 1 November; contact the organiser").
-
-**Caps are per token per time window, not one absolute cap per form.** A single
-absolute cap *is* the denial-of-service tool: someone in a forwarded group chat
-fills it and real respondents get "form closed". The organiser is warned at 80%
-of any cap, and can rotate the open token (above) or delete junk without
-downloading it.
-
-### 6.4 Invites, and how a respondent knows the form is genuine
-
-An invite is a link the organiser shares in any channel (WhatsApp, Slack, mail):
-
-```
-https://forms.organiser.example/f/<fid>#api=intake.organiser.example&fp=<fingerprint>&t=<token>
+```json
+{
+  "format": "ociserve-intake-form/1",
+  "title": "Inzending Indo IT Kookboek",
+  "purposes": ["publicatie in het Indo IT Kookboek"],
+  "privacy_text": "…",
+  "retention": { "draft_days": 30, "submitted_days": 365 },
+  "correction_policy": { "allowed": true, "deadline_days": 14 },
+  "definition": { /* opaque to the server — OciDeck's form definition */ }
+}
 ```
 
-- The link points at **the organiser's web form shell** (§6.6), which is also the
-  landing page a telephone opens. The **fragment is never sent to any server**. It
-  carries the API host, the owner-key **fingerprint** and the invite token.
-- The client fetches the bundle, verifies the signature against `fp` and all the
-  bindings of §5.1.
-- **A link without `fp` is treated as incomplete** and stops: "This link is not
-  complete. Ask the organiser for the full invitation link." Revision 1 let such a
-  link continue with a prompt showing an organiser name taken from the very bundle
-  being verified; a layperson cannot answer that, and a hostile template would
-  always arrive on that path.
-- **A fingerprint mismatch stops hard**, with no continue button: "This form does
-  not come from who the invitation names. Do not fill anything in; tell the
-  organiser the link is wrong."
-- The client **pins (`fid`, host) to the fingerprint** and checks it on every fetch:
-  a key change is blocked, like SSH's "host key changed".
-- **Modes:** *open link* (one shared token, with a per-window cap and a rate limit —
-  the Kookboek starts here) and *single-use tokens* (deferred, §15 D6).
+- **The local `.md` stays the source of truth.** A snapshot is a *publication of*
+  a version, never a sync target. Editing the local form does not change the
+  published version; publishing again yields **version n+1** — server-computed
+  hash, monotonically numbered, byte-for-byte immutable once active.
+- **Before the organiser confirms**, the dialog shows: server and organisation,
+  the version and hash that will exist, the purposes and privacy text, the
+  retention bounds and the correction policy — the promises the respondent will
+  see verbatim. The envelope's retention bounds are a **published ceiling the
+  server cannot silently extend**.
+- **Operational status is not content.** `open` / `paused` / `closed`
+  (`PATCH …/intake-forms/{form_id}`) changes whether *new* submissions are
+  accepted; it never edits a published version and never breaks existing
+  submissions — `paused`/`closed` still allow correction and withdrawal.
+- **Two identifiers, deliberately different.** `form_id` is the internal
+  organiser-side id (a uuid, inside the tenant). `form_ref` is a high-entropy
+  public reference the **invitation link** carries — it identifies, it does not
+  authorise.
+- **`definition` is opaque on purpose.** OciDeck keeps the package and form
+  formats free to version; the server checks the envelope (required fields,
+  retention bounds) and computes hash and size, and does not interpret the
+  questions. The submission package a respondent uploads is opaque the same way.
 
-### 6.5 Requirements on the reference server (the minimum bar)
+### 6.3 The two access chains — never mixed
 
-*The full, numbered list is [`INTAKE_SERVER_REQUIREMENTS.md`](INTAKE_SERVER_REQUIREMENTS.md); what follows is the bar in short.*
+**The organiser chain** is the existing OciServe one: OIDC sign-in plus a
+tenant capability **and** a per-form grant. Capability catalogue version 10 adds
+`intake:publish`, `intake:manage`, `intake:read`; the per-form grants are
+`beheerder` (operational status, correction rounds, retention), `redacteur`
+(publish new versions), `verwerker` (read and process submissions). A form's
+maker becomes its first `beheerder`; grant management itself needs
+`intake:manage` and no form grant — the deliberate bootstrap so an organisation
+can never lock itself out, and every grant change is audited. **Organisation
+administration never silently opens content**: without `verwerker`/`beheerder`
+on that form, even an owner sees nothing.
 
-- TLS only; HSTS; no plaintext listener beyond a health check.
-- **Streaming uploads with a hard byte ceiling**: the request is cut at the cap, not
-  buffered. No decompression, no parsing, no thumbnailing, no scanning of ciphertext.
-  Content hygiene happens on the organiser's machine after decryption (§7.2).
-- Rate limit per network bucket and per invite token; invite tokens stored hashed.
-- **Logs and metadata.** The application keeps no full IP address beyond a short-lived
-  truncated form for rate limiting. The **reverse proxy is part of the threat
-  surface** (it terminates TLS): the reference server ships a proxy configuration with
-  the access log off or IP-truncated and rotation of at most 7 days, and its
-  documentation states plainly that without it the operator sees full IP addresses.
-- **Retention** (proposed defaults, shown in the bundle policy and the acceptance
-  dialog): ciphertext is deleted when **every organiser in the bundle has
-  acknowledged it** or — hard cap — **90 days after the form closes**, whichever is
-  first; the organiser is warned 14 days before. Metadata rows go with the
-  ciphertext; the only survivor is the **tombstone** (`sid`, time) for withdrawals,
-  kept 24 months.
-- **CORS** allows the web form shell's origin where configured. The app's web CSP
-  already allows `connect-src https:`; a **web smoke test against a real server is
-  part of phase 4's gate**, because the web branch is otherwise unguarded by
-  `flutter test` (where `kIsWeb` is always false).
-- The server documents backup/restore, has a `--check-config` mode, ships an SBOM,
-  and is **not offered as a hosted service by the foundation**.
-- **Licences:** EUPL-1.2 treats giving access to a program's essential functionality
-  as communication, so a modified server run as a network service must point at its
-  source (hence `source_url` in `/v1/info`). **Decided (D5): the protocol document is
-  CC-BY-4.0 and the shared test vectors are CC0**, so a third party can implement a
-  compatible server or client without a copyleft question; the code stays EUPL-1.2.
+**The respondent chain** is public, accountless and purpose-bound. Five
+identifiers, **never interchangeable**:
+
+| Identifier | What it is | Properties |
+|---|---|---|
+| `form_ref` | the public form reference in the shared invitation link | high-entropy; identifies only |
+| `locator` | the return-link pointer to exactly one submission | random, not a database id; **not an authorisation** |
+| mailbox code | one-time proof of mailbox possession, mailed by OciServe | ~10 min, ≤ 5 atomic attempts, resend invalidates |
+| `grant` | bearer under the `IntakeGrant` scheme | short-lived; bound to one submission, one form, one purpose |
+| `Idempotency-Key` | safe retry on mutations | deduplicates; never authorisation |
+
+Every content action needs **a fresh code**: `POST /api/v1/intake/challenges`
+(purpose `start`, `resume`, `correct` or `withdraw`) mails a code to a mailbox the
+respondent names; `POST …/challenges/{id}/verify` exchanges it for a grant. Code,
+grant and idempotency key **never appear in a URL, a file, a log or an error
+body**; the locator appears in the return link but is not a secret. Challenge
+initiation answers identically whether or not the form, locator or mailbox exists
+(enumeration resistance is the server's contract; the client relies on it, it does
+not implement it).
+
+The routes, for orientation — the pinned OpenAPI is normative:
+
+| Route | Who | What |
+|---|---|---|
+| `GET /api/v1/intake/forms/{form_ref}` | respondent, unauthenticated | the published public form: version, `accepting`, operational status, snapshot |
+| `POST /api/v1/intake/challenges` | respondent | start a mailbox challenge for `start`/`resume`/`correct`/`withdraw` |
+| `POST /api/v1/intake/challenges/{id}/verify` | respondent | code → purpose-bound grant + locator |
+| `GET /api/v1/intake/submissions/{locator}` | respondent, grant | own state, revision, `allowed_actions` |
+| `PUT /api/v1/intake/submissions/{locator}/draft` | respondent, grant | upload/replace the draft package (≤ 120 MiB, streamed) |
+| `POST …/submit` | respondent, grant | the current draft becomes an immutable revision |
+| `POST …/withdraw` | respondent, grant | withdraw; revokes the grants |
+| `GET/POST …/organizations/{org}/intake-forms[…]` | organiser, OIDC + capability × grant | forms, versions, grants, submissions, revisions, `open-correction`, `mark-handled`, `purge` |
+
+**A submission has four states; revisions are immutable and version-bound.**
+`draft` exists after a verified `start` challenge until first submit; `submit`
+makes it `submitted` at **revision 1**, bound to exactly one published form
+version/hash and the server's receipt time. An organiser with `beheerder` +
+`intake:manage` may move `submitted` → `correction_open` within the published
+correction policy; a `correct`-grant submit returns it to `submitted` at
+revision n+1, and a lapsed correction deadline does the same without a new
+revision. `withdrawn` is terminal and reachable from `draft`, `submitted` and
+`correction_open` — always behind a fresh code. **No transition overwrites a
+submitted revision or rebinds it to another form version**; an organiser `purge`
+within the published policy removes content durably, leaving the minimal
+tombstone.
+
+### 6.4 The respondent journeys
+
+1. **Invitation.** The organiser shares a link carrying `form_ref`. Opening it
+   fetches the published public form; the respondent sees the title, the
+   organiser's purposes, the privacy text and retention *as published* — before
+   anything is typed. Filling happens **locally**; the filled document can be
+   saved or exported at any moment, and saving never involves the server.
+2. **Choosing to send.** *Send* is an explicit act, never automatic. The dialog
+   says where the submission goes and under which published purposes, then asks
+   for an e-mail address — **mailbox verification, not an account**. The
+   verified mailbox is transport/access metadata; an e-mail address typed as a
+   *form answer* is ordinary content, may differ, may be absent.
+3. **Code and grant.** OciServe mails a one-time code (~10 minutes, ≤ 5 tries).
+   Verifying it yields a short-lived `IntakeGrant` bound to that submission and
+   the chosen purpose. The code is typed into the app — it is never part of a
+   URL, a file name or a log line.
+4. **Draft or definitive.** With the grant the respondent uploads a draft as
+   often as useful (each replaces the previous draft object) or presses
+   **definitive submit** — an unambiguous confirmation that turns the draft into
+   **revision 1**, bound to exactly one published form version and hash. The
+   server computes and returns `sha256` and `size`; the client checks them.
+5. **The return link.** After submit (and for a draft that needs finishing
+   elsewhere) OciServe mails a return link carrying the `locator`. The link
+   alone opens nothing: every later visit asks for a fresh code before content
+   is available.
+6. **Correction.** When an organiser opens a correction round (only if the
+   published `correction_policy` allows it), the respondent gets a mail, opens
+   the return link, verifies a fresh `correct` code, edits **locally**, and
+   submits **revision n+1**. No path ever overwrites a submitted revision; the
+   originally received bytes stay as they arrived.
+7. **Withdrawal.** A fresh `withdraw` code, a clear explanation, and the
+   submission is withdrawn — content and contact data go within the published
+   purge window, the grant set is revoked, a minimal tombstone remains. Possible
+   at any operational status, also after closing; late is flagged, not refused.
+8. **The local escape is always on.** No network, a refused challenge, a closed
+   form or a failed upload leaves the filled document exactly where it was; *save
+   as file* and the offline `.zip.age` route remain available and are said so in
+   the error text (§8).
+
+### 6.5 What stays local, and what leaves the machine
+
+| Action | Leaves the machine? | What, exactly |
+|---|---|---|
+| Author, open, fill, save a form | no | — |
+| Save/export a `.zip` or `.zip.age` | no | a file the user chooses |
+| Open an invitation link | yes | `form_ref`; the host sees the request (IP, time) |
+| Request a mailbox code | yes | the mailbox address, the purpose, `form_ref`/`locator` |
+| Verify a code | yes | the typed code, once, under TLS |
+| Upload draft / definitive submit | yes | the submission package (plaintext zip ≤ 120 MiB); server returns `sha256`/`size`; a return link is mailed |
+| Fetch own submission / correct / withdraw | yes | `locator` + grant; content only behind a fresh code |
+| Publish / manage (organiser) | yes | the snapshot (incl. `definition`), management calls, all under OIDC + tenant |
+| Fetch submissions (organiser) | yes inbound | revision content streams into the workspace (§7.2) |
+
+Drafts the respondent keeps are **local files**; OciDeck holds no respondent
+secrets server-side. A respondent who never sends leaves nothing on any server.
 
 ### 6.6 The client: transports, acceptance, outbox, platforms
 
-```dart
-abstract interface class IntakeTransport {
-  Future<FormBundle> fetchForm(InviteLink invite);
-  Future<ArrivalNote> submit(SealedPackage package, InviteLink invite);
-  Future<void> withdraw(ArrivalNote note, WithdrawalSecret secret);
-}
-// FileDropTransport   — writes/reads sealed files (phase 3, no network)
-// IntakeHttpTransport — the protocol of §6.3 over guarded HTTPS (phase 4)
-```
+- **Two transports, two auth chains.** The organiser calls go through the
+  existing `OciServeApi` gateway (OIDC token, tenant context, `NetGuard`,
+  RFC 9457 problem reading, `If-Match`/ETag, idempotency — extended for the
+  `Intake` tag under issue #2262). The respondent calls are a **separate thin
+  transport** holding only the `IntakeGrant` — never an OIDC token, never the
+  organiser's session. The two chains share no credentials and no code path that
+  could confuse them.
+- **Acceptance is two-step and honest.** Before the first request the host is
+  shown; before a definitive submit the destination, the published purposes and
+  retention are shown; before publishing, the organiser sees the same envelope
+  the respondent will. No dialog says the server cannot read the content — it
+  says the server is the processor and the file route exists.
+- **Outbox and drafts.** A respondent's work is a local file (the filled `.md`
+  plus images). A queued upload retries only while the app is open and only for
+  something Send was pressed on; on every failure the *export the file instead*
+  route is offered in the same sentence (§8). The exam outbox pattern still does
+  not fit (keychain, 64 KiB) — the package stays a file.
+- **Web.** The respondent journey in a browser has no keychain and no `NetGuard`;
+  the grant lives in the tab, persistence is opt-in with the shared-computer
+  warning, and everything is wiped after a successful send — the same honesty
+  rules as today (§8).
+- **Fail-closed reading.** Unknown submission states, purposes, grant roles,
+  operational statuses or problem types **stop the action** with a safe "update
+  OciDeck" message — an unrecognised value is never guessed into a mutation.
+  Payload size is checked before upload; the returned `sha256`/`size` and the
+  `ETag`/`If-Match` discipline are checked after; a hash mismatch is a hard
+  failure, not a retry.
 
-**The respondent gets in by one of two doors — and the door is designed, not assumed.**
-There is no mobile build, and most invite links are opened on a phone.
+### 6.7 Why file routes must exist (G4)
 
-- **Desktop app.** *Open invitation…* on the start screen reads the link from the
-  clipboard. (No URL scheme is registered today.)
-- **Web form shell.** A *separate, minimal web target* containing only the landing
-  page, fill view, engine, `age` sealing and transport — no editor chrome. It is a
-  static bundle **hosted by the organiser** (HOSTING.md describes serving the web
-  bundle from any static host). It is tested at 360 px width and 200 % text.
-  **It is never served by the intake server and never by the foundation's
-  public demo** (`ocideck.librekat.nl`): code that sees plaintext must not come from
-  the party that stores ciphertext (condition 3), and the foundation must not become
-  a processor of other people's intake by the back door. The web transport **never
-  uses the `fetch-proxy`** that the demo's *Import from URL* uses; a CORS refusal is
-  a clear error ("use the desktop app, or the file route"), not a detour through
-  someone else's server.
+People without connectivity; organisations that will not (or may not) use a
+processor; the day the tenant is gone; and **tests** — the organiser side, the
+package and the sealing are fully testable with no network. Two file routes
+coexist and must not be confused: the **plain `.zip`** (readable everywhere, no
+protection) and the **`age`-sealed `.zip.age`** (the offline transfer route of §5,
+end-to-end encrypted to the organisers' own keys). Neither is `.ocideck`; the
+format decision is recorded in §15.
 
-**Acceptance is two-step and happens where the respondent can judge it.**
+### 6.8 Refused, not merely deferred
 
-1. *Before any request:* the host in the link is shown — "Open the form from
-   intake.organiser.example?". On the web the shell is already loaded from the
-   organiser's own host, so this step is the tap itself.
-2. *After fetching and verifying* (signature, fingerprint, pin): the organiser's
-   name, the notice (§8), and — at **Send** — a single plain confirmation: "Send to
-   the editors of {organiser}? Your submission goes encrypted to {host}; only the
-   editors can open it." The fingerprint is under *Details*.
-
-A `target=` attribute in a template is **not** part of the format any more: the API
-host comes only from the **signed bundle** and must equal the host in the link. A
-template can never cause a request on its own (a template is untrusted input).
-
-**Network rules.** Desktop: `NetGuard` on every request (no internal addresses, DNS
-pinned), redirects to another host refused. **Web: `NetGuard` does not exist there**
-(`dart:io`); the web transport uses https only, `redirect: 'error'`, and the origin
-of the signed `api_host`; DNS guarantees are not available and the documentation
-says so.
-
-**Outbox and drafts — per platform, because the keychain is not everywhere.**
-
-- **Desktop.** A sealed package is ciphertext already; it waits as a **file** in the
-  app's data directory with a tiny index (sid, host, path, arrival note state). The
-  keychain holds only what must stay secret (none for the respondent in v1). The
-  respondent sees "will be sent when you are online and OciDeck is open" and can
-  always *export the sealed file instead*. (The OciServe outbox pattern does not
-  apply: it stores small retry records in the keychain, bounded to 64 KiB.)
-- **Web.** `SecretStore` refuses to store on web (`platformCanStoreSecrets` is
-  `!kIsWeb`) and the only persistent draft store is unencrypted `localStorage`. So
-  **the web keeps nothing beyond the tab by default**, there is **no outbox**, and
-  on failure the shell says "Not sent: no connection. Your submission is still here.
-  Try again shortly, or save it as a file and mail it to the editors." A **Save
-  draft** button downloads the `.md` and images; *Continue a saved draft* loads them;
-  a one-time hint at the start explains that the browser does not keep work. Persistence
-  in the browser is **opt-in**, after a warning about shared computers, and everything
-  is wiped after a successful send.
-- **The organiser's Inbox is desktop-only in v1** (keychain-backed keys).
-
-### 6.7 Why a file route must exist (G4)
-
-The same sealed package, written to a file, goes through e-mail or a shared drive.
-Four reasons: people without connectivity; organisations that will not run a server;
-the day the server is gone; and **tests** — the organiser side and sealing (phases
-2–3) are fully testable with no network. The file route is not a fallback tacked on
-at the end. It needs the **bundle file** of §5.1, because a loose `.md` has no keys
-and nothing to verify.
-
-### 6.8 Refused, not merely deferred: a server that reads plaintext
-
-Some deployments will want the server to reject a short answer at upload time. That
-requires plaintext on the server, which **turns the dropbox into a backend and ends
-condition 3**. It is **refused under §2.1**; it would be a different product and
-would need a new design and a new review. (Revision 1 called it "possible later",
-which is exactly the trigger §2.1 names, scheduled in advance.)
+- **A "my submissions" portal on an e-mail address.** The mailbox verifies
+  possession for one purpose chain; listing submissions by e-mail is refused by
+  design (no cross-submission identity).
+- **The verified mailbox as content.** It is access metadata; it is not merged
+  into the submission, not shown as a form answer, not required to match one.
+- **Any blindness claim.** A screen or sentence implying OciServe cannot read
+  stored content is a defect — §2.1 condition 3.
+- **Automatic anything.** No background upload, no implicit account, no silent
+  re-publish: every boundary crossing is a user act.
 
 ---
 
@@ -1370,10 +1443,10 @@ replaces the one beside the same template.
 
 ```mermaid
 flowchart TD
-  A[fetch blob / open file / open plain zip] --> B[open the age file with an organiser identity]
-  B -->|bad header MAC / unknown recipient| X1[drop + report, no ack]
+  A[fetch revision from OciServe / open .zip.age / open plain zip] --> B[sealed? open the age file with an organiser identity]
+  B -->|bad header MAC / unknown recipient| X1[drop + report]
   B --> C[unzip under caps, counting extracted bytes]
-  C -->|limit / name-grammar violation| X2[drop + report, no ack]
+  C -->|limit / name-grammar violation| X2[drop + report]
   C --> M[manifest: sid, form, version match what was asked for?]
   M -->|mismatch| X3[needs fixing: replaced or wrong form]
   M --> D[answer-zone rules §4.6 + MarkdownSafetyScanner]
@@ -1381,14 +1454,16 @@ flowchart TD
   E --> F[validate against the PUBLISHED spec and compare template-owned regions]
   F --> G[OciWacht scan of answer zones, own-identity per submission]
   G --> H[land as submissions/sid/ — plain files]
-  H --> I[ack — per kid, or once when landed in shared storage]
+  H --> I[server-fetched? mark-handled when the organiser chooses]
 ```
 
-- **No ack on any drop.** A client that cannot open a package must not acknowledge it,
-  or retention could purge a blob a co-organiser who *has* the key has not fetched.
-- **Acknowledge only after the folder is safely written**, so a crash never loses a
-  submission the server already purged. With a **shared StorageConnection** as the
-  workspace (§7.6) one ack suffices; otherwise each organiser acks their own `kid`.
+- **A fetched revision is never edited.** What OciServe stored is immutable; the
+  Inbox lands a copy and `mark-handled` is a separate organiser decision, never
+  automatic on import. Revisions stay fetchable: `revisions/{n}/content` streams
+  exactly what was submitted against the version in force then.
+- **The folder is safely written before anything is reported done**, so a crash
+  never loses a submission. A dropped or failed package leaves a report, not a
+  partial folder.
 - The submission is *data*: nothing in it is executed, no link is followed at import,
   no image is decoded outside the capped pipeline.
 - A **HEIC kept as-is** (§5.5) is landed untouched, never opened by OciDeck's own
@@ -1408,8 +1483,8 @@ One Markdown table the Inbox maintains and the user can also edit:
 - **Status** comes from a closed list the form names (`states="received|edited|…"`);
   default `received|maker-check-sent|maker-approved|edited|laid-out`. The Kookboek's
   own progress list (*Voortgangslijst per bijdrage*) is the first instance.
-- **Withdrawn** is set from the server's tombstones (or by hand on the file route)
-  and is honoured by compile unconditionally.
+- **Withdrawn** is set from the submission's state on OciServe (or by hand on the
+  file routes) and is honoured by compile unconditionally.
 - **Delete** removes `submission.md`, `submission.edit.md` and `images/` of that row,
   **and offers to remove the copies compile made into `book/images/`** (they are
   the same personal data). It keeps `manifest.json` and the row (status
@@ -1498,15 +1573,15 @@ would have grown into a programming language.)
 
 - **Where do submissions land?** When a form is set up the organiser chooses the
   **workspace** from the existing storage connections (shared folder, git, WebDAV).
-  Then everyone sees the same folders and `overview.md`, and one ack after landing is
-  enough. Without it, every organiser fetches and acks their own copy.
-- **Keys.** Creating the editorial key is a visible step with its own explanation.
-  **Publishing is blocked** until there are at least two organiser keys or a verified
-  recovery key: "Add a second editor, or keep the recovery key. Otherwise nobody can
-  open the submissions if this computer fails." *Add an editor* follows the device
-  verification the collab design already has.
-- The first editor to fetch and ack must not leave the others with an empty Inbox
-  after the purge: see the retention rule (§6.5) and the shared workspace above.
+  Then everyone sees the same folders and `overview.md` — on the Managed Intake
+  route, each `verwerker` fetches revisions into the shared workspace once.
+- **Keys.** The editorial key secures the **offline route only** (§5.9). Creating
+  it is a visible step with its own explanation, and **sealing a bundle is
+  blocked** until there are at least two organiser keys or a verified recovery
+  key: "Add a second editor, or keep the recovery key. Otherwise nobody can open
+  the sealed submissions if this computer fails." *Add an editor* follows the
+  device verification the collab design already has. Managed Intake access is
+  not a key at all — it is the per-form grant of §6.3, managed on OciServe.
 
 *As built — the team* (`form_team.dart`, `form_team_actions.dart`, `form_team_dialog.dart`; Inbox → **Team…**).
 The owner is whoever holds the editorial key on this machine; the **team** is the other editors, listed in every
@@ -1542,17 +1617,60 @@ silently weakens a rule. The **author view** therefore:
 - warns on `notice-missing`, on a missing `contact`/`controller`, on a missing
   `retain-unused`, and when `keep-record` is set but the notice gives no period.
 
+### 7.8 The organiser's Managed Intake journey
+
+Beside the local work, the Inbox gains one optional column of server actions —
+each an explicit act under the organiser's OIDC session and their grant on the
+form (§6.3):
+
+- **Publish a version.** *Publish to OciServe…* builds the snapshot envelope
+  (§6.2) from the form — title, purposes, privacy text from the `notice`, the
+  retention bounds and correction policy the organiser sets within the contract's
+  limits, and the opaque `definition` — shows all of it with the server,
+  organisation and resulting version/hash **before** the confirming click, then
+  publishes. A local edit afterwards changes nothing published: *Publish* again
+  makes version n+1 and says so. The invitation link the organiser then shares
+  carries only the `form_ref`.
+- **Fetch submissions.** The Inbox lists what the form received (state, revision,
+  time — no e-mail addresses, the contract deliberately withholds them) and
+  downloads each new revision into `submissions/<sid>/` through §7.2, immutable
+  as it arrived; the working-copy rules of §7.3 apply unchanged. Nothing is
+  fetched on a schedule: fetching is a user act.
+- **Open a correction round** (`beheerder` + `intake:manage`, within the
+  published policy): the respondent is mailed, edits locally, and what returns
+  is revision n+1 beside the original — never over it.
+- **Mark handled**, **pause/close the form** for new submissions, and **purge**
+  are management calls with clear confirmations; `withdrawn` submissions appear
+  as such in the register (§7.3). Every response the client cannot classify
+  fail-closed stops the action (§6.6).
+
+Nothing in this journey is required for the local workflow of §7.1–§7.7; an
+organiser who never configures OciServe loses no feature.
+
 ---
 
 ## 8. Respondent experience (requirements for phase 1)
 
-**The journey from link to arrival note has to be designed, and these are its
-requirements**, taken from the usability review:
+**The journey from invitation to return link has to be designed, and these are
+its requirements**, taken from the usability review:
 
-- **Landing page** (the web shell's `/f/<fid>`; the desktop's *Open invitation*): the
+- **Landing page** (the invitation link; the desktop's *Open invitation*): the
   form title, the organiser, the closing date, the **introduction** (the text before the
   first field, e.g. "what you need: your recipe, your story, 3–6 original photos, ~45
-  minutes"), the **notice** (§9.3) and one main button. No editor chrome.
+  minutes"), the **notice** (§9.3) and one main button. No editor chrome. On the
+  Managed Intake route the landing shows the *published* purposes, privacy text
+  and retention (§6.2) — the promises the snapshot makes, not ours.
+- **Sending is a choice, never a step you slide into.** *Send* is always
+  pressable, and next to it the equally real *Save as file*. Choosing Send asks
+  for an e-mail address with one plain sentence: "We mail you a code to prove
+  this mailbox is yours. It is not an account, and nothing is sent until you
+  confirm." The code screen takes 6–16 characters, offers **resend** (with its
+  cooldown), and never echoes the code. The verified mailbox is shown as
+  delivery metadata — never silently merged into the form's answers.
+- **The return link is explained, not just mailed.** "Keep the link we mail you.
+  It points at your submission — opening it always asks for a new code, so the
+  link alone is not a key." A lost link ends at the contact address, in plain
+  words.
 - **Send is always pressable.** With open issues the screen shows, at the top, "4
   things left before you can send", each a link to its field, and moves focus to that
   summary. Section headings carry their state ("A. Contact and profile — done",
@@ -1579,14 +1697,20 @@ requirements**, taken from the usability review:
   `lib/`; the form shell turns semantics on when the fill view opens. A `flutter test`
   run (where `kIsWeb` is false) cannot show this, so it is in the web smoke test.
 - **Drafts and offline** as in §6.6, in plain words.
-- **Arrival screen.** "Your submission has arrived (4 October, 20:22). You do not need
-  to keep anything. To withdraw it, write to {contact} before {date} — or use the
-  saved copy." Not "keep the receipt".
+- **Every server failure preserves local work and names the escape.** An expired
+  or wrong code, a lost connection, a `409` conflict, a paused or closed form, a
+  package over the limit, a rate limit, or a server outage — each gets a plain
+  sentence, what the respondent can do now, and the same standing offer: *save as
+  file*. Nothing entered is ever lost to a network error (§6.4, §6.8).
+- **Arrival screen.** "Your submission has arrived (4 October, 20:22), revision 1.
+  We mailed you a return link — opening it will ask for a new code. To change or
+  withdraw it later, use that link; or write to {contact}." Not "keep the
+  receipt".
 - **The notice** (the `notice` region, shown before the first field and summarised at
-  Send) states, on **both routes**, who the controller is, the contact, what is
+  Send) states, on **every route**, who the controller is, the contact, what is
   collected and **how long the organiser keeps it**. The server's retention
-  (*"the encrypted package is kept until …"*) is shown as a separate line, so a
-  respondent does not read the server's 30 days as the organiser's retention.
+  (*"this submission is kept at most …"*, from the published snapshot) is shown as a separate line, so a
+  respondent does not read the server's bound as the organiser's retention.
 - **Language and size.** UI strings through `l10n` (31 languages); layout holds at
   200 % text; keyboard-only operable; counters announce politely, not on every
   keystroke.
@@ -1599,23 +1723,23 @@ requirements**, taken from the usability review:
 
 | Threat | Answer |
 |---|---|
-| Malicious respondent: spam, oversize, zip bomb, polyglot image, poisoned Markdown, remote images that phone home when an editor opens the file | Server caps, per-token windows and rate limits; organiser-side caps counting extracted bytes; name grammars; full bounded image decode + trailer removal; answer **whitelist** (§4.6) incl. no remote images; nothing executed |
+| Malicious respondent: spam, oversize, zip bomb, polyglot image, poisoned Markdown, remote images that phone home when an editor opens the file | Server-side caps and rate limits (contract: 120 MiB package, 64 KiB control bodies); organiser-side caps counting extracted bytes; name grammars; full bounded image decode + trailer removal; answer **whitelist** (§4.6) incl. no remote images; nothing executed |
 | A hostile **HEIC** kept as-is (we do not decode it) that a preview or external tool on the organiser's machine then decodes | Magic-byte and size checks only; never opened by OciDeck's own decoders; no automatic preview in the Inbox; flagged *not checked*; conversion only on demand, on a platform decoder; accepted residual risk (D4) |
 | Modified or old respondent client skips the rules | The organiser re-validates against the **published** spec and compares template-owned text (§4.11). The respondent client is advisory |
-| **The server forges or replaces a submission** | **Not preventable for anonymous respondents** (§5.7). Mitigated: `409` on a second body, `replaced` flag, and the out-of-band maker check before publication |
-| Server withholds, delays, deletes | Accepted; hence the file route, organiser-side ack discipline, arrival note |
-| Malicious template / phishing endpoint | The API host comes only from the **signed bundle** and must equal the link's; host shown before any request and at Send; fingerprint-anchored signature; nothing is sent without Send |
-| Key substitution by the server | Fingerprint in the link fragment; bundle signature; **pin of (fid, host) → fingerprint**; a link without a fingerprint stops; a mismatch stops |
-| **Stale or rolled-back bundle** (departed organiser's key, older consent text) | Monotonic `bundle_seq` pinned per (fid, fingerprint), mandatory `expires`, signed `api_host` |
-| Loose template on the file route has no keys (a group member posts a "better version" with their own key) | A template alone cannot be sealed; the **bundle file** and an **out-of-band fingerprint** are required; an organiser's fingerprint is quoted in the call text |
-| Recipient dropped from a submission by the server | `age`'s authenticated header detects it |
-| Replay / cross-form substitution | Manifest binding checked after opening; `sid → hash` recorded at first fetch |
-| Open write endpoint / squatting on a `fid` | Operator allowlist of organiser keys for new forms; random `fid`; only the owner updates |
-| Replay of organiser requests | Domain-tagged preimage with host, nonce cache, ±5 min window |
-| Loss of organiser keys | Two-key rule / verified recovery key before publishing; standard age identity export |
-| Metadata (who, when, how big) | Out of scope for E2EE; minimised: no accounts, random sids, day-precision dates, short-lived truncated logs, proxy config shipped |
-| A web respondent's input seen by whoever serves the client | The client is served from the organiser's own origin (condition 3); stated in §6.2; not claimed otherwise |
-| Denial of service | Per-token windows, streaming caps, organiser-side delete-without-fetch, token rotation; the file route as fallback |
+| **The server forges or replaces a submission** | On the offline route: not preventable for anonymous senders (§5.7), mitigated by manifest binding and the out-of-band maker check. On Managed Intake: the server is the trusted processor — the answer is **immutable revisions** (nothing overwrites submitted bytes), revision+hash receipts the respondent can quote, and the maker check before publication |
+| OciServe withholds, delays, deletes, or is down | Accepted as a partial outage: local work is preserved, the file route is offered in the error text, retries use `Idempotency-Key`; organiser-side, fetched revisions are already local |
+| Malicious template / phishing endpoint | The host comes from the organiser's **configured OciServe tenant** (organiser side) or the **invitation's host shown before any content moves** (respondent); nothing is sent without Send; a template can never cause a request on its own |
+| Offline route: key substitution, stale or rolled-back bundle, loose template without keys | Bundle signature + **out-of-band fingerprint**, monotonic `bundle_seq` pinned per (fid, fingerprint), mandatory `expires` (§5.1); a template alone cannot be sealed |
+| Offline route: recipient dropped, replay / cross-form substitution | `age`'s authenticated header detects a dropped recipient; manifest binding is checked after opening; `sid → hash` recorded at first import |
+| **Mailbox-code bruteforce** | Contract: ≤ 5 atomic attempts, ~10 min validity, resend invalidates, peppered slow-KDF digest. Client duty: never log or persist a code, never pre-fill it, never place it in a URL |
+| **Enumeration** (which form, locator or mailbox exists) | Contract: challenge initiation answers identically either way; verification fails generically. Client duty: show the same neutral screen for every challenge failure — never "this e-mail address is not known" |
+| **Mail bombing** of a respondent's address | Contract: per-form, per-mailbox and per-network rate limits + resend cooldown. Client: one resend button, honouring `resend_after` |
+| Grant theft or replay | Grant is short-lived, bound to one submission, one form, one purpose and its allowed actions; carried in `Authorization`, never in a URL; a stolen grant for another purpose or submission fails server-side; withdrawal revokes outstanding grants |
+| Cross-tenant access to submissions | Contract: FORCE RLS on every intake table + organisation scoping + capability × per-form grant. Client duty: organiser calls always carry the tenant context; the respondent chain never carries an OIDC token |
+| Loss of organiser keys (offline route) | Two-key rule / verified recovery key before sealing a bundle; standard `age` identity export (§5.9) |
+| Metadata (who, when, how big) | Not hidden from the processor — minimised instead: no accounts, the locator is not a database id, day-precision client dates, retention bounded by the published snapshot, audit without answers/e-mail/codes/locators |
+| A web respondent's input seen by whoever serves the client | The web client runs in the respondent's tab; whoever serves it can see input before it is sent — stated where the web route is offered, never denied |
+| Denial of service on the public respondent chain | Contract rate limits and streaming caps; client: honest errors with the file-route escape; no client-side polling |
 | Organiser endpoint compromise | Outside this design's boundary (as for every local secret) |
 
 ### 9.2 Accessibility and dignity (value 7)
@@ -1628,15 +1752,21 @@ a developer; the target respondent is *someone who is not a chef or a writer*.
 This section records design obligations; it is not legal advice, and the **jurist
 review (§11) is a gate**.
 
-- **Roles.** The form's organiser is the **controller**; the operator of the intake
-  server is a **processor** of ciphertext and metadata; the operator of the *web form
-  shell* origin sees plaintext in the respondent's browser (§6.2) and is, in practice,
-  the organiser. **The foundation operates no intake server and ships no default
-  one.** It does operate the public demo (with a fetch-proxy); the demo is **never**
-  the route for intake, and the intake transport never goes through the proxy (§6.6).
-  Should the foundation ever run an intake server *for someone else* — the Kookboek
-  included — it would be that party's processor and would need an article 28
-  agreement.
+- **Roles.** The form's organiser is the **controller**. On the Managed Intake
+  route the **OciServe operator is a processor that can read the content** — the
+  honest position of §6.1, which needs an article 28 agreement between the
+  organiser and whoever runs their tenant. On the file routes there is no
+  processor at all. **The foundation operates no intake server and ships no
+  default one.** It does operate the public demo (with a fetch-proxy); the demo
+  is **never** the route for intake, and the intake transport never goes through
+  the proxy (§6.6). Should the foundation ever run OciServe *for someone else* —
+  the Kookboek included — it would be that party's processor and would need an
+  article 28 agreement.
+- **The verified mailbox is access metadata, not content.** It proves temporary
+  possession of a mailbox for one purpose chain; it is not a form answer, not an
+  account and not a record key (§6.4). An e-mail address typed *as an answer* is
+  ordinary form content and is treated like any other answer — the two are never
+  merged, and the organiser's inbox deliberately does not show the mailbox.
 - **What is personal data here.** The respondent's own details: name, e-mail, phone,
   town, portrait, bio. The *content* of a contribution — a recipe, its ingredients,
   its dietary properties (a dish being halal or vegan says nothing about a person) —
@@ -1661,13 +1791,14 @@ review (§11) is a gate**.
   the closing date of the Kookboek's consent marks only until when removal from a
   printed edition can still be *guaranteed*; after it, withdrawal still stops the
   digital edition, reprints, promotion and the keeping of contact data. A withdrawal
-  is a **tombstone** the organiser sees (§5.8) and compile honours unconditionally —
-  not a server-side delete that the organiser never hears of.
-- **Transparency before sending**, on both routes: the `notice` region (§8) names the
+  the organiser sees (§5.8, §6.4) is honoured by compile unconditionally — on the
+  server route it is a real state change the organiser fetches, on the file route a
+  message to the contact address.
+- **Transparency before sending**, on every route: the `notice` region (§8) names the
   controller, contact, purpose and the organiser's retention; the acceptance dialog
-  adds what leaves the device, where to, and the *server's* retention as a distinct
-  line. The privacy documentation gains a row for this feature, like the OciServe rows
-  today.
+  adds what leaves the device, where to, and the *server's* published retention as a
+  distinct line. The privacy documentation gains a row for this feature, like the
+  OciServe rows today.
 - **Third parties and minors.** A respondent's photo may show others. The form can ask
   a plain `choice` ("Are recognisable other people in the photos? no / yes, with their
   permission") next to an optional text field ("who gave permission — for children,
@@ -1688,7 +1819,11 @@ review (§11) is a gate**.
   scanner finds *labelled* names only, and the documentation does not promise more.
 - **Retention.** The notice states the organiser's retention; the register has a
   *delete after* column and a reminder; *delete* removes the compiled copies too
-  (§7.3); the server's retention is bounded and shown (§6.5).
+  (§7.3). On the server route the retention categories and their ceilings live in
+  the published snapshot — `draft_days` (≤ 90) and `submitted_days` (≤ 1825) are
+  promises the server enforces, shown to the respondent as published (§6.2); a
+  withdrawn submission's content and contact data go within the purge window and a
+  minimal tombstone remains.
 
 ### 9.4 Legal notes that shape the design
 
@@ -1704,11 +1839,11 @@ review (§11) is a gate**.
 - **CRA.** The foundation's position (`assurance/CRA-2024-2847-positie.md`) is that
   the regulation imposes no obligations on OciDeck (not offered on the market, not a
   manufacturer) and that the CRA is followed as *guidance* — documents say "as
-  described in the CRA", never "as required by". That decision is about OciDeck. The
-  **reference server is a second product**: before phase 4 that document gets a line
-  covering the server repository on the same grounds (free, not monetised, not offered
-  as a service), and its reopening grounds — in particular *the foundation runs an
-  intake server for someone else* — apply to the server.
+  described in the CRA", never "as required by". That decision is about OciDeck;
+  OciServe is a separate product with its own position document — Managed Intake
+  changes nothing on the OciDeck side (the app gains a client, not a service),
+  and the reopening ground *the foundation runs an OciServe for someone else*
+  is already the processor case of §9.3.
 - **Export control.** Open-source code using standard primitives is expected to fall
   under the public-domain software note; OciDeck already ships collab and zip AES.
   Re-check if binaries are distributed outside the EU or a non-standard primitive is
@@ -1719,10 +1854,10 @@ review (§11) is a gate**.
 ### 9.5 Supply chain and compliance
 
 No new dependency is expected on the app side (`cryptography`, `archive`, `image`,
-`crypto`, `characters` are present; the `age` format is implemented over them unless a
-maintained implementation is adopted and passes `check-licenses`). The core package is
-a path dependency in this repository. The reference server adds its own dependency set
-and SBOM in its own repository.
+`crypto`, `characters`, `dartage` are present for the offline route). The core
+package is a path dependency in this repository; the Managed Intake client reuses
+the existing OciServe gateway. OciServe's own dependency set and SBOM live in its
+own repository.
 
 ---
 
@@ -1745,6 +1880,8 @@ and SBOM in its own repository.
 | Zip limits | `lib/utils/archive_limits.dart`; the capped stream is private in `file_service_package.dart` | move the capped stream to `archive_limits.dart` so the Flutter-free package can reuse it |
 | Extraction budget | `ImportBudget` | yes (§5.4) |
 | SSRF/host guard | `NetGuard` | desktop; does not exist on web |
+| OciServe organiser calls | `OciServeApi` gateway, OIDC (`ociserve_auth*`), RFC 9457 reading, ETag/`If-Match`, idempotency | yes — extended for the `Intake` tag under issue #2262 |
+| Contract pinning / drift | `test/fixtures/ociserve_openapi.yaml`, `test/ociserve_api_drift_test.dart` | yes — the pin is renewed from the merged upstream contract (#2262) |
 | Host acceptance UX | OciServe IdP-host acceptance | pattern (§6.6) |
 | Privacy scan / face scan | OciWacht, `lib/services/privacy/` | yes, with the limits of §9.3 |
 | Asset rights | `AssetRightsProvenance` (`lib/models/asset_rights.dart`) | filled at compile (§7.5) |
@@ -1766,9 +1903,10 @@ promises need the *bewaker*; a panel for the heavy ones. **The eight-lens review
   record, retention, deletion).
 - **Before phase 3:** security-architect, the **external crypto review** (age
   implementation, signatures), privacyexpert.
-- **Before phase 4:** security-architect (server threat model), jurist (processor story,
-  CRA line for the server repo, licences), a real-server **web** smoke test, and the
-  preconditions of §14.
+- **Before phase 4:** security-architect (the respondent chain, the two separated
+  auth chains, fail-closed reading), privacyexpert (mailbox as access metadata,
+  retention categories), jurist (processor story, published retention promises),
+  a real-server **web** smoke test, and the preconditions of §14.
 
 ---
 
@@ -1783,7 +1921,23 @@ the risky, external-review-bound parts last**. Each phase stands alone.
 | **1 — The form** | **Plumbing for `packages/` first** (analyze, test, coverage, SBOM, licence and convention gates learn the new package; the repo has no such folder yet); core package (grammar, engine, vectors); the form block through the ten-place chain; **fill view** in the desktop app **and the web form shell**; image checks incl. metadata stripping; message catalogue; **plain package export** (a zip the respondent mails); two example templates; author view basics | server, crypto, organiser side | a recipe form can be filled, validated and saved; round trip byte-identical on **real files** incl. CRLF/BOM; template and submission open in reader and visual editor **with no visible markers**; every issue code has a rendered message; overflow/a11y gates pass; web shell tested at 360 px / 200 % |
 | **2 — The organiser side** | Import of plain zips and folders, **re-validation against the published spec**, `template-text-altered` checks, OciWacht, the register `overview.md`, maker check, **compile**, deletion with compiled copies, withdrawal by hand | server, crypto | the Kookboek team goes from a folder of mailed zips to a laid-out PDF **without leaving OciDeck** and without any network |
 | **3 — Sealing and keys** | `age` implementation, organiser keys (visible creation, two-key rule), the **bundle file**, fingerprints, sealed file route, strip-again at import | server | `age` test vectors + **interop with the reference `age`**; tamper/wrong-key/wrong-form all fail closed and never ack; **external crypto review done** |
-| **4 — Server** | Protocol v1, reference server (separate repo), `IntakeHttpTransport`, two-step acceptance, tombstones, organiser requests, web smoke test | accounts | end-to-end on a real server incl. a **web respondent**; fingerprint-missing/mismatch and `bundle_seq` rollback tested; hardening checklist green; **§14 preconditions met** |
+| **4a — Clean the slate** | Five controlled reverts of the never-released OciIntake protocol and client (#2263); reposition the `.zip.age` route as the named **offline transfer route**, without server semantics (#2261) | — | no old `/v1` artefact reachable; local form, Inbox, plain zip and the sealed file route green; the two routes cannot be confused |
+| **4b — The contract** | Renew the pinned OciServe OpenAPI from the merged upstream contract (capability catalogue v10), extend gateway and drift tests for `Intake`/`IntakeRespondent` (#2262) | respondent UI | every intake call covered by a drift test; organiser calls need OIDC + tenant, respondent calls never do; unknown enums fail closed |
+| **4c — The journey** | Publish dialog, respondent chain (challenge → grant → draft/submit/withdraw), return-link resume, correction rounds, organiser fetch + mark-handled (#2260) | — | end-to-end on a real tenant incl. web respondent; "not sending" tested as a full outcome; §14 preconditions met |
+
+**Consequence of D7 (2026-09-30): the Kookboek call waits for the sealed route.** The
+call opens when phases 1–3 are done, so every submission is encrypted from the first one.
+That decision stands for the **offline route** — for the Kookboek the sealed file is
+the way submissions travel. Managed Intake (phase 4c) is an option for organisers who
+accept a processor; it does not replace the sealed route for this case.
+The start-up package's calendar (werving November 2026 – January 2027) cannot be assumed
+any more: phase 3 ends in an **external crypto review that has no date**, and the
+kumpulan date T in that calendar is an example the owner can move. Two things keep this
+manageable, neither a decision yet: the review's **scope can be narrowed** to the `age`
+implementation and the signing code (the *format* is an external standard with public
+test vectors and a reference implementation to interoperate with), and phases 1–2 remain
+useful on their own for any user who accepts **plain zips by mail** — the route stays in
+the product, it is just not the Kookboek's.
 
 **Consequence of D7 (2026-09-30): the Kookboek call waits for the sealed route.** The
 call opens when phases 1–3 are done, so every submission is encrypted from the first one.
@@ -1859,12 +2013,15 @@ The review asked that the cost be written down, not discovered.
   vector-file parity test.
 - **`packages/` plumbing** (D2): analyze, test, coverage, SBOM, licence and convention
   gates for a package, a one-time cost before phase 1.
-- **A client↔server version matrix** once the protocol exists.
-- **A second product**: the reference server needs a **named maintainer**, a support
-  promise and an **end date** (or renewal) — it opens a public upload endpoint.
-  **Phase 4 does not start without a named maintainer.** Decision D3 (2026-09-30):
-  *nobody is named now*; the decision is taken when phase 3 is done, with real experience
-  of the Kookboek call.
+- **A client↔server version matrix** once the pinned contract is live — the pinned
+  spec records commit, hash and catalogue version (#2262), so the matrix is a file,
+  not a spreadsheet.
+- **No second product any more.** The standalone intake server is gone (revision 4):
+  Managed Intake lives inside OciServe, an existing product with its own maintainer,
+  release cycle and operations. The phase-4 precondition changes accordingly:
+  **the upstream contract must be merged** (OciServe #629 — done 2026-10-04) and the
+  Managed Intake server issues (#630–#637) far enough that a real tenant answers;
+  OciDeck's side waits on that, not on staffing a new product.
 
 ---
 
@@ -1879,37 +2036,61 @@ The review asked that the cost be written down, not discovered.
   dependency). The `packages/` plumbing is an explicit phase-1 task (§12, §14). (The
   alternative — engine in `lib/` behind a Flutter-free gate, extracting a small protocol
   package only at phase 4 — was presented with its advantages and not chosen.)
-- **D3 — Server maintainer and end date: not decided now.** Still a precondition of phase
-  4; decided when phase 3 is done (§14).
+- **D3 — Server maintainer and end date.** ~~Not decided; a precondition of the old
+  phase 4.~~ **Moot since D10**: there is no second product to staff — Managed Intake
+  is part of OciServe, which already has a maintainer and a release cycle.
 - **D4 — HEIC: convert where the platform can; otherwise accept as-is and flag unchecked.**
   Never a refusal. OciDeck never decodes HEIC itself (§5.5). The owner first chose "accept as
   original" and then, once shown that OciDeck has no HEIC decoder (no measuring, no full
   decode, no metadata stripping), chose this middle path; the GPS risk for unconvertible
   files is knowingly accepted and disclosed (§9.3).
-- **D5 — Licences: CC-BY-4.0 for `PROTOCOL.md`, CC0 for the test vectors**; code stays
-  EUPL-1.2 (§6.5).
-- **D6 — Invites: open link with per-window limits**; single-use tokens only if spam
-  appears (§6.4).
+- **D5 — Licences.** ~~CC-BY-4.0 for the protocol document, CC0 for the test vectors.~~
+  Applied to the OciIntake documents that revision 4 supersedes and #2263 removes;
+  the surviving vectors (bundle, editor card, recovery key, `age` corpus) stay CC0;
+  code stays EUPL-1.2. The Managed Intake contract is OciServe's own and lives there.
+- **D6 — Invites: an open shared link.** On Managed Intake the link carries only the
+  `form_ref`; abuse pressure is absorbed server-side by rate limits (§6.3), not by
+  per-person tokens. On the offline route the organiser mails the bundle to their
+  own list.
 - **D7 — The Kookboek call waits for the sealed route (phase 3).** Everything is encrypted
   from the first submission; the calendar cost is stated in §12.
 - **D8 — Identity after deletion: none by default**; a form may declare `keep-record` and
   disclose it in the notice (§7.3).
 - **D9 — The age implementation: `dartage`** (2026-10-03, on the owner's instruction to use
   an age library). See §5.6 for what was read, what was not chosen and what is accepted.
+- **D10 — The server direction is OciServe Managed Intake** (2026-10-04, this issue).
+  The standalone blind OciIntake is dropped; the upstream contract (OciServe ADR 0016 +
+  `docs/openapi.yaml`) is the source of truth; OciServe is described honestly as a
+  processor that can read. The old phase-4 client work merged to `main` was never
+  released and is reverted (#2263).
+- **D11 — The `.zip.age` sealed package stays, as the offline transfer route** —
+  recommended by this design, confirmed under issue #2261: renamed so it cannot be
+  confused with Managed Intake, stripped of server semantics (`api_host` out of the
+  bundle format), with its own keys and trust model (§5).
+- **D12 — Format decision: keep `.md` + `.zip` (+ `.zip.age`).** The form stays a
+  readable Markdown file; a submission stays a documented zip; the sealed offline
+  variant adds `.age`. **No new extension and no `.ocideck` reuse**: a `.ocideck`
+  already means the presentation/project package — calling a form draft or a
+  submission that would silently claim interchangeability the format does not have.
+  A new extension is introduced, if ever, only through an explicit format decision
+  with a migration plan and an interchangeability check — the FILE_FORMAT §14 rule.
 
 **Smaller questions, with defaults:**
 
-1. **Names.** *Formulier* / *Inzending* in the interface; server *OciIntake*.
-   Cheap to change until phase 1 ships, expensive after.
-2. **Respondent identity.** Anonymous (invite token only). Optional e-mail
-   verification would add a mail dependency and a processor. Default: none in v1.
+1. **Names.** *Formulier* / *Inzending* in the interface; the server route is *OciServe
+   Managed Intake*, the sealed file route is the *offline transfer route* — two names,
+   two trust models, never shown as the same thing.
+2. **Respondent identity.** A verified mailbox, per purpose chain (§6.4) — not an
+   account. On the file routes: anonymous.
 3. **Conditional fields and repeating groups.** Not in v1 and **not reserved**: a
    future version raises `rules=` (§4.8). Two recipes = two submissions.
-4. **Organiser key custody.** Every organiser has their own key; submissions are sealed
-   to all; one verified recovery key kept by the project lead.
-5. **Does OciServe adopt the protocol later?** Undecided; the protocol is independent.
-6. **Retention defaults** in §6.5 (30/90 days, 24-month tombstones) are proposals.
-7. **A bundled example template** is user-visible content per language (nl + en) and
+4. **Organiser key custody (offline route).** Every organiser has their own key;
+   sealed packages are sealed to all; one verified recovery key kept by the project
+   lead.
+5. **Retention defaults** on the server route live in the published snapshot —
+   `draft_days` ≤ 90, `submitted_days` ≤ 1825 (§6.2); the organiser's own retention
+   is the `notice`/`retain-unused` promise.
+6. **A bundled example template** is user-visible content per language (nl + en) and
    falls under the content-per-language rule and the registration gate: bundle at most
    one neutral template in phase 1; the Kookboek stays in the owner's repository as a
    worked example.
@@ -1965,37 +2146,41 @@ bundle against the fingerprint the respondent types (never prefilled; deliberate
 checks it against the respondent's own template, its validity and the highest sequence number already seen
 (the pins, kept in preferences), and only then seals — to every organiser the bundle names. A form past its
 `closes` day (the last day is still open) and a package above `max_package_bytes` stop with the reason. The
-web build offers no sealed export: `dartage` does not run under dart2js (a `wasm` build or an upstream fix is a
-precondition of the web respondent, phase 4). The respondent's side of the file route is done; the server
-route is phase 4.
+web build offers no sealed export: `dartage` does not run under dart2js (a `wasm` build or an upstream fix —
+§5.6; the web respondent of Managed Intake does not seal). The respondent's side of the offline route is done;
+Managed Intake is phase 4b/4c.
 **Built since:** the editor card (§5.1): a new editor makes it in *Editorial key…* (their name, the card text
 to copy, the card's fingerprint to read out). The team (§7.6): *Team…* in the Inbox adds an editor from their card
 and the fingerprint typed back, removes one, and `publishFormBundle` lists the owner and the team — with the
 two-key rule (recovery key typed back, **or** an editor in the team).
-**Phase 3's file route is built.** The dossier for the external review is `FORM_INTAKE_REVIEW.md`. The
+**Phase 3's file route is built** — and is now the **offline transfer route** (D11). The dossier for the external review is `FORM_INTAKE_REVIEW.md`. The
 **interoperability run with the reference `age`** (§5.6) was done on 2026-10-03 against `age` v1.3.2 and
 passes: round trips over several chunks, two recipients, a key that is not a recipient, a changed or cut-short
 file (refused by both), and plaintexts at every edge of a 64 KiB chunk. `make test-age-interop` repeats it
 (it builds the pinned binary; Go and the network are needed, so it is not part of `make check`, where the
 test still reports "NOT RUN").
-**Still to build:** the **external review itself** (a human step, no date — D7), and — phase 4 — the server
-and the web respondent.
-**Phase 4 has started (2026-10-03):** the protocol is written down (`INTAKE_PROTOCOL.md`) and its pure half is in
-`ocideck_form_core` — the invite link, `GET /v1/info`, the arrival note, the withdrawal secret, the error codes and
-**signed organiser requests** (`intake_protocol.dart`, `intake_request.dart`, tested against
-`test/fixtures/intake_protocol_vectors.json`). The bodies and routes followed (`intake_bodies.dart`, `intake_routes.dart`). **The respondent's first step is in the app:**
-*Open invitation…* (`IntakeClient.openInvitation`, `PinnedIntakeHttp`) fetches and verifies a form from an invitation link.
-**Sending is in too** (`IntakeClient.submit`, *Send…*, the receipt). The outbox, withdrawing, the organiser's side of the
-server, the server itself and the web respondent are not built; the server still waits for a named maintainer (D3), and the
-owner chose to build the client first (2026-10-03).
+**Still to build:** the **external review itself** (a human step, no date — D7).
+**Reverted (2026-10-04, #2263):** the old phase-4 OciIntake work — `intake_protocol.dart`,
+`intake_request.dart`, `intake_bodies.dart`, `intake_routes.dart` in the core package,
+`lib/services/form/intake/*`, `lib/widgets/forms/form_invitation_*`, `form_send_*`, their
+vectors, tests, translations and docs (`INTAKE_PROTOCOL.md`,
+`INTAKE_SERVER_REQUIREMENTS.md`) — merged 2026-10-03, never released, reverted in five
+controlled commits before it could ship.
+**To build (4b, #2262):** the renewed pinned spec and the gateway extension for tags
+`Intake`/`IntakeRespondent` — `ociserve_gateway_intake.dart` beside the exam and planning
+gateways, respondent transport under `IntakeGrant`, drift tests over every used route.
+**To build (4c, #2260):** the publish dialog (§7.8), the respondent chain in the fill
+view (challenge → code → grant → draft/submit/withdraw), return-link resume, correction
+rounds, the organiser fetch/`mark-handled` in the Inbox — plus their l10n, widget and
+contract tests.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
-(`form_image_probe.dart`), `intake_transport.dart` (+ `_file`, `_http`),
+(`form_image_probe.dart`),
 `form_outbox.dart` (file-based), `form_compile.dart`, `form_import.dart`,
 `form_overview.dart`; `lib/widgets/form/` — fill view, field cards (one per type,
 registered), landing page, author view, Inbox, key steps, acceptance dialogs;
-a `form_shell_main.dart` web target; `assets/forms/` (≤ 1 bundled example);
+`assets/forms/` (≤ 1 bundled example);
 `tool/check_form_templates.dart`.
 
 *Changed:* `markdown_quill_codec.dart`, `wysiwyg_notes_field.dart`,
@@ -2005,11 +2190,7 @@ a `form_shell_main.dart` web target; `assets/forms/` (≤ 1 bundled example);
 (the ten places); `archive_limits.dart` (capped stream moves here); `tool/mutation_check.dart`
 (comparison and ±1 operators, scoped to the form package); `settings` (intake connections,
 pins); `l10n` (31 languages per string); `docs/` (USER_GUIDE, FILE_FORMAT §14.x, PRIVACY row,
-SECURITY_DESIGN §, SOURCE_MAP, CHANGELOG, HOSTING for the form shell).
-
-*New (separate repository):* the reference server and a conformance suite any alternative server can run
-(the protocol itself is `docs/design/INTAKE_PROTOCOL.md` here, so that the client and the server are reviewed
-against one text).
+SECURITY_DESIGN §, SOURCE_MAP, CHANGELOG).
 
 ---
 
@@ -2047,21 +2228,30 @@ against one text).
   with a **trailer after EOI**, a polyglot, **a JPEG with EXIF orientation 6** (width =
   displayed width), a **canary photo with GPS** whose coordinates appear in **no byte** after
   package → import → compile.
-- **Crypto.** `age` public test vectors; **interop with the reference `age` binary**; tamper
+- **Crypto (offline route).** `age` public test vectors; **interop with the reference
+  `age` binary**; tamper
   each region; wrong key; dropped recipient stanza; header MAC failure; truncation at each
-  chunk boundary; multi-recipient open by each; all fail closed **and never ack**; manifest
+  chunk boundary; multi-recipient open by each; all fail closed; manifest
   binding (`sid`, form, version) checked after open; a ciphertext moved between two forms of
   one organiser is rejected; `replaced` on a second hash. Gate reports "not run" when
   `age` is absent — it does not pass silently.
-- **Protocol.** A conformance suite against the reference server: idempotent retry — **first
-  response lost, retry, withdrawal still works**; same `sid` different body → `409`, never
-  overwrite; closed form; over-cap upload cut mid-stream; new `fid` by a non-allowlisted key
-  refused; replayed organiser request refused; tombstone survives purge.
+- **Contract (Managed Intake).** The drift test pins every used `Intake`/
+  `IntakeRespondent` route: method, path, security scheme, request/response fields,
+  RFC 9457 problem shapes, 401/403/404/409/412/413/429 and retry metadata (#2262).
+  Client tests: a `verify` that returns an unknown purpose, an unknown submission
+  `state`, an unknown grant role or an unknown operational status **stops** with the
+  update message (fail-closed, §6.6); code, grant, locator and idempotency key appear
+  in **no** URL, log or error body; the returned `sha256`/`size` is checked.
+- **The respondent chain.** Challenge → verify → draft → submit → receipt with
+  revision and hash; resume through return link + fresh code; correction producing
+  revision n+1 while revision 1 stays untouched; withdrawal revoking access; every
+  step also tested **refused** (expired code, wrong purpose, closed form, `413`,
+  `429` with `Retry-After`, `409`) with the local-escape text shown.
 - **Acceptance and network.** **No request is made before acceptance** — asserted at
   **socket level** (`HttpOverrides`, like `cve_transport_io_test.dart`) with external media
   switched **on** and a template that contains an external image in its guidance text, not
-  merely with a fake transport. A link without `fp` stops; a mismatch stops; a `bundle_seq`
-  rollback is refused; "without a configured server OciDeck makes no request".
+  merely with a fake transport. "Without a configured OciServe OciDeck makes no
+  request"; organiser calls carry OIDC + tenant, respondent calls never do.
 - **UI.** Widget tests at 200 % text, keyboard-only traversal, semantics of each field card,
   summary-and-focus behaviour of Send; the fill view and author view in the **overflow stress
   gate**; **real renders** through the visual-inspection route (a widget test confirms
@@ -2213,10 +2403,11 @@ true.
 A form is a Markdown document with invisible-to-others, visible-to-OciDeck rules; filling
 it produces the same document with answers; the organiser re-validates every submission
 against the form they published, tracks it in a Markdown table and compiles the accepted
-ones into one document — all of it without any server. Delivery is either a mailed plain
-zip (phases 1–2), a sealed `age` file anyone can open without OciDeck (phase 3), or a
-small blind separate server (phase 4) that never serves the code that sees plaintext.
-The first case is the Indo IT Kookboek; the engine knows nothing about recipes. The one
-value we bend — *no server at all* — bends only for an optional, self-hostable,
-content-blind service that is never the only route, under seven written conditions, with a
-stated trigger for undoing it.
+ones into one document — all of it without any server. Delivery is a mailed plain zip,
+a sealed `age` file on the offline transfer route anyone can open without OciDeck, or —
+optionally — **OciServe Managed Intake**: a processor that can read, honestly described,
+reached through a mailbox-verified, accountless respondent chain with immutable
+revisions and a return link that always asks for a fresh code. The first case is the
+Indo IT Kookboek; the engine knows nothing about recipes. The one value we bend —
+*no server at all* — bends only for an optional, never-default service that is never
+the only route, under seven written conditions, with a stated trigger for undoing it.
