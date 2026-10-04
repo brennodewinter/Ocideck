@@ -1,0 +1,8 @@
+# Deterministische, verzonnen protocolvectoren uit commit 961a0f0. Het bestand
+# is in e7074f4 weer verwijderd; deze exacte historische treffers blijven
+# genegeerd zonder nieuwe bestanden, regels of detectietypen vrij te stellen.
+961a0f015f7498a7ebf842949f1fef8038dfca45:packages/ocideck_form_core/test/fixtures/intake_protocol_vectors.json:generic-api-key:36
+961a0f015f7498a7ebf842949f1fef8038dfca45:packages/ocideck_form_core/test/fixtures/intake_protocol_vectors.json:generic-api-key:37
+961a0f015f7498a7ebf842949f1fef8038dfca45:packages/ocideck_form_core/test/fixtures/intake_protocol_vectors.json:generic-api-key:39
+961a0f015f7498a7ebf842949f1fef8038dfca45:packages/ocideck_form_core/test/fixtures/intake_protocol_vectors.json:generic-api-key:50
+961a0f015f7498a7ebf842949f1fef8038dfca45:packages/ocideck_form_core/test/fixtures/intake_protocol_vectors.json:generic-api-key:61
