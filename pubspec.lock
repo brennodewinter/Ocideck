@@ -29,7 +29,7 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/app_appearance"
-      ref: d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82
+      ref: "app_appearance-v0.1.0"
       resolved-ref: d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82
       url: "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
     source: git
