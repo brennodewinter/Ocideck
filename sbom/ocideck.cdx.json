@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:b29fd6d5-1501-5b86-841a-78134f60b341",
+  "serialNumber": "urn:uuid:793ef067-bc5b-5b32-81ec-8d9202ba157f",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-03T09:53:16.472978Z",
+    "timestamp": "2026-10-04T18:43:23.612590Z",
     "tools": {
       "components": [
         {
@@ -8886,11 +8886,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:npm/dompurify@3.4.13",
+      "bom-ref": "pkg:npm/dompurify@3.4.16",
       "type": "library",
       "name": "dompurify",
-      "version": "3.4.13",
-      "purl": "pkg:npm/dompurify@3.4.13",
+      "version": "3.4.16",
+      "purl": "pkg:npm/dompurify@3.4.16",
       "licenses": [
         {
           "expression": "Apache-2.0 OR MPL-2.0"
@@ -8899,13 +8899,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "9ab3d44d73c3e3947f9ab72e0f0bc15c7f1931d60b365ba261fc85fe59013c56"
+          "content": "2c90a9b46d6463f26038a29b686e82bc91de01fdac9d5229e7cfe3b360134ea2"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://cdn.jsdelivr.net/npm/dompurify@3.4.13/dist/purify.min.js"
+          "url": "https://cdn.jsdelivr.net/npm/dompurify@3.4.16/dist/purify.min.js"
         }
       ],
       "properties": [
@@ -9257,7 +9257,7 @@
         "fork:markdown_quill@4.3.0",
         "git:cnativeapi@0.1.4",
         "git:nativeapi@0.1.4",
-        "pkg:npm/dompurify@3.4.13",
+        "pkg:npm/dompurify@3.4.16",
         "pkg:npm/highlight.js@11.11.1",
         "pkg:npm/marked@18.0.5",
         "pkg:npm/mathjax@3.2.2",
