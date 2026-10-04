@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_exam.dart';
+import '../../models/ociserve_intake.dart';
 import '../../models/ociserve_models.dart';
 import '../../models/ociserve_settings.dart';
 import '../../utils/log.dart';
@@ -16,10 +17,11 @@ import '../../utils/content_hash.dart';
 
 part 'ociserve_gateway_planning.dart';
 part 'ociserve_gateway_exams.dart';
+part 'ociserve_gateway_intake.dart';
 
 /// Typed, bounded gateway for OciServe's learner-facing API.
 abstract class OciServeApi extends OciServePlanningApi
-    implements OciServeExamApi {
+    implements OciServeExamApi, OciServeIntakeApi {
   Future<OciServeInstallation> installation();
   Future<OciServeOidcConfiguration> discoverOidc(
     OciServeInstallation installation,
@@ -171,6 +173,8 @@ abstract class OciServeGatewayBase implements OciServeApi {
     Map<String, String> headers = const {},
     List<int>? body,
     int cap = _jsonCap,
+    Duration timeout = const Duration(seconds: 30),
+    bool allowNotModified = false,
   }) async {
     _requireConfigured();
     if (accessToken != null && accessToken.trim().isEmpty) {
@@ -189,13 +193,14 @@ abstract class OciServeGatewayBase implements OciServeApi {
         },
         body: body,
         maxResponseBytes: cap,
-        timeout: const Duration(seconds: 30),
+        timeout: timeout,
       );
+      if (allowNotModified && response.statusCode == 304) return response;
       if (response.statusCode < 200 || response.statusCode >= 300) {
         throw OciServeException(
           response.statusCode == 401 ? 'unauthorized' : 'http_error',
           statusCode: response.statusCode,
-          problem: _problemDetails(response),
+          problem: ociServeProblemOf(response),
         );
       }
       return response;
@@ -830,6 +835,6 @@ abstract class OciServeGatewayBase implements OciServeApi {
 /// Typed, bounded gateway voor de OciServe learner-facing API: de kern uit
 /// [OciServeGatewayBase] plus de planning-methoden uit [_OciServePlanning].
 class OciServeGateway extends OciServeGatewayBase
-    with _OciServePlanning, _OciServeExams {
+    with _OciServePlanning, _OciServeExams, _OciServeIntake {
   OciServeGateway({required super.settings, super.transport});
 }

@@ -72,6 +72,11 @@ class _FakeAuth implements OciServeAuthenticator {
 }
 
 class _FakeApi implements OciServeApi {
+  // De provider oefent geen intake-routes; alles wat deze fake niet
+  // expliciet implementeert (o.a. de Managed-Intake-methoden) gooit.
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   Completer<OciServeAccount>? meCompleter;
   Completer<void>? reportCompleter;
   OciServeInstallation installationValue = _installation;

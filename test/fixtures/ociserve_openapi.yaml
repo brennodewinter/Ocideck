@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: OciServe API
   version: 0.1.0
-  x-capability-catalog-version: 9
+  x-capability-catalog-version: 10
   x-tenant-capabilities:
     - org:admin
     - org:delete
@@ -30,6 +30,9 @@ info:
     - exam_session:release
     - exam_session:monitor
     - exam_attempt:intervene
+    - intake:publish
+    - intake:manage
+    - intake:read
   description: |
     OciServe is a privacy-first learning and assessment platform.
     This is the initial API contract covering health endpoints and the
@@ -143,6 +146,22 @@ tags:
       Itembank: toetsitems met draft/edit/publish lifecycle. Each item has an
       interaction type (multipleChoice, trueFalse, etc.), content and an
       answer model. A published item version is immutable.
+  - name: Intake
+    description: |
+      Managed Intake (ADR 0016): organisatorbeheer van formulieren, immutable
+      formulierversies, per-formulier grants en de privacy-begrensde
+      organisator-inbox. Elke actie vereist zowel de tenantcapability als een
+      expliciete grant op het formulier; organisatiebeheer geeft op zichzelf
+      geen inhoudelijke inzage.
+  - name: IntakeRespondent
+    description: |
+      Managed Intake respondentketen (ADR 0016): publieke,
+      accountloze toegang via e-mailchallenge en kortlevende, doelgebonden
+      grants. De terugkeerlocator wijst naar één inzending maar verleent op
+      zichzelf geen lees- of schrijfrecht; iedere inhoudelijke actie vereist
+      een verse IntakeGrant na mailboxverificatie. Challenge-initiatie
+      antwoordt altijd generiek en verraadt niet of een formulier, locator of
+      e-mailadres bestaat.
 
 paths:
   /health/live:
@@ -1678,13 +1697,24 @@ paths:
           in: query
           required: false
           schema: { type: string }
+        - name: If-None-Match
+          in: header
+          required: false
+          schema: { type: string }
+          description: ETag from a previous response; returns 304 if the page is unchanged.
       responses:
         "200":
           description: A page of access audit events.
+          headers:
+            ETag:
+              schema: { type: string }
+              description: Strong per-page validator; send as If-None-Match.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessAuditEventList'
+        "304":
+          description: Page unchanged since the supplied ETag.
         "401":
           $ref: '#/components/responses/ProblemResponse'
         "403":
@@ -2606,6 +2636,7 @@ paths:
         not overwrite the original decision; the award transitions to
         `corrected`. The actor must hold `content:create`. Only an `active`
         award can be corrected; correcting a non-active award returns 409.
+        An `Idempotency-Key` is required — the correction is not reversible.
       parameters:
         - name: organization_id
           in: path
@@ -2619,6 +2650,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -2659,7 +2695,8 @@ paths:
         Revokes a PE award. Like correction, revocation is an append-only
         event; the award transitions to `revoked`. The actor must hold
         `content:create`. Only an `active` award can be revoked; revoking a
-        non-active award returns 409.
+        non-active award returns 409. An `Idempotency-Key` is required —
+        revocation is not reversible.
       parameters:
         - name: organization_id
           in: path
@@ -2673,6 +2710,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -5080,13 +5122,26 @@ paths:
           schema:
             type: string
             enum: [draft, published, archived]
+        - name: If-None-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: ETag from a previous response; returns 304 if the page is unchanged.
       responses:
         "200":
           description: A paginated list of courses.
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: Strong per-page validator; send as If-None-Match.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CourseList'
+        "304":
+          description: Page unchanged since the supplied ETag.
         "401":
           $ref: '#/components/responses/ProblemResponse'
         "403":
@@ -5876,13 +5931,26 @@ paths:
           required: false
           schema:
             type: boolean
+        - name: If-None-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: ETag from a previous response; returns 304 if the page is unchanged.
       responses:
         "200":
           description: A paginated list of participants.
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: Strong per-page validator; send as If-None-Match.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ParticipantsList'
+        "304":
+          description: Page unchanged since the supplied ETag.
         "401":
           $ref: '#/components/responses/ProblemResponse'
         "403":
@@ -6908,7 +6976,8 @@ paths:
         Creates an async export request for the participant's personal data.
         The actor must have privacy access (own data or `privacy:manage`).
         Returns the created request; poll the detail endpoint to follow
-        progress.
+        progress. An `Idempotency-Key` is required; the server deduplicates on
+        (key + request digest) so a retry does not create a second request.
       parameters:
         - name: organization_id
           in: path
@@ -6922,6 +6991,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Export request created.
@@ -6942,7 +7016,9 @@ paths:
       summary: Request privacy deletion
       description: |
         Creates an async deletion request for the participant's personal
-        data. The actor must have privacy access.
+        data. The actor must have privacy access. An `Idempotency-Key` is
+        required; the server deduplicates on (key + request digest) so a
+        retry cannot execute the irreversible mutation twice.
       parameters:
         - name: organization_id
           in: path
@@ -6956,6 +7032,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Deletion request created.
@@ -6976,7 +7057,9 @@ paths:
       summary: Request privacy anonymization
       description: |
         Creates an async anonymization request for the participant's personal
-        data. The actor must have privacy access.
+        data. The actor must have privacy access. An `Idempotency-Key` is
+        required; the server deduplicates on (key + request digest) so a
+        retry cannot execute the irreversible mutation twice.
       parameters:
         - name: organization_id
           in: path
@@ -6990,6 +7073,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Anonymization request created.
@@ -7046,12 +7134,16 @@ paths:
         - { name: q, in: query, required: false, schema: { type: string } }
         - { name: cursor, in: query, required: false, schema: { type: string } }
         - { name: limit, in: query, required: false, schema: { type: integer } }
+        - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if the page is unchanged. }
       responses:
         "200":
           description: Course offerings.
+          headers:
+            ETag: { schema: { type: string }, description: Strong per-page validator; send as If-None-Match. }
           content:
             application/json:
               schema: { $ref: '#/components/schemas/CourseOfferingList' }
+        "304": { description: Page unchanged since the supplied ETag. }
         "401": { $ref: '#/components/responses/ProblemResponse' }
         "403": { $ref: '#/components/responses/ProblemResponse' }
     post:
@@ -7130,12 +7222,16 @@ paths:
       parameters:
         - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
         - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if the list is unchanged. }
       responses:
         "200":
           description: Classroom sessions with current capacity counts.
+          headers:
+            ETag: { schema: { type: string }, description: Strong per-page validator; send as If-None-Match. }
           content:
             application/json:
               schema: { $ref: '#/components/schemas/TrainingSessionList' }
+        "304": { description: List unchanged since the supplied ETag. }
         "401": { $ref: '#/components/responses/ProblemResponse' }
         "403": { $ref: '#/components/responses/ProblemResponse' }
     post:
@@ -7975,12 +8071,16 @@ paths:
         - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
         - { name: from, in: query, required: false, schema: { type: string, format: date-time } }
         - { name: to, in: query, required: false, schema: { type: string, format: date-time } }
+        - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if the list is unchanged. }
       responses:
         "200":
           description: Sessions the caller teaches.
+          headers:
+            ETag: { schema: { type: string }, description: Strong per-page validator; send as If-None-Match. }
           content:
             application/json:
               schema: { $ref: '#/components/schemas/TrainingSessionList' }
+        "304": { description: List unchanged since the supplied ETag. }
         "400": { $ref: '#/components/responses/ProblemResponse' }
         "401": { $ref: '#/components/responses/ProblemResponse' }
         "403": { $ref: '#/components/responses/ProblemResponse' }
@@ -8305,6 +8405,682 @@ paths:
         - { name: attempt_id, in: path, required: true, schema: { type: string, format: uuid } }
         - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
       responses: { "200": { description: Submitted attempt without score., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamAttempt' } } } }, "409": { $ref: '#/components/responses/ProblemResponse' } }
+
+  # --- Managed Intake: public respondent chain (ADR 0016) ---
+
+  /api/v1/intake/forms/{form_ref}:
+    get:
+      tags: [IntakeRespondent]
+      summary: Fetch the published form a respondent was invited to
+      description: |
+        Public endpoint returning the active immutable form version for the
+        respondent-facing `form_ref` carried by the shared form link. The
+        snapshot contains the published purposes, privacy text, retention and
+        correction terms, and the opaque `definition` the client renders.
+        `accepting` reports whether new submissions are currently accepted;
+        a paused or closed form still returns its snapshot so the client can
+        explain the situation. No personal data is exposed and no account,
+        grant or code is required. `form_ref` is a high-entropy identifier;
+        an unknown value yields 404.
+      security: []
+      parameters:
+        - { name: form_ref, in: path, required: true, schema: { type: string, minLength: 20, maxLength: 64 } }
+      responses:
+        "200":
+          description: Published form snapshot.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakePublicForm' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/v1/intake/challenges:
+    post:
+      tags: [IntakeRespondent]
+      summary: Request an e-mail challenge for a respondent action
+      description: |
+        Starts an accountless mailbox-ownership check. `purpose` selects the
+        goal: `start` a new submission on a form (`form_ref` required), or
+        `resume`/`correct`/`withdraw` an existing submission (`locator`
+        required, taken from the return link). The response is ALWAYS
+        identical: a freshly minted `challenge_id`, `expires_in` and
+        `resend_after`. It never reveals whether the form, locator or e-mail
+        address exists — a challenge for unknown input is internally
+        undeliverable and its verification can only fail. When the input is
+        valid the server mails a one-time code; for `start` the code e-mail
+        contains no locator (the locator is issued only after successful
+        verification), for the other purposes the mail carries the return
+        link. Neither the code nor any grant appears in a URL, log or
+        problem body. Rate-limited per form, per e-mail bucket and per
+        network bucket.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IntakeChallengeRequest' }
+      responses:
+        "202":
+          description: Challenge accepted for processing — identical for known and unknown input.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeChallengeResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "413": { $ref: '#/components/responses/RequestTooLarge' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/v1/intake/challenges/{challenge_id}/verify:
+    post:
+      tags: [IntakeRespondent]
+      summary: Verify a mailbox code and receive a purpose-bound grant
+      description: |
+        Redeems a mailed one-time code. The code is valid for about ten
+        minutes, single-use, and allows at most five atomic attempts; a
+        resend invalidates the previous code. On success the challenge is
+        consumed and a short-lived `grant` is returned, bound to exactly one
+        submission, one form and the requested purpose — for `start` the
+        server also creates the submission and returns its fresh `locator`
+        (the return link itself is mailed, never returned here twice).
+        Failures are deliberately generic (`errors/intake-verification`):
+        wrong, expired, exhausted and undeliverable challenges are
+        indistinguishable.
+      security: []
+      parameters:
+        - { name: challenge_id, in: path, required: true, schema: { type: string, minLength: 20, maxLength: 64 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IntakeVerifyRequest' }
+      responses:
+        "200":
+          description: Purpose-bound respondent grant.
+          headers:
+            Cache-Control: { schema: { type: string, const: 'no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeGrantResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "413": { $ref: '#/components/responses/RequestTooLarge' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/v1/intake/submissions/{locator}:
+    get:
+      tags: [IntakeRespondent]
+      summary: Read the respondent's own submission state
+      description: |
+        Returns the state of the single submission the presented grant is
+        bound to. The locator in the path identifies which submission is
+        meant; only a valid IntakeGrant (obtained after a fresh e-mail
+        challenge) authorizes reading it — the locator alone grants nothing.
+        Conditional requests are supported: send `If-None-Match` with a
+        previously returned ETag to receive 304.
+      security:
+        - IntakeGrant: []
+      parameters:
+        - { name: locator, in: path, required: true, schema: { type: string, minLength: 20, maxLength: 64 } }
+        - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if unchanged. }
+      responses:
+        "200":
+          description: Own submission state.
+          headers:
+            ETag: { schema: { type: string }, description: Strong ETag of the representation. }
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeRespondentSubmission' }
+        "304": { description: Not modified — the ETag matches. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/v1/intake/submissions/{locator}/draft:
+    put:
+      tags: [IntakeRespondent]
+      summary: Upload or replace the draft payload
+      description: |
+        Streams the respondent's draft package to the private intake object
+        store. The package is opaque to the server (`application/octet-stream`);
+        size and SHA-256 are computed server-side and returned. Requires an
+        IntakeGrant whose purpose permits drafting (`start`, `resume` or
+        `correct`). A draft may be replaced while the submission is still a
+        draft or an open correction; the previous object is cleaned up after
+        a successful commit. Maximum payload size is 120 MiB —
+        `Content-Length` is enforced before the body is read where possible.
+        An aborted or oversized upload leaves no visible object.
+      security:
+        - IntakeGrant: []
+      parameters:
+        - { name: locator, in: path, required: true, schema: { type: string, minLength: 20, maxLength: 64 } }
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema: { type: string, format: binary }
+      responses:
+        "200":
+          description: Draft stored.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeDraftReceipt' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "413": { $ref: '#/components/responses/RequestTooLarge' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/v1/intake/submissions/{locator}/submit:
+    post:
+      tags: [IntakeRespondent]
+      summary: Submit the current draft definitively
+      description: |
+        Finalizes the current draft into an immutable revision, bound to the
+        exact published form version and its server-computed hash at first
+        submission, plus the server receipt time. First submit produces
+        revision 1; a submit inside an open correction round produces
+        revision n+1. A revision is never overwritten — a retry with the
+        same Idempotency-Key returns the original outcome. Requires an
+        IntakeGrant for purpose `start`, `resume` or `correct`.
+      security:
+        - IntakeGrant: []
+      parameters:
+        - { name: locator, in: path, required: true, schema: { type: string, minLength: 20, maxLength: 64 } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 }, description: Required — a retry with the same key returns the same revision outcome and never creates a second revision. }
+      responses:
+        "201":
+          description: Immutable revision created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeSubmitReceipt' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "413": { $ref: '#/components/responses/RequestTooLarge' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/v1/intake/submissions/{locator}/withdraw:
+    post:
+      tags: [IntakeRespondent]
+      summary: Withdraw the submission
+      description: |
+        Withdraws the submission: active respondent grants are revoked, and
+        content and contact data are purged within the published withdrawal
+        policy, leaving only a minimal non-identifying tombstone where
+        required for audit and deletion-ledger replay. Withdrawal stays
+        possible after the form stops accepting new submissions. Requires an
+        IntakeGrant for purpose `withdraw`.
+      security:
+        - IntakeGrant: []
+      parameters:
+        - { name: locator, in: path, required: true, schema: { type: string, minLength: 20, maxLength: 64 } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 } }
+      responses:
+        "200":
+          description: Submission withdrawn.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeWithdrawReceipt' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  # --- Managed Intake: organizer surface (ADR 0016) ---
+
+  /api/v1/organizations/{organization_id}/intake-forms:
+    get:
+      tags: [Intake]
+      summary: List intake forms visible to the actor
+      description: |
+        Cursor-paginated list of forms. A member sees only forms on which
+        they hold a grant; members with `intake:manage` additionally see all
+        forms as metadata (grant administration), never submission content.
+        Conditional requests are supported via `If-None-Match`.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, required: false, schema: { type: string }, description: Opaque keyset cursor from a previous response's `next_cursor`. }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 200, default: 50 } }
+        - { name: operational_status, in: query, required: false, schema: { type: string, enum: [open, paused, closed] } }
+        - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if the page is unchanged. }
+      responses:
+        "200":
+          description: Page of forms.
+          headers:
+            ETag: { schema: { type: string }, description: Strong per-page validator; send as If-None-Match. }
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeFormListResponse' }
+        "304": { description: Page unchanged since the supplied ETag. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+    post:
+      tags: [Intake]
+      summary: Create a form and publish its first immutable version
+      description: |
+        Creates a form, publishes version 1 (byte-for-byte immutable from
+        activation), assigns a high-entropy public `form_ref` for the
+        respondent chain and makes the creator its first `beheerder` grant.
+        Requires `intake:publish`. Publication is idempotent via
+        Idempotency-Key; the version hash is computed server-side and
+        concurrent publications produce one ordered outcome or a clear 409.
+        The snapshot envelope is validated (purposes, privacy text, retention
+        within server bounds); the form `definition` is opaque to the server.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IntakeFormCreateRequest' }
+      responses:
+        "201":
+          description: Form created with version 1.
+          headers:
+            Location: { schema: { type: string }, description: "/api/v1/organizations/{organization_id}/intake-forms/{form_id}" }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeForm' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "413": { $ref: '#/components/responses/RequestTooLarge' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}:
+    get:
+      tags: [Intake]
+      summary: Form detail with active version and operational status
+      description: |
+        Returns the form, its operational status and every published version
+        (old versions stay referentiable for linked submissions). Requires a
+        form grant — or `intake:manage` for grant administration — and never
+        exposes respondent data. Supports `If-None-Match`.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if unchanged. }
+      responses:
+        "200":
+          description: Form detail.
+          headers:
+            ETag: { schema: { type: string }, description: Strong ETag of the representation. }
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeForm' }
+        "304": { description: Not modified — the ETag matches. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+    patch:
+      tags: [Intake]
+      summary: Change the form's operational status
+      description: |
+        Merge-patch of operational properties only — `operational_status`
+        transitions `open`/`paused`/`closed` and never touches published
+        content. Closing a form stops new submissions; existing submissions
+        keep their lifecycle (correction and withdrawal remain possible).
+        Requires `intake:manage` and a `beheerder` grant on the form. Send
+        `If-Match` with the current ETag, or `*` to skip the check.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-Match, in: header, required: true, schema: { type: string }, description: "The ETag from a previous GET, or `*` to match any current representation; mismatch yields 412." }
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema: { $ref: '#/components/schemas/IntakeFormPatch' }
+      responses:
+        "200":
+          description: Updated form.
+          headers:
+            ETag: { schema: { type: string }, description: Strong ETag of the new representation. }
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeForm' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "412": { $ref: '#/components/responses/ProblemResponse' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/versions:
+    post:
+      tags: [Intake]
+      summary: Publish a new immutable form version
+      description: |
+        Publishes the next version of the form. Version numbers are monotone
+        per form; the hash is computed server-side and an activated version is
+        byte-for-byte immutable — operational status changes live on the form,
+        never inside a version. Requires `intake:publish` and a `redacteur` or
+        `beheerder` grant on the form. Publication is idempotent via
+        Idempotency-Key; concurrent publications produce one ordered outcome
+        or a clear 409. Publishing a new version does not retroactively change
+        submissions bound to earlier versions.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IntakeFormVersionCreateRequest' }
+      responses:
+        "201":
+          description: Version published and activated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeFormVersion' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "413": { $ref: '#/components/responses/RequestTooLarge' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/versions/{version}:
+    get:
+      tags: [Intake]
+      summary: Fetch an immutable published form version
+      description: |
+        Returns one published version with its snapshot envelope and
+        server-computed hash. Old versions remain referentiable because
+        submissions are bound to the exact version they were submitted
+        against. Requires a form grant or `intake:manage`.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: version, in: path, required: true, schema: { type: integer, minimum: 1 } }
+      responses:
+        "200":
+          description: Immutable version snapshot.
+          headers:
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeFormVersion' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/grants:
+    get:
+      tags: [Intake]
+      summary: List per-form grants
+      description: |
+        Lists the explicit per-form grants (`beheerder`, `redacteur`,
+        `verwerker`). Grant administration requires `intake:manage`; it is
+        the only form-level action that does not itself require a grant, so
+        an organization can bootstrap access — every grant change is audited.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Form grants.
+          headers:
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeFormGrantListResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+    post:
+      tags: [Intake]
+      summary: Grant a member a role on this form
+      description: |
+        Assigns `beheerder`, `redacteur` or `verwerker` on this form to an
+        active membership of the organization. The capability gate still
+        applies per action: a `verwerker` without `intake:read` gains
+        nothing. Requires `intake:manage`. Grant assignment is audited with
+        actor, action and target — never form or submission content.
+        Idempotent via Idempotency-Key.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IntakeFormGrantCreateRequest' }
+      responses:
+        "201":
+          description: Grant created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeFormGrant' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/grants/{grant_id}:
+    delete:
+      tags: [Intake]
+      summary: Revoke a per-form grant
+      description: |
+        Revokes a grant on this form. Revocation takes effect on the next
+        request; a revoked grant removes access even while the membership and
+        its capabilities stay valid. Requires `intake:manage`. Idempotent —
+        deleting an already-revoked grant returns 204.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: grant_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "204": { description: Grant revoked. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions:
+    get:
+      tags: [Intake]
+      summary: Privacy-bounded organizer inbox for one form
+      description: |
+        Cursor-paginated list of submissions with minimal metadata — state,
+        revision counter and timestamps; never answers, e-mail addresses or
+        locators. Requires `intake:read` AND a `verwerker` or `beheerder`
+        grant on this form: neither a non-assigned editor nor an
+        organization administrator without a grant sees anything.
+        Conditional requests are supported via `If-None-Match`.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, required: false, schema: { type: string }, description: Opaque keyset cursor from a previous response's `next_cursor`. }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 200, default: 50 } }
+        - { name: state, in: query, required: false, schema: { type: string, enum: [draft, submitted, correction_open, withdrawn] } }
+        - { name: handled, in: query, required: false, schema: { type: boolean } }
+        - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if the page is unchanged. }
+      responses:
+        "200":
+          description: Page of submissions.
+          headers:
+            ETag: { schema: { type: string }, description: Strong per-page validator; send as If-None-Match. }
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeSubmissionListResponse' }
+        "304": { description: Page unchanged since the supplied ETag. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions/{submission_id}:
+    get:
+      tags: [Intake]
+      summary: Submission detail for an assigned processor
+      description: |
+        Returns state, revision history (hash, size and server receipt time
+        per immutable revision) and handled flag. The verified mailbox
+        address is access/contact metadata and is NOT included; a correction
+        e-mail is triggered server-side via the open-correction action.
+        Requires `intake:read` and a `verwerker` or `beheerder` grant on the
+        form. Supports `If-None-Match`.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if unchanged. }
+      responses:
+        "200":
+          description: Submission detail.
+          headers:
+            ETag: { schema: { type: string }, description: Strong ETag of the representation. }
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeSubmissionDetail' }
+        "304": { description: Not modified — the ETag matches. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions/{submission_id}/revisions/{revision}/content:
+    get:
+      tags: [Intake]
+      summary: Stream one immutable submission revision
+      description: |
+        Streams the bytes of exactly one revision. Revisions are immutable
+        and bound to the form version in force at their submission; no path
+        can alter revision bytes or rebind them to another version. The
+        response is a forced download (`Content-Disposition: attachment`),
+        `no-store`, `nosniff`, with declared `Content-Length` and a `Digest`
+        header carrying the server-computed SHA-256. Requires `intake:read`
+        and a `verwerker` or `beheerder` grant on the form. Every content
+        access is audited with actor, action and resource — never the
+        content itself.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: revision, in: path, required: true, schema: { type: integer, minimum: 1 } }
+      responses:
+        "200":
+          description: Revision bytes.
+          headers:
+            Content-Disposition: { schema: { type: string }, description: attachment; filename="submission-<revision>.bin" }
+            Cache-Control: { schema: { type: string, const: 'no-store' } }
+            X-Content-Type-Options: { schema: { type: string, const: nosniff } }
+            Digest: { schema: { type: string }, description: sha-256=<base64> of the revision bytes. }
+          content:
+            application/octet-stream:
+              schema: { type: string, format: binary }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions/{submission_id}/open-correction:
+    post:
+      tags: [Intake]
+      summary: Open a correction round for the respondent
+      description: |
+        Moves a submitted submission to `correction_open` and triggers a
+        server-side correction e-mail to the verified mailbox — the
+        organizer never sees the address. Whether correction is allowed and
+        within which deadline follows the correction policy published in the
+        bound form version. Requires `intake:manage` and a `beheerder` grant
+        on the form. Idempotent via Idempotency-Key; the final submitted
+        revision is never overwritten — a correction produces revision n+1.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IntakeCorrectionRequest' }
+      responses:
+        "200":
+          description: Correction round opened.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeSubmissionDetail' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions/{submission_id}/mark-handled:
+    post:
+      tags: [Intake]
+      summary: Mark a submission as handled
+      description: |
+        Sets or clears the handled flag used by the organizer inbox.
+        Requires `intake:read` and a `verwerker` or `beheerder` grant on the
+        form. Idempotent via Idempotency-Key.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IntakeMarkHandledRequest' }
+      responses:
+        "200":
+          description: Handled flag updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeSubmissionDetail' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "415": { $ref: '#/components/responses/UnsupportedMediaType' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions/{submission_id}/purge:
+    post:
+      tags: [Intake]
+      summary: Durably purge a submission within published policy
+      description: |
+        Schedules durable deletion of the submission's objects, contact data
+        and database rows, recorded in the deletion ledger so a restored
+        backup replays the purge. Purging is only allowed within the
+        retention and erasure terms published in the bound form version.
+        Requires `intake:manage` and a `beheerder` grant on the form.
+        Idempotent via Idempotency-Key; returns 202 while the purge executes.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 } }
+      responses:
+        "202":
+          description: Purge accepted and recorded in the deletion ledger.
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
 
 components:
   schemas:
@@ -10894,6 +11670,9 @@ components:
         participant_id:
           type: string
           format: uuid
+        participant_display_name:
+          type: string
+          description: Only present in review-queue responses; readable participant name so the queue needs no detail calls.
         evidence_type_id:
           type: string
           format: uuid
@@ -13004,7 +13783,396 @@ components:
           maxLength: 1024
           writeOnly: true
 
+    # --- Managed Intake (ADR 0016) ---
+
+    IntakePurpose:
+      type: string
+      enum: [start, resume, correct, withdraw]
+      description: |
+        The respondent goal a mailbox challenge verifies. `start` creates a
+        new submission after verification; `resume`, `correct` and
+        `withdraw` act on the existing submission the locator points at.
+
+    IntakeSubmissionState:
+      type: string
+      enum: [draft, submitted, correction_open, withdrawn]
+      description: |
+        Submission lifecycle (ADR 0016). `draft` before first submit;
+        `submitted` holds an immutable revision; `correction_open` lets the
+        respondent produce revision n+1; `withdrawn` is terminal.
+
+    IntakeGrantRole:
+      type: string
+      enum: [beheerder, redacteur, verwerker]
+      description: |
+        Per-form grant, orthogonal to tenant capabilities. `beheerder`
+        covers operational status, correction rounds and retention actions;
+        `redacteur` may publish new versions; `verwerker` may read and
+        process submissions. Every action still requires the matching
+        tenant capability.
+
+    IntakeChallengeRequest:
+      type: object
+      additionalProperties: false
+      required: [purpose, email]
+      properties:
+        purpose: { $ref: '#/components/schemas/IntakePurpose' }
+        email:
+          type: string
+          format: email
+          maxLength: 320
+          example: respondent@example.nl
+          description: Mailbox to verify. Contact metadata only — never an account or record identifier.
+        form_ref:
+          type: string
+          minLength: 20
+          maxLength: 64
+          example: frm_7kQ9v2mX8nR4tW6jY3hB
+          description: Public form identifier from the shared link. Required when purpose is `start`.
+        locator:
+          type: string
+          minLength: 20
+          maxLength: 64
+          example: sbm_9wX4kQ7v2mR8nT6jY3hBzP
+          description: Return-link locator of an existing submission. Required for `resume`, `correct` and `withdraw`.
+
+    IntakeChallengeResponse:
+      type: object
+      additionalProperties: false
+      required: [challenge_id, expires_in, resend_after]
+      properties:
+        challenge_id:
+          type: string
+          minLength: 20
+          maxLength: 64
+          example: chg_3mR8nT6jY9wX4kQ7v2hB
+          description: Random challenge handle — an identifier, not an authorization secret.
+        expires_in: { type: integer, description: Seconds the mailed code stays valid (about 600). }
+        resend_after: { type: integer, description: Seconds before a resend is accepted; resending invalidates the previous code. }
+
+    IntakeVerifyRequest:
+      type: object
+      additionalProperties: false
+      required: [code]
+      properties:
+        code:
+          type: string
+          minLength: 6
+          maxLength: 16
+          example: "482913"
+          description: One-time mailbox code. Compared server-side against a peppered, slow-KDF digest; never logged or stored in plaintext.
+
+    IntakeGrantResponse:
+      type: object
+      additionalProperties: false
+      required: [grant, expires_in, purpose, locator]
+      properties:
+        grant:
+          type: string
+          description: Short-lived bearer grant for the IntakeGrant security scheme — bound to one submission, one form and this purpose.
+        expires_in: { type: integer, description: Seconds the grant stays valid. }
+        purpose: { $ref: '#/components/schemas/IntakePurpose' }
+        locator:
+          type: string
+          description: The submission locator — issued only after successful verification; for `start` it points at the newly created submission.
+        form_ref: { type: string }
+        state: { $ref: '#/components/schemas/IntakeSubmissionState' }
+
+    IntakeRespondentSubmission:
+      type: object
+      additionalProperties: false
+      required: [locator, state, revision, draft_present, allowed_actions]
+      properties:
+        locator: { type: string }
+        state: { $ref: '#/components/schemas/IntakeSubmissionState' }
+        revision: { type: integer, minimum: 0, description: Highest submitted revision; 0 while only a draft exists. }
+        draft_present: { type: boolean }
+        submitted_at: { type: string, format: date-time }
+        correction_deadline: { type: string, format: date-time, description: Present while a correction round is open. }
+        allowed_actions:
+          type: array
+          items: { type: string, enum: [draft_put, submit, withdraw] }
+          description: Actions the presented grant may still perform on this submission.
+
+    IntakeDraftReceipt:
+      type: object
+      additionalProperties: false
+      required: [sha256, size]
+      properties:
+        sha256: { type: string, description: Server-computed SHA-256 of the stored draft bytes (hex). }
+        size: { type: integer, description: Server-computed size in bytes. }
+
+    IntakeSubmitReceipt:
+      type: object
+      additionalProperties: false
+      required: [revision, submitted_at, sha256, size]
+      properties:
+        revision: { type: integer, minimum: 1, description: "Immutable revision number — 1 for the first submit, n+1 for a correction." }
+        submitted_at: { type: string, format: date-time, description: Server receipt time. }
+        sha256: { type: string }
+        size: { type: integer }
+
+    IntakeWithdrawReceipt:
+      type: object
+      additionalProperties: false
+      required: [state]
+      properties:
+        state: { $ref: '#/components/schemas/IntakeSubmissionState' }
+
+    IntakeFormSnapshot:
+      type: object
+      additionalProperties: false
+      required: [format, title, purposes, privacy_text, retention, correction_policy, definition]
+      description: |
+        The immutable snapshot envelope published as one form version. The
+        server validates the envelope (required fields and retention bounds)
+        and treats `definition` — the form questions and layout owned by
+        OciDeck — as opaque.
+      properties:
+        format: { type: string, const: ociserve-intake-form/1 }
+        title: { type: string, minLength: 1, maxLength: 300 }
+        purposes:
+          type: array
+          minItems: 1
+          items: { type: string, maxLength: 300 }
+          description: Published purposes shown to the respondent before submitting.
+        privacy_text: { type: string, minLength: 1, description: Privacy notice published with the form. }
+        retention:
+          type: object
+          additionalProperties: false
+          required: [draft_days, submitted_days]
+          properties:
+            draft_days: { type: integer, minimum: 1, maximum: 90, description: Abandoned drafts are purged after this many days. }
+            submitted_days: { type: integer, minimum: 1, maximum: 1825, description: "Submitted revisions and contact data are kept at most this many days, then purged." }
+          description: Retention promises shown to the respondent; the server enforces these bounds — it never silently keeps data longer.
+        correction_policy:
+          type: object
+          additionalProperties: false
+          required: [allowed]
+          properties:
+            allowed: { type: boolean }
+            deadline_days: { type: integer, minimum: 1, maximum: 365, description: How long a correction round stays open once started. }
+          description: Whether an organizer may open a correction round, and its default deadline.
+        definition:
+          type: object
+          description: Opaque form definition (questions, layout) owned by OciDeck; the server stores and republishes it without interpreting.
+
+    IntakePublicForm:
+      type: object
+      additionalProperties: false
+      required: [form_ref, version, accepting, operational_status, snapshot]
+      properties:
+        form_ref: { type: string }
+        version: { type: integer, minimum: 1, description: Active immutable version. }
+        accepting: { type: boolean, description: False when the form is paused or closed for new submissions. }
+        operational_status: { type: string, enum: [open, paused, closed] }
+        snapshot: { $ref: '#/components/schemas/IntakeFormSnapshot' }
+
+    IntakeFormCreateRequest:
+      type: object
+      additionalProperties: false
+      required: [name, snapshot]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 300, description: Organizer-facing name; distinct from the published title. }
+        snapshot: { $ref: '#/components/schemas/IntakeFormSnapshot' }
+
+    IntakeFormPatch:
+      type: object
+      additionalProperties: false
+      properties:
+        operational_status: { type: string, enum: [open, paused, closed] }
+      description: Merge-patch — operational properties only; published content is immutable.
+
+    IntakeFormVersionCreateRequest:
+      type: object
+      additionalProperties: false
+      required: [snapshot]
+      properties:
+        snapshot: { $ref: '#/components/schemas/IntakeFormSnapshot' }
+
+    IntakeFormVersion:
+      type: object
+      additionalProperties: false
+      required: [version, sha256, published_at, snapshot]
+      properties:
+        version: { type: integer, minimum: 1, description: Monotone per form. }
+        sha256: { type: string, description: Server-computed hash of the activated version bytes (hex). }
+        published_at: { type: string, format: date-time }
+        snapshot: { $ref: '#/components/schemas/IntakeFormSnapshot' }
+
+    IntakeFormVersionSummary:
+      type: object
+      additionalProperties: false
+      required: [version, sha256, published_at, active]
+      properties:
+        version: { type: integer, minimum: 1 }
+        sha256: { type: string }
+        published_at: { type: string, format: date-time }
+        active: { type: boolean, description: Whether this version is currently served to respondents. }
+
+    IntakeForm:
+      type: object
+      additionalProperties: false
+      required: [form_id, form_ref, name, operational_status, active_version, versions, created_at]
+      properties:
+        form_id: { type: string, format: uuid, description: Internal organizer identifier. }
+        form_ref: { type: string, description: High-entropy public identifier used by the respondent chain. }
+        name: { type: string }
+        operational_status: { type: string, enum: [open, paused, closed] }
+        active_version: { type: integer, minimum: 1 }
+        versions:
+          type: array
+          items: { $ref: '#/components/schemas/IntakeFormVersionSummary' }
+          description: All published versions; old versions stay referentiable for linked submissions.
+        created_at: { type: string, format: date-time }
+
+    IntakeFormSummary:
+      type: object
+      additionalProperties: false
+      required: [form_id, name, operational_status, active_version, my_grant]
+      properties:
+        form_id: { type: string, format: uuid }
+        name: { type: string }
+        operational_status: { type: string, enum: [open, paused, closed] }
+        active_version: { type: integer, minimum: 1 }
+        my_grant: { $ref: '#/components/schemas/IntakeGrantRole' }
+
+    IntakeFormListResponse:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/IntakeFormSummary' }
+        next_cursor: { type: string }
+
+    IntakeFormGrant:
+      type: object
+      additionalProperties: false
+      required: [grant_id, membership_id, grant_role, created_at]
+      properties:
+        grant_id: { type: string, format: uuid }
+        membership_id: { type: string, format: uuid }
+        grant_role: { $ref: '#/components/schemas/IntakeGrantRole' }
+        created_at: { type: string, format: date-time }
+
+    IntakeFormGrantListResponse:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/IntakeFormGrant' }
+
+    IntakeFormGrantCreateRequest:
+      type: object
+      additionalProperties: false
+      required: [membership_id, grant_role]
+      properties:
+        membership_id: { type: string, format: uuid, description: Active membership in this organization. }
+        grant_role: { $ref: '#/components/schemas/IntakeGrantRole' }
+
+    IntakeRevisionSummary:
+      type: object
+      additionalProperties: false
+      required: [revision, submitted_at, sha256, size]
+      properties:
+        revision: { type: integer, minimum: 1 }
+        submitted_at: { type: string, format: date-time }
+        sha256: { type: string }
+        size: { type: integer }
+
+    IntakeSubmissionSummary:
+      type: object
+      additionalProperties: false
+      required: [submission_id, state, revision, handled, submitted_at]
+      description: Minimal inbox metadata — no answers, e-mail address or locator.
+      properties:
+        submission_id: { type: string, format: uuid }
+        state: { $ref: '#/components/schemas/IntakeSubmissionState' }
+        revision: { type: integer, minimum: 0 }
+        handled: { type: boolean }
+        submitted_at: { type: string, format: date-time }
+
+    IntakeSubmissionListResponse:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/IntakeSubmissionSummary' }
+        next_cursor: { type: string }
+
+    IntakeSubmissionDetail:
+      type: object
+      additionalProperties: false
+      required: [submission_id, state, revision, handled, created_at, revisions]
+      description: |
+        Submission detail for an assigned processor. The verified mailbox
+        address is deliberately absent — it is access metadata, not inbox
+        content; contact happens via server-triggered e-mail.
+      properties:
+        submission_id: { type: string, format: uuid }
+        state: { $ref: '#/components/schemas/IntakeSubmissionState' }
+        revision: { type: integer, minimum: 0 }
+        handled: { type: boolean }
+        created_at: { type: string, format: date-time }
+        submitted_at: { type: string, format: date-time }
+        correction_deadline: { type: string, format: date-time }
+        revisions:
+          type: array
+          items: { $ref: '#/components/schemas/IntakeRevisionSummary' }
+          description: Full immutable revision history, bound to the form version in force at each submission.
+
+    IntakeCorrectionRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        reason: { type: string, maxLength: 500, description: Optional explanation relayed in the correction e-mail. }
+        deadline_at: { type: string, format: date-time, description: Round deadline; bounded by the published correction policy. }
+
+    IntakeMarkHandledRequest:
+      type: object
+      additionalProperties: false
+      required: [handled]
+      properties:
+        handled: { type: boolean }
+
   responses:
+    RequestTooLarge:
+      description: Request body exceeds the maximum size for this route.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    UnsupportedMediaType:
+      description: Content-Type is not the declared media type for this route.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    RateLimited:
+      description: Too many requests. Includes Retry-After and RateLimit headers.
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+        RateLimit-Limit:
+          schema:
+            type: integer
+        RateLimit-Remaining:
+          schema:
+            type: integer
+        RateLimit-Reset:
+          schema:
+            type: integer
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
     ProblemResponse:
       description: An error following RFC 9457 problem+json.
       content:
@@ -13021,6 +14189,17 @@ components:
         OIDC bearer token. The issuer and audience are configured at deploy
         time (OCISERVE_OIDC_ISSUER, OCISERVE_OIDC_AUDIENCE). Health endpoints
         do not require authentication.
+    IntakeGrant:
+      type: http
+      scheme: bearer
+      description: |
+        Short-lived Managed Intake respondent grant (ADR 0016), issued by
+        POST /api/v1/intake/challenges/{challenge_id}/verify after a fresh
+        e-mail challenge. The grant is bound to exactly one submission, one
+        form and one purpose, and carries only the actions that purpose
+        allows. It is presented as `Authorization: Bearer <grant>` — never
+        in a URL — and is distinct from the OIDC BearerAuth token, the
+        submission locator, the mailbox code and the Idempotency-Key.
 
 security:
   - BearerAuth: []

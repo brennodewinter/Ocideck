@@ -1028,18 +1028,21 @@ also declares them, but see the [CI note](#continuous-integration).)
 ### OciServe contractpoort (`test/ociserve_api_drift_test.dart`)
 - **Runs:** `flutter test test/ociserve_api_drift_test.dart` (in
   `make check-registrations` en de handmatige `static-gate`).
-- **Covers:** dat elke route die `ociserve_gateway.dart` aanroept bestaat in
-  de gepinde OpenAPI-spec van OciServe, met de juiste methode en de
-  responsvelden die OciDeck uitleest. Een verwijderde, hernoemde of
-  hervormde route in OciServe laat deze poort rood worden — vóórdat een
-  gebruiker een kapotte endpoint raakt.
+- **Covers:** dat elke route die `ociserve_gateway.dart` of
+  `ociserve_intake_respondent.dart` aanroept bestaat in de gepinde
+  OpenAPI-spec van OciServe, met de juiste methode, het juiste
+  securityscheme en de responsvelden die OciDeck uitleest. Een verwijderde,
+  hernoemde of hervormde route in OciServe laat deze poort rood worden —
+  vóórdat een gebruiker een kapotte endpoint raakt.
 - **Pinned spec:** `test/fixtures/ociserve_openapi.yaml`, gekopieerd van
-  `brenno/OciServe` op commit `69147a084daf85cc4b573617aaa9f946ec08c841`.
+  `brenno/OciServe` op commit `45d9a87a4ccd39924df1305aa7922f0171abc23d`
+  (capabilitycatalogus v10, met het Managed Intake-contract uit ADR 0016).
 - **Pin bijwerken:**
   1. Kopieer `docs/openapi.yaml` uit de OciServe-repo naar
      `test/fixtures/ociserve_openapi.yaml`.
   2. Noteer de OciServe commit-SHA in `pinnedOciServeCommit` bovenaan de
-     test.
+     test en werk `pinnedOciServeSpecSha256` bij met de SHA-256 van het
+     nieuwe specbestand (`shasum -a 256 test/fixtures/ociserve_openapi.yaml`).
   3. Voeg nieuwe gateway-routes toe aan `gatewayRoutes` in de test als de
      gateway er een heeft bijgekregen.
   4. Draai `flutter test test/ociserve_api_drift_test.dart` — groen betekent

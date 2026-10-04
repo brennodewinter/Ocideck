@@ -4,18 +4,33 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  b137c0604b3a3d780d5ffe3fb8ae4c296b6f922a
+// OciServe commit:  45d9a87a4ccd39924df1305aa7922f0171abc23d
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
 import 'package:yaml/yaml.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_privacy_dictionary.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = 'b137c0604b3a3d780d5ffe3fb8ae4c296b6f922a';
+const pinnedOciServeCommit = '45d9a87a4ccd39924df1305aa7922f0171abc23d';
+
+/// SHA-256 of the pinned spec file itself — a spec silently replaced or
+/// hand-edited shows up here, not in a subtle field rename.
+const pinnedOciServeSpecSha256 =
+    '28809ba4b18c270705d382fb5f283af710c08aea302febf788f0ab7dfab3e0a3';
+
+/// The capability catalogue the pinned spec declares (`info.x-capability-
+/// catalog-version`) and the intake capabilities OciDeck may rely on.
+const pinnedCapabilityCatalogVersion = 10;
+const pinnedIntakeCapabilities = {
+  'intake:publish',
+  'intake:manage',
+  'intake:read',
+};
 
 /// One route the gateway calls, with the response fields OciDeck reads.
 /// Fields are dot-paths into the JSON response (after $ref resolution).
@@ -27,12 +42,20 @@ class GatewayRoute {
     required this.path,
     this.responseFields = const [],
     this.responseSchema, // expected schema name for 200/201 responses
+    this.security,
   });
 
   final String method;
   final String path;
   final List<String> responseFields;
   final String? responseSchema;
+
+  /// The security scheme the operation must declare: a scheme name from
+  /// `components.securitySchemes` (`'BearerAuth'`, `'IntakeGrant'`), or
+  /// `'none'` for a public operation (`security: []`). `null` skips the
+  /// check — the intake routes all carry an explicit value so a scheme
+  /// rename or an accidental public route goes red.
+  final String? security;
 }
 
 /// Every route ociserve_gateway.dart calls, with the fields it reads.
@@ -42,6 +65,7 @@ const gatewayRoutes = <GatewayRoute>[
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/installation',
+    security: 'none',
     responseSchema: 'InstallationStatus',
     // OciDeck reads these from the top level (with an oidc.* fallback).
     responseFields: ['ocideck_native_client_id', 'oidc_issuer'],
@@ -247,6 +271,191 @@ const gatewayRoutes = <GatewayRoute>[
     responseSchema: 'SessionBookingResponse',
     responseFields: ['id', 'session_id', 'status'],
   ),
+  // — Managed Intake: organisator (OIDC + tenantcapability × per-form grant) —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/intake-forms',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeFormListResponse',
+    responseFields: [
+      'items',
+      'items.form_id',
+      'items.name',
+      'items.operational_status',
+      'items.active_version',
+      'items.my_grant',
+      'next_cursor',
+    ],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/intake-forms',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeForm',
+    responseFields: [
+      'form_id',
+      'form_ref',
+      'name',
+      'operational_status',
+      'active_version',
+      'versions',
+      'created_at',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/intake-forms/{}',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeForm',
+    responseFields: [
+      'form_id',
+      'form_ref',
+      'name',
+      'operational_status',
+      'active_version',
+      'versions',
+    ],
+  ),
+  GatewayRoute(
+    method: 'PATCH',
+    path: '/api/v1/organizations/{}/intake-forms/{}',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeForm',
+    responseFields: ['form_id', 'operational_status'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/intake-forms/{}/versions',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeFormVersion',
+    responseFields: ['version', 'sha256', 'published_at', 'snapshot'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/intake-forms/{}/versions/{}',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeFormVersion',
+    responseFields: ['version', 'sha256', 'published_at', 'snapshot'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/intake-forms/{}/submissions',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeSubmissionListResponse',
+    responseFields: [
+      'items',
+      'items.submission_id',
+      'items.state',
+      'items.revision',
+      'items.handled',
+      'items.submitted_at',
+      'next_cursor',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/intake-forms/{}/submissions/{}',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeSubmissionDetail',
+    responseFields: [
+      'submission_id',
+      'state',
+      'revision',
+      'handled',
+      'created_at',
+      'revisions',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path:
+        '/api/v1/organizations/{}/intake-forms/{}/submissions/{}/revisions/{}/content',
+    security: 'BearerAuth',
+    // Binary stream — Digest header is checked client-side, no JSON fields.
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path:
+        '/api/v1/organizations/{}/intake-forms/{}/submissions/{}/open-correction',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeSubmissionDetail',
+    responseFields: ['submission_id', 'state', 'correction_deadline'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path:
+        '/api/v1/organizations/{}/intake-forms/{}/submissions/{}/mark-handled',
+    security: 'BearerAuth',
+    responseSchema: 'IntakeSubmissionDetail',
+    responseFields: ['submission_id', 'handled'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/intake-forms/{}/submissions/{}/purge',
+    security: 'BearerAuth',
+    // 202 with no body — the ledger is OciServe's, not ours to read.
+  ),
+  // — Managed Intake: respondent (no OIDC — public or IntakeGrant bearer) —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/intake/forms/{}',
+    security: 'none',
+    responseSchema: 'IntakePublicForm',
+    responseFields: [
+      'form_ref',
+      'version',
+      'accepting',
+      'operational_status',
+      'snapshot',
+    ],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/intake/challenges',
+    security: 'none',
+    responseFields: ['challenge_id', 'expires_in', 'resend_after'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/intake/challenges/{}/verify',
+    security: 'none',
+    responseSchema: 'IntakeGrantResponse',
+    responseFields: ['grant', 'expires_in', 'purpose', 'locator', 'state'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/intake/submissions/{}',
+    security: 'IntakeGrant',
+    responseSchema: 'IntakeRespondentSubmission',
+    responseFields: [
+      'locator',
+      'state',
+      'revision',
+      'draft_present',
+      'allowed_actions',
+    ],
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/intake/submissions/{}/draft',
+    security: 'IntakeGrant',
+    responseSchema: 'IntakeDraftReceipt',
+    responseFields: ['sha256', 'size'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/intake/submissions/{}/submit',
+    security: 'IntakeGrant',
+    responseSchema: 'IntakeSubmitReceipt',
+    responseFields: ['revision', 'submitted_at', 'sha256', 'size'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/intake/submissions/{}/withdraw',
+    security: 'IntakeGrant',
+    responseSchema: 'IntakeWithdrawReceipt',
+    responseFields: ['state'],
+  ),
 ];
 
 /// Normalise a path so {param_name} becomes {} for comparison.
@@ -294,8 +503,8 @@ Map<String, dynamic>? responseSchemaFor(
 ) {
   final responses = operation['responses'] as Map<String, dynamic>?;
   if (responses == null) return null;
-  // Try 200, then 201, then 2xx.
-  for (final code in ['200', '201', '2xx']) {
+  // Try 200, then 201, then 202, then 2xx.
+  for (final code in ['200', '201', '202', '2xx']) {
     final response = responses[code] as Map<String, dynamic>?;
     if (response == null) continue;
     final content = response['content'] as Map<String, dynamic>?;
@@ -329,13 +538,20 @@ Map<String, dynamic> _mergedProperties(
 }
 
 /// Check that a dot-path like 'account.id' exists in a schema map.
-/// Handles nested objects via 'properties' and allOf composition.
+/// Handles nested objects via 'properties', allOf composition, and
+/// descends into array 'items' for paths like 'items.form_id'.
 bool schemaHasField(Map<String, dynamic>? schema, String dotPath) {
   if (schema == null) return false;
   final parts = dotPath.split('.');
   dynamic current = schema;
   for (final part in parts) {
     if (current is! Map) return false;
+    // Array node: the next part addresses an element field, so walk
+    // into `items` instead of looking for a property literally named.
+    if (current['type'] == 'array' && current['items'] != null) {
+      current = resolveAllRefs(current['items'], schema);
+      if (current is! Map) return false;
+    }
     final value =
         _mergedProperties(Map<String, dynamic>.from(current), schema)[part] ??
         current[part];
@@ -393,6 +609,38 @@ void main() {
     expect(pinnedOciServeCommit, matches(RegExp(r'^[0-9a-f]{40}$')));
   });
 
+  test('pinned spec file matches its recorded SHA-256', () {
+    final bytes = File('test/fixtures/ociserve_openapi.yaml').readAsBytesSync();
+    expect(
+      sha256.convert(bytes).toString(),
+      pinnedOciServeSpecSha256,
+      reason:
+          'The pinned spec changed without updating pinnedOciServeSpecSha256 — '
+          'renew the pin from a verifiable OciServe main commit, never in place',
+    );
+  });
+
+  test('capability catalogue version and intake capabilities match', () {
+    final info = spec['info'] as Map<String, dynamic>;
+    expect(
+      info['x-capability-catalog-version'],
+      pinnedCapabilityCatalogVersion,
+      reason:
+          'OciServe shipped a new capability catalogue — check which '
+          'capabilities changed before extending the client',
+    );
+    final declared = (info['x-tenant-capabilities'] as List)
+        .cast<String>()
+        .toSet();
+    expect(
+      declared.containsAll(pinnedIntakeCapabilities),
+      true,
+      reason:
+          'A capability OciDeck relies on was renamed or removed '
+          '(expected $pinnedIntakeCapabilities)',
+    );
+  });
+
   test('current exam item distinguishes completion with no-content', () {
     const path = '/api/v1/organizations/{}/me/attempts/{}/items/current';
     final operation = specPaths[path]!['GET'] as Map<String, dynamic>;
@@ -445,6 +693,48 @@ void main() {
           reason:
               'Method ${route.method} not found on $normalised in pinned spec',
         );
+      });
+    }
+  });
+
+  group('declared security scheme matches how OciDeck authenticates', () {
+    for (final route in gatewayRoutes) {
+      if (route.security == null) continue;
+
+      test('${route.method} ${route.path}', () {
+        final normalised = normalisePath(route.path);
+        final operation =
+            specPaths[normalised]?[route.method] as Map<String, dynamic>?;
+        expect(
+          operation,
+          isNotNull,
+          reason: 'Operation not found for $normalised ${route.method}',
+        );
+
+        // An operation without its own `security` inherits the spec-level
+        // requirement (BearerAuth); `security: []` means public.
+        final declared = operation!['security'] ?? spec['security'];
+        final schemes = declared is List
+            ? declared.expand((req) => (req as Map).keys.cast<String>()).toSet()
+            : <String>{};
+        if (route.security == 'none') {
+          expect(
+            declared,
+            isA<List<dynamic>>().having((l) => l.isEmpty, 'empty', isTrue),
+            reason:
+                '$normalised ${route.method} is called without credentials '
+                'but the spec secures it — organiser and respondent auth '
+                'must stay strictly separated',
+          );
+        } else {
+          expect(
+            schemes,
+            contains(route.security),
+            reason:
+                '$normalised ${route.method} no longer accepts '
+                '${route.security} in the pinned spec',
+          );
+        }
       });
     }
   });
