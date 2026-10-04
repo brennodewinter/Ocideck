@@ -105,6 +105,14 @@ void main() {
       expect(touched, isEmpty);
     });
 
+    test('de privacy-identiteit gaat de opslag niet in', () async {
+      expect(
+        await refusing.writePrivacyOwnIdentity('Bram\nbram@example.test'),
+        isFalse,
+      );
+      expect(touched, isEmpty);
+    });
+
     test('de melding draagt wél de naam maar nooit de waarde', () async {
       try {
         await refusing.writeGitToken('https://git.example', 'o', 'ghp_geheim');
@@ -132,6 +140,7 @@ void main() {
         isNull,
       );
       expect(await refusing.readAiApiKey('https://ai.example'), isNull);
+      expect(await refusing.readPrivacyOwnIdentity(), isNull);
       expect(touched, isEmpty);
     });
 
@@ -140,6 +149,7 @@ void main() {
       await refusing.deleteWebdavPassword('https://c.example', 'b');
       await refusing.deleteS3SecretKey('https://s3.example', 'AKIA');
       await refusing.deleteAiApiKey('https://ai.example');
+      await refusing.deletePrivacyOwnIdentity();
       expect(touched, isEmpty);
     });
 

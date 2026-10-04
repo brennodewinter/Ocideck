@@ -583,8 +583,11 @@ model.
   `writeAsString`/`writeAsBytes` anywhere else.
 - **Secret storage.** WebDAV/Nextcloud passwords, the S3 secret access key, the
   AI API key, and the git personal-access token live in the OS keychain via
+  AppFoundation's fail-closed `secret_storage` adapter over
   `flutter_secure_storage` (`lib/services/secret_store.dart`), keyed per
-  server/account; only the secret goes there — URLs, usernames and the S3
+  server/account. OciDeck's facade keeps the product-specific key catalogue and
+  the macOS login-keychain configuration; the shared adapter never falls back
+  to memory or browser storage. Only the secret goes there — URLs, usernames and the S3
   **access key ID** stay in the prefs domain. The git token leaves the keychain
   for the lifetime of a `git` subprocess, passed via `GIT_CONFIG_*` so it reaches
   neither argv, nor the remote URL, nor `.git/config`

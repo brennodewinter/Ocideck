@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De geheime-opslag gebruikt nu de gedeelde `secret_storage`-package uit
+  AppFoundation voor het kleine opslagcontract, de native keychain-adapter en
+  de fail-closed browserpoort. OciDeck houdt zijn bestaande sleutelnamen,
+  foutafhandeling per geheim en de macOS-login-keychainoptie in een dunne
+  lokale laag; bestaande keychain-items blijven daardoor op dezelfde plaats
+  leesbaar. Ook de privacy-identiteit raakt op een platform zonder veilige
+  opslag de backend niet meer.
 - Het uiterlijk van de applicatieschil gebruikt nu de gedeelde
   `app_appearance`-package uit AppFoundation voor profielvelden, Material-thema,
   palet en contrastcontrole. OciDeck houdt alleen zijn productbeleid lokaal:

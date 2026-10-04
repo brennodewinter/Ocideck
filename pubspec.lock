@@ -1188,6 +1188,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  secret_storage:
+    dependency: "direct main"
+    description:
+      path: "packages/secret_storage"
+      ref: ac46741489d60c011377e27e0df9152b164f0701
+      resolved-ref: ac46741489d60c011377e27e0df9152b164f0701
+      url: "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
+    source: git
+    version: "0.1.0"
   shared_preferences:
     dependency: "direct main"
     description:

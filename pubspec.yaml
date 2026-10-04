@@ -108,6 +108,13 @@ dependencies:
       url: https://pawprint.vigilis.online/LibreKAT/AppFoundation.git
       ref: app_appearance-v0.1.0
       path: packages/app_appearance
+  # Productneutrale, fail-closed keychain-adapter. De sleutelcatalogus en het
+  # afwijkende macOS-beleid blijven bewust in OciDeck.
+  secret_storage:
+    git:
+      url: https://pawprint.vigilis.online/LibreKAT/AppFoundation.git
+      ref: ac46741489d60c011377e27e0df9152b164f0701
+      path: packages/secret_storage
   timezone: ^0.11.1
 
 # dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.

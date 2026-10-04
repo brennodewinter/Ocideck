@@ -556,9 +556,14 @@ Containment is checked with `p.isWithin` from the `path` package; absolute paths
 and `../` escapes are refused on the render/present/export paths.
 
 ### SecretStore
-`lib/services/secret_store.dart` — OS keychain integration via
-`flutter_secure_storage` (macOS Keychain, Windows Credential Manager, and the
-platform-appropriate backend elsewhere). Typed accessors:
+`lib/services/secret_store.dart` — OciDeck's typed, product-specific facade over
+AppFoundation's `secret_storage` contract and native
+`flutter_secure_storage` adapter (macOS Keychain, Windows Credential Manager,
+and the platform-appropriate backend elsewhere). The shared package owns the
+fail-closed platform boundary and raw `write`/`read`/`delete` operations;
+OciDeck owns the stable key names, its macOS login-keychain option and the
+different error policy for recoverable credentials versus irreplaceable keys.
+Typed accessors:
 `write/read/deleteWebdavPassword`, `write/read/deleteS3SecretKey`,
 `write/read/deleteAiApiKey`, `write/read/deleteGitToken`. Only secrets go here;
 server URLs, usernames and the S3 access key ID stay in the prefs domain.
