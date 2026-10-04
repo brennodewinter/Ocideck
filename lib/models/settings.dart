@@ -1,4 +1,5 @@
 import 'privacy_disposition.dart';
+import 'package:app_appearance/app_appearance.dart' as foundation;
 import 'privacy_finding.dart';
 import '../services/privacy/privacy_regions.dart';
 import 'ai_settings.dart';

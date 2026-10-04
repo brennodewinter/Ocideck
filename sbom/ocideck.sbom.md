@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.6.13+39** (licence EUPL-1.2) and every third-party component it ships (223 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.6.13+39** (licence EUPL-1.2) and every third-party component it ships (224 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **789 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **792 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -15,18 +15,19 @@ The JSON documents carry **789 dependency relations** between these components: 
 | Apache-2.0 | 19 |
 | OFL-1.1 | 7 |
 | BSD | 3 |
+| EUPL-1.2 | 2 |
 | MPL-2.0 | 1 |
-| EUPL-1.2 | 1 |
 
 ## Components
 
-### Dart / Flutter packages (204)
+### Dart / Flutter packages (205)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
 | _fe_analyzer_shared _(transitive)_ | 108.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/_fe_analyzer_shared@108.0.0` |
 | analyzer _(direct dev)_ | 14.4.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@14.4.0` |
 | android_file_picker _(transitive)_ | 2.0.0 | MIT | vicajilau | `pkg:pub/android_file_picker@2.0.0` |
+| app_appearance _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82` (packages/app_appearance) |
 | archive _(direct main)_ | 4.3.0 | MIT | brendan-duncan | `pkg:pub/archive@4.3.0` |
 | args _(transitive)_ | 2.7.0 | BSD-3-Clause | dart-lang | `pkg:pub/args@2.7.0` |
 | asn1lib _(transitive)_ | 1.6.5 | BSD | wstrange | `pkg:pub/asn1lib@1.6.5` |
@@ -38,7 +39,7 @@ The JSON documents carry **789 dependency relations** between these components: 
 | characters _(direct main)_ | 1.4.1 | BSD-3-Clause | dart-lang | `pkg:pub/characters@1.4.1` |
 | charcode _(transitive)_ | 1.4.0 | BSD-3-Clause | lrhn | `pkg:pub/charcode@1.4.0` |
 | clock _(transitive)_ | 1.1.3 | Apache-2.0 | dart-lang | `pkg:pub/clock@1.1.3` |
-| cnativeapi _(direct overridden)_ | 0.1.4 | MIT | libnativeapi | Source: git. |
+| cnativeapi _(direct overridden)_ | 0.1.4 | MIT | brennodewinter | https://github.com/brennodewinter/nativeapi-flutter.git @ `0b3aafa797dafd3012a4fdb74f403d6cb20288b1` (packages/cnativeapi) |
 | code_assets _(transitive)_ | 2.1.0 | BSD-3-Clause | dart-lang | `pkg:pub/code_assets@2.1.0` |
 | collection _(transitive)_ | 1.19.1 | BSD-3-Clause | dart-lang | `pkg:pub/collection@1.19.1` |
 | convert _(transitive)_ | 3.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/convert@3.1.2` |
@@ -124,10 +125,10 @@ The JSON documents carry **789 dependency relations** between these components: 
 | markdown _(direct main)_ | 7.3.1 | BSD-3-Clause | dart-lang | `pkg:pub/markdown@7.3.1` |
 | matcher _(transitive)_ | 0.12.20 | BSD-3-Clause | dart-lang | `pkg:pub/matcher@0.12.20` |
 | material_color_utilities _(transitive)_ | 0.13.0 | Apache-2.0 | material-foundation | `pkg:pub/material_color_utilities@0.13.0` |
-| material_ui _(direct main)_ | 1.3.0 | BSD-3-Clause | flutter | `pkg:pub/material_ui@1.3.0` |
+| material_ui _(direct main)_ | 1.5.0 | BSD-3-Clause | flutter | `pkg:pub/material_ui@1.5.0` |
 | meta _(transitive)_ | 1.19.0 | BSD-3-Clause | dart-lang | `pkg:pub/meta@1.19.0` |
 | native_toolchain_cmake _(transitive)_ | 0.3.2 | Apache-2.0 | rainyl | `pkg:pub/native_toolchain_cmake@0.3.2` |
-| nativeapi _(direct main)_ | 0.1.4 | MIT | libnativeapi | Source: git. |
+| nativeapi _(direct main)_ | 0.1.4 | MIT | brennodewinter | https://github.com/brennodewinter/nativeapi-flutter.git @ `0b3aafa797dafd3012a4fdb74f403d6cb20288b1` (packages/nativeapi) |
 | nested _(transitive)_ | 1.0.0 | MIT | rrousselGit | `pkg:pub/nested@1.0.0` |
 | objective_c _(transitive)_ | 9.6.0 | BSD-3-Clause | dart-lang | `pkg:pub/objective_c@9.6.0` |
 | openid_client _(direct main)_ | 0.4.10+2 | BSD-3-Clause | appsup-dart | `pkg:pub/openid_client@0.4.10+2` |

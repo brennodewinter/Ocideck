@@ -10,87 +10,59 @@
 // houden scheelt elke aanroeper een tweede import.
 part of '../settings.dart';
 
-class AppAppearanceProfile {
-  final String name;
-  final bool isBuiltIn;
-  final bool isDark;
-  final String primaryColor;
-  final String accentColor;
-  final String backgroundColor;
-  final String surfaceColor;
-  final String textColor;
-  final String mutedTextColor;
-  final String panelColor;
-  final String panelTextColor;
-
+/// OciDeck-compatibiliteitslaag boven het gedeelde uiterlijkprofiel.
+///
+/// Alleen het productbeleid blijft hier: OciDeck bundelt vier lettertypen en
+/// gebruikte historisch Roboto wanneer oudere instellingen nog geen
+/// `fontFamily` bevatten. Velden en de JSON-basis komen uit AppFoundation.
+class AppAppearanceProfile extends foundation.AppAppearanceProfile {
   /// The interface font family — one of [uiFonts], all bundled so the choice
   /// renders on every platform (including the hardened web build). Default
   /// Roboto.
-  final String fontFamily;
-
   const AppAppearanceProfile({
-    required this.name,
-    this.isBuiltIn = false,
-    this.isDark = false,
-    required this.primaryColor,
-    required this.accentColor,
-    required this.backgroundColor,
-    required this.surfaceColor,
-    required this.textColor,
-    required this.mutedTextColor,
-    required this.panelColor,
-    required this.panelTextColor,
-    this.fontFamily = 'Roboto',
+    required super.name,
+    super.isBuiltIn = false,
+    super.isDark = false,
+    required super.primaryColor,
+    required super.accentColor,
+    required super.backgroundColor,
+    required super.surfaceColor,
+    required super.textColor,
+    required super.mutedTextColor,
+    required super.panelColor,
+    required super.panelTextColor,
+    super.fontFamily = 'Roboto',
   });
 
   /// Interface fonts the user can pick for the app UI. All bundled in
   /// pubspec.yaml so they work on desktop, the hardened web build, and export.
   static const uiFonts = ['Roboto', 'Inter', 'Lora', 'EB Garamond'];
 
-  static const basic = AppAppearanceProfile(
-    name: 'Basic',
-    isBuiltIn: true,
-    primaryColor: '#1C2B47',
-    accentColor: '#2563EB',
-    backgroundColor: '#F8F9FA',
-    surfaceColor: '#FFFFFF',
-    textColor: '#1E293B',
-    mutedTextColor: '#64748B',
-    // EU-vlagblauw voor de bovenbalk/panelen (huisstijl), i.p.v. near-black.
-    panelColor: '#003399',
-    panelTextColor: '#FFFFFF',
+  static final basic = _fromFoundation(foundation.AppAppearanceProfile.basic);
+  static final europa = _fromFoundation(foundation.AppAppearanceProfile.europa);
+  static final dark = _fromFoundation(foundation.AppAppearanceProfile.dark);
+
+  static final builtIns = <AppAppearanceProfile>[basic, europa, dark];
+
+  static AppAppearanceProfile _fromFoundation(
+    foundation.AppAppearanceProfile profile,
+  ) => AppAppearanceProfile(
+    name: profile.name,
+    isBuiltIn: profile.isBuiltIn,
+    isDark: profile.isDark,
+    primaryColor: profile.primaryColor,
+    accentColor: profile.accentColor,
+    backgroundColor: profile.backgroundColor,
+    surfaceColor: profile.surfaceColor,
+    textColor: profile.textColor,
+    mutedTextColor: profile.mutedTextColor,
+    panelColor: profile.panelColor,
+    panelTextColor: profile.panelTextColor,
+    // OciDeck bundles Roboto; AppFoundation deliberately has no font policy.
+    fontFamily: 'Roboto',
   );
 
-  static const europa = AppAppearanceProfile(
-    name: 'Europa',
-    isBuiltIn: true,
-    primaryColor: '#003399',
-    accentColor: '#FFCC00',
-    backgroundColor: '#F4F7FC',
-    surfaceColor: '#FFFFFF',
-    textColor: '#003399',
-    mutedTextColor: '#5D6B85',
-    // Zelfde EU-vlagblauw als de bovenbalk-keuze in het Basic-profiel.
-    panelColor: '#003399',
-    panelTextColor: '#FFFFFF',
-  );
-
-  static const dark = AppAppearanceProfile(
-    name: 'Donker',
-    isBuiltIn: true,
-    isDark: true,
-    primaryColor: '#111827',
-    accentColor: '#60A5FA',
-    backgroundColor: '#0F172A',
-    surfaceColor: '#1E293B',
-    textColor: '#F1F5F9',
-    mutedTextColor: '#94A3B8',
-    panelColor: '#090E1A',
-    panelTextColor: '#E2E8F0',
-  );
-
-  static const builtIns = [basic, europa, dark];
-
+  @override
   AppAppearanceProfile copyWith({
     String? name,
     bool? isBuiltIn,
@@ -104,6 +76,7 @@ class AppAppearanceProfile {
     String? panelColor,
     String? panelTextColor,
     String? fontFamily,
+    bool useSystemFont = false,
   }) {
     return AppAppearanceProfile(
       name: name ?? this.name,
@@ -117,42 +90,37 @@ class AppAppearanceProfile {
       mutedTextColor: mutedTextColor ?? this.mutedTextColor,
       panelColor: panelColor ?? this.panelColor,
       panelTextColor: panelTextColor ?? this.panelTextColor,
-      fontFamily: fontFamily ?? this.fontFamily,
+      fontFamily: useSystemFont ? null : fontFamily ?? this.fontFamily,
     );
   }
 
-  Map<String, Object?> toJson() {
-    return {
-      'name': name,
-      'isBuiltIn': isBuiltIn,
-      'isDark': isDark,
-      'primaryColor': primaryColor,
-      'accentColor': accentColor,
-      'backgroundColor': backgroundColor,
-      'surfaceColor': surfaceColor,
-      'textColor': textColor,
-      'mutedTextColor': mutedTextColor,
-      'panelColor': panelColor,
-      'panelTextColor': panelTextColor,
-      'fontFamily': fontFamily,
-    };
-  }
+  @override
+  Map<String, Object?> toJson() => {
+    ...super.toJson(),
+    // OciDeck schreef dit veld altijd, ook voor het standaardlettertype.
+    'fontFamily': fontFamily,
+  };
 
   factory AppAppearanceProfile.fromJson(Map<String, Object?> json) {
+    final shared = foundation.AppAppearanceProfile.fromJson(json);
     return AppAppearanceProfile(
-      name: json['name'] as String? ?? 'Eigen thema',
-      isBuiltIn: json['isBuiltIn'] as bool? ?? false,
-      isDark: json['isDark'] as bool? ?? false,
-      primaryColor: json['primaryColor'] as String? ?? basic.primaryColor,
-      accentColor: json['accentColor'] as String? ?? basic.accentColor,
-      backgroundColor:
-          json['backgroundColor'] as String? ?? basic.backgroundColor,
-      surfaceColor: json['surfaceColor'] as String? ?? basic.surfaceColor,
-      textColor: json['textColor'] as String? ?? basic.textColor,
-      mutedTextColor: json['mutedTextColor'] as String? ?? basic.mutedTextColor,
-      panelColor: json['panelColor'] as String? ?? basic.panelColor,
-      panelTextColor: json['panelTextColor'] as String? ?? basic.panelTextColor,
-      fontFamily: json['fontFamily'] as String? ?? 'Roboto',
+      name: shared.name,
+      isBuiltIn: shared.isBuiltIn,
+      isDark: shared.isDark,
+      primaryColor: shared.primaryColor,
+      accentColor: shared.accentColor,
+      backgroundColor: shared.backgroundColor,
+      surfaceColor: shared.surfaceColor,
+      textColor: shared.textColor,
+      mutedTextColor: shared.mutedTextColor,
+      panelColor: shared.panelColor,
+      panelTextColor: shared.panelTextColor,
+      // Een ontbrekend veld is een bestand uit vóór de lettertypekeuze en
+      // krijgt OciDecks historische standaard. Expliciet null bewaart juist
+      // de gedeelde keuze voor het systeemfont.
+      fontFamily: json.containsKey('fontFamily')
+          ? json['fontFamily'] as String?
+          : 'Roboto',
     );
   }
 }

@@ -418,6 +418,25 @@ void main() {
       );
     });
 
+    test('gedeelde bouwer voegt geen Keiko-knopbeleid toe', () {
+      final theme = AppTheme.fromProfile(AppAppearanceProfile.basic);
+
+      expect(
+        theme.filledButtonTheme.style,
+        isNull,
+        reason:
+            'OciDeck liet FilledButton aan Material over; gedeelde code mag '
+            'niet stil het productgedrag van een andere app invoeren',
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side?.resolve({WidgetState.focused}),
+        isNull,
+        reason:
+            'OciDeck had geen eigen focusrand op knoppen; die Keiko-keuze is '
+            'in AppFoundation expliciet uitgezet',
+      );
+    });
+
     // De rekensom hierboven vindt een slechte kleur. Deze vindt een ontbrékende
     // kleur — en dát was #744: er stond geen `textButtonTheme`, dus viel Flutter
     // terug op `colorScheme.primary`. Een verhoudingstoets alleen zou de dag dat
