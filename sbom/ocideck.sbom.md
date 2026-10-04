@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.6.13+39** (licence EUPL-1.2) and every third-party component it ships (224 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.6.13+39** (licence EUPL-1.2) and every third-party component it ships (225 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **792 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **795 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -14,13 +14,13 @@ The JSON documents carry **792 dependency relations** between these components: 
 | MIT | 65 |
 | Apache-2.0 | 19 |
 | OFL-1.1 | 7 |
+| EUPL-1.2 | 3 |
 | BSD | 3 |
-| EUPL-1.2 | 2 |
 | MPL-2.0 | 1 |
 
 ## Components
 
-### Dart / Flutter packages (205)
+### Dart / Flutter packages (206)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -172,6 +172,7 @@ The JSON documents carry **792 dependency relations** between these components: 
 | record_use _(transitive)_ | 1.1.1 | BSD-3-Clause | dart-lang | `pkg:pub/record_use@1.1.1` |
 | riverpod _(transitive)_ | 3.4.3 | MIT | rrousselGit | `pkg:pub/riverpod@3.4.3` |
 | rxdart _(transitive)_ | 0.28.0 | Apache-2.0 | ReactiveX | `pkg:pub/rxdart@0.28.0` |
+| secret_storage _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `ac46741489d60c011377e27e0df9152b164f0701` (packages/secret_storage) |
 | shared_preferences _(direct main)_ | 2.5.5 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences@2.5.5` |
 | shared_preferences_android _(transitive)_ | 2.4.28 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_android@2.4.28` |
 | shared_preferences_foundation _(transitive)_ | 2.5.7 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_foundation@2.5.7` |

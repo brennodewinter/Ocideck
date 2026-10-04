@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:9adfda82-1e3c-5a9a-821e-746751433071",
+  "serialNumber": "urn:uuid:e403403b-9542-577a-8d0e-6a4e6017b044",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-04T19:02:01.992607Z",
+    "timestamp": "2026-10-04T19:22:28.180051Z",
     "tools": {
       "components": [
         {
@@ -6231,6 +6231,53 @@
       ]
     },
     {
+      "bom-ref": "git:secret_storage@0.1.0",
+      "type": "library",
+      "supplier": {
+        "name": "pawprint.vigilis.online",
+        "url": [
+          "https://pawprint.vigilis.online"
+        ]
+      },
+      "name": "secret_storage",
+      "version": "0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "EUPL-1.2"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:resolved-revision",
+          "value": "ac46741489d60c011377e27e0df9152b164f0701"
+        },
+        {
+          "name": "ocideck:package-subpath",
+          "value": "packages/secret_storage"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: git."
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/shared_preferences@2.5.5",
       "type": "library",
       "supplier": {
@@ -9333,6 +9380,7 @@
         "git:app_appearance@0.1.0",
         "git:cnativeapi@0.1.4",
         "git:nativeapi@0.1.4",
+        "git:secret_storage@0.1.0",
         "pkg:npm/dompurify@3.4.16",
         "pkg:npm/highlight.js@11.11.1",
         "pkg:npm/marked@18.0.5",
@@ -10660,6 +10708,13 @@
     {
       "ref": "pkg:pub/rxdart@0.28.0",
       "dependsOn": []
+    },
+    {
+      "ref": "git:secret_storage@0.1.0",
+      "dependsOn": [
+        "pkg:pub/flutter_secure_storage@11.2.0",
+        "sdk:flutter@0.0.0"
+      ]
     },
     {
       "ref": "pkg:pub/shared_preferences@2.5.5",
