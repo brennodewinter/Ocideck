@@ -827,48 +827,6 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
-  'Uitnodiging openen…': 'Open invitation…',
-  'Uitnodiging openen': 'Open invitation',
-  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
-      'Paste the invitation link you got from the organiser. The form is then fetched from the server named in the link.',
-  'Uitnodigingslink': 'Invitation link',
-  'Het formulier wordt opgehaald bij {host}.':
-      'The form will be fetched from {host}.',
-  'Formulier ophalen': 'Fetch form',
-  'Het formulier wordt opgehaald…': 'Fetching the form…',
-  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
-      'This link is not complete. Ask the organiser for the full invitation link.',
-  'De link moet met https beginnen.': 'The link must start with https.',
-  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
-      'This is not an invitation link OciDeck knows. Ask the organiser for the full link.',
-  'OciDeck maakt geen verbinding met dit adres.':
-      'OciDeck does not connect to this address.',
-  'De server stuurde meer dan OciDeck accepteert.':
-      'The server sent more than OciDeck accepts.',
-  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
-      'No connection to {host}. Check your internet connection and try again later.',
-  '{host} is geen inzendserver die OciDeck begrijpt.':
-      '{host} is not a submission server OciDeck understands.',
-  'Deze server is te oud voor deze versie van OciDeck.':
-      'This server is too old for this version of OciDeck.',
-  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
-      'This server is from a newer version. Update OciDeck.',
-  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
-      'This form no longer exists on the server. Ask the organiser for a new invitation.',
-  'De server is druk. Probeer het later opnieuw.':
-      'The server is busy. Try again later.',
-  'De server weigerde het verzoek.': 'The server refused the request.',
-  'De server stuurde een formulier dat OciDeck niet kan lezen.':
-      'The server sent a form OciDeck cannot read.',
-  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
-      'The form does not belong to the server in the invitation. Ask the organiser for a new invitation.',
-  'Formulier van {naam}': 'Form from {naam}',
-  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
-      'This form is closed to new submissions. Contact the organiser.',
-  'Server: {host}': 'Server: {host}',
-  'Formulier invullen': 'Fill in the form',
-  'Onbekende taal': 'Unknown language',
-  'Formulier geopend.': 'Form opened.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'The editors besides you who are in every bundle, so they can open the submissions too. You add someone with their editor card and type back the fingerprint of that card.',

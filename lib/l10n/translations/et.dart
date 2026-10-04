@@ -1620,48 +1620,6 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
-  'Uitnodiging openen…': 'Ava kutse…',
-  'Uitnodiging openen': 'Ava kutse',
-  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
-      'Kleebi korraldajalt saadud kutse link. Vorm tuuakse siis lingis nimetatud serverist.',
-  'Uitnodigingslink': 'Kutse link',
-  'Het formulier wordt opgehaald bij {host}.':
-      'Vorm tuuakse aadressilt {host}.',
-  'Formulier ophalen': 'Too vorm',
-  'Het formulier wordt opgehaald…': 'Vormi toomine…',
-  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
-      'See link pole täielik. Palu korraldajalt kutse täielikku linki.',
-  'De link moet met https beginnen.': 'Link peab algama https-ga.',
-  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
-      'See pole kutse link, mida OciDeck tunneb. Palu korraldajalt täielikku linki.',
-  'OciDeck maakt geen verbinding met dit adres.':
-      'OciDeck ei loo ühendust sellele aadressile.',
-  'De server stuurde meer dan OciDeck accepteert.':
-      'Server saatis rohkem, kui OciDeck vastu võtab.',
-  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Ühendus aadressiga {host} puudub. Kontrolli oma internetiühendust ja proovi hiljem uuesti.',
-  '{host} is geen inzendserver die OciDeck begrijpt.':
-      '{host} pole esitusserver, millest OciDeck aru saab.',
-  'Deze server is te oud voor deze versie van OciDeck.':
-      'See server on selle OciDecki versiooni jaoks liiga vana.',
-  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
-      'See server on uuemast versioonist. Uuenda OciDecki.',
-  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
-      'Seda vormi serveris (enam) pole. Palu korraldajalt uut kutset.',
-  'De server is druk. Probeer het later opnieuw.':
-      'Server on hõivatud. Proovi hiljem uuesti.',
-  'De server weigerde het verzoek.': 'Server lükkas päringu tagasi.',
-  'De server stuurde een formulier dat OciDeck niet kan lezen.':
-      'Server saatis vormi, mida OciDeck ei suuda lugeda.',
-  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
-      'Vorm ei kuulu kutses olevale serverile. Palu korraldajalt uut kutset.',
-  'Formulier van {naam}': 'Vorm: {naam}',
-  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
-      'See vorm on uute esituste jaoks suletud. Võta ühendust korraldajaga.',
-  'Server: {host}': 'Server: {host}',
-  'Formulier invullen': 'Täida vorm',
-  'Onbekende taal': 'Tundmatu keel',
-  'Formulier geopend.': 'Vorm avatud.',
   'Team…': 'Meeskond…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Toimetajad peale sinu, kes on igas bundle’is, et ka nemad saaksid esitusi avada. Lisad kellegi tema toimetaja kaardiga ja sisestad selle kaardi sõrmejälje uuesti.',

@@ -1655,48 +1655,6 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
-  'Uitnodiging openen…': 'Abrir convite…',
-  'Uitnodiging openen': 'Abrir convite',
-  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
-      'Cole a ligação do convite que recebeu do organizador. O formulário é então obtido do servidor indicado na ligação.',
-  'Uitnodigingslink': 'Ligação do convite',
-  'Het formulier wordt opgehaald bij {host}.':
-      'O formulário será obtido de {host}.',
-  'Formulier ophalen': 'Obter formulário',
-  'Het formulier wordt opgehaald…': 'A obter o formulário…',
-  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
-      'Esta ligação não está completa. Peça ao organizador a ligação completa do convite.',
-  'De link moet met https beginnen.': 'A ligação tem de começar por https.',
-  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
-      'Isto não é uma ligação de convite que o OciDeck conheça. Peça ao organizador a ligação completa.',
-  'OciDeck maakt geen verbinding met dit adres.':
-      'O OciDeck não se liga a este endereço.',
-  'De server stuurde meer dan OciDeck accepteert.':
-      'O servidor enviou mais do que o OciDeck aceita.',
-  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Sem ligação a {host}. Verifique a sua ligação à internet e tente novamente mais tarde.',
-  '{host} is geen inzendserver die OciDeck begrijpt.':
-      '{host} não é um servidor de submissões que o OciDeck compreenda.',
-  'Deze server is te oud voor deze versie van OciDeck.':
-      'Este servidor é demasiado antigo para esta versão do OciDeck.',
-  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
-      'Este servidor é de uma versão mais recente. Atualize o OciDeck.',
-  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
-      'Este formulário já não existe no servidor. Peça ao organizador um novo convite.',
-  'De server is druk. Probeer het later opnieuw.':
-      'O servidor está ocupado. Tente novamente mais tarde.',
-  'De server weigerde het verzoek.': 'O servidor recusou o pedido.',
-  'De server stuurde een formulier dat OciDeck niet kan lezen.':
-      'O servidor enviou um formulário que o OciDeck não consegue ler.',
-  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
-      'O formulário não pertence ao servidor do convite. Peça ao organizador um novo convite.',
-  'Formulier van {naam}': 'Formulário de {naam}',
-  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
-      'Este formulário está fechado a novas submissões. Contacte o organizador.',
-  'Server: {host}': 'Servidor: {host}',
-  'Formulier invullen': 'Preencher o formulário',
-  'Onbekende taal': 'Idioma desconhecido',
-  'Formulier geopend.': 'Formulário aberto.',
   'Team…': 'Equipa…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Os redatores além de si que estão em cada bundle, para que também possam abrir os envios. Adiciona alguém com o seu cartão de redator e escreve de novo a impressão digital desse cartão.',

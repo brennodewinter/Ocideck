@@ -667,48 +667,6 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
-  'Uitnodiging openen…': 'Útnoeging iepenje…',
-  'Uitnodiging openen': 'Útnoeging iepenje',
-  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
-      'Plak de útnoegingslink dy’t jo fan de organisator krigen. It formulier wurdt dan ophelle by de server dy’t yn de link stiet.',
-  'Uitnodigingslink': 'Útnoegingslink',
-  'Het formulier wordt opgehaald bij {host}.':
-      'It formulier wurdt ophelle by {host}.',
-  'Formulier ophalen': 'Formulier ophelje',
-  'Het formulier wordt opgehaald…': 'It formulier wurdt ophelle…',
-  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
-      'Dizze link is net kompleet. Freegje de organisator om de folsleine útnoegingslink.',
-  'De link moet met https beginnen.': 'De link moat mei https begjinne.',
-  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
-      'Dit is gjin útnoegingslink dy’t OciDeck kent. Freegje de organisator om de folsleine link.',
-  'OciDeck maakt geen verbinding met dit adres.':
-      'OciDeck makket gjin ferbining mei dit adres.',
-  'De server stuurde meer dan OciDeck accepteert.':
-      'De server stjoerde mear as OciDeck akseptearret.',
-  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Gjin ferbining mei {host}. Kontrolearje jo ynternetferbining en besykje it letter opnij.',
-  '{host} is geen inzendserver die OciDeck begrijpt.':
-      '{host} is gjin ynstjoerserver dy’t OciDeck begrypt.',
-  'Deze server is te oud voor deze versie van OciDeck.':
-      'Dizze server is te âld foar dizze ferzje fan OciDeck.',
-  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
-      'Dizze server is fan in nijere ferzje. Wurkje OciDeck by.',
-  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
-      'Dit formulier bestiet (net mear) op de server. Freegje de organisator om in nije útnoeging.',
-  'De server is druk. Probeer het later opnieuw.':
-      'De server is drok. Besykje it letter opnij.',
-  'De server weigerde het verzoek.': 'De server wegere it fersyk.',
-  'De server stuurde een formulier dat OciDeck niet kan lezen.':
-      'De server stjoerde in formulier dat OciDeck net lêze kin.',
-  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
-      'It formulier heart net by de server út de útnoeging. Freegje de organisator om in nije útnoeging.',
-  'Formulier van {naam}': 'Formulier fan {naam}',
-  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
-      'Dit formulier is sluten foar nije ynstjoerings. Nim kontakt op mei de organisator.',
-  'Server: {host}': 'Server: {host}',
-  'Formulier invullen': 'Formulier ynfolje',
-  'Onbekende taal': 'Ûnbekende taal',
-  'Formulier geopend.': 'Formulier iepene.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'De redakteurs njonken dy dy’t yn elke bondel steane, sadat ek sy de ynstjoeringen iepenje kinne. Do foegest immen ta mei syn redakteurkaart en typst de fingerôfdruk fan dy kaart werom.',

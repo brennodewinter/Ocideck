@@ -666,48 +666,6 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
-  'Uitnodiging openen…': 'Habri invitashon…',
-  'Uitnodiging openen': 'Habri invitashon',
-  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
-      'Pega e link di invitashon ku bo a risibí di e organisador. E formulario ta wòrdu hañá di e server ku ta na e link.',
-  'Uitnodigingslink': 'Link di invitashon',
-  'Het formulier wordt opgehaald bij {host}.':
-      'E formulario lo wòrdu hañá di {host}.',
-  'Formulier ophalen': 'Buska formulario',
-  'Het formulier wordt opgehaald…': 'E formulario ta wòrdu hañá…',
-  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
-      'E link akí no ta kompleto. Pidi e organisador pa e link kompleto di invitashon.',
-  'De link moet met https beginnen.': 'E link mester kuminsá ku https.',
-  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
-      'Esaki no ta un link di invitashon ku OciDeck konosé. Pidi e organisador pa e link kompleto.',
-  'OciDeck maakt geen verbinding met dit adres.':
-      'OciDeck no ta konektá ku e adrès akí.',
-  'De server stuurde meer dan OciDeck accepteert.':
-      'E server a manda mas ku loke OciDeck ta aseptá.',
-  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
-      'No tin konekshon ku {host}. Kontrolá bo konekshon di internet i purba di nobo mas lat.',
-  '{host} is geen inzendserver die OciDeck begrijpt.':
-      '{host} no ta un server di entrega ku OciDeck ta komprendé.',
-  'Deze server is te oud voor deze versie van OciDeck.':
-      'E server akí ta muchu bieu pa e vershon akí di OciDeck.',
-  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
-      'E server akí ta di un vershon mas nobo. Aktualisá OciDeck.',
-  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
-      'E formulario akí no ta eksistí mas riba e server. Pidi e organisador pa un invitashon nobo.',
-  'De server is druk. Probeer het later opnieuw.':
-      'E server ta okupá. Purba di nobo mas lat.',
-  'De server weigerde het verzoek.': 'E server a rechasá e petishon.',
-  'De server stuurde een formulier dat OciDeck niet kan lezen.':
-      'E server a manda un formulario ku OciDeck no por lesa.',
-  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
-      'E formulario no ta pertenesé na e server di e invitashon. Pidi e organisador pa un invitashon nobo.',
-  'Formulier van {naam}': 'Formulario di {naam}',
-  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
-      'E formulario akí ta sera pa entrega nobo. Tuma kontakto ku e organisador.',
-  'Server: {host}': 'Server: {host}',
-  'Formulier invullen': 'Yena e formulario',
-  'Onbekende taal': 'Idioma deskonosí',
-  'Formulier geopend.': 'Formulario habrí.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'E redaktornan banda di bo ku ta den kada bundel, pa nan tambe por habri e envionan. Bo ta agregá un persona ku su karta di redaktor i bo ta tipa e huella digital di e karta atrás.',

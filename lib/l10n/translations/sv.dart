@@ -1626,47 +1626,6 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
-  'Uitnodiging openen…': 'Öppna inbjudan…',
-  'Uitnodiging openen': 'Öppna inbjudan',
-  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
-      'Klistra in inbjudningslänken du fick av organisatören. Formuläret hämtas sedan från den server som anges i länken.',
-  'Uitnodigingslink': 'Inbjudningslänk',
-  'Het formulier wordt opgehaald bij {host}.': 'Formuläret hämtas från {host}.',
-  'Formulier ophalen': 'Hämta formulär',
-  'Het formulier wordt opgehaald…': 'Formuläret hämtas…',
-  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
-      'Länken är inte komplett. Be organisatören om den fullständiga inbjudningslänken.',
-  'De link moet met https beginnen.': 'Länken måste börja med https.',
-  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
-      'Detta är inte en inbjudningslänk som OciDeck känner till. Be organisatören om den fullständiga länken.',
-  'OciDeck maakt geen verbinding met dit adres.':
-      'OciDeck ansluter inte till den här adressen.',
-  'De server stuurde meer dan OciDeck accepteert.':
-      'Servern skickade mer än OciDeck accepterar.',
-  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Ingen anslutning till {host}. Kontrollera din internetanslutning och försök igen senare.',
-  '{host} is geen inzendserver die OciDeck begrijpt.':
-      '{host} är inte en inlämningsserver som OciDeck förstår.',
-  'Deze server is te oud voor deze versie van OciDeck.':
-      'Den här servern är för gammal för den här versionen av OciDeck.',
-  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
-      'Den här servern är av en nyare version. Uppdatera OciDeck.',
-  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
-      'Det här formuläret finns inte (längre) på servern. Be organisatören om en ny inbjudan.',
-  'De server is druk. Probeer het later opnieuw.':
-      'Servern är upptagen. Försök igen senare.',
-  'De server weigerde het verzoek.': 'Servern avvisade begäran.',
-  'De server stuurde een formulier dat OciDeck niet kan lezen.':
-      'Servern skickade ett formulär som OciDeck inte kan läsa.',
-  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
-      'Formuläret hör inte till servern i inbjudan. Be organisatören om en ny inbjudan.',
-  'Formulier van {naam}': 'Formulär från {naam}',
-  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
-      'Det här formuläret är stängt för nya inlämningar. Kontakta organisatören.',
-  'Server: {host}': 'Server: {host}',
-  'Formulier invullen': 'Fyll i formuläret',
-  'Onbekende taal': 'Okänt språk',
-  'Formulier geopend.': 'Formuläret öppnat.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktörerna förutom du som står i varje bundle, så att de också kan öppna inlämningarna. Du lägger till någon med deras redaktörskort och skriver in kortets fingeravtryck igen.',

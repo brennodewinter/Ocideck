@@ -21,38 +21,18 @@ import '../../utils/atomic_file.dart';
 import 'form_export_support.dart';
 import 'form_text_helpers.dart' show formTextOf;
 
-/// De gepubliceerde formulieren die in deze sessie zijn gezien, per formulier, versie en taal. Het geheugen van de ondersteuning; een nieuwe sessie begint leeg, en dan
+/// De gepubliceerde formulieren die in deze sessie zijn gezien, per formulier en
+/// versie. Het geheugen van de ondersteuning; een nieuwe sessie begint leeg, en dan
 /// vraagt de pagina om het bestand.
 final Map<String, String> _publishedForms = {};
 
 /// De bundel en de vingerafdruk die bij een formulier in deze sessie tot een verzegelde
-/// inzending leidden, per formulier, versie en taal: een tweede inzending vraagt er niet opnieuw om.
+/// inzending leidden, per formulier en versie: een tweede inzending vraagt er niet opnieuw om.
 final Map<String, ({String bundle, String fingerprint})> _sealMemory = {};
 
 /// Waar de pins staan: per formulier en organisator het hoogste volgnummer dat de invuller zag
 /// (FORM_INTAKE.md §5.1). Blijft over sessies bestaan, anders beschermt het tegen niets.
 const String kFormBundlePinsKey = 'form_bundle_pins';
-
-/// Wat het geheugen onder een formulier bewaart: het formulier, de versie en de taal. Elke taal
-/// van een formulier is een eigen sjabloon met een eigen bundel; zonder de taal zou het
-/// Nederlandse sjabloon het Engelse uit het geheugen duwen.
-String _memoryKey(FormSpec spec) =>
-    '${spec.id}@${spec.version}@${spec.lang ?? ''}';
-
-/// Onthoudt een formulier dat via een uitnodiging is binnengekomen: het sjabloon zoals de
-/// organisator het publiceerde, en de bundel met de vingerafdruk uit de uitnodiging, die al zijn
-/// getoetst. De invulpagina hoeft dan niet om het bestand te vragen en niet om de vingerafdruk —
-/// die kwam langs de weg waar hij voor bedoeld is.
-void rememberInvitedForm({
-  required FormSpec spec,
-  required String template,
-  required String bundleText,
-  required String fingerprint,
-}) {
-  final key = _memoryKey(spec);
-  _publishedForms[key] = template;
-  _sealMemory[key] = (bundle: bundleText, fingerprint: fingerprint);
-}
 
 /// Leegt het geheugen van [formExportSupportFor], voor een test.
 @visibleForTesting
@@ -86,6 +66,7 @@ FormExportSupport formExportSupportFor({
   Future<String?> Function(String dialogTitle)? pickBundle,
   FormExportDestination? destination,
 }) {
+  String key(FormSpec spec) => '${spec.id}@${spec.version}';
   return FormExportSupport(
     frontMatter: frontMatter,
     clientVersion: kOciDeckVersion,
@@ -100,24 +81,22 @@ FormExportSupport formExportSupportFor({
       projectPath: projectPath,
       destination: destination ?? pickDocumentExportDestination,
     ),
-    recall: (spec) => _publishedForms[_memoryKey(spec)],
-    remember: (spec, published) =>
-        _publishedForms[_memoryKey(spec)] = published,
+    recall: (spec) => _publishedForms[key(spec)],
+    remember: (spec, published) => _publishedForms[key(spec)] = published,
     // Verzegelen gebruikt de age-bibliotheek, en die draait in de webbouw nog niet (dart2js):
     // daar is er alleen de gewone zip.
     seal: kIsWeb || bundleTitle == null
         ? null
         : FormSealSupport(
             pickBundle: () => (pickBundle ?? _pickBundle)(bundleTitle),
-            readPins: readFormBundlePins,
-            writePins: writeFormBundlePins,
-            recall: (spec) => _sealMemory[_memoryKey(spec)],
-            remember: (spec, bundle, fingerprint) =>
-                _sealMemory[_memoryKey(spec)] = (
-                  bundle: bundle,
-                  fingerprint: fingerprint,
-                ),
-            forget: (spec) => _sealMemory.remove(_memoryKey(spec)),
+            readPins: _readPins,
+            writePins: _writePins,
+            recall: (spec) => _sealMemory[key(spec)],
+            remember: (spec, bundle, fingerprint) => _sealMemory[key(spec)] = (
+              bundle: bundle,
+              fingerprint: fingerprint,
+            ),
+            forget: (spec) => _sealMemory.remove(key(spec)),
           ),
   );
 }
@@ -134,7 +113,7 @@ Future<String?> _pickBundle(String dialogTitle) async {
 
 /// De pins uit de voorkeuren. Wat er niet staat of niet te lezen is, is een lege lijst: de
 /// invuller geloofde nog geen bundel — het is niet te weten of hij er wel een zag.
-Future<FormBundlePins> readFormBundlePins() async {
+Future<FormBundlePins> _readPins() async {
   final prefs = await SharedPreferences.getInstance();
   final text = prefs.getString(kFormBundlePinsKey);
   if (text == null) return const FormBundlePins();
@@ -145,7 +124,7 @@ Future<FormBundlePins> readFormBundlePins() async {
   }
 }
 
-Future<void> writeFormBundlePins(FormBundlePins pins) async {
+Future<void> _writePins(FormBundlePins pins) async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.setString(kFormBundlePinsKey, jsonEncode(pins.toJson()));
 }

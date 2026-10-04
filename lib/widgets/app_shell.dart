@@ -171,7 +171,6 @@ import 'shell/open_failure_message.dart';
 import '../services/import/document_import_service.dart'
     show isImportableDocumentName;
 import 'forms/form_inbox_dialog.dart';
-import 'forms/form_invitation_action.dart';
 import 'shell/document_import_action.dart';
 import 'shell/new_document_action.dart';
 import 'shell/openkat_import_action.dart';

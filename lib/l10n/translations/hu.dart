@@ -1629,48 +1629,6 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
-  'Uitnodiging openen…': 'Meghívó megnyitása…',
-  'Uitnodiging openen': 'Meghívó megnyitása',
-  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
-      'Illeszd be a szervezőtől kapott meghívólinket. Az űrlapot ezután a linkben megadott szerverről tölti le a program.',
-  'Uitnodigingslink': 'Meghívólink',
-  'Het formulier wordt opgehaald bij {host}.':
-      'Az űrlap letöltése innen történik: {host}.',
-  'Formulier ophalen': 'Űrlap letöltése',
-  'Het formulier wordt opgehaald…': 'Az űrlap letöltése folyamatban…',
-  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
-      'Ez a link nem teljes. Kérd a szervezőtől a teljes meghívólinket.',
-  'De link moet met https beginnen.': 'A linknek https-sel kell kezdődnie.',
-  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
-      'Ez nem olyan meghívólink, amelyet az OciDeck ismer. Kérd a szervezőtől a teljes linket.',
-  'OciDeck maakt geen verbinding met dit adres.':
-      'Az OciDeck nem csatlakozik ehhez a címhez.',
-  'De server stuurde meer dan OciDeck accepteert.':
-      'A szerver többet küldött, mint amennyit az OciDeck elfogad.',
-  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Nincs kapcsolat a következővel: {host}. Ellenőrizd az internetkapcsolatot, és próbáld újra később.',
-  '{host} is geen inzendserver die OciDeck begrijpt.':
-      'A(z) {host} nem olyan beküldési szerver, amelyet az OciDeck megért.',
-  'Deze server is te oud voor deze versie van OciDeck.':
-      'Ez a szerver túl régi az OciDeck e verziójához.',
-  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
-      'Ez a szerver újabb verziójú. Frissítsd az OciDecket.',
-  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
-      'Ez az űrlap (már) nem létezik a szerveren. Kérj a szervezőtől új meghívót.',
-  'De server is druk. Probeer het later opnieuw.':
-      'A szerver foglalt. Próbáld újra később.',
-  'De server weigerde het verzoek.': 'A szerver elutasította a kérést.',
-  'De server stuurde een formulier dat OciDeck niet kan lezen.':
-      'A szerver olyan űrlapot küldött, amelyet az OciDeck nem tud elolvasni.',
-  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
-      'Az űrlap nem a meghívóban szereplő szerverhez tartozik. Kérj a szervezőtől új meghívót.',
-  'Formulier van {naam}': '{naam} űrlapja',
-  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
-      'Ez az űrlap le van zárva az új beküldések elől. Vedd fel a kapcsolatot a szervezővel.',
-  'Server: {host}': 'Szerver: {host}',
-  'Formulier invullen': 'Űrlap kitöltése',
-  'Onbekende taal': 'Ismeretlen nyelv',
-  'Formulier geopend.': 'Az űrlap megnyílt.',
   'Team…': 'Csapat…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'A szerkesztők rajtad kívül, akik minden bundle-ben szerepelnek, hogy ők is megnyithassák a beküldéseket. Valakit a szerkesztői kártyájával adsz hozzá, és újra beírod a kártya ujjlenyomatát.',

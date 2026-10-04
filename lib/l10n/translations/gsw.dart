@@ -1630,48 +1630,6 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
-  'Uitnodiging openen…': 'Iiladig ufmache…',
-  'Uitnodiging openen': 'Iiladig ufmache',
-  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
-      'Füeg dr Iiladigslink y, wo du vom Organisator becho hesch. S Formular wird denn bi däm Server abgholt, wo im Link staat.',
-  'Uitnodigingslink': 'Iiladigslink',
-  'Het formulier wordt opgehaald bij {host}.':
-      'S Formular wird bi {host} abgholt.',
-  'Formulier ophalen': 'Formular abhole',
-  'Het formulier wordt opgehaald…': 'S Formular wird abgholt…',
-  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
-      'Dä Link isch nid vollständig. Frag dr Organisator nach em vollständige Iiladigslink.',
-  'De link moet met https beginnen.': 'Dr Link muess mit https afo.',
-  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
-      'Das isch kei Iiladigslink, wo OciDeck kennt. Frag dr Organisator nach em vollständige Link.',
-  'OciDeck maakt geen verbinding met dit adres.':
-      'OciDeck verbindet sich nid mit dere Adrässe.',
-  'De server stuurde meer dan OciDeck accepteert.':
-      'Dr Server het meh gschickt, as OciDeck akzeptiert.',
-  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Kei Verbindig zu {host}. Prüef dini Internetverbindig und probier s speter nomol.',
-  '{host} is geen inzendserver die OciDeck begrijpt.':
-      '{host} isch kei Iisändeserver, wo OciDeck verstoht.',
-  'Deze server is te oud voor deze versie van OciDeck.':
-      'Dä Server isch z alt für die Version vo OciDeck.',
-  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
-      'Dä Server isch vo ere neuere Version. Aktualisier OciDeck.',
-  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
-      'Das Formular git s uf em Server nid (meh). Frag dr Organisator nach ere neue Iiladig.',
-  'De server is druk. Probeer het later opnieuw.':
-      'Dr Server isch beschäftigt. Probier s speter nomol.',
-  'De server weigerde het verzoek.': 'Dr Server het d Aafrag abglehnt.',
-  'De server stuurde een formulier dat OciDeck niet kan lezen.':
-      'Dr Server het es Formular gschickt, wo OciDeck nid cha läse.',
-  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
-      'S Formular ghört nid zum Server us dr Iiladig. Frag dr Organisator nach ere neue Iiladig.',
-  'Formulier van {naam}': 'Formular vo {naam}',
-  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
-      'Das Formular isch für neui Iisändige gschlosse. Mäld di bim Organisator.',
-  'Server: {host}': 'Server: {host}',
-  'Formulier invullen': 'Formular usfülle',
-  'Onbekende taal': 'Unbekannti Sprach',
-  'Formulier geopend.': 'Formular ufgmacht.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'D Redaktore näb dir, wo i jedem Bundle sin, dass au si d Iischickige chönne ufmache. Du fügsch öpper mit synere Redaktorekarte zue und tippsch dr Fingerabdruck vo dr Karte zrügg.',

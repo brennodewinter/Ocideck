@@ -196,7 +196,6 @@ against accessing internal/private network addresses.
 | **Save/Open — Nextcloud/WebDAV** | Your deck files | Your configured server |
 | **Save/Open — S3** | Your deck files (objects) | Your configured endpoint (AWS S3, MinIO, or any S3-compatible service) |
 | **Save/Open — Git** | Your deck files (commits) | Your configured forge (Gitea/Forgejo/GitLab/GitHub) |
-| **Open an invitation** (desktop only) | Two plain requests to the server named in the invitation link: its information, and the form you were invited to (the form's id is in the address). The invitation token and the organiser's fingerprint are in the link's fragment, which is never sent. Nothing about you or your device goes with them | The server in the link — never an internal address |
 | **AI assistant** (off by default) | The specific text/image you request help with | The endpoint you configured |
 | **eLearning sign-in (OciServe)** (off by default, desktop only) | Installation status and, after login, the access token needed for `/me` | Your configured OciServe server |
 | **eLearning identity provider (OciServe)** | OIDC discovery, browser login and token exchange; the host is shown and requires explicit acceptance when it differs from OciServe | The identity-provider host announced by your OciServe server |
