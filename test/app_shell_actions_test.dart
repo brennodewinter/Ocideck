@@ -96,8 +96,9 @@ void main() {
   ) async {
     await pumpShell(tester);
 
-    // The main layout's app bar (slideshow marker + save/toggle actions).
-    expect(appBarIcon(Icons.slideshow_outlined), findsOneWidget);
+    // The main layout's app bar. De slideshow-markering voor de titel is weg:
+    // het las als de afspeelknop ernaast.
+    expect(appBarIcon(Icons.slideshow_outlined), findsNothing);
     expect(appBarIcon(Icons.save_outlined), findsOneWidget);
     expect(find.text('Testrapport'), findsWidgets);
   });
