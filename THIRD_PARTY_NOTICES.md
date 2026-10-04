@@ -84,6 +84,7 @@ same answer `make licenses` and the SBOM give.
 | --- | --- | --- |
 | `flutter`, `flutter_localizations` | The framework and its localisation delegates | BSD-3-Clause (Flutter SDK) |
 | `app_appearance` | Shared product-neutral appearance profiles, Material theme construction and contrast checks from LibreKAT AppFoundation | EUPL-1.2 |
+| `secret_storage` | Shared product-neutral secure-storage contract and fail-closed native keychain adapter from LibreKAT AppFoundation | EUPL-1.2 |
 | `material_ui` | Standalone Material Design widget library (decoupled from core Flutter in 3.47) | BSD-3-Clause |
 | `flutter_riverpod` | Application state | MIT |
 | `file_picker` | Open/save dialogs | MIT |
