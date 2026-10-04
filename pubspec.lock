@@ -31,7 +31,7 @@ packages:
       path: "packages/app_appearance"
       ref: d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82
       resolved-ref: d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82
-      url: "ssh://git@pawprint.vigilis.online:2222/LibreKAT/AppFoundation.git"
+      url: "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
     source: git
     version: "0.1.0"
   archive:
