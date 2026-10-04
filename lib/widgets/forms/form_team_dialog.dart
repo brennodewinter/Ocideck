@@ -147,12 +147,12 @@ class _FormTeamDialogState extends State<FormTeamDialog> {
   String _say(AppLocalizations l10n, FormTeamEdit outcome) => switch (outcome) {
     FormEditorAdded(:final card) => _name(
       l10n,
-      '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.',
+      '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.',
       card.name,
     ),
     FormEditorRemoved(:final card) => _name(
       l10n,
-      '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.',
+      '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.',
       card.name,
     ),
     FormTeamNeedsKey(:final problem) => switch (problem) {
@@ -401,7 +401,7 @@ class _RemoveDialog extends StatelessWidget {
       content: Text(
         l10n
             .d(
-              'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.',
+              'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.',
             )
             .replaceAll('{naam}', card.name),
       ),

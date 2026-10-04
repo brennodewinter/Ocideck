@@ -6,7 +6,7 @@
   "template": "<!-- form id=kookboek version=2 rules=1 -->\n# Inzending\n\n<!-- field id=naam type=text required -->\n**Naam**\n<!-- answer -->\n<!-- /field id=naam -->\n\n<!-- field id=akkoord type=consent required -->\nIk ga akkoord met publicatie.\n<!-- answer -->\n- [ ]\n<!-- /field id=akkoord -->\n",
   "fingerprint": "mw3am46w5weex4a4fqrc3avnub2a6knmgnk5nkjfzaprp5d2e64a",
   "public_key": "pg2vmlup4zkpsqdywejorkmlu6ib7bj242k35v7a4oiqxlieszsa",
-  "canonical": "{\"bundle_seq\":3,\"expires\":\"2027-03-01\",\"fid\":\"abcdefghijklmnopqrstuvwxyz\",\"form\":{\"id\":\"kookboek\",\"rules\":1,\"version\":2},\"organisers\":[{\"age\":\"age1xmwwc06ly3ee5rytxm9mflaz2u56jjj36s0mypdrwsvlul66mv4q47ryef\",\"kid\":\"t2opkkyz3ksutmups5g5e764pi\",\"name\":\"Redactie\",\"sign\":\"pg2vmlup4zkpsqdywejorkmlu6ib7bj242k35v7a4oiqxlieszsa\"}],\"policy\":{\"api_host\":\"intake.example.org\",\"closes\":\"2027-01-31\"},\"template_sha256\":\"c21f6408082ae6bde1f39af3085390c65f6a428cb33de0e25b9f0260e25e180d\",\"v\":1}",
+  "canonical": "{\"bundle_seq\":3,\"expires\":\"2027-03-01\",\"fid\":\"abcdefghijklmnopqrstuvwxyz\",\"form\":{\"id\":\"kookboek\",\"rules\":1,\"version\":2},\"organisers\":[{\"age\":\"age1xmwwc06ly3ee5rytxm9mflaz2u56jjj36s0mypdrwsvlul66mv4q47ryef\",\"kid\":\"t2opkkyz3ksutmups5g5e764pi\",\"name\":\"Redactie\",\"sign\":\"pg2vmlup4zkpsqdywejorkmlu6ib7bj242k35v7a4oiqxlieszsa\"}],\"policy\":{\"closes\":\"2027-01-31\"},\"template_sha256\":\"c21f6408082ae6bde1f39af3085390c65f6a428cb33de0e25b9f0260e25e180d\",\"v\":1}",
   "bundle": {
     "bundle_seq": 3,
     "expires": "2027-03-01",
@@ -25,12 +25,11 @@
       }
     ],
     "policy": {
-      "api_host": "intake.example.org",
       "closes": "2027-01-31"
     },
     "template_sha256": "c21f6408082ae6bde1f39af3085390c65f6a428cb33de0e25b9f0260e25e180d",
     "v": 1,
-    "sig": "3tvabsc6bkgvq3mp4apexj3xobur6e57f3uo5ulq22xzbvuppxs7g4zkldfge6op5wm3pi6gfjkxnwctcumk2zpyytsjt3dfaaswibq"
+    "sig": "x2ro65hjjahb3756tw32wiwbg7ffy6cw4f6nlhask6pnkr4qekvj55ssxjzqmqmygdapq3tqi7mdsprhn6tzjxqyg6z2ndhypp5soaq"
   },
   "cases": [
     {
@@ -47,18 +46,6 @@
       "name": "expired the day after",
       "now": "2027-03-02",
       "expect": "expired"
-    },
-    {
-      "name": "the host it names",
-      "now": "2026-11-03",
-      "host": "intake.example.org",
-      "expect": "verified"
-    },
-    {
-      "name": "another host",
-      "now": "2026-11-03",
-      "host": "evil.example.org",
-      "expect": "hostMismatch"
     },
     {
       "name": "a newer bundle was seen",

@@ -1639,6 +1639,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Utwórz pakiet zaproszenia offline…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      'Dodano: {naam}. Utwórz pakiet zaproszenia ponownie, żeby uwzględnić tę osobę.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      'Usunięto: {naam}. Utwórz pakiet zaproszenia ponownie, żeby wyłączyć tę osobę.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Usunąć {naam} z zespołu? Pakiety zaproszenia, które już utworzyłeś, zostają, jakie są, dopóki nie utworzysz nowego; to, co już zapieczętowano dla {naam}, pozostaje dla tej osoby czytelne.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Nie ma jeszcze klucza redakcji. Utwórz go w Klucz redakcji…, zanim utworzysz pakiet zaproszenia.',
   'Team…': 'Zespół…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktorzy poza Tobą, którzy są w każdym bundle, żeby oni też mogli otwierać zgłoszenia. Dodajesz kogoś jego kartą redaktora i ponownie wpisujesz odcisk palca tej karty.',
@@ -1648,12 +1657,6 @@ const _dutchSourceAddPl = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Karta: {naam}. Wpisz odcisk palca tej karty, który {naam} przekazał Ci inną drogą, na przykład przez telefon.',
   'Redacteur verwijderen': 'Usuń redaktora',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Usunąć {naam} z zespołu? Bundle, które już opublikowałeś, zostają, jakie są, dopóki nie opublikujesz ponownie; to, co już zapieczętowano dla {naam}, pozostaje dla tej osoby czytelne.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      'Dodano: {naam}. Opublikuj bundle ponownie, żeby uwzględnić tę osobę.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      'Usunięto: {naam}. Opublikuj bundle ponownie, żeby wyłączyć tę osobę.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Najpierw utwórz własny klucz redakcji w Klucz redakcji….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1722,7 +1725,6 @@ const _dutchSourceAddPl = <String, String>{
       'Nie udało się zapieczętować zgłoszenia.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Zapisano zapieczętowane jako {naam}, otworzy je tylko: {organisatoren}.',
-  'Bundel publiceren…': 'Opublikuj bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle to to, czemu wierzy osoba wypełniająca w sprawie waszej redakcji: do którego klucza zapieczętować i do jakiego tekstu należy. Zapisuje się obok formularza.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1738,8 +1740,6 @@ const _dutchSourceAddPl = <String, String>{
       'Przekaż odcisk palca osobie wypełniającej inną drogą niż plik bundle, na przykład w zaproszeniu. Kto ma tylko plik bundle, nie może sprawdzić, od kogo pochodzi.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Ta platforma nie ma pęku kluczy na klucz redakcji; bundle nie można tu podpisać.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Nie ma jeszcze klucza redakcji. Utwórz go w Klucz redakcji…, zanim opublikujesz bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Pęku kluczy nie da się odczytać. Niczego nie podpisano.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

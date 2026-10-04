@@ -666,6 +666,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Offline uitnodigingspakket maken…':
+      'Krea un pakete di invitashon sin konekshon…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} a wòrdu agregá. Krea e pakete di invitashon di nobo pa inkluí {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} a wòrdu kitá. Krea e pakete di invitashon di nobo pa kita {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Kita {naam} for di e team? Paketenan di invitashon ku bo a krea kaba ta keda manera nan ta te ora bo krea un nobo; loke kaba a wòrdu sellá pa {naam} ta keda lesibel pa e persona ei.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Ainda no tin yave di redakshon. Krea un bou di Yave di redakshon… promé ku bo krea un pakete di invitashon.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'E redaktornan banda di bo ku ta den kada bundel, pa nan tambe por habri e envionan. Bo ta agregá un persona ku su karta di redaktor i bo ta tipa e huella digital di e karta atrás.',
@@ -675,12 +685,6 @@ const _dutchSourceAddPap = {
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Karta di {naam}. Tipa e huella digital di e karta akí ku {naam} a duna bo via un otro kaminda, por ehèmpel pa telefòn.',
   'Redacteur verwijderen': 'Kita redaktor',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Kita {naam} for di e team? Bundelnan ku bo a publiká kaba ta keda manera nan ta te ora bo publiká di nobo; loke kaba a wòrdu sellá pa {naam} ta keda lesibel pa e persona ei.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} a wòrdu agregá. Publiká e bundel di nobo pa inkluí {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} a wòrdu kitá. Publiká e bundel di nobo pa kita {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Krea promé bo propio yave di redakshon bou di Yave di redakshon….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -748,7 +752,6 @@ const _dutchSourceAddPap = {
   'De inzending kon niet worden verzegeld.': 'No por a sella e envio.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Warda sellá komo {naam}, solamente por wòrdu habrí pa: {organisatoren}.',
-  'Bundel publiceren…': 'Publiká bundel…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'E bundel ta loke e invulador di bo redakshon ta kere: na ki yave e ta sella i ki teksto e ta pertenesé na dje. E ta wòrdu warda banda di e formulario.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -764,8 +767,6 @@ const _dutchSourceAddPap = {
       'Duna e invulador e huella digital via un otro kaminda ku e archivo di e bundel, por ehèmpel den e invitashon. Ken tin solamente e archivo di e bundel no por verifiká di ken e ta bin.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'E plataforma akí no tin yavero pa e yave di redakshon; no por firma un bundel aki.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Ainda no tin yave di redakshon. Krea un bou di Yave di redakshon… promé ku bo publiká un bundel.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'E yavero no por wòrdu lesá. Nada no a wòrdu firmá.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

@@ -667,6 +667,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Offline uitnodigingspakket maken…': 'Offline-Einladungspaket erstellen…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} wurde hinzugefügt. Erstelle das Einladungspaket erneut, um {naam} aufzunehmen.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} wurde entfernt. Erstelle das Einladungspaket erneut, um {naam} herauszunehmen.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} aus dem Team entfernen? Einladungspakete, die du schon erstellt hast, bleiben, wie sie sind, bis du ein neues erstellst; was schon für {naam} verschlüsselt wurde, bleibt für diese Person lesbar.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Es gibt noch keinen Redaktionsschlüssel. Erstelle unter Redaktionsschlüssel… einen, bevor du ein Einladungspaket erstellst.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Die Redakteure neben dir, die in jedem Bundle stehen, damit auch sie die Einsendungen öffnen können. Du fügst jemanden mit seiner Redakteurskarte hinzu und tippst den Fingerabdruck dieser Karte zurück.',
@@ -676,12 +685,6 @@ const _dutchSourceAddDe = {
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Karte von {naam}. Tippe den Fingerabdruck dieser Karte ein, den {naam} dir auf einem anderen Weg gegeben hat, zum Beispiel am Telefon.',
   'Redacteur verwijderen': 'Redakteur entfernen',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      '{naam} aus dem Team entfernen? Bundles, die du schon veröffentlicht hast, bleiben, wie sie sind, bis du erneut veröffentlichst; was schon für {naam} verschlüsselt wurde, bleibt für diese Person lesbar.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} wurde hinzugefügt. Veröffentliche das Bundle erneut, um {naam} aufzunehmen.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} wurde entfernt. Veröffentliche das Bundle erneut, um {naam} herauszunehmen.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Erstelle zuerst deinen eigenen Redaktionsschlüssel unter Redaktionsschlüssel….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -751,7 +754,6 @@ const _dutchSourceAddDe = {
       'Die Einsendung konnte nicht verschlüsselt werden.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Verschlüsselt gespeichert als {naam}, nur zu öffnen von: {organisatoren}.',
-  'Bundel publiceren…': 'Bundle veröffentlichen…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Das Bundle ist das, was ein Einsender über eure Redaktion glaubt: an welchen Schlüssel er verschlüsselt und zu welchem Text es gehört. Es wird neben dem Formular gespeichert.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -767,8 +769,6 @@ const _dutchSourceAddDe = {
       'Gib dem Einsender den Fingerabdruck auf einem anderen Weg als die Bundle-Datei, zum Beispiel in der Einladung. Wer nur die Bundle-Datei hat, kann nicht prüfen, von wem sie kommt.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Diese Plattform hat keinen Schlüsselbund für den Redaktionsschlüssel; ein Bundle kann hier nicht signiert werden.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Es gibt noch keinen Redaktionsschlüssel. Erstelle unter Redaktionsschlüssel… einen, bevor du ein Bundle veröffentlichst.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Der Schlüsselbund lässt sich nicht lesen. Es wurde nichts signiert.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

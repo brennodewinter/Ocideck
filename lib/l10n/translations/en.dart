@@ -827,6 +827,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Offline uitnodigingspakket maken…': 'Create offline invitation package…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} has been added. Make the invitation package again to include {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} has been removed. Make the invitation package again to take {naam} out.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Remove {naam} from the team? Invitation packages you have already made stay as they are until you make a new one; what was already sealed for {naam} stays readable to that person.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'There is no editorial key yet. Create one under Editorial key… before you make an invitation package.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'The editors besides you who are in every bundle, so they can open the submissions too. You add someone with their editor card and type back the fingerprint of that card.',
@@ -836,12 +845,6 @@ const _dutchSourceAddEn = {
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Card of {naam}. Type the fingerprint of this card that {naam} gave you by another route, for example over the phone.',
   'Redacteur verwijderen': 'Remove editor',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Remove {naam} from the team? Bundles you have already published stay as they are until you publish again; what was already sealed for {naam} stays readable to that person.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} has been added. Publish the bundle again to include {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} has been removed. Publish the bundle again to take {naam} out.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'First create your own editorial key under Editorial key….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -910,7 +913,6 @@ const _dutchSourceAddEn = {
       'The submission could not be sealed.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Saved sealed as {naam}, can only be opened by: {organisatoren}.',
-  'Bundel publiceren…': 'Publish bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'The bundle is what a respondent believes about your editorial team: which key to seal to and which text it belongs to. It is saved next to the form.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -926,8 +928,6 @@ const _dutchSourceAddEn = {
       'Give the fingerprint to the respondent by another route than the bundle file, for example in the invitation. Whoever has only the bundle file cannot tell who it comes from.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'This platform has no keychain for the editorial key; a bundle cannot be signed here.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'There is no editorial key yet. Create one under Editorial key… before you publish a bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'The keychain cannot be read. Nothing was signed.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

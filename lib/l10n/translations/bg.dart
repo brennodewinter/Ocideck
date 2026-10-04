@@ -1647,6 +1647,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Създаване на офлайн пакет за покана…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} е добавен. Направете пакета за покана отново, за да включите {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} е премахнат. Направете пакета за покана отново, за да изключите {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Да се премахне ли {naam} от екипа? Пакетите за покана, които вече сте направили, остават каквито са, докато не направите нов; каквото вече е запечатано за {naam}, остава четимо за този човек.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Все още няма ключ на редакцията. Създайте такъв в Ключ на редакцията…, преди да направите пакет за покана.',
   'Team…': 'Екип…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Редакторите освен вас, които са във всеки комплект, за да могат и те да отварят изпращанията. Добавяте някого с неговата карта на редактора и въвеждате отново отпечатъка на тази карта.',
@@ -1656,12 +1665,6 @@ const _dutchSourceAddBg = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Карта на {naam}. Въведете отпечатъка на тази карта, който {naam} ви даде по друг път, например по телефона.',
   'Redacteur verwijderen': 'Премахване на редактор',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Да се премахне ли {naam} от екипа? Комплектите, които вече сте публикували, остават каквито са, докато не публикувате отново; каквото вече е запечатано за {naam}, остава четимо за този човек.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} е добавен. Публикувайте комплекта отново, за да включите {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} е премахнат. Публикувайте комплекта отново, за да изключите {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Първо създайте собствен ключ на редакцията в Ключ на редакцията….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1730,7 +1733,6 @@ const _dutchSourceAddBg = <String, String>{
       'Изпращането не можа да бъде запечатано.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Запазено запечатано като {naam}, може да се отвори само от: {organisatoren}.',
-  'Bundel publiceren…': 'Публикуване на комплект…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Комплектът е това, на което попълващият вярва за вашата редакция: за кой ключ запечатва и към кой текст принадлежи. Съхранява се до формуляра.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1746,8 +1748,6 @@ const _dutchSourceAddBg = <String, String>{
       'Дайте отпечатъка на попълващия по друг път, а не с файла на комплекта, например в поканата. Който има само файла на комплекта, не може да провери от кого е.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Тази платформа няма връзка с ключове за ключа на редакцията; комплект не може да се подпише тук.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Все още няма ключ на редакцията. Създайте такъв в Ключ на редакцията…, преди да публикувате комплект.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Връзката с ключове не може да се прочете. Нищо не е подписано.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

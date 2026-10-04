@@ -1633,6 +1633,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Vytvoriť offline balík pozvánky…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} bol(a) pridaný(á). Vytvorte balík pozvánky znova, aby zahŕňal {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} bol(a) odstránený(á). Vytvorte balík pozvánky znova, aby {naam} vynechal.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Odstrániť {naam} z tímu? Balíky pozvánky, ktoré ste už vytvorili, zostanú, aké sú, kým nevytvoríte nový; čo už bolo zapečatené pre {naam}, zostáva pre túto osobu čitateľné.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Kľúč redakcie zatiaľ neexistuje. Vytvorte ho v Kľúč redakcie…, skôr než vytvoríte balík pozvánky.',
   'Team…': 'Tím…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktori okrem vás, ktorí sú v každom bundle, aby aj oni mohli otvárať odoslania. Niekoho pridáte jeho kartou redaktora a znova zadáte odtlačok tejto karty.',
@@ -1642,12 +1651,6 @@ const _dutchSourceAddSk = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Karta: {naam}. Zadajte odtlačok tejto karty, ktorý vám {naam} odovzdal inou cestou, napríklad telefonicky.',
   'Redacteur verwijderen': 'Odstrániť redaktora',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Odstrániť {naam} z tímu? Bundle, ktoré ste už zverejnili, zostanú, aké sú, kým nezverejníte znova; čo už bolo zapečatené pre {naam}, zostáva pre túto osobu čitateľné.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} bol(a) pridaný(á). Zverejnite bundle znova, aby zahŕňal {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} bol(a) odstránený(á). Zverejnite bundle znova, aby {naam} vynechal.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Najprv vytvorte vlastný kľúč redakcie v Kľúč redakcie….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1716,7 +1719,6 @@ const _dutchSourceAddSk = <String, String>{
       'Prihlášku sa nepodarilo zapečatiť.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Uložené zapečatené ako {naam}, otvoriť ho môže iba: {organisatoren}.',
-  'Bundel publiceren…': 'Zverejniť bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle je to, čomu ten, kto vypĺňa, verí o vašej redakcii: ku ktorému kľúču pečatiť a ku ktorému textu patrí. Ukladá sa vedľa formulára.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1732,8 +1734,6 @@ const _dutchSourceAddSk = <String, String>{
       'Odovzdajte vypĺňajúcemu odtlačok inou cestou než súborom bundle, napríklad v pozvánke. Kto má len súbor bundle, nemôže overiť, od koho pochádza.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Táto platforma nemá kľúčenku pre kľúč redakcie; bundle tu nemožno podpísať.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Kľúč redakcie zatiaľ neexistuje. Vytvorte ho v Kľúč redakcie…, skôr než bundle zverejníte.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Kľúčenku nemožno prečítať. Nič sa nepodpísalo.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

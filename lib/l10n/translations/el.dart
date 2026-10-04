@@ -1652,6 +1652,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Offline uitnodigingspakket maken…':
+      'Δημιουργία πακέτου πρόσκλησης εκτός σύνδεσης…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      'Ο/Η {naam} προστέθηκε. Δημιουργήστε ξανά το πακέτο πρόσκλησης για να συμπεριληφθεί ο/η {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      'Ο/Η {naam} αφαιρέθηκε. Δημιουργήστε ξανά το πακέτο πρόσκλησης για να αφαιρεθεί ο/η {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Αφαίρεση του/της {naam} από την ομάδα; Τα πακέτα πρόσκλησης που έχετε ήδη δημιουργήσει μένουν όπως είναι μέχρι να δημιουργήσετε νέο· ό,τι έχει ήδη σφραγιστεί για τον/την {naam} παραμένει αναγνώσιμο για το άτομο αυτό.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Δεν υπάρχει ακόμη κλειδί συντακτικής ομάδας. Δημιουργήστε ένα στο Κλειδί συντακτικής ομάδας… πριν δημιουργήσετε πακέτο πρόσκλησης.',
   'Team…': 'Ομάδα…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Οι συντάκτες εκτός από εσάς που είναι σε κάθε δέσμη, ώστε να μπορούν κι αυτοί να ανοίγουν τις υποβολές. Προσθέτετε κάποιον με την κάρτα συντάκτη του και πληκτρολογείτε ξανά το δακτυλικό αποτύπωμα της κάρτας.',
@@ -1661,12 +1671,6 @@ const _dutchSourceAddEl = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Κάρτα του/της {naam}. Πληκτρολογήστε το δακτυλικό αποτύπωμα αυτής της κάρτας που σας έδωσε ο/η {naam} με άλλον τρόπο, π.χ. τηλεφωνικά.',
   'Redacteur verwijderen': 'Αφαίρεση συντάκτη',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Αφαίρεση του/της {naam} από την ομάδα; Οι δέσμες που έχετε ήδη δημοσιεύσει μένουν όπως είναι μέχρι να δημοσιεύσετε ξανά· ό,τι έχει ήδη σφραγιστεί για τον/την {naam} παραμένει αναγνώσιμο για το άτομο αυτό.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      'Ο/Η {naam} προστέθηκε. Δημοσιεύστε ξανά τη δέσμη για να συμπεριληφθεί ο/η {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      'Ο/Η {naam} αφαιρέθηκε. Δημοσιεύστε ξανά τη δέσμη για να αφαιρεθεί ο/η {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Δημιουργήστε πρώτα το δικό σας κλειδί συντακτικής ομάδας στο Κλειδί συντακτικής ομάδας….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1735,7 +1739,6 @@ const _dutchSourceAddEl = <String, String>{
       'Η υποβολή δεν μπόρεσε να σφραγιστεί.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Αποθηκεύτηκε σφραγισμένη ως {naam}, ανοίγει μόνο από: {organisatoren}.',
-  'Bundel publiceren…': 'Δημοσίευση δέσμης…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Η δέσμη είναι ό,τι πιστεύει όποιος συμπληρώνει για τη συντακτική σας ομάδα: με ποιο κλειδί σφραγίζει και σε ποιο κείμενο ανήκει. Αποθηκεύεται δίπλα στη φόρμα.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1751,8 +1754,6 @@ const _dutchSourceAddEl = <String, String>{
       'Δώστε το δακτυλικό αποτύπωμα σε όποιον συμπληρώνει με άλλον τρόπο από το αρχείο της δέσμης, π.χ. στην πρόσκληση. Όποιος έχει μόνο το αρχείο της δέσμης δεν μπορεί να ελέγξει από ποιον προέρχεται.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Αυτή η πλατφόρμα δεν έχει κλειδοθήκη για το κλειδί συντακτικής ομάδας· η δέσμη δεν μπορεί να υπογραφεί εδώ.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Δεν υπάρχει ακόμη κλειδί συντακτικής ομάδας. Δημιουργήστε ένα στο Κλειδί συντακτικής ομάδας… πριν δημοσιεύσετε δέσμη.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Η κλειδοθήκη δεν μπορεί να διαβαστεί. Δεν υπογράφηκε τίποτα.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

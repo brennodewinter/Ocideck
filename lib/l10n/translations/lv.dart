@@ -1625,6 +1625,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Izveidot bezsaistes ielūguma paketi…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} ir pievienots. Izveidojiet ielūguma paketi vēlreiz, lai iekļautu {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} ir noņemts. Izveidojiet ielūguma paketi vēlreiz, lai izņemtu {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Noņemt {naam} no komandas? Ielūguma paketes, ko jau esat izveidojis, paliek tādas, kādas ir, līdz izveidojat jaunu; tas, kas jau aizzīmogots {naam}, šai personai paliek lasāms.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Redakcijas atslēgas vēl nav. Izveidojiet to sadaļā Redakcijas atslēga…, pirms izveidojat ielūguma paketi.',
   'Team…': 'Komanda…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktori bez jums, kas ir katrā bundle, lai arī viņi varētu atvērt iesūtījumus. Jūs pievienojat kādu ar viņa redaktora karti un vēlreiz ievadāt šīs kartes pirkstu nospiedumu.',
@@ -1634,12 +1643,6 @@ const _dutchSourceAddLv = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       '{naam} karte. Ievadiet šīs kartes pirkstu nospiedumu, ko {naam} jums iedeva citā ceļā, piemēram, pa tālruni.',
   'Redacteur verwijderen': 'Noņemt redaktoru',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Noņemt {naam} no komandas? Bundle, ko jau esat publicējis, paliek tādi, kādi ir, līdz publicējat vēlreiz; tas, kas jau aizzīmogots {naam}, šai personai paliek lasāms.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} ir pievienots. Publicējiet bundle vēlreiz, lai iekļautu {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} ir noņemts. Publicējiet bundle vēlreiz, lai izņemtu {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Vispirms izveidojiet savu redakcijas atslēgu sadaļā Redakcijas atslēga….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1707,7 +1710,6 @@ const _dutchSourceAddLv = <String, String>{
   'De inzending kon niet worden verzegeld.': 'Iesūtījumu neizdevās aizzīmogot.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Saglabāts aizzīmogots kā {naam}, atvērt var tikai: {organisatoren}.',
-  'Bundel publiceren…': 'Publicēt bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle ir tas, kam aizpildītājs tic par jūsu redakciju: kādai atslēgai aizzīmogot un pie kura teksta tas pieder. To saglabā blakus veidlapai.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1723,8 +1725,6 @@ const _dutchSourceAddLv = <String, String>{
       'Dodiet aizpildītājam pirkstu nospiedumu citā ceļā nekā bundle failu, piemēram, uzaicinājumā. Kam ir tikai bundle fails, tas nevar pārbaudīt, no kā tas nāk.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Šai platformai nav atslēgu saišķa redakcijas atslēgai; bundle šeit nevar parakstīt.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Redakcijas atslēgas vēl nav. Izveidojiet to sadaļā Redakcijas atslēga…, pirms publicējat bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Atslēgu saišķi nevar nolasīt. Nekas netika parakstīts.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

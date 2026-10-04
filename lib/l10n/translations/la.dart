@@ -1642,6 +1642,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Offline uitnodigingspakket maken…':
+      'Fasciculum invitationis sine nexu creare…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} additus est. Fasciculum invitationis iterum crea ut {naam} includatur.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} remotus est. Fasciculum invitationis iterum crea ut {naam} eximatur.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} ex manu removere? Fasciculi invitationis iam creati manent ut sunt donec novum crees; quod iam pro {naam} obsignatum est, illi legibile manet.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Nondum est clavis redactionis. Unam sub Clavis redactionis… crea antequam fasciculum invitationis crees.',
   'Team…': 'Manus…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redactores praeter te qui in omni fasce sunt, ut et ipsi missa aperire possint. Aliquem cum charta redactoris addis et vestigium digitale illius chartae rursus scribis.',
@@ -1651,12 +1661,6 @@ const _dutchSourceAddLa = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Charta {naam}. Vestigium digitale huius chartae quod {naam} tibi alia via dedit scribe, exempli gratia telephono.',
   'Redacteur verwijderen': 'Redactorem removere',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      '{naam} ex manu removere? Fasces iam publicati manent ut sunt donec iterum publices; quod iam pro {naam} obsignatum est, illi legibile manet.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} additus est. Fascem iterum publica ut {naam} includatur.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} remotus est. Fascem iterum publica ut {naam} eximatur.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Primum clavem redactionis tuam sub Clavis redactionis… crea.',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1724,7 +1728,6 @@ const _dutchSourceAddLa = <String, String>{
   'De inzending kon niet worden verzegeld.': 'Missum obsignari non potuit.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Obsignatum servatum est ut {naam}, solus aperire potest: {organisatoren}.',
-  'Bundel publiceren…': 'Fascem publicare…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Fascis est quod is qui implet de redactione vestra credit: ad quam clavem obsignet et ad quem textum pertineat. Iuxta formam servatur.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1740,8 +1743,6 @@ const _dutchSourceAddLa = <String, String>{
       'Vestigium digitale ei qui implet alia via da quam per fasciculum fascis, exempli gratia in invitatione. Qui solum fasciculum fascis habet, unde veniat explorare non potest.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Haec platea circulum clavium pro clave redactionis non habet; fascis hic subscribi non potest.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Nondum est clavis redactionis. Unam sub Clavis redactionis… crea antequam fascem publices.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Circulus clavium legi non potest. Nihil subscriptum est.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

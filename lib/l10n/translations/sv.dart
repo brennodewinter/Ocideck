@@ -1626,6 +1626,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Skapa offline-inbjudningspaket…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} har lagts till. Skapa inbjudningspaketet igen för att ta med {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} har tagits bort. Skapa inbjudningspaketet igen för att ta bort {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Ta bort {naam} från teamet? Inbjudningspaket du redan har skapat förblir som de är tills du skapar ett nytt; det som redan förseglats för {naam} förblir läsbart för den personen.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Det finns ännu ingen redaktionsnyckel. Skapa en under Redaktionsnyckel… innan du skapar ett inbjudningspaket.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktörerna förutom du som står i varje bundle, så att de också kan öppna inlämningarna. Du lägger till någon med deras redaktörskort och skriver in kortets fingeravtryck igen.',
@@ -1635,12 +1644,6 @@ const _dutchSourceAddSv = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Kort från {naam}. Skriv in fingeravtrycket för det här kortet som {naam} gav dig på ett annat sätt, till exempel i telefon.',
   'Redacteur verwijderen': 'Ta bort redaktör',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Ta bort {naam} från teamet? Bundles du redan har publicerat förblir som de är tills du publicerar igen; det som redan förseglats för {naam} förblir läsbart för den personen.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} har lagts till. Publicera bundlen igen för att ta med {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} har tagits bort. Publicera bundlen igen för att ta bort {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Skapa först din egen redaktionsnyckel under Redaktionsnyckel….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1708,7 +1711,6 @@ const _dutchSourceAddSv = <String, String>{
       'Inlämningen kunde inte förseglas.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Sparat förseglat som {naam}, kan bara öppnas av: {organisatoren}.',
-  'Bundel publiceren…': 'Publicera bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundlen är det en inlämnare tror om er redaktion: vilken nyckel den förseglar till och vilken text den hör till. Den sparas bredvid formuläret.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1724,8 +1726,6 @@ const _dutchSourceAddSv = <String, String>{
       'Ge inlämnaren fingeravtrycket på ett annat sätt än bundle-filen, till exempel i inbjudan. Den som bara har bundle-filen kan inte kontrollera vem den kommer från.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Den här plattformen har ingen nyckelring för redaktionsnyckeln; en bundle kan inte signeras här.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Det finns ännu ingen redaktionsnyckel. Skapa en under Redaktionsnyckel… innan du publicerar en bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Nyckelringen går inte att läsa. Inget har signerats.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

@@ -185,7 +185,7 @@ void main() {
     await waitFor(
       tester,
       text(
-        'Tweede redacteur is toegevoegd. Publiceer de bundel opnieuw om Tweede redacteur erin op te nemen.',
+        'Tweede redacteur is toegevoegd. Maak het uitnodigingspakket opnieuw om Tweede redacteur erin op te nemen.',
       ),
     );
     expect(await teamNames(tester), ['Tweede redacteur']);
@@ -474,7 +474,7 @@ void main() {
       expect(text('Redacteur verwijderen'), findsOneWidget);
       expect(
         containing(
-          'Verwijder A uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn',
+          'Verwijder A uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn',
         ),
         findsOneWidget,
       );
@@ -489,7 +489,7 @@ void main() {
       await waitFor(
         tester,
         text(
-          'A is verwijderd. Publiceer de bundel opnieuw om A eruit te halen.',
+          'A is verwijderd. Maak het uitnodigingspakket opnieuw om A eruit te halen.',
         ),
       );
       expect(await teamNames(tester), ['B']);

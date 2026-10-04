@@ -1634,6 +1634,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Sukurti neprisijungus kvietimo paketą…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} pridėtas. Sukurkite kvietimo paketą iš naujo, kad {naam} būtų įtrauktas.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} pašalintas. Sukurkite kvietimo paketą iš naujo, kad {naam} būtų išimtas.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Pašalinti {naam} iš komandos? Jau sukurti kvietimo paketai lieka tokie, kokie yra, kol sukursite naują; tai, kas jau užplombuota {naam}, šiam asmeniui lieka skaitoma.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Redakcijos rakto dar nėra. Sukurkite jį skiltyje Redakcijos raktas…, prieš kurdami kvietimo paketą.',
   'Team…': 'Komanda…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktoriai, be jūsų, kurie yra kiekviename bundle, kad ir jie galėtų atidaryti pateikimus. Jūs pridedate ką nors su jo redaktoriaus kortele ir dar kartą įvedate tos kortelės kontrolinį kodą.',
@@ -1643,12 +1652,6 @@ const _dutchSourceAddLt = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       '{naam} kortelė. Įveskite šios kortelės kontrolinį kodą, kurį {naam} jums davė kitu keliu, pavyzdžiui, telefonu.',
   'Redacteur verwijderen': 'Pašalinti redaktorių',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Pašalinti {naam} iš komandos? Jau paskelbti bundle lieka tokie, kokie yra, kol paskelbsite iš naujo; tai, kas jau užplombuota {naam}, šiam asmeniui lieka skaitoma.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} pridėtas. Paskelbkite bundle iš naujo, kad {naam} būtų įtrauktas.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} pašalintas. Paskelbkite bundle iš naujo, kad {naam} būtų išimtas.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Pirmiausia sukurkite savo redakcijos raktą skiltyje Redakcijos raktas….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1716,7 +1719,6 @@ const _dutchSourceAddLt = <String, String>{
   'De inzending kon niet worden verzegeld.': 'Pateikimo nepavyko užplombuoti.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Įrašyta užplombuota kaip {naam}, gali atidaryti tik: {organisatoren}.',
-  'Bundel publiceren…': 'Paskelbti bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle yra tai, kuo pildytojas tiki apie jūsų redakciją: kuriam raktui užplombuoti ir kuriam tekstui jis priklauso. Jis išsaugomas šalia formos.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1732,8 +1734,6 @@ const _dutchSourceAddLt = <String, String>{
       'Perduokite kontrolinį kodą pildytojui kitu keliu nei bundle failą, pavyzdžiui, kvietime. Kas turi tik bundle failą, negali patikrinti, iš ko jis.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Šioje platformoje nėra raktų pakabuko redakcijos raktui; bundle čia pasirašyti negalima.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Redakcijos rakto dar nėra. Sukurkite jį skiltyje Redakcijos raktas…, prieš skelbdami bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Raktų pakabuko nepavyksta perskaityti. Nieko nepasirašyta.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

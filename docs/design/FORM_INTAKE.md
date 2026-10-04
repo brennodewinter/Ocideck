@@ -783,9 +783,9 @@ A template `.md` contains **no keys**, so on its own it can never be sealed — 
 loose file carries nothing to check authenticity against. The **bundle** fixes both:
 a file beside the template (`<template-name>.bundle.json`, the existing sidecar
 naming). A bundle is **never** a route to a server: it names no host and carries
-no server metadata (issue #2261 removes `policy.api_host` from the format —
-bundles made before then were never released and their migration is decided and
-tested there).
+no server metadata (`policy.api_host` is out of the format, issue #2261 —
+bundles made before then were never released, so a bundle that still carries
+the member is refused as malformed rather than migrated).
 
 ```json
 {
@@ -2064,9 +2064,10 @@ The review asked that the cost be written down, not discovered.
   processor that can read. The old phase-4 client work merged to `main` was never
   released and is reverted (#2263).
 - **D11 — The `.zip.age` sealed package stays, as the offline transfer route** —
-  recommended by this design, confirmed under issue #2261: renamed so it cannot be
-  confused with Managed Intake, stripped of server semantics (`api_host` out of the
-  bundle format), with its own keys and trust model (§5).
+  recommended by this design, landed under issue #2261: the entry point is now
+  *Offline uitnodigingspakket maken…* so it cannot be confused with Managed
+  Intake, `api_host` is out of the bundle format (an old bundle that carries it
+  is refused, not migrated), with its own keys and trust model (§5).
 - **D12 — Format decision: keep `.md` + `.zip` (+ `.zip.age`).** The form stays a
   readable Markdown file; a submission stays a documented zip; the sealed offline
   variant adds `.age`. **No new extension and no `.ocideck` reuse**: a `.ocideck`
@@ -2133,7 +2134,7 @@ package sealed for another key, a package changed or cut short, one that is too 
 otherwise unreadable file, and a file that opens but holds no package. The Inbox does not yet record the
 SHA-256 of the sealed file or mark a *replaced* one (§5.6) — a second file for the same `sid` is simply
 *already there*.
-**Built since, in the Inbox:** publishing a bundle (§5.1, §7.6): `publishFormBundle` makes and signs
+**Built since, in the Inbox:** making the offline invitation package (§5.1, §7.6): `makeFormBundle` makes and signs
 the bundle of one published template with the editorial key and stores it beside the template; the
 window shows the fingerprint to give the respondent by another route. The team is the owner alone for
 now, so the publishing rule of §7.6 is met by the **recovery key typed back**; "two organiser keys" as
@@ -2151,7 +2152,7 @@ web build offers no sealed export: `dartage` does not run under dart2js (a `wasm
 Managed Intake is phase 4b/4c.
 **Built since:** the editor card (§5.1): a new editor makes it in *Editorial key…* (their name, the card text
 to copy, the card's fingerprint to read out). The team (§7.6): *Team…* in the Inbox adds an editor from their card
-and the fingerprint typed back, removes one, and `publishFormBundle` lists the owner and the team — with the
+and the fingerprint typed back, removes one, and `makeFormBundle` lists the owner and the team — with the
 two-key rule (recovery key typed back, **or** an editor in the team).
 **Phase 3's file route is built** — and is now the **offline transfer route** (D11). The dossier for the external review is `FORM_INTAKE_REVIEW.md`. The
 **interoperability run with the reference `age`** (§5.6) was done on 2026-10-03 against `age` v1.3.2 and

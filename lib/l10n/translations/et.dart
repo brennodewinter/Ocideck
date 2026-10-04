@@ -1620,6 +1620,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Loo võrguta kutsepakett…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} on lisatud. Loo kutsepakett uuesti, et {naam} kaasata.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} on eemaldatud. Loo kutsepakett uuesti, et {naam} välja jätta.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Kas eemaldada {naam} meeskonnast? Kutsepaketid, mille oled juba loonud, jäävad samaks, kuni uue lood; mis on juba {naam} jaoks pitseeritud, jääb sellele inimesele loetavaks.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Toimetuse võtit ei ole veel. Loo see jaotises Toimetuse võti…, enne kui kutsepaketi lood.',
   'Team…': 'Meeskond…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Toimetajad peale sinu, kes on igas bundle’is, et ka nemad saaksid esitusi avada. Lisad kellegi tema toimetaja kaardiga ja sisestad selle kaardi sõrmejälje uuesti.',
@@ -1629,12 +1638,6 @@ const _dutchSourceAddEt = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       '{naam} kaart. Sisesta selle kaardi sõrmejälg, mille {naam} sulle muud teed andis, näiteks telefonis.',
   'Redacteur verwijderen': 'Eemalda toimetaja',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Kas eemaldada {naam} meeskonnast? Bundle’id, mille oled juba avaldanud, jäävad samaks, kuni avaldad uuesti; mis on juba {naam} jaoks pitseeritud, jääb sellele inimesele loetavaks.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} on lisatud. Avalda bundle uuesti, et {naam} kaasata.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} on eemaldatud. Avalda bundle uuesti, et {naam} välja jätta.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Loo kõigepealt oma toimetuse võti jaotises Toimetuse võti….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1701,7 +1704,6 @@ const _dutchSourceAddEt = <String, String>{
   'De inzending kon niet worden verzegeld.': 'Saadetist ei saanud pitseerida.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Salvestatud pitseeritult nimega {naam}, avada saab ainult: {organisatoren}.',
-  'Bundel publiceren…': 'Avalda bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle on see, mida vormi täitja teie toimetuse kohta usub: millisele võtmele pitseerida ja millise tekstiga see kuulub kokku. See salvestatakse vormi kõrvale.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1717,8 +1719,6 @@ const _dutchSourceAddEt = <String, String>{
       'Anna sõrmejälg täitjale muud teed kui bundle\'i failiga, näiteks kutses. Kellel on ainult bundle\'i fail, see ei saa kontrollida, kellelt see pärineb.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Sellel platvormil ei ole toimetuse võtme jaoks võtmehoidjat; bundle\'it ei saa siin allkirjastada.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Toimetuse võtit ei ole veel. Loo see jaotises Toimetuse võti…, enne kui bundle\'i avaldad.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Võtmehoidjat ei saa lugeda. Midagi ei allkirjastatud.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

@@ -77,14 +77,12 @@ Future<FormBundleResult> verify(
   String? fingerprint,
   String text = template,
   DateTime? at,
-  String? host,
   FormBundlePins pins = const FormBundlePins(),
 }) => verifyFormBundle(
   bundle is FormBundle ? bundle.toJsonText() : bundle as String,
   templateText: text,
   fingerprint: fingerprint ?? alice.fingerprint,
   now: at ?? now,
-  expectedApiHost: host,
   pins: pins,
 );
 
@@ -259,7 +257,6 @@ void main() {
       final json = await jsonOf(
         await make(
           policy: const FormBundlePolicy(
-            apiHost: 'intake.example.org',
             closes: '2027-01-31',
             maxPackageBytes: 62914560,
             retainUnused: '6 maanden na sluiting',
@@ -273,7 +270,6 @@ void main() {
       expect(json['bundle_seq'], 3);
       expect(json['expires'], '2027-03-01');
       expect(json['policy'], {
-        'api_host': 'intake.example.org',
         'closes': '2027-01-31',
         'max_package_bytes': 62914560,
         'retain_unused': '6 maanden na sluiting',
@@ -454,7 +450,6 @@ void main() {
     test('changing any value, anywhere, one at a time, is refused', () async {
       final bundle = await make(
         policy: const FormBundlePolicy(
-          apiHost: 'intake.example.org',
           closes: '2027-01-31',
           maxPackageBytes: 1000000,
           retainUnused: 'een half jaar',
@@ -475,7 +470,7 @@ void main() {
       }
 
       collect(original, []);
-      expect(paths.length, greaterThan(20));
+      expect(paths.length, greaterThanOrEqualTo(20));
       for (final path in paths) {
         final copy = jsonDecode(jsonEncode(original));
         dynamic holder = copy;
@@ -914,79 +909,76 @@ void main() {
       );
     });
 
-    test('a policy: host, closing day, cap, retention', () async {
-      for (final bad in [
-        '',
-        'Intake.Example.Org',
-        'intake_example',
-        '-x.org',
-        'x.org-',
-        'intake.example.org/path',
-        'intake example',
-        'x.org:',
-        'x.org:123456',
-        7,
-      ]) {
-        await structure(
-          'host $bad',
-          with_({
-            'policy': {'api_host': bad},
-          }),
-        );
-      }
-      for (final bad in [
-        '',
-        '2027-02-30',
-        '20270131',
-        '2027-1-31',
-        'morgen',
-        7,
-      ]) {
-        await structure(
-          'closes $bad',
-          with_({
-            'policy': {'closes': bad},
-          }),
-        );
-      }
-      for (final bad in [
-        0,
-        -1,
-        const FormPackageLimits().maxPackageBytes + 1,
-        '100',
-        null,
-      ]) {
-        await structure(
-          'cap $bad',
-          with_({
-            'policy': {'max_package_bytes': bad},
-          }),
-        );
-      }
-      for (final bad in ['', '   ', 'x' * 201, 'new\nline', 7, null]) {
-        await structure(
-          'retain $bad',
-          with_({
-            'policy': {'retain_unused': bad},
-          }),
-        );
-      }
-      for (final ok in [
-        {'api_host': 'intake.example.org'},
-        {'api_host': 'localhost:8080'},
-        {'api_host': 'a'},
-        {'closes': '2028-02-29'},
-        {'max_package_bytes': 1},
-        {'max_package_bytes': const FormPackageLimits().maxPackageBytes},
-        {'retain_unused': 'x' * 200},
-      ]) {
-        expect(
-          await verify(await signed(with_({'policy': ok}), alice)),
-          isA<FormBundleVerified>(),
-          reason: '$ok',
-        );
-      }
-    });
+    test(
+      'a policy: closing day, cap, retention — and nothing server-shaped',
+      () async {
+        // `api_host` belonged to the never-released intake server. There is no
+        // migration: a bundle carrying it is malformed, whatever the value.
+        for (final bad in [
+          'intake.example.org',
+          'localhost:8080',
+          '',
+          7,
+          null,
+        ]) {
+          await structure(
+            'api_host $bad',
+            with_({
+              'policy': {'api_host': bad},
+            }),
+          );
+        }
+        for (final bad in [
+          '',
+          '2027-02-30',
+          '20270131',
+          '2027-1-31',
+          'morgen',
+          7,
+        ]) {
+          await structure(
+            'closes $bad',
+            with_({
+              'policy': {'closes': bad},
+            }),
+          );
+        }
+        for (final bad in [
+          0,
+          -1,
+          const FormPackageLimits().maxPackageBytes + 1,
+          '100',
+          null,
+        ]) {
+          await structure(
+            'cap $bad',
+            with_({
+              'policy': {'max_package_bytes': bad},
+            }),
+          );
+        }
+        for (final bad in ['', '   ', 'x' * 201, 'new\nline', 7, null]) {
+          await structure(
+            'retain $bad',
+            with_({
+              'policy': {'retain_unused': bad},
+            }),
+          );
+        }
+        for (final ok in [
+          {'closes': '2028-02-29'},
+          {'max_package_bytes': 1},
+          {'max_package_bytes': const FormPackageLimits().maxPackageBytes},
+          {'retain_unused': 'x' * 200},
+        ]) {
+          expect(
+            await verify(await signed(with_({'policy': ok}), alice)),
+            isA<FormBundleVerified>(),
+            reason: '$ok',
+          );
+        }
+      },
+    );
 
     test('a sequence and an expiry', () async {
       for (final bad in [0, -1, '3', null]) {
@@ -1191,41 +1183,22 @@ void main() {
     );
   });
 
-  group('the host it was made for', () {
-    test('is the host the client called', () async {
-      final bundle = await make(
-        policy: const FormBundlePolicy(apiHost: 'intake.example.org'),
-      );
-      expect(
-        await verify(bundle, host: 'intake.example.org'),
-        isA<FormBundleVerified>(),
-      );
-      expect(
-        await verify(bundle, host: 'Intake.Example.ORG'),
-        isA<FormBundleVerified>(),
-      );
-      expect(
-        refusedWith(await verify(bundle, host: 'evil.example.org')),
-        FormBundleIssue.hostMismatch,
-      );
-      expect(
-        refusedWith(await verify(bundle, host: 'intake.example.org:8443')),
-        FormBundleIssue.hostMismatch,
-      );
-      expect(
-        await verify(bundle),
-        isA<FormBundleVerified>(),
-        reason: 'no host called, none checked',
-      );
-    });
-
-    test('a bundle without one is not for a server', () async {
-      final bundle = await make();
-      expect(
-        refusedWith(await verify(bundle, host: 'intake.example.org')),
-        FormBundleIssue.hostMismatch,
-      );
-    });
+  group('the offline route, not a server', () {
+    test(
+      'a bundle carrying the retired api_host is refused, not migrated',
+      () async {
+        // Bundles from the unreleased intake server named the host they were
+        // sealed for. That semantic is gone from the format; such a bundle was
+        // never released, so it fails closed as malformed rather than being read.
+        final json = await jsonOf(await make());
+        (json['policy'] as Map<String, Object?>)['api_host'] =
+            'intake.example.org';
+        expect(
+          refusedWith(await verify(await signed(json, alice))),
+          FormBundleIssue.badStructure,
+        );
+      },
+    );
   });
 
   group('never rolled back', () {
@@ -1418,16 +1391,12 @@ void main() {
     );
 
     test(
-      'a fid, dates, caps and hosts that a respondent would refuse are refused here first',
+      'a fid, dates and caps that a respondent would refuse are refused here first',
       () async {
         for (final (label, result) in [
           ('fid', await create(id: 'short')),
           ('expires', await create(expires: 'ooit')),
           ('seq', await create(seq: 0)),
-          (
-            'host',
-            await create(policy: const FormBundlePolicy(apiHost: 'No Good')),
-          ),
           (
             'closes',
             await create(policy: const FormBundlePolicy(closes: '2027-02-30')),
@@ -1464,10 +1433,7 @@ void main() {
                   person('Redactie', aliceAge, alice),
                   person('Bob', bobAge, bob),
                 ],
-                policy: const FormBundlePolicy(
-                  apiHost: 'intake.example.org',
-                  closes: '2027-01-31',
-                ),
+                policy: const FormBundlePolicy(closes: '2027-01-31'),
               )
               as FormBundleCreated;
       final v = await verifyFormBundle(
@@ -1475,7 +1441,6 @@ void main() {
         templateText: template,
         fingerprint: alice.fingerprint,
         now: now,
-        expectedApiHost: 'intake.example.org',
       );
       expect(v, isA<FormBundleVerified>());
       expect(r.text, r.bundle.toJsonText());

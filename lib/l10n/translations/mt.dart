@@ -1645,6 +1645,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Oħloq pakkett ta\' stedina offline…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} ġie miżjud. Erġa\' oħloq il-pakkett ta\' stedina biex jiddaħħal {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} ġie mneħħi. Erġa\' oħloq il-pakkett ta\' stedina biex joħroġ {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Tneħħi lil {naam} mit-tim? Pakketti ta\' stedina li diġà ħloqt jibqgħu kif inhuma sakemm toħloq wieħed ġdid; dak li diġà ġie ssiġillat għal {naam} jibqa\' jinqara minn dak il-persuna.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Għad m\'hemmx ċavetta tar-redazzjoni. Oħloq waħda taħt Ċavetta tar-redazzjoni… qabel toħloq pakkett ta\' stedina.',
   'Team…': 'Tim…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'L-edituri minbarra int li jinsabu f’kull bundle, biex huma wkoll ikunu jistgħu jiftħu s-sottomissjonijiet. Tżid lil xi ħadd bil-karta tal-editur tiegħu u terġa’ tittajpja l-marka tas-swaba’ ta’ dik il-karta.',
@@ -1654,12 +1663,6 @@ const _dutchSourceAddMt = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Karta ta’ {naam}. Ittajpja l-marka tas-swaba’ ta’ din il-karta li {naam} tak b’mod ieħor, pereżempju bit-telefon.',
   'Redacteur verwijderen': 'Neħħi l-editur',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Tneħħi lil {naam} mit-tim? Bundles li diġà ppubblikajt jibqgħu kif inhuma sakemm terġa’ tippubblika; dak li diġà ġie ssiġillat għal {naam} jibqa’ jinqara minn dak il-persuna.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} ġie miżjud. Erġa’ ippubblika l-bundle biex jiddaħħal {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} ġie mneħħi. Erġa’ ippubblika l-bundle biex joħroġ {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'L-ewwel oħloq iċ-ċavetta tar-redazzjoni tiegħek stess taħt Ċavetta tar-redazzjoni….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1728,7 +1731,6 @@ const _dutchSourceAddMt = <String, String>{
       'Is-sottomissjoni ma setgħetx tiġi ssiġillata.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Maħżun issiġillat bħala {naam}, jista’ jinfetaħ biss minn: {organisatoren}.',
-  'Bundel publiceren…': 'Ippubblika bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Il-bundle huwa dak li min jimla l-formola jemmen dwar ir-redazzjoni tagħkom: għal liema ċavetta jissiġilla u lil liema test jappartjeni. Jinħażen ħdejn il-formola.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1744,8 +1746,6 @@ const _dutchSourceAddMt = <String, String>{
       'Agħti l-marka tas-swaba\' lil min jimla l-formola b\'mod ieħor mhux permezz tal-fajl tal-bundle, pereżempju fl-istedina. Min għandu l-fajl tal-bundle biss ma jistax jivverifika minn ħa jiġi.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Din il-pjattaforma m\'għandhiex keychain taċ-ċavetta tar-redazzjoni; bundle ma jistax jiġi ffirmat hawn.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Għad m\'hemmx ċavetta tar-redazzjoni. Oħloq waħda taħt Ċavetta tar-redazzjoni… qabel tippubblika bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Il-keychain ma jistax jinqara. Ma ġie ffirmat xejn.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

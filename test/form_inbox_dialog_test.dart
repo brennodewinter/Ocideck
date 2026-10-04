@@ -665,10 +665,10 @@ void main() {
     });
   });
 
-  group('bundel publiceren', () {
+  group('uitnodigingspakket maken', () {
     OutlinedButton button(WidgetTester tester) => tester.widget<OutlinedButton>(
       find.ancestor(
-        of: text('Bundel publiceren…'),
+        of: text('Offline uitnodigingspakket maken…'),
         matching: find.byType(OutlinedButton),
       ),
     );
@@ -684,7 +684,7 @@ void main() {
       await tester.runAsync(() => FormWorkspace(root).publishForm(kook));
       await open(tester, _Picks(), workspace: root);
       await pumpUntil(tester, () => button(tester).onPressed != null);
-      await tester.tap(text('Bundel publiceren…'));
+      await tester.tap(text('Offline uitnodigingspakket maken…'));
       await tester.pumpAndSettle();
       expect(text('Bundel maken'), findsOneWidget);
       expect(text('kook · v1'), findsWidgets);

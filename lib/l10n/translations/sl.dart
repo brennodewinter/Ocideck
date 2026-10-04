@@ -1627,6 +1627,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Ustvari paket vabila brez povezave…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} je dodan. Znova ustvari paket vabila, da vključiš {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} je odstranjen. Znova ustvari paket vabila, da izključiš {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Odstranim {naam} iz ekipe? Paketi vabila, ki si jih že ustvaril, ostanejo, kakršni so, dokler ne ustvariš novega; kar je že zapečateno za {naam}, ostane za to osebo berljivo.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Ključa uredništva še ni. Ustvari ga v Ključ uredništva…, preden ustvariš paket vabila.',
   'Team…': 'Ekipa…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Uredniki poleg tebe, ki so v vsakem bundlu, da lahko tudi oni odpirajo oddaje. Nekoga dodaš z njegovo kartico urednika in ponovno vpišeš prstni odtis te kartice.',
@@ -1636,12 +1645,6 @@ const _dutchSourceAddSl = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Kartica: {naam}. Vpiši prstni odtis te kartice, ki ti ga je {naam} dal po drugi poti, na primer po telefonu.',
   'Redacteur verwijderen': 'Odstrani urednika',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Odstranim {naam} iz ekipe? Bundli, ki si jih že objavil, ostanejo, kakršni so, dokler ne objaviš znova; kar je že zapečateno za {naam}, ostane za to osebo berljivo.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} je dodan. Znova objavi bundle, da vključiš {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} je odstranjen. Znova objavi bundle, da izključiš {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Najprej ustvari svoj ključ uredništva v Ključ uredništva….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1710,7 +1713,6 @@ const _dutchSourceAddSl = <String, String>{
       'Oddaje ni bilo mogoče zapečatiti.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Shranjeno zapečateno kot {naam}, odpre ga lahko samo: {organisatoren}.',
-  'Bundel publiceren…': 'Objavi bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle je tisto, čemur izpolnjevalec verjame o vašem uredništvu: s katerim ključem zapečati in h kateremu besedilu spada. Shrani se ob obrazcu.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1726,8 +1728,6 @@ const _dutchSourceAddSl = <String, String>{
       'Izpolnjevalcu daj prstni odtis po drugi poti kot z datoteko bundla, na primer v vabilu. Kdor ima samo datoteko bundla, ne more preveriti, od koga prihaja.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Ta platforma nima obeska za ključe za ključ uredništva; bundla tu ni mogoče podpisati.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Ključa uredništva še ni. Ustvari ga v Ključ uredništva…, preden objaviš bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Obeska za ključe ni mogoče prebrati. Nič ni bilo podpisano.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

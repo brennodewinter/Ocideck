@@ -1643,6 +1643,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Creează pachet de invitație offline…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} a fost adăugat. Creează din nou pachetul de invitație ca să îl incluzi pe {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} a fost eliminat. Creează din nou pachetul de invitație ca să îl scoți pe {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Elimini pe {naam} din echipă? Pachetele de invitație pe care le-ai creat deja rămân cum sunt până creezi unul nou; ce a fost deja sigilat pentru {naam} rămâne lizibil pentru acea persoană.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Nu există încă o cheie a redacției. Creează una în Cheia redacției… înainte de a crea un pachet de invitație.',
   'Team…': 'Echipă…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redactorii în afară de tine care sunt în fiecare bundle, ca să poată deschide și ei trimiterile. Adaugi pe cineva cu fișa lui de redactor și tastezi din nou amprenta acelei fișe.',
@@ -1652,12 +1661,6 @@ const _dutchSourceAddRo = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Fișa lui {naam}. Tastează amprenta acestei fișe pe care ți-a dat-o {naam} pe altă cale, de exemplu la telefon.',
   'Redacteur verwijderen': 'Elimină redactorul',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Elimini pe {naam} din echipă? Bundle-urile pe care le-ai publicat deja rămân cum sunt până publici din nou; ce a fost deja sigilat pentru {naam} rămâne lizibil pentru acea persoană.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} a fost adăugat. Publică din nou bundle-ul ca să îl incluzi pe {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} a fost eliminat. Publică din nou bundle-ul ca să îl scoți pe {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Creează mai întâi propria cheie a redacției în Cheia redacției….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1726,7 +1729,6 @@ const _dutchSourceAddRo = <String, String>{
       'Trimiterea nu a putut fi sigilată.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Salvat sigilat ca {naam}, poate fi deschis doar de: {organisatoren}.',
-  'Bundel publiceren…': 'Publică bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle-ul este ceea ce crede cel care completează despre redacția voastră: pentru ce cheie sigilează și cărui text îi aparține. Se salvează lângă formular.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1742,8 +1744,6 @@ const _dutchSourceAddRo = <String, String>{
       'Dă amprenta celui care completează pe altă cale decât fișierul bundle, de exemplu în invitație. Cine are doar fișierul bundle nu poate verifica de la cine provine.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Această platformă nu are un breloc de chei pentru cheia redacției; un bundle nu poate fi semnat aici.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Nu există încă o cheie a redacției. Creează una în Cheia redacției… înainte de a publica un bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Brelocul de chei nu poate fi citit. Nu s-a semnat nimic.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
