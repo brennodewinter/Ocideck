@@ -398,6 +398,9 @@ class AppSettings {
     this.updateChecksEnabled = false,
     this.aiSettings = const AiSettings(),
     this.libreplanSettings = const LibreplanSettings(),
+    // De publieke parameternaam blijft compatibel; het private veld bewaart
+    // het verschil tussen "standaardprofielen" en een bewust lege lijst.
+    // ignore: prefer_initializing_formals
   }) : _appAppearanceProfiles = appAppearanceProfiles;
 
   ThemeProfile get themeProfile {
