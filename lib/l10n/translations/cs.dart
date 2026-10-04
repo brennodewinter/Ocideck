@@ -1628,6 +1628,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Vytvořit offline balíček pozvánky…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} byl(a) přidán(a). Vytvořte balíček pozvánky znovu, aby zahrnul {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} byl(a) odebrán(a). Vytvořte balíček pozvánky znovu, aby {naam} vynechal.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Odebrat {naam} z týmu? Balíčky pozvánky, které jste už vytvořili, zůstanou, jaké jsou, dokud nevytvoříte nový; co už bylo zapečetěno pro {naam}, zůstává pro tuto osobu čitelné.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Klíč redakce zatím neexistuje. Vytvořte ho v Klíč redakce…, než vytvoříte balíček pozvánky.',
   'Team…': 'Tým…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktoři kromě vás, kteří jsou v každém bundle, aby i oni mohli otevírat odeslání. Někoho přidáte jeho kartou redaktora a znovu zadáte otisk této karty.',
@@ -1637,12 +1646,6 @@ const _dutchSourceAddCs = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Karta: {naam}. Zadejte otisk této karty, který vám {naam} předal jinou cestou, například telefonem.',
   'Redacteur verwijderen': 'Odebrat redaktora',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Odebrat {naam} z týmu? Bundle, které jste už zveřejnili, zůstanou, jaké jsou, dokud nezveřejníte znovu; co už bylo zapečetěno pro {naam}, zůstává pro tuto osobu čitelné.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} byl(a) přidán(a). Zveřejněte bundle znovu, aby zahrnul {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} byl(a) odebrán(a). Zveřejněte bundle znovu, aby {naam} vynechal.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Nejprve vytvořte vlastní klíč redakce v Klíč redakce….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1711,7 +1714,6 @@ const _dutchSourceAddCs = <String, String>{
       'Přihlášku se nepodařilo zapečetit.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Uloženo zapečetěné jako {naam}, otevřít ji může jen: {organisatoren}.',
-  'Bundel publiceren…': 'Zveřejnit bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle je to, čemu ten, kdo vyplňuje, věří o vaší redakci: ke kterému klíči pečetit a ke kterému textu patří. Ukládá se vedle formuláře.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1727,8 +1729,6 @@ const _dutchSourceAddCs = <String, String>{
       'Předejte vyplňujícímu otisk jinou cestou než souborem bundle, například v pozvánce. Kdo má jen soubor bundle, nemůže ověřit, od koho pochází.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Tato platforma nemá klíčenku pro klíč redakce; bundle tu nelze podepsat.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Klíč redakce zatím neexistuje. Vytvořte ho v Klíč redakce…, než bundle zveřejníte.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Klíčenku nelze přečíst. Nic nebylo podepsáno.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

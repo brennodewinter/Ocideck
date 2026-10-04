@@ -1629,6 +1629,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Offline meghívócsomag létrehozása…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} hozzáadva. Készítsd újra a meghívócsomagot, hogy {naam} is benne legyen.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} eltávolítva. Készítsd újra a meghívócsomagot, hogy {naam} kikerüljön belőle.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Eltávolítod {naam} nevű tagot a csapatból? A már elkészített meghívócsomagok változatlanok maradnak, amíg újat nem készítesz; ami már le van zárva {naam} számára, az számára olvasható marad.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Még nincs szerkesztőségi kulcs. Hozz létre egyet a Szerkesztőségi kulcs… alatt, mielőtt meghívócsomagot készítesz.',
   'Team…': 'Csapat…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'A szerkesztők rajtad kívül, akik minden bundle-ben szerepelnek, hogy ők is megnyithassák a beküldéseket. Valakit a szerkesztői kártyájával adsz hozzá, és újra beírod a kártya ujjlenyomatát.',
@@ -1638,12 +1647,6 @@ const _dutchSourceAddHu = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       '{naam} kártyája. Írd be a kártya ujjlenyomatát, amelyet {naam} más úton adott neked, például telefonon.',
   'Redacteur verwijderen': 'Szerkesztő eltávolítása',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Eltávolítod {naam} nevű tagot a csapatból? A már közzétett bundle-ök változatlanok maradnak, amíg újra nem teszed közzé őket; ami már le van zárva {naam} számára, az számára olvasható marad.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} hozzáadva. Tedd újra közzé a bundle-t, hogy {naam} is benne legyen.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} eltávolítva. Tedd újra közzé a bundle-t, hogy {naam} kikerüljön belőle.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Először hozd létre a saját szerkesztőségi kulcsodat a Szerkesztőségi kulcs… alatt.',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1712,7 +1715,6 @@ const _dutchSourceAddHu = <String, String>{
       'A beküldést nem sikerült lezárni.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Lezártként mentve {naam} néven, csak ők nyithatják meg: {organisatoren}.',
-  'Bundel publiceren…': 'Bundle közzététele…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'A bundle az, amiben a kitöltő hisz a szerkesztőségetekről: melyik kulcsra zár, és melyik szöveghez tartozik. Az űrlap mellett tárolódik.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1728,8 +1730,6 @@ const _dutchSourceAddHu = <String, String>{
       'Add át az ujjlenyomatot a kitöltőnek más úton, mint a bundle fájlt, például a meghívóban. Aki csak a bundle fájlt birtokolja, nem tudja ellenőrizni, kitől származik.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Ennek a platformnak nincs kulcstartója a szerkesztőségi kulcshoz; bundle-t itt nem lehet aláírni.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Még nincs szerkesztőségi kulcs. Hozz létre egyet a Szerkesztőségi kulcs… alatt, mielőtt bundle-t teszel közzé.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'A kulcstartó nem olvasható. Semmi nem lett aláírva.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

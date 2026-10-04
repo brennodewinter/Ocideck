@@ -36,7 +36,7 @@
    quietly sealed to someone else (`form_editor_card.dart`, `form_team.dart`).
 5. **How the pieces are used by the app** — the respondent's side
    (`form_submission_seal.dart`) and the organiser's side (`form_import.dart`,
-   `form_bundle_publish.dart`, `form_team_actions.dart`): in particular what each refuses and in
+   `form_bundle_make.dart`, `form_team_actions.dart`): in particular what each refuses and in
    which order.
 
 **Out of scope** (and why)
@@ -177,7 +177,9 @@ part of a file.
 ### 4.2 The bundle — `form_bundle.dart`, `form_jcs.dart`, `form_base32.dart`
 
 A bundle is JSON: `{v, fid, form:{id,version,rules}, template_sha256, organisers:[{name, age, sign,
-kid}], policy:{api_host?, closes?, max_package_bytes?, retain_unused?}, bundle_seq, expires, sig}`.
+kid}], policy:{closes?, max_package_bytes?, retain_unused?}, bundle_seq, expires, sig}`. The format
+carries nothing server-shaped: the `api_host` member of the never-released intake server is gone,
+and a bundle that still carries it is refused as malformed, not migrated.
 
 **Signature.** Ed25519, by the **owner**, over the bytes
 `"ocideck-intake-bundle-v1\n" ‖ canonical-JSON(bundle without sig)`. The canonical form is RFC 8785
@@ -205,8 +207,7 @@ failure wins, none has a "continue"):
    and rules the bundle names (`templateMismatch`);
 8. the rules version is one this engine supports (`rulesTooNew`);
 9. `expires` is not before today (UTC) (`expired`);
-10. the `api_host` equals the host the client called, when it called one (`hostMismatch`);
-11. `bundle_seq` is not below the pin for (`fid`, owner fingerprint) (`rollback`).
+10. `bundle_seq` is not below the pin for (`fid`, owner fingerprint) (`rollback`).
 
 *Nothing from the bundle is believed before step 5.* Step 4 reads only the `sign` members of the
 `organisers` list to find the key. `createFormBundle` runs `verifyFormBundle` on what it just made,
@@ -313,7 +314,7 @@ files also run in a browser) and the app code has widget and service tests in `t
 | Subject | Core tests | App tests |
 |---|---|---|
 | sealing | `form_seal_test.dart`, `form_seal_vectors_test.dart`, `form_seal_interop_test.dart` | `form_import_test.dart`, `form_submission_seal_test.dart`, `form_export_seal_test.dart` |
-| bundle | `form_bundle_test.dart`, `form_bundle_vector_test.dart`, `form_jcs_test.dart`, `form_base32_test.dart` | `form_bundle_publish_test.dart`, `form_bundle_dialog_test.dart` |
+| bundle | `form_bundle_test.dart`, `form_bundle_vector_test.dart`, `form_jcs_test.dart`, `form_base32_test.dart` | `form_bundle_make_test.dart`, `form_bundle_dialog_test.dart` |
 | keys | `form_recovery_key_test.dart`, `form_bech32_test.dart`; `test/form_recovery_key_collab_test.dart` | `form_keys_test.dart`, `form_keys_dialog_test.dart`, `form_key_file_test.dart` |
 | card, team | `form_editor_card_test.dart`, `form_editor_card_vector_test.dart`, `form_team_test.dart` | `form_team_actions_test.dart`, `form_team_dialog_test.dart` |
 

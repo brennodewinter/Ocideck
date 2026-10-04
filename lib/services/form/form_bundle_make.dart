@@ -28,14 +28,14 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'form_keys.dart';
 import 'form_workspace.dart';
 
-/// Wat [publishFormBundle] opleverde.
+/// Wat [makeFormBundle] opleverde.
 sealed class FormBundleOutcome {
   const FormBundleOutcome();
 }
 
 /// De bundel is gemaakt, gecontroleerd en bewaard.
-class FormBundlePublished extends FormBundleOutcome {
-  const FormBundlePublished({
+class FormBundleMade extends FormBundleOutcome {
+  const FormBundleMade({
     required this.bundle,
     required this.path,
     required this.fingerprint,
@@ -109,7 +109,7 @@ class FormBundleNotWritten extends FormBundleOutcome {
   const FormBundleNotWritten();
 }
 
-/// De geldigheid die [publishFormBundle] voorstelt: de sluitingsdag van het formulier, of een
+/// De geldigheid die [makeFormBundle] voorstelt: de sluitingsdag van het formulier, of een
 /// jaar na [now] als er geen is.
 String defaultBundleExpiry(DateTime now, String? closes) =>
     closes != null && isValidCalendarDate(closes)
@@ -124,7 +124,7 @@ String defaultBundleOrganiserName(FormSpec spec) =>
 /// Maakt en bewaart de bundel van [form] in [workspace], ondertekend met de redactiesleutel uit
 /// [keys]; de organisatoren zijn de eigenaar en het team uit `team.json`. [organiserName] en [expires] zijn wat de redacteur invult; `closes` en `retain_unused`
 /// komen uit het formulier zelf — één bron. [random] is de bron van een nieuw `fid`; [now] de dag.
-Future<FormBundleOutcome> publishFormBundle(
+Future<FormBundleOutcome> makeFormBundle(
   FormWorkspace workspace,
   PublishedForm form, {
   required FormKeyService keys,
@@ -199,7 +199,7 @@ Future<FormBundleOutcome> publishFormBundle(
   if (!await workspace.writeBundle(form, created.text)) {
     return const FormBundleNotWritten();
   }
-  return FormBundlePublished(
+  return FormBundleMade(
     bundle: bundle,
     path: path,
     fingerprint: formatFingerprint(signing.fingerprint),

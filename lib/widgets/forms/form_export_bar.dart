@@ -210,8 +210,7 @@ class _FormExportBarState extends State<FormExportBar> {
       ),
       FormBundleIssue.badStructure ||
       FormBundleIssue.noFingerprint ||
-      FormBundleIssue.badFingerprint ||
-      FormBundleIssue.hostMismatch => l10n.d(
+      FormBundleIssue.badFingerprint => l10n.d(
         'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.',
       ),
     },

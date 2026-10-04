@@ -1657,6 +1657,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Cruthaigh pacáiste cuirí as líne…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      'Cuireadh {naam} leis. Cruthaigh an pacáiste cuirí arís chun {naam} a áireamh.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      'Baineadh {naam}. Cruthaigh an pacáiste cuirí arís chun {naam} a fhágáil amach.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Bain {naam} den fhoireann? Fanann na pacáistí cuirí atá déanta agat cheana mar atá siad go dtí go ndéanann tú ceann nua; fanann an méid atá séalaithe cheana do {naam} inléite don duine sin.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Níl eochair eagarthóireachta ann fós. Cruthaigh ceann faoi Eochair eagarthóireachta… sula ndéanann tú pacáiste cuirí.',
   'Team…': 'Foireann…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Na heagarthóirí seachas tú atá i ngach bundle, ionas gur féidir leo siúd na haighneachtaí a oscailt freisin. Cuireann tú duine leis lena chárta eagarthóra agus clóscríobhann tú méarlorg an chárta sin arís.',
@@ -1666,12 +1675,6 @@ const _dutchSourceAddGa = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Cárta {naam}. Clóscríobh méarlorg an chárta seo a thug {naam} duit ar bhealach eile, mar shampla ar an teileafón.',
   'Redacteur verwijderen': 'Bain eagarthóir',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Bain {naam} den fhoireann? Fanann na bundles atá foilsithe agat cheana mar atá siad go dtí go bhfoilseoidh tú arís; fanann an méid atá séalaithe cheana do {naam} inléite don duine sin.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      'Cuireadh {naam} leis. Foilsigh an bundle arís chun {naam} a áireamh.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      'Baineadh {naam}. Foilsigh an bundle arís chun {naam} a fhágáil amach.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Cruthaigh d’eochair eagarthóireachta féin ar dtús faoi Eochair eagarthóireachta….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1741,7 +1744,6 @@ const _dutchSourceAddGa = <String, String>{
       'Níorbh fhéidir an aighneacht a shéalú.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Sábháilte séalaithe mar {naam}, ní féidir ach le: {organisatoren} é a oscailt.',
-  'Bundel publiceren…': 'Foilsigh bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Is é an bundle an rud a chreideann an líontóir faoi bhur n-eagarthóireacht: cén eochair a shéalaíonn sé di agus cén téacs lena mbaineann sé. Stóráiltear é in aice leis an bhfoirm.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1757,8 +1759,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tabhair an méarlorg don líontóir ar bhealach eile seachas comhad an bundle, mar shampla sa chuireadh. Ní féidir leis an té nach bhfuil aige ach comhad an bundle a sheiceáil cé uaidh a thagann sé.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Níl slabhra eochrach ag an ardán seo don eochair eagarthóireachta; ní féidir bundle a shíniú anseo.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Níl eochair eagarthóireachta ann fós. Cruthaigh ceann faoi Eochair eagarthóireachta… sula bhfoilsíonn tú bundle.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Ní féidir an slabhra eochrach a léamh. Níor síníodh tada.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

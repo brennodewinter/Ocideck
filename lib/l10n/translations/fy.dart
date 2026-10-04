@@ -667,6 +667,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Offline uitnodigingspakket maken…': 'Offline útnoegingspakke meitsje…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} is tafoege. Meitsje it útnoegingspakke opnij om {naam} derin op te nimmen.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} is fuortsmiten. Meitsje it útnoegingspakke opnij om {naam} derút te heljen.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} út it team heljen? Utnoegingspaketten dy\'t do al makke hast, bliuwe sa\'t se binne oant do in nij makkest; wat al foar {naam} fersegele is, bliuwt foar dy persoan lêsber.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Der is noch gjin redaksjekaai. Meitsje der ien oan ûnder Redaksjekaai… foardat jo in útnoegingspakke meitsje.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'De redakteurs njonken dy dy’t yn elke bondel steane, sadat ek sy de ynstjoeringen iepenje kinne. Do foegest immen ta mei syn redakteurkaart en typst de fingerôfdruk fan dy kaart werom.',
@@ -676,12 +685,6 @@ const _dutchSourceAddFy = {
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Kaart fan {naam}. Typ de fingerôfdruk fan dizze kaart dy’t {naam} dy op in oare wei joech, bygelyks oan de tillefoan.',
   'Redacteur verwijderen': 'Redakteur fuortsmite',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      '{naam} út it team heljen? Bondels dy’t do al publisearre hast, bliuwe sa’t se binne oant do opnij publisearrest; wat al foar {naam} fersegele is, bliuwt foar dy persoan lêsber.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} is tafoege. Publisearje de bondel opnij om {naam} derin op te nimmen.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} is fuortsmiten. Publisearje de bondel opnij om {naam} derút te heljen.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Meitsje earst dyn eigen redaksjekaai oan ûnder Redaksjekaai….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -750,7 +753,6 @@ const _dutchSourceAddFy = {
       'De ynstjoering koe net fersegele wurde.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Fersegele bewarre as {naam}, allinnich te iepenjen troch: {organisatoren}.',
-  'Bundel publiceren…': 'Bondel publisearje…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'De bondel is wat in ynstjoerder fan jim redaksje leaut: nei hokker kaai hy fersegelet en by hokker tekst it heart. Hy komt njonken it formulier te stean.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -766,8 +768,6 @@ const _dutchSourceAddFy = {
       'Jou de fingerôfdruk oan de ynstjoerder op in oare wei as it bondelbestân, bygelyks yn de útnoeging. Wa\'t allinnich it bondelbestân hat, kin net neigean fan wa\'t it komt.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Dit platfoarm hat gjin kaaiering foar de redaksjekaai; in bondel kin hjir net ûndertekene wurde.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Der is noch gjin redaksjekaai. Meitsje der ien oan ûnder Redaksjekaai… foardat jo in bondel publisearje.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'De kaaiering is net te lêzen. Der is neat ûndertekene.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

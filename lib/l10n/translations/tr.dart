@@ -2538,6 +2538,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Çevrimdışı davet paketi oluştur…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} eklendi. {naam} adlı kişiyi dahil etmek için davet paketini yeniden oluşturun.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} kaldırıldı. {naam} adlı kişiyi çıkarmak için davet paketini yeniden oluşturun.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} ekipten kaldırılsın mı? Önceden oluşturduğunuz davet paketleri siz yenisini oluşturana kadar olduğu gibi kalır; {naam} için zaten mühürlenmiş olan, o kişi için okunabilir kalır.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Henüz yayın kurulu anahtarı yok. Davet paketi oluşturmadan önce Yayın kurulu anahtarı… altında bir tane oluşturun.',
   'Team…': 'Ekip…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Sizin dışınızda her bundle’da bulunan editörler, böylece onlar da gönderileri açabilir. Birini editör kartıyla eklersiniz ve o kartın parmak izini yeniden yazarsınız.',
@@ -2547,12 +2556,6 @@ const _dutchSourceAddTr = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       '{naam} kartı. {naam} adlı kişinin size başka bir yoldan, örneğin telefonla verdiği bu kartın parmak izini yazın.',
   'Redacteur verwijderen': 'Editörü kaldır',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      '{naam} ekipten kaldırılsın mı? Önceden yayımladığınız bundle’lar siz yeniden yayımlayana kadar olduğu gibi kalır; {naam} için zaten mühürlenmiş olan, o kişi için okunabilir kalır.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} eklendi. {naam} adlı kişiyi dahil etmek için bundle’ı yeniden yayımlayın.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} kaldırıldı. {naam} adlı kişiyi çıkarmak için bundle’ı yeniden yayımlayın.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Önce Yayın kurulu anahtarı… altında kendi yayın kurulu anahtarınızı oluşturun.',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -2620,7 +2623,6 @@ const _dutchSourceAddTr = <String, String>{
   'De inzending kon niet worden verzegeld.': 'Gönderi mühürlenemedi.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       '{naam} olarak mühürlü kaydedildi, yalnızca şunlar açabilir: {organisatoren}.',
-  'Bundel publiceren…': 'Bundle yayımla…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle, formu dolduranın yayın kurulunuz hakkında inandığı şeydir: hangi anahtara mühürleyeceği ve hangi metne ait olduğu. Formun yanına kaydedilir.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -2636,8 +2638,6 @@ const _dutchSourceAddTr = <String, String>{
       'Parmak izini formu dolduran kişiye bundle dosyasından farklı bir yoldan verin, örneğin davetiyede. Yalnızca bundle dosyasına sahip olan, onun kimden geldiğini doğrulayamaz.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Bu platformda yayın kurulu anahtarı için anahtarlık yok; burada bundle imzalanamaz.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Henüz yayın kurulu anahtarı yok. Bundle yayımlamadan önce Yayın kurulu anahtarı… altında bir tane oluşturun.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Anahtarlık okunamıyor. Hiçbir şey imzalanmadı.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

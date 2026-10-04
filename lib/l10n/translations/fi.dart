@@ -1627,6 +1627,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Luo offline-kutsupaketti…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} on lisätty. Luo kutsupaketti uudelleen, jotta {naam} tulee mukaan.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} on poistettu. Luo kutsupaketti uudelleen, jotta {naam} poistuu.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Poistetaanko {naam} tiimistä? Jo luomasi kutsupaketit pysyvät sellaisina kuin ovat, kunnes luot uuden; se, mikä on jo sinetöity henkilölle {naam}, pysyy hänelle luettavana.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Toimituksen avainta ei ole vielä. Luo sellainen kohdassa Toimituksen avain… ennen kuin luot kutsupaketin.',
   'Team…': 'Tiimi…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Toimittajat sinun lisäksesi, jotka ovat jokaisessa bundlessa, jotta hekin voivat avata lähetykset. Lisäät jonkun hänen toimittajakortillaan ja kirjoitat kortin sormenjäljen uudelleen.',
@@ -1636,12 +1645,6 @@ const _dutchSourceAddFi = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Kortti: {naam}. Kirjoita tämän kortin sormenjälki, jonka {naam} antoi sinulle muuta tietä, esimerkiksi puhelimessa.',
   'Redacteur verwijderen': 'Poista toimittaja',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Poistetaanko {naam} tiimistä? Jo julkaisemasi bundlet pysyvät sellaisina kuin ovat, kunnes julkaiset uudelleen; se, mikä on jo sinetöity henkilölle {naam}, pysyy hänelle luettavana.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} on lisätty. Julkaise bundle uudelleen, jotta {naam} tulee mukaan.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} on poistettu. Julkaise bundle uudelleen, jotta {naam} poistuu.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Luo ensin oma toimituksen avaimesi kohdassa Toimituksen avain….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1709,7 +1712,6 @@ const _dutchSourceAddFi = <String, String>{
   'De inzending kon niet worden verzegeld.': 'Lähetystä ei voitu sinetöidä.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Tallennettu sinetöitynä nimellä {naam}, vain nämä voivat avata sen: {organisatoren}.',
-  'Bundel publiceren…': 'Julkaise bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle on se, mihin lomakkeen täyttäjä toimituksestanne luottaa: mille avaimelle hän sinetöi ja mihin tekstiin se kuuluu. Se tallennetaan lomakkeen viereen.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1725,8 +1727,6 @@ const _dutchSourceAddFi = <String, String>{
       'Anna sormenjälki täyttäjälle muuta tietä kuin bundle-tiedoston mukana, esimerkiksi kutsussa. Se, jolla on vain bundle-tiedosto, ei voi tarkistaa, keneltä se tulee.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Tällä alustalla ei ole avainnippua toimituksen avaimelle; bundlea ei voi allekirjoittaa täällä.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Toimituksen avainta ei ole vielä. Luo sellainen kohdassa Toimituksen avain… ennen kuin julkaiset bundlen.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Avainnippua ei voi lukea. Mitään ei allekirjoitettu.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

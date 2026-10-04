@@ -5,7 +5,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocideck/services/form/form_bundle_publish.dart';
+import 'package:ocideck/services/form/form_bundle_make.dart';
 import 'package:ocideck/services/form/form_keys.dart';
 import 'package:ocideck/services/form/form_workspace.dart';
 import 'package:ocideck/services/secret_store.dart';
@@ -67,7 +67,7 @@ void main() {
     String expires = '2026-12-15',
     FormKeyService? use,
     Random? random,
-  }) => publishFormBundle(
+  }) => makeFormBundle(
     workspace,
     target ?? form,
     keys: use ?? keys,
@@ -77,13 +77,9 @@ void main() {
     random: random ?? Random(++seed),
   );
 
-  FormBundlePublished published(FormBundleOutcome o) =>
-      o as FormBundlePublished;
+  FormBundleMade published(FormBundleOutcome o) => o as FormBundleMade;
 
-  Future<FormBundle> verified(
-    FormBundlePublished done,
-    PublishedForm of,
-  ) async {
+  Future<FormBundle> verified(FormBundleMade done, PublishedForm of) async {
     final text = File(done.path).readAsStringSync();
     final result = await verifyFormBundle(
       text,
@@ -125,11 +121,6 @@ void main() {
         final bundle = await verified(published(await publish()), form);
         expect(bundle.policy.closes, '2026-12-01');
         expect(bundle.policy.retainUnused, '6 maanden');
-        expect(
-          bundle.policy.apiHost,
-          isNull,
-          reason: 'de bestandsroute heeft geen host',
-        );
       },
     );
 
@@ -309,7 +300,7 @@ void main() {
       final found = await workspace.bundlesOf('kook');
       expect(found.bundles, isEmpty);
       expect(found.unreadable, isEmpty);
-      expect(await publish(), isA<FormBundlePublished>());
+      expect(await publish(), isA<FormBundleMade>());
     });
 
     test('een map met een bundelnaam is geen bundel', () async {
@@ -404,7 +395,7 @@ void main() {
         await fresh.verifyRecovery((await fresh.recoveryKey())!),
         isA<FormKeyVerified>(),
       );
-      expect(await publish(use: fresh), isA<FormBundlePublished>());
+      expect(await publish(use: fresh), isA<FormBundleMade>());
     },
   );
 
@@ -512,10 +503,7 @@ void main() {
           FormBundleInputField.expiresBeforeCloses,
           expires: '2026-11-30',
         );
-        expect(
-          await publish(expires: '2026-12-01'),
-          isA<FormBundlePublished>(),
-        );
+        expect(await publish(expires: '2026-12-01'), isA<FormBundleMade>());
       },
     );
   });

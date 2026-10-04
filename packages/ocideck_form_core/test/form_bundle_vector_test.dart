@@ -49,10 +49,7 @@ void main() {
                 bundleSeq: 3,
                 expires: '2027-03-01',
                 now: DateTime.utc(2026, 11, 3),
-                policy: const FormBundlePolicy(
-                  apiHost: 'intake.example.org',
-                  closes: '2027-01-31',
-                ),
+                policy: const FormBundlePolicy(closes: '2027-01-31'),
               )
               as FormBundleCreated;
       expect(canonicalJson(r.bundle.signedObject()), vector['canonical']);
@@ -85,7 +82,6 @@ void main() {
           templateText: vectorTemplate,
           fingerprint: fingerprint,
           now: DateTime.parse('${c['now']}T12:00:00Z'),
-          expectedApiHost: c['host'] as String?,
           pins: pins,
         );
         final expected = c['expect']! as String;

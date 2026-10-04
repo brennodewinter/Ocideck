@@ -1627,6 +1627,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Buat paket undangan luring…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} telah ditambahkan. Buat paket undangan lagi untuk menyertakan {naam}.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} telah dihapus. Buat paket undangan lagi untuk mengeluarkan {naam}.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Hapus {naam} dari tim? Paket undangan yang sudah Anda buat tetap seperti adanya sampai Anda membuat yang baru; yang sudah disegel untuk {naam} tetap dapat dibaca oleh orang itu.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Belum ada kunci redaksi. Buat satu di Kunci redaksi… sebelum Anda membuat paket undangan.',
   'Team…': 'Tim…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktur selain Anda yang ada di setiap bundel, agar mereka juga dapat membuka kiriman. Anda menambahkan seseorang dengan kartu redakturnya dan mengetik ulang sidik jari kartu itu.',
@@ -1636,12 +1645,6 @@ const _dutchSourceAddId = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Kartu {naam}. Ketik sidik jari kartu ini yang diberikan {naam} kepada Anda lewat jalur lain, misalnya lewat telepon.',
   'Redacteur verwijderen': 'Hapus redaktur',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      'Hapus {naam} dari tim? Bundel yang sudah Anda terbitkan tetap seperti adanya sampai Anda menerbitkan lagi; yang sudah disegel untuk {naam} tetap dapat dibaca oleh orang itu.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} telah ditambahkan. Terbitkan bundel lagi untuk menyertakan {naam}.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} telah dihapus. Terbitkan bundel lagi untuk mengeluarkan {naam}.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Buat dulu kunci redaksi Anda sendiri di Kunci redaksi….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1709,7 +1712,6 @@ const _dutchSourceAddId = <String, String>{
   'De inzending kon niet worden verzegeld.': 'Kiriman tidak dapat disegel.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Disimpan tersegel sebagai {naam}, hanya dapat dibuka oleh: {organisatoren}.',
-  'Bundel publiceren…': 'Terbitkan bundel…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundel adalah apa yang dipercayai pengisi tentang redaksi Anda: ke kunci mana ia menyegel dan teks mana yang menjadi miliknya. Bundel disimpan di samping formulir.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1725,8 +1727,6 @@ const _dutchSourceAddId = <String, String>{
       'Berikan sidik jari kepada pengisi lewat jalur lain selain berkas bundel, misalnya dalam undangan. Siapa pun yang hanya memiliki berkas bundel tidak dapat memeriksa dari siapa bundel itu berasal.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Platform ini tidak punya gantungan kunci untuk kunci redaksi; bundel tidak dapat ditandatangani di sini.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Belum ada kunci redaksi. Buat satu di Kunci redaksi… sebelum Anda menerbitkan bundel.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Gantungan kunci tidak dapat dibaca. Tidak ada yang ditandatangani.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

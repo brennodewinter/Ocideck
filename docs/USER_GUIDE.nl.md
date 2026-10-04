@@ -6031,20 +6031,21 @@ telefoon, in persoon — en kies **Toevoegen**. De vingerafdruk wordt je niet ee
 scherm controleert niets. Het stopt, en zegt waarom, als de vingerafdruk niet bij de kaart past (de kaart is veranderd of
 niet van wie je denkt), de kaart je eigen kaart is, de redacteur er al in staat, het team vol is (een bundel noemt hooguit
 64 organisatoren, jou meegeteld) of `team.json` niet te lezen is (het blijft met rust). **Verwijderen** vraagt eerst en zegt
-wat blijft: bundels die je eerder publiceerde blijven zoals ze zijn tot je opnieuw publiceert, en wat al voor die persoon
-is verzegeld blijft voor hem leesbaar. Publiceer na elke wijziging opnieuw: de bundel noemt jou eerst en daarna de
+wat blijft: uitnodigingspakketten die je eerder maakte blijven zoals ze zijn tot je een nieuwe maakt, en wat al voor die persoon
+is verzegeld blijft voor hem leesbaar. Maak na elke wijziging een nieuw pakket: de bundel noemt jou eerst en daarna de
 redacteurs in de volgorde waarin ze zijn toegevoegd, en het venster zegt *Naast jou in de bundel: …*.
 
-**Publiceren vraagt een weg terug**: je herstelsleutel teruggetypt, *of* een tweede redacteur in het team.
+**Maken vraagt een weg terug**: je herstelsleutel teruggetypt, *of* een tweede redacteur in het team.
 
-**Bundel publiceren…** (onder de formulieren in de Inbox). Een invuller neemt een formulier niet zomaar aan: de
+**Offline uitnodigingspakket maken…** (onder de formulieren in de Inbox). Deze route is volledig offline: er komt geen
+server aan te pas en het pakket gaat per mail, drive of andere bestandsweg. Een invuller neemt een formulier niet zomaar aan: de
 **bundel** zegt naar welke sleutel hij verzegelt en welke tekst erbij hoort, en is ondertekend met je
 redactiesleutel. Kies het formulier — **elke taal is een eigen tekst en krijgt een eigen bundel** —, de *naam voor de
 invuller* (de `controller` van het formulier, anders *Redactie*) en *geldig tot* (de sluitingsdag van het formulier,
 anders een jaar verder; nooit vóór de sluitingsdag). **Bundel maken** zet `template.<taal>.bundle.json` naast het
 formulier en toont de **vingerafdruk** van je ondertekeningssleutel. Geef die vingerafdruk de invuller **langs een
 andere weg dan het bundelbestand** — in de uitnodiging, bijvoorbeeld. De bundel alleen kan niet laten zien van wie hij
-komt; de vingerafdruk wel. Opnieuw publiceren geeft een bundel met het volgende volgnummer, over de oude heen; het
+komt; de vingerafdruk wel. Opnieuw maken geeft een bundel met het volgende volgnummer, over de oude heen; het
 nummer loopt door over de talen en versies van één formulier, want een invuller weigert een lager nummer dan hij zag.
 
 Er wordt niets ondertekend, en het venster zegt waarom, als: er geen bruikbare redactiesleutel is; er **geen weg terug

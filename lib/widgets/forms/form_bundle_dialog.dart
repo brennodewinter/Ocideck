@@ -1,9 +1,9 @@
-// Een bundel publiceren, vanuit de Inbox (FORM_INTAKE.md §5.1, §7.6): kies het formulier (een taal is
+// Een offline uitnodigingspakket maken, vanuit de Inbox (FORM_INTAKE.md §5.1, §7.6): kies het formulier (een taal is
 // een eigen tekst en dus een eigen bundel), de naam die de invuller te zien krijgt en tot wanneer de
 // bundel geldt. De bundel wordt ondertekend met de redactiesleutel en naast het formulier bewaard;
 // daarna staat hier de vingerafdruk die de invuller langs een andere weg moet krijgen.
 //
-// Het werk staat in `form_bundle_publish.dart`. Hier staan de keuzes en de zinnen die zeggen waarom
+// Het werk staat in `form_bundle_make.dart`. Hier staan de keuzes en de zinnen die zeggen waarom
 // het niet ging.
 
 import 'package:flutter/services.dart' show Clipboard, ClipboardData;
@@ -11,7 +11,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../services/form/form_bundle_publish.dart';
+import '../../services/form/form_bundle_make.dart';
 import '../../services/form/form_keys.dart' show FormKeyProblem, FormKeyService;
 import '../../services/form/form_workspace.dart';
 
@@ -57,7 +57,7 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
   final TextEditingController _expires = TextEditingController();
   bool _busy = false;
   String? _message;
-  FormBundlePublished? _published;
+  FormBundleMade? _made;
   FormTeam? _team;
 
   DateTime get _today => (widget.now ?? DateTime.now)();
@@ -102,22 +102,22 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
   void _chooseForm(PublishedForm? form) {
     setState(() {
       _form = form;
-      _published = null;
+      _made = null;
       _message = null;
       _fillDefaults();
     });
   }
 
-  Future<void> _publish() async {
+  Future<void> _make() async {
     final form = _form;
     if (form == null || _busy) return;
     final l10n = context.l10n;
     setState(() {
       _busy = true;
       _message = null;
-      _published = null;
+      _made = null;
     });
-    final outcome = await publishFormBundle(
+    final outcome = await makeFormBundle(
       widget.workspace,
       form,
       keys: widget.keys,
@@ -128,8 +128,8 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
     if (!mounted) return;
     setState(() {
       _busy = false;
-      if (outcome is FormBundlePublished) {
-        _published = outcome;
+      if (outcome is FormBundleMade) {
+        _made = outcome;
         _message = l10n
             .d('Bundel gemaakt (volgnummer {n}): {pad}')
             .replaceAll('{n}', '${outcome.bundle.bundleSeq}')
@@ -149,7 +149,7 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
         'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.',
       ),
       FormKeyProblem.absent => l10n.d(
-        'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.',
+        'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.',
       ),
       FormKeyProblem.unreadable => l10n.d(
         'De sleutelhanger is niet te lezen. Er is niets ondertekend.',
@@ -190,7 +190,7 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
     FormBundleNotWritten() => l10n.d(
       'De bundel kon niet worden opgeslagen in de werkmap.',
     ),
-    FormBundlePublished() => '',
+    FormBundleMade() => '',
   };
 
   String _label(PublishedForm form) =>
@@ -218,7 +218,7 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
                       Semantics(
                         header: true,
                         child: Text(
-                          l10n.d('Bundel publiceren…'),
+                          l10n.d('Offline uitnodigingspakket maken…'),
                           style: theme.textTheme.titleLarge,
                         ),
                       ),
@@ -242,7 +242,7 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
                         const SizedBox(height: 16),
                         Semantics(liveRegion: true, child: Text(_message!)),
                       ],
-                      if (_published != null) ..._fingerprint(l10n, theme),
+                      if (_made != null) ..._fingerprint(l10n, theme),
                     ],
                   ),
                 ),
@@ -258,7 +258,7 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
                   if (_form != null) ...[
                     const SizedBox(width: 8),
                     FilledButton(
-                      onPressed: _busy ? null : _publish,
+                      onPressed: _busy ? null : _make,
                       child: Text(l10n.d('Bundel maken')),
                     ),
                   ],
@@ -313,7 +313,7 @@ class _FormBundleDialogState extends State<FormBundleDialog> {
   ];
 
   List<Widget> _fingerprint(AppLocalizations l10n, ThemeData theme) {
-    final published = _published!;
+    final published = _made!;
     return [
       const SizedBox(height: 16),
       Text(l10n.d('Vingerafdruk'), style: theme.textTheme.titleSmall),

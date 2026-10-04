@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **verzegelde formulierroute is expliciet offline** (#2261): *Bundel publiceren…* heet nu *Offline uitnodigingspakket
+  maken…*, en de bundel — `….bundle.json` naast het formulier — is volledig een bestandsoverdracht: per mail, drive of andere
+  bestandsweg, zonder server. Het veld `api_host` is uit het bundelformaat; een bundel die het nog draagt (alleen gemaakt
+  tijdens de nooit uitgebrachte serverfase) wordt als kapot geweigerd, niet gemigreerd. Ook `hostMismatch` en de hostcontrole
+  zijn weg uit `verifyFormBundle`. De teksten in alle 30 talen noemen het uitnodigingspakket, en de handleiding zegt dat
+  verzegeld `.zip.age` en de latere Managed Intake twee routes zijn: de redactiesleutel en `team.json` beveiligen alleen de
+  offline route. De gewone `.zip`-export blijft ernaast bestaan. 5 teksten vervangen in 30 talen.
 - **Interoperabiliteit met de referentie-`age`** (fase 3, poortitem): de test draait nu tegen `age` v1.3.2 en slaagt. Naast de heen-en-weerronde (200 KiB, meerdere
   chunks) zijn er gevallen voor twee ontvangers (elk opent het, aan beide kanten), een sleutel die geen ontvanger is (niets opent), een veranderd of
   afgekapt bestand (een bit in de inhoud, de laatste byte, een bit in de kop, afgekapt, afgekapt op een chunkgrens: **door beide geweigerd**) en
@@ -21,8 +28,8 @@ All notable changes to OciDeck are documented in this file.
   die de eigenaar ondertekent. **Toevoegen in twee stappen**: de kaart (§5.1) plakken, waarna alleen de naam in beeld staat, en de **vingerafdruk van de
   kaart** terugtypen die de redacteur langs een andere weg gaf — hij wordt bewust niet eerst getoond. Een foute vingerafdruk wordt vóór elke andere
   weigering gemeld; geweigerd worden ook de eigen kaart, een dubbele en een vol team (63 + de eigenaar = de 64 van een bundel). Een `team.json` dat niet
-  te lezen is wordt nooit overschreven en houdt het publiceren tegen. Verwijderen vraagt een bevestiging die zegt wat blijft (eerder gepubliceerde bundels
-  tot er opnieuw wordt gepubliceerd; wat al verzegeld is blijft leesbaar). **De publiceerregel van §7.6 is nu volledig**: herstelsleutel teruggetypt *of*
+  te lezen is wordt nooit overschreven en houdt het publiceren tegen. Verwijderen vraagt een bevestiging die zegt wat blijft (eerder gemaakte uitnodigingspakketten tot er een
+  nieuwe wordt gemaakt; wat al verzegeld is blijft leesbaar). **De regel van §7.6 is nu volledig**: herstelsleutel teruggetypt *of*
   minstens één redacteur in het team (twee sleutels). `publishFormBundle` zet de eigenaar eerst en de redacteurs in volgorde in de bundel; het
   bundelvenster zegt *Naast jou in de bundel: …*. Het bericht bij een ontbrekende herstelweg is aangepast (de oude zin is uit alle 30 talen verwijderd). 27
   nieuwe teksten in 30 talen.
@@ -41,11 +48,11 @@ All notable changes to OciDeck are documented in this file.
   vingerafdruk die er geen is of niet past, een veranderde of verlopen bundel, een bundel bij een andere tekst, een gesloten formulier (de laatste
   dag zelf mag nog) en een inzending groter dan `max_package_bytes`. Wat werkte wordt voor dit formulier onthouden tot de sessie eindigt, maar pas na
   een opgeslagen bestand. **Niet in de webversie**: `dartage` draait niet onder dart2js, daar wordt de knop niet getoond. 18 nieuwe teksten in 30 talen.
-- De Inbox **publiceert een bundel** (formaat §5.1, §7.6, fase 3): *Bundel publiceren…* maakt en ondertekent met de redactiesleutel de
+- De Inbox **maakt een offline uitnodigingspakket** (formaat §5.1, §7.6, fase 3): *Offline uitnodigingspakket maken…* maakt en ondertekent met de redactiesleutel de
   bundel van één gepubliceerd sjabloon en bewaart hem ernaast als `template.<taal>.bundle.json`; daarna staat in het venster de
   **vingerafdruk** om de invuller langs een andere weg dan het bundelbestand te geven. De naam voor de invuller en *geldig tot* komen uit
   het formulier (`controller`, `closes`) en zijn aanpasbaar; `closes` en `retain_unused` van de bundel komen uit het formulier zelf. Er wordt
-  niets ondertekend als er geen bruikbare sleutel is, als de **herstelsleutel niet is teruggetypt** (de publiceerregel van §7.6; twee
+  niets ondertekend als er geen bruikbare sleutel is, als de **herstelsleutel niet is teruggetypt** (de regel van §7.6; twee
   sleutels als alternatief komt met het team), als de naam of de geldigheid niet deugt (ook een geldigheid vóór de sluitingsdag), of als er
   al een bundel van dit formulier staat die niet te lezen is of een ander `fid` noemt — het volgende `bundle_seq` is dan niet te weten, en een
   invuller die het hogere zag weigert een lager stilletjes. `fid` en `bundle_seq` lopen per formulier door over talen en versies.

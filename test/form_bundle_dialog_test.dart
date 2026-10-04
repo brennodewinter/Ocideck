@@ -1,4 +1,4 @@
-// Een bundel publiceren vanuit de Inbox (FORM_INTAKE.md §5.1, §7.6): de keuzes, de vingerafdruk
+// Een offline uitnodigingspakket maken vanuit de Inbox (FORM_INTAKE.md §5.1, §7.6): de keuzes, de vingerafdruk
 // die erna komt en elke zin die zegt waarom er niets is ondertekend.
 
 import 'dart:async';
@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
-import 'package:ocideck/services/form/form_bundle_publish.dart';
+import 'package:ocideck/services/form/form_bundle_make.dart';
 import 'package:ocideck/services/form/form_keys.dart';
 import 'package:ocideck/services/form/form_workspace.dart';
 import 'package:ocideck/services/secret_store.dart';
@@ -125,7 +125,7 @@ void main() {
 
   testWidgets('beginwaarden komen uit het formulier zelf', (tester) async {
     await show(tester, await prepare(tester));
-    expect(text('Bundel publiceren…'), findsOneWidget);
+    expect(text('Offline uitnodigingspakket maken…'), findsOneWidget);
     expect(text('kook · v1 · nl'), findsOneWidget);
     expect(fieldText(tester, 'Naam voor de invuller'), 'Indo IT Kookboek-team');
     expect(fieldText(tester, 'Geldig tot (jjjj-mm-dd)'), '2026-12-01');
@@ -233,7 +233,7 @@ void main() {
       await waitFor(
         tester,
         text(
-          'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.',
+          'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.',
         ),
       );
       expect(
@@ -369,7 +369,7 @@ void main() {
     // Hoeveel keer één bundel de sleutelhanger leest, vooraf gemeten op dezelfde manier.
     final before = vault.reads;
     await tester.runAsync(
-      () => publishFormBundle(
+      () => makeFormBundle(
         workspace,
         forms.single,
         keys: keys,
@@ -400,12 +400,15 @@ void main() {
     );
     expect(header, findsOneWidget);
     expect(
-      find.descendant(of: header, matching: text('Bundel publiceren…')),
+      find.descendant(
+        of: header,
+        matching: text('Offline uitnodigingspakket maken…'),
+      ),
       findsOneWidget,
     );
     await make(tester);
     const message =
-        'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.';
+        'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.';
     await waitFor(tester, text(message));
     expect(
       tester.getSemantics(text(message)).flagsCollection.isLiveRegion,
@@ -456,7 +459,7 @@ void main() {
 
   testWidgets('de knoppen zeggen in het Engels wat ze doen', (tester) async {
     await show(tester, await prepare(tester), language: 'en');
-    expect(text('Publish bundle…'), findsOneWidget);
+    expect(text('Create offline invitation package…'), findsOneWidget);
     expect(text('Create bundle'), findsOneWidget);
     expect(text('Name for the respondent'), findsOneWidget);
     expect(text('Close'), findsOneWidget);

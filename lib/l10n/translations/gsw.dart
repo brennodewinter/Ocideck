@@ -1630,6 +1630,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Offline uitnodigingspakket maken…': 'Offline-Yyladigspaket mache…',
+  '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
+      '{naam} isch zuegfüegt worde. Mach s Yyladigspaket nöi, zum {naam} ufznäh.',
+  '{naam} is verwijderd. Maak het uitnodigingspakket opnieuw om {naam} eruit te halen.':
+      '{naam} isch entfernt worde. Mach s Yyladigspaket nöi, zum {naam} usezneh.',
+  'Verwijder {naam} uit het team? Uitnodigingspakketten die je al hebt gemaakt blijven zoals ze zijn tot je een nieuwe maakt; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} us em Team entferne? Yyladigspaket, wo du scho gmacht hesch, blybe wie si sin, bis du es nöis machsch; was scho für {naam} verschlüsslet isch, blybt für die Person läsbar.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een uitnodigingspakket maakt.':
+      'Es git no keine Redaktionsschlüssel. Erstell under Redaktionsschlüssel… eine, bevor du es Yyladigspaket machsch.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'D Redaktore näb dir, wo i jedem Bundle sin, dass au si d Iischickige chönne ufmache. Du fügsch öpper mit synere Redaktorekarte zue und tippsch dr Fingerabdruck vo dr Karte zrügg.',
@@ -1639,12 +1648,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
       'Karte vo {naam}. Tipp dr Fingerabdruck vo dere Karte ii, wo {naam} dir uf eme andere Wäg gä het, zum Bispiil am Telefon.',
   'Redacteur verwijderen': 'Redaktor entferne',
-  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
-      '{naam} us em Team entferne? Bundles, wo du scho veröffentlicht hesch, blybe wie si sin, bis du nöi veröffentlichsch; was scho für {naam} verschlüsslet isch, blybt für die Person läsbar.',
-  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
-      '{naam} isch zuegfüegt worde. Veröffentlich s Bundle nöi, zum {naam} ufznäh.',
-  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
-      '{naam} isch entfernt worde. Veröffentlich s Bundle nöi, zum {naam} usezneh.',
   'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
       'Erstell zersch dy eigete Redaktionsschlüssel under Redaktionsschlüssel….',
   'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
@@ -1714,7 +1717,6 @@ const _dutchSourceAddGsw = <String, String>{
       'S Iischicku het nid chönne verschlüsslet wärde.',
   'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
       'Verschlüsslet gspeicheret as {naam}, nume z öffne dur: {organisatoren}.',
-  'Bundel publiceren…': 'Bundle veröffentliche…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'S Bundle isch das, wo e Iischicker über öiji Redaktion gloubt: a weli Schlüssel är verschlüsslet und zu welem Text es ghört. Es wird näbe em Formular gspeicheret.',
   'Er is geen formulier in de werkmap om een bundel voor te maken.':
@@ -1730,8 +1732,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Gib em Iischicker dr Fingerabdruck uf eme andere Wäg as d Bundle-Datei, zum Bispiil i dr Iiladig. Wär nume d Bundle-Datei het, cha nid prüefe, vo wem si chunnt.',
   'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
       'Die Plattform het kei Schlüsselbund für e Redaktionsschlüssel; es Bundle cha da nid signiert wärde.',
-  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
-      'Es git no keine Redaktionsschlüssel. Erstell under Redaktionsschlüssel… eine, bevor du es Bundle veröffentlichsch.',
   'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
       'Dr Schlüsselbund lat sich nid läse. Es isch nüt signiert worde.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':

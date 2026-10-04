@@ -3,12 +3,13 @@
 ///
 /// A template contains **no keys**, so on its own it can never be sealed, and a loose file
 /// carries nothing to check authenticity against. The bundle — a JSON file beside the
-/// template, `<template>.bundle.json`, or the same object from a server — fixes both. The
-/// **form owner's Ed25519 key signs it**; the respondent checks that signature against a
-/// **fingerprint that came by another road** than the bundle (§6.4): the organiser's call
-/// text, or the invite link. Without one the bundle is **refused, not accepted with a
-/// prompt** — a prompt would show a name taken from the very bundle being verified, which a
-/// layperson cannot judge and a hostile template would always pass.
+/// template, `<template>.bundle.json`, handed over by mail, drive or any other offline
+/// road — fixes both. The **form owner's Ed25519 key signs it**; the respondent checks
+/// that signature against a **fingerprint that came by another road** than the bundle
+/// (§6.4): the organiser's call text, or the invitation it came with. Without one the
+/// bundle is **refused, not accepted with a prompt** — a prompt would show a name taken
+/// from the very bundle being verified, which a layperson cannot judge and a hostile
+/// template would always pass.
 ///
 /// **This is one of the two files that touch the cryptographic primitives**
 /// (`check_packages` rule 10); the other is `form_seal.dart`. Ed25519 comes from
@@ -28,14 +29,17 @@
 ///   include none that matches is a [FormBundleIssue.fingerprintMismatch].
 /// * **`kid`** is derived, never chosen: the first 128 bits of the SHA-256 of the organiser's
 ///   canonical `age1…` recipient, as base32 ([organiserKid]). A bundle that carries another
-///   value is refused, so a server cannot attribute a key to an organiser who does not hold it.
+///   value is refused, so a relay cannot attribute a key to an organiser who does not hold it.
 /// * **The signature** is Ed25519 over `ocideck-intake-bundle-v1\n` followed by the JCS
 ///   ([canonicalJson]) of the object **without `sig`**. The tag keeps it apart from request
 ///   signatures and from the collaboration design's.
+/// * **Nothing server-shaped.** The format carries no host, token, receipt or tenant: this is
+///   the offline transfer route, and a bundle that still names an `api_host` — an artefact of
+///   the never-released server protocol — is refused as malformed, not migrated.
 ///
 /// ## Verified in this order
 ///
-/// size and JSON → fingerprint → signer → signature → structure → template → expiry → host →
+/// size and JSON → fingerprint → signer → signature → structure → template → expiry →
 /// pin. The fingerprint and the signature come first: nothing in a bundle that was not signed
 /// by the key the respondent was told to trust is believed, not even a "this form is closed".
 library;
@@ -183,15 +187,10 @@ class FormBundleOrganiser {
 /// The bundle's policy: what the form says about itself that is not a key.
 class FormBundlePolicy {
   const FormBundlePolicy({
-    this.apiHost,
     this.closes,
     this.maxPackageBytes,
     this.retainUnused,
   });
-
-  /// The host of the intake server, with an optional port. Signed: the client refuses a
-  /// bundle that names another host than the one it called. Absent on the file route.
-  final String? apiHost;
 
   /// The last day a submission is accepted, `YYYY-MM-DD`.
   final String? closes;
@@ -204,7 +203,6 @@ class FormBundlePolicy {
   final String? retainUnused;
 
   Map<String, Object?> toJson() => {
-    if (apiHost != null) 'api_host': apiHost,
     if (closes != null) 'closes': closes,
     if (maxPackageBytes != null) 'max_package_bytes': maxPackageBytes,
     if (retainUnused != null) 'retain_unused': retainUnused,
@@ -339,7 +337,7 @@ enum FormBundleIssue {
   badSignature,
 
   /// Signed, but a field is not what §5.1 allows: an organiser's key, name or `kid`, a date,
-  /// the `fid`, a cap, a host.
+  /// the `fid`, a cap — or a member the format does not know, like the retired `api_host`.
   badStructure,
 
   /// The template's hash is not the bundle's `template_sha256`, or the template is not a form,
@@ -351,9 +349,6 @@ enum FormBundleIssue {
 
   /// `expires` is before today. The day it names is the last day the bundle is believed.
   expired,
-
-  /// The bundle's `api_host` is not the host the client called.
-  hostMismatch,
 
   /// `bundle_seq` is lower than the highest this client has seen for the form and owner.
   rollback,
@@ -395,10 +390,6 @@ class FormBundleRefused extends FormBundleResult {
   final String? detail;
 }
 
-final RegExp _host = RegExp(
-  r'^[a-z0-9](?:[a-z0-9.-]{0,251}[a-z0-9])?(?::[0-9]{1,5})?$',
-);
-
 const Set<String> _topKeys = {
   'v',
   'fid',
@@ -413,15 +404,13 @@ const Set<String> _topKeys = {
 
 /// Verifies [bundleText] for [templateText], against a [fingerprint] that came out of band.
 ///
-/// [now] is the day for `expires`. [expectedApiHost] is the host the client called, when it
-/// called one (the file route has none). [pins] are what the client has seen before.
+/// [now] is the day for `expires`. [pins] are what the client has seen before.
 /// Never throws.
 Future<FormBundleResult> verifyFormBundle(
   String bundleText, {
   required String templateText,
   required String? fingerprint,
   required DateTime now,
-  String? expectedApiHost,
   FormBundlePins pins = const FormBundlePins(),
 }) async {
   if (utf8.encode(bundleText).length > kFormMaxBundleBytes) {
@@ -527,10 +516,6 @@ Future<FormBundleResult> verifyFormBundle(
   if (bundle.expires.compareTo(formDay(now)) < 0) {
     return const FormBundleRefused(FormBundleIssue.expired);
   }
-  if (expectedApiHost != null &&
-      bundle.policy.apiHost != expectedApiHost.toLowerCase()) {
-    return const FormBundleRefused(FormBundleIssue.hostMismatch);
-  }
   final pinned = pins.seqFor(bundle.fid, fp);
   if (pinned != null && bundle.bundleSeq < pinned) {
     return const FormBundleRefused(FormBundleIssue.rollback);
@@ -606,23 +591,14 @@ Object _parse(Map<String, Object?> json) {
   final policyJson = json['policy'];
   if (policyJson is! Map ||
       policyJson.keys.any(
-        (k) => !const {
-          'api_host',
-          'closes',
-          'max_package_bytes',
-          'retain_unused',
-        }.contains(k),
+        (k) =>
+            !const {'closes', 'max_package_bytes', 'retain_unused'}.contains(k),
       )) {
     return 'policy';
   }
-  final apiHost = policyJson['api_host'];
   final closes = policyJson['closes'];
   final maxBytes = policyJson['max_package_bytes'];
   final retain = policyJson['retain_unused'];
-  if (policyJson.containsKey('api_host') &&
-      (apiHost is! String || !_host.hasMatch(apiHost))) {
-    return 'policy.api_host';
-  }
   if (policyJson.containsKey('closes') &&
       (closes is! String || !isValidCalendarDate(closes))) {
     return 'policy.closes';
@@ -652,7 +628,6 @@ Object _parse(Map<String, Object?> json) {
     templateSha256: templateSha256,
     organisers: organisers,
     policy: FormBundlePolicy(
-      apiHost: apiHost as String?,
       closes: closes as String?,
       maxPackageBytes: maxBytes as int?,
       retainUnused: retain as String?,
@@ -676,8 +651,8 @@ enum FormBundleCreateIssue {
   /// The key that signs is not one of the organisers: the owner must be listed (§5.1).
   signerNotListed,
 
-  /// The bundle as built would not pass its own verification — a date, a cap, a host, the
-  /// fid. [FormBundleCreateRefused.detail] names the field.
+  /// The bundle as built would not pass its own verification — a date, a cap, the fid.
+  /// [FormBundleCreateRefused.detail] names the field.
   invalid,
 }
 
@@ -801,7 +776,6 @@ Future<FormBundleCreateResult> createFormBundle({
     templateText: template,
     fingerprint: owner.fingerprint,
     now: now,
-    expectedApiHost: policy.apiHost,
   );
   if (check is FormBundleRefused) {
     final structural = check.issue == FormBundleIssue.badStructure;

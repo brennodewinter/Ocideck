@@ -335,7 +335,7 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
     );
   }
 
-  Future<void> _publishBundle() async {
+  Future<void> _makeInvitationPackage() async {
     final workspace = _workspace;
     if (workspace == null) return;
     await showFormBundleDialog(
@@ -369,8 +369,8 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
           'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.',
         ),
         child: OutlinedButton(
-          onPressed: _busy || _forms.isEmpty ? null : _publishBundle,
-          child: Text(l10n.d('Bundel publiceren…')),
+          onPressed: _busy || _forms.isEmpty ? null : _makeInvitationPackage,
+          child: Text(l10n.d('Offline uitnodigingspakket maken…')),
         ),
       ),
     ],
