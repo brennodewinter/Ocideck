@@ -17,6 +17,7 @@ import '../../services/download_delivery.dart';
 import '../../services/export_metadata.dart' show kOciDeckVersion;
 import '../../services/file_service.dart' show pickDocumentExportDestination;
 import '../../services/form/form_image_service.dart';
+import '../../services/form/form_intake_context.dart';
 import '../../utils/atomic_file.dart';
 import 'form_export_support.dart';
 import 'form_text_helpers.dart' show formTextOf;
@@ -30,6 +31,11 @@ final Map<String, String> _publishedForms = {};
 /// inzending leidden, per formulier en versie: een tweede inzending vraagt er niet opnieuw om.
 final Map<String, ({String bundle, String fingerprint})> _sealMemory = {};
 
+/// De intake-context van documenten zonder pad (het web, of nog niet
+/// opgeslagen), per formulier en versie — het sessiegeheugen dat de sidecar
+/// op schijf vervangt zolang er geen bestandsnaam is.
+final Map<String, FormIntakeContext> _intakeMemory = {};
+
 /// Waar de pins staan: per formulier en organisator het hoogste volgnummer dat de invuller zag
 /// (FORM_INTAKE.md §5.1). Blijft over sessies bestaan, anders beschermt het tegen niets.
 const String kFormBundlePinsKey = 'form_bundle_pins';
@@ -39,6 +45,24 @@ const String kFormBundlePinsKey = 'form_bundle_pins';
 void debugClearPublishedForms() {
   _publishedForms.clear();
   _sealMemory.clear();
+  _intakeMemory.clear();
+}
+
+String _intakeKey(FormSpec spec) => '${spec.id}@${spec.version}';
+
+/// Legt [context] vast waar de invulpagina hem vindt (§6.4): naast het
+/// document op [documentPath], of in het sessiegeheugen voor padloze
+/// documenten. De uitnodigingsdialoog gebruikt dit vlak voordat hij het
+/// formulier opent.
+Future<void> rememberIntakeContext({
+  required FormSpec spec,
+  required FormIntakeContext context,
+  String? documentPath,
+}) async {
+  _intakeMemory[_intakeKey(spec)] = context;
+  if (documentPath != null && !kIsWeb) {
+    await writeIntakeContext(documentPath, context);
+  }
 }
 
 /// Waar het opslagvenster naartoe schrijft: een pad, of `null` als de invuller
@@ -52,7 +76,9 @@ typedef FormExportDestination =
 
 /// De ondersteuning voor het opslaan van een inzending van een document in
 /// [projectPath] (`null`: nog nergens opgeslagen, of het web — dan zijn er geen foto's
-/// te lezen, en de tekst gaat gewoon mee).
+/// te lezen, en de tekst gaat gewoon mee). [documentPath] is het pad van het
+/// document zelf: de intake-context staat ernaast als sidecar; zonder pad
+/// leeft hij in het sessiegeheugen.
 ///
 /// [pick] en [destination] zijn de bestandskiezer en het opslagvenster; een test
 /// geeft eigen keuzes mee.
@@ -62,11 +88,11 @@ FormExportSupport formExportSupportFor({
   required String pickTitle,
   required String saveTitle,
   String? bundleTitle,
+  String? documentPath,
   Future<String?> Function(String dialogTitle)? pick,
   Future<String?> Function(String dialogTitle)? pickBundle,
   FormExportDestination? destination,
 }) {
-  String key(FormSpec spec) => '${spec.id}@${spec.version}';
   return FormExportSupport(
     frontMatter: frontMatter,
     clientVersion: kOciDeckVersion,
@@ -81,8 +107,9 @@ FormExportSupport formExportSupportFor({
       projectPath: projectPath,
       destination: destination ?? pickDocumentExportDestination,
     ),
-    recall: (spec) => _publishedForms[key(spec)],
-    remember: (spec, published) => _publishedForms[key(spec)] = published,
+    recall: (spec) => _publishedForms[_intakeKey(spec)],
+    remember: (spec, published) =>
+        _publishedForms[_intakeKey(spec)] = published,
     // Verzegelen gebruikt de age-bibliotheek, en die draait in de webbouw nog niet (dart2js):
     // daar is er alleen de gewone zip.
     seal: kIsWeb || bundleTitle == null
@@ -91,13 +118,29 @@ FormExportSupport formExportSupportFor({
             pickBundle: () => (pickBundle ?? _pickBundle)(bundleTitle),
             readPins: _readPins,
             writePins: _writePins,
-            recall: (spec) => _sealMemory[key(spec)],
-            remember: (spec, bundle, fingerprint) => _sealMemory[key(spec)] = (
-              bundle: bundle,
-              fingerprint: fingerprint,
-            ),
-            forget: (spec) => _sealMemory.remove(key(spec)),
+            recall: (spec) => _sealMemory[_intakeKey(spec)],
+            remember: (spec, bundle, fingerprint) =>
+                _sealMemory[_intakeKey(spec)] = (
+                  bundle: bundle,
+                  fingerprint: fingerprint,
+                ),
+            forget: (spec) => _sealMemory.remove(_intakeKey(spec)),
           ),
+    // De sidecar naast het document is de duurzame plek; het sessiegeheugen
+    // dekt padloze documenten (het web) en het venster tussen uitnodiging en
+    // eerste opslag.
+    intake: FormIntakeSupport(
+      load: (spec) async =>
+          (documentPath != null && !kIsWeb
+              ? await readIntakeContext(documentPath)
+              : null) ??
+          _intakeMemory[_intakeKey(spec)],
+      save: (spec, context) => rememberIntakeContext(
+        spec: spec,
+        context: context,
+        documentPath: documentPath,
+      ),
+    ),
   );
 }
 

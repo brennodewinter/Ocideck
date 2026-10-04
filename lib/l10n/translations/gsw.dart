@@ -1630,6 +1630,179 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'De Server het nöd gsait, welis Formular zu däre Yrichtig ghört — Uusfülle isch do nöd mögli.',
+  ', {n} niet binnengehaald': ', {n} nöd gholt',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'D\'Ufbewarigsfriste stimme nöd: en Entwurf maximal {draft} Täg, e Yreichig maximal {submitted} Täg.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formular as Version {n} veröffentlicht.',
+  'Nieuwe versie {n} gepubliceerd.': 'Neui Version {n} veröffentlicht.',
+  'Organisatie: {organisatie}': 'Organisation: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Diräkt zum Veranstalter uf {server}. Du bestätigisch im Fänschter, wo ufgoot; es wird nie vo säuber öppis gschickt.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Version: {versie} — früeheri Versione bliibe unantastbar.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Über OciServe · Revision {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Fingerabdruck: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} neui, {bijgewerkt} aktualisiert, {ingetrokken} zruggzoge{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'De Server isch grad nöd erreichbar. Probiers spöter noemal; es isch nüt gschickt worde.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Z\'vill Versüch hindernang. Wart es Momentli und probiers noemal.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Die Adrässe oder de Code stimmt so nöd. Lueg no und probiers noemal.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Das het nöd klappet. Es isch nüt gschickt worde — probiers noemal.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Dini E-Mail-Adrässe bewiist nur, dass du s\'Poschtfach erreiche chasch — es isch kein Account und es wird nüt gschickt, bis du sälber bestätigisch.',
+  'Je e-mailadres': 'Dini E-Mail-Adrässe',
+  'Code aanvragen': 'Code aafordere',
+  'Opnieuw versturen': 'Noemal schicke',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Noemal schicke chasch in {seconden} Sekunde.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'En Code isch underwegs an die Adrässe (au wenn se nöd existiert — das erfahrsch du hie nöd).',
+  'Code uit de e-mail': 'Code us de E-Mail',
+  'Code controleren': 'Code prüefe',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Die Yreichig cha jetzt nöd gschickt werde — si isch zue, zruggzoge oder es lauft kei Korrekturrundi. Dini Arbet isch in dere Datei sicher; speichere se as Zip zum mitschicke.',
+  'Het pakket wordt verstuurd…': 'S\'Paket wird gschickt…',
+  'De inzending wordt vastgelegd…': 'D\'Yreichig wird feschtghalte…',
+  'De inzending wordt ingetrokken…': 'D\'Yreichig wird zruggzoge…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'De Zuegang isch abgloffe. Forder en neue Code über de Rückkehrlink aa; dini Arbet isch in dere Datei sicher.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'S\'Paket isch z\'gross zum schicke. Nimm es Foto wäg und probiers noemal — oder speichere se as Zip und schick das mit.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'De Server het nöd genau das übercho, was gschickt worde isch. Es isch nüt feschtghalte worde; probiers noemal.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'De Server het öppis Unerwartets gantwortet. Es isch nüt feschtghalte worde; probiers spöter noemal.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'De Server isch grad nöd erreichbar. Es isch nüt gschickt worde — dini Arbet isch in dere Datei sicher.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'S\'Schicke het nöd klappet. Es isch nüt feschtghalte worde — dini Arbet isch in dere Datei sicher; speichere se as Zip zum mitschicke.',
+  'Verzenden via OciServe': 'Über OciServe schicke',
+  'Bestemming: {server}': 'Ziil: {server}',
+  'Doel: {doelen}': 'Zwäg: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.': 'Ufbewarig: {dagen} Täg nach Yreiche.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Sis Formular nimmt grad kei neui Yreichige aa.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'S\'Formular het nöd chöne gholt werde. Du chasch dini Arbet trotzdem as Zip speichere.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Es wird erst öppis gschickt, wenn du unde bestätigisch. As Zip-Datei speichere blibt immer mögli.',
+  'Insturen…': 'Yreiche…',
+  'Correctie insturen…': 'Korrektur yreiche…',
+  'Inzending bijwerken…': 'Yreichig aktualisiere…',
+  'Inzending intrekken…': 'Yreichig zruggzieh…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Das wird Revision {n} vo dinere Yreichig uf {server}. Nach em Yreiche chasch se nümm ändere — en Fähler behebsch mit ere neue Korrekturrundi.',
+  'Definitief insturen': 'Definitiv yreiche',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Zruggzieh nimpf dini Yreichig bim Veranstalter wäg und cha nöd rückgängig gmacht werde. Wotsch witerfahre?',
+  'Verstuurd als revisie {n}.': 'Gschickt as Revision {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Du überchunnsch en Rückkehrlink per E-Mail. De Link macht dini Yreichig nur zäme mit eme neue Code uf — de Link eli isch kei Schlüssel.',
+  'Je inzending is ingetrokken.': 'Dini Yreichig isch zruggzoge worde.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'De Server isch grad nöd erreichbar. Lueg de Link aa und probiers spöter noemal.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'De Link het nöd klappet. Lueg ihn aa und probiers noemal.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Das isch kein Ylade- oder Rückkehrlink, de OciDeck kennt. En Link fangt mit https:// aa.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Die Veröffentlichung het kei Formular, wo OciDeck cha uusfülle.',
+  'Bewaar het formulier om in te vullen': 'S\'Formular zum Uusfülle speichere',
+  'Formulieruitnodiging': 'Formular-Yladig',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Füeg de Ylade- oder Rückkehrlink yy, wo du übercho hesch. De Link sälber isch kei Schlüssel — für dini Yreichig bruuchts immer en neue Code.',
+  'Uitnodigings- of terugkeerlink': 'Ylade- oder Rückkehrlink',
+  'Link openen': 'Link ufmache',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'De Link wiist uf dini Yreichig uf {server}. Zum Ufmache bruuchts en neue Code — de Link eli langt nie.',
+  'Deze link wijst naar {server}.': 'De Link wiist uf {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Du hesch hie en Entwurf ligge (Revision {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Dini Yreichig isch da (Revision {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'De Veranstalter het e Korrektur aagfordert: dini Änderig wird Revision {n}.',
+  'Deze inzending is ingetrokken.': 'Die Yreichig isch zruggzoge worde.',
+  'Formulier invullen': 'Formular uusfülle',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Du füllsch uff dim eigene Grät uus; es wird erst öppis gschickt, wenn du sälber bestätigisch.',
+  'Als behandeld gemarkeerd op de server.':
+      'Ufem Server as behandlet markiert.',
+  'Als behandeld markeren': 'As behandlet markiere',
+  'Als nieuwe versie publiceren': 'As neui Version veröffentliche',
+  'Correctie achteraf toestaan': 'Korrektur nacheh erloube',
+  'Correctieronde geopend op de server.':
+      'Korrekturrundi uffem Server ufgmacht.',
+  'Correctieronde openen': 'Korrekturrundi ufmache',
+  'Correctieronde openen…': 'Korrekturrundi ufmache…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Korrekturfrist (Täg, leer = kei Änd)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Das het uffem Server nöd klappet. Es het nüt gänderet.',
+  'De correctietermijn klopt niet.': 'D\'Korrekturfrist stimmt nöd.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'De Uusfüller derf denn en neui Version yreiche. Sini früehneri Yreichig blibt unveränderet bestoh.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'D\'Yreichig verschwindet bi OciServe; s\'Ufruümregister dört haltet fescht, was wäg isch. Was in dim Arbeitsordner stoht, blibt — das ruümsch du separat uff.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'De Server isch grad nöd erreichbar. Es isch nüt veröffentlicht worde — probiers spöter noemal.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'De Server isch grad nöd erreichbar. Es het nüt gänderet — probiers spöter noemal.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Teil de Yladelink mit wem du s\'Formular wetsch uusfülle la. De Link wiist nur ufs Formular — er macht kei Yreichige uff.',
+  'Dit gaat er naartoe': 'Do gaats ane',
+  'Doelen (één per regel)': 'Zwäg (eine pro Ziile)',
+  'Inzending bewaren (dagen)': 'Yreichig ufbewahre (Täg)',
+  'Inzending opschonen op de server': 'Yreichig uffem Server ufruüme',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Du derfsch das Formular dört nöd veröffentliche. Lueg d\'Organisation und dini Rächt aa.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Das derfsch uffem Server nöd. Lueg d\'Organisation und dini Rächt aa.',
+  'Link kopiëren': 'Link kopiere',
+  'Naam voor de organisatie': 'Name für d\'Organisation',
+  'Ontwerp bewaren (dagen)': 'Entwurf ufbewahre (Täg)',
+  'Opschonen ingepland op de server.': 'Ufruüme uffem Server ygpland.',
+  'Opschonen op de server': 'Uffem Server ufruüme',
+  'Opschonen op de server…': 'Uffem Server ufruüme…',
+  'Privacytekst': 'Dateschutztekst',
+  'Publiceren': 'Veröffentliche',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'S\'Veröffentliche het nöd klappet. Uffem Server het nüt gänderet.',
+  'Publiceren via OciServe': 'Über OciServe veröffentliche',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Titel, wo de Uusfüller gseet',
+  'Vul een naam en een titel in.': 'Gib en Name und en Titel yy.',
+  'Vul minstens één doel in — per regel één.':
+      'Gib mindistens ein Zwäg yy — eine pro Ziile.',
+  'Waarom (niet verplicht)': 'Worum (früewillig)',
+  'Weer als open gemarkeerd op de server.':
+      'Uffem Server wider as offe markiert.',
+  'Weer als open markeren': 'Wider as offe markiere',
+  'correctieronde open': 'Korrektur offe',
+  'ingediend': 'ygreicht',
+  'ingetrokken': 'zruggzoge',
+  'ontwerp': 'Entwurf',
+  'Insturen via OciServe…': 'Über OciServe yreiche…',
+  'Ophalen van OciServe': 'Vo OciServe hole',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Veröffentlich es Formular as feschtgleiti Version uf oiem OciServe und teil de Yladelink.',
+  'Publiceren via OciServe…': 'Über OciServe veröffentliche…',
+  'Uitnodiging openen…': 'Yladig ufmache…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'de Server isch grad nöd erreichbar; nüt het gänderet.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'du derfsch die Yreichige dört nöd läse — lueg d\'Organisation und dini Rächt aa.',
+  'ophalen lukte niet; er is niets veranderd.':
+      's\'Hole het nöd klappet; nüt het gänderet.',
   'Offline uitnodigingspakket maken…': 'Offline-Yyladigspaket mache…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} isch zuegfüegt worde. Mach s Yyladigspaket nöi, zum {naam} ufznäh.',

@@ -1643,6 +1643,179 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Serverul nu a indicat ce formular aparține acestei trimiteri — completarea aici nu este posibilă.',
+  ', {n} niet binnengehaald': ', {n} nepreluate',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Termenele de păstrare nu sunt corecte: o ciornă maximum {draft} zile, o înscriere maximum {submitted} zile.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formular publicat ca versiunea {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Versiunea nouă {n} publicată.',
+  'Organisatie: {organisatie}': 'Organizație: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Direct către organizator pe {server}. Confirmi în fereastra care se deschide; nimic nu se trimite vreodată de la sine.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Versiune: {versie} — versiunile anterioare rămân intangibile.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Prin OciServe · revizia {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Amprentă: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} noi, {bijgewerkt} actualizate, {ingetrokken} retrase{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Serverul nu poate fi contactat acum. Încearcă mai târziu; nimic nu a fost trimis.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Prea multe încercări la rând. Așteaptă puțin și încearcă din nou.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Această adresă sau acest cod nu pare corect. Verifică-l și încearcă din nou.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'N-a funcționat. Nimic nu a fost trimis — încearcă din nou.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Adresa ta de e-mail dovedește doar că poți accesa căsuța poștală — nu este un cont și nimic nu se trimite până nu confirmi tu însuți.',
+  'Je e-mailadres': 'Adresa ta de e-mail',
+  'Code aanvragen': 'Cere codul',
+  'Opnieuw versturen': 'Retrimite',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Poți retrimite peste {seconden} secunde.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Un cod este pe drum către acea adresă (chiar dacă adresa nu există — nu vei afla asta aici).',
+  'Code uit de e-mail': 'Codul din e-mail',
+  'Code controleren': 'Verifică codul',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Această înscriere nu poate fi trimisă acum — este închisă, retrasă sau nu există o rundă de corecție deschisă. Munca ta este în siguranță în acest fișier; salvează-l ca zip pentru a-l trimite.',
+  'Het pakket wordt verstuurd…': 'Pachetul se trimite…',
+  'De inzending wordt vastgelegd…': 'Înscrierea se înregistrează…',
+  'De inzending wordt ingetrokken…': 'Înscrierea se retrage…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Accesul a expirat. Cere un cod nou prin linkul de întoarcere; munca ta este în siguranță în acest fișier.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Pachetul este prea mare pentru a fi trimis. Elimină o fotografie și încearcă din nou — sau salvează-l ca zip și trimite-l pe acela.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Serverul nu a primit exact ce a fost trimis. Nimic nu a fost înregistrat; încearcă din nou.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Serverul a răspuns ceva neașteptat. Nimic nu a fost înregistrat; încearcă mai târziu.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Serverul nu poate fi contactat acum. Nimic nu a fost trimis — munca ta este în siguranță în acest fișier.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Trimiterea nu a reușit. Nimic nu a fost înregistrat — munca ta este în siguranță în acest fișier; salvează-l ca zip pentru a-l trimite.',
+  'Verzenden via OciServe': 'Trimite prin OciServe',
+  'Bestemming: {server}': 'Destinație: {server}',
+  'Doel: {doelen}': 'Scop: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Păstrare: {dagen} zile după trimitere.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Acest formular nu acceptă înscrieri noi acum.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Formularul nu a putut fi preluat. Îți poți salva totuși munca ca zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Nimic nu se trimite până nu confirmi mai jos. Salvarea ca fișier zip rămâne întotdeauna posibilă.',
+  'Insturen…': 'Trimite…',
+  'Correctie insturen…': 'Trimite corecția…',
+  'Inzending bijwerken…': 'Actualizează înscrierea…',
+  'Inzending intrekken…': 'Retrage înscrierea…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Aceasta devine revizia {n} a înscrierii tale pe {server}. După trimitere nu o mai poți modifica — o greșeală se repară cu o nouă rundă de corecție.',
+  'Definitief insturen': 'Trimite definitiv',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Retragerea elimină înscrierea ta de la organizator și nu poate fi anulată. Vrei să continui?',
+  'Verstuurd als revisie {n}.': 'Trimis ca revizia {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Vei primi un link de întoarcere prin e-mail. Acel link deschide înscrierea ta doar împreună cu un cod nou — linkul singur nu este o cheie.',
+  'Je inzending is ingetrokken.': 'Înscrierea ta a fost retrasă.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Serverul nu poate fi contactat acum. Verifică linkul și încearcă mai târziu.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Linkul nu a funcționat. Verifică-l și încearcă din nou.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Acela nu este un link de invitație sau de întoarcere pe care OciDeck îl cunoaște. Un link începe cu https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Această publicație nu conține un formular pe care OciDeck îl poate completa.',
+  'Bewaar het formulier om in te vullen': 'Salvează formularul de completat',
+  'Formulieruitnodiging': 'Invitație la formular',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Lipește linkul de invitație sau de întoarcere primit. Linkul în sine nu este o cheie — înscrierea ta necesită întotdeauna un cod nou.',
+  'Uitnodigings- of terugkeerlink': 'Link de invitație sau de întoarcere',
+  'Link openen': 'Deschide linkul',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Acest link indică înscrierea ta de pe {server}. Deschiderea lui necesită un cod nou — linkul singur nu este niciodată suficient.',
+  'Deze link wijst naar {server}.': 'Acest link indică {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Ai o ciornă aici (revizia {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Înscrierea ta a ajuns (revizia {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Organizatorul a cerut o corecție: modificarea ta devine revizia {n}.',
+  'Deze inzending is ingetrokken.': 'Această înscriere a fost retrasă.',
+  'Formulier invullen': 'Completează formularul',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Completezi pe propriul dispozitiv; nimic nu se trimite până nu confirmi tu însuți.',
+  'Als behandeld gemarkeerd op de server.': 'Marcat ca tratat pe server.',
+  'Als behandeld markeren': 'Marchează ca tratat',
+  'Als nieuwe versie publiceren': 'Publică ca versiune nouă',
+  'Correctie achteraf toestaan': 'Permite corecția ulterioară',
+  'Correctieronde geopend op de server.':
+      'Rundă de corecție deschisă pe server.',
+  'Correctieronde openen': 'Deschide runda de corecție',
+  'Correctieronde openen…': 'Deschide runda de corecție…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Termen de corecție (zile, gol = fără sfârșit)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Nu a funcționat pe server. Nimic nu s-a schimbat.',
+  'De correctietermijn klopt niet.': 'Termenul de corecție nu este corect.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Completatorul poate apoi trimite o versiune nouă. Înscrierea sa anterioară rămâne neschimbată.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Înscrierea dispare la OciServe; registrul de curățare de acolo ține evidența a ceea ce a dispărut. Ce este în dosarul tău de lucru rămâne — asta îl cureți separat.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Serverul nu poate fi contactat acum. Nimic nu a fost publicat — încearcă mai târziu.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Serverul nu poate fi contactat acum. Nimic nu s-a schimbat — încearcă mai târziu.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Distribuie acest link de invitație cu cine vrei să completeze formularul. Linkul indică doar formularul — nu deschide înscrieri.',
+  'Dit gaat er naartoe': 'Acolo ajunge',
+  'Doelen (één per regel)': 'Scopuri (câte unul pe rând)',
+  'Inzending bewaren (dagen)': 'Păstrează înscrierea (zile)',
+  'Inzending opschonen op de server': 'Curăță înscrierea pe server',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Nu poți publica acest formular acolo. Verifică organizația și drepturile tale.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Nu poți face asta pe server. Verifică organizația și drepturile tale.',
+  'Link kopiëren': 'Copiază linkul',
+  'Naam voor de organisatie': 'Nume pentru organizație',
+  'Ontwerp bewaren (dagen)': 'Păstrează ciorna (zile)',
+  'Opschonen ingepland op de server.': 'Curățare programată pe server.',
+  'Opschonen op de server': 'Curăță pe server',
+  'Opschonen op de server…': 'Curăță pe server…',
+  'Privacytekst': 'Text de confidențialitate',
+  'Publiceren': 'Publică',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Publicarea nu a reușit. Nimic nu s-a schimbat pe server.',
+  'Publiceren via OciServe': 'Publică prin OciServe',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Titlul pe care îl vede completatorul',
+  'Vul een naam en een titel in.': 'Introdu un nume și un titlu.',
+  'Vul minstens één doel in — per regel één.':
+      'Introdu cel puțin un scop — câte unul pe rând.',
+  'Waarom (niet verplicht)': 'De ce (opțional)',
+  'Weer als open gemarkeerd op de server.':
+      'Marcat din nou ca deschis pe server.',
+  'Weer als open markeren': 'Marchează din nou ca deschis',
+  'correctieronde open': 'corecție deschisă',
+  'ingediend': 'trimisă',
+  'ingetrokken': 'retrasă',
+  'ontwerp': 'ciornă',
+  'Insturen via OciServe…': 'Trimite prin OciServe…',
+  'Ophalen van OciServe': 'Preia de pe OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Publică un formular ca versiune fixată pe OciServe-ul vostru și distribuie linkul de invitație.',
+  'Publiceren via OciServe…': 'Publică prin OciServe…',
+  'Uitnodiging openen…': 'Deschide invitația…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'serverul nu poate fi contactat acum; nimic nu s-a schimbat.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'nu poți citi aceste înscrieri acolo — verifică organizația și drepturile tale.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'preluarea nu a reușit; nimic nu s-a schimbat.',
   'Offline uitnodigingspakket maken…': 'Creează pachet de invitație offline…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} a fost adăugat. Creează din nou pachetul de invitație ca să îl incluzi pe {naam}.',

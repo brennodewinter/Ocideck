@@ -42,6 +42,7 @@ class FormInboxList extends StatefulWidget {
     this.now,
     this.delete = deleteSubmission,
     this.onOpenFile,
+    this.extraActions,
   });
 
   final FormWorkspace workspace;
@@ -49,6 +50,10 @@ class FormInboxList extends StatefulWidget {
   /// Opent een bestand van de werkmap (de werkkopie van een inzending). `null`: de
   /// knop ontbreekt.
   final ValueChanged<String>? onOpenFile;
+
+  /// Wat er onder de lokale acties van een inzending nog kan — de
+  /// OciServe-acties van de Managed Intake (§7.8). `null`: er is niets extra.
+  final Widget Function(String sid)? extraActions;
 
   /// Het verwijderen zelf; een naad voor de test (zie [FormInboxActions.delete]).
   final Future<FormDeleteOutcome> Function(
@@ -161,6 +166,7 @@ class _FormInboxListState extends State<FormInboxList> {
                   now: widget.now,
                   delete: widget.delete,
                   onOpenFile: widget.onOpenFile,
+                  extraActions: widget.extraActions,
                 ),
           ],
         );
@@ -178,10 +184,12 @@ class _EntryTile extends StatelessWidget {
     required this.delete,
     this.onOpenFile,
     this.now,
+    this.extraActions,
   });
 
   final _Entry entry;
   final ValueChanged<String>? onOpenFile;
+  final Widget Function(String sid)? extraActions;
   final FormWorkspace workspace;
   final Future<FormStoredReviewResult> Function() review;
   final ValueChanged<String> onDone;
@@ -260,6 +268,7 @@ class _EntryTile extends StatelessWidget {
           now: now,
           delete: delete,
           onOpenFile: onOpenFile,
+          extraActions: extraActions,
         ),
       ],
     );
@@ -277,9 +286,11 @@ class _Detail extends StatelessWidget {
     required this.delete,
     this.onOpenFile,
     this.now,
+    this.extraActions,
   });
 
   final ValueChanged<String>? onOpenFile;
+  final Widget Function(String sid)? extraActions;
   final Future<FormStoredReviewResult> Function() review;
   final FormWorkspace workspace;
   final _Entry entry;
@@ -339,6 +350,7 @@ class _Detail extends StatelessWidget {
                 FormStoredUnavailable(:final edited) => edited,
               },
             ),
+            if (extraActions != null) extraActions!(entry.sid),
           ],
         );
       },

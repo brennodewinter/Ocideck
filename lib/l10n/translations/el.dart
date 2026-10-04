@@ -1652,6 +1652,181 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Ο διακομιστής δεν ανέφερε ποια φόρμα ανήκει σε αυτή την υποβολή — η συμπλήρωση εδώ δεν είναι δυνατή.',
+  ', {n} niet binnengehaald': ', {n} δεν παραλήφθηκαν',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Οι περίοδοι τήρησης δεν είναι σωστές: προσχέδιο το πολύ {draft} ημέρες, υποβολή το πολύ {submitted} ημέρες.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Η φόρμα δημοσιεύτηκε ως έκδοση {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Νέα έκδοση {n} δημοσιεύτηκε.',
+  'Organisatie: {organisatie}': 'Οργανισμός: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Απευθείας στον οργανωτή στο {server}. Επιβεβαιώνεις στο παράθυρο που ανοίγει· ποτέ τίποτα δεν αποστέλλεται από μόνο του.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Έκδοση: {versie} — οι προηγούμενες εκδόσεις παραμένουν άθικτες.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Μέσω OciServe · αναθεώρηση {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Αποτύπωμα: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} νέες, {bijgewerkt} ενημερωμένες, {ingetrokken} αποσυρμένες{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Ο διακομιστής δεν είναι προσβάσιμος τώρα. Δοκίμασε ξανά αργότερα· τίποτα δεν εστάλη.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Πάρα πολλές απόπειρες στη σειρά. Περίμενε λίγο και δοκίμασε ξανά.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Αυτή η διεύθυνση ή ο κωδικός δεν φαίνεται σωστός. Έλεγξέ τον και δοκίμασε ξανά.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Δεν πέτυχε. Τίποτα δεν εστάλη — δοκίμασε ξανά.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Η διεύθυνσή σου αποδεικνύει μόνο ότι έχεις πρόσβαση στο γραμματοκιβώτιο — δεν είναι λογαριασμός και τίποτα δεν αποστέλλεται πριν επιβεβαιώσεις εσύ.',
+  'Je e-mailadres': 'Η διεύθυνσή σου',
+  'Code aanvragen': 'Ζήτησε κωδικό',
+  'Opnieuw versturen': 'Εκ νέου αποστολή',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Μπορείς να ξαναστείλεις σε {seconden} δευτερόλεπτα.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Ένας κωδικός είναι καθ\' οδόν προς εκείνη τη διεύθυνση (ακόμα κι αν δεν υπάρχει — δεν θα το μάθεις εδώ).',
+  'Code uit de e-mail': 'Κωδικός από το e-mail',
+  'Code controleren': 'Έλεγχος κωδικού',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Αυτή η υποβολή δεν μπορεί να σταλεί τώρα — είναι κλειστή, αποσυρμένη ή δεν υπάρχει ανοιχτός κύκλος διόρθωσης. Η δουλειά σου είναι ασφαλής σε αυτό το αρχείο· αποθήκευσέ την ως zip για να τη στείλεις.',
+  'Het pakket wordt verstuurd…': 'Αποστολή του πακέτου…',
+  'De inzending wordt vastgelegd…': 'Καταγραφή της υποβολής…',
+  'De inzending wordt ingetrokken…': 'Απόσυρση της υποβολής…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Η πρόσβαση έληξε. Ζήτησε νέο κωδικό μέσω του συνδέσμου επιστροφής· η δουλειά σου είναι ασφαλής σε αυτό το αρχείο.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Το πακέτο είναι πολύ μεγάλο για αποστολή. Αφαίρεσε μια φωτογραφία και δοκίμασε ξανά — ή αποθήκευσέ το ως zip και στείλε εκείνο.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Ο διακομιστής δεν έλαβε ακριβώς ό,τι εστάλη. Τίποτα δεν καταγράφηκε· δοκίμασε ξανά.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Ο διακομιστής απάντησε κάτι απροσδόκητο. Τίποτα δεν καταγράφηκε· δοκίμασε ξανά αργότερα.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Ο διακομιστής δεν είναι προσβάσιμος τώρα. Τίποτα δεν εστάλη — η δουλειά σου είναι ασφαλής σε αυτό το αρχείο.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Η αποστολή απέτυχε. Τίποτα δεν καταγράφηκε — η δουλειά σου είναι ασφαλής σε αυτό το αρχείο· αποθήκευσέ την ως zip για να τη στείλεις.',
+  'Verzenden via OciServe': 'Αποστολή μέσω OciServe',
+  'Bestemming: {server}': 'Προορισμός: {server}',
+  'Doel: {doelen}': 'Σκοπός: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Τήρηση: {dagen} ημέρες μετά την υποβολή.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Αυτή η φόρμα δεν δέχεται νέες υποβολές αυτή τη στιγμή.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Η φόρμα δεν μπόρεσε να ανακτηθεί. Μπορείς πάντα να αποθηκεύσεις τη δουλειά σου ως zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Τίποτα δεν αποστέλλεται μέχρι να επιβεβαιώσεις παρακάτω. Η αποθήκευση ως zip είναι πάντα δυνατή.',
+  'Insturen…': 'Υποβολή…',
+  'Correctie insturen…': 'Υποβολή διόρθωσης…',
+  'Inzending bijwerken…': 'Ενημέρωση υποβολής…',
+  'Inzending intrekken…': 'Απόσυρση υποβολής…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Αυτή γίνεται η αναθεώρηση {n} της υποβολής σου στο {server}. Μετά την υποβολή δεν μπορείς πλέον να την αλλάξεις — ένα λάθος διορθώνεται με νέο κύκλο διόρθωσης.',
+  'Definitief insturen': 'Οριστική υποβολή',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Η απόσυρση αφαιρεί την υποβολή σου από τον οργανωτή και δεν μπορεί να αναιρεθεί. Θέλεις να συνεχίσεις;',
+  'Verstuurd als revisie {n}.': 'Εστάλη ως αναθεώρηση {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Θα λάβεις σύνδεσμο επιστροφής μέσω e-mail. Αυτός ο σύνδεσμος ανοίγει την υποβολή σου μόνο μαζί με νέο κωδικό — ο σύνδεσμος μόνος του δεν είναι κλειδί.',
+  'Je inzending is ingetrokken.': 'Η υποβολή σου αποσύρθηκε.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Ο διακομιστής δεν είναι προσβάσιμος τώρα. Έλεγξε τον σύνδεσμο και δοκίμασε ξανά αργότερα.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Ο σύνδεσμος δεν λειτούργησε. Έλεγξέ τον και δοκίμασε ξανά.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Αυτός δεν είναι σύνδεσμος πρόσκλησης ή επιστροφής που γνωρίζει το OciDeck. Ένας σύνδεσμος ξεκινά με https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Αυτή η δημοσίευση δεν περιέχει φόρμα που μπορεί να συμπληρώσει το OciDeck.',
+  'Bewaar het formulier om in te vullen': 'Αποθήκευσε τη φόρμα για συμπλήρωση',
+  'Formulieruitnodiging': 'Πρόσκληση φόρμας',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Επικόλλησε τον σύνδεσμο πρόσκλησης ή επιστροφής που έλαβες. Ο σύνδεσμος από μόνος του δεν είναι κλειδί — η υποβολή σου απαιτεί πάντα νέο κωδικό.',
+  'Uitnodigings- of terugkeerlink': 'Σύνδεσμος πρόσκλησης ή επιστροφής',
+  'Link openen': 'Άνοιγμα συνδέσμου',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Αυτός ο σύνδεσμος δείχνει την υποβολή σου στο {server}. Για να τον ανοίξεις χρειάζεται νέος κωδικός — ο σύνδεσμος μόνος του δεν αρκεί ποτέ.',
+  'Deze link wijst naar {server}.': 'Αυτός ο σύνδεσμος δείχνει το {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Έχεις ένα προσχέδιο εδώ (αναθεώρηση {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Η υποβολή σου καταχωρήθηκε (αναθεώρηση {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Ο οργανωτής ζήτησε διόρθωση: η αλλαγή σου γίνεται αναθεώρηση {n}.',
+  'Deze inzending is ingetrokken.': 'Αυτή η υποβολή αποσύρθηκε.',
+  'Formulier invullen': 'Συμπλήρωση φόρμας',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Συμπληρώνεις στη δική σου συσκευή· τίποτα δεν αποστέλλεται μέχρι να επιβεβαιώσεις εσύ.',
+  'Als behandeld gemarkeerd op de server.':
+      'Σημειώθηκε ως διεκπεραιωμένο στον διακομιστή.',
+  'Als behandeld markeren': 'Σήμανση ως διεκπεραιωμένο',
+  'Als nieuwe versie publiceren': 'Δημοσίευση ως νέα έκδοση',
+  'Correctie achteraf toestaan': 'Να επιτρέπεται διόρθωση εκ των υστέρων',
+  'Correctieronde geopend op de server.':
+      'Ο κύκλος διόρθωσης άνοιξε στον διακομιστή.',
+  'Correctieronde openen': 'Άνοιγμα κύκλου διόρθωσης',
+  'Correctieronde openen…': 'Άνοιγμα κύκλου διόρθωσης…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Προθεσμία διόρθωσης (ημέρες, κενό = χωρίς τέλος)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Δεν πέτυχε στον διακομιστή. Τίποτα δεν άλλαξε.',
+  'De correctietermijn klopt niet.': 'Η προθεσμία διόρθωσης δεν είναι σωστή.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Ο συμπληρωτής μπορεί τότε να υποβάλει νέα έκδοση. Η προηγούμενη υποβολή του παραμένει αμετάβλητη.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Η υποβολή εξαφανίζεται στο OciServe· το μητρώο εκκαθάρισης εκεί κρατά τι έφυγε. Ό,τι υπάρχει στον φάκελο εργασίας σου μένει — αυτό το καθαρίζεις χωριστά.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Ο διακομιστής δεν είναι προσβάσιμος τώρα. Τίποτα δεν δημοσιεύτηκε — δοκίμασε ξανά αργότερα.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Ο διακομιστής δεν είναι προσβάσιμος τώρα. Τίποτα δεν άλλαξε — δοκίμασε ξανά αργότερα.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Μοιράσου αυτόν τον σύνδεσμο πρόσκλησης με όποιον θέλεις να συμπληρώσει τη φόρμα. Ο σύνδεσμος δείχνει μόνο στη φόρμα — δεν ανοίγει υποβολές.',
+  'Dit gaat er naartoe': 'Εκεί πηγαίνει',
+  'Doelen (één per regel)': 'Σκοποί (ένας ανά γραμμή)',
+  'Inzending bewaren (dagen)': 'Τήρηση υποβολής (ημέρες)',
+  'Inzending opschonen op de server': 'Εκκαθάριση υποβολής στον διακομιστή',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Δεν επιτρέπεται να δημοσιεύσεις αυτή τη φόρμα εκεί. Έλεγξε τον οργανισμό και τα δικαιώματά σου.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Δεν επιτρέπεται να το κάνεις αυτό στον διακομιστή. Έλεγξε τον οργανισμό και τα δικαιώματά σου.',
+  'Link kopiëren': 'Αντιγραφή συνδέσμου',
+  'Naam voor de organisatie': 'Όνομα για τον οργανισμό',
+  'Ontwerp bewaren (dagen)': 'Τήρηση προσχεδίου (ημέρες)',
+  'Opschonen ingepland op de server.':
+      'Η εκκαθάριση προγραμματίστηκε στον διακομιστή.',
+  'Opschonen op de server': 'Εκκαθάριση στον διακομιστή',
+  'Opschonen op de server…': 'Εκκαθάριση στον διακομιστή…',
+  'Privacytekst': 'Κείμενο απορρήτου',
+  'Publiceren': 'Δημοσίευση',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Η δημοσίευση απέτυχε. Τίποτα δεν άλλαξε στον διακομιστή.',
+  'Publiceren via OciServe': 'Δημοσίευση μέσω OciServe',
+  'Server: {server}': 'Διακομιστής: {server}',
+  'Titel die de invuller ziet': 'Τίτλος που βλέπει ο συμπληρωτής',
+  'Vul een naam en een titel in.': 'Συμπλήρωσε όνομα και τίτλο.',
+  'Vul minstens één doel in — per regel één.':
+      'Συμπλήρωσε τουλάχιστον έναν σκοπό — έναν ανά γραμμή.',
+  'Waarom (niet verplicht)': 'Γιατί (προαιρετικό)',
+  'Weer als open gemarkeerd op de server.':
+      'Σημειώθηκε ξανά ως ανοιχτό στον διακομιστή.',
+  'Weer als open markeren': 'Σήμανση ξανά ως ανοιχτό',
+  'correctieronde open': 'διόρθωση ανοιχτή',
+  'ingediend': 'υποβλήθηκε',
+  'ingetrokken': 'αποσύρθηκε',
+  'ontwerp': 'προσχέδιο',
+  'Insturen via OciServe…': 'Υποβολή μέσω OciServe…',
+  'Ophalen van OciServe': 'Λήψη από OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Δημοσίευσε μια φόρμα ως καρφιτσωμένη έκδοση στο δικό σας OciServe και μοιράσου τον σύνδεσμο πρόσκλησης.',
+  'Publiceren via OciServe…': 'Δημοσίευση μέσω OciServe…',
+  'Uitnodiging openen…': 'Άνοιγμα πρόσκλησης…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'ο διακομιστής δεν είναι προσβάσιμος τώρα· τίποτα δεν άλλαξε.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'δεν επιτρέπεται να διαβάζεις αυτές τις υποβολές εκεί — έλεγξε τον οργανισμό και τα δικαιώματά σου.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'η λήψη απέτυχε· τίποτα δεν άλλαξε.',
   'Offline uitnodigingspakket maken…':
       'Δημιουργία πακέτου πρόσκλησης εκτός σύνδεσης…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':

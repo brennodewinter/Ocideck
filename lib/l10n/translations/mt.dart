@@ -1645,6 +1645,181 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Is-server ma indikax liema formola tappartjeni għal din is-sottomissjoni — mhuwiex possibbli timtela hawn.',
+  ', {n} niet binnengehaald': ', {n} ma ġewx ġabra',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Il-perjodi taż-żamma mhumiex tajbin: abbozz massimu {draft} jum, sottomissjoni massimu {submitted} jum.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Il-formola ġiet ippubblikata bħala verżjoni {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Verżjoni ġdida {n} ippubblikata.',
+  'Organisatie: {organisatie}': 'Organizzazzjoni: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Direttament lill-organizzatur fuq {server}. Tikkonferma fit-tieqa li tiftaħ; qatt ma jintbagħat xejn waħdu.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Verżjoni: {versie} — il-verżjonijiet ta\' qabel jibqgħu intatti.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Permezz ta\' OciServe · reviżjoni {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Marka: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} ġodda, {bijgewerkt} aġġornati, {ingetrokken} rtirati{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Is-server ma jistax jintlaħaq bħalissa. Erġa\' pprova aktar tard; xejn ma ntbagħat.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Wisq tentattivi wara xulxin. Stenna ftit u erġa\' pprova.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Dan l-indirizz jew il-kodiċi ma jidhirx tajjeb. Iċċekkjah u erġa\' pprova.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Ma ħađix. Xejn ma ntbagħat — erġa\' pprova.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'L-indirizz tal-email tiegħek jipprova biss li tista\' tilħaq il-kaxxa tal-posta — mhuwiex kont u xejn ma jintbagħat sakemm inti nnifsek tikkonferma.',
+  'Je e-mailadres': 'L-email tiegħek',
+  'Code aanvragen': 'Itlob kodiċi',
+  'Opnieuw versturen': 'Ibgħat mill-ġdid',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Tista\' tibgħat mill-ġdid fi {seconden} sekondi.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Kodiċi qed jasal għal dak l-indirizz (anki jekk l-indirizz ma jeżistix — dan ma tinstema\'x hawn).',
+  'Code uit de e-mail': 'Kodiċi mill-email',
+  'Code controleren': 'Iċċekkja l-kodiċi',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Din is-sottomissjoni ma tistax tinbagħat issa — hija magħluqa, rtirata jew m\'hemmx rawnd ta\' korrezzjoni miftuħ. Xogħlok huwa sikur f\'dan il-fajl; ħarżnu bħala zip biex tibgħatu.',
+  'Het pakket wordt verstuurd…': 'Il-pakkett qed jintbagħat…',
+  'De inzending wordt vastgelegd…': 'Is-sottomissjoni qed tirreġistra…',
+  'De inzending wordt ingetrokken…': 'Is-sottomissjoni qed tinġibed…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'L-aċċess skada. Itlob kodiċi ġdid permezz tal-link tar-ritorn; xogħlok huwa sikur f\'dan il-fajl.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Il-pakkett huwa kbir wisq biex jintbagħat. Neħħi ritratt u erġa\' pprova — jew ħarżnu bħala zip u ibgħat dak.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Is-server ma riciviex eżattament dak li ntbagħat. Xejn ma ġie rreġistrat; erġa\' pprova.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Is-server wieġeb b\'xi ħaġa mhux mistennija. Xejn ma ġie rreġistrat; erġa\' pprova aktar tard.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Is-server ma jistax jintlaħaq bħalissa. Xejn ma ntbagħat — xogħlok huwa sikur f\'dan il-fajl.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'L-ibgħat ma ħađix. Xejn ma ġie rreġistrat — xogħlok huwa sikur f\'dan il-fajl; ħarżnu bħala zip biex tibgħatu.',
+  'Verzenden via OciServe': 'Ibgħat permezz ta\' OciServe',
+  'Bestemming: {server}': 'Destinazzjoni: {server}',
+  'Doel: {doelen}': 'Għan: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Żamma: {dagen} jum wara s-sottomissjoni.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Din il-formola bħalissa ma taċċettax sottomissjonijiet ġodda.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Il-formola ma setgħetx tinġibed. Xorta tista\' tħalli x-xogħol tiegħek bħala zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Xejn ma jintbagħat sakemm tikkonferma hawn taħt. Tħaffir bħala fajl zip dejjem jista\' jsir.',
+  'Insturen…': 'Issottometti…',
+  'Correctie insturen…': 'Issottometti l-korrezzjoni…',
+  'Inzending bijwerken…': 'Aġġorna s-sottomissjoni…',
+  'Inzending intrekken…': 'Irritira s-sottomissjoni…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Din issir reviżjoni {n} tas-sottomissjoni tiegħek fuq {server}. Wara li tibgħatha ma tistax tibdelha aktar — żball jiġi ndirizzat b\'rawnd ta\' korrezzjoni ġdid.',
+  'Definitief insturen': 'Issottometti definittivament',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'L-irtirar iħassar is-sottomissjoni tiegħek mal-organizzatur u ma jistax jiġi mħassar. Tixtieq tkompli?',
+  'Verstuurd als revisie {n}.': 'Mibgħuta bħala r-reviżjoni {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Ser tirċievi link ta\' ritorn bil-posta. Dak il-link jiftaħ is-sottomissjoni tiegħek biss flimkien ma\' kodiċi ġdid — il-link waħdu mhuwiex ċavetta.',
+  'Je inzending is ingetrokken.': 'Is-sottomissjoni tiegħek ġiet rtirata.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Is-server ma jistax jintlaħaq bħalissa. Iċċekkja l-link u erġa\' pprova aktar tard.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Il-link ma ħađitx. Iċċekkjaha u erġa\' pprova.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Dak mhuwiex link ta\' stedina jew ta\' ritorn li OciDeck jaf. Link jibda b\'https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Din il-pubblikazzjoni ma fiħix formola li OciDeck jista\' jimla.',
+  'Bewaar het formulier om in te vullen': 'Ħażen il-formola biex timliha',
+  'Formulieruitnodiging': 'Stedina għal formola',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Waħħal il-link ta\' stedina jew ta\' ritorn li rċivejt. Il-link nnifsu mhuwiex ċavetta — għas-sottomissjoni tiegħek dejjem hemm bżonn kodiċi ġdid.',
+  'Uitnodigings- of terugkeerlink': 'Link ta\' stedina jew ta\' ritorn',
+  'Link openen': 'Iftaħ il-link',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Dan il-link jipponta lejn is-sottomissjoni tiegħek fuq {server}. Biex tiftħu hemm bżonn kodiċi ġdid — il-link waħdu qatt ma jkun biżejjed.',
+  'Deze link wijst naar {server}.': 'Dan il-link jipponta lejn {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Għandek abbozz hawn (reviżjoni {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Is-sottomissjoni tiegħek waslet (reviżjoni {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'L-organizzatur talab korrezzjoni: il-bidla tiegħek issir reviżjoni {n}.',
+  'Deze inzending is ingetrokken.': 'Din is-sottomissjoni ġiet rtirata.',
+  'Formulier invullen': 'Imla l-formola',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Timla fuq l-apparat tiegħek stess; xejn ma jintbagħat sakemm inti nnifsek tikkonferma.',
+  'Als behandeld gemarkeerd op de server.':
+      'Mmarkat bħala trattat fuq is-server.',
+  'Als behandeld markeren': 'Immarka bħala trattat',
+  'Als nieuwe versie publiceren': 'Ippubblika bħala verżjoni ġdida',
+  'Correctie achteraf toestaan': 'Ħalli korrezzjoni wara',
+  'Correctieronde geopend op de server.':
+      'Rawnd ta\' korrezzjoni miftuħ fuq is-server.',
+  'Correctieronde openen': 'Iftaħ rawnd ta\' korrezzjoni',
+  'Correctieronde openen…': 'Iftaħ rawnd ta\' korrezzjoni…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Terminu tal-korrezzjoni (jiem, vojt = bla tmiem)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Ma ħađix fuq is-server. Xejn ma nbidel.',
+  'De correctietermijn klopt niet.':
+      'It-terminu tal-korrezzjoni mhuwiex tajjeb.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Il-mimli jista\' mbagħad jissottometti verżjoni ġdida. Is-sottomissjoni tagħha ta\' qabel tibqa\' l-istess.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Is-sottomissjoni tispiċċa ġewwa OciServe; ir-reġistru tat-tindif hemm jinnota x\'għadda. Dak li hemm fil-folder tax-xogħol tiegħek jibqa\' — dak tnaddafu separatament.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Is-server ma jistax jintlaħaq bħalissa. Xejn ma ġie ppubblikat — erġa\' pprova aktar tard.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Is-server ma jistax jintlaħaq bħalissa. Xejn ma nbidel — erġa\' pprova aktar tard.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Aqsam dan il-link ta\' stedina ma\' min trid jimla l-formola. Il-link jipponta biss lejn il-formola — ma jiftaħx sottomissjonijiet.',
+  'Dit gaat er naartoe': 'Hawnhekk imur',
+  'Doelen (één per regel)': 'Għanijiet (wieħed f\'kull linja)',
+  'Inzending bewaren (dagen)': 'Żomm s-sottomissjoni (jiem)',
+  'Inzending opschonen op de server': 'Naddaf s-sottomissjoni fuq is-server',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Ma tistax tippubblika din il-formola hemm. Iċċekkja l-organizzazzjoni u d-drittijiet tiegħek.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Ma tistax tagħmel dan fuq is-server. Iċċekkja l-organizzazzjoni u d-drittijiet tiegħek.',
+  'Link kopiëren': 'Ikkopja l-link',
+  'Naam voor de organisatie': 'Isem għall-organizzazzjoni',
+  'Ontwerp bewaren (dagen)': 'Żomm l-abbozz (jiem)',
+  'Opschonen ingepland op de server.': 'It-tindif ġie skedat fuq is-server.',
+  'Opschonen op de server': 'Naddaf fuq is-server',
+  'Opschonen op de server…': 'Naddaf fuq is-server…',
+  'Privacytekst': 'Test tal-privatezza',
+  'Publiceren': 'Ippubblika',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Il-pubblikazzjoni ma rnexxietx. Xejn ma nbidel fuq is-server.',
+  'Publiceren via OciServe': 'Ippubblika permezz ta\' OciServe',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Titlu li jarah il-mimli',
+  'Vul een naam en een titel in.': 'Daħħal isem u titlu.',
+  'Vul minstens één doel in — per regel één.':
+      'Daħħal mill-inqas għan wieħed — wieħed f\'kull linja.',
+  'Waarom (niet verplicht)': 'Għaliex (mhux obbligatorju)',
+  'Weer als open gemarkeerd op de server.':
+      'Mmarkat mill-ġdid bħala miftuħ fuq is-server.',
+  'Weer als open markeren': 'Immarka mill-ġdid bħala miftuħ',
+  'correctieronde open': 'korrezzjoni miftuħa',
+  'ingediend': 'ssottomessa',
+  'ingetrokken': 'rtirata',
+  'ontwerp': 'abbozz',
+  'Insturen via OciServe…': 'Issottometti permezz ta\' OciServe…',
+  'Ophalen van OciServe': 'Ġib minn OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Ippubblika formola bħala verżjoni mwaħħla fuq l-OciServe tagħkom u aqsam il-link ta\' stedina.',
+  'Publiceren via OciServe…': 'Ippubblika permezz ta\' OciServe…',
+  'Uitnodiging openen…': 'Iftaħ l-istedina…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'is-server ma jistax jintlaħaq issa; xejn ma nbidel.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'ma tistax taqra dawn is-sottomissjonijiet hemm — iċċekkja l-organizzazzjoni u d-drittijiet tiegħek.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'il-ġib ma rnexxiex; xejn ma nbidel.',
   'Offline uitnodigingspakket maken…': 'Oħloq pakkett ta\' stedina offline…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} ġie miżjud. Erġa\' oħloq il-pakkett ta\' stedina biex jiddaħħal {naam}.',

@@ -24,6 +24,7 @@ part 'ociserve_activation.dart';
 part 'ociserve_state.dart';
 part 'ociserve_provider_planning.dart';
 part 'ociserve_provider_exams.dart';
+part 'ociserve_provider_intake.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
 /// consumers receive only the minimal account/membership read model.
@@ -915,4 +916,5 @@ class OciServeNotifier extends OciServeNotifierBase
     with
         _OciServeActivationMethods,
         _OciServePlanningMethods,
-        _OciServeExamMethods {}
+        _OciServeExamMethods,
+        _OciServeIntakeMethods {}

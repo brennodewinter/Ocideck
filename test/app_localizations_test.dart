@@ -12,6 +12,10 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  // 'Server' is in het Engels hetzelfde woord; de andere talen wijken af.
+  'Server: {server}',
+  // Alleen plaatsvervangers: er valt in het Engels letterlijk niets te vertalen.
+  '{naam}: {fout}',
   // Het Engels heeft hetzelfde woord als het Nederlands ("Later" op de knop die een stap
   // uitstelt); de andere talen niet, dus alleen hier.
   'Later',

@@ -1625,6 +1625,178 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Serveris nenorādīja, kura veidlapa pieder šim iesniegumam — aizpildīt to šeit nav iespējams.',
+  ', {n} niet binnengehaald': ', {n} neielādēti',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Glabāšanas termiņi nav pareizi: melnraksts ne vairāk kā {draft} dienas, iesniegums ne vairāk kā {submitted} dienas.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Veidlapa publicēta kā versija {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Jauna versija {n} publicēta.',
+  'Organisatie: {organisatie}': 'Organizācija: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Tieši organizētājam uz {server}. Tu apstiprini atveramajā logā; nekas nekad netiek nosūtīts pats no sevis.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Versija: {versie} — iepriekšējās versijas paliek neaizskaramas.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Caur OciServe · revīzija {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Pirkstu nospiedums: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} jauni, {bijgewerkt} atjaunināti, {ingetrokken} atsaukti{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Serveris šobrīd nav sasniedzams. Mēģini vēlāk vēlreiz; nekas netika nosūtīts.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Pārāk daudz mēģinājumu pēc kārtas. Pagaidi brīdi un mēģini vēlreiz.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Šī adrese vai kods neizskatās pareizs. Pārbaudi un mēģini vēlreiz.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Tas neizdevās. Nekas netika nosūtīts — mēģini vēlreiz.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Tava e-pasta adrese pierāda tikai to, ka vari piekļūt pastkastei — tā nav konts, un nekas netiek nosūtīts, pirms tu pats apstiprini.',
+  'Je e-mailadres': 'Tava e-pasta adrese',
+  'Code aanvragen': 'Pieprasīt kodu',
+  'Opnieuw versturen': 'Sūtīt vēlreiz',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Atkārtoti nosūtīt varēsi pēc {seconden} sekundēm.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Kods ir ceļā uz to adresi (pat ja adrese neeksistē — to tu šeit nedzirdēsi).',
+  'Code uit de e-mail': 'Kods no e-pasta',
+  'Code controleren': 'Pārbaudīt kodu',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Šo iesniegumu šobrīd nevar nosūtīt — tas ir slēgts, atsaukts vai nav atvērta labojumu rinda. Tavs darbs ir drošībā šajā failā; saglabā to kā zip, lai nosūtītu.',
+  'Het pakket wordt verstuurd…': 'Pakotne tiek nosūtīta…',
+  'De inzending wordt vastgelegd…': 'Iesniegums tiek reģistrēts…',
+  'De inzending wordt ingetrokken…': 'Iesniegums tiek atsaukts…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Piekļuve ir beigusies. Pieprasi jaunu kodu, izmantojot atgriešanās saiti; tavs darbs ir drošībā šajā failā.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Pakotne ir pārāk liela, lai nosūtītu. Noņem vienu foto un mēģini vēlreiz — vai saglabā to kā zip un nosūti to.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Serveris nesaņēma tieši to, kas tika nosūtīts. Nekas netika reģistrēts; mēģini vēlreiz.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Serveris atbildēja kaut ko negaidītu. Nekas netika reģistrēts; mēģini vēlāk vēlreiz.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Serveris šobrīd nav sasniedzams. Nekas netika nosūtīts — tavs darbs ir drošībā šajā failā.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Sūtīšana neizdevās. Nekas netika reģistrēts — tavs darbs ir drošībā šajā failā; saglabā to kā zip, lai nosūtītu.',
+  'Verzenden via OciServe': 'Sūtīt caur OciServe',
+  'Bestemming: {server}': 'Galamērķis: {server}',
+  'Doel: {doelen}': 'Mērķis: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Glabāšana: {dagen} dienas pēc iesniegšanas.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Šī veidlapa pašlaik nepieņem jaunus iesniegumus.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Veidlapu neizdevās ielādēt. Savu darbu joprojām vari saglabāt kā zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Nekas netiek nosūtīts, kamēr apstiprini zemāk. Saglabāšana kā zip vienmēr ir iespējama.',
+  'Insturen…': 'Iesniegt…',
+  'Correctie insturen…': 'Iesniegt labojumu…',
+  'Inzending bijwerken…': 'Atjaunināt iesniegumu…',
+  'Inzending intrekken…': 'Atsaukt iesniegumu…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Šis kļūst par tava iesnieguma revīziju {n} serverī {server}. Pēc iesniegšanas to vairs nevarēsi mainīt — kļūdu izlabo jauna labojumu rinda.',
+  'Definitief insturen': 'Iesniegt galīgi',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Atsaukšana noņem tavu iesniegumu pie organizētāja un to nevar atsaukt. Vai vēlies turpināt?',
+  'Verstuurd als revisie {n}.': 'Nosūtīts kā revīzija {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Tu saņemsi atgriešanās saiti pa e-pastu. Tā saite atver tavu iesniegumu tikai kopā ar jaunu kodu — pati saite nav atslēga.',
+  'Je inzending is ingetrokken.': 'Tavs iesniegums ir atsaukts.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Serveris šobrīd nav sasniedzams. Pārbaudi saiti un mēģini vēlāk vēlreiz.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Saite nedarbojās. Pārbaudi to un mēģini vēlreiz.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Tā nav uzaicinājuma vai atgriešanās saite, ko OciDeck pazīst. Saite sākas ar https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Šī publikācija nesatur veidlapu, ko OciDeck var aizpildīt.',
+  'Bewaar het formulier om in te vullen': 'Saglabā veidlapu aizpildīšanai',
+  'Formulieruitnodiging': 'Veidlapas uzaicinājums',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Ielīmē saņemto uzaicinājuma vai atgriešanās saiti. Pati saite nav atslēga — tavam iesniegumam vienmēr nepieciešams jauns kods.',
+  'Uitnodigings- of terugkeerlink': 'Uzaicinājuma vai atgriešanās saite',
+  'Link openen': 'Atvērt saiti',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Šī saite norāda uz tavu iesniegumu serverī {server}. Tās atvēršanai nepieciešams jauns kods — pati saite nekad nepietiek.',
+  'Deze link wijst naar {server}.': 'Šī saite norāda uz {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Tev šeit ir melnraksts (revīzija {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Tavs iesniegums ir saņemts (revīzija {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Organizētājs lūdza labojumu: tava izmaiņa kļūs par revīziju {n}.',
+  'Deze inzending is ingetrokken.': 'Šis iesniegums ir atsaukts.',
+  'Formulier invullen': 'Aizpildīt veidlapu',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Aizpildi savā ierīcē; nekas netiek nosūtīts, pirms tu pats apstiprini.',
+  'Als behandeld gemarkeerd op de server.': 'Serverī atzīmēts kā apstrādāts.',
+  'Als behandeld markeren': 'Atzīmēt kā apstrādātu',
+  'Als nieuwe versie publiceren': 'Publicēt kā jaunu versiju',
+  'Correctie achteraf toestaan': 'Atļaut vēlāku labojumu',
+  'Correctieronde geopend op de server.': 'Labojumu rinda atvērta serverī.',
+  'Correctieronde openen': 'Atvērt labojumu rindu',
+  'Correctieronde openen…': 'Atvērt labojumu rindu…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Labojumu termiņš (dienas, tukšs = bez beigām)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Tas serverī neizdevās. Nekas nemainījās.',
+  'De correctietermijn klopt niet.': 'Labojumu termiņš nav pareizs.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Aizpildītājs tad var iesniegt jaunu versiju. Viņa iepriekšējais iesniegums paliek nemainīts.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Iesniegums pazūd pie OciServe; tīrīšanas reģistrs tur fiksē, kas ir aizgājis. Kas ir tavā darba mapē, paliek — to tu satīri atsevišķi.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Serveris šobrīd nav sasniedzams. Nekas netika publicēts — mēģini vēlāk vēlreiz.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Serveris šobrīd nav sasniedzams. Nekas nemainījās — mēģini vēlāk vēlreiz.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Kopdali šo uzaicinājuma saiti ar tiem, kuriem vēlies ļaut aizpildīt veidlapu. Saite norāda tikai uz veidlapu — tā neatver iesniegumus.',
+  'Dit gaat er naartoe': 'Tur tas aiziet',
+  'Doelen (één per regel)': 'Mērķi (viens katrā rindā)',
+  'Inzending bewaren (dagen)': 'Glabāt iesniegumu (dienas)',
+  'Inzending opschonen op de server': 'Iztīrīt iesniegumu serverī',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Tu nedrīksti tur publicēt šo veidlapu. Pārbaudi organizāciju un savas tiesības.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'To tu serverī nedrīksti darīt. Pārbaudi organizāciju un savas tiesības.',
+  'Link kopiëren': 'Kopēt saiti',
+  'Naam voor de organisatie': 'Organizācijas nosaukums',
+  'Ontwerp bewaren (dagen)': 'Glabāt melnrakstu (dienas)',
+  'Opschonen ingepland op de server.': 'Tīrīšana ieplānota serverī.',
+  'Opschonen op de server': 'Iztīrīt serverī',
+  'Opschonen op de server…': 'Iztīrīt serverī…',
+  'Privacytekst': 'Privātuma teksts',
+  'Publiceren': 'Publicēt',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Publicēšana neizdevās. Serverī nekas nemainījās.',
+  'Publiceren via OciServe': 'Publicēt caur OciServe',
+  'Server: {server}': 'Serveris: {server}',
+  'Titel die de invuller ziet': 'Virsraksts, ko redz aizpildītājs',
+  'Vul een naam en een titel in.': 'Ievadi nosaukumu un virsrakstu.',
+  'Vul minstens één doel in — per regel één.':
+      'Ievadi vismaz vienu mērķi — vienu katrā rindā.',
+  'Waarom (niet verplicht)': 'Kāpēc (nav obligāti)',
+  'Weer als open gemarkeerd op de server.':
+      'Serverī atkal atzīmēts kā atvērts.',
+  'Weer als open markeren': 'Atkal atzīmēt kā atvērtu',
+  'correctieronde open': 'labojums atvērts',
+  'ingediend': 'iesniegts',
+  'ingetrokken': 'atsaukts',
+  'ontwerp': 'melnraksts',
+  'Insturen via OciServe…': 'Iesniegt caur OciServe…',
+  'Ophalen van OciServe': 'Ielādēt no OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Publicē veidlapu kā piespraustu versiju uz jūsu OciServe un kopdali uzaicinājuma saiti.',
+  'Publiceren via OciServe…': 'Publicēt caur OciServe…',
+  'Uitnodiging openen…': 'Atvērt uzaicinājumu…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'serveris šobrīd nav sasniedzams; nekas nemainījās.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'tu nedrīksti tur lasīt šos iesniegumus — pārbaudi organizāciju un savas tiesības.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'ielāde neizdevās; nekas nemainījās.',
   'Offline uitnodigingspakket maken…': 'Izveidot bezsaistes ielūguma paketi…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} ir pievienots. Izveidojiet ielūguma paketi vēlreiz, lai iekļautu {naam}.',

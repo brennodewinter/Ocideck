@@ -1627,6 +1627,179 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Server tidak menyebut formulir mana yang terkait dengan kiriman ini — mengisinya tidak mungkin di sini.',
+  ', {n} niet binnengehaald': ', {n} tidak terambil',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Masa simpan tidak tepat: draf maksimal {draft} hari, kiriman maksimal {submitted} hari.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formulir diterbitkan sebagai versi {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Versi baru {n} diterbitkan.',
+  'Organisatie: {organisatie}': 'Organisasi: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Langsung ke penyelenggara di {server}. Kamu mengonfirmasi di jendela yang terbuka; tidak ada yang pernah terkirim sendiri.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Versi: {versie} — versi sebelumnya tetap tidak dapat diubah.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Via OciServe · revisi {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Sidik jari: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} baru, {bijgewerkt} diperbarui, {ingetrokken} ditarik{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Server tidak dapat dijangkau sekarang. Coba lagi nanti; tidak ada yang terkirim.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Terlalu banyak percobaan berturut-turut. Tunggu sebentar dan coba lagi.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Alamat atau kode ini tampak tidak benar. Periksa dan coba lagi.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Itu tidak berhasil. Tidak ada yang terkirim — coba lagi.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Alamat e-mailmu hanya membuktikan kamu bisa mengakses kotak surat — bukan akun, dan tidak ada yang dikirim sebelum kamu mengonfirmasi sendiri.',
+  'Je e-mailadres': 'Alamat e-mailmu',
+  'Code aanvragen': 'Minta kode',
+  'Opnieuw versturen': 'Kirim ulang',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Kirim ulang bisa dalam {seconden} detik.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Kode sedang dikirim ke alamat itu (bahkan jika alamatnya tidak ada — kamu tidak akan mendengarnya di sini).',
+  'Code uit de e-mail': 'Kode dari e-mail',
+  'Code controleren': 'Periksa kode',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Kiriman ini tidak dapat dikirim sekarang — sudah ditutup, ditarik, atau tidak ada putaran koreksi terbuka. Pekerjaanmu aman di berkas ini; simpan sebagai zip untuk mengirimkannya.',
+  'Het pakket wordt verstuurd…': 'Paket sedang dikirim…',
+  'De inzending wordt vastgelegd…': 'Kiriman sedang dicatat…',
+  'De inzending wordt ingetrokken…': 'Kiriman sedang ditarik…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Akses telah kedaluwarsa. Minta kode baru melalui tautan kembali; pekerjaanmu aman di berkas ini.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Paket terlalu besar untuk dikirim. Hapus satu foto dan coba lagi — atau simpan sebagai zip dan kirim itu.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Server tidak menerima persis apa yang dikirim. Tidak ada yang tercatat; coba lagi.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Server menjawab sesuatu yang tak terduga. Tidak ada yang tercatat; coba lagi nanti.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Server tidak dapat dijangkau sekarang. Tidak ada yang terkirim — pekerjaanmu aman di berkas ini.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Pengiriman gagal. Tidak ada yang tercatat — pekerjaanmu aman di berkas ini; simpan sebagai zip untuk mengirimkannya.',
+  'Verzenden via OciServe': 'Kirim via OciServe',
+  'Bestemming: {server}': 'Tujuan: {server}',
+  'Doel: {doelen}': 'Tujuan: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Penyimpanan: {dagen} hari setelah pengiriman.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Formulir ini saat ini tidak menerima kiriman baru.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Formulir tidak dapat diambil. Kamu masih bisa menyimpan pekerjaanmu sebagai zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Tidak ada yang dikirim sampai kamu mengonfirmasi di bawah. Menyimpan sebagai zip selalu dimungkinkan.',
+  'Insturen…': 'Kirim…',
+  'Correctie insturen…': 'Kirim koreksi…',
+  'Inzending bijwerken…': 'Perbarui kiriman…',
+  'Inzending intrekken…': 'Tarik kiriman…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Ini menjadi revisi {n} dari kirimanmu di {server}. Setelah dikirim kamu tidak dapat mengubahnya lagi — kesalahan diperbaiki dengan putaran koreksi baru.',
+  'Definitief insturen': 'Kirim definitif',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Penarikan menghapus kirimanmu dari penyelenggara dan tidak dapat dibatalkan. Lanjutkan?',
+  'Verstuurd als revisie {n}.': 'Terkirim sebagai revisi {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Kamu akan menerima tautan kembali lewat e-mail. Tautan itu membuka kirimanmu hanya bersama kode baru — tautan saja bukan kunci.',
+  'Je inzending is ingetrokken.': 'Kirimanmu telah ditarik.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Server tidak dapat dijangkau sekarang. Periksa tautan dan coba lagi nanti.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Tautan tidak berfungsi. Periksa dan coba lagi.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Itu bukan tautan undangan atau kembali yang dikenal OciDeck. Tautan dimulai dengan https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Publikasi ini tidak berisi formulir yang dapat diisi OciDeck.',
+  'Bewaar het formulier om in te vullen': 'Simpan formulir untuk diisi',
+  'Formulieruitnodiging': 'Undangan formulir',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Tempel tautan undangan atau kembali yang kamu terima. Tautan itu sendiri bukan kunci — kirimanmu selalu memerlukan kode baru.',
+  'Uitnodigings- of terugkeerlink': 'Tautan undangan atau kembali',
+  'Link openen': 'Buka tautan',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Tautan ini mengarah ke kirimanmu di {server}. Membukanya memerlukan kode baru — tautan saja tidak pernah cukup.',
+  'Deze link wijst naar {server}.': 'Tautan ini mengarah ke {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Kamu punya draf di sini (revisi {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Kirimanmu sudah masuk (revisi {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Penyelenggara meminta koreksi: perubahanmu menjadi revisi {n}.',
+  'Deze inzending is ingetrokken.': 'Kiriman ini telah ditarik.',
+  'Formulier invullen': 'Isi formulir',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Kamu mengisi di perangkatmu sendiri; tidak ada yang dikirim sebelum kamu mengonfirmasi sendiri.',
+  'Als behandeld gemarkeerd op de server.':
+      'Ditandai sebagai ditangani di server.',
+  'Als behandeld markeren': 'Tandai sebagai ditangani',
+  'Als nieuwe versie publiceren': 'Terbitkan sebagai versi baru',
+  'Correctie achteraf toestaan': 'Izinkan koreksi setelahnya',
+  'Correctieronde geopend op de server.': 'Putaran koreksi dibuka di server.',
+  'Correctieronde openen': 'Buka putaran koreksi',
+  'Correctieronde openen…': 'Buka putaran koreksi…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Tenggat koreksi (hari, kosong = tanpa akhir)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Itu tidak berhasil di server. Tidak ada yang berubah.',
+  'De correctietermijn klopt niet.': 'Tenggat koreksi tidak tepat.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Pengisi kemudian boleh mengirim versi baru. Kiriman sebelumnya tetap tidak berubah.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Kiriman menghilang di OciServe; registri pembersihan di sana mencatat apa yang hilang. Apa yang ada di berkas kerjamu tetap — itu kamu bersihkan terpisah.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Server tidak dapat dijangkau sekarang. Tidak ada yang diterbitkan — coba lagi nanti.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Server tidak dapat dijangkau sekarang. Tidak ada yang berubah — coba lagi nanti.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Bagikan tautan undangan ini kepada siapa pun yang ingin kamu minta mengisi formulir. Tautan hanya mengarah ke formulir — tidak membuka kiriman.',
+  'Dit gaat er naartoe': 'Ke sinilah tujuannya',
+  'Doelen (één per regel)': 'Tujuan (satu per baris)',
+  'Inzending bewaren (dagen)': 'Simpan kiriman (hari)',
+  'Inzending opschonen op de server': 'Bersihkan kiriman di server',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Kamu tidak boleh menerbitkan formulir ini di sana. Periksa organisasi dan hakmu.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Kamu tidak boleh melakukan ini di server. Periksa organisasi dan hakmu.',
+  'Link kopiëren': 'Salin tautan',
+  'Naam voor de organisatie': 'Nama untuk organisasi',
+  'Ontwerp bewaren (dagen)': 'Simpan draf (hari)',
+  'Opschonen ingepland op de server.': 'Pembersihan dijadwalkan di server.',
+  'Opschonen op de server': 'Bersihkan di server',
+  'Opschonen op de server…': 'Bersihkan di server…',
+  'Privacytekst': 'Teks privasi',
+  'Publiceren': 'Terbitkan',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Penerbitan gagal. Tidak ada yang berubah di server.',
+  'Publiceren via OciServe': 'Terbitkan via OciServe',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Judul yang dilihat pengisi',
+  'Vul een naam en een titel in.': 'Isi nama dan judul.',
+  'Vul minstens één doel in — per regel één.':
+      'Isi setidaknya satu tujuan — satu per baris.',
+  'Waarom (niet verplicht)': 'Mengapa (opsional)',
+  'Weer als open gemarkeerd op de server.':
+      'Ditandai sebagai terbuka lagi di server.',
+  'Weer als open markeren': 'Tandai sebagai terbuka lagi',
+  'correctieronde open': 'koreksi terbuka',
+  'ingediend': 'terkirim',
+  'ingetrokken': 'ditarik',
+  'ontwerp': 'draf',
+  'Insturen via OciServe…': 'Kirim via OciServe…',
+  'Ophalen van OciServe': 'Ambil dari OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Terbitkan formulir sebagai versi yang dikunci di OciServe kalian dan bagikan tautan undangannya.',
+  'Publiceren via OciServe…': 'Terbitkan via OciServe…',
+  'Uitnodiging openen…': 'Buka undangan…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'server tidak dapat dijangkau sekarang; tidak ada yang berubah.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'kamu tidak boleh membaca kiriman ini di sana — periksa organisasi dan hakmu.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'pengambilan gagal; tidak ada yang berubah.',
   'Offline uitnodigingspakket maken…': 'Buat paket undangan luring…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} telah ditambahkan. Buat paket undangan lagi untuk menyertakan {naam}.',

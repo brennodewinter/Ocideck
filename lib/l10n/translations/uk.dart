@@ -1642,6 +1642,179 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Сервер не вказав, яка форма належить до цього подання — заповнити її тут неможливо.',
+  ', {n} niet binnengehaald': ', {n} не отримано',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Терміни зберігання некоректні: чернетка щонайбільше {draft} днів, подання щонайбільше {submitted} днів.',
+  'Formulier gepubliceerd als versie {n}.': 'Форму опубліковано як версію {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Нову версію {n} опубліковано.',
+  'Organisatie: {organisatie}': 'Організація: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Напряму до організатора на {server}. Ви підтверджуєте у вікні, що відкриється; нічого ніколи не надсилається само собою.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Версія: {versie} — попередні версії залишаються незмінними.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Через OciServe · ревізія {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Відбиток: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} нових, {bijgewerkt} оновлених, {ingetrokken} відкликаних{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Сервер зараз недоступний. Спробуйте пізніше; нічого не надіслано.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Забагато спроб підряд. Зачекайте трохи й спробуйте знову.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Ця адреса або цей код виглядає неправильно. Перевірте й спробуйте знову.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Це не вдалося. Нічого не надіслано — спробуйте знову.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Ваша адреса лише доводить, що ви маєте доступ до скриньки — це не обліковий запис, і нічого не надсилається, доки ви самі не підтвердите.',
+  'Je e-mailadres': 'Ваша адреса',
+  'Code aanvragen': 'Запросити код',
+  'Opnieuw versturen': 'Надіслати знову',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Повторно надіслати можна через {seconden} секунд.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Код уже дорогою на цю адресу (навіть якщо адреси не існує — тут ви про це не дізнаєтесь).',
+  'Code uit de e-mail': 'Код з листа',
+  'Code controleren': 'Перевірити код',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Це подання зараз не можна надіслати — воно закрите, відкликане або немає відкритого кола виправлень. Ваша робота у безпеці в цьому файлі; збережіть його як zip, щоб надіслати.',
+  'Het pakket wordt verstuurd…': 'Пакет надсилається…',
+  'De inzending wordt vastgelegd…': 'Подання фіксується…',
+  'De inzending wordt ingetrokken…': 'Подання відкликається…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Доступ закінчився. Запросіть новий код через зворотне посилання; ваша робота у безпеці в цьому файлі.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Пакет завеликий для надсилання. Видаліть фото й спробуйте знову — або збережіть його як zip і надішліть.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Сервер отримав не зовсім те, що було надіслано. Нічого не зафіксовано; спробуйте знову.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Сервер відповів щось несподіване. Нічого не зафіксовано; спробуйте пізніше.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Сервер зараз недоступний. Нічого не надіслано — ваша робота у безпеці в цьому файлі.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Надсилання не вдалося. Нічого не зафіксовано — ваша робота у безпеці в цьому файлі; збережіть його як zip, щоб надіслати.',
+  'Verzenden via OciServe': 'Надіслати через OciServe',
+  'Bestemming: {server}': 'Призначення: {server}',
+  'Doel: {doelen}': 'Мета: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Зберігання: {dagen} днів після подання.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Ця форма зараз не приймає нові подання.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Форму не вдалося отримати. Ви все одно можете зберегти роботу як zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Нічого не надішлється, доки ви не підтвердите нижче. Зберегти як zip завжди можливо.',
+  'Insturen…': 'Надіслати…',
+  'Correctie insturen…': 'Надіслати виправлення…',
+  'Inzending bijwerken…': 'Оновити подання…',
+  'Inzending intrekken…': 'Відкликати подання…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Це стане ревізією {n} вашого подання на {server}. Після надсилання ви більше не зможете його змінити — помилку виправляє нове коло коригувань.',
+  'Definitief insturen': 'Надіслати остаточно',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Відкликання видаляє ваше подання в організатора і його не можна скасувати. Продовжити?',
+  'Verstuurd als revisie {n}.': 'Надіслано як ревізію {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Ви отримаєте зворотне посилання листом. Це посилання відкриває ваше подання лише разом із новим кодом — саме посилання не є ключем.',
+  'Je inzending is ingetrokken.': 'Ваше подання відкликано.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Сервер зараз недоступний. Перевірте посилання й спробуйте пізніше.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Посилання не спрацювало. Перевірте його й спробуйте знову.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Це не запрошувальне і не зворотне посилання, яке знає OciDeck. Посилання починається з https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Ця публікація не містить форми, яку OciDeck може заповнити.',
+  'Bewaar het formulier om in te vullen': 'Зберегти форму для заповнення',
+  'Formulieruitnodiging': 'Запрошення до форми',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Вставте отримане запрошувальне або зворотне посилання. Саме посилання не є ключем — для вашого подання завжди потрібен новий код.',
+  'Uitnodigings- of terugkeerlink': 'Запрошувальне або зворотне посилання',
+  'Link openen': 'Відкрити посилання',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Це посилання вказує на ваше подання на {server}. Щоб відкрити його, потрібен новий код — самого посилання ніколи не достатньо.',
+  'Deze link wijst naar {server}.': 'Це посилання вказує на {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Тут у вас є чернетка (ревізія {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Ваше подання надійшло (ревізія {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Організатор запросив виправлення: ваша зміна стане ревізією {n}.',
+  'Deze inzending is ingetrokken.': 'Це подання відкликано.',
+  'Formulier invullen': 'Заповнити форму',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Ви заповнюєте на власному пристрої; нічого не надсилається, доки ви самі не підтвердите.',
+  'Als behandeld gemarkeerd op de server.':
+      'Позначено як оброблене на сервері.',
+  'Als behandeld markeren': 'Позначити як оброблене',
+  'Als nieuwe versie publiceren': 'Опублікувати як нову версію',
+  'Correctie achteraf toestaan': 'Дозволити виправлення згодом',
+  'Correctieronde geopend op de server.':
+      'Коло виправлень відкрито на сервері.',
+  'Correctieronde openen': 'Відкрити коло виправлень',
+  'Correctieronde openen…': 'Відкрити коло виправлень…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Термін виправлення (днів, порожньо = без кінця)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Це не вдалося на сервері. Нічого не змінилося.',
+  'De correctietermijn klopt niet.': 'Термін виправлення некоректний.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Заповнювач тоді може надіслати нову версію. Його попереднє подання залишається незмінним.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Подання зникає на OciServe; реєстр очищення там фіксує, що зникло. Те, що у вашій робочій папці, лишається — це ви прибираєте окремо.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Сервер зараз недоступний. Нічого не опубліковано — спробуйте пізніше.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Сервер зараз недоступний. Нічого не змінилося — спробуйте пізніше.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Поділіться цим запрошувальним посиланням з тими, хто має заповнити форму. Посилання вказує лише на форму — воно не відкриває подань.',
+  'Dit gaat er naartoe': 'Ось куди це йде',
+  'Doelen (één per regel)': 'Цілі (по одній на рядок)',
+  'Inzending bewaren (dagen)': 'Зберігати подання (днів)',
+  'Inzending opschonen op de server': 'Очистити подання на сервері',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Ви не можете опублікувати цю форму там. Перевірте організацію та свої права.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Ви не можете цього зробити на сервері. Перевірте організацію та свої права.',
+  'Link kopiëren': 'Копіювати посилання',
+  'Naam voor de organisatie': 'Назва для організації',
+  'Ontwerp bewaren (dagen)': 'Зберігати чернетку (днів)',
+  'Opschonen ingepland op de server.': 'Очищення заплановано на сервері.',
+  'Opschonen op de server': 'Очистити на сервері',
+  'Opschonen op de server…': 'Очистити на сервері…',
+  'Privacytekst': 'Текст про конфіденційність',
+  'Publiceren': 'Опублікувати',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Публікація не вдалася. На сервері нічого не змінилося.',
+  'Publiceren via OciServe': 'Опублікувати через OciServe',
+  'Server: {server}': 'Сервер: {server}',
+  'Titel die de invuller ziet': 'Назва, яку бачить заповнювач',
+  'Vul een naam en een titel in.': 'Введіть назву й заголовок.',
+  'Vul minstens één doel in — per regel één.':
+      'Введіть принаймні одну ціль — по одній на рядок.',
+  'Waarom (niet verplicht)': 'Навіщо (необов\'язково)',
+  'Weer als open gemarkeerd op de server.':
+      'На сервері знову позначено як відкрите.',
+  'Weer als open markeren': 'Позначити знову як відкрите',
+  'correctieronde open': 'виправлення відкрите',
+  'ingediend': 'подано',
+  'ingetrokken': 'відкликано',
+  'ontwerp': 'чернетка',
+  'Insturen via OciServe…': 'Надіслати через OciServe…',
+  'Ophalen van OciServe': 'Отримати з OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Опублікуйте форму як зафіксовану версію на вашому OciServe і поділіться запрошувальним посиланням.',
+  'Publiceren via OciServe…': 'Опублікувати через OciServe…',
+  'Uitnodiging openen…': 'Відкрити запрошення…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'сервер зараз недоступний; нічого не змінилося.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'ви не можете читати ці подання там — перевірте організацію та свої права.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'отримання не вдалося; нічого не змінилося.',
   'Offline uitnodigingspakket maken…': 'Створити офлайн-пакет запрошення…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} додано. Створіть пакет запрошення знову, щоб включити {naam}.',

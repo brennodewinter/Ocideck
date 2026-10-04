@@ -5906,6 +5906,23 @@ andere tekst hoort, of is verlopen; het formulier is gesloten (de bundel noemt d
 groter is dan de organisator toestaat. De gewone zip blijft ernaast bestaan. **Niet in de webversie:** de
 versleutelbibliotheek draait daar nog niet, dus daar wordt de knop niet getoond.
 
+**Insturen via OciServe.** Kreeg je een **uitnodigingslink** (begint met `https://`, bijvoorbeeld
+`…/api/v1/intake/forms/…`), dan open je die met **Uitnodiging openen…** op het beginscherm — ook in de
+webversie, waar het formulier een gewoon document in een tabblad wordt. Op een gewone computer bewaar je het
+formulier als `.md`-bestand; OciDeck legt een klein bestand `….md.intake.json` ernaast met alleen
+*verwijzingen* (welke server, welk formulier, welke inzending) — geen codes, geen sleutels. Vul het
+formulier in zoals altijd en kies **Insturen via OciServe…** op het tabblad Invullen. Dat knopje staat er
+alleen bij een document dat uit een uitnodiging komt. Het venster toont eerst waar het naartoe gaat —
+welke server, welk formulier, hoe lang de organisator het bewaart — en verstuurt pas als jij bevestigt.
+Bij elke stap die de inzending raakt (insturen, hervatten, corrigeren, intrekken) vraagt OciDeck om je
+**e-mailadres** en mailt de server een **eenmalige code**; die code bewijst alleen dat je bij de mailbox
+kunt — het is geen account, geen wachtwoord en geen sleutel. Na het insturen krijg je per mail een
+**terugkeerlink**; die opent je inzending samen met een nieuwe code — de link alleen is geen sleutel en
+mag je dus gewoon bewaren. Staat er een **correctieronde** open, dan stuur je een nieuwe versie in;
+eerdere versies blijven op de server staan. **Inzending intrekken…** haalt hem weg bij de organisator.
+Gaat er iets mis — server weg, code verlopen — dan staat er dat er niets is vastgelegd en je werk veilig
+in je document staat; opslaan als zip en zelf meesturen kan altijd.
+
 ### Inzendingen ontvangen (organisator)
 
 De andere kant van een formulier is ontvangen wat terugkomt. Dat is een optionele uitbreiding: zet
@@ -6059,6 +6076,23 @@ byte zoals ze aankwamen plus de foto's, in één stap: een crash laat nooit een 
 en een inzending die er al is wordt nooit overschreven. Eén met een fout komt er wel in, met de status
 `needs-fixing`, zodat je er in een kopie aan kunt werken; niets wordt stilzwijgend aangenomen of
 weggegooid.
+
+**Publiceren via OciServe.** Ben je bij OciServe aangemeld (dezelfde server als bij eLearning), dan staat
+onder de formulieren ook **Publiceren via OciServe…**. Je kiest het formulier en de organisatie, en vult
+in wat de invuller te zien krijgt: titel, doelen, privacytekst, hoelang een ontwerp en een ingediende
+inzending bewaard blijven en of achteraf corrigeren mag (en binnen hoeveel dagen). Elke publicatie is een
+**vaste versie**: een gewijzigde tekst wordt versie n+1, eerdere versies veranderen nooit. Daarna toont
+het venster de **uitnodigingslink** om te delen — hij verwijst alleen naar het formulier en opent geen
+inzendingen. De koppeling ligt in `forms/<formulier>/intake.json` in de werkmap en reist mee met de map.
+
+**Ophalen van OciServe** haalt op verzoek de inzendingen binnen — er is geen achtergrondtaak en er wordt
+niet gepolsd. Per formulier meldt de regel eronder hoeveel er nieuw, bijgewerkt of ingetrokken binnenkwamen
+en hoeveel mislukten; wat binnenkomt landt via dezelfde import als een zip en krijgt dus dezelfde
+regels (het origineel wordt nooit overschreven). Onder een OciServe-inzending staan drie serverknoppen:
+**Correctieronde openen…** (de invuller mag een nieuwe versie insturen; de oude blijft staan), **Als
+behandeld markeren** / **Weer als open markeren**, en **Opschonen op de server…** — die vraagt om een
+bevestiging en ruimt de inzending alleen bij OciServe op; wat in jouw werkmap staat blijft en ruim je apart
+op. Faalt de server of je rechten, dan zegt de knop dat er niets veranderd is.
 
 **Het register** (`overview.md`, *Register openen*) is één Markdown-tabel met een rij per inzending:
 het nummer, de kolommen die het formulier in `overview=` noemt, de dag van ontvangst, de status, de dag

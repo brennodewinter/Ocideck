@@ -664,6 +664,180 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'El servidor no indicó qué formulario corresponde a este envío — no es posible rellenarlo aquí.',
+  ', {n} niet binnengehaald': ', {n} no recogidas',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Los plazos de conservación no son correctos: un borrador como máximo {draft} días, una entrega como máximo {submitted} días.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Formulario publicado como versión {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Nueva versión {n} publicada.',
+  'Organisatie: {organisatie}': 'Organización: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Directamente al organizador en {server}. Confirmas en la ventana que se abre; nunca se envía nada por sí solo.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Versión: {versie} — las versiones anteriores permanecen intocables.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Vía OciServe · revisión {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Huella: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} nuevas, {bijgewerkt} actualizadas, {ingetrokken} retiradas{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'El servidor no está disponible ahora. Inténtalo más tarde; no se ha enviado nada.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Demasiados intentos seguidos. Espera un momento e inténtalo de nuevo.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Esta dirección o este código no parece correcto. Compruébalo e inténtalo de nuevo.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'No ha funcionado. No se ha enviado nada — inténtalo de nuevo.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Tu dirección de correo solo prueba que puedes acceder al buzón — no es una cuenta y no se envía nada hasta que tú confirmes.',
+  'Je e-mailadres': 'Tu dirección de correo',
+  'Code aanvragen': 'Solicitar código',
+  'Opnieuw versturen': 'Reenviar',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Podrás reenviar en {seconden} segundos.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'Un código va en camino a esa dirección (aunque la dirección no exista — no lo sabrás aquí).',
+  'Code uit de e-mail': 'Código del correo',
+  'Code controleren': 'Comprobar código',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Esta entrega no puede enviarse ahora — está cerrada, retirada o no hay ronda de corrección abierta. Tu trabajo está a salvo en este archivo; guárdalo como zip para enviarlo.',
+  'Het pakket wordt verstuurd…': 'Enviando el paquete…',
+  'De inzending wordt vastgelegd…': 'Registrando la entrega…',
+  'De inzending wordt ingetrokken…': 'Retirando la entrega…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'El acceso ha caducado. Solicita un nuevo código mediante el enlace de retorno; tu trabajo está a salvo en este archivo.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'El paquete es demasiado grande para enviarse. Quita una foto e inténtalo de nuevo — o guárdalo como zip y envía eso.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'El servidor no recibió exactamente lo que se envió. No se registró nada; inténtalo de nuevo.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'El servidor respondió algo inesperado. No se registró nada; inténtalo más tarde.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'El servidor no está disponible ahora. No se ha enviado nada — tu trabajo está a salvo en este archivo.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'El envío no funcionó. No se registró nada — tu trabajo está a salvo en este archivo; guárdalo como zip para enviarlo.',
+  'Verzenden via OciServe': 'Enviar mediante OciServe',
+  'Bestemming: {server}': 'Destino: {server}',
+  'Doel: {doelen}': 'Propósito: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Conservación: {dagen} días tras la entrega.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Este formulario no acepta nuevas entregas ahora.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'No se pudo obtener el formulario. Aún puedes guardar tu trabajo como zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Nada se envía hasta que confirmes abajo. Guardar como archivo zip siempre es posible.',
+  'Insturen…': 'Enviar…',
+  'Correctie insturen…': 'Enviar corrección…',
+  'Inzending bijwerken…': 'Actualizar entrega…',
+  'Inzending intrekken…': 'Retirar entrega…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Esta se convierte en la revisión {n} de tu entrega en {server}. Tras enviarla ya no podrás cambiarla — un error se arregla con una nueva ronda de corrección.',
+  'Definitief insturen': 'Enviar definitivamente',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Retirar elimina tu entrega del organizador y no puede deshacerse. ¿Quieres continuar?',
+  'Verstuurd als revisie {n}.': 'Enviado como revisión {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Recibirás un enlace de retorno por correo. Ese enlace abre tu entrega solo junto con un nuevo código — el enlace solo no es una llave.',
+  'Je inzending is ingetrokken.': 'Tu entrega ha sido retirada.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'El servidor no está disponible ahora. Comprueba el enlace e inténtalo más tarde.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'El enlace no funcionó. Compruébalo e inténtalo de nuevo.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Eso no es un enlace de invitación o de retorno que OciDeck conozca. Un enlace empieza por https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Esta publicación no contiene un formulario que OciDeck pueda rellenar.',
+  'Bewaar het formulier om in te vullen': 'Guardar el formulario para rellenar',
+  'Formulieruitnodiging': 'Invitación a un formulario',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Pega el enlace de invitación o de retorno que recibiste. El enlace en sí no es una llave — tu entrega siempre requiere un código nuevo.',
+  'Uitnodigings- of terugkeerlink': 'Enlace de invitación o de retorno',
+  'Link openen': 'Abrir enlace',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Este enlace apunta a tu entrega en {server}. Abrirlo requiere un código nuevo — el enlace solo nunca es suficiente.',
+  'Deze link wijst naar {server}.': 'Este enlace apunta a {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Tienes un borrador aquí (revisión {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Tu entrega está registrada (revisión {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'El organizador pidió una corrección: tu cambio será la revisión {n}.',
+  'Deze inzending is ingetrokken.': 'Esta entrega ha sido retirada.',
+  'Formulier invullen': 'Rellenar formulario',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Rellenas en tu propio dispositivo; nada se envía hasta que tú confirmes.',
+  'Als behandeld gemarkeerd op de server.':
+      'Marcado como tratado en el servidor.',
+  'Als behandeld markeren': 'Marcar como tratado',
+  'Als nieuwe versie publiceren': 'Publicar como nueva versión',
+  'Correctie achteraf toestaan': 'Permitir corrección posterior',
+  'Correctieronde geopend op de server.':
+      'Ronda de corrección abierta en el servidor.',
+  'Correctieronde openen': 'Abrir ronda de corrección',
+  'Correctieronde openen…': 'Abrir ronda de corrección…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Plazo de corrección (días, vacío = sin fin)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'No funcionó en el servidor. Nada ha cambiado.',
+  'De correctietermijn klopt niet.': 'El plazo de corrección no es correcto.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'El encuestado puede entonces enviar una nueva versión. Su entrega anterior permanece sin cambios.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'La entrega desaparece en OciServe; el registro de purga allí anota lo que se fue. Lo que está en tu carpeta queda — lo limpias aparte.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'El servidor no está disponible ahora. No se ha publicado nada — inténtalo más tarde.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'El servidor no está disponible ahora. Nada ha cambiado — inténtalo más tarde.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Comparte este enlace de invitación con quien quieras que rellene el formulario. El enlace solo apunta al formulario — no abre entregas.',
+  'Dit gaat er naartoe': 'Ahí es donde va',
+  'Doelen (één per regel)': 'Propósitos (uno por línea)',
+  'Inzending bewaren (dagen)': 'Conservar entrega (días)',
+  'Inzending opschonen op de server': 'Purgar entrega en el servidor',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'No puedes publicar este formulario allí. Comprueba la organización y tus derechos.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'No puedes hacer esto en el servidor. Comprueba la organización y tus derechos.',
+  'Link kopiëren': 'Copiar enlace',
+  'Naam voor de organisatie': 'Nombre para la organización',
+  'Ontwerp bewaren (dagen)': 'Conservar borrador (días)',
+  'Opschonen ingepland op de server.': 'Purga programada en el servidor.',
+  'Opschonen op de server': 'Purgar en el servidor',
+  'Opschonen op de server…': 'Purgar en el servidor…',
+  'Privacytekst': 'Texto de privacidad',
+  'Publiceren': 'Publicar',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'La publicación no funcionó. Nada ha cambiado en el servidor.',
+  'Publiceren via OciServe': 'Publicar mediante OciServe',
+  'Server: {server}': 'Servidor: {server}',
+  'Titel die de invuller ziet': 'Título que ve el encuestado',
+  'Vul een naam en een titel in.': 'Introduce un nombre y un título.',
+  'Vul minstens één doel in — per regel één.':
+      'Introduce al menos un propósito — uno por línea.',
+  'Waarom (niet verplicht)': 'Por qué (opcional)',
+  'Weer als open gemarkeerd op de server.':
+      'Marcado como abierto de nuevo en el servidor.',
+  'Weer als open markeren': 'Marcar como abierto de nuevo',
+  'correctieronde open': 'corrección abierta',
+  'ingediend': 'enviada',
+  'ingetrokken': 'retirada',
+  'ontwerp': 'borrador',
+  'Insturen via OciServe…': 'Enviar mediante OciServe…',
+  'Ophalen van OciServe': 'Obtener de OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Publica un formulario como versión fijada en vuestro OciServe y comparte el enlace de invitación.',
+  'Publiceren via OciServe…': 'Publicar mediante OciServe…',
+  'Uitnodiging openen…': 'Abrir invitación…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'el servidor no está disponible; nada ha cambiado.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'no puedes leer estas entregas allí — comprueba la organización y tus derechos.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'la obtención no funcionó; nada ha cambiado.',
   'Offline uitnodigingspakket maken…':
       'Crear paquete de invitación sin conexión…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':

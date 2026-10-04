@@ -12,6 +12,8 @@ import 'dart:typed_data';
 
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
+import '../../services/form/form_intake_context.dart';
+
 class FormExportSupport {
   const FormExportSupport({
     required this.frontMatter,
@@ -22,6 +24,7 @@ class FormExportSupport {
     required this.remember,
     this.clientVersion,
     this.seal,
+    this.intake,
   });
 
   /// De front matter van het document; de pagina zelf werkt alleen met de tekst
@@ -52,6 +55,24 @@ class FormExportSupport {
   /// Wat het verzegeld opslaan nodig heeft, of `null` waar dat niet kan (het web: de
   /// age-bibliotheek draait daar nog niet) — dan is er alleen de gewone zip.
   final FormSealSupport? seal;
+
+  /// De Managed-Intake-context van dit document (FORM_INTAKE.md §6.4), of
+  /// `null` als er geen uitnodiging bij hoort — dan is er geen verzendknop.
+  final FormIntakeSupport? intake;
+}
+
+/// Wat de invulpagina nodig heeft om via OciServe te kunnen insturen: de
+/// context naast het document lezen en bijwerken. De code en de grant gaan er
+/// nooit doorheen — alleen de verwijzingen die overeind mogen blijven.
+class FormIntakeSupport {
+  const FormIntakeSupport({required this.load, required this.save});
+
+  /// De bewaarde context van [spec], of `null` als dit document er geen
+  /// heeft.
+  final Future<FormIntakeContext?> Function(FormSpec spec) load;
+
+  /// Bewaart de context van [spec] na een verstuurde of opgehaalde stap.
+  final Future<void> Function(FormSpec spec, FormIntakeContext context) save;
 }
 
 /// Wat de invulpagina nodig heeft om een inzending **verzegeld** op te slaan (FORM_INTAKE.md

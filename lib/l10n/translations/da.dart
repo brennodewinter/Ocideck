@@ -1627,6 +1627,178 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Serveren angav ikke, hvilken formular der hører til denne indsendelse — udfyldelse er ikke mulig her.',
+  ', {n} niet binnengehaald': ', {n} ikke hentet',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Opbevaringsfristerne er ikke rigtige: et udkast højst {draft} dage, en indsendelse højst {submitted} dage.',
+  'Formulier gepubliceerd als versie {n}.': 'Formular udgivet som version {n}.',
+  'Nieuwe versie {n} gepubliceerd.': 'Ny version {n} udgivet.',
+  'Organisatie: {organisatie}': 'Organisation: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Direkte til arrangøren på {server}. Du bekræfter i vinduet, der åbner; der sendes aldrig noget af sig selv.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Version: {versie} — tidligere versioner forbliver uberørbare.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'Via OciServe · revision {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Fingeraftryk: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} nye, {bijgewerkt} opdaterede, {ingetrokken} tilbagetrukkede{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Serveren kan ikke nås lige nu. Prøv igen senere; der blev ikke sendt noget.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'For mange forsøg i træk. Vent et øjeblik og prøv igen.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Denne adresse eller kode ser ikke rigtig ud. Tjek den og prøv igen.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'Det lykkedes ikke. Der blev ikke sendt noget — prøv igen.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'Din e-mailadresse beviser kun, at du kan nå postkassen — det er ikke en konto, og der sendes ikke noget, før du selv bekræfter.',
+  'Je e-mailadres': 'Din e-mailadresse',
+  'Code aanvragen': 'Anmod om kode',
+  'Opnieuw versturen': 'Send igen',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      'Du kan sende igen om {seconden} sekunder.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'En kode er på vej til den adresse (også selvom adressen ikke findes — det får du ikke at vide her).',
+  'Code uit de e-mail': 'Kode fra e-mailen',
+  'Code controleren': 'Tjek kode',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Denne indsendelse kan ikke sendes nu — den er lukket, trukket tilbage, eller der er ingen korrektionsrunde åben. Dit arbejde er sikkert i denne fil; gem det som zip for at sende det.',
+  'Het pakket wordt verstuurd…': 'Pakken sendes…',
+  'De inzending wordt vastgelegd…': 'Indsendelsen registreres…',
+  'De inzending wordt ingetrokken…': 'Indsendelsen trækkes tilbage…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Adgangen er udløbet. Anmod om en ny kode via returlinket; dit arbejde er sikkert i denne fil.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Pakken er for stor til at sende. Fjern et foto og prøv igen — eller gem den som zip og send den med.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Serveren modtog ikke præcis det, der blev sendt. Intet blev registreret; prøv igen.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Serveren svarede noget uventet. Intet blev registreret; prøv igen senere.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Serveren kan ikke nås lige nu. Der blev ikke sendt noget — dit arbejde er sikkert i denne fil.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Afsendelsen mislykkedes. Intet blev registreret — dit arbejde er sikkert i denne fil; gem det som zip for at sende det.',
+  'Verzenden via OciServe': 'Send via OciServe',
+  'Bestemming: {server}': 'Destination: {server}',
+  'Doel: {doelen}': 'Formål: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Opbevaring: {dagen} dage efter indsendelse.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Denne formular modtager ikke nye indsendelser lige nu.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Formularen kunne ikke hentes. Du kan stadig gemme dit arbejde som zip.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Der sendes ikke noget, før du bekræfter nedenfor. Det er altid muligt at gemme som zip-fil.',
+  'Insturen…': 'Indsend…',
+  'Correctie insturen…': 'Indsend rettelse…',
+  'Inzending bijwerken…': 'Opdater indsendelse…',
+  'Inzending intrekken…': 'Træk indsendelse tilbage…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Dette bliver revision {n} af din indsendelse på {server}. Efter indsendelse kan du ikke længere ændre den — en fejl rettes med en ny korrektionsrunde.',
+  'Definitief insturen': 'Indsend endeligt',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Tilbagetrækning fjerner din indsendelse hos arrangøren og kan ikke fortrydes. Vil du fortsætte?',
+  'Verstuurd als revisie {n}.': 'Sendt som revision {n}.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'Du modtager et returlink pr. e-mail. Det link åbner kun din indsendelse sammen med en ny kode — linket alene er ikke en nøgle.',
+  'Je inzending is ingetrokken.': 'Din indsendelse er trukket tilbage.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Serveren kan ikke nås lige nu. Tjek linket og prøv igen senere.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Linket virkede ikke. Tjek det og prøv igen.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Det er ikke et invitations- eller returlink, som OciDeck kender. Et link starter med https://.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Denne publikation indeholder ikke en formular, som OciDeck kan udfylde.',
+  'Bewaar het formulier om in te vullen': 'Gem formularen til udfyldelse',
+  'Formulieruitnodiging': 'Formularinvitation',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Indsæt det invitations- eller returlink, du fik. Linket i sig selv er ikke en nøgle — din indsendelse kræver altid en ny kode.',
+  'Uitnodigings- of terugkeerlink': 'Invitations- eller returlink',
+  'Link openen': 'Åbn link',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Dette link peger på din indsendelse på {server}. At åbne det kræver en ny kode — linket alene er aldrig nok.',
+  'Deze link wijst naar {server}.': 'Dette link peger på {server}.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Du har et udkast her (revision {n}).',
+  'Je inzending is binnen (revisie {n}).':
+      'Din indsendelse er modtaget (revision {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Arrangøren bad om en rettelse: din ændring bliver revision {n}.',
+  'Deze inzending is ingetrokken.': 'Denne indsendelse er trukket tilbage.',
+  'Formulier invullen': 'Udfyld formular',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Du udfylder på din egen enhed; der sendes ikke noget, før du selv bekræfter.',
+  'Als behandeld gemarkeerd op de server.':
+      'Markeret som behandlet på serveren.',
+  'Als behandeld markeren': 'Markér som behandlet',
+  'Als nieuwe versie publiceren': 'Udgiv som ny version',
+  'Correctie achteraf toestaan': 'Tillad korrektion bagefter',
+  'Correctieronde geopend op de server.': 'Korrektionsrunde åbnet på serveren.',
+  'Correctieronde openen': 'Åbn korrektionsrunde',
+  'Correctieronde openen…': 'Åbn korrektionsrunde…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Korrektionsfrist (dage, tom = ingen ende)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Det lykkedes ikke på serveren. Intet er ændret.',
+  'De correctietermijn klopt niet.': 'Korrektionsfristen er ikke rigtig.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Udfylderen må herefter indsende en ny version. Vedkommendes tidligere indsendelse forbliver uændret.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Indsendelsen forsvinder hos OciServe; rydningsregisteret der holder styr på, hvad der er væk. Hvad der står i din arbejdsmappe, bliver — det rydder du separat op.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Serveren kan ikke nås lige nu. Intet blev udgivet — prøv igen senere.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Serveren kan ikke nås lige nu. Intet er ændret — prøv igen senere.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Del dette invitationslink med dem, du vil have til at udfylde formularen. Linket peger kun på formularen — det åbner ikke indsendelser.',
+  'Dit gaat er naartoe': 'Dér går det hen',
+  'Doelen (één per regel)': 'Formål (ét pr. linje)',
+  'Inzending bewaren (dagen)': 'Opbevar indsendelse (dage)',
+  'Inzending opschonen op de server': 'Ryd indsendelse på serveren',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Du må ikke udgive denne formular der. Tjek organisationen og dine rettigheder.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Det må du ikke på serveren. Tjek organisationen og dine rettigheder.',
+  'Link kopiëren': 'Kopiér link',
+  'Naam voor de organisatie': 'Navn til organisationen',
+  'Ontwerp bewaren (dagen)': 'Opbevar udkast (dage)',
+  'Opschonen ingepland op de server.': 'Rydning planlagt på serveren.',
+  'Opschonen op de server': 'Ryd på serveren',
+  'Opschonen op de server…': 'Ryd på serveren…',
+  'Privacytekst': 'Privatlivstekst',
+  'Publiceren': 'Udgiv',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Udgivelsen mislykkedes. Intet er ændret på serveren.',
+  'Publiceren via OciServe': 'Udgiv via OciServe',
+  'Server: {server}': 'Server: {server}',
+  'Titel die de invuller ziet': 'Titel, som udfylderen ser',
+  'Vul een naam en een titel in.': 'Indtast et navn og en titel.',
+  'Vul minstens één doel in — per regel één.':
+      'Indtast mindst ét formål — ét pr. linje.',
+  'Waarom (niet verplicht)': 'Hvorfor (valgfrit)',
+  'Weer als open gemarkeerd op de server.':
+      'Markeret som åben igen på serveren.',
+  'Weer als open markeren': 'Markér som åben igen',
+  'correctieronde open': 'korrektion åben',
+  'ingediend': 'indsendt',
+  'ingetrokken': 'tilbagetrukket',
+  'ontwerp': 'udkast',
+  'Insturen via OciServe…': 'Indsend via OciServe…',
+  'Ophalen van OciServe': 'Hent fra OciServe',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Udgiv en formular som en fastlagt version på jeres OciServe og del invitationslinket.',
+  'Publiceren via OciServe…': 'Udgiv via OciServe…',
+  'Uitnodiging openen…': 'Åbn invitation…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'serveren kan ikke nås nu; intet er ændret.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'du må ikke læse disse indsendelser der — tjek organisationen og dine rettigheder.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'hentningen mislykkedes; intet er ændret.',
   'Offline uitnodigingspakket maken…': 'Opret offline-invitationspakke…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} er tilføjet. Lav invitationspakken igen for at medtage {naam}.',

@@ -2538,6 +2538,179 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
+      'Sunucu bu gönderime hangi formun ait olduğunu belirtmedi — burada doldurmak mümkün değil.',
+  ', {n} niet binnengehaald': ', {n} alınamadı',
+  'De bewaartermijnen kloppen niet: een ontwerp maximaal {draft} dagen, een inzending maximaal {submitted} dagen.':
+      'Saklama süreleri doğru değil: taslak en fazla {draft} gün, başvuru en fazla {submitted} gün.',
+  'Formulier gepubliceerd als versie {n}.':
+      'Form {n}. sürüm olarak yayınlandı.',
+  'Nieuwe versie {n} gepubliceerd.': 'Yeni sürüm {n} yayınlandı.',
+  'Organisatie: {organisatie}': 'Organizasyon: {organisatie}',
+  'Rechtstreeks naar de organisator op {server}. Je bevestigt in het venster dat opent; er wordt nooit vanzelf iets verstuurd.':
+      'Doğrudan {server} üzerindeki organizatöre. Açılan pencerede onaylarsın; hiçbir şey kendiliğinden gönderilmez.',
+  'Versie: {versie} — vorige versies blijven onaantastbaar.':
+      'Sürüm: {versie} — önceki sürümler dokunulmaz kalır.',
+  'Via OciServe · revisie {n} · {toestand}':
+      'OciServe ile · revizyon {n} · {toestand}',
+  'Vingerafdruk: {hash}…': 'Parmak izi: {hash}…',
+  '{naam}: {fout}': '{naam}: {fout}',
+  '{naam}: {nieuw} nieuw, {bijgewerkt} bijgewerkt, {ingetrokken} ingetrokken{mislukt}.':
+      '{naam}: {nieuw} yeni, {bijgewerkt} güncellenmiş, {ingetrokken} geri çekilmiş{mislukt}.',
+  'De server is nu niet bereikbaar. Probeer het later opnieuw; er is niets verstuurd.':
+      'Sunucuya şu anda ulaşılamıyor. Daha sonra tekrar dene; hiçbir şey gönderilmedi.',
+  'Te veel pogingen achter elkaar. Wacht even en probeer het opnieuw.':
+      'Üst üste çok fazla deneme. Biraz bekle ve tekrar dene.',
+  'Dit adres of deze code klopt niet zo. Controleer het en probeer het opnieuw.':
+      'Bu adres veya kod doğru görünmüyor. Kontrol et ve tekrar dene.',
+  'Dat lukte niet. Er is niets verstuurd — probeer het opnieuw.':
+      'İşe yaramadı. Hiçbir şey gönderilmedi — tekrar dene.',
+  'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
+      'E-posta adresin yalnızca posta kutusuna erişebildiğini kanıtlar — bir hesap değildir ve sen onaylayana kadar hiçbir şey gönderilmez.',
+  'Je e-mailadres': 'E-posta adresin',
+  'Code aanvragen': 'Kod iste',
+  'Opnieuw versturen': 'Tekrar gönder',
+  'Opnieuw versturen kan over {seconden} seconden.':
+      '{seconden} saniye sonra tekrar gönderebilirsin.',
+  'Er is een code onderweg naar dat adres (ook als het adres niet bestaat — dat hoor je hier niet).':
+      'O adrese bir kod yolda (adres var olmasa bile — bunu burada öğrenemezsin).',
+  'Code uit de e-mail': 'E-postadaki kod',
+  'Code controleren': 'Kodu doğrula',
+  'Deze inzending kan nu niet worden verstuurd — hij is gesloten, ingetrokken of er loopt geen correctieronde. Je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Bu başvuru şu anda gönderilemez — kapalı, geri çekilmiş veya açık bir düzeltme turu yok. Çalışman bu dosyada güvende; göndermek için zip olarak kaydet.',
+  'Het pakket wordt verstuurd…': 'Paket gönderiliyor…',
+  'De inzending wordt vastgelegd…': 'Başvuru kaydediliyor…',
+  'De inzending wordt ingetrokken…': 'Başvuru geri çekiliyor…',
+  'De toegang is verlopen. Vraag via de terugkeerlink een nieuwe code aan; je werk staat veilig in dit bestand.':
+      'Erişim süresi doldu. Geri dönüş bağlantısı üzerinden yeni bir kod iste; çalışman bu dosyada güvende.',
+  'Het pakket is te groot om te versturen. Haal een foto weg en probeer het opnieuw — of sla het op als zip en stuur dat mee.':
+      'Paket göndermek için çok büyük. Bir fotoğrafı kaldır ve tekrar dene — ya da zip olarak kaydet ve onu gönder.',
+  'De server ontving niet precies wat er verstuurd is. Er is niets vastgelegd; probeer het opnieuw.':
+      'Sunucu gönderileni tam olarak almadı. Hiçbir şey kaydedilmedi; tekrar dene.',
+  'De server antwoordde iets onverwachts. Er is niets vastgelegd; probeer het later opnieuw.':
+      'Sunucu beklenmedik bir yanıt verdi. Hiçbir şey kaydedilmedi; daha sonra tekrar dene.',
+  'De server is nu niet bereikbaar. Er is niets verstuurd — je werk staat veilig in dit bestand.':
+      'Sunucuya şu anda ulaşılamıyor. Hiçbir şey gönderilmedi — çalışman bu dosyada güvende.',
+  'Versturen lukte niet. Er is niets vastgelegd — je werk staat veilig in dit bestand; sla het op als zip om het mee te sturen.':
+      'Gönderme başarısız oldu. Hiçbir şey kaydedilmedi — çalışman bu dosyada güvende; göndermek için zip olarak kaydet.',
+  'Verzenden via OciServe': 'OciServe ile gönder',
+  'Bestemming: {server}': 'Hedef: {server}',
+  'Doel: {doelen}': 'Amaç: {doelen}',
+  'Bewaren: {dagen} dagen na indienen.':
+      'Saklama: gönderimden sonra {dagen} gün.',
+  'Dit formulier neemt nu geen nieuwe inzendingen aan.':
+      'Bu form şu anda yeni başvuru kabul etmiyor.',
+  'Het formulier kon niet worden opgehaald. Je kunt je werk alsnog opslaan als zip.':
+      'Form alınamadı. Çalışmanı yine de zip olarak kaydedebilirsin.',
+  'Er wordt pas iets verstuurd als je hieronder bevestigt. Opslaan als zipbestand blijft altijd mogelijk.':
+      'Aşağıda onaylayana kadar hiçbir şey gönderilmez. Zip dosyası olarak kaydetmek her zaman mümkündür.',
+  'Insturen…': 'Gönder…',
+  'Correctie insturen…': 'Düzeltme gönder…',
+  'Inzending bijwerken…': 'Başvuruyu güncelle…',
+  'Inzending intrekken…': 'Başvuruyu geri çek…',
+  'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.':
+      'Bu, {server} üzerindeki başvurunun {n}. revizyonu olur. Gönderdikten sonra artık değiştiremezsin — bir hata yeni bir düzeltme turu ile düzeltilir.',
+  'Definitief insturen': 'Kesin olarak gönder',
+  'Intrekken haalt je inzending weg bij de organisator en kan niet ongedaan worden gemaakt. Wil je doorgaan?':
+      'Geri çekme, başvurunu organizatörden kaldırır ve geri alınamaz. Devam etmek istiyor musun?',
+  'Verstuurd als revisie {n}.': '{n}. revizyon olarak gönderildi.',
+  'Je krijgt een terugkeerlink per mail. Die link opent je inzending alleen samen met een nieuwe code — de link alleen is geen sleutel.':
+      'E-postayla bir geri dönüş bağlantısı alacaksın. Bu bağlantı, başvurunu yalnızca yeni bir kodla birlikte açar — bağlantı tek başına bir anahtar değildir.',
+  'Je inzending is ingetrokken.': 'Başvurun geri çekildi.',
+  'De server is nu niet bereikbaar. Controleer de link en probeer het later opnieuw.':
+      'Sunucuya şu anda ulaşılamıyor. Bağlantıyı kontrol et ve daha sonra tekrar dene.',
+  'De link werkte niet. Controleer hem en probeer het opnieuw.':
+      'Bağlantı çalışmadı. Kontrol et ve tekrar dene.',
+  'Dat is geen uitnodigings- of terugkeerlink die OciDeck kent. Een link begint met https://.':
+      'Bu, OciDeck\'in tanıdığı bir davet veya geri dönüş bağlantısı değil. Bağlantı https:// ile başlar.',
+  'Deze publicatie bevat geen formulier dat OciDeck kan invullen.':
+      'Bu yayın, OciDeck\'in doldurabileceği bir form içermiyor.',
+  'Bewaar het formulier om in te vullen': 'Doldurmak için formu kaydet',
+  'Formulieruitnodiging': 'Form daveti',
+  'Plak de uitnodigings- of terugkeerlink die je kreeg. De link zelf is geen sleutel — voor je inzending is altijd een nieuwe code nodig.':
+      'Aldığın davet veya geri dönüş bağlantısını yapıştır. Bağlantının kendisi bir anahtar değildir — başvurun için her zaman yeni bir kod gerekir.',
+  'Uitnodigings- of terugkeerlink': 'Davet veya geri dönüş bağlantısı',
+  'Link openen': 'Bağlantıyı aç',
+  'Deze link wijst naar jouw inzending op {server}. Om hem te openen is een nieuwe code nodig — de link alleen is nooit genoeg.':
+      'Bu bağlantı {server} üzerindeki başvuruna işaret ediyor. Açmak için yeni bir kod gerekir — bağlantı tek başına asla yeterli değildir.',
+  'Deze link wijst naar {server}.':
+      'Bu bağlantı {server} adresine işaret ediyor.',
+  'Je hebt hier een ontwerp staan (revisie {n}).':
+      'Burada bir taslağın var (revizyon {n}).',
+  'Je inzending is binnen (revisie {n}).': 'Başvurun ulaştı (revizyon {n}).',
+  'De organisator vroeg een correctie: jouw wijziging wordt revisie {n}.':
+      'Organizatör bir düzeltme istedi: değişikliğin {n}. revizyon olur.',
+  'Deze inzending is ingetrokken.': 'Bu başvuru geri çekildi.',
+  'Formulier invullen': 'Formu doldur',
+  'Je vult in op je eigen apparaat; er wordt pas iets verstuurd als je dat zelf bevestigt.':
+      'Kendi cihazında doldurursun; sen onaylayana kadar hiçbir şey gönderilmez.',
+  'Als behandeld gemarkeerd op de server.':
+      'Sunucuda işlendi olarak işaretlendi.',
+  'Als behandeld markeren': 'İşlendi olarak işaretle',
+  'Als nieuwe versie publiceren': 'Yeni sürüm olarak yayınla',
+  'Correctie achteraf toestaan': 'Sonradan düzeltmeye izin ver',
+  'Correctieronde geopend op de server.': 'Sunucuda düzeltme turu açıldı.',
+  'Correctieronde openen': 'Düzeltme turunu aç',
+  'Correctieronde openen…': 'Düzeltme turunu aç…',
+  'Correctietermijn (dagen, leeg = geen einde)':
+      'Düzeltme süresi (gün, boş = sonu yok)',
+  'Dat lukte niet op de server. Er is niets veranderd.':
+      'Sunucuda işe yaramadı. Hiçbir şey değişmedi.',
+  'De correctietermijn klopt niet.': 'Düzeltme süresi doğru değil.',
+  'De invuller mag dan een nieuwe versie insturen. Zijn eerdere inzending blijft onveranderd staan.':
+      'Dolduran kişi o zaman yeni bir sürüm gönderebilir. Önceki başvurusu değişmeden kalır.',
+  'De inzending verdwijnt bij OciServe; het opschoningsregister daar houdt bij wat er weg is. Wat er in jouw werkmap staat blijft — dat ruim je apart op.':
+      'Başvuru OciServe\'de kaybolur; oradaki temizlik kaydı neyin gittiğini tutar. Çalışma klasöründe olan kalır — onu ayrıca temizlersin.',
+  'De server is nu niet bereikbaar. Er is niets gepubliceerd — probeer het later opnieuw.':
+      'Sunucuya şu anda ulaşılamıyor. Hiçbir şey yayınlanmadı — daha sonra tekrar dene.',
+  'De server is nu niet bereikbaar. Er is niets veranderd — probeer het later opnieuw.':
+      'Sunucuya şu anda ulaşılamıyor. Hiçbir şey değişmedi — daha sonra tekrar dene.',
+  'Deel deze uitnodigingslink met wie je het formulier wilt laten invullen. De link verwijst alleen naar het formulier — hij opent geen inzendingen.':
+      'Bu davet bağlantısını, formu doldurmasını istediğin kişilerle paylaş. Bağlantı yalnızca forma işaret eder — başvuruları açmaz.',
+  'Dit gaat er naartoe': 'Buraya gider',
+  'Doelen (één per regel)': 'Amaçlar (satır başına bir)',
+  'Inzending bewaren (dagen)': 'Başvuruyu sakla (gün)',
+  'Inzending opschonen op de server': 'Başvuruyu sunucuda temizle',
+  'Je mag dit formulier daar niet publiceren. Controleer de organisatie en je rechten.':
+      'Bu formu orada yayınlayamazsın. Organizasyonu ve yetkilerini kontrol et.',
+  'Je mag dit op de server niet. Controleer de organisatie en je rechten.':
+      'Bunu sunucuda yapamazsın. Organizasyonu ve yetkilerini kontrol et.',
+  'Link kopiëren': 'Bağlantıyı kopyala',
+  'Naam voor de organisatie': 'Organizasyon için ad',
+  'Ontwerp bewaren (dagen)': 'Taslağı sakla (gün)',
+  'Opschonen ingepland op de server.': 'Sunucuda temizleme planlandı.',
+  'Opschonen op de server': 'Sunucuda temizle',
+  'Opschonen op de server…': 'Sunucuda temizle…',
+  'Privacytekst': 'Gizlilik metni',
+  'Publiceren': 'Yayınla',
+  'Publiceren lukte niet. Er is niets veranderd op de server.':
+      'Yayınlama başarısız oldu. Sunucuda hiçbir şey değişmedi.',
+  'Publiceren via OciServe': 'OciServe ile yayınla',
+  'Server: {server}': 'Sunucu: {server}',
+  'Titel die de invuller ziet': 'Dolduranın gördüğü başlık',
+  'Vul een naam en een titel in.': 'Bir ad ve bir başlık gir.',
+  'Vul minstens één doel in — per regel één.':
+      'En az bir amaç gir — satır başına bir.',
+  'Waarom (niet verplicht)': 'Neden (zorunlu değil)',
+  'Weer als open gemarkeerd op de server.':
+      'Sunucuda tekrar açık olarak işaretlendi.',
+  'Weer als open markeren': 'Tekrar açık olarak işaretle',
+  'correctieronde open': 'düzeltme açık',
+  'ingediend': 'gönderildi',
+  'ingetrokken': 'geri çekildi',
+  'ontwerp': 'taslak',
+  'Insturen via OciServe…': 'OciServe ile gönder…',
+  'Ophalen van OciServe': 'OciServe\'den al',
+  'Publiceer een formulier als vastgelegde versie op jullie OciServe en deel de uitnodigingslink.':
+      'Bir formu OciServe\'nizde sabitlenmiş sürüm olarak yayınla ve davet bağlantısını paylaş.',
+  'Publiceren via OciServe…': 'OciServe ile yayınla…',
+  'Uitnodiging openen…': 'Daveti aç…',
+  'de server is nu niet bereikbaar; er is niets veranderd.':
+      'sunucuya şu anda ulaşılamıyor; hiçbir şey değişmedi.',
+  'je mag deze inzendingen daar niet lezen — controleer de organisatie en je rechten.':
+      'bu başvuruları orada okuyamazsın — organizasyonu ve yetkilerini kontrol et.',
+  'ophalen lukte niet; er is niets veranderd.':
+      'alma başarısız oldu; hiçbir şey değişmedi.',
   'Offline uitnodigingspakket maken…': 'Çevrimdışı davet paketi oluştur…',
   '{naam} is toegevoegd. Maak het uitnodigingspakket opnieuw om {naam} erin op te nemen.':
       '{naam} eklendi. {naam} adlı kişiyi dahil etmek için davet paketini yeniden oluşturun.',
