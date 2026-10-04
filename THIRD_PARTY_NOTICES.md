@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-> **Status:** current-state notices, maintained by hand; the SBOM is the machine-readable authority · **Status last reviewed:** 2026-09-07 · **Published by:** Stichting LibreKAT
+> **Status:** current-state notices, maintained by hand; the SBOM is the machine-readable authority · **Status last reviewed:** 2026-10-04 · **Published by:** Stichting LibreKAT
 
 OciDeck is licensed under the EUPL-1.2 (see [`LICENSE.md`](LICENSE.md)). It
 builds on, and bundles, third-party components that remain under their own
@@ -23,6 +23,8 @@ from its project or package page.
 > **First-party packages are not listed here.** Code under `packages/` (today
 > `ocideck_form_core`) is part of OciDeck itself and licensed EUPL-1.2 like the rest;
 > it is not a third-party component. The SBOM lists it in its own `first-party` group.
+> Shared LibreKAT packages from another repository are listed with the direct
+> dependencies below, so this notice remains complete across repository boundaries.
 
 ## Bundled runtime assets
 
@@ -81,6 +83,7 @@ same answer `make licenses` and the SBOM give.
 | Package | Used for | Licence |
 | --- | --- | --- |
 | `flutter`, `flutter_localizations` | The framework and its localisation delegates | BSD-3-Clause (Flutter SDK) |
+| `app_appearance` | Shared product-neutral appearance profiles, Material theme construction and contrast checks from LibreKAT AppFoundation | EUPL-1.2 |
 | `material_ui` | Standalone Material Design widget library (decoupled from core Flutter in 3.47) | BSD-3-Clause |
 | `flutter_riverpod` | Application state | MIT |
 | `file_picker` | Open/save dialogs | MIT |
