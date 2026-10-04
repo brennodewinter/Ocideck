@@ -5851,29 +5851,6 @@ bundle was changed, belongs to another form or text, or has expired; the form ha
 day); or the submission is larger than the organiser allows. The plain zip stays available beside it. **Not in the
 web version:** the encryption library does not run there yet, so there the button is not offered.
 
-**Opening an invitation.** When the organiser sent you an **invitation link** instead of a file, choose
-**Open invitation…** on the start screen (on a computer; not in the web version yet). Paste the link — OciDeck has
-already filled it in if it was on your clipboard — and the window shows which server the form will be fetched from before
-anything is requested. A link without the organiser's fingerprint is *not complete* and goes no further: ask for the full
-link. OciDeck then fetches the form and checks everything the server says against the fingerprint in the link: that the
-form really is from who the invitation names, that it is exactly this form for exactly this server, that it has not
-expired, and that it is not older than a form you saw before. Only then does it show *Form from* the organiser's name,
-with the fingerprint under *Details*. If the form comes in several languages you choose one; a form that has closed cannot
-be opened. **Fill in the form** opens it as a new document on the **Fill in** tab, and OciDeck already knows the
-published form and the bundle, so saving the submission — also sealed — asks for neither a file nor a fingerprint.
-Opening an invitation sends the server nothing but two plain requests; the token and the fingerprint in the link never
-leave your computer.
-
-**Sending it.** A form you opened from an invitation has a **Send…** button as well. OciDeck seals the submission
-first, on your computer, and only if the form's bundle holds — it is signed by the organiser the invitation names, for
-exactly the server in the link, and the form has not closed. Then one question stands between your answers and the
-network: *Send to the editors of …? Your submission goes encrypted to the server; only … can open it.* The fingerprint is
-under *Details*. After the upload the window shows when it arrived and the editors' contact line, and the first characters
-of a checksum you can quote. **Keep receipt…** saves a small file with the secret that can withdraw the submission; keep it
-somewhere safe, and note that **the arrival note is not a proof against the server** — the server could write anything on
-it. If sending fails, your answers stay in the form: *Try again* sends the same submission once more (a repeat is safe: the
-server knows it by its number and cannot end up with two), or *Save sealed…* makes the encrypted file to email instead.
-
 ### Receiving submissions (organiser)
 
 The other side of a form is receiving what comes back. It is an optional extension: switch on

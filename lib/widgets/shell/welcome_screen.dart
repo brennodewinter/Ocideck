@@ -309,7 +309,6 @@ class _WelcomeScreen extends ConsumerWidget {
       const SizedBox(height: 16),
       ..._elearningEntry(context, ref, l10n, scheme, secondaryStyle),
       ..._formsEntry(context, ref, l10n, secondaryStyle),
-      ..._invitationEntry(context, l10n, secondaryStyle),
       _wideSecondaryButton(
         style: secondaryStyle,
         icon: Icons.folder_open_outlined,
@@ -401,27 +400,6 @@ class _WelcomeScreen extends ConsumerWidget {
         icon: Icons.inbox_outlined,
         label: Text(l10n.d('Inzendingen')),
         onPressed: () => showFormInboxDialog(context),
-      ),
-      const SizedBox(height: 10),
-    ];
-  }
-
-  /// *Uitnodiging openen…*: wie een link kreeg om een formulier in te vullen opent hem hier.
-  /// Voor iedereen op een computer, niet achter de uitbreiding — de uitbreiding is wat een
-  /// organisator doet met wat binnenkomt, en een invuller heeft die niet. Op het web is er nog geen
-  /// weg: de webinvuller moet eerst kunnen verzegelen.
-  List<Widget> _invitationEntry(
-    BuildContext context,
-    AppLocalizations l10n,
-    ButtonStyle secondaryStyle,
-  ) {
-    if (!supportsLocalProjectFolders) return const [];
-    return [
-      _wideSecondaryButton(
-        style: secondaryStyle,
-        icon: Icons.mark_email_read_outlined,
-        label: Text(l10n.d('Uitnodiging openen…')),
-        onPressed: () => openFormInvitation(context),
       ),
       const SizedBox(height: 10),
     ];

@@ -12,8 +12,6 @@ import 'dart:typed_data';
 
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
-import '../../services/form/intake/intake_client.dart';
-
 class FormExportSupport {
   const FormExportSupport({
     required this.frontMatter,
@@ -24,7 +22,6 @@ class FormExportSupport {
     required this.remember,
     this.clientVersion,
     this.seal,
-    this.send,
   });
 
   /// De front matter van het document; de pagina zelf werkt alleen met de tekst
@@ -55,24 +52,6 @@ class FormExportSupport {
   /// Wat het verzegeld opslaan nodig heeft, of `null` waar dat niet kan (het web: de
   /// age-bibliotheek draait daar nog niet) — dan is er alleen de gewone zip.
   final FormSealSupport? seal;
-
-  /// Wat het versturen naar een inzendserver nodig heeft, of `null` waar dat niet kan (het web).
-  /// Er valt alleen iets te versturen voor een formulier dat via een uitnodiging kwam.
-  final FormSendSupport? send;
-}
-
-/// Wat de invulpagina nodig heeft om een inzending **naar een server** te sturen (FORM_INTAKE.md
-/// §6.6): de uitnodiging waarmee het formulier kwam, en de client die erheen praat. De bundel en de
-/// vingerafdruk zelf staan in het geheugen van [FormSealSupport]; die zijn bij de uitnodiging al
-/// getoetst.
-class FormSendSupport {
-  const FormSendSupport({required this.recall, required this.client});
-
-  /// De uitnodiging waarmee het formulier van [spec] in deze sessie kwam, of `null`: dan is er
-  /// geen server om naar te sturen.
-  final InviteLink? Function(FormSpec spec) recall;
-
-  final IntakeClient client;
 }
 
 /// Wat de invulpagina nodig heeft om een inzending **verzegeld** op te slaan (FORM_INTAKE.md

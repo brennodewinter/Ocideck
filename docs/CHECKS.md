@@ -960,8 +960,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   1000-line ceiling (`maxFileLines`, imported from `check_conventions.dart`); no
   bare `catch (_)`; and **the cryptographic primitives** — `package:dartage`,
   `cryptography`, `pointycastle`, `pqcrypto` — are imported only by the files that are
-  meant to touch them (`primitiveFiles`: `form_seal.dart`,
-  `form_bundle.dart` and `intake_request.dart`, FORM_INTAKE.md §5.6, §6.3). A hash (`package:crypto`) is not one.
+  meant to touch them (`primitiveFiles`: `form_seal.dart` and the later
+  `form_bundle.dart`, FORM_INTAKE.md §5.6). A hash (`package:crypto`) is not one.
 - **Why it exists:** a shared core is only shareable if that is *checked*. One
   `import 'dart:io'` and the web form shell stops compiling; one `sdk: flutter`
   and a standalone Dart server cannot resolve it. `flutter analyze` at the root

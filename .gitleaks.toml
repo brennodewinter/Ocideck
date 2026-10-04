@@ -67,15 +67,4 @@ paths = [
   # eigen sleutel in zet, loopt gewoon tegen de poort aan. `form_seal_vectors_test`
   # rekent elk bestand na tegen `SHA256SUMS`, dus er komt hier ook niets ongemerkt bij.
   '''^packages/ocideck_form_core/test/fixtures/age_testkit/[a-z0-9_]+$''',
-
-  # ── De testvectoren van het inzendprotocol ────────────────────────────────
-  # `intake_protocol_vectors.json` (CC0, FORM_INTAKE.md D5) bestaat om voorbeeldwaarden te
-  # dragen onder de namen die het protocol ze geeft: een uitnodigingstoken, het intrekgeheim
-  # en hun hashes, een ondertekend verzoek. Gitleaks' `generic-api-key` leest `token` of
-  # `secret` in een sleutelnaam plus een waarde met entropie als lek en vond er zes. Het zijn
-  # verzonnen waarden bij een zaad dat in het bestand zelf staat; een sleutel die er per
-  # ongeluk bij komt, valt hier niet op. Alleen dit ene bestand: de test
-  # `intake_protocol_vector_test` leest het en rekent elke waarde na, en een Dart-bestand
-  # (waar een echte waarde zou belanden) blijft gewoon gescand.
-  '''^packages/ocideck_form_core/test/fixtures/intake_protocol_vectors\.json$''',
 ]

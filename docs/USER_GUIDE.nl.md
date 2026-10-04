@@ -5906,31 +5906,6 @@ andere tekst hoort, of is verlopen; het formulier is gesloten (de bundel noemt d
 groter is dan de organisator toestaat. De gewone zip blijft ernaast bestaan. **Niet in de webversie:** de
 versleutelbibliotheek draait daar nog niet, dus daar wordt de knop niet getoond.
 
-**Een uitnodiging openen.** Kreeg je van de organisator een **uitnodigingslink** in plaats van een bestand, kies dan op het
-startscherm **Uitnodiging openen…** (op een computer; in de webversie nog niet). Plak de link — OciDeck heeft hem al ingevuld
-als hij op je klembord stond — en het venster laat zien bij welke server het formulier wordt opgehaald, voor er iets wordt
-gevraagd. Een link zonder de vingerafdruk van de organisator is *niet compleet* en gaat niet verder: vraag om de volledige
-link. OciDeck haalt het formulier dan op en toetst alles wat de server zegt aan de vingerafdruk uit de link: dat het
-formulier echt komt van wie de uitnodiging noemt, dat het precies dit formulier is voor precies deze server, dat het niet
-verlopen is en niet ouder is dan een formulier dat je eerder zag. Pas dan staat er *Formulier van* de naam van de
-organisator, met de vingerafdruk onder *Details*. Komt het formulier in meerdere talen, dan kies je er één; een formulier
-dat gesloten is kun je niet openen. **Formulier invullen** opent het als nieuw document op het tabblad **Invullen**, en
-OciDeck kent het gepubliceerde formulier en de bundel al, dus het opslaan van de inzending — ook verzegeld — vraagt om
-geen bestand en geen vingerafdruk. Een uitnodiging openen stuurt de server niets anders dan twee gewone verzoeken; het
-token en de vingerafdruk uit de link verlaten je computer nooit.
-
-**Versturen.** Een formulier dat je uit een uitnodiging opende heeft ook een knop **Versturen…**. OciDeck verzegelt de
-inzending eerst, op je computer, en alleen als de bundel van het formulier klopt — ondertekend door de organisator die de
-uitnodiging noemt, voor precies de server in de link, en het formulier niet gesloten is. Daarna staat er één vraag tussen
-je antwoorden en het netwerk: *Naar de redactie van … versturen? Je inzending gaat versleuteld naar de server; alleen …
-kunnen hem openen.* De vingerafdruk staat onder *Details*. Na het versturen toont het venster wanneer het aankwam, de
-contactregel van de redactie en de eerste tekens van een controlegetal dat je kunt noemen. **Bewijs bewaren…** slaat een klein
-bestand op met het geheim waarmee je de inzending kunt intrekken; bewaar het veilig, en bedenk dat **het
-aankomstbericht geen bewijs tegen de server is** — de server kan er alles op zetten. Lukt het versturen niet, dan blijven
-je antwoorden in het formulier: *Opnieuw proberen* stuurt dezelfde inzending nog een keer (een herhaling is veilig: de
-server kent hem aan zijn nummer en kan er geen twee van hebben), of *Verzegeld opslaan…* maakt het versleutelde bestand om
-te mailen.
-
 ### Inzendingen ontvangen (organisator)
 
 De andere kant van een formulier is ontvangen wat terugkomt. Dat is een optionele uitbreiding: zet
