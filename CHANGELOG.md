@@ -437,6 +437,13 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- **De afbeeldingcarrousel sluit niet meer direct na *Bladeren…* (#2277).** Wie
+  vanuit de kiezer een nieuw beeld ophaalde, viel meteen terug op de slide —
+  precies vóór het moment om bijschrift en doorzoekbare beschrijving in te
+  vullen. Het gekozen bestand staat nu geselecteerd in de nog open kiezer, met
+  dezelfde afslag als plakken en *Afbeelding toevoegen…*: pas *Kiezen* of
+  annuleren verlaat het scherm. Op web, waar er geen bestandsarchief is,
+  blijft *Bladeren* meteen kiezen.
 - Een Marp-regelafbreking `<br>` in een kop of titeltekst werd letterlijk op de
   dia getoond; de inline-parser vertaalde geen HTML. `<br>`, `<br/>` en
   `<br />` (ook met hoofdletters of attributen) breken de tekst nu zoals Marp

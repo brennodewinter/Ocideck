@@ -330,7 +330,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
         }(),
     ];
 
-    final confirmed = await _showDedupeDialog(plan);
+    final confirmed = await _showDedupeDialog(context, plan);
     if (!mounted) return;
     if (confirmed != true) {
       _rebuild(() {
@@ -443,129 +443,6 @@ extension _CarouselActions on _ImageCarouselPickerState {
     return (removed, updatedDeckFiles);
   }
 
-  Future<bool?> _showDedupeDialog(
-    List<({String keeper, List<String> remove})> plan,
-  ) {
-    final removeCount = plan.fold(0, (sum, e) => sum + e.remove.length);
-    return showDialog<bool>(
-      context: context,
-      builder: (ctx) {
-        final l10n = ctx.l10n;
-        return AlertDialog(
-          backgroundColor: ImagePickerPalette.surface1,
-          title: Row(
-            children: [
-              const Icon(
-                Icons.layers_clear_outlined,
-                color: AppTheme.blue400,
-                size: 20,
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  '${l10n.d('Dubbele afbeeldingen opruimen?')} ($removeCount)',
-                  style: TextStyle(
-                    color: ImagePickerPalette.text,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          content: SizedBox(
-            width: 440,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  l10n.d(
-                    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.',
-                  ),
-                  style: TextStyle(color: _muted, fontSize: 13),
-                ),
-                const SizedBox(height: 12),
-                Flexible(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (final entry in plan) ...[
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.check_circle_outline,
-                                size: 14,
-                                color: ImagePickerPalette.success,
-                              ),
-                              const SizedBox(width: 6),
-                              Expanded(
-                                child: Text(
-                                  p.basename(entry.keeper),
-                                  style: TextStyle(
-                                    color: ImagePickerPalette.text,
-                                    fontSize: 12.5,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                          for (final path in entry.remove)
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 2),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.delete_outline,
-                                    size: 13,
-                                    color: ImagePickerPalette.dangerSoft,
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Expanded(
-                                    child: Text(
-                                      p.basename(path),
-                                      style: TextStyle(
-                                        color: _muted,
-                                        fontSize: 12,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          const SizedBox(height: 10),
-                        ],
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx, false),
-              style: TextButton.styleFrom(foregroundColor: _muted),
-              child: Text(l10n.t('cancel')),
-            ),
-            ElevatedButton.icon(
-              onPressed: () => Navigator.pop(ctx, true),
-              icon: const Icon(Icons.layers_clear_outlined, size: 16),
-              label: Text(l10n.d('Opruimen')),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ImagePickerPalette.successStrong,
-                foregroundColor: Colors.white,
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Future<void> _confirm() async {
     // In beheermodus is er niets om te kiezen: Enter en dubbelklik mogen de
     // dialoog dan niet met een (zinloos) resultaat sluiten.
@@ -605,11 +482,23 @@ extension _CarouselActions on _ImageCarouselPickerState {
     // blob:-URL die nergens heen wijst, terwijl de app een mem:-sleutel
     // verwacht. ImageService kent die route al, mét grens en inhoudscontrole
     // (#526).
-    final path = (await ImageService().pickImageDetailed()).path;
+    final outcome =
+        await (debugCarouselBrowsePick?.call() ??
+            ImageService().pickImageDetailed());
+    final path = outcome.path;
     if (path == null || !mounted) return;
-    final caption = await widget.captionService.getCaption(path) ?? '';
-    if (!mounted) return;
-    await _close(ImagePickResult(path, caption));
+    if (!supportsLocalProjectFolders) {
+      // Op web is er geen bestandsarchief en kan de kiezer een mem:-pad niet
+      // tekenen; daar blijft "Bladeren" daarom meteen kiezen.
+      final caption = await widget.captionService.getCaption(path) ?? '';
+      if (!mounted) return;
+      return _close(ImagePickResult(path, caption));
+    }
+    // Blijf in de kiezer met het net gekozen beeld aangewezen (#2277): vlak na
+    // het toevoegen horen bijschrift en beschrijving erbij — pas "Kiezen" of
+    // annuleren verlaat het scherm, zoals bij plakken en "Afbeelding
+    // toevoegen…". "Kiezen" neemt het pad via importIntoDeck het deck in.
+    await _refreshAndSelect(path);
   }
 
   /// Voeg een map toe als zoekwortel: scant opnieuw en bewaart hem als
@@ -875,10 +764,18 @@ extension _CarouselActions on _ImageCarouselPickerState {
   }
 
   /// Rescan het archief en selecteer [path] — de afslag na elke toevoeging,
-  /// zodat het nieuwe beeld meteen zichtbaar en aangewezen is.
+  /// zodat het nieuwe beeld meteen zichtbaar en aangewezen is. Ligt het pad
+  /// buiten elke zoekwortel (het gestagede "Bladeren…"-bestand), dan mist de
+  /// scan het; het komt dan als losse entry bovenaan in de lijst.
   Future<void> _refreshAndSelect(String path) async {
     await _loadImages();
-    if (!mounted || !_images.contains(path)) return;
+    if (!mounted) return;
+    if (!_images.contains(path)) {
+      _rebuild(() {
+        _images.insert(0, path);
+        _applyFilter();
+      });
+    }
     await _select(path);
   }
 
@@ -974,6 +871,11 @@ Future<String?> adoptImageBytesIntoArchive(
 /// test zet hem in `setUp` en herstelt hem in `tearDown`.
 @visibleForTesting
 Future<String?> Function({String? fileName})? debugImageDownloadDestination;
+
+/// Test-seam voor de systeemkiezer achter "Bladeren…" — die bestaat evenmin
+/// onder `flutter test`. Zelfde patroon als [debugImageDownloadDestination].
+@visibleForTesting
+Future<ImageImportOutcome> Function()? debugCarouselBrowsePick;
 
 /// Vraagt de gebruiker om een bestemmingspad voor een kopie van een
 /// archiefafbeelding. `getSaveLocation` levert alleen het pad — de kopie zelf
