@@ -442,6 +442,10 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- De **webbundel werkt nu ook vanuit een submap** van een webserver (#2275): de `<base href>` was `/`, waardoor een
+  installatie onder bijvoorbeeld `/ocideck/` — zoals via een symlink naar een versiemap — zijn scripts en assets vanaf
+  de documentroot zocht en volledig dood bleef. De bundel resolveert nu relatief en draait ongewijzigd op elke diepte;
+  in `HOSTING.md` staat hoe dat werkt.
 - **De afbeeldingcarrousel sluit niet meer direct na *Bladeren…* (#2277).** Wie
   vanuit de kiezer een nieuw beeld ophaalde, viel meteen terug op de slide —
   precies vóór het moment om bijschrift en doorzoekbare beschrijving in te
