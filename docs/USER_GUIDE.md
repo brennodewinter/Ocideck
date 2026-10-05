@@ -1712,6 +1712,12 @@ The rail on the left lists every slide as a thumbnail.
   moves one grid row), `Ctrl/Cmd+Z` undoes and
   `Ctrl/Cmd+Shift+Z` redoes. `Esc` closes the overview. Finalised and play-only
   decks can still be inspected there, but the order is read-only.
+- **Zoom the overview** with the magnifier buttons in the title bar,
+  `Ctrl/Cmd +`/`−` or `Ctrl`-scroll on the grid; `Ctrl/Cmd+0` returns to the
+  default size. Zooming in shows fewer but larger tiles — helpful when the
+  thumbnails are too small to read — and the chosen size is remembered for the
+  next overview. It works on read-only decks too: zooming changes only what
+  you see, never the deck.
 - **Select** a slide by clicking it. Hold **Shift** to select a range, or
   **Ctrl/Cmd** to add/remove individual slides; **Ctrl/Cmd+A** selects them all.
 - **Reorder** by dragging a thumbnail's drag handle. With several slides

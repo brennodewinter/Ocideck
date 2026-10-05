@@ -1765,6 +1765,12 @@ De rail aan de linkerkant somt elke slide op als een miniatuur.
   (omhoog/omlaag is één rasterrij), `Ctrl/Cmd+Z` maakt ongedaan en
   `Ctrl/Cmd+Shift+Z` voert opnieuw uit. `Esc` sluit het overzicht. Afgeronde en
   alleen-afspelen-decks kun je er wel bekijken, maar niet herschikken.
+- **Zoom het overzicht** met de loepknoppen in de titelbalk, `Ctrl/Cmd +`/`−`
+  of Ctrl+scrollen op het raster; `Ctrl/Cmd+0` zet terug naar de standaardmaat.
+  Inzoomen toont minder maar grotere slides — handig als de miniaturen te klein
+  zijn om te lezen — en de gekozen maat blijft bewaard voor het volgende
+  overzicht. Het werkt ook bij afgeronde en alleen-afspelen-decks: zoomen
+  verandert alleen wat je ziet, nooit het deck.
 - **Selecteer** een slide door erop te klikken. Houd **Shift** ingedrukt om een bereik te selecteren, of
   **Ctrl/Cmd** om individuele slides toe te voegen/verwijderen; **Ctrl/Cmd+A** selecteert ze allemaal.
 - **Herorden** door de sleepgreep van een miniatuur te slepen. Met meerdere slides

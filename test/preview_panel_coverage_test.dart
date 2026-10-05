@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +9,7 @@ import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/panels/preview_panel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -340,6 +342,69 @@ void main() {
       container.read(deckProvider).deck!.slides.map((slide) => slide.id),
       before,
     );
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('slide overview zooms via buttons, keys and ctrl-scroll', (
+    tester,
+  ) async {
+    final container = _deckWith([
+      Slide.create(SlideType.bullets).copyWith(title: 'Alpha'),
+      Slide.create(SlideType.quote).copyWith(title: 'Beta'),
+      Slide.create(SlideType.table).copyWith(title: 'Gamma'),
+    ]);
+    addTearDown(container.dispose);
+    await _pumpOverview(tester, container);
+
+    int columns() {
+      final grid = tester.widget<GridView>(
+        find.byKey(const Key('slide-overview-grid')),
+      );
+      return (grid.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount)
+          .crossAxisCount;
+    }
+
+    // 1100 px breed → drie kolommen à ±320 px; op 100% is er niets terug te
+    // zetten en toont de balk geen percentage.
+    expect(columns(), 3);
+    expect(container.read(settingsProvider).slideOverviewZoom, 1.0);
+    expect(find.text('100%'), findsNothing);
+
+    // Inzoomen via de knop: tegel wordt 400 px → twee kolommen.
+    await tester.tap(find.byKey(const Key('overview-zoom-in')));
+    await tester.pump();
+    expect(container.read(settingsProvider).slideOverviewZoom, 1.25);
+    expect(columns(), 2);
+    expect(find.text('125%'), findsOneWidget);
+
+    // Ctrl+0 zet terug naar 100%.
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    await tester.sendKeyEvent(LogicalKeyboardKey.digit0);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+    await tester.pump();
+    expect(container.read(settingsProvider).slideOverviewZoom, 1.0);
+    expect(columns(), 3);
+
+    // Uitzoomen via Ctrl+scroll: tegel wordt 240 px → vier kolommen.
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    await tester.sendEventToBinding(
+      PointerScrollEvent(
+        position: tester.getCenter(
+          find.byKey(const Key('slide-overview-grid')),
+        ),
+        scrollDelta: const Offset(0, 100),
+      ),
+    );
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+    await tester.pump();
+    expect(container.read(settingsProvider).slideOverviewZoom, 0.75);
+    expect(columns(), 4);
+
+    // Het percentage is zelf de resetknop terug naar ware grootte.
+    await tester.tap(find.text('75%'));
+    await tester.pump();
+    expect(container.read(settingsProvider).slideOverviewZoom, 1.0);
+    expect(columns(), 3);
     expect(tester.takeException(), isNull);
   });
 

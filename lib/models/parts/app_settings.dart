@@ -260,6 +260,13 @@ class AppSettings {
   /// of kleiner kan zonder de rest van de app te beïnvloeden.
   final double docReaderTextScale;
 
+  /// Zoomfactor van de tegels in het slide-overzicht (0,5–3,0). 1,0 is de
+  /// standaardtegel van ±320 px; hoger geeft minder kolommen en grotere
+  /// miniaturen. Puur een kijkvoorkeur — het raakt geen enkel `.md`-bestand —
+  /// maar wel bewaard: wie grotere miniaturen nodig heeft, stelt ze niet bij
+  /// elk overzicht opnieuw in.
+  final double slideOverviewZoom;
+
   /// Toon een waarschuwing vóór export wanneer de slide-kwaliteitscontrole
   /// problemen vindt (alt-tekst, contrast, tekstdichtheid).
   final bool qualityWarningsOnExport;
@@ -387,6 +394,7 @@ class AppSettings {
     this.privacyOwnIdentity = '',
     this.uiTextScale = 1.0,
     this.docReaderTextScale = 1.0,
+    this.slideOverviewZoom = 1.0,
     this.qualityWarningsOnExport = true,
     this.qualityBlockExportOnErrors = false,
     this.marpCompatChecksEnabled = true,
@@ -489,6 +497,7 @@ class AppSettings {
     String? privacyOwnIdentity,
     double? uiTextScale,
     double? docReaderTextScale,
+    double? slideOverviewZoom,
     bool? qualityWarningsOnExport,
     bool? qualityBlockExportOnErrors,
     bool? marpCompatChecksEnabled,
@@ -576,6 +585,7 @@ class AppSettings {
       privacyOwnIdentity: privacyOwnIdentity ?? this.privacyOwnIdentity,
       uiTextScale: uiTextScale ?? this.uiTextScale,
       docReaderTextScale: docReaderTextScale ?? this.docReaderTextScale,
+      slideOverviewZoom: slideOverviewZoom ?? this.slideOverviewZoom,
       qualityWarningsOnExport:
           qualityWarningsOnExport ?? this.qualityWarningsOnExport,
       qualityBlockExportOnErrors:

@@ -25,6 +25,7 @@ part 'parts/settings_provider_git.dart';
 part 'parts/settings_provider_privacy.dart';
 part 'parts/settings_provider_traces.dart';
 part 'parts/settings_provider_update_check.dart';
+part 'parts/settings_provider_viewing.dart';
 
 /// Vaste startwaarde voor de testsuite, in plaats van de taal van de machine.
 ///
@@ -299,6 +300,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         0.8,
         1.8,
       ),
+      slideOverviewZoom: _readSlideOverviewZoom(prefs),
       qualityWarningsOnExport: prefs.getBool('qualityWarningsOnExport') ?? true,
       qualityBlockExportOnErrors:
           prefs.getBool('qualityBlockExportOnErrors') ?? false,
@@ -555,17 +557,13 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   Future<void> setClassificationWatermarkEnabled(bool enabled) =>
       _applyClassificationWatermarkEnabled(this, enabled);
 
-  Future<void> setUiTextScale(double scale) async {
-    final clamped = scale.clamp(1.0, 2.0).toDouble();
-    state = state.copyWith(uiTextScale: clamped);
-    await _persist(
-      'setUiTextScale',
-      (prefs) => prefs.setDouble('uiTextScale', clamped),
-    );
-  }
+  Future<void> setUiTextScale(double scale) => _applyUiTextScale(this, scale);
 
   Future<void> setDocReaderTextScale(double scale) =>
       _applyDocReaderTextScale(this, scale);
+
+  Future<void> setSlideOverviewZoom(double zoom) =>
+      _applySlideOverviewZoom(this, zoom);
 
   Future<void> setQualityWarningsOnExport(bool enabled) async {
     state = state.copyWith(qualityWarningsOnExport: enabled);

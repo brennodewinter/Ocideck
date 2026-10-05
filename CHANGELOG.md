@@ -32,6 +32,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Inzoomen in het slide-overzicht** (#2288): de tegels zitten niet langer aan één maat vast. De loepknoppen in de
+  titelbalk, `Ctrl/Cmd +`/`−`, `Ctrl/Cmd+0` voor de standaardmaat en Ctrl+scroll op het raster schalen de miniaturen
+  van de halve tot de driedubbele maat — inzoomen geeft minder maar grotere slides, uitzoomen juist meer kolommen. De
+  gekozen maat blijft bewaard voor het volgende overzicht en werkt óók op afgeronde en alleen-afspelen-decks: zoomen is
+  kijken, geen bewerken. Geen nieuwe teksten — de knoppen hergebruiken de bestaande zoomlabels.
 - De **importdialoog voor slides** toont nu onder elke dia de wijzigingsdatum van het bronbestand, zodat bij look-alikes
   zichtbaar is welke kopie de nieuwste draagt; dezelfde datum staat in de vindplaats- en vergelijkingslabels. Een compacte
   sorteerknop in de werkbalk schakelt tussen naam (de bestaande volgorde) en datum, oplopend én aflopend; bij datum-sort

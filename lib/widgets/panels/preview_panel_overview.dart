@@ -29,6 +29,29 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
     super.dispose();
   }
 
+  double get _zoom => ref.read(settingsProvider).slideOverviewZoom;
+
+  void _zoomTo(double zoom) {
+    unawaited(ref.read(settingsProvider.notifier).setSlideOverviewZoom(zoom));
+    _focusNode.requestFocus();
+  }
+
+  void _zoomBy(double delta) => _zoomTo(_zoom + delta);
+
+  /// Ctrl + muiswiel zoomt, zoals in elke slide-sorter. Zonder Ctrl is het
+  /// gewoon scrollen en doet deze listener niets.
+  void _onPointerSignal(PointerSignalEvent event) {
+    if (event is! PointerScrollEvent ||
+        !HardwareKeyboard.instance.isControlPressed) {
+      return;
+    }
+    _zoomBy(
+      event.scrollDelta.dy < 0
+          ? kSlideOverviewZoomStep
+          : -kSlideOverviewZoomStep,
+    );
+  }
+
   void _select(int index) {
     final keys = HardwareKeyboard.instance;
     final notifier = ref.read(editorProvider.notifier);
@@ -123,6 +146,23 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
       case LogicalKeyboardKey.keyZ when modifier:
         _undo(keys.isShiftPressed);
         return KeyEventResult.handled;
+      // Zoomen zoals overal: Cmd/Ctrl met + of −, en 0 terug naar 100%. Beide
+      // plustoetsen, want + zit op de meeste indelingen op shift-= en levert
+      // dan `equal` in plaats van `add`.
+      case LogicalKeyboardKey.equal ||
+              LogicalKeyboardKey.add ||
+              LogicalKeyboardKey.numpadAdd
+          when modifier && widget.editable:
+        _zoomBy(kSlideOverviewZoomStep);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.minus || LogicalKeyboardKey.numpadSubtract
+          when modifier && widget.editable:
+        _zoomBy(-kSlideOverviewZoomStep);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.digit0 || LogicalKeyboardKey.numpad0
+          when modifier && widget.editable:
+        _zoomTo(1);
+        return KeyEventResult.handled;
       default:
         return KeyEventResult.ignored;
     }
@@ -134,6 +174,7 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
     final deck = liveState?.deck ?? widget.deck;
     final l10n = context.l10n;
     final readOnly = deck.finalized || deck.playOnly;
+    final zoom = ref.watch(settingsProvider.select((s) => s.slideOverviewZoom));
     return Focus(
       focusNode: _focusNode,
       autofocus: true,
@@ -156,6 +197,45 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
           ),
           actions: widget.editable
               ? [
+                  // Zoomen is een kijkvoorkeur, geen bewerking — de knoppen
+                  // blijven daarom ook bruikbaar op een verzegeld deck.
+                  IconButton(
+                    key: const Key('overview-zoom-out'),
+                    tooltip: l10n.d('Uitzoomen'),
+                    onPressed: zoom > kSlideOverviewZoomMin + 1e-6
+                        ? () => _zoomBy(-kSlideOverviewZoomStep)
+                        : null,
+                    icon: const Icon(Icons.zoom_out, size: 18),
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  if (zoom != 1)
+                    Tooltip(
+                      message: l10n.d('Ware grootte'),
+                      child: TextButton(
+                        onPressed: () => _zoomTo(1),
+                        style: TextButton.styleFrom(
+                          minimumSize: const Size(48, 32),
+                          padding: EdgeInsets.zero,
+                        ),
+                        child: Text(
+                          '${(zoom * 100).round()}%',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontFeatures: [FontFeature.tabularFigures()],
+                          ),
+                        ),
+                      ),
+                    ),
+                  IconButton(
+                    key: const Key('overview-zoom-in'),
+                    tooltip: l10n.d('Inzoomen'),
+                    onPressed: zoom < kSlideOverviewZoomMax - 1e-6
+                        ? () => _zoomBy(kSlideOverviewZoomStep)
+                        : null,
+                    icon: const Icon(Icons.zoom_in, size: 18),
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  const SizedBox(width: 8),
                   if (readOnly)
                     Tooltip(
                       message: l10n.d(
@@ -201,9 +281,12 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final timedPreset = deck.presentationTiming.isTimedPreset;
-        _columns = (constraints.maxWidth / (timedPreset ? 280 : 320))
+        final zoom = settings.slideOverviewZoom;
+        // De zoom vergroot de streefteel; het kolomplafond schaalt mee, zodat
+        // uitzoomen ook echt méér kolommen geeft en inzoomen er minder.
+        _columns = (constraints.maxWidth / ((timedPreset ? 280 : 320) * zoom))
             .floor()
-            .clamp(1, timedPreset ? 5 : 6);
+            .clamp(1, ((timedPreset ? 5 : 6) / zoom).ceil());
         final itemCount = timedPreset
             ? math.max(
                 deck.slides.length,
@@ -214,46 +297,49 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
           children: [
             if (timedPreset) _TimedPresentationOverviewHeader(deck: deck),
             Expanded(
-              child: GridView.builder(
-                key: const Key('slide-overview-grid'),
-                padding: const EdgeInsets.all(24),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: _columns,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 1.52,
+              child: Listener(
+                onPointerSignal: _onPointerSignal,
+                child: GridView.builder(
+                  key: const Key('slide-overview-grid'),
+                  padding: const EdgeInsets.all(24),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: _columns,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 1.52,
+                  ),
+                  itemCount: itemCount,
+                  itemBuilder: (context, index) {
+                    if (index >= deck.slides.length) {
+                      return _MissingTimedPresentationSlide(index: index);
+                    }
+                    return _OverviewSlideCard(
+                      key: ValueKey('overview-${deck.slides[index].id}'),
+                      deck: deck,
+                      index: index,
+                      selected: editor.selection.contains(index),
+                      readOnly: readOnly,
+                      settings: settings,
+                      scopeCia: scopeCia,
+                      numberStart: numberStarts[index],
+                      outsideTimedFormat:
+                          timedPreset &&
+                          index >= (deck.presentationTiming.maxSlides ?? 20),
+                      onSelect: () => _select(index),
+                      onOpen: () {
+                        _select(index);
+                        Navigator.pop(context);
+                      },
+                      onReorder: (oldIndex) => _reorder(oldIndex, index),
+                      onMovePrevious: index == 0
+                          ? null
+                          : () => _reorder(index, index - 1),
+                      onMoveNext: index == deck.slides.length - 1
+                          ? null
+                          : () => _reorder(index, index + 1),
+                    );
+                  },
                 ),
-                itemCount: itemCount,
-                itemBuilder: (context, index) {
-                  if (index >= deck.slides.length) {
-                    return _MissingTimedPresentationSlide(index: index);
-                  }
-                  return _OverviewSlideCard(
-                    key: ValueKey('overview-${deck.slides[index].id}'),
-                    deck: deck,
-                    index: index,
-                    selected: editor.selection.contains(index),
-                    readOnly: readOnly,
-                    settings: settings,
-                    scopeCia: scopeCia,
-                    numberStart: numberStarts[index],
-                    outsideTimedFormat:
-                        timedPreset &&
-                        index >= (deck.presentationTiming.maxSlides ?? 20),
-                    onSelect: () => _select(index),
-                    onOpen: () {
-                      _select(index);
-                      Navigator.pop(context);
-                    },
-                    onReorder: (oldIndex) => _reorder(oldIndex, index),
-                    onMovePrevious: index == 0
-                        ? null
-                        : () => _reorder(index, index - 1),
-                    onMoveNext: index == deck.slides.length - 1
-                        ? null
-                        : () => _reorder(index, index + 1),
-                  );
-                },
               ),
             ),
           ],
