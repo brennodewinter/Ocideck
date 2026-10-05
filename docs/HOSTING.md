@@ -397,6 +397,8 @@ Create `ocideck-web-config.json` at the root of the app (the same directory as
 **Apache** — enable autoindex for the decks directory:
 
 ```apache
+Alias /decks /var/www/decks
+
 <Directory /var/www/decks>
   Options +Indexes
   AllowOverride None
