@@ -1631,6 +1631,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nieuwste eerst': 'Najnovije prvo',
+  'Oudste eerst': 'Najstarije prvo',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Poslužitelj nije naveo koji obrazac pripada ovoj pošiljci — ispunjavanje ovdje nije moguće.',
   ', {n} niet binnengehaald': ', {n} nedohvaćeno',

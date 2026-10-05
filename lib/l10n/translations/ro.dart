@@ -1643,6 +1643,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nieuwste eerst': 'Cele mai recente întâi',
+  'Oudste eerst': 'Cele mai vechi întâi',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Serverul nu a indicat ce formular aparține acestei trimiteri — completarea aici nu este posibilă.',
   ', {n} niet binnengehaald': ', {n} nepreluate',

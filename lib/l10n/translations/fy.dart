@@ -667,6 +667,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nieuwste eerst': 'Nijste earst',
+  'Oudste eerst': 'Aldste earst',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'De server joech net oan hokker formulier by dizze ynstjoering heart — ynfoljen is hjir net mooglik.',
   ', {n} niet binnengehaald': ', {n} net binnenhelle',

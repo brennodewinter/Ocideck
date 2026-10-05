@@ -1633,6 +1633,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nieuwste eerst': 'Najnovšie najprv',
+  'Oudste eerst': 'Najstaršie najprv',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Server neuviedol, ktorý formulár patrí k tomuto podaniu — vyplniť ho tu nie je možné.',
   ', {n} niet binnengehaald': ', {n} nestiahnuté',

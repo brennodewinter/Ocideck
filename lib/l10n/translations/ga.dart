@@ -1657,6 +1657,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nieuwste eerst': 'Is nuaí ar dtús',
+  'Oudste eerst': 'Is sine ar dtús',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Ní thug an freastalaí le fios cén fhoirm a bhaineann leis an aighneacht seo — ní féidir í a líonadh anseo.',
   ', {n} niet binnengehaald': ', {n} gan bhailiú',

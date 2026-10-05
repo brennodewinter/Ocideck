@@ -1630,6 +1630,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nieuwste eerst': 'Nöisti zerscht',
+  'Oudste eerst': 'Eltesti zerscht',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'De Server het nöd gsait, welis Formular zu däre Yrichtig ghört — Uusfülle isch do nöd mögli.',
   ', {n} niet binnengehaald': ', {n} nöd gholt',

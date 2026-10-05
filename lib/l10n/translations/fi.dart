@@ -1627,6 +1627,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nieuwste eerst': 'Uusimmat ensin',
+  'Oudste eerst': 'Vanhimmat ensin',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Palvelin ei kertonut, mikä lomake kuuluu tähän lähetykseen — täyttäminen ei ole mahdollista täällä.',
   ', {n} niet binnengehaald': ', {n} ei noudettu',

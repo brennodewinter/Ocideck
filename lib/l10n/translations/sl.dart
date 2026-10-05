@@ -1627,6 +1627,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Nieuwste eerst': 'Najnovejše najprej',
+  'Oudste eerst': 'Najstarejše najprej',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Strežnik ni navedel, kateri obrazec pripada tej oddaji — izpolnjevanje tuk ni mogoče.',
   ', {n} niet binnengehaald': ', {n} nepridobljeno',

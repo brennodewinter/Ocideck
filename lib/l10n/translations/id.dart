@@ -1627,6 +1627,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nieuwste eerst': 'Terbaru dulu',
+  'Oudste eerst': 'Terlama dulu',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Server tidak menyebut formulir mana yang terkait dengan kiriman ini — mengisinya tidak mungkin di sini.',
   ', {n} niet binnengehaald': ', {n} tidak terambil',

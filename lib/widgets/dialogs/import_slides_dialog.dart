@@ -13,6 +13,7 @@ import '../slides/slide_preview.dart';
 import 'dialog_shell.dart';
 import 'slide_diff_dialog.dart';
 import '../../platform/platform_features.dart';
+import '../duplicate_badges.dart' show formatModifiedDate;
 
 /// One place a slide was found while scanning: the deck plus the slide. Used to
 /// de-duplicate identical slides across decks and to label where they live.
@@ -27,9 +28,22 @@ class _Occ {
   /// 1-based position of the slide in its deck, for labels/tooltips.
   int get slideNumber => pres.deck.slides.indexOf(slide) + 1;
 
-  String label(AppLocalizations l10n) =>
-      '$sourceName · ${l10n.d('slide')} $slideNumber';
+  /// De vindplaats plus de wijzigingsdatum van dat bestand — bij kopieën en
+  /// look-alikes is juist "welke is de nieuwste" de vraag die het label moet
+  /// beantwoorden.
+  String label(AppLocalizations l10n) {
+    final date = formatModifiedDate(pres.modified);
+    final where = '$sourceName · ${l10n.d('slide')} $slideNumber';
+    return date.isEmpty ? where : '$where · $date';
+  }
 }
+
+/// De volgorde waarin de gescande presentaties als secties getoond worden.
+/// [name] is de volgorde die de schijfscan al oplevert (op titel); de twee
+/// datum-modes herschikken die lijst. Sorteren verandert tevens welke kopie
+/// van een duplicaat als primaire zichtbaar blijft — bij "nieuwste eerst" is
+/// dat de kopie uit het jongste bestand.
+enum _SortMode { name, dateDesc, dateAsc }
 
 /// Dialog that scans a directory for other Marp presentations, lets the user
 /// search across them and pick individual slides to import. Returns the
@@ -75,6 +89,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
   List<ScannedPresentation> _presentations = const [];
   final Set<String> _selectedIds = {};
   String _query = '';
+  _SortMode _sortMode = _SortMode.name;
 
   @override
   void initState() {
@@ -132,12 +147,31 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
     ].join(' ').toLowerCase();
   }
 
+  /// The scanned decks in the order the toolbar's sort choice dictates. The
+  /// scan already delivers title order, so only the date modes re-shuffle;
+  /// decks without a file mtime (remote sources, failed stat) sink to the
+  /// bottom in both directions.
+  List<ScannedPresentation> _ordered() {
+    if (_sortMode == _SortMode.name) return _presentations;
+    return List.of(_presentations)..sort((a, b) {
+      final am = a.modified;
+      final bm = b.modified;
+      if (am == null) return bm == null ? 0 : 1;
+      if (bm == null) return -1;
+      return _sortMode == _SortMode.dateDesc
+          ? bm.compareTo(am)
+          : am.compareTo(bm);
+    });
+  }
+
   /// Returns, per presentation, the slides that should be shown for the
   /// current query (preserving document order).
-  List<(ScannedPresentation, List<Slide>)> _visible() {
+  List<(ScannedPresentation, List<Slide>)> _visible(
+    List<ScannedPresentation> presentations,
+  ) {
     final q = _query.trim().toLowerCase();
     final out = <(ScannedPresentation, List<Slide>)>[];
-    for (final pres in _presentations) {
+    for (final pres in presentations) {
       if (q.isEmpty) {
         out.add((pres, pres.deck.slides));
         continue;
@@ -159,7 +193,10 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
 
   List<Slide> _collectSelected() {
     final result = <Slide>[];
-    for (final pres in _presentations) {
+    // In de getoonde volgorde, niet de scanvolgorde: wie op datum sorteerde en
+    // kaarten van boven naar onder aanvinkte, verwacht ze ook in die volgorde
+    // terug in zijn deck.
+    for (final pres in _ordered()) {
       for (final slide in pres.deck.slides) {
         if (!_selectedIds.contains(slide.id)) continue;
         // Élke verwijzing wordt absoluut gemaakt tegen het bron-deck, ook een
@@ -208,7 +245,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final visible = _visible();
+    final visible = _visible(_ordered());
     final selectedCount = _selectedIds.length;
 
     return OciDialogShell(
@@ -279,6 +316,10 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
         ),
       ),
     );
+    // De sorteerkeuze is één compacte menubutton achteraan de rij — zichtbaar
+    // voor wie hem zoekt, geen extra regel hoogte voor wie hem niet nodig
+    // heeft. In de gestapelde variant deelt hij de regel met de mapknop.
+    final sort = _sortButton(l10n);
     return LayoutBuilder(
       builder: (context, constraints) {
         final stacked =
@@ -287,7 +328,16 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
         if (stacked) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [search, const SizedBox(height: 8), folder],
+            children: [
+              search,
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Expanded(child: folder),
+                  sort,
+                ],
+              ),
+            ],
           );
         }
         return Row(
@@ -295,9 +345,45 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
             Expanded(child: search),
             const SizedBox(width: 8),
             folder,
+            sort,
           ],
         );
       },
+    );
+  }
+
+  /// De sortering van de secties: de naam-volgorde die de scan oplevert, of op
+  /// wijzigingsdatum van het bronbestand in beide richtingen. Hetzelfde
+  /// menupatroon als de breedte-keuze in de documenteditor: check-mark op de
+  /// actieve keuze, eigen icoon per optie.
+  Widget _sortButton(AppLocalizations l10n) {
+    PopupMenuItem<_SortMode> item(_SortMode mode, IconData icon, String label) {
+      return PopupMenuItem<_SortMode>(
+        value: mode,
+        child: Row(
+          children: [
+            Icon(_sortMode == mode ? Icons.check : icon, size: 17),
+            const SizedBox(width: 10),
+            Expanded(child: Text(label)),
+          ],
+        ),
+      );
+    }
+
+    return PopupMenuButton<_SortMode>(
+      tooltip: l10n.d('Sorteren'),
+      position: PopupMenuPosition.under,
+      icon: const Icon(Icons.sort, size: 18),
+      onSelected: (mode) => setState(() => _sortMode = mode),
+      itemBuilder: (context) => [
+        item(_SortMode.name, Icons.sort_by_alpha, l10n.d('Naam')),
+        item(
+          _SortMode.dateDesc,
+          Icons.arrow_downward,
+          l10n.d('Nieuwste eerst'),
+        ),
+        item(_SortMode.dateAsc, Icons.arrow_upward, l10n.d('Oudste eerst')),
+      ],
     );
   }
 
@@ -487,6 +573,7 @@ class _PresentationSection extends StatelessWidget {
                   deck.projectPath,
                   deck.themeProfile,
                   deck.marpStyle,
+                  presentation.modified,
                 ),
             ],
           ),
@@ -500,6 +587,7 @@ class _PresentationSection extends StatelessWidget {
     String? projectPath,
     ThemeProfile theme,
     MarpStyle deckMarpStyle,
+    DateTime? modified,
   ) {
     final group = groupByPrimaryId[slide.id];
     final similar = similarByPrimaryId[slide.id] ?? const [];
@@ -508,6 +596,7 @@ class _PresentationSection extends StatelessWidget {
       projectPath: projectPath,
       themeProfile: theme,
       deckMarpStyle: deckMarpStyle,
+      modified: modified,
       selected: selectedIds.contains(slide.id),
       occurrences: group?.occurrences ?? const [],
       onTap: () => onToggle(slide),
@@ -525,6 +614,7 @@ class _SlideCard extends StatelessWidget {
   final String? projectPath;
   final ThemeProfile themeProfile;
   final MarpStyle deckMarpStyle;
+  final DateTime? modified;
   final bool selected;
 
   /// Every place this exact slide was found (length > 1 ⇒ a duplicate hidden
@@ -538,6 +628,7 @@ class _SlideCard extends StatelessWidget {
     required this.projectPath,
     required this.themeProfile,
     required this.deckMarpStyle,
+    required this.modified,
     required this.selected,
     required this.occurrences,
     required this.onTap,
@@ -605,6 +696,29 @@ class _SlideCard extends StatelessWidget {
               ],
             ),
           ),
+          // Wijzigingsdatum van het bronbestand — het antwoord op "welke van
+          // deze look-alikes is de nieuwste" zonder de diff te openen. Kale
+          // datum op de kaart; de volledige zin zit in de tooltip.
+          if (modified != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Tooltip(
+                message:
+                    '${l10n.d('Laatst gewijzigd op')} '
+                    '${formatModifiedDate(modified)}',
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.schedule, size: 10, color: AppTheme.slate400),
+                    const SizedBox(width: 3),
+                    Text(
+                      formatModifiedDate(modified),
+                      style: TextStyle(fontSize: 10, color: AppTheme.slate400),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           if (onCompare != null)
             Align(
               alignment: Alignment.centerLeft,

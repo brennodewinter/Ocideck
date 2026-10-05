@@ -2538,6 +2538,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nieuwste eerst': 'Önce en yeniler',
+  'Oudste eerst': 'Önce en eskiler',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Sunucu bu gönderime hangi formun ait olduğunu belirtmedi — burada doldurmak mümkün değil.',
   ', {n} niet binnengehaald': ', {n} alınamadı',

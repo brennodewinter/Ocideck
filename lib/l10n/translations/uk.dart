@@ -1642,6 +1642,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Nieuwste eerst': 'Спочатку нові',
+  'Oudste eerst': 'Спочатку старі',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Сервер не вказав, яка форма належить до цього подання — заповнити її тут неможливо.',
   ', {n} niet binnengehaald': ', {n} не отримано',

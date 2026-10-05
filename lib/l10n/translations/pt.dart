@@ -1655,6 +1655,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nieuwste eerst': 'Mais recentes primeiro',
+  'Oudste eerst': 'Mais antigos primeiro',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'O servidor não indicou a que formulário pertence esta submissão — não é possível preenchê-lo aqui.',
   ', {n} niet binnengehaald': ', {n} não obtidas',

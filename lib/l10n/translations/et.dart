@@ -1620,6 +1620,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nieuwste eerst': 'Uusimad esimesena',
+  'Oudste eerst': 'Vanimad esimesena',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Server ei teatanud, milline vorm selle esituse juurde kuulub — täitmine pole siin võimalik.',
   ', {n} niet binnengehaald': ', {n} laadimata',

@@ -1642,6 +1642,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nieuwste eerst': 'Recentissima primum',
+  'Oudste eerst': 'Veterrima primum',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Servitorium non indicavit quae forma ad hanc missionem pertineat — replere hic non potest.',
   ', {n} niet binnengehaald': ', {n} non acceptae',

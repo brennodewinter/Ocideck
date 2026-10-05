@@ -827,6 +827,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nieuwste eerst': 'Newest first',
+  'Oudste eerst': 'Oldest first',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'The server did not say which form belongs to this submission — filling it in is not possible here.',
   ', {n} niet binnengehaald': ', {n} not collected',
