@@ -3320,6 +3320,8 @@ automatisch de **dia op de beamer** en het **presentatoraanzicht op je
 laptop** (huidige dia, volgende dia, notities, klok). Gebruik een *uitgebreid* (niet
 gespiegeld) scherm. Opmerkingen:
 
+- Beide vensters gaan volledig scherm: de beamer vult het externe scherm en het
+  presentatoraanzicht vult je laptopscherm. Verlaten herstelt ze allebei.
 - Sneltoetsen werken vanuit beide vensters: welke ook de toetsenbordfocus heeft, de
   toetsen belanden in de presentatie. Klik op het beamerbeeld en `Esc`, de
   pijltjes en de rest blijven werken.

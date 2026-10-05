@@ -3225,6 +3225,9 @@ automatically shows the **slide on the beamer** and the **presenter view on your
 laptop** (current slide, next slide, notes, clock). Use an *extended* (not
 mirrored) display. Notes:
 
+- Both windows go full screen: the beamer fills the external display and the
+  presenter view fills your laptop screen. Leaving the presentation restores
+  both.
 - Shortcuts work from either window: whichever one has the keyboard focus, the
   keys end up in the presentation. Click on the beamer image and `Esc`, the
   arrows and the rest keep working.

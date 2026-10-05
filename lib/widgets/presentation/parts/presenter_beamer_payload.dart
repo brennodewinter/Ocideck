@@ -392,6 +392,11 @@ Future<String?> _runDualPresenter(
   final hadWakeLock = await _wakeLockEnabled();
   await _enableWakeLock();
   try {
+    // Ook in dubbelschermmodus gaat het presentatorvenster volledig scherm:
+    // het hoort het laptopscherm te vullen zoals het beamervenster de beamer
+    // vult (#2289). Best-effort, net als in `show()` — een platform dat het
+    // niet kan blokkeert het presenteren niet.
+    await setPresenterFullscreen(true);
     if (!context.mounted) return null;
     return await Navigator.push<String>(
       context,

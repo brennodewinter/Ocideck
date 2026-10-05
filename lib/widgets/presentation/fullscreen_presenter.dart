@@ -882,23 +882,19 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       } else {
         _scheduleAdvance();
       }
-      // In enkel-scherm-modus zet `show()` het venster in volledig scherm.
-      // macOS en de browser onderscheppen Escape op platformniveau om het
+      // `show()` en `_runDualPresenter` zetten het venster in volledig scherm.
+      // macOS en de browser onderscheppen Escape op platformniveau om het te
       // verlaten — de toets bereikt Flutter niet. Poll het venster en verlaat
       // de presentatie zodra het volledig scherm onverwacht verdwijnt.
-      if (!_dual) {
-        _fullscreenGuard = Timer.periodic(const Duration(milliseconds: 300), (
-          _,
-        ) {
-          if (!mounted || _exiting) return;
-          final fs = isPresenterFullscreen();
-          if (fs) {
-            _wasFullscreen = true;
-          } else if (_wasFullscreen) {
-            _exit();
-          }
-        });
-      }
+      _fullscreenGuard = Timer.periodic(const Duration(milliseconds: 300), (_) {
+        if (!mounted || _exiting) return;
+        final fs = isPresenterFullscreen();
+        if (fs) {
+          _wasFullscreen = true;
+        } else if (_wasFullscreen) {
+          _exit();
+        }
+      });
     });
   }
 
