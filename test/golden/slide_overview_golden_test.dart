@@ -8,6 +8,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/presentation_timing.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/panels/preview_panel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -142,6 +143,19 @@ void main() {
 
     await gesture.up();
     await tester.pump(const Duration(milliseconds: 100));
+  });
+
+  testWidgets('ingezoomd slide-overzicht toont grotere tegels', (tester) async {
+    final container = _deck();
+    addTearDown(container.dispose);
+    await container.read(settingsProvider.notifier).setSlideOverviewZoom(2);
+    await _pumpOverview(tester, container, const Size(1200, 800));
+
+    expect(find.text('200%'), findsOneWidget);
+    await expectLater(
+      find.byKey(_surfaceKey),
+      matchesGoldenFile('goldens/slide_overview_zoomed.png'),
+    );
   });
 
   testWidgets('Ignite-storyboard toont twintig dia\'s en vijf minuten', (

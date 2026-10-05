@@ -531,6 +531,17 @@ void main() {
       expect(n.state.docReaderTextScale, 1.3);
     });
 
+    test('slideOverviewZoom defaults to 1.0, persists and clamps', () async {
+      final n = await _loadedNotifier();
+      expect(n.state.slideOverviewZoom, 1.0);
+      await n.setSlideOverviewZoom(5);
+      expect(n.state.slideOverviewZoom, kSlideOverviewZoomMax);
+      await n.setSlideOverviewZoom(0.1);
+      expect(n.state.slideOverviewZoom, kSlideOverviewZoomMin);
+      await n.setSlideOverviewZoom(1.5);
+      expect(n.state.slideOverviewZoom, 1.5);
+    });
+
     test('contrastMinRatio defaults to WCAG AA, persists and clamps', () async {
       final n = await _loadedNotifier();
       expect(n.state.contrastMinRatio, 4.5);
