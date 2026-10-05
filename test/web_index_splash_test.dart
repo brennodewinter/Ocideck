@@ -53,6 +53,25 @@ void main() {
     }
   });
 
+  test('de bundel is installeerbaar in een submap (relatieve base href)', () {
+    // `<base href="/">` — wat `$FLUTTER_BASE_HREF` wordt als --base-href niet
+    // wordt meegegeven — laadt flutter_bootstrap.js vanaf de documentroot en
+    // laat een bundel in /ocideck/ volledig dood (#2275). De base moet
+    // relatief blijven, zodat dezelfde bundel op elke diepte draait.
+    final base = RegExp(
+      r'<base\s+href="([^"]*)"',
+      caseSensitive: false,
+    ).firstMatch(html);
+    expect(base, isNotNull, reason: 'index.html draagt een <base href>');
+    expect(
+      base!.group(1),
+      './',
+      reason:
+          'een absolute of token-base bindt de bundel aan de documentroot '
+          '(#2275); "./" laat hem onder elk subpad werken',
+    );
+  });
+
   test('het laadscherm gebruikt alleen bestanden die de bundel al draagt', () {
     // De afbeelding op het laadscherm mag geen extern bestand zijn: alles wat
     // het toont moet uit de bundel zelf komen, anders is de eerste indruk een

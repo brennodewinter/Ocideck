@@ -57,6 +57,15 @@ cd build/web && python3 -m http.server 8080
 That one-liner is for a **local check only**. It serves nothing compressed, and
 this bundle is large enough that the difference is the whole first impression.
 
+The bundle is **location-independent**: `<base href="./">` makes every asset
+resolve relative to the directory it was served from, so you may install it in
+a subdirectory (e.g. `https://example.org/ocideck/`) or behind a symlinked
+versioned directory — no rebuild or `--base-href` needed. One edge to know:
+the address must end in a trailing slash (`/ocideck/`, not `/ocideck`); every
+stock web server already redirects a directory URL to its slash form, so in
+practice this takes care of itself. The optional server-side deck library and
+fetch-proxy (§4, §7) resolve against the same directory automatically.
+
 Serve over **HTTPS** in production.
 
 ### Publishing an update: `make deploy-web`

@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Replaced by `flutter build`'s --base-href at build time. -->
-  <base href="$FLUTTER_BASE_HREF">
+  <!-- Deliberately relative, not $FLUTTER_BASE_HREF: with `--base-href`
+       unset Flutter substitutes "/", which pins every asset to the server's
+       document root and 404s the whole bundle when it is served from a
+       subdirectory (#2275). "./" resolves against the directory the page was
+       served from, so the same bundle works at the web root and under any
+       subpath — provided the URL ends in a slash, which every stock web
+       server enforces for a directory by redirecting to it. Safe because the
+       app uses hash-based URLs: the document path never changes after load. -->
+  <base href="./">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">

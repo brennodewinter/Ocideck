@@ -135,6 +135,21 @@ void main() {
       _extractReferrerPolicy(html) == 'no-referrer',
       'index.html must carry <meta name="referrer" content="no-referrer">.',
     );
+    // The bundle must be installable under any subpath, not only at the
+    // document root: <base href="/"> — what --base-href's default substitutes —
+    // resolves flutter_bootstrap.js and every asset from the root and 404s the
+    // whole app in a subdirectory install (#2275). The source-level pin lives
+    // in test/web_index_splash_test.dart; this guards the *built* artefact so
+    // a build that reintroduces an absolute base can't ship silently.
+    final baseHref = RegExp(
+      r'<base\s+href="([^"]*)"',
+      caseSensitive: false,
+    ).firstMatch(html)?.group(1);
+    require(
+      baseHref == './',
+      'index.html must keep a relative <base href="./"> — an absolute base '
+      'pins the bundle to the document root (#2275).',
+    );
   }
 
   // ── .htaccess ships the header-form hardening (#849) ────────────────────────
