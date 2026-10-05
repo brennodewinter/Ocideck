@@ -1088,7 +1088,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `page_scoped_notes.dart` — Per-page speaker/user-notes parsing and storage.
 - `password_generator.dart` — Cryptographically strong random passwords (`Random.secure`) for encrypted packages.
 - `password_strength.dart` — Entropy-based password-strength estimate (warn-only) for the encrypt dialog.
-- `project_path.dart` — Path resolution with project containment and symlink checking.
+- `project_path.dart` — Path resolution with project containment and symlink checking; also `resolveDeckAssetUrl`, the same-origin/deck-directory resolver for media in decks opened from a URL (#2282).
 - `export_link.dart` — Gedeelde fail-closed schema-allowlist voor klikbare links in audience-exports: alleen web, e-mail en interne ankers; onbekende, relatieve en bestands-URL's blijven platte tekst.
 - `sanitize_svg.dart` — Keeps only the SVG elements and attributes `flutter_svg` actually reads, and drops the rest with a log line. The allow-list is read off `vector_graphics_compiler`, so it is never stricter than the renderer: what it refuses would have been discarded anyway. A `<defs>` left empty by that pass is dropped too: the serializer would write it as `<defs/>`, and that self-closing form is the one the parser does not handle (#1942).
 - `safe_filename.dart` — `sanitizeFilename`: deelt het `[\w\s-]`-recept om vrije tekst tot een veilige bestandsnaam-stam te maken, met een fallback-parameter per aanroeper. Voorheen gekopieerd in `file_service_package`, `shell_actions` en `file_service_style_profile`.
@@ -1588,7 +1588,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 
 ### `lib/widgets/slides/previews/` (each `part of slide_preview.dart`)
 
-- `slide_preview_support.dart` — Standalone shared Marp image-filter and link-scope widgets used by preview, presenter and raster export, extracted to keep the central preview library within its size ratchet.
+- `slide_preview_support.dart` — Standalone shared Marp image-filter and link-scope widgets used by preview, presenter and raster export, extracted to keep the central preview library within its size ratchet. Also hosts `DeckAssetScope`, the ambient scope that carries a URL-opened deck's base URL down to the media renderers (#2282).
 - `callout_overlay.dart` — Standalone callout overlay widget: paints numbered markers on top of the image slot using `ImageViewportGeometry` to map targets from image space to slot pixels (IMAGE_CALLOUTS.md §4.1). Imported by `slide_preview.dart` and used by the bulletsImage preview. Retries the intrinsic-size resolve with `RetryingImage` cadence so a transient read failure can't drop the markers for the whole session (#2162).
 - `retrying_image.dart` — Standalone `RetryingImage` widget: an `Image` that evicts its provider key and remounts on a load error so a transient read/decode failure self-heals without navigation (#2159). Used by the slide image renderers in `media_previews_image.dart`.
 

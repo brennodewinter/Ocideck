@@ -65,7 +65,12 @@ class _VideoPreviewState extends State<_VideoPreview>
         // (#854).
         final vp = widget.slide.videoPath;
         if (WebAssetStore.isMemPath(vp)) return vp;
-        return _resolvePath(vp, widget.projectPath);
+        // Deck via URL geopend (#2282): een relatief pad wijst naar een bestand
+        // naast het deck op die server. Same-origin + deckmap-containment zit
+        // in de helper; `allowRemoteMedia` staat erbuiten zoals een bestand
+        // naast het deck op schijf ook zonder die schakelaar speelt.
+        return _resolvePath(vp, widget.projectPath) ??
+            resolveDeckAssetUrl(vp, DeckAssetScope.read(context));
       case VideoSourceKind.remoteFile:
         // Live laden alleen als de gebruiker remote media heeft toegestaan én
         // de URL door de SSRF-gate komt; anders placeholder met de URL.
@@ -79,6 +84,11 @@ class _VideoPreviewState extends State<_VideoPreview>
         return null; // embeds gaan via _VideoEmbedPreview
     }
   }
+
+  @override
+  bool mediaUrlIsDeckAsset(String url) =>
+      url ==
+      resolveDeckAssetUrl(widget.slide.videoPath, DeckAssetScope.read(context));
 
   @override
   int get mediaStartMs => widget.slide.videoStartMs;

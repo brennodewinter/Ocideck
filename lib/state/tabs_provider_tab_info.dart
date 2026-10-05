@@ -25,7 +25,11 @@ void _placeDeckInTab(
     tab = notifier._createTab();
   }
   tab.deckNotifier.loadDeck(
-    deck,
+    // Een deck dat via een URL binnenkwam (web `?deck=`, URL-import) krijgt die
+    // URL als resolutiebasis mee, zodat relatieve mediapaden op dezelfde server
+    // naast het deck worden gezocht (#2282). [remoteDeckUrlOrNull] filtert:
+    // git-labels en lokale open-routes krijgen nooit een niet-URL basis.
+    deck.copyWith(remoteAssetBase: remoteDeckUrlOrNull(remoteOrigin)),
     filePath: filePath,
     remoteOrigin: remoteOrigin,
     // Het serverpakket bevat de bij publicatie bevroren huisstijl; de gewone

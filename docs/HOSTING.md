@@ -423,6 +423,12 @@ parses. Subdirectories are not followed — the listing is flat.
   change.
 - The `.md` files pass through the same security gate as URL import: executable
   content is refused at open time.
+- Relative image and media references in a deck (`images/foo.png`) resolve
+  against the deck file's own URL, so files placed next to the `.md` — or under
+  it, like `/var/www/decks/images/` — load without extra configuration
+  (`img-src`/`media-src 'self'` in the shipped CSP permits exactly that).
+  References pointing outside the deck's directory or at another origin fail
+  closed: the slide shows the missing-media placeholder instead.
 
 ## Checklist
 

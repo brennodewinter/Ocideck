@@ -327,6 +327,11 @@ class SlideRasterizer {
           repaintKey: repaintKey,
           initialSlide: slides.first,
           projectPath: deck.projectPath,
+          // De overlay-boom hangt los van de werkruimte-boom waar
+          // DeckAssetScope staat; een via URL geopend deck (#2282) krijgt de
+          // basis hier expliciet mee zodat exports dezelfde beelden tekenen
+          // als het scherm.
+          remoteAssetBase: deck.remoteAssetBase,
           themeProfile: deck.themeProfile,
           deckMarpStyle: deck.marpStyle,
           cockpitColorScheme: cockpitColorScheme,
@@ -451,6 +456,7 @@ class _RasterSlideHost extends StatefulWidget {
   final GlobalKey repaintKey;
   final Slide initialSlide;
   final String? projectPath;
+  final String? remoteAssetBase;
   final ThemeProfile themeProfile;
   final MarpStyle deckMarpStyle;
   final CockpitColorScheme cockpitColorScheme;
@@ -469,6 +475,7 @@ class _RasterSlideHost extends StatefulWidget {
     required this.repaintKey,
     required this.initialSlide,
     required this.projectPath,
+    this.remoteAssetBase,
     required this.themeProfile,
     required this.deckMarpStyle,
     required this.cockpitColorScheme,
@@ -542,6 +549,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           scrollableTimeline: false,
           slide: _slide,
           projectPath: widget.projectPath,
+          remoteAssetBase: widget.remoteAssetBase,
           themeProfile: widget.themeProfile,
           deckMarpStyle: widget.deckMarpStyle,
           cockpitColorScheme: widget.cockpitColorScheme,

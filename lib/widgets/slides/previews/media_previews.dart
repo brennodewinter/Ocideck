@@ -62,6 +62,12 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
   /// bestandspad; voor een live URL de URL zelf.
   String? resolveMediaPath();
 
+  /// Of [url] via `resolveDeckAssetUrl` uit de deck-URL zelf kwam (#2282).
+  /// Zo'n bron is al door de herkomstgrens (same-origin én binnen de deckmap);
+  /// de NetGuard-SSRF-controle hoeft niet nog eens — en zou op web sowieso
+  /// weigeren, want dart:io-DNS ontbreekt daar. Subklassen overschrijven dit.
+  bool mediaUrlIsDeckAsset(String url) => false;
+
   /// Of de media automatisch start.
   bool get mediaAutoplay;
 
@@ -127,7 +133,10 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
     // SSRF gate for a remote media URL: resolve the host and refuse an internal
     // target before VideoPlayerController.networkUrl, which would otherwise
     // resolve+connect with no host check (see NetGuard.isAllowedMediaUrlResolved).
+    // A URL resolved from the deck URL itself (mediaUrlIsDeckAsset) was already
+    // inside that boundary — the user picked that host for the deck.
     if (VideoSource.looksLikeUrl(path) &&
+        !mediaUrlIsDeckAsset(path) &&
         !await NetGuard.isAllowedMediaUrlResolved(path)) {
       if (gen != _initGen) return;
       _loadFailure = MediaLoadFailure.remoteRefused;
@@ -254,8 +263,17 @@ class _AudioPlaybackState extends State<_AudioPlayback>
     // geeft resolveSlideAssetPath op web sowieso null.
     final ap = widget.audioPath;
     if (WebAssetStore.isMemPath(ap)) return ap;
-    return _resolvePath(ap, widget.projectPath);
+    // Deck via URL geopend (#2282): een relatief pad wijst naar een bestand
+    // naast het deck op die server — zie [_VideoPreviewState] voor de reden
+    // dat dit geen `allowRemoteMedia` vraagt.
+    return _resolvePath(ap, widget.projectPath) ??
+        resolveDeckAssetUrl(ap, DeckAssetScope.read(context));
   }
+
+  @override
+  bool mediaUrlIsDeckAsset(String url) =>
+      url ==
+      resolveDeckAssetUrl(widget.audioPath, DeckAssetScope.read(context));
 
   @override
   bool get mediaAutoplay => widget.autoplay;

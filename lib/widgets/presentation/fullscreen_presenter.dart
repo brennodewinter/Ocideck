@@ -50,6 +50,7 @@ import '../../l10n/app_localizations.dart';
 import '../../utils/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
+import '../slides/previews/slide_preview_support.dart';
 import '../slides/slide_preview.dart';
 import '../dialogs/settings_dialog.dart';
 import '../markdown_editor/markdown_editor.dart';
@@ -281,6 +282,7 @@ class FullscreenPresenter extends StatefulWidget {
     final slides = audienceDeck.slides;
     final deck = audienceDeck.deck;
     final projectPath = deck.projectPath;
+    final remoteAssetBase = deck.remoteAssetBase;
     final themeProfile = deck.themeProfile;
     final tlp = deck.tlp;
     final organization = deck.organization;
@@ -307,6 +309,7 @@ class FullscreenPresenter extends StatefulWidget {
         context,
         slides: slides,
         projectPath: projectPath,
+        remoteAssetBase: remoteAssetBase,
         themeProfile: themeProfile,
         marpStyle: deck.marpStyle,
         cockpitColorScheme: cockpitColorScheme,
@@ -336,6 +339,7 @@ class FullscreenPresenter extends StatefulWidget {
         context,
         slides: slides,
         projectPath: projectPath,
+        remoteAssetBase: remoteAssetBase,
         themeProfile: themeProfile,
         marpStyle: deck.marpStyle,
         cockpitColorScheme: cockpitColorScheme,
@@ -367,6 +371,7 @@ class FullscreenPresenter extends StatefulWidget {
     BuildContext context, {
     required List<Slide> slides,
     required String? projectPath,
+    String? remoteAssetBase,
     required ThemeProfile themeProfile,
     MarpStyle marpStyle = const MarpStyle(),
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
@@ -404,32 +409,38 @@ class FullscreenPresenter extends StatefulWidget {
           context,
           PageRouteBuilder<String>(
             opaque: true,
-            pageBuilder: (context, anim, anim2) => FullscreenPresenter(
-              slides: slides,
-              projectPath: projectPath,
-              themeProfile: themeProfile,
-              marpStyle: marpStyle,
-              cockpitColorScheme: cockpitColorScheme,
-              initialIndex: initialIndex,
-              tlp: tlp,
-              organization: organization,
-              reportLanguage: reportLanguage,
-              showClassificationWatermark: showClassificationWatermark,
-              allowRemoteMedia: allowRemoteMedia,
-              targetDuration: targetDuration,
-              showRehearsalSummary: showRehearsalSummary,
-              playOnly: playOnly,
-              presentationTiming: presentationTiming,
-              rehearsalMode: rehearsalMode,
-              initialAnnotations: annotations,
-              onAnnotationsChanged: onAnnotationsChanged,
-              onSlideChanged: onSlideChanged,
-              onSlideSplit: onSlideSplit,
-              onSessionEdit: onSessionEdit,
-              onPlaybackFinished: onPlaybackFinished,
-              initialUserNotes: initialUserNotes,
-              onUserNotesChanged: onUserNotesChanged,
-              improvementY01: improvementY01,
+            // De route bouwt een eigen sub-boom — de ambient scope uit de
+            // werkruimte reikt er niet in, dus de deck-URL voor relatieve
+            // media (#2282) gaat mee in de route zelf.
+            pageBuilder: (context, anim, anim2) => DeckAssetScope(
+              deckUrl: remoteAssetBase,
+              child: FullscreenPresenter(
+                slides: slides,
+                projectPath: projectPath,
+                themeProfile: themeProfile,
+                marpStyle: marpStyle,
+                cockpitColorScheme: cockpitColorScheme,
+                initialIndex: initialIndex,
+                tlp: tlp,
+                organization: organization,
+                reportLanguage: reportLanguage,
+                showClassificationWatermark: showClassificationWatermark,
+                allowRemoteMedia: allowRemoteMedia,
+                targetDuration: targetDuration,
+                showRehearsalSummary: showRehearsalSummary,
+                playOnly: playOnly,
+                presentationTiming: presentationTiming,
+                rehearsalMode: rehearsalMode,
+                initialAnnotations: annotations,
+                onAnnotationsChanged: onAnnotationsChanged,
+                onSlideChanged: onSlideChanged,
+                onSlideSplit: onSlideSplit,
+                onSessionEdit: onSessionEdit,
+                onPlaybackFinished: onPlaybackFinished,
+                initialUserNotes: initialUserNotes,
+                onUserNotesChanged: onUserNotesChanged,
+                improvementY01: improvementY01,
+              ),
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -447,24 +458,11 @@ class FullscreenPresenter extends StatefulWidget {
   /// the slide, and run the presenter view (current/next/notes/timer) in the
   /// main window on the laptop. The two windows stay in sync over method
   /// channels. Falls back to [show] if the second window can't be created.
-  static Map<String, dynamic> _annotationsBySlideIndex(
-    List<Slide> slides,
-    Map<String, List<InkStroke>> annotations,
-  ) {
-    final inkByIndex = <String, dynamic>{};
-    for (var i = 0; i < slides.length; i++) {
-      final strokes = annotations[slides[i].id];
-      if (strokes != null && strokes.isNotEmpty) {
-        inkByIndex['$i'] = encodeStrokes(strokes);
-      }
-    }
-    return inkByIndex;
-  }
-
   static Future<String?> showDualScreen(
     BuildContext context, {
     required List<Slide> slides,
     required String? projectPath,
+    String? remoteAssetBase,
     required ThemeProfile themeProfile,
     MarpStyle marpStyle = const MarpStyle(),
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
@@ -533,6 +531,7 @@ class FullscreenPresenter extends StatefulWidget {
           context,
           slides: slides,
           projectPath: projectPath,
+          remoteAssetBase: remoteAssetBase,
           themeProfile: themeProfile,
           marpStyle: marpStyle,
           cockpitColorScheme: cockpitColorScheme,
@@ -570,6 +569,7 @@ class FullscreenPresenter extends StatefulWidget {
       audienceHandle: audienceHandle,
       slides: slides,
       projectPath: projectPath,
+      remoteAssetBase: remoteAssetBase,
       themeProfile: themeProfile,
       marpStyle: marpStyle,
       cockpitColorScheme: cockpitColorScheme,
