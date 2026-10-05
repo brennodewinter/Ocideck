@@ -67,6 +67,12 @@ class InlineRun {
 
 const _markers = r'*_~`[]()\$';
 
+/// Het enige inline-HTML-element dat Marp in tekst betekenis geeft en dat hier
+/// narekenbaar is: `<br>` — `<br/>`, `<br />`, hoofdletters en attributen
+/// (`<br clear="all">`) tellen mee. Andere tags blijven letterlijke tekst; een
+/// bredere HTML-parser zou meer wegsnoepen dan Marp belooft (#2274).
+final _brTag = RegExp(r'<br(\s[^>]*)?/?>', caseSensitive: false);
+
 bool _isEscapedPunctuation(String c) =>
     c.length == 1 && markdownEscapedPunctuation.contains(c);
 
@@ -132,6 +138,7 @@ bool _hasMarker(String s) {
     if (s[i] == r'\' && i + 1 < s.length && _isEscapedPunctuation(s[i + 1])) {
       return true;
     }
+    if (s[i] == '<' && _brTag.matchAsPrefix(s, i) != null) return true;
   }
   return false;
 }
@@ -226,6 +233,19 @@ void _parseInto(
       }
     }
 
+    // Marp-inline-HTML: `<br>` is een echte regeleinde, ook in een kop (#2274).
+    // Hij landt in de lopende buffer zodat de actieve opmaak er omheen blijft
+    // gelden (`**a<br>b**` breekt vet door). In een `code`-span komt deze tak
+    // nooit terecht — die tekst wordt letterlijk overgenomen.
+    if (c == '<') {
+      final br = _brTag.matchAsPrefix(s, i);
+      if (br != null) {
+        buf.write('\n');
+        i = br.end;
+        continue;
+      }
+    }
+
     // [^label] — een voetnootverwijzing, vóór de link-tak: die kijkt óók naar
     // een `[` en zou hem als gewone tekst laten liggen.
     final note = footnotes && c == '[' ? _footnoteLabelAt(s, i) : null;
@@ -252,53 +272,14 @@ void _parseInto(
       }
     }
 
-    // **vet** (asterisks) — vóór enkele *cursief*
-    if (c == '*' && i + 1 < s.length && s[i + 1] == '*') {
-      final end = _findDelimiter(s, i + 2, '**');
-      if (end != -1) {
-        flush();
-        _parseInto(
-          s.substring(i + 2, end),
-          ctx._with(bold: true),
-          out,
-          footnotes: footnotes,
-        );
-        i = end + 2;
-        continue;
-      }
-    }
-
-    // __vet__ (underscores) — CommonMark/GFM; stond eerder alleen *cursief*
-    // voor `_`, waardoor `__dit__` geen vet werd (test.md / markdown-here).
-    if (c == '_' && i + 1 < s.length && s[i + 1] == '_') {
-      final end = _findDelimiter(s, i + 2, '__');
-      if (end != -1) {
-        flush();
-        _parseInto(
-          s.substring(i + 2, end),
-          ctx._with(bold: true),
-          out,
-          footnotes: footnotes,
-        );
-        i = end + 2;
-        continue;
-      }
-    }
-
-    // ~~doorhalen~~
-    if (c == '~' && i + 1 < s.length && s[i + 1] == '~') {
-      final end = _findDelimiter(s, i + 2, '~~');
-      if (end != -1) {
-        flush();
-        _parseInto(
-          s.substring(i + 2, end),
-          ctx._with(strike: true),
-          out,
-          footnotes: footnotes,
-        );
-        i = end + 2;
-        continue;
-      }
+    // Dubbele merktekens — **vet** en __vet__ (CommonMark/GFM) en
+    // ~~doorhalen~~ — vóór enkele *cursief*/_cursief_. `__` stond eerder
+    // alleen als cursief-variant, waardoor `__dit__` geen vet werd
+    // (test.md / markdown-here).
+    final dbl = _doubleMarkAt(s, i, ctx, out, flush, footnotes);
+    if (dbl != -1) {
+      i = dbl;
+      continue;
     }
 
     // *cursief* of _cursief_
@@ -332,6 +313,34 @@ void _parseInto(
     i++;
   }
   flush();
+}
+
+/// Parse een dubbel merkteken (`**`, `__`, `~~`) op [i]: flusht de lopende
+/// buffer, parse de inhoud recursief met vet- dan wel doorhaal-opmaak en geef
+/// de index ná het sluitteken terug. Geeft -1 wanneer op [i] geen afgesloten
+/// dubbele markering staat.
+int _doubleMarkAt(
+  String s,
+  int i,
+  InlineRun ctx,
+  List<InlineRun> out,
+  void Function() flush,
+  bool footnotes,
+) {
+  for (final mark in const ['**', '__', '~~']) {
+    if (!s.startsWith(mark, i)) continue;
+    final end = _findDelimiter(s, i + 2, mark);
+    if (end == -1) continue;
+    flush();
+    _parseInto(
+      s.substring(i + 2, end),
+      mark == '~~' ? ctx._with(strike: true) : ctx._with(bold: true),
+      out,
+      footnotes: footnotes,
+    );
+    return end + 2;
+  }
+  return -1;
 }
 
 /// Vind het index van het sluitteken [delim] vanaf [from], rekening houdend

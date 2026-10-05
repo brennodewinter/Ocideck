@@ -437,6 +437,11 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- Een Marp-regelafbreking `<br>` in een kop of titeltekst werd letterlijk op de
+  dia getoond; de inline-parser vertaalde geen HTML. `<br>`, `<br/>` en
+  `<br />` (ook met hoofdletters of attributen) breken de tekst nu zoals Marp
+  dat doet, in voorvertoning, presentatiemodus en alle andere plekken die via
+  dezelfde parser lopen (#2274).
 - De meegeleverde DOMPurify voor offline HTML-export is bijgewerkt van 3.4.13
   naar 3.4.16. Daarmee is `GHSA-p98j-92pf-mc4p` verholpen; bron en SHA-256
   blijven exact vastgelegd in het manifest.

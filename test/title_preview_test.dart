@@ -95,4 +95,21 @@ void main() {
       expect(find.textContaining('Welkom'), findsOneWidget);
     },
   );
+
+  // Marp renders `# First<br>Second` in a title as a real line break; the
+  // preview used to show the literal markup (#2274).
+  testWidgets('a Marp <br> in the title renders as a line break', (
+    tester,
+  ) async {
+    const profile = ThemeProfile();
+    final slide = Slide.create(
+      SlideType.title,
+    ).copyWith(title: 'First line<br>Second line');
+
+    await tester.pumpWidget(_host(slide, profile));
+    await tester.pump();
+
+    expect(find.textContaining('First line\nSecond line'), findsOneWidget);
+    expect(find.textContaining('<br>'), findsNothing);
+  });
 }
