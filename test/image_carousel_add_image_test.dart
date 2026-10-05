@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as p;
 import 'package:ocideck/services/caption_service.dart';
 import 'package:ocideck/services/description_service.dart';
+import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 
 import 'support/pump_until.dart';
@@ -15,9 +16,10 @@ import 'support/pump_until.dart';
 /// Dekking voor het toevoegen aan het afbeeldingenarchief (#2107): de
 /// bestemmingskeuze (`imageArchiveDestination`) en de twee opnamepaden
 /// (`adoptImageFileIntoArchive`, `adoptImageBytesIntoArchive`) zijn pure
-/// file-IO en direct te bewijzen; de knop in beheermodus is een
-/// widgetassertie. Het klembord zelf (Pasteboard) en de bestandskiezer zijn
-/// plugin-kanalen die onder `flutter test` niet bestaan — daar zit de naad.
+/// file-IO en direct te bewijzen; de knoppen zijn widgetasserties. Het
+/// klembord zelf (Pasteboard) en de systeemkiezer zijn plugin-kanalen die
+/// onder `flutter test` niet bestaan — daar zit de naad
+/// (`debugCarouselBrowsePick` speelt `pickImageDetailed` voor "Bladeren…").
 final _onePixelPng = base64Decode(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8z8BQDwAEhQGA'
   'hKmMIQAAAABJRU5ErkJggg==',
@@ -226,6 +228,93 @@ void main() {
       await pumpPicker(tester, manage: false);
       expect(find.text('Bladeren…'), findsOneWidget);
       expect(find.text('Afbeelding toevoegen…'), findsNothing);
+    });
+  });
+
+  group('kiesmodus "Bladeren…"', () {
+    void clearLayoutNoise(WidgetTester tester) {
+      while (tester.takeException() != null) {}
+    }
+
+    /// Regressie voor #2277: "Bladeren…" sloot de kiezer direct na het kiezen
+    /// van een bestand — vlak vóór het moment dat je bijschrift en
+    /// beschrijving wilt invullen. Nu blijft de kiezer open met het nieuwe
+    /// beeld aangewezen; pas "Kiezen" geeft het resultaat terug.
+    testWidgets('blijft open met het nieuwe bestand geselecteerd', (
+      tester,
+    ) async {
+      final lib = Directory('${tempDir.path}/bib')..createSync();
+      File('${lib.path}/bestaand.png').writeAsBytesSync(_onePixelPng);
+      // Buiten elke zoekwortel: bewijst dat de kiezer het pad zélf in de
+      // lijst zet — een herscan van de wortels zou dit bestand niet vinden.
+      final outside = Directory('${tempDir.path}/buiten')..createSync();
+      final picked = File('${outside.path}/nieuwe_foto.png')
+        ..writeAsBytesSync(_onePixelPng);
+
+      debugCarouselBrowsePick = () async =>
+          ImageImportOutcome.success(picked.path);
+      addTearDown(() => debugCarouselBrowsePick = null);
+
+      ImagePickResult? result;
+      var dialogOpen = false;
+      await tester.binding.setSurfaceSize(const Size(1400, 900));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+          ProviderScope(
+            child: MaterialApp(
+              home: Builder(
+                builder: (context) => Scaffold(
+                  body: Center(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        dialogOpen = true;
+                        result = await ImageCarouselPicker.show(
+                          context,
+                          searchPaths: [lib.path],
+                          captionService: CaptionService(),
+                          descriptionService: DescriptionService(),
+                        );
+                        dialogOpen = false;
+                      },
+                      child: const Text('open'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.tap(find.text('open'));
+      });
+      await pumpUntil(
+        tester,
+        () =>
+            find.text('Bladeren…').evaluate().isNotEmpty &&
+            find.byType(CircularProgressIndicator).evaluate().isEmpty,
+        reason: 'de afbeeldingkiezer opende niet of bleef laden',
+      );
+      clearLayoutNoise(tester);
+
+      await tester.runAsync(() => tester.tap(find.text('Bladeren…')));
+      await pumpUntil(
+        tester,
+        () => find.text('nieuwe_foto.png').evaluate().isNotEmpty,
+        reason: 'het via "Bladeren…" gekozen bestand werd niet geselecteerd',
+      );
+      // De kern van de bug: de kiezer sloot direct na het kiezen. Nu moet
+      // hij nog open staan, met het nieuwe beeld aangewezen in de preview.
+      expect(dialogOpen, isTrue);
+      expect(find.text('Kiezen'), findsOneWidget);
+      clearLayoutNoise(tester);
+
+      await tester.runAsync(() => tester.tap(find.text('Kiezen')));
+      await pumpUntil(
+        tester,
+        () => !dialogOpen,
+        reason: 'de kiezer gaf geen resultaat terug',
+      );
+      expect(result?.path, picked.path);
     });
   });
 }

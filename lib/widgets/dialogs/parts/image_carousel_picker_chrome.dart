@@ -395,3 +395,130 @@ extension _CarouselChrome on _ImageCarouselPickerState {
     );
   }
 }
+
+/// De bevestigingsdialoog voor `_dedupe` in de actions-part: somt per groep
+/// op welke kopieën weggaan en welk bestand blijft staan.
+///
+/// Top-level zoals [_metaField]: hij gebruikt geen instantietoestand — context
+/// en het plan komen mee als parameters — dus hij hoort niet op de State en
+/// telt niet mee voor de klassegrootte-ratchet.
+Future<bool?> _showDedupeDialog(
+  BuildContext context,
+  List<({String keeper, List<String> remove})> plan,
+) {
+  final removeCount = plan.fold(0, (sum, e) => sum + e.remove.length);
+  return showDialog<bool>(
+    context: context,
+    builder: (ctx) {
+      final l10n = ctx.l10n;
+      return AlertDialog(
+        backgroundColor: ImagePickerPalette.surface1,
+        title: Row(
+          children: [
+            const Icon(
+              Icons.layers_clear_outlined,
+              color: AppTheme.blue400,
+              size: 20,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                '${l10n.d('Dubbele afbeeldingen opruimen?')} ($removeCount)',
+                style: TextStyle(color: ImagePickerPalette.text, fontSize: 16),
+              ),
+            ),
+          ],
+        ),
+        content: SizedBox(
+          width: 440,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.d(
+                  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.',
+                ),
+                style: TextStyle(color: _muted, fontSize: 13),
+              ),
+              const SizedBox(height: 12),
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final entry in plan) ...[
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.check_circle_outline,
+                              size: 14,
+                              color: ImagePickerPalette.success,
+                            ),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                p.basename(entry.keeper),
+                                style: TextStyle(
+                                  color: ImagePickerPalette.text,
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        for (final path in entry.remove)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 2),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.delete_outline,
+                                  size: 13,
+                                  color: ImagePickerPalette.dangerSoft,
+                                ),
+                                const SizedBox(width: 6),
+                                Expanded(
+                                  child: Text(
+                                    p.basename(path),
+                                    style: TextStyle(
+                                      color: _muted,
+                                      fontSize: 12,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        const SizedBox(height: 10),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            style: TextButton.styleFrom(foregroundColor: _muted),
+            child: Text(l10n.t('cancel')),
+          ),
+          ElevatedButton.icon(
+            onPressed: () => Navigator.pop(ctx, true),
+            icon: const Icon(Icons.layers_clear_outlined, size: 16),
+            label: Text(l10n.d('Opruimen')),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ImagePickerPalette.successStrong,
+              foregroundColor: Colors.white,
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}

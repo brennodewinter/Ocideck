@@ -505,7 +505,10 @@ const Map<String, int> classSizeBaseline = {
   // van 2460: `_parsedCustomMarkdown` is naar het hoogste niveau getild — het
   // leest niets van de service, dus het hoorde nooit op de klasse. Meet 2428.
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
-      2601, // +164 (#2107): archief-toevoeging — upload-knop en Ctrl/Cmd+V in
+      2517, // −84 (#2277): de dedupe-bevestigingsdialoog naar top-level
+  // (_showDedupeDialog in de chrome-part) — hij gebruikte geen
+  // instantietoestand. Meet 2492.
+  // +164 (#2107): archief-toevoeging — upload-knop en Ctrl/Cmd+V in
   // beheermodus. De file-IO zit bewust in top-level functies
   // (imageArchiveDestination/adoptImage*IntoArchive), de klasse draagt alleen
   // de dunne pick/plak-orchestratie en snackbar-afslag.
