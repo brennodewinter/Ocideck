@@ -128,6 +128,7 @@ part 'previews/chart_preview_radar.dart';
 part 'previews/chart_preview_extra.dart';
 part 'previews/chart_preview_heatmap.dart';
 part 'previews/chart_preview_touch.dart';
+part 'previews/chart_preview_legend.dart';
 part 'previews/chart_preview_bullet.dart';
 part 'previews/chart_preview_improvement.dart';
 part 'previews/cockpit_preview.dart';

@@ -180,10 +180,17 @@ extension _ChartPreviewExtra on _ChartPreviewState {
               Expanded(
                 child: MouseRegion(
                   key: ValueKey('hbar-cell-$cat-$si'),
-                  onEnter: (_) => _setCellTooltip(
-                    _seriesCellTooltip(context, spec, cat, si),
-                  ),
-                  onExit: (_) => _setCellTooltip(null),
+                  onEnter: (_) {
+                    _setCellTooltip(_seriesCellTooltip(context, spec, cat, si));
+                    // De cel meldt zich óók bij de hover-bus: de legenda
+                    // benadrukt deze reeks en het andere scherm spiegelt de
+                    // tooltip mee.
+                    _setLocalHover(ChartHover(category: cat, series: si));
+                  },
+                  onExit: (_) {
+                    _setCellTooltip(null);
+                    _setLocalHover(null);
+                  },
                   child: _hBarCell(
                     s[si].data[cat],
                     _seriesDisplayColor(s[si], si),
@@ -446,10 +453,16 @@ extension _ChartPreviewExtra on _ChartPreviewState {
             for (var i = 0; i < segs.length; i++)
               MouseRegion(
                 key: ValueKey('hstack-seg-$cat-${segs[i].si}'),
-                onEnter: (_) => _setCellTooltip(
-                  _seriesCellTooltip(context, spec, cat, segs[i].si),
-                ),
-                onExit: (_) => _setCellTooltip(null),
+                onEnter: (_) {
+                  _setCellTooltip(
+                    _seriesCellTooltip(context, spec, cat, segs[i].si),
+                  );
+                  _setLocalHover(ChartHover(category: cat, series: segs[i].si));
+                },
+                onExit: (_) {
+                  _setCellTooltip(null);
+                  _setLocalHover(null);
+                },
                 child: SizedBox(
                   width: segs[i].len,
                   child: DecoratedBox(

@@ -466,7 +466,12 @@ const Map<String, int> classSizeBaseline = {
   // controller + scope in chart_hover.dart, `composedChartHoverText` en het
   // verhuisde `_HoverPieChart` in chart_preview_touch.dart.
   // Verlaagd van 3160 naar 3159: de klasse meet 3159.
-  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3159,
+  // Verlaagd van 3159 naar 3073 (#2286): de legenda-bouwers (`_legend` /
+  // `_pieLegend`) gingen naar een eigen `_ChartLegend`-widget in
+  // chart_preview_legend.dart — plot-hover benadrukt de legenda, wat zeven
+  // params kostte in plaats van 160 extensie-regels. De klasse meet 3048;
+  // ~25 regels lucht voor twee PR's die tegelijk in dit bestand werken.
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3073,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
   // Verlaagd van 2235 naar 2232: de klasse meet 2227.

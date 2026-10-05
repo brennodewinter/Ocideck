@@ -229,9 +229,22 @@ class _ChartPreviewState extends State<_ChartPreview>
 
   /// Series index to emphasise (dim the rest / thicken the line): a local legend
   /// hover, or the series mirrored from the other screen. A local *plot* hover
-  /// deliberately does not dim — matching what a lone pointer shows here.
+  /// deliberately does not dim — matching what a lone pointer shows here. The
+  /// legend-side mirror of this getter is [_effectiveLegendIndex].
   int? get _effectiveHoverSeries =>
       _hovered ?? _hoverController?.external?.series;
+
+  /// Legend index to emphasise (chip highlight + fading the rest). A legend
+  /// hover leads; a plot hover follows the same channel — the series index on
+  /// cartesian charts, the slice index on pie/donut — and the mirrored hover
+  /// from the other screen comes last. Symmetrie met [_effectiveHoverSeries]:
+  /// net zoals de legenda de plot aanstuurt, stuurt de plot nu de legenda.
+  int? get _effectiveLegendIndex {
+    final local = _spec.isPieLike ? _localHover?.category : _localHover?.series;
+    final external = _hoverController?.external;
+    final mirrored = _spec.isPieLike ? external?.category : external?.series;
+    return _hovered ?? local ?? mirrored;
+  }
 
   /// Slice index to enlarge in a pie/donut: a local legend/slice hover, or the
   /// slice mirrored from the other screen.
@@ -272,9 +285,10 @@ class _ChartPreviewState extends State<_ChartPreview>
   /// from instance members of a State subclass), so they route through this.
   void _rebuild(VoidCallback fn) => setState(fn);
 
-  /// True when another legend entry is hovered, so [index] should fade back.
-  /// Honours the hover mirrored from the other screen too, so the audience sees
-  /// the same series stand out that the presenter is pointing at.
+  /// True when another series is emphasised, so [index] fades back in the
+  /// *plot*. Emphasis comes from a legend hover or the hover mirrored from the
+  /// other screen — a local plot hover never dims the plot you are pointing
+  /// at. The legend-side equivalent lives in [_ChartLegend].
   bool _dimmed(int index) {
     final active = _effectiveHoverSeries;
     return active != null && active != index;
@@ -453,170 +467,25 @@ class _ChartPreviewState extends State<_ChartPreview>
   /// The legend under the plot, or null for chart types that carry their key
   /// elsewhere: pie/donut list their slices, heatmap shows a colour scale
   /// inside the plot, and a waterfall reads a single series so a legend adds
-  /// nothing.
+  /// nothing. The chips themselves live in [_ChartLegend] — a top-level widget
+  /// in chart_preview_legend.dart — so emphasis state stays in this State while
+  /// the ~160 layout lines don't count toward its size ratchet.
   Widget? _legendWidget(ChartSpec spec, Color textColor) {
     if (!spec.hasInlineData || spec.series.isEmpty) return null;
     if (spec.type == ChartType.heatmap || spec.type == ChartType.waterfall) {
       return null;
     }
-    if (spec.isPieLike) return _pieLegend(spec, textColor);
-    return _legend(spec, textColor);
-  }
-
-  Widget _legend(ChartSpec spec, Color textColor) {
-    return SizedBox(
-      height: w * 0.03,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            for (var i = 0; i < spec.series.length; i++) ...[
-              if (i > 0) SizedBox(width: w * 0.01),
-              MouseRegion(
-                onEnter: (_) => _hoverSeriesLegend(i),
-                onExit: (_) => _hoverSeriesLegend(null),
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 120),
-                  opacity: _dimmed(i) ? 0.4 : 1,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: w * 0.01,
-                      vertical: w * 0.004,
-                    ),
-                    decoration: BoxDecoration(
-                      color: _hovered == i
-                          ? _seriesColor(
-                              spec.series[i],
-                              i,
-                            ).withValues(alpha: 0.18)
-                          : textColor.withValues(alpha: 0.045),
-                      borderRadius: BorderRadius.circular(w),
-                      border: Border.all(
-                        color: _hovered == i
-                            ? _seriesColor(spec.series[i], i)
-                            : Colors.transparent,
-                        width: w * 0.0015,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          width: w * 0.012,
-                          height: w * 0.012,
-                          decoration: BoxDecoration(
-                            color: _seriesColor(spec.series[i], i),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        SizedBox(width: w * 0.006),
-                        ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: w * 0.16),
-                          child: Text(
-                            spec.series[i].name.isEmpty
-                                ? '${context.l10n.d('Reeks')} ${i + 1}'
-                                : decodeNamedHtmlEntities(spec.series[i].name),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: _applyFont(
-                              font,
-                              TextStyle(
-                                fontSize: w * 0.013,
-                                fontWeight: FontWeight.w600,
-                                color: textColor.withValues(alpha: 0.82),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _pieLegend(ChartSpec spec, Color textColor) {
-    final itemCount = math.min(spec.x.length, 18);
-    final columns = math.min(itemCount, presentationMode ? 4 : 6);
-    final rows = (itemCount / columns).ceil();
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final gap = w * 0.006;
-        final itemWidth =
-            (constraints.maxWidth - gap * (columns - 1)) / columns;
-        return SizedBox(
-          height: rows * w * 0.03 * _labelScale + (rows - 1) * gap,
-          child: Wrap(
-            spacing: gap,
-            runSpacing: gap,
-            children: [
-              for (var i = 0; i < itemCount; i++)
-                MouseRegion(
-                  onEnter: (_) => _hoverSliceLegend(i),
-                  onExit: (_) => _hoverSliceLegend(null),
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 120),
-                    opacity: _dimmed(i) ? 0.4 : 1,
-                    child: Container(
-                      width: itemWidth,
-                      height: w * 0.03 * _labelScale,
-                      padding: EdgeInsets.symmetric(horizontal: w * 0.008),
-                      decoration: BoxDecoration(
-                        color: _hovered == i
-                            ? AppTheme.parseHexColor(
-                                chartRowColor(spec, i),
-                              ).withValues(alpha: 0.18)
-                            : textColor.withValues(alpha: 0.045),
-                        borderRadius: BorderRadius.circular(w),
-                        border: Border.all(
-                          color: _hovered == i
-                              ? AppTheme.parseHexColor(chartRowColor(spec, i))
-                              : Colors.transparent,
-                          width: w * 0.0015,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: w * 0.012,
-                            height: w * 0.012,
-                            decoration: BoxDecoration(
-                              color: AppTheme.parseHexColor(
-                                chartRowColor(spec, i),
-                              ),
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          SizedBox(width: w * 0.006),
-                          Expanded(
-                            child: Text(
-                              decodeNamedHtmlEntities(spec.x[i]),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: _applyFont(
-                                font,
-                                TextStyle(
-                                  fontSize: w * 0.013 * _labelScale,
-                                  fontWeight: FontWeight.w600,
-                                  color: textColor.withValues(alpha: 0.82),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        );
-      },
+    return _ChartLegend(
+      spec: spec,
+      textColor: textColor,
+      w: w,
+      font: font,
+      labelScale: _labelScale,
+      presentationMode: presentationMode,
+      pie: spec.isPieLike,
+      emphasised: _effectiveLegendIndex,
+      seriesColor: _seriesColor,
+      onHoverEntry: spec.isPieLike ? _hoverSliceLegend : _hoverSeriesLegend,
     );
   }
 
