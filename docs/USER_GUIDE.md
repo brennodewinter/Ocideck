@@ -1133,10 +1133,12 @@ The available types:
   (centre to outer ring). They are not shown for pie, donut, horizontal bar,
   horizontal stacked bar, or heatmap. Leave them empty to scale automatically.
 - **Reading values** — hovering a legend entry highlights its series (or pie
-  slice). On a line chart the tooltip belongs to the dot under the cursor and
-  shows every overlapping dot at once; on a spider/radar chart hovering a point
-  shows its value in a tooltip too. For screen readers every chart also carries
-  a text alternative with its type, title, and the values per series.
+  slice), and hovering the chart does the reverse: the matching legend entry
+  lights up while the rest fade back. On a line chart the tooltip belongs to
+  the dot under the cursor and shows every overlapping dot at once; on a
+  spider/radar chart hovering a point shows its value in a tooltip too. For
+  screen readers every chart also carries a text alternative with its type,
+  title, and the values per series.
 - Charts render in the preview, presenter, PDF, and PPTX, and as inline SVG in the
   HTML export.
 

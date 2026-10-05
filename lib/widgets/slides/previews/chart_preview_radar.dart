@@ -110,8 +110,8 @@ extension _ChartPreviewRadar on _ChartPreviewState {
                 si,
               ).withValues(alpha: _dimmed(si) ? 0.04 : 0.16),
               borderColor: _seriesDisplayColor(spec.series[si], si),
-              borderWidth: w * (_hovered == si ? 0.0040 : 0.0022),
-              entryRadius: w * (_hovered == si ? 0.006 : 0.004),
+              borderWidth: w * (_effectiveLegendIndex == si ? 0.0040 : 0.0022),
+              entryRadius: w * (_effectiveLegendIndex == si ? 0.006 : 0.004),
             ),
           // Invisible anchor pinning the scale to [lo, hi]
           // so the rings represent a fixed scale.
@@ -161,6 +161,13 @@ extension _ChartPreviewRadar on _ChartPreviewState {
                 : null;
             if (next != _radarTouch) {
               _rebuild(() => _radarTouch = next);
+              // De vertex meldt ook zijn dataset aan de hover-bus: de legenda
+              // benadrukt die reeks en het andere scherm spiegelt de hover.
+              _setLocalHover(
+                next == null
+                    ? null
+                    : ChartHover(series: next.series, category: next.entry),
+              );
             }
           },
         ),

@@ -10,6 +10,10 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **legenda van een grafiek** (#2286) reageert nu ook op hover over de grafiek zelf: het datapunt of segment onder
+  de pointer licht zijn legenda-entry uit terwijl de rest vervaagt — precies de spiegel van de bestaande legenda-hover.
+  Dat geldt voor de handgetekende horizontale staaf- en gestapelde staafgrafieken én de spidergrafiek, die hun hover
+  daarvoor nu ook aan de gedeelde bus doorgeven; beide schermen van de presentatie spiegelen dat mee.
 - De geheime-opslag gebruikt nu de gedeelde `secret_storage`-package uit
   AppFoundation voor het kleine opslagcontract, de native keychain-adapter en
   de fail-closed browserpoort. OciDeck houdt zijn bestaande sleutelnamen,

@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -98,6 +99,150 @@ void main() {
       findsOneWidget,
     );
   });
+
+  /// De AnimatedOpacity van de legenda-chip rond [label] — de geëmphasiseerde
+  /// entry blijft op 1, de rest vervaagt naar 0.4 (hetzelfde gedrag als een
+  /// legenda-hover op de plot geeft).
+  double chipOpacity(WidgetTester tester, String label) {
+    final chip = find.ancestor(
+      of: find.text(label),
+      matching: find.byType(AnimatedOpacity),
+    );
+    return tester.widget<AnimatedOpacity>(chip.first).opacity;
+  }
+
+  testWidgets('hovering a chart cell emphasises the matching legend chip', (
+    tester,
+  ) async {
+    // Spiegelbeeld van legenda-hover: de plot onder de pointer benadrukt nu ook
+    // zijn legenda-entry — uitgelicht blijven, de rest vergrijst.
+    const spec = ChartSpec(
+      type: ChartType.horizontalBar,
+      x: ['Alpha', 'Beta'],
+      series: [
+        ChartSeries(name: 'Noord', data: [8, 12]),
+        ChartSeries(name: 'Zuid', data: [6, 9]),
+      ],
+    );
+    final controller = ChartHoverController();
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(_host(spec, controller));
+    await tester.pump();
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+
+    await gesture.moveTo(
+      tester.getCenter(find.byKey(const ValueKey('hbar-cell-0-1'))),
+    );
+    await tester.pump();
+    expect(controller.local, const ChartHover(category: 0, series: 1));
+    expect(chipOpacity(tester, 'Zuid'), 1);
+    expect(chipOpacity(tester, 'Noord'), 0.4);
+
+    // Pointer weg: de legenda herstelt volledig.
+    await gesture.moveTo(Offset.zero);
+    await tester.pump();
+    expect(chipOpacity(tester, 'Noord'), 1);
+    expect(chipOpacity(tester, 'Zuid'), 1);
+  });
+
+  testWidgets(
+    'hovering a stacked segment emphasises its series in the legend',
+    (tester) async {
+      const spec = ChartSpec(
+        type: ChartType.horizontalStackedBar,
+        x: ['Alpha', 'Beta'],
+        series: [
+          ChartSeries(name: 'A', data: [6, 8]),
+          ChartSeries(name: 'B', data: [4, 3]),
+        ],
+      );
+      final controller = ChartHoverController();
+      addTearDown(controller.dispose);
+
+      await tester.pumpWidget(_host(spec, controller));
+      await tester.pump();
+      // De groei-animatie begint op nul: segmenten bestaan pas ná het
+      // uitlopen (net als de bestaande hstack-tooltip-test).
+      await tester.pumpAndSettle();
+      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await gesture.addPointer(location: Offset.zero);
+      addTearDown(gesture.removePointer);
+
+      await gesture.moveTo(
+        tester.getCenter(find.byKey(const ValueKey('hstack-seg-1-1'))),
+      );
+      await tester.pump();
+      expect(chipOpacity(tester, 'B'), 1);
+      expect(chipOpacity(tester, 'A'), 0.4);
+    },
+  );
+
+  testWidgets('hovering a pie slice emphasises its legend entry', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.pie,
+      x: ['Team A', 'Team B'],
+      series: [
+        ChartSeries(name: 'Aandeel', data: [60, 40]),
+      ],
+    );
+    final controller = ChartHoverController();
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(_host(spec, controller));
+    await tester.pump();
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+
+    // Slice 0 begint bovenaan en loopt met de klok mee; bij twee delen bezet
+    // hij de rechterhelft, dus een punt daar raakt altijd slice 0.
+    final pieRect = tester.getRect(find.byType(PieChart).first);
+    await gesture.moveTo(
+      Offset(
+        pieRect.center.dx + pieRect.shortestSide * 0.25,
+        pieRect.center.dy,
+      ),
+    );
+    await tester.pump();
+    expect(controller.local, const ChartHover(category: 0));
+    expect(chipOpacity(tester, 'Team A'), 1);
+    expect(chipOpacity(tester, 'Team B'), 0.4);
+  });
+
+  testWidgets(
+    'a mirrored slice hover emphasises the legend on the audience pie',
+    (tester) async {
+      const spec = ChartSpec(
+        type: ChartType.pie,
+        x: ['Team A', 'Team B'],
+        series: [
+          ChartSeries(name: 'Aandeel', data: [60, 40]),
+        ],
+      );
+      final controller = ChartHoverController();
+      addTearDown(controller.dispose);
+
+      await tester.pumpWidget(_host(spec, controller));
+      await tester.pump();
+      expect(chipOpacity(tester, 'Team B'), 1);
+
+      // De presentator zweeft over slice 1 — het publieksscherm toont dezelfde
+      // legenda-emphasse als bij een lokale hover.
+      controller.setExternal(const ChartHover(category: 1));
+      await tester.pump();
+      expect(chipOpacity(tester, 'Team B'), 1);
+      expect(chipOpacity(tester, 'Team A'), 0.4);
+
+      controller.setExternal(null);
+      await tester.pump();
+      expect(chipOpacity(tester, 'Team A'), 1);
+    },
+  );
 
   testWidgets('hovering a legend reports the series to the shared controller', (
     tester,
