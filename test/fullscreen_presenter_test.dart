@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
@@ -38,38 +40,41 @@ Widget _host(
 
 /// The presenter pushed over a launcher screen, so its exit (a `Navigator.pop`)
 /// is observable: "open" being back on screen means the presentation closed.
-Widget _presenterOverLauncher({bool showRehearsalSummary = false}) =>
-    MaterialApp(
-      localizationsDelegates: const [
-        ...GlobalMaterialLocalizations.delegates,
-        FlutterQuillLocalizations.delegate,
-      ],
-      home: Scaffold(
-        body: Builder(
-          builder: (context) => TextButton(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => FullscreenPresenter(
-                  slides: [
-                    Slide.create(
-                      SlideType.bullets,
-                    ).copyWith(title: 'Eerste', bullets: ['a']),
-                    Slide.create(
-                      SlideType.bullets,
-                    ).copyWith(title: 'Tweede', bullets: ['b']),
-                  ],
-                  projectPath: null,
-                  themeProfile: const ThemeProfile(),
-                  initialIndex: 0,
-                  showRehearsalSummary: showRehearsalSummary,
-                ),
-              ),
+Widget _presenterOverLauncher({
+  bool showRehearsalSummary = false,
+  AudienceWindowHandle? audience,
+}) => MaterialApp(
+  localizationsDelegates: const [
+    ...GlobalMaterialLocalizations.delegates,
+    FlutterQuillLocalizations.delegate,
+  ],
+  home: Scaffold(
+    body: Builder(
+      builder: (context) => TextButton(
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => FullscreenPresenter(
+              slides: [
+                Slide.create(
+                  SlideType.bullets,
+                ).copyWith(title: 'Eerste', bullets: ['a']),
+                Slide.create(
+                  SlideType.bullets,
+                ).copyWith(title: 'Tweede', bullets: ['b']),
+              ],
+              projectPath: null,
+              themeProfile: const ThemeProfile(),
+              initialIndex: 0,
+              showRehearsalSummary: showRehearsalSummary,
+              audience: audience,
             ),
-            child: const Text('open'),
           ),
         ),
+        child: const Text('open'),
       ),
-    );
+    ),
+  ),
+);
 
 Future<void> sendControlKey(WidgetTester tester, LogicalKeyboardKey key) async {
   await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
@@ -1351,6 +1356,122 @@ void main() {
       expect(find.text('open'), findsNothing);
     },
   );
+
+  test('dual-screen entry also puts the presenter window in fullscreen', () {
+    // `_runDualPresenter` draait op het hoofdvenster naast het beamervenster
+    // en moet — net als `show()` — dat venster volledig scherm zetten (#2289).
+    // De aanroep zelf kan niet in een widgettest: `WindowController.create`
+    // heeft een echte desktop-engine nodig. Deze bron-scan bewaakt dat de
+    // regel er staat.
+    final source = File(
+      'lib/widgets/presentation/parts/presenter_beamer_payload.dart',
+    ).readAsStringSync();
+    expect(source, contains('await setPresenterFullscreen(true);'));
+  });
+
+  testWidgets('a dual-screen exit restores the presenter window too', (
+    tester,
+  ) async {
+    // Het presentatorvenster staat sinds #2289 ook in dubbelschermmodus
+    // volledig scherm; het verlaten moet dat dus óók ongedaan maken —
+    // anders blijft de app na afloop op een volledig scherm staan.
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      bridge,
+      (call) async => null,
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    final fullscreenCalls = <bool>[];
+    debugSetPresenterFullscreen = (f) async => fullscreenCalls.add(f);
+    debugIsPresenterFullscreen = () => true;
+    addTearDown(() => debugSetPresenterFullscreen = null);
+    addTearDown(() => debugIsPresenterFullscreen = null);
+
+    var audienceClosed = false;
+    await tester.pumpWidget(
+      _presenterOverLauncher(
+        audience: AudienceWindowHandle(
+          WindowController.fromWindowId('test'),
+          closeImpl: (_) async => audienceClosed = true,
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    expect(find.text('Eerste'), findsOneWidget);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pumpAndSettle();
+
+    expect(find.text('open'), findsOneWidget);
+    expect(audienceClosed, isTrue);
+    expect(fullscreenCalls, contains(false));
+  });
+
+  testWidgets('the fullscreen guard leaves a dual-screen presentation too', (
+    tester,
+  ) async {
+    // macOS onderschept Escape om volledig scherm te verlaten — de guard
+    // detecteert dat en beëindigt de presentatie (#1862). Toen het
+    // presentatorvenster in dubbelschermmodus óók volledig scherm ging
+    // (#2289) moest de guard daar mee, anders bleef een via het platform
+    // verlaten volledig scherm een draaiende presentatie achter.
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      bridge,
+      (call) async => null,
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    var isFullscreen = true;
+    debugIsPresenterFullscreen = () => isFullscreen;
+    addTearDown(() => debugIsPresenterFullscreen = null);
+
+    var audienceClosed = false;
+    await tester.pumpWidget(
+      _presenterOverLauncher(
+        audience: AudienceWindowHandle(
+          WindowController.fromWindowId('test'),
+          closeImpl: (_) async => audienceClosed = true,
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    // Eerste polsslag: het venster staat volledig scherm.
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.text('Eerste'), findsOneWidget);
+
+    // Het platform verlaat volledig scherm zonder Flutter te bereiken.
+    isFullscreen = false;
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.pumpAndSettle();
+
+    expect(find.text('open'), findsOneWidget);
+    expect(audienceClosed, isTrue);
+  });
 
   testWidgets('with the rehearsal summary on, Escape shows it before leaving', (
     tester,

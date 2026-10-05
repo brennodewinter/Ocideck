@@ -10,6 +10,9 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- Bij **afspelen met twee schermen** (#2289) gaat nu ook het presentatorscherm volledig scherm — voorheen vulde alleen
+  het beamervenster zijn scherm en bleef het presentatoraanzicht een gewoon venster. Verlaten herstelt beide vensters
+  weer, en de bewaker die een door het platform onderschepte Escape detecteert geldt nu voor beide modi.
 - De **legenda van een grafiek** (#2286) reageert nu ook op hover over de grafiek zelf: het datapunt of segment onder
   de pointer licht zijn legenda-entry uit terwijl de rest vervaagt — precies de spiegel van de bestaande legenda-hover.
   Dat geldt voor de handgetekende horizontale staaf- en gestapelde staafgrafieken én de spidergrafiek, die hun hover

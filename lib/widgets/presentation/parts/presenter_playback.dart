@@ -197,9 +197,10 @@ extension _PresenterPlayback on _FullscreenPresenterState {
       // Dubbel sluiten laat de Linux-embedder crashen; de vlag hierboven maakt
       // dit daarom bewust een eenmalige opruimactie.
       await audience.close();
-    } else {
-      await setPresenterFullscreen(false);
     }
+    // Het presentatorvenster staat in beide modi volledig scherm — ook met een
+    // publieksvenster ernaast (#2289).
+    await setPresenterFullscreen(false);
     if (mounted) Navigator.pop(context, _exitSlideId(widget.slides, _index));
   }
 
