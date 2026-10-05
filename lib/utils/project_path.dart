@@ -107,6 +107,56 @@ String? resolveSlideAssetPath(String path, String? projectPath) {
   return resolveProjectRelative(projectPath, path);
 }
 
+/// Geeft [deckUrl] terug als het een absolute http(s)-URL is waar relatieve
+/// paden tegen opgelost kunnen worden — zoals een `?deck=`/URL-import. Alles
+/// anders (een git-label, een bestandspad, `null`) levert `null`, zodat
+/// aanroepers nooit een niet-URL als resolutiebasis opslaan.
+String? remoteDeckUrlOrNull(String? deckUrl) {
+  final uri = deckUrl == null ? null : Uri.tryParse(deckUrl.trim());
+  if (uri == null ||
+      !(uri.isScheme('http') || uri.isScheme('https')) ||
+      uri.host.isEmpty) {
+    return null;
+  }
+  return uri.toString();
+}
+
+/// Lost een deck-relatieve assetverwijzing (`images/foto.png`) op tegen de URL
+/// waar het deck zélf vandaan kwam — bijvoorbeeld een plat Markdown-deck dat op
+/// web via `?deck=` of URL-import is geopend (#2282). Dat is de web-tegenhanger
+/// van [resolveProjectRelative]: een bestand naast het deck op de server is de
+/// dezelfde verwijzing als een bestand naast het deck op schijf.
+///
+/// De uitkomst blijft same-origin én binnen de map van het deck — dezelfde
+/// project-containment die desktop afdwingt, zodat deck-inhoud geen
+/// willekeurige URL's kan laten ophalen. Fail-closed `null` voor een
+/// verwijzing met eigen scheme/authority (`https://…`, `//host/…`, `mem:`,
+/// `data:` — die takken lopen eerder) en voor een [deckUrl] die geen absolute
+/// http(s)-URL is.
+String? resolveDeckAssetUrl(String? path, String? deckUrl) {
+  if (remoteDeckUrlOrNull(deckUrl) == null) return null;
+  final base = Uri.parse(deckUrl!.trim());
+  final ref = path?.trim();
+  if (ref == null || ref.isEmpty) return null;
+  // Een verwijzing mét eigen scheme hoort bij een eerder tak (URL, mem:,
+  // asset:, data:). Toestaan zou deck-inhoud elke gewenste URL laten ophalen.
+  if (RegExp(r'^[a-zA-Z][a-zA-Z0-9+.-]*:').hasMatch(ref)) return null;
+  final dir = base.resolve('./');
+  final resolved = base.resolve(ref);
+  // `//host/…` wisselt van autoriteit; alles anders erft scheme+host+port.
+  if (resolved.scheme != dir.scheme || resolved.authority != dir.authority) {
+    return null;
+  }
+  // Dot-segmenten zijn door resolve al weggenormaliseerd, maar `Uri.path`
+  // laat `%2F` gecodeerd terwijl de server hem als `/` leest — daarom draait
+  // de map-containment op het gedecodeerde, genormaliseerde pad.
+  final dirPath = p.posix.normalize(Uri.decodeComponent(dir.path));
+  final resolvedPath = p.posix.normalize(Uri.decodeComponent(resolved.path));
+  final prefix = dirPath.endsWith('/') ? dirPath : '$dirPath/';
+  if (!resolvedPath.startsWith(prefix)) return null;
+  return resolved.toString();
+}
+
 /// Resolve a TRUSTED asset path (the active style-profile logo) for display.
 ///
 /// Unlike [resolveSlideAssetPath], an absolute path is allowed even when it

@@ -79,6 +79,110 @@ void main() {
     });
   });
 
+  group('resolveDeckAssetUrl', () {
+    const deckUrl = 'https://deck.example/decks/presentatie.md';
+
+    test('resolves a relative path against the deck URL directory', () {
+      expect(
+        resolveDeckAssetUrl('images/foto.png', deckUrl),
+        'https://deck.example/decks/images/foto.png',
+      );
+    });
+
+    test('resolves ./-prefixed and nested relative paths', () {
+      expect(
+        resolveDeckAssetUrl('./images/foto.png', deckUrl),
+        'https://deck.example/decks/images/foto.png',
+      );
+      expect(
+        resolveDeckAssetUrl('a/b/c.png', deckUrl),
+        'https://deck.example/decks/a/b/c.png',
+      );
+    });
+
+    test('keeps query and fragment of the deck URL out of the base', () {
+      expect(
+        resolveDeckAssetUrl(
+          'i.png',
+          'https://deck.example/decks/presentatie.md?v=2#s1',
+        ),
+        'https://deck.example/decks/i.png',
+      );
+    });
+
+    test('keeps a non-default port', () {
+      expect(
+        resolveDeckAssetUrl('i.png', 'https://deck.example:8443/d/p.md'),
+        'https://deck.example:8443/d/i.png',
+      );
+    });
+
+    test('rejects .. escaping the deck directory', () {
+      expect(resolveDeckAssetUrl('../geshared/x.png', deckUrl), isNull);
+      expect(resolveDeckAssetUrl('images/../../x.png', deckUrl), isNull);
+      // Percent-encoded separators decode to real traversal — the containment
+      // check runs on the decoded path.
+      expect(resolveDeckAssetUrl('..%2F..%2Fetc/passwd', deckUrl), isNull);
+    });
+
+    test('rejects references with their own scheme or authority', () {
+      expect(
+        resolveDeckAssetUrl('https://ander.example/x.png', deckUrl),
+        isNull,
+      );
+      expect(resolveDeckAssetUrl('//ander.example/x.png', deckUrl), isNull);
+      expect(resolveDeckAssetUrl('data:image/png;base64,xx', deckUrl), isNull);
+      expect(resolveDeckAssetUrl('mem:abc123', deckUrl), isNull);
+      expect(resolveDeckAssetUrl('asset:logo.png', deckUrl), isNull);
+    });
+
+    test('rejects root-absolute paths outside the deck directory', () {
+      expect(resolveDeckAssetUrl('/images/x.png', deckUrl), isNull);
+      // Een deck in de documentroot mag wél naar /images/ verwijzen.
+      expect(
+        resolveDeckAssetUrl('/images/x.png', 'https://deck.example/p.md'),
+        'https://deck.example/images/x.png',
+      );
+    });
+
+    test('rejects a missing or non-http deck URL', () {
+      expect(resolveDeckAssetUrl('i.png', null), isNull);
+      expect(resolveDeckAssetUrl('i.png', ''), isNull);
+      expect(resolveDeckAssetUrl('i.png', 'geen-url'), isNull);
+      expect(resolveDeckAssetUrl('i.png', 'ftp://h/d/p.md'), isNull);
+      expect(resolveDeckAssetUrl('i.png', 'file:///d/p.md'), isNull);
+      expect(resolveDeckAssetUrl('i.png', '/decks/p.md'), isNull);
+    });
+
+    test('rejects an empty asset path', () {
+      expect(resolveDeckAssetUrl('', deckUrl), isNull);
+      expect(resolveDeckAssetUrl('   ', deckUrl), isNull);
+      expect(resolveDeckAssetUrl(null, deckUrl), isNull);
+    });
+  });
+
+  group('remoteDeckUrlOrNull', () {
+    test('keeps absolute http(s) URLs, normalised', () {
+      expect(
+        remoteDeckUrlOrNull('https://deck.example/decks/p.md'),
+        'https://deck.example/decks/p.md',
+      );
+      expect(
+        remoteDeckUrlOrNull('  http://deck.example/d/p.md '),
+        'http://deck.example/d/p.md',
+      );
+    });
+
+    test('rejects git labels, file paths and non-http schemes', () {
+      expect(remoteDeckUrlOrNull('git: LibreKAT/Ocideck @ main'), isNull);
+      expect(remoteDeckUrlOrNull('/tmp/deck.md'), isNull);
+      expect(remoteDeckUrlOrNull('file:///tmp/deck.md'), isNull);
+      expect(remoteDeckUrlOrNull('ftp://h/d.md'), isNull);
+      expect(remoteDeckUrlOrNull(null), isNull);
+      expect(remoteDeckUrlOrNull(''), isNull);
+    });
+  });
+
   group('resolveEditorAssetPath', () {
     test('joins relative paths safely for the editor', () {
       final project = p.join('/tmp', 'deck');

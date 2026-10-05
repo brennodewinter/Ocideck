@@ -166,6 +166,43 @@ const _invertMatrix = <double>[
   0,
 ];
 
+/// Draagt de http(s)-URL waar het geopende deck vandaan kwam (web `?deck=`/
+/// URL-import), zodat de renderers een relatieve assetverwijzing als
+/// `images/foto.png` tóch kunnen oplossen — op web bestaat er geen
+/// `projectPath` als basis (#2282).
+///
+/// Een scope, geen parameter: de media-renderers zitten negen lagen diep en
+/// een tiende widget die de waarde zou vergeten verliest stil zijn
+/// afbeeldingen — hetzelfde argument als bij [SlideLinkScope.mediaRedacted].
+/// De schil (werkruimte, presenter-route, exportoverlay) plaatst deze scope
+/// met `Deck.remoteAssetBase`; previews lezen hem enkel.
+class DeckAssetScope extends InheritedWidget {
+  const DeckAssetScope({
+    super.key,
+    required this.deckUrl,
+    required super.child,
+  });
+
+  /// Absolute http(s)-URL van het deckbestand zélf (niet van de map), of
+  /// `null` voor een deck dat niet van een server kwam.
+  final String? deckUrl;
+
+  /// Dependent read voor in build: afnemers herbouwen als de basis verandert.
+  static String? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DeckAssetScope>()?.deckUrl;
+
+  /// Niet-dependent read voor levenscycluscode (bijv. `initMedia`) die buiten
+  /// build staat — de basis verandert nooit onder een gemounte boom.
+  static String? read(BuildContext context) =>
+      (context.getElementForInheritedWidgetOfExactType<DeckAssetScope>()?.widget
+              as DeckAssetScope?)
+          ?.deckUrl;
+
+  @override
+  bool updateShouldNotify(DeckAssetScope oldWidget) =>
+      deckUrl != oldWidget.deckUrl;
+}
+
 /// Geeft de link-tap-handler door aan alle tekst in een slide, zonder die door
 /// elke sub-widget heen te hoeven sleuren. Draagt ook of er een TLP-markering
 /// rechtsonder staat, zodat bijschriften daarboven uitwijken.

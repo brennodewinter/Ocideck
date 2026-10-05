@@ -153,29 +153,17 @@ Widget _resolvedImage(
   }
 
   // In-memory afbeelding (webversie): een `mem:`-pad wijst naar bytes in de
-  // WebAssetStore in plaats van naar een bestand. Zelfde decode-cap; na een
-  // herlaad van de pagina is de store leeg en toont dit de placeholder.
-  final memBytes = WebAssetStore.isMemPath(imagePath)
-      ? WebAssetStore.bytesFor(imagePath)
-      : null;
-  if (memBytes != null) {
-    return styled(
-      Image(
-        image: cappedMemoryImage(memBytes),
-        fit: fit,
-        alignment: alignment,
-        width: double.infinity,
-        height: double.infinity,
-        gaplessPlayback: true,
-        semanticLabel: semanticLabel,
-        errorBuilder: (context, error, stackTrace) =>
-            failed(ImagePlaceholderReason.missing),
-      ),
-    );
-  }
-  if (WebAssetStore.isMemPath(imagePath)) {
-    return failed(ImagePlaceholderReason.memoryGone);
-  }
+  // WebAssetStore in plaats van naar een bestand.
+  final memoryImage = _memoryImage(
+    context,
+    imagePath,
+    fit: fit,
+    alignment: alignment,
+    semanticLabel: semanticLabel,
+    styled: styled,
+    failed: failed,
+  );
+  if (memoryImage != null) return memoryImage;
 
   // Online afbeelding: render live via NetworkImage (zelfde decode-cap als
   // bestanden), maar alleen als de remote-media-gate open staat én de URL door
@@ -199,13 +187,32 @@ Widget _resolvedImage(
       ? resolveTrustedAssetPath(imagePath, projectPath)
       : resolveSlideAssetPath(imagePath, projectPath);
   if (resolved == null) {
+    // Een deck dat via een URL is geopend (web `?deck=`, URL-import) heeft
+    // geen projectPath; een relatief pad wijst dan naar een bestand nàást het
+    // deck op die server (#2282). De remote-media-schakelaar staat hierbuiten
+    // om dezelfde reden dat een bestand naast het deck op schijf hem ook niet
+    // vraagt: de bytes komen van precies de host die de gebruiker voor het
+    // deck aanwees. Het thema-logo (trustedAsset) is app-config en mag nooit
+    // iets van de deck-server halen.
+    final deckImage = trustedAsset
+        ? null
+        : _deckAssetImage(
+            context,
+            imagePath,
+            fit: fit,
+            alignment: alignment,
+            semanticLabel: semanticLabel,
+            styled: styled,
+            failed: failed,
+          );
     // Op web bestaat er geen bestandssysteem: het bestand is er domweg niet.
     // Op desktop kan dit alleen door de containment-grens komen.
-    return failed(
-      kIsWeb
-          ? ImagePlaceholderReason.missing
-          : ImagePlaceholderReason.outsideDeck,
-    );
+    return deckImage ??
+        failed(
+          kIsWeb
+              ? ImagePlaceholderReason.missing
+              : ImagePlaceholderReason.outsideDeck,
+        );
   }
   // Block a project-internal symlink that points outside the project (cached,
   // so the per-frame cost is O(1) after the first render of each image).
@@ -215,15 +222,36 @@ Widget _resolvedImage(
     return _imagePlaceholder(context, ImagePlaceholderReason.outsideDeck);
   }
 
-  // Cap the decode so a huge-dimensioned (possibly untrusted) image can't
-  // exhaust memory; see cappedFileImage / kMaxImageDecodeDimension. De
-  // slidestrook zet daarbovenop een veel lagere grens via de scope — daar is
-  // een thumbnail van ~180 px breed, en op ware grootte kost één telefoonfoto
-  // bijna 49 MiB (#612).
-  //
-  // De version-teller forceert een cache-miss nadat een afbeelding op schijf
-  // is herschreven (bv. na rotatie in de crop-dialoog) — zonder dit blijft de
-  // Image-widget de oude decode tonen omdat de provider `==` niet verandert.
+  return _localFileImage(
+    context,
+    resolved,
+    fit: fit,
+    alignment: alignment,
+    semanticLabel: semanticLabel,
+    styled: styled,
+    failed: failed,
+  );
+}
+
+/// Afbeelding van een gecontroleerd lokaal pad. Cap de decode zodat een
+/// enorm (mogelijk onbetrouwbaar) beeld het geheugen niet leegtrekt; zie
+/// cappedFileImage / kMaxImageDecodeDimension. De slidestrook zet
+/// daarbovenop een veel lagere grens via de scope — daar is een thumbnail
+/// van ~180 px breed, en op ware grootte kost één telefoonfoto bijna
+/// 49 MiB (#612).
+///
+/// De version-teller forceert een cache-miss nadat een afbeelding op schijf
+/// is herschreven (bv. na rotatie in de crop-dialoog) — zonder dit blijft de
+/// Image-widget de oude decode tonen omdat de provider `==` niet verandert.
+Widget _localFileImage(
+  BuildContext context,
+  String resolved, {
+  required BoxFit fit,
+  required Alignment alignment,
+  required String? semanticLabel,
+  required Widget Function(Widget child) styled,
+  required Widget Function(ImagePlaceholderReason reason) failed,
+}) {
   final maxEdge = SlideLinkScope.decodeMaxEdgeOf(context);
   final version = imageVersionOf(resolved);
   return styled(
@@ -242,6 +270,69 @@ Widget _resolvedImage(
       gaplessPlayback: true,
       errorBuilder: (context, error, stackTrace) =>
           failed(ImagePlaceholderReason.missing),
+    ),
+  );
+}
+
+/// `mem:`-pad (in-memory web-afbeelding): bytes uit de WebAssetStore i.p.v.
+/// een bestand. Zelfde decode-cap; na een herlaad van de pagina is de store
+/// leeg en toont dit de placeholder. Null → het pad was geen `mem:`-pad.
+Widget? _memoryImage(
+  BuildContext context,
+  String imagePath, {
+  required BoxFit fit,
+  required Alignment alignment,
+  required String? semanticLabel,
+  required Widget Function(Widget child) styled,
+  required Widget Function(ImagePlaceholderReason reason) failed,
+}) {
+  if (!WebAssetStore.isMemPath(imagePath)) return null;
+  final memBytes = WebAssetStore.bytesFor(imagePath);
+  if (memBytes == null) return failed(ImagePlaceholderReason.memoryGone);
+  return styled(
+    Image(
+      image: cappedMemoryImage(memBytes),
+      fit: fit,
+      alignment: alignment,
+      width: double.infinity,
+      height: double.infinity,
+      gaplessPlayback: true,
+      semanticLabel: semanticLabel,
+      errorBuilder: (context, error, stackTrace) =>
+          failed(ImagePlaceholderReason.missing),
+    ),
+  );
+}
+
+/// Relatief pad in een via URL geopend deck: opgelost tegen de deck-URL uit
+/// [DeckAssetScope] (#2282). [resolveDeckAssetUrl] houdt de uitkomst
+/// same-origin én binnen de deckmap — deck-inhoud kan zo geen willekeurige
+/// URL laten ophalen. Null → geen (geldige) deck-URL of pad in de scope.
+Widget? _deckAssetImage(
+  BuildContext context,
+  String imagePath, {
+  required BoxFit fit,
+  required Alignment alignment,
+  required String? semanticLabel,
+  required Widget Function(Widget child) styled,
+  required Widget Function(ImagePlaceholderReason reason) failed,
+}) {
+  final deckAsset = resolveDeckAssetUrl(
+    imagePath,
+    DeckAssetScope.maybeOf(context),
+  );
+  if (deckAsset == null) return null;
+  return styled(
+    RetryingImage(
+      image: guardedNetworkImage(deckAsset),
+      fit: fit,
+      alignment: alignment,
+      width: double.infinity,
+      height: double.infinity,
+      gaplessPlayback: true,
+      semanticLabel: semanticLabel,
+      errorBuilder: (context, error, stackTrace) =>
+          failed(ImagePlaceholderReason.remoteUnavailable),
     ),
   );
 }

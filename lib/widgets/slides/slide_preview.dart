@@ -238,6 +238,11 @@ EdgeInsets _bulletsPadding({
 class SlidePreviewWidget extends StatelessWidget {
   final Slide slide;
   final String? projectPath;
+
+  /// De http(s)-URL waaruit het deck is geladen (`Deck.remoteAssetBase`,
+  /// #2282). Zet deze op een oppervlak dat buiten de ambient [DeckAssetScope]
+  /// staat — de exportoverlay; null → de ambient waarde geldt.
+  final String? remoteAssetBase;
   final ThemeProfile baseThemeProfile;
   final MarpStyle deckMarpStyle;
 
@@ -451,6 +456,7 @@ class SlidePreviewWidget extends StatelessWidget {
     super.key,
     required this.slide,
     this.projectPath,
+    this.remoteAssetBase,
     ThemeProfile themeProfile = const ThemeProfile(),
     this.deckMarpStyle = const MarpStyle(),
     this.cockpitColorScheme = CockpitColorScheme.standard,
@@ -519,42 +525,46 @@ class SlidePreviewWidget extends StatelessWidget {
       scrollable: scrollableMermaid,
       viewController: mermaidViewController,
       interactive: mermaidInteractive,
-      child: MediaQuery.withNoTextScaling(
-        child: _TableEditHost(
-          controller: presentationMode && slide.type == SlideType.table
-              ? tableEditController
-              : null,
-          child: _ChecklistInteractionHost(
-            // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
-            // schrijft de hele (zwartgelakte) slide terug. Zie
-            // [Slide.contentRedacted].
-            enabled:
-                presentationMode &&
-                onChecklistItemToggle != null &&
-                !slide.contentRedacted,
-            onToggle: onChecklistItemToggle,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: DefaultTextStyle(
-                style: TextStyle(
-                  color: AppTheme.parseHexColor(themeProfile.textColor),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.normal,
-                  fontStyle: FontStyle.normal,
-                ),
-                child: SlideLinkScope(
-                  onTapLink: onLinkTap,
-                  hasBottomTlp: hasBottomRightTlp,
-                  allowRemoteMedia: allowRemoteMedia,
-                  mediaRedacted: slide.mediaRedacted,
-                  decodeMaxEdge: decodeMaxEdge,
-                  marpStyle: marpStyle,
-                  slideText: AppTheme.parseHexColor(themeProfile.textColor),
-                  slideBackground: AppTheme.parseHexColor(
-                    themeProfile.slideBackgroundColor,
+      // Expliciete basis (param) gaat vóór op de ambient waarde (#2282).
+      child: DeckAssetScope(
+        deckUrl: remoteAssetBase ?? DeckAssetScope.maybeOf(context),
+        child: MediaQuery.withNoTextScaling(
+          child: _TableEditHost(
+            controller: presentationMode && slide.type == SlideType.table
+                ? tableEditController
+                : null,
+            child: _ChecklistInteractionHost(
+              // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
+              // schrijft de hele (zwartgelakte) slide terug. Zie
+              // [Slide.contentRedacted].
+              enabled:
+                  presentationMode &&
+                  onChecklistItemToggle != null &&
+                  !slide.contentRedacted,
+              onToggle: onChecklistItemToggle,
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: DefaultTextStyle(
+                  style: TextStyle(
+                    color: AppTheme.parseHexColor(themeProfile.textColor),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.normal,
+                    fontStyle: FontStyle.normal,
                   ),
-                  onEnableOnlineMedia: onEnableOnlineMedia,
-                  child: _buildSlide(slide.projectionWithViewLimit()),
+                  child: SlideLinkScope(
+                    onTapLink: onLinkTap,
+                    hasBottomTlp: hasBottomRightTlp,
+                    allowRemoteMedia: allowRemoteMedia,
+                    mediaRedacted: slide.mediaRedacted,
+                    decodeMaxEdge: decodeMaxEdge,
+                    marpStyle: marpStyle,
+                    slideText: AppTheme.parseHexColor(themeProfile.textColor),
+                    slideBackground: AppTheme.parseHexColor(
+                      themeProfile.slideBackgroundColor,
+                    ),
+                    onEnableOnlineMedia: onEnableOnlineMedia,
+                    child: _buildSlide(slide.projectionWithViewLimit()),
+                  ),
                 ),
               ),
             ),

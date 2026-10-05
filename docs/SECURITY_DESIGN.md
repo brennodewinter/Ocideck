@@ -132,6 +132,17 @@ The web build is designed to pull **zero third-party origins** at runtime.
   no `net_guard` SSRF check (unlike desktop), so restricting these to
   `'self' data: blob:` is what closes that hole. To allow remote media, add
   `https:` to both directives in `web/index.html`.
+- **Deck-relative media resolve against the deck's URL, not the app's.** A deck
+  opened over `?deck=`, URL import, or the server-side deck library has no
+  local project folder; `resolveDeckAssetUrl` resolves its relative media
+  references against the deck file's own URL, same-origin and inside the
+  deck's directory — the web counterpart of the desktop project containment,
+  so deck content cannot make the app fetch an arbitrary URL. What actually
+  loads is then bounded by the CSP above on web and by the pinned
+  `guardedNetworkImage`/`NetGuard` path on desktop. This bypasses the
+  remote-media switch deliberately: the bytes come from the exact host the
+  user pointed the app at, the same trust a file next to the deck on disk
+  would get (#2282).
 - **`connect-src` accepts `blob:` so the app can read back a dropped file.**
   A file dragged onto the window arrives as a blob URL, and reading its bytes is
   an XHR to that URL — which this directive governs. Without the token the

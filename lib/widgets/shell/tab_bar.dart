@@ -326,10 +326,15 @@ class _TabContent extends ConsumerWidget {
     final playOnly = ref.watch(
       deckProvider.select((s) => s.deck?.playOnly ?? false),
     );
-    if (playOnly || isLearningSession) {
-      return _PlayOnlyScreen(resumeFromSelection: isLearningSession);
-    }
-    return _MainLayout(exportService: ExportService());
+    // De URL waar een web-geopend deck vandaan kwam, als resolutiebasis voor
+    // relatieve media in élke render in dit tabblad (#2282).
+    final Widget child = playOnly || isLearningSession
+        ? _PlayOnlyScreen(resumeFromSelection: isLearningSession)
+        : _MainLayout(exportService: ExportService());
+    return DeckAssetScope(
+      deckUrl: ref.watch(deckProvider.select((s) => s.deck?.remoteAssetBase)),
+      child: child,
+    );
   }
 }
 

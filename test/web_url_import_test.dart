@@ -352,6 +352,45 @@ void main() {
       expect(deckState.remoteOrigin, isNull);
     });
 
+    test('a URL-opened deck keeps that URL as remote asset base', () async {
+      // #2282: een via `?deck=`/URL-import geopend deck heeft geen
+      // projectPath; de bron-URL is de resolutiebasis voor relatieve media.
+      final container = _container();
+      final tabs = container.read(tabsProvider.notifier);
+      const url = 'https://example.org/decks/presentatie.md';
+      await tabs.openDeckFromBytes(
+        utf8.encode(_goodDeck),
+        url,
+        remoteOrigin: url,
+      );
+      final deck = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState
+          .deck!;
+      expect(deck.remoteAssetBase, url);
+    });
+
+    test('a non-URL remote origin never becomes an asset base', () async {
+      // remoteOrigin draagt ook niet-URL-labels (git); alleen een absolute
+      // http(s)-URL mag als resolutiebasis dienen — fail closed.
+      final container = _container();
+      final tabs = container.read(tabsProvider.notifier);
+      await tabs.openDeckFromBytes(
+        utf8.encode(_goodDeck),
+        'deck.md',
+        remoteOrigin: 'git: LibreKAT/Ocideck @ main',
+      );
+      final deck = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState
+          .deck!;
+      expect(deck.remoteAssetBase, isNull);
+    });
+
     test('a corrupt zip package is refused, nothing opens', () async {
       final container = _container();
       final tabs = container.read(tabsProvider.notifier);

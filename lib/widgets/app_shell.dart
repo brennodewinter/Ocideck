@@ -186,6 +186,7 @@ import 'privacy_badge.dart';
 import 'collab_verify_banner.dart';
 import 'presentation/fullscreen_presenter.dart';
 import 'presentation/session_export.dart';
+import 'slides/previews/slide_preview_support.dart';
 import 'slides/slide_preview.dart';
 
 part 'app_shell_main_layout.dart';

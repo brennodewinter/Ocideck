@@ -442,6 +442,12 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- **Relatieve afbeeldingen en media in een via URL geopend deck werken op de webversie** (#2282): een deck dat via
+  `?deck=`, URL-import of de serverbibliotheek binnenkwam had geen projectmap als resolutiebasis, dus `images/foto.png`
+  eindigde stil op een leeg-beeldvlak. Zulke paden resolveeren nu tegen de URL van het deck zelf — same-origin en
+  binnen de deckmap, de web-tegenhanger van de projectcontainment op desktop — in de editor, het afspeelscherm, de
+  presentatiemodus en de export. Een verwijzing die daaruit ontsnapt of naar een andere host wijst, blijft de
+  placeholder tonen.
 - De **webbundel werkt nu ook vanuit een submap** van een webserver (#2275): de `<base href>` was `/`, waardoor een
   installatie onder bijvoorbeeld `/ocideck/` — zoals via een symlink naar een versiemap — zijn scripts en assets vanaf
   de documentroot zocht en volledig dood bleef. De bundel resolveert nu relatief en draait ongewijzigd op elke diepte;

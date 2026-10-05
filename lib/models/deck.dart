@@ -191,6 +191,15 @@ class Deck {
   final bool paginate;
   final List<Slide> slides;
   final String? projectPath;
+
+  /// De absolute http(s)-URL waaruit dit deck is geladen (web `?deck=` /
+  /// URL-import), of `null` voor een deck uit een bestand of het geheugen.
+  ///
+  /// Runtime-herkomst, géén deckinhoud: het veld wordt nergens
+  /// ge(serialise)erd en de statusbalk toont hem via `DeckState.remoteOrigin`.
+  /// De renderlaag gebruikt hem als basis om relatieve mediapaden
+  /// (`images/foto.png`) op te lossen — zie `resolveDeckAssetUrl` (#2282).
+  final String? remoteAssetBase;
   final ThemeProfile themeProfile;
   final MarpStyle marpStyle;
 
@@ -421,6 +430,7 @@ class Deck {
     this.paginate = true,
     this.slides = const [],
     this.projectPath,
+    this.remoteAssetBase,
     this.themeProfile = const ThemeProfile(),
     this.marpStyle = const MarpStyle(),
     this.author = '',
@@ -465,6 +475,7 @@ class Deck {
     bool? paginate,
     List<Slide>? slides,
     String? projectPath,
+    String? remoteAssetBase,
     ThemeProfile? themeProfile,
     MarpStyle? marpStyle,
     bool clearProjectPath = false,
@@ -512,6 +523,9 @@ class Deck {
       paginate: paginate ?? this.paginate,
       slides: slides ?? this.slides,
       projectPath: clearProjectPath ? null : (projectPath ?? this.projectPath),
+      remoteAssetBase: clearProjectPath
+          ? null
+          : (remoteAssetBase ?? this.remoteAssetBase),
       themeProfile: themeProfile ?? this.themeProfile,
       marpStyle: marpStyle ?? this.marpStyle,
       author: author ?? this.author,
