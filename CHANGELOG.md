@@ -694,6 +694,85 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.14] — 2026-10-06
+
+### Added
+
+- feat(overzicht): zoombare tegels in het slide-overzicht (#2288) (#2290)
+- feat(chart): plot-hover benadrukt de bijbehorende legenda-entry (#2286)
+- feat(import): wijzigingsdatum onder slides + datum-sortering (#2279)
+- feat(forms): optionele Managed Intake-gebruikersreis (#2260)
+- feat(intake): Managed Intake-contractpoort organisator + respondent (#2262) (#2269)
+- feat(forms): verzegelde bundel als offline overdrachtsroute (#2261)
+- feat(forms): Versturen… — een inzending naar de server sturen (fase 4, stap 4)
+- feat(forms): Uitnodiging openen… — een formulier ophalen en toetsen (fase 4, stap 3)
+- feat(intake): de bodies van protocol v1 en de routes (fase 4, stap 2)
+- feat(intake): protocol v1 — uitnodigingslink, info, foutcodes en ondertekende verzoeken (fase 4, stap 1)
+- feat(forms): het team van de redactie (par. 7.6)
+- feat(forms): de redacteurskaart (par. 5.1)
+- feat(forms): verzegeld opslaan door de invuller (par. 5.1, 5.6)
+- feat(forms): een bundel publiceren (par. 5.1, 7.6)
+- feat(forms): de Inbox haalt verzegelde bestanden binnen (par. 7.2)
+- feat(forms): de redactiesleutel in de app (par. 5.9)
+- feat(forms): de herstelsleutel van de redactiesleutel (par. 5.9)
+- feat(forms): het bundelbestand, ondertekend door de eigenaar (par. 5.1, fase 3)
+- feat(forms): verzegelen met age (par. 5.6, fase 3)
+- feat(forms): rechtenbewijs per foto en terug naar wat binnenkwam
+- feat(forms): controle door de maker (par. 7.4)
+- feat(forms): het boek samenstellen (par. 7.5)
+- feat(forms): de kern van het samenstellen van een boek (par. 7.5)
+- feat(forms): een werkkopie om een inzending te verbeteren zonder wat binnenkwam aan te raken (par. 7.1)
+- feat(forms): status wisselen, intrekken en verwijderen vanuit de Inbox (par. 7.3)
+- feat(forms): de Inbox toont elke inzending en wat er mis mee is, in gewone woorden (par. 7.2, 7.3)
+- feat(forms): voorbeeldformulier recept.nl/en.md in examples/forms
+- feat(forms): inzendingen binnenhalen - werkmap, importpijplijn en de uitbreiding Formulieren en inzendingen (par. 7.1, 7.2)
+- feat(forms): het register van de organisator - overview.md als tabel (par. 7.3)
+- feat(forms): de organisator beoordeelt een binnengekomen pakket tegen het gepubliceerde formulier (par. 4.11 run 3)
+- feat(forms): de inzending opslaan als pakket vanaf de invulpagina (par. 5.2, fase 1)
+- feat(forms): het inzendpakket - bouwen en strikt lezen (par. 5.2-5.4, fase 1)
+- feat(forms): foto's - schoonmaken, echt decoderen, bewaren en toevoegen (par. 5.5)
+- feat(documentimport): xlsx-, ods- en csv-spreadsheets openen als Markdown-tabellen
+- feat(forms): invullen - schrijfkant, berichtencatalogus, FormFill en de stand Invullen
+- feat(forms): het formulierblok in lezer, visuele editor, brug en exports (par. 4.9)
+- feat(forms): antwoorden en validatie (tellers, patronen, veiligheidsregels, validator, sjabloontekst)
+- feat(forms): parseForm — de leeskant van het formulier (markers, tien veldtypen, auteursfouten)
+- feat(forms): packages/ocideck_form_core met eigen poorten, first-party SBOM-groep
+- feat: blauw lampje voor ontwikkelbuild bij het versienummer
+- feat(carousel): archiefafbeelding downloaden naar een plek naar keuze (#2212)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- docs: Apache-alias voor de decks-map in HOSTING.md
+- refactor(secrets): deel veilige opslag via AppFoundation
+- refactor(theme): deel uiterlijk via AppFoundation
+- security: herstel de volledige beveiligingspoort
+- revert(intake): vijf gecontroleerde reverts van het blinde OciIntake-protocol (#2263)
+- docs(intake): Managed Intake als richting — FORM_INTAKE revisie 4 (#2259)
+- docs(intake): de eisen aan de inzendserver (fase 4)
+- test(forms): interop met de referentie-age gedraaid en uitgebreid (fase 3)
+- docs(forms): dossier voor de externe cryptografische beoordeling (fase 3)
+- docs(design): formulierdocumenten en verzegelde inzendingen (FORM_INTAKE) (#2216)
+- chore(l10n): Klingon valt weg als interfacetaal
+
+### Fixed
+
+- fix(presentatie): presentatorscherm ook volledig scherm bij dubbelscherm (#2289) (#2291)
+- fix(web): resolve relatieve mediapaden tegen de deck-URL (#2282)
+- fix(web): bundle installeerbaar onder elke submap via relatieve base href (#2275)
+- fix(carousel): Bladeren… houdt de kiezer open op het nieuwe beeld (#2277)
+- fix(slides): render Marp <br> in titles as a line break (#2276)
+- fix(shell): slideshow-icoon uit de appbalk-titel (#2264)
+- fix(zegel): een BOM voor een verzegeld deck leest niet langer als intact
+- fix(document): open → opslaan behoudt een leidende UTF-8-BOM (DOCUMENT_MODE §3.1)
+- fix(pentest): een rondgang door de visuele editor laat het bestand niet meer groeien
+- fix(forms): geen foto onder een Windows-apparaatnaam; het pakket bewaart wat het ontving byte voor byte
+- fix(codec): de opslagnormalisatie slaat het atomaire pentestbereik over
+- fix(tabel): vrijgave van embed-controller mag geadopteerde entry niet doden (#2215)
+- fix: maak releaseketen fail-closed en hervatbaar
+- fix: dode eLearning-server kleurt rood via anonieme bereikbaarheidstest
+- fix: eLearning-status volgt 'eLearning volgen', niet de maken-module
+
 ## [0.6.13] — 2026-09-27
 
 ### Added
