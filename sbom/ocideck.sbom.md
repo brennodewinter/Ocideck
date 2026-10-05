@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.6.13+39** (licence EUPL-1.2) and every third-party component it ships (225 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.6.13+39** (licence EUPL-1.2) and every third-party component it ships (226 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **795 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **797 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -14,13 +14,13 @@ The JSON documents carry **795 dependency relations** between these components: 
 | MIT | 65 |
 | Apache-2.0 | 19 |
 | OFL-1.1 | 7 |
-| EUPL-1.2 | 3 |
+| EUPL-1.2 | 4 |
 | BSD | 3 |
 | MPL-2.0 | 1 |
 
 ## Components
 
-### Dart / Flutter packages (206)
+### Dart / Flutter packages (207)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -130,6 +130,7 @@ The JSON documents carry **795 dependency relations** between these components: 
 | native_toolchain_cmake _(transitive)_ | 0.3.2 | Apache-2.0 | rainyl | `pkg:pub/native_toolchain_cmake@0.3.2` |
 | nativeapi _(direct main)_ | 0.1.4 | MIT | brennodewinter | https://github.com/brennodewinter/nativeapi-flutter.git @ `0b3aafa797dafd3012a4fdb74f403d6cb20288b1` (packages/nativeapi) |
 | nested _(transitive)_ | 1.0.0 | MIT | rrousselGit | `pkg:pub/nested@1.0.0` |
+| network_guard _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `7bdf60067a3d6701ac5bf98032449ab56961ce4f` (packages/network_guard) |
 | objective_c _(transitive)_ | 9.6.0 | BSD-3-Clause | dart-lang | `pkg:pub/objective_c@9.6.0` |
 | openid_client _(direct main)_ | 0.4.10+2 | BSD-3-Clause | appsup-dart | `pkg:pub/openid_client@0.4.10+2` |
 | package_config _(transitive)_ | 3.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/package_config@3.0.0` |

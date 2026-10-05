@@ -9,29 +9,12 @@
 /// actie start.
 library;
 
-/// De backend-tier waarmee een consument (later: afbeeldingstags, pentesttekst)
-/// praat. De volgorde weerspiegelt oplopende egress-impact; de veiligheidsgate
-/// ([AiSecurityGate]) handhaaft per tier een ander netwerkregime.
-enum AiBackendMode {
-  /// Niets gekozen. Standaard, ook wanneer [AiSettings.enabled] al aanstaat:
-  /// er wordt niets verstuurd tot de gebruiker bewust een tier kiest.
-  none,
+// De privacytier-enum staat sinds de extractie in AppFoundation
+// `network_guard`; deze export houdt `AiBackendMode` bereikbaar voor
+// bestaande importers van dit bestand.
+export 'package:network_guard/network_guard.dart' show AiBackendMode;
 
-  /// Lokaal model op dit apparaat (Ollama/LM Studio/llama.cpp) op een
-  /// loopback-adres. Dit is lokale IPC, geen egress: er verlaat niets het
-  /// apparaat, dus geen outbound-privacytoestemming nodig.
-  local,
-
-  /// Eigen server op het LAN/VPN. Alleen bereikbaar wanneer de gebruiker de
-  /// server als vertrouwd intern heeft gemarkeerd ([trustedInternal]); dan via
-  /// `NetGuard.safeResolveTrusted(allowPrivate: true)`.
-  selfHosted,
-
-  /// Externe clouddienst (publieke host). Fail-closed achter de bestaande
-  /// outbound-privacytoestemming plus een expliciete bevestiging die de
-  /// bestemming benoemt ([cloudConfirmed]). Nooit standaard; geblokkeerd op web.
-  cloud,
-}
+import 'package:network_guard/network_guard.dart' show AiBackendMode;
 
 /// Onveranderlijke instellingen voor de AI-backend. Round-trip via [toJson] /
 /// [fromJson] naar het prefs-domein; [copyWith] voor UI-bewerkingen.

@@ -20,7 +20,7 @@ const int kMaxRemoteMediaBytes = 64 * 1024 * 1024;
 /// op het adres dat [NetGuard.safeResolve] heeft goedgekeurd.
 ///
 /// Hier zat het gat dat de audit als AEG-04 noteerde. `NetworkImage` resolvet de
-/// hostnaam zelf op het moment van ophalen, dus een `isAllowedMediaUrlResolved`
+/// hostnaam zelf op het moment van ophalen, dus een `isAllowedRemoteUrlResolved`
 /// ervóór keurde een adres dat daarna opnieuw werd opgezocht. Wie DNS in handen
 /// heeft, kan in dat venster omvlaggen naar een intern adres — dezelfde
 /// TOCTOU-rebind waar de deck-import zich met pinning al tegen wapende.
