@@ -667,6 +667,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Nieuwste eerst': 'Plus récents d\'abord',
+  'Oudste eerst': 'Plus anciens d\'abord',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Le serveur n\'a pas indiqué quel formulaire correspond à cette soumission — impossible de le remplir ici.',
   ', {n} niet binnengehaald': ', {n} non récupérées',

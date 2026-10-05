@@ -1628,6 +1628,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Nieuwste eerst': 'Nejnovější napřed',
+  'Oudste eerst': 'Nejstarší napřed',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Server neuvedl, který formulář patří k tomuto podání — vyplnit jej zde nelze.',
   ', {n} niet binnengehaald': ', {n} nevyzvednuto',

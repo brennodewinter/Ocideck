@@ -28,6 +28,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **importdialoog voor slides** toont nu onder elke dia de wijzigingsdatum van het bronbestand, zodat bij look-alikes
+  zichtbaar is welke kopie de nieuwste draagt; dezelfde datum staat in de vindplaats- en vergelijkingslabels. Een compacte
+  sorteerknop in de werkbalk schakelt tussen naam (de bestaande volgorde) en datum, oplopend én aflopend; bij datum-sort
+  wint bij ontdubbelde slides de kopie uit het bestand dat als eerste in de gekozen volgorde staat. 2 nieuwe teksten in
+  30 talen.
 - De **Managed-Intake-gebruikersreis** (#2260): formulieren kunnen nu optioneel via OciServe lopen, naast en nooit in plaats van de lokale route.
   De **respondent** opent een uitnodigings- of terugkeerlink via *Uitnodiging openen…* op het beginscherm — alleen `https`, ook in de webversie, waar het
   formulier een gewoon document in een tabblad wordt — en vult lokaal in zoals altijd. Op het bureaublad staat de intake-context als

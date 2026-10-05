@@ -666,6 +666,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nieuwste eerst': 'Mas resien promé',
+  'Oudste eerst': 'Mas bieu promé',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'E servidor no a indiká ki formular ta perené na e entrega aki — no ta posible pa yene\'é akí.',
   ', {n} niet binnengehaald': ', {n} no hañá',

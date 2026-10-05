@@ -254,6 +254,58 @@ void main() {
     expect(find.text('Verschillen'), findsWidgets);
   });
 
+  // Twee versies van vrijwel hetzelfde deck: welke kopie is de nieuwste? De
+  // wijzigingsdatum onder elke kaart — en sorteerbaar — maakt die inschatting
+  // zichtbaar zonder de diff te hoeven openen.
+  group('datum en sorteren in de importdialoog', () {
+    void showImporter(BuildContext context) => ImportSlidesDialog.show(
+      context,
+      fileService: _fileService(dir.path),
+      initialDirectory: dir.path,
+    );
+
+    setUp(() {
+      // Deck A is ouder dan deck B; het bestandssysteem levert de mtime.
+      File('${dir.path}/deck_a.md').setLastModifiedSync(DateTime(2021, 3, 15));
+      File('${dir.path}/deck_b.md').setLastModifiedSync(DateTime(2023, 11, 2));
+    });
+
+    double topOf(WidgetTester tester, String text) =>
+        tester.getTopLeft(find.textContaining(text).first).dy;
+
+    testWidgets('toont de wijzigingsdatum van het bronbestand onder elke dia', (
+      tester,
+    ) async {
+      await _openAndSearch(tester, show: showImporter, query: '');
+
+      expect(find.text('2021-03-15'), findsWidgets);
+      expect(find.text('2023-11-02'), findsWidgets);
+    });
+
+    testWidgets('sorteert standaard op naam, en op datum in beide richtingen', (
+      tester,
+    ) async {
+      await _openAndSearch(tester, show: showImporter, query: '');
+
+      // Standaard: naam — Deck A boven Deck B.
+      expect(topOf(tester, 'Deck A'), lessThan(topOf(tester, 'Deck B')));
+
+      // Het popup-menu animeert open; wacht tot die uitgespeeld is, anders
+      // mist de tap op de menukeuze.
+      await tester.tap(find.byIcon(Icons.sort));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Nieuwste eerst'));
+      await tester.pumpAndSettle();
+      expect(topOf(tester, 'Deck B'), lessThan(topOf(tester, 'Deck A')));
+
+      await tester.tap(find.byIcon(Icons.sort));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Oudste eerst'));
+      await tester.pumpAndSettle();
+      expect(topOf(tester, 'Deck A'), lessThan(topOf(tester, 'Deck B')));
+    });
+  });
+
   // Een relatief pad betekent iets anders in het bron-deck dan in de
   // presentatie waar de dia naartoe gaat. Beide dialogen maken het daarom
   // absoluut — maar deden dat alleen voor de afbeeldingsvelden, dus een

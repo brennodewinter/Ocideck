@@ -1634,6 +1634,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nieuwste eerst': 'Naujausi pirmiausia',
+  'Oudste eerst': 'Seniausi pirmiausia',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Serveris nenurodė, kokia forma priklauso šiam pateikimui — užpildyti jos čia negalima.',
   ', {n} niet binnengehaald': ', {n} negauta',

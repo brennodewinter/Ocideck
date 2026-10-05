@@ -1629,6 +1629,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nieuwste eerst': 'Legújabb elöl',
+  'Oudste eerst': 'Legrégebbi elöl',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'A szerver nem jelezte, melyik űrlap tartozik ehhez a benyújtáshoz — a kitöltés itt nem lehetséges.',
   ', {n} niet binnengehaald': ', {n} nem letölthető',

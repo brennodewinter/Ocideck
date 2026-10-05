@@ -1652,6 +1652,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nieuwste eerst': 'Νεότερα πρώτα',
+  'Oudste eerst': 'Παλαιότερα πρώτα',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Ο διακομιστής δεν ανέφερε ποια φόρμα ανήκει σε αυτή την υποβολή — η συμπλήρωση εδώ δεν είναι δυνατή.',
   ', {n} niet binnengehaald': ', {n} δεν παραλήφθηκαν',

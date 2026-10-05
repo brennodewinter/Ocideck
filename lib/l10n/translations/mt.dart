@@ -1645,6 +1645,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nieuwste eerst': 'L-aktar riċenti l-ewwel',
+  'Oudste eerst': 'L-eqdem l-ewwel',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Is-server ma indikax liema formola tappartjeni għal din is-sottomissjoni — mhuwiex possibbli timtela hawn.',
   ', {n} niet binnengehaald': ', {n} ma ġewx ġabra',

@@ -1627,6 +1627,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nieuwste eerst': 'Nyeste først',
+  'Oudste eerst': 'Ældste først',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Serveren angav ikke, hvilken formular der hører til denne indsendelse — udfyldelse er ikke mulig her.',
   ', {n} niet binnengehaald': ', {n} ikke hentet',

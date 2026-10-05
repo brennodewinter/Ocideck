@@ -1639,6 +1639,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Nieuwste eerst': 'Najnowsze najpierw',
+  'Oudste eerst': 'Najstarsze najpierw',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Serwer nie wskazał, którego formularza dotyczy to zgłoszenie — wypełnienie go tutaj nie jest możliwe.',
   ', {n} niet binnengehaald': ', {n} nieodebrane',

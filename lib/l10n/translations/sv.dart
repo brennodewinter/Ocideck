@@ -1626,6 +1626,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Nieuwste eerst': 'Nyaste först',
+  'Oudste eerst': 'Äldsta först',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Serveren angav inte vilket formulär som hör till denna inlämning — ifyllnad är inte möjlig här.',
   ', {n} niet binnengehaald': ', {n} ej hämtade',

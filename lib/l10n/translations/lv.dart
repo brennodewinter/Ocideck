@@ -1625,6 +1625,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nieuwste eerst': 'Jaunākie vispirms',
+  'Oudste eerst': 'Vecākie vispirms',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Serveris nenorādīja, kura veidlapa pieder šim iesniegumam — aizpildīt to šeit nav iespējams.',
   ', {n} niet binnengehaald': ', {n} neielādēti',

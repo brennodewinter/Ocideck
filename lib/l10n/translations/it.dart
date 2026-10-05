@@ -664,6 +664,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Nieuwste eerst': 'Più recenti prima',
+  'Oudste eerst': 'Più vecchi prima',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Il server non ha indicato a quale modulo appartiene questo invio — non è possibile compilarlo qui.',
   ', {n} niet binnengehaald': ', {n} non recuperate',

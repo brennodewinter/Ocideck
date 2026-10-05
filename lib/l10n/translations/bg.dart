@@ -1647,6 +1647,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nieuwste eerst': 'Най-новите първо',
+  'Oudste eerst': 'Най-старите първо',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
       'Сървърът не посочи кой формуляр принадлежи към това подаване — попълването тук не е възможно.',
   ', {n} niet binnengehaald': ', {n} неизтеглени',
