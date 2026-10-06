@@ -997,6 +997,85 @@ assert_workspace_idle() {
   die "sluit dat af (flutter run, flutter test, een IDE-sessie) en draai opnieuw — een schone bouw kan anders niet. Niets gemuteerd."
 }
 
+# ── appimagetool-pin: de rollende upstream-asset vóór de tag toetsen ───────────
+# appimagetool komt uit een rollende `continuous`-release op GitHub; upstream
+# verving die asset op 04-10-2026 en de vastgelegde sha256 faalde terecht — maar
+# pas ná de tag, in de Linux-job (release-run 5479, job 23681 — #2324). Deze
+# controle vergelijkt de pin vóór elke branch/tagmutatie met de officiële
+# asset-digest uit de GitHub-API, zodat een verplaatste upstream de release
+# stopt terwijl er nog niets onomkeerbaars is.
+
+# De vastgelegde pin als "url sha256". De env-override deelt het contract met
+# scripts/package_linux.sh (en is de testroute); anders wordt de pin uit de
+# env-blok van 'Linux-pakketten bouwen' in de release-workflow gelezen.
+appimagetool_pin() {
+  if [ -n "${APPIMAGETOOL_URL:-}" ] && [ -n "${APPIMAGETOOL_SHA256:-}" ]; then
+    printf '%s %s\n' "$APPIMAGETOOL_URL" "$APPIMAGETOOL_SHA256"
+    return 0
+  fi
+  local wf url sha
+  wf="${OCIDECK_APPIMAGE_WORKFLOW:-.forgejo/workflows/release.yml}"
+  url="$(sed -n 's/^[[:space:]]*APPIMAGETOOL_URL:[[:space:]]*//p' "$wf" | head -n1)"
+  sha="$(sed -n 's/^[[:space:]]*APPIMAGETOOL_SHA256:[[:space:]]*//p' "$wf" | head -n1)"
+  [ -n "$url" ] && [ -n "$sha" ] || return 1
+  printf '%s %s\n' "$url" "$sha"
+}
+
+# De GitHub release-API die bij een releases/download-URL hoort:
+#   github.com/O/R/releases/download/TAG/ASSET → repos/O/R/releases/tags/TAG
+appimagetool_release_api() {
+  printf '%s' "$1" | sed -n 's|^https://github\.com/\([^/]*/[^/]*\)/releases/download/\([^/]*\)/.*|https://api.github.com/repos/\1/releases/tags/\2|p'
+}
+
+# De officiële sha256 van de asset, zonder prefix. GitHub levert die als
+# `digest`-veld op het release-asset. Is de API onleesbaar of ontbreekt het
+# veld, dan faalt dit — onbekend is niet afwezig.
+appimagetool_official_digest() { # appimagetool_official_digest ASSET_URL
+  local url="$1" api_url json digest
+  api_url="$(appimagetool_release_api "$url")"
+  [ -n "$api_url" ] || return 1
+  json="$(curl -fsS --connect-timeout 10 --max-time 30 \
+    -H 'Accept: application/vnd.github+json' "$api_url" 2>/dev/null)" || return 1
+  digest="$(printf '%s' "$json" | jq -r --arg name "${url##*/}" '
+      .assets[]? | select(.name == $name) | .digest // empty' \
+    | sed -n 's/^sha256:\([0-9a-fA-F]\{64\}\)$/\1/p' | head -n1)"
+  [ -n "$digest" ] || return 1
+  printf '%s\n' "$digest"
+}
+
+# De pincontrole hoort vóór branch/tagmutatie. Staat de tag bij --resume al op
+# origin, dan is er niets meer om vóór te blokkeren: de lopende keten gebruikt
+# de pin van de tag-commit, en een afwijking is informatief, geen drempel.
+appimagetool_tag_pushed() {
+  [ -n "$RESUME_TAG" ] \
+    && git ls-remote --exit-code origin "refs/tags/$RESUME_TAG" >/dev/null 2>&1
+}
+
+assert_appimagetool_pin() {
+  STEP="appimagetool-pin"
+  local pin url sha official
+  pin="$(appimagetool_pin)" \
+    || die "appimagetool-pin niet leesbaar uit ${OCIDECK_APPIMAGE_WORKFLOW:-.forgejo/workflows/release.yml} — verwacht APPIMAGETOOL_URL en APPIMAGETOOL_SHA256 in de env van 'Linux-pakketten bouwen'. Niets gemuteerd."
+  url="${pin%% *}"
+  sha="${pin##* }"
+  if ! official="$(appimagetool_official_digest "$url")"; then
+    if appimagetool_tag_pushed; then
+      log "appimagetool: officiële digest niet leesbaar; tag $RESUME_TAG staat al op origin — informatief, geen blokkade."
+      return 0
+    fi
+    die "officiële appimagetool-digest niet leesbaar via de GitHub-API — de pinstatus is onbekend, niet afwezig. Controleer netwerk/ rate limit en draai opnieuw. Niets gemuteerd."
+  fi
+  if [ "$official" = "$sha" ]; then
+    log "appimagetool-pin klopt (sha256 ${sha:0:12}…)."
+    return 0
+  fi
+  if appimagetool_tag_pushed; then
+    log "appimagetool-pin ($sha) wijkt af van de officiële digest ($official); tag $RESUME_TAG staat al — de lopende keten gebruikt de pin van de tag-commit."
+    return 0
+  fi
+  die "appimagetool-pin verouderd: vastgelegd $sha, officiële asset-digest $official. Upstream verving de rollende 'continuous'-asset — precies wat release-run 5479/job 23681 ná de tag brak (#2324). Herstel na herkomstcontrole van de nieuwe asset: (1) beoordeel de release met 'curl -s $(appimagetool_release_api "$url")' (velden assets[].digest en .updated_at); (2) zet 'APPIMAGETOOL_SHA256: $official' in .forgejo/workflows/release.yml; (3) commit op main en draai de release opnieuw. Niets gemuteerd."
+}
+
 # ── #7 Pre-flight: alles wat later onherroepelijk nodig is, nú toetsen ──────────
 # Vandaag brak de keten pas ná de tag op stappen die vooraf toetsbaar waren
 # (deploy-ssh, de handtekening). Deze functie faalt vóór elke mutatie.
@@ -1033,6 +1112,10 @@ preflight() {
     *" $live_ip "*) ;;
     *) die "deploy-host $DEPLOY_HOST draagt [$deploy_host_ips], maar $DEPLOY_URL gaat naar $live_ip — deploy-web zou naar de verkeerde server schrijven." ;;
   esac
+  # De appimagetool-pin hoort hier: de Linux-job toetst de download aan deze
+  # hash, en voor de v0.6.14-tag bleek de pin verouderd pas ná de onomkeerbare
+  # push (#2324). Toetsen nu kost seconden; toen kostte het een releaserun.
+  assert_appimagetool_pin
   # Proef-tekening: valideert sleutel én wachtwoord vóór de lange build/tag,
   # zodat een fout wachtwoord niet pas aan het eind (na de tag) opduikt.
   local t; t="$(mktemp -d)"

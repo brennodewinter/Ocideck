@@ -364,12 +364,15 @@ jobs:
         # distro, dus het pakketscript haalt het op en toetst het tegen deze
         # sha256. De hash ÍS de pin: draait de `continuous`-build upstream weg, dan
         # faalt de download hier hoorbaar in plaats van stil een ander binary te
-        # draaien. Daarom staat appimagetool niet als *_VERSION in de pin-manifest
-        # (een content-hash veroudert niet in stilte); bij een sha-mismatch: haal
-        # de nieuwe digest uit de GitHub-release-API en werk hem hier bij.
+        # draaien. Sinds #2324 vergelijkt de pre-flight van release_auto deze pin
+        # vóór de tag met de officiële asset-digest uit de GitHub-release-API —
+        # zo bleek een verplaatste upstream niet meer pas in dèze job. Daarom
+        # staat appimagetool niet als *_VERSION in de pin-manifest (een
+        # content-hash veroudert niet in stilte); bij een sha-mismatch: haal de
+        # nieuwe digest uit de GitHub-release-API en werk hem hier bij.
         env:
           APPIMAGETOOL_URL: https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
-          APPIMAGETOOL_SHA256: a6d71e2b6cd66f8e8d16c37ad164658985e0cf5fcaa950c90a482890cb9d13e0
+          APPIMAGETOOL_SHA256: 95cbe7cce9717fce90c484e34052ee7c7f1d7635b33c12525b4776826a7d29b6
           OUT: dist
         run: make package-linux VERSION="$VERSIE"
 

@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **releaseketen** (#2324) toetst de appimagetool-pin nu vóór de tag aan de officiële
+  GitHub asset-digest: upstream verving de rollende `continuous`-asset op 4 oktober, wat
+  v0.6.14 pas in de Linux-job ná de onomkeerbare push brak. Bij een afwijking stopt de
+  pre-flight met een concreet herstelcommando; de pin zelf is na herkomstcontrole
+  (API-digest én zelfstandig gedownloade bytes) bijgewerkt naar de huidige asset.
 - De **releaseketen** (#2294) volgt Forgejo-*workflowruns* in plaats van runner-taken. Een run die nog in de
   wachtrij staat — zonder toegewezen runner-taak — is nu zichtbaar en telt als actief; dispatches vragen met
   `return_run_info` meteen de run-id terug en mijnen anders de nieuwste run uit de runlijst. Elke snapshot komt
