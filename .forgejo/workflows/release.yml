@@ -783,6 +783,11 @@ jobs:
     name: Release publiceren
     needs: [web, linux, macos, windows-ophalen, consumer-deb, consumer-rpm, consumer-appimage]
     runs-on: docker
+    # Deze job muteeert buiten ons gebaande pad: elke call draagt daarom een
+    # connect- én responstime-out (de curl-flags in de stappen; een endpoint dat
+    # TCP accepteert maar niet antwoordt zou de job anders tot de zes-uur-
+    # standaard laten hangen) en deze harde buitenmuur dekt wat toch wegglipt.
+    timeout-minutes: 30
     # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: node/git/curl/
     # ca-certificates/jq zitten er al in (zie .forgejo/ci-image/Dockerfile) en het
     # image staat door de bouw-jobs al warm op de runner. #11 van het
@@ -884,18 +889,35 @@ jobs:
           # workflow opnieuw te draaien is dat de Windows-build op de spiegel te
           # laat kwam; dan bestaat de release van de vorige poging al, en een
           # tweede POST loopt stuk. Dus: bestaat hij, dan hergebruiken.
-          CODE=$(curl -s -o /tmp/created.json -w '%{http_code}' -X POST "$API/releases" \
+          #
+          # Elke curl hier draagt --connect-timeout + --max-time (#2312): een
+          # endpoint dat TCP accepteert maar nooit antwoordt hing deze job
+          # anders tot de runnerlimiet. Bij HTTP 000 was de mutatie misschien
+          # tóch gelukt — daarom reconcilert ALLE niet-201-uitkomsten eerst
+          # read-only via GET-by-tag voordat er iets anders gebeurt.
+          # `|| CODE=000` houdt `set -e` tegen: een transportfout is géén
+          # bewijs dat de mutatie niet is geland — HTTP 000 loopt daarom
+          # bewust dezelfde reconcile-tak in als een geweigerde POST.
+          CODE=$(curl -s -o /tmp/created.json -w '%{http_code}' --connect-timeout 15 --max-time 60 \
+            -X POST "$API/releases" \
             -H "Authorization: token $TOKEN" -H "Content-Type: application/json" \
-            -d @/tmp/release.json)
+            -d @/tmp/release.json) || CODE=000
           if [ "$CODE" = "201" ]; then
             ID=$(jq -r '.id' /tmp/created.json)
             echo "Release $GITHUB_REF_NAME aangemaakt (id $ID)."
           else
-            echo "POST /releases gaf HTTP $CODE — kijken of hij al bestaat."
+            echo "POST /releases gaf HTTP $CODE — reconcileren via GET-by-tag."
             BESTAAND=$(curl -s -o /tmp/bestaand.json -w '%{http_code}' \
-              -H "Authorization: token $TOKEN" "$API/releases/tags/$GITHUB_REF_NAME")
+              --connect-timeout 15 --max-time 60 \
+              -H "Authorization: token $TOKEN" "$API/releases/tags/$GITHUB_REF_NAME") \
+              || BESTAAND=000
             if [ "$BESTAAND" != "200" ]; then
-              echo "Release aanmaken gaf HTTP $CODE en hij bestaat ook niet:" >&2
+              if [ "$CODE" = "000" ]; then
+                echo "Externe toestand onbekend: de POST bereikte de server mogelijk wel," >&2
+                echo "maar het antwoord niet terug, en ook de reconcile-GET faalde." >&2
+              else
+                echo "Release aanmaken gaf HTTP $CODE en hij bestaat ook niet:" >&2
+              fi
               cat /tmp/created.json >&2
               exit 1
             fi
@@ -910,7 +932,8 @@ jobs:
           # hernoemen hem daarna naar de definitieve naam en ruimen pas dan de
           # oude ids op. Een fout laat dus altijd óf het oude asset óf een reeds
           # geverifieerde kandidaat achter.
-          curl -fsS -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
+          curl -fsS --connect-timeout 15 --max-time 60 \
+            -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
             > /tmp/bijlagen.json
           VERSIE="${GITHUB_REF_NAME#v}"
           printf '%s\n' \
@@ -942,7 +965,8 @@ jobs:
             # eindtoestand. Downloaden toetst de serverbytes, niet metadata.
             if [ "$OUD_AANTAL" = 1 ]; then
               OUD_URL="$(jq -r --arg n "$NAAM" '.[] | select(.name==$n) | .browser_download_url' /tmp/bijlagen.json)"
-              curl -fsSL -H "Authorization: token $TOKEN" "$OUD_URL" -o /tmp/bestaand-asset
+              curl -fsSL --connect-timeout 15 --max-time 300 \
+                -H "Authorization: token $TOKEN" "$OUD_URL" -o /tmp/bestaand-asset
               OUD_SHA="$(sha256sum /tmp/bestaand-asset | awk '{print $1}')"
               if [ "$OUD_SHA" = "$LOKAAL_SHA" ]; then
                 echo "  = $NAAM (bestaande, identieke bytes hergebruikt)"
@@ -951,20 +975,44 @@ jobs:
             fi
 
             KANDIDAAT=".$NAAM.kandidaat-${GITHUB_RUN_ID:-handmatig}-${GITHUB_RUN_ATTEMPT:-1}"
-            CODE=$(curl -s -o /tmp/asset.json -w '%{http_code}' -X POST \
+            CODE=$(curl -s -o /tmp/asset.json -w '%{http_code}' \
+              --connect-timeout 15 --max-time 300 -X POST \
               "$API/releases/$ID/assets?name=$KANDIDAAT" \
               -H "Authorization: token $TOKEN" \
-              -F "attachment=@$BESTAND")
+              -F "attachment=@$BESTAND") || CODE=000
             if [ "$CODE" != "201" ]; then
-              echo "Kandidaat voor $NAAM gaf HTTP $CODE:" >&2
-              cat /tmp/asset.json >&2
-              exit 1
+              # Onzekere mutatie: bij HTTP 000 kan de upload geland zijn zónder
+              # dat het antwoord terugkwam. Een tweede POST zou dan twee
+              # schrijvers maken — dus eerst read-only reconcileren op de
+              # kandidaatnaam (#2312).
+              echo "Kandidaat-upload voor $NAAM gaf HTTP $CODE — reconcileren op naam."
+              curl -fsS --connect-timeout 15 --max-time 60 \
+                -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
+                > /tmp/reconcile-assets.json || {
+                  echo "Externe toestand onbekend: reconcile-GET faalde ook; oude asset(s) blijven staan." >&2
+                  exit 1
+                }
+              KANDIDAAT_ID="$(jq -r --arg n "$KANDIDAAT" \
+                '[.[] | select(.name==$n)][0].id // empty' /tmp/reconcile-assets.json)"
+              if [ -z "$KANDIDAAT_ID" ]; then
+                echo "Kandidaat voor $NAAM staat er niet (HTTP $CODE) — bevestigd mislukt:" >&2
+                cat /tmp/asset.json >&2
+                exit 1
+              fi
+              echo "Kandidaat stond er toch al (id $KANDIDAAT_ID) — verder met die."
+            else
+              KANDIDAAT_ID="$(jq -r '.id' /tmp/asset.json)"
+              test -n "$KANDIDAAT_ID" && test "$KANDIDAAT_ID" != null
             fi
-            KANDIDAAT_ID="$(jq -r '.id' /tmp/asset.json)"
-            KANDIDAAT_URL="$(jq -r '.browser_download_url' /tmp/asset.json)"
-            test -n "$KANDIDAAT_ID" && test "$KANDIDAAT_ID" != null
+            KANDIDAAT_URL="$(jq -r --argjson kid "$KANDIDAAT_ID" \
+              '.[] | select(.id==$kid) | .browser_download_url' \
+              /tmp/reconcile-assets.json 2>/dev/null || true)"
+            if [ -z "$KANDIDAAT_URL" ]; then
+              KANDIDAAT_URL="$(jq -r '.browser_download_url' /tmp/asset.json)"
+            fi
             test -n "$KANDIDAAT_URL" && test "$KANDIDAAT_URL" != null
-            curl -fsSL -H "Authorization: token $TOKEN" "$KANDIDAAT_URL" -o /tmp/kandidaat-asset
+            curl -fsSL --connect-timeout 15 --max-time 300 \
+              -H "Authorization: token $TOKEN" "$KANDIDAAT_URL" -o /tmp/kandidaat-asset
             KANDIDAAT_SHA="$(sha256sum /tmp/kandidaat-asset | awk '{print $1}')"
             if [ "$KANDIDAAT_SHA" != "$LOKAAL_SHA" ]; then
               echo "Geüploade kandidaat voor $NAAM heeft SHA256 $KANDIDAAT_SHA, verwacht $LOKAAL_SHA; oude asset(s) blijven staan." >&2
@@ -972,24 +1020,56 @@ jobs:
             fi
 
             jq -n --arg name "$NAAM" '{name:$name}' > /tmp/asset-naam.json
-            CODE=$(curl -s -o /tmp/hernoemd.json -w '%{http_code}' -X PATCH \
+            CODE=$(curl -s -o /tmp/hernoemd.json -w '%{http_code}' \
+              --connect-timeout 15 --max-time 60 -X PATCH \
               "$API/releases/$ID/assets/$KANDIDAAT_ID" \
               -H "Authorization: token $TOKEN" -H "Content-Type: application/json" \
-              -d @/tmp/asset-naam.json)
+              -d @/tmp/asset-naam.json) || CODE=000
             # Forgejo documenteert 201 voor deze PATCH; 200 wordt door oudere
             # Gitea-compatibele versies gebruikt. Beide betekenen dat de
             # kandidaat nu de definitieve naam draagt.
             if [ "$CODE" != 200 ] && [ "$CODE" != 201 ]; then
-              echo "Geverifieerde kandidaat voor $NAAM kon niet worden hernoemd (HTTP $CODE); oude asset(s) blijven staan." >&2
-              cat /tmp/hernoemd.json >&2
-              exit 1
+              # Ook hier reconcileren: bij een onzeker antwoord kan de hernoeming
+              # tóch gelukt zijn — dan staat onze kandidaat-id al onder $NAAM.
+              curl -fsS --connect-timeout 15 --max-time 60 \
+                -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
+                > /tmp/reconcile-assets.json || {
+                  echo "Hernoemen van $NAAM gaf HTTP $CODE en reconcile faalde — toestand onbekend; oude asset(s) blijven staan." >&2
+                  exit 1
+                }
+              if ! jq -e --arg n "$NAAM" --argjson kid "$KANDIDAAT_ID" \
+                '[.[] | select(.name==$n and .id==$kid)] | length == 1' \
+                /tmp/reconcile-assets.json >/dev/null; then
+                echo "Geverifieerde kandidaat voor $NAAM kon niet worden hernoemd (HTTP $CODE); oude asset(s) blijven staan." >&2
+                cat /tmp/hernoemd.json >&2
+                exit 1
+              fi
+              echo "Hernoemen bleek tóch gelukt (reconcile via assets-lijst)."
             fi
 
             jq -r --arg n "$NAAM" '.[] | select(.name==$n) | .id' /tmp/bijlagen.json \
               | while IFS= read -r OUD_ID; do
                   [ -n "$OUD_ID" ] || continue
-                  curl -fsS -o /dev/null -X DELETE -H "Authorization: token $TOKEN" \
-                    "$API/releases/$ID/assets/$OUD_ID"
+                  curl -fsS -o /dev/null -X DELETE --connect-timeout 15 --max-time 60 \
+                    -H "Authorization: token $TOKEN" \
+                    "$API/releases/$ID/assets/$OUD_ID" || {
+                      # DELETE is opruiming: reconcilert of hij weg is. Een
+                      # falende GET is géén 404 — ook dat kan 'onbekend' zijn;
+                      # de eindcontrole hieronder vangt een overblijvend asset.
+                      CHECK=$(curl -s -o /dev/null -w '%{http_code}' \
+                        --connect-timeout 15 --max-time 60 \
+                        -H "Authorization: token $TOKEN" \
+                        "$API/releases/$ID/assets/$OUD_ID" || true)
+                      case "$CHECK" in
+                        404)
+                          echo "Oude asset $OUD_ID was na onzekere DELETE al weg." ;;
+                        200)
+                          echo "Oude asset $OUD_ID kon niet worden verwijderd." >&2
+                          exit 1 ;;
+                        *)
+                          echo "Toestand oude asset $OUD_ID onbekend (HTTP $CHECK); eindcontrole dekt dit af." >&2 ;;
+                      esac
+                    }
                 done
             echo "  + $NAAM (kandidaat geverifieerd, oude versie veilig vervangen)"
           done < /tmp/verwachte-assets
@@ -999,7 +1079,8 @@ jobs:
           # geproduceerd bestand moet exact één keer bestaan én dezelfde bytes
           # bevatten als dist/.
           echo "Unieke verwachte bijlagen controleren…"
-          curl -fsS -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
+          curl -fsS --connect-timeout 15 --max-time 60 \
+            -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
             > /tmp/bijlagen-na-upload.json
           while IFS= read -r NAAM; do
             AANTAL="$(jq -r --arg n "$NAAM" '[.[] | select(.name==$n)] | length' /tmp/bijlagen-na-upload.json)"
@@ -1008,7 +1089,8 @@ jobs:
               exit 1
             fi
             URL="$(jq -r --arg n "$NAAM" '.[] | select(.name==$n) | .browser_download_url' /tmp/bijlagen-na-upload.json)"
-            curl -fsSL -H "Authorization: token $TOKEN" "$URL" -o /tmp/eind-asset
+            curl -fsSL --connect-timeout 15 --max-time 300 \
+              -H "Authorization: token $TOKEN" "$URL" -o /tmp/eind-asset
             SERVER_SHA="$(sha256sum /tmp/eind-asset | awk '{print $1}')"
             LOKAAL_SHA="$(sha256sum "dist/$NAAM" | awk '{print $1}')"
             if [ "$SERVER_SHA" != "$LOKAAL_SHA" ]; then
