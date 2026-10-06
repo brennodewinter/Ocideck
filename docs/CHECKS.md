@@ -1779,8 +1779,10 @@ For focused work, run only the relevant slice instead of the whole suite:
   since #1988: `macos-gate.yml` runs `make test-golden` on every push to `main`
   on the Mac-runner — a post-merge vangnet that een sub-promille renderlaag-
   verschuiving binnen minuten ziet in plaats van pas wanneer iemand lokaal `make
-  check` draait. Geen required PR-check, want de Mac-runner staat niet altijd
-  aan en de goldens zijn machine-specifiek.)
+  check` draait. Since #2321 it also runs on `v*` tag pushes, in a ref-scoped
+  concurrency group that a `main` push can never cancel — so the released commit
+  carries its own golden proof. Geen required PR-check, want de Mac-runner staat
+  niet altijd aan en de goldens zijn machine-specifiek.)
 
   *Corrected 2026-07-22 (#617): this said "each slide type" while the file
   covered **eight** of the 24 types there were then. Everything built after the

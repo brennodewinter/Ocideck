@@ -392,6 +392,19 @@ release_ci_has_failure() { # release_ci_has_failure SNAPSHOT
   printf '%s\n' "$1" | grep -qE '^(failure|cancelled|skipped|error)\|'
 }
 
+# De golden-poort op de tag zelf. macos-gate draait sinds #2321 óók op v*-tags,
+# in de eigen concurrencygroep macos-gate-refs/tags/vX.Y.Z die geen main-push
+# deelt — daarvoor hing het golden-bewijs van een releasecommit aan een main-run
+# die elke volgende merge kon annuleren (run 5477, v0.6.14). Deze helper volgt
+# exact de tag-run via prettyref; een gerichte herstart komt onder dezelfde
+# run-id met een hogere attempt terug en wordt zo gewoon meegevolgd.
+macos_gate_tag_status() { # → "status|run-id" of leeg; exit≠0 als de API hapert
+  local run
+  run="$(latest_workflow_run macos-gate.yml "$TAG")" || return 2
+  [ -n "$run" ] || return 0
+  printf '%s\n' "${run#*|}|${run%%|*}"
+}
+
 expected_release_assets() {
   printf '%s\n' \
     "ocideck-web-$NEW_VERSION.tar.gz" \
@@ -569,6 +582,17 @@ cmd_status() {
     mark 0 "release-CI status onleesbaar (Forgejo-API-fout — onbekend is niet afwezig)"
   else
     mark "$ci_stable" "release-CI terminaal groen; geen actieve schrijver"
+  fi
+  # De golden-poort op de tag (#2321): geen releasejob, maar wél de enige plek
+  # waar de goldens van de uitgebrachte commit bewezen worden. Een afwezige of
+  # geannuleerde tagrun mag niet onzichtbaar blijven.
+  local mgate="" mgate_ok=0
+  mgate="$(macos_gate_tag_status || true)"
+  if [ -z "$mgate" ]; then
+    mark 0 "macos-gate (goldens) op $TAG: geen tagrun gevonden"
+  else
+    [ "${mgate%%|*}" = "success" ] && mgate_ok=1
+    mark "$mgate_ok" "macos-gate (goldens) op $TAG: ${mgate%%|*} (run ${mgate##*|})"
   fi
   mark "$has_sums" "SHA256SUMS aanwezig (van de publiceren-job)"
   mark "$manifest_complete" "SHA256SUMS bevat exact alle verwachte releasebestanden"
@@ -1864,6 +1888,16 @@ follow_ci() {
     log "Terzijde: de losse ci.yml-poort (gate) op $TAG is rood. Dat is een testrun naast de"
     log "releaseketen, geen releasejob — bekijk de uitslag, maar de release gaat door."
   fi
+  # Dezelfde terzijde voor de golden-poort op de tag (#2321): die run staat in
+  # zijn eigen tag-groep en wordt hier expliciet gevolgd — een afwezige of
+  # geannuleerde tagrun mag niet onzichtbaar blijven.
+  local mgate=""
+  mgate="$(macos_gate_tag_status || true)"
+  case "$mgate" in
+    "")      log "Terzijde: geen macos-gate-run op $TAG gevonden — de golden-poort van de tagcommit is onbewezen." ;;
+    success\|*) log "macos-gate (goldens) op $TAG is groen (run ${mgate##*|})." ;;
+    *)       log "Terzijde: macos-gate op $TAG is ${mgate%%|*} (run ${mgate##*|}) — de golden-poort van de tagcommit is niet groen." ;;
+  esac
   if printf '%s\n' "$snap" | grep -v '^failure|gate$' | grep -q '^failure|'; then
     log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
     log "Herstel de upstream-job en maak DEZELFDE tag af met '--resume $TAG'; her-tag niet."
