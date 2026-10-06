@@ -135,7 +135,8 @@ jobs:
         run: |
           set -eu
           install -d -o ubuntu -g ubuntu "$PUB_CACHE"
-          chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE" "$PUB_CACHE"
+          chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE" "$PUB_CACHE" \
+            /opt/flutter/packages/flutter_tools/.dart_tool
           runuser --user ubuntu --preserve-environment -- env \
             HOME=/home/ubuntu flutter pub get
 

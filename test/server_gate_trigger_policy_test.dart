@@ -26,6 +26,10 @@ void main() {
 
     expect(workflow, contains('PUB_CACHE: /home/ubuntu/.pub-cache'));
     expect(workflow, contains('chown -R ubuntu:ubuntu'));
+    expect(
+      workflow,
+      contains('/opt/flutter/packages/flutter_tools/.dart_tool'),
+    );
     expect(workflow, contains('runuser --user ubuntu'));
   });
 }
