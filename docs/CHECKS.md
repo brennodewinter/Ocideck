@@ -2284,8 +2284,11 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   `CI_IMAGE_TOKEN` secret and `CI_IMAGE_USER` variable, or the manual route
   `make ci-image-scans-publish` from a machine with docker/colima. Set the
   published package to **public** so `scans.yml` can pull it without credentials.
-  The publish guard skips green when the token is absent, so adding this cannot
-  turn `main` red before the one-time setup is done.
+  The publish guard fails red on the canonical repo (and on any manual
+  dispatch) when the token is absent — green must mean the image exists
+  (#2301); only an explicit fork context may skip green. The workflow also
+  verifies the pushed tag back from the registry (`manifest inspect`) as a
+  postcondition.
 - **Publish the image once by hand when you introduce or re-point it — Forgejo
   will not do it for you (#1168).** A newly added `push`-triggered workflow does
   **not** run on the commit that introduces it, so merging the PR that adds this

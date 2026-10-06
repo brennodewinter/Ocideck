@@ -48,15 +48,19 @@ jobs:
   build-publish:
     runs-on: docker
     steps:
-      # Zonder registry-token kan deze workflow niets publiceren. Dat is géén
-      # fout: vóór de eenmalige inrichting (of op een fork) hoort de run gewoon
-      # groen over te slaan, niet rood te worden. Anders zou juist de PR die dit
-      # image toevoegt na de merge een rode `main`-run opleveren.
+      # Zonder registry-token kan deze workflow niets publiceren. Op de
+      # canonical repo is groen-zonder-image géén neutrale skip maar een
+      # leugen: release_auto ziet later 'success' en strandt pas op de
+      # ontbrekende registrytag (#2301). Daarom faalt de guard op
+      # `LibreKAT/Ocideck` én bij elke handmatige dispatch — alleen een
+      # expliciete fork die zelf niets vroeg mag groen overslaan.
       - name: Is de registry-publicatie ingericht?
         id: guard
         env:
           TOKEN: ${{ secrets.CI_IMAGE_TOKEN }}
           USER: ${{ vars.CI_IMAGE_USER }}
+          REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
         run: |
           set -eu
           # Beide nodig: het token is het geheim, de gebruikersnaam is de EIGENAAR
@@ -65,8 +69,12 @@ jobs:
           # token-eigenaar te zijn; dan zou de push stil op de verkeerde login
           # falen. Een repo-variabele `CI_IMAGE_USER` maakt het expliciet.
           if [ -z "${TOKEN:-}" ] || [ -z "${USER:-}" ]; then
-            echo "CI_IMAGE_TOKEN (secret) en/of CI_IMAGE_USER (variabele) niet gezet — publicatie overgeslagen."
-            echo "Richt ze eenmalig in (docs/CHECKS.md 'ci-image.yml') of draai 'make ci-image-scans-publish'."
+            if [ "$REPO" = "LibreKAT/Ocideck" ] || [ "$EVENT" = "workflow_dispatch" ]; then
+              echo "CI_IMAGE_TOKEN (secret) en/of CI_IMAGE_USER (variabele) niet gezet — op deze context is dat een failure, geen skip."
+              echo "Richt ze eenmalig in (docs/CHECKS.md 'ci-image.yml') of draai 'make ci-image-scans-publish'."
+              exit 1
+            fi
+            echo "fork-context ($REPO, $EVENT): publicatie overgeslagen."
             echo "publish=no" >> "$GITHUB_OUTPUT"
           else
             echo "publish=yes" >> "$GITHUB_OUTPUT"
@@ -181,3 +189,18 @@ jobs:
             -f .forgejo/ci-image/scans.Dockerfile .forgejo/ci-image
           docker -H "$DH" push "$IMG:$TAG"
           echo "Gepubliceerd: $IMG:$TAG"
+
+      # NACONDITIE. Een groene push stap zegt nog niets over de registry —
+      # groen mag pas "het image bestaat" betekenen als de registry het exact
+      # afgeleide tag teruglevert (#2301). `manifest inspect` vraagt het
+      # manifest direct aan de registry en faalt op een afwezig tag.
+      - name: Registrytag teruglezen
+        if: steps.guard.outputs.publish == 'yes'
+        env:
+          DH: ${{ steps.dockerd.outputs.host }}
+        run: |
+          set -eu
+          IMG="pawprint.vigilis.online/librekat/ocideck-scans"
+          TAG="${{ steps.pins.outputs.tag }}"
+          DOCKER_CLI_EXPERIMENTAL=enabled docker -H "$DH" manifest inspect "$IMG:$TAG" >/dev/null
+          echo "Registry bevestigt $IMG:$TAG — groen betekent pullbaar."
