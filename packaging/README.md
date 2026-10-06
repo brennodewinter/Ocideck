@@ -74,9 +74,15 @@ a different binary — the same "no silent drift" property `.github/pinned-ci-ve
 gives the version-pinned tools, reached a different way (which is why appimagetool
 is not in that manifest: a content-hash pin cannot go stale by omission).
 
-**To re-pin** (only when the build fails on a sha256 mismatch, or you deliberately
-want a newer appimagetool): fetch the new digest and update `APPIMAGETOOL_SHA256`
-in `.forgejo/workflows/release.yml`.
+Since #2324 the `release_auto.sh` pre-flight compares this pin against the
+official asset digest from the GitHub release API **before** the tag is pushed,
+so a replaced upstream asset blocks the release while nothing is irreversible
+yet (release v0.6.14 hit the mismatch only inside the Linux job, after the tag).
+
+**To re-pin** (when the pre-flight reports a mismatch, or you deliberately
+want a newer appimagetool): verify the new asset's provenance — fetch the
+digest below and download the bytes yourself once — then update
+`APPIMAGETOOL_SHA256` in `.forgejo/workflows/release.yml`.
 
 ```bash
 curl -fsSL https://api.github.com/repos/AppImage/appimagetool/releases/tags/continuous \
