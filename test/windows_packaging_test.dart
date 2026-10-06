@@ -445,6 +445,78 @@ void main() {
       );
     });
 
+    // #2313: a rerun that replaced the zip but died before the installer used
+    // to leave a mixed pair from two attempts, and the forge accepted it on
+    // name alone. The cohort attestation binds the pair to one run — delete a
+    // link in that chain and the regression from the issue is back.
+    test('the mirror attests the pair as one build cohort (#2313)', () {
+      expect(
+        mirrorYaml,
+        contains(r'ocideck-windows-cohort-$VERSIE.json'),
+        reason: 'The mirror no longer publishes a cohort attestation.',
+      );
+      // The attestation must carry the tag commit, the run id and both hashes —
+      // anything less can be satisfied by a mixed pair.
+      final attest = RegExp(
+        r"jq -n[\s\S]*?ocideck-windows-cohort-\$VERSIE\.json",
+      ).firstMatch(mirrorYaml)?.group(0);
+      expect(attest, isNotNull, reason: 'Cannot find the attestation writer.');
+      for (final field in ['tag_commit', 'run_id', 'sha256']) {
+        expect(attest, contains(field), reason: 'Attestation lost `$field`.');
+      }
+      expect(attest, contains(r'$GITHUB_SHA'));
+      expect(attest, contains(r'$GITHUB_RUN_ID'));
+      expect(attest, contains('sha256sum'));
+    });
+
+    test('the forge verifies the cohort before accepting the pair', () {
+      expect(
+        forgeYaml,
+        contains(r'COHORT="ocideck-windows-cohort-$VERSIE.json"'),
+        reason: 'windows-ophalen no longer fetches the attestation.',
+      );
+      // have_asset must pull the attestation too, so a missing one reads as
+      // "not there" rather than as "pair without proof".
+      final have = RegExp(
+        r'have_asset\(\)\s*\{(.*?)\n          \}',
+        dotAll: true,
+      ).firstMatch(forgeYaml);
+      expect(have!.group(1), contains(r'"$COHORT"'));
+      // And the proof is actually checked: tag commit, both hashes, and the
+      // run id when the dispatch token is present.
+      final verify = RegExp(
+        r'verify_cohort\(\)\s*\{(.*?)\n          \}',
+        dotAll: true,
+      ).firstMatch(forgeYaml);
+      expect(verify, isNotNull, reason: 'verify_cohort is gone.');
+      for (final check in [
+        r'.tag_commit == $commit',
+        r'.sha256.zip == $z',
+        r'.sha256.installer == $e',
+        r'.run_id == ($rid | tonumber)',
+      ]) {
+        expect(verify!.group(1), contains(check));
+      }
+      // Acceptance requires it: a pair is only collected when verify passes.
+      expect(
+        forgeYaml,
+        contains(r'verify_cohort "$rid"'),
+        reason:
+            'The download loop accepts the pair without checking the cohort — '
+            'a mixed zip+installer from two runs would publish again (#2313).',
+      );
+    });
+
+    test('the artifact hand-off keeps the attestation out of the payload', () {
+      // The glob carries only the two user-facing files; the attestation is
+      // consumed by windows-ophalen and must not leak into SHA256SUMS.
+      expect(
+        forgeYaml.contains(r'ocideck-windows-x64-*'),
+        isTrue,
+        reason: 'The upload-artifact glob changed — check the cohort file.',
+      );
+    });
+
     test('the artifact hand-off is not narrowed to the zip', () {
       expect(
         RegExp(
