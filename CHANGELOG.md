@@ -10,6 +10,10 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **macos-gate** (golden-poort) draait nu ook op `v*`-tags (#2321), in een eigen
+  ref-gescheiden concurrencygroep — een gewone merge naar `main` annuleert een lopende
+  of wachtende poort voor een releasetag niet meer, zoals bij v0.6.14 gebeurde.
+  `release_auto` volgt die tagrun en toont hem in `--status` en de CI-opvolging.
 - De **releaseketen** (#2324) toetst de appimagetool-pin nu vóór de tag aan de officiële
   GitHub asset-digest: upstream verving de rollende `continuous`-asset op 4 oktober, wat
   v0.6.14 pas in de Linux-job ná de onomkeerbare push brak. Bij een afwijking stopt de

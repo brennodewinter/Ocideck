@@ -27,6 +27,14 @@
 # check` draait. Staat de Mac uit, dan wacht de run; een volgende merge
 # vervangt een wachtende run.
 #
+# **Waarom óók op `v*`-tags (#2321).** De golden-poort van een releasecommit
+# leefde alleen als main-run — in de concurrencygroep `macos-gate-refs/heads/
+# main`, waar elke volgende merge hem met `cancel-in-progress` wegveegt. Zo werd
+# tijdens v0.6.14 de herstelpoging van run 5477 vóór de start geannuleerd toen
+# een ongerelateerde PR landde. Een tag-push geeft de poort nu zijn eigen run
+# in `macos-gate-refs/tags/vX.Y.Z`: een groep die geen enkele branchrun deelt,
+# dus geen main-push annuleert ooit een lopende of wachtende tagpoort.
+#
 # **Waarom niet samengevoegd met `macos-build.yml`.** Die workflow draait alleen
 # wanneer native-buildpaden veranderen (`pubspec.yaml`, `macos/**`, …); een
 # golden-regressie komt uit élke code-wijziging, niet alleen uit native work.
@@ -38,9 +46,13 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+    tags: ['v*']
 
 # Zelfde concurrency-gedrag als static-gate: een nieuwe push zet de lopende
 # run opzij, want de golden-suite bekijkt de hele boom op de nieuwste commit.
+# De groepsleutel is de volledige ref, dus `refs/tags/v*` en `refs/heads/main`
+# landen in gescheiden groepen (#2321): main-churn annuleert geen tagpoort meer,
+# en binnen een tag annuleert alleen een herdispatch van díe tag — bewust.
 concurrency:
   group: macos-gate-${{ github.ref }}
   cancel-in-progress: true
