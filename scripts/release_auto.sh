@@ -2092,10 +2092,72 @@ assert_no_pending_fixes() {
   die "een release langs bekend herstelwerk is hoe v0.6.5 de v0.6.4-startfout meenam. Merge het eerst, of geef --ondanks-fixes mee als het bewust buiten deze release blijft. Niets gemuteerd."
 }
 
+# ── Nachtelijke main-poort (#2308) ─────────────────────────────────────────────
+# De nightly linux-gate stond vier nachten rood terwijl de v0.6.14-release fase
+# 1 rustig doorliep en exact dezelfde fout pas ná branch en PR zelf vond. De
+# pre-flight toetst gereedschappen, niet of de onafhankelijke Linux-poort deze
+# main al als kapot kent. Daarom hier — vóór het wachtwoord, vóór elke mutatie —
+# read-only de nieuwste linux-gate-run op de huidige main-geschiedenis lezen.
+# Een ontbrekende of niet-relevante run is expliciet onbekend, niet groen. Nooit
+# een nieuwe run dispatchen als neveneffect — alleen lezen.
+assert_nightly_main_gate() {
+  STEP="nachtelijke main-poort"
+  # --resume: de inhoud van de lopende release ligt al vast; een intussen rood
+  # geworden main-run zegt niets meer over díe inhoud.
+  [ -z "$RESUME_TAG" ] || return 0
+  local main_sha
+  main_sha="$(git rev-parse --verify origin/main 2>/dev/null)" \
+    || die "origin/main ontbreekt lokaal — de nachtelijke linux-gate kan niet aan de huidige main-tip gekoppeld worden."
+  # De lijst-route geeft geen commit_sha; die staat op de detail-GET per run.
+  # Loop van nieuw naar oud over de runs op main tot één run op de tip of een
+  # voorvader: alleen díe zeggen iets over de code die deze release uitbrengt.
+  local ids rid rinfo rsha rstatus rurl found=""
+  ids="$(api GET "/actions/runs?limit=50&workflow_id=linux-gate.yml" 2>/dev/null \
+    | jq -r '[.workflow_runs[]? | select(.prettyref == "main") | .id] | sort | reverse | .[]' 2>/dev/null)" \
+    || die "kon de linux-gate-runs niet lezen — nachtelijke main-poort is onbekend, niet groen."
+  for rid in $ids; do
+    rinfo="$(api GET "/actions/runs/$rid" 2>/dev/null \
+      | jq -r '[.commit_sha // "", .status // "", .html_url // ""] | @tsv' 2>/dev/null)" || continue
+    rsha="$(printf '%s' "$rinfo" | cut -f1)"
+    [ -n "$rsha" ] || continue
+    git merge-base --is-ancestor "$rsha" "$main_sha" 2>/dev/null || continue
+    found="$rid"
+    rstatus="$(printf '%s' "$rinfo" | cut -f2)"
+    rurl="$(printf '%s' "$rinfo" | cut -f3)"
+    break
+  done
+  [ -n "$found" ] \
+    || die "geen linux-gate-run gevonden op de huidige main-geschiedenis — de nachtelijke poort is onbekend, niet groen. Draai linux-gate handmatig (workflow_dispatch op main) of wacht op de nachtrun en begin dan opnieuw. Niets gemuteerd."
+  if [ "$rstatus" = "success" ]; then
+    log "Nachtelijke linux-gate groen op ${rsha:0:9} (run $found)."
+    return 0
+  fi
+  case "$rstatus" in
+    failure|cancelled|skipped|error)
+      local jobname jobid rlog=""
+      jobname="$(api GET "/actions/runs/$found/jobs" 2>/dev/null \
+        | jq -r '[.[]? | select(.status == "failure")] | .[0] | "\(.name // "onbekende job")|\(.id // "")"' 2>/dev/null)"
+      jobid="${jobname##*|}"; jobname="${jobname%%|*}"
+      [ -n "$jobid" ] \
+        && rlog="$(api GET "/actions/jobs/$jobid/logs" 2>/dev/null \
+          | grep -v '^[[:space:]]*$' | tail -n 8)"
+      section "Nachtelijke linux-gate staat rood op de huidige main"
+      log "run: ${rurl:-run $found} (commit ${rsha:0:9}, status $rstatus)"
+      [ -z "$jobname" ] || log "eerste falende job: $jobname"
+      [ -z "$rlog" ] || { log "foutcontext:"; printf '%s\n' "$rlog" | sed 's/^/     /'; }
+      die "dezelfde fout zou deze release ná de tag alsnog breken — repareer main, draai linux-gate groen en begin dan pas. Niets gemuteerd."
+      ;;
+    *)
+      die "de nieuwste linux-gate-run op main is niet voltooid (status: ${rstatus:-leeg}) — onbekend is niet groen. Wacht tot de run klaar is of draai hem handmatig opnieuw, en begin dan. Niets gemuteerd."
+      ;;
+  esac
+}
+
 # ── De twee prompts (de enige interactie) ───────────────────────────────────────
 STEP="wachtwoord"
 read_token
 assert_no_pending_fixes
+assert_nightly_main_gate
 section "Wachtwoord"
 log "Het minisign-sleutelwachtwoord wordt nu gevraagd en blijft alleen in het"
 log "geheugen van deze run (voor het tekenen van SHA256SUMS, geheel aan het eind)."

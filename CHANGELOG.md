@@ -10,6 +10,20 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **releasepreflight** (#2308) leest vóór het wachtwoord read-only de
+  nieuwste linux-gate-run op de huidige `origin/main`-geschiedenis. Staat die
+  nachtelijke poort rood — zoals vier nachten vóór v0.6.14 — dan stopt de
+  release vóór wachtwoord, build en branchmutatie, met de runlink en de eerste
+  falende job erbij. Een ontbrekende, niet-relevante of nog lopende run meldt
+  zich expliciet als onbekend in plaats van stil groen te tellen, en `--resume`
+  slaat de toets over: de inhoud van een lopende release ligt al vast.
+- De **releasepublicatie** (#2311) houdt de Forgejo-release nu als draft tot
+  alle artefacten én de minisign-handtekening compleet en teruggelezen
+  geverifieerd zijn; pas daarna flipt `release_auto.sh` hem naar publiek. Wie
+  tussen CI-groen en het lokale tekenen keek, zag voorheen al een release
+  zónder handtekening. De website-downloads-update staat in een eigen workflow
+  die pas ná de publicatie wordt gedispatcht — zijn bump-script leest publieke
+  URL's die onder een draft simpelweg niet bestaan.
 - De **releasepublicatie** (#2312) begrenst nu elke HTTP-call met een connect-
   en responstime-out en de publicatiejob zelf heeft een harde tijdslimiet. Een
   endpoint dat TCP accepteert maar nooit antwoordt hing de run voorheen tot de
