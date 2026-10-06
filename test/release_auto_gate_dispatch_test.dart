@@ -58,11 +58,16 @@ $body
 TRACE=${trace.path}
 api() {
   local method="\$1" path="\$2"
-  if [ "\$method \$path" = 'GET /actions/tasks?limit=100' ]; then
+  if [ "\$method \$path" = 'GET /actions/runs?limit=50' ]; then
     printf '%s\n' '{"workflow_runs":[]}'
     return 0
   fi
-  printf '%s %s %s\n' "\$method" "\$path" "\${*:3}" >>"\$TRACE"
+  if [ "\$method" = POST ]; then
+    printf '%s %s %s\n' "\$method" "\$path" "\${*:3}" >>"\$TRACE"
+    printf '%s\n' '{"id":7,"run_number":42,"jobs":["gate"]}'
+    return 0
+  fi
+  printf '%s\n' '{}'
 }
 ensure_gate_tasks abc123 2194
 ''');
@@ -82,11 +87,11 @@ ensure_gate_tasks abc123 2194
     final result = runHarness(r'''
 api() {
   local method="$1" path="$2"
-  if [ "$method $path" = 'GET /actions/tasks?limit=100' ]; then
+  if [ "$method $path" = 'GET /actions/runs?limit=50' ]; then
     printf '%s\n' '{"workflow_runs":[
-      {"id":1,"workflow_id":"static-gate.yml","name":"static-gate","status":"success","head_sha":"abc123"},
-      {"id":2,"workflow_id":"scans.yml","name":"scans","status":"success","head_sha":"abc123"},
-      {"id":3,"workflow_id":"linux-gate.yml","name":"linux-gate","status":"success","head_sha":"abc123"}
+      {"id":1,"workflow_id":"static-gate.yml","title":"static-gate","status":"success","commit_sha":"abc123"},
+      {"id":2,"workflow_id":"scans.yml","title":"scans","status":"success","commit_sha":"abc123"},
+      {"id":3,"workflow_id":"linux-gate.yml","title":"linux-gate","status":"success","commit_sha":"abc123"}
     ]}'
     return 0
   fi
