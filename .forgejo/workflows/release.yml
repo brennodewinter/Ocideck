@@ -15,9 +15,12 @@
 #   linux    → x64-bundel als tar.gz
 #   macos    → .app als zip (op de Mac-runner)
 #   windows  → opgehaald van de spiegel
-#   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS
-#   website  → de download-verwijzingen in de website-repo bijgewerkt; die repo
-#              zet zichzelf live met een eigen deploy-workflow
+#   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS.
+#              De release blijft draft (#2311): pas nadat release_auto.sh de
+#              SHA256SUMS lokaal heeft getekend én die handtekening heeft
+#              geverifieerd, wordt hij gepubliceerd. Diezelfde stap dispatcht
+#              dan website-downloads.yml, dat de download-verwijzingen in de
+#              website-repo bijwerkt (die repo zet zichzelf live).
 #
 # Ondertekening: de macOS-app wordt op de Mac-runner getekend en genotariseerd
 # (Developer ID + notarytool; zie de macos-job en docs/BUILD.md). Een stabiele
@@ -878,11 +881,18 @@ jobs:
             *-*) VOORLOPER=true ;;
             *)   VOORLOPER=false ;;
           esac
+          # draft:true (#2311): deze job maakt de release aan en vult hem, maar
+          # publiceert hem NIET — de minisign-handtekening bestaat pas nadat
+          # release_auto.sh lokaal heeft getekend. Pas ná een geverifieerde
+          # handtekening flipt die het draft-vlag naar gepubliceerd; elke fout
+          # hieronder laat de wereld dus een draft zien in plaats van een
+          # halve publieke release. De website-downloads-workflow volgt via
+          # een dispatch vanuit datzelfde tekenstuk.
           jq -n --arg tag "$GITHUB_REF_NAME" \
                 --arg name "OciDeck $GITHUB_REF_NAME" \
                 --rawfile body /tmp/body.md \
                 --argjson pre "$VOORLOPER" \
-                '{tag_name:$tag, name:$name, body:$body, draft:false, prerelease:$pre}' \
+                '{tag_name:$tag, name:$name, body:$body, draft:true, prerelease:$pre}' \
             > /tmp/release.json
 
           # Herstarten moet gewoon werken. De waarschijnlijkste reden om deze
@@ -1100,7 +1110,12 @@ jobs:
           done < /tmp/verwachte-assets
 
           echo
-          echo "Klaar: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${GITHUB_REF_NAME}"
+          # Nog steeds draft (#2311): publicatie volgt pas in release_auto.sh,
+          # nadat de minisign-handtekening lokaal is aangebracht én
+          # teruggelezen geverifieerd. Een release die je hier ziet staan is
+          # dus bewust nog niet publiek.
+          echo "Assets compleet; release ${GITHUB_REF_NAME} blijft draft tot de"
+          echo "lokale tekenstap (scripts/release_auto.sh) hem publiceert."
 
       # De losse .deb blijft een release-asset; daarnaast publiceren we exact
       # dezelfde bytes naar Forgejo's eigen, ondertekende Debian-registry zodat
@@ -1117,43 +1132,3 @@ jobs:
           VERSIE="${GITHUB_REF_NAME#v}"
           scripts/publish_debian_package.sh \
             "dist/ocideck-linux-amd64-$VERSIE.deb"
-
-  website-downloads:
-    name: Website-downloads bijwerken
-    # Op de aangemelde Mac (mac-brenno): die heeft SSH-toegang tot de website-repo
-    # en de tooling van het bump-script. Draait ná 'publiceren', want het
-    # bump-script haalt de verificatiehash en de datum uit de zojuist gepubliceerde
-    # release. Geen prereleases (zoals deploy-web) — een -rc raakt de productiesite
-    # niet.
-    #
-    # Deze job werkt alléén de website-repository bij: bump -> commit -> push. Het
-    # live zetten is bewust níet meer de taak van de releaseketen. De website-repo
-    # publiceert zichzelf, met een eigen deploy-workflow die op elke push naar main
-    # `./publiceersite` draait (.forgejo/workflows/deploy.yml in die repo). Zo reikt
-    # de release niet meer rechtstreeks naar de productieserver — hij levert een
-    # commit aan, de website-repo zet live. Faalt deze job, dan is de release al
-    # gepubliceerd en valt de website terug op de handmatige route
-    # (scripts/bump-ocideck.sh + commit + push in de website-repo; de
-    # deploy-workflow zet daarna live).
-    needs: publiceren
-    if: ${{ !contains(github.ref_name, '-') }}
-    runs-on: macos
-    steps:
-      - name: Website-repo naar deze release bijwerken
-        run: |
-          set -Eeuo pipefail
-          export GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentitiesOnly=yes -i $HOME/.ssh/id_rsa"
-          VERSIE="${GITHUB_REF_NAME#v}"
-          WT="$(mktemp -d)"
-          git clone ssh://git@pawprint.vigilis.online:2222/LibreKAT/website.git "$WT"
-          cd "$WT"
-          git config user.name "OciDeck release"
-          git config user.email "release@librekat.nl"
-          scripts/bump-ocideck.sh "$VERSIE"
-          if git diff --quiet; then
-            echo "Website staat al op $VERSIE — niets te pushen."
-            exit 0
-          fi
-          git commit -aqm "OciDeck $VERSIE: downloads bijwerken (automatisch bij release)"
-          git push origin main
-          echo "Website-repo bijgewerkt naar $VERSIE — de deploy-workflow van die repo zet het live."

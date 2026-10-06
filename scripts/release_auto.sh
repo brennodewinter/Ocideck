@@ -34,7 +34,8 @@
 #       eens per ~minuut volgen tot alle jobs klaar zijn
 #   FASE 3 (verspreiden, pas ná groene CI)
 #     make deploy-web (webdemo, onafhankelijk van de platform-artefacten)
-#       → SHA256SUMS tekenen (minisign) + aanhangen → website-downloads-job bewaken
+#       → SHA256SUMS tekenen (minisign) + aanhangen → release publiceren
+#       → website-downloads-workflow dispatchen
 #     De webdemo gaat bewust EERST: ze hangt alleen aan de web-bundel, dus een
 #     teken- of platformfout laat de demo nooit op de oude versie staan.
 #
@@ -377,12 +378,14 @@ release_ci_is_active() { # release_ci_is_active SNAPSHOT
 # klaar" tellen.
 release_ci_completion_seen() { # release_ci_completion_seen SNAPSHOT
   local snapshot="$1"
-  # Groen is pas compleet na de laatste job. Een fout kan die laatste job juist
-  # blokkeren; accepteer die daarom alleen wanneer de falende taak herkenbaar uit
-  # release.yml komt. De losse ci.yml-job heet simpelweg `gate` en telt hier dus
-  # uitdrukkelijk niet als bewijs dat de releaseketen terminaal is.
+  # Groen is pas compleet na de laatste job. Dat is sinds #2311 'Release
+  # publiceren': de website-downloads-job verhuisde naar een eigen workflow die
+  # pas ná de (lokale) publicatie dispatcht — hij hoort dus niet meer in deze
+  # snapshot. Een fout kan die laatste job juist blokkeren; accepteer die daarom
+  # alleen wanneer de falende taak herkenbaar uit release.yml komt. De losse
+  # ci.yml-job heet simpelweg `gate` en telt hier uitdrukkelijk niet mee.
   printf '%s\n' "$snapshot" \
-    | grep -qE '^(success|failure|cancelled|skipped|error)\|Website-downloads bijwerken(\|([0-9]+|null))?$' \
+    | grep -qE '^(success|failure|cancelled|skipped|error)\|Release publiceren(\|([0-9]+|null))?$' \
     && return 0
   printf '%s\n' "$snapshot" \
     | grep -qE '^(failure|cancelled|skipped|error)\|(Poort \(vóór het bouwen\)|Web bouwen|Webversie live zetten|Linux bouwen|macOS bouwen|Windows ophalen van de spiegel|Release publiceren)(\|([0-9]+|null))?$'
@@ -429,6 +432,19 @@ verify_release_manifest() { # verify_release_manifest FILE
   expected="$(expected_release_assets | sort)"
   rm -f "$file.names"
   [ "$actual" = "$expected" ]
+}
+
+release_asset_url() { # release_asset_url RID NAAM → browser_download_url of leeg
+  api GET "/releases/$1/assets" 2>/dev/null \
+    | jq -r --arg n "$2" '.[] | select(.name==$n) | .browser_download_url // empty' \
+      2>/dev/null | head -n 1
+}
+
+# Draft-assets zijn publiek niet bereikbaar (#2311); met het repo-token wel.
+# Zo kan fase 3 de release lezen en verifiëren terwijl hij nog draft is.
+download_release_asset() { # download_release_asset URL DEST
+  curl -fsSL --connect-timeout 10 --max-time 60 \
+    -H "Authorization: token $TOKEN" -o "$2" "$1" 2>/dev/null
 }
 
 website_has_expected_downloads() {
@@ -911,7 +927,8 @@ show_plan() {
             → make check-release → build + notarize → zegel → /Applications
     FASE 2  [scans-image publiceren als pins gebumpt] → PR → poort groen → merge
             → tag $TAG → push origin+mirror → CI volgen
-    FASE 3  make deploy-web → SHA256SUMS tekenen + aanhangen → website-job bewaken
+    FASE 3  make deploy-web → SHA256SUMS tekenen + aanhangen → publiceren
+            → website-downloads-workflow dispatchen
 STEPS
   if ! changelog_has_section; then
     section "CHANGELOG-preview"
@@ -1269,12 +1286,22 @@ phase3() {
   deploy_web_if_needed
 
   STEP="SHA256SUMS tekenen"
-  section "Fase 3 — SHA256SUMS tekenen en aanhangen"
+  section "Fase 3 — SHA256SUMS tekenen, publiceren en aanhangen"
   TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
-  # `publiceren` kan nog nalopen; wacht begrensd i.p.v. meteen op 404 te sterven.
-  local got=0 _
+  local rid
+  rid="$(api GET "/releases/tags/$TAG" | jq -er '.id')" \
+    || die "kon de release-id voor $TAG niet betrouwbaar bepalen."
+  # De release is draft (#2311): publieke download-URL's geven 404 tot wij hem
+  # hieronder publiceren. Lees daarom alles via de API. `publiceren` kan nog
+  # nalopen; wacht begrensd i.p.v. meteen op een ontbrekend asset te sterven.
+  local got=0 _ sums_url
   for _ in $(seq 1 20); do
-    if curl -fsSL -o "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null; then got=1; break; fi
+    sums_url="$(release_asset_url "$rid" SHA256SUMS)"
+    if [ -n "$sums_url" ] \
+        && download_release_asset "$sums_url" "$TMP/SHA256SUMS"; then
+      got=1
+      break
+    fi
     sleep 15
   done
   # Nooit zelf opnieuw dispatchen. Een mislukte releasejob heeft een oorzaak die
@@ -1285,9 +1312,7 @@ phase3() {
     || die "release-CI voor $TAG is terminaal groen, maar SHA256SUMS ontbreekt — dispatch niet automatisch; onderzoek de publiceren-job en hervat daarna dezelfde tag."
   verify_release_manifest "$TMP/SHA256SUMS" \
     || die "SHA256SUMS bevat niet exact de tien verwachte artefacten voor $TAG — teken geen onvolledige of onverwachte release."
-  local rid release_assets expected_asset
-  rid="$(api GET "/releases/tags/$TAG" | jq -er '.id')" \
-    || die "kon de release-id voor $TAG niet betrouwbaar bepalen."
+  local release_assets expected_asset
   release_assets="$(api GET "/releases/$rid/assets" | jq -er '.[].name')" \
     || die "kon de release-assets voor $TAG niet betrouwbaar lezen."
   while IFS= read -r expected_asset; do
@@ -1298,18 +1323,21 @@ phase3() {
     || die "release $TAG mist SHA256SUMS als asset."
 
   # Een hervatting van een al getekende release hoort read-only te zijn. Controleer
-  # eerst de publiek aangeboden combinatie en raak de assets alleen aan als die niet
-  # exact bij het zojuist gevalideerde manifest hoort.
+  # eerst de aangeboden combinatie en raak de assets alleen aan als die niet
+  # exact bij het zojuist gevalideerde manifest hoort. De release is nog draft —
+  # lees daarom via de API (publieke URL's bestaan pas na publicatie, #2311).
   local public_sums="$TMP/SHA256SUMS.public"
   local public_sig="$TMP/SHA256SUMS.minisig.public"
-  local signature_current=0
-  if curl -fsSL --connect-timeout 10 --max-time 30 -o "$public_sums" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
-      && curl -fsSL --connect-timeout 10 --max-time 30 -o "$public_sig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
+  local signature_current=0 existing_sig_url
+  existing_sig_url="$(release_asset_url "$rid" SHA256SUMS.minisig)"
+  if [ -n "$existing_sig_url" ] \
+      && download_release_asset "$sums_url" "$public_sums" \
+      && download_release_asset "$existing_sig_url" "$public_sig" \
       && cmp -s "$TMP/SHA256SUMS" "$public_sums" \
       && minisign -Vm "$public_sums" -x "$public_sig" \
         -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1; then
     signature_current=1
-    log "Bestaande publieke handtekening past al exact bij SHA256SUMS; upload overgeslagen."
+    log "Bestaande handtekening past al exact bij SHA256SUMS; upload overgeslagen."
   fi
   if [ "$signature_current" -eq 0 ]; then
   printf '%s\n' "$MINISIGN_PW" \
@@ -1358,12 +1386,46 @@ phase3() {
   fi
 
   # Vertrouw niet op een geslaagde uploadstatus. Lees precies wat ontvangers
-  # krijgen opnieuw terug en verifieer die combinatie. Zo kan finish() nooit een
-  # oude handtekening naast een later vervangen manifest als "getekend" melden.
+  # krijgen opnieuw terug en verifieer die combinatie — geauthenticeerd, want de
+  # release is nog draft (#2311). Zo kan de publicatie hieronder nooit een oude
+  # handtekening naast een later vervangen manifest als "getekend" melden.
+  local attached_valid=0
+  for _ in $(seq 1 12); do
+    local check_sig_url
+    check_sig_url="$(release_asset_url "$rid" SHA256SUMS.minisig)"
+    if [ -n "$check_sig_url" ] \
+        && download_release_asset "$sums_url" "$public_sums" \
+        && download_release_asset "$check_sig_url" "$public_sig" \
+        && cmp -s "$TMP/SHA256SUMS" "$public_sums" \
+        && minisign -Vm "$public_sums" -x "$public_sig" \
+          -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1; then
+      attached_valid=1
+      break
+    fi
+    sleep 5
+  done
+  [ "$attached_valid" -eq 1 ] \
+    || die "de teruggelezen SHA256SUMS en handtekening verifiëren niet — de release blijft draft; onderzoek en hervat pas nadat geen workflow meer schrijft."
+  log "SHA256SUMS.minisig aangehangen en teruggelezen geverifieerd."
+
+  # Alle nacondities kloppen: assets compleet, manifest klopt, handtekening
+  # geldig. Nu pas wordt de release publiek — elke eerder gedode stap liet hem
+  # als draft staan (#2311). Mislukt de PATCH onzeker, dan reconcilert de
+  # GET hieronder; een release die draft blijft is een melding, geen ramp.
+  api PATCH "/releases/$rid" -H 'Content-Type: application/json' \
+    -d '{"draft":false}' -o /dev/null || {
+      local pub_state
+      pub_state="$(api GET "/releases/$rid" 2>/dev/null | jq -r '.draft // empty' 2>/dev/null)"
+      [ "$pub_state" = "false" ] \
+        || die "de release kon niet van draft naar gepubliceerd (externe toestand onbekend) — hij blijft draft; controleer de release-pagina en hervat met --resume $TAG."
+    }
+  log "Release $TAG gepubliceerd."
+
+  # Laatste bewijs is publiek: precies wat een bezoeker zonder token krijgt.
   local public_valid=0
   for _ in $(seq 1 12); do
-    if curl -fsSL -o "$public_sums" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
-        && curl -fsSL -o "$public_sig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
+    if curl -fsSL --connect-timeout 10 --max-time 30 -o "$public_sums" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
+        && curl -fsSL --connect-timeout 10 --max-time 30 -o "$public_sig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
         && cmp -s "$TMP/SHA256SUMS" "$public_sums" \
         && minisign -Vm "$public_sums" -x "$public_sig" \
           -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1; then
@@ -1373,23 +1435,23 @@ phase3() {
     sleep 5
   done
   [ "$public_valid" -eq 1 ] \
-    || die "de publiek teruggelezen SHA256SUMS en handtekening verifiëren niet — meld de release niet als getekend en hervat pas nadat geen workflow meer schrijft."
-  log "SHA256SUMS.minisig aangehangen en publiek geverifieerd voor release $TAG."
+    || die "de publiek teruggelezen SHA256SUMS en handtekening verifiëren niet na publicatie — onderzoek en hervat pas nadat geen workflow meer schrijft."
 
-  STEP="website bewaken"
-  # In --resume is er geen fase-2-snapshot; haal er dan vers een op voor deze tag.
-  local snap3="${snap:-}"
-  if [ -z "$snap3" ]; then
-    snap3="$(release_ci_snapshot 2>/dev/null | cut -d'|' -f1,2 | sort -u || true)"
-  fi
-  if printf '%s\n' "$snap3" | grep -q 'Website-downloads'; then
-    if printf '%s\n' "$snap3" | grep -q '^failure|Website-downloads'; then
-      log "LET OP: de website-downloads-job faalde — werk de librekat.nl-downloadpagina"
-      log "handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
-    else
-      log "Website-downloads-job groen."
-    fi
-  fi
+  STEP="website-downloads aansturen"
+  # De website-downloads-job staat sinds #2311 in een eigen workflow: hij leest
+  # publieke release-URL's, en die bestaan pas nu. Dispatch hem op de tag —
+  # faalt de dispatch zelf, dan beslist de publieke naconditie hieronder alsnog.
+  case "$TAG" in
+    *-*)
+      log "Prerelease $TAG: website-downloads wordt niet bijgewerkt." ;;
+    *)
+      api POST "/actions/workflows/website-downloads.yml/dispatches" \
+        -H 'Content-Type: application/json' \
+        -d "{\"ref\":\"$TAG\"}" -o /dev/null \
+        && log "website-downloads-workflow gedispatcht op $TAG." \
+        || log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+      ;;
+  esac
 
   # De website-repo publiceert asynchroon na de bovenstaande job. Wacht daarom
   # begrensd op de publieke naconditie. Status 0 van beide workflows is niet

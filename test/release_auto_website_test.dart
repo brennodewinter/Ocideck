@@ -79,10 +79,10 @@ api() {
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
       ;;
     'GET /actions/runs/900/jobs')
-      printf '%s\\n' '[{"name":"Website-downloads bijwerken","status":"success","id":1,"attempt":1}]'
+      printf '%s\\n' '[{"name":"Release publiceren","status":"success","id":1,"attempt":1}]'
       ;;
     'GET /releases/41/assets')
-      printf '%s\\n' '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS"}]'
+      printf '%s\\n' '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"name":"SHA256SUMS.minisig","browser_download_url":"https://dl.invalid/x/SHA256SUMS.minisig"}]'
       ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41}' ;;
     POST\\ /releases/41/assets?name=SHA256SUMS.minisig.new.*)
@@ -131,7 +131,10 @@ printf 'DOOR\\n'
       final output = '${result.stdout}\n${result.stderr}';
 
       expect(result.exitCode, isNot(0), reason: output);
-      expect(output, contains('Website-downloads-job groen.'));
+      expect(
+        output,
+        contains('website-downloads-workflow gedispatcht op v9.9.9.'),
+      );
       expect(output, contains('v9.9.8'));
       expect(output, contains('in plaats van v9.9.9'));
       expect(output, contains('--resume v9.9.9'));
