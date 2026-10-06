@@ -1117,6 +1117,42 @@ assert_appimagetool_pin() {
   die "appimagetool-pin verouderd: vastgelegd $sha, officiële asset-digest $official. Upstream verving de rollende 'continuous'-asset — precies wat release-run 5479/job 23681 ná de tag brak (#2324). Herstel na herkomstcontrole van de nieuwe asset: (1) beoordeel de release met 'curl -s $(appimagetool_release_api "$url")' (velden assets[].digest en .updated_at); (2) zet 'APPIMAGETOOL_SHA256: $official' in .forgejo/workflows/release.yml; (3) commit op main en draai de release opnieuw. Niets gemuteerd."
 }
 
+# Bepaalt read-only welke capaciteiten een --resume nog nodig heeft (#2303):
+#   need_mirror — de tag staat nog niet op de mirror (ensure_mirror_tag pusht 'm)
+#   need_deploy — de webdemo draait de nieuwe versie nog niet (deploy-web loopt)
+#   need_sign   — de release mist nog een geldige minisign-handtekening
+# Een onleesbare toestand laat de vlag op 1 staan: onbekend is niet afwezig.
+# Zo bereikt een al live en getekende release het websiteherstel zónder een
+# werkende deploy-host of de minisign-privésleutel.
+resume_capability_needs() {
+  local live rc=0
+  live="$(live_web_version || true)"
+  [ -n "${NEW_VERSION:-}" ] && [ "$live" = "$NEW_VERSION" ] && need_deploy=0
+  remote_tag_commit mirror >/dev/null 2>&1 || rc=$?
+  case "$rc" in
+    0) need_mirror=0 ;;
+    1) : ;;  # de tag ontbreekt: ensure_mirror_tag pusht 'm — capaciteit nodig
+    *) die "kon de mirror-tagstatus van $TAG niet lezen — onbekend is niet afwezig." ;;
+  esac
+  # Klopt de combinatie manifest + handtekening al? Lees via de API
+  # (draft-proof, #2311). Bestaat de release niet of mist er een asset, dan
+  # komt het tekenen nog — de capaciteit blijft nodig.
+  local rid sums_url sig_url t
+  rid="$(api GET "/releases/tags/$TAG" 2>/dev/null | jq -er '.id' 2>/dev/null)" \
+    || return 0
+  sums_url="$(release_asset_url "$rid" SHA256SUMS)"
+  sig_url="$(release_asset_url "$rid" SHA256SUMS.minisig)"
+  [ -n "$sums_url" ] && [ -n "$sig_url" ] || return 0
+  t="$(mktemp -d)"
+  if download_release_asset "$sums_url" "$t/sums" \
+      && download_release_asset "$sig_url" "$t/sig" \
+      && minisign -Vm "$t/sums" -x "$t/sig" \
+        -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1; then
+    need_sign=0
+  fi
+  rm -rf "$t"
+}
+
 # ── #7 Pre-flight: alles wat later onherroepelijk nodig is, nú toetsen ──────────
 # Vandaag brak de keten pas ná de tag op stappen die vooraf toetsbaar waren
 # (deploy-ssh, de handtekening). Deze functie faalt vóór elke mutatie.
@@ -1132,42 +1168,56 @@ preflight() {
     || die "kon de native-assets-cache niet beoordelen (scripts/prune_stale_hook_cache.sh) — zie hierboven. Niets gemuteerd."
   api GET "" -o /dev/null \
     || die "forge-token werkt niet tegen $REPO_SLUG (keychain '$TOKEN_KEYCHAIN_SERVICE')."
-  git ls-remote mirror >/dev/null 2>&1 \
-    || die "mirror-remote onbereikbaar — de Windows-build op de spiegel hangt eraan."
-  # Bereikbaar alleen is niet genoeg: v0.6.12 werd keurig naar een oude VPS
-  # geschreven nadat DNS naar zijn opvolger was verhuisd. `index.html` was
-  # toevallig bytegelijk, zodat pas SHA256SUMS na de tag het verkeerde doel
-  # ontdekte. Vergelijk daarom vóór de tag het publieke IPv4-adres met de
-  # adressen die de SSH-host zelf draagt. De referentiehosting is rechtstreeks;
-  # een inzet met proxy/CDN moet deze poort bewust passend maken.
-  local deploy_host_ips live_ip
-  deploy_host_ips="$(ssh -o BatchMode=yes -o ConnectTimeout=8 \
-    "$DEPLOY_HOST" 'command -v flock python3 sudo tar >/dev/null && sudo -n true && python3 -c '\''import ctypes; assert hasattr(ctypes.CDLL(None), "renameat2")'\'' && hostname -I' 2>/dev/null)" \
-    || die "deploy-host $DEPLOY_HOST mist bereikbaarheid, flock, python3, sudo, tar of atomaire renameat2 — deploy-web zou ná de tag stranden."
-  [ -n "$deploy_host_ips" ] \
-    || die "deploy-host $DEPLOY_HOST meldt geen eigen IP-adressen — niet bewijsbaar dat hij $DEPLOY_URL bedient."
-  live_ip="$(curl -4 -fsS --max-time 15 -o /dev/null -w '%{remote_ip}' \
-    "$DEPLOY_URL/version.json")" \
-    || die "publieke webdemo $DEPLOY_URL niet bereikbaar — deploydoel vóór de tag niet verifieerbaar."
-  case " $deploy_host_ips " in
-    *" $live_ip "*) ;;
-    *) die "deploy-host $DEPLOY_HOST draagt [$deploy_host_ips], maar $DEPLOY_URL gaat naar $live_ip — deploy-web zou naar de verkeerde server schrijven." ;;
-  esac
+  # Bij --resume is een deel van de keten al af en de bijbehorende capaciteit
+  # overbodig (#2303): een live webdemo vraagt geen deploy-SSH, een geldige
+  # handtekening geen privésleutel, een al gepushte mirror-tag geen mirror.
+  # Read-only bepaald; een onleesbare toestand laat de vlag aan (fail-closed).
+  local need_mirror=1 need_deploy=1 need_sign=1
+  if [ -n "$RESUME_TAG" ]; then
+    resume_capability_needs
+  fi
+  if [ "$need_mirror" -eq 1 ]; then
+    git ls-remote mirror >/dev/null 2>&1 \
+      || die "mirror-remote onbereikbaar — de Windows-build op de spiegel hangt eraan."
+  fi
+  if [ "$need_deploy" -eq 1 ]; then
+    # Bereikbaar alleen is niet genoeg: v0.6.12 werd keurig naar een oude VPS
+    # geschreven nadat DNS naar zijn opvolger was verhuisd. `index.html` was
+    # toevallig bytegelijk, zodat pas SHA256SUMS na de tag het verkeerde doel
+    # ontdekte. Vergelijk daarom vóór de tag het publieke IPv4-adres met de
+    # adressen die de SSH-host zelf draagt. De referentiehosting is rechtstreeks;
+    # een inzet met proxy/CDN moet deze poort bewust passend maken.
+    local deploy_host_ips live_ip
+    deploy_host_ips="$(ssh -o BatchMode=yes -o ConnectTimeout=8 \
+      "$DEPLOY_HOST" 'command -v flock python3 sudo tar >/dev/null && sudo -n true && python3 -c '\''import ctypes; assert hasattr(ctypes.CDLL(None), "renameat2")'\'' && hostname -I' 2>/dev/null)" \
+      || die "deploy-host $DEPLOY_HOST mist bereikbaarheid, flock, python3, sudo, tar of atomaire renameat2 — deploy-web zou ná de tag stranden."
+    [ -n "$deploy_host_ips" ] \
+      || die "deploy-host $DEPLOY_HOST meldt geen eigen IP-adressen — niet bewijsbaar dat hij $DEPLOY_URL bedient."
+    live_ip="$(curl -4 -fsS --max-time 15 -o /dev/null -w '%{remote_ip}' \
+      "$DEPLOY_URL/version.json")" \
+      || die "publieke webdemo $DEPLOY_URL niet bereikbaar — deploydoel vóór de tag niet verifieerbaar."
+    case " $deploy_host_ips " in
+      *" $live_ip "*) ;;
+      *) die "deploy-host $DEPLOY_HOST draagt [$deploy_host_ips], maar $DEPLOY_URL gaat naar $live_ip — deploy-web zou naar de verkeerde server schrijven." ;;
+    esac
+  fi
   # De appimagetool-pin hoort hier: de Linux-job toetst de download aan deze
   # hash, en voor de v0.6.14-tag bleek de pin verouderd pas ná de onomkeerbare
   # push (#2324). Toetsen nu kost seconden; toen kostte het een releaserun.
   assert_appimagetool_pin
-  # Proef-tekening: valideert sleutel én wachtwoord vóór de lange build/tag,
-  # zodat een fout wachtwoord niet pas aan het eind (na de tag) opduikt.
-  local t; t="$(mktemp -d)"
-  printf 'preflight\n' >"$t/probe"
-  printf '%s\n' "$MINISIGN_PW" \
-    | make sign-release SHA256SUMS="$t/probe" >/dev/null 2>&1 || true
-  if [ ! -f "$t/probe.minisig" ]; then
+  if [ "$need_sign" -eq 1 ]; then
+    # Proef-tekening: valideert sleutel én wachtwoord vóór de lange build/tag,
+    # zodat een fout wachtwoord niet pas aan het eind (na de tag) opduikt.
+    local t; t="$(mktemp -d)"
+    printf 'preflight\n' >"$t/probe"
+    printf '%s\n' "$MINISIGN_PW" \
+      | make sign-release SHA256SUMS="$t/probe" >/dev/null 2>&1 || true
+    if [ ! -f "$t/probe.minisig" ]; then
+      rm -rf "$t"
+      die "minisign proef-tekening faalde — sleutelwachtwoord fout of sleutel ontbreekt. Niets gemuteerd."
+    fi
     rm -rf "$t"
-    die "minisign proef-tekening faalde — sleutelwachtwoord fout of sleutel ontbreekt. Niets gemuteerd."
   fi
-  rm -rf "$t"
   if [ -z "$RESUME_TAG" ]; then
     # macOS-ondertekening + notarisatie zijn alleen voor fase 1 (een verse build)
     # nodig. Toets identiteit én notary-profiel nu, vóór de ~10 min build — niet pas
@@ -1179,7 +1229,15 @@ preflight() {
     fi
     log "Pre-flight groen: forge-token, mirror, deploy-host, minisign en macOS-ondertekening kloppen."
   else
-    log "Pre-flight groen: forge-token, mirror, deploy-host en minisign kloppen."
+    local skipped=""
+    [ "$need_mirror" -eq 0 ] && skipped="$skipped mirror"
+    [ "$need_deploy" -eq 0 ] && skipped="$skipped deploy-host"
+    [ "$need_sign" -eq 0 ] && skipped="$skipped minisign"
+    if [ -n "$skipped" ]; then
+      log "Pre-flight groen: alleen de open capaciteiten getoetst (overgeslagen:${skipped} — die stappen zijn al af)."
+    else
+      log "Pre-flight groen: forge-token, mirror, deploy-host en minisign kloppen."
+    fi
   fi
 }
 

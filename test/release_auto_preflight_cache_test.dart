@@ -92,6 +92,8 @@ set -uo pipefail
 STEP=test
 ROOT_DIR='${root.path}'
 RESUME_TAG=v9.9.9
+TAG=v9.9.9
+NEW_VERSION=9.9.9
 REPO_SLUG=LibreKAT/Ocideck
 TOKEN_KEYCHAIN_SERVICE=test
 DEPLOY_HOST=deploy.invalid
