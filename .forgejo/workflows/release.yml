@@ -512,6 +512,10 @@ jobs:
             "ocideck-windows-x64-$VERSIE.zip"
             "ocideck-windows-x64-setup-$VERSIE.exe"
           )
+          # Het cohortattest (#2313): de spiegel schrijft per run tagcommit,
+          # run-id en beide sha256's. Het paar geldt pas als alles klopt — een
+          # halve upload uit twee pogingen is daarmee nooit een cohort.
+          COHORT="ocideck-windows-cohort-$VERSIE.json"
           REPO="brennodewinter/Ocideck"
           API="https://api.github.com/repos/$REPO"
 
@@ -520,10 +524,25 @@ jobs:
           # hangen, en de 45-minutenlus hieronder telt pogingen, geen tijd.
           have_asset() {
             local f
-            for f in "${BESTANDEN[@]}"; do
+            for f in "${BESTANDEN[@]}" "$COHORT"; do
               curl -fsSLo "$f" --connect-timeout 15 --max-time 300 \
                 "https://github.com/$REPO/releases/download/$TAG/$f" 2>/dev/null || return 1
             done
+          }
+          # Accepteer het paar alleen als het attest één en hetzelfde cohort
+          # beschrijft: onze tagcommit, de nieuwste spiegelrun (alleen te
+          # controleren mét dispatch-token) en de sha256 van beide gedownloade
+          # bestanden. Een halve upload — zip vervangen, installer of attest
+          # nog oud — faalt hier en wordt nooit meegenomen naar SHA256SUMS.
+          verify_cohort() {
+            local rid="${1:-}" z e
+            z="$(sha256sum "${BESTANDEN[0]}" | cut -d' ' -f1)"
+            e="$(sha256sum "${BESTANDEN[1]}" | cut -d' ' -f1)"
+            jq -e --arg commit "$GITHUB_SHA" --arg z "$z" --arg e "$e" --arg rid "$rid" \
+              '.tag_commit == $commit
+               and .sha256.zip == $z and .sha256.installer == $e
+               and ($rid == "" or .run_id == ($rid | tonumber))' \
+              "$COHORT" >/dev/null
           }
           gh_api() { curl -fsS --connect-timeout 15 --max-time 60 \
             -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
@@ -531,12 +550,13 @@ jobs:
           dispatch() { gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
             -d "{\"ref\":\"$TAG\"}"; }
           # Laatste run van de Windows-workflow op DEZE tag:
-          # "status conclusion url created_at". De created_at rijdt mee omdat
-          # de conclusie alleen iets zegt over DEZE poging als de run ook bij
-          # deze poging hoort — zie de T0-vergelijking in de lus.
+          # "status conclusion url created_at run_id". De created_at rijdt mee
+          # omdat de conclusie alleen iets zegt over DEZE poging als de run ook
+          # bij deze poging hoort — zie de T0-vergelijking in de lus. De run-id
+          # is voor de cohortcontrole: het paar moet uit precies die run komen.
           run_status() { gh_api "$API/actions/workflows/release.yml/runs?per_page=10" \
             | jq -r --arg t "$TAG" 'first(.workflow_runs[] | select(.head_branch==$t))
-                // {} | "\(.status // "") \(.conclusion // "") \(.html_url // "") \(.created_at // "")"'; }
+                // {} | "\(.status // "") \(.conclusion // "") \(.html_url // "") \(.created_at // "") \(.id // "")"'; }
 
           # Het anker voor "hoort die run bij deze poging". Ruim vóór de
           # dispatch genomen, met vijf minuten marge omdat een run die de
@@ -546,9 +566,15 @@ jobs:
             || date -u -v-5M +%Y-%m-%dT%H:%M:%SZ)"
 
           # #2 idempotent: staat het asset er al (push-event vuurde wél, of een
-          # eerdere run), dan zijn we meteen klaar.
+          # eerdere run), dan zijn we meteen klaar — mits het paar aantoonbaar
+          # uit één cohort komt (#2313). Een gemengd paar weigeren en doorvallen
+          # naar de lus: de spiegel kan op dat moment een verse upload doen.
           if have_asset; then
-            echo "Assets stonden er al: $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
+            info="$(run_status || true)"; rid="$(printf '%s' "$info" | awk '{print $5}')"
+            if verify_cohort "$rid"; then
+              echo "Assets stonden er al: $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
+            fi
+            echo "Aanwezige bestanden vormen geen coherent cohort — wachten op een verse upload."
           fi
 
           if [ -z "${GH_DISPATCH_TOKEN:-}" ]; then
@@ -569,16 +595,23 @@ jobs:
           # ~5 min geen run zichtbaar is; faal meteen (met run-URL) als de build faalt.
           LAST_URL=""
           for POGING in $(seq 1 45); do
-            if have_asset; then
-              echo "Opgehaald na $POGING minuut/minuten: $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
-            fi
+            rid=""
             if [ -n "${GH_DISPATCH_TOKEN:-}" ]; then
               info="$(run_status || true)"
               st="$(printf '%s' "$info" | awk '{print $1}')"
               cc="$(printf '%s' "$info" | awk '{print $2}')"
               LAST_URL="$(printf '%s' "$info" | awk '{print $3}')"
               created="$(printf '%s' "$info" | awk '{print $4}')"
+              rid="$(printf '%s' "$info" | awk '{print $5}')"
               echo "[$POGING] run: ${st:-<geen>} ${cc:-} ${LAST_URL:-} ${created:-}"
+            fi
+            if have_asset; then
+              if verify_cohort "$rid"; then
+                echo "Opgehaald na $POGING minuut/minuten (cohort geverifieerd): $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
+              fi
+              echo "[$POGING] bestanden aanwezig maar niet één coherent cohort — halve upload? Verder wachten."
+            fi
+            if [ -n "${GH_DISPATCH_TOKEN:-}" ]; then
               if [ "$POGING" -eq 5 ] && { [ -z "$st" ] || [ "$st" = "null" ]; }; then
                 echo "Nog geen run zichtbaar — opnieuw dispatchen."; dispatch || true
               fi
@@ -608,7 +641,7 @@ jobs:
             fi
             sleep 60
           done
-          echo "Na 45 minuten stonden ${BESTANDEN[*]} er nog niet op $TAG (laatste run: ${LAST_URL:-onbekend})." >&2
+          echo "Na 45 minuten geen coherent cohort op $TAG (laatste run: ${LAST_URL:-onbekend})." >&2
           echo "Hertrigger deze release-workflow zodra de Windows-build groen is." >&2
           exit 1
 

@@ -19,6 +19,11 @@ All notable changes to OciDeck are documented in this file.
   die leesbaar blijkt zónder ons resultaat, volgt een nieuwe schrijver. De run
   meldt nu expliciet of iets een timeout was, een bevestigde mislukking, of dat
   de externe toestand onbekend bleef.
+- De **Windows-releaseketen** (#2313) publiceert nu een cohortattest naast zip
+  en installer: tagcommit, run-id en beide sha256's. De forge accepteert het
+  paar alleen als dat attest klopt — een halve upload uit twee pogingen (zip
+  vervangen, installer nog oud) werd voorheen op naam alleen al aangenomen en
+  kon zo een incoherent paar met een vers SHA256SUMS de release in.
 - De **Windows-workflow** (#2314) beproeft de installer nu functioneel vóór
   publicatie: stille per-gebruiker-installatie in een schone tijdelijke map,
   controle op payload en bestandsassociaties, een startproef van de app, en een

@@ -312,6 +312,17 @@ jobs:
           for f in "${BESTANDEN[@]}"; do
             [ -f "$f" ] || { echo "Verwacht bestand ontbreekt: $f" >&2; exit 1; }
           done
+          # Cohortattest (#2313): één bestand dat bewijst dat zip en installer
+          # uit DEZE run komen — tagcommit, run-id en beide sha256's. De forge
+          # accepteert het paar alleen als dit klopt; een halve upload (de zip
+          # vervangen, de installer niet) kan dan nooit als één cohort gelden.
+          jq -n --arg commit "$GITHUB_SHA" --argjson run "$GITHUB_RUN_ID" \
+            --arg zip "$(sha256sum "${BESTANDEN[0]}" | cut -d' ' -f1)" \
+            --arg installer "$(sha256sum "${BESTANDEN[1]}" | cut -d' ' -f1)" \
+            '{tag_commit: $commit, run_id: $run,
+              sha256: {zip: $zip, installer: $installer}}' \
+            > "ocideck-windows-cohort-$VERSIE.json"
+          BESTANDEN+=("ocideck-windows-cohort-$VERSIE.json")
           # Mét releasetekst en niet stilzwijgend: wie hier via een zoekmachine
           # binnenkomt moet meteen zien dat dit één platform is en waar de rest
           # staat. Bestaat de release al (hertrigger), dan de bestanden alleen
@@ -326,10 +337,12 @@ jobs:
           SBOM and \`SHA256SUMS\` — is published there:
           <https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/tag/$GITHUB_REF_NAME>
 
-          Two files: \`ocideck-windows-x64-$VERSIE.zip\` (unpack and run, nothing
-          is installed) and \`ocideck-windows-x64-setup-$VERSIE.exe\` (an
+          Two downloads: \`ocideck-windows-x64-$VERSIE.zip\` (unpack and run,
+          nothing is installed) and \`ocideck-windows-x64-setup-$VERSIE.exe\` (an
           installer with a Start menu shortcut, file associations and a clean
-          uninstall). Neither updates itself.
+          uninstall). Neither updates itself. The \`ocideck-windows-cohort-*\`
+          JSON is not a download — it attests to the forge that the two files
+          came from this exact build run.
 
           Both are unsigned, so SmartScreen will warn: choose **More info**
           → **Run anyway**. Verify your download against \`SHA256SUMS\` in the
