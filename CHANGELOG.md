@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **website-synchronisatie** (#2302) wordt ná publicatie afzonderlijk
+  gevolgd: `release_auto.sh` start nooit een tweede website-downloads-run
+  naast een nog actieve externe deploy en volgt een draaiende run verder.
+  Verloopt de begrensde wacht op de publieke downloadpagina, dan beslist de
+  run-toestand het verdict — een lopende deploy is expliciet "loopt nog" en
+  nooit "verkeerde host", een gefaalde run krijgt het handmatige
+  fallback-advies, en alleen een groene run mét achterlopende pagina wijst
+  naar de DNS/host-controle.
 - De **releasepreflight onder `--resume`** (#2303) toetst alleen nog de
   capaciteiten die de open stappen vragen: read-only bepaald welke van
   deploy-host, mirror en minisign nog nodig zijn. Een release waarvan de

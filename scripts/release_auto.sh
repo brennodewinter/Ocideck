@@ -1498,16 +1498,39 @@ phase3() {
   STEP="website-downloads aansturen"
   # De website-downloads-job staat sinds #2311 in een eigen workflow: hij leest
   # publieke release-URL's, en die bestaan pas nu. Dispatch hem op de tag —
-  # faalt de dispatch zelf, dan beslist de publieke naconditie hieronder alsnog.
+  # maar nooit naast een nog actieve run: een tweede publicatie naast een
+  # levende externe deploy is een tweede schrijver (#2302). Een leesbare
+  # eerdere run die klaar is bepaalt of dispatchen überhaupt nodig is; alleen
+  # een terminale mislukking rechtvaardigt opnieuw aansturen.
   case "$TAG" in
     *-*)
       log "Prerelease $TAG: website-downloads wordt niet bijgewerkt." ;;
     *)
-      api POST "/actions/workflows/website-downloads.yml/dispatches" \
-        -H 'Content-Type: application/json' \
-        -d "{\"ref\":\"$TAG\"}" -o /dev/null \
-        && log "website-downloads-workflow gedispatcht op $TAG." \
-        || log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+      local wrun wrc=0
+      wrun="$(latest_workflow_run website-downloads.yml "$TAG" 2>/dev/null)" || wrc=$?
+      if [ "$wrc" -ne 0 ]; then
+        log "LET OP: kon de website-downloads-runs niet lezen — geen nieuwe dispatch terwijl een actieve deploy niet uit te sluiten is; de publieke naconditie hieronder beslist."
+      elif [ -z "$wrun" ]; then
+        api POST "/actions/workflows/website-downloads.yml/dispatches" \
+          -H 'Content-Type: application/json' \
+          -d "{\"ref\":\"$TAG\"}" -o /dev/null \
+          && log "website-downloads-workflow gedispatcht op $TAG." \
+          || log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+      else
+        case "${wrun#*|}" in
+          success)
+            log "website-downloads voor $TAG is al groen — dispatch overgeslagen." ;;
+          failure|cancelled|skipped|error)
+            api POST "/actions/workflows/website-downloads.yml/dispatches" \
+              -H 'Content-Type: application/json' \
+              -d "{\"ref\":\"$TAG\"}" -o /dev/null \
+              && log "eerdere website-downloads-run was terminaal-rood; opnieuw gedispatcht op $TAG." \
+              || log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+            ;;
+          *)
+            log "website-downloads-run ${wrun%%|*} is nog actief — geen tweede publicatie; hij wordt hieronder gevolgd." ;;
+        esac
+      fi
       ;;
   esac
 
@@ -1515,18 +1538,37 @@ phase3() {
   # begrensd op de publieke naconditie. Status 0 van beide workflows is niet
   # genoeg: v0.6.11 t/m v0.6.13 werden groen naar een nieuwe VPS gekopieerd,
   # terwijl librekat.nl via DNS nog de oude VPS en v0.6.10 bediende.
-  local website_version="" website_live=0
-  for _ in $(seq 1 24); do
-    website_version="$(live_website_version || true)"
-    if website_has_expected_downloads; then
-      website_live=1
-      break
+  # Prereleases raken de productiesite bewust niet — die wacht is er niet.
+  if [[ "$TAG" != *-* ]]; then
+    local website_version="" website_live=0
+    for _ in $(seq 1 24); do
+      website_version="$(live_website_version || true)"
+      if website_has_expected_downloads; then
+        website_live=1
+        break
+      fi
+      sleep 15
+    done
+    if [ "$website_live" -eq 0 ]; then
+      # Een nog lopende of onleesbare externe deploy is géén mislukking van de
+      # release — nooit als "verkeerde host" presenteren, en er staat bewust
+      # geen tweede publicatie naast (#2302).
+      local wrun_after wst=""
+      wrun_after="$(latest_workflow_run website-downloads.yml "$TAG" 2>/dev/null || true)"
+      [ -n "$wrun_after" ] && wst="${wrun_after#*|}"
+      case "$wst" in
+        success)
+          die "de website-downloads-run claimt groen, maar $WEBSITE_URL toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG — controleer naar welke host librekat.nl wijst, publiceer de website daar en hervat: scripts/release_auto.sh --resume $TAG" ;;
+        failure|cancelled|skipped|error)
+          die "de website-downloads-run faalde (run ${wrun_after%%|*}, status $wst) — werk de downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite) en hervat: scripts/release_auto.sh --resume $TAG" ;;
+        "")
+          die "geen website-downloads-run voor $TAG te vinden en $WEBSITE_URL toont niet de release — de dispatch is onzeker; onderzoek de workflow en hervat: scripts/release_auto.sh --resume $TAG" ;;
+        *)
+          die "de externe website-deploy voor $TAG loopt nog (run ${wrun_after%%|*}) — dat is géén mislukking en er is geen tweede publicatie gestart; kom terug met: scripts/release_auto.sh --resume $TAG" ;;
+      esac
     fi
-    sleep 15
-  done
-  [ "$website_live" -eq 1 ] \
-    || die "de website-jobs zijn klaar, maar $WEBSITE_URL toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG — controleer naar welke host librekat.nl wijst, publiceer de website daar en hervat: scripts/release_auto.sh --resume $TAG"
-  log "Publieke downloadpagina gecontroleerd: $WEBSITE_URL verwijst naar $TAG."
+    log "Publieke downloadpagina gecontroleerd: $WEBSITE_URL verwijst naar $TAG."
+  fi
 }
 
 # Fase 3 bouwt de webdemo vanaf de tag en laat de werkboom dus op een losse HEAD
