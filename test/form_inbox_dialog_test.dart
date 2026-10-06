@@ -88,15 +88,25 @@ class _Picks {
 /// Echte bestands-I/O loopt niet af binnen de nep-klok van een widgettest; geef
 /// haar echte tijd, beeld voor beeld, tot [until] er is. (`pumpAndSettle` is hier
 /// geen optie: de voortgangsbalk blijft bewegen en het wachten zou nooit eindigen.)
-Future<void> settleIo(WidgetTester tester, Finder until) => pumpUntil(
+Future<void> settleIo(
+  WidgetTester tester,
+  Finder until, {
+  Duration timeout = const Duration(seconds: 10),
+}) => pumpUntil(
   tester,
   () => until.evaluate().isNotEmpty,
+  timeout: timeout,
   reason: 'wachtte op ${until.describeMatch(Plurality.one)}',
 );
 
-Future<void> tapAndWait(WidgetTester tester, Finder tap, Finder until) async {
+Future<void> tapAndWait(
+  WidgetTester tester,
+  Finder tap,
+  Finder until, {
+  Duration timeout = const Duration(seconds: 10),
+}) async {
   await tester.tap(tap);
-  await settleIo(tester, until);
+  await settleIo(tester, until, timeout: timeout);
 }
 
 void main() {
@@ -307,6 +317,10 @@ void main() {
         tester,
         text('Pakketten binnenhalen…'),
         containing('Inzendingen in de werkmap: 2'),
+        // Vier ZIP-bestanden doen echte bestands-I/O. Onder de volledige
+        // Linux-suite kan dat langer dan de algemene 10 s duren; de concrete
+        // UI-naconditie blijft leidend en de wacht blijft begrensd.
+        timeout: const Duration(seconds: 30),
       );
       expect(picks.titles.last, 'Kies de pakketten om binnen te halen');
       expect(text('goed.zip: binnengehaald.'), findsOneWidget);
