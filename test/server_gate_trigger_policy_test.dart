@@ -18,4 +18,22 @@ void main() {
       expect(trekkers.keys, equals(['workflow_dispatch']));
     });
   }
+
+  test('de Linux-poort draait de tests niet als root', () {
+    final workflow = File(
+      '.forgejo/workflows/linux-gate.yml',
+    ).readAsStringSync();
+
+    expect(workflow, contains('PUB_CACHE: /home/ubuntu/.pub-cache'));
+    expect(workflow, contains('chown -R ubuntu:ubuntu'));
+    expect(
+      workflow,
+      contains('/opt/flutter/packages/flutter_tools/.dart_tool'),
+    );
+    expect(workflow, contains('runuser --user ubuntu'));
+    expect(
+      workflow,
+      contains(r'key: dartcv-linux-${{ steps.dartcv.outputs.versie }}-uid1000'),
+    );
+  });
 }

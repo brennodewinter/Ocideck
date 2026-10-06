@@ -65,6 +65,16 @@ dev_dependencies:
     rootLicense: rootLicense,
   );
 
+  test('analysis bootstraps first-party package dependencies first', () {
+    final result = Process.runSync('make', ['-n', 'analyze']);
+    expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+    final output = result.stdout as String;
+    final bootstrap = output.indexOf('dart pub get --enforce-lockfile');
+    final analyze = output.indexOf('flutter analyze --fatal-infos');
+    expect(bootstrap, isNonNegative, reason: output);
+    expect(analyze, greaterThan(bootstrap), reason: output);
+  });
+
   test('a package that follows every rule is clean', () {
     writePackage('good_pkg');
     expect(problems(), isEmpty);

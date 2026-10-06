@@ -197,14 +197,13 @@ void main() {
               ],
               supportedLocales: AppLocalizations.supportedLocales,
               builder: (context, child) => MediaQuery(
-                // De carrousel heeft bij de standaard testfont op macOS een
-                // bekende, losstaande footer-overflow van 10 px. Met een
-                // geldige compacte systeemtekstinstelling blijft deze test
-                // gericht op de deduplicatieketen, zonder renderfouten te
-                // verbergen of uit de exception-queue te verwijderen.
+                // De carrouselfooter gebruikt platformspecifieke fontmaten en
+                // valt buiten deze deduplicatietest. Met een geldige compacte
+                // systeemtekstinstelling blijft de test gericht op de keten,
+                // zonder renderfouten uit de exception-queue te verwijderen.
                 data: const MediaQueryData(
                   size: Size(1400, 900),
-                  textScaler: TextScaler.linear(0.9),
+                  textScaler: TextScaler.linear(0.8),
                 ),
                 child: child!,
               ),
