@@ -1,4 +1,5 @@
 .PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: package-deps
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -143,7 +144,7 @@ format-check:
 # Static analysis. --fatal-infos makes info-level diagnostics fail the build too,
 # so the strict-casts/strict-raw-types/strict-inference modes in
 # analysis_options.yaml are actually enforced.
-analyze:
+analyze: package-deps
 	@echo "== OciDeck check: static analysis =="
 	@echo "Command: flutter analyze --fatal-infos"
 	@echo "Covers: analyzer/lint/type checks (incl. strict inference) for the app and tests."
@@ -779,6 +780,17 @@ PACKAGE_DIRS := $(patsubst %/pubspec.yaml,%,$(wildcard packages/*/pubspec.yaml))
 PACKAGE_COVERAGE_MIN ?= 90
 PACKAGE_PER_FILE_FLOOR ?= 60
 
+# Root analysis also scans first-party package tests, while their dev dependencies
+# do not belong to the root package graph. Resolve them explicitly so a clean gate
+# never depends on ignored packages/*/.dart_tool state from an earlier run.
+package-deps:
+	@echo "== OciDeck setup: first-party package dependencies =="
+	@echo "Command: dart pub get --enforce-lockfile in each packages/<name>."
+	@set -e; for p in $(PACKAGE_DIRS); do \
+	  echo "-- $$p"; \
+	  ( cd $$p && dart pub get --enforce-lockfile ); \
+	done
+
 # The reference `age` the interoperability test runs against (FORM_INTAKE.md §5.6, §12). Built from
 # source into `.dart_tool/` (not tracked) at a pinned version. It needs Go and the network, so it is
 # not part of `make check`: without the binary the test reports "NOT RUN" rather than passing.
@@ -800,9 +812,9 @@ test-age-interop:
 	  || { echo "the built age is not $(AGE_VERSION)"; exit 1; }
 	cd packages/ocideck_form_core && AGE_BIN=$(AGE_BIN_DIR)/age dart test test/form_seal_interop_test.dart
 
-test-packages:
+test-packages: package-deps
 	@echo "== OciDeck check: package tests =="
-	@echo "Command: dart pub get --enforce-lockfile && dart test --coverage in each packages/<name>,"
+	@echo "Command: dart test --coverage in each packages/<name> after package-deps,"
 	@echo "         then dart run tool/package_coverage.dart --min=$(PACKAGE_COVERAGE_MIN) --per-file-floor=$(PACKAGE_PER_FILE_FLOOR)"
 	@echo "Covers: the tests of every first-party package, in random order, plus its coverage floors:"
 	@echo "        the average, every lib/ file in a test, and a floor per file."
@@ -811,7 +823,6 @@ test-packages:
 	@set -e; for p in $(PACKAGE_DIRS); do \
 	  echo "-- $$p"; \
 	  ( cd $$p && rm -rf coverage \
-	    && dart pub get --enforce-lockfile \
 	    && dart test --test-randomize-ordering-seed random --coverage=coverage \
 	    && dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib --check-ignore ); \
 	  dart run tool/package_coverage.dart --package=$$p --min=$(PACKAGE_COVERAGE_MIN) --per-file-floor=$(PACKAGE_PER_FILE_FLOOR); \
