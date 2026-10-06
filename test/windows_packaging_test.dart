@@ -482,6 +482,102 @@ void main() {
       }
     });
 
+    // #2314: a compiling-but-broken installer (missing payload, wrong install
+    // location, dead binary, dirty uninstall) used to publish green. The smoke
+    // step runs the real installer on the Windows runner before the publish
+    // step — delete a check here and the corresponding failure mode ships again.
+    test('the mirror smoke-tests the installer before publishing it', () {
+      final smokeAt = mirrorYaml.indexOf(
+        '- name: "Smoke-test: installeren, starten, verwijderen"',
+      );
+      final publishAt = mirrorYaml.indexOf(
+        "- name: Publish to the mirror's release",
+      );
+      expect(
+        smokeAt,
+        greaterThan(-1),
+        reason: 'The smoke step is gone (#2314).',
+      );
+      expect(
+        smokeAt,
+        lessThan(publishAt),
+        reason:
+            'The publish step runs before the installer smoke-test — a broken '
+            'installer would ship again.',
+      );
+    });
+
+    test('the smoke step installs silently, per user, into a clean dir', () {
+      final smoke = RegExp(
+        r'- name: "Smoke-test: installeren, starten, verwijderen".*?(?=\n      - name:)',
+        dotAll: true,
+      ).firstMatch(mirrorYaml)!.group(0)!;
+      expect(
+        smoke,
+        contains('shell: pwsh'),
+        reason:
+            'The smoke step runs under bash — MSYS would rewrite /VERYSILENT '
+            'into a path and hang the job (v0.4.7-rc1).',
+      );
+      for (final flag in ['/VERYSILENT', '/SUPPRESSMSGBOXES', '/CURRENTUSER']) {
+        expect(
+          smoke,
+          contains(flag),
+          reason: 'The silent per-user install lost `$flag`.',
+        );
+      }
+      expect(smoke, contains('/DIR='), reason: 'No clean install location.');
+      // ExitCode must be checked: Start-Process -Wait returns the child but
+      // pwsh never throws on a native non-zero exit.
+      expect(
+        smoke,
+        contains(r'$p.ExitCode -ne 0'),
+        reason:
+            'The installer exit code is not checked — a failed install would '
+            'read as green.',
+      );
+    });
+
+    test('the smoke step checks payload, associations, start and uninstall', () {
+      final smoke = RegExp(
+        r'- name: "Smoke-test: installeren, starten, verwijderen".*?(?=\n      - name:)',
+        dotAll: true,
+      ).firstMatch(mirrorYaml)!.group(0)!;
+      // Payload: a missing file in the package must fail here.
+      for (final f in ['ocideck.exe', 'flutter_windows.dll', r'data\app.so']) {
+        expect(smoke, contains(f), reason: 'Payload check lost `$f`.');
+      }
+      // Associations: what the installer promises over the raw bundle.
+      expect(smoke, contains(r'HKCU:\Software\Classes\.ocideck'));
+      expect(smoke, contains('OciDeck.Package'));
+      // Start probe: a binary that dies at launch must not publish.
+      expect(
+        smoke,
+        contains('HasExited'),
+        reason: 'The app start probe is gone.',
+      );
+      // Uninstall: silent, and the directory plus ProgID must actually be gone.
+      expect(smoke, contains('unins000.exe'));
+      expect(
+        smoke,
+        contains(r'HKCU:\Software\Classes\OciDeck.Package'),
+        reason: 'The uninstall no longer proves the ProgID is removed.',
+      );
+    });
+
+    test('the installer allows the per-user command-line override', () {
+      // /CURRENTUSER in the smoke step is silently ignored unless the .iss
+      // declares `commandline` in PrivilegesRequiredOverridesAllowed — the
+      // probe would then install machine-wide while believing otherwise.
+      expect(
+        iss.contains('PrivilegesRequiredOverridesAllowed=dialog commandline'),
+        isTrue,
+        reason:
+            'The .iss no longer allows the `commandline` override, so the '
+            "smoke's /CURRENTUSER flag is ignored (#2314).",
+      );
+    });
+
     test(
       'the mirror installs Inno Setup without Git Bash, and waits for it',
       () {
