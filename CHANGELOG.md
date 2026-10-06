@@ -10,6 +10,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **releasepreflight onder `--resume`** (#2303) toetst alleen nog de
+  capaciteiten die de open stappen vragen: read-only bepaald welke van
+  deploy-host, mirror en minisign nog nodig zijn. Een release waarvan de
+  webdemo al live is en de handtekening al klopt bereikt het websiteherstel nu
+  zonder werkende deploy-SSH of privésleutel; een onleesbare toestand vraagt de
+  capaciteit wél (fail-closed).
 - De **releasepreflight** (#2308) leest vóór het wachtwoord read-only de
   nieuwste linux-gate-run op de huidige `origin/main`-geschiedenis. Staat die
   nachtelijke poort rood — zoals vier nachten vóór v0.6.14 — dan stopt de
