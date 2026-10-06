@@ -10,7 +10,7 @@ const _allowedUrlSchemes = {'https', 'http', 'mailto'};
 
 /// De hostpoort voor een `http(s)`-link uit een deck.
 ///
-/// Standaard [NetGuard.isAllowedMediaUrlResolved] — dezelfde poort waar een
+/// Standaard [NetGuard.isAllowedRemoteUrlResolved] — dezelfde poort waar een
 /// deck-afbeelding en een deck-video al doorheen gaan. Injecteerbaar zodat de
 /// tests hermetisch blijven: de echte poort doet een DNS-opzoeking, en een test
 /// die van het netwerk afhangt staat op een verkeerd moment rood.
@@ -41,7 +41,7 @@ Future<void> openExternalUrl(String url, {UrlHostGate? hostGate}) async {
   final scheme = uri.scheme.toLowerCase();
   if (!_allowedUrlSchemes.contains(scheme)) return;
   if (scheme != 'mailto') {
-    final allowed = await (hostGate ?? NetGuard.isAllowedMediaUrlResolved)(u);
+    final allowed = await (hostGate ?? NetGuard.isAllowedRemoteUrlResolved)(u);
     if (!allowed) {
       // Bewust zonder het adres: een deck-URL kan zelf een gegeven zijn.
       logWarning('openExternalUrl: host geweigerd door NetGuard');

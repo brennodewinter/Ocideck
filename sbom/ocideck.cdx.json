@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:e403403b-9542-577a-8d0e-6a4e6017b044",
+  "serialNumber": "urn:uuid:300bf4b3-351d-5879-8a56-5739b7876962",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-04T19:22:28.180051Z",
+    "timestamp": "2026-10-05T23:26:05.907170Z",
     "tools": {
       "components": [
         {
@@ -4463,6 +4463,53 @@
         {
           "name": "cdx:pub:scope",
           "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "git:network_guard@0.1.0",
+      "type": "library",
+      "supplier": {
+        "name": "pawprint.vigilis.online",
+        "url": [
+          "https://pawprint.vigilis.online"
+        ]
+      },
+      "name": "network_guard",
+      "version": "0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "EUPL-1.2"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:resolved-revision",
+          "value": "7bdf60067a3d6701ac5bf98032449ab56961ce4f"
+        },
+        {
+          "name": "ocideck:package-subpath",
+          "value": "packages/network_guard"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: git."
         }
       ]
     },
@@ -9380,6 +9427,7 @@
         "git:app_appearance@0.1.0",
         "git:cnativeapi@0.1.4",
         "git:nativeapi@0.1.4",
+        "git:network_guard@0.1.0",
         "git:secret_storage@0.1.0",
         "pkg:npm/dompurify@3.4.16",
         "pkg:npm/highlight.js@11.11.1",
@@ -10326,6 +10374,12 @@
       "ref": "pkg:pub/nested@1.0.0",
       "dependsOn": [
         "sdk:flutter@0.0.0"
+      ]
+    },
+    {
+      "ref": "git:network_guard@0.1.0",
+      "dependsOn": [
+        "pkg:pub/crypto@3.0.7"
       ]
     },
     {

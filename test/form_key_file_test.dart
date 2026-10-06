@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/form/form_key_file.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/chmod_lock.dart';
 import 'support/temp_dir.dart';
 
 void main() {
@@ -90,6 +91,12 @@ void main() {
       final folder = Directory(p.join(dir.path, 'dicht'))..createSync();
       await Process.run('chmod', ['555', folder.path]);
       addTearDown(() => Process.run('chmod', ['755', folder.path]));
+      if (!chmodLockHoudt(folder.path)) {
+        // `chmod` houdt root niet tegen; de CI-container draait als root.
+        // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+        markTestSkipped('chmod heeft geen effect als root (CI-container)');
+        return;
+      }
       final path = p.join(folder.path, 'sleutel.txt');
       await expectLater(
         writeSecretFile(path, 'geheim'),

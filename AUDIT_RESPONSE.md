@@ -313,7 +313,7 @@ For **video** the window remains, and this is the honest part:
 its own connection, and there is no byte-level seam to pin. What is left is an
 internal GET whose response never reaches the app — no credentials travel, and
 the static-internal and resolves-to-internal cases are still refused. That
-residual now sits in the docstring of `isAllowedMediaUrlResolved` instead of a
+residual now sits in the docstring of `isAllowedRemoteUrlResolved` instead of a
 general remark that read as if it covered images too.
 
 ## AEG-05 — the nonce, and what it cannot do here

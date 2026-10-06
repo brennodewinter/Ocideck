@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// class of bug fixed in "Close SSRF on the live remote-media path": a network
 /// sink that turns a (possibly deck-supplied) URL into a request without going
 /// through `NetGuard`. New sinks must apply the guard:
-///   * a deck-supplied media URL → `NetGuard.isAllowedMediaUrlResolved` before
+///   * a deck-supplied media URL → `NetGuard.isAllowedRemoteUrlResolved` before
 ///     `NetworkImage` / `VideoPlayerController.networkUrl`;
 ///   * a raw `HttpClient` → `NetGuard.safeResolve(Trusted)` + socket pinning;
 ///   * any OTHER egress primitive — `package:http`, `package:dio`, `Socket`,
@@ -102,7 +102,10 @@ void main() {
     // De gepinde fetch achter guardedNetworkImage.
     'lib/services/webdav_service.dart': 0,
     'lib/services/s3/s3_service.dart': 0,
-    'lib/services/ai_client_service.dart': 1,
+    // Nul sinds de extractie: de AI-transport staat in het AppFoundation-
+    // package `network_guard` (PinnedAiHttpTransport), dit bestand maakt
+    // zelf geen HttpClient meer aan.
+    'lib/services/ai_client_service.dart': 0,
     'lib/services/cve_transport_io.dart': 0,
     // Twee: `getJson` en `download` openen elk hun eigen client, en beide laten
     // hem door `_get` pinnen — één keer per redirect-hop.
@@ -136,7 +139,7 @@ void main() {
       },
       guidance:
           'New remote-media fetch sink. Gate the URL on '
-          'NetGuard.isAllowedMediaUrlResolved before fetching, and add the file '
+          'NetGuard.isAllowedRemoteUrlResolved before fetching, and add the file '
           'to the allowlist:',
     );
   });
@@ -164,8 +167,10 @@ void main() {
         // écht bellen — bij virtual-hosted adressering zit de bucketnaam
         // daarin, dus die naam wordt geresolved, niet het kale endpoint.
         'lib/services/s3/s3_service.dart',
-        // AI backend: resolves per AiResolveStrategy (loopback-direct for local
-        // IPC, safeResolveTrusted for self-hosted, safeResolve for cloud) + pin.
+        // AI backend: de gepinde transport staat in het AppFoundation-
+        // package `network_guard` (PinnedAiHttpTransport). Deze entry blijft
+        // staan zodat een client die hier ooit terugkeert óók via die poort
+        // moet — afgemeten wordt het op de telling hieronder.
         'lib/services/ai_client_service.dart',
         // CVE lookup: NetGuard.safeResolve + socket pin + no-redirect + cap.
         'lib/services/cve_transport_io.dart',

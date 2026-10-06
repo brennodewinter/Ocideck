@@ -132,12 +132,12 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
     }
     // SSRF gate for a remote media URL: resolve the host and refuse an internal
     // target before VideoPlayerController.networkUrl, which would otherwise
-    // resolve+connect with no host check (see NetGuard.isAllowedMediaUrlResolved).
+    // resolve+connect with no host check (see NetGuard.isAllowedRemoteUrlResolved).
     // A URL resolved from the deck URL itself (mediaUrlIsDeckAsset) was already
     // inside that boundary — the user picked that host for the deck.
     if (VideoSource.looksLikeUrl(path) &&
         !mediaUrlIsDeckAsset(path) &&
-        !await NetGuard.isAllowedMediaUrlResolved(path)) {
+        !await NetGuard.isAllowedRemoteUrlResolved(path)) {
       if (gen != _initGen) return;
       _loadFailure = MediaLoadFailure.remoteRefused;
       if (mounted) setState(() {}); // keep the placeholder visible

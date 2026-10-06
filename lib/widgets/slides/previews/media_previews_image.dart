@@ -352,7 +352,7 @@ Widget _resolvedRemoteImage(
   // Een host die naar een intern adres wijst is een SSRF-poging. Daarom wordt
   // het netwerkbeeld pas gebouwd nadat de asynchrone DNS-controle slaagt.
   return FutureBuilder<bool>(
-    future: NetGuard.isAllowedMediaUrlResolved(imagePath),
+    future: NetGuard.isAllowedRemoteUrlResolved(imagePath),
     builder: (context, snapshot) {
       if (snapshot.connectionState != ConnectionState.done) {
         return _imagePlaceholder(context, ImagePlaceholderReason.noImage);

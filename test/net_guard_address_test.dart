@@ -68,19 +68,19 @@ void main() {
     });
   });
 
-  group('isAllowedMediaUrl — literal bracketed IPv6 host', () {
+  group('isAllowedRemoteUrl — literal bracketed IPv6 host', () {
     for (final url in [
       'http://[::ffff:127.0.0.1]/x',
       'http://[::ffff:169.254.169.254]/latest/meta-data/',
       'http://[64:ff9b::a9fe:a9fe]/x',
     ]) {
       test('rejects $url', () {
-        expect(NetGuard.isAllowedMediaUrl(url), isFalse);
+        expect(NetGuard.isAllowedRemoteUrl(url), isFalse);
       });
     }
 
     test('allows a public mapped host', () {
-      expect(NetGuard.isAllowedMediaUrl('http://[::ffff:8.8.8.8]/x'), isTrue);
+      expect(NetGuard.isAllowedRemoteUrl('http://[::ffff:8.8.8.8]/x'), isTrue);
     });
   });
 
@@ -123,7 +123,7 @@ void main() {
     });
   });
 
-  group('isAllowedMediaUrl — poort-allowlist', () {
+  group('isAllowedRemoteUrl — poort-allowlist', () {
     // De fetch-proxy begrensde de poort al (`ALLOWED_PORTS`), de Dart-kant
     // niet. Dat zijn de twee helften van dezelfde wacht — web haalt via de
     // proxy op, bureaublad rechtstreeks — dus een deck kon op het bureaublad
@@ -132,15 +132,18 @@ void main() {
     test(
       'een gewone URL zonder poort valt binnen de standaard van het schema',
       () {
-        expect(NetGuard.isAllowedMediaUrl('https://example.org/a.png'), isTrue);
-        expect(NetGuard.isAllowedMediaUrl('http://example.org/a.png'), isTrue);
+        expect(
+          NetGuard.isAllowedRemoteUrl('https://example.org/a.png'),
+          isTrue,
+        );
+        expect(NetGuard.isAllowedRemoteUrl('http://example.org/a.png'), isTrue);
       },
     );
 
     for (final port in [80, 443, 8080, 8443]) {
       test('staat poort $port toe', () {
         expect(
-          NetGuard.isAllowedMediaUrl('https://example.org:$port/a.png'),
+          NetGuard.isAllowedRemoteUrl('https://example.org:$port/a.png'),
           isTrue,
         );
       });
@@ -149,7 +152,7 @@ void main() {
     for (final port in [22, 25, 3306, 5432, 6379, 9200, 11211, 3000]) {
       test('weigert poort $port', () {
         expect(
-          NetGuard.isAllowedMediaUrl('https://example.org:$port/a.png'),
+          NetGuard.isAllowedRemoteUrl('https://example.org:$port/a.png'),
           isFalse,
         );
       });

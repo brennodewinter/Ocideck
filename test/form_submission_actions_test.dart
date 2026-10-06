@@ -11,6 +11,7 @@ import 'package:ocideck/services/form/form_workspace.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/chmod_lock.dart';
 import 'support/temp_dir.dart';
 
 const String kook = '''<!-- form id=kook version=1 overview="naam" -->
@@ -152,6 +153,12 @@ void main() {
       if (Platform.isWindows) return;
       await Process.run('chmod', ['555', workspace.root]);
       addTearDown(() => Process.run('chmod', ['755', workspace.root]));
+      if (!chmodLockHoudt(workspace.root)) {
+        // `chmod` houdt root niet tegen; de CI-container draait als root.
+        // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+        markTestSkipped('chmod heeft geen effect als root (CI-container)');
+        return;
+      }
       expect(
         await setSubmissionStatus(
           workspace,
@@ -326,6 +333,12 @@ void main() {
         // Alleen het register is niet te schrijven; de inzending zelf wel.
         await Process.run('chmod', ['555', workspace.root]);
         addTearDown(() => Process.run('chmod', ['755', workspace.root]));
+        if (!chmodLockHoudt(workspace.root)) {
+          // `chmod` houdt root niet tegen; de CI-container draait als root.
+          // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+          markTestSkipped('chmod heeft geen effect als root (CI-container)');
+          return;
+        }
         expect(
           await deleteSubmission(workspace, first),
           FormDeleteOutcome.deletedRegisterNotUpdated,
@@ -339,6 +352,12 @@ void main() {
       final folder = workspace.submissionPath(first);
       await Process.run('chmod', ['555', folder]);
       addTearDown(() => Process.run('chmod', ['755', folder]));
+      if (!chmodLockHoudt(folder)) {
+        // `chmod` houdt root niet tegen; de CI-container draait als root.
+        // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+        markTestSkipped('chmod heeft geen effect als root (CI-container)');
+        return;
+      }
       expect(
         await deleteSubmission(workspace, first),
         FormDeleteOutcome.failed,

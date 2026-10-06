@@ -12,6 +12,7 @@ import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/chmod_lock.dart';
 import 'support/form_key_vault.dart';
 import 'support/temp_dir.dart';
 
@@ -355,6 +356,12 @@ void main() {
       File(workspace.teamPath).writeAsStringSync(FormTeam([a]).toJsonText());
       await Process.run('chmod', ['555', workspace.root]);
       addTearDown(() => Process.run('chmod', ['755', workspace.root]));
+      if (!chmodLockHoudt(workspace.root)) {
+        // `chmod` houdt root niet tegen; de CI-container draait als root.
+        // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+        markTestSkipped('chmod heeft geen effect als root (CI-container)');
+        return;
+      }
       if (Platform.isWindows) return;
       expect(await removeFormEditor(workspace, a.kid), isA<FormTeamNotSaved>());
     });

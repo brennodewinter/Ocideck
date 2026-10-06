@@ -148,6 +148,13 @@ analyze:
 	@echo "Command: flutter analyze --fatal-infos"
 	@echo "Covers: analyzer/lint/type checks (incl. strict inference) for the app and tests."
 	@echo "Failure means: inspect analyzer diagnostics above the final summary."
+	@# De analyzer daalt af in packages/<name>/test, waar `package:test` uit diens
+	@# eigen pubspec komt. `flutter pub get` op de root schrijft die package_config
+	@# niet; zonder deze stap faalt analyze op elke machine die test-packages nog
+	@# niet heeft gedraaid — zoals de static/linux-gate-runners (#2309).
+	@set -e; for p in $(PACKAGE_DIRS); do \
+	  ( cd $$p && dart pub get --enforce-lockfile ); \
+	done
 	flutter analyze --fatal-infos
 
 # Gooit de incrementele kernelcache weg die `flutter test` zelf aanlegt, en

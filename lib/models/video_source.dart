@@ -142,7 +142,8 @@ class VideoSource {
 
   /// True when [url] is an `http(s)` URL that passes the insert-time SSRF gate.
   /// Used by the image fields, which accept either a local path or a URL.
-  static bool isAllowedRemoteUrl(String url) => NetGuard.isAllowedMediaUrl(url);
+  static bool isAllowedRemoteUrl(String url) =>
+      NetGuard.isAllowedRemoteUrl(url);
 
   /// True when [value] looks like an `http(s)` URL at all (scheme present),
   /// regardless of host — used to branch rendering between file and network.
