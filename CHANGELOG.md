@@ -10,6 +10,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **Windows-workflow** (#2314) beproeft de installer nu functioneel vóór
+  publicatie: stille per-gebruiker-installatie in een schone tijdelijke map,
+  controle op payload en bestandsassociaties, een startproef van de app, en een
+  stille de-installatie die niets achter mag laten. Een installer die wel
+  compileert maar niet bruikbaar installeert kan zo nooit meer groen de release
+  in. De .iss staat daarvoor nu ook de `commandline`-override toe (`/CURRENTUSER`).
 - De **releaseketen** (#2315) installeert en start de Linux-pakketten nu eerst in
   schone consumentimages — `.deb` en AppImage op kaal Ubuntu 24.04, `.rpm` op kaal
   Fedora 42 — met een `ldd`-linkcontrole en een Xvfb-startproef. Het bouw-image

@@ -213,6 +213,87 @@ jobs:
           mv "dist/ocideck-windows-x64-setup-$VERSIE.exe" "$GITHUB_WORKSPACE/"
           echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
 
+      # Functionele proef vóór publicatie (#2314): een installer die compileert
+      # maar niet installeert, niet start of troep achterlaat mag de release
+      # nooit bereiken — precies wat statische controles niet zien. De proef
+      # installeert stil als gewone gebruiker in een schone tijdelijke map,
+      # toetst payload en associaties, start de app, en verwijdert alles weer.
+      #
+      # pwsh en niet bash — dezelfde MSYS-reden als bij de Inno-installatie
+      # hierboven: onder Git Bash zou /VERYSILENT als pad aankomen en het
+      # venster zou op een runner nooit wegklikt worden (v0.4.7-rc1 hing er
+      # 1u52m op). En Start-Process -Wait -PassThru met een expliciete
+      # ExitCode-check: zonder die leest een mislukte installatie als geslaagd.
+      - name: "Smoke-test: installeren, starten, verwijderen"
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $setup = "$env:GITHUB_WORKSPACE\ocideck-windows-x64-setup-$env:VERSIE.exe"
+          if (-not (Test-Path $setup)) { throw "De gebouwde setup ontbreekt: $setup" }
+          $doel = Join-Path $env:TEMP "ocideck-smoke-$PID"
+
+          # 1. Stil installeren, per gebruiker (/CURRENTUSER — HKA-sleutels
+          #    landen dan in HKCU en de proef raakt niets machine-breeds).
+          $p = Start-Process -FilePath $setup -Wait -NoNewWindow -PassThru -ArgumentList `
+            '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', `
+            '/CURRENTUSER', "/DIR=`"$doel`""
+          if ($p.ExitCode -ne 0) {
+            throw "De installer faalde in stille modus (exit $($p.ExitCode))."
+          }
+          # setup.exe kan terugkeren zodra zijn uitgepakte kind draait; wacht
+          # tot de installatie aantoonbaar klaar is (de de-installer wordt als
+          # laatste geschreven).
+          $wacht = 0
+          while (-not (Test-Path "$doel\unins000.exe") -and $wacht -lt 120) {
+            Start-Sleep -Seconds 2; $wacht += 2
+          }
+
+          # 2. Payload en associaties: precies wat de installer belooft.
+          foreach ($f in @('ocideck.exe', 'flutter_windows.dll', 'data\app.so', 'unins000.exe')) {
+            if (-not (Test-Path "$doel\$f")) {
+              throw "Payload ontbreekt na installatie: $doel\$f"
+            }
+          }
+          $oc = Get-Item 'HKCU:\Software\Classes\.ocideck' -ErrorAction SilentlyContinue
+          if (-not $oc -or $oc.GetValue('') -ne 'OciDeck.Package') {
+            throw '.ocideck wijst na installatie niet naar OciDeck.Package.'
+          }
+          $md = Get-Item 'HKCU:\Software\Classes\.md\OpenWithProgids' -ErrorAction SilentlyContinue
+          if (-not $md -or ($md.GetValueNames() -notcontains 'OciDeck.Package')) {
+            throw '.md mist de "Openen met"-vermelding voor OciDeck.Package.'
+          }
+
+          # 3. Startproef: de app moet opkomen en draaien blijven. Een exe die
+          #    direct wegvalt (mismatched dll, ontbrekende payload) mag de
+          #    release nooit bereiken.
+          $app = Start-Process -FilePath "$doel\ocideck.exe" -PassThru
+          Start-Sleep -Seconds 15
+          $app.Refresh()
+          if ($app.HasExited) {
+            throw "ocideck.exe is binnen 15 s gestopt (exit $($app.ExitCode))."
+          }
+          Stop-Process -Id $app.Id -Force
+
+          # 4. Stil verwijderen en aantoonbaar schoon achterlaten. unins000.exe
+          #    retourneert vroeg (het echte werk doet een kindproces), dus pollen
+          #    tot de map weg is in plaats van op de exitstatus alleen te leunen.
+          $p = Start-Process -FilePath "$doel\unins000.exe" -Wait -NoNewWindow -PassThru -ArgumentList `
+            '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART'
+          if ($p.ExitCode -ne 0) {
+            throw "De de-installatie faalde (exit $($p.ExitCode))."
+          }
+          $wacht = 0
+          while ((Test-Path $doel) -and $wacht -lt 120) {
+            Start-Sleep -Seconds 2; $wacht += 2
+          }
+          if (Test-Path $doel) {
+            throw "De de-installatie liet $doel achter."
+          }
+          if (Test-Path 'HKCU:\Software\Classes\OciDeck.Package') {
+            throw 'De de-installatie liet de ProgID-sleutel achter.'
+          }
+          Write-Host "Smoke-test groen: $setup installeert, start en ruimt schoon op."
+
       - name: Publish to the mirror's release
         shell: bash
         env:

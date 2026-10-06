@@ -90,8 +90,11 @@ MinVersion=10.0
 ; but let someone without admin rights pick a per-user install instead. HKA in
 ; [Registry] and {autopf}/{autodesktop} above follow that choice automatically,
 ; which is why the same key list serves both.
+; `commandline` next to `dialog` so the release smoke-test can install with
+; /CURRENTUSER (#2314): without it the flag is silently ignored and the probe
+; would install machine-wide while believing it stays per-user.
 PrivilegesRequired=admin
-PrivilegesRequiredOverridesAllowed=dialog
+PrivilegesRequiredOverridesAllowed=dialog commandline
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"

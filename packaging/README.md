@@ -171,13 +171,16 @@ produces one. `test/linux_packaging_test.dart` pins the wiring offline — the j
 calls the packager and uploads every artifact it makes, the script names those
 exact artifacts and declares the right runtime libraries, appimagetool is
 checksum-verified, the registry publisher refuses a different package under an
-existing version, and the metadata is well formed. Validate the actual packages
-with a prerelease tag (`v<next>-rc1`, which builds and publishes as a prerelease
-without touching the live web demo or the website) before the real release.
+existing version, and the metadata is well formed. On top of that the release
+workflow installs and starts the packages in pinned bare distro images —
+`.deb` and AppImage on Ubuntu 24.04, `.rpm` on Fedora 42 — with an `ldd` link
+check and an Xvfb start probe before publication (#2315).
 
 `test/windows_packaging_test.dart` does the same for the installer, which no
 `flutter test` can produce either: the `.iss` and `windows/file-associations.reg`
 declare the same associations, the installer wraps the whole build output rather
 than a hand-picked file list, it carries no downloader and no `[Code]` section,
-and the signing step stays optional-but-loud. Whether the installer actually
-installs, associates and uninstalls is a manual check on Windows.
+and the signing step stays optional-but-loud. On the mirror the installer also
+gets a functional smoke-test before publication (#2314): a silent per-user
+install into a clean temp dir, payload and association checks, a launch probe,
+and a silent uninstall that must leave nothing behind.
