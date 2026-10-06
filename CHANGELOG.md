@@ -10,6 +10,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **releaseketen** (#2315) installeert en start de Linux-pakketten nu eerst in
+  schone consumentimages — `.deb` en AppImage op kaal Ubuntu 24.04, `.rpm` op kaal
+  Fedora 42 — met een `ldd`-linkcontrole en een Xvfb-startproef. Het bouw-image
+  draagt alle ontwikkelbibliotheken, waardoor een ontbrekende
+  runtimeafhankelijkheid in het manifest daar onzichtbaar bleef; zo ging v0.4.9 de
+  deur uit zonder Ayatana. Publicatie hangt nu aan alle drie de proeven.
 - De **macos-gate** (golden-poort) draait nu ook op `v*`-tags (#2321), in een eigen
   ref-gescheiden concurrencygroep — een gewone merge naar `main` annuleert een lopende
   of wachtende poort voor een releasetag niet meer, zoals bij v0.6.14 gebeurde.

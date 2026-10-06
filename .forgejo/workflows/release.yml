@@ -622,9 +622,133 @@ jobs:
           name: ocideck-windows
           path: ocideck-windows-x64-*
 
+  # De consumentproeven hieronder pakken wat de bouw niet kan: het
+  # ocideck-ci-image draagt alle -dev-pakketten, dus een ontbrekende
+  # runtimeafhankelijkheid in het pakketmanifest valt daar nooit op — de lib
+  # is immers gewoon aanwezig. Zo ging v0.4.9 de deur uit zonder Ayatana.
+  # Elke proef draait daarom in een kaal consumentimage zonder bouwgereedschap,
+  # installeert het pakket zoals een gebruiker dat doet, linkt de binary na
+  # met ldd en start de app onder een virtuele display. `publiceren` hangt aan
+  # alle drie: één rode proef en er gaat niets de deur uit.
+  consumer-deb:
+    name: .deb proef op een schone Ubuntu
+    needs: linux
+    runs-on: docker
+    timeout-minutes: 20
+    # Zelfde pin als deploy-web; kaal Ubuntu, géén bouwgereedschap.
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux, path: dist }
+      - name: Installeren, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends xvfb fonts-dejavu-core
+          apt-get install -y "dist/ocideck-linux-amd64-${GITHUB_REF_NAME#v}.deb"
+          # Declares de control minder dan de binary linkt, dan toont ldd
+          # "not found" — precies de v0.4.9-klasse (Ayatana miste in Depends).
+          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
+            echo "Het .deb dekt niet alle runtimebibliotheken van de binary." >&2
+            exit 1
+          fi
+          # Startproef: onder Xvfb moet de app opkomen en draaien blijven.
+          # timeout geeft 124 als hij de volle 20 s overleefde; een crash of
+          # direct wegvallen geeft iets anders en is dus rood.
+          set +e
+          timeout 20 xvfb-run -a ocideck
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
+  consumer-rpm:
+    name: .rpm proef op een schone Fedora
+    needs: linux
+    runs-on: docker
+    timeout-minutes: 20
+    # Kaal Fedora: de .rpm-Requires zijn sonames, dus dnf moet de libs zelf
+    # uit de gewone repo's kunnen trekken — als een consument dat ook kan.
+    container:
+      image: fedora:42@sha256:99e203b80b1c3d8f7e161ec10a68fd02b081ef83a3963553e513c82846b97814
+    steps:
+      - name: Node voor de artefactactie
+        run: dnf install -y --setopt=install_weak_deps=False nodejs
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux, path: dist }
+      - name: Installeren, linken en starten
+        run: |
+          set -eu
+          dnf install -y --setopt=install_weak_deps=False xorg-x11-server-Xvfb dejavu-sans-fonts
+          dnf install -y "dist/ocideck-linux-x86_64-${GITHUB_REF_NAME#v}.rpm"
+          if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
+            echo "Het .rpm dekt niet alle runtimebibliotheken van de binary." >&2
+            exit 1
+          fi
+          set +e
+          timeout 20 xvfb-run -a ocideck
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "ocideck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
+  consumer-appimage:
+    name: AppImage proef op een schone Ubuntu
+    needs: linux
+    runs-on: docker
+    timeout-minutes: 20
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux, path: dist }
+      - name: Uitpakken, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          # Een AppImage bundelt geen GTK: de runtimebibliotheken hieronder
+          # zijn wat een gewone desktop al heeft. Geen -dev-pakketten, geen
+          # toolchain — het beeld blijft consumentachtig.
+          apt-get install -y --no-install-recommends \
+            xvfb fonts-dejavu-core \
+            libgtk-3-0t64 libsecret-1-0 liblzma5 libayatana-appindicator3-1
+          cd dist
+          chmod +x ocideck-linux-x86_64-*.AppImage
+          ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
+          test -x squashfs-root/ocideck
+          # De binary vindt zijn eigen lib/ via $ORIGIN (zie packaging/linux/
+          # AppRun); wat ldd als "not found" toont, ontbreekt dus echt.
+          if ldd squashfs-root/ocideck | grep 'not found'; then
+            echo "De AppImage mist een runtimebibliotheek." >&2
+            exit 1
+          fi
+          set +e
+          timeout 20 xvfb-run -a squashfs-root/AppRun
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "De AppImage kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
   publiceren:
     name: Release publiceren
-    needs: [web, linux, macos, windows-ophalen]
+    needs: [web, linux, macos, windows-ophalen, consumer-deb, consumer-rpm, consumer-appimage]
     runs-on: docker
     # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: node/git/curl/
     # ca-certificates/jq zitten er al in (zie .forgejo/ci-image/Dockerfile) en het

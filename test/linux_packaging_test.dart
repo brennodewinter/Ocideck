@@ -113,6 +113,115 @@ void main() {
     });
   });
 
+  group('the consumer probes gate publication (#2315)', () {
+    // The build image carries every -dev package, so a missing runtime
+    // dependency in a package manifest can never surface there — v0.4.9
+    // shipped without Ayatana that way. Each consumer job therefore runs in
+    // a bare distro image, installs or extracts the package as a user would,
+    // and only then proves the app links and starts. `publiceren` lists all
+    // three in `needs`, so a failed probe can never reach the release.
+    for (final job in ['consumer-deb', 'consumer-rpm', 'consumer-appimage']) {
+      test('$job exists after the Linux build', () {
+        expect(
+          RegExp(
+            '  $job:\\n    name: [^\\n]+\\n    needs: linux',
+          ).hasMatch(releaseYaml),
+          isTrue,
+          reason: 'The `$job` consumer probe is missing from release.yml.',
+        );
+      });
+    }
+
+    test('the consumer images are pinned, bare distro images', () {
+      // No ocideck-ci image here: it ships the build toolchain and -dev
+      // packages that would mask a missing runtime dependency.
+      final section = releaseYaml.substring(
+        releaseYaml.indexOf('  consumer-deb:'),
+        releaseYaml.indexOf('  publiceren:'),
+      );
+      expect(
+        section.contains('pawprint.vigilis.online/librekat/ocideck-ci'),
+        isFalse,
+        reason:
+            'A consumer probe runs in the build image — that masks missing '
+            'runtime dependencies.',
+      );
+      for (final image in [
+        'ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3',
+        'fedora:42@sha256:99e203b80b1c3d8f7e161ec10a68fd02b081ef83a3963553e513c82846b97814',
+      ]) {
+        expect(
+          section.contains(image),
+          isTrue,
+          reason: 'A consumer probe lost its pinned image `$image`.',
+        );
+      }
+    });
+
+    test('the .deb probe installs, link-checks and starts the package', () {
+      final section = releaseYaml.substring(
+        releaseYaml.indexOf('  consumer-deb:'),
+        releaseYaml.indexOf('  consumer-rpm:'),
+      );
+      expect(section, contains('ocideck-linux-amd64-'));
+      expect(section, contains('.deb'));
+      // Removing a runtime dependency from Depends must fail here: apt then
+      // leaves the lib uninstalled and `ldd` reports "not found", or the app
+      // fails to start under Xvfb.
+      expect(
+        section,
+        contains("ldd /usr/lib/ocideck/ocideck | grep 'not found'"),
+      );
+      expect(section, contains('xvfb-run -a ocideck'));
+      expect(section, contains('timeout 20'));
+    });
+
+    test('the .rpm probe installs, link-checks and starts the package', () {
+      final section = releaseYaml.substring(
+        releaseYaml.indexOf('  consumer-rpm:'),
+        releaseYaml.indexOf('  consumer-appimage:'),
+      );
+      expect(section, contains('ocideck-linux-x86_64-'));
+      expect(section, contains('.rpm'));
+      expect(section, contains('dnf install -y'));
+      expect(
+        section,
+        contains("ldd /usr/lib/ocideck/ocideck | grep 'not found'"),
+      );
+      expect(section, contains('xvfb-run -a ocideck'));
+    });
+
+    test('the AppImage probe extracts, link-checks and starts it', () {
+      final section = releaseYaml.substring(
+        releaseYaml.indexOf('  consumer-appimage:'),
+        releaseYaml.indexOf('  publiceren:'),
+      );
+      expect(section, contains('--appimage-extract'));
+      expect(section, contains("ldd squashfs-root/ocideck | grep 'not found'"));
+      expect(section, contains('xvfb-run -a squashfs-root/AppRun'));
+    });
+
+    test('publiceren needs all three consumer probes', () {
+      final needs = RegExp(
+        r'  publiceren:\n    name: [^\n]+\n    needs: \[([^\]]+)\]',
+      ).firstMatch(releaseYaml)?.group(1);
+      expect(
+        needs,
+        isNotNull,
+        reason: 'Cannot read the publiceren needs line.',
+      );
+      for (final job in ['consumer-deb', 'consumer-rpm', 'consumer-appimage']) {
+        expect(
+          needs,
+          contains(job),
+          reason:
+              'publiceren no longer waits for `$job` — a broken package could '
+              'be published untested (#2315).',
+        );
+      }
+    });
+  });
+
   group('the Debian registry publication fails closed', () {
     test('uses the public stable/main registry owned by LibreKAT', () {
       expect(publishScript, contains('DEBIAN_PACKAGE_OWNER:-LibreKAT'));
