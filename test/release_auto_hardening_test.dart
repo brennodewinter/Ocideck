@@ -86,6 +86,26 @@ void main() {
     },
   );
 
+  test('tag-teruglezing werkt met de awk van macOS', () {
+    final body = functionBody('remote_tag_commit');
+    final program = RegExp(r"awk '([\s\S]*?)'").firstMatch(body)?.group(1);
+    expect(program, isNotNull, reason: 'awk-programma niet gevonden');
+
+    final input =
+        File('${Directory.systemTemp.path}/ocideck-release-tag-awk-$pid.txt')
+          ..writeAsStringSync('''
+tag-object refs/tags/v1.2.3
+release-commit refs/tags/v1.2.3^{}
+''');
+    try {
+      final result = Process.runSync('/usr/bin/awk', [program!, input.path]);
+      expect(result.exitCode, 0, reason: result.stderr.toString());
+      expect((result.stdout as String).trim(), 'release-commit');
+    } finally {
+      input.deleteSync();
+    }
+  }, skip: skipOnWindows);
+
   test(
     'manifest en publieke downloadpagina bewijzen de volledige assetset',
     () {

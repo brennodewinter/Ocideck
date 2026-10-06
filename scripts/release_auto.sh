@@ -1555,7 +1555,7 @@ remote_tag_commit() { # remote_tag_commit REMOTE
   refs="$(git ls-remote "$remote" "refs/tags/$TAG" "refs/tags/$TAG^{}")" || return 2
   [ -n "$refs" ] || return 1
   printf '%s\n' "$refs" | awk '$2 ~ /\^\{\}$/ { peeled=$1 } $2 !~ /\^\{\}$/ { direct=$1 }
-    END { print peeled != "" ? peeled : direct }'
+    END { print (peeled != "" ? peeled : direct) }'
 }
 
 assert_tag_commit() { # assert_tag_commit LABEL ACTUAL EXPECTED
