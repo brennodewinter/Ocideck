@@ -811,10 +811,16 @@ branch merged into it — so every fresh run stranded here and had to be checked
 out and resumed by hand. After the deploy, sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
 (waiting quietly for `publiceren` to attach it rather than printing every expected
 404), read both public files back and verify them with `minisign`, watch the
-website-downloads job, and then poll the public LibreKAT download page until its
-release links really point at the new tag. The job status alone is deliberately
-not accepted as proof: a deploy can return success while writing to a server
-that public DNS does not serve. Because checking the tag out leaves the working tree on a
+dispatch the separate
+website-downloads workflow (or follow the one already running — a second
+publication alongside a live external deploy is never allowed), and then poll
+the public LibreKAT download page until its release links really point at the
+new tag. The job status alone is deliberately not accepted as proof: a deploy
+can return success while writing to a server that public DNS does not serve.
+If the bounded wait expires the run state decides the verdict: a still-running
+deploy is reported as still-running (never as a wrong host), a failed run gets
+the manual-fallback advice, and only a green run plus a stale page points at
+the DNS/host check. Because checking the tag out leaves the working tree on a
 detached `HEAD`, the chain puts it back on the branch the release started from
 when it finishes — a failure there is reported, never fatal to a release that is
 already out. Phase 3 refuses to start while any job for the tag is still

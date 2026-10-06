@@ -78,16 +78,23 @@ void main() {
 
   /// Draait de echte fase 3 met een gemockte forge/downloads/signer. Geeft het
   /// resultaat plus het mutatielogboek terug: elke niet-GET api()-call staat er
-  /// in als "METHODE pad".
-  (ProcessResult, List<String>) runPhase3({required bool signatureValid}) {
+  /// in als "METHODE pad". [websiteRun] is de status van de nieuwste
+  /// website-downloads-run op de tag ('' = geen run); [pageLive] bepaalt of de
+  /// publieke downloadpagina al naar de tag wijst.
+  (ProcessResult, List<String>) runPhase3({
+    required bool signatureValid,
+    String websiteRun = '',
+    bool pageLive = true,
+  }) {
     final dir = Directory.systemTemp.createTempSync('ocideck-draft-gate-');
     addTearDown(() => dir.deleteSync(recursive: true));
+    final seen = pageLive ? '9.9.9' : '9.9.8';
     final page = File('${dir.path}/website.html')
       ..writeAsStringSync('''
-<a href="https://forge.invalid/releases/download/v9.9.9/ocideck-linux-amd64-9.9.9.deb">deb</a>
-<a href="https://forge.invalid/releases/download/v9.9.9/ocideck-linux-x86_64-9.9.9.AppImage">AppImage</a>
-<a href="https://forge.invalid/releases/download/v9.9.9/ocideck-macos-9.9.9.zip">macOS</a>
-<a href="https://forge.invalid/releases/download/v9.9.9/ocideck-windows-x64-setup-9.9.9.exe">Windows</a>
+<a href="https://forge.invalid/releases/download/v$seen/ocideck-linux-amd64-$seen.deb">deb</a>
+<a href="https://forge.invalid/releases/download/v$seen/ocideck-linux-x86_64-$seen.AppImage">AppImage</a>
+<a href="https://forge.invalid/releases/download/v$seen/ocideck-macos-$seen.zip">macOS</a>
+<a href="https://forge.invalid/releases/download/v$seen/ocideck-windows-x64-setup-$seen.exe">Windows</a>
 ''');
     final mutations = File('${dir.path}/mutations.log');
     final harness = File('${dir.path}/harness.sh');
@@ -104,6 +111,7 @@ REPO_SLUG=LibreKAT/Ocideck
 TOKEN=test-token
 MINISIGN_PW=test-password
 MUTATIONS=${mutations.path}
+WEBSITE_RUN=$websiteRun
 TMP=
 STEP=test
 snap=
@@ -133,6 +141,13 @@ api() {
       ;;
     'GET /actions/runs/900/jobs')
       printf '%s\\n' '[{"name":"Release publiceren","status":"success","id":1,"attempt":1}]'
+      ;;
+    'GET /actions/runs?limit=50&workflow_id=website-downloads.yml')
+      if [ -n "\$WEBSITE_RUN" ]; then
+        printf '{"workflow_runs":[{"id":901,"prettyref":"v9.9.9","workflow_id":"website-downloads.yml","status":"%s"}]}\\n' "\$WEBSITE_RUN"
+      else
+        printf '%s\\n' '{"workflow_runs":[]}'
+      fi
       ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41,"draft":true}' ;;
     'GET /releases/41/assets')
@@ -223,4 +238,94 @@ printf 'DOOR\\n'
     },
     skip: skipOnWindows,
   );
+
+  group('de externe website-deploy wordt afzonderlijk gevolgd (#2302)', () {
+    const dispatch = 'POST /actions/workflows/website-downloads.yml/dispatches';
+
+    test('een nog actieve externe deploy krijgt geen tweede publicatie', () {
+      final (result, calls) = runPhase3(
+        signatureValid: true,
+        websiteRun: 'in_progress',
+      );
+      final output = '${result.stdout}\n${result.stderr}';
+      expect(result.exitCode, 0, reason: output);
+      expect(output, contains('geen tweede publicatie'));
+      expect(
+        calls,
+        isNot(contains(dispatch)),
+        reason:
+            'zolang de eerste externe deploy actief kan zijn start er geen '
+            'tweede publicatie — dat is een tweede schrijver.',
+      );
+      expect(
+        calls,
+        contains('PATCH /releases/41'),
+        reason:
+            'een actieve website-deploy mag de releasepublicatie niet '
+            'terugdraaien.',
+      );
+    }, skip: skipOnWindows);
+
+    test(
+      'stale pagina + lopende deploy: géén host-beschuldiging, géén dispatch',
+      () {
+        final (result, calls) = runPhase3(
+          signatureValid: true,
+          websiteRun: 'in_progress',
+          pageLive: false,
+        );
+        final output = '${result.stdout}\n${result.stderr}';
+        expect(result.exitCode, isNot(0), reason: output);
+        expect(output, contains('loopt nog'));
+        expect(
+          output,
+          isNot(contains('naar welke host')),
+          reason:
+              'een nog lopende of onbekende externe deploy wordt nooit als '
+              'verkeerde host gepresenteerd.',
+        );
+        expect(calls, isNot(contains(dispatch)));
+      },
+      skip: skipOnWindows,
+    );
+
+    test(
+      'stale pagina + gefaalde deploy: faalrapport en handmatige fallback',
+      () {
+        final (result, calls) = runPhase3(
+          signatureValid: true,
+          websiteRun: 'failure',
+          pageLive: false,
+        );
+        final output = '${result.stdout}\n${result.stderr}';
+        expect(result.exitCode, isNot(0), reason: output);
+        expect(output, contains('website-downloads-run faalde'));
+        expect(output, contains('publiceersite'));
+        expect(
+          calls,
+          contains('PATCH /releases/41'),
+          reason:
+              'een rode website-sync blokkeert het tekenen en publiceren van de '
+              'release niet — hij verhindert alleen het klaar melden.',
+        );
+      },
+      skip: skipOnWindows,
+    );
+
+    test(
+      'stale pagina + groene run: pas dan is de host/DNS-route de conclusie',
+      () {
+        final (result, calls) = runPhase3(
+          signatureValid: true,
+          websiteRun: 'success',
+          pageLive: false,
+        );
+        final output = '${result.stdout}\n${result.stderr}';
+        expect(result.exitCode, isNot(0), reason: output);
+        expect(output, contains('naar welke host'));
+        expect(calls, isNot(contains(dispatch)));
+      },
+      skip: skipOnWindows,
+    );
+  });
 }
