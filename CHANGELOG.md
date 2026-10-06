@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **releasepublicatie** (#2312) begrenst nu elke HTTP-call met een connect-
+  en responstime-out en de publicatiejob zelf heeft een harde tijdslimiet. Een
+  endpoint dat TCP accepteert maar nooit antwoordt hing de run voorheen tot de
+  runnerlimiet. Loopt een mutatie (upload, hernoeming, verwijdering,
+  pakketpublicatie) onzeker af — het antwoord kwam niet terug — dan wordt de
+  externe toestand eerst read-only gereconcilieerd op naam en SHA256; pas als
+  die leesbaar blijkt zónder ons resultaat, volgt een nieuwe schrijver. De run
+  meldt nu expliciet of iets een timeout was, een bevestigde mislukking, of dat
+  de externe toestand onbekend bleef.
 - De **Windows-workflow** (#2314) beproeft de installer nu functioneel vóór
   publicatie: stille per-gebruiker-installatie in een schone tijdelijke map,
   controle op payload en bestandsassociaties, een startproef van de app, en een
