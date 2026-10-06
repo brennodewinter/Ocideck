@@ -142,9 +142,10 @@ jobs:
 
       # De dartcv4-hook compileert OpenCV (native OpenCV-binding, #870) — veruit de
       # duurste stap na de tests. Blijft bewust op `actions/cache` (volgt
-      # `pubspec.lock`), niet in het image; zelfde sleutel als static-gate, zodat
-      # één cache beide poorten bedient. De sleutel hangt alleen aan de
-      # dartcv4-versie, niet aan de hele `pubspec.lock` — zie static-gate.yml (#1746).
+      # `pubspec.lock`), niet in het image. De uid-suffix houdt deze non-root
+      # build weg van oudere caches met absolute /root/.pub-cache-paden. De
+      # sleutel hangt verder alleen aan de dartcv4-versie, niet aan de hele
+      # `pubspec.lock` — zie static-gate.yml (#1746).
       - name: dartcv4-versie uit pubspec.lock
         id: dartcv
         run: |
@@ -157,7 +158,7 @@ jobs:
           path: |
             .dart_tool/hooks_runner
             build/native_assets
-          key: dartcv-linux-${{ steps.dartcv.outputs.versie }}
+          key: dartcv-linux-${{ steps.dartcv.outputs.versie }}-uid1000
 
       # `check-no-coverage` en niet `check`: de volledige suite draait onverkort,
       # alleen zonder `--coverage`. Die instrumentatie houdt per test een

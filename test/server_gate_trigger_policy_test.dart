@@ -31,5 +31,9 @@ void main() {
       contains('/opt/flutter/packages/flutter_tools/.dart_tool'),
     );
     expect(workflow, contains('runuser --user ubuntu'));
+    expect(
+      workflow,
+      contains(r'key: dartcv-linux-${{ steps.dartcv.outputs.versie }}-uid1000'),
+    );
   });
 }
