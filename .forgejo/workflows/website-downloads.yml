@@ -1,0 +1,49 @@
+# Website-downloads bijwerken na een gepubliceerde release.
+#
+# Dit was ooit de laatste job van release.yml, maar sinds #2311 mag dat niet
+# meer: de release blijft draft tot release_auto.sh lokaal heeft getekend en
+# gepubliceerd — deze job kan dus niet via `needs: publiceren` lopen, want zijn
+# bump-script leest de PUBLIEKE release-URL's en die bestaan pas ná het
+# draft-vlag weg is. Daarom is dit een eigen workflow die release_auto.sh
+# dispatcht op de tag zodra de release echt gepubliceerd is, met een handmatige
+# dispatch als reserve. Geen trigger op tag-push: een draft zou hem alleen maar
+# rood laten lopen.
+#
+# Deze job werkt alléén de website-repository bij: bump -> commit -> push. Het
+# live zetten is bewust níet de taak van de releaseketen — de website-repo
+# publiceert zichzelf via een eigen deploy-workflow (.forgejo/workflows/
+# deploy.yml in die repo). Faalt deze job, dan is de release al gepubliceerd en
+# valt de website terug op de handmatige route (scripts/bump-ocideck.sh +
+# commit + push in de website-repo; de deploy-workflow zet daarna live).
+name: website-downloads
+
+on:
+  workflow_dispatch:
+
+jobs:
+  website-downloads:
+    name: Website-downloads bijwerken
+    # Op de aangemelde Mac (mac-brenno): die heeft SSH-toegang tot de
+    # website-repo en de tooling van het bump-script. Geen prereleases (zoals
+    # deploy-web) — een -rc raakt de productiesite niet.
+    if: ${{ !contains(github.ref_name, '-') }}
+    runs-on: macos
+    steps:
+      - name: Website-repo naar deze release bijwerken
+        run: |
+          set -Eeuo pipefail
+          export GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentitiesOnly=yes -i $HOME/.ssh/id_rsa"
+          VERSIE="${GITHUB_REF_NAME#v}"
+          WT="$(mktemp -d)"
+          git clone ssh://git@pawprint.vigilis.online:2222/LibreKAT/website.git "$WT"
+          cd "$WT"
+          git config user.name "OciDeck release"
+          git config user.email "release@librekat.nl"
+          scripts/bump-ocideck.sh "$VERSIE"
+          if git diff --quiet; then
+            echo "Website staat al op $VERSIE — niets te pushen."
+            exit 0
+          fi
+          git commit -aqm "OciDeck $VERSIE: downloads bijwerken (automatisch bij release)"
+          git push origin main
+          echo "Website-repo bijgewerkt naar $VERSIE — de deploy-workflow van die repo zet het live."

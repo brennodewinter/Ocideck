@@ -169,19 +169,22 @@ void main() {
     final follow = functionBody('follow_ci');
     final assertion = functionBody('assert_release_ci_terminal');
 
+    // De laatste job van release.yml is 'Release publiceren' — de
+    // website-downloads-job zit sinds #2311 in een eigen workflow die pas na
+    // de lokale publicatie dispatcht en hoort hier niet meer bij.
     expect(
       completion,
-      contains('Website-downloads bijwerken'),
+      contains('Release publiceren'),
       reason:
           'een groene voorlopertaak bewijst niet dat geblokkeerde vervolgjobs '
           'al door Forgejo als runner-taak zichtbaar zijn.',
     );
     expect(
       completion,
-      contains('Release publiceren'),
+      isNot(contains('Website-downloads bijwerken')),
       reason:
-          'een terminale fout in release.yml moet herstelbaar blijven als de '
-          'laatste websitejob door die fout nooit kan starten.',
+          'die job staat in website-downloads.yml en komt nooit in de '
+          'release.yml-snapshot voor.',
     );
     expect(
       follow,
