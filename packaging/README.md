@@ -183,4 +183,8 @@ than a hand-picked file list, it carries no downloader and no `[Code]` section,
 and the signing step stays optional-but-loud. On the mirror the installer also
 gets a functional smoke-test before publication (#2314): a silent per-user
 install into a clean temp dir, payload and association checks, a launch probe,
-and a silent uninstall that must leave nothing behind.
+and a silent uninstall that must leave nothing behind. Each mirror run also
+publishes a cohort attestation (`ocideck-windows-cohort-*.json`: tag commit,
+run id, both sha256's); the forge only accepts the zip+installer pair when the
+attestation proves they came from that exact run, so a partial upload from a
+failed rerun can never ship as a mixed pair (#2313).
