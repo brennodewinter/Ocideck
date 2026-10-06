@@ -98,6 +98,8 @@ jobs:
     # meer dan één zware gate tegelijk draait (zie de kop en docs/CHECKS.md).
     # `static-gate`/`scans` blijven op `docker` (capacity 4).
     runs-on: linux-serial
+    env:
+      PUB_CACHE: /home/ubuntu/.pub-cache
     # Voorgebakken CI-image (zie de kop van `static-gate.yml` en docs/CHECKS.md):
     # OS + node + build-toolchain + de gepinde, sha256-geverifieerde Flutter
     # (+ precache) zitten erin, dus de per-run-installatie vervalt. Het tag ís de
@@ -124,13 +126,18 @@ jobs:
         continue-on-error: true
         uses: actions/cache@v4
         with:
-          path: ~/.pub-cache
+          path: /home/ubuntu/.pub-cache
           key: pub-linux-${{ hashFiles('pubspec.lock') }}
           restore-keys: |
             pub-linux-
 
       - name: Afhankelijkheden ophalen
-        run: flutter pub get
+        run: |
+          set -eu
+          install -d -o ubuntu -g ubuntu "$PUB_CACHE"
+          chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE" "$PUB_CACHE"
+          runuser --user ubuntu --preserve-environment -- env \
+            HOME=/home/ubuntu flutter pub get
 
       # De dartcv4-hook compileert OpenCV (native OpenCV-binding, #870) — veruit de
       # duurste stap na de tests. Blijft bewust op `actions/cache` (volgt
@@ -167,4 +174,9 @@ jobs:
       # CONTRIBUTING.md en docs/CHECKS.md. Wat deze poort op een tag beantwoordt
       # is "draait alles nog, op andermans hardware", niet "hoeveel raakt het".
       - name: De poort
-        run: make check-no-coverage
+        run: |
+          set -eu
+          chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE" "$PUB_CACHE"
+          runuser --user ubuntu --preserve-environment -- env \
+            HOME=/home/ubuntu \
+            make check-no-coverage
