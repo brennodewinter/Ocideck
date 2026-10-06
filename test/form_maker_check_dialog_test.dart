@@ -15,6 +15,7 @@ import 'package:ocideck/widgets/forms/form_maker_check_dialog.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/chmod_lock.dart';
 import 'support/form_maker_check_fixtures.dart';
 import 'support/pump_until.dart';
 import 'support/temp_dir.dart';
@@ -365,6 +366,12 @@ void main() {
     await chooseTemplate(tester);
     await io(tester, () => Process.run('chmod', ['555', workspace.root]));
     addTearDown(() => Process.run('chmod', ['755', workspace.root]));
+    if (!chmodLockHoudt(workspace.root)) {
+      // `chmod` houdt root niet tegen; de CI-container draait als root.
+      // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+      markTestSkipped('chmod heeft geen effect als root (CI-container)');
+      return;
+    }
     await create(tester);
     await waitForText(
       tester,

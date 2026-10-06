@@ -12,6 +12,7 @@ import 'package:ocideck/services/form/form_workspace.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/chmod_lock.dart';
 import 'support/form_photo_fixtures.dart';
 import 'support/temp_dir.dart';
 
@@ -509,6 +510,12 @@ void main() {
         final folder = workspace.submissionPath(sid);
         await Process.run('chmod', ['555', folder]);
         addTearDown(() => Process.run('chmod', ['755', folder]));
+        if (!chmodLockHoudt(folder)) {
+          // `chmod` houdt root niet tegen; de CI-container draait als root.
+          // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+          markTestSkipped('chmod heeft geen effect als root (CI-container)');
+          return;
+        }
         expect(await workspace.workingCopy(sid), isA<FormWorkingCopyFailed>());
       },
     );
@@ -606,6 +613,12 @@ void main() {
           final folder = workspace.submissionPath(sid);
           await Process.run('chmod', ['555', folder]);
           addTearDown(() => Process.run('chmod', ['755', folder]));
+          if (!chmodLockHoudt(folder)) {
+            // `chmod` houdt root niet tegen; de CI-container draait als root.
+            // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+            markTestSkipped('chmod heeft geen effect als root (CI-container)');
+            return;
+          }
           expect(
             await workspace.discardWorkingCopy(sid),
             FormDiscardResult.failed,
@@ -827,6 +840,12 @@ void main() {
       await edit.writeAsString('werkkopie');
       await Process.run('chmod', ['000', edit.path]);
       addTearDown(() => Process.run('chmod', ['644', edit.path]));
+      if (!chmodLockHoudt(edit.path, schrijven: false)) {
+        // `chmod` houdt root niet tegen; de CI-container draait als root.
+        // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+        markTestSkipped('chmod heeft geen effect als root (CI-container)');
+        return;
+      }
       final result = await workspace.reviewStored(sid);
       expect(result, isA<FormStoredUnavailable>());
       expect((result as FormStoredUnavailable).deleted, isFalse);
