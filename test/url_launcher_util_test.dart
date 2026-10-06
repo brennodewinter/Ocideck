@@ -42,7 +42,8 @@ void main() {
   /// een letterlijk intern adres te weren, en het houdt de test hermetisch —
   /// de echte poort doet een opzoeking en zou de suite van het netwerk laten
   /// afhangen. De resolverende helft wordt bij NetGuard zelf getoetst.
-  Future<bool> lexicalGate(String url) async => NetGuard.isAllowedMediaUrl(url);
+  Future<bool> lexicalGate(String url) async =>
+      NetGuard.isAllowedRemoteUrl(url);
 
   Future<void> open(String url) => openExternalUrl(url, hostGate: lexicalGate);
 

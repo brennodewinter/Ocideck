@@ -37,6 +37,11 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES (#16): `net_guard.dart` is sinds de extractie een
+  // export-shim op AppFoundation `network_guard` — het bestand bevat alleen
+  // een export-directive, dus lcov emitteert geen record. De inhoud zelf is
+  // getest in het package en via de karakterisering in net_guard_address_test.
+  'lib/utils/net_guard.dart',
   // NO EXECUTABLE LINES: `slide_taxonomy.dart` is a `part` containing only
   // public enum declarations. Their persisted names are asserted directly in
   // slide_taxonomy_test.dart, but lcov emits no record for declaration-only

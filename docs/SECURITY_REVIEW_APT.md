@@ -219,7 +219,7 @@ binnen dezelfde sessie, en alleen voor reeds-gerenderde paden.
 ### B-02 — Video TOCTOU
 
 `lib/widgets/slides/previews/media_previews.dart:107-112`. `VideoPlayerController.networkUrl()`
-doet eigen DNS en kan niet socket-pinnen. `NetGuard.isAllowedMediaUrlResolved()` controleert
+doet eigen DNS en kan niet socket-pinnen. `NetGuard.isAllowedRemoteUrlResolved()` controleert
 vooraf, maar tussen check en connect is een rebind-venster.
 
 **Bevestigd.** Gedocumenteerd in `SECURITY.md` en `net_guard.dart:283-287`. Geen

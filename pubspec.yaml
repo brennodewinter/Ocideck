@@ -116,6 +116,11 @@ dependencies:
       url: https://pawprint.vigilis.online/LibreKAT/AppFoundation.git
       ref: secret_storage-v0.1.0
       path: packages/secret_storage
+  network_guard:
+    git:
+      url: https://pawprint.vigilis.online/LibreKAT/AppFoundation.git
+      ref: network_guard-v0.1.0
+      path: packages/network_guard
   timezone: ^0.11.1
 
 # dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.

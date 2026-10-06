@@ -845,6 +845,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  network_guard:
+    dependency: "direct main"
+    description:
+      path: "packages/network_guard"
+      ref: "network_guard-v0.1.0"
+      resolved-ref: "7bdf60067a3d6701ac5bf98032449ab56961ce4f"
+      url: "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
+    source: git
+    version: "0.1.0"
   objective_c:
     dependency: transitive
     description:

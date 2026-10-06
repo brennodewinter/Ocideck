@@ -15,6 +15,7 @@ import 'package:ocideck/widgets/forms/form_inbox_list.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/chmod_lock.dart';
 import 'support/form_photo_fixtures.dart';
 import 'support/pump_until.dart';
 import 'support/temp_dir.dart';
@@ -808,6 +809,12 @@ void main() {
       final folder = workspace.submissionPath(first);
       await io(tester, () => Process.run('chmod', ['555', folder]));
       addTearDown(() => Process.run('chmod', ['755', folder]));
+      if (!chmodLockHoudt(folder)) {
+        // `chmod` houdt root niet tegen; de CI-container draait als root.
+        // Dan is dit scenario niet toetsbaar — overslaan i.p.v. vals-rood.
+        markTestSkipped('chmod heeft geen effect als root (CI-container)');
+        return;
+      }
       await tester.tap(text('Werkkopie openen'));
       await pumpUntil(
         tester,

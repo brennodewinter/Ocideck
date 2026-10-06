@@ -89,17 +89,17 @@ void main() {
 
   group('NetGuard media URL gate', () {
     test('rejects non-web schemes and blocked hosts', () {
-      expect(NetGuard.isAllowedMediaUrl('ftp://example.com/x.mp4'), isFalse);
-      expect(NetGuard.isAllowedMediaUrl('file:///etc/passwd'), isFalse);
-      expect(NetGuard.isAllowedMediaUrl('http://localhost/x.mp4'), isFalse);
-      expect(NetGuard.isAllowedMediaUrl('http://127.0.0.1/x.mp4'), isFalse);
-      expect(NetGuard.isAllowedMediaUrl('http://192.168.1.10/x.mp4'), isFalse);
-      expect(NetGuard.isAllowedMediaUrl('http://169.254.169.254/x'), isFalse);
+      expect(NetGuard.isAllowedRemoteUrl('ftp://example.com/x.mp4'), isFalse);
+      expect(NetGuard.isAllowedRemoteUrl('file:///etc/passwd'), isFalse);
+      expect(NetGuard.isAllowedRemoteUrl('http://localhost/x.mp4'), isFalse);
+      expect(NetGuard.isAllowedRemoteUrl('http://127.0.0.1/x.mp4'), isFalse);
+      expect(NetGuard.isAllowedRemoteUrl('http://192.168.1.10/x.mp4'), isFalse);
+      expect(NetGuard.isAllowedRemoteUrl('http://169.254.169.254/x'), isFalse);
     });
 
     test('allows public https URLs', () {
       expect(
-        NetGuard.isAllowedMediaUrl('https://example.com/clip.mp4'),
+        NetGuard.isAllowedRemoteUrl('https://example.com/clip.mp4'),
         isTrue,
       );
     });

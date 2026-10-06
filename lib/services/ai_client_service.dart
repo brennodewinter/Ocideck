@@ -1,134 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+
+import 'package:network_guard/network_guard.dart';
 
 import '../models/ai_settings.dart';
 import '../platform/platform_features.dart';
-import '../utils/log.dart';
-import '../utils/net_guard.dart';
 import 'ai_request.dart';
 import 'ai_security_gate.dart';
 
-/// One HTTP exchange result across the transport seam.
-class AiHttpResult {
-  final int statusCode;
-  final String body;
-  const AiHttpResult(this.statusCode, this.body);
-}
-
-/// Injectable network seam. Tests provide a fake so no test touches the
-/// network; the default implementation ([PinnedAiHttpTransport]) resolves and
-/// pins the socket according to the gate's [AiResolveStrategy].
-abstract class AiHttpTransport {
-  Future<AiHttpResult> send({
-    required String method,
-    required Uri url,
-    required AiResolveStrategy strategy,
-    Map<String, String> headers,
-    String? body,
-    Duration timeout,
-  });
-}
-
-/// A network or protocol failure talking to the backend (distinct from a
-/// [AiGateException], which is a refusal to even send).
-class AiRequestException implements Exception {
-  final String message;
-  AiRequestException(this.message);
-  @override
-  String toString() => 'AiRequestException: $message';
-}
-
-/// The default transport: resolves the endpoint host per [AiResolveStrategy],
-/// pins the socket to the validated address (so a DNS rebind between check and
-/// connect can't move it internally), refuses redirects, and caps the response.
-/// This is the ONLY place in the AI backend that opens a raw `HttpClient`; it
-/// is listed in `network_sink_guard_test.dart`.
-class PinnedAiHttpTransport implements AiHttpTransport {
-  const PinnedAiHttpTransport();
-
-  /// Cap on the response body a hostile/misconfigured endpoint may return.
-  static const int maxResponseBytes = 8 * 1024 * 1024;
-
-  @override
-  Future<AiHttpResult> send({
-    required String method,
-    required Uri url,
-    required AiResolveStrategy strategy,
-    Map<String, String> headers = const {},
-    String? body,
-    Duration timeout = const Duration(seconds: 60),
-  }) async {
-    final pinned = await _resolvePinned(url.host, strategy);
-    final client = HttpClient()
-      ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, proxyHost, proxyPort) =>
-          NetGuard.connectPinned(pinned, u);
-    try {
-      final request = await client.openUrl(method, url);
-      request.followRedirects = false; // a 3xx must not bypass the host check
-      headers.forEach(request.headers.set);
-      if (body != null) request.add(utf8.encode(body));
-      final response = await request.close().timeout(timeout);
-      final builder = BytesBuilder(copy: false);
-      await for (final chunk in response) {
-        builder.add(chunk);
-        if (builder.length > maxResponseBytes) {
-          throw AiRequestException('response too large');
-        }
-      }
-      return AiHttpResult(
-        response.statusCode,
-        utf8.decode(builder.takeBytes(), allowMalformed: true),
-      );
-    } on AiRequestException {
-      rethrow;
-    } on TimeoutException {
-      throw AiRequestException('timeout');
-    } catch (e) {
-      // Host omitted from the log: it is user-configured but may be sensitive.
-      logError('PinnedAiHttpTransport.send: request failed', e);
-      throw AiRequestException('network');
-    } finally {
-      client.close(force: true);
-    }
-  }
-
-  /// Resolve [host] to the single address the socket is pinned to, applying the
-  /// tier's network regime. Throws [AiRequestException] when refused.
-  Future<InternetAddress> _resolvePinned(
-    String host,
-    AiResolveStrategy strategy,
-  ) async {
-    switch (strategy) {
-      case AiResolveStrategy.loopbackDirect:
-        // Local IPC: the gate already verified the host is loopback, so pin
-        // straight to the literal (NetGuard would otherwise block loopback).
-        final addr =
-            InternetAddress.tryParse(host) ?? InternetAddress.loopbackIPv4;
-        if (!addr.isLoopback) {
-          throw AiRequestException('local endpoint not loopback');
-        }
-        return addr;
-      case AiResolveStrategy.trustedPrivate:
-        final addrs = await NetGuard.safeResolveTrusted(
-          host,
-          allowPrivate: true,
-        );
-        if (addrs == null || addrs.isEmpty) {
-          throw AiRequestException('host refused or unreachable');
-        }
-        return addrs.first;
-      case AiResolveStrategy.publicGuarded:
-        final addrs = await NetGuard.safeResolve(host);
-        if (addrs == null || addrs.isEmpty) {
-          throw AiRequestException('host refused or unreachable');
-        }
-        return addrs.first;
-    }
-  }
-}
+export 'package:network_guard/network_guard.dart'
+    show
+        AiHttpResult,
+        AiHttpTransport,
+        AiRequestException,
+        PinnedAiHttpTransport;
 
 /// The shared AI client. Given [settings], the consent facts, and an optional
 /// API key, it gates every request through [AiSecurityGate] and only then hands

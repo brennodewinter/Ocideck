@@ -388,7 +388,7 @@ OciDeck constrains what an opened deck can do:
   WebView) does its own DNS, so it cannot pin the socket the way URL *import*
   does — this residual SSRF/rebind exposure is the reason the gate defaults off
   and is scoped to user-enabled sessions. The connect-time media check
-  (`NetGuard.isAllowedMediaUrlResolved`) also **caches a positive host
+  (`NetGuard.isAllowedRemoteUrlResolved`) also **caches a positive host
   resolution for the session**, so a host that resolved externally once is not
   re-validated later in that session; this is an accepted trade-off for the
   higher-level Flutter media APIs, whereas the URL *import* path avoids it by
