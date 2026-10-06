@@ -75,8 +75,11 @@ minisign() { return 0; }
 api() {
   local method="\$1" path="\$2"
   case "\$method \$path" in
-    'GET /actions/tasks?limit=100')
-      printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
+    'GET /actions/runs?limit=50&workflow_id=release.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
+      ;;
+    'GET /actions/runs/900/jobs')
+      printf '%s\\n' '[{"name":"Website-downloads bijwerken","status":"success","id":1,"attempt":1}]'
       ;;
     'GET /releases/41/assets')
       printf '%s\\n' '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS"}]'

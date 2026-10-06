@@ -322,28 +322,59 @@ api() { # api METHOD PATH [curl-args…]
   return "$rc"
 }
 
-RELEASE_CI_MIN_ID=0
+# De nieuwste workflowrun van één workflow op één ref, als "id|status".
+# /actions/runs kent een run zodra hij bestaat — ook queued of nog zonder
+# runner-taak. Dat is precies wat /actions/tasks niet kan: die toont alleen
+# toegewezen taken en maakte de v0.6.14-run 9655 onzichtbaar (#2294).
+# Leeg antwoord = geen run; exit≠0 = de API was onleesbaar, en onbekend is
+# niet afwezig — aanroepers behandelen dat apart.
+latest_workflow_run() { # latest_workflow_run WORKFLOW_ID REF
+  api GET "/actions/runs?limit=50&workflow_id=$1" \
+    | jq -r --arg ref "$2" --arg wf "$1" '
+        [.workflow_runs[]? | select(.workflow_id == $wf) | select(.prettyref == $ref)]
+        | sort_by(.id) | .[-1] // empty | "\(.id)|\(.status)"'
+}
 
 # Eén bron voor de actuele toestand van deze tag. Zowel de gewone route als
 # --resume en fase 3 gebruiken hem, zodat geen van die paden een nog schrijvende
 # release-run voor "klaar" kan aanzien.
+#
+# De snapshot komt uit één run — de nieuwste release.yml-run op de tag — en de
+# jobs worden per poging ontleed (de hoogste attempt per jobnaam wint). Zo kan
+# een oude complete poging nooit met een nieuwe gedeeltelijke samensmelten tot
+# een nep-groene keten.
+#
+# Uitvoer: één regel per job als "status|naam|job-id". Heeft de run nog geen
+# zichtbare jobs (zojuist gedispatcht), dan één regel "status|run|run-id" met
+# de runstatus — een wachtende run is actief, niet afwezig.
 release_ci_snapshot() {
-  api GET '/actions/tasks?limit=100' 2>/dev/null \
-    | jq -r --arg ref "$TAG" --argjson min "${RELEASE_CI_MIN_ID:-0}" '
-        [(.workflow_runs // .tasks // [])[]
-          | select(.head_branch==$ref)
-          | select(.workflow_id=="release.yml" or
-              ((.workflow_id // "")=="" and (.name | IN("Poort (vóór het bouwen)", "Web bouwen", "Webversie live zetten", "Linux bouwen", "macOS bouwen", "Windows ophalen van de spiegel", "Release publiceren", "Website-downloads bijwerken"))))
-          | select((.id // 0) > $min or ($min == 0 and .id == null))]
-        | group_by(.name) | map(max_by(.id))[]
-        | "\(.status)|\(.name)|\(.id)"' 2>/dev/null
+  local run jobs
+  run="$(latest_workflow_run release.yml "$TAG")" || return 2
+  [ -n "$run" ] || return 0
+  jobs="$(api GET "/actions/runs/${run%%|*}/jobs" \
+    | jq -r 'group_by(.name) | map(sort_by([.attempt // 0, .id]) | .[-1])[]
+        | "\(.status)|\(.name)|\(.id)"')" \
+    || return 2
+  if [ -n "$jobs" ]; then
+    printf '%s\n' "$jobs"
+  else
+    printf '%s|run|%s\n' "${run#*|}" "${run%%|*}"
+  fi
 }
 
-# Forgejo's tasks-endpoint toont alleen jobs waarvoor al een runner-taak bestaat.
-# Tussen twee afhankelijke jobs kan de zojuist afgeronde taak daardoor de enige
-# zichtbare zijn, terwijl de volgende nog geblokkeerd en dus onzichtbaar is. De
-# laatste job van release.yml is het bewijs dat de hele keten geregistreerd is;
-# zonder die marker mag "nul actieve taken" nooit als "release klaar" tellen.
+# Zijn er niet-terminale jobs? Alles buiten de terminale verzameling telt als
+# actief — ook een toestand die deze Forgejo-versie nog niet kende. Een
+# onbekende status mag nooit stil "klaar" betekenen.
+release_ci_is_active() { # release_ci_is_active SNAPSHOT
+  [ -n "$1" ] || return 1
+  printf '%s\n' "$1" | grep -qvE '^(success|failure|cancelled|skipped|error)\|'
+}
+
+# Een nog lopende keten hoeft zijn laatste job nog niet te hebben bereikt —
+# eindigt een eerdere job rood, dan kan de vervolgjob afwezig of geblokkeerd
+# zijn. De laatste job van release.yml is daarom het bewijs dat de hele keten
+# is doorlopen; zonder die marker mag "nul actieve jobs" nooit als "release
+# klaar" tellen.
 release_ci_completion_seen() { # release_ci_completion_seen SNAPSHOT
   local snapshot="$1"
   # Groen is pas compleet na de laatste job. Een fout kan die laatste job juist
@@ -397,13 +428,15 @@ website_has_expected_downloads() {
 }
 
 assert_release_ci_terminal() {
-  snap="$(release_ci_snapshot || true)"
-  if [ -z "$snap" ]; then
-    die "geen release-CI-taken voor $TAG gevonden — teken niet zolang de publieke toestand niet bewezen is."
+  local snap_rc=0
+  snap="$(release_ci_snapshot)" || snap_rc=$?
+  if [ "$snap_rc" -ne 0 ]; then
+    die "de release-CI-status voor $TAG is onleesbaar (Forgejo-API-fout) — onbekend is niet afwezig; teken niet zolang de publieke toestand niet bewezen is."
   fi
-  local running
-  running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
-  if [ "$running" -ne 0 ]; then
+  if [ -z "$snap" ]; then
+    die "geen release-run voor $TAG gevonden — teken niet zolang de publieke toestand niet bewezen is."
+  fi
+  if release_ci_is_active "$snap"; then
     die "release-CI voor $TAG is nog actief — wacht tot alle jobs terminaal zijn en hervat daarna met: scripts/release_auto.sh --resume $TAG"
   fi
   release_ci_completion_seen "$snap" \
@@ -492,9 +525,10 @@ cmd_status() {
       rm -rf "$verify_tmp"
     fi
   fi
-  status_snap="$(release_ci_snapshot || true)"
-  if [ -n "$status_snap" ] \
-      && ! printf '%s\n' "$status_snap" | grep -qE '^(running|waiting|pending)\|' \
+  local snap_rc=0
+  status_snap="$(release_ci_snapshot)" || snap_rc=$?
+  if [ "$snap_rc" -eq 0 ] && [ -n "$status_snap" ] \
+      && ! release_ci_is_active "$status_snap" \
       && release_ci_completion_seen "$status_snap" \
       && ! release_ci_has_failure "$status_snap"; then
     ci_stable=1
@@ -531,7 +565,11 @@ cmd_status() {
     mark 0 "mirror-remote beschikbaar (nodig voor de Windows-build)"
   fi
   mark "$has_rel" "release aangemaakt op de forge"
-  mark "$ci_stable" "release-CI terminaal groen; geen actieve schrijver"
+  if [ "$snap_rc" -ne 0 ]; then
+    mark 0 "release-CI status onleesbaar (Forgejo-API-fout — onbekend is niet afwezig)"
+  else
+    mark "$ci_stable" "release-CI terminaal groen; geen actieve schrijver"
+  fi
   mark "$has_sums" "SHA256SUMS aanwezig (van de publiceren-job)"
   mark "$manifest_complete" "SHA256SUMS bevat exact alle verwachte releasebestanden"
   mark "$sig_valid" "publieke SHA256SUMS.minisig cryptografisch geldig"
@@ -1235,9 +1273,7 @@ phase3() {
   # In --resume is er geen fase-2-snapshot; haal er dan vers een op voor deze tag.
   local snap3="${snap:-}"
   if [ -z "$snap3" ]; then
-    snap3="$(api GET '/actions/tasks?limit=25' \
-      | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
-          | select(.head_branch==$ref) | "\(.status)|\(.name)"' | sort -u)"
+    snap3="$(release_ci_snapshot 2>/dev/null | cut -d'|' -f1,2 | sort -u || true)"
   fi
   if printf '%s\n' "$snap3" | grep -q 'Website-downloads'; then
     if printf '%s\n' "$snap3" | grep -q '^failure|Website-downloads'; then
@@ -1401,31 +1437,49 @@ publish_scans_image() { # publish_scans_image IMAGE_TAG
   local image_tag="$1"
   STEP="scans-image publiceren"
   section "Fase 2 — nieuw scans-image publiceren (scanner-pins gebumpt)"
-  api POST "/actions/workflows/ci-image-scans.yml/dispatches" -H 'Content-Type: application/json' \
-    -d "$(jq -n --arg r "$BRANCH" '{ref:$r}')" -o /dev/null
-  log "ci-image-scans gedispatcht op $BRANCH — wachten tot het scans-image gepubliceerd is…"
+  # De dispatch levert met return_run_info direct de run-id op; oudere Forgejo's
+  # antwoorden 204 zonder body — dan resolven we de nieuwste ci-image-scans-run
+  # op deze ref zelf. In beide gevallen volgen we daarna de RUN, niet de
+  # runner-taken: een wachtende run zonder toegewezen taak is bestaand en
+  # actief, niet "nooit aangemaakt" (de v0.6.14-fout, #2294).
+  local resp run_id="" run="" ist="" poll
+  resp="$(api POST '/actions/workflows/ci-image-scans.yml/dispatches' \
+    -H 'Content-Type: application/json' \
+    -d "$(jq -n --arg r "$BRANCH" '{ref:$r, return_run_info:true}')")" \
+    || die "dispatch van ci-image-scans op $BRANCH faalde — publiceer lokaal met 'make ci-image-scans-publish' en hervat daarna met: scripts/release_auto.sh --resume $TAG"
+  run_id="$(printf '%s' "$resp" | jq -r '.id // empty' 2>/dev/null || true)"
+  log "ci-image-scans gedispatcht op $BRANCH${run_id:+ (run $run_id)} — wachten tot het scans-image gepubliceerd is…"
   sleep 10
-  local ist="" task_seen=0 poll
   for poll in $(seq 1 60); do
-    ist="$(api GET '/actions/tasks?limit=20' \
-      | jq -r --arg ref "$BRANCH" '[(.workflow_runs // .tasks // [])[]
-          | select(.head_branch==$ref and .name=="build-publish") | .status][0] // "onbekend"')"
+    if [ -z "$run_id" ]; then
+      run="$(latest_workflow_run ci-image-scans.yml "$BRANCH" 2>/dev/null || true)"
+      run_id="${run%%|*}"
+    fi
+    if [ -n "$run_id" ]; then
+      ist="$(api GET "/actions/runs/$run_id/jobs" 2>/dev/null \
+        | jq -r '[.[] | select(.name == "build-publish")] | sort_by([.attempt // 0, .id])
+            | .[-1] // empty | .status' 2>/dev/null)"
+      # De run bestaat — staat de job er nog niet in, dan wacht hij gewoon.
+      [ -n "$ist" ] || ist="wachtend"
+    else
+      ist=""
+    fi
     case "$ist" in
-      success) task_seen=1; break ;;
+      success) break ;;
       failure|cancelled) die "ci-image-scans faalde op $BRANCH — het nieuwe scans-image is niet gepubliceerd; de PR-scan zou het niet vinden." ;;
-      onbekend)
-        # Forgejo kan een dispatch met 204 accepteren zonder een taak te maken.
-        # Wacht daar geen twintig minuten op: dit vraagt om de gedocumenteerde
-        # lokale publicatieroute en daarna een veilige --resume.
+      "")
+        # De dispatch is aanvaard maar er verschijnt geen run — dat is een
+        # registratieprobleem, geen wachttoestand. Dit vraagt om de
+        # gedocumenteerde lokale publicatieroute en daarna een veilige --resume.
         if [ "$poll" -ge 3 ]; then
-          die "geen ci-image-scans-taak aangemaakt voor $BRANCH; publiceer lokaal met 'make ci-image-scans-publish' en hervat daarna met: scripts/release_auto.sh --resume $TAG"
+          die "geen ci-image-scans-run aangemaakt voor $BRANCH; publiceer lokaal met 'make ci-image-scans-publish' en hervat daarna met: scripts/release_auto.sh --resume $TAG"
         fi
         sleep 20
         ;;
-      *) task_seen=1; sleep 20 ;;
+      *) sleep 20 ;;
     esac
   done
-  [ "$task_seen" -eq 1 ] && [ "$ist" = "success" ] \
+  [ "$ist" = "success" ] \
     || die "scans-image werd niet op tijd gepubliceerd — controleer de ci-image-scans-run."
   for _ in $(seq 1 12); do
     scan_image_available "$image_tag" && break
@@ -1454,42 +1508,47 @@ ensure_scans_image() {
 # Linux-/scannercontrole vóór de tag. Een PR openen maakt daarom geen
 # statuscontexten meer. #2194 bleef toch de lege combined status pollen en kon
 # uitsluitend na 75 minuten stoppen. Start ontbrekende workflows hier zelf en
-# volg hun Forgejo-taken op exact de PR-head.
-gate_task_snapshot() { # gate_task_snapshot SHA
+# volg hun workflowRUNS op exact de PR-head: /actions/runs ziet ook een run die
+# nog in de runnerwachtrij staat, en de nieuwste run per workflow kan nooit met
+# een oudere poging versmelten (#2294).
+gate_task_snapshot() { # gate_task_snapshot SHA → "workflow|status|titel|run-id" per poort
   local sha="$1"
-  api GET '/actions/tasks?limit=100' 2>/dev/null \
+  api GET '/actions/runs?limit=50' \
     | jq -r --arg sha "$sha" '
-        [(.workflow_runs // .tasks // [])[]
-          | select(.head_sha == $sha)
+        [.workflow_runs[]?
+          | select(.commit_sha == $sha)
           | select(.workflow_id == "static-gate.yml"
               or .workflow_id == "scans.yml"
               or .workflow_id == "linux-gate.yml")]
         | group_by(.workflow_id)
         | map(max_by(.id))[]
-        | "\(.workflow_id)|\(.status)|\(.name)|\(.id)"' 2>/dev/null
+        | "\(.workflow_id)|\(.status)|\(.title // "")|\(.id)"'
 }
 
 ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
-  local sha="$1" pr="$2" snap workflow
+  local sha="$1" pr="$2" snap workflow resp run_id
   snap="$(gate_task_snapshot "$sha")" \
-    || die "kon bestaande poorttaken niet betrouwbaar lezen — dispatch geen duplicaten."
+    || die "kon bestaande poortruns niet betrouwbaar lezen — dispatch geen duplicaten."
   for workflow in static-gate.yml scans.yml linux-gate.yml; do
     if printf '%s\n' "$snap" | grep -q "^${workflow}|"; then
       continue
     fi
-    api POST "/actions/workflows/$workflow/dispatches" \
+    resp="$(api POST "/actions/workflows/$workflow/dispatches" \
       -H 'Content-Type: application/json' \
-      -d "$(jq -n --arg r "$BRANCH" '{ref:$r}')" -o /dev/null \
+      -d "$(jq -n --arg r "$BRANCH" '{ref:$r, return_run_info:true}')")" \
       || die "kon $workflow voor PR #$pr niet starten — niets getagd. Hervat later met: scripts/release_auto.sh --resume $TAG"
-    log "$workflow gestart op $BRANCH (head ${sha:0:10})."
+    run_id="$(printf '%s' "$resp" | jq -r '.id // empty' 2>/dev/null || true)"
+    log "$workflow gestart op $BRANCH (head ${sha:0:10}${run_id:+, run $run_id})."
   done
 }
 
 # linux-gate draait de volledige suite op de capacity-1 serial-runner (~27 min,
 # langer als er iets vóór in de wachtrij staat). Vandaar GATE_TIMEOUT_MIN (75)
-# mét voortgang. Een geaccepteerde dispatch die na vijf minuten nog geen taak
-# opleverde is een registratieprobleem, geen reden om de overige zeventig
-# minuten uit te zitten. Losse API-hikjes binnen dat venster blijven zacht.
+# mét voortgang. Een geaccepteerde dispatch die na vijf minuten nog geen RUN
+# opleverde is een registratieprobleem — een queued run zonder runner-taak is
+# via /actions/runs wél zichtbaar — geen reden om de overige zeventig minuten
+# uit te zitten. Losse API-hikjes binnen dat venster blijven zacht; een
+# volhoudend onleesbare API niet: onbekend is niet afwezig.
 wait_gate() { # wait_gate SHA PR_NUMBER
   local sha="$1" pr="$2"
   STEP="poort bewaken"
@@ -1497,9 +1556,17 @@ wait_gate() { # wait_gate SHA PR_NUMBER
   ensure_gate_tasks "$sha" "$pr"
   log "Wachten op de handmatige poorten (static-gate, scans, linux-gate) — max ${GATE_TIMEOUT_MIN} min."
   log "linux-gate draait de volledige suite op de serial-runner; dat duurt het langst."
-  local snap="" count=0 success=0 failed="" i workflow line
+  local snap="" count=0 success=0 failed="" i workflow line unreadable=0
   for i in $(seq 1 "$polls"); do
-    snap="$(gate_task_snapshot "$sha" || true)"
+    if snap="$(gate_task_snapshot "$sha")"; then
+      unreadable=0
+    else
+      snap=""
+      unreadable=$(( unreadable + 1 ))
+    fi
+    if [ "$unreadable" -ge 6 ]; then
+      die "de poortstatus voor $sha is $unreadable polls onleesbaar (Forgejo-API-fout) — onbekend is niet afwezig. Niets getagd. Hervat later met: scripts/release_auto.sh --resume $TAG"
+    fi
     count="$(printf '%s\n' "$snap" | grep -c '^[^|]*|' || true)"
     success="$(printf '%s\n' "$snap" | awk -F'|' '$2 == "success" { n++ } END { print n+0 }')"
     failed="$(printf '%s\n' "$snap" | awk -F'|' '$2 ~ /^(failure|error|cancelled)$/ { print }')"
@@ -1508,8 +1575,8 @@ wait_gate() { # wait_gate SHA PR_NUMBER
       die "minstens één handmatige poort faalde op $sha — zie PR #$pr. Niets getagd. Herstel en hervat met: scripts/release_auto.sh --resume $TAG"
     fi
     [ "$count" -eq 3 ] && [ "$success" -eq 3 ] && break
-    if [ "$count" -lt 3 ] && [ "$i" -ge 10 ]; then
-      die "niet alle handmatige poorten zijn binnen vijf minuten als taak geregistreerd voor $sha — zie PR #$pr. Niets getagd. Hervat later met: scripts/release_auto.sh --resume $TAG"
+    if [ "$count" -lt 3 ] && [ "$unreadable" -eq 0 ] && [ "$i" -ge 10 ]; then
+      die "niet alle handmatige poorten zijn binnen vijf minuten als run geregistreerd voor $sha — zie PR #$pr. Niets getagd. Hervat later met: scripts/release_auto.sh --resume $TAG"
     fi
     if [ $(( (i - 1) % 6 )) -eq 0 ]; then
       for workflow in static-gate.yml scans.yml linux-gate.yml; do
@@ -1662,21 +1729,33 @@ follow_ci() {
   STEP="release-CI volgen"
   local cap="${RELEASE_CI_TIMEOUT_MIN:-240}"
   section "Fase 2 — release-CI volgen (tot alle jobs klaar zijn, max ${cap} min)"
-  local prev="" running _ unchanged=0
+  local prev="" running=0 _ unchanged=0 unreadable=0
   snap=""
   # Elke iteratie ~30 s. Een lange job (Linux bouwen, ~50 min) verandert het
   # beeld een half uur lang niet; daarom is de cap een tijd en geen "geen
   # wijziging"-drempel, en laat een hartslag elke tien minuten zien dat er nog
   # gewacht wordt en niet gehangen.
   for _ in $(seq 1 $(( cap * 2 ))); do
-    snap="$(release_ci_snapshot || true)"
-    running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
+    if snap="$(release_ci_snapshot)"; then
+      unreadable=0
+    else
+      snap=""
+      unreadable=$(( unreadable + 1 ))
+    fi
+    running=0
+    if [ -n "$snap" ]; then
+      running="$(printf '%s\n' "$snap" | grep -cvE '^(success|failure|cancelled|skipped|error)\|' || true)"
+    fi
     if [ "$snap" != "$prev" ] && [ -n "$snap" ]; then
       printf '%s\n' "$snap" | sed 's/^/   /'; prev="$snap"; unchanged=0
     else
       unchanged=$(( unchanged + 1 ))
       if [ $(( unchanged % 20 )) -eq 0 ]; then
-        log "nog bezig na $(elapsed 2>/dev/null || echo '?'): $running job(s) actief, geen wijziging in de laatste 10 min."
+        if [ "$unreadable" -gt 0 ]; then
+          log "nog bezig na $(elapsed 2>/dev/null || echo '?'): de Forgejo-API is $unreadable polls onleesbaar."
+        else
+          log "nog bezig na $(elapsed 2>/dev/null || echo '?'): $running job(s) actief, geen wijziging in de laatste 10 min."
+        fi
       fi
     fi
     if [ -n "$snap" ] && [ "$running" -eq 0 ] \
@@ -1686,7 +1765,10 @@ follow_ci() {
     sleep 30
   done
   if [ -z "$snap" ]; then
-    die "geen release-CI-taken voor $TAG gevonden binnen de wachttijd — fase 3 wordt niet gestart."
+    if [ "$unreadable" -gt 0 ]; then
+      die "de release-CI-status voor $TAG bleef onleesbaar (Forgejo-API-fout) — onbekend is niet afwezig; fase 3 wordt niet gestart. Hervat met: scripts/release_auto.sh --resume $TAG"
+    fi
+    die "geen release-run voor $TAG gevonden binnen de wachttijd — fase 3 wordt niet gestart."
   fi
   if [ "$running" -ne 0 ] || ! release_ci_completion_seen "$snap"; then
     die "release-CI voor $TAG is na ${cap} minuten nog actief of niet volledig zichtbaar — fase 3 wordt niet gestart; hervat later met: scripts/release_auto.sh --resume $TAG"

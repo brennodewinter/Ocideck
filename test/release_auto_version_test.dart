@@ -128,7 +128,7 @@ void main() {
   });
 
   test(
-    'de scans-imagewacht controleert het register en faalt snel zonder taak',
+    'de scans-imagewacht controleert het register en faalt snel zonder run',
     () {
       final ensure = functionBody('ensure_scans_image');
       final publish = functionBody('publish_scans_image');
@@ -144,11 +144,21 @@ void main() {
         reason:
             'een groene workflow alleen bewijst niet dat het image pullbaar is.',
       );
+      // Een run zonder toegewezen runner-taak is wél zichtbaar via
+      // /actions/runs (#2294); alleen een dispatch die helemaal geen run
+      // maakt is een registratieprobleem.
       expect(
         publish,
-        contains('geen ci-image-scans-taak'),
+        contains('return_run_info'),
         reason:
-            'een geaccepteerde dispatch zonder aangemaakte taak moet snel en '
+            'de dispatch hoort de run-id direct terug te vragen zodat de '
+            'keten die run kan volgen.',
+      );
+      expect(
+        publish,
+        contains('geen ci-image-scans-run'),
+        reason:
+            'een geaccepteerde dispatch zonder aangemaakte run moet snel en '
             'herkenbaar stoppen, niet pas na twintig minuten.',
       );
     },

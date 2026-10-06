@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **releaseketen** (#2294) volgt Forgejo-*workflowruns* in plaats van runner-taken. Een run die nog in de
+  wachtrij staat — zonder toegewezen runner-taak — is nu zichtbaar en telt als actief; dispatches vragen met
+  `return_run_info` meteen de run-id terug en mijnen anders de nieuwste run uit de runlijst. Elke snapshot komt
+  voortaan uit één run en één poging, zodat een oude complete poging nooit met een nieuwe gedeeltelijke versmelt
+  tot een nep-groene keten; een onleesbare Forgejo-API wordt bovendien als *onbekend* gemeld, niet als afwezig.
 - Bij **afspelen met twee schermen** (#2289) gaat nu ook het presentatorscherm volledig scherm — voorheen vulde alleen
   het beamervenster zijn scherm en bleef het presentatoraanzicht een gewoon venster. Verlaten herstelt beide vensters
   weer, en de bewaker die een door het platform onderschepte Escape detecteert geldt nu voor beide modi.

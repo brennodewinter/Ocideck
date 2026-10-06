@@ -208,8 +208,11 @@ git() {
 }
 api() {
   case "\$2" in
-    '/actions/tasks?limit=100')
-      printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
+    '/actions/runs?limit=50&workflow_id=release.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
+      ;;
+    '/actions/runs/900/jobs')
+      printf '%s\\n' '[{"name":"Website-downloads bijwerken","status":"success","id":1,"attempt":1}]'
       ;;
     '/pulls?state=all&limit=50') printf '%s\\n' '$pullsJson' ;;
     '/releases/tags/v9.9.9')
@@ -323,8 +326,12 @@ log() { :; }
 sleep() { :; }
 die() { printf '%s\\n' "\$1" >&2; exit 1; }
 api() {
-  if [ "\$1" = GET ] && [ "\$2" = '/actions/tasks?limit=100' ]; then
-    printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"running","name":"Publiceren"}]}'
+  if [ "\$1" = GET ] && [ "\$2" = '/actions/runs?limit=50&workflow_id=release.yml' ]; then
+    printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"running"}]}'
+    return 0
+  fi
+  if [ "\$1" = GET ] && [ "\$2" = '/actions/runs/900/jobs' ]; then
+    printf '%s\\n' '[{"name":"Publiceren","status":"running","id":1,"attempt":1}]'
     return 0
   fi
   printf '%s %s\\n' "\$1" "\$2" >>"\$MUTATIONS"
@@ -362,12 +369,21 @@ log() { printf '%s\\n' "\$1"; }
 sleep() { :; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
 api() {
-  n=\$(( \$(cat "\$COUNTER" 2>/dev/null || echo 0) + 1 )); printf '%s' "\$n" >"\$COUNTER"
-  if [ "\$n" -lt 150 ]; then
-    printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"running","name":"Linux bouwen"},{"head_branch":"v9.9.9","status":"success","name":"macOS bouwen"},{"head_branch":"v9.9.9","status":"failure","name":"gate"}]}'
-  else
-    printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Linux bouwen"},{"head_branch":"v9.9.9","status":"success","name":"macOS bouwen"},{"head_branch":"v9.9.9","status":"failure","name":"gate"},{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
-  fi
+  case "\$1 \$2" in
+    'GET /actions/runs?limit=50&workflow_id=release.yml')
+      # De losse ci.yml-run op dezelfde tag mag de release-snapshot niet raken.
+      printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"running"},{"id":901,"prettyref":"v9.9.9","workflow_id":"ci.yml","status":"failure"}]}'
+      ;;
+    'GET /actions/runs/900/jobs')
+      n=\$(( \$(cat "\$COUNTER" 2>/dev/null || echo 0) + 1 )); printf '%s' "\$n" >"\$COUNTER"
+      if [ "\$n" -lt 150 ]; then
+        printf '%s\\n' '[{"name":"Linux bouwen","status":"running","id":1,"attempt":1},{"name":"macOS bouwen","status":"success","id":2,"attempt":1}]'
+      else
+        printf '%s\\n' '[{"name":"Linux bouwen","status":"success","id":1,"attempt":1},{"name":"macOS bouwen","status":"success","id":2,"attempt":1},{"name":"Website-downloads bijwerken","status":"success","id":3,"attempt":1}]'
+      fi
+      ;;
+    *) printf '%s\\n' '{}' ;;
+  esac
 }
 follow_ci
 echo "KLAAR"
@@ -389,7 +405,15 @@ log() { printf '%s\\n' "\$1"; }
 sleep() { :; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
 api() {
-  printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"failure","name":"Linux bouwen"},{"head_branch":"v9.9.9","status":"failure","name":"Release publiceren"}]}'
+  case "\$1 \$2" in
+    'GET /actions/runs?limit=50&workflow_id=release.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"failure"}]}'
+      ;;
+    'GET /actions/runs/900/jobs')
+      printf '%s\\n' '[{"name":"Linux bouwen","status":"failure","id":1,"attempt":1},{"name":"Release publiceren","status":"failure","id":2,"attempt":1}]'
+      ;;
+    *) printf '%s\\n' '{}' ;;
+  esac
 }
 follow_ci
 ''');
@@ -446,7 +470,17 @@ git() {
     *) return 1 ;;
   esac
 }
-api() { printf '%s\\n' '{"workflow_runs":[$snapshotJobs]}'; }
+api() {
+  case "\$1 \$2" in
+    'GET /actions/runs?limit=50&workflow_id=release.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
+      ;;
+    'GET /actions/runs/900/jobs')
+      printf '%s\\n' "[$snapshotJobs]"
+      ;;
+    *) printf '%s\\n' '{}' ;;
+  esac
+}
 deploy_web_if_needed
 echo "DOOR"
 ''');
@@ -471,7 +505,7 @@ echo "DOOR"
       liveVersion: '0.6.4',
       headSha: 'tagsha000',
       snapshotJobs:
-          '{"head_branch":"v9.9.9","status":"success","name":"Webversie live zetten"}',
+          '{"name":"Webversie live zetten","status":"success","id":1,"attempt":1}',
     );
     expect(r.exitCode, 0, reason: r.stderr as String);
     expect(r.stdout, contains('draait nog 0.6.4'));
@@ -531,8 +565,12 @@ make() { return 0; }
 curl() { return 22; }
 die() { printf '%s\\n' "\$1" >&2; exit 1; }
 api() {
-  if [ "\$1" = GET ] && [ "\$2" = '/actions/tasks?limit=100' ]; then
-    printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"running","name":"Publiceren"}]}'
+  if [ "\$1" = GET ] && [ "\$2" = '/actions/runs?limit=50&workflow_id=release.yml' ]; then
+    printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"running"}]}'
+    return 0
+  fi
+  if [ "\$1" = GET ] && [ "\$2" = '/actions/runs/900/jobs' ]; then
+    printf '%s\\n' '[{"name":"Publiceren","status":"running","id":1,"attempt":1}]'
     return 0
   fi
   if [ "\$1" != GET ]; then printf '%s %s\\n' "\$1" "\$2" >>"\$MUTATIONS"; fi
@@ -606,16 +644,11 @@ minisign() { return 0; }
 api() {
   local method="\$1" path="\$2" count
   case "\$method \$path" in
-    'GET /actions/tasks?limit=100')
-      count=\$(( \$(cat "\$CALLS") + 1 ))
-      printf '%s' "\$count" >"\$CALLS"
-      if [ "\$count" -le 3 ]; then
-        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Release publiceren"}]}'
-      elif [ "\$count" -eq 4 ]; then
-        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Release publiceren"},{"id":202,"head_branch":"v9.9.9","status":"running","name":"Release publiceren"}]}'
-      else
-        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Release publiceren"},{"id":202,"head_branch":"v9.9.9","status":"success","name":"Release publiceren"},{"id":203,"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
-      fi
+    'GET /actions/runs?limit=50&workflow_id=release.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"failure"}]}'
+      ;;
+    'GET /actions/runs/900/jobs')
+      printf '%s\\n' '[{"name":"Release publiceren","status":"failure","id":101,"attempt":1}]'
       ;;
     'POST /actions/workflows/release.yml/dispatches')
       printf 'dispatch\\n' >>"\$TRACE"
@@ -689,8 +722,11 @@ curl() {
 minisign() { printf 'verify\\n' >>"\$TRACE"; return 0; }
 api() {
   case "\$1 \$2" in
-    'GET /actions/tasks?limit=100')
-      printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Release publiceren"},{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
+    'GET /actions/runs?limit=50&workflow_id=release.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
+      ;;
+    'GET /actions/runs/900/jobs')
+      printf '%s\\n' '[{"name":"Release publiceren","status":"success","id":1,"attempt":1},{"name":"Website-downloads bijwerken","status":"success","id":2,"attempt":1}]'
       ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41}' ;;
     'GET /releases/41/assets')
