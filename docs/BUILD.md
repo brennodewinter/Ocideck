@@ -1060,9 +1060,14 @@ feature-flag) are in
   and already publishes the project's CI images. A missing or rejected token
   fails the release instead of leaving the apt source silently behind. Never
   replace it with a broad personal token.
-- **Not offline-testable.** The packages only build on a Linux tag;
-  `test/linux_packaging_test.dart` pins the wiring, but validate the real packages
-  with a `-rc1` tag (below) before a real release.
+- **Consumer-verified before publication.** Three jobs (`consumer-deb`,
+  `consumer-rpm`, `consumer-appimage`) install the packages in pinned, bare
+  distro images — Ubuntu 24.04 for the `.deb` and AppImage, Fedora 42 for the
+  `.rpm` — link-check the binary with `ldd` and start it under Xvfb. The build
+  image carries every `-dev` package, so only a clean image can expose a
+  missing runtime dependency (the v0.4.9 Ayatana miss). `publiceren` needs all
+  three, so a failed probe blocks the release. `test/linux_packaging_test.dart`
+  pins the wiring; the probes themselves only run on a real `v*` tag.
 
 ### AUR package
 
