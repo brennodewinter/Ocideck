@@ -665,6 +665,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Un logo dans un coin inférieur se déplace automatiquement vers le coin supérieur correspondant lorsqu\'un pied de page est présent.',
   'Verschillen bekijken…': 'Voir les différences…',
   'Mijn versie als kopie bewaren': 'Conserver ma version en copie',
   'Verschillen met de versie op schijf':

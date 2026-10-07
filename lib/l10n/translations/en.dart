@@ -825,6 +825,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'A logo in a bottom corner automatically moves to the corresponding top corner when a footer is present.',
   'Verschillen bekijken…': 'View differences…',
   'Mijn versie als kopie bewaren': 'Keep my version as a copy',
   'Verschillen met de versie op schijf': 'Differences from the version on disk',

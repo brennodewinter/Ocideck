@@ -1618,6 +1618,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Alumnurgas olev logo liigub jaluse olemasolul automaatselt vastavasse ülanurka.',
   'Verschillen bekijken…': 'Vaata erinevusi…',
   'Mijn versie als kopie bewaren': 'Säilita minu versioon koopiana',
   'Verschillen met de versie op schijf':

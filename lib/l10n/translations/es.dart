@@ -662,6 +662,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Un logotipo en una esquina inferior se desplaza automáticamente a la esquina superior correspondiente cuando hay un pie de página.',
   'Verschillen bekijken…': 'Ver diferencias…',
   'Mijn versie als kopie bewaren': 'Guardar mi versión como copia',
   'Verschillen met de versie op schijf': 'Diferencias con la versión en disco',

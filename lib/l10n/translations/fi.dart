@@ -1625,6 +1625,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Alakulmassa oleva logo siirtyy alatunnisteen yhteydessä automaattisesti vastaavaan yläkulmaan.',
   'Verschillen bekijken…': 'Näytä erot…',
   'Mijn versie als kopie bewaren': 'Säilytä versioni kopiona',
   'Verschillen met de versie op schijf': 'Erot levyn versioon',

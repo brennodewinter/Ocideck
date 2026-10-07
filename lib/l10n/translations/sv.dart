@@ -1624,6 +1624,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'En logotyp i ett nedre hörn flyttas automatiskt till motsvarande övre hörn när det finns en sidfot.',
   'Verschillen bekijken…': 'Visa skillnader…',
   'Mijn versie als kopie bewaren': 'Behåll min version som kopia',
   'Verschillen met de versie op schijf': 'Skillnader mot versionen på disken',

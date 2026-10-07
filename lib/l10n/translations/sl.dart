@@ -1625,6 +1625,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logotip v spodnjem kotu se ob nogi samodejno premakne v ustrezni zgornji kot.',
   'Verschillen bekijken…': 'Poglej razlike…',
   'Mijn versie als kopie bewaren': 'Ohrani mojo različico kot kopijo',
   'Verschillen met de versie op schijf': 'Razlike glede na različico na disku',

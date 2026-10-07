@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/marp_style.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/utils/marp_emoji.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
@@ -41,6 +42,53 @@ void main() {
     expect(find.textContaining('Kop', findRichText: true), findsOneWidget);
     expect(find.textContaining('Voet', findRichText: true), findsOneWidget);
   });
+
+  testWidgets(
+    'deckfooter verplaatst een onderlogo alleen in de effectieve preview',
+    (tester) async {
+      const profile = ThemeProfile(
+        logoPath: 'asset:assets/images/vigilis-logo.png',
+        logoPosition: 'bottom-left',
+      );
+      final slide = Slide.create(SlideType.bullets);
+
+      final withFooter = SlidePreviewWidget(
+        slide: slide,
+        themeProfile: profile,
+        deckMarpStyle: const MarpStyle(footer: 'Vertrouwelijk'),
+      );
+      final withoutFooter = SlidePreviewWidget(
+        slide: slide,
+        themeProfile: profile,
+      );
+
+      expect(withFooter.themeProfile.logoPosition, 'top-left');
+      expect(withoutFooter.themeProfile.logoPosition, 'bottom-left');
+      expect(profile.logoPosition, 'bottom-left');
+
+      Future<Positioned> renderedLogoPosition(
+        SlidePreviewWidget preview,
+      ) async {
+        await tester.pumpWidget(
+          MaterialApp(home: SizedBox(width: 1280, height: 720, child: preview)),
+        );
+        await tester.pumpAndSettle();
+        final image = find.byType(Image);
+        expect(image, findsOneWidget);
+        return tester.widget<Positioned>(
+          find.ancestor(of: image, matching: find.byType(Positioned)).first,
+        );
+      }
+
+      final moved = await renderedLogoPosition(withFooter);
+      expect(moved.top, isNotNull);
+      expect(moved.bottom, isNull);
+
+      final unchanged = await renderedLogoPosition(withoutFooter);
+      expect(unchanged.top, isNull);
+      expect(unchanged.bottom, isNotNull);
+    },
+  );
 
   testWidgets('background colour stays behind a transparent background image', (
     tester,

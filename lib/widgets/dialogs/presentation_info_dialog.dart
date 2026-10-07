@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../models/deck.dart';
 import '../../models/marp_compatibility.dart';
 import '../../models/presentation_timing.dart';
@@ -26,6 +27,7 @@ class PresentationInfo {
   final String date;
   final String description;
   final String keywords;
+  final String footer;
 
   /// De taal waarin het rapport geschreven wordt (MIAUW EIS 2.3), als taalcode;
   /// leeg = niet vastgelegd.
@@ -54,6 +56,7 @@ class PresentationInfo {
     required this.date,
     required this.description,
     required this.keywords,
+    required this.footer,
     required this.language,
     this.standardsUsed = const [],
     this.toolsUsed = const [],
@@ -67,11 +70,8 @@ class PresentationInfo {
 
 /// Open de presentatiegegevens en verwerk wat de gebruiker invult.
 ///
-/// Los van de shell, omdat er twee wegen naartoe lopen: het menu-item
-/// "Eigenschappen" en een privacybevinding op een frontmatter-veld (auteur,
-/// organisatie, trefwoorden). Die tweede weg zit in de kwaliteitsnavigatie en
-/// kan niet bij de private shell-methode; zonder deze functie zou hij de
-/// verwerking moeten overschrijven, en dan lopen twee kopieën uiteen.
+/// Gedeeld door menu en kwaliteitsnavigatie; beide verwerken zo dezelfde
+/// wijzigingen.
 Future<void> editPresentationInfo(BuildContext context, WidgetRef ref) async {
   final deckNotifier = ref.read(deckProvider.notifier);
   final deck = ref.read(deckProvider).deck;
@@ -86,6 +86,7 @@ Future<void> editPresentationInfo(BuildContext context, WidgetRef ref) async {
     date: info.date,
     description: info.description,
     keywords: info.keywords,
+    footer: info.footer,
     language: info.language,
     standardsUsed: info.standardsUsed,
     toolsUsed: info.toolsUsed,
@@ -158,6 +159,7 @@ class _PresentationInfoDialogState
   late final TextEditingController _date;
   late final TextEditingController _description;
   late final TextEditingController _keywords;
+  late final TextEditingController _footer;
   late final TextEditingController _standards;
   late final TextEditingController _tools;
   String _language = '';
@@ -181,6 +183,7 @@ class _PresentationInfoDialogState
     _date = TextEditingController(text: widget.deck.date);
     _description = TextEditingController(text: widget.deck.description);
     _keywords = TextEditingController(text: widget.deck.keywords);
+    _footer = TextEditingController(text: widget.deck.marpStyle.footer);
     _standards = TextEditingController(
       text: widget.deck.standardsUsed.join(', '),
     );
@@ -211,6 +214,7 @@ class _PresentationInfoDialogState
     _date.dispose();
     _description.dispose();
     _keywords.dispose();
+    _footer.dispose();
     _standards.dispose();
     _tools.dispose();
     _customMinutes.dispose();
@@ -228,6 +232,7 @@ class _PresentationInfoDialogState
         date: _date.text.trim(),
         description: _description.text.trim(),
         keywords: _keywords.text.trim(),
+        footer: _footer.text.trim(),
         language: _language,
         standardsUsed: _standards.text
             .split(',')
@@ -285,6 +290,18 @@ class _PresentationInfoDialogState
                 _presentationFormatControl(l10n),
                 const SizedBox(height: 20),
                 _metadataFields(),
+                const SizedBox(height: 16),
+                TextField(
+                  key: const ValueKey('presentation-footer'),
+                  controller: _footer,
+                  decoration: InputDecoration(
+                    labelText: l10n.d('Footertekst'),
+                    hintText: l10n.d('bijv. Vertrouwelijk · {title} · {date}'),
+                    helperText: l10n.d(
+                      'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.',
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 16),
                 _styleProfileControl(l10n),
                 const SizedBox(height: 16),

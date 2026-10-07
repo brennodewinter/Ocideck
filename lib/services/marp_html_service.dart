@@ -177,8 +177,15 @@ class MarpHtmlService {
     PageSizeSpec? pageSize,
     PageMargins? pageMargins,
   }) async {
+    final sourceDeck = MarkdownService().parseDeck(deckMarkdown);
+    final effectiveTheme = theme == null
+        ? null
+        : themeWithFooterSafeLogo(
+            theme,
+            sourceDeck?.marpStyle.footer ?? theme.footerText,
+          );
     final [marked, purify, hljs, hljsCss, mathjax, mermaid, css] =
-        await _loadExportBundles(theme);
+        await _loadExportBundles(effectiveTheme);
 
     // Wie een export doorstuurt, verspreidt vijf JavaScript-bundels en — als het
     // gebundelde lettertype is ingesloten — ook een font. Dat mag alleen mét de
@@ -200,7 +207,7 @@ class MarpHtmlService {
       embedImage,
       maxEmbedBytes,
       continuous,
-      theme,
+      effectiveTheme,
       docMeta.tlp,
       documentFields,
       this,
@@ -216,7 +223,7 @@ class MarpHtmlService {
     final parsedDeck = MarkdownService().parseDeck(renderMarkdown);
     final sections = _renderSections(
       renderMarkdown,
-      theme: theme,
+      theme: effectiveTheme,
       cockpitColorScheme: cockpitColorScheme,
       signature: signature,
       continuous: continuous,
@@ -256,9 +263,9 @@ class MarpHtmlService {
     // Het presentatielogo op elke logo-dia, zoals de app, de beamer en de
     // PDF/PPTX het tonen. Alleen in de dia-modus: de doorlopende documentmodus
     // draagt hetzelfde logo al als kop/voetband (zie [_withDocumentChrome]).
-    final logoCss = theme == null || continuous
+    final logoCss = effectiveTheme == null || continuous
         ? ''
-        : await _presentationLogoCss(theme, embedImage, loadBytes);
+        : await _presentationLogoCss(effectiveTheme, embedImage, loadBytes);
 
     return '<!doctype html>\n'
         '<html lang="$htmlLang"><head><meta charset="utf-8">'
@@ -280,7 +287,7 @@ class MarpHtmlService {
         '<main><h1 class="ocideck-sr-only">$h1Title</h1>'
         '$sections'
         '</main>'
-        '${inline(_renderScript(embedded.dataUris, theme: theme))}'
+        '${inline(_renderScript(embedded.dataUris, theme: effectiveTheme))}'
         '${notices.html}'
         '</body></html>';
   }

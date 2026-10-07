@@ -1640,6 +1640,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Логотип у нижньому куті за наявності нижнього колонтитула автоматично переміщується до відповідного верхнього кута.',
   'Verschillen bekijken…': 'Переглянути відмінності…',
   'Mijn versie als kopie bewaren': 'Зберегти мою версію як копію',
   'Verschillen met de versie op schijf': 'Відмінності від версії на диску',

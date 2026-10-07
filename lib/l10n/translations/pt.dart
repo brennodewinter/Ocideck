@@ -1653,6 +1653,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Um logótipo num canto inferior move-se automaticamente para o canto superior correspondente quando existe um rodapé.',
   'Verschillen bekijken…': 'Ver diferenças…',
   'Mijn versie als kopie bewaren': 'Guardar a minha versão como cópia',
   'Verschillen met de versie op schijf':

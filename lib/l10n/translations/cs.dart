@@ -1626,6 +1626,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logo v dolním rohu se při použití zápatí automaticky přesune do odpovídajícího horního rohu.',
   'Verschillen bekijken…': 'Zobrazit rozdíly…',
   'Mijn versie als kopie bewaren': 'Uchovat mou verzi jako kopii',
   'Verschillen met de versie op schijf': 'Rozdíly oproti verzi na disku',

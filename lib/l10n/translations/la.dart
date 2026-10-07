@@ -1640,6 +1640,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Insigne in angulo inferiore, cum footer adest, automatice ad eundem angulum superiorem movetur.',
   'Verschillen bekijken…': 'Discrimina inspice…',
   'Mijn versie als kopie bewaren': 'Versionem meam exemplari serva',
   'Verschillen met de versie op schijf': 'Discrimina a versione in disco',

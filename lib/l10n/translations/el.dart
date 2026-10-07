@@ -1650,6 +1650,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Ένα λογότυπο σε κάτω γωνία μετακινείται αυτόματα στην αντίστοιχη επάνω γωνία όταν υπάρχει υποσέλιδο.',
   'Verschillen bekijken…': 'Προβολή διαφορών…',
   'Mijn versie als kopie bewaren':
       'Διατήρηση της δικής μου έκδοσης ως αντίγραφο',

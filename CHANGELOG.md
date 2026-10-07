@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- Een presentatie-eigen **footertekst** is nu rechtstreeks te bewerken via
+  *Presentatie-eigenschappen*. OciDeck bewaart hem als de bestaande Marp-
+  `footer:`-frontmatter; een logo in een onderhoek wijkt zolang de footer
+  zichtbaar is automatisch uit naar dezelfde bovenhoek. Merkstroken blijven
+  op hun vaste rand staan.
 - **Typen in een document is lichter geworden.** Elke aanslag liep eerst de
   volledige afgeleide keten — Quill↔Markdown heen en terug, overzicht-sync,
   undo/redo-status en een volledige herparsing van het document — in de

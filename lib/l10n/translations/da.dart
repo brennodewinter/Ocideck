@@ -1625,6 +1625,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Et logo i et nederste hjørne flyttes automatisk til det tilsvarende øverste hjørne, når der er en sidefod.',
   'Verschillen bekijken…': 'Se forskelle…',
   'Mijn versie als kopie bewaren': 'Gem min version som kopi',
   'Verschillen met de versie op schijf': 'Forskelle fra versionen på disken',

@@ -665,6 +665,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'In logo yn in ûnderhoeke ferskoot by in foettekst automatysk nei deselde boppehoeke.',
   'Verschillen bekijken…': 'Ferskillen besjen…',
   'Mijn versie als kopie bewaren': 'My ferzje as kopy bewarje',
   'Verschillen met de versie op schijf': 'Ferskillen mei de ferzje op skiif',

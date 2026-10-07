@@ -1637,6 +1637,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logo w dolnym rogu automatycznie przesuwa się do odpowiadającego mu górnego rogu, gdy obecna jest stopka.',
   'Verschillen bekijken…': 'Zobacz różnice…',
   'Mijn versie als kopie bewaren': 'Zachowaj moją wersję jako kopię',
   'Verschillen met de versie op schijf': 'Różnice względem wersji na dysku',

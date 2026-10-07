@@ -1643,6 +1643,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logo f\'rokna t\'isfel jiċċaqlaq awtomatikament għar-rokna ta\' fuq korrispondenti meta jkun hemm footer.',
   'Verschillen bekijken…': 'Ara d-differenzi…',
   'Mijn versie als kopie bewaren': 'Żomm il-verżjoni tiegħi bħala kopja',
   'Verschillen met de versie op schijf': 'Differenzi mill-verżjoni fuq id-disk',

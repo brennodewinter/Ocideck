@@ -1627,6 +1627,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Az alsó sarokban lévő logó lábléc esetén automatikusan a megfelelő felső sarokba kerül.',
   'Verschillen bekijken…': 'Különbségek megtekintése…',
   'Mijn versie als kopie bewaren': 'Saját verzióm megőrzése másolatként',
   'Verschillen met de versie op schijf':

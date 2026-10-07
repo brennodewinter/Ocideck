@@ -665,6 +665,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Ein Logo in einer unteren Ecke verschiebt sich bei einer Fußzeile automatisch in dieselbe obere Ecke.',
   'Verschillen bekijken…': 'Unterschiede ansehen…',
   'Mijn versie als kopie bewaren': 'Meine Version als Kopie behalten',
   'Verschillen met de versie op schijf':

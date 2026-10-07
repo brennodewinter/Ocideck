@@ -205,6 +205,7 @@ extension _FileServiceProject on FileService {
       themesDir.path,
       updatedDeck.theme,
       updatedDeck.themeProfile,
+      updatedDeck.marpStyle.footer,
       logoAsset.cssUrl,
       stripAsset.cssUrl,
     );
@@ -311,6 +312,7 @@ extension _FileServiceProject on FileService {
     String themesPath,
     String themeName,
     ThemeProfile profile,
+    String footerText,
     String? logoUrl,
     String? brandStripUrl,
   ) async {
@@ -322,7 +324,12 @@ extension _FileServiceProject on FileService {
       )).replaceFirst('@theme ocideck', '@theme $safeThemeName');
       await writeStringAtomicIfChanged(
         dest,
-        _buildThemeCss(base, profile, logoUrl, brandStripUrl),
+        _buildThemeCss(
+          base,
+          themeWithFooterSafeLogo(profile, footerText),
+          logoUrl,
+          brandStripUrl,
+        ),
       );
       return safeThemeName;
     } catch (e) {

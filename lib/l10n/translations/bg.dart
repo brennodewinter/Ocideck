@@ -1645,6 +1645,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Лого в долния ъгъл автоматично се премества в съответния горен ъгъл, когато има долен колонтитул.',
   'Verschillen bekijken…': 'Преглед на разликите…',
   'Mijn versie als kopie bewaren': 'Запази моята версия като копие',
   'Verschillen met de versie op schijf': 'Разлики спрямо версията на диска',

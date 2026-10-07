@@ -6123,6 +6123,12 @@ hides the overlay for that slide. Emoji are converted to local Unicode glyphs,
 so this feature makes no network request. Syntax OciDeck does not model stays in
 the Markdown unchanged and remains available for source editing.
 
+Set a deck-wide footer without leaving visual mode through **Presentation
+properties → Footer text**. OciDeck stores that value as standard Marp `footer:`
+front matter, so it remains readable and editable in any text editor. When the
+style places a logo in a bottom corner, a visible footer moves that logo to the
+same top corner on screen and in exports. A full-width brand strip stays fixed.
+
 ### Find & replace
 
 Markdown mode has an **in-editor find bar** (IDE-style) that searches the live

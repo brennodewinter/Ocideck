@@ -13,6 +13,7 @@ import 'package:re_highlight/styles/atom-one-dark.dart';
 import 'package:re_highlight/styles/github.dart';
 import 'package:video_player/video_player.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 import 'mermaid_diagram.dart';
 import 'chart_hover.dart';
 import 'video_playhead_bus.dart';
@@ -166,7 +167,7 @@ TextStyle _applyFont(String font, TextStyle base) {
 ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
   final foreground = normalizeMarpColor(style.color);
   final background = normalizeMarpColor(style.backgroundColor);
-  return base.copyWith(
+  final themed = base.copyWith(
     slideBackgroundColor: background,
     titleBackgroundColor: background,
     sectionBackgroundColor: background,
@@ -175,6 +176,7 @@ ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
     titleTextColor: foreground,
     footerText: style.footer.isEmpty ? null : style.footer,
   );
+  return themeWithFooterSafeLogo(themed, themed.footerText);
 }
 
 /// Tekst met inline-markdown (**vet**, *cursief*, `code`, ~~door~~, [link](url)).
@@ -203,11 +205,7 @@ Widget _md(
   );
 }
 
-/// Content-padding voor bulletslides: logo-safe bovenrand en de
-/// checklist/logo-bewuste onderrand uit [bulletsSlideBottomInset]. [safe]
-/// blijft bij de aanroeper (sommige previews hebben hem daarna nog nodig, en
-/// split-slides gebruiken andere insets). Stond in vijf previews als
-/// identiek blok uitgeschreven.
+/// Content-padding met logo-veilige boven- en onderrand voor bulletslides.
 EdgeInsets _bulletsPadding({
   required double w,
   required Slide slide,

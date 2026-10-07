@@ -27,6 +27,15 @@ Inhoud.
 # Dia zonder logo
 ''';
 
+const _mdWithFooter = '''
+---
+marp: true
+footer: Vertrouwelijk
+---
+
+# Dia met footer en logo
+''';
+
 MarpHtmlService _service() => MarpHtmlService(
   loadAsset: _diskLoader,
   // Elke asset — het logo én het gebundelde font — komt als dezelfde vier bytes
@@ -99,6 +108,30 @@ void main() {
     expect(html, contains('.slide.logo-safe{padding-top:58px}'));
     expect(html, contains('.slide.logo-safe.logo-occupy{padding-top:154px}'));
   });
+
+  test(
+    'deckfooter verplaatst een linksonder-logo ook in HTML naar boven',
+    () async {
+      const bottomLeft = ThemeProfile(
+        logoPath: 'asset:assets/images/vigilis-logo.png',
+        logoPosition: 'bottom-left',
+        logoSize: 96,
+      );
+
+      final withFooter = await _service().build(
+        _mdWithFooter,
+        theme: bottomLeft,
+      );
+      final withoutFooter = await _service().build(_md, theme: bottomLeft);
+
+      expect(withFooter, contains('top:40px;left:27px'));
+      expect(withFooter, contains('.slide.logo-safe{padding-top:58px}'));
+      expect(withFooter, isNot(contains('bottom:12px;left:27px')));
+
+      expect(withoutFooter, contains('bottom:12px;left:27px'));
+      expect(withoutFooter, contains('.slide.logo-safe{padding-bottom:29px}'));
+    },
+  );
 
   test('een thema zonder logo laat de dia-export ongemoeid', () async {
     const noLogo = ThemeProfile(logoPath: null);
