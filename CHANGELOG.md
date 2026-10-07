@@ -10,6 +10,16 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- Het **wisselen tussen Visueel en Bron houdt je plek in beeld** (#2322).
+  De caret werd sinds #1566 al logisch meevertaald, maar de doelstand opende
+  bovenaan: een goed gezette cursor kon alsnog buiten het venster liggen, en
+  wie alleen had gescrold zonder de cursor te verzetten verloor zijn plek
+  helemaal. Nu is er één Markdown-anker — de caret als die in beeld is of er
+  niet is gescrold, anders het eerste zichtbare blok — dat na de opbouw van
+  de doelstand expliciet in de viewport wordt gesprongen. Hetzelfde geldt
+  voor de automatische Bron-fallback bij een niet-verliesvrije constructie:
+  de probleemregel komt echt in beeld. Wisselen verandert de inhoud niet en
+  maakt geen stap in Ongedaan maken.
 - De **carrouselfooter breekt om in plaats van over te lopen** (#2318). De
   footer was een vaste horizontale rij en liep bij bredere fontmetrics buiten
   beeld — 10 px op macOS, 29 px op een Linux-gate — tot functionele tests de

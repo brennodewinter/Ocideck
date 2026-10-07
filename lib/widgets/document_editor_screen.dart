@@ -104,6 +104,7 @@ part 'parts/document_editor_layouts.dart';
 part 'parts/document_source_field.dart';
 part 'parts/document_source_rewrites.dart';
 part 'parts/document_editor_inserts.dart';
+part 'parts/document_editor_position.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
 /// Markdown-bron, rechts een live weergave. De bron *ís* de waarheid — elke
@@ -162,6 +163,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Sleutel op de Quill-editor van de visuele stand, zodat de pagina-einden
   /// aan de echte blokgeometrie gemeten kunnen worden.
   final GlobalKey<EditorState> _visualEditorKey = GlobalKey<EditorState>();
+
+  /// Anker en reveal bij standwissels (Visueel ↔ Bron), zie #2322.
+  late final _DocPosition _position = _DocPosition(this);
 
   /// De focus van de rauwe editor. De opmaak-knoppenbalk geeft de focus hierheen
   /// terug na een klik, zodat je meteen verder typt.
@@ -251,6 +255,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     _sourceTables.dispose();
     super.dispose();
   }
+
+  /// Rebuild-trigger voor de extensiemethoden in de `parts/`-bestanden:
+  /// die mogen het `@protected` [setState] niet direct aanroepen (alleen
+  /// instancemembers van een State-subklasse), dus lopen ze via deze wrapper.
+  void _rebuild(VoidCallback fn) => setState(fn);
 
   /// Stroom een controllerwijziging naar de notifier. Slaat over wanneer de
   /// controller juist van búiten wordt bijgewerkt (`_applyingExternal`), en
@@ -503,97 +512,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
-  /// Wissel van weergave — en neem je plek in de tekst mee.
-  ///
-  /// Wisselen doe je omdat je op één plek iets in de bron wilt zien of zetten.
-  /// Kwam je bovenaan uit, dan moest je je plek in een lang document opnieuw
-  /// zoeken en werd de bronstand iets om te vermijden (#1566). De andere kant
-  /// op regelt de visuele editor zelf: die leest bij het openen de cursor van
-  /// de bron-controller.
-  void _changeViewMode(_DocViewMode mode) {
-    if (mode == _viewMode) return;
-    // De gebruiker kiest Visueel, maar de bron bevat een constructie die de
-    // rijke-tekstlaag niet verliesvrij aankan. In plaats van de visuele modus
-    // te openen en daarin stilletjes terug te vallen op brontekst, blijven we
-    // in de Bron-modus en wijzen we de probleemregel aan — dat is waar de
-    // gebruiker iets aan kan doen.
-    if (mode == _DocViewMode.visual) {
-      final body = _controller.text;
-      if (!markdownRoundTripsVisually(body)) {
-        _autoFallbackToSource(body);
-        return;
-      }
-    }
-    if (_viewMode == _DocViewMode.visual) {
-      final text = _controller.text;
-      final offset = MarkdownCaretMap.of(
-        text,
-      ).sourceOffsetOf(_visualCaret).clamp(0, text.length);
-      // Alleen de cursor verzet, geen bewerking: de luisteraar mag hier niets
-      // naar de notifier schrijven.
-      _applyingExternal = true;
-      _controller.selection = TextSelection.collapsed(offset: offset);
-      _applyingExternal = false;
-    }
-    setState(() => _viewMode = mode);
-    if (mode != _DocViewMode.pages) {
-      // Het schrijfvlak bestaat pas ná deze opbouw; focussen kan dus niet
-      // eerder, en zonder focus schuift het de cursor niet in beeld — dan zou
-      // de cursor wel goed staan maar buiten het venster.
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) _editorFocus.requestFocus();
-      });
-    }
-  }
-
-  /// Wissel automatisch naar de Bron-modus en plaats de cursor op de eerste
-  /// regel die de visuele editor niet aankan. Toont een snackbar die zegt
-  /// *wat* er mis is en op welke regel, en scrollt naar de probleemregel.
-  void _autoFallbackToSource(String body) {
-    final hit = firstVisualLimitation(body);
-    // Direct, zonder door [_changeViewMode] — we zijn al aan het verlaten.
-    setState(() => _viewMode = _DocViewMode.source);
-    if (hit == null) return;
-    final lines = body.split('\n');
-    final offset = lines
-        .take(hit.lineIndex)
-        .fold<int>(0, (sum, line) => sum + line.length + 1);
-    _applyingExternal = true;
-    _controller.selection = TextSelection.collapsed(
-      offset: offset.clamp(0, body.length),
-    );
-    _applyingExternal = false;
-    final l10n = context.l10n;
-    final lineNo = hit.lineIndex + 1;
-    final message = switch (hit.limitation) {
-      MarkdownVisualLimitation.rawHtml =>
-        l10n
-            .d(
-              'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.',
-            )
-            .replaceAll('{n}', '$lineNo'),
-      MarkdownVisualLimitation.escapedPunctuation =>
-        l10n
-            .d(
-              'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.',
-            )
-            .replaceAll('{n}', '$lineNo'),
-      MarkdownVisualLimitation.looseTableLine =>
-        l10n
-            .d(
-              'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.',
-            )
-            .replaceAll('{n}', '$lineNo'),
-    };
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      _editorFocus.requestFocus();
-      ScaffoldMessenger.maybeOf(
-        context,
-      )?.showSnackBar(SnackBar(content: Text(message)));
-    });
-  }
-
   /// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
   /// dialoog. Zie [_editDocumentChart]; hier alleen de doorgeefluik-methode,
   /// zodat de weergave hem als callback kan meegeven.
@@ -734,6 +652,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // Bron, waar de zoekbalk en de markering hun plek hebben.
     if (_viewMode == _DocViewMode.pages) {
       setState(() => _viewMode = _DocViewMode.source);
+      // Ook dit is een standwissel: de caret moet daarna in beeld liggen,
+      // niet bovenaan het document (#2322).
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _revealAnchor();
+      });
     }
     _find.open(showReplace: showReplace);
   }
@@ -747,6 +670,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         baseOffset: match.start,
         extentOffset: match.end,
       );
+      // Dezelfde garantie als bij een standwissel: de trefferregel komt
+      // echt in beeld, niet alleen de logische cursor (#2322).
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _revealAnchor();
+      });
       return;
     }
     setState(() {
