@@ -98,6 +98,7 @@ import 'shell/document_save_actions.dart';
 import 'shell/document_import_action.dart';
 
 part 'parts/document_editor_toolbar.dart';
+part 'parts/document_editor_chrome_coordinator.dart';
 part 'parts/document_fields_dialog.dart';
 part 'parts/document_editor_form.dart';
 part 'parts/document_editor_layouts.dart';
@@ -107,8 +108,8 @@ part 'parts/document_editor_inserts.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
 /// Markdown-bron, rechts een live weergave. De bron *ís* de waarheid — elke
-/// toetsaanslag stroomt direct naar de [DocumentNotifier] (geen 'Toepassen'-muur,
-/// DOCUMENT_MODE.md §1.1), en de weergave hertekent mee.
+/// toetsaanslag stroomt zonder 'Toepassen'-muur naar de [DocumentNotifier]
+/// (DOCUMENT_MODE.md §1.1); afgeleid werk wordt kort samengevoegd.
 ///
 /// Bewust nog kaal: dit is de rauw+preview-basis. De visuele (WYSIWYG) modus met
 /// ingebedde kaarten, het invoeg-palet en de Overzicht-rail komen er in latere
@@ -133,6 +134,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   /// Actieve kop in de Overzicht-rail (−1 = geen), afgeleid van de caret.
   int _activeOutlineIndex = -1;
+
+  late final _DocumentEditorChromeCoordinator _chrome;
 
   /// Of de Overzicht-rail is ingeklapt tot een smalle strook.
   bool _outlineCollapsed = false;
@@ -212,6 +215,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   @override
   void initState() {
     super.initState();
+    final initialState = ref.read(documentProvider);
+    _chrome = _DocumentEditorChromeCoordinator(this, initialState);
     // De editor bewerkt de *body*: de bron zonder het leidende stijl-frontmatter-
     // blok. De stijl (`theme:`) leeft in de frontmatter en wordt beheerd door de
     // Stijl-kiezer, niet als tekst getypt. Elke terugschrijf zet de frontmatter
@@ -244,6 +249,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   @override
   void dispose() {
+    _chrome.dispose();
     _controller.removeListener(_onControllerChanged);
     _controller.dispose();
     _editorFocus.dispose();
@@ -257,14 +263,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// wanneer alleen de selectie/cursor verschoof (body gelijk) — anders zou een
   /// simpele cursorbeweging een lege bewerking worden.
   void _onControllerChanged() {
-    // In Visueel is de Quill-caret leidend; de bronselectie wordt er juist
-    // náár gezet — teruglezen liet de markering flippen (#2141). Pas zonder
-    // gebouwde Quill (de platte-bron-fallback) geldt de bronselectie.
-    if (_viewMode != _DocViewMode.visual ||
-        _visualEditorKey.currentState == null) {
-      _syncOutlineToMarkdownCaret();
-    }
     if (_applyingExternal) return;
+    _chrome.schedule();
     final body = _controller.text;
     final doc = ref.read(documentProvider).document;
     if (doc == null || doc.body == body) return;
@@ -285,6 +285,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           coalesceKey: ownStep ? null : 'doc',
           visualEdit: isVisualEdit,
         );
+    _chrome.updateHistory();
     // Houd de matchteller bij terwijl je typt — zonder te springen, net als de
     // presentatie-broneditor. De teller loopt mee via de provider-herbouw.
     _find.refreshWhileTyping();
@@ -298,6 +299,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       setState(() => _activeOutlineIndex = active);
     });
   }
+
+  void _refreshChrome() => setState(() {});
 
   /// Sla het document op. Cmd/Ctrl+S én de Opslaan-knop in de werkbalk, net als
   /// een deck. Feedback is de dirty-stip op het tabblad die verdwijnt.
@@ -390,8 +393,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       _,
       rawBody,
     ) {
+      _chrome.updateHistory();
       final body = stripLeadingFrontMatterLeakage(rawBody);
-      if (body != _controller.text) {
+      final externalChange = body != _controller.text;
+      if (externalChange) {
         _applyingExternal = true;
         // Behoud de huidige cursorpositie, geklemd op de nieuwe lengte —
         // spring niet naar het einde bij undo/redo (#1672).
@@ -404,23 +409,17 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           selection: TextSelection.collapsed(offset: prevOffset),
         );
         _applyingExternal = false;
-      }
-      // Externe body-wijziging (ongedaan maken/opnieuw, of een ander tabblad
-      // dat hetzelfde document bewerkt) die de visuele modus niet aankan:
-      // wissel automatisch naar Bron en wijs de probleemregel aan. Bij gewoon
-      // typen in de visuele stand is de body altijd verliesvrij (de editor
-      // produceert alleen ronde-trip-Markdown), dus dit triggert niet per
-      // toetsaanslag.
-      if (_viewMode == _DocViewMode.visual &&
-          !markdownRoundTripsVisually(body)) {
-        _autoFallbackToSource(body);
+        setState(() {});
+        // Alleen een wijziging van buiten hoeft hier opnieuw gecontroleerd te
+        // worden. Gewoon typen is hierboven al door dezelfde poort gegaan;
+        // een tweede volledige documentscan per letter voegt niets toe.
+        if (_viewMode == _DocViewMode.visual &&
+            !markdownRoundTripsVisually(body)) {
+          _autoFallbackToSource(body);
+        }
       }
     });
-    final source = stripLeadingFrontMatterLeakage(
-      ref.watch(documentProvider.select((s) => s.document?.body ?? '')),
-    );
-    final canUndo = ref.watch(documentProvider.select((s) => s.canUndo));
-    final canRedo = ref.watch(documentProvider.select((s) => s.canRedo));
+    final source = _controller.text;
     // De actieve documentstijl: de per-document `theme:` (of de afgedwongen/
     // standaardstijl uit de instellingen). Stuurt het lettertype van het
     // schrijfoppervlak; de kiezer toont hem en laat wisselen.
@@ -445,13 +444,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       child: Scaffold(
         body: Column(
           children: [
-            _docToolbar(
-              theme,
-              settings,
-              canUndo,
-              canRedo,
-              documentTlp,
-              docStyleName,
+            ValueListenableBuilder<(bool, bool)>(
+              valueListenable: _chrome.historyAvailability,
+              builder: (context, history, _) => _docToolbar(
+                theme,
+                settings,
+                history.$1,
+                history.$2,
+                documentTlp,
+                docStyleName,
+              ),
             ),
             Divider(
               height: 1,

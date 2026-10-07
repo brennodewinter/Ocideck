@@ -49,16 +49,19 @@ class MarkdownSourceDocument {
     var nextId = previous?._nextId ?? 1;
 
     if (previous != null) {
+      final previousByAnchor = <String, List<int>>{};
+      for (var old = 0; old < previous.blocks.length; old++) {
+        final anchor = previous.blocks[old].anchor;
+        if (anchor.isEmpty) continue;
+        (previousByAnchor[anchor] ??= []).add(old);
+      }
       for (var index = 0; index < anchors.length; index++) {
         final anchor = anchors[index];
         if (anchor.isEmpty) continue;
-        final matches = <int>[
-          for (var old = 0; old < previous.blocks.length; old++)
-            if (!usedPrevious.contains(old) &&
-                previous.blocks[old].anchor == anchor)
-              old,
-        ];
-        if (matches.length == 1) {
+        final matches = previousByAnchor[anchor];
+        if (matches != null &&
+            matches.length == 1 &&
+            !usedPrevious.contains(matches.single)) {
           ids[index] = previous.blocks[matches.single].id;
           usedPrevious.add(matches.single);
         }
@@ -68,16 +71,15 @@ class MarkdownSourceDocument {
       for (var index = 0; index < ids.length; index++) {
         if (ids[index] != null) continue;
         int? nearest;
-        var distance = 1 << 30;
-        for (var old = 0; old < previous.blocks.length; old++) {
-          if (usedPrevious.contains(old)) continue;
-          final candidateDistance = (old - index).abs();
-          if (candidateDistance < distance) {
-            nearest = old;
-            distance = candidateDistance;
-          }
+        if (index < previous.blocks.length && !usedPrevious.contains(index)) {
+          nearest = index;
+        } else if (index > 0 && !usedPrevious.contains(index - 1)) {
+          nearest = index - 1;
+        } else if (index + 1 < previous.blocks.length &&
+            !usedPrevious.contains(index + 1)) {
+          nearest = index + 1;
         }
-        if (nearest != null && distance <= 1) {
+        if (nearest != null) {
           ids[index] = previous.blocks[nearest].id;
           usedPrevious.add(nearest);
         }

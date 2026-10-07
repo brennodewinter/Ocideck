@@ -217,6 +217,8 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   FocusNode? _ownedFocusNode;
   bool _syncingMarkdown = false;
   String _markdownSnapshot = '';
+  bool _quillSyncScheduled = false;
+  bool _quillContentSyncPending = false;
 
   /// Het Quill-document zoals het er bij de laatste *inhoudelijke* melding
   /// uitzag. Zie [_onQuillChanged]: een melding waarbij dit gelijk blijft is
@@ -502,6 +504,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   void _closeVisualEditor({required bool flush}) {
     final quill = _quillController;
     if (quill == null) return;
+    _quillSyncScheduled = false;
     if (flush) {
       _flushQuillToController(quill);
     }
@@ -510,11 +513,14 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     _scrollController?.dispose();
     _quillController = null;
     _scrollController = null;
+    _quillContentSyncPending = false;
   }
 
   void _reloadVisualFromMarkdown() {
     final quill = _quillController;
     if (quill == null) return;
+    _quillSyncScheduled = false;
+    _quillContentSyncPending = false;
     _syncingMarkdown = true;
     _markdownSnapshot = widget.controller.text;
     quill.document = MarkdownQuillCodec.documentFromMarkdown(
@@ -563,9 +569,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     // echte opmaak; de compose roept deze listener opnieuw aan en die ronde
     // doet dan de gewone sync.
     if (applyMarkdownLineShortcut(quill)) return;
-    final plain = quill.document.toPlainText();
-    final caret = quill.selection.isValid ? quill.selection.baseOffset : 0;
-    widget.onVisualCaret?.call(plain, caret.clamp(0, plain.length));
     // Quill meldt óók wanneer alleen de cursor verschoof. De heen-en-terugweg
     // naar Markdown levert niet byte-getrouw dezelfde bron op (witregels rond
     // koppen en blokken schuiven), dus zonder deze poort schreef de éérste klik
@@ -573,11 +576,31 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     // gebruiker niet had gemaakt, mét een stap in ongedaan maken. Alleen een
     // echte wijziging van het document telt als bewerking.
     final delta = quill.document.toDelta();
-    if (delta == _lastQuillDelta) return;
-    _lastQuillDelta = delta;
+    if (delta != _lastQuillDelta) {
+      _lastQuillDelta = delta;
+      _visualEdited = true;
+      _quillContentSyncPending = true;
+    }
+    // Verlaat eerst de native tekstcallback. Vooral op macOS moet de volgende
+    // composing-update niet wachten op serialisatie van het hele document.
+    // Meerdere Quill-meldingen in dezelfde event-loop delen één terugschrijf.
+    if (_quillSyncScheduled) return;
+    _quillSyncScheduled = true;
+    scheduleMicrotask(_flushPendingQuillChange);
+  }
+
+  void _flushPendingQuillChange() {
+    _quillSyncScheduled = false;
+    if (!mounted || _syncingMarkdown) return;
+    final quill = _quillController;
+    if (quill == null) return;
+    final plain = quill.document.toPlainText();
+    final caret = quill.selection.isValid ? quill.selection.baseOffset : 0;
+    widget.onVisualCaret?.call(plain, caret.clamp(0, plain.length));
+    if (!_quillContentSyncPending) return;
+    _quillContentSyncPending = false;
     final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
     if (markdown == _markdownSnapshot) return;
-    _visualEdited = true;
     _syncingMarkdown = true;
     _markdownSnapshot = markdown;
     widget.controller.value = _valueWithClampedSelection(markdown);

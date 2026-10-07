@@ -13,8 +13,8 @@ typedef TableEmbedFactory = BlockEmbed Function(String source);
 /// Quill vervangt de embedknoop bij iedere inhoudswijziging. De tabelcellen
 /// mogen daarbij niet worden vervangen: dan verdwijnen focus, selectie en de
 /// eigen tekstverbinding van de cel. Deze binding bewaart daarom de stabiele
-/// positie, coalescet schrijfacties tot één per frame en laat de celcontroller
-/// buiten de vluchtige embedwidget leven.
+/// identiteit, coalescet schrijfacties tot één per frame en laat de
+/// celcontroller buiten de vluchtige embedknoop leven.
 class TableEmbedBinding {
   factory TableEmbedBinding({
     required TableEmbedControllerStore controllerStore,
@@ -42,7 +42,8 @@ class TableEmbedBinding {
     this._wrapTable,
     this._makeEmbed,
     this._isMounted,
-  ) : _documentOffset = _embedContext.node.documentOffset {
+  ) : _storeKey = _embedContext.node,
+      _documentOffset = _embedContext.node.documentOffset {
     editor = _obtainController();
   }
 
@@ -52,6 +53,11 @@ class TableEmbedBinding {
   final TableSourceTransform _wrapTable;
   final TableEmbedFactory _makeEmbed;
   final bool Function() _isMounted;
+
+  /// Stabiele identiteit van deze gemonteerde tabel. De documentpositie is
+  /// alleen een adres om de embed te vervangen: tekst vóór de tabel verschuift
+  /// dat adres, maar maakt de tabel zelf niet nieuw.
+  Object _storeKey;
 
   late TableEditController editor;
 
@@ -71,13 +77,28 @@ class TableEmbedBinding {
     _embedContext = embedContext;
     final node = embedContext.node;
     if (node.parent != null) _documentOffset = node.documentOffset;
+    if (!identical(node, _storeKey)) {
+      // Een ingevoegde regel kan Flutter een bestaand State-object aan de
+      // volgende tabel laten koppelen. Laat de oude entry staan zodat de
+      // opvolger haar kan adopteren, en neem zelf de controller van deze node.
+      _controllerStore.release(_storeKey, editor, _ownerToken);
+      _storeKey = node;
+      _source = source;
+      editor = _obtainController();
+      return;
+    }
+    // Quill bouwt bij elke letter alle embeds opnieuw. Tekst vóór deze tabel
+    // verandert alleen haar offset; de bron en celcontrollers blijven gelijk.
+    // Opnieuw `obtain` zou iedere tabel alsnog volledig encoderen om datzelfde
+    // vast te stellen — precies de vertraging bij grote documenten.
+    if (source == _source) return;
     _source = source;
     editor = _obtainController();
   }
 
   TableEditController _obtainController() {
     final acquired = _controllerStore.obtain(
-      _documentOffset,
+      _storeKey,
       tableSource,
       onChanged: _tableChanged,
       onCellFocused: () => _embedContext.controller.skipRequestKeyboard = true,
@@ -125,7 +146,7 @@ class TableEmbedBinding {
     if (source == _source) return;
     if (discrete) onDiscreteEdit?.call();
     if (preserveEditor) {
-      _controllerStore.remember(_documentOffset, editor, _unwrapSource(source));
+      _controllerStore.remember(_storeKey, editor, _unwrapSource(source));
     }
     _source = source;
     _embedContext.controller.replaceText(
@@ -139,10 +160,21 @@ class TableEmbedBinding {
       // vervanging niet terugpakken of naar het blokbegin scrollen.
       ignoreFocus: true,
     );
+    final newNode = _embedContext.controller.document
+        .querySegmentLeafNode(_documentOffset)
+        .leaf;
+    if (newNode != null && !identical(newNode, _storeKey)) {
+      _controllerStore.rekey(
+        _storeKey,
+        newNode,
+        controller: editor,
+        token: _ownerToken,
+      );
+      _storeKey = newNode;
+    }
   }
 
-  void dispose() =>
-      _controllerStore.release(_documentOffset, editor, _ownerToken);
+  void dispose() => _controllerStore.release(_storeKey, editor, _ownerToken);
 }
 
 /// Bewaart tabelcontrollers buiten de vluchtige widgets die ze tekenen.
@@ -200,16 +232,32 @@ class TableEmbedControllerStore {
     );
   }
 
+  /// Verhuis een entry naar de nieuwe Quill-embedknoop. Tekst vóór een tabel
+  /// behoudt de knoop; alleen het vervangen van de embed zelf maakt een nieuwe.
+  void rekey(
+    Object oldKey,
+    Object newKey, {
+    required TableEditController controller,
+    required Object token,
+  }) {
+    if (identical(oldKey, newKey)) return;
+    final entry = _entries[oldKey];
+    if (entry == null ||
+        entry.controller != controller ||
+        entry.token != token) {
+      return;
+    }
+    _entries.remove(oldKey);
+    _entries[newKey] = entry;
+  }
+
   /// Verwijdert een controller pas na de huidige frame, en alleen als de
   /// entry dan nog toebehoort aan degene die [token] meegaf.
   ///
-  /// Een Quill-update ruimt de oude embedwidget op en bouwt haar meteen weer
-  /// op; [obtain] adopteert de entry dan onder een nieuwe token en deze
-  /// vrijgave doet niets meer. Datzelfde geldt wanneer de embed van
-  /// widgettype wisselt (tabel ↔ tijdlijn): de opvolger obtaint vóórdat de
-  /// voorganger ontmanteld is — diens [release] zou zonder de token de net
-  /// geadopteerde controller opruimen en de levende cellen met gedode
-  /// focusnodes achterlaten.
+  /// Een bronwijziging kan een nieuwe controller onder dezelfde binding
+  /// plaatsen. Een uitgestelde [release] van de vorige eigenaar mag die nieuwe
+  /// controller niet opruimen en levende cellen met gedode focusnodes
+  /// achterlaten.
   void release(Object tableKey, TableEditController controller, Object token) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final entry = _entries[tableKey];

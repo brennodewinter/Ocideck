@@ -17,8 +17,9 @@ part of '../document_editor_screen.dart';
 /// getoond. De bytes reisden mee, de app deed er niets mee.
 ///
 /// Staat bewust top-level en niet op de staat: de klasse zat op haar plafond.
-String _pageSetupSource(WidgetRef ref) =>
-    ref.watch(documentProvider).document?.source ?? '';
+String _pageSetupSource(WidgetRef ref) => ref.watch(
+  documentProvider.select((state) => state.document?.frontMatter ?? ''),
+);
 
 /// De map waarin het document staat, voor het oplossen van een logo in de
 /// kop- of voetband. `null` als het nog nergens is opgeslagen. Een padloos
@@ -49,7 +50,10 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
 
   /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
   void _syncOutlineToVisualCaret(String plain, int plainOffset) {
-    _visualCaret = plainOffset;
+    _chrome.recordVisualCaret(plain, plainOffset);
+  }
+
+  void _applyVisualCaretToChrome(String plain, int plainOffset) {
     final sourceOffset = MarkdownCaretMap.of(
       _controller.text,
     ).sourceOffsetOf(plainOffset).clamp(0, _controller.text.length);

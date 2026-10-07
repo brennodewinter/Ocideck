@@ -6289,6 +6289,13 @@ find it.
     attachment without making the content proprietary. Title slides can also
     place their subtitle/byline inside that strip.
 
+  **A footer for this presentation.** Open **Presentation properties** and set
+  its **Footer** to give just this deck its own footer text. OciDeck stores that
+  value as ordinary Marp `footer:` front matter, so it remains editable in any
+  Marp-aware editor. On a deck with a logo in a bottom corner, the logo moves to
+  the matching top corner to leave the footer clear; a full-width brand strip
+  stays where the style profile put it.
+
   The **base font size** is the size ordinary body text is set in, from 9 to
   28 pt, 11 pt by default — a page size rather than a screen size.
   Headings, footnotes and timeline cards are proportions of it, so one slider
