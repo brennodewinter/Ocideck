@@ -4,6 +4,7 @@ library;
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:yaml/yaml.dart';
 
 import '../tool/generate_license_txt.dart';
 
@@ -785,19 +786,29 @@ void main() {
     });
 
     test('the forge judges a run only if it belongs to this attempt', () {
+      // #2300: the attempt test is the run id, not a clock. A five-minute
+      // window read every failure inside it as "this attempt" — including an
+      // old, already-known red run a minute old. Run ids are monotone:
+      // BASE_RID pins the highest id visible before the dispatch, and only a
+      // run above the anchor (or the followed in-flight run, OUR_RID) counts.
       expect(
-        forgeYaml.contains('created_at'),
+        forgeYaml.contains('BASE_RID='),
         isTrue,
-        reason:
-            'run_status no longer reads created_at, so the conclusion of an '
-            'OLDER run on the same tag can kill a fresh retrigger — the exact '
-            'rc1-recovery trap: a cancelled run sat on the tag, and the '
-            'retrigger read it as "the build failed" within seconds.',
+        reason: 'The pre-dispatch run-id anchor is gone from windows-ophalen.',
       );
       expect(
-        forgeYaml.contains('T0='),
+        forgeYaml.contains('OUR_RID='),
         isTrue,
-        reason: 'The attempt anchor (T0) is gone from windows-ophalen.',
+        reason:
+            'An already-running build on the tag is followed as this attempt — '
+            'dropping OUR_RID would wait forever on its conclusion.',
+      );
+      expect(
+        forgeYaml.contains('created_at'),
+        isFalse,
+        reason:
+            'The T0/created_at time window is back — only the run id decides '
+            'whether a conclusion belongs to this attempt (#2300).',
       );
       expect(
         RegExp(r'--max-time \d+').hasMatch(forgeYaml),
@@ -805,6 +816,151 @@ void main() {
         reason:
             'The polling curls run without --max-time: one blackholed '
             'connection hangs the 45-minute loop for hours.',
+      );
+    });
+
+    // #2300 regression: an already-failed run stays the newest visible one for
+    // a few polls after our dispatch — GitHub does not show the new run
+    // immediately. The job must wait it out and follow the NEW run, not die
+    // on the old conclusion. The step script is extracted from the workflow
+    // and run for real, with curl and sleep faked on PATH.
+    group('de herdispatch-toets op run-id (gedrag)', () {
+      const stepName = 'Windows-build starten en ophalen';
+
+      String stepScript() {
+        final doc =
+            loadYaml(File('.forgejo/workflows/release.yml').readAsStringSync())
+                as YamlMap;
+        for (final job in (doc['jobs'] as YamlMap).values) {
+          if (job is! YamlMap) continue;
+          final steps = job['steps'];
+          if (steps is! YamlList) continue;
+          for (final s in steps) {
+            if (s is YamlMap && s['name'] == stepName) {
+              return s['run'].toString();
+            }
+          }
+        }
+        fail('stap "$stepName" niet gevonden in release.yml');
+      }
+
+      /// Bouwt een sandbox met fake curl/sleep en draait de stap.
+      /// [newRunAfterPolls] = bij welke run_status-call de nieuwe run (id 102)
+      /// zichtbaar wordt; null = de nieuwe run verschijnt nooit (alleen de
+      /// oude failure blijft). [newRunConclusion] haar eindconclusie.
+      /// [serveAssets] = of de downloads ooit bediend worden.
+      ProcessResult runStep({
+        int? newRunAfterPolls = 3,
+        String newRunConclusion = 'success',
+        bool serveAssets = true,
+      }) {
+        final dir = Directory.systemTemp.createTempSync('win-redispatch-');
+        addTearDown(() => dir.deleteSync(recursive: true));
+        Directory('${dir.path}/bin').createSync();
+        File(
+          '${dir.path}/bin/sleep',
+        ).writeAsStringSync('#!/bin/bash\nexit 0\n');
+        File(
+          '${dir.path}/bin/sha256sum',
+        ).writeAsStringSync('#!/bin/bash\nexec shasum -a 256 "\$@"\n');
+        File('${dir.path}/bin/curl').writeAsStringSync('''
+#!/bin/bash
+out='' url='' prev=''
+for a in "\$@"; do
+  case "\$prev" in -o|-*o) out="\$a" ;; esac
+  prev="\$a"
+  case "\$a" in http*) url="\$a" ;; esac
+done
+RC_FILE="\$FAKE_DIR/runcount"
+RC=0; [ -f "\$RC_FILE" ] && RC=\$(cat "\$RC_FILE")
+case "\$url" in
+  */dispatches)
+    echo x >> "\$FAKE_DIR/dispatches"; exit 0 ;;
+  */runs?per_page=*)
+    RC=\$((RC+1)); echo "\$RC" > "\$RC_FILE"
+    if [ "\$RC" -lt ${newRunAfterPolls ?? 9999} ]; then
+      printf '{"workflow_runs":[{"id":100,"head_branch":"v9.9.9","status":"completed","conclusion":"failure","html_url":"https://gh/oud"}]}\\n'
+    elif [ "\$RC" -lt 5 ]; then
+      printf '{"workflow_runs":[{"id":102,"head_branch":"v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/nieuw"}]}\\n'
+    else
+      printf '{"workflow_runs":[{"id":102,"head_branch":"v9.9.9","status":"completed","conclusion":"$newRunConclusion","html_url":"https://gh/nieuw"}]}\\n'
+    fi ;;
+  */releases/download/*)
+    [ "\$RC" -ge ${serveAssets ? 5 : 9999} ] || exit 22
+    f="\${url##*/}"
+    case "\$f" in
+      *.zip) printf 'zipdata' > "\$out" ;;
+      *.exe) printf 'exedata' > "\$out" ;;
+      *.json)
+        z=\$(printf 'zipdata' | sha256sum | cut -d' ' -f1)
+        e=\$(printf 'exedata' | sha256sum | cut -d' ' -f1)
+        printf '{"tag_commit":"%s","run_id":102,"sha256":{"zip":"%s","installer":"%s"}}\\n' \\
+          "\$GITHUB_SHA" "\$z" "\$e" > "\$out" ;;
+    esac ;;
+  *) exit 22 ;;
+esac
+exit 0
+''');
+        for (final f in ['sleep', 'curl', 'sha256sum']) {
+          Process.runSync('chmod', ['+x', '${dir.path}/bin/$f']);
+        }
+        final step = File('${dir.path}/step.sh')
+          ..writeAsStringSync(stepScript());
+        return Process.runSync(
+          'bash',
+          [step.path],
+          workingDirectory: dir.path,
+          environment: {
+            'PATH': '${dir.path}/bin:/usr/bin:/bin',
+            'FAKE_DIR': dir.path,
+            'GITHUB_REF_NAME': 'v9.9.9',
+            'GITHUB_SHA': 'deadbeef',
+            'GH_DISPATCH_TOKEN': 'x',
+          },
+        );
+      }
+
+      test(
+        'een oude failure blijft informatief; de nieuwe run wordt gevolgd',
+        () {
+          final r = runStep();
+          final out = '${r.stdout}\n${r.stderr}';
+          expect(r.exitCode, 0, reason: out);
+          expect(out, contains('niet bij deze poging'));
+          expect(
+            out,
+            isNot(contains('Windows-build faalde')),
+            reason:
+                'een oude rode run die als nieuwste zichtbaar blijft mag de '
+                'nieuwe poging nooit beëindigen (#2300).',
+          );
+        },
+        skip: Platform.isWindows,
+      );
+
+      test('een falende run van déze poging blijft fataal', () {
+        final r = runStep(newRunConclusion: 'failure', serveAssets: false);
+        final out = '${r.stdout}\n${r.stderr}';
+        expect(r.exitCode, isNot(0), reason: out);
+        expect(out, contains('Windows-build faalde'));
+        expect(out, contains('https://gh/nieuw'));
+      }, skip: Platform.isWindows);
+
+      test(
+        'alleen een oude failure: wachten, nooit op die conclusie sterven',
+        () {
+          final r = runStep(newRunAfterPolls: null);
+          final out = '${r.stdout}\n${r.stderr}';
+          expect(r.exitCode, isNot(0), reason: out);
+          expect(
+            out,
+            contains('geen coherent cohort'),
+            reason: 'de begrensde wachttoestand moet het eindbericht zijn.',
+          );
+          expect(out, contains('niet bij deze poging'));
+          expect(out, isNot(contains('Windows-build faalde')));
+        },
+        skip: Platform.isWindows,
       );
     });
 

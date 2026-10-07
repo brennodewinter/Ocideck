@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **Windows-herdispatch** in `windows-ophalen` (#2300) toetst "hoort deze
+  run bij deze poging" nu aan een run-id-anker in plaats van een
+  vijf-minuten-tijdvenster: vóór de dispatch wordt de hoogste zichtbare
+  run-id vastgelegd en alleen een run daarboven — of de aangehouden, al
+  lopende build — telt mee. Een oude failure die GitHub als nieuwste blijft
+  tonen is voortaan informatief en beëindigt de herstelpoging nooit meer;
+  vertraagde zichtbaarheid van de echte dispatch blijft een begrensde
+  wachttoestand.
 - De **CI-image-workflows** (#2301) melden ontbrekende
   publicatiecredentials op de canonical repo — en bij elke handmatige
   dispatch — nu als terminale failure met hersteladvies in plaats van een
