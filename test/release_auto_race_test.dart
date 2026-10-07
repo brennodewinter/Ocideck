@@ -258,7 +258,14 @@ cmd_status
       expect(output, contains('mark 0 webdemo'), reason: output);
       expect(output, contains('(nu: 0.6.4)'));
       expect(output, isNot(contains('De release lijkt compleet')));
-      expect(output, contains('make deploy-web'));
+      expect(output, contains('--resume v9.9.9'));
+      expect(
+        output,
+        isNot(contains('git checkout')),
+        reason:
+            'het advies mag geen losse checkout+deploy meer tonen: die omzeilt '
+            'de schone-werkboom- en tag-tegen-origin-controles (#2295).',
+      );
     },
     skip: skipOnWindows,
   );
@@ -467,6 +474,7 @@ git() {
   case "\$1" in
     rev-list) printf '%s\\n' '$tagSha' ;;
     rev-parse) printf '%s\\n' '$headSha' ;;
+    ls-remote) printf '%s refs/tags/v9.9.9^{}\\n' '$tagSha' ;;
     *) return 1 ;;
   esac
 }
