@@ -234,6 +234,9 @@ void main() {
         tester,
         text('Formulier toevoegen…'),
         text('Formulier toegevoegd: kook · v1.'),
+        // De volledige Linux-suite mat door runnerbelasting meer dan 10 s voor
+        // deze echte bestands-I/O; geïsoleerd is dezelfde voorwaarde direct groen.
+        timeout: const Duration(seconds: 30),
       );
       picks.form = kook.replaceAll('Inzending', 'Anders');
       await tapAndWait(
