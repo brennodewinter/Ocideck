@@ -647,7 +647,7 @@ cmd_status() {
   elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
     log "Alles is uitgebracht en getekend, maar de webdemo draait ${live:-een onleesbare versie} in plaats van $NEW_VERSION."
     log "Zet hem live met:  scripts/release_auto.sh --resume $TAG"
-    log "(die checkt de tag zelf uit; met de hand is het:  git checkout $TAG && make deploy-web)"
+    log "(die verifieert de tag tegen origin, eist een schone werkboom en bouwt alleen vanaf de tag-commit)"
   elif [ "$has_tag_o" -eq 1 ]; then
     log "De tag staat vast, maar de release is nog niet af (mirror-tag / tekenen / deploy)."
     log "Maak DEZELFDE tag af met:  scripts/release_auto.sh --resume $TAG"
@@ -1278,8 +1278,15 @@ ensure_worktree_on_tag() {
     git fetch --quiet --force origin "refs/tags/$TAG:refs/tags/$TAG" \
       || die "kon tag $TAG niet lokaal krijgen — zonder de tag-commit zou deploy-web andere code als $TAG publiceren. Is origin bereikbaar?"
   fi
-  local tag_sha
+  # De lokale tag moet bewijsbaar díe van origin zijn (#2295): een afwijkende
+  # lokale ref zou deploy-web andere code als $TAG laten publiceren.
+  local tag_sha origin_sha rc=0
+  origin_sha="$(remote_tag_commit origin)" || rc=$?
+  [ "$rc" -eq 0 ] \
+    || die "kon de origin-tag $TAG niet teruglezen — zonder dat bewijs is geen veilige deploy-web mogelijk."
   tag_sha="$(git rev-list -n 1 "$TAG")"
+  [ "$tag_sha" = "$origin_sha" ] \
+    || die "lokale tag $TAG (${tag_sha:0:12}) wijkt af van origin (${origin_sha:0:12}) — een releasetag verplaats je nooit; herstel de lokale ref naar de origin-tag en hervat: scripts/release_auto.sh --resume $TAG"
   [ "$tag_sha" != "$(git rev-parse HEAD)" ] || return 0
   # Nooit andermans werk onder de checkout vandaan trekken: liever stoppen met een
   # melding dan een niet-gecommitte wijziging meenemen of weggooien.
@@ -1729,7 +1736,7 @@ publish_scans_image() { # publish_scans_image IMAGE_TAG
   resp="$(api POST '/actions/workflows/ci-image-scans.yml/dispatches' \
     -H 'Content-Type: application/json' \
     -d "$(jq -n --arg r "$BRANCH" '{ref:$r, return_run_info:true}')")" \
-    || die "dispatch van ci-image-scans op $BRANCH faalde — publiceer lokaal met 'make ci-image-scans-publish' en hervat daarna met: scripts/release_auto.sh --resume $TAG"
+    || die "dispatch van ci-image-scans op $BRANCH faalde — publiceer lokaal met 'scripts/release_scans_image.sh $TAG' (bouwt vanaf de release-ref, nooit van HEAD) en hervat daarna met: scripts/release_auto.sh --resume $TAG"
   run_id="$(printf '%s' "$resp" | jq -r '.id // empty' 2>/dev/null || true)"
   log "ci-image-scans gedispatcht op $BRANCH${run_id:+ (run $run_id)} — wachten tot het scans-image gepubliceerd is…"
   sleep 10
@@ -1755,7 +1762,7 @@ publish_scans_image() { # publish_scans_image IMAGE_TAG
         # registratieprobleem, geen wachttoestand. Dit vraagt om de
         # gedocumenteerde lokale publicatieroute en daarna een veilige --resume.
         if [ "$poll" -ge 3 ]; then
-          die "geen ci-image-scans-run aangemaakt voor $BRANCH; publiceer lokaal met 'make ci-image-scans-publish' en hervat daarna met: scripts/release_auto.sh --resume $TAG"
+          die "geen ci-image-scans-run aangemaakt voor $BRANCH; publiceer lokaal met 'scripts/release_scans_image.sh $TAG' (bouwt vanaf de release-ref, nooit van HEAD) en hervat daarna met: scripts/release_auto.sh --resume $TAG"
         fi
         sleep 20
         ;;

@@ -65,6 +65,9 @@ void main() {
       'release/v9.9.9',
     ]);
     git(repo, ['tag', '-a', 'v9.9.9', '-m', 'OciDeck v9.9.9']);
+    // ensure_worktree_on_tag bewijst sinds #2295 dat de lokale tag díe van
+    // origin is; deze zelf-verwijzende remote maakt die teruglezing echt.
+    git(repo, ['remote', 'add', 'origin', repo.path]);
     // Waar fase 2 de operator achterlaat: op de release-branch, niet op de tag.
     git(repo, ['checkout', '--quiet', 'release/v9.9.9']);
     return repo;

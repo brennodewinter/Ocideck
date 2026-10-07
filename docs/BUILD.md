@@ -808,7 +808,9 @@ a `--resume` of v0.6.5 ran a day later on `main` with four merges the tag did
 not carry, and only a coincidentally red `sbom-verify` kept that code from going
 live as v0.6.5. So Phase 3 checks the tag out itself (fetching it from `origin`
 first if this clone lacks it) and refuses only when it *cannot*: a dirty working
-tree, or an untracked file in the way. Up to v0.6.8 it merely demanded that
+tree, an untracked file in the way, or a local tag that does not match `origin`'s
+— the local ref must provably be the pushed one before any `deploy-web` build may
+run. Up to v0.6.8 it merely demanded that
 `HEAD` already be the tag, which a release that lands as a merge commit can
 never satisfy — the tag sits on the merge, the working tree on the release
 branch merged into it — so every fresh run stranded here and had to be checked
@@ -848,7 +850,13 @@ idempotently; the expensive Phase 1 (build/notarize) is never redone. So a pre-t
 stall (the usual case — the gate simply took longer than the wait) resumes at the
 gate/merge; a post-tag stall (Phase 3 signing/deploy, or an upstream job) resumes
 at Phase 3. The PR is found by title, so it is still located after the branch is
-deleted on merge, and the tag is placed on the PR's exact merge commit.
+deleted on merge, and the tag is placed on the PR's exact merge commit. The two
+manual fallback routes are equally ref-bound (#2295): if the `ci-image-scans`
+dispatch is impossible, `scripts/release_scans_image.sh vX.Y.Z` publishes the
+image from a temporary worktree on the release ref — never from wherever `HEAD`
+happens to sit after the chain cleaned up — and reads that exact registry tag
+back; no failure message ever advises a bare `make` that silently reads the
+current checkout.
 
 Fail-safe: `set -Eeuo pipefail` plus an `ERR` trap name *which* step failed on
 *which* line, and whether the tag was already pushed — before the push nothing

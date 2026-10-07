@@ -10,6 +10,16 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **handmatige releaseherstelroutes** (#2295) zijn nu ref-veilig: geen
+  faalmelding adviseert meer een los `make`-commando dat impliciet op de
+  huidige checkout werkt. De scans-imagefallback is
+  `scripts/release_scans_image.sh vX.Y.Z` — die bouwt aantoonbaar in een
+  tijdelijke werkboom op de release-ref (branch, of de tag als de branch al
+  opgeruimd is) met de scannerpins van díe ref en leest daarna exact die
+  registrytag terug. De webdeploy bewijst bovendien dat de lokale tag díe
+  van origin is, eist een schone werkboom en bouwt alleen vanaf de
+  tag-commit; een afwijkende lokale ref blokkeert de deploy met hersteladvies
+  in plaats van andere code als `$TAG` te publiceren.
 - De **remote tagpush** (#2297) geldt vanaf de eerste poging als
   remote-onzeker totdat de teruglezing hem bevestigt. Valt het antwoord of de
   teruglezing weg terwijl de server de tag al sloeg, dan ruimde de oude keten
