@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **SIGINT en SIGTERM zijn nu veilige afbrekingen** (#2298) in
+  `release_auto.sh` en `sign_release.sh`. Een signaal is geen commandofout en
+  bereikte de `ERR`-trap niet: Ctrl-C na het aanmaken van de releasebranch liet
+  die tak mét versiebump staan, waarna een verse run er terecht op weigerde;
+  en een afgebroken tekenrun liet een geschreven maar nog niet geverifieerde
+  `SHA256SUMS.minisig` liggen. Beide scripts delen nu dezelfde gelaagde
+  herstelbehandeling als een gewone fout — vóór de tagpush opruimen en opnieuw
+  mogen, bij een onzekere of bevestigde push niets terugdraaien maar eerst
+  `--status` lezen — met de passende 128+n exitstatus.
 - De **lokale macOS-installatie is werkelijk hervatbaar** (#2304). De te
   installeren app zat alleen in een procesvariabele; faalde de wissel ná een
   complete publieke release, dan sloeg `--resume` de lokale installatie stil
