@@ -712,6 +712,14 @@ final List<DeckTemplate> deckTemplates = [
     requiresInfoSafety: true,
   ),
   DeckTemplate(
+    id: 'safariAssurance',
+    title: 'SAFARI-assessment digitale soevereiniteit',
+    description:
+        'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een '
+        'assurance-oordeel volgens SAFARI.',
+    icon: 'certification',
+  ),
+  DeckTemplate(
     id: 'procesverbetering-dmaic',
     title: 'Procesverbetering: DMAIC-project',
     description:

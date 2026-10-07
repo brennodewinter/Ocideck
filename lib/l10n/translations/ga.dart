@@ -217,8 +217,6 @@ const _dutchSourceGa = {
       'Séalaithe. Sábháil (Ctrl/Cmd+S) chun é a choinneáil.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ullmhaíodh an tuarascáil seo go fírinneach.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Ní féidir séalú a dhéanamh go dtí go seiceáiltear gach dréacht AI. Le seiceáil fós ar shleamhnán(áin):',
   'Uit sjabloon…': 'Ó theimpléad…',
   'Sjabloon kiezen': 'Roghnaigh teimpléad',
   'Scope-object': 'Réad scóipe',
@@ -1657,6 +1655,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Ní féidir séalú a dhéanamh ach nuair atá gach dréacht agus réimse éigeantach comhlánaithe. Tá le seiceáil fós ar an sleamhnán:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Measúnú SAFARI ar cheannasacht dhigiteach',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Deic oibre iomlán don raon feidhme, do cheisteanna measúnaithe, d\'fhianaise, do scóráil agus do thuairim dearbhaithe de réir SAFARI.',
   'Nieuwste eerst': 'Is nuaí ar dtús',
   'Oudste eerst': 'Is sine ar dtús',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

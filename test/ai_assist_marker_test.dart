@@ -82,6 +82,101 @@ void main() {
       expect(deckHasUnreviewedAiMarkers(deck), isFalse);
       expect(slidesWithUnreviewedAiMarkers(deck), isEmpty);
     });
+
+    test('SAFARI starter values block sealing until explicitly completed', () {
+      Slide table(String value) => Slide.create(SlideType.table).copyWith(
+        tableEditable: true,
+        tableRows: [
+          ['Veld', 'Invulling'],
+          ['Uitkomst', value],
+        ],
+      );
+      final open = Deck(
+        title: 'SAFARI',
+        standardsUsed: const ['SAFARI@0.9', 'ECSF'],
+        slides: [Slide.create(SlideType.title), table('…')],
+      );
+      expect(slidesWithUnresolvedSafariFields(open), [2]);
+      expect(
+        slidesWithUnresolvedSafariFields(
+          open.copyWith(slides: [open.slides.first, table('n.v.t.')]),
+        ),
+        isEmpty,
+      );
+    });
+
+    test(
+      'starter values in ordinary decks do not change the seal contract',
+      () {
+        final deck = Deck(
+          title: 'Ander deck',
+          slides: [
+            Slide.create(SlideType.table).copyWith(
+              tableEditable: true,
+              tableRows: const [
+                ['Veld', 'Invulling'],
+                ['Optioneel', '…'],
+              ],
+            ),
+          ],
+        );
+        expect(slidesWithUnresolvedSafariFields(deck), isEmpty);
+      },
+    );
+
+    test('SAFARI scores and totals must be numeric and consistent', () {
+      Slide scorecard(String firstScore) =>
+          Slide.create(SlideType.table).copyWith(
+            title: 'SAFARI-scorekaart',
+            tableEditable: true,
+            tableRows: [
+              [
+                'Code',
+                'Gewicht',
+                'Vastgesteld 0-4',
+                'Bewijs 0-4',
+                'Oordeel',
+                'Bron',
+              ],
+              for (var i = 0; i < 8; i++)
+                [
+                  'SOV-${i + 1}',
+                  const [
+                    '15%',
+                    '10%',
+                    '10%',
+                    '15%',
+                    '20%',
+                    '15%',
+                    '10%',
+                    '5%',
+                  ][i],
+                  i == 0 ? firstScore : '2',
+                  '2',
+                  'voldoet',
+                  'doelconclusie ${i + 1}',
+                ],
+            ],
+          );
+      Slide totals(String ecsf) => Slide.create(SlideType.table).copyWith(
+        title: 'Totaaluitkomst',
+        tableEditable: true,
+        tableRows: [
+          ['Onderdeel', 'Uitkomst'],
+          ['SEAL-totaalniveau', '2'],
+          ['Gewogen ECSF-score', ecsf],
+        ],
+      );
+      Deck deck(String firstScore, String ecsf) => Deck(
+        title: 'SAFARI',
+        standardsUsed: const ['SAFARI@0.9', 'ECSF'],
+        slides: [scorecard(firstScore), totals(ecsf)],
+      );
+
+      expect(slidesWithUnresolvedSafariFields(deck('2', '50%')), isEmpty);
+      expect(slidesWithUnresolvedSafariFields(deck('x', '50%')), [1, 2]);
+      expect(slidesWithUnresolvedSafariFields(deck('2', '51%')), [2]);
+    });
   });
 
   group('de markering overleeft de privacyprojectie', () {
@@ -146,6 +241,28 @@ void main() {
       n.finalizeAndSeal();
       expect(n.state.deck!.finalized, isTrue);
       expect(n.state.deck!.sealAt, isNotEmpty);
+    });
+
+    test('refuses to seal a SAFARI deck with starter values', () {
+      final n = _notifier();
+      n.loadDeck(
+        Deck(
+          title: 'SAFARI',
+          standardsUsed: const ['SAFARI@0.9', 'ECSF'],
+          slides: [
+            Slide.create(SlideType.table).copyWith(
+              tableEditable: true,
+              tableRows: const [
+                ['Veld', 'Invulling'],
+                ['Scope', '…'],
+              ],
+            ),
+          ],
+        ),
+      );
+      expect(n.slidesBlockingSeal, [1]);
+      n.finalizeAndSeal();
+      expect(n.state.deck!.finalized, isFalse);
     });
   });
 }

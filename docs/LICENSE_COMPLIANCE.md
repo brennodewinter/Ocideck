@@ -8,8 +8,10 @@ software, how that is verified, and the result of the latest check.
 
 ## Policy
 
-Every dependency and every bundled asset must be available under an OSI-approved
-open-source licence. No proprietary or source-unavailable components are shipped.
+Every software dependency and bundled runtime asset must be available under an
+OSI-approved open-source licence. Separately licensed bundled content is
+recorded below with its own terms. No proprietary or source-unavailable
+components are shipped.
 
 Accepted licence families: **MIT, BSD (2-/3-Clause), Apache-2.0, MPL-2.0, ISC,
 Zlib, BSL-1.0, Unlicense, SIL OFL-1.1, CC0** (and EUPL-1.2 for OciDeck itself).
@@ -112,6 +114,16 @@ have to travel inside them rather than only living in this repository:
 
 `marp_html_service_licenses_test.dart` fails if a bundle listed in
 `assets/web_export/MANIFEST.json` reaches the export without a notice.
+
+## Bundled template content
+
+The template catalogue includes the SAFARI assurance work deck in
+`assets/templates/safariAssurance.<lang>.md` (31 content languages). Its 49
+SAFARI v0.9 questions, auditor evidence, scoring and assurance judgement are a
+**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)** adaptation of
+[SAFARI v0.9](https://pawprint.vigilis.online/LibreKAT/Safari) by Brenno de
+Winter and Stichting LibreKAT. Attribution and share-alike apply to that
+template content; the OciDeck code remains **EUPL-1.2**.
 
 ## Bundled reference data (information-security module)
 

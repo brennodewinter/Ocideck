@@ -218,8 +218,6 @@ const _dutchSourcePl = {
       'Zapieczętowano. Zapisz (Ctrl/Cmd+S), aby zachować.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Niniejszy raport sporządzono zgodnie z prawdą.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Zapieczętowanie jest możliwe dopiero po sprawdzeniu wszystkich szkiców AI. Do sprawdzenia na slajdzie(-ach):',
   'Uit sjabloon…': 'Z szablonu…',
   'Sjabloon kiezen': 'Wybierz szablon',
   'Scope-object': 'Obiekt zakresu',
@@ -1639,6 +1637,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Zapieczętowanie jest możliwe dopiero po uzupełnieniu wszystkich wersji roboczych i pól obowiązkowych. Pozostało do sprawdzenia na slajdzie:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Ocena SAFARI suwerenności cyfrowej',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Kompletny zestaw roboczy dotyczący zakresu, pytań oceniających, dowodów, punktacji i opinii assurance zgodnie z SAFARI.',
   'Nieuwste eerst': 'Najnowsze najpierw',
   'Oudste eerst': 'Najstarsze najpierw',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

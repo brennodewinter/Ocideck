@@ -848,7 +848,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            '${context.l10n.d('Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:')} ${blocking.join(', ')}',
+            '${context.l10n.d('Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:')} ${blocking.join(', ')}',
           ),
         ),
       );
