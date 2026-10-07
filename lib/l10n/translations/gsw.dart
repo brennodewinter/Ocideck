@@ -1630,6 +1630,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Versiegle isch erscht mögli, wenn alli Entwürf und Pflichfelder abgschlosse sind. No uf dr Folie z prüefe:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-Bewärtig vo dr digitale Souveränität',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Vollschtändigs Arbetsdeck für Umfång, Prüfungsfroge, Noowis, Bewertig und es Assurance-Urteil gemäss SAFARI.',
   'Nieuwste eerst': 'Nöisti zerscht',
   'Oudste eerst': 'Eltesti zerscht',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

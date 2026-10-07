@@ -1647,6 +1647,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Запечатването е възможно едва след като всички чернови и задължителни полета са завършени. Остава да се провери на слайда:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Оценка SAFARI на цифровия суверенитет',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Пълен работен пакет за обхват, въпроси за оценка, доказателства, оценяване и становище за увереност съгласно SAFARI.',
   'Nieuwste eerst': 'Най-новите първо',
   'Oudste eerst': 'Най-старите първо',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

@@ -691,7 +691,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
     // AI_ASSIST §16.3: refuse to seal while any AI-drafted field is unreviewed,
     // so the EIS 1.6 attestation always covers human-verified text. The UI
     // pre-checks it (see [slidesBlockingSeal]); this is the authoritative guard.
-    if (deckHasUnreviewedAiMarkers(deck)) return;
+    if (deckHasUnreviewedAiMarkers(deck) ||
+        slidesWithUnresolvedSafariFields(deck).isNotEmpty) {
+      return;
+    }
     final sealed = DocumentIntegrity(_md).seal(deck, signature: signature);
     _clearHistory();
     state = state.copyWith(deck: sealed, isDirty: true);
@@ -719,7 +722,11 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// explain the block instead of silently doing nothing.
   List<int> get slidesBlockingSeal {
     final deck = state.deck;
-    return deck == null ? const [] : slidesWithUnreviewedAiMarkers(deck);
+    if (deck == null) return const [];
+    return {
+      ...slidesWithUnreviewedAiMarkers(deck),
+      ...slidesWithUnresolvedSafariFields(deck),
+    }.toList()..sort();
   }
 
   /// Set the deck-level visual signature draft (authored on the `signOff` slide,

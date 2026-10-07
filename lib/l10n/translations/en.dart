@@ -827,6 +827,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sealing is only possible when all drafts and mandatory fields have been completed. Still to check on slide:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI digital sovereignty assessment',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Complete working deck for scope, assessment questions, evidence, scoring and an assurance opinion according to SAFARI.',
   'Nieuwste eerst': 'Newest first',
   'Oudste eerst': 'Oldest first',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

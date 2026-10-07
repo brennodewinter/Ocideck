@@ -1655,6 +1655,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'A selagem só é possível quando todos os rascunhos e campos obrigatórios estiverem concluídos. Ainda a verificar no diapositivo:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Avaliação SAFARI da soberania digital',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Deck de trabalho completo para âmbito, questões de avaliação, evidências, pontuação e uma opinião de asseguração segundo o SAFARI.',
   'Nieuwste eerst': 'Mais recentes primeiro',
   'Oudste eerst': 'Mais antigos primeiro',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

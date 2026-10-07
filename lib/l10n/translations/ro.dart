@@ -1643,6 +1643,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sigilarea este posibilă numai după ce toate schițele și câmpurile obligatorii sunt completate. Mai trebuie verificat pe diapozitiv:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Evaluarea SAFARI a suveranității digitale',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Set de lucru complet pentru domeniu, întrebări de evaluare, dovezi, punctaj și o opinie de asigurare conform SAFARI.',
   'Nieuwste eerst': 'Cele mai recente întâi',
   'Oudste eerst': 'Cele mai vechi întâi',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

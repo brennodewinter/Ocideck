@@ -664,6 +664,12 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'La sigillatura è possibile solo quando tutte le bozze e i campi obbligatori sono stati completati. Ancora da verificare nella diapositiva:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Valutazione SAFARI della sovranità digitale',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Mazzo di lavoro completo per ambito, domande di valutazione, evidenze, punteggio e giudizio di assurance secondo SAFARI.',
   'Nieuwste eerst': 'Più recenti prima',
   'Oudste eerst': 'Più vecchi prima',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

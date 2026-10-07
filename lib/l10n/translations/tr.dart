@@ -2538,6 +2538,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Mühürleme, ancak tüm taslaklar ve zorunlu alanlar tamamlandığında mümkündür. Slaytta hâlâ kontrol edilmesi gerekenler:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Dijital egemenlik SAFARI değerlendirmesi',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Kapsam, değerlendirme soruları, kanıtlar, puanlama ve SAFARI\'ye göre bir güvence görüşü için eksiksiz çalışma destesi.',
   'Nieuwste eerst': 'Önce en yeniler',
   'Oudste eerst': 'Önce en eskiler',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

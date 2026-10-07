@@ -1627,6 +1627,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Forsegling er kun mulig, når alle udkast og obligatoriske felter er afsluttet. Mangler stadig at blive kontrolleret på diaset:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-vurdering af digital suverænitet',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Komplet arbejdsdeck til omfang, vurderingsspørgsmål, dokumentation, scoring og en assurance-erklæring i henhold til SAFARI.',
   'Nieuwste eerst': 'Nyeste først',
   'Oudste eerst': 'Ældste først',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

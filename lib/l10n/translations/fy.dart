@@ -667,6 +667,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Fersegeljen kin pas as alle konsepten en ferplichte fjilden ôfmakke binne. Noch te kontrolearjen op dia:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-beoardieling digitale soevereiniteit',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Folslein wurkdeck foar berik, toetsfragen, bewiis, skoaring en in assurance-oardiel neffens SAFARI.',
   'Nieuwste eerst': 'Nijste earst',
   'Oudste eerst': 'Aldste earst',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

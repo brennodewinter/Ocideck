@@ -1634,6 +1634,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Užantspauduoti galima tik užbaigus visus juodraščius ir privalomus laukus. Dar reikia patikrinti skaidrėje:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI skaitmeninio suvereniteto vertinimas',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Visas darbo rinkinys, skirtas apimčiai, vertinimo klausimams, įrodymams, balų skyrimui ir užtikrinimo išvadai pagal SAFARI.',
   'Nieuwste eerst': 'Naujausi pirmiausia',
   'Oudste eerst': 'Seniausi pirmiausia',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

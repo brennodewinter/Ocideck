@@ -1627,6 +1627,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Penyegelan hanya dapat dilakukan setelah semua draf dan bidang wajib diselesaikan. Masih perlu diperiksa pada slide:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Penilaian SAFARI kedaulatan digital',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Dek kerja lengkap untuk ruang lingkup, pertanyaan penilaian, bukti, penilaian skor, dan opini assurance sesuai SAFARI.',
   'Nieuwste eerst': 'Terbaru dulu',
   'Oudste eerst': 'Terlama dulu',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

@@ -219,3 +219,39 @@ List<int> slidesWithUnreviewedAiMarkers(Deck deck) => [
 /// blocked (see [slidesWithUnreviewedAiMarkers]).
 bool deckHasUnreviewedAiMarkers(Deck deck) =>
     deck.slides.any((s) => s.aiAssistedFields.isNotEmpty);
+
+/// SAFARI assurance decks must not be sealed while their editable tables still
+/// contain starter values. An explicit `n.v.t.` is a decision; an empty cell,
+/// ellipsis, bracket placeholder or untouched slash-choice is not.
+List<int> slidesWithUnresolvedSafariFields(Deck deck) {
+  final questionIdPattern = RegExp(r'^([1-8]\.[1-7])(?:\s|$)');
+  final questionIds = <String>{};
+  for (final slide in deck.slides) {
+    for (final cell in slide.tableRows.expand((row) => row)) {
+      final match = questionIdPattern.firstMatch(cell);
+      if (match != null) questionIds.add(match.group(1)!);
+    }
+  }
+  final isSafari =
+      deck.standardsUsed.contains('SAFARI@0.9') ||
+      (deck.slides.any((slide) => slide.title.contains('SAFARI')) &&
+          questionIds.length == 49);
+  if (!isSafari) return const [];
+  final bracketPlaceholder = RegExp(r'\[[^\]]+\]');
+  bool unresolved(String value) {
+    final text = value.trim();
+    return text.isEmpty ||
+        text.contains('…') ||
+        text.contains(' / ') ||
+        text.contains('L/M/H') ||
+        text.contains('J/O/S') ||
+        bracketPlaceholder.hasMatch(text);
+  }
+
+  return [
+    for (var i = 0; i < deck.slides.length; i++)
+      if (deck.slides[i].tableEditable &&
+          deck.slides[i].tableRows.skip(1).expand((row) => row).any(unresolved))
+        i + 1,
+  ];
+}

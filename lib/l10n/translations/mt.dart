@@ -1645,6 +1645,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'L-issiġillar huwa possibbli biss meta l-abbozzi u l-oqsma obbligatorji kollha jkunu tlestew. Għad irid jiġi ċċekkjat fuq is-slide:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Valutazzjoni SAFARI tas-sovranità diġitali',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Sett ta\' ħidma sħiħ għall-ambitu, il-mistoqsijiet ta\' valutazzjoni, l-evidenza, l-iskorar u opinjoni ta\' assurance skont SAFARI.',
   'Nieuwste eerst': 'L-aktar riċenti l-ewwel',
   'Oudste eerst': 'L-eqdem l-ewwel',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

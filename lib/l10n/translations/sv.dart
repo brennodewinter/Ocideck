@@ -1626,6 +1626,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Försegling är möjlig först när alla utkast och obligatoriska fält har slutförts. Återstår att kontrollera på bilden:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-bedömning av digital suveränitet',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Fullständigt arbetsunderlag för omfattning, bedömningsfrågor, bevis, poängsättning och ett assurance-utlåtande enligt SAFARI.',
   'Nieuwste eerst': 'Nyaste först',
   'Oudste eerst': 'Äldsta först',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

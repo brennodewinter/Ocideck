@@ -667,6 +667,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Le scellement n’est possible que lorsque tous les brouillons et champs obligatoires sont complétés. Reste à vérifier sur la diapositive :',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Évaluation SAFARI de la souveraineté numérique',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Jeu de diapositives de travail complet couvrant le périmètre, les questions d’évaluation, les éléments probants, la notation et une opinion d’assurance selon SAFARI.',
   'Nieuwste eerst': 'Plus récents d\'abord',
   'Oudste eerst': 'Plus anciens d\'abord',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

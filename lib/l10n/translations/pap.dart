@@ -666,6 +666,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sela por tuma ta posibel ora tur konsepto i campo obligatorio a ser kompletá. Aún pa kontrolá riba diapositiva:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Evaluashon SAFARI di soberania digital',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Deck di trabou komplet pa alcance, preguntanan di evaluashon, prueba, puntuashon i un opinion di assurance segun SAFARI.',
   'Nieuwste eerst': 'Mas resien promé',
   'Oudste eerst': 'Mas bieu promé',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

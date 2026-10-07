@@ -1627,6 +1627,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Zapečatenje je mogoče šele, ko so dokončani vsi osnutki in obvezna polja. Na prosojnici je treba še preveriti:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Ocena SAFARI digitalne suverenosti',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Celovit delovni komplet za obseg, ocenjevalna vprašanja, dokaze, točkovanje in mnenje o zagotovilu v skladu s SAFARI.',
   'Nieuwste eerst': 'Najnovejše najprej',
   'Oudste eerst': 'Najstarejše najprej',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

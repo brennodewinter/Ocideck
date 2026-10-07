@@ -82,6 +82,47 @@ void main() {
       expect(deckHasUnreviewedAiMarkers(deck), isFalse);
       expect(slidesWithUnreviewedAiMarkers(deck), isEmpty);
     });
+
+    test('SAFARI starter values block sealing until explicitly completed', () {
+      Slide table(String value) => Slide.create(SlideType.table).copyWith(
+        tableEditable: true,
+        tableRows: [
+          ['Veld', 'Invulling'],
+          ['Uitkomst', value],
+        ],
+      );
+      final open = Deck(
+        title: 'SAFARI',
+        standardsUsed: const ['SAFARI@0.9', 'ECSF'],
+        slides: [Slide.create(SlideType.title), table('…')],
+      );
+      expect(slidesWithUnresolvedSafariFields(open), [2]);
+      expect(
+        slidesWithUnresolvedSafariFields(
+          open.copyWith(slides: [open.slides.first, table('n.v.t.')]),
+        ),
+        isEmpty,
+      );
+    });
+
+    test(
+      'starter values in ordinary decks do not change the seal contract',
+      () {
+        final deck = Deck(
+          title: 'Ander deck',
+          slides: [
+            Slide.create(SlideType.table).copyWith(
+              tableEditable: true,
+              tableRows: const [
+                ['Veld', 'Invulling'],
+                ['Optioneel', '…'],
+              ],
+            ),
+          ],
+        );
+        expect(slidesWithUnresolvedSafariFields(deck), isEmpty);
+      },
+    );
   });
 
   group('de markering overleeft de privacyprojectie', () {
@@ -146,6 +187,28 @@ void main() {
       n.finalizeAndSeal();
       expect(n.state.deck!.finalized, isTrue);
       expect(n.state.deck!.sealAt, isNotEmpty);
+    });
+
+    test('refuses to seal a SAFARI deck with starter values', () {
+      final n = _notifier();
+      n.loadDeck(
+        Deck(
+          title: 'SAFARI',
+          standardsUsed: const ['SAFARI@0.9', 'ECSF'],
+          slides: [
+            Slide.create(SlideType.table).copyWith(
+              tableEditable: true,
+              tableRows: const [
+                ['Veld', 'Invulling'],
+                ['Scope', '…'],
+              ],
+            ),
+          ],
+        ),
+      );
+      expect(n.slidesBlockingSeal, [1]);
+      n.finalizeAndSeal();
+      expect(n.state.deck!.finalized, isFalse);
     });
   });
 }

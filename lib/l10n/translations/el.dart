@@ -1652,6 +1652,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Η σφράγιση είναι δυνατή μόνο όταν έχουν ολοκληρωθεί όλα τα προσχέδια και τα υποχρεωτικά πεδία. Απομένει να ελεγχθεί στη διαφάνεια:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Αξιολόγηση SAFARI της ψηφιακής κυριαρχίας',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Πλήρες πακέτο εργασίας για το πεδίο εφαρμογής, τα ερωτήματα αξιολόγησης, τα τεκμήρια, τη βαθμολόγηση και ένα συμπέρασμα διασφάλισης σύμφωνα με το SAFARI.',
   'Nieuwste eerst': 'Νεότερα πρώτα',
   'Oudste eerst': 'Παλαιότερα πρώτα',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

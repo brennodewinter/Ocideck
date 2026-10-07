@@ -664,6 +664,12 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'El sellado solo es posible cuando se han completado todos los borradores y campos obligatorios. Pendiente de revisar en la diapositiva:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Evaluación SAFARI de la soberanía digital',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Presentación de trabajo completa para el alcance, las preguntas de evaluación, las evidencias, la puntuación y una opinión de aseguramiento conforme a SAFARI.',
   'Nieuwste eerst': 'Más recientes primero',
   'Oudste eerst': 'Más antiguos primero',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

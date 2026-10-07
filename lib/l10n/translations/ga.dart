@@ -1657,6 +1657,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Ní féidir séalú a dhéanamh ach nuair atá gach dréacht agus réimse éigeantach comhlánaithe. Tá le seiceáil fós ar an sleamhnán:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Measúnú SAFARI ar cheannasacht dhigiteach',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Deic oibre iomlán don raon feidhme, do cheisteanna measúnaithe, d\'fhianaise, do scóráil agus do thuairim dearbhaithe de réir SAFARI.',
   'Nieuwste eerst': 'Is nuaí ar dtús',
   'Oudste eerst': 'Is sine ar dtús',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

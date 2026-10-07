@@ -1628,6 +1628,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Zapečetění je možné až po dokončení všech návrhů a povinných polí. Ještě je třeba zkontrolovat na snímku:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Hodnocení SAFARI digitální suverenity',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Úplný pracovní balíček pro rozsah, hodnoticí otázky, důkazy, bodování a ujišťovací výrok podle SAFARI.',
   'Nieuwste eerst': 'Nejnovější napřed',
   'Oudste eerst': 'Nejstarší napřed',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

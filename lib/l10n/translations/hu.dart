@@ -1629,6 +1629,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'A lezárás csak akkor lehetséges, ha minden vázlat és kötelező mező elkészült. Még ellenőrizendő a dián:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'A digitális szuverenitás SAFARI-értékelése',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Teljes munkacsomag a hatókörhöz, az értékelési kérdésekhez, a bizonyítékokhoz, a pontozáshoz és egy, a SAFARI szerinti bizonyossági véleményhez.',
   'Nieuwste eerst': 'Legújabb elöl',
   'Oudste eerst': 'Legrégebbi elöl',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
