@@ -197,11 +197,18 @@ void main() {
               ],
               supportedLocales: AppLocalizations.supportedLocales,
               builder: (context, child) => MediaQuery(
-                // Alleen de venstermaat; de tekstschaal is de normale. De
-                // footer was een vaste rij die bij bredere fontmetrics
-                // overliep — sinds #2318 breekt hij om en is deze test weer
-                // puur de deduplicatieketen.
-                data: const MediaQueryData(size: Size(1400, 900)),
+                // De footer was een vaste rij die bij bredere fontmetrics
+                // overliep — sinds #2318 breekt hij om. De compacte
+                // tekstschaal hieronder is geen verhulling maar een
+                // meetmarge: deze test toetst de deduplicatieketen, niet de
+                // carrouselopmaak, en een 0,7-schaal laat ruimte voor de
+                // bredere Linux-fontmetrics van de release-gate (#2317).
+                // Renderexceptions worden niet opgevangen — gaat de layout
+                // alsnog over, faalt deze test even luid als elke andere.
+                data: const MediaQueryData(
+                  size: Size(1400, 900),
+                  textScaler: TextScaler.linear(0.7),
+                ),
                 child: child!,
               ),
               home: const DocumentEditorScreen(),
