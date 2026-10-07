@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **lokale releasebranch** (#2306) wordt na een geslaagde verse release nu
+  echt opgeruimd: eindigde de keten zonder tag-checkout (de CI zette de demo
+  al live), dan bleef de werkboom op de remote-verwijderde versiebumpbranch
+  staan en erfde elke volgende aftakking die stilletjes. Een verse release
+  eindigt voortaan op de starttak én zonder de eigen releasebranch — een
+  vuile werkboom of worktree-lock blokkeert dat met een expliciete melding
+  in plaats van werk mee te dragen of weg te gooien. `--resume` verwijdert
+  nooit een tak die die run niet zelf aanmaakte.
 - De **handmatige releaseherstelroutes** (#2295) zijn nu ref-veilig: geen
   faalmelding adviseert meer een los `make`-commando dat impliciet op de
   huidige checkout werkt. De scans-imagefallback is

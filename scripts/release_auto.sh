@@ -1609,6 +1609,43 @@ restore_start_branch() {
   fi
 }
 
+# Een verse release eindigde op de door deze run gemaakte release-branch wanneer
+# deploy_web_if_needed de tag-checkout oversloeg (de CI had de demo al live) —
+# restore_start_branch keek alleen naar een lóse HEAD. Die tak is na merge+tag
+# een verweesde versiebump: alles wat er daarna van aftakt erft 'm, precies hoe
+# een bump ooit in een ongerelateerde PR belandde (#2306). Ruim daarom op wat
+# deze run zelf aanmaakte — en alleen dat: op --resume staat BRANCH_OWNED op 0
+# en raakt dit geen enkele tak.
+cleanup_owned_release_branch() {
+  [ "$BRANCH_OWNED" -eq 1 ] || return 0
+  [ -n "$BRANCH" ] || return 0
+  git rev-parse -q --verify "refs/heads/$BRANCH" >/dev/null 2>&1 || return 0
+  local head_ref err
+  head_ref="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+  if [ "$head_ref" = "$BRANCH" ]; then
+    # De werkboom staat nog op de tak die weggaat. Na de merge zijn de bomen
+    # gelijk, dus een checkout zou niet-gecommitte wijzigingen zónder protest
+    # meedragen naar de starttak — en daar hoort een losse edit niet (#2306).
+    # Dezelfde eis als bij de tag-checkout: schoon, of expliciet gemeld.
+    if ! git diff --quiet || ! git diff --cached --quiet \
+        || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+      cleanup_failed "werkboom niet schoon — niets verplaatst of weggegooid. Commit of herstel de wijzigingen op $BRANCH (of berg ze met 'git stash') en ruim daarna met de hand op."
+      return 0
+    fi
+    # Eerst terug naar de starttak: 'branch -D' weigert een uitgecheckte tak.
+    if ! err="$(git checkout --quiet "${START_BRANCH:-main}" 2>&1)"; then
+      cleanup_failed "terug naar ${START_BRANCH:-main} lukte niet: $err"
+      return 0
+    fi
+    log "Werkboom terug op ${START_BRANCH:-main}."
+  fi
+  if ! err="$(git branch -D "$BRANCH" 2>&1)"; then
+    cleanup_failed "$err"
+    return 0
+  fi
+  log "Lokale release-branch $BRANCH opgeruimd; merge en tag zijn bewezen."
+}
+
 install_macos_app() { # install_macos_app SOURCE_APP
   local source_app="$1" target="$APPLICATIONS_DIR/OciDeck.app"
   local stage backup had_old=0
@@ -1653,6 +1690,7 @@ finish() {
   STEP="klaar"
   section "Klaar — $TAG in $(elapsed)"
   restore_start_branch
+  cleanup_owned_release_branch
   log "OciDeck $TAG is uitgebracht, getekend en live."
   log ""
   log "Release-pagina : ${RELEASE_BASE_URL%/download}/tag/$TAG"

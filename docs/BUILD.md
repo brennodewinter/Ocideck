@@ -829,7 +829,12 @@ the manual-fallback advice, and only a green run plus a stale page points at
 the DNS/host check. Because checking the tag out leaves the working tree on a
 detached `HEAD`, the chain puts it back on the branch the release started from
 when it finishes — a failure there is reported, never fatal to a release that is
-already out. Phase 3 refuses to start while any job for the tag is still
+already out. The same finish removes the local release branch this run created
+once merge and tag are proven: even when the deploy never detached `HEAD` (the
+CI had already taken the demo live) the run ends back on the starting branch,
+and anything blocking the switch — a dirty tree, a worktree lock — is reported
+rather than carried along or discarded. `--resume` never deletes a branch it did
+not create. Phase 3 refuses to start while any job for the tag is still
 active. A timed-out CI wait stops the chain instead of falling through, and
 `--resume` follows the existing jobs before it signs. An absent manifest causes
 one automatic retry only after the previous run is terminal and has a failed job;
