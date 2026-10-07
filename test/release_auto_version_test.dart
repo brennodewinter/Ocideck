@@ -618,13 +618,14 @@ void main() {
   // GERICHT (branch weg), nooit een blanket 'git reset --hard' — die zou het
   // ongecommitte werk van parallelle sessies op deze gedeelde checkout wissen.
   test('de pre-tag abort-route ruimt de release-branch op (geen reset --hard)', () {
-    final onErr = functionBody('on_err');
+    // De gelaagde opruiming deelt recovery_report met de signaaltraps (#2298).
+    final recovery = functionBody('recovery_report');
     expect(
-      onErr,
+      recovery,
       contains('cleanup_branch'),
       reason:
-          'on_err moet cleanup_branch aanroepen zolang de tag nog niet gepusht is '
-          '(TAG_PUSHED=0).',
+          'recovery_report moet cleanup_branch aanroepen zolang de tag nog niet '
+          'gepusht is (TAG_PUSHED=0).',
     );
     final cleanup = functionBody('cleanup_branch');
     expect(
@@ -685,15 +686,15 @@ void main() {
           'gebruiker met een halve release-branch zitten.',
     );
 
-    // En on_err mag de opruiming niet vooraf aankondigen als voldongen feit —
-    // cleanup_branch meldt zelf wat er werkelijk gebeurde.
+    // En de herstelroute mag de opruiming niet vooraf aankondigen als voldongen
+    // feit — cleanup_branch meldt zelf wat er werkelijk gebeurde.
     expect(
-      functionBody('on_err'),
+      functionBody('recovery_report'),
       isNot(contains('wordt opgeruimd')),
       reason:
-          'on_err beweerde "de release-branch wordt opgeruimd" vóórdat de '
-          'opruiming had plaatsgevonden; die uitkomst hoort van cleanup_branch '
-          'te komen.',
+          'recovery_report beweerde "de release-branch wordt opgeruimd" vóórdat '
+          'de opruiming had plaatsgevonden; die uitkomst hoort van '
+          'cleanup_branch te komen.',
     );
   });
 

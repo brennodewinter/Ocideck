@@ -62,7 +62,20 @@ command -v minisign >/dev/null 2>&1 || {
 # Laat nooit een half product achter. `minisign -Sm` schrijft de .minisig vóór
 # de verify; breekt de verify (of wat dan ook) daarna af, dan is die .minisig
 # niet te vertrouwen en moet hij weg — anders zou een genegeerde exitcode een
-# niet-verifieerbare handtekening kunnen publiceren.
+# niet-verifieerbare handtekening kunnen publiceren. Een signaal is geen
+# commandofout en bereikt de ERR-trap niet — Ctrl-C liet die .minisig liggen
+# (#2298).
+sig_cleanup() {
+  rm -f "$SUMS.minisig"
+  printf 'onderbroken (SIG%s) — de nog niet geverifieerde handtekening is verwijderd; draai het script opnieuw.\n' "$1" >&2
+  case "$1" in
+    INT)  exit 130;;
+    TERM) exit 143;;
+    *)    exit 128;;
+  esac
+}
+trap 'sig_cleanup INT' INT
+trap 'sig_cleanup TERM' TERM
 trap 'rm -f "$SUMS.minisig"' ERR
 
 echo "== OciDeck: minisign detached signature over $SUMS =="
@@ -73,7 +86,7 @@ echo "-- verifiëren tegen $PUBKEY --"
 # een verwisselde sleutel of een corrupte handtekening vóór publicatie.
 minisign -Vm "$SUMS" -p "$PUBKEY"
 
-trap - ERR  # geslaagd én geverifieerd: de handtekening mag blijven staan
+trap - ERR INT TERM  # geslaagd én geverifieerd: de handtekening mag blijven staan
 
 echo
 echo "Klaar: $SUMS.minisig"

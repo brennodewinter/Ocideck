@@ -205,9 +205,11 @@ cleanup_branch() {
   printf '  Release-branch %s opgeruimd; je staat weer op %s.\n' \
     "$BRANCH" "$CLEANUP_BACK" >&2
 }
-on_err() {
-  local ec=$? ln=${1:-?}
-  printf '\nrelease-auto: FOUT in stap "%s" (regel %s, exit %s).\n' "$STEP" "$ln" "$ec" >&2
+# De gelaagde herstelboodschap + veilige opruiming die elke afbreking deelt —
+# een commandofout én een Ctrl-C/SIGTERM (#2298). Welke laag geldt hangt alleen
+# af van wat de run remote al bewees: na een bevestigde of onzekere tagpush
+# wordt niets automatisch teruggedraaid.
+recovery_report() {
   if [ "$TAG_PUSHED" -eq 1 ]; then
     printf '  De tag %s is AL gepusht — de release staat vast.\n' "${TAG:-?}" >&2
     printf '  Faalde het in fase 3 (tekenen/deploy) of op een upstream CI-job, maak dan\n' >&2
@@ -234,7 +236,29 @@ on_err() {
     cleanup_branch
   fi
 }
+on_err() {
+  local ec=$? ln=${1:-?}
+  printf '\nrelease-auto: FOUT in stap "%s" (regel %s, exit %s).\n' "$STEP" "$ln" "$ec" >&2
+  recovery_report
+}
+# Een signaal is geen commandofout en bereikt de ERR-trap niet — zonder eigen
+# trap stierf Ctrl-C terwijl de aangemaakte release-branch bleef staan en een
+# verse run er daarna terecht op weigerde (#2298). Dezelfde staat, dezelfde
+# behandeling, maar wél de passende signaal-exitstatus (128+n).
+on_sig() { # on_sig INT|TERM
+  local sig="$1"
+  printf '\nrelease-auto: onderbroken door SIG%s tijdens stap "%s".\n' \
+    "$sig" "$STEP" >&2
+  recovery_report
+  case "$sig" in
+    INT)  exit 130;;
+    TERM) exit 143;;
+    *)    exit 128;;
+  esac
+}
 trap 'on_err $LINENO' ERR
+trap 'on_sig INT' INT
+trap 'on_sig TERM' TERM
 
 # ── Argumenten ──────────────────────────────────────────────────────────────────
 RESUME=0

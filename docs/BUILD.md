@@ -873,7 +873,11 @@ current checkout.
 Fail-safe: `set -Eeuo pipefail` plus an `ERR` trap name *which* step failed on
 *which* line, and whether the tag was already pushed — before the push nothing
 went out and the local release branch is cleaned up (rerun fresh, or `--resume`
-if the PR was already open). That clean-up reports what it actually did: if the
+if the PR was already open). SIGINT and SIGTERM take that exact same path: an
+interruption is not a command error, so the `ERR` trap never saw it and the
+branch once stayed behind — now the signal runs the same tiered recovery report
+and exits with the matching 128+n status (#2298). That clean-up reports what it
+actually did: if the
 working tree blocks the checkout back to the branch you started from, the release
 branch — carrying the version bump — is still there, and the script says so and
 hands you the two commands to remove it. It used to swallow both failures and
