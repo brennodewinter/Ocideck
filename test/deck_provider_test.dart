@@ -661,6 +661,28 @@ void main() {
     expect(n.state.deck!.author, 'Auteur');
   });
 
+  test('updateInfo zet en wist de footer met undo en redo', () {
+    final n = _notifier()..newDeck('D');
+
+    n.updateInfo(footer: '  Vertrouwelijk  ');
+    expect(n.state.deck!.marpStyle.footer, 'Vertrouwelijk');
+    expect(n.state.deck!.marpStyle.hasFooter, isTrue);
+
+    n.undo();
+    expect(n.state.deck!.marpStyle.hasFooter, isFalse);
+    n.redo();
+    expect(n.state.deck!.marpStyle.footer, 'Vertrouwelijk');
+
+    n.updateInfo(footer: '   ');
+    expect(n.state.deck!.marpStyle.footer, isEmpty);
+    expect(n.state.deck!.marpStyle.hasFooter, isFalse);
+
+    n.undo();
+    expect(n.state.deck!.marpStyle.footer, 'Vertrouwelijk');
+    n.redo();
+    expect(n.state.deck!.marpStyle.hasFooter, isFalse);
+  });
+
   test('generateMarkdown and applyMarkdown round-trip the deck', () {
     final n = _notifier()..newDeck('D');
     n.addSlide(SlideType.bulletsImage, afterIndex: 0);

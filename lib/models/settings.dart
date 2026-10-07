@@ -1,5 +1,7 @@
 import 'privacy_disposition.dart';
+
 import 'package:app_appearance/app_appearance.dart' as foundation;
+
 import 'privacy_finding.dart';
 import '../services/privacy/privacy_regions.dart';
 import 'ai_settings.dart';
@@ -792,6 +794,22 @@ class ThemeProfile {
       preferredDocumentHeadingFontFamily ??
       documentHeadingFontFamily ??
       exportFontFamily;
+}
+
+/// Verplaatst een hoeklogo uit de footerzone; een merkstrook blijft vast staan.
+ThemeProfile themeWithFooterSafeLogo(ThemeProfile profile, String footerText) {
+  final strip = profile.brandStripPath?.trim() ?? '';
+  final visibleFooter = footerText.trim().isEmpty
+      ? profile.footerText.trim()
+      : footerText.trim();
+  if (visibleFooter.isEmpty ||
+      strip.isNotEmpty ||
+      !profile.logoPosition.startsWith('bottom')) {
+    return profile;
+  }
+  return profile.copyWith(
+    logoPosition: profile.logoPosition.replaceFirst('bottom', 'top'),
+  );
 }
 
 /// Wat een gewenst lettertype ([ThemeProfile.preferredFontFamily]) mag zijn:

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+
 import '../models/annotation.dart';
 import '../models/asset_origin.dart';
 import '../models/checklist_spec.dart';
@@ -10,6 +11,7 @@ import '../models/presentation_timing.dart';
 import '../models/provenance_signature.dart';
 import '../models/improvement_y01.dart';
 import '../models/document_signature.dart';
+import '../models/marp_style.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
@@ -42,6 +44,7 @@ import 'settings_provider.dart';
 import '../services/privacy/dismissal_codec.dart';
 
 part 'deck_provider_markdown.dart';
+part 'deck_provider_info.dart';
 part 'deck_provider_ai.dart';
 part 'deck_provider_miauw.dart';
 part 'deck_provider_checklist.dart';
@@ -625,55 +628,8 @@ class DeckNotifier extends StateNotifier<DeckState> {
         : RegExp(RegExp.escape(query), caseSensitive: false);
   }
 
-  void updateMeta({String? title, String? theme, bool? paginate}) {
-    final deck = state.deck;
-    if (deck == null) return;
-    _mutate(
-      deck.copyWith(title: title, theme: theme, paginate: paginate),
-      coalesceKey: 'meta',
-    );
-  }
-
-  void updateInfo({
-    String? title,
-    String? author,
-    String? organization,
-    String? version,
-    String? date,
-    String? description,
-    String? keywords,
-    String? language,
-    List<String>? standardsUsed,
-    List<UsedTool>? toolsUsed,
-    TlpLevel? tlp,
-    int? presentationTargetSeconds,
-    PresentationTimingConfig? presentationTiming,
-    bool? showRehearsalSummary,
-    bool? playOnly,
-  }) {
-    final deck = state.deck;
-    if (deck == null) return;
-    _mutate(
-      deck.copyWith(
-        title: title,
-        author: author,
-        organization: organization,
-        version: version,
-        date: date,
-        description: description,
-        keywords: keywords,
-        language: language,
-        standardsUsed: standardsUsed,
-        toolsUsed: toolsUsed,
-        tlp: tlp,
-        presentationTargetSeconds: presentationTargetSeconds,
-        presentationTiming: presentationTiming,
-        showRehearsalSummary: showRehearsalSummary,
-        playOnly: playOnly,
-      ),
-      coalesceKey: 'info',
-    );
-  }
+  void updateMeta({String? title, String? theme, bool? paginate}) =>
+      _updateMeta(this, title, theme, paginate);
 
   /// Documentintegriteit (§8 A1): rond het deck af en verzegel het. Zet de
   /// vergrendeling, de optionele [signature] en het moment van verzegelen, en

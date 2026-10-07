@@ -1643,6 +1643,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Un logo dintr-un colț inferior se mută automat în colțul superior corespunzător atunci când există un subsol.',
   'Nieuwste eerst': 'Cele mai recente întâi',
   'Oudste eerst': 'Cele mai vechi întâi',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

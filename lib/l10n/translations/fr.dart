@@ -667,6 +667,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Un logo dans un coin inférieur se déplace automatiquement vers le coin supérieur correspondant lorsqu\'un pied de page est présent.',
   'Nieuwste eerst': 'Plus récents d\'abord',
   'Oudste eerst': 'Plus anciens d\'abord',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

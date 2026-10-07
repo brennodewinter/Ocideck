@@ -1642,6 +1642,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Логотип у нижньому куті за наявності нижнього колонтитула автоматично переміщується до відповідного верхнього кута.',
   'Nieuwste eerst': 'Спочатку нові',
   'Oudste eerst': 'Спочатку старі',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

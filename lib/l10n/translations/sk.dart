@@ -1633,6 +1633,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logo v dolnom rohu sa pri použití päty automaticky presunie do zodpovedajúceho horného rohu.',
   'Nieuwste eerst': 'Najnovšie najprv',
   'Oudste eerst': 'Najstaršie najprv',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

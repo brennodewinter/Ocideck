@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/presentation_timing.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
@@ -68,6 +69,44 @@ void main() {
     );
 
     expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsOneWidget);
+  });
+
+  testWidgets('footerveld toont de deckfooter en bewaart de wijziging', (
+    tester,
+  ) async {
+    Future<PresentationInfo?>? result;
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: ElevatedButton(
+                onPressed: () => result = PresentationInfoDialog.show(
+                  context,
+                  const Deck(
+                    title: 'Test',
+                    marpStyle: MarpStyle(footer: 'Bestaande voet'),
+                  ),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    final footer = find.byKey(const ValueKey('presentation-footer'));
+    expect(tester.widget<TextField>(footer).controller!.text, 'Bestaande voet');
+
+    await tester.enterText(footer, '  Nieuwe voet  ');
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+
+    expect((await result!)!.footer, 'Nieuwe voet');
   });
 
   testWidgets('MIAUW-velden blijven weg als de module uitstaat', (

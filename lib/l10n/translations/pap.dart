@@ -666,6 +666,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Un logo den un skina abou ta move outomátikamente pa e mesun skina ariba ora tin un footer.',
   'Nieuwste eerst': 'Mas resien promé',
   'Oudste eerst': 'Mas bieu promé',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

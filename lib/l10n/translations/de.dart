@@ -667,6 +667,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Ein Logo in einer unteren Ecke verschiebt sich bei einer Fußzeile automatisch in dieselbe obere Ecke.',
   'Nieuwste eerst': 'Neueste zuerst',
   'Oudste eerst': 'Älteste zuerst',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

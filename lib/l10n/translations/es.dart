@@ -664,6 +664,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Un logotipo en una esquina inferior se desplaza automáticamente a la esquina superior correspondiente cuando hay un pie de página.',
   'Nieuwste eerst': 'Más recientes primero',
   'Oudste eerst': 'Más antiguos primero',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

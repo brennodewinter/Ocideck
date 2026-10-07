@@ -667,6 +667,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'In logo yn in ûnderhoeke ferskoot by in foettekst automatysk nei deselde boppehoeke.',
   'Nieuwste eerst': 'Nijste earst',
   'Oudste eerst': 'Aldste earst',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

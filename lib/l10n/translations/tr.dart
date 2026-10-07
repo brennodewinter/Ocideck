@@ -2538,6 +2538,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Alt köşedeki bir logo, alt bilgi olduğunda otomatik olarak karşılık gelen üst köşeye taşınır.',
   'Nieuwste eerst': 'Önce en yeniler',
   'Oudste eerst': 'Önce en eskiler',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

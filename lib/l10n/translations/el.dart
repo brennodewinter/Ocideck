@@ -1652,6 +1652,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Ένα λογότυπο σε κάτω γωνία μετακινείται αυτόματα στην αντίστοιχη επάνω γωνία όταν υπάρχει υποσέλιδο.',
   'Nieuwste eerst': 'Νεότερα πρώτα',
   'Oudste eerst': 'Παλαιότερα πρώτα',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

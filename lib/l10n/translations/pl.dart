@@ -1639,6 +1639,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logo w dolnym rogu automatycznie przesuwa się do odpowiadającego mu górnego rogu, gdy obecna jest stopka.',
   'Nieuwste eerst': 'Najnowsze najpierw',
   'Oudste eerst': 'Najstarsze najpierw',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

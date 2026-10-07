@@ -1631,6 +1631,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logotip u donjem kutu automatski se premješta u odgovarajući gornji kut kada postoji podnožje.',
   'Nieuwste eerst': 'Najnovije prvo',
   'Oudste eerst': 'Najstarije prvo',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

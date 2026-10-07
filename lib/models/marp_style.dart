@@ -104,12 +104,13 @@ class MarpStyle {
     String? imageFit,
     List<String>? imageFilters,
     bool? headingFit,
+    bool clearFooter = false,
   }) => MarpStyle._(
     color: color ?? this.color,
     backgroundColor: backgroundColor ?? this.backgroundColor,
     backgroundImage: backgroundImage ?? this.backgroundImage,
     header: header ?? this.header,
-    footer: footer ?? this.footer,
+    footer: clearFooter ? '' : (footer ?? this.footer),
     imageFit: imageFit ?? this.imageFit,
     imageFilters: imageFilters ?? this.imageFilters,
     headingFit: headingFit ?? this.headingFit,
@@ -117,7 +118,7 @@ class MarpStyle {
     hasBackgroundColor: backgroundColor != null || hasBackgroundColor,
     hasBackgroundImage: backgroundImage != null || hasBackgroundImage,
     hasHeader: header != null || hasHeader,
-    hasFooter: footer != null || hasFooter,
+    hasFooter: clearFooter ? false : (footer != null || hasFooter),
     hasImageFit: imageFit != null || hasImageFit,
     hasImageFilters: imageFilters != null || hasImageFilters,
   );

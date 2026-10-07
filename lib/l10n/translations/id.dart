@@ -1627,6 +1627,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logo di sudut bawah otomatis berpindah ke sudut atas yang sama saat ada footer.',
   'Nieuwste eerst': 'Terbaru dulu',
   'Oudste eerst': 'Terlama dulu',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

@@ -1645,6 +1645,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logo f\'rokna t\'isfel jiċċaqlaq awtomatikament għar-rokna ta\' fuq korrispondenti meta jkun hemm footer.',
   'Nieuwste eerst': 'L-aktar riċenti l-ewwel',
   'Oudste eerst': 'L-eqdem l-ewwel',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

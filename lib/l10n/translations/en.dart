@@ -827,6 +827,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'A logo in a bottom corner automatically moves to the corresponding top corner when a footer is present.',
   'Nieuwste eerst': 'Newest first',
   'Oudste eerst': 'Oldest first',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

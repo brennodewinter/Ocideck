@@ -1625,6 +1625,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logotips apakšējā stūrī, ja ir kājene, automātiski pārvietojas uz atbilstošo augšējo stūri.',
   'Nieuwste eerst': 'Jaunākie vispirms',
   'Oudste eerst': 'Vecākie vispirms',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

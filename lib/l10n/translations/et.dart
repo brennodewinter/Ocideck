@@ -1620,6 +1620,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Alumnurgas olev logo liigub jaluse olemasolul automaatselt vastavasse ülanurka.',
   'Nieuwste eerst': 'Uusimad esimesena',
   'Oudste eerst': 'Vanimad esimesena',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

@@ -1647,6 +1647,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Лого в долния ъгъл автоматично се премества в съответния горен ъгъл, когато има долен колонтитул.',
   'Nieuwste eerst': 'Най-новите първо',
   'Oudste eerst': 'Най-старите първо',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

@@ -1627,6 +1627,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Alakulmassa oleva logo siirtyy alatunnisteen yhteydessä automaattisesti vastaavaan yläkulmaan.',
   'Nieuwste eerst': 'Uusimmat ensin',
   'Oudste eerst': 'Vanhimmat ensin',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

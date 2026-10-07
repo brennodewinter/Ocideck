@@ -1642,6 +1642,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Insigne in angulo inferiore, cum footer adest, automatice ad eundem angulum superiorem movetur.',
   'Nieuwste eerst': 'Recentissima primum',
   'Oudste eerst': 'Veterrima primum',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

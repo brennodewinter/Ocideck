@@ -1657,6 +1657,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Bogann lógó i gcúinne íochtarach go huathoibríoch chuig an gcúinne uachtarach comhfhreagrach nuair a bhíonn buntásc ann.',
   'Nieuwste eerst': 'Is nuaí ar dtús',
   'Oudste eerst': 'Is sine ar dtús',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

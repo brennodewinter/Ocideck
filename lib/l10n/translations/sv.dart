@@ -1626,6 +1626,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'En logotyp i ett nedre hörn flyttas automatiskt till motsvarande övre hörn när det finns en sidfot.',
   'Nieuwste eerst': 'Nyaste först',
   'Oudste eerst': 'Äldsta först',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

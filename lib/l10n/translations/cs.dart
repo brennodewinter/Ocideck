@@ -1628,6 +1628,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Logo v dolním rohu se při použití zápatí automaticky přesune do odpovídajícího horního rohu.',
   'Nieuwste eerst': 'Nejnovější napřed',
   'Oudste eerst': 'Nejstarší napřed',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

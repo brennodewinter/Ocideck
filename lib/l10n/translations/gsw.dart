@@ -1630,6 +1630,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Es Logo i nere Egge rutscht mit ere Fuesszeile automatisch i di gliich oberi Egge.',
   'Nieuwste eerst': 'Nöisti zerscht',
   'Oudste eerst': 'Eltesti zerscht',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

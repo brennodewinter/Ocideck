@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/display_window_spec.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
@@ -24,8 +25,10 @@ Future<void> _match(
   String name,
   Slide slide, {
   ThemeProfile profile = const ThemeProfile(),
+  MarpStyle deckMarpStyle = const MarpStyle(),
   TlpLevel tlp = TlpLevel.none,
   bool watermark = false,
+  bool settleImages = false,
   int? slideNumber,
   int? slideCount,
 }) async {
@@ -40,6 +43,7 @@ Future<void> _match(
             child: SlidePreviewWidget(
               slide: slide,
               themeProfile: profile,
+              deckMarpStyle: deckMarpStyle,
               tlp: tlp,
               showClassificationWatermark: watermark,
               organization: watermark ? 'OciDeck BV' : '',
@@ -52,6 +56,7 @@ Future<void> _match(
     ),
   );
   await tester.pump(const Duration(milliseconds: 50));
+  if (settleImages) await tester.pumpAndSettle();
   await expectLater(
     find.byType(SlidePreviewWidget),
     matchesGoldenFile('goldens/$name.png'),
@@ -106,6 +111,27 @@ void main() {
         title: 'Agenda',
         bullets: ['Eerste punt', '\tSubpunt', 'Tweede punt', 'Derde punt'],
       ),
+    );
+  });
+
+  testWidgets('deckfooter verplaatst een linksonder-logo naar boven', (
+    tester,
+  ) async {
+    await _match(
+      tester,
+      'bullets_deck_footer_safe_logo',
+      Slide.create(SlideType.bullets).copyWith(
+        title: 'Agenda',
+        bullets: ['Eerste punt', 'Tweede punt', 'Derde punt'],
+        showLogo: true,
+      ),
+      profile: const ThemeProfile(
+        logoPath: 'asset:assets/images/vigilis-logo.png',
+        logoPosition: 'bottom-left',
+        logoSize: 96,
+      ),
+      deckMarpStyle: const MarpStyle(footer: 'Vertrouwelijk'),
+      settleImages: true,
     );
   });
 

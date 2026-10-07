@@ -1627,6 +1627,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
+      'Et logo i et nederste hjørne flyttes automatisk til det tilsvarende øverste hjørne, når der er en sidefod.',
   'Nieuwste eerst': 'Nyeste først',
   'Oudste eerst': 'Ældste først',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
