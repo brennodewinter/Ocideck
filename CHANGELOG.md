@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **`--status` heeft een vaste totale deadline** (#2305) en rapporteert elke
+  sonde afzonderlijk: bewezen, aantoonbaar afwezig, of `[?]` onbekend met de
+  reden. Voorheen deed elke probe tot vier API-pogingen van hooguit 90 seconden
+  achter elkaar — een hangende Forgejo-endpoint (zoals `/actions/tasks` bij
+  v0.6.14, terwijl de rest wél werkte) blokkeerde minutenlang álle statusregels
+  die daarna kwamen, en een leesfout werd stil "afwezig". Nu lopen de sondes
+  parallel met één korte poging per call; wat de deadline niet haalt eindigt
+  als `[?]` met "tijdslimiet overschreden" in plaats van het rapport vast te
+  houden.
 - De **lokale releasebranch** (#2306) wordt na een geslaagde verse release nu
   echt opgeruimd: eindigde de keten zonder tag-checkout (de CI zette de demo
   al live), dan bleef de werkboom op de remote-verwijderde versiebumpbranch

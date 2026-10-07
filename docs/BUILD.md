@@ -712,6 +712,13 @@ mail. Reading that green as "deployed" left `ocideck.librekat.nl` on 0.6.4 for
 both v0.6.5 and v0.6.6. `--status <tag>` reports the live version on its own
 line for the same reason.
 
+`--status` runs its probes in parallel under one fixed total deadline
+(`STATUS_TOTAL_SECONDS`, default 60 s). Every probe reports independently —
+proven, demonstrably absent, or `[?]` unknown with its reason — so a hung
+Forgejo endpoint (in v0.6.14 `/actions/tasks` stalled while the rest of the
+API kept answering) can never hold the whole status report hostage, and an
+unreadable probe is never mistaken for "absent".
+
 Also before the password, the pre-flight clears a **native-assets CMake cache
 left by a previous package version**. `hooks_runner` keys its shared build
 directories on a hash of the build configuration, not on the package version,
