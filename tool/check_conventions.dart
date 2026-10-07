@@ -188,7 +188,7 @@ const Map<String, int> fileSizeBaseline = {
   // van [fileSizeBaseline].
   // +11 (#1670): body i.p.v. source voor headingBlockIndex in _scrollToHeading.
   // +3 (#1759): stripLeadingFrontMatterLeakage op drie plekken in de editor.
-  'lib/widgets/document_editor_screen.dart': 1153,
+  'lib/widgets/document_editor_screen.dart': 1104,
   // +37 (#1963): _jumpToFirstFinding — statusbalk-chip springt naar de
   // eerste slide met een openstaande bevinding. Cohesief met de export-
   // readiness-berekening die al in dit part-bestand staat.
@@ -350,7 +350,7 @@ const Map<String, int> classSizeBaseline = {
   // als bij het bestand met lucht erboven, om dezelfde reden.
   // +11 (#1670): body i.p.v. source voor headingBlockIndex in _scrollToHeading.
   // +3 (#1759): stripLeadingFrontMatterLeakage op drie plekken in de editor.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1153,
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1112,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.

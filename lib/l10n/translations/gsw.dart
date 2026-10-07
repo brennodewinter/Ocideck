@@ -1628,6 +1628,29 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Verschillen bekijken…': 'Unterschied aaluege…',
+  'Mijn versie als kopie bewaren': 'Mini Version als Kopii bhaltè',
+  'Verschillen met de versie op schijf':
+      'Unterschied zur Version uf em Laufwerk',
+  'Versie op schijf': 'Version uf em Laufwerk',
+  'Laatst geopend of opgeslagen': 'Zletscht ufgmacht oder gschpicheret',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Drüü Versione: was du zletscht ufgmacht oder gschpicheret hesch (d Basis), dini uegschpichereti Version, und was jetz uf em Laufwerk staht.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Es isch kei zuverlässigi Basisversion bekannt; automatisch zämmefüere geht nöd. Wähl, weli Version du wetsch bruuche.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'D Änderige berüehre sich nöd un chöne automatisch zämmegfüert wärde.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Die Foleje sind uf beide Siite gänderet worde — wähl pro Foleje, weli Version blibt:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Kei inhältlichi Unterschied gfunde.',
+  'Samenvoegen en toepassen': 'Zämmefüere un aawände',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'D Datei isch underdes nomol gänderet worde; vergliich nomol.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Mit dr Version uf em Laufwerk zämmegfüert — no nöd gschpicheret.',
+  'Mijn versie bewaren': 'Mini Version bhaltè',
+  'Versie op schijf laden': 'Version vom Laufwerk lade',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Versiegle isch erscht mögli, wenn alli Entwürf und Pflichfelder abgschlosse sind. No uf dr Folie z prüefe:',
   'SAFARI-assessment digitale soevereiniteit':

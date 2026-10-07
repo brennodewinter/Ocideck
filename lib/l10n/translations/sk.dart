@@ -1631,6 +1631,28 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Verschillen bekijken…': 'Zobraziť rozdiely…',
+  'Mijn versie als kopie bewaren': 'Uchovať moju verziu ako kópiu',
+  'Verschillen met de versie op schijf': 'Rozdiely oproti verzii na disku',
+  'Versie op schijf': 'Verzia na disku',
+  'Laatst geopend of opgeslagen': 'Naposledy otvorená alebo uložená',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tri verzie: čo ste naposledy otvorili alebo uložili (základ), vaša neuložená verzia a čo je teraz na disku.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Nie je známa spoľahlivá základná verzia; automatické zlúčenie nie je možné. Vyberte, ktorú verziu chcete použiť.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Zmeny sa neprekrývajú a môžu sa automaticky zlúčiť.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Tieto snímky boli zmenené na oboch stranách — pri každej vyberte, ktorá verzia zostane:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Nenašli sa žiadne obsahové rozdiely.',
+  'Samenvoegen en toepassen': 'Zlúčiť a použiť',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Súbor sa medzitým znova zmenil; porovnajte znova.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Zlúčené s verziou na disku — zatiaľ neuložené.',
+  'Mijn versie bewaren': 'Ponechať moju verziu',
+  'Versie op schijf laden': 'Načítať verziu z disku',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Zapečatenie je možné až po dokončení všetkých návrhov a povinných polí. Ešte treba skontrolovať na snímke:',
   'SAFARI-assessment digitale soevereiniteit':

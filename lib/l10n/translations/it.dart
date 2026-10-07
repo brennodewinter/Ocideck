@@ -662,6 +662,29 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Verschillen bekijken…': 'Vedi differenze…',
+  'Mijn versie als kopie bewaren': 'Conserva la mia versione come copia',
+  'Verschillen met de versie op schijf':
+      'Differenze rispetto alla versione su disco',
+  'Versie op schijf': 'Versione su disco',
+  'Laatst geopend of opgeslagen': 'Ultima apertura o salvataggio',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tre versioni: ciò che hai aperto o salvato per ultimo (la base), la tua versione non salvata e ciò che si trova ora sul disco.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Non è nota una versione di base affidabile; l\'unione automatica non è possibile. Scegli quale versione usare.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Le modifiche non si sovrappongono e possono essere unite automaticamente.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Queste slide sono state modificate su entrambi i lati: scegli per ciascuna quale versione mantenere:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Nessuna differenza di contenuto trovata.',
+  'Samenvoegen en toepassen': 'Unisci e applica',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Il file è stato modificato di nuovo nel frattempo; confronta di nuovo.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Unito alla versione su disco — non ancora salvato.',
+  'Mijn versie bewaren': 'Conserva la mia versione',
+  'Versie op schijf laden': 'Carica la versione su disco',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'La sigillatura è possibile solo quando tutte le bozze e i campi obbligatori sono stati completati. Ancora da verificare nella diapositiva:',
   'SAFARI-assessment digitale soevereiniteit':

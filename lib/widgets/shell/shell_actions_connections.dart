@@ -190,27 +190,15 @@ Future<bool> saveDeckWithDestination(
       deckNotifier.currentState.filePath != null &&
       await deckNotifier.fileChangedExternally() &&
       context.mounted) {
-    final choice = await _showLocalConflictDialog(context);
-    if (choice == null || !context.mounted) return false;
-    switch (choice) {
-      case _LocalConflictChoice.overwrite:
+    switch (await _resolveLocalDeckConflict(context, ref, deckNotifier)) {
+      case _LocalSaveOutcome.saved:
+        return true;
+      case _LocalSaveOutcome.abort:
+        return false;
+      case _LocalSaveOutcome.proceed:
         break; // ga door naar de gewone opslaan hieronder
-      case _LocalConflictChoice.reload:
-        return withSaveProgress(
-          ref,
-          SaveTarget.local,
-          deckNotifier.reloadFromDisk,
-        );
-      case _LocalConflictChoice.saveAs:
-        if (!context.mounted) return false;
-        return withSaveProgress(
-          ref,
-          SaveTarget.local,
-          () => deckNotifier.saveAs(
-            initialDirectory: ref.read(settingsProvider).homeDirectory,
-          ),
-        );
     }
+    if (!context.mounted) return false;
   }
 
   final settings = ref.read(settingsProvider);
@@ -282,14 +270,173 @@ Future<bool?> _confirmWebAssetLoss(BuildContext context) {
   );
 }
 
-/// #1951: keuzes in de dialoog wanneer het bestand op schijf is gewijzigd
-/// sinds openen.
-enum _LocalConflictChoice { overwrite, reload, saveAs }
+/// Wat de lokale-conflictlus teruggeeft aan [saveDeckWithDestination]: door
+/// met de gewone opslaan, afgehandeld (herladen/kopie) of afbreken.
+enum _LocalSaveOutcome { proceed, saved, abort }
 
-/// #1951: toon een dialoog wanneer het bestand op schijf is gewijzigd sinds
-/// openen — door een ander venster of een ander programma. De gebruiker kan
-/// overschrijven (gooit de andere wijzigingen weg), herladen (laadt de versie
-/// van schijf in, verliest lokale wijzigingen) of opslaan als (bewaart beide).
+/// #1951 + #2323: de lus rond de lokale-conflictdialoog. "Verschillen
+/// bekijken…" leest de schijfversie door de open-poort en toont de
+/// dia-vergelijking; de andere keuzes doen wat ze altijd deden. Vóór élke
+/// schrijfactie wordt de schijf-vingerafdruk opnieuw gecontroleerd — is het
+/// bestand ondertussen weer veranderd, dan is elke eerdere analyse vervallen
+/// en mag er niet op basis daarvan worden overschreven.
+Future<_LocalSaveOutcome> _resolveLocalDeckConflict(
+  BuildContext context,
+  WidgetRef ref,
+  DeckNotifier deckNotifier,
+) async {
+  final path = deckNotifier.currentState.filePath!;
+  final files = ref.read(fileServiceProvider);
+  var fingerprint = await files.fileMtime(path);
+  for (;;) {
+    if (!context.mounted) return _LocalSaveOutcome.abort;
+    final choice = await _showLocalConflictDialog(context);
+    if (!context.mounted) return _LocalSaveOutcome.abort;
+    switch (choice) {
+      case null:
+        return _LocalSaveOutcome.abort;
+      case _LocalConflictChoice.overwrite:
+        final now = await files.fileMtime(path);
+        if (now != fingerprint) {
+          // Verlopen vingerafdruk: niets schrijven, de melding zegt waarom en
+          // de lus geeft de keuze opnieuw — met de verse stand als basis.
+          fingerprint = now;
+          if (!context.mounted) return _LocalSaveOutcome.abort;
+          showErrorSnackBar(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            context.l10n.d(
+              'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.',
+            ),
+          );
+          continue;
+        }
+        return _LocalSaveOutcome.proceed;
+      case _LocalConflictChoice.reload:
+        final reloaded = await withSaveProgress(
+          ref,
+          SaveTarget.local,
+          deckNotifier.reloadFromDisk,
+        );
+        return reloaded ? _LocalSaveOutcome.saved : _LocalSaveOutcome.abort;
+      case _LocalConflictChoice.saveAs:
+        if (!context.mounted) return _LocalSaveOutcome.abort;
+        final saved = await withSaveProgress(
+          ref,
+          SaveTarget.local,
+          () => deckNotifier.saveAs(
+            initialDirectory: ref.read(settingsProvider).homeDirectory,
+          ),
+        );
+        return saved ? _LocalSaveOutcome.saved : _LocalSaveOutcome.abort;
+      case _LocalConflictChoice.compare:
+        final outcome = await _compareLocalDeckConflict(
+          context,
+          ref,
+          deckNotifier,
+          path,
+          fingerprint,
+        );
+        fingerprint = outcome.fingerprint;
+        if (outcome.applied) return _LocalSaveOutcome.abort;
+      // Bij Terug of een mislukte analyse komt de eerste dialoog opnieuw.
+    }
+  }
+}
+
+/// De schijfversie door de open-poort lezen, de vergelijkingsdialoog tonen en
+/// een gekozen merge toepassen. Schrijft nooit tijdens de analyse; de merge
+/// zelf gaat pas door als de vingerafdruk van net nóg klopt
+/// ([DeckNotifier.applyMergedDeck]).
+Future<({bool applied, DateTime? fingerprint})> _compareLocalDeckConflict(
+  BuildContext context,
+  WidgetRef ref,
+  DeckNotifier deckNotifier,
+  String path,
+  DateTime? fingerprint,
+) async {
+  final files = ref.read(fileServiceProvider);
+  final result = await files.openDeckDetailed(path);
+  if (!context.mounted) {
+    return (applied: false, fingerprint: fingerprint);
+  }
+  final theirs = result.deck;
+  if (theirs == null) {
+    // Dezelfde afhandeling als herladen: onveilig → alarm, anders → melding.
+    if (result.failure == OpenFailure.unsafe) {
+      final findings = await files.scanForUnsafeMarkdown(path);
+      ref.read(importSecurityAlarmProvider.notifier).state =
+          ImportSecurityAlarm(path: path, findings: findings);
+    } else {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        openFailureMessage(context.l10n, result.failure),
+      );
+    }
+    return (applied: false, fingerprint: fingerprint);
+  }
+  final ours = deckNotifier.currentState.deck;
+  if (ours == null) {
+    return (applied: false, fingerprint: fingerprint);
+  }
+  // De vingerafdruk ná de lezing dekt wat de dialoog straks laat zien; de
+  // controle vlak voor het toepassen vangt alles wat daarna beweegt.
+  final analysisMtime = await files.fileMtime(path);
+  final conflict = analyzeLocalDeckConflict(
+    base: deckNotifier.baseDeck,
+    ours: ours,
+    theirs: theirs,
+  );
+  if (!context.mounted) {
+    return (applied: false, fingerprint: analysisMtime);
+  }
+  final merged = await showDialog<Deck>(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) => LocalDeckCompareDialog(conflict: conflict),
+  );
+  if (merged == null || !context.mounted) {
+    return (applied: false, fingerprint: analysisMtime);
+  }
+  final applied = await deckNotifier.applyMergedDeck(
+    merged,
+    expectedMtime: analysisMtime,
+  );
+  if (!context.mounted) {
+    return (applied: applied, fingerprint: analysisMtime);
+  }
+  final messenger = ScaffoldMessenger.of(context);
+  if (!applied) {
+    showErrorSnackBar(
+      messenger,
+      context.l10n,
+      context.l10n.d(
+        'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.',
+      ),
+    );
+    return (applied: false, fingerprint: analysisMtime);
+  }
+  messenger.showSnackBar(
+    SnackBar(
+      content: Text(
+        context.l10n.d(
+          'Samengevoegd met de versie op schijf — nog niet opgeslagen.',
+        ),
+      ),
+    ),
+  );
+  return (applied: true, fingerprint: analysisMtime);
+}
+
+/// #1951 + #2323: keuzes in de dialoog wanneer het bestand op schijf is
+/// gewijzigd sinds openen.
+enum _LocalConflictChoice { overwrite, reload, saveAs, compare }
+
+/// #1951 + #2323: toon een dialoog wanneer het bestand op schijf is gewijzigd
+/// sinds openen — door een ander venster of een ander programma. De gebruiker
+/// kan de verschillen bekijken (vergelijken en per slide samenvoegen),
+/// overschrijven, herladen of de eigen versie als kopie bewaren.
 Future<_LocalConflictChoice?> _showLocalConflictDialog(BuildContext context) {
   final l10n = context.l10n;
   return showDialog<_LocalConflictChoice>(
@@ -310,6 +457,10 @@ Future<_LocalConflictChoice?> _showLocalConflictDialog(BuildContext context) {
           child: Text(l10n.t('cancel')),
         ),
         TextButton(
+          onPressed: () => Navigator.pop(ctx, _LocalConflictChoice.compare),
+          child: Text(l10n.d('Verschillen bekijken…')),
+        ),
+        TextButton(
           onPressed: () => Navigator.pop(ctx, _LocalConflictChoice.overwrite),
           child: Text(l10n.d('Overschrijven')),
         ),
@@ -321,7 +472,7 @@ Future<_LocalConflictChoice?> _showLocalConflictDialog(BuildContext context) {
         // je wilt aanraden aan iemand die dit scherm onverwacht krijgt.
         FilledButton(
           onPressed: () => Navigator.pop(ctx, _LocalConflictChoice.saveAs),
-          child: Text(l10n.d('Opslaan als')),
+          child: Text(l10n.d('Mijn versie als kopie bewaren')),
         ),
       ],
     ),

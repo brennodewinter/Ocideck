@@ -665,6 +665,29 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Verschillen bekijken…': 'Voir les différences…',
+  'Mijn versie als kopie bewaren': 'Conserver ma version en copie',
+  'Verschillen met de versie op schijf':
+      'Différences avec la version sur le disque',
+  'Versie op schijf': 'Version sur le disque',
+  'Laatst geopend of opgeslagen': 'Dernière ouverture ou enregistrement',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Trois versions : ce que vous avez ouvert ou enregistré en dernier (la base), votre version non enregistrée et ce qui se trouve maintenant sur le disque.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Aucune version de base fiable n\'est connue ; la fusion automatique est impossible. Choisissez la version à utiliser.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Les modifications ne se chevauchent pas et peuvent être fusionnées automatiquement.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Ces diapositives ont été modifiées des deux côtés — choisissez pour chacune quelle version conserver :',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Aucune différence de contenu trouvée.',
+  'Samenvoegen en toepassen': 'Fusionner et appliquer',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Le fichier a de nouveau été modifié entre-temps ; recommencez la comparaison.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Fusionné avec la version sur le disque — pas encore enregistré.',
+  'Mijn versie bewaren': 'Conserver ma version',
+  'Versie op schijf laden': 'Charger la version sur le disque',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Le scellement n’est possible que lorsque tous les brouillons et champs obligatoires sont complétés. Reste à vérifier sur la diapositive :',
   'SAFARI-assessment digitale soevereiniteit':

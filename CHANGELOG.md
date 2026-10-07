@@ -10,6 +10,45 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Typen in een document is lichter geworden.** Elke aanslag liep eerst de
+  volledige afgeleide keten — Quill↔Markdown heen en terug, overzicht-sync,
+  undo/redo-status en een volledige herparsing van het document — in de
+  native tekstcallback. Dat werk wordt nu kort samengevoegd (één debounce
+  per event-loop-ronde voor Quill↔Markdown, één 160 ms-coördinator voor de
+  overzichts- en geschiedenisbalk), tabelcellen houden hun controller en
+  focus als er tekst vóór de tabel wordt ingevoegd, en de blokidentiteit
+  matcht in O(n) in plaats van O(n²). Gedrag is ongewijzigd; nieuwe
+  prestatiestests bewaken de grenzen.
+
+
+- **Lokale bestandsconflicten zijn te vergelijken en samen te voegen**
+  (#2323). Wie opsloeg terwijl het bestand ondertussen elders was
+  gewijzigd, kreeg alleen een blinde keuze: overschrijven, herladen of
+  opslaan als — zonder te zien wát er anders was. Beide dialogen bieden nu
+  "Verschillen bekijken…" en "Mijn versie als kopie bewaren". Bij een
+  presentatie opent de vergelijking een dia-overzicht met de drie versies
+  (laatst geopend/opgeslagen, mijn versie, versie op schijf) en voegt
+  `mergeDeckVersions` de niet-botsende wijzigingen al samen; per botsende
+  dia — ook verwijderd-tegen-gewijzigd — kiest de gebruiker expliciet een
+  kant, waarna de merge als één ongedaan-stap in het tabblad landt en
+  bewust vuil blijft. Bij een document toont de vergelijking beide bronnen
+  zij-aan-zij per blok met woordmarkering; samenvoegen van tekst is er
+  bewust niet, alleen een keuze voor een hele versie. Lezen loopt over de
+  bestaande open-poort (cap, UTF-8, veiligheidsscan, parse), er wordt
+  niets geschreven zolang de analyse open staat, en elke schrijfactie
+  controleert de schijf-vingerafdruk opnieuw: is het bestand ondertussen
+  alweer veranderd, dan vervalt de analyse in plaats van dat hij stil
+  wordt toegepast.
+- Het **wisselen tussen Visueel en Bron houdt je plek in beeld** (#2322).
+  De caret werd sinds #1566 al logisch meevertaald, maar de doelstand opende
+  bovenaan: een goed gezette cursor kon alsnog buiten het venster liggen, en
+  wie alleen had gescrold zonder de cursor te verzetten verloor zijn plek
+  helemaal. Nu is er één Markdown-anker — de caret als die in beeld is of er
+  niet is gescrold, anders het eerste zichtbare blok — dat na de opbouw van
+  de doelstand expliciet in de viewport wordt gesprongen. Hetzelfde geldt
+  voor de automatische Bron-fallback bij een niet-verliesvrije constructie:
+  de probleemregel komt echt in beeld. Wisselen verandert de inhoud niet en
+  maakt geen stap in Ongedaan maken.
 - De **carrouselfooter breekt om in plaats van over te lopen** (#2318). De
   footer was een vaste horizontale rij en liep bij bredere fontmetrics buiten
   beeld — 10 px op macOS, 29 px op een Linux-gate — tot functionele tests de

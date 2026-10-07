@@ -1640,6 +1640,28 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Verschillen bekijken…': 'Переглянути відмінності…',
+  'Mijn versie als kopie bewaren': 'Зберегти мою версію як копію',
+  'Verschillen met de versie op schijf': 'Відмінності від версії на диску',
+  'Versie op schijf': 'Версія на диску',
+  'Laatst geopend of opgeslagen': 'Востаннє відкрито або збережено',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Три версії: те, що ви востаннє відкрили або зберегли (база), ваша незбережена версія та те, що зараз на диску.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Немає надійної базової версії; автоматичне об’єднання неможливе. Виберіть, яку версію використовувати.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Зміни не перетинаються і можуть бути об’єднані автоматично.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Ці слайди змінено з обох боків — виберіть для кожного, яка версія залишиться:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Змістовних відмінностей не знайдено.',
+  'Samenvoegen en toepassen': 'Об’єднати й застосувати',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Файл тим часом знову змінився; порівняйте ще раз.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Об’єднано з версією на диску — ще не збережено.',
+  'Mijn versie bewaren': 'Залишити мою версію',
+  'Versie op schijf laden': 'Завантажити версію з диска',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Запечатування можливе лише після завершення всіх чернеток і обов’язкових полів. Ще потрібно перевірити на слайді:',
   'SAFARI-assessment digitale soevereiniteit':
