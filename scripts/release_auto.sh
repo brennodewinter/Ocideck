@@ -1867,6 +1867,26 @@ wait_gate() { # wait_gate SHA PR_NUMBER
 
 # Merge de release-PR. Idempotent: al gemerged → niets doen. head_commit_id maakt de
 # merge exact (schone 200 i.p.v. 405, en nooit een stale/verkeerde head).
+# De gekeurde base bevriezen vóór de servermerge (#2299). De releasebranch
+# werd aan het begin van origin/main getakt en daarna gebouwd en gekeurd.
+# Schuift main ondertussen door, dan neemt de servermerge die nieuwe base
+# mee in de getagde tree — commits die nooit in deze keten gebouwd of
+# gekeurd zijn. De merge-base van branch en main ÍS het vastgelegde
+# vertrekpunt: alleen als origin/main er nog exact op staat is de getagde
+# tree de gekeurde boom.
+assert_release_base_frozen() {
+  local base now
+  git fetch origin main "$BRANCH" --quiet 2>/dev/null \
+    || die "kon origin/main en $BRANCH niet verversen vóór de merge — base-toestand onbekend, niets gemerged."
+  base="$(git merge-base "origin/$BRANCH" origin/main 2>/dev/null || true)"
+  now="$(git rev-parse origin/main 2>/dev/null || true)"
+  [ -n "$base" ] && [ -n "$now" ] \
+    || die "kon de gekeurde base van $BRANCH niet bepalen — mergen gestopt, niets gemerged."
+  [ "$now" = "$base" ] \
+    || die "origin/main schoof door (${base:0:12} → ${now:0:12}) sinds $BRANCH werd gekeurd — de servermerge zou nooit gebouwde base-commits in de getagde tree meenemen. Herstel: merge origin/main in $BRANCH, push, laat de poort opnieuw groen worden en hervat met: scripts/release_auto.sh --resume $TAG. Niets gemerged, niets getagd."
+  log "Gekeurde base bevroren op ${base:0:12} — merge heeft geen ongeziene base."
+}
+
 merge_pr() { # merge_pr PR_NUMBER HEAD_SHA
   local pr="$1" head="$2" st
   STEP="mergen"
@@ -1875,6 +1895,7 @@ merge_pr() { # merge_pr PR_NUMBER HEAD_SHA
     log "PR #$pr was al gemerged."
     return 0
   fi
+  assert_release_base_frozen
   api POST "/pulls/$pr/merge" -H 'Content-Type: application/json' \
     -d "$(jq -n --arg h "$head" '{Do:"merge", head_commit_id:$h, delete_branch_after_merge:true}')" -o /dev/null
   log "PR #$pr gemergd."
