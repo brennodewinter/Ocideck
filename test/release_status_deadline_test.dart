@@ -105,9 +105,17 @@ api() {
   esac
 }
 curl() {
-  local url='' arg
-  for arg in "\$@"; do url="\$arg"; done
+  local out='' url='' previous='' arg
+  for arg in "\$@"; do
+    [ "\$previous" = '-o' ] && out="\$arg"
+    previous="\$arg"
+    url="\$arg"
+  done
   case "\$url" in
+    https://forge.invalid/api/v1/repos/LibreKAT/Ocideck/releases/tags/v9.9.9)
+      printf '%s\n' '{"id":41,"assets":[]}' >"\$out"
+      printf '200'
+      ;;
     https://website.invalid/nl/ocideck/) command cat "\$WEBSITE_HTML" ;;
     */version.json) printf '{"version":"9.9.9"}\\n' ;;
     *) return 22 ;;
