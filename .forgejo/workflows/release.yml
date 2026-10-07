@@ -553,42 +553,43 @@ jobs:
           dispatch() { gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
             -d "{\"ref\":\"$TAG\"}"; }
           # Laatste run van de Windows-workflow op DEZE tag:
-          # "status conclusion url created_at run_id". De created_at rijdt mee
-          # omdat de conclusie alleen iets zegt over DEZE poging als de run ook
-          # bij deze poging hoort — zie de T0-vergelijking in de lus. De run-id
-          # is voor de cohortcontrole: het paar moet uit precies die run komen.
+          # "status conclusion url run_id". De run-id is de exacte toets voor
+          # "hoort deze run bij deze poging" (zie BASE_RID hieronder) én voor
+          # de cohortcontrole: het paar moet uit precies die run komen.
           run_status() { gh_api "$API/actions/workflows/release.yml/runs?per_page=10" \
             | jq -r --arg t "$TAG" 'first(.workflow_runs[] | select(.head_branch==$t))
-                // {} | "\(.status // "") \(.conclusion // "") \(.html_url // "") \(.created_at // "") \(.id // "")"'; }
-
-          # Het anker voor "hoort die run bij deze poging". Ruim vóór de
-          # dispatch genomen, met vijf minuten marge omdat een run die de
-          # tag-push op de spiegel zélf triggerde seconden vóór deze job kan
-          # zijn aangemaakt — die run is van ons en telt mee.
-          T0="$(date -u -d '5 minutes ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null \
-            || date -u -v-5M +%Y-%m-%dT%H:%M:%SZ)"
+                // {} | "\(.status // "") \(.conclusion // "") \(.html_url // "") \(.id // "")"'; }
 
           # #2 idempotent: staat het asset er al (push-event vuurde wél, of een
           # eerdere run), dan zijn we meteen klaar — mits het paar aantoonbaar
           # uit één cohort komt (#2313). Een gemengd paar weigeren en doorvallen
           # naar de lus: de spiegel kan op dat moment een verse upload doen.
           if have_asset; then
-            info="$(run_status || true)"; rid="$(printf '%s' "$info" | awk '{print $5}')"
+            info="$(run_status || true)"; rid="$(printf '%s' "$info" | awk '{print $4}')"
             if verify_cohort "$rid"; then
               echo "Assets stonden er al: $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
             fi
             echo "Aanwezige bestanden vormen geen coherent cohort — wachten op een verse upload."
           fi
 
+          # Het anker voor "hoort die run bij deze poging" (#2300): de hoogste
+          # run-id die vóór onze dispatch zichtbaar was. GitHub toont een
+          # dispatch niet meteen, en run-id's zijn monotoon — daarna telt
+          # alleen een run nieuwer dan dit anker als deze poging. Loopt er al
+          # een build op deze tag, dan volgen we juist díe (OUR_RID): zijn
+          # conclusie geldt wel voor ons.
+          BASE_RID="" OUR_RID=""
           if [ -z "${GH_DISPATCH_TOKEN:-}" ]; then
             echo "GH_DISPATCH_TOKEN niet gezet — passief wachten op de spiegel-build (minder robuust)."
           else
             info="$(run_status || true)"; st="$(printf '%s' "$info" | awk '{print $1}')"
+            BASE_RID="$(printf '%s' "$info" | awk '{print $4}')"
             # #2: draait er al een build op deze tag, dan niet nog eens dispatchen.
             if [ -n "$st" ] && [ "$st" != "completed" ] && [ "$st" != "null" ]; then
               echo "Er loopt al een Windows-build ($st) — niet opnieuw dispatchen."
+              OUR_RID="$BASE_RID"
             else
-              echo "Windows-build dispatchen op $REPO@$TAG…"
+              echo "Windows-build dispatchen op $REPO@${TAG}…"
               dispatch || { echo "Dispatch faalde — controleer GH_DISPATCH_TOKEN (Actions: RW)." >&2; exit 1; }
               sleep 10
             fi
@@ -604,9 +605,8 @@ jobs:
               st="$(printf '%s' "$info" | awk '{print $1}')"
               cc="$(printf '%s' "$info" | awk '{print $2}')"
               LAST_URL="$(printf '%s' "$info" | awk '{print $3}')"
-              created="$(printf '%s' "$info" | awk '{print $4}')"
-              rid="$(printf '%s' "$info" | awk '{print $5}')"
-              echo "[$POGING] run: ${st:-<geen>} ${cc:-} ${LAST_URL:-} ${created:-}"
+              rid="$(printf '%s' "$info" | awk '{print $4}')"
+              echo "[$POGING] run: ${st:-<geen>} ${cc:-} ${LAST_URL:-} ${rid:-}"
             fi
             if have_asset; then
               if verify_cohort "$rid"; then
@@ -615,31 +615,26 @@ jobs:
               echo "[$POGING] bestanden aanwezig maar niet één coherent cohort — halve upload? Verder wachten."
             fi
             if [ -n "${GH_DISPATCH_TOKEN:-}" ]; then
-              if [ "$POGING" -eq 5 ] && { [ -z "$st" ] || [ "$st" = "null" ]; }; then
-                echo "Nog geen run zichtbaar — opnieuw dispatchen."; dispatch || true
+              # Hoort de zichtbaar-nieuwste run bij DEZE poging? Alleen als
+              # haar id boven het anker ligt: na een eigen dispatch is dat
+              # BASE_RID zelf; bij een aangehouden lopende build is OUR_RID-1
+              # het anker, zodat juist die run meetelt. Een oudere failure
+              # blijft informatief maar beëindigt deze poging nooit.
+              DEZE="" ANKER="${BASE_RID:-0}"
+              [ -n "$OUR_RID" ] && ANKER=$((OUR_RID - 1))
+              if [ -n "$rid" ] && [ "$rid" -gt "$ANKER" ] 2>/dev/null; then
+                DEZE=1
+              fi
+              if [ "$POGING" -eq 5 ] && [ -z "$DEZE" ]; then
+                echo "Nog geen run van deze poging zichtbaar — opnieuw dispatchen."; dispatch || true
               fi
               if [ "${cc:-}" = "failure" ] || [ "${cc:-}" = "cancelled" ]; then
-                # Alleen fataal als de run bij DEZE poging hoort. Na het
-                # afbreken van v0.4.7-rc1 stond er een cancelled run op de tag;
-                # een hertrigger las die oude conclusie binnen ~11 s als "de
-                # build faalde" en doodde de release, met de URL van de vórige
-                # poging als dwaalspoor — terwijl de zojuist gedispatchte run
-                # gewoon aan het bouwen was (dispatch→zichtbaar is niet
-                # gegarandeerd binnen de sleep 10 hierboven). ISO-tijden
-                # vergelijken lexicografisch correct.
-                if [ -n "$created" ] && [ "$created" \< "$T0" ]; then
-                  if [ -z "${HERDISPATCHT:-}" ]; then
-                    echo "Verouderde $cc-run van vóór deze poging ($created) — eenmalig opnieuw dispatchen."
-                    dispatch || true
-                    HERDISPATCHT=1
-                  else
-                    echo "[$POGING] wachten tot een run van deze poging zichtbaar is (oude run: $cc)."
-                  fi
-                else
+                if [ -n "$DEZE" ]; then
                   echo "De Windows-build faalde: ${LAST_URL:-zie GitHub Actions}." >&2
                   echo "Herstel dat en hertrigger deze release-workflow." >&2
                   exit 1
                 fi
+                echo "[$POGING] verouderde $cc-run hoort niet bij deze poging — wachten op de nieuwe run."
               fi
             fi
             sleep 60
