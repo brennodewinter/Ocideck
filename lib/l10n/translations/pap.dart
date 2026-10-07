@@ -664,6 +664,28 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Verschillen bekijken…': 'Mira diferensianan…',
+  'Mijn versie als kopie bewaren': 'Keda mi vershon komo kopia',
+  'Verschillen met de versie op schijf': 'Diferensia ku e vershon riba disko',
+  'Versie op schijf': 'Vershon riba disko',
+  'Laatst geopend of opgeslagen': 'Último abierto of wardá',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tres vershon: loke bo a habri of warda por último (e base), bo vershon sin warda, i loke ta riba disko awe.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'No tin un vershon base konfiabel konosí; no por mesklá outomátikamente. Skohe kua vershon bo ke usa.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'E kambionan no ta afektá otro i por wòrdu mesklá outomátikamente.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'E slidenan aki a kambia na dos banda — skohe pa kada slide kua vershon keda:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'No a haña diferensia di kontenido.',
+  'Samenvoegen en toepassen': 'Meskla i apliká',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'E archivo a kambia atrobe mientras tanto; kompará atrobe.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Mesklá ku e vershon riba disko — ainda no wardá.',
+  'Mijn versie bewaren': 'Keda mi vershon',
+  'Versie op schijf laden': 'Karga e vershon riba disko',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Sela por tuma ta posibel ora tur konsepto i campo obligatorio a ser kompletá. Aún pa kontrolá riba diapositiva:',
   'SAFARI-assessment digitale soevereiniteit':

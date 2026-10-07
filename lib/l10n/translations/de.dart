@@ -665,6 +665,29 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Verschillen bekijken…': 'Unterschiede ansehen…',
+  'Mijn versie als kopie bewaren': 'Meine Version als Kopie behalten',
+  'Verschillen met de versie op schijf':
+      'Unterschiede zur Version auf dem Laufwerk',
+  'Versie op schijf': 'Version auf dem Laufwerk',
+  'Laatst geopend of opgeslagen': 'Zuletzt geöffnet oder gespeichert',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Drei Versionen: was du zuletzt geöffnet oder gespeichert hast (die Basis), deine ungespeicherte Version und was jetzt auf dem Laufwerk steht.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Es ist keine zuverlässige Basisversion bekannt; automatisches Zusammenführen ist nicht möglich. Wähle, welche Version du verwenden möchtest.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Die Änderungen überschneiden sich nicht und können automatisch zusammengeführt werden.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Diese Folien wurden auf beiden Seiten geändert — wähle pro Folie, welche Version bleibt:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Keine inhaltlichen Unterschiede gefunden.',
+  'Samenvoegen en toepassen': 'Zusammenführen und anwenden',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Die Datei wurde inzwischen erneut geändert; vergleiche erneut.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Mit der Version auf dem Laufwerk zusammengeführt — noch nicht gespeichert.',
+  'Mijn versie bewaren': 'Meine Version behalten',
+  'Versie op schijf laden': 'Version vom Laufwerk laden',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Das Versiegeln ist erst möglich, wenn alle Entwürfe und Pflichtfelder abgeschlossen sind. Noch auf der Folie zu prüfen:',
   'SAFARI-assessment digitale soevereiniteit':
