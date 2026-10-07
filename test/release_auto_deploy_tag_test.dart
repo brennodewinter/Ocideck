@@ -218,6 +218,135 @@ deploy_web_if_needed
     );
   }, skip: skipOnWindows);
 
+  // #2306: sloeg de deploy de tag-checkout over (de CI had de demo al live),
+  // dan eindigde de werkboom op de door deze run gemaakte release-branch —
+  // verweesd na merge+tag, en alles wat er vanaf takte erfde de versiebump.
+  String finishEnv() => '''
+RUN_T0=1
+SKIP_INSTALL=1
+PENDING_APP=
+LOGFILE=
+RELEASE_BASE_URL=https://forge.invalid/download
+START_BRANCH=main
+BRANCH=release/v9.9.9
+''';
+
+  test(
+    'een geslaagde release eindigt op de starttak en ruimt de owned branch op',
+    () {
+      final repo = releaseRepoAfterMerge(); // werkboom staat op release/v9.9.9
+
+      final result = runInRepo(repo, '''
+${finishEnv()}
+BRANCH_OWNED=1
+finish
+''');
+
+      expect(result.exitCode, 0, reason: '${result.stdout}${result.stderr}');
+      expect(
+        Process.runSync('git', [
+          'branch',
+          '--show-current',
+        ], workingDirectory: repo.path).stdout.toString().trim(),
+        'main',
+        reason: 'een verse release eindigt waar hij begon',
+      );
+      expect(
+        Process.runSync('git', [
+          'branch',
+          '--list',
+          'release/v9.9.9',
+        ], workingDirectory: repo.path).stdout.toString().trim(),
+        isEmpty,
+        reason:
+            'de lokale releasebranch is na bewezen merge+tag verweesd — '
+            'wie er vanaf takte erfde ongemerkt de versiebump (#2306)',
+      );
+    },
+    skip: skipOnWindows,
+  );
+
+  test('ook ná een tag-checkout ruimt finish de owned releasebranch op', () {
+    final repo = releaseRepoAfterMerge();
+
+    final result = runInRepo(repo, '''
+${finishEnv()}
+BRANCH_OWNED=1
+git checkout --quiet --detach v9.9.9
+finish
+''');
+
+    expect(result.exitCode, 0, reason: '${result.stdout}${result.stderr}');
+    expect(
+      Process.runSync('git', [
+        'branch',
+        '--show-current',
+      ], workingDirectory: repo.path).stdout.toString().trim(),
+      'main',
+    );
+    expect(
+      Process.runSync('git', [
+        'branch',
+        '--list',
+        'release/v9.9.9',
+      ], workingDirectory: repo.path).stdout.toString().trim(),
+      isEmpty,
+    );
+  }, skip: skipOnWindows);
+
+  test('--resume raakt geen tak die die run niet aanmaakte', () {
+    final repo = releaseRepoAfterMerge();
+
+    final result = runInRepo(repo, '''
+${finishEnv()}
+BRANCH_OWNED=0
+finish
+''');
+
+    expect(result.exitCode, 0, reason: '${result.stdout}${result.stderr}');
+    expect(
+      Process.runSync('git', [
+        'branch',
+        '--list',
+        'release/v9.9.9',
+      ], workingDirectory: repo.path).stdout.toString().trim(),
+      isNotEmpty,
+      reason:
+          '--resume mag een lokale branch van een eerdere run nooit opruimen '
+          '(#2306)',
+    );
+  }, skip: skipOnWindows);
+
+  test('een vuile werkboom blokkeert de opruiming zonder dataverlies', () {
+    final repo = releaseRepoAfterMerge();
+    File(
+      '${repo.path}/pubspec.yaml',
+    ).writeAsStringSync('version: 9.9.9-vuil\n');
+
+    final result = runInRepo(repo, '''
+${finishEnv()}
+BRANCH_OWNED=1
+finish
+''');
+
+    expect(result.exitCode, 0, reason: '${result.stdout}${result.stderr}');
+    expect(result.stderr, contains('NIET opgeruimd'));
+    expect(
+      Process.runSync('git', [
+        'branch',
+        '--list',
+        'release/v9.9.9',
+      ], workingDirectory: repo.path).stdout.toString().trim(),
+      isNotEmpty,
+      reason: 'een mislukte opruiming moet de tak laten staan, met melding',
+    );
+    expect(
+      File('${repo.path}/pubspec.yaml').readAsStringSync(),
+      contains('9.9.9-vuil'),
+      reason: 'andermans werk wordt nooit onder de checkout weggewerkt',
+    );
+  }, skip: skipOnWindows);
+
   test('een falende deploy wordt als deploy-web gemeld, niet als checkout', () {
     final repo = releaseRepoAfterMerge();
 
