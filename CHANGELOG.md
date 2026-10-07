@@ -10,6 +10,17 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Typen in een document is lichter geworden.** Elke aanslag liep eerst de
+  volledige afgeleide keten — Quill↔Markdown heen en terug, overzicht-sync,
+  undo/redo-status en een volledige herparsing van het document — in de
+  native tekstcallback. Dat werk wordt nu kort samengevoegd (één debounce
+  per event-loop-ronde voor Quill↔Markdown, één 160 ms-coördinator voor de
+  overzichts- en geschiedenisbalk), tabelcellen houden hun controller en
+  focus als er tekst vóór de tabel wordt ingevoegd, en de blokidentiteit
+  matcht in O(n) in plaats van O(n²). Gedrag is ongewijzigd; nieuwe
+  prestatiestests bewaken de grenzen.
+
+
 - **Lokale bestandsconflicten zijn te vergelijken en samen te voegen**
   (#2323). Wie opsloeg terwijl het bestand ondertussen elders was
   gewijzigd, kreeg alleen een blinde keuze: overschrijven, herladen of

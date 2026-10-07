@@ -58,7 +58,6 @@ class TableEmbedBuilder extends EmbedBuilder {
       );
     }
     return _EditableTableEmbed(
-      key: ValueKey('document-table-${embedContext.node.documentOffset}'),
       gfm: gfm,
       profile: profile,
       embedContext: embedContext,
@@ -73,7 +72,6 @@ class TableEmbedBuilder extends EmbedBuilder {
 /// en de focus kwijtraken.
 class _EditableTableEmbed extends StatefulWidget {
   const _EditableTableEmbed({
-    super.key,
     required this.gfm,
     required this.profile,
     required this.embedContext,

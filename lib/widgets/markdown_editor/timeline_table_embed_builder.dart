@@ -41,7 +41,6 @@ class TimelineTableEmbedBuilder extends EmbedBuilder {
       );
     }
     return _EditableTimelineEmbed(
-      key: ValueKey('document-timeline-${embedContext.node.documentOffset}'),
       source: source,
       profile: profile,
       embedContext: embedContext,
@@ -53,7 +52,6 @@ class TimelineTableEmbedBuilder extends EmbedBuilder {
 
 class _EditableTimelineEmbed extends StatefulWidget {
   const _EditableTimelineEmbed({
-    super.key,
     required this.source,
     required this.profile,
     required this.embedContext,

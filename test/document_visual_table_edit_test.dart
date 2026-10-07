@@ -3,6 +3,7 @@ import 'package:flutter_quill/flutter_quill.dart'
     show FlutterQuillLocalizations, QuillEditor;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
 
@@ -114,6 +115,54 @@ Een alinea vooraf.
     final controller = await typeInCell(tester, 'Aapje');
     expect(controller.text, contains('| Aapje | Tester |'));
     expect(find.byType(QuillEditor), findsOneWidget);
+  });
+
+  testWidgets('nieuwe regel vóór veel tabellen behoudt hun celcontrollers', (
+    tester,
+  ) async {
+    final tables = List.generate(
+      80,
+      (i) => '| Kolom | Waarde |\n| --- | --- |\n| Rij $i | gelijk |',
+    ).join('\n\n');
+    await pump(tester, 'Voorwoord.\n\n$tables');
+    final surface = tester.widget<WysiwygNotesField>(
+      find.byType(WysiwygNotesField),
+    );
+    final before = [
+      for (final field in tester.widgetList<TextField>(find.byType(TextField)))
+        field.controller,
+    ];
+    var tableViewRebuilds = 0;
+    debugOnRebuildDirtyWidget = (element, builtOnce) {
+      if (builtOnce && element.widget is DocumentMarkdownView) {
+        tableViewRebuilds++;
+      }
+    };
+    addTearDown(() => debugOnRebuildDirtyWidget = null);
+
+    surface.controller.replaceText(
+      0,
+      0,
+      '\n',
+      const TextSelection.collapsed(offset: 1),
+    );
+    await tester.pump();
+    await tester.pump();
+
+    final after = [
+      for (final field in tester.widgetList<TextField>(find.byType(TextField)))
+        field.controller,
+    ];
+    expect(after, hasLength(before.length));
+    for (var i = 0; i < before.length; i++) {
+      expect(after[i], same(before[i]), reason: 'controller $i werd vervangen');
+    }
+    expect(
+      tableViewRebuilds,
+      0,
+      reason:
+          'ongewijzigde tabellen hoeven hun volledige weergave niet te bouwen',
+    );
   });
 
   testWidgets('aanslag voor aanslag blijft de cursor achter het woord', (
