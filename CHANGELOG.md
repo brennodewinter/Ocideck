@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **remote tagpush** (#2297) geldt vanaf de eerste poging als
+  remote-onzeker totdat de teruglezing hem bevestigt. Valt het antwoord of de
+  teruglezing weg terwijl de server de tag al sloeg, dan ruimde de oude keten
+  de release-branch op en adviseerde een verse release naast de al bestaande
+  tag. Nu geldt vanaf die eerste poging: geen opruiming, geen verse-release-
+  advies — de route is read-only `--status` en daarna uitsluitend `--resume`
+  van dezelfde tag. Alleen een aantoonbaar afgewezen push mag nog als "niets
+  gebeurd" tellen.
 - De **servermerge van de release-PR** (#2299) gaat alleen door zolang
   `origin/main` nog exact op de gekeurde base staat. De releasebranch wordt
   vroeg van main getakt en daarna pas gebouwd en gekeurd; schuift main in die
@@ -128,6 +136,10 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Presentatie-eigen voettekst:** stel onder **Presentatie-eigenschappen** een
+  voettekst voor alleen dit deck in. OciDeck bewaart die als bestaande Marp
+  `footer:`-frontmatter; een logo in een onderhoek wijkt automatisch naar
+  dezelfde bovenhoek, terwijl een merkstrook blijft staan.
 - **Inzoomen in het slide-overzicht** (#2288): de tegels zitten niet langer aan één maat vast. De loepknoppen in de
   titelbalk, `Ctrl/Cmd +`/`−`, `Ctrl/Cmd+0` voor de standaardmaat en Ctrl+scroll op het raster schalen de miniaturen
   van de halve tot de driedubbele maat — inzoomen geeft minder maar grotere slides, uitzoomen juist meer kolommen. De
