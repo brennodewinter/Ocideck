@@ -10,6 +10,16 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **CWE-verouderingscontrole** (#2292) leest nu MITRE's officiële
+  `cwec_latest.xml.zip` in plaats van de REST-API (`cwe-api.mitre.org`), die
+  op 6-10-2026 verbindingen verbrak ná het HTTP-verzoek. Uit de XML komen
+  versie, inhoudsdatum én het aantal `Weakness`-elementen — dat aantal wordt
+  nog steeds met `assets/cwe/cwe_full.json` vergeleken, zodat een afgekapte of
+  half geregenereerde bundel rood blijft. Een onbereikbare of onleesbare bron
+  is `onbekend`, nooit `actueel`; en `release_auto.sh` kwalificeert zijn
+  "Referentiedata actueel" nu als er bronnen onbekend bleven — vroeger
+  meldde dezelfde uitvoer eerst "niet kunnen kijken" en daarna toch
+  onvoorwaardelijk "actueel".
 - De **notarisatie-preflight classificeert Apple-fouten** (#2296) in plaats
   van bij élke `notarytool`-fout hetzelfde "profiel opnieuw opslaan"-advies
   te geven. Bij de echte 403 — een vereiste overeenkomst ontbrak of was

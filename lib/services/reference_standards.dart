@@ -68,10 +68,12 @@ const referenceStandards = <ReferenceStandard>[
         'De volledige lijst (id, naam, beschrijving) plus een eigen '
         'geselecteerde kern met onze remediatie-notities.',
     licence: 'MITRE Terms of Use',
-    // MITRE's eigen REST-API geeft versie, inhoudsdatum én het aantal
+    // MITRE's officiële XML-release geeft versie, inhoudsdatum én het aantal
     // zwakheden — dat laatste controleert meteen of onze bundel compleet is.
-    probe: UpstreamProbe.cweApi,
-    probeTarget: 'https://cwe-api.mitre.org/api/v1/cwe/version',
+    // Niet de REST-API: die host verbrak op 6-10-2026 verbindingen ná het
+    // HTTP-verzoek, terwijl cwec_latest.xml.zip gewoon bereikbaar bleef.
+    probe: UpstreamProbe.cweXmlZip,
+    probeTarget: 'https://cwe.mitre.org/data/xml/cwec_latest.xml.zip',
   ),
   ReferenceStandard(
     id: 'miauw',

@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../tool/check_reference_data.dart';
@@ -175,6 +178,88 @@ void main() {
       expect(outcome.outdated, 1);
       expect(outcome.notes, contains('pad bestaat niet meer'));
       expect(outcome.exitCode(advisory: false), 1);
+    });
+  });
+
+  group('de CWE XML-release als bron (#2292)', () {
+    // De REST-API verbrak op 6-10-2026 verbindingen ná het HTTP-verzoek;
+    // MITRE's officiële cwec_latest.xml.zip bleef bereikbaar en bevat dezelfde
+    // feiten — versie, inhoudsdatum en het aantal Weakness-elementen.
+    final cwe = standards.firstWhere((s) => s.id == 'cwe');
+    final bundledCount =
+        (jsonDecode(File('assets/cwe/cwe_full.json').readAsStringSync())
+                as Map<String, dynamic>)['weaknesses']
+            as List;
+
+    /// Een echte zip met één XML-catalogus, in dezelfde vorm als MITRE publiceert.
+    Uint8List cweZip({required String version, required int weaknesses}) {
+      final buf = StringBuffer(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<Weakness_Catalog Name="CWE" Version="$version" '
+        'Date="2026-04-30" xmlns="http://cwe.mitre.org/cwe-7">'
+        '<Weaknesses>',
+      );
+      for (var i = 1; i <= weaknesses; i++) {
+        buf.write('<Weakness ID="$i" Name="w$i" Abstraction="Base"/>');
+      }
+      buf.write('</Weaknesses></Weakness_Catalog>');
+      final archive = Archive()
+        ..addFile(ArchiveFile.string('cwec_latest.xml', buf.toString()));
+      return Uint8List.fromList(ZipEncoder().encode(archive));
+    }
+
+    test('gelijke versie én telling is actueel', () async {
+      final r = await probeCweXml(
+        cwe,
+        (uri) async =>
+            cweZip(version: cwe.version, weaknesses: bundledCount.length),
+      );
+      expect(r.latest, cwe.version);
+      expect(r.stale, isFalse);
+      expect(r.integrityProblem, isEmpty);
+      expect(r.note, contains('2026-04-30'));
+    });
+
+    test('een afwijkende versie is verouderd', () async {
+      final r = await probeCweXml(
+        cwe,
+        (uri) async => cweZip(version: '9.9', weaknesses: bundledCount.length),
+      );
+      expect(r.stale, isTrue);
+      expect(r.latest, '9.9');
+    });
+
+    test('een afwijkende telling is een integriteitsbevinding', () async {
+      final r = await probeCweXml(
+        cwe,
+        (uri) async =>
+            cweZip(version: cwe.version, weaknesses: bundledCount.length - 3),
+      );
+      expect(r.stale, isFalse, reason: 'de versie klopt — dit is géén drift');
+      expect(r.integrityProblem, contains('zwakheden'));
+    });
+
+    test('een beschadigde zip is onbekend, nooit actueel', () async {
+      final r = await probeCweXml(
+        cwe,
+        (uri) async => Uint8List.fromList([1, 2, 3, 4, 5]),
+      );
+      expect(r.latest, isNull);
+    });
+
+    test('kapotte XML in een geldige zip is onbekend', () async {
+      final archive = Archive()
+        ..addFile(ArchiveFile.string('cwec_latest.xml', '<open>'));
+      final r = await probeCweXml(
+        cwe,
+        (uri) async => Uint8List.fromList(ZipEncoder().encode(archive)),
+      );
+      expect(r.latest, isNull);
+    });
+
+    test('een onbereikbare bron is onbekend', () async {
+      final r = await probeCweXml(cwe, (uri) async => null);
+      expect(r.latest, isNull);
     });
   });
 

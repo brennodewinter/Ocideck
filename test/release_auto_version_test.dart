@@ -1006,4 +1006,52 @@ void main() {
     );
     expect(stepIdx, lessThan(callIdx));
   });
+
+  // Regressie voor #2292: toen de CWE-bron onbereikbaar was meldde de gate eerst
+  // "Niet kunnen kijken bij: MITRE CWE" en daarna alsnog de ongekwalificeerde
+  // regel "Referentiedata actueel." — alsof een onbekende bron goedkeuring was.
+  // De prober is een mockbare naad; de gate zelf loopt hier echt.
+  String runGate(String probesJson) {
+    final dir = Directory.systemTemp.createTempSync('ocideck-gate-');
+    File('${dir.path}/probes.json').writeAsStringSync(probesJson);
+    File('${dir.path}/run.sh').writeAsStringSync(
+      'set -euo pipefail\n'
+      'STEP="verouderingsgate"\n'
+      'REFRESHABLE_CATALOGS="wstg mastg maswe"\n'
+      'section() { printf "== %s ==\\n" "\$1"; }\n'
+      'log() { printf "%s\\n" "\$1"; }\n'
+      'die() { printf "die: %s\\n" "\$1" >&2; exit 1; }\n'
+      'make() { :; }\n'
+      'catalogs_probe_json() { cat "${dir.path}/probes.json"; }\n'
+      'stale_catalog_ids() {\n${functionBody('stale_catalog_ids')}\n}\n'
+      'handmatige_route() {\n${functionBody('handmatige_route')}\n}\n'
+      'outdated_gate() {\n${functionBody('outdated_gate')}\n}\n'
+      'outdated_gate\n',
+    );
+    final r = Process.runSync('bash', [
+      '${dir.path}/run.sh',
+    ], workingDirectory: dir.path);
+    dir.deleteSync(recursive: true);
+    return '${r.stdout}${r.stderr}';
+  }
+
+  test('de verouderingsgate kwalificeert "actueel" bij een onbekende bron', () {
+    const allCurrent =
+        '[{"id":"cwe","naam":"MITRE CWE","status":"actueel","adviserend":false}]';
+    expect(runGate(allCurrent), contains('Referentiedata actueel.'));
+
+    const withUnknown =
+        '[{"id":"cwe","naam":"MITRE CWE","status":"onbekend","adviserend":false},'
+        '{"id":"wstg","naam":"WSTG","status":"actueel","adviserend":false}]';
+    final out = runGate(withUnknown);
+    expect(out, contains('Niet kunnen kijken bij: MITRE CWE'));
+    expect(
+      out,
+      isNot(contains('Referentiedata actueel.')),
+      reason:
+          'de ongekwalificeerde "actueel"-regel mag niet vallen terwijl een '
+          'bron onbekend was — dat las v0.6.x als goedkeuring.\n$out',
+    );
+    expect(out, contains('geen uitspraak'));
+  }, skip: skipOnWindows);
 }
