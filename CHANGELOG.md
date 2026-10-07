@@ -136,10 +136,6 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
-- **Presentatie-eigen voettekst:** stel onder **Presentatie-eigenschappen** een
-  voettekst voor alleen dit deck in. OciDeck bewaart die als bestaande Marp
-  `footer:`-frontmatter; een logo in een onderhoek wijkt automatisch naar
-  dezelfde bovenhoek, terwijl een merkstrook blijft staan.
 - **Inzoomen in het slide-overzicht** (#2288): de tegels zitten niet langer aan één maat vast. De loepknoppen in de
   titelbalk, `Ctrl/Cmd +`/`−`, `Ctrl/Cmd+0` voor de standaardmaat en Ctrl+scroll op het raster schalen de miniaturen
   van de halve tot de driedubbele maat — inzoomen geeft minder maar grotere slides, uitzoomen juist meer kolommen. De
