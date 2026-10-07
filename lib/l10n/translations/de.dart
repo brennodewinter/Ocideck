@@ -216,8 +216,6 @@ const _dutchSourceDe = {
       'Versiegelt. Speichern (Strg/Cmd+S), um es zu behalten.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Dieser Bericht wurde wahrheitsgemäß erstellt.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Versiegeln ist erst möglich, wenn alle KI-Entwürfe geprüft wurden. Noch zu prüfen auf Folie(n):',
   'Uit sjabloon…': 'Aus Vorlage…',
   'Sjabloon kiezen': 'Vorlage wählen',
   'Scope-object': 'Scope-Objekt',

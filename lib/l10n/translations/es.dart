@@ -218,8 +218,6 @@ const _dutchSourceEs = {
       'Sellado. Guarde (Ctrl/Cmd+S) para conservarlo.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Este informe se ha elaborado con veracidad.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'El sellado solo es posible tras revisar todos los borradores de IA. Aún por comprobar en la(s) diapositiva(s):',
   'Uit sjabloon…': 'Desde plantilla…',
   'Sjabloon kiezen': 'Elegir plantilla',
   'Scope-object': 'Objeto del alcance',

@@ -216,8 +216,6 @@ const _dutchSourceEl = {
       'Σφραγίστηκε. Αποθηκεύστε (Ctrl/Cmd+S) για να διατηρηθεί.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Η παρούσα αναφορά συντάχθηκε με αλήθεια.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Η σφράγιση είναι δυνατή μόνο αφού ελεγχθούν όλα τα προσχέδια AI. Απομένει έλεγχος στη(ις) διαφάνεια(ες):',
   'Uit sjabloon…': 'Από πρότυπο…',
   'Sjabloon kiezen': 'Επιλογή προτύπου',
   'Scope-object': 'Αντικείμενο εμβέλειας',

@@ -214,8 +214,6 @@ const _dutchSourceHr = {
       'Zapečaćeno. Spremite (Ctrl/Cmd+S) da biste zadržali.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ovo je izvješće sastavljeno istinito.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Pečaćenje je moguće tek nakon pregleda svih AI nacrta. Još za provjeru na slajdu(ovima):',
   'Uit sjabloon…': 'Iz predloška…',
   'Sjabloon kiezen': 'Odaberi predložak',
   'Scope-object': 'Objekt opsega',

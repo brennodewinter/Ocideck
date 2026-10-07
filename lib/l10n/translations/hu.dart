@@ -214,8 +214,6 @@ const _dutchSourceHu = {
       'Lepecsételve. Mentse el (Ctrl/Cmd+S) a megőrzéshez.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ez a jelentés a valóságnak megfelelően készült.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'A lezárás csak akkor lehetséges, ha minden AI-vázlatot ellenőriztek. Még ellenőrizni kell a dián/diákon:',
   'Uit sjabloon…': 'Sablonból…',
   'Sjabloon kiezen': 'Sablon választása',
   'Scope-object': 'Hatókör objektuma',

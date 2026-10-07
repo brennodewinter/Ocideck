@@ -217,8 +217,6 @@ const _dutchSourcePt = {
       'Selado. Guarde (Ctrl/Cmd+S) para manter.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Este relatório foi elaborado com veracidade.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'O selamento só é possível depois de revistos todos os rascunhos de IA. Ainda por verificar no(s) slide(s):',
   'Uit sjabloon…': 'A partir de modelo…',
   'Sjabloon kiezen': 'Escolher modelo',
   'Scope-object': 'Objeto do escopo',

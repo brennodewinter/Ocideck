@@ -216,8 +216,6 @@ const _dutchSourceUk = {
       'Запечатано. Збережіть (Ctrl/Cmd+S), щоб зберегти.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Цей звіт складено достовірно.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Запечатування можливе лише після перевірки всіх чернеток ШІ. Ще перевірити на слайді(ах):',
   'Uit sjabloon…': 'З шаблону…',
   'Sjabloon kiezen': 'Вибрати шаблон',
   'Scope-object': 'Об\'єкт області',

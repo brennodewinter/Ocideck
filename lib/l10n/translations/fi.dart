@@ -214,8 +214,6 @@ const _dutchSourceFi = {
       'Sinetöity. Tallenna (Ctrl/Cmd+S) säilyttääksesi.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Tämä raportti on laadittu totuudenmukaisesti.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Sinetöinti on mahdollista vasta, kun kaikki tekoälyluonnokset on tarkistettu. Vielä tarkistettava dialla (dioilla):',
   'Uit sjabloon…': 'Mallista…',
   'Sjabloon kiezen': 'Valitse malli',
   'Scope-object': 'Kohde (scope)',

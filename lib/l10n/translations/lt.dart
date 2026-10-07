@@ -213,8 +213,6 @@ const _dutchSourceLt = {
       'Užantspauduota. Išsaugokite (Ctrl/Cmd+S), kad išliktų.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ši ataskaita parengta teisingai.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Užantspauduoti galima tik peržiūrėjus visus DI juodraščius. Dar reikia patikrinti skaidrėje (-ėse):',
   'Uit sjabloon…': 'Iš šablono…',
   'Sjabloon kiezen': 'Pasirinkti šabloną',
   'Scope-object': 'Aprėpties objektas',

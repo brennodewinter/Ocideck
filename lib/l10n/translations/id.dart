@@ -213,8 +213,6 @@ const _dutchSourceId = {
       'Tersegel. Simpan (Ctrl/Cmd+S) untuk menyimpannya.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Laporan ini disusun secara benar.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Penyegelan baru bisa dilakukan setelah semua draf AI ditinjau. Masih perlu diperiksa pada slide:',
   'Uit sjabloon…': 'Dari templat…',
   'Sjabloon kiezen': 'Pilih templat',
   'Scope-object': 'Objek lingkup',

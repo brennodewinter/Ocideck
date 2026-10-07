@@ -214,8 +214,6 @@ const _dutchSourceDa = {
       'Forseglet. Gem (Ctrl/Cmd+S) for at bevare det.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Denne rapport er udarbejdet sandfærdigt.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Forsegling er først mulig, når alle AI-udkast er gennemgået. Mangler at blive kontrolleret på dias:',
   'Uit sjabloon…': 'Fra skabelon…',
   'Sjabloon kiezen': 'Vælg skabelon',
   'Scope-object': 'Scope-objekt',

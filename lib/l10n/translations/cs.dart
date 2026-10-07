@@ -215,8 +215,6 @@ const _dutchSourceCs = {
       'Zapečetěno. Uložte (Ctrl/Cmd+S) pro zachování.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Tato zpráva byla vypracována pravdivě.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Zapečetění je možné až po kontrole všech AI konceptů. Zbývá zkontrolovat na snímku(cích):',
   'Uit sjabloon…': 'Ze šablony…',
   'Sjabloon kiezen': 'Vybrat šablonu',
   'Scope-object': 'Objekt rozsahu',

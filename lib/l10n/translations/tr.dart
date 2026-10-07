@@ -214,8 +214,6 @@ const _dutchSourceTr = {
       'Mühürlendi. Saklamak için kaydedin (Ctrl/Cmd+S).',
   'Deze rapportage is naar waarheid opgesteld.':
       'Bu rapor gerçeğe uygun olarak hazırlanmıştır.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Mühürleme ancak tüm AI taslakları gözden geçirildikten sonra yapılabilir. Şu slaytlarda hâlâ denetim gerekiyor:',
   'Uit sjabloon…': 'Şablondan…',
   'Sjabloon kiezen': 'Şablon seç',
   'Scope-object': 'Kapsam nesnesi',

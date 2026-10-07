@@ -217,8 +217,6 @@ const _dutchSourceGa = {
       'Séalaithe. Sábháil (Ctrl/Cmd+S) chun é a choinneáil.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ullmhaíodh an tuarascáil seo go fírinneach.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Ní féidir séalú a dhéanamh go dtí go seiceáiltear gach dréacht AI. Le seiceáil fós ar shleamhnán(áin):',
   'Uit sjabloon…': 'Ó theimpléad…',
   'Sjabloon kiezen': 'Roghnaigh teimpléad',
   'Scope-object': 'Réad scóipe',

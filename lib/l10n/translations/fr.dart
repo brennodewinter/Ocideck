@@ -218,8 +218,6 @@ const _dutchSourceFr = {
       'Scellé. Enregistrez (Ctrl/Cmd+S) pour conserver.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ce rapport a été rédigé conformément à la vérité.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Le scellement n\'est possible qu\'après vérification de tous les brouillons IA. À vérifier sur la ou les diapositives :',
   'Uit sjabloon…': 'Depuis un modèle…',
   'Sjabloon kiezen': 'Choisir un modèle',
   'Scope-object': 'Objet du périmètre',

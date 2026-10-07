@@ -214,8 +214,6 @@ const _dutchSourceEn = {
       'Sealed. Save (Ctrl/Cmd+S) to keep it.',
   'Deze rapportage is naar waarheid opgesteld.':
       'This report has been prepared truthfully.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Sealing is only possible once all AI drafts have been reviewed. Still to check on slide(s):',
   'Uit sjabloon…': 'From template…',
   'Sjabloon kiezen': 'Choose template',
   'Scope-object': 'Scope object',

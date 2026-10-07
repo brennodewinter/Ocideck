@@ -215,8 +215,6 @@ const _dutchSourceBg = {
       'Подпечатано. Запазете (Ctrl/Cmd+S), за да го запазите.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Този доклад е изготвен добросъвестно.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Подпечатването е възможно едва след като всички AI чернови са прегледани. Още за проверка на слайд(ове):',
   'Uit sjabloon…': 'От шаблон…',
   'Sjabloon kiezen': 'Изберете шаблон',
   'Scope-object': 'Обект от обхвата',

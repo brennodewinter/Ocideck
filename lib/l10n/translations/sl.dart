@@ -214,8 +214,6 @@ const _dutchSourceSl = {
       'Zapečateno. Shranite (Ctrl/Cmd+S), da ga ohranite.',
   'Deze rapportage is naar waarheid opgesteld.':
       'To poročilo je bilo pripravljeno resnično.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Zapečatenje je mogoče šele, ko so vsi osnutki UI pregledani. Še za preverjanje na prosojnici(-ah):',
   'Uit sjabloon…': 'Iz predloge…',
   'Sjabloon kiezen': 'Izberi predlogo',
   'Scope-object': 'Predmet obsega',

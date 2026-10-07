@@ -213,8 +213,6 @@ const _dutchSourceFy = {
       'Fersegele. Bewarje (Ctrl/Cmd+S) om it te hâlden.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Dit rapport is nei wierheid opsteld.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Fersegelje kin pas as alle AI-konsepten neisjoen binne. Noch te kontrolearjen op dia(\'s):',
   'Uit sjabloon…': 'Ut sjabloan…',
   'Sjabloon kiezen': 'Sjabloan kieze',
   'Scope-object': 'Scope-objekt',

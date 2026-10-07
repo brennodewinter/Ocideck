@@ -216,8 +216,6 @@ const _dutchSourceRo = {
       'Sigilat. Salvați (Ctrl/Cmd+S) pentru a-l păstra.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Acest raport a fost întocmit în mod veridic.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Sigilarea este posibilă doar după verificarea tuturor schițelor AI. Rămâne de verificat pe diapozitiv(e):',
   'Uit sjabloon…': 'Din șablon…',
   'Sjabloon kiezen': 'Alege un șablon',
   'Scope-object': 'Obiect din domeniu',

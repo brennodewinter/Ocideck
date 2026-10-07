@@ -216,8 +216,6 @@ const _dutchSourceLa = {
       'Obsignatum. Serva (Ctrl/Cmd+S) ut retineas.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Haec relatio secundum veritatem confecta est.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Obsignatio fieri non potest nisi omnia adumbrata ab IA recognita sint. Adhuc examinandum in scida(is):',
   'Uit sjabloon…': 'Ex exemplari…',
   'Sjabloon kiezen': 'Exemplar eligere',
   'Scope-object': 'Obiectum ambitus',

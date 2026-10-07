@@ -213,8 +213,6 @@ const _dutchSourceEt = {
       'Pitseeritud. Salvesta (Ctrl/Cmd+S), et see säiliks.',
   'Deze rapportage is naar waarheid opgesteld.':
       'See aruanne on koostatud tõeselt.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Pitseerimine on võimalik alles siis, kui kõik AI mustandid on üle vaadatud. Veel kontrollida slaidil (slaididel):',
   'Uit sjabloon…': 'Mallist…',
   'Sjabloon kiezen': 'Vali mall',
   'Scope-object': 'Ulatuse objekt',
