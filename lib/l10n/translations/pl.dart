@@ -1637,6 +1637,27 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Verschillen bekijken…': 'Zobacz różnice…',
+  'Mijn versie als kopie bewaren': 'Zachowaj moją wersję jako kopię',
+  'Verschillen met de versie op schijf': 'Różnice względem wersji na dysku',
+  'Versie op schijf': 'Wersja na dysku',
+  'Laatst geopend of opgeslagen': 'Ostatnio otwarta lub zapisana',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Trzy wersje: co ostatnio otwarto lub zapisano (baza), Twoja niezapisana wersja i to, co jest teraz na dysku.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Nieznana jest wiarygodna wersja bazowa; automatyczne scalanie jest niemożliwe. Wybierz, której wersji chcesz użyć.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Zmiany nie kolidują ze sobą i można je scalić automatycznie.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Te slajdy zmieniono po obu stronach — wybierz dla każdego, która wersja ma zostać:',
+  'Geen inhoudelijke verschillen gevonden.': 'Nie znaleziono różnic w treści.',
+  'Samenvoegen en toepassen': 'Scal i zastosuj',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Plik w międzyczasie ponownie się zmienił; porównaj jeszcze raz.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Scalono z wersją na dysku — jeszcze nie zapisano.',
+  'Mijn versie bewaren': 'Zachowaj moją wersję',
+  'Versie op schijf laden': 'Wczytaj wersję z dysku',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Zapieczętowanie jest możliwe dopiero po uzupełnieniu wszystkich wersji roboczych i pól obowiązkowych. Pozostało do sprawdzenia na slajdzie:',
   'SAFARI-assessment digitale soevereiniteit':

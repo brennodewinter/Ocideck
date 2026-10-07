@@ -2536,6 +2536,27 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Verschillen bekijken…': 'Farkları görüntüle…',
+  'Mijn versie als kopie bewaren': 'Sürümümü kopya olarak sakla',
+  'Verschillen met de versie op schijf': 'Diskteki sürümden farklar',
+  'Versie op schijf': 'Diskteki sürüm',
+  'Laatst geopend of opgeslagen': 'Son açılan veya kaydedilen',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Üç sürüm: en son açtığınız veya kaydettiğiniz (taban), kaydedilmemiş sürümünüz ve şu anda diskte bulunanlar.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Güvenilir bir temel sürüm bilinmiyor; otomatik birleştirme mümkün değil. Kullanmak istediğiniz sürümü seçin.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Değişiklikler çakışmıyor ve otomatik olarak birleştirilebilir.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Bu slaytlar her iki tarafta da değiştirildi — her slayt için hangi sürümün kalacağını seçin:',
+  'Geen inhoudelijke verschillen gevonden.': 'İçerik farkı bulunamadı.',
+  'Samenvoegen en toepassen': 'Birleştir ve uygula',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Dosya bu arada yeniden değişti; yeniden karşılaştırın.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Diskteki sürümle birleştirildi — henüz kaydedilmedi.',
+  'Mijn versie bewaren': 'Sürümümü tut',
+  'Versie op schijf laden': 'Diskteki sürümü yükle',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Mühürleme, ancak tüm taslaklar ve zorunlu alanlar tamamlandığında mümkündür. Slaytta hâlâ kontrol edilmesi gerekenler:',
   'SAFARI-assessment digitale soevereiniteit':

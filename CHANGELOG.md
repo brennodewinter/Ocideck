@@ -10,6 +10,24 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Lokale bestandsconflicten zijn te vergelijken en samen te voegen**
+  (#2323). Wie opsloeg terwijl het bestand ondertussen elders was
+  gewijzigd, kreeg alleen een blinde keuze: overschrijven, herladen of
+  opslaan als — zonder te zien wát er anders was. Beide dialogen bieden nu
+  "Verschillen bekijken…" en "Mijn versie als kopie bewaren". Bij een
+  presentatie opent de vergelijking een dia-overzicht met de drie versies
+  (laatst geopend/opgeslagen, mijn versie, versie op schijf) en voegt
+  `mergeDeckVersions` de niet-botsende wijzigingen al samen; per botsende
+  dia — ook verwijderd-tegen-gewijzigd — kiest de gebruiker expliciet een
+  kant, waarna de merge als één ongedaan-stap in het tabblad landt en
+  bewust vuil blijft. Bij een document toont de vergelijking beide bronnen
+  zij-aan-zij per blok met woordmarkering; samenvoegen van tekst is er
+  bewust niet, alleen een keuze voor een hele versie. Lezen loopt over de
+  bestaande open-poort (cap, UTF-8, veiligheidsscan, parse), er wordt
+  niets geschreven zolang de analyse open staat, en elke schrijfactie
+  controleert de schijf-vingerafdruk opnieuw: is het bestand ondertussen
+  alweer veranderd, dan vervalt de analyse in plaats van dat hij stil
+  wordt toegepast.
 - Het **wisselen tussen Visueel en Bron houdt je plek in beeld** (#2322).
   De caret werd sinds #1566 al logisch meevertaald, maar de doelstand opende
   bovenaan: een goed gezette cursor kon alsnog buiten het venster liggen, en

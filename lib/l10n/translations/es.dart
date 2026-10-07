@@ -662,6 +662,28 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Verschillen bekijken…': 'Ver diferencias…',
+  'Mijn versie als kopie bewaren': 'Guardar mi versión como copia',
+  'Verschillen met de versie op schijf': 'Diferencias con la versión en disco',
+  'Versie op schijf': 'Versión en disco',
+  'Laatst geopend of opgeslagen': 'Última apertura o guardado',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tres versiones: lo que abriste o guardaste por última vez (la base), tu versión sin guardar y lo que hay ahora en el disco.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'No se conoce una versión base fiable; no es posible combinar automáticamente. Elige qué versión quieres usar.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Los cambios no se solapan y pueden combinarse automáticamente.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Estas diapositivas se modificaron en ambos lados: elige qué versión conservar en cada una:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'No se encontraron diferencias de contenido.',
+  'Samenvoegen en toepassen': 'Combinar y aplicar',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'El archivo ha vuelto a cambiar mientras tanto; compara de nuevo.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Combinado con la versión en disco; aún no guardado.',
+  'Mijn versie bewaren': 'Conservar mi versión',
+  'Versie op schijf laden': 'Cargar la versión en disco',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'El sellado solo es posible cuando se han completado todos los borradores y campos obligatorios. Pendiente de revisar en la diapositiva:',
   'SAFARI-assessment digitale soevereiniteit':

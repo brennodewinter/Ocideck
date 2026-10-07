@@ -1645,6 +1645,28 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Verschillen bekijken…': 'Преглед на разликите…',
+  'Mijn versie als kopie bewaren': 'Запази моята версия като копие',
+  'Verschillen met de versie op schijf': 'Разлики спрямо версията на диска',
+  'Versie op schijf': 'Версия на диска',
+  'Laatst geopend of opgeslagen': 'Последно отворена или запазена',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Три версии: това, което последно сте отворили или запазили (базата), вашата незапазена версия и това, което сега е на диска.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Не е известна надеждна базова версия; автоматичното сливане е невъзможно. Изберете коя версия искате да използвате.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Промените не си противоречат и могат да бъдат сляти автоматично.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Тези слайдове са променени и от двете страни — изберете за всеки коя версия остава:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Не са намерени разлики в съдържанието.',
+  'Samenvoegen en toepassen': 'Слей и приложи',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Файлът междувременно отново е променен; сравнете отново.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Слято с версията на диска — все още не е запазено.',
+  'Mijn versie bewaren': 'Запази моята версия',
+  'Versie op schijf laden': 'Зареди версията от диска',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Запечатването е възможно едва след като всички чернови и задължителни полета са завършени. Остава да се провери на слайда:',
   'SAFARI-assessment digitale soevereiniteit':

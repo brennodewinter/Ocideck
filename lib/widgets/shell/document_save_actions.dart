@@ -19,6 +19,7 @@ import '../../utils/error_snackbar.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/source_patcher.dart';
+import '../dialogs/document_conflict_dialog.dart';
 import 'open_failure_message.dart';
 
 /// Saves the document held by [notifier], the single way every save route lands:
@@ -69,14 +70,22 @@ Future<bool> saveDocumentWithDestination(
         state.savedFileHash != null &&
         diskHash != state.savedFileHash) {
       if (!context.mounted) return false;
-      final choice = await _showConflictDialog(context);
-      if (choice == _ConflictChoice.cancel) return false;
-      if (choice == _ConflictChoice.reload) {
-        if (!context.mounted) return false;
-        await _reloadFromDisk(context, ref, notifier, path);
-        return false;
+      final outcome = await _resolveDocumentConflict(
+        context,
+        ref,
+        notifier,
+        path,
+        diskHash,
+        documentToSave,
+      );
+      switch (outcome) {
+        case _DocSaveOutcome.saved:
+          return true;
+        case _DocSaveOutcome.abort:
+          return false;
+        case _DocSaveOutcome.proceed:
+          break; // overwrite: ga door met opslaan.
       }
-      // overwrite: ga door met opslaan.
     }
     final written = await saveDocument(documentToSave, path);
     if (written != null) {
@@ -107,17 +116,37 @@ Future<bool> saveDocumentWithDestination(
       .read(fileServiceProvider)
       .saveDocumentAs(documentToSave);
   if (saved == null) return false;
-  if (saved.document.source != document.source) {
-    notifier.replaceSource(saved.document.source);
+  await _adoptSavedDocument(
+    ref,
+    notifier,
+    saved.path,
+    saved.document,
+    oldSource: document.source,
+  );
+  return true;
+}
+
+/// Neemt het zojuist gekozen schrijfpad over in de notifier: tabblad wijst
+/// nu naar de kopie, is schoon en loopt qua bron, schijf en conflict-hash
+/// gelijk. Ook gebruikt door "Mijn versie als kopie bewaren" (#2323).
+Future<void> _adoptSavedDocument(
+  WidgetRef ref,
+  DocumentNotifier notifier,
+  String path,
+  MarkdownDocument saved, {
+  required String oldSource,
+}) async {
+  if (saved.source != oldSource) {
+    notifier.replaceSource(saved.source);
   }
   notifier.markSaved(
-    filePath: saved.path,
-    savedFileHash: DocumentIntegrity.hashDocument(saved.document),
+    filePath: path,
+    savedFileHash: DocumentIntegrity.hashDocument(saved),
   );
+  // Werk de recente-bestanden-lijst bij, net als bij openen en Opslaan-als.
   await ref
       .read(settingsProvider.notifier)
-      .addRecentFile(saved.path, kind: MarkdownKind.document);
-  return true;
+      .addRecentFile(path, kind: MarkdownKind.document);
 }
 
 /// Patcht de bewerkingen uit de visuele editor op de originele bron.
@@ -159,8 +188,158 @@ MarkdownDocument _patchVisualSave(
   return document.withSource(currSplit.block + patched);
 }
 
-/// De keuzes uit de conflict-dialoog (#1699).
-enum _ConflictChoice { cancel, reload, overwrite }
+/// Wat de conflictlus teruggeeft aan [saveDocumentWithDestination].
+enum _DocSaveOutcome { proceed, saved, abort }
+
+/// De keuzes uit de conflict-dialoog (#1699, #2323).
+enum _ConflictChoice { cancel, reload, overwrite, saveCopy, compare }
+
+/// Wat de vergelijkingsdialoog aanvraagt — terug is geen keuze maar een
+/// terugkeer naar de eerste dialoog.
+enum _DocConflictAction { back, action }
+
+/// De lus rond het lokale documentconflict (#2323): de eerste dialoog biedt
+/// naast de bestaande keuzes "Verschillen bekijken…" en "Mijn versie als
+/// kopie bewaren". De vergelijking leest de schijfversie door dezelfde
+/// open-poort als elk openen; vóór élke schrijfactie wordt de hash opnieuw
+/// gecontroleerd zodat een tussentijdse wijziging nooit stilletjes wordt
+/// overschreven.
+Future<_DocSaveOutcome> _resolveDocumentConflict(
+  BuildContext context,
+  WidgetRef ref,
+  DocumentNotifier notifier,
+  String path,
+  String fingerprint,
+  MarkdownDocument documentToSave,
+) async {
+  for (;;) {
+    if (!context.mounted) return _DocSaveOutcome.abort;
+    var choice = await _showConflictDialog(context);
+    if (!context.mounted) return _DocSaveOutcome.abort;
+    if (choice == _ConflictChoice.compare) {
+      final compare = await _compareDocumentConflict(
+        context,
+        ref,
+        path,
+        fingerprint,
+        documentToSave,
+      );
+      fingerprint = compare.fingerprint;
+      if (compare.action == null) return _DocSaveOutcome.abort;
+      if (compare.action == _DocConflictAction.back) continue;
+      choice = compare.choice;
+    }
+    switch (choice) {
+      case _ConflictChoice.cancel:
+      case _ConflictChoice.compare:
+        return _DocSaveOutcome.abort;
+      case _ConflictChoice.reload:
+        if (!context.mounted) return _DocSaveOutcome.abort;
+        await _reloadFromDisk(context, ref, notifier, path);
+        return _DocSaveOutcome.abort;
+      case _ConflictChoice.saveCopy:
+        final saved = await ref
+            .read(fileServiceProvider)
+            .saveDocumentAs(documentToSave);
+        if (saved == null) return _DocSaveOutcome.abort;
+        if (!context.mounted) return _DocSaveOutcome.abort;
+        await _adoptSavedDocument(
+          ref,
+          notifier,
+          saved.path,
+          saved.document,
+          oldSource: documentToSave.source,
+        );
+        return _DocSaveOutcome.saved;
+      case _ConflictChoice.overwrite:
+        final now = await _readFileHash(path);
+        if (now != fingerprint) {
+          // Verlopen vingerafdruk: niet schrijven — de melding zegt waarom en
+          // de lus geeft de keuze met de verse stand opnieuw.
+          fingerprint = now ?? fingerprint;
+          if (!context.mounted) return _DocSaveOutcome.abort;
+          showErrorSnackBar(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            context.l10n.d(
+              'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.',
+            ),
+          );
+          continue;
+        }
+        return _DocSaveOutcome.proceed;
+    }
+  }
+}
+
+/// Leest de schijfversie door de open-poort en toont de blokvergelijking.
+/// Schrijft nooit tijdens de analyse; geeft de gevraagde actie terug plus de
+/// vingerafdruk van de geanalyseerde versie.
+Future<
+  ({_DocConflictAction? action, _ConflictChoice choice, String fingerprint})
+>
+_compareDocumentConflict(
+  BuildContext context,
+  WidgetRef ref,
+  String path,
+  String fingerprint,
+  MarkdownDocument documentToSave,
+) async {
+  final files = ref.read(fileServiceProvider);
+  final result = await files.openDocumentDetailed(path);
+  if (!context.mounted) {
+    return (
+      action: _DocConflictAction.back,
+      choice: _ConflictChoice.cancel,
+      fingerprint: fingerprint,
+    );
+  }
+  final disk = result.document;
+  if (disk == null) {
+    if (result.failure == OpenFailure.unsafe) {
+      final findings = await files.scanForUnsafeMarkdown(path);
+      ref.read(importSecurityAlarmProvider.notifier).state =
+          ImportSecurityAlarm(path: path, findings: findings);
+    } else {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        openFailureMessage(context.l10n, result.failure),
+      );
+    }
+    return (
+      action: _DocConflictAction.back,
+      choice: _ConflictChoice.cancel,
+      fingerprint: fingerprint,
+    );
+  }
+  final analysisHash = await _readFileHash(path) ?? fingerprint;
+  if (!context.mounted) {
+    return (
+      action: _DocConflictAction.back,
+      choice: _ConflictChoice.cancel,
+      fingerprint: analysisHash,
+    );
+  }
+  final action = await DocumentConflictDialog.show(
+    context,
+    ours: documentToSave.source,
+    theirs: disk.source,
+  );
+  final choice = switch (action) {
+    DocumentConflictAction.overwrite => _ConflictChoice.overwrite,
+    DocumentConflictAction.loadDisk => _ConflictChoice.reload,
+    DocumentConflictAction.saveCopy => _ConflictChoice.saveCopy,
+    _ => _ConflictChoice.cancel,
+  };
+  return (
+    action: action == DocumentConflictAction.back || action == null
+        ? _DocConflictAction.back
+        : _DocConflictAction.action,
+    choice: choice,
+    fingerprint: analysisHash,
+  );
+}
 
 /// Leest het bestand op [path] en retourneert de SHA-512-hash van de bytes,
 /// of `null` als het bestand niet (meer) bestaat of niet leesbaar is.
@@ -174,8 +353,9 @@ Future<String?> _readFileHash(String path) async {
 }
 
 /// Toont de conflict-dialoog: het bestand is buiten OciDeck gewijzigd.
-/// De gebruiker kiest tussen Herladen (opnieuw inladen), Overschrijven
-/// (toch opslaan) of Annuleren.
+/// De gebruiker kiest tussen de verschillen bekijken, Herladen (opnieuw
+/// inladen), Overschrijven (toch opslaan), de eigen versie als kopie
+/// bewaren, of Annuleren (#1699, #2323).
 Future<_ConflictChoice> _showConflictDialog(BuildContext context) async {
   final l10n = context.l10n;
   final choice = await showDialog<_ConflictChoice>(
@@ -191,8 +371,16 @@ Future<_ConflictChoice> _showConflictDialog(BuildContext context) async {
           child: Text(l10n.d('Annuleren')),
         ),
         TextButton(
+          onPressed: () => Navigator.pop(ctx, _ConflictChoice.compare),
+          child: Text(l10n.d('Verschillen bekijken…')),
+        ),
+        TextButton(
           onPressed: () => Navigator.pop(ctx, _ConflictChoice.reload),
           child: Text(l10n.d('Herladen')),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, _ConflictChoice.saveCopy),
+          child: Text(l10n.d('Mijn versie als kopie bewaren')),
         ),
         FilledButton(
           onPressed: () => Navigator.pop(ctx, _ConflictChoice.overwrite),

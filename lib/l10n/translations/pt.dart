@@ -1653,6 +1653,29 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Verschillen bekijken…': 'Ver diferenças…',
+  'Mijn versie als kopie bewaren': 'Guardar a minha versão como cópia',
+  'Verschillen met de versie op schijf':
+      'Diferenças em relação à versão no disco',
+  'Versie op schijf': 'Versão no disco',
+  'Laatst geopend of opgeslagen': 'Última abertura ou gravação',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Três versões: o que abriu ou guardou por último (a base), a sua versão não guardada e o que está agora no disco.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Não é conhecida uma versão base fiável; a fusão automática não é possível. Escolha que versão pretende usar.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'As alterações não entram em conflito e podem ser fundidas automaticamente.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Estes diapositivos foram alterados em ambos os lados — escolha para cada um que versão fica:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Não foram encontradas diferenças de conteúdo.',
+  'Samenvoegen en toepassen': 'Fundir e aplicar',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'O ficheiro mudou novamente entretanto; compare novamente.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Fundido com a versão no disco — ainda não guardado.',
+  'Mijn versie bewaren': 'Manter a minha versão',
+  'Versie op schijf laden': 'Carregar a versão no disco',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'A selagem só é possível quando todos os rascunhos e campos obrigatórios estiverem concluídos. Ainda a verificar no diapositivo:',
   'SAFARI-assessment digitale soevereiniteit':

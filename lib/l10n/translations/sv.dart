@@ -1624,6 +1624,28 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Verschillen bekijken…': 'Visa skillnader…',
+  'Mijn versie als kopie bewaren': 'Behåll min version som kopia',
+  'Verschillen met de versie op schijf': 'Skillnader mot versionen på disken',
+  'Versie op schijf': 'Version på disken',
+  'Laatst geopend of opgeslagen': 'Senast öppnad eller sparad',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tre versioner: vad du senast öppnade eller sparade (basen), din osparade version, och vad som nu finns på disken.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Ingen tillförlitlig basversion är känd; automatisk sammanfogning är inte möjlig. Välj vilken version du vill använda.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Ändringarna krockar inte och kan slås ihop automatiskt.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Dessa bilder har ändrats på båda sidor — välj per bild vilken version som ska behållas:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Inga innehållsskillnader hittades.',
+  'Samenvoegen en toepassen': 'Slå ihop och tillämpa',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Filen har ändrats igen under tiden; jämför igen.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Sammanslagen med versionen på disken — inte sparad ännu.',
+  'Mijn versie bewaren': 'Behåll min version',
+  'Versie op schijf laden': 'Läs in versionen på disken',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'Försegling är möjlig först när alla utkast och obligatoriska fält har slutförts. Återstår att kontrollera på bilden:',
   'SAFARI-assessment digitale soevereiniteit':

@@ -1627,6 +1627,29 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Verschillen bekijken…': 'Különbségek megtekintése…',
+  'Mijn versie als kopie bewaren': 'Saját verzióm megőrzése másolatként',
+  'Verschillen met de versie op schijf':
+      'Különbségek a lemezen lévő verzióhoz képest',
+  'Versie op schijf': 'Verzió a lemezen',
+  'Laatst geopend of opgeslagen': 'Legutoljára megnyitott vagy mentett',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Három verzió: amit legutoljára megnyitott vagy mentett (az alap), a mentetlen verziója, és ami most a lemezen van.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Nem ismert megbízható alapverzió; az automatikus összefésülés nem lehetséges. Válassza ki, melyik verziót szeretné használni.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'A módosítások nem ütköznek, és automatikusan összefésülhetők.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Ezeket a diákat mindkét oldalon módosították — válassza ki diánként, melyik verzió maradjon:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Nem található tartalmi különbség.',
+  'Samenvoegen en toepassen': 'Összefésülés és alkalmazás',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'A fájl időközben ismét megváltozott; hasonlítsa össze újra.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Összefésülve a lemezen lévő verzióval — még nincs mentve.',
+  'Mijn versie bewaren': 'Saját verzióm megtartása',
+  'Versie op schijf laden': 'Verzió betöltése a lemezről',
   'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
       'A lezárás csak akkor lehetséges, ha minden vázlat és kötelező mező elkészült. Még ellenőrizendő a dián:',
   'SAFARI-assessment digitale soevereiniteit':
