@@ -439,6 +439,15 @@ profile `ocideck-notary`; override with `OCIDECK_SIGN_IDENTITY` /
 `scripts/notarize_macos.sh --skip-build` signs and notarises whatever is already
 in `build/` without rebuilding.
 
+When the preflight (`--preflight`, also run by `release_auto.sh`) reports a
+`notarytool` failure it shows Apple's real output and routes the fix to the
+cause (#2296): a **403 about a required agreement** means the Account Holder
+must accept the current agreements in App Store Connect — re-saving
+credentials cannot fix that; a **missing or invalid profile** is repaired
+with `store-credentials` as above; a **401/credentials** failure means the
+Apple-ID, app-specific password or team-id is wrong; a **network** error is
+retried later. Anything unrecognised is shown raw, without a guessed cause.
+
 ### Windows / Linux notes
 
 - Windows: distribute the contents of `build/windows/x64/runner/Release/`, or
