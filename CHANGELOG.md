@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **lokale macOS-installatie is werkelijk hervatbaar** (#2304). De te
+  installeren app zat alleen in een procesvariabele; faalde de wissel ná een
+  complete publieke release, dan sloeg `--resume` de lokale installatie stil
+  over en meldde toch succes terwijl `/Applications` oud bleef. Nu herontdekt
+  de afsluitstap de bij de tag horende build in de bouwmap, bewijst versie én
+  zegel vóór installatie, en meldt de lokale stap expliciet `NOG OPEN` met de
+  publiceer-url als er niets geverifieerds is — nooit meer stil succes.
 - **`--status` heeft een vaste totale deadline** (#2305) en rapporteert elke
   sonde afzonderlijk: bewezen, aantoonbaar afwezig, of `[?]` onbekend met de
   reden. Voorheen deed elke probe tot vier API-pogingen van hooguit 90 seconden

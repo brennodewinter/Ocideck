@@ -1834,6 +1834,35 @@ cleanup_owned_release_branch() {
   log "Lokale release-branch $BRANCH opgeruimd; merge en tag zijn bewezen."
 }
 
+# Is APP de genotariseerde build van díe release? Voor een herontdekte kandidaat
+# (bij --resume) is dat de enige veiligheidsgrens: versie moet exact NEW_VERSION
+# zijn en de zegel streng geldig — anders installeren we mogelijk een oude of
+# andere build alsof het deze release was. (#2304)
+verify_install_candidate() {
+  local app="$1" ver
+  [ -d "$app/Contents" ] || return 1
+  ver="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' \
+    "$app/Contents/Info.plist" 2>/dev/null)" || return 1
+  [ "$ver" = "$NEW_VERSION" ] || return 1
+  codesign --verify --deep --strict "$app" >/dev/null 2>&1
+}
+
+# De bouwmap van deze checkout kan bij --resume de genotariseerde fase-1-build
+# van deze tag nog bevatten: PENDING_APP is een procesvariabele die een nieuwe
+# run niet meekrijgt. Herontdek hem hier — één kandidaat die de verificatie
+# doorstaat, anders niets.
+discover_install_candidate() {
+  local app
+  for app in build/macos/Build/Products/Release/*.app; do
+    [ -e "$app" ] || continue
+    if verify_install_candidate "$app"; then
+      printf '%s\n' "$app"
+      return 0
+    fi
+  done
+  return 1
+}
+
 install_macos_app() { # install_macos_app SOURCE_APP
   local source_app="$1" target="$APPLICATIONS_DIR/OciDeck.app"
   local stage backup had_old=0
@@ -1870,16 +1899,46 @@ install_macos_app() { # install_macos_app SOURCE_APP
 
 finish() {
   STEP="klaar"
-  if [ -n "${PENDING_APP:-}" ] && [ "$SKIP_INSTALL" -eq 0 ]; then
-    STEP="/Applications vervangen"
-    install_macos_app "$PENDING_APP"
-    log "$APPLICATIONS_DIR/OciDeck.app vervangen door de uitgebrachte, genotariseerde build."
+  # Het eindbericht onderscheidt de publieke release van de lokale installatie:
+  # die eerste kan compleet zijn terwijl /Applications nog de oude versie draait
+  # (#2304). --skip-install blijft de enige bewuste manier om over te slaan.
+  local install_state="overgeslagen" install_note=""
+  if [ "${SKIP_INSTALL:-0}" -eq 0 ]; then
+    # Bij --resume is PENDING_APP leeg — deze run bouwde niets. De beoogde
+    # lokale app is dan de bij deze tag horende build: herontdek hem in de
+    # bouwmap en installeer alleen wat versie én zegel aantoont.
+    local candidate="${PENDING_APP:-}"
+    if [ -n "$candidate" ] && ! verify_install_candidate "$candidate"; then
+      die "de bewaarde build $candidate is geen geverifieerde $NEW_VERSION-build — de lokale installatie kan niet kloppen; onderzoek de bouwmap en hervat: scripts/release_auto.sh --resume $TAG"
+    fi
+    [ -n "$candidate" ] || candidate="$(discover_install_candidate || true)"
+    if [ -n "$candidate" ]; then
+      STEP="/Applications vervangen"
+      install_macos_app "$candidate"
+      install_state="gedaan"
+      log "$APPLICATIONS_DIR/OciDeck.app vervangen door de uitgebrachte, genotariseerde build."
+    else
+      install_state="open"
+      install_note="geen geverifieerde lokale build voor $NEW_VERSION in build/macos/Build/Products/Release"
+    fi
   fi
   STEP="klaar"
   section "Klaar — $TAG in $(elapsed)"
   restore_start_branch
   cleanup_owned_release_branch
   log "OciDeck $TAG is uitgebracht, getekend en live."
+  case "$install_state" in
+    gedaan)
+      log "Lokale installatie: $APPLICATIONS_DIR/OciDeck.app staat op $NEW_VERSION."
+      ;;
+    overgeslagen)
+      log "Lokale installatie: bewust overgeslagen (--skip-install); /Applications is ongemoeid."
+      ;;
+    *)
+      log "Lokale installatie: NOG OPEN — $install_note."
+      log "  Installeer desgewenst zelf: $RELEASE_BASE_URL/$TAG/ocideck-macos-$NEW_VERSION.zip"
+      ;;
+  esac
   log ""
   log "Release-pagina : ${RELEASE_BASE_URL%/download}/tag/$TAG"
   [ -n "${LOGFILE:-}" ] && log "Logboek        : $LOGFILE"
