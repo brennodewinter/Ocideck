@@ -197,14 +197,11 @@ void main() {
               ],
               supportedLocales: AppLocalizations.supportedLocales,
               builder: (context, child) => MediaQuery(
-                // De carrouselfooter gebruikt platformspecifieke fontmaten en
-                // valt buiten deze deduplicatietest. Met een geldige compacte
-                // systeemtekstinstelling blijft de test gericht op de keten,
-                // zonder renderfouten uit de exception-queue te verwijderen.
-                data: const MediaQueryData(
-                  size: Size(1400, 900),
-                  textScaler: TextScaler.linear(0.8),
-                ),
+                // Alleen de venstermaat; de tekstschaal is de normale. De
+                // footer was een vaste rij die bij bredere fontmetrics
+                // overliep — sinds #2318 breekt hij om en is deze test weer
+                // puur de deduplicatieketen.
+                data: const MediaQueryData(size: Size(1400, 900)),
                 child: child!,
               ),
               home: const DocumentEditorScreen(),

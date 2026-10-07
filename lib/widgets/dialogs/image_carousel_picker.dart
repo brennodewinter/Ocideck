@@ -1,5 +1,6 @@
 import '../../utils/image_limits.dart' show boundedFileImage;
 import 'dart:io';
+import 'dart:math' as math;
 import 'package:file_picker/file_picker.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:material_ui/material_ui.dart';

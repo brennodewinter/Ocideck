@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **carrouselfooter breekt om in plaats van over te lopen** (#2318). De
+  footer was een vaste horizontale rij en liep bij bredere fontmetrics buiten
+  beeld — 10 px op macOS, 29 px op een Linux-gate — tot functionele tests de
+  tekstschaal naar 0,8 moesten verkleinen om dat te verhullen. De footer is
+  nu een `Wrap` die knoppen naar een tweede regel breekt, en het
+  bestandsinfopaneel in de previewkolom scrollt als bredere tekst of een
+  lager venster hem groter maakt dan de kolom toelaat. De
+  deduplicatieketentest hoeft de productlayout niet langer te bewijzen.
 - De **CWE-verouderingscontrole** (#2292) leest nu MITRE's officiële
   `cwec_latest.xml.zip` in plaats van de REST-API (`cwe-api.mitre.org`), die
   op 6-10-2026 verbindingen verbrak ná het HTTP-verzoek. Uit de XML komen
