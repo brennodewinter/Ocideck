@@ -72,7 +72,7 @@ log() { printf '%s\\n' "\$1"; }
 git() {
   if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then return 0; fi
   case "\${*: -1}" in
-    refs/heads/*) return 1 ;;
+    refs/heads/*) return 2 ;;
     refs/tags/*) return 0 ;;
   esac
   return 1
@@ -141,17 +141,33 @@ cmd_status
       reason: 'aanroep van cmd_status niet gevonden',
     );
 
-    // De body van cmd_status, en daarin elk woord dat een functie uit dit
-    // script is.
-    final start = defined['cmd_status']!;
-    final end = lines.indexWhere((l) => RegExp(r'^\}\s*$').hasMatch(l), start);
-    final body = lines.sublist(start + 1, end).join('\n');
-    final used = defined.keys
-        .where((f) => f != 'cmd_status')
-        .where(
-          (f) => RegExp('(^|[^a-zA-Z0-9_])$f([^a-zA-Z0-9_]|\$)').hasMatch(body),
-        )
-        .toList();
+    // Elke functiebody uit dit script — cmd_status roept zijn sondes op in
+    // subshells (#2305), en die zoeken hún callees ook pas bij aanroepen. De
+    // regel "gedefinieerd vóór de aanroep" geldt dus transitief: niet alleen
+    // wat cmd_status letterlijk noemt, maar ook wat de sondes noemen.
+    final bodies = <String, String>{};
+    for (final name in defined.keys) {
+      final start = defined[name]!;
+      final end = lines.indexWhere(
+        (l) => RegExp(r'^\}\s*$').hasMatch(l),
+        start,
+      );
+      bodies[name] = lines.sublist(start + 1, end).join('\n');
+    }
+    final used = <String>{};
+    final queue = <String>['cmd_status'];
+    while (queue.isNotEmpty) {
+      final body = bodies[queue.removeLast()];
+      if (body == null) continue;
+      for (final f in defined.keys) {
+        if (used.contains(f)) continue;
+        if (RegExp('(^|[^a-zA-Z0-9_])$f([^a-zA-Z0-9_]|\$)').hasMatch(body)) {
+          used.add(f);
+          queue.add(f);
+        }
+      }
+    }
+    used.remove('cmd_status');
     expect(
       used,
       contains('live_web_version'),
@@ -201,7 +217,7 @@ mark() { printf 'mark %s %s\\n' "\$1" "\$2"; }
 git() {
   if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then return 0; fi
   case "\${*: -1}" in
-    refs/heads/*) return 1 ;;
+    refs/heads/*) return 2 ;;
     refs/tags/*) return 0 ;;
   esac
   return 1

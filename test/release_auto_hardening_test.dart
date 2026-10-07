@@ -119,8 +119,12 @@ release-commit refs/tags/v1.2.3^{}
         contains('expected_release_assets'),
       );
       expect(
-        functionBody('website_has_expected_downloads'),
+        functionBody('website_html_has_expected_downloads'),
         contains('expected_release_assets'),
+      );
+      expect(
+        functionBody('website_has_expected_downloads'),
+        contains('website_html_has_expected_downloads'),
       );
     },
   );
