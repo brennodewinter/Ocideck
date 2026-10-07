@@ -214,8 +214,6 @@ const _dutchSourceEn = {
       'Sealed. Save (Ctrl/Cmd+S) to keep it.',
   'Deze rapportage is naar waarheid opgesteld.':
       'This report has been prepared truthfully.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Sealing is only possible once all AI drafts have been reviewed. Still to check on slide(s):',
   'Uit sjabloon…': 'From template…',
   'Sjabloon kiezen': 'Choose template',
   'Scope-object': 'Scope object',
@@ -827,6 +825,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sealing is only possible when all drafts and mandatory fields have been completed. Still to check on slide:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI digital sovereignty assessment',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Complete working deck for scope, assessment questions, evidence, scoring and an assurance opinion according to SAFARI.',
   'Nieuwste eerst': 'Newest first',
   'Oudste eerst': 'Oldest first',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

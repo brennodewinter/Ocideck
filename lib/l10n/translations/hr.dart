@@ -214,8 +214,6 @@ const _dutchSourceHr = {
       'Zapečaćeno. Spremite (Ctrl/Cmd+S) da biste zadržali.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ovo je izvješće sastavljeno istinito.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Pečaćenje je moguće tek nakon pregleda svih AI nacrta. Još za provjeru na slajdu(ovima):',
   'Uit sjabloon…': 'Iz predloška…',
   'Sjabloon kiezen': 'Odaberi predložak',
   'Scope-object': 'Objekt opsega',
@@ -1631,6 +1629,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Pečaćenje je moguće tek kada su svi nacrti i obavezna polja dovršeni. Još treba provjeriti na slajdu:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI procjena digitalnog suvereniteta',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Potpuni radni paket za opseg, pitanja za ocjenjivanje, dokaze, bodovanje i mišljenje o izražavanju uvjerenja u skladu sa SAFARI-jem.',
   'Nieuwste eerst': 'Najnovije prvo',
   'Oudste eerst': 'Najstarije prvo',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

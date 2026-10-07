@@ -214,8 +214,6 @@ const _dutchSourceSl = {
       'Zapečateno. Shranite (Ctrl/Cmd+S), da ga ohranite.',
   'Deze rapportage is naar waarheid opgesteld.':
       'To poročilo je bilo pripravljeno resnično.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Zapečatenje je mogoče šele, ko so vsi osnutki UI pregledani. Še za preverjanje na prosojnici(-ah):',
   'Uit sjabloon…': 'Iz predloge…',
   'Sjabloon kiezen': 'Izberi predlogo',
   'Scope-object': 'Predmet obsega',
@@ -1627,6 +1625,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Zapečatenje je mogoče šele, ko so dokončani vsi osnutki in obvezna polja. Na prosojnici je treba še preveriti:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Ocena SAFARI digitalne suverenosti',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Celovit delovni komplet za obseg, ocenjevalna vprašanja, dokaze, točkovanje in mnenje o zagotovilu v skladu s SAFARI.',
   'Nieuwste eerst': 'Najnovejše najprej',
   'Oudste eerst': 'Najstarejše najprej',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

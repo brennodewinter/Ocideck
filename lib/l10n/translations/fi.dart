@@ -214,8 +214,6 @@ const _dutchSourceFi = {
       'Sinetöity. Tallenna (Ctrl/Cmd+S) säilyttääksesi.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Tämä raportti on laadittu totuudenmukaisesti.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Sinetöinti on mahdollista vasta, kun kaikki tekoälyluonnokset on tarkistettu. Vielä tarkistettava dialla (dioilla):',
   'Uit sjabloon…': 'Mallista…',
   'Sjabloon kiezen': 'Valitse malli',
   'Scope-object': 'Kohde (scope)',
@@ -1627,6 +1625,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sinetöinti on mahdollista vasta, kun kaikki luonnokset ja pakolliset kentät on täytetty. Tarkistettavaa diassa:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-arviointi digitaalisesta suvereniteetista',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Täydellinen työpaketti laajuutta, arviointikysymyksiä, näyttöä, pisteytystä ja SAFARIn mukaista varmennuslausuntoa varten.',
   'Nieuwste eerst': 'Uusimmat ensin',
   'Oudste eerst': 'Vanhimmat ensin',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

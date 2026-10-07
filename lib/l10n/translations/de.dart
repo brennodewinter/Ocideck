@@ -216,8 +216,6 @@ const _dutchSourceDe = {
       'Versiegelt. Speichern (Strg/Cmd+S), um es zu behalten.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Dieser Bericht wurde wahrheitsgemäß erstellt.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Versiegeln ist erst möglich, wenn alle KI-Entwürfe geprüft wurden. Noch zu prüfen auf Folie(n):',
   'Uit sjabloon…': 'Aus Vorlage…',
   'Sjabloon kiezen': 'Vorlage wählen',
   'Scope-object': 'Scope-Objekt',
@@ -667,6 +665,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Das Versiegeln ist erst möglich, wenn alle Entwürfe und Pflichtfelder abgeschlossen sind. Noch auf der Folie zu prüfen:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-Bewertung der digitalen Souveränität',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Vollständiges Arbeitsdeck für Geltungsbereich, Prüfungsfragen, Nachweise, Bewertung und ein Assurance-Urteil gemäß SAFARI.',
   'Nieuwste eerst': 'Neueste zuerst',
   'Oudste eerst': 'Älteste zuerst',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

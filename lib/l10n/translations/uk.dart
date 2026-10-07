@@ -216,8 +216,6 @@ const _dutchSourceUk = {
       'Запечатано. Збережіть (Ctrl/Cmd+S), щоб зберегти.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Цей звіт складено достовірно.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Запечатування можливе лише після перевірки всіх чернеток ШІ. Ще перевірити на слайді(ах):',
   'Uit sjabloon…': 'З шаблону…',
   'Sjabloon kiezen': 'Вибрати шаблон',
   'Scope-object': 'Об\'єкт області',
@@ -1642,6 +1640,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Запечатування можливе лише після завершення всіх чернеток і обов’язкових полів. Ще потрібно перевірити на слайді:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Оцінювання SAFARI цифрового суверенітету',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Повний робочий набір слайдів для обсягу, питань оцінювання, доказів, оцінювання та висновку з надання впевненості відповідно до SAFARI.',
   'Nieuwste eerst': 'Спочатку нові',
   'Oudste eerst': 'Спочатку старі',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

@@ -216,8 +216,6 @@ const _dutchSourceLa = {
       'Obsignatum. Serva (Ctrl/Cmd+S) ut retineas.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Haec relatio secundum veritatem confecta est.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Obsignatio fieri non potest nisi omnia adumbrata ab IA recognita sint. Adhuc examinandum in scida(is):',
   'Uit sjabloon…': 'Ex exemplari…',
   'Sjabloon kiezen': 'Exemplar eligere',
   'Scope-object': 'Obiectum ambitus',
@@ -1642,6 +1640,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Obsignatio fieri potest tantum cum omnia exemplaria et campi necessarii completa sunt. Adhuc in diapositiva inspiciendum:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Aestimatio SAFARI dominationis digitalis',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Fasciculus operis plenus pro ambitu, quaestionibus probationis, probationibus, aestimatione atque iudicio assecurationis secundum SAFARI.',
   'Nieuwste eerst': 'Recentissima primum',
   'Oudste eerst': 'Veterrima primum',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

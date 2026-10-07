@@ -213,8 +213,6 @@ const _dutchSourceEt = {
       'Pitseeritud. Salvesta (Ctrl/Cmd+S), et see säiliks.',
   'Deze rapportage is naar waarheid opgesteld.':
       'See aruanne on koostatud tõeselt.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Pitseerimine on võimalik alles siis, kui kõik AI mustandid on üle vaadatud. Veel kontrollida slaidil (slaididel):',
   'Uit sjabloon…': 'Mallist…',
   'Sjabloon kiezen': 'Vali mall',
   'Scope-object': 'Ulatuse objekt',
@@ -1620,6 +1618,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Pitseerimine on võimalik alles siis, kui kõik mustandid ja kohustuslikud väljad on täidetud. Slaidil tuleb veel kontrollida:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI digisuveräänsuse hindamine',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Täielik töökomplekt ulatuse, hindamisküsimuste, tõendite, hindamise ja SAFARI kohase kindlustandva arvamuse jaoks.',
   'Nieuwste eerst': 'Uusimad esimesena',
   'Oudste eerst': 'Vanimad esimesena',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

@@ -213,8 +213,6 @@ const _dutchSourceLv = {
       'Aizzīmogots. Saglabājiet (Ctrl/Cmd+S), lai saglabātu.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Šis ziņojums ir sagatavots patiesi.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Aizzīmogošana iespējama tikai pēc visu MI melnrakstu pārbaudes. Vēl jāpārbauda slaidā(os):',
   'Uit sjabloon…': 'No veidnes…',
   'Sjabloon kiezen': 'Izvēlēties veidni',
   'Scope-object': 'Tvēruma objekts',
@@ -1625,6 +1623,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Aizzīmogošana ir iespējama tikai tad, kad ir pabeigti visi melnraksti un obligātie lauki. Vēl jāpārbauda slaidā:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI digitālās suverenitātes novērtējums',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Pilns darba komplekts darbības jomai, novērtēšanas jautājumiem, pierādījumiem, vērtēšanai un apliecinājuma atzinumam saskaņā ar SAFARI.',
   'Nieuwste eerst': 'Jaunākie vispirms',
   'Oudste eerst': 'Vecākie vispirms',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

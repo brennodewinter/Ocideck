@@ -146,6 +146,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Het werkdeck **SAFARI-assessment digitale soevereiniteit** staat nu direct in
+  de sjablooncatalogus: 49 vaste SAFARI v0.9-toetsvragen met
+  herleidbaar auditorbewijs, bewijsniveaus, bindende scoringsregels en een
+  assurance-oordeel per doel. Onopgeloste invulwaarden blokkeren verzegelen,
+  zodat een leeg of half ingevuld assessment niet als eindrapport kan worden
+  vastgezet. De sjablooninhoud is een CC BY-SA 4.0-bewerking
+  van SAFARI van Brenno de Winter en Stichting LibreKAT; de OciDeck-code blijft
+  EUPL-1.2.
 - **Inzoomen in het slide-overzicht** (#2288): de tegels zitten niet langer aan één maat vast. De loepknoppen in de
   titelbalk, `Ctrl/Cmd +`/`−`, `Ctrl/Cmd+0` voor de standaardmaat en Ctrl+scroll op het raster schalen de miniaturen
   van de halve tot de driedubbele maat — inzoomen geeft minder maar grotere slides, uitzoomen juist meer kolommen. De
