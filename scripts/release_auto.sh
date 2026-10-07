@@ -69,7 +69,9 @@
 # --preflight gaat een stap verder en is de generale repetitie: het vraagt het
 # wachtwoord, toetst álles wat de keten onderweg nodig heeft — referentiedata,
 # schone én vrije werkboom, forge-token, mirror, deploy-host, minisign-sleutel en
-# de macOS-ondertekening/notarisatie — en stopt dan, zonder iets te muteren.
+# de macOS-ondertekening/notarisatie — en stopt dan zonder release- of
+# bronbestanden te wijzigen. Verouderde afgeleide bouwcaches kunnen wel worden
+# opgeruimd.
 # Bedoeld voor vlak vóór een release: de dure fouten in deze keten waren telkens
 # vooraf kenbaar (een notary-profiel dat na een sessieherstart weg was, een
 # deploy-host die niet antwoordde, een catalogus die achterliep), maar bleken pas
@@ -169,6 +171,8 @@ rollback_release_edits() {
   [ "$BRANCH_OWNED" -eq 1 ] || return 0
   git restore --staged --worktree -- pubspec.yaml CHANGELOG.md \
     lib/services/export_metadata.dart sbom 2>/dev/null || true
+  git restore --staged --worktree -- .github/pinned-ci-versions.json \
+    .forgejo/workflows/scans.yml .github/workflows/ci.yml 2>/dev/null || true
   git clean -fd -- sbom >/dev/null 2>&1 || true
 }
 cleanup_branch() {
@@ -348,9 +352,8 @@ api() { # api METHOD PATH [curl-args…]
   # Alleen idempotente GET's herproberen bij een transiënte curl-fout (netwerkhik,
   # 5xx): een losse hik hoort geen release af te breken. POST/DELETE (merge, dispatch,
   # upload) zijn niet idempotent en worden NOOIT herhaald.
-  # API_TRIES/API_MAX_TIME zijn alleen voor de read-only sondes van --status:
-  # daar is één korte poging per sonde juist (de vaste totale deadline doet de
-  # rest), voor de schrijvende release-paden blijven 4×90 s en retries gelden.
+  # API_TRIES/API_MAX_TIME begrenzen read-only sondes binnen een eigen vaste
+  # totale deadline. Voor losse release-GET's blijven 4×90 s en retries gelden.
   local tries=1 i rc=0
   [ "$method" = "GET" ] && tries="${API_TRIES:-4}"
   for i in $(seq 1 "$tries"); do
@@ -614,9 +617,17 @@ status_probe_tag_m() {
 }
 
 status_probe_release() {
-  local rel assets sums=0 sig=0 man=0 valid=0 verify_tmp
-  rel="$(api GET "/releases/tags/$TAG" 2>/dev/null)" \
-    || { printf '?|Forgejo-API onleesbaar\n' >"$1"; return; }
+  local rel assets sums=0 sig=0 man=0 valid=0 verify_tmp response code
+  response="$(mktemp)"
+  code="$(curl -sS --connect-timeout 10 --max-time "${API_MAX_TIME:-90}" \
+    --config <(printf 'header = "Authorization: token %s"\n' "$TOKEN") \
+    -o "$response" -w '%{http_code}' \
+    "$FORGE_API/repos/$REPO_SLUG/releases/tags/$TAG" 2>/dev/null)" \
+    || { rm -f "$response"; printf '?|Forgejo-API onleesbaar\n' >"$1"; return; }
+  if [ "$code" = 404 ]; then rm -f "$response"; printf '0\n' >"$1"; return; fi
+  if [ "$code" != 200 ]; then rm -f "$response"; printf '?|Forgejo-API gaf HTTP %s\n' "$code" >"$1"; return; fi
+  rel="$(cat "$response")"
+  rm -f "$response"
   [ -n "$(printf '%s' "$rel" | jq -r '.id // empty' 2>/dev/null)" ] \
     || { printf '0\n' >"$1"; return; }
   assets="$(printf '%s' "$rel" | jq -r '.assets[]?.name' 2>/dev/null)"
@@ -771,6 +782,8 @@ cmd_status() {
   [ "$st_site" = 1 ] && website_live=1
   [ "$st_site" = 0 ] && website_version="$d_site"
   [ "$st_mgate" = 1 ] && mgate_ok=1
+  local website_seen="${website_version:+v$website_version}"
+  [ -n "$website_seen" ] || website_seen="geen leesbare versie"
 
   local prdesc
   if [ "$has_pr" -eq 0 ]; then prdesc="release-PR aangemaakt"
@@ -831,8 +844,7 @@ cmd_status() {
   if [ "$st_site" = '?' ]; then
     mark3 '?' "$d_site" "$websitedesc"
   else
-    [ "$website_live" -eq 1 ] \
-      || websitedesc="$websitedesc (nu: ${website_version:+v$website_version}${website_version:-geen versieverwijzing})"
+    [ "$website_live" -eq 1 ] || websitedesc="$websitedesc (nu: $website_seen)"
     mark "$website_live" "$websitedesc"
   fi
 
@@ -846,7 +858,7 @@ cmd_status() {
     if [ "$st_site" = '?' ]; then
       log "Alles is uitgebracht en getekend; de publieke downloadpagina is onleesbaar ($d_site) — status onbekend, niet afwezig."
     else
-      log "Alles is uitgebracht en getekend, maar de publieke downloadpagina toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG."
+      log "Alles is uitgebracht en getekend, maar de publieke downloadpagina toont $website_seen in plaats van $TAG."
     fi
     log "Controleer de deployhost/DNS en publiceer de website opnieuw; --resume controleert daarna de publieke pagina."
   elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
@@ -1437,6 +1449,14 @@ preflight() {
   # push (#2324). Toetsen nu kost seconden; toen kostte het een releaserun.
   assert_appimagetool_pin
   if [ "$need_sign" -eq 1 ]; then
+    if [ -z "${MINISIGN_PW:-}" ]; then
+      section "Wachtwoord"
+      log "Het minisign-sleutelwachtwoord wordt nu gevraagd en blijft alleen in het"
+      log "geheugen van deze run (voor het tekenen van SHA256SUMS, geheel aan het eind)."
+      read -r -s -p "  minisign-wachtwoord: " MINISIGN_PW || true
+      echo
+    fi
+    [ -n "$MINISIGN_PW" ] || die "leeg wachtwoord — afgebroken."
     # Proef-tekening: valideert sleutel én wachtwoord vóór de lange build/tag,
     # zodat een fout wachtwoord niet pas aan het eind (na de tag) opduikt.
     local t; t="$(mktemp -d)"
@@ -1590,9 +1610,11 @@ phase3() {
   # De release is draft (#2311): publieke download-URL's geven 404 tot wij hem
   # hieronder publiceren. Lees daarom alles via de API. `publiceren` kan nog
   # nalopen; wacht begrensd i.p.v. meteen op een ontbrekend asset te sterven.
-  local got=0 _ sums_url
+  local got=0 sums_url asset_deadline
+  asset_deadline=$((SECONDS + 5 * 60))
   for _ in $(seq 1 20); do
-    sums_url="$(release_asset_url "$rid" SHA256SUMS)"
+    [ "$SECONDS" -lt "$asset_deadline" ] || break
+    sums_url="$(API_TRIES=1 API_MAX_TIME=25 release_asset_url "$rid" SHA256SUMS)"
     if [ -n "$sums_url" ] \
         && download_release_asset "$sums_url" "$TMP/SHA256SUMS"; then
       got=1
@@ -1656,7 +1678,7 @@ phase3() {
     new_asset="${existing_tmp%%|*}"
     existing_url="${existing_tmp#*|}"
     downloaded_tmp="$TMP/existing.minisig"
-    if ! curl -fsSL --connect-timeout 10 --max-time 30 -o "$downloaded_tmp" "$existing_url" \
+    if ! download_release_asset "$existing_url" "$downloaded_tmp" \
         || ! cmp -s "$downloaded_tmp" "$TMP/SHA256SUMS.minisig"; then
       die "tijdelijke handtekening $tmp_name bestaat, maar de inhoud wijkt af — verwijder hem niet automatisch."
     fi
@@ -1685,10 +1707,12 @@ phase3() {
   # krijgen opnieuw terug en verifieer die combinatie — geauthenticeerd, want de
   # release is nog draft (#2311). Zo kan de publicatie hieronder nooit een oude
   # handtekening naast een later vervangen manifest als "getekend" melden.
-  local attached_valid=0
+  local attached_valid=0 attached_deadline
+  attached_deadline=$((SECONDS + 2 * 60))
   for _ in $(seq 1 12); do
+    [ "$SECONDS" -lt "$attached_deadline" ] || break
     local check_sig_url
-    check_sig_url="$(release_asset_url "$rid" SHA256SUMS.minisig)"
+    check_sig_url="$(API_TRIES=1 API_MAX_TIME=25 release_asset_url "$rid" SHA256SUMS.minisig)"
     if [ -n "$check_sig_url" ] \
         && download_release_asset "$sums_url" "$public_sums" \
         && download_release_asset "$check_sig_url" "$public_sig" \
@@ -1718,8 +1742,10 @@ phase3() {
   log "Release $TAG gepubliceerd."
 
   # Laatste bewijs is publiek: precies wat een bezoeker zonder token krijgt.
-  local public_valid=0
+  local public_valid=0 public_deadline
+  public_deadline=$((SECONDS + 2 * 60))
   for _ in $(seq 1 12); do
+    [ "$SECONDS" -lt "$public_deadline" ] || break
     if curl -fsSL --connect-timeout 10 --max-time 30 -o "$public_sums" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
         && curl -fsSL --connect-timeout 10 --max-time 30 -o "$public_sig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
         && cmp -s "$TMP/SHA256SUMS" "$public_sums" \
@@ -1782,8 +1808,10 @@ phase3() {
   # terwijl librekat.nl via DNS nog de oude VPS en v0.6.10 bediende.
   # Prereleases raken de productiesite bewust niet — die wacht is er niet.
   if [[ "$TAG" != *-* ]]; then
-    local website_version="" website_live=0
+    local website_version="" website_live=0 website_deadline
+    website_deadline=$((SECONDS + 6 * 60))
     for _ in $(seq 1 24); do
+      [ "$SECONDS" -lt "$website_deadline" ] || break
       website_version="$(live_website_version || true)"
       if website_has_expected_downloads; then
         website_live=1
@@ -2028,12 +2056,13 @@ scan_image_tag_for_ref() { # scan_image_tag_for_ref GIT_REF
 
 scan_image_available() { # scan_image_available TAG
   local image_tag="$1" token code
-  token="$(curl -fsSLG 'https://pawprint.vigilis.online/v2/token' \
+  token="$(curl -fsSLG --connect-timeout 10 --max-time 30 \
+    'https://pawprint.vigilis.online/v2/token' \
     --data-urlencode 'service=container_registry' \
     --data-urlencode 'scope=repository:librekat/ocideck-scans:pull' \
     | jq -r '.token // .access_token // empty' 2>/dev/null || true)"
   [ -n "$token" ] || return 1
-  code="$(curl -sS -o /dev/null -w '%{http_code}' \
+  code="$(curl -sS --connect-timeout 10 --max-time 30 -o /dev/null -w '%{http_code}' \
     -H "Authorization: Bearer $token" \
     -H 'Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json' \
     "https://pawprint.vigilis.online/v2/librekat/ocideck-scans/manifests/$image_tag" \
@@ -2050,7 +2079,7 @@ publish_scans_image() { # publish_scans_image IMAGE_TAG
   # op deze ref zelf. In beide gevallen volgen we daarna de RUN, niet de
   # runner-taken: een wachtende run zonder toegewezen taak is bestaand en
   # actief, niet "nooit aangemaakt" (de v0.6.14-fout, #2294).
-  local resp run_id="" run="" ist="" poll
+  local resp run_id="" run="" ist="" poll=0 deadline
   resp="$(api POST '/actions/workflows/ci-image-scans.yml/dispatches' \
     -H 'Content-Type: application/json' \
     -d "$(jq -n --arg r "$BRANCH" '{ref:$r, return_run_info:true}')")" \
@@ -2058,13 +2087,16 @@ publish_scans_image() { # publish_scans_image IMAGE_TAG
   run_id="$(printf '%s' "$resp" | jq -r '.id // empty' 2>/dev/null || true)"
   log "ci-image-scans gedispatcht op $BRANCH${run_id:+ (run $run_id)} — wachten tot het scans-image gepubliceerd is…"
   sleep 10
-  for poll in $(seq 1 60); do
+  deadline=$((SECONDS + 20 * 60))
+  for _ in $(seq 1 60); do
+    [ "$SECONDS" -lt "$deadline" ] || break
+    poll=$((poll + 1))
     if [ -z "$run_id" ]; then
-      run="$(latest_workflow_run ci-image-scans.yml "$BRANCH" 2>/dev/null || true)"
+      run="$(API_TRIES=1 API_MAX_TIME=25 latest_workflow_run ci-image-scans.yml "$BRANCH" 2>/dev/null || true)"
       run_id="${run%%|*}"
     fi
     if [ -n "$run_id" ]; then
-      ist="$(api GET "/actions/runs/$run_id/jobs" 2>/dev/null \
+      ist="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs/$run_id/jobs" 2>/dev/null \
         | jq -r '[.[] | select(.name == "build-publish")] | sort_by([.attempt // 0, .id])
             | .[-1] // empty | .status' 2>/dev/null)"
       # De run bestaat — staat de job er nog niet in, dan wacht hij gewoon.
@@ -2089,7 +2121,9 @@ publish_scans_image() { # publish_scans_image IMAGE_TAG
   done
   [ "$ist" = "success" ] \
     || die "scans-image werd niet op tijd gepubliceerd — controleer de ci-image-scans-run."
+  local registry_deadline=$((SECONDS + 3 * 60))
   for _ in $(seq 1 12); do
+    [ "$SECONDS" -lt "$registry_deadline" ] || break
     scan_image_available "$image_tag" && break
     sleep 5
   done
@@ -2160,13 +2194,18 @@ ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
 wait_gate() { # wait_gate SHA PR_NUMBER
   local sha="$1" pr="$2"
   STEP="poort bewaken"
-  local polls=$(( GATE_TIMEOUT_MIN * 2 ))   # elke iteratie ~30s
+  local timeout_seconds="${GATE_TIMEOUT_SECONDS:-$((GATE_TIMEOUT_MIN * 60))}"
+  local deadline=$((SECONDS + timeout_seconds))
+  local poll_limit=$(( (timeout_seconds + 29) / 30 ))
+  [ "$poll_limit" -ge 1 ] || poll_limit=1
+  local registration_deadline=$((SECONDS + 5 * 60))
   ensure_gate_tasks "$sha" "$pr"
   log "Wachten op de handmatige poorten (static-gate, scans, linux-gate) — max ${GATE_TIMEOUT_MIN} min."
   log "linux-gate draait de volledige suite op de serial-runner; dat duurt het langst."
-  local snap="" count=0 success=0 failed="" i workflow line unreadable=0
-  for i in $(seq 1 "$polls"); do
-    if snap="$(gate_task_snapshot "$sha")"; then
+  local snap="" count=0 success=0 failed="" i=0 workflow line unreadable=0
+  for i in $(seq 1 "$poll_limit"); do
+    [ "$SECONDS" -lt "$deadline" ] || break
+    if snap="$(API_TRIES=1 API_MAX_TIME=25 gate_task_snapshot "$sha")"; then
       unreadable=0
     else
       snap=""
@@ -2183,7 +2222,8 @@ wait_gate() { # wait_gate SHA PR_NUMBER
       die "minstens één handmatige poort faalde op $sha — zie PR #$pr. Niets getagd. Herstel en hervat met: scripts/release_auto.sh --resume $TAG"
     fi
     [ "$count" -eq 3 ] && [ "$success" -eq 3 ] && break
-    if [ "$count" -lt 3 ] && [ "$unreadable" -eq 0 ] && [ "$i" -ge 10 ]; then
+    if [ "$count" -lt 3 ] && [ "$unreadable" -eq 0 ] \
+        && [ "$SECONDS" -ge "$registration_deadline" ]; then
       die "niet alle handmatige poorten zijn binnen vijf minuten als run geregistreerd voor $sha — zie PR #$pr. Niets getagd. Hervat later met: scripts/release_auto.sh --resume $TAG"
     fi
     if [ $(( (i - 1) % 6 )) -eq 0 ]; then
@@ -2370,15 +2410,20 @@ tag_and_push() { # tag_and_push MERGE_SHA
 follow_ci() {
   STEP="release-CI volgen"
   local cap="${RELEASE_CI_TIMEOUT_MIN:-240}"
+  local timeout_seconds="${RELEASE_CI_TIMEOUT_SECONDS:-$((cap * 60))}"
   section "Fase 2 — release-CI volgen (tot alle jobs klaar zijn, max ${cap} min)"
-  local prev="" running=0 _ unchanged=0 unreadable=0
+  local prev="" running=0 unchanged=0 unreadable=0
+  local deadline=$((SECONDS + timeout_seconds))
+  local poll_limit=$(( (timeout_seconds + 29) / 30 ))
+  [ "$poll_limit" -ge 1 ] || poll_limit=1
   snap=""
   # Elke iteratie ~30 s. Een lange job (Linux bouwen, ~50 min) verandert het
   # beeld een half uur lang niet; daarom is de cap een tijd en geen "geen
   # wijziging"-drempel, en laat een hartslag elke tien minuten zien dat er nog
   # gewacht wordt en niet gehangen.
-  for _ in $(seq 1 $(( cap * 2 ))); do
-    if snap="$(release_ci_snapshot)"; then
+  for _ in $(seq 1 "$poll_limit"); do
+    [ "$SECONDS" -lt "$deadline" ] || break
+    if snap="$(API_TRIES=1 API_MAX_TIME=25 release_ci_snapshot)"; then
       unreadable=0
     else
       snap=""
@@ -2582,8 +2627,9 @@ assert_nightly_main_gate() {
   main_sha="$(git rev-parse --verify origin/main 2>/dev/null)" \
     || die "origin/main ontbreekt lokaal — de nachtelijke linux-gate kan niet aan de huidige main-tip gekoppeld worden."
   # De lijst-route geeft geen commit_sha; die staat op de detail-GET per run.
-  # Loop van nieuw naar oud over de runs op main tot één run op de tip of een
-  # voorvader: alleen díe zeggen iets over de code die deze release uitbrengt.
+  # Alleen een run op exact de main-tip bewijst de kandidaatbasis. Een groene
+  # voorouder kan tientallen ongetoetste commits achterlopen en verplaatst een
+  # Linux-fout dan juist naar ná de lange lokale build.
   local ids rid rinfo rsha rstatus rurl found=""
   ids="$(api GET "/actions/runs?limit=50&workflow_id=linux-gate.yml" 2>/dev/null \
     | jq -r '[.workflow_runs[]? | select(.prettyref == "main") | .id] | sort | reverse | .[]' 2>/dev/null)" \
@@ -2593,14 +2639,14 @@ assert_nightly_main_gate() {
       | jq -r '[.commit_sha // "", .status // "", .html_url // ""] | @tsv' 2>/dev/null)" || continue
     rsha="$(printf '%s' "$rinfo" | cut -f1)"
     [ -n "$rsha" ] || continue
-    git merge-base --is-ancestor "$rsha" "$main_sha" 2>/dev/null || continue
+    [ "$rsha" = "$main_sha" ] || continue
     found="$rid"
     rstatus="$(printf '%s' "$rinfo" | cut -f2)"
     rurl="$(printf '%s' "$rinfo" | cut -f3)"
     break
   done
   [ -n "$found" ] \
-    || die "geen linux-gate-run gevonden op de huidige main-geschiedenis — de nachtelijke poort is onbekend, niet groen. Draai linux-gate handmatig (workflow_dispatch op main) of wacht op de nachtrun en begin dan opnieuw. Niets gemuteerd."
+    || die "geen linux-gate-run gevonden op de huidige main-tip — de nachtelijke poort is onbekend, niet groen. Draai linux-gate handmatig (workflow_dispatch op main) of wacht op de nachtrun en begin dan opnieuw. Niets gemuteerd."
   if [ "$rstatus" = "success" ]; then
     log "Nachtelijke linux-gate groen op ${rsha:0:9} (run $found)."
     return 0
@@ -2631,17 +2677,7 @@ STEP="wachtwoord"
 read_token
 assert_no_pending_fixes
 assert_nightly_main_gate
-section "Wachtwoord"
-log "Het minisign-sleutelwachtwoord wordt nu gevraagd en blijft alleen in het"
-log "geheugen van deze run (voor het tekenen van SHA256SUMS, geheel aan het eind)."
 MINISIGN_PW=""
-# '|| true': zonder tty (stdin op /dev/null, een pipe) geeft read EOF en dus een
-# niet-nul status, waarna set -e in de ERR-trap viel en het scherm de vorige stap
-# als schuldige aanwees. De guard hieronder is de juiste melding; laat die 'm
-# geven in plaats van 'm onbereikbaar te maken.
-read -r -s -p "  minisign-wachtwoord: " MINISIGN_PW || true
-echo
-[ -n "$MINISIGN_PW" ] || die "leeg wachtwoord — afgebroken."
 
 # #7: faal vóór elke onherroepelijke stap; en in --resume is dit de enige gate.
 preflight
@@ -2650,13 +2686,13 @@ preflight
 # heeft is nu getoetst — referentiedata, schone werkboom, vrije werkboom, bekend
 # herstelwerk, forge-token, mirror, deploy-host, minisign-sleutel én de
 # macOS-ondertekening —
-# en er is niets gemuteerd. Dit bestaat omdat de dure fouten in deze keten
+# en er zijn geen release- of bronbestanden gewijzigd. Dit bestaat omdat de dure fouten in deze keten
 # telkens vooraf kenbaar waren: een notary-profiel dat na een sessieherstart weg
 # was, een deploy-host die niet antwoordde, een catalogus die achterliep. Die
 # kosten nu een halve minuut in plaats van een halve release.
 if [ "$PREFLIGHT_ONLY" -eq 1 ]; then
   section "Pre-flight klaar"
-  log "Alles wat deze release onderweg nodig heeft, is er. Niets gemuteerd."
+  log "Alles wat deze release onderweg nodig heeft, is er. Geen release- of bronbestanden gewijzigd; verouderde afgeleide caches kunnen zijn opgeruimd."
   log "Draai de release met:  scripts/release_auto.sh patch|minor|major"
   exit 0
 fi

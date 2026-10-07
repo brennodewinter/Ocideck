@@ -708,7 +708,9 @@ void main() {
     final guardIdx = src.indexOf(
       RegExp(r'^assert_workspace_idle\s*$', multiLine: true),
     );
-    final promptIdx = src.indexOf('minisign-wachtwoord');
+    final preflightIdx = src.lastIndexOf(
+      RegExp(r'^preflight\s*$', multiLine: true),
+    );
     expect(
       guardIdx,
       isNonNegative,
@@ -718,10 +720,10 @@ void main() {
     );
     expect(
       guardIdx,
-      lessThan(promptIdx),
+      lessThan(preflightIdx),
       reason:
-          'de toets hoort vóór de wachtwoordprompt: anders tikt de gebruiker '
-          'een wachtwoord in voor een keten die tien minuten later alsnog valt.',
+          'de toets hoort vóór preflight, waar zo nodig het wachtwoord wordt '
+          'gevraagd; anders vraagt de keten om invoer vóór een bekende blokkade.',
     );
   });
 
@@ -766,9 +768,11 @@ void main() {
         'rollback_release_edits() {\n${functionBody('rollback_release_edits')}\n}\n'
         'cleanup_branch() {\n${functionBody('cleanup_branch')}\n}\n';
 
-    ({String out, bool branchLeft, String head}) play({
+    ({String out, bool branchLeft, String head, List<String> scannerPins})
+    play({
       required bool dirty,
       required String startBranch,
+      bool dirtyScannerPins = false,
     }) {
       final dir = Directory.systemTemp.createTempSync('ocideck-cleanup');
       String git(List<String> args) {
@@ -782,6 +786,23 @@ void main() {
       git(['config', 'user.name', 'test']);
       git(['config', 'commit.gpgsign', 'false']);
       File('${dir.path}/f.txt').writeAsStringSync('een\n');
+      for (final path in [
+        'pubspec.yaml',
+        'CHANGELOG.md',
+        'lib/services/export_metadata.dart',
+        'sbom/manifest.json',
+      ]) {
+        final file = File('${dir.path}/$path')..createSync(recursive: true);
+        file.writeAsStringSync('basis\n');
+      }
+      for (final path in [
+        '.github/pinned-ci-versions.json',
+        '.forgejo/workflows/scans.yml',
+        '.github/workflows/ci.yml',
+      ]) {
+        final file = File('${dir.path}/$path')..createSync(recursive: true);
+        file.writeAsStringSync('basis\n');
+      }
       git(['add', '.']);
       git(['commit', '-qm', 'basis']);
       // De release-branch met zijn versiebump, precies zoals fase 1 hem achterlaat.
@@ -790,6 +811,17 @@ void main() {
       git(['commit', '-qam', 'bump']);
       if (dirty) {
         File('${dir.path}/f.txt').writeAsStringSync('ongecommit werk\n');
+      }
+      if (dirtyScannerPins) {
+        for (final path in [
+          '.github/pinned-ci-versions.json',
+          '.forgejo/workflows/scans.yml',
+          '.github/workflows/ci.yml',
+        ]) {
+          File(
+            '${dir.path}/$path',
+          ).writeAsStringSync('ongecommit scanner-pin\n');
+        }
       }
       File('${dir.path}/run.sh').writeAsStringSync(
         'set -Eeuo pipefail\n'
@@ -809,8 +841,13 @@ void main() {
           0;
       final head = git(['branch', '--show-current']);
       final out = '${r.stdout}${r.stderr}';
+      final scannerPins = [
+        '.github/pinned-ci-versions.json',
+        '.forgejo/workflows/scans.yml',
+        '.github/workflows/ci.yml',
+      ].map((path) => File('${dir.path}/$path').readAsStringSync()).toList();
       dir.deleteSync(recursive: true);
-      return (out: out, branchLeft: left, head: head);
+      return (out: out, branchLeft: left, head: head, scannerPins: scannerPins);
     }
 
     final ok = play(dirty: false, startBranch: 'main');
@@ -843,6 +880,21 @@ void main() {
     final fromRel = play(dirty: false, startBranch: 'rel');
     expect(fromRel.branchLeft, isFalse);
     expect(fromRel.head, 'main');
+
+    final scannerPins = play(
+      dirty: false,
+      startBranch: 'main',
+      dirtyScannerPins: true,
+    );
+    expect(scannerPins.branchLeft, isFalse);
+    expect(scannerPins.head, 'main');
+    expect(
+      scannerPins.scannerPins,
+      everyElement('basis\n'),
+      reason:
+          'rollback_release_edits moet alle drie ongecommitte scanner-pinbestanden '
+          'herstellen; anders reizen ze met de checkout mee naar main.',
+    );
   }, skip: skipOnWindows);
 
   // Gedragstoets in een wegwerp-repo, net als bij cleanup_branch hierboven: de
@@ -982,13 +1034,16 @@ void main() {
     // vorige stap toegewezen — dezelfde verwarring als build-release/notarize.
     final src = File(script).readAsStringSync();
     final stepIdx = src.indexOf('STEP="wachtwoord"');
-    final promptIdx = src.indexOf('minisign-wachtwoord');
+    final preflightIdx = src.lastIndexOf(
+      RegExp(r'^preflight\s*$', multiLine: true),
+    );
     expect(
       stepIdx,
       isNonNegative,
       reason: 'de promptsectie hoort een eigen STEP te zetten.',
     );
-    expect(stepIdx, lessThan(promptIdx));
+    expect(stepIdx, lessThan(preflightIdx));
+    expect(functionBody('preflight'), contains('section "Wachtwoord"'));
   });
 
   test('bouwen en notariseren melden zich als aparte stap', () {

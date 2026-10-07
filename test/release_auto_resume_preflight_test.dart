@@ -47,6 +47,7 @@ void main() {
     bool mirrorReachable = true,
     bool deployReachable = false,
     bool keyWorks = false,
+    bool presetPassword = true,
   }) {
     final dir = Directory.systemTemp.createTempSync(
       'ocideck-resume-preflight-',
@@ -84,7 +85,7 @@ DEPLOY_HOST=deploy.invalid
 DEPLOY_URL=https://deploy.invalid
 WEBSITE_URL=https://website.invalid/
 TOKEN=test-token
-MINISIGN_PW=test-password
+MINISIGN_PW=${presetPassword ? 'test-password' : ''}
 ${allFunctionDefinitions()}
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
@@ -134,7 +135,7 @@ curl() {
     *) return 22 ;;
   esac
 }
-preflight
+preflight </dev/null
 printf 'DOOR\\n'
 ''');
     return Process.runSync('bash', [
@@ -154,6 +155,16 @@ printf 'DOOR\\n'
     },
     skip: skipOnWindows,
   );
+
+  test('website-only resume vraagt zonder stdin geen minisign-wachtwoord', () {
+    final r = runPreflight(presetPassword: false);
+    final output = '${r.stdout}\n${r.stderr}';
+
+    expect(r.exitCode, 0, reason: output);
+    expect(output, isNot(contains('Wachtwoord')));
+    expect(output, isNot(contains('leeg wachtwoord')));
+    expect(output, contains('DOOR'));
+  }, skip: skipOnWindows);
 
   test('--resume met achterlopende demo eist wél een werkende deploy-host', () {
     final r = runPreflight(liveDemo: false);
