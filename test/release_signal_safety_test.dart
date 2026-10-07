@@ -63,6 +63,7 @@ void main() {
   }) async {
     final dir = Directory.systemTemp.createTempSync('ocideck-sig-');
     addTearDown(() => dir.deleteSync(recursive: true));
+    final ready = File('${dir.path}/ready');
     final harness = File('${dir.path}/harness.sh')
       ..writeAsStringSync('''
 set -uo pipefail
@@ -87,11 +88,15 @@ cd "${repo.path}" || exit 99
 git checkout -b "\$BRANCH" --quiet || exit 98
 BRANCH_OWNED=1
 $extra
+printf ready >"${ready.path}"
 # De sleep erft de pijpen niet mee — anders blijft stderr open na het exiten.
 sleep 60 </dev/null >/dev/null 2>&1 & wait
 ''');
     final proc = await Process.start('bash', [harness.path]);
-    await Future<void>.delayed(const Duration(milliseconds: 400));
+    for (var i = 0; i < 200 && !ready.existsSync(); i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 25));
+    }
+    expect(ready.existsSync(), isTrue, reason: 'het harnas werd niet gereed');
     proc.kill(signal);
     final stderr = await proc.stderr
         .transform(const SystemEncoding().decoder)

@@ -108,12 +108,13 @@ DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de livev
 # website-workflow kan groen zijn terwijl rsync naar een host gaat waar DNS niet
 # naar wijst; daarom is ook hier de pagina die bezoekers krijgen de waarheid.
 WEBSITE_URL="${OCIDECK_WEBSITE_URL:-https://librekat.nl/nl/ocideck/}"
-# De poort-wachttijd (minuten). Ruim boven linux-gate (~27 min, capacity-1
-# serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
-# stuk. De release start de drie handmatige workflows zelf en volgt hun taken;
+# De poort-wachttijd (minuten). De linux-gate duurde op 08-10-2026 onder volle
+# runnerbelasting 81 min; 120 min geeft meetbare marge zonder ooit urenlang
+# onbegrensd te wachten. De release start de drie handmatige workflows zelf en
+# volgt hun taken;
 # sinds #2194 leveren ze bewust geen automatische PR-statuscontexten meer. Zie
 # wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
-GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-75}"
+GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-120}"
 # De wachttijd op de release-CI ná de tag (minuten). Die keten duurt ruim twee
 # uur: v0.6.4 2u05 en v0.6.5 2u14 (gate ~12 → Poort ~12 → macOS ~15 naast
 # Linux ~50 en web ~45 → publiceren → website). De oude vaste 60 min brak de
@@ -2184,11 +2185,11 @@ ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
   done
 }
 
-# linux-gate draait de volledige suite op de capacity-1 serial-runner (~27 min,
-# langer als er iets vóór in de wachtrij staat). Vandaar GATE_TIMEOUT_MIN (75)
+# linux-gate draait de volledige suite op de capacity-1 serial-runner (81 min
+# gemeten onder volle belasting op 08-10-2026). Vandaar GATE_TIMEOUT_MIN (120)
 # mét voortgang. Een geaccepteerde dispatch die na vijf minuten nog geen RUN
 # opleverde is een registratieprobleem — een queued run zonder runner-taak is
-# via /actions/runs wél zichtbaar — geen reden om de overige zeventig minuten
+# via /actions/runs wél zichtbaar — geen reden om de overige wachttijd
 # uit te zitten. Losse API-hikjes binnen dat venster blijven zacht; een
 # volhoudend onleesbare API niet: onbekend is niet afwezig.
 wait_gate() { # wait_gate SHA PR_NUMBER

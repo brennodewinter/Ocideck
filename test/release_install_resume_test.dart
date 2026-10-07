@@ -100,6 +100,13 @@ git() {
   esac
 }
 codesign() { return 0; }
+${Platform.isMacOS ? '' : '''
+verify_install_candidate() {
+  [ -d "\$1/Contents" ] || return 1
+  grep -Fq "<string>\$NEW_VERSION</string>" "\$1/Contents/Info.plist" || return 1
+  codesign --verify --deep --strict "\$1"
+}
+'''}
 install_macos_app() { printf '%s\\n' "\$1" >>"\$INSTALL_TRACE"; return 0; }
 cd "\$STATE"
 $extra

@@ -799,7 +799,7 @@ own commit on the release branch; then the four-place version bump, `make sbom`,
 verification and the `/Applications` swap; **Phase 2** branch → *if the scanners
 were bumped, publish a new scans image first* (dispatch `ci-image-scans` on the
 branch and wait, so `scans.yml`'s new image tag exists before the PR scan runs) →
-PR → wait for the gate (up to `OCIDECK_GATE_TIMEOUT_MIN`, default 75 min: `linux-gate`
+PR → wait for the gate (up to `OCIDECK_GATE_TIMEOUT_MIN`, default 120 min: `linux-gate`
 runs the full suite per-PR on a capacity-1 serial runner and can queue, so the wait
 prints progress rather than giving up at 30) → merge — refused unless
 `origin/main` still sits on the exact base the gate audited (the merge-base of
