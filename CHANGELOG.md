@@ -10,6 +10,16 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **servermerge van de release-PR** (#2299) gaat alleen door zolang
+  `origin/main` nog exact op de gekeurde base staat. De releasebranch wordt
+  vroeg van main getakt en daarna pas gebouwd en gekeurd; schuift main in die
+  tussenliggende uren door, dan zou een servermerge base-commits in de getagde
+  tree zetten die nooit in deze keten bouwden of keurden. De toets vergelijkt
+  de merge-base van branch en main — het vastgelegde vertrekpunt — met de
+  actuele main-tip, vlak vóór de merge-call: bij drift of een onleesbare
+  toestand stopt de keten vóór merge én tag, met het herstel (main erin
+  mergen, poort opnieuw groen, `--resume`) erbij. Een PR die de server al
+  mergde wordt veilig herkend zonder de toets opnieuw te eisen.
 - De **Windows-herdispatch** in `windows-ophalen` (#2300) toetst "hoort deze
   run bij deze poging" nu aan een run-id-anker in plaats van een
   vijf-minuten-tijdvenster: vóór de dispatch wordt de hoogste zichtbare

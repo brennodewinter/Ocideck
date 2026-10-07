@@ -785,7 +785,11 @@ were bumped, publish a new scans image first* (dispatch `ci-image-scans` on the
 branch and wait, so `scans.yml`'s new image tag exists before the PR scan runs) →
 PR → wait for the gate (up to `OCIDECK_GATE_TIMEOUT_MIN`, default 75 min: `linux-gate`
 runs the full suite per-PR on a capacity-1 serial runner and can queue, so the wait
-prints progress rather than giving up at 30) → merge → tag → push to origin **and**
+prints progress rather than giving up at 30) → merge — refused unless
+`origin/main` still sits on the exact base the gate audited (the merge-base of
+the branch against main); on drift the script stops before merging or tagging
+and tells you to merge `origin/main` into the release branch, re-gate, and
+`--resume` → tag → push to origin **and**
 mirror → poll the release CI until every job is done (up to
 `OCIDECK_RELEASE_CI_TIMEOUT_MIN`, default 240 min: the tag chain takes a good two
 hours — v0.6.4 2h05, v0.6.5 2h14, with `Linux bouwen` alone around 50 min — and
