@@ -40,12 +40,17 @@ enum UpstreamProbe {
   /// elkaar leggen is geen vergelijking.
   githubCommitDate,
 
-  /// MITRE's CWE REST API (`cwe-api.mitre.org`), die naast de versie ook de
-  /// inhoudsdatum en het **aantal** zwakheden geeft. Dat aantal is een
-  /// gratis integriteitscontrole: wijkt onze bundel ervan af, dan is hij
-  /// afgekapt of half geregenereerd, en dat is een ander soort fout dan
-  /// veroudering.
-  cweApi,
+  /// MITRE's officiële CWE XML-release (`cwe.mitre.org/data/xml/cwec_latest.xml.zip`),
+  /// die naast de versie ook de inhoudsdatum en het **aantal** zwakheden geeft.
+  /// Dat aantal is een gratis integriteitscontrole: wijkt onze bundel ervan af,
+  /// dan is hij afgekapt of half geregenereerd, en dat is een ander soort fout
+  /// dan veroudering.
+  ///
+  /// Dit was eerst de REST-API (`cwe-api.mitre.org`); die host accepteerde op
+  /// 6-10-2026 nog wel DNS/TCP/TLS maar verbrak de verbinding ná het HTTP-
+  /// verzoek. De zip is de officiële releasebron en bevat dezelfde feiten —
+  /// in het XML-hoofdelement én als te tellen `Weakness`-elementen.
+  cweXmlZip,
 
   /// Bron die geen "laatste versie" publiceert, maar wél per versie een
   /// document op een voorspelbare URL. We proberen de **opvolgers** van wat we

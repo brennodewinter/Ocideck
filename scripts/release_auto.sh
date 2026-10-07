@@ -1097,7 +1097,14 @@ outdated_gate() {
   stale="$(stale_catalog_ids "$json" | tr '\n' ' ')"
   stale="$(printf '%s' "$stale" | xargs || true)"
   if [ -z "$stale" ]; then
-    log "Referentiedata actueel."
+    # Onbekend is géén actueel: bij een onbereikbare bron mag de regel niet
+    # de kwalificatie weglaten — dat las v0.6.x als goedkeuring terwijl de
+    # CWE-probe juist had gefaald (#2292).
+    if [ -z "$onbekend" ]; then
+      log "Referentiedata actueel."
+    else
+      log "Referentiedata actueel op wat bereikbaar was; over $onbekend is geen uitspraak."
+    fi
     log "Scanner-pins worden in fase 1 automatisch bijgewerkt (bump-scanner-pins)."
     log "Dependencies (adviserend):"
     make deps-outdated 2>&1 | grep -iE "upgradable|outdated|newer|→" | head -8 | sed 's/^/     /' || true

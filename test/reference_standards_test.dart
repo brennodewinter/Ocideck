@@ -69,10 +69,16 @@ void main() {
       );
     });
 
-    test('de CWE-probe wijst naar de API, niet naar de downloadpagina', () {
+    test('de CWE-probe wijst naar de officiële XML-release', () {
+      // De REST-API (cwe-api.mitre.org) verbrak op 6-10-2026 verbindingen ná
+      // het HTTP-verzoek; cwec_latest.xml.zip is de officiële releasebron en
+      // bleef bereikbaar (#2292).
       final cwe = referenceStandardById('cwe')!;
-      expect(cwe.probe, UpstreamProbe.cweApi);
-      expect(cwe.probeTarget, startsWith('https://cwe-api.mitre.org/'));
+      expect(cwe.probe, UpstreamProbe.cweXmlZip);
+      expect(
+        cwe.probeTarget,
+        'https://cwe.mitre.org/data/xml/cwec_latest.xml.zip',
+      );
     });
 
     test('de MIAUW-versie is een datum, want de probe rekent ermee', () {
