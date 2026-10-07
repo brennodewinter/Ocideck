@@ -93,6 +93,10 @@ curl() {
     previous="\$arg"; url="\$arg"
   done
   case "\$url" in
+    https://forge.invalid/api/v1/repos/LibreKAT/Ocideck/releases/tags/v9.9.9)
+      printf '%s\\n' '{"id":41,"assets":[{"name":"SHA256SUMS"},{"name":"SHA256SUMS.minisig"}]}' >"\$out"
+      printf '200'
+      ;;
     */SHA256SUMS.minisig) printf 'signature:manifest-A\\n' >"\$out" ;;
     */SHA256SUMS) printf 'manifest-B\\n' >"\$out" ;;
     *) return 22 ;;
@@ -191,6 +195,7 @@ cmd_status
     required String liveVersion,
     String websiteVersion = '9.9.9',
     String pullsJson = '[]',
+    bool releaseMissing = false,
   }) {
     final state = Directory.systemTemp.createTempSync('ocideck-status-');
     final live = File('${state.path}/live.txt')..writeAsStringSync(liveVersion);
@@ -232,18 +237,22 @@ api() {
       ;;
     '/pulls?state=all&limit=50') printf '%s\\n' '$pullsJson' ;;
     '/releases/tags/v9.9.9')
-      printf '%s\\n' '{"id":41,"assets":[{"name":"SHA256SUMS"},{"name":"SHA256SUMS.minisig"}]}'
+      ${releaseMissing ? 'return 22' : '''printf '%s\\n' '{"id":41,"assets":[{"name":"SHA256SUMS"},{"name":"SHA256SUMS.minisig"}]}' '''}
       ;;
     *) printf '%s\\n' '{}' ;;
   esac
 }
 curl() {
-  local out='' url='' previous='' arg
+  local out='' url='' previous='' arg write_code=0
   for arg in "\$@"; do
     if [ "\$previous" = '-o' ] || [[ "\$previous" == *o ]]; then out="\$arg"; fi
+    [ "\$previous" = '-w' ] && write_code=1
     previous="\$arg"; url="\$arg"
   done
   case "\$url" in
+    https://forge.invalid/api/v1/repos/LibreKAT/Ocideck/releases/tags/v9.9.9)
+      ${releaseMissing ? "printf '404'" : '''printf '%s\\n' '{"id":41,"assets":[{"name":"SHA256SUMS"},{"name":"SHA256SUMS.minisig"}]}' >"\$out"; printf '200' '''}
+      ;;
     https://website.invalid/nl/ocideck/)
       command cat "\$WEBSITE"
       ;;
@@ -303,9 +312,31 @@ cmd_status
     final output = '${r.stdout}\n${r.stderr}';
     expect(output, contains('mark 0 downloadpagina'), reason: output);
     expect(output, contains('(nu: v9.9.8'));
+    expect(
+      output,
+      isNot(contains('v9.9.89.9.8')),
+      reason:
+          'de huidige websiteversie hoort maar één keer in de status.\n$output',
+    );
     expect(output, isNot(contains('De release is publiek compleet')));
     expect(output, contains('--resume controleert daarna de publieke pagina'));
   }, skip: skipOnWindows);
+
+  test(
+    '--status noemt een ontbrekende release afwezig, niet API-onleesbaar',
+    () {
+      final r = runStatus(liveVersion: '9.9.9', releaseMissing: true);
+      final output = '${r.stdout}\n${r.stderr}';
+      expect(output, contains('mark 0 release aangemaakt'), reason: output);
+      expect(
+        output,
+        isNot(contains('[?] release aangemaakt')),
+        reason:
+            'HTTP 404 is bewezen afwezigheid, geen onleesbare API.\n$output',
+      );
+    },
+    skip: skipOnWindows,
+  );
 
   // De merge verwijdert de release-branch. Eén vast vakje "branch op origin"
   // bleef daardoor op élke afgeronde release leeg staan en las als een open
@@ -373,6 +404,50 @@ follow_ci
       isEmpty,
       reason: 'de timeout-controle mag niets muteren.',
     );
+  }, skip: skipOnWindows);
+
+  test('follow_ci houdt een wall-clockdeadline aan bij een trage poll', () {
+    final polls = File(
+      '${Directory.systemTemp.path}/ocideck-ci-deadline-$pid.log',
+    );
+    addTearDown(() {
+      if (polls.existsSync()) polls.deleteSync();
+    });
+    final stopwatch = Stopwatch()..start();
+    final result = runReleaseHarness('''
+POLLS=${polls.path}
+RELEASE_CI_TIMEOUT_MIN=0
+RELEASE_CI_TIMEOUT_SECONDS=2
+section() { :; }
+log() { :; }
+sleep() { :; }
+release_ci_snapshot() {
+  printf 'poll\\n' >>"\$POLLS"
+  command sleep 3
+  printf '%s\n' 'running|Linux bouwen'
+}
+release_ci_completion_seen() { return 1; }
+die() { printf 'DIE: %s\n' "\$1" >&2; exit 99; }
+follow_ci
+''');
+    stopwatch.stop();
+
+    expect(result.exitCode, 99, reason: '${result.stdout}\n${result.stderr}');
+    expect(
+      stopwatch.elapsed,
+      lessThan(const Duration(milliseconds: 4500)),
+      reason:
+          'na de ene begrensde poll mag geen tweede poll meer starten; '
+          'dit duurde ${stopwatch.elapsed}.',
+    );
+    expect(
+      stopwatch.elapsed,
+      greaterThan(const Duration(milliseconds: 2500)),
+      reason:
+          'de eerste poll mag zijn eigen begrensde duur afmaken; een directe '
+          'terugkeer betekent dat RELEASE_CI_TIMEOUT_SECONDS is genegeerd.',
+    );
+    expect(polls.readAsLinesSync(), ['poll']);
   }, skip: skipOnWindows);
 
   test('follow_ci wacht langer dan een uur zolang de keten zichtbaar draait', () {

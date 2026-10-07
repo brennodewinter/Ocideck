@@ -18,20 +18,38 @@ void main() {
 
   final autoScript = File(script).readAsStringSync();
 
-  test('de poort draait vóór het wachtwoord en alleen read-only', () {
-    // De plek in de keten is het punt: een rode nachtrun moet vóór het
-    // wachtwoord, de build en elke branchmutatie stoppen (#2308).
-    final gateCall = autoScript.indexOf('assert_nightly_main_gate\n');
-    final password = autoScript.indexOf(
-      'read -r -s -p "  minisign-wachtwoord:',
+  test('de poort draait vóór preflight en alleen read-only', () {
+    // Voer de echte top-level aanroepvolgorde uit met tracerende grenzen. De
+    // wachtwoordprompt mag binnen preflight verhuizen zolang de nightly gate
+    // runtime vóór die hele stap blijft.
+    final lines = autoScript.split('\n');
+    final start = lines.indexWhere(
+      (line) => line.contains('De twee prompts (de enige interactie)'),
     );
-    expect(gateCall, greaterThan(0), reason: 'aanroep ontbreekt');
-    expect(
-      gateCall,
-      lessThan(password),
-      reason: 'de gate hoort vóór de wachtwoordvraag te staan.',
-    );
+    final end = lines.indexWhere((line) => line.trim() == 'preflight', start);
+    expect(start, isNonNegative);
+    expect(end, greaterThan(start));
+    final topLevel = lines.sublist(start + 1, end + 1).join('\n');
+    final dir = Directory.systemTemp.createTempSync('ocideck-nightly-order-');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    final harness = File('${dir.path}/harness.sh')
+      ..writeAsStringSync('''
+set -uo pipefail
+STEP=
+MINISIGN_PW=old
+read_token() { printf 'token\\n'; }
+assert_no_pending_fixes() { printf 'blockers\\n'; }
+assert_nightly_main_gate() { printf 'nightly\\n'; }
+preflight() { printf 'preflight\\n'; }
+$topLevel
+''');
+    final result = Process.runSync('bash', [harness.path]);
+    final calls = (result.stdout as String).trim().split('\n');
+    expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+    expect(calls.indexOf('nightly'), lessThan(calls.indexOf('preflight')));
+
     // Geen neveneffect: de gate mag nooit zelf een run dispatchen.
+    final gateCall = autoScript.indexOf('assert_nightly_main_gate\n');
     final body = autoScript.substring(
       autoScript.indexOf('assert_nightly_main_gate() {'),
       gateCall,
@@ -146,12 +164,8 @@ printf 'DOOR\\n'
     () {
       final r = runGate(
         runs: [
-          '9718|bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb|failure',
+          '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|failure',
           '9700|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success',
-        ],
-        ancestors: [
-          'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-          'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
         ],
       );
       final output = '${r.stdout}\n${r.stderr}';

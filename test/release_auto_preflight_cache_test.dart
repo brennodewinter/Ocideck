@@ -143,6 +143,23 @@ preflight
     expect(result.stdout, contains('Pre-flight groen'));
   }, skip: skipOnWindows);
 
+  test('preflight beweert na cache-pruning niet dat niets muteerde', () {
+    final completion = File(script)
+        .readAsStringSync()
+        .split('if [ "\$PREFLIGHT_ONLY" -eq 1 ]; then')
+        .last
+        .split('fi')
+        .first;
+
+    expect(
+      completion.toLowerCase(),
+      isNot(contains('niets gemuteerd')),
+      reason:
+          'prune_stale_hook_cache kan de lokale cache verwijderen; de '
+          'preflighttekst mag daarom alleen beloven dat er niets gepubliceerd is.',
+    );
+  });
+
   test(
     'een bereikbare deployhost die de publieke site niet bedient stopt vóór de tag',
     () {

@@ -85,6 +85,7 @@ void main() {
     required bool signatureValid,
     String websiteRun = '',
     bool pageLive = true,
+    bool resumedTempSignature = false,
   }) {
     final dir = Directory.systemTemp.createTempSync('ocideck-draft-gate-');
     addTearDown(() => dir.deleteSync(recursive: true));
@@ -97,6 +98,14 @@ void main() {
 <a href="https://forge.invalid/releases/download/v$seen/ocideck-windows-x64-setup-$seen.exe">Windows</a>
 ''');
     final mutations = File('${dir.path}/mutations.log');
+    final tempRenamed = File('${dir.path}/temp-renamed');
+    const tempName =
+        'SHA256SUMS.minisig.new.'
+        'e5bc2c58bbb0a51702ebe17973eaa4a28668b47457854fb917aa6d2fc45a39bd';
+    const normalAssets =
+        '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"id":90,"name":"SHA256SUMS.minisig","browser_download_url":"https://dl.invalid/x/SHA256SUMS.minisig"}]';
+    const tempAssets =
+        '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"id":91,"name":"$tempName","browser_download_url":"https://dl.invalid/x/$tempName"}]';
     final harness = File('${dir.path}/harness.sh');
     harness.writeAsStringSync('''
 set -uo pipefail
@@ -111,6 +120,7 @@ REPO_SLUG=LibreKAT/Ocideck
 TOKEN=test-token
 MINISIGN_PW=test-password
 MUTATIONS=${mutations.path}
+TEMP_RENAMED=${tempRenamed.path}
 WEBSITE_RUN=$websiteRun
 TMP=
 STEP=test
@@ -151,15 +161,25 @@ api() {
       ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41,"draft":true}' ;;
     'GET /releases/41/assets')
-      printf '%s\\n' '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"id":90,"name":"SHA256SUMS.minisig","browser_download_url":"https://dl.invalid/x/SHA256SUMS.minisig"}]'
+      if ${resumedTempSignature ? 'true' : 'false'}; then
+        if [ -f "\$TEMP_RENAMED" ]; then
+          printf '%s\\n' '$normalAssets'
+        else
+          printf '%s\\n' '$tempAssets'
+        fi
+      else
+        printf '%s\\n' '$normalAssets'
+      fi
       ;;
+    'PATCH /releases/41/assets/91') : >"\$TEMP_RENAMED"; printf '%s\\n' '{}' ;;
     *) printf '%s\\n' '{}' ;;
   esac
 }
 curl() {
-  local out='' url='' previous='' arg
+  local out='' url='' previous='' arg authorized=0
   for arg in "\$@"; do
     if [ "\$previous" = '-o' ]; then out="\$arg"; fi
+    [ "\$arg" = 'Authorization: token test-token' ] && authorized=1
     previous="\$arg"
     url="\$arg"
   done
@@ -169,6 +189,10 @@ curl() {
       ;;
     https://website.invalid/nl/ocideck/)
       command cat '${page.path}'
+      ;;
+    */SHA256SUMS.minisig.new.*)
+      [ "\$authorized" -eq 1 ] || return 22
+      printf 'signature\\n' >"\$out"
       ;;
     */SHA256SUMS.minisig)
       printf 'signature\\n' >"\$out"
@@ -213,6 +237,22 @@ printf 'DOOR\\n'
       calls.indexOf('PATCH /releases/41'),
       greaterThan(calls.indexWhere((c) => c.startsWith('POST /releases/'))),
       reason: 'de release mag pas publiek nadat de handtekening eraan hangt.',
+    );
+  }, skip: skipOnWindows);
+
+  test('resume leest een tijdelijke draft-handtekening geauthenticeerd', () {
+    final (result, calls) = runPhase3(
+      signatureValid: true,
+      resumedTempSignature: true,
+    );
+    final output = '${result.stdout}\n${result.stderr}';
+
+    expect(result.exitCode, 0, reason: output);
+    expect(output, contains('tijdelijke handtekening hervat'));
+    expect(
+      calls.where((call) => call.startsWith('POST /releases/41/assets')),
+      isEmpty,
+      reason: 'de reeds geüploade tijdelijke handtekening hoort hergebruikt.',
     );
   }, skip: skipOnWindows);
 
