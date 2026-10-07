@@ -123,6 +123,60 @@ void main() {
         expect(slidesWithUnresolvedSafariFields(deck), isEmpty);
       },
     );
+
+    test('SAFARI scores and totals must be numeric and consistent', () {
+      Slide scorecard(String firstScore) =>
+          Slide.create(SlideType.table).copyWith(
+            title: 'SAFARI-scorekaart',
+            tableEditable: true,
+            tableRows: [
+              [
+                'Code',
+                'Gewicht',
+                'Vastgesteld 0-4',
+                'Bewijs 0-4',
+                'Oordeel',
+                'Bron',
+              ],
+              for (var i = 0; i < 8; i++)
+                [
+                  'SOV-${i + 1}',
+                  const [
+                    '15%',
+                    '10%',
+                    '10%',
+                    '15%',
+                    '20%',
+                    '15%',
+                    '10%',
+                    '5%',
+                  ][i],
+                  i == 0 ? firstScore : '2',
+                  '2',
+                  'voldoet',
+                  'doelconclusie ${i + 1}',
+                ],
+            ],
+          );
+      Slide totals(String ecsf) => Slide.create(SlideType.table).copyWith(
+        title: 'Totaaluitkomst',
+        tableEditable: true,
+        tableRows: [
+          ['Onderdeel', 'Uitkomst'],
+          ['SEAL-totaalniveau', '2'],
+          ['Gewogen ECSF-score', ecsf],
+        ],
+      );
+      Deck deck(String firstScore, String ecsf) => Deck(
+        title: 'SAFARI',
+        standardsUsed: const ['SAFARI@0.9', 'ECSF'],
+        slides: [scorecard(firstScore), totals(ecsf)],
+      );
+
+      expect(slidesWithUnresolvedSafariFields(deck('2', '50%')), isEmpty);
+      expect(slidesWithUnresolvedSafariFields(deck('x', '50%')), [1, 2]);
+      expect(slidesWithUnresolvedSafariFields(deck('2', '51%')), [2]);
+    });
   });
 
   group('de markering overleeft de privacyprojectie', () {

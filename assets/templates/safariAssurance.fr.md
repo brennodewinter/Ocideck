@@ -7,7 +7,6 @@ title: Évaluation SAFARI de la souveraineté numérique
 language: fr
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Évaluation SAFARI de la souveraineté numérique
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Appliquer les six règles de notation avant de déterminer le niveau pour chaque objectif SOV.
 - Formuler l'opinion d'assurance uniquement après l'évaluation des contrôles de qualité et des événements postérieurs à la date de référence.
 ---
-
 <!-- _class: table table-editable -->
 
 # Équipe de gestion des documents et d'engagement
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Sécurité et conformité | Oui | 2 | … | … |
 | SOV-8 | Développement durable | Oui | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Approche d'assurance
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Des preuves suffisantes sont, selon les attentes, disponibles | … | Oui / Non |
 | Décision d'acceptation | Uniquement si continuer si tous les critères sont "oui" | Accepter / Ne pas accepter |
 ---
-
 <!-- _class: table -->
 
 # Niveaux de preuve
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Preuves indépendantes | Collectés ou vérifiés par un organisme d'examen indépendant |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Registre central des preuves
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Ordre juridique | En cas de contrainte exécutoire et d'absence de voie juridique indépendante ou de possibilité de signalement, les points 2.3, 2.5 et 2.6 sont considérés comme des preuves 0 ; SOV-2 est au maximum 1, et SOV-1 également si la souveraineté est là. |
 | 5 · Voie technique | En cas de contrainte étrangère exécutoire, seule la voie technique complète est protégée ; cela ne modifie pas SOV-2 ni le total du SEAL. Un service qui doit traiter des données lisibles n'a pas cette voie. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Souveraineté stratégique
@@ -185,7 +179,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Dépendance au conseil d'administration (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Sortie à changement de propriété (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Détermination du niveau
@@ -210,7 +203,6 @@ standards: SAFARI@0.9, ECSF
 | Règles appliquées et éventuelles limitations | … |
 | Raison principale, risque et ID de constatation | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Souveraineté juridique et juridictionnelle
@@ -251,7 +243,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Contester les demandes étrangères (K·2+) | … | … | … | H/M/L · S/O/J |
 | 2.7 · Légitimité des données par type de données (K·2+) | … | … | … | H/M/L · S/O/J |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Détermination du niveau
@@ -276,7 +267,6 @@ standards: SAFARI@0.9, ECSF
 | Application des règles 0 et 4 et toute limitation | … |
 | Raison principale, risque et identifiant de constatation | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Souveraineté des données et de l'IA
@@ -308,7 +298,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Suppression définitive (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Accès au support géré (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Détermination du niveau
@@ -333,7 +322,6 @@ standards: SAFARI@0.9, ECSF
 | Application des règles 0 et 5 et toute limitation | … |
 | Raison principale, risque et identifiant de constatation | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Souveraineté opérationnelle
@@ -365,7 +353,6 @@ standards: SAFARI@0.9, ECSF
 | 4.5 · Replaceable subcontractors (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistic exit (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Détermination du niveau
@@ -390,7 +377,6 @@ standards: SAFARI@0.9, ECSF
 | Règles appliquées et limitations éventuelles | … |
 | Motif principal, risque et identifiant de constatation | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Souveraineté de la chaîne
@@ -422,7 +408,6 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Sous-fournisseurs et signalement des modifications (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Audit des droits des sous-fournisseurs (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Détermination du niveau
@@ -447,7 +432,6 @@ standards: SAFARI@0.9, ECSF
 | Application du règlement 5 et éventuelles limitations | … |
 | Raison principale, risque et identifiant de constatation | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Souveraineté technologique
@@ -479,7 +463,6 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Pile documentée (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Migration testée vers une alternative (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Détermination du niveau
@@ -504,7 +487,6 @@ standards: SAFARI@0.9, ECSF
 | Application du règlement 5 et toute limitation | … |
 | Raison principale, risque et identifiant de constatation | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Souveraineté en matière de sécurité et de conformité
@@ -536,7 +518,6 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Droits d'audit réalisables en pratique (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · Procédure de signalement conforme au RGPD (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Détermination du niveau
@@ -561,7 +542,6 @@ standards: SAFARI@0.9, ECSF
 | Règles appliquées et toute limitation | … |
 | Raison principale, risque et identifiant de constatation | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Souveraineté durable
@@ -593,7 +573,6 @@ standards: SAFARI@0.9, ECSF
 | 8.5 · Critical Raw Materials Assessed (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD or Voluntary Reporting (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Détermination du niveau
@@ -618,13 +597,11 @@ standards: SAFARI@0.9, ECSF
 | Règles appliquées et limitation éventuelle | … |
 | Motif principal, risque et identifiant de constatation | … |
 ---
-
 <!-- _class: section -->
 
 # Conclusion et avis d'assurance
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Légalité par type de données · Ligne 0
@@ -637,7 +614,6 @@ standards: SAFARI@0.9, ECSF
 | Données du secteur réglementé | Règles NIS2, DORA ou spécifiques au secteur | … | Justifié/risque | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Exposition aux ordres juridiques · Règle 4
@@ -706,7 +682,6 @@ standards: SAFARI@0.9, ECSF
 | Résoluble en interne | … |
 | Collaboration du fournisseur requise | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Position indicative du CADA
@@ -721,7 +696,6 @@ standards: SAFARI@0.9, ECSF
 | Libellé obligatoire | Indication basée sur la proposition ; aucun jugement sur la conformité. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Évaluation de l'assurance par cible
@@ -743,7 +717,6 @@ standards: SAFARI@0.9, ECSF
 | Certitude limitée | Toutes les questions critiques au minimum 2 ; pas toutes au minimum 3 | Sur la base de nos travaux, rien ne nous indique que [allégation] soit fausse. Nous exprimons une certitude limitée. |
 | Certitude raisonnable | Toutes les questions critiques au minimum 3 | Sur la base de nos travaux, nous sommes d'avis que [allégation]. Nous exprimons une certitude raisonnable. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Résultats et recommandations
@@ -755,7 +728,6 @@ standards: SAFARI@0.9, ECSF
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Contrôle qualité et événements après la date de référence

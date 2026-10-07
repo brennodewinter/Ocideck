@@ -7,7 +7,6 @@ title: SAFARI-arviointi digitaalisesta suvereniteetista
 language: fi
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI-arviointi digitaalisesta suvereniteetista
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Sovella kuusi pisteytysääntöä ennen SOV-tavoitteen tasoittamista.
 - Muotoile vakuutusarvio vasta kun laaduntarkistus ja tapahtumat peilipäivän jälkeen on arvioitu.
 ---
-
 <!-- _class: table table-editable -->
 
 # Asiakirjojen hallinta- ja toimeksiantotiimi
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Turvallisuus ja säännökset | Kyllä | 2 | … | … |
 | SOV-8 | Kestävyys | Kyllä | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Avarmuutta koskeva lähestymistapa
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Riittävä todiste on odotettavissa saatavilla | … | Kyllä / ei |
 | Vahvistuspäätös | Vain jatketaan, jos kaikki kriteerit ovat "kyllä" | Hyväksy / ei hyväksy |
 ---
-
 <!-- _class: table -->
 
 # Todisteiden tasot
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Riippumaton todiste |  Riippumattoman testauspuolen keräämä tai vahvistama |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Keskitodistusrekisteri
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Toimiva oikeusjärjestys | Jos pakottava ulkomaalainen pääsy on suojattu ja ei ole riippumatonta oikeuskäsittelyä tai ilmoitusmahdollisuutta, lasketaan 2.3, 2.5 ja 2.6 todisteeksi 0; SOV-2 on enintään 1 ja SOV-1 myös, jos vallanpitäminen on siellä. |
 | 5 · Tekninen reitti | Jos pakottava ulkomaalainen pääsy on suojattu vain koko tekninen reitti; se ei muuta SOV-2:ta tai SEAL:n kokonaistasoa. Palvelu, joka tarvitsee luettavaa dataa, ei käytä tätä reittiä. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strateginen itsemääräämisoikeus
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Riippuvuus lautakunnassa (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Ulostulo omistusmuutoksessa (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Tason määritys
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Käytetyt säännöt ja mahdolliset rajoitukset | … |
 | Tärkein syy, riski ja löydön tunnus | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Oikeudellinen ja toimivaltainen suvereniteetti
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Ulkomaalaisen pyynnön kiistaminen (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Tietojen oikeellisuus (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Tason määritys
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Käytettyjen sääntöjen ja mahdollisten rajoitusten soveltaminen | … |
 | Tärkein riski ja löydön tunnus | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Tietojen ja tekoälyn suvereniteetti
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Lopullinen poisto (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Hallittu tuki pääsy (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Tason määritys
@@ -336,12 +325,13 @@ standards: SAFARI@0.9, ECSF
 
 Here's the translated Markdown slide blocks from Dutch to professional Finnish, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Toiminnallinen itsemääräämisoikeus
 
 ---
+<!-- _class: table -->
+
 # SOV-4 · Kyselykset
 
 | Kysymys · tyyppi/min. | Kyselykset | Vaadittu todiste |
@@ -353,6 +343,8 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 4.5 · O·1+ | Ovatko kriittiset alihankkijat tunnettuja ja realistisesti korvattavissa? | Alihankkijaluettelo, vaihtoehtoanalyysi |
 | 4.6 · O·2+ | Onko olemassa poistoprosessi realistisilla siirtymäajoilla ja kustannuksilla? | Poistostrategia, migraatiokustannuslaskelma |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-4 · Löydökset ja todisteet
 
 | Kysymys · tyyppi/min. | Faktinen löydös | Lähteiden ID | Todiste 0-4 | Vaikutus / riski |
@@ -364,7 +356,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 4.5 · Korvattavat alihankkijat (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistinen poisto (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Tason määritys
@@ -378,6 +369,8 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 4 | In ohjaus |  Täysi EU:n toiminta ilman kriittisiä EU:n ulkopuolisia riippuvuuksia | 4 |
 
 ---
+<!-- _class: table table-editable -->
+
 # SOV-4 · Tavoitepäätelmä
 
 | Perustelu keskeiselle tuloskortille | Toteutus |
@@ -387,12 +380,13 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Käytetyt säännöt ja mahdolliset rajoitukset | … |
 | Tärkein syy, riski ja löydöksen ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Ketjun itsemääräämisoikeus
 
 ---
+<!-- _class: table -->
+
 # SOV-5 · Kyselykset
 
 | Kysymys · tyyppi/min. | Kyselykset | Vaadittu todiste |
@@ -404,6 +398,8 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 5.5 · K·2+ | Ovatko kaikki alihankkijat tunnettuja ja onko muutosehtaus säännöksellisesti järjestetty? | Alihankkijaluettelo, sopimusehto |
 | 5.6 · O·2+ | Onko alihankkijoiden tarkastus-oikeuksia säännöksellisesti vahvistettu? | Sopimusehdot, tarkastusraportit |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Löydökset ja todisteet
 
 | Kysymys · tyyppi/min. | Faktinen löydös | Lähteiden ID | Todiste 0-4 | Vaikutus / riski |
@@ -415,7 +411,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 5.5 · Alihankkijat ja muutosehtaus (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Alihankkijoiden tarkastus-oikeudet (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Tason määritys
@@ -429,6 +424,8 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 4 | Läpinäkyvä ja hallinnassa | QTäysi läpinäkyvyys ilman kriittisiä EU:n ulkopuolisia riippuvuuksia | 4 |
 
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Tavoitepäätelmä
 
 | Perustelu keskeiselle tuloskortille | Toteutus |
@@ -438,12 +435,13 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Käytetyt säännöt ja mahdolliset rajoitukset | … |
 | Tärkein syy, riski ja löydöksen ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Tekninen suvereniteetti
 
 ---
+<!-- _class: table -->
+
 # SOV-6 · Kyselykset
 
 | Kysymys · tyyppi/min. | Kyselykset | Vaadittu todiste |
@@ -455,6 +453,8 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 6.5 · O·1+ | Onko koko stack dokumentoitu, mukaan lukien suljetut komponentit ja vaihtoehdot? | Arkkitehtuuri, komponenttien rekisteri |
 | 6.6 · O·2+ | Onko migraatio vaihtoehtoon realistinen ja testattu? | Migraatiotesti, poistostrategia, vaihtoehtoanalyysi |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Löydökset ja todisteet
 
 | Kysymys · tyyppi/min. | Faktinen löydös | Lähteiden ID | Todiste 0-4 | Vaikutus / riski |
@@ -466,7 +466,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 6.5 · Dokumentoitu stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testattu migraatio vaihtoehtoon (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Tason määritys
@@ -491,7 +490,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Säännön 5 soveltaminen ja mahdolliset rajoitukset | … |
 | Tärkein syy, riski ja löydön-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Turvallisuus ja vaatimustenmukaisuuden riippumattomuus
@@ -523,7 +521,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 7.5 · Käytännössä toteutettavat auditoinnin oikeudet (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · GDPR-yhteensopiva ilmoitusmenettely (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Tason määritys
@@ -548,7 +545,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Sovelletut säännöt ja mahdolliset rajoitukset | … |
 | Tärkein syy, riski ja löydön-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Kestävän kehityksen suvereniteetti
@@ -580,7 +576,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | 8.5 · Kriittisten raaka-aineiden arviointi (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD tai vapaaehtoinen raportointi (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Tason määritys
@@ -605,13 +600,11 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Sovelletut säännöt ja mahdolliset rajoitukset | … |
 | Tärkein syy, riski ja löydön-ID | … |
 ---
-
 <!-- _class: section -->
 
 # Päätelmä ja varmennuslausunto
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Laitius tietotyypin mukaan · Rivi 0
@@ -624,7 +617,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Säännellyt sektoritiedot | NIS2, DORA tai alakohtaiset säännöt | … |  Perusteltu / riski | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Altistuminen oikeudellisille määräyksille · Sääntö 4
@@ -693,7 +685,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Ratkaistavissa sisäisesti | … |
 | Toimittajan yhteistyö tarvitaan | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Viaava CADA-asema
@@ -708,7 +699,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Pakollinen sanamuoto |  Ehdotukseen perustuva merkintä; ei tuomiota vaatimustenmukaisuudesta. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Varmuusarvio tavoitetta kohti
@@ -730,7 +720,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | Rajoitettu varmuus | Kaikki kriittiset kysymykset vähintään 2; ei kaikki vähintään 3 | Todisteidemme perusteella emme ole havainneet mitään, mikä osoittaisi [väitettä] olevan epätosi. Annamme rajatun määrän varmuutta. |
 | Kohtuullinen varmuus | Kaikki kriittiset kysymykset vähintään 3 | Todisteidemme perusteella olemme sitä mieltä, että [väite]. Annamme kohtuullisen määrän varmuutta. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Havainnot ja suositukset
@@ -742,7 +731,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Finnish, 
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Laadunvalvonta ja viitepäivämäärän jälkeiset tapahtumat

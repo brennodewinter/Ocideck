@@ -7,7 +7,6 @@ title: SAFARI digitālās suverenitātes novērtējums
 language: lv
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI digitālās suverenitātes novērtējums
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Pielietojiet sešas vērtēšanas noteikumus, pirms noteicat līmeni par katru SOV mērķi.
 - Izveidojiet drošības vērtējumu tikai pēc kvalitatīvās kontroles un pasūtījuma pēcmaksas pasākumu novērtēšanas.
 ---
-
 <!-- _class: table table-editable -->
 
 # Dokumentu pārvaldības un piešķiršanas komanda
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Drošība un atbilstība | Jā | 2 | … | … |
 | SOV-8 | Uzticama | Jā | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Anodrošināšanas pieeja
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Pietiekami piemērots pierādījums tiek sagaidīts | … | Jā / nē |
 | Pamatlēmuma lēmums | Vienīgi pieļaujams, ja visi kritēriji ir "jā" | Atzīst / noraidīts |
 ---
-
 <!-- _class: table -->
 
 # Pierādījumu līmeņi
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Neatkarīgi pierādījumi | Ievāc vai pārbaudīja neatkarīga testēšanas puse |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Centrālais pierādījumu reģistrs
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Tiesību piederība | Ja ir piespieduma spēks un nav neatkarīgas tiesību noteikumu vai pieteikums, 2.3, 2.5 un 2.6 tiek uzskatīti par pierādījumiem 0; SOV-2 ir maksimums 1, un SOV-1 arī, ja noteiktā varas attiecības ir ievirtotas. |
 | 5 · Tehniskais posms | Ja ir piespieduma ārvalstu piekļuve, tikai pilnībā tehniskais posms; tas nemaina SOV-2 un SEAL kopējo līmeni. Pakalpojums, kas ir nepieciešams lasītām datiem, nav šajā posmā. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Stratēģiskā suverenitāte
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Atkarība no padomus (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Iziet no īpašuma maiņas (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Līmeņa noteikšana
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Izmantotās noteikšanas un jebkādas ierobežojumu | … |
 | Galvenais iemesls, risks un atziņas ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Juridiskā un jurisdikcijas suverenitāte
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Cīnīties pret ārvalstu pieprasījumiem (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Datu likumība pēc tiesību valstību (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Līmeņa noteikšana
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Izmantotās noteikšanas un jebkādas ierobežojumu | … |
 | Galvenais iemesls, risks un atziņas ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Datu un AI suverenitāte
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Definētā izdzēšana (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Noteikta atbalsta pieeja (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Līmeņa noteikšana
@@ -335,7 +324,6 @@ standards: SAFARI@0.9, ECSF
 | Galvenais iemesls, risks un atziņas ID | … |
 Here's the translated Markdown slide blocks from Dutch to professional Latvian, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operatīvā suverenitāte
@@ -390,7 +378,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Izmantotie noteikumi un jebkāda ierobežošana | … |
 | Galveno iemeslu, risks un atklājuma ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Ķēdes suverenitāte
@@ -422,7 +409,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | 5.5 · Pakārtās piegādātāji un izmaiņu paziņojums (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Pakārtās piegādātāju pārbaudes tiesības (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Līmeņa noteikšana
@@ -447,7 +433,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Izmantotie noteikumi un jebkāda ierobežošana | … |
 | Galveno iemeslu, risks un atklājuma ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Tehnoloģiskā suverenitāte
@@ -479,7 +464,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | 6.5 · Stack dokumentācija | … | … | … | L/M/H · J/O/S |
 | 6.6 · Migrācijas tests | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Līmeņa noteikšana
@@ -504,7 +488,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Regulas 5 piemērošana un jebkādas ierobežojuma attiecināšana | … |
 | Galvenais iemesls, risks un atziņas ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Drošības un atbilstības suverenitāte
@@ -536,7 +519,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | 7.5 · Praktiski izmērāmās auditēšanas tiesības (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · AVG atbilstīgā paziņošanas procedūra (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Līmeņa noteikšana
@@ -561,7 +543,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Izmantotās regulas un jebkādas ierobežojuma attiecināšana | … |
 | Galvenais iemesls, risks un atziņas ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Ilgtspējības suverenitāte
@@ -593,7 +574,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | 8.5 · Kritiskiem izejvielu novērtējums (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD vai brīvprātīga ziņošana (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Līmeņa noteikšana
@@ -618,13 +598,11 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Izmantotās regulas un jebkādas ierobežojuma attiecināšana | … |
 | Galvenais iemesls, risks un atziņas ID | … |
 ---
-
 <!-- _class: section -->
 
 # Secinājums un pārliecības atzinums
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Leģitimitāte pēc datu veida · 0. rindiņa
@@ -637,7 +615,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Regulēti sektora dati | NIS2, DORA vai nozares specifiskie noteikumi | … | Pamatots / risks | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Pakļaušana juridiskiem rīkojumiem · 4. noteikums
@@ -706,7 +683,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Iekšējais risinājums | … |
 | Piegādātāja sadarbības nepieciešams | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Indatīva CADA pozīcija
@@ -721,7 +697,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Obligāts formulējums | Indikācija, pamatojoties uz priekšlikumu; nav sprieduma par atbilstību. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance novērtējums katram mērķim
@@ -743,7 +718,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | Mērķa drošība | Visi kritiskie jautājumi vismaz 2; ne visi vismaz 3 | Pamatojoties uz mūsu darbu, nav konstatēts, ka [paziņojums] būtu nepareizs. Mēs sniedzam mērķa drošību. |
 | Racionāla drošība | Visi kritiskie jautājumi vismaz 3 | Pamatojoties uz mūsu darbu, mēs uzskatām, ka [paziņojums]. Mēs sniedzam racionālu drošības līmeni. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Atklājumi un ieteikumi
@@ -755,7 +729,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Latvian, 
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kvalitātes kontrole un notikumi pēc atsauces datuma

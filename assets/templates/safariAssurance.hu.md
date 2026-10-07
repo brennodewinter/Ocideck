@@ -36,6 +36,8 @@ standards: SAFARI@0.9, ECSF
 | Jeljelentés verzió és dátum | … |
 | TLP-szabályozás és terítéksor | … |
 ---
+<!-- _class: table table-editable -->
+
 # Objektum és hatókör
 
 | Hatókör rész | Megfejtés |
@@ -49,6 +51,8 @@ standards: SAFARI@0.9, ECSF
 | Explicit kizárások indoklással | … |
 | Normatív keret verziója | SAFARI v0.9 (koncepció; önkéntes módszertan) |
 ---
+<!-- _class: table table-editable -->
+
 # Az organizmus állítása
 
 | Alszám | Megfejtés |
@@ -60,6 +64,8 @@ standards: SAFARI@0.9, ECSF
 | Megjegyzés | Az eredmény a mérőszám alapján rendelkezésre álló bizonyítékok alapján készült; a változások befolyásolhatják az eredményt. |
 | Tulajdonos és hivatalos jóválasztás | … |
 ---
+<!-- _class: table table-editable -->
+
 # Kívánt szintek és kulcsfontosságú célok
 
 | Kód | Cél | Kulcsfontosságú cél | Javasolt minimum | Kívánt | Eltérés indoklása |
@@ -73,6 +79,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Biztonság és megfelelés | Igen | 2 | … | … |
 | SOV-8 | Fenntarthatóság | Igen | 1 | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Bizalom-biztosítási megközelítés
 
 | Alszám | Választás és indoklás |
@@ -308,7 +316,7 @@ standards: SAFARI@0.9, ECSF
 
 # SOV-4 · Üzemeltel szuverenitás
 ---
-<!-- _class: táblázat -->
+<!-- _class: table -->
 
 # SOV-4 · Ellenőrző kérdések
 
@@ -321,7 +329,7 @@ standards: SAFARI@0.9, ECSF
 | 4.5 · O·1+ | Ismertek és reálisan helyettesíthetők a kritikus alvállalkozók? | Alvállalkozói lista, alternatív elemzési elemzés |
 | 4.6 · O·2+ | Van-e egy kilépési forgatókönyv reális átköltéssel és költségekkel? | Kilépési stratégia, migrálási üzleti esettel |
 ---
-<!-- _class: táblázat táblázható -->
+<!-- _class: table table-editable -->
 
 # SOV-4 · Találdok és bizonyítékok
 
@@ -334,7 +342,7 @@ standards: SAFARI@0.9, ECSF
 | 4.5 · Helyettesíthető alvállalkozók (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Reális kilépés (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-<!-- _class: táblázat táblázható -->
+<!-- _class: table table-editable -->
 
 # SOV-4 · Szint meghatározás
 
@@ -427,6 +435,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · O·1+ | A teljes teknológia-csomag dokumentált, beleértve a zárt komponenseket és alternatívákat? | Architektúra, komponens katalógus |
 | 6.6 · O·2+ | Lehetséges-e a technológia alternatívra való átvitele valós és tesztelt módon? | Átviteles teszt, kilépési stratégia, alternatívák elemzése |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Érdelemek és bizonyíték
 
 | Kérdés · Típus/Min. | Valódi érdeklemény | Forrás-ID | Bizonyíték 0-4 | Hatás / kockázat |
@@ -438,6 +448,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Dokumentált teknológia-csomópont (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Tesztelt migráció alternatívra (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Szintfelmérés
 
 | Szint | Jelölés | Jellemző | Minimális bizonyíték |
@@ -448,6 +460,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Jelentős önálló | A helyettesíthetőség tesztelve; a kritikus szoftver ellenőrizhető audit vagy nyílt forrásból | 3 |
 | 4 | Kontroll alatt | Teljes kontroll az integráció és a szabványok tekintetében kritikus zárt függőségek nélkül | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Célkitűzési következtetés
 
 | Alap a központi értékelési táblázat számára | Megvalósítás |
@@ -461,6 +475,8 @@ standards: SAFARI@0.9, ECSF
 
 # SOV-7 · Biztonsági és megfelelőségi szuverenitás
 ---
+<!-- _class: table -->
+
 # SOV-7 · Tesztkérdések
 
 | Kérdés · típus/min. | Tesztkérdés | Szükséges bizonyíték |
@@ -472,6 +488,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · K·2+ | A jogosultsági jogok gyakorlati jelleggel megvalósíthatók, beleértve a rendszer- és logolaszthatóságot? | Szerződéses jogosultsági jog, végrehajtott auditjelentés |
 | 7.6 · O·2+ | A adatvédelmi incidensekre és eseményekre vonatkozó jelzésfolyamdolog GDPR-konform és bizonyíthatósága van? | Incidens terv, beszámoló felelősség szabályzat, jelzésregisztráció |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Találdatok és bizonyítékok
 
 | Kérdés · típus/min. | Valós tény | Forrás-azonosító | Bizonyíték 0-4 | Hatás / kockázat |
@@ -483,6 +501,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Praktikusan megvalósítható jogosultsági jogok (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · GDPR-konform jelzésfolyamdolog (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Szintértékelés
 
 | Szint | Jelölés | Jellemző | Minimális bizonyíték |
@@ -493,6 +513,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | EU-műveletek | Az EU-biztonsági műveletek hatékonyak és független auditok lehetségesek | 3 |
 | 4 | Ellenőrzés alatt | Teljes ellenőrzés a felügyelet, incidencetek kezelése, javítások és megfelelőség | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Központi konklúzió
 
 | A központi pontszámhoz tartozó indoklás | Összevonás |
@@ -544,6 +566,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Hatás | Jelentős EU hatás az energiaforrás és körforrásos ökoszisztéma tekintetében | 3 |
 | 4 | Fenntartható | Teljesen fenntartható, átlátható és EU-ba épített strukturális felügyelet | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # Központi pontszám alapítványa · Végső következtetés
 
 | Központi pontszám alapítványa | Teljesítés |
@@ -553,8 +577,12 @@ standards: SAFARI@0.9, ECSF
 | Alkalmazott szabályok és esetleges korlátozások | … |
 | Főbb ok, kockázat és találdozó-azonosító | … |
 ---
+<!-- _class: section -->
+
 # Konklúzió és asszurance ítélet
 ---
+<!-- _class: table table-editable -->
+
 # Jogosság az adat típusok szerint · Szabály 0
 
 | Adat típus | Ellenőrző keret | Alapítvány és forrás-azonosító | Eredmény | Tárgyalt SOV cél |
@@ -564,6 +592,8 @@ standards: SAFARI@0.9, ECSF
 | Kormányzati vagy témájú információk | A vonatkozó nemzeti és EU szabályok | … | Alapozott / kockázat | … |
 | Szabályozott szektor adatai | NIS2, DORA vagy szektorspecifikus szabályok | … | Alapozott / kockázat | … |
 ---
+<!-- _class: table table-editable -->
+
 # Jogszabályi megfelelőséghez való kitettség · Szabály 4
 
 | Személy/Jogszabály és jogrend | Tűz lehet a kormány által erőltetve? | Független bírósági eljárás? | Tájékoztatás adható a vevőnek? | Eredmény a bizonyítékok és a szintszint wzglęmban |
@@ -572,6 +602,8 @@ standards: SAFARI@0.9, ECSF
 | … | … | … | … | … |
 | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Szabály 4 · Kötelező következtetés
 
 | Feltétel vagy következmény | Megállapítás és forrás-azonosító |
@@ -583,6 +615,8 @@ standards: SAFARI@0.9, ECSF
 | Ha a befolyás a jogrendszerben van, akkor a SOV-1 maximum 1 szintű | Alkalmazott / nem alkalmazott: … |
 | Maradó kitettség | … |
 ---
+<!-- _class: table table-editable -->
+
 # Technikai útvonal · Szabály 5
 
 | Feltétel | Következtetés és forrás-azonosító |
@@ -625,6 +659,8 @@ standards: SAFARI@0.9, ECSF
 | Belső megoldható | … |
 | Szolgáltató együttműködése szükséges | … |
 ---
+<!-- _class: table table-editable -->
+
 # Javasolt CADA Pozíció
 
 | Alapkomponens | Eredmény és Forrás-azonosító |
@@ -636,6 +672,8 @@ standards: SAFARI@0.9, ECSF
 | Bizonylati Korlátozás | … |
 | Kötelező Megfogalmazás | Javaslat alapján történő jelzés; nem ítélkezzük a megfelelőségről. |
 ---
+<!-- _class: table table-editable -->
+
 # Biztonsági Értékelési Vélemény Célok szerint
 
 | Cél | Bizonylati Kritikus Kérdések | Jogtalmasági Rizikó | Biztonsági Értékelési Típus | Megfogalmazás és Megjegyzés |
@@ -644,6 +682,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-… | … | … | … | … |
 | SOV-… | … | … | … | … |
 ---
+<!-- _class: table -->
+
 # Biztonsági Értékelési Segítő Megfogalmazás
 
 | Típus | Feltétel | Standard Megfogalmazás |
@@ -652,6 +692,8 @@ standards: SAFARI@0.9, ECSF
 | Korlátozott Biztonság | Minden kritikus kérdés legalább 2; nem minden legalább 3 | Munkafolyamatok során nem találtunk bizonyítékot, hogy [állítmány] helytelen lenne. Korlátozott mértékben nyújtunk biztonságot. |
 | Megbízható Biztonság | Minden kritikus kérdés legalább 3 | Munkafolyamatok során megítélésünk szerint [állítmány] igaz. Megbízható mértékben nyújtunk biztonságot. |
 ---
+<!-- _class: table table-editable -->
+
 # Találdozatok és Javaslatok
 
 | ID | SOV | Találdozat | Hatás | Javaslat | Tulajdonos | Időpont |

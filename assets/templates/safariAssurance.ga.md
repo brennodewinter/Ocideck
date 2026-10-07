@@ -50,6 +50,8 @@ standards: SAFARI@0.9, ECSF
 | Iontachais i gcoinne go leor le géarscríbhí | … |
 | Beartas Normatach Versiú | SAFARI v0.9 (concept; Méithéacán voluntaer) |
 ---
+<!-- _class: table table-editable -->
+
 # Tá Seasamhachas an Oidhreachta |
 
 | Comhionadh | Teicneolaíocht |
@@ -61,6 +63,8 @@ standards: SAFARI@0.9, ECSF
 | Cairim | Tá an rang bunaithe ar an bhfaisgneamh atá ar fáil ar an lá; d’fhéach an méadhnach ar an rang |
 | Príomh-Oidhreacht agus sealadh oidhreachta | … |
 ---
+<!-- _class: table table-editable -->
+
 # Ranganna agus Mheasanna Cruinne |
 
 | Cóid | Mheas | Mheas Cruinne | Rang Miontach | Rang | Cuntas faoin dhiúltú |
@@ -470,6 +474,8 @@ standards: SAFARI@0.9, ECSF
 
 # SOV-7 · Sochairt agus Comhlíonta Sochair
 ---
+<!-- _class: table -->
+
 # SOV-7 · Ceisteagartha
 
 | Cuestion · tip/min. | Ceisteagracht | Príomharthaí Príomhartha |
@@ -481,6 +487,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · K·2+ | An bhfuil ceisteanna iascaireachta i bhfacta go gá, lena n-áirítear faisnéis agus log-fás? | Comharthaí Seachas, láithreán sinsearachta |
 | 7.6 · O·2+ | An bhfuil bealach mígheall ar an dán le fáilíochta agus ar an dán le fáilíochta faoi GDPR agus le fáilíochta faoi bhonn? | Réadair mígheall, baingl, gléas mígheall |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Fianaidh agus Príomharthaí
 
 | Cuestion · tip/min. | Fianaí fhiabhriúil | ID Faidh | Príomhartha 0-4 | Rís / Fás / Fás |
@@ -504,6 +512,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Oibreachas Eirpe | Tá oibreachas poibliochta ar neartachas i bhfad os comhair rialacháin Eirpe | 3 |
 | 4 | I gcáilithe | Tá comhlíodar i bhfad os comhair rialacháin Eirpe | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Ceisteanna Cláirithe
 
 | Príomhartha ar an scéarlaí ceanncheardlacha | Tionair |
@@ -555,6 +565,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Ríocht | Ríocht mór AE ar an muin agus ar an gcluiche ghlúine | 3 |
 | 4 | Staunaithe | Staunaithe, neartaithe, agus an AE a theastaíonn uasaor | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-8 · De Réabhnamh Coitiúnachta
 
 | Bás Úilleadh do Shéardaíocht Mhalra | Tairpeanu |
@@ -564,6 +576,8 @@ standards: SAFARI@0.9, ECSF
 | Regattaí a bhaint amh agus an mioncheanas a cheilt | … |
 | An réad briondar, an rís, agus SAMHSAID | … |
 ---
+<!-- _class: section -->
+
 # Coitriú agus Réabhnamh Coitiúnachta
 ---
 <!-- _class: table table-editable -->
@@ -577,6 +591,8 @@ standards: SAFARI@0.9, ECSF
 | Government or Classified Information | Applicable National and EU Regulations | … | Substantiated / Risk | … |
 | Regulated Sector Data | NIS2, DORA or Sector-Specific Regulations | … | Substantiated / Risk | … |
 ---
+<!-- _class: table table-editable -->
+
 # Tráthú ar Réaltaí · Regulate 4
 
 | Partíocht agus Réalta | D’fhéadfaidh an rialta a cheiliúradh? | An táirgeadh i bhfábhar? | D’fhéadfaidh an fhadhb a chur in iúl don ghlacadh? | An t-éifeacht ar an buiste agus ar an méadbhliath |
@@ -585,6 +601,8 @@ standards: SAFARI@0.9, ECSF
 | … | … | … | … | … |
 | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Rialta 4 · Ceartachtaí Oblógtha
 
 | Rialtaí nó Ceartachtaí | Ranganna agus ID Foinsíochta |
@@ -596,6 +614,8 @@ standards: SAFARI@0.9, ECSF
 | Má tá an cumhacht ag an stát i gcáiréid seo, is mó na céimeanna de SOV-1 | Tá sé déanta / N.V.T.: … |
 | Bás an chasta | … |
 ---
+<!-- _class: table table-editable -->
+
 # Bealach Teicneachta · Rialta 5
 
 | Rialtaí | Ceartachtaí agus ID Foinsíochta |
@@ -608,6 +628,8 @@ standards: SAFARI@0.9, ECSF
 | Tá na rialtaí uile comh maith | Fomlánach 'tá sé ar fáil' seachas na gcomhchomataí roimhe seo a bhfuil siad poiblé: … |
 | Ceartachta | Tá an Rialta 0 ina bhfachas; Ní fhágann sé SOV-2 nó an mionchearfaidh an SEAL |
 ---
+<!-- _class: table table-editable -->
+
 # Scaraghtóir SAFARI
 
 | Coisc | Cainneadh | Ceartachta 0-4 | Béarma 0-4 | Ceartachtaí i gcoinne na feithíochta choibhionaithe | Caibhdhíochtaí |
@@ -621,6 +643,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | 10% | … | … | Tá sé comhdhéanta / Gap / N.V.T. | … |
 | SOV-8 | 5% | … | … | Tá sé comhdhéanta / Gap / N.V.T. | … |
 ---
+<!-- _class: table table-editable -->
+
 # Ceartachtaí Iomlán
 
 | Comhtháth | Ceartachta agus Soiléiriú |

@@ -7,7 +7,6 @@ title: SAFARI digisuveräänsuse hindamine
 language: et
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI digisuveräänsuse hindamine
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Rakendage kuus hinnangureegleid enne SOV-eesmärkide taseme määramist.
 - Assurance otsust formuleerige alles pärast kvaliteedi kontrolli ja pealepeale sündmuste hindamist.
 ---
-
 <!-- _class: table table-editable -->
 
 # Dokumendihalduse ja määramise meeskond
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Turvallisuus ja compliance | Jah | 2 | … | … |
 | SOV-8 | Kestevus | Jah | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Akindluse lähenemisviis
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Piisavalt sobivad tõendid on oodata | … | Jah / Ei |
 | Tehtestamise otsus | Ühtsete kriteeriumide puhul ainult jätkamine | Vastuvõtta / Mitte vastuvõtta |
 ---
-
 <!-- _class: table -->
 
 # Tõendite tasemed
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Sõltumatuid tõendeid | Sõltumatu testija poolt kogutud või kontrollitud |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Keskne tõendite register
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Toimiv õigusriik | Kui sundimine on jõustatav ja isärane õigusruum või suhtlusvõimalus puudub, loetakse 2.3, 2.5 ja 2.6 hinnanguks 0; SOV-2 on maksimaalselt 1, ja SOV-1 ka, kui kontrollijuht on selles. |
 | 5 · Tekhniline tee | Kui sundimine on jõustatav välismaisel juurdepääsul, kaitseb ainult kogu tehniline tee; see ei muuda SOV-2 ega SEAL-taset. Teenus, mis peab töötlema loetavat andmeid, ei saa seda kasutada. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strateegiline suveräänsus
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Tuginedes nõudmisel juhatusel (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Väljapääs omanike muutmise korral (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Taseme määramine
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Rakendatud reeglid ja võimalik piirang | … |
 | Olulisim põhjus, risk ja leidmise ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Õiguslik ja jurisdiktsiooniline suveräänsus
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Välismaise päringu vaidlustamine (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Andmete legitiimsus (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Taseme määramine
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Määrelemine reeglite 0 ja 4 rakendamine ja võimalik piiramine | … |
 | Olulisim põhjus, risk ja leidmise ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Andmete ja tehisintellekti suveräänsus
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Kindel kustutamine (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Reguleeritud toetusjuurde pääsemine (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Taseme määramine
@@ -334,7 +323,6 @@ standards: SAFARI@0.9, ECSF
 | Määrelemine reeglite 0 ja 5 rakendamine ja võimalik piiramine | … |
 | Olulisim põhjus, risk ja leidmise ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operatiivne suveräänsus
@@ -366,7 +354,6 @@ standards: SAFARI@0.9, ECSF
 | 4.5 · Asendatavad allhõljatavad (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistne väljapääs (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Taseme määramine
@@ -391,7 +378,6 @@ standards: SAFARI@0.9, ECSF
 | Rakendatud reeglid ja võimalik piiramine | … |
 | Olulisim põhjus, risk ja leidmise ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Keti suveräänsus
@@ -423,7 +409,6 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Allhankijad ja muudatusavaldus (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Allhankijate auditiõigused (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Taseme määramine
@@ -448,7 +433,6 @@ standards: SAFARI@0.9, ECSF
 | Reegli 5 rakendamine ja võimalik piiramine | … |
 | Olulisim põhjus, risk ja leid-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Tehnoloogiline suveräänsus
@@ -480,7 +464,6 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Dokumenteeritud süsteem (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testitud alternatiivide migratsioon (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Taseme määramine
@@ -505,7 +488,6 @@ standards: SAFARI@0.9, ECSF
 | Määrele 5 rakendamine ja võimalik piiramine | … |
 | Olulisim põhjus, risk ja leidmise ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Turvalisuse ja vastavuse suveräänsus
@@ -537,7 +519,6 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Praktiliselt rakendatavad auditõigused (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · AVG-vastav teadaandmise protseduur (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Taseme määramine
@@ -562,7 +543,6 @@ standards: SAFARI@0.9, ECSF
 | Rakendatud reeglid ja võimalik piiramine | … |
 | Olulisim põhjus, risk ja leidmise ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Jätkusuutlikkuse suveräänsus
@@ -594,7 +574,6 @@ standards: SAFARI@0.9, ECSF
 | 8.5 · Kriitilised tooted hinnatud (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD või vabatahtliku aruandluse aruanded (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Taseme määramine
@@ -619,13 +598,11 @@ standards: SAFARI@0.9, ECSF
 | Rakendatud reeglid ja võimalik piiramine | … |
 | Olulisim põhjus, risk ja leidmise ID | … |
 ---
-
 <!-- _class: section -->
 
 # Järeldus ja kinnitus arvamus
 
 ---
-
 <!-- _class: table table-editable -->
 
 #  Legitiimsus andmetüübi kohta · Rida 0
@@ -638,7 +615,6 @@ standards: SAFARI@0.9, ECSF
 | Reguleeritud sektori andmed | NIS2, DORA või sektoripõhised reeglid | … |  Põhjendatud / risk | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kohtumine juriidilistele korraldustele · Reegel 4
@@ -707,7 +683,6 @@ standards: SAFARI@0.9, ECSF
 | Selles osas lahendatav | … |
 | Tarvitaja koostöö nõutav | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Indikatiivne CADA positsioon
@@ -722,7 +697,6 @@ standards: SAFARI@0.9, ECSF
 | Kohustuslik sõnastus | Ettepanekul põhinev märge; ei mingit hinnangut vastavuse kohta. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Tagamise hindamine eesmärgi kohta
@@ -744,7 +718,6 @@ standards: SAFARI@0.9, ECSF
 | Piiratud kindlus | Kõik kriitilised küsimused vähemalt 2; mitte kõik vähemalt 3 | Saadaval oleva tõendite põhjal meil ei ole mitte midagi, mis näitaks, et [väide] oleks vales. Me anname piiratud kindlusega. |
 | Ühine kindlus | Kõik kriitilised küsimused vähemalt 3 | Saadaval oleva tõendite põhjal me leiame, et [väide]. Me anname ühise kindlusega. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Leiud ja soovitused
@@ -756,7 +729,6 @@ standards: SAFARI@0.9, ECSF
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kvaliteedikontroll ja sündmused pärast võrdluskuupäeva

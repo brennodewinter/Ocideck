@@ -7,7 +7,6 @@ title: Valutazione SAFARI della sovranità digitale
 language: it
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Valutazione SAFARI della sovranità digitale
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Applicare le sei regole di valutazione prima di stabilire il livello per ogni obiettivo SOV.
 - Formulare l'opinione di garanzia solo dopo che le verifiche di qualità e gli eventi post-data di riferimento sono stati valutati.
 ---
-
 <!-- _class: table table-editable -->
 
 # Gestione dei documenti e team di coinvolgimento
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Sicurezza e conformità | Sì | 2 | … | … |
 | SOV-8 | Sostenibilità | Sì | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Approccio di garanzia
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | È previsto che un'adeguata prova sia disponibile | … | Sì / no |
 | Decisione di accettazione | Solo continuare se tutti i criteri sono "sì" | Accettare / non accettare |
 ---
-
 <!-- _class: table -->
 
 # Livelli di prova
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Prove indipendenti | Raccolti o verificati da un revisore indipendente |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Registro centrale delle prove
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Ordine legale | In caso di coercizione e senza un processo legale indipendente o possibilità di segnalazione, 2.3, 2.5 e 2.6 sono considerati come prova 0; SOV-2 è al massimo 1 e SOV-1 anche se la sovranità è lì. |
 | 5 · Percorso tecnico | In caso di accesso straniero coercitivo protetto solo dal percorso tecnico completo; questo non cambia SOV-2 o il livello totale SEAL. Un servizio che deve elaborare dati leggibili non ha questo percorso. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Sovranità strategica
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Dipendenza a livello del consiglio di amministrazione (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Uscita in caso di modifica della proprietà (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Determinazione del livello
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Regole applicate e eventuali limitazioni | … |
 | Principale ragione, rischio e ID della scoperta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Sovranità giuridica e giurisdizionale
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Contestazione Richieste Straniere (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Legittimità dei Dati (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Determinazione del livello
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Applicazione delle regole 0 e 4 e eventuali limitazioni | … |
 | Principale ragione, rischio e ID della scoperta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Sovranità dei dati e dell'intelligenza artificiale
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Cancellazione Definitiva (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Accesso Supporto Gestito (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Determinazione del livello
@@ -336,7 +325,6 @@ standards: SAFARI@0.9, ECSF
 
 Here's the translated Markdown slide blocks from Dutch to professional Italian for an assurance auditor, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Sovranità operativa
@@ -368,7 +356,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | 4.5 · Subappaltatori sostituibili (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Uscita realistica (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Determinazione del livello
@@ -393,7 +380,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Regole applicate e eventuali limitazioni | … |
 | Principale ragione, rischio e ID della scoperta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Sovranità a catena
@@ -425,7 +411,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | 5.5 · Subappaltatori e clausola di modifica (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Audit diritti subappaltatori (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Determinazione del livello
@@ -450,7 +435,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Applicazione della regola 5 e eventuali limitazioni | … |
 | Principale ragione, rischio e ID della scoperta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Sovranità tecnologica
@@ -482,7 +466,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | 6.5 · Stack documentato (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Migrazione testata (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Determinazione del livello
@@ -507,7 +490,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Applicazione di regola 5 e eventuali limitazioni | … |
 | Principale ragione, rischio e ID della scoperta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Sovranità di sicurezza e conformità
@@ -539,7 +521,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | 7.5 · Diritti di audit realizzabili (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · Conformità GDPR procedura di segnalazione (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Determinazione del livello
@@ -564,7 +545,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Regole applicate e eventuali limitazioni | … |
 | Principale ragione, rischio e ID della scoperta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Sostenibilità, sovranità
@@ -596,7 +576,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | 8.5 · Materie prime critiche valutate (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD o rapporto volontario (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Determinazione del livello
@@ -621,13 +600,11 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Regole applicate e eventuali limitazioni | … |
 | Principale ragione, rischio e ID della scoperta | … |
 ---
-
 <!-- _class: section -->
 
 # Conclusione e parere di garanzia
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legittimità per tipo di dati · Riga 0
@@ -640,7 +617,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Dati del settore regolamentato | NIS2, DORA o norme specifiche di settore | … | Sostanziato/rischio | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Esposizione a ordini legali · Regola 4
@@ -709,7 +685,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Risolvibile internamente | … |
 | Richiesta di collaborazione del fornitore | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Posizione CADA indicativa
@@ -724,7 +699,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Testo obbligatorio | Indicazione in base alla proposta; nessun giudizio sulla conformità. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Valutazione della garanzia per target
@@ -746,7 +720,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | Certezza limitata | Tutte le domande critiche almeno 2; non tutte almeno 3 | Sulla base delle nostre attività, non ci risultano elementi che suggeriscano che [affermazione] sia falsa. Forniamo un livello di certezza limitato. |
 | Certezza ragionevole | Tutte le domande critiche almeno 3 | Sulla base delle nostre attività, riteniamo che [affermazione]. Forniamo un livello di certezza ragionevole. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Risultati e raccomandazioni
@@ -758,7 +731,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Italian f
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Controllo qualità ed eventi successivi alla data di riferimento

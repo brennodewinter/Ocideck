@@ -7,7 +7,6 @@ title: Оцінювання SAFARI цифрового суверенітету
 language: uk
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Оцінювання SAFARI цифрового суверенітету
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Застосовуйте шість правил оцінювання перед визначенням рівня для кожної мети SOV.
 - Сформулюйте висновок про запевнення та події після дати огляду лише після оцінки контролю якості та подій після дати огляду.
 ---
-
 <!-- _class: table table-editable -->
 
 # Команда управління документами та залучення
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Безпека та відповідність | Так | 2 | … | … |
 | SOV-8 | Стійкість | Так | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Підхід до впевненості
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Достатньо відповідні докази очікуються | … | Так / ні |
 | Рішення про прийняття | Тільки якщо всі критерії «так» | Прийняти / не прийняти |
 ---
-
 <!-- _class: table -->
 
 # Рівні доказів
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Незалежні докази | Зібрано або підтверджено незалежною перевіряючою стороною |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Центральний реєстр доказів
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Законний порядок | Якщо застосовний іноземний контроль та відсутня незалежна правова процедура або можливість повідомлення, 2.3, 2.5 і 2.6 вважаються доказами 0; SOV-2 не більше 1, а SOV-1 також, якщо тут знаходиться контроль. |
 | 5 · Технічний маршрут | Якщо застосовний іноземний контроль захищає лише повний технічний маршрут; це не змінює SOV-2 і SEAL загалом. Послуга, яка повинна обробляти читані дані, не має цього маршруту. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Стратегічний суверенітет
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Залежність на рівні правління (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Вихід при зміні власності (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Визначення рівня
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Застосовані правила та будь-які обмеження | … |
 | Найважливіша причина, ризик та ідентифікатор виявлення | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Правовий і юрисдикційний суверенітет
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Оскарження запитів іноземних юрисдикцій (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Законність даних щодо кожного виду (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Визначення рівня
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Застосування правил 0 та 4 та будь-які обмеження | … |
 | Найважливіша причина, ризик та ідентифікатор виявлення | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Суверенітет даних і ШІ
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Дострокове видалення даних (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Забезпечено доступ до підтримки (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Визначення рівня
@@ -335,7 +324,6 @@ standards: SAFARI@0.9, ECSF
 | Найважливіша причина, ризик та ідентифікатор виявлення | … |
 Here's the translated Markdown slide blocks from Dutch into professional Ukrainian for an assurance auditor, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Операційний суверенітет
@@ -367,7 +355,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | 4.5 · Замінні підрядники (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Реалістичний вихід (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Визначення рівня
@@ -392,7 +379,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Застосовані правила та будь-які обмеження | … |
 | Найважливіша причина, ризик та ID виявлення | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Суверенітет ланцюга
@@ -424,7 +410,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | 5.5 · Підрядники та узгодження змін (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Права на аудит для підрядників (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Визначення рівня
@@ -449,7 +434,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Застосування правила 5 та будь-які обмеження | … |
 | Найважливіша причина, ризик та ID виявлення | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Технологічний суверенітет
@@ -481,7 +465,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | 6.5 · Задокументований стек (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Протестована міграція до альтернативи (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Визначення рівня
@@ -506,7 +489,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Застосування правила 5 та будь-які обмеження | … |
 | Найважливіша причина, ризик та ідентифікатор виявлення | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Суверенітет безпеки та відповідності
@@ -538,7 +520,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | 7.5 · Реалізовані права на аудит (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · Відповідність GDPR процедура повідомлення (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Визначення рівня
@@ -563,7 +544,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Застосоване правило та будь-які обмеження | … |
 | Найважливіша причина, ризик та ідентифікатор виявлення | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Суверенітет сталого розвитку
@@ -595,7 +575,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | 8.5 · Оцінена залежність від критичних матеріалів (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · Звітність CSRD або добровільна (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Визначення рівня
@@ -620,13 +599,11 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Застосоване правило та будь-які обмеження | … |
 | Найважливіша причина, ризик та ідентифікатор виявлення | … |
 ---
-
 <!-- _class: section -->
 
 # Висновок і впевненість
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Законність за типом даних · Рядок 0
@@ -639,7 +616,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Дані регульованого сектора | Правила NIS2, DORA або сектору | … | Обґрунтовано / ризик | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Вплив законних розпоряджень · Правило 4
@@ -708,7 +684,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Можливе вирішення внутрішньо | … |
 | Потребує співпраці постачальника | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Орієнтовна позиція CADA
@@ -723,7 +698,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Обов'язкове формулювання | Зазначення на основі пропозиції; відсутність оцінки відповідності. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Оцінка надійності для кожної цілі
@@ -745,7 +719,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | Обмежена впевненість | Усі критичні питання мінімум 2; не всі мінімум 3 | На основі наших робіт не виявилося жодних доказів того, що [твердження] не є правильним. Ми надаємо обмежений рівень впевненості. |
 | Раціональна впевненість | Усі критичні питання мінімум 3 | На основі наших робіт ми вважаємо, що [твердження]. Ми надаємо раціональний рівень впевненості. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Висновки та рекомендації
@@ -757,7 +730,6 @@ Here's the translated Markdown slide blocks from Dutch into professional Ukraini
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Контроль якості та події після контрольної дати

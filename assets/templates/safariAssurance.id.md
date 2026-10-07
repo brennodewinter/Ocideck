@@ -7,7 +7,6 @@ title: Penilaian SAFARI kedaulatan digital
 language: id
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Penilaian SAFARI kedaulatan digital
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Terapkan enam aturan penilaian sebelum menentukan tingkat untuk setiap tujuan SOV.
 - Rumuskan opini jaminan hanya setelah kontrol kualitas dan peristiwa pasca tanggal tolok ukur dievaluasi.
 ---
-
 <!-- _class: table table-editable -->
 
 # Tim manajemen dan keterlibatan dokumen
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Keamanan dan Kepatuhan | Ya | 2 | … | … |
 | SOV-8 | Keberlanjutan | Ya | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Pendekatan jaminan
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Bukti yang cukup diperkirakan tersedia | … | Ya / tidak |
 | Keputusan validasi | Hanya melanjutkan jika semua kriteria "ya" | Menerima / tidak menerima |
 ---
-
 <!-- _class: table -->
 
 # Tingkat bukti
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Bukti independen | Dikumpulkan atau diverifikasi oleh pihak peninjau independen |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Daftar bukti pusat
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Perintah yang berlaku | Jika perintah dapat ditegakkan dan tidak ada jalur hukum independen atau mekanisme pelaporan yang tersedia, 2.3, 2.5, dan 2.6 dianggap sebagai bukti 0; SOV-2 maksimum 1, dan SOV-1 juga jika otoritas diberikan. |
 | 5 · Rute teknis | Jika perintah dapat ditegakkan secara asing, hanya rute teknis lengkap yang melindungi; ini tidak mengubah SOV-2 atau total SEAL. Layanan yang perlu memproses data yang dapat dibaca tidak memiliki rute ini. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Kedaulatan strategis
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Ketergantungan pada papan (Jenis 2+ | … | … | … | L/M/H · J/O/S |
 | 1.6 · Keluar jika terjadi perubahan kepemilikan (Jenis 2+ | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Penentuan level
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Aturan yang diterapkan dan pembatasan apa pun | … |
 | Alasan utama, risiko, dan ID temuan | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Kedaulatan hukum dan yurisdiksi
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Menantang permintaan hukum asing (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Legalitas data menurut jenis (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Penentuan level
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Penerapan aturan 0 dan 4 dan pembatasan apa pun | … |
 | Alasan utama, risiko, dan ID temuan | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Kedaulatan Data dan AI
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Penghapusan data definitif (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Akses dukungan yang dikendalikan (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Penentuan level
@@ -335,7 +324,6 @@ standards: SAFARI@0.9, ECSF
 | Alasan utama, risiko, dan ID temuan | … |
 Here's the translated Markdown slide blocks from Dutch to professional Indonesian, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Kedaulatan operasional
@@ -367,7 +355,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | 4.5 · Kontraktor sub utama yang dapat diganti (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Keluar yang realistis (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Penentuan level
@@ -392,7 +379,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Aturan yang diterapkan dan pembatasan apa pun | … |
 | Alasan utama, risiko, dan ID temuan | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Rantai kedaulatan
@@ -424,7 +410,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | 5.5 · Subkontraktor dan klausul perubahan (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Hak audit subkontraktor (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Penentuan level
@@ -449,7 +434,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Penerapan aturan 5 dan pembatasan apa pun | … |
 | Alasan utama, risiko, dan ID temuan | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Kedaulatan teknologi
@@ -481,7 +465,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | 6.5 · Tumpukan yang didokumentasikan (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Pengujian migrasi ke alternatif (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Penentuan level
@@ -506,7 +489,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Penerapan aturan 5 dan pembatasan yang mungkin | … |
 | Alasan utama, risiko, dan ID temuan | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Kedaulatan Keamanan dan Kepatuhan
@@ -538,7 +520,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | 7.5 · Hak audit yang dapat dilaksanakan secara praktis (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · Kepatuhan AVG prosedur pelaporan (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Penentuan level
@@ -563,7 +544,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Aturan yang diterapkan dan pembatasan yang mungkin | … |
 | Alasan utama, risiko, dan ID temuan | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Kedaulatan Keberlanjutan
@@ -595,7 +575,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | 8.5 · Bahan kritis dinilai (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · Pelaporan CSRD atau sukarela (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Penentuan level
@@ -620,13 +599,11 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Aturan yang diterapkan dan pembatasan yang mungkin | … |
 | Alasan utama, risiko, dan ID temuan | … |
 ---
-
 <!-- _class: section -->
 
 # Pendapat kesimpulan dan jaminan
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legalitas per tipe data · Baris 0
@@ -639,7 +616,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Data sektor yang diatur | NIS2, DORA, atau aturan khusus sektor | … | Dibuktikan / berisiko | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Paparan terhadap Perintah Hukum · Aturan 4
@@ -708,7 +684,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Dapat Diselesaikan Secara Internal | … |
 | Kerjasama Pemasok Diperlukan | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Indikatif posisi CADA
@@ -723,7 +698,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Kata-kata yang wajib | Indikasi berdasarkan proposal; tidak ada penilaian atas kesesuaian. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Penilaian jaminan per target
@@ -745,7 +719,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | Kepastian Terbatas | Semua pertanyaan kritis minimal 2; tidak semua minimal 3 | Berdasarkan kegiatan kami, tidak ada bukti yang menunjukkan bahwa [klaim] tidak benar. Kami memberikan tingkat kepastian terbatas. |
 | Kepastian Wajar | Semua pertanyaan kritis minimal 3 | Berdasarkan kegiatan kami, kami berpendapat bahwa [klaim]. Kami memberikan tingkat kepastian yang wajar. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Temuan dan rekomendasi
@@ -757,7 +730,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Indonesia
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kontrol kualitas dan kejadian setelah tanggal referensi

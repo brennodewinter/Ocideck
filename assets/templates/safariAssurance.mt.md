@@ -7,7 +7,6 @@ title: Valutazzjoni SAFARI tas-sovranità diġitali
 language: mt
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Valutazzjoni SAFARI tas-sovranità diġitali
@@ -81,7 +80,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Sigurtà u konformità | Iċ-ċert | 2 | … | … |
 | SOV-8 | Sostenibilità | Iċ-ċert | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # A approċċ ta' assigurazzjoni
@@ -112,7 +110,6 @@ standards: SAFARI@0.9, ECSF
 | Provvista biż-żermajja biż-żermajja hija mistennija | … | Iċ-ċert / mhux iċ-ċert |
 | Uffiċċju ta' konklużjoni | Saqas biss jista' jkun kontinwanti b'kull kriterju 'iċ-ċert' | Ikkunsidra / ma konsegwi xejn |
 ---
-
 <!-- _class: table -->
 
 # Livelli ta' evidenza
@@ -126,7 +123,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Evidenza indipendenti | Miġbura jew verifikata minn parti indipendenti tal-ittestjar |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Reġistru ċentrali tal-evidenza
@@ -152,7 +148,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Ordni ta’ provvista | F’kundizzjonijiet ta’ forza obblattiva u mingħajr ġurisprensjoni indipendenti jew opportunità ta’ rapport, 2.3, 2.5 u 2.6 huma mistoqsijiet ta’ provvista 0; SOV-2 huwa massimu 1, u SOV-1 ukoll jekk is-suvera tkun ilha |
 | 5 · Ruta teknika | F’kundizzjonijiet ta’ forza obblattiva barra l-eżerżż ta’ protezzjoni, saħħa u l-vja teknika kollha huma garantiti; id-servizz li jista’ jilħaq data li jista’ jintlaqqa’ ma jkollu din il-vja. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Is-sovranità strateġika
@@ -184,7 +179,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Dipendenza fil-livell tas-sodda (O·2+) | … | … | … | G.Ż/M.IŻ/S.IŻ |
 | 1.6 · Użu wara li s-seħħ it-tibdil fil-proprjetà (O·2+) | … | … | … | G.Ż/M.IŻ/S.IŻ |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Determinazzjoni tal-livell
@@ -209,7 +203,6 @@ standards: SAFARI@0.9, ECSF
 | Regoli u kwalunkwe limitazzjoni applikata | … |
 | Rakkomenda, risk u ID ta’ skoperament | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Is-sovranità legali u ġurisdizzjonali
@@ -250,7 +243,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Wettaq il-Richisti Barranġati (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Trattament tal-Data bbażat fuq il-Leġislazzjoni (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Determinazzjoni tal-livell
@@ -275,7 +267,6 @@ standards: SAFARI@0.9, ECSF
 | Applikazzjoni ta’ regoli 0 u 4 u kwalunkwe limitazzjoni | … |
 | Rakkomenda, risk u ID ta’ skoperament | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Is-sovranità tad-dejta u l-AI
@@ -307,7 +298,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Rimdiet Definittiv tal-Dati (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Aċċess ta’ Support Regolat (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Determinazzjoni tal-livell
@@ -333,7 +323,6 @@ standards: SAFARI@0.9, ECSF
 | Rakkomenda, risk u ID ta’ skoperament | … |
 Here's the translated Markdown slide blocks from Dutch to professional Maltese, preserving all markers, identifiers, numbers, `…`, URLs, SAFARI, ECSF, ISO 27001:2022, ISAE 3000 and CC BY-SA 4.0 exactly.
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Is-sovranità operattiva
@@ -365,7 +354,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | 4.5 · Sussidjarji li jaqbelu (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · ħu ħwija realistiċi (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Determinazzjoni tal-livell
@@ -390,7 +378,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Regoli u kwalunkwe limitazzjoni applikati | … |
 | Rakkomenda, riskju u ID ta’ finding ewlieni | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Is-sovranità tal-katina
@@ -422,7 +409,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | 5.5 · Sussidjarji u klausa ta’ kontraenti (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Dritti ta’ audit għas-sussidjarji kontra kontraenti (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Determinazzjoni tal-livell
@@ -447,7 +433,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Regoli u kwalunkwe limitazzjoni applikati | … |
 | Rakkomenda, riskju u ID ta’ finding ewlieni | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Is-sovranità teknoloġika
@@ -479,7 +464,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | 6.5 · Stack dokumentat (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Migrazzjoni alternattiva testata (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Determinazzjoni tal-livell
@@ -504,7 +488,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Applikazzjoni tar-Regola 5 u kwalunkwe limitazzjoni | … |
 | Rakkomenda u risku u ID tal-ittestazzjoni | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Is-Sovranità tas-Sigurtà u l-Konformità
@@ -559,7 +542,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Applikazzjoni tar-Regola 5 u kwalunkwe limitazzjoni | … |
 | Rakkomenda u risku u ID tal-ittestazzjoni | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Sostenibbiltà Sovranità
@@ -591,7 +573,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | 8.5 · Materjali kritiċi evalwati (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD jew rapport volontarju (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Determinazzjoni tal-livell
@@ -616,13 +597,11 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Applikazzjoni tar-Regola 5 u kwalunkwe limitazzjoni | … |
 | Rakkomenda u risku u ID tal-ittestazzjoni | … |
 ---
-
 <!-- _class: section -->
 
 # Opinjoni ta' konklużjoni u ta' assigurazzjoni
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Leġittimità għal kull tip ta' dejta · Linja 0
@@ -635,7 +614,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Dejta tas-settur regolat | NIS2, DORA jew regoli speċifiċi għas-settur | … | Sostanzjat / riskju | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Espożizzjoni għal Ordnijiet Legali · Regola 4
@@ -704,7 +682,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Jistax jiġi solvi internament | … |
 | Jeħtieġa kooperazzjoni tal-fornitur | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Pożizzjoni CADA indikattiva
@@ -719,7 +696,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Formula obbligatorja | Indikazzjoni bbażata fuq il-proposta; ebda ġudizzju dwar il-konformità. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Valutazzjoni ta' assigurazzjoni għal kull mira
@@ -741,7 +717,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | Ċertifikazzjoni limitata | Kull mistoqsija kritika minimu 2; mhemmx mistoqsijiet minimi 3 | Bbażata fuq il-provvista tagħna ta’ xogħol, ma konjignajna ħuġa li tkun żbalja [stqarriġ]. Nagħti ċertifikazzjoni limitata. |
 | Ċertifikazzjoni razzjonali | Kull mistoqsija kritika minimu 3 | Bbażata fuq il-provvista tagħna ta’ xogħol, aħdemna naqbel li [stqarriġ]. Nagħti ċertifikazzjoni razzjonali. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Sejbiet u rakkomandazzjonijiet
@@ -753,7 +728,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Maltese, 
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kontroll tal-kwalità u avvenimenti wara d-data ta' referenza

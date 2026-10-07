@@ -7,7 +7,6 @@ title: SAFARI skaitmeninio suvereniteto vertinimas
 language: lt
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI skaitmeninio suvereniteto vertinimas
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Taikykite šešis įvertinimo kriterijus prieš nustatant lygį kiekvienam SOV tikslui.
 - Formuluokite užtikrinimo išvadą tik po kokybės patikros ir įvykių po pagrindinio laikrodžio įvertinimo.
 ---
-
 <!-- _class: table table-editable -->
 
 # Dokumentų valdymo ir priskyrimo komanda
@@ -112,7 +110,6 @@ standards: SAFARI@0.9, ECSF
 | Pakankamai tinkama įrodymų medžiaga numatoma būtų galima įsigyti | … | Ta / ne |
 | Užimtumo sprendimas | Tiesiog tęstina tik esant visiems kriterijams "ta" | Pritemdyti / atsisakyti |
 ---
-
 <!-- _class: table -->
 
 # Įrodymų lygiai
@@ -126,7 +123,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Nepriklausomi įrodymai | Surinko arba patikrino nepriklausoma bandomoji šalis |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Centrinis įrodymų registras
@@ -152,7 +148,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Veikianti teisė | Jei įsiteisiusios priverčiamų įvykių ir nepriklausomos teismo procedūros ar pranešimo galimybės, 2.3, 2.5 ir 2.6 skirstomi kaip įrodymai 0; SOV-2 yra maksimalus 1, ir SOV-1 taip pat, jei kontrolė yra ten. |
 | 5 · Techninis maršrutas | Jei įsiteisiusios užsienio prieigos, apsaugo tik visą techninį maršrutą; tai neprideda SOV-2 ir nekeičia SEAL bendro lygio. Paslauga, kuri turi apdoroti duomenis, neturi šio maršruto. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strateginis suverenitetas
@@ -184,7 +179,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Priklausomybė vykdančiųjų taryboje (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Išeities scenarijus dėl savininkų keities (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Lygio nustatymas
@@ -209,7 +203,6 @@ standards: SAFARI@0.9, ECSF
 | Taikomos taisyklės ir galimos ribos | … |
 | Pagrindinė priežastis, rizika ir rado ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Teisinis ir jurisdikcinis suverenitetas
@@ -250,7 +243,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Ginčai dėl užsienio prašymų (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Duomenų rūšies teisėtumas (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Lygio nustatymas
@@ -275,7 +267,6 @@ standards: SAFARI@0.9, ECSF
 | Reguliavimo taisyklių 0 ir 4 taikymas ir galimi apribojimai | … |
 | Pagrindinė priežastis, rizika ir rado ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Duomenų ir AI suverenitetas
@@ -330,7 +321,6 @@ standards: SAFARI@0.9, ECSF
 | Reguliavimo taisyklių 0 ir 5 taikymas ir galimi apribojimai | … |
 | Pagrindinė priežastis, rizika ir rado ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Veiklos suverenitetas
@@ -362,7 +352,6 @@ standards: SAFARI@0.9, ECSF
 | 4.5 · Keičiami kontrahentai (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realus išeikimas (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Lygio nustatymas
@@ -387,7 +376,6 @@ standards: SAFARI@0.9, ECSF
 | Taikomos taisyklės ir galimos ribos | … |
 | Pagrindinė priežastis, rizika ir radimo ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Grandinės suverenitetas
@@ -419,7 +407,6 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Padalintai tiekėjai ir pokyčių pranešimai (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Padalintų tiekėjų audito teisės (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Lygio nustatymas
@@ -444,7 +431,6 @@ standards: SAFARI@0.9, ECSF
 | Tartybos taikymas ir apribojimai | … |
 | Pagrindinė priežastis, rizika ir rėšio ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Technologinis suverenitetas
@@ -476,7 +462,6 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Dokumentuota staklių sistema (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Išbandyta migracija į alternatyvą (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Lygio nustatymas
@@ -501,7 +486,6 @@ standards: SAFARI@0.9, ECSF
 | Bendra taisyklių 5 taikymas ir galimi apribojimai | … |
 | Pagrindinė priežastis, rizika ir rado ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Saugumas ir atitikties suverenitetas
@@ -533,7 +517,6 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Praktiškai įmanomi patikslinimo teisės (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · AVG atitkunima pranešimo procedura (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Lygio nustatymas
@@ -558,7 +541,6 @@ standards: SAFARI@0.9, ECSF
 | Taikomos taisyklės ir galimi apribojimai | … |
 | Pagrindinė priežastis, rizika ir rado ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Tvarumo suverenitetas
@@ -590,7 +572,6 @@ standards: SAFARI@0.9, ECSF
 | 8.5 · Kritinės žaliųjų spalvų priklausomybė įvertinta (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD arba savanoriška ataskaita (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Lygio nustatymas
@@ -615,13 +596,11 @@ standards: SAFARI@0.9, ECSF
 | Naudoti taisyklės ir galimos ribos | … |
 | Pagrindinė priežastis, rizika ir išvados ID | … |
 ---
-
 <!-- _class: section -->
 
 # Išvada ir patikinimo nuomonė
 
 ---
-
 <!-- _class: table table-editable -->
 
 #  Teisėtumas pagal duomenų tipą · 0 eilutė
@@ -634,7 +613,6 @@ standards: SAFARI@0.9, ECSF
 | Reguliuojami sektoriaus duomenys | NIS2, DORA arba sektoriui būdingas taisykles | … | Pagrįsta / rizika | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Teisinių nurodymų poveikis · 4 taisyklė
@@ -703,7 +681,6 @@ standards: SAFARI@0.9, ECSF
 | Įmanoma ištaisyti vidiniu būdu | … |
 | Reikia tiekėjo bendradarbiavimo | … |
 ---
-
 <!-- _class: table table-editable -->
 
 #  Orientacinė CADA padėtis
@@ -718,7 +695,6 @@ standards: SAFARI@0.9, ECSF
 | Privaloma formuluotė | Nurodymas remiantis pasiūlymu; jokio sprendimo dėl atitikties. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Užtikrinimo įvertinimas vienam tikslui
@@ -740,7 +716,6 @@ standards: SAFARI@0.9, ECSF
 | Ribota tikslumo | Visi kritiniai klausimai mažiausiai 2; ne visi mažiausiai 3 | Remiantis mūsų veiksmų rezultatais, mums nebuvo įrodyta, kad [teisvinamoji deklaracija] būtų netiesa. Mes suteikiame ribotą tikslumo lygį. |
 | Ribota tikslumo | Visi kritiniai klausimai mažiausiai 3 | Remiantis mūsų veiksmų rezultatais, mes laikome, kad [teisvinamoji deklaracija]. Mes suteikiame ribotą tikslumo lygį. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Išvados ir rekomendacijos
@@ -752,7 +727,6 @@ standards: SAFARI@0.9, ECSF
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kokybės kontrolė ir įvykiai po atskaitos datos

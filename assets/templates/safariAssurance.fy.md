@@ -7,7 +7,6 @@ title: SAFARI-beoardieling digitale soevereiniteit
 language: fy
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI-beoardieling digitale soevereiniteit
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Pas de seis scoringsregels tawenden as it nivo per SOV-doel feroerset.
 - Formulearret it assurance-oordeel pas nei it beoardieling fan de kwaliteitscontrole en gebeurtenissen nei de peildatum.
 ---
-
 <!-- _class: table table-editable -->
 
 # Dokumintbehear en belutsenensteam
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Beveiliging en compliance | Ja | 2 | … | … |
 | SOV-8 | Duurzaamheid | Ja | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance-oanpak
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Voldoende geschikt bewijs is naar verwachting beschikbaar | … | Ja / nee |
 | Acceptatiebesluit | Alleen doorgaan bij alle criteria 'ja' | Accepteren / niet accepteren |
 ---
-
 <!-- _class: table -->
 
 # Bewiisnivo's
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Unôfhinklik bewiis | Samle of ferifiearre troch in ûnôfhinklike beoardielingspartij |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Sintraal bewiisregister
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Werkende rechtsorde | Bij afdwingbare dwang en geen onafhankelijke rechtsgang of meldmogelijkheid tellen 2.3, 2.5 en 2.6 als bewijs 0; SOV-2 is maximaal 1, en SOV-1 ook als de zeggenschap daar ligt. |
 | 5 · Technische route | Bij afdwingbare buitenlandse toegang beschermt alleen de volledige technische route; die verandert SOV-2 en het SEAL-totaal niet. Een dienst die leesbare data moet verwerken heeft deze route niet. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strategyske soevereiniteit
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Afhankelijkheid op boardniveau (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Exit bij eigendomswijziging (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Nivobepaling
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Toepanne fan regels en eventuele begrenzing | … |
 | Belangrijkste reden, risico en bevinding-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Juridyske en jurisdiksjonele soevereiniteit
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Buitenlands verzoek betwisten (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Rechtmatigheid per gegevenssoort (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Nivobepaling
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Toepanne fan regels 0 en 4 en eventuele begrenzing | … |
 | Belangrijkste reden, risico en bevinding-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Gegevens en AI-sûvereiniteit
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Definityf ferwiarden fan data (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Behearste supporttoegang (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Nivobepaling
@@ -336,7 +325,6 @@ standards: SAFARI@0.9, ECSF
 
 Here's the translation of the Markdown slide blocks from Dutch to professional West Frisian, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operasjonele soevereiniteit
@@ -368,7 +356,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | 4.5 · Vervangbere onderaannemers (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistische eksit (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Nivobepaling
@@ -393,7 +380,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | Toepaste regels en eventuele begrenzing | … |
 | Belangrijkste reden, risiko en befining-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Kettingsûvereiniteit
@@ -425,7 +411,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | 5.5 · Subleverantoren en wijingingsmelding (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditrechten subleverantoren (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Nivobepaling
@@ -450,7 +435,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | Toepasje fan regel 5 en eventuele begrenzing | … |
 | Belangrijkste reden, risiko en befining-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Technologyske soevereiniteit
@@ -482,7 +466,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | 6.5 · Dokumenteerde stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Geteste migraasje nei alternatyf (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Nivobepaling
@@ -507,7 +490,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | Toepassing fan regel 5 en eventuele begrenzing | … |
 | Belangrijkste reden, risico en bevinding-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Sûvereiniteit foar feiligens en neilibjen
@@ -539,7 +521,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | 7.5 · Praktysk útfierbere auditrechten (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · AVG-conforme meldprocedure (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Nivobepaling
@@ -564,7 +545,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | Toegepaste regels en eventuele begrenzing | … |
 | Belangrijkste reden, risico en bevinding-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Suvereiniteit fan duorsumens
@@ -596,7 +576,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | 8.5 · Kritike grondstoffen beoordeeld (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD of vrijwillige rapportage (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Nivobepaling
@@ -621,13 +600,11 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | Toegepaste regels en eventuele begrenzing | … |
 | Belangrijkste reden, risico en bevinding-ID | … |
 ---
-
 <!-- _class: section -->
 
 # Konklúzje en advys oer garânsje
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Letaliteit per gegevenstype · Rigel 0
@@ -640,7 +617,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | Regelearre sektorgegevens | NIS2, DORA of sektor-spesifike regels | … | Befêstige / risiko | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Blootstelling oan juridyske oarders · Regel 4
@@ -709,7 +685,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | Intern oplosbaar | … |
 | Leverandier medewerking fereasket | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Yndikative CADA-posysje
@@ -724,7 +699,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 |  Ferplichte formulearring | Yndikaasje basearre op it foarstel; gjin oardiel oer konformiteit. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance-oardiel per doel
@@ -746,7 +720,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | Beperre sekerheid | Alle kritike freget saerdeelik 2; net alle saerdeelik 3 | Fan ús wurkenheden is ús neat gebleaun dat [bewering] oarsprong wûn. We jaan in beperre mate fan sekerheid. |
 | Redelijke sekerheid | Alle kritike freget saerdeelik 3 | Fan ús wurkenheden bin we oerliede dat [bewering]. We jaan in redelike mate fan sekerheid. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Befinings en oanbefellings
@@ -758,7 +731,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional W
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kwaliteitskontrôle en eveneminten nei referinsjedatum

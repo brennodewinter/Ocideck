@@ -248,10 +248,81 @@ List<int> slidesWithUnresolvedSafariFields(Deck deck) {
         bracketPlaceholder.hasMatch(text);
   }
 
-  return [
+  final blocked = <int>{
     for (var i = 0; i < deck.slides.length; i++)
       if (deck.slides[i].tableEditable &&
           deck.slides[i].tableRows.skip(1).expand((row) => row).any(unresolved))
         i + 1,
-  ];
+    ..._invalidSafariScoreSlides(deck),
+  };
+  return blocked.toList()..sort();
 }
+
+Set<int> _invalidSafariScoreSlides(Deck deck) {
+  final scores = <int>[];
+  int? scoreSlide;
+  int? totalSlide;
+  String? sealValue;
+  String? ecsfValue;
+  for (var i = 0; i < deck.slides.length; i++) {
+    for (final row in deck.slides[i].tableRows.skip(1)) {
+      if (row.length >= 4 &&
+          RegExp(r'^SOV-[1-8]$').hasMatch(row[0]) &&
+          row[1].endsWith('%')) {
+        scoreSlide = i + 1;
+        final established = int.tryParse(row[2]);
+        final evidence = int.tryParse(row[3]);
+        if (established == null ||
+            evidence == null ||
+            established < 0 ||
+            established > 4 ||
+            evidence < established ||
+            evidence > 4) {
+          scores.add(-1);
+        } else {
+          scores.add(established);
+        }
+      }
+      if (row.length < 2) continue;
+      if (row[0].contains('SEAL')) {
+        totalSlide = i + 1;
+        sealValue = row[1];
+      }
+      if (row[0].contains('ECSF')) {
+        totalSlide = i + 1;
+        ecsfValue = row[1];
+      }
+    }
+  }
+  if (scoreSlide == null) return const {};
+  final invalid = <int>{};
+  if (scores.length != 8 || scores.any((score) => score < 0)) {
+    invalid.add(scoreSlide);
+  }
+  if (totalSlide == null ||
+      scores.length != 8 ||
+      scores.any((score) => score < 0)) {
+    invalid.add(totalSlide ?? scoreSlide);
+    return invalid;
+  }
+  final seal = int.tryParse(sealValue?.trim() ?? '');
+  final ecsf = double.tryParse(
+    (ecsfValue ?? '').replaceAll('%', '').replaceAll(',', '.').trim(),
+  );
+  const weights = [15, 10, 10, 15, 20, 15, 10, 5];
+  final expectedEcsf = List.generate(
+    8,
+    (i) => scores[i] * weights[i] / 4,
+  ).reduce((a, b) => a + b);
+  if (seal != scores.reduce((a, b) => a < b ? a : b) ||
+      ecsf == null ||
+      (ecsf - expectedEcsf).abs() > 0.05) {
+    invalid.add(totalSlide);
+  }
+  return invalid;
+}
+
+List<int> slidesBlockingSealForDeck(Deck deck) => ({
+  ...slidesWithUnreviewedAiMarkers(deck),
+  ...slidesWithUnresolvedSafariFields(deck),
+}.toList()..sort());

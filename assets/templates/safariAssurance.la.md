@@ -51,6 +51,8 @@ standards: SAFARI@0.9, ECSF
 | Exceptio explicata cum justificatione | … |
 | Versio quadri partis | SAFARI v0.9 (conceptus; methodicus liber voluntatis) |
 ---
+<!-- _class: table table-editable -->
+
 # Declaration Organismi
 
 | Pars | Inscriptio |
@@ -62,6 +64,8 @@ standards: SAFARI@0.9, ECSF
 | Reservation | Resultatum fundatur in probationibus praesentibus per diem; mutationes effectum mutare possunt. |
 | Proprietas et Confirmatio Formalis | … |
 ---
+<!-- _class: table table-editable -->
+
 # Gradus Optimi et Finis Cardinalis
 
 | Codex | Finis | Finis Cardinalis | Minimum Praescriptum | Optime | Justificatio deviationis |
@@ -75,6 +79,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Securitas et Conformitas | Iam | 2 | … | … |
 | SOV-8 | Sustainability | Iam | 1 | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Methodus Assurantis
 
 | Pars | Optionem et Justificationem |
@@ -88,6 +94,8 @@ standards: SAFARI@0.9, ECSF
 | Autonomia et Conflictus Interestuum | … |
 | Impedimenta ad Accessum vel Opera | … |
 ---
+<!-- _class: table table-editable -->
+
 # Acceptatio Commissionis Assurantis Formalis
 
 | Criterium Acceptationis | Valutatio et Fontes | Eventus |
@@ -100,6 +108,8 @@ standards: SAFARI@0.9, ECSF
 | Praeterea proba apta exspectatur | … | Iuvat/Nihil |
 | Decisio acceptationis | Solum continuo si omnia criteriis “iuvat” | Accipere/Non Accipere |
 ---
+<!-- _class: table -->
+
 # Gradus Probatum
 
 | Gradus | Nomen | Applicationes |
@@ -110,6 +120,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Proba technica | Configurationem, logum, experimentum vel consilium iurisdicendi externum quod a contractante acquisitum est |
 | 4 | Proba libera | Collectum vel verificatum a parte examinatoria libera |
 ---
+<!-- _class: table table-editable -->
+
 # Registrum Centralis Probatum
 
 | ID Fontis | Documentum vel Registratio | Proprietarius | Dies et Versio | Origine | Integritas et Ubicatio Custodiae |
@@ -119,6 +131,8 @@ standards: SAFARI@0.9, ECSF
 | B-003 | … | … | … | … | … |
 | B-004 | … | … | … | … | … |
 ---
+<!-- _class: table -->
+
 # Regulae Scorings Vinculantes
 
 | Regula | Eventus pro Iudicio |
@@ -172,6 +186,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Administratio | Gubernatio Europaea separata et coercibila; potentia extra Europam valde restricta | 3 |
 | 4 | Imperium Strategicum | Durable Europae integratus; dependetia explicit ponderata in consilia | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-1 · Conclusio Principalis
 
 | Fundamentum pro Gradu Centrali | Implicatio |
@@ -181,6 +197,8 @@ standards: SAFARI@0.9, ECSF
 | Regulae Applicatae et Eventuale Limitatio | … |
 | Causa Principalis, Risus et ID Inventio | … |
 ---
+<!-- _class: section -->
+
 # SOV-2 · Soberania Iuris et Potestas Legalis
 ---
 <!-- _class: table -->
@@ -204,6 +222,8 @@ standards: SAFARI@0.9, ECSF
 | 2.4 · O·2+ | Estne Codex Fontis Escrow et sub Quibus Conditionibus est Accessus ad Ille? | Pactum Escrow, Declaratione Notaria |
 | 2.5 · O·2+ | Suntne Ius Contractus Effectivamente Potestesse Exigere apud Iudicem Europaeum in Unione? | Consilium Iuris, Analysis Contractus |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-2 · Observatio et Probatium
 
 | Quaestio · Typus/Min. | Observatio Factiva | Identificatio Fontis | Probatium 0-4 | Implicatio / Periculum |
@@ -216,6 +236,8 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Petitiō Publica Contestatio (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Ius Rationis per Species Data (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-2 · Gradus Determinatio
 
 | Gradus | Nomen | Caracteristica | Minimum Probatium |
@@ -226,6 +248,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Administratio Praxi | Procedura contestationis et custodia instaurata et demonstrabiliter efficax | 3 |
 | 4 | Effectiva Repraesentationis | Iura effectiva et reprehensibilia et iura extra territoria periodiciter examinata | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-2 · Conclusio Finis
 
 | Fundamentum pro Gradu Centrali Tabulæ | Impletio |
@@ -330,6 +354,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Significans Controllo | Actores Europaei operationem dirigunt; accessus supportus Europaeus est, logatus et permissus; exitus realis | Tres |
 | 4 | In Controllo | Completum operationem Europaeam sine dependentiis non Europaeis criticis | Quattuor |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-4 · Conclusio Centralis
 
 | Fundamentum pro gradu centrali chartae | Implicatio |
@@ -339,8 +365,12 @@ standards: SAFARI@0.9, ECSF
 | Regulae applicatae et eventus limitandi | … |
 | Causa primaria, riscus et ID inventarii | … |
 ---
+<!-- _class: section -->
+
 # SOV-5 · Autonomiae Retis
 ---
+<!-- _class: table -->
+
 # SOV-5 · Quaestiones Examinandae
 
 | Quaestio · Typus/Min. | Quaestio Examinandi | Probatio Exigenda |
@@ -352,6 +382,8 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · K·2+ | Sunt omnes sub-providores nota et est mutatio contractu regenda? | Inventarium sub-providorum, clausula contractus |
 | 5.6 · O·2+ | Sunt iura auditum pro sub-providore contractu fixata? | Clausulae contractus, reportationes auditum |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Inventa et Probatio
 
 | Quaestio · Typus/Min. | Inventio Facta | ID Fontis | Probatio 0-4 | Impactus / Rexus |
@@ -363,6 +395,8 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Sub-providores et mutatio contractu (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Iura auditum sub-providore (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Confirmatio Nivium
 
 | Gradus | Nomen | Caracteres | Minimum Probatio |
@@ -373,6 +407,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Effectus Significans | Coniuncta Critica Discreta; Updates Verificabilia; Catena Constructi et Signatura Notata | Tres |
 | 4 | Transparantia et Control | Transparantia Completa sine Dependentiis Non Europae Criticis | Quattuor |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Conclusio Centralis
 
 | Fundamentum pro Gradu Centrali | Implicatio |
@@ -399,6 +435,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · O·1+ | Estne Totus Stack Documentatus, Cum Componentibus Closed et Alternativis? | Architectura, Registrum Componentium |
 | 6.6 · O·2+ | Estne Migratio ad Alternativum Realistica et Testata? | Test Migratio, Strategia Exitus, Analysi Alternativorum |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Observatio et Probabilia
 
 | Quaestio · Species/Minimun | Observatio Factiva | Identificatio Fontis | Probabilis 0-4 | Implicatio / Periculum |
@@ -410,6 +448,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Stacks documentata (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Migratio ad alternativum probata (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Gradatio Determinatio
 
 | Gradus | Nomen | Caracter | Minimum Probabilis |
@@ -420,6 +460,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Autonomus Significans | Substitutio probata est et software criticum est inspectabile per audit vel open source | 3 |
 | 4 | In Control | Plena potentia super integrationem et normas sine dependentiis clausis criticis | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Conclusio Principalis
 
 | Fundamentum pro gradu centrali tabulæ | Impletio |
@@ -433,6 +475,8 @@ standards: SAFARI@0.9, ECSF
 
 # SOV-7 · Imperium et Concordia Normativa
 ---
+<!-- _class: table -->
+
 # SOV-7 · Interrogatioes
 
 | Vraes · typus/min. | Interrogatio | Exigit probatio |
@@ -444,6 +488,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · K·2+ | Sunt iura auditalia praxi facta, includente accessum ad systema et loga? | Ius auditale contractuum, raportum auditum factum |
 | 7.6 · O·2+ | Est procedura reportandi incidentum databasi et incidentum AVG-conformis et manifesta instituta? | Plan incidentis, pactum negotiatoris, registratio reportandi |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Observationes et Probationes
 
 | Vraes · typus/min. | Observatio facta | ID Fontis | Probatio 0-4 | Periculum/Implicatio |
@@ -455,6 +501,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Iura auditalia praxi facta (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · AVG-conformis procedura reportandi (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Determinatio Gradus
 
 | Gradus | Nomen | Caracteres | Min. Probatio |
@@ -465,6 +513,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Operationes Europae | Operationes securitatis Europae sunt efficaces et auditibus independentibus possibiles | 3 |
 | 4 | In Control | Plena potentia super monitoriam, responsa incidentum, patching et observatio | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Conclusio Centrata
 
 | Fundamentum pro gradu centrali chartae | Involutiones |
@@ -516,6 +566,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Influens | Influens EU in fonte energia et circuli systema | 3 |
 | 4 | Perpetua | Perpetua, transparentia et EU-ancora cum monitoria structura | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-8 · Conclusio Principalis
 
 | Fundamentum pro Gradu Centrali in Tabula | Implicatio |
@@ -525,10 +577,14 @@ standards: SAFARI@0.9, ECSF
 | Regulae Applicatae et Eventuale Limitatio | … |
 | Causa Principalis, Risus et ID Inventio | … |
 ---
+<!-- _class: section -->
+
 # Conclusio et Iudicium Assurantis
 ---
-latin
 <!-- _class: table table-editable -->
+
+latin
+
 
 # Iuris Validitas per Species Datae · Regulamentum 0
 
@@ -539,12 +595,16 @@ latin
 | Informationes Gubernationales vel Cryptae | Regulamenta Nationa et EU Applicabilia | … | Fundatum / periculum | … |
 | Data Sectoris Regulati | NIS2, DORA vel Regulamenta Sectoralia | … | Fundatum / periculum | … |
 ---
+<!-- _class: table table-editable -->
+
 | Particeps et Ius Rationis | Potestatem Gubernationem Imperare? | Processus Iure Independentis? | Iubeatur Notae Beneficiarii? | Effectus in Evidensia et Gradu |
 | --- | --- | --- | --- | --- |
 | … | Ita / Nolite / Incertum | Ita / Nolite / Incertum | Ita / Nolite / Incertum | … |
 | … | … | … | … | … |
 | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Regula 4 · Exitus obligatorius
 
 | Condicio vel consequentia | Determinatio et index fontis |
@@ -556,6 +616,8 @@ latin
 | If control resides in that legal order, then SOV-1 is also maximum level 1 | Applied / n.v.t.: … |
 | Expositio residua | … |
 ---
+<!-- _class: table table-editable -->
+
 # Via technica · Regula 5
 
 | Condicio | Exitus et index fontis |
@@ -568,6 +630,8 @@ latin
 | All conditions fulfilled together | Only ‘yes’ if all preceding outcomes are positive: … |
 | Consequence | Can support Rule 0; does not change SOV-2 or the SEAL total level. |
 ---
+<!-- _class: table table-editable -->
+
 # Tabula aestimationis SAFARI
 
 | Code | Weight | Determined 0-4 | Evidence 0-4 | Judgment against chosen norm | Source Target Conclusion |
@@ -581,6 +645,8 @@ latin
 | SOV-7 | 10% | … | … | Meets / gap / n.v.t. | … |
 | SOV-8 | 5% | … | … | Meets / gap / n.v.t. | … |
 ---
+<!-- _class: table table-editable -->
+
 # Total Outcome
 
 | Pars | Exitus et iustificatio |
@@ -594,6 +660,8 @@ latin
 | Internally Solvable | … |
 | Cooperatio praebitoris necessaria | … |
 ---
+<!-- _class: table table-editable -->
+
 # Indicatrum CADA
 
 | Pars | Eventus et ID Fontis |
@@ -605,6 +673,8 @@ latin
 | Impedimentum Probatorii | … |
 | Formula Obligatoria | Indicatio ex propositione; nihil iudicii de conformitate. |
 ---
+<!-- _class: table table-editable -->
+
 # Iudicium Assurantis per Finem
 
 | Finis | Probatio Quaestionum Criticorum | Risus Legitimitatis | Species Iudicii | Formula et Praemunire |
@@ -633,6 +703,8 @@ latin
 | F-02 | … | … | … | … | … | … |
 | F-03 | … | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Controllo Qualitatis et Eventus Post Datum Fundamenti
 
 | Instrumentum | Resultatum et Referentia Examineris |
@@ -646,6 +718,8 @@ latin
 | Eventus post Datum Fundamenti iudicati sunt | … |
 | Dissensiones apertae ex insight processus | … |
 ---
+<!-- _class: table table-editable -->
+
 # Confirmatio Assertionis ab Organo
 
 | Confirmatio | Impletio |
@@ -655,6 +729,8 @@ latin
 | Dies | … |
 | Concordantia | Ista / Nosta |
 ---
+<!-- _class: table table-editable -->
+
 # Review Qualitatis Independentis
 
 | Review | Impletio |

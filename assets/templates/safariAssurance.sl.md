@@ -36,6 +36,8 @@ standards: SAFARI@0.9, ECSF
 | Verzija poročila in datum | … |
 | Razvrstitev TLP in seznam distribucije | … |
 ---
+<!-- _class: table table-editable -->
+
 # Objekti in obseg
 
 | Obseg komponenta | Uvedba |
@@ -49,6 +51,8 @@ standards: SAFARI@0.9, ECSF
 | Eksplicitni izključenji z obrazložitvijo | … |
 | Različica normativnega ogrodja | SAFARI v0.9 (predlog; prostovoljna metodologija) |
 ---
+<!-- _class: table table-editable -->
+
 # Organizacijevo trditev
 
 | Komponenta | Uvedbni tekst |
@@ -60,6 +64,8 @@ standards: SAFARI@0.9, ECSF
 | Opozorilo | Rezultat je temeljil na razpoložljivih pričujočih podatkih; spremembe lahko vplivajo na rezultat. |
 | Vlastnik in uradna potrditev | … |
 ---
+<!-- _class: table table-editable -->
+
 # Želeni nivoji in ključni cilji
 
 | Koda | Cilj | Ključni cilj | Priporočljiva minimalna raven | Želeno | Razlaga odstopanja |
@@ -73,6 +79,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Varnost in skladnost | Da | 2 | … | … |
 | SOV-8 | Učakano | Da | 1 | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Poudarni pristop
 
 | Komponenta | Izbira in utemeljitev |
@@ -178,6 +186,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Uravnavanje | EU-upravljanje je ločeno in izvedljivo; vpliv zunaj EU je močno omejen | 3 |
 | 4 | Strategična avtonomija | Trdno vpeto v Evropo; odvisnost je eksplicitno ocenjena v vodstveni odločitvi | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-1 · Končna sklepnost
 
 | Utemeljitev za osrednjo lestnico | Izpeljava |
@@ -212,6 +222,8 @@ standards: SAFARI@0.9, ECSF
 | 2.4 · O·2+ | Ali obstaja escrow kode in pod katerimi pogoji je dostopen? | Skupnost escrow, notarizirana izjava |
 | 2.5 · O·2+ | Ali lahko pogodbenih pravic učinkovito uveljavljamo pri EU-sodišču? | Pravno mnenje, analiza pogodbe |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-2 · Ugotki in dokazovanje
 
 | Vprašanje · tip/min. | Stvarne ugotovljene stvari | ID vire | Dokaz 0-4 | Vpliv/tveganje |
@@ -224,6 +236,8 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Pritožbe glede na zahtevo tujine (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Pravilnost glede na podatkovni tip (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-2 · Ocena ravni
 
 | Raven | Oznaka | Lastnosti | Minimalni dokaz |
@@ -234,6 +248,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Uresničitev upravnega nadzora | Postopek za ugovarjanje in escrow so bili vzpostavljeni in dokazano izvedljivi | 3 |
 | 4 | Učinkovito uveljavljanje | Pravice so učinkovito uveljavljene in ekstraterritorialna tveganja se redno preverjajo | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-2 · Osrednja sklepčnost
 
 | Osnova za osrednjo meritev | Izpolnitev |
@@ -419,6 +435,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · O·1+ | Je celotna zgradba dokumentirana, vključno s komponentami in alternativami? | Arhitektura, register komponent |
 | 6.6 · O·2+ | Je migracija v alternativno možnost realistična in testirana? | Test migracije, načrt za izstop, analiza alternativ |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Ugotovke in doktrina
 
 | Vprašanje · tip/min. | Stvarno ugotovanje | ID vire | Dokaz 0-4 | Vpliv/tveganje |
@@ -430,6 +448,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Dokumentirana veriga (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testirana migracija na alternativno (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Ravnovesje
 
 | Raven | Etimetka | Lastnosti | Minimalni dokaz |
@@ -440,6 +460,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Pomembno samostojno | Nadomestljivost je bila preizkušena in kritična programska oprema je preverljiva s preverjalno ali odprto kodo | 3 |
 | 4 | Pod kontroli | Popolna kontrola nad integracijo in standardi brez kritičnih zaprtih odvisnosti | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Ciljna sklepčnost
 
 | Osnova za osrednjo meritev | Urejevalna |
@@ -544,6 +566,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Vpliv | Pomemben vpliv EU na vir energije in krožno verigo | 3 |
 | 4 | Trdna trajnost | Popolnoma trdna, pregledna in EU zakoreninila z strukturiranim spremljanjem | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-8 · Konkluziven zaključek
 
 | Utemeljitev za osrednjo lestvico ocen | Izpeljava |
@@ -553,8 +577,12 @@ standards: SAFARI@0.9, ECSF
 | Uporabljene pravila in morebitne omejitve | … |
 | Ključni razlog, tveganje in ID najdenine | … |
 ---
+<!-- _class: section -->
+
 # Zaključek in zagotovitvena ocena
 ---
+<!-- _class: table table-editable -->
+
 # Pravilnost po vrstah podatkov · Pravilo 0
 
 | Vrsta podatkov | Ugotovitveno ogrodje | Utemeljitev in identifikator virov | Izid | Povezan SOV-cilj |
@@ -564,6 +592,8 @@ standards: SAFARI@0.9, ECSF
 | Vlade ali tematizirane informacije | Ustreznih nacionalnih in EU-pravil | … | Ugotovljeno / tveganje | … |
 | Regulirane sektorne podatke | NIS2, DORA ali sektorne predpise | … | Ugotovljeno / tveganje | … |
 ---
+<!-- _class: table table-editable -->
+
 # Izpostavljenost pravnim določbam · Pravilo 4
 
 | Stranka in pravna veja | Lahko vlada naloži? | Neodvisna sodna poteka? | Je dovoljena obvestitev stranki? | Posledica za dokazilo in raven |
@@ -572,6 +602,8 @@ standards: SAFARI@0.9, ECSF
 | … | … | … | … | … |
 | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Pravilo 4 · Obvezni izhod
 
 | Predpostavka ali posledica | Ugotavljanje in ID vire |
@@ -583,6 +615,8 @@ standards: SAFARI@0.9, ECSF
 | Če je v tej pravni državi prisoten vpliv, je tudi SOV-1 največ nivo 1 | Uporabljeno / n.v.t.: … |
 | Ostanek izpostavljenosti | … |
 ---
+<!-- _class: table table-editable -->
+
 # Strokovni pot · Pravilo 5
 
 | Predpostavka | Izid in ID vire |
@@ -595,6 +629,8 @@ standards: SAFARI@0.9, ECSF
 | Vsi pogoji združeni so izpolnjeni | Samo 'da', če so vsi prejšnji izidi pozitivni: … |
 | Posledica | Lahko podpira Pravilo 0; ne spremeni SOV-2 in raven celotnega SEAL-a. |
 ---
+<!-- _class: table table-editable -->
+
 # SAFARI-scoreboard
 
 | Koda | Teža | Ugotovljeno 0-4 | Dokaz 0-4 | Sodba glede na izbrano standardno | Vir ciljne ugotovitve |
@@ -608,6 +644,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | 10% | … | … | Uporabno / prazna / n.v.t. | … |
 | SOV-8 | 5% | … | … | Uporabno / prazna / n.v.t. | … |
 ---
+<!-- _class: table table-editable -->
+
 # Skupni izhod
 
 | Komponenta | Izid in utemeljitev |
@@ -621,6 +659,8 @@ standards: SAFARI@0.9, ECSF
 | Rešljivo znotraj | … |
 | Potrebna sodelovanja dobavitelja | … |
 ---
+<!-- _class: table table-editable -->
+
 # Predvidena CADA-pozicija
 
 | Komponenta | Rezultat in izvorna ID |
@@ -632,6 +672,8 @@ standards: SAFARI@0.9, ECSF
 | Omejevanje dokazil | … |
 | Obvezna formulacija | Predlog za smernice; ni mnenja o skladnosti. |
 ---
+<!-- _class: table table-editable -->
+
 # Povzemanje ocen izjava po cilju
 
 | Cilj | Dokazovalne kritične vprašanja | Pravilnostno tveganje | Tip ocenjevanja | Formulacija in opozorilo |

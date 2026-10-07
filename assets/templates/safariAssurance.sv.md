@@ -7,7 +7,6 @@ title: SAFARI-bedömning av digital suveränitet
 language: sv
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI-bedömning av digital suveränitet
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Tillämpa de sex bedömningsreglerna innan du fastställer nivån för varje SOV-mål.
 - Formulera assurancebedömningen först efter att kvalitetskontrollen och händelserna efter referensdatum har utvärderats.
 ---
-
 <!-- _class: table table-editable -->
 
 # Dokumenthantering och uppdragsteam
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Säkerhet och efterlevnad | Ja | 2 | … | … |
 | SOV-8 | Hållbarhet | Ja | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Aförsäkran
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Tillräckligt lämpligt bevis förväntas vara tillgängligt | … | Ja / nej |
 | Godkännandebeslut | Endast fortsättning om alla kriterier är "ja" | Acceptera / inte acceptera |
 ---
-
 <!-- _class: table -->
 
 #  Bevisnivåer
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Oberoende bevis |  Samlas in eller verifieras av en oberoende testpart |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Centralt bevisregister
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Fungerande lagordning | Vid avdrivbar utomlandsåtkomst skyddar endast den fullständiga tekniska rutten; det förändrar inte SOV-2 och SEAL-totalt. En tjänst som måste bearbeta läsbar data har inte denna rutt. |
 | 5 · Teknisk rutt | Vid avdrivbar utomlandsåtkomst skyddar endast den fullständiga tekniska rutten; det förändrar inte SOV-2 och SEAL-totalt. En tjänst som måste bearbeta läsbar data har inte denna rutt. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strategisk suveränitet
@@ -185,7 +179,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Beroende på styrelsen (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Exit vid ägandeförändring (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Nivåbestämning
@@ -210,7 +203,6 @@ standards: SAFARI@0.9, ECSF
 | Tillämpade regler och eventuell begränsning | … |
 | Viktigaste anledning, risk och fynd-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Juridisk suveränitet och jurisdiktion
@@ -251,7 +243,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Bestrid utländsk förfrågan (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Lagligheten av data (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Nivåbestämning
@@ -276,7 +267,6 @@ standards: SAFARI@0.9, ECSF
 | Tillämpning av regler 0 och 4 och eventuell begränsning | … |
 | Viktigaste anledning, risk och fynd-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Data- och AI-suveränitet
@@ -308,7 +298,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Definitiv radering (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Hanterad supportåtkomst (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Nivåbestämning
@@ -335,7 +324,6 @@ standards: SAFARI@0.9, ECSF
 
 Here's the translated Markdown slide blocks from Dutch to professional Swedish, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operativ suveränitet
@@ -367,7 +355,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | 4.5 · Ersättningsbara underleverantörer (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistisk utfasning (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Nivåbestämning
@@ -392,7 +379,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Användning av regel 5 och eventuell begränsning | … |
 | Viktigaste anledningen, risk och funn-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Kedjesuveränitet
@@ -424,7 +410,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | 5.5 · Underleverantörer och ändringsmeddelande (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Revisionsrättigheter underleverantörer (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Nivåbestämning
@@ -449,7 +434,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Användning av regel 5 och eventuell begränsning | … |
 | Viktigaste anledningen, risk och funn-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Teknisk suveränitet
@@ -481,7 +465,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | 6.5 · Dokumenterad stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testad migrering till alternativ (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Nivåbestämning
@@ -506,7 +489,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Tillämpning av regel 5 och eventuell begränsning | … |
 | Viktigaste anledning, risk och fynd-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Säkerhet och efterlevnadssuveränitet
@@ -538,7 +520,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | 7.5 · Praktiskt genomförbara revisionsrättigheter (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · GDPR-kompatibel rapporteringsprocess (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Nivåbestämning
@@ -563,7 +544,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Tillämpade regler och eventuell begränsning | … |
 | Viktigaste anledning, risk och fynd-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Suveränitet för hållbarhet
@@ -595,7 +575,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | 8.5 · Bedömt kritiska råvaror (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD eller frivillig rapportering (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Nivåbestämning
@@ -620,13 +599,11 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Tillämpade regler och eventuell begränsning | … |
 | Viktigaste anledning, risk och fynd-ID | … |
 ---
-
 <!-- _class: section -->
 
 #  Slutsats och bekräftelseutlåtande
 
 ---
-
 <!-- _class: table table-editable -->
 
 #  Legitimitet per datatyp · Rad 0
@@ -639,7 +616,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Reglade sektordata | NIS2, DORA eller sektorspecifika regler | … | Bestyrkt / risk | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Exponering för juridiska order · Regel 4
@@ -708,7 +684,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Intern löslighet | … |
 | Leverantörs samarbete krävs | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Indikativ CADA-position
@@ -723,7 +698,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Obligatorisk formulering | Indikation baserad på förslaget; ingen bedömning av överensstämmelse. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurancebedömning per mål
@@ -745,7 +719,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | Begränsad säkerhet | Alla kritiska frågor minst 2; inte alla minst 3 | Baserat på våra aktiviteter har vi inget som tyder på att [påstående] inte skulle vara sant. Vi ger en begränsad grad av säkerhet. |
 | Rimlig säkerhet | Alla kritiska frågor minst 3 | Baserat på våra aktiviteter anser vi att [påstående]. Vi ger en rimlig grad av säkerhet. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Fynd och rekommendationer
@@ -757,7 +730,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Swedish, 
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kvalitetskontroll och händelser efter referensdatum

@@ -7,7 +7,6 @@ title: SAFARI digital sovereignty assessment
 language: en
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI digital sovereignty assessment
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Apply the six scoring rules before setting the level for each SOV objective.
 - Formulate the assurance opinion only after quality control and post-date events have been assessed.
 ---
-
 <!-- _class: table table-editable -->
 
 # Document management and engagement team
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Security and Compliance | Yes | 2 | … | … |
 | SOV-8 | Sustainability | Yes | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance approach
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Sufficient suitable evidence is expected to be available | … | Yes / No |
 | Acceptance decision | Only proceed if all criteria ‘yes’ | Accept / Reject |
 ---
-
 <!-- _class: table -->
 
 # Levels of evidence
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Independent evidence | Collected or verified by an independent reviewing party |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Central evidence register
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Binding Legal Order | If an enforceable foreign access is protected only by the full technical route; this does not change SOV-2 or the SEAL total. A service that needs to process readable data does not have this route. |
 | 5 · Technical Route | If an enforceable foreign access is protected only by the full technical route; this does not change SOV-2 or the SEAL total. A service that needs to process readable data does not have this route. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strategic sovereignty
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Dependence on board level (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Exit on ownership change (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Level determination
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Applied rules and any limitations | … |
 | Key reason, risk and finding ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Legal and jurisdictional sovereignty
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Challenge foreign requests (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Legality of data types (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Level determination
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Application of rules 0 and 4 and any limitations | … |
 | Key reason, risk and finding ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Data and AI Sovereignty
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Permanent deletion (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Regulated support access (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Level determination
@@ -334,7 +323,6 @@ standards: SAFARI@0.9, ECSF
 | Application of rules 0 and 5 and any limitations | … |
 | Key reason, risk and finding ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operational sovereignty
@@ -366,7 +354,6 @@ standards: SAFARI@0.9, ECSF
 | 4.5 · Vervangbare onderaannemers (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistische exit (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Level determination
@@ -391,7 +378,6 @@ standards: SAFARI@0.9, ECSF
 | Toepassing van regel 5 en eventuele begrenzing | … |
 | Belangrijkste reden, risico en bevinding-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Chain sovereignty
@@ -423,7 +409,6 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Subleveranciers en wijzigingsmelding (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditrechten subleveranciers (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Level determination
@@ -448,7 +433,6 @@ standards: SAFARI@0.9, ECSF
 | Toepassing van regel 5 en eventuele begrenzing | … |
 | Belangrijkste reden, risico en bevinding-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Technological sovereignty
@@ -480,7 +464,6 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Gedocumenteerde stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Geteste migratie naar alternatief (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Level determination
@@ -505,7 +488,6 @@ standards: SAFARI@0.9, ECSF
 | Application of Rule 5 and any limitations | … |
 | Key reason, risk, and finding ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Security and Compliance Sovereignty
@@ -537,7 +519,6 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Practically executable audit rights (C·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · GDPR-compliant reporting procedure (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Level determination
@@ -562,7 +543,6 @@ standards: SAFARI@0.9, ECSF
 | Applied rules and any limitations | … |
 | Key reason, risk, and finding ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Sustainability Sovereignty
@@ -594,7 +574,6 @@ standards: SAFARI@0.9, ECSF
 | 8.5 · Critical raw materials assessed (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD or voluntary reporting (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Level determination
@@ -619,13 +598,11 @@ standards: SAFARI@0.9, ECSF
 | Applied rules and any limitations | … |
 | Key reason, risk, and finding ID | … |
 ---
-
 <!-- _class: section -->
 
 # Conclusion and assurance opinion
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legality per data type · Line 0
@@ -638,7 +615,6 @@ standards: SAFARI@0.9, ECSF
 | Regulated sector data | NIS2, DORA or sector-specific rules | … | Substantiated / risk | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Exposure to Legal Orders · Rule 4
@@ -707,7 +683,6 @@ standards: SAFARI@0.9, ECSF
 | Solvable Internally | … |
 | Supplier Cooperation Required | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Indicative CADA position
@@ -722,7 +697,6 @@ standards: SAFARI@0.9, ECSF
 | Mandatory wording | Indication based on the proposal; no judgment on conformity. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance assessment per target
@@ -744,7 +718,6 @@ standards: SAFARI@0.9, ECSF
 | Limited Certainty | All critical questions at least 2; not all at least 3 | Based on our work, we have found no evidence that [assertion] is incorrect. We provide a limited degree of certainty. |
 | Reasonable Certainty | All critical questions at least 3 | Based on our work, we consider that [assertion]. We provide a reasonable degree of certainty. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Findings and recommendations
@@ -756,7 +729,6 @@ standards: SAFARI@0.9, ECSF
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Quality control and events after reference date

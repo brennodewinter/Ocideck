@@ -8,7 +8,6 @@ Hodnocení digitální suverenity
 language: cs
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Hodnocení SAFARI digitální suverenity
@@ -22,7 +21,6 @@ standards: SAFARI@0.9, ECSF
 - Aplikuji šest bodových pravidel před stanovením úrovně pro každé SOV cíle.
 - Formuluji ujišťovací stanovisko až poté, co jsou vyhodnoceny kontroly kvality a události po referenčním datu.
 ---
-
 <!-- _class: table table-editable -->
 
 #  Tým správy dokumentů a přiřazení
@@ -84,7 +82,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Bezpečnost a soulad | Ano | 2 | … | … |
 | SOV-8 | Udržitelnost | Ano | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Abezpečnostní přístup
@@ -115,7 +112,6 @@ standards: SAFARI@0.9, ECSF
 | Dostatečně vhodný důkaz je očekáván | … | Ano / ne |
 | Rozhodnutí o přijetí | Pouze pokračovat, pokud jsou všechna kritéria „ano“ | Akceptovat / zamítnout |
 ---
-
 <!-- _class: table -->
 
 # Úrovně důkazů
@@ -129,7 +125,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Nezávislé důkazy | Shromážděno nebo ověřeno nezávislou testovací stranou |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Centrální evidence evidence
@@ -155,7 +150,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Platná právní řád | Pokud je vynutitelný cizí přístup a není nezávislý právní proces nebo možnost hlášení, počítají 2.3, 2.5 a 2.6 jako důkazy 0; SOV-2 je maximálně 1, a SOV-1 také, pokud je zde kontrola. |
 | 5 · Technický průchod | Pokud je vynutitelný cizí přístup, chrání pouze celý technický průchod; to nezmění SOV-2 a celkovou úroveň SEAL. Služba, která musí zpracovávat čitelné data, nemá tento průchod. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strategická suverenita
@@ -210,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Použitá pravidla a případné omezení | … |
 | Hlavní důvod, riziko a ID nálezu | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Právní a jurisdikční suverenita
@@ -251,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Zpochybnění zahraničních požadavků (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Legalita dat dle typu (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Stanovení hladiny
@@ -276,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Použití pravidel 0 a 4 a případné omezení | … |
 | Hlavní důvod, riziko a ID nálezu | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Suverenita dat a umělé inteligence
@@ -308,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Definitivní odstranění dat (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Řízený přístup k podpoře (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Stanovení hladiny
@@ -334,12 +324,13 @@ standards: SAFARI@0.9, ECSF
 | Hlavní důvod, riziko a ID nálezu | … |
 Here's the translated block content, preserving all markers and formatting as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Provozní suverenita
 
 ---
+<!-- _class: table -->
+
 # SOV-4 · Testovací otázky
 
 | Otázka · typ/min. | Testovací otázka | Požadované důkazy |
@@ -351,6 +342,8 @@ Here's the translated block content, preserving all markers and formatting as re
 | 4.5 · O·1+ | Jsou kritičtí subdodavatelé známí a realisticky nahraditelní? | Seznam subdodavatelů, analýza alternativ |
 | 4.6 · O·2+ | Existuje scénář ukončení činnosti s realistickým časem přechodu a náklady? | Strategie ukončení, migrační business case |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-4 · Zjištění a důkazy
 
 | Otázka · typ/min. | Faktické zjištění | Identifikátor zdroje | Důkaz 0-4 | Dopad / riziko |
@@ -362,7 +355,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | 4.5 · Nahraditelní subdodavatelé (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistické ukončení (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Stanovení hladiny
@@ -376,6 +368,8 @@ Here's the translated block content, preserving all markers and formatting as re
 | 4 | In ovládání | Plný provoz v EU bez kritických závislostí mimo EU | 4 |
 
 ---
+<!-- _class: table table-editable -->
+
 # SOV-4 · Cílový závěr
 
 | Podklad pro centrální scorecard | Implementace |
@@ -385,12 +379,13 @@ Here's the translated block content, preserving all markers and formatting as re
 | Použitá pravidla a případné omezení | … |
 | Hlavní důvod, riziko a identifikátor zjištění | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Suverenita řetězu
 
 ---
+<!-- _class: table -->
+
 # SOV-5 · Testovací otázky
 
 | Otázka · typ/min. | Testovací otázka | Požadované důkazy |
@@ -402,6 +397,8 @@ Here's the translated block content, preserving all markers and formatting as re
 | 5.5 · K·2+ | Jsou všichni subdodavatelé známí a změnové oznámení je smlouvou upraveno? | Seznam subdodavatelů, klauzule smlouvy |
 | 5.6 · O·2+ | Jsou auditní práva pro subdodavatele smlouvou zajištěna? | Smluvní klauzule, auditní zprávy |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Zjištění a důkazy
 
 | Otázka · typ/min. | Faktické zjištění | Identifikátor zdroje | Důkaz 0-4 | Dopad / riziko |
@@ -413,7 +410,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | 5.5 · Subdodavatelé a změnové oznámení (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditní práva subdodavatelů (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Stanovení hladiny
@@ -427,6 +423,8 @@ Here's the translated block content, preserving all markers and formatting as re
 | 4 | Transparentní a pod kontrolou | Plná transparentnost bez kritických závislostí mimo EU | 4 |
 
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Cílový závěr
 
 | Podklad pro centrální scorecard | Implementace |
@@ -436,12 +434,13 @@ Here's the translated block content, preserving all markers and formatting as re
 | Použití pravidla 5 a případné omezení | … |
 | Hlavní důvod, riziko a identifikátor zjištění | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Technologická suverenita
 
 ---
+<!-- _class: table -->
+
 # SOV-6 · Testovací otázky
 
 | Otázka · typ/min. | Testovací otázka | Požadované důkazy |
@@ -453,6 +452,8 @@ Here's the translated block content, preserving all markers and formatting as re
 | 6.5 · O·1+ | Je dokumentován celý stack, včetně uzavřených komponent a alternativ? | Architektura, rejstřík komponent |
 | 6.6 · O·2+ | Je migrace na alternativu realistická a testována? | Test migrace, strategie ukončení, analýza alternativ |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Zjištění a důkazy
 
 | Otázka · typ/min. | Faktické zjištění | Identifikátor zdroje | Důkaz 0-4 | Dopad / riziko |
@@ -464,7 +465,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | 6.5 · Dokumentovaný stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testovaná migrace na alternativu (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Stanovení hladiny
@@ -489,7 +489,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | Aplikace pravidla 5 a případné omezení | … |
 | Klíčový důvod, riziko a ID nálezu | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Suverenita zabezpečení a dodržování předpisů
@@ -544,7 +543,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | Použitá pravidla a případné omezení | … |
 | Klíčový důvod, riziko a ID nálezu | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Suverenita udržitelnosti
@@ -576,7 +574,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | 8.5 · Kritické suroviny hodnoceny (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD nebo dobrovolný report (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Stanovení hladiny
@@ -601,7 +598,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | Použitá pravidla a případné omezení | … |
 | Klíčový důvod, riziko a ID nálezu | … |
 ---
-
 <!-- _class: section -->
 
 # Závěr a ujištění
@@ -618,7 +614,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | Vládní nebo citlivé informace | Relevantní národní a EU předpisy | … | Podložené / riziko | … |
 | Regulované sektorové údaje | NIS2, DORA nebo sektorově specifické předpisy | … | Podložené / riziko | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Vystavení právním příkazům · Pravidlo 4
@@ -687,7 +682,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | Možné řešení interně | … |
 | Souhlas dodavatele vyžadován | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Indikativní pozice CADA
@@ -702,7 +696,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | Povinná formulace | Indikace na základě návrhu; žádné posouzení shody. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Ahodnocení jistoty na cíl
@@ -724,7 +717,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | Omezená jistota | Všechny kritické otázky minimálně 2; ne všechny minimálně 3 | Na základě našich činností se nám nepodařilo zjistit, že [tvrdba] by mohla být nepravdivá. Poskytujeme omezenou úroveň jistoty. |
 | Rozumná jistota | Všechny kritické otázky minimálně 3 | Na základě našich činností jsme dospěli k závěru, že [tvrdba]. Poskytujeme rozumnou úroveň jistoty. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Zjištění a doporučení
@@ -736,7 +728,6 @@ Here's the translated block content, preserving all markers and formatting as re
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kontrola kvality a události po referenčním datu

@@ -7,7 +7,6 @@ title: SAFARI-Bewärtig vo dr digitale Souveränität
 language: gsw
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI-Bewärtig vo dr digitale Souveränität
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Passt die sechs Scoringsregeln an, bevor man das Niveau pro SOV-Ziel feststellt.
 - Formuliert das Assurance-Urteil erst, nachdem die Qualitätskontrolle und Ereignisse nach der Peildatum beurteilt wurden.
 ---
-
 <!-- _class: table table-editable -->
 
 # Dokumentenverwaltungs- und Zuweisungsteam
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Sicherheit und Compliance | Ja | 2 | … | … |
 | SOV-8 | Nachhaltigkeit | Ja | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance-Ansatz
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Ausreichend geeignet Beweis ist nach Erwartung verfügbar | … | Ja / nee |
 | Akzeptabeschluss | Nur fortsetzen bei allen Kriterien 'ja' | Akzeptieren / nicht akzeptieren |
 ---
-
 <!-- _class: table -->
 
 # Evidenzstufen
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 |  Unabhängige Beweise | Von einer unabhängigen Prüfstelle gesammelt oder verifiziert |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Zentrales Beweisregister
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Werksordnungsverfassung | Bei abdingbarer Zwang und keine unabhängige Rechtsgang oder Meldmoglichkeit zählen 2.3, 2.5 und 2.6 als Beweis 0; SOV-2 ist maximal 1, und SOV-1 auch als die Zeggenschap da liegt. |
 | 5 · Technische Route | Bei abdingbarer ausländische Zugang geschützt nur die vollständige technische Route; die ändert SOV-2 und das SEAL-Totaal nicht. Ein Dienst, der lesbare Daten muss verarbeiten hat diese Route nicht. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strategische Souveränität
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Abhängigkeit auf Boardniveau (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Exit bei Eigentumsänderung (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Pegelbestimmung
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Ufsetzdi Regle und Eventuell Begrenzung | … |
 | Wichtigschte Grund, Risiko und Findig-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Rechtliche und gerichtliche Souveränität
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Buitenlands verzoek betwisten (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Rechtmatigheid per gegevenssoort (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Pegelbestimmung
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Ufsetzdi Regle 0 und 4 und Eventuell Begrenzung | … |
 | Wichtigschte Grund, Risiko und Findig-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Daten- und KI-Souveränität
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Definitiv Verwyderung (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Beherste Supportaazugang (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Pegelbestimmung
@@ -336,7 +325,6 @@ standards: SAFARI@0.9, ECSF
 
 Here's the translation of the Markdown slide blocks from Dutch to professional Swiss German, preserving all markers, identifiers, numbers, `…`, URLs, SAFARI, ECSF, ISO 27001:2022, ISAE 3000 and CC BY-SA 4.0 exactly.
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operative Souveränität
@@ -368,7 +356,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | 4.5 · Vervèrlasbare Underanèzièri (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistisch Exit (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Pegelbestimmung
@@ -393,7 +380,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Toepazung vo de Regle und eventuèli Begrenzung | … |
 | Belangrichsti Rèason, Risiko und Bevindig-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Kettensouveränität
@@ -425,7 +411,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | 5.5 · Sublevèrarzièri und Wijigungsmeldung (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditrechta subleverarzièri (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Pegelbestimmung
@@ -450,7 +435,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Toepazung vo de Regle 5 und eventuèli Begrenzung | … |
 | Belangrichsti Rèason, Risiko und Bevindig-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Technologische Souveränität
@@ -482,7 +466,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | 6.5 · G'dokumentèrierte Stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · G'testete Migrazion na Alternativ (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Pegelbestimmung
@@ -507,7 +490,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Applikazio vo Regel 5 und eventuali Begrenzung | … |
 | Wichtigschti Grund, Risiko und Bevinds-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Sicherheit und Compliance-Souveränität
@@ -539,7 +521,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | 7.5 · Praktisch uitvoerbare Auditrechte (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · AVG-conforme Meldprocedure (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Pegelbestimmung
@@ -564,7 +545,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Toegepasst di Regle und eventuali Begrenzung | … |
 | Wichtigschti Grund, Risiko und Bevinds-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Nachhaltigkeitssouveränität
@@ -596,7 +576,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | 8.5 · Kritische Grundstoff beoordelet (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD oder friiwili Rapportage (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Pegelbestimmung
@@ -621,13 +600,11 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Toegepasst di Regle und eventuali Begrenzung | … |
 | Wichtigschti Grund, Risiko und Bevinds-ID | … |
 ---
-
 <!-- _class: section -->
 
 # Schlussfolgerung und Bestätigungsmeinung
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legalität nach Datentyp · Zeile 0
@@ -640,7 +617,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Regulierte Sektordaten | NIS2, DORA oder sektorspezifische Regeln | … | Begründet / Risiko | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Aussetzung gegenüber rechtlichen Anordnungen · Regel 4
@@ -709,7 +685,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Intern lösbar | … |
 | Zusammenarbeit Lieferant erforderlich | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Indikative CADA-Position
@@ -724,7 +699,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Pflichtformulierung | Angabe basierend auf dem Vorschlag; kein Urteil über Konformität. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Sicherheitsbewertung pro Ziel
@@ -746,7 +720,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | Begrenzte Sicherheit | Alle kritischen Fragen mindestens 2; nicht alle mindestens 3 | Basierend auf unseren Arbeiten ist uns nichts bekannt, das [Aussage] falsch wäre. Wir geben eine begrenzte Sicherheit. |
 | Moderate Sicherheit | Alle kritischen Fragen mindestens 3 | Basierend auf unseren Arbeiten sind wir der Meinung, dass [Aussage]. Wir geben eine moderate Sicherheit. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Ergebnisse und Empfehlungen
@@ -758,7 +731,6 @@ Here's the translation of the Markdown slide blocks from Dutch to professional S
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Qualitätskontroll- und Nachbewertungsereignisse

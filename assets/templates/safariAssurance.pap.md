@@ -7,7 +7,6 @@ title: Evaluashon SAFARI di soberania digital
 language: pap
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Evaluashon SAFARI di soberania digital
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Aplika seis regla di evaluashon antes ku ku estable nivel pa cada objetivo SOV.
 - Formula el juicio di aseguramiento solo despue’ ku ku evaluá kontrol di kalidad i evenu ku ku ta na data di base.
 ---
-
 <!-- _class: table table-editable -->
 
 # Maneho di dokumento i tim di asignashon
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Seguridad i Cumplishon | Si | 2 | … | … |
 | SOV-8 | Sostenibilidad | Si | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Aserkamentu di garantia
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Suficiente evidencia a fora esperá disponible | … | Si / no |
 | Decishon opishon | Solo continuar ku todo criterio "si" | Opishon / no opishon |
 ---
-
 <!-- _class: table -->
 
 # Nivelnan di Evidensia
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Evidencia independiente | Kolektá òf verifiká pa un partido di revishon independiente |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Registro di evidensia sentral
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Orden legal | Si forzamiento eksterior i sin legal independiente o oportunidad di reporte a fuera, 2.3, 2.5 i 2.6 a cuenta komo prob 0; SOV-2 a ser máximo 1, i SOV-1 también si control a ta na parte. |
 | 5 · Ruta teknikal | Si forzamiento eksterior a protehe solo ruta teknikal completo; e ta cambia SOV-2 i SEAL total no. Un servicio ku ta necesa procesa data legible no ta tene ruta e. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Soberania Stratégiko
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Dependencia na board nivel (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Exit na cambio di propiedad (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Determinashon di nivel
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Reglanan a aplica i cualquier limitá | … |
 | Razón principal, risku i ID riba descubrimiento | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Soberania legal i hurisdikshonal
@@ -251,7 +243,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Contestá solicitud legal (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Legalidad tipo data (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Determinashon di nivel
@@ -276,7 +267,6 @@ standards: SAFARI@0.9, ECSF
 | Aplicación riba regla 0 i 4 i cualquier limitá | … |
 | Razón principal, risku i ID riba descubrimiento | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Soberania di Dato i AI
@@ -307,7 +297,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Eliminación definitiva (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Acceso soporte regulá (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Determinashon di nivel
@@ -334,7 +323,6 @@ standards: SAFARI@0.9, ECSF
 
 Here's the translated Markdown slide blocks from Dutch to professional Papiamento, preserving all markers, identifiers, numbers, `…`, URLs, SAFARI, ECSF, ISO 27001:2022, ISAE 3000 and CC BY-SA 4.0 exactly:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Soberania Operashonal
@@ -364,7 +352,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | 4.5 · Vervangbare onderaannemers (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistische exit (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Determinashon di nivel
@@ -388,7 +375,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Reglas aplicado y limitacion posible | … |
 | Razón principal, riesgo y ID encuentro | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Soberania di kadena
@@ -418,7 +404,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | 5.5 · Subleveranciers en wijzigingsmelding (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditrechten subleveranciers (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Determinashon di nivel
@@ -442,7 +427,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Aplicacion regla 5 y limitacion posible | … |
 | Razón principal, riesgo y ID encuentro | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Soberania teknológiko
@@ -472,7 +456,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | 6.5 · Gedocumenteerde stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Geteste migracion naar alternatief (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Determinashon di nivel
@@ -497,7 +480,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Aplicación di regla 5 i limitación posible | … |
 | Razón principal, riesgo i ID di evidencia | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Soberania di Seguridat i Kumplimentu
@@ -529,7 +511,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | 7.5 · Acceso práctico di auditoría (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · AVG-conform procedimiento di reporte (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Determinashon di nivel
@@ -554,7 +535,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Aplicación di regla 5 i limitación posible | … |
 | Razón principal, riesgo i ID di evidencia | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Soberania di Sostenibilidat
@@ -586,7 +566,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | 8.5 · Material crítico evaluá (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD o reporte voluntario (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Determinashon di nivel
@@ -611,13 +590,11 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Aplicación di regla 5 i limitación posible | … |
 | Razón principal, riesgo i ID di evidencia | … |
 ---
-
 <!-- _class: section -->
 
 # Konklushon i opinion di siguransa
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legalidat pa tipo di dato · Liña 0
@@ -630,7 +607,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Datonan di sektor regulá | NIS2, DORA òf reglanan spesífiko di sektor | … | Substansiá / riesgo | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Exposicion na Ordonan Huridico · Regla 4
@@ -699,7 +675,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Soluble internamente | … |
 | Colaboración del proveedor requerida | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Posishon di CADA indikativo
@@ -714,7 +689,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Redaccion obligatorio | Indikashon basá riba e proposishon; no tin huisio riba konformidat. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Evaluashon di garantia pa meta
@@ -736,7 +710,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | Seguridad limitada | Todas preguntas críticas mínimo 2; nun todas mínimo 3 | Basá na nosa trabayo, nun atáves nos nada que la [afirmación] sería incorrecta. Damos un grado limitado de seguridad. |
 | Seguridad razonable | Todas preguntas críticas mínimo 3 | Basá na nosa trabayo, atáves nos de o parecer que la [afirmación]. Damos un grado razonable de seguridad. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Resultadonan i rekomendashonnan
@@ -748,7 +721,6 @@ Here's the translated Markdown slide blocks from Dutch to professional Papiament
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Eventonan di kontrol di kalidat i despues di evaluashon

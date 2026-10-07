@@ -7,7 +7,6 @@ title: Evaluación SAFARI de la soberanía digital
 language: es
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Evaluación SAFARI de la soberanía digital
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Aplicar las seis reglas de calificación antes de establecer el nivel por cada objetivo SOV.
 - Formular el juicio de aseguramiento solo después de que se hayan evaluado los controles de calidad y los eventos posteriores a la fecha de referencia.
 ---
-
 <!-- _class: table table-editable -->
 
 # Equipo de gestión y participación de documentos
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Seguridad y cumplimiento | Sí | 2 | … | … |
 | SOV-8 | Sostenibilidad | Sí | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Enfoque de garantía
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Se espera que haya suficiente evidencia disponible | … | Sí / no |
 | Decisión de confirmación | Solo continuar si todos los criterios son "sí" | Aceptar / no aceptar |
 ---
-
 <!-- _class: table -->
 
 # Niveles de evidencia
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Evidencia independiente | Recopilado o verificado por una parte revisora independiente |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Registro central de pruebas
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Orden legal vigente | Si existe una orden legal vigente y no hay un proceso legal independiente o una posibilidad de denuncia, se considera 2.3, 2.5 y 2.6 como evidencia 0; SOV-2 es máximo 1, y SOV-1 también si la autoridad reside allí. |
 | 5 · Ruta técnica | Si existe una orden legal vigente en el extranjero, solo la ruta técnica completa protege; esto no cambia SOV-2 ni el nivel total del SEAL. Un servicio que necesita procesar datos legibles no tiene esta ruta. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Soberanía estratégica
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Dependencia en el nivel de la junta directiva (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Salida en un cambio de propiedad (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Determinación de nivel
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Reglas aplicadas y cualquier limitación | … |
 | Razón principal, riesgo y ID de hallazgo | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Soberanía legal y jurisdiccional
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Impugnar solicitud extranjera (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Cumplimiento legal de los datos (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Determinación de nivel
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Aplicación de las reglas 0 y 4 y cualquier limitación | … |
 | Razón principal, riesgo y ID de hallazgo | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Soberanía de datos e IA
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Eliminación definitiva de datos (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Acceso regulado de soporte (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Determinación de nivel
@@ -335,12 +324,13 @@ standards: SAFARI@0.9, ECSF
 | Razón principal, riesgo y ID de hallazgo | … |
 Here's the translated Spanish version of the Markdown slide blocks, preserving all markers, identifiers, numbers, `…`, URLs, SAFARI, ECSF, ISO 27001:2022, ISAE 3000 and CC BY-SA 4.0 exactly.
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Soberanía operativa
 
 ---
+<!-- _class: table -->
+
 # Preguntas Clave · Pruebas
 
 | Pregunta · tipo/min. | Pregunta | Evidencia Requerida |
@@ -352,6 +342,8 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 4.5 · O·1+ | ¿Son conocidos los subcontratistas críticos y son reemplazables de forma realista? | Lista de subprocesadores, análisis de alternativas |
 | 4.6 · O·2+ | ¿Existe un escenario de salida con tiempos de transición y costos realistas? | Estrategia de salida, caso de negocio de migración |
 ---
+<!-- _class: table table-editable -->
+
 # Preguntas Clave · Hallazgos y Evidencia
 
 | Pregunta · tipo/min. | Hallazgo Fáctico | ID de Fuente | Evidencia 0-4 | Impacto / Riesgo |
@@ -363,7 +355,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 4.5 · Subcontratistas reemplazables (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Salida realista (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Determinación de nivel
@@ -377,6 +368,8 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 4 | En control | Operación completa en la UE sin dependencias críticas fuera de la UE | 4 |
 
 ---
+<!-- _class: table table-editable -->
+
 # Preguntas Clave · Conclusión Objetivo
 
 | Justificación para la puntuación central | Implementación |
@@ -386,12 +379,13 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Aplicación de reglas y cualquier limitación | … |
 | Razón principal, riesgo y ID de hallazgo | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Soberanía en cadena
 
 ---
+<!-- _class: table -->
+
 # Preguntas Clave · SOV-5
 
 | Pregunta · tipo/min. | Pregunta | Evidencia Requerida |
@@ -403,6 +397,8 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 5.5 · K·2+ | ¿Son conocidos todos los subcontratistas y está regulado un cambio mediante un acuerdo contractual? | Lista de subprocesadores, cláusula contractual |
 | 5.6 · O·2+ | ¿Están enlazados contractualmente los derechos de auditoría de los subcontratistas? | Cláusulas contractuales, informes de auditoría |
 ---
+<!-- _class: table table-editable -->
+
 # Preguntas Clave · Hallazgos y Evidencia
 
 | Pregunta · tipo/min. | Hallazgo Fáctico | ID de Fuente | Evidencia 0-4 | Impacto / Riesgo |
@@ -414,7 +410,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 5.5 · Subcontratistas y cambio regulado (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Derechos de auditoría de los subcontratistas (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Determinación de nivel
@@ -428,6 +423,8 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 4 | Transparente y en control | Transparencia total sin dependencias críticas fuera de la UE | 4 |
 
 ---
+<!-- _class: table table-editable -->
+
 # Preguntas Clave · Conclusión Objetivo
 
 | Justificación para la puntuación central | Implementación |
@@ -437,12 +434,13 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Aplicación de regla 5 y cualquier limitación | … |
 | Razón principal, riesgo y ID de hallazgo | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Soberanía tecnológica
 
 ---
+<!-- _class: table -->
+
 # Preguntas Clave · SOV-6
 
 | Pregunta · tipo/min. | Pregunta | Evidencia Requerida |
@@ -454,6 +452,8 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 6.5 · O·1+ | ¿Está documentada la pila completa, incluidos los componentes cerrados y las alternativas? | Arquitectura, registro de componentes |
 | 6.6 · O·2+ | ¿Es realista la migración a una alternativa y se ha probado? | Prueba de migración, estrategia de salida, análisis de alternativas |
 ---
+<!-- _class: table table-editable -->
+
 # Preguntas Clave · Hallazgos y Evidencia
 
 | Pregunta · tipo/min. | Hallazgo Fáctico | ID de Fuente | Evidencia 0-4 | Impacto / Riesgo |
@@ -465,7 +465,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 6.5 · Pila documentada (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Migración a alternativa probada (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Determinación de nivel
@@ -490,7 +489,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Aplicación de la regla 5 y cualquier limitación | … |
 | Razón principal, riesgo y ID de hallazgo | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Soberanía de seguridad y cumplimiento
@@ -522,7 +520,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 7.5 · Derechos de auditoría factibles en la práctica (C·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · Cumplimiento del RGPD del procedimiento de notificación (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Determinación de nivel
@@ -547,7 +544,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Aplicación de la regla 5 y cualquier limitación | … |
 | Razón principal, riesgo y ID de hallazgo | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Soberanía sostenible
@@ -579,7 +575,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | 8.5 · Dependencia de materias primas críticas (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · Informe CSRD o voluntario (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Determinación de nivel
@@ -604,13 +599,11 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Aplicación de la regla 5 y cualquier limitación | … |
 | Razón principal, riesgo y ID de hallazgo | … |
 ---
-
 <!-- _class: section -->
 
 # Conclusión y opinión de aseguramiento
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legalidad por tipo de dato · Línea 0
@@ -623,7 +616,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Datos del sector regulado | NIS2, DORA o reglas específicas del sector | … | Fundamentado/riesgo | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Exposición a órdenes legales · Regla 4
@@ -692,7 +684,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Soluble internamente | … |
 | Se requiere la cooperación del proveedor | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Posición indicativa del CADA
@@ -707,7 +698,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Redacción obligatoria | Indicación basada en la propuesta; ningún juicio sobre la conformidad. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Evaluación de aseguramiento por objetivo
@@ -729,7 +719,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | Certeza limitada | Todas las preguntas críticas al menos 2; no todas al menos 3 | Basándonos en nuestro trabajo, no hemos encontrado nada que sugiera que [afirmación] sea incorrecta. Emitimos un grado limitado de certeza. |
 | Certeza razonable | Todas las preguntas críticas al menos 3 | Basándonos en nuestro trabajo, consideramos que [afirmación]. Emitimos un grado de certeza razonable. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Hallazgos y recomendaciones
@@ -741,7 +730,6 @@ Here's the translated Spanish version of the Markdown slide blocks, preserving a
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Control de calidad y eventos posteriores a la fecha de referencia

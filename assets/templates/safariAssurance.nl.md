@@ -7,13 +7,11 @@ title: SAFARI-assessment digitale soevereiniteit
 language: nl
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI-assessment digitale soevereiniteit
 
 ---
-
 # Zo gebruikt u dit werkdeck
 
 - Leg eerst scope, bewering, gewenste niveaus en beoogde mate van zekerheid vast.
@@ -23,7 +21,6 @@ standards: SAFARI@0.9, ECSF
 - Formuleer het assurance-oordeel pas nadat de kwaliteitscontrole en gebeurtenissen na de peildatum zijn beoordeeld.
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Documentbeheer en opdrachtteam
@@ -42,7 +39,6 @@ standards: SAFARI@0.9, ECSF
 | TLP-classificatie en distributielijst | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Object en scope
@@ -59,7 +55,6 @@ standards: SAFARI@0.9, ECSF
 | Versie normatief kader | SAFARI v0.9 (concept; vrijwillige methodiek) |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Bewering van de organisatie
@@ -74,7 +69,6 @@ standards: SAFARI@0.9, ECSF
 | Eigenaar en formele vaststelling | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Gewenste niveaus en kerndoelen
@@ -91,7 +85,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-8 | Duurzaamheid | Ja | 1 | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance-aanpak
@@ -108,7 +101,6 @@ standards: SAFARI@0.9, ECSF
 | Beperkingen in toegang of werkzaamheden | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Opdrachtacceptatie formele assurance
@@ -124,7 +116,6 @@ standards: SAFARI@0.9, ECSF
 | Acceptatiebesluit | Alleen doorgaan bij alle criteria 'ja' | Accepteren / niet accepteren |
 
 ---
-
 <!-- _class: table -->
 
 # Bewijsniveaus
@@ -138,7 +129,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Onafhankelijk bewijs | Verzameld of geverifieerd door een onafhankelijke toetsende partij |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Centraal bewijsregister
@@ -151,7 +141,6 @@ standards: SAFARI@0.9, ECSF
 | B-004 | … | … | … | … | … |
 
 ---
-
 <!-- _class: table -->
 
 # Bindende scoringsregels
@@ -166,13 +155,11 @@ standards: SAFARI@0.9, ECSF
 | 5 · Technische route | Bij afdwingbare buitenlandse toegang beschermt alleen de volledige technische route; die verandert SOV-2 en het SEAL-totaal niet. Een dienst die leesbare data moet verwerken heeft deze route niet. |
 
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strategische soevereiniteit
 
 ---
-
 <!-- _class: table -->
 
 # SOV-1 · Toetsvragen
@@ -187,7 +174,6 @@ standards: SAFARI@0.9, ECSF
 | 1.6 · O·2+ | Is er een exit- of continuïteitsscenario voor een eigendomswijziging? | Continuïteitsplan, exitstrategie |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Bevindingen en bewijs
@@ -202,7 +188,6 @@ standards: SAFARI@0.9, ECSF
 | 1.6 · Exit bij eigendomswijziging (O·2+) | … | … | … | L/M/H · J/O/S |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Niveauvaststelling
@@ -216,7 +201,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Strategische autonomie | Duurzaam Europees ingebed; afhankelijkheid is expliciet gewogen in een boardbesluit | 4 |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Doelconclusie
@@ -229,13 +213,11 @@ standards: SAFARI@0.9, ECSF
 | Belangrijkste reden, risico en bevinding-ID | … |
 
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Juridische en rechtsmachtsoevereiniteit
 
 ---
-
 <!-- _class: table -->
 
 # SOV-2 · Kritische toetsvragen
@@ -249,7 +231,6 @@ standards: SAFARI@0.9, ECSF
 | 2.7 · K·2+ | Is de rechtmatigheid per soort gegevens onderbouwd gezien alle betrokken rechtsordes? | DPIA, doorgiftetoets, Data Act-maatregelen, rubricerings- en sectorregels |
 
 ---
-
 <!-- _class: table -->
 
 # SOV-2 · Ondersteunende toetsvragen
@@ -260,7 +241,6 @@ standards: SAFARI@0.9, ECSF
 | 2.5 · O·2+ | Kunnen contractrechten effectief bij een EU-rechter worden afgedwongen? | Juridisch advies, contractanalyse |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Bevindingen en bewijs
@@ -276,7 +256,6 @@ standards: SAFARI@0.9, ECSF
 | 2.7 · Rechtmatigheid per gegevenssoort (K·2+) | … | … | … | L/M/H · J/O/S |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Niveauvaststelling
@@ -290,7 +269,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Effectieve afdwingbaarheid | Rechten zijn effectief afdwingbaar en extraterritoriale risico's worden periodiek getoetst | 4 |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Doelconclusie
@@ -303,13 +281,11 @@ standards: SAFARI@0.9, ECSF
 | Belangrijkste reden, risico en bevinding-ID | … |
 
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Data- en AI-soevereiniteit
 
 ---
-
 <!-- _class: table -->
 
 # SOV-3 · Toetsvragen
@@ -324,7 +300,6 @@ standards: SAFARI@0.9, ECSF
 | 3.6 · O·2+ | Is supporttoegang geregeld en wordt deze gelogd? | Supportbeleid, logs, contract |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Bevindingen en bewijs
@@ -339,7 +314,6 @@ standards: SAFARI@0.9, ECSF
 | 3.6 · Beheerste supporttoegang (O·2+) | … | … | … | L/M/H · J/O/S |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Niveauvaststelling
@@ -353,7 +327,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Volledige controle | Volledige controle over data, sleutels, AI-modellen en verwerking | 4 |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Doelconclusie
@@ -366,13 +339,11 @@ standards: SAFARI@0.9, ECSF
 | Belangrijkste reden, risico en bevinding-ID | … |
 
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operationele soevereiniteit
 
 ---
-
 <!-- _class: table -->
 
 # SOV-4 · Toetsvragen
@@ -387,7 +358,6 @@ standards: SAFARI@0.9, ECSF
 | 4.6 · O·2+ | Is er een exit-scenario met realistische overstaptijd en kosten? | Exitstrategie, migratiebusinesscase |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Bevindingen en bewijs
@@ -402,7 +372,6 @@ standards: SAFARI@0.9, ECSF
 | 4.6 · Realistische exit (O·2+) | … | … | … | L/M/H · J/O/S |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Niveauvaststelling
@@ -416,7 +385,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | In control | Volledige EU-exploitatie zonder kritieke niet-EU-afhankelijkheden | 4 |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Doelconclusie
@@ -429,13 +397,11 @@ standards: SAFARI@0.9, ECSF
 | Belangrijkste reden, risico en bevinding-ID | … |
 
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Ketensoevereiniteit
 
 ---
-
 <!-- _class: table -->
 
 # SOV-5 · Toetsvragen
@@ -450,7 +416,6 @@ standards: SAFARI@0.9, ECSF
 | 5.6 · O·2+ | Zijn auditrechten voor subleveranciers contractueel verankerd? | Contractclausules, auditrapportages |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Bevindingen en bewijs
@@ -465,7 +430,6 @@ standards: SAFARI@0.9, ECSF
 | 5.6 · Auditrechten subleveranciers (O·2+) | … | … | … | L/M/H · J/O/S |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Niveauvaststelling
@@ -479,7 +443,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Transparant en in control | Volledige transparantie zonder kritieke niet-EU-afhankelijkheden | 4 |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Doelconclusie
@@ -492,13 +455,11 @@ standards: SAFARI@0.9, ECSF
 | Belangrijkste reden, risico en bevinding-ID | … |
 
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Technologische soevereiniteit
 
 ---
-
 <!-- _class: table -->
 
 # SOV-6 · Toetsvragen
@@ -513,7 +474,6 @@ standards: SAFARI@0.9, ECSF
 | 6.6 · O·2+ | Is migratie naar een alternatief realistisch en getest? | Migratietest, exitstrategie, alternatievenanalyse |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Bevindingen en bewijs
@@ -528,7 +488,6 @@ standards: SAFARI@0.9, ECSF
 | 6.6 · Geteste migratie naar alternatief (O·2+) | … | … | … | L/M/H · J/O/S |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Niveauvaststelling
@@ -542,7 +501,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | In control | Volledige controle over integratie en standaarden zonder kritieke gesloten afhankelijkheden | 4 |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Doelconclusie
@@ -555,13 +513,11 @@ standards: SAFARI@0.9, ECSF
 | Belangrijkste reden, risico en bevinding-ID | … |
 
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Beveiligings- en compliancesoevereiniteit
 
 ---
-
 <!-- _class: table -->
 
 # SOV-7 · Toetsvragen
@@ -576,7 +532,6 @@ standards: SAFARI@0.9, ECSF
 | 7.6 · O·2+ | Is de meldprocedure voor datalekken en incidenten AVG-conform en aantoonbaar ingericht? | Incidentplan, verwerkersovereenkomst, meldregistratie |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Bevindingen en bewijs
@@ -591,7 +546,6 @@ standards: SAFARI@0.9, ECSF
 | 7.6 · AVG-conforme meldprocedure (O·2+) | … | … | … | L/M/H · J/O/S |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Niveauvaststelling
@@ -605,7 +559,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | In control | Volledige controle over monitoring, incidentrespons, patching en compliance | 4 |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Doelconclusie
@@ -618,13 +571,11 @@ standards: SAFARI@0.9, ECSF
 | Belangrijkste reden, risico en bevinding-ID | … |
 
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Duurzaamheidssoevereiniteit
 
 ---
-
 <!-- _class: table -->
 
 # SOV-8 · Toetsvragen
@@ -639,7 +590,6 @@ standards: SAFARI@0.9, ECSF
 | 8.6 · O·1+ | Valt de aanbieder onder CSRD en zijn rapportages openbaar; zo niet, rapporteert zij vrijwillig? | Jaarverslag, CSRD- of vrijwillige rapportage |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Bevindingen en bewijs
@@ -654,7 +604,6 @@ standards: SAFARI@0.9, ECSF
 | 8.6 · CSRD of vrijwillige rapportage (O·1+) | … | … | … | L/M/H · J/O/S |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Niveauvaststelling
@@ -668,7 +617,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Duurzaam | Volledig duurzaam, transparant en EU-verankerd met structurele monitoring | 4 |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Doelconclusie
@@ -681,13 +629,11 @@ standards: SAFARI@0.9, ECSF
 | Belangrijkste reden, risico en bevinding-ID | … |
 
 ---
-
 <!-- _class: section -->
 
 # Conclusie en assurance-oordeel
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Rechtmatigheid per gegevenssoort · Regel 0
@@ -700,7 +646,6 @@ standards: SAFARI@0.9, ECSF
 | Gereguleerde sectorgegevens | NIS2, DORA of sectorspecifieke regels | … | Onderbouwd / risico | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Blootstelling aan rechtsordes · Regel 4
@@ -712,7 +657,6 @@ standards: SAFARI@0.9, ECSF
 | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Regel 4 · Verplichte uitkomst
@@ -727,7 +671,6 @@ standards: SAFARI@0.9, ECSF
 | Resterende blootstelling | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Technische route · Regel 5
@@ -743,7 +686,6 @@ standards: SAFARI@0.9, ECSF
 | Gevolg | Kan Regel 0 ondersteunen; verandert SOV-2 en het SEAL-totaalniveau niet. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # SAFARI-scorekaart
@@ -760,7 +702,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-8 | 5% | … | … | Voldoet / gap / n.v.t. | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Totaaluitkomst
@@ -777,7 +718,6 @@ standards: SAFARI@0.9, ECSF
 | Medewerking leverancier vereist | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Indicatieve CADA-positie
@@ -792,7 +732,6 @@ standards: SAFARI@0.9, ECSF
 | Verplichte formulering | Indicatie op basis van het voorstel; geen oordeel over conformiteit. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance-oordeel per doel
@@ -804,7 +743,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-… | … | … | … | … |
 
 ---
-
 <!-- _class: table -->
 
 # Formuleringshulp assurance
@@ -816,7 +754,6 @@ standards: SAFARI@0.9, ECSF
 | Redelijke zekerheid | Alle kritische vragen minimaal 3 | Op basis van onze werkzaamheden zijn wij van oordeel dat [bewering]. Wij geven een redelijke mate van zekerheid. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Bevindingen en aanbevelingen
@@ -828,7 +765,6 @@ standards: SAFARI@0.9, ECSF
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kwaliteitscontrole en gebeurtenissen na peildatum
@@ -845,7 +781,6 @@ standards: SAFARI@0.9, ECSF
 | Openstaande verschillen van inzicht zijn verwerkt | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Vaststelling bewering door organisatie
@@ -858,7 +793,6 @@ standards: SAFARI@0.9, ECSF
 | Akkoord | Ja / nee |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Onafhankelijke kwaliteitsreview
@@ -872,13 +806,11 @@ standards: SAFARI@0.9, ECSF
 | Vrijgave voor ondertekening | Ja / nee |
 
 ---
-
 <!-- _class: sign-off -->
 
 # Ondertekening assurance-oordeel
 
 ---
-
 # Bronnen en licentie
 
 - Methodiek: SAFARI v0.9 (concept), Brenno de Winter en Stichting LibreKAT.

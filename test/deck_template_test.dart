@@ -228,37 +228,52 @@ void main() {
     });
   });
 
-  group('nl/en parity', () {
-    // De Engelse variant is een vertaling van het Nederlandse document, geen
-    // eigen sjabloon: zelfde slidetypes, zelfde invulbaarheid, zelfde maten.
-    test('both languages carry the same structure per template', () {
+  group('translated template parity', () {
+    test('SAFARI and every English template match the Dutch structure', () {
       for (final template in documentTemplates) {
         final nl = slidesOf(template.id);
-        final en = slidesOf(template.id, language: 'en');
-        final label = template.id;
-        expect(
-          en.map((s) => s.type).toList(),
-          nl.map((s) => s.type).toList(),
-          reason: label,
-        );
-        for (var i = 0; i < nl.length; i++) {
-          final where = '$label slide ${i + 1}';
-          expect(en[i].tableEditable, nl[i].tableEditable, reason: where);
-          expect(en[i].skipped, nl[i].skipped, reason: where);
-          expect(en[i].listStyle, nl[i].listStyle, reason: where);
+        final languages = template.id == 'safariAssurance'
+            ? contentLanguages.where((code) => code != 'nl')
+            : const ['en'];
+        for (final language in languages) {
+          final translated = slidesOf(template.id, language: language);
+          final label = '${template.id}.$language';
           expect(
-            en[i].showChecklistProgress,
-            nl[i].showChecklistProgress,
-            reason: where,
+            translated.map((s) => s.type).toList(),
+            nl.map((s) => s.type).toList(),
+            reason: label,
           );
-          expect(en[i].bullets.length, nl[i].bullets.length, reason: where);
-          expect(en[i].tableRows.length, nl[i].tableRows.length, reason: where);
-          if (nl[i].tableRows.isNotEmpty) {
+          for (var i = 0; i < nl.length; i++) {
+            final where = '$label slide ${i + 1}';
             expect(
-              en[i].tableRows.first.length,
-              nl[i].tableRows.first.length,
+              translated[i].tableEditable,
+              nl[i].tableEditable,
               reason: where,
             );
+            expect(translated[i].skipped, nl[i].skipped, reason: where);
+            expect(translated[i].listStyle, nl[i].listStyle, reason: where);
+            expect(
+              translated[i].showChecklistProgress,
+              nl[i].showChecklistProgress,
+              reason: where,
+            );
+            expect(
+              translated[i].bullets.length,
+              nl[i].bullets.length,
+              reason: where,
+            );
+            expect(
+              translated[i].tableRows.length,
+              nl[i].tableRows.length,
+              reason: where,
+            );
+            if (nl[i].tableRows.isNotEmpty) {
+              expect(
+                translated[i].tableRows.first.length,
+                nl[i].tableRows.first.length,
+                reason: where,
+              );
+            }
           }
         }
       }

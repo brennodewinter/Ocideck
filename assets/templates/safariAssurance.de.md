@@ -7,7 +7,6 @@ title: SAFARI-Bewertung der digitalen Souveränität
 language: de
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI-Bewertung der digitalen Souveränität
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Wenden Sie die sechs Bewertungskriterien an, bevor Sie das Niveau für jedes SOV-Ziel festlegen.
 - Formulieren Sie das Assurance-Urteil erst, nachdem Qualitätskontrolle und Ereignisse nach dem Basisdatum bewertet wurden.
 ---
-
 <!-- _class: table table-editable -->
 
 # Dokumentenmanagement- und Engagement-Team
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Sicherheit und Compliance | Ja | 2 | … | … |
 | SOV-8 | Nachhaltigkeit | Ja | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Assurance-Ansatz
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Ausreichend geeigneter Beweis ist voraussichtlich verfügbar | … | Ja / nein |
 | Akzeptanzentscheidung | Nur fortsetzen, wenn alle Kriterien "ja" sind | Akzeptieren / nicht akzeptieren |
 ---
-
 <!-- _class: table -->
 
 # Evidenzstufen
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Unabhängige Beweise | Von einer unabhängigen Prüfpartei gesammelt oder überprüft |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Zentrales Beweisregister
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Arbeitsrecht | Bei durchsetzbaren ausländischer Zugriff schützt nur die vollständige technische Route; diese ändert SOV-2 und das SEAL-Gesamt nicht. Ein Dienst, der lesbare Daten verarbeiten muss, hat diese Route nicht. |
 | 5 · Technische Route | Bei durchsetzbaren ausländischer Zugriff schützt nur die vollständige technische Route; diese ändert SOV-2 und das SEAL-Gesamt nicht. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strategische Souveränität
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Abhängigkeit auf Vorstandsebene (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Exit bei Eigentumsänderung (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Füllstandsbestimmung
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Angewandte Regeln und eventuelle Begrenzung | … |
 | Wichtigste Begründung, Risiko und Findungs-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Rechtliche und gerichtliche Souveränität
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Ausländischer Antrag abwehren (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Rechtmäßigkeit pro Datentyp (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Füllstandsbestimmung
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Anwendung der Regeln 0 und 4 und eventuelle Begrenzung | … |
 | Wichtigste Begründung, Risiko und Findungs-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Daten- und KI-Souveränität
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Definitiver Löschung (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Geordnete Support-Zugang (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Füllstandsbestimmung
@@ -336,7 +325,6 @@ standards: SAFARI@0.9, ECSF
 
 Here's the translated Markdown slide blocks from Dutch to professional German, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operative Souveränität
@@ -368,7 +356,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | 4.5 · Ersetzbare Subunternehmer (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistisches Exit (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Füllstandsbestimmung
@@ -393,7 +380,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Angewandte Regeln und eventuelle Begrenzung | … |
 | Wichtigste Begründung, Risiko und Erkenntnis-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Kettensouveränität
@@ -425,7 +411,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | 5.5 · Subunternehmer und Änderungsmitteilung (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditrechte Subunternehmer (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Füllstandsbestimmung
@@ -450,7 +435,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Anwendung der Regel 5 und eventuelle Begrenzung | … |
 | Wichtigste Begründung, Risiko und Erkenntnis-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Technologische Souveränität
@@ -482,7 +466,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | 6.5 · Dokumentierter Stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Getestete Migration zu Alternativ (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Füllstandsbestimmung
@@ -507,7 +490,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Anwendung von Regel 5 und eventuelle Begrenzung | … |
 | Wichtigste Begründung, Risiko und Findungs-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Sicherheit und Compliance-Souveränität
@@ -539,7 +521,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | 7.5 · Praktisch umsetzbare Prüfungsrechte (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · DSGVO-konformes Meldeverfahren (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Füllstandsbestimmung
@@ -564,7 +545,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Angewandte Regeln und eventuelle Begrenzung | … |
 | Wichtigste Begründung, Risiko und Findungs-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Nachhaltigkeitssouveränität
@@ -596,7 +576,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | 8.5 · Kritische Rohstoffe bewertet (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD oder freiwillige Berichterstattung (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Füllstandsbestimmung
@@ -621,13 +600,11 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Angewandte Regeln und eventuelle Begrenzung | … |
 | Wichtigste Begründung, Risiko und Findungs-ID | … |
 ---
-
 <!-- _class: section -->
 
 # Schlussfolgerung und Bestätigungsmeinung
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legalität pro Datentyp · Zeile 0
@@ -640,7 +617,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Daten zum regulierten Sektor | NIS2, DORA oder branchenspezifische Regeln | … | Begründet / Risiko | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Aussetzung gegenüber rechtlichen Anordnungen · Regel 4
@@ -709,7 +685,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Intern lösbar | … |
 | Lieferantenkooperation erforderlich | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Indikative CADA-Position
@@ -724,7 +699,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Pflichtformulierung | Angabe basierend auf dem Vorschlag; kein Urteil über Konformität. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Sicherheitsbewertung pro Ziel
@@ -746,7 +720,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | Begrenzte Sicherheit | Alle kritischen Fragen mindestens 2; nicht alle mindestens 3 | Basierend auf unseren Arbeiten ist uns nichts bekannt, das [Feststellung] unzutreffend wäre. Wir geben eine begrenzte Sicherheit. |
 | Moderate Sicherheit | Alle kritischen Fragen mindestens 3 | Basierend auf unseren Arbeiten sind wir der Meinung, dass [Feststellung]. Wir geben eine moderate Sicherheit. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Ergebnisse und Empfehlungen
@@ -758,7 +731,6 @@ Here's the translated Markdown slide blocks from Dutch to professional German, p
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Qualitätskontrolle und Ereignisse nach dem Stichtag

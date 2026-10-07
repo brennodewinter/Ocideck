@@ -7,7 +7,6 @@ title: Avaliação SAFARI da soberania digital
 language: pt
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Avaliação SAFARI da soberania digital
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Aplique as seis regras de pontuação antes de definir o nível para cada objetivo SOV.
 - Formule o parecer de garantia somente após a avaliação dos controles de qualidade e eventos pós-data de referência.
 ---
-
 <!-- _class: table table-editable -->
 
 # Gerenciamento de documentos e equipe de projeto
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Segurança e Conformidade | Sim | 2 | … | … |
 | SOV-8 | Sustentabilidade | Sim | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Abordagem de garantia
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Evidência adequadamente adequada está prevista | … | Sim / não |
 | Decisão de assinatura | Apenas continuar se todos os critérios forem "sim" | Aceitar / não aceitar |
 ---
-
 <!-- _class: table -->
 
 # Níveis de prova
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Prova independente | Coletado ou verificado por uma parte de avaliação independente |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # ID da fonte
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Ordem legal | Se houver coerção exigível e sem processo legal independente ou oportunidade de reporte, 2.3, 2.5 e 2.6 são considerados como evidência 0; SOV-2 é no máximo 1, e SOV-1 também se a soberania estiver envolvida. |
 | 5 · Rota técnica | Se houver coerção estrangeira, apenas a rota técnica completa é protegida; isso não altera o SOV-2 ou o nível total do SEAL. Um serviço que precisa processar dados legíveis não tem essa rota. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Soberania estratégica
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Dependência no conselho (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Saída na mudança de propriedade (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Nível de avaliação
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Regras aplicadas e eventuais limitações | … |
 | Principal razão, risco e ID da descoberta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Soberania jurídica e de poder
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Contestar pedido estrangeiro (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Legalidade dos dados por tipo (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Determinação de nível
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Aplicação das regras 0 e 4 e eventuais limitações | … |
 | Principal razão, risco e ID da descoberta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Soberania de dados e IA
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Remoção definitiva de dados (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Acesso de suporte gerenciado (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Determinação de Nível
@@ -336,7 +325,6 @@ standards: SAFARI@0.9, ECSF
 
 Here's the translated version of the Markdown slide blocks, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Soberania operacional
@@ -368,7 +356,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 4.5 · Subcontratantes substituíveis (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Saída realista (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Avaliação de Nível
@@ -393,7 +380,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Regras aplicadas e quaisquer limitações | … |
 | Principal razão, risco e ID de achado | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Soberania da Cadeia de Suprimentos
@@ -425,7 +411,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 5.5 · Subcontratados e alteração no contrato (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditorias de subcontratados (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Determinação de nível
@@ -450,7 +435,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Aplicação da regra 5 e quaisquer limitações | … |
 | Principal razão, risco e ID de achado | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Soberania tecnológica
@@ -482,7 +466,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 6.5 · Pilha documentada (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Migração testada para alternativa (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Nivelamento
@@ -507,7 +490,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Aplicação da regra 5 e eventuais limitações | … |
 | Principal razão, risco e ID da descoberta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Soberania de segurança e conformidade
@@ -539,7 +521,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 7.5 · Direitos de auditoria praticavelmente executáveis (C·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · Procedimento de notificação do RGPD (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Determinação de nível
@@ -564,7 +545,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Aplicação da regra 5 e eventuais limitações | … |
 | Principal razão, risco e ID da descoberta | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Soberania de sustentabilidade
@@ -596,7 +576,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 8.5 · Matérias-primas críticas avaliadas (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · Relatório CSRD ou voluntário (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Determinação de nível
@@ -621,13 +600,11 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Aplicação da regra 5 e eventuais limitações | … |
 | Principal razão, risco e ID da descoberta | … |
 ---
-
 <!-- _class: section -->
 
 # Conclusão e parecer de garantia
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legalidade por tipo de dados · Regra 0
@@ -640,7 +617,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Dados de setores regulamentados | NIS2, DORA ou regras específicas do setor | … | Justificado / risco | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Exposição a jurisdições · Regra 4
@@ -709,7 +685,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Solúvel Internamente | … |
 | Cooperação do Fornecedor Necessária | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Posição CADA indicativa
@@ -724,7 +699,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Formulação obrigatória | Indicação com base na proposta; sem julgamento sobre a conformidade. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Julgamento de garantia por objetivo
@@ -746,7 +720,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Certeza Limitada | Todas as perguntas críticas no mínimo 2; não todas no mínimo 3 | Com base em nossas atividades, nada nos indica que a [afirmação] seja incorreta. Fornecemos um grau de certeza limitado. |
 | Certeza Razoável | Todas as perguntas críticas no mínimo 3 | Com base em nossas atividades, consideramos que a [afirmação] é verdadeira. Fornecemos um grau de certeza razoável. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Achados e recomendações
@@ -758,7 +731,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Controle de qualidade e eventos após a data de referência
@@ -786,7 +758,7 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Data | … |
 | Concordância | Sim / Não |
 ---
-<!-- _class: table-editable -->
+<!-- _class: table table-editable -->
 
 # Revisão de Qualidade Independente
 

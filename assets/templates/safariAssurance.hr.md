@@ -7,7 +7,6 @@ title: SAFARI procjena digitalnog suvereniteta
 language: hr
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI procjena digitalnog suvereniteta
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Primijenite šest pravila rangiranja prije utvrđivanja razine po cilju SOV.
 - Formulirajte mišljenje o osiguravanju tek nakon što su se proveli kvalitativni nadzor i događaji nakon referentnog datuma.
 ---
-
 <!-- _class: table table-editable -->
 
 #  Tim za upravljanje dokumentima i dodjelu
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Sigurnost i usklađenost | Da | 2 | … | … |
 | SOV-8 | P održivost | Da | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Apristup osiguranja
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Umiješano je dovoljno odgovarajućih dokaza očekivano dostupno | … | Da / ne |
 | Odlučka o prihvaćanju | Samo nastaviti ako su sva kriterija 'da' | Prihvatiti / odbiti |
 ---
-
 <!-- _class: table -->
 
 # Razine dokaza
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Neovisni dokazi | Prikupila ili potvrdila neovisna strana za testiranje |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Centralni registar evidencije
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Uredno pravno stanje | Ako je obvezujuće strano pristupače zaštićeno samo punom tehničkom putanju; to ne mijenja SOV-2 i SEAL-ovu razinu. Služba koja treba čitati podatke ne treba ovu putanju. |
 | 5 · Tehnička ruta | Ako je obvezujuće strano pristupače zaštićeno samo punom tehničkom putanju; to ne mijenja SOV-2 i SEAL-ovu razinu. Služba koja treba čitati podatke ne treba ovu putanju. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strateški suverenitet
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Zavisnost na razini uprave (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Izlaz kod promjene vlasništva (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Određivanje razine
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Primijenjeni pravila i eventualni ograničenja | … |
 | Najvažniji razlog, rizik i ID nalaza | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Pravni i jurisdikcijski suverenitet
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Odbijanje stranih zahtjeva (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Pravovornošću podataka (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Određivanje razine
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Primijenjeni pravila 0 i 4 i eventualni ograničenja | … |
 | Najvažniji razlog, rizik i ID nalaza | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Suverenitet podataka i umjetne inteligencije
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Očistite podatke na kraju (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Regulirana pristup podrškom (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Određivanje razine
@@ -336,7 +325,6 @@ standards: SAFARI@0.9, ECSF
 
 Okay, here's the translated version of the Markdown slide blocks from Dutch to professional Croatian, preserving all markers, identifiers, numbers, `…`, URLs, SAFARI, ECSF, ISO 27001:2022, ISAE 3000 and CC BY-SA 4.0 exactly.
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operativni suverenitet
@@ -368,7 +356,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | 4.5 · Zamjenjivi podizvođači (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realan izlaz (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Određivanje razine
@@ -393,7 +380,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | Primijenjeni pravila i eventualno ograničenja | … |
 | Najvažniji razlog, rizik i ID nalaza | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Suverenost lanca
@@ -448,7 +434,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | Primijenjeni pravila i eventualno ograničenja | … |
 | Najvažniji razlog, rizik i ID nalaza | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Tehnološki suverenitet
@@ -480,7 +465,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | 6.5 · Dokumentirana steka (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testirana migracija u alternativu (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Određivanje razine
@@ -505,7 +489,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | Primjena pravila 5 i eventualno ograničenja | … |
 | Najvažniji razlog, rizik i ID nalaza | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Suverenost sigurnosti i sukladnosti
@@ -537,7 +520,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | 7.5 · Praktično izvedive prava na audit (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · AVG-surodba procedura prijava (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Određivanje razine
@@ -562,7 +544,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | Primijenjene pravila i eventualno ograničenja | … |
 | Najvažniji razlog, rizik i ID nalaza | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Suverenost održivosti
@@ -594,7 +575,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | 8.5 · Ovisnost o kritičnim sirovinama (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD ili slobodni izvještaji (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Određivanje razine
@@ -619,13 +599,11 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | Primijenjene pravila i eventualno ograničenja | … |
 | Najvažniji razlog, rizik i ID nalaza | … |
 ---
-
 <!-- _class: section -->
 
 # Mišljenje o zaključku i uvjerenju
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Legitimnost po vrsti podataka · Redak 0
@@ -638,7 +616,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 |  Podaci o reguliranom sektoru | NIS2, DORA ili pravila specifična za sektor | … |  Potkrijepljeno / rizik | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Izloženost pravnim nalozima · Pravilo 4
@@ -707,7 +684,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | Rješavan u smislu internog | … |
 | Potreban suglasaj dobavljača | … |
 ---
-
 <!-- _class: table table-editable -->
 
 #  Indikativna CADA pozicija
@@ -722,7 +698,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | Obvezna formulacija | Naznaka na temelju prijedloga; nema prosudbe o sukladnosti. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Procjena sigurnosti po cilju
@@ -744,7 +719,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | Ograničena sigurnost | Svi kritični zahtjevi minimalno 2; ne svi minimalno 3 | Na temelju naših aktivnosti, nismo pronašli ništa što bi ukazivalo da [zahtjev] nije točan. Danosmo ograničenu razinu sigurnosti. |
 | Razumljiva sigurnost | Svi kritični zahtjevi minimalno 3 | Na temelju naših aktivnosti, smatramo da [zahtjev]. Danosmo razumnu razinu sigurnosti. |
 ---
-
 <!-- _class: table table-editable -->
 
 #  Nalazi i preporuke
@@ -756,7 +730,6 @@ Okay, here's the translated version of the Markdown slide blocks from Dutch to p
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kontrola kvalitete i događaji nakon referentnog datuma

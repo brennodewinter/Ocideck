@@ -36,6 +36,8 @@ standards: SAFARI@0.9, ECSF
 | Rapor Versiyonu ve Tarihi | … |
 | TLP Sınıflandırması ve Dağıtım Listesi | … |
 ---
+<!-- _class: table table-editable -->
+
 # Nesne ve Kapsamı
 
 | Kapsam Bileşeni | Katkı |
@@ -49,6 +51,8 @@ standards: SAFARI@0.9, ECSF
 | Açık istisnalar ve gerekçeleri | … |
 | Normatif çerçeve sürümü | SAFARI v0.9 (konsept; gönüllü metodoloji) |
 ---
+<!-- _class: table table-editable -->
+
 # Kuruluşun İddiası
 
 | Bölüm | İçerik |
@@ -60,6 +64,8 @@ standards: SAFARI@0.9, ECSF
 | Uyarı | Sonuç, belirli bir tarihe göre mevcut kanıtlara dayanmaktadır; değişiklikler sonucu değişebilir. |
 | Sahip ve Resmi Onay | … |
 ---
+<!-- _class: table table-editable -->
+
 # İstenen Seviyeler ve Ana Hedefler
 
 | Kod | Amaç | Ana Hedef | Önerilen Minimum | İstendiği Gibi | Sapma Gerekçesi |
@@ -73,6 +79,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Güvenlik ve Uyumluluk | Evet | 2 | … | … |
 | SOV-8 | Sürdürülebilirlik | Evet | 1 | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Güvenlik Denetim Yaklaşımı
 
 | Bölüm | Seçim ve Gerekçe |
@@ -387,6 +395,8 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Alt Tedarikçiler ve Değişiklik Bildirimi (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Alt Tedarikçilerin Denetim Hakları (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Seviye Belirleme
 
 | Seviye | Etiket | Özellik | Minimum Kanıt |
@@ -397,6 +407,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Anlamlı Etkileşim | Kritik bağlantılar çeşitlendirilmiştir; güncellemeler kontrol edilebilir; build ve imza zinciri bilinir | 3 |
 | 4 | Şeffaf ve Kontrollü | Tam şeffaflık, kritik olmayan AB bağımlılıkları yoktur | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Temel Sonuç
 
 | Merkezi Skorboard'a Dayanak | Uygulama |
@@ -423,6 +435,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · O·1+ | Tüm yığın belgelenmiş mi, kapalı bileşenler ve alternatifler dahil? | Mimari, bileşen kayıt defteri |
 | 6.6 · O·2+ | Alternatife geçiş gerçekçi ve test edilmiş mi? | Geçiş testi, çıkış stratejisi, alternatif analizi |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Bulgulamalar ve Kanıtlar
 
 | Soru · Tür/Minimum | Gerçek Bulgusu | Kaynak Kimliği | Kanıt 0-4 | Etki / Risk |
@@ -434,6 +448,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Belgelenmiş Yığın (O·1+) | … | … | … | Y/N/H · V/Ş/A |
 | 6.6 · Alternatiflere Geçişin Test Edilmesi (O·2+) | … | … | … | Y/N/H · V/Ş/A |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Seviye Belirleme
 
 | Seviye | Etiket | Özellik | Minimum Kanıt |
@@ -444,6 +460,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Anlamlı Bağımsızlık | Değiştirilebilirlik test edilmiş; kritik yazılım denetim veya açık kaynak yoluyla kontrol edilebilir | 3 |
 | 4 | Kontrol Altında | Entegrasyon ve standartlar üzerinde tam kontrol; kritik kapalı bağımlılıklar olmadan | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Amaç Sonucu
 
 | Merkezi Skorboard İçin Temel Gerekçe | Uygulama |
@@ -457,6 +475,8 @@ standards: SAFARI@0.9, ECSF
 
 # SOV-7 · Güvenlik ve Uygunluk Egemenliği
 ---
+<!-- _class: table -->
+
 # SOV-7 · Soru Sorular
 
 | Soru · Tür/Minimum | Soru | Gerekli Kanıt |
@@ -468,6 +488,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · K·2+ | Denetim hakları pratik olarak uygulanabilir mi, sistem ve günlük erişim dahil? | Sözleşme ile sağlanan denetim hakkı, gerçekleştirilen denetim raporu |
 | 7.6 · O·2+ | Veri ihlali ve olay bildirim prosedürü KVKK'ya uygun ve kanıtlanabilir bir şekilde kurulmuş mu? | Olay planı, işleme sözleşmesi, bildirim kaydı |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Bulgular ve Kanıt
 
 | Soru · Tür/Minimum | Gerçekleşen Bulgu | Kaynak ID | Kanıt 0-4 | Etki / Risk |
@@ -479,6 +501,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Pratik olarak uygulanabilir denetim hakları (K·2+) | … | … | … | Y/O/H · J/O/S |
 | 7.6 · KVKK'ya uygun bildirim prosedürü (O·2+) | … | … | … | Y/O/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Seviye Belirleme
 
 | Seviye | Etiket | Özellik | Minimum Kanıt |
@@ -489,6 +513,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | EU Operasyonları | EU güvenlik operasyonları etkili ve bağımsız denetimler mümkün | 3 |
 | 4 | Kontrol Altında | İzleme, olay yanıtı, yamalama ve uyumluluk üzerinde tam kontrol | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Merkezi Skorboard İçin Sonuç |
 
 | Merkezi Skorboard İçin Temel Temel | Uygulama |
@@ -540,6 +566,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Etki | Anlamlı EU etkisi enerji kaynağı ve döngüsel tedarik zinciri üzerinde | 3 |
 | 4 | Sürdürülebilir | Tamamen sürdürülebilir, şeffaf ve EU ile entegre, yapısal izleme ile | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # Merkezi Skor Tahtası İçin Temel Argüman · Sonuç Çıkarımı
 
 | Merkezi Skor Tahtasına Dayanak | Uygulama |
@@ -549,8 +577,12 @@ standards: SAFARI@0.9, ECSF
 | Uygulanan Kurallar ve Olası Kısıtlamalar | … |
 | Önemli Sebep, Risk ve Bulguyu Kimliği | … |
 ---
+<!-- _class: section -->
+
 # Sonuç ve Güvence Yorumu
 ---
+<!-- _class: table table-editable -->
+
 # Veri Türüne Göre Yasalılık · Kural 0
 
 | Veri Türü | Değerlendirme Çerçevesi | Dayanak ve Kaynak Kimliği | Sonuç | Etkilenen SOV Hedefi |
@@ -560,6 +592,8 @@ standards: SAFARI@0.9, ECSF
 | Hükümet veya Konuşulmuş Bilgiler | Uygulanabilir Ulusal ve AB Kuralları | … | Destekli / Risk | … |
 | Düzenlenmiş Sektör Verileri | NIS2, DORA veya Sektörel Kurallar | … | Destekli / Risk | … |
 ---
+<!-- _class: table table-editable -->
+
 # Hukuki Düzenlemelere Maruz Kalma · Kural 4
 
 | Taraflı ve Hukuki Düzenleme | Hükümet Tarafından Zorlanabilir mi? | Bağımsız Yargılama Var mı? | Tüketiciye Bildirim Yapılabilir mi? | Kanıt ve Seviye Üzerindeki Sonuç |
@@ -568,6 +602,8 @@ standards: SAFARI@0.9, ECSF
 | … | … | … | … | … |
 | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Zorunlu Sonuç - Kural 4
 
 | Koşul veya Sonuç | Doğrulama ve Kaynak Kimliği |
@@ -579,6 +615,8 @@ standards: SAFARI@0.9, ECSF
 | Otorite içinde kontrol varsa, SOV-1 de maksimum seviye 1'dir | Uygulandı / Yok: … |
 | Kalan maruziyet | … |
 ---
+<!-- _class: table table-editable -->
+
 # Teknik Yol - Kural 5
 
 | Koşul | Sonuç ve Kaynak Kimliği |
@@ -591,6 +629,8 @@ standards: SAFARI@0.9, ECSF
 | Tüm koşullar birlikte sağlanır | Sadece 'evet' ise tüm önceki sonuçların olumlu olması gerekir: … |
 | Sonuç | Kural 0'ı destekleyebilir; SOV-2 ve SEAL toplam seviyesini değiştirmez. |
 ---
+<!-- _class: table table-editable -->
+
 # SAFARI Skor Tablosu
 
 | Kod | Ağırlık | Belirlenmiş 0-4 | Kanıt 0-4 | Seçilen Norma Göre Yorum | Hedef Sonucu Kaynağı |
@@ -604,6 +644,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | %10 | … | … | Tamam / Boşluk / Yok | … |
 | SOV-8 | %5 | … | … | Tamam / Boşluk / Yok | … |
 ---
+<!-- _class: table table-editable -->
+
 # Toplam Sonuç
 
 | Bölüm | Sonuç ve Gerekçe |
@@ -617,6 +659,8 @@ standards: SAFARI@0.9, ECSF
 | İç Çözülebilir | … |
 | Tedarikçi İşbirliği Gerektirir | … |
 ---
+<!-- _class: table table-editable -->
+
 # Tahmini CADA Konumu
 
 | Bileşen | Sonuç ve Kaynak Kimliği |
@@ -628,6 +672,8 @@ standards: SAFARI@0.9, ECSF
 | Kanıt Eksikliği | … |
 | Zorunlu İfade | Öneriye dayalı bir gösterge; uyumluluk hakkında bir yargıda bulunulmamaktadır. |
 ---
+<!-- _class: table table-editable -->
+
 # Güvenlik Denetimi Kararı Hedef Başına Göre
 
 | Hedef | Kritik Sorular için Kanıt | Hukuki Doğruluk Riski | Karar Tipi | Formülasyon ve Not |
@@ -636,6 +682,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-… | … | … | … | … |
 | SOV-… | … | … | … | … |
 ---
+<!-- _class: table -->
+
 # Güvenlik Denetimi Formülasyon Yardımı
 
 | Tür | Koşul | Standart Formülasyon |
@@ -644,6 +692,8 @@ standards: SAFARI@0.9, ECSF
 | Sınırlı Eminlık | Tüm kritik sorular en az 2; tümü en az 3 | Yapılan çalışmalarımıza göre, [iddia] yanlış olabileceğine dair bir kanıt bulunmamaktadır. Sınırlı bir dereceye kadar güven sağlıyoruz. |
 | Makul Eminlık | Tüm kritik sorular en az 3 | Yapılan çalışmalarımıza göre, [iddia] doğru olduğuna inanıyoruz. Makul bir dereceye kadar güven sağlıyoruz. |
 ---
+<!-- _class: table table-editable -->
+
 # Bulgular ve Öneriler
 
 | ID | SOV | Bulgu | Etki | Öneri | Sahip | Son Tarih |

@@ -7,7 +7,6 @@ title: SAFARI-vurdering af digital suverænitet
 language: da
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # SAFARI-vurdering af digital suverænitet
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Anvend de seks rangeringsregler, før du fastlægger niveauet for hvert SOV-mål.
 - Formulér assurancevurderingen først efter at kvalitetskontrollen og begivenhederne efter referencepunktet er vurderet.
 ---
-
 <!-- _class: table table-editable -->
 
 # Dokumenthåndterings- og opgaveteam
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Sikkerhed og overholdelse | Ja | 2 | … | … |
 | SOV-8 | Bæredygtighed | Ja | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Aassurance tilgang
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Tilstrækkeligt egnet bevis er forventeligt tilgængeligt | … | Ja / nej |
 | Acceptationsbeslutning | Kun fortsætte ved alle kriterier 'ja' | Acceptere / ikke acceptere |
 ---
-
 <!-- _class: table -->
 
 #  Bevisniveauer
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Uafhængige beviser |  Indsamlet eller verificeret af en uafhængig testpart |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Centralt bevisregister
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Fungerende lovmæssighed | Ved håndhævelig udenlandsk adgang beskytter kun den fulde tekniske rute; det ændrer ikke SOV-2 og SEAL-totalet. En tjeneste, der skal behandle læsbare data, har ikke denne rute. |
 | 5 · Teknisk rute | Ved håndhævelig udenlandsk adgang beskytter kun den fulde tekniske rute; det ændrer ikke SOV-2 og SEAL-totalet. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Strategisk suverænitet
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Afhængighed på bestyrelsesniveau (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Exit ved ejendomsændring (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Niveaubestemmelse
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Anvendte regler og eventuel begrænsning | … |
 | Vigtigste årsag, risiko og fund-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Juridisk suverænitet og jurisdiktion
@@ -251,7 +243,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Bestridelse af udenlandske anmodninger (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Lovlighed af dataarter (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Niveaubestemmelse
@@ -276,7 +267,6 @@ standards: SAFARI@0.9, ECSF
 | Anvendelse af regler 0 og 4 samt eventuel begrænsning | … |
 | Vigtigste årsag, risiko og fund-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Data- og AI-suverænitet
@@ -307,7 +297,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Definitiv sletning (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Reguleret supportadgang (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Niveaubestemmelse
@@ -332,7 +321,6 @@ standards: SAFARI@0.9, ECSF
 | Anvendelse af regler 0 og 5 samt eventuel begrænsning | … |
 | Vigtigste årsag, risiko og fund-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Operationel suverænitet
@@ -364,7 +352,6 @@ standards: SAFARI@0.9, ECSF
 | 4.5 · Udskiftelige underleverandører (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistisk exit (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Niveaubestemmelse
@@ -389,7 +376,6 @@ standards: SAFARI@0.9, ECSF
 | Anvendte regler og eventuel begrænsning | … |
 | Vigtigste årsag, risiko og fund-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Kædesuverænitet
@@ -421,7 +407,6 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Underleverandører og ændringsmeddelelse (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditrettigheder underleverandører (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Niveaubestemmelse
@@ -446,7 +431,6 @@ standards: SAFARI@0.9, ECSF
 | Anvendelse af regel 5 og eventuel begrænsning | … |
 | Vigtigste årsag, risiko og fund-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Teknologisk suverænitet
@@ -478,7 +462,6 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Dokumenteret stack (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testet migration til alternativ (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Niveaubestemmelse
@@ -503,7 +486,6 @@ standards: SAFARI@0.9, ECSF
 | Anvendelse af regel 5 og eventuel begrænsning | … |
 | Vigtigste årsag, risiko og fund-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Sikkerheds- og overholdelsessuverænitet
@@ -535,7 +517,6 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Praktisk gennemførlige auditrettigheder (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · GDPR-overensstemmende rapporteringsprocedure (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Niveaubestemmelse
@@ -560,7 +541,6 @@ standards: SAFARI@0.9, ECSF
 | Anvendte regler og eventuel begrænsning | … |
 | Vigtigste årsag, risiko og fund-ID | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Suverænitet for bæredygtighed
@@ -592,7 +572,6 @@ standards: SAFARI@0.9, ECSF
 | 8.5 · Råstofafhængighed vurderet (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · CSRD eller frivillig rapportering (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Niveaubestemmelse
@@ -617,13 +596,11 @@ standards: SAFARI@0.9, ECSF
 | Anvendte regler og eventuel begrænsning | … |
 | Vigtigste årsag, risiko og fund-ID | … |
 ---
-
 <!-- _class: section -->
 
 #  Konklusion og erklæring om sikkerhed
 
 ---
-
 <!-- _class: table table-editable -->
 
 #  Legitimitet pr. datatype · Linje 0
@@ -636,7 +613,6 @@ standards: SAFARI@0.9, ECSF
 | Regulerede sektordata | NIS2, DORA eller sektorspecifikke regler | … | Begrundet / risiko | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Eksponering for juridiske ordrer · Regel 4
@@ -705,7 +681,6 @@ standards: SAFARI@0.9, ECSF
 | Intern løseligt | … |
 | Leverandørens samarbejde kræves | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Vejledende CADA-stilling
@@ -720,7 +695,6 @@ standards: SAFARI@0.9, ECSF
 | Obligatorisk formulering | Indikation baseret på forslaget; ingen bedømmelse af overensstemmelse. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Sikkerhedsvurdering pr. mål
@@ -742,7 +716,6 @@ standards: SAFARI@0.9, ECSF
 | Begrænset sikkerhed | Alle kritiske spørgsmål mindst 2; ikke alle mindst 3 | Baseret på vores arbejde er der intet, der tyder på, at [påstand] ikke kunne være ukorrekt. Vi giver en begrænset grad af sikkerhed. |
 | Rimelig sikkerhed | Alle kritiske spørgsmål mindst 3 | Baseret på vores arbejde er vi af opfattelse af, at [påstand]. Vi giver en rimelig grad af sikkerhed. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Fund og anbefalinger
@@ -754,7 +727,6 @@ standards: SAFARI@0.9, ECSF
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kvalitetskontrol og hændelser efter referencedato

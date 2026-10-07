@@ -36,6 +36,8 @@ standards: SAFARI@0.9, ECSF
 | Versiunea raportului și data | … |
 | Clasificarea TLP și lista de distribuție | … |
 ---
+<!-- _class: table table-editable -->
+
 # Obiecte și Scop
 
 | Componenta Scopului | Completare |
@@ -49,6 +51,8 @@ standards: SAFARI@0.9, ECSF
 | Excluderi explicite cu justificări | … |
 | Versiunea cadrului normativ | SAFARI v0.9 (concept; metodologie voluntară) |
 ---
+<!-- _class: table table-editable -->
+
 # Declarația Organizației
 
 | Componentă | Completare |
@@ -60,6 +64,8 @@ standards: SAFARI@0.9, ECSF
 | Notă | Rezultatul se bazează pe probele disponibile la data de referință; modificările pot influența rezultatul. |
 | Proprietar și aprobare formală | … |
 ---
+<!-- _class: table table-editable -->
+
 # Niveluri Dorite și Obiective Cheie
 
 | Cod | Obiectiv | Obiectiv Cheie | Nivel Minim Recomandat | Dorit | Justificare pentru deviație |
@@ -73,6 +79,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Securitate și conformitate | Da | 2 | … | … |
 | SOV-8 | Durabilitate | Da | 1 | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Abordarea de Asigurare
 
 | Componentă | Alegere și Justificare |
@@ -387,6 +395,8 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Subcontractanții și notificarea de modificare (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Drepturile de audit pentru subcontractanți (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # Stabilizarea Nivelului · SOV-5
 
 | Nivel | Etichetă | Caracteristică | Dovezi Minime |
@@ -397,6 +407,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Influență Significativă | Lanțuri critice sunt diversificate; actualizări sunt verificabile; lanțul de build și semnătură este cunoscut | 3 |
 | 4 | Transparent și Controlat | Transparență completă fără dependențe non-UE critice | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Concluzie Centrală
 
 | Justificare pentru Scor Central | Implementare |
@@ -463,6 +475,8 @@ standards: SAFARI@0.9, ECSF
 
 # SOV-7 · Suveranitate de securitate și conformitate
 ---
+<!-- _class: table -->
+
 # SOV-7 · Întrebări
 
 | Întrebare · tip/min. | Întrebare | Dovezire necesară |
@@ -474,6 +488,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · K·2+ | Sunt drepturile de audit realizabile în practică, inclusiv accesul la sistem și loguri? | Drept de audit contractual, raport de audit efectuat |
 | 7.6 · O·2+ | Este procedura de raportare pentru încălcări de date și incidente conformă GDPR și este demonstrabil implementată? | Plan de incident, acord cu procesor de date, înregistrare de raportare |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Găsiri și Dovezi
 
 | Întrebare · tip/min. | Găsire factuală | ID Sursă | Dovezire 0-4 | Impact / Risc |
@@ -485,6 +501,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Drepturi de audit realizabile în practică (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · Procedură conformă GDPR (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Stabilirea Nivelului
 
 | Nivel | Etichetă | Caracteristică | Dovezire minimă |
@@ -495,6 +513,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Operațiuni UE | Operațiunile de securitate UE sunt eficiente și auditurile independente sunt posibile | 3 |
 | 4 | În control | Control complet asupra monitorizării, răspunsului la incidente, patch-urilor și conformității | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Concluzie Finală
 
 | Justificare pentru scorul central al tabloului de bord | Implementare |
@@ -546,6 +566,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Influență | Influență UE semnificativă asupra sursei de energie și a lanțului de aprovizionare circular | 3 |
 | 4 | Durabil | Complet durabil, transparent și ancorat în UE cu monitorizare structurală | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-8 · Concluzie preliminară
 
 | Justificare pentru scorul central | Implementare |
@@ -580,6 +602,8 @@ standards: SAFARI@0.9, ECSF
 | … | … | … | … | … |
 | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Regula 4 · Rezultat Obligatoriu
 
 | Condiție sau Consecință | Verificare și ID Sursă |
@@ -591,6 +615,8 @@ standards: SAFARI@0.9, ECSF
 | Dacă controlul este exercitat în acea jurisdicție, atunci SOV-1 este, de asemenea, nivel maxim 1 | Aplicat / N.V.T.: … |
 | Expunere rămasă | … |
 ---
+<!-- _class: table table-editable -->
+
 # Rută Tehnică · Regula 5
 
 | Condiție | Rezultat și ID Sursă |
@@ -603,6 +629,8 @@ standards: SAFARI@0.9, ECSF
 | Toate condițiile sunt îndeplinite | Doar "da" dacă toate rezultatele anterioare sunt pozitive: … |
 | Consecință | Poate susține Regula 0; nu modifică SOV-2 și nivelul total SEAL |
 ---
+<!-- _class: table table-editable -->
+
 # Tablou de Bord SAFARI
 
 | Cod | Greutate | Stabilit 0-4 | Probă 0-4 | Judecată față de norma aleasă | Sursă Obiectiv Concluzie |
@@ -616,6 +644,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | 10% | … | … | Satisfăcător / decalaj / N.V.T. | … |
 | SOV-8 | 5% | … | … | Satisfăcător / decalaj / N.V.T. | … |
 ---
+<!-- _class: table table-editable -->
+
 # Rezultat Total
 
 | Componentă | Rezultat și Justificare |
@@ -629,6 +659,8 @@ standards: SAFARI@0.9, ECSF
 | Solubil intern | … |
 | Necesită cooperarea furnizorului | … |
 ---
+<!-- _class: table table-editable -->
+
 # Poziție Indicativă CADA
 
 | Componentă | Rezultat și ID sursă |
@@ -640,6 +672,8 @@ standards: SAFARI@0.9, ECSF
 | Restricție de probă | … |
 | Formularea obligatorie | Indicație pe baza propunerii; nu un calificativ cu privire la conformitate. |
 ---
+<!-- _class: table table-editable -->
+
 # Opinia de asigurare pe obiective
 
 | Obiectiv | Întrebări critice cu dovezi | Risc de neconformitate | Tip de opinie | Formularea și mențiune |
@@ -648,7 +682,7 @@ standards: SAFARI@0.9, ECSF
 | SOV-… | … | … | … | … |
 | SOV-… | … | … | … | … |
 ---
-<!-- class: table -->
+<!-- _class: table -->
 
 # Asistență de formulare pentru asigurare
 
@@ -658,7 +692,7 @@ standards: SAFARI@0.9, ECSF
 | Siguranță limitată | Toate întrebările critice minim 2; nu toate minim 3 | Pe baza activităților noastre, nu s-a dovedit că [afirmație] este incorectă. Oferim o siguranță limitată. |
 | Siguranță rezonabilă | Toate întrebările critice minim 3 | Pe baza activităților noastre, considerăm că [afirmație]. Oferim o siguranță rezonabilă. |
 ---
-<!-- class: table table-editable -->
+<!-- _class: table table-editable -->
 
 # Găsiri și recomandări
 

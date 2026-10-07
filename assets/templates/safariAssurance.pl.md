@@ -7,7 +7,6 @@ title: Ocena SAFARI suwerenności cyfrowej
 language: pl
 standards: SAFARI@0.9, ECSF
 ---
-
 <!-- _class: title -->
 
 # Ocena SAFARI suwerenności cyfrowej
@@ -21,7 +20,6 @@ standards: SAFARI@0.9, ECSF
 - Zastosuj sześć reguł oceny przed ustaleniem poziomu dla każdego celu SOV.
 - Sformułuj orzeczenie dotyczące zapewnienia jakości dopiero po ocenie kontroli jakości i zdarzeń po dacie referencyjnej.
 ---
-
 <!-- _class: table table-editable -->
 
 # Zespół ds. zarządzania dokumentacją i zaangażowania
@@ -83,7 +81,6 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Bezpieczeństwo i zgodność | Tak | 2 | … | … |
 | SOV-8 | Zrównoważony rozwój | Tak | 1 | … | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Podejście zapewniające pewność
@@ -114,7 +111,6 @@ standards: SAFARI@0.9, ECSF
 | Wystarczająco dużo dowodów jest oczekiwane | … | Tak / nie |
 | Decyzja o akceptacji | Tylko kontynuuj, jeśli wszystkie kryteria są "tak" | Akceptacja / odrzucenie |
 ---
-
 <!-- _class: table -->
 
 # Poziomy dowodów
@@ -128,7 +124,6 @@ standards: SAFARI@0.9, ECSF
 | 4 | Niezależne dowody | Zebrane lub zweryfikowane przez niezależną osobę oceniającą |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Centralny rejestr dowodowy
@@ -154,7 +149,6 @@ standards: SAFARI@0.9, ECSF
 | 4 · Wymuszona pozycja prawna | W przypadku wymuszalnego dostępu zagranicznego, tylko pełna ścieżka techniczna chroni; to zmienia SOV-2 i całkowity SEAL. Usługa wymagająca czytelnych danych nie ma tej ścieżki. |
 | 5 · Ścieżka techniczna | W przypadku wymuszalnego dostępu zagranicznego, tylko pełna ścieżka techniczna chroni; to zmienia SOV-2 i całkowity SEAL. Usługa wymagająca czytelnich danych nie ma tej ścieżki. |
 ---
-
 <!-- _class: section -->
 
 # SOV-1 · Suwerenność strategiczna
@@ -186,7 +180,6 @@ standards: SAFARI@0.9, ECSF
 | 1.5 · Zależność od dostawców na poziomie zarządu (O·2+) | … | … | … | L/M/H · J/O/S |
 | 1.6 · Wyjście w przypadku zmiany własności (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-1 · Określanie poziomu
@@ -211,7 +204,6 @@ standards: SAFARI@0.9, ECSF
 | Zastosowane zasady i ewentualne ograniczenia | … |
 | Najważniejsza przyczyna, ryzyko i identyfikator znaleziska | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-2 · Suwerenność prawna i jurysdykcyjna
@@ -252,7 +244,6 @@ standards: SAFARI@0.9, ECSF
 | 2.6 · Kwestionowanie żądania zagranicznego sądu (K·2+) | … | … | … | L/M/H · J/O/S |
 | 2.7 · Legalność danych w zależności od rodzaju (K·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-2 · Określanie poziomu
@@ -277,7 +268,6 @@ standards: SAFARI@0.9, ECSF
 | Zastosowanie zasad 0 i 4 oraz ewentualne ograniczenia | … |
 | Najważniejsza przyczyna, ryzyko i identyfikator znaleziska | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-3 · Suwerenność danych i sztucznej inteligencji
@@ -309,7 +299,6 @@ standards: SAFARI@0.9, ECSF
 | 3.5 · Definitywne usunięcie danych (O·2+) | … | … | … | L/M/H · J/O/S |
 | 3.6 · Regulowany dostęp do wsparcia (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-3 · Określanie poziomu
@@ -335,7 +324,6 @@ standards: SAFARI@0.9, ECSF
 | Najważniejsza przyczyna, ryzyko i identyfikator znaleziska | … |
 Here's the translated version of the Markdown slide blocks, preserving all markers and identifiers as requested:
 ---
-
 <!-- _class: section -->
 
 # SOV-4 · Suwerenność operacyjna
@@ -367,7 +355,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 4.5 · Zastępowalni podwykonawcy (O·1+) | … | … | … | L/M/H · J/O/S |
 | 4.6 · Realistyczny scenariusz wyjścia (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-4 · Określanie poziomu
@@ -392,7 +379,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Zastosowane reguły i ewentualne ograniczenia | … |
 | Najważniejsza przyczyna, ryzyko i ID znaleziska | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-5 · Suwerenność łańcucha
@@ -424,7 +410,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 5.5 · Podwykonawcy i zapis o zmianie umowy (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Prawa audytowe dla podwykonawców (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-5 · Określanie poziomu
@@ -449,7 +434,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Zastosowanie reguły 5 i ewentualne ograniczenia | … |
 | Najważniejsza przyczyna, ryzyko i ID znaleziska | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-6 · Suwerenność technologiczna
@@ -481,7 +465,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 6.5 · Udokumentowana pętla (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testowana migracja do alternatywy (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-6 · Określanie poziomu
@@ -506,7 +489,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Zastosowanie reguły 5 i ewentualne ograniczenia | … |
 | Najważniejsza przyczyna, ryzyko i identyfikator znaleziska | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-7 · Bezpieczeństwo i zgodność Suwerenność
@@ -538,7 +520,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 7.5 · Wykonalne prawa audytowe (K·2+) | … | … | … | L/M/H · J/O/S |
 | 7.6 · Zgodna z RODO procedura zgłaszania (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-7 · Określanie poziomu
@@ -563,7 +544,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Zastosowane reguły i ewentualne ograniczenia | … |
 | Najważniejsza przyczyna, ryzyko i identyfikator znaleziska | … |
 ---
-
 <!-- _class: section -->
 
 # SOV-8 · Zrównoważony rozwój Suwerenność
@@ -595,7 +575,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | 8.5 · Oceń zależność od krytycznych surowców (O·1+) | … | … | … | L/M/H · J/O/S |
 | 8.6 · Raport CSRD lub dobrowolny (O·1+) | … | … | … | L/M/H · J/O/S |
 ---
-
 <!-- _class: table table-editable -->
 
 # SOV-8 · Określanie poziomu
@@ -620,13 +599,11 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Zastosowane reguły i ewentualne ograniczenia | … |
 | Najważniejsza przyczyna, ryzyko i identyfikator znaleziska | … |
 ---
-
 <!-- _class: section -->
 
 # Wniosek i opinia atestacyjna
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Zgodność z prawem według typu danych · Wiersz 0
@@ -639,7 +616,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Dane sektora regulowanego | NIS2, DORA lub zasady specyficzne dla sektora | … | Uzasadnione / ryzyko | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Narażenie na nakazy prawne · Zasada 4
@@ -708,7 +684,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Możliwe do rozwiązania wewnętrznie | … |
 | Wymagana współpraca dostawcy | … |
 ---
-
 <!-- _class: table table-editable -->
 
 # Wskazówka pozycji CADA
@@ -723,7 +698,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Sformułowanie obowiązkowe | Wskazanie na podstawie propozycji; brak oceny zgodności. |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Ocena pewności dla każdego celu
@@ -745,7 +719,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | Ograniczona pewność | Wszystkie krytyczne pytania minimalnie 2; nie wszystkie minimalnie 3 | Na podstawie naszych działań nie stwierdziliśmy, że [twierdzenie] jest nieprawdziwe. Wydajemy ograniczoną pewność. |
 | Racjonalna pewność | Wszystkie krytyczne pytania minimalnie 3 | Na podstawie naszych działań uważamy, że [twierdzenie]. Wydajemy racjonalną pewność. |
 ---
-
 <!-- _class: table table-editable -->
 
 # Wnioski i rekomendacje
@@ -757,7 +730,6 @@ Here's the translated version of the Markdown slide blocks, preserving all marke
 | F-03 | … | … | … | … | … | … |
 
 ---
-
 <!-- _class: table table-editable -->
 
 # Kontrola jakości i zdarzenia po dacie referencyjnej

@@ -35,6 +35,8 @@ standards: SAFARI@0.9, ECSF
 | Verzia a dátum reportu | … |
 | TLP klasifikácia a zoznam distribúcie | … |
 ---
+<!-- _class: table table-editable -->
+
 # Objektív a Rozsah
 
 | Rozsahový prvok | Implementácia |
@@ -48,6 +50,8 @@ standards: SAFARI@0.9, ECSF
 | Explicitné výnimky s odôvodnením | … |
 | Verzia normatívneho rámca | SAFARI v0.9 (koncept; dobrovoľná metódika) |
 ---
+<!-- _class: table table-editable -->
+
 # Organizácia’s Vyhlásenie
 
 | Komponent | Implementačný text |
@@ -59,6 +63,8 @@ standards: SAFARI@0.9, ECSF
 | Upozornenie | Výsledok je založený na dostupnom dôkaze k určitému dátumu; zmeny môžu ovplyvniť výsledok. |
 | Vlastník a formálne potvrdenie | … |
 ---
+<!-- _class: table table-editable -->
+
 # Požadované úrovne a kľúčové ciele
 
 | Kód | Cieľ | Kľúčový cieľ | Odporúčaná minimálna úroveň | Požadovaná | Odôvodnenie odchýlky |
@@ -72,6 +78,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | Bezpečnosť a dodržiavanie predpisov | Áno | 2 | … | … |
 | SOV-8 | Udržateľnosť | Áno | 1 | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Audítna stratégia
 
 | Komponent | Výber a odôvodnenie |
@@ -177,6 +185,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Riadenie | Európske riadenie je oddelené a vynútené; vplyv mimo EÚ je silne obmedzený | 3 |
 | 4 | Stratégia autonómia | Udržateľne zakorenené v Európe; závislosť je explicitne zvážená v rozhodnutí predstavenstva | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-1 · Zostatková Hodnotenie – Hlavné Zoznamenie
 
 | Podklad pre hlavné hodnotenie | Implementácia |
@@ -384,6 +394,8 @@ standards: SAFARI@0.9, ECSF
 | 5.5 · Poddodávky a notifikovanie o zmene (K·2+) | … | … | … | L/M/H · J/O/S |
 | 5.6 · Auditné práva pre poddodávky (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Úroveň Stanovovania
 
 | Úroveň | Popis | Kritéria | Min. dôkaz |
@@ -394,6 +406,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Významný vplyv | Kritické zložky sú diverzifikované; aktualizácie sú ovértené; reťazec budovania a podpísania je známy | 3 |
 | 4 | Transparentný a kontrolovaný | Kompletná transparentnosť bez kritických ne-EÚ závislostí | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-5 · Cieľová Hodnotenie
 
 | Odôvodnenie pre hlavný ukazovateľ | Implementácia |
@@ -420,6 +434,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · O·1+ | Je celý stack zdokumentovaný, vrátane uzavretých komponentov a alternatív? | Architektúra, register komponentov |
 | 6.6 · O·2+ | Je migrácia na alternatívu realistická a testovaná? | Test migrácie, stratégia odchodu, analýza alternatív |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Zistenia a dôkazy
 
 | Otázka · typ/min. | Skutočná zistená skutočnosť | Identifikátor zdroja | Dôkaz 0-4 | Dopad / riziko |
@@ -431,6 +447,8 @@ standards: SAFARI@0.9, ECSF
 | 6.5 · Dokumentovaná technológia (O·1+) | … | … | … | L/M/H · J/O/S |
 | 6.6 · Testovaná migrácia na alternatívu (O·2+) | … | … | … | L/M/H · J/O/S |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Úroveň Hodnotenia
 
 | Úroveň | Označenie | Charakteristika | Minimálny dôkaz |
@@ -441,6 +459,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Znamenitá autonómia | Nahraditeľnosť bola testovaná a kritický softvér je ovládateľný prostredníctvom auditu alebo otvoreného zdroja | 3 |
 | 4 | Pod kontrolou | Plná kontrola nad integráciou a štandardmi bez kritických uzavretých závislostí | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-6 · Hlavný Zistený Výsledok
 
 | Odôvodnenie pre hlavný ukazovateľ | Implementácia |
@@ -454,6 +474,8 @@ standards: SAFARI@0.9, ECSF
 
 # SOV-7 · Bezpečnostná a Kompliance Súverenita
 ---
+<!-- _class: table -->
+
 # SOV-7 · Otázky
 
 | Otázka · typ/min. | Otázka | Požiadavka na dôkaznú podporu |
@@ -465,6 +487,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · K·2+ | Sú auditné práva prakticky realizovateľné, vrátane prístupu k systémom a logom? | Zmluvné auditné práva, vykonaný auditný výkaz |
 | 7.6 · O·2+ | Je proces hlášdenia úniku osobných údajov a incidentov v súlade s GDPR a je dokázateľne implementovaný? | Plán incidentov, zmluva s prevádzkovateľom, evidencia hlášení |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Nález a dôkazy
 
 | Otázka · typ/min. | Skutočný nález | Identifikátor zdroja | Dôkaz 0-4 | Dopad / Riziko |
@@ -476,6 +500,8 @@ standards: SAFARI@0.9, ECSF
 | 7.5 · Prakticky realizovateľné auditné práva (K·2+) | … | … | … | Nízky/Stredný/Vysoký · Žiadny/Áno/Nie |
 | 7.6 · GDPR-zodpovedný proces hlášdenia (O·2+) | … | … | … | Nízky/Stredný/Vysoký · Žiadny/Áno/Nie |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Úroveň Hodnotenia
 
 | Úroveň | Označenie | Charakteristika | Minimálne dôkazy |
@@ -486,6 +512,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Operácie v EÚ | Bezpečnostné operácie v EÚ sú efektívne a nezávislé audity sú možné | 3 |
 | 4 | Pod kontrolou | Kompletná kontrola nad monitorovaním, reakciou na incidenty, aktualizáciami a shodou | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-7 · Hlavný Záver
 
 | Odôvodnenie pre hlavný výsledok na hlavnej tabule | Implementácia |
@@ -537,6 +565,8 @@ standards: SAFARI@0.9, ECSF
 | 3 | Vplyv | Významný vplyv EÚ na zdroj energie a obojsstranný reťazec | 3 |
 | 4 | Udržateľnosť | Plne udržateľná, transparentná a zakorenená v EÚ s štruktúrnou monitorovaním | 4 |
 ---
+<!-- _class: table table-editable -->
+
 # SOV-8 · Hlavný záver
 
 | Podklad pre hlavný ukazovák | Implementácia |
@@ -571,6 +601,8 @@ standards: SAFARI@0.9, ECSF
 | … | … | … | … | … |
 | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Požadavka 4 · Povinný výstup
 
 | Podmienka alebo dôsledok | Potvrdenie a ID zdroja |
@@ -582,6 +614,8 @@ standards: SAFARI@0.9, ECSF
 | Ak je v danej právnej leh všeobecná kontrola, potom je aj SOV-1 maximálna úroveň 1 | Použité / n.v.t.: … |
 | Zostávajúci vystavený rizikový faktor | … |
 ---
+<!-- _class: table table-editable -->
+
 # Technický postup · Požiadavka 5
 
 | Podmienka | Výstup a ID zdroja |
@@ -594,6 +628,8 @@ standards: SAFARI@0.9, ECSF
 | Všetky podmienky spoločne splnené | Len 'áno', ak všetky predchádzajúce výstupy sú pozitívne: … |
 | Dôsledok | Môže podporovať Pravidlo 0; nezmení SOV-2 a celkové úroveň SEAL |
 ---
+<!-- _class: table table-editable -->
+
 # Safari-škála
 
 | Kód | Váha | Stanovené 0-4 | Dôkaz 0-4 | Hodnotenie oproti zvolenej norme | Zdroj cieľovej závery |
@@ -607,6 +643,8 @@ standards: SAFARI@0.9, ECSF
 | SOV-7 | 10% | … | … | Vhodné / medzera / n.v.t. | … |
 | SOV-8 | 5% | … | … | Vhodné / medzera / n.v.t. | … |
 ---
+<!-- _class: table table-editable -->
+
 # Celkový výstup
 
 | Časť | Výstup a zdôvodnenie |
@@ -620,6 +658,8 @@ standards: SAFARI@0.9, ECSF
 | Riadené internými prostriedkami | … |
 | Vyžaduje spoluprácu dodávateľa | … |
 ---
+<!-- _class: table table-editable -->
+
 # Predikátna poloha CADA
 
 | Část | Výsledok a ID zdroja |
@@ -631,6 +671,8 @@ standards: SAFARI@0.9, ECSF
 | Obmedzenie dôkazov | … |
 | Povinná formulácia | Predikcia na základe návrhu; neposúďme shodu s predpismi. |
 ---
+<!-- _class: table table-editable -->
+
 # Hodnotenie záruky podľa cieľa
 
 | Cieľ | Dôkaz kritických otázok | Riziko neplatnosti | Typ hodnotenia | Formulácia a výnimka |
@@ -659,6 +701,8 @@ standards: SAFARI@0.9, ECSF
 | F-02 | … | … | … | … | … | … |
 | F-03 | … | … | … | … | … | … |
 ---
+<!-- _class: table table-editable -->
+
 # Kontrol kvality a udalosti po referenčnej dátume
 
 | Kontrola | Výsledok a odkaz na revízneho |
@@ -672,6 +716,8 @@ standards: SAFARI@0.9, ECSF
 | Udalosti po referenčnej dátume boli vyhodnotené | … |
 | Otvorené rozdiely v porozumení boli spracované | … |
 ---
+<!-- _class: table table-editable -->
+
 # Potvrdenie tvrdenia organizáciou
 
 | Potvrdenie | Implementácia |
@@ -681,6 +727,8 @@ standards: SAFARI@0.9, ECSF
 | Dátum | … |
 | Potvrdenie | Áno / Nie |
 ---
+<!-- _class: table table-editable -->
+
 # Nezávislá kontrola kvality
 
 | Kontrola | Implementácia |
