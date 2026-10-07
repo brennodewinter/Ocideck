@@ -10,8 +10,9 @@ import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/document_integrity.dart';
 
-/// De veertien invulbare werkdeck-sjablonen voor terugkerende werkprocessen.
+/// De vijftien invulbare werkdeck-sjablonen voor terugkerende werkprocessen.
 const werkdeckIds = [
   'postIncidentReview',
   'privacyIncident',
@@ -23,6 +24,7 @@ const werkdeckIds = [
   'steeringUpdate',
   'auditFollowup',
   'vendorRisk',
+  'safariAssurance',
   'architectureDecision',
   'policyRollout',
   'handover',
@@ -226,37 +228,52 @@ void main() {
     });
   });
 
-  group('nl/en parity', () {
-    // De Engelse variant is een vertaling van het Nederlandse document, geen
-    // eigen sjabloon: zelfde slidetypes, zelfde invulbaarheid, zelfde maten.
-    test('both languages carry the same structure per template', () {
+  group('translated template parity', () {
+    test('SAFARI and every English template match the Dutch structure', () {
       for (final template in documentTemplates) {
         final nl = slidesOf(template.id);
-        final en = slidesOf(template.id, language: 'en');
-        final label = template.id;
-        expect(
-          en.map((s) => s.type).toList(),
-          nl.map((s) => s.type).toList(),
-          reason: label,
-        );
-        for (var i = 0; i < nl.length; i++) {
-          final where = '$label slide ${i + 1}';
-          expect(en[i].tableEditable, nl[i].tableEditable, reason: where);
-          expect(en[i].skipped, nl[i].skipped, reason: where);
-          expect(en[i].listStyle, nl[i].listStyle, reason: where);
+        final languages = template.id == 'safariAssurance'
+            ? contentLanguages.where((code) => code != 'nl')
+            : const ['en'];
+        for (final language in languages) {
+          final translated = slidesOf(template.id, language: language);
+          final label = '${template.id}.$language';
           expect(
-            en[i].showChecklistProgress,
-            nl[i].showChecklistProgress,
-            reason: where,
+            translated.map((s) => s.type).toList(),
+            nl.map((s) => s.type).toList(),
+            reason: label,
           );
-          expect(en[i].bullets.length, nl[i].bullets.length, reason: where);
-          expect(en[i].tableRows.length, nl[i].tableRows.length, reason: where);
-          if (nl[i].tableRows.isNotEmpty) {
+          for (var i = 0; i < nl.length; i++) {
+            final where = '$label slide ${i + 1}';
             expect(
-              en[i].tableRows.first.length,
-              nl[i].tableRows.first.length,
+              translated[i].tableEditable,
+              nl[i].tableEditable,
               reason: where,
             );
+            expect(translated[i].skipped, nl[i].skipped, reason: where);
+            expect(translated[i].listStyle, nl[i].listStyle, reason: where);
+            expect(
+              translated[i].showChecklistProgress,
+              nl[i].showChecklistProgress,
+              reason: where,
+            );
+            expect(
+              translated[i].bullets.length,
+              nl[i].bullets.length,
+              reason: where,
+            );
+            expect(
+              translated[i].tableRows.length,
+              nl[i].tableRows.length,
+              reason: where,
+            );
+            if (nl[i].tableRows.isNotEmpty) {
+              expect(
+                translated[i].tableRows.first.length,
+                nl[i].tableRows.first.length,
+                reason: where,
+              );
+            }
           }
         }
       }
@@ -814,6 +831,205 @@ void main() {
         expect(spec.description, isNotEmpty, reason: language);
         expect(spec.recommendation, isNotEmpty, reason: language);
       }
+    });
+  });
+
+  group('SAFARI-assessment', () {
+    test('is een direct vindbaar invulbaar assurance-werkdeck', () {
+      final template = deckTemplateById('safariAssurance')!;
+      expect(template.requiresInfoSafety, isFalse);
+      expect(template.title, 'SAFARI-assessment digitale soevereiniteit');
+      final slides = slidesOf('safariAssurance');
+      expect(deckOf('safariAssurance').standardsUsed, ['SAFARI@0.9', 'ECSF']);
+      expect(
+        slidesWithUnresolvedSafariFields(
+          deckOf('safariAssurance').copyWith(standardsUsed: const []),
+        ),
+        isNotEmpty,
+        reason: 'de echte aanmaakroute neemt alleen de sjabloondia\'s over',
+      );
+      expect(slides.first.type, SlideType.title);
+      expect(slides.any((slide) => slide.tableEditable), isTrue);
+      expect(slides.any((slide) => slide.type == SlideType.signOff), isTrue);
+    });
+
+    test('dekt alle 49 vaste SAFARI-toetsvragen in elke taal', () {
+      final expected = {
+        for (var goal = 1; goal <= 8; goal++)
+          for (var question = 1; question <= (goal == 2 ? 7 : 6); question++)
+            '$goal.$question',
+      };
+      for (final language in contentLanguages) {
+        final source = File(
+          'assets/templates/safariAssurance.$language.md',
+        ).readAsStringSync();
+        expect(source, contains('CC BY-SA 4.0'), reason: language);
+        expect(
+          source,
+          contains('https://creativecommons.org/licenses/by-sa/4.0/'),
+          reason: language,
+        );
+        final found = <String>{};
+        for (final slide in slidesOf('safariAssurance', language: language)) {
+          for (final row in slide.tableRows.skip(1)) {
+            final match = row.isEmpty
+                ? null
+                : RegExp(r'^([1-8]\.[1-7])(?:\s|$)').firstMatch(row[0]);
+            if (match != null) {
+              found.add(match.group(1)!);
+            }
+          }
+        }
+        expect(found, expected, reason: language);
+      }
+    });
+
+    test('bewaart type en minimale bewijseis van SAFARI v0.9', () {
+      const expected = {
+        '1.1': 'K:2+',
+        '1.2': 'K:2+',
+        '1.3': 'K:2+',
+        '1.4': 'O:1+',
+        '1.5': 'O:2+',
+        '1.6': 'O:2+',
+        '2.1': 'K:2+',
+        '2.2': 'K:3+',
+        '2.3': 'K:2+',
+        '2.4': 'O:2+',
+        '2.5': 'O:2+',
+        '2.6': 'K:2+',
+        '2.7': 'K:2+',
+        '3.1': 'K:3+',
+        '3.2': 'K:3+',
+        '3.3': 'K:2+',
+        '3.4': 'O:2+',
+        '3.5': 'O:2+',
+        '3.6': 'O:2+',
+        '4.1': 'K:2+',
+        '4.2': 'K:2+',
+        '4.3': 'O:2+',
+        '4.4': 'O:2+',
+        '4.5': 'O:1+',
+        '4.6': 'O:2+',
+        '5.1': 'K:2+',
+        '5.2': 'O:1+',
+        '5.3': 'K:2+',
+        '5.4': 'O:1+',
+        '5.5': 'K:2+',
+        '5.6': 'O:2+',
+        '6.1': 'K:2+',
+        '6.2': 'K:2+',
+        '6.3': 'O:2+',
+        '6.4': 'O:2+',
+        '6.5': 'O:1+',
+        '6.6': 'O:2+',
+        '7.1': 'K:3+',
+        '7.2': 'K:2+',
+        '7.3': 'O:3+',
+        '7.4': 'K:2+',
+        '7.5': 'K:2+',
+        '7.6': 'O:2+',
+        '8.1': 'K:2+',
+        '8.2': 'O:2+',
+        '8.3': 'O:2+',
+        '8.4': 'O:1+',
+        '8.5': 'O:1+',
+        '8.6': 'O:1+',
+      };
+      final found = <String, String>{};
+      for (final slide in slidesOf('safariAssurance')) {
+        if (!slide.title.toLowerCase().contains('toetsvragen') ||
+            slide.tableRows.isEmpty) {
+          continue;
+        }
+        for (final row in slide.tableRows.skip(1)) {
+          if (row.isEmpty) continue;
+          final match = RegExp(
+            r'^([1-8]\.[1-7]) · ([KO])·([1-3]\+)$',
+          ).firstMatch(row[0]);
+          if (match == null) continue;
+          found[match.group(1)!] = '${match.group(2)}:${match.group(3)}';
+        }
+      }
+      expect(found, expected);
+    });
+
+    test('legt de blokkerende assuranceregels expliciet vast', () {
+      final source = File(
+        'assets/templates/safariAssurance.nl.md',
+      ).readAsStringSync();
+      expect(
+        source,
+        contains('Bewijs onder het minimum van een vraag telt als 0'),
+      );
+      expect(
+        source,
+        contains('vragen 2.3, 2.5 en 2.6 tellen als bewijsniveau 0'),
+      );
+      expect(
+        source,
+        contains('De dienst hoeft gegevens niet in leesbare vorm te verwerken'),
+      );
+      expect(source, contains('Wij geven een beperkte mate van zekerheid.'));
+      expect(source, contains('Wij geven een redelijke mate van zekerheid.'));
+      expect(source, contains('Acceptatiebesluit'));
+    });
+
+    test(
+      'houdt bewijscontext dichtbij en gebruikt één centrale scorekaart',
+      () {
+        final slides = slidesOf('safariAssurance');
+        final evidence = slides.firstWhere(
+          (slide) => slide.title == 'SOV-1 · Bevindingen en bewijs',
+        );
+        expect(evidence.tableRows[1][0], contains("1.1 · UBO's"));
+        expect(evidence.tableRows[1][0], contains('K·2+'));
+
+        final scorecard = slides.firstWhere(
+          (slide) => slide.title == 'SAFARI-scorekaart',
+        );
+        expect(scorecard.tableRows.first, [
+          'Code',
+          'Gewicht',
+          'Vastgesteld 0-4',
+          'Bewijs 0-4',
+          'Oordeel tegen gekozen norm',
+          'Bron doelconclusie',
+        ]);
+        expect(
+          slides.where((slide) => slide.title.endsWith('· Doelconclusie')),
+          hasLength(8),
+        );
+      },
+    );
+
+    test('draagt de acht doelen van scope tot assurance-oordeel', () {
+      final slides = slidesOf('safariAssurance');
+      final sections = slides
+          .where((slide) => slide.type == SlideType.section)
+          .map((slide) => slide.title)
+          .toSet();
+      for (var goal = 1; goal <= 8; goal++) {
+        expect(
+          sections.any((title) => title.startsWith('SOV-$goal ·')),
+          isTrue,
+          reason: 'SOV-$goal',
+        );
+      }
+      final titles = slides.map((slide) => slide.title).toSet();
+      expect(titles, contains('Bindende scoringsregels'));
+      expect(titles, contains('Rechtmatigheid per gegevenssoort · Regel 0'));
+      expect(titles, contains('Blootstelling aan rechtsordes · Regel 4'));
+      expect(titles, contains('Technische route · Regel 5'));
+      expect(titles, contains('SAFARI-scorekaart'));
+      expect(titles, contains('Assurance-oordeel per doel'));
+      expect(titles, contains('Vaststelling bewering door organisatie'));
+      expect(titles, contains('Onafhankelijke kwaliteitsreview'));
+      expect(titles, contains('Ondertekening assurance-oordeel'));
+      expect(
+        titles,
+        contains('Kwaliteitscontrole en gebeurtenissen na peildatum'),
+      );
     });
   });
 

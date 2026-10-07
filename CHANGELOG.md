@@ -15,6 +15,140 @@ All notable changes to OciDeck are documented in this file.
   `footer:`-frontmatter; een logo in een onderhoek wijkt zolang de footer
   zichtbaar is automatisch uit naar dezelfde bovenhoek. Merkstroken blijven
   op hun vaste rand staan.
+- **Typen in een document is lichter geworden.** Elke aanslag liep eerst de
+  volledige afgeleide keten — Quill↔Markdown heen en terug, overzicht-sync,
+  undo/redo-status en een volledige herparsing van het document — in de
+  native tekstcallback. Dat werk wordt nu kort samengevoegd (één debounce
+  per event-loop-ronde voor Quill↔Markdown, één 160 ms-coördinator voor de
+  overzichts- en geschiedenisbalk), tabelcellen houden hun controller en
+  focus als er tekst vóór de tabel wordt ingevoegd, en de blokidentiteit
+  matcht in O(n) in plaats van O(n²). Gedrag is ongewijzigd; nieuwe
+  prestatiestests bewaken de grenzen.
+
+
+- **Lokale bestandsconflicten zijn te vergelijken en samen te voegen**
+  (#2323). Wie opsloeg terwijl het bestand ondertussen elders was
+  gewijzigd, kreeg alleen een blinde keuze: overschrijven, herladen of
+  opslaan als — zonder te zien wát er anders was. Beide dialogen bieden nu
+  "Verschillen bekijken…" en "Mijn versie als kopie bewaren". Bij een
+  presentatie opent de vergelijking een dia-overzicht met de drie versies
+  (laatst geopend/opgeslagen, mijn versie, versie op schijf) en voegt
+  `mergeDeckVersions` de niet-botsende wijzigingen al samen; per botsende
+  dia — ook verwijderd-tegen-gewijzigd — kiest de gebruiker expliciet een
+  kant, waarna de merge als één ongedaan-stap in het tabblad landt en
+  bewust vuil blijft. Bij een document toont de vergelijking beide bronnen
+  zij-aan-zij per blok met woordmarkering; samenvoegen van tekst is er
+  bewust niet, alleen een keuze voor een hele versie. Lezen loopt over de
+  bestaande open-poort (cap, UTF-8, veiligheidsscan, parse), er wordt
+  niets geschreven zolang de analyse open staat, en elke schrijfactie
+  controleert de schijf-vingerafdruk opnieuw: is het bestand ondertussen
+  alweer veranderd, dan vervalt de analyse in plaats van dat hij stil
+  wordt toegepast.
+- Het **wisselen tussen Visueel en Bron houdt je plek in beeld** (#2322).
+  De caret werd sinds #1566 al logisch meevertaald, maar de doelstand opende
+  bovenaan: een goed gezette cursor kon alsnog buiten het venster liggen, en
+  wie alleen had gescrold zonder de cursor te verzetten verloor zijn plek
+  helemaal. Nu is er één Markdown-anker — de caret als die in beeld is of er
+  niet is gescrold, anders het eerste zichtbare blok — dat na de opbouw van
+  de doelstand expliciet in de viewport wordt gesprongen. Hetzelfde geldt
+  voor de automatische Bron-fallback bij een niet-verliesvrije constructie:
+  de probleemregel komt echt in beeld. Wisselen verandert de inhoud niet en
+  maakt geen stap in Ongedaan maken.
+- De **carrouselfooter breekt om in plaats van over te lopen** (#2318). De
+  footer was een vaste horizontale rij en liep bij bredere fontmetrics buiten
+  beeld — 10 px op macOS, 29 px op een Linux-gate — tot functionele tests de
+  tekstschaal naar 0,8 moesten verkleinen om dat te verhullen. De footer is
+  nu een `Wrap` die knoppen naar een tweede regel breekt, en het
+  bestandsinfopaneel in de previewkolom scrollt als bredere tekst of een
+  lager venster hem groter maakt dan de kolom toelaat. De
+  deduplicatieketentest hoeft de productlayout niet langer te bewijzen.
+- De **CWE-verouderingscontrole** (#2292) leest nu MITRE's officiële
+  `cwec_latest.xml.zip` in plaats van de REST-API (`cwe-api.mitre.org`), die
+  op 6-10-2026 verbindingen verbrak ná het HTTP-verzoek. Uit de XML komen
+  versie, inhoudsdatum én het aantal `Weakness`-elementen — dat aantal wordt
+  nog steeds met `assets/cwe/cwe_full.json` vergeleken, zodat een afgekapte of
+  half geregenereerde bundel rood blijft. Een onbereikbare of onleesbare bron
+  is `onbekend`, nooit `actueel`; en `release_auto.sh` kwalificeert zijn
+  "Referentiedata actueel" nu als er bronnen onbekend bleven — vroeger
+  meldde dezelfde uitvoer eerst "niet kunnen kijken" en daarna toch
+  onvoorwaardelijk "actueel".
+- De **notarisatie-preflight classificeert Apple-fouten** (#2296) in plaats
+  van bij élke `notarytool`-fout hetzelfde "profiel opnieuw opslaan"-advies
+  te geven. Bij de echte 403 — een vereiste overeenkomst ontbrak of was
+  verlopen — wees dat advies de verkeerde kant op: `store-credentials` kan
+  een juridische overeenkomst niet accepteren. Nu wijst die fout naar de
+  Account Holder in App Store Connect, blijft het profiel-advies alleen
+  bij een ontbrekend of ongeldig profiel staan, en toont een onbekende
+  fout de rauwe notarytool-uitvoer zonder verzonnen oorzaak.
+- **SIGINT en SIGTERM zijn nu veilige afbrekingen** (#2298) in
+  `release_auto.sh` en `sign_release.sh`. Een signaal is geen commandofout en
+  bereikte de `ERR`-trap niet: Ctrl-C na het aanmaken van de releasebranch liet
+  die tak mét versiebump staan, waarna een verse run er terecht op weigerde;
+  en een afgebroken tekenrun liet een geschreven maar nog niet geverifieerde
+  `SHA256SUMS.minisig` liggen. Beide scripts delen nu dezelfde gelaagde
+  herstelbehandeling als een gewone fout — vóór de tagpush opruimen en opnieuw
+  mogen, bij een onzekere of bevestigde push niets terugdraaien maar eerst
+  `--status` lezen — met de passende 128+n exitstatus.
+- De **lokale macOS-installatie is werkelijk hervatbaar** (#2304). De te
+  installeren app zat alleen in een procesvariabele; faalde de wissel ná een
+  complete publieke release, dan sloeg `--resume` de lokale installatie stil
+  over en meldde toch succes terwijl `/Applications` oud bleef. Nu herontdekt
+  de afsluitstap de bij de tag horende build in de bouwmap, bewijst versie én
+  zegel vóór installatie, en meldt de lokale stap expliciet `NOG OPEN` met de
+  publiceer-url als er niets geverifieerds is — nooit meer stil succes.
+- **`--status` heeft een vaste totale deadline** (#2305) en rapporteert elke
+  sonde afzonderlijk: bewezen, aantoonbaar afwezig, of `[?]` onbekend met de
+  reden. Voorheen deed elke probe tot vier API-pogingen van hooguit 90 seconden
+  achter elkaar — een hangende Forgejo-endpoint (zoals `/actions/tasks` bij
+  v0.6.14, terwijl de rest wél werkte) blokkeerde minutenlang álle statusregels
+  die daarna kwamen, en een leesfout werd stil "afwezig". Nu lopen de sondes
+  parallel met één korte poging per call; wat de deadline niet haalt eindigt
+  als `[?]` met "tijdslimiet overschreden" in plaats van het rapport vast te
+  houden.
+- De **lokale releasebranch** (#2306) wordt na een geslaagde verse release nu
+  echt opgeruimd: eindigde de keten zonder tag-checkout (de CI zette de demo
+  al live), dan bleef de werkboom op de remote-verwijderde versiebumpbranch
+  staan en erfde elke volgende aftakking die stilletjes. Een verse release
+  eindigt voortaan op de starttak én zonder de eigen releasebranch — een
+  vuile werkboom of worktree-lock blokkeert dat met een expliciete melding
+  in plaats van werk mee te dragen of weg te gooien. `--resume` verwijdert
+  nooit een tak die die run niet zelf aanmaakte.
+- De **handmatige releaseherstelroutes** (#2295) zijn nu ref-veilig: geen
+  faalmelding adviseert meer een los `make`-commando dat impliciet op de
+  huidige checkout werkt. De scans-imagefallback is
+  `scripts/release_scans_image.sh vX.Y.Z` — die bouwt aantoonbaar in een
+  tijdelijke werkboom op de release-ref (branch, of de tag als de branch al
+  opgeruimd is) met de scannerpins van díe ref en leest daarna exact die
+  registrytag terug. De webdeploy bewijst bovendien dat de lokale tag díe
+  van origin is, eist een schone werkboom en bouwt alleen vanaf de
+  tag-commit; een afwijkende lokale ref blokkeert de deploy met hersteladvies
+  in plaats van andere code als `$TAG` te publiceren.
+- De **remote tagpush** (#2297) geldt vanaf de eerste poging als
+  remote-onzeker totdat de teruglezing hem bevestigt. Valt het antwoord of de
+  teruglezing weg terwijl de server de tag al sloeg, dan ruimde de oude keten
+  de release-branch op en adviseerde een verse release naast de al bestaande
+  tag. Nu geldt vanaf die eerste poging: geen opruiming, geen verse-release-
+  advies — de route is read-only `--status` en daarna uitsluitend `--resume`
+  van dezelfde tag. Alleen een aantoonbaar afgewezen push mag nog als "niets
+  gebeurd" tellen.
+- De **servermerge van de release-PR** (#2299) gaat alleen door zolang
+  `origin/main` nog exact op de gekeurde base staat. De releasebranch wordt
+  vroeg van main getakt en daarna pas gebouwd en gekeurd; schuift main in die
+  tussenliggende uren door, dan zou een servermerge base-commits in de getagde
+  tree zetten die nooit in deze keten bouwden of keurden. De toets vergelijkt
+  de merge-base van branch en main — het vastgelegde vertrekpunt — met de
+  actuele main-tip, vlak vóór de merge-call: bij drift of een onleesbare
+  toestand stopt de keten vóór merge én tag, met het herstel (main erin
+  mergen, poort opnieuw groen, `--resume`) erbij. Een PR die de server al
+  mergde wordt veilig herkend zonder de toets opnieuw te eisen.
+- De **Windows-herdispatch** in `windows-ophalen` (#2300) toetst "hoort deze
+  run bij deze poging" nu aan een run-id-anker in plaats van een
+  vijf-minuten-tijdvenster: vóór de dispatch wordt de hoogste zichtbare
+  run-id vastgelegd en alleen een run daarboven — of de aangehouden, al
+  lopende build — telt mee. Een oude failure die GitHub als nieuwste blijft
+  tonen is voortaan informatief en beëindigt de herstelpoging nooit meer;
+  vertraagde zichtbaarheid van de echte dispatch blijft een begrensde
+  wachttoestand.
 - De **CI-image-workflows** (#2301) melden ontbrekende
   publicatiecredentials op de canonical repo — en bij elke handmatige
   dispatch — nu als terminale failure met hersteladvies in plaats van een
@@ -115,6 +249,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Het werkdeck **SAFARI-assessment digitale soevereiniteit** staat nu direct in
+  de sjablooncatalogus: 49 vaste SAFARI v0.9-toetsvragen met
+  herleidbaar auditorbewijs, bewijsniveaus, bindende scoringsregels en een
+  assurance-oordeel per doel. Onopgeloste invulwaarden blokkeren verzegelen,
+  zodat een leeg of half ingevuld assessment niet als eindrapport kan worden
+  vastgezet. De sjablooninhoud is een CC BY-SA 4.0-bewerking
+  van SAFARI van Brenno de Winter en Stichting LibreKAT; de OciDeck-code blijft
+  EUPL-1.2.
 - **Inzoomen in het slide-overzicht** (#2288): de tegels zitten niet langer aan één maat vast. De loepknoppen in de
   titelbalk, `Ctrl/Cmd +`/`−`, `Ctrl/Cmd+0` voor de standaardmaat en Ctrl+scroll op het raster schalen de miniaturen
   van de halve tot de driedubbele maat — inzoomen geeft minder maar grotere slides, uitzoomen juist meer kolommen. De

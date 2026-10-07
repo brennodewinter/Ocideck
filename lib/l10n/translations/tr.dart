@@ -214,8 +214,6 @@ const _dutchSourceTr = {
       'Mühürlendi. Saklamak için kaydedin (Ctrl/Cmd+S).',
   'Deze rapportage is naar waarheid opgesteld.':
       'Bu rapor gerçeğe uygun olarak hazırlanmıştır.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Mühürleme ancak tüm AI taslakları gözden geçirildikten sonra yapılabilir. Şu slaytlarda hâlâ denetim gerekiyor:',
   'Uit sjabloon…': 'Şablondan…',
   'Sjabloon kiezen': 'Şablon seç',
   'Scope-object': 'Kapsam nesnesi',
@@ -2540,6 +2538,33 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Alt köşedeki bir logo, alt bilgi olduğunda otomatik olarak karşılık gelen üst köşeye taşınır.',
+  'Verschillen bekijken…': 'Farkları görüntüle…',
+  'Mijn versie als kopie bewaren': 'Sürümümü kopya olarak sakla',
+  'Verschillen met de versie op schijf': 'Diskteki sürümden farklar',
+  'Versie op schijf': 'Diskteki sürüm',
+  'Laatst geopend of opgeslagen': 'Son açılan veya kaydedilen',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Üç sürüm: en son açtığınız veya kaydettiğiniz (taban), kaydedilmemiş sürümünüz ve şu anda diskte bulunanlar.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Güvenilir bir temel sürüm bilinmiyor; otomatik birleştirme mümkün değil. Kullanmak istediğiniz sürümü seçin.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Değişiklikler çakışmıyor ve otomatik olarak birleştirilebilir.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Bu slaytlar her iki tarafta da değiştirildi — her slayt için hangi sürümün kalacağını seçin:',
+  'Geen inhoudelijke verschillen gevonden.': 'İçerik farkı bulunamadı.',
+  'Samenvoegen en toepassen': 'Birleştir ve uygula',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Dosya bu arada yeniden değişti; yeniden karşılaştırın.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Diskteki sürümle birleştirildi — henüz kaydedilmedi.',
+  'Mijn versie bewaren': 'Sürümümü tut',
+  'Versie op schijf laden': 'Diskteki sürümü yükle',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Mühürleme, ancak tüm taslaklar ve zorunlu alanlar tamamlandığında mümkündür. Slaytta hâlâ kontrol edilmesi gerekenler:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Dijital egemenlik SAFARI değerlendirmesi',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Kapsam, değerlendirme soruları, kanıtlar, puanlama ve SAFARI\'ye göre bir güvence görüşü için eksiksiz çalışma destesi.',
   'Nieuwste eerst': 'Önce en yeniler',
   'Oudste eerst': 'Önce en eskiler',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

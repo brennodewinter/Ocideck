@@ -216,8 +216,6 @@ const _dutchSourceEl = {
       'Σφραγίστηκε. Αποθηκεύστε (Ctrl/Cmd+S) για να διατηρηθεί.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Η παρούσα αναφορά συντάχθηκε με αλήθεια.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Η σφράγιση είναι δυνατή μόνο αφού ελεγχθούν όλα τα προσχέδια AI. Απομένει έλεγχος στη(ις) διαφάνεια(ες):',
   'Uit sjabloon…': 'Από πρότυπο…',
   'Sjabloon kiezen': 'Επιλογή προτύπου',
   'Scope-object': 'Αντικείμενο εμβέλειας',
@@ -1654,6 +1652,35 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Ένα λογότυπο σε κάτω γωνία μετακινείται αυτόματα στην αντίστοιχη επάνω γωνία όταν υπάρχει υποσέλιδο.',
+  'Verschillen bekijken…': 'Προβολή διαφορών…',
+  'Mijn versie als kopie bewaren':
+      'Διατήρηση της δικής μου έκδοσης ως αντίγραφο',
+  'Verschillen met de versie op schijf': 'Διαφορές από την έκδοση στον δίσκο',
+  'Versie op schijf': 'Έκδοση στον δίσκο',
+  'Laatst geopend of opgeslagen': 'Τελευταίο άνοιγμα ή αποθήκευση',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Τρεις εκδόσεις: ό,τι άνοιξες ή αποθήκευσες τελευταία (η βάση), η μη αποθηκευμένη έκδοσή σου και ό,τι υπάρχει τώρα στον δίσκο.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Δεν υπάρχει γνωστή αξιόπιστη βασική έκδοση· η αυτόματη συγχώνευση δεν είναι δυνατή. Διάλεξε ποια έκδοση θέλεις να χρησιμοποιήσεις.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Οι αλλαγές δεν συγκρούονται και μπορούν να συγχωνευθούν αυτόματα.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Αυτές οι διαφάνειες άλλαξαν και από τις δύο πλευρές — διάλεξε ανά διαφάνεια ποια έκδοση θα μείνει:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Δεν βρέθηκαν διαφορές περιεχομένου.',
+  'Samenvoegen en toepassen': 'Συγχώνευση και εφαρμογή',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Το αρχείο άλλαξε ξανά εν τω μεταξύ· σύγκρινε ξανά.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Συγχωνεύτηκε με την έκδοση στον δίσκο — δεν έχει αποθηκευτεί ακόμη.',
+  'Mijn versie bewaren': 'Διατήρηση της δικής μου έκδοσης',
+  'Versie op schijf laden': 'Φόρτωση έκδοσης από τον δίσκο',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Η σφράγιση είναι δυνατή μόνο όταν έχουν ολοκληρωθεί όλα τα προσχέδια και τα υποχρεωτικά πεδία. Απομένει να ελεγχθεί στη διαφάνεια:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Αξιολόγηση SAFARI της ψηφιακής κυριαρχίας',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Πλήρες πακέτο εργασίας για το πεδίο εφαρμογής, τα ερωτήματα αξιολόγησης, τα τεκμήρια, τη βαθμολόγηση και ένα συμπέρασμα διασφάλισης σύμφωνα με το SAFARI.',
   'Nieuwste eerst': 'Νεότερα πρώτα',
   'Oudste eerst': 'Παλαιότερα πρώτα',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

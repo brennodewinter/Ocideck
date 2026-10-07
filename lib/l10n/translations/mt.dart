@@ -215,8 +215,6 @@ const _dutchSourceMt = {
       'Issiġillat. Issejvja (Ctrl/Cmd+S) biex iżżommu.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Dan ir-rapport tħejja bil-verità.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'L-issiġillar huwa possibbli biss wara li jiġu riveduti l-abbozzi kollha tal-IA. Għad irid jiġi ċċekkjat fuq is-slajd(s):',
   'Uit sjabloon…': 'Minn mudell…',
   'Sjabloon kiezen': 'Agħżel mudell',
   'Scope-object': 'Oġġett tal-ambitu',
@@ -1647,6 +1645,34 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Logo f\'rokna t\'isfel jiċċaqlaq awtomatikament għar-rokna ta\' fuq korrispondenti meta jkun hemm footer.',
+  'Verschillen bekijken…': 'Ara d-differenzi…',
+  'Mijn versie als kopie bewaren': 'Żomm il-verżjoni tiegħi bħala kopja',
+  'Verschillen met de versie op schijf': 'Differenzi mill-verżjoni fuq id-disk',
+  'Versie op schijf': 'Verżjoni fuq id-disk',
+  'Laatst geopend of opgeslagen': 'L-aħħar miftuħ jew salvat',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tliet verżjonijiet: dak li fetaħt jew żomm l-aħħar (il-bażi), il-verżjoni tiegħek mhux salvata, u dak li issa jinsab fuq id-disk.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'M\'hemmx verżjoni bażi affidabbli magħrufa; it-twaħħid awtomatiku mhux possibbli. Agħżel liema verżjoni trid tuża.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Il-bidliet ma jikkonfligġux u jistgħu jiġu magħquda awtomatikament.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Dawn is-slides nbidlu miż-żewġ naħat — agħżel għal kull slide liema verżjoni tibqa\':',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Ma nstabilx differenzi fil-kontenut.',
+  'Samenvoegen en toepassen': 'Waħħad u applika',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Il-fajl nbidel mill-ġdid fil-frattemp; qabbel mill-ġdid.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Magħqud mal-verżjoni fuq id-disk — mhux salvat għad.',
+  'Mijn versie bewaren': 'Żomm il-verżjoni tiegħi',
+  'Versie op schijf laden': 'Ibbagħja l-verżjoni mid-disk',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'L-issiġillar huwa possibbli biss meta l-abbozzi u l-oqsma obbligatorji kollha jkunu tlestew. Għad irid jiġi ċċekkjat fuq is-slide:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Valutazzjoni SAFARI tas-sovranità diġitali',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Sett ta\' ħidma sħiħ għall-ambitu, il-mistoqsijiet ta\' valutazzjoni, l-evidenza, l-iskorar u opinjoni ta\' assurance skont SAFARI.',
   'Nieuwste eerst': 'L-aktar riċenti l-ewwel',
   'Oudste eerst': 'L-eqdem l-ewwel',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

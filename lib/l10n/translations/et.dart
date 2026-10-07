@@ -213,8 +213,6 @@ const _dutchSourceEt = {
       'Pitseeritud. Salvesta (Ctrl/Cmd+S), et see säiliks.',
   'Deze rapportage is naar waarheid opgesteld.':
       'See aruanne on koostatud tõeselt.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Pitseerimine on võimalik alles siis, kui kõik AI mustandid on üle vaadatud. Veel kontrollida slaidil (slaididel):',
   'Uit sjabloon…': 'Mallist…',
   'Sjabloon kiezen': 'Vali mall',
   'Scope-object': 'Ulatuse objekt',
@@ -1622,6 +1620,34 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Alumnurgas olev logo liigub jaluse olemasolul automaatselt vastavasse ülanurka.',
+  'Verschillen bekijken…': 'Vaata erinevusi…',
+  'Mijn versie als kopie bewaren': 'Säilita minu versioon koopiana',
+  'Verschillen met de versie op schijf':
+      'Erinevused kettal olevast versioonist',
+  'Versie op schijf': 'Versioon kettal',
+  'Laatst geopend of opgeslagen': 'Viimati avatud või salvestatud',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Kolm versiooni: mida viimati avasite või salvestasite (alus), teie salvestamata versioon ja mis praegu kettal on.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Usaldusväärset põhiversiooni pole teada; automaatne liitmine pole võimalik. Valige, millist versiooni soovite kasutada.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Muudatused ei ole vastuolus ja need saab automaatselt liita.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Need slaidid on muudetud mõlemal pool — valige iga slaidi jaoks, kumb versioon jääb:',
+  'Geen inhoudelijke verschillen gevonden.': 'Sisulisi erinevusi ei leitud.',
+  'Samenvoegen en toepassen': 'Liida ja rakenda',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Fail on vahepeal jälle muutunud; võrrelge uuesti.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Liidetud kettal oleva versiooniga — veel salvestamata.',
+  'Mijn versie bewaren': 'Säilita minu versioon',
+  'Versie op schijf laden': 'Laadi versioon kettalt',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Pitseerimine on võimalik alles siis, kui kõik mustandid ja kohustuslikud väljad on täidetud. Slaidil tuleb veel kontrollida:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI digisuveräänsuse hindamine',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Täielik töökomplekt ulatuse, hindamisküsimuste, tõendite, hindamise ja SAFARI kohase kindlustandva arvamuse jaoks.',
   'Nieuwste eerst': 'Uusimad esimesena',
   'Oudste eerst': 'Vanimad esimesena',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

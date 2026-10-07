@@ -439,6 +439,15 @@ profile `ocideck-notary`; override with `OCIDECK_SIGN_IDENTITY` /
 `scripts/notarize_macos.sh --skip-build` signs and notarises whatever is already
 in `build/` without rebuilding.
 
+When the preflight (`--preflight`, also run by `release_auto.sh`) reports a
+`notarytool` failure it shows Apple's real output and routes the fix to the
+cause (#2296): a **403 about a required agreement** means the Account Holder
+must accept the current agreements in App Store Connect — re-saving
+credentials cannot fix that; a **missing or invalid profile** is repaired
+with `store-credentials` as above; a **401/credentials** failure means the
+Apple-ID, app-specific password or team-id is wrong; a **network** error is
+retried later. Anything unrecognised is shown raw, without a guessed cause.
+
 ### Windows / Linux notes
 
 - Windows: distribute the contents of `build/windows/x64/runner/Release/`, or
@@ -712,6 +721,13 @@ mail. Reading that green as "deployed" left `ocideck.librekat.nl` on 0.6.4 for
 both v0.6.5 and v0.6.6. `--status <tag>` reports the live version on its own
 line for the same reason.
 
+`--status` runs its probes in parallel under one fixed total deadline
+(`STATUS_TOTAL_SECONDS`, default 60 s). Every probe reports independently —
+proven, demonstrably absent, or `[?]` unknown with its reason — so a hung
+Forgejo endpoint (in v0.6.14 `/actions/tasks` stalled while the rest of the
+API kept answering) can never hold the whole status report hostage, and an
+unreadable probe is never mistaken for "absent".
+
 Also before the password, the pre-flight clears a **native-assets CMake cache
 left by a previous package version**. `hooks_runner` keys its shared build
 directories on a hash of the build configuration, not on the package version,
@@ -785,7 +801,11 @@ were bumped, publish a new scans image first* (dispatch `ci-image-scans` on the
 branch and wait, so `scans.yml`'s new image tag exists before the PR scan runs) →
 PR → wait for the gate (up to `OCIDECK_GATE_TIMEOUT_MIN`, default 75 min: `linux-gate`
 runs the full suite per-PR on a capacity-1 serial runner and can queue, so the wait
-prints progress rather than giving up at 30) → merge → tag → push to origin **and**
+prints progress rather than giving up at 30) → merge — refused unless
+`origin/main` still sits on the exact base the gate audited (the merge-base of
+the branch against main); on drift the script stops before merging or tagging
+and tells you to merge `origin/main` into the release branch, re-gate, and
+`--resume` → tag → push to origin **and**
 mirror → poll the release CI until every job is done (up to
 `OCIDECK_RELEASE_CI_TIMEOUT_MIN`, default 240 min: the tag chain takes a good two
 hours — v0.6.4 2h05, v0.6.5 2h14, with `Linux bouwen` alone around 50 min — and
@@ -804,7 +824,9 @@ a `--resume` of v0.6.5 ran a day later on `main` with four merges the tag did
 not carry, and only a coincidentally red `sbom-verify` kept that code from going
 live as v0.6.5. So Phase 3 checks the tag out itself (fetching it from `origin`
 first if this clone lacks it) and refuses only when it *cannot*: a dirty working
-tree, or an untracked file in the way. Up to v0.6.8 it merely demanded that
+tree, an untracked file in the way, or a local tag that does not match `origin`'s
+— the local ref must provably be the pushed one before any `deploy-web` build may
+run. Up to v0.6.8 it merely demanded that
 `HEAD` already be the tag, which a release that lands as a merge commit can
 never satisfy — the tag sits on the merge, the working tree on the release
 branch merged into it — so every fresh run stranded here and had to be checked
@@ -823,7 +845,12 @@ the manual-fallback advice, and only a green run plus a stale page points at
 the DNS/host check. Because checking the tag out leaves the working tree on a
 detached `HEAD`, the chain puts it back on the branch the release started from
 when it finishes — a failure there is reported, never fatal to a release that is
-already out. Phase 3 refuses to start while any job for the tag is still
+already out. The same finish removes the local release branch this run created
+once merge and tag are proven: even when the deploy never detached `HEAD` (the
+CI had already taken the demo live) the run ends back on the starting branch,
+and anything blocking the switch — a dirty tree, a worktree lock — is reported
+rather than carried along or discarded. `--resume` never deletes a branch it did
+not create. Phase 3 refuses to start while any job for the tag is still
 active. A timed-out CI wait stops the chain instead of falling through, and
 `--resume` follows the existing jobs before it signs. An absent manifest causes
 one automatic retry only after the previous run is terminal and has a failed job;
@@ -844,12 +871,22 @@ idempotently; the expensive Phase 1 (build/notarize) is never redone. So a pre-t
 stall (the usual case — the gate simply took longer than the wait) resumes at the
 gate/merge; a post-tag stall (Phase 3 signing/deploy, or an upstream job) resumes
 at Phase 3. The PR is found by title, so it is still located after the branch is
-deleted on merge, and the tag is placed on the PR's exact merge commit.
+deleted on merge, and the tag is placed on the PR's exact merge commit. The two
+manual fallback routes are equally ref-bound (#2295): if the `ci-image-scans`
+dispatch is impossible, `scripts/release_scans_image.sh vX.Y.Z` publishes the
+image from a temporary worktree on the release ref — never from wherever `HEAD`
+happens to sit after the chain cleaned up — and reads that exact registry tag
+back; no failure message ever advises a bare `make` that silently reads the
+current checkout.
 
 Fail-safe: `set -Eeuo pipefail` plus an `ERR` trap name *which* step failed on
 *which* line, and whether the tag was already pushed — before the push nothing
 went out and the local release branch is cleaned up (rerun fresh, or `--resume`
-if the PR was already open). That clean-up reports what it actually did: if the
+if the PR was already open). SIGINT and SIGTERM take that exact same path: an
+interruption is not a command error, so the `ERR` trap never saw it and the
+branch once stayed behind — now the signal runs the same tiered recovery report
+and exits with the matching 128+n status (#2298). That clean-up reports what it
+actually did: if the
 working tree blocks the checkout back to the branch you started from, the release
 branch — carrying the version bump — is still there, and the script says so and
 hands you the two commands to remove it. It used to swallow both failures and

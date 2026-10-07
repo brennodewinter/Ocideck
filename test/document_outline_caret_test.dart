@@ -74,6 +74,7 @@ void main() {
           ChangeSource.local,
         );
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.pump();
     expect(activeOutlineTitle(tester), 'Twee');
 
@@ -90,6 +91,7 @@ void main() {
     // dat expliciet.
     tester.binding.scheduleFrame();
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.pump();
     expect(
       activeOutlineTitle(tester),

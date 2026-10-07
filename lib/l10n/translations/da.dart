@@ -214,8 +214,6 @@ const _dutchSourceDa = {
       'Forseglet. Gem (Ctrl/Cmd+S) for at bevare det.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Denne rapport er udarbejdet sandfærdigt.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Forsegling er først mulig, når alle AI-udkast er gennemgået. Mangler at blive kontrolleret på dias:',
   'Uit sjabloon…': 'Fra skabelon…',
   'Sjabloon kiezen': 'Vælg skabelon',
   'Scope-object': 'Scope-objekt',
@@ -1629,6 +1627,34 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Et logo i et nederste hjørne flyttes automatisk til det tilsvarende øverste hjørne, når der er en sidefod.',
+  'Verschillen bekijken…': 'Se forskelle…',
+  'Mijn versie als kopie bewaren': 'Gem min version som kopi',
+  'Verschillen met de versie op schijf': 'Forskelle fra versionen på disken',
+  'Versie op schijf': 'Version på disken',
+  'Laatst geopend of opgeslagen': 'Sidst åbnet eller gemt',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tre versioner: hvad du sidst åbnede eller gemte (grundlaget), din ugemte version, og hvad der nu står på disken.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Der findes ingen pålidelig basisversion; automatisk fletning er ikke muligt. Vælg hvilken version du vil bruge.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Ændringerne konflikter ikke og kan flettes automatisk.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Disse slides er ændret på begge sider — vælg for hver slide, hvilken version der bevares:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Ingen indholdsmæssige forskelle fundet.',
+  'Samenvoegen en toepassen': 'Flet og anvend',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Filen er i mellemtiden ændret igen; sammenlign igen.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Flettet med versionen på disken — ikke gemt endnu.',
+  'Mijn versie bewaren': 'Bevar min version',
+  'Versie op schijf laden': 'Indlæs versionen på disken',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Forsegling er kun mulig, når alle udkast og obligatoriske felter er afsluttet. Mangler stadig at blive kontrolleret på diaset:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-vurdering af digital suverænitet',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Komplet arbejdsdeck til omfang, vurderingsspørgsmål, dokumentation, scoring og en assurance-erklæring i henhold til SAFARI.',
   'Nieuwste eerst': 'Nyeste først',
   'Oudste eerst': 'Ældste først',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

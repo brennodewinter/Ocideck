@@ -214,8 +214,6 @@ const _dutchSourceFi = {
       'Sinetöity. Tallenna (Ctrl/Cmd+S) säilyttääksesi.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Tämä raportti on laadittu totuudenmukaisesti.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Sinetöinti on mahdollista vasta, kun kaikki tekoälyluonnokset on tarkistettu. Vielä tarkistettava dialla (dioilla):',
   'Uit sjabloon…': 'Mallista…',
   'Sjabloon kiezen': 'Valitse malli',
   'Scope-object': 'Kohde (scope)',
@@ -1629,6 +1627,33 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Alakulmassa oleva logo siirtyy alatunnisteen yhteydessä automaattisesti vastaavaan yläkulmaan.',
+  'Verschillen bekijken…': 'Näytä erot…',
+  'Mijn versie als kopie bewaren': 'Säilytä versioni kopiona',
+  'Verschillen met de versie op schijf': 'Erot levyn versioon',
+  'Versie op schijf': 'Versio levyllä',
+  'Laatst geopend of opgeslagen': 'Viimeksi avattu tai tallennettu',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Kolme versiota: mitä viimeksi avasit tai tallensit (pohja), tallentamaton versiosi ja mitä levyllä nyt on.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Luotettavaa perusversiota ei ole tiedossa; automaattinen yhdistäminen ei ole mahdollista. Valitse, mitä versiota haluat käyttää.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Muutokset eivät ole ristiriidassa ja ne voidaan yhdistää automaattisesti.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Näitä dioja on muutettu molemmin puolin — valitse kullekin dialle, kumpi versio säilyy:',
+  'Geen inhoudelijke verschillen gevonden.': 'Sisältöeroja ei löytynyt.',
+  'Samenvoegen en toepassen': 'Yhdistä ja käytä',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Tiedostoa on sillä välin muutettu uudelleen; vertaile uudelleen.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Yhdistetty levyn version kanssa — ei vielä tallennettu.',
+  'Mijn versie bewaren': 'Säilytä versioni',
+  'Versie op schijf laden': 'Lataa versio levyltä',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sinetöinti on mahdollista vasta, kun kaikki luonnokset ja pakolliset kentät on täytetty. Tarkistettavaa diassa:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-arviointi digitaalisesta suvereniteetista',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Täydellinen työpaketti laajuutta, arviointikysymyksiä, näyttöä, pisteytystä ja SAFARIn mukaista varmennuslausuntoa varten.',
   'Nieuwste eerst': 'Uusimmat ensin',
   'Oudste eerst': 'Vanhimmat ensin',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

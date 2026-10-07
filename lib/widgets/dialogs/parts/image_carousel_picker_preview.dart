@@ -34,31 +34,42 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                   ],
                 ),
               )
-            : Column(
-                children: [
-                  // Grote preview
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image(
-                          image: boundedFileImage(File(_selected!), 720),
-                          fit: BoxFit.contain,
-                          errorBuilder: (context, error, stackTrace) => Center(
-                            child: Icon(
-                              Icons.broken_image,
-                              color: ImagePickerPalette.border,
-                              size: 48,
-                            ),
+            : LayoutBuilder(
+                builder: (context, bc) => Column(
+                  children: [
+                    // Grote preview
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image(
+                            image: boundedFileImage(File(_selected!), 720),
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Center(
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    color: ImagePickerPalette.border,
+                                    size: 48,
+                                  ),
+                                ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  // Bestandsinfo
-                  _fileInfoPanel(l10n),
-                ],
+                    // Bestandsinfo — scrollt als bredere tekst of een lager
+                    // venster hem groter maakt dan de kolom toelaat, in
+                    // plaats van onder de dialoog uit te lopen (#2318). De
+                    // afbeelding behoudt een minimale hoogte.
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: math.max(0, bc.maxHeight - 96),
+                      ),
+                      child: SingleChildScrollView(child: _fileInfoPanel(l10n)),
+                    ),
+                  ],
+                ),
               ),
       ),
     );
@@ -128,84 +139,65 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     );
   }
 
+  /// De footer. Een Wrap in plaats van een vaste Row: bij bredere fontmetrics
+  /// of een smaller venster breekt de rij om naar een tweede regel in plaats
+  /// van buiten beeld te lopen (#2318 — op macOS liep hij 10 px over, op een
+  /// Linux-gate 29 px, en functionele tests moesten de tekstschaal verkleinen
+  /// om het te verhullen). De hoogte is daarvoor een minimum, geen vaste maat.
   Widget _buildFooter() {
     final l10n = context.l10n;
-    return Container(
-      height: 64,
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: ImagePickerPalette.surface2)),
+    final libButtons = _footerLibraryButtons(l10n);
+    final dedupeButton = Tooltip(
+      message: l10n.d(
+        'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën',
       ),
-      child: Row(
-        children: [
-          ..._footerLibraryButtons(l10n),
-          // Duplicaten opruimen (md5)
-          Tooltip(
-            message: l10n.d(
-              'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën',
-            ),
-            child: OutlinedButton.icon(
-              onPressed: _deduping || _images.length < 2 ? null : _dedupe,
-              icon: _deduping
-                  ? SizedBox(
-                      width: 14,
-                      height: 14,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: ImagePickerPalette.textMuted,
-                      ),
-                    )
-                  : const Icon(Icons.layers_clear_outlined, size: 16),
-              label: Text(
-                _deduping && _dedupePhase != null
-                    ? _dedupePhase!
-                    : l10n.d('Duplicaten opruimen'),
-              ),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: ImagePickerPalette.textMuted,
-                side: BorderSide(color: ImagePickerPalette.border),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 10,
+      child: OutlinedButton.icon(
+        onPressed: _deduping || _images.length < 2 ? null : _dedupe,
+        icon: _deduping
+            ? SizedBox(
+                width: 14,
+                height: 14,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: ImagePickerPalette.textMuted,
                 ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 8),
-          // Hint — kort pas in als de ruimte er werkelijk niet is. Was
-          // `Flexible` + `Spacer`: elk flex 1, dus die deelden de vrije ruimte
-          // en de hint eindigde op "Dubbelklik s…" met 400px leegte ernaast.
-          // De kleur was `borderStrong`, een randkleur als tekst: 2,28:1 (#780).
-          // In de beheermodus gaat de hint over kiezen en klopt dus niet; dan
-          // vult een lege ruimte de plek zodat de knoppen rechts blijven staan.
-          Expanded(
-            child: widget.manageOnly
-                ? (supportsLocalProjectFolders
-                      ? Text(
-                          l10n.d(
-                            'Ctrl/Cmd+V plakt een afbeelding in het archief',
-                          ),
-                          style: TextStyle(
-                            color: ImagePickerPalette.textMuted,
-                            fontSize: 11,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      : const SizedBox.shrink())
-                : Text(
-                    l10n.d(
-                      '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
-                    ),
-                    style: TextStyle(
-                      color: ImagePickerPalette.textMuted,
-                      fontSize: 11,
-                    ),
-                    overflow: TextOverflow.ellipsis,
+              )
+            : const Icon(Icons.layers_clear_outlined, size: 16),
+        label: Text(
+          _deduping && _dedupePhase != null
+              ? _dedupePhase!
+              : l10n.d('Duplicaten opruimen'),
+        ),
+        style: OutlinedButton.styleFrom(
+          foregroundColor: ImagePickerPalette.textMuted,
+          side: BorderSide(color: ImagePickerPalette.border),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        ),
+      ),
+    );
+    // Hint — kort pas in als de ruimte er werkelijk niet is. De kleur was
+    // ooit `borderStrong`, een randkleur als tekst: 2,28:1 (#780). In de
+    // beheermodus gaat de hint over kiezen en klopt dus niet; dan toont hij de
+    // plak-hint voor het archief.
+    final hint = widget.manageOnly
+        ? (supportsLocalProjectFolders
+              ? Text(
+                  l10n.d('Ctrl/Cmd+V plakt een afbeelding in het archief'),
+                  style: TextStyle(
+                    color: ImagePickerPalette.textMuted,
+                    fontSize: 11,
                   ),
-          ),
-          if (widget.manageOnly)
-            // In beheermodus is er niets te kiezen of te annuleren: één heldere
-            // uitgang volstaat.
+                  overflow: TextOverflow.ellipsis,
+                )
+              : const SizedBox.shrink())
+        : Text(
+            l10n.d('↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert'),
+            style: TextStyle(color: ImagePickerPalette.textMuted, fontSize: 11),
+            overflow: TextOverflow.ellipsis,
+          );
+    // Primaire acties: in beheermodus één uitgang, anders annuleren + kiezen.
+    final primary = widget.manageOnly
+        ? <Widget>[
             ElevatedButton.icon(
               onPressed: () => _close(),
               icon: const Icon(Icons.check_circle_outline, size: 17),
@@ -222,9 +214,9 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                   fontSize: 14,
                 ),
               ),
-            )
-          else ...[
-            // Annuleren
+            ),
+          ]
+        : <Widget>[
             TextButton(
               onPressed: () => _close(),
               style: TextButton.styleFrom(
@@ -236,8 +228,6 @@ extension _CarouselPreview on _ImageCarouselPickerState {
               ),
               child: Text(l10n.t('cancel')),
             ),
-            const SizedBox(width: 10),
-            // Kiezen
             ElevatedButton.icon(
               onPressed: _selected != null ? () => _confirm() : null,
               icon: const Icon(Icons.check_circle_outline, size: 17),
@@ -257,7 +247,27 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                 ),
               ),
             ),
-          ],
+          ];
+    return Container(
+      constraints: const BoxConstraints(minHeight: 64),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: ImagePickerPalette.surface2)),
+      ),
+      child: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        runAlignment: WrapAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [...libButtons, dedupeButton],
+          ),
+          hint,
+          Wrap(spacing: 10, runSpacing: 8, children: primary),
         ],
       ),
     );
@@ -265,7 +275,8 @@ extension _CarouselPreview on _ImageCarouselPickerState {
 
   /// Bladeren (één bestand, kiesmodus), Afbeelding toevoegen (beheermodus)
   /// en Map toevoegen (zoekwortel) — uit [_buildFooter] getild voor de
-  /// methode-lengteratchet.
+  /// methode-lengteratchet. De tussenruimte hoort bij de Wrap-spacing van de
+  /// footer, niet bij deze lijst.
   List<Widget> _footerLibraryButtons(AppLocalizations l10n) {
     final style = OutlinedButton.styleFrom(
       foregroundColor: ImagePickerPalette.textMuted,
@@ -273,34 +284,29 @@ extension _CarouselPreview on _ImageCarouselPickerState {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
     );
     return [
-      if (!widget.manageOnly) ...[
+      if (!widget.manageOnly)
         OutlinedButton.icon(
           onPressed: _browse,
           icon: const Icon(Icons.folder_open_outlined, size: 16),
           label: Text(l10n.d('Bladeren…')),
           style: style,
         ),
-        const SizedBox(width: 8),
-      ],
       // In beheermodus is "Bladeren" zinloos (er valt niets te kiezen) — de
       // ontbrekende handeling daar is juist: een afbeelding ín het archief
       // zetten (#2107).
-      if (widget.manageOnly && supportsLocalProjectFolders) ...[
+      if (widget.manageOnly && supportsLocalProjectFolders)
         OutlinedButton.icon(
           onPressed: _loading ? null : _addImageFromFile,
           icon: const Icon(Icons.add_photo_alternate_outlined, size: 16),
           label: Text(l10n.d('Afbeelding toevoegen…')),
           style: style,
         ),
-        const SizedBox(width: 8),
-      ],
       OutlinedButton.icon(
         onPressed: _loading ? null : _addLibraryFolder,
         icon: const Icon(Icons.create_new_folder_outlined, size: 16),
         label: Text(l10n.d('Map toevoegen…')),
         style: style,
       ),
-      const SizedBox(width: 8),
     ];
   }
 

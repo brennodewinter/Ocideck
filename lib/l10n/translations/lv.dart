@@ -213,8 +213,6 @@ const _dutchSourceLv = {
       'Aizzīmogots. Saglabājiet (Ctrl/Cmd+S), lai saglabātu.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Šis ziņojums ir sagatavots patiesi.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Aizzīmogošana iespējama tikai pēc visu MI melnrakstu pārbaudes. Vēl jāpārbauda slaidā(os):',
   'Uit sjabloon…': 'No veidnes…',
   'Sjabloon kiezen': 'Izvēlēties veidni',
   'Scope-object': 'Tvēruma objekts',
@@ -1627,6 +1625,33 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Logotips apakšējā stūrī, ja ir kājene, automātiski pārvietojas uz atbilstošo augšējo stūri.',
+  'Verschillen bekijken…': 'Skatīt atšķirības…',
+  'Mijn versie als kopie bewaren': 'Saglabāt manu versiju kā kopiju',
+  'Verschillen met de versie op schijf': 'Atšķirības no versijas diskā',
+  'Versie op schijf': 'Versija diskā',
+  'Laatst geopend of opgeslagen': 'Pēdējo reizi atvērtā vai saglabātā',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Trīs versijas: to, ko pēdējo reizi atvērāt vai saglabājāt (bāze), jūsu nesaglabāto versiju un to, kas tagad ir diskā.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Nav zināma uzticama bāzes versija; automātiska sapludināšana nav iespējama. Izvēlieties, kuru versiju vēlaties izmantot.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Izmaiņas savstarpēji nekonfliktē, un tās var apvienot automātiski.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Šie slaidi ir mainīti abās pusēs — izvēlieties katram, kura versija paliek:',
+  'Geen inhoudelijke verschillen gevonden.': 'Satura atšķirības nav atrastas.',
+  'Samenvoegen en toepassen': 'Sapludināt un lietot',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Fails šajā laikā atkal ir mainījies; salīdziniet vēlreiz.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Sapludināts ar versiju diskā — vēl nav saglabāts.',
+  'Mijn versie bewaren': 'Saglabāt manu versiju',
+  'Versie op schijf laden': 'Ielādēt versiju no diska',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Aizzīmogošana ir iespējama tikai tad, kad ir pabeigti visi melnraksti un obligātie lauki. Vēl jāpārbauda slaidā:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI digitālās suverenitātes novērtējums',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Pilns darba komplekts darbības jomai, novērtēšanas jautājumiem, pierādījumiem, vērtēšanai un apliecinājuma atzinumam saskaņā ar SAFARI.',
   'Nieuwste eerst': 'Jaunākie vispirms',
   'Oudste eerst': 'Vecākie vispirms',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

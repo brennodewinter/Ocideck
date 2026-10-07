@@ -51,6 +51,7 @@ part 'deck_provider_checklist.dart';
 part 'deck_provider_managementsysteem.dart';
 part 'deck_provider_auto.dart';
 part 'deck_provider_load.dart';
+part 'deck_provider_conflict.dart';
 part 'deck_provider_slides.dart';
 
 // ── Service providers ────────────────────────────────────────────────────────
@@ -200,11 +201,11 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// schoon hebben gemaakt, of de gebruiker kan ondertussen hebben getypt).
   bool _saveQueued = false;
 
-  /// #1951: het tijdstip waarop het bestand op schijf voor het laatst is
-  /// gewijzigd, zoals gezien bij openen of de laatste opslag. De schil
-  /// vergelijkt dit met de huidige mtime vóór opslaan — wijkt die af, dan
-  /// heeft een ander venster of programma het bestand ondertussen geschreven.
-  DateTime? _fileMtime;
+  /// De lokale-conflicttoestand (#1951, #2323): de basisversie van de laatste
+  /// open-/opslagbeurt, de schijf-vingerafdruk voor externe wijziging,
+  /// herladen en het toepassen van de samenvoeging. Eigen klasse, zie
+  /// deck_provider_conflict.dart.
+  late final _localMerge = DeckLocalMerge(this);
 
   /// Snelle, opeenvolgende bewerkingen (zoals typen) worden samengevoegd tot
   /// één ongedaan-maken-stap zolang ze dezelfde [_lastCoalesceKey] delen en
@@ -310,7 +311,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       projectPath: projectPath,
     );
     _clearHistory();
-    _fileMtime = null;
+    _localMerge.clear();
     state = DeckState(deck: deck, isDirty: true);
   }
 
@@ -343,45 +344,33 @@ class DeckNotifier extends StateNotifier<DeckState> {
       return;
     }
     _clearHistory();
+    _localMerge.base = deck;
     state = DeckState(deck: deck, filePath: path, isDirty: false);
   }
 
   /// #1951: of het bestand op schijf sinds openen/opslaan is gewijzigd of
   /// verwijderd door een ander venster of proces. Alleen relevant wanneer
   /// dit deck aan een bestandspad hangt (lokaal opslaan, niet web-download).
-  Future<bool> fileChangedExternally() async {
-    final path = state.filePath;
-    if (path == null) return false;
-    return _file.fileChangedSince(path, _fileMtime);
-  }
+  Future<bool> fileChangedExternally() => _localMerge.fileChangedExternally();
+
+  /// De basisversie voor het lokale bestandsconflict (#2323), of `null`
+  /// wanneer geen betrouwbare "laatst geopend/opgeslagen"-versie bekend is.
+  Deck? get baseDeck => _localMerge.base;
+
+  /// Zet de samengevoegde conflictoplossing in het open tabblad — als één
+  /// ongedaan-maken-stap en zónder op te slaan: het tabblad blijft vuil,
+  /// want de merge is nog niet op schijf (#2323). Faalt zonder pad of bij
+  /// een verlopen [expectedMtime]; zie [DeckLocalMerge.apply].
+  Future<bool> applyMergedDeck(
+    Deck merged, {
+    required DateTime? expectedMtime,
+  }) => _localMerge.apply(merged, expectedMtime: expectedMtime);
 
   /// #1951: herlaad het bestand vanaf schijf, waarbij de huidige wijzigingen
   /// verloren gaan. Geeft true terug als het herladen is gelukt. Gebruikt door
   /// de conflict-dialoog ("Herladen") wanneer een ander venster het bestand
   /// ondertussen heeft geschreven.
-  Future<bool> reloadFromDisk() async {
-    final path = state.filePath;
-    if (path == null) return false;
-    final deck = await _file.openDeck(path);
-    if (deck == null) return false;
-    _clearHistory();
-    state = DeckState(deck: deck, filePath: path, isDirty: false);
-    await _recordFileMtime();
-    return true;
-  }
-
-  /// #1951: lees de mtime van het huidige bestand en onthoud hem. Aangeroepen
-  /// na openen en na opslaan, zodat de volgende opslaan-controle een verse
-  /// vergelijking heeft. Fire-and-forget bij openen (sync context), awaited
-  /// bij opslaan (async context).
-  Future<void> _recordFileMtime() async {
-    final path = state.filePath;
-    if (path == null) {
-      _fileMtime = null;
-      return;
-    }
-    _fileMtime = await _file.fileMtime(path);
-  }
+  Future<bool> reloadFromDisk() => _localMerge.reloadFromDisk();
 
   Future<bool> save({String? initialDirectory}) async {
     // Wijs een tweede gelijktijdige opslag af — twee schrijfbeurten door
@@ -493,8 +482,9 @@ class DeckNotifier extends StateNotifier<DeckState> {
         isDirty: userEdited || incomplete,
       );
     }
+    _localMerge.base = reopened ?? deck;
     // #1951: na opslaan-naar-nieuw-pad, onthoud de mtime van dat bestand.
-    await _recordFileMtime();
+    await _localMerge.recordMtime();
     return true;
   }
 
@@ -532,16 +522,17 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final deckChanged = !identical(state.deck, deck);
     final userEdited = deckChanged && _undoStack.length > undoLenBefore;
     if (userEdited) return true;
+    _localMerge.base = savedDeck;
     state = state.copyWith(deck: savedDeck, isDirty: incomplete);
     // #1951: na succesvolle opslaan, onthoud de nieuwe mtime zodat de
     // volgende opslaan-controle geen vals positief geeft.
-    await _recordFileMtime();
+    await _localMerge.recordMtime();
     return true;
   }
 
   void closeDeck() {
     _clearHistory();
-    _fileMtime = null;
+    _localMerge.clear();
     state = const DeckState();
   }
 
@@ -647,7 +638,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     // AI_ASSIST §16.3: refuse to seal while any AI-drafted field is unreviewed,
     // so the EIS 1.6 attestation always covers human-verified text. The UI
     // pre-checks it (see [slidesBlockingSeal]); this is the authoritative guard.
-    if (deckHasUnreviewedAiMarkers(deck)) return;
+    if (slidesBlockingSealForDeck(deck).isNotEmpty) return;
     final sealed = DocumentIntegrity(_md).seal(deck, signature: signature);
     _clearHistory();
     state = state.copyWith(deck: sealed, isDirty: true);
@@ -675,7 +666,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// explain the block instead of silently doing nothing.
   List<int> get slidesBlockingSeal {
     final deck = state.deck;
-    return deck == null ? const [] : slidesWithUnreviewedAiMarkers(deck);
+    return deck == null ? const [] : slidesBlockingSealForDeck(deck);
   }
 
   /// Set the deck-level visual signature draft (authored on the `signOff` slide,

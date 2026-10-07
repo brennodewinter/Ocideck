@@ -216,8 +216,6 @@ const _dutchSourceRo = {
       'Sigilat. Salvați (Ctrl/Cmd+S) pentru a-l păstra.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Acest raport a fost întocmit în mod veridic.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Sigilarea este posibilă doar după verificarea tuturor schițelor AI. Rămâne de verificat pe diapozitiv(e):',
   'Uit sjabloon…': 'Din șablon…',
   'Sjabloon kiezen': 'Alege un șablon',
   'Scope-object': 'Obiect din domeniu',
@@ -1645,6 +1643,35 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Un logo dintr-un colț inferior se mută automat în colțul superior corespunzător atunci când există un subsol.',
+  'Verschillen bekijken…': 'Vezi diferențele…',
+  'Mijn versie als kopie bewaren': 'Păstrează versiunea mea ca copie',
+  'Verschillen met de versie op schijf':
+      'Diferențe față de versiunea de pe disc',
+  'Versie op schijf': 'Versiune pe disc',
+  'Laatst geopend of opgeslagen': 'Ultima deschisă sau salvată',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Trei versiuni: ce ați deschis sau salvat ultima dată (baza), versiunea dvs. nesalvată și ce se află acum pe disc.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Nu este cunoscută o versiune de bază fiabilă; îmbinarea automată nu este posibilă. Alegeți ce versiune doriți să folosiți.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Modificările nu se suprapun și pot fi îmbinate automat.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Aceste diapozitive au fost modificate pe ambele părți — alegeți pentru fiecare ce versiune rămâne:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Nu au fost găsite diferențe de conținut.',
+  'Samenvoegen en toepassen': 'Îmbină și aplică',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Fișierul s-a modificat din nou între timp; comparați din nou.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Îmbinat cu versiunea de pe disc — încă nesalvat.',
+  'Mijn versie bewaren': 'Păstrează versiunea mea',
+  'Versie op schijf laden': 'Încarcă versiunea de pe disc',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sigilarea este posibilă numai după ce toate schițele și câmpurile obligatorii sunt completate. Mai trebuie verificat pe diapozitiv:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Evaluarea SAFARI a suveranității digitale',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Set de lucru complet pentru domeniu, întrebări de evaluare, dovezi, punctaj și o opinie de asigurare conform SAFARI.',
   'Nieuwste eerst': 'Cele mai recente întâi',
   'Oudste eerst': 'Cele mai vechi întâi',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

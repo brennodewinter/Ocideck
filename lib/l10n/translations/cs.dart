@@ -215,8 +215,6 @@ const _dutchSourceCs = {
       'Zapečetěno. Uložte (Ctrl/Cmd+S) pro zachování.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Tato zpráva byla vypracována pravdivě.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Zapečetění je možné až po kontrole všech AI konceptů. Zbývá zkontrolovat na snímku(cích):',
   'Uit sjabloon…': 'Ze šablony…',
   'Sjabloon kiezen': 'Vybrat šablonu',
   'Scope-object': 'Objekt rozsahu',
@@ -1630,6 +1628,34 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Logo v dolním rohu se při použití zápatí automaticky přesune do odpovídajícího horního rohu.',
+  'Verschillen bekijken…': 'Zobrazit rozdíly…',
+  'Mijn versie als kopie bewaren': 'Uchovat mou verzi jako kopii',
+  'Verschillen met de versie op schijf': 'Rozdíly oproti verzi na disku',
+  'Versie op schijf': 'Verze na disku',
+  'Laatst geopend of opgeslagen': 'Naposledy otevřená nebo uložená',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tři verze: co jste naposledy otevřeli nebo uložili (základ), vaše neuložená verze a co je nyní na disku.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Není známá spolehlivá základní verze; automatické sloučení není možné. Vyberte, kterou verzi chcete použít.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Změny se nepřekrývají a lze je sloučit automaticky.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Tyto snímky byly změněny na obou stranách — u každého vyberte, která verze zůstane:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Nebyly nalezeny žádné obsahové rozdíly.',
+  'Samenvoegen en toepassen': 'Sloučit a použít',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Soubor se mezitím znovu změnil; porovnejte znovu.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Sloučeno s verzí na disku — zatím neuloženo.',
+  'Mijn versie bewaren': 'Ponechat mou verzi',
+  'Versie op schijf laden': 'Načíst verzi z disku',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Zapečetění je možné až po dokončení všech návrhů a povinných polí. Ještě je třeba zkontrolovat na snímku:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Hodnocení SAFARI digitální suverenity',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Úplný pracovní balíček pro rozsah, hodnoticí otázky, důkazy, bodování a ujišťovací výrok podle SAFARI.',
   'Nieuwste eerst': 'Nejnovější napřed',
   'Oudste eerst': 'Nejstarší napřed',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

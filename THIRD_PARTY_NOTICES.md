@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-> **Status:** current-state notices, maintained by hand; the SBOM is the machine-readable authority · **Status last reviewed:** 2026-10-04 · **Published by:** Stichting LibreKAT
+> **Status:** current-state notices, maintained by hand; the SBOM is the machine-readable authority · **Status last reviewed:** 2026-10-07 · **Published by:** Stichting LibreKAT
 
 OciDeck is licensed under the EUPL-1.2 (see [`LICENSE.md`](LICENSE.md)). It
 builds on, and bundles, third-party components that remain under their own
@@ -52,6 +52,12 @@ The exact pinned version, source URL and SHA-256 of every vendored JS bundle
 live in [`assets/web_export/MANIFEST.json`](assets/web_export/MANIFEST.json).
 `make deps-check` verifies each file still matches that manifest and queries the
 [OSV](https://osv.dev) database for known vulnerabilities.
+
+## Bundled template content
+
+| Component | Used for | Licence |
+| --- | --- | --- |
+| [SAFARI v0.9](https://pawprint.vigilis.online/LibreKAT/Safari), Brenno de Winter and Stichting LibreKAT | The 49-question `safariAssurance` work deck; auditor evidence, scoring and assurance judgement | **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)** — adapted template content, with attribution and share-alike. This does not change the EUPL-1.2 licence of OciDeck code. |
 
 ## Vendored (forked) plugins
 

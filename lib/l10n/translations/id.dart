@@ -213,8 +213,6 @@ const _dutchSourceId = {
       'Tersegel. Simpan (Ctrl/Cmd+S) untuk menyimpannya.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Laporan ini disusun secara benar.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Penyegelan baru bisa dilakukan setelah semua draf AI ditinjau. Masih perlu diperiksa pada slide:',
   'Uit sjabloon…': 'Dari templat…',
   'Sjabloon kiezen': 'Pilih templat',
   'Scope-object': 'Objek lingkup',
@@ -1629,6 +1627,33 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Logo di sudut bawah otomatis berpindah ke sudut atas yang sama saat ada footer.',
+  'Verschillen bekijken…': 'Lihat perbedaan…',
+  'Mijn versie als kopie bewaren': 'Simpan versi saya sebagai salinan',
+  'Verschillen met de versie op schijf': 'Perbedaan dengan versi di diska',
+  'Versie op schijf': 'Versi di diska',
+  'Laatst geopend of opgeslagen': 'Terakhir dibuka atau disimpan',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tiga versi: yang terakhir Anda buka atau simpan (dasar), versi Anda yang belum disimpan, dan yang sekarang ada di diska.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Tidak ada versi dasar yang andal; penggabungan otomatis tidak dapat dilakukan. Pilih versi yang ingin Anda gunakan.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Perubahannya tidak saling berbenturan dan dapat digabungkan secara otomatis.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Slide-slide ini diubah di kedua sisi — pilih versi yang dipertahankan untuk setiap slide:',
+  'Geen inhoudelijke verschillen gevonden.': 'Tidak ditemukan perbedaan isi.',
+  'Samenvoegen en toepassen': 'Gabungkan dan terapkan',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Berkas telah berubah lagi sementara itu; bandingkan lagi.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Digabungkan dengan versi di diska — belum disimpan.',
+  'Mijn versie bewaren': 'Pertahankan versi saya',
+  'Versie op schijf laden': 'Muat versi di diska',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Penyegelan hanya dapat dilakukan setelah semua draf dan bidang wajib diselesaikan. Masih perlu diperiksa pada slide:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Penilaian SAFARI kedaulatan digital',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Dek kerja lengkap untuk ruang lingkup, pertanyaan penilaian, bukti, penilaian skor, dan opini assurance sesuai SAFARI.',
   'Nieuwste eerst': 'Terbaru dulu',
   'Oudste eerst': 'Terlama dulu',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

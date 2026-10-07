@@ -216,8 +216,6 @@ const _dutchSourceDe = {
       'Versiegelt. Speichern (Strg/Cmd+S), um es zu behalten.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Dieser Bericht wurde wahrheitsgemäß erstellt.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Versiegeln ist erst möglich, wenn alle KI-Entwürfe geprüft wurden. Noch zu prüfen auf Folie(n):',
   'Uit sjabloon…': 'Aus Vorlage…',
   'Sjabloon kiezen': 'Vorlage wählen',
   'Scope-object': 'Scope-Objekt',
@@ -669,6 +667,35 @@ const _dutchSourceDe = {
 const _dutchSourceAddDe = {
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Ein Logo in einer unteren Ecke verschiebt sich bei einer Fußzeile automatisch in dieselbe obere Ecke.',
+  'Verschillen bekijken…': 'Unterschiede ansehen…',
+  'Mijn versie als kopie bewaren': 'Meine Version als Kopie behalten',
+  'Verschillen met de versie op schijf':
+      'Unterschiede zur Version auf dem Laufwerk',
+  'Versie op schijf': 'Version auf dem Laufwerk',
+  'Laatst geopend of opgeslagen': 'Zuletzt geöffnet oder gespeichert',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Drei Versionen: was du zuletzt geöffnet oder gespeichert hast (die Basis), deine ungespeicherte Version und was jetzt auf dem Laufwerk steht.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Es ist keine zuverlässige Basisversion bekannt; automatisches Zusammenführen ist nicht möglich. Wähle, welche Version du verwenden möchtest.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Die Änderungen überschneiden sich nicht und können automatisch zusammengeführt werden.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Diese Folien wurden auf beiden Seiten geändert — wähle pro Folie, welche Version bleibt:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Keine inhaltlichen Unterschiede gefunden.',
+  'Samenvoegen en toepassen': 'Zusammenführen und anwenden',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Die Datei wurde inzwischen erneut geändert; vergleiche erneut.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Mit der Version auf dem Laufwerk zusammengeführt — noch nicht gespeichert.',
+  'Mijn versie bewaren': 'Meine Version behalten',
+  'Versie op schijf laden': 'Version vom Laufwerk laden',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Das Versiegeln ist erst möglich, wenn alle Entwürfe und Pflichtfelder abgeschlossen sind. Noch auf der Folie zu prüfen:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-Bewertung der digitalen Souveränität',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Vollständiges Arbeitsdeck für Geltungsbereich, Prüfungsfragen, Nachweise, Bewertung und ein Assurance-Urteil gemäß SAFARI.',
   'Nieuwste eerst': 'Neueste zuerst',
   'Oudste eerst': 'Älteste zuerst',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

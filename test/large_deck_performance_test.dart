@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/markdown_source_document.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -248,6 +249,42 @@ void main() {
             'parsen van 200 slides kostte ${laagste.toStringAsFixed(2)}x '
             'zoveel als $grootteFactor keer 50 slides; meer dan 2,5x wijst '
             'op superlineair gedrag',
+      );
+    });
+
+    test('document herparsen schaalt niet kwadratisch met pagina-einden', () {
+      const factor = 4;
+      String document(int blocks) => List.generate(
+        blocks,
+        (i) => '# Deel $i\n\nInhoud $i',
+      ).join('\n\n---\n\n');
+
+      final smallSource = document(500);
+      final largeSource = document(2000);
+      final small = MarkdownSourceDocument.parse(smallSource);
+      final large = MarkdownSourceDocument.parse(largeSource);
+
+      small.reparse(smallSource);
+      large.reparse(largeSource);
+
+      var lowest = double.infinity;
+      for (var attempt = 0; attempt < 3; attempt++) {
+        final repeatedSmall = fastestOf(3, () {
+          for (var i = 0; i < factor; i++) {
+            small.reparse(smallSource);
+          }
+        });
+        final oneLarge = fastestOf(3, () => large.reparse(largeSource));
+        final ratio = oneLarge.inMicroseconds / repeatedSmall.inMicroseconds;
+        if (ratio < lowest) lowest = ratio;
+      }
+      expect(
+        lowest,
+        lessThan(2.5),
+        reason:
+            '2000 documentblokken kostten ${lowest.toStringAsFixed(2)}x '
+            'zoveel als $factor keer 500; meer dan 2,5x wijst op '
+            'superlineair gedrag',
       );
     });
 

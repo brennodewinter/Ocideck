@@ -217,8 +217,6 @@ const _dutchSourceGa = {
       'Séalaithe. Sábháil (Ctrl/Cmd+S) chun é a choinneáil.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ullmhaíodh an tuarascáil seo go fírinneach.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Ní féidir séalú a dhéanamh go dtí go seiceáiltear gach dréacht AI. Le seiceáil fós ar shleamhnán(áin):',
   'Uit sjabloon…': 'Ó theimpléad…',
   'Sjabloon kiezen': 'Roghnaigh teimpléad',
   'Scope-object': 'Réad scóipe',
@@ -1659,6 +1657,36 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Bogann lógó i gcúinne íochtarach go huathoibríoch chuig an gcúinne uachtarach comhfhreagrach nuair a bhíonn buntásc ann.',
+  'Verschillen bekijken…': 'Féach ar na difríochtaí…',
+  'Mijn versie als kopie bewaren': 'Coinnigh mo leagan mar chóip',
+  'Verschillen met de versie op schijf':
+      'Difríochtaí leis an leagan ar an diosca',
+  'Versie op schijf': 'Leagan ar an diosca',
+  'Laatst geopend of opgeslagen':
+      'An ceann is déanaí a osclaíodh nó a sábháladh',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Trí leagan: a d\'oscail nó a shábháil tú go deireanach (an bunleagan), do leagan gan sábháil, agus atá ar an diosca anois.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Níl aon leagan bunúsach iontaofa ar eolas; ní féidir cumasc uathoibríoch a dhéanamh. Roghnaigh cén leagan is mian leat a úsáid.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Ní bhíonn na hathruithe i gcoimhlint agus is féidir iad a chumasc go huathoibríoch.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Athraíodh na sleamhnáin seo ar an dá thaobh — roghnaigh do gach sleamhnán cén leagan a fhanfaidh:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Níor aimsíodh aon dhifríochtaí ábhair.',
+  'Samenvoegen en toepassen': 'Cumasc agus cuir i bhfeidhm',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Athraíodh an comhad arís idir an dá linn; déan comparáid arís.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Cumasctha leis an leagan ar an diosca — gan sábháil go fóill.',
+  'Mijn versie bewaren': 'Coinnigh mo leagan',
+  'Versie op schijf laden': 'Luchtaigh an leagan ar an diosca',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Ní féidir séalú a dhéanamh ach nuair atá gach dréacht agus réimse éigeantach comhlánaithe. Tá le seiceáil fós ar an sleamhnán:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Measúnú SAFARI ar cheannasacht dhigiteach',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Deic oibre iomlán don raon feidhme, do cheisteanna measúnaithe, d\'fhianaise, do scóráil agus do thuairim dearbhaithe de réir SAFARI.',
   'Nieuwste eerst': 'Is nuaí ar dtús',
   'Oudste eerst': 'Is sine ar dtús',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

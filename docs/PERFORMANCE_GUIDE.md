@@ -129,6 +129,12 @@ builds course cards, charts or activity lists (`ociserve_courses_dialog.dart`,
 
 ## Large presentations & directory scans
 
+`test/large_deck_performance_test.dart` also guards lossless document reparsing
+at **2 000 explicit blocks/page breaks** against quadratic identity matching:
+one 2 000-block reparse must cost less than `2.5 ×` four 500-block reparses.
+This is a relative complexity guard, not an editing-latency promise
+(`MarkdownSourceDocument.reparse`).
+
 There is no hard slide-count limit, but responsiveness degrades with many
 high-resolution media assets or complex charts. Directory scanning (used by the
 deck browser and image-dedup tooling) is bounded so a pathological tree can't

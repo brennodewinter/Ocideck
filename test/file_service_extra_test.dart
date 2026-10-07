@@ -40,7 +40,9 @@ void main() {
     final mdPath = p.join(temp.path, 'huge.md');
     final file = File(mdPath);
     // Write a header plus a body that pushes the file past the size cap.
-    final filler = 'x' * 1024;
+    // 1 MiB-chunks: ~33k kleine writes waren onder suite-load >30 s trager
+    // dan de test-timeout (twee rode poortruns op een belaste machine).
+    final filler = 'x' * (1 << 20);
     final sink = file.openWrite();
     sink.write('---\nmarp: true\n---\n\n# Big\n\n');
     final chunks = (FileService.maxDeckMarkdownBytes ~/ filler.length) + 8;
@@ -148,7 +150,7 @@ void main() {
       '---\nmarp: true\ntheme: ocideck\ntitle: Ok\n---\n\n# Ok\n',
     );
     final huge = File(p.join(temp.path, 'huge.md'));
-    final filler = 'x' * 1024;
+    final filler = 'x' * (1 << 20);
     final sink = huge.openWrite();
     sink.write('---\nmarp: true\n---\n\n# Big\n\n');
     final chunks = (FileService.maxDeckMarkdownBytes ~/ filler.length) + 8;

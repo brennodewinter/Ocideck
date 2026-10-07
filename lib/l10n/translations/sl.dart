@@ -214,8 +214,6 @@ const _dutchSourceSl = {
       'Zapečateno. Shranite (Ctrl/Cmd+S), da ga ohranite.',
   'Deze rapportage is naar waarheid opgesteld.':
       'To poročilo je bilo pripravljeno resnično.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Zapečatenje je mogoče šele, ko so vsi osnutki UI pregledani. Še za preverjanje na prosojnici(-ah):',
   'Uit sjabloon…': 'Iz predloge…',
   'Sjabloon kiezen': 'Izberi predlogo',
   'Scope-object': 'Predmet obsega',
@@ -1629,6 +1627,34 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Logotip v spodnjem kotu se ob nogi samodejno premakne v ustrezni zgornji kot.',
+  'Verschillen bekijken…': 'Poglej razlike…',
+  'Mijn versie als kopie bewaren': 'Ohrani mojo različico kot kopijo',
+  'Verschillen met de versie op schijf': 'Razlike glede na različico na disku',
+  'Versie op schijf': 'Različica na disku',
+  'Laatst geopend of opgeslagen': 'Nazadnje odprta ali shranjena',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tri različice: kar ste nazadnje odprli ali shranili (osnova), vaša neshranjena različica in kar je zdaj na disku.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Zanesljiva osnovna različica ni znana; samodejno združevanje ni mogoče. Izberite, katero različico želite uporabiti.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Spremembe se ne prekrivajo in jih je mogoče samodejno združiti.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Ti slajdi so bili spremenjeni na obeh straneh — za vsakega izberite, katera različica ostane:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Vsebinskih razlik ni bilo mogoče najti.',
+  'Samenvoegen en toepassen': 'Združi in uporabi',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Datoteka se je medtem spet spremenila; primerjajte znova.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Združeno z različico na disku — še ni shranjeno.',
+  'Mijn versie bewaren': 'Ohrani mojo različico',
+  'Versie op schijf laden': 'Naloži različico z diska',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Zapečatenje je mogoče šele, ko so dokončani vsi osnutki in obvezna polja. Na prosojnici je treba še preveriti:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Ocena SAFARI digitalne suverenosti',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Celovit delovni komplet za obseg, ocenjevalna vprašanja, dokaze, točkovanje in mnenje o zagotovilu v skladu s SAFARI.',
   'Nieuwste eerst': 'Najnovejše najprej',
   'Oudste eerst': 'Najstarejše najprej',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

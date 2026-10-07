@@ -217,8 +217,6 @@ const _dutchSourcePt = {
       'Selado. Guarde (Ctrl/Cmd+S) para manter.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Este relatório foi elaborado com veracidade.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'O selamento só é possível depois de revistos todos os rascunhos de IA. Ainda por verificar no(s) slide(s):',
   'Uit sjabloon…': 'A partir de modelo…',
   'Sjabloon kiezen': 'Escolher modelo',
   'Scope-object': 'Objeto do escopo',
@@ -1657,6 +1655,35 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Um logótipo num canto inferior move-se automaticamente para o canto superior correspondente quando existe um rodapé.',
+  'Verschillen bekijken…': 'Ver diferenças…',
+  'Mijn versie als kopie bewaren': 'Guardar a minha versão como cópia',
+  'Verschillen met de versie op schijf':
+      'Diferenças em relação à versão no disco',
+  'Versie op schijf': 'Versão no disco',
+  'Laatst geopend of opgeslagen': 'Última abertura ou gravação',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Três versões: o que abriu ou guardou por último (a base), a sua versão não guardada e o que está agora no disco.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Não é conhecida uma versão base fiável; a fusão automática não é possível. Escolha que versão pretende usar.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'As alterações não entram em conflito e podem ser fundidas automaticamente.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Estes diapositivos foram alterados em ambos os lados — escolha para cada um que versão fica:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Não foram encontradas diferenças de conteúdo.',
+  'Samenvoegen en toepassen': 'Fundir e aplicar',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'O ficheiro mudou novamente entretanto; compare novamente.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Fundido com a versão no disco — ainda não guardado.',
+  'Mijn versie bewaren': 'Manter a minha versão',
+  'Versie op schijf laden': 'Carregar a versão no disco',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'A selagem só é possível quando todos os rascunhos e campos obrigatórios estiverem concluídos. Ainda a verificar no diapositivo:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Avaliação SAFARI da soberania digital',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Deck de trabalho completo para âmbito, questões de avaliação, evidências, pontuação e uma opinião de asseguração segundo o SAFARI.',
   'Nieuwste eerst': 'Mais recentes primeiro',
   'Oudste eerst': 'Mais antigos primeiro',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

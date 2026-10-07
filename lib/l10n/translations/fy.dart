@@ -213,8 +213,6 @@ const _dutchSourceFy = {
       'Fersegele. Bewarje (Ctrl/Cmd+S) om it te hâlden.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Dit rapport is nei wierheid opsteld.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Fersegelje kin pas as alle AI-konsepten neisjoen binne. Noch te kontrolearjen op dia(\'s):',
   'Uit sjabloon…': 'Ut sjabloan…',
   'Sjabloon kiezen': 'Sjabloan kieze',
   'Scope-object': 'Scope-objekt',
@@ -669,6 +667,33 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'In logo yn in ûnderhoeke ferskoot by in foettekst automatysk nei deselde boppehoeke.',
+  'Verschillen bekijken…': 'Ferskillen besjen…',
+  'Mijn versie als kopie bewaren': 'My ferzje as kopy bewarje',
+  'Verschillen met de versie op schijf': 'Ferskillen mei de ferzje op skiif',
+  'Versie op schijf': 'Ferzje op skiif',
+  'Laatst geopend of opgeslagen': 'Lêst iepene of bewarre',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Trije ferzjes: wat jo it lêst iepene of bewarre hawwe (de basis), jo net-bewarre ferzje, en wat no op de skiif stiet.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Der is gjin betroubere basisferzje bekend; automatysk gearfoegje kin net. Kies hokker ferzje jo brûke wolle.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'De wizigings reitsje inoar net en kinne automatysk gearfoege wurde.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Dizze slides binne oan beide kanten wizige — kies per slide hokker ferzje bliuwt:',
+  'Geen inhoudelijke verschillen gevonden.': 'Gjin ynhâldlike ferskillen fûn.',
+  'Samenvoegen en toepassen': 'Gearfoegje en tapasse',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'It bestand is ûnderwilens wer wizige; fergelyk opnij.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Gearfoege mei de ferzje op skiif — noch net bewarre.',
+  'Mijn versie bewaren': 'My ferzje bewarje',
+  'Versie op schijf laden': 'Ferzje fan skiif lade',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Fersegeljen kin pas as alle konsepten en ferplichte fjilden ôfmakke binne. Noch te kontrolearjen op dia:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI-beoardieling digitale soevereiniteit',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Folslein wurkdeck foar berik, toetsfragen, bewiis, skoaring en in assurance-oardiel neffens SAFARI.',
   'Nieuwste eerst': 'Nijste earst',
   'Oudste eerst': 'Aldste earst',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

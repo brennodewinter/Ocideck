@@ -25,8 +25,11 @@ void _loadDeck(
   // De mtime is pas bij een volgende opslag nodig en hoeft het openen daarom
   // niet op te houden.
   if (filePath != null) {
-    unawaited(notifier._recordFileMtime());
-  } else {
-    notifier._fileMtime = null;
+    unawaited(notifier._localMerge.recordMtime());
   }
+  // Alleen een schone lading vanaf een pad is een aantoonbare basis voor de
+  // driewegs-merge (#2323); een vuil hersteld tabblad wijkt mogelijk al af.
+  notifier._localMerge.base = !isDirty && filePath != null
+      ? resolvedDeck
+      : null;
 }

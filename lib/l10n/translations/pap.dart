@@ -214,8 +214,6 @@ const _dutchSourcePap = {
       'Seyá. Warda (Ctrl/Cmd+S) pa keda kuné.',
   'Deze rapportage is naar waarheid opgesteld.':
       'E rapòrt aki a ser prepará konforme berdat.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Por seya solamente ora tur konseptonan di IA a ser revisá. Ainda pa kontrolá riba slide:',
   'Uit sjabloon…': 'For di plantia…',
   'Sjabloon kiezen': 'Skohe plantia',
   'Scope-object': 'Opheto di scope',
@@ -668,6 +666,34 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Un logo den un skina abou ta move outomátikamente pa e mesun skina ariba ora tin un footer.',
+  'Verschillen bekijken…': 'Mira diferensianan…',
+  'Mijn versie als kopie bewaren': 'Keda mi vershon komo kopia',
+  'Verschillen met de versie op schijf': 'Diferensia ku e vershon riba disko',
+  'Versie op schijf': 'Vershon riba disko',
+  'Laatst geopend of opgeslagen': 'Último abierto of wardá',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tres vershon: loke bo a habri of warda por último (e base), bo vershon sin warda, i loke ta riba disko awe.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'No tin un vershon base konfiabel konosí; no por mesklá outomátikamente. Skohe kua vershon bo ke usa.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'E kambionan no ta afektá otro i por wòrdu mesklá outomátikamente.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'E slidenan aki a kambia na dos banda — skohe pa kada slide kua vershon keda:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'No a haña diferensia di kontenido.',
+  'Samenvoegen en toepassen': 'Meskla i apliká',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'E archivo a kambia atrobe mientras tanto; kompará atrobe.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Mesklá ku e vershon riba disko — ainda no wardá.',
+  'Mijn versie bewaren': 'Keda mi vershon',
+  'Versie op schijf laden': 'Karga e vershon riba disko',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sela por tuma ta posibel ora tur konsepto i campo obligatorio a ser kompletá. Aún pa kontrolá riba diapositiva:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Evaluashon SAFARI di soberania digital',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Deck di trabou komplet pa alcance, preguntanan di evaluashon, prueba, puntuashon i un opinion di assurance segun SAFARI.',
   'Nieuwste eerst': 'Mas resien promé',
   'Oudste eerst': 'Mas bieu promé',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

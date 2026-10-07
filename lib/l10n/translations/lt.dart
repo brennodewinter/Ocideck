@@ -213,8 +213,6 @@ const _dutchSourceLt = {
       'Užantspauduota. Išsaugokite (Ctrl/Cmd+S), kad išliktų.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Ši ataskaita parengta teisingai.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Užantspauduoti galima tik peržiūrėjus visus DI juodraščius. Dar reikia patikrinti skaidrėje (-ėse):',
   'Uit sjabloon…': 'Iš šablono…',
   'Sjabloon kiezen': 'Pasirinkti šabloną',
   'Scope-object': 'Aprėpties objektas',
@@ -1636,6 +1634,33 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Logotipas apatiniame kampe, esant poraštei, automatiškai perkeliamas į atitinkamą viršutinį kampą.',
+  'Verschillen bekijken…': 'Peržiūrėti skirtumus…',
+  'Mijn versie als kopie bewaren': 'Išsaugoti mano versiją kaip kopiją',
+  'Verschillen met de versie op schijf': 'Skirtumai nuo versijos diske',
+  'Versie op schijf': 'Versija diske',
+  'Laatst geopend of opgeslagen': 'Paskutinį kartą atidaryta arba įrašyta',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Trys versijos: ką paskutinį kartą atidarėte arba įrašėte (bazė), jūsų neįrašyta versija ir kas dabar yra diske.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Nežinoma patikima bazinė versija; automatinis sujungimas neįmanomas. Pasirinkite, kurią versiją norite naudoti.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Pakeitimai nekonfliktuoja ir gali būti sujungti automatiškai.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Šios skaidrės pakeistos abiejose pusėse — kiekvienai pasirinkite, kuri versija lieka:',
+  'Geen inhoudelijke verschillen gevonden.': 'Turinio skirtumų nerasta.',
+  'Samenvoegen en toepassen': 'Sujungti ir taikyti',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Failas tuo metu vėl pakeistas; palyginkite dar kartą.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Sujungta su versija diske — dar neįrašyta.',
+  'Mijn versie bewaren': 'Palikti mano versiją',
+  'Versie op schijf laden': 'Įkelti versiją iš disko',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Užantspauduoti galima tik užbaigus visus juodraščius ir privalomus laukus. Dar reikia patikrinti skaidrėje:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI skaitmeninio suvereniteto vertinimas',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Visas darbo rinkinys, skirtas apimčiai, vertinimo klausimams, įrodymams, balų skyrimui ir užtikrinimo išvadai pagal SAFARI.',
   'Nieuwste eerst': 'Naujausi pirmiausia',
   'Oudste eerst': 'Seniausi pirmiausia',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

@@ -214,8 +214,6 @@ const _dutchSourceEn = {
       'Sealed. Save (Ctrl/Cmd+S) to keep it.',
   'Deze rapportage is naar waarheid opgesteld.':
       'This report has been prepared truthfully.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Sealing is only possible once all AI drafts have been reviewed. Still to check on slide(s):',
   'Uit sjabloon…': 'From template…',
   'Sjabloon kiezen': 'Choose template',
   'Scope-object': 'Scope object',
@@ -829,6 +827,33 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'A logo in a bottom corner automatically moves to the corresponding top corner when a footer is present.',
+  'Verschillen bekijken…': 'View differences…',
+  'Mijn versie als kopie bewaren': 'Keep my version as a copy',
+  'Verschillen met de versie op schijf': 'Differences from the version on disk',
+  'Versie op schijf': 'Version on disk',
+  'Laatst geopend of opgeslagen': 'Last opened or saved',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Three versions: what you last opened or saved (the base), your unsaved version, and what is now on disk.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'No reliable base version is known; automatic merging is not possible. Choose which version you want to use.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'The changes do not conflict and can be merged automatically.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'These slides were changed on both sides — choose which version to keep for each slide:',
+  'Geen inhoudelijke verschillen gevonden.': 'No content differences found.',
+  'Samenvoegen en toepassen': 'Merge and apply',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'The file has changed again in the meantime; compare again.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Merged with the version on disk — not saved yet.',
+  'Mijn versie bewaren': 'Keep my version',
+  'Versie op schijf laden': 'Load version on disk',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Sealing is only possible when all drafts and mandatory fields have been completed. Still to check on slide:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'SAFARI digital sovereignty assessment',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Complete working deck for scope, assessment questions, evidence, scoring and an assurance opinion according to SAFARI.',
   'Nieuwste eerst': 'Newest first',
   'Oudste eerst': 'Oldest first',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':

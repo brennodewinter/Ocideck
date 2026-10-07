@@ -216,8 +216,6 @@ const _dutchSourceLa = {
       'Obsignatum. Serva (Ctrl/Cmd+S) ut retineas.',
   'Deze rapportage is naar waarheid opgesteld.':
       'Haec relatio secundum veritatem confecta est.',
-  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
-      'Obsignatio fieri non potest nisi omnia adumbrata ab IA recognita sint. Adhuc examinandum in scida(is):',
   'Uit sjabloon…': 'Ex exemplari…',
   'Sjabloon kiezen': 'Exemplar eligere',
   'Scope-object': 'Obiectum ambitus',
@@ -1644,6 +1642,34 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Insigne in angulo inferiore, cum footer adest, automatice ad eundem angulum superiorem movetur.',
+  'Verschillen bekijken…': 'Discrimina inspice…',
+  'Mijn versie als kopie bewaren': 'Versionem meam exemplari serva',
+  'Verschillen met de versie op schijf': 'Discrimina a versione in disco',
+  'Versie op schijf': 'Versio in disco',
+  'Laatst geopend of opgeslagen': 'Nuper apertum vel servatum',
+  'Drie versies: wat je het laatst opende of opsloeg (de basis), jouw niet-opgeslagen versie, en wat er nu op schijf staat.':
+      'Tres versiones: quod nuper aperuisti vel servavisti (basis), versio tua non servata, et quod nunc in disco est.',
+  'Er is geen betrouwbare basisversie bekend; automatisch samenvoegen kan niet. Kies welke versie je wilt gebruiken.':
+      'Versio basis certa ignoratur; coniunctio automatica fieri non potest. Elige quam versionem uti velis.',
+  'De wijzigingen raken elkaar niet en kunnen automatisch worden samengevoegd.':
+      'Mutationes inter se non pugnant et automatice coniungi possunt.',
+  'Deze slides zijn aan beide kanten gewijzigd — kies per slide welke versie blijft:':
+      'Hae paginae utrimque mutatae sunt — pro quaque elige quae versio maneat:',
+  'Geen inhoudelijke verschillen gevonden.':
+      'Nulla discrimina contenti reperta.',
+  'Samenvoegen en toepassen': 'Coniunge et adhibe',
+  'Het bestand is ondertussen opnieuw gewijzigd; vergelijk opnieuw.':
+      'Fasciculus interea iterum mutatus est; iterum compara.',
+  'Samengevoegd met de versie op schijf — nog niet opgeslagen.':
+      'Cum versione in disco coniunctum — nondum servatum.',
+  'Mijn versie bewaren': 'Versionem meam serva',
+  'Versie op schijf laden': 'Versionem e disco lege',
+  'Verzegelen kan pas als alle concepten en verplichte velden zijn afgerond. Nog te controleren op dia:':
+      'Obsignatio fieri potest tantum cum omnia exemplaria et campi necessarii completa sunt. Adhuc in diapositiva inspiciendum:',
+  'SAFARI-assessment digitale soevereiniteit':
+      'Aestimatio SAFARI dominationis digitalis',
+  'Volledig werkdeck voor scope, toetsvragen, bewijs, scoring en een assurance-oordeel volgens SAFARI.':
+      'Fasciculus operis plenus pro ambitu, quaestionibus probationis, probationibus, aestimatione atque iudicio assecurationis secundum SAFARI.',
   'Nieuwste eerst': 'Recentissima primum',
   'Oudste eerst': 'Veterrima primum',
   'De server gaf niet aan welk formulier bij deze inzending hoort — invullen is hier niet mogelijk.':
