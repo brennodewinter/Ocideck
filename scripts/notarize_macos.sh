@@ -69,6 +69,35 @@ require_cmd() {
   command -v "$1" >/dev/null 2>&1 || { echo "Ontbrekend commando: $1" >&2; exit 127; }
 }
 
+# Zet de echte notarytool-uitvoer om in het bruikbare herstelpad. Elke klasse
+# heeft een ándere oplossing: store-credentials herschrijft een keychain-
+# profiel maar kan een juridische overeenkomst bij Apple niet accepteren —
+# wie dat advies bij een 403 krijgt, zoekt de verkeerde kant op (#2296).
+# Herkent niets? Dan alleen de rauwe uitvoer, geen verzonnen oorzaak.
+notary_failure_advice() { # notary_failure_advice NOTARY_OUTPUT (stderr)
+  local out
+  out="$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]')"
+  if grep -qE 'agreement' <<<"$out"; then
+    echo "Een vereiste Apple-overeenkomst ontbreekt of is verlopen (HTTP 403)." >&2
+    echo "De Account Holder moet de actuele overeenkomsten accepteren in" >&2
+    echo "App Store Connect. store-credentials lost dit NIET op — dat" >&2
+    echo "herschrijft alleen het keychain-profiel." >&2
+  elif grep -qE 'keychain[- ]profile|profile.*(found|exist|missing|invalid|unusable)|unable to (find|use|load).*profile' <<<"$out"; then
+    echo "Het profiel ontbreekt of is ongeldig — mogelijk verdwenen na een" >&2
+    echo "sessieherstart (zoals v0.1.3-rc1). Herstel met 'xcrun notarytool" >&2
+    echo "store-credentials' (zie de kop van dit script en docs/BUILD.md)." >&2
+  elif grep -qE '401|unauthoriz|invalid (credentials|password)|authenticat' <<<"$out"; then
+    echo "Authenticatie geweigerd — controleer Apple-ID, app-specifiek" >&2
+    echo "wachtwoord en team-id, en sla het profiel daarna opnieuw op." >&2
+  elif grep -qE 'network|timed out|offline|could not connect|nsurlerror|connection' <<<"$out"; then
+    echo "Netwerkstoring richting Apple — controleer de verbinding en draai" >&2
+    echo "het script later opnieuw." >&2
+  else
+    echo "Geen bekende oorzaak herkend; ga uit van de bovenstaande" >&2
+    echo "notarytool-uitvoer." >&2
+  fi
+}
+
 # Een macOS-app tekenen kan alleen op macOS.
 [[ "$(uname -s)" == "Darwin" ]] || {
   echo "Dit script tekent een macOS-app en draait dus op macOS." >&2
@@ -102,11 +131,13 @@ if [[ $PREFLIGHT -eq 1 ]]; then
   # Toon bij falen de ECHTE fout, niet een generieke tekst: een eerdere versie gaf
   # '--limit 1' mee — dat kent notarytool niet (exit 64), waardoor élke release
   # onterecht op "profiel verdwenen" strandde. De echte fout tonen maakt zo'n vals
-  # alarm meteen zichtbaar.
+  # alarm meteen zichtbaar. En het advies hoort bij de foutklasse: bij een
+  # overeenkomst-403 stuurde dezelfde regel naar store-credentials, dat daar
+  # niets aan doet (#2296).
   if ! NOTARY_OUT="$(xcrun notarytool history --keychain "$KEYCHAIN" --keychain-profile "$PROFILE" 2>&1)"; then
     echo "Notary-profiel '$PROFILE' in keychain '$KEYCHAIN' werkt niet:" >&2
     printf '%s\n' "$NOTARY_OUT" | sed 's/^/   /' >&2
-    echo "Mogelijk na een sessieherstart verdwenen — herstel met 'xcrun notarytool store-credentials' (zie de kop van dit script en docs/BUILD.md)." >&2
+    notary_failure_advice "$NOTARY_OUT"
     exit 1
   fi
   echo "Pre-flight OK: identiteit '$IDENTITY' aanwezig, notary-profiel '$PROFILE' geldig."

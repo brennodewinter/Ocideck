@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De **notarisatie-preflight classificeert Apple-fouten** (#2296) in plaats
+  van bij élke `notarytool`-fout hetzelfde "profiel opnieuw opslaan"-advies
+  te geven. Bij de echte 403 — een vereiste overeenkomst ontbrak of was
+  verlopen — wees dat advies de verkeerde kant op: `store-credentials` kan
+  een juridische overeenkomst niet accepteren. Nu wijst die fout naar de
+  Account Holder in App Store Connect, blijft het profiel-advies alleen
+  bij een ontbrekend of ongeldig profiel staan, en toont een onbekende
+  fout de rauwe notarytool-uitvoer zonder verzonnen oorzaak.
 - **SIGINT en SIGTERM zijn nu veilige afbrekingen** (#2298) in
   `release_auto.sh` en `sign_release.sh`. Een signaal is geen commandofout en
   bereikte de `ERR`-trap niet: Ctrl-C na het aanmaken van de releasebranch liet
