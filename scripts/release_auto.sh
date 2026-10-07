@@ -709,7 +709,7 @@ cmd_status() {
   read_token
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
-  local has_rel=0 has_sums=0 manifest_complete=0 has_sig=0 sig_valid=0 web_live=0 website_live=0 ci_stable=0
+  local has_sums=0 manifest_complete=0 sig_valid=0 web_live=0 website_live=0 ci_stable=0
   local live="" website_version="" mgate_ok=0
   local prnum="" prstate=""
   local probe_dir probe_fn probe pids="" n_done deadline
@@ -761,9 +761,7 @@ cmd_status() {
   [ "$st_tag_m" != 'nomirror' ] && has_mirror=1
   [ "$st_tag_m" = 1 ] && has_tag_m=1
   if [ "$st_release" = 1 ]; then
-    has_rel=1
     has_sums="$(printf '%s' "$d_release" | cut -d' ' -f1)"
-    has_sig="$(printf '%s' "$d_release" | cut -d' ' -f2)"
     manifest_complete="$(printf '%s' "$d_release" | cut -d' ' -f3)"
     sig_valid="$(printf '%s' "$d_release" | cut -d' ' -f4)"
   fi
@@ -1751,21 +1749,25 @@ phase3() {
       if [ "$wrc" -ne 0 ]; then
         log "LET OP: kon de website-downloads-runs niet lezen — geen nieuwe dispatch terwijl een actieve deploy niet uit te sluiten is; de publieke naconditie hieronder beslist."
       elif [ -z "$wrun" ]; then
-        api POST "/actions/workflows/website-downloads.yml/dispatches" \
+        if api POST "/actions/workflows/website-downloads.yml/dispatches" \
           -H 'Content-Type: application/json' \
-          -d "{\"ref\":\"$TAG\"}" -o /dev/null \
-          && log "website-downloads-workflow gedispatcht op $TAG." \
-          || log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+          -d "{\"ref\":\"$TAG\"}" -o /dev/null; then
+          log "website-downloads-workflow gedispatcht op $TAG."
+        else
+          log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+        fi
       else
         case "${wrun#*|}" in
           success)
             log "website-downloads voor $TAG is al groen — dispatch overgeslagen." ;;
           failure|cancelled|skipped|error)
-            api POST "/actions/workflows/website-downloads.yml/dispatches" \
+            if api POST "/actions/workflows/website-downloads.yml/dispatches" \
               -H 'Content-Type: application/json' \
-              -d "{\"ref\":\"$TAG\"}" -o /dev/null \
-              && log "eerdere website-downloads-run was terminaal-rood; opnieuw gedispatcht op $TAG." \
-              || log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+              -d "{\"ref\":\"$TAG\"}" -o /dev/null; then
+              log "eerdere website-downloads-run was terminaal-rood; opnieuw gedispatcht op $TAG."
+            else
+              log "LET OP: dispatch van website-downloads.yml faalde — werk de librekat.nl-downloadpagina handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+            fi
             ;;
           *)
             log "website-downloads-run ${wrun%%|*} is nog actief — geen tweede publicatie; hij wordt hieronder gevolgd." ;;
