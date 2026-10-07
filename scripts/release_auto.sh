@@ -58,6 +58,10 @@
 #     artefact zélf fout is snijd je de VOLGENDE patch-tag; her-tag nooit (dat
 #     degradeert de mirror-Windows-release tot draft en laat `windows-ophalen`
 #     eeuwig wachten).
+#   * Verloopt de tag-PUSH zelf onzeker (het antwoord of de teruglezing valt
+#     weg), dan kan de tag er al staan: de branch blijft bewust staan en de
+#     route is read-only `--status` gevolgd door `--resume` van dezelfde tag —
+#     nooit een verse release ernaast (#2297).
 #
 # --dry-run doet alle read-only stappen (versie bepalen, verouderingsgate,
 # CHANGELOG-preview, plan tonen) en STOPT vóór elke mutatie.
@@ -136,12 +140,16 @@ RUN_T0="$(date +%s)"
 elapsed() { local d=$(( $(date +%s) - RUN_T0 )); printf '%d:%02d' "$((d / 60))" "$((d % 60))"; }
 section() { printf '\n== [%s] %s ==\n' "$(elapsed)" "$1"; }
 log()     { printf '   %s\n' "$1"; }
-die()     { printf '\nrelease-auto: %s\n' "$1" >&2; cleanup_branch 2>/dev/null || true; exit 1; }
+die()     { printf '\nrelease-auto: %s\n' "$1" >&2; [ "$TAG_UNCERTAIN" -eq 0 ] && cleanup_branch 2>/dev/null || true; exit 1; }
 need_cmd() { command -v "$1" >/dev/null 2>&1 || die "ontbrekend commando: $1"; }
 
 # ── Fail-safe: waar zijn we, en is de tag al onherroepelijk de deur uit? ─────────
 STEP="init"
 TAG_PUSHED=0
+# TAG_UNCERTAIN staat aan vanaf de eerste remote tagpushpoging tot de teruglezing
+# hem bevestigt of de afwijzing bewijst. Zolang hij aan staat kan de tag er al
+# zijn: geen branchcleanup en nooit het advies voor een verse release (#2297).
+TAG_UNCERTAIN=0
 # Staat de release-branch al op origin, dan is een verse run geen optie meer —
 # die weigert er terecht bovenop te bouwen. De juiste route is dan --resume, en
 # dat hoort de foutmelding te zeggen in plaats van "draai opnieuw".
@@ -206,6 +214,12 @@ on_err() {
     printf '  DEZELFDE tag af zodra dat hersteld is:  scripts/release_auto.sh --resume %s\n' "${TAG:-vX.Y.Z}" >&2
     printf '  Alleen als een uitgebracht artefact zelf fout is, snijd je de VOLGENDE patch-tag;\n' >&2
     printf '  verplaats deze tag nooit (dat breekt de mirror-Windows-release).\n' >&2
+  elif [ "$TAG_UNCERTAIN" -eq 1 ]; then
+    printf '  De push van tag %s verliep onzeker — de server kan hem al hebben.\n' "${TAG:-?}" >&2
+    printf '  De release-branch blijft daarom bewust staan. Lees eerst read-only de\n' >&2
+    printf '  staat:  scripts/release_auto.sh --status %s\n' "${TAG:-vX.Y.Z}" >&2
+    printf '  en maak uitsluitend DEZELFDE tag af:  scripts/release_auto.sh --resume %s\n' "${TAG:-vX.Y.Z}" >&2
+    printf '  Een volgende release is pas veilig als deze tagtoestand bekend is.\n' >&2
   elif [ "$BRANCH_PUSHED" -eq 1 ]; then
     printf '  Er is niets onherroepelijks gebeurd: de tag staat er niet.\n' >&2
     printf '  Maar de release-branch %s staat wél op origin, dus een verse run\n' "$BRANCH" >&2
@@ -1997,15 +2011,28 @@ tag_and_push() { # tag_and_push MERGE_SHA
   git tag -d "$TAG" >/dev/null 2>&1 || true   # een stale lokale tag van een vorige poging opruimen
   git tag -a "$TAG" -m "OciDeck $TAG" "$mergesha"
   assert_tag_commit lokaal "$(git rev-list -n 1 "$TAG")" "$mergesha"
+  # Vanaf de eerste pushpoging is de toestand remote-onzeker: de server kan de
+  # tag accepteren terwijl het antwoord óf de teruglezing wegvalt. Tot de tag
+  # bevestigd is mag niets deze toestand als "er is niets gebeurd" behandelen
+  # — die() laat de branch staan en on_err wijst naar --status/--resume.
+  TAG_UNCERTAIN=1
   if ! git push --quiet origin "$TAG"; then
-    origin_sha="$(remote_tag_commit origin)" || true
-    assert_tag_commit origin "$origin_sha" "$mergesha"
-    log "Origin-push meldde een fout, maar de teruglezing bewijst dat $TAG correct staat."
+    rc=0; origin_sha="$(remote_tag_commit origin)" || rc=$?
+    if [ "$rc" -eq 0 ]; then
+      assert_tag_commit origin "$origin_sha" "$mergesha"
+      log "Origin-push meldde een fout, maar de teruglezing bewijst dat $TAG correct staat."
+    elif [ "$rc" -eq 1 ]; then
+      TAG_UNCERTAIN=0
+      die "de push van tag $TAG werd aantoonbaar afgewezen — de server kent de tag niet. Repareer de oorzaak en draai het script opnieuw."
+    else
+      die "de push van tag $TAG faalde én de tag is niet terug te lezen — de server kan hem al hebben. Controleer met: scripts/release_auto.sh --status $TAG en hervat met: scripts/release_auto.sh --resume $TAG. Begin géén volgende release."
+    fi
   else
     origin_sha="$(remote_tag_commit origin)" \
-      || die "origin-push meldde succes, maar $TAG is niet terug te lezen."
+      || die "origin-push meldde succes, maar $TAG is niet terug te lezen — de server kan hem al hebben. Controleer met: scripts/release_auto.sh --status $TAG en hervat met: scripts/release_auto.sh --resume $TAG."
     assert_tag_commit origin "$origin_sha" "$mergesha"
   fi
+  TAG_UNCERTAIN=0
   TAG_PUSHED=1   # origin heeft de tag: de release-CI is gestart, ongeacht de mirror
   log "Tag $TAG gepusht naar origin."
   ensure_mirror_tag
