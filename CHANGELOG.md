@@ -676,6 +676,14 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- **De Homebrew-tapcontrole wijst bij een achterlopende tap naar de juiste
+  herstelroute** (#2365): `scripts/verify_homebrew_cask.sh` verwees nog naar
+  het afgeschafte `HOMEBREW_TAP_TOKEN`, terwijl de tap zich allang zelf
+  bijwerkt. De melding noemt nu de update-workflow van
+  `LibreKAT/homebrew-ocideck`; een achterlopende GitHub-spiegel blijft apart
+  naar het push-mirror wijzen. De contracttest pint nu ook `minisign.pub` —
+  het derde bouwsteen dat de tap bij elke tag ophaalt — en bewijst dat een
+  ontbrekende sleutel de caskgenerator fail-closed houdt.
 - **Relatieve afbeeldingen en media in een via URL geopend deck werken op de webversie** (#2282): een deck dat via
   `?deck=`, URL-import of de serverbibliotheek binnenkwam had geen projectmap als resolutiebasis, dus `images/foto.png`
   eindigde stil op een leeg-beeldvlak. Zulke paden resolveeren nu tegen de URL van het deck zelf — same-origin en
