@@ -1628,6 +1628,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Importeren…': 'Importiere…',
+  'OciDeck-pakket (.ocideck)': 'OciDeck-Paket (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Es Logo i nere Egge rutscht mit ere Fuesszeile automatisch i di gliich oberi Egge.',
   'Verschillen bekijken…': 'Unterschied aaluege…',

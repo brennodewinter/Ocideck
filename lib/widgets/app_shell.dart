@@ -127,6 +127,7 @@ import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
 import 'dialogs/asset_usage_dialog.dart';
 import 'dialogs/asset_rights_dialog.dart';
+import 'dialogs/choice_picker.dart';
 import 'dialogs/command_palette.dart';
 import 'dialogs/local_deck_conflict_dialog.dart';
 import 'editors/markdown_editor_field.dart';

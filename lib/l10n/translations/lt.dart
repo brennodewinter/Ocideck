@@ -1632,6 +1632,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Importeren…': 'Importuoti…',
+  'OciDeck-pakket (.ocideck)': 'OciDeck paketas (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Logotipas apatiniame kampe, esant poraštei, automatiškai perkeliamas į atitinkamą viršutinį kampą.',
   'Verschillen bekijken…': 'Peržiūrėti skirtumus…',

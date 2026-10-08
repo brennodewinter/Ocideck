@@ -121,7 +121,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             deckState: deckState,
             exportDirectory: settings.exportDirectory,
             onSave: _saveDeck,
-            onExport: canExport ? _exportDeck : null,
+            onExport: canExport ? _exportFlow : null,
             exportTooltip: exportTooltip,
             readiness: readiness,
             quality: quality,
@@ -420,18 +420,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _mergeConcept(context, ref);
             case 'tag_git':
               _tagRelease(context, ref);
-            case 'export_package':
-              _exportPackage(context, ref);
-            case 'import_package':
-              _importPackage();
-            case 'import_url':
-              _importUrl();
-            case 'import_openkat':
-            case 'openkat_add_server':
-            case 'openkat_server_report':
-              dispatchOpenKatShellAction(context, ref, v);
-            case 'import_presentation':
-              importPresentation(context, ref);
+            case 'export':
+              _exportFlow();
+            case 'import':
+              _importFlow();
             case 'find':
               _openFindReplace();
             case 'clear_checklists':
@@ -689,7 +681,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     }
   }
 
-  Future<void> _exportDeck() async {
+  /// De document-exportroute. [format] komt uit de voorafgaande formaatkeuze
+  /// (de centrale export-ingang): het exportdialoog markeert die knop dan als
+  /// de gekozen hoofdactie, zodat de keuze zichtbaar meekomt.
+  Future<void> _exportDeck({ExportFormat? format}) async {
     final deckState = ref.read(deckProvider);
     final deck = deckState.deck!;
     final l10n = context.l10n;
@@ -756,6 +751,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           deckState.filePath ??
           '${sanitizeFilename(deck.title, fallback: 'presentatie')}.md',
       bundleFor: bundleFor,
+      initialFormat: format,
       hasPrivacyFindings: hasPrivacyFindings,
       hasDepthChoice: hasDepthChoice,
       cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,

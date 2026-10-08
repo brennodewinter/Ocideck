@@ -66,6 +66,87 @@ PopupMenuItem<String> shellMenuItem(String value, IconData icon, String label) {
   );
 }
 
+/// Waar "Exporteren…" heen kan: een documentformaat via de bestaande
+/// exportdialoog, of het `.ocideck`-pakket via zijn eigen pakket-route (met
+/// de encryptie- en classificatiepoort die daarbij hoort). `format == null`
+/// onderscheidt het pakket van de documentformaten zonder een tweede enum.
+enum ExportTarget {
+  pdf(ExportFormat.pdf),
+  pptx(ExportFormat.pptx),
+  odp(ExportFormat.odp),
+  html(ExportFormat.html),
+  latex(ExportFormat.latex),
+  package(null);
+
+  const ExportTarget(this.format);
+  final ExportFormat? format;
+}
+
+/// De zes antwoorden van de formaatkeuze achter "Exporteren…". De document-
+/// formaten dragen dezelfde benaming als de knoppen in het exportdialoog —
+/// één woordenschat, nergens anders. Het pakket benoemt zijn extensie, zodat
+/// het verschil met documentexport in de lijst zelf al leesbaar is.
+List<PickerOption<ExportTarget>> exportTargetOptions(AppLocalizations l10n) => [
+  (
+    value: ExportTarget.pdf,
+    icon: Icons.picture_as_pdf_outlined,
+    label: l10n.t('exportAsPdf'),
+  ),
+  (
+    value: ExportTarget.pptx,
+    icon: Icons.slideshow_outlined,
+    label: l10n.t('exportAsPptx'),
+  ),
+  (
+    value: ExportTarget.odp,
+    icon: Icons.slideshow_outlined,
+    label: l10n.t('exportAsOdp'),
+  ),
+  (
+    value: ExportTarget.html,
+    icon: Icons.public_outlined,
+    label: l10n.t('exportAsHtml'),
+  ),
+  (
+    value: ExportTarget.latex,
+    icon: Icons.science_outlined,
+    label: l10n.t('exportAsLatex'),
+  ),
+  (
+    value: ExportTarget.package,
+    icon: Icons.inventory_2_outlined,
+    label: l10n.d('OciDeck-pakket (.ocideck)'),
+  ),
+];
+
+/// De bronnen van de bronkiezer achter "Importeren…": altijd pakket en URL,
+/// plus de module-afhankelijke bronnen — presentatie-import achter de
+/// Importeren-module, OpenKAT achter zijn eigen integratiepoort.
+///
+/// De terugkeerwaarde is de menusleutel die vroeger direct in het menu stond:
+/// dezelfde dispatch behandelt hem, zodat er van elke afhandeling maar één
+/// exemplaar bestaat.
+List<PickerOption<String>> importSourceOptions(
+  WidgetRef ref,
+  AppLocalizations l10n,
+) => [
+  (
+    value: 'import_package',
+    icon: Icons.unarchive_outlined,
+    label: l10n.t('importPackage'),
+  ),
+  (value: 'import_url', icon: Icons.link, label: l10n.t('importUrl')),
+  // Presentatie-import (PowerPoint/Keynote/Impress): werkt op bytes, dus ook
+  // op web — zelfde reveal-poort als het tabblad Integraties.
+  if (ref.read(importModuleRevealProvider))
+    (
+      value: 'import_presentation',
+      icon: Icons.slideshow_outlined,
+      label: presentationImportLabel(l10n),
+    ),
+  ...openKatImportChoices(ref, l10n),
+];
+
 String presentationActionTooltip(Deck deck, AppLocalizations l10n) =>
     deck.presentationTiming.isIgnite
     ? l10n.d('Ignite presenteren')
@@ -182,6 +263,48 @@ extension _MainLayoutMenu on _MainLayoutState {
     ];
   }
 
+  /// De tweede stap achter "Exporteren…" — tevens de centrale export-ingang
+  /// van statusbalk, menubalk en opdrachtenpalet, zodat volgorde en benamingen
+  /// overal gelijk zijn. Eerst welk formaat (of het pakket), daarna de
+  /// bestaande route met al haar poorten: documentformaten via het
+  /// exportdialoog, `.ocideck` via [_exportPackage].
+  Future<void> _exportFlow() async {
+    final l10n = context.l10n;
+    final target = await ChoicePicker.show<ExportTarget>(
+      context,
+      title: l10n.t('exportDialogTitle'),
+      options: exportTargetOptions(l10n),
+    );
+    if (target == null || !mounted) return;
+    final format = target.format;
+    if (format == null) {
+      await _exportPackage(context, ref);
+      return;
+    }
+    await _exportDeck(format: format);
+  }
+
+  /// De tweede stap achter "Importeren…": welke bron, daarna dezelfde
+  /// afhandeling die eerder een eigen menu-regel had.
+  Future<void> _importFlow() async {
+    final action = await ChoicePicker.show<String>(
+      context,
+      title: context.l10n.d('Importeren'),
+      options: importSourceOptions(ref, context.l10n),
+    );
+    if (action == null || !mounted) return;
+    switch (action) {
+      case 'import_package':
+        await _importPackage();
+      case 'import_url':
+        await _importUrl();
+      case 'import_presentation':
+        await importPresentation(context, ref);
+      default:
+        await dispatchOpenKatShellAction(context, ref, action);
+    }
+  }
+
   List<PopupMenuEntry<String>> _moreMenuItems(AppLocalizations l10n) {
     return [
       shellMenuItem(
@@ -214,30 +337,20 @@ extension _MainLayoutMenu on _MainLayoutState {
         ),
       ],
       const PopupMenuDivider(),
-      // ── Pakket en import ──────────────────────────────────────────
-      // Pakketten en URL-import werken overal: op web volledig in het
-      // geheugen (pakket als download, import via de browser met dezelfde
-      // security-gate). Alleen Nextcloud is op web bewust uit (zie
-      // platform_features.dart).
+      // ── Importeren en exporteren ──────────────────────────────────
+      // Twee ingangen, één per richting. Wélke bron of wélk formaat is de
+      // volgende stap — zo blijft dit menu kort terwijl de keuzelijst
+      // compleet blijft, inclusief de module-afhankelijke bronnen.
       shellMenuItem(
-        'export_package',
-        Icons.inventory_2_outlined,
-        l10n.t('exportPackage'),
+        'export',
+        Icons.file_download_outlined,
+        l10n.d('Exporteren…'),
       ),
       shellMenuItem(
-        'import_package',
-        Icons.unarchive_outlined,
-        l10n.t('importPackage'),
+        'import',
+        Icons.file_upload_outlined,
+        l10n.d('Importeren…'),
       ),
-      shellMenuItem('import_url', Icons.link, l10n.t('importUrl')),
-      ...openKatShellMenuEntries(ref, l10n, shellMenuItem),
-      // Presentatie-import (PowerPoint/Keynote/Impress): werkt op bytes, dus ook op web.
-      if (ref.watch(importModuleRevealProvider))
-        shellMenuItem(
-          'import_presentation',
-          Icons.slideshow_outlined,
-          presentationImportLabel(l10n),
-        ),
       ..._gitMenuItems(l10n),
       const PopupMenuDivider(),
       // ── Bewerken in dit deck ──────────────────────────────────────

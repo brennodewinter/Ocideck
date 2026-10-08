@@ -52,6 +52,11 @@ class ExportDialog extends StatefulWidget {
   final CockpitColorScheme cockpitColorScheme;
   final ExportService exportService;
 
+  /// Welk formaat de gebruiker in de voorafgaande formaatkeuze ("Exporteren…")
+  /// aanwees; die knop krijgt hier de hoofdactie-vorm, zodat de keuze zichtbaar
+  /// meekomt in plaats van weg te vallen. `null` bij een directe aanroep.
+  final ExportFormat? initialFormat;
+
   /// Classificatie-handhaving (plafond, minimum, verplicht classificeren).
   final ClassificationEnforcementPolicy enforcementPolicy;
 
@@ -86,6 +91,7 @@ class ExportDialog extends StatefulWidget {
     this.hasDepthChoice = false,
     this.cockpitColorScheme = CockpitColorScheme.standard,
     required this.exportService,
+    this.initialFormat,
     this.enforcementPolicy = const ClassificationEnforcementPolicy(),
     this.qualityResult = const SlideQualityResult([]),
     this.qualityPolicy = const QualityExportPolicy(),
@@ -105,6 +111,7 @@ class ExportDialog extends StatefulWidget {
     bool hasDepthChoice = false,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required ExportService exportService,
+    ExportFormat? initialFormat,
     ClassificationEnforcementPolicy enforcementPolicy =
         const ClassificationEnforcementPolicy(),
     SlideQualityResult qualityResult = const SlideQualityResult([]),
@@ -125,6 +132,7 @@ class ExportDialog extends StatefulWidget {
         hasDepthChoice: hasDepthChoice,
         cockpitColorScheme: cockpitColorScheme,
         exportService: exportService,
+        initialFormat: initialFormat,
         enforcementPolicy: enforcementPolicy,
         qualityResult: qualityResult,
         qualityPolicy: qualityPolicy,
@@ -139,6 +147,32 @@ class ExportDialog extends StatefulWidget {
 
   @override
   State<ExportDialog> createState() => _ExportDialogState();
+}
+
+/// Één formaatknop. Top-level en niet op de State: leest alleen parameters en
+/// de klasse zit tegen haar plafond ([classSizeBaseline]).
+Widget _exportButton({
+  required IconData icon,
+  required String label,
+  required VoidCallback? onPressed,
+  bool emphasized = false,
+}) {
+  final buttonIcon = Icon(icon);
+  final buttonLabel = Text(label);
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    child: emphasized
+        ? FilledButton.icon(
+            onPressed: onPressed,
+            icon: buttonIcon,
+            label: buttonLabel,
+          )
+        : OutlinedButton.icon(
+            onPressed: onPressed,
+            icon: buttonIcon,
+            label: buttonLabel,
+          ),
+  );
 }
 
 class _ExportDialogState extends State<ExportDialog> {
@@ -718,6 +752,7 @@ class _ExportDialogState extends State<ExportDialog> {
         _exportButton(
           icon: _formatIcon(ExportFormat.pdf),
           label: l10n.t('exportAsPdf'),
+          emphasized: widget.initialFormat == ExportFormat.pdf,
           onPressed: _loading
               ? null
               : () => _export(ExportFormat.pdf, compress: _compress),
@@ -725,21 +760,25 @@ class _ExportDialogState extends State<ExportDialog> {
         _exportButton(
           icon: _formatIcon(ExportFormat.pptx),
           label: l10n.t('exportAsPptx'),
+          emphasized: widget.initialFormat == ExportFormat.pptx,
           onPressed: _loading ? null : () => _export(ExportFormat.pptx),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.odp),
           label: l10n.t('exportAsOdp'),
+          emphasized: widget.initialFormat == ExportFormat.odp,
           onPressed: _loading ? null : () => _export(ExportFormat.odp),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.html),
           label: l10n.t('exportAsHtml'),
+          emphasized: widget.initialFormat == ExportFormat.html,
           onPressed: _loading ? null : () => _export(ExportFormat.html),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.latex),
           label: l10n.t('exportAsLatex'),
+          emphasized: widget.initialFormat == ExportFormat.latex,
           onPressed: _loading ? null : () => _export(ExportFormat.latex),
         ),
         Padding(
@@ -791,21 +830,6 @@ class _ExportDialogState extends State<ExportDialog> {
           ],
         ),
       ],
-    );
-  }
-
-  Widget _exportButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback? onPressed,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: OutlinedButton.icon(
-        onPressed: onPressed,
-        icon: Icon(icon),
-        label: Text(label),
-      ),
     );
   }
 

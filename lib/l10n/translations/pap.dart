@@ -664,6 +664,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Importeren…': 'Importá…',
+  'OciDeck-pakket (.ocideck)': 'Pakete OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Un logo den un skina abou ta move outomátikamente pa e mesun skina ariba ora tin un footer.',
   'Verschillen bekijken…': 'Mira diferensianan…',

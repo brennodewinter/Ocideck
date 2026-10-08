@@ -1655,6 +1655,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Importeren…': 'Iompórtáil…',
+  'OciDeck-pakket (.ocideck)': 'Pacáiste OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Bogann lógó i gcúinne íochtarach go huathoibríoch chuig an gcúinne uachtarach comhfhreagrach nuair a bhíonn buntásc ann.',
   'Verschillen bekijken…': 'Féach ar na difríochtaí…',

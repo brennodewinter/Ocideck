@@ -1618,6 +1618,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Importeren…': 'Impordi…',
+  'OciDeck-pakket (.ocideck)': 'OciDecki pakett (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Alumnurgas olev logo liigub jaluse olemasolul automaatselt vastavasse ülanurka.',
   'Verschillen bekijken…': 'Vaata erinevusi…',

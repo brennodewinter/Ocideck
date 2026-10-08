@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Importeren en exporteren zijn gegroepeerd in het ⋮-menu** (#2359). Het
+  menu toont nu twee hoofdacties — *Exporteren…* en *Importeren…* — met de
+  formaat- of bronkeuze als tweede stap: PDF, PowerPoint, ODP, HTML en LaTeX
+  via het bestaande exportdialoog, het OciDeck-pakket (.ocideck) via zijn
+  eigen pakketroute met encryptie en classificatiepoort. De statusbalk, het
+  macOS-menu en het opdrachtenpalet openen dezelfde centrale export-ingang,
+  en de beschikbare bronnen volgen dezelfde modulepoorten als voorheen.
 - Een presentatie-eigen **footertekst** is nu rechtstreeks te bewerken via
   *Presentatie-eigenschappen*. OciDeck bewaart hem als de bestaande Marp-
   `footer:`-frontmatter; een logo in een onderhoek wijkt zolang de footer
