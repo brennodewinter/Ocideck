@@ -11,6 +11,7 @@ import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
+import 'package:ocideck/services/mermaid_render_service.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/slide_rasterizer.dart';
 import 'package:ocideck/services/web_asset_store.dart';
@@ -93,6 +94,7 @@ Future<List<Uint8List>> _rasterize(
   void Function(String phase, int done, int total)? onStage,
   bool Function()? isCancelled,
   int maxExportBytes = kMaxRasterExportBytes,
+  Duration frameTimeout = SlideRasterizer.frameTimeout,
 }) async {
   final context = await _hostContext(tester);
   final audience = PrivacyProjection.forAudience(deck);
@@ -109,6 +111,7 @@ Future<List<Uint8List>> _rasterize(
         onStage: onStage,
         isCancelled: isCancelled,
         maxExportBytes: maxExportBytes,
+        frameTimeout: frameTimeout,
       ).then(
         (value) => result = value,
         onError: (Object error) => failure = error,
@@ -121,7 +124,13 @@ Future<List<Uint8List>> _rasterize(
   });
 
   if (failure != null) fail('rasterize wierp: $failure');
-  expect(result, isNotNull, reason: 'rasterize werd niet klaar binnen de lus');
+  expect(
+    result,
+    isNotNull,
+    reason:
+        'rasterize werd niet klaar binnen de lus '
+        '(pendingRenders=${MermaidRenderService.instance.pendingRenders})',
+  );
   return result!;
 }
 
@@ -689,5 +698,152 @@ void main() {
           'de statische rasterroute moet gebeurtenis 64 tekenen, inclusief '
           'zijn huidige-puntmarkering',
     );
+  });
+
+  group('mermaid in de rasterexport (#2358)', () {
+    // Een minimale SVG die `sanitizeMermaidSvg` ongemoeid laat (svg, rect,
+    // viewBox en fill staan allemaal op de toelatingslijst) en die in het
+    // gerasterde beeld aan één kleur te herkennen is — de bronfallback
+    // (monospace brontekst op een licht vlak) bevat die kleur nooit.
+    const markerSvg =
+        '<svg viewBox="0 0 100 60"><rect width="100" height="60" '
+        'fill="#2E7D32"/></svg>';
+    const marker = Color(0xFF2E7D32);
+
+    Deck mermaidDeck() => Deck(
+      title: 'Met diagram',
+      slides: [
+        Slide.create(SlideType.title).copyWith(title: 'Eerste dia'),
+        Slide.create(SlideType.freeMarkdown).copyWith(
+          title: 'Flow',
+          customMarkdown: '```mermaid\ngraph TD; A-->B\n```\n',
+        ),
+      ],
+    );
+
+    void resetRenderer() =>
+        MermaidRenderService.instance.debugRenderOverride = null;
+
+    testWidgets('rasteren wacht op de mermaid-eindtoestand', (tester) async {
+      addTearDown(resetRenderer);
+      // De render afronden staat onder controle van de test: pas als de poort
+      // opengaat komt er een SVG. Zo is aantoonbaar dat de rasteraar wacht —
+      // anders had hij de laad-indicator al vastgelegd.
+      final gate = Completer<void>();
+      MermaidRenderService.instance.debugRenderOverride = (_) async {
+        await gate.future;
+        return markerSvg;
+      };
+
+      final context = await _hostContext(tester);
+      final audience = PrivacyProjection.forAudience(mermaidDeck());
+      List<Uint8List>? result;
+      Object? failure;
+      final service = MermaidRenderService.instance;
+      await tester.runAsync(() async {
+        unawaited(
+          SlideRasterizer.rasterize(
+            context: context,
+            audience: audience,
+            targetWidth: 640,
+          ).then((v) => result = v, onError: (Object e) => failure = e),
+        );
+        // Pompt frames tot de render daadwerkelijk loopt — geen klokgok:
+        // de poort houdt de render dicht tot de test hem zelf opent.
+        for (
+          var i = 0;
+          i < 400 &&
+              service.pendingRenders == 0 &&
+              result == null &&
+              failure == null;
+          i++
+        ) {
+          await tester.pump(const Duration(milliseconds: 16));
+          await pumpEventQueue();
+        }
+        expect(
+          service.pendingRenders,
+          greaterThan(0),
+          reason: 'de rasteraar bereikte de mermaid-dia nooit',
+        );
+        // Een handvol frames verder mag de export nog niet klaar zijn: de
+        // capture mag pas na de eindtoestand vallen.
+        for (var i = 0; i < 10; i++) {
+          await tester.pump(const Duration(milliseconds: 16));
+          await pumpEventQueue();
+        }
+        expect(
+          result,
+          isNull,
+          reason:
+              'de export afronden terwijl de render nog liep betekent dat de '
+              'laad-indicator werd vastgelegd',
+        );
+
+        gate.complete();
+        for (var i = 0; i < 900 && result == null && failure == null; i++) {
+          await tester.pump(const Duration(milliseconds: 16));
+          await pumpEventQueue();
+        }
+      });
+      if (failure != null) fail('rasterize wierp: $failure');
+      expect(result, hasLength(2));
+      final img = await _decode(tester, result![1]);
+      expect(
+        _hasColourNear(img, marker),
+        isTrue,
+        reason:
+            'de raster van de mermaid-dia moet het diagram bevatten, niet de '
+            'laad-indicator of de bronfallback',
+      );
+    });
+
+    testWidgets('een falende mermaid-render blokkeert de export niet', (
+      tester,
+    ) async {
+      addTearDown(resetRenderer);
+      MermaidRenderService.instance.debugRenderOverride = (_) async => null;
+
+      final images = await _rasterize(tester, mermaidDeck());
+
+      expect(images, hasLength(2));
+      final img = await _decode(tester, images[1]);
+      expect(
+        _distinctColours(img.rgba),
+        greaterThan(1),
+        reason:
+            'de bronfallback tekent de brontekst — een egale vlakte zou '
+            'betekenen dat er helemaal niets werd vastgelegd',
+      );
+      expect(
+        _hasColourNear(img, marker),
+        isFalse,
+        reason: 'zonder SVG hoort de bronfallback in de export',
+      );
+    });
+
+    testWidgets('een hangende mermaid-render blijft begrensd', (tester) async {
+      // De poort blijft dicht tot de export besluit het wachten op te geven;
+      // daarna mag hij alsnog opengaan. Completeren in teardown is geen
+      // concessie maar opruimen: zonder dat blijft `pendingRenders` op de
+      // gedeelde dienst hoog en zou élke latere rasterize in dit bestand
+      // per dia het volle frameTimeout wachten.
+      final gate = Completer<String?>();
+      addTearDown(() {
+        gate.complete(null);
+        resetRenderer();
+      });
+      // Rondt niet af binnen de export: de export mag daar niet eindeloos op
+      // blijven wachten.
+      MermaidRenderService.instance.debugRenderOverride = (_) => gate.future;
+
+      final images = await _rasterize(
+        tester,
+        mermaidDeck(),
+        frameTimeout: const Duration(milliseconds: 400),
+      );
+
+      expect(images, hasLength(2));
+    });
   });
 }

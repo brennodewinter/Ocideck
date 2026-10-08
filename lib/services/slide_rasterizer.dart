@@ -24,6 +24,7 @@ import 'slide_layout_metrics.dart';
 import '../widgets/document_signature_view.dart'
     show decodeEmbeddedSignatureImage;
 import '../widgets/slides/slide_preview.dart';
+import 'mermaid_render_service.dart';
 import '../theme/brand_logo.dart';
 
 String? _resolvedRasterAsset(String rawPath, String? projectPath) {
@@ -220,25 +221,13 @@ class SlideRasterizer {
     var cancelled = false;
     try {
       overlay.insert(entry);
-      // De eerste melding staat vóór het eerste wachten, en dat is opzet.
-      // Stond hij erna, dan zag de gebruiker bij een blokkade hier helemaal
-      // niets: geen fase, geen teller, geen fout — alleen een export die stil
-      // bleef staan. Nu is minstens zichtbaar dát er begonnen is.
-      onStage?.call('precache', 0, allPaths.length);
-      await _awaitFrame(frameTimeout);
-      if (!context.mounted) return results;
-
-      await _precachePathsBatched(
+      await _precacheForRaster(
         context,
         allPaths,
-        onProgress: (done, total) => onStage?.call('precache', done, total),
+        signature,
+        frameTimeout,
+        onStage,
       );
-      if (!context.mounted) return results;
-
-      // The sign-off's drawn signature is a deck-level embedded image, not a
-      // slide path — precache it so it paints on the first captured frame
-      // instead of decoding a beat too late.
-      await _precacheSignatureImage(context, signature);
       if (!context.mounted) return results;
 
       final numberStarts = numberedListStarts(slides);
@@ -248,6 +237,9 @@ class SlideRasterizer {
           break;
         }
         onStage?.call('prepare', i, slides.length);
+        // Meet vóór het tonen hoeveel renders al liepen: alleen renders die
+        // deze dia zelf afvuurt mag de capture ophouden (#2358).
+        final pendingBaseline = MermaidRenderService.instance.pendingRenders;
         hostKey.currentState!.showSlide(
           slides[i],
           i + 1,
@@ -263,7 +255,13 @@ class SlideRasterizer {
         if (!context.mounted) break;
 
         onStage?.call('render', i, slides.length);
-        final png = await _capture(repaintKey, pixelRatio, frameTimeout);
+        final png = await _capture(
+          repaintKey,
+          pixelRatio,
+          frameTimeout,
+          isCancelled: isCancelled,
+          pendingBaseline: pendingBaseline,
+        );
         results.add(png);
 
         onStage?.call('done', i + 1, slides.length);
@@ -349,6 +347,38 @@ class SlideRasterizer {
     );
   }
 
+  /// Laadt vóór de eerste capture alles in wat de dia's tekenen: de
+  /// afbeeldingen van de dia's (logo, merkstrook, inline `![…](…)`) plus de
+  /// handtekening van de sign-off. Zonder precache staat er op de vastgelegde
+  /// frames een leeg vak waar een afbeelding had moeten staan.
+  static Future<void> _precacheForRaster(
+    BuildContext context,
+    Set<String> paths,
+    DocumentSignature? signature,
+    Duration frameTimeout,
+    void Function(String phase, int done, int total)? onStage,
+  ) async {
+    // De eerste melding staat vóór het eerste wachten, en dat is opzet.
+    // Stond hij erna, dan zag de gebruiker bij een blokkade hier helemaal
+    // niets: geen fase, geen teller, geen fout — alleen een export die stil
+    // bleef staan. Nu is minstens zichtbaar dát er begonnen is.
+    onStage?.call('precache', 0, paths.length);
+    await _awaitFrame(frameTimeout);
+    if (!context.mounted) return;
+
+    await _precachePathsBatched(
+      context,
+      paths,
+      onProgress: (done, total) => onStage?.call('precache', done, total),
+    );
+    if (!context.mounted) return;
+
+    // The sign-off's drawn signature is a deck-level embedded image, not a
+    // slide path — precache it so it paints on the first captured frame
+    // instead of decoding a beat too late.
+    await _precacheSignatureImage(context, signature);
+  }
+
   /// Precache the deck's drawn sign-off signature (a deck-level embedded image,
   /// via the same stable-bytes MemoryImage the preview uses) so it paints on the
   /// first captured frame. No-op when the deck is unsigned.
@@ -366,12 +396,97 @@ class SlideRasterizer {
     );
   }
 
+  /// Wacht tot de inhoud van de getoonde dia een eindtoestand heeft.
+  ///
+  /// `MermaidDiagram` rendert asynchroon via de gedeelde dienst: zonder dit
+  /// wachten legde de capture bij een koude cache de laad-indicator vast in
+  /// plaats van het diagram — en dat beeld belandt zo in de PDF, PPTX, ODP en
+  /// "dia als afbeelding" (#2358). De eindtoestand is ruim: het gerenderde
+  /// diagram óf de bestaande bronfallback na een mislukte render — maar
+  /// nooit de spinner.
+  ///
+  /// De wacht is begrensd ([timeout] in totaal, tegen een render die nooit
+  /// afrondt) en afbreekbaar ([isCancelled], gepeild per frame).
+  ///
+  /// [pendingBaseline] is het aantal lopende renders vlak vóór de dia getoond
+  /// werd: alleen renders die dáárboven uitkomen horen bij deze dia. Een
+  /// render die elders in de app (of een eerdere dia) nog loopt mag de export
+  /// niet ophouden — die hoort bij een ander beeld.
+  static Future<void> _awaitSlideContent(
+    GlobalKey key,
+    Duration timeout,
+    bool Function()? isCancelled,
+    int pendingBaseline,
+  ) async {
+    final sw = Stopwatch()..start();
+    var cleanFrames = 0;
+    var dirtyFrames = 0;
+    while (true) {
+      if (isCancelled?.call() ?? false) return;
+      final left = timeout - sw.elapsed;
+      if (left <= Duration.zero) return;
+      // De context wordt in de synchrone helper uitgelezen en niet over de
+      // awaits heen meegenomen.
+      final state = _slideContentState(key);
+      if (state == null) return;
+
+      if (state.pendingRenders > pendingBaseline) {
+        // Er loopt nog een render. Per frame rondkijken is genoeg: een
+        // afrondende render markeert zijn widget vuil en levert zo zelf het
+        // frame waarop we verder kunnen.
+        cleanFrames = 0;
+        dirtyFrames = 0;
+      } else if (!state.boundaryDirty) {
+        // Geen renders meer onderweg én de rand is schoon. De eindtoestand
+        // moet óók geschilderd zijn: de SVG-decoder markeert de rand pas
+        // vuil ná het eerste schone frame, dus één schoon frame is te vroeg.
+        // Twee aaneengesloten schone frames is de eindtoestand echt vast te
+        // leggen.
+        cleanFrames++;
+        if (cleanFrames >= 2) return;
+      } else {
+        // Blijft iets anders eindeloos animeren, dan is dit geen geval om op
+        // te wachten: na een dozijn vuile frames gaat de capture door op
+        // wat er ligt. Geteld in frames, niet in kloktijd — onder een
+        // belaste testrun meet een stopwatch anders schaalvergroting mee.
+        cleanFrames = 0;
+        if (++dirtyFrames >= 12) return;
+      }
+      try {
+        await _awaitFrame(left);
+      } on SlideRasterizerNoFrameException {
+        // Het wachtbudget raakte op tijdens deze frame — behandel dat als
+        // "klaar met wachten", niet als een dode pipeline.
+        return;
+      }
+    }
+  }
+
+  /// Leest in één synchrone stap uit hoe het staat met de inhoud onder [key]:
+  /// hoeveel mermaid-renders lopen nog, en is de capture-rand nog vuil. Los
+  /// van de wachtlus, zodat er geen BuildContext over een async gap heen
+  /// gaat.
+  static ({int pendingRenders, bool boundaryDirty})? _slideContentState(
+    GlobalKey key,
+  ) {
+    final element = key.currentContext;
+    if (element is! Element || !element.mounted) return null;
+    final obj = element.findRenderObject();
+    return (
+      pendingRenders: MermaidRenderService.instance.pendingRenders,
+      boundaryDirty: obj is RenderRepaintBoundary && obj.debugNeedsPaint,
+    );
+  }
+
   static Future<Uint8List> _capture(
     GlobalKey key,
     double pixelRatio,
-    Duration frameTimeout,
-  ) async {
+    Duration frameTimeout, {
+    bool Function()? isCancelled,
+    int pendingBaseline = 0,
+  }) async {
     await _awaitFrame(frameTimeout);
+    await _awaitSlideContent(key, frameTimeout, isCancelled, pendingBaseline);
     RenderRepaintBoundary? boundary;
     for (var attempt = 0; attempt < 12; attempt++) {
       final obj = key.currentContext?.findRenderObject();

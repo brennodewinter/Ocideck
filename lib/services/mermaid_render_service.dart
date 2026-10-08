@@ -245,9 +245,31 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
     _pumpQueue();
   }
 
+  /// Testnaad: onder `flutter test` bestaat geen WebView, dus [render] is
+  /// daar altijd meteen klaar — met `null`. Een override maakt een bewust
+  /// vertraagde of falende render mogelijk, zodat de rasterexport kan
+  /// bewijzen dat hij op de eindtoestand wacht (#2358).
+  @visibleForTesting
+  Future<String?> Function(String source)? debugRenderOverride;
+
+  int _pendingRenders = 0;
+
+  /// Hoeveel diagramrenders nog lopen — wachtrij en WebView-trip meegerekend.
+  ///
+  /// De rasterexport wacht hierop vóór de capture: een dia capturen terwijl
+  /// de render nog liep legde de laad-indicator vast in de PDF/PPTX (#2358).
+  /// Nul betekent: elke render heeft een eindtoestand bereikt — het plaatje,
+  /// of de bron-/foutfallback na een mislukte render.
+  int get pendingRenders => _pendingRenders;
+
   /// Returns SVG markup or `null` when rendering fails.
-  Future<String?> render(String source) =>
-      _enqueue(source, _RenderKind.mermaid);
+  Future<String?> render(String source) {
+    _pendingRenders++;
+    final future =
+        debugRenderOverride?.call(source) ??
+        _enqueue(source, _RenderKind.mermaid);
+    return future.whenComplete(() => _pendingRenders--);
+  }
 
   /// Zet een TeX-formule om in zelfstandige SVG, of `null` als dat niet lukt.
   ///

@@ -676,6 +676,12 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- **Mermaid-diagrammen komen nu betrouwbaar mee in PDF-, PPTX- en
+  ODP-exports en bij "dia als afbeelding kopiëren"** (#2358): de rasterroute
+  capturede na één frame, terwijl een diagram asynchroon rendert — bij een
+  koude cache belandde zo de laad-indicator in de export. De rasteraar wacht
+  nu per dia tot elke mermaid-render een eindtoestand heeft (het diagram of
+  de bestaande bronfallback), begrensd en afbreekbaar.
 - **De Homebrew-tapcontrole wijst bij een achterlopende tap naar de juiste
   herstelroute** (#2365): `scripts/verify_homebrew_cask.sh` verwees nog naar
   het afgeschafte `HOMEBREW_TAP_TOKEN`, terwijl de tap zich allang zelf
