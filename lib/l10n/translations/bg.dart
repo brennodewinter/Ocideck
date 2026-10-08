@@ -1645,6 +1645,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Importeren…': 'Импортиране…',
+  'OciDeck-pakket (.ocideck)': 'Пакет OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Лого в долния ъгъл автоматично се премества в съответния горен ъгъл, когато има долен колонтитул.',
   'Verschillen bekijken…': 'Преглед на разликите…',

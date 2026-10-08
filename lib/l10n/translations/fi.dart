@@ -1625,6 +1625,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Importeren…': 'Tuo…',
+  'OciDeck-pakket (.ocideck)': 'OciDeck-paketti (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Alakulmassa oleva logo siirtyy alatunnisteen yhteydessä automaattisesti vastaavaan yläkulmaan.',
   'Verschillen bekijken…': 'Näytä erot…',

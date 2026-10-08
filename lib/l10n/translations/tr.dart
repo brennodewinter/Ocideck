@@ -2536,6 +2536,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Importeren…': 'İçe aktar…',
+  'OciDeck-pakket (.ocideck)': 'OciDeck paketi (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Alt köşedeki bir logo, alt bilgi olduğunda otomatik olarak karşılık gelen üst köşeye taşınır.',
   'Verschillen bekijken…': 'Farkları görüntüle…',

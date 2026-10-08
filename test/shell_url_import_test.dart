@@ -86,7 +86,10 @@ void main() {
     await pumpShell(tester);
     await tester.tap(appBarIcon(Icons.more_vert));
     await tester.pumpAndSettle();
-    await tester.tap(menuItemIcon(Icons.link));
+    // ⋮ → "Importeren…" → bronkiezer → "Importeren via URL…" (#2359).
+    await tester.tap(menuItemIcon(Icons.file_upload_outlined));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Importeren via URL…'));
     await tester.pumpAndSettle();
   }
 

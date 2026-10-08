@@ -1653,6 +1653,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Importeren…': 'Importar…',
+  'OciDeck-pakket (.ocideck)': 'Pacote OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Um logótipo num canto inferior move-se automaticamente para o canto superior correspondente quando existe um rodapé.',
   'Verschillen bekijken…': 'Ver diferenças…',

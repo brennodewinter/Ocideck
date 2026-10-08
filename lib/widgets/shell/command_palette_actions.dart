@@ -35,7 +35,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         icon: Icons.file_download_outlined,
         keywords: const ['pdf', 'pptx', 'html'],
         enabled: _canExport,
-        onInvoke: _exportDeck,
+        onInvoke: _exportFlow,
       ),
       PaletteCommand(
         label: l10n.d('Opslaan'),
@@ -515,32 +515,32 @@ void _listenImportHomeUnavailable(BuildContext context, WidgetRef ref) {
   });
 }
 
-/// OpenKAT-menu-items voor het …-menu. Top-level zodat `_MainLayoutState`
-/// onder het klasseplafond blijft.
-List<PopupMenuEntry<String>> openKatShellMenuEntries(
+/// De OpenKAT-importbronnen als keuze-opties voor de bronkiezer achter
+/// "Importeren…". Top-level zodat `_MainLayoutState` onder het klasseplafond
+/// blijft; zelfde reveal- en desktop-poort als het opdrachtenpalet hieronder.
+List<PickerOption<String>> openKatImportChoices(
   WidgetRef ref,
   AppLocalizations l10n,
-  PopupMenuItem<String> Function(String, IconData, String) menuItem,
 ) {
   if (!supportsLocalProjectFolders ||
-      !ref.watch(openKatIntegrationRevealProvider)) {
+      !ref.read(openKatIntegrationRevealProvider)) {
     return const [];
   }
   return [
-    menuItem(
-      'import_openkat',
-      Icons.radar_outlined,
-      openKatLabel(l10n, updating: hasActiveOpenKatReport(ref)),
+    (
+      value: 'import_openkat',
+      icon: Icons.radar_outlined,
+      label: openKatLabel(l10n, updating: hasActiveOpenKatReport(ref)),
     ),
-    menuItem(
-      'openkat_add_server',
-      Icons.add_link,
-      l10n.d('OpenKAT-server toevoegen…'),
+    (
+      value: 'openkat_add_server',
+      icon: Icons.add_link,
+      label: l10n.d('OpenKAT-server toevoegen…'),
     ),
-    menuItem(
-      'openkat_server_report',
-      Icons.cloud_download_outlined,
-      l10n.d('Rapportage van OpenKAT-server…'),
+    (
+      value: 'openkat_server_report',
+      icon: Icons.cloud_download_outlined,
+      label: l10n.d('Rapportage van OpenKAT-server…'),
     ),
   ];
 }

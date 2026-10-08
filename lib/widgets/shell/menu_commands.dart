@@ -33,7 +33,7 @@ extension _MainLayoutMenuCommands on _MainLayoutState {
     }
     final next = ShellDeckCommands(
       present: _presentDeck,
-      export: _exportDeck,
+      export: _exportFlow,
       save: _saveDeck,
       find: _openFind,
       findReplace: _openFindReplace,

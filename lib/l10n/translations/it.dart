@@ -662,6 +662,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Importeren…': 'Importa…',
+  'OciDeck-pakket (.ocideck)': 'Pacchetto OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Un logo in un angolo inferiore si sposta automaticamente nell\'angolo superiore corrispondente quando è presente un piè di pagina.',
   'Verschillen bekijken…': 'Vedi differenze…',

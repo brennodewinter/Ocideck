@@ -1641,6 +1641,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Importeren…': 'Importă…',
+  'OciDeck-pakket (.ocideck)': 'Pachet OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
       'Un logo dintr-un colț inferior se mută automat în colțul superior corespunzător atunci când există un subsol.',
   'Verschillen bekijken…': 'Vezi diferențele…',
