@@ -40,9 +40,16 @@ class MarkdownSourceDocument {
   }) {
     final ranges = _slideRanges(source);
     final outline = buildMarkdownOutline(source);
+    final firstHeadingBySlide = <int, String>{};
+    for (final entry in outline) {
+      firstHeadingBySlide.putIfAbsent(
+        entry.slideNumber,
+        () => entry.title.trim(),
+      );
+    }
     final anchors = <String>[
       for (var index = 0; index < ranges.length; index++)
-        _anchorFor(source, ranges[index], outline, index + 1),
+        _anchorFor(source, ranges[index], firstHeadingBySlide[index + 1]),
     ];
     final ids = List<String?>.filled(ranges.length, null);
     final usedPrevious = <int>{};
@@ -161,14 +168,8 @@ List<(int, int)> _slideRanges(String source) {
   return ranges;
 }
 
-String _anchorFor(
-  String source,
-  (int, int) range,
-  List<MarkdownOutlineEntry> outline,
-  int slideNumber,
-) {
-  final headings = outline.where((entry) => entry.slideNumber == slideNumber);
-  if (headings.isNotEmpty) return 'h:${headings.first.title.trim()}';
+String _anchorFor(String source, (int, int) range, String? firstHeading) {
+  if (firstHeading != null) return 'h:$firstHeading';
   for (final line in source.substring(range.$1, range.$2).split('\n')) {
     final value = line.trim();
     if (value.isNotEmpty && value != '---' && !value.startsWith('<!--')) {
