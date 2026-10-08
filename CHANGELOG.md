@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Het slide-overzicht volgt de themakleuren van de applicatie** (#2360).
+  De achtergrond en bovenbalk gebruikten vaste donkere kleuren; nu volgen ze
+  net als de kaarten, selectie en sleepfeedback de `ThemeData`-rollen van het
+  actieve uiterlijk, in licht én donker. De statuskleuren van de
+  timing-kop (Ignite/PechaKucha) gebruiken de mode-afhankelijke inktvarianten,
+  zodat ze in beide modi leesbaar blijven. Alleen de chrome verandert — wat
+  een dia zelf rendert, blijft gelijk.
 - **Importeren en exporteren zijn gegroepeerd in het ⋮-menu** (#2359). Het
   menu toont nu twee hoofdacties — *Exporteren…* en *Importeren…* — met de
   formaat- of bronkeuze als tweede stap: PDF, PowerPoint, ODP, HTML en LaTeX

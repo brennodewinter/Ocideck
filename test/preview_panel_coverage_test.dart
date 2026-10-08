@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/finding_spec.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
@@ -59,6 +60,7 @@ Future<void> _pumpOverview(
   WidgetTester tester,
   ProviderContainer container, {
   Size size = const Size(1100, 800),
+  ThemeData? theme,
 }) async {
   await tester.binding.setSurfaceSize(size);
   addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -67,7 +69,7 @@ Future<void> _pumpOverview(
     UncontrolledProviderScope(
       container: container,
       child: MaterialApp(
-        theme: AppTheme.light,
+        theme: theme ?? AppTheme.light,
         home: FullDeckPreview(
           deck: deck,
           themeProfile: deck.themeProfile,
@@ -303,6 +305,56 @@ void main() {
     expect(find.textContaining('(1/2)'), findsOneWidget);
     expect(find.textContaining('(2/2)'), findsOneWidget);
     expect(tester.takeException(), isNull);
+  });
+
+  // #2360: het overzicht schilderde zijn buitenkant met vaste donkere kleuren
+  // (`AppTheme.panelBg`/`navy`), terwijl de rest van de app het actieve profiel
+  // volgt. Deze toets meet in twee contrasterende thema's dat de chrome de
+  // themarollen gebruikt — niet dat de waarden 'donker genoeg' zijn, maar dat
+  // ze gelijk zijn aan wat het thema voorschrijft.
+  testWidgets('het slide-overzicht volgt de themakleuren in licht en donker', (
+    tester,
+  ) async {
+    final container = _deckWith([Slide.create(SlideType.bullets)]);
+    addTearDown(container.dispose);
+    addTearDown(() => AppTheme.isDark = false);
+
+    for (final dark in [false, true]) {
+      AppTheme.isDark = dark;
+      final theme = AppTheme.fromProfile(
+        dark ? AppAppearanceProfile.dark : AppAppearanceProfile.basic,
+      );
+      await _pumpOverview(tester, container, theme: theme);
+
+      final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
+      expect(
+        scaffold.backgroundColor ?? theme.scaffoldBackgroundColor,
+        theme.scaffoldBackgroundColor,
+        reason:
+            'de achtergrond volgt de scaffold-rol van het '
+            '${dark ? 'donkere' : 'lichte'} thema',
+      );
+      final appBar = tester.widget<AppBar>(find.byType(AppBar));
+      expect(
+        appBar.backgroundColor ?? theme.appBarTheme.backgroundColor,
+        theme.appBarTheme.backgroundColor,
+        reason: 'de bovenbalk volgt de appBar-rol van het thema',
+      );
+      // MaterialApp animeert een thema-wissel over 200ms; meet pas ná die
+      // overgang, anders landt de meting midden in een ColorScheme-lerp.
+      await tester.pump(const Duration(milliseconds: 250));
+      final card = tester.widget<AnimatedContainer>(
+        find.descendant(
+          of: find.byType(DragTarget<int>).first,
+          matching: find.byType(AnimatedContainer),
+        ),
+      );
+      expect(
+        (card.decoration as BoxDecoration).color,
+        theme.colorScheme.surface,
+        reason: 'de dia-kaart volgt het oppervlak van het thema',
+      );
+    }
   });
 
   testWidgets('slide overview reorders with the keyboard and can undo', (
