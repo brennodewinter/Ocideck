@@ -7,6 +7,8 @@
 # red. That made a green job also read as "tap updated" when nothing had been
 # pushed at all — a revoked HOMEBREW_TAP_TOKEN stayed invisible until someone
 # installed a stale version. This measures "pushed" instead of assuming it.
+# The token is gone now: the tap updates itself with its own workflow, so a
+# lagging tap means that workflow failed — the diagnostic below points there.
 #
 # The tap is read unauthenticated, over the same public URL Homebrew itself
 # uses: the question is what a `brew install` gets, not what a token can see.
@@ -116,7 +118,11 @@ fi
 
 if [ "$FOUND" != "$EXPECTED" ]; then
   echo "Tap is not on this release: cask says $FOUND, release is $EXPECTED." >&2
-  echo "The push into $TAP_REPOSITORY did not land -- check HOMEBREW_TAP_TOKEN." >&2
+  echo "The tap updates itself; there is no push from the release chain to" >&2
+  echo "debug. Check the update-cask workflow of $TAP_REPOSITORY at" >&2
+  echo "$FORGE_URL/$TAP_REPOSITORY/actions -- its job log holds the real" >&2
+  echo "failure (for example a missing minisign verifier, or a SHA256SUMS" >&2
+  echo "signature that did not verify)." >&2
   exit 1
 fi
 

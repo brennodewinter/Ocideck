@@ -9,6 +9,8 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaml/yaml.dart';
 
+import 'support/release_manifest_test_support.dart';
+
 /// De terugleescontrole op de Homebrew-tap
 /// (`scripts/verify_homebrew_cask.sh`).
 ///
@@ -19,8 +21,9 @@ import 'package:yaml/yaml.dart';
 /// werkstroom en het per-run Actions-token van Forgejo, en deze repository
 /// levert alleen nog de bouwstenen. Er is dus geen secret meer dat kan
 /// verlopen — maar wél een koppeling over repo-grenzen heen, en die is stil:
-/// hernoem je het script of de sjabloon, dan breekt de tap zonder dat hier
-/// iets rood wordt. Vandaar dat die twee paden hieronder gepind staan.
+/// hernoem je het script, de sjabloon of de publieke sleutel, dan breekt de
+/// tap zonder dat hier iets rood wordt. Vandaar dat die drie paden hieronder
+/// gepind staan.
 ///
 /// Eén hop verderop zit dezelfde faalklasse: de GitHub-spiegel van de tap. Die
 /// is een reservekopie, maar Homebrews `brew tap`-shorthand lost er wél naar
@@ -79,12 +82,16 @@ void main() {
       expect(r.stdout, contains('0.4.6'));
     });
 
-    test('een achtergebleven cask is rood', () {
+    test('een achtergebleven cask is rood en wijst naar de tapworkflow', () {
       final r = run(['v0.4.7'], tap: writeCask('tap', '0.4.6'));
       expect(r.exitCode, isNot(0));
-      // De melding moet de dader noemen, niet alleen dat er iets niet klopt:
-      // wie dit in een release-log tegenkomt moet weten waar hij moet kijken.
-      expect(r.stderr, contains('HOMEBREW_TAP_TOKEN'));
+      // De melding moet de dader noemen, niet alleen dat er iets niet klopt.
+      // De tap werkt zichzelf bij, dus de herstelroute is diens
+      // update-workflow — niet het afgeschafte duwtoken dat hier vroeger
+      // stond en de beheerder bij v0.6.14 het verkeerde bos in stuurde.
+      expect(r.stderr, contains('homebrew-ocideck'));
+      expect(r.stderr, contains('actions'));
+      expect(r.stderr, isNot(contains('HOMEBREW_TAP_TOKEN')));
     });
 
     test('een cask zonder versieregel is rood', () {
@@ -183,13 +190,16 @@ void main() {
     });
 
     test('de bouwstenen liggen op de paden die de tap ophaalt', () {
-      // De werkstroom in LibreKAT/homebrew-ocideck haalt deze twee bestanden
-      // per run op via `raw/<pad>?ref=<tag>`. Die koppeling staat in een andere
-      // repository en kan hier dus niet meelopen in een refactor: verplaats je
-      // ze, dan blijft de tap stil op de oude release staan.
+      // De werkstroom in LibreKAT/homebrew-ocideck haalt deze drie bestanden
+      // per run op via `raw/<pad>?ref=<tag>`: het script, de sjabloon én de
+      // publieke sleutel waartegen het script SHA256SUMS.minisig verifieert.
+      // Die koppeling staat in een andere repository en kan hier dus niet
+      // meelopen in een refactor: verplaats je ze, dan blijft de tap stil op
+      // de oude release staan — bij v0.6.14 bleek dat met minisign.pub.
       for (final pad in const [
         'scripts/update_homebrew_cask.sh',
         'homebrew/ocideck.rb.tmpl',
+        'minisign.pub',
       ]) {
         expect(
           File(pad).existsSync(),
@@ -246,6 +256,81 @@ void main() {
             'de releaseketen toetst de spiegel; die loopt vlak na een release '
             'normaal achter en maakt de release dan onterecht rood',
       );
+    });
+  });
+
+  group('het taggebonden bouwcontract', () {
+    // De tapworkflow draait de generator in een checkout van díe tag: het
+    // script bepaalt zijn repo-root zelf (dirname van het script) en zoekt
+    // template en sleutel daaronder. Deze tests bootsen die layout na door de
+    // drie bouwstenen naar een schone tag-root te kopiëren, zodat bewezen is
+    // dat ze daar samen op de verwachte paden staan — precies wat bij v0.6.14
+    // stuk ging, toen de sleutel nog niet mee opgehaald werd.
+    Directory writeTagLayout({bool metSleutel = true}) {
+      final tagRoot = Directory('${temp.path}/tag${temp.listSync().length}')
+        ..createSync(recursive: true);
+      Directory('${tagRoot.path}/scripts').createSync();
+      Directory('${tagRoot.path}/homebrew').createSync();
+      for (final pad in [
+        'scripts/update_homebrew_cask.sh',
+        'homebrew/ocideck.rb.tmpl',
+        if (metSleutel) 'minisign.pub',
+      ]) {
+        File('$repoRoot/$pad').copySync('${tagRoot.path}/$pad');
+      }
+      return tagRoot;
+    }
+
+    File writeSignedSums(String version) {
+      const macSha =
+          '9e199155b109b195bf0a3c0a8303f181debf23c8cb06b7585a393dce461176e6';
+      final sums = File('${temp.path}/SHA256SUMS-$version')
+        ..writeAsStringSync(
+          'aaaa  ./ocideck-$version.cdx.json\n'
+          '$macSha  ./ocideck-macos-$version.zip\n',
+        );
+      signTestManifest(sums);
+      return sums;
+    }
+
+    ProcessResult runGenerator(Directory tagRoot, File sums, String out) =>
+        Process.runSync(
+          'bash',
+          ['scripts/update_homebrew_cask.sh', 'v9.9.9', out],
+          workingDirectory: tagRoot.path,
+          environment: {
+            'SHA256SUMS_FILE': sums.path,
+            'PATH': '${temp.path}:${Platform.environment['PATH']}',
+          },
+        );
+
+    test('script, sjabloon en sleutel op hun tagpaden leveren een cask', () {
+      writeFakeMinisign(temp);
+      final tagRoot = writeTagLayout();
+      final out = '${temp.path}/ocideck.rb';
+
+      final r = runGenerator(tagRoot, writeSignedSums('9.9.9'), out);
+
+      expect(r.exitCode, 0, reason: '${r.stderr}');
+      expect(
+        File(out).readAsStringSync(),
+        contains(
+          'sha256 '
+          '"9e199155b109b195bf0a3c0a8303f181debf23c8cb06b7585a393dce461176e6"',
+        ),
+      );
+    });
+
+    test('een ontbrekende sleutel blijft fail-closed', () {
+      writeFakeMinisign(temp);
+      final tagRoot = writeTagLayout(metSleutel: false);
+      final out = '${temp.path}/ocideck.rb';
+
+      final r = runGenerator(tagRoot, writeSignedSums('9.9.9'), out);
+
+      expect(r.exitCode, isNot(0));
+      expect(r.stderr, contains('minisign public key'));
+      expect(File(out).existsSync(), isFalse);
     });
   });
 }

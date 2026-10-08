@@ -977,8 +977,9 @@ tracked separately (#1227).
 - **Where it runs: in the tap, not here.** The tap updates *itself*.
   `.forgejo/workflows/update-cask.yml` in `LibreKAT/homebrew-ocideck` runs every
   30 minutes (and on `workflow_dispatch`), reads the newest non-prerelease from
-  this repo's public API, fetches `scripts/update_homebrew_cask.sh` and
-  `homebrew/ocideck.rb.tmpl` **at that tag** over `raw/<path>?ref=<tag>`,
+  this repo's public API, fetches `scripts/update_homebrew_cask.sh`,
+  `homebrew/ocideck.rb.tmpl` and `minisign.pub` **at that tag** over
+  `raw/<path>?ref=<tag>`,
   regenerates `Casks/ocideck.rb` and pushes — with the per-run Actions token
   Forgejo mints for that repository. Nothing is committed when the cask is
   already current, so the half-hourly schedule does not produce noise.
@@ -991,10 +992,11 @@ tracked separately (#1227).
   updating within the run — irrelevant for a tap, since `brew update` is on the
   user's own clock, and worth it to be rid of a credential that expires.
 - **This repo only supplies the building blocks**, and that coupling is silent:
-  the tap fetches those two paths **by name**, from another repository. Rename or
-  move either and the tap quietly keeps serving the previous release. There is no
-  gate here that can see it, so `test/homebrew_cask_verify_test.dart` pins both
-  paths; if you move them, update the workflow in the tap in the same change.
+  the tap fetches those three paths **by name**, from another repository. Rename
+  or move any of them and the tap quietly keeps serving the previous release.
+  There is no gate here that can see it, so
+  `test/homebrew_cask_verify_test.dart` pins all three paths; if you move them,
+  update the workflow in the tap in the same change.
 - **Tap topology: the forge is the source, GitHub is the backup.** The tap lives
   on our own forge as the canonical repo, **mirrored to GitHub** (a Forgejo
   push-mirror on the tap repo). Homebrew's one-argument shorthand
