@@ -180,7 +180,6 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
       autofocus: true,
       onKeyEvent: _onKey,
       child: Scaffold(
-        backgroundColor: AppTheme.panelBg,
         appBar: AppBar(
           title: Text(
             widget.editable
@@ -189,7 +188,6 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          backgroundColor: AppTheme.navy,
           leading: IconButton(
             tooltip: l10n.d('Sluiten'),
             icon: const Icon(Icons.close),
@@ -365,7 +363,10 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
           children: [
             Text(
               '${context.l10n.d('Slide')} ${index + 1}',
-              style: TextStyle(color: AppTheme.slate500, fontSize: 11),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                fontSize: 11,
+              ),
             ),
             const SizedBox(height: 4),
             Container(
@@ -426,10 +427,10 @@ class _TimedPresentationOverviewHeader extends StatelessWidget {
         ? l10n.d('Ignite-storyboard')
         : l10n.d('PechaKucha-storyboard');
     final color = validation.isValid
-        ? PresenterPalette.laserGreen
+        ? AppTheme.successFg
         : validation.excessSlides > 0
-        ? Theme.of(context).colorScheme.error
-        : AppTheme.amber600;
+        ? AppTheme.dangerFg
+        : AppTheme.warningFg;
     return Material(
       color: color.withValues(alpha: 0.08),
       child: Padding(
@@ -453,8 +454,8 @@ class _TimedPresentationOverviewHeader extends StatelessWidget {
                 children: [
                   Text(
                     formatName,
-                    style: const TextStyle(
-                      color: PresenterPalette.text,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.w800,
                       fontSize: 16,
                     ),
@@ -464,9 +465,9 @@ class _TimedPresentationOverviewHeader extends StatelessWidget {
                     '${validation.requiredSlides} ${l10n.d('dia\'s')} × '
                     '${timing.slideDuration.inSeconds} ${l10n.d('seconden')}  ·  '
                     '${_clock(validation.targetDuration!)}',
-                    style: const TextStyle(
-                      color: PresenterPalette.textMuted,
-                      fontFeatures: [FontFeature.tabularFigures()],
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontFeatures: const [FontFeature.tabularFigures()],
                     ),
                   ),
                 ],
@@ -614,7 +615,7 @@ class _OverviewSlideCard extends StatelessWidget {
                     color: Colors.transparent,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: AppTheme.navy,
+                        color: colorScheme.primary,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: const [
                           BoxShadow(color: Colors.black38, blurRadius: 10),
@@ -627,8 +628,8 @@ class _OverviewSlideCard extends StatelessWidget {
                         ),
                         child: Text(
                           '${index + 1}. $title',
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: colorScheme.onPrimary,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -668,7 +669,7 @@ class _OverviewSlideCard extends StatelessWidget {
         final borderColor = outsideTimedFormat
             ? Theme.of(context).colorScheme.error
             : targeted
-            ? AppTheme.accent
+            ? colorScheme.primary
             : selected
             ? colorScheme.primary
             : colorScheme.outlineVariant;

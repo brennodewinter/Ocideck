@@ -22,7 +22,6 @@ import '../../services/finding_pagination.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../theme/app_theme.dart';
-import '../../theme/presenter_palette.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../dialogs/settings_dialog.dart';

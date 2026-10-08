@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/presentation_timing.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
@@ -71,13 +72,18 @@ ProviderContainer _igniteDeck() {
 Future<void> _pumpOverview(
   WidgetTester tester,
   ProviderContainer container,
-  Size size,
-) async {
+  Size size, {
+  bool dark = false,
+}) async {
+  AppTheme.isDark = dark;
+  addTearDown(() => AppTheme.isDark = false);
   tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);
-  final baseTheme = AppTheme.light;
+  final baseTheme = AppTheme.fromProfile(
+    dark ? AppAppearanceProfile.dark : AppAppearanceProfile.basic,
+  );
   final deck = container.read(deckProvider).deck!;
   await tester.pumpWidget(
     UncontrolledProviderScope(
@@ -105,14 +111,22 @@ void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
   testWidgets('breed slide-overzicht', (tester) async {
-    final container = _deck();
-    addTearDown(container.dispose);
-    await _pumpOverview(tester, container, const Size(1200, 800));
+    for (final dark in [false, true]) {
+      final container = _deck();
+      addTearDown(container.dispose);
+      await _pumpOverview(tester, container, const Size(1200, 800), dark: dark);
+      // MaterialApp animeert de thema-wissel over 200ms; de opname moet wachten
+      // tot de ColorScheme-lerp afgelopen is of de golden legt een mengbeeld
+      // van licht én donker vast.
+      await tester.pump(const Duration(milliseconds: 250));
 
-    await expectLater(
-      find.byKey(_surfaceKey),
-      matchesGoldenFile('goldens/slide_overview_wide.png'),
-    );
+      await expectLater(
+        find.byKey(_surfaceKey),
+        matchesGoldenFile(
+          'goldens/slide_overview_wide${dark ? '_dark' : ''}.png',
+        ),
+      );
+    }
   });
 
   testWidgets('smal slide-overzicht met dropdoel', (tester) async {
@@ -161,16 +175,22 @@ void main() {
   testWidgets('Ignite-storyboard toont twintig dia\'s en vijf minuten', (
     tester,
   ) async {
-    final container = _igniteDeck();
-    addTearDown(container.dispose);
-    await _pumpOverview(tester, container, const Size(1200, 800));
+    for (final dark in [false, true]) {
+      final container = _igniteDeck();
+      addTearDown(container.dispose);
+      await _pumpOverview(tester, container, const Size(1200, 800), dark: dark);
+      // Zelfde thematransitie als bij het brede overzicht: eerst laten uitlopen.
+      await tester.pump(const Duration(milliseconds: 250));
 
-    expect(find.text('Ignite-storyboard'), findsOneWidget);
-    expect(find.textContaining('5:00'), findsOneWidget);
-    expect(find.text('20 / 20'), findsOneWidget);
-    await expectLater(
-      find.byKey(_surfaceKey),
-      matchesGoldenFile('goldens/slide_overview_ignite.png'),
-    );
+      expect(find.text('Ignite-storyboard'), findsOneWidget);
+      expect(find.textContaining('5:00'), findsOneWidget);
+      expect(find.text('20 / 20'), findsOneWidget);
+      await expectLater(
+        find.byKey(_surfaceKey),
+        matchesGoldenFile(
+          'goldens/slide_overview_ignite${dark ? '_dark' : ''}.png',
+        ),
+      );
+    }
   });
 }
