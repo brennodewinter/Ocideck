@@ -916,6 +916,52 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.15] — 2026-10-08
+
+### Added
+
+- feat: bewerk de deck-voettekst via presentatie-eigenschappen
+- feat: voeg invulbaar SAFARI-assurancedeck toe
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- perf(document): werk afgeleid van toetsaanslagen uit de native callback
+- test: maak deduplicatieketen onafhankelijk van platformfontmetrics (#2317)
+- Laat lokale bestandsconflicten vergelijken en veilig samenvoegen (#2323)
+- Houd de zichtbare documentpositie vast bij Visueel ↔ Bron (#2322)
+- Carrouselfooter ombreekbaar en infopaneel scrollbaar (#2318)
+- CWE-verouderingscontrole via MITREs officiële XML-release
+- Classificeer Apple-notaryfouten in de preflight
+- Behandel SIGINT/SIGTERM veilig in release- en tekenscripts
+- docs(changelog): verwijder voettekst-entry voor niet-bestaande feature
+- test(release): attesteer Windows zip+installer als één buildcohort (#2313)
+- test(release): functionele smoke-test voor de Windows-installer (#2314)
+- test(release): installeer en start Linux-pakketten in schone consumentimages (#2315)
+
+### Fixed
+
+- fix(release): herstel nachtelijke Linux-poort
+- fix(release): begrens Linux-poort op gemeten duur
+- fix(release): begrens en herstel releaseroute
+- fix(release): lokale macOS-installatie werkelijk hervatbaar (#2304)
+- fix(release): --status parallelle sondes onder een vaste deadline (#2305)
+- fix(release): lokale releasebranch opruimen na geslaagde release (#2306)
+- fix(release): handmatige herstelroutes ref-veilig maken (#2295)
+- fix(release): onzekere remote tagpush als point of no return (#2297)
+- fix(release): gekeurde base bevriezen vóór merge en tag (#2299)
+- fix(release): Windows-herdispatch aan run-id-anker, niet tijdvenster (#2300)
+- fix(ci): canonical image-publicatie nooit groen zonder image (#2301)
+- fix(release): externe website-deploy afzonderlijk volgen (#2302)
+- fix(release): --resume prefligt alleen nog ontbrekende capaciteiten (#2303)
+- fix(release): preflight toetst de nachtelijke linux-gate op main (#2308)
+- fix(release): houd de release draft tot artefacten en handtekening compleet zijn (#2311)
+- fix(ci): begrens en reconcile HTTP-mutaties bij releasepublicatie (#2312)
+- fix(ci): isoleer de macos-gate van een releasetag (#2321)
+- fix(release): toets de appimagetool-pin vóór de tag (#2324)
+- fix(release): volg Forgejo-workflowruns per poging (#2294)
+- fix(release): lees geannoteerde tags op macOS
+
 ## [0.6.14] — 2026-10-06
 
 ### Added
