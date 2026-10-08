@@ -271,7 +271,9 @@ void main() {
         'Context bij org 1',
         reason: 'de opbouw van de presentatie is het werk, niet alleen de dia',
       );
-    });
+      // Twee volledige imports doen atomair geflushte schijfschrijfbeurten; op de
+      // belaste Linux-runner overschreed die echte I/O de standaard 30 seconden.
+    }, timeout: const Timeout(Duration(minutes: 1)));
 
     test(
       'de volle data blijft in de dia; de limiet toont alleen de kop',

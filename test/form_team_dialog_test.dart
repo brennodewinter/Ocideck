@@ -98,9 +98,14 @@ void main() {
   Finder text(String s) => find.text(s);
   Finder containing(String s) => find.textContaining(s);
 
-  Future<void> waitFor(WidgetTester tester, Finder finder) => pumpUntil(
+  Future<void> waitFor(
+    WidgetTester tester,
+    Finder finder, {
+    Duration timeout = const Duration(seconds: 10),
+  }) => pumpUntil(
     tester,
     () => finder.evaluate().isNotEmpty,
+    timeout: timeout,
     reason: 'wachtte op ${finder.describeMatch(Plurality.one)}',
   );
 
@@ -210,7 +215,13 @@ void main() {
     );
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pump();
-    await waitFor(tester, containing('A is toegevoegd.'));
+    // Sleutelcontrole en opslag gebruiken echte I/O; de volle Linux-suite mat
+    // hier meer dan tien seconden terwijl de uitkomst daarna wel verscheen.
+    await waitFor(
+      tester,
+      containing('A is toegevoegd.'),
+      timeout: const Duration(seconds: 30),
+    );
   });
 
   testWidgets('de velden leren niets van wat je typt', (tester) async {
