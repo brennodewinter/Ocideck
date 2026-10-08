@@ -985,12 +985,33 @@ fi
 # Bestaat er al een handgeschreven '## [X.Y.Z]'-sectie, dan respecteren we die
 # (curatie boven automaat). Anders bouwen we er een uit de merge-/commit-titels
 # sinds de laatste tag, gegroepeerd op conventional-commit-prefix.
-LAST_TAG="$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || true)"
+last_distributed_tag() {
+  local tag version heading
+  while IFS= read -r tag; do
+    [ -n "$tag" ] || continue
+    version="${tag#v}"
+    heading="$(grep -m1 "^## \[$version\]" CHANGELOG.md || true)"
+    case "$heading" in *Withdrawn*) continue ;; esac
+    printf '%s\n' "$tag"
+    return 0
+  done < <(git tag --merged HEAD --sort=-version:refname --list 'v*')
+}
+LAST_TAG="$(last_distributed_tag)"
 TODAY="$(date +%Y-%m-%d)"
 
 changelog_has_section() { grep -q "^## \[$NEW_VERSION\]" CHANGELOG.md; }
 
 generate_changelog_section() {
+  local unreleased
+  unreleased="$(awk '
+    /^## Unreleased$/ { in_section=1; next }
+    in_section && /^## / { exit }
+    in_section { print }
+  ' CHANGELOG.md)"
+  if [ -n "$(printf '%s' "$unreleased" | tr -d '[:space:]')" ]; then
+    printf '## [%s] — %s\n\n%s\n' "$NEW_VERSION" "$TODAY" "$unreleased"
+    return 0
+  fi
   local range="HEAD"
   [ -n "$LAST_TAG" ] && range="$LAST_TAG..HEAD"
   local added="" changed="" fixed="" line subj
@@ -2146,7 +2167,7 @@ ensure_scans_image() {
   publish_scans_image "$image_tag"
 }
 
-# De drie releasepoorten zijn sinds b3e182044 bewust alleen handmatig startbaar:
+# De vier releasepoorten zijn bewust alleen handmatig startbaar:
 # lokaal `make check-full` is de primaire poort, deze runs zijn de onafhankelijke
 # Linux-/scannercontrole vóór de tag. Een PR openen maakt daarom geen
 # statuscontexten meer. #2194 bleef toch de lege combined status pollen en kon
@@ -2162,7 +2183,8 @@ gate_task_snapshot() { # gate_task_snapshot SHA → "workflow|status|titel|run-i
           | select(.commit_sha == $sha)
           | select(.workflow_id == "static-gate.yml"
               or .workflow_id == "scans.yml"
-              or .workflow_id == "linux-gate.yml")]
+              or .workflow_id == "linux-gate.yml"
+              or .workflow_id == "linux-build.yml")]
         | group_by(.workflow_id)
         | map(max_by(.id))[]
         | "\(.workflow_id)|\(.status)|\(.title // "")|\(.id)"'
@@ -2172,7 +2194,7 @@ ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
   local sha="$1" pr="$2" snap workflow resp run_id
   snap="$(gate_task_snapshot "$sha")" \
     || die "kon bestaande poortruns niet betrouwbaar lezen — dispatch geen duplicaten."
-  for workflow in static-gate.yml scans.yml linux-gate.yml; do
+  for workflow in static-gate.yml scans.yml linux-gate.yml linux-build.yml; do
     if printf '%s\n' "$snap" | grep -q "^${workflow}|"; then
       continue
     fi
@@ -2201,7 +2223,7 @@ wait_gate() { # wait_gate SHA PR_NUMBER
   [ "$poll_limit" -ge 1 ] || poll_limit=1
   local registration_deadline=$((SECONDS + 5 * 60))
   ensure_gate_tasks "$sha" "$pr"
-  log "Wachten op de handmatige poorten (static-gate, scans, linux-gate) — max ${GATE_TIMEOUT_MIN} min."
+  log "Wachten op de handmatige poorten (static-gate, scans, linux-gate, linux-build) — max ${GATE_TIMEOUT_MIN} min."
   log "linux-gate draait de volledige suite op de serial-runner; dat duurt het langst."
   local snap="" count=0 success=0 failed="" i=0 workflow line unreadable=0
   for i in $(seq 1 "$poll_limit"); do
@@ -2222,13 +2244,13 @@ wait_gate() { # wait_gate SHA PR_NUMBER
       printf '%s\n' "$failed" | awk -F'|' '{ printf "     %s: %s (%s)\n", $1, $2, $3 }' >&2
       die "minstens één handmatige poort faalde op $sha — zie PR #$pr. Niets getagd. Herstel en hervat met: scripts/release_auto.sh --resume $TAG"
     fi
-    [ "$count" -eq 3 ] && [ "$success" -eq 3 ] && break
-    if [ "$count" -lt 3 ] && [ "$unreadable" -eq 0 ] \
+    [ "$count" -eq 4 ] && [ "$success" -eq 4 ] && break
+    if [ "$count" -lt 4 ] && [ "$unreadable" -eq 0 ] \
         && [ "$SECONDS" -ge "$registration_deadline" ]; then
       die "niet alle handmatige poorten zijn binnen vijf minuten als run geregistreerd voor $sha — zie PR #$pr. Niets getagd. Hervat later met: scripts/release_auto.sh --resume $TAG"
     fi
     if [ $(( (i - 1) % 6 )) -eq 0 ]; then
-      for workflow in static-gate.yml scans.yml linux-gate.yml; do
+      for workflow in static-gate.yml scans.yml linux-gate.yml linux-build.yml; do
         line="$(printf '%s\n' "$snap" | grep "^${workflow}|" | head -1 || true)"
         if [ -z "$line" ]; then
           printf '     wacht op %s: taakregistratie\n' "$workflow"
@@ -2240,7 +2262,7 @@ wait_gate() { # wait_gate SHA PR_NUMBER
     fi
     sleep 30
   done
-  [ "$count" -eq 3 ] && [ "$success" -eq 3 ] \
+  [ "$count" -eq 4 ] && [ "$success" -eq 4 ] \
     || die "poort werd niet groen binnen ${GATE_TIMEOUT_MIN} min — zie PR #$pr. Hervat later met: scripts/release_auto.sh --resume $TAG"
   log "Poort groen."
 }
@@ -2299,6 +2321,18 @@ assert_tag_commit() { # assert_tag_commit LABEL ACTUAL EXPECTED
   local label="$1" actual="$2" expected="$3"
   [ -n "$actual" ] && [ "$actual" = "$expected" ] \
     || die "tag $TAG op $label wijst naar ${actual:-onbekend}, verwacht $expected — verplaats of overschrijf een releasetag nooit."
+}
+
+assert_release_merge_tree() { # assert_release_merge_tree MERGE_SHA
+  local merge="$1" parents merge_tree head_tree
+  parents="$(git show -s --format='%P' "$merge" 2>/dev/null || true)"
+  [ "$(printf '%s\n' "$parents" | awk '{print NF}')" -eq 2 ] \
+    || die "merge-commit $merge heeft niet precies twee ouders — de getagde tree is niet aan de gekeurde release-head te koppelen."
+  merge_tree="$(git rev-parse "$merge^{tree}" 2>/dev/null || true)"
+  head_tree="$(git rev-parse "$(printf '%s\n' "$parents" | awk '{print $2}')^{tree}" 2>/dev/null || true)"
+  [ -n "$merge_tree" ] && [ "$merge_tree" = "$head_tree" ] \
+    || die "de merge-tree wijkt af van de gekeurde release-head — er zou ongekeurde inhoud in de tag belanden. Niets getagd."
+  log "Merge-tree is bytegelijk aan de gekeurde release-head (${merge_tree:0:12})."
 }
 
 # De mirror-tag (GitHub-spiegel) is een eigen faalpunt naast origin: de origin-push
@@ -2546,6 +2580,9 @@ resume_release() {
   fi
   [ -n "${MERGE_SHA:-}" ] && [ "$MERGE_SHA" != "null" ] \
     || die "kon de merge-commit voor $TAG niet bepalen."
+  git fetch --quiet origin \
+    || die "kon de merge-commit niet ophalen voor de treecontrole. Niets getagd."
+  assert_release_merge_tree "$MERGE_SHA"
   tag_and_push "$MERGE_SHA"
   follow_ci
   phase3
@@ -2820,6 +2857,13 @@ import sys
 section = sys.argv[1].rstrip('\n') + '\n\n'
 p = 'CHANGELOG.md'
 lines = open(p).read().splitlines(keepends=True)
+start = next((i for i, line in enumerate(lines) if line.rstrip('\n') == '## Unreleased'), None)
+if start is None:
+    raise SystemExit('CHANGELOG.md mist de sectie ## Unreleased')
+end = next((i for i in range(start + 1, len(lines)) if lines[i].startswith('## ')), len(lines))
+if any(line.rstrip('\n') == '## Unreleased' for line in lines[start + 1:]):
+    raise SystemExit('CHANGELOG.md bevat meer dan één ## Unreleased-sectie')
+lines[start:end] = ['## Unreleased\n', '\n']
 out, inserted = [], False
 for line in lines:
     if not inserted and line.startswith('## ['):
@@ -2895,6 +2939,9 @@ wait_gate "$HEAD_SHA" "$PR_NUMBER"
 merge_pr "$PR_NUMBER" "$HEAD_SHA"
 MERGE_SHA="$(merge_commit_of_pr "$PR_NUMBER")"
 [ -n "$MERGE_SHA" ] && [ "$MERGE_SHA" != "null" ] || die "kon de merge-commit van PR #$PR_NUMBER niet bepalen."
+git fetch --quiet origin \
+  || die "kon de merge-commit niet ophalen voor de treecontrole. Niets getagd."
+assert_release_merge_tree "$MERGE_SHA"
 tag_and_push "$MERGE_SHA"
 follow_ci
 

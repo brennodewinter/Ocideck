@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// Regressietoets voor de v0.6.11-release die 75 minuten wachtte op
 /// statuscontexten die niet meer konden ontstaan.
 ///
-/// `static-gate`, `scans` en `linux-gate` zijn bewust alleen via
+/// `static-gate`, `scans`, `linux-gate` en de Linux-consumentproef zijn via
 /// `workflow_dispatch` startbaar. De releaseketen moet ze daarom zelf starten
 /// en hun Forgejo-taken volgen; de gecombineerde commitstatus blijft leeg.
 void main() {
@@ -47,7 +47,7 @@ $body
     return Process.runSync('bash', [harness.path]);
   }
 
-  test('start de drie handmatige poorten wanneer nog geen taak bestaat', () {
+  test('start alle handmatige poorten wanneer nog geen taak bestaat', () {
     final trace = File(
       '${Directory.systemTemp.path}/ocideck-gate-dispatch-$pid.log',
     );
@@ -74,7 +74,12 @@ ensure_gate_tasks abc123 2194
 
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
     final calls = trace.existsSync() ? trace.readAsStringSync() : '';
-    for (final workflow in ['static-gate.yml', 'scans.yml', 'linux-gate.yml']) {
+    for (final workflow in [
+      'static-gate.yml',
+      'scans.yml',
+      'linux-gate.yml',
+      'linux-build.yml',
+    ]) {
       expect(
         calls,
         contains('/actions/workflows/$workflow/dispatches'),
@@ -83,7 +88,7 @@ ensure_gate_tasks abc123 2194
     }
   }, skip: skipOnWindows);
 
-  test('groene handmatige taken voltooien de poort zonder commitstatus', () {
+  test('alleen groene taken op exact de release-head voltooien de poort', () {
     final result = runHarness(r'''
 api() {
   local method="$1" path="$2"
@@ -91,7 +96,9 @@ api() {
     printf '%s\n' '{"workflow_runs":[
       {"id":1,"workflow_id":"static-gate.yml","title":"static-gate","status":"success","commit_sha":"abc123"},
       {"id":2,"workflow_id":"scans.yml","title":"scans","status":"success","commit_sha":"abc123"},
-      {"id":3,"workflow_id":"linux-gate.yml","title":"linux-gate","status":"success","commit_sha":"abc123"}
+      {"id":3,"workflow_id":"linux-gate.yml","title":"linux-gate","status":"success","commit_sha":"abc123"},
+      {"id":4,"workflow_id":"linux-build.yml","title":"oude consumentproef","status":"success","commit_sha":"parent123"},
+      {"id":5,"workflow_id":"linux-build.yml","title":"consumentproef","status":"success","commit_sha":"abc123"}
     ]}'
     return 0
   fi
@@ -103,6 +110,31 @@ wait_gate abc123 2194
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
     expect(result.stdout, contains('Poort groen.'));
     expect(result.stderr, isNot(contains('poort werd niet groen')));
+  }, skip: skipOnWindows);
+
+  test('een groene consumentproef op een oudere SHA telt niet', () {
+    final result = runHarness(r'''
+GATE_TIMEOUT_SECONDS=1
+api() {
+  local method="$1" path="$2"
+  if [ "$method $path" = 'GET /actions/runs?limit=50' ]; then
+    printf '%s\n' '{"workflow_runs":[
+      {"id":1,"workflow_id":"static-gate.yml","status":"success","commit_sha":"abc123"},
+      {"id":2,"workflow_id":"scans.yml","status":"success","commit_sha":"abc123"},
+      {"id":3,"workflow_id":"linux-gate.yml","status":"success","commit_sha":"abc123"},
+      {"id":4,"workflow_id":"linux-build.yml","status":"success","commit_sha":"parent123"}
+    ]}'
+    return 0
+  fi
+  if [ "$method" = POST ]; then printf '%s\n' '{"id":5}'; return 0; fi
+  printf '%s\n' '{}'
+}
+die() { printf 'DIE: %s\n' "$1" >&2; exit 99; }
+wait_gate abc123 2194
+''');
+
+    expect(result.exitCode, 99, reason: '${result.stdout}\n${result.stderr}');
+    expect(result.stderr, contains('poort werd niet groen'));
   }, skip: skipOnWindows);
 
   test('nachtelijke main-poort accepteert geen groene voorouder', () {
@@ -171,6 +203,41 @@ wait_gate abc123 2194
           'terugkeer betekent dat GATE_TIMEOUT_SECONDS is genegeerd.',
     );
     expect(polls.readAsLinesSync(), ['poll']);
+  }, skip: skipOnWindows);
+
+  test('merge-tree moet exact de gekeurde release-head zijn', () {
+    final result = runHarness(r'''
+git() {
+  case "$*" in
+    'show -s --format=%P merge-sha') printf '%s\n' 'base-sha head-sha' ;;
+    'rev-parse merge-sha^{tree}') printf '%s\n' 'tree-sha' ;;
+    'rev-parse head-sha^{tree}') printf '%s\n' 'tree-sha' ;;
+    *) return 1 ;;
+  esac
+}
+assert_release_merge_tree merge-sha
+''');
+
+    expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+    expect(result.stdout, contains('Merge-tree is bytegelijk'));
+  }, skip: skipOnWindows);
+
+  test('afwijkende merge-tree stopt vóór het taggen', () {
+    final result = runHarness(r'''
+git() {
+  case "$*" in
+    'show -s --format=%P merge-sha') printf '%s\n' 'base-sha head-sha' ;;
+    'rev-parse merge-sha^{tree}') printf '%s\n' 'merged-tree' ;;
+    'rev-parse head-sha^{tree}') printf '%s\n' 'approved-tree' ;;
+    *) return 1 ;;
+  esac
+}
+die() { printf 'DIE: %s\n' "$1" >&2; exit 99; }
+assert_release_merge_tree merge-sha
+''');
+
+    expect(result.exitCode, 99, reason: '${result.stdout}\n${result.stderr}');
+    expect(result.stderr, contains('ongekeurde inhoud'));
   }, skip: skipOnWindows);
 
   test('scan_image_available begrenst beide curl-aanroepen', () {

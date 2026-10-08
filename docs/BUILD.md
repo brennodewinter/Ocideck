@@ -923,11 +923,10 @@ and <https://ocideck.librekat.nl/> is serving that same web bundle.
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
 
-The Windows artifact travels back as a **public GitHub release asset**, not as a
-build artifact. A GitHub artifact needs a token even on a public repository and
-expires after ninety days; a release asset is a plain public URL that keeps
-working. So *collecting* it needs no credentials — the `windows-ophalen` job just
-`curl`s the URL.
+The Windows artifact travels back as an asset on a **draft GitHub release**, not
+as a build artifact. It remains private on the mirror: only the complete,
+canonical Forge release is published. The `windows-ophalen` job retrieves the
+draft asset through GitHub's authenticated API with `GH_DISPATCH_TOKEN`.
 
 *Starting* the build, however, is no longer left to chance. It used to rely on the
 tag push to the mirror triggering `.github/workflows/release.yml` there — but when
@@ -940,8 +939,8 @@ with *Actions: read and write* + *Contents: read* on `brennodewinter/Ocideck`),
 regardless of whether the push event fired. It is idempotent — if the asset or a
 running build already exists it does not dispatch again — and it polls the run
 status so a failed build stops the job promptly (with the run URL) instead of
-after 45 empty minutes. Without the secret the job falls back to the old passive
-wait, so the chain keeps working until the secret is set.
+after 45 empty minutes. Without the secret the job fails closed: a private draft
+must never be replaced by an early public mirror release.
 
 The **web and Linux jobs run on the prebaked `ocideck-ci:flutter-<pin>` image** —
 the same image the gates use (see the `ci-image.yml` section of

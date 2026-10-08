@@ -785,6 +785,50 @@ void main() {
       );
     });
 
+    test(
+      'the mirror release stays draft; only the canonical release is public',
+      () {
+        final publish = mirrorYaml.substring(
+          mirrorYaml.indexOf("- name: Publish to the mirror's release"),
+        );
+        expect(
+          RegExp(
+            r'gh release create[^\n]*(?:\\\n[^\n]*)*--draft',
+          ).hasMatch(publish),
+          isTrue,
+          reason:
+              'Windows assets must remain a private draft on the mirror; the '
+              'complete canonical Forge release is the public distribution.',
+        );
+      },
+    );
+
+    test('the forge downloads the draft Windows assets with authentication', () {
+      final start = forgeYaml.indexOf('  windows-ophalen:');
+      final windows = forgeYaml.substring(
+        start,
+        forgeYaml.indexOf('  consumer-deb:', start),
+      );
+      expect(
+        RegExp(
+          r'if \[ -z "\$\{GH_DISPATCH_TOKEN:-\}" \]; then[\s\S]{0,400}?exit 1',
+        ).hasMatch(windows),
+        isTrue,
+        reason:
+            'Without the GitHub token a draft is unreadable; this job must '
+            'fail closed instead of falling back to a public URL.',
+      );
+      expect(windows, contains(r'Authorization: Bearer $GH_DISPATCH_TOKEN'));
+      expect(windows, contains('application/octet-stream'));
+      expect(
+        windows,
+        isNot(contains(r'https://github.com/$REPO/releases/download/$TAG/$f')),
+        reason:
+            'That public URL would require publishing the mirror before the '
+            'canonical release has approved the Windows cohort.',
+      );
+    });
+
     test('the forge judges a run only if it belongs to this attempt', () {
       // #2300: the attempt test is the run id, not a clock. A five-minute
       // window read every failure inside it as "this attempt" — including an
@@ -885,13 +929,16 @@ case "\$url" in
     else
       printf '{"workflow_runs":[{"id":102,"head_branch":"v9.9.9","status":"completed","conclusion":"$newRunConclusion","html_url":"https://gh/nieuw"}]}\\n'
     fi ;;
-  */releases/download/*)
+  */releases?per_page=*)
+    [ "\$RC" -ge ${serveAssets ? 5 : 9999} ] || { printf '[]\n'; exit 0; }
+    printf '[{"tag_name":"v9.9.9","draft":true,"assets":[{"name":"ocideck-windows-x64-9.9.9.zip","url":"https://api.github.com/assets/zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe","url":"https://api.github.com/assets/exe"},{"name":"ocideck-windows-cohort-9.9.9.json","url":"https://api.github.com/assets/cohort"}]}]\n' ;;
+  */assets/*)
     [ "\$RC" -ge ${serveAssets ? 5 : 9999} ] || exit 22
     f="\${url##*/}"
     case "\$f" in
-      *.zip) printf 'zipdata' > "\$out" ;;
-      *.exe) printf 'exedata' > "\$out" ;;
-      *.json)
+      zip) printf 'zipdata' > "\$out" ;;
+      exe) printf 'exedata' > "\$out" ;;
+      cohort)
         z=\$(printf 'zipdata' | sha256sum | cut -d' ' -f1)
         e=\$(printf 'exedata' | sha256sum | cut -d' ' -f1)
         printf '{"tag_commit":"%s","run_id":102,"sha256":{"zip":"%s","installer":"%s"}}\\n' \\

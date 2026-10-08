@@ -18,6 +18,9 @@ import 'package:flutter_test/flutter_test.dart';
 /// fetched under a checksum rather than trusted blindly.
 void main() {
   final releaseYaml = File('.forgejo/workflows/release.yml').readAsStringSync();
+  final preTagYaml = File(
+    '.forgejo/workflows/linux-build.yml',
+  ).readAsStringSync();
   final script = File('scripts/package_linux.sh').readAsStringSync();
   final publishScript = File(
     'scripts/publish_debian_package.sh',
@@ -132,6 +135,27 @@ void main() {
       });
     }
 
+    test('the pre-tag workflow builds and runs all consumer probes', () {
+      expect(preTagYaml, contains('make package-linux VERSION='));
+      expect(
+        preTagYaml,
+        matches(
+          RegExp(r'  build-linux:\n(?:.*\n){0,4}?    timeout-minutes: 60'),
+        ),
+        reason:
+            'A stuck pre-tag build must not occupy the release indefinitely.',
+      );
+      for (final job in ['consumer-deb', 'consumer-rpm', 'consumer-appimage']) {
+        expect(
+          RegExp('^  $job:', multiLine: true).hasMatch(preTagYaml),
+          isTrue,
+          reason:
+              'linux-build.yml can only gate the tag if it actually contains '
+              'the `$job` package-consumer job.',
+        );
+      }
+    });
+
     test('the consumer images are pinned, bare distro images', () {
       // No ocideck-ci image here: it ships the build toolchain and -dev
       // packages that would mask a missing runtime dependency.
@@ -155,6 +179,33 @@ void main() {
           isTrue,
           reason: 'A consumer probe lost its pinned image `$image`.',
         );
+      }
+    });
+
+    test('the Ubuntu consumer bootstraps install ca-certificates', () {
+      for (final workflow in [
+        (releaseYaml, '  publiceren:'),
+        (preTagYaml, null),
+      ]) {
+        for (final bounds in [
+          ('  consumer-deb:', '  consumer-rpm:'),
+          ('  consumer-appimage:', workflow.$2),
+        ]) {
+          final start = workflow.$1.indexOf(bounds.$1);
+          final end = bounds.$2 == null
+              ? workflow.$1.length
+              : workflow.$1.indexOf(bounds.$2!, start);
+          final section = workflow.$1.substring(start, end);
+          expect(
+            RegExp(
+              r'apt-get install[^\n]*\bca-certificates\b',
+            ).hasMatch(section),
+            isTrue,
+            reason:
+                '${bounds.$1.trim()} downloads a Linux artifact over HTTPS, '
+                'so its bare Ubuntu image needs the CA bundle.',
+          );
+        }
       }
     });
 
@@ -191,6 +242,13 @@ void main() {
       expect(section, contains('xvfb-run -a ocideck'));
     });
 
+    test('consumer package paths are explicit local paths', () {
+      for (final workflow in [releaseYaml, preTagYaml]) {
+        expect(workflow, matches(RegExp(r'apt-get install -y (?:")?\./dist/')));
+        expect(workflow, matches(RegExp(r'dnf install -y (?:")?\./dist/')));
+      }
+    });
+
     test('the AppImage probe extracts, link-checks and starts it', () {
       final section = releaseYaml.substring(
         releaseYaml.indexOf('  consumer-appimage:'),
@@ -199,6 +257,37 @@ void main() {
       expect(section, contains('--appimage-extract'));
       expect(section, contains("ldd squashfs-root/ocideck | grep 'not found'"));
       expect(section, contains('xvfb-run -a squashfs-root/AppRun'));
+    });
+
+    test('the AppImage consumer installs the GLES and EGL runtimes', () {
+      for (final workflow in [
+        (releaseYaml, '  publiceren:'),
+        (preTagYaml, null),
+      ]) {
+        final start = workflow.$1.indexOf('  consumer-appimage:');
+        final section = workflow.$1.substring(
+          start,
+          workflow.$2 == null
+              ? workflow.$1.length
+              : workflow.$1.indexOf(workflow.$2!, start),
+        );
+        expect(
+          RegExp(
+            r'apt-get install[\s\S]{0,300}?\blibgles2\b',
+          ).hasMatch(section),
+          isTrue,
+          reason:
+              'The extracted AppImage links libGLESv2 from the host; a bare '
+              'Ubuntu consumer must install that runtime before the link check.',
+        );
+        expect(
+          RegExp(r'apt-get install[\s\S]{0,350}?\blibegl1\b').hasMatch(section),
+          isTrue,
+          reason:
+              'Flutter loads libEGL dynamically; the AppImage consumer must '
+              'install it before the start probe.',
+        );
+      }
     });
 
     test('publiceren needs all three consumer probes', () {
@@ -280,6 +369,8 @@ void main() {
         'libgtk-3-0',
         'libsecret-1-0',
         'liblzma5',
+        'libgles2',
+        'libegl1',
         // cnativeapi links the tray library since the nativeapi migration
         // (#1741); it is a system lib the bundle does not carry.
         'libayatana-appindicator3-1',
@@ -291,6 +382,25 @@ void main() {
         );
       }
     });
+
+    test(
+      'the .rpm declares the GLES and EGL sonames required by the bundle',
+      () {
+        final rpmSpec = RegExp(
+          r'cat > "\$top/SPECS/ocideck\.spec" <<EOF(.*?)\nEOF',
+          dotAll: true,
+        ).firstMatch(script)?.group(1);
+        expect(rpmSpec, isNotNull, reason: 'No generated RPM spec found.');
+        expect(
+          rpmSpec,
+          contains('libGLESv2.so.2'),
+          reason:
+              'The RPM must require the host GLES runtime explicitly; the '
+              'bundled Flutter files do not provide libGLESv2.',
+        );
+        expect(rpmSpec, contains('libEGL.so.1'));
+      },
+    );
 
     test('the AppImage build requires the file tool up front', () {
       // appimagetool invokes `file`; the packager checks for it before running
