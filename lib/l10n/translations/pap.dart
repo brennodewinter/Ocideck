@@ -664,6 +664,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Aan selectie toevoegen': 'Añadi na selekshon',
+  'Uit selectie halen': 'Kitá for di selekshon',
+  '{n} dia\'s geselecteerd': '{n} diapositiva selekshoná',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Hala un diapositiva selekshoná pa move e bloki henter',
   'Verplaats vóór': 'Move promé',
   'Verplaats na': 'Move despues',
   'Achteraan plaatsen': 'Pone na final',

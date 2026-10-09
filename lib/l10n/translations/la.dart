@@ -1640,6 +1640,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Aan selectie toevoegen': 'Selectioni adde',
+  'Uit selectie halen': 'E selectione tolle',
+  '{n} dia\'s geselecteerd': '{n} paginae selectae',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Trahe paginam selectam ut totum agmen moveas',
   'Verplaats vóór': 'Ante move',
   'Verplaats na': 'Post move',
   'Achteraan plaatsen': 'In fine pone',

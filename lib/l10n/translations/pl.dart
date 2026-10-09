@@ -1637,6 +1637,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Aan selectie toevoegen': 'Dodaj do zaznaczenia',
+  'Uit selectie halen': 'Usuń ze zaznaczenia',
+  '{n} dia\'s geselecteerd': 'Zaznaczono {n} slajdów',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Przeciągnij zaznaczony slajd, aby przenieść cały blok',
   'Verplaats vóór': 'Przenieś przed',
   'Verplaats na': 'Przenieś po',
   'Achteraan plaatsen': 'Umieść na końcu',

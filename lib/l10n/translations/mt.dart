@@ -1643,6 +1643,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Aan selectie toevoegen': 'Żid magħażla',
+  'Uit selectie halen': 'Aqla\' mill-għażla',
+  '{n} dia\'s geselecteerd': '{n} slide magħżula',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Aḍġa slide magħżula biex tiċċaqlaq il-blokk kollu',
   'Verplaats vóór': 'Mexxi qabel',
   'Verplaats na': 'Mexxi wara',
   'Achteraan plaatsen': 'Poġġi fl-aħħar',

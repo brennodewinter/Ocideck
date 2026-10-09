@@ -1625,6 +1625,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Aan selectie toevoegen': 'Tambahkan ke pilihan',
+  'Uit selectie halen': 'Hapus dari pilihan',
+  '{n} dia\'s geselecteerd': '{n} slide dipilih',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Seret satu slide terpilih untuk memindahkan seluruh blok',
   'Verplaats vóór': 'Pindahkan sebelum',
   'Verplaats na': 'Pindahkan sesudah',
   'Achteraan plaatsen': 'Letakkan di akhir',

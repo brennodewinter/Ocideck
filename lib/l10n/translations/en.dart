@@ -825,6 +825,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Aan selectie toevoegen': 'Add to selection',
+  'Uit selectie halen': 'Remove from selection',
+  '{n} dia\'s geselecteerd': '{n} slides selected',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Drag a selected slide to move the whole block',
   'Verplaats vóór': 'Move before',
   'Verplaats na': 'Move after',
   'Achteraan plaatsen': 'Place at the end',

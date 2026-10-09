@@ -1623,6 +1623,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Aan selectie toevoegen': 'Pievienot atlasei',
+  'Uit selectie halen': 'Izņemt no atlases',
+  '{n} dia\'s geselecteerd': '{n} slaidi atlasīti',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Velc atlasīto slaidu, lai pārvietotu visu bloku',
   'Verplaats vóór': 'Pārvietot pirms',
   'Verplaats na': 'Pārvietot pēc',
   'Achteraan plaatsen': 'Novietot beigās',

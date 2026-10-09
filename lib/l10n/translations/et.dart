@@ -1618,6 +1618,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Aan selectie toevoegen': 'Lisa valikusse',
+  'Uit selectie halen': 'Eemalda valikust',
+  '{n} dia\'s geselecteerd': '{n} slaidi valitud',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Lohista valitud slaidi, et liigutada kogu plokki',
   'Verplaats vóór': 'Liiguta enne',
   'Verplaats na': 'Liiguta pärast',
   'Achteraan plaatsen': 'Aseta lõppu',

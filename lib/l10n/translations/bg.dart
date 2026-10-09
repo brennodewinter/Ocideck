@@ -1645,6 +1645,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Aan selectie toevoegen': 'Добави към избора',
+  'Uit selectie halen': 'Махни от избора',
+  '{n} dia\'s geselecteerd': '{n} слайда избрани',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Плъзни избран слайд, за да преместиш целия блок',
   'Verplaats vóór': 'Премести преди',
   'Verplaats na': 'Премести след',
   'Achteraan plaatsen': 'Постави в края',

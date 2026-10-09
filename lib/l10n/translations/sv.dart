@@ -1624,6 +1624,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Aan selectie toevoegen': 'Lägg till i urvalet',
+  'Uit selectie halen': 'Ta bort från urvalet',
+  '{n} dia\'s geselecteerd': '{n} bilder valda',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Dra en vald bild för att flytta hela blocket',
   'Verplaats vóór': 'Flytta före',
   'Verplaats na': 'Flytta efter',
   'Achteraan plaatsen': 'Placera sist',

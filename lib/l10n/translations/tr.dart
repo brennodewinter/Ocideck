@@ -2536,6 +2536,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Aan selectie toevoegen': 'Seçime ekle',
+  'Uit selectie halen': 'Seçimden kaldır',
+  '{n} dia\'s geselecteerd': '{n} slayt seçildi',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Tüm bloğu taşımak için seçili bir slaytı sürükle',
   'Verplaats vóór': 'Öncesine taşı',
   'Verplaats na': 'Sonrasına taşı',
   'Achteraan plaatsen': 'Sona yerleştir',

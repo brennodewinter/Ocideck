@@ -1626,6 +1626,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Aan selectie toevoegen': 'Přidat do výběru',
+  'Uit selectie halen': 'Odebrat z výběru',
+  '{n} dia\'s geselecteerd': '{n} snímků vybráno',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Přetáhni vybraný snímek a přesune se celý blok',
   'Verplaats vóór': 'Přesunout před',
   'Verplaats na': 'Přesunout za',
   'Achteraan plaatsen': 'Umístit na konec',

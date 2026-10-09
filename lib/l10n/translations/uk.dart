@@ -1640,6 +1640,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Aan selectie toevoegen': 'Додати до вибору',
+  'Uit selectie halen': 'Прибрати з вибору',
+  '{n} dia\'s geselecteerd': 'Вибрано {n} слайдів',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Перетягніть вибраний слайд, щоб перемістити весь блок',
   'Verplaats vóór': 'Перемістити перед',
   'Verplaats na': 'Перемістити після',
   'Achteraan plaatsen': 'Розмістити в кінці',

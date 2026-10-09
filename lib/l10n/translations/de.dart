@@ -665,6 +665,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Aan selectie toevoegen': 'Zur Auswahl hinzufügen',
+  'Uit selectie halen': 'Aus der Auswahl entfernen',
+  '{n} dia\'s geselecteerd': '{n} Folien ausgewählt',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Ziehe eine ausgewählte Folie, um den ganzen Block zu verschieben',
   'Verplaats vóór': 'Davor verschieben',
   'Verplaats na': 'Danach verschieben',
   'Achteraan plaatsen': 'Am Ende einfügen',

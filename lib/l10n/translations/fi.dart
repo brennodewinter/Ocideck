@@ -1625,6 +1625,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Aan selectie toevoegen': 'Lisää valintaan',
+  'Uit selectie halen': 'Poista valinnasta',
+  '{n} dia\'s geselecteerd': '{n} dioja valittu',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Vedä valittua diaa siirtääksesi koko lohkon',
   'Verplaats vóór': 'Siirrä ennen',
   'Verplaats na': 'Siirrä jälkeen',
   'Achteraan plaatsen': 'Aseta loppuun',

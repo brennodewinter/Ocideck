@@ -1625,6 +1625,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Aan selectie toevoegen': 'Dodaj v izbor',
+  'Uit selectie halen': 'Odstrani iz izbora',
+  '{n} dia\'s geselecteerd': '{n} prosojnic izbranih',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Povleci izbrano prosojnico, da premakneš celoten blok',
   'Verplaats vóór': 'Premakni pred',
   'Verplaats na': 'Premakni za',
   'Achteraan plaatsen': 'Postavi na konec',

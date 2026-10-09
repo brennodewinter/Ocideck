@@ -85,6 +85,13 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
     _focusNode.requestFocus();
   }
 
+  /// Het selectievak op de kaart (#2363): altijd een toggle, nooit een
+  /// modificatietoets nodig. Het vak zelf houdt de focus zodat spatie
+  /// blijft schakelen.
+  void _toggleSelect(int index) {
+    ref.read(editorProvider.notifier).toggleSelect(index);
+  }
+
   void _stepSelection(int delta) {
     final deck = ref.read(deckProvider).deck;
     if (deck == null || deck.slides.isEmpty) return;
@@ -331,6 +338,9 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
     final l10n = context.l10n;
     final readOnly = deck.finalized || deck.playOnly;
     final zoom = ref.watch(settingsProvider.select((s) => s.slideOverviewZoom));
+    final selectedCount = widget.editable
+        ? ref.watch(editorProvider.select((e) => e.selection.length))
+        : 0;
     return Focus(
       focusNode: _focusNode,
       autofocus: true,
@@ -351,6 +361,46 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
           ),
           actions: widget.editable
               ? [
+                  // Meervoudige selectie (#2363): toon het aantal én dat
+                  // slepen het blok verplaatst — de selectievakken op de
+                  // kaarten zijn vindbaar, deze pill maakt de gevolgen
+                  // zichtbaar.
+                  if (selectedCount > 1)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Tooltip(
+                        message: l10n.d(
+                          'Sleep een geselecteerde dia om het hele blok te verplaatsen',
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primaryContainer,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            l10n
+                                .d('{n} dia\'s geselecteerd')
+                                .replaceAll('{n}', '$selectedCount'),
+                            style: TextStyle(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onPrimaryContainer,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              fontFeatures: const [
+                                FontFeature.tabularFigures(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   // Zoomen is een kijkvoorkeur, geen bewerking — de knoppen
                   // blijven daarom ook bruikbaar op een verzegeld deck.
                   IconButton(
@@ -481,6 +531,7 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
                           timedPreset &&
                           index >= (deck.presentationTiming.maxSlides ?? 20),
                       onSelect: () => _select(index),
+                      onToggleSelect: () => _toggleSelect(index),
                       onOpen: () {
                         _select(index);
                         Navigator.pop(context);

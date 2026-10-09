@@ -1655,6 +1655,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Aan selectie toevoegen': 'Cuir leis an rogha',
+  'Uit selectie halen': 'Bain den rogha',
+  '{n} dia\'s geselecteerd': '{n} sleamhnán roghnaithe',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Tarraing sleamhnán roghnaithe chun an bloc ar fad a bhogadh',
   'Verplaats vóór': 'Bog roimh',
   'Verplaats na': 'Bog tar éis',
   'Achteraan plaatsen': 'Cuir ag an deireadh',

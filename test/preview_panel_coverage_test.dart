@@ -688,6 +688,101 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('het selectievak schakelt dia\'s zonder modificatietoets', (
+    tester,
+  ) async {
+    final container = _deckWith([
+      Slide.create(SlideType.bullets).copyWith(title: 'Alpha'),
+      Slide.create(SlideType.quote).copyWith(title: 'Beta'),
+      Slide.create(SlideType.table).copyWith(title: 'Gamma'),
+    ]);
+    addTearDown(container.dispose);
+    await _pumpOverview(tester, container);
+
+    Set<int> selection() => container.read(editorProvider).selection;
+
+    // Titel + drie dia's: elke kaart heeft een eigen vinkvak.
+    expect(find.byType(Checkbox), findsNWidgets(4));
+
+    // Twee vakken aanvinken via de muis, zonder Shift of Ctrl. De kaart heeft
+    // een dubbeltik-handler, dus de tap-resolve wacht de double-tap-timeout
+    // af — pompen van 350 ms laat die landen.
+    await tester.tap(find.byType(Checkbox).at(1));
+    await tester.pump(const Duration(milliseconds: 350));
+    await tester.tap(find.byType(Checkbox).at(3));
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(selection(), {0, 1, 3});
+    // De bovenbalk meldt het aantal en dat slepen het blok verplaatst.
+    expect(find.text('3 dia\'s geselecteerd'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (w) =>
+            w is Tooltip &&
+            w.message ==
+                'Sleep een geselecteerde dia om het hele blok te verplaatsen',
+      ),
+      findsOneWidget,
+    );
+
+    // Uitvinken haalt één dia eruit; de rest van het blok blijft staan.
+    await tester.tap(find.byType(Checkbox).at(3));
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(selection(), {0, 1});
+    expect(find.text('2 dia\'s geselecteerd'), findsOneWidget);
+
+    // Het vak is een eigen hit target: klikken op de kaart selecteert
+    // nog steeds alleen die ene dia en de teller verdwijnt.
+    await tester.tap(find.text('2. Alpha'));
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(selection(), {1});
+    expect(find.textContaining('geselecteerd'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('selectievakken werken samen met Ctrl+A', (tester) async {
+    final container = _deckWith([
+      Slide.create(SlideType.bullets).copyWith(title: 'Alpha'),
+      Slide.create(SlideType.quote).copyWith(title: 'Beta'),
+    ]);
+    addTearDown(container.dispose);
+    await _pumpOverview(tester, container);
+
+    Set<int> selection() => container.read(editorProvider).selection;
+
+    // Ctrl+A selecteert alles; het vak haalt één dia er weer uit.
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyA);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+    await tester.pump();
+    expect(selection(), {0, 1, 2});
+    expect(find.text('3 dia\'s geselecteerd'), findsOneWidget);
+
+    await tester.tap(find.byType(Checkbox).at(2));
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(selection(), {0, 1});
+    expect(tester.widget<Checkbox>(find.byType(Checkbox).at(2)).value, isFalse);
+    expect(tester.widget<Checkbox>(find.byType(Checkbox).at(0)).value, isTrue);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('een verzegeld overzicht toont geen selectievakken', (
+    tester,
+  ) async {
+    final container = _deckWith([Slide.create(SlideType.bullets)]);
+    addTearDown(container.dispose);
+    container
+        .read(deckProvider.notifier)
+        .loadDeck(
+          container.read(deckProvider).deck!.copyWith(finalized: true),
+          preserveThemeProfile: true,
+        );
+    await _pumpOverview(tester, container);
+
+    expect(find.byType(Checkbox), findsNothing);
+    expect(find.byIcon(Icons.drag_indicator), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
     'slide overview shows authored slides once in a responsive grid',
     (tester) async {
