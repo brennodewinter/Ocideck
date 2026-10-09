@@ -573,6 +573,121 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('slepen bij de rand scrolt het overzicht vanzelf door', (
+    tester,
+  ) async {
+    final container = _deckWith([
+      for (var i = 2; i <= 12; i++)
+        Slide.create(SlideType.bullets).copyWith(title: 'Dia $i'),
+    ]);
+    addTearDown(container.dispose);
+    final ids = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .map((slide) => slide.id)
+        .toList();
+    // Klein scherm, veel dia's: het eind van de lijst is onzichtbaar.
+    await _pumpOverview(tester, container, size: const Size(520, 420));
+
+    double offset() => tester
+        .widget<GridView>(find.byKey(const Key('slide-overview-grid')))
+        .controller!
+        .position
+        .pixels;
+
+    // Sleep de eerste dia en houd de aanwijzer in de onderrandzone vast.
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.byIcon(Icons.drag_indicator).first),
+    );
+    await gesture.moveBy(const Offset(0, -40));
+    await tester.pump();
+    final grid = tester.getRect(find.byKey(const Key('slide-overview-grid')));
+    await gesture.moveTo(Offset(grid.center.dx, grid.bottom - 8));
+    await tester.pump();
+    expect(offset(), greaterThanOrEqualTo(0));
+
+    // De randzone scrolt door tot het einde van de lijst en stopt daar.
+    for (var i = 0; i < 300 && offset() < 4000; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    expect(offset(), greaterThan(0));
+    // De beoogde invoegpositie blijft tijdens het doorscrollen gemarkeerd.
+    expect(find.byKey(const Key('insert-marker')), findsWidgets);
+
+    // Blijf pompen: de scroll stopt netjes bij het einde van de lijst.
+    final position = tester
+        .widget<GridView>(find.byKey(const Key('slide-overview-grid')))
+        .controller!
+        .position;
+    for (var i = 0; i < 300 && offset() < position.maxScrollExtent; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    expect(offset(), position.maxScrollExtent);
+
+    // Droppen op de eindzone: de dia landt achteraan — een bestemming die
+    // aan het begin van de sleep onzichtbaar was.
+    await gesture.moveTo(tester.getCenter(find.byType(DragTarget<int>).last));
+    await tester.pump();
+    await gesture.up();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    final after = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .map((slide) => slide.id)
+        .toList();
+    expect(after, [...ids.sublist(1), ids[0]]);
+    expect(container.read(editorProvider).selectedIndex, ids.length - 1);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('slepen in het midden van het raster scrolt niet', (
+    tester,
+  ) async {
+    final container = _deckWith([
+      for (var i = 2; i <= 12; i++)
+        Slide.create(SlideType.bullets).copyWith(title: 'Dia $i'),
+    ]);
+    addTearDown(container.dispose);
+    await _pumpOverview(tester, container, size: const Size(520, 420));
+
+    double offset() => tester
+        .widget<GridView>(find.byKey(const Key('slide-overview-grid')))
+        .controller!
+        .position
+        .pixels;
+
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.byIcon(Icons.drag_indicator).first),
+    );
+    await gesture.moveBy(const Offset(0, -40));
+    await tester.pump();
+    final grid = tester.getRect(find.byKey(const Key('slide-overview-grid')));
+    // De greep zelf kan in de randzone beginnen; zodra de aanwijzer het
+    // midden bereikt mag er geen enkele tick meer scrollen.
+    await gesture.moveTo(grid.center);
+    await tester.pump();
+    final frozen = offset();
+    for (var i = 0; i < 30; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    expect(offset(), frozen);
+
+    // De bovenrandzone scrolt terug omhoog en stopt op de lijstgrens.
+    await gesture.moveTo(Offset(grid.center.dx, grid.top + 8));
+    await tester.pump();
+    for (var i = 0; i < 30; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    expect(offset(), 0);
+
+    await gesture.up();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
     'slide overview shows authored slides once in a responsive grid',
     (tester) async {

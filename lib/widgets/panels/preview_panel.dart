@@ -28,6 +28,7 @@ import '../dialogs/settings_dialog.dart';
 import '../slides/slide_preview.dart';
 
 part 'preview_panel_overview.dart';
+part 'preview_panel_overview_cards.dart';
 
 /// Of het preview-paneel ingeklapt is (UI-voorkeur, app-breed).
 final previewCollapsedProvider = StateProvider<bool>((_) => false);
