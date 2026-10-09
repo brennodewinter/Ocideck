@@ -34,6 +34,15 @@ packages:
       url: "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
     source: git
     version: "0.1.0"
+  app_localizations:
+    dependency: "direct main"
+    description:
+      path: "packages/app_localizations"
+      ref: "app_localizations-v0.1.0"
+      resolved-ref: "73822a01339b6e601f8b84ada2e529d3db33d81d"
+      url: "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
+    source: git
+    version: "0.1.0"
   archive:
     dependency: "direct main"
     description:

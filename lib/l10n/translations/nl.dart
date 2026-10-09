@@ -11,7 +11,6 @@ const _stringsNl = {
   'presentFullscreen': 'Presenteren (volledig scherm) · P voor presenter view',
   'visualMode': 'Visuele modus',
   'markdownMode': 'Markdown modus',
-  'save': 'Opslaan',
   'more': 'Meer',
   'export': 'Exporteren',
   'exportReady': 'Exporteren (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsNl = {
   'importUrl': 'Importeren via URL…',
   'findReplace': 'Zoeken en vervangen',
   'fullDeckPreview': 'Volledig deck bekijken',
-  'settings': 'Instellingen',
   'settingsGeneral': 'Algemeen',
   'settingsColors': 'Kleuren',
-  'language': 'Taal',
-  'applicationLanguage': 'Applicatietaal',
   'languageHelp':
       'De interface wisselt direct van taal. Presentatie-inhoud blijft ongewijzigd.',
   'exportFolderSetting': 'Exportmap',
@@ -51,9 +47,6 @@ const _stringsNl = {
   'removeExportFolder': 'Verwijder exportmap',
   'exportFolderHelp':
       'Alle exports (PDF/PPTX) worden hier opgeslagen. Niet ingesteld? Dan komt de export naast het presentatiebestand te staan.',
-  'cancel': 'Annuleren',
-  'close': 'Sluiten',
-  'saveSettings': 'Opslaan',
   'exportDialogTitle': 'Exporteren',
   'exportAgain': 'Nogmaals exporteren',
   'exportIntro':

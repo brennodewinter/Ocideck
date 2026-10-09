@@ -12,7 +12,6 @@ const _stringsCs = {
       'Prezentovat (celá obrazovka) · P pro režim přednášejícího',
   'visualMode': 'Vizuální režim',
   'markdownMode': 'Režim Markdown',
-  'save': 'Uložit',
   'more': 'Více',
   'export': 'Exportovat',
   'exportReady': 'Exportovat (PDF/PPTX/HTML)',
@@ -39,11 +38,8 @@ const _stringsCs = {
   'importUrl': 'Importovat z URL…',
   'findReplace': 'Najít a nahradit',
   'fullDeckPreview': 'Zobrazit celou prezentaci',
-  'settings': 'Nastavení',
   'settingsGeneral': 'Obecné',
   'settingsColors': 'Barvy',
-  'language': 'Jazyk',
-  'applicationLanguage': 'Jazyk aplikace',
   'languageHelp':
       'Rozhraní okamžitě změní jazyk. Obsah prezentace zůstane beze změny.',
   'exportFolderSetting': 'Složka exportu',
@@ -52,9 +48,6 @@ const _stringsCs = {
   'removeExportFolder': 'Odebrat složku exportu',
   'exportFolderHelp':
       'Všechny exporty (PDF/PPTX) se ukládají sem. Pokud není nastaveno, exporty se uloží vedle souboru prezentace.',
-  'cancel': 'Zrušit',
-  'close': 'Zavřít',
-  'saveSettings': 'Uložit',
   'exportDialogTitle': 'Exportovat',
   'exportAgain': 'Exportovat znovu',
   'exportIntro':
@@ -242,7 +235,6 @@ const _dutchSourceCs = {
   'Onbereikbaar': 'Nedostupné',
   'Infrastructuur': 'Infrastruktura',
   'Mobiel': 'Mobilní',
-  'Overig': 'Ostatní',
   '(leeg)': '(prázdné)',
   'Audio': 'Audio',
   'Bijschrift': 'Popisek',
@@ -339,7 +331,6 @@ const _dutchSourceCs = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Tip: dlouhá přístupová fráze je bezpečnější než krátké heslo se symboly.',
   'Versleuteld pakket': 'Zašifrovaný balíček',
-  'Wachtwoord': 'Heslo',
   'Wachtwoord gekopieerd naar klembord.': 'Heslo zkopírováno do schránky.',
   'Wachtwoord tonen': 'Zobrazit heslo',
   'Wachtwoord verbergen': 'Skrýt heslo',
@@ -396,9 +387,7 @@ const _dutchSourceCs = {
   'Instelling opslaan is mislukt.': 'Uložení nastavení selhalo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Pozor: webová verze může stahovat jen ze serverů, které to povolují (CORS).',
-  'Geen': 'Žádné',
   'Nieuw': 'Nový',
-  'Verwijderen': 'Smazat',
   'Herstellen': 'Obnovit',
   'Opslaan en sluiten': 'Uložit a zavřít',
   'Niet opslaan': 'Neukládat',
@@ -520,7 +509,6 @@ const _dutchSourceCs = {
   'Slides importeren': 'Importovat snímky',
   'Importeren': 'Importovat',
   'Klaar': 'Hotovo',
-  'Toevoegen': 'Přidat',
   'Toegevoegd': 'Přidáno',
   'Selecteer alles': 'Vybrat vše',
   'Deselecteer alles': 'Zrušit výběr všeho',
@@ -573,7 +561,6 @@ const _dutchSourceCs = {
       'Oddělená čárkou, např. čtvrtletí, čísla, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Tyto údaje se ukládají do Markdown a jsou prohledávatelné při otevírání.',
-  'App-thema': 'Motiv aplikace',
   'Look-and-feel': 'Vzhled a chování',
   'Kopie maken en aanpassen': 'Vytvořit a upravit kopii',
   'Thema verwijderen': 'Smazat motiv',
@@ -800,7 +787,6 @@ const _dutchSourceCs = {
       'Odpověď serveru byla příliš velká',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL serveru',
-  'Gebruikersnaam': 'Uživatelské jméno',
   'App-wachtwoord': 'Heslo aplikace',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Vytvořte si k tomu heslo aplikace v Nextcloud',
@@ -823,7 +809,6 @@ const _dutchSourceCs = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Jako balíček .ocideck (jeden soubor, s materiály)',
   'Als losse .md plus afbeeldingen': 'Jako samostatný .md plus obrázky',
-  'Opslaan': 'Uložit',
   'Presenteren': 'Prezentování',
   'Tijden-overzicht tonen na afloop': 'Zobrazit přehled časů po skončení',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -909,7 +894,6 @@ const _dutchSourceCs = {
       'Text titulku má příliš malý kontrast s obrázkem na pozadí',
   'Herstel': 'Opravit',
   'Tijdlijn': 'Časová osa',
-  'Indeling': 'Rozvržení',
   'Automatisch': 'Automaticky',
   'Horizontaal': 'Vodorovně',
   'Verticaal': 'Svisle',
@@ -1085,13 +1069,11 @@ const _dutchSourceCs = {
   'Geen slides gemeten.': 'Žádné snímky nezměřeny.',
   'Tijden gekopieerd naar klembord.': 'Časy zkopírovány do schránky.',
   'Kopieer': 'Kopírovat',
-  'Sluiten': 'Zavřít',
   'Tekstgrootte van de interface': 'Velikost textu rozhraní',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Zvětší veškerý text editoru až na 200 %. Samotné snímky se nemění.',
   'Breedte van het slidepaneel': 'Šířka panelu snímků',
   'Pijltjestoetsen passen de breedte aan': 'Šipky upravují šířku',
-  'Annuleren': 'Zrušit',
   'Checklist': 'Kontrolní seznam úkolů',
   'Voortgangsgrafiek tonen': 'Zobrazit graf průběhu',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1335,7 +1317,6 @@ const _dutchSourceCs = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Zklidní pozadí za titulkem a podtitulkem.',
   'Licht': 'Světlý',
-  'Donker': 'Tmavý',
   'Pen (D)': 'Pero (D)',
   'Markeerstift (T)': 'Zvýrazňovač (T)',
   'Gum (E / Shift+E)': 'Guma (E / Shift+E)',
@@ -1697,7 +1678,6 @@ const _dutchSourceAddCs = <String, String>{
       'To se nepovedlo. Nic nebylo odesláno — zkus to znovu.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Tvoje e-mailová adresa dokazuje jen, že máš přístup ke schránce — není to účet a nic se neodešle, dokud sám nepotvrdíš.',
-  'Je e-mailadres': 'Tvoje e-mailová adresa',
   'Code aanvragen': 'Vyžádat kód',
   'Opnieuw versturen': 'Odeslat znovu',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2933,7 +2913,6 @@ const _dutchSourceAddCs = <String, String>{
   'Aantal minuten': 'Počet minut',
   'Aantal pogingen': 'Počet pokusů',
   'Accountbewerkingen': 'Operace s účtem',
-  'Accountgegevens': 'Informace o účtu',
   'Accountnummer': 'Číslo účtu',
   'Accountnummer waarop de actie gericht was':
       'Číslo účtu, na který je akce zaměřena',
@@ -4221,7 +4200,6 @@ const _dutchSourceAddCs = <String, String>{
   'Chat': 'Chat',
   'Chat sluiten': 'Zavřít chat',
   'Bericht…': 'Zpráva…',
-  'Versturen': 'Odeslat',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Zatím žádné zprávy. Řekni něco svým spoluautorům.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4608,8 +4586,6 @@ const _dutchSourceAddCs = <String, String>{
   'Rapportages voorbereiden': 'Připravte zprávy',
   'Rapporttitel': 'Název zprávy',
   'Stap': 'Krok',
-  'Taal': 'Jazyk',
-  'Terug': 'Zadní',
   'Veranderingen in monitoring': 'Změny v monitorování',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'U jedné nebo více organizací chybí užitečné předchozí měření.',
@@ -5978,7 +5954,6 @@ const _dutchSourceAddCs = <String, String>{
       'Umožní ti měnit tabulku před publikem během prezentace. Ve výchozím nastavení vypnuto.',
   'Automatisch doorgaan': 'Pokračovat automaticky',
   'Persoonsgegevens': 'Osobní údaje',
-  'Wijzigen': 'Změnit',
   'Automatisch afspelen': 'Přehrát automaticky',
   'Melden': 'Hlásit',
   'Geaccepteerd': 'Přijato',

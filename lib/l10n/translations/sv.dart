@@ -11,7 +11,6 @@ const _stringsSv = {
   'presentFullscreen': 'Presentera (helskärm) · P för presentatörsvy',
   'visualMode': 'Visuellt läge',
   'markdownMode': 'Markdown-läge',
-  'save': 'Spara',
   'more': 'Mer',
   'export': 'Exportera',
   'exportReady': 'Exportera (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsSv = {
   'importUrl': 'Importera från URL…',
   'findReplace': 'Sök och ersätt',
   'fullDeckPreview': 'Visa hela decket',
-  'settings': 'Inställningar',
   'settingsGeneral': 'Allmänt',
   'settingsColors': 'Färger',
-  'language': 'Språk',
-  'applicationLanguage': 'Applikationsspråk',
   'languageHelp':
       'Gränssnittet byter språk direkt. Presentationens innehåll ändras inte.',
   'exportFolderSetting': 'Exportmapp',
@@ -51,9 +47,6 @@ const _stringsSv = {
   'removeExportFolder': 'Ta bort exportmapp',
   'exportFolderHelp':
       'Alla exporter (PDF/PPTX) sparas här. Om ingen anges sparas exporter bredvid presentationsfilen.',
-  'cancel': 'Avbryt',
-  'close': 'Stäng',
-  'saveSettings': 'Spara',
   'exportDialogTitle': 'Exportera',
   'exportAgain': 'Exportera igen',
   'exportIntro':
@@ -240,7 +233,6 @@ const _dutchSourceSv = {
   'Onbereikbaar': 'Onåbar',
   'Infrastructuur': 'Infrastruktur',
   'Mobiel': 'Mobil',
-  'Overig': 'Övrigt',
   '(leeg)': '(tom)',
   'Audio': 'Ljud',
   'Bijschrift': 'Bildtext',
@@ -338,7 +330,6 @@ const _dutchSourceSv = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Tips: en lång lösenordsfras är säkrare än ett kort lösenord med symboler.',
   'Versleuteld pakket': 'Krypterat paket',
-  'Wachtwoord': 'Lösenord',
   'Wachtwoord gekopieerd naar klembord.': 'Lösenordet kopierat till urklipp.',
   'Wachtwoord tonen': 'Visa lösenord',
   'Wachtwoord verbergen': 'Dölj lösenord',
@@ -395,9 +386,7 @@ const _dutchSourceSv = {
   'Instelling opslaan is mislukt.': 'Det gick inte att spara inställningen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Obs: webbversionen kan bara hämta från servrar som tillåter det (CORS).',
-  'Geen': 'Ingen',
   'Nieuw': 'Ny',
-  'Verwijderen': 'Ta bort',
   'Herstellen': 'Återställ',
   'Opslaan en sluiten': 'Spara och stäng',
   'Niet opslaan': 'Spara inte',
@@ -518,7 +507,6 @@ const _dutchSourceSv = {
   'Slides importeren': 'Importera bilder',
   'Importeren': 'Importera',
   'Klaar': 'Klar',
-  'Toevoegen': 'Lägg till',
   'Toegevoegd': 'Tillagd',
   'Selecteer alles': 'Markera alla',
   'Deselecteer alles': 'Avmarkera alla',
@@ -571,7 +559,6 @@ const _dutchSourceSv = {
       'Kommaseparerade, t.ex. kvartal, siffror, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Dessa uppgifter lagras i Markdown och är sökbara vid öppning.',
-  'App-thema': 'Apptema',
   'Look-and-feel': 'Utseende och känsla',
   'Kopie maken en aanpassen': 'Skapa och anpassa en kopia',
   'Thema verwijderen': 'Ta bort tema',
@@ -796,7 +783,6 @@ const _dutchSourceSv = {
   'Het antwoord van de server was te groot': 'Serversvaret var för stort',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Server-URL',
-  'Gebruikersnaam': 'Användarnamn',
   'App-wachtwoord': 'App-lösenord',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Skapa ett app-lösenord för detta i Nextcloud',
@@ -820,7 +806,6 @@ const _dutchSourceSv = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Som ett .ocideck-paket (en fil, med tillgångar)',
   'Als losse .md plus afbeeldingen': 'Som en separat .md plus bilder',
-  'Opslaan': 'Spara',
   'Presenteren': 'Presenterar',
   'Tijden-overzicht tonen na afloop': 'Visa tidsöversikt efteråt',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -906,7 +891,6 @@ const _dutchSourceSv = {
       'Titeltexten har för lite kontrast mot bakgrundsbilden',
   'Herstel': 'Åtgärda',
   'Tijdlijn': 'Tidslinje',
-  'Indeling': 'Layout',
   'Automatisch': 'Automatisk',
   'Horizontaal': 'Horisontell',
   'Verticaal': 'Vertikal',
@@ -1082,13 +1066,11 @@ const _dutchSourceSv = {
   'Geen slides gemeten.': 'Inga bilder uppmätta.',
   'Tijden gekopieerd naar klembord.': 'Tider kopierade till urklipp.',
   'Kopieer': 'Kopiera',
-  'Sluiten': 'Stäng',
   'Tekstgrootte van de interface': 'Gränssnittets textstorlek',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Förstorar all redigerartext upp till 200 %. Bilderna själva påverkas inte.',
   'Breedte van het slidepaneel': 'Bildpanelens bredd',
   'Pijltjestoetsen passen de breedte aan': 'Piltangenterna justerar bredden',
-  'Annuleren': 'Avbryt',
   'Checklist': 'Uppgiftschecklista',
   'Voortgangsgrafiek tonen': 'Visa förloppsdiagram',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1333,7 +1315,6 @@ const _dutchSourceSv = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Gör bakgrunden lugnare bakom titel och undertitel.',
   'Licht': 'Ljus',
-  'Donker': 'Mörk',
   'Pen (D)': 'Penna (D)',
   'Markeerstift (T)': 'Överstrykningspenna (T)',
   'Gum (E / Shift+E)': 'Suddgummi (E / Shift+E)',
@@ -1695,7 +1676,6 @@ const _dutchSourceAddSv = <String, String>{
       'Det fungerade inte. Inget skickades — försök igen.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Din e-postadress bevisar bara att du kommer åt brevlådan — det är inget konto och inget skickas förrän du själv bekräftar.',
-  'Je e-mailadres': 'Din e-postadress',
   'Code aanvragen': 'Begär kod',
   'Opnieuw versturen': 'Skicka igen',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2935,7 +2915,6 @@ const _dutchSourceAddSv = <String, String>{
   'Aantal minuten': 'Antal minuter',
   'Aantal pogingen': 'Antal försök',
   'Accountbewerkingen': 'Kontoverksamhet',
-  'Accountgegevens': 'Kontoinformation',
   'Accountnummer': 'Kontonummer',
   'Accountnummer waarop de actie gericht was':
       'Kontonummer som åtgärden riktar in sig på',
@@ -4230,7 +4209,6 @@ const _dutchSourceAddSv = <String, String>{
   'Chat': 'Chatt',
   'Chat sluiten': 'Stäng chatten',
   'Bericht…': 'Meddelande…',
-  'Versturen': 'Skicka',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Inga meddelanden än. Säg något till dina medförfattare.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4618,8 +4596,6 @@ const _dutchSourceAddSv = <String, String>{
   'Rapportages voorbereiden': 'Förbered rapporter',
   'Rapporttitel': 'Rapportens titel',
   'Stap': 'Steg',
-  'Taal': 'Språk',
-  'Terug': 'Tillbaka',
   'Veranderingen in monitoring': 'Förändringar i övervakningen',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'En användbar tidigare mätning saknas för en eller flera organisationer.',
@@ -5999,7 +5975,6 @@ const _dutchSourceAddSv = <String, String>{
       'Låter dig ändra tabellen inför publiken under presentationen. Av som standard.',
   'Automatisch doorgaan': 'Gå vidare automatiskt',
   'Persoonsgegevens': 'Personuppgifter',
-  'Wijzigen': 'Ändra',
   'Automatisch afspelen': 'Spela upp automatiskt',
   'Melden': 'Rapportera',
   'Geaccepteerd': 'Accepterad',

@@ -101,6 +101,11 @@ dependencies:
   file_selector: ^1.1.0
   re_highlight: ^0.0.3
   material_ui: ^1.5.0
+  app_localizations:
+    git:
+      url: https://pawprint.vigilis.online/LibreKAT/AppFoundation.git
+      ref: app_localizations-v0.1.0
+      path: packages/app_localizations
   # Productneutrale profielen, Material-thema-opbouw en contrastcontrole.
   # De package-release is onveranderlijk per package getagd.
   app_appearance:

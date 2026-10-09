@@ -11,7 +11,6 @@ const _stringsIt = {
   'presentFullscreen': 'Presenta a schermo intero · P per vista relatore',
   'visualMode': 'Modalità visuale',
   'markdownMode': 'Modalità Markdown',
-  'save': 'Salva',
   'more': 'Altro',
   'export': 'Esporta',
   'exportReady': 'Esporta (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsIt = {
   'importUrl': 'Importa da URL…',
   'findReplace': 'Trova e sostituisci',
   'fullDeckPreview': 'Visualizza deck completo',
-  'settings': 'Impostazioni',
   'settingsGeneral': 'Generale',
   'settingsColors': 'Colori',
-  'language': 'Lingua',
-  'applicationLanguage': 'Lingua applicazione',
   'languageHelp':
       'L’interfaccia cambia lingua subito. Il contenuto della presentazione resta invariato.',
   'exportFolderSetting': 'Cartella esportazione',
@@ -51,9 +47,6 @@ const _stringsIt = {
   'removeExportFolder': 'Rimuovi cartella esportazione',
   'exportFolderHelp':
       'Tutte le esportazioni (PDF/PPTX) vengono salvate qui. Se non impostata, accanto al file della presentazione.',
-  'cancel': 'Annulla',
-  'close': 'Chiudi',
-  'saveSettings': 'Salva',
   'exportDialogTitle': 'Esporta',
   'exportAgain': 'Esporta di nuovo',
   'exportIntro':
@@ -242,7 +235,6 @@ const _dutchSourceIt = {
   'Onbereikbaar': 'Irraggiungibile',
   'Infrastructuur': 'Infrastruttura',
   'Mobiel': 'Mobile',
-  'Overig': 'Altro',
   '(leeg)': '(vuoto)',
   'Audio': 'Audio',
   'Bijschrift': 'Didascalia',
@@ -341,7 +333,6 @@ const _dutchSourceIt = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Suggerimento: una lunga frase di accesso è più sicura di una password breve con simboli.',
   'Versleuteld pakket': 'Pacchetto cifrato',
-  'Wachtwoord': 'Password',
   'Wachtwoord gekopieerd naar klembord.': 'Password copiata negli appunti.',
   'Wachtwoord tonen': 'Mostra password',
   'Wachtwoord verbergen': 'Nascondi password',
@@ -398,9 +389,7 @@ const _dutchSourceIt = {
   'Instelling opslaan is mislukt.': 'Salvataggio impostazione non riuscito.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: la versione web può scaricare solo da server che lo consentono (CORS).',
-  'Geen': 'Nessuno',
   'Nieuw': 'Nuovo',
-  'Verwijderen': 'Elimina',
   'Herstellen': 'Ripristina',
   'Opslaan en sluiten': 'Salva e chiudi',
   'Niet opslaan': 'Non salvare',
@@ -483,7 +472,6 @@ const _dutchSourceIt = {
   'Slides importeren': 'Importa slide',
   'Importeren': 'Importa',
   'Klaar': 'Fine',
-  'Toevoegen': 'Aggiungi',
   'Toegevoegd': 'Aggiunta',
   'Selecteer alles': 'Seleziona tutto',
   'Deselecteer alles': 'Deseleziona tutto',
@@ -510,7 +498,6 @@ const _dutchSourceIt = {
   'Datum': 'Data',
   'Beschrijving': 'Descrizione',
   'Trefwoorden': 'Parole chiave',
-  'App-thema': 'Tema dell’app',
   'Look-and-feel': 'Aspetto',
   'Kopie maken en aanpassen': 'Crea e personalizza una copia',
   'Thema verwijderen': 'Elimina tema',
@@ -734,7 +721,6 @@ const _dutchSourceAddIt = {
       'Non ha funzionato. Non è stato inviato nulla — riprova.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Il tuo indirizzo e-mail prova solo che puoi accedere alla casella — non è un account e non viene inviato nulla finché non confermi tu stesso.',
-  'Je e-mailadres': 'Il tuo indirizzo e-mail',
   'Code aanvragen': 'Richiedi codice',
   'Opnieuw versturen': 'Invia di nuovo',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -1995,7 +1981,6 @@ const _dutchSourceAddIt = {
   'Aantal minuten': 'Numero di minuti',
   'Aantal pogingen': 'Numero di tentativi',
   'Accountbewerkingen': 'Operazioni sul conto',
-  'Accountgegevens': 'Informazioni sull\'account',
   'Accountnummer': 'Numero di conto',
   'Accountnummer waarop de actie gericht was':
       'Numero di conto preso di mira dall\'azione',
@@ -3304,7 +3289,6 @@ const _dutchSourceAddIt = {
   'Chat': 'Chat',
   'Chat sluiten': 'Chiudi chat',
   'Bericht…': 'Messaggio…',
-  'Versturen': 'Invia',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Ancora nessun messaggio. Scrivi qualcosa ai tuoi coautori.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -3703,8 +3687,6 @@ const _dutchSourceAddIt = {
   'Rapportages voorbereiden': 'Preparare rapporti',
   'Rapporttitel': 'Titolo del rapporto',
   'Stap': 'Fare un passo',
-  'Taal': 'Lingua',
-  'Terug': 'Indietro',
   'Veranderingen in monitoring': 'Cambiamenti nel monitoraggio',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Manca una misurazione precedente utile per una o più organizzazioni.',
@@ -5119,7 +5101,6 @@ const _dutchSourceAddIt = {
       'Ti permette di modificare la tabella davanti al pubblico durante la presentazione. Disattivato per impostazione predefinita.',
   'Automatisch doorgaan': 'Avanza automaticamente',
   'Persoonsgegevens': 'Dati personali',
-  'Wijzigen': 'Cambia',
   'Automatisch afspelen': 'Riproduci automaticamente',
   'Melden': 'Segnala',
   'Geaccepteerd': 'Accettato',
@@ -5396,7 +5377,6 @@ const _dutchSourceAddIt = {
       'La risposta del server era troppo grande',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL del server',
-  'Gebruikersnaam': 'Nome utente',
   'App-wachtwoord': 'Password dell’app',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Crea una password dell’app in Nextcloud a questo scopo',
@@ -5420,7 +5400,6 @@ const _dutchSourceAddIt = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Come pacchetto .ocideck (un file, con le risorse)',
   'Als losse .md plus afbeeldingen': 'Come .md separato più immagini',
-  'Opslaan': 'Salva',
   // Accessibility labels for icon-only buttons (screen readers).
   'Presenteren': 'Presentazione',
   'Tijden-overzicht tonen na afloop': 'Mostra il riepilogo dei tempi alla fine',
@@ -5513,7 +5492,6 @@ const _dutchSourceAddIt = {
   'Herstel': 'Correggi',
   // Tijdlijn-slides.
   'Tijdlijn': 'Cronologia',
-  'Indeling': 'Disposizione',
   'Automatisch': 'Automatico',
   'Horizontaal': 'Orizzontale',
   'Verticaal': 'Verticale',
@@ -5694,14 +5672,12 @@ const _dutchSourceAddIt = {
   'Geen slides gemeten.': 'Nessuna slide misurata.',
   'Tijden gekopieerd naar klembord.': 'Tempi copiati negli appunti.',
   'Kopieer': 'Copia',
-  'Sluiten': 'Chiudi',
   'Tekstgrootte van de interface': 'Dimensione del testo dell\'interfaccia',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Ingrandisce tutto il testo dell\'editor fino al 200%. Le slide non cambiano.',
   'Breedte van het slidepaneel': 'Larghezza del pannello delle slide',
   'Pijltjestoetsen passen de breedte aan':
       'I tasti freccia regolano la larghezza',
-  'Annuleren': 'Annulla',
   'Checklist': 'Lista di controllo',
   'Voortgangsgrafiek tonen': 'Mostra grafico di avanzamento',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -6113,7 +6089,6 @@ const _dutchSourceAddIt = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Rende lo sfondo più calmo dietro titolo e sottotitolo.',
   'Licht': 'Chiaro',
-  'Donker': 'Scuro',
   'Pen (D)': 'Penna (D)',
   'Markeerstift (T)': 'Evidenziatore (T)',
   'Gum (E / Shift+E)': 'Gomma (E / Shift+E)',

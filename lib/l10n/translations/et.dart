@@ -11,7 +11,6 @@ const _stringsEt = {
   'presentFullscreen': 'Esitle (täisekraan) · P esitlejavaate jaoks',
   'visualMode': 'Visuaalne režiim',
   'markdownMode': 'Markdown-režiim',
-  'save': 'Salvesta',
   'more': 'Rohkem',
   'export': 'Ekspordi',
   'exportReady': 'Ekspordi (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsEt = {
   'importUrl': 'Impordi URL-ist…',
   'findReplace': 'Otsi ja asenda',
   'fullDeckPreview': 'Vaata kogu esitlust',
-  'settings': 'Seaded',
   'settingsGeneral': 'Üldine',
   'settingsColors': 'Värvid',
-  'language': 'Keel',
-  'applicationLanguage': 'Rakenduse keel',
   'languageHelp': 'Liides vahetab keele kohe. Esitluse sisu ei muutu.',
   'exportFolderSetting': 'Ekspordikaust',
   'nextToPresentationFile': 'Esitlusfaili kõrval',
@@ -50,9 +46,6 @@ const _stringsEt = {
   'removeExportFolder': 'Eemalda ekspordikaust',
   'exportFolderHelp':
       'Kõik ekspordid (PDF/PPTX) salvestatakse siia. Kui määramata, salvestatakse eksport esitlusfaili kõrvale.',
-  'cancel': 'Tühista',
-  'close': 'Sulge',
-  'saveSettings': 'Salvesta',
   'exportDialogTitle': 'Ekspordi',
   'exportAgain': 'Ekspordi uuesti',
   'exportIntro':
@@ -240,7 +233,6 @@ const _dutchSourceEt = {
   'Onbereikbaar': 'Kättesaamatu',
   'Infrastructuur': 'Taristu',
   'Mobiel': 'Mobiil',
-  'Overig': 'Muu',
   '(leeg)': '(tühi)',
   'Audio': 'Audio',
   'Bijschrift': 'Pealdis',
@@ -337,7 +329,6 @@ const _dutchSourceEt = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Nõuanne: pikk paroolifraas on turvalisem kui lühike sümbolitega parool.',
   'Versleuteld pakket': 'Krüpteeritud pakett',
-  'Wachtwoord': 'Parool',
   'Wachtwoord gekopieerd naar klembord.': 'Parool kopeeriti lõikelauale.',
   'Wachtwoord tonen': 'Näita parooli',
   'Wachtwoord verbergen': 'Peida parool',
@@ -394,9 +385,7 @@ const _dutchSourceEt = {
   'Instelling opslaan is mislukt.': 'Sätte salvestamine ebaõnnestus.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Märkus: veebiversioon saab laadida ainult serveritest, mis seda lubavad (CORS).',
-  'Geen': 'Puudub',
   'Nieuw': 'Uus',
-  'Verwijderen': 'Kustuta',
   'Herstellen': 'Taasta',
   'Opslaan en sluiten': 'Salvesta ja sulge',
   'Niet opslaan': 'Ära salvesta',
@@ -519,7 +508,6 @@ const _dutchSourceEt = {
   'Slides importeren': 'Impordi slaidid',
   'Importeren': 'Impordi',
   'Klaar': 'Valmis',
-  'Toevoegen': 'Lisa',
   'Toegevoegd': 'Lisatud',
   'Selecteer alles': 'Vali kõik',
   'Deselecteer alles': 'Tühista kõigi valik',
@@ -572,7 +560,6 @@ const _dutchSourceEt = {
       'Komadega eraldatud, nt kvartal, arvud, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Need andmed salvestatakse Markdown-i ja on avamisel otsitavad.',
-  'App-thema': 'Rakenduse teema',
   'Look-and-feel': 'Välimus',
   'Kopie maken en aanpassen': 'Loo koopia ja kohanda',
   'Thema verwijderen': 'Kustuta teema',
@@ -797,7 +784,6 @@ const _dutchSourceEt = {
   'Het antwoord van de server was te groot': 'Serveri vastus oli liiga suur',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Serveri URL',
-  'Gebruikersnaam': 'Kasutajanimi',
   'App-wachtwoord': 'Rakenduse parool',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Loo selleks Nextcloud\'is rakenduse parool',
@@ -820,7 +806,6 @@ const _dutchSourceEt = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Kui .ocideck-pakett (üks fail, koos assetitega)',
   'Als losse .md plus afbeeldingen': 'Kui eraldi .md koos piltidega',
-  'Opslaan': 'Salvesta',
   'Presenteren': 'Esitamine',
   'Tijden-overzicht tonen na afloop': 'Näita aegade ülevaadet lõpus',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -905,7 +890,6 @@ const _dutchSourceEt = {
       'Pealkirja tekstil on taustapildiga liiga vähe kontrasti',
   'Herstel': 'Paranda',
   'Tijdlijn': 'Ajajoon',
-  'Indeling': 'Paigutus',
   'Automatisch': 'Automaatne',
   'Horizontaal': 'Horisontaalne',
   'Verticaal': 'Vertikaalne',
@@ -1080,13 +1064,11 @@ const _dutchSourceEt = {
   'Geen slides gemeten.': 'Ühtegi slaidi ei mõõdetud.',
   'Tijden gekopieerd naar klembord.': 'Ajad kopeeriti lõikelauale.',
   'Kopieer': 'Kopeeri',
-  'Sluiten': 'Sulge',
   'Tekstgrootte van de interface': 'Liidese teksti suurus',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Suurendab kogu redaktori teksti kuni 200%. Slaidid ise ei muutu.',
   'Breedte van het slidepaneel': 'Slaidipaneeli laius',
   'Pijltjestoetsen passen de breedte aan': 'Nooleklahvid muudavad laiust',
-  'Annuleren': 'Tühista',
   'Checklist': 'Kontrollnimekiri',
   'Voortgangsgrafiek tonen': 'Näita edenemisgraafikut',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1329,7 +1311,6 @@ const _dutchSourceEt = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Muudab tausta pealkirja ja alapealkirja taga rahulikumaks.',
   'Licht': 'Hele',
-  'Donker': 'Tume',
   'Pen (D)': 'Pliiats (D)',
   'Markeerstift (T)': 'Markeri (T)',
   'Gum (E / Shift+E)': 'Kustukumm (E / Shift+E)',
@@ -1688,7 +1669,6 @@ const _dutchSourceAddEt = <String, String>{
       'See ei õnnestunud. Midagi ei saadetud — proovi uuesti.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Sinu e-posti aadress tõestab ainult, et pääsed postkasti — see ei ole konto ja midagi ei saadeta enne, kui ise kinnitad.',
-  'Je e-mailadres': 'Sinu e-posti aadress',
   'Code aanvragen': 'Küsi koodi',
   'Opnieuw versturen': 'Saada uuesti',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2927,7 +2907,6 @@ const _dutchSourceAddEt = <String, String>{
   'Aantal minuten': 'Minutite arv',
   'Aantal pogingen': 'Katsete arv',
   'Accountbewerkingen': 'Konto toimingud',
-  'Accountgegevens': 'Konto teave',
   'Accountnummer': 'Konto number',
   'Accountnummer waarop de actie gericht was':
       'Konto number, mille tegevus sihib',
@@ -4219,7 +4198,6 @@ const _dutchSourceAddEt = <String, String>{
   'Chat': 'Vestlus',
   'Chat sluiten': 'Sulge vestlus',
   'Bericht…': 'Sõnum…',
-  'Versturen': 'Saada',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Sõnumeid veel pole. Ütle oma kaasautoritele midagi.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4606,8 +4584,6 @@ const _dutchSourceAddEt = <String, String>{
   'Rapportages voorbereiden': 'Koostage aruanded',
   'Rapporttitel': 'Aruande pealkiri',
   'Stap': 'Samm',
-  'Taal': 'Keel',
-  'Terug': 'Tagasi',
   'Veranderingen in monitoring': 'Muutused monitooringus',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Ühe või mitme organisatsiooni jaoks puudub kasulik eelmine mõõtmine.',
@@ -5989,7 +5965,6 @@ const _dutchSourceAddEt = <String, String>{
       'Võimaldab sul esitluse ajal publiku ees tabelit muuta. Vaikimisi väljas.',
   'Automatisch doorgaan': 'Liigu automaatselt edasi',
   'Persoonsgegevens': 'Isikuandmed',
-  'Wijzigen': 'Muuda',
   'Automatisch afspelen': 'Esita automaatselt',
   'Melden': 'Teata',
   'Geaccepteerd': 'Aktsepteeritud',

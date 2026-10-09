@@ -11,7 +11,6 @@ const _stringsSl = {
   'presentFullscreen': 'Predstavi (celozaslonsko) · P za predstavitveni pogled',
   'visualMode': 'Vizualni način',
   'markdownMode': 'Način Markdown',
-  'save': 'Shrani',
   'more': 'Več',
   'export': 'Izvozi',
   'exportReady': 'Izvozi (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsSl = {
   'importUrl': 'Uvozi prek URL …',
   'findReplace': 'Poišči in zamenjaj',
   'fullDeckPreview': 'Ogled celotne predstavitve',
-  'settings': 'Nastavitve',
   'settingsGeneral': 'Splošno',
   'settingsColors': 'Barve',
-  'language': 'Jezik',
-  'applicationLanguage': 'Jezik aplikacije',
   'languageHelp':
       'Vmesnik takoj zamenja jezik. Vsebina predstavitve ostane nespremenjena.',
   'exportFolderSetting': 'Mapa za izvoz',
@@ -51,9 +47,6 @@ const _stringsSl = {
   'removeExportFolder': 'Odstrani mapo za izvoz',
   'exportFolderHelp':
       'Vsi izvozi (PDF/PPTX) se shranijo tukaj. Če ni nastavljeno, se izvoz shrani ob datoteki predstavitve.',
-  'cancel': 'Prekliči',
-  'close': 'Zapri',
-  'saveSettings': 'Shrani',
   'exportDialogTitle': 'Izvozi',
   'exportAgain': 'Znova izvozi',
   'exportIntro':
@@ -241,7 +234,6 @@ const _dutchSourceSl = {
   'Onbereikbaar': 'Nedosegljivo',
   'Infrastructuur': 'Infrastruktura',
   'Mobiel': 'Mobilno',
-  'Overig': 'Drugo',
   '(leeg)': '(prazno)',
   'Audio': 'Audio',
   'Bijschrift': 'Napis',
@@ -338,7 +330,6 @@ const _dutchSourceSl = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Nasvet: dolgo geselno besedilo je varnejše od kratkega gesla s simboli.',
   'Versleuteld pakket': 'Šifriran paket',
-  'Wachtwoord': 'Geslo',
   'Wachtwoord gekopieerd naar klembord.': 'Geslo je kopirano v odložišče.',
   'Wachtwoord tonen': 'Prikaži geslo',
   'Wachtwoord verbergen': 'Skrij geslo',
@@ -395,9 +386,7 @@ const _dutchSourceSl = {
   'Instelling opslaan is mislukt.': 'Shranjevanje nastavitve ni uspelo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Opomba: spletna različica lahko prenaša le s strežnikov, ki to dovoljujejo (CORS).',
-  'Geen': 'Brez',
   'Nieuw': 'Nova',
-  'Verwijderen': 'Izbriši',
   'Herstellen': 'Obnovi',
   'Opslaan en sluiten': 'Shrani in zapri',
   'Niet opslaan': 'Ne shrani',
@@ -519,7 +508,6 @@ const _dutchSourceSl = {
   'Slides importeren': 'Uvozi diapozitive',
   'Importeren': 'Uvozi',
   'Klaar': 'Končano',
-  'Toevoegen': 'Dodaj',
   'Toegevoegd': 'Dodano',
   'Selecteer alles': 'Izberi vse',
   'Deselecteer alles': 'Prekliči izbor vseh',
@@ -572,7 +560,6 @@ const _dutchSourceSl = {
       'Ločene z vejico, npr. četrtletje, številke, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Ti podatki se shranijo v Markdown in jih je mogoče iskati pri odpiranju.',
-  'App-thema': 'Tema aplikacije',
   'Look-and-feel': 'Videz in občutek',
   'Kopie maken en aanpassen': 'Ustvari in prilagodi kopijo',
   'Thema verwijderen': 'Izbriši temo',
@@ -797,7 +784,6 @@ const _dutchSourceSl = {
       'Odgovor strežnika je bil prevelik',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL strežnika',
-  'Gebruikersnaam': 'Uporabniško ime',
   'App-wachtwoord': 'Geslo aplikacije',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Za to ustvarite geslo aplikacije v Nextcloud',
@@ -820,7 +806,6 @@ const _dutchSourceSl = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Kot paket .ocideck (ena datoteka, s sredstvi)',
   'Als losse .md plus afbeeldingen': 'Kot ločen .md in slike',
-  'Opslaan': 'Shrani',
   'Presenteren': 'Predstavljanje',
   'Tijden-overzicht tonen na afloop': 'Po koncu pokaži pregled časov',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -906,7 +891,6 @@ const _dutchSourceSl = {
       'Naslovno besedilo ima premalo kontrasta s sliko ozadja',
   'Herstel': 'Popravi',
   'Tijdlijn': 'Časovnica',
-  'Indeling': 'Postavitev',
   'Automatisch': 'Samodejno',
   'Horizontaal': 'Vodoravno',
   'Verticaal': 'Navpično',
@@ -1083,13 +1067,11 @@ const _dutchSourceSl = {
   'Geen slides gemeten.': 'Nobena prosojnica ni izmerjena.',
   'Tijden gekopieerd naar klembord.': 'Časi kopirani v odložišče.',
   'Kopieer': 'Kopiraj',
-  'Sluiten': 'Zapri',
   'Tekstgrootte van de interface': 'Velikost besedila vmesnika',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Poveča vse besedilo urejevalnika do 200 %. Same prosojnice se ne spremenijo.',
   'Breedte van het slidepaneel': 'Širina plošče s prosojnicami',
   'Pijltjestoetsen passen de breedte aan': 'Puščične tipke prilagodijo širino',
-  'Annuleren': 'Prekliči',
   'Checklist': 'Kontrolni seznam',
   'Voortgangsgrafiek tonen': 'Prikaži graf napredka',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1334,7 +1316,6 @@ const _dutchSourceSl = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Umiri ozadje za naslovom in podnaslovom.',
   'Licht': 'Svetlo',
-  'Donker': 'Temno',
   'Pen (D)': 'Pero (D)',
   'Markeerstift (T)': 'Označevalnik (T)',
   'Gum (E / Shift+E)': 'Radirka (E / Shift+E)',
@@ -1696,7 +1677,6 @@ const _dutchSourceAddSl = <String, String>{
       'To ni uspelo. Nič ni bilo poslano — poskusi znova.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Tvoj e-poštni naslov dokazuje le, da lahko dostopaš do nabiralnika — ni račun in nič se ne pošlje, dokler sam ne potrdiš.',
-  'Je e-mailadres': 'Tvoj e-poštni naslov',
   'Code aanvragen': 'Zahtevaj kodo',
   'Opnieuw versturen': 'Ponovno pošlji',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2937,7 +2917,6 @@ const _dutchSourceAddSl = <String, String>{
   'Aantal minuten': 'Število minut',
   'Aantal pogingen': 'Število poskusov',
   'Accountbewerkingen': 'Poslovanje z računi',
-  'Accountgegevens': 'Podatki o računu',
   'Accountnummer': 'Številka računa',
   'Accountnummer waarop de actie gericht was':
       'Številka računa, na katerega cilja dejanje',
@@ -4226,7 +4205,6 @@ const _dutchSourceAddSl = <String, String>{
   'Chat': 'Klepet',
   'Chat sluiten': 'Zapri klepet',
   'Bericht…': 'Sporočilo…',
-  'Versturen': 'Pošlji',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Še ni sporočil. Povej kaj svojim soavtorjem.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4617,8 +4595,6 @@ const _dutchSourceAddSl = <String, String>{
   'Rapportages voorbereiden': 'Pripravite poročila',
   'Rapporttitel': 'Naslov poročila',
   'Stap': 'korak',
-  'Taal': 'Jezik',
-  'Terug': 'Nazaj',
   'Veranderingen in monitoring': 'Spremembe v spremljanju',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Za eno ali več organizacij manjka uporabna predhodna meritev.',
@@ -6001,7 +5977,6 @@ const _dutchSourceAddSl = <String, String>{
       'Omogoča ti, da med predstavitvijo pred občinstvom spremeniš tabelo. Privzeto izklopljeno.',
   'Automatisch doorgaan': 'Samodejno naprej',
   'Persoonsgegevens': 'Osebni podatki',
-  'Wijzigen': 'Spremeni',
   'Automatisch afspelen': 'Samodejno predvajaj',
   'Melden': 'Poročaj',
   'Geaccepteerd': 'Sprejeto',

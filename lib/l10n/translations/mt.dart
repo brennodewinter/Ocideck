@@ -12,7 +12,6 @@ const _stringsMt = {
       'Ippreżenta (skrin sħiħ) · P għall-veduta tal-preżentatur',
   'visualMode': 'Modalità viżiva',
   'markdownMode': 'Modalità Markdown',
-  'save': 'Issejvja',
   'more': 'Aktar',
   'export': 'Esporta',
   'exportReady': 'Esporta (PDF/PPTX/HTML)',
@@ -39,11 +38,8 @@ const _stringsMt = {
   'importUrl': 'Importa minn URL…',
   'findReplace': 'Sib u ibdel',
   'fullDeckPreview': 'Ara d-deck sħiħ',
-  'settings': 'Settings',
   'settingsGeneral': 'Ġenerali',
   'settingsColors': 'Kuluri',
-  'language': 'Lingwa',
-  'applicationLanguage': 'Lingwa tal-applikazzjoni',
   'languageHelp':
       'L-interfaċċa tbiddel il-lingwa minnufih. Il-kontenut tal-preżentazzjoni ma jinbidilx.',
   'exportFolderSetting': 'Folder tal-esportazzjoni',
@@ -52,9 +48,6 @@ const _stringsMt = {
   'removeExportFolder': 'Neħħi l-folder tal-esportazzjoni',
   'exportFolderHelp':
       'L-esportazzjonijiet kollha (PDF/PPTX) jiġu ssejvjati hawn. Jekk mhux issettjat, l-esportazzjonijiet jiġu ssejvjati ħdejn il-fajl tal-preżentazzjoni.',
-  'cancel': 'Ikkanċella',
-  'close': 'Agħlaq',
-  'saveSettings': 'Issejvja',
   'exportDialogTitle': 'Esporta',
   'exportAgain': 'Esporta mill-ġdid',
   'exportIntro':
@@ -242,7 +235,6 @@ const _dutchSourceMt = {
   'Onbereikbaar': 'Ma jintlaħaqx',
   'Infrastructuur': 'Infrastruttura',
   'Mobiel': 'Mobbli',
-  'Overig': 'Ieħor',
   '(leeg)': '(vojt)',
   'Audio': 'Awdjo',
   'Bijschrift': 'Didaskalija',
@@ -340,7 +332,6 @@ const _dutchSourceMt = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Parir: frażi twila ta\' password hija aktar sigura minn password qasira b\'simboli.',
   'Versleuteld pakket': 'Pakkett kriptat',
-  'Wachtwoord': 'Password',
   'Wachtwoord gekopieerd naar klembord.':
       'Il-password ġiet ikkupjata fil-clipboard.',
   'Wachtwoord tonen': 'Uri l-password',
@@ -398,9 +389,7 @@ const _dutchSourceMt = {
   'Instelling opslaan is mislukt.': 'L-issejvjar tas-setting falla.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: il-verżjoni tal-web tista\' ġġib biss minn servers li jippermettuh (CORS).',
-  'Geen': 'L-ebda',
   'Nieuw': 'Ġdid',
-  'Verwijderen': 'Ħassar',
   'Herstellen': 'Irkupra',
   'Opslaan en sluiten': 'Ħażen u agħlaq',
   'Niet opslaan': 'Taħżinx',
@@ -523,7 +512,6 @@ const _dutchSourceMt = {
   'Slides importeren': 'Importa slides',
   'Importeren': 'Importa',
   'Klaar': 'Lest',
-  'Toevoegen': 'Żid',
   'Toegevoegd': 'Miżjud',
   'Selecteer alles': 'Agħżel kollox',
   'Deselecteer alles': 'Neħħi l-għażla ta\' kollox',
@@ -577,7 +565,6 @@ const _dutchSourceMt = {
       'Separati bil-virgola, eż. kwartali, ċifri, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Dawn id-dettalji jinħażnu fil-Markdown u jistgħu jitfittxu meta tiftaħ.',
-  'App-thema': 'Tema tal-app',
   'Look-and-feel': 'Dehra u sensazzjoni',
   'Kopie maken en aanpassen': 'Oħloq u ppersonalizza kopja',
   'Thema verwijderen': 'Ħassar it-tema',
@@ -805,7 +792,6 @@ const _dutchSourceMt = {
       'It-tweġiba tas-server kienet kbira wisq',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL tas-server',
-  'Gebruikersnaam': 'Isem tal-utent',
   'App-wachtwoord': 'Password tal-app',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Oħloq password tal-app għal dan f\'Nextcloud',
@@ -829,7 +815,6 @@ const _dutchSourceMt = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Bħala pakkett .ocideck (fajl wieħed, bl-assets)',
   'Als losse .md plus afbeeldingen': 'Bħala .md separat flimkien mal-immaġni',
-  'Opslaan': 'Issalva',
   'Presenteren': 'Qed tippreżenta',
   'Tijden-overzicht tonen na afloop':
       'Uri l-ħarsa ġenerali tal-ħinijiet fl-aħħar',
@@ -916,7 +901,6 @@ const _dutchSourceMt = {
       'It-test tat-titlu għandu kuntrast żgħir wisq mal-immaġni tal-isfond',
   'Herstel': 'Irranġa',
   'Tijdlijn': 'Timeline',
-  'Indeling': 'Tqassim',
   'Automatisch': 'Awtomatiku',
   'Horizontaal': 'Orizzontali',
   'Verticaal': 'Vertikali',
@@ -1094,13 +1078,11 @@ const _dutchSourceMt = {
   'Geen slides gemeten.': 'L-ebda slajd ma tkejjel.',
   'Tijden gekopieerd naar klembord.': 'Il-ħinijiet ikkupjati fil-clipboard.',
   'Kopieer': 'Ikkopja',
-  'Sluiten': 'Agħlaq',
   'Tekstgrootte van de interface': 'Daqs tat-test tal-interface',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Ikabbar it-test kollu tal-editur sa 200%. L-islajds infushom ma jinbidlux.',
   'Breedte van het slidepaneel': 'Wisa\' tal-pannell tal-islajds',
   'Pijltjestoetsen passen de breedte aan': 'Il-vleġeġ jaġġustaw il-wisa\'',
-  'Annuleren': 'Ikkanċella',
   'Checklist': 'Lista ta\' verifika',
   'Voortgangsgrafiek tonen': 'Uri l-grafika tal-progress',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1346,7 +1328,6 @@ const _dutchSourceMt = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Tikkalma l-isfond wara t-titlu u s-sottotitlu.',
   'Licht': 'Ċar',
-  'Donker': 'Skur',
   'Pen (D)': 'Pinna (D)',
   'Markeerstift (T)': 'Evidenzjatur (T)',
   'Gum (E / Shift+E)': 'Gomma (E / Shift+E)',
@@ -1714,7 +1695,6 @@ const _dutchSourceAddMt = <String, String>{
       'Ma ħađix. Xejn ma ntbagħat — erġa\' pprova.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'L-indirizz tal-email tiegħek jipprova biss li tista\' tilħaq il-kaxxa tal-posta — mhuwiex kont u xejn ma jintbagħat sakemm inti nnifsek tikkonferma.',
-  'Je e-mailadres': 'L-email tiegħek',
   'Code aanvragen': 'Itlob kodiċi',
   'Opnieuw versturen': 'Ibgħat mill-ġdid',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2974,7 +2954,6 @@ const _dutchSourceAddMt = <String, String>{
   'Aantal minuten': 'Numru ta\' minuti',
   'Aantal pogingen': 'Numru ta\' tentattivi',
   'Accountbewerkingen': 'Operazzjonijiet ta\' kont',
-  'Accountgegevens': 'Informazzjoni tal-kont',
   'Accountnummer': 'Numru tal-kont',
   'Accountnummer waarop de actie gericht was':
       'Numru tal-kont immirat mill-azzjoni',
@@ -4284,7 +4263,6 @@ const _dutchSourceAddMt = <String, String>{
   'Chat': 'Chat',
   'Chat sluiten': 'Agħlaq iċ-chat',
   'Bericht…': 'Messaġġ…',
-  'Versturen': 'Ibgħat',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Għad m\'hemm l-ebda messaġġ. Għid xi ħaġa lill-koawturi tiegħek.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4681,8 +4659,6 @@ const _dutchSourceAddMt = <String, String>{
   'Rapportages voorbereiden': 'Ipprepara rapporti',
   'Rapporttitel': 'Titolu tar-rapport',
   'Stap': 'Pass',
-  'Taal': 'Lingwa',
-  'Terug': 'Lura',
   'Veranderingen in monitoring': 'Bidliet fil-monitoraġġ',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Kejl preċedenti utli huwa nieqes għal organizzazzjoni waħda jew aktar.',
@@ -6078,7 +6054,6 @@ const _dutchSourceAddMt = <String, String>{
       'Iħallik tbiddel it-tabella quddiem l-udjenza waqt il-preżentazzjoni. Mitfi awtomatikament.',
   'Automatisch doorgaan': 'Kompli awtomatikament',
   'Persoonsgegevens': 'Data personali',
-  'Wijzigen': 'Ibdel',
   'Automatisch afspelen': 'Daqq awtomatikament',
   'Melden': 'Irrapporta',
   'Geaccepteerd': 'Aċċettat',

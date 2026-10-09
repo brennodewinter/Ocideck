@@ -11,7 +11,6 @@ const _stringsLv = {
   'presentFullscreen': 'Rādīt (pilnekrāns) · P prezentētāja skatam',
   'visualMode': 'Vizuālais režīms',
   'markdownMode': 'Markdown režīms',
-  'save': 'Saglabāt',
   'more': 'Vairāk',
   'export': 'Eksportēt',
   'exportReady': 'Eksportēt (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsLv = {
   'importUrl': 'Importēt no URL…',
   'findReplace': 'Meklēt un aizstāt',
   'fullDeckPreview': 'Skatīt visu deku',
-  'settings': 'Iestatījumi',
   'settingsGeneral': 'Vispārīgi',
   'settingsColors': 'Krāsas',
-  'language': 'Valoda',
-  'applicationLanguage': 'Lietotnes valoda',
   'languageHelp':
       'Saskarne uzreiz maina valodu. Prezentācijas saturs paliek nemainīgs.',
   'exportFolderSetting': 'Eksporta mape',
@@ -51,9 +47,6 @@ const _stringsLv = {
   'removeExportFolder': 'Noņemt eksporta mapi',
   'exportFolderHelp':
       'Visi eksporti (PDF/PPTX) tiek saglabāti šeit. Ja nav iestatīts, eksporti tiek saglabāti blakus prezentācijas failam.',
-  'cancel': 'Atcelt',
-  'close': 'Aizvērt',
-  'saveSettings': 'Saglabāt',
   'exportDialogTitle': 'Eksportēt',
   'exportAgain': 'Eksportēt vēlreiz',
   'exportIntro':
@@ -240,7 +233,6 @@ const _dutchSourceLv = {
   'Onbereikbaar': 'Nesasniedzams',
   'Infrastructuur': 'Infrastruktūra',
   'Mobiel': 'Mobilais',
-  'Overig': 'Cits',
   '(leeg)': '(tukšs)',
   'Audio': 'Audio',
   'Bijschrift': 'Paraksts',
@@ -338,7 +330,6 @@ const _dutchSourceLv = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Padoms: gara paroles frāze ir drošāka nekā īsa parole ar simboliem.',
   'Versleuteld pakket': 'Šifrēta pakotne',
-  'Wachtwoord': 'Parole',
   'Wachtwoord gekopieerd naar klembord.': 'Parole nokopēta starpliktuvē.',
   'Wachtwoord tonen': 'Rādīt paroli',
   'Wachtwoord verbergen': 'Slēpt paroli',
@@ -394,9 +385,7 @@ const _dutchSourceLv = {
   'Instelling opslaan is mislukt.': 'Neizdevās saglabāt iestatījumu.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Piezīme: tīmekļa versija var ielādēt tikai no serveriem, kas to atļauj (CORS).',
-  'Geen': 'Nav',
   'Nieuw': 'Jauns',
-  'Verwijderen': 'Dzēst',
   'Herstellen': 'Atjaunot',
   'Opslaan en sluiten': 'Saglabāt un aizvērt',
   'Niet opslaan': 'Nesaglabāt',
@@ -518,7 +507,6 @@ const _dutchSourceLv = {
   'Slides importeren': 'Importēt slaidus',
   'Importeren': 'Importēt',
   'Klaar': 'Gatavs',
-  'Toevoegen': 'Pievienot',
   'Toegevoegd': 'Pievienots',
   'Selecteer alles': 'Atlasīt visu',
   'Deselecteer alles': 'Noņemt atlasi no visa',
@@ -571,7 +559,6 @@ const _dutchSourceLv = {
       'Ar komatu atdalīti, piem., ceturksnis, skaitļi, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Šie dati tiek saglabāti Markdown formātā un ir meklējami, atverot failu.',
-  'App-thema': 'Lietotnes tēma',
   'Look-and-feel': 'Izskats un noskaņa',
   'Kopie maken en aanpassen': 'Izveidot kopiju un pielāgot',
   'Thema verwijderen': 'Dzēst tēmu',
@@ -797,7 +784,6 @@ const _dutchSourceLv = {
   'Het antwoord van de server was te groot': 'Servera atbilde bija pārāk liela',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Servera URL',
-  'Gebruikersnaam': 'Lietotājvārds',
   'App-wachtwoord': 'Lietotnes parole',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Izveidojiet tam lietotnes paroli Nextcloud',
@@ -820,7 +806,6 @@ const _dutchSourceLv = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Kā .ocideck pakotni (viens fails, ar līdzekļiem)',
   'Als losse .md plus afbeeldingen': 'Kā atsevišķu .md plus attēlus',
-  'Opslaan': 'Saglabāt',
   'Presenteren': 'Prezentē',
   'Tijden-overzicht tonen na afloop': 'Rādīt laika pārskatu pēc beigām',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -906,7 +891,6 @@ const _dutchSourceLv = {
       'Virsraksta tekstam ir pārāk mazs kontrasts ar fona attēlu',
   'Herstel': 'Labot',
   'Tijdlijn': 'Laika līnija',
-  'Indeling': 'Izkārtojums',
   'Automatisch': 'Automātiski',
   'Horizontaal': 'Horizontāli',
   'Verticaal': 'Vertikāli',
@@ -1083,13 +1067,11 @@ const _dutchSourceLv = {
   'Geen slides gemeten.': 'Nav izmērītu slaidu.',
   'Tijden gekopieerd naar klembord.': 'Laiki nokopēti starpliktuvē.',
   'Kopieer': 'Kopēt',
-  'Sluiten': 'Aizvērt',
   'Tekstgrootte van de interface': 'Saskarnes teksta izmērs',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Palielina visu redaktora tekstu līdz 200%. Paši slaidi netiek mainīti.',
   'Breedte van het slidepaneel': 'Slaidu paneļa platums',
   'Pijltjestoetsen passen de breedte aan': 'Bulttaustiņi pielāgo platumu',
-  'Annuleren': 'Atcelt',
   'Checklist': 'Kontrolsaraksts',
   'Voortgangsgrafiek tonen': 'Rādīt progresa diagrammu',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1333,7 +1315,6 @@ const _dutchSourceLv = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Nomierina fonu aiz virsraksta un apakšvirsraksta.',
   'Licht': 'Gaišs',
-  'Donker': 'Tumšs',
   'Pen (D)': 'Pildspalva (D)',
   'Markeerstift (T)': 'Marķieris (T)',
   'Gum (E / Shift+E)': 'Dzēšgumija (E / Shift+E)',
@@ -1693,7 +1674,6 @@ const _dutchSourceAddLv = <String, String>{
       'Tas neizdevās. Nekas netika nosūtīts — mēģini vēlreiz.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Tava e-pasta adrese pierāda tikai to, ka vari piekļūt pastkastei — tā nav konts, un nekas netiek nosūtīts, pirms tu pats apstiprini.',
-  'Je e-mailadres': 'Tava e-pasta adrese',
   'Code aanvragen': 'Pieprasīt kodu',
   'Opnieuw versturen': 'Sūtīt vēlreiz',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2933,7 +2913,6 @@ const _dutchSourceAddLv = <String, String>{
   'Aantal minuten': 'Minūšu skaits',
   'Aantal pogingen': 'Mēģinājumu skaits',
   'Accountbewerkingen': 'Kontu operācijas',
-  'Accountgegevens': 'Konta informācija',
   'Accountnummer': 'Konta numurs',
   'Accountnummer waarop de actie gericht was':
       'Konta numurs, uz kuru attiecas darbība',
@@ -4225,7 +4204,6 @@ const _dutchSourceAddLv = <String, String>{
   'Chat': 'Tērzēšana',
   'Chat sluiten': 'Aizvērt tērzēšanu',
   'Bericht…': 'Ziņa…',
-  'Versturen': 'Sūtīt',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Vēl nav ziņu. Pasaki kaut ko saviem līdzautoriem.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4618,8 +4596,6 @@ const _dutchSourceAddLv = <String, String>{
   'Rapportages voorbereiden': 'Sagatavot atskaites',
   'Rapporttitel': 'Ziņojuma nosaukums',
   'Stap': 'Solis',
-  'Taal': 'Valoda',
-  'Terug': 'Atpakaļ',
   'Veranderingen in monitoring': 'Izmaiņas monitoringā',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Vienai vai vairākām organizācijām trūkst noderīga iepriekšēja mērījuma.',
@@ -5997,7 +5973,6 @@ const _dutchSourceAddLv = <String, String>{
       'Ļauj tev mainīt tabulu publikas priekšā prezentācijas laikā. Pēc noklusējuma izslēgts.',
   'Automatisch doorgaan': 'Automātiski turpināt',
   'Persoonsgegevens': 'Personas dati',
-  'Wijzigen': 'Mainīt',
   'Automatisch afspelen': 'Atskaņot automātiski',
   'Melden': 'Ziņot',
   'Geaccepteerd': 'Pieņemts',

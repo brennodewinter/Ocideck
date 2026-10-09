@@ -23,6 +23,11 @@ All notable changes to OciDeck are documented in this file.
   plek die eerst buiten beeld lag. De scroll stopt bij loslaten,
   annuleren, het verlaten van de rand en het einde van de lijst, en de
   invoegmarkering volgt de aanwijzer tijdens het scrollen mee.
+- **De taalset en productneutrale vertalingen komen uit AppFoundation.**
+  OciDeck en Limi gebruiken daardoor dezelfde 31 taalnamen, dezelfde
+  basistermen en dezelfde taalkeuze in Instellingen. OciDeck houdt zijn
+  productspecifieke vertalingen en exporttaal lokaal; presentatiebestanden en
+  opgeslagen instellingen veranderen niet.
 - **Dia's neerzetten op expliciete invoegposities in het slide-overzicht**
   (#2362). Dropbestemmingen zijn nu invoegslots: vóór de eerste dia, tussen
   elke twee dia's en achter de laatste — niet langer "op" een kaart mikken.

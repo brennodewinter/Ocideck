@@ -12,7 +12,6 @@ const _stringsRo = {
       'Prezintă (ecran complet) · P pentru vizualizarea prezentatorului',
   'visualMode': 'Mod vizual',
   'markdownMode': 'Mod Markdown',
-  'save': 'Salvează',
   'more': 'Mai multe',
   'export': 'Exportă',
   'exportReady': 'Exportă (PDF/PPTX/HTML)',
@@ -39,11 +38,8 @@ const _stringsRo = {
   'importUrl': 'Importă din URL…',
   'findReplace': 'Caută și înlocuiește',
   'fullDeckPreview': 'Vezi întregul deck',
-  'settings': 'Setări',
   'settingsGeneral': 'General',
   'settingsColors': 'Culori',
-  'language': 'Limbă',
-  'applicationLanguage': 'Limba aplicației',
   'languageHelp':
       'Interfața își schimbă limba imediat. Conținutul prezentării rămâne neschimbat.',
   'exportFolderSetting': 'Folder export',
@@ -52,9 +48,6 @@ const _stringsRo = {
   'removeExportFolder': 'Elimină folderul de export',
   'exportFolderHelp':
       'Toate exporturile (PDF/PPTX) se salvează aici. Dacă nu e setat, exporturile se salvează lângă fișierul prezentării.',
-  'cancel': 'Anulează',
-  'close': 'Închide',
-  'saveSettings': 'Salvează',
   'exportDialogTitle': 'Exportă',
   'exportAgain': 'Exportă din nou',
   'exportIntro':
@@ -243,7 +236,6 @@ const _dutchSourceRo = {
   'Onbereikbaar': 'Inaccesibil',
   'Infrastructuur': 'Infrastructură',
   'Mobiel': 'Mobil',
-  'Overig': 'Altul',
   '(leeg)': '(gol)',
   'Audio': 'Audio',
   'Bijschrift': 'Legendă',
@@ -341,7 +333,6 @@ const _dutchSourceRo = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Sfat: o frază de acces lungă este mai sigură decât o parolă scurtă cu simboluri.',
   'Versleuteld pakket': 'Pachet criptat',
-  'Wachtwoord': 'Parolă',
   'Wachtwoord gekopieerd naar klembord.': 'Parola a fost copiată în clipboard.',
   'Wachtwoord tonen': 'Afișează parola',
   'Wachtwoord verbergen': 'Ascunde parola',
@@ -397,9 +388,7 @@ const _dutchSourceRo = {
   'Instelling opslaan is mislukt.': 'Salvarea setării a eșuat.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Notă: versiunea web poate prelua doar de la servere care permit acest lucru (CORS).',
-  'Geen': 'Niciuna',
   'Nieuw': 'Nou',
-  'Verwijderen': 'Șterge',
   'Herstellen': 'Restaurează',
   'Opslaan en sluiten': 'Salvează și închide',
   'Niet opslaan': 'Nu salva',
@@ -521,7 +510,6 @@ const _dutchSourceRo = {
   'Slides importeren': 'Importă slide-uri',
   'Importeren': 'Importă',
   'Klaar': 'Gata',
-  'Toevoegen': 'Adaugă',
   'Toegevoegd': 'Adăugat',
   'Selecteer alles': 'Selectează tot',
   'Deselecteer alles': 'Deselectează tot',
@@ -574,7 +562,6 @@ const _dutchSourceRo = {
       'Separate prin virgulă, ex. trimestrial, cifre, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Aceste detalii sunt salvate în Markdown și pot fi căutate la deschidere.',
-  'App-thema': 'Tema aplicației',
   'Look-and-feel': 'Aspect și senzație',
   'Kopie maken en aanpassen': 'Creează și personalizează o copie',
   'Thema verwijderen': 'Șterge tema',
@@ -804,7 +791,6 @@ const _dutchSourceRo = {
       'Răspunsul serverului a fost prea mare',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL server',
-  'Gebruikersnaam': 'Nume de utilizator',
   'App-wachtwoord': 'Parolă de aplicație',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Creează o parolă de aplicație pentru aceasta în Nextcloud',
@@ -828,7 +814,6 @@ const _dutchSourceRo = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Ca pachet .ocideck (un fișier, cu resurse)',
   'Als losse .md plus afbeeldingen': 'Ca .md separat plus imagini',
-  'Opslaan': 'Salvează',
   'Presenteren': 'Prezentare',
   'Tijden-overzicht tonen na afloop':
       'Arată prezentarea generală a timpilor la final',
@@ -915,7 +900,6 @@ const _dutchSourceRo = {
       'Textul titlului are prea puțin contrast cu imaginea de fundal',
   'Herstel': 'Corectează',
   'Tijdlijn': 'Cronologie',
-  'Indeling': 'Aranjare',
   'Automatisch': 'Automat',
   'Horizontaal': 'Orizontal',
   'Verticaal': 'Vertical',
@@ -1094,13 +1078,11 @@ const _dutchSourceRo = {
   'Geen slides gemeten.': 'Niciun slide măsurat.',
   'Tijden gekopieerd naar klembord.': 'Timpi copiați în clipboard.',
   'Kopieer': 'Copiază',
-  'Sluiten': 'Închide',
   'Tekstgrootte van de interface': 'Dimensiunea textului interfeței',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Mărește tot textul din editor până la maximum 200%. Slide-urile în sine nu se modifică.',
   'Breedte van het slidepaneel': 'Lățimea panoului de slide-uri',
   'Pijltjestoetsen passen de breedte aan': 'Tastele săgeți ajustează lățimea',
-  'Annuleren': 'Anulează',
   'Checklist': 'Listă de sarcini',
   'Voortgangsgrafiek tonen': 'Afișează graficul de progres',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1344,7 +1326,6 @@ const _dutchSourceRo = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Liniștește fundalul din spatele titlului și subtitlului.',
   'Licht': 'Deschis',
-  'Donker': 'Închis',
   'Pen (D)': 'Stilou (D)',
   'Markeerstift (T)': 'Evidențiator (T)',
   'Gum (E / Shift+E)': 'Radieră (E / Shift+E)',
@@ -1713,7 +1694,6 @@ const _dutchSourceAddRo = <String, String>{
       'N-a funcționat. Nimic nu a fost trimis — încearcă din nou.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Adresa ta de e-mail dovedește doar că poți accesa căsuța poștală — nu este un cont și nimic nu se trimite până nu confirmi tu însuți.',
-  'Je e-mailadres': 'Adresa ta de e-mail',
   'Code aanvragen': 'Cere codul',
   'Opnieuw versturen': 'Retrimite',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2972,7 +2952,6 @@ const _dutchSourceAddRo = <String, String>{
   'Aantal minuten': 'Numărul de minute',
   'Aantal pogingen': 'Numărul de încercări',
   'Accountbewerkingen': 'Operațiuni de cont',
-  'Accountgegevens': 'Informații despre cont',
   'Accountnummer': 'Numărul contului',
   'Accountnummer waarop de actie gericht was':
       'Numărul de cont vizat de acțiune',
@@ -4281,7 +4260,6 @@ const _dutchSourceAddRo = <String, String>{
   'Chat': 'Chat',
   'Chat sluiten': 'Închide chatul',
   'Bericht…': 'Mesaj…',
-  'Versturen': 'Trimite',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Încă nu există mesaje. Spune ceva coautorilor tăi.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4676,8 +4654,6 @@ const _dutchSourceAddRo = <String, String>{
   'Rapportages voorbereiden': 'Pregătiți rapoarte',
   'Rapporttitel': 'Titlul raportului',
   'Stap': 'Pas',
-  'Taal': 'Limbă',
-  'Terug': 'Spate',
   'Veranderingen in monitoring': 'Modificări în monitorizare',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'O măsurătoare anterioară utilă lipsește pentru una sau mai multe organizații.',
@@ -6071,7 +6047,6 @@ const _dutchSourceAddRo = <String, String>{
       'Îți permite să modifici tabelul în fața publicului în timpul prezentării. Dezactivat implicit.',
   'Automatisch doorgaan': 'Avansează automat',
   'Persoonsgegevens': 'Date personale',
-  'Wijzigen': 'Modifică',
   'Automatisch afspelen': 'Redă automat',
   'Melden': 'Raportează',
   'Geaccepteerd': 'Acceptat',

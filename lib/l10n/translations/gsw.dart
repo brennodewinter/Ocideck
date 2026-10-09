@@ -11,7 +11,6 @@ const _stringsGsw = {
   'presentFullscreen': 'Presentiere (Vollbild) · P für d Presenter-Ansicht',
   'visualMode': 'Visuelle Modus',
   'markdownMode': 'Markdown-Modus',
-  'save': 'Speichere',
   'more': 'Mee',
   'export': 'Exportiere',
   'exportReady': 'Exportiere (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsGsw = {
   'importUrl': 'Über URL importiere…',
   'findReplace': 'Sueche und ersetze',
   'fullDeckPreview': 'Ganze Deck aaluege',
-  'settings': 'Istellige',
   'settingsGeneral': 'Allgemein',
   'settingsColors': 'Farbe',
-  'language': 'Sproch',
-  'applicationLanguage': 'App-Sproch',
   'languageHelp':
       'S Interface wächslet grad d Sproch. De Präsentationsinhalt blibt unveränderet.',
   'exportFolderSetting': 'Export-Ordner',
@@ -51,9 +47,6 @@ const _stringsGsw = {
   'removeExportFolder': 'Export-Ordner entferne',
   'exportFolderHelp':
       'Alli Exports (PDF/PPTX) werded do gspeicheret. Wänn nöd istellt, chunt de Export näbe d Präsentationsdatei.',
-  'cancel': 'Abbräche',
-  'close': 'Zuemache',
-  'saveSettings': 'Speichere',
   'exportDialogTitle': 'Exportiere',
   'exportAgain': 'Nomol exportiere',
   'exportIntro':
@@ -241,7 +234,6 @@ const _dutchSourceGsw = {
   'Onbereikbaar': 'Nöd erreichbar',
   'Infrastructuur': 'Infrastruktur',
   'Mobiel': 'Mobil',
-  'Overig': 'Anders',
   '(leeg)': '(leer)',
   'Audio': 'Audio',
   'Bijschrift': 'Bildlegände',
@@ -340,7 +332,6 @@ const _dutchSourceGsw = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Tipp: en langi Passwortphrase isch sicherer als es churzes Passwort mit Zeiche.',
   'Versleuteld pakket': 'Verschlüsslets Päckli',
-  'Wachtwoord': 'Passwort',
   'Wachtwoord gekopieerd naar klembord.': 'Passwort i d Zwischeablag kopiert.',
   'Wachtwoord tonen': 'Passwort zeige',
   'Wachtwoord verbergen': 'Passwort verstecke',
@@ -397,9 +388,7 @@ const _dutchSourceGsw = {
   'Instelling opslaan is mislukt.': 'Iistellig spychere isch fehlgschlage.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Achtig: d Webversion cha nume vo Server abhole, wo das erlaube (CORS).',
-  'Geen': 'Kes',
   'Nieuw': 'Nöi',
-  'Verwijderen': 'Lösche',
   'Herstellen': 'Widerhärstelle',
   'Opslaan en sluiten': 'Spichere und zuemache',
   'Niet opslaan': 'Nöd spichere',
@@ -522,7 +511,6 @@ const _dutchSourceGsw = {
   'Slides importeren': 'Slides importiere',
   'Importeren': 'Importiere',
   'Klaar': 'Fertig',
-  'Toevoegen': 'Zuefüege',
   'Toegevoegd': 'Zuegfüegt',
   'Selecteer alles': 'Alles uuswähle',
   'Deselecteer alles': 'Alles abwähle',
@@ -576,7 +564,6 @@ const _dutchSourceGsw = {
       'Mit Komma trännt, z.B. quartalswiis, Zahle, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Die Aagabe wärded im Markdown gspicheret und sind bim Uufmache durchsuechbar.',
-  'App-thema': 'App-Thema',
   'Look-and-feel': 'Ussgseh und Gfüehl',
   'Kopie maken en aanpassen': 'Es Duplikat mache und aapasse',
   'Thema verwijderen': 'Thema lösche',
@@ -801,7 +788,6 @@ const _dutchSourceGsw = {
       'D Antwort vom Server isch z gross gsi',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Server-URL',
-  'Gebruikersnaam': 'Benutzername',
   'App-wachtwoord': 'App-Passwort',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Erstell defür es App-Passwort in Nextcloud',
@@ -825,7 +811,6 @@ const _dutchSourceGsw = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Als .ocideck-Paket (ei Datei, mit Assets)',
   'Als losse .md plus afbeeldingen': 'Als separati .md plus Bilder',
-  'Opslaan': 'Speichere',
   'Presenteren': 'Präsentiere',
   'Tijden-overzicht tonen na afloop': 'Ziit-Überblick nach em Schluss zeige',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -911,7 +896,6 @@ const _dutchSourceGsw = {
       'De Titeltext het z wenig Kontrast mit em Hintergrundbild',
   'Herstel': 'Behäbe',
   'Tijdlijn': 'Ziitachse',
-  'Indeling': 'Ufteilig',
   'Automatisch': 'Automatisch',
   'Horizontaal': 'Horizontal',
   'Verticaal': 'Vertikal',
@@ -1087,13 +1071,11 @@ const _dutchSourceGsw = {
   'Geen slides gemeten.': 'Kei Slides gmässe.',
   'Tijden gekopieerd naar klembord.': 'Ziite is Zwischeablag kopiert.',
   'Kopieer': 'Kopiere',
-  'Sluiten': 'Zuemache',
   'Tekstgrootte van de interface': 'Textgrössi vo de Oberflächi',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Vergrösseret alle Editortext bis uf 200%. D Slides sälber ändere sich nöd.',
   'Breedte van het slidepaneel': 'Breiti vom Slidepanel',
   'Pijltjestoetsen passen de breedte aan': 'Pfiiltaschte passe d Breiti a',
-  'Annuleren': 'Abbräche',
   'Checklist': 'Ufgabe-Checklischte',
   'Voortgangsgrafiek tonen': 'Fortschrittsgrafik zeige',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1337,7 +1319,6 @@ const _dutchSourceGsw = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Macht dr Hintergrund ruehiger hinterem Titel und Untertitel.',
   'Licht': 'Hell',
-  'Donker': 'Dunkel',
   'Pen (D)': 'Stift (D)',
   'Markeerstift (T)': 'Leuchtstift (T)',
   'Gum (E / Shift+E)': 'Gummi (E / Shift+E)',
@@ -1700,7 +1681,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Das het nöd klappet. Es isch nüt gschickt worde — probiers noemal.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Dini E-Mail-Adrässe bewiist nur, dass du s\'Poschtfach erreiche chasch — es isch kein Account und es wird nüt gschickt, bis du sälber bestätigisch.',
-  'Je e-mailadres': 'Dini E-Mail-Adrässe',
   'Code aanvragen': 'Code aafordere',
   'Opnieuw versturen': 'Noemal schicke',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2957,7 +2937,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Aantal minuten': 'Anzahl der Minuten',
   'Aantal pogingen': 'Anzahl der Versuche',
   'Accountbewerkingen': 'Kontovorgänge',
-  'Accountgegevens': 'Kontoinformationen',
   'Accountnummer': 'Kontonummer',
   'Accountnummer waarop de actie gericht was':
       'Kontonummer, auf die die Aktion abzielt',
@@ -4253,7 +4232,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Chat': 'Chat',
   'Chat sluiten': 'Chat zuemache',
   'Bericht…': 'Nachricht…',
-  'Versturen': 'Schicke',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Na kei Nachrichte. Sag dine Mitautore öppis.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4646,8 +4624,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Rapportages voorbereiden': 'Bricht vorbereite',
   'Rapporttitel': 'Brichttitel',
   'Stap': 'Schritt',
-  'Taal': 'Sproch',
-  'Terug': 'Zrugg',
   'Veranderingen in monitoring': 'Änderige bim Monitoring',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Für eini oder mehri Organisatione fählt e bruchbari früehri Messig.',
@@ -6027,7 +6003,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Lat di d Tabäle während em Präsentiere vor em Publikum ändere. Standardmässig us.',
   'Automatisch doorgaan': 'Automatisch wiiter',
   'Persoonsgegevens': 'Persönlichi Date',
-  'Wijzigen': 'Ändere',
   'Automatisch afspelen': 'Automatisch abspiele',
   'Melden': 'Mälde',
   'Geaccepteerd': 'Akzeptiert',

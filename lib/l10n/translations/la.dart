@@ -12,7 +12,6 @@ const _stringsLa = {
       'Praesentare (tota tabula) · P pro conspectu praesentantis',
   'visualMode': 'Modus visualis',
   'markdownMode': 'Modus Markdown',
-  'save': 'Servare',
   'more': 'Plura',
   'export': 'Exportare',
   'exportReady': 'Exportare (PDF/PPTX/HTML)',
@@ -40,11 +39,8 @@ const _stringsLa = {
   'importUrl': 'Importare ex URL…',
   'findReplace': 'Quaerere et substituere',
   'fullDeckPreview': 'Totum acervum inspicere',
-  'settings': 'Optiones',
   'settingsGeneral': 'Generalia',
   'settingsColors': 'Colores',
-  'language': 'Lingua',
-  'applicationLanguage': 'Lingua applicationis',
   'languageHelp':
       'Interfacies statim linguam mutat. Contentus praesentationis immutatus manet.',
   'exportFolderSetting': 'Directorium exportationis',
@@ -53,9 +49,6 @@ const _stringsLa = {
   'removeExportFolder': 'Directorium exportationis removere',
   'exportFolderHelp':
       'Omnes exportationes (PDF/PPTX) hic servantur. Si non constitutum, exportationes iuxta plicam praesentationis servantur.',
-  'cancel': 'Cancellare',
-  'close': 'Claudere',
-  'saveSettings': 'Servare',
   'exportDialogTitle': 'Exportatio',
   'exportAgain': 'Denuo exportare',
   'exportIntro':
@@ -243,7 +236,6 @@ const _dutchSourceLa = {
   'Onbereikbaar': 'Inaccessibile',
   'Infrastructuur': 'Infrastructura',
   'Mobiel': 'Mobile',
-  'Overig': 'Aliud',
   '(leeg)': '(vacuum)',
   'Audio': 'Audio',
   'Bijschrift': 'Inscriptio',
@@ -340,7 +332,6 @@ const _dutchSourceLa = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Consilium: sententia longa tutior est quam tessera brevis cum signis.',
   'Versleuteld pakket': 'Fasciculus cifratus',
-  'Wachtwoord': 'Tessera',
   'Wachtwoord gekopieerd naar klembord.': 'Tessera in tabellam translata est.',
   'Wachtwoord tonen': 'Tesseram monstrare',
   'Wachtwoord verbergen': 'Tesseram celare',
@@ -396,9 +387,7 @@ const _dutchSourceLa = {
   'Instelling opslaan is mislukt.': 'Optio servari non potuit.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: versio interretialis solum a servis id permittentibus accersere potest (CORS).',
-  'Geen': 'Nullum',
   'Nieuw': 'Novum',
-  'Verwijderen': 'Delere',
   'Herstellen': 'Restituere',
   'Opslaan en sluiten': 'Servare et claudere',
   'Niet opslaan': 'Ne serves',
@@ -521,7 +510,6 @@ const _dutchSourceLa = {
   'Slides importeren': 'Paginas importare',
   'Importeren': 'Importare',
   'Klaar': 'Peractum',
-  'Toevoegen': 'Addere',
   'Toegevoegd': 'Additum',
   'Selecteer alles': 'Omnia seligere',
   'Deselecteer alles': 'Omnia deseligere',
@@ -574,7 +562,6 @@ const _dutchSourceLa = {
       'Commate separata, e.g. trimestre, numeri, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Haec singula in Markdown servantur et perquisibilia sunt dum aperis.',
-  'App-thema': 'Thema applicationis',
   'Look-and-feel': 'Aspectus et sensus',
   'Kopie maken en aanpassen': 'Exemplar creare et accommodare',
   'Thema verwijderen': 'Thema delere',
@@ -804,7 +791,6 @@ const _dutchSourceLa = {
       'Responsum servatoris nimis magnum erat',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL servatoris',
-  'Gebruikersnaam': 'Nomen usoris',
   'App-wachtwoord': 'Tessera applicationis',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Ad hoc tesseram applicationis in Nextcloud crea',
@@ -828,7 +814,6 @@ const _dutchSourceLa = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Ut fasciculus .ocideck (unus fasciculus, cum bonis)',
   'Als losse .md plus afbeeldingen': 'Ut separatum .md cum imaginibus',
-  'Opslaan': 'Servare',
   'Presenteren': 'Praesentans',
   'Tijden-overzicht tonen na afloop': 'Conspectum temporum postea monstrare',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -914,7 +899,6 @@ const _dutchSourceLa = {
       'Textus tituli nimis parvam contrarietatem cum imagine fundi habet',
   'Herstel': 'Corrigere',
   'Tijdlijn': 'Temporum linea',
-  'Indeling': 'Dispositio',
   'Automatisch': 'Automatice',
   'Horizontaal': 'Horizontaliter',
   'Verticaal': 'Verticaliter',
@@ -1090,14 +1074,12 @@ const _dutchSourceLa = {
   'Tijden gekopieerd naar klembord.':
       'Tempora in tabulam scriptoriam exscripta.',
   'Kopieer': 'Exscribe',
-  'Sluiten': 'Claude',
   'Tekstgrootte van de interface': 'Magnitudo textus interfaciei',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Auget omnem textum editoris usque ad 200%. Ipsa schemata non afficiuntur.',
   'Breedte van het slidepaneel': 'Latitudo tabellae schematum',
   'Pijltjestoetsen passen de breedte aan':
       'Tasti sagittarum latitudinem adaptant',
-  'Annuleren': 'Abrogare',
   'Checklist': 'Index munerum',
   'Voortgangsgrafiek tonen': 'Diagramma progressus ostendere',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1342,7 +1324,6 @@ const _dutchSourceLa = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Fundum post titulum et subtitulum tranquillius reddit.',
   'Licht': 'Clarum',
-  'Donker': 'Obscurum',
   'Pen (D)': 'Calamus (D)',
   'Markeerstift (T)': 'Stilus notans (T)',
   'Gum (E / Shift+E)': 'Deletrix (E / Shift+E)',
@@ -1711,7 +1692,6 @@ const _dutchSourceAddLa = <String, String>{
       'Non successit. Nihil missum est — iterum tempta.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Directio tua solum probat te ad arcam litterarum accedere posse — non est ratio tua nec quidquam mittitur antequam ipse confirmes.',
-  'Je e-mailadres': 'Directio tua',
   'Code aanvragen': 'Codicem pete',
   'Opnieuw versturen': 'Iterum mitte',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2953,7 +2933,6 @@ const _dutchSourceAddLa = <String, String>{
   'Aantal minuten': 'Numerus minuta',
   'Aantal pogingen': 'Numerus conatusque prohibebit',
   'Accountbewerkingen': 'Ratio res',
-  'Accountgegevens': 'Ratio notitia',
   'Accountnummer': 'Ratio numerus',
   'Accountnummer waarop de actie gericht was':
       'Propter numerum targeted per actum',
@@ -4255,7 +4234,6 @@ const _dutchSourceAddLa = <String, String>{
   'Chat': 'Colloquium',
   'Chat sluiten': 'Claude colloquium',
   'Bericht…': 'Nuntius…',
-  'Versturen': 'Mitte',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Nulla adhuc nuntia. Dic aliquid coauctoribus tuis.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4644,8 +4622,6 @@ const _dutchSourceAddLa = <String, String>{
   'Rapportages voorbereiden': 'Para tradit',
   'Rapporttitel': 'Titulus relationis',
   'Stap': 'Gradus',
-  'Taal': 'Linguae',
-  'Terug': 'Retro',
   'Veranderingen in monitoring': 'Mutationes in magna',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Mensura prior utilis pro una vel pluribus Institutis deest.',
@@ -6021,7 +5997,6 @@ const _dutchSourceAddLa = <String, String>{
       'Sinit te tabulam coram spectatoribus mutare dum ostenditur. Ex more exstinctum.',
   'Automatisch doorgaan': 'Sponte procedere',
   'Persoonsgegevens': 'Data personalia',
-  'Wijzigen': 'Mutare',
   'Automatisch afspelen': 'Sponte canere',
   'Melden': 'Nuntiare',
   'Geaccepteerd': 'Acceptum',

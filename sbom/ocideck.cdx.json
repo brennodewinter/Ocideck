@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:300bf4b3-351d-5879-8a56-5739b7876962",
+  "serialNumber": "urn:uuid:dda61b8d-d3c0-53d0-899b-d811fc91a533",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-08T18:04:29.885494Z",
+    "timestamp": "2026-10-09T08:29:42.556318Z",
     "tools": {
       "components": [
         {
@@ -228,6 +228,53 @@
         {
           "name": "ocideck:package-subpath",
           "value": "packages/app_appearance"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: git."
+        }
+      ]
+    },
+    {
+      "bom-ref": "git:app_localizations@0.1.0",
+      "type": "library",
+      "supplier": {
+        "name": "pawprint.vigilis.online",
+        "url": [
+          "https://pawprint.vigilis.online"
+        ]
+      },
+      "name": "app_localizations",
+      "version": "0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "EUPL-1.2"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://pawprint.vigilis.online/LibreKAT/AppFoundation.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:resolved-revision",
+          "value": "73822a01339b6e601f8b84ada2e529d3db33d81d"
+        },
+        {
+          "name": "ocideck:package-subpath",
+          "value": "packages/app_localizations"
         },
         {
           "name": "ocideck:note",
@@ -9425,6 +9472,7 @@
         "fork:desktop_multi_window@0.3.1",
         "fork:markdown_quill@4.3.0",
         "git:app_appearance@0.1.0",
+        "git:app_localizations@0.1.0",
         "git:cnativeapi@0.1.4",
         "git:nativeapi@0.1.4",
         "git:network_guard@0.1.0",
@@ -9526,6 +9574,13 @@
     },
     {
       "ref": "git:app_appearance@0.1.0",
+      "dependsOn": [
+        "pkg:pub/material_ui@1.5.0",
+        "sdk:flutter@0.0.0"
+      ]
+    },
+    {
+      "ref": "git:app_localizations@0.1.0",
       "dependsOn": [
         "pkg:pub/material_ui@1.5.0",
         "sdk:flutter@0.0.0"

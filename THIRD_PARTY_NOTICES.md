@@ -90,6 +90,7 @@ same answer `make licenses` and the SBOM give.
 | --- | --- | --- |
 | `flutter`, `flutter_localizations` | The framework and its localisation delegates | BSD-3-Clause (Flutter SDK) |
 | `app_appearance` | Shared product-neutral appearance profiles, Material theme construction and contrast checks from LibreKAT AppFoundation | EUPL-1.2 |
+| `app_localizations` | Shared product-neutral language registry, base translations and language selector from LibreKAT AppFoundation | EUPL-1.2 |
 | `secret_storage` | Shared product-neutral secure-storage contract and fail-closed native keychain adapter from LibreKAT AppFoundation | EUPL-1.2 |
 | `network_guard` | Shared product-neutral egress/SSRF gate, socket pinning, AI egress tiers and the OpenAI-compatible transport contract from LibreKAT AppFoundation | EUPL-1.2 |
 | `material_ui` | Standalone Material Design widget library (decoupled from core Flutter in 3.47) | BSD-3-Clause |

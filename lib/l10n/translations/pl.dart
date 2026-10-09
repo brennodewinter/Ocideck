@@ -11,7 +11,6 @@ const _stringsPl = {
   'presentFullscreen': 'Prezentuj na pełnym ekranie · P dla widoku prezentera',
   'visualMode': 'Tryb wizualny',
   'markdownMode': 'Tryb Markdown',
-  'save': 'Zapisz',
   'more': 'Więcej',
   'export': 'Eksportuj',
   'exportReady': 'Eksportuj (PDF/PPTX/HTML)',
@@ -40,11 +39,8 @@ const _stringsPl = {
   'importUrl': 'Importuj z adresu URL…',
   'findReplace': 'Znajdź i zamień',
   'fullDeckPreview': 'Wyświetl całą prezentację',
-  'settings': 'Ustawienia',
   'settingsGeneral': 'Ogólne',
   'settingsColors': 'Kolory',
-  'language': 'Język',
-  'applicationLanguage': 'Język aplikacji',
   'languageHelp':
       'Interfejs zmienia język natychmiast. Zawartość prezentacji pozostaje bez zmian.',
   'exportFolderSetting': 'Folder eksportu',
@@ -53,9 +49,6 @@ const _stringsPl = {
   'removeExportFolder': 'Usuń folder eksportu',
   'exportFolderHelp':
       'Wszystkie eksporty (PDF/PPTX) są tutaj zapisywane. Jeśli nie ustawiono, eksporty są zapisywane obok pliku prezentacji.',
-  'cancel': 'Anuluj',
-  'close': 'Zamknij',
-  'saveSettings': 'Zapisz',
   'exportDialogTitle': 'Eksportuj',
   'exportAgain': 'Eksportuj ponownie',
   'exportIntro':
@@ -245,7 +238,6 @@ const _dutchSourcePl = {
   'Onbereikbaar': 'Nieosiągalny',
   'Infrastructuur': 'Infrastruktura',
   'Mobiel': 'Mobilny',
-  'Overig': 'Inne',
   '(leeg)': '(puste)',
   'Audio': 'Audio',
   'Bijschrift': 'Podpis',
@@ -343,7 +335,6 @@ const _dutchSourcePl = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Wskazówka: długie hasło-fraza jest bezpieczniejsze niż krótkie hasło z symbolami.',
   'Versleuteld pakket': 'Zaszyfrowany pakiet',
-  'Wachtwoord': 'Hasło',
   'Wachtwoord gekopieerd naar klembord.': 'Skopiowano hasło do schowka.',
   'Wachtwoord tonen': 'Pokaż hasło',
   'Wachtwoord verbergen': 'Ukryj hasło',
@@ -399,9 +390,7 @@ const _dutchSourcePl = {
   'Instelling opslaan is mislukt.': 'Nie udało się zapisać ustawienia.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Uwaga: wersja internetowa może pobierać tylko z serwerów, które na to pozwalają (CORS).',
-  'Geen': 'Brak',
   'Nieuw': 'Nowy',
-  'Verwijderen': 'Usuń',
   'Herstellen': 'Przywróć',
   'Opslaan en sluiten': 'Zapisz i zamknij',
   'Niet opslaan': 'Nie zapisuj',
@@ -524,7 +513,6 @@ const _dutchSourcePl = {
   'Slides importeren': 'Importuj slajdy',
   'Importeren': 'Importuj',
   'Klaar': 'Gotowe',
-  'Toevoegen': 'Dodaj',
   'Toegevoegd': 'Dodano',
   'Selecteer alles': 'Zaznacz wszystko',
   'Deselecteer alles': 'Odznacz wszystko',
@@ -577,7 +565,6 @@ const _dutchSourcePl = {
       'Rozdzielone przecinkami, np. kwartalny, liczby, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Te dane są zapisywane w Markdownie i przeszukiwalne przy otwieraniu.',
-  'App-thema': 'Motyw aplikacji',
   'Look-and-feel': 'Wygląd',
   'Kopie maken en aanpassen': 'Utwórz i dostosuj kopię',
   'Thema verwijderen': 'Usuń motyw',
@@ -803,7 +790,6 @@ const _dutchSourcePl = {
   'Het antwoord van de server was te groot': 'Odpowiedź serwera była zbyt duża',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Adres URL serwera',
-  'Gebruikersnaam': 'Nazwa użytkownika',
   'App-wachtwoord': 'Hasło aplikacji',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Utwórz do tego hasło aplikacji w Nextcloud',
@@ -827,7 +813,6 @@ const _dutchSourcePl = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Jako pakiet .ocideck (jeden plik, z zasobami)',
   'Als losse .md plus afbeeldingen': 'Jako osobny plik .md plus obrazy',
-  'Opslaan': 'Zapisz',
   'Presenteren': 'Prezentowanie',
   'Tijden-overzicht tonen na afloop': 'Pokaż przegląd czasów po zakończeniu',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -913,7 +898,6 @@ const _dutchSourcePl = {
       'Tekst tytułu ma zbyt mały kontrast z obrazem tła',
   'Herstel': 'Napraw',
   'Tijdlijn': 'Oś czasu',
-  'Indeling': 'Układ',
   'Automatisch': 'Automatycznie',
   'Horizontaal': 'Poziomo',
   'Verticaal': 'Pionowo',
@@ -1089,14 +1073,12 @@ const _dutchSourcePl = {
   'Geen slides gemeten.': 'Nie zmierzono slajdów.',
   'Tijden gekopieerd naar klembord.': 'Czasy skopiowane do schowka.',
   'Kopieer': 'Kopiuj',
-  'Sluiten': 'Zamknij',
   'Tekstgrootte van de interface': 'Rozmiar tekstu interfejsu',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Powiększa cały tekst edytora do 200%. Same slajdy nie są zmieniane.',
   'Breedte van het slidepaneel': 'Szerokość panelu slajdów',
   'Pijltjestoetsen passen de breedte aan':
       'Klawisze strzałek dostosowują szerokość',
-  'Annuleren': 'Anuluj',
   'Checklist': 'Lista zadań',
   'Voortgangsgrafiek tonen': 'Pokaż wykres postępu',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1343,7 +1325,6 @@ const _dutchSourcePl = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Uspokaja tło za tytułem i podtytułem.',
   'Licht': 'Jasny',
-  'Donker': 'Ciemny',
   'Pen (D)': 'Pióro (D)',
   'Markeerstift (T)': 'Zakreślacz (T)',
   'Gum (E / Shift+E)': 'Gumka (E / Shift+E)',
@@ -1707,7 +1688,6 @@ const _dutchSourceAddPl = <String, String>{
       'To się nie powiodło. Nic nie wysłano — spróbuj ponownie.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Twój adres e-mail dowodzi tylko, że masz dostęp do skrzynki — to nie jest konto i nic nie zostanie wysłane, zanim sam nie potwierdzisz.',
-  'Je e-mailadres': 'Twój adres e-mail',
   'Code aanvragen': 'Poproś o kod',
   'Opnieuw versturen': 'Wyślij ponownie',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2959,7 +2939,6 @@ const _dutchSourceAddPl = <String, String>{
   'Aantal minuten': 'Liczba minut',
   'Aantal pogingen': 'Liczba prób',
   'Accountbewerkingen': 'Operacje na koncie',
-  'Accountgegevens': 'Informacje o koncie',
   'Accountnummer': 'Numer konta',
   'Accountnummer waarop de actie gericht was':
       'Numer konta, na który jest kierowana akcja',
@@ -4255,7 +4234,6 @@ const _dutchSourceAddPl = <String, String>{
   'Chat': 'Czat',
   'Chat sluiten': 'Zamknij czat',
   'Bericht…': 'Wiadomość…',
-  'Versturen': 'Wyślij',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Nie ma jeszcze wiadomości. Napisz coś do swoich współautorów.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4649,8 +4627,6 @@ const _dutchSourceAddPl = <String, String>{
   'Rapportages voorbereiden': 'Przygotuj raporty',
   'Rapporttitel': 'Tytuł raportu',
   'Stap': 'Krok',
-  'Taal': 'Język',
-  'Terug': 'Z powrotem',
   'Veranderingen in monitoring': 'Zmiany w monitoringu',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Brakuje przydatnego poprzedniego pomiaru w przypadku jednej lub większej liczby organizacji.',
@@ -6032,7 +6008,6 @@ const _dutchSourceAddPl = <String, String>{
       'Pozwala zmieniać tabelę na oczach publiczności podczas prezentacji. Domyślnie wyłączone.',
   'Automatisch doorgaan': 'Przechodź automatycznie',
   'Persoonsgegevens': 'Dane osobowe',
-  'Wijzigen': 'Zmień',
   'Automatisch afspelen': 'Odtwarzaj automatycznie',
   'Melden': 'Zgłoś',
   'Geaccepteerd': 'Zaakceptowane',
