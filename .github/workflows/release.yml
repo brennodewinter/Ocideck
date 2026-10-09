@@ -6,12 +6,8 @@
 # naar github.com/brennodewinter/Ocideck, en dit bestand is het enige dat daar
 # iets doet — één platform, verder niets.
 #
-# Waarom hier een échte GitHub-*release* wordt gepubliceerd en niet alleen een
-# build-artifact: een artifact vraagt een token om te downloaden (óók bij een
-# publieke repo) en verloopt na negentig dagen. Een release-asset van een
-# publieke repo is een gewone publieke URL die blijft bestaan. Daardoor kan de
-# release-workflow op de forge dat bestand gewoon met `curl` ophalen, zonder dat
-# er een GitHub-token als geheim op de eigen runner hoeft te staan.
+# De Windows-assets blijven hier draft. De forge haalt ze met zijn bestaande
+# GitHub-token op; alleen de complete, canonieke Forge-release wordt publiek.
 #
 # De volledige release — álle platformen, de SBOM en SHA256SUMS — staat op de
 # forge: https://pawprint.vigilis.online/LibreKAT/Ocideck/releases
@@ -357,11 +353,15 @@ jobs:
             *)   VOORLOPER=() ;;
           esac
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            [ "$(gh release view "$GITHUB_REF_NAME" --json isDraft --jq .isDraft)" = true ] || {
+              echo "Bestaande spiegelrelease is publiek; weiger ongekeurde assets te vervangen." >&2
+              exit 1
+            }
             gh release upload "$GITHUB_REF_NAME" "${BESTANDEN[@]}" --clobber
           else
             gh release create "$GITHUB_REF_NAME" "${BESTANDEN[@]}" \
               --title "OciDeck $GITHUB_REF_NAME (Windows build)" \
-              --notes "$NOTES" "${VOORLOPER[@]}"
+              --notes "$NOTES" --draft "${VOORLOPER[@]}"
           fi
           # De Homebrew-cask wordt uitsluitend vanuit de canonieke forge-release
           # bijgewerkt (`.forgejo/workflows/release.yml`), die naar de tap op de

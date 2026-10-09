@@ -115,7 +115,7 @@ Version: $VERSION
 Architecture: amd64
 Maintainer: $MAINTAINER
 Installed-Size: $size_kb
-Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libayatana-appindicator3-1
+Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libayatana-appindicator3-1, libgles2, libegl1
 Section: office
 Priority: optional
 Homepage: $HOMEPAGE
@@ -152,6 +152,8 @@ Summary:        $SUMMARY
 License:        EUPL-1.2
 URL:            $HOMEPAGE
 BuildArch:      x86_64
+Requires:       libGLESv2.so.2()(64bit)
+Requires:       libEGL.so.1()(64bit)
 
 # The payload is a prebuilt Flutter bundle — no sources, no compilation. Skip the
 # debuginfo split (nothing to attach) and the strip/brp post-install scripts that

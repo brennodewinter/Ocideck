@@ -483,11 +483,8 @@ jobs:
     container:
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
     steps:
-      # Waarom een release-asset en niet het build-artifact van die run: een
-      # GitHub-*artifact* vraagt een token, óók bij een publieke repo, en
-      # verloopt na negentig dagen. Een release-*asset* van een publieke repo is
-      # een gewone publieke URL. Dat scheelt bij het OPHALEN een geheim op de
-      # runner én betekent dat de Windows-download over drie jaar nog bestaat.
+      # De spiegelrelease blijft draft: Windows mag niet eerder publiek zijn dan
+      # de centrale release. Ophalen gebeurt daarom geauthenticeerd via de API.
       #
       # Het STARTEN gaat sinds v0.3.6 niet meer vanzelf. Eerder leunde deze job
       # erop dat de tag-push naar de spiegel daar `release.yml` triggert — maar
@@ -522,14 +519,26 @@ jobs:
           REPO="brennodewinter/Ocideck"
           API="https://api.github.com/repos/$REPO"
 
+          if [ -z "${GH_DISPATCH_TOKEN:-}" ]; then
+            echo "GH_DISPATCH_TOKEN ontbreekt — draft Windows-assets zijn terecht niet publiek leesbaar." >&2
+            exit 1
+          fi
+
           # Elke curl draagt een tijdslimiet: een geblackholede route (DROP
           # i.p.v. REJECT) laat een kale curl anders minutenlang per poging
           # hangen, en de 45-minutenlus hieronder telt pogingen, geen tijd.
           have_asset() {
-            local f
+            local f release asset
+            release="$(gh_api "$API/releases?per_page=100" \
+              | jq -c --arg tag "$TAG" 'first(.[] | select(.tag_name == $tag and .draft == true)) // empty')" || return 1
+            test -n "$release" || return 1
             for f in "${BESTANDEN[@]}" "$COHORT"; do
-              curl -fsSLo "$f" --connect-timeout 15 --max-time 300 \
-                "https://github.com/$REPO/releases/download/$TAG/$f" 2>/dev/null || return 1
+              asset="$(printf '%s' "$release" | jq -r --arg name "$f" \
+                'first(.assets[] | select(.name == $name) | .url) // empty')"
+              test -n "$asset" || return 1
+              curl -fLsS --connect-timeout 15 --max-time 300 \
+                -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
+                -H 'Accept: application/octet-stream' -o "$f" "$asset" || return 1
             done
           }
           # Accepteer het paar alleen als het attest één en hetzelfde cohort
@@ -579,20 +588,16 @@ jobs:
           # een build op deze tag, dan volgen we juist díe (OUR_RID): zijn
           # conclusie geldt wel voor ons.
           BASE_RID="" OUR_RID=""
-          if [ -z "${GH_DISPATCH_TOKEN:-}" ]; then
-            echo "GH_DISPATCH_TOKEN niet gezet — passief wachten op de spiegel-build (minder robuust)."
+          info="$(run_status || true)"; st="$(printf '%s' "$info" | awk '{print $1}')"
+          BASE_RID="$(printf '%s' "$info" | awk '{print $4}')"
+          # #2: draait er al een build op deze tag, dan niet nog eens dispatchen.
+          if [ -n "$st" ] && [ "$st" != "completed" ] && [ "$st" != "null" ]; then
+            echo "Er loopt al een Windows-build ($st) — niet opnieuw dispatchen."
+            OUR_RID="$BASE_RID"
           else
-            info="$(run_status || true)"; st="$(printf '%s' "$info" | awk '{print $1}')"
-            BASE_RID="$(printf '%s' "$info" | awk '{print $4}')"
-            # #2: draait er al een build op deze tag, dan niet nog eens dispatchen.
-            if [ -n "$st" ] && [ "$st" != "completed" ] && [ "$st" != "null" ]; then
-              echo "Er loopt al een Windows-build ($st) — niet opnieuw dispatchen."
-              OUR_RID="$BASE_RID"
-            else
-              echo "Windows-build dispatchen op $REPO@${TAG}…"
-              dispatch || { echo "Dispatch faalde — controleer GH_DISPATCH_TOKEN (Actions: RW)." >&2; exit 1; }
-              sleep 10
-            fi
+            echo "Windows-build dispatchen op $REPO@${TAG}…"
+            dispatch || { echo "Dispatch faalde — controleer GH_DISPATCH_TOKEN (Actions: RW)." >&2; exit 1; }
+            sleep 10
           fi
 
           # #5 poll op zowel het asset als de run-status; herdispatch als er na
@@ -674,7 +679,7 @@ jobs:
         run: |
           set -eu
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
       - name: Installeren, linken en starten
@@ -682,7 +687,7 @@ jobs:
           set -eu
           export DEBIAN_FRONTEND=noninteractive
           apt-get install -y --no-install-recommends xvfb fonts-dejavu-core
-          apt-get install -y "dist/ocideck-linux-amd64-${GITHUB_REF_NAME#v}.deb"
+          apt-get install -y "./dist/ocideck-linux-amd64-${GITHUB_REF_NAME#v}.deb"
           # Declares de control minder dan de binary linkt, dan toont ldd
           # "not found" — precies de v0.4.9-klasse (Ayatana miste in Depends).
           if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
@@ -719,7 +724,7 @@ jobs:
         run: |
           set -eu
           dnf install -y --setopt=install_weak_deps=False xorg-x11-server-Xvfb dejavu-sans-fonts
-          dnf install -y "dist/ocideck-linux-x86_64-${GITHUB_REF_NAME#v}.rpm"
+          dnf install -y "./dist/ocideck-linux-x86_64-${GITHUB_REF_NAME#v}.rpm"
           if ldd /usr/lib/ocideck/ocideck | grep 'not found'; then
             echo "Het .rpm dekt niet alle runtimebibliotheken van de binary." >&2
             exit 1
@@ -745,7 +750,7 @@ jobs:
         run: |
           set -eu
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
       - name: Uitpakken, linken en starten
@@ -757,7 +762,8 @@ jobs:
           # toolchain — het beeld blijft consumentachtig.
           apt-get install -y --no-install-recommends \
             xvfb fonts-dejavu-core \
-            libgtk-3-0t64 libsecret-1-0 liblzma5 libayatana-appindicator3-1
+            libgtk-3-0t64 libsecret-1-0 liblzma5 libayatana-appindicator3-1 \
+            libgles2 libegl1
           cd dist
           chmod +x ocideck-linux-x86_64-*.AppImage
           ./ocideck-linux-x86_64-*.AppImage --appimage-extract >/dev/null
