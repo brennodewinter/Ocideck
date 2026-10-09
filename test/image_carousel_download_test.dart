@@ -99,7 +99,11 @@ void main() {
     await tapDownload(tester);
     await pumpUntil(
       tester,
-      () => File(target).existsSync(),
+      // File.copy maakt het doel aan zodra het voor schrijven opent; op
+      // bestaan alleen wachten leest dan een leeg bestand.
+      () =>
+          File(target).existsSync() &&
+          File(target).readAsBytesSync().isNotEmpty,
       reason: 'de kopie werd niet op de gekozen bestemming geschreven',
     );
     expect(File(target).readAsBytesSync(), _onePixelPng);
