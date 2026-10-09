@@ -1626,6 +1626,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Verplaats vóór': 'Přesunout před',
+  'Verplaats na': 'Přesunout za',
+  'Achteraan plaatsen': 'Umístit na konec',
   'Importeren…': 'Importovat…',
   'OciDeck-pakket (.ocideck)': 'Balíček OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

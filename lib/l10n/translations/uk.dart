@@ -1640,6 +1640,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Verplaats vóór': 'Перемістити перед',
+  'Verplaats na': 'Перемістити після',
+  'Achteraan plaatsen': 'Розмістити в кінці',
   'Importeren…': 'Імпортувати…',
   'OciDeck-pakket (.ocideck)': 'Пакет OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

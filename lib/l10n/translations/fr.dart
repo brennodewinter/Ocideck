@@ -665,6 +665,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Verplaats vóór': 'Déplacer avant',
+  'Verplaats na': 'Déplacer après',
+  'Achteraan plaatsen': 'Placer à la fin',
   'Importeren…': 'Importer…',
   'OciDeck-pakket (.ocideck)': 'Paquet OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

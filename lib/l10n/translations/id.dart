@@ -1625,6 +1625,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Verplaats vóór': 'Pindahkan sebelum',
+  'Verplaats na': 'Pindahkan sesudah',
+  'Achteraan plaatsen': 'Letakkan di akhir',
   'Importeren…': 'Impor…',
   'OciDeck-pakket (.ocideck)': 'Paket OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

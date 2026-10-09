@@ -1640,6 +1640,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Verplaats vóór': 'Ante move',
+  'Verplaats na': 'Post move',
+  'Achteraan plaatsen': 'In fine pone',
   'Importeren…': 'Importa…',
   'OciDeck-pakket (.ocideck)': 'Fasciculus OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

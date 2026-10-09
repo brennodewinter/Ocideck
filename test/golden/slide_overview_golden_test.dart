@@ -129,30 +129,38 @@ void main() {
     }
   });
 
-  testWidgets('smal slide-overzicht met dropdoel', (tester) async {
+  testWidgets('smal slide-overzicht met invoegmarkering', (tester) async {
     final container = _deck();
     addTearDown(container.dispose);
     await _pumpOverview(tester, container, const Size(520, 800));
 
-    final source = tester.getCenter(find.byIcon(Icons.drag_indicator).first);
-    final target = tester.getCenter(find.byType(DragTarget<int>).at(1));
-    final gesture = await tester.startGesture(source);
-    await gesture.moveBy(const Offset(0, -10));
-    await tester.pump();
-    await gesture.moveTo(target);
-    await tester.pump(const Duration(milliseconds: 150));
-    final targetCard = find.descendant(
-      of: find.byType(DragTarget<int>).at(1),
-      matching: find.byType(AnimatedContainer),
+    // Het merklogo in elke dia decodeert asynchroon; onder last verschilt het
+    // moment waarop hij er staat. Vooraf precachen maakt de opname stabiel.
+    await tester.runAsync(
+      () => precacheImage(
+        const AssetImage('assets/images/librekat-logo.png'),
+        tester.element(find.byType(FullDeckPreview)),
+      ),
     );
-    final decoration =
-        tester.widget<AnimatedContainer>(targetCard).decoration
-            as BoxDecoration;
-    expect((decoration.border! as Border).top.width, 3);
+    await tester.pump();
+
+    // Sleep de tweede kaart over de linkerhelft van de eerste: de markering
+    // toont slot 0 als accentlijn vóór die kaart, de kaart zelf kleurt niet
+    // als doel (#2362).
+    final source = tester.getCenter(find.byIcon(Icons.drag_indicator).at(1));
+    final target = tester.getRect(find.byType(DragTarget<int>).at(0));
+    final gesture = await tester.startGesture(source);
+    await gesture.moveBy(const Offset(0, -40));
+    await tester.pump();
+    await gesture.moveTo(
+      Offset(target.left + target.width * 0.2, target.center.dy),
+    );
+    await tester.pump(const Duration(milliseconds: 150));
+    expect(find.byKey(const Key('insert-marker')), findsOneWidget);
 
     await expectLater(
       find.byKey(_surfaceKey),
-      matchesGoldenFile('goldens/slide_overview_narrow_drop_target.png'),
+      matchesGoldenFile('goldens/slide_overview_narrow_insert_marker.png'),
     );
 
     await gesture.up();

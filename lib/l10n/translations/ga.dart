@@ -1655,6 +1655,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Verplaats vóór': 'Bog roimh',
+  'Verplaats na': 'Bog tar éis',
+  'Achteraan plaatsen': 'Cuir ag an deireadh',
   'Importeren…': 'Iompórtáil…',
   'OciDeck-pakket (.ocideck)': 'Pacáiste OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

@@ -664,6 +664,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Verplaats vóór': 'Move promé',
+  'Verplaats na': 'Move despues',
+  'Achteraan plaatsen': 'Pone na final',
   'Importeren…': 'Importá…',
   'OciDeck-pakket (.ocideck)': 'Pakete OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':
