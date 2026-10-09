@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Het slide-overzicht scrolt vanzelf door tijdens slepen** (#2361). Houd
+  een gesleepte dia of een geselecteerd blok in de boven- of onderrand van
+  het raster en de lijst scrolt die kant op — sneller naarmate de aanwijzer
+  dichter bij de rand komt. Zo landt een dia in één sleepbeweging op een
+  plek die eerst buiten beeld lag. De scroll stopt bij loslaten,
+  annuleren, het verlaten van de rand en het einde van de lijst, en de
+  invoegmarkering volgt de aanwijzer tijdens het scrollen mee.
 - **Dia's neerzetten op expliciete invoegposities in het slide-overzicht**
   (#2362). Dropbestemmingen zijn nu invoegslots: vóór de eerste dia, tussen
   elke twee dia's en achter de laatste — niet langer "op" een kaart mikken.
