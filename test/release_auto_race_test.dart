@@ -89,7 +89,9 @@ api() {
 curl() {
   local out='' url='' previous='' arg
   for arg in "\$@"; do
-    if [ "\$previous" = '-o' ] || [[ "\$previous" == *o ]]; then out="\$arg"; fi
+    # -*o vangt -o en gebundelde vlaggen zoals -fsSLo, maar nooit een
+    # mktemp-pad dat toevallig op 'o' eindigt.
+    if [[ "\$previous" == -*o ]]; then out="\$arg"; fi
     previous="\$arg"; url="\$arg"
   done
   case "\$url" in
@@ -245,7 +247,9 @@ api() {
 curl() {
   local out='' url='' previous='' arg write_code=0
   for arg in "\$@"; do
-    if [ "\$previous" = '-o' ] || [[ "\$previous" == *o ]]; then out="\$arg"; fi
+    # -*o vangt -o en gebundelde vlaggen zoals -fsSLo, maar nooit een
+    # mktemp-pad dat toevallig op 'o' eindigt.
+    if [[ "\$previous" == -*o ]]; then out="\$arg"; fi
     [ "\$previous" = '-w' ] && write_code=1
     previous="\$arg"; url="\$arg"
   done
@@ -720,7 +724,9 @@ make() {
 curl() {
   local out='' url='' previous='' arg
   for arg in "\$@"; do
-    if [ "\$previous" = '-o' ] || [[ "\$previous" == *o ]]; then out="\$arg"; fi
+    # -*o vangt -o en gebundelde vlaggen zoals -fsSLo, maar nooit een
+    # mktemp-pad dat toevallig op 'o' eindigt.
+    if [[ "\$previous" == -*o ]]; then out="\$arg"; fi
     previous="\$arg"; url="\$arg"
   done
   # De webdemo draait de release al; deze toets gaat over tekenen, niet over
@@ -800,7 +806,9 @@ make() {
 curl() {
   local out='' url='' previous='' arg
   for arg in "\$@"; do
-    if [ "\$previous" = '-o' ] || [[ "\$previous" == *o ]]; then out="\$arg"; fi
+    # -*o vangt -o en gebundelde vlaggen zoals -fsSLo, maar nooit een
+    # mktemp-pad dat toevallig op 'o' eindigt.
+    if [[ "\$previous" == -*o ]]; then out="\$arg"; fi
     previous="\$arg"; url="\$arg"
   done
   case "\$url" in
