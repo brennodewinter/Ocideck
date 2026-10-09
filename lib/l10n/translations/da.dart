@@ -1625,6 +1625,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Aan selectie toevoegen': 'Føj til markering',
+  'Uit selectie halen': 'Fjern fra markering',
+  '{n} dia\'s geselecteerd': '{n} slides valgt',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Træk en valgt slide for at flytte hele blokken',
   'Verplaats vóór': 'Flyt før',
   'Verplaats na': 'Flyt efter',
   'Achteraan plaatsen': 'Placér til sidst',

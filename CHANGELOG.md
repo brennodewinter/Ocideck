@@ -10,6 +10,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Meervoudige selectie in het slide-overzicht is nu vindbaar** (#2363).
+  Elke bewerkbare dia-kaart heeft een selectievak waarmee je dia's zonder
+  Shift of Ctrl/Cmd toevoegt aan of haalt uit de selectie. Bij meer dan één
+  geselecteerde dia toont de bovenbalk het aantal en dat slepen het hele
+  blok verplaatst. Shift-bereik, Ctrl-/Cmd-toggle en Ctrl/Cmd+A blijven
+  werken; verzegelde presentaties tonen geen vakken.
 - **Het slide-overzicht scrolt vanzelf door tijdens slepen** (#2361). Houd
   een gesleepte dia of een geselecteerd blok in de boven- of onderrand van
   het raster en de lijst scrolt die kant op — sneller naarmate de aanwijzer

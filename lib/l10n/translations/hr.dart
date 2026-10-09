@@ -1629,6 +1629,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Aan selectie toevoegen': 'Dodaj u odabir',
+  'Uit selectie halen': 'Ukloni iz odabira',
+  '{n} dia\'s geselecteerd': 'Odabrano {n} slajdova',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Povuci odabrani slajd da pomakneš cijeli blok',
   'Verplaats vóór': 'Premjesti prije',
   'Verplaats na': 'Premjesti poslije',
   'Achteraan plaatsen': 'Postavi na kraj',

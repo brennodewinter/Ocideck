@@ -1650,6 +1650,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Aan selectie toevoegen': 'Προσθήκη στην επιλογή',
+  'Uit selectie halen': 'Αφαίρεση από την επιλογή',
+  '{n} dia\'s geselecteerd': '{n} διαφάνειες επιλεγμένες',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Σύρε μια επιλεγμένη διαφάνεια για να μετακινήσεις όλο το μπλοκ',
   'Verplaats vóór': 'Μετακίνηση πριν',
   'Verplaats na': 'Μετακίνηση μετά',
   'Achteraan plaatsen': 'Τοποθέτηση στο τέλος',

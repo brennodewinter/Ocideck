@@ -665,6 +665,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Aan selectie toevoegen': 'Oan seleksje tafoegje',
+  'Uit selectie halen': 'Út seleksje helje',
+  '{n} dia\'s geselecteerd': '{n} dia\'s selektearre',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Sleep in selektearre dia om it hiele blok te ferpleatsen',
   'Verplaats vóór': 'Derfoar ferpleatse',
   'Verplaats na': 'Dêrnei ferpleatse',
   'Achteraan plaatsen': 'Efterein pleatse',

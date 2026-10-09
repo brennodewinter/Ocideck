@@ -1632,6 +1632,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Aan selectie toevoegen': 'Pridėti prie žymėjimo',
+  'Uit selectie halen': 'Pašalinti iš žymėjimo',
+  '{n} dia\'s geselecteerd': 'Pasirinkta {n} skaidrių',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Vilkite pasirinktą skaidrę, kad perkeltumėte visą bloką',
   'Verplaats vóór': 'Perkelti prieš',
   'Verplaats na': 'Perkelti po',
   'Achteraan plaatsen': 'Padėti gale',

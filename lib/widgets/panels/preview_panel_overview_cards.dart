@@ -138,6 +138,7 @@ class _OverviewSlideCard extends StatelessWidget {
     required this.scopeCia,
     required this.numberStart,
     required this.onSelect,
+    required this.onToggleSelect,
     required this.onOpen,
     required this.onSlotHover,
     required this.onDropSlot,
@@ -158,6 +159,7 @@ class _OverviewSlideCard extends StatelessWidget {
   final Map<String, CiaRating> scopeCia;
   final int numberStart;
   final VoidCallback onSelect;
+  final VoidCallback onToggleSelect;
   final VoidCallback onOpen;
   final ValueChanged<int?> onSlotHover;
   final void Function(int draggedIndex, int slot) onDropSlot;
@@ -245,10 +247,20 @@ class _OverviewSlideCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            if (selected) ...[
-              Icon(Icons.check_circle, size: 17, color: colorScheme.primary),
-              const SizedBox(width: 7),
-            ],
+            // Een zichtbaar selectievak op elke bewerkbare kaart maakt
+            // meervoudige selectie vindbaar zonder Shift/Ctrl (#2363).
+            if (!readOnly)
+              Tooltip(
+                message: context.l10n.d(
+                  selected ? 'Uit selectie halen' : 'Aan selectie toevoegen',
+                ),
+                child: Checkbox(
+                  value: selected,
+                  onChanged: (_) => onToggleSelect(),
+                  visualDensity: VisualDensity.compact,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+              ),
             Expanded(
               child: Text(
                 '${index + 1}. $title',

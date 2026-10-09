@@ -1641,6 +1641,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Aan selectie toevoegen': 'Adaugă la selecție',
+  'Uit selectie halen': 'Elimină din selecție',
+  '{n} dia\'s geselecteerd': '{n} diapozitive selectate',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Trage un diapozitiv selectat pentru a muta tot blocul',
   'Verplaats vóór': 'Mută înainte',
   'Verplaats na': 'Mută după',
   'Achteraan plaatsen': 'Plasează la final',

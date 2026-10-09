@@ -1628,6 +1628,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Aan selectie toevoegen': 'Zur Uuswahl dezue',
+  'Uit selectie halen': 'Us de Uuswahl neh',
+  '{n} dia\'s geselecteerd': '{n} Folien usgwählt',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Zieh e usgwählti Folie, um de ganzi Block z verschiebe',
   'Verplaats vóór': 'Davor verschiebe',
   'Verplaats na': 'Danach verschiebe',
   'Achteraan plaatsen': 'Am Schluss platziere',

@@ -662,6 +662,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Aan selectie toevoegen': 'Añadir a la selección',
+  'Uit selectie halen': 'Quitar de la selección',
+  '{n} dia\'s geselecteerd': '{n} diapositivas seleccionadas',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Arrastra una diapositiva seleccionada para mover todo el bloque',
   'Verplaats vóór': 'Mover antes',
   'Verplaats na': 'Mover después',
   'Achteraan plaatsen': 'Colocar al final',

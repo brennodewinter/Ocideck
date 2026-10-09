@@ -1653,6 +1653,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Aan selectie toevoegen': 'Adicionar à seleção',
+  'Uit selectie halen': 'Remover da seleção',
+  '{n} dia\'s geselecteerd': '{n} diapositivos selecionados',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Arrasta um diapositivo selecionado para mover o bloco inteiro',
   'Verplaats vóór': 'Mover antes',
   'Verplaats na': 'Mover depois',
   'Achteraan plaatsen': 'Colocar no fim',

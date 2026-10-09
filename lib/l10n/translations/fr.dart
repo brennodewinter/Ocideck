@@ -665,6 +665,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Aan selectie toevoegen': 'Ajouter à la sélection',
+  'Uit selectie halen': 'Retirer de la sélection',
+  '{n} dia\'s geselecteerd': '{n} diapositives sélectionnées',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Faites glisser une diapositive sélectionnée pour déplacer tout le bloc',
   'Verplaats vóór': 'Déplacer avant',
   'Verplaats na': 'Déplacer après',
   'Achteraan plaatsen': 'Placer à la fin',

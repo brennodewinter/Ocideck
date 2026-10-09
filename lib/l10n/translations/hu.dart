@@ -1627,6 +1627,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Aan selectie toevoegen': 'Hozzáadás a kijelöléshez',
+  'Uit selectie halen': 'Eltávolítás a kijelölésből',
+  '{n} dia\'s geselecteerd': '{n} dia kijelölve',
+  'Sleep een geselecteerde dia om het hele blok te verplaatsen':
+      'Húzz egy kijelölt diát a teljes blokk mozgatásához',
   'Verplaats vóór': 'Mozgatás elé',
   'Verplaats na': 'Mozgatás után',
   'Achteraan plaatsen': 'Helyezés a végére',
