@@ -1637,6 +1637,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Verplaats vóór': 'Przenieś przed',
+  'Verplaats na': 'Przenieś po',
+  'Achteraan plaatsen': 'Umieść na końcu',
   'Importeren…': 'Importuj…',
   'OciDeck-pakket (.ocideck)': 'Pakiet OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

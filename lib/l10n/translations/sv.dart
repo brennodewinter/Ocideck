@@ -1624,6 +1624,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Verplaats vóór': 'Flytta före',
+  'Verplaats na': 'Flytta efter',
+  'Achteraan plaatsen': 'Placera sist',
   'Importeren…': 'Importera…',
   'OciDeck-pakket (.ocideck)': 'OciDeck-paket (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

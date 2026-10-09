@@ -485,10 +485,15 @@ void main() {
     await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
     expect(container.read(editorProvider).selection, {1, 2});
 
+    // Drop het blok op de eindzone — invoegslot N, achter de laatste dia.
+    // Eerst ruim boven de touch-slop bewegen zodat de sleep écht loopt en de
+    // eindzone (die alleen tijdens een sleep bestaat) gemount is.
     final source = tester.getCenter(find.byIcon(Icons.drag_indicator).at(1));
-    final target = tester.getCenter(find.byType(DragTarget<int>).at(3));
     final gesture = await tester.startGesture(source);
-    await gesture.moveTo(target);
+    await gesture.moveBy(const Offset(0, -40));
+    await tester.pump();
+    final endZone = find.byType(DragTarget<int>).last;
+    await gesture.moveTo(tester.getCenter(endZone));
     await tester.pump();
     await gesture.up();
     await tester.pump(const Duration(milliseconds: 100));
@@ -502,6 +507,69 @@ void main() {
     expect(after, [before[0], before[3], before[1], before[2]]);
     expect(container.read(editorProvider).selection, {2, 3});
     expect(container.read(editorProvider).selectedIndex, 3);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('pointer drag drops a slide on explicit insertion slots', (
+    tester,
+  ) async {
+    final container = _deckWith([
+      Slide.create(SlideType.bullets).copyWith(title: 'Alpha'),
+      Slide.create(SlideType.quote).copyWith(title: 'Beta'),
+      Slide.create(SlideType.table).copyWith(title: 'Gamma'),
+    ]);
+    addTearDown(container.dispose);
+    final ids = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .map((slide) => slide.id)
+        .toList();
+    List<String> order() => container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .map((slide) => slide.id)
+        .toList();
+    await _pumpOverview(tester, container);
+
+    Offset leftHalfOf(int gridIndex) {
+      final rect = tester.getRect(find.byType(DragTarget<int>).at(gridIndex));
+      return Offset(rect.left + rect.width * 0.2, rect.center.dy);
+    }
+
+    Future<void> dragTo(int handleIndex, Offset target) async {
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.byIcon(Icons.drag_indicator).at(handleIndex)),
+      );
+      await gesture.moveBy(const Offset(0, -40));
+      await tester.pump();
+      await gesture.moveTo(target);
+      await tester.pump();
+      await gesture.up();
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+
+    // Begin: sleep de laatste dia naar de linkerhelft van dia 1 → slot 0.
+    await dragTo(3, leftHalfOf(0));
+    expect(order(), [ids[3], ids[0], ids[1], ids[2]]);
+
+    // Midden: sleep dia 4 (nu vooraan) naar de linkerhelft van dia 3 →
+    // slot 2, tussen de tweede en derde dia.
+    await dragTo(0, leftHalfOf(2));
+    expect(order(), [ids[0], ids[3], ids[1], ids[2]]);
+
+    // Einde: sleep de eerste dia naar de eindzone → slot N.
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.byIcon(Icons.drag_indicator).at(0)),
+    );
+    await gesture.moveBy(const Offset(0, -40));
+    await tester.pump();
+    await gesture.moveTo(tester.getCenter(find.byType(DragTarget<int>).last));
+    await tester.pump();
+    await gesture.up();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(order(), [ids[3], ids[1], ids[2], ids[0]]);
     expect(tester.takeException(), isNull);
   });
 

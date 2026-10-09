@@ -1643,6 +1643,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Verplaats vóór': 'Mexxi qabel',
+  'Verplaats na': 'Mexxi wara',
+  'Achteraan plaatsen': 'Poġġi fl-aħħar',
   'Importeren…': 'Importa…',
   'OciDeck-pakket (.ocideck)': 'Pakkett OciDeck (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

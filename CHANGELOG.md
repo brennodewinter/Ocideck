@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Dia's neerzetten op expliciete invoegposities in het slide-overzicht**
+  (#2362). Dropbestemmingen zijn nu invoegslots: vóór de eerste dia, tussen
+  elke twee dia's en achter de laatste — niet langer "op" een kaart mikken.
+  Tijdens het slepen toont elke slotrand een subtiele streep en krijgt de
+  actieve positie een duidelijke accentlijn; "achteraan" heeft een eigen
+  doelzone onder het raster. Slots in of direct langs het gesleepte (blok)
+  zijn een no-op, en een geselecteerd blok verhuist als geheel in eigen
+  volgorde. De schermlezeracties heten nu *Verplaats vóór* / *Verplaats na*.
 - **Het slide-overzicht volgt de themakleuren van de applicatie** (#2360).
   De achtergrond en bovenbalk gebruikten vaste donkere kleuren; nu volgen ze
   net als de kaarten, selectie en sleepfeedback de `ThemeData`-rollen van het

@@ -214,52 +214,44 @@ extension DeckNotifierSlides on DeckNotifier {
 
   // newIndex from onReorderItem is pre-adjusted (no -1 needed)
   void reorderSlides(int oldIndex, int newIndex) {
-    final deck = currentState.deck;
-    if (deck == null) return;
-    final slides = List<Slide>.from(deck.slides);
-    // Zelfde reden als bij [addSlide]: de indices komen uit de UI en kunnen
-    // achterlopen op het deck.
-    if (oldIndex < 0 || oldIndex >= slides.length) return;
-    final slide = slides.removeAt(oldIndex);
-    slides.insert(newIndex.clamp(0, slides.length), slide);
-    _mutate(deck.copyWith(slides: slides));
+    // onReorderItem-coördinaten (lijst zónder de gesleepte dia) → invoegslot.
+    moveSlidesToSlot({
+      oldIndex,
+    }, newIndex >= oldIndex ? newIndex + 1 : newIndex);
   }
 
   /// Verplaats de geselecteerde slides als één aaneengesloten blok (in hun
   /// oorspronkelijke volgorde) naar de drop-plek. [oldIndex]/[newIndex] komen van
-  /// `onReorderItem` (voor-gecorrigeerd, net als bij [reorderSlides]). Bij minder
-  /// dan twee geselecteerde slides valt dit terug op een gewone enkel-slide-move.
+  /// `onReorderItem` (voor-gecorrigeerd, net als bij [reorderSlides]).
   /// Geeft de nieuwe startindex van het blok, of -1 als er niets te doen is.
+  int moveSlides(Set<int> selection, int oldIndex, int newIndex) =>
+      moveSlidesToSlot(
+        selection,
+        newIndex >= oldIndex ? newIndex + 1 : newIndex,
+      );
+
+  /// Zet de dia's op [dragged] neer op invoegslot [slot]: 0 = vóór de eerste
+  /// dia, N = achter de laatste. Het slot telt in de lijst mét de gesleepte
+  /// dia's er nog in — "vóór dia s" (#2362). Levert de nieuwe startindex van
+  /// het blok, of -1 als er niets verandert: het slot wijst in het eigen blok,
+  /// of de bestemming houdt de volgorde gelijk.
   ///
-  /// De drop-plek wordt verankerd op slide-**id** i.p.v. index: we zoeken de
-  /// eerste niet-blok-slide op of na [newIndex] en zetten het blok daar vóór. Zo
-  /// blijft de plaatsing correct ongeacht hoeveel geselecteerde slides boven de
-  /// drop stonden.
-  int moveSlides(Set<int> selection, int oldIndex, int newIndex) {
+  /// Het slot wordt verankerd op slide-**id** i.p.v. index: het blok komt vóór
+  /// de slide die nu op [slot] staat, dus de plaatsing blijft correct ongeacht
+  /// hoeveel gesleepte slides boven het slot stonden.
+  int moveSlidesToSlot(Set<int> dragged, int slot) {
     final deck = currentState.deck;
     if (deck == null) return -1;
     final n = deck.slides.length;
-    final sel = selection.where((i) => i >= 0 && i < n).toList()..sort();
-    if (sel.length < 2) {
-      reorderSlides(oldIndex, newIndex);
-      return newIndex;
-    }
+    final sel = dragged.where((i) => i >= 0 && i < n).toList()..sort();
+    if (sel.isEmpty) return -1;
+    slot = slot.clamp(0, n);
+    // "Vóór dia s" waar s zelf meereist is geen bestemming.
+    if (slot < n && sel.contains(slot)) return -1;
 
     final slides = List<Slide>.from(deck.slides);
     final block = [for (final i in sel) slides[i]];
-    final blockIds = {for (final s in block) s.id};
-
-    // Anker = eerste niet-blok-slide op/na de drop in de lijst zonder de
-    // gesleepte slide (newIndex is in die coördinaten voor-gecorrigeerd).
-    final withoutOld = List<Slide>.from(slides)..removeAt(oldIndex);
-    String? anchorId;
-    for (var k = newIndex; k < withoutOld.length; k++) {
-      if (!blockIds.contains(withoutOld[k].id)) {
-        anchorId = withoutOld[k].id;
-        break;
-      }
-    }
-
+    final anchorId = slot < n ? slides[slot].id : null;
     final selSet = sel.toSet();
     final reduced = [
       for (var i = 0; i < n; i++)
@@ -267,8 +259,18 @@ extension DeckNotifierSlides on DeckNotifier {
     ];
     final insertAt = anchorId == null
         ? reduced.length
-        : reduced.indexWhere((s) => s.id == anchorId).clamp(0, reduced.length);
+        : reduced.indexWhere((s) => s.id == anchorId);
     reduced.insertAll(insertAt, block);
+    // Een slot direct langs het eigen (aaneengesloten) blok levert dezelfde
+    // volgorde op — geen mutatie en geen ongedaan-stap.
+    var identical = true;
+    for (var i = 0; i < n; i++) {
+      if (reduced[i].id != slides[i].id) {
+        identical = false;
+        break;
+      }
+    }
+    if (identical) return -1;
     _mutate(deck.copyWith(slides: reduced), bumpRevision: true);
     return insertAt;
   }

@@ -22,6 +22,10 @@ class FullDeckPreview extends ConsumerStatefulWidget {
 class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
   final FocusNode _focusNode = FocusNode(debugLabel: 'SlideOverview');
   int _columns = 1;
+  // De gesleepte dia en het invoegslot (0..N) dat de pointer nu boven hangt;
+  // beide null buiten een sleep om (#2362).
+  int? _draggingIndex;
+  int? _hoveredSlot;
 
   @override
   void dispose() {
@@ -75,16 +79,50 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
   void _reorder(int oldIndex, int newIndex) {
     final deck = ref.read(deckProvider).deck;
     if (deck == null || deck.finalized || deck.playOnly) return;
-    final editor = ref.read(editorProvider);
-    if (editor.hasMultiSelection &&
-        editor.selection.contains(oldIndex) &&
-        editor.selection.contains(newIndex)) {
-      return;
-    }
     applySlideReorder(
       oldIndex,
       newIndex.clamp(0, deck.slides.length - 1),
-      editor: editor,
+      editor: ref.read(editorProvider),
+      notifier: ref.read(deckProvider.notifier),
+      editorNotifier: ref.read(editorProvider.notifier),
+      slideCount: deck.slides.length,
+    );
+    _focusNode.requestFocus();
+  }
+
+  /// Het blok dat meereist: de multiselectie als de gesleepte dia daarin zit,
+  /// anders alleen de gesleepte dia.
+  Set<int> _draggedSet() {
+    final dragged = _draggingIndex;
+    if (dragged == null) return const {};
+    final selection = ref.read(editorProvider).selection;
+    return selection.contains(dragged) ? selection : {dragged};
+  }
+
+  /// Registreert het invoegslot onder de pointer. Slots die niets verplaatsen
+  /// (in of direct langs het eigen blok) tonen geen markering.
+  void _hoverSlot(int? slot) {
+    final deck = ref.read(deckProvider).deck;
+    if (slot != null &&
+        deck != null &&
+        isNoOpInsertSlot(_draggedSet(), slot, deck.slides.length)) {
+      slot = null;
+    }
+    if (slot != _hoveredSlot) setState(() => _hoveredSlot = slot);
+  }
+
+  void _dragChanged(int? index) => setState(() {
+    _draggingIndex = index;
+    _hoveredSlot = null;
+  });
+
+  void _dropSlide(int draggedIndex, int slot) {
+    final deck = ref.read(deckProvider).deck;
+    if (deck == null || deck.finalized || deck.playOnly) return;
+    applySlideInsertion(
+      draggedIndex,
+      slot,
+      editor: ref.read(editorProvider),
       notifier: ref.read(deckProvider.notifier),
       editorNotifier: ref.read(editorProvider.notifier),
       slideCount: deck.slides.length,
@@ -328,7 +366,11 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
                         _select(index);
                         Navigator.pop(context);
                       },
-                      onReorder: (oldIndex) => _reorder(oldIndex, index),
+                      onSlotHover: _hoverSlot,
+                      onDropSlot: _dropSlide,
+                      onDragChanged: _dragChanged,
+                      markerBefore: _hoveredSlot == index,
+                      slotHints: _draggingIndex != null,
                       onMovePrevious: index == 0
                           ? null
                           : () => _reorder(index, index - 1),
@@ -340,6 +382,15 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
                 ),
               ),
             ),
+            // Invoegslot N is geen kaart: de doelzone onder het raster biedt
+            // "achteraan" als expliciete, altijd bereikbare bestemming.
+            if (_draggingIndex != null)
+              _OverviewEndSlot(
+                active: _hoveredSlot == deck.slides.length,
+                onHover: (hover) =>
+                    _hoverSlot(hover ? deck.slides.length : null),
+                onAccept: (dragged) => _dropSlide(dragged, deck.slides.length),
+              ),
           ],
         );
       },
@@ -547,7 +598,11 @@ class _OverviewSlideCard extends StatelessWidget {
     required this.numberStart,
     required this.onSelect,
     required this.onOpen,
-    required this.onReorder,
+    required this.onSlotHover,
+    required this.onDropSlot,
+    required this.onDragChanged,
+    required this.markerBefore,
+    required this.slotHints,
     required this.onMovePrevious,
     required this.onMoveNext,
     this.outsideTimedFormat = false,
@@ -562,10 +617,62 @@ class _OverviewSlideCard extends StatelessWidget {
   final int numberStart;
   final VoidCallback onSelect;
   final VoidCallback onOpen;
-  final ValueChanged<int> onReorder;
+  final ValueChanged<int?> onSlotHover;
+  final void Function(int draggedIndex, int slot) onDropSlot;
+  final ValueChanged<int?> onDragChanged;
+  final bool markerBefore;
+  final bool slotHints;
   final VoidCallback? onMovePrevious;
   final VoidCallback? onMoveNext;
   final bool outsideTimedFormat;
+
+  /// Linkerhelft van de kaart = slot vóór deze dia, rechterhelft = slot erna
+  /// (leesvolgorde). Zo dekt elke kaart twee invoegslots zonder eigen tegel.
+  int? _slotFor(DragTargetDetails<int> details, BuildContext context) {
+    final box = context.findRenderObject();
+    if (box is! RenderBox || !box.hasSize) return null;
+    final dx = box.globalToLocal(details.offset).dx;
+    return dx < box.size.width / 2 ? index : index + 1;
+  }
+
+  /// Invoegmarkering (#2362): tijdens een sleep een subtiele streep op elke
+  /// slotrand; het actieve slot krijgt een volle accentlijn aan de kaartrand.
+  List<Widget> _insertMarkers(ColorScheme colorScheme) {
+    if (markerBefore) {
+      return [
+        Positioned(
+          key: const Key('insert-marker'),
+          left: 0,
+          top: 6,
+          bottom: 6,
+          width: 5,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: colorScheme.primary,
+              borderRadius: BorderRadius.circular(3),
+            ),
+          ),
+        ),
+      ];
+    }
+    if (!slotHints) return const [];
+    return [
+      Positioned(
+        left: 0,
+        top: 0,
+        bottom: 0,
+        child: Center(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: colorScheme.primary.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(2),
+            ),
+            child: const SizedBox(width: 4, height: 26),
+          ),
+        ),
+      ),
+    ];
+  }
 
   Map<CustomSemanticsAction, VoidCallback> _semanticActions(
     AppLocalizations l10n,
@@ -574,10 +681,11 @@ class _OverviewSlideCard extends StatelessWidget {
     final previous = onMovePrevious;
     final next = onMoveNext;
     if (previous != null) {
-      actions[CustomSemanticsAction(label: l10n.d('Vorige'))] = previous;
+      actions[CustomSemanticsAction(label: l10n.d('Verplaats vóór'))] =
+          previous;
     }
     if (next != null) {
-      actions[CustomSemanticsAction(label: l10n.d('Volgende'))] = next;
+      actions[CustomSemanticsAction(label: l10n.d('Verplaats na'))] = next;
     }
     return actions;
   }
@@ -611,6 +719,8 @@ class _OverviewSlideCard extends StatelessWidget {
                 message: context.l10n.d('Sorteren'),
                 child: Draggable<int>(
                   data: index,
+                  onDragStarted: () => onDragChanged(index),
+                  onDragEnd: (_) => onDragChanged(null),
                   feedback: Material(
                     color: Colors.transparent,
                     child: DecoratedBox(
@@ -661,15 +771,20 @@ class _OverviewSlideCard extends StatelessWidget {
         ? l10n.d(slide.type.label)
         : slide.title.trim();
     return DragTarget<int>(
-      onWillAcceptWithDetails: (details) => !readOnly && details.data != index,
-      onAcceptWithDetails: (details) => onReorder(details.data),
+      onWillAcceptWithDetails: (_) => !readOnly,
+      onMove: (details) {
+        final slot = _slotFor(details, context);
+        if (slot != null) onSlotHover(slot);
+      },
+      onLeave: (_) => onSlotHover(null),
+      onAcceptWithDetails: (details) {
+        final slot = _slotFor(details, context);
+        if (slot != null) onDropSlot(details.data, slot);
+      },
       builder: (context, candidates, rejected) {
-        final targeted = candidates.isNotEmpty;
         final colorScheme = Theme.of(context).colorScheme;
         final borderColor = outsideTimedFormat
             ? Theme.of(context).colorScheme.error
-            : targeted
-            ? colorScheme.primary
             : selected
             ? colorScheme.primary
             : colorScheme.outlineVariant;
@@ -688,13 +803,13 @@ class _OverviewSlideCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: borderColor, width: targeted ? 3 : 2),
+                border: Border.all(color: borderColor, width: 2),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(
-                      alpha: selected || targeted ? 0.34 : 0.18,
+                      alpha: selected ? 0.34 : 0.18,
                     ),
-                    blurRadius: selected || targeted ? 14 : 8,
+                    blurRadius: selected ? 14 : 8,
                     offset: const Offset(0, 4),
                   ),
                 ],
@@ -769,12 +884,68 @@ class _OverviewSlideCard extends StatelessWidget {
                         ),
                       ),
                     ),
+                  // De markering hangt aan de kaartrand — de kaart zelf is
+                  // geen dropdoel meer.
+                  ..._insertMarkers(colorScheme),
                 ],
               ),
             ),
           ),
         );
       },
+    );
+  }
+}
+
+/// Dropdoel voor invoegslot N ("achteraan"). Alleen zichtbaar tijdens een
+/// sleep: het slot na de laatste dia hangt niet aan een kaart en heeft dus een
+/// eigen doelzone nodig (#2362).
+class _OverviewEndSlot extends StatelessWidget {
+  const _OverviewEndSlot({
+    required this.active,
+    required this.onHover,
+    required this.onAccept,
+  });
+
+  final bool active;
+  final ValueChanged<bool> onHover;
+  final ValueChanged<int> onAccept;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return DragTarget<int>(
+      onWillAcceptWithDetails: (_) => true,
+      onMove: (_) => onHover(true),
+      onLeave: (_) => onHover(false),
+      onAcceptWithDetails: (details) => onAccept(details.data),
+      builder: (context, candidates, rejected) => AnimatedContainer(
+        duration: const Duration(milliseconds: 120),
+        height: 32,
+        margin: const EdgeInsets.fromLTRB(24, 0, 24, 10),
+        decoration: BoxDecoration(
+          color: active
+              ? colorScheme.primary.withValues(alpha: 0.14)
+              : colorScheme.surfaceContainerHighest.withValues(alpha: 0.45),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: active ? colorScheme.primary : colorScheme.outlineVariant,
+            width: active ? 2.5 : 1,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            context.l10n.d('Achteraan plaatsen'),
+            style: TextStyle(
+              color: active
+                  ? colorScheme.primary
+                  : colorScheme.onSurfaceVariant,
+              fontSize: 12,
+              fontWeight: active ? FontWeight.w700 : FontWeight.w500,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

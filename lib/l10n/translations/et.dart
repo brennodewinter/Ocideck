@@ -1618,6 +1618,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Verplaats vóór': 'Liiguta enne',
+  'Verplaats na': 'Liiguta pärast',
+  'Achteraan plaatsen': 'Aseta lõppu',
   'Importeren…': 'Impordi…',
   'OciDeck-pakket (.ocideck)': 'OciDecki pakett (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

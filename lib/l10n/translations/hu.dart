@@ -1627,6 +1627,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Verplaats vóór': 'Mozgatás elé',
+  'Verplaats na': 'Mozgatás után',
+  'Achteraan plaatsen': 'Helyezés a végére',
   'Importeren…': 'Importálás…',
   'OciDeck-pakket (.ocideck)': 'OciDeck-csomag (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

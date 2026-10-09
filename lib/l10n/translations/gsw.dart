@@ -1628,6 +1628,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Verplaats vóór': 'Davor verschiebe',
+  'Verplaats na': 'Danach verschiebe',
+  'Achteraan plaatsen': 'Am Schluss platziere',
   'Importeren…': 'Importiere…',
   'OciDeck-pakket (.ocideck)': 'OciDeck-Paket (.ocideck)',
   'Een logo in een onderhoek schuift bij een footer automatisch naar dezelfde bovenhoek.':

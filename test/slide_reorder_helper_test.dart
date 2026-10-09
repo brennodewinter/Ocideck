@@ -86,4 +86,118 @@ void main() {
       },
     );
   });
+
+  group('applySlideInsertion', () {
+    List<String> apply(
+      DeckNotifier deck,
+      EditorNotifier editor,
+      int dragged,
+      int slot,
+    ) {
+      applySlideInsertion(
+        dragged,
+        slot,
+        editor: editor.currentState,
+        notifier: deck,
+        editorNotifier: editor,
+        slideCount: deck.state.deck!.slides.length,
+      );
+      return deck.state.deck!.slides.map((s) => s.id).toList();
+    }
+
+    test('slot 0 places the slide before the first one', () {
+      final deck = _deckWith(3); // 4 slides
+      final ids = deck.state.deck!.slides.map((s) => s.id).toList();
+      final editor = EditorNotifier()..select(0);
+
+      final after = apply(deck, editor, 2, 0);
+
+      expect(after, [ids[2], ids[0], ids[1], ids[3]]);
+      expect(editor.currentState.selectedIndex, 1);
+    });
+
+    test('a middle slot places the slide between its neighbours', () {
+      final deck = _deckWith(3);
+      final ids = deck.state.deck!.slides.map((s) => s.id).toList();
+      final editor = EditorNotifier()..select(0);
+
+      // Slot 3 = "vóór dia 3": de gesleepte dia 0 belandt tussen 2 en 3.
+      final after = apply(deck, editor, 0, 3);
+
+      expect(after, [ids[1], ids[2], ids[0], ids[3]]);
+    });
+
+    test('slot N places the slide after the last one', () {
+      final deck = _deckWith(3);
+      final ids = deck.state.deck!.slides.map((s) => s.id).toList();
+      final editor = EditorNotifier()..select(0);
+
+      final after = apply(deck, editor, 0, 4);
+
+      expect(after, [ids[1], ids[2], ids[3], ids[0]]);
+      expect(editor.currentState.selectedIndex, 3);
+    });
+
+    test('a selected block moves to a slot while keeping its order', () {
+      final deck = _deckWith(4); // 5 slides
+      final ids = deck.state.deck!.slides.map((s) => s.id).toList();
+      final editor = EditorNotifier()..selectAll(5);
+      editor
+        ..select(1)
+        ..toggleSelect(2);
+
+      // Sleep dia 1 (deel van het blok {1,2}) naar slot 0: vóór alles.
+      final after = apply(deck, editor, 1, 0);
+
+      expect(after, [ids[1], ids[2], ids[0], ids[3], ids[4]]);
+      expect(editor.currentState.selection, {0, 1});
+      // De actieve dia (de laatst aangevinkte, index 2) rijdt mee naar het
+      // tweede bloklid.
+      expect(editor.currentState.selectedIndex, 1);
+    });
+
+    test('a slot inside or next to the dragged block changes nothing', () {
+      final deck = _deckWith(4);
+      final ids = deck.state.deck!.slides.map((s) => s.id).toList();
+      final editor = EditorNotifier()..selectAll(5);
+      editor
+        ..select(1)
+        ..toggleSelect(2);
+
+      for (final slot in [1, 2, 3]) {
+        expect(
+          apply(deck, editor, 1, slot),
+          ids,
+          reason: 'slot $slot in/langs het eigen blok is een no-op',
+        );
+      }
+    });
+
+    test('a single slide dropped on its own slots changes nothing', () {
+      final deck = _deckWith(3);
+      final ids = deck.state.deck!.slides.map((s) => s.id).toList();
+      final editor = EditorNotifier()..select(0);
+
+      for (final slot in [1, 2]) {
+        expect(apply(deck, editor, 1, slot), ids);
+      }
+    });
+  });
+
+  group('isNoOpInsertSlot', () {
+    test('marks the slots in and around a contiguous block', () {
+      expect(isNoOpInsertSlot({1, 2}, 1, 5), isTrue);
+      expect(isNoOpInsertSlot({1, 2}, 2, 5), isTrue);
+      expect(isNoOpInsertSlot({1, 2}, 3, 5), isTrue);
+      expect(isNoOpInsertSlot({1, 2}, 0, 5), isFalse);
+      expect(isNoOpInsertSlot({1, 2}, 4, 5), isFalse);
+    });
+
+    test('marks only member slots of a non-contiguous selection', () {
+      expect(isNoOpInsertSlot({0, 2}, 0, 5), isTrue);
+      expect(isNoOpInsertSlot({0, 2}, 1, 5), isFalse);
+      expect(isNoOpInsertSlot({0, 2}, 2, 5), isTrue);
+      expect(isNoOpInsertSlot({0, 2}, 3, 5), isFalse);
+    });
+  });
 }
