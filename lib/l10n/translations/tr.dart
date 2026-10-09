@@ -11,7 +11,6 @@ const _stringsTr = {
   'presentFullscreen': 'Sunum yap (tam ekran) · sunucu görünümü için P',
   'visualMode': 'Görsel mod',
   'markdownMode': 'Markdown modu',
-  'save': 'Kaydet',
   'more': 'Daha fazla',
   'export': 'Dışa aktar',
   'exportReady': 'Dışa aktar (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsTr = {
   'importUrl': 'URL ile içe aktar…',
   'findReplace': 'Bul ve değiştir',
   'fullDeckPreview': 'Sunumun tamamını görüntüle',
-  'settings': 'Ayarlar',
   'settingsGeneral': 'Genel',
   'settingsColors': 'Renkler',
-  'language': 'Dil',
-  'applicationLanguage': 'Uygulama dili',
   'languageHelp':
       'Arayüz anında dil değiştirir. Sunum içeriği değişmeden kalır.',
   'exportFolderSetting': 'Dışa aktarma klasörü',
@@ -51,9 +47,6 @@ const _stringsTr = {
   'removeExportFolder': 'Dışa aktarma klasörünü kaldır',
   'exportFolderHelp':
       'Tüm dışa aktarmalar (PDF/PPTX) buraya kaydedilir. Ayarlanmadıysa dışa aktarma sunum dosyasının yanına gelir.',
-  'cancel': 'İptal',
-  'close': 'Kapat',
-  'saveSettings': 'Kaydet',
   'exportDialogTitle': 'Dışa aktar',
   'exportAgain': 'Yeniden dışa aktar',
   'exportIntro':
@@ -241,7 +234,6 @@ const _dutchSourceTr = {
   'Onbereikbaar': 'Ulaşılamıyor',
   'Infrastructuur': 'Altyapı',
   'Mobiel': 'Mobil',
-  'Overig': 'Diğer',
   '(leeg)': '(boş)',
   'Audio': 'Ses',
   'Bijschrift': 'Açıklama',
@@ -338,7 +330,6 @@ const _dutchSourceTr = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'İpucu: uzun bir parola cümlesi, sembollü kısa bir paroladan daha güvenlidir.',
   'Versleuteld pakket': 'Şifreli paket',
-  'Wachtwoord': 'Parola',
   'Wachtwoord gekopieerd naar klembord.': 'Parola panoya kopyalandı.',
   'Wachtwoord tonen': 'Parolayı göster',
   'Wachtwoord verbergen': 'Parolayı gizle',
@@ -394,9 +385,7 @@ const _dutchSourceTr = {
   'Instelling opslaan is mislukt.': 'Ayar kaydedilemedi.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Dikkat: web sürümü yalnızca buna izin veren sunuculardan veri alabilir (CORS).',
-  'Geen': 'Yok',
   'Nieuw': 'Yeni',
-  'Verwijderen': 'Sil',
   'Herstellen': 'Geri yükle',
   'Opslaan en sluiten': 'Kaydet ve kapat',
   'Niet opslaan': 'Kaydetme',
@@ -515,7 +504,6 @@ const _dutchSourceTr = {
   'Slides importeren': 'Slaytları içe aktar',
   'Importeren': 'İçe aktar',
   'Klaar': 'Bitti',
-  'Toevoegen': 'Ekle',
   'Toegevoegd': 'Eklendi',
   'Selecteer alles': 'Tümünü seç',
   'Deselecteer alles': 'Seçimi kaldır',
@@ -568,7 +556,6 @@ const _dutchSourceTr = {
       'Virgülle ayrılmış, örn. çeyrek, sayılar, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Bu bilgiler Markdown içinde saklanır ve açarken aranabilir.',
-  'App-thema': 'Uygulama teması',
   'Look-and-feel': 'Görünüm ve his',
   'Kopie maken en aanpassen': 'Kopya oluştur ve özelleştir',
   'Thema verwijderen': 'Temayı sil',
@@ -1485,7 +1472,6 @@ const _dutchSourceTr = {
       'Sunum sırasında tabloyu salonun gözü önünde değiştirmenizi sağlar. Varsayılan olarak kapalıdır.',
   'Automatisch doorgaan': 'Otomatik ilerle',
   'Persoonsgegevens': 'Kişisel veriler',
-  'Wijzigen': 'Değiştir',
   'Automatisch afspelen': 'Otomatik oynat',
   'Melden': 'Bildir',
   'Geaccepteerd': 'Kabul edildi',
@@ -1758,7 +1744,6 @@ const _dutchSourceTr = {
   'Het antwoord van de server was te groot': 'Sunucunun yanıtı çok büyüktü',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Sunucu URL\'si',
-  'Gebruikersnaam': 'Kullanıcı adı',
   'App-wachtwoord': 'Uygulama parolası',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Bunun için Nextcloud\'da bir uygulama parolası oluşturun',
@@ -1781,7 +1766,6 @@ const _dutchSourceTr = {
   'Als .ocideck-pakket (één bestand, met assets)':
       '.ocideck paketi olarak (tek dosya, varlıklarıyla)',
   'Als losse .md plus afbeeldingen': 'Ayrı bir .md ve görseller olarak',
-  'Opslaan': 'Kaydet',
   'Presenteren': 'Sunum yapma',
   'Tijden-overzicht tonen na afloop': 'Bitişte süre özetini göster',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -1866,7 +1850,6 @@ const _dutchSourceTr = {
       'Başlık metninin arka plan görseliyle kontrastı yetersiz',
   'Herstel': 'Düzelt',
   'Tijdlijn': 'Zaman çizelgesi',
-  'Indeling': 'Düzen',
   'Automatisch': 'Otomatik',
   'Horizontaal': 'Yatay',
   'Verticaal': 'Dikey',
@@ -2047,13 +2030,11 @@ const _dutchSourceTr = {
   'Geen slides gemeten.': 'Ölçülen slayt yok.',
   'Tijden gekopieerd naar klembord.': 'Süreler panoya kopyalandı.',
   'Kopieer': 'Kopyala',
-  'Sluiten': 'Kapat',
   'Tekstgrootte van de interface': 'Arayüz yazı boyutu',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Düzenleme ortamındaki tüm metni en fazla %200\'e kadar büyütür. Slaytların kendisi bundan etkilenmez.',
   'Breedte van het slidepaneel': 'Slayt panelinin genişliği',
   'Pijltjestoetsen passen de breedte aan': 'Ok tuşları genişliği ayarlar',
-  'Annuleren': 'İptal',
   'Checklist': 'Kontrol listesi',
   'Voortgangsgrafiek tonen': 'İlerleme grafiğini göster',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -2304,7 +2285,6 @@ const _dutchSourceTr = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Başlık ve alt başlığın arkasındaki arka planı sakinleştirir.',
   'Licht': 'Açık',
-  'Donker': 'Koyu',
   'Pen (D)': 'Kalem (D)',
   'Markeerstift (T)': 'Fosforlu kalem (T)',
   'Gum (E / Shift+E)': 'Silgi (E / Shift+E)',
@@ -2606,7 +2586,6 @@ const _dutchSourceAddTr = <String, String>{
       'İşe yaramadı. Hiçbir şey gönderilmedi — tekrar dene.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'E-posta adresin yalnızca posta kutusuna erişebildiğini kanıtlar — bir hesap değildir ve sen onaylayana kadar hiçbir şey gönderilmez.',
-  'Je e-mailadres': 'E-posta adresin',
   'Code aanvragen': 'Kod iste',
   'Opnieuw versturen': 'Tekrar gönder',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -3838,7 +3817,6 @@ const _dutchSourceAddTr = <String, String>{
   'Aantal minuten': 'Dakika sayısı',
   'Aantal pogingen': 'Deneme sayısı',
   'Accountbewerkingen': 'Hesap işlemleri',
-  'Accountgegevens': 'Hesap bilgileri',
   'Accountnummer': 'Hesap numarası',
   'Accountnummer waarop de actie gericht was':
       'İşlemin hedeflediği hesap numarası',
@@ -5121,7 +5099,6 @@ const _dutchSourceAddTr = <String, String>{
   'Chat': 'Sohbet',
   'Chat sluiten': 'Sohbeti kapat',
   'Bericht…': 'Mesaj…',
-  'Versturen': 'Gönder',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Henüz mesaj yok. Ortak yazarlarına bir şeyler söyle.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -5508,8 +5485,6 @@ const _dutchSourceAddTr = <String, String>{
   'Rapportages voorbereiden': 'Raporları hazırlayın',
   'Rapporttitel': 'Rapor başlığı',
   'Stap': 'Adım',
-  'Taal': 'Dil',
-  'Terug': 'Geri',
   'Veranderingen in monitoring': 'İzlemedeki değişiklikler',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Bir veya daha fazla kuruluş için yararlı bir önceki ölçüm eksik.',

@@ -22,40 +22,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app_localizations/app_language_registry.dart';
+
 // Same order/codes as _dutchSourceStrings in app_localizations.dart (nl is the
 // source language and needs no translation).
-const langs = [
-  'en',
-  'it',
-  'de',
-  'fr',
-  'es',
-  'fy',
-  'pap',
-  'la',
-  'id',
-  'pl',
-  'uk',
-  'gsw',
-  'el',
-  'da',
-  'sv',
-  'hr',
-  'cs',
-  'fi',
-  'bg',
-  'lv',
-  'lt',
-  'mt',
-  'et',
-  'hu',
-  'ga',
-  'pt',
-  'ro',
-  'sl',
-  'sk',
-  'tr',
-];
+final langs = AppLanguages.names.keys.where((code) => code != 'nl').toList();
 
 String cap(String code) => code[0].toUpperCase() + code.substring(1);
 
@@ -145,6 +116,9 @@ void main(List<String> args) {
   // Validate every addition covers exactly the 31 target languages up front, so
   // a gap fails here (with a clear message) rather than deep in `make check`.
   additions.forEach((source, value) {
+    if (sharedTranslations['en']?.containsKey(source) == true) {
+      fail('"$source" staat al in de gedeelde AppFoundation-catalogus');
+    }
     final t = (value as Map).cast<String, dynamic>();
     final missing = langs.where((l) => !t.containsKey(l)).toList();
     final extra = t.keys.where((k) => k != 'nl' && !langs.contains(k)).toList();

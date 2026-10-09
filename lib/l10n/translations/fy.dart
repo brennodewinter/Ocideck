@@ -11,7 +11,6 @@ const _stringsFy = {
   'presentFullscreen': 'Presintearje folslein skerm · P foar presenter view',
   'visualMode': 'Fisuele modus',
   'markdownMode': 'Markdown-modus',
-  'save': 'Bewarje',
   'more': 'Mear',
   'export': 'Eksportearje',
   'exportReady': 'Eksportearje (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsFy = {
   'importUrl': 'Ymportearje fan URL…',
   'findReplace': 'Sykje en ferfange',
   'fullDeckPreview': 'Hiel deck besjen',
-  'settings': 'Ynstellingen',
   'settingsGeneral': 'Algemien',
   'settingsColors': 'Kleuren',
-  'language': 'Taal',
-  'applicationLanguage': 'Applikaasjetaal',
   'languageHelp':
       'De interface wikselet daliks fan taal. Presintaasje-ynhâld bliuwt itselde.',
   'exportFolderSetting': 'Eksportmap',
@@ -51,9 +47,6 @@ const _stringsFy = {
   'removeExportFolder': 'Eksportmap fuortsmite',
   'exportFolderHelp':
       'Alle eksporten (PDF/PPTX) wurde hjir bewarre. Net ynsteld? Dan komme se neist it presintaasjebestân.',
-  'cancel': 'Annulearje',
-  'close': 'Slute',
-  'saveSettings': 'Bewarje',
   'exportDialogTitle': 'Eksportearje',
   'exportAgain': 'Nochris eksportearje',
   'exportIntro':
@@ -240,7 +233,6 @@ const _dutchSourceFy = {
   'Onbereikbaar': 'Net berikber',
   'Infrastructuur': 'Ynfrastruktuer',
   'Mobiel': 'Mobyl',
-  'Overig': 'Oars',
   '(leeg)': '(leech)',
   'Audio': 'Audio',
   'Bijschrift': 'Byskrift',
@@ -340,7 +332,6 @@ const _dutchSourceFy = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Tip: in lange wachtwurdsin is feiliger as in koart wachtwurd mei symboalen.',
   'Versleuteld pakket': 'Fersifere pakket',
-  'Wachtwoord': 'Wachtwurd',
   'Wachtwoord gekopieerd naar klembord.': 'Wachtwurd kopiearre nei klamboerd.',
   'Wachtwoord tonen': 'Wachtwurd sjen litte',
   'Wachtwoord verbergen': 'Wachtwurd ferbergje',
@@ -396,9 +387,7 @@ const _dutchSourceFy = {
   'Instelling opslaan is mislukt.': 'Ynstelling bewarje is mislearre.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tink derom: de webferzje kin allinnich ophelje fan servers dy\'t dat tastean (CORS).',
-  'Geen': 'Gjin',
   'Nieuw': 'Nij',
-  'Verwijderen': 'Fuortsmite',
   'Herstellen': 'Weromsette',
   'Opslaan en sluiten': 'Bewarje en slute',
   'Niet opslaan': 'Net bewarje',
@@ -480,7 +469,6 @@ const _dutchSourceFy = {
   'Slides importeren': 'Slides ymportearje',
   'Importeren': 'Ymportearje',
   'Klaar': 'Klear',
-  'Toevoegen': 'Tafoegje',
   'Toegevoegd': 'Tafoege',
   'Selecteer alles': 'Alles selektearje',
   'Deselecteer alles': 'Alles deselektearje',
@@ -507,7 +495,6 @@ const _dutchSourceFy = {
   'Datum': 'Datum',
   'Beschrijving': 'Beskriuwing',
   'Trefwoorden': 'Trefwurden',
-  'App-thema': 'App-tema',
   'Look-and-feel': 'Uterlik',
   'Kopie maken en aanpassen': 'Kopy meitsje en oanpasse',
   'Thema verwijderen': 'Tema wiskje',
@@ -735,7 +722,6 @@ const _dutchSourceAddFy = {
       'Dat is net slagge. Der is neat ferstjoerd — probearje it opnij.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Jo e-mailadres bewiist allinnich datst by de mailbox kinst — it is gjin account en der wurdt neat ferstjoerd foardatst sels befêstigest.',
-  'Je e-mailadres': 'Jo e-mailadres',
   'Code aanvragen': 'Koade oanfreegje',
   'Opnieuw versturen': 'Opnij ferstjoere',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -1981,7 +1967,6 @@ const _dutchSourceAddFy = {
   'Aantal minuten': 'Oantal minuten',
   'Aantal pogingen': 'Oantal besykjen',
   'Accountbewerkingen': 'Account operaasjes',
-  'Accountgegevens': 'Account ynformaasje',
   'Accountnummer': 'Rekkennûmer',
   'Accountnummer waarop de actie gericht was':
       'Accountnûmer rjochte troch de aksje',
@@ -3278,7 +3263,6 @@ const _dutchSourceAddFy = {
   'Chat': 'Chat',
   'Chat sluiten': 'Chat slute',
   'Bericht…': 'Berjocht…',
-  'Versturen': 'Ferstjoere',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Noch gjin berjochten. Sis wat tsjin dyn mei-auteurs.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -3669,8 +3653,6 @@ const _dutchSourceAddFy = {
   'Rapportages voorbereiden': 'Meitsje rapporten',
   'Rapporttitel': 'Rapport titel',
   'Stap': 'Stap',
-  'Taal': 'Taal',
-  'Terug': 'Rêch',
   'Veranderingen in monitoring': 'Feroarings yn tafersjoch',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'In nuttige foarige mjitting ûntbrekt foar ien of mear organisaasjes.',
@@ -5063,7 +5045,6 @@ const _dutchSourceAddFy = {
       'Lit dy de tabel ûnder it presintearjen foar de seal oanpasse. Stiet standert út.',
   'Automatisch doorgaan': 'Automatysk trochgean',
   'Persoonsgegevens': 'Persoansgegevens',
-  'Wijzigen': 'Feroarje',
   'Automatisch afspelen': 'Automatysk ôfspylje',
   'Melden': 'Melde',
   'Geaccepteerd': 'Akseptearre',
@@ -5335,7 +5316,6 @@ const _dutchSourceAddFy = {
       'It antwurd fan de server wie te grut',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Server-URL',
-  'Gebruikersnaam': 'Brûkersnamme',
   'App-wachtwoord': 'App-wachtwurd',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Meitsje hjirfoar in app-wachtwurd oan yn Nextcloud',
@@ -5359,7 +5339,6 @@ const _dutchSourceAddFy = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'As .ocideck-pakket (ien bestân, mei assets)',
   'Als losse .md plus afbeeldingen': 'As losse .md plus ôfbyldingen',
-  'Opslaan': 'Bewarje',
   // Accessibility labels for icon-only buttons (screen readers).
   'Presenteren': 'Presintearje',
   'Tijden-overzicht tonen na afloop': 'Tiidenoersjoch nei ôfrin toane',
@@ -5452,7 +5431,6 @@ const _dutchSourceAddFy = {
   'Herstel': 'Herstelle',
   // Tijdlijn-slides.
   'Tijdlijn': 'Tiidline',
-  'Indeling': 'Yndieling',
   'Automatisch': 'Automatysk',
   'Horizontaal': 'Horizontaal',
   'Verticaal': 'Fertikaal',
@@ -5630,13 +5608,11 @@ const _dutchSourceAddFy = {
   'Geen slides gemeten.': 'Gjin slides metten.',
   'Tijden gekopieerd naar klembord.': 'Tiden nei it klamboerd kopiearre.',
   'Kopieer': 'Kopiearje',
-  'Sluiten': 'Slute',
   'Tekstgrootte van de interface': 'Tekstgrutte fan de ynterface',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Fergruttet alle tekst fan de bewurkomjouwing oant maksimaal 200%. De slides sels feroarje net.',
   'Breedte van het slidepaneel': 'Breedte fan it slidepaniel',
   'Pijltjestoetsen passen de breedte aan': 'Pylktoetsen passe de breedte oan',
-  'Annuleren': 'Annulearje',
   'Checklist': 'Kontrôlelist',
   'Voortgangsgrafiek tonen': 'Fuortgongsgrafyk toane',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -6040,7 +6016,6 @@ const _dutchSourceAddFy = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Makket de eftergrûn rêstiger efter titel en subtitel.',
   'Licht': 'Ljocht',
-  'Donker': 'Tsjuster',
   'Pen (D)': 'Pinne (D)',
   'Markeerstift (T)': 'Markearstift (T)',
   'Gum (E / Shift+E)': 'Gom (E / Shift+E)',

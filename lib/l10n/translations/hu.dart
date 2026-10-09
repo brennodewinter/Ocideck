@@ -11,7 +11,6 @@ const _stringsHu = {
   'presentFullscreen': 'Bemutatás (teljes képernyő) · P az előadói nézethez',
   'visualMode': 'Vizuális mód',
   'markdownMode': 'Markdown mód',
-  'save': 'Mentés',
   'more': 'Továbbiak',
   'export': 'Exportálás',
   'exportReady': 'Exportálás (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsHu = {
   'importUrl': 'Importálás URL-ből…',
   'findReplace': 'Keresés és csere',
   'fullDeckPreview': 'Teljes diasor megtekintése',
-  'settings': 'Beállítások',
   'settingsGeneral': 'Általános',
   'settingsColors': 'Színek',
-  'language': 'Nyelv',
-  'applicationLanguage': 'Alkalmazás nyelve',
   'languageHelp':
       'A felület azonnal nyelvet vált. A bemutató tartalma változatlan marad.',
   'exportFolderSetting': 'Export mappa',
@@ -51,9 +47,6 @@ const _stringsHu = {
   'removeExportFolder': 'Export mappa eltávolítása',
   'exportFolderHelp':
       'Minden export (PDF/PPTX) ide mentődik. Ha nincs beállítva, az export a bemutatófájl mellé kerül.',
-  'cancel': 'Mégse',
-  'close': 'Bezárás',
-  'saveSettings': 'Mentés',
   'exportDialogTitle': 'Exportálás',
   'exportAgain': 'Újbóli exportálás',
   'exportIntro':
@@ -241,7 +234,6 @@ const _dutchSourceHu = {
   'Onbereikbaar': 'Elérhetetlen',
   'Infrastructuur': 'Infrastruktúra',
   'Mobiel': 'Mobil',
-  'Overig': 'Egyéb',
   '(leeg)': '(üres)',
   'Audio': 'Hang',
   'Bijschrift': 'Képaláírás',
@@ -339,7 +331,6 @@ const _dutchSourceHu = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Tipp: egy hosszú jelmondat biztonságosabb, mint egy rövid, szimbólumokat tartalmazó jelszó.',
   'Versleuteld pakket': 'Titkosított csomag',
-  'Wachtwoord': 'Jelszó',
   'Wachtwoord gekopieerd naar klembord.': 'Jelszó a vágólapra másolva.',
   'Wachtwoord tonen': 'Jelszó megjelenítése',
   'Wachtwoord verbergen': 'Jelszó elrejtése',
@@ -396,9 +387,7 @@ const _dutchSourceHu = {
   'Instelling opslaan is mislukt.': 'A beállítás mentése sikertelen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Megjegyzés: a webes verzió csak olyan szerverekről tölthet le, amelyek ezt engedélyezik (CORS).',
-  'Geen': 'Nincs',
   'Nieuw': 'Új',
-  'Verwijderen': 'Törlés',
   'Herstellen': 'Visszaállítás',
   'Opslaan en sluiten': 'Mentés és bezárás',
   'Niet opslaan': 'Ne mentse',
@@ -520,7 +509,6 @@ const _dutchSourceHu = {
   'Slides importeren': 'Diák importálása',
   'Importeren': 'Importálás',
   'Klaar': 'Kész',
-  'Toevoegen': 'Hozzáadás',
   'Toegevoegd': 'Hozzáadva',
   'Selecteer alles': 'Összes kijelölése',
   'Deselecteer alles': 'Kijelölés megszüntetése',
@@ -573,7 +561,6 @@ const _dutchSourceHu = {
       'Vesszővel elválasztva, pl. negyedéves, számok, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Ezek az adatok a Markdownban tárolódnak és megnyitáskor kereshetők.',
-  'App-thema': 'Alkalmazás témája',
   'Look-and-feel': 'Megjelenés',
   'Kopie maken en aanpassen': 'Másolat létrehozása és testreszabása',
   'Thema verwijderen': 'Téma törlése',
@@ -798,7 +785,6 @@ const _dutchSourceHu = {
   'Het antwoord van de server was te groot': 'A szerver válasza túl nagy volt',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Szerver-URL',
-  'Gebruikersnaam': 'Felhasználónév',
   'App-wachtwoord': 'App-jelszó',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Ehhez hozz létre egy app-jelszót a Nextcloudban',
@@ -821,7 +807,6 @@ const _dutchSourceHu = {
   'Als .ocideck-pakket (één bestand, met assets)':
       '.ocideck csomagként (egy fájl, eszközökkel)',
   'Als losse .md plus afbeeldingen': 'Külön .md fájlként képekkel',
-  'Opslaan': 'Mentés',
   'Presenteren': 'Előadás',
   'Tijden-overzicht tonen na afloop': 'Idő-áttekintés megjelenítése a végén',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -906,7 +891,6 @@ const _dutchSourceHu = {
       'A címszöveg kontrasztja túl kicsi a háttérképpel',
   'Herstel': 'Javítás',
   'Tijdlijn': 'Idővonal',
-  'Indeling': 'Elrendezés',
   'Automatisch': 'Automatikus',
   'Horizontaal': 'Vízszintes',
   'Verticaal': 'Függőleges',
@@ -1083,14 +1067,12 @@ const _dutchSourceHu = {
   'Geen slides gemeten.': 'Nincs mért dia.',
   'Tijden gekopieerd naar klembord.': 'Idők a vágólapra másolva.',
   'Kopieer': 'Másolás',
-  'Sluiten': 'Bezárás',
   'Tekstgrootte van de interface': 'A felület szövegmérete',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'A szerkesztőkörnyezet minden szövegét legfeljebb 200%-ra nagyítja. Maguk a diák nem változnak.',
   'Breedte van het slidepaneel': 'A diapanel szélessége',
   'Pijltjestoetsen passen de breedte aan':
       'A nyílbillentyűk állítják a szélességet',
-  'Annuleren': 'Mégse',
   'Checklist': 'Feladatlista',
   'Voortgangsgrafiek tonen': 'Előrehaladási diagram megjelenítése',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1336,7 +1318,6 @@ const _dutchSourceHu = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Nyugodtabbá teszi a hátteret a cím és az alcím mögött.',
   'Licht': 'Világos',
-  'Donker': 'Sötét',
   'Pen (D)': 'Toll (D)',
   'Markeerstift (T)': 'Szövegkiemelő (T)',
   'Gum (E / Shift+E)': 'Radír (E / Shift+E)',
@@ -1698,7 +1679,6 @@ const _dutchSourceAddHu = <String, String>{
       'Ez nem sikerült. Semmi sem lett elküldve — próbáld újra.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Az e-mail-címed csak azt bizonyítja, hogy eléred a postafiókot — nem fiók, és semmi sem kerül elküldésre, amíg te magad meg nem erősíted.',
-  'Je e-mailadres': 'Az e-mail-címed',
   'Code aanvragen': 'Kód kérése',
   'Opnieuw versturen': 'Újraküldés',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2944,7 +2924,6 @@ const _dutchSourceAddHu = <String, String>{
   'Aantal minuten': 'Percek száma',
   'Aantal pogingen': 'A kísérletek száma',
   'Accountbewerkingen': 'Számlaműveletek',
-  'Accountgegevens': 'Számlainformációk',
   'Accountnummer': 'Számlaszám',
   'Accountnummer waarop de actie gericht was':
       'A művelet által megcélzott számlaszám',
@@ -4244,7 +4223,6 @@ const _dutchSourceAddHu = <String, String>{
   'Chat': 'Csevegés',
   'Chat sluiten': 'Csevegés bezárása',
   'Bericht…': 'Üzenet…',
-  'Versturen': 'Küldés',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Még nincsenek üzenetek. Mondj valamit a társszerzőidnek.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4636,8 +4614,6 @@ const _dutchSourceAddHu = <String, String>{
   'Rapportages voorbereiden': 'Készítsen jelentéseket',
   'Rapporttitel': 'Jelentés címe',
   'Stap': 'Lépés',
-  'Taal': 'Nyelv',
-  'Terug': 'Vissza',
   'Veranderingen in monitoring': 'Változások a monitoringban',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Egy vagy több szervezetnél hiányzik egy hasznos korábbi mérés.',
@@ -6021,7 +5997,6 @@ const _dutchSourceAddHu = <String, String>{
       'Lehetővé teszi, hogy bemutatás közben a közönség előtt módosítsd a táblázatot. Alapértelmezetten kikapcsolva.',
   'Automatisch doorgaan': 'Automatikus továbblépés',
   'Persoonsgegevens': 'Személyes adatok',
-  'Wijzigen': 'Módosítás',
   'Automatisch afspelen': 'Automatikus lejátszás',
   'Melden': 'Jelentés',
   'Geaccepteerd': 'Elfogadva',

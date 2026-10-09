@@ -11,7 +11,6 @@ const _stringsLt = {
   'presentFullscreen': 'Pristatyti (visas ekranas) · P – pranešėjo rodinys',
   'visualMode': 'Vaizdinis režimas',
   'markdownMode': 'Markdown režimas',
-  'save': 'Įrašyti',
   'more': 'Daugiau',
   'export': 'Eksportuoti',
   'exportReady': 'Eksportuoti (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsLt = {
   'importUrl': 'Importuoti iš URL…',
   'findReplace': 'Rasti ir pakeisti',
   'fullDeckPreview': 'Peržiūrėti visą rinkinį',
-  'settings': 'Nustatymai',
   'settingsGeneral': 'Bendra',
   'settingsColors': 'Spalvos',
-  'language': 'Kalba',
-  'applicationLanguage': 'Programos kalba',
   'languageHelp':
       'Sąsajos kalba pasikeičia iškart. Prezentacijos turinys nekinta.',
   'exportFolderSetting': 'Eksportų aplankas',
@@ -51,9 +47,6 @@ const _stringsLt = {
   'removeExportFolder': 'Pašalinti eksportų aplanką',
   'exportFolderHelp':
       'Visi eksportai (PDF/PPTX) įrašomi čia. Jei nenustatyta, eksportai įrašomi šalia prezentacijos failo.',
-  'cancel': 'Atsisakyti',
-  'close': 'Užverti',
-  'saveSettings': 'Įrašyti',
   'exportDialogTitle': 'Eksportuoti',
   'exportAgain': 'Eksportuoti dar kartą',
   'exportIntro':
@@ -240,7 +233,6 @@ const _dutchSourceLt = {
   'Onbereikbaar': 'Nepasiekiama',
   'Infrastructuur': 'Infrastruktūra',
   'Mobiel': 'Mobilusis',
-  'Overig': 'Kita',
   '(leeg)': '(tuščia)',
   'Audio': 'Garsas',
   'Bijschrift': 'Antraštė',
@@ -338,7 +330,6 @@ const _dutchSourceLt = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Patarimas: ilga slaptažodžio frazė yra saugesnė nei trumpas slaptažodis su simboliais.',
   'Versleuteld pakket': 'Užšifruotas paketas',
-  'Wachtwoord': 'Slaptažodis',
   'Wachtwoord gekopieerd naar klembord.':
       'Slaptažodis nukopijuotas į iškarpinę.',
   'Wachtwoord tonen': 'Rodyti slaptažodį',
@@ -395,9 +386,7 @@ const _dutchSourceLt = {
   'Instelling opslaan is mislukt.': 'Nepavyko išsaugoti nustatymo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Pastaba: žiniatinklio versija gali parsisiųsti tik iš serverių, kurie tai leidžia (CORS).',
-  'Geen': 'Nėra',
   'Nieuw': 'Naujas',
-  'Verwijderen': 'Ištrinti',
   'Herstellen': 'Atkurti',
   'Opslaan en sluiten': 'Išsaugoti ir uždaryti',
   'Niet opslaan': 'Neišsaugoti',
@@ -522,7 +511,6 @@ const _dutchSourceLt = {
   'Slides importeren': 'Importuoti skaidres',
   'Importeren': 'Importuoti',
   'Klaar': 'Atlikta',
-  'Toevoegen': 'Pridėti',
   'Toegevoegd': 'Pridėta',
   'Selecteer alles': 'Pažymėti viską',
   'Deselecteer alles': 'Atžymėti viską',
@@ -575,7 +563,6 @@ const _dutchSourceLt = {
       'Atskirti kableliais, pvz. ketvirtinis, skaičiai, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Šie duomenys saugomi Markdown faile ir yra randami atidarant.',
-  'App-thema': 'Programos tema',
   'Look-and-feel': 'Išvaizda',
   'Kopie maken en aanpassen': 'Sukurti ir pritaikyti kopiją',
   'Thema verwijderen': 'Ištrinti temą',
@@ -803,7 +790,6 @@ const _dutchSourceLt = {
       'Serverio atsakymas buvo per didelis',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Serverio URL',
-  'Gebruikersnaam': 'Naudotojo vardas',
   'App-wachtwoord': 'Programos slaptažodis',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Tam sukurkite programos slaptažodį Nextcloud',
@@ -826,7 +812,6 @@ const _dutchSourceLt = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Kaip .ocideck paketą (vienas failas su ištekliais)',
   'Als losse .md plus afbeeldingen': 'Kaip atskirą .md su paveikslėliais',
-  'Opslaan': 'Išsaugoti',
   'Presenteren': 'Pristatoma',
   'Tijden-overzicht tonen na afloop': 'Rodyti laikų apžvalgą pabaigoje',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -911,7 +896,6 @@ const _dutchSourceLt = {
       'Antraštės tekstas per mažai kontrastuoja su fono paveikslėliu',
   'Herstel': 'Taisyti',
   'Tijdlijn': 'Laiko juosta',
-  'Indeling': 'Išdėstymas',
   'Automatisch': 'Automatinis',
   'Horizontaal': 'Horizontalus',
   'Verticaal': 'Vertikalus',
@@ -1088,13 +1072,11 @@ const _dutchSourceLt = {
   'Geen slides gemeten.': 'Neišmatuota nė viena skaidrė.',
   'Tijden gekopieerd naar klembord.': 'Laikai nukopijuoti į iškarpinę.',
   'Kopieer': 'Kopijuoti',
-  'Sluiten': 'Uždaryti',
   'Tekstgrootte van de interface': 'Sąsajos teksto dydis',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Padidina visą redaktoriaus tekstą iki 200 %. Pačios skaidrės nepasikeičia.',
   'Breedte van het slidepaneel': 'Skaidrių skydelio plotis',
   'Pijltjestoetsen passen de breedte aan': 'Rodyklių klavišai koreguoja plotį',
-  'Annuleren': 'Atšaukti',
   'Checklist': 'Užduočių kontrolinis sąrašas',
   'Voortgangsgrafiek tonen': 'Rodyti progreso diagramą',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1340,7 +1322,6 @@ const _dutchSourceLt = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Nuramina foną už pavadinimo ir paantraštės.',
   'Licht': 'Šviesus',
-  'Donker': 'Tamsus',
   'Pen (D)': 'Rašiklis (D)',
   'Markeerstift (T)': 'Žymeklis (T)',
   'Gum (E / Shift+E)': 'Trintukas (E / Shift+E)',
@@ -1701,7 +1682,6 @@ const _dutchSourceAddLt = <String, String>{
       'Tai nepavyko. Nieko neišsiųsta — bandyk dar kartą.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Tavo el. pašto adresas įrodo tik tai, kad gali pasiekti pašto dėžutę — tai nėra paskyra ir nieko nesiunčiama, kol pats nepatvirtini.',
-  'Je e-mailadres': 'Tavo el. pašto adresas',
   'Code aanvragen': 'Prašyti kodo',
   'Opnieuw versturen': 'Siųsti dar kartą',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2941,7 +2921,6 @@ const _dutchSourceAddLt = <String, String>{
   'Aantal minuten': 'Minučių skaičius',
   'Aantal pogingen': 'Bandymų skaičius',
   'Accountbewerkingen': 'Sąskaitos operacijos',
-  'Accountgegevens': 'Sąskaitos informacija',
   'Accountnummer': 'Sąskaitos numeris',
   'Accountnummer waarop de actie gericht was':
       'Sąskaitos numeris, kuriam taikomas veiksmas',
@@ -4231,7 +4210,6 @@ const _dutchSourceAddLt = <String, String>{
   'Chat': 'Pokalbis',
   'Chat sluiten': 'Užverti pokalbį',
   'Bericht…': 'Žinutė…',
-  'Versturen': 'Siųsti',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Kol kas žinučių nėra. Parašyk ką nors savo bendraautoriams.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4624,8 +4602,6 @@ const _dutchSourceAddLt = <String, String>{
   'Rapportages voorbereiden': 'Ruošti ataskaitas',
   'Rapporttitel': 'Pranešimo pavadinimas',
   'Stap': 'Žingsnis',
-  'Taal': 'Kalba',
-  'Terug': 'Atgal',
   'Veranderingen in monitoring': 'Stebėjimo pokyčiai',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Vienai ar kelioms organizacijoms trūksta naudingo ankstesnio matavimo.',
@@ -6009,7 +5985,6 @@ const _dutchSourceAddLt = <String, String>{
       'Leidžia keisti lentelę auditorijos akivaizdoje pristatymo metu. Pagal numatytuosius nustatymus išjungta.',
   'Automatisch doorgaan': 'Tęsti automatiškai',
   'Persoonsgegevens': 'Asmens duomenys',
-  'Wijzigen': 'Keisti',
   'Automatisch afspelen': 'Groti automatiškai',
   'Melden': 'Pranešti',
   'Geaccepteerd': 'Priimta',

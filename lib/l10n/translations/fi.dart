@@ -11,7 +11,6 @@ const _stringsFi = {
   'presentFullscreen': 'Esitä koko näytöllä · P avaa esittäjänäkymän',
   'visualMode': 'Visuaalinen tila',
   'markdownMode': 'Markdown-tila',
-  'save': 'Tallenna',
   'more': 'Lisää',
   'export': 'Vie',
   'exportReady': 'Vie (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsFi = {
   'importUrl': 'Tuo URL-osoitteesta…',
   'findReplace': 'Etsi ja korvaa',
   'fullDeckPreview': 'Näytä koko diasarja',
-  'settings': 'Asetukset',
   'settingsGeneral': 'Yleiset',
   'settingsColors': 'Värit',
-  'language': 'Kieli',
-  'applicationLanguage': 'Sovelluksen kieli',
   'languageHelp':
       'Käyttöliittymän kieli vaihtuu välittömästi. Esityksen sisältö pysyy ennallaan.',
   'exportFolderSetting': 'Vientikansio',
@@ -51,9 +47,6 @@ const _stringsFi = {
   'removeExportFolder': 'Poista vientikansio',
   'exportFolderHelp':
       'Kaikki viennit (PDF/PPTX) tallennetaan tänne. Jos ei asetettu, viennit tallennetaan esitystiedoston viereen.',
-  'cancel': 'Peruuta',
-  'close': 'Sulje',
-  'saveSettings': 'Tallenna',
   'exportDialogTitle': 'Vie',
   'exportAgain': 'Vie uudelleen',
   'exportIntro':
@@ -241,7 +234,6 @@ const _dutchSourceFi = {
   'Onbereikbaar': 'Ei tavoitettavissa',
   'Infrastructuur': 'Infrastruktuuri',
   'Mobiel': 'Mobiili',
-  'Overig': 'Muu',
   '(leeg)': '(tyhjä)',
   'Audio': 'Ääni',
   'Bijschrift': 'Kuvateksti',
@@ -339,7 +331,6 @@ const _dutchSourceFi = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Vinkki: pitkä tunnuslause on turvallisempi kuin lyhyt salasana symboleilla.',
   'Versleuteld pakket': 'Salattu paketti',
-  'Wachtwoord': 'Salasana',
   'Wachtwoord gekopieerd naar klembord.': 'Salasana kopioitu leikepöydälle.',
   'Wachtwoord tonen': 'Näytä salasana',
   'Wachtwoord verbergen': 'Piilota salasana',
@@ -395,9 +386,7 @@ const _dutchSourceFi = {
   'Instelling opslaan is mislukt.': 'Asetuksen tallennus epäonnistui.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Huomio: verkkoversio voi noutaa vain palvelimilta, jotka sallivat sen (CORS).',
-  'Geen': 'Ei mitään',
   'Nieuw': 'Uusi',
-  'Verwijderen': 'Poista',
   'Herstellen': 'Palauta',
   'Opslaan en sluiten': 'Tallenna ja sulje',
   'Niet opslaan': 'Älä tallenna',
@@ -518,7 +507,6 @@ const _dutchSourceFi = {
   'Slides importeren': 'Tuo dioja',
   'Importeren': 'Tuo',
   'Klaar': 'Valmis',
-  'Toevoegen': 'Lisää',
   'Toegevoegd': 'Lisätty',
   'Selecteer alles': 'Valitse kaikki',
   'Deselecteer alles': 'Poista kaikki valinnat',
@@ -571,7 +559,6 @@ const _dutchSourceFi = {
       'Pilkuin eroteltuna, esim. neljännesvuosi, luvut, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Nämä tiedot tallennetaan Markdowniin ja ovat haettavissa avattaessa.',
-  'App-thema': 'Sovelluksen teema',
   'Look-and-feel': 'Ulkoasu ja tuntuma',
   'Kopie maken en aanpassen': 'Luo ja mukauta kopio',
   'Thema verwijderen': 'Poista teema',
@@ -798,7 +785,6 @@ const _dutchSourceFi = {
       'Palvelimen vastaus oli liian suuri',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Palvelimen URL',
-  'Gebruikersnaam': 'Käyttäjänimi',
   'App-wachtwoord': 'Sovellussalasana',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Luo tätä varten sovellussalasana Nextcloudissa',
@@ -821,7 +807,6 @@ const _dutchSourceFi = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'As .ocideck-pakettina (yksi tiedosto, sisältää resurssit)',
   'Als losse .md plus afbeeldingen': 'Erillisenä .md-tiedostona ja kuvina',
-  'Opslaan': 'Tallenna',
   'Presenteren': 'Esittäminen',
   'Tijden-overzicht tonen na afloop': 'Näytä aikakatsaus jälkeenpäin',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -907,7 +892,6 @@ const _dutchSourceFi = {
       'Otsikkotekstin kontrasti taustakuvan kanssa on liian pieni',
   'Herstel': 'Korjaa',
   'Tijdlijn': 'Aikajana',
-  'Indeling': 'Asettelu',
   'Automatisch': 'Automaattinen',
   'Horizontaal': 'Vaakasuora',
   'Verticaal': 'Pystysuora',
@@ -1085,13 +1069,11 @@ const _dutchSourceFi = {
   'Geen slides gemeten.': 'Yhtään diaa ei mitattu.',
   'Tijden gekopieerd naar klembord.': 'Ajat kopioitu leikepöydälle.',
   'Kopieer': 'Kopioi',
-  'Sluiten': 'Sulje',
   'Tekstgrootte van de interface': 'Käyttöliittymän tekstikoko',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Suurentaa kaiken editorin tekstin enintään 200 %:iin. Diat itsessään eivät muutu.',
   'Breedte van het slidepaneel': 'Diapaneelin leveys',
   'Pijltjestoetsen passen de breedte aan': 'Nuolinäppäimet säätävät leveyttä',
-  'Annuleren': 'Peruuta',
   'Checklist': 'Tehtävälista',
   'Voortgangsgrafiek tonen': 'Näytä edistymiskaavio',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1337,7 +1319,6 @@ const _dutchSourceFi = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Rauhoittaa taustan otsikon ja alaotsikon takana.',
   'Licht': 'Vaalea',
-  'Donker': 'Tumma',
   'Pen (D)': 'Kynä (D)',
   'Markeerstift (T)': 'Korostuskynä (T)',
   'Gum (E / Shift+E)': 'Pyyhekumi (E / Shift+E)',
@@ -1694,7 +1675,6 @@ const _dutchSourceAddFi = <String, String>{
       'Se ei onnistunut. Mitään ei lähetetty — yritä uudelleen.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Sähköpostiosoitteesi todistaa vain, että pääset postilaatikkoon — se ei ole tili, eikä mitään lähetetä ennen kuin vahvistat itse.',
-  'Je e-mailadres': 'Sähköpostiosoitteesi',
   'Code aanvragen': 'Pyydä koodi',
   'Opnieuw versturen': 'Lähetä uudelleen',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2941,7 +2921,6 @@ const _dutchSourceAddFi = <String, String>{
   'Aantal minuten': 'Minuuttimäärä',
   'Aantal pogingen': 'Yritysten määrä',
   'Accountbewerkingen': 'Tilitoiminnot',
-  'Accountgegevens': 'Tilitiedot',
   'Accountnummer': 'Tilinumero',
   'Accountnummer waarop de actie gericht was':
       'Tilinumero, johon toiminto on kohdistettu',
@@ -4229,7 +4208,6 @@ const _dutchSourceAddFi = <String, String>{
   'Chat': 'Chat',
   'Chat sluiten': 'Sulje chat',
   'Bericht…': 'Viesti…',
-  'Versturen': 'Lähetä',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Ei vielä viestejä. Sano jotain kanssakirjoittajillesi.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4620,8 +4598,6 @@ const _dutchSourceAddFi = <String, String>{
   'Rapportages voorbereiden': 'Valmistele raportteja',
   'Rapporttitel': 'Raportin otsikko',
   'Stap': 'Vaihe',
-  'Taal': 'Kieli',
-  'Terug': 'Takaisin',
   'Veranderingen in monitoring': 'Muutoksia seurannassa',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Yhdeltä tai useammalta organisaatiolta puuttuu hyödyllinen aiempi mittaus.',
@@ -6001,7 +5977,6 @@ const _dutchSourceAddFi = <String, String>{
       'Antaa sinun muuttaa taulukkoa yleisön edessä esityksen aikana. Oletuksena pois päältä.',
   'Automatisch doorgaan': 'Siirry automaattisesti',
   'Persoonsgegevens': 'Henkilötiedot',
-  'Wijzigen': 'Vaihda',
   'Automatisch afspelen': 'Toista automaattisesti',
   'Melden': 'Ilmoita',
   'Geaccepteerd': 'Hyväksytty',

@@ -198,7 +198,7 @@ lib/
               # (docs/design/NATIVE_CALLS.md)
   platform/   # conditional-import platform abstraction (io/web halves)
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
-  l10n/       # AppLocalizations + translations/<lang>.dart (31 languages)
+  l10n/       # Productvertalingen bovenop AppFoundation (31 talen)
   theme/      # app theming
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```

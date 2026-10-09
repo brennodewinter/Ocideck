@@ -11,7 +11,6 @@ const _stringsPap = {
   'presentFullscreen': 'Presentá na pantalla kompletu · P pa presenter view',
   'visualMode': 'Modo visual',
   'markdownMode': 'Modo Markdown',
-  'save': 'Warda',
   'more': 'Mas',
   'export': 'Eksportá',
   'exportReady': 'Eksportá (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsPap = {
   'importUrl': 'Importá for di URL…',
   'findReplace': 'Busca i reemplasá',
   'fullDeckPreview': 'Mira henter e deck',
-  'settings': 'Preferensianan',
   'settingsGeneral': 'General',
   'settingsColors': 'Kolónan',
-  'language': 'Idioma',
-  'applicationLanguage': 'Idioma di aplikashon',
   'languageHelp':
       'E interface ta cambia idioma mesora. Kontenido di presentashon ta keda igual.',
   'exportFolderSetting': 'Folder di eksport',
@@ -51,9 +47,6 @@ const _stringsPap = {
   'removeExportFolder': 'Kita folder di eksport',
   'exportFolderHelp':
       'Tur eksportnan (PDF/PPTX) ta wordu wardá aki. Si no konfigurá, nan ta wordu wardá banda di e file di presentashon.',
-  'cancel': 'Kanselá',
-  'close': 'Sera',
-  'saveSettings': 'Warda',
   'exportDialogTitle': 'Eksportá',
   'exportAgain': 'Eksportá atrobe',
   'exportIntro':
@@ -241,7 +234,6 @@ const _dutchSourcePap = {
   'Onbereikbaar': 'No alkansabel',
   'Infrastructuur': 'Infrastruktura',
   'Mobiel': 'Móbil',
-  'Overig': 'Otro',
   '(leeg)': '(bashí)',
   'Audio': 'Audio',
   'Bijschrift': 'Lènda',
@@ -341,7 +333,6 @@ const _dutchSourcePap = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Konseho: un frase largu ta mas sigur ku un kontraseña kòrtiku ku símbolo.',
   'Versleuteld pakket': 'Paket enkriptá',
-  'Wachtwoord': 'Kontraseña',
   'Wachtwoord gekopieerd naar klembord.': 'Kontraseña kopiá na klembòrt.',
   'Wachtwoord tonen': 'Mustra kontraseña',
   'Wachtwoord verbergen': 'Skonde kontraseña',
@@ -396,9 +387,7 @@ const _dutchSourcePap = {
   'Instelling opslaan is mislukt.': 'Warda di konfigurashon a faya.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: e vershon web por baha solamente for di servernan ku ta permití esaki (CORS).',
-  'Geen': 'Ningun',
   'Nieuw': 'Nobo',
-  'Verwijderen': 'Kita',
   'Herstellen': 'Restorá',
   'Opslaan en sluiten': 'Warda i sera',
   'Niet opslaan': 'No warda',
@@ -480,7 +469,6 @@ const _dutchSourcePap = {
   'Slides importeren': 'Importá slides',
   'Importeren': 'Importá',
   'Klaar': 'Kla',
-  'Toevoegen': 'Añadí',
   'Toegevoegd': 'Añadí',
   'Selecteer alles': 'Selektá tur',
   'Deselecteer alles': 'Deselektá tur',
@@ -507,7 +495,6 @@ const _dutchSourcePap = {
   'Datum': 'Fecha',
   'Beschrijving': 'Deskripshon',
   'Trefwoorden': 'Palabranan klave',
-  'App-thema': 'Tema di app',
   'Look-and-feel': 'Aparensia',
   'Kopie maken en aanpassen': 'Krea i personalisá un kopia',
   'Thema verwijderen': 'Kita tema',
@@ -735,7 +722,6 @@ const _dutchSourceAddPap = {
       'E no a fungi. Nada a wordu mandá — purba atrobe.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Bo e-mail ta pruhbá so ku bo por yega na e buzon — no ta un kuenta i nada ta wordu mandá te ora bo konfirmá.',
-  'Je e-mailadres': 'Bo e-mail',
   'Code aanvragen': 'Pidi kodigo',
   'Opnieuw versturen': 'Manda atrobe',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -1978,7 +1964,6 @@ const _dutchSourceAddPap = {
   'Aantal minuten': 'Kantidat di minüt',
   'Aantal pogingen': 'Kantidat di intento',
   'Accountbewerkingen': 'Operashonnan di kuenta',
-  'Accountgegevens': 'Informashon di kuenta',
   'Accountnummer': 'Number di kuenta',
   'Accountnummer waarop de actie gericht was':
       'Number di kuenta dirigí pa e akshon',
@@ -3276,7 +3261,6 @@ const _dutchSourceAddPap = {
   'Chat': 'Chat',
   'Chat sluiten': 'Sera chat',
   'Bericht…': 'Mensahe…',
-  'Versturen': 'Manda',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'No tin mensahe ainda. Bisa algu na bo ko-outornan.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -3670,8 +3654,6 @@ const _dutchSourceAddPap = {
   'Rapportages voorbereiden': 'Prepará rapòrtnan',
   'Rapporttitel': 'Título di rapòrt',
   'Stap': 'Paso',
-  'Taal': 'Idioma',
-  'Terug': 'Patras',
   'Veranderingen in monitoring': 'Kambionan den monitoreo',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Un midimentu anterior útil ta falta pa un òf mas organisashon.',
@@ -5073,7 +5055,6 @@ const _dutchSourceAddPap = {
       'Ta laga bo kambia e tabel dilanti di e públiko durante presentashon. Ta pagá pa default.',
   'Automatisch doorgaan': 'Sigui outomátikamente',
   'Persoonsgegevens': 'Datos personal',
-  'Wijzigen': 'Kambia',
   'Automatisch afspelen': 'Toka outomátikamente',
   'Melden': 'Reportá',
   'Geaccepteerd': 'Aseptá',
@@ -5351,7 +5332,6 @@ const _dutchSourceAddPap = {
       'E respondi di servidó tabata muchu grandi',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL di servidó',
-  'Gebruikersnaam': 'Nòmber di usuario',
   'App-wachtwoord': 'Kontrasenja di app',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Krea un kontrasenja di app pa esaki den Nextcloud',
@@ -5375,7 +5355,6 @@ const _dutchSourceAddPap = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Komo paket .ocideck (un solo dokumento, ku rekursonan)',
   'Als losse .md plus afbeeldingen': 'Komo .md separá plus imágennan',
-  'Opslaan': 'Warda',
   // Accessibility labels for icon-only buttons (screen readers).
   'Presenteren': 'Presentá',
   'Tijden-overzicht tonen na afloop': 'Mustra resúmen di tempo despues',
@@ -5468,7 +5447,6 @@ const _dutchSourceAddPap = {
   'Herstel': 'Drecha',
   // Tijdlijn-slides.
   'Tijdlijn': 'Liña di tempu',
-  'Indeling': 'Areglo',
   'Automatisch': 'Outomátiko',
   'Horizontaal': 'Horizontal',
   'Verticaal': 'Vertikal',
@@ -5647,14 +5625,12 @@ const _dutchSourceAddPap = {
   'Geen slides gemeten.': 'No a midi slide.',
   'Tijden gekopieerd naar klembord.': 'Tempo kopiá na klipbord.',
   'Kopieer': 'Kopia',
-  'Sluiten': 'Sera',
   'Tekstgrootte van de interface': 'Tamaño di teksto di e interfaz',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Ta hasi tur teksto di e editor mas grandi te 200%. E slidenan mes no ta kambia.',
   'Breedte van het slidepaneel': 'Hanchura di e panel di slide',
   'Pijltjestoetsen passen de breedte aan':
       'Tekla di flecha ta atapta e hanchura',
-  'Annuleren': 'Kanselá',
   'Checklist': 'Lista di kontrol',
   'Voortgangsgrafiek tonen': 'Mustra gráfiko di progreso',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -6059,7 +6035,6 @@ const _dutchSourceAddPap = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Ta hasi e fondo mas trankil tras di título i subtítulo.',
   'Licht': 'Kla',
-  'Donker': 'Skur',
   'Pen (D)': 'Pèn (D)',
   'Markeerstift (T)': 'Marker (T)',
   'Gum (E / Shift+E)': 'Borador (E / Shift+E)',

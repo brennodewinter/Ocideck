@@ -12,7 +12,6 @@ const _stringsUk = {
       'Презентувати на весь екран · P для перегляду доповідача',
   'visualMode': 'Візуальний режим',
   'markdownMode': 'Режим Markdown',
-  'save': 'Зберегти',
   'more': 'Більше',
   'export': 'Експорт',
   'exportReady': 'Експорт (PDF/PPTX/HTML)',
@@ -39,11 +38,8 @@ const _stringsUk = {
   'importUrl': 'Імпортувати з URL…',
   'findReplace': 'Знайти та замінити',
   'fullDeckPreview': 'Переглянути всю презентацію',
-  'settings': 'Налаштування',
   'settingsGeneral': 'Загальні',
   'settingsColors': 'Кольори',
-  'language': 'Мова',
-  'applicationLanguage': 'Мова застосунку',
   'languageHelp':
       'Інтерфейс змінює мову негайно. Вміст презентації залишається незмінним.',
   'exportFolderSetting': 'Тека експорту',
@@ -52,9 +48,6 @@ const _stringsUk = {
   'removeExportFolder': 'Видалити теку експорту',
   'exportFolderHelp':
       'Усі експорти (PDF/PPTX) зберігаються тут. Якщо не встановлено, експорти зберігаються поряд із файлом презентації.',
-  'cancel': 'Скасувати',
-  'close': 'Закрити',
-  'saveSettings': 'Зберегти',
   'exportDialogTitle': 'Експорт',
   'exportAgain': 'Експортувати знову',
   'exportIntro':
@@ -243,7 +236,6 @@ const _dutchSourceUk = {
   'Onbereikbaar': 'Недоступно',
   'Infrastructuur': 'Інфраструктура',
   'Mobiel': 'Мобільний',
-  'Overig': 'Інше',
   '(leeg)': '(порожньо)',
   'Audio': 'Аудіо',
   'Bijschrift': 'Підпис',
@@ -341,7 +333,6 @@ const _dutchSourceUk = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Порада: довга парольна фраза безпечніша за короткий пароль із символами.',
   'Versleuteld pakket': 'Зашифрований пакет',
-  'Wachtwoord': 'Пароль',
   'Wachtwoord gekopieerd naar klembord.':
       'Пароль скопійовано до буфера обміну.',
   'Wachtwoord tonen': 'Показати пароль',
@@ -399,9 +390,7 @@ const _dutchSourceUk = {
   'Instelling opslaan is mislukt.': 'Не вдалося зберегти налаштування.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Увага: веб-версія може завантажувати лише із серверів, які це дозволяють (CORS).',
-  'Geen': 'Немає',
   'Nieuw': 'Новий',
-  'Verwijderen': 'Видалити',
   'Herstellen': 'Відновити',
   'Opslaan en sluiten': 'Зберегти й закрити',
   'Niet opslaan': 'Не зберігати',
@@ -525,7 +514,6 @@ const _dutchSourceUk = {
   'Slides importeren': 'Імпортувати слайди',
   'Importeren': 'Імпортувати',
   'Klaar': 'Готово',
-  'Toevoegen': 'Додати',
   'Toegevoegd': 'Додано',
   'Selecteer alles': 'Вибрати все',
   'Deselecteer alles': 'Скасувати вибір усього',
@@ -578,7 +566,6 @@ const _dutchSourceUk = {
       'Через кому, напр. квартальний, цифри, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Ці дані зберігаються в Markdown і доступні для пошуку під час відкриття.',
-  'App-thema': 'Тема застосунку',
   'Look-and-feel': 'Вигляд і поведінка',
   'Kopie maken en aanpassen': 'Створити та налаштувати копію',
   'Thema verwijderen': 'Видалити тему',
@@ -807,7 +794,6 @@ const _dutchSourceUk = {
   'Het antwoord van de server was te groot': 'Відповідь сервера була завеликою',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL сервера',
-  'Gebruikersnaam': 'Ім’я користувача',
   'App-wachtwoord': 'Пароль застосунку',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Створіть для цього пароль застосунку в Nextcloud',
@@ -830,7 +816,6 @@ const _dutchSourceUk = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Як пакет .ocideck (один файл, з ресурсами)',
   'Als losse .md plus afbeeldingen': 'Як окремий .md плюс зображення',
-  'Opslaan': 'Зберегти',
   'Presenteren': 'Презентування',
   'Tijden-overzicht tonen na afloop': 'Показувати огляд часу після завершення',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -916,7 +901,6 @@ const _dutchSourceUk = {
       'Текст заголовка має замалий контраст із фоновим зображенням',
   'Herstel': 'Виправити',
   'Tijdlijn': 'Часова шкала',
-  'Indeling': 'Компонування',
   'Automatisch': 'Автоматично',
   'Horizontaal': 'Горизонтально',
   'Verticaal': 'Вертикально',
@@ -1094,14 +1078,12 @@ const _dutchSourceUk = {
   'Geen slides gemeten.': 'Жодного слайда не виміряно.',
   'Tijden gekopieerd naar klembord.': 'Час скопійовано в буфер обміну.',
   'Kopieer': 'Копіювати',
-  'Sluiten': 'Закрити',
   'Tekstgrootte van de interface': 'Розмір тексту інтерфейсу',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Збільшує весь текст редактора до 200%. Самі слайди не змінюються.',
   'Breedte van het slidepaneel': 'Ширина панелі слайдів',
   'Pijltjestoetsen passen de breedte aan':
       'Клавіші зі стрілками регулюють ширину',
-  'Annuleren': 'Скасувати',
   'Checklist': 'Контрольний список завдань',
   'Voortgangsgrafiek tonen': 'Показати діаграму прогресу',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1347,7 +1329,6 @@ const _dutchSourceUk = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Робить тло спокійнішим за заголовком і підзаголовком.',
   'Licht': 'Світлий',
-  'Donker': 'Темний',
   'Pen (D)': 'Перо (D)',
   'Markeerstift (T)': 'Маркер (T)',
   'Gum (E / Shift+E)': 'Гумка (E / Shift+E)',
@@ -1710,7 +1691,6 @@ const _dutchSourceAddUk = <String, String>{
       'Це не вдалося. Нічого не надіслано — спробуйте знову.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Ваша адреса лише доводить, що ви маєте доступ до скриньки — це не обліковий запис, і нічого не надсилається, доки ви самі не підтвердите.',
-  'Je e-mailadres': 'Ваша адреса',
   'Code aanvragen': 'Запросити код',
   'Opnieuw versturen': 'Надіслати знову',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2945,7 +2925,6 @@ const _dutchSourceAddUk = <String, String>{
   'Aantal minuten': 'Кількість хвилин',
   'Aantal pogingen': 'Кількість спроб',
   'Accountbewerkingen': 'Операції по рахунку',
-  'Accountgegevens': 'Інформація про обліковий запис',
   'Accountnummer': 'Номер рахунку',
   'Accountnummer waarop de actie gericht was':
       'Номер рахунку, на який спрямована дія',
@@ -4241,7 +4220,6 @@ const _dutchSourceAddUk = <String, String>{
   'Chat': 'Чат',
   'Chat sluiten': 'Закрити чат',
   'Bericht…': 'Повідомлення…',
-  'Versturen': 'Надіслати',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Повідомлень ще немає. Напишіть щось своїм співавторам.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4633,8 +4611,6 @@ const _dutchSourceAddUk = <String, String>{
   'Rapportages voorbereiden': 'Готуйте звіти',
   'Rapporttitel': 'Назва звіту',
   'Stap': 'Крок',
-  'Taal': 'Мова',
-  'Terug': 'Назад',
   'Veranderingen in monitoring': 'Зміни в моніторингу',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Відсутнє корисне попереднє вимірювання для однієї чи кількох організацій.',
@@ -6012,7 +5988,6 @@ const _dutchSourceAddUk = <String, String>{
       'Дозволяє змінювати таблицю перед аудиторією під час презентації. Типово вимкнено.',
   'Automatisch doorgaan': 'Переходити автоматично',
   'Persoonsgegevens': 'Персональні дані',
-  'Wijzigen': 'Змінити',
   'Automatisch afspelen': 'Відтворювати автоматично',
   'Melden': 'Повідомляти',
   'Geaccepteerd': 'Прийнято',

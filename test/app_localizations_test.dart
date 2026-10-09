@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_localizations/app_language_registry.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
@@ -439,6 +440,45 @@ const unchangedInAllLanguages = {
 };
 
 void main() {
+  test('shared translations are not duplicated in product source maps', () {
+    for (final file in Directory('lib/l10n/translations').listSync()) {
+      if (file is! File || !file.path.endsWith('.dart')) continue;
+      final text = file.readAsStringSync();
+      final sourceStart = text.indexOf('const _dutchSource');
+      if (sourceStart < 0) continue;
+      final productSources = text.substring(sourceStart);
+      for (final source in sharedTranslations['en']!.keys) {
+        expect(
+          productSources,
+          isNot(contains("'$source':")),
+          reason: '${file.path}: $source',
+        );
+      }
+    }
+  });
+
+  test('shared keyed aliases resolve through the central catalog', () {
+    const aliases = {
+      'save': 'Opslaan',
+      'saveSettings': 'Opslaan',
+      'cancel': 'Annuleren',
+      'close': 'Sluiten',
+      'settings': 'Instellingen',
+      'language': 'Taal',
+      'applicationLanguage': 'Applicatietaal',
+    };
+    for (final code in AppLocalizations.languageNames.keys) {
+      AppLocalizations.setActiveLanguageCode(code);
+      for (final entry in aliases.entries) {
+        expect(
+          AppLocalizations.active.t(entry.key),
+          AppLocalizations.active.d(entry.value),
+          reason: '$code: ${entry.key}',
+        );
+      }
+    }
+  });
+
   tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
 
   group('startup language for an installation without a choice', () {

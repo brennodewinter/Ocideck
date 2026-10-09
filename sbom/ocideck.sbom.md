@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.6.15+41** (licence EUPL-1.2) and every third-party component it ships (226 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.6.15+41** (licence EUPL-1.2) and every third-party component it ships (227 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **797 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **800 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -14,13 +14,13 @@ The JSON documents carry **797 dependency relations** between these components: 
 | MIT | 65 |
 | Apache-2.0 | 19 |
 | OFL-1.1 | 7 |
-| EUPL-1.2 | 4 |
+| EUPL-1.2 | 5 |
 | BSD | 3 |
 | MPL-2.0 | 1 |
 
 ## Components
 
-### Dart / Flutter packages (207)
+### Dart / Flutter packages (208)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -28,6 +28,7 @@ The JSON documents carry **797 dependency relations** between these components: 
 | analyzer _(direct dev)_ | 14.4.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@14.4.0` |
 | android_file_picker _(transitive)_ | 2.0.0 | MIT | vicajilau | `pkg:pub/android_file_picker@2.0.0` |
 | app_appearance _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82` (packages/app_appearance) |
+| app_localizations _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `73822a01339b6e601f8b84ada2e529d3db33d81d` (packages/app_localizations) |
 | archive _(direct main)_ | 4.3.0 | MIT | brendan-duncan | `pkg:pub/archive@4.3.0` |
 | args _(transitive)_ | 2.7.0 | BSD-3-Clause | dart-lang | `pkg:pub/args@2.7.0` |
 | asn1lib _(transitive)_ | 1.6.5 | BSD | wstrange | `pkg:pub/asn1lib@1.6.5` |

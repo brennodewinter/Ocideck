@@ -11,7 +11,6 @@ const _stringsEl = {
   'presentFullscreen': 'Παρουσίαση (πλήρης οθόνη) · P για προβολή παρουσιαστή',
   'visualMode': 'Οπτική λειτουργία',
   'markdownMode': 'Λειτουργία Markdown',
-  'save': 'Αποθήκευση',
   'more': 'Περισσότερα',
   'export': 'Εξαγωγή',
   'exportReady': 'Εξαγωγή (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsEl = {
   'importUrl': 'Εισαγωγή από URL…',
   'findReplace': 'Εύρεση και αντικατάσταση',
   'fullDeckPreview': 'Προβολή πλήρους deck',
-  'settings': 'Ρυθμίσεις',
   'settingsGeneral': 'Γενικά',
   'settingsColors': 'Χρώματα',
-  'language': 'Γλώσσα',
-  'applicationLanguage': 'Γλώσσα εφαρμογής',
   'languageHelp':
       'Η διεπαφή αλλάζει γλώσσα άμεσα. Το περιεχόμενο της παρουσίασης παραμένει αμετάβλητο.',
   'exportFolderSetting': 'Φάκελος εξαγωγών',
@@ -51,9 +47,6 @@ const _stringsEl = {
   'removeExportFolder': 'Αφαίρεση φακέλου εξαγωγών',
   'exportFolderHelp':
       'Όλες οι εξαγωγές (PDF/PPTX) αποθηκεύονται εδώ. Αν δεν έχει οριστεί, οι εξαγωγές αποθηκεύονται δίπλα στο αρχείο παρουσίασης.',
-  'cancel': 'Άκυρο',
-  'close': 'Κλείσιμο',
-  'saveSettings': 'Αποθήκευση',
   'exportDialogTitle': 'Εξαγωγή',
   'exportAgain': 'Εξαγωγή ξανά',
   'exportIntro':
@@ -243,7 +236,6 @@ const _dutchSourceEl = {
   'Onbereikbaar': 'Μη προσβάσιμο',
   'Infrastructuur': 'Υποδομή',
   'Mobiel': 'Κινητό',
-  'Overig': 'Άλλο',
   '(leeg)': '(κενό)',
   'Audio': 'Ήχος',
   'Bijschrift': 'Λεζάντα',
@@ -343,7 +335,6 @@ const _dutchSourceEl = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Συμβουλή: μια μεγάλη φράση πρόσβασης είναι ασφαλέστερη από έναν σύντομο κωδικό με σύμβολα.',
   'Versleuteld pakket': 'Κρυπτογραφημένο πακέτο',
-  'Wachtwoord': 'Κωδικός πρόσβασης',
   'Wachtwoord gekopieerd naar klembord.':
       'Ο κωδικός πρόσβασης αντιγράφηκε στο πρόχειρο.',
   'Wachtwoord tonen': 'Εμφάνιση κωδικού πρόσβασης',
@@ -401,9 +392,7 @@ const _dutchSourceEl = {
   'Instelling opslaan is mislukt.': 'Η αποθήκευση της ρύθμισης απέτυχε.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Σημείωση: η έκδοση για τον ιστό μπορεί να αντλεί μόνο από διακομιστές που το επιτρέπουν (CORS).',
-  'Geen': 'Κανένα',
   'Nieuw': 'Νέα',
-  'Verwijderen': 'Διαγραφή',
   'Herstellen': 'Επαναφορά',
   'Opslaan en sluiten': 'Αποθήκευση και κλείσιμο',
   'Niet opslaan': 'Να μην αποθηκευτεί',
@@ -527,7 +516,6 @@ const _dutchSourceEl = {
   'Slides importeren': 'Εισαγωγή διαφανειών',
   'Importeren': 'Εισαγωγή',
   'Klaar': 'Έτοιμο',
-  'Toevoegen': 'Προσθήκη',
   'Toegevoegd': 'Προστέθηκε',
   'Selecteer alles': 'Επιλογή όλων',
   'Deselecteer alles': 'Αποεπιλογή όλων',
@@ -580,7 +568,6 @@ const _dutchSourceEl = {
       'Χωρισμένες με κόμμα, π.χ. τριμηνιαία, αριθμοί, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Αυτά τα στοιχεία αποθηκεύονται στο Markdown και είναι αναζητήσιμα κατά το άνοιγμα.',
-  'App-thema': 'Θέμα εφαρμογής',
   'Look-and-feel': 'Εμφάνιση και αίσθηση',
   'Kopie maken en aanpassen': 'Δημιουργία και προσαρμογή αντιγράφου',
   'Thema verwijderen': 'Διαγραφή θέματος',
@@ -808,7 +795,6 @@ const _dutchSourceEl = {
       'Η απόκριση του διακομιστή ήταν πολύ μεγάλη',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL διακομιστή',
-  'Gebruikersnaam': 'Όνομα χρήστη',
   'App-wachtwoord': 'Κωδικός εφαρμογής',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Δημιουργήστε έναν κωδικό εφαρμογής γι\' αυτό στο Nextcloud',
@@ -833,7 +819,6 @@ const _dutchSourceEl = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Ως πακέτο .ocideck (ένα αρχείο, με στοιχεία)',
   'Als losse .md plus afbeeldingen': 'Ως ξεχωριστό .md συν εικόνες',
-  'Opslaan': 'Αποθήκευση',
   'Presenteren': 'Παρουσίαση',
   'Tijden-overzicht tonen na afloop':
       'Εμφάνιση επισκόπησης χρόνων μετά το τέλος',
@@ -920,7 +905,6 @@ const _dutchSourceEl = {
       'Το κείμενο του τίτλου έχει πολύ μικρή αντίθεση με την εικόνα φόντου',
   'Herstel': 'Διόρθωση',
   'Tijdlijn': 'Χρονογραμμή',
-  'Indeling': 'Διάταξη',
   'Automatisch': 'Αυτόματα',
   'Horizontaal': 'Οριζόντια',
   'Verticaal': 'Κατακόρυφα',
@@ -1099,13 +1083,11 @@ const _dutchSourceEl = {
   'Geen slides gemeten.': 'Δεν μετρήθηκαν διαφάνειες.',
   'Tijden gekopieerd naar klembord.': 'Οι χρόνοι αντιγράφηκαν στο πρόχειρο.',
   'Kopieer': 'Αντιγραφή',
-  'Sluiten': 'Κλείσιμο',
   'Tekstgrootte van de interface': 'Μέγεθος κειμένου διεπαφής',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Μεγεθύνει όλο το κείμενο του επεξεργαστή έως 200%. Οι διαφάνειες δεν επηρεάζονται.',
   'Breedte van het slidepaneel': 'Πλάτος του πίνακα διαφανειών',
   'Pijltjestoetsen passen de breedte aan': 'Τα βελάκια προσαρμόζουν το πλάτος',
-  'Annuleren': 'Ακύρωση',
   'Checklist': 'Λίστα εργασιών',
   'Voortgangsgrafiek tonen': 'Εμφάνιση γραφήματος προόδου',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1352,7 +1334,6 @@ const _dutchSourceEl = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Ηρεμεί το φόντο πίσω από τον τίτλο και τον υπότιτλο.',
   'Licht': 'Ανοιχτό',
-  'Donker': 'Σκούρο',
   'Pen (D)': 'Πένα (D)',
   'Markeerstift (T)': 'Μαρκαδόρος (T)',
   'Gum (E / Shift+E)': 'Γόμα (E / Shift+E)',
@@ -1722,7 +1703,6 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν πέτυχε. Τίποτα δεν εστάλη — δοκίμασε ξανά.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Η διεύθυνσή σου αποδεικνύει μόνο ότι έχεις πρόσβαση στο γραμματοκιβώτιο — δεν είναι λογαριασμός και τίποτα δεν αποστέλλεται πριν επιβεβαιώσεις εσύ.',
-  'Je e-mailadres': 'Η διεύθυνσή σου',
   'Code aanvragen': 'Ζήτησε κωδικό',
   'Opnieuw versturen': 'Εκ νέου αποστολή',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2990,7 +2970,6 @@ const _dutchSourceAddEl = <String, String>{
   'Aantal minuten': 'Αριθμός λεπτών',
   'Aantal pogingen': 'Αριθμός προσπαθειών',
   'Accountbewerkingen': 'Λειτουργίες λογαριασμού',
-  'Accountgegevens': 'Πληροφορίες λογαριασμού',
   'Accountnummer': 'Αριθμός λογαριασμού',
   'Accountnummer waarop de actie gericht was':
       'Αριθμός λογαριασμού που στοχεύει η ενέργεια',
@@ -4302,7 +4281,6 @@ const _dutchSourceAddEl = <String, String>{
   'Chat': 'Συνομιλία',
   'Chat sluiten': 'Κλείσιμο συνομιλίας',
   'Bericht…': 'Μήνυμα…',
-  'Versturen': 'Αποστολή',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Δεν υπάρχουν ακόμη μηνύματα. Πες κάτι στους συν-συντάκτες σου.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4697,8 +4675,6 @@ const _dutchSourceAddEl = <String, String>{
   'Rapportages voorbereiden': 'Ετοιμάστε αναφορές',
   'Rapporttitel': 'Τίτλος αναφοράς',
   'Stap': 'Βήμα',
-  'Taal': 'Γλώσσα',
-  'Terug': 'Πίσω',
   'Veranderingen in monitoring': 'Αλλαγές στην παρακολούθηση',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Λείπει μια χρήσιμη προηγούμενη μέτρηση για έναν ή περισσότερους οργανισμούς.',
@@ -6099,7 +6075,6 @@ const _dutchSourceAddEl = <String, String>{
       'Σου επιτρέπει να αλλάζεις τον πίνακα μπροστά στο κοινό κατά την παρουσίαση. Απενεργοποιημένο εξ ορισμού.',
   'Automatisch doorgaan': 'Αυτόματη μετάβαση',
   'Persoonsgegevens': 'Προσωπικά δεδομένα',
-  'Wijzigen': 'Αλλαγή',
   'Automatisch afspelen': 'Αυτόματη αναπαραγωγή',
   'Melden': 'Αναφορά',
   'Geaccepteerd': 'Αποδεκτό',

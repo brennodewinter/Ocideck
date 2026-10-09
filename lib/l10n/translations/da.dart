@@ -11,7 +11,6 @@ const _stringsDa = {
   'presentFullscreen': 'Præsentér (fuld skærm) · P for præsentervisning',
   'visualMode': 'Visuel tilstand',
   'markdownMode': 'Markdown-tilstand',
-  'save': 'Gem',
   'more': 'Mere',
   'export': 'Eksportér',
   'exportReady': 'Eksportér (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsDa = {
   'importUrl': 'Importér fra URL…',
   'findReplace': 'Søg og erstat',
   'fullDeckPreview': 'Vis hele decket',
-  'settings': 'Indstillinger',
   'settingsGeneral': 'Generelt',
   'settingsColors': 'Farver',
-  'language': 'Sprog',
-  'applicationLanguage': 'Programsprog',
   'languageHelp':
       'Grænsefladen skifter sprog med det samme. Præsentationens indhold ændres ikke.',
   'exportFolderSetting': 'Eksportmappe',
@@ -51,9 +47,6 @@ const _stringsDa = {
   'removeExportFolder': 'Fjern eksportmappe',
   'exportFolderHelp':
       'Alle eksporter (PDF/PPTX) gemmes her. Hvis den ikke er angivet, gemmes eksporter ved siden af præsentationsfilen.',
-  'cancel': 'Annuller',
-  'close': 'Luk',
-  'saveSettings': 'Gem',
   'exportDialogTitle': 'Eksportér',
   'exportAgain': 'Eksportér igen',
   'exportIntro':
@@ -241,7 +234,6 @@ const _dutchSourceDa = {
   'Onbereikbaar': 'Utilgængelig',
   'Infrastructuur': 'Infrastruktur',
   'Mobiel': 'Mobil',
-  'Overig': 'Andet',
   '(leeg)': '(tom)',
   'Audio': 'Lyd',
   'Bijschrift': 'Billedtekst',
@@ -339,7 +331,6 @@ const _dutchSourceDa = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Tip: en lang adgangssætning er sikrere end en kort adgangskode med symboler.',
   'Versleuteld pakket': 'Krypteret pakke',
-  'Wachtwoord': 'Adgangskode',
   'Wachtwoord gekopieerd naar klembord.':
       'Adgangskode kopieret til udklipsholder.',
   'Wachtwoord tonen': 'Vis adgangskode',
@@ -397,9 +388,7 @@ const _dutchSourceDa = {
   'Instelling opslaan is mislukt.': 'Indstillingen kunne ikke gemmes.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Bemærk: webversionen kan kun hente fra servere, der tillader det (CORS).',
-  'Geen': 'Ingen',
   'Nieuw': 'Ny',
-  'Verwijderen': 'Slet',
   'Herstellen': 'Gendan',
   'Opslaan en sluiten': 'Gem og luk',
   'Niet opslaan': 'Gem ikke',
@@ -521,7 +510,6 @@ const _dutchSourceDa = {
   'Slides importeren': 'Importer slides',
   'Importeren': 'Importer',
   'Klaar': 'Færdig',
-  'Toevoegen': 'Tilføj',
   'Toegevoegd': 'Tilføjet',
   'Selecteer alles': 'Vælg alt',
   'Deselecteer alles': 'Fravælg alt',
@@ -574,7 +562,6 @@ const _dutchSourceDa = {
       'Kommasepareret, f.eks. kvartal, tal, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Disse oplysninger gemmes i Markdown og er søgbare ved åbning.',
-  'App-thema': 'App-tema',
   'Look-and-feel': 'Look and feel',
   'Kopie maken en aanpassen': 'Opret og tilpas en kopi',
   'Thema verwijderen': 'Slet tema',
@@ -798,7 +785,6 @@ const _dutchSourceDa = {
   'Het antwoord van de server was te groot': 'Serverens svar var for stort',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'Server-URL',
-  'Gebruikersnaam': 'Brugernavn',
   'App-wachtwoord': 'App-adgangskode',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Opret en app-adgangskode til dette i Nextcloud',
@@ -822,7 +808,6 @@ const _dutchSourceDa = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Som en .ocideck-pakke (én fil, med assets)',
   'Als losse .md plus afbeeldingen': 'Som en separat .md plus billeder',
-  'Opslaan': 'Gem',
   'Presenteren': 'Præsenterer',
   'Tijden-overzicht tonen na afloop': 'Vis tidsoversigt bagefter',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
@@ -908,7 +893,6 @@ const _dutchSourceDa = {
       'Titeltekst har for lidt kontrast med baggrundsbilledet',
   'Herstel': 'Ret',
   'Tijdlijn': 'Tidslinje',
-  'Indeling': 'Layout',
   'Automatisch': 'Automatisk',
   'Horizontaal': 'Vandret',
   'Verticaal': 'Lodret',
@@ -1083,13 +1067,11 @@ const _dutchSourceDa = {
   'Geen slides gemeten.': 'Ingen slides målt.',
   'Tijden gekopieerd naar klembord.': 'Tider kopieret til udklipsholder.',
   'Kopieer': 'Kopiér',
-  'Sluiten': 'Luk',
   'Tekstgrootte van de interface': 'Tekststørrelse for brugerfladen',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Forstørrer al editortekst op til 200 %. Selve slidesene påvirkes ikke.',
   'Breedte van het slidepaneel': 'Bredde på slidepanelet',
   'Pijltjestoetsen passen de breedte aan': 'Piletaster justerer bredden',
-  'Annuleren': 'Annullér',
   'Checklist': 'Opgavetjekliste',
   'Voortgangsgrafiek tonen': 'Vis fremskridtsdiagram',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1333,7 +1315,6 @@ const _dutchSourceDa = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Gør baggrunden roligere bag titel og undertitel.',
   'Licht': 'Lys',
-  'Donker': 'Mørk',
   'Pen (D)': 'Pen (D)',
   'Markeerstift (T)': 'Overstregningstusch (T)',
   'Gum (E / Shift+E)': 'Viskelæder (E / Shift+E)',
@@ -1695,7 +1676,6 @@ const _dutchSourceAddDa = <String, String>{
       'Det lykkedes ikke. Der blev ikke sendt noget — prøv igen.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Din e-mailadresse beviser kun, at du kan nå postkassen — det er ikke en konto, og der sendes ikke noget, før du selv bekræfter.',
-  'Je e-mailadres': 'Din e-mailadresse',
   'Code aanvragen': 'Anmod om kode',
   'Opnieuw versturen': 'Send igen',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2935,7 +2915,6 @@ const _dutchSourceAddDa = <String, String>{
   'Aantal minuten': 'Antal minutter',
   'Aantal pogingen': 'Antal forsøg',
   'Accountbewerkingen': 'Kontodrift',
-  'Accountgegevens': 'Kontooplysninger',
   'Accountnummer': 'Kontonummer',
   'Accountnummer waarop de actie gericht was':
       'Kontonummer målrettet af handlingen',
@@ -4227,7 +4206,6 @@ const _dutchSourceAddDa = <String, String>{
   'Chat': 'Chat',
   'Chat sluiten': 'Luk chat',
   'Bericht…': 'Besked…',
-  'Versturen': 'Send',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Ingen beskeder endnu. Sig noget til dine medforfattere.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4617,8 +4595,6 @@ const _dutchSourceAddDa = <String, String>{
   'Rapportages voorbereiden': 'Udarbejde rapporter',
   'Rapporttitel': 'Rapportens titel',
   'Stap': 'Trin',
-  'Taal': 'Sprog',
-  'Terug': 'Tilbage',
   'Veranderingen in monitoring': 'Ændringer i overvågningen',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'En nyttig tidligere måling mangler for en eller flere organisationer.',
@@ -5997,7 +5973,6 @@ const _dutchSourceAddDa = <String, String>{
       'Lader dig ændre tabellen foran publikum under præsentationen. Slået fra som standard.',
   'Automatisch doorgaan': 'Gå videre automatisk',
   'Persoonsgegevens': 'Personoplysninger',
-  'Wijzigen': 'Skift',
   'Automatisch afspelen': 'Afspil automatisk',
   'Melden': 'Rapportér',
   'Geaccepteerd': 'Accepteret',

@@ -11,7 +11,6 @@ const _stringsId = {
   'presentFullscreen': 'Presentasikan (layar penuh) · P untuk tampilan penyaji',
   'visualMode': 'Mode visual',
   'markdownMode': 'Mode Markdown',
-  'save': 'Simpan',
   'more': 'Lainnya',
   'export': 'Ekspor',
   'exportReady': 'Ekspor (PDF/PPTX/HTML)',
@@ -38,11 +37,8 @@ const _stringsId = {
   'importUrl': 'Impor dari URL…',
   'findReplace': 'Cari dan ganti',
   'fullDeckPreview': 'Lihat seluruh deck',
-  'settings': 'Pengaturan',
   'settingsGeneral': 'Umum',
   'settingsColors': 'Warna',
-  'language': 'Bahasa',
-  'applicationLanguage': 'Bahasa aplikasi',
   'languageHelp':
       'Antarmuka langsung berganti bahasa. Konten presentasi tidak berubah.',
   'exportFolderSetting': 'Folder ekspor',
@@ -51,9 +47,6 @@ const _stringsId = {
   'removeExportFolder': 'Hapus folder ekspor',
   'exportFolderHelp':
       'Semua ekspor (PDF/PPTX) disimpan di sini. Jika tidak diatur, ekspor disimpan di samping berkas presentasi.',
-  'cancel': 'Batal',
-  'close': 'Tutup',
-  'saveSettings': 'Simpan',
   'exportDialogTitle': 'Ekspor',
   'exportAgain': 'Ekspor lagi',
   'exportIntro':
@@ -240,7 +233,6 @@ const _dutchSourceId = {
   'Onbereikbaar': 'Tidak terjangkau',
   'Infrastructuur': 'Infrastruktur',
   'Mobiel': 'Seluler',
-  'Overig': 'Lainnya',
   '(leeg)': '(kosong)',
   'Audio': 'Audio',
   'Bijschrift': 'Keterangan',
@@ -338,7 +330,6 @@ const _dutchSourceId = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Tips: frasa sandi yang panjang lebih aman daripada kata sandi pendek dengan simbol.',
   'Versleuteld pakket': 'Paket terenkripsi',
-  'Wachtwoord': 'Kata sandi',
   'Wachtwoord gekopieerd naar klembord.': 'Kata sandi disalin ke papan klip.',
   'Wachtwoord tonen': 'Tampilkan kata sandi',
   'Wachtwoord verbergen': 'Sembunyikan kata sandi',
@@ -394,9 +385,7 @@ const _dutchSourceId = {
   'Instelling opslaan is mislukt.': 'Gagal menyimpan pengaturan.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Catatan: versi web hanya dapat mengambil dari server yang mengizinkannya (CORS).',
-  'Geen': 'Tidak ada',
   'Nieuw': 'Baru',
-  'Verwijderen': 'Hapus',
   'Herstellen': 'Pulihkan',
   'Opslaan en sluiten': 'Simpan dan tutup',
   'Niet opslaan': 'Jangan simpan',
@@ -518,7 +507,6 @@ const _dutchSourceId = {
   'Slides importeren': 'Impor slide',
   'Importeren': 'Impor',
   'Klaar': 'Selesai',
-  'Toevoegen': 'Tambah',
   'Toegevoegd': 'Ditambahkan',
   'Selecteer alles': 'Pilih semua',
   'Deselecteer alles': 'Batalkan pilih semua',
@@ -571,7 +559,6 @@ const _dutchSourceId = {
       'Dipisahkan koma, mis. triwulanan, angka, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Detail ini disimpan dalam Markdown dan dapat dicari saat dibuka.',
-  'App-thema': 'Tema aplikasi',
   'Look-and-feel': 'Tampilan dan nuansa',
   'Kopie maken en aanpassen': 'Buat dan sesuaikan salinan',
   'Thema verwijderen': 'Hapus tema',
@@ -797,7 +784,6 @@ const _dutchSourceId = {
   'Het antwoord van de server was te groot': 'Respons server terlalu besar',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL server',
-  'Gebruikersnaam': 'Nama pengguna',
   'App-wachtwoord': 'Kata sandi aplikasi',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Buat kata sandi aplikasi untuk ini di Nextcloud',
@@ -820,7 +806,6 @@ const _dutchSourceId = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Sebagai paket .ocideck (satu berkas, dengan aset)',
   'Als losse .md plus afbeeldingen': 'Sebagai .md terpisah plus gambar',
-  'Opslaan': 'Simpan',
   'Presenteren': 'Mempresentasikan',
   'Tijden-overzicht tonen na afloop':
       'Tampilkan ikhtisar waktu setelah selesai',
@@ -907,7 +892,6 @@ const _dutchSourceId = {
       'Teks judul memiliki kontras yang terlalu rendah dengan gambar latar',
   'Herstel': 'Perbaiki',
   'Tijdlijn': 'Linimasa',
-  'Indeling': 'Tata letak',
   'Automatisch': 'Otomatis',
   'Horizontaal': 'Horizontal',
   'Verticaal': 'Vertikal',
@@ -1083,13 +1067,11 @@ const _dutchSourceId = {
   'Geen slides gemeten.': 'Tidak ada slide yang diukur.',
   'Tijden gekopieerd naar klembord.': 'Waktu disalin ke clipboard.',
   'Kopieer': 'Salin',
-  'Sluiten': 'Tutup',
   'Tekstgrootte van de interface': 'Ukuran teks antarmuka',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Memperbesar semua teks editor hingga 200%. Slide itu sendiri tidak terpengaruh.',
   'Breedte van het slidepaneel': 'Lebar panel slide',
   'Pijltjestoetsen passen de breedte aan': 'Tombol panah menyesuaikan lebarnya',
-  'Annuleren': 'Batal',
   'Checklist': 'Daftar tugas',
   'Voortgangsgrafiek tonen': 'Tampilkan grafik kemajuan',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1334,7 +1316,6 @@ const _dutchSourceId = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Membuat latar belakang lebih tenang di belakang judul dan subjudul.',
   'Licht': 'Terang',
-  'Donker': 'Gelap',
   'Pen (D)': 'Pena (D)',
   'Markeerstift (T)': 'Stabilo (T)',
   'Gum (E / Shift+E)': 'Penghapus (E / Shift+E)',
@@ -1695,7 +1676,6 @@ const _dutchSourceAddId = <String, String>{
       'Itu tidak berhasil. Tidak ada yang terkirim — coba lagi.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Alamat e-mailmu hanya membuktikan kamu bisa mengakses kotak surat — bukan akun, dan tidak ada yang dikirim sebelum kamu mengonfirmasi sendiri.',
-  'Je e-mailadres': 'Alamat e-mailmu',
   'Code aanvragen': 'Minta kode',
   'Opnieuw versturen': 'Kirim ulang',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2935,7 +2915,6 @@ const _dutchSourceAddId = <String, String>{
   'Aantal minuten': 'Jumlah menit',
   'Aantal pogingen': 'Jumlah upaya',
   'Accountbewerkingen': 'Operasi akun',
-  'Accountgegevens': 'Informasi akun',
   'Accountnummer': 'Nomor rekening',
   'Accountnummer waarop de actie gericht was':
       'Nomor rekening yang menjadi target tindakan',
@@ -4229,7 +4208,6 @@ const _dutchSourceAddId = <String, String>{
   'Chat': 'Obrolan',
   'Chat sluiten': 'Tutup obrolan',
   'Bericht…': 'Pesan…',
-  'Versturen': 'Kirim',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Belum ada pesan. Katakan sesuatu kepada rekan penulismu.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4622,8 +4600,6 @@ const _dutchSourceAddId = <String, String>{
   'Rapportages voorbereiden': 'Siapkan laporan',
   'Rapporttitel': 'Judul laporan',
   'Stap': 'Melangkah',
-  'Taal': 'Bahasa',
-  'Terug': 'Kembali',
   'Veranderingen in monitoring': 'Perubahan dalam pemantauan',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Pengukuran sebelumnya yang berguna tidak ada pada satu atau lebih organisasi.',
@@ -6009,7 +5985,6 @@ const _dutchSourceAddId = <String, String>{
       'Memungkinkan Anda mengubah tabel di depan audiens saat presentasi. Nonaktif secara bawaan.',
   'Automatisch doorgaan': 'Lanjut otomatis',
   'Persoonsgegevens': 'Data pribadi',
-  'Wijzigen': 'Ubah',
   'Automatisch afspelen': 'Putar otomatis',
   'Melden': 'Laporkan',
   'Geaccepteerd': 'Diterima',

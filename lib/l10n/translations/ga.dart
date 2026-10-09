@@ -11,7 +11,6 @@ const _stringsGa = {
   'presentFullscreen': 'Cuir i láthair (lánscáileán) · P don amharc láithreora',
   'visualMode': 'Mód amhairc',
   'markdownMode': 'Mód Markdown',
-  'save': 'Sábháil',
   'more': 'Tuilleadh',
   'export': 'Easpórtáil',
   'exportReady': 'Easpórtáil (PDF/PPTX/HTML)',
@@ -40,11 +39,8 @@ const _stringsGa = {
   'importUrl': 'Iompórtáil ó URL…',
   'findReplace': 'Aimsigh agus athsholáthar',
   'fullDeckPreview': 'Féach ar an deic iomlán',
-  'settings': 'Socruithe',
   'settingsGeneral': 'Ginearálta',
   'settingsColors': 'Dathanna',
-  'language': 'Teanga',
-  'applicationLanguage': 'Teanga an fheidhmchláir',
   'languageHelp':
       'Athraíonn teanga an chomhéadain láithreach. Fanann ábhar na láithreoireachta gan athrú.',
   'exportFolderSetting': 'Fillteán easpórtála',
@@ -53,9 +49,6 @@ const _stringsGa = {
   'removeExportFolder': 'Bain an fillteán easpórtála',
   'exportFolderHelp':
       'Sábháiltear gach easpórtáil (PDF/PPTX) anseo. Mura bhfuil sé socraithe, sábháiltear easpórtálacha in aice le comhad na láithreoireachta.',
-  'cancel': 'Cealaigh',
-  'close': 'Dún',
-  'saveSettings': 'Sábháil',
   'exportDialogTitle': 'Easpórtáil',
   'exportAgain': 'Easpórtáil arís',
   'exportIntro':
@@ -244,7 +237,6 @@ const _dutchSourceGa = {
   'Onbereikbaar': 'Do-shroichte',
   'Infrastructuur': 'Bonneagar',
   'Mobiel': 'Móbíleach',
-  'Overig': 'Eile',
   '(leeg)': '(folamh)',
   'Audio': 'Fuaim',
   'Bijschrift': 'Foscríbhinn',
@@ -342,7 +334,6 @@ const _dutchSourceGa = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Leid: tá frása pasfhocail fada níos sábháilte ná pasfhocal gearr le siombailí.',
   'Versleuteld pakket': 'Pacáiste criptithe',
-  'Wachtwoord': 'Pasfhocal',
   'Wachtwoord gekopieerd naar klembord.':
       'Cóipeáladh an pasfhocal chuig an ngearrthaisce.',
   'Wachtwoord tonen': 'Taispeáin an pasfhocal',
@@ -400,9 +391,7 @@ const _dutchSourceGa = {
   'Instelling opslaan is mislukt.': 'Theip ar an socrú a shábháil.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tabhair faoi deara: ní féidir leis an leagan gréasáin íoslódáil ach ó fhreastalaithe a cheadaíonn é (CORS).',
-  'Geen': 'Gan aon',
   'Nieuw': 'Nua',
-  'Verwijderen': 'Scrios',
   'Herstellen': 'Athchóirigh',
   'Opslaan en sluiten': 'Sábháil agus dún',
   'Niet opslaan': 'Ná sábháil',
@@ -528,7 +517,6 @@ const _dutchSourceGa = {
   'Slides importeren': 'Iompórtáil sleamhnáin',
   'Importeren': 'Iompórtáil',
   'Klaar': 'Déanta',
-  'Toevoegen': 'Cuir leis',
   'Toegevoegd': 'Curtha leis',
   'Selecteer alles': 'Roghnaigh gach rud',
   'Deselecteer alles': 'Díroghnaigh gach rud',
@@ -582,7 +570,6 @@ const _dutchSourceGa = {
       'Camóg-scartha, m.sh. ráithiúil, uimhreacha, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Stóráiltear na sonraí seo sa Markdown agus tá siad inchuardaithe agus tú ag oscailt.',
-  'App-thema': 'Téama na haipe',
   'Look-and-feel': 'Cuma agus mothú',
   'Kopie maken en aanpassen': 'Cruthaigh agus saincheap cóip',
   'Thema verwijderen': 'Scrios an téama',
@@ -813,7 +800,6 @@ const _dutchSourceGa = {
       'Bhí freagra an fhreastalaí rómhór',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL freastalaí',
-  'Gebruikersnaam': 'Ainm úsáideora',
   'App-wachtwoord': 'Pasfhocal aipe',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Cruthaigh pasfhocal aipe chuige seo i Nextcloud',
@@ -837,7 +823,6 @@ const _dutchSourceGa = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Mar phacáiste .ocideck (comhad amháin, le sócmhainní)',
   'Als losse .md plus afbeeldingen': 'Mar .md ar leith móide íomhánna',
-  'Opslaan': 'Sábháil',
   'Presenteren': 'Ag láithriú',
   'Tijden-overzicht tonen na afloop':
       'Taispeáin forbhreathnú amanna ina dhiaidh',
@@ -925,7 +910,6 @@ const _dutchSourceGa = {
       'Tá codarsnacht rólag ag téacs an teidil leis an íomhá chúlra',
   'Herstel': 'Deisigh',
   'Tijdlijn': 'Amlíne',
-  'Indeling': 'Leagan amach',
   'Automatisch': 'Uathoibríoch',
   'Horizontaal': 'Cothrománach',
   'Verticaal': 'Ingearach',
@@ -1103,14 +1087,12 @@ const _dutchSourceGa = {
   'Tijden gekopieerd naar klembord.':
       'Amanna cóipeáilte chuig an ngearrthaisce.',
   'Kopieer': 'Cóipeáil',
-  'Sluiten': 'Dún',
   'Tekstgrootte van de interface': 'Méid téacs an chomhéadain',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Méadaíonn téacs an eagarthóra go léir suas go 200%. Ní athraíonn na sleamhnáin féin.',
   'Breedte van het slidepaneel': 'Leithead an phainéil sleamhnán',
   'Pijltjestoetsen passen de breedte aan':
       'Coigeartaíonn na saigheadeochracha an leithead',
-  'Annuleren': 'Cealaigh',
   'Checklist': 'Seicliosta tascanna',
   'Voortgangsgrafiek tonen': 'Taispeáin cairt dul chun cinn',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1359,7 +1341,6 @@ const _dutchSourceGa = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Ciúnaíonn sé an cúlra taobh thiar den teideal agus den fhotheideal.',
   'Licht': 'Geal',
-  'Donker': 'Dorcha',
   'Pen (D)': 'Peann (D)',
   'Markeerstift (T)': 'Aibhsitheoir (T)',
   'Gum (E / Shift+E)': 'Scriosán (E / Shift+E)',
@@ -1727,7 +1708,6 @@ const _dutchSourceAddGa = <String, String>{
       'Níor oibrigh sé. Níor seoladh aon rud — bain triail eile as.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Ní chruthaíonn do sheoladh ríomhphoist ach gur féidir leat an bhosca poist a rochtain — ní cuntas é agus ní sheoltar aon rud go dtí go ndeimhníonn tú tú féin.',
-  'Je e-mailadres': 'Do sheoladh ríomhphoist',
   'Code aanvragen': 'Iarr cód',
   'Opnieuw versturen': 'Seol arís',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2995,7 +2975,6 @@ const _dutchSourceAddGa = <String, String>{
   'Aantal minuten': '|\nLíon nóiméad',
   'Aantal pogingen': '|\nLíon iarrachtaí',
   'Accountbewerkingen': '|\nOibríochtaí cuntais',
-  'Accountgegevens': '|\nEolas cuntais',
   'Accountnummer': '|\nUimhir chuntais',
   'Accountnummer waarop de actie gericht was':
       '|\nUimhir chuntais atá dírithe ar an ngníomh',
@@ -4303,7 +4282,6 @@ const _dutchSourceAddGa = <String, String>{
   'Chat': 'Comhrá',
   'Chat sluiten': 'Dún an comhrá',
   'Bericht…': 'Teachtaireacht…',
-  'Versturen': 'Seol',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Gan teachtaireachtaí go fóill. Abair rud éigin le do chomhúdair.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4700,8 +4678,6 @@ const _dutchSourceAddGa = <String, String>{
   'Rapportages voorbereiden': 'Tuarascálacha a ullmhú',
   'Rapporttitel': 'Teideal na tuarascála',
   'Stap': 'Céim',
-  'Taal': 'Teanga',
-  'Terug': 'Ar ais',
   'Veranderingen in monitoring': 'Athruithe ar mhonatóireacht',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Tá tomhas úsáideach roimhe seo in easnamh i gcás eagraíocht amháin nó níos mó.',
@@ -6101,7 +6077,6 @@ const _dutchSourceAddGa = <String, String>{
       'Ligeann duit an tábla a athrú os comhair an lucht féachana le linn cur i láthair. As de réir réamhshocraithe.',
   'Automatisch doorgaan': 'Téigh ar aghaidh go huathoibríoch',
   'Persoonsgegevens': 'Sonraí pearsanta',
-  'Wijzigen': 'Athraigh',
   'Automatisch afspelen': 'Seinn go huathoibríoch',
   'Melden': 'Tuairiscigh',
   'Geaccepteerd': 'Glactha',

@@ -23,30 +23,13 @@ extension _SettingsGeneralTab on _SettingsDialogState {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _sectionTitle(l10n.t('language')),
-        InputDecorator(
-          decoration: InputDecoration(
-            labelText: l10n.t('applicationLanguage'),
-            isDense: true,
-            prefixIcon: const Icon(Icons.language, size: 18),
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: languageCode,
-              isExpanded: true,
-              isDense: true,
-              items: [
-                for (final entry in AppLocalizations.languageOptions)
-                  DropdownMenuItem(
-                    value: entry.key,
-                    child: languageOptionRow(entry.key, entry.value),
-                  ),
-              ],
-              onChanged: (code) {
-                if (code == null) return;
-                ref.read(settingsProvider.notifier).setLanguageCode(code);
-              },
-            ),
-          ),
+        AppLanguageDropdown(
+          languageCode: languageCode,
+          labelText: l10n.t('applicationLanguage'),
+          flagBuilder: (code, size) => languageFlag(code, size: size),
+          onChanged: (code) {
+            ref.read(settingsProvider.notifier).setLanguageCode(code);
+          },
         ),
         Padding(
           padding: const EdgeInsets.only(top: 6),

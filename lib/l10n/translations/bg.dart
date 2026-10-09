@@ -11,7 +11,6 @@ const _stringsBg = {
   'presentFullscreen': 'Презентиране (цял екран) · P за изглед на водещия',
   'visualMode': 'Визуален режим',
   'markdownMode': 'Режим Markdown',
-  'save': 'Запазване',
   'more': 'Още',
   'export': 'Експортиране',
   'exportReady': 'Експортиране (PDF/PPTX/HTML)',
@@ -39,11 +38,8 @@ const _stringsBg = {
   'importUrl': 'Импортиране от URL…',
   'findReplace': 'Търсене и замяна',
   'fullDeckPreview': 'Преглед на цялото деко',
-  'settings': 'Настройки',
   'settingsGeneral': 'Общи',
   'settingsColors': 'Цветове',
-  'language': 'Език',
-  'applicationLanguage': 'Език на приложението',
   'languageHelp':
       'Интерфейсът сменя езика веднага. Съдържанието на презентацията остава непроменено.',
   'exportFolderSetting': 'Папка за експорт',
@@ -52,9 +48,6 @@ const _stringsBg = {
   'removeExportFolder': 'Премахване на папката за експорт',
   'exportFolderHelp':
       'Всички експорти (PDF/PPTX) се запазват тук. Ако не е зададено, експортите се запазват до файла на презентацията.',
-  'cancel': 'Отказ',
-  'close': 'Затваряне',
-  'saveSettings': 'Запазване',
   'exportDialogTitle': 'Експортиране',
   'exportAgain': 'Ново експортиране',
   'exportIntro':
@@ -242,7 +235,6 @@ const _dutchSourceBg = {
   'Onbereikbaar': 'Недостъпно',
   'Infrastructuur': 'Инфраструктура',
   'Mobiel': 'Мобилно',
-  'Overig': 'Друго',
   '(leeg)': '(празно)',
   'Audio': 'Аудио',
   'Bijschrift': 'Надпис',
@@ -340,7 +332,6 @@ const _dutchSourceBg = {
   'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
       'Съвет: дълга парола фраза е по-сигурна от кратка парола със символи.',
   'Versleuteld pakket': 'Шифрован пакет',
-  'Wachtwoord': 'Парола',
   'Wachtwoord gekopieerd naar klembord.': 'Паролата е копирана в клипборда.',
   'Wachtwoord tonen': 'Показване на паролата',
   'Wachtwoord verbergen': 'Скриване на паролата',
@@ -397,9 +388,7 @@ const _dutchSourceBg = {
   'Instelling opslaan is mislukt.': 'Запазването на настройката е неуспешно.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Забележка: уеб версията може да изтегля само от сървъри, които го позволяват (CORS).',
-  'Geen': 'Няма',
   'Nieuw': 'Нов',
-  'Verwijderen': 'Изтриване',
   'Herstellen': 'Възстановяване',
   'Opslaan en sluiten': 'Запазване и затваряне',
   'Niet opslaan': 'Без запазване',
@@ -524,7 +513,6 @@ const _dutchSourceBg = {
   'Slides importeren': 'Импортиране на слайдове',
   'Importeren': 'Импортиране',
   'Klaar': 'Готово',
-  'Toevoegen': 'Добавяне',
   'Toegevoegd': 'Добавено',
   'Selecteer alles': 'Избор на всички',
   'Deselecteer alles': 'Отмяна на избора',
@@ -577,7 +565,6 @@ const _dutchSourceBg = {
       'Разделени със запетая, напр. тримесечие, числа, 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'Тези данни се запазват в Markdown и могат да се търсят при отваряне.',
-  'App-thema': 'Тема на приложението',
   'Look-and-feel': 'Външен вид',
   'Kopie maken en aanpassen': 'Създаване и персонализиране на копие',
   'Thema verwijderen': 'Изтриване на тема',
@@ -808,7 +795,6 @@ const _dutchSourceBg = {
       'Отговорът на сървъра беше твърде голям',
   'Nextcloud': 'Nextcloud',
   'Server-URL': 'URL на сървъра',
-  'Gebruikersnaam': 'Потребителско име',
   'App-wachtwoord': 'Парола за приложение',
   'Maak hiervoor een app-wachtwoord aan in Nextcloud':
       'Създайте за целта парола за приложение в Nextcloud',
@@ -832,7 +818,6 @@ const _dutchSourceBg = {
   'Als .ocideck-pakket (één bestand, met assets)':
       'Като .ocideck пакет (един файл, с ресурси)',
   'Als losse .md plus afbeeldingen': 'Като отделен .md плюс изображения',
-  'Opslaan': 'Запазване',
   'Presenteren': 'Презентиране',
   'Tijden-overzicht tonen na afloop':
       'Показване на преглед на времената след края',
@@ -919,7 +904,6 @@ const _dutchSourceBg = {
       'Заглавният текст има твърде малък контраст с фоновото изображение',
   'Herstel': 'Поправяне',
   'Tijdlijn': 'Времева линия',
-  'Indeling': 'Оформление',
   'Automatisch': 'Автоматично',
   'Horizontaal': 'Хоризонтално',
   'Verticaal': 'Вертикално',
@@ -1095,14 +1079,12 @@ const _dutchSourceBg = {
   'Geen slides gemeten.': 'Няма измерени слайдове.',
   'Tijden gekopieerd naar klembord.': 'Времената са копирани в клипборда.',
   'Kopieer': 'Копирай',
-  'Sluiten': 'Затвори',
   'Tekstgrootte van de interface': 'Размер на текста на интерфейса',
   'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
       'Уголемява целия текст на редактора до 200%. Самите слайдове не се променят.',
   'Breedte van het slidepaneel': 'Ширина на панела със слайдове',
   'Pijltjestoetsen passen de breedte aan':
       'Клавишите със стрелки регулират ширината',
-  'Annuleren': 'Отказ',
   'Checklist': 'Списък със задачи',
   'Voortgangsgrafiek tonen': 'Показвай диаграма на напредъка',
   'Toont afgevinkt en niet afgevinkt als percentages.':
@@ -1350,7 +1332,6 @@ const _dutchSourceBg = {
   'Maakt de achtergrond rustiger achter titel en subtitel.':
       'Успокоява фона зад заглавието и подзаглавието.',
   'Licht': 'Светъл',
-  'Donker': 'Тъмен',
   'Pen (D)': 'Писалка (D)',
   'Markeerstift (T)': 'Маркер (T)',
   'Gum (E / Shift+E)': 'Гума (E / Shift+E)',
@@ -1716,7 +1697,6 @@ const _dutchSourceAddBg = <String, String>{
       'Това не успя. Нищо не е изпратено — опитай отново.',
   'Je e-mailadres bewijst alleen dat je bij de mailbox kunt — het is geen account en er wordt niets verstuurd voordat je zelf bevestigt.':
       'Твоят имейл адрес доказва само, че имаш достъп до пощенската кутия — не е акаунт и нищо не се изпраща, докато сам не потвърдиш.',
-  'Je e-mailadres': 'Твоят имейл адрес',
   'Code aanvragen': 'Поискай код',
   'Opnieuw versturen': 'Изпрати отново',
   'Opnieuw versturen kan over {seconden} seconden.':
@@ -2964,7 +2944,6 @@ const _dutchSourceAddBg = <String, String>{
   'Aantal minuten': 'Брой минути',
   'Aantal pogingen': 'Брой опити',
   'Accountbewerkingen': 'Операции по сметката',
-  'Accountgegevens': 'Информация за акаунта',
   'Accountnummer': 'Номер на сметката',
   'Accountnummer waarop de actie gericht was':
       'Номер на сметка, към която е насочено действието',
@@ -4265,7 +4244,6 @@ const _dutchSourceAddBg = <String, String>{
   'Chat': 'Чат',
   'Chat sluiten': 'Затвори чата',
   'Bericht…': 'Съобщение…',
-  'Versturen': 'Изпрати',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Все още няма съобщения. Кажи нещо на съавторите си.',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
@@ -4660,8 +4638,6 @@ const _dutchSourceAddBg = <String, String>{
   'Rapportages voorbereiden': 'Подгответе доклади',
   'Rapporttitel': 'Заглавие на доклада',
   'Stap': 'стъпка',
-  'Taal': 'език',
-  'Terug': 'Назад',
   'Veranderingen in monitoring': 'Промени в мониторинга',
   'Voor een of meer organisaties ontbreekt een bruikbare eerdere meting.':
       'Липсва полезно предишно измерване за една или повече организации.',
@@ -6051,7 +6027,6 @@ const _dutchSourceAddBg = <String, String>{
       'Позволява ти да променяш таблицата пред публиката по време на презентация. По подразбиране е изключено.',
   'Automatisch doorgaan': 'Автоматично напред',
   'Persoonsgegevens': 'Лични данни',
-  'Wijzigen': 'Промяна',
   'Automatisch afspelen': 'Автоматично възпроизвеждане',
   'Melden': 'Съобщаване',
   'Geaccepteerd': 'Прието',
