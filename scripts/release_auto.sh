@@ -2752,6 +2752,8 @@ assert_nightly_main_gate() {
       # Een zichtbare run voorkomt ook na een tijdelijke lijst-hik een tweede
       # niet-idempotente POST; andere releaseprocessen mogen hem nu hergebruiken.
       dispatched=1
+      [ "$registration_deadline" -gt 0 ] \
+        || registration_deadline=$((SECONDS + 5 * 60))
       release_main_gate_lock
     fi
     if [ "$rstatus" = "success" ]; then
