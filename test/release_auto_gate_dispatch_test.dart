@@ -37,6 +37,7 @@ set -uo pipefail
 TAG=v9.9.9
 BRANCH=release/v9.9.9
 GATE_TIMEOUT_MIN=1
+MAIN_GATE_LOCK_DIR='${dir.path}/main-gate.lock'
 STEP=test
 ${allFunctionDefinitions()}
 log() { printf '%s\n' "\$1"; }
@@ -153,9 +154,9 @@ api() {
   case "$2" in
     '/actions/runs?limit=50&workflow_id=linux-gate.yml')
       if [ -e "$MARKER" ]; then
-        printf '%s\n' '{"workflow_runs":[{"id":8,"prettyref":"main"},{"id":7,"prettyref":"main"}]}'
+        printf '%s\n' '{"workflow_runs":[{"id":8,"workflow_id":"linux-gate.yml","prettyref":"main"},{"id":7,"workflow_id":"linux-gate.yml","prettyref":"main"}]}'
       else
-        printf '%s\n' '{"workflow_runs":[{"id":7,"prettyref":"main"}]}'
+        printf '%s\n' '{"workflow_runs":[{"id":7,"workflow_id":"linux-gate.yml","prettyref":"main"}]}'
       fi ;;
     '/actions/workflows/linux-gate.yml/dispatches')
       : > "$MARKER"

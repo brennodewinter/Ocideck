@@ -2655,14 +2655,43 @@ assert_no_pending_fixes() {
 # main al als kapot kent. Daarom hier, vóór elke lokale mutatie: hergebruik de
 # run op de huidige main-tip, of start hem zelf als de nachtrun die tip nog niet
 # heeft gezien. Een rode run blijft blokkeren; onbekend wordt nooit stil groen.
+MAIN_GATE_LOCK_DIR="$ROOT_DIR/build/release-main-gate.lock"
+release_main_gate_lock() {
+  [ -f "$MAIN_GATE_LOCK_DIR/pid" ] || return 0
+  [ "$(cat "$MAIN_GATE_LOCK_DIR/pid" 2>/dev/null || true)" = "$$" ] || return 0
+  rm -f "$MAIN_GATE_LOCK_DIR/pid"
+  rmdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null || true
+}
+acquire_main_gate_lock() {
+  local owner=""
+  mkdir -p "$(dirname "$MAIN_GATE_LOCK_DIR")"
+  if mkdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null; then
+    printf '%s\n' "$$" > "$MAIN_GATE_LOCK_DIR/pid"
+    return 0
+  fi
+  owner="$(cat "$MAIN_GATE_LOCK_DIR/pid" 2>/dev/null || true)"
+  if [[ "$owner" =~ ^[0-9]+$ ]] && kill -0 "$owner" 2>/dev/null; then
+    die "een andere release controleert of start de linux-gate (proces $owner) — start geen tweede release tegelijk."
+  fi
+  rm -f "$MAIN_GATE_LOCK_DIR/pid"
+  rmdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null || true
+  mkdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null \
+    || die "kon de exclusieve linux-gatecontrole niet claimen — start geen tweede release tegelijk."
+  printf '%s\n' "$$" > "$MAIN_GATE_LOCK_DIR/pid"
+}
+die_main_gate() {
+  release_main_gate_lock
+  die "$1"
+}
 assert_nightly_main_gate() {
   STEP="nachtelijke main-poort"
   # --resume: de inhoud van de lopende release ligt al vast; een intussen rood
   # geworden main-run zegt niets meer over díe inhoud.
   [ -z "$RESUME_TAG" ] || return 0
+  acquire_main_gate_lock
   local main_sha
   main_sha="$(git rev-parse --verify origin/main 2>/dev/null)" \
-    || die "origin/main ontbreekt lokaal — de nachtelijke linux-gate kan niet aan de huidige main-tip gekoppeld worden."
+    || die_main_gate "origin/main ontbreekt lokaal — de nachtelijke linux-gate kan niet aan de huidige main-tip gekoppeld worden."
   # De lijst-route geeft geen commit_sha; die staat op de detail-GET per run.
   # Alleen een run op exact de main-tip bewijst de kandidaatbasis. Een groene
   # voorouder kan tientallen ongetoetste commits achterlopen en verplaatst een
@@ -2675,7 +2704,12 @@ assert_nightly_main_gate() {
     polls=$((polls + 1))
     found=""; rsha=""; rstatus=""; rurl=""; lookup_failed=0
     ids="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs?limit=50&workflow_id=linux-gate.yml" 2>/dev/null \
-      | jq -r '[.workflow_runs[]? | select(.prettyref == "main") | .id] | sort | reverse | .[]' 2>/dev/null)" \
+      | jq -r '
+          if (.workflow_runs | type) != "array" then error("workflow_runs is geen array")
+          else [.workflow_runs[]
+            | select(.workflow_id == "linux-gate.yml" and .prettyref == "main")
+            | .id] | sort | reverse | .[]
+          end' 2>/dev/null)" \
       || lookup_failed=1
     if [ "$lookup_failed" -eq 0 ]; then
       for rid in $ids; do
@@ -2694,7 +2728,7 @@ assert_nightly_main_gate() {
     if [ "$lookup_failed" -ne 0 ]; then
       unreadable=$((unreadable + 1))
       [ "$unreadable" -lt 6 ] \
-        || die "de linux-gate op de huidige main-tip is $unreadable polls onleesbaar — onbekend is niet groen. Niets gemuteerd."
+        || die_main_gate "de linux-gate op de huidige main-tip is $unreadable polls onleesbaar — onbekend is niet groen. Niets gemuteerd."
       sleep 30
       continue
     fi
@@ -2712,9 +2746,15 @@ assert_nightly_main_gate() {
           log "De dispatchbevestiging viel weg; controleren of Forgejo de linux-gate toch heeft gestart."
         fi
       elif [ "$SECONDS" -ge "$registration_deadline" ]; then
-        die "de linux-gate is niet binnen vijf minuten als run geregistreerd op de huidige main-tip — niets lokaal gemuteerd."
+        die_main_gate "de linux-gate is niet binnen vijf minuten als run geregistreerd op de huidige main-tip — niets lokaal gemuteerd."
       fi
-    elif [ "$rstatus" = "success" ]; then
+    else
+      # Een zichtbare run voorkomt ook na een tijdelijke lijst-hik een tweede
+      # niet-idempotente POST; andere releaseprocessen mogen hem nu hergebruiken.
+      dispatched=1
+      release_main_gate_lock
+    fi
+    if [ "$rstatus" = "success" ]; then
       log "Linux-gate groen op ${rsha:0:9} (run $found)."
       return 0
     elif printf '%s' "$rstatus" | grep -qE '^(failure|cancelled|skipped|error)$'; then
@@ -2729,13 +2769,13 @@ assert_nightly_main_gate() {
       log "run: ${rurl:-run $found} (commit ${rsha:0:9}, status $rstatus)"
       [ -z "$jobname" ] || log "eerste falende job: $jobname"
       [ -z "$rlog" ] || { log "foutcontext:"; printf '%s\n' "$rlog" | sed 's/^/     /'; }
-      die "dezelfde fout zou deze release ná de tag alsnog breken — repareer main en begin dan opnieuw. Niets lokaal gemuteerd."
+      die_main_gate "dezelfde fout zou deze release ná de tag alsnog breken — repareer main en begin dan opnieuw. Niets lokaal gemuteerd."
     elif [ $(( (polls - 1) % 6 )) -eq 0 ]; then
       log "Wachten op linux-gate${found:+ run $found} op main (status: ${rstatus:-registratie})…"
     fi
     sleep 30
   done
-  die "linux-gate werd niet groen binnen ${GATE_TIMEOUT_MIN} min — niets lokaal gemuteerd."
+  die_main_gate "linux-gate werd niet groen binnen ${GATE_TIMEOUT_MIN} min — niets lokaal gemuteerd."
 }
 
 # ── De twee prompts (de enige interactie) ───────────────────────────────────────

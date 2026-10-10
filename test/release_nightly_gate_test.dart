@@ -90,6 +90,9 @@ $topLevel
     String dispatchedStatus = 'success',
     bool runningBecomesSuccess = false,
     String dispatchResponse = '{"id":9800}',
+    String listWorkflowId = 'linux-gate.yml',
+    bool wrongListSchema = false,
+    bool lockHeld = false,
     File? trace,
   }) {
     final dir = Directory.systemTemp.createTempSync('ocideck-nightly-gate-');
@@ -102,6 +105,7 @@ set -uo pipefail
 RESUME_TAG='$resumeTag'
 GATE_TIMEOUT_MIN=1
 GATE_TIMEOUT_SECONDS=2
+MAIN_GATE_LOCK_DIR='${dir.path}/main-gate.lock'
 ${allFunctionDefinitions()}
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
@@ -125,17 +129,21 @@ api() {
   [ -z '${trace?.path ?? ''}' ] || printf '%s %s\\n' "\$method" "\$path" >> '${trace?.path ?? '/dev/null'}'
   case "\$path" in
     '/actions/runs?limit=50&workflow_id=linux-gate.yml')
+      if [ '${wrongListSchema ? '1' : '0'}' -eq 1 ]; then
+        printf '%s\n' '{"message":"unexpected response"}'
+        return 0
+      fi
       { printf '{"workflow_runs":['
         first=1
         while IFS='|' read -r rid rsha rstatus; do
           [ -n "\$rid" ] || continue
           [ "\$first" -eq 0 ] && printf ','
           first=0
-          printf '{"id":%s,"prettyref":"main","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\$rstatus" "\$rid"
+          printf '{"id":%s,"workflow_id":"${listWorkflowId}","prettyref":"main","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\$rstatus" "\$rid"
         done < '${runsFile.path}'
         if [ -f '${dir.path}/dispatched' ]; then
           [ "\$first" -eq 0 ] && printf ','
-          printf '{"id":9800,"prettyref":"main","status":"${dispatchedStatus}","html_url":"https://forge.invalid/r/9800"}'
+          printf '{"id":9800,"workflow_id":"linux-gate.yml","prettyref":"main","status":"${dispatchedStatus}","html_url":"https://forge.invalid/r/9800"}'
         fi
         printf ']}\\n'
       }
@@ -176,6 +184,8 @@ api() {
     *) printf '%s\\n' '{}' ;;
   esac'''}
 }
+${lockHeld ? '''mkdir -p "\$MAIN_GATE_LOCK_DIR"
+printf '%s\n' "\$PPID" > "\$MAIN_GATE_LOCK_DIR/pid"''' : ''}
 assert_nightly_main_gate
 printf 'DOOR\\n'
 ''');
@@ -218,6 +228,53 @@ printf 'DOOR\\n'
       expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
     },
   );
+
+  test('een andere workflow op dezelfde SHA telt niet als linux-gate', () {
+    final trace = File(
+      '${Directory.systemTemp.path}/ocideck-nightly-workflow-id-$pid.log',
+    );
+    addTearDown(() {
+      if (trace.existsSync()) trace.deleteSync();
+    });
+    final r = runGate(
+      runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],
+      listWorkflowId: 'other.yml',
+      trace: trace,
+    );
+    expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+    expect(
+      trace.readAsStringSync(),
+      contains('POST /actions/workflows/linux-gate.yml/dispatches'),
+    );
+  });
+
+  test('een onjuist lijstschema veroorzaakt geen dispatch', () {
+    final trace = File(
+      '${Directory.systemTemp.path}/ocideck-nightly-schema-$pid.log',
+    );
+    addTearDown(() {
+      if (trace.existsSync()) trace.deleteSync();
+    });
+    final r = runGate(runs: [], wrongListSchema: true, trace: trace);
+    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+    expect(trace.readAsStringSync(), isNot(contains('POST ')));
+  });
+
+  test('een tweede releaseproces kan niet dubbel dispatchen', () {
+    final trace = File(
+      '${Directory.systemTemp.path}/ocideck-nightly-lock-$pid.log',
+    );
+    addTearDown(() {
+      if (trace.existsSync()) trace.deleteSync();
+    });
+    final r = runGate(runs: [], lockHeld: true, trace: trace);
+    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+    expect('${r.stdout}\n${r.stderr}', contains('andere release'));
+    expect(
+      trace.existsSync() ? trace.readAsStringSync() : '',
+      isNot(contains('POST ')),
+    );
+  });
 
   test(
     'een rode nachtrun stopt vóór elke mutatie, met run- en foutcontext',
