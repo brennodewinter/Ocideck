@@ -50,7 +50,10 @@ on:
 jobs:
   build-linux:
     runs-on: docker
-    timeout-minutes: 60
+    # Een lege Flutter-cache plus native build, drie pakketten en twee
+    # cache-uploads overschreed na de 3.47.7-bump de oude 60-minutengrens pas
+    # tijdens de opruimfase, nadat de artefacten al succesvol waren geüpload.
+    timeout-minutes: 90
     container:
       image: ubuntu:24.04
     steps:
