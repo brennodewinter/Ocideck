@@ -52,7 +52,7 @@ $topLevel
     final phaseOne = autoScript.indexOf('section "Fase 1 — voorbereiden"');
     final fetch = autoScript.indexOf('git fetch origin --quiet', phaseOne);
     final checkout = autoScript.indexOf(
-      'git checkout -b "\$BRANCH" origin/main --quiet',
+      'git checkout -b "\$BRANCH" "\$APPROVED_MAIN_SHA" --quiet',
       fetch,
     );
     expect(phaseOne, isNonNegative);
@@ -77,6 +77,38 @@ $topLevel
     }
     return out.join('\n');
   }
+
+  test(
+    'de releasebranch blijft op de gekeurde SHA als origin/main verschuift',
+    () {
+      final dir = Directory.systemTemp.createTempSync('ocideck-approved-main-');
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final harness = File('${dir.path}/harness.sh')
+        ..writeAsStringSync(r'''
+set -uo pipefail
+BRANCH=release/v9.9.9
+APPROVED_MAIN_SHA=
+ORIGIN_MAIN=old-main
+git() {
+  if [ "$1" = fetch ]; then ORIGIN_MAIN=new-main; return 0; fi
+  if [ "$1" = checkout ]; then printf '%s\n' "$4"; return 0; fi
+}
+assert_nightly_main_gate() {
+  APPROVED_MAIN_SHA="$ORIGIN_MAIN"
+  ORIGIN_MAIN=unapproved-main
+}
+die() { printf 'DIE: %s\n' "$1" >&2; exit 1; }
+git fetch origin --quiet
+assert_nightly_main_gate
+[ -n "$APPROVED_MAIN_SHA" ] || die "geen goedgekeurde main-commit"
+git checkout -b "$BRANCH" "$APPROVED_MAIN_SHA" --quiet
+''');
+      final result = Process.runSync('bash', [harness.path]);
+      expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+      expect((result.stdout as String).trim(), 'new-main');
+    },
+    skip: skipOnWindows,
+  );
 
   /// Draait de echte assert_nightly_main_gate met gemockte api/git.
   /// [runs] is "id|sha|status" per regel (nieuw→oud, sha '' = geen);

@@ -2658,6 +2658,7 @@ assert_no_pending_fixes() {
 # run op de huidige main-tip, of start hem zelf als de nachtrun die tip nog niet
 # heeft gezien. Een rode run blijft blokkeren; onbekend wordt nooit stil groen.
 MAIN_GATE_LOCK_DIR="$ROOT_DIR/build/release-main-gate.lock"
+APPROVED_MAIN_SHA=""
 release_main_gate_lock() {
   [ -f "$MAIN_GATE_LOCK_DIR/pid" ] || return 0
   [ "$(cat "$MAIN_GATE_LOCK_DIR/pid" 2>/dev/null || true)" = "$$" ] || return 0
@@ -2770,6 +2771,7 @@ assert_nightly_main_gate() {
       registration_deadline=0
     fi
     if [ "$rstatus" = "success" ]; then
+      APPROVED_MAIN_SHA="$rsha"
       log "Linux-gate groen op ${rsha:0:9} (run $found)."
       release_main_gate_lock
       return 0
@@ -2835,9 +2837,11 @@ git fetch origin --quiet
 # De eerste gate draait vóór de algemene preflight. Is main tijdens die
 # repetitie doorgeschoven, keur dan de werkelijk uit te checken tip eerst.
 assert_nightly_main_gate
-git checkout -b "$BRANCH" origin/main --quiet
+[ -n "$APPROVED_MAIN_SHA" ] \
+  || die "de linux-gate leverde geen goedgekeurde main-commit op — niets lokaal gemuteerd."
+git checkout -b "$BRANCH" "$APPROVED_MAIN_SHA" --quiet
 BRANCH_OWNED=1
-log "Branch $BRANCH van origin/main."
+log "Branch $BRANCH van goedgekeurde main ${APPROVED_MAIN_SHA:0:9}."
 
 # Aan het begin van élke release: scanner-pins naar de laatste upstream. Idempotent
 # — verandert niets als ze al kloppen. Wijzigt hij wel iets, dan committen we dat
