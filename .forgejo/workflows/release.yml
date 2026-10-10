@@ -95,7 +95,7 @@ jobs:
     # afdrijft. De web-engine-artefacten zijn niet voorgebakken (`--no-web` in het
     # image) en worden bij `flutter build web` opgehaald — een kleine download.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:baf7501654fdac272df72f90a361f17104f2849b2010c144af9d834daf41aaa6
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -284,7 +284,7 @@ jobs:
     # hieronder aan. De rest (clang/cmake/ninja/pkg-config/libgtk-3-dev/
     # build-essential/node) is ingebakken.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:baf7501654fdac272df72f90a361f17104f2849b2010c144af9d834daf41aaa6
     steps:
       # liblzma-dev + libsecret-1-dev + libayatana-appindicator3-dev: nodig voor
       # `make build-linux` (flutter_secure_storage linkt libsecret; lzma voor
@@ -481,7 +481,7 @@ jobs:
     # op de runner al warm van de bouw-jobs, dus de "Gereedschap installeren"-stap
     # (4-6 min apt) vervalt. #11 van het releaseketen-verhardingsplan.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:baf7501654fdac272df72f90a361f17104f2849b2010c144af9d834daf41aaa6
     steps:
       # De spiegelrelease blijft draft: Windows mag niet eerder publiek zijn dan
       # de centrale release. Ophalen gebeurt daarom geauthenticeerd via de API.
@@ -797,7 +797,7 @@ jobs:
     # image staat door de bouw-jobs al warm op de runner. #11 van het
     # releaseketen-verhardingsplan.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.7@sha256:baf7501654fdac272df72f90a361f17104f2849b2010c144af9d834daf41aaa6
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
