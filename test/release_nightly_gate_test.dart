@@ -139,11 +139,11 @@ api() {
           [ -n "\$rid" ] || continue
           [ "\$first" -eq 0 ] && printf ','
           first=0
-          printf '{"id":%s,"workflow_id":"${listWorkflowId}","prettyref":"main","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\$rstatus" "\$rid"
+          printf '{"id":%s,"workflow_id":"$listWorkflowId","prettyref":"main","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\$rstatus" "\$rid"
         done < '${runsFile.path}'
         if [ -f '${dir.path}/dispatched' ]; then
           [ "\$first" -eq 0 ] && printf ','
-          printf '{"id":9800,"workflow_id":"linux-gate.yml","prettyref":"main","status":"${dispatchedStatus}","html_url":"https://forge.invalid/r/9800"}'
+          printf '{"id":9800,"workflow_id":"linux-gate.yml","prettyref":"main","status":"$dispatchedStatus","html_url":"https://forge.invalid/r/9800"}'
         fi
         printf ']}\\n'
       }
@@ -151,7 +151,7 @@ api() {
     '/actions/workflows/linux-gate.yml/dispatches')
       [ "\$method" = POST ] || return 22
       : > '${dir.path}/dispatched'
-      printf '%s\\n' '${dispatchResponse}'
+      printf '%s\\n' '$dispatchResponse'
       ;;
     '/actions/runs/'*'/jobs')
       printf '%s\\n' '[{"id":50,"name":"gate-linux","status":"failure","attempt":1}]'
@@ -163,7 +163,7 @@ api() {
       rid="\${path#/actions/runs/}"
       if [ "\$rid" = 9800 ] && [ -f '${dir.path}/dispatched' ]; then
         printf '{"commit_sha":"%s","status":"%s","html_url":"https://forge.invalid/r/9800"}\\n' \\
-          'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' '${dispatchedStatus}'
+          'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' '$dispatchedStatus'
         return 0
       fi
       while IFS='|' read -r r rsha rstatus; do
