@@ -132,10 +132,9 @@ step: a ZAP warning is something to weigh and, if real, file as an issue — not
 something that reddens the command. If `colima` is installed but stopped, this
 starts it rather than requiring a separate step before every tag (it's
 idempotent — a no-op if already running); only if no container runtime is
-reachable even after that does the DAST step skip itself. Two more things
-belong in the same pre-tag ritual but are **not** automated here — run
-[`make linux-gate`](#continuous-integration) and glance at open
-`security`/`privacy` issues on the tracker before you tag.
+reachable even after that does the DAST step skip itself. Also glance at open
+`security`/`privacy` issues on the tracker before you tag. The unattended
+`release_auto.sh` route starts and follows the Linux gate itself.
 
 ## Localisation helpers
 
@@ -2133,8 +2132,9 @@ that reaches beyond `build/test_cache`.
   baked Flutter, so a *prebuilt third-party* image (the cirruslabs one shipped
   channel `[user-branch]`) still falls over on it; our own image carries only the
   pinned stable release. The tag *is* the pin, so a stale image fails fail-closed.
-- **When to press it:** before a release, and whenever a change touches paths,
-  subprocesses or `git` invocations.
+- **When it runs:** nightly, when deliberately dispatched, and automatically by
+  `release_auto.sh` when the current `main` tip has no run yet. Dispatch it
+  yourself when a change touches paths, subprocesses or `git` invocations.
 - **Why it runs at all:** `static-gate.yml` runs the static gates per PR but
   **not** the test suite, so a registration gate that is *a test*
   (`source_map_coverage_test`, the docs-registration, SBOM and l10n invariants)

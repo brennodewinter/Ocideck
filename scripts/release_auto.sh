@@ -243,6 +243,7 @@ recovery_report() {
 }
 on_err() {
   local ec=$? ln=${1:-?}
+  type release_main_gate_lock >/dev/null 2>&1 && release_main_gate_lock
   printf '\nrelease-auto: FOUT in stap "%s" (regel %s, exit %s).\n' "$STEP" "$ln" "$ec" >&2
   recovery_report
 }
@@ -252,6 +253,7 @@ on_err() {
 # behandeling, maar wél de passende signaal-exitstatus (128+n).
 on_sig() { # on_sig INT|TERM
   local sig="$1"
+  type release_main_gate_lock >/dev/null 2>&1 && release_main_gate_lock
   printf '\nrelease-auto: onderbroken door SIG%s tijdens stap "%s".\n' \
     "$sig" "$STEP" >&2
   recovery_report
@@ -2652,62 +2654,147 @@ assert_no_pending_fixes() {
 # De nightly linux-gate stond vier nachten rood terwijl de v0.6.14-release fase
 # 1 rustig doorliep en exact dezelfde fout pas ná branch en PR zelf vond. De
 # pre-flight toetst gereedschappen, niet of de onafhankelijke Linux-poort deze
-# main al als kapot kent. Daarom hier — vóór het wachtwoord, vóór elke mutatie —
-# read-only de nieuwste linux-gate-run op de huidige main-geschiedenis lezen.
-# Een ontbrekende of niet-relevante run is expliciet onbekend, niet groen. Nooit
-# een nieuwe run dispatchen als neveneffect — alleen lezen.
+# main al als kapot kent. Daarom hier, vóór elke lokale mutatie: hergebruik de
+# run op de huidige main-tip, of start hem zelf als de nachtrun die tip nog niet
+# heeft gezien. Een rode run blijft blokkeren; onbekend wordt nooit stil groen.
+MAIN_GATE_LOCK_DIR="$ROOT_DIR/build/release-main-gate.lock"
+APPROVED_MAIN_SHA=""
+release_main_gate_lock() {
+  [ -n "${MAIN_GATE_LOCK_DIR:-}" ] || return 0
+  [ -f "$MAIN_GATE_LOCK_DIR/pid" ] || return 0
+  [ "$(cat "$MAIN_GATE_LOCK_DIR/pid" 2>/dev/null || true)" = "$$" ] || return 0
+  rm -f "$MAIN_GATE_LOCK_DIR/pid"
+  rmdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null || true
+}
+acquire_main_gate_lock() {
+  local owner=""
+  mkdir -p "$(dirname "$MAIN_GATE_LOCK_DIR")"
+  if mkdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null; then
+    printf '%s\n' "$$" > "$MAIN_GATE_LOCK_DIR/pid"
+    return 0
+  fi
+  owner="$(cat "$MAIN_GATE_LOCK_DIR/pid" 2>/dev/null || true)"
+  if [[ "$owner" =~ ^[0-9]+$ ]] && kill -0 "$owner" 2>/dev/null; then
+    die "een andere release controleert of start de linux-gate (proces $owner) — start geen tweede release tegelijk."
+  fi
+  die "de exclusieve linux-gatecontrole is achtergebleven — verwijder $MAIN_GATE_LOCK_DIR pas nadat je hebt vastgesteld dat geen release draait."
+}
+die_main_gate() {
+  release_main_gate_lock
+  die "$1"
+}
 assert_nightly_main_gate() {
   STEP="nachtelijke main-poort"
   # --resume: de inhoud van de lopende release ligt al vast; een intussen rood
   # geworden main-run zegt niets meer over díe inhoud.
   [ -z "$RESUME_TAG" ] || return 0
+  acquire_main_gate_lock
   local main_sha
   main_sha="$(git rev-parse --verify origin/main 2>/dev/null)" \
-    || die "origin/main ontbreekt lokaal — de nachtelijke linux-gate kan niet aan de huidige main-tip gekoppeld worden."
+    || die_main_gate "origin/main ontbreekt lokaal — de nachtelijke linux-gate kan niet aan de huidige main-tip gekoppeld worden."
   # De lijst-route geeft geen commit_sha; die staat op de detail-GET per run.
   # Alleen een run op exact de main-tip bewijst de kandidaatbasis. Een groene
   # voorouder kan tientallen ongetoetste commits achterlopen en verplaatst een
   # Linux-fout dan juist naar ná de lange lokale build.
-  local ids rid rinfo rsha rstatus rurl found=""
-  ids="$(api GET "/actions/runs?limit=50&workflow_id=linux-gate.yml" 2>/dev/null \
-    | jq -r '[.workflow_runs[]? | select(.prettyref == "main") | .id] | sort | reverse | .[]' 2>/dev/null)" \
-    || die "kon de linux-gate-runs niet lezen — nachtelijke main-poort is onbekend, niet groen."
-  for rid in $ids; do
-    rinfo="$(api GET "/actions/runs/$rid" 2>/dev/null \
-      | jq -r '[.commit_sha // "", .status // "", .html_url // ""] | @tsv' 2>/dev/null)" || continue
-    rsha="$(printf '%s' "$rinfo" | cut -f1)"
-    [ -n "$rsha" ] || continue
-    [ "$rsha" = "$main_sha" ] || continue
-    found="$rid"
-    rstatus="$(printf '%s' "$rinfo" | cut -f2)"
-    rurl="$(printf '%s' "$rinfo" | cut -f3)"
-    break
-  done
-  [ -n "$found" ] \
-    || die "geen linux-gate-run gevonden op de huidige main-tip — de nachtelijke poort is onbekend, niet groen. Draai linux-gate handmatig (workflow_dispatch op main) of wacht op de nachtrun en begin dan opnieuw. Niets gemuteerd."
-  if [ "$rstatus" = "success" ]; then
-    log "Nachtelijke linux-gate groen op ${rsha:0:9} (run $found)."
-    return 0
-  fi
-  case "$rstatus" in
-    failure|cancelled|skipped|error)
-      local jobname jobid rlog=""
+  local timeout_seconds="${GATE_TIMEOUT_SECONDS:-$((GATE_TIMEOUT_MIN * 60))}"
+  local deadline=$((SECONDS + timeout_seconds)) registration_deadline=0
+  local ids rid rinfo rsha rstatus rurl found resp dispatch_id="" dispatched=0
+  local lookup_failed=0 unreadable=0 polls=0 jobname jobid rlog
+  while [ "$SECONDS" -lt "$deadline" ]; do
+    polls=$((polls + 1))
+    found=""; rsha=""; rstatus=""; rurl=""; lookup_failed=0
+    ids="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs?limit=50&workflow_id=linux-gate.yml" 2>/dev/null \
+      | jq -r '
+          if (.workflow_runs | type) != "array" then error("workflow_runs is geen array")
+          elif any(.workflow_runs[];
+              type != "object"
+              or (.id | type) != "number"
+              or (.workflow_id | type) != "string"
+              or (.prettyref | type) != "string")
+          then error("ongeldige workflow-run")
+          else [.workflow_runs[]
+            | select(.workflow_id == "linux-gate.yml" and .prettyref == "main")
+            | .id] | sort | reverse | .[]
+          end' 2>/dev/null)" \
+      || lookup_failed=1
+    if [ "$lookup_failed" -eq 0 ]; then
+      for rid in $ids; do
+        rinfo="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs/$rid" 2>/dev/null \
+          | jq -er '
+              if (type != "object"
+                  or (.commit_sha | type) != "string" or .commit_sha == ""
+                  or (.status | type) != "string" or .status == ""
+                  or ((.html_url // "") | type) != "string")
+              then error("ongeldige run-details")
+              else [.commit_sha, .status, (.html_url // "")] | @tsv
+              end' 2>/dev/null)" \
+          || { lookup_failed=1; break; }
+        rsha="$(printf '%s' "$rinfo" | cut -f1)"
+        [ -n "$rsha" ] || continue
+        [ "$rsha" = "$main_sha" ] || continue
+        found="$rid"
+        rstatus="$(printf '%s' "$rinfo" | cut -f2)"
+        rurl="$(printf '%s' "$rinfo" | cut -f3)"
+        break
+      done
+    fi
+    if [ "$lookup_failed" -ne 0 ]; then
+      unreadable=$((unreadable + 1))
+      [ "$unreadable" -lt 6 ] \
+        || die_main_gate "de linux-gate op de huidige main-tip is $unreadable polls onleesbaar — onbekend is niet groen. Niets gemuteerd."
+      sleep 30
+      continue
+    fi
+    unreadable=0
+    if [ -z "$found" ]; then
+      if [ "$dispatched" -eq 0 ]; then
+        dispatched=1
+        registration_deadline=$((SECONDS + 5 * 60))
+        if resp="$(api POST '/actions/workflows/linux-gate.yml/dispatches' \
+          -H 'Content-Type: application/json' \
+          -d "$(jq -n --arg r main '{ref:$r, return_run_info:true}')")"; then
+          dispatch_id="$(printf '%s' "$resp" | jq -r '.id // empty' 2>/dev/null || true)"
+          log "Geen linux-gate op de huidige main-tip; zelf gestart${dispatch_id:+ (run $dispatch_id)}."
+        else
+          log "De dispatchbevestiging viel weg; controleren of Forgejo de linux-gate toch heeft gestart."
+        fi
+      else
+        [ "$registration_deadline" -gt 0 ] \
+          || registration_deadline=$((SECONDS + 5 * 60))
+        [ "$SECONDS" -lt "$registration_deadline" ] \
+          || die_main_gate "de linux-gate is vijf minuten niet zichtbaar op de huidige main-tip — niets lokaal gemuteerd."
+      fi
+    else
+      # Een zichtbare run voorkomt ook na een tijdelijke lijst-hik een tweede
+      # niet-idempotente POST. Houd de proceslock tot de run terminaal is: een
+      # tweede release hoort niet naast deze release te starten.
+      dispatched=1
+      registration_deadline=0
+    fi
+    if [ "$rstatus" = "success" ]; then
+      APPROVED_MAIN_SHA="$rsha"
+      log "Linux-gate groen op ${rsha:0:9} (run $found)."
+      release_main_gate_lock
+      return 0
+    elif printf '%s' "$rstatus" | grep -qE '^(failure|cancelled|skipped|error)$'; then
+      rlog=""
       jobname="$(api GET "/actions/runs/$found/jobs" 2>/dev/null \
         | jq -r '[.[]? | select(.status == "failure")] | .[0] | "\(.name // "onbekende job")|\(.id // "")"' 2>/dev/null)"
       jobid="${jobname##*|}"; jobname="${jobname%%|*}"
       [ -n "$jobid" ] \
         && rlog="$(api GET "/actions/jobs/$jobid/logs" 2>/dev/null \
           | grep -v '^[[:space:]]*$' | tail -n 8)"
-      section "Nachtelijke linux-gate staat rood op de huidige main"
+      section "Linux-gate staat rood op de huidige main"
       log "run: ${rurl:-run $found} (commit ${rsha:0:9}, status $rstatus)"
       [ -z "$jobname" ] || log "eerste falende job: $jobname"
       [ -z "$rlog" ] || { log "foutcontext:"; printf '%s\n' "$rlog" | sed 's/^/     /'; }
-      die "dezelfde fout zou deze release ná de tag alsnog breken — repareer main, draai linux-gate groen en begin dan pas. Niets gemuteerd."
-      ;;
-    *)
-      die "de nieuwste linux-gate-run op main is niet voltooid (status: ${rstatus:-leeg}) — onbekend is niet groen. Wacht tot de run klaar is of draai hem handmatig opnieuw, en begin dan. Niets gemuteerd."
-      ;;
-  esac
+      die_main_gate "dezelfde fout zou deze release ná de tag alsnog breken — repareer main en begin dan opnieuw. Niets lokaal gemuteerd."
+    elif [ $(( (polls - 1) % 6 )) -eq 0 ]; then
+      log "Wachten op linux-gate${found:+ run $found} op main (status: ${rstatus:-registratie})…"
+    fi
+    sleep 30
+  done
+  die_main_gate "linux-gate werd niet groen binnen ${GATE_TIMEOUT_MIN} min — niets lokaal gemuteerd."
 }
 
 # ── De twee prompts (de enige interactie) ───────────────────────────────────────
@@ -2748,9 +2835,14 @@ fi
 STEP="voorbereiden"
 section "Fase 1 — voorbereiden"
 git fetch origin --quiet
-git checkout -b "$BRANCH" origin/main --quiet
+# De eerste gate draait vóór de algemene preflight. Is main tijdens die
+# repetitie doorgeschoven, keur dan de werkelijk uit te checken tip eerst.
+assert_nightly_main_gate
+[ -n "$APPROVED_MAIN_SHA" ] \
+  || die "de linux-gate leverde geen goedgekeurde main-commit op — niets lokaal gemuteerd."
+git checkout -b "$BRANCH" "$APPROVED_MAIN_SHA" --quiet
 BRANCH_OWNED=1
-log "Branch $BRANCH van origin/main."
+log "Branch $BRANCH van goedgekeurde main ${APPROVED_MAIN_SHA:0:9}."
 
 # Aan het begin van élke release: scanner-pins naar de laatste upstream. Idempotent
 # — verandert niets als ze al kloppen. Wijzigt hij wel iets, dan committen we dat

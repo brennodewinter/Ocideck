@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De releasepreflight start een ontbrekende `linux-gate` op de actuele
+  `main`-tip nu zelf en wacht begrensd op de uitslag. Een al lopende run wordt
+  hergebruikt; rood of onleesbaar blijft fail-closed. Een release hoeft daardoor
+  niet meer handmatig afgebroken en opnieuw gestart te worden alleen omdat de
+  nachtrun de nieuwste commit nog niet had gezien.
 - **Meervoudige selectie in het slide-overzicht is nu vindbaar** (#2363).
   Elke bewerkbare dia-kaart heeft een selectievak waarmee je dia's zonder
   Shift of Ctrl/Cmd toevoegt aan of haalt uit de selectie. Bij meer dan één
