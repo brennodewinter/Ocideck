@@ -243,6 +243,7 @@ recovery_report() {
 }
 on_err() {
   local ec=$? ln=${1:-?}
+  type release_main_gate_lock >/dev/null 2>&1 && release_main_gate_lock
   printf '\nrelease-auto: FOUT in stap "%s" (regel %s, exit %s).\n' "$STEP" "$ln" "$ec" >&2
   recovery_report
 }
@@ -252,6 +253,7 @@ on_err() {
 # behandeling, maar wél de passende signaal-exitstatus (128+n).
 on_sig() { # on_sig INT|TERM
   local sig="$1"
+  type release_main_gate_lock >/dev/null 2>&1 && release_main_gate_lock
   printf '\nrelease-auto: onderbroken door SIG%s tijdens stap "%s".\n' \
     "$sig" "$STEP" >&2
   recovery_report
@@ -2673,15 +2675,7 @@ acquire_main_gate_lock() {
   if [[ "$owner" =~ ^[0-9]+$ ]] && kill -0 "$owner" 2>/dev/null; then
     die "een andere release controleert of start de linux-gate (proces $owner) — start geen tweede release tegelijk."
   fi
-  [ -n "$owner" ] \
-    || die "de exclusieve linux-gatecontrole wordt net door een ander proces geclaimd — start geen tweede release tegelijk."
-  [[ "$owner" =~ ^[0-9]+$ ]] \
-    || die "de exclusieve linux-gatecontrole heeft een ongeldige eigenaar — verwijder $MAIN_GATE_LOCK_DIR pas nadat je hebt vastgesteld dat geen release draait."
-  rm -f "$MAIN_GATE_LOCK_DIR/pid"
-  rmdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null || true
-  mkdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null \
-    || die "kon de exclusieve linux-gatecontrole niet claimen — start geen tweede release tegelijk."
-  printf '%s\n' "$$" > "$MAIN_GATE_LOCK_DIR/pid"
+  die "de exclusieve linux-gatecontrole is achtergebleven — verwijder $MAIN_GATE_LOCK_DIR pas nadat je hebt vastgesteld dat geen release draait."
 }
 die_main_gate() {
   release_main_gate_lock
@@ -2710,6 +2704,12 @@ assert_nightly_main_gate() {
     ids="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs?limit=50&workflow_id=linux-gate.yml" 2>/dev/null \
       | jq -r '
           if (.workflow_runs | type) != "array" then error("workflow_runs is geen array")
+          elif any(.workflow_runs[];
+              type != "object"
+              or (.id | type) != "number"
+              or (.workflow_id | type) != "string"
+              or (.prettyref | type) != "string")
+          then error("ongeldige workflow-run")
           else [.workflow_runs[]
             | select(.workflow_id == "linux-gate.yml" and .prettyref == "main")
             | .id] | sort | reverse | .[]
@@ -2764,13 +2764,14 @@ assert_nightly_main_gate() {
       fi
     else
       # Een zichtbare run voorkomt ook na een tijdelijke lijst-hik een tweede
-      # niet-idempotente POST; andere releaseprocessen mogen hem nu hergebruiken.
+      # niet-idempotente POST. Houd de proceslock tot de run terminaal is: een
+      # tweede release hoort niet naast deze release te starten.
       dispatched=1
       registration_deadline=0
-      release_main_gate_lock
     fi
     if [ "$rstatus" = "success" ]; then
       log "Linux-gate groen op ${rsha:0:9} (run $found)."
+      release_main_gate_lock
       return 0
     elif printf '%s' "$rstatus" | grep -qE '^(failure|cancelled|skipped|error)$'; then
       rlog=""

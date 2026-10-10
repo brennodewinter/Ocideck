@@ -92,9 +92,12 @@ $topLevel
     String dispatchResponse = '{"id":9800}',
     String listWorkflowId = 'linux-gate.yml',
     bool wrongListSchema = false,
+    bool malformedListItem = false,
     bool wrongDetailSchema = false,
     bool lockHeld = false,
     bool lockMissingPid = false,
+    bool lockDeadPid = false,
+    bool requireLockWhileRunning = false,
     bool delayedListGap = false,
     File? trace,
   }) {
@@ -139,6 +142,10 @@ api() {
     '/actions/runs?limit=50&workflow_id=linux-gate.yml')
       if [ '${wrongListSchema ? '1' : '0'}' -eq 1 ]; then
         printf '%s\n' '{"message":"unexpected response"}'
+        return 0
+      fi
+      if [ '${malformedListItem ? '1' : '0'}' -eq 1 ]; then
+        printf '%s\\n' '{"workflow_runs":[{"id":99}]}'
         return 0
       fi
       ${delayedListGap ? '''count=0
@@ -188,6 +195,9 @@ api() {
       fi
       while IFS='|' read -r r rsha rstatus; do
         if [ "\$r" = "\$rid" ]; then
+          if [ '${requireLockWhileRunning ? '1' : '0'}' -eq 1 ] && [ ! -f "\$MAIN_GATE_LOCK_DIR/pid" ]; then
+            return 23
+          fi
           if [ '${delayedListGap ? '1' : '0'}' -eq 1 ] && [ "\$(cat '${dir.path}/list-count')" -ge 3 ]; then
             rstatus=success
           fi
@@ -210,6 +220,8 @@ api() {
 ${lockHeld ? '''mkdir -p "\$MAIN_GATE_LOCK_DIR"
 printf '%s\n' "\$PPID" > "\$MAIN_GATE_LOCK_DIR/pid"''' : ''}
 ${lockMissingPid ? 'mkdir -p "\$MAIN_GATE_LOCK_DIR"' : ''}
+${lockDeadPid ? '''mkdir -p "\$MAIN_GATE_LOCK_DIR"
+printf '%s\n' 99999999 > "\$MAIN_GATE_LOCK_DIR/pid"''' : ''}
 assert_nightly_main_gate
 printf 'DOOR\\n'
 ''');
@@ -284,6 +296,18 @@ printf 'DOOR\\n'
     expect(trace.readAsStringSync(), isNot(contains('POST ')));
   });
 
+  test('een onvolledig lijstitem veroorzaakt geen dispatch', () {
+    final trace = File(
+      '${Directory.systemTemp.path}/ocideck-nightly-list-item-$pid.log',
+    );
+    addTearDown(() {
+      if (trace.existsSync()) trace.deleteSync();
+    });
+    final r = runGate(runs: [], malformedListItem: true, trace: trace);
+    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+    expect(trace.readAsStringSync(), isNot(contains('POST ')));
+  });
+
   test('ongeldige run-details veroorzaken geen dispatch', () {
     final trace = File(
       '${Directory.systemTemp.path}/ocideck-nightly-detail-$pid.log',
@@ -316,10 +340,16 @@ printf 'DOOR\\n'
     );
   });
 
-  test('een lock zonder pid wordt nooit als stale verwijderd', () {
+  test('een lock zonder pid wordt nooit automatisch verwijderd', () {
     final r = runGate(runs: [], lockMissingPid: true);
     expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
-    expect('${r.stdout}\n${r.stderr}', contains('net door een ander proces'));
+    expect('${r.stdout}\n${r.stderr}', contains('achtergebleven'));
+  });
+
+  test('een lock van een gestopt proces wordt nooit automatisch vervangen', () {
+    final r = runGate(runs: [], lockDeadPid: true);
+    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+    expect('${r.stdout}\n${r.stderr}', contains('achtergebleven'));
   });
 
   test('een late lege runlijst krijgt een nieuwe registratietermijn', () {
@@ -358,6 +388,7 @@ printf 'DOOR\\n'
     final r = runGate(
       runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
       runningBecomesSuccess: true,
+      requireLockWhileRunning: true,
       trace: trace,
     );
     final output = '${r.stdout}\n${r.stderr}';
