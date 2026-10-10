@@ -1943,7 +1943,7 @@ patchrelease, samen met de reparatie van de releaseketen.
   '…/Metal.xctoolchain/usr/lib/swift/macosx' not found`, en datzelfde pad —
   inclusief het koppelnummer van het Metal-cryptex, dat per machine en per
   Apple-update verschilt — belandde als dode `LC_RPATH` in de uitgebrachte
-  binary. Een `post_install`-haak in [`macos/Podfile`](macos/Podfile) haalt het
+  binary. Een `post_install`-haak in `macos/Podfile` haalde het
   uit de gegenereerde xcconfigs. De app zelf verandert niet: niets in het
   bundel hangt aan `@rpath/libswift*`, en de Swift-runtime werd al gevonden via
   `/usr/lib/swift` en de SDK.
