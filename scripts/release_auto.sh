@@ -2660,6 +2660,7 @@ assert_no_pending_fixes() {
 MAIN_GATE_LOCK_DIR="$ROOT_DIR/build/release-main-gate.lock"
 APPROVED_MAIN_SHA=""
 release_main_gate_lock() {
+  [ -n "${MAIN_GATE_LOCK_DIR:-}" ] || return 0
   [ -f "$MAIN_GATE_LOCK_DIR/pid" ] || return 0
   [ "$(cat "$MAIN_GATE_LOCK_DIR/pid" 2>/dev/null || true)" = "$$" ] || return 0
   rm -f "$MAIN_GATE_LOCK_DIR/pid"
