@@ -224,7 +224,7 @@ die niet bestaat.*
 **Oplossingen**:
 1. **Omgevingsverificatie**:
    - Draai `make check` om te controleren dat alle kwaliteitspoorten lokaal slagen
-   - Zorg dat de toolchain-versies overeenkomen met de projecteisen (**Flutter 3.47.5**)
+   - Zorg dat de toolchain-versies overeenkomen met de projecteisen (**Flutter 3.47.7**)
    - Ga na dat de afhankelijkheden correct zijn geïnstalleerd (`flutter pub get`) 
 
 2. **Testomgeving**:

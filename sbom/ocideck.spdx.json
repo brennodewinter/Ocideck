@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.6.15+41",
-  "documentNamespace": "https://ocideck.app/spdx/f9c41e35-6182-5511-804d-5c409bb60b01",
+  "documentNamespace": "https://ocideck.app/spdx/4f382eb6-c965-5e7b-8bf5-fc8a47cf61f0",
   "creationInfo": {
-    "created": "2026-10-09T08:29:42.556318Z",
+    "created": "2026-10-10T10:46:19.123705Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -33,69 +33,69 @@
     {
       "SPDXID": "SPDXRef-1--fe-analyzer-shared",
       "name": "_fe_analyzer_shared",
-      "versionInfo": "108.0.0",
+      "versionInfo": "109.0.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/_fe_analyzer_shared/versions/108.0.0",
+      "downloadLocation": "https://pub.dev/packages/_fe_analyzer_shared/versions/109.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "fdcd9f70f9eb80df3bc5ed0fa67280df2595fd481948df8a9ab082e6a40ad04b"
+          "checksumValue": "48e48f73a431eb269eec66d243a63a07ed90ef9417a74047a3b98d52338626ad"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/_fe_analyzer_shared@108.0.0"
+          "referenceLocator": "pkg:pub/_fe_analyzer_shared@109.0.0"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-2-analyzer",
       "name": "analyzer",
-      "versionInfo": "14.4.0",
+      "versionInfo": "14.5.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/analyzer/versions/14.4.0",
+      "downloadLocation": "https://pub.dev/packages/analyzer/versions/14.5.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a51c769bff3b6dfbe9d60199b8606d808290702a296bef0c26a4ca391d414e46"
+          "checksumValue": "6d377901d198536b648172974d9d4f277910502cad92193466869cac0ff34990"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/analyzer@14.4.0"
+          "referenceLocator": "pkg:pub/analyzer@14.5.0"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-3-android-file-picker",
       "name": "android_file_picker",
-      "versionInfo": "2.0.0",
+      "versionInfo": "2.0.1",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/android_file_picker/versions/2.0.0",
+      "downloadLocation": "https://pub.dev/packages/android_file_picker/versions/2.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "14ab27769b54c48d5a8a71aa9858372b7a3ae77572ea0a8aee744643c5d8c53d"
+          "checksumValue": "537bce9a43bc6fc08670cb68498251acc6eb9134b86a391b43e1f7c863588388"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/android_file_picker@2.0.0"
+          "referenceLocator": "pkg:pub/android_file_picker@2.0.1"
         }
       ]
     },
@@ -575,46 +575,46 @@
     {
       "SPDXID": "SPDXRef-26-cupertino-icons",
       "name": "cupertino_icons",
-      "versionInfo": "1.0.9",
+      "versionInfo": "2.0.0",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/cupertino_icons/versions/1.0.9",
+      "downloadLocation": "https://pub.dev/packages/cupertino_icons/versions/2.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "41e005c33bd814be4d3096aff55b1908d419fde52ca656c8c47719ec745873cd"
+          "checksumValue": "b7cc2390aac296c083bea762859413eb1cf5b630c70e0c7e4d831018f762a8b2"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/cupertino_icons@1.0.9"
+          "referenceLocator": "pkg:pub/cupertino_icons@2.0.0"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-27-cupertino-ui",
       "name": "cupertino_ui",
-      "versionInfo": "1.1.0",
+      "versionInfo": "1.1.2",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/cupertino_ui/versions/1.1.0",
+      "downloadLocation": "https://pub.dev/packages/cupertino_ui/versions/1.1.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c6747018d37d32feeeb858a1d7043831cb541460ebe1a890a995cdb8df8ea5a5"
+          "checksumValue": "ea0b8170b40a86262b2fc21ac0625303f52df209dbf6fccc2b98b27eff44f6ce"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/cupertino_ui@1.1.0"
+          "referenceLocator": "pkg:pub/cupertino_ui@1.1.2"
         }
       ]
     },
@@ -920,23 +920,23 @@
     {
       "SPDXID": "SPDXRef-41-file-picker-darwin",
       "name": "file_picker_darwin",
-      "versionInfo": "2.1.0",
+      "versionInfo": "2.1.3",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/file_picker_darwin/versions/2.1.0",
+      "downloadLocation": "https://pub.dev/packages/file_picker_darwin/versions/2.1.3",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "deb3ff69d58656b885c85bc1627f09ecb79860f272a5e7577149582ede4dce5d"
+          "checksumValue": "3df1dc8e881de9ffd3953c9e482ac5d6e1ffe1e7f7b231b5695543e251ab7918"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/file_picker_darwin@2.1.0"
+          "referenceLocator": "pkg:pub/file_picker_darwin@2.1.3"
         }
       ]
     },
@@ -989,23 +989,23 @@
     {
       "SPDXID": "SPDXRef-44-file-picker-web",
       "name": "file_picker_web",
-      "versionInfo": "4.0.0",
+      "versionInfo": "4.1.0",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/file_picker_web/versions/4.0.0",
+      "downloadLocation": "https://pub.dev/packages/file_picker_web/versions/4.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b3004268da0c1b52baa18df430e7ec4438194de855a807d26b447cbf07ef3496"
+          "checksumValue": "32af8262aca907b02b8970b32328b0312db0b42ba6f930be6d27fde179d59b7d"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/file_picker_web@4.0.0"
+          "referenceLocator": "pkg:pub/file_picker_web@4.1.0"
         }
       ]
     },
@@ -1711,23 +1711,23 @@
     {
       "SPDXID": "SPDXRef-78-flutter-webrtc",
       "name": "flutter_webrtc",
-      "versionInfo": "1.6.2+hotfix.3",
+      "versionInfo": "1.6.2+hotfix.4",
       "supplier": "Organization: cloudwebrtc",
-      "downloadLocation": "https://pub.dev/packages/flutter_webrtc/versions/1.6.2+hotfix.3",
+      "downloadLocation": "https://pub.dev/packages/flutter_webrtc/versions/1.6.2+hotfix.4",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c1d3674f61b14cbe98b60f0cce396835b1483163e644b8cd26fd3fdd55360fb9"
+          "checksumValue": "ebf5ceef2897caae425ed65a38b2961c29d9d9a626159418ed460e1a65038c00"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/flutter_webrtc@1.6.2+hotfix.3"
+          "referenceLocator": "pkg:pub/flutter_webrtc@1.6.2+hotfix.4"
         }
       ]
     },
@@ -1860,23 +1860,23 @@
     {
       "SPDXID": "SPDXRef-85-image",
       "name": "image",
-      "versionInfo": "4.10.1",
+      "versionInfo": "4.10.2",
       "supplier": "Organization: brendan-duncan",
-      "downloadLocation": "https://pub.dev/packages/image/versions/4.10.1",
+      "downloadLocation": "https://pub.dev/packages/image/versions/4.10.2",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a1e7f4951e538a568e14b856702afc9ae1d2f4b202daced8d22c1b9cd211ce89"
+          "checksumValue": "0be525eb917b032c7c9c980597c508a255814a858bd8d9abfc9c57e04f3ebf89"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/image@4.10.1"
+          "referenceLocator": "pkg:pub/image@4.10.2"
         }
       ]
     },
@@ -1940,46 +1940,46 @@
     {
       "SPDXID": "SPDXRef-89-jni",
       "name": "jni",
-      "versionInfo": "1.0.3",
+      "versionInfo": "1.1.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/jni/versions/1.0.3",
+      "downloadLocation": "https://pub.dev/packages/jni/versions/1.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f038e58b4dc2c9037f50e233175086337e0b305e356d28211bf55f21c504cbd3"
+          "checksumValue": "6b9ca0602fef0230e83149afbe3f9f8227e94f2bbe84a1da4f14d699742f402d"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/jni@1.0.3"
+          "referenceLocator": "pkg:pub/jni@1.1.0"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-90-jni-flutter",
       "name": "jni_flutter",
-      "versionInfo": "1.0.3",
+      "versionInfo": "1.0.4+1",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/jni_flutter/versions/1.0.3",
+      "downloadLocation": "https://pub.dev/packages/jni_flutter/versions/1.0.4+1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b2310cdd4c18c65c081ab141a41efa94aa26c65431803703ece51996f174f351"
+          "checksumValue": "0dd33d67797560f66e961a6053882d4df54bd345bf063b8fe7ea133f7ad8b191"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/jni_flutter@1.0.3"
+          "referenceLocator": "pkg:pub/jni_flutter@1.0.4+1"
         }
       ]
     },
@@ -2262,23 +2262,23 @@
     {
       "SPDXID": "SPDXRef-103-material-ui",
       "name": "material_ui",
-      "versionInfo": "1.5.0",
+      "versionInfo": "1.6.0",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/material_ui/versions/1.5.0",
+      "downloadLocation": "https://pub.dev/packages/material_ui/versions/1.6.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "32d98f11cf5942a095a8c3e01b03e4de3b17941437713dcf36b1088fb62e23d2"
+          "checksumValue": "98ab9eda579ecae623e4b376c603035c5def78ce706f735f30bd632af5814695"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/material_ui@1.5.0"
+          "referenceLocator": "pkg:pub/material_ui@1.6.0"
         }
       ]
     },
@@ -2378,23 +2378,23 @@
     {
       "SPDXID": "SPDXRef-109-objective-c",
       "name": "objective_c",
-      "versionInfo": "9.6.0",
+      "versionInfo": "9.6.2",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/objective_c/versions/9.6.0",
+      "downloadLocation": "https://pub.dev/packages/objective_c/versions/9.6.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ad56fd53a78ff6b1472fa59ff2a4e8b8ccabafc586fc263a1dfad0b99b5553e3"
+          "checksumValue": "5c80c2ad6e2c0397de5db38c6d653e69616a3397e13aa7633bf39eb668f2041b"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/objective_c@9.6.0"
+          "referenceLocator": "pkg:pub/objective_c@9.6.2"
         }
       ]
     },
@@ -2447,23 +2447,23 @@
     {
       "SPDXID": "SPDXRef-112-package-info-plus",
       "name": "package_info_plus",
-      "versionInfo": "10.2.1",
+      "versionInfo": "10.2.2",
       "supplier": "Organization: fluttercommunity",
-      "downloadLocation": "https://pub.dev/packages/package_info_plus/versions/10.2.1",
+      "downloadLocation": "https://pub.dev/packages/package_info_plus/versions/10.2.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "127e1751e37ffb2ff4658beeaca77bad0c27bf5f932bd3a501c2296926d4b481"
+          "checksumValue": "73ef2cd5c11a7548f9b7f6fc2a4f6113de2e64aa2a70de63feede95548822908"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/package_info_plus@10.2.1"
+          "referenceLocator": "pkg:pub/package_info_plus@10.2.2"
         }
       ]
     },
@@ -2815,23 +2815,23 @@
     {
       "SPDXID": "SPDXRef-128-petitparser",
       "name": "petitparser",
-      "versionInfo": "7.0.2",
+      "versionInfo": "7.1.0",
       "supplier": "Organization: petitparser",
-      "downloadLocation": "https://pub.dev/packages/petitparser/versions/7.0.2",
+      "downloadLocation": "https://pub.dev/packages/petitparser/versions/7.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "91bd59303e9f769f108f8df05e371341b15d59e995e6806aefab827b58336675"
+          "checksumValue": "2f1564aadb14215e478563b5406cb80729d022158c01dc50c96013c2f7eb4790"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/petitparser@7.0.2"
+          "referenceLocator": "pkg:pub/petitparser@7.1.0"
         }
       ]
     },
@@ -2930,23 +2930,23 @@
     {
       "SPDXID": "SPDXRef-133-pqcrypto",
       "name": "pqcrypto",
-      "versionInfo": "0.4.2",
+      "versionInfo": "0.4.3",
       "supplier": "Organization: turkananation",
-      "downloadLocation": "https://pub.dev/packages/pqcrypto/versions/0.4.2",
+      "downloadLocation": "https://pub.dev/packages/pqcrypto/versions/0.4.3",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "e9a420fe70b03a862b71ea8a1e70976d1d64ca647bfba58bf1acc3e727cb24fe"
+          "checksumValue": "ec5027887d3bfdcf0c383f805a813d7c518864e56e3e48028f5ed2980db7eb64"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/pqcrypto@0.4.2"
+          "referenceLocator": "pkg:pub/pqcrypto@0.4.3"
         }
       ]
     },
@@ -3206,23 +3206,23 @@
     {
       "SPDXID": "SPDXRef-145-quill-native-bridge-windows",
       "name": "quill_native_bridge_windows",
-      "versionInfo": "0.1.0",
+      "versionInfo": "0.1.1",
       "supplier": "Organization: FlutterQuill",
-      "downloadLocation": "https://pub.dev/packages/quill_native_bridge_windows/versions/0.1.0",
+      "downloadLocation": "https://pub.dev/packages/quill_native_bridge_windows/versions/0.1.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "e91090a2f3ff61cf18bd011f6c0a6c9625f145601e6e8eccf91b6d6cb9a572f8"
+          "checksumValue": "a23cd4d0d4477188d2dd4bc6db886fe5cb27e2d555b94434bc2b471d5d7558f5"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/quill_native_bridge_windows@0.1.0"
+          "referenceLocator": "pkg:pub/quill_native_bridge_windows@0.1.1"
         }
       ]
     },
@@ -3356,23 +3356,23 @@
     {
       "SPDXID": "SPDXRef-152-shared-preferences",
       "name": "shared_preferences",
-      "versionInfo": "2.5.5",
+      "versionInfo": "2.5.6",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/shared_preferences/versions/2.5.5",
+      "downloadLocation": "https://pub.dev/packages/shared_preferences/versions/2.5.6",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c3025c5534b01739267eb7d76959bbc25a6d10f6988e1c2a3036940133dd10bf"
+          "checksumValue": "1e85e0dccf5b4a016077fea7dfbb4a7cb39c759ac1596fcf60c06deadb7da91f"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/shared_preferences@2.5.5"
+          "referenceLocator": "pkg:pub/shared_preferences@2.5.6"
         }
       ]
     },
@@ -3827,23 +3827,23 @@
     {
       "SPDXID": "SPDXRef-173-url-launcher",
       "name": "url_launcher",
-      "versionInfo": "6.3.2",
+      "versionInfo": "6.3.3",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/url_launcher/versions/6.3.2",
+      "downloadLocation": "https://pub.dev/packages/url_launcher/versions/6.3.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f6a7e5c4835bb4e3026a04793a4199ca2d14c739ec378fdfe23fc8075d0439f8"
+          "checksumValue": "e8cc955c97e06df9879140a1fe301f3d493f01b7c62dec7f46834be31d7e9fda"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/url_launcher@6.3.2"
+          "referenceLocator": "pkg:pub/url_launcher@6.3.3"
         }
       ]
     },
@@ -4126,23 +4126,23 @@
     {
       "SPDXID": "SPDXRef-186-video-player",
       "name": "video_player",
-      "versionInfo": "2.14.0",
+      "versionInfo": "2.14.1",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/video_player/versions/2.14.0",
+      "downloadLocation": "https://pub.dev/packages/video_player/versions/2.14.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8c837b570dccb9ae6ff73d2e0b03c7e708bfefd3bd1194faa7f3e7f200dfc399"
+          "checksumValue": "07ae1e03f2d4c8e2e9a75ee678f90acbc4506d4458a9c628512d119a1eee5754"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/video_player@2.14.0"
+          "referenceLocator": "pkg:pub/video_player@2.14.1"
         }
       ]
     },
@@ -4172,23 +4172,23 @@
     {
       "SPDXID": "SPDXRef-188-video-player-avfoundation",
       "name": "video_player_avfoundation",
-      "versionInfo": "2.12.0",
+      "versionInfo": "2.12.1",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/video_player_avfoundation/versions/2.12.0",
+      "downloadLocation": "https://pub.dev/packages/video_player_avfoundation/versions/2.12.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "2fc56e537324a19eb649fca991aa308ac961b5406292876fa657b062de461fd8"
+          "checksumValue": "4f8a845173377ab250a50f9b9dfe4a43500cc76a7c49dd8410d02d8fc29dfd8b"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/video_player_avfoundation@2.12.0"
+          "referenceLocator": "pkg:pub/video_player_avfoundation@2.12.1"
         }
       ]
     },
@@ -4494,23 +4494,23 @@
     {
       "SPDXID": "SPDXRef-202-webview-flutter-wkwebview",
       "name": "webview_flutter_wkwebview",
-      "versionInfo": "3.26.1",
+      "versionInfo": "3.27.0",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/webview_flutter_wkwebview/versions/3.26.1",
+      "downloadLocation": "https://pub.dev/packages/webview_flutter_wkwebview/versions/3.27.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "fe359c7fac1002124b5b9e2ba3a41906bbb9b2d029ccb4a0067404d8f3704730"
+          "checksumValue": "a9cc3f507ee40127ed0812ca54d00701a27833f51ea0b5820f4b3e7f42518bf3"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/webview_flutter_wkwebview@3.26.1"
+          "referenceLocator": "pkg:pub/webview_flutter_wkwebview@3.27.0"
         }
       ]
     },
@@ -4540,23 +4540,23 @@
     {
       "SPDXID": "SPDXRef-204-windows-file-picker",
       "name": "windows_file_picker",
-      "versionInfo": "2.0.0",
+      "versionInfo": "2.0.1",
       "supplier": "Organization: vicajilau",
-      "downloadLocation": "https://pub.dev/packages/windows_file_picker/versions/2.0.0",
+      "downloadLocation": "https://pub.dev/packages/windows_file_picker/versions/2.0.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "9f3aa833068b09e380fdc59560ad260a4a14e9397173abb533699f967443602e"
+          "checksumValue": "18452aa293de3b6961c6d05b0e71b4be7bb90c67635abdd3aa5c4e75dd875072"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/windows_file_picker@2.0.0"
+          "referenceLocator": "pkg:pub/windows_file_picker@2.0.1"
         }
       ]
     },
@@ -4986,7 +4986,7 @@
     {
       "SPDXID": "SPDXRef-225-flutter",
       "name": "flutter",
-      "versionInfo": "3.47.5",
+      "versionInfo": "3.47.7",
       "supplier": "Organization: flutter",
       "downloadLocation": "https://flutter.dev",
       "filesAnalyzed": false,
