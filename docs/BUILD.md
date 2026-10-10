@@ -585,19 +585,13 @@ imagemagick`) and nothing else, and it is safe to run at any time: re-running it
 without changing the master reproduces the committed macOS set byte for byte.
 
 **The master is `macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png`**,
-not `assets/images/ocideck-logo.png`. The latter is the logo shown *inside* the
-app: 512 px, with a wider margin. The master is 1024 px and carries roughly three
-times the edge detail, so every app-icon size is a reduction and never an
-enlargement — which is what keeps the 1024 icon Apple shows in the App Store
-sharp. If you replace the master, keep its framing: the drawing trimmed, scaled
-to **87.7%** of the canvas height, centred on opaque white. Opaque, not
-transparent: the mark is dark ink and vanishes on a dark taskbar without the
-white plate under it, and iOS rejects an icon with an alpha channel outright.
-
-The web icons are the one deliberate exception — they come from
-`assets/images/ocideck-logo.png` at its own wider margin, because a favicon sits
-in a tab strip rather than a dock. That is measured, not assumed; the script says
-so at the point where it does it.
+not `assets/images/ocideck-logo.png`. The latter is the black-and-white logo
+shown *inside* the app. The 1024 px master is the platform icon: the unchanged
+KAT drawing in EU yellow (`#FFCC00`) on an opaque EU-blue (`#003399`) plate.
+Every platform size is a reduction of that master, never an enlargement. If you
+replace it, keep the drawing at **87.7%** of the canvas height and centred.
+Opaque is required: it keeps the mark stable on light and dark system surfaces,
+and iOS rejects an icon with an alpha channel outright.
 
 `test/platform_icon_branding_test.dart` holds every target against the mark
 afterwards. It compares the drawing itself — trimmed, flattened to a greyscale

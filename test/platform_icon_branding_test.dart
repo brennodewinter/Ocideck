@@ -36,9 +36,7 @@ void main() {
     return decoded!;
   }
 
-  /// Een grove grijswaarde-vingerafdruk van de tékening: bijsnijden tot de
-  /// inhoud, dan platslaan naar 32x32. Zo valt het verschil in canvasgrootte en
-  /// marge weg en blijft over waar het om gaat — welke kat er staat.
+  /// Een grove grijswaarde-vingerafdruk van de volledige plaat.
   img.Image vingerafdruk(img.Image bron) => img.grayscale(
     img.copyResize(
       img.trim(bron, mode: img.TrimMode.topLeftColor),
@@ -61,31 +59,56 @@ void main() {
     return som / (32 * 32);
   }
 
-  /// Aandeel ondoorzichtige pixels met een uitgesproken kleur. De lijntekening
-  /// is neutrale inkt op wit en komt op nul uit; de fotokat — gele poten, rode
-  /// halsband — zat boven de vijftig procent.
-  double kleuraandeel(img.Image beeld) {
+  void verwachtEuPalet(img.Image beeld, String pad) {
     var ondoorzichtig = 0;
-    var gekleurd = 0;
+    var blauw = 0;
+    var geel = 0;
+    var buitenPalet = 0;
+    const basisR = 0.0;
+    const basisG = 51.0;
+    const basisB = 153.0;
+    const deltaR = 255.0;
+    const deltaG = 153.0;
+    const deltaB = -153.0;
+    const deltaKwadratensom =
+        deltaR * deltaR + deltaG * deltaG + deltaB * deltaB;
     for (var y = 0; y < beeld.height; y++) {
       for (var x = 0; x < beeld.width; x++) {
         final p = beeld.getPixel(x, y);
         if (p.a < 200) continue;
         ondoorzichtig++;
-        final hoog = math.max(p.r, math.max(p.g, p.b));
-        final laag = math.min(p.r, math.min(p.g, p.b));
-        if (hoog - laag > 40) gekleurd++;
+        final t =
+            (((p.r - basisR) * deltaR +
+                        (p.g - basisG) * deltaG +
+                        (p.b - basisB) * deltaB) /
+                    deltaKwadratensom)
+                .clamp(0.0, 1.0);
+        final afwijking = math.sqrt(
+          math.pow(p.r - (basisR + t * deltaR), 2) +
+              math.pow(p.g - (basisG + t * deltaG), 2) +
+              math.pow(p.b - (basisB + t * deltaB), 2),
+        );
+        if (t < 0.1) blauw++;
+        if (t > 0.8) geel++;
+        if (afwijking > 20) buitenPalet++;
       }
     }
+    expect(ondoorzichtig, greaterThan(0), reason: '$pad is doorzichtig');
     expect(
-      ondoorzichtig,
-      greaterThan(0),
-      reason: 'icoon is volledig doorzichtig',
+      blauw / ondoorzichtig,
+      greaterThan(0.35),
+      reason: '$pad mist EU-blauw',
     );
-    return gekleurd / ondoorzichtig;
+    expect(geel, greaterThan(0), reason: '$pad mist EU-geel');
+    expect(
+      buitenPalet / ondoorzichtig,
+      lessThan(0.01),
+      reason: '$pad bevat kleuren buiten het EU-blauw/gele palet',
+    );
   }
 
-  const merkpad = 'assets/images/ocideck-logo.png';
+  const merkpad =
+      'macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png';
 
   /// Het grootste kunstwerk per bouwdoel. Bewust niet de kleine formaten: bij
   /// 16 of 64 pixels waaieren de dunne lijnen zo ver uit dat de vingerafdruk
@@ -151,26 +174,22 @@ void main() {
     }
   });
 
-  test('geen enkel icoonformaat draagt de verzadigde kleur van de foto', () {
+  test('elk icoonformaat gebruikt EU-blauw met een EU-gele KAT', () {
     final paden = [
       ...grootste.values,
       for (final n in macosMaten)
         'macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_$n.png',
       'web/favicon.png',
       'web/app-icons/Icon-192.png',
+      'web/app-icons/Icon-maskable-192.png',
+      'web/app-icons/Icon-maskable-512.png',
       ...iosBestanden.map(iosPad),
       ...androidDichtheden.map(androidPad),
     ].where((pad) => File(pad).existsSync());
 
     for (final pad in paden) {
       for (final formaat in lees(pad).frames) {
-        expect(
-          kleuraandeel(formaat),
-          lessThan(0.01),
-          reason:
-              '$pad (${formaat.width}px) staat vol verzadigde kleur; de '
-              'huisstijl is neutrale inkt op wit',
-        );
+        verwachtEuPalet(formaat, '$pad (${formaat.width}px)');
       }
     }
   });

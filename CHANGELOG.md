@@ -28,6 +28,10 @@ All notable changes to OciDeck are documented in this file.
   basistermen en dezelfde taalkeuze in Instellingen. OciDeck houdt zijn
   productspecifieke vertalingen en exporttaal lokaal; presentatiebestanden en
   opgeslagen instellingen veranderen niet.
+- **Het app-icoon gebruikt nu de EU-kleuren.** In systeemmenu's,
+  appwisselaars, docks, taakbalken en browser-tabs staat de KAT-tekening in
+  EU-geel (`#FFCC00`) op een EU-blauwe (`#003399`) achtergrond. Alle zes
+  platformsets worden uit dezelfde master gegenereerd.
 - **Dia's neerzetten op expliciete invoegposities in het slide-overzicht**
   (#2362). Dropbestemmingen zijn nu invoegslots: vóór de eerste dia, tussen
   elke twee dia's en achter de laatste — niet langer "op" een kaart mikken.
