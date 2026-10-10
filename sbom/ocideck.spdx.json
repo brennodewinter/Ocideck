@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.6.15+41",
-  "documentNamespace": "https://ocideck.app/spdx/81961bb0-f0b6-542e-8274-4a7add2385e7",
+  "documentNamespace": "https://ocideck.app/spdx/4f382eb6-c965-5e7b-8bf5-fc8a47cf61f0",
   "creationInfo": {
-    "created": "2026-10-10T10:08:02.770641Z",
+    "created": "2026-10-10T10:46:19.123705Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -126,23 +126,23 @@
     {
       "SPDXID": "SPDXRef-6-archive",
       "name": "archive",
-      "versionInfo": "4.4.0",
+      "versionInfo": "4.3.0",
       "supplier": "Organization: brendan-duncan",
-      "downloadLocation": "https://pub.dev/packages/archive/versions/4.4.0",
+      "downloadLocation": "https://pub.dev/packages/archive/versions/4.3.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "3aa20c6b5617b632a1b7198dcca3d88065d37232485b9a6c6c14dc8f5357d279"
+          "checksumValue": "6c5bcd986e06b94e3c40244af471750840a3d2341d1f9763a1100a14add517b4"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/archive@4.4.0"
+          "referenceLocator": "pkg:pub/archive@4.3.0"
         }
       ]
     },

@@ -29,7 +29,7 @@ The JSON documents carry **800 dependency relations** between these components: 
 | android_file_picker _(transitive)_ | 2.0.1 | MIT | vicajilau | `pkg:pub/android_file_picker@2.0.1` |
 | app_appearance _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `d2d9a3b6b5bdae4c1ddd71245055ef0823fadc82` (packages/app_appearance) |
 | app_localizations _(direct main)_ | 0.1.0 | EUPL-1.2 | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/AppFoundation.git @ `73822a01339b6e601f8b84ada2e529d3db33d81d` (packages/app_localizations) |
-| archive _(direct main)_ | 4.4.0 | MIT | brendan-duncan | `pkg:pub/archive@4.4.0` |
+| archive _(direct main)_ | 4.3.0 | MIT | brendan-duncan | `pkg:pub/archive@4.3.0` |
 | args _(transitive)_ | 2.7.0 | BSD-3-Clause | dart-lang | `pkg:pub/args@2.7.0` |
 | asn1lib _(transitive)_ | 1.6.5 | BSD | wstrange | `pkg:pub/asn1lib@1.6.5` |
 | async _(transitive)_ | 2.13.1 | BSD-3-Clause | dart-lang | `pkg:pub/async@2.13.1` |

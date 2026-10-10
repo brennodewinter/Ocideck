@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:11c12de7-614b-52fe-8e7a-8da272ce9e6d",
+  "serialNumber": "urn:uuid:b6d8fa0e-25ca-57eb-8847-50906b6b4495",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-10T10:08:02.770641Z",
+    "timestamp": "2026-10-10T10:46:19.123705Z",
     "tools": {
       "components": [
         {
@@ -283,7 +283,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/archive@4.4.0",
+      "bom-ref": "pkg:pub/archive@4.3.0",
       "type": "library",
       "supplier": {
         "name": "brendan-duncan",
@@ -292,8 +292,8 @@
         ]
       },
       "name": "archive",
-      "version": "4.4.0",
-      "purl": "pkg:pub/archive@4.4.0",
+      "version": "4.3.0",
+      "purl": "pkg:pub/archive@4.3.0",
       "licenses": [
         {
           "license": {
@@ -304,13 +304,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "3aa20c6b5617b632a1b7198dcca3d88065d37232485b9a6c6c14dc8f5357d279"
+          "content": "6c5bcd986e06b94e3c40244af471750840a3d2341d1f9763a1100a14add517b4"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/archive/versions/4.4.0"
+          "url": "https://pub.dev/packages/archive/versions/4.3.0"
         }
       ],
       "properties": [
@@ -9483,7 +9483,7 @@
         "pkg:npm/mathjax@3.2.2",
         "pkg:npm/mermaid@11.16.1",
         "pkg:pub/analyzer@14.5.0",
-        "pkg:pub/archive@4.4.0",
+        "pkg:pub/archive@4.3.0",
         "pkg:pub/characters@1.4.1",
         "pkg:pub/crypto@3.0.7",
         "pkg:pub/cryptography@2.9.0",
@@ -9587,7 +9587,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/archive@4.4.0",
+      "ref": "pkg:pub/archive@4.3.0",
       "dependsOn": [
         "pkg:pub/path@1.9.1",
         "pkg:pub/posix@6.5.2"
@@ -10246,7 +10246,7 @@
     {
       "ref": "pkg:pub/image@4.10.2",
       "dependsOn": [
-        "pkg:pub/archive@4.4.0"
+        "pkg:pub/archive@4.3.0"
       ]
     },
     {
@@ -10303,7 +10303,7 @@
     {
       "ref": "pkg:pub/jose@0.3.5+2",
       "dependsOn": [
-        "pkg:pub/archive@4.4.0",
+        "pkg:pub/archive@4.3.0",
         "pkg:pub/asn1lib@1.6.5",
         "pkg:pub/collection@1.19.1",
         "pkg:pub/crypto_keys@0.3.1",
@@ -10571,7 +10571,7 @@
     {
       "ref": "pkg:pub/pdf@3.13.1",
       "dependsOn": [
-        "pkg:pub/archive@4.4.0",
+        "pkg:pub/archive@4.3.0",
         "pkg:pub/barcode@2.2.9",
         "pkg:pub/bidi@2.0.13",
         "pkg:pub/crypto@3.0.7",
@@ -10585,7 +10585,7 @@
     {
       "ref": "pkg:pub/pdfium_dart@0.3.1",
       "dependsOn": [
-        "pkg:pub/archive@4.4.0",
+        "pkg:pub/archive@4.3.0",
         "pkg:pub/code_assets@2.1.0",
         "pkg:pub/ffi@2.2.0",
         "pkg:pub/hooks@2.2.0",
@@ -10626,7 +10626,7 @@
     {
       "ref": "pkg:pub/pdfrx_engine@0.6.1",
       "dependsOn": [
-        "pkg:pub/archive@4.4.0",
+        "pkg:pub/archive@4.3.0",
         "pkg:pub/collection@1.19.1",
         "pkg:pub/crypto@3.0.7",
         "pkg:pub/ffi@2.2.0",
@@ -11268,7 +11268,7 @@
     {
       "ref": "first-party:ocideck_form_core@0.0.1",
       "dependsOn": [
-        "pkg:pub/archive@4.4.0",
+        "pkg:pub/archive@4.3.0",
         "pkg:pub/characters@1.4.1",
         "pkg:pub/crypto@3.0.7",
         "pkg:pub/cryptography@2.9.0",
