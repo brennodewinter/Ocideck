@@ -24,3 +24,6 @@ PRODUCT_BUNDLE_IDENTIFIER = com.dewinter.ocideck
 // Shown in the macOS "About" panel. The publisher is the foundation, not a
 // company — corrected 2026-07-22 (#646); see COMPLIANCE.md for who holds what.
 PRODUCT_COPYRIGHT = Copyright © 2026 Stichting LibreKAT. Licensed under the EUPL-1.2.
+
+// Optionele, machinegebonden signingconfiguratie; blijft buiten git.
+#include? "Local.xcconfig"
