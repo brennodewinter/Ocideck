@@ -20,7 +20,7 @@ dependencies:
   cryptography: ^2.9.0
   # Exact pin, no caret: a 0.x cryptographic library does not float. Only form_seal.dart
   # imports it (the check_packages gate keeps it so). See FORM_INTAKE.md §5.6.
-  # It needs Dart 3.13; the toolchain pin (.tool-versions) ships 3.13.4. The `sdk` above stays
+  # It needs Dart 3.13; the toolchain pin (.tool-versions) ships 3.13.5. The `sdk` above stays
   # as the root's: raising it to ^3.13.0 switches `dart format` to the newer style and
   # rewrites half the repository, which is a change of its own.
   dartage: 0.3.0
