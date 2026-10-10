@@ -140,7 +140,7 @@ void main() {
       expect(
         preTagYaml,
         matches(
-          RegExp(r'  build-linux:\n(?:.*\n){0,4}?    timeout-minutes: 60'),
+          RegExp(r'  build-linux:\n(?:.*\n){0,4}?    timeout-minutes: 90'),
         ),
         reason:
             'A stuck pre-tag build must not occupy the release indefinitely.',
