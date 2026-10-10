@@ -5,11 +5,10 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// Guards #2308: a fresh release must not walk past a nightly linux-gate that
-/// already knows this main is broken (v0.6.14 ran phase 1 while the gate had
-/// been red for four nights). The check is read-only: a missing, stale or
-/// unfinished run is explicitly unknown — never silently green — and --resume
-/// skips it entirely because a resumed release's content is already fixed.
+/// Guards #2308: a fresh release must not walk past a linux-gate that has not
+/// proved the current main tip. A missing run is started here and followed to
+/// completion; failed or unknown is never silently green. --resume skips the
+/// check because a resumed release's content is already fixed.
 void main() {
   const script = 'scripts/release_auto.sh';
   final skipOnWindows = Platform.isWindows
@@ -18,7 +17,7 @@ void main() {
 
   final autoScript = File(script).readAsStringSync();
 
-  test('de poort draait vóór preflight en alleen read-only', () {
+  test('de poort draait vóór preflight', () {
     // Voer de echte top-level aanroepvolgorde uit met tracerende grenzen. De
     // wachtwoordprompt mag binnen preflight verhuizen zolang de nightly gate
     // runtime vóór die hele stap blijft.
@@ -47,15 +46,22 @@ $topLevel
     final calls = (result.stdout as String).trim().split('\n');
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
     expect(calls.indexOf('nightly'), lessThan(calls.indexOf('preflight')));
+  });
 
-    // Geen neveneffect: de gate mag nooit zelf een run dispatchen.
-    final gateCall = autoScript.indexOf('assert_nightly_main_gate\n');
-    final body = autoScript.substring(
-      autoScript.indexOf('assert_nightly_main_gate() {'),
-      gateCall,
+  test('de ververste main-tip wordt vóór de fase-1-checkout herkeurd', () {
+    final phaseOne = autoScript.indexOf('section "Fase 1 — voorbereiden"');
+    final fetch = autoScript.indexOf('git fetch origin --quiet', phaseOne);
+    final checkout = autoScript.indexOf(
+      'git checkout -b "\$BRANCH" origin/main --quiet',
+      fetch,
     );
-    expect(body, isNot(contains('POST')));
-    expect(body, isNot(contains('dispatches')));
+    expect(phaseOne, isNonNegative);
+    expect(fetch, greaterThan(phaseOne));
+    expect(checkout, greaterThan(fetch));
+    expect(
+      autoScript.substring(fetch, checkout),
+      contains('assert_nightly_main_gate'),
+    );
   });
 
   String allFunctionDefinitions() {
@@ -81,6 +87,10 @@ $topLevel
     List<String> ancestors = const ['aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'],
     String resumeTag = '',
     bool apiFails = false,
+    String dispatchedStatus = 'success',
+    bool runningBecomesSuccess = false,
+    String dispatchResponse = '{"id":9800}',
+    File? trace,
   }) {
     final dir = Directory.systemTemp.createTempSync('ocideck-nightly-gate-');
     addTearDown(() => dir.deleteSync(recursive: true));
@@ -90,6 +100,8 @@ $topLevel
     harness.writeAsStringSync('''
 set -uo pipefail
 RESUME_TAG='$resumeTag'
+GATE_TIMEOUT_MIN=1
+GATE_TIMEOUT_SECONDS=2
 ${allFunctionDefinitions()}
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
@@ -110,6 +122,7 @@ git() {
 }
 api() {
   ${apiFails ? 'return 22' : '''local method="\$1" path="\$2"
+  [ -z '${trace?.path ?? ''}' ] || printf '%s %s\\n' "\$method" "\$path" >> '${trace?.path ?? '/dev/null'}'
   case "\$path" in
     '/actions/runs?limit=50&workflow_id=linux-gate.yml')
       { printf '{"workflow_runs":['
@@ -120,8 +133,17 @@ api() {
           first=0
           printf '{"id":%s,"prettyref":"main","status":"%s","html_url":"https://forge.invalid/r/%s"}' "\$rid" "\$rstatus" "\$rid"
         done < '${runsFile.path}'
+        if [ -f '${dir.path}/dispatched' ]; then
+          [ "\$first" -eq 0 ] && printf ','
+          printf '{"id":9800,"prettyref":"main","status":"${dispatchedStatus}","html_url":"https://forge.invalid/r/9800"}'
+        fi
         printf ']}\\n'
       }
+      ;;
+    '/actions/workflows/linux-gate.yml/dispatches')
+      [ "\$method" = POST ] || return 22
+      : > '${dir.path}/dispatched'
+      printf '%s\\n' '${dispatchResponse}'
       ;;
     '/actions/runs/'*'/jobs')
       printf '%s\\n' '[{"id":50,"name":"gate-linux","status":"failure","attempt":1}]'
@@ -131,8 +153,20 @@ api() {
       ;;
     '/actions/runs/'*)
       rid="\${path#/actions/runs/}"
+      if [ "\$rid" = 9800 ] && [ -f '${dir.path}/dispatched' ]; then
+        printf '{"commit_sha":"%s","status":"%s","html_url":"https://forge.invalid/r/9800"}\\n' \\
+          'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' '${dispatchedStatus}'
+        return 0
+      fi
       while IFS='|' read -r r rsha rstatus; do
         if [ "\$r" = "\$rid" ]; then
+          if [ '${runningBecomesSuccess ? '1' : '0'}' -eq 1 ] && [ "\$rstatus" = running ]; then
+            if [ -f '${dir.path}/seen-running' ]; then
+              rstatus=success
+            else
+              : > '${dir.path}/seen-running'
+            fi
+          fi
           printf '{"commit_sha":"%s","status":"%s","html_url":"https://forge.invalid/r/%s"}\\n' "\$rsha" "\$rstatus" "\$rid"
           return 0
         fi
@@ -159,6 +193,32 @@ printf 'DOOR\\n'
     expect(output, contains('DOOR'));
   });
 
+  test('zonder groene tiprun start en volgt de release zelf linux-gate', () {
+    final trace = File(
+      '${Directory.systemTemp.path}/ocideck-nightly-dispatch-$pid.log',
+    );
+    addTearDown(() {
+      if (trace.existsSync()) trace.deleteSync();
+    });
+    final r = runGate(runs: [], trace: trace);
+    final output = '${r.stdout}\n${r.stderr}';
+    expect(r.exitCode, 0, reason: output);
+    expect(output, contains('DOOR'));
+    expect(
+      trace.readAsStringSync(),
+      contains('POST /actions/workflows/linux-gate.yml/dispatches'),
+    );
+    expect(trace.readAsStringSync(), contains('GET /actions/runs/9800'));
+  });
+
+  test(
+    'een lege dispatchbevestiging wordt via de aangemaakte run hersteld',
+    () {
+      final r = runGate(runs: [], dispatchResponse: '');
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+    },
+  );
+
   test(
     'een rode nachtrun stopt vóór elke mutatie, met run- en foutcontext',
     () {
@@ -176,29 +236,29 @@ printf 'DOOR\\n'
     },
   );
 
-  test('een run op een commit buiten main telt niet als goedkeuring', () {
-    final r = runGate(
-      runs: ['9718|cccccccccccccccccccccccccccccccccccccccc|success'],
+  test('een lopende tiprun wordt gevolgd zonder dubbele dispatch', () {
+    final trace = File(
+      '${Directory.systemTemp.path}/ocideck-nightly-running-$pid.log',
     );
-    final output = '${r.stdout}\n${r.stderr}';
-    expect(r.exitCode, isNot(0), reason: output);
-    expect(output, contains('onbekend, niet groen'));
-  });
-
-  test('zonder linux-gate-run is de main-toestand onbekend, niet groen', () {
-    final r = runGate(runs: []);
-    final output = '${r.stdout}\n${r.stderr}';
-    expect(r.exitCode, isNot(0), reason: output);
-    expect(output, contains('onbekend, niet groen'));
-  });
-
-  test('een nog lopende nachtrun is onbekend, niet groen', () {
+    addTearDown(() {
+      if (trace.existsSync()) trace.deleteSync();
+    });
     final r = runGate(
       runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
+      runningBecomesSuccess: true,
+      trace: trace,
     );
     final output = '${r.stdout}\n${r.stderr}';
+    expect(r.exitCode, 0, reason: output);
+    expect(output, contains('DOOR'));
+    expect(trace.readAsStringSync(), isNot(contains('POST ')));
+  });
+
+  test('een nieuw gedispatchte rode run blijft fail-closed', () {
+    final r = runGate(runs: [], dispatchedStatus: 'failure');
+    final output = '${r.stdout}\n${r.stderr}';
     expect(r.exitCode, isNot(0), reason: output);
-    expect(output, contains('niet voltooid'));
+    expect(output, contains('https://forge.invalid/r/9800'));
   });
 
   test('een onbereikbare forge-API maakt de toestand onbekend, niet groen', () {

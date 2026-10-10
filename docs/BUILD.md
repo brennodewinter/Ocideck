@@ -629,8 +629,9 @@ step anyway: a set nobody watches is how this went wrong the first time.
 > pin.
 >
 > What that costs: the suite no longer runs on Linux by default. The Linux gate
-> moved to `.forgejo/workflows/linux-gate.yml`, on demand — press it before a
-> release and when a change touches paths, subprocesses or `git` invocations.
+> moved to `.forgejo/workflows/linux-gate.yml`, nightly and on demand;
+> `release_auto.sh` starts and follows it itself before a release. Dispatch it
+> yourself when a change touches paths, subprocesses or `git` invocations.
 > The pinned-toolchain and pub caches live there, where an install actually
 > happens.
 >
@@ -747,6 +748,12 @@ pre-flight below checks tools, not whether the release is complete; this check
 does. `--ondanks-fixes` lets a run proceed anyway and records that choice in the
 release log; `--resume` skips the check because the content of a running release
 is already fixed. `test/release_auto_pending_fixes_test.dart` pins the behaviour.
+
+The same pre-mutation section requires a green `linux-gate` on the exact
+`origin/main` tip. It reuses and follows an existing run, or dispatches one on
+`main` when the nightly schedule has not seen that commit yet. A red or
+persistently unreadable run remains a hard stop. Phase 1 repeats the check after
+its final fetch, so it never branches from a newer, untested tip.
 
 Right after the password, a **pre-flight** checks everything the later,
 irreversible steps will need — the forge token, the `mirror` remote, the deploy

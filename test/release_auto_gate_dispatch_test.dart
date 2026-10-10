@@ -137,9 +137,11 @@ wait_gate abc123 2194
     expect(result.stderr, contains('poort werd niet groen'));
   }, skip: skipOnWindows);
 
-  test('nachtelijke main-poort accepteert geen groene voorouder', () {
+  test('nachtelijke main-poort keurt na een groene voorouder de tip zelf', () {
     final result = runHarness(r'''
 RESUME_TAG=
+MARKER="$(mktemp -d)/dispatched"
+trap 'rm -rf "${MARKER%/*}"' EXIT
 git() {
   case "$*" in
     'rev-parse --verify origin/main') printf '%s\n' 'tip-sha' ;;
@@ -150,7 +152,16 @@ git() {
 api() {
   case "$2" in
     '/actions/runs?limit=50&workflow_id=linux-gate.yml')
-      printf '%s\n' '{"workflow_runs":[{"id":7,"prettyref":"main"}]}' ;;
+      if [ -e "$MARKER" ]; then
+        printf '%s\n' '{"workflow_runs":[{"id":8,"prettyref":"main"},{"id":7,"prettyref":"main"}]}'
+      else
+        printf '%s\n' '{"workflow_runs":[{"id":7,"prettyref":"main"}]}'
+      fi ;;
+    '/actions/workflows/linux-gate.yml/dispatches')
+      : > "$MARKER"
+      printf '%s\n' '{"id":8}' ;;
+    '/actions/runs/8')
+      printf '%s\n' '{"commit_sha":"tip-sha","status":"success","html_url":"https://forge.invalid/8"}' ;;
     '/actions/runs/7')
       printf '%s\n' '{"commit_sha":"old-sha","status":"success","html_url":"https://forge.invalid/7"}' ;;
     *) printf '%s\n' '{}' ;;
@@ -160,8 +171,8 @@ die() { printf 'DIE: %s\n' "$1" >&2; exit 99; }
 assert_nightly_main_gate
 ''');
 
-    expect(result.exitCode, 99, reason: '${result.stdout}\n${result.stderr}');
-    expect(result.stderr, contains('main-tip'));
+    expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+    expect(result.stdout, contains('Linux-gate groen op tip-sha'));
   }, skip: skipOnWindows);
 
   test('wait_gate houdt een wall-clockdeadline aan bij een trage poll', () {
