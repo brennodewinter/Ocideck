@@ -92,7 +92,10 @@ $topLevel
     String dispatchResponse = '{"id":9800}',
     String listWorkflowId = 'linux-gate.yml',
     bool wrongListSchema = false,
+    bool wrongDetailSchema = false,
     bool lockHeld = false,
+    bool lockMissingPid = false,
+    bool delayedListGap = false,
     File? trace,
   }) {
     final dir = Directory.systemTemp.createTempSync('ocideck-nightly-gate-');
@@ -104,12 +107,17 @@ $topLevel
 set -uo pipefail
 RESUME_TAG='$resumeTag'
 GATE_TIMEOUT_MIN=1
-GATE_TIMEOUT_SECONDS=2
+GATE_TIMEOUT_SECONDS=${delayedListGap ? '1000' : '2'}
 MAIN_GATE_LOCK_DIR='${dir.path}/main-gate.lock'
 ${allFunctionDefinitions()}
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
-sleep() { :; }
+sleep() {
+  ${delayedListGap ? '''if [ ! -e '${dir.path}/slept' ]; then
+    : > '${dir.path}/slept'
+    SECONDS=600
+  fi''' : ':'}
+}
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
 git() {
   if [ "\$1" = rev-parse ]; then
@@ -133,6 +141,14 @@ api() {
         printf '%s\n' '{"message":"unexpected response"}'
         return 0
       fi
+      ${delayedListGap ? '''count=0
+      [ ! -f '${dir.path}/list-count' ] || count="\$(cat '${dir.path}/list-count')"
+      count=\$((count + 1))
+      printf '%s\n' "\$count" > '${dir.path}/list-count'
+      if [ "\$count" -eq 2 ]; then
+        printf '%s\n' '{"workflow_runs":[]}'
+        return 0
+      fi''' : ''}
       { printf '{"workflow_runs":['
         first=1
         while IFS='|' read -r rid rsha rstatus; do
@@ -161,6 +177,10 @@ api() {
       ;;
     '/actions/runs/'*)
       rid="\${path#/actions/runs/}"
+      if [ '${wrongDetailSchema ? '1' : '0'}' -eq 1 ]; then
+        printf '%s\\n' '{"message":"temporarily unreadable"}'
+        return 0
+      fi
       if [ "\$rid" = 9800 ] && [ -f '${dir.path}/dispatched' ]; then
         printf '{"commit_sha":"%s","status":"%s","html_url":"https://forge.invalid/r/9800"}\\n' \\
           'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' '$dispatchedStatus'
@@ -168,6 +188,9 @@ api() {
       fi
       while IFS='|' read -r r rsha rstatus; do
         if [ "\$r" = "\$rid" ]; then
+          if [ '${delayedListGap ? '1' : '0'}' -eq 1 ] && [ "\$(cat '${dir.path}/list-count')" -ge 3 ]; then
+            rstatus=success
+          fi
           if [ '${runningBecomesSuccess ? '1' : '0'}' -eq 1 ] && [ "\$rstatus" = running ]; then
             if [ -f '${dir.path}/seen-running' ]; then
               rstatus=success
@@ -186,6 +209,7 @@ api() {
 }
 ${lockHeld ? '''mkdir -p "\$MAIN_GATE_LOCK_DIR"
 printf '%s\n' "\$PPID" > "\$MAIN_GATE_LOCK_DIR/pid"''' : ''}
+${lockMissingPid ? 'mkdir -p "\$MAIN_GATE_LOCK_DIR"' : ''}
 assert_nightly_main_gate
 printf 'DOOR\\n'
 ''');
@@ -260,6 +284,22 @@ printf 'DOOR\\n'
     expect(trace.readAsStringSync(), isNot(contains('POST ')));
   });
 
+  test('ongeldige run-details veroorzaken geen dispatch', () {
+    final trace = File(
+      '${Directory.systemTemp.path}/ocideck-nightly-detail-$pid.log',
+    );
+    addTearDown(() {
+      if (trace.existsSync()) trace.deleteSync();
+    });
+    final r = runGate(
+      runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
+      wrongDetailSchema: true,
+      trace: trace,
+    );
+    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+    expect(trace.readAsStringSync(), isNot(contains('POST ')));
+  });
+
   test('een tweede releaseproces kan niet dubbel dispatchen', () {
     final trace = File(
       '${Directory.systemTemp.path}/ocideck-nightly-lock-$pid.log',
@@ -274,6 +314,21 @@ printf 'DOOR\\n'
       trace.existsSync() ? trace.readAsStringSync() : '',
       isNot(contains('POST ')),
     );
+  });
+
+  test('een lock zonder pid wordt nooit als stale verwijderd', () {
+    final r = runGate(runs: [], lockMissingPid: true);
+    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+    expect('${r.stdout}\n${r.stderr}', contains('net door een ander proces'));
+  });
+
+  test('een late lege runlijst krijgt een nieuwe registratietermijn', () {
+    final r = runGate(
+      runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
+      delayedListGap: true,
+    );
+    expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+    expect('${r.stdout}\n${r.stderr}', contains('DOOR'));
   });
 
   test(

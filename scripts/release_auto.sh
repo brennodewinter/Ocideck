@@ -2673,6 +2673,10 @@ acquire_main_gate_lock() {
   if [[ "$owner" =~ ^[0-9]+$ ]] && kill -0 "$owner" 2>/dev/null; then
     die "een andere release controleert of start de linux-gate (proces $owner) — start geen tweede release tegelijk."
   fi
+  [ -n "$owner" ] \
+    || die "de exclusieve linux-gatecontrole wordt net door een ander proces geclaimd — start geen tweede release tegelijk."
+  [[ "$owner" =~ ^[0-9]+$ ]] \
+    || die "de exclusieve linux-gatecontrole heeft een ongeldige eigenaar — verwijder $MAIN_GATE_LOCK_DIR pas nadat je hebt vastgesteld dat geen release draait."
   rm -f "$MAIN_GATE_LOCK_DIR/pid"
   rmdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null || true
   mkdir "$MAIN_GATE_LOCK_DIR" 2>/dev/null \
@@ -2714,7 +2718,14 @@ assert_nightly_main_gate() {
     if [ "$lookup_failed" -eq 0 ]; then
       for rid in $ids; do
         rinfo="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs/$rid" 2>/dev/null \
-          | jq -r '[.commit_sha // "", .status // "", .html_url // ""] | @tsv' 2>/dev/null)" \
+          | jq -er '
+              if (type != "object"
+                  or (.commit_sha | type) != "string" or .commit_sha == ""
+                  or (.status | type) != "string" or .status == ""
+                  or ((.html_url // "") | type) != "string")
+              then error("ongeldige run-details")
+              else [.commit_sha, .status, (.html_url // "")] | @tsv
+              end' 2>/dev/null)" \
           || { lookup_failed=1; break; }
         rsha="$(printf '%s' "$rinfo" | cut -f1)"
         [ -n "$rsha" ] || continue
@@ -2745,15 +2756,17 @@ assert_nightly_main_gate() {
         else
           log "De dispatchbevestiging viel weg; controleren of Forgejo de linux-gate toch heeft gestart."
         fi
-      elif [ "$SECONDS" -ge "$registration_deadline" ]; then
-        die_main_gate "de linux-gate is niet binnen vijf minuten als run geregistreerd op de huidige main-tip — niets lokaal gemuteerd."
+      else
+        [ "$registration_deadline" -gt 0 ] \
+          || registration_deadline=$((SECONDS + 5 * 60))
+        [ "$SECONDS" -lt "$registration_deadline" ] \
+          || die_main_gate "de linux-gate is vijf minuten niet zichtbaar op de huidige main-tip — niets lokaal gemuteerd."
       fi
     else
       # Een zichtbare run voorkomt ook na een tijdelijke lijst-hik een tweede
       # niet-idempotente POST; andere releaseprocessen mogen hem nu hergebruiken.
       dispatched=1
-      [ "$registration_deadline" -gt 0 ] \
-        || registration_deadline=$((SECONDS + 5 * 60))
+      registration_deadline=0
       release_main_gate_lock
     fi
     if [ "$rstatus" = "success" ]; then
