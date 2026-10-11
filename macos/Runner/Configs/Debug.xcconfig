@@ -1,2 +1,5 @@
 #include "../../Flutter/Flutter-Debug.xcconfig"
 #include "Warnings.xcconfig"
+
+// Alleen debug mag machinegebonden signing-instellingen overnemen.
+#include? "Local.xcconfig"
