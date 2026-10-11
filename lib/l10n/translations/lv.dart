@@ -1604,6 +1604,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Git-werk herstellen': 'Atjaunot Git darbu',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Joprojām ir lokāli Git dati, kas nav saistīti ar pašreizējo savienojumu. Tie netiks nosūtīti automātiski. Saglabā kopiju un izlasi rokasgrāmatā “Veco Git melnrakstu atjaunošana”, pirms dzēs lietotnes datus.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Šīs prezentācijas Git savienojums ir noņemts vai mainīts. Atver prezentāciju vēlreiz vai izvēlies “Saglabāt uz…”.',
   'Aan selectie toevoegen': 'Pievienot atlasei',
   'Uit selectie halen': 'Izņemt no atlases',
   '{n} dia\'s geselecteerd': '{n} slaidi atlasīti',
@@ -5658,8 +5663,6 @@ const _dutchSourceAddLv = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Šis galapunkts neatbalsta nosacītu rakstīšanu; vienlaicīga rediģēšana šeit ir sliktāk aizsargāta.',
   'Naar de slide': 'Uz slaidu',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Šīs prezentācijas git savienojuma vairs nav.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Vispirms iestatiet git repozitoriju sadaļā Iestatījumi → Krātuve.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

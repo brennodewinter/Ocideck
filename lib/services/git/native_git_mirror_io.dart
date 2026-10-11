@@ -280,13 +280,48 @@ class _NativeGitMirror implements NativeGitMirror {
     Duration timeout = const Duration(seconds: 60),
     bool network = false,
     List<GitConfigOverride> extraConfig = const [],
-  }) async => _git.run(
-    args,
-    operands: operands,
-    workingDirectory: _worktree.path,
-    config: [...(network ? await _networkConfig() : _config0), ...extraConfig],
-    timeout: timeout,
-  );
+  }) async {
+    await _verifyExistingOrigin();
+    return _git.run(
+      args,
+      operands: operands,
+      workingDirectory: _worktree.path,
+      config: [
+        ...(network ? await _networkConfig() : _config0),
+        ...extraConfig,
+      ],
+      timeout: timeout,
+    );
+  }
+
+  /// Een bestaande kloon mag nooit met de token van een andere verbinding
+  /// werken, ook niet wanneer de opgeslagen remote een pushurl of rewrite heeft.
+  Future<void> _verifyExistingOrigin() async {
+    if (!_cloned) return;
+    try {
+      for (final flags in [
+        const ['remote', 'get-url', '--all', 'origin'],
+        const ['remote', 'get-url', '--push', '--all', 'origin'],
+      ]) {
+        final urls = await _git.run(flags, workingDirectory: _worktree.path);
+        final effective = urls.stdout
+            .split('\n')
+            .map((url) => url.trim())
+            .where((url) => url.isNotEmpty);
+        if (effective.isEmpty || effective.any((url) => url != _cloneUrl)) {
+          throw const GitForgeException(
+            GitForgeError.config,
+            'De lokale git-kloon hoort bij een andere repository.',
+          );
+        }
+      }
+    } on GitCliException {
+      throw const GitForgeException(
+        GitForgeError.config,
+        'De herkomst van de lokale git-kloon is niet te controleren.',
+      );
+    }
+  }
 
   /// De merge-driver voor de ink-sidecar (§9.7, D7), meegegeven aan precies de
   /// merge-aanroep — nooit in `.git/config`, om dezelfde reden als de rest van
@@ -323,17 +358,35 @@ class _NativeGitMirror implements NativeGitMirror {
 
   // ── DeckMirror-contract (gedelegeerd) ──────────────────────────────────────
   @override
-  Future<void> writeDeck(String deckDir, Map<String, Uint8List> files) =>
-      _guarded.writeDeck(deckDir, files);
+  Future<void> writeDeck(String deckDir, Map<String, Uint8List> files) async {
+    await _verifyExistingOrigin();
+    await _guarded.writeDeck(deckDir, files);
+  }
+
   @override
-  Future<Map<String, Uint8List>> readDeck(String deckDir) =>
-      _guarded.readDeck(deckDir);
+  Future<Map<String, Uint8List>> readDeck(String deckDir) async {
+    await _verifyExistingOrigin();
+    return _guarded.readDeck(deckDir);
+  }
+
   @override
-  Future<bool> hasDeck(String deckDir) => _guarded.hasDeck(deckDir);
+  Future<bool> hasDeck(String deckDir) async {
+    await _verifyExistingOrigin();
+    return _guarded.hasDeck(deckDir);
+  }
+
   @override
-  Future<void> discardDeck(String deckDir) => _guarded.discardDeck(deckDir);
+  Future<void> discardDeck(String deckDir) async {
+    await _verifyExistingOrigin();
+    await _guarded.discardDeck(deckDir);
+  }
+
   @override
-  Future<List<String>> deckDirs() => _guarded.deckDirs();
+  Future<List<String>> deckDirs() async {
+    await _verifyExistingOrigin();
+    return _guarded.deckDirs();
+  }
+
   @override
   bool get hasRealHistory => true;
   @override
@@ -595,7 +648,7 @@ class _NativeGitMirror implements NativeGitMirror {
   }
 
   Future<void> _ensureClone() async {
-    if (_cloned) return;
+    if (_cloned) return _verifyExistingOrigin();
     await _worktree.parent.create(recursive: true);
     // In een lege doelmap klonen; het subproces draait vanuit de ouder.
     await _git.run(

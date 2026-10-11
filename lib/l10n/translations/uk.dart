@@ -1621,6 +1621,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Git-werk herstellen': 'Відновити роботу Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Ще є локальні дані Git, які не належать до жодного поточного з’єднання. Їх не буде надіслано автоматично. Збережіть копію та прочитайте в посібнику «Відновлення старих чернеток Git», перш ніж видаляти дані застосунку.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'З’єднання Git цієї презентації видалено або змінено. Відкрийте презентацію знову або виберіть «Зберегти до…».',
   'Aan selectie toevoegen': 'Додати до вибору',
   'Uit selectie halen': 'Прибрати з вибору',
   '{n} dia\'s geselecteerd': 'Вибрано {n} слайдів',
@@ -5673,8 +5678,6 @@ const _dutchSourceAddUk = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Ця кінцева точка не підтримує умовний запис; одночасне редагування тут захищене гірше.',
   'Naar de slide': 'До слайда',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Git-з\'єднання цієї презентації більше не існує.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Спершу налаштуйте git-репозиторій у Налаштування → Сховище.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

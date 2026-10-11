@@ -649,6 +649,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Git-werk herstellen': 'Recuperar el trabajo de Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Aún hay datos Git locales que no están asociados a ninguna conexión actual. No se enviarán automáticamente. Guarda una copia y lee «Recuperar borradores antiguos de Git» en el manual antes de borrar los datos de la aplicación.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Se ha eliminado o cambiado la conexión Git de esta presentación. Vuelve a abrirla o elige «Guardar en…».',
   'Aan selectie toevoegen': 'Añadir a la selección',
   'Uit selectie halen': 'Quitar de la selección',
   '{n} dia\'s geselecteerd': '{n} diapositivas seleccionadas',
@@ -4764,8 +4769,6 @@ const _dutchSourceAddEs = {
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Este punto de conexión no admite escrituras condicionales; la edición simultánea está peor protegida aquí.',
   'Naar de slide': 'Ir a la diapositiva',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'La conexión git de esta presentación ya no existe.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configura primero un repositorio git en Ajustes → Almacenamiento.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

@@ -191,4 +191,53 @@ void main() {
     );
     expect(klantA.storageSlug, isNot(zelfdeNaamAndereHost.storageSlug));
   });
+
+  test('opslagsleutel onderscheidt URL, eigenaar, provider en branch', () {
+    const original = GitRepoConfig(
+      baseUrl: 'https://git.example:8443/team',
+      owner: 'a-b',
+      repo: 'decks',
+    );
+    const variants = [
+      GitRepoConfig(
+        baseUrl: 'https://git.example:9443/team',
+        owner: 'a-b',
+        repo: 'decks',
+      ),
+      GitRepoConfig(
+        baseUrl: 'https://git.example:8443/other',
+        owner: 'a-b',
+        repo: 'decks',
+      ),
+      GitRepoConfig(
+        baseUrl: 'https://git.example:8443/team',
+        owner: 'a/b',
+        repo: 'decks',
+      ),
+      GitRepoConfig(
+        baseUrl: 'https://git.example:8443/team',
+        owner: ' a-b',
+        repo: 'decks',
+      ),
+      GitRepoConfig(
+        baseUrl: 'https://git.example:8443/team',
+        owner: 'a-b',
+        repo: 'decks',
+        provider: GitProvider.gitlab,
+      ),
+      GitRepoConfig(
+        baseUrl: 'https://git.example:8443/team',
+        owner: 'a-b',
+        repo: 'decks',
+        defaultBranch: 'release',
+      ),
+    ];
+    for (final variant in variants) {
+      expect(variant.storageSlug, isNot(original.storageSlug));
+    }
+    expect(
+      original.copyWith(baseUrl: '${original.baseUrl}/').storageSlug,
+      original.storageSlug,
+    );
+  });
 }

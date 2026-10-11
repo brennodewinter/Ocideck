@@ -1618,6 +1618,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Git-werk herstellen': 'Przywróć pracę w Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Nadal istnieją lokalne dane Git, które nie są powiązane z żadnym bieżącym połączeniem. Nie zostaną automatycznie wysłane. Zachowaj kopię i przeczytaj w instrukcji „Odzyskiwanie starych szkiców Git” przed usunięciem danych aplikacji.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Połączenie Git tej prezentacji zostało usunięte lub zmienione. Otwórz prezentację ponownie albo wybierz „Zapisz w…”.',
   'Aan selectie toevoegen': 'Dodaj do zaznaczenia',
   'Uit selectie halen': 'Usuń ze zaznaczenia',
   '{n} dia\'s geselecteerd': 'Zaznaczono {n} slajdów',
@@ -5693,8 +5698,6 @@ const _dutchSourceAddPl = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Ten punkt końcowy nie obsługuje zapisu warunkowego; jednoczesna edycja jest tu gorzej chroniona.',
   'Naar de slide': 'Przejdź do slajdu',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Połączenie git tej prezentacji już nie istnieje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najpierw skonfiguruj repozytorium git w Ustawienia → Pamięć.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

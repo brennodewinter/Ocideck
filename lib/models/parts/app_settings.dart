@@ -335,17 +335,22 @@ class AppSettings {
 
   /// De git-verbinding waar een geopend deck bij hoort.
   ///
-  /// Eerst op id, want dat overleeft hernoemen en het herstellen van een
-  /// typefout in de URL. Lukt dat niet — een herkomst uit een versie van vóór
+  /// Eerst op id én repo-identiteit: een bestaand tabblad mag na het wijzigen
+  /// van de verbinding niet stil naar een andere repository schrijven. Lukt
+  /// dat niet — een herkomst uit een versie van vóór
   /// de verbindingenlijst draagt nog geen id — dan alsnog op de configuratie,
   /// zodat zo'n deck niet losgeslagen raakt van zijn repo. `null` wanneer de
   /// verbinding is verwijderd; de aanroeper moet dan om een keuze vragen in
   /// plaats van te gokken.
   GitConnection? gitConnectionFor(String? connectionId, GitRepoConfig config) {
     final byId = connectionById(connectionId);
-    if (byId is GitConnection) return byId;
+    if (byId is GitConnection && byId.repo.storageSlug == config.storageSlug) {
+      return byId;
+    }
     for (final c in connections) {
-      if (c is GitConnection && c.repo == config) return c;
+      if (c is GitConnection && c.repo.storageSlug == config.storageSlug) {
+        return c;
+      }
     }
     return null;
   }

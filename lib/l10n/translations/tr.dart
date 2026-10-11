@@ -1157,8 +1157,6 @@ const _dutchSourceTr = {
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Bu endpoint koşullu yazmayı desteklemiyor; eşzamanlı düzenleme burada daha zayıf korunur.',
   'Naar de slide': 'Slayda git',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Bu sunumun git bağlantısı artık mevcut değil.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Önce Ayarlar → Depolama bölümünde bir git repository\'si ayarlayın.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':
@@ -2516,6 +2514,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Git-werk herstellen': 'Git çalışmasını kurtar',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Geçerli bir bağlantıyla ilişkili olmayan yerel Git verileri hâlâ var. Bunlar otomatik olarak gönderilmez. Bir kopyasını saklayın ve uygulama verilerini silmeden önce kılavuzdaki “Eski Git taslaklarını kurtarma” bölümünü okuyun.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Bu sununun Git bağlantısı kaldırıldı veya değiştirildi. Sunuyu yeniden açın ya da “Şuraya kaydet…” seçeneğini belirleyin.',
   'Aan selectie toevoegen': 'Seçime ekle',
   'Uit selectie halen': 'Seçimden kaldır',
   '{n} dia\'s geselecteerd': '{n} slayt seçildi',

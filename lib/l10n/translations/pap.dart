@@ -651,6 +651,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Git-werk herstellen': 'Restaurá trabou di Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Ainda tin dato Git lokal ku no ta pertenesé na un konekshon aktual. Nan no ta wòrdu manda automáticamente. Warda un kopia i lesa “Restaurá borradónan Git bieu” den e manual promé ku bo kita dato di e aplikashon.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'E konekshon Git di e presentashon aki a wòrdu kita òf kambia. Habri e presentashon atrobe òf skohe “Warda na…”.',
   'Aan selectie toevoegen': 'Añadi na selekshon',
   'Uit selectie halen': 'Kitá for di selekshon',
   '{n} dia\'s geselecteerd': '{n} diapositiva selekshoná',
@@ -4739,8 +4744,6 @@ const _dutchSourceAddPap = {
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'E punto final aki no ta soportá skirbimentu kondishonal; editá na mesun momento ta menos protehá akinan.',
   'Naar de slide': 'Bai na e slide',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'E konekshon git di e presentashon akí no ta eksistí mas.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Konfigurá promé un repositorio git na Konfigurashon → Almasenahe.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

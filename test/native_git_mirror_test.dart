@@ -29,6 +29,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/services/git/deck_search.dart';
 import 'package:ocideck/services/git/git_cli_io.dart';
+import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/native_git_mirror_api.dart';
 import 'package:ocideck/services/git/native_git_mirror_io.dart';
 
@@ -200,6 +201,50 @@ void main() {
       );
       expect(await mirror.headSha(), isNotNull);
     });
+
+    for (final remoteKind in ['fetch', 'push']) {
+      _wtest(
+        'weigert een bestaande kloon met andere $remoteKind-URL',
+        () async {
+          await mirror.prepareForOpen();
+          final other = '${temp.path}/x/other.git';
+          await _rawGit([
+            'init',
+            '--bare',
+            '--initial-branch=main',
+            other,
+          ], temp.path);
+          await _rawGit(
+            remoteKind == 'push'
+                ? ['remote', 'set-url', '--push', 'origin', other]
+                : ['remote', 'set-url', 'origin', other],
+            '${temp.path}/clone',
+          );
+          final reopened = (await createNativeGitMirror(
+            git: NativeGitCli(),
+            config: config,
+            token: 'ander-token',
+            baseDir: '${temp.path}/clone',
+          ))!;
+
+          expect(
+            reopened.prepareForOpen,
+            throwsA(
+              isA<GitForgeException>().having(
+                (error) => error.kind,
+                'kind',
+                GitForgeError.config,
+              ),
+            ),
+          );
+          expect(reopened.readDeck(deckDir), throwsA(isA<GitForgeException>()));
+          expect(
+            File('${temp.path}/clone/$deckDir/deck.md').readAsStringSync(),
+            '# Kwartaalcijfers\n',
+          );
+        },
+      );
+    }
 
     _wtest('commitDeck landt op de forge, met de pool-blob', () async {
       await mirror.prepareForOpen();

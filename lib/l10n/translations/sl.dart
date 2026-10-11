@@ -1606,6 +1606,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Git-werk herstellen': 'Obnovi delo Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Še vedno obstajajo lokalni podatki Git, ki ne pripadajo nobeni trenutni povezavi. Ne bodo poslani samodejno. Shrani kopijo in pred brisanjem podatkov aplikacije v priročniku preberi »Obnovitev starih osnutkov Git«.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Povezava Git te predstavitve je bila odstranjena ali spremenjena. Znova odpri predstavitev ali izberi »Shrani v…«.',
   'Aan selectie toevoegen': 'Dodaj v izbor',
   'Uit selectie halen': 'Odstrani iz izbora',
   '{n} dia\'s geselecteerd': '{n} prosojnic izbranih',
@@ -5665,8 +5670,6 @@ const _dutchSourceAddSl = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Ta končna točka ne podpira pogojnega pisanja; hkratno urejanje je tu slabše zaščiteno.',
   'Naar de slide': 'Na prosojnico',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Povezava git te predstavitve ne obstaja več.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najprej nastavite repozitorij git v Nastavitve → Shramba.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

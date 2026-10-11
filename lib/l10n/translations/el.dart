@@ -1631,6 +1631,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Git-werk herstellen': 'Ανάκτηση εργασίας Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Υπάρχουν ακόμη τοπικά δεδομένα Git που δεν ανήκουν σε κάποια τρέχουσα σύνδεση. Δεν θα σταλούν αυτόματα. Κρατήστε ένα αντίγραφο και διαβάστε στο εγχειρίδιο την ενότητα «Ανάκτηση παλιών πρόχειρων Git» πριν διαγράψετε τα δεδομένα της εφαρμογής.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Η σύνδεση Git αυτής της παρουσίασης καταργήθηκε ή άλλαξε. Ανοίξτε ξανά την παρουσίαση ή επιλέξτε «Αποθήκευση σε…».',
   'Aan selectie toevoegen': 'Προσθήκη στην επιλογή',
   'Uit selectie halen': 'Αφαίρεση από την επιλογή',
   '{n} dia\'s geselecteerd': '{n} διαφάνειες επιλεγμένες',
@@ -5753,8 +5758,6 @@ const _dutchSourceAddEl = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Αυτό το τελικό σημείο δεν υποστηρίζει υπό όρους εγγραφές· η ταυτόχρονη επεξεργασία προστατεύεται λιγότερο εδώ.',
   'Naar de slide': 'Στη διαφάνεια',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Η σύνδεση git αυτής της παρουσίασης δεν υπάρχει πλέον.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Ρυθμίστε πρώτα ένα αποθετήριο git στις Ρυθμίσεις → Αποθήκευση.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

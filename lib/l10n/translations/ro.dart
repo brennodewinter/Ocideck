@@ -1622,6 +1622,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Git-werk herstellen': 'Recuperează lucrul Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Încă există date Git locale care nu aparțin unei conexiuni curente. Acestea nu vor fi trimise automat. Păstrează o copie și citește „Recuperarea schițelor Git vechi” din manual înainte de a șterge datele aplicației.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Conexiunea Git a acestei prezentări a fost eliminată sau modificată. Redeschide prezentarea sau alege „Salvează în…”.',
   'Aan selectie toevoegen': 'Adaugă la selecție',
   'Uit selectie halen': 'Elimină din selecție',
   '{n} dia\'s geselecteerd': '{n} diapozitive selectate',
@@ -5727,8 +5732,6 @@ const _dutchSourceAddRo = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Acest punct final nu acceptă scrieri condiționate; editarea simultană este mai slab protejată aici.',
   'Naar de slide': 'La slide',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Conexiunea git a acestei prezentări nu mai există.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configurează mai întâi un depozit git în Setări → Stocare.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

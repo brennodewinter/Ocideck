@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/widgets/dialogs/settings/git_form.dart';
 import 'package:ocideck/widgets/dialogs/settings/git_panel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Het git-paneel, los van het instellingenvenster. Zie
 /// settings_s3_panel_test.dart voor waarom dat losstaan de winst is (#631).
@@ -12,6 +13,7 @@ void main() {
   var changes = 0;
 
   setUp(() {
+    SharedPreferences.setMockInitialValues({});
     form = GitForm();
     changes = 0;
   });
@@ -47,6 +49,18 @@ void main() {
     await show(tester);
     expect(find.text('GIT-REPOSITORY'), findsOneWidget);
     expect(find.text('Personal access token'), findsOneWidget);
+  });
+
+  testWidgets('waarschuwt wanneer oud lokaal Git-werk bestaat', (tester) async {
+    SharedPreferences.setMockInitialValues({
+      'git_outbox::oude-scope::decks/kwartaal': '{}',
+    });
+    await show(tester);
+    await tester.pumpAndSettle();
+    expect(
+      find.textContaining('niet bij een huidige verbinding'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('the token scope help follows the chosen forge', (tester) async {

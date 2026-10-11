@@ -652,6 +652,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Git-werk herstellen': 'Git-wurk weromhelje',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Der binne noch lokale Git-gegevens dy\'t net by in aktuele ferbining hearre. Dy wurde net automatysk ferstjoerd. Bewarje in kopy en lês ‘Alde Git-konsepten weromhelje’ yn de hantlieding foardatst appgegevens wiskest.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'De Git-ferbining fan dizze presintaasje is fuorthelle of feroare. Iepenje de presintaasje opnij of kies ‘Bewarje yn…’.',
   'Aan selectie toevoegen': 'Oan seleksje tafoegje',
   'Uit selectie halen': 'Út seleksje helje',
   '{n} dia\'s geselecteerd': '{n} dia\'s selektearre',
@@ -4730,8 +4735,6 @@ const _dutchSourceAddFy = {
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Dit einpunt stipet gjin betingst skriuwen; tagelyk bewurkjen is hjir minder beskerme.',
   'Naar de slide': 'Nei de slide',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'De git-ferbining fan dizze presintaasje bestiet net mear.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Stel earst in git-repository yn by Ynstellings → Opslach.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

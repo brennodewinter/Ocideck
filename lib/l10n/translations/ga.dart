@@ -1636,6 +1636,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Git-werk herstellen': 'Obair Git a athshlánú',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Tá sonraí Git logánta fós ann nach mbaineann le nasc reatha. Ní sheolfar iad go huathoibríoch. Coinnigh cóip agus léigh “Dréachtaí Git sean a athshlánú” sa lámhleabhar sula scriosann tú sonraí na haipe.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Baineadh nó athraíodh nasc Git an chuir i láthair seo. Oscail an cur i láthair arís nó roghnaigh “Sábháil chuig…”.',
   'Aan selectie toevoegen': 'Cuir leis an rogha',
   'Uit selectie halen': 'Bain den rogha',
   '{n} dia\'s geselecteerd': '{n} sleamhnán roghnaithe',
@@ -5756,8 +5761,6 @@ const _dutchSourceAddGa = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Ní thacaíonn an críochphointe seo le scríobh coinníollach; tá eagarthóireacht chomhuaineach níos lú cosanta anseo.',
   'Naar de slide': 'Go dtí an sleamhnán',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Níl nasc git na láithreoireachta seo ann a thuilleadh.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Socraigh stóras git ar dtús faoi Socruithe → Stóráil.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

@@ -370,8 +370,8 @@ class _ExportReadinessChip extends StatelessWidget {
   }
 }
 
-/// Toont hoeveel decks er nog in een git-wachtrij staan, en verdwijnt zodra
-/// dat er geen zijn.
+/// Toont werk in de huidige wachtrij en werk uit een oudere opslagruimte dat
+/// apart hersteld moet worden.
 ///
 /// Werk dat offline is opgeslagen wácht — het is niet weg, maar het staat ook
 /// nog nergens waar een ander erbij kan. Tot nu toe zag je dat alleen als je
@@ -390,19 +390,34 @@ class _GitQueueBadge extends ConsumerWidget {
     // Een fout of een nog lopende telling is geen reden om iets te tonen: dan
     // wéten we het niet, en "0" beweren zou erger zijn dan zwijgen.
     final count = ref.watch(gitQueueCountProvider).asData?.value ?? 0;
-    if (count == 0) return const SizedBox.shrink();
+    final unattached =
+        ref.watch(gitUnattachedWorkProvider).asData?.value == true;
+    if (count == 0 && !unattached) return const SizedBox.shrink();
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const _StatusDivider(),
-        _StatusItem(
-          icon: Icons.cloud_upload_outlined,
-          label: '$count ${l10n.d('wacht op verbinding')}',
-          tooltip: l10n.d(
-            'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".',
+        if (count > 0) ...[
+          const _StatusDivider(),
+          _StatusItem(
+            icon: Icons.cloud_upload_outlined,
+            label: '$count ${l10n.d('wacht op verbinding')}',
+            tooltip: l10n.d(
+              'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".',
+            ),
+            color: AppTheme.amber700,
           ),
-          color: AppTheme.amber700,
-        ),
+        ],
+        if (unattached) ...[
+          const _StatusDivider(),
+          _StatusItem(
+            icon: Icons.warning_amber_outlined,
+            label: l10n.d('Git-werk herstellen'),
+            tooltip: l10n.d(
+              'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.',
+            ),
+            color: AppTheme.amber700,
+          ),
+        ],
       ],
     );
   }

@@ -1608,6 +1608,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Git-werk herstellen': 'Git-munka visszaállítása',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Még vannak olyan helyi Git-adatok, amelyek nem tartoznak aktuális kapcsolathoz. Ezek nem lesznek automatikusan elküldve. Mentsen róluk egy másolatot, és az alkalmazás adatainak törlése előtt olvassa el a kézikönyv „Régi Git-vázlatok visszaállítása” című részét.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'A bemutató Git-kapcsolatát eltávolították vagy módosították. Nyissa meg újra a bemutatót, vagy válassza a „Mentés ide…” lehetőséget.',
   'Aan selectie toevoegen': 'Hozzáadás a kijelöléshez',
   'Uit selectie halen': 'Eltávolítás a kijelölésből',
   '{n} dia\'s geselecteerd': '{n} dia kijelölve',
@@ -5680,8 +5685,6 @@ const _dutchSourceAddHu = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Ez a végpont nem támogatja a feltételes írást; az egyidejű szerkesztés itt kevésbé védett.',
   'Naar de slide': 'Ugrás a diára',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Ennek a bemutatónak a git-kapcsolata már nem létezik.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Előbb állíts be egy git-tárolót a Beállítások → Tárolás alatt.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

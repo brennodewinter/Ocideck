@@ -366,6 +366,24 @@ saved version stays retrievable, which a plain folder cannot give you.
   keeps the deck on this computer until there is a connection again; the bar is
   what tells you it is still there. It stays quiet when nothing is waiting, and
   it is not clickable — use *Flush queue* in the `…` menu to send it now.
+- **Recovering older Git drafts.** Git's local storage now separates connections
+  by full server URL (including port and path), owner, repository, forge type,
+  and branch. OciDeck leaves older working copies and queues untouched because
+  their old key does not prove which repository owns them. They are not synced
+  automatically. Editing a connection or branch later also leaves work in its
+  previous storage area. The status bar and Git settings panel warn when data
+  belongs to no current connection. Do not
+  clear app or browser site data when you see this warning. First back up
+  OciDeck's application data on desktop or the site's storage in the browser.
+  An older desktop clone is under `git_clone/<old key>`, an offline working copy
+  under `git_mirror/<old key>`; queued work and browser drafts are in app
+  preferences under `git_outbox::` and `git_draft::` keys. For a clone, check
+  `origin` in `.git/config` and any unpushed commits. A queue or draft without
+  a clone has no such origin: have an administrator recover the deck files from
+  the backup, inspect their contents, then explicitly choose the right
+  repository with *Save to…*. Do not sync an old queue directly to a new
+  connection. Reopen a deck after changing its Git connection; *Save to…*
+  remains available when you intentionally choose another destination.
 - **Open** via the `…` menu (*Open from…*, then pick the repository): the deck
   is fetched, checked by the same safety scan as any other deck, and opened. A
   repository is untrusted input — coming from your own forge does not make it
