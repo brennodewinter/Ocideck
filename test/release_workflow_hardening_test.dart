@@ -113,6 +113,22 @@ void main() {
     final macSteps = ((jobs['macos'] as YamlMap)['steps'] as YamlList)
         .cast<YamlMap>();
 
+    test('lokale debug-signing lekt niet naar releasebuilds', () {
+      final appInfo = File(
+        'macos/Runner/Configs/AppInfo.xcconfig',
+      ).readAsStringSync();
+      final debug = File(
+        'macos/Runner/Configs/Debug.xcconfig',
+      ).readAsStringSync();
+      final release = File(
+        'macos/Runner/Configs/Release.xcconfig',
+      ).readAsStringSync();
+
+      expect(appInfo, isNot(contains('Local.xcconfig')));
+      expect(release, isNot(contains('Local.xcconfig')));
+      expect(debug, contains('#include? "Local.xcconfig"'));
+    });
+
     test('een stabiele release faalt zonder signing en notary preflight', () {
       final build = macSteps.firstWhere(
         (step) =>
