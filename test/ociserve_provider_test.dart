@@ -936,10 +936,99 @@ void main() {
     },
   );
 
-  test('rememberLogin is opt-in for new and legacy settings', () {
-    expect(const OciServeSettings().rememberLogin, isFalse);
-    expect(OciServeSettings.fromJson(const {}).rememberLogin, isFalse);
+  test('rememberLogin is on by default for new and legacy settings', () {
+    expect(const OciServeSettings().rememberLogin, isTrue);
+    expect(OciServeSettings.fromJson(const {}).rememberLogin, isTrue);
+    // Oudere versies bewaarden `false` ook als niemand het vinkje aanraakte;
+    // dat is geen keuze en mag het gemak niet blijven blokkeren.
+    expect(
+      OciServeSettings.fromJson(const {'rememberLogin': false}).rememberLogin,
+      isTrue,
+    );
+    expect(
+      OciServeSettings.fromJson(const {'rememberLogin': true}).rememberLogin,
+      isTrue,
+    );
   });
+
+  test(
+    'an explicit choice survives a round trip, an untouched one stays open',
+    () {
+      final off = OciServeSettings.fromJson(
+        const OciServeSettings(rememberLogin: false).toJson(),
+      );
+      expect(off.rememberLogin, isFalse);
+      expect(off.rememberLoginChoice, isFalse);
+
+      final untouched = OciServeSettings.fromJson(
+        const OciServeSettings(enabled: true).toJson(),
+      );
+      expect(untouched.rememberLogin, isTrue);
+      expect(untouched.rememberLoginChoice, isNull);
+      // Wie nooit koos, laat niets in de opslag achter dat later voor een
+      // keuze kan doorgaan.
+      expect(
+        const OciServeSettings().toJson().keys,
+        isNot(contains('rememberLoginChoice')),
+      );
+      expect(
+        const OciServeSettings(rememberLogin: false).toJson(),
+        containsPair('rememberLoginChoice', false),
+      );
+
+      // Een ander veld wijzigen mag de keuze niet wissen of vastleggen.
+      expect(off.copyWith(enabled: true).rememberLogin, isFalse);
+      expect(untouched.copyWith(enabled: true).rememberLoginChoice, isNull);
+      expect(untouched.copyWith(rememberLogin: false).rememberLogin, isFalse);
+    },
+  );
+
+  test(
+    'a fresh login is remembered without the user ever ticking the box',
+    () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(
+        const OciServeSettings(enabled: true, baseUrl: 'https://learn.example'),
+      );
+      expect(await notifier.login(), isTrue);
+
+      expect(container.read(ociServeProvider).hasStoredLogin, isTrue);
+      expect(
+        await secrets.readOciServeRefreshToken(_settings.baseUrl),
+        isNotNull,
+      );
+    },
+  );
+
+  test(
+    'a stored login signs in again after a restart for default settings',
+    () async {
+      SharedPreferences.setMockInitialValues({
+        kOciServeSettingsKey:
+            '{"enabled":true,"baseUrl":"https://learn.example","rememberLogin":false}',
+      });
+      await secrets.writeOciServeRefreshToken(
+        _settings.baseUrl,
+        jsonEncode({
+          'version': 1,
+          'refresh_token': 'refresh',
+          'issuer': _oidc.issuer.toString(),
+          'client_id': _installation.clientId,
+          'token_endpoint': _oidc.tokenEndpoint.toString(),
+        }),
+      );
+      final auth = _FakeAuth();
+      final container = _container(api, secrets, auth: auth);
+      addTearDown(container.dispose);
+      container.read(ociServeProvider);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+
+      expect(auth.refreshes, 1);
+      expect(container.read(ociServeProvider).authenticated, isTrue);
+    },
+  );
 
   test(
     'cached login can recover after the server was offline at startup',

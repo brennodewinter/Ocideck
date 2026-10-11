@@ -4773,10 +4773,17 @@ Uitbreidingen → eLearning**, then configure the HTTPS address supplied by your
 organisation under **Integraties → eLearning**. When the extension is off,
 **Sign in**, **My courses** and any connection warning stay off the welcome
 screen; stored server settings are retained. Sign in in the system browser.
-OciDeck can remember the login with a rotating refresh token in
-the operating-system keychain; switching that option off keeps the token only for
-the current app session. The browser build cannot store this credential safely
-and therefore does not offer eLearning login.
+You only have to do that once on a device. OciDeck stays signed in: it keeps a
+rotating refresh token in the operating-system keychain and signs you in again
+at the next start without opening the browser. That is on by default. Untick
+**Ingelogd blijven op dit apparaat** under **Integraties → eLearning** and the
+token only exists for the current app session; **Uitloggen** removes it at any
+time. How long a remembered sign-in stays valid is decided by your
+organisation's server; once it has lapsed, OciDeck simply asks you to sign in
+again. On a computer that several people share under one user account, untick
+the option or sign out when you are done: whoever uses that account next opens
+OciDeck already signed in as you. The browser build cannot store this credential safely and therefore does
+not offer eLearning login.
 
 During a sign-in attempt, OciDeck tries the configured address first and then
 the same server on every known OciServe port: 8443, 1428, 8080 and the standard
