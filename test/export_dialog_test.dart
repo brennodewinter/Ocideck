@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/markdown_validation.dart';
@@ -6,6 +9,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/export_service.dart';
+import 'package:ocideck/services/download_delivery.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/services/export_bundle.dart';
@@ -45,6 +49,16 @@ ExportBundle _bundleOf(Deck deck, PrivacyExportProfile profile) => ExportBundle(
   manifest: RedactionManifest.empty,
   privacySummary: PrivacyExportSummary.empty,
 );
+
+class _SuccessfulWebExport implements ExportService {
+  @override
+  dynamic noSuchMethod(Invocation invocation) {
+    if (invocation.memberName == #export) {
+      return Future<ExportResult>.value(ExportResult.ok('report.html.zip'));
+    }
+    return super.noSuchMethod(invocation);
+  }
+}
 
 void main() {
   test('quality warnings require acknowledgement before export proceeds', () {
@@ -123,14 +137,15 @@ void main() {
     Future<void> toon(
       WidgetTester tester,
       ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
-      bundleFor,
-    ) => tester.pumpWidget(
+      bundleFor, {
+      ExportService? service,
+    }) => tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           body: ExportDialog(
             deckPath: '/tmp/deck.md',
             bundleFor: bundleFor,
-            exportService: ExportService(),
+            exportService: service ?? ExportService(),
           ),
         ),
       ),
@@ -159,6 +174,50 @@ void main() {
       await toon(tester, _emptyBundle);
 
       expect(find.textContaining(kRedactionKeysSuffix), findsNothing);
+    });
+
+    testWidgets('web biedt auteursleutels na de deelbare ZIP apart aan', (
+      tester,
+    ) async {
+      final downloads = <({String name, Uint8List bytes})>[];
+      debugDeliversByDownload = true;
+      debugDownloadSink = (name, bytes, mime) {
+        downloads.add((name: name, bytes: bytes));
+        return true;
+      };
+      addTearDown(() {
+        debugDeliversByDownload = null;
+        debugDownloadSink = null;
+      });
+
+      ExportBundle bundle(
+        PrivacyExportProfile profile, {
+        bool includeDetail = true,
+      }) {
+        final original = bundleMetManifest(profile);
+        return ExportBundle(
+          audience: original.audience,
+          markdown: '# Test',
+          manifest: original.manifest,
+          privacySummary: original.privacySummary,
+        );
+      }
+
+      await toon(tester, bundle, service: _SuccessfulWebExport());
+      final html = find.text('HTML-bestand (werkt offline)');
+      await tester.ensureVisible(html);
+      await tester.tap(html);
+      for (var i = 0; i < 8; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
+      expect(downloads, isEmpty);
+      expect(find.text('Verificatiesleutels downloaden'), findsOneWidget);
+
+      await tester.tap(find.text('Verificatiesleutels downloaden'));
+      await tester.pumpAndSettle();
+      expect(downloads, hasLength(1));
+      expect(downloads.single.name, endsWith(kRedactionKeysSuffix));
+      expect(utf8.decode(downloads.single.bytes), contains('peper'));
     });
   });
 

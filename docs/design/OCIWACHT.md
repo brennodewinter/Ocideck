@@ -1352,9 +1352,11 @@ uitleg hoe het te verifiëren valt, is een rapport dat een auditor niet kan aann
 > een ontwerpdocument — maar §6.6 staat bovenaan als *geleverd*, en dat sloeg op
 > het commitment-schema, niet op deze bundeling.
 
-**Twee bestanden, en de scheiding ertussen ís de beveiliging.** Naast de export komen
+**Twee bestanden, en de scheiding ertussen ís de beveiliging.** Op desktop komen naast de export
 `<naam>-redactions.json` (commitments zonder salts, mag met het rapport mee) en
-`<naam>-redaction-keys.json` (mét salts, blijft bij de bron). De namen zijn sinds 2026-07-21
+`<naam>-redaction-keys.json` (mét salts, blijft bij de bron). In de browser bevat de deelbare
+ZIP alleen het rapport en het eerste bestand; de auteur downloadt het sleutelbestand met een
+aparte klik. De namen zijn sinds 2026-07-21
 Engels; ze heetten `-redacties.json` en `-redacties-verificatiesleutels.json`, twee Nederlandse
 namen die op elkaar lijken terwijl ze precies tegengesteld behandeld moeten worden, in een app
 met 31 talen en ontvangers in evenzovele. Beide dragen bovenaan een `notice`-veld dat in één

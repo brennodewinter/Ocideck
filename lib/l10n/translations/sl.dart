@@ -1611,6 +1611,13 @@ const _dutchSourceAddSl = <String, String>{
       'Še vedno obstajajo lokalni podatki Git, ki ne pripadajo nobeni trenutni povezavi. Ne bodo poslani samodejno. Shrani kopijo in pred brisanjem podatkov aplikacije v priročniku preberi »Obnovitev starih osnutkov Git«.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Povezava Git te predstavitve je bila odstranjena ali spremenjena. Znova odpri predstavitev ali izberi »Shrani v…«.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Preden zaprete, prenesite ključe za preverjanje. Shranite jih pri izvirniku in delite le datoteko ZIP.',
+  'Verificatiesleutels downloaden': 'Prenesi ključe za preverjanje',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP za deljenje vsebuje poročilo in manifest redakcij. Nato posebej prenesite ključe za preverjanje.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP za deljenje vsebuje poročilo in manifest redakcij brez ključev.',
   'Aan selectie toevoegen': 'Dodaj v izbor',
   'Uit selectie halen': 'Odstrani iz izbora',
   '{n} dia\'s geselecteerd': '{n} prosojnic izbranih',

@@ -817,6 +817,13 @@ const _dutchSourceAddEn = {
       'There is still local Git data that is not associated with a current connection. It will not be sent automatically. Keep a copy and read “Recovering old Git drafts” in the manual before erasing app data.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'This deck’s Git connection was removed or changed. Reopen the deck or choose “Save to…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Download the verification keys before closing. Keep them with the source and share only the ZIP file.',
+  'Verificatiesleutels downloaden': 'Download verification keys',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'The shareable ZIP contains the report and redaction manifest. Download the verification keys separately afterwards.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'The shareable ZIP contains the report and redaction manifest without keys.',
   'Aan selectie toevoegen': 'Add to selection',
   'Uit selectie halen': 'Remove from selection',
   '{n} dia\'s geselecteerd': '{n} slides selected',

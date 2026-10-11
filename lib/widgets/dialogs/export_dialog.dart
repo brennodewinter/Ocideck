@@ -6,6 +6,7 @@ import '../../models/slide_quality.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/export_metadata.dart';
 import '../../services/export_service.dart';
+import '../../services/download_delivery.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/redaction_manifest.dart';
 import '../../services/export_bundle.dart';
@@ -624,6 +625,11 @@ class _ExportDialogState extends State<ExportDialog> {
               label: Text(l10n.d('Kopiëren')),
             ),
           ],
+          if (deliversByDownload && _outputPath != null)
+            _WebRedactionKeysDownload(
+              downloadName: _outputPath!,
+              manifest: _bundle.manifest,
+            ),
         ],
       );
     }
@@ -846,5 +852,53 @@ class _ExportDialogState extends State<ExportDialog> {
       case ExportFormat.latex:
         return Icons.science_outlined;
     }
+  }
+}
+
+class _WebRedactionKeysDownload extends StatelessWidget {
+  final String downloadName;
+  final RedactionManifest manifest;
+
+  const _WebRedactionKeysDownload({
+    required this.downloadName,
+    required this.manifest,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (!manifest.carriesSalts) return const SizedBox.shrink();
+    final l10n = context.l10n;
+    return Column(
+      children: [
+        const SizedBox(height: 12),
+        Text(
+          l10n.d(
+            'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.',
+          ),
+          textAlign: TextAlign.center,
+          style: TextStyle(color: AppTheme.warningFg, fontSize: 12),
+        ),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
+          onPressed: () {
+            final name = downloadRedactionKeys(downloadName, manifest);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  name == null
+                      ? exportFailureReasonText(
+                          l10n,
+                          ExportFailure.downloadNotStarted,
+                        )
+                      : '${exportDeliveryLabel(l10n)}\n$name',
+                ),
+              ),
+            );
+          },
+          icon: const Icon(Icons.download_outlined, size: 16),
+          label: Text(l10n.d('Verificatiesleutels downloaden')),
+        ),
+      ],
+    );
   }
 }

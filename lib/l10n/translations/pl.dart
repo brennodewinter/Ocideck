@@ -1623,6 +1623,13 @@ const _dutchSourceAddPl = <String, String>{
       'Nadal istnieją lokalne dane Git, które nie są powiązane z żadnym bieżącym połączeniem. Nie zostaną automatycznie wysłane. Zachowaj kopię i przeczytaj w instrukcji „Odzyskiwanie starych szkiców Git” przed usunięciem danych aplikacji.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Połączenie Git tej prezentacji zostało usunięte lub zmienione. Otwórz prezentację ponownie albo wybierz „Zapisz w…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Przed zamknięciem pobierz klucze weryfikacyjne. Przechowuj je przy źródle i udostępniaj tylko plik ZIP.',
+  'Verificatiesleutels downloaden': 'Pobierz klucze weryfikacyjne',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP do udostępnienia zawiera raport i manifest redakcji. Następnie pobierz osobno klucze weryfikacyjne.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP do udostępnienia zawiera raport i manifest redakcji bez kluczy.',
   'Aan selectie toevoegen': 'Dodaj do zaznaczenia',
   'Uit selectie halen': 'Usuń ze zaznaczenia',
   '{n} dia\'s geselecteerd': 'Zaznaczono {n} slajdów',

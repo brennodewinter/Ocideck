@@ -564,7 +564,11 @@ salutation or label makes them unambiguous, to avoid crying wolf.
 
 ### The redaction manifest, and the file that must stay home
 
-An export that removes something writes two files beside it. `-redactions.json`
+On desktop, an export that removes something writes two files beside it. In the
+browser, the shareable ZIP contains the report and only the salt-free
+`-redactions.json`; the author downloads `-redaction-keys.json` with a separate
+click and keeps it with the source. The browser cannot confirm that either
+download reached disk, so check before closing the dialog. `-redactions.json`
 lists what was taken out — rule, slide, field, and a salted commitment, but no
 values — and is meant to travel with the report, so a recipient can dispute a
 specific redaction and you can prove what it hid without opening the rest.
@@ -576,8 +580,8 @@ recomputed. Sending it along would undo the redaction while the document still
 looks redacted, which is worse than not redacting at all.
 
 OciDeck names both files in the export dialog and repeats the warning inside
-each file, but it cannot stop you from attaching one. That decision stays
-yours — see USER_GUIDE, *The two manifest files*.
+each file. The browser ZIP excludes the keys, but you can still attach them
+later. See USER_GUIDE, *The two manifest files*.
 
 ### Classification (TLP)
 

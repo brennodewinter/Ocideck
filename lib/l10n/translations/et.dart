@@ -1604,6 +1604,13 @@ const _dutchSourceAddEt = <String, String>{
       'Alles on veel kohalikke Giti andmeid, mis pole seotud ühegi praeguse ühendusega. Neid ei saadeta automaatselt. Säilita koopia ja loe juhendist „Vanade Giti mustandite taastamine” enne rakenduse andmete kustutamist.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Selle esitluse Giti ühendus on eemaldatud või muudetud. Ava esitlus uuesti või vali „Salvesta asukohta…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Laadi kinnitamisvõtmed enne sulgemist alla. Hoia neid lähtefaili juures ja jaga ainult ZIP-faili.',
+  'Verificatiesleutels downloaden': 'Laadi kinnitamisvõtmed alla',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Jagatav ZIP sisaldab aruannet ja redigeerimismanifesti. Seejärel laadi kinnitamisvõtmed eraldi alla.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Jagatav ZIP sisaldab aruannet ja redigeerimismanifesti ilma võtmeteta.',
   'Aan selectie toevoegen': 'Lisa valikusse',
   'Uit selectie halen': 'Eemalda valikust',
   '{n} dia\'s geselecteerd': '{n} slaidi valitud',

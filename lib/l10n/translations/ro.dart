@@ -1627,6 +1627,13 @@ const _dutchSourceAddRo = <String, String>{
       'Încă există date Git locale care nu aparțin unei conexiuni curente. Acestea nu vor fi trimise automat. Păstrează o copie și citește „Recuperarea schițelor Git vechi” din manual înainte de a șterge datele aplicației.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Conexiunea Git a acestei prezentări a fost eliminată sau modificată. Redeschide prezentarea sau alege „Salvează în…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Descărcați cheile de verificare înainte de a închide. Păstrați-le lângă sursă și partajați doar fișierul ZIP.',
+  'Verificatiesleutels downloaden': 'Descărcați cheile de verificare',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Arhiva ZIP care poate fi partajată conține raportul și manifestul redactărilor. Apoi descărcați separat cheile de verificare.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Arhiva ZIP care poate fi partajată conține raportul și manifestul redactărilor fără chei.',
   'Aan selectie toevoegen': 'Adaugă la selecție',
   'Uit selectie halen': 'Elimină din selecție',
   '{n} dia\'s geselecteerd': '{n} diapozitive selectate',

@@ -1614,6 +1614,13 @@ const _dutchSourceAddGsw = <String, String>{
       'Es git no lokali Git-Date, wo zu keiner aktuelle Verbindig ghöre. Sie wärde nid automatisch verschickt. Mach e Kopie und lies im Handbuech «Alti Git-Entwürf widerherstelle», bevor du d App-Date lösches.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'D Git-Verbindig vo dere Präsentation isch entfernt oder gänderet worde. Öffne d Präsentation nomal oder wähl «Speichere in…».',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Lad d Verifizierigsschlüssel abe, bevor du zumachsch. Bhalt si bi dr Quälle und teil nume d ZIP-Datei.',
+  'Verificatiesleutels downloaden': 'Verifizierigsschlüssel abelade',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Im ZIP zum Teile sind dr Bricht und s Schwärzigsmanifest. Lad d Verifizierigsschlüssel derno separat abe.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Im ZIP zum Teile sind dr Bricht und s Schwärzigsmanifest ohni Schlüssel.',
   'Aan selectie toevoegen': 'Zur Uuswahl dezue',
   'Uit selectie halen': 'Us de Uuswahl neh',
   '{n} dia\'s geselecteerd': '{n} Folien usgwählt',

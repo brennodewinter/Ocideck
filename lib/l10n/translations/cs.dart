@@ -1612,6 +1612,13 @@ const _dutchSourceAddCs = <String, String>{
       'Stále existují místní data Git, která nepatří k žádnému aktuálnímu připojení. Automaticky se neodešlou. Uložte si kopii a před smazáním dat aplikace si v příručce přečtěte „Obnovení starých konceptů Git“.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Připojení Git této prezentace bylo odebráno nebo změněno. Otevřete prezentaci znovu nebo zvolte „Uložit do…“.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Než okno zavřete, stáhněte si ověřovací klíče. Uchovejte je u zdroje a sdílejte pouze soubor ZIP.',
+  'Verificatiesleutels downloaden': 'Stáhnout ověřovací klíče',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP určený ke sdílení obsahuje zprávu a manifest redakcí. Ověřovací klíče si pak stáhněte zvlášť.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP určený ke sdílení obsahuje zprávu a manifest redakcí bez klíčů.',
   'Aan selectie toevoegen': 'Přidat do výběru',
   'Uit selectie halen': 'Odebrat z výběru',
   '{n} dia\'s geselecteerd': '{n} snímků vybráno',

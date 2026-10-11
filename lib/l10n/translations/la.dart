@@ -1626,6 +1626,13 @@ const _dutchSourceAddLa = <String, String>{
       'Adhuc sunt data Git localia quae ad nullam connexionem praesentem pertinent. Ea automatice non mittentur. Exemplum serva et in manuali lege “Schedas Git veteres recuperare” antequam data applicationis deleas.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Connexio Git huius praesentationis remota vel mutata est. Praesentationem iterum aperi aut “Serva in…” elige.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Claves verificationis antequam claudis depone. Eas apud fontem serva et solum fasciculum ZIP communica.',
+  'Verificatiesleutels downloaden': 'Claves verificationis deponere',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Fasciculus ZIP communicabilis relationem et indicem partium occultatarum continet. Claves verificationis postea separatim depone.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Fasciculus ZIP communicabilis relationem et indicem partium occultatarum sine clavibus continet.',
   'Aan selectie toevoegen': 'Selectioni adde',
   'Uit selectie halen': 'E selectione tolle',
   '{n} dia\'s geselecteerd': '{n} paginae selectae',

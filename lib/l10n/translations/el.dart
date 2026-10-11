@@ -1636,6 +1636,13 @@ const _dutchSourceAddEl = <String, String>{
       'Υπάρχουν ακόμη τοπικά δεδομένα Git που δεν ανήκουν σε κάποια τρέχουσα σύνδεση. Δεν θα σταλούν αυτόματα. Κρατήστε ένα αντίγραφο και διαβάστε στο εγχειρίδιο την ενότητα «Ανάκτηση παλιών πρόχειρων Git» πριν διαγράψετε τα δεδομένα της εφαρμογής.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Η σύνδεση Git αυτής της παρουσίασης καταργήθηκε ή άλλαξε. Ανοίξτε ξανά την παρουσίαση ή επιλέξτε «Αποθήκευση σε…».',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Κατεβάστε τα κλειδιά επαλήθευσης πριν κλείσετε. Φυλάξτε τα μαζί με την πηγή και κοινοποιήστε μόνο το αρχείο ZIP.',
+  'Verificatiesleutels downloaden': 'Λήψη κλειδιών επαλήθευσης',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Το ZIP προς κοινοποίηση περιέχει την αναφορά και το δηλωτικό απόκρυψης. Κατεβάστε έπειτα τα κλειδιά επαλήθευσης ξεχωριστά.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Το ZIP προς κοινοποίηση περιέχει την αναφορά και το δηλωτικό απόκρυψης χωρίς κλειδιά.',
   'Aan selectie toevoegen': 'Προσθήκη στην επιλογή',
   'Uit selectie halen': 'Αφαίρεση από την επιλογή',
   '{n} dia\'s geselecteerd': '{n} διαφάνειες επιλεγμένες',

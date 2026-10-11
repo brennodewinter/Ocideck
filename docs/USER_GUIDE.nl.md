@@ -3012,13 +3012,14 @@ niet meereizen — zie *De twee manifestbestanden* hieronder.
 
 ### De twee manifestbestanden
 
-Telkens als een export daadwerkelijk iets verwijdert, schrijft OciDeck twee extra
-bestanden in dezelfde map als de export. In de browser is er geen map, dus komen
-het rapport en beide manifestbestanden samen aan in **één ZIP** — genoemd naar de
-export met `.zip` erachter. Dat is geen cosmetische keuze: browsers houden de
-tweede automatische download op rij tegen, en tot dan waren het manifest en de
-sleutels juist de twee die stilzwijgend nooit aankwamen terwijl de app meldde dat
-de export gelukt was. *(Gecorrigeerd 01-09-2026, #1902.)*
+Op desktop schrijft OciDeck twee extra bestanden naast een export die iets
+verwijdert. In de browser bevat de **deelbare ZIP** alleen het rapport en
+`-redactions.json`, zonder salts. Klik daarna in het exportdialoog op
+**Verificatiesleutels downloaden** om `-redaction-keys.json` apart te krijgen.
+Bewaar dit bestand bij de bron voordat je het dialoog sluit: een latere export
+maakt andere salts en kan de sleutels van dit rapport niet herstellen. Controleer
+zelf of beide downloads zijn aangekomen; de browser kan dat niet bevestigen.
+Stuur het sleutelbestand nooit mee en voeg het niet toe aan de deelbare ZIP.
 
 | Bestand | Wat erin zit | Gaat het mee met het rapport? |
 | --- | --- | --- |

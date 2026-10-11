@@ -1641,6 +1641,13 @@ const _dutchSourceAddGa = <String, String>{
       'Tá sonraí Git logánta fós ann nach mbaineann le nasc reatha. Ní sheolfar iad go huathoibríoch. Coinnigh cóip agus léigh “Dréachtaí Git sean a athshlánú” sa lámhleabhar sula scriosann tú sonraí na haipe.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Baineadh nó athraíodh nasc Git an chuir i láthair seo. Oscail an cur i láthair arís nó roghnaigh “Sábháil chuig…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Íoslódáil na heochracha fíorúcháin sula ndúnann tú. Coinnigh leis an bhfoinse iad agus ná roinn ach an comhad ZIP.',
+  'Verificatiesleutels downloaden': 'Íoslódáil eochracha fíorúcháin',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Tá an tuarascáil agus forléargas na folaithe sa ZIP inroinnte. Íoslódáil na heochracha fíorúcháin ar leith ina dhiaidh sin.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Tá an tuarascáil agus forléargas na folaithe sa ZIP inroinnte, gan eochracha.',
   'Aan selectie toevoegen': 'Cuir leis an rogha',
   'Uit selectie halen': 'Bain den rogha',
   '{n} dia\'s geselecteerd': '{n} sleamhnán roghnaithe',
