@@ -4887,6 +4887,15 @@ meteen als jou. De browserversie
 kan dit geheim niet veilig bewaren en biedt aanmelden bij eLearning daarom niet
 aan.
 
+Sommige organisaties eisen een recente of sterkere aanmelding voordat je hun
+cursussen kunt gebruiken. Dan opent OciDeck nog één keer de systeembrowser, met
+wat de organisatie vraagt, en gaat daarna verder met waar je mee bezig was. Meld
+je aan met hetzelfde account: meldt de browser iemand anders aan, dan weigert
+OciDeck dat en blijft je eigen sessie staan. Voor werk dat je niet zelf hebt
+gestart opent nooit een browser, zoals voortgang op de achtergrond versturen,
+plaatjes laden, een les sluiten of uitloggen. Voldoet de nieuwe aanmelding nog
+steeds niet, dan zie je de gebruikelijke foutmelding van het scherm en geen lus.
+
 Bij een aanmeldpoging probeert OciDeck eerst het ingestelde adres en daarna
 dezelfde server op alle bekende OciServe-poorten: 8443, 1428, 8080 en de
 standaard HTTPS-poort 443. De werkende URL wordt bewaard. Pas wanneer geen van

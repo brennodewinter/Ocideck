@@ -47,6 +47,22 @@ discovery metadata from the additional party. Refresh tokens are bound to the
 issuer, client and token endpoint that issued them and are never sent to newly
 discovered endpoints after a server configuration change.
 
+An organisation can require a stronger or more recent sign-in. OciServe then
+answers `401` with an RFC 9470 `insufficient_user_authentication` challenge. A
+token refresh cannot satisfy it, because `auth_time` and `acr` stay those of the
+original sign-in. OciDeck repeats the request once, after an interactive sign-in
+that asks the identity provider for the challenge's `acr_values` and `max_age`.
+The challenge comes from the server and is bounded before it reaches the
+provider: 2 KiB, at most eight `acr` values of printable ASCII, an age of at most
+366 days. The new tokens replace the old ones only after `/me` shows the same
+account id and an active membership; a different account in the browser, which
+matters on a shared computer, is refused and the existing session stays. Requests
+that meet the same challenge share one sign-in, and a second challenge after the
+repeat is an error, not a loop. Work the user did not start (progress
+synchronisation, images, closing lesson sessions, signing out) never opens a
+browser; the challenge is then an error to the caller. A sign-in that finishes
+after logout changes nothing.
+
 Authentication is accepted only after the access token succeeds against `/me`
 and the returned account has an active membership. Learner routes derive the
 participant from that token and OciDeck only permits organisation identifiers

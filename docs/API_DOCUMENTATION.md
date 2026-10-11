@@ -673,6 +673,14 @@ The participant identity is derived from the bearer token, not accepted from a
 client field. The authoritative schemas and authorization responses live in the
 OciServe repository's `docs/openapi.yaml`.
 
+An organisation's strict access policy answers with `401` and
+`WWW-Authenticate: Bearer error="insufficient_user_authentication"` plus
+`acr_values` and `max_age` (RFC 9470). `OciServeGatewayBase._send` recognises it
+(`parseOciServeStepUpChallenge`), asks its `stepUpHandler` for a fresh access
+token and sends the same request once more, with the same method, URL, body and
+`Idempotency-Key`. Without a handler, or on a second challenge, it throws
+`OciServeStepUpRequired`.
+
 The privacy-data GET follows the same self-scoped identity rule: the server
 derives the participant from the authenticated user. `OciServePrivacyData`
 requires `participant_id`, `generated_at` and a `data` object, but deliberately
