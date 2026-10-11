@@ -7,6 +7,7 @@ import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/services/ociserve/ociserve_auth.dart';
 import 'package:ocideck/services/ociserve/ociserve_auth_platform.dart';
 import 'package:ocideck/services/ociserve/ociserve_http.dart';
+import 'package:ocideck/services/ociserve/ociserve_step_up.dart';
 
 class _Browser implements OciServeBrowserLauncher {
   Uri? opened;
@@ -251,6 +252,78 @@ void main() {
         ),
         'refresh_refused',
       );
+    });
+  });
+
+  group('a step-up sign-in', () {
+    final installation = OciServeInstallation(
+      clientId: 'desktop',
+      issuer: Uri.parse('https://id.example'),
+    );
+    final configuration = OciServeOidcConfiguration(
+      issuer: Uri.parse('https://id.example'),
+      authorizationEndpoint: Uri.parse('https://id.example/authorize'),
+      tokenEndpoint: Uri.parse('https://id.example/token'),
+      jwksUri: Uri.parse('https://id.example/jwks'),
+      metadata: const {},
+      signingAlgorithms: const ['RS256'],
+    );
+
+    /// Meldt aan en geeft de parameters van het autorisatieverzoek terug. De
+    /// aanmelding zelf faalt bij het ID-token (dat is hier niet het onderwerp).
+    Future<Map<String, String>> authorizationQuery(
+      OciServeStepUpRequired? stepUp,
+    ) async {
+      final browser = _Browser();
+      final auth = OciServePkceAuthenticator(
+        settings: const OciServeSettings(
+          enabled: true,
+          baseUrl: 'https://learn.example',
+        ),
+        transport: _AuthTransport(),
+        browser: browser,
+        receiverFactory: () async => _Receiver(browser),
+      );
+      await expectLater(
+        auth.login(installation, configuration, stepUp: stepUp),
+        throwsA(isA<OciServeException>()),
+      );
+      return browser.opened!.queryParameters;
+    }
+
+    test('vraagt de provider om de acr en de maximale leeftijd', () async {
+      final query = await authorizationQuery(
+        const OciServeStepUpRequired(
+          acrValues: ['phr', 'mfa'],
+          maxAge: Duration(minutes: 5),
+        ),
+      );
+      expect(query['acr_values'], 'phr mfa');
+      expect(query['max_age'], '300');
+      // De rest van het contract blijft: PKCE, state en nonce.
+      expect(query['code_challenge_method'], 'S256');
+      expect(query['state'], isNotEmpty);
+      expect(query['nonce'], isNotEmpty);
+    });
+
+    test('vraagt alleen wat de uitdaging noemt', () async {
+      final onlyAge = await authorizationQuery(
+        const OciServeStepUpRequired(maxAge: Duration.zero),
+      );
+      expect(onlyAge['max_age'], '0');
+      expect(onlyAge, isNot(contains('acr_values')));
+
+      final onlyAcr = await authorizationQuery(
+        const OciServeStepUpRequired(acrValues: ['phr']),
+      );
+      expect(onlyAcr['acr_values'], 'phr');
+      expect(onlyAcr, isNot(contains('max_age')));
+    });
+
+    test('een gewone aanmelding vraagt er geen van beide', () async {
+      final query = await authorizationQuery(null);
+      expect(query, isNot(contains('acr_values')));
+      expect(query, isNot(contains('max_age')));
     });
   });
 }

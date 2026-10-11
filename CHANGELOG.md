@@ -10,6 +10,18 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **eLearning vraagt opnieuw om aanmelding als de organisatie dat eist.** Een
+  organisatie kan een recente of sterkere aanmelding verplichten (OciServe
+  antwoordt dan met een RFC 9470-uitdaging). OciDeck opent dan nog één keer de
+  systeembrowser met `acr_values` en `max_age` uit die uitdaging en herhaalt
+  daarna het verzoek, met dezelfde idempotentiesleutel. Voorheen gold zo'n
+  `401` als "uitgelogd": opnieuw inloggen veranderde niets, want Keycloak
+  hergebruikte de bestaande browsersessie met de oude `auth_time`. Meldt de
+  browser een ander account aan (bijvoorbeeld op een gedeelde computer), dan
+  wordt dat geweigerd en blijft je eigen sessie staan. Voor werk dat je niet zelf
+  startte (voortgang op de achtergrond, plaatjes, een les sluiten, uitloggen)
+  opent nooit een browser, en een tweede uitdaging na de herhaling is een fout in
+  plaats van een lus.
 - **Bij eLearning hoef je nog maar één keer in te loggen per apparaat.**
   *Ingelogd blijven op dit apparaat* staat nu standaard aan: na de eerste
   aanmelding bewaart OciDeck het roterende vernieuwtoken in de sleutelbos van

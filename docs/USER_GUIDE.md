@@ -4785,6 +4785,15 @@ the option or sign out when you are done: whoever uses that account next opens
 OciDeck already signed in as you. The browser build cannot store this credential safely and therefore does
 not offer eLearning login.
 
+Some organisations require a recent or stronger sign-in before you can use their
+courses. When that happens OciDeck opens the system browser once more, asking for
+what the organisation requires, and then carries on with what you were doing.
+Sign in with the same account: if the browser signs in someone else, OciDeck
+refuses that and keeps your own session. A browser never opens for work you did
+not start yourself, such as sending progress in the background, loading pictures,
+closing a lesson or signing out. If the new sign-in still does not meet the
+requirement, you get the view's usual error message instead of a loop.
+
 During a sign-in attempt, OciDeck tries the configured address first and then
 the same server on every known OciServe port: 8443, 1428, 8080 and the standard
 HTTPS port 443. It stores the working URL. A **No connection** badge appears
