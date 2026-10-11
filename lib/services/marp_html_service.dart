@@ -268,7 +268,7 @@ class MarpHtmlService {
         : await _presentationLogoCss(effectiveTheme, embedImage, loadBytes);
 
     return '<!doctype html>\n'
-        '<html lang="$htmlLang"><head><meta charset="utf-8">'
+        '<html lang="${_htmlAttr(htmlLang)}"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         '${_cspMeta(nonce)}'
         '<title>$title</title>'
