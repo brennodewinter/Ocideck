@@ -1624,6 +1624,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Git-werk herstellen': 'Irkupra x-xogħol ta’ Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Għad hemm dejta Git lokali li mhijiex marbuta ma’ konnessjoni attwali. Din mhux se tintbagħat awtomatikament. Żomm kopja u aqra “Irkupru ta’ abbozzi qodma ta’ Git” fil-manwal qabel tħassar id-dejta tal-app.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Il-konnessjoni Git ta’ din il-preżentazzjoni tneħħiet jew inbidlet. Erġa’ iftaħ il-preżentazzjoni jew agħżel “Issejvja f’…”.',
   'Aan selectie toevoegen': 'Żid magħażla',
   'Uit selectie halen': 'Aqla\' mill-għażla',
   '{n} dia\'s geselecteerd': '{n} slide magħżula',
@@ -5733,8 +5738,6 @@ const _dutchSourceAddMt = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Dan il-punt tat-tmiem ma jappoġġjax kitba kondizzjonali; l-editjar simultanju hawn huwa inqas protett.',
   'Naar de slide': 'Mur għall-islajd',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Il-konnessjoni git ta\' din il-preżentazzjoni ma għadhiex teżisti.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'L-ewwel issettja repożitorju git f\'Settings → Ħażna.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

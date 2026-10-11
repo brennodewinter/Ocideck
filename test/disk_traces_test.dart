@@ -117,8 +117,8 @@ void main() {
 
   test('de wachtrij van een ándere repo blijft ongemoeid', () async {
     const other = GitRepoConfig(
-      baseUrl: 'https://git.example.org',
-      owner: 'anders',
+      baseUrl: 'https://git.example.org:8443',
+      owner: 'klant',
       repo: 'deck',
     );
     workingCopy('git_clone', other.storageSlug);
@@ -139,6 +139,40 @@ void main() {
     );
     expect(await Outbox(scope: other.storageSlug).pending(), hasLength(1));
   });
+
+  test('oud Git-werk blijft herkenbaar zonder het over te nemen', () async {
+    expect(await traces.hasUnattachedGitWork({slug}), isFalse);
+    workingCopy('git_clone', slug);
+    expect(await traces.hasUnattachedGitWork({slug}), isFalse);
+
+    workingCopy('git_clone', 'git.example.org_klant_deck');
+    expect(await traces.hasUnattachedGitWork({slug}), isTrue);
+    expect(
+      Directory(
+        '${support.path}/git_clone/git.example.org_klant_deck',
+      ).existsSync(),
+      isTrue,
+    );
+  });
+
+  test(
+    'werk op een oude branch-scope blijft zichtbaar na branchwissel',
+    () async {
+      workingCopy('git_clone', slug);
+      await Outbox(scope: slug).enqueue(
+        const PendingCommit(
+          deckDir: 'decks/kwartaal',
+          branch: 'main',
+          message: 'nog niet verstuurd',
+          baseSha: 'abc',
+        ),
+      );
+      final changed = repo.copyWith(defaultBranch: 'master');
+      expect(await traces.hasUnattachedGitWork({changed.storageSlug}), isTrue);
+      expect(await Outbox(scope: slug).pending(), hasLength(1));
+      expect(Directory('${support.path}/git_clone/$slug').existsSync(), isTrue);
+    },
+  );
 
   test(
     'een lokale verbinding raakt de map van de gebruiker niet aan',

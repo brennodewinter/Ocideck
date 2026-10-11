@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as p;
 import 'storage_origin.dart';
 
@@ -78,8 +81,8 @@ class GitRepoConfig {
   /// Menselijke aanduiding `owner/repo`, voor UI en logregels.
   String get slug => '${owner.trim()}/${repo.trim()}';
 
-  /// Een stabiele, veilige sleutel per repo: host + owner + repo, gestript tot
-  /// tekens die overal mogen — in een mapnaam én in een prefs-sleutel.
+  /// Een stabiele, veilige sleutel per repo en branch. De eerdere leesbare
+  /// sleutel verloor poort, URL-pad en leestekens en kon daardoor botsen.
   ///
   /// Dit is wat een repo van een andere onderscheidt in de opslag eromheen: de
   /// clone-map, de wachtrij met nog niet gepushte commits, en de werkkopie. Een
@@ -91,8 +94,14 @@ class GitRepoConfig {
   /// ongescopede (`<prefix>::<deckDir>`) — deckmappen mogen ook geen `:`
   /// bevatten (zie [GitRepoLayout]).
   String get storageSlug {
-    final raw = '${host}_${owner.trim()}_${repo.trim()}';
-    return raw.replaceAll(RegExp(r'[^A-Za-z0-9._-]+'), '-');
+    final identity = jsonEncode([
+      baseUrl.trim().replaceAll(RegExp(r'/+$'), ''),
+      owner,
+      repo,
+      provider.name,
+      defaultBranch,
+    ]);
+    return 'v2-${sha256.convert(utf8.encode(identity))}';
   }
 
   GitRepoConfig copyWith({
@@ -342,9 +351,9 @@ class GitOrigin implements StorageOrigin {
   final GitRepoConfig config;
 
   /// De bestandsverbinding waar dit deck vandaan kwam. Hiermee gaat opslaan
-  /// terug naar dezelfde opdrachtgever zonder opnieuw te vragen, en blijft dat
-  /// kloppen als de gebruiker de verbinding hernoemt of een typefout in de URL
-  /// herstelt — [config] verandert dan wél mee.
+  /// terug naar dezelfde opdrachtgever zonder opnieuw te vragen. Bij een
+  /// gewijzigde repository-identiteit moet het deck opnieuw worden geopend;
+  /// een stabiele verbindings-id is dan niet voldoende.
   ///
   /// Leeg voor herkomst uit een versie van vóór de verbindingenlijst; dan valt
   /// de app terug op het vergelijken van [config] (zie [matchesRepo]).
@@ -374,7 +383,8 @@ class GitOrigin implements StorageOrigin {
   @override
   String get remoteLocation => deckDir;
 
-  bool matchesRepo(GitRepoConfig other) => other == config;
+  bool matchesRepo(GitRepoConfig other) =>
+      other.storageSlug == config.storageSlug;
 
   GitOrigin copyWith({
     GitRepoConfig? config,

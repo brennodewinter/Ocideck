@@ -312,6 +312,11 @@ void main() {
         origin.matchesRepo(config.copyWith(baseUrl: 'https://elders.example')),
         isFalse,
       );
+      expect(origin.matchesRepo(config.copyWith(owner: ' librekat')), isFalse);
+      expect(
+        origin.matchesRepo(config.copyWith(trustedInternal: true)),
+        isTrue,
+      );
     });
 
     test('copyWith advances baseSha without touching the rest', () {

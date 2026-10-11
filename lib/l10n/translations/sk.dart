@@ -1612,6 +1612,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Git-werk herstellen': 'Obnoviť prácu v Gite',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Stále existujú miestne údaje Git, ktoré nepatria k žiadnemu aktuálnemu pripojeniu. Automaticky sa neodošlú. Uložte si kópiu a pred vymazaním údajov aplikácie si v príručke prečítajte „Obnovenie starých konceptov Git“.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Pripojenie Git tejto prezentácie bolo odstránené alebo zmenené. Znovu otvorte prezentáciu alebo vyberte „Uložiť do…“.',
   'Aan selectie toevoegen': 'Pridať do výberu',
   'Uit selectie halen': 'Odobrať z výberu',
   '{n} dia\'s geselecteerd': '{n} snímok vybraných',
@@ -5662,8 +5667,6 @@ const _dutchSourceAddSk = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Tento koncový bod nepodporuje podmienený zápis; súčasné úpravy sú tu horšie chránené.',
   'Naar de slide': 'Prejsť na snímku',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Pripojenie git tejto prezentácie už neexistuje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najprv nastavte git repozitár v Nastavenia → Úložisko.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

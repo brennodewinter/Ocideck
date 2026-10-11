@@ -1610,6 +1610,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Git-werk herstellen': 'Vrati Git rad',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Još postoje lokalni podaci Git koji nisu povezani s trenutačnom vezom. Neće se automatski poslati. Sačuvajte kopiju i pročitajte „Vraćanje starih Git skica” u priručniku prije brisanja podataka aplikacije.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Git veza ove prezentacije uklonjena je ili promijenjena. Ponovno otvorite prezentaciju ili odaberite „Spremi u…”.',
   'Aan selectie toevoegen': 'Dodaj u odabir',
   'Uit selectie halen': 'Ukloni iz odabira',
   '{n} dia\'s geselecteerd': 'Odabrano {n} slajdova',
@@ -5660,8 +5665,6 @@ const _dutchSourceAddHr = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Ova krajnja točka ne podržava uvjetno pisanje; istovremeno uređivanje ovdje je slabije zaštićeno.',
   'Naar de slide': 'Na slajd',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Git veza ove prezentacije više ne postoji.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najprije postavite git repozitorij u Postavke → Pohrana.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

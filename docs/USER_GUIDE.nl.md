@@ -390,6 +390,26 @@ opgeslagen versie blijft opvraagbaar, wat een gewone map je niet kan geven.
   houdt het deck op deze computer tot er weer een verbinding is; de balk is wat je
   vertelt dat het er nog staat. Hij blijft stil als er niets wacht, en hij is niet
   klikbaar — gebruik *Wachtrij legen* in het `…`-menu om het nu te versturen.
+- **Oude Git-concepten herstellen.** Na de wijziging van de lokale Git-opslag
+  krijgen server-URL (inclusief poort en pad), eigenaar, repository, forgetype en
+  branch elk hun eigen opslagruimte. OciDeck laat oude werkkopieën en wachtrijen
+  onaangeroerd; hun oude sleutel bewijst niet bij welke repository ze horen. Ze
+  worden daarom niet vanzelf gesynchroniseerd. Ook na een latere wijziging van
+  een verbinding of branch blijft werk in de vorige opslagruimte bewaard. De
+  statusbalk en het Git-paneel waarschuwen wanneer gegevens niet bij een huidige
+  verbinding horen. Wis dan geen appgegevens of browsergegevens. Maak eerst een
+  back-up van de OciDeck-appgegevens op desktop, of van de sitegegevens in de
+  browser. De oude desktopkloon staat onder `git_clone/<oude sleutel>`, een
+  offline werkkopie onder `git_mirror/<oude sleutel>`; de wachtrij en eventuele
+  browserwerkkopie staan in de appvoorkeuren als `git_outbox::` en `git_draft::`
+  sleutels. Controleer bij een kloon de `origin` in `.git/config` en eventuele
+  niet-gepushte commits. Bij een wachtrij of werkkopie zonder kloon ontbreekt
+  die herkomst: laat een beheerder de deckbestanden uit de back-up terughalen en
+  kies pas na controle van de inhoud zelf de juiste repository via *Opslaan
+  naar…*. Laat oude wachtrijen niet rechtstreeks synchroniseren naar een nieuwe
+  verbinding. Een al geopend deck moet na wijziging van zijn Git-verbinding
+  opnieuw worden geopend; *Opslaan naar…* blijft beschikbaar als je bewust een
+  andere bestemming kiest.
 - **Openen** via het `…`-menu (*Openen vanuit…*, dan de repository kiezen): het
   deck wordt opgehaald, gecontroleerd door dezelfde veiligheidsscan als elk ander
   deck, en geopend. Een repository is niet-vertrouwde invoer — dat het van je eigen

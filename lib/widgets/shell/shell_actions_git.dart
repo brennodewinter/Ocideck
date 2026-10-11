@@ -15,8 +15,8 @@ part of '../app_shell.dart';
 /// Deck-gebonden acties — historie, versies, review, samenvoegen, taggen — mogen
 /// niets vragen: de herkomst wéét al bij welke opdrachtgever dit werk hoort, en
 /// een keuzedialoog zou de gebruiker de kans geven daar per ongeluk van af te
-/// wijken. Is de verbinding intussen verwijderd, dan valt er niets zinnigs te
-/// doen (de repo is weg en het token ook) en zegt de app dat.
+/// wijken. Is de verbinding intussen verwijderd of naar een andere repo
+/// gewijzigd, dan mag het oude deck niet vanzelf naar die repo reizen.
 GitConnection? _originConnection(
   BuildContext context,
   WidgetRef ref,
@@ -29,7 +29,9 @@ GitConnection? _originConnection(
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          context.l10n.d('De git-verbinding van dit deck bestaat niet meer.'),
+          context.l10n.d(
+            'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.',
+          ),
         ),
       ),
     );
@@ -168,6 +170,20 @@ Future<bool> _saveToGit(
   // Native git als het er is: een echte lokale commit. Anders het REST-pad.
   final native = await ref.read(nativeGitMirrorProvider(connection.id).future);
   if (!context.mounted) return false;
+  final latest = ref.read(settingsProvider).connectionById(connection.id);
+  if (latest is! GitConnection ||
+      latest.repo.storageSlug != config.storageSlug) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.',
+          ),
+        ),
+      ),
+    );
+    return false;
+  }
 
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;

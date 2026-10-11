@@ -1626,6 +1626,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Git-werk herstellen': 'Възстановяване на работата в Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Все още има локални Git данни, които не принадлежат към текуща връзка. Те няма да бъдат изпратени автоматично. Запазете копие и прочетете „Възстановяване на стари чернови в Git“ в ръководството, преди да изтриете данните на приложението.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Git връзката на тази презентация е премахната или променена. Отворете презентацията отново или изберете „Запазване в…“.',
   'Aan selectie toevoegen': 'Добави към избора',
   'Uit selectie halen': 'Махни от избора',
   '{n} dia\'s geselecteerd': '{n} слайда избрани',
@@ -5708,8 +5713,6 @@ const _dutchSourceAddBg = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Тази крайна точка не поддържа условен запис; едновременното редактиране тук е по-слабо защитено.',
   'Naar de slide': 'Към слайда',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Git връзката на тази презентация вече не съществува.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Първо настройте git хранилище в Настройки → Хранилище.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

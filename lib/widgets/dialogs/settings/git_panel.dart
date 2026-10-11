@@ -115,6 +115,16 @@ class _GitPanelState extends ConsumerState<GitPanel> {
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
+        if (ref.watch(gitUnattachedWorkProvider).asData?.value == true)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 14),
+            child: Text(
+              l10n.d(
+                'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.',
+              ),
+              style: TextStyle(color: AppTheme.amber700),
+            ),
+          ),
         // De soort forge bepaalt welke adapter erachter komt: de REST-API's
         // verschillen te veel om te raden aan de URL.
         Padding(

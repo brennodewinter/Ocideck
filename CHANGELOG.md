@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
+  Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
+  de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of
+  publiceer-URL wordt geweigerd voordat een token of deck wordt gebruikt.
+  Oude offline concepten blijven bewaard voor handmatig herstel; het
+  Git-paneel waarschuwt als ze aanwezig zijn. Een open deck wordt niet
+  stilzwijgend naar een later gewijzigde verbinding opgeslagen.
 - **eLearning vraagt opnieuw om aanmelding als de organisatie dat eist.** Een
   organisatie kan een recente of sterkere aanmelding verplichten (OciServe
   antwoordt dan met een RFC 9470-uitdaging). OciDeck opent dan nog één keer de

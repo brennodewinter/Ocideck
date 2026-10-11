@@ -1613,6 +1613,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Git-werk herstellen': 'Atkurti „Git“ darbą',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Vis dar yra vietinių „Git“ duomenų, nesusietų su jokiu dabartiniu ryšiu. Jie nebus siunčiami automatiškai. Išsaugokite kopiją ir prieš trindami programos duomenis perskaitykite vadovo skyrių „Senų „Git“ juodraščių atkūrimas“.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Šio pristatymo „Git“ ryšys pašalintas arba pakeistas. Atidarykite pristatymą iš naujo arba pasirinkite „Įrašyti į…“.',
   'Aan selectie toevoegen': 'Pridėti prie žymėjimo',
   'Uit selectie halen': 'Pašalinti iš žymėjimo',
   '{n} dia\'s geselecteerd': 'Pasirinkta {n} skaidrių',
@@ -5671,8 +5676,6 @@ const _dutchSourceAddLt = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Šis galinis taškas nepalaiko sąlyginio rašymo; vienalaikis redagavimas čia apsaugotas prasčiau.',
   'Naar de slide': 'Į skaidrę',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Šio pristatymo git jungties nebėra.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Pirmiausia nustatykite git saugyklą skiltyje Nustatymai → Saugykla.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

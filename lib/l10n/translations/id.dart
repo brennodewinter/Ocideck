@@ -1606,6 +1606,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Git-werk herstellen': 'Pulihkan pekerjaan Git',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Masih ada data Git lokal yang tidak terkait dengan koneksi saat ini. Data tersebut tidak akan dikirim otomatis. Simpan salinannya dan baca “Memulihkan draf Git lama” di panduan sebelum menghapus data aplikasi.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Koneksi Git presentasi ini telah dihapus atau diubah. Buka kembali presentasinya atau pilih “Simpan ke…”.',
   'Aan selectie toevoegen': 'Tambahkan ke pilihan',
   'Uit selectie halen': 'Hapus dari pilihan',
   '{n} dia\'s geselecteerd': '{n} slide dipilih',
@@ -5671,8 +5676,6 @@ const _dutchSourceAddId = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Titik akhir ini tidak mendukung penulisan bersyarat; penyuntingan bersamaan kurang terlindungi di sini.',
   'Naar de slide': 'Ke slide',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Koneksi git untuk presentasi ini tidak ada lagi.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Siapkan dulu repositori git di Pengaturan → Penyimpanan.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

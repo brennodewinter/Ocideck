@@ -34,15 +34,23 @@ void main() {
         connectionId: connectionId,
       );
 
-  test('op id, ook als de configuratie inmiddels is bijgewerkt', () {
-    // De gebruiker herstelde een typefout in de server-URL. De id blijft
-    // gelijk, dus het deck hoort nog steeds bij dezelfde opdrachtgever.
+  test('gewijzigde repository mag een open tab niet overnemen', () {
+    // Een bewerkte verbinding behoudt haar id, maar kan nu een andere
+    // repository aanwijzen. Dan moet het oude tabblad opnieuw geopend worden.
     final verouderd = origin(
-      config: repoA.copyWith(baseUrl: 'https://gti.a.example'),
+      config: repoA.copyWith(baseUrl: 'https://git.a.example:8443'),
       connectionId: 'a',
     );
     expect(
-      settings.gitConnectionFor(verouderd.connectionId, verouderd.config)?.id,
+      settings.gitConnectionFor(verouderd.connectionId, verouderd.config),
+      isNull,
+    );
+  });
+
+  test('hernoemen houdt de verbinding van een open tab intact', () {
+    final opened = origin(config: repoA, connectionId: 'a');
+    expect(
+      settings.gitConnectionFor(opened.connectionId, opened.config)?.id,
       'a',
     );
   });
@@ -52,6 +60,10 @@ void main() {
     // Zonder deze terugval raakt zo'n deck losgeslagen van zijn repo.
     final oud = origin(config: repoB);
     expect(settings.gitConnectionFor(oud.connectionId, oud.config)?.id, 'b');
+    expect(
+      settings.gitConnectionFor('', repoB.copyWith(owner: ' klant-b')),
+      isNull,
+    );
   });
 
   test('een verwijderde verbinding levert null, geen andere repo', () {

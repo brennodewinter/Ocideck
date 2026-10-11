@@ -1599,6 +1599,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Git-werk herstellen': 'Taasta Giti töö',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Alles on veel kohalikke Giti andmeid, mis pole seotud ühegi praeguse ühendusega. Neid ei saadeta automaatselt. Säilita koopia ja loe juhendist „Vanade Giti mustandite taastamine” enne rakenduse andmete kustutamist.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Selle esitluse Giti ühendus on eemaldatud või muudetud. Ava esitlus uuesti või vali „Salvesta asukohta…”.',
   'Aan selectie toevoegen': 'Lisa valikusse',
   'Uit selectie halen': 'Eemalda valikust',
   '{n} dia\'s geselecteerd': '{n} slaidi valitud',
@@ -5652,8 +5657,6 @@ const _dutchSourceAddEt = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'See lõpp-punkt ei toeta tingimuslikku kirjutamist; samaaegne muutmine on siin halvemini kaitstud.',
   'Naar de slide': 'Slaidile',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Selle esitluse git-ühendust enam pole.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Seadista kõigepealt git-hoidla jaotises Seaded → Salvestus.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

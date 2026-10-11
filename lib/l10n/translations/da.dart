@@ -1606,6 +1606,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Git-werk herstellen': 'Gendan Git-arbejde',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Der er stadig lokale Git-data, som ikke hører til en aktuel forbindelse. De bliver ikke sendt automatisk. Gem en kopi, og læs “Gendan gamle Git-kladder” i vejledningen, før du sletter appdata.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Git-forbindelsen til denne præsentation er fjernet eller ændret. Åbn præsentationen igen, eller vælg “Gem i…”.',
   'Aan selectie toevoegen': 'Føj til markering',
   'Uit selectie halen': 'Fjern fra markering',
   '{n} dia\'s geselecteerd': '{n} slides valgt',
@@ -5661,8 +5666,6 @@ const _dutchSourceAddDa = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Dette slutpunkt understøtter ikke betingede skrivninger; samtidig redigering er dårligere beskyttet her.',
   'Naar de slide': 'Gå til slide',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Git-forbindelsen til denne præsentation findes ikke længere.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Opsæt først et git-arkiv under Indstillinger → Lagring.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

@@ -77,4 +77,35 @@ void main() {
     ]);
     expect(await container.read(gitQueueCountProvider.future), 0);
   });
+
+  test('ongescopeerd oud werk wordt niet aan een repo toegewezen', () async {
+    SharedPreferences.setMockInitialValues({
+      'git_outbox::decks/oud':
+          '{"deckDir":"decks/oud","branch":"main","message":"oud","baseSha":"abc123"}',
+    });
+    final container = await containerWith([
+      GitConnection(id: 'a', name: 'Klant A', repo: klantA),
+    ]);
+    expect(await container.read(gitQueueCountProvider.future), 0);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.containsKey('git_outbox::decks/oud'), isTrue);
+    expect(await Outbox(scope: klantA.storageSlug).pending(), isEmpty);
+    expect(await container.read(gitUnattachedWorkProvider.future), isTrue);
+  });
+
+  test(
+    'na branchwijziging blijft oude wachtrij als herstelwerk zichtbaar',
+    () async {
+      await Outbox(
+        scope: klantA.storageSlug,
+      ).enqueue(commit('kwartaalcijfers'));
+      final changed = klantA.copyWith(defaultBranch: 'master');
+      final container = await containerWith([
+        GitConnection(id: 'a', name: 'Klant A', repo: changed),
+      ]);
+      expect(await container.read(gitQueueCountProvider.future), 0);
+      expect(await container.read(gitUnattachedWorkProvider.future), isTrue);
+      expect(await Outbox(scope: klantA.storageSlug).pending(), hasLength(1));
+    },
+  );
 }

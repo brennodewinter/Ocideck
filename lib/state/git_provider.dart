@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/git_settings.dart';
 import '../models/storage_connection.dart';
 import '../platform/platform_features.dart';
 import '../services/git/deck_mirror.dart';
+import '../services/disk_traces.dart';
 import '../services/git/git_cli.dart';
 import '../services/git/git_cli_factory.dart';
 import '../services/git/git_forge.dart';
@@ -15,7 +14,6 @@ import '../services/git/native_git_mirror_factory.dart';
 import '../services/git/outbox.dart';
 import '../services/git/sync_engine.dart';
 import '../services/git/draft_store_factory.dart';
-import '../utils/log.dart';
 import 'provider_retry.dart';
 import 'settings_provider.dart';
 
@@ -85,6 +83,18 @@ final gitQueueCountProvider = FutureProvider<int>((ref) async {
   return total;
 });
 
+/// Ook werk van verwijderde of gewijzigde verbindingen blijft op de schijf.
+/// Het mag niet door een andere verbinding worden verstuurd en moet zichtbaar
+/// blijven tot de eigenaar het bewust heeft hersteld.
+final gitUnattachedWorkProvider = FutureProvider<bool>((ref) async {
+  final scopes = ref
+      .watch(settingsProvider)
+      .connectionsOf<GitConnection>()
+      .map((connection) => connection.repo.storageSlug)
+      .toSet();
+  return DiskTraces().hasUnattachedGitWork(scopes);
+});
+
 /// De gehardde git-uitvoerder (§10.2). Eén per proces; op web een stub die
 /// [GitCli.isSupported] `false` meldt.
 final gitCliProvider = Provider<GitCli>((ref) => createGitCli());
@@ -147,9 +157,8 @@ final draftMirrorProvider = Provider.family<DeckMirror, String>((
 ) {
   final scope = ref.watch(_repoScopeProvider(connectionId));
   final store = createDraftStore(scope: scope);
-  // Werk uit de tijd van één repo hoort bij de repo die toen was ingesteld —
-  // en dat is deze. Eenmalig; daarna vindt de sweep niets meer.
-  unawaited(_adoptLegacy(store.adoptLegacyEntries, 'werkkopie'));
+  // Oude opslag heeft geen controleerbare repository-identiteit. Ze automatisch
+  // overnemen kan concepten van een andere verbinding publiceren.
   return DraftMirror(store: store);
 });
 
@@ -158,21 +167,8 @@ final draftMirrorProvider = Provider.family<DeckMirror, String>((
 /// zonder dat duwde een flush de hele wachtrij naar de forge die op dat moment
 /// was ingesteld, ongeacht voor welke repo het werk bedoeld was.
 final outboxProvider = Provider.family<Outbox, String>((ref, connectionId) {
-  final outbox = Outbox(scope: ref.watch(_repoScopeProvider(connectionId)));
-  unawaited(_adoptLegacy(outbox.adoptLegacyEntries, 'wachtrij'));
-  return outbox;
+  return Outbox(scope: ref.watch(_repoScopeProvider(connectionId)));
 });
-
-/// De overname mag de provider niet ophouden en mag hem al helemaal niet laten
-/// omvallen: mislukt hij, dan staat het oude werk er nog steeds — onbereikbaar,
-/// maar niet weg — en dat is een logregel waard, geen crash.
-Future<void> _adoptLegacy(Future<int> Function() adopt, String wat) async {
-  try {
-    await adopt();
-  } catch (e, s) {
-    logError('git: overnemen van de oude $wat mislukt', e, s);
-  }
-}
 
 /// Verzoent de werkkopie met de forge (§8): maakt commits van wat wacht zodra
 /// dat kan. `null` wanneer er geen repo is ingesteld — dan is er niets te

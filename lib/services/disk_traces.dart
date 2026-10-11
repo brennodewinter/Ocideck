@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/storage_connection.dart';
 import '../utils/chmod.dart';
@@ -272,6 +273,46 @@ class DiskTraces {
       total += (await Outbox(scope: slug).pending()).length;
     }
     return total;
+  }
+
+  /// Werk buiten de huidige verbindingen blijft bewaard, ook na het wijzigen
+  /// van een URL of branch. Toon het als herstelwerk in plaats van het stil te
+  /// verbergen of aan een andere repo toe te wijzen.
+  Future<bool> hasUnattachedGitWork(Set<String> activeScopes) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      if (prefs.getKeys().any((key) {
+        final prefix = key.startsWith('git_outbox::')
+            ? 'git_outbox::'
+            : key.startsWith('git_draft::')
+            ? 'git_draft::'
+            : null;
+        if (prefix == null) return false;
+        final rest = key.substring(prefix.length);
+        final separator = rest.indexOf('::');
+        return separator < 0 ||
+            !activeScopes.contains(rest.substring(0, separator));
+      })) {
+        return true;
+      }
+      final support = await _support();
+      if (support == null) return false;
+      for (final name in [cloneDirName, mirrorDirName]) {
+        final root = Directory(p.join(support.path, name));
+        if (!await root.exists()) continue;
+        await for (final entry in root.list(followLinks: false)) {
+          final basename = p.basename(entry.path);
+          final scope = basename.endsWith('.pem')
+              ? basename.substring(0, basename.length - 4)
+              : basename;
+          if (!activeScopes.contains(scope)) return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      logWarning('DiskTraces: oude git-gegevens niet te controleren', e);
+      return true;
+    }
   }
 
   /// Gooi de hele logomap weg. Alleen voor de terugzetknop; het gewone opruimen

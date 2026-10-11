@@ -1621,6 +1621,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Git-werk herstellen': 'Opus Git recupera',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Adhuc sunt data Git localia quae ad nullam connexionem praesentem pertinent. Ea automatice non mittentur. Exemplum serva et in manuali lege “Schedas Git veteres recuperare” antequam data applicationis deleas.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Connexio Git huius praesentationis remota vel mutata est. Praesentationem iterum aperi aut “Serva in…” elige.',
   'Aan selectie toevoegen': 'Selectioni adde',
   'Uit selectie halen': 'E selectione tolle',
   '{n} dia\'s geselecteerd': '{n} paginae selectae',
@@ -5683,8 +5688,6 @@ const _dutchSourceAddLa = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Hic terminus scripturam condicionalem non sustinet; editio simultanea hic minus tuta est.',
   'Naar de slide': 'Ad tabulam',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Conexio git huius praesentationis non iam exstat.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Prius repositorium git in Optionibus → Repositorio constitue.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

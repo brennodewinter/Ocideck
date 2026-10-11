@@ -455,12 +455,16 @@ void main() {
     await startChain(
       tester,
       menuItemIcon(Icons.label_outline),
-      () => textShown('De git-verbinding van dit deck bestaat niet meer'),
+      () => textShown(
+        'De git-verbinding van dit deck is verwijderd of gewijzigd',
+      ),
       reason: 'de app zweeg over de verdwenen verbinding',
     );
 
     expect(
-      find.textContaining('De git-verbinding van dit deck bestaat niet meer'),
+      find.textContaining(
+        'De git-verbinding van dit deck is verwijderd of gewijzigd',
+      ),
       findsOneWidget,
     );
 

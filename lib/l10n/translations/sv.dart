@@ -1605,6 +1605,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Git-werk herstellen': 'Återställ Git-arbete',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Det finns fortfarande lokala Git-data som inte hör till någon aktuell anslutning. De skickas inte automatiskt. Spara en kopia och läs ”Återställ gamla Git-utkast” i handboken innan du raderar appdata.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'Git-anslutningen för den här presentationen har tagits bort eller ändrats. Öppna presentationen igen eller välj ”Spara till…”.',
   'Aan selectie toevoegen': 'Lägg till i urvalet',
   'Uit selectie halen': 'Ta bort från urvalet',
   '{n} dia\'s geselecteerd': '{n} bilder valda',
@@ -5661,8 +5666,6 @@ const _dutchSourceAddSv = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Den här slutpunkten stöder inte villkorliga skrivningar; samtidig redigering är sämre skyddad här.',
   'Naar de slide': 'Gå till bilden',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'Git-anslutningen för den här presentationen finns inte längre.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Ställ först in ett git-arkiv under Inställningar → Lagring.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':

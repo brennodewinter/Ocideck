@@ -106,6 +106,15 @@ machine (desktop) or in your browser tab (web). This includes:
   belongs to the account rather than to this one connection, and a second
   connection to the same server still needs it.
 
+  Working copies and queue entries created before the repository storage-key
+  change remain under their older keys. They are not assigned to a new
+  connection or removed with it because those keys do not prove which
+  repository owns the data. Changing a connection or its branch likewise
+  preserves its prior storage area. The status bar and Git settings panel warn
+  when unattached data is
+  found; see *Recovering older Git drafts* in the user guide. A full app-data
+  reset can still remove them, so make a backup before using it.
+
   With one exception, and it is the important one: if that connection still has
   commits that were never pushed, they exist nowhere else. OciDeck will not throw
   them away without asking. It shows you which deck, which branch and which

@@ -1609,6 +1609,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Git-werk herstellen': 'Git-Arbeit widerherstelle',
+  'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
+      'Es git no lokali Git-Date, wo zu keiner aktuelle Verbindig ghöre. Sie wärde nid automatisch verschickt. Mach e Kopie und lies im Handbuech «Alti Git-Entwürf widerherstelle», bevor du d App-Date lösches.',
+  'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
+      'D Git-Verbindig vo dere Präsentation isch entfernt oder gänderet worde. Öffne d Präsentation nomal oder wähl «Speichere in…».',
   'Aan selectie toevoegen': 'Zur Uuswahl dezue',
   'Uit selectie halen': 'Us de Uuswahl neh',
   '{n} dia\'s geselecteerd': '{n} Folien usgwählt',
@@ -5688,8 +5693,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Dä Ändpunkt unterstützt kes bedingts Schriibe; glichzitigs Bearbeite isch da schlächter gschützt.',
   'Naar de slide': 'Zur Folie',
-  'De git-verbinding van dit deck bestaat niet meer.':
-      'D git-Verbindig vo dere Präsentation git\'s nüme.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Richt zerscht es git-Repository i unter Istellige → Spycher.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':
