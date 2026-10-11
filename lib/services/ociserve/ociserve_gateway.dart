@@ -13,6 +13,7 @@ import '../../utils/log.dart';
 import '../../utils/zip_encryption.dart';
 import 'ociserve_http.dart';
 import 'ociserve_http_factory.dart';
+import 'ociserve_step_up.dart';
 import '../../utils/content_hash.dart';
 
 part 'ociserve_gateway_planning.dart';
@@ -126,7 +127,7 @@ abstract class OciServeApi extends OciServePlanningApi
 /// De gedeelde kern van de gateway. De self-service planningmethoden staan in
 /// de mixin [_OciServePlanning] (part-bestand) zodat dit bestand onder de
 /// bestandsgrens blijft; abstract omdat de planning-leden daar leven.
-abstract class OciServeGatewayBase implements OciServeApi {
+abstract class OciServeGatewayBase implements OciServeApi, OciServeStepUpAware {
   OciServeGatewayBase({
     required this.settings,
     OciServeHttpTransport? transport,
@@ -145,6 +146,14 @@ abstract class OciServeGatewayBase implements OciServeApi {
 
   final OciServeSettings settings;
   final OciServeHttpTransport _transport;
+
+  OciServeStepUpHandler? _stepUpHandler;
+
+  /// Wat deze gateway doet als de server om een sterkere of recentere
+  /// aanmelding vraagt (RFC 9470). Zonder handler gooit hij
+  /// [OciServeStepUpRequired].
+  @override
+  set stepUpHandler(OciServeStepUpHandler? handler) => _stepUpHandler = handler;
 
   Uri _api(List<String> segments) {
     final base = Uri.parse(settings.normalizedBaseUrl);
@@ -181,29 +190,46 @@ abstract class OciServeGatewayBase implements OciServeApi {
       throw const OciServeException('not_authenticated');
     }
     try {
-      final response = await _transport.send(
-        method: method,
-        url: url,
-        trustedInternal: settings.trustedInternal,
-        headers: {
-          'accept': 'application/json',
-          if (accessToken != null)
-            'authorization': 'Bearer ${accessToken.trim()}',
-          ...headers,
-        },
-        body: body,
-        maxResponseBytes: cap,
-        timeout: timeout,
-      );
-      if (allowNotModified && response.statusCode == 304) return response;
-      if (response.statusCode < 200 || response.statusCode >= 300) {
+      var token = accessToken;
+      var retried = false;
+      while (true) {
+        final response = await _transport.send(
+          method: method,
+          url: url,
+          trustedInternal: settings.trustedInternal,
+          headers: {
+            'accept': 'application/json',
+            if (token != null) 'authorization': 'Bearer ${token.trim()}',
+            ...headers,
+          },
+          body: body,
+          maxResponseBytes: cap,
+          timeout: timeout,
+        );
+        if (allowNotModified && response.statusCode == 304) return response;
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          return response;
+        }
+        final problem = ociServeProblemOf(response);
+        final need = response.statusCode == 401
+            ? parseOciServeStepUpChallenge(response.headers, problem: problem)
+            : null;
+        if (need != null) {
+          // Eén keer opnieuw, met het token van de nieuwe aanmelding. Een
+          // tweede uitdaging betekent dat die aanmelding het beleid ook niet
+          // haalt; dat wordt een fout en geen lus.
+          final handler = _stepUpHandler;
+          if (retried || token == null || handler == null) throw need;
+          retried = true;
+          token = await handler(need);
+          continue;
+        }
         throw OciServeException(
           response.statusCode == 401 ? 'unauthorized' : 'http_error',
           statusCode: response.statusCode,
-          problem: ociServeProblemOf(response),
+          problem: problem,
         );
       }
-      return response;
     } on OciServeException {
       rethrow;
     } on OciServeTransportException catch (e) {
