@@ -100,7 +100,7 @@ class _TokenReplyTransport implements OciServeHttpTransport {
   }) async => OciServeHttpResponse(
     statusCode: statusCode,
     body: Uint8List.fromList(utf8.encode(this.body)),
-    headers: {if (contentType != null) 'content-type': contentType!},
+    headers: {'content-type': ?contentType},
   );
 }
 
