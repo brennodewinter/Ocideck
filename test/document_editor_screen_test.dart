@@ -452,12 +452,12 @@ void main() {
     // isDirty clear't pas ná de awaited atomic write (document_editor_screen
     // roept markSaved aan ná `await saveDocument`), dus dit is het juiste
     // wachtsignaal. Het budget moet ruim: op de Forgejo linux-gate draaien vier
-    // job-containers parallel op één dind, en onder die I/O-contentie haalde de
-    // write de oude 500 ms niet — de lus las dan nog 'oud'.
+    // job-containers parallel op één dind; run 5572 overschreed daar zelfs 5 s.
+    // Een groene run wacht niet langer: pumpUntil stopt zodra de write klaar is.
     await pumpUntil(
       tester,
       () => !n.currentState.isDirty,
-      timeout: const Duration(seconds: 5),
+      timeout: const Duration(seconds: 15),
       reason: 'de opslag maakte het document niet schoon',
     );
 
