@@ -1371,6 +1371,20 @@ void _videoTests() {
   // bibliotheek-brede static); ExportService zet die tijdelijk op de
   // exporttaal — hier stellen we haar zelf in om de builder los te toetsen. #1249
   group('HTML-export taal (WCAG 3.1.1, #1249)', () {
+    test('taalmetadata kan niet uit het lang-attribuut breken', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        '# Titel\n',
+        htmlLang: 'en"><script>alert(1)</script>',
+      );
+
+      expect(
+        html,
+        contains('<html lang="en&quot;>&lt;script>alert(1)&lt;/script>">'),
+      );
+      expect(html, isNot(contains('<script>alert(1)</script>')));
+    });
+
     test('<html lang> volgt htmlLang, niet het Nederlands', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build('# Titel\n', htmlLang: 'fi');
