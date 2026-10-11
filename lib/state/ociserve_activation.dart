@@ -71,12 +71,42 @@ mixin _OciServeActivationMethods on OciServeNotifierBase {
       if (generation != _generation) return;
       _tokens = null;
       final errorCode = OciServeNotifierBase._safeErrorCode(error);
+      if (errorCode == 'session_expired') {
+        await _forgetExpiredLogin(settings, generation);
+        return;
+      }
       state = state.copyWith(
         status: OciServeStatus.signedOut,
         clearAccount: true,
         errorCode: _restoreErrorCode(errorCode),
       );
     }
+  }
+
+  /// De server wees het onthouden vernieuwtoken af omdat de sessie verlopen of
+  /// ingetrokken is. Dat is het einde van de login, geen storing: het dode token
+  /// gaat uit de sleutelbos en de gebruiker ziet weer gewoon "Inloggen" in
+  /// plaats van een foutmelding over de server — die antwoordde immers.
+  Future<void> _forgetExpiredLogin(
+    OciServeSettings settings,
+    int generation,
+  ) async {
+    try {
+      await _secretWriteInFlight;
+      await _secrets.deleteOciServeRefreshToken(settings.normalizedBaseUrl);
+    } catch (error, stack) {
+      // Blijft het token staan, dan wijst de server het bij de volgende start
+      // opnieuw af en volgt hier dezelfde weg; voor de gebruiker verandert niets.
+      logError('OciServe: verlopen sessie wissen', error.runtimeType, stack);
+    }
+    if (generation != _generation) return;
+    state = state.copyWith(
+      status: OciServeStatus.signedOut,
+      clearAccount: true,
+      clearError: true,
+      hasStoredLogin: false,
+      serverReachable: true,
+    );
   }
 
   /// Test alleen de bereikbaarheid van de ingestelde server: de

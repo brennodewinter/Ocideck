@@ -79,6 +79,31 @@ class _AuthTransport implements OciServeHttpTransport {
   }
 }
 
+/// Antwoordt op het token-endpoint met één vast antwoord, zoals een IdP die een
+/// vernieuwtoken afwijst.
+class _TokenReplyTransport implements OciServeHttpTransport {
+  _TokenReplyTransport(this.statusCode, this.body, {this.contentType});
+
+  final int statusCode;
+  final String body;
+  final String? contentType;
+
+  @override
+  Future<OciServeHttpResponse> send({
+    required String method,
+    required Uri url,
+    required bool trustedInternal,
+    Map<String, String> headers = const {},
+    List<int>? body,
+    int maxResponseBytes = 0,
+    Duration timeout = Duration.zero,
+  }) async => OciServeHttpResponse(
+    statusCode: statusCode,
+    body: Uint8List.fromList(utf8.encode(this.body)),
+    headers: {if (contentType != null) 'content-type': contentType!},
+  );
+}
+
 void main() {
   test(
     'uses PKCE, state, nonce and rejects an unsigned/unverifiable ID token',
@@ -161,5 +186,71 @@ void main() {
       () => verifyOciServeAtHash('access', 'ignored', 'HS256'),
       throwsA(isA<OciServeException>()),
     );
+  });
+
+  group('a refused refresh token', () {
+    final installation = OciServeInstallation(
+      clientId: 'desktop',
+      issuer: Uri.parse('https://id.example'),
+    );
+    final configuration = OciServeOidcConfiguration(
+      issuer: Uri.parse('https://id.example'),
+      authorizationEndpoint: Uri.parse('https://id.example/authorize'),
+      tokenEndpoint: Uri.parse('https://id.example/token'),
+      jwksUri: Uri.parse('https://id.example/jwks'),
+      metadata: const {},
+      signingAlgorithms: const ['RS256'],
+    );
+
+    Future<Object?> refreshWith(OciServeHttpTransport transport) async {
+      final auth = OciServePkceAuthenticator(
+        settings: const OciServeSettings(
+          enabled: true,
+          baseUrl: 'https://learn.example',
+        ),
+        transport: transport,
+      );
+      try {
+        await auth.refresh(installation, configuration, 'stored-refresh');
+      } on OciServeException catch (error) {
+        return error.code;
+      }
+      return null;
+    }
+
+    test('is an expired session when the provider says invalid_grant', () async {
+      // Zo antwoordt Keycloak op een verlopen, ingetrokken of al gebruikt token.
+      expect(
+        await refreshWith(
+          _TokenReplyTransport(
+            400,
+            '{"error":"invalid_grant","error_description":"Token is not active"}',
+            contentType: 'application/json',
+          ),
+        ),
+        'session_expired',
+      );
+    });
+
+    test('stays a plain refusal for anything that can pass', () async {
+      // Een storing aan de serverkant of een andere weigering is geen bewijs
+      // dat het token dood is; het blijft bewaard voor een volgende poging.
+      expect(
+        await refreshWith(
+          _TokenReplyTransport(503, 'tijdelijk niet beschikbaar'),
+        ),
+        'refresh_refused',
+      );
+      expect(
+        await refreshWith(
+          _TokenReplyTransport(
+            400,
+            '{"error":"invalid_request"}',
+            contentType: 'application/json',
+          ),
+        ),
+        'refresh_refused',
+      );
+    });
   });
 }
