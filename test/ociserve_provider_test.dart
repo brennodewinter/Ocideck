@@ -46,6 +46,9 @@ class _FakeAuth implements OciServeAuthenticator {
   Completer<OciServeTokens>? loginCompleter;
   int refreshes = 0;
 
+  /// Laat elke refresh met deze fout falen, zoals een afgewezen token.
+  Object? refreshError;
+
   @override
   Future<OciServeTokens> login(
     OciServeInstallation installation,
@@ -67,9 +70,20 @@ class _FakeAuth implements OciServeAuthenticator {
     String refreshToken,
   ) {
     refreshes++;
+    final error = refreshError;
+    if (error != null) return Future.error(error);
     return login(installation, configuration);
   }
 }
+
+/// Een bewaarde aanmelding zoals de provider die zelf wegschrijft.
+String _storedLogin() => jsonEncode({
+  'version': 1,
+  'refresh_token': 'refresh',
+  'issuer': _oidc.issuer.toString(),
+  'client_id': _installation.clientId,
+  'token_endpoint': _oidc.tokenEndpoint.toString(),
+});
 
 class _FakeApi implements OciServeApi {
   // De provider oefent geen intake-routes; alles wat deze fake niet
@@ -1068,6 +1082,67 @@ void main() {
       expect(await container.read(ociServeProvider.notifier).login(), isTrue);
       expect(auth.refreshes, 1);
       expect(container.read(ociServeProvider).authenticated, isTrue);
+    },
+  );
+
+  test(
+    'an expired remembered login is forgotten and offers a plain sign-in',
+    () async {
+      SharedPreferences.setMockInitialValues({
+        kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+      });
+      await secrets.writeOciServeRefreshToken(
+        _settings.baseUrl,
+        _storedLogin(),
+      );
+      final auth = _FakeAuth()
+        ..refreshError = const OciServeException('session_expired');
+      final container = _container(api, secrets, auth: auth);
+      addTearDown(container.dispose);
+      container.read(ociServeProvider);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+
+      final state = container.read(ociServeProvider);
+      expect(auth.refreshes, 1);
+      expect(state.authenticated, isFalse);
+      // Een verlopen sessie is het einde van de login, geen storing.
+      expect(state.errorCode, isNull);
+      expect(state.serverUnavailable, isFalse);
+      expect(state.hasStoredLogin, isFalse);
+      expect(await secrets.readOciServeRefreshToken(_settings.baseUrl), isNull);
+
+      // Het dode token staat niet meer in de weg: dit is gewoon inloggen.
+      expect(await container.read(ociServeProvider.notifier).login(), isTrue);
+      expect(auth.refreshes, 1);
+      expect(container.read(ociServeProvider).authenticated, isTrue);
+    },
+  );
+
+  test(
+    'a refresh that fails for another reason keeps the remembered login',
+    () async {
+      SharedPreferences.setMockInitialValues({
+        kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+      });
+      await secrets.writeOciServeRefreshToken(
+        _settings.baseUrl,
+        _storedLogin(),
+      );
+      final auth = _FakeAuth()
+        ..refreshError = const OciServeException('refresh_refused');
+      final container = _container(api, secrets, auth: auth);
+      addTearDown(container.dispose);
+      container.read(ociServeProvider);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+
+      final state = container.read(ociServeProvider);
+      expect(state.authenticated, isFalse);
+      expect(state.errorCode, 'restore_failed');
+      expect(state.hasStoredLogin, isTrue);
+      expect(
+        await secrets.readOciServeRefreshToken(_settings.baseUrl),
+        _storedLogin(),
+      );
     },
   );
 

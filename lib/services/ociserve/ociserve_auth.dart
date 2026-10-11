@@ -148,6 +148,13 @@ class OciServePkceAuthenticator implements OciServeAuthenticator {
       return _tokens(response, fallbackRefreshToken: refreshToken);
     } catch (error, stack) {
       logError('OciServe: sessie vernieuwen', error.runtimeType, stack);
+      // `invalid_grant` is de provider die het token zelf afwijst: verlopen,
+      // ingetrokken of al gebruikt. Opnieuw proberen verandert daar niets aan;
+      // alleen opnieuw inloggen helpt. Netwerk, time-out en 5xx kunnen morgen
+      // wél slagen en blijven daarom een gewone weigering.
+      if (error is oidc.OpenIdException && error.code == 'invalid_grant') {
+        throw const OciServeException('session_expired');
+      }
       throw const OciServeException('refresh_refused');
     }
   }
