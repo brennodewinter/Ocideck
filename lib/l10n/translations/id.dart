@@ -1606,6 +1606,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Unduh kunci verifikasi sebelum menutup. Simpan bersama sumbernya dan bagikan hanya berkas ZIP.',
+  'Verificatiesleutels downloaden': 'Unduh kunci verifikasi',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP yang dapat dibagikan berisi laporan dan manifes penyuntingan. Setelah itu, unduh kunci verifikasi secara terpisah.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP yang dapat dibagikan berisi laporan dan manifes penyuntingan tanpa kunci.',
   'Aan selectie toevoegen': 'Tambahkan ke pilihan',
   'Uit selectie halen': 'Hapus dari pilihan',
   '{n} dia\'s geselecteerd': '{n} slide dipilih',

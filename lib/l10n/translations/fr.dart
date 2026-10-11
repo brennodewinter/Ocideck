@@ -652,6 +652,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Téléchargez les clés de vérification avant de fermer. Conservez-les avec la source et partagez uniquement le fichier ZIP.',
+  'Verificatiesleutels downloaden': 'Télécharger les clés de vérification',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Le ZIP partageable contient le rapport et le manifeste des occultations. Téléchargez ensuite les clés de vérification séparément.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Le ZIP partageable contient le rapport et le manifeste des occultations sans clés.',
   'Aan selectie toevoegen': 'Ajouter à la sélection',
   'Uit selectie halen': 'Retirer de la sélection',
   '{n} dia\'s geselecteerd': '{n} diapositives sélectionnées',

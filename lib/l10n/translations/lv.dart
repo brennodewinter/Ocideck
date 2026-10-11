@@ -1604,6 +1604,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Pirms aizvēršanas lejupielādējiet pārbaudes atslēgas. Glabājiet tās pie avota un kopīgojiet tikai ZIP failu.',
+  'Verificatiesleutels downloaden': 'Lejupielādēt pārbaudes atslēgas',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Kopīgojamajā ZIP ir pārskats un rediģējumu manifests. Pēc tam pārbaudes atslēgas lejupielādējiet atsevišķi.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Kopīgojamajā ZIP ir pārskats un rediģējumu manifests bez atslēgām.',
   'Aan selectie toevoegen': 'Pievienot atlasei',
   'Uit selectie halen': 'Izņemt no atlases',
   '{n} dia\'s geselecteerd': '{n} slaidi atlasīti',

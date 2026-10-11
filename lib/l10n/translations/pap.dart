@@ -651,6 +651,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Download e yabi di verifikashon promé ku bo sera. Warda nan serka e fuente i kompartí solamente e fail ZIP.',
+  'Verificatiesleutels downloaden': 'Download yabi di verifikashon',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'E ZIP ku por kompartí ta kontené e rapòrt i e manifest di redakshon. Despues, download e yabinan di verifikashon apart.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'E ZIP ku por kompartí ta kontené e rapòrt i e manifest di redakshon sin yabi.',
   'Aan selectie toevoegen': 'Añadi na selekshon',
   'Uit selectie halen': 'Kitá for di selekshon',
   '{n} dia\'s geselecteerd': '{n} diapositiva selekshoná',

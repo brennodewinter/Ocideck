@@ -1605,6 +1605,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Ladda ned verifieringsnycklarna innan du stänger. Förvara dem med källan och dela endast ZIP-filen.',
+  'Verificatiesleutels downloaden': 'Ladda ned verifieringsnycklar',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Den delbara ZIP-filen innehåller rapporten och redigeringsmanifestet. Ladda sedan ned verifieringsnycklarna separat.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Den delbara ZIP-filen innehåller rapporten och redigeringsmanifestet utan nycklar.',
   'Aan selectie toevoegen': 'Lägg till i urvalet',
   'Uit selectie halen': 'Ta bort från urvalet',
   '{n} dia\'s geselecteerd': '{n} bilder valda',

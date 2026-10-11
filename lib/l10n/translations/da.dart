@@ -1606,6 +1606,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Download verificeringsnøglerne, før du lukker. Opbevar dem sammen med kilden, og del kun ZIP-filen.',
+  'Verificatiesleutels downloaden': 'Download verificeringsnøgler',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP-filen til deling indeholder rapporten og redaktionsmanifestet. Download derefter verificeringsnøglerne separat.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP-filen til deling indeholder rapporten og redaktionsmanifestet uden nøgler.',
   'Aan selectie toevoegen': 'Føj til markering',
   'Uit selectie halen': 'Fjern fra markering',
   '{n} dia\'s geselecteerd': '{n} slides valgt',

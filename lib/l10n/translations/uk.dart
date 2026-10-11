@@ -1621,6 +1621,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Завантажте ключі перевірки, перш ніж закрити вікно. Зберігайте їх разом із джерелом і діліться лише ZIP-файлом.',
+  'Verificatiesleutels downloaden': 'Завантажити ключі перевірки',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP-архів для поширення містить звіт і маніфест редагування. Потім завантажте ключі перевірки окремо.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP-архів для поширення містить звіт і маніфест редагування без ключів.',
   'Aan selectie toevoegen': 'Додати до вибору',
   'Uit selectie halen': 'Прибрати з вибору',
   '{n} dia\'s geselecteerd': 'Вибрано {n} слайдів',

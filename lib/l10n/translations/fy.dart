@@ -652,6 +652,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Download de ferifikaasjekaaien foardatst slútst. Bewarje se by de boarne en diel allinnich it ZIP-bestân.',
+  'Verificatiesleutels downloaden': 'Ferifikaasjekaaien downloade',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'De dielbere ZIP befettet it rapport en it redaksjemanifest. Download dêrnei de ferifikaasjekaaien apart.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'De dielbere ZIP befettet it rapport en it redaksjemanifest sûnder kaaien.',
   'Aan selectie toevoegen': 'Oan seleksje tafoegje',
   'Uit selectie halen': 'Út seleksje helje',
   '{n} dia\'s geselecteerd': '{n} dia\'s selektearre',

@@ -1606,6 +1606,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Preden zaprete, prenesite ključe za preverjanje. Shranite jih pri izvirniku in delite le datoteko ZIP.',
+  'Verificatiesleutels downloaden': 'Prenesi ključe za preverjanje',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP za deljenje vsebuje poročilo in manifest redakcij. Nato posebej prenesite ključe za preverjanje.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP za deljenje vsebuje poročilo in manifest redakcij brez ključev.',
   'Aan selectie toevoegen': 'Dodaj v izbor',
   'Uit selectie halen': 'Odstrani iz izbora',
   '{n} dia\'s geselecteerd': '{n} prosojnic izbranih',

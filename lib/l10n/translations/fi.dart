@@ -1606,6 +1606,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Lataa vahvistusavaimet ennen sulkemista. Säilytä ne lähteen yhteydessä ja jaa vain ZIP-tiedosto.',
+  'Verificatiesleutels downloaden': 'Lataa vahvistusavaimet',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Jaettava ZIP sisältää raportin ja peittomerkintöjen luettelon. Lataa vahvistusavaimet sen jälkeen erikseen.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Jaettava ZIP sisältää raportin ja peittomerkintöjen luettelon ilman avaimia.',
   'Aan selectie toevoegen': 'Lisää valintaan',
   'Uit selectie halen': 'Poista valinnasta',
   '{n} dia\'s geselecteerd': '{n} dioja valittu',

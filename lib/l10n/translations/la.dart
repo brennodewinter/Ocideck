@@ -1621,6 +1621,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Claves verificationis antequam claudis depone. Eas apud fontem serva et solum fasciculum ZIP communica.',
+  'Verificatiesleutels downloaden': 'Claves verificationis deponere',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Fasciculus ZIP communicabilis relationem et indicem partium occultatarum continet. Claves verificationis postea separatim depone.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Fasciculus ZIP communicabilis relationem et indicem partium occultatarum sine clavibus continet.',
   'Aan selectie toevoegen': 'Selectioni adde',
   'Uit selectie halen': 'E selectione tolle',
   '{n} dia\'s geselecteerd': '{n} paginae selectae',

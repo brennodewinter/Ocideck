@@ -2516,6 +2516,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Kapatmadan önce doğrulama anahtarlarını indirin. Bunları kaynakla birlikte saklayın ve yalnızca ZIP dosyasını paylaşın.',
+  'Verificatiesleutels downloaden': 'Doğrulama anahtarlarını indir',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Paylaşılabilir ZIP, raporu ve redaksiyon bildirimini içerir. Ardından doğrulama anahtarlarını ayrı olarak indirin.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Paylaşılabilir ZIP, raporu ve redaksiyon bildirimini anahtarlar olmadan içerir.',
   'Aan selectie toevoegen': 'Seçime ekle',
   'Uit selectie halen': 'Seçimden kaldır',
   '{n} dia\'s geselecteerd': '{n} slayt seçildi',

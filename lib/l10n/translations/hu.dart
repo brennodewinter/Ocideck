@@ -1608,6 +1608,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Bezárás előtt töltse le az ellenőrzőkulcsokat. Tartsa őket a forrásnál, és csak a ZIP-fájlt ossza meg.',
+  'Verificatiesleutels downloaden': 'Ellenőrzőkulcsok letöltése',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'A megosztható ZIP tartalmazza a jelentést és a kitakarási jegyzéket. Ezután külön töltse le az ellenőrzőkulcsokat.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'A megosztható ZIP tartalmazza a jelentést és a kitakarási jegyzéket, kulcsok nélkül.',
   'Aan selectie toevoegen': 'Hozzáadás a kijelöléshez',
   'Uit selectie halen': 'Eltávolítás a kijelölésből',
   '{n} dia\'s geselecteerd': '{n} dia kijelölve',

@@ -1613,6 +1613,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Prieš uždarydami atsisiųskite tikrinimo raktus. Laikykite juos prie šaltinio ir bendrinkite tik ZIP failą.',
+  'Verificatiesleutels downloaden': 'Atsisiųsti tikrinimo raktus',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Bendrinamame ZIP yra ataskaita ir redagavimo manifestas. Po to tikrinimo raktus atsisiųskite atskirai.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Bendrinamame ZIP yra ataskaita ir redagavimo manifestas be raktų.',
   'Aan selectie toevoegen': 'Pridėti prie žymėjimo',
   'Uit selectie halen': 'Pašalinti iš žymėjimo',
   '{n} dia\'s geselecteerd': 'Pasirinkta {n} skaidrių',

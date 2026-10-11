@@ -1624,6 +1624,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Niżżel iċ-ċwievet tal-verifika qabel tagħlaq. Żommhom mas-sors u aqsam biss il-fajl ZIP.',
+  'Verificatiesleutels downloaden': 'Niżżel iċ-ċwievet tal-verifika',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Iż-ZIP li jista’ jinqasam fih ir-rapport u l-manifest tar-redazzjoni. Wara, niżżel iċ-ċwievet tal-verifika separatament.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Iż-ZIP li jista’ jinqasam fih ir-rapport u l-manifest tar-redazzjoni mingħajr ċwievet.',
   'Aan selectie toevoegen': 'Żid magħażla',
   'Uit selectie halen': 'Aqla\' mill-għażla',
   '{n} dia\'s geselecteerd': '{n} slide magħżula',

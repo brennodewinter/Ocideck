@@ -1631,6 +1631,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Κατεβάστε τα κλειδιά επαλήθευσης πριν κλείσετε. Φυλάξτε τα μαζί με την πηγή και κοινοποιήστε μόνο το αρχείο ZIP.',
+  'Verificatiesleutels downloaden': 'Λήψη κλειδιών επαλήθευσης',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Το ZIP προς κοινοποίηση περιέχει την αναφορά και το δηλωτικό απόκρυψης. Κατεβάστε έπειτα τα κλειδιά επαλήθευσης ξεχωριστά.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Το ZIP προς κοινοποίηση περιέχει την αναφορά και το δηλωτικό απόκρυψης χωρίς κλειδιά.',
   'Aan selectie toevoegen': 'Προσθήκη στην επιλογή',
   'Uit selectie halen': 'Αφαίρεση από την επιλογή',
   '{n} dia\'s geselecteerd': '{n} διαφάνειες επιλεγμένες',

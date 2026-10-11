@@ -1612,6 +1612,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Pred zatvorením si stiahnite overovacie kľúče. Uložte ich k zdroju a zdieľajte iba súbor ZIP.',
+  'Verificatiesleutels downloaden': 'Stiahnuť overovacie kľúče',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP určený na zdieľanie obsahuje správu a manifest redakcií. Overovacie kľúče si potom stiahnite osobitne.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP určený na zdieľanie obsahuje správu a manifest redakcií bez kľúčov.',
   'Aan selectie toevoegen': 'Pridať do výberu',
   'Uit selectie halen': 'Odobrať z výberu',
   '{n} dia\'s geselecteerd': '{n} snímok vybraných',

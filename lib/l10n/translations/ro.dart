@@ -1622,6 +1622,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Descărcați cheile de verificare înainte de a închide. Păstrați-le lângă sursă și partajați doar fișierul ZIP.',
+  'Verificatiesleutels downloaden': 'Descărcați cheile de verificare',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Arhiva ZIP care poate fi partajată conține raportul și manifestul redactărilor. Apoi descărcați separat cheile de verificare.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Arhiva ZIP care poate fi partajată conține raportul și manifestul redactărilor fără chei.',
   'Aan selectie toevoegen': 'Adaugă la selecție',
   'Uit selectie halen': 'Elimină din selecție',
   '{n} dia\'s geselecteerd': '{n} diapozitive selectate',

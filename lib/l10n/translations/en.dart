@@ -812,6 +812,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Download the verification keys before closing. Keep them with the source and share only the ZIP file.',
+  'Verificatiesleutels downloaden': 'Download verification keys',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'The shareable ZIP contains the report and redaction manifest. Download the verification keys separately afterwards.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'The shareable ZIP contains the report and redaction manifest without keys.',
   'Aan selectie toevoegen': 'Add to selection',
   'Uit selectie halen': 'Remove from selection',
   '{n} dia\'s geselecteerd': '{n} slides selected',

@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Een geredigeerde browserexport houdt verificatiesleutels apart.** De
+  deelbare ZIP bevat het rapport en alleen het redactiemanifest zonder salts.
+  Download de auteursleutels daarna met de aparte knop in het exportdialoog en
+  bewaar ze bij de bron. Controleer zelf of de download is aangekomen voordat
+  je het dialoog sluit; de browser kan dat niet bevestigen.
 - **eLearning vraagt opnieuw om aanmelding als de organisatie dat eist.** Een
   organisatie kan een recente of sterkere aanmelding verplichten (OciServe
   antwoordt dan met een RFC 9470-uitdaging). OciDeck opent dan nog één keer de

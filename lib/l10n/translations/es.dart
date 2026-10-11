@@ -649,6 +649,13 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Descarga las claves de verificación antes de cerrar. Guárdalas junto al original y comparte solo el archivo ZIP.',
+  'Verificatiesleutels downloaden': 'Descargar claves de verificación',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'El ZIP que puedes compartir contiene el informe y el manifiesto de redacción. Después, descarga las claves de verificación por separado.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'El ZIP que puedes compartir contiene el informe y el manifiesto de redacción sin claves.',
   'Aan selectie toevoegen': 'Añadir a la selección',
   'Uit selectie halen': 'Quitar de la selección',
   '{n} dia\'s geselecteerd': '{n} diapositivas seleccionadas',

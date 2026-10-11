@@ -1626,6 +1626,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Изтеглете ключовете за проверка, преди да затворите. Съхранявайте ги при източника и споделяйте само ZIP файла.',
+  'Verificatiesleutels downloaden': 'Изтегляне на ключовете за проверка',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP файлът за споделяне съдържа отчета и манифеста на редакциите. След това изтеглете ключовете за проверка отделно.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP файлът за споделяне съдържа отчета и манифеста на редакциите без ключове.',
   'Aan selectie toevoegen': 'Добави към избора',
   'Uit selectie halen': 'Махни от избора',
   '{n} dia\'s geselecteerd': '{n} слайда избрани',

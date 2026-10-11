@@ -1607,6 +1607,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Než okno zavřete, stáhněte si ověřovací klíče. Uchovejte je u zdroje a sdílejte pouze soubor ZIP.',
+  'Verificatiesleutels downloaden': 'Stáhnout ověřovací klíče',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP určený ke sdílení obsahuje zprávu a manifest redakcí. Ověřovací klíče si pak stáhněte zvlášť.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP určený ke sdílení obsahuje zprávu a manifest redakcí bez klíčů.',
   'Aan selectie toevoegen': 'Přidat do výběru',
   'Uit selectie halen': 'Odebrat z výběru',
   '{n} dia\'s geselecteerd': '{n} snímků vybráno',

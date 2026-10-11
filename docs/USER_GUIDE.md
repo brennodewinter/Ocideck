@@ -2898,13 +2898,15 @@ not travel — see *The two manifest files* below.
 
 ### The two manifest files
 
-Whenever an export actually removes something, OciDeck writes two extra files
-into the same folder as the export. In the browser there is no folder, so the
-report and both manifest files arrive together in **one ZIP** — named after the
-export with `.zip` on the end. That is not a cosmetic choice: browsers stop the
-second automatic download in a row, and until then the manifest and the keys
-were the two that silently never arrived while the app said the export had
-succeeded. *(Corrected 2026-09-01, #1902.)*
+Whenever an export actually removes something, the desktop app writes two extra
+files beside the export. In the browser, the **shareable ZIP** contains only the
+report and `-redactions.json`, which has no salts. After that download is offered,
+click **Download verification keys** in the export dialog to get
+`-redaction-keys.json` separately. Save the key file with the source before
+closing the dialog: a later export creates different salts and cannot recover
+the keys for this report. Check that both downloads arrived. The browser cannot
+confirm whether a download reached your device. Never send the key file or add
+it to the shareable ZIP.
 
 | File | What is in it | Does it go with the report? |
 | --- | --- | --- |
@@ -2922,9 +2924,9 @@ unredacted deck. Send it to nobody by default. When a specific redaction is
 disputed, open **that one** — reveal its salt and its value, and the recipient
 can recompute the commitment themselves. Every other redaction stays shut.
 
-The export dialog names both files before you export, and each file says what it
-is in its own `notice` field, because a filename does not survive being renamed
-or zipped.
+The export dialog names both files before you export. Each file also says what
+it is in its own `notice` field, because a filename does not survive being
+renamed or zipped.
 
 The names are deliberately in English, unlike the `-geredigeerd` suffix on the
 export itself: these files travel to recipients in any language, and telling the
