@@ -737,6 +737,13 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- **Een verlopen onthouden eLearning-aanmelding geeft geen foutmelding meer.**
+  Wees de server het bewaarde vernieuwtoken af (`invalid_grant`: verlopen,
+  ingetrokken of al gebruikt), dan meldde het welkomstscherm bij de start dat
+  aanmelden "niet gelukt" was en je de server moest controleren — terwijl de
+  server netjes antwoordde. OciDeck wist nu dat dode token en toont gewoon
+  *Inloggen*. Een storing of time-out aan de serverkant blijft een
+  herstelbare fout en laat het token staan.
 - **De releaseketen keurt Linux-pakketten nu vóór de tag in schone
   consumentimages.** De `.deb`, `.rpm` en AppImage worden gebouwd, geïnstalleerd,
   nagelinkt en gestart op exact de release-head; ontbrekende certificaten of
