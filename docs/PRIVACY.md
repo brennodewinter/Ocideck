@@ -138,9 +138,11 @@ slide anchors, displayed milliseconds and completion; it does not send answers,
 scores, notes or presentation contents as progress. Displayed time is wall-clock
 exposure and is not proof of attention, presence or learning. The rotating
 refresh token and unsent progress outbox live only in the operating-system
-keychain. Logout removes the token but preserves unsent progress for a later
-authenticated retry; *Reset everything to its initial state* removes both.
-Access tokens remain in memory.
+keychain. Keeping the sign-in is on by default so that a learner signs in once
+per device; unticking *Ingelogd blijven op dit apparaat* keeps the token for
+the current app session only. Logout removes the token but preserves unsent
+progress for a later authenticated retry; *Reset everything to its initial
+state* removes both. Access tokens remain in memory.
 
 ### Face detection in slide images
 

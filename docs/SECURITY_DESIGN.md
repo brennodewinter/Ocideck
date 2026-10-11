@@ -34,7 +34,10 @@ requests resolve through `NetGuard`, pin the connection to the validated address
 refuse redirects and bound response sizes; private targets require the explicit
 trusted-internal-server switch. Access tokens stay in memory. A rotating refresh
 token and at most 100 pending playback snapshots are held in the OS keychain and
-are handled separately: logout deletes the token but preserves unsent progress;
+are handled separately. Keeping the refresh token is the default, so a learner
+signs in once per device; a user who switches it off keeps it for the current
+app session only, and a stored `false` written by versions that defaulted to off
+is not read as that choice. Logout deletes the token but preserves unsent progress;
 a server change is refused while progress still waits. The full local-data reset
 is the explicit action that deletes both.
 

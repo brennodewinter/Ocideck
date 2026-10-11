@@ -10,6 +10,18 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Bij eLearning hoef je nog maar één keer in te loggen per apparaat.**
+  *Ingelogd blijven op dit apparaat* staat nu standaard aan: na de eerste
+  aanmelding bewaart OciDeck het roterende vernieuwtoken in de sleutelbos van
+  het besturingssysteem en meldt je bij elke volgende start zonder browser weer
+  aan, tot de server van je organisatie de sessie laat verlopen. Het vinkje
+  onder *Integraties → eLearning* blijft: haal het weg en het token bestaat
+  alleen tijdens die appsessie. Bestaande installaties gaan mee, want oudere
+  versies bewaarden `uit` ook als niemand het vinkje had aangeraakt; alleen een
+  uitdrukkelijke keuze wordt vanaf nu onthouden. Op een computer die meerdere
+  mensen onder één gebruikersaccount delen is uitloggen of het vinkje uitzetten
+  de bedoeling: de volgende gebruiker van dat account opent anders OciDeck als
+  de vorige.
 - De releasepreflight start een ontbrekende `linux-gate` op de actuele
   `main`-tip nu zelf en wacht begrensd op de uitslag. Een al lopende run wordt
   hergebruikt; rood of onleesbaar blijft fail-closed. Een release hoeft daardoor

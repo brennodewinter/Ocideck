@@ -4873,10 +4873,19 @@ eLearning** het HTTPS-adres van je organisatie. Als de uitbreiding uitstaat,
 verschijnen **Inloggen**, **Mijn cursussen** en een eventuele verbindingsmelding
 niet op het welkomstscherm; bewaarde serverinstellingen blijven wel behouden.
 Meld je via de systeembrowser aan.
-OciDeck kan de aanmelding onthouden met een roterend vernieuwtoken in de
-sleutelbos van het besturingssysteem; schakel je dat uit, dan blijft het token
-alleen tijdens deze appsessie bestaan. De browserversie kan dit geheim niet
-veilig bewaren en biedt aanmelden bij eLearning daarom niet aan.
+Dat hoef je op een apparaat maar één keer te doen. OciDeck blijft ingelogd: het
+bewaart een roterend vernieuwtoken in de sleutelbos van het besturingssysteem
+en meldt je bij de volgende start weer aan zonder de browser te openen. Dat
+staat standaard aan. Haal je het vinkje bij **Ingelogd blijven op dit apparaat**
+onder **Integraties → eLearning** weg, dan bestaat het token alleen tijdens
+deze appsessie; **Uitloggen** wist het op elk moment. Hoe lang een onthouden
+aanmelding geldig blijft, bepaalt de server van je organisatie; is die
+verlopen, dan vraagt OciDeck je gewoon opnieuw in te loggen. Deel je een
+computer met anderen onder één gebruikersaccount, haal dan het vinkje weg of
+log uit als je klaar bent: wie dat account daarna gebruikt, opent OciDeck
+meteen als jou. De browserversie
+kan dit geheim niet veilig bewaren en biedt aanmelden bij eLearning daarom niet
+aan.
 
 Bij een aanmeldpoging probeert OciDeck eerst het ingestelde adres en daarna
 dezelfde server op alle bekende OciServe-poorten: 8443, 1428, 8080 en de
