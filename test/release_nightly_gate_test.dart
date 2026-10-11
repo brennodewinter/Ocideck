@@ -212,7 +212,13 @@ api() {
       printf '%s\\n' '[{"id":50,"name":"gate-linux","status":"failure","attempt":1}]'
       ;;
     '/actions/jobs/'*'/logs')
-      printf '%s\\n' 'make check-no-coverage: FAILED test/foo_test.dart'
+      printf '%s\\n' \\
+        '##[group]❌ test/foo_test.dart: kapotte toets (failed)' \\
+        'make check-no-coverage: FAILED test/foo_test.dart' \\
+        '##[endgroup]' \\
+        'checkout-opruiming 1' 'checkout-opruiming 2' 'checkout-opruiming 3' \\
+        'checkout-opruiming 4' 'checkout-opruiming 5' 'checkout-opruiming 6' \\
+        'checkout-opruiming 7' 'checkout-opruiming 8' 'checkout-opruiming 9'
       ;;
     '/actions/runs/'*)
       rid="\${path#/actions/runs/}"
@@ -407,6 +413,7 @@ printf 'DOOR\\n'
       expect(output, contains('https://forge.invalid/r/9718'));
       expect(output, contains('gate-linux'));
       expect(output, contains('FAILED test/foo_test.dart'));
+      expect(output, isNot(contains('checkout-opruiming')));
     },
   );
 
