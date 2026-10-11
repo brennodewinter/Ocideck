@@ -4,7 +4,7 @@
 /// then streams the new content in. A crash, full disk or process kill midway
 /// leaves a half-written, corrupt file — and for a presentation editor that
 /// means the user's original deck is gone. These helpers write to a sibling
-/// `<path>.tmp` and then rename it onto the target, so the original stays intact
+/// sibling temporary file and then rename it onto the target, so the original stays intact
 /// until the complete new content is durably on disk.
 ///
 /// `rename` is atomic on POSIX (it overwrites the destination in one syscall).
@@ -27,14 +27,18 @@ library;
 
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
 import 'log.dart';
 
-/// Teller die elke schrijfbeurt binnen dit proces een eigen tijdelijk bestand
-/// geeft. Zie [writeBytesAtomic].
-int _tempCounter = 0;
+// Git can contain a link at a predictable sibling name: never write through it.
+final _tempRandom = Random.secure();
+
+File _newTemp(File target) => File(
+  '${target.path}.${List.generate(4, (_) => _tempRandom.nextInt(1 << 32).toRadixString(16).padLeft(8, '0')).join()}.tmp',
+);
 
 /// Atomically write [bytes] to [target] via a sibling temp file + rename.
 ///
@@ -45,9 +49,12 @@ int _tempCounter = 0;
 /// opslag waar niets mis mee was. Dat kon al met twee decks in dezelfde
 /// projectmap, die allebei hun thema-CSS wegschrijven.
 Future<void> writeBytesAtomic(File target, List<int> bytes) async {
-  final tmp = File('${target.path}.${_tempCounter++}.tmp');
+  final tmp = _newTemp(target);
   var targetRemoved = false;
+  var tempCreated = false;
   try {
+    await tmp.create(exclusive: true);
+    tempCreated = true;
     await tmp.writeAsBytes(bytes, flush: true);
     try {
       await tmp.rename(target.path);
@@ -75,7 +82,7 @@ Future<void> writeBytesAtomic(File target, List<int> bytes) async {
     // this temp is the only copy of the content that is left. Same reasoning as
     // in [writeBytesAtomicSync].
     logWarning('writeBytesAtomic: write failed', e);
-    if (!targetRemoved && await tmp.exists()) {
+    if (tempCreated && !targetRemoved && await tmp.exists()) {
       try {
         await tmp.delete();
       } catch (e) {
@@ -206,10 +213,13 @@ void writeBytesAtomicSync(
   void Function(File recovery)? onRecoveryKept,
 }) {
   final rename = renameOnce ?? (File tmp, String dest) => tmp.renameSync(dest);
-  final tmp = File('${target.path}.${_tempCounter++}.tmp');
+  final tmp = _newTemp(target);
   // Zodra dit waar is, is `tmp` de enige kopie die er nog van de inhoud is.
   var targetRemoved = false;
+  var tempCreated = false;
   try {
+    tmp.createSync(exclusive: true);
+    tempCreated = true;
     tmp.writeAsBytesSync(bytes, flush: true);
     try {
       rename(tmp, target.path);
@@ -235,7 +245,7 @@ void writeBytesAtomicSync(
     // daarna ook nog het herstelbestand weg.
     if (targetRemoved) {
       onRecoveryKept?.call(tmp);
-    } else if (tmp.existsSync()) {
+    } else if (tempCreated && tmp.existsSync()) {
       try {
         tmp.deleteSync();
       } catch (e) {

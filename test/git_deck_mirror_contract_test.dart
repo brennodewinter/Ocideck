@@ -256,6 +256,41 @@ void main() {
     });
   });
 
+  group('FileDraftStore symlink containment', () {
+    test(
+      'linked deck member cannot read a file outside the worktree',
+      () async {
+        final outside = File('${temp.path}.secret')
+          ..writeAsStringSync('secret');
+        addTearDown(() => outside.deleteSync());
+        final deck = Directory('${temp.path}/decks/a')
+          ..createSync(recursive: true);
+        File('${deck.path}/deck.md').writeAsStringSync('# A');
+        Link('${deck.path}/data.json').createSync(outside.path);
+
+        final mirror = DraftMirror(store: FileDraftStore(baseDir: temp));
+        expect(
+          mirror.readDeck('decks/a'),
+          throwsA(isA<DraftStoreUnsupported>()),
+        );
+      },
+      skip: Platform.isWindows,
+    );
+
+    test('linked deck ancestor cannot redirect a write', () async {
+      final outside = Directory.systemTemp.createTempSync('ocideck_outside');
+      addTearDown(() => outside.deleteSync(recursive: true));
+      Link('${temp.path}/decks').createSync(outside.path);
+      final mirror = DraftMirror(store: FileDraftStore(baseDir: temp));
+
+      expect(
+        mirror.writeDeck('decks/a', {'decks/a/deck.md': _b('# A')}),
+        throwsA(isA<DraftStoreUnsupported>()),
+      );
+      expect(File('${outside.path}/a/deck.md').existsSync(), isFalse);
+    }, skip: Platform.isWindows);
+  });
+
   runDeckMirrorContract(
     'DraftMirror (browser key/value store)',
     () => DraftMirror(store: PrefsDraftStore(prefs: prefs)),

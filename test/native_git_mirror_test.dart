@@ -118,8 +118,8 @@ final _windowsTimeout = Platform.isWindows
 
 /// test() met de Windows-ruime tijdlimiet — `@OnPlatform` op bibliotheekniveau
 /// wordt door `flutter test` niet verwerkt, dus per-test zetten (#933).
-void _wtest(String description, dynamic Function() body) =>
-    test(description, body, timeout: _windowsTimeout);
+void _wtest(String description, dynamic Function() body, {bool skip = false}) =>
+    test(description, body, timeout: _windowsTimeout, skip: skip);
 
 void main() {
   // ── Opslag-contract: gelijkwaardig aan DraftMirror ─────────────────────────
@@ -201,6 +201,37 @@ void main() {
       );
       expect(await mirror.headSha(), isNotNull);
     });
+
+    _wtest('een gelinkte decks-map kan geen externe map verwijderen', () async {
+      await mirror.prepareForOpen();
+      final outside = Directory('${temp.path}/outside');
+      final sentinel = File('${outside.path}/kwartaalcijfers/deck.md')
+        ..parent.createSync(recursive: true)
+        ..writeAsStringSync('bewaren');
+      Directory('${temp.path}/clone/decks').deleteSync(recursive: true);
+      Link('${temp.path}/clone/decks').createSync(outside.path);
+
+      expect(
+        mirror.commitDeck(deckDir, {'$deckDir/deck.md': _b('# Nieuw')}, 'save'),
+        throwsA(isA<GitForgeException>()),
+      );
+      expect(sentinel.readAsStringSync(), 'bewaren');
+    }, skip: Platform.isWindows);
+
+    _wtest('een gelinkte assets-map kan niet extern schrijven', () async {
+      await mirror.prepareForOpen();
+      final outside = Directory('${temp.path}/outside')..createSync();
+      Link('${temp.path}/clone/assets').createSync(outside.path);
+
+      expect(
+        mirror.commitDeck(deckDir, {
+          '$deckDir/deck.md': _b('# Nieuw'),
+          'assets/payload.bin': _b('geheim'),
+        }, 'save'),
+        throwsA(isA<GitForgeException>()),
+      );
+      expect(File('${outside.path}/payload.bin').existsSync(), isFalse);
+    }, skip: Platform.isWindows);
 
     for (final remoteKind in ['fetch', 'push']) {
       _wtest(

@@ -14,6 +14,14 @@ All notable changes to OciDeck are documented in this file.
   ODS stoppen met een leesbare limietmelding als kolomgaten, ongelijke rijen,
   herhalingen of vele lege werkbladen te veel geheugen zouden vragen. Het
   bronbestand blijft ongemoeid; gewone kleine tabellen werken zoals voorheen.
+- **Security: Git-werkkopieën volgen geen symbolische links buiten hun map.**
+  Lezen, opslaan en verwijderen weigeren een deck of assetpad dat via een
+  symbolische link loopt. Zo kan een repository geen lokaal bestand in een deck
+  opnemen of een schrijf- of verwijderactie buiten de kloon sturen. Tijdelijke
+  bestanden bij atomair opslaan krijgen een onvoorspelbare naam, zodat een link
+  op een voorbereide tijdelijke bestandsnaam geen ander bestand overschrijft.
+  Zet zulke links om naar gewone bestanden binnen de repository voordat je
+  verderwerkt.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of

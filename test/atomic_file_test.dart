@@ -6,6 +6,22 @@ import 'package:ocideck/utils/atomic_file.dart';
 import 'package:path/path.dart' as p;
 
 void main() {
+  test('atomic write never follows a pre-existing temporary symlink', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_atomic_link_');
+    addTearDown(() => temp.delete(recursive: true));
+    final outside = File(p.join(temp.path, 'outside'));
+    await outside.writeAsString('keep');
+    final target = File(p.join(temp.path, 'out.bin'));
+    for (var i = 0; i < 64; i++) {
+      await Link('${target.path}.$i.tmp').create(outside.path);
+    }
+
+    await writeBytesAtomic(target, utf8.encode('safe'));
+
+    expect(await outside.readAsString(), 'keep');
+    expect(await target.readAsString(), 'safe');
+  }, skip: Platform.isWindows);
+
   test('writeStringAtomic creates the file with exact content', () async {
     final temp = await Directory.systemTemp.createTemp('ocideck_atomic_');
     addTearDown(() => temp.delete(recursive: true));

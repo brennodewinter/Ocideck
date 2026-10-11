@@ -413,7 +413,10 @@ opgeslagen versie blijft opvraagbaar, wat een gewone map je niet kan geven.
 - **Openen** via het `…`-menu (*Openen vanuit…*, dan de repository kiezen): het
   deck wordt opgehaald, gecontroleerd door dezelfde veiligheidsscan als elk ander
   deck, en geopend. Een repository is niet-vertrouwde invoer — dat het van je eigen
-  forge komt maakt het niet vertrouwd.
+  forge komt maakt het niet vertrouwd. De lokale Git-werkkopie weigert
+  symbolische links in een deck en in paden waar OciDeck schrijft of verwijdert.
+  Zet een gelinkt bestand eerst om naar een gewoon bestand binnen de repository;
+  ook een link naar een andere plek binnen dezelfde repository wordt geweigerd.
 - **Opslaan** met de gewone opslagknop, of *Opslaan naar…* om ergens anders te
   publiceren: het deck wordt teruggeschreven als één commit — de markdown, zijn
   afbeeldingen en media, die precies zo in de gedeelde pool gaan als het openen ze

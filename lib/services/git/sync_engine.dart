@@ -131,6 +131,15 @@ class SyncEngine {
             'Een gewijzigd deck kon niet uit de wachtrij worden gelezen en is '
             'overgeslagen.',
       );
+    } on DraftStoreUnsupported catch (e) {
+      // Een onveilig bestand kan later door de gebruiker worden hersteld.
+      // Bewaar de intentie en laat de overige decks in de wachtrij doorgaan.
+      logWarning('SyncEngine._flush: werkkopie geweigerd', e);
+      return SyncOutcome(
+        deckDir: commit.deckDir,
+        status: SyncStatus.failed,
+        message: 'Dit deck kan niet veilig uit de werkkopie worden gelezen.',
+      );
     }
     if (stored.isEmpty) {
       // Geen werkkopie meer (deck verworpen): de intentie is zinloos geworden.

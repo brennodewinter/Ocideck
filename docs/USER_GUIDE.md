@@ -387,7 +387,10 @@ saved version stays retrievable, which a plain folder cannot give you.
 - **Open** via the `…` menu (*Open from…*, then pick the repository): the deck
   is fetched, checked by the same safety scan as any other deck, and opened. A
   repository is untrusted input — coming from your own forge does not make it
-  trusted.
+  trusted. The local Git working copy rejects symbolic links in a deck and in
+  paths where OciDeck writes or deletes files. Replace a link with an ordinary
+  file inside the repository before continuing; links to another location
+  inside the same repository are rejected too.
 - **Save** with the ordinary save button, or *Save to…* to publish somewhere
   else: the deck is written back as one
   commit — the markdown, its images and media, which go into the shared pool
