@@ -15,6 +15,7 @@ import '../../utils/log.dart';
 import 'ociserve_auth_platform.dart';
 import 'ociserve_http.dart';
 import 'ociserve_http_factory.dart';
+import 'ociserve_step_up.dart';
 
 class OciServeTokens {
   const OciServeTokens({
@@ -45,10 +46,15 @@ class ExternalOciServeBrowserLauncher implements OciServeBrowserLauncher {
 }
 
 abstract class OciServeAuthenticator {
+  /// Meldt interactief aan in de systeembrowser. Met [stepUp] vraagt de
+  /// aanmelding om wat een organisatie eist (RFC 9470): de gevraagde `acr` en
+  /// een maximale leeftijd van de aanmelding, zodat de provider de bestaande
+  /// browsersessie niet zomaar hergebruikt.
   Future<OciServeTokens> login(
     OciServeInstallation installation,
-    OciServeOidcConfiguration configuration,
-  );
+    OciServeOidcConfiguration configuration, {
+    OciServeStepUpRequired? stepUp,
+  });
 
   Future<OciServeTokens> refresh(
     OciServeInstallation installation,
@@ -84,15 +90,21 @@ class OciServePkceAuthenticator implements OciServeAuthenticator {
   @override
   Future<OciServeTokens> login(
     OciServeInstallation installation,
-    OciServeOidcConfiguration configuration,
-  ) async {
+    OciServeOidcConfiguration configuration, {
+    OciServeStepUpRequired? stepUp,
+  }) async {
     final client = _client(installation, configuration);
     final receiver = await _receiverFactory();
     final nonce = _randomValue(32);
     final flow = oidc.Flow.authorizationCodeWithPKCE(
       client,
       scopes: const ['openid', 'offline_access'],
-      additionalParameters: {'nonce': nonce},
+      additionalParameters: {
+        'nonce': nonce,
+        if (stepUp != null && stepUp.acrValues.isNotEmpty)
+          'acr_values': stepUp.acrValues.join(' '),
+        if (stepUp?.maxAge case final maxAge?) 'max_age': '${maxAge.inSeconds}',
+      },
     )..redirectUri = receiver.redirectUri;
     try {
       if (!await _browser.open(flow.authenticationUri)) {

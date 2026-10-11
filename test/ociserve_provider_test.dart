@@ -15,6 +15,7 @@ import 'package:ocideck/models/rehearsal.dart';
 import 'package:ocideck/services/ociserve/ociserve_auth.dart';
 import 'package:ocideck/services/ociserve/ociserve_gateway.dart';
 import 'package:ocideck/services/ociserve/ociserve_http.dart';
+import 'package:ocideck/services/ociserve/ociserve_step_up.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/secret_store_provider.dart';
 import 'package:ocideck/services/secret_store.dart';
@@ -49,19 +50,39 @@ class _FakeAuth implements OciServeAuthenticator {
   /// Laat elke refresh met deze fout falen, zoals een afgewezen token.
   Object? refreshError;
 
+  /// Elke stap-omhoog-aanmelding die is gevraagd, met wat ze vroeg.
+  final stepUps = <OciServeStepUpRequired>[];
+
+  /// Houdt een stap-omhoog-aanmelding vast tot de test haar vrijgeeft.
+  Completer<void>? stepUpGate;
+
+  /// Laat een stap-omhoog-aanmelding mislukken, zoals een gesloten browser.
+  Object? stepUpError;
+
   @override
   Future<OciServeTokens> login(
     OciServeInstallation installation,
-    OciServeOidcConfiguration configuration,
-  ) =>
-      loginCompleter?.future ??
-      Future.value(
+    OciServeOidcConfiguration configuration, {
+    OciServeStepUpRequired? stepUp,
+  }) async {
+    if (stepUp != null) {
+      stepUps.add(stepUp);
+      await stepUpGate?.future;
+      final error = stepUpError;
+      if (error != null) throw error;
+      return OciServeTokens(
+        accessToken: 'stepped-up',
+        refreshToken: 'refresh-2',
+        expiresAt: DateTime.now().toUtc().add(const Duration(hours: 1)),
+      );
+    }
+    return loginCompleter?.future ??
         OciServeTokens(
           accessToken: 'access',
           refreshToken: 'refresh',
           expiresAt: DateTime.now().toUtc().add(const Duration(hours: 1)),
-        ),
-      );
+        );
+  }
 
   @override
   Future<OciServeTokens> refresh(
@@ -84,6 +105,83 @@ String _storedLogin() => jsonEncode({
   'client_id': _installation.clientId,
   'token_endpoint': _oidc.tokenEndpoint.toString(),
 });
+
+/// Doet na wat de echte gateway bij een uitdaging doet: een verzoek met het
+/// oude token wordt uitgedaagd, de handler levert een nieuw token en het
+/// verzoek wordt één keer herhaald. Het echte gedrag staat in
+/// `ociserve_step_up_test.dart`; dit toetst de provider daaromheen.
+class _StepUpApi extends _FakeApi implements OciServeStepUpAware {
+  OciServeStepUpHandler? _handler;
+
+  @override
+  set stepUpHandler(OciServeStepUpHandler? handler) => _handler = handler;
+
+  /// Wat de server op elk verzoek met het oude token antwoordt; null: niets.
+  OciServeStepUpRequired? challenge = const OciServeStepUpRequired(
+    acrValues: ['phr'],
+    maxAge: Duration(minutes: 5),
+  );
+
+  /// Houdt een leesverzoek vast, nadat de gateway voor dat verzoek is gemaakt.
+  Completer<void>? feedGate;
+
+  /// Met welk token elk verzoek uiteindelijk werd afgehandeld.
+  final served = <String>[];
+
+  /// Welk account `/me` voor een bepaald token teruggeeft.
+  final accountByToken = <String, OciServeAccount>{};
+
+  @override
+  Future<OciServeAccount> me(String accessToken) async =>
+      accountByToken[accessToken] ?? await super.me(accessToken);
+
+  Future<T> _serve<T>(
+    String token,
+    OciServeStepUpHandler? handler,
+    T value,
+  ) async {
+    final need = challenge;
+    if (token == 'access' && need != null) {
+      if (handler == null) throw need;
+      token = await handler(need);
+    }
+    served.add(token);
+    return value;
+  }
+
+  @override
+  Future<List<OciServeFeedItem>> learningFeed({
+    required String accessToken,
+    required String organizationId,
+  }) async {
+    final handler = _handler; // die van dit verzoek, vóór de eerste await
+    await feedGate?.future;
+    return _serve(accessToken, handler, const <OciServeFeedItem>[]);
+  }
+
+  @override
+  Future<OciServeExamSessionList> examSessions({
+    required String accessToken,
+    required String organizationId,
+  }) async => _serve(
+    accessToken,
+    _handler,
+    OciServeExamSessionList(sessions: const [], serverTime: DateTime.utc(2026)),
+  );
+
+  @override
+  Future<Uint8List> accountAvatar({
+    required String accessToken,
+    required String avatarHash,
+  }) async => _serve(accessToken, _handler, Uint8List(0));
+
+  @override
+  Future<void> closeLessonSession({
+    required String accessToken,
+    required String organizationId,
+    required String sessionId,
+  }) async => _serve(accessToken, _handler, null);
+}
 
 class _FakeApi implements OciServeApi {
   // De provider oefent geen intake-routes; alles wat deze fake niet
@@ -1638,5 +1736,210 @@ void main() {
       expect(submitted.id, 'attempt');
       expect(api.lastIdempotencyKey, 'key-submit');
     });
+  });
+
+  group('a server challenge for a stronger or more recent sign-in', () {
+    late _StepUpApi stepApi;
+    late _FakeAuth auth;
+    late ProviderContainer container;
+    late OciServeNotifier notifier;
+
+    Future<void> signIn([OciServeSettings settings = _settings]) async {
+      stepApi = _StepUpApi();
+      auth = _FakeAuth();
+      container = _container(stepApi, secrets, auth: auth);
+      addTearDown(container.dispose);
+      notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(settings);
+      expect(await notifier.login(), isTrue);
+    }
+
+    test(
+      'starts one sign-in that asks for what the server asked, then serves the call',
+      () async {
+        await signIn();
+
+        await notifier.learningFeed('org');
+
+        expect(auth.stepUps, hasLength(1));
+        expect(auth.stepUps.single.acrValues, ['phr']);
+        expect(auth.stepUps.single.maxAge, const Duration(minutes: 5));
+        expect(stepApi.served, ['stepped-up']);
+        // De nieuwe aanmelding blijft gelden voor wat erna komt.
+        await notifier.learningFeed('org');
+        expect(auth.stepUps, hasLength(1));
+        expect(stepApi.served, ['stepped-up', 'stepped-up']);
+        expect(container.read(ociServeProvider).authenticated, isTrue);
+      },
+    );
+
+    test('keeps the remembered login in step with the new sign-in', () async {
+      await signIn();
+      await notifier.learningFeed('org');
+      expect(
+        await secrets.readOciServeRefreshToken(_settings.baseUrl),
+        contains('"refresh_token":"refresh-2"'),
+      );
+    });
+
+    test('stores nothing when the user chose not to stay signed in', () async {
+      await signIn(_settings.copyWith(rememberLogin: false));
+      await notifier.learningFeed('org');
+      expect(auth.stepUps, hasLength(1));
+      expect(await secrets.readOciServeRefreshToken(_settings.baseUrl), isNull);
+    });
+
+    test('lets simultaneous calls share one sign-in', () async {
+      await signIn();
+      auth.stepUpGate = Completer<void>();
+
+      final calls = Future.wait([
+        notifier.learningFeed('org'),
+        notifier.examSessions('org'),
+      ]);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      expect(auth.stepUps, hasLength(1), reason: 'één browser, niet twee');
+
+      auth.stepUpGate!.complete();
+      await calls;
+      expect(auth.stepUps, hasLength(1));
+      expect(stepApi.served, ['stepped-up', 'stepped-up']);
+    });
+
+    test(
+      'lets a call that was built before the sign-in use its result',
+      () async {
+        await signIn();
+        stepApi.feedGate = Completer<void>();
+        final early = notifier.learningFeed(
+          'org',
+        ); // gebouwd met het oude token
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+
+        await notifier.examSessions('org'); // dit doet de aanmelding
+        expect(auth.stepUps, hasLength(1));
+
+        stepApi.feedGate!
+            .complete(); // nu pas wordt het oude verzoek uitgedaagd
+        await early;
+        expect(auth.stepUps, hasLength(1), reason: 'geen tweede browser');
+        expect(stepApi.served, ['stepped-up', 'stepped-up']);
+      },
+    );
+
+    test(
+      'refuses a sign-in by someone else and keeps the old session',
+      () async {
+        await signIn();
+        stepApi.accountByToken['stepped-up'] = const OciServeAccount(
+          id: 'someone-else',
+          memberships: [OciServeMembership(organizationId: 'org')],
+        );
+
+        await expectLater(
+          notifier.learningFeed('org'),
+          throwsA(
+            isA<OciServeException>().having(
+              (e) => e.code,
+              'code',
+              'step_up_account_mismatch',
+            ),
+          ),
+        );
+
+        // Het token van de ander is nergens terechtgekomen.
+        expect(
+          await secrets.readOciServeRefreshToken(_settings.baseUrl),
+          contains('"refresh_token":"refresh"'),
+        );
+        expect(container.read(ociServeProvider).account?.id, 'user');
+        stepApi.challenge = null;
+        await notifier.learningFeed('org');
+        expect(stepApi.served.last, 'access');
+      },
+    );
+
+    test('is not poisoned by a sign-in that failed', () async {
+      await signIn();
+      auth.stepUpError = const OciServeException('authorization_timeout');
+
+      await expectLater(
+        notifier.learningFeed('org'),
+        throwsA(
+          isA<OciServeException>().having(
+            (e) => e.code,
+            'code',
+            'authorization_timeout',
+          ),
+        ),
+      );
+      expect(container.read(ociServeProvider).authenticated, isTrue);
+
+      auth.stepUpError = null;
+      await notifier.learningFeed('org');
+      expect(
+        auth.stepUps,
+        hasLength(2),
+        reason: 'de tweede poging mag opnieuw',
+      );
+      expect(stepApi.served, ['stepped-up']);
+    });
+
+    test('never opens a browser for work the user did not ask for', () async {
+      await signIn();
+
+      await expectLater(
+        notifier.accountAvatar('hash'),
+        throwsA(isA<OciServeStepUpRequired>()),
+      );
+      expect(auth.stepUps, isEmpty);
+    });
+
+    test('never opens a browser to close a lesson or to sign out', () async {
+      await signIn();
+
+      // Een lessessie sluiten na afloop is geen reden voor een nieuwe login...
+      await notifier.closeLessonSession(_session());
+      expect(auth.stepUps, isEmpty);
+
+      // ...en uitloggen al helemaal niet, ook niet als de server het laatste
+      // sluiten van een open les weigert.
+      notifier.closeLearningTabsLocally = () => [_session()];
+      expect(await notifier.logout(), isTrue);
+      expect(auth.stepUps, isEmpty);
+      expect(container.read(ociServeProvider).authenticated, isFalse);
+    });
+
+    for (final remember in [true, false]) {
+      test('does not bring a session back that was signed out meanwhile '
+          '(stay signed in: $remember)', () async {
+        await signIn(_settings.copyWith(rememberLogin: remember));
+        auth.stepUpGate = Completer<void>();
+
+        final call = expectLater(
+          notifier.learningFeed('org'),
+          throwsA(
+            isA<OciServeException>().having(
+              (e) => e.code,
+              'code',
+              'not_authenticated',
+            ),
+          ),
+        );
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        await notifier.logout();
+        auth.stepUpGate!.complete();
+        await call;
+
+        final state = container.read(ociServeProvider);
+        expect(state.authenticated, isFalse);
+        // Ook het account van de uitgelogde sessie komt niet terug.
+        expect(state.account, isNull);
+        expect(
+          await secrets.readOciServeRefreshToken(_settings.baseUrl),
+          isNull,
+        );
+      });
+    }
   });
 }

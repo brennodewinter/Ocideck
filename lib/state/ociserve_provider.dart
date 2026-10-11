@@ -16,11 +16,13 @@ import '../services/ociserve/ociserve_auth.dart';
 import '../services/ociserve/ociserve_exam_outbox.dart';
 import '../services/ociserve/ociserve_gateway.dart';
 import '../services/ociserve/ociserve_http.dart';
+import '../services/ociserve/ociserve_step_up.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 import 'secret_store_provider.dart';
 
 part 'ociserve_activation.dart';
+part 'ociserve_provider_step_up.dart';
 part 'ociserve_state.dart';
 part 'ociserve_provider_planning.dart';
 part 'ociserve_provider_exams.dart';
@@ -33,8 +35,24 @@ part 'ociserve_provider_intake.dart';
 /// bestandsgrens te houden.
 abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   SecretStore get _secrets => ref.read(secretStoreProvider);
-  OciServeGatewayFactory get _gatewayFactory =>
-      ref.read(ociServeGatewayFactoryProvider);
+
+  /// Elke gateway die hier ontstaat kan een uitdaging van de server om een
+  /// sterkere of recentere aanmelding zelf afhandelen (zie
+  /// [_OciServeStepUpMethods]). De `epoch` is het aantal stap-omhoog-
+  /// aanmeldingen op het moment dat het verzoek werd opgebouwd.
+  OciServeGatewayFactory get _gatewayFactory {
+    final factory = ref.read(ociServeGatewayFactoryProvider);
+    return (settings) {
+      final api = factory(settings);
+      if (api is OciServeStepUpAware) {
+        final epoch = _stepUpEpoch;
+        (api as OciServeStepUpAware).stepUpHandler = (need) =>
+            _handleStepUp(need, epoch);
+      }
+      return api;
+    };
+  }
+
   OciServeAuthenticatorFactory get _authFactory =>
       ref.read(ociServeAuthenticatorFactoryProvider);
 
@@ -46,6 +64,8 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   int? _flushGeneration;
   Future<OciServeTokens>? _refreshInFlight;
   Future<void>? _secretWriteInFlight;
+  int _stepUpEpoch = 0;
+  Future<String>? _stepUpInFlight;
   final Map<String, LearningSessionRef> _activeLessonSessions = {};
 
   /// Lokale cleanup vóór logout en best-effort server-close.
@@ -76,6 +96,10 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     state = OciServeState(settings: settings, status: OciServeStatus.signedOut);
     await _activateSession(settings, generation);
   }
+
+  /// Zie [_OciServeStepUpMethods].
+  Future<String> _handleStepUp(OciServeStepUpRequired need, int epoch);
+  Future<T> _nonInteractive<T>(Future<T> Function() body);
 
   /// Sessie-activering voor "eLearning volgen": bewaarde aanmelding
   /// herstellen of de bereikbaarheid testen — implementatie in
@@ -541,10 +565,12 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         continue;
       }
       try {
-        await _gatewayFactory(settings).closeLessonSession(
-          accessToken: access,
-          organizationId: session.organizationId,
-          sessionId: session.playbackSessionId,
+        await _nonInteractive(
+          () => _gatewayFactory(settings).closeLessonSession(
+            accessToken: access,
+            organizationId: session.organizationId,
+            sessionId: session.playbackSessionId,
+          ),
         );
       } catch (error, stack) {
         logError('OciServe: lessessie sluiten', error.runtimeType, stack);
@@ -562,10 +588,12 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     }
     try {
       final token = access ?? await _accessToken();
-      await _gatewayFactory(state.settings).closeLessonSession(
-        accessToken: token,
-        organizationId: session.organizationId,
-        sessionId: session.playbackSessionId,
+      await _nonInteractive(
+        () => _gatewayFactory(state.settings).closeLessonSession(
+          accessToken: token,
+          organizationId: session.organizationId,
+          sessionId: session.playbackSessionId,
+        ),
       );
     } catch (error, stack) {
       logError('OciServe: lessessie sluiten', error.runtimeType, stack);
@@ -578,18 +606,22 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   }) async {
     _requireMembership(organizationId);
     final access = await _accessToken();
-    return _gatewayFactory(state.settings).courseImage(
-      accessToken: access,
-      organizationId: organizationId,
-      imageHash: imageHash,
+    return _nonInteractive(
+      () => _gatewayFactory(state.settings).courseImage(
+        accessToken: access,
+        organizationId: organizationId,
+        imageHash: imageHash,
+      ),
     );
   }
 
   Future<Uint8List> accountAvatar(String avatarHash) async {
     final access = await _accessToken();
-    return _gatewayFactory(
-      state.settings,
-    ).accountAvatar(accessToken: access, avatarHash: avatarHash);
+    return _nonInteractive(
+      () => _gatewayFactory(
+        state.settings,
+      ).accountAvatar(accessToken: access, avatarHash: avatarHash),
+    );
   }
 
   Future<void> reportPlayback({
@@ -630,7 +662,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     final generation = _generation;
     final running = _flushInFlight;
     if (running != null && _flushGeneration == generation) return running;
-    final future = _flushPendingReports();
+    final future = _nonInteractive(_flushPendingReports);
     _flushInFlight = future;
     _flushGeneration = generation;
     return future.whenComplete(() {
@@ -915,6 +947,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
 class OciServeNotifier extends OciServeNotifierBase
     with
         _OciServeActivationMethods,
+        _OciServeStepUpMethods,
         _OciServePlanningMethods,
         _OciServeExamMethods,
         _OciServeIntakeMethods {}
