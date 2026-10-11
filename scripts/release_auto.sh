@@ -2783,7 +2783,11 @@ assert_nightly_main_gate() {
       jobid="${jobname##*|}"; jobname="${jobname%%|*}"
       [ -n "$jobid" ] \
         && rlog="$(api GET "/actions/jobs/$jobid/logs" 2>/dev/null \
-          | grep -v '^[[:space:]]*$' | tail -n 8)"
+          | awk '
+              !done && /##\[group\].*\(failed\)/ { in_failure=1 }
+              in_failure && !done { print; lines++ }
+              in_failure && (/##\[endgroup\]/ || lines >= 20) { done=1 }
+            ')"
       section "Linux-gate staat rood op de huidige main"
       log "run: ${rurl:-run $found} (commit ${rsha:0:9}, status $rstatus)"
       [ -z "$jobname" ] || log "eerste falende job: $jobname"
