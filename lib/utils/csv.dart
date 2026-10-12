@@ -41,12 +41,20 @@ List<List<String>> parseCsvRows(
   String text, {
   String delimiter = ',',
   bool trimUnquoted = false,
+  void Function(int rows, int columns, int cells)? checkBudget,
 }) {
   final source = text.replaceAll('\r\n', '\n');
   final rows = <List<String>>[];
   var row = <String>[];
   var started = false;
   var i = 0;
+  var cells = 0;
+
+  void addCell(String value) {
+    row.add(value);
+    cells++;
+    checkBudget?.call(rows.length + 1, row.length, cells);
+  }
 
   while (i < source.length) {
     final start = i;
@@ -73,7 +81,7 @@ List<List<String>> parseCsvRows(
           break;
         }
       }
-      row.add(field.toString());
+      addCell(field.toString());
       while (i < source.length && source[i] != delimiter && source[i] != '\n') {
         i++;
       }
@@ -85,7 +93,7 @@ List<List<String>> parseCsvRows(
         end++;
       }
       final raw = source.substring(start, end);
-      row.add(trimUnquoted ? raw.trim() : raw);
+      addCell(trimUnquoted ? raw.trim() : raw);
       i = end;
     }
     started = true;
@@ -103,7 +111,7 @@ List<List<String>> parseCsvRows(
     // uitgegeven, en dan telde die rij één kolom te weinig — waarop
     // `parseClipboardTable` de hele plakactie afkeurde omdat de rijen ongelijk
     // waren.
-    if (!atLineBreak && i >= source.length) row.add('');
+    if (!atLineBreak && i >= source.length) addCell('');
   }
 
   if (started) rows.add(row);

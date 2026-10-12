@@ -63,6 +63,27 @@ void main() {
       final md = convertCsvDetailed(bytes).markdown;
       expect(md, contains('a\\|b'));
     });
+
+    test('een gegolfde CSV blijft binnen het totale celbudget', () {
+      final bytes = utf8.encode('a,b,c\nx\nx\nx\n');
+      final result = importDocumentBytes(
+        bytes,
+        filename: 'tabel.csv',
+        budget: ImportBudget.forTest(maxSheetCells: 8),
+      );
+      expect(result.isSuccess, isFalse);
+      expect(result.failure!.cause, isA<ImportBudgetException>());
+    });
+
+    test('te veel CSV-kolommen stopt tijdens het lezen', () {
+      expect(
+        () => convertCsvDetailed(
+          utf8.encode('a,b,c,d,e\n1,2,3,4,5'),
+          budget: ImportBudget.forTest(maxSheetCols: 4),
+        ),
+        throwsA(isA<ImportBudgetException>()),
+      );
+    });
   });
 
   group('XLSX → Markdown', () {
@@ -150,6 +171,53 @@ void main() {
       );
     });
 
+    test('een extreem XLSX-kolomadres stopt voor het opvullen', () {
+      final bytes = xlsxFixture(
+        sheets: {'Blad1': '<row><c r="ZZZZZZZZ1"><v>1</v></c></row>'},
+      );
+      expect(
+        () => convertXlsxDetailed(
+          bytes,
+          budget: ImportBudget.forTest(maxSheetCols: 4),
+        ),
+        throwsA(isA<ImportBudgetException>()),
+      );
+    });
+
+    test('een brede late XLSX-rij vergroot niet alle eerdere rijen', () {
+      final bytes = xlsxFixture(
+        sheets: {
+          'Blad1':
+              '<row><c r="A1"><v>1</v></c></row>'
+              '<row><c r="A2"><v>2</v></c></row>'
+              '<row><c r="D3"><v>3</v></c></row>',
+        },
+      );
+      expect(
+        () => convertXlsxDetailed(
+          bytes,
+          budget: ImportBudget.forTest(maxSheetCells: 8),
+        ),
+        throwsA(isA<ImportBudgetException>()),
+      );
+    });
+
+    test('lege XLSX-rijen tellen over werkbladen mee', () {
+      final bytes = xlsxFixture(
+        sheets: {
+          'Eerste': '<row/><row/><row/>',
+          'Tweede': '<row/><row/><row/>',
+        },
+      );
+      expect(
+        () => convertXlsxDetailed(
+          bytes,
+          budget: ImportBudget.forTest(maxSheetCells: 5),
+        ),
+        throwsA(isA<ImportBudgetException>()),
+      );
+    });
+
     test('inline strings en booleans', () {
       final bytes = xlsxFixture(
         sheets: {
@@ -233,6 +301,41 @@ void main() {
       final md = convertOdsDetailed(bytes).markdown;
       expect(md, contains('| a |'));
       expect(md, isNot(contains('| | |')));
+    });
+
+    test('een gevulde ODS-herhaling heeft een totaal celplafond', () {
+      final bytes = odsFixture(
+        sheets: {
+          'Blad1':
+              '<table:table-row table:number-rows-repeated="5">'
+              '<table:table-cell table:number-columns-repeated="4">'
+              '<text:p>x</text:p></table:table-cell>'
+              '</table:table-row>',
+        },
+      );
+      expect(
+        () => convertOdsDetailed(
+          bytes,
+          budget: ImportBudget.forTest(maxSheetCells: 16),
+        ),
+        throwsA(isA<ImportBudgetException>()),
+      );
+    });
+
+    test('lege ODS-herhalingen tellen over werkbladen mee', () {
+      final bytes = odsFixture(
+        sheets: {
+          'Eerste': '<table:table-row table:number-rows-repeated="3"/>',
+          'Tweede': '<table:table-row table:number-rows-repeated="3"/>',
+        },
+      );
+      expect(
+        () => convertOdsDetailed(
+          bytes,
+          budget: ImportBudget.forTest(maxSheetCells: 5),
+        ),
+        throwsA(isA<ImportBudgetException>()),
+      );
     });
 
     test('buiten het budget vallende inhoud telt als verlies', () {

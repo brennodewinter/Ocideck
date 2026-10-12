@@ -9,6 +9,7 @@
 library;
 
 import 'document_markdown.dart';
+import 'import_budget.dart';
 
 /// Eén werkblad als los rooster: [name] is de bladnaam uit de bron (leeg bij
 /// CSV, dat geen bladen kent), [rows] de cellen als platte tekst per rij.
@@ -20,16 +21,26 @@ typedef SheetGrid = ({String name, List<List<String>> rows});
 /// Een blad zonder enige niet-lege cel valt weg — een kop boven niets zegt
 /// minder dan de afwezigheid ervan. Bladvormende whitespace blijft wél
 /// binnen het rooster staan zolang die cellen tussen gevulde rijen zitten.
-String spreadsheetToMarkdown(String title, List<SheetGrid> sheets) {
+String spreadsheetToMarkdown(
+  String title,
+  List<SheetGrid> sheets, {
+  ImportBudget budget = ImportBudget.standard,
+}) {
   final buf = StringBuffer();
+  var expandedCells = 0;
   if (title.isNotEmpty) {
     buf
       ..writeln('# ${escapeDocumentMarkdown(title)}')
       ..writeln();
   }
   for (final sheet in sheets) {
-    final rows = _trimmed(sheet.rows);
+    final rows = _trimmed(
+      sheet.rows,
+      budget.maxSheetCells - expandedCells,
+      budget.maxSheetCells,
+    );
     if (rows.isEmpty) continue;
+    expandedCells += rows.length * rows.first.length;
     if (sheet.name.isNotEmpty) {
       buf
         ..writeln('## ${escapeDocumentMarkdown(sheet.name)}')
@@ -45,7 +56,11 @@ String spreadsheetToMarkdown(String title, List<SheetGrid> sheets) {
 
 /// Snijdt lege rijen en kolommen van de randen af en brengt elke rij op de
 /// breedte van de breedste — GFM verlangt een rechthoek.
-List<List<String>> _trimmed(List<List<String>> rows) {
+List<List<String>> _trimmed(
+  List<List<String>> rows,
+  int remainingCells,
+  int maxCells,
+) {
   var end = rows.length;
   while (end > 0 && rows[end - 1].every((c) => c.trim().isEmpty)) {
     end--;
@@ -64,6 +79,9 @@ List<List<String>> _trimmed(List<List<String>> rows) {
       last--;
     }
     if (last > width) width = last;
+  }
+  if (width * used.length > remainingCells) {
+    throw ImportBudgetException('$maxCells tabelcellen');
   }
   return [
     for (final row in used)

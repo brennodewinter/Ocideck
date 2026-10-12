@@ -57,6 +57,7 @@ class ImportBudget {
     this.maxIwaObjects = 500000,
     this.maxSheetRows = 65536,
     this.maxSheetCols = 1024,
+    this.maxSheetCells = 1000000,
     this.maxDuration = const Duration(minutes: 2),
   });
 
@@ -112,6 +113,11 @@ class ImportBudget {
   final int maxSheetRows;
   final int maxSheetCols;
 
+  /// Maximale uitgewerkte tabelcellen per document; ook elke opgeslagen lege
+  /// rij telt als één eenheid. Rijen en kolommen apart laten anders een enorm
+  /// product of vele lege werkbladen toe.
+  final int maxSheetCells;
+
   /// Maximale wandkloktijd voor één import. De worker toetst dit binnen zijn
   /// eigen isolate bij elke werkeenheid (na het uitpakken, na het parsen, per
   /// dia); een overschrijding eindigt de import als
@@ -143,6 +149,7 @@ class ImportBudget {
     int maxIwaObjects = 16,
     int maxSheetRows = 8,
     int maxSheetCols = 4,
+    int maxSheetCells = 32,
     Duration maxDuration = const Duration(minutes: 2),
   }) => ImportBudget(
     maxSourceBytes: maxSourceBytes,
@@ -156,6 +163,7 @@ class ImportBudget {
     maxIwaObjects: maxIwaObjects,
     maxSheetRows: maxSheetRows,
     maxSheetCols: maxSheetCols,
+    maxSheetCells: maxSheetCells,
     maxDuration: maxDuration,
   );
 }

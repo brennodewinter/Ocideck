@@ -115,7 +115,11 @@ DocumentImportResult importDocumentBytes(
         title: title,
         budget: budget,
       ),
-      DocumentImportFormat.csv => convertCsvDetailed(bytes, title: title),
+      DocumentImportFormat.csv => convertCsvDetailed(
+        bytes,
+        title: title,
+        budget: budget,
+      ),
     };
     final materialized = _materializeImages(conversion);
     // Fail-closed: de importer produceert zelf Markdown, maar de brontekst

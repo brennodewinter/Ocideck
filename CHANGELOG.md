@@ -10,6 +10,10 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- **Spreadsheet-import begrenst nu het totale tabelrooster.** CSV, XLSX en
+  ODS stoppen met een leesbare limietmelding als kolomgaten, ongelijke rijen,
+  herhalingen of vele lege werkbladen te veel geheugen zouden vragen. Het
+  bronbestand blijft ongemoeid; gewone kleine tabellen werken zoals voorheen.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of

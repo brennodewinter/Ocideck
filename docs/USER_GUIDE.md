@@ -5127,6 +5127,11 @@ formatting have no Markdown shape and are reported in the *not taken along*
 count rather than dropped silently. A spreadsheet dropped on the window takes
 the same route, and a spreadsheet picked via **Openen** gets a snackbar
 offering the import instead of a dead end.
+The import accepts up to 65,536 rows and 1,024 columns per worksheet and
+one million table cells in total. A larger sheet is refused with a limit
+message, except that ODS row and column repetitions above the per-sheet
+limits are truncated; omitted content is reported as not taken along. The
+original file is untouched.
 
 **Taking the house style along.** Since 2026-09-19 (#2119) the import also reads
 what the document carries as house style, and when it finds anything, one
