@@ -119,6 +119,8 @@ class MarkdownSafetyScanner {
     final seen = <String>{};
 
     void run(String text) {
+      final newlinePositions = _newlinePositions(text);
+      final tagEnds = _tagEnds(text);
       for (final rule in _rules) {
         for (final m in rule.pattern.allMatches(text)) {
           // OciDeck serialises YouTube/Vimeo video slides as
@@ -126,13 +128,13 @@ class MarkdownSafetyScanner {
           // the app's own, host-restricted output, so re-opening a deck the app
           // just saved must not fail the gate. Any *other* danger inside the
           // same tag (an `on…=` handler, a `javascript:` src) is still caught by
-          // its own rule, so this exception is safe.
+          // its own rule or rejected by the whitelist, so this exception is safe.
           if (rule.kind == MarkdownThreat.embeddedContent &&
-              _isSafeOcideckEmbed(text, m.start)) {
+              _isSafeOcideckEmbed(text, m.start, tagEnds)) {
             continue;
           }
-          final line = _lineAt(text, m.start);
-          final evidence = _snippet(text, m.start);
+          final line = _lineAt(m.start, newlinePositions);
+          final evidence = _snippet(text, m.start, newlinePositions);
           // Dedup on (kind, line, evidence) so the raw and normalized passes
           // don't double-report the same spot.
           if (seen.add('${rule.kind.name}|$line|$evidence')) {
@@ -171,33 +173,100 @@ class MarkdownSafetyScanner {
   /// True when the `<iframe>` starting at [tagStart] is OciDeck's own
   /// `class="ocideck-embed"` video embed pointing at an allowed host. Only the
   /// tag itself (up to the first `>`) is inspected.
-  static bool _isSafeOcideckEmbed(String text, int tagStart) {
-    var end = text.indexOf('>', tagStart);
-    if (end == -1) end = text.length;
+  static bool _isSafeOcideckEmbed(
+    String text,
+    int tagStart,
+    Map<int, int> tagEnds,
+  ) {
+    final end = tagEnds[tagStart];
+    if (end == null) return false;
+    // shortcut: 8192-byte tag cap, increase only if generated embeds require larger tags.
+    if (end - tagStart > 8192) return false;
     final tag = text.substring(tagStart, end);
     if (!RegExp(r'<\s*iframe\b', caseSensitive: false).hasMatch(tag)) {
       return false; // object/embed/applet are never whitelisted
     }
     if (!tag.contains('class="ocideck-embed"')) return false;
+    if (RegExp(r'[\s/]on[a-z]+\s*=', caseSensitive: false).hasMatch(tag)) {
+      return false;
+    }
     return _safeEmbedSrc.hasMatch(tag);
   }
 
-  static int _lineAt(String text, int index) {
-    var line = 1;
-    final end = index.clamp(0, text.length);
-    for (var i = 0; i < end; i++) {
-      if (text.codeUnitAt(i) == 0x0A) line++;
+  static List<int> _positionsOf(String text, int codeUnit) {
+    final positions = <int>[];
+    for (var i = 0; i < text.length; i++) {
+      if (text.codeUnitAt(i) == codeUnit) positions.add(i);
     }
-    return line;
+    return positions;
   }
 
-  static String _snippet(String text, int start) {
+  static List<int> _newlinePositions(String text) => _positionsOf(text, 0x0A);
+
+  static Map<int, int> _tagEnds(String text) {
+    final ends = <int, int>{};
+    int? start;
+    int? quote;
+    var malformed = false;
+    for (var i = 0; i < text.length; i++) {
+      final code = text.codeUnitAt(i);
+      if (start == null) {
+        if (code == 0x3C) start = i;
+        continue;
+      }
+      if (quote != null) {
+        if (code == quote) {
+          quote = null;
+        } else if (code == 0x3E) {
+          malformed = true;
+        }
+      } else if (code == 0x22 || code == 0x27) {
+        quote = code;
+      } else if (code == 0x3E) {
+        if (!malformed) ends[start] = i;
+        start = null;
+        quote = null;
+        malformed = false;
+      }
+    }
+    return ends;
+  }
+
+  static int? _nextPosition(List<int> positions, int index) {
+    var low = 0;
+    var high = positions.length;
+    while (low < high) {
+      final middle = (low + high) >> 1;
+      if (positions[middle] < index) {
+        low = middle + 1;
+      } else {
+        high = middle;
+      }
+    }
+    return low < positions.length ? positions[low] : null;
+  }
+
+  static int _lineAt(int index, List<int> newlinePositions) {
+    var low = 0;
+    var high = newlinePositions.length;
+    while (low < high) {
+      final middle = (low + high) >> 1;
+      if (newlinePositions[middle] < index) {
+        low = middle + 1;
+      } else {
+        high = middle;
+      }
+    }
+    return low + 1;
+  }
+
+  static String _snippet(String text, int start, List<int> newlinePositions) {
     var end = start + 80;
     if (end > text.length) end = text.length;
-    final nl = text.indexOf('\n', start);
-    if (nl != -1 && nl < end) end = nl;
+    final nl = _nextPosition(newlinePositions, start);
+    if (nl != null && nl < end) end = nl;
     var s = text.substring(start, end).replaceAll(RegExp(r'\s+'), ' ').trim();
-    final truncated = end < text.length && (nl == -1 || nl > end);
+    final truncated = end < text.length && (nl == null || nl > end);
     if (truncated) s = '$s…';
     return s;
   }
@@ -210,6 +279,8 @@ class MarkdownSafetyScanner {
       final hex = m.group(1)!.isNotEmpty;
       final code = int.tryParse(m.group(2)!, radix: hex ? 16 : 10);
       if (code == null || code < 0 || code > 0x10FFFF) return m.group(0)!;
+      // Keep source line boundaries aligned between the raw and normalized pass.
+      if (code == 0x0A || code == 0x0D) return m.group(0)!;
       try {
         return String.fromCharCode(code);
       } on ArgumentError {
