@@ -391,6 +391,10 @@ saved version stays retrievable, which a plain folder cannot give you.
   paths where OciDeck writes or deletes files. Replace a link with an ordinary
   file inside the repository before continuing; links to another location
   inside the same repository are rejected too.
+- **Images in a Git deck:** images already stored as repository assets travel
+  with the deck. New images you select or paste in OciDeck are staged by the
+  app and can be added on save. A local file path written into a Git deck is
+  not read or uploaded; select that image in OciDeck if you want to add it.
 - **Save** with the ordinary save button, or *Save to…* to publish somewhere
   else: the deck is written back as one
   commit — the markdown, its images and media, which go into the shared pool

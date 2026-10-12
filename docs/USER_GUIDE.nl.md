@@ -410,6 +410,12 @@ opgeslagen versie blijft opvraagbaar, wat een gewone map je niet kan geven.
   verbinding. Een al geopend deck moet na wijziging van zijn Git-verbinding
   opnieuw worden geopend; *Opslaan naar…* blijft beschikbaar als je bewust een
   andere bestemming kiest.
+- **Afbeeldingen in een Git-deck:** afbeeldingen die al als repository-asset
+  zijn opgeslagen reizen met het deck mee. Nieuwe afbeeldingen die je in
+  OciDeck kiest of plakt, worden door de app klaargezet en kunnen bij opslaan
+  worden toegevoegd. Een lokaal bestandspad dat in een Git-deck staat, wordt
+  niet gelezen of geüpload; kies de afbeelding in OciDeck als je haar wilt
+  toevoegen.
 - **Openen** via het `…`-menu (*Openen vanuit…*, dan de repository kiezen): het
   deck wordt opgehaald, gecontroleerd door dezelfde veiligheidsscan als elk ander
   deck, en geopend. Een repository is niet-vertrouwde invoer — dat het van je eigen

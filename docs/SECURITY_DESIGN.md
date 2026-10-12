@@ -360,6 +360,10 @@ functions in `lib/utils/project_path.dart`:
   outside — a check the lexical `p.isWithin` alone cannot make.
 - The distinction between trusted (app-config, e.g. the style-profile logo) and
   editor-permissive resolvers is explicit in the API.
+- A Git deck has no local project folder. When saving it, the asset resolver
+  accepts in-memory media and files inside OciDeck's staging folder; it checks
+  the real path so a staged symlink cannot reach outside. An arbitrary local
+  path from repository content is not read into the asset pool.
 
 ## 5. HTML export sanitization
 

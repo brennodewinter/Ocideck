@@ -22,6 +22,10 @@ All notable changes to OciDeck are documented in this file.
   op een voorbereide tijdelijke bestandsnaam geen ander bestand overschrijft.
   Zet zulke links om naar gewone bestanden binnen de repository voordat je
   verderwerkt.
+- **Git-decks nemen geen willekeurige lokale bestanden meer op als asset.**
+  Bij het opslaan worden alleen bestaande repository-assets en door OciDeck
+  gekozen of geplakte media meegenomen. Een lokaal pad in een Git-deck wordt
+  niet meer gelezen of geüpload.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of
