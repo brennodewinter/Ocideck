@@ -486,6 +486,22 @@ class AppSettings {
     'Cascadia Code',
   ];
 
+  /// Vervangt het gelijknamige profiel in [profiles], of voegt het toe.
+  ///
+  /// Staat buiten [copyWith]: die methode zat op de lengtegrens.
+  List<ThemeProfile> _profilesWith(
+    List<ThemeProfile> profiles,
+    ThemeProfile? replacement,
+  ) {
+    if (replacement == null) return profiles;
+    return [
+      for (final profile in profiles)
+        if (profile.name == replacement.name) replacement else profile,
+      if (!profiles.any((profile) => profile.name == replacement.name))
+        replacement,
+    ];
+  }
+
   AppSettings copyWith({
     String? languageCode,
     List<StorageConnection>? connections,
@@ -545,7 +561,6 @@ class AppSettings {
     bool clearDocumentDefaultStyle = false,
     bool clearDocumentEditorMaxWidth = false,
   }) {
-    final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
       languageCode: languageCode ?? this.languageCode,
       connections: connections ?? this.connections,
@@ -559,17 +574,10 @@ class AppSettings {
       presentationStartDirectory: clearPresentationStartDirectory
           ? null
           : (presentationStartDirectory ?? this.presentationStartDirectory),
-      themeProfiles: themeProfile == null
-          ? nextProfiles
-          : [
-              for (final profile in nextProfiles)
-                if (profile.name == themeProfile.name)
-                  themeProfile
-                else
-                  profile,
-              if (!nextProfiles.any((p) => p.name == themeProfile.name))
-                themeProfile,
-            ],
+      themeProfiles: _profilesWith(
+        themeProfiles ?? this.themeProfiles,
+        themeProfile,
+      ),
       selectedThemeProfileName:
           selectedThemeProfileName ??
           themeProfile?.name ??
