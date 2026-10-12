@@ -69,8 +69,9 @@ class _VideoPreviewState extends State<_VideoPreview>
         // naast het deck op die server. Same-origin + deckmap-containment zit
         // in de helper; `allowRemoteMedia` staat erbuiten zoals een bestand
         // naast het deck op schijf ook zonder die schakelaar speelt.
-        return _resolvePath(vp, widget.projectPath) ??
-            resolveDeckAssetUrl(vp, DeckAssetScope.read(context));
+        final local = _resolvePath(vp, widget.projectPath);
+        if (local != null || widget.projectPath != null) return local;
+        return resolveDeckAssetUrl(vp, DeckAssetScope.read(context));
       case VideoSourceKind.remoteFile:
         // Live laden alleen als de gebruiker remote media heeft toegestaan én
         // de URL door de SSRF-gate komt; anders placeholder met de URL.

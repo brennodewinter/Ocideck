@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
@@ -180,6 +181,7 @@ class _FakeWebViewWidget extends PlatformWebViewWidget {
 // ── Host + helpers ───────────────────────────────────────────────────────────
 Widget _host(
   Slide slide, {
+  String? projectPath,
   bool enableMedia = true,
   bool autoplayMedia = false,
   bool allowRemoteMedia = false,
@@ -193,6 +195,7 @@ Widget _host(
           height: 360,
           child: SlidePreviewWidget(
             slide: slide,
+            projectPath: projectPath,
             enableMedia: enableMedia,
             autoplayMedia: autoplayMedia,
             allowRemoteMedia: allowRemoteMedia,
@@ -328,6 +331,52 @@ void main() {
     expect(find.byType(VideoPlayer), findsNothing);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('a project symlink outside the deck stays blocked', (
+    tester,
+  ) async {
+    final project = Directory.systemTemp.createTempSync('ocideck_media_');
+    final outside = File('${project.path}_outside.mp4')..writeAsBytesSync([1]);
+    final linked = Link('${project.path}/escape.mp4')..createSync(outside.path);
+    addTearDown(() {
+      linked.deleteSync();
+      project.deleteSync(recursive: true);
+      outside.deleteSync();
+    });
+
+    await tester.pumpWidget(
+      _host(_video(path: 'escape.mp4'), projectPath: project.path),
+    );
+    await settle(tester);
+
+    expect(find.byType(VideoPlayer), findsNothing);
+    expect(find.byIcon(Icons.movie_outlined), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  }, skip: Platform.isWindows);
+
+  testWidgets('an audio symlink outside the deck stays blocked', (
+    tester,
+  ) async {
+    final project = Directory.systemTemp.createTempSync('ocideck_audio_');
+    final outside = File('${project.path}_outside.mp3')..writeAsBytesSync([1]);
+    final linked = Link('${project.path}/escape.mp3')..createSync(outside.path);
+    addTearDown(() {
+      linked.deleteSync();
+      project.deleteSync(recursive: true);
+      outside.deleteSync();
+    });
+
+    await tester.pumpWidget(
+      _host(
+        Slide.create(SlideType.title).copyWith(audioPath: 'escape.mp3'),
+        projectPath: project.path,
+      ),
+    );
+    await settle(tester);
+
+    expect(find.byIcon(Icons.volume_up_outlined), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  }, skip: Platform.isWindows);
 
   testWidgets('re-pumping with a new local path re-initialises the player', (
     tester,
