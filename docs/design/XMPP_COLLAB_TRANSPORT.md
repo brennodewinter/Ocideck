@@ -252,12 +252,20 @@ members-only**) → `publishDeviceKeys` → `distributeEpoch([])` → `sendSnaps
 `CollabSession(isAuthority:true)`. On each **approved** newcomer → `ensureKeyed` sends the
 recipient-blinded `<keyshare>`; an unapproved occupant is **not** keyed (deny-by-default).
 
-Join: join the MUC (unpredictable nick + device presence) → `publishDeviceKeys` → wait. The demux
-pins the authority's device key (signed rot), trial-opens the `<keyshare>` for it, then the snapshot;
-once keyed the baseline opens and `CollabSession(isAuthority:false)` starts. **Two distinct recovery
+Join: obtain and verify the host's device identity and MUC occupant address outside the MUC, pass
+them as `trustedHost` and `trustedHostAddress` to `joinXmppSession`, then join the MUC
+(unpredictable nick + device presence) → `publishDeviceKeys` → wait. The key exchange rejects
+presence that claims the host id from a different address or identity and accepts keyshares only
+from that pinned host; the host installs no inbound keyshares. An installed epoch key cannot be
+replaced by a different key. The guest then opens its own `<keyshare>` and the snapshot; once keyed
+the baseline opens and `CollabSession(isAuthority:false)` starts. **Two distinct recovery
 paths — do not conflate them (NEW-6):** a drop **before keying** holds no epoch key to seal a resync
 with, so it recovers by **re-join + `ensureKeyed`**; a drop **after keying** uses the sealed **§4
 resync**. Both fail closed.
+
+The XMPP launch remains a library seam with no production UI caller. A future UI must provide a
+trusted invitation or fingerprint confirmation, including the host occupant address, before it
+calls `joinXmppSession`; accepting the first device advertised in the MUC would undo the host pin.
 
 Root-scoped, on the same guarded `XmppSession` as the Jitsi call, XMPP-mode only (§1 exclusivity).
 

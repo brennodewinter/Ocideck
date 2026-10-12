@@ -1609,6 +1609,13 @@ const _dutchSourceAddLv = <String, String>{
       'Joprojām ir lokāli Git dati, kas nav saistīti ar pašreizējo savienojumu. Tie netiks nosūtīti automātiski. Saglabā kopiju un izlasi rokasgrāmatā “Veco Git melnrakstu atjaunošana”, pirms dzēs lietotnes datus.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Šīs prezentācijas Git savienojums ir noņemts vai mainīts. Atver prezentāciju vēlreiz vai izvēlies “Saglabāt uz…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Pirms aizvēršanas lejupielādējiet pārbaudes atslēgas. Glabājiet tās pie avota un kopīgojiet tikai ZIP failu.',
+  'Verificatiesleutels downloaden': 'Lejupielādēt pārbaudes atslēgas',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Kopīgojamajā ZIP ir pārskats un rediģējumu manifests. Pēc tam pārbaudes atslēgas lejupielādējiet atsevišķi.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Kopīgojamajā ZIP ir pārskats un rediģējumu manifests bez atslēgām.',
   'Aan selectie toevoegen': 'Pievienot atlasei',
   'Uit selectie halen': 'Izņemt no atlases',
   '{n} dia\'s geselecteerd': '{n} slaidi atlasīti',

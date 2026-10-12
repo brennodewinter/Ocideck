@@ -8,7 +8,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/asset_staging.dart';
 import 'package:ocideck/services/git/asset_pool.dart';
+import 'package:ocideck/services/git/repo_asset_resolver.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/recovery_service.dart';
@@ -108,6 +110,58 @@ void main() {
         deckDir: 'decks/kwartaalcijfers',
         branch: 'main',
       );
+
+  test('remote Git deck cannot publish an arbitrary local image', () async {
+    final temp = Directory.systemTemp.createTempSync('git_asset_escape_');
+    addTearDown(() => temp.deleteSync(recursive: true));
+    final outside = File('${temp.path}/private.png')..writeAsBytesSync(_png);
+    final repo = repoWith(markdown: deckMarkdown([outside.path]));
+    final (_, tabs) = build();
+    await open(tabs, repo);
+
+    final result = await tabs.saveToGit(
+      FakeForge(repo),
+      config: config,
+      deckDir: 'decks/kwartaalcijfers',
+      branch: 'main',
+      message: 'save',
+    );
+
+    expect(result.status, GitSaveStatus.committed);
+    expect(
+      repo.files.containsKey(GitRepoLayout.assetPathOf(_ref(_png))),
+      isFalse,
+    );
+  });
+
+  test('Git asset bytes allow staged and in-memory media', () async {
+    final temp = Directory.systemTemp.createTempSync('git_asset_stage_');
+    addTearDown(() => temp.deleteSync(recursive: true));
+    AssetStaging.overrideRootForTest('${temp.path}/staging');
+    addTearDown(() => AssetStaging.overrideRootForTest(null));
+    final chosen = File('${temp.path}/chosen.png')..writeAsBytesSync(_png);
+    final staged = await AssetStaging.stage(chosen.path, subdir: 'images');
+    expect(staged, isNotNull);
+    final mem = WebAssetStore.put(_png, name: 'in-memory.png');
+    final resolve = repoAssetBytes(null);
+
+    expect(await resolve(staged!), _png);
+    expect(await resolve(mem), _png);
+    expect(await resolve(chosen.path), isNull);
+  });
+
+  test('Git asset bytes refuse a staged symlink escape', () async {
+    final temp = Directory.systemTemp.createTempSync('git_asset_link_');
+    addTearDown(() => temp.deleteSync(recursive: true));
+    AssetStaging.overrideRootForTest('${temp.path}/staging');
+    addTearDown(() => AssetStaging.overrideRootForTest(null));
+    Directory(AssetStaging.rootPath!).createSync();
+    final outside = File('${temp.path}/private.png')..writeAsBytesSync(_png);
+    final linked = Link('${AssetStaging.rootPath}/escape.png')
+      ..createSync(outside.path);
+
+    expect(await repoAssetBytes(null)(linked.path), isNull);
+  }, skip: Platform.isWindows);
 
   test('a pooled image is fetched and the slide points at its bytes', () async {
     final (container, tabs) = build();

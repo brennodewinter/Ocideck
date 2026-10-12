@@ -5,8 +5,9 @@
 /// de tweede en verdere: Chrome vraagt of de site meerdere bestanden mag
 /// downloaden en levert bij weigering stilzwijgend niets. Een export die uit
 /// meer dan één bestand bestaat verloor daar zijn tweede en derde bestand —
-/// een geredigeerd rapport vertrok zonder zijn manifest en sleutels, en de app
-/// meldde "geëxporteerd" (#1902). Daarom gaat zo'n export hier als één ZIP.
+/// een geredigeerd rapport vertrok zonder zijn manifest, en de app meldde
+/// "geëxporteerd" (#1902). Daarom gaat het rapport met het saltvrije manifest
+/// als één ZIP; de auteur downloadt sleutels via een aparte gebruikersklik.
 ///
 /// Wat deze laag niet kan: zien of het bestand werkelijk in de downloadmap
 /// aankwam. Een download-anker meldt niets terug. Het enige eerlijke signaal is

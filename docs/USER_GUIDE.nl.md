@@ -410,10 +410,19 @@ opgeslagen versie blijft opvraagbaar, wat een gewone map je niet kan geven.
   verbinding. Een al geopend deck moet na wijziging van zijn Git-verbinding
   opnieuw worden geopend; *Opslaan naar…* blijft beschikbaar als je bewust een
   andere bestemming kiest.
+- **Afbeeldingen in een Git-deck:** afbeeldingen die al als repository-asset
+  zijn opgeslagen reizen met het deck mee. Nieuwe afbeeldingen die je in
+  OciDeck kiest of plakt, worden door de app klaargezet en kunnen bij opslaan
+  worden toegevoegd. Een lokaal bestandspad dat in een Git-deck staat, wordt
+  niet gelezen of geüpload; kies de afbeelding in OciDeck als je haar wilt
+  toevoegen.
 - **Openen** via het `…`-menu (*Openen vanuit…*, dan de repository kiezen): het
   deck wordt opgehaald, gecontroleerd door dezelfde veiligheidsscan als elk ander
   deck, en geopend. Een repository is niet-vertrouwde invoer — dat het van je eigen
-  forge komt maakt het niet vertrouwd.
+  forge komt maakt het niet vertrouwd. De lokale Git-werkkopie weigert
+  symbolische links in een deck en in paden waar OciDeck schrijft of verwijdert.
+  Zet een gelinkt bestand eerst om naar een gewoon bestand binnen de repository;
+  ook een link naar een andere plek binnen dezelfde repository wordt geweigerd.
 - **Opslaan** met de gewone opslagknop, of *Opslaan naar…* om ergens anders te
   publiceren: het deck wordt teruggeschreven als één commit — de markdown, zijn
   afbeeldingen en media, die precies zo in de gedeelde pool gaan als het openen ze
@@ -3012,13 +3021,14 @@ niet meereizen — zie *De twee manifestbestanden* hieronder.
 
 ### De twee manifestbestanden
 
-Telkens als een export daadwerkelijk iets verwijdert, schrijft OciDeck twee extra
-bestanden in dezelfde map als de export. In de browser is er geen map, dus komen
-het rapport en beide manifestbestanden samen aan in **één ZIP** — genoemd naar de
-export met `.zip` erachter. Dat is geen cosmetische keuze: browsers houden de
-tweede automatische download op rij tegen, en tot dan waren het manifest en de
-sleutels juist de twee die stilzwijgend nooit aankwamen terwijl de app meldde dat
-de export gelukt was. *(Gecorrigeerd 01-09-2026, #1902.)*
+Op desktop schrijft OciDeck twee extra bestanden naast een export die iets
+verwijdert. In de browser bevat de **deelbare ZIP** alleen het rapport en
+`-redactions.json`, zonder salts. Klik daarna in het exportdialoog op
+**Verificatiesleutels downloaden** om `-redaction-keys.json` apart te krijgen.
+Bewaar dit bestand bij de bron voordat je het dialoog sluit: een latere export
+maakt andere salts en kan de sleutels van dit rapport niet herstellen. Controleer
+zelf of beide downloads zijn aangekomen; de browser kan dat niet bevestigen.
+Stuur het sleutelbestand nooit mee en voeg het niet toe aan de deelbare ZIP.
 
 | Bestand | Wat erin zit | Gaat het mee met het rapport? |
 | --- | --- | --- |

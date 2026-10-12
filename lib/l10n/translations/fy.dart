@@ -657,6 +657,13 @@ const _dutchSourceAddFy = {
       'Der binne noch lokale Git-gegevens dy\'t net by in aktuele ferbining hearre. Dy wurde net automatysk ferstjoerd. Bewarje in kopy en lês ‘Alde Git-konsepten weromhelje’ yn de hantlieding foardatst appgegevens wiskest.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'De Git-ferbining fan dizze presintaasje is fuorthelle of feroare. Iepenje de presintaasje opnij of kies ‘Bewarje yn…’.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Download de ferifikaasjekaaien foardatst slútst. Bewarje se by de boarne en diel allinnich it ZIP-bestân.',
+  'Verificatiesleutels downloaden': 'Ferifikaasjekaaien downloade',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'De dielbere ZIP befettet it rapport en it redaksjemanifest. Download dêrnei de ferifikaasjekaaien apart.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'De dielbere ZIP befettet it rapport en it redaksjemanifest sûnder kaaien.',
   'Aan selectie toevoegen': 'Oan seleksje tafoegje',
   'Uit selectie halen': 'Út seleksje helje',
   '{n} dia\'s geselecteerd': '{n} dia\'s selektearre',

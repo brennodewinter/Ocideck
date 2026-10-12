@@ -1631,6 +1631,13 @@ const _dutchSourceAddBg = <String, String>{
       'Все още има локални Git данни, които не принадлежат към текуща връзка. Те няма да бъдат изпратени автоматично. Запазете копие и прочетете „Възстановяване на стари чернови в Git“ в ръководството, преди да изтриете данните на приложението.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Git връзката на тази презентация е премахната или променена. Отворете презентацията отново или изберете „Запазване в…“.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Изтеглете ключовете за проверка, преди да затворите. Съхранявайте ги при източника и споделяйте само ZIP файла.',
+  'Verificatiesleutels downloaden': 'Изтегляне на ключовете за проверка',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP файлът за споделяне съдържа отчета и манифеста на редакциите. След това изтеглете ключовете за проверка отделно.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP файлът за споделяне съдържа отчета и манифеста на редакциите без ключове.',
   'Aan selectie toevoegen': 'Добави към избора',
   'Uit selectie halen': 'Махни от избора',
   '{n} dia\'s geselecteerd': '{n} слайда избрани',

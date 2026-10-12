@@ -657,6 +657,13 @@ const _dutchSourceAddFr = {
       'Des données Git locales qui ne sont associées à aucune connexion actuelle sont encore présentes. Elles ne seront pas envoyées automatiquement. Conservez-en une copie et consultez « Récupérer les anciens brouillons Git » dans le manuel avant d’effacer les données de l’application.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'La connexion Git de cette présentation a été supprimée ou modifiée. Rouvrez la présentation ou choisissez « Enregistrer dans… ».',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Téléchargez les clés de vérification avant de fermer. Conservez-les avec la source et partagez uniquement le fichier ZIP.',
+  'Verificatiesleutels downloaden': 'Télécharger les clés de vérification',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Le ZIP partageable contient le rapport et le manifeste des occultations. Téléchargez ensuite les clés de vérification séparément.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Le ZIP partageable contient le rapport et le manifeste des occultations sans clés.',
   'Aan selectie toevoegen': 'Ajouter à la sélection',
   'Uit selectie halen': 'Retirer de la sélection',
   '{n} dia\'s geselecteerd': '{n} diapositives sélectionnées',

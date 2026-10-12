@@ -3409,11 +3409,13 @@ document properties and the filename only. See
 ## 12. Redaction Manifest Files (Beside an Export)
 
 When an export actually removes something (§3.1a), OciDeck writes two JSON files
-into the same folder as the export. On the web there is no folder: the report and
-both JSON files arrive together in one ZIP named after the export (#1902 — offered
-one by one, the browser stopped everything after the first). They are export
-artefacts, not deck sidecars: nothing reads them back in, and they never appear
-next to the `.md`.
+beside the export on desktop. On the web, the shareable ZIP contains only the
+report and salt-free `-redactions.json`. The author then downloads
+`-redaction-keys.json` with a separate click in the export dialog and keeps it
+with the source. Check that it arrived before closing the dialog: the browser
+cannot confirm completion, and a later export creates different salts. These
+are export artefacts, not deck sidecars: nothing reads them back in, and they
+never appear next to the `.md`.
 
 | File | Contains | Travels with the report |
 | --- | --- | --- |

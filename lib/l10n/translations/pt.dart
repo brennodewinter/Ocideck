@@ -1639,6 +1639,13 @@ const _dutchSourceAddPt = <String, String>{
       'Ainda existem dados Git locais que não pertencem a uma ligação atual. Não serão enviados automaticamente. Guarde uma cópia e leia “Recuperar rascunhos Git antigos” no manual antes de apagar os dados da aplicação.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'A ligação Git desta apresentação foi removida ou alterada. Abra novamente a apresentação ou escolha “Guardar em…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Transfira as chaves de verificação antes de fechar. Guarde-as junto da origem e partilhe apenas o ficheiro ZIP.',
+  'Verificatiesleutels downloaden': 'Transferir chaves de verificação',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'O ZIP partilhável contém o relatório e o manifesto de ocultações. Depois, transfira as chaves de verificação em separado.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'O ZIP partilhável contém o relatório e o manifesto de ocultações sem chaves.',
   'Aan selectie toevoegen': 'Adicionar à seleção',
   'Uit selectie halen': 'Remover da seleção',
   '{n} dia\'s geselecteerd': '{n} diapositivos selecionados',

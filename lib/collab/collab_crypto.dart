@@ -551,6 +551,18 @@ class CollabCrypto {
       wrapAad,
       'bad-wrap',
     );
+    final installed = _epochKeys[wrap.epoch];
+    if (installed != null) {
+      if (installed.length != keyBytes.length) {
+        throw const CollabCryptoException('epoch-key-conflict');
+      }
+      for (var i = 0; i < installed.length; i++) {
+        if (installed[i] != keyBytes[i]) {
+          throw const CollabCryptoException('epoch-key-conflict');
+        }
+      }
+      return; // dezelfde hostshare kan na een reconnect opnieuw aankomen
+    }
     _epochKeys[wrap.epoch] = keyBytes;
     if (_currentEpoch == null || wrap.epoch > _currentEpoch!) {
       _currentEpoch = wrap.epoch;

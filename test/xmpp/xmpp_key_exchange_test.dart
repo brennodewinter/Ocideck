@@ -29,6 +29,33 @@ import 'fake_muc_hub.dart';
 
 void main() {
   group('XmppKeyExchange device-key ingest (signed-rot presence)', () {
+    test(
+      'replayed host presence from another nick cannot pin its address',
+      () async {
+        final env = await _KeyEnv.create();
+        addTearDown(env.dispose);
+        await env.addMember('intruder');
+        env.members['intruder']!.channel.sendStanza(
+          Stanza(
+            kind: StanzaKind.presence,
+            to: env.room,
+            children: [XmppKeyExchange.devicePresenceExtension(env.hostPub)],
+          ),
+        );
+        await env.settle();
+        expect(env.guestDir.resolve('host'), isNull);
+
+        await env.host.publishDeviceKeys();
+        await env.guest.publishDeviceKeys();
+        await env.settle();
+        expect(env.guestDir.addressOf('host'), '${env.room}/host');
+        env.host.approve('guest');
+        await env.host.distributeEpoch([env.guestPub]);
+        await env.settle();
+        expect(env.guestCrypto.currentEpoch, 0);
+      },
+    );
+
     test("two parties publish and ingest each other's device keys", () async {
       final env = await _KeyEnv.create();
       addTearDown(env.dispose);
@@ -223,6 +250,70 @@ void main() {
   });
 
   group('XmppKeyExchange keyshare (recipient-blinded broadcast)', () {
+    test('host refuses an unapproved occupant key for a later epoch', () async {
+      final env = await _KeyEnv.create();
+      addTearDown(env.dispose);
+      await env.host.publishDeviceKeys();
+      await env.host.distributeEpoch([]);
+      await env.addMember('intruder');
+      await env.settle();
+
+      final intruder = env.members['intruder']!;
+      await intruder.crypto.rekey([env.hostPub]);
+      final forged = await intruder.crypto.rekey([env.hostPub]);
+      intruder.channel.sendStanza(
+        Stanza(
+          kind: StanzaKind.message,
+          type: 'groupchat',
+          to: env.room,
+          children: [
+            xmppElement(
+              'keyshare',
+              namespace: OciDeckNamespace.keyshare,
+              text: jsonEncode(forged.wraps.single.toJson()),
+            ),
+          ],
+        ),
+      );
+      await env.settle();
+
+      expect(env.hostCrypto.currentEpoch, 0);
+    });
+
+    test('guest accepts only the trusted host keyshare', () async {
+      final env = await _KeyEnv.create();
+      addTearDown(env.dispose);
+      await env.addMember('intruder');
+      await env.settle();
+
+      final intruder = env.members['intruder']!;
+      final forged = await intruder.crypto.rekey([env.guestPub]);
+      intruder.channel.sendStanza(
+        Stanza(
+          kind: StanzaKind.message,
+          type: 'groupchat',
+          to: env.room,
+          children: [
+            xmppElement(
+              'keyshare',
+              namespace: OciDeckNamespace.keyshare,
+              text: jsonEncode(forged.wraps.single.toJson()),
+            ),
+          ],
+        ),
+      );
+      await env.settle();
+      expect(env.guestCrypto.currentEpoch, isNull);
+
+      await env.host.publishDeviceKeys();
+      await env.guest.publishDeviceKeys();
+      await env.settle();
+      env.host.approve('guest');
+      await env.host.distributeEpoch([env.guestPub]);
+      await env.settle();
+      expect(env.guestCrypto.currentEpoch, 0);
+    });
+
     test('keyshare trial-open works for the intended recipient', () async {
       final env = await _KeyEnv.create();
       addTearDown(env.dispose);
@@ -526,6 +617,8 @@ class _KeyEnv {
       roomJid: room,
       directory: dir,
       ownKeys: pub,
+      trustedHost: hostPub,
+      trustedHostAddress: '$room/host',
     );
     members[nick] = _Member(
       channel: channel,
@@ -582,6 +675,8 @@ class _KeyEnv {
       roomJid: room,
       directory: hostDir,
       ownKeys: hostPub,
+      trustedHost: null,
+      trustedHostAddress: null,
     );
     final guest = XmppKeyExchange(
       stanzaChannel: guestChannel,
@@ -590,6 +685,8 @@ class _KeyEnv {
       roomJid: room,
       directory: guestDir,
       ownKeys: guestPub,
+      trustedHost: hostPub,
+      trustedHostAddress: '$room/host',
     );
 
     XmppTransport? hostTransport;

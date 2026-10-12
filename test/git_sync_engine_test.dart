@@ -283,6 +283,35 @@ void main() {
   });
 
   group('SyncEngine.flush', () {
+    test('een gelinkt concept houdt andere wachtrijdecks niet tegen', () async {
+      await save('# Kwartaalcijfers');
+      final outside = File('${temp.path}.secret')..writeAsStringSync('secret');
+      addTearDown(() => outside.deleteSync());
+      Link(
+        '${temp.path}/decks/kwartaalcijfers/data.json',
+      ).createSync(outside.path);
+      await mirror.writeDeck('decks/tweede', {
+        'decks/tweede/deck.md': _b('# Tweede'),
+      });
+      await outbox.enqueue(
+        const PendingCommit(
+          deckDir: 'decks/tweede',
+          branch: 'main',
+          message: 'Tweede',
+          baseSha: 'commit-main',
+        ),
+      );
+
+      final outcomes = await engineWith(FakeForge(repo)).flush();
+      expect(outcomes.map((outcome) => outcome.status), [
+        SyncStatus.failed,
+        SyncStatus.committed,
+      ]);
+      expect(await outbox.forDeck('decks/kwartaalcijfers'), isNotNull);
+      expect(await outbox.forDeck('decks/tweede'), isNull);
+      expect(outside.readAsStringSync(), 'secret');
+    }, skip: Platform.isWindows);
+
     test(
       'een beschadigde werkkopie wordt een fout, geen stille "niets te doen"',
       () async {

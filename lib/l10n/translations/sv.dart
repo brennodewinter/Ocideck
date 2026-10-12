@@ -1610,6 +1610,13 @@ const _dutchSourceAddSv = <String, String>{
       'Det finns fortfarande lokala Git-data som inte hör till någon aktuell anslutning. De skickas inte automatiskt. Spara en kopia och läs ”Återställ gamla Git-utkast” i handboken innan du raderar appdata.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Git-anslutningen för den här presentationen har tagits bort eller ändrats. Öppna presentationen igen eller välj ”Spara till…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Ladda ned verifieringsnycklarna innan du stänger. Förvara dem med källan och dela endast ZIP-filen.',
+  'Verificatiesleutels downloaden': 'Ladda ned verifieringsnycklar',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Den delbara ZIP-filen innehåller rapporten och redigeringsmanifestet. Ladda sedan ned verifieringsnycklarna separat.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Den delbara ZIP-filen innehåller rapporten och redigeringsmanifestet utan nycklar.',
   'Aan selectie toevoegen': 'Lägg till i urvalet',
   'Uit selectie halen': 'Ta bort från urvalet',
   '{n} dia\'s geselecteerd': '{n} bilder valda',

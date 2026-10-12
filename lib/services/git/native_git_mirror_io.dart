@@ -471,11 +471,14 @@ class _NativeGitMirror implements NativeGitMirror {
       }
     }
 
+    final deckPath = await _containedPath(deckDir);
+    for (final path in repoFiles.keys) {
+      await _containedPath(path);
+    }
+
     // De deckmap in z'n geheel vervangen zodat een verwijderd lid ook echt weg
     // is; daarna de blobs erbij schrijven.
-    final deckAbs = Directory(
-      p.join(_worktree.path, p.joinAll(deckDir.split('/'))),
-    );
+    final deckAbs = Directory(deckPath);
     if (await deckAbs.exists()) await deckAbs.delete(recursive: true);
     await _writeAll(deckMembers);
     await _writeAll(assetMembers);
@@ -603,6 +606,9 @@ class _NativeGitMirror implements NativeGitMirror {
       // de drie `deck.md`'s — dus "wat hij niet noemt, hoort weg" was een
       // belofte die hij niet kon nakomen: het kostte de grafiekdata bij élke
       // merge (#670). Verwijderen gebeurt daarom alleen op verzoek.
+      for (final path in [...resolved.deletes, ...resolved.files.keys]) {
+        await _containedPath(path);
+      }
       await _deleteAll(resolved.deletes);
       await _writeAll(resolved.files);
       await _run(['add', '-A']);
@@ -717,38 +723,37 @@ class _NativeGitMirror implements NativeGitMirror {
   /// telt als gedaan: verwijderen is idempotent, en de aanroeper hoeft niet te
   /// weten wat er al weg was.
   Future<void> _deleteAll(List<String> paths) async {
+    final targets = <String>[];
     for (final path in paths) {
-      final abs = p.normalize(
-        p.join(_worktree.path, p.joinAll(path.split('/'))),
-      );
-      // Zelfde vangnet als bij het schrijven: nooit buiten de werkboom.
-      if (!p.isWithin(_worktree.path, abs)) {
-        throw GitForgeException(
-          GitForgeError.malformed,
-          'Pad valt buiten de werkkopie: $path',
-        );
-      }
+      targets.add(await _containedPath(path));
+    }
+    for (final abs in targets) {
       final file = File(abs);
       if (await file.exists()) await file.delete();
     }
   }
 
   Future<void> _writeAll(Map<String, Uint8List> files) async {
+    final targets = <String, Uint8List>{};
     for (final entry in files.entries) {
-      final abs = p.normalize(
-        p.join(_worktree.path, p.joinAll(entry.key.split('/'))),
-      );
-      // Vangnet: nooit buiten de werkboom schrijven.
-      if (!p.isWithin(_worktree.path, abs)) {
-        throw GitForgeException(
-          GitForgeError.malformed,
-          'Pad valt buiten de werkkopie: ${entry.key}',
-        );
-      }
-      final file = File(abs);
+      targets[await _containedPath(entry.key)] = entry.value;
+    }
+    for (final entry in targets.entries) {
+      final file = File(entry.key);
       await file.parent.create(recursive: true);
       await writeBytesAtomic(file, entry.value);
     }
+  }
+
+  Future<String> _containedPath(String path) async {
+    final abs = await containedGitWorktreePath(_worktree, path);
+    if (abs == null) {
+      throw GitForgeException(
+        GitForgeError.malformed,
+        'Pad valt buiten de werkkopie of loopt via een link: $path',
+      );
+    }
+    return abs;
   }
 
   /// Commit met de boodschap uit een tijdelijk bestand, zodat de tekst —

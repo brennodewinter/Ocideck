@@ -117,6 +117,47 @@ theme: ocideck
     expect(origin.baseSha, isNotEmpty); // de clone-HEAD
   });
 
+  test('publiceert geen lokaal bestand uit een Git-deck als asset', () async {
+    final (container, tabs) = build();
+    final outside = File('${temp.path}/private.png')
+      ..writeAsBytesSync([0x89, 0x50, 0x4e, 0x47, 1, 2, 3]);
+    await tabs.openDeckFromGitNative(
+      mirror,
+      FakeForge(FakeRepo(branches: {}, files: {})),
+      config: config,
+      deckDir: deckDir,
+      branch: 'main',
+    );
+    container
+        .read(tabsProvider)
+        .current!
+        .deckNotifier
+        .loadDeck(
+          Deck(
+            title: 'Kwartaalcijfers',
+            slides: [
+              Slide.create(SlideType.image).copyWith(imagePath: outside.path),
+            ],
+          ),
+        );
+
+    final result = await tabs.saveToGitNative(
+      mirror,
+      config: config,
+      deckDir: deckDir,
+      branch: 'main',
+      message: 'bewerk',
+      now: DateTime(2026, 7, 18),
+    );
+
+    expect(result.status, GitSaveStatus.committed);
+    final assets = Directory('${temp.path}/clone/assets');
+    expect(
+      assets.existsSync() ? assets.listSync() : <FileSystemEntity>[],
+      isEmpty,
+    );
+  });
+
   test(
     'opslaan landt op een werkbranch op de origin, niet op main (D3)',
     () async {

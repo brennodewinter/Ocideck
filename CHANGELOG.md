@@ -14,6 +14,24 @@ All notable changes to OciDeck are documented in this file.
   ODS stoppen met een leesbare limietmelding als kolomgaten, ongelijke rijen,
   herhalingen of vele lege werkbladen te veel geheugen zouden vragen. Het
   bronbestand blijft ongemoeid; gewone kleine tabellen werken zoals voorheen.
+- **Security: Git-werkkopieën volgen geen symbolische links buiten hun map.**
+  Lezen, opslaan en verwijderen weigeren een deck of assetpad dat via een
+  symbolische link loopt. Zo kan een repository geen lokaal bestand in een deck
+  opnemen of een schrijf- of verwijderactie buiten de kloon sturen. Tijdelijke
+  bestanden bij atomair opslaan krijgen een onvoorspelbare naam, zodat een link
+  op een voorbereide tijdelijke bestandsnaam geen ander bestand overschrijft.
+  Zet zulke links om naar gewone bestanden binnen de repository voordat je
+  verderwerkt.
+- **Git-decks nemen geen willekeurige lokale bestanden meer op als asset.**
+  Bij het opslaan worden alleen bestaande repository-assets en door OciDeck
+  gekozen of geplakte media meegenomen. Een lokaal pad in een Git-deck wordt
+  niet meer gelezen of geüpload.
+- **De optionele XMPP-sleuteluitwisseling vertrouwt alleen de vooraf bekende host.**
+  Een deelnemer moet diens apparaatidentiteit en kameradres via een afzonderlijk
+  geverifieerde uitnodiging aanleveren. De host neemt geen inkomende
+  sessiesleutels aan; een eenmaal geïnstalleerde epoch-sleutel kan niet door
+  een andere sleutel worden vervangen. Deze XMPP-startfunctie heeft nog geen
+  aanroep vanuit de productie-interface.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of
@@ -21,6 +39,11 @@ All notable changes to OciDeck are documented in this file.
   Oude offline concepten blijven bewaard voor handmatig herstel; het
   Git-paneel waarschuwt als ze aanwezig zijn. Een open deck wordt niet
   stilzwijgend naar een later gewijzigde verbinding opgeslagen.
+- **Een geredigeerde browserexport houdt verificatiesleutels apart.** De
+  deelbare ZIP bevat het rapport en alleen het redactiemanifest zonder salts.
+  Download de auteursleutels daarna met de aparte knop in het exportdialoog en
+  bewaar ze bij de bron. Controleer zelf of de download is aangekomen voordat
+  je het dialoog sluit; de browser kan dat niet bevestigen.
 - **eLearning vraagt opnieuw om aanmelding als de organisatie dat eist.** Een
   organisatie kan een recente of sterkere aanmelding verplichten (OciServe
   antwoordt dan met een RFC 9470-uitdaging). OciDeck opent dan nog één keer de

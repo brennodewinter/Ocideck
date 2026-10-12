@@ -2519,6 +2519,13 @@ const _dutchSourceAddTr = <String, String>{
       'Geçerli bir bağlantıyla ilişkili olmayan yerel Git verileri hâlâ var. Bunlar otomatik olarak gönderilmez. Bir kopyasını saklayın ve uygulama verilerini silmeden önce kılavuzdaki “Eski Git taslaklarını kurtarma” bölümünü okuyun.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Bu sununun Git bağlantısı kaldırıldı veya değiştirildi. Sunuyu yeniden açın ya da “Şuraya kaydet…” seçeneğini belirleyin.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Kapatmadan önce doğrulama anahtarlarını indirin. Bunları kaynakla birlikte saklayın ve yalnızca ZIP dosyasını paylaşın.',
+  'Verificatiesleutels downloaden': 'Doğrulama anahtarlarını indir',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Paylaşılabilir ZIP, raporu ve redaksiyon bildirimini içerir. Ardından doğrulama anahtarlarını ayrı olarak indirin.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Paylaşılabilir ZIP, raporu ve redaksiyon bildirimini anahtarlar olmadan içerir.',
   'Aan selectie toevoegen': 'Seçime ekle',
   'Uit selectie halen': 'Seçimden kaldır',
   '{n} dia\'s geselecteerd': '{n} slayt seçildi',

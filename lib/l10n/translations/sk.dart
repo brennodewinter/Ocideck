@@ -1617,6 +1617,13 @@ const _dutchSourceAddSk = <String, String>{
       'Stále existujú miestne údaje Git, ktoré nepatria k žiadnemu aktuálnemu pripojeniu. Automaticky sa neodošlú. Uložte si kópiu a pred vymazaním údajov aplikácie si v príručke prečítajte „Obnovenie starých konceptov Git“.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Pripojenie Git tejto prezentácie bolo odstránené alebo zmenené. Znovu otvorte prezentáciu alebo vyberte „Uložiť do…“.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Pred zatvorením si stiahnite overovacie kľúče. Uložte ich k zdroju a zdieľajte iba súbor ZIP.',
+  'Verificatiesleutels downloaden': 'Stiahnuť overovacie kľúče',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP určený na zdieľanie obsahuje správu a manifest redakcií. Overovacie kľúče si potom stiahnite osobitne.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP určený na zdieľanie obsahuje správu a manifest redakcií bez kľúčov.',
   'Aan selectie toevoegen': 'Pridať do výberu',
   'Uit selectie halen': 'Odobrať z výberu',
   '{n} dia\'s geselecteerd': '{n} snímok vybraných',

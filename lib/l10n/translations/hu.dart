@@ -1613,6 +1613,13 @@ const _dutchSourceAddHu = <String, String>{
       'Még vannak olyan helyi Git-adatok, amelyek nem tartoznak aktuális kapcsolathoz. Ezek nem lesznek automatikusan elküldve. Mentsen róluk egy másolatot, és az alkalmazás adatainak törlése előtt olvassa el a kézikönyv „Régi Git-vázlatok visszaállítása” című részét.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'A bemutató Git-kapcsolatát eltávolították vagy módosították. Nyissa meg újra a bemutatót, vagy válassza a „Mentés ide…” lehetőséget.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Bezárás előtt töltse le az ellenőrzőkulcsokat. Tartsa őket a forrásnál, és csak a ZIP-fájlt ossza meg.',
+  'Verificatiesleutels downloaden': 'Ellenőrzőkulcsok letöltése',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'A megosztható ZIP tartalmazza a jelentést és a kitakarási jegyzéket. Ezután külön töltse le az ellenőrzőkulcsokat.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'A megosztható ZIP tartalmazza a jelentést és a kitakarási jegyzéket, kulcsok nélkül.',
   'Aan selectie toevoegen': 'Hozzáadás a kijelöléshez',
   'Uit selectie halen': 'Eltávolítás a kijelölésből',
   '{n} dia\'s geselecteerd': '{n} dia kijelölve',

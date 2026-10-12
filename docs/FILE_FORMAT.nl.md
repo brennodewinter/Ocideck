@@ -3385,12 +3385,14 @@ in de documenteigenschappen en de bestandsnaam. Zie
 
 ## 12. Redactie-manifestbestanden (naast een export)
 
-Wanneer een export daadwerkelijk iets verwijdert (§3.1a), schrijft OciDeck twee
-JSON-bestanden in dezelfde map als de export. Op het web is er geen map: het
-rapport en beide JSON-bestanden komen samen aan in één ZIP, genoemd naar de
-export (#1902 — één voor één aangeboden hield de browser alles ná de eerste
-tegen). Het zijn exportartefacten, geen deck-sidecars: niets leest ze weer in, en
-ze verschijnen nooit naast de `.md`.
+Wanneer een export daadwerkelijk iets verwijdert (§3.1a), schrijft OciDeck op
+desktop twee JSON-bestanden in dezelfde map als de export. Op het web bevat de
+deelbare ZIP alleen het rapport en het saltvrije `-redactions.json`. De auteur
+downloadt `-redaction-keys.json` daarna met een aparte klik in het exportdialoog
+en bewaart het bij de bron. Controleer of deze download is aangekomen voordat je
+het dialoog sluit: de browser kan dat niet bevestigen en een latere export maakt
+andere salts. Het zijn exportartefacten, geen deck-sidecars: niets leest ze weer
+in, en ze verschijnen nooit naast de `.md`.
 
 | Bestand | Bevat | Reist mee met het rapport |
 | --- | --- | --- |

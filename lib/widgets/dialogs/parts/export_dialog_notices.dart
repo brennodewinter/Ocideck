@@ -16,7 +16,7 @@ extension _ExportDialogNotices on _ExportDialogState {
   /// De twee bestanden die naast de export komen te staan, bij naam.
   ///
   /// Dit stond nergens. OciDeck schreef `…-redaction-keys.json` in dezelfde map
-  /// als het rapport — op web in dezelfde downloadmap — zónder er iets over te
+  /// als het rapport — op web nu via een aparte klik — zónder er iets over te
   /// zeggen: geen tekst in de interface, geen regel in de handleiding. Met de
   /// salts uit dat bestand is elk weggelakt BSN in seconden terug te rekenen,
   /// dus wie het per ongeluk meestuurt, heft zijn eigen redactie op. Een
@@ -35,9 +35,17 @@ extension _ExportDialogNotices on _ExportDialogState {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.d(
-              'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.',
-            ),
+            deliversByDownload
+                ? (_bundle.manifest.carriesSalts
+                      ? l10n.d(
+                          'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.',
+                        )
+                      : l10n.d(
+                          'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.',
+                        ))
+                : l10n.d(
+                    'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.',
+                  ),
             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 4),

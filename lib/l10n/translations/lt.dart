@@ -1618,6 +1618,13 @@ const _dutchSourceAddLt = <String, String>{
       'Vis dar yra vietinių „Git“ duomenų, nesusietų su jokiu dabartiniu ryšiu. Jie nebus siunčiami automatiškai. Išsaugokite kopiją ir prieš trindami programos duomenis perskaitykite vadovo skyrių „Senų „Git“ juodraščių atkūrimas“.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Šio pristatymo „Git“ ryšys pašalintas arba pakeistas. Atidarykite pristatymą iš naujo arba pasirinkite „Įrašyti į…“.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Prieš uždarydami atsisiųskite tikrinimo raktus. Laikykite juos prie šaltinio ir bendrinkite tik ZIP failą.',
+  'Verificatiesleutels downloaden': 'Atsisiųsti tikrinimo raktus',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Bendrinamame ZIP yra ataskaita ir redagavimo manifestas. Po to tikrinimo raktus atsisiųskite atskirai.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Bendrinamame ZIP yra ataskaita ir redagavimo manifestas be raktų.',
   'Aan selectie toevoegen': 'Pridėti prie žymėjimo',
   'Uit selectie halen': 'Pašalinti iš žymėjimo',
   '{n} dia\'s geselecteerd': 'Pasirinkta {n} skaidrių',

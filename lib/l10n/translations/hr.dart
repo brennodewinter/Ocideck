@@ -1615,6 +1615,13 @@ const _dutchSourceAddHr = <String, String>{
       'Još postoje lokalni podaci Git koji nisu povezani s trenutačnom vezom. Neće se automatski poslati. Sačuvajte kopiju i pročitajte „Vraćanje starih Git skica” u priručniku prije brisanja podataka aplikacije.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Git veza ove prezentacije uklonjena je ili promijenjena. Ponovno otvorite prezentaciju ili odaberite „Spremi u…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Preuzmite ključeve za provjeru prije zatvaranja. Čuvajte ih uz izvor i dijelite samo ZIP datoteku.',
+  'Verificatiesleutels downloaden': 'Preuzmi ključeve za provjeru',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'ZIP za dijeljenje sadrži izvješće i manifest redakcije. Zatim zasebno preuzmite ključeve za provjeru.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'ZIP za dijeljenje sadrži izvješće i manifest redakcije bez ključeva.',
   'Aan selectie toevoegen': 'Dodaj u odabir',
   'Uit selectie halen': 'Ukloni iz odabira',
   '{n} dia\'s geselecteerd': 'Odabrano {n} slajdova',

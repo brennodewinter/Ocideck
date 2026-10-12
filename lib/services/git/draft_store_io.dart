@@ -15,6 +15,37 @@ import 'draft_store.dart';
 DraftStore createDraftStore({String scope = ''}) =>
     FileDraftStore(scope: scope);
 
+/// Repo-paden mogen ook via bestaande symlinks niet buiten de werkkopie komen.
+/// Ontbrekende segmenten zijn toegestaan voor nieuwe bestanden en mappen.
+Future<String?> containedGitWorktreePath(
+  Directory root,
+  String repoPath,
+) async {
+  if (!GitRepoLayout.isSafeRepoPath(repoPath)) return null;
+  final base = p.absolute(root.path);
+  final abs = p.normalize(p.join(base, p.joinAll(repoPath.split('/'))));
+  if (!p.isWithin(base, abs)) return null;
+  if (await FileSystemEntity.type(base, followLinks: false) ==
+      FileSystemEntityType.link) {
+    return null;
+  }
+  final realBase = await Directory(base).resolveSymbolicLinks();
+  var current = base;
+  for (final segment in p.split(p.relative(abs, from: base))) {
+    current = p.join(current, segment);
+    final type = await FileSystemEntity.type(current, followLinks: false);
+    if (type == FileSystemEntityType.link) {
+      return null;
+    }
+    if (type == FileSystemEntityType.notFound) continue;
+    final real = type == FileSystemEntityType.directory
+        ? await Directory(current).resolveSymbolicLinks()
+        : await File(current).resolveSymbolicLinks();
+    if (!p.isWithin(realBase, real)) return null;
+  }
+  return abs;
+}
+
 class FileDraftStore implements DraftStore {
   /// [scope] is `GitRepoConfig.storageSlug`: de werkkopie van elke repo krijgt
   /// een eigen submap. Zonder dat deelden twee repo's met een gelijknamig deck
@@ -84,11 +115,23 @@ class FileDraftStore implements DraftStore {
   /// wortel zou vallen. Laatste vangnet: de aanroeper heeft al gecontroleerd,
   /// maar hier gaan echte bytes naar een echt bestandssysteem.
   Future<String?> _absolute(String repoPath) async {
-    if (!GitRepoLayout.isSafeRepoPath(repoPath)) return null;
     final base = await _base();
-    final abs = p.normalize(p.join(base.path, repoPath));
-    if (!p.isWithin(base.path, abs)) return null;
-    return abs;
+    return containedGitWorktreePath(base, repoPath);
+  }
+
+  Future<List<FileSystemEntity>> _deckEntries(String deckDir) async {
+    final abs = await _absolute(deckDir);
+    if (abs == null) throw DraftStoreUnsupported('Onveilig pad: $deckDir');
+    final dir = Directory(abs);
+    if (!await dir.exists()) return [];
+    final entries = <FileSystemEntity>[];
+    await for (final entry in dir.list(recursive: true, followLinks: false)) {
+      if (entry is Link) {
+        throw DraftStoreUnsupported('Symbolische link in deck: ${entry.path}');
+      }
+      entries.add(entry);
+    }
+    return entries;
   }
 
   @override
@@ -103,6 +146,7 @@ class FileDraftStore implements DraftStore {
       }
       targets[abs] = entry.value;
     }
+    await _deckEntries(deckDir);
     // Vervang de map in z'n geheel: een lid dat in deze versie niet meer bestaat
     // hoort ook niet meer op schijf te staan, anders zou een verwijderde slide
     // z'n asset laten rondslingeren.
@@ -125,11 +169,7 @@ class FileDraftStore implements DraftStore {
   /// De tegenhanger van het "vervang de map in z'n geheel"-gedrag, maar dan
   /// zonder het gat: de nieuwe versie staat er al voordat hier iets verdwijnt.
   Future<void> _removeStrayMembers(String deckDir, Set<String> keep) async {
-    final abs = await _absolute(deckDir);
-    if (abs == null) return;
-    final dir = Directory(abs);
-    if (!dir.existsSync()) return;
-    for (final entry in dir.listSync(recursive: true)) {
+    for (final entry in await _deckEntries(deckDir)) {
       if (entry is! File) continue;
       if (keep.contains(entry.path)) continue;
       // Een tijdelijk bestand van een schrijfbeurt die nog loopt, laten staan.
@@ -144,14 +184,9 @@ class FileDraftStore implements DraftStore {
 
   @override
   Future<Map<String, Uint8List>> readDeck(String deckDir) async {
-    final abs = await _absolute(deckDir);
-    if (abs == null) return {};
-    final dir = Directory(abs);
-    if (!await dir.exists()) return {};
-
     final base = await _base();
     final out = <String, Uint8List>{};
-    await for (final entity in dir.list(recursive: true)) {
+    for (final entity in await _deckEntries(deckDir)) {
       if (entity is! File) continue;
       final rel = p.relative(entity.path, from: base.path);
       out[p.posix.joinAll(p.split(rel))] = await entity.readAsBytes();
@@ -170,6 +205,7 @@ class FileDraftStore implements DraftStore {
   Future<void> discardDeck(String deckDir) async {
     final abs = await _absolute(deckDir);
     if (abs == null) return;
+    await _deckEntries(deckDir);
     final dir = Directory(abs);
     if (await dir.exists()) await dir.delete(recursive: true);
   }
@@ -177,10 +213,17 @@ class FileDraftStore implements DraftStore {
   @override
   Future<List<String>> deckDirs() async {
     final base = await _base();
-    final decks = Directory(p.join(base.path, GitRepoLayout.decksRoot));
+    final decksPath = await containedGitWorktreePath(
+      base,
+      GitRepoLayout.decksRoot,
+    );
+    if (decksPath == null) {
+      throw const DraftStoreUnsupported('Symbolische link bij deckmappen');
+    }
+    final decks = Directory(decksPath);
     if (!await decks.exists()) return [];
     final out = <String>[];
-    await for (final entity in decks.list()) {
+    await for (final entity in decks.list(followLinks: false)) {
       if (entity is! Directory) continue;
       final name = p.basename(entity.path);
       final dir = GitRepoLayout.deckDir(name);

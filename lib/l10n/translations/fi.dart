@@ -1611,6 +1611,13 @@ const _dutchSourceAddFi = <String, String>{
       'Paikallisia Git-tietoja, jotka eivät kuulu mihinkään nykyiseen yhteyteen, on yhä jäljellä. Niitä ei lähetetä automaattisesti. Säilytä kopio ja lue oppaasta ”Vanhojen Git-luonnosten palauttaminen” ennen sovellustietojen poistamista.',
   'De git-verbinding van dit deck is verwijderd of gewijzigd. Open het deck opnieuw of kies “Opslaan naar…”.':
       'Tämän esityksen Git-yhteys on poistettu tai sitä on muutettu. Avaa esitys uudelleen tai valitse ”Tallenna kohteeseen…”.',
+  'Download de verificatiesleutels voordat je sluit. Bewaar ze bij de bron en deel alleen het ZIP-bestand.':
+      'Lataa vahvistusavaimet ennen sulkemista. Säilytä ne lähteen yhteydessä ja jaa vain ZIP-tiedosto.',
+  'Verificatiesleutels downloaden': 'Lataa vahvistusavaimet',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest. Download de verificatiesleutels daarna apart.':
+      'Jaettava ZIP sisältää raportin ja peittomerkintöjen luettelon. Lataa vahvistusavaimet sen jälkeen erikseen.',
+  'De deelbare ZIP bevat het rapport en het redactiemanifest zonder sleutels.':
+      'Jaettava ZIP sisältää raportin ja peittomerkintöjen luettelon ilman avaimia.',
   'Aan selectie toevoegen': 'Lisää valintaan',
   'Uit selectie halen': 'Poista valinnasta',
   '{n} dia\'s geselecteerd': '{n} dioja valittu',

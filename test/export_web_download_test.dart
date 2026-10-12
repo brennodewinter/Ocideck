@@ -85,33 +85,59 @@ void main() {
     ], redactionManifest: _manifest);
 
     expect(r.success, isTrue, reason: r.error);
-    // Eén download. Drie losse (rapport, commitments, sleutels) waren er twee
-    // te veel: de browser houdt de tweede tegen en de auteur hield een
-    // geredigeerd rapport over zonder iets om de redacties mee na te trekken.
+    // Eén deelbare download: rapport en saltvrije commitments samen.
     expect(calls, hasLength(1));
     expect(calls.single.name, endsWith('.pdf.zip'));
     expect(r.outputPath, calls.single.name);
 
     final zip = ZipDecoder().decodeBytes(calls.single.bytes);
     final names = zip.files.map((f) => f.name).toList();
-    expect(names, hasLength(3));
+    expect(names, hasLength(2));
     expect(names.where((n) => n.endsWith('.pdf')), hasLength(1));
     expect(
       names.where((n) => n.endsWith(kRedactionManifestSuffix)),
       hasLength(1),
     );
-    expect(names.where((n) => n.endsWith(kRedactionKeysSuffix)), hasLength(1));
+    expect(names.where((n) => n.endsWith(kRedactionKeysSuffix)), isEmpty);
 
-    // De commitments reizen zonder salt mee; de sleutels dragen hem wel. Dat
-    // onderscheid moet de zip overleven.
+    // Het meereizende manifest draagt geen salt.
     String memberFor(String suffix) => utf8.decode(
       zip.files.firstWhere((f) => f.name.endsWith(suffix)).content as List<int>,
     );
     expect(memberFor(kRedactionManifestSuffix), isNot(contains('peper')));
-    expect(memberFor(kRedactionKeysSuffix), contains('peper'));
 
     // En er is niets naar schijf geschreven: op web bestaat die map niet.
     expect(tmp.listSync(), isEmpty);
+  });
+
+  test('auteursleutels krijgen een aparte expliciete download', () async {
+    final r = await service.export(deckPath(), ExportFormat.pdf, [
+      _png(),
+    ], redactionManifest: _manifest);
+    expect(r.success, isTrue);
+    expect(calls, hasLength(1));
+
+    final keyName = downloadRedactionKeys(r.outputPath!, _manifest);
+    final reportName = ZipDecoder()
+        .decodeBytes(calls.first.bytes)
+        .files
+        .first
+        .name;
+    expect(
+      keyName,
+      '${p.basenameWithoutExtension(reportName)}$kRedactionKeysSuffix',
+    );
+    expect(calls, hasLength(2));
+    expect(calls.last.name, keyName);
+    expect(utf8.decode(calls.last.bytes), contains('peper'));
+    expect(calls.last.name, isNot(contains('.zip')));
+
+    accept = false;
+    expect(downloadRedactionKeys(r.outputPath!, _manifest), isNull);
+    expect(
+      downloadRedactionKeys(r.outputPath!, _manifest.withoutSalts),
+      isNull,
+    );
   });
 
   test('een export zonder manifest blijft één los bestand', () async {

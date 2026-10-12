@@ -399,9 +399,9 @@ class ExportService {
   }
 
   /// De manifestbestanden voor een geredigeerde export, als (naam, bytes). Eén
-  /// bron voor beide uitgangen: het schijfpad ([_writeRedactionManifest]) en de
-  /// browser-download op web. [reference] is het exportpad of de bestandsnaam;
-  /// alleen de basisnaam (zonder extensie) wordt gebruikt.
+  /// bron voor het schijfpad ([_writeRedactionManifest]) en de saltvrije
+  /// browser-ZIP. [reference] is het exportpad of de bestandsnaam; alleen de
+  /// basisnaam (zonder extensie) wordt gebruikt.
   static List<({String name, Uint8List bytes})> _redactionManifestFiles(
     String reference,
     RedactionManifest manifest,
@@ -426,12 +426,9 @@ class ExportService {
 /// De webaflevering van een export: het bestand zelf plus het redactiemanifest,
 /// als **één** download.
 ///
-/// Het manifest hoort mee. Zonder de commitments (die met het rapport
-/// meereizen) en de verificatiesleutels (die de auteur houdt) is geen enkele
-/// redactie meer na te trekken. Precies dat ging op web mis: elk bestand werd
-/// apart aangeboden, en een browser houdt de tweede download op rij tegen — de
-/// auteur kreeg het geredigeerde rapport, las "geëxporteerd", en had het
-/// manifest niet (#1902).
+/// Het saltvrije manifest hoort mee met het rapport. De sleutels blijven buiten
+/// deze deelbare ZIP en krijgen in het exportdialoog een eigen gebruikersklik.
+/// Een tweede automatische download kan de browser tegenhouden (#1902).
 ///
 /// Top-level en niet in de klasse: dit gebruikt geen enkel veld van de dienst,
 /// en [ExportService.export] zat tegen zijn regelplafond.
@@ -442,9 +439,24 @@ ExportResult _deliverExportDownload(
 ) {
   final delivered = deliverAsDownload([
     (name: fileName, bytes: bytes),
-    ...ExportService._redactionManifestFiles(fileName, redactionManifest),
+    ...ExportService._redactionManifestFiles(
+      fileName,
+      redactionManifest.withoutSalts,
+    ),
   ], bundleName: bundleNameFor(fileName));
   return delivered == null
       ? ExportResult.failed(ExportFailure.downloadNotStarted)
       : ExportResult.ok(delivered);
+}
+
+/// Biedt de auteursleutels pas na een aparte gebruikersklik aan, buiten de
+/// deelbare browser-ZIP. [downloadName] is de eerder aangeboden ZIP-naam.
+String? downloadRedactionKeys(String downloadName, RedactionManifest manifest) {
+  if (!manifest.carriesSalts) return null;
+  final reportName = downloadName.endsWith('.zip')
+      ? downloadName.substring(0, downloadName.length - 4)
+      : downloadName;
+  final keyName =
+      '${p.basenameWithoutExtension(reportName)}$kRedactionKeysSuffix';
+  return deliverTextAsDownload(keyName, manifest.toPrettyJson());
 }
