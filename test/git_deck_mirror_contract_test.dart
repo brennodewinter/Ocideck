@@ -256,6 +256,75 @@ void main() {
     });
   });
 
+  group('FileDraftStore limits', () {
+    test(
+      'refuses an oversized on-disk deck before reading its bytes',
+      () async {
+        final deck = Directory('${temp.path}/decks/a')
+          ..createSync(recursive: true);
+        File('${deck.path}/deck.md').writeAsStringSync('# A');
+
+        final store = FileDraftStore(baseDir: temp, maxPackageBytes: 2);
+        await expectLater(
+          store.readDeck('decks/a'),
+          throwsA(
+            isA<DraftStoreUnsupported>().having(
+              (e) => e.message,
+              'message',
+              contains('Deck is te groot'),
+            ),
+          ),
+        );
+      },
+    );
+
+    test('refuses too many on-disk deck members', () async {
+      final deck = Directory('${temp.path}/decks/a')
+        ..createSync(recursive: true);
+      File('${deck.path}/deck.md').writeAsStringSync('# A');
+      File('${deck.path}/extra.md').writeAsStringSync('x');
+
+      final store = FileDraftStore(baseDir: temp, maxPackageEntries: 1);
+      await expectLater(
+        store.readDeck('decks/a'),
+        throwsA(
+          isA<DraftStoreUnsupported>().having(
+            (e) => e.message,
+            'message',
+            contains('Te veel'),
+          ),
+        ),
+      );
+    });
+
+    test('refuses an oversized write before changing the deck', () async {
+      final store = FileDraftStore(baseDir: temp, maxPackageBytes: 2);
+      await expectLater(
+        store.writeDeck('decks/a', {'decks/a/deck.md': _b('# A')}),
+        throwsA(isA<DraftStoreUnsupported>()),
+      );
+      expect(File('${temp.path}/decks/a/deck.md').existsSync(), isFalse);
+    });
+
+    test('bounds the directory walk, even without files', () async {
+      Directory(
+        '${temp.path}/decks/a/one/two/three',
+      ).createSync(recursive: true);
+
+      final store = FileDraftStore(baseDir: temp, maxPackageEntries: 2);
+      await expectLater(
+        store.readDeck('decks/a'),
+        throwsA(
+          isA<DraftStoreUnsupported>().having(
+            (e) => e.message,
+            'message',
+            contains('Te veel onderdelen'),
+          ),
+        ),
+      );
+    });
+  });
+
   group('FileDraftStore symlink containment', () {
     test(
       'linked deck member cannot read a file outside the worktree',
