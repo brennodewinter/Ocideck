@@ -5,6 +5,8 @@ import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart';
 import '../../services/ai_client_service.dart';
 import '../../services/ai_condense_service.dart';
+import '../../services/privacy/privacy_own_identity.dart';
+import '../../services/privacy/privacy_projection.dart';
 import '../../services/secret_store.dart';
 import '../../state/consent_provider.dart';
 import '../../state/deck_provider.dart';
@@ -66,6 +68,20 @@ class AiCondenseButton extends ConsumerWidget {
       context,
       generate: (mode, style) async {
         final settings = ref.read(settingsProvider).aiSettings;
+        final deck = ref.read(deckProvider).deck;
+        if (deck == null) return null;
+        final slideIndex = deck.slides.indexWhere(
+          (candidate) => candidate.id == slide.id,
+        );
+        if (slideIndex < 0) return null;
+        final projected = PrivacyProjection.forExternalProcessing(
+          deck,
+          disabledRules: ref.read(settingsProvider).privacyDisabledRules,
+          ownIdentity: OwnIdentity.fromLines(
+            ref.read(settingsProvider).privacyOwnIdentity,
+          ),
+        ).deck;
+        final safeSlide = projected.slides[slideIndex];
         final client = AiClientService(
           settings: settings,
           hasOutboundConsent: ref.read(consentProvider).hasAccepted,
@@ -74,7 +90,7 @@ class AiCondenseButton extends ConsumerWidget {
         return AiCondenseService(client).condense(
           mode: mode,
           listStyle: style,
-          sourceText: slide.customMarkdown,
+          sourceText: safeSlide.customMarkdown,
           languageName: languageName,
         );
       },

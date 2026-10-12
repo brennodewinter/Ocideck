@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
@@ -408,7 +410,9 @@ void main() {
       privacy: PrivacyDisposition.redact,
       listStyle: ListStyle.richText,
       imagePath: 'images/portret.png',
-      customMarkdown: 'Zie de foto:\n\n![Het team](images/team.jpg)\n\nEinde.',
+      customMarkdown:
+          'Zie de foto:\n\n![Het team](images/team.jpg)\n\n'
+          '<img src="images/html-team.jpg">\n\nEinde.',
     );
 
     test('een afbeelding in de tekst reist niet mee naar het publiek', () {
@@ -421,6 +425,27 @@ void main() {
       final projected = audience.slides.single;
       expect(projected.imagePath, isEmpty);
       expect(projected.customMarkdown, isNot(contains('images/team.jpg')));
+      expect(projected.customMarkdown, isNot(contains('images/html-team.jpg')));
+      expect(projected.mediaRedacted, isTrue);
+    });
+
+    test('vraagafbeeldingen in JSON reizen niet mee naar het publiek', () {
+      final slide = Slide.create(SlideType.question).copyWith(
+        privacy: PrivacyDisposition.redact,
+        customMarkdown: jsonEncode({
+          'image': 'images/hotspot.jpg',
+          'answers': [
+            {'text': 'Ja', 'image': 'images/ja.jpg'},
+            {'text': 'Nee', 'image': 'images/nee.jpg'},
+          ],
+        }),
+      );
+      final projected = PrivacyProjection.forAudience(
+        Deck(title: 'D', slides: [slide]),
+      ).slides.single;
+      expect(projected.customMarkdown, isNot(contains('images/hotspot.jpg')));
+      expect(projected.customMarkdown, isNot(contains('images/ja.jpg')));
+      expect(projected.customMarkdown, isNot(contains('images/nee.jpg')));
       expect(projected.mediaRedacted, isTrue);
     });
 

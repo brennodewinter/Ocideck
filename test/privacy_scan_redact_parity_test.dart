@@ -61,7 +61,46 @@ final Map<String, Deck Function(Deck)> _deckVelden = {
   'marpBackgroundImage': (d) =>
       d.copyWith(marpStyle: d.marpStyle.copyWith(backgroundImage: _waarde)),
   'standardsUsed': (d) => d.copyWith(standardsUsed: [_waarde]),
-  'toolsUsed': (d) => d.copyWith(toolsUsed: [UsedTool(name: _waarde)]),
+  'toolsUsed': (d) => d.copyWith(
+    toolsUsed: [
+      const UsedTool(
+        name: 'jan.jansen@klant.nl',
+        version: 'jan.jansen@klant.nl',
+        url: 'jan.jansen@klant.nl',
+        description: 'jan.jansen@klant.nl',
+      ),
+    ],
+  ),
+  'toolsUsedVersion': (d) => d.copyWith(
+    toolsUsed: [
+      const UsedTool(
+        name: 'jan.jansen@klant.nl',
+        version: 'jan.jansen@klant.nl',
+        url: 'jan.jansen@klant.nl',
+        description: 'jan.jansen@klant.nl',
+      ),
+    ],
+  ),
+  'toolsUsedUrl': (d) => d.copyWith(
+    toolsUsed: [
+      const UsedTool(
+        name: 'jan.jansen@klant.nl',
+        version: 'jan.jansen@klant.nl',
+        url: 'jan.jansen@klant.nl',
+        description: 'jan.jansen@klant.nl',
+      ),
+    ],
+  ),
+  'toolsUsedDescription': (d) => d.copyWith(
+    toolsUsed: [
+      const UsedTool(
+        name: 'jan.jansen@klant.nl',
+        version: 'jan.jansen@klant.nl',
+        url: 'jan.jansen@klant.nl',
+        description: 'jan.jansen@klant.nl',
+      ),
+    ],
+  ),
   // Additief op wat er al staat: de pariteitstest vult álle velden op één
   // deck, en een copyWith die de hele dispositie vervangt zou het vorige veld
   // stil wegvagen.

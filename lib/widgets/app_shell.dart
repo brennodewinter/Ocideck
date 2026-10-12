@@ -140,6 +140,7 @@ import 'dialogs/slide_diff_dialog.dart';
 import 'dialogs/ai_translate_dialog.dart';
 import 'dialogs/convert_to_document_dialog.dart';
 import 'dialogs/export_dialog.dart';
+import 'dialogs/document_export_dialog.dart';
 import 'dialogs/export_failure_text.dart';
 import 'dialogs/finalize_seal_dialog.dart';
 import 'dialogs/git_search_dialog.dart';

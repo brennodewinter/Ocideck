@@ -99,6 +99,23 @@ typedef _Range = ({int start, int end});
 
 typedef _ProjectedSlides = ({List<Slide> slides, int count, Set<int> shielded});
 
+List<UsedTool> _projectUsedTools(
+  Deck deck,
+  String Function(String, String, [int]) redact,
+) => [
+  for (var i = 0; i < deck.toolsUsed.length; i++)
+    UsedTool(
+      name: redact('toolsUsed', deck.toolsUsed[i].name, i),
+      version: redact('toolsUsedVersion', deck.toolsUsed[i].version, i),
+      url: redact('toolsUsedUrl', deck.toolsUsed[i].url, i),
+      description: redact(
+        'toolsUsedDescription',
+        deck.toolsUsed[i].description,
+        i,
+      ),
+    ),
+];
+
 /// Bouwt een [AudienceDeck] uit een bron-[Deck].
 class PrivacyProjection {
   const PrivacyProjection._();
@@ -276,15 +293,7 @@ class PrivacyProjection {
         for (var i = 0; i < deck.standardsUsed.length; i++)
           deckField('standardsUsed', deck.standardsUsed[i], i),
       ],
-      toolsUsed: [
-        for (var i = 0; i < deck.toolsUsed.length; i++)
-          UsedTool(
-            name: deckField('toolsUsed', deck.toolsUsed[i].name, i),
-            version: deck.toolsUsed[i].version,
-            url: deck.toolsUsed[i].url,
-            description: deck.toolsUsed[i].description,
-          ),
-      ],
+      toolsUsed: _projectUsedTools(deck, deckField),
       // De MIAUW-motiveringen staan in een sidecar naast de .md — buiten het
       // zicht van wie alleen het bestand naleest, en dus ook van elk vangnet
       // dat op platte tekst zoekt. Juist daar staat het vaakst een naam
@@ -519,6 +528,12 @@ class PrivacyProjection {
     // dia gewoon met zijn foto mee naar het scherm en de export — het veld was
     // leeg, de tekst niet.
     final inline = inlineImagePaths(slide.customMarkdown);
+    final questionImages = slide.type == SlideType.question
+        ? slideImageRefs(
+            slide,
+          ).where((ref) => ref.slot == SlideImageSlot.questionImage).toList()
+        : const <SlideImageRef>[];
+    final htmlImages = htmlImagePaths(slide.customMarkdown);
     final marpBackground = slide.marpStyle.backgroundImage.isNotEmpty
         ? slide.marpStyle.backgroundImage
         : deckBackgroundImage;
@@ -530,8 +545,11 @@ class PrivacyProjection {
           slide.audioPath,
         ].where((p) => p.isNotEmpty).length +
         inline.length +
+        questionImages.length +
+        htmlImages.length +
         (marpBackground.isEmpty || marpBackground == 'none' ? 0 : 1);
     if (present == 0) return (slide: slide, count: 0);
+    final rewritten = rewriteSlideImagePaths(slide, (_) => '');
     return (
       slide: slide.copyWith(
         imagePath: '',
@@ -544,8 +562,8 @@ class PrivacyProjection {
         // Het pad eruit, de verwijzing laten staan: `![alt]()` houdt zijn plek
         // in de layout, zodat de tekst niet opschuift alsof er nooit iets stond
         // en de renderer er hetzelfde zwarte vlak van maakt als bij een veld.
-        customMarkdown: rewriteInlineImagePaths(
-          slide.customMarkdown,
+        customMarkdown: rewriteHtmlImagePaths(
+          rewritten.customMarkdown,
           (_) => '',
         ),
         mediaRedacted: true,
