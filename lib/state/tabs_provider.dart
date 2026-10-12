@@ -50,6 +50,7 @@ import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import '../utils/archive_limits.dart';
 import '../utils/project_path.dart';
+import '../utils/bundled_asset.dart';
 import '../utils/utf8_bom.dart';
 import '../utils/zip_encryption.dart';
 import 'deck_provider.dart';

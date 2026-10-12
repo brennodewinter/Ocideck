@@ -172,6 +172,63 @@ void main() {
       expect(theme.accentColor, '#123456');
     });
 
+    test('een OciServe-thema kan geen lokaal bestandspad leveren', () async {
+      final container = _container();
+      const source =
+          '---\nmarp: true\n---\n<!-- ocideck_slide_anchor: slide-1 -->\n# Les\n';
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 7),
+        expiresAt: DateTime.utc(2099),
+      );
+
+      final result = await openLearningPackage(
+        container.read(tabsProvider.notifier),
+        ociServeAesPackage({
+          'deck.md': utf8.encode(source),
+          'theme.json': utf8.encode(
+            jsonEncode({
+              'definition': {
+                'accentColor': '#123456',
+                'logoPath': '/etc/passwd',
+                'logoDarkPath': 'images/dark.png',
+                'brandStripPath': '../strip.png',
+                'documentLogoPath': 'asset:assets/images/librekat-logo.png',
+                'closingSlideEnabled': true,
+                'closingSlideMarkdown': '![privaat](/etc/passwd)',
+              },
+            }),
+          ),
+        }),
+        'les.ocideck',
+        session,
+        password: testOciServePackagePassword,
+        packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+      );
+
+      expect(result, OpenResult.opened);
+      final theme = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState
+          .deck!
+          .themeProfile;
+      expect(theme.accentColor, '#123456');
+      expect(theme.logoPath, isNull);
+      expect(theme.logoDarkPath, isNull);
+      expect(theme.brandStripPath, isNull);
+      expect(theme.documentLogoPath, 'asset:assets/images/librekat-logo.png');
+      expect(theme.closingSlideEnabled, isFalse);
+    });
+
     test('weigert een leerpakket met een onleesbaar server-thema', () async {
       final container = _container();
       const source =
