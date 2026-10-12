@@ -97,6 +97,22 @@ title: Kwartaalcijfers
       );
     });
 
+    test('reports repeated unsafe markup without rescanning the prefix', () {
+      final markdown = List.filled(3000, '<script>x</script>').join('\n');
+      final findings = MarkdownSafetyScanner.scan(markdown);
+      expect(findings, hasLength(3000));
+      expect(findings.first.line, 1);
+      expect(findings.last.line, 3000);
+    });
+
+    test('keeps encoded newlines on their source line', () {
+      final findings = MarkdownSafetyScanner.scan(
+        '&#10;<script>alert(1)</script>',
+      );
+      expect(findings, hasLength(1));
+      expect(findings.single.line, 1);
+    });
+
     test('benign inline HTML like <b> and <div> is allowed', () {
       expect(
         MarkdownSafetyScanner.isSafe('Some **<b>bold</b>** and <div>x</div>'),
@@ -136,6 +152,20 @@ title: Kwartaalcijfers
         const evil =
             '<iframe class="ocideck-embed" onload="alert(1)" '
             'src="https://www.youtube-nocookie.com/embed/x"></iframe>';
+        expect(MarkdownSafetyScanner.isSafe(evil), isFalse);
+      });
+      test('a greater-than sign inside an attribute cannot hide a handler', () {
+        const evil =
+            '<iframe class="ocideck-embed" '
+            'src="https://www.youtube-nocookie.com/embed/x>" '
+            'onload="alert(1)"></iframe>';
+        expect(MarkdownSafetyScanner.isSafe(evil), isFalse);
+      });
+      test('a handler on a later line cannot be whitelisted', () {
+        const evil =
+            '<iframe class="ocideck-embed"\n'
+            'src="https://www.youtube-nocookie.com/embed/x"\n'
+            'onload="alert(1)"></iframe>';
         expect(MarkdownSafetyScanner.isSafe(evil), isFalse);
       });
       test('a plain foreign iframe without the class is still blocked', () {
