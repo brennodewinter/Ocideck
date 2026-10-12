@@ -404,6 +404,8 @@ class _LaunchEnv {
       roomJid: room,
       localDeck: guestLocal,
       ownUserId: '$room/guest',
+      trustedHost: hostPub,
+      trustedHostAddress: '$room/host',
       onReconnected: guestChannel.onReconnected,
     );
 

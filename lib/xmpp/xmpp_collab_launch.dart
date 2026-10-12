@@ -264,6 +264,8 @@ Future<XmppCollabLaunch> hostXmppSession({
     roomJid: roomJid,
     ownUserId: ownUserId,
     onReconnected: null, // authority does not resync-request on reconnect
+    trustedHost: null,
+    trustedHostAddress: null,
   );
   await parts.keyExchange.publishDeviceKeys();
   await parts.keyExchange.distributeEpoch(const []); // epoch 0, owner only
@@ -304,6 +306,8 @@ Future<XmppCollabLaunch> hostXmppSession({
 /// [localDeck]. [onReconnected] is the follower-side reconnect signal (from
 /// `XmppSession.onReconnected` or a test fake) that feeds the transport's
 /// gap→resync (NEW-6 post-keying recovery, §4).
+/// [trustedHost] and [trustedHostAddress] come from an independently verified
+/// invitation, never from the room's untrusted presence stream.
 Future<XmppCollabLaunch> joinXmppSession({
   required XmppStanzaChannel stanzaChannel,
   required CollabCrypto crypto,
@@ -311,8 +315,17 @@ Future<XmppCollabLaunch> joinXmppSession({
   required String roomJid,
   required Deck localDeck,
   required String ownUserId,
+  required DevicePublicKeys trustedHost,
+  required String trustedHostAddress,
   Stream<void>? onReconnected,
 }) async {
+  if (!await trustedHost.verifyBinding()) {
+    throw ArgumentError.value(trustedHost.deviceId, 'trustedHost');
+  }
+  if (!trustedHostAddress.startsWith('$roomJid/') ||
+      trustedHostAddress.length <= roomJid.length + 1) {
+    throw ArgumentError.value(trustedHostAddress, 'trustedHostAddress');
+  }
   final parts = _wire(
     stanzaChannel: stanzaChannel,
     crypto: crypto,
@@ -320,6 +333,8 @@ Future<XmppCollabLaunch> joinXmppSession({
     roomJid: roomJid,
     ownUserId: ownUserId,
     onReconnected: onReconnected,
+    trustedHost: trustedHost,
+    trustedHostAddress: trustedHostAddress,
   );
   await parts.keyExchange.publishDeviceKeys();
   return XmppCollabLaunch._(
@@ -343,6 +358,8 @@ _WireResult _wire({
   required DevicePublicKeys ownKeys,
   required String roomJid,
   required String ownUserId,
+  required DevicePublicKeys? trustedHost,
+  required String? trustedHostAddress,
   Stream<void>? onReconnected,
 }) {
   final demux = CompanionDemux(channel: stanzaChannel);
@@ -354,6 +371,8 @@ _WireResult _wire({
     roomJid: roomJid,
     directory: directory,
     ownKeys: ownKeys,
+    trustedHost: trustedHost,
+    trustedHostAddress: trustedHostAddress,
   );
   final snapshotChannel = XmppSnapshotChannel(
     stanzaChannel: stanzaChannel,

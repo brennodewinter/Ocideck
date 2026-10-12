@@ -26,6 +26,12 @@ All notable changes to OciDeck are documented in this file.
   Bij het opslaan worden alleen bestaande repository-assets en door OciDeck
   gekozen of geplakte media meegenomen. Een lokaal pad in een Git-deck wordt
   niet meer gelezen of geüpload.
+- **De optionele XMPP-sleuteluitwisseling vertrouwt alleen de vooraf bekende host.**
+  Een deelnemer moet diens apparaatidentiteit en kameradres via een afzonderlijk
+  geverifieerde uitnodiging aanleveren. De host neemt geen inkomende
+  sessiesleutels aan; een eenmaal geïnstalleerde epoch-sleutel kan niet door
+  een andere sleutel worden vervangen. Deze XMPP-startfunctie heeft nog geen
+  aanroep vanuit de productie-interface.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of

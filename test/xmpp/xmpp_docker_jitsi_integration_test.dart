@@ -373,6 +373,8 @@ class _IntegrationEnv {
       roomJid: roomJid,
       localDeck: guestLocal,
       ownUserId: '$roomJid/$guestNick',
+      trustedHost: hostPub,
+      trustedHostAddress: '$roomJid/$hostNick',
       onReconnected: null, // TODO: wire to session.onReconnected
     );
 
@@ -423,6 +425,8 @@ class _IntegrationEnv {
       roomJid: roomJid,
       localDeck: guestLocal,
       ownUserId: '$roomJid/$guestNick',
+      trustedHost: hostPub,
+      trustedHostAddress: '$roomJid/$hostNick',
       onReconnected: null,
     );
   }

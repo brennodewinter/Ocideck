@@ -382,6 +382,37 @@ void main() {
   });
 
   group('CollabCrypto — key wraps & epochs', () {
+    test('a second sender cannot replace an installed epoch key', () async {
+      final memberKeys = await _device('member');
+      final memberPub = await memberKeys.publicKeys(rot: 0);
+      final authorityKeys = await _device('authority');
+      final intruderKeys = await _device('intruder');
+      final authority = CollabCrypto(authorityKeys);
+      final intruder = CollabCrypto(intruderKeys);
+      final member = CollabCrypto(memberKeys);
+      final legitimate = await authority.rekey([memberPub]);
+      final authorityPub = await authorityKeys.publicKeys(rot: 0);
+      await member.installEpochKey(legitimate.wraps.single, authorityPub);
+      await member.installEpochKey(legitimate.wraps.single, authorityPub);
+      final forged = await intruder.rekey([memberPub]);
+      final intruderPub = await intruderKeys.publicKeys(rot: 0);
+
+      await expectLater(
+        () => member.installEpochKey(forged.wraps.single, intruderPub),
+        _throwsReason('epoch-key-conflict'),
+      );
+      final sealed = await authority.seal(
+        {'kind': 'op'},
+        room: 'r',
+        type: 't',
+        signed: false,
+      );
+      expect(
+        await member.open(sealed, room: 'r', type: 't', sender: authorityPub),
+        {'kind': 'op'},
+      );
+    });
+
     test(
       'a wrap for another device fails trial-decrypt (blinded, §5.1 N3)',
       () async {

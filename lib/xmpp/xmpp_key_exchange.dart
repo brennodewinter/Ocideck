@@ -6,8 +6,8 @@
 //   • **Device-keys als signed-rot presence-extensie** (`<x xmlns="nl.ocideck.
 //     device">`), niet als power-gated room-state. Presence is ongeordend en
 //     ongegated (elke occupant/server kan het uitzenden), dus de §5.1
-//     signed-rot-epoch + pin-on-first-use + rot-monotoniciteit betalen de
-//     veiligheid die Matrix's geordende state gratis gaf.
+//     signed-rot-epoch + hostpin uit een uitnodiging + rot-monotoniciteit
+//     betalen de veiligheid die Matrix's geordende state gratis gaf.
 //   • **Deny-by-default admission-gated keying** — NIET de fail-open Matrix-
 //     spiegel (`MatrixKeyExchange.ensureKeyed` sleutelt elk bekend device
 //     onvoorwaardelijk, omdat Matrix admission de room's job is). De kamer is
@@ -48,7 +48,7 @@ import 'xmpp_transport.dart' show OciDeckNamespace;
 ///
 /// De autoriteit onderhoudt de approval-set ([approve]/[isApproved]) en
 /// sleutelt alleen goedgekeurde devices ([ensureKeyed]). Een follower
-/// trial-opent elke inbound keyshare en installeert de zijne.
+/// trial-opent uitsluitend keyshares van de vooraf vertrouwde host.
 class XmppKeyExchange {
   XmppKeyExchange({
     required XmppStanzaChannel stanzaChannel,
@@ -57,6 +57,8 @@ class XmppKeyExchange {
     required this.roomJid,
     required this.directory,
     required DevicePublicKeys ownKeys,
+    required this.trustedHost,
+    required this.trustedHostAddress,
   }) : _channel = stanzaChannel,
        _demux = companionDemux,
        _e2ee = crypto,
@@ -70,6 +72,12 @@ class XmppKeyExchange {
   final CollabCrypto _e2ee;
   final String roomJid;
   final CollabDeviceDirectory directory;
+
+  /// Null only for the host; guests receive the host identity out of band.
+  final DevicePublicKeys? trustedHost;
+
+  /// MUC occupant address from the same verified invitation as [trustedHost].
+  final String? trustedHostAddress;
   DevicePublicKeys _own;
 
   /// Callback nadat een nieuwe device-sleutel is geïnstalleerd in de directory.
@@ -214,6 +222,10 @@ class XmppKeyExchange {
     // Eigen presence niet ingesten — de MUC reflecteert de afzender zijn
     // eigen presence terug (XEP-0045), maar je hoeft jezelf niet te leren.
     if (keys.deviceId == _e2ee.deviceId) return;
+    if (keys.deviceId == trustedHost?.deviceId && !_isTrustedHost(keys)) {
+      logWarning('xmpp.keyexchange.untrustedHostPresence', keys.deviceId);
+      return;
+    }
 
     // Rot-monotoniciteit: voor een bekend device moet de signed rot strikt
     // toenemen. Een replay (zelfde of lagere rot) wordt geweigerd vóór de
@@ -237,20 +249,25 @@ class XmppKeyExchange {
       logWarning('xmpp.keyexchange.missingFrom', keys.deviceId);
       return;
     }
+    if (keys.deviceId == trustedHost?.deviceId &&
+        peerAddress != trustedHostAddress) {
+      logWarning('xmpp.keyexchange.untrustedHostAddress', peerAddress);
+      return;
+    }
     final stored = await directory.ingest(peerAddress: peerAddress, keys: keys);
     if (stored) onKeyInstalled?.call();
   }
 
-  /// Verwerk een inbound keyshare: trial-open tegen elke kandidaat-afzender
-  /// uit de directory. De wrap bevat geen cleartext afzender (§5.1 N3) — de
-  /// afzender wordt uit de stanza's `from` (room@conf/nick) afgeleid, en de
-  /// directory levert de kandidaat-devices voor die nick. Alleen de
-  /// authentieke afzender's identiteit laat de handtekening verifiëren, en
-  /// alleen de bedoelde ontvanger kan de ECDH-afgeleide wrap-sleutel vinden.
+  /// Verwerk een inbound keyshare: alleen een gast probeert wraps van de
+  /// vooraf vertrouwde host. De wrap bevat geen cleartext afzender (§5.1 N3);
+  /// de MUC levert het adres en de directory de gesigneerde device-binding.
   ///
   /// Een keyshare die niet voor dit device is, wordt stil gedropt — elke
   /// occupant trial-opent elke broadcast keyshare; falen is geen fout.
   Future<void> handleKeyshare(Stanza stanza) async {
+    // Alleen de host deelt epoch-sleutels uit. Hijzelf installeert er geen
+    // uit de kamer; een gast vertrouwt uitsluitend zijn vooraf bekende host.
+    if (trustedHost == null) return;
     final child = stanza.childByNs(OciDeckNamespace.keyshare);
     if (child == null) return;
     final WrappedKey wrap;
@@ -262,13 +279,6 @@ class XmppKeyExchange {
       logWarning('xmpp.keyexchange.keyshare.parse', e);
       return;
     }
-    // Eigen keyshare niet installeren — de MUC reflecteert de afzender zijn
-    // eigen bericht terug, en de autoriteit heeft de epoch-sleutel al. De
-    // autoriteit staat niet in zijn eigen directory (handleDevicePresence slaat
-    // het eigen device over), dus candidates is leeg en de check hieronder dropt
-    // hem. Een nick-based check is onbetrouwbaar (#1415): de MUC-nick en de
-    // XMPP-resource hebben geen relatie, en een toevallige nick-botsing kan een
-    // andere deelnemer's keyshare incorrect droppen.
     // De afzender wordt uit de stanza's from (room@conf/nick) afgeleid. Een
     // keyshare zonder from is misvormd — drop fail-closed (#1429).
     final senderAddress = stanza.from;
@@ -276,12 +286,14 @@ class XmppKeyExchange {
       logWarning('xmpp.keyexchange.keyshare.missingFrom', null);
       return;
     }
+    if (senderAddress != trustedHostAddress) return;
     final candidates = directory.devicesForAddress(senderAddress).toList();
     if (candidates.isEmpty) {
       logWarning('xmpp.keyexchange.keyshare.unknownSender', senderAddress);
       return;
     }
     for (final sender in candidates) {
+      if (!_isTrustedHost(sender)) continue;
       try {
         await _e2ee.installEpochKey(wrap, sender);
         onKeyInstalled?.call(); // epoch-sleutel geïnstalleerd — retry backlog
@@ -303,4 +315,16 @@ class XmppKeyExchange {
   }
 
   // ── helpers ────────────────────────────────────────────────────────────────
+
+  bool _isTrustedHost(DevicePublicKeys keys) {
+    final host = trustedHost;
+    if (host == null || keys.deviceId != host.deviceId) return false;
+    final actual = keys.identityKey;
+    final expected = host.identityKey;
+    if (actual.length != expected.length) return false;
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i] != expected[i]) return false;
+    }
+    return true;
+  }
 }
