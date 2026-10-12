@@ -1606,6 +1606,32 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Startmappen': 'Začetne mape',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Kje se začneta odpiranje in shranjevanje. Prazno uporabi prvo knjižnico.',
+  'Eerste bibliotheek': 'Prva knjižnica',
+  'Typ een trefwoord en druk op Enter':
+      'Vnesite ključno besedo in pritisnite Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtriraj po ključnih besedah, ločenih z vejico…',
+  'Voor wie is deze classificatie?': 'Za koga je ta razvrstitev?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — prejemniki smejo te informacije širiti v svoji skupnosti.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — omejeno širjenje, samo znotraj skupnosti.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — omejeno širjenje, samo v organizacijah udeležencev.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — omejeno širjenje, samo za udeležence.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — ne širi naprej, samo za imenovane prejemnike.',
+  'Ontvangers': 'Prejemniki',
+  'Namen, gescheiden door komma\'s': 'Imena, ločena z vejico',
+  'Vul in voor wie dit bestemd is.': 'Izpolnite, za koga je namenjeno.',
+  'Standaardtoelichting in het document zetten':
+      'Vstavi standardno razlago v dokument',
+  'Als dia invoegen': 'Vstavi kot prosojnico',
+  'Bestemd voor:': 'Namenjeno za:',
   'Git-werk herstellen': 'Obnovi delo Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Še vedno obstajajo lokalni podatki Git, ki ne pripadajo nobeni trenutni povezavi. Ne bodo poslani samodejno. Shrani kopijo in pred brisanjem podatkov aplikacije v priročniku preberi »Obnovitev starih osnutkov Git«.',

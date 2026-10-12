@@ -812,6 +812,31 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Startmappen': 'Start folders',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Where opening and saving starts. Leave this empty to use the first library.',
+  'Eerste bibliotheek': 'First library',
+  'Typ een trefwoord en druk op Enter': 'Type a keyword and press Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filter by keywords, separated by commas…',
+  'Voor wie is deze classificatie?': 'Who is this classification for?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — recipients may share this information within their community.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — limited sharing, only within the community.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — limited sharing, only within the organisations of the participants.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — limited sharing, only for the participants.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — do not share further, only for the named recipients.',
+  'Ontvangers': 'Recipients',
+  'Namen, gescheiden door komma\'s': 'Names, separated by commas',
+  'Vul in voor wie dit bestemd is.': 'Say who this is for.',
+  'Standaardtoelichting in het document zetten':
+      'Insert the standard explanation in the document',
+  'Als dia invoegen': 'Insert as a slide',
+  'Bestemd voor:': 'Intended for:',
   'Git-werk herstellen': 'Recover Git work',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'There is still local Git data that is not associated with a current connection. It will not be sent automatically. Keep a copy and read “Recovering old Git drafts” in the manual before erasing app data.',

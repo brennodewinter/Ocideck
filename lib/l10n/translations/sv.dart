@@ -1605,6 +1605,32 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Startmappen': 'Startmappar',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Där öppna och spara börjar. Lämna tomt för att använda det första biblioteket.',
+  'Eerste bibliotheek': 'Första biblioteket',
+  'Typ een trefwoord en druk op Enter':
+      'Skriv ett nyckelord och tryck på Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrera på nyckelord, kommaseparerade…',
+  'Voor wie is deze classificatie?': 'Vem gäller den här klassningen?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — mottagare får sprida denna information inom sin gemenskap.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — begränsad spridning, endast inom gemenskapen.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — begränsad spridning, endast inom deltagarnas organisationer.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — begränsad spridning, endast för deltagarna.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — sprid inte vidare, endast för de namngivna mottagarna.',
+  'Ontvangers': 'Mottagare',
+  'Namen, gescheiden door komma\'s': 'Namn, åtskilda med komma',
+  'Vul in voor wie dit bestemd is.': 'Fyll i vem detta är avsett för.',
+  'Standaardtoelichting in het document zetten':
+      'Infoga standardförklaringen i dokumentet',
+  'Als dia invoegen': 'Infoga som en bild',
+  'Bestemd voor:': 'Avsedd för:',
   'Git-werk herstellen': 'Återställ Git-arbete',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Det finns fortfarande lokala Git-data som inte hör till någon aktuell anslutning. De skickas inte automatiskt. Spara en kopia och läs ”Återställ gamla Git-utkast” i handboken innan du raderar appdata.',

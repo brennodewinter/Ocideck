@@ -652,6 +652,31 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Startmappen': 'Begjinmappen',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Wêr iepenjen en bewarjen begjint. Leech litte brûkt de earste bibleteek.',
+  'Eerste bibliotheek': 'Earste bibleteek',
+  'Typ een trefwoord en druk op Enter': 'Typ in trefwurd en druk op Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filterje op trefwurden, skieden troch komma\'s…',
+  'Voor wie is deze classificatie?': 'Foar wa is dizze yndieling?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — ûntfangers meie dizze ynformaasje yn har mienskip ferspriede.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — beheinde fersprieding, allinnich binnen de mienskip.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — beheinde fersprieding, allinnich binnen de organisaasjes fan de dielnimmers.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — beheinde fersprieding, allinnich foar de dielnimmers.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — net fierder ferspriede, allinnich foar de neamde ûntfangers.',
+  'Ontvangers': 'Ûntfangers',
+  'Namen, gescheiden door komma\'s': 'Namme, skieden troch komma\'s',
+  'Vul in voor wie dit bestemd is.': 'Fol yn foar wa dit bedoeld is.',
+  'Standaardtoelichting in het document zetten':
+      'Standerttaljochting yn it dokumint sette',
+  'Als dia invoegen': 'As dia ynfoegje',
+  'Bestemd voor:': 'Bestimd foar:',
   'Git-werk herstellen': 'Git-wurk weromhelje',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Der binne noch lokale Git-gegevens dy\'t net by in aktuele ferbining hearre. Dy wurde net automatysk ferstjoerd. Bewarje in kopy en lês ‘Alde Git-konsepten weromhelje’ yn de hantlieding foardatst appgegevens wiskest.',

@@ -652,6 +652,32 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Startmappen': 'Dossiers de départ',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Là où l\'ouverture et l\'enregistrement commencent. Laisser vide utilise la première bibliothèque.',
+  'Eerste bibliotheek': 'Première bibliothèque',
+  'Typ een trefwoord en druk op Enter':
+      'Saisissez un mot-clé et appuyez sur Entrée',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrer par mots-clés, séparés par des virgules…',
+  'Voor wie is deze classificatie?': 'Pour qui est ce classement ?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — les destinataires peuvent diffuser cette information dans leur communauté.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — diffusion limitée, uniquement au sein de la communauté.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — diffusion limitée, uniquement dans les organisations des participants.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — diffusion limitée, uniquement pour les participants.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — ne pas diffuser davantage, uniquement pour les destinataires nommés.',
+  'Ontvangers': 'Destinataires',
+  'Namen, gescheiden door komma\'s': 'Noms, séparés par des virgules',
+  'Vul in voor wie dit bestemd is.': 'Indiquez à qui ceci est destiné.',
+  'Standaardtoelichting in het document zetten':
+      'Insérer l\'explication type dans le document',
+  'Als dia invoegen': 'Insérer comme diapositive',
+  'Bestemd voor:': 'Destiné à :',
   'Git-werk herstellen': 'Récupérer le travail Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Des données Git locales qui ne sont associées à aucune connexion actuelle sont encore présentes. Elles ne seront pas envoyées automatiquement. Conservez-en une copie et consultez « Récupérer les anciens brouillons Git » dans le manuel avant d’effacer les données de l’application.',

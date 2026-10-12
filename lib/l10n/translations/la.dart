@@ -1621,6 +1621,31 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Startmappen': 'Carpetae initiales',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Ubi aperire et servare incipiunt. Vacuum relictum prima bibliotheca utitur.',
+  'Eerste bibliotheek': 'Prima bibliotheca',
+  'Typ een trefwoord en druk op Enter': 'Scribe verbum clavem et preme Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtra per verba clavia, commatibus separata…',
+  'Voor wie is deze classificatie?': 'Cui haec classificatio destinatur?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — accipientes hanc informationem intra communitatem suam divulgare possunt.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — divulgatio limitata, tantum intra communitatem.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — divulgatio limitata, tantum intra organizationes participantium.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — divulgatio limitata, tantum participantibus.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — ne ultra divulgato, tantum accipientibus nominatis.',
+  'Ontvangers': 'Accipientes',
+  'Namen, gescheiden door komma\'s': 'Nomina, commatibus separata',
+  'Vul in voor wie dit bestemd is.': 'Inscribe cui hoc destinatum sit.',
+  'Standaardtoelichting in het document zetten':
+      'Explicationem solitam in documento pone',
+  'Als dia invoegen': 'Ut paginam insere',
+  'Bestemd voor:': 'Destinatum:',
   'Git-werk herstellen': 'Opus Git recupera',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Adhuc sunt data Git localia quae ad nullam connexionem praesentem pertinent. Ea automatice non mittentur. Exemplum serva et in manuali lege “Schedas Git veteres recuperare” antequam data applicationis deleas.',

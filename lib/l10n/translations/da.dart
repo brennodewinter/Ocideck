@@ -1606,6 +1606,31 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Startmappen': 'Startmapper',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Hvor åbning og gemning begynder. Tomt felt bruger det første bibliotek.',
+  'Eerste bibliotheek': 'Første bibliotek',
+  'Typ een trefwoord en druk op Enter': 'Skriv et nøgleord og tryk på Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrér på nøgleord, adskilt med komma…',
+  'Voor wie is deze classificatie?': 'Hvem er denne klassifikation til?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — modtagere må dele denne information i deres fællesskab.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — begrænset deling, kun inden for fællesskabet.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — begrænset deling, kun inden for deltagernes organisationer.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — begrænset deling, kun til deltagerne.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — må ikke deles videre, kun til de navngivne modtagere.',
+  'Ontvangers': 'Modtagere',
+  'Namen, gescheiden door komma\'s': 'Navne, adskilt med komma',
+  'Vul in voor wie dit bestemd is.': 'Udfyld, hvem dette er tiltænkt.',
+  'Standaardtoelichting in het document zetten':
+      'Indsæt standardforklaringen i dokumentet',
+  'Als dia invoegen': 'Indsæt som dias',
+  'Bestemd voor:': 'Tiltænkt:',
   'Git-werk herstellen': 'Gendan Git-arbejde',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Der er stadig lokale Git-data, som ikke hører til en aktuel forbindelse. De bliver ikke sendt automatisk. Gem en kopi, og læs “Gendan gamle Git-kladder” i vejledningen, før du sletter appdata.',

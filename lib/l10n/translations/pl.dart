@@ -1618,6 +1618,31 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Startmappen': 'Foldery startowe',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Gdzie zaczyna się otwieranie i zapisywanie. Puste pole oznacza pierwszą bibliotekę.',
+  'Eerste bibliotheek': 'Pierwsza biblioteka',
+  'Typ een trefwoord en druk op Enter': 'Wpisz słowo kluczowe i naciśnij Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtruj według słów kluczowych, rozdzielonych przecinkami…',
+  'Voor wie is deze classificatie?': 'Dla kogo jest ta klasyfikacja?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — odbiorcy mogą rozpowszechniać te informacje w swojej społeczności.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — ograniczone rozpowszechnianie, tylko wewnątrz społeczności.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — ograniczone rozpowszechnianie, tylko w organizacjach uczestników.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — ograniczone rozpowszechnianie, tylko dla uczestników.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — nie rozpowszechniać dalej, tylko dla wskazanych odbiorców.',
+  'Ontvangers': 'Odbiorcy',
+  'Namen, gescheiden door komma\'s': 'Nazwy, rozdzielone przecinkami',
+  'Vul in voor wie dit bestemd is.': 'Podaj, dla kogo jest to przeznaczone.',
+  'Standaardtoelichting in het document zetten':
+      'Wstaw standardowe objaśnienie do dokumentu',
+  'Als dia invoegen': 'Wstaw jako slajd',
+  'Bestemd voor:': 'Przeznaczone dla:',
   'Git-werk herstellen': 'Przywróć pracę w Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Nadal istnieją lokalne dane Git, które nie są powiązane z żadnym bieżącym połączeniem. Nie zostaną automatycznie wysłane. Zachowaj kopię i przeczytaj w instrukcji „Odzyskiwanie starych szkiców Git” przed usunięciem danych aplikacji.',

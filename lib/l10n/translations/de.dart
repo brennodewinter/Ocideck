@@ -652,6 +652,32 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Startmappen': 'Startordner',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Wo Öffnen und Speichern beginnen. Leer lassen verwendet die erste Bibliothek.',
+  'Eerste bibliotheek': 'Erste Bibliothek',
+  'Typ een trefwoord en druk op Enter':
+      'Schlagwort eingeben und Eingabetaste drücken',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Nach Schlagwörtern filtern, durch Kommas getrennt…',
+  'Voor wie is deze classificatie?': 'Für wen gilt diese Einstufung?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — Empfänger dürfen diese Information in ihrer Gemeinschaft weitergeben.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — begrenzte Weitergabe, nur innerhalb der Gemeinschaft.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — begrenzte Weitergabe, nur innerhalb der Organisationen der Beteiligten.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — begrenzte Weitergabe, nur für die Beteiligten.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — nicht weitergeben, nur für die genannten Empfänger.',
+  'Ontvangers': 'Empfänger',
+  'Namen, gescheiden door komma\'s': 'Namen, durch Kommas getrennt',
+  'Vul in voor wie dit bestemd is.': 'Gib an, für wen dies bestimmt ist.',
+  'Standaardtoelichting in het document zetten':
+      'Standarderläuterung ins Dokument setzen',
+  'Als dia invoegen': 'Als Folie einfügen',
+  'Bestemd voor:': 'Bestimmt für:',
   'Git-werk herstellen': 'Git-Arbeit wiederherstellen',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Es sind noch lokale Git-Daten vorhanden, die zu keiner aktuellen Verbindung gehören. Sie werden nicht automatisch gesendet. Bewahre eine Kopie auf und lies im Handbuch „Alte Git-Entwürfe wiederherstellen“, bevor du die App-Daten löschst.',

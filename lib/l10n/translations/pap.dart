@@ -651,6 +651,31 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Startmappen': 'Mapa di kuminsamentu',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Unda habri i warda ta kuminsá. Laga bashí ta usa e promé biblioteka.',
+  'Eerste bibliotheek': 'Promé biblioteka',
+  'Typ een trefwoord en druk op Enter': 'Skirbi un palabra klave i primi Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtra riba palabra klave, separá pa koma…',
+  'Voor wie is deze classificatie?': 'Pa ken e klasifikashon aki ta?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — risibidor por plama e informashon aki den nan komunidat.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — plamamentu limitá, solamente den e komunidat.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — plamamentu limitá, solamente den e organisashonnan di e partisipantenan.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — plamamentu limitá, solamente pa e partisipantenan.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — no plama mas aleu, solamente pa e risibidornan menshoná.',
+  'Ontvangers': 'Risibidornan',
+  'Namen, gescheiden door komma\'s': 'Nòmber, separá pa koma',
+  'Vul in voor wie dit bestemd is.': 'Yena pa ken esaki ta destiná.',
+  'Standaardtoelichting in het document zetten':
+      'Pone e splikashon estándar den e dokumento',
+  'Als dia invoegen': 'Hinka komo dia',
+  'Bestemd voor:': 'Destiná pa:',
   'Git-werk herstellen': 'Restaurá trabou di Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Ainda tin dato Git lokal ku no ta pertenesé na un konekshon aktual. Nan no ta wòrdu manda automáticamente. Warda un kopia i lesa “Restaurá borradónan Git bieu” den e manual promé ku bo kita dato di e aplikashon.',

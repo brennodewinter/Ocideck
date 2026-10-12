@@ -649,6 +649,32 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Startmappen': 'Carpetas de inicio',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Dónde empiezan abrir y guardar. Déjalo vacío para usar la primera biblioteca.',
+  'Eerste bibliotheek': 'Primera biblioteca',
+  'Typ een trefwoord en druk op Enter':
+      'Escribe una palabra clave y pulsa Intro',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrar por palabras clave, separadas por comas…',
+  'Voor wie is deze classificatie?': '¿Para quién es esta clasificación?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — los destinatarios pueden difundir esta información en su comunidad.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — difusión limitada, solo dentro de la comunidad.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — difusión limitada, solo en las organizaciones de los participantes.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — difusión limitada, solo para los participantes.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — no difundir más, solo para los destinatarios nombrados.',
+  'Ontvangers': 'Destinatarios',
+  'Namen, gescheiden door komma\'s': 'Nombres, separados por comas',
+  'Vul in voor wie dit bestemd is.': 'Indica para quién está destinado.',
+  'Standaardtoelichting in het document zetten':
+      'Insertar la explicación estándar en el documento',
+  'Als dia invoegen': 'Insertar como diapositiva',
+  'Bestemd voor:': 'Destinado a:',
   'Git-werk herstellen': 'Recuperar el trabajo de Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Aún hay datos Git locales que no están asociados a ninguna conexión actual. No se enviarán automáticamente. Guarda una copia y lee «Recuperar borradores antiguos de Git» en el manual antes de borrar los datos de la aplicación.',

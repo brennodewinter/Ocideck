@@ -1622,6 +1622,32 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Startmappen': 'Dosare de pornire',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Unde încep deschiderea și salvarea. Gol folosește prima bibliotecă.',
+  'Eerste bibliotheek': 'Prima bibliotecă',
+  'Typ een trefwoord en druk op Enter':
+      'Tastați un cuvânt-cheie și apăsați Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrează după cuvinte-cheie, separate prin virgule…',
+  'Voor wie is deze classificatie?': 'Pentru cine este această clasificare?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — destinatarii pot răspândi această informație în comunitatea lor.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — răspândire limitată, doar în interiorul comunității.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — răspândire limitată, doar în organizațiile participanților.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — răspândire limitată, doar pentru participanți.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — nu se răspândește mai departe, doar pentru destinatarii numiți.',
+  'Ontvangers': 'Destinatari',
+  'Namen, gescheiden door komma\'s': 'Nume, separate prin virgule',
+  'Vul in voor wie dit bestemd is.': 'Completați pentru cine este destinat.',
+  'Standaardtoelichting in het document zetten':
+      'Inserează explicația standard în document',
+  'Als dia invoegen': 'Inserează ca diapozitiv',
+  'Bestemd voor:': 'Destinat pentru:',
   'Git-werk herstellen': 'Recuperează lucrul Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Încă există date Git locale care nu aparțin unei conexiuni curente. Acestea nu vor fi trimise automat. Păstrează o copie și citește „Recuperarea schițelor Git vechi” din manual înainte de a șterge datele aplicației.',

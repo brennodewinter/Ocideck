@@ -1636,6 +1636,32 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Startmappen': 'Fillteáin tosaigh',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Cá dtosaíonn oscailt agus sábháil. Fág folamh chun an chéad leabharlann a úsáid.',
+  'Eerste bibliotheek': 'An chéad leabharlann',
+  'Typ een trefwoord en druk op Enter':
+      'Clóscríobh eochairfhocal agus brúigh Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Scag de réir eochairfhocal, scartha le camóga…',
+  'Voor wie is deze classificatie?': 'Cé dó an t-aicmiú seo?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — féadfaidh faighteoirí an fhaisnéis seo a scaipeadh ina bpobal.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — scaipeadh teoranta, laistigh den phobal amháin.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — scaipeadh teoranta, laistigh d\'eagraíochtaí na rannpháirtithe amháin.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — scaipeadh teoranta, do na rannpháirtithe amháin.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — ná scaip níos faide, ach do na faighteoirí ainmnithe.',
+  'Ontvangers': 'Faighteoirí',
+  'Namen, gescheiden door komma\'s': 'Ainmneacha, scartha le camóga',
+  'Vul in voor wie dit bestemd is.': 'Líon isteach cé dó seo.',
+  'Standaardtoelichting in het document zetten':
+      'Cuir an míniú caighdeánach isteach sa cháipéis',
+  'Als dia invoegen': 'Ionsáigh mar shleamhnán',
+  'Bestemd voor:': 'Beartaithe do:',
   'Git-werk herstellen': 'Obair Git a athshlánú',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Tá sonraí Git logánta fós ann nach mbaineann le nasc reatha. Ní sheolfar iad go huathoibríoch. Coinnigh cóip agus léigh “Dréachtaí Git sean a athshlánú” sa lámhleabhar sula scriosann tú sonraí na haipe.',

@@ -1610,6 +1610,32 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Startmappen': 'Početne mape',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Gdje počinju otvaranje i spremanje. Prazno koristi prvu knjižnicu.',
+  'Eerste bibliotheek': 'Prva knjižnica',
+  'Typ een trefwoord en druk op Enter':
+      'Upišite ključnu riječ i pritisnite Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtriraj po ključnim riječima, odvojenima zarezom…',
+  'Voor wie is deze classificatie?': 'Za koga je ova klasifikacija?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — primatelji smiju širiti ove informacije unutar svoje zajednice.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — ograničeno širenje, samo unutar zajednice.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — ograničeno širenje, samo unutar organizacija sudionika.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — ograničeno širenje, samo za sudionike.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — ne širiti dalje, samo za imenovane primatelje.',
+  'Ontvangers': 'Primatelji',
+  'Namen, gescheiden door komma\'s': 'Imena, odvojena zarezom',
+  'Vul in voor wie dit bestemd is.': 'Upišite za koga je ovo namijenjeno.',
+  'Standaardtoelichting in het document zetten':
+      'Umetni standardno objašnjenje u dokument',
+  'Als dia invoegen': 'Umetni kao slajd',
+  'Bestemd voor:': 'Namijenjeno za:',
   'Git-werk herstellen': 'Vrati Git rad',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Još postoje lokalni podaci Git koji nisu povezani s trenutačnom vezom. Neće se automatski poslati. Sačuvajte kopiju i pročitajte „Vraćanje starih Git skica” u priručniku prije brisanja podataka aplikacije.',

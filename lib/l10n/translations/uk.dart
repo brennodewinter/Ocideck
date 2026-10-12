@@ -1621,6 +1621,32 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Startmappen': 'Початкові теки',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Звідки починаються відкриття й збереження. Порожнє значення — перша бібліотека.',
+  'Eerste bibliotheek': 'Перша бібліотека',
+  'Typ een trefwoord en druk op Enter':
+      'Введіть ключове слово й натисніть Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Фільтр за ключовими словами, через кому…',
+  'Voor wie is deze classificatie?': 'Для кого ця класифікація?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — отримувачі можуть поширювати цю інформацію у своїй спільноті.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — обмежене поширення, лише всередині спільноти.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — обмежене поширення, лише в організаціях учасників.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — обмежене поширення, лише для учасників.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — не поширювати далі, лише для названих отримувачів.',
+  'Ontvangers': 'Отримувачі',
+  'Namen, gescheiden door komma\'s': 'Імена, через кому',
+  'Vul in voor wie dit bestemd is.': 'Вкажіть, для кого це призначено.',
+  'Standaardtoelichting in het document zetten':
+      'Вставити стандартне пояснення в документ',
+  'Als dia invoegen': 'Вставити як слайд',
+  'Bestemd voor:': 'Призначено для:',
   'Git-werk herstellen': 'Відновити роботу Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Ще є локальні дані Git, які не належать до жодного поточного з’єднання. Їх не буде надіслано автоматично. Збережіть копію та прочитайте в посібнику «Відновлення старих чернеток Git», перш ніж видаляти дані застосунку.',

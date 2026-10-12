@@ -1599,6 +1599,31 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Startmappen': 'Alguskaustad',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Kus avamine ja salvestamine algavad. Tühi kasutab esimest teeki.',
+  'Eerste bibliotheek': 'Esimene teek',
+  'Typ een trefwoord en druk op Enter': 'Tippige märksõna ja vajutage Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtreeri märksõnade järgi, komadega eraldatult…',
+  'Voor wie is deze classificatie?': 'Kelle jaoks see liigitus on?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — saajad võivad seda teavet oma kogukonnas levitada.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — piiratud levitamine, ainult kogukonna sees.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — piiratud levitamine, ainult osalejate organisatsioonides.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — piiratud levitamine, ainult osalejatele.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — ära levita edasi, ainult nimetatud saajatele.',
+  'Ontvangers': 'Saajad',
+  'Namen, gescheiden door komma\'s': 'Nimed, komadega eraldatult',
+  'Vul in voor wie dit bestemd is.': 'Täitke, kelle jaoks see on mõeldud.',
+  'Standaardtoelichting in het document zetten':
+      'Lisa standardselgitus dokumenti',
+  'Als dia invoegen': 'Lisa slaidina',
+  'Bestemd voor:': 'Mõeldud:',
   'Git-werk herstellen': 'Taasta Giti töö',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Alles on veel kohalikke Giti andmeid, mis pole seotud ühegi praeguse ühendusega. Neid ei saadeta automaatselt. Säilita koopia ja loe juhendist „Vanade Giti mustandite taastamine” enne rakenduse andmete kustutamist.',

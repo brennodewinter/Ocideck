@@ -1634,6 +1634,32 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Startmappen': 'Pastas iniciais',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Onde abrir e guardar começam. Vazio usa a primeira biblioteca.',
+  'Eerste bibliotheek': 'Primeira biblioteca',
+  'Typ een trefwoord en druk op Enter':
+      'Escreva uma palavra-chave e prima Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrar por palavras-chave, separadas por vírgulas…',
+  'Voor wie is deze classificatie?': 'Para quem é esta classificação?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — os destinatários podem divulgar esta informação na sua comunidade.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — divulgação limitada, apenas dentro da comunidade.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — divulgação limitada, apenas nas organizações dos participantes.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — divulgação limitada, apenas para os participantes.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — não divulgar mais, apenas para os destinatários nomeados.',
+  'Ontvangers': 'Destinatários',
+  'Namen, gescheiden door komma\'s': 'Nomes, separados por vírgulas',
+  'Vul in voor wie dit bestemd is.': 'Indique para quem se destina.',
+  'Standaardtoelichting in het document zetten':
+      'Inserir a explicação padrão no documento',
+  'Als dia invoegen': 'Inserir como diapositivo',
+  'Bestemd voor:': 'Destinado a:',
   'Git-werk herstellen': 'Recuperar trabalho do Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Ainda existem dados Git locais que não pertencem a uma ligação atual. Não serão enviados automaticamente. Guarde uma cópia e leia “Recuperar rascunhos Git antigos” no manual antes de apagar os dados da aplicação.',

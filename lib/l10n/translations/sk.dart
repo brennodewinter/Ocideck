@@ -1612,6 +1612,31 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Startmappen': 'Štartovacie priečinky',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Kde sa začína otváranie a ukladanie. Prázdne použije prvú knižnicu.',
+  'Eerste bibliotheek': 'Prvá knižnica',
+  'Typ een trefwoord en druk op Enter': 'Napíšte kľúčové slovo a stlačte Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrovať podľa kľúčových slov, oddelených čiarkami…',
+  'Voor wie is deze classificatie?': 'Pre koho je táto klasifikácia?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — príjemcovia môžu tieto informácie šíriť vo svojej komunite.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — obmedzené šírenie, len v rámci komunity.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — obmedzené šírenie, len v organizáciách účastníkov.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — obmedzené šírenie, len pre účastníkov.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — nešíriť ďalej, len pre uvedených príjemcov.',
+  'Ontvangers': 'Príjemcovia',
+  'Namen, gescheiden door komma\'s': 'Mená, oddelené čiarkami',
+  'Vul in voor wie dit bestemd is.': 'Vyplňte, pre koho je to určené.',
+  'Standaardtoelichting in het document zetten':
+      'Vložiť štandardné vysvetlenie do dokumentu',
+  'Als dia invoegen': 'Vložiť ako snímku',
+  'Bestemd voor:': 'Určené pre:',
   'Git-werk herstellen': 'Obnoviť prácu v Gite',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Stále existujú miestne údaje Git, ktoré nepatria k žiadnemu aktuálnemu pripojeniu. Automaticky sa neodošlú. Uložte si kópiu a pred vymazaním údajov aplikácie si v príručke prečítajte „Obnovenie starých konceptov Git“.',
