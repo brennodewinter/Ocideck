@@ -51,8 +51,18 @@ DocumentConversion convertOdsDetailed(
 
   var truncated = false;
   final sheets = <SheetGrid>[];
+  var materializedCells = 0;
   for (final table in childrenLocal(spreadsheet, 'table')) {
-    final rows = _tableRows(table, budget, () => truncated = true);
+    final rows = _tableRows(
+      table,
+      budget,
+      budget.maxSheetCells - materializedCells,
+      () => truncated = true,
+    );
+    materializedCells += rows.fold<int>(
+      0,
+      (sum, row) => sum + (row.isEmpty ? 1 : row.length),
+    );
     sheets.add((name: _attr(table, 'name') ?? '', rows: rows));
   }
 
@@ -63,7 +73,7 @@ DocumentConversion convertOdsDetailed(
     for (final _ in descendantsLocal(content, 'chart')) 'object',
   ];
   return DocumentConversion(
-    markdown: spreadsheetToMarkdown(title, sheets),
+    markdown: spreadsheetToMarkdown(title, sheets, budget: budget),
     notImported: notImported,
   );
 }
@@ -74,10 +84,11 @@ DocumentConversion convertOdsDetailed(
 List<List<String>> _tableRows(
   XmlElement table,
   ImportBudget budget,
+  int remainingCells,
   void Function() onTruncate,
 ) {
   final rows = <List<String>>[];
-  var maxCols = 0;
+  var materializedCells = 0;
 
   void visit(XmlElement parent) {
     for (final child in parent.children.whereType<XmlElement>()) {
@@ -89,11 +100,20 @@ List<List<String>> _tableRows(
         case 'table-row':
           final wanted = _repeatOf(child, 'number-rows-repeated');
           final cells = _rowCells(child, budget, onTruncate);
-          if (cells.length > maxCols) maxCols = cells.length;
-          final hasContent = cells.any((c) => c.isNotEmpty);
+          while (cells.isNotEmpty && cells.last.isEmpty) {
+            cells.removeLast();
+          }
+          final hasContent = cells.isNotEmpty;
           var taken = 0;
           while (taken < wanted && rows.length < budget.maxSheetRows) {
-            rows.add(List.of(cells));
+            final rowCost = cells.isEmpty ? 1 : cells.length;
+            if (materializedCells + rowCost > remainingCells) {
+              throw ImportBudgetException(
+                '${budget.maxSheetCells} tabelcellen',
+              );
+            }
+            rows.add(cells.isEmpty ? const [] : List.of(cells));
+            materializedCells += rowCost;
             taken++;
           }
           if (taken < wanted && hasContent) onTruncate();
@@ -104,11 +124,6 @@ List<List<String>> _tableRows(
   }
 
   visit(table);
-  for (final row in rows) {
-    while (row.length < maxCols) {
-      row.add('');
-    }
-  }
   return rows;
 }
 

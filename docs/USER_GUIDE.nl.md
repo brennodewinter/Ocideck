@@ -5468,6 +5468,11 @@ in de *niet overgenomen*-telling benoemd in plaats van stil weg te vallen.
 Een spreadsheet die op het venster valt neemt dezelfde route, en een
 spreadsheet die via **Openen** wordt gekozen krijgt een melding die de import
 aanbiedt in plaats van een doodlopende fout.
+De import accepteert per werkblad maximaal 65.536 rijen en 1.024 kolommen,
+en in totaal één miljoen tabelcellen. Een groter rooster wordt met een
+limietmelding geweigerd. ODS-herhalingen boven de grens per werkblad worden
+afgekapt; weggevallen inhoud wordt als *niet overgenomen* gemeld. Het
+bronbestand blijft ongemoeid.
 
 **De huisstijl meenemen.** Sinds 2026-09-19 (#2119) leest de import ook wat het
 document aan huisstijl draagt, en als er iets te vinden is toont één dialoog —

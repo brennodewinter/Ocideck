@@ -47,17 +47,29 @@ DocumentConversion convertXlsxDetailed(
   final dateStyle = ctx.dateStyles();
 
   final sheets = <SheetGrid>[];
+  var materializedCells = 0;
   for (final sheet in descendantsLocal(workbook, 'sheet')) {
     final name = _attr(sheet, 'name') ?? '';
     final target = rels[_attr(sheet, 'id')];
     if (target == null) continue;
     final doc = ctx.readXml(_normalizeTarget(target));
     if (doc == null) continue;
-    sheets.add((name: name, rows: _sheetRows(doc, shared, dateStyle)));
+    final rows = _sheetRows(
+      doc,
+      shared,
+      dateStyle,
+      budget,
+      budget.maxSheetCells - materializedCells,
+    );
+    materializedCells += rows.fold<int>(
+      0,
+      (sum, row) => sum + (row.isEmpty ? 1 : row.length),
+    );
+    sheets.add((name: name, rows: rows));
   }
 
   return DocumentConversion(
-    markdown: spreadsheetToMarkdown(title, sheets),
+    markdown: spreadsheetToMarkdown(title, sheets, budget: budget),
     notImported: ctx.notImported(),
   );
 }
@@ -165,42 +177,52 @@ List<List<String>> _sheetRows(
   XmlDocument sheet,
   List<String> shared,
   List<_DateStyle> dateStyles,
+  ImportBudget budget,
+  int remainingCells,
 ) {
   final data = descendantsLocal(sheet, 'sheetData').firstOrNull;
   if (data == null) return const [];
 
   final rows = <List<String>>[];
-  var maxCols = 0;
+  var materializedCells = 0;
   for (final row in childrenLocal(data, 'row')) {
+    if (rows.length >= budget.maxSheetRows) {
+      throw ImportBudgetException('${budget.maxSheetRows} rijen');
+    }
     final cells = <String>[];
     var nextCol = 0;
     for (final c in childrenLocal(row, 'c')) {
       final ref = _attr(c, 'r');
-      final col = ref == null ? nextCol : _columnIndex(ref);
+      final col = ref == null
+          ? nextCol
+          : _columnIndex(ref, budget.maxSheetCols);
+      if (col >= budget.maxSheetCols || cells.length >= budget.maxSheetCols) {
+        throw ImportBudgetException('${budget.maxSheetCols} kolommen');
+      }
       while (cells.length < col) {
         cells.add('');
       }
       cells.add(_cellText(c, shared, dateStyles));
       nextCol = col + 1;
     }
-    if (cells.length > maxCols) maxCols = cells.length;
-    rows.add(cells);
-  }
-  // Rechthoek maken: rijen eindigen in de bron bij hun laatste niet-lege cel.
-  for (final row in rows) {
-    while (row.length < maxCols) {
-      row.add('');
+    materializedCells += cells.isEmpty ? 1 : cells.length;
+    if (materializedCells > remainingCells) {
+      throw ImportBudgetException('${budget.maxSheetCells} tabelcellen');
     }
+    rows.add(cells);
   }
   return rows;
 }
 
 /// `"BC"` → 54: kolomletter naar nul-gebaseerde index.
-int _columnIndex(String cellRef) {
+int _columnIndex(String cellRef, int maxColumns) {
   var col = 0;
   for (final unit in cellRef.codeUnits) {
     if (unit < 0x41 || unit > 0x5A) break; // stopt bij het eerste cijfer
     col = col * 26 + (unit - 0x41 + 1);
+    if (col > maxColumns) {
+      throw ImportBudgetException('$maxColumns kolommen');
+    }
   }
   return col - 1;
 }

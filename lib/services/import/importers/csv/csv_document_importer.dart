@@ -14,16 +14,24 @@
 import 'dart:convert';
 
 import '../../models/document_conversion.dart';
+import '../../utils/import_budget.dart';
 import '../../utils/spreadsheet_markdown.dart';
 import '../../../../utils/csv.dart';
 
 /// Zet de bytes van een `.csv` om in Markdown. [title] is de naam die boven
 /// het document komt — de aanroeper levert hem uit de bestandsnaam.
-DocumentConversion convertCsvDetailed(List<int> bytes, {String title = ''}) {
+DocumentConversion convertCsvDetailed(
+  List<int> bytes, {
+  String title = '',
+  ImportBudget budget = ImportBudget.standard,
+}) {
+  if (bytes.length > budget.maxSourceBytes) {
+    throw ImportBudgetException('${budget.maxSourceBytes} bytes');
+  }
   return DocumentConversion(
     markdown: spreadsheetToMarkdown(title, [
-      (name: '', rows: _rows(_decodeText(bytes))),
-    ]),
+      (name: '', rows: _rows(_decodeText(bytes), budget)),
+    ], budget: budget),
   );
 }
 
@@ -46,7 +54,7 @@ String _decodeText(List<int> bytes) {
   }
 }
 
-List<List<String>> _rows(String text) {
+List<List<String>> _rows(String text, ImportBudget budget) {
   // Een bestand heet `.csv` en mag gegolfd zijn — regels met wisselende
   // kolomaantallen zijn legaal. Dus niet de klembordregel ("elke rij even
   // breed"), maar: het scheidingsteken dat de meeste cellen oplevert terwijl
@@ -54,8 +62,32 @@ List<List<String>> _rows(String text) {
   // Markdown-tabel zelf aan tot rechthoek.
   List<List<String>>? best;
   var bestCells = 0;
+  ImportBudgetException? rejected;
+  void checkBudget(int rows, int columns, int cells) {
+    if (rows > budget.maxSheetRows) {
+      throw ImportBudgetException('${budget.maxSheetRows} rijen');
+    }
+    if (columns > budget.maxSheetCols) {
+      throw ImportBudgetException('${budget.maxSheetCols} kolommen');
+    }
+    if (cells > budget.maxSheetCells) {
+      throw ImportBudgetException('${budget.maxSheetCells} tabelcellen');
+    }
+  }
+
   for (final delimiter in const [';', ',', '\t']) {
-    final rows = parseCsvRows(text, delimiter: delimiter, trimUnquoted: true);
+    late final List<List<String>> rows;
+    try {
+      rows = parseCsvRows(
+        text,
+        delimiter: delimiter,
+        trimUnquoted: true,
+        checkBudget: checkBudget,
+      );
+    } on ImportBudgetException catch (e) {
+      rejected = e;
+      continue;
+    }
     if (rows.isEmpty || rows.first.length < 2) continue;
     final cells = rows.fold<int>(0, (sum, r) => sum + r.length);
     if (cells > bestCells) {
@@ -64,9 +96,14 @@ List<List<String>> _rows(String text) {
     }
   }
   if (best != null) return best;
+  if (rejected != null) throw rejected;
   // Geen scheidingsteken gevonden: één kolom, elke regel een cel.
+  final normalized = text.replaceAll('\r\n', '\n');
+  if ('\n'.allMatches(normalized).length + 1 > budget.maxSheetRows) {
+    throw ImportBudgetException('${budget.maxSheetRows} rijen');
+  }
   return [
-    for (final line in text.replaceAll('\r\n', '\n').split('\n'))
+    for (final line in normalized.split('\n'))
       if (line.trim().isNotEmpty) [line.trim()],
   ];
 }
