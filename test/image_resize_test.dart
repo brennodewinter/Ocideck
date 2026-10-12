@@ -69,6 +69,18 @@ void main() {
     });
   });
 
+  test('bakeImportGeometry inspects dimensions before decoding', () {
+    final bytes = Uint8List.fromList(
+      img.encodePng(img.Image(width: 4097, height: 1)),
+    );
+    final result = bakeImportGeometry(
+      bytes,
+      const ImportImageGeometry(clockwiseDegrees: 90),
+      'large.png',
+    );
+    expect(result, same(bytes));
+  });
+
   group('imageNaturalSizeCm', () {
     // ODF meet `fo:clip` hiertegen af; de standaard van 0,2 mm per pixel en het
     // honoreren van de eigen resolutie zijn gemeten aan LibreOffice zelf.

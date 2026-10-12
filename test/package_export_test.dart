@@ -6,6 +6,7 @@ import 'package:archive/archive.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -78,6 +79,96 @@ void main() {
       expect(extracted.readAsBytesSync(), [1, 2, 3, 4]);
     },
   );
+
+  test('project package refuses absolute and symlink escapes', () async {
+    final project = Directory(p.join(tmp.path, 'project'))..createSync();
+    final images = Directory(p.join(project.path, 'images'))..createSync();
+    final outside = File(p.join(tmp.path, 'secret.txt'))
+      ..writeAsStringSync('outside');
+    final sneaky = Link(p.join(images.path, 'sneaky.png'))
+      ..createSync(outside.path);
+    final deck = Deck(
+      title: 'Containment',
+      projectPath: project.path,
+      slides: [
+        Slide.create(SlideType.image).copyWith(imagePath: outside.path),
+        Slide.create(SlideType.image).copyWith(imagePath: sneaky.path),
+      ],
+    );
+
+    final members = await file.buildPackageMembers(deck);
+    expect(members.keys.where((name) => name.startsWith('images/')), isEmpty);
+    final markdown = utf8.decode(members['Containment.md']!);
+    expect(markdown, isNot(contains(outside.path)));
+    expect(markdown, isNot(contains(sneaky.path)));
+  });
+
+  test('project package keeps trusted external theme logos', () async {
+    final project = Directory(p.join(tmp.path, 'project'))..createSync();
+    final logo = File(p.join(tmp.path, 'brand.png'))
+      ..writeAsBytesSync([9, 8, 7]);
+    final deck = Deck(
+      title: 'Brand',
+      projectPath: project.path,
+      themeProfile: ThemeProfile(logoPath: logo.path),
+    );
+
+    final members = await file.buildPackageMembers(deck);
+    final logoMember = members.entries.firstWhere(
+      (entry) => entry.key.startsWith('logos/'),
+    );
+    expect(logoMember.value, logo.readAsBytesSync());
+  });
+
+  test(
+    'project package removes blocked HTML and background image paths',
+    () async {
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+      final outside = File(p.join(tmp.path, 'secret.png'))
+        ..writeAsBytesSync([6, 6, 6]);
+      final deck = Deck(
+        title: 'Markup assets',
+        projectPath: project.path,
+        marpStyle: MarpStyle(
+          backgroundImage: 'linear-gradient(red, blue), url("${outside.path}")',
+        ),
+        slides: [
+          Slide.create(
+            SlideType.freeMarkdown,
+          ).copyWith(customMarkdown: '<img src="${outside.path}">'),
+        ],
+      );
+
+      final members = await file.buildPackageMembers(deck);
+      final markdown = utf8.decode(
+        members.entries.firstWhere((entry) => entry.key.endsWith('.md')).value,
+      );
+      expect(markdown, isNot(contains(outside.path)));
+      expect(members.keys.where((name) => name.startsWith('images/')), isEmpty);
+    },
+  );
+
+  test('project package removes blocked PDF evidence paths', () async {
+    final project = Directory(p.join(tmp.path, 'project'))..createSync();
+    final outside = File(p.join(tmp.path, 'secret.pdf'))
+      ..writeAsBytesSync([37, 80, 68, 70, 45, 1]);
+    final deck = Deck(
+      title: 'Evidence',
+      projectPath: project.path,
+      slides: [
+        Slide.create(
+          SlideType.freeMarkdown,
+        ).copyWith(customMarkdown: '[bewijs](<${outside.path}>)'),
+      ],
+    );
+
+    final members = await file.buildPackageMembers(deck);
+    final markdown = utf8.decode(
+      members.entries.firstWhere((entry) => entry.key.endsWith('.md')).value,
+    );
+    expect(markdown, isNot(contains(outside.path)));
+    expect(members.keys.where((name) => name.startsWith('evidence/')), isEmpty);
+  });
 
   // Een pakket is bedoeld om weg te geven: wat er niet in zit, ziet de
   // ontvanger niet. Een afbeelding in de vrije tekst hoort er dus net zo goed
