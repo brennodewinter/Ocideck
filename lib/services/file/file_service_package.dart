@@ -47,6 +47,80 @@ ThemeProfile _profileWithPackageAssets(
       )
     : profile;
 
+class _PackedThemeAssets {
+  final ThemeProfile profile;
+  final String? logoRel;
+  final String? brandStripRel;
+
+  const _PackedThemeAssets(this.profile, this.logoRel, this.brandStripRel);
+}
+
+final _packageBackgroundUrl = RegExp(
+  r'''url\(\s*(["']?)(.*?)\1\s*\)''',
+  caseSensitive: false,
+);
+
+Iterable<String> _packageBackgroundPaths(String value) sync* {
+  for (final match in _packageBackgroundUrl.allMatches(value)) {
+    final path = match.group(2)?.trim() ?? '';
+    if (path.isNotEmpty) yield path;
+  }
+}
+
+String _rewritePackageBackground(
+  String value,
+  String? Function(String path) map,
+) => value.replaceAllMapped(_packageBackgroundUrl, (match) {
+  final path = match.group(2)!.trim();
+  final replacement = path.isEmpty ? null : map(path);
+  if (replacement == null || replacement == path) return match.group(0)!;
+  return 'url(${match.group(1)}$replacement${match.group(1)})';
+});
+
+Future<_PackedThemeAssets> _packThemeAssets(
+  ThemeProfile profile,
+  Future<String?> Function(String, String, {bool allowExternal}) addAsset,
+) async {
+  final logoRel = await addAsset(
+    profile.logoPath ?? '',
+    'logos',
+    allowExternal: true,
+  );
+  final logoDarkRel = await addAsset(
+    profile.logoDarkPath ?? '',
+    'logos',
+    allowExternal: true,
+  );
+  final brandStripRel = await addAsset(
+    profile.brandStripPath ?? '',
+    'logos',
+    allowExternal: true,
+  );
+  return _PackedThemeAssets(
+    _profileWithPackageAssets(profile, logoRel, logoDarkRel, brandStripRel),
+    logoRel,
+    brandStripRel,
+  );
+}
+
+Future<MarpStyle?> _packDeckBackground(
+  Deck deck,
+  Future<String?> Function(String, String) addAsset,
+) async {
+  final packed = <String, String>{};
+  for (final path in _packageBackgroundPaths(deck.marpStyle.backgroundImage)) {
+    final rel = await addAsset(path, 'images');
+    if (rel != null) packed[path] = rel;
+  }
+  final rewritten = _rewritePackageBackground(
+    deck.marpStyle.backgroundImage,
+    (path) => packed[path],
+  );
+  return rewritten == deck.marpStyle.backgroundImage
+      ? null
+      : deck.marpStyle.copyWith(backgroundImage: rewritten);
+}
+
 List<PackageEntry>? _decodePackageEntries(
   List<int> zipBytes, {
   required int maxBytes,
@@ -212,23 +286,17 @@ extension FileServicePackage on FileService {
   }) async {
     final archive = Archive();
     final added = <String>{};
-    // Cumulative package budget, aligned to the importer's ceiling so a package
-    // this version writes is one this version can reopen (#1046). Every member's
-    // bytes are reserved here — file assets are stat'd before they are read, so
-    // an oversized one fails fast instead of being pulled fully into memory.
+    // Reserve bytes before reading assets so oversized packages fail fast (#1046).
     final budget = _PackageBudget(budgetBytes);
     void reserve(int n) => budget.reserve(n);
 
-    // Bronpad → archiefpad, zodat hetzelfde bestand één keer wordt opgenomen en
-    // twéé verschillende bestanden met dezelfde naam allebei meegaan.
+    // Bronpad → archiefpad, zodat dubbele bronnen maar eenmaal meegaan.
     final byAbsolutePath = <String, String>{};
     // Stabiel lidpad per mem:-asset, zodat imagePath en imagePath2 die
     // dezelfde afbeelding delen ook hetzelfde pakket-lid krijgen.
     final memRels = <String, String>{};
 
-    /// Voeg een in-memory asset (mem:-pad uit de WebAssetStore) toe onder een
-    /// unieke naam in [subdir]. Naamconflicten tussen verschillende assets
-    /// krijgen een volgnummer.
+    // Add a mem asset under a unique name in [subdir].
     String? addMemAsset(String path, String subdir) {
       final existing = memRels[path];
       if (existing != null) return existing;
@@ -251,26 +319,40 @@ extension FileServicePackage on FileService {
       return rel;
     }
 
-    /// Resolve [path] (relatief t.o.v. projectPath, absoluut, mem: of
-    /// asset:), voeg het bestand toe onder `<subdir>/<bestandsnaam>` en geef
-    /// dat pad terug.
-    Future<String?> addAsset(String path, String subdir) async {
+    /// Resolve [path] and add it under `<subdir>/<filename>`.
+    Future<String?> addAsset(
+      String path,
+      String subdir, {
+      bool allowExternal = false,
+    }) async {
       if (path.trim().isEmpty) return null;
       if (WebAssetStore.isMemPath(path)) return addMemAsset(path, subdir);
       if (isBundledAssetPath(path)) {
         return _addBundledAssetTo(archive, added, path, subdir);
       }
+      // URLs and other URI-backed assets are not local files for this packer;
+      // leave them untouched rather than treating them as project paths.
+      if (!p.isAbsolute(path) && Uri.tryParse(path)?.hasScheme == true) {
+        return null;
+      }
       // Zonder bestandssysteem (web) valt hier niets meer te lezen.
       if (kIsWeb) return null;
       final String abs;
-      if (p.isAbsolute(path)) {
-        // Absolute paths come from the picker (the user explicitly chose them).
-        abs = path;
-      } else if (deck.projectPath != null) {
-        // A relative asset must not escape the project via `../`.
-        final resolved = resolveProjectRelative(deck.projectPath, path);
-        if (resolved == null) return null;
+      if (deck.projectPath != null && !allowExternal) {
+        // Package export is a file-reading sink: follow symlinks as well as
+        // lexical segments, so a project asset cannot escape its project.
+        final resolved = resolveContainedRealPath(path, deck.projectPath);
+        if (resolved == null) return '';
         abs = resolved;
+      } else if (deck.projectPath != null && allowExternal) {
+        // Theme profiles are trusted settings and may deliberately point at a
+        // logo outside the deck project.
+        final resolved = resolveTrustedAssetPath(path, deck.projectPath);
+        if (resolved == null) return '';
+        abs = resolved;
+      } else if (p.isAbsolute(path)) {
+        // An unsaved deck may contain a user-picked absolute asset.
+        abs = path;
       } else {
         abs = path;
       }
@@ -311,23 +393,15 @@ extension FileServicePackage on FileService {
           s,
     ];
 
-    final logoRel = await addAsset(deck.themeProfile.logoPath ?? '', 'logos');
-    final logoDarkRel = await addAsset(
-      deck.themeProfile.logoDarkPath ?? '',
-      'logos',
-    );
-    final brandStripRel = await addAsset(
-      deck.themeProfile.brandStripPath ?? '',
-      'logos',
-    );
-    final profile = _profileWithPackageAssets(
-      deck.themeProfile,
-      logoRel,
-      logoDarkRel,
-      brandStripRel,
-    );
+    final themeAssets = await _packThemeAssets(deck.themeProfile, addAsset);
+    final profile = themeAssets.profile;
 
-    final packDeck = deck.copyWith(slides: packedSlides, themeProfile: profile);
+    final packedDeckStyle = await _packDeckBackground(deck, addAsset);
+    final packDeck = deck.copyWith(
+      slides: packedSlides,
+      themeProfile: profile,
+      marpStyle: packedDeckStyle,
+    );
 
     // Markdown.
     final markdown = _md.generateDeck(packDeck);
@@ -346,8 +420,8 @@ extension FileServicePackage on FileService {
       archive,
       packDeck,
       profile,
-      logoRel,
-      brandStripRel,
+      themeAssets.logoRel,
+      themeAssets.brandStripRel,
     );
 
     // Cumulative guard over every member (markdown, sidecars, theme CSS and
@@ -397,11 +471,35 @@ extension FileServicePackage on FileService {
     final slides = <Slide>[];
     for (final slide in _packSlides(deck)) {
       final packed = <String, String>{};
-      for (final path in slideImagePaths(slide).toSet()) {
+      final paths = {
+        ...slideImagePaths(slide),
+        ...htmlImagePaths(slide.customMarkdown),
+        ..._packageBackgroundPaths(slide.marpStyle.backgroundImage),
+      };
+      for (final path in paths) {
         final rel = await addAsset(path, 'images');
         if (rel != null) packed[path] = rel;
       }
-      final withImages = rewriteSlideImagePaths(slide, (path) => packed[path]);
+      var withImages = rewriteSlideImagePaths(slide, (path) => packed[path]);
+      withImages = withImages.copyWith(
+        customMarkdown: rewriteHtmlImagePaths(
+          withImages.customMarkdown,
+          (path) => packed[path],
+        ),
+        marpStyle:
+            _rewritePackageBackground(
+                  withImages.marpStyle.backgroundImage,
+                  (path) => packed[path],
+                ) ==
+                withImages.marpStyle.backgroundImage
+            ? null
+            : withImages.marpStyle.copyWith(
+                backgroundImage: _rewritePackageBackground(
+                  withImages.marpStyle.backgroundImage,
+                  (path) => packed[path],
+                ),
+              ),
+      );
       final pdf = PdfEvidenceService.attachmentFromMarkdown(
         withImages.customMarkdown,
       );
@@ -415,12 +513,14 @@ extension FileServicePackage on FileService {
               byAbsolutePath: byAbsolutePath,
               reserve: reserve,
             );
-      final withEvidence = pdfRel == null
+      final withEvidence = pdf == null
           ? withImages
+          : pdfRel == null
+          ? withImages.copyWith(customMarkdown: '')
           : withImages.copyWith(
               customMarkdown: PdfEvidenceService.markdownFor(
                 pdfRel,
-                label: pdf?.label,
+                label: pdf.label,
               ),
             );
       slides.add(

@@ -310,7 +310,18 @@ Uint8List bakeImportGeometry(
   String path,
 ) {
   try {
-    final decoded = img.decodeImage(bytes);
+    final decoder = img.findDecoderForData(bytes);
+    final info = decoder?.startDecode(bytes);
+    // Read the header before allocating pixels. Large sources remain available
+    // to the capped render path; geometry baking is skipped for them.
+    if (info == null ||
+        info.width <= 0 ||
+        info.height <= 0 ||
+        info.width > 4096 ||
+        info.height > 4096) {
+      return bytes;
+    }
+    final decoded = decoder?.decode(bytes);
     if (decoded == null) return bytes;
     final baked = geometry.sourceHonoursExif
         ? 0
