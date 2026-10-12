@@ -556,7 +556,10 @@ model.
 - **TLP classification gate.** `ClassificationEnforcementPolicy.evaluate`
   (`lib/services/classification_enforcement_policy.dart`) is a fail-closed export
   gate with a release ceiling, a required floor, and an optional
-  "block unclassified" rule; it runs on `ExportService.export`.
+  "block unclassified" rule; it runs on `ExportService.export` and the shell's
+  package and audit-dossier actions. The latter two require the deck's own TLP
+  to satisfy classification and floor rules, then check the strongest TLP across
+  deck and slides against the ceiling before reading any asset or evidence.
 - **Classification watermark.** When enabled, the TLP level is stamped onto
   rasterized PDF/PPTX output (`SlideRasterizer`) and rendered as a banner in HTML
   export.

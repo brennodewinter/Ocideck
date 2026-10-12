@@ -77,6 +77,11 @@ All notable changes to OciDeck are documented in this file.
   *Waarschuwen* vraagt om een bewuste bevestiging; *Blokkeren* weigert de
   export, ook als *Geredigeerd* is gekozen. Opslaan van het origineel blijft
   een afzonderlijke handeling.
+- **Auditdossier-export volgt nu het ingestelde classificatiebeleid.**
+  Een verzegeld rapport wordt vóór het lezen van bewijs of openen van het
+  exportvenster geweigerd als classificatie verplicht is maar ontbreekt, onder
+  het minimum ligt of boven het vrijgaveplafond uitkomt. Ook een strenger
+  geclassificeerde bewijsdia telt mee, op desktop en in de browser.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of

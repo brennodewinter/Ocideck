@@ -4592,6 +4592,11 @@ evidence images — plus an `AUDIT_DOSSIER.md` index that restates, in one place
 - the MIAUW compliance tally (Voldaan / Openstaand / Uitgesloten);
 - the evidence hash table (SHA1 + SHA-256 per evidence image).
 
+Before reading evidence or offering the export, OciDeck checks the report's own
+TLP against the required classification and minimum level. It checks the highest
+TLP across the report and its slides against the release ceiling. A blocked
+dossier shows the reason in the app.
+
 Like the normal package export, you can protect the whole dossier with a password
 (WinZip **AES-256**), so the report, its evidence and the hash tables travel
 together as one encrypted, auditor-ready file.

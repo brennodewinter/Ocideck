@@ -4690,6 +4690,11 @@ bewijsafbeeldingen — plus een index `AUDIT_DOSSIER.md` die op één plek herfo
 - de MIAUW-nalevingstelling (Voldaan / Openstaand / Uitgesloten);
 - de bewijs-hashtabel (SHA1 + SHA-256 per bewijsafbeelding).
 
+Voordat OciDeck bewijs leest of de export aanbiedt, toetst het de classificatie
+van het rapport zelf aan de verplichte classificatie en het minimum. Voor het
+vrijgaveplafond telt het hoogste niveau van het rapport en zijn dia's. Een
+geweigerd dossier toont de reden in de app.
+
 Net als de normale package-export kun je het hele dossier beschermen met een wachtwoord
 (WinZip **AES-256**), zodat het rapport, zijn bewijs en de hashtabellen samen
 reizen als één versleuteld, auditor-klaar bestand.
