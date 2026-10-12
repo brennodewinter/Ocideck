@@ -18,13 +18,29 @@ class ImageDimensions {
   double get aspect => width / height;
 }
 
+/// Header reads are bounded because dimensions never require the image body.
+const int kMaxImageHeaderBytes = 1024 * 1024;
+
 /// Reads the pixel dimensions of the image at [path] from its header only.
 /// Returns null when the file is missing, unreadable, or an unsupported format.
 ImageDimensions? readImageDimensions(String path) {
   try {
     final file = File(path);
     if (!file.existsSync()) return null;
-    final bytes = file.readAsBytesSync();
+    if (FileSystemEntity.typeSync(path, followLinks: true) !=
+        FileSystemEntityType.file) {
+      return null;
+    }
+    final length = file.lengthSync();
+    final handle = file.openSync();
+    late final Uint8List bytes;
+    try {
+      bytes = handle.readSync(
+        length < kMaxImageHeaderBytes ? length : kMaxImageHeaderBytes,
+      );
+    } finally {
+      handle.closeSync();
+    }
     return imageDimensionsFromBytes(bytes);
   } catch (e) {
     logError('readImageDimensions: failed to read $path', e);

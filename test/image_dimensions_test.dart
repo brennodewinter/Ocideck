@@ -85,4 +85,53 @@ void main() {
   test('ontbrekend bestand geeft null', () {
     expect(readImageDimensions('${tmp.path}/bestaat_niet.png'), isNull);
   });
+
+  test('een map wordt niet als afbeeldingsbestand geopend', () {
+    final directory = Directory('${tmp.path}/geen-afbeelding')..createSync();
+    expect(readImageDimensions(directory.path), isNull);
+  });
+
+  test('grote bestanden worden alleen tot de headergrens gelezen', () {
+    final file = File('${tmp.path}/large.png')
+      ..writeAsBytesSync([
+        ..._minimalPngHeader(7, 11),
+        ...List<int>.filled(kMaxImageHeaderBytes + 1024, 0),
+      ]);
+    final dims = readImageDimensions(file.path);
+    expect(dims, isNotNull);
+    expect(dims!.width, 7);
+    expect(dims.height, 11);
+  });
 }
+
+List<int> _minimalPngHeader(int width, int height) => [
+  0x89,
+  0x50,
+  0x4E,
+  0x47,
+  0x0D,
+  0x0A,
+  0x1A,
+  0x0A,
+  0x00,
+  0x00,
+  0x00,
+  0x0D,
+  0x49,
+  0x48,
+  0x44,
+  0x52,
+  (width >> 24) & 0xFF,
+  (width >> 16) & 0xFF,
+  (width >> 8) & 0xFF,
+  width & 0xFF,
+  (height >> 24) & 0xFF,
+  (height >> 16) & 0xFF,
+  (height >> 8) & 0xFF,
+  height & 0xFF,
+  0x08,
+  0x02,
+  0x00,
+  0x00,
+  0x00,
+];
