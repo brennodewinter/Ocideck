@@ -134,6 +134,14 @@ List<PackageEntry>? _decodePackageEntries(
   final input = password != null ? Uint8List.fromList(zipBytes) : zipBytes;
   final Archive archive;
   try {
+    final entryCount = readZipEntryCount(
+      zipBytes,
+      stopAfter: FileService.maxPackageEntries + 1,
+    );
+    if (entryCount == null || entryCount > FileService.maxPackageEntries) {
+      logWarning('FileService.decodePackageEntries: too many archive entries');
+      return null;
+    }
     archive = ZipDecoder().decodeBytes(input, password: password);
   } catch (e, s) {
     logError('FileService.decodePackageEntries: ZIP decode failed', e, s);

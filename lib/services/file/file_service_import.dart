@@ -75,6 +75,13 @@ enum ImportFailure {
 bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
   try {
     if (bytes.length > maxBytes) throw const ExtractionLimitException();
+    final entryCount = readZipEntryCount(
+      bytes,
+      stopAfter: FileService.maxPackageEntries + 1,
+    );
+    if (entryCount == null || entryCount > FileService.maxPackageEntries) {
+      throw const ExtractionLimitException();
+    }
     final copy = Uint8List.fromList(bytes);
     final archive = ZipDecoder().decodeBytes(copy, password: password);
     if (archive.files.length > FileService.maxPackageEntries) {
@@ -215,6 +222,16 @@ extension FileServiceImport on FileService {
     // eigen melding krijgen vóór de echte begrensde decode hieronder.
     final Archive archive;
     try {
+      final entryCount = readZipEntryCount(
+        zipBytes,
+        stopAfter: FileService.maxPackageEntries + 1,
+      );
+      if (entryCount == null) {
+        return const ImportOutcome.failed(ImportFailure.unsupported);
+      }
+      if (entryCount > FileService.maxPackageEntries) {
+        return const ImportOutcome.failed(ImportFailure.limitExceeded);
+      }
       archive = ZipDecoder().decodeBytes(zipBytes, password: password);
     } catch (e, s) {
       logError('FileService.importPackageBytes: ZIP decode failed', e, s);
