@@ -33,9 +33,11 @@ import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import '../../services/download_delivery.dart';
+import '../../services/classification_enforcement_policy.dart';
 import '../../services/privacy/privacy_own_identity.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/privacy/privacy_scanner.dart';
+import '../../l10n/export_block_localization.dart';
 import '../../state/deck_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
@@ -90,6 +92,19 @@ Future<void> offerSessionExport(
   // Projectie: de export levert aan een ontvanger, dus redactie geldt — tenzij
   // de gebruiker regels heeft uitgezet (disabledRules). Zie privacyexpert-skill.
   final settings = ref.read(settingsProvider);
+  final policy = ClassificationEnforcementPolicy.fromAppSettings(settings);
+  final deckDecision = policy.evaluate(deck.tlp);
+  final classification = deckDecision.allowed
+      ? policy.evaluate(deckReleaseTlp(deck))
+      : deckDecision;
+  if (!classification.allowed) {
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      context.l10n,
+      exportBlockMessage(context.l10n, classification) ?? '',
+    );
+    return;
+  }
   final audience = PrivacyProjection.forAudience(
     deck.copyWith(slides: edited.values.toList()),
     disabledRules: settings.privacyDisabledRules,
@@ -313,9 +328,12 @@ Future<_SessionExportOutcome> _downloadSessionSlides(
     if (projectedById.contains(entry.value.id)) {
       final p = audience.slides.firstWhere((s) => s.id == entry.value.id);
       exported[entry.key] = p;
-    } else {
-      exported[entry.key] = entry.value;
     }
+  }
+  // Een ontbrekende projectie is een weigering, geen reden om de bron-dia
+  // alsnog naar een ontvanger te schrijven.
+  if (exported.length != edited.length) {
+    return _SessionExportOutcome.failed;
   }
   if (deliversByDownload) {
     // Eén download voor de hele sessie. Per dia een eigen download aanbieden

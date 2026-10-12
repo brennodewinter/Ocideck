@@ -9,6 +9,7 @@ library;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ocideck/models/settings.dart' show ThemeProfile;
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -20,6 +21,7 @@ import 'package:ocideck/services/download_delivery.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/widgets/presentation/session_export.dart';
+import 'package:ocideck/models/deck.dart' show TlpLevel;
 
 DeckNotifier _notifier() {
   final md = MarkdownService();
@@ -229,6 +231,8 @@ void main() {
     var accept = true;
 
     setUp(() {
+      // Widgettests mogen geen classificatiebeleid uit een eerdere test erven.
+      SharedPreferences.setMockInitialValues({});
       calls.clear();
       accept = true;
       debugDeliversByDownload = true;
@@ -272,6 +276,32 @@ void main() {
       expect(slides.map((s) => s.tableRows[1][1]), ['1', '1']);
     });
 
+    testWidgets('de download bevat nooit ongeredigeerde session-data', (
+      tester,
+    ) async {
+      final session = _editedSession();
+      final slide = session.notifier.currentState.deck!.slides.first;
+      session.notifier.updateSlide(
+        0,
+        slide.copyWith(customMarkdown: '# [[geheim]]\n\nBijgewerkt'),
+      );
+
+      await tester.pumpWidget(_harness(session.notifier, session.originals));
+      await tester.tap(find.text('start'));
+      await tester.pump();
+      await tester.pump();
+      await tester.tap(find.text('Downloaden als losse bestanden'));
+      await tester.pump();
+      await tester.pump();
+
+      final zip = ZipDecoder().decodeBytes(calls.single.bytes);
+      final markdown = [
+        for (final file in zip.files)
+          String.fromCharCodes(file.content as List<int>),
+      ].join('\n');
+      expect(markdown, isNot(contains('geheim')));
+    });
+
     testWidgets('een geweigerde download laat het deck staan én zegt het', (
       tester,
     ) async {
@@ -294,5 +324,46 @@ void main() {
       expect(find.byType(SnackBar), findsOneWidget);
       expect(find.textContaining('niet opgeslagen'), findsOneWidget);
     });
+
+    testWidgets('classificatiebeleid blokkeert de sessie-download', (
+      tester,
+    ) async {
+      SharedPreferences.setMockInitialValues({'maxReleaseExportTlp': 'green'});
+      final session = _editedSession();
+      session.notifier.updateInfo(tlp: TlpLevel.red);
+      await tester.pumpWidget(_harness(session.notifier, session.originals));
+      await tester.tap(find.text('start'));
+      await tester.pump();
+      await tester.pump();
+      await tester.tap(find.text('Downloaden als losse bestanden'));
+      await tester.pump();
+
+      expect(calls, isEmpty);
+      expect(find.byType(SnackBar), findsOneWidget);
+      expect(find.textContaining('classificatiebeleid'), findsOneWidget);
+      expect(
+        session.notifier.currentState.deck!.slides.first.tableRows[1][1],
+        '99',
+      );
+    });
+
+    testWidgets(
+      'verplicht classificeren blokkeert een ongeclassificeerd deck',
+      (tester) async {
+        SharedPreferences.setMockInitialValues({
+          'requireClassificationOnExport': true,
+        });
+        final session = _editedSession();
+        await tester.pumpWidget(_harness(session.notifier, session.originals));
+        await tester.tap(find.text('start'));
+        await tester.pump();
+        await tester.pump();
+        await tester.tap(find.text('Downloaden als losse bestanden'));
+        await tester.pump();
+
+        expect(calls, isEmpty);
+        expect(find.textContaining('classificatiebeleid'), findsOneWidget);
+      },
+    );
   });
 }
