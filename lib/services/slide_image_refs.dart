@@ -330,7 +330,10 @@ Slide absolutizeSlideAssetPaths(Slide slide, String? basePath) {
         Uri.tryParse(trimmed)?.hasScheme == true) {
       return null;
     }
-    return p.normalize(p.join(basePath, trimmed));
+    final base = p.normalize(basePath);
+    final absolute = p.normalize(p.join(base, trimmed));
+    if (absolute != base && !p.isWithin(base, absolute)) return null;
+    return absolute;
   }
 
   var next = rewriteSlideImagePaths(slide, abs);

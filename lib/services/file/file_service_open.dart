@@ -93,15 +93,12 @@ extension FileServiceDocumentOpen on FileService {
 
   /// Vraagt de gebruiker waar het document naartoe moet en schrijft het daar
   /// heen (nieuw of nog niet opgeslagen document, DOCUMENT_MODE.md §3).
-  /// Levert het gekozen pad én het document zoals het op schijf staat —
-  /// `mem:`- en absolute afbeeldingsverwijzingen zijn dan al naar `images/`
-  /// gematerialiseerd — of null bij wegklikken of schrijffout, zie
-  /// [_writeDocumentToPicked]. Spiegel van [saveDeckAsDetailed], zonder
-  /// projectmap of sidecars: een document is één plat bestand plus zijn
-  /// afbeeldingsmap.
+  /// Levert het gekozen pad en document zoals opgeslagen, met afbeeldingen
+  /// gematerialiseerd onder `images/`, of null bij annuleren of schrijffout.
   Future<({String path, MarkdownDocument document})?> saveDocumentAs(
     MarkdownDocument document, {
     String? initialDirectory,
+    String? sourceProjectPath,
   }) async => _writeDocumentToPicked(
     document,
     await _saveDestination(
@@ -109,6 +106,7 @@ extension FileServiceDocumentOpen on FileService {
       fileName: 'document.md',
       initialDirectory: initialDirectory,
     ),
+    sourceProjectPath: sourceProjectPath,
   );
 }
 
@@ -120,11 +118,16 @@ extension FileServiceDocumentOpen on FileService {
 /// plafond.
 Future<({String path, MarkdownDocument document})?> _writeDocumentToPicked(
   MarkdownDocument document,
-  String? dest,
-) async {
+  String? dest, {
+  String? sourceProjectPath,
+}) async {
   if (dest == null) return null;
   final path = withExtension(dest, '.md');
-  final written = await saveDocument(document, path);
+  final written = await saveDocument(
+    document,
+    path,
+    sourceProjectPath: sourceProjectPath,
+  );
   return written == null ? null : (path: path, document: written);
 }
 
@@ -142,16 +145,12 @@ Future<({String path, MarkdownDocument document})?> _writeDocumentToPicked(
 /// null bij een schrijffout; de aanroeper moet die versie overnemen zodat
 /// editor, schijf en conflict-hash over één bron lopen.
 ///
-/// De veiligheidsscan hoort bij het *openen* (onvertrouwde invoer); wat de
-/// gebruiker in zijn eigen editor typt en naar zijn eigen, gekozen pad
-/// wegschrijft, is geen onvertrouwde invoer en gaat er niet nog eens doorheen.
-///
-/// Top-level en niet op [FileService]: hij raakt geen enkel veld van die
-/// klasse aan, en de klasse zit tegen haar plafond.
+/// Top-level helper; de klasse zit tegen haar plafond.
 Future<MarkdownDocument?> saveDocument(
   MarkdownDocument document,
-  String filePath,
-) async {
+  String filePath, {
+  String? sourceProjectPath,
+}) async {
   try {
     final written = kIsWeb
         ? document
@@ -159,6 +158,7 @@ Future<MarkdownDocument?> saveDocument(
             await ImageService().copyDocumentImagesToProject(
               document.source,
               p.dirname(filePath),
+              sourceProjectPath: sourceProjectPath,
             ),
           );
     await writeBytesAtomic(File(filePath), written.toBytes());

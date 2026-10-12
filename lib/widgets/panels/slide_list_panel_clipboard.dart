@@ -68,9 +68,16 @@ Future<void> _copySlidesToOtherDeck(
   final targetDeck = target.deckNotifierOrNull;
   if (targetDeck == null) return;
 
-  final adopted = await ref.read(imageServiceProvider).adoptSlideAssets([
-    for (final s in slides) absolutizeSlideAssetPaths(s, sourceProjectPath),
-  ], targetDeck.currentState.deck?.projectPath);
+  final adopted = await ref
+      .read(imageServiceProvider)
+      .adoptSlideAssets(
+        [
+          for (final s in slides)
+            absolutizeSlideAssetPaths(s, sourceProjectPath),
+        ],
+        targetDeck.currentState.deck?.projectPath,
+        sourceProjectPath: sourceProjectPath,
+      );
   if (!context.mounted) return;
 
   final at = targetDeck.insertSlides(adopted);

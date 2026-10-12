@@ -909,7 +909,13 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                   // kopiëren voordat hij ingevoegd wordt (#2104).
                   final adopted = await ref
                       .read(imageServiceProvider)
-                      .adoptSlideAssets([clipboard], deck.projectPath);
+                      .adoptSlideAssets(
+                        [clipboard],
+                        deck.projectPath,
+                        sourceProjectPath: ref.read(
+                          slideClipboardSourceProjectProvider,
+                        ),
+                      );
                   if (!context.mounted) return;
                   // Eén ongedaan-maak-stap; zie "Afbeelding plakken" hierboven.
                   final at = notifier.insertSlides(adopted, afterIndex: idx);

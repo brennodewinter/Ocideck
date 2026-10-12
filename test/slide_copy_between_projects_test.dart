@@ -95,7 +95,11 @@ void main() {
       // Kopiëren in A: de verwijzing wordt absoluut tegen A aangelegd.
       final onClipboard = absolutizeSlideAssetPaths(copied, dirA.path);
       // Plakken in B: het bestand verhuist mee en het pad wordt weer relatief.
-      final pasted = await service.adoptSlideAssets([onClipboard], dirB.path);
+      final pasted = await service.adoptSlideAssets(
+        [onClipboard],
+        dirB.path,
+        sourceProjectPath: dirA.path,
+      );
 
       expect(pasted.single.imagePath, 'images/pic.png');
       expect(File(p.join(dirB.path, 'images', 'pic.png')).readAsBytesSync(), [
@@ -118,9 +122,11 @@ void main() {
         SlideType.image,
       ).copyWith(imagePath: 'pic.png');
 
-      final pasted = await service.adoptSlideAssets([
-        absolutizeSlideAssetPaths(copied, dirA.path),
-      ], dirB.path);
+      final pasted = await service.adoptSlideAssets(
+        [absolutizeSlideAssetPaths(copied, dirA.path)],
+        dirB.path,
+        sourceProjectPath: dirA.path,
+      );
 
       expect(pasted.single.imagePath, 'images/pic_2.png');
       expect(File(p.join(dirB.path, 'images', 'pic_2.png')).readAsBytesSync(), [
@@ -147,9 +153,11 @@ void main() {
         SlideType.video,
       ).copyWith(videoPath: 'media/clip.mp4', audioPath: 'media/geluid.mp3');
 
-      final pasted = await service.adoptSlideAssets([
-        absolutizeSlideAssetPaths(copied, dirA.path),
-      ], dirB.path);
+      final pasted = await service.adoptSlideAssets(
+        [absolutizeSlideAssetPaths(copied, dirA.path)],
+        dirB.path,
+        sourceProjectPath: dirA.path,
+      );
 
       expect(pasted.single.videoPath, 'media/clip.mp4');
       expect(pasted.single.audioPath, 'media/geluid.mp3');
@@ -166,6 +174,44 @@ void main() {
       ).copyWith(imagePath: '/bron/images/pic.png');
       final out = await service.adoptSlideAssets([slide], null);
       expect(identical(out.single, slide), isTrue);
+    });
+
+    test('weigert relatieve paden die buiten de bronmap ontsnappen', () {
+      final sourceDir = Directory(p.join(tmp.path, 'bronmap'))..createSync();
+      final slide = Slide.create(
+        SlideType.image,
+      ).copyWith(imagePath: '../geheim.png');
+
+      final out = absolutizeSlideAssetPaths(slide, sourceDir.path);
+
+      expect(out.imagePath, '../geheim.png');
+    });
+
+    test('weigert een bron-symlink die buiten de bronmap wijst', () async {
+      final dirA = Directory(p.join(tmp.path, 'a'))..createSync();
+      final dirB = Directory(p.join(tmp.path, 'b'))..createSync();
+      final outside = File(p.join(tmp.path, 'geheim.png'))
+        ..writeAsBytesSync([4, 5, 6]);
+      Directory(p.join(dirA.path, 'images')).createSync(recursive: true);
+      Link(p.join(dirA.path, 'images', 'escape.png')).createSync(outside.path);
+      final slide = Slide.create(
+        SlideType.image,
+      ).copyWith(imagePath: 'images/escape.png');
+
+      final pasted = await service.adoptSlideAssets(
+        [absolutizeSlideAssetPaths(slide, dirA.path)],
+        dirB.path,
+        sourceProjectPath: dirA.path,
+      );
+
+      expect(
+        pasted.single.imagePath,
+        p.join(dirA.path, 'images', 'escape.png'),
+      );
+      expect(
+        File(p.join(dirB.path, 'images', 'escape.png')).existsSync(),
+        isFalse,
+      );
     });
   });
 }

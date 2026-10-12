@@ -167,7 +167,11 @@ void main() {
         final slide = Slide.create(
           SlideType.bulletsImage,
         ).copyWith(imagePath: src.path);
-        final out = await service.copyImagesToProject([slide], project.path);
+        final out = await service.copyImagesToProject(
+          [slide],
+          project.path,
+          sourceProjectPath: tmp.path,
+        );
 
         expect(out.single.imagePath, 'images/source.png');
         expect(
@@ -185,7 +189,11 @@ void main() {
       final slide = Slide.create(
         SlideType.bulletsImage,
       ).copyWith(imagePath: a.path, imagePath2: b.path);
-      final out = await service.copyImagesToProject([slide], project.path);
+      final out = await service.copyImagesToProject(
+        [slide],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
 
       expect(out.single.imagePath, 'images/a.png');
       expect(out.single.imagePath2, 'images/b.png');
@@ -197,7 +205,11 @@ void main() {
         SlideType.bulletsImage,
       ).copyWith(imagePath: 'images/keep.png');
 
-      final out = await service.copyImagesToProject([slide], project.path);
+      final out = await service.copyImagesToProject(
+        [slide],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
       expect(out.single.imagePath, 'images/keep.png');
       // Nothing was copied for an already-relative path.
       expect(Directory(p.join(project.path, 'images')).listSync(), isEmpty);
@@ -210,7 +222,11 @@ void main() {
         SlideType.bulletsImage,
       ).copyWith(imagePath: missing);
 
-      final out = await service.copyImagesToProject([slide], project.path);
+      final out = await service.copyImagesToProject(
+        [slide],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
       expect(out.single.imagePath, missing);
     });
 
@@ -228,7 +244,11 @@ void main() {
           SlideType.bulletsImage,
         ).copyWith(imagePath: src.path);
 
-        final out = await service.copyImagesToProject([s1, s2], project.path);
+        final out = await service.copyImagesToProject(
+          [s1, s2],
+          project.path,
+          sourceProjectPath: tmp.path,
+        );
         expect(out[0].imagePath, 'images/dup.png');
         expect(out[1].imagePath, 'images/dup.png');
         // Both slides point at the single copied file.

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:path/path.dart' as p;
 
 import '../models/annotation.dart';
 import '../models/asset_origin.dart';
@@ -466,10 +467,11 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final deckChanged = !identical(state.deck, deck);
     final userEdited = deckChanged && _undoStack.length > undoLenBefore;
     final settled = userEdited ? state.deck : (reopened ?? deck);
+    final relocated = settled?.copyWith(projectPath: p.dirname(path));
     if (reopened == null) {
       logWarning('DeckNotifier.saveAs: saved file could not be re-read', path);
       state = state.copyWith(
-        deck: settled,
+        deck: relocated,
         filePath: path,
         isDirty: userEdited || incomplete,
         error:
@@ -477,7 +479,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       );
     } else {
       state = state.copyWith(
-        deck: settled,
+        deck: relocated,
         filePath: path,
         isDirty: userEdited || incomplete,
       );

@@ -550,8 +550,9 @@ class ImageService {
   /// eerst elk pad naar zijn nieuwe plek, dan de dia in haar geheel om.
   Future<List<Slide>> copyImagesToProject(
     List<Slide> slides,
-    String projectPath,
-  ) async {
+    String projectPath, {
+    String? sourceProjectPath,
+  }) async {
     final imagesDir = Directory(p.join(projectPath, 'images'));
     await imagesDir.create(recursive: true);
 
@@ -580,6 +581,7 @@ class ImageService {
         final dest = await _copyImageToProject(
           path,
           imagesDir,
+          sourceProjectPath: sourceProjectPath,
           existingByHash: existingByHash,
         );
         if (dest != null) copied[path] = dest;
@@ -614,8 +616,9 @@ class ImageService {
   /// lege-afbeeldingsplek is eerlijker dan stil weglaten.
   Future<String> copyDocumentImagesToProject(
     String source,
-    String projectPath,
-  ) async {
+    String projectPath, {
+    String? sourceProjectPath,
+  }) async {
     final targets = <String>{
       for (final path in inlineImagePaths(source))
         if (WebAssetStore.isMemPath(path) ||
@@ -637,6 +640,7 @@ class ImageService {
       final dest = await _copyImageToProject(
         path,
         imagesDir,
+        sourceProjectPath: sourceProjectPath,
         existingByHash: existingByHash,
       );
       if (dest != null) rewrites[path] = dest;
@@ -656,10 +660,15 @@ class ImageService {
   /// binnen via [copyImagesToProject].
   Future<List<Slide>> adoptSlideAssets(
     List<Slide> slides,
-    String? projectPath,
-  ) async {
+    String? projectPath, {
+    String? sourceProjectPath,
+  }) async {
     if (kIsWeb || projectPath == null || projectPath.isEmpty) return slides;
-    final withImages = await copyImagesToProject(slides, projectPath);
+    final withImages = await copyImagesToProject(
+      slides,
+      projectPath,
+      sourceProjectPath: sourceProjectPath,
+    );
     return copyMediaToProject(withImages, projectPath);
   }
 
@@ -752,6 +761,7 @@ class ImageService {
   Future<String?> _copyImageToProject(
     String sourcePath,
     Directory imagesDir, {
+    String? sourceProjectPath,
     Map<String, String>? existingByHash,
   }) async {
     if (WebAssetStore.isMemPath(sourcePath)) {
@@ -766,7 +776,13 @@ class ImageService {
         !p.isAbsolute(sourcePath)) {
       return null;
     }
-    return _copyInto(sourcePath, imagesDir, 'images');
+    final trustedSource = AssetStaging.isStagedPath(sourcePath)
+        ? resolveContainedRealPath(sourcePath, AssetStaging.rootPath)
+        : sourceProjectPath == null
+        ? null
+        : resolveContainedRealPath(sourcePath, sourceProjectPath);
+    if (trustedSource == null) return null;
+    return _copyInto(trustedSource, imagesDir, 'images');
   }
 
   /// Schrijf een in-geheugen `mem:`-afbeelding als echt bestand in de
