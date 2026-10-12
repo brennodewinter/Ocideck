@@ -444,7 +444,7 @@ void main() {
     );
     expect(
       find.descendant(of: dialog, matching: find.byType(TextField)),
-      findsNWidgets(3),
+      findsNWidgets(4),
     );
     expect(find.byKey(const Key('document-field-name-0')), findsNothing);
     expect(

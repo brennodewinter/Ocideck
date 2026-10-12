@@ -195,7 +195,10 @@ class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
                 ),
                 const SizedBox(height: 10),
               ],
-              KeywordChipsEditor(controller: _keywords),
+              KeywordChipsEditor(
+                controller: _keywords,
+                enabled: !_sourceOverLimit,
+              ),
               const SizedBox(height: 10),
               for (final entry in _knownValues.entries) ...[
                 TextField(

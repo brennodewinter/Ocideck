@@ -7,9 +7,14 @@ import '../l10n/app_localizations.dart';
 /// [controller] blijft de bron: opslaan leest die tekst, niet een eigen lijst.
 /// Enter of een komma voegt een chip toe; het kruisje haalt hem weg (#2395).
 class KeywordChipsEditor extends StatefulWidget {
-  const KeywordChipsEditor({super.key, required this.controller});
+  const KeywordChipsEditor({
+    super.key,
+    required this.controller,
+    this.enabled = true,
+  });
 
   final TextEditingController controller;
+  final bool enabled;
 
   @override
   State<KeywordChipsEditor> createState() => _KeywordChipsEditorState();
@@ -63,27 +68,37 @@ class _KeywordChipsEditorState extends State<KeywordChipsEditor> {
               for (final word in words)
                 InputChip(
                   label: Text(word),
-                  onDeleted: () => _write([
-                    for (final item in words)
-                      if (item != word) item,
-                  ]),
+                  onDeleted: widget.enabled
+                      ? () => _write([
+                          for (final item in words)
+                            if (item != word) item,
+                        ])
+                      : null,
                 ),
             ],
           ),
-        TextField(
-          key: const Key('keyword-chip-input'),
-          controller: _input,
-          decoration: InputDecoration(
-            isDense: true,
-            hintText: l10n.d('Typ een trefwoord en druk op Enter'),
+        Tooltip(
+          message: l10n.d('Typ een trefwoord en druk op Enter'),
+          child: TextField(
+            key: const Key('keyword-chip-input'),
+            controller: _input,
+            enabled: widget.enabled,
+            decoration: InputDecoration(
+              isDense: true,
+              hintText: l10n.d(
+                'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
+              ),
+            ),
+            textInputAction: TextInputAction.done,
+            onSubmitted: widget.enabled ? (_) => _commit() : null,
+            onChanged: widget.enabled
+                ? (value) {
+                    if (!value.contains(',')) return;
+                    _input.text = value.replaceAll(',', '').trim();
+                    _commit();
+                  }
+                : null,
           ),
-          textInputAction: TextInputAction.done,
-          onSubmitted: (_) => _commit(),
-          onChanged: (value) {
-            if (!value.contains(',')) return;
-            _input.text = value.replaceAll(',', '').trim();
-            _commit();
-          },
         ),
       ],
     );
