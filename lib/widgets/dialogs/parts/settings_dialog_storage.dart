@@ -566,14 +566,14 @@ extension _SettingsStorageTab on _SettingsDialogState {
         label: l10n.d('Documenten'),
         value: _documentStartDirectory,
         locals: locals,
-        onChanged: (path) => setState(() => _documentStartDirectory = path),
+        onChanged: (path) => _rebuild(() => _documentStartDirectory = path),
       ),
       const SizedBox(height: 8),
       _startDirectoryPicker(
         label: l10n.d('Presentaties'),
         value: _presentationStartDirectory,
         locals: locals,
-        onChanged: (path) => setState(() => _presentationStartDirectory = path),
+        onChanged: (path) => _rebuild(() => _presentationStartDirectory = path),
       ),
     ];
   }

@@ -113,7 +113,7 @@ Widget _documentInfoStrip(
                 ],
               ),
             ),
-            if (trailing != null) trailing,
+            ?trailing,
           ],
         ),
       ),

@@ -303,7 +303,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     bool isMarkdownMode,
     ExportDecision classificationDecision,
   ) {
-    final deckNotifier = ref.read(deckProvider.notifier);
     return AppBar(
       title: Row(
         children: [

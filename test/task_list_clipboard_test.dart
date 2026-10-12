@@ -1,4 +1,3 @@
-import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/clipboard_markdown.dart';
 import 'package:ocideck/utils/html_to_markdown.dart';
