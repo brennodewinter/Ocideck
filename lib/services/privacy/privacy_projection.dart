@@ -97,7 +97,12 @@ typedef RedactedText = ({String text, int count});
 /// Een half-open bereik in een tekst.
 typedef _Range = ({int start, int end});
 
-typedef _ProjectedSlides = ({List<Slide> slides, int count, Set<int> shielded});
+typedef _ProjectedSlides = ({
+  List<Slide> slides,
+  int count,
+  Set<int> shielded,
+  bool deckBackgroundSuppressed,
+});
 
 List<UsedTool> _projectUsedTools(
   Deck deck,
@@ -258,6 +263,11 @@ class PrivacyProjection {
     var waiverIndex = 0;
     var confirmationIndex = 0;
     var projectedDeckMarpStyle = deck.marpStyle;
+    if (projectedSlides.deckBackgroundSuppressed) {
+      projectedDeckMarpStyle = projectedDeckMarpStyle.copyWith(
+        clearBackgroundImage: true,
+      );
+    }
     if (deck.marpStyle.hasHeader) {
       projectedDeckMarpStyle = projectedDeckMarpStyle.copyWith(
         header: deckField('marpHeader', deck.marpStyle.header),
@@ -627,6 +637,16 @@ _ProjectedSlides _projectSlides(
   var count = 0;
   final slides = <Slide>[];
   final shielded = <int>{};
+  final deckBackgroundImage = deck.marpStyle.backgroundImage;
+  final deckBackgroundSuppressed =
+      deckBackgroundImage.isNotEmpty &&
+      deck.slides.any((slide) {
+        final disposition = effectivePrivacyDisposition(
+          deck: deck.privacy,
+          slide: slide.privacy,
+        );
+        return external || disposition == PrivacyDisposition.redact;
+      });
   for (var i = 0; i < deck.slides.length; i++) {
     final slide = deck.slides[i];
     final disposition = effectivePrivacyDisposition(
@@ -647,11 +667,26 @@ _ProjectedSlides _projectSlides(
       deckBackgroundImage: deck.marpStyle.backgroundImage,
     );
     count += projected.count;
+    var projectedSlide = projected.slide;
+    if (deckBackgroundSuppressed &&
+        !active &&
+        !slide.marpStyle.hasBackgroundImage) {
+      projectedSlide = projectedSlide.copyWith(
+        marpStyle: projectedSlide.marpStyle.copyWith(
+          backgroundImage: deckBackgroundImage,
+        ),
+      );
+    }
     // De effectieve stand reist met de dia mee, zodat geen renderoppervlak het
     // shield via een vergeten extra parameter kan kwijtraken.
-    slides.add(projected.slide.copyWith(privacy: disposition));
+    slides.add(projectedSlide.copyWith(privacy: disposition));
   }
-  return (slides: slides, count: count, shielded: shielded);
+  return (
+    slides: slides,
+    count: count,
+    shielded: shielded,
+    deckBackgroundSuppressed: deckBackgroundSuppressed,
+  );
 }
 
 typedef _DeckFieldProjector =

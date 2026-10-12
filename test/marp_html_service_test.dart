@@ -5,11 +5,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/marp_style.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
@@ -95,6 +98,33 @@ void main() {}
     expect(html, contains('htmlLabels:false'));
     expect(html, contains('flowchart:{htmlLabels:false}'));
   });
+
+  test(
+    'een geredigeerde deckachtergrond komt niet in de HTML-export',
+    () async {
+      const background = 'data:image/png;base64,gevoelige-achtergrond';
+      final source = Deck(
+        title: 'D',
+        marpStyle: const MarpStyle(backgroundImage: background),
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(privacy: PrivacyDisposition.redact),
+        ],
+      );
+      final projected = PrivacyProjection.forAudience(source).deck;
+      final markdown = MarkdownService().generateDeck(
+        projected,
+        forExport: true,
+      );
+      final html = await MarpHtmlService(
+        loadAsset: _diskLoader,
+      ).build(markdown);
+
+      expect(markdown, isNot(contains(background)));
+      expect(html, isNot(contains('gevoelige-achtergrond')));
+    },
+  );
 
   test(
     'build() stamps classification metadata and banner in the head',
