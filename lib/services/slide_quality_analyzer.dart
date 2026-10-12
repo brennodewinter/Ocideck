@@ -251,7 +251,7 @@ class SlideQualityAnalyzer {
     _checkQuestionAnswerable(slide, index, issues);
     _checkFindingSections(slide, index, issues);
     _checkEmptySlide(slide, index, issues);
-    _checkCallouts(slide, index, issues);
+    _checkCallouts(slide, index, projectPath, issues);
     _slideIssuesCache[slide] = _SlideIssuesMemo(
       theme: theme,
       font: font,

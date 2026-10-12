@@ -49,7 +49,7 @@ void main() {
         ),
       ],
     );
-    final deck = Deck(title: 'test', slides: [slide]);
+    final deck = Deck(title: 'test', projectPath: tmp.path, slides: [slide]);
     final result = analyzer.analyze(deck);
     final clipIssues = result.issues
         .where((i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView)
@@ -76,7 +76,7 @@ void main() {
         ),
       ],
     );
-    final deck = Deck(title: 'test', slides: [slide]);
+    final deck = Deck(title: 'test', projectPath: tmp.path, slides: [slide]);
     final result = analyzer.analyze(deck);
     final clipIssues = result.issues
         .where((i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView)
@@ -99,7 +99,7 @@ void main() {
         ),
       ],
     );
-    final deck = Deck(title: 'test', slides: [slide]);
+    final deck = Deck(title: 'test', projectPath: tmp.path, slides: [slide]);
     final result = analyzer.analyze(deck);
     final clipIssues = result.issues
         .where((i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView)
@@ -119,7 +119,7 @@ void main() {
         ),
       ],
     );
-    final deck = Deck(title: 'test', slides: [slide]);
+    final deck = Deck(title: 'test', projectPath: tmp.path, slides: [slide]);
     final result = analyzer.analyze(deck);
     final clipIssues = result.issues
         .where((i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView)
@@ -141,7 +141,7 @@ void main() {
         ),
       ],
     );
-    final deck = Deck(title: 'test', slides: [slide]);
+    final deck = Deck(title: 'test', projectPath: tmp.path, slides: [slide]);
     final result = analyzer.analyze(deck);
     final clipIssues = result.issues
         .where((i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView)
@@ -168,12 +168,39 @@ void main() {
         ),
       ],
     );
-    final deck = Deck(title: 'test', slides: [slide]);
+    final deck = Deck(title: 'test', projectPath: tmp.path, slides: [slide]);
     final result = analyzer.analyze(deck);
     final clipIssues = result.issues
         .where((i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView)
         .toList();
     expect(clipIssues, hasLength(1));
+  });
+
+  test('een afbeelding buiten het project wordt niet gelezen', () {
+    final outside = File('${tmp.parent.path}/callout-outside.png')
+      ..writeAsBytesSync(_minimalPng(400, 100));
+    addTearDown(() => outside.deleteSync());
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      anchor: 'test',
+      bullets: ['punt (A)'],
+      imagePath: outside.path,
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.05, 0.5)],
+          description: 'buiten project',
+        ),
+      ],
+    );
+    final result = analyzer.analyze(
+      Deck(title: 'test', projectPath: tmp.path, slides: [slide]),
+    );
+    expect(
+      result.issues.where(
+        (i) => i.kind == SlideQualityIssueKind.calloutTargetOutOfView,
+      ),
+      isEmpty,
+    );
   });
 }
 
