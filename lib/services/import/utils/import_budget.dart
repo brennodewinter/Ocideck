@@ -58,6 +58,8 @@ class ImportBudget {
     this.maxSheetRows = 65536,
     this.maxSheetCols = 1024,
     this.maxSheetCells = 1000000,
+    this.maxTableCells = 100000,
+    this.maxExpandedTableChars = 16 * _mib,
     this.maxDuration = const Duration(minutes: 2),
   });
 
@@ -118,6 +120,12 @@ class ImportBudget {
   /// product of vele lege werkbladen toe.
   final int maxSheetCells;
 
+  /// Maximaal aantal uitgeklapte tabelcellen in één ODP- of ODT-import.
+  final int maxTableCells;
+
+  /// Maximale tekstlengte na ODF-celherhaling, vóór Markdown of dia-opbouw.
+  final int maxExpandedTableChars;
+
   /// Maximale wandkloktijd voor één import. De worker toetst dit binnen zijn
   /// eigen isolate bij elke werkeenheid (na het uitpakken, na het parsen, per
   /// dia); een overschrijding eindigt de import als
@@ -150,6 +158,8 @@ class ImportBudget {
     int maxSheetRows = 8,
     int maxSheetCols = 4,
     int maxSheetCells = 32,
+    int maxTableCells = 16,
+    int maxExpandedTableChars = 4 * _kib,
     Duration maxDuration = const Duration(minutes: 2),
   }) => ImportBudget(
     maxSourceBytes: maxSourceBytes,
@@ -164,8 +174,52 @@ class ImportBudget {
     maxSheetRows: maxSheetRows,
     maxSheetCols: maxSheetCols,
     maxSheetCells: maxSheetCells,
+    maxTableCells: maxTableCells,
+    maxExpandedTableChars: maxExpandedTableChars,
     maxDuration: maxDuration,
   );
+}
+
+/// Eén gedeelde grens voor ODF-tabellen binnen een volledige import.
+class ExpandedTableBudget {
+  ExpandedTableBudget(this.budget);
+
+  final ImportBudget budget;
+  int _used = 0;
+  int _expandedChars = 0;
+
+  void addRow() {
+    if (_used >= budget.maxTableCells) {
+      throw ImportBudgetException('${budget.maxTableCells} tabelcellen');
+    }
+    _used++;
+  }
+
+  void addCells(int rowWidth, int repeat, int textLength) {
+    if (repeat <= 0) return;
+    if (repeat > budget.maxSheetCols - rowWidth) {
+      throw ImportBudgetException('${budget.maxSheetCols} tabelkolommen');
+    }
+    if (repeat > budget.maxTableCells - _used) {
+      throw ImportBudgetException('${budget.maxTableCells} tabelcellen');
+    }
+    if (textLength > 0 &&
+        repeat >
+            (budget.maxExpandedTableChars - _expandedChars) ~/ textLength) {
+      throw ImportBudgetException(
+        '${budget.maxExpandedTableChars} tabelteksttekens',
+      );
+    }
+    _used += repeat;
+    _expandedChars += repeat * textLength;
+  }
+
+  void addChartValues(int count) {
+    if (count > budget.maxTableCells - _used) {
+      throw ImportBudgetException('${budget.maxTableCells} grafiekwaarden');
+    }
+    _used += count;
+  }
 }
 
 /// Gegooid zodra de bronpresentatie een grens uit het [ImportBudget]

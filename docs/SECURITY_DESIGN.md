@@ -877,6 +877,11 @@ claims no certification and no compliance (*reworded 2026-07-21*).
 - **Defence in depth.** Layered guards rather than a single boundary: the SSRF
   guard, the import caps, path containment, the projection boundary.
 
+ODP and ODT table expansion uses one budget per import: at most 1024 columns
+per row, 100,000 expanded cells and derived chart values, and 16 MiB of
+repeated cell text. Empty rows also consume one budget unit. A limit breach
+ends the import rather than silently dropping a table or chart.
+
 **"Fail-closed" is per mechanism, not a blanket default.** Several mechanisms do
 fail closed once they are switched on — the classification gate writes no file
 when a rule blocks, the SSRF guard refuses rather than falls back, an import over

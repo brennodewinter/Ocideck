@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/import/document_import_service.dart';
 import 'package:ocideck/services/import/importers/docx/docx_document_importer.dart';
 import 'package:ocideck/services/import/importers/odt/odt_document_importer.dart';
+import 'package:ocideck/services/import/utils/import_budget.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 
 import 'helpers/docx_fixture.dart';
@@ -118,6 +119,35 @@ void main() {
   });
 
   group('ODT → Markdown', () {
+    test('ODT-tabel meldt een te grote kolomherhaling als importlimiet', () {
+      const body =
+          '<table:table><table:table-row>'
+          '<table:table-cell table:number-columns-repeated="999999999">'
+          '<text:p>A</text:p></table:table-cell>'
+          '</table:table-row></table:table>';
+      final result = importDocumentBytes(
+        odtFixture(body: body),
+        filename: 'repeat.odt',
+        budget: const ImportBudget(maxSheetCols: 4),
+      );
+      expect(result.isSuccess, isFalse);
+      expect(result.failure!.cause, isA<ImportBudgetException>());
+    });
+
+    test('ODT-tabel begrenst herhaalde tekst vóór Markdown-opbouw', () {
+      final body =
+          '<table:table><table:table-row>'
+          '<table:table-cell table:number-columns-repeated="4">'
+          '<text:p>${'A' * 32}</text:p></table:table-cell>'
+          '</table:table-row></table:table>';
+      final result = importDocumentBytes(
+        odtFixture(body: body),
+        filename: 'repeat-text.odt',
+        budget: const ImportBudget(maxSheetCols: 4, maxExpandedTableChars: 100),
+      );
+      expect(result.failure!.cause, isA<ImportBudgetException>());
+    });
+
     test('converteert koppen, vet/cursief, lijst en tabel', () {
       final bytes = odtFixture();
       final md = convertOdtToMarkdown(bytes);

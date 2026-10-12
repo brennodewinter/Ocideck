@@ -1,6 +1,7 @@
 import 'package:xml/xml.dart';
 
 import '../../models/source_chart.dart';
+import '../../utils/import_budget.dart';
 import 'odp_context.dart';
 
 /// Salvage an ODF chart sub-document (`ObjectCharts/N/content.xml`) into a
@@ -10,7 +11,7 @@ import 'odp_context.dart';
 /// series names (column 0 is the empty corner), and rows 1..n hold the
 /// category label in column 0 and the numeric series values in the remaining
 /// columns. The chart type is read from `<chart:chart chart:class="...">`.
-SourceChart? parseOdpChartXml(String xml) {
+SourceChart? parseOdpChartXml(String xml, ExpandedTableBudget budget) {
   // Geen interne `try/catch`: een misvormde grafiek-XML mag opborrelen naar de
   // `guardParse` in [parsePage], die hem als grafiekverlies noteert (#877) —
   // gelijk aan het PPTX-pad. Een `null`-retour betekent "wel leesbaar, maar geen
@@ -39,11 +40,12 @@ SourceChart? parseOdpChartXml(String xml) {
     );
   }
 
-  final rows = _tableRows(tbl);
+  final rows = _tableRows(tbl, budget);
   if (rows.length < 2) return null;
 
   final header = rows.first;
   final dataRows = rows.sublist(1);
+  budget.addChartValues(header.length * dataRows.length);
   final x = dataRows.map((r) => r.isEmpty ? '' : r.first).toList();
   final series = <SourceChartSeries>[];
   for (var col = 1; col < header.length; col++) {
@@ -66,14 +68,16 @@ SourceChart? parseOdpChartXml(String xml) {
   );
 }
 
-List<List<String>> _tableRows(XmlElement tbl) {
+List<List<String>> _tableRows(XmlElement tbl, ExpandedTableBudget budget) {
   final rows = <List<String>>[];
   for (final tr in childrenLocal(tbl, 'table-row')) {
+    budget.addRow();
     final cells = <String>[];
     for (final tc in childrenLocal(tr, 'table-cell')) {
       final repeat =
           int.tryParse(_attr(tc, 'number-columns-repeated') ?? '') ?? 1;
       final value = _cellStringValue(tc);
+      budget.addCells(cells.length, repeat, value.length);
       for (var i = 0; i < repeat; i++) {
         cells.add(value);
       }

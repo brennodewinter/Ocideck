@@ -174,7 +174,7 @@ void _readFrames(
         feature: 'Tabel',
         description: 'kon niet worden gelezen en is overgeslagen',
         logOp: 'OdpImporter: dia ${index + 1} tabel',
-        body: () => parseOdpTable(tbl),
+        body: () => parseOdpTable(tbl, ctx.tableCells),
       );
       continue;
     }
@@ -262,7 +262,7 @@ SourceChart? _chartFromObject(OdpContext ctx, XmlElement obj) {
   final base = ctx.resolveHref(href);
   final xml = ctx.readPart('$base/content.xml');
   if (xml == null) return null;
-  return parseOdpChartXml(xml);
+  return parseOdpChartXml(xml, ctx.tableCells);
 }
 
 SourceImage? _imageFromHref(

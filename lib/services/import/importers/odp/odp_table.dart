@@ -1,6 +1,7 @@
 import 'package:xml/xml.dart';
 
 import '../../models/source_table.dart';
+import '../../utils/import_budget.dart';
 import 'odp_context.dart';
 
 /// Salvage an ODF `<table:table>` into a [SourceTable].
@@ -9,14 +10,16 @@ import 'odp_context.dart';
 /// `<table:table-cell>` contributes its paragraph text joined by newlines.
 /// Cells with `table:number-columns-repeated` are expanded so columns line up
 /// (a common ODF space-saving trick for empty cells).
-SourceTable? parseOdpTable(XmlElement tbl) {
+SourceTable? parseOdpTable(XmlElement tbl, ExpandedTableBudget budget) {
   final rows = <List<String>>[];
   for (final tr in childrenLocal(tbl, 'table-row')) {
+    budget.addRow();
     final cells = <String>[];
     for (final tc in childrenLocal(tr, 'table-cell')) {
       final repeat =
           int.tryParse(_attr(tc, 'number-columns-repeated') ?? '') ?? 1;
       final text = _cellText(tc);
+      budget.addCells(cells.length, repeat, text.length);
       for (var i = 0; i < repeat; i++) {
         cells.add(text);
       }

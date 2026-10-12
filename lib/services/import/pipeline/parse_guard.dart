@@ -1,5 +1,6 @@
 import '../../../utils/log.dart';
 import '../models/conversion_issue.dart';
+import '../utils/import_budget.dart';
 
 /// De naad waarlangs [guardParse] logt: de bewerking en het foutobject.
 ///
@@ -39,6 +40,8 @@ T? guardParse<T>({
 }) {
   try {
     return body();
+  } on ImportBudgetException {
+    rethrow;
   } on Object catch (error) {
     final cause = classifyParseCause(error);
     sink.add(

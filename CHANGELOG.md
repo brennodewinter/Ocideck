@@ -82,6 +82,11 @@ All notable changes to OciDeck are documented in this file.
   exportvenster geweigerd als classificatie verplicht is maar ontbreekt, onder
   het minimum ligt of boven het vrijgaveplafond uitkomt. Ook een strenger
   geclassificeerde bewijsdia telt mee, op desktop en in de browser.
+- **ODF-tabellen kunnen de import niet meer vullen met herhaalde cellen.**
+  ODP-dia's en grafieken en ODT-documenten toetsen de kolombreedte en het
+  gezamenlijke aantal tabelcellen en de herhaalde tekst vóór
+  `number-columns-repeated` wordt uitgeklapt. Grafieken begrenzen ook hun
+  afgeleide waarden. Een te groot bestand krijgt een importlimietfout.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of
