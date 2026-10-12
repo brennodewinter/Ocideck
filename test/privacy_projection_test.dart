@@ -6,6 +6,7 @@ import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/privacy_finding.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
@@ -289,6 +290,31 @@ void main() {
       expect(audience.redactionCount, 0);
       expect(audience.hasRedactions, isFalse);
       expect(audience.slides.single.title, 'Kop');
+    });
+
+    test('een deckachtergrond verlaat de projectie niet via front matter', () {
+      const background = 'data:image/png;base64,gevoelige-achtergrond';
+      final deck = Deck(
+        title: 'D',
+        marpStyle: const MarpStyle(backgroundImage: background),
+        slides: [
+          bulletSlide().copyWith(privacy: PrivacyDisposition.redact),
+          bulletSlide().copyWith(privacy: PrivacyDisposition.accept),
+          bulletSlide().copyWith(
+            privacy: PrivacyDisposition.accept,
+            marpStyle: const MarpStyle(backgroundImage: ''),
+          ),
+        ],
+      );
+
+      final projected = PrivacyProjection.forAudience(deck).deck;
+
+      expect(projected.marpStyle.hasBackgroundImage, isFalse);
+      expect(projected.marpStyle.backgroundImage, isEmpty);
+      expect(projected.slides[0].marpStyle.backgroundImage, 'none');
+      expect(projected.slides[1].marpStyle.backgroundImage, background);
+      expect(projected.slides[2].marpStyle.backgroundImage, isEmpty);
+      expect(projected.slides[2].marpStyle.hasBackgroundImage, isTrue);
     });
   });
 
