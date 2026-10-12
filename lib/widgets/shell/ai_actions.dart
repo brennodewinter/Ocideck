@@ -40,6 +40,37 @@ Future<void> clearAiAltTexts(BuildContext context, WidgetRef ref) async {
   );
 }
 
+Deck _deckForExternalAi(Deck deck, WidgetRef ref) {
+  final settings = ref.read(settingsProvider);
+  final projected = PrivacyProjection.forExternalProcessing(
+    deck,
+    disabledRules: settings.privacyDisabledRules,
+    ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+  ).deck;
+  final restoredSlides = [
+    for (var i = 0; i < projected.slides.length; i++)
+      projected.slides[i].copyWith(
+        imagePath: deck.slides[i].imagePath,
+        imagePath2: deck.slides[i].imagePath2,
+        videoPath: deck.slides[i].videoPath,
+        audioPath: deck.slides[i].audioPath,
+        marpStyle: projected.slides[i].marpStyle.copyWith(
+          backgroundImage: deck.slides[i].marpStyle.backgroundImage,
+        ),
+        customMarkdown:
+            const {
+              SlideType.question,
+              SlideType.chart,
+              SlideType.cockpit,
+              SlideType.code,
+            }.contains(deck.slides[i].type)
+            ? deck.slides[i].customMarkdown
+            : projected.slides[i].customMarkdown,
+      ),
+  ];
+  return projected.copyWith(slides: restoredSlides);
+}
+
 /// "Vertaal met AI…" — vertaalt het hele deck (zichtbare tekst én
 /// speakernotities) en opent de vertaling als onopgeslagen kopie in een
 /// nieuw tabblad. Het origineel blijft ongemoeid; de kopie krijgt
@@ -64,7 +95,7 @@ Future<void> translateDeckWithAi(BuildContext context, WidgetRef ref) async {
             .readAiApiKey(settings.baseUrl),
       );
       return AiTranslateService(client).translateDeck(
-        deck: deck,
+        deck: _deckForExternalAi(deck, ref),
         languageCode: code,
         languageName: name,
         onProgress: onProgress,

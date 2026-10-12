@@ -221,6 +221,15 @@ class RedactionManifestService {
       'marpFooter' => deck.marpStyle.footer,
       'standardsUsed' => _at(deck.standardsUsed, i),
       'toolsUsed' => _at(deck.toolsUsed.map((t) => t.name).toList(), i),
+      'toolsUsedVersion' => _at(
+        deck.toolsUsed.map((t) => t.version).toList(),
+        i,
+      ),
+      'toolsUsedUrl' => _at(deck.toolsUsed.map((t) => t.url).toList(), i),
+      'toolsUsedDescription' => _at(
+        deck.toolsUsed.map((t) => t.description).toList(),
+        i,
+      ),
       'miauwWaivers' => _at(deck.miauwWaivers.values.toList(), i),
       'miauwConfirmations' => _at(deck.miauwConfirmations.values.toList(), i),
       _ => null,

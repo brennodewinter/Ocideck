@@ -25,6 +25,14 @@ import '../utils/json_depth_guard.dart';
 /// met opzet geen echte markdown-parser: we willen élke verwijzing zien, ook
 /// eentje in een regel die een parser als iets anders zou lezen.
 final _imageRef = RegExp(r'!\[([^\]]*)\]\(([^)\n]+)\)');
+final _htmlImageRef = RegExp(
+  r'''(<img\b[^>]*\bsrc\s*=\s*["'])([^"']+)(["'])''',
+  caseSensitive: false,
+);
+final _htmlUnquotedImageRef = RegExp(
+  r'''(<img\b[^>]*\bsrc\s*=\s*)([^\s>"']+)''',
+  caseSensitive: false,
+);
 
 /// Waar een afbeeldingsverwijzing op een dia vandaan komt.
 enum SlideImageSlot {
@@ -161,6 +169,36 @@ List<String> inlineImagePaths(String markdown) => [
     if ((match.group(2) ?? '').trim().isNotEmpty) (match.group(2) ?? '').trim(),
 ];
 
+/// De paden van afbeeldingen in vrije HTML die in een Markdown-body is
+/// opgenomen.
+List<String> htmlImagePaths(String markdown) => [
+  for (final match in _htmlImageRef.allMatches(markdown))
+    if ((match.group(2) ?? '').trim().isNotEmpty) (match.group(2) ?? '').trim(),
+  for (final match in _htmlUnquotedImageRef.allMatches(markdown))
+    if ((match.group(2) ?? '').trim().isNotEmpty) (match.group(2) ?? '').trim(),
+];
+
+/// Vervangt alleen het `src`-pad van inline HTML-afbeeldingen.
+String rewriteHtmlImagePaths(
+  String markdown,
+  String? Function(String path) map,
+) {
+  final quoted = markdown.replaceAllMapped(_htmlImageRef, (match) {
+    final path = (match.group(2) ?? '').trim();
+    if (path.isEmpty) return match.group(0)!;
+    final replacement = map(path);
+    if (replacement == null || replacement == path) return match.group(0)!;
+    return '${match.group(1)}$replacement${match.group(3)}';
+  });
+  return quoted.replaceAllMapped(_htmlUnquotedImageRef, (match) {
+    final path = (match.group(2) ?? '').trim();
+    if (path.isEmpty) return match.group(0)!;
+    final replacement = map(path);
+    if (replacement == null || replacement == path) return match.group(0)!;
+    return '${match.group(1)}$replacement';
+  });
+}
+
 /// [markdown] met elk afbeeldingspad vervangen door wat [map] ervan maakt.
 /// `null` (of hetzelfde pad) laat de verwijzing staan.
 ///
@@ -255,9 +293,10 @@ Slide rewriteSlideImagePaths(Slide slide, String? Function(String path) map) {
   // Een vraag-slide draagt JSON, geen Markdown: de inline-regex zou de
   // imagePair-antwoorden missen (#853). Herschrijf daar de `image`-velden in het
   // blok; overal elders de `![…](…)` in de vrije tekst.
-  final newMarkdown = slide.type == SlideType.question
+  final questionMarkdown = slide.type == SlideType.question
       ? _rewriteQuestionAnswerImages(slide.customMarkdown, map)
-      : rewriteInlineImagePaths(slide.customMarkdown, map);
+      : slide.customMarkdown;
+  final newMarkdown = rewriteInlineImagePaths(questionMarkdown, map);
   if (newImage == null &&
       newImage2 == null &&
       newMarkdown == slide.customMarkdown) {

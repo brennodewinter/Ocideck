@@ -60,6 +60,20 @@ void main() {
     test('inlineImagePaths leest de maatvoering als gewone alt-tekst', () {
       expect(inlineImagePaths('![w:600 h:400](foto.png)'), ['foto.png']);
     });
+
+    test('htmlImagePaths leest gequote en ongequote src-paden', () {
+      expect(htmlImagePaths('<img src="een.png"><img src=two.png>'), [
+        'een.png',
+        'two.png',
+      ]);
+      expect(
+        rewriteHtmlImagePaths(
+          '<img src="een.png"><img src=two.png>',
+          (_) => '',
+        ),
+        '<img src=""><img src=>',
+      );
+    });
   });
 
   group('rewriteInlineImagePaths', () {
@@ -152,6 +166,16 @@ void main() {
         (p) => p == 'images/schema.png' ? 'mem:xyz' : null,
       );
       expect(QuestionSpec.parse(out.customMarkdown).hotspotImage, 'mem:xyz');
+    });
+
+    test('rewriteSlideImagePaths verlegt ook Markdown naast vraag-JSON', () {
+      final slide = hotspotSlide('images/schema.png').copyWith(
+        customMarkdown:
+            '${hotspotSlide('images/schema.png').customMarkdown}\n'
+            '![extra](images/extra.png)',
+      );
+      final out = rewriteSlideImagePaths(slide, (_) => '');
+      expect(out.customMarkdown, isNot(contains('images/extra.png')));
     });
   });
 

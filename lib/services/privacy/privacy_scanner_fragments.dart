@@ -48,14 +48,7 @@ extension PrivacyScannerFragments on PrivacyScanner {
         context: '',
       );
     }
-    for (var i = 0; i < deck.toolsUsed.length; i++) {
-      yield (
-        field: 'toolsUsed',
-        index: i,
-        text: deck.toolsUsed[i].name,
-        context: '',
-      );
-    }
+    yield* _toolPrivacyFragments(deck);
     // De MIAUW-motiveringen. Dit is de plek waar een naam het waarschijnlijkst
     // staat — "uitgesloten op verzoek van …" — en ze reizen base64-gecodeerd mee
     // in de front matter: onzichtbaar voor wie het bestand naleest, en dus ook
@@ -203,6 +196,26 @@ extension PrivacyScannerFragments on PrivacyScanner {
         );
       }
     }
+  }
+}
+
+Iterable<_Fragment> _toolPrivacyFragments(Deck deck) sync* {
+  for (var i = 0; i < deck.toolsUsed.length; i++) {
+    final tool = deck.toolsUsed[i];
+    yield (field: 'toolsUsed', index: i, text: tool.name, context: '');
+    yield (
+      field: 'toolsUsedVersion',
+      index: i,
+      text: tool.version,
+      context: '',
+    );
+    yield (field: 'toolsUsedUrl', index: i, text: tool.url, context: '');
+    yield (
+      field: 'toolsUsedDescription',
+      index: i,
+      text: tool.description,
+      context: '',
+    );
   }
 }
 

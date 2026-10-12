@@ -58,6 +58,13 @@ Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
     );
     return;
   }
+  final privacyDecision = PrivacyExportPolicy(
+    gate: ref.read(settingsProvider).privacyExportGate,
+  ).evaluate(ref.read(privacyExportSummaryProvider));
+  if (!context.mounted ||
+      !await confirmDocumentPrivacyExport(context, privacyDecision)) {
+    return;
+  }
   if (!context.mounted) return;
   final choice = await PackageEncryptDialog.show(context);
   if (choice == null || !context.mounted) return;
@@ -126,6 +133,13 @@ Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
       l10n,
       exportBlockMessage(l10n, decision) ?? '',
     );
+    return;
+  }
+  final privacyDecision = PrivacyExportPolicy(
+    gate: ref.read(settingsProvider).privacyExportGate,
+  ).evaluate(ref.read(privacyExportSummaryProvider));
+  if (!context.mounted ||
+      !await confirmDocumentPrivacyExport(context, privacyDecision)) {
     return;
   }
   final imageService = ImageService();
