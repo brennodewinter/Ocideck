@@ -155,9 +155,15 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
     paths = await ref
         .read(fileServiceProvider)
         .pickMarkdownFiles(
-          initialDirectory: settings.libraries.isEmpty
-              ? null
-              : settings.libraries.first.path,
+          initialDirectory: switch (result.kind) {
+            OpenKindFilter.documents => settings.startDirectoryFor(
+              document: true,
+            ),
+            OpenKindFilter.presentations => settings.startDirectoryFor(
+              document: false,
+            ),
+            OpenKindFilter.all => settings.homeDirectory,
+          },
         );
     if (paths.isEmpty || !context.mounted) return;
     selectIndex = null;

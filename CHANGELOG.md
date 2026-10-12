@@ -8,6 +8,35 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- **Een taaklijst overleeft knippen en plakken.** Kopiëren en knippen in de
+  visuele stand zetten de Markdown op het klembord, inclusief `- [ ]` per
+  regel. Knippen van een hele regel neemt de regelafsluiter mee, zodat er geen
+  lege vinkjesregel achterblijft. HTML van een andere app met een selectievakje
+  wordt weer een taakregel, en plakken haalt het vinkje van de laatste regel
+  niet meer weg.
+- **De tellerbalk dekt de laatste regels niet meer.** Woorden, koppen, tabellen,
+  afbeeldingen en de paginamaat staan in een vaste strook onder de tekst, boven
+  de TLP-voet wanneer die er is. De strook is er ook zonder classificatie.
+
+### Added
+
+- **Aparte startmappen voor documenten en presentaties.** Onder *Instellingen
+  → Opslag* kies je per soort een bibliotheek waar openen en opslaan beginnen.
+  Leeg laten blijft de eerste bibliotheek. Er komt geen nieuw bestandsformaat
+  bij: het zijn twee aanwijzers in de instellingen.
+- **Trefwoorden op een document, en een filter daarop.** Documenteigenschappen
+  en presentatiegegevens tonen `keywords:` als chips. De waarde blijft één
+  komma-gescheiden regel, hetzelfde vocabulaire als Pandoc. Het opendialoog
+  filtert daarop; de gewone zoektekst blijft de hele bron doorzoeken.
+- **Bij een TLP-keuze vraagt OciDeck voor wie het is.** AMBER+STRICT en RED
+  schrijven het niveau pas nadat er ontvangers zijn genoemd. De standaardzin
+  kan als gewone alinea onder de titel van een document, of als gewone
+  opsommingsdia in een presentatie. Daarna is die tekst van jou: een latere
+  opslag herschrijft hem niet, en weghalen laat `tlp:` staan. Een verzegeld
+  deck krijgt geen extra dia.
+
 ### Changed
 
 - **Spreadsheet-import begrenst nu het totale tabelrooster.** CSV, XLSX en

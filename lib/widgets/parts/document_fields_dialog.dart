@@ -35,6 +35,7 @@ class _DocumentFieldRow {
 class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
   static const _known = ['title', 'subtitle', 'author'];
   late final Map<String, TextEditingController> _knownValues;
+  late final TextEditingController _keywords;
   late final List<_DocumentFieldRow> _custom;
   late final bool _sourceOverLimit;
 
@@ -45,6 +46,7 @@ class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
       for (final key in _known)
         key: TextEditingController(text: widget.fields[key] ?? ''),
     };
+    _keywords = TextEditingController(text: widget.fields['keywords'] ?? '');
     final duplicateCount = switch (widget.fields) {
       final DocumentFields fields => fields.duplicateValues.values.fold(
         0,
@@ -58,7 +60,7 @@ class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
         ? []
         : [
             for (final entry in widget.fields.entries)
-              if (!_known.contains(entry.key))
+              if (!_known.contains(entry.key) && entry.key != 'keywords')
                 _DocumentFieldRow(entry.key, entry.value),
             if (widget.fields case final DocumentFields fields)
               for (final entry in fields.duplicateValues.entries)
@@ -72,6 +74,7 @@ class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
     for (final controller in _knownValues.values) {
       controller.dispose();
     }
+    _keywords.dispose();
     for (final row in _custom) {
       row.dispose();
     }
@@ -110,12 +113,14 @@ class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
       _knownValues.values
           .where((value) => value.text.trim().isNotEmpty)
           .length +
+      (_keywords.text.trim().isNotEmpty ? 1 : 0) +
       _custom.where((row) => row.value.text.trim().isNotEmpty).length;
 
   bool _canSave(Map<String, int> nameCounts) =>
       !_sourceOverLimit &&
       _filledFieldCount <= kMaxDocumentFields &&
       !_knownValues.values.any(_tooLong) &&
+      !_tooLong(_keywords) &&
       !_custom.any((row) {
         final name = row.name.text.trim();
         return !_validName(name) ||
@@ -133,6 +138,7 @@ class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
               _tooLong(row.value);
         }) ||
         _knownValues.values.any(_tooLong) ||
+        _tooLong(_keywords) ||
         _filledFieldCount > kMaxDocumentFields) {
       return;
     }
@@ -140,6 +146,7 @@ class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
       for (final entry in _knownValues.entries)
         if (entry.value.text.trim().isNotEmpty)
           entry.key: entry.value.text.trim(),
+      if (_keywords.text.trim().isNotEmpty) 'keywords': _keywords.text.trim(),
       for (final row in _custom)
         if (row.value.text.trim().isNotEmpty)
           row.name.text.trim(): row.value.text.trim(),
@@ -188,6 +195,11 @@ class _DocumentFieldsDialogState extends State<_DocumentFieldsDialog> {
                 ),
                 const SizedBox(height: 10),
               ],
+              KeywordChipsEditor(
+                controller: _keywords,
+                enabled: !_sourceOverLimit,
+              ),
+              const SizedBox(height: 10),
               for (final entry in _knownValues.entries) ...[
                 TextField(
                   key: Key('document-field-${entry.key}'),

@@ -1606,6 +1606,31 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Startmappen': 'Folder awal',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Di mana membuka dan menyimpan dimulai. Kosongkan untuk memakai pustaka pertama.',
+  'Eerste bibliotheek': 'Pustaka pertama',
+  'Typ een trefwoord en druk op Enter': 'Ketik kata kunci lalu tekan Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Saring menurut kata kunci, dipisah koma…',
+  'Voor wie is deze classificatie?': 'Untuk siapa klasifikasi ini?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — penerima boleh menyebarkan informasi ini di dalam komunitasnya.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — penyebaran terbatas, hanya di dalam komunitas.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — penyebaran terbatas, hanya di dalam organisasi para peserta.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — penyebaran terbatas, hanya untuk para peserta.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — jangan disebarluaskan, hanya untuk penerima yang disebutkan.',
+  'Ontvangers': 'Penerima',
+  'Namen, gescheiden door komma\'s': 'Nama, dipisah koma',
+  'Vul in voor wie dit bestemd is.': 'Isi untuk siapa ini ditujukan.',
+  'Standaardtoelichting in het document zetten':
+      'Sisipkan penjelasan baku ke dalam dokumen',
+  'Als dia invoegen': 'Sisipkan sebagai salindia',
+  'Bestemd voor:': 'Ditujukan untuk:',
   'Git-werk herstellen': 'Pulihkan pekerjaan Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Masih ada data Git lokal yang tidak terkait dengan koneksi saat ini. Data tersebut tidak akan dikirim otomatis. Simpan salinannya dan baca “Memulihkan draf Git lama” di panduan sebelum menghapus data aplikasi.',

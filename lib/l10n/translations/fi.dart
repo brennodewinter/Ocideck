@@ -1606,6 +1606,31 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Startmappen': 'Aloituskansiot',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Mistä avaaminen ja tallennus alkavat. Tyhjä käyttää ensimmäistä kirjastoa.',
+  'Eerste bibliotheek': 'Ensimmäinen kirjasto',
+  'Typ een trefwoord en druk op Enter': 'Kirjoita avainsana ja paina Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Suodata avainsanoilla, pilkulla erotettuina…',
+  'Voor wie is deze classificatie?': 'Kenelle tämä luokitus on?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — vastaanottajat saavat levittää tätä tietoa yhteisössään.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — rajattu levitys, vain yhteisön sisällä.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — rajattu levitys, vain osallistujien organisaatioissa.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — rajattu levitys, vain osallistujille.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — älä levitä eteenpäin, vain nimetyille vastaanottajille.',
+  'Ontvangers': 'Vastaanottajat',
+  'Namen, gescheiden door komma\'s': 'Nimet, pilkulla erotettuina',
+  'Vul in voor wie dit bestemd is.': 'Täytä, kenelle tämä on tarkoitettu.',
+  'Standaardtoelichting in het document zetten':
+      'Lisää vakioselitys asiakirjaan',
+  'Als dia invoegen': 'Lisää diana',
+  'Bestemd voor:': 'Tarkoitettu:',
   'Git-werk herstellen': 'Palauta Git-työ',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Paikallisia Git-tietoja, jotka eivät kuulu mihinkään nykyiseen yhteyteen, on yhä jäljellä. Niitä ei lähetetä automaattisesti. Säilytä kopio ja lue oppaasta ”Vanhojen Git-luonnosten palauttaminen” ennen sovellustietojen poistamista.',

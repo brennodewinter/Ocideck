@@ -303,7 +303,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     bool isMarkdownMode,
     ExportDecision classificationDecision,
   ) {
-    final deckNotifier = ref.read(deckProvider.notifier);
     return AppBar(
       title: Row(
         children: [
@@ -324,7 +323,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             tlp: deck.tlp,
             warnUnset:
                 !classificationDecision.allowed && deck.tlp == TlpLevel.none,
-            onSelected: (level) => deckNotifier.updateInfo(tlp: level),
+            onSelected: (level) =>
+                unawaited(applyPresentationTlp(context, ref, level)),
           ),
           const SizedBox(width: 6),
           _PresentationPropertiesButton(onPressed: _openProperties),

@@ -449,6 +449,13 @@ deliberate TLP change canonises the block to one line. Inline YAML comments do
 not become part of the value. The same ceiling, minimum and mandatory-
 classification export policy as for presentations applies to document export.
 
+When you set a level, OciDeck can insert a short explanation as an ordinary
+paragraph under the first heading (a document) or as an ordinary bullet slide
+(a presentation). That text is Markdown you own. A later save does not rewrite
+it, and deleting it leaves `tlp:` in place. It is not an `ocideck_` anchor.
+AMBER+STRICT and RED are only written after you name who the marking is for.
+Names in that paragraph are scanned like any other paragraph.
+
 ### 3.1b Privacy disposition — `privacy:` / `<!-- ocideck_privacy: … -->`
 
 What happens to privacy findings. Four stable values: `warn` (the default, never
@@ -4211,6 +4218,12 @@ author: Jane Example
 case-id: IR-2026-08
 ---
 ```
+
+`keywords` is the same one-line, comma-separated scalar Pandoc and a deck
+already use (`keywords: alfa, beta`). The properties window edits it as chips.
+An empty value removes the key. It is not a YAML sequence and not an
+`ocideck_` key. The open dialog can filter on these words alone; full-text
+search is unchanged.
 
 A field key must match `[a-z][a-z0-9_-]*`. The structural keys `theme`, `tlp`,
 `papersize`, `geometry` and `reference-location` are reserved, as is every key

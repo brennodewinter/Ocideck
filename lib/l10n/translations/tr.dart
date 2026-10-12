@@ -2514,6 +2514,32 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Startmappen': 'Başlangıç klasörleri',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Açma ve kaydetmenin başladığı yer. Boş bırakmak ilk kitaplığı kullanır.',
+  'Eerste bibliotheek': 'İlk kitaplık',
+  'Typ een trefwoord en druk op Enter':
+      'Bir anahtar sözcük yazın ve Enter\'a basın',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Anahtar sözcüklere göre süz, virgülle ayır…',
+  'Voor wie is deze classificatie?': 'Bu sınıflandırma kimin için?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — alıcılar bu bilgiyi toplulukları içinde yayabilir.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — sınırlı yayılım, yalnızca topluluk içinde.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — sınırlı yayılım, yalnızca katılımcıların kuruluşları içinde.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — sınırlı yayılım, yalnızca katılımcılar için.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — daha fazla yaymayın, yalnızca adı geçen alıcılar için.',
+  'Ontvangers': 'Alıcılar',
+  'Namen, gescheiden door komma\'s': 'Adlar, virgülle ayrılmış',
+  'Vul in voor wie dit bestemd is.': 'Bunun kime yönelik olduğunu yazın.',
+  'Standaardtoelichting in het document zetten':
+      'Standart açıklamayı belgeye ekle',
+  'Als dia invoegen': 'Slayt olarak ekle',
+  'Bestemd voor:': 'Yönelik:',
   'Git-werk herstellen': 'Git çalışmasını kurtar',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Geçerli bir bağlantıyla ilişkili olmayan yerel Git verileri hâlâ var. Bunlar otomatik olarak gönderilmez. Bir kopyasını saklayın ve uygulama verilerini silmeden önce kılavuzdaki “Eski Git taslaklarını kurtarma” bölümünü okuyun.',

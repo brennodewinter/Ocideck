@@ -1631,6 +1631,32 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Startmappen': 'Φάκελοι έναρξης',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Από πού ξεκινούν το άνοιγμα και η αποθήκευση. Κενό σημαίνει την πρώτη βιβλιοθήκη.',
+  'Eerste bibliotheek': 'Πρώτη βιβλιοθήκη',
+  'Typ een trefwoord en druk op Enter':
+      'Πληκτρολογήστε λέξη-κλειδί και πατήστε Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Φίλτρο με λέξεις-κλειδιά, χωρισμένες με κόμμα…',
+  'Voor wie is deze classificatie?': 'Για ποιον είναι αυτή η διαβάθμιση;',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — οι παραλήπτες μπορούν να διαδώσουν αυτές τις πληροφορίες στην κοινότητά τους.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — περιορισμένη διάδοση, μόνο μέσα στην κοινότητα.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — περιορισμένη διάδοση, μόνο στους οργανισμούς των συμμετεχόντων.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — περιορισμένη διάδοση, μόνο για τους συμμετέχοντες.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — να μην διαδοθεί περαιτέρω, μόνο για τους κατονομαζόμενους παραλήπτες.',
+  'Ontvangers': 'Παραλήπτες',
+  'Namen, gescheiden door komma\'s': 'Ονόματα, χωρισμένα με κόμμα',
+  'Vul in voor wie dit bestemd is.': 'Συμπληρώστε για ποιον προορίζεται.',
+  'Standaardtoelichting in het document zetten':
+      'Εισαγωγή της τυπικής εξήγησης στο έγγραφο',
+  'Als dia invoegen': 'Εισαγωγή ως διαφάνεια',
+  'Bestemd voor:': 'Προορίζεται για:',
   'Git-werk herstellen': 'Ανάκτηση εργασίας Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Υπάρχουν ακόμη τοπικά δεδομένα Git που δεν ανήκουν σε κάποια τρέχουσα σύνδεση. Δεν θα σταλούν αυτόματα. Κρατήστε ένα αντίγραφο και διαβάστε στο εγχειρίδιο την ενότητα «Ανάκτηση παλιών πρόχειρων Git» πριν διαγράψετε τα δεδομένα της εφαρμογής.',

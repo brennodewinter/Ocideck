@@ -649,6 +649,32 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Startmappen': 'Cartelle di partenza',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Dove iniziano apertura e salvataggio. Lascia vuoto per usare la prima raccolta.',
+  'Eerste bibliotheek': 'Prima raccolta',
+  'Typ een trefwoord en druk op Enter':
+      'Digita una parola chiave e premi Invio',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtra per parole chiave, separate da virgole…',
+  'Voor wie is deze classificatie?': 'Per chi è questa classificazione?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — i destinatari possono diffondere queste informazioni nella loro comunità.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — diffusione limitata, solo all\'interno della comunità.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — diffusione limitata, solo nelle organizzazioni dei partecipanti.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — diffusione limitata, solo per i partecipanti.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — non diffondere oltre, solo per i destinatari indicati.',
+  'Ontvangers': 'Destinatari',
+  'Namen, gescheiden door komma\'s': 'Nomi, separati da virgole',
+  'Vul in voor wie dit bestemd is.': 'Indica per chi è destinato.',
+  'Standaardtoelichting in het document zetten':
+      'Inserisci la spiegazione standard nel documento',
+  'Als dia invoegen': 'Inserisci come diapositiva',
+  'Bestemd voor:': 'Destinato a:',
   'Git-werk herstellen': 'Recupera il lavoro Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Sono ancora presenti dati Git locali che non appartengono a una connessione attuale. Non verranno inviati automaticamente. Conserva una copia e leggi “Recuperare le vecchie bozze Git” nel manuale prima di cancellare i dati dell’app.',

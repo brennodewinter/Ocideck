@@ -168,7 +168,9 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     if (c.maxWidth < 760) {
       return Column(
         children: [
-          Expanded(child: _withStatsCorner(context, theme, editor, source)),
+          Expanded(
+            child: _editorAboveInfoStrip(context, ref, theme, editor, source),
+          ),
           Divider(height: 1, thickness: 1, color: divider),
           Expanded(child: preview),
         ],
@@ -183,7 +185,9 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
           _outlineRail(theme, source),
           VerticalDivider(width: 1, thickness: 1, color: divider),
         ],
-        Expanded(child: _withStatsCorner(context, theme, editor, source)),
+        Expanded(
+          child: _editorAboveInfoStrip(context, ref, theme, editor, source),
+        ),
         VerticalDivider(width: 1, thickness: 1, color: divider),
         Expanded(child: preview),
       ],
@@ -238,55 +242,35 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
         Expanded(
           child: _styledDocumentSurface(
             _styleProfile,
-            Stack(
-              children: [
-                MediaQuery(
-                  // De zoom vermenigvuldigt wat het toestel en de app-brede
-                  // interfaceschaal al vragen, zoals de documentatielezer het ook
-                  // doet — één begrip van "groter", niet twee.
-                  data: MediaQuery.of(context).copyWith(
-                    textScaler: TextScaler.linear(
-                      MediaQuery.textScalerOf(context).scale(1) * zoom,
-                    ),
-                  ),
-                  child: WritingPageBreakOverlay(
-                    editorKey: _visualEditorKey,
-                    pageContentHeight: pageContentHeight,
-                    bodyFontSize: documentBodyFontSizeToCssPx(
-                      _styleProfile?.documentBodyFontSize ??
-                          kDocumentDefaultBodyFontSize,
-                    ),
-                    // De einden gelden alleen op paginabreedte: op een andere
-                    // maat breekt het vel ergens anders dan de lijn zegt.
-                    enabled:
-                        _showPageBreaks &&
-                        settings.documentEditorWidth ==
-                            DocumentEditorWidth.page,
-                    child: _wysiwygEditor(theme),
-                  ),
+            MediaQuery(
+              // De zoom vermenigvuldigt wat het toestel en de app-brede
+              // interfaceschaal al vragen, zoals de documentatielezer het ook
+              // doet — één begrip van "groter", niet twee.
+              data: MediaQuery.of(context).copyWith(
+                textScaler: TextScaler.linear(
+                  MediaQuery.textScalerOf(context).scale(1) * zoom,
                 ),
-                // Binnen het tekstvlak, niet over de vaste voetband. Zo blijft
-                // zowel de paginamatenknop als een TLP- of stijlvoet leesbaar.
-                _documentPageIndicator(
-                  context,
-                  theme,
-                  pageSize: pageSize,
-                  margins: margins,
-                  fromDocument: documentCarriesPageSetup(_pageSetupSource(ref)),
-                  onTap: () => unawaited(
-                    _choosePageSetupScope(
-                      context,
-                      ref,
-                      pageSize: pageSize,
-                      margins: margins,
-                    ),
-                  ),
+              ),
+              child: WritingPageBreakOverlay(
+                editorKey: _visualEditorKey,
+                pageContentHeight: pageContentHeight,
+                bodyFontSize: documentBodyFontSizeToCssPx(
+                  _styleProfile?.documentBodyFontSize ??
+                      kDocumentDefaultBodyFontSize,
                 ),
-                _documentStatsCorner(context, theme, source),
-              ],
+                // De einden gelden alleen op paginabreedte: op een andere
+                // maat breekt het vel ergens anders dan de lijn zegt.
+                enabled:
+                    _showPageBreaks &&
+                    settings.documentEditorWidth == DocumentEditorWidth.page,
+                child: _wysiwygEditor(theme),
+              ),
             ),
             tlp: tlp,
             fields: fields,
+            // Onder de tekst, boven de TLP-voet. Niet als Positioned in de
+            // schrijfstack: dan dekt de strook de laatste regels (#2397).
+            belowEditor: _documentInfoStripFor(context, ref, theme, source),
           ),
         ),
       ],
@@ -452,28 +436,9 @@ bool _pasteInlineAtVisualCaret(
   required VoidCallback markInsert,
 }) {
   if (quill == null) return false;
-  // De delta van een heel document sluit af met de verplichte
-  // regelafsluiter; die is geen inhoud. Laat je hem staan, dan breekt de
-  // geplakte tekst de regel waar de caret in staat.
-  final ops = MarkdownQuillCodec.documentFromMarkdown(
-    markdown,
-  ).toDelta().toList();
-  final last = ops.isEmpty ? null : ops.last;
-  if (last != null &&
-      last.isInsert &&
-      last.isPlain &&
-      last.data is String &&
-      (last.data as String).endsWith('\n')) {
-    final trimmed = (last.data as String).substring(
-      0,
-      (last.data as String).length - 1,
-    );
-    if (trimmed.isEmpty) {
-      ops.removeLast();
-    } else {
-      ops[ops.length - 1] = Operation.insert(trimmed);
-    }
-  }
+  // De kale documentafsluiter gaat eraf; een vinkje- of lijstafsluiter blijft.
+  // Zie [operationsForVisualPaste].
+  final ops = operationsForVisualPaste(markdown);
   if (ops.isEmpty) return true;
   final end = quill.document.length - 1;
   final sel = (caret != null && caret.isValid) ? caret : quill.selection;
@@ -764,6 +729,7 @@ Widget _documentPagesLayout(
             scale: settings.documentEditorZoom,
           ),
         ),
+        _documentInfoStripFor(context, ref, theme, source),
       ],
     ),
   );
@@ -837,85 +803,6 @@ void _setFootnotePlacement(WidgetRef ref, bool atEnd) {
   if (next == doc.source) return;
   ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
 }
-
-/// Wikkel [child] in een [Stack] met het statistiekenhoekje linksonder —
-/// de Bron-stand heeft zelf geen Stack zoals de Visuele die wel heeft.
-Widget _withStatsCorner(
-  BuildContext context,
-  ThemeData theme,
-  Widget child,
-  String source,
-) => Stack(children: [child, _documentStatsCorner(context, theme, source)]);
-
-/// Het statistiekenhoekje linksonder in de editor: woorden, hoofdstukken (H1),
-/// paragrafen (H2+), tabellen en afbeeldingen — live geteld op de bron.
-///
-/// Volgt hetzelfde patroon als [_documentPageIndicator]: een [Positioned] in de
-/// [Stack] van het schrijfvlak, met een halfdoorzichtige achtergrond zodat de
-/// tekst eronder leesbaar blijft. De labels gaan door [l10n.d] (één woord per
-/// teller, dus de doorgelaten-bron-poort geldt niet — wel de pariteit).
-Widget _documentStatsCorner(
-  BuildContext context,
-  ThemeData theme,
-  String source,
-) {
-  final l10n = context.l10n;
-  final stats = computeDocumentStats(source);
-  return Positioned(
-    left: 8,
-    bottom: 8,
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withValues(alpha: 0.85),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: theme.colorScheme.outlineVariant),
-      ),
-      child: Wrap(
-        spacing: 10,
-        runSpacing: 2,
-        children: [
-          _statChip(theme, Icons.text_fields, stats.words, l10n.d('woorden')),
-          _statChip(
-            theme,
-            Icons.menu_book_outlined,
-            stats.chapters,
-            l10n.d('hoofdstukken'),
-          ),
-          _statChip(theme, Icons.subject, stats.sections, l10n.d('paragrafen')),
-          _statChip(
-            theme,
-            Icons.table_chart_outlined,
-            stats.tables,
-            l10n.d('tabellen'),
-          ),
-          _statChip(
-            theme,
-            Icons.image_outlined,
-            stats.images,
-            l10n.d('afbeeldingen'),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget _statChip(ThemeData theme, IconData icon, int count, String label) =>
-    Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 11, color: theme.colorScheme.onSurfaceVariant),
-        const SizedBox(width: 3),
-        Text(
-          '$count $label',
-          style: theme.textTheme.labelSmall?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-            fontSize: 10,
-          ),
-        ),
-      ],
-    );
 
 /// Laat kiezen of de huidige paginaopmaak in dít document komt te staan of uit
 /// de instellingen blijft komen.

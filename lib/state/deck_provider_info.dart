@@ -59,6 +59,21 @@ extension DeckNotifierInfo on DeckNotifier {
   }
 }
 
+/// Zet [tlp] en, wanneer [explanation] er is en het deck niet verzegeld is,
+/// die dia vooraan. Eén ongedaan-stap (#2396).
+void applyPresentationTlpLevel(
+  DeckNotifier notifier,
+  TlpLevel tlp, {
+  Slide? explanation,
+}) {
+  final deck = notifier.currentState.deck;
+  if (deck == null) return;
+  final slides = explanation == null || deck.finalized
+      ? deck.slides
+      : [explanation, ...deck.slides];
+  notifier._mutate(deck.copyWith(tlp: tlp, slides: slides), coalesceKey: null);
+}
+
 MarpStyle _marpStyleWithFooter(Deck deck, String? footer) {
   if (footer == null) return deck.marpStyle;
   final value = footer.trim();

@@ -54,7 +54,9 @@ Future<void> importDocument(
       fileOverride ??
       await _pickDocument(
         l10n,
-        initialDirectory: container.read(settingsProvider).homeDirectory,
+        initialDirectory: container
+            .read(settingsProvider)
+            .startDirectoryFor(document: true),
       );
   if (picked == null || !context.mounted) return;
 

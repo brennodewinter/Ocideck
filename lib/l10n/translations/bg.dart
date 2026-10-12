@@ -1626,6 +1626,32 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Startmappen': 'Начални папки',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Къде започват отварянето и записването. Празно използва първата библиотека.',
+  'Eerste bibliotheek': 'Първа библиотека',
+  'Typ een trefwoord en druk op Enter':
+      'Въведете ключова дума и натиснете Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Филтрирай по ключови думи, разделени със запетая…',
+  'Voor wie is deze classificatie?': 'За кого е тази класификация?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — получателите могат да разпространяват тази информация в общността си.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — ограничено разпространение, само в общността.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — ограничено разпространение, само в организациите на участниците.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — ограничено разпространение, само за участниците.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — да не се разпространява по-нататък, само за посочените получатели.',
+  'Ontvangers': 'Получатели',
+  'Namen, gescheiden door komma\'s': 'Имена, разделени със запетая',
+  'Vul in voor wie dit bestemd is.': 'Попълнете за кого е предназначено.',
+  'Standaardtoelichting in het document zetten':
+      'Вмъкни стандартното обяснение в документа',
+  'Als dia invoegen': 'Вмъкни като слайд',
+  'Bestemd voor:': 'Предназначено за:',
   'Git-werk herstellen': 'Възстановяване на работата в Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Все още има локални Git данни, които не принадлежат към текуща връзка. Те няма да бъдат изпратени автоматично. Запазете копие и прочетете „Възстановяване на стари чернови в Git“ в ръководството, преди да изтриете данните на приложението.',

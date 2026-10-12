@@ -255,6 +255,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       documentEditorZoom: document.editorZoom,
       documentPageSize: document.pageSize,
       documentPageMargins: document.pageMargins,
+      documentStartDirectory: document.documentStart,
+      presentationStartDirectory: document.presentationStart,
       cockpitColorSchemes: cockpit.schemes,
       selectedCockpitColorSchemeName: cockpit.selectedName,
       cockpitVisualStyle: cockpit.visualStyle,

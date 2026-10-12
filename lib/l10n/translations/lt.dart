@@ -1613,6 +1613,32 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Startmappen': 'Pradžios aplankai',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Kur prasideda atidarymas ir įrašymas. Tuščia naudoja pirmąją biblioteką.',
+  'Eerste bibliotheek': 'Pirmoji biblioteka',
+  'Typ een trefwoord en druk op Enter':
+      'Įveskite raktažodį ir paspauskite Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtruoti pagal raktažodžius, atskirtus kableliais…',
+  'Voor wie is deze classificatie?': 'Kam skirta ši klasifikacija?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — gavėjai gali skleisti šią informaciją savo bendruomenėje.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — ribotas platinimas, tik bendruomenės viduje.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — ribotas platinimas, tik dalyvių organizacijose.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — ribotas platinimas, tik dalyviams.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — toliau neplatinti, tik įvardytiems gavėjams.',
+  'Ontvangers': 'Gavėjai',
+  'Namen, gescheiden door komma\'s': 'Vardai, atskirti kableliais',
+  'Vul in voor wie dit bestemd is.': 'Nurodykite, kam tai skirta.',
+  'Standaardtoelichting in het document zetten':
+      'Įterpti standartinį paaiškinimą į dokumentą',
+  'Als dia invoegen': 'Įterpti kaip skaidrę',
+  'Bestemd voor:': 'Skirta:',
   'Git-werk herstellen': 'Atkurti „Git“ darbą',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Vis dar yra vietinių „Git“ duomenų, nesusietų su jokiu dabartiniu ryšiu. Jie nebus siunčiami automatiškai. Išsaugokite kopiją ir prieš trindami programos duomenis perskaitykite vadovo skyrių „Senų „Git“ juodraščių atkūrimas“.',

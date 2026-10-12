@@ -210,7 +210,9 @@ Future<bool> saveDeckWithDestination(
     return withSaveProgress(
       ref,
       SaveTarget.local,
-      () => deckNotifier.save(initialDirectory: settings.homeDirectory),
+      () => deckNotifier.save(
+        initialDirectory: settings.startDirectoryFor(document: false),
+      ),
     );
   }
   final choice = await SaveDestinationDialog.show(

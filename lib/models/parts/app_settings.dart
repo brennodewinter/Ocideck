@@ -63,6 +63,18 @@ class AppSettings {
   /// weergavepad-verkorting).
   String? get homeDirectory => libraries.isEmpty ? null : libraries.first.path;
 
+  /// Startmap voor openen en opslaan. Leeg of een pad dat geen bibliotheek
+  /// meer is, valt terug op [homeDirectory] — de eerste bibliotheek (#2394).
+  String? startDirectoryFor({required bool document}) {
+    final chosen = document
+        ? documentStartDirectory
+        : presentationStartDirectory;
+    if (chosen != null && chosen.isNotEmpty && libraryPaths.contains(chosen)) {
+      return chosen;
+    }
+    return homeDirectory;
+  }
+
   /// Alle bibliotheekpaden — de zoekwortels voor multi-map zoekacties (openen,
   /// afbeeldingenbibliotheek, brede scan).
   List<String> get libraryPaths => [for (final l in libraries) l.path];
@@ -76,6 +88,13 @@ class AppSettings {
   /// Folder where all exports (PDF/PPTX) are written. When null, exports land
   /// next to the source deck (legacy behaviour).
   final String? exportDirectory;
+
+  /// Optionele startmap voor documenten, als pad van een lokale bibliotheek.
+  /// `null` = [homeDirectory].
+  final String? documentStartDirectory;
+
+  /// Optionele startmap voor presentaties. `null` = [homeDirectory].
+  final String? presentationStartDirectory;
   final List<ThemeProfile> themeProfiles;
   final String selectedThemeProfileName;
   final List<AppAppearanceProfile>? _appAppearanceProfiles;
@@ -368,6 +387,8 @@ class AppSettings {
     this.connections = const [],
     this.customChecklists = const [],
     this.exportDirectory,
+    this.documentStartDirectory,
+    this.presentationStartDirectory,
     this.themeProfiles = ThemeProfile.builtIns,
     this.selectedThemeProfileName = 'LibreKAT',
     List<AppAppearanceProfile>? appAppearanceProfiles,
@@ -465,11 +486,29 @@ class AppSettings {
     'Cascadia Code',
   ];
 
+  /// Vervangt het gelijknamige profiel in [profiles], of voegt het toe.
+  ///
+  /// Staat buiten [copyWith]: die methode zat op de lengtegrens.
+  List<ThemeProfile> _profilesWith(
+    List<ThemeProfile> profiles,
+    ThemeProfile? replacement,
+  ) {
+    if (replacement == null) return profiles;
+    return [
+      for (final profile in profiles)
+        if (profile.name == replacement.name) replacement else profile,
+      if (!profiles.any((profile) => profile.name == replacement.name))
+        replacement,
+    ];
+  }
+
   AppSettings copyWith({
     String? languageCode,
     List<StorageConnection>? connections,
     List<ChecklistTemplate>? customChecklists,
     String? exportDirectory,
+    String? documentStartDirectory,
+    String? presentationStartDirectory,
     ThemeProfile? themeProfile,
     List<ThemeProfile>? themeProfiles,
     String? selectedThemeProfileName,
@@ -515,12 +554,13 @@ class AppSettings {
     AiSettings? aiSettings,
     LibreplanSettings? libreplanSettings,
     bool clearExportDirectory = false,
+    bool clearDocumentStartDirectory = false,
+    bool clearPresentationStartDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
     bool clearDocumentDefaultStyle = false,
     bool clearDocumentEditorMaxWidth = false,
   }) {
-    final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
       languageCode: languageCode ?? this.languageCode,
       connections: connections ?? this.connections,
@@ -528,17 +568,16 @@ class AppSettings {
       exportDirectory: clearExportDirectory
           ? null
           : (exportDirectory ?? this.exportDirectory),
-      themeProfiles: themeProfile == null
-          ? nextProfiles
-          : [
-              for (final profile in nextProfiles)
-                if (profile.name == themeProfile.name)
-                  themeProfile
-                else
-                  profile,
-              if (!nextProfiles.any((p) => p.name == themeProfile.name))
-                themeProfile,
-            ],
+      documentStartDirectory: clearDocumentStartDirectory
+          ? null
+          : (documentStartDirectory ?? this.documentStartDirectory),
+      presentationStartDirectory: clearPresentationStartDirectory
+          ? null
+          : (presentationStartDirectory ?? this.presentationStartDirectory),
+      themeProfiles: _profilesWith(
+        themeProfiles ?? this.themeProfiles,
+        themeProfile,
+      ),
       selectedThemeProfileName:
           selectedThemeProfileName ??
           themeProfile?.name ??

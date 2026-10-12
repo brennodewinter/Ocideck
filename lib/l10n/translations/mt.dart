@@ -1624,6 +1624,32 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Startmappen': 'Folders tal-bidu',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Fejn jibdew il-ftuħ u s-salvataġġ. Vojet juża l-ewwel librerija.',
+  'Eerste bibliotheek': 'L-ewwel librerija',
+  'Typ een trefwoord en druk op Enter':
+      'Ittajpja kelma ewlenija u agħfas Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Iffiltra skont kelmiet ewlenin, separati b\'virgola…',
+  'Voor wie is deze classificatie?': 'Għal min hija din il-klassifikazzjoni?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — ir-riċevituri jistgħu jxerrdu din l-informazzjoni fil-komunità tagħhom.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — tixrid limitat, biss fil-komunità.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — tixrid limitat, biss fl-organizzazzjonijiet tal-parteċipanti.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — tixrid limitat, biss għall-parteċipanti.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — tixridhiex aktar, biss għar-riċevituri msemmija.',
+  'Ontvangers': 'Riċevituri',
+  'Namen, gescheiden door komma\'s': 'Ismijiet, separati b\'virgola',
+  'Vul in voor wie dit bestemd is.': 'Imla għal min huwa destinat.',
+  'Standaardtoelichting in het document zetten':
+      'Daħħal it-tifsira standard fid-dokument',
+  'Als dia invoegen': 'Daħħal bħala slajd',
+  'Bestemd voor:': 'Destinat għal:',
   'Git-werk herstellen': 'Irkupra x-xogħol ta’ Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Għad hemm dejta Git lokali li mhijiex marbuta ma’ konnessjoni attwali. Din mhux se tintbagħat awtomatikament. Żomm kopja u aqra “Irkupru ta’ abbozzi qodma ta’ Git” fil-manwal qabel tħassar id-dejta tal-app.',

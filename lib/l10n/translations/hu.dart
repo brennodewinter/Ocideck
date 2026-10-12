@@ -1608,6 +1608,32 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Startmappen': 'Kezdőmappák',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Hol a megnyitás és a mentés kezdődik. Üresen az első könyvtárat használja.',
+  'Eerste bibliotheek': 'Első könyvtár',
+  'Typ een trefwoord en druk op Enter':
+      'Írjon kulcsszót, majd nyomja meg az Entert',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Szűrés kulcsszavakra, vesszővel elválasztva…',
+  'Voor wie is deze classificatie?': 'Kinek szól ez a besorolás?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — a címzettek a közösségükön belül terjeszthetik ezt az információt.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — korlátozott terjesztés, csak a közösségen belül.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — korlátozott terjesztés, csak a résztvevők szervezetein belül.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — korlátozott terjesztés, csak a résztvevőknek.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — nem terjeszthető tovább, csak a megnevezett címzetteknek.',
+  'Ontvangers': 'Címzettek',
+  'Namen, gescheiden door komma\'s': 'Nevek, vesszővel elválasztva',
+  'Vul in voor wie dit bestemd is.': 'Töltse ki, kinek szól.',
+  'Standaardtoelichting in het document zetten':
+      'A szokásos magyarázat beszúrása a dokumentumba',
+  'Als dia invoegen': 'Beszúrás diákként',
+  'Bestemd voor:': 'Rendeltetése:',
   'Git-werk herstellen': 'Git-munka visszaállítása',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Még vannak olyan helyi Git-adatok, amelyek nem tartoznak aktuális kapcsolathoz. Ezek nem lesznek automatikusan elküldve. Mentsen róluk egy másolatot, és az alkalmazás adatainak törlése előtt olvassa el a kézikönyv „Régi Git-vázlatok visszaállítása” című részét.',

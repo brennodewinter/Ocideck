@@ -381,10 +381,12 @@ const Map<String, int> classSizeBaseline = {
       // (+10), classificatie-handhaving verhuisd van Algemeen naar Privacy
       // (+3), cockpit verhuisd naar presentatie als AdvancedSection (+6).
       // +1 (#1999): eLearning-module­kaart in settings_dialog_modules.
+      // +53 (#2394): startmappen op het Opslag-tabblad, naast de exportmap.
+      // Dezelfde sectie-opbouw als de rest van dat tabblad.
       // −54: versiecheck-kaart is een eigen ConsumerWidget (_UpdateCheckCard)
       // en _aboutHeading/_aboutCard/_aboutLink staan top-level — gedrag uit de
       // klasse gehaald in plaats van het plafond op te rekken.
-      6209,
+      6287,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -547,7 +549,10 @@ const Map<String, int> classSizeBaseline = {
       // +3: `setShowOpenPreview`, de zetter van "Voorbeeld tonen bij openen".
       // Een zetter móét de state van deze notifier aanraken, dus top-level
       // halen zou hem alleen omslachtiger maken, niet kleiner.
-      1373,
+      // +26 (#2394): setStartDirectory voor de document- en presentatiestartmap.
+      // De zetter schrijft de notifier-state en de prefs; buiten de klasse
+      // zetten zou `_persist` publiek maken.
+      1424,
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen

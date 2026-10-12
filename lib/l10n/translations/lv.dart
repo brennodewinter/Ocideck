@@ -1604,6 +1604,32 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Startmappen': 'Sākuma mapes',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Kur sākas atvēršana un saglabāšana. Tukšs izmanto pirmo bibliotēku.',
+  'Eerste bibliotheek': 'Pirmā bibliotēka',
+  'Typ een trefwoord en druk op Enter':
+      'Ierakstiet atslēgvārdu un nospiediet Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrēt pēc atslēgvārdiem, atdalītiem ar komatu…',
+  'Voor wie is deze classificatie?': 'Kam šī klasifikācija ir domāta?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — saņēmēji drīkst izplatīt šo informāciju savā kopienā.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — ierobežota izplatīšana, tikai kopienas ietvaros.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — ierobežota izplatīšana, tikai dalībnieku organizācijās.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — ierobežota izplatīšana, tikai dalībniekiem.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — neizplatīt tālāk, tikai nosauktajiem saņēmējiem.',
+  'Ontvangers': 'Saņēmēji',
+  'Namen, gescheiden door komma\'s': 'Vārdi, atdalīti ar komatu',
+  'Vul in voor wie dit bestemd is.': 'Norādiet, kam tas paredzēts.',
+  'Standaardtoelichting in het document zetten':
+      'Ievietot standarta skaidrojumu dokumentā',
+  'Als dia invoegen': 'Ievietot kā slaidu',
+  'Bestemd voor:': 'Paredzēts:',
   'Git-werk herstellen': 'Atjaunot Git darbu',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Joprojām ir lokāli Git dati, kas nav saistīti ar pašreizējo savienojumu. Tie netiks nosūtīti automātiski. Saglabā kopiju un izlasi rokasgrāmatā “Veco Git melnrakstu atjaunošana”, pirms dzēs lietotnes datus.',

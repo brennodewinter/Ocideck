@@ -4,6 +4,11 @@
 /// anders opgeschoonde platte tekst. Die volgorde houdt spreadsheet-plakken
 /// gelijk aan wat er al was, en vangt het geval waarin de platte tekst de
 /// structuur al heeft verloren (#1595).
+///
+/// Uitzondering: een platte taak- of opsomlijst die de HTML tot één regel of
+/// tot een lijst zonder vinkjes platslaat, blijft de platte tekst. Het
+/// klembord van de visuele editor zet de Markdown er zelf op; HTML van een
+/// eerdere kopie mag die niet overschrijven (#2398).
 library;
 
 import 'html_to_markdown.dart';
@@ -43,6 +48,12 @@ ClipboardMarkdown? resolveClipboardMarkdown({String? plain, String? html}) {
   if (html != null && html.isNotEmpty) {
     final fromHtml = htmlClipboardToMarkdown(html);
     if (fromHtml != null && fromHtml.isNotEmpty) {
+      if (plain != null && _plainKeepsListStructure(plain, fromHtml)) {
+        final cleaned = sanitizeMarkdownPaste(plain);
+        if (cleaned.isNotEmpty) {
+          return ClipboardMarkdown(cleaned, ClipboardMarkdownKind.markdown);
+        }
+      }
       return ClipboardMarkdown(fromHtml, ClipboardMarkdownKind.markdown);
     }
   }
@@ -50,6 +61,25 @@ ClipboardMarkdown? resolveClipboardMarkdown({String? plain, String? html}) {
   final cleaned = sanitizeMarkdownPaste(plain);
   if (cleaned.isEmpty) return null;
   return ClipboardMarkdown(cleaned, ClipboardMarkdownKind.markdown);
+}
+
+final _taskLine = RegExp(r'^\s*[-*+] \[[ xX]\] ', multiLine: true);
+final _listLine = RegExp(
+  r'^\s*(?:[-*+] \[[ xX]\] |[-*+] |\d+\. )',
+  multiLine: true,
+);
+
+/// De platte tekst bewaart een lijst die de HTML-variant verliest.
+///
+/// Twee gevallen: de vinkjes staan alleen in de platte tekst, of de HTML
+/// vouwt meerdere lijstregels tot minder regels op. Een HTML-variant die
+/// evenveel lijstregels houdt — inclusief een diepere nesteling — wint nog
+/// steeds, want dáár zit de structuur die de platte tekst kwijt is (#1595).
+bool _plainKeepsListStructure(String plain, String fromHtml) {
+  if (_taskLine.hasMatch(plain) && !_taskLine.hasMatch(fromHtml)) return true;
+  final plainLists = _listLine.allMatches(plain).length;
+  final htmlLists = _listLine.allMatches(fromHtml).length;
+  return plainLists >= 2 && htmlLists < plainLists;
 }
 
 /// Minimale GFM-tabel, dezelfde pijp-ontsnapping als de rest van de app.

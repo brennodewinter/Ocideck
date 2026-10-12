@@ -1607,6 +1607,32 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Startmappen': 'Výchozí složky',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Kde začíná otevírání a ukládání. Prázdné použije první knihovnu.',
+  'Eerste bibliotheek': 'První knihovna',
+  'Typ een trefwoord en druk op Enter':
+      'Napište klíčové slovo a stiskněte Enter',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Filtrovat podle klíčových slov, oddělených čárkami…',
+  'Voor wie is deze classificatie?': 'Pro koho je tato klasifikace?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — příjemci smějí tyto informace šířit ve své komunitě.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — omezené šíření, pouze uvnitř komunity.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — omezené šíření, pouze v organizacích účastníků.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — omezené šíření, pouze pro účastníky.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — dále nešířit, pouze pro uvedené příjemce.',
+  'Ontvangers': 'Příjemci',
+  'Namen, gescheiden door komma\'s': 'Jména, oddělená čárkami',
+  'Vul in voor wie dit bestemd is.': 'Vyplňte, pro koho je to určeno.',
+  'Standaardtoelichting in het document zetten':
+      'Vložit standardní vysvětlení do dokumentu',
+  'Als dia invoegen': 'Vložit jako snímek',
+  'Bestemd voor:': 'Určeno pro:',
   'Git-werk herstellen': 'Obnovit práci v Gitu',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Stále existují místní data Git, která nepatří k žádnému aktuálnímu připojení. Automaticky se neodešlou. Uložte si kopii a před smazáním dat aplikace si v příručce přečtěte „Obnovení starých konceptů Git“.',

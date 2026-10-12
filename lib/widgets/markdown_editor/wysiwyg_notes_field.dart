@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
+import '../../utils/visual_selection_markdown.dart';
 import 'image_embed_builder.dart';
 import '../reader/document_markdown_view.dart'
     show
@@ -297,6 +298,34 @@ class WysiwygNotesField extends StatefulWidget {
 class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
   final TableEmbedControllerStore _tableEditors = TableEmbedControllerStore();
 
+  /// Knippen en kopiëren zetten de Markdown van de selectie op het klembord,
+  /// niet de platte tekst van Quill. Die mist de lijststreep en het vinkje
+  /// (#2398). Een knip wist de regelafsluiter mee wanneer de hele regel
+  /// geselecteerd was, anders blijft er een lege `- [ ]` staan.
+  Future<void> _copySelection({required bool cut}) async {
+    final controller = widget.controller;
+    final selection = controller.selection;
+    if (!selection.isValid || selection.isCollapsed) return;
+    final payload = visualClipboardPayload(
+      controller.document,
+      selection.start,
+      selection.end,
+    );
+    if (payload == null) return;
+    await Clipboard.setData(ClipboardData(text: payload.markdown));
+    if (!cut || !mounted) return;
+    final length = controller.document.length;
+    final start = payload.start.clamp(0, length);
+    final end = payload.end.clamp(start, length);
+    controller.replaceText(
+      start,
+      end - start,
+      '',
+      TextSelection.collapsed(offset: start),
+    );
+    widget.onDiscreteVisualEdit?.call();
+  }
+
   Future<void> _pasteSanitized() async {
     if (widget.tryConsumePaste != null && await widget.tryConsumePaste!()) {
       return;
@@ -333,12 +362,32 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               _SanitizedPasteIntent(),
           SingleActivator(LogicalKeyboardKey.keyV, meta: true):
               _SanitizedPasteIntent(),
+          SingleActivator(LogicalKeyboardKey.keyC, control: true):
+              _CopyMarkdownIntent(),
+          SingleActivator(LogicalKeyboardKey.keyC, meta: true):
+              _CopyMarkdownIntent(),
+          SingleActivator(LogicalKeyboardKey.keyX, control: true):
+              _CutMarkdownIntent(),
+          SingleActivator(LogicalKeyboardKey.keyX, meta: true):
+              _CutMarkdownIntent(),
         },
         child: Actions(
           actions: {
             _SanitizedPasteIntent: CallbackAction<_SanitizedPasteIntent>(
               onInvoke: (_) {
                 _pasteSanitized();
+                return null;
+              },
+            ),
+            _CopyMarkdownIntent: CallbackAction<_CopyMarkdownIntent>(
+              onInvoke: (_) {
+                _copySelection(cut: false);
+                return null;
+              },
+            ),
+            _CutMarkdownIntent: CallbackAction<_CutMarkdownIntent>(
+              onInvoke: (_) {
+                _copySelection(cut: true);
                 return null;
               },
             ),
@@ -408,6 +457,14 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
 
 class _SanitizedPasteIntent extends Intent {
   const _SanitizedPasteIntent();
+}
+
+class _CopyMarkdownIntent extends Intent {
+  const _CopyMarkdownIntent();
+}
+
+class _CutMarkdownIntent extends Intent {
+  const _CutMarkdownIntent();
 }
 
 /// Inserts sanitized plain text at the cursor in a Quill document.

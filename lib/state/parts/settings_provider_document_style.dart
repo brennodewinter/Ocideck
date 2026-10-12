@@ -199,6 +199,8 @@ Future<void> _applyDocumentEditorZoom(SettingsNotifier notifier, double zoom) {
   double editorZoom,
   PageSizeSpec pageSize,
   PageMargins pageMargins,
+  String? documentStart,
+  String? presentationStart,
 })
 _readDocumentSettings(SharedPreferences prefs) => (
   defaultStyle: prefs.getString('documentDefaultStyle'),
@@ -222,7 +224,37 @@ _readDocumentSettings(SharedPreferences prefs) => (
   pageMargins:
       PageMargins.fromId(prefs.getString('documentPageMargins')) ??
       const PageMargins(),
+  documentStart: prefs.getString('documentStartDirectory'),
+  presentationStart: prefs.getString('presentationStartDirectory'),
 );
+
+extension SettingsNotifierStartDirectories on SettingsNotifier {
+  /// Zet de startmap voor documenten of presentaties. `null` is de eerste
+  /// bibliotheek (#2394).
+  Future<void> setStartDirectory({required bool document, String? path}) {
+    final trimmed = path?.trim();
+    final next = trimmed == null || trimmed.isEmpty ? null : trimmed;
+    currentState = document
+        ? currentState.copyWith(
+            clearDocumentStartDirectory: next == null,
+            documentStartDirectory: next,
+          )
+        : currentState.copyWith(
+            clearPresentationStartDirectory: next == null,
+            presentationStartDirectory: next,
+          );
+    final key = document
+        ? 'documentStartDirectory'
+        : 'presentationStartDirectory';
+    return _persist(key, (prefs) async {
+      if (next == null) {
+        await prefs.remove(key);
+      } else {
+        await prefs.setString(key, next);
+      }
+    });
+  }
+}
 
 /// Documentmodus: stel de paginamaat voor export in (ISO-216). Feature 3.
 Future<void> _applyDocumentPageSize(

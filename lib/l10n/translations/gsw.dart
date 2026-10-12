@@ -1609,6 +1609,31 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Startmappen': 'Startordner',
+  'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
+      'Wo Öffne und Speichere aafangt. Läer laa nimmt di erst Bibliothek.',
+  'Eerste bibliotheek': 'Ersti Bibliothek',
+  'Typ een trefwoord en druk op Enter': 'Schlagwort yygee und Enter drucke',
+  'Filter op trefwoorden, komma-gescheiden…':
+      'Noch Schlagwörter filtere, mit Komma trennt…',
+  'Voor wie is deze classificatie?': 'Für wen isch die Iistuufig?',
+  'TLP:CLEAR — ontvangers mogen deze informatie binnen hun gemeenschap verspreiden.':
+      'TLP:CLEAR — Empfänger dörfed die Information i ihrer Gmeinschaft wytergee.',
+  'TLP:GREEN — beperkte verspreiding, alleen binnen de gemeenschap.':
+      'TLP:GREEN — begränzti Wytergab, nume innerhalb vo der Gmeinschaft.',
+  'TLP:AMBER — beperkte verspreiding, alleen binnen de organisaties van de deelnemers.':
+      'TLP:AMBER — begränzti Wytergab, nume i de Organisatione vo de Beteiligte.',
+  'TLP:AMBER+STRICT — beperkte verspreiding, alleen voor de deelnemers.':
+      'TLP:AMBER+STRICT — begränzti Wytergab, nume für d Beteiligte.',
+  'TLP:RED — niet verder verspreiden, alleen voor de genoemde ontvangers.':
+      'TLP:RED — nöd wytergee, nume für di gnännte Empfänger.',
+  'Ontvangers': 'Empfänger',
+  'Namen, gescheiden door komma\'s': 'Näme, mit Komma trennt',
+  'Vul in voor wie dit bestemd is.': 'Gib aa, für wen das bestimmt isch.',
+  'Standaardtoelichting in het document zetten':
+      'Standarderkläärig is Dokument setze',
+  'Als dia invoegen': 'Als Folie yyfüege',
+  'Bestemd voor:': 'Bestimmt für:',
   'Git-werk herstellen': 'Git-Arbeit widerherstelle',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Es git no lokali Git-Date, wo zu keiner aktuelle Verbindig ghöre. Sie wärde nid automatisch verschickt. Mach e Kopie und lies im Handbuech «Alti Git-Entwürf widerherstelle», bevor du d App-Date lösches.',

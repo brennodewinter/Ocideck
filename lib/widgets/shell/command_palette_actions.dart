@@ -117,7 +117,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
           icon: Icons.shield_outlined,
           keywords: const ['tlp', 'classification'],
           enabled: deck.tlp != level,
-          onInvoke: () => deckNotifier.updateInfo(tlp: level),
+          onInvoke: () => unawaited(applyPresentationTlp(context, ref, level)),
         ),
       ...provenanceSignCommands(ref, l10n, deck, _signProvenance),
       ...collabPaletteCommands(context, ref, l10n),
