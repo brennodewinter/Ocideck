@@ -43,10 +43,25 @@ void main() {
     await tester.pump();
   }
 
-  Future<void> pickTlp(WidgetTester tester, String item) async {
+  Future<void> pickTlp(
+    WidgetTester tester,
+    String item, {
+    bool explain = false,
+  }) async {
     await tester.tap(find.byKey(const Key('document-tlp-menu')));
     await tester.pumpAndSettle();
     await tester.tap(find.text(item).last);
+    await tester.pumpAndSettle();
+    if (find.byKey(const Key('tlp-audience-confirm')).evaluate().isEmpty) {
+      return;
+    }
+    if (!explain) {
+      await tester.tap(
+        find.text('Standaardtoelichting in het document zetten'),
+      );
+      await tester.pump();
+    }
+    await tester.tap(find.byKey(const Key('tlp-audience-confirm')));
     await tester.pump();
   }
 
@@ -150,6 +165,11 @@ void main() {
       find.byKey(const Key('document-footer-band')),
     );
     expect(pageIndicator.bottom, lessThanOrEqualTo(footerBand.top));
+    // De tellerbalk hoort in diezelfde strook onder de tekst, niet eroverheen,
+    // en boven de TLP-voet (#2397).
+    final strip = tester.getRect(find.byKey(const Key('document-info-strip')));
+    expect(strip.bottom, lessThanOrEqualTo(footerBand.top));
+    expect(pageIndicator.top, greaterThanOrEqualTo(strip.top));
 
     n.undo();
     await tester.pump();

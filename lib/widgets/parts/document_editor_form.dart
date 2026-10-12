@@ -58,6 +58,7 @@ extension _DocumentEditorForm on _DocumentEditorScreenState {
     ),
     tlp: tlp,
     fields: fields,
+    belowEditor: _documentInfoStripFor(context, ref, Theme.of(context), source),
   );
 
   /// Een antwoord is een nieuwe brontekst. Eén ongedaan-maken-stap per veld: wie

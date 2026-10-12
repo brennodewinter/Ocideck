@@ -202,7 +202,14 @@ void _convertListItem(
   required int index,
 }) {
   _ensureLineStart(buf);
-  buf.write('${'  ' * listDepth}${ordered ? '$index. ' : '- '}');
+  buf.write(
+    '${'  ' * listDepth}${_listMarker(node, ordered: ordered, index: index)}',
+  );
+  // De tekst van het item gaat eerst naar een eigen buffer. Een `<p>` in een
+  // item mag de regel niet breken — dat vouwde een taaklijst open tot een
+  // lege vinkjesregel plus de tekst eronder (#2398). De inspringing voor
+  // geneste lijsten blijft de lijstdiepte, niet deze.
+  final content = StringBuffer();
   final nested = <Element>[];
   for (final child in node.nodes) {
     if (child is Element) {
@@ -212,8 +219,9 @@ void _convertListItem(
         continue;
       }
     }
-    _convertNode(child, buf, listDepth: listDepth);
+    _convertNode(child, content, listDepth: listDepth + 1);
   }
+  buf.write(content.toString().trim());
   _ensureLineStart(buf);
   for (final list in nested) {
     _convertList(
@@ -347,6 +355,43 @@ void _ensureBlankLine(StringBuffer buf) {
     return;
   }
   buf.write('\n\n');
+}
+
+/// Streep of vinkje vóór een lijstitem.
+///
+/// Een `<input type="checkbox">` is geen tekst — hij staat in [_skipTags] en
+/// verdween daardoor bij het plakken, waarna de taaklijst een gewone opsomming
+/// werd (#2398). Het vinkje hoort in de streep: `- [ ]` of `- [x]`.
+String _listMarker(Element node, {required bool ordered, required int index}) {
+  final checked = _checkboxChecked(node, descendIntoLists: true);
+  if (checked == null) return ordered ? '$index. ' : '- ';
+  return checked ? '- [x] ' : '- [ ] ';
+}
+
+/// `true`/`false` als [node] een aanvinkvak bevat, anders `null`.
+///
+/// HTML telt de aanwezigheid van `checked` als aangevinkt, ook wanneer de
+/// waarde leeg is. `checked="false"` is de uitzondering die sommige editors
+/// toch schrijven.
+bool? _checkboxChecked(Node node, {bool descendIntoLists = false}) {
+  if (node is Element) {
+    final tag = node.localName?.toLowerCase() ?? '';
+    // Een vinkje in een geneste lijst hoort bij dat item, niet bij de ouder.
+    if (!descendIntoLists && (tag == 'ul' || tag == 'ol')) return null;
+    if (tag == 'input') {
+      final type = (node.attributes['type'] ?? 'checkbox').toLowerCase();
+      if (type == 'checkbox') {
+        if (node.attributes['aria-checked'] == 'true') return true;
+        if (!node.attributes.containsKey('checked')) return false;
+        return node.attributes['checked'] != 'false';
+      }
+    }
+  }
+  for (final child in node.nodes) {
+    final found = _checkboxChecked(child);
+    if (found != null) return found;
+  }
+  return null;
 }
 
 void _ensureLineStart(StringBuffer buf) {

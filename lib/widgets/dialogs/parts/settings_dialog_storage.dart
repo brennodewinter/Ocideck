@@ -84,6 +84,8 @@ extension _SettingsStorageTab on _SettingsDialogState {
           const SizedBox(height: 20),
           ..._openPreviewSection(l10n),
           const SizedBox(height: 20),
+          ..._startDirectorySection(l10n),
+          const SizedBox(height: 20),
           ..._exportFolderSection(l10n),
         ],
       ],
@@ -541,6 +543,72 @@ extension _SettingsStorageTab on _SettingsDialogState {
             ),
         ],
       ),
+    );
+  }
+
+  /// Twee startmappen op de bestaande bibliotheken. Leeg = de eerste (#2394).
+  List<Widget> _startDirectorySection(AppLocalizations l10n) {
+    final locals = [
+      for (final c in _localConnections)
+        if (c.isConfigured) c,
+    ];
+    if (locals.isEmpty) return const [];
+    return [
+      _sectionTitle(l10n.d('Startmappen')),
+      Text(
+        l10n.d(
+          'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.',
+        ),
+        style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+      ),
+      const SizedBox(height: 8),
+      _startDirectoryPicker(
+        label: l10n.d('Documenten'),
+        value: _documentStartDirectory,
+        locals: locals,
+        onChanged: (path) => setState(() => _documentStartDirectory = path),
+      ),
+      const SizedBox(height: 8),
+      _startDirectoryPicker(
+        label: l10n.d('Presentaties'),
+        value: _presentationStartDirectory,
+        locals: locals,
+        onChanged: (path) => setState(() => _presentationStartDirectory = path),
+      ),
+    ];
+  }
+
+  Widget _startDirectoryPicker({
+    required String label,
+    required String? value,
+    required List<LocalConnection> locals,
+    required ValueChanged<String?> onChanged,
+  }) {
+    final paths = [for (final c in locals) c.path];
+    final selected = value != null && paths.contains(value) ? value : null;
+    return Row(
+      children: [
+        SizedBox(width: 120, child: Text(label)),
+        const SizedBox(width: 8),
+        Expanded(
+          child: DropdownButton<String?>(
+            isExpanded: true,
+            value: selected,
+            items: [
+              DropdownMenuItem<String?>(
+                value: null,
+                child: Text(context.l10n.d('Eerste bibliotheek')),
+              ),
+              for (final c in locals)
+                DropdownMenuItem<String?>(
+                  value: c.path,
+                  child: Text(c.name.isEmpty ? p.basename(c.path) : c.name),
+                ),
+            ],
+            onChanged: onChanged,
+          ),
+        ),
+      ],
     );
   }
 

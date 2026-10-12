@@ -182,16 +182,13 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late AppAppearanceProfile _appearanceProfile;
   late String _originalAppearanceName;
 
-  /// De werkkopie van de app-themalijst (#760). Aanmaken en verwijderen
-  /// bewerken déze lijst en landen pas bij Opslaan — hetzelfde contract als de
-  /// acht kleurvelden en de opslagverbindingen (`_connections`), zodat
-  /// Annuleren het hele venster terugdraait en niet de helft.
+  /// Werkkopie van de app-thema's. Landt pas bij Opslaan (#760).
   late List<AppAppearanceProfile> _appearanceProfiles;
 
-  /// Het thema dat actief was toen het venster openging: de terugval wanneer
-  /// het geselecteerde thema verwijderd wordt. Wie een kopie van Donker
-  /// weggooit hoort weer in Donker te staan, niet in een hardgecodeerd licht
-  /// thema (#760, bevinding 3).
+  /// Startmappen. `null` = de eerste bibliotheek. Landt bij Opslaan (#2394).
+  late String? _documentStartDirectory;
+  late String? _presentationStartDirectory;
+
   late String _appearanceOpenName;
   late TextEditingController _appearanceName;
 
@@ -291,6 +288,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _configAtOpen[connection.id] = jsonEncode(connection.toJson()['config']);
     }
     _exportDirectory = settings.exportDirectory;
+    _documentStartDirectory = settings.documentStartDirectory;
+    _presentationStartDirectory = settings.presentationStartDirectory;
     // Profiel van de open presentatie (deckNotifierOrNull: documenttab = geen).
     final deckProfile = ref
         .read(tabsProvider)
@@ -752,9 +751,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       discardPendingWorkFor: _discardPendingWorkFor,
     );
     notifier.setExportDirectory(_exportDirectory);
+    notifier.setStartDirectory(document: true, path: _documentStartDirectory);
+    notifier.setStartDirectory(
+      document: false,
+      path: _presentationStartDirectory,
+    );
     notifier.saveThemeProfile(profile, previousName: _originalName);
-    // De hele werkkopie in één keer (#760): aangemaakte en verwijderde
-    // thema's landen hier, samen met de lopende bewerking en de selectie.
     _syncAppearanceEdits();
     notifier.setAppAppearanceProfiles(
       _appearanceProfiles,

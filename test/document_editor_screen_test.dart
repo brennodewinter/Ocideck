@@ -64,6 +64,8 @@ void main() {
     expect(find.byType(DocumentMarkdownView), findsNothing);
     // Eenvoudige markdown → Quill-WYSIWYG (bewerkbaar).
     expect(find.byType(QuillEditor), findsOneWidget);
+    // De informatiestrook is er ook zonder TLP, en niet als overlay op de tekst.
+    expect(find.byKey(const Key('document-info-strip')), findsOneWidget);
   });
 
   testWidgets('Visueel: een tabel valt niet terug op ruwe markdown', (

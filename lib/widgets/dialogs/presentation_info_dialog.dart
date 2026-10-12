@@ -7,6 +7,7 @@ import '../../models/deck.dart';
 import '../../models/marp_compatibility.dart';
 import '../../models/presentation_timing.dart';
 import '../../l10n/app_localizations.dart';
+import '../keyword_chips_editor.dart';
 import '../../services/markdown_service.dart';
 import '../../services/marp_compatibility.dart';
 import '../../state/deck_provider.dart';
@@ -596,11 +597,7 @@ class _PresentationInfoDialogState
           maxLines: 3,
         ),
         const SizedBox(height: 12),
-        _field(
-          _keywords,
-          'Trefwoorden',
-          'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
-        ),
+        KeywordChipsEditor(controller: _keywords),
         // Standaarden en hulpmiddelen zijn MIAUW-vastlegging (EIS 4.3.2/4.8.2).
         // Bij een gewone presentatie zeggen ze niets, dus ze verschijnen pas met
         // de informatieveiligheidsmodule aan — dezelfde lijn als de rest van de

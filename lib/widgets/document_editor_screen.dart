@@ -7,7 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart'
     show EditorState, QuillController;
-import 'package:flutter_quill/quill_delta.dart' show Delta, Operation;
+import 'package:flutter_quill/quill_delta.dart' show Delta;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
@@ -61,13 +61,14 @@ import '../utils/image_search_paths.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
-import '../utils/markdown_quill_codec.dart';
 import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';
 import '../utils/document_stats.dart';
+import 'keyword_chips_editor.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
+import '../utils/visual_paste_delta.dart';
 import '../utils/markdown_visual_compatibility.dart'
     show
         firstVisualLimitation,
@@ -75,6 +76,7 @@ import '../utils/markdown_visual_compatibility.dart'
         markdownRoundTripsVisually;
 import 'dialogs/convert_to_presentation_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
+import 'dialogs/tlp_audience_action.dart';
 import 'dialogs/image_carousel_picker.dart';
 import 'dialogs/settings_dialog.dart';
 import 'document_page_chrome.dart';
@@ -102,6 +104,7 @@ part 'parts/document_editor_chrome_coordinator.dart';
 part 'parts/document_fields_dialog.dart';
 part 'parts/document_editor_form.dart';
 part 'parts/document_editor_layouts.dart';
+part 'parts/document_info_strip.dart';
 part 'parts/document_source_field.dart';
 part 'parts/document_source_rewrites.dart';
 part 'parts/document_editor_inserts.dart';
@@ -620,7 +623,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         : null,
     onStyleChanged: (name) => _setDocumentStyle(ref, name),
     tlp: documentTlp,
-    onTlpChanged: (level) => _setDocumentTlp(ref, level),
+    onTlpChanged: (level) => unawaited(applyDocumentTlp(context, ref, level)),
     showPageBreaks: _showPageBreaks,
     onShowPageBreaksChanged: (v) => setState(() => _showPageBreaks = v),
     width: settings.documentEditorWidth,
@@ -930,28 +933,38 @@ Widget _styledDocumentSurface(
   Widget editor, {
   required TlpLevel tlp,
   required Map<String, String> fields,
+  Widget? belowEditor,
 }) {
   final chromeProfile = profile ?? const ThemeProfile();
-  if (!_hasDocumentChrome(chromeProfile, tlp)) return editor;
-  return ColoredBox(
-    color: AppTheme.parseHexColor(chromeProfile.slideBackgroundColor),
-    child: Column(
-      children: [
+  final chrome = _hasDocumentChrome(chromeProfile, tlp);
+  if (!chrome && belowEditor == null) return editor;
+  // De informatiestrook staat boven de TLP-voet, in de ruimte die anders over
+  // de laatste regels heen lag (#2397). Zonder strook en zonder chrome blijft
+  // de editor zelf het hele vlak.
+  final column = Column(
+    children: [
+      if (chrome)
         DocumentChromeBand(
           profile: chromeProfile,
           header: true,
           tlp: tlp,
           fields: fields,
         ),
-        Expanded(child: editor),
+      Expanded(child: editor),
+      ?belowEditor,
+      if (chrome)
         DocumentChromeBand(
           profile: chromeProfile,
           header: false,
           tlp: tlp,
           fields: fields,
         ),
-      ],
-    ),
+    ],
+  );
+  if (!chrome) return column;
+  return ColoredBox(
+    color: AppTheme.parseHexColor(chromeProfile.slideBackgroundColor),
+    child: column,
   );
 }
 
@@ -1056,16 +1069,6 @@ void _setDocumentStyle(WidgetRef ref, String? name) {
 TlpLevel _documentTlp(WidgetRef ref) => ref.watch(
   documentProvider.select((state) => state.document?.tlp ?? TlpLevel.none),
 );
-
-/// Eén bewuste classificatiekeuze is één ongedaan-stap. De broneditor krijgt
-/// alleen de body en hoeft dus niet te verspringen wanneer de front matter wijzigt.
-void _setDocumentTlp(WidgetRef ref, TlpLevel level) {
-  final doc = ref.read(documentProvider).document;
-  if (doc == null || doc.tlp == level) return;
-  ref
-      .read(documentProvider.notifier)
-      .edit(doc.withTlp(level).source, coalesceKey: null);
-}
 
 /// De weergavemodus van de documenteditor. Manieren om naar hetzelfde document
 /// te kijken, nooit een extra renderpad (DOCUMENT_MODE.md §2.1): de bron als

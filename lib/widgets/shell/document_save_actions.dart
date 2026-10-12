@@ -114,7 +114,12 @@ Future<bool> saveDocumentWithDestination(
   // work as a copy rather than losing it.
   final saved = await ref
       .read(fileServiceProvider)
-      .saveDocumentAs(documentToSave);
+      .saveDocumentAs(
+        documentToSave,
+        initialDirectory: ref
+            .read(settingsProvider)
+            .startDirectoryFor(document: true),
+      );
   if (saved == null) return false;
   await _adoptSavedDocument(
     ref,
@@ -240,7 +245,12 @@ Future<_DocSaveOutcome> _resolveDocumentConflict(
       case _ConflictChoice.saveCopy:
         final saved = await ref
             .read(fileServiceProvider)
-            .saveDocumentAs(documentToSave);
+            .saveDocumentAs(
+              documentToSave,
+              initialDirectory: ref
+                  .read(settingsProvider)
+                  .startDirectoryFor(document: true),
+            );
         if (saved == null) return _DocSaveOutcome.abort;
         if (!context.mounted) return _DocSaveOutcome.abort;
         await _adoptSavedDocument(

@@ -9,6 +9,7 @@ import '../../platform/platform_features.dart';
 import '../../services/duplicate_service.dart';
 import '../../services/file_service.dart';
 import '../../utils/display_path.dart';
+import '../../utils/markdown_keywords.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../duplicate_badges.dart';
@@ -34,17 +35,23 @@ class OpenSearchResult {
 
   OpenSearchResult(String path, {this.slideIndex})
     : paths = [path],
-      browseRequested = false;
+      browseRequested = false,
+      kind = OpenKindFilter.all;
 
   /// Meerdere bestanden tegelijk, in de volgorde waarin de lijst ze toonde.
   OpenSearchResult.multiple(this.paths)
     : slideIndex = null,
-      browseRequested = false;
+      browseRequested = false,
+      kind = OpenKindFilter.all;
 
-  const OpenSearchResult.browse()
+  const OpenSearchResult.browse({this.kind = OpenKindFilter.all})
     : paths = const [],
       slideIndex = null,
       browseRequested = true;
+
+  /// Het soortfilter op het moment van Bladeren, zodat de native kiezer in
+  /// de startmap van dát soort opent (#2394).
+  final OpenKindFilter kind;
 }
 
 /// Dialog that scans the configured libraries for editable Markdown files and
@@ -110,6 +117,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// vindplaats-weergave per rij (naam + map relatief aan die wortel).
   final Map<String, LibraryFolder> _rootOf = {};
   String _query = '';
+  String _tagQuery = '';
   OpenKindFilter _kind = OpenKindFilter.all;
 
   /// Het bestand waarvan het voorbeeld getoond wordt; null zolang er niets is
@@ -247,7 +255,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   Future<void> _browse() async {
     // Sluit eerst: zie [OpenSearchResult.browseRequested]. De startmap geeft
     // de aanroeper mee via de geconfigureerde wortels (eerste bibliotheek).
-    Navigator.pop(context, const OpenSearchResult.browse());
+    Navigator.pop(context, OpenSearchResult.browse(kind: _kind));
   }
 
   /// Pijltje/Enter/Home/End op de dialoog. Deze handler zit op een `Focus`
@@ -365,13 +373,21 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// Het soortfilter zit hier bewust niet in: het scherm heeft zowel de
   /// gefilterde lijst als de aantallen per soort nodig, en dat zijn twee kijken
   /// op één zoekactie — geen twee zoekacties.
+  List<String> get _requiredTags => [
+    for (final part in _tagQuery.split(','))
+      if (part.trim().isNotEmpty) part.trim(),
+  ];
+
+  bool _tagsMatch(String content) =>
+      markdownHasKeywords(content, _requiredTags);
+
   List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> _matching() {
     final q = _query.trim().toLowerCase();
     final out = <(DuplicateInfo<ScannedMarkdown>, List<_Hit>)>[];
     final groups = _groups;
     if (q.isEmpty) {
       for (final info in groups) {
-        out.add((info, const []));
+        if (_tagsMatch(info.primary.content)) out.add((info, const []));
       }
       return out;
     }
@@ -396,7 +412,9 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           '$contentLower';
       final fileMatch = matchesAll(fileHay);
       final hits = _hitsIn(file, first, matchesAll, contentLower);
-      if (fileMatch || hits.isNotEmpty) out.add((info, hits));
+      if ((fileMatch || hits.isNotEmpty) && _tagsMatch(file.content)) {
+        out.add((info, hits));
+      }
     }
     return out;
   }
@@ -467,6 +485,19 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _toolbar(),
+              const SizedBox(height: 8),
+              TextField(
+                key: const Key('open-tag-filter'),
+                decoration: InputDecoration(
+                  isDense: true,
+                  prefixIcon: const Icon(Icons.label_outline, size: 18),
+                  hintText: l10n.d('Filter op trefwoorden, komma-gescheiden…'),
+                ),
+                onChanged: (v) => setState(() {
+                  _tagQuery = v;
+                  _focusedIndex = null;
+                }),
+              ),
               const SizedBox(height: 8),
               OpenKindFilterBar(
                 value: _kind,
