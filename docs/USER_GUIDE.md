@@ -5089,6 +5089,13 @@ not, and why conversion is deliberately lossy — is written up in
   OciDeck refuses to open is not drawn here either. *(Added 2026-08-19: the
   search lists showed Marp presentations only, so your own documents could not be
   found there.)*
+- **Start folders.** *Settings → Storage → Start folders* lets documents and
+  presentations begin in different libraries. Leave a choice empty and OciDeck
+  uses the first library, as before. The native open and save dialogs open
+  there; the in-app list still searches every library.
+- **Keywords.** Document properties and presentation info edit `keywords` as
+  chips. The open dialog has a separate keyword filter that matches only that
+  line, not the body.
 - **Save** (`Ctrl/Cmd + S`) writes your **byte-faithful master**: opening a
   document and saving it again without editing yields a byte-identical file.
   OciDeck injects no front matter, forces no slide separators, and applies no
