@@ -11,7 +11,24 @@ Deck _attachLearningTheme(Deck deck, List<PackageEntry> entries) {
   }
   final definition = Map<String, Object?>.from(decoded['definition'] as Map);
   if (decoded['name'] case final String name) definition['name'] = name;
-  return deck.copyWith(themeProfile: ThemeProfile.fromJson(definition));
+  final profile = ThemeProfile.fromJson(definition);
+  return deck.copyWith(themeProfile: _safeLearningTheme(profile));
+}
+
+/// Een lespakket levert configuratie aan de ontvanger, geen lokaal vertrouwde
+/// stijl. Alleen ingebouwde assets mogen daarom als bestandspad meekomen.
+ThemeProfile _safeLearningTheme(ThemeProfile profile) {
+  bool isSafe(String? path) =>
+      path == null || path.trim().isEmpty || isBundledAssetPath(path.trim());
+
+  return profile.copyWith(
+    clearLogo: !isSafe(profile.logoPath),
+    clearLogoDark: !isSafe(profile.logoDarkPath),
+    clearBrandStrip: !isSafe(profile.brandStripPath),
+    clearDocumentLogoOverride: !isSafe(profile.documentLogoPath),
+    // De Markdown van een afsluitdia kan zelf lokale afbeeldingspaden dragen.
+    closingSlideEnabled: false,
+  );
 }
 
 /// Opent een onveranderlijke OciServe-les en bindt de sessie aan het tabblad.
