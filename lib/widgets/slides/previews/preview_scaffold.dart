@@ -14,8 +14,11 @@ part of '../slide_preview.dart';
 /// breed, en de meting loopt door (#782).
 double _progressBarThickness(double w) => math.max(0.5, w * 0.014);
 
-String? _resolvePath(String path, String? projectPath) =>
-    resolveSlideAssetPath(path, projectPath);
+String? _resolvePath(String path, String? projectPath) {
+  final resolved = resolveSlideAssetPath(path, projectPath);
+  if (resolved == null || projectPath == null) return resolved;
+  return isRenderPathContained(resolved, projectPath) ? resolved : null;
+}
 
 /// De buitenste stellage die de inhoudspreviews delen: een vlak in
 /// [background], met de inhoud opgemaakt op de vaste slidebreedte [width] en

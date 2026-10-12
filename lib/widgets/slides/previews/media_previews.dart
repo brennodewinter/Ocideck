@@ -266,8 +266,9 @@ class _AudioPlaybackState extends State<_AudioPlayback>
     // Deck via URL geopend (#2282): een relatief pad wijst naar een bestand
     // naast het deck op die server — zie [_VideoPreviewState] voor de reden
     // dat dit geen `allowRemoteMedia` vraagt.
-    return _resolvePath(ap, widget.projectPath) ??
-        resolveDeckAssetUrl(ap, DeckAssetScope.read(context));
+    final local = _resolvePath(ap, widget.projectPath);
+    if (local != null || widget.projectPath != null) return local;
+    return resolveDeckAssetUrl(ap, DeckAssetScope.read(context));
   }
 
   @override
