@@ -48,6 +48,18 @@ Archive safeDecodeZip(
       'missing, so the file is not a readable pptx/odp/key.',
     );
   }
+  final declaredEntries = readZipEntryCount(
+    bytes,
+    stopAfter: budget.maxArchiveEntries + 1,
+  );
+  if (declaredEntries == null) {
+    throw const FormatException(
+      'Not a readable ZIP archive: central directory is missing or malformed.',
+    );
+  }
+  if (declaredEntries > budget.maxArchiveEntries) {
+    throw ImportBudgetException('${budget.maxArchiveEntries} onderdelen');
+  }
   final archive = ZipDecoder().decodeBytes(bytes);
   if (archive.length > budget.maxArchiveEntries) {
     throw ImportBudgetException('${budget.maxArchiveEntries} onderdelen');
@@ -67,6 +79,98 @@ Archive safeDecodeZip(
     }
   }
   return archive;
+}
+
+/// Count the central-directory records without decoding the archive. A null
+/// result means the archive has no parseable EOCD or central directory;
+/// [ZipDecoder] remains responsible for reporting that malformed input.
+int? readZipEntryCount(List<int> bytes, {int? stopAfter}) {
+  const eocdSignature = 0x06054b50;
+  const zip64LocatorSignature = 0x07064b50;
+  const zip64EndSignature = 0x06064b50;
+  for (var i = bytes.length - 22; i >= 0; i--) {
+    if (!_rangeWithin(i, 22, bytes.length) || _u32(bytes, i) != eocdSignature) {
+      continue;
+    }
+    final commentLength = _u16(bytes, i + 20);
+    if (i + 22 + commentLength > bytes.length) continue;
+    final centralSize16 = _u32(bytes, i + 12);
+    final centralOffset16 = _u32(bytes, i + 16);
+    if (centralSize16 != 0xFFFFFFFF &&
+        centralOffset16 != 0xFFFFFFFF &&
+        _rangeWithin(centralOffset16, centralSize16, i)) {
+      return _countCentralDirectoryEntries(
+        bytes,
+        centralOffset16,
+        centralSize16,
+        stopAfter: stopAfter,
+      );
+    }
+
+    final locator = i - 20;
+    if (!_rangeWithin(locator, 20, bytes.length) ||
+        _u32(bytes, locator) != zip64LocatorSignature) {
+      return null;
+    }
+    final zip64Offset = _u64(bytes, locator + 8);
+    if (!_rangeWithin(zip64Offset, 56, bytes.length)) return null;
+    final zip64 = zip64Offset.toInt();
+    if (_u32(bytes, zip64) != zip64EndSignature) return null;
+    final centralSize = _u64(bytes, zip64 + 40);
+    final centralOffset = _u64(bytes, zip64 + 48);
+    if (!_rangeWithin(centralOffset, centralSize, zip64Offset)) return null;
+    return _countCentralDirectoryEntries(
+      bytes,
+      centralOffset,
+      centralSize,
+      stopAfter: stopAfter,
+    );
+  }
+  return null;
+}
+
+int? _countCentralDirectoryEntries(
+  List<int> bytes,
+  int offset,
+  int size, {
+  int? stopAfter,
+}) {
+  if (!_rangeWithin(offset, size, bytes.length)) return null;
+  final end = offset + size;
+  var count = 0;
+  var position = offset;
+  while (position < end) {
+    if (!_rangeWithin(position, 46, end) ||
+        _u32(bytes, position) != 0x02014b50) {
+      return null;
+    }
+    final nameLength = _u16(bytes, position + 28);
+    final extraLength = _u16(bytes, position + 30);
+    final commentLength = _u16(bytes, position + 32);
+    final headerLength = 46 + nameLength + extraLength + commentLength;
+    if (!_rangeWithin(position, headerLength, end)) return null;
+    count++;
+    if (stopAfter != null && count >= stopAfter) return count;
+    position += headerLength;
+  }
+  return count;
+}
+
+bool _rangeWithin(int offset, int size, int limit) =>
+    offset >= 0 && size >= 0 && offset <= limit && size <= limit - offset;
+
+int _u16(List<int> bytes, int offset) =>
+    bytes[offset] | (bytes[offset + 1] << 8);
+
+int _u32(List<int> bytes, int offset) =>
+    _u16(bytes, offset) | (_u16(bytes, offset + 2) << 16);
+
+int _u64(List<int> bytes, int offset) {
+  var value = 0;
+  for (var i = 0; i < 8; i++) {
+    value |= bytes[offset + i] << (i * 8);
+  }
+  return value;
 }
 
 /// A byte count as a short human string for the grens-beschrijving: MiB for the

@@ -84,6 +84,58 @@ void main() {
     );
   });
 
+  test('de entrytelling leest de central directory vóór decode', () {
+    final bytes = zipOf({'a.txt': 'x', 'b.txt': 'y', 'c.txt': 'z'});
+    expect(readZipEntryCount(bytes), 3);
+    // Een valse telling in EOCD mag de echte central-directorytelling niet
+    // verbergen voor de preflight.
+    final eocd = bytes.length - 22;
+    bytes[eocd + 10] = 1;
+    bytes[eocd + 11] = 0;
+    expect(
+      () => safeDecodeZip(
+        bytes,
+        budget: ImportBudget.forTest(maxArchiveEntries: 2),
+      ),
+      throwsA(isA<ImportBudgetException>()),
+    );
+  });
+
+  test('een ZIP64-markering zonder locator maskeert de directory niet', () {
+    final bytes = zipOf({'a.txt': 'x', 'b.txt': 'y', 'c.txt': 'z'});
+    final eocd = bytes.length - 22;
+    bytes[eocd + 10] = 0xFF;
+    bytes[eocd + 11] = 0xFF;
+    expect(readZipEntryCount(bytes), 3);
+  });
+
+  test('de entrytelling blijft gelden bij bytes achter de ZIP', () {
+    final bytes = [
+      ...zipOf({'a.txt': 'x', 'b.txt': 'y', 'c.txt': 'z'}),
+      0xCA,
+      0xFE,
+    ];
+    final eocd = bytes.length - 2 - 22;
+    bytes[eocd + 10] = 1;
+    bytes[eocd + 11] = 0;
+    expect(readZipEntryCount(bytes), 3);
+    expect(
+      () => safeDecodeZip(
+        bytes,
+        budget: ImportBudget.forTest(maxArchiveEntries: 2),
+      ),
+      throwsA(isA<ImportBudgetException>()),
+    );
+  });
+
+  test('de entrytelling vindt EOCD ook voorbij een lange staart', () {
+    final bytes = [
+      ...zipOf({'a.txt': 'x'}),
+      ...List.filled(70 * 1024, 0xCA),
+    ];
+    expect(readZipEntryCount(bytes), 1);
+  });
+
   test('een te grote losse entry wordt geweigerd', () {
     expect(
       () => safeDecodeZip(

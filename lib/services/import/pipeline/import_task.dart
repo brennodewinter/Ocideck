@@ -204,7 +204,23 @@ Future<ImportTaskResult> parseAndClassify(
       ),
     );
   } on FormatException {
-    // Geen zip-magie: dit is geen presentatie (en niet: beschadigd).
+    // Geen zip-magie: dit is geen presentatie. Een bestand met een echte
+    // ZIP-kop maar een kapotte directory is wél beschadigd.
+    final hasZipMagic =
+        request.bytes.length >= 4 &&
+        request.bytes[0] == 0x50 &&
+        request.bytes[1] == 0x4B &&
+        request.bytes[2] == 0x03 &&
+        request.bytes[3] == 0x04;
+    if (hasZipMagic) {
+      return ImportTaskFailed(
+        ImportFailure(
+          '$filename lijkt beschadigd: het archief kan niet worden uitgepakt.',
+          reason: ImportFailureReason.corrupt,
+          args: {'bestand': filename},
+        ),
+      );
+    }
     return ImportTaskFailed(
       ImportFailure(
         '$filename: dit bestand is geen geldig zip-archief (pptx/odp/key).',
