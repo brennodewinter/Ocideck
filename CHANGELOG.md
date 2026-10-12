@@ -68,6 +68,9 @@ All notable changes to OciDeck are documented in this file.
   Oude offline concepten blijven bewaard voor handmatig herstel; het
   Git-paneel waarschuwt als ze aanwezig zijn. Een open deck wordt niet
   stilzwijgend naar een later gewijzigde verbinding opgeslagen.
+- **Exporttaal blijft geldige metadata in HTML, EPUB en ODT.** Gewone BCP47-
+  taalcodes blijven ongewijzigd; andere tekens kunnen de uitvoerstructuur niet
+  meer veranderen.
 - **Een geredigeerde browserexport houdt verificatiesleutels apart.** De
   deelbare ZIP bevat het rapport en alleen het redactiemanifest zonder salts.
   Download de auteursleutels daarna met de aparte knop in het exportdialoog en
