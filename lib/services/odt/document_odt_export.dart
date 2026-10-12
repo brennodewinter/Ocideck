@@ -241,7 +241,7 @@ String _buildMetaXml(ExportDocumentMetadata meta, String title) {
     ..writeln('<dc:title>${xmlEscape(title)}</dc:title>')
     ..writeln('<dc:creator>${xmlEscape(meta.documentAuthor)}</dc:creator>')
     ..writeln(
-      '<dc:language>${meta.language.isNotEmpty ? meta.language : "nl"}</dc:language>',
+      '<dc:language>${xmlEscape(meta.language.isNotEmpty ? meta.language : "nl")}</dc:language>',
     )
     ..writeln(
       '<meta:creation-date>${now.toIso8601String().split(".").first}Z</meta:creation-date>',

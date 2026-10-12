@@ -267,7 +267,7 @@ String _buildDocumentXhtml(
     ..writeln(
       '<html xmlns="http://www.w3.org/1999/xhtml" '
       'xmlns:epub="http://www.idpf.org/2007/ops" '
-      'lang="$lang">',
+      'lang="${xmlAttr(lang)}">',
     )
     ..writeln('<head><meta charset="utf-8"/>')
     ..writeln('<title>${xmlEscape(title)}</title>')
@@ -296,7 +296,7 @@ String _buildOpf(
     )
     ..writeln('  <dc:title>${xmlEscape(title)}</dc:title>')
     ..writeln(
-      '  <dc:language>${meta.language.isNotEmpty ? meta.language : "nl"}</dc:language>',
+      '  <dc:language>${xmlEscape(meta.language.isNotEmpty ? meta.language : "nl")}</dc:language>',
     )
     ..writeln('  <dc:creator>${xmlEscape(meta.documentAuthor)}</dc:creator>');
 

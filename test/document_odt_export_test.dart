@@ -23,6 +23,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/export_bundle.dart';
+import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/odt/document_odt_export.dart';
@@ -171,6 +172,26 @@ void main() {
 
     expect(meta, contains('TLP'));
     expect(meta, contains('AMBER'));
+  });
+
+  test('odt: taalmetadata kan geen XML markup injecteren', () async {
+    final bundle = await buildBundle('# Rapport\n\nTekst.\n');
+    final bytes = await buildDocumentExportOdt(
+      bundle,
+      metadata: const ExportDocumentMetadata(
+        language: 'en"><script>alert(1)</script>',
+      ),
+    );
+    final archive = ZipDecoder().decodeBytes(bytes);
+    final meta = _readEntry(archive, 'meta.xml');
+
+    expect(
+      meta,
+      contains(
+        '<dc:language>en"&gt;&lt;script&gt;alert(1)&lt;/script&gt;</dc:language>',
+      ),
+    );
+    expect(meta, isNot(contains('<script>alert(1)</script>')));
   });
 
   test('odt: writeDocumentExport schrijft een geldig .odt-bestand', () async {

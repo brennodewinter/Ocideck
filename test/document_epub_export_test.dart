@@ -183,6 +183,31 @@ void main() {
     expect(opf, contains('style.css'));
   });
 
+  test('epub: taalmetadata kan geen XML markup injecteren', () async {
+    final bundle = await buildBundle('# Rapport\n\nTekst.\n');
+    final bytes = await buildDocumentExportEpub(
+      bundle,
+      metadata: const ExportDocumentMetadata(
+        language: 'en"><script>alert(1)</script>',
+      ),
+    );
+    final archive = ZipDecoder().decodeBytes(bytes);
+    final document = _readEntry(archive, 'OEBPS/document.xhtml');
+    final opf = _readEntry(archive, 'OEBPS/content.opf');
+
+    expect(
+      document,
+      contains('lang="en&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;"'),
+    );
+    expect(document, isNot(contains('<script>alert(1)</script>')));
+    expect(
+      opf,
+      contains(
+        '<dc:language>en"&gt;&lt;script&gt;alert(1)&lt;/script&gt;</dc:language>',
+      ),
+    );
+  });
+
   test('epub: TLP-classificatie staat in de OPF-metadata', () async {
     final bundle = await buildBundle(
       '# Geheim Rapport\n\nVertrouwelijk.\n',
