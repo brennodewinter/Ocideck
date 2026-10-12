@@ -1636,6 +1636,13 @@ const _dutchSourceAddHr = <String, String>{
       'Umetni standardno objašnjenje u dokument',
   'Als dia invoegen': 'Umetni kao slajd',
   'Bestemd voor:': 'Namijenjeno za:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Provjera privatnosti isključena je u odjeljku Sigurnost. Izvoz dokumenta ipak provjerava sadržaj prema pravilu izvoza.',
+  'Persoonsgegevens in dit document': 'Osobni podaci u ovom dokumentu',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Uklonite pronađene podatke iz dokumenta ili promijenite postavku u odjeljku Sigurnost.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Provjerite sadržaj i izričito potvrdite da želite izvesti ovu kopiju.',
   'Git-werk herstellen': 'Vrati Git rad',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Još postoje lokalni podaci Git koji nisu povezani s trenutačnom vezom. Neće se automatski poslati. Sačuvajte kopiju i pročitajte „Vraćanje starih Git skica” u priručniku prije brisanja podataka aplikacije.',

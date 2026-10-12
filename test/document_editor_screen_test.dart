@@ -250,6 +250,73 @@ void main() {
     );
   });
 
+  for (final gate in ['warn', 'block']) {
+    for (final checksEnabled in [true, false]) {
+      testWidgets(
+        'documentexport volgt privacybeleid $gate bij controles $checksEnabled',
+        (tester) async {
+          SharedPreferences.setMockInitialValues({
+            'privacyExportGate': gate,
+            'privacyChecksEnabled': checksEnabled,
+          });
+          await tester.binding.setSurfaceSize(const Size(800, 800));
+          tester.platformDispatcher.textScaleFactorTestValue = 2;
+          addTearDown(() {
+            tester.binding.setSurfaceSize(null);
+            tester.platformDispatcher.clearTextScaleFactorTestValue();
+          });
+          final notifier = DocumentNotifier()
+            ..loadDocument(
+              MarkdownDocument.parse('# Rapport\n\nBSN 728398242\n'),
+            );
+
+          await tester.pumpWidget(harness(notifier));
+          await tester.pumpAndSettle();
+          await tester.tap(find.byTooltip('Exporteren…'));
+          await tester.pumpAndSettle();
+          if (!checksEnabled) {
+            expect(
+              find.textContaining('Documentexport controleert de inhoud wel'),
+              findsOneWidget,
+            );
+          }
+          await tester.tap(find.text('Exporteren…').last);
+          await pumpUntil(
+            tester,
+            () => find
+                .textContaining('bevinding(en) zonder keuze.')
+                .evaluate()
+                .isNotEmpty,
+            reason: 'het privacybesluit verscheen niet',
+          );
+
+          expect(
+            find.textContaining('bevinding(en) zonder keuze.'),
+            findsOneWidget,
+          );
+          expect(
+            find.text('Toch exporteren'),
+            gate == 'warn' ? findsOneWidget : findsNothing,
+          );
+          if (gate == 'block') {
+            expect(find.text('Export geblokkeerd'), findsOneWidget);
+          } else {
+            await tester.tap(find.text('Annuleren').last);
+            await pumpUntil(
+              tester,
+              () => find
+                  .text('Persoonsgegevens in dit document')
+                  .evaluate()
+                  .isEmpty,
+              reason: 'annuleren sloot de privacyvraag niet',
+            );
+            expect(find.text('Persoonsgegevens in dit document'), findsNothing);
+          }
+        },
+      );
+    }
+  }
+
   testWidgets('Cmd+= zoomt in en Cmd+0 zet terug op ware grootte', (
     tester,
   ) async {

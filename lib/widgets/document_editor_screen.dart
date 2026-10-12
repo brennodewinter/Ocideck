@@ -12,7 +12,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
 import '../l10n/app_localizations.dart';
-import '../l10n/export_block_localization.dart';
 import '../l10n/page_size_localization.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
@@ -41,6 +40,7 @@ import '../services/markdown_table_codec.dart';
 import '../services/document_timeline.dart';
 import '../services/marp_html_service.dart';
 import '../services/privacy/privacy_own_identity.dart';
+import '../services/privacy/privacy_export_policy.dart';
 import '../state/deck_provider.dart'
     show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
@@ -727,15 +727,12 @@ Future<String?> _writeDocumentExport(
   final projectPath = filePath == null ? null : p.dirname(filePath);
   final settings = ref.read(settingsProvider);
   final exportSetup = effectiveDocumentPageSetup(settings, document.source);
-  final fileService = ref.read(fileServiceProvider);
-  final imageService = ref.read(imageServiceProvider);
-  final markdownService = ref.read(markdownServiceProvider);
   final l10n = context.l10n;
   final messenger = ScaffoldMessenger.of(context);
   final title = document.fields['title'] ?? _documentTitle(body, filePath);
   final effectiveTheme =
       resolveDocumentStyleProfile(settings, document.styleName) ??
-      fileService.activeProfileFor(projectPath: projectPath);
+      ref.read(fileServiceProvider).activeProfileFor(projectPath: projectPath);
 
   // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
   // uitvoerpad de rauwe bron nog aan.
@@ -746,29 +743,34 @@ Future<String?> _writeDocumentExport(
     ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
     regions: settings.privacyRegions,
     disabledRules: settings.privacyDisabledRules,
-    markdownService: markdownService,
+    markdownService: ref.read(markdownServiceProvider),
     title: title,
     theme: effectiveTheme,
     tlp: document.tlp,
     fields: document.fields,
   );
 
-  final classificationDecision =
-      ClassificationEnforcementPolicy.fromAppSettings(
-        settings,
-      ).evaluate(bundle.audience.deck.tlp);
-  if (!classificationDecision.allowed) {
-    if (!context.mounted) return null;
-    showErrorSnackBar(
-      ScaffoldMessenger.of(context),
-      l10n,
-      exportBlockMessage(l10n, classificationDecision) ?? '',
-    );
+  final classificationPolicy = ClassificationEnforcementPolicy.fromAppSettings(
+    settings,
+  );
+  if (!context.mounted ||
+      !documentClassificationAllowed(
+        context,
+        classificationPolicy.evaluate(bundle.audience.deck.tlp),
+      )) {
     return null;
   }
 
-  if (!context.mounted) return null;
-  if (!await _confirmWebExportAssetLoss(context, bundle, format)) {
+  final privacyPolicy = PrivacyExportPolicy(gate: settings.privacyExportGate);
+  final privacyDecision = privacyPolicy.evaluate(bundle.privacySummary);
+  if (!context.mounted ||
+      !await confirmDocumentPrivacyExport(context, privacyDecision)) {
+    return null;
+  }
+  final privacyAcknowledged = !privacyDecision.allowed;
+
+  if (!context.mounted ||
+      !await _confirmWebExportAssetLoss(context, bundle, format)) {
     return null;
   }
 
@@ -803,13 +805,13 @@ Future<String?> _writeDocumentExport(
     bundle,
     format,
     html: MarpHtmlService(),
-    enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
-      settings,
-    ),
+    enforcementPolicy: classificationPolicy,
+    privacyPolicy: privacyPolicy,
+    privacyAcknowledged: privacyAcknowledged,
     metadata: ExportDocumentMetadata(language: l10n.languageCode),
     embedImage: (src) => _embedDocumentExportImage(
       src,
-      imageService: imageService,
+      imageService: ref.read(imageServiceProvider),
       logoPath: effectiveTheme.logoPath,
       projectPath: projectPath,
     ),

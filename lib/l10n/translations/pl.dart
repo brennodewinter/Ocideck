@@ -1643,6 +1643,13 @@ const _dutchSourceAddPl = <String, String>{
       'Wstaw standardowe objaśnienie do dokumentu',
   'Als dia invoegen': 'Wstaw jako slajd',
   'Bestemd voor:': 'Przeznaczone dla:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Kontrola prywatności jest wyłączona w sekcji Bezpieczeństwo. Eksport dokumentu nadal sprawdza zawartość zgodnie z regułą eksportu.',
+  'Persoonsgegevens in dit document': 'Dane osobowe w tym dokumencie',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Usuń wykryte dane z dokumentu lub zmień ustawienie w sekcji Bezpieczeństwo.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Sprawdź zawartość i wyraźnie potwierdź, że chcesz wyeksportować tę kopię.',
   'Git-werk herstellen': 'Przywróć pracę w Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Nadal istnieją lokalne dane Git, które nie są powiązane z żadnym bieżącym połączeniem. Nie zostaną automatycznie wysłane. Zachowaj kopię i przeczytaj w instrukcji „Odzyskiwanie starych szkiców Git” przed usunięciem danych aplikacji.',

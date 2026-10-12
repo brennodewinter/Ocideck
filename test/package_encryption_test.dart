@@ -3,6 +3,11 @@ import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/services/file_service.dart';
+import 'package:ocideck/services/image_service.dart';
+import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/utils/archive_limits.dart';
 import 'package:ocideck/utils/password_generator.dart';
 import 'package:ocideck/utils/password_strength.dart';
 import 'package:ocideck/utils/zip_encryption.dart';
@@ -17,6 +22,59 @@ Archive _sampleArchive() {
 
 void main() {
   group('archive AES round-trip', () {
+    test('a forged small AES member is capped on the web inflater', () {
+      final expanded = List<int>.filled(64 * 1024, 65);
+      final archive = Archive()
+        ..addFile(ArchiveFile('deck.md', expanded.length, expanded));
+      final bytes = Uint8List.fromList(
+        ZipEncoder(password: 'pw').encode(archive),
+      );
+      var central = -1;
+      for (var i = 0; i < bytes.length - 28; i++) {
+        if (bytes[i] == 0x50 &&
+            bytes[i + 1] == 0x4b &&
+            bytes[i + 2] == 0x01 &&
+            bytes[i + 3] == 0x02) {
+          central = i;
+          break;
+        }
+      }
+      expect(central, isNonNegative);
+      bytes
+        ..[central + 24] = 64
+        ..[central + 25] = 0
+        ..[central + 26] = 0
+        ..[central + 27] = 0;
+      const limit = 4096;
+      final service = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(),
+      );
+      final normal = ZipEncoder(password: 'pw').encode(_sampleArchive());
+      expect(service.canDecodePackage(normal, 'pw'), isTrue);
+      expect(service.canDecodePackage(normal, 'wrong'), isFalse);
+      expect(
+        service.decodePackageEntries(normal, password: 'pw')?.single.bytes,
+        utf8.encode('marp: true\n\n# Titel\n'),
+      );
+      expect(
+        service
+            .decodePackageEntries(ZipEncoder().encode(_sampleArchive()))
+            ?.single
+            .bytes,
+        utf8.encode('marp: true\n\n# Titel\n'),
+      );
+      expect(
+        () => service.canDecodePackage(bytes, 'pw', maxBytes: limit),
+        throwsA(isA<ExtractionLimitException>()),
+      );
+      expect(
+        service.decodePackageEntries(bytes, maxBytes: limit, password: 'pw'),
+        isNull,
+      );
+    });
+
     test('encrypt met wachtwoord → decode met hetzelfde wachtwoord', () {
       final zip = ZipEncoder(
         password: 'correct horse battery staple',

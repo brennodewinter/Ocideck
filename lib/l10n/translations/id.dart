@@ -1631,6 +1631,13 @@ const _dutchSourceAddId = <String, String>{
       'Sisipkan penjelasan baku ke dalam dokumen',
   'Als dia invoegen': 'Sisipkan sebagai salindia',
   'Bestemd voor:': 'Ditujukan untuk:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Pemeriksaan privasi dinonaktifkan di Keamanan. Ekspor dokumen tetap memeriksa isi berdasarkan aturan ekspor.',
+  'Persoonsgegevens in dit document': 'Data pribadi dalam dokumen ini',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Hapus data yang ditemukan dari dokumen atau ubah pengaturan di Keamanan.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Periksa isinya dan konfirmasikan secara sadar bahwa Anda ingin mengekspor salinan ini.',
   'Git-werk herstellen': 'Pulihkan pekerjaan Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Masih ada data Git lokal yang tidak terkait dengan koneksi saat ini. Data tersebut tidak akan dikirim otomatis. Simpan salinannya dan baca “Memulihkan draf Git lama” di panduan sebelum menghapus data aplikasi.',

@@ -677,6 +677,13 @@ const _dutchSourceAddFy = {
       'Standerttaljochting yn it dokumint sette',
   'Als dia invoegen': 'As dia ynfoegje',
   'Bestemd voor:': 'Bestimd foar:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'De privacykontrôle stiet út by Befeiliging. By it eksportearjen fan it dokumint wurdt de ynhâld dochs oan de eksportregel toetst.',
+  'Persoonsgegevens in dit document': 'Persoansgegevens yn dit dokumint',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Helje de fûne gegevens út it dokumint of feroarje de ynstelling by Befeiliging.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Kontrolearje de ynhâld en befêstigje bewust dat jo dizze kopy eksportearje wolle.',
   'Git-werk herstellen': 'Git-wurk weromhelje',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Der binne noch lokale Git-gegevens dy\'t net by in aktuele ferbining hearre. Dy wurde net automatysk ferstjoerd. Bewarje in kopy en lês ‘Alde Git-konsepten weromhelje’ yn de hantlieding foardatst appgegevens wiskest.',

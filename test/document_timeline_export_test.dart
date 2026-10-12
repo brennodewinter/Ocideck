@@ -153,6 +153,7 @@ void main() {
             format,
             html: service,
             enforcementPolicy: const ClassificationEnforcementPolicy(),
+            privacyAcknowledged: true,
             outputPath: path,
           );
           outputs[format] = await File(path).readAsString();

@@ -1631,6 +1631,13 @@ const _dutchSourceAddFi = <String, String>{
       'Lisää vakioselitys asiakirjaan',
   'Als dia invoegen': 'Lisää diana',
   'Bestemd voor:': 'Tarkoitettu:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Yksityisyystarkistus on poistettu käytöstä kohdassa Turvallisuus. Asiakirjan vienti tarkistaa silti sisällön vientisäännön mukaisesti.',
+  'Persoonsgegevens in dit document': 'Henkilötiedot tässä asiakirjassa',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Poista löydetyt tiedot asiakirjasta tai muuta asetusta kohdassa Turvallisuus.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Tarkista sisältö ja vahvista erikseen, että haluat viedä tämän kopion.',
   'Git-werk herstellen': 'Palauta Git-työ',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Paikallisia Git-tietoja, jotka eivät kuulu mihinkään nykyiseen yhteyteen, on yhä jäljellä. Niitä ei lähetetä automaattisesti. Säilytä kopio ja lue oppaasta ”Vanhojen Git-luonnosten palauttaminen” ennen sovellustietojen poistamista.',

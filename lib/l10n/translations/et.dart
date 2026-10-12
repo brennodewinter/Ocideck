@@ -1624,6 +1624,13 @@ const _dutchSourceAddEt = <String, String>{
       'Lisa standardselgitus dokumenti',
   'Als dia invoegen': 'Lisa slaidina',
   'Bestemd voor:': 'Mõeldud:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Privaatsuskontroll on jaotises Turvalisus välja lülitatud. Dokumendi eksportimisel kontrollitakse sisu siiski ekspordireegli järgi.',
+  'Persoonsgegevens in dit document': 'Isikuandmed selles dokumendis',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Eemaldage leitud andmed dokumendist või muutke seadet jaotises Turvalisus.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Vaadake sisu üle ja kinnitage teadlikult, et soovite selle koopia eksportida.',
   'Git-werk herstellen': 'Taasta Giti töö',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Alles on veel kohalikke Giti andmeid, mis pole seotud ühegi praeguse ühendusega. Neid ei saadeta automaatselt. Säilita koopia ja loe juhendist „Vanade Giti mustandite taastamine” enne rakenduse andmete kustutamist.',

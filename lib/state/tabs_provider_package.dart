@@ -25,9 +25,20 @@ Future<OpenResult> _openLearningPackage(
   String? initialAnchor,
 }) {
   _clearOpenFailure(notifier._ref, notifier.mounted);
-  if (!FileService.looksLikeZipBytes(bytes) ||
-      !hasExactOciServeAesPackageProfile(bytes, profile: packageProfile) ||
-      !notifier._file.canDecodePackage(bytes, password)) {
+  var valid = false;
+  try {
+    valid =
+        FileService.looksLikeZipBytes(bytes) &&
+        hasExactOciServeAesPackageProfile(bytes, profile: packageProfile) &&
+        notifier._file.canDecodePackage(
+          bytes,
+          password,
+          maxBytes: 32 * 1024 * 1024,
+        );
+  } on ExtractionLimitException {
+    valid = false;
+  }
+  if (!valid) {
     return Future.value(
       _failOpen(notifier._ref, notifier.mounted, OpenFailure.unreadable),
     );
@@ -238,6 +249,9 @@ Future<OpenResult> _openPackageFromBytes(
 }) async {
   // Versleuteld pakket: vraag (met retry) het wachtwoord vóór het decoderen.
   String? password = suppliedPassword;
+  final maxBytes = learningSession == null
+      ? FileService.maxPackageBytes
+      : 32 * 1024 * 1024;
   if (password == null && FileService.isEncryptedPackage(bytes)) {
     final resolver = notifier.packagePasswordResolver;
     if (resolver == null) return OpenResult.passwordCancelled;
@@ -245,9 +259,13 @@ Future<OpenResult> _openPackageFromBytes(
     while (true) {
       final pw = await resolver(retry: retry);
       if (pw == null || !notifier.mounted) return OpenResult.passwordCancelled;
-      if (notifier._file.canDecodePackage(bytes, pw)) {
-        password = pw;
-        break;
+      try {
+        if (notifier._file.canDecodePackage(bytes, pw, maxBytes: maxBytes)) {
+          password = pw;
+          break;
+        }
+      } on ExtractionLimitException {
+        return OpenResult.unreadable;
       }
       retry = true;
     }
@@ -256,9 +274,7 @@ Future<OpenResult> _openPackageFromBytes(
     bytes,
     // Het servercontract begrenst zowel download als uitgepakt pakket op
     // 32 MiB. De algemene lokale pakketroute blijft ruimer.
-    maxBytes: learningSession == null
-        ? FileService.maxPackageBytes
-        : 32 * 1024 * 1024,
+    maxBytes: maxBytes,
     password: password,
     strictIntegrity: strictIntegrity,
   );

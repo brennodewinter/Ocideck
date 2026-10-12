@@ -43,6 +43,7 @@ class _CapturingGitCli implements GitCli {
     required String workingDirectory,
     List<GitConfigOverride> config = const [],
     Duration timeout = const Duration(seconds: 60),
+    String? allowedProtocol,
   }) async {
     calls.add(config);
     return const GitResult(exitCode: 0, stdout: '', stderr: '');

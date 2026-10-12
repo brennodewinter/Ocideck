@@ -2,12 +2,83 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/export_block_localization.dart';
 import '../../models/privacy_disposition.dart';
+import '../../services/classification_policy.dart';
+import '../../services/privacy/privacy_export_policy.dart';
 import '../../services/document_export_service.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
 import 'dialog_shell.dart';
 import 'export_failure_text.dart';
+
+/// Toon de reden wanneer het classificatiebeleid documentexport weigert.
+bool documentClassificationAllowed(
+  BuildContext context,
+  ExportDecision decision,
+) {
+  if (decision.allowed) return true;
+  final l10n = context.l10n;
+  showErrorSnackBar(
+    ScaffoldMessenger.of(context),
+    l10n,
+    exportBlockMessage(l10n, decision) ?? '',
+  );
+  return false;
+}
+
+/// Vraag een expliciet privacybesluit vóór een documentexport.
+Future<bool> confirmDocumentPrivacyExport(
+  BuildContext context,
+  PrivacyExportDecision decision,
+) async {
+  if (decision.allowed) return true;
+  final l10n = context.l10n;
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (dialogContext) => AlertDialog(
+      title: Text(
+        decision.hardBlocked
+            ? l10n.d('Export geblokkeerd')
+            : l10n.d('Persoonsgegevens in dit document'),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${decision.summary.unresolved} ${l10n.d('bevinding(en) zonder keuze.')}',
+          ),
+          const SizedBox(height: 8),
+          Text(
+            decision.hardBlocked
+                ? l10n.d(
+                    'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.',
+                  )
+                : l10n.d(
+                    'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.',
+                  ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(dialogContext, false),
+          child: Text(
+            decision.hardBlocked ? l10n.d('Sluiten') : l10n.t('cancel'),
+          ),
+        ),
+        if (!decision.hardBlocked)
+          ElevatedButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.d('Toch exporteren')),
+          ),
+      ],
+    ),
+  );
+  return confirmed == true;
+}
 
 /// De compacte export-dialoog voor een plat-Markdown-**document**
 /// (DOCUMENT_MODE.md §11.2). Kiest het **profiel** (Volledig / Geredigeerd) en
@@ -26,8 +97,8 @@ class DocumentExportDialog extends StatefulWidget {
   final Future<String?> Function(PrivacyExportProfile, DocumentExportFormat)
   onExport;
 
-  /// Of de privacycontrole aanstaat. Staat ze uit, dan is een geredigeerde
-  /// kopie niet echt op persoonsgegevens nagekeken en zegt de dialoog dat.
+  /// Of de privacycontrole tijdens het bewerken aanstaat. Documentexport
+  /// controleert de inhoud alsnog tegen de exportregel.
   final bool privacyChecksEnabled;
 
   const DocumentExportDialog({
@@ -256,7 +327,7 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           const SizedBox(height: 4),
           Text(
             l10n.d(
-              'Er is niet gekeken naar persoonsgegevens, bijzondere gegevens en geheimen: de privacycontrole staat uit bij Beveiliging.',
+              'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.warningFg),
           ),

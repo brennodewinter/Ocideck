@@ -38,7 +38,7 @@ class OdpImporter extends Importer {
   }) async {
     try {
       final archive = preDecoded ?? safeDecodeZip(bytes, budget: budget);
-      final ctx = OdpContext(archive);
+      final ctx = OdpContext(archive, budget: budget);
 
       final pages = _pages(ctx);
       if (pages.isEmpty) {

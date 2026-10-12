@@ -523,7 +523,7 @@ opgeslagen versie blijft opvraagbaar, wat een gewone map je niet kan geven.
   van de twee. Dit werkt zowel in de browser als op desktop met native `git`; op
   desktop wordt het een echte merge-commit, zodat `git log` de twee werklijnen laat
   zien die samenkomen.
-- **Native git (desktop):** als je `git` geïnstalleerd hebt (2.19 of nieuwer),
+- **Native git (desktop):** als je `git` geïnstalleerd hebt (2.37 of nieuwer),
   toont de git-verbinding in *Instellingen → Opslag* dat, en houdt OciDeck een echte
   kloon van de repository bij. Dan **is elke opslag een echte lokale commit** —
   duurzaam en offline: bewerk weg van een netwerk, sla zo vaak op als je wilt, en
@@ -4690,6 +4690,11 @@ bewijsafbeeldingen — plus een index `AUDIT_DOSSIER.md` die op één plek herfo
 - de MIAUW-nalevingstelling (Voldaan / Openstaand / Uitgesloten);
 - de bewijs-hashtabel (SHA1 + SHA-256 per bewijsafbeelding).
 
+Voordat OciDeck bewijs leest of de export aanbiedt, toetst het de classificatie
+van het rapport zelf aan de verplichte classificatie en het minimum. Voor het
+vrijgaveplafond telt het hoogste niveau van het rapport en zijn dia's. Een
+geweigerd dossier toont de reden in de app.
+
 Net als de normale package-export kun je het hele dossier beschermen met een wachtwoord
 (WinZip **AES-256**), zodat het rapport, zijn bewijs en de hashtabellen samen
 reizen als één versleuteld, auditor-klaar bestand.
@@ -5634,6 +5639,14 @@ Markdown-inhoud en is geen stijldrager.
 **Exporteren** maakt een *afgeleide, geredigeerde kopie voor een ontvanger* op een
 **nieuw** bestand, en raakt je bron nooit aan. Het exportvenster vraagt twee
 dingen:
+
+Vóór de bestandskeuze of download toetst OciDeck de ingestelde privacyregel aan
+zekere bevindingen in het brondocument. De standaardstand **Waarschuwen vóór export** vraagt
+bevestiging bij onbeoordeelde bevindingen. **Export blokkeren** weigert de export, ook
+als **Geredigeerd** is gekozen: verwijder de gevonden gegevens uit het document
+of wijzig de regel bewust onder *Beveiliging*. Deze exportcontrole werkt ook
+wanneer de privacycontrole tijdens het bewerken uitstaat. Het origineel opslaan
+kan nog wel.
 
 - **Voor wie** — het profiel. **Volledig** laat alles leesbaar behalve wat je zelf
   hebt gemarkeerd om weg te laten; **Geredigeerd** haalt eruit wat de

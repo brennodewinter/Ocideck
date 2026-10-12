@@ -678,6 +678,14 @@ const _dutchSourceAddDe = {
       'Standarderläuterung ins Dokument setzen',
   'Als dia invoegen': 'Als Folie einfügen',
   'Bestemd voor:': 'Bestimmt für:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Die Datenschutzprüfung ist unter Sicherheit ausgeschaltet. Beim Dokumentexport wird der Inhalt dennoch anhand der Exportregel geprüft.',
+  'Persoonsgegevens in dit document':
+      'Personenbezogene Daten in diesem Dokument',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Entfernen Sie die gefundenen Daten aus dem Dokument oder ändern Sie die Einstellung unter Sicherheit.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Prüfen Sie den Inhalt und bestätigen Sie ausdrücklich, dass Sie diese Kopie exportieren möchten.',
   'Git-werk herstellen': 'Git-Arbeit wiederherstellen',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Es sind noch lokale Git-Daten vorhanden, die zu keiner aktuellen Verbindung gehören. Sie werden nicht automatisch gesendet. Bewahre eine Kopie auf und lies im Handbuch „Alte Git-Entwürfe wiederherstellen“, bevor du die App-Daten löschst.',

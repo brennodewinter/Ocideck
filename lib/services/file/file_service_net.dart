@@ -106,34 +106,57 @@ extension FileServiceNet on FileService {
     if (onConfirmProxy == null) return false;
     return onConfirmProxy(host: uri.host);
   }
+}
 
-  /// Eén begrensde GET: 200-only, harde bytecap. Geeft de bytes, of de reden
-  /// waarom niet — een niet-200 status via [_classifyUrlImportStatus] (404 →
-  /// notFound), een overschreden cap als [ImportFailure.tooLarge], en elke
-  /// gevangen fout (de ondoorzichtige CORS-/netwerkweigering) als
-  /// [ImportFailure.network].
-  Future<({Uint8List? bytes, ImportFailure? failure})> _fetchCapped(
-    http.Client c,
-    Uri uri,
-    int maxBytes, {
-    Duration timeout = const Duration(seconds: 30),
-  }) async {
-    try {
-      final response = await c.get(uri).timeout(timeout);
-      if (response.statusCode != 200) {
-        return (
-          bytes: null,
-          failure: _classifyUrlImportStatus(response.statusCode),
-        );
-      }
-      final bytes = response.bodyBytes;
-      if (bytes.length > maxBytes) {
-        return (bytes: null, failure: ImportFailure.tooLarge);
-      }
-      return (bytes: bytes, failure: null);
-    } catch (e) {
-      logError('FileService._fetchCapped: download failed', e);
-      return (bytes: null, failure: ImportFailure.network);
+/// Eén begrensde GET: 200-only, harde bytecap. Geeft de bytes, of de reden
+/// waarom niet — een niet-200 status via [_classifyUrlImportStatus] (404 →
+/// notFound), een overschreden cap als [ImportFailure.tooLarge], en elke
+/// gevangen fout (de ondoorzichtige CORS-/netwerkweigering) als
+/// [ImportFailure.network].
+Future<({Uint8List? bytes, ImportFailure? failure})> _fetchCapped(
+  http.Client c,
+  Uri uri,
+  int maxBytes, {
+  Duration timeout = const Duration(seconds: 30),
+}) async {
+  try {
+    final clock = Stopwatch()..start();
+    Future<T> withinTimeout<T>(Future<T> operation) {
+      final remaining = timeout - clock.elapsed;
+      if (remaining <= Duration.zero) throw TimeoutException('URL import');
+      return operation.timeout(remaining);
     }
+
+    final response = await withinTimeout(c.send(http.Request('GET', uri)));
+    final ImportFailure? earlyFailure;
+    if (response.statusCode != 200) {
+      earlyFailure = _classifyUrlImportStatus(response.statusCode);
+    } else if (response.contentLength != null &&
+        response.contentLength! > maxBytes) {
+      earlyFailure = ImportFailure.tooLarge;
+    } else {
+      earlyFailure = null;
+    }
+    if (earlyFailure != null) {
+      await response.stream.listen(null).cancel();
+      return (bytes: null, failure: earlyFailure);
+    }
+    final chunks = StreamIterator<List<int>>(response.stream);
+    try {
+      final bytes = BytesBuilder();
+      while (await withinTimeout(chunks.moveNext())) {
+        final chunk = chunks.current;
+        if (chunk.length > maxBytes - bytes.length) {
+          return (bytes: null, failure: ImportFailure.tooLarge);
+        }
+        bytes.add(chunk);
+      }
+      return (bytes: bytes.takeBytes(), failure: null);
+    } finally {
+      await chunks.cancel();
+    }
+  } catch (e) {
+    logError('FileService._fetchCapped: download failed', e);
+    return (bytes: null, failure: ImportFailure.network);
   }
 }

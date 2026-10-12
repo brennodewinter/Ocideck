@@ -72,6 +72,31 @@ enum ImportFailure {
   destinationUnavailable,
 }
 
+bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
+  try {
+    if (bytes.length > maxBytes) throw const ExtractionLimitException();
+    final copy = Uint8List.fromList(bytes);
+    final archive = ZipDecoder().decodeBytes(copy, password: password);
+    if (archive.files.length > FileService.maxPackageEntries) {
+      throw const ExtractionLimitException();
+    }
+    final file = archive.files.firstWhere(
+      (f) => f.isFile,
+      orElse: () => throw StateError('leeg archief'),
+    );
+    if (file.size < 0 || file.size > maxBytes) {
+      throw const ExtractionLimitException();
+    }
+    _writePackageEntryCapped(file, _CappedOutputStream(maxBytes));
+    return true;
+  } on ExtractionLimitException {
+    rethrow;
+  } catch (e) {
+    logWarning('FileService.canDecodePackage: ontgrendelen mislukt', e);
+    return false;
+  }
+}
+
 extension FileServiceImport on FileService {
   /// De meervoudige variant van [FileService.pickMarkdownFile]: dezelfde
   /// filterloze kiezer, maar de gebruiker mag een stapel bestanden tegelijk
@@ -96,23 +121,13 @@ extension FileServiceImport on FileService {
   ///
   /// Werkt op een kopie van [bytes]: de AES-ontsleuteling muteert de
   /// invoerbuffer, dus zonder kopie zou een latere echte decode van dezelfde
-  /// bytes op beschadigde inhoud stuiten.
-  bool canDecodePackage(List<int> bytes, String password) {
-    try {
-      final copy = Uint8List.fromList(bytes);
-      final archive = ZipDecoder().decodeBytes(copy, password: password);
-      final file = archive.files.firstWhere(
-        (f) => f.isFile,
-        orElse: () => throw StateError('leeg archief'),
-      );
-      // De content-getter ontsleutelt en controleert de MAC van dit lid.
-      final _ = file.content;
-      return true;
-    } catch (e) {
-      logWarning('FileService.canDecodePackage: ontgrendelen mislukt', e);
-      return false;
-    }
-  }
+  /// bytes op beschadigde inhoud stuiten. Een overschreden [maxBytes] gooit
+  /// [ExtractionLimitException], zodat die niet als fout wachtwoord herhaalt.
+  bool canDecodePackage(
+    List<int> bytes,
+    String password, {
+    int maxBytes = FileService.maxPackageBytes,
+  }) => _canDecodePackage(bytes, password, maxBytes);
 
   /// Pak een pakket uit in een submap onder [destParentDir]. Geeft het pad
   /// naar het uitgepakte markdown-bestand terug (om in een tab te openen).
@@ -176,9 +191,13 @@ extension FileServiceImport on FileService {
         if (pw == null) {
           return const ImportOutcome.failed(ImportFailure.encryptedCancelled);
         }
-        if (canDecodePackage(zipBytes, pw)) {
-          password = pw;
-          break;
+        try {
+          if (canDecodePackage(zipBytes, pw, maxBytes: maxBytes)) {
+            password = pw;
+            break;
+          }
+        } on ExtractionLimitException {
+          return const ImportOutcome.failed(ImportFailure.tooLarge);
         }
         if (!geprobeerd.add(pw)) {
           logWarning(

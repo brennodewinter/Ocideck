@@ -170,11 +170,13 @@ bool _isOrderedList(_OdtContext ctx, XmlElement list) {
 void _emitTable(_OdtContext ctx, XmlElement tbl, StringBuffer buf) {
   final rows = <List<String>>[];
   for (final tr in childrenLocal(tbl, 'table-row')) {
+    ctx.tableCells.addRow();
     final cells = <String>[];
     for (final tc in childrenLocal(tr, 'table-cell')) {
       final repeat =
           int.tryParse(_attr(tc, 'number-columns-repeated') ?? '') ?? 1;
       final text = _cellText(ctx, tc);
+      ctx.tableCells.addCells(cells.length, repeat, text.length);
       for (var i = 0; i < repeat; i++) {
         cells.add(text);
       }
@@ -371,10 +373,12 @@ String? _attr(XmlElement el, String local) {
 
 /// Een getypeerde weergave van een uitgepakt ODT-pakket, met stijllookup.
 class _OdtContext {
-  _OdtContext(this.archive, {this.budget = ImportBudget.standard});
+  _OdtContext(this.archive, {this.budget = ImportBudget.standard})
+    : tableCells = ExpandedTableBudget(budget);
 
   final Archive archive;
   final ImportBudget budget;
+  final ExpandedTableBudget tableCells;
   final _parsed = <String, XmlDocument?>{};
   Map<String, (bool, bool)>? _spanStyles; // style-name → (bold, italic)
   Map<String, String>? _listStyles; // style-name → list-style name

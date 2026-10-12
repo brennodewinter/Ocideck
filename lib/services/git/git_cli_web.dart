@@ -20,5 +20,6 @@ class UnavailableGitCli implements GitCli {
     required String workingDirectory,
     List<GitConfigOverride> config = const [],
     Duration timeout = const Duration(seconds: 30),
+    String? allowedProtocol,
   }) async => throw const GitCliException('Native git bestaat niet op web');
 }

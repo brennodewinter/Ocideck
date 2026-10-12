@@ -61,6 +61,37 @@ All notable changes to OciDeck are documented in this file.
   sessiesleutels aan; een eenmaal geïnstalleerde epoch-sleutel kan niet door
   een andere sleutel worden vervangen. Deze XMPP-startfunctie heeft nog geen
   aanroep vanuit de productie-interface.
+- **Versleutelde pakketten stoppen bij de uitpaklimiet.** Zowel de
+  wachtwoordcontrole als het openen begrenzen nu werkelijk uitgepakte bytes.
+  In de browser wordt DEFLATE rechtstreeks naar die begrensde uitvoer geschreven;
+  een te groot pakket vraagt niet opnieuw om hetzelfde wachtwoord.
+- **Web-URL-import stopt bij de ingestelde bestandsgrootte.** Decks en pakketten
+  worden tijdens het ophalen begrensd. Een te grote opgegeven lengte wordt al
+  vóór het lezen geweigerd; zonder betrouwbare lengte stopt de download zodra
+  de limiet wordt overschreden. Dat geldt ook voor de terugval via het
+  fetch-hulppunt, zodat een groot antwoord de browsertab niet eerst volledig
+  vult.
+- **Documentexport respecteert het ingestelde privacybeleid.** Ook bij Markdown,
+  HTML, PDF, LaTeX, ePub, ODT en Word wordt vóór bestandskeuze of download
+  gecontroleerd of zekere persoonsgegevens nog onbeoordeeld zijn. De stand
+  *Waarschuwen* vraagt om een bewuste bevestiging; *Blokkeren* weigert de
+  export, ook als *Geredigeerd* is gekozen. Opslaan van het origineel blijft
+  een afzonderlijke handeling.
+- **Auditdossier-export volgt nu het ingestelde classificatiebeleid.**
+  Een verzegeld rapport wordt vóór het lezen van bewijs of openen van het
+  exportvenster geweigerd als classificatie verplicht is maar ontbreekt, onder
+  het minimum ligt of boven het vrijgaveplafond uitkomt. Ook een strenger
+  geclassificeerde bewijsdia telt mee, op desktop en in de browser.
+- **ODF-tabellen kunnen de import niet meer vullen met herhaalde cellen.**
+  ODP-dia's en grafieken en ODT-documenten toetsen de kolombreedte en het
+  gezamenlijke aantal tabelcellen en de herhaalde tekst vóór
+  `number-columns-repeated` wordt uitgeklapt. Grafieken begrenzen ook hun
+  afgeleide waarden. Een te groot bestand krijgt een importlimietfout.
+- **Git voert lokale opdrachten en netwerkverkeer nu strikter afgeschermd uit.**
+  Relatieve `PATH`-delen kunnen geen programma uit een geopende werkkopie meer
+  starten. Ontbrekende bestanden in een gedeeltelijke kloon worden alleen via
+  een gecontroleerde verbinding opgehaald. De native Git-koppeling vereist
+  Git 2.37 of nieuwer; bij een oudere versie gebruikt OciDeck de REST-koppeling.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of

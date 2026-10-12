@@ -4,6 +4,7 @@ import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
 import '../../utils/xml_utils.dart';
+import '../../utils/import_budget.dart';
 
 /// A typed view over an unzipped ODP (OpenDocument Presentation) package.
 ///
@@ -12,9 +13,11 @@ import '../../utils/xml_utils.dart';
 /// `Pictures/1000...png`, `ObjectCharts/1`). Targets are relative to the
 /// package root and may start with `./`.
 class OdpContext {
-  OdpContext(this.archive);
+  OdpContext(this.archive, {ImportBudget budget = ImportBudget.standard})
+    : tableCells = ExpandedTableBudget(budget);
 
   final Archive archive;
+  final ExpandedTableBudget tableCells;
 
   Map<String, (double, double)>? _pageSizes;
   Map<String, XmlElement>? _graphicProperties;

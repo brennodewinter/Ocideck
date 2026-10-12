@@ -198,6 +198,33 @@ void main() {
     );
   });
 
+  test(
+    'onbeoordeeld persoonsgegeven verlaat document niet als webdownload',
+    () async {
+      final bundle = await buildDocumentExportBundle(
+        '# Rapport\n\nBSN 728398242\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      expect(bundle.privacySummary.unresolved, greaterThan(0));
+
+      final written = await writeDocumentExport(
+        bundle,
+        DocumentExportFormat.md,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
+        webFileName: 'rapport.md',
+      );
+
+      expect(written, isNull);
+      expect(calls, isEmpty);
+    },
+  );
+
   test('een geweigerd stijlprofiel meldt niet dat het is opgeslagen', () async {
     final service = FileService(
       MarkdownService(),

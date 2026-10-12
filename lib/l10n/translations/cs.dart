@@ -1633,6 +1633,13 @@ const _dutchSourceAddCs = <String, String>{
       'Vložit standardní vysvětlení do dokumentu',
   'Als dia invoegen': 'Vložit jako snímek',
   'Bestemd voor:': 'Určeno pro:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Kontrola soukromí je vypnutá v části Zabezpečení. Export dokumentu přesto kontroluje obsah podle pravidla pro export.',
+  'Persoonsgegevens in dit document': 'Osobní údaje v tomto dokumentu',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Odstraňte nalezené údaje z dokumentu nebo změňte nastavení v části Zabezpečení.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Zkontrolujte obsah a výslovně potvrďte, že chcete tuto kopii exportovat.',
   'Git-werk herstellen': 'Obnovit práci v Gitu',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Stále existují místní data Git, která nepatří k žádnému aktuálnímu připojení. Automaticky se neodešlou. Uložte si kopii a před smazáním dat aplikace si v příručce přečtěte „Obnovení starých konceptů Git“.',

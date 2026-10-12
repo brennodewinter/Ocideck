@@ -1648,6 +1648,14 @@ const _dutchSourceAddRo = <String, String>{
       'Inserează explicația standard în document',
   'Als dia invoegen': 'Inserează ca diapozitiv',
   'Bestemd voor:': 'Destinat pentru:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Verificarea confidențialității este dezactivată în Securitate. Exportul documentului verifică totuși conținutul conform regulii de export.',
+  'Persoonsgegevens in dit document':
+      'Date cu caracter personal în acest document',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Eliminați datele găsite din document sau modificați setarea din Securitate.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Verificați conținutul și confirmați în mod explicit că doriți să exportați această copie.',
   'Git-werk herstellen': 'Recuperează lucrul Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Încă există date Git locale care nu aparțin unei conexiuni curente. Acestea nu vor fi trimise automat. Păstrează o copie și citește „Recuperarea schițelor Git vechi” din manual înainte de a șterge datele aplicației.',

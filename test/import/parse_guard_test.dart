@@ -1,11 +1,28 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/import/models/conversion_issue.dart';
 import 'package:ocideck/services/import/pipeline/parse_guard.dart';
+import 'package:ocideck/services/import/utils/import_budget.dart';
 
 /// De foutgrens die #877 legt: één onderdeel dat struikelt wordt genoteerd en
 /// overgeslagen, de rest gaat door, en de fout lekt geen broninhoud naar het
 /// log of de notitie.
 void main() {
+  test('een importlimiet passeert de onderdeelbewaker', () {
+    final issues = <ConversionIssue>[];
+    expect(
+      () => guardParse<int>(
+        sink: issues,
+        slideIndex: 0,
+        component: IssueComponent.table,
+        feature: 'Tabel',
+        description: 'overgeslagen',
+        logOp: 'test',
+        body: () => throw const ImportBudgetException('4 tabelkolommen'),
+      ),
+      throwsA(isA<ImportBudgetException>()),
+    );
+    expect(issues, isEmpty);
+  });
   test('geeft de body-waarde ongewijzigd terug bij succes', () {
     final issues = <ConversionIssue>[];
     final value = guardParse<int>(

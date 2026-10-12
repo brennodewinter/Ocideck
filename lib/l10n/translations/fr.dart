@@ -678,6 +678,13 @@ const _dutchSourceAddFr = {
       'Insérer l\'explication type dans le document',
   'Als dia invoegen': 'Insérer comme diapositive',
   'Bestemd voor:': 'Destiné à :',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Le contrôle de confidentialité est désactivé dans Sécurité. L\'exportation du document vérifie néanmoins le contenu selon la règle d\'exportation.',
+  'Persoonsgegevens in dit document': 'Données personnelles dans ce document',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Supprimez les données détectées du document ou modifiez le paramètre dans Sécurité.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Vérifiez le contenu et confirmez explicitement que vous souhaitez exporter cette copie.',
   'Git-werk herstellen': 'Récupérer le travail Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Des données Git locales qui ne sont associées à aucune connexion actuelle sont encore présentes. Elles ne seront pas envoyées automatiquement. Conservez-en une copie et consultez « Récupérer les anciens brouillons Git » dans le manuel avant d’effacer les données de l’application.',

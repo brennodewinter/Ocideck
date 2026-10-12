@@ -6,8 +6,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/odp/odp_importer.dart';
+import 'package:ocideck/services/import/importers/import_failure.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
 import 'package:ocideck/services/import/models/source_chart.dart';
+import 'package:ocideck/services/import/utils/import_budget.dart';
 import 'package:ocideck/utils/image_resize.dart';
 
 const _office = 'urn:oasis:names:tc:opendocument:xmlns:office:1.0';
@@ -221,6 +223,66 @@ void main() {
     ]);
   });
 
+  test(
+    'ODP-tabel accepteert de grens en weigert het totale celbudget',
+    () async {
+      final content = _contentXml(withTable: true, withNotes: false)
+          .replaceFirst(
+            '<table:table-cell office:value-type="string"><text:p>B',
+            '<table:table-cell table:number-columns-repeated="3" '
+                'office:value-type="string"><text:p>B',
+          );
+      final bytes = _zip({'content.xml': content});
+      final accepted = await OdpImporter().importBytes(
+        bytes,
+        budget: const ImportBudget(maxSheetCols: 4, maxTableCells: 8),
+      );
+      expect(accepted.isOk, isTrue);
+      expect(accepted.okValue!.slides.single.table!.header, [
+        'A',
+        'B',
+        'B',
+        'B',
+      ]);
+
+      final rejected = await OdpImporter().importBytes(
+        bytes,
+        budget: const ImportBudget(maxSheetCols: 4, maxTableCells: 7),
+      );
+      expect(rejected.errValue?.reason, ImportFailureReason.tooLarge);
+    },
+  );
+
+  test(
+    'ODP-tabel weigert een enorme kolomherhaling vóór uitbreiding',
+    () async {
+      final content = _contentXml(withTable: true, withNotes: false)
+          .replaceFirst(
+            '<table:table-cell office:value-type="string"><text:p>B',
+            '<table:table-cell table:number-columns-repeated="999999999" '
+                'office:value-type="string"><text:p>B',
+          );
+      final result = await OdpImporter().importBytes(
+        _zip({'content.xml': content}),
+        budget: const ImportBudget(maxSheetCols: 4),
+      );
+      expect(result.errValue?.reason, ImportFailureReason.tooLarge);
+    },
+  );
+
+  test('ODP-tabel begrenst ook de herhaalde tekst', () async {
+    final content = _contentXml(withTable: true, withNotes: false).replaceFirst(
+      '<table:table-cell office:value-type="string"><text:p>A',
+      '<table:table-cell table:number-columns-repeated="4" '
+          'office:value-type="string"><text:p>${'A' * 32}',
+    );
+    final result = await OdpImporter().importBytes(
+      _zip({'content.xml': content}),
+      budget: const ImportBudget(maxSheetCols: 4, maxExpandedTableChars: 100),
+    );
+    expect(result.errValue?.reason, ImportFailureReason.tooLarge);
+  });
+
   test('salvages a stacked-bar chart via a draw:object sub-document', () async {
     final bytes = _zip({
       'mimetype': _b('application/vnd.oasis.opendocument.presentation'),
@@ -240,6 +302,52 @@ void main() {
     expect(slide.chart!.series.single.name, '2024');
     expect(slide.chart!.series.single.data, [10.0, 14.0]);
   });
+
+  test('ODP-grafiek weigert een enorme kolomherhaling', () async {
+    final chart = _chartContentXml().replaceFirst(
+      '<table:table-cell office:value-type="string"><text:p>2024',
+      '<table:table-cell table:number-columns-repeated="999999999" '
+          'office:value-type="string"><text:p>2024',
+    );
+    final result = await OdpImporter().importBytes(
+      _zip({
+        'content.xml': _contentXml(withChart: true, withNotes: false),
+        'ObjectCharts/1/content.xml': chart,
+      }),
+      budget: const ImportBudget(maxSheetCols: 4),
+    );
+    expect(result.errValue?.reason, ImportFailureReason.tooLarge);
+  });
+
+  test(
+    'ODP-grafiek begrenst waarden uit een brede kop en smalle rijen',
+    () async {
+      final sparseRows = List.filled(
+        5,
+        '<table:table-row><table:table-cell office:value-type="string">'
+        '<text:p>Q</text:p></table:table-cell></table:table-row>',
+      ).join();
+      final chart =
+          '<?xml version="1.0"?>'
+          '<office:document-content xmlns:office="$_office" '
+          'xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" '
+          'xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" '
+          'xmlns:text="$_text">'
+          '<chart:chart chart:class="chart:bar"><table:table>'
+          '<table:table-row><table:table-cell '
+          'table:number-columns-repeated="8" office:value-type="string">'
+          '<text:p>Serie</text:p></table:table-cell></table:table-row>'
+          '$sparseRows</table:table></chart:chart></office:document-content>';
+      final result = await OdpImporter().importBytes(
+        _zip({
+          'content.xml': _contentXml(withChart: true, withNotes: false),
+          'ObjectCharts/1/content.xml': chart,
+        }),
+        budget: const ImportBudget(maxSheetCols: 8, maxTableCells: 32),
+      );
+      expect(result.errValue?.reason, ImportFailureReason.tooLarge);
+    },
+  );
 
   test('imports a large ODP deck with many pages', () async {
     const pageCount = 20;

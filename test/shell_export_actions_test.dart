@@ -10,6 +10,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
+import 'package:ocideck/services/download_delivery.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart';
@@ -395,6 +396,42 @@ void main() {
     );
   });
 
+  testWidgets('een TLP-dia classificeert het pakketdeck niet', (tester) async {
+    SharedPreferences.setMockInitialValues({
+      'app_consent_accepted': true,
+      'secModuleEnabled': true,
+      'requireClassificationOnExport': true,
+    });
+    final base = sampleDeck();
+    await openPalette(
+      tester,
+      deck: base.copyWith(
+        slides: [
+          base.slides.first.copyWith(tlp: TlpLevel.green),
+          ...base.slides.skip(1),
+        ],
+      ),
+    );
+    await runCommand(
+      tester,
+      'pakket export',
+      'Pakket exporteren…',
+      until: () =>
+          encryptDialogShown() ||
+          find
+              .textContaining('Export geblokkeerd door classificatiebeleid')
+              .evaluate()
+              .isNotEmpty,
+      reason: 'de poort of het versleutelingsvenster verscheen niet',
+    );
+    expect(
+      find.textContaining('Export geblokkeerd door classificatiebeleid'),
+      findsOneWidget,
+    );
+    expect(find.byType(PackageEncryptDialog), findsNothing);
+    expect(asked, isEmpty);
+  });
+
   testWidgets('het auditdossier eist eerst een verzegeld rapport', (
     tester,
   ) async {
@@ -438,6 +475,77 @@ void main() {
         ),
       ],
     );
+  }
+
+  for (final rule in [
+    'verplichte classificatie',
+    'classificatie alleen op dia',
+    'minimum',
+    'plafond',
+  ]) {
+    testWidgets('auditdossier volgt het $rule vóór aflevering', (tester) async {
+      SharedPreferences.setMockInitialValues({
+        'app_consent_accepted': true,
+        'secModuleEnabled': true,
+        if (rule == 'verplichte classificatie' ||
+            rule == 'classificatie alleen op dia')
+          'requireClassificationOnExport': true,
+        if (rule == 'minimum') 'minRequiredExportTlp': 'green',
+        if (rule == 'plafond') 'maxReleaseExportTlp': 'amber',
+      });
+      final base = sealedDeckWithEvidence();
+      final deck = switch (rule) {
+        'classificatie alleen op dia' => base.copyWith(
+          slides: [
+            base.slides.first,
+            base.slides.last.copyWith(tlp: TlpLevel.green),
+          ],
+        ),
+        'minimum' => base.copyWith(tlp: TlpLevel.clear),
+        'plafond' => base.copyWith(
+          slides: [
+            base.slides.first,
+            base.slides.last.copyWith(tlp: TlpLevel.red),
+          ],
+        ),
+        _ => base,
+      };
+      var downloads = 0;
+      if (rule == 'plafond') {
+        debugDeliversByDownload = true;
+        debugDownloadSink = (_, _, _) {
+          downloads++;
+          return true;
+        };
+        addTearDown(() {
+          debugDeliversByDownload = null;
+          debugDownloadSink = null;
+        });
+      }
+
+      await openPalette(tester, deck: deck);
+      await runCommand(
+        tester,
+        'auditdossier',
+        'Auditdossier exporteren',
+        until: () =>
+            encryptDialogShown() ||
+            find
+                .textContaining('Export geblokkeerd door classificatiebeleid')
+                .evaluate()
+                .isNotEmpty,
+        reason: 'de poort of het versleutelingsvenster verscheen niet',
+      );
+
+      expect(
+        find.textContaining('Export geblokkeerd door classificatiebeleid'),
+        findsOneWidget,
+      );
+      expect(find.byType(PackageEncryptDialog), findsNothing);
+      expect(asked, isEmpty);
+      expect(File(destination!).existsSync(), isFalse);
+      expect(downloads, 0);
+    });
   }
 
   testWidgets('een mislukt auditdossier meldt dat ook', (tester) async {

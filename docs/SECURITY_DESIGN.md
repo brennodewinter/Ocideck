@@ -339,14 +339,13 @@ SSRF-pinned transports.
 - **Per-caller byte caps** (see the Performance guide) reject oversized responses
   both by `Content-Length` pre-check and by streaming cap. On desktop both stages
   bite: an oversized `Content-Length` is refused before reading, and the stream is
-  aborted mid-download. On **web** the same two-stage check runs, but the default
-  browser HTTP client (XHR) buffers the response body *inside the browser* before
-  the Dart stream yields anything — so there the `Content-Length` pre-check is the
-  effective guard for an honest server, and the streaming cap only bites once the
-  client genuinely streams (the Fetch API). A forge that lies about (or omits) its
-  `Content-Length` can therefore still make a browser tab buffer an oversized body
-  before the cap fires; the cap prevents OciDeck from *retaining* it, not the
-  browser from *receiving* it.
+  aborted mid-download. On **web**, the pinned `package:http` browser client uses
+  a Fetch response stream. URL import now uses `Client.send` for both its direct
+  request and its consented proxy fallback, checks `Content-Length` before reading,
+  and cancels the stream at the first chunk that exceeds the cap. Its 30-second
+  direct and 120-second proxy deadlines cover the complete transfer. A browser
+  can still receive one oversized network chunk before Dart rejects it; the cap
+  prevents buffering the complete attacker-controlled response in the app.
 
 ## 4. Asset-path containment
 
@@ -544,13 +543,23 @@ model.
   `.ocideck` package must carry the source verbatim and a PDF must not, and no
   static rule derives that difference. Forcing the question to be answered is
   the guarantee.)*
+- **Document recipient-export gate.** `writeDocumentExport` evaluates the
+  configured `PrivacyExportPolicy` against the source scan summary before
+  building bytes for any of its seven formats. The document editor explains a
+  hard block or requires explicit acknowledgement of a warning before choosing
+  a destination. This export scan runs even when editor privacy checks are off.
+  The same summary is checked for full and redacted profiles;
+  saving the byte-faithful source is a separate action.
 
 ## 9. Classification, integrity & secure storage
 
 - **TLP classification gate.** `ClassificationEnforcementPolicy.evaluate`
   (`lib/services/classification_enforcement_policy.dart`) is a fail-closed export
   gate with a release ceiling, a required floor, and an optional
-  "block unclassified" rule; it runs on `ExportService.export`.
+  "block unclassified" rule; it runs on `ExportService.export` and the shell's
+  package and audit-dossier actions. The latter two require the deck's own TLP
+  to satisfy classification and floor rules, then check the strongest TLP across
+  deck and slides against the ceiling before reading any asset or evidence.
 - **Classification watermark.** When enabled, the TLP level is stamped onto
   rasterized PDF/PPTX output (`SlideRasterizer`) and rendered as a banner in HTML
   export.
@@ -610,7 +619,13 @@ model.
   tamper-evidence, not tamper-proofing.
 - **Encrypted packages.** `.ocideck` packages can be encrypted
   (`lib/utils/zip_encryption.dart`, wired into `FileService`); an encrypted
-  package cannot be opened without its password.
+  package cannot be opened without its password. The password probe and every
+  extracted member share the package's output-byte ceiling. On web, ZIP
+  DEFLATE uses the archive inflater with OciDeck's capped output directly;
+  `archive` 4.3.0 otherwise inflates into an unbounded intermediate buffer
+  before invoking a caller-supplied output stream. AES authentication is
+  checked before decompression. A member whose declared size is false still
+  stops at the actual output limit.
 - **Atomic writes.** All persistence uses `writeStringAtomic`/`writeBytesAtomic`
   (`lib/utils/atomic_file.dart`) — write-to-temp-then-rename — so a crash never
   truncates a file. A `check_conventions` ratchet forbids raw
@@ -654,6 +669,18 @@ rides along as `http.extraHeader`, and headers follow redirects — and the same
 reaches the network; other schemes are refused. Verified in
 `test/git_network_guard_test.dart`, which also checks that `git` honours the pin
 rather than assuming it.
+
+The native runner requires Git 2.37 or newer, when `http.curloptResolve` became
+available. It resolves `git` from absolute `PATH` entries and passes an absolute
+executable path; relative entries cannot select a program from a deck's working
+copy or reach Git's helpers. `GIT_ALLOW_PROTOCOL` defaults to an empty set even
+for local commands: partial clones may fetch absent blobs during `show`, `switch`,
+or `merge`. Those commands permit the configured scheme only after the same
+network guard and pin have succeeded. If the guard is unavailable, cached local
+content remains usable without opening a transport.
+An existing partial clone is also rejected if it has any remote besides the
+configured `origin`: Git may try another promisor remote when the first lacks a
+blob, and that second destination has no approved address or redirect policy.
 
 A pinned certificate is translated the same way. Git has no notion of a
 certificate fingerprint — only a CA file — so `native_git_mirror_io.dart` fetches
@@ -861,6 +888,11 @@ claims no certification and no compliance (*reworded 2026-07-21*).
   and the OciWacht scanner/redaction model (§8).
 - **Defence in depth.** Layered guards rather than a single boundary: the SSRF
   guard, the import caps, path containment, the projection boundary.
+
+ODP and ODT table expansion uses one budget per import: at most 1024 columns
+per row, 100,000 expanded cells and derived chart values, and 16 MiB of
+repeated cell text. Empty rows also consume one budget unit. A limit breach
+ends the import rather than silently dropping a table or chart.
 
 **"Fail-closed" is per mechanism, not a blanket default.** Several mechanisms do
 fail closed once they are switched on — the classification gate writes no file

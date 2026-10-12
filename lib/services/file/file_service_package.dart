@@ -104,57 +104,33 @@ List<PackageEntry>? _decodePackageEntries(
       return null;
     }
     final Uint8List content;
-    if (password != null) {
-      // WinZip-AES ontsleutelt via de content-getter en toetst daar de HMAC.
-      final List<int> raw;
-      try {
-        raw = file.content;
-      } catch (e) {
-        // Een half pakket na een mislukte integriteitstoets is gevaarlijker dan
-        // een duidelijke weigering, dus één beschadigd lid weigert alles.
-        logError(
-          'FileService.decodePackageEntries: encrypted entry failed its '
-          'integrity check, refusing the package (${file.name})',
+    final capped = _CappedOutputStream(maxBytes - extracted);
+    try {
+      _writePackageEntryCapped(file, capped);
+      // De stream geeft al een zicht op zijn buffer; kopiëren verdubbelt de
+      // geheugenpiek bij een groot uitgepakt lid.
+      content = capped.getBytes();
+    } on ExtractionLimitException {
+      logWarning(
+        'FileService.decodePackageEntries: entry exceeds decompression '
+        'limit (possible zip bomb): ${file.name}',
+      );
+      return null;
+    } catch (e) {
+      if (password != null || strictIntegrity) {
+        logWarning(
+          'FileService.decodePackageEntries: unreadable entry in strict '
+          'package, refusing all members',
           e,
         );
         return null;
       }
-      if (extracted + raw.length > maxBytes) {
-        logWarning(
-          'FileService.decodePackageEntries: decrypted size exceeds limit',
-        );
-        return null;
-      }
-      content = raw is Uint8List ? raw : Uint8List.fromList(raw);
-    } else {
-      final capped = _CappedOutputStream(maxBytes - extracted);
-      try {
-        file.writeContent(capped);
-        // De stream geeft al een zicht op zijn buffer; kopiëren verdubbelt de
-        // geheugenpiek bij een groot uitgepakt lid.
-        content = capped.getBytes();
-      } on ExtractionLimitException {
-        logWarning(
-          'FileService.decodePackageEntries: entry exceeds decompression '
-          'limit (possible zip bomb): ${file.name}',
-        );
-        return null;
-      } catch (e) {
-        if (strictIntegrity) {
-          logWarning(
-            'FileService.decodePackageEntries: unreadable entry in strict '
-            'package, refusing all members',
-            e,
-          );
-          return null;
-        }
-        logWarning(
-          'FileService.decodePackageEntries: unreadable entry skipped '
-          '(${file.name})',
-          e,
-        );
-        continue;
-      }
+      logWarning(
+        'FileService.decodePackageEntries: unreadable entry skipped '
+        '(${file.name})',
+        e,
+      );
+      continue;
     }
     extracted += content.length;
     entries.add((name: file.name, bytes: content));
@@ -678,6 +654,39 @@ class _CappedOutputStream extends OutputMemoryStream {
   void writeStream(InputStream stream) {
     _guard(stream.length);
     super.writeStream(stream);
+  }
+
+  @override
+  void writeBackReference(int distance, int count) {
+    _guard(count);
+    super.writeBackReference(distance, count);
+  }
+}
+
+void _writePackageEntryCapped(ArchiveFile file, _CappedOutputStream output) {
+  if (!kIsWeb) {
+    file.writeContent(output);
+    return;
+  }
+  // archive 4.3.0 negeert op web de meegegeven output bij DEFLATE en bouwt
+  // eerst zelf de volledige body op. Gebruik daar zijn directe inflater.
+  final raw = file.rawContent;
+  if (raw is! ZipFile) throw const FormatException('ongeldig ZIP-lid');
+  final compressed = raw.getStream(decompress: false); // Controleert AES-MAC.
+  switch (file.compression) {
+    case CompressionType.deflate:
+      Inflate.stream(compressed, output: output);
+      return;
+    case CompressionType.bzip2:
+      if (!BZip2Decoder().decodeStream(compressed, output)) {
+        throw const FormatException('ongeldige BZip2-inhoud');
+      }
+      return;
+    case CompressionType.none:
+      output.writeStream(compressed);
+      return;
+    case null:
+      throw const FormatException('onbekende ZIP-compressie');
   }
 }
 

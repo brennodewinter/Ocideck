@@ -1631,6 +1631,13 @@ const _dutchSourceAddSv = <String, String>{
       'Infoga standardförklaringen i dokumentet',
   'Als dia invoegen': 'Infoga som en bild',
   'Bestemd voor:': 'Avsedd för:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Integritetskontrollen är avstängd under Säkerhet. Dokumentexporten kontrollerar ändå innehållet mot exportregeln.',
+  'Persoonsgegevens in dit document': 'Personuppgifter i det här dokumentet',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Ta bort de uppgifter som hittats i dokumentet eller ändra inställningen under Säkerhet.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Granska innehållet och bekräfta uttryckligen att du vill exportera den här kopian.',
   'Git-werk herstellen': 'Återställ Git-arbete',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Det finns fortfarande lokala Git-data som inte hör till någon aktuell anslutning. De skickas inte automatiskt. Spara en kopia och läs ”Återställ gamla Git-utkast” i handboken innan du raderar appdata.',

@@ -1634,6 +1634,13 @@ const _dutchSourceAddGsw = <String, String>{
       'Standarderkläärig is Dokument setze',
   'Als dia invoegen': 'Als Folie yyfüege',
   'Bestemd voor:': 'Bestimmt für:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'D Datenschutzprüefig isch under Sicherheit usgschaltet. Bim Dokumentexport wird de Inhalt trotzdem a de Exportregel prüeft.',
+  'Persoonsgegevens in dit document': 'Personebezogeni Date i dem Dokument',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Entfern di gfundenen Date us em Dokument oder ändere d Iistellig under Sicherheit.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Prüef de Inhalt und bestätig bewusst, dass du die Kopie exportiere wotsch.',
   'Git-werk herstellen': 'Git-Arbeit widerherstelle',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Es git no lokali Git-Date, wo zu keiner aktuelle Verbindig ghöre. Sie wärde nid automatisch verschickt. Mach e Kopie und lies im Handbuech «Alti Git-Entwürf widerherstelle», bevor du d App-Date lösches.',

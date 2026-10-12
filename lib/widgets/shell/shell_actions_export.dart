@@ -16,6 +16,16 @@ String _downloadRefusedMessage(AppLocalizations l10n) => l10n.d(
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
 );
 
+ExportDecision _fullTransferExportDecision(Deck deck, AppSettings settings) {
+  final policy = ClassificationEnforcementPolicy.fromAppSettings(settings);
+  // Het deck zelf moet aan de verplichte classificatie en ondergrens voldoen;
+  // voor het vrijgaveplafond telt ook de strengste dia mee.
+  final deckDecision = policy.evaluate(deck.tlp);
+  return deckDecision.allowed
+      ? policy.evaluate(deckReleaseTlp(deck))
+      : deckDecision;
+}
+
 /// De twee uitvoerpaden die niet door [ExportService] lopen: het `.ocideck`-
 /// pakket en het auditdossier.
 ///
@@ -36,12 +46,10 @@ Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
   // de app kent — de volledige markdown plus élke asset — dus juist hier telt
   // het plafond.
   //
-  // Getoetst op [deckReleaseTlp], de strengste classificatie in het hele deck,
-  // niet op `deck.tlp` alleen: een pakket is een volledige overdracht, net als
-  // een release. Één TLP:RED-dia in een TLP:none-deck hoort hem tegen te houden.
-  final decision = ClassificationEnforcementPolicy.fromAppSettings(
+  final decision = _fullTransferExportDecision(
+    deck,
     ref.read(settingsProvider),
-  ).evaluate(deckReleaseTlp(deck));
+  );
   if (!decision.allowed) {
     showErrorSnackBar(
       ScaffoldMessenger.of(context),
@@ -104,6 +112,19 @@ Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
       SnackBar(
         content: Text(l10n.d('Finaliseer en verzegel het rapport eerst.')),
       ),
+    );
+    return;
+  }
+  // Een dossier draagt het hele deck en al zijn bewijs mee, net als een pakket.
+  final decision = _fullTransferExportDecision(
+    deck,
+    ref.read(settingsProvider),
+  );
+  if (!decision.allowed) {
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      l10n,
+      exportBlockMessage(l10n, decision) ?? '',
     );
     return;
   }

@@ -490,7 +490,7 @@ saved version stays retrievable, which a plain folder cannot give you.
   deck's classification differs, the stricter of the two wins. This works both in
   the browser and on desktop with native `git`; on desktop it becomes a real
   merge commit, so `git log` shows the two lines of work coming together.
-- **Native git (desktop):** if you have `git` installed (2.19 or newer),
+- **Native git (desktop):** if you have `git` installed (2.37 or newer),
   the git connection in *Settings → Storage* shows it, and OciDeck keeps a real
   clone of the repository.
   Then **each save is a genuine local commit** — durable and offline: edit away
@@ -4592,6 +4592,11 @@ evidence images — plus an `AUDIT_DOSSIER.md` index that restates, in one place
 - the MIAUW compliance tally (Voldaan / Openstaand / Uitgesloten);
 - the evidence hash table (SHA1 + SHA-256 per evidence image).
 
+Before reading evidence or offering the export, OciDeck checks the report's own
+TLP against the required classification and minimum level. It checks the highest
+TLP across the report and its slides against the release ceiling. A blocked
+dossier shows the reason in the app.
+
 Like the normal package export, you can protect the whole dossier with a password
 (WinZip **AES-256**), so the report, its evidence and the hash tables travel
 together as one encrypted, auditor-ready file.
@@ -5582,6 +5587,14 @@ content rather than a style carrier.
 **Export is not Save.** Save writes your byte-faithful original; **Export** makes
 a *derived, redacted copy for a recipient* on a **new** file, and never touches
 your source. The export dialog asks two things:
+
+Before choosing a destination or starting a download, OciDeck checks the
+configured privacy export rule against certain findings in the source document.
+The default **Warn before exporting** rule asks you to confirm an export with findings you have
+not reviewed. **Block export** refuses it, even with **Redacted** selected: remove the
+found data from the document or deliberately change the rule under *Security*.
+This export check also runs when privacy checks during editing are disabled.
+Saving the original remains available.
 
 - **For whom** — the profile. **Volledig** (full) leaves everything readable
   except what you yourself marked to leave out; **Geredigeerd** (redacted) takes
