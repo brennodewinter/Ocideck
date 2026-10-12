@@ -339,14 +339,13 @@ SSRF-pinned transports.
 - **Per-caller byte caps** (see the Performance guide) reject oversized responses
   both by `Content-Length` pre-check and by streaming cap. On desktop both stages
   bite: an oversized `Content-Length` is refused before reading, and the stream is
-  aborted mid-download. On **web** the same two-stage check runs, but the default
-  browser HTTP client (XHR) buffers the response body *inside the browser* before
-  the Dart stream yields anything — so there the `Content-Length` pre-check is the
-  effective guard for an honest server, and the streaming cap only bites once the
-  client genuinely streams (the Fetch API). A forge that lies about (or omits) its
-  `Content-Length` can therefore still make a browser tab buffer an oversized body
-  before the cap fires; the cap prevents OciDeck from *retaining* it, not the
-  browser from *receiving* it.
+  aborted mid-download. On **web**, the pinned `package:http` browser client uses
+  a Fetch response stream. URL import now uses `Client.send` for both its direct
+  request and its consented proxy fallback, checks `Content-Length` before reading,
+  and cancels the stream at the first chunk that exceeds the cap. Its 30-second
+  direct and 120-second proxy deadlines cover the complete transfer. A browser
+  can still receive one oversized network chunk before Dart rejects it; the cap
+  prevents buffering the complete attacker-controlled response in the app.
 
 ## 4. Asset-path containment
 

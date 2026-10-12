@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -49,6 +50,16 @@ class _CloseAwareClient extends http.BaseClient {
 
   @override
   void close() => closed = true;
+}
+
+class _StreamingClient extends http.BaseClient {
+  _StreamingClient(this.response);
+
+  final http.StreamedResponse Function() response;
+
+  @override
+  Future<http.StreamedResponse> send(http.BaseRequest request) async =>
+      response();
 }
 
 /// Zelfde opzet als state_providers_extra_test: wegwerp-herstelmap zodat de
@@ -109,6 +120,80 @@ void main() {
       );
       expect(fetched.bytes, isNull);
       expect(fetched.failure, ImportFailure.tooLarge);
+    });
+
+    test(
+      'stopt een groeiend antwoord zodra de bytelimiet bereikt is',
+      () async {
+        var chunksRead = 0;
+        var cancelled = false;
+        Stream<List<int>> chunks() async* {
+          try {
+            for (var i = 0; i < 3; i++) {
+              chunksRead++;
+              yield List.filled(9, 65);
+            }
+          } finally {
+            cancelled = true;
+          }
+        }
+
+        final client = _StreamingClient(
+          () => http.StreamedResponse(chunks(), 200),
+        );
+
+        final fetched = await fileService().fetchUrlBytes(
+          'https://example.org/deck.md',
+          maxBytes: 16,
+          client: client,
+        );
+
+        expect(fetched.failure, ImportFailure.tooLarge);
+        expect(chunksRead, 2);
+        expect(cancelled, isTrue);
+      },
+    );
+
+    test('weigert een te grote Content-Length vóór de eerste byte', () async {
+      var subscribed = false;
+      var cancelled = false;
+      final body = StreamController<List<int>>.broadcast(
+        onListen: () => subscribed = true,
+        onCancel: () => cancelled = true,
+      );
+      addTearDown(body.close);
+      final client = _StreamingClient(
+        () => http.StreamedResponse(body.stream, 200, contentLength: 32),
+      );
+
+      final fetched = await fileService().fetchUrlBytes(
+        'https://example.org/deck.md',
+        maxBytes: 16,
+        client: client,
+      );
+
+      expect(fetched.failure, ImportFailure.tooLarge);
+      expect(subscribed, isTrue);
+      expect(cancelled, isTrue);
+    });
+
+    test('annuleert ook een foutantwoord zonder de body te lezen', () async {
+      var cancelled = false;
+      final body = StreamController<List<int>>.broadcast(
+        onCancel: () => cancelled = true,
+      );
+      addTearDown(body.close);
+      final client = _StreamingClient(
+        () => http.StreamedResponse(body.stream, 404),
+      );
+
+      final fetched = await fileService().fetchUrlBytes(
+        'https://example.org/missing.md',
+        client: client,
+      );
+
+      expect(fetched.failure, ImportFailure.notFound);
+      expect(cancelled, isTrue);
     });
 
     test('valt op web terug op het same-origin fetch-hulppunt', () async {

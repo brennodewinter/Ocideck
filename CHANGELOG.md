@@ -65,6 +65,12 @@ All notable changes to OciDeck are documented in this file.
   wachtwoordcontrole als het openen begrenzen nu werkelijk uitgepakte bytes.
   In de browser wordt DEFLATE rechtstreeks naar die begrensde uitvoer geschreven;
   een te groot pakket vraagt niet opnieuw om hetzelfde wachtwoord.
+- **Web-URL-import stopt bij de ingestelde bestandsgrootte.** Decks en pakketten
+  worden tijdens het ophalen begrensd. Een te grote opgegeven lengte wordt al
+  vóór het lezen geweigerd; zonder betrouwbare lengte stopt de download zodra
+  de limiet wordt overschreden. Dat geldt ook voor de terugval via het
+  fetch-hulppunt, zodat een groot antwoord de browsertab niet eerst volledig
+  vult.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of
