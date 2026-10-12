@@ -24,6 +24,10 @@ the contributor's statement that they had the right to submit it under the
 project licence. That is the instrument that lets the sentence above hold once
 there is more than one author. *(Adopted 2026-07-23, #594; there was no CLA and
 no sign-off before, so the foundation had nothing making the split true.)*
+Commits from before that date carry no `Signed-off-by` line and need none: they
+all have one author, the initiator, who holds the rights to submit them, so
+there is nothing for a sign-off to certify, and rewriting the published history
+to add one would change every hash and break the signed releases.
 
 The name is a wink: *Oci* comes from the **Ocicats** (Brenno's cats) and *Deck*
 is short for a presentation deck.
