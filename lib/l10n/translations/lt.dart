@@ -1639,6 +1639,13 @@ const _dutchSourceAddLt = <String, String>{
       'Įterpti standartinį paaiškinimą į dokumentą',
   'Als dia invoegen': 'Įterpti kaip skaidrę',
   'Bestemd voor:': 'Skirta:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Privatumo patikra išjungta skiltyje Saugumas. Eksportuojant dokumentą turinys vis tiek tikrinamas pagal eksportavimo taisyklę.',
+  'Persoonsgegevens in dit document': 'Asmens duomenys šiame dokumente',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Pašalinkite aptiktus duomenis iš dokumento arba pakeiskite nustatymą skiltyje Saugumas.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Peržiūrėkite turinį ir aiškiai patvirtinkite, kad norite eksportuoti šią kopiją.',
   'Git-werk herstellen': 'Atkurti „Git“ darbą',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Vis dar yra vietinių „Git“ duomenų, nesusietų su jokiu dabartiniu ryšiu. Jie nebus siunčiami automatiškai. Išsaugokite kopiją ir prieš trindami programos duomenis perskaitykite vadovo skyrių „Senų „Git“ juodraščių atkūrimas“.',

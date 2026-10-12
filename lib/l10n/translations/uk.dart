@@ -1647,6 +1647,13 @@ const _dutchSourceAddUk = <String, String>{
       'Вставити стандартне пояснення в документ',
   'Als dia invoegen': 'Вставити як слайд',
   'Bestemd voor:': 'Призначено для:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Перевірку конфіденційності вимкнено в розділі «Безпека». Експорт документа все одно перевіряє вміст за правилом експорту.',
+  'Persoonsgegevens in dit document': 'Персональні дані в цьому документі',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Видаліть знайдені дані з документа або змініть налаштування в розділі «Безпека».',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Перевірте вміст і свідомо підтвердьте, що хочете експортувати цю копію.',
   'Git-werk herstellen': 'Відновити роботу Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Ще є локальні дані Git, які не належать до жодного поточного з’єднання. Їх не буде надіслано автоматично. Збережіть копію та прочитайте в посібнику «Відновлення старих чернеток Git», перш ніж видаляти дані застосунку.',

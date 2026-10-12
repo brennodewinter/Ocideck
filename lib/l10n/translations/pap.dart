@@ -676,6 +676,13 @@ const _dutchSourceAddPap = {
       'Pone e splikashon estándar den e dokumento',
   'Als dia invoegen': 'Hinka komo dia',
   'Bestemd voor:': 'Destiná pa:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'E kontrol di privasidat ta pagá bou di Seguridat. Eksportashon di dokumento ta kontrolá e kontenido tòg segun e regla di eksportashon.',
+  'Persoonsgegevens in dit document': 'Datonan personal den e dokumento aki',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Kita e datonan detektá for di e dokumento òf kambia e konfigurashon bou di Seguridat.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Kontrolá e kontenido i konfirmá eksplísitamente ku bo ke eksportá e kopia aki.',
   'Git-werk herstellen': 'Restaurá trabou di Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Ainda tin dato Git lokal ku no ta pertenesé na un konekshon aktual. Nan no ta wòrdu manda automáticamente. Warda un kopia i lesa “Restaurá borradónan Git bieu” den e manual promé ku bo kita dato di e aplikashon.',

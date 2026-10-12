@@ -1662,6 +1662,13 @@ const _dutchSourceAddGa = <String, String>{
       'Cuir an míniú caighdeánach isteach sa cháipéis',
   'Als dia invoegen': 'Ionsáigh mar shleamhnán',
   'Bestemd voor:': 'Beartaithe do:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Tá an seiceáil príobháideachais múchta faoi Shlándáil. Seiceálann easpórtáil an doiciméid an t-ábhar de réir na rialach easpórtála mar sin féin.',
+  'Persoonsgegevens in dit document': 'Sonraí pearsanta sa doiciméad seo',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Bain na sonraí a aimsíodh den doiciméad nó athraigh an socrú faoi Shlándáil.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Seiceáil an t-ábhar agus deimhnigh go follasach gur mian leat an chóip seo a easpórtáil.',
   'Git-werk herstellen': 'Obair Git a athshlánú',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Tá sonraí Git logánta fós ann nach mbaineann le nasc reatha. Ní sheolfar iad go huathoibríoch. Coinnigh cóip agus léigh “Dréachtaí Git sean a athshlánú” sa lámhleabhar sula scriosann tú sonraí na haipe.',

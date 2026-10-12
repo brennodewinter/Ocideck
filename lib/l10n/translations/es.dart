@@ -675,6 +675,13 @@ const _dutchSourceAddEs = {
       'Insertar la explicación estándar en el documento',
   'Als dia invoegen': 'Insertar como diapositiva',
   'Bestemd voor:': 'Destinado a:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'La comprobación de privacidad está desactivada en Seguridad. La exportación del documento sí comprueba el contenido según la regla de exportación.',
+  'Persoonsgegevens in dit document': 'Datos personales en este documento',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Elimine los datos detectados del documento o cambie el ajuste en Seguridad.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Revise el contenido y confirme expresamente que desea exportar esta copia.',
   'Git-werk herstellen': 'Recuperar el trabajo de Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Aún hay datos Git locales que no están asociados a ninguna conexión actual. No se enviarán automáticamente. Guarda una copia y lee «Recuperar borradores antiguos de Git» en el manual antes de borrar los datos de la aplicación.',

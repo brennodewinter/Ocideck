@@ -33,6 +33,7 @@ import 'epub/document_epub_export.dart';
 import 'odt/document_odt_export.dart';
 import 'docx/document_docx_export.dart';
 import 'privacy/privacy_own_identity.dart';
+import 'privacy/privacy_export_policy.dart';
 import '../utils/document_front_matter.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
@@ -493,13 +494,15 @@ Future<Uint8List> _buildPdfBytes(
 /// en [webFileName] wordt genegeerd.
 ///
 /// Geeft het geschreven pad (desktop) of de bestandsnaam (web) terug, of
-/// `null` bij een geblokkeerde classificatie of wanneer het doel gelijk is
+/// `null` bij een geblokkeerde classificatie of privacycontrole, of wanneer het doel gelijk is
 /// aan de bron.
 Future<String?> writeDocumentExport(
   ExportBundle bundle,
   DocumentExportFormat format, {
   required MarpHtmlService html,
   required ClassificationEnforcementPolicy enforcementPolicy,
+  PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
+  bool privacyAcknowledged = false,
   ExportDocumentMetadata? metadata,
   HtmlImageResolver? embedImage,
   bool chapterPageBreak = false,
@@ -524,6 +527,11 @@ Future<String?> writeDocumentExport(
     if (await _sameFile(sourcePath, outputPath)) return null;
   }
   if (!enforcementPolicy.evaluate(bundle.audience.deck.tlp).allowed) {
+    return null;
+  }
+  final privacyDecision = privacyPolicy.evaluate(bundle.privacySummary);
+  if (!privacyDecision.allowed &&
+      (privacyDecision.hardBlocked || !privacyAcknowledged)) {
     return null;
   }
   final bytes = await buildDocumentExportBytes(

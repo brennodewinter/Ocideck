@@ -1657,6 +1657,13 @@ const _dutchSourceAddEl = <String, String>{
       'Εισαγωγή της τυπικής εξήγησης στο έγγραφο',
   'Als dia invoegen': 'Εισαγωγή ως διαφάνεια',
   'Bestemd voor:': 'Προορίζεται για:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Ο έλεγχος απορρήτου είναι απενεργοποιημένος στην Ασφάλεια. Η εξαγωγή εγγράφου ελέγχει ωστόσο το περιεχόμενο βάσει του κανόνα εξαγωγής.',
+  'Persoonsgegevens in dit document': 'Προσωπικά δεδομένα σε αυτό το έγγραφο',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Αφαιρέστε τα δεδομένα που εντοπίστηκαν από το έγγραφο ή αλλάξτε τη ρύθμιση στην Ασφάλεια.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Ελέγξτε το περιεχόμενο και επιβεβαιώστε ρητά ότι θέλετε να εξαγάγετε αυτό το αντίγραφο.',
   'Git-werk herstellen': 'Ανάκτηση εργασίας Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Υπάρχουν ακόμη τοπικά δεδομένα Git που δεν ανήκουν σε κάποια τρέχουσα σύνδεση. Δεν θα σταλούν αυτόματα. Κρατήστε ένα αντίγραφο και διαβάστε στο εγχειρίδιο την ενότητα «Ανάκτηση παλιών πρόχειρων Git» πριν διαγράψετε τα δεδομένα της εφαρμογής.',

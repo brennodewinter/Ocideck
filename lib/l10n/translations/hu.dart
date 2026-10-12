@@ -1634,6 +1634,13 @@ const _dutchSourceAddHu = <String, String>{
       'A szokásos magyarázat beszúrása a dokumentumba',
   'Als dia invoegen': 'Beszúrás diákként',
   'Bestemd voor:': 'Rendeltetése:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Az adatvédelmi ellenőrzés ki van kapcsolva a Biztonság menüben. A dokumentum exportálása ennek ellenére ellenőrzi a tartalmat az exportszabály alapján.',
+  'Persoonsgegevens in dit document': 'Személyes adatok ebben a dokumentumban',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Távolítsa el a megtalált adatokat a dokumentumból, vagy módosítsa a beállítást a Biztonság menüben.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Ellenőrizze a tartalmat, és kifejezetten erősítse meg, hogy exportálni kívánja ezt a másolatot.',
   'Git-werk herstellen': 'Git-munka visszaállítása',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Még vannak olyan helyi Git-adatok, amelyek nem tartoznak aktuális kapcsolathoz. Ezek nem lesznek automatikusan elküldve. Mentsen róluk egy másolatot, és az alkalmazás adatainak törlése előtt olvassa el a kézikönyv „Régi Git-vázlatok visszaállítása” című részét.',

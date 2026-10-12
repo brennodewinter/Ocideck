@@ -1652,6 +1652,13 @@ const _dutchSourceAddBg = <String, String>{
       'Вмъкни стандартното обяснение в документа',
   'Als dia invoegen': 'Вмъкни като слайд',
   'Bestemd voor:': 'Предназначено за:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Проверката за поверителност е изключена в Сигурност. Експортирането на документа въпреки това проверява съдържанието спрямо правилото за експорт.',
+  'Persoonsgegevens in dit document': 'Лични данни в този документ',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Премахнете откритите данни от документа или променете настройката в Сигурност.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Прегледайте съдържанието и изрично потвърдете, че искате да експортирате това копие.',
   'Git-werk herstellen': 'Възстановяване на работата в Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Все още има локални Git данни, които не принадлежат към текуща връзка. Те няма да бъдат изпратени автоматично. Запазете копие и прочетете „Възстановяване на стари чернови в Git“ в ръководството, преди да изтриете данните на приложението.',

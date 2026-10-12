@@ -2540,6 +2540,13 @@ const _dutchSourceAddTr = <String, String>{
       'Standart açıklamayı belgeye ekle',
   'Als dia invoegen': 'Slayt olarak ekle',
   'Bestemd voor:': 'Yönelik:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Gizlilik denetimi Güvenlik bölümünde kapalıdır. Belge dışa aktarımı yine de içeriği dışa aktarma kuralına göre denetler.',
+  'Persoonsgegevens in dit document': 'Bu belgedeki kişisel veriler',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Bulunan verileri belgeden kaldırın veya Güvenlik bölümündeki ayarı değiştirin.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'İçeriği gözden geçirin ve bu kopyayı dışa aktarmak istediğinizi açıkça onaylayın.',
   'Git-werk herstellen': 'Git çalışmasını kurtar',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Geçerli bir bağlantıyla ilişkili olmayan yerel Git verileri hâlâ var. Bunlar otomatik olarak gönderilmez. Bir kopyasını saklayın ve uygulama verilerini silmeden önce kılavuzdaki “Eski Git taslaklarını kurtarma” bölümünü okuyun.',

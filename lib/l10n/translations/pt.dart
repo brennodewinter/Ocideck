@@ -1660,6 +1660,13 @@ const _dutchSourceAddPt = <String, String>{
       'Inserir a explicação padrão no documento',
   'Als dia invoegen': 'Inserir como diapositivo',
   'Bestemd voor:': 'Destinado a:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'A verificação de privacidade está desativada em Segurança. A exportação do documento continua a verificar o conteúdo segundo a regra de exportação.',
+  'Persoonsgegevens in dit document': 'Dados pessoais neste documento',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Remova os dados encontrados do documento ou altere a definição em Segurança.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Reveja o conteúdo e confirme expressamente que pretende exportar esta cópia.',
   'Git-werk herstellen': 'Recuperar trabalho do Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Ainda existem dados Git locais que não pertencem a uma ligação atual. Não serão enviados automaticamente. Guarde uma cópia e leia “Recuperar rascunhos Git antigos” no manual antes de apagar os dados da aplicação.',

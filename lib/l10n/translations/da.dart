@@ -1631,6 +1631,13 @@ const _dutchSourceAddDa = <String, String>{
       'Indsæt standardforklaringen i dokumentet',
   'Als dia invoegen': 'Indsæt som dias',
   'Bestemd voor:': 'Tiltænkt:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Privatlivskontrollen er slået fra under Sikkerhed. Dokumenteksporten kontrollerer stadig indholdet efter eksportreglen.',
+  'Persoonsgegevens in dit document': 'Personoplysninger i dette dokument',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Fjern de fundne oplysninger fra dokumentet, eller skift indstillingen under Sikkerhed.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Gennemgå indholdet, og bekræft udtrykkeligt, at du vil eksportere denne kopi.',
   'Git-werk herstellen': 'Gendan Git-arbejde',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Der er stadig lokale Git-data, som ikke hører til en aktuel forbindelse. De bliver ikke sendt automatisk. Gem en kopi, og læs “Gendan gamle Git-kladder” i vejledningen, før du sletter appdata.',

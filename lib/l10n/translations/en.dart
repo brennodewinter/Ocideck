@@ -837,6 +837,13 @@ const _dutchSourceAddEn = {
       'Insert the standard explanation in the document',
   'Als dia invoegen': 'Insert as a slide',
   'Bestemd voor:': 'Intended for:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'The privacy check is off under Security. Document export still checks the content against the export rule.',
+  'Persoonsgegevens in dit document': 'Personal data in this document',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Remove the detected data from the document or change the setting under Security.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Review the content and explicitly confirm that you want to export this copy.',
   'Git-werk herstellen': 'Recover Git work',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'There is still local Git data that is not associated with a current connection. It will not be sent automatically. Keep a copy and read “Recovering old Git drafts” in the manual before erasing app data.',

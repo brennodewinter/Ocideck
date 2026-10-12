@@ -1630,6 +1630,13 @@ const _dutchSourceAddLv = <String, String>{
       'Ievietot standarta skaidrojumu dokumentā',
   'Als dia invoegen': 'Ievietot kā slaidu',
   'Bestemd voor:': 'Paredzēts:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Privātuma pārbaude ir izslēgta sadaļā Drošība. Dokumenta eksportēšana tomēr pārbauda saturu atbilstoši eksportēšanas noteikumam.',
+  'Persoonsgegevens in dit document': 'Personas dati šajā dokumentā',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Izņemiet atrastos datus no dokumenta vai mainiet iestatījumu sadaļā Drošība.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Pārbaudiet saturu un apzināti apstipriniet, ka vēlaties eksportēt šo kopiju.',
   'Git-werk herstellen': 'Atjaunot Git darbu',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Joprojām ir lokāli Git dati, kas nav saistīti ar pašreizējo savienojumu. Tie netiks nosūtīti automātiski. Saglabā kopiju un izlasi rokasgrāmatā “Veco Git melnrakstu atjaunošana”, pirms dzēs lietotnes datus.',

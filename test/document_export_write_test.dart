@@ -21,6 +21,7 @@ import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/pdf/document_pdf_export.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
+import 'package:ocideck/services/privacy/privacy_export_policy.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 import 'package:ocideck/utils/document_front_matter.dart';
@@ -59,6 +60,18 @@ void main() {
     await fn(bundle);
   }
 
+  Future<ExportBundle> sensitiveBundle({
+    PrivacyExportProfile profile = PrivacyExportProfile.full,
+  }) => buildDocumentExportBundle(
+    '# Rapport\n\nBSN 728398242\n',
+    projectPath: null,
+    profile: profile,
+    ownIdentity: OwnIdentity.empty,
+    regions: defaultPrivacyRegions,
+    disabledRules: const {},
+    markdownService: MarkdownService(),
+  );
+
   test('md-export schrijft de geprojecteerde platte body', () async {
     await withBundle((bundle) async {
       final out = p.join(temp.path, 'rapport.md');
@@ -75,6 +88,58 @@ void main() {
       // Geen deck-scaffold: een document-export draagt geen `marp:`-kop.
       expect(content.contains('marp: true'), isFalse);
     });
+  });
+
+  test(
+    'document met onbeoordeeld BSN vraagt eerst privacybevestiging',
+    () async {
+      final bundle = await sensitiveBundle();
+      expect(bundle.privacySummary.unresolved, greaterThan(0));
+      final out = p.join(temp.path, 'gevoelig.md');
+      final written = await writeDocumentExport(
+        bundle,
+        DocumentExportFormat.md,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
+        outputPath: out,
+      );
+      expect(written, isNull);
+      expect(File(out).existsSync(), isFalse);
+    },
+  );
+
+  test('privacyblok weigert ook na bevestiging een documentexport', () async {
+    final bundle = await sensitiveBundle(
+      profile: PrivacyExportProfile.redacted,
+    );
+    expect(bundle.privacySummary.unresolved, greaterThan(0));
+    final out = p.join(temp.path, 'geredigeerd.md');
+    final written = await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.md,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      privacyPolicy: const PrivacyExportPolicy(gate: PrivacyExportGate.block),
+      privacyAcknowledged: true,
+      outputPath: out,
+    );
+    expect(written, isNull);
+    expect(File(out).existsSync(), isFalse);
+  });
+
+  test('privacywaarschuwing laat bewuste documentexport toe', () async {
+    final bundle = await sensitiveBundle();
+    final out = p.join(temp.path, 'bevestigd.md');
+    final written = await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.md,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      privacyAcknowledged: true,
+      outputPath: out,
+    );
+    expect(written, out);
+    expect(await File(out).readAsString(), contains('728398242'));
   });
 
   test(
@@ -508,6 +573,7 @@ void main() {
           format,
           html: MarpHtmlService(loadAsset: _diskLoader),
           enforcementPolicy: const ClassificationEnforcementPolicy(),
+          privacyAcknowledged: true,
           // De schrijver mag deze ongeprojecteerde metadata niet vertrouwen.
           metadata: const ExportDocumentMetadata(title: rawTitle),
           outputPath: out,

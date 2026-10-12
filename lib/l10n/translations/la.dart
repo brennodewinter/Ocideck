@@ -1646,6 +1646,13 @@ const _dutchSourceAddLa = <String, String>{
       'Explicationem solitam in documento pone',
   'Als dia invoegen': 'Ut paginam insere',
   'Bestemd voor:': 'Destinatum:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Inspectio secreti sub Securitate intermissa est. Exportatio documenti tamen contentum secundum regulam exportationis examinat.',
+  'Persoonsgegevens in dit document': 'Data personalia in hoc documento',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Data inventa e documento remove aut optionem sub Securitate muta.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Contentum inspice et consulto confirma te hoc exemplar exportare velle.',
   'Git-werk herstellen': 'Opus Git recupera',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Adhuc sunt data Git localia quae ad nullam connexionem praesentem pertinent. Ea automatice non mittentur. Exemplum serva et in manuali lege “Schedas Git veteres recuperare” antequam data applicationis deleas.',

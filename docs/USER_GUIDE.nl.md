@@ -5635,6 +5635,14 @@ Markdown-inhoud en is geen stijldrager.
 **nieuw** bestand, en raakt je bron nooit aan. Het exportvenster vraagt twee
 dingen:
 
+Vóór de bestandskeuze of download toetst OciDeck de ingestelde privacyregel aan
+zekere bevindingen in het brondocument. De standaardstand **Waarschuwen vóór export** vraagt
+bevestiging bij onbeoordeelde bevindingen. **Export blokkeren** weigert de export, ook
+als **Geredigeerd** is gekozen: verwijder de gevonden gegevens uit het document
+of wijzig de regel bewust onder *Beveiliging*. Deze exportcontrole werkt ook
+wanneer de privacycontrole tijdens het bewerken uitstaat. Het origineel opslaan
+kan nog wel.
+
 - **Voor wie** — het profiel. **Volledig** laat alles leesbaar behalve wat je zelf
   hebt gemarkeerd om weg te laten; **Geredigeerd** haalt eruit wat de
   privacycontrole vindt. Het gekozen profiel wordt in de bestandsnaam van de export

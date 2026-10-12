@@ -1650,6 +1650,13 @@ const _dutchSourceAddMt = <String, String>{
       'Daħħal it-tifsira standard fid-dokument',
   'Als dia invoegen': 'Daħħal bħala slajd',
   'Bestemd voor:': 'Destinat għal:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Il-kontroll tal-privatezza huwa mitfi taħt Sigurtà. L-esportazzjoni tad-dokument xorta tivverifika l-kontenut skont ir-regola tal-esportazzjoni.',
+  'Persoonsgegevens in dit document': 'Data personali f\'dan id-dokument',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Neħħi d-data misjuba mid-dokument jew ibdel l-issettjar taħt Sigurtà.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Iċċekkja l-kontenut u kkonferma b\'mod ċar li trid tesporta din il-kopja.',
   'Git-werk herstellen': 'Irkupra x-xogħol ta’ Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Għad hemm dejta Git lokali li mhijiex marbuta ma’ konnessjoni attwali. Din mhux se tintbagħat awtomatikament. Żomm kopja u aqra “Irkupru ta’ abbozzi qodma ta’ Git” fil-manwal qabel tħassar id-dejta tal-app.',

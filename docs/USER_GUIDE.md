@@ -5583,6 +5583,14 @@ content rather than a style carrier.
 a *derived, redacted copy for a recipient* on a **new** file, and never touches
 your source. The export dialog asks two things:
 
+Before choosing a destination or starting a download, OciDeck checks the
+configured privacy export rule against certain findings in the source document.
+The default **Warn before exporting** rule asks you to confirm an export with findings you have
+not reviewed. **Block export** refuses it, even with **Redacted** selected: remove the
+found data from the document or deliberately change the rule under *Security*.
+This export check also runs when privacy checks during editing are disabled.
+Saving the original remains available.
+
 - **For whom** — the profile. **Volledig** (full) leaves everything readable
   except what you yourself marked to leave out; **Geredigeerd** (redacted) takes
   out everything the privacy check finds. The chosen profile is written into the

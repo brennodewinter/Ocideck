@@ -1637,6 +1637,13 @@ const _dutchSourceAddSk = <String, String>{
       'Vložiť štandardné vysvetlenie do dokumentu',
   'Als dia invoegen': 'Vložiť ako snímku',
   'Bestemd voor:': 'Určené pre:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Kontrola súkromia je vypnutá v časti Zabezpečenie. Export dokumentu napriek tomu kontroluje obsah podľa pravidla exportu.',
+  'Persoonsgegevens in dit document': 'Osobné údaje v tomto dokumente',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Odstráňte nájdené údaje z dokumentu alebo zmeňte nastavenie v časti Zabezpečenie.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Skontrolujte obsah a výslovne potvrďte, že chcete exportovať túto kópiu.',
   'Git-werk herstellen': 'Obnoviť prácu v Gite',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Stále existujú miestne údaje Git, ktoré nepatria k žiadnemu aktuálnemu pripojeniu. Automaticky sa neodošlú. Uložte si kópiu a pred vymazaním údajov aplikácie si v príručke prečítajte „Obnovenie starých konceptov Git“.',

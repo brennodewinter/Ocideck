@@ -543,6 +543,13 @@ model.
   `.ocideck` package must carry the source verbatim and a PDF must not, and no
   static rule derives that difference. Forcing the question to be answered is
   the guarantee.)*
+- **Document recipient-export gate.** `writeDocumentExport` evaluates the
+  configured `PrivacyExportPolicy` against the source scan summary before
+  building bytes for any of its seven formats. The document editor explains a
+  hard block or requires explicit acknowledgement of a warning before choosing
+  a destination. This export scan runs even when editor privacy checks are off.
+  The same summary is checked for full and redacted profiles;
+  saving the byte-faithful source is a separate action.
 
 ## 9. Classification, integrity & secure storage
 

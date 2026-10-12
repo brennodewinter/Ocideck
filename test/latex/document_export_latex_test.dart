@@ -202,6 +202,7 @@ void main() {
       DocumentExportFormat.latex,
       html: MarpHtmlService(loadAsset: _diskLoader),
       enforcementPolicy: const ClassificationEnforcementPolicy(),
+      privacyAcknowledged: true,
       outputPath: out,
     );
     final tex = await File(out).readAsString();

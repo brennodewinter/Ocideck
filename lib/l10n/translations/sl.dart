@@ -1632,6 +1632,13 @@ const _dutchSourceAddSl = <String, String>{
       'Vstavi standardno razlago v dokument',
   'Als dia invoegen': 'Vstavi kot prosojnico',
   'Bestemd voor:': 'Namenjeno za:',
+  'De privacycontrole staat uit bij Beveiliging. Documentexport controleert de inhoud wel tegen de exportregel.':
+      'Preverjanje zasebnosti je izklopljeno v razdelku Varnost. Izvoz dokumenta kljub temu preveri vsebino glede na pravilo izvoza.',
+  'Persoonsgegevens in dit document': 'Osebni podatki v tem dokumentu',
+  'Verwijder de gevonden gegevens uit het document of wijzig de instelling bij Beveiliging.':
+      'Odstranite najdene podatke iz dokumenta ali spremenite nastavitev v razdelku Varnost.',
+  'Controleer de inhoud en bevestig bewust dat je deze kopie wilt exporteren.':
+      'Preglejte vsebino in izrecno potrdite, da želite izvoziti to kopijo.',
   'Git-werk herstellen': 'Obnovi delo Git',
   'Er zijn nog lokale Git-gegevens die niet bij een huidige verbinding horen. Ze worden niet automatisch verstuurd. Bewaar een kopie en lees “Oude Git-concepten herstellen” in de handleiding voordat je appgegevens wist.':
       'Še vedno obstajajo lokalni podatki Git, ki ne pripadajo nobeni trenutni povezavi. Ne bodo poslani samodejno. Shrani kopijo in pred brisanjem podatkov aplikacije v priročniku preberi »Obnovitev starih osnutkov Git«.',

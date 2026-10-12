@@ -71,6 +71,12 @@ All notable changes to OciDeck are documented in this file.
   de limiet wordt overschreden. Dat geldt ook voor de terugval via het
   fetch-hulppunt, zodat een groot antwoord de browsertab niet eerst volledig
   vult.
+- **Documentexport respecteert het ingestelde privacybeleid.** Ook bij Markdown,
+  HTML, PDF, LaTeX, ePub, ODT en Word wordt vóór bestandskeuze of download
+  gecontroleerd of zekere persoonsgegevens nog onbeoordeeld zijn. De stand
+  *Waarschuwen* vraagt om een bewuste bevestiging; *Blokkeren* weigert de
+  export, ook als *Geredigeerd* is gekozen. Opslaan van het origineel blijft
+  een afzonderlijke handeling.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of
