@@ -87,6 +87,11 @@ All notable changes to OciDeck are documented in this file.
   gezamenlijke aantal tabelcellen en de herhaalde tekst vóór
   `number-columns-repeated` wordt uitgeklapt. Grafieken begrenzen ook hun
   afgeleide waarden. Een te groot bestand krijgt een importlimietfout.
+- **Git voert lokale opdrachten en netwerkverkeer nu strikter afgeschermd uit.**
+  Relatieve `PATH`-delen kunnen geen programma uit een geopende werkkopie meer
+  starten. Ontbrekende bestanden in een gedeeltelijke kloon worden alleen via
+  een gecontroleerde verbinding opgehaald. De native Git-koppeling vereist
+  Git 2.37 of nieuwer; bij een oudere versie gebruikt OciDeck de REST-koppeling.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of

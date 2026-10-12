@@ -31,6 +31,7 @@ class _FakeGitCli implements GitCli {
     required String workingDirectory,
     List<GitConfigOverride> config = const [],
     Duration timeout = const Duration(seconds: 30),
+    String? allowedProtocol,
   }) async => throw UnimplementedError();
 }
 

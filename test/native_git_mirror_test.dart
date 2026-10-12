@@ -233,6 +233,26 @@ void main() {
       expect(File('${outside.path}/payload.bin').existsSync(), isFalse);
     }, skip: Platform.isWindows);
 
+    _wtest(
+      'weigert een extra promisor-remote in een bestaande kloon',
+      () async {
+        await mirror.prepareForOpen();
+        await _rawGit([
+          'remote',
+          'add',
+          'attacker',
+          'file://$bare',
+        ], '${temp.path}/clone');
+        await _rawGit([
+          'config',
+          'remote.attacker.promisor',
+          'true',
+        ], '${temp.path}/clone');
+        expect(mirror.headSha(), throwsA(isA<GitForgeException>()));
+        expect(mirror.readDeck(deckDir), throwsA(isA<GitForgeException>()));
+      },
+    );
+
     for (final remoteKind in ['fetch', 'push']) {
       _wtest(
         'weigert een bestaande kloon met andere $remoteKind-URL',

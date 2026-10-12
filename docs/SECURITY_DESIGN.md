@@ -670,6 +670,18 @@ reaches the network; other schemes are refused. Verified in
 `test/git_network_guard_test.dart`, which also checks that `git` honours the pin
 rather than assuming it.
 
+The native runner requires Git 2.37 or newer, when `http.curloptResolve` became
+available. It resolves `git` from absolute `PATH` entries and passes an absolute
+executable path; relative entries cannot select a program from a deck's working
+copy or reach Git's helpers. `GIT_ALLOW_PROTOCOL` defaults to an empty set even
+for local commands: partial clones may fetch absent blobs during `show`, `switch`,
+or `merge`. Those commands permit the configured scheme only after the same
+network guard and pin have succeeded. If the guard is unavailable, cached local
+content remains usable without opening a transport.
+An existing partial clone is also rejected if it has any remote besides the
+configured `origin`: Git may try another promisor remote when the first lacks a
+blob, and that second destination has no approved address or redirect policy.
+
 A pinned certificate is translated the same way. Git has no notion of a
 certificate fingerprint — only a CA file — so `native_git_mirror_io.dart` fetches
 the certificate at the pinned address, compares the SHA-256 itself, and only then

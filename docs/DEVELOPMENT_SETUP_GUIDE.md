@@ -27,7 +27,7 @@ Setting up a proper development environment is crucial for contributing to OciDe
   ships inside it (3.13.5) rather than a separately installed one.
   [BUILD.md](BUILD.md) is the authority here and explains why the exact version
   matters for `make format-check` but not for building.
-- **Git**: any recent version. (The *app's* git integration requires 2.19+, see
+- **Git**: any recent version. (The *app's* git integration requires 2.37+, see
   `kMinGitVersion`; that is a runtime requirement, not a build one.)
 - **Xcode Command Line Tools** (macOS only)  
 - **Visual Studio with C++ workload** (Windows only)

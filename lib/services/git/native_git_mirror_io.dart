@@ -271,26 +271,37 @@ class _NativeGitMirror implements NativeGitMirror {
     ];
   }
 
-  /// [network] hoort aan te staan voor alles wat de lijn op gaat — clone,
-  /// fetch, push. Lokale aanroepen (commit, checkout) hebben de guard niet
-  /// nodig en zouden er een DNS-lookup per aanroep bij krijgen.
+  /// Ook een lokale opdracht kan ontbrekende blobs van een partiële clone
+  /// ophalen. [lazyNetwork] laat dat alleen toe na dezelfde netwerkpoort;
+  /// offline blijft de lokale cache bruikbaar zonder transport.
   Future<GitResult> _run(
     List<String> args, {
     List<String> operands = const [],
     Duration timeout = const Duration(seconds: 60),
     bool network = false,
+    bool lazyNetwork = false,
     List<GitConfigOverride> extraConfig = const [],
   }) async {
     await _verifyExistingOrigin();
+    var guardedConfig = _config0;
+    String? allowedProtocol;
+    if (network || lazyNetwork) {
+      try {
+        guardedConfig = await _networkConfig();
+        allowedProtocol = Uri.parse(
+          _config.baseUrl.trim(),
+        ).scheme.toLowerCase();
+      } on GitForgeException {
+        if (network) rethrow;
+      }
+    }
     return _git.run(
       args,
       operands: operands,
       workingDirectory: _worktree.path,
-      config: [
-        ...(network ? await _networkConfig() : _config0),
-        ...extraConfig,
-      ],
+      config: [...guardedConfig, ...extraConfig],
       timeout: timeout,
+      allowedProtocol: allowedProtocol,
     );
   }
 
@@ -299,6 +310,17 @@ class _NativeGitMirror implements NativeGitMirror {
   Future<void> _verifyExistingOrigin() async {
     if (!_cloned) return;
     try {
+      // Een partiële clone kan ontbrekende blobs bij andere promisor-remotes
+      // ophalen. Alleen origin heeft een door NetGuard gepinde bestemming.
+      final remotes = await _git.run([
+        'remote',
+      ], workingDirectory: _worktree.path);
+      if (remotes.stdout.trim() != 'origin') {
+        throw const GitForgeException(
+          GitForgeError.config,
+          'De lokale git-kloon bevat een onverwachte remote.',
+        );
+      }
       for (final flags in [
         const ['remote', 'get-url', '--all', 'origin'],
         const ['remote', 'get-url', '--push', '--all', 'origin'],
@@ -413,7 +435,11 @@ class _NativeGitMirror implements NativeGitMirror {
   Future<void> _refreshCurrentBranch() async {
     try {
       await _run(['fetch', 'origin'], operands: [_branch], network: true);
-      await _run(['merge', '--ff-only'], operands: ['origin/$_branch']);
+      await _run(
+        ['merge', '--ff-only'],
+        operands: ['origin/$_branch'],
+        lazyNetwork: true,
+      );
     } on GitCliException catch (e) {
       logWarning('NativeGitMirror: fetch/ff mislukt (offline of divergent)', e);
     } on GitForgeException catch (e) {
@@ -596,6 +622,7 @@ class _NativeGitMirror implements NativeGitMirror {
         ['merge', '--no-commit', '--no-ff'],
         operands: [remote],
         extraConfig: _inkMergeDriver,
+        lazyNetwork: true,
       );
     } on GitCliException catch (e) {
       logWarning('mergeRemote: merge meldde botsingen (verwacht)', e);
@@ -621,7 +648,7 @@ class _NativeGitMirror implements NativeGitMirror {
     } on Exception catch (e) {
       logWarning('mergeRemote: samengevoegde commit mislukt', e);
       try {
-        await _run(['merge', '--abort']);
+        await _run(['merge', '--abort'], lazyNetwork: true);
       } on GitCliException catch (e2) {
         logWarning('mergeRemote: afbreken mislukt', e2);
       }
@@ -646,7 +673,11 @@ class _NativeGitMirror implements NativeGitMirror {
   /// De bytes van [path] op [ref], of null wanneer het er niet staat.
   Future<Uint8List?> _showAtRef(String ref, String path) async {
     try {
-      final res = await _run(['show'], operands: ['$ref:$path']);
+      final res = await _run(
+        ['show'],
+        operands: ['$ref:$path'],
+        lazyNetwork: true,
+      );
       return Uint8List.fromList(utf8.encode(res.stdout));
     } on GitCliException {
       return null;
@@ -670,6 +701,7 @@ class _NativeGitMirror implements NativeGitMirror {
       workingDirectory: _worktree.parent.path,
       config: await _networkConfig(),
       timeout: const Duration(minutes: 5),
+      allowedProtocol: Uri.parse(_config.baseUrl.trim()).scheme.toLowerCase(),
     );
   }
 
@@ -693,7 +725,7 @@ class _NativeGitMirror implements NativeGitMirror {
           : start;
       await _run(['branch'], operands: [branch, from]);
     }
-    await _run(['switch'], operands: [branch]);
+    await _run(['switch'], operands: [branch], lazyNetwork: true);
   }
 
   /// De naam van de uitgecheckte branch (`main`, of een werkbranch).

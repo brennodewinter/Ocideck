@@ -27,6 +27,7 @@ import 'support/git_test_env.dart';
 /// Vangt op wat er aan `git` zou zijn meegegeven, zonder een proces te starten.
 class _CapturingGitCli implements GitCli {
   final List<List<GitConfigOverride>> calls = [];
+  final List<String?> protocols = [];
 
   @override
   bool get isSupported => true;
@@ -41,8 +42,10 @@ class _CapturingGitCli implements GitCli {
     required String workingDirectory,
     List<GitConfigOverride> config = const [],
     Duration timeout = const Duration(seconds: 60),
+    String? allowedProtocol,
   }) async {
     calls.add(config);
+    protocols.add(allowedProtocol);
     return const GitResult(exitCode: 0, stdout: '', stderr: '');
   }
 }
@@ -103,23 +106,27 @@ void main() {
         reason: 'de hostnaam hoort aan het goedgekeurde adres gebonden te zijn',
       );
       expect(_valueOf(fetch, 'http.followRedirects'), 'false');
+      expect(git.protocols.first, 'https');
     });
 
-    test('een lokale aanroep krijgt de guard niet — die kost een DNS-lookup '
-        'en gaat de lijn niet op', () async {
-      final git = _CapturingGitCli();
-      final mirror = await _mirror(
-        _config('https://localhost:3000', trustedInternal: true),
-        git,
-        temp,
-      );
+    test(
+      'ook een fast-forward mag alleen beveiligd ontbrekende blobs ophalen',
+      () async {
+        final git = _CapturingGitCli();
+        final mirror = await _mirror(
+          _config('https://localhost:3000', trustedInternal: true),
+          git,
+          temp,
+        );
 
-      await mirror.prepareForOpen();
+        await mirror.prepareForOpen();
 
-      // prepareForOpen doet fetch (netwerk) en daarna merge --ff-only (lokaal).
-      final local = git.calls.last;
-      expect(_valueOf(local, 'http.curloptResolve'), isNull);
-    });
+        // Een fast-forward kan bij een partiële clone alsnog een blob ophalen.
+        final local = git.calls.last;
+        expect(_valueOf(local, 'http.curloptResolve'), isNotNull);
+        expect(git.protocols.last, 'https');
+      },
+    );
 
     test(
       'een privaat adres wordt geweigerd zolang het niet vertrouwd is',

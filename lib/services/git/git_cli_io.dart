@@ -63,7 +63,7 @@ class NativeGitCli implements GitCli {
     if (Platform.isMacOS) {
       try {
         final xc = await _runner(
-          'xcode-select',
+          '/usr/bin/xcode-select',
           const ['-p'],
           environment: await _hardenedEnv(),
           timeout: _probeTimeout,
@@ -76,7 +76,7 @@ class NativeGitCli implements GitCli {
 
     try {
       final res = await _runner(
-        'git',
+        _gitExecutable(),
         const ['--version'],
         environment: await _hardenedEnv(),
         timeout: _probeTimeout,
@@ -97,7 +97,12 @@ class NativeGitCli implements GitCli {
     required String workingDirectory,
     List<GitConfigOverride> config = const [],
     Duration timeout = const Duration(seconds: 30),
+    String? allowedProtocol,
   }) async {
+    if (allowedProtocol != null &&
+        !const {'file', 'http', 'https'}.contains(allowedProtocol)) {
+      throw const GitCliException('Git-protocol geweigerd');
+    }
     for (final operand in operands) {
       // Gebruikersdata is een operand, nooit een optie (§10.2): een waarde die
       // met `-` begint zou als vlag gelezen kunnen worden. Weiger vóór het
@@ -137,10 +142,13 @@ class NativeGitCli implements GitCli {
     ];
 
     final result = await _runner(
-      'git',
+      _gitExecutable(),
       argv,
       workingDirectory: workingDirectory,
-      environment: await _hardenedEnv(config: config),
+      environment: await _hardenedEnv(
+        config: config,
+        allowedProtocol: allowedProtocol,
+      ),
       timeout: timeout,
     );
     if (!result.ok) {
@@ -169,18 +177,12 @@ class NativeGitCli implements GitCli {
   /// meer. De kans dat ze wegvallen bij een échte gebruiker weegt zwaarder.
   /// `LANG`/`LC_ALL` staan hier bewust *niet* bij: die worden hieronder op `C`
   /// vastgezet. Zie [_hardenedEnv].
-  static const _carriedPosix = {
-    'PATH',
-    'TMPDIR',
-    'SSL_CERT_FILE',
-    'SSL_CERT_DIR',
-  };
+  static const _carriedPosix = {'TMPDIR', 'SSL_CERT_FILE', 'SSL_CERT_DIR'};
 
   /// Windows heeft er meer nodig om überhaupt een proces te kunnen starten:
-  /// zonder SystemRoot laden de socket-DLL's niet, en zonder PATHEXT vindt de
-  /// loader `git.exe` niet.
+  /// zonder SystemRoot laden de socket-DLL's niet, en PATHEXT is nodig voor
+  /// Git-hulpprocessen.
   static const _carriedWindows = {
-    'PATH',
     'PATHEXT',
     'SystemRoot',
     'SYSTEMROOT',
@@ -213,6 +215,7 @@ class NativeGitCli implements GitCli {
   /// overkomen doordat er iets in de schil stond.
   Future<Map<String, String>> _hardenedEnv({
     List<GitConfigOverride> config = const [],
+    String? allowedProtocol,
   }) async {
     final sandbox = await _sandbox();
     final devNull = Platform.isWindows ? 'NUL' : '/dev/null';
@@ -222,6 +225,11 @@ class NativeGitCli implements GitCli {
       // Alleen wat een proces nodig heeft om te kúnnen draaien.
       for (final entry in Platform.environment.entries)
         if (carried.contains(entry.key)) entry.key: entry.value,
+      'PATH': gitPathFromEnvironment(Platform.environment),
+      // Ook lokale git-opdrachten kunnen bij een partiële clone een blob
+      // ophalen. Alleen de aanroeper die de netwerkpoort passeerde opent het
+      // protocol voor die ene aanroep.
+      'GIT_ALLOW_PROTOCOL': allowedProtocol ?? '',
       'GIT_TERMINAL_PROMPT': '0',
       'GIT_CONFIG_NOSYSTEM': '1',
       'GIT_CONFIG_GLOBAL': devNull,
@@ -254,6 +262,18 @@ class NativeGitCli implements GitCli {
       }
     }
     return env;
+  }
+
+  String _gitExecutable() {
+    final name = Platform.isWindows ? 'git.exe' : 'git';
+    for (final dir in gitPathFromEnvironment(
+      Platform.environment,
+    ).split(Platform.isWindows ? ';' : ':')) {
+      if (dir.isEmpty) continue;
+      final candidate = File(p.join(dir, name));
+      if (candidate.existsSync()) return candidate.path;
+    }
+    throw const GitCliException('Git niet gevonden op een absoluut PATH');
   }
 
   /// De lege, app-eigen map die als HOME én als hooks-map dient. Eén keer
@@ -404,6 +424,26 @@ class NativeGitCli implements GitCli {
     }
     return GitResult(exitCode: exitCode, stdout: out.text, stderr: err.text);
   }
+}
+
+@visibleForTesting
+String safeGitPath(String path) => path
+    .split(Platform.isWindows ? ';' : ':')
+    .where((part) => part.isNotEmpty && p.isAbsolute(part))
+    .join(Platform.isWindows ? ';' : ':');
+
+@visibleForTesting
+String gitPathFromEnvironment(
+  Map<String, String> environment, {
+  bool? windows,
+}) {
+  final isWindows = windows ?? Platform.isWindows;
+  for (final entry in environment.entries) {
+    if (isWindows ? entry.key.toUpperCase() == 'PATH' : entry.key == 'PATH') {
+      return safeGitPath(entry.value);
+    }
+  }
+  return '';
 }
 
 /// Verzamelt bytes tot een cap; daarna gooit hij weg (maar telt door), zodat een

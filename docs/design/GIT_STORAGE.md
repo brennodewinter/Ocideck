@@ -594,7 +594,7 @@ from "save" is only shown when it is true; otherwise the user sees a single
   otherwise pull every video in the repo's entire history to open one deck: 4 GB
   of media would cost 4 GB to open a text file. With the filter, opening costs
   megabytes and blobs arrive on demand, which is the same lazy-fetch shape the
-  REST plane already has. Requires git ≥2.19 and forge support — Forgejo, GitHub
+  REST plane already has. Requires git ≥2.37 and forge support — Forgejo, GitHub
   and GitLab all have it (§14, D5).
 - Saving writes files locally and immediately (as desktop already works — a real
   `filePath`), then `git add` + `git commit`. Offline, this is a complete,
@@ -1546,8 +1546,8 @@ discussion still resolve.
   person made about one set of bytes.
 - **D8 — Minimum git version.** Required, and enforced by the probe. Below it the
   native plane is refused **wholesale** and the repo falls back to REST — never
-  feature-by-feature. `--filter=blob:none` (D5) puts the floor at **≥2.19**; pin
-  the exact number when Phase 3 starts (§8.4).
+  feature-by-feature. `--filter=blob:none` (D5) needs 2.19, and the pinned
+  `http.curloptResolve` connection (D8) raises the floor to **≥2.37**.
 - **D9 — Tag namespacing.** **`decks/<naam>/v1.0`**. Groups readably in forge UIs,
   makes tag-protection patterns (`decks/*/v*`) natural for a ref that is gated
   under P8, and avoids git's D/F conflict because `decks/<naam>` is never itself a

@@ -523,7 +523,7 @@ opgeslagen versie blijft opvraagbaar, wat een gewone map je niet kan geven.
   van de twee. Dit werkt zowel in de browser als op desktop met native `git`; op
   desktop wordt het een echte merge-commit, zodat `git log` de twee werklijnen laat
   zien die samenkomen.
-- **Native git (desktop):** als je `git` geïnstalleerd hebt (2.19 of nieuwer),
+- **Native git (desktop):** als je `git` geïnstalleerd hebt (2.37 of nieuwer),
   toont de git-verbinding in *Instellingen → Opslag* dat, en houdt OciDeck een echte
   kloon van de repository bij. Dan **is elke opslag een echte lokale commit** —
   duurzaam en offline: bewerk weg van een netwerk, sla zo vaak op als je wilt, en

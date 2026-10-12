@@ -490,7 +490,7 @@ saved version stays retrievable, which a plain folder cannot give you.
   deck's classification differs, the stricter of the two wins. This works both in
   the browser and on desktop with native `git`; on desktop it becomes a real
   merge commit, so `git log` shows the two lines of work coming together.
-- **Native git (desktop):** if you have `git` installed (2.19 or newer),
+- **Native git (desktop):** if you have `git` installed (2.37 or newer),
   the git connection in *Settings → Storage* shows it, and OciDeck keeps a real
   clone of the repository.
   Then **each save is a genuine local commit** — durable and offline: edit away

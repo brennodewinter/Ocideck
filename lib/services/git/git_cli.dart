@@ -64,10 +64,9 @@ class GitVersion implements Comparable<GitVersion> {
   String toString() => display;
 }
 
-/// De ondergrens (§8.2/D5/D8): `--filter=blob:none` — de partiële clone waar de
-/// hele native aanpak op leunt — vereist git ≥ 2.19. Daaronder wordt het native
-/// plane in zijn geheel geweigerd, nooit functie voor functie.
-const GitVersion kMinGitVersion = GitVersion(2, 19, 0);
+/// `http.curloptResolve` is vanaf 2.37 beschikbaar. Oudere versies kunnen de
+/// door NetGuard goedgekeurde bestemming niet betrouwbaar afdwingen.
+const GitVersion kMinGitVersion = GitVersion(2, 37, 0);
 
 /// Een config-sleutel/waarde die als `-c key=value` zou kunnen, maar via de
 /// omgeving (`GIT_CONFIG_*`) wordt aangeleverd wanneer de waarde geheim is.
@@ -229,6 +228,8 @@ abstract class GitCli {
   /// met `-` beginnen) en achter `--end-of-options` gezet, zodat een repo geen
   /// vlaggen kan smokkelen. [config] gaat via de omgeving mee; een geheime
   /// waarde (het token) komt zo nooit in argv terecht.
+  /// [allowedProtocol] opent uitsluitend voor deze opdracht het door de
+  /// netwerkpoort goedgekeurde Git-transport; zonder waarde is transport dicht.
   ///
   /// Gooit [GitCliException] bij een niet-nul exit, een tijdslimiet of een
   /// ongeldige operand.
@@ -238,5 +239,6 @@ abstract class GitCli {
     required String workingDirectory,
     List<GitConfigOverride> config,
     Duration timeout,
+    String? allowedProtocol,
   });
 }

@@ -67,8 +67,8 @@ void main() {
 
     test('vergelijkt op major/minor/patch', () {
       expect(GitVersion(2, 54, 0) >= kMinGitVersion, isTrue);
-      expect(GitVersion(2, 19, 0) >= kMinGitVersion, isTrue);
-      expect(GitVersion(2, 18, 9) >= kMinGitVersion, isFalse);
+      expect(GitVersion(2, 37, 0) >= kMinGitVersion, isTrue);
+      expect(GitVersion(2, 36, 9) >= kMinGitVersion, isFalse);
       expect(GitVersion(1, 99, 0) >= kMinGitVersion, isFalse);
     });
   });
@@ -141,6 +141,46 @@ void main() {
       expect(env['GIT_CONFIG_NOSYSTEM'], '1');
       expect(env['HOME'], sandbox.path);
       expect(env['GIT_CONFIG_GLOBAL'], anyOf('/dev/null', 'NUL'));
+      expect(env['GIT_ALLOW_PROTOCOL'], '');
+      expect(File(rec.calls.single.exe).isAbsolute, isTrue);
+    });
+
+    test('relatieve PATH-delen bereiken git of helpers niet', () {
+      final separator = Platform.isWindows ? ';' : ':';
+      final absolute = Platform.isWindows
+          ? r'C:\Program Files\Git\cmd'
+          : '/usr/bin';
+      expect(
+        safeGitPath(['.', absolute, 'tools', '', absolute].join(separator)),
+        '$absolute$separator$absolute',
+      );
+    });
+
+    test('Windows leest ook Path met andere hoofdletters', () {
+      final absolute = Platform.isWindows ? r'C:\Windows' : '/usr/bin';
+      expect(
+        gitPathFromEnvironment({'Path': absolute}, windows: true),
+        absolute,
+      );
+      expect(gitPathFromEnvironment({'Path': absolute}, windows: false), '');
+    });
+
+    test('alleen een expliciet toegestaan protocol mag de lijn op', () async {
+      await git.run(
+        ['fetch'],
+        workingDirectory: sandbox.path,
+        allowedProtocol: 'https',
+      );
+      expect(rec.calls.single.env!['GIT_ALLOW_PROTOCOL'], 'https');
+      await expectLater(
+        git.run(
+          ['fetch'],
+          workingDirectory: sandbox.path,
+          allowedProtocol: 'ssh',
+        ),
+        throwsA(isA<GitCliException>()),
+      );
+      expect(rec.calls, hasLength(1));
     });
 
     test('geen enkele GIT_*/SSH_* uit de schil komt mee (OQ-10)', () async {
@@ -260,7 +300,9 @@ void main() {
       final rec = _Recorder()
         ..respond = (exe, args) => GitResult(
           exitCode: 0,
-          stdout: exe == 'git' ? 'git version 2.54.0' : '/x',
+          stdout: exe.endsWith(Platform.isWindows ? 'git.exe' : 'git')
+              ? 'git version 2.54.0'
+              : '/x',
           stderr: '',
         );
       final version = await NativeGitCli(
@@ -270,8 +312,13 @@ void main() {
       expect(version?.display, '2.54.0');
       // Op macOS gaat xcode-select vóór git (de shim-val).
       if (Platform.isMacOS) {
-        expect(rec.calls.first.exe, 'xcode-select');
-        expect(rec.calls.any((c) => c.exe == 'git'), isTrue);
+        expect(rec.calls.first.exe, '/usr/bin/xcode-select');
+        expect(
+          rec.calls.any(
+            (c) => c.exe.endsWith(Platform.isWindows ? 'git.exe' : 'git'),
+          ),
+          isTrue,
+        );
       }
     });
 
@@ -279,7 +326,9 @@ void main() {
       final rec = _Recorder()
         ..respond = (exe, _) => GitResult(
           exitCode: 0,
-          stdout: exe == 'git' ? 'git version 2.10.0' : '/x',
+          stdout: exe.endsWith(Platform.isWindows ? 'git.exe' : 'git')
+              ? 'git version 2.10.0'
+              : '/x',
           stderr: '',
         );
       expect(
@@ -290,7 +339,8 @@ void main() {
 
     test('geeft null als git ontbreekt (nonzero exit)', () async {
       final rec = _Recorder()
-        ..respond = (exe, _) => exe == 'git'
+        ..respond = (exe, _) =>
+            exe.endsWith(Platform.isWindows ? 'git.exe' : 'git')
             ? const GitResult(exitCode: 127, stdout: '', stderr: 'not found')
             : const GitResult(exitCode: 0, stdout: '/x', stderr: '');
       expect(
@@ -309,7 +359,7 @@ void main() {
       expect(res.stdout, contains('git version'));
     });
 
-    test('probe() vindt echt git (≥ 2.19)', () async {
+    test('probe() vindt echt git (≥ 2.37)', () async {
       // Met een geïnjecteerde zandbak: de standaardmap komt uit path_provider,
       // en dat is een platformkanaal dat op de kale Dart-VM van `flutter test`
       // niet bestaat. In de app is die binding er altijd.
