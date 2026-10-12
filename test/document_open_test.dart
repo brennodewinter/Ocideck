@@ -138,6 +138,7 @@ void main() {
       final written = await saveDocument(
         MarkdownDocument.parse('![foto](${bron.path})\n'),
         path,
+        sourceProjectPath: temp.path,
       );
 
       expect(written!.source, contains('![foto](images/invoer.png)'));
@@ -146,6 +147,29 @@ void main() {
         png,
       );
     });
+
+    test(
+      'een absolute verwijzing buiten het bronproject wordt niet gekopieerd',
+      () async {
+        final bronDir = Directory(p.join(temp.path, 'bron'))..createSync();
+        final destDir = Directory(p.join(temp.path, 'doel'))..createSync();
+        final bron = File(p.join(temp.path, 'geheim.png'))
+          ..writeAsBytesSync(png);
+
+        final written = await saveDocument(
+          MarkdownDocument.parse('![foto](${bron.path})\n'),
+          p.join(destDir.path, 'doc.md'),
+          sourceProjectPath: bronDir.path,
+        );
+
+        expect(written, isNotNull);
+        expect(written!.source, contains(bron.path));
+        expect(
+          File(p.join(destDir.path, 'images', 'geheim.png')).existsSync(),
+          isFalse,
+        );
+      },
+    );
 
     test(
       'een document zonder verwijzingen maakt geen lege images/-map',

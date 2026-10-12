@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -77,6 +79,7 @@ Future<bool> saveDocumentWithDestination(
         path,
         diskHash,
         documentToSave,
+        sourceProjectPath: state.projectPath ?? p.dirname(path),
       );
       switch (outcome) {
         case _DocSaveOutcome.saved:
@@ -87,7 +90,11 @@ Future<bool> saveDocumentWithDestination(
           break; // overwrite: ga door met opslaan.
       }
     }
-    final written = await saveDocument(documentToSave, path);
+    final written = await saveDocument(
+      documentToSave,
+      path,
+      sourceProjectPath: state.projectPath ?? p.dirname(path),
+    );
     if (written != null) {
       // Werk de notifier bij met de versie zoals die op schijf staat —
       // mem:-verwijzingen zijn inmiddels images/-paden — zodat editor,
@@ -119,6 +126,9 @@ Future<bool> saveDocumentWithDestination(
         initialDirectory: ref
             .read(settingsProvider)
             .startDirectoryFor(document: true),
+        sourceProjectPath:
+            state.projectPath ??
+            (state.filePath == null ? null : p.dirname(state.filePath!)),
       );
   if (saved == null) return false;
   await _adoptSavedDocument(
@@ -215,8 +225,9 @@ Future<_DocSaveOutcome> _resolveDocumentConflict(
   DocumentNotifier notifier,
   String path,
   String fingerprint,
-  MarkdownDocument documentToSave,
-) async {
+  MarkdownDocument documentToSave, {
+  String? sourceProjectPath,
+}) async {
   for (;;) {
     if (!context.mounted) return _DocSaveOutcome.abort;
     var choice = await _showConflictDialog(context);
@@ -250,6 +261,7 @@ Future<_DocSaveOutcome> _resolveDocumentConflict(
               initialDirectory: ref
                   .read(settingsProvider)
                   .startDirectoryFor(document: true),
+              sourceProjectPath: sourceProjectPath,
             );
         if (saved == null) return _DocSaveOutcome.abort;
         if (!context.mounted) return _DocSaveOutcome.abort;

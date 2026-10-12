@@ -45,9 +45,11 @@ void main() {
           ..writeAsBytesSync([1, 2]);
         final project = Directory(p.join(tmp.path, 'project'))..createSync();
 
-        final out = await service.copyImagesToProject([
-          Slide.create(SlideType.image).copyWith(imagePath: src.path),
-        ], project.path);
+        final out = await service.copyImagesToProject(
+          [Slide.create(SlideType.image).copyWith(imagePath: src.path)],
+          project.path,
+          sourceProjectPath: tmp.path,
+        );
 
         expect(out.single.imagePath, 'images/photo.png');
         expect(
@@ -64,9 +66,11 @@ void main() {
       await descriptions.saveDescription(src.path, 'zon, zee');
       final project = Directory(p.join(tmp.path, 'project'))..createSync();
 
-      final out = await service.copyImagesToProject([
-        Slide.create(SlideType.image).copyWith(imagePath: src.path),
-      ], project.path);
+      final out = await service.copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: src.path)],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
 
       expect(out.single.imagePath, 'images/getagd.png');
       expect(
@@ -91,9 +95,11 @@ void main() {
       await descriptions.saveDescription(src.path, 'nieuwe tag');
       await descriptions.saveDescription(existing, 'bestaande tag');
 
-      final out = await service.copyImagesToProject([
-        Slide.create(SlideType.image).copyWith(imagePath: src.path),
-      ], project.path);
+      final out = await service.copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: src.path)],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
 
       // Byte-identiek → geen nieuwe kopie, wél samengevoegde tags.
       expect(out.single.imagePath, 'images/dubbel.png');
@@ -104,31 +110,58 @@ void main() {
 
     test('leaves already-relative image paths unchanged', () async {
       final project = Directory(p.join(tmp.path, 'project'))..createSync();
-      final out = await service.copyImagesToProject([
-        Slide.create(SlideType.image).copyWith(imagePath: 'images/keep.png'),
-      ], project.path);
+      final out = await service.copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: 'images/keep.png')],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
       expect(out.single.imagePath, 'images/keep.png');
     });
 
     test('leaves the path unchanged when the source file is missing', () async {
       final project = Directory(p.join(tmp.path, 'project'))..createSync();
       final missing = p.join(tmp.path, 'does_not_exist.png');
-      final out = await service.copyImagesToProject([
-        Slide.create(SlideType.image).copyWith(imagePath: missing),
-      ], project.path);
+      final out = await service.copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: missing)],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
       expect(out.single.imagePath, missing);
     });
+
+    test(
+      'leaves an absolute path unchanged without trusted provenance',
+      () async {
+        final src = File(p.join(tmp.path, 'outside.png'))
+          ..writeAsBytesSync([1]);
+        final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+        final out = await service.copyImagesToProject([
+          Slide.create(SlideType.image).copyWith(imagePath: src.path),
+        ], project.path);
+
+        expect(out.single.imagePath, src.path);
+        expect(
+          File(p.join(project.path, 'images', 'outside.png')).existsSync(),
+          isFalse,
+        );
+      },
+    );
 
     test('copies the second image of a twoImages slide', () async {
       final a = File(p.join(tmp.path, 'a.png'))..writeAsBytesSync([1]);
       final b = File(p.join(tmp.path, 'b.png'))..writeAsBytesSync([2]);
       final project = Directory(p.join(tmp.path, 'project'))..createSync();
 
-      final out = await service.copyImagesToProject([
-        Slide.create(
-          SlideType.twoImages,
-        ).copyWith(imagePath: a.path, imagePath2: b.path),
-      ], project.path);
+      final out = await service.copyImagesToProject(
+        [
+          Slide.create(
+            SlideType.twoImages,
+          ).copyWith(imagePath: a.path, imagePath2: b.path),
+        ],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
 
       expect(out.single.imagePath, 'images/a.png');
       expect(out.single.imagePath2, 'images/b.png');
@@ -142,9 +175,11 @@ void main() {
       final mem = WebAssetStore.put(bytes, name: 'plaatje.png');
       final project = Directory(p.join(tmp.path, 'project'))..createSync();
 
-      final out = await service.copyImagesToProject([
-        Slide.create(SlideType.image).copyWith(imagePath: mem),
-      ], project.path);
+      final out = await service.copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: mem)],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
 
       expect(out.single.imagePath, 'images/plaatje.png');
       final file = File(p.join(project.path, 'images', 'plaatje.png'));
@@ -157,9 +192,11 @@ void main() {
       // het pad blijft ongemoeid in plaats van naar een leeg bestand te wijzen.
       final project = Directory(p.join(tmp.path, 'project'))..createSync();
       const dangling = 'mem:00000000-0000-0000-0000-000000000000';
-      final out = await service.copyImagesToProject([
-        Slide.create(SlideType.image).copyWith(imagePath: dangling),
-      ], project.path);
+      final out = await service.copyImagesToProject(
+        [Slide.create(SlideType.image).copyWith(imagePath: dangling)],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
       expect(out.single.imagePath, dangling);
       expect(Directory(p.join(project.path, 'images')).listSync(), isEmpty);
     });
@@ -172,11 +209,15 @@ void main() {
         ..writeAsBytesSync([1, 2, 3]);
       final project = Directory(p.join(tmp.path, 'project'))..createSync();
 
-      final out = await service.copyImagesToProject([
-        Slide.create(SlideType.freeMarkdown).copyWith(
-          customMarkdown: 'Zie ![w:600 de foto](${src.path}) hierboven.',
-        ),
-      ], project.path);
+      final out = await service.copyImagesToProject(
+        [
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            customMarkdown: 'Zie ![w:600 de foto](${src.path}) hierboven.',
+          ),
+        ],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
 
       expect(
         out.single.customMarkdown,
@@ -203,9 +244,11 @@ void main() {
               ..writeAsBytesSync(bytes);
 
         final mem = WebAssetStore.put(bytes, name: 'logo.png');
-        final out = await service.copyImagesToProject([
-          Slide.create(SlideType.image).copyWith(imagePath: mem),
-        ], project.path);
+        final out = await service.copyImagesToProject(
+          [Slide.create(SlideType.image).copyWith(imagePath: mem)],
+          project.path,
+          sourceProjectPath: tmp.path,
+        );
 
         // Het pad wijst naar de bestaande afbeelding, niet naar een nieuw bestand.
         expect(out.single.imagePath, 'images/logo_bedrijf.png');
@@ -229,9 +272,11 @@ void main() {
 
         final newBytes = Uint8List.fromList([2, 2, 2]);
         final mem = WebAssetStore.put(newBytes, name: 'logo.png');
-        final out = await service.copyImagesToProject([
-          Slide.create(SlideType.image).copyWith(imagePath: mem),
-        ], project.path);
+        final out = await service.copyImagesToProject(
+          [Slide.create(SlideType.image).copyWith(imagePath: mem)],
+          project.path,
+          sourceProjectPath: tmp.path,
+        );
 
         expect(out.single.imagePath, 'images/logo_2.png');
         expect(

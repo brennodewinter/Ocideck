@@ -681,6 +681,8 @@ class SlideThumbnail extends ConsumerWidget {
                   // een andere map de bestanden kan meenemen (#2104).
                   ref.read(slideClipboardProvider.notifier).state =
                       absolutizeSlideAssetPaths(slide, projectPath);
+                  ref.read(slideClipboardSourceProjectProvider.notifier).state =
+                      projectPath;
                 }
                 if (v == 'copy_image') onCopyImage();
                 if (v == 'duplicate') onDuplicate();

@@ -189,7 +189,11 @@ extension _FileServiceProject on FileService {
     // toevallig aangemaakt door wie een CSV koppelde.
     await Directory(p.join(dir, chartDataDirName)).create(recursive: true);
 
-    final imageSlides = await _img.copyImagesToProject(deck.slides, dir);
+    final imageSlides = await _img.copyImagesToProject(
+      deck.slides,
+      dir,
+      sourceProjectPath: deck.projectPath,
+    );
     final mediaSlides = await _img.copyMediaToProject(imageSlides, dir);
     var updatedDeck = deck.copyWith(slides: mediaSlides, projectPath: dir);
     final logoAsset = await _copyLogoToProject(updatedDeck.themeProfile, dir);
