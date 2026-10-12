@@ -38,6 +38,7 @@ import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
 import 'import/utils/archive_utils.dart';
 import 'download_delivery.dart';
+import 'asset_staging.dart';
 import 'net/transport_failure.dart';
 import 'annotation_codec.dart';
 import 'document_integrity.dart';

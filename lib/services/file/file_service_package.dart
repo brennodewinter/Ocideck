@@ -353,16 +353,17 @@ extension FileServicePackage on FileService {
         if (resolved == null) return '';
         abs = resolved;
       } else if (deck.projectPath != null && allowExternal) {
-        // Theme profiles are trusted settings and may deliberately point at a
-        // logo outside the deck project.
         final resolved = resolveTrustedAssetPath(path, deck.projectPath);
         if (resolved == null) return '';
         abs = resolved;
-      } else if (p.isAbsolute(path)) {
-        // An unsaved deck may contain a user-picked absolute asset.
+      } else if (AssetStaging.isStagedPath(path)) {
+        final resolved = resolveContainedRealPath(path, AssetStaging.rootPath);
+        if (resolved == null) return '';
+        abs = resolved;
+      } else if (allowExternal && p.isAbsolute(path)) {
         abs = path;
       } else {
-        abs = path;
+        return '';
       }
       final file = File(abs);
       if (!await file.exists()) return null;

@@ -11,6 +11,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
+import 'package:ocideck/services/asset_staging.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/pdf_evidence_service.dart';
 import 'package:ocideck/utils/archive_limits.dart';
@@ -27,9 +28,11 @@ void main() {
       ImageService(),
       () => const ThemeProfile(),
     );
+    AssetStaging.overrideRootForTest(p.join(tmp.path, 'staging'));
   });
 
   tearDown(() {
+    AssetStaging.overrideRootForTest(null);
     if (tmp.existsSync()) tmp.deleteSync(recursive: true);
   });
 
@@ -40,12 +43,15 @@ void main() {
       final srcImg = File(p.join(tmp.path, 'pic.png'))
         ..writeAsBytesSync([1, 2, 3, 4]);
 
+      final staged = await AssetStaging.stage(srcImg.path, subdir: 'images');
+      expect(staged, isNotNull);
+      final stagedPath = staged!;
       final deck = Deck(
         title: 'Mijn Deck',
         slides: [
           Slide.create(
             SlideType.image,
-          ).copyWith(title: 'Foto', imagePath: srcImg.path),
+          ).copyWith(title: 'Foto', imagePath: stagedPath),
           Slide.create(
             SlideType.bullets,
           ).copyWith(title: 'Punten', bullets: ['een', 'twee']),
@@ -101,6 +107,24 @@ void main() {
     final markdown = utf8.decode(members['Containment.md']!);
     expect(markdown, isNot(contains(outside.path)));
     expect(markdown, isNot(contains(sneaky.path)));
+  });
+
+  test('unsaved package refuses untrusted local image paths', () async {
+    final outside = File(p.join(tmp.path, 'secret.png'))
+      ..writeAsBytesSync([1, 2, 3]);
+    final deck = Deck(
+      title: 'Unsaved',
+      slides: [
+        Slide.create(SlideType.image).copyWith(imagePath: outside.path),
+        Slide.create(SlideType.image).copyWith(imagePath: 'images/local.png'),
+      ],
+    );
+
+    final members = await file.buildPackageMembers(deck);
+    expect(members.keys.where((name) => name.startsWith('images/')), isEmpty);
+    final markdown = utf8.decode(members['Unsaved.md']!);
+    expect(markdown, isNot(contains(outside.path)));
+    expect(markdown, isNot(contains('images/local.png')));
   });
 
   test('project package keeps trusted external theme logos', () async {
@@ -176,13 +200,16 @@ void main() {
   test('export then import bundles an image from the free text', () async {
     final srcImg = File(p.join(tmp.path, 'tekstfoto.png'))
       ..writeAsBytesSync([5, 6, 7, 8]);
+    final staged = await AssetStaging.stage(srcImg.path, subdir: 'images');
+    expect(staged, isNotNull);
+    final stagedPath = staged!;
 
     final deck = Deck(
       title: 'Tekstdeck',
       slides: [
         Slide.create(SlideType.freeMarkdown).copyWith(
           title: 'Verhaal',
-          customMarkdown: 'Zie ![w:600 de foto](${srcImg.path}) hierboven.',
+          customMarkdown: 'Zie ![w:600 de foto]($stagedPath) hierboven.',
         ),
       ],
     );
@@ -269,12 +296,14 @@ void main() {
   });
 
   test('package bundles all nine images from an oversized question', () async {
-    final paths = [
-      for (var i = 0; i < 9; i++)
-        (File(
-          p.join(tmp.path, 'antwoord-$i.png'),
-        )..writeAsBytesSync([0x89, 0x50, 0x4e, 0x47, i])).path,
-    ];
+    final paths = <String>[];
+    for (var i = 0; i < 9; i++) {
+      final source = File(p.join(tmp.path, 'antwoord-$i.png'))
+        ..writeAsBytesSync([0x89, 0x50, 0x4e, 0x47, i]);
+      final staged = await AssetStaging.stage(source.path, subdir: 'images');
+      expect(staged, isNotNull);
+      paths.add(staged!);
+    }
     final question = const JsonEncoder.withIndent('  ').convert({
       'kind': 'imagePair',
       'prompt': 'Welke?',
