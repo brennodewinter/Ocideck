@@ -610,7 +610,13 @@ model.
   tamper-evidence, not tamper-proofing.
 - **Encrypted packages.** `.ocideck` packages can be encrypted
   (`lib/utils/zip_encryption.dart`, wired into `FileService`); an encrypted
-  package cannot be opened without its password.
+  package cannot be opened without its password. The password probe and every
+  extracted member share the package's output-byte ceiling. On web, ZIP
+  DEFLATE uses the archive inflater with OciDeck's capped output directly;
+  `archive` 4.3.0 otherwise inflates into an unbounded intermediate buffer
+  before invoking a caller-supplied output stream. AES authentication is
+  checked before decompression. A member whose declared size is false still
+  stops at the actual output limit.
 - **Atomic writes.** All persistence uses `writeStringAtomic`/`writeBytesAtomic`
   (`lib/utils/atomic_file.dart`) — write-to-temp-then-rename — so a crash never
   truncates a file. A `check_conventions` ratchet forbids raw

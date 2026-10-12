@@ -12,6 +12,7 @@ import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/pdf_evidence_service.dart';
+import 'package:ocideck/utils/archive_limits.dart';
 import 'package:path/path.dart' as p;
 
 void main() {
@@ -243,6 +244,60 @@ void main() {
           SlideType.bullets,
         ).copyWith(title: 'Punten', bullets: ['een', 'twee']),
       ],
+    );
+
+    test(
+      'versleutelde zip-bom stopt tijdens wachtwoordproef en extractie',
+      () async {
+        final expanded = List<int>.filled(64 * 1024, 65);
+        final archive = Archive()
+          ..addFile(ArchiveFile('deck.md', expanded.length, expanded));
+        final bytes = Uint8List.fromList(
+          ZipEncoder(password: 'pw').encode(archive),
+        );
+        // De inhoudsopgave liegt over de uitgepakte grootte: alleen de echte
+        // begrensde writer kan de overschrijding dan nog tegenhouden.
+        final directory = bytes.indexOf(0x50, 0);
+        var central = -1;
+        for (var i = directory; i < bytes.length - 28; i++) {
+          if (bytes[i] == 0x50 &&
+              bytes[i + 1] == 0x4b &&
+              bytes[i + 2] == 0x01 &&
+              bytes[i + 3] == 0x02) {
+            central = i;
+            break;
+          }
+        }
+        expect(central, isNonNegative);
+        bytes
+          ..[central + 24] = 64
+          ..[central + 25] = 0
+          ..[central + 26] = 0
+          ..[central + 27] = 0;
+        const limit = 4096;
+        expect(bytes.length, lessThan(limit));
+        expect(
+          () => file.canDecodePackage(bytes, 'pw', maxBytes: limit),
+          throwsA(isA<ExtractionLimitException>()),
+        );
+        expect(
+          file.decodePackageEntries(bytes, maxBytes: limit, password: 'pw'),
+          isNull,
+        );
+
+        var prompts = 0;
+        final outcome = await file.importPackageBytesDetailed(
+          bytes,
+          tmp.path,
+          maxBytes: limit,
+          onPassword: ({required bool retry}) async {
+            prompts++;
+            return 'pw';
+          },
+        );
+        expect(prompts, 1);
+        expect(outcome.failure, ImportFailure.tooLarge);
+      },
     );
 
     test('versleuteld pakket is detecteerbaar; onversleuteld niet', () async {

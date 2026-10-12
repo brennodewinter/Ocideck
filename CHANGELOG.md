@@ -61,6 +61,10 @@ All notable changes to OciDeck are documented in this file.
   sessiesleutels aan; een eenmaal geïnstalleerde epoch-sleutel kan niet door
   een andere sleutel worden vervangen. Deze XMPP-startfunctie heeft nog geen
   aanroep vanuit de productie-interface.
+- **Versleutelde pakketten stoppen bij de uitpaklimiet.** Zowel de
+  wachtwoordcontrole als het openen begrenzen nu werkelijk uitgepakte bytes.
+  In de browser wordt DEFLATE rechtstreeks naar die begrensde uitvoer geschreven;
+  een te groot pakket vraagt niet opnieuw om hetzelfde wachtwoord.
 - **Security: Git-verbindingen delen geen lokale werkkopie meer bij gelijkende adressen.**
   Poort, URL-pad, eigenaar, repository, forgetype en branch bepalen nu samen
   de opslagruimte. Een bestaande kloon met een afwijkende ophaal- of
