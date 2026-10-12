@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../../models/git_settings.dart';
+import '../file_service.dart';
 import '../../utils/atomic_file.dart';
 import 'draft_store.dart';
 
@@ -51,14 +52,20 @@ class FileDraftStore implements DraftStore {
   /// een eigen submap. Zonder dat deelden twee repo's met een gelijknamig deck
   /// dezelfde bestanden. Genegeerd wanneer [baseDir] wordt meegegeven — dan is
   /// de map al gekozen (de native mirror doet dat, en die scoopt zelf al).
-  FileDraftStore({Directory? baseDir, String scope = ''})
-    : _scope = baseDir != null ? '' : scope,
-      _resolveDir = baseDir != null
-          ? (() async => baseDir)
-          : (() => _defaultDir(scope));
+  FileDraftStore({
+    Directory? baseDir,
+    String scope = '',
+    this.maxPackageBytes = FileService.maxPackageBytes,
+    this.maxPackageEntries = FileService.maxPackageEntries,
+  }) : _scope = baseDir != null ? '' : scope,
+       _resolveDir = baseDir != null
+           ? (() async => baseDir)
+           : (() => _defaultDir(scope));
 
   /// Leeg wanneer de map van buiten kwam: dan scoopt de aanroeper al.
   final String _scope;
+  final int maxPackageBytes;
+  final int maxPackageEntries;
 
   final Future<Directory> Function() _resolveDir;
   Directory? _cached;
@@ -129,13 +136,36 @@ class FileDraftStore implements DraftStore {
       if (entry is Link) {
         throw DraftStoreUnsupported('Symbolische link in deck: ${entry.path}');
       }
+      if (entries.length == maxPackageEntries) {
+        throw DraftStoreUnsupported(
+          'Te veel onderdelen in deck: meer dan $maxPackageEntries',
+        );
+      }
       entries.add(entry);
     }
     return entries;
   }
 
+  void _checkBudget(int entries, int bytes) {
+    if (entries > maxPackageEntries) {
+      throw DraftStoreUnsupported(
+        'Te veel bestanden in deck: $entries (maximum $maxPackageEntries)',
+      );
+    }
+    if (bytes > maxPackageBytes) {
+      throw DraftStoreUnsupported(
+        'Deck is te groot: $bytes bytes (maximum $maxPackageBytes)',
+      );
+    }
+  }
+
   @override
   Future<void> writeDeck(String deckDir, Map<String, Uint8List> files) async {
+    var bytes = 0;
+    for (final file in files.values) {
+      bytes += file.length;
+    }
+    _checkBudget(files.length, bytes);
     // Eerst alle paden oplossen, dan pas schrijven: een deck half wegschrijven
     // en dan stranden op één slecht pad is erger dan niets schrijven.
     final targets = <String, Uint8List>{};
@@ -186,8 +216,13 @@ class FileDraftStore implements DraftStore {
   Future<Map<String, Uint8List>> readDeck(String deckDir) async {
     final base = await _base();
     final out = <String, Uint8List>{};
-    for (final entity in await _deckEntries(deckDir)) {
-      if (entity is! File) continue;
+    final entries = (await _deckEntries(deckDir)).whereType<File>().toList();
+    var bytes = 0;
+    for (final entity in entries) {
+      bytes += await entity.length();
+      _checkBudget(entries.length, bytes);
+    }
+    for (final entity in entries) {
       final rel = p.relative(entity.path, from: base.path);
       out[p.posix.joinAll(p.split(rel))] = await entity.readAsBytes();
     }
