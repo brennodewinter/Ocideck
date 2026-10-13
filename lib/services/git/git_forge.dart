@@ -319,6 +319,8 @@ abstract class GitForge {
     int number, {
     PullRequestMergeMethod method = PullRequestMergeMethod.merge,
     bool deleteBranch = false,
+    String? expectedHeadSha,
+    String? expectedBaseBranch,
   });
 
   /// De open pull request met [head] als bronbranch, of null als er geen is. Zo
