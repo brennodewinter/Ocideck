@@ -81,6 +81,9 @@ bool isRenderPathContained(String resolved, String projectPath) {
 
 bool _missingPathInsideRealBase(String resolved, String projectPath) {
   try {
+    if (!Directory(projectPath).existsSync()) {
+      return p.isWithin(p.normalize(projectPath), p.normalize(resolved));
+    }
     final realBase = Directory(projectPath).resolveSymbolicLinksSync();
     var ancestor = resolved;
     while (FileSystemEntity.typeSync(ancestor, followLinks: false) ==
