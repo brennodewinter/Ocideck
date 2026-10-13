@@ -322,9 +322,6 @@ Widget? _deckAssetImage(
     DeckAssetScope.maybeOf(context),
   );
   if (deckAsset == null) return null;
-  if (!SlideLinkScope.allowRemoteMediaOf(context)) {
-    return _remoteBlockedPlaceholder(context, deckAsset);
-  }
   return styled(
     RetryingImage(
       image: guardedNetworkImage(deckAsset),

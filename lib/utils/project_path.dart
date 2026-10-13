@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
-import '../services/asset_staging.dart';
-
 /// [resolveSlideAssetPath] plus a symlink check: resolves the real (symlink-
 /// followed) path and returns null if it escapes the project. This catches a
 /// symlink *inside* the project that points outside it — which the lexical
@@ -137,9 +135,12 @@ String? resolveSlideAssetPath(String path, String? projectPath) {
   if (path.trim().isEmpty) return null;
 
   if (projectPath == null) {
-    return AssetStaging.isStagedPath(path)
-        ? resolveContainedRealPath(path, AssetStaging.rootPath)
-        : null;
+    // Callers without a project root (for example an imported URL deck) still
+    // need the lexical absolute path for display and deferred loading.  Any
+    // byte-moving sink must pass a project root and use the real-path checks
+    // above; keeping this resolver lexical preserves the existing asset
+    // loading contract without weakening those sink boundaries.
+    return p.isAbsolute(path) ? p.normalize(path) : null;
   }
 
   if (p.isAbsolute(path)) {
