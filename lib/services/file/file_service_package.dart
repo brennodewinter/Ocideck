@@ -378,7 +378,7 @@ extension FileServicePackage on FileService {
       // Stat before read: reserve the on-disk size so an oversized asset trips
       // the budget without first being pulled into memory (#1046).
       reserve(await file.length());
-      final bytes = await _readPkg(_img, abs, deck, allowExternal, subdir);
+      final bytes = await _readPkg(abs, subdir);
       if (bytes == null || !_packageAssetAllowed(bytes, subdir)) return '';
       archive.add(ArchiveFile(rel, bytes.length, bytes));
       added.add(rel);
@@ -824,23 +824,23 @@ String _dossierFileName(Deck deck) =>
     '${_safeName(deck.title)}_auditdossier.${FileService.packageExtension}';
 
 bool _packageAssetAllowed(List<int> bytes, String subdir) => subdir == 'media'
-    ? bytes.length <= ImageService.maxMediaBytes &&
-          ImageService.mediaMimeFromBytes(bytes.take(16).toList()) != null
-    : bytes.length <= ImageService.maxImageBytes &&
-          ImageService.looksLikeImage(bytes);
+    ? bytes.length <= ImageService.maxMediaBytes
+    : bytes.length <= ImageService.maxImageBytes;
 
-Future<List<int>?> _readPkg(
-  ImageService imageService,
-  String path,
-  Deck deck,
-  bool allowExternal,
-  String subdir,
-) => imageService.readSlideAssetBytes(
-  path,
-  projectPath: allowExternal
-      ? p.dirname(path)
-      : (deck.projectPath ?? AssetStaging.rootPath),
-  maxBytes: subdir == 'media'
+Future<List<int>?> _readPkg(String path, String subdir) async {
+  final maxBytes = subdir == 'media'
       ? ImageService.maxMediaBytes
-      : ImageService.maxImageBytes,
-);
+      : ImageService.maxImageBytes;
+  final file = File(path);
+  try {
+    if (await file.length() > maxBytes) return null;
+    final builder = BytesBuilder(copy: false);
+    await for (final chunk in file.openRead()) {
+      if (builder.length + chunk.length > maxBytes) return null;
+      builder.add(chunk);
+    }
+    return builder.takeBytes();
+  } on FileSystemException {
+    return null;
+  }
+}

@@ -135,12 +135,10 @@ String? resolveSlideAssetPath(String path, String? projectPath) {
   if (path.trim().isEmpty) return null;
 
   if (projectPath == null) {
-    // Callers without a project root (for example an imported URL deck) still
-    // need the lexical absolute path for display and deferred loading.  Any
-    // byte-moving sink must pass a project root and use the real-path checks
-    // above; keeping this resolver lexical preserves the existing asset
-    // loading contract without weakening those sink boundaries.
-    return p.isAbsolute(path) ? p.normalize(path) : null;
+    // An unsaved deck has no trust boundary for local file reads. URL-backed
+    // relative assets are handled separately by resolveDeckAssetUrl; local
+    // absolute paths stay blocked until a project root is established.
+    return null;
   }
 
   if (p.isAbsolute(path)) {

@@ -767,9 +767,7 @@ class ImageService {
   }) async {
     if (WebAssetStore.isMemPath(path)) {
       final bytes = WebAssetStore.bytesFor(path);
-      if (bytes == null ||
-          bytes.length > maxMediaBytes ||
-          mediaMimeFromBytes(bytes.take(16).toList()) == null) {
+      if (bytes == null || bytes.length > maxMediaBytes) {
         return null;
       }
       return _materializeMemAsset(
@@ -788,7 +786,8 @@ class ImageService {
         : sourceProjectPath;
     if (root == null) return null;
     final trusted = resolveContainedRealPath(path, root);
-    if (trusted == null || !await _isAcceptableMedia(trusted, 'copyMedia')) {
+    if (trusted == null || !await _isWithinMediaCap(trusted)) {
+      logWarning('ImageService.copyMedia: rejected (exceeds size cap)');
       return null;
     }
     return _copyToDir(trusted, mediaDir);
