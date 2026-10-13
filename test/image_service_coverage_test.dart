@@ -88,11 +88,11 @@ void main() {
       expect(bytes, _pngBytes);
     });
 
-    test('reads an absolute path when there is no project', () async {
+    test('refuses an absolute path when there is no project', () async {
       final abs = File(p.join(tmp.path, 'loose.png'));
       await abs.writeAsBytes(_pngBytes);
       final bytes = await service.readSlideImageBytes(abs.path);
-      expect(bytes, _pngBytes);
+      expect(bytes, isNull);
     });
 
     test('refuses a path that escapes the project', () async {
@@ -271,7 +271,11 @@ void main() {
       final slide = Slide.create(
         SlideType.bullets,
       ).copyWith(videoPath: video.path, audioPath: audio.path);
-      final out = await service.copyMediaToProject([slide], project.path);
+      final out = await service.copyMediaToProject(
+        [slide],
+        project.path,
+        sourceProjectPath: tmp.path,
+      );
 
       expect(out.single.videoPath, 'media/clip.mp4');
       expect(out.single.audioPath, 'media/sound.mp3');

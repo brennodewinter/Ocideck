@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -86,11 +87,14 @@ class _RecordingVideoPlayerPlatform extends VideoPlayerPlatform {
 
 void main() {
   late _RecordingVideoPlayerPlatform fake;
+  late Directory project;
 
   setUp(() {
     fake = _RecordingVideoPlayerPlatform();
     VideoPlayerPlatform.instance = fake;
+    project = Directory.systemTemp.createTempSync('ocideck_media_lifecycle');
   });
+  tearDown(() => project.deleteSync(recursive: true));
 
   // Laat de async init-/teardown-keten lopen. De controller-teardown sluit een
   // stream-subscription, en dat voltooit alleen op de echte event-loop (niet
@@ -123,6 +127,7 @@ void main() {
               height: 180,
               child: SlidePreviewWidget(
                 slide: slide,
+                projectPath: project.path,
                 enableMedia: true,
                 autoplayMedia: autoplayMedia,
                 onVideoComplete: onVideoComplete,
@@ -140,7 +145,7 @@ void main() {
   ).copyWith(videoPath: path, videoAutoplay: autoplay);
 
   testWidgets('video pauses before it is disposed on teardown', (tester) async {
-    await pumpSlide(tester, videoSlide('/clip-a.mp4'));
+    await pumpSlide(tester, videoSlide('clip-a.mp4'));
     await settle(tester);
     expect(fake.calls, contains('play#0'));
 
@@ -157,13 +162,13 @@ void main() {
   testWidgets('switching slides disposes the old controller and starts the new', (
     tester,
   ) async {
-    await pumpSlide(tester, videoSlide('/clip-a.mp4'));
+    await pumpSlide(tester, videoSlide('clip-a.mp4'));
     await settle(tester);
     expect(fake.calls, contains('create#0'));
     expect(fake.calls, contains('play#0'));
 
     // Snel naar een andere videodia: didUpdateWidget her-initialiseert.
-    await pumpSlide(tester, videoSlide('/clip-b.mp4'));
+    await pumpSlide(tester, videoSlide('clip-b.mp4'));
     await settle(tester);
 
     // De oude controller is opgeruimd, de nieuwe speelt — geen dubbele weergave.
@@ -187,7 +192,7 @@ void main() {
     var completions = 0;
     await pumpSlide(
       tester,
-      videoSlide('/clip-a.mp4'),
+      videoSlide('clip-a.mp4'),
       onVideoComplete: () => completions++,
     );
     await settle(tester);
@@ -211,7 +216,7 @@ void main() {
     var completions = 0;
     await pumpSlide(
       tester,
-      videoSlide('/clip-a.mp4', autoplay: false),
+      videoSlide('clip-a.mp4', autoplay: false),
       autoplayMedia: false,
       onVideoComplete: () => completions++,
     );
@@ -231,7 +236,7 @@ void main() {
     var completions = 0;
     final slide = Slide.create(
       SlideType.bullets,
-    ).copyWith(audioPath: '/voice.mp3', audioAutoplay: true);
+    ).copyWith(audioPath: 'voice.mp3', audioAutoplay: true);
     await pumpSlide(tester, slide, onAudioComplete: () => completions++);
     await settle(tester);
 

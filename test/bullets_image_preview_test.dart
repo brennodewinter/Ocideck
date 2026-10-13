@@ -55,7 +55,10 @@ void main() {
                 child: SizedBox(
                   width: 800,
                   height: 450,
-                  child: SlidePreviewWidget(slide: slide),
+                  child: SlidePreviewWidget(
+                    slide: slide,
+                    projectPath: dir.path,
+                  ),
                 ),
               ),
             ),

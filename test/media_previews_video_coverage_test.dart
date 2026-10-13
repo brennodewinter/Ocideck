@@ -179,6 +179,8 @@ class _FakeWebViewWidget extends PlatformWebViewWidget {
 }
 
 // ── Host + helpers ───────────────────────────────────────────────────────────
+late Directory _localProject;
+
 Widget _host(
   Slide slide, {
   String? projectPath,
@@ -195,7 +197,7 @@ Widget _host(
           height: 360,
           child: SlidePreviewWidget(
             slide: slide,
-            projectPath: projectPath,
+            projectPath: projectPath ?? _localProject.path,
             enableMedia: enableMedia,
             autoplayMedia: autoplayMedia,
             allowRemoteMedia: allowRemoteMedia,
@@ -244,14 +246,16 @@ void main() {
     VideoPlayerPlatform.instance = fakeVideo;
     fakeWeb = _FakeWebViewPlatform();
     WebViewPlatform.instance = fakeWeb;
+    _localProject = Directory.systemTemp.createTempSync('ocideck_video');
   });
+  tearDown(() => _localProject.deleteSync(recursive: true));
 
   // ── Local file ─────────────────────────────────────────────────────────────
   testWidgets('local file renders a VideoPlayer and a play control', (
     tester,
   ) async {
     await tester.pumpWidget(
-      _host(_video(path: '/clip.mp4', title: 'Local clip')),
+      _host(_video(path: 'clip.mp4', title: 'Local clip')),
     );
     await settle(tester);
 
@@ -264,7 +268,7 @@ void main() {
   testWidgets('hovering reveals the control and tapping toggles play/pause', (
     tester,
   ) async {
-    await tester.pumpWidget(_host(_video(path: '/clip.mp4')));
+    await tester.pumpWidget(_host(_video(path: 'clip.mp4')));
     await settle(tester);
 
     final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
@@ -291,7 +295,7 @@ void main() {
   ) async {
     await tester.pumpWidget(
       _host(
-        _video(path: '/clip.mp4', startMs: 5000, endMs: 12000, autoplay: true),
+        _video(path: 'clip.mp4', startMs: 5000, endMs: 12000, autoplay: true),
         autoplayMedia: true,
       ),
     );
@@ -307,7 +311,7 @@ void main() {
     var completions = 0;
     await tester.pumpWidget(
       _host(
-        _video(path: '/clip.mp4', autoplay: true),
+        _video(path: 'clip.mp4', autoplay: true),
         autoplayMedia: true,
         onVideoComplete: () => completions++,
       ),
@@ -381,11 +385,11 @@ void main() {
   testWidgets('re-pumping with a new local path re-initialises the player', (
     tester,
   ) async {
-    await tester.pumpWidget(_host(_video(path: '/a.mp4')));
+    await tester.pumpWidget(_host(_video(path: 'a.mp4')));
     await settle(tester);
     expect(find.byType(VideoPlayer), findsOneWidget);
 
-    await tester.pumpWidget(_host(_video(path: '/b.mp4')));
+    await tester.pumpWidget(_host(_video(path: 'b.mp4')));
     await settle(tester);
     expect(find.byType(VideoPlayer), findsOneWidget);
     expect(tester.takeException(), isNull);

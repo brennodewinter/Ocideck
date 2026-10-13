@@ -215,8 +215,9 @@ void main() {
                 slide: Slide(
                   id: 'c',
                   type: SlideType.image,
-                  imagePath: '/no/such/content-image.png',
+                  imagePath: 'content-image.png',
                 ),
+                projectPath: Directory.systemTemp.path,
               ),
             ),
           ),
@@ -253,7 +254,11 @@ void main() {
       );
 
       final key = GlobalKey();
-      final cap = await _capture(tester, key, SlidePreviewWidget(slide: slide));
+      final cap = await _capture(
+        tester,
+        key,
+        SlidePreviewWidget(slide: slide, projectPath: dir.path),
+      );
 
       ({int r, int g, int b}) pixelAt(double fx, double fy) {
         final x = (cap.width * fx).round().clamp(0, cap.width - 1);
@@ -301,7 +306,11 @@ void main() {
       );
 
       final key = GlobalKey();
-      final cap = await _capture(tester, key, SlidePreviewWidget(slide: slide));
+      final cap = await _capture(
+        tester,
+        key,
+        SlidePreviewWidget(slide: slide, projectPath: dir.path),
+      );
 
       final cx = cap.width ~/ 2;
       final cy = cap.height ~/ 2;
@@ -342,7 +351,11 @@ void main() {
       );
 
       final key = GlobalKey();
-      final cap = await _capture(tester, key, SlidePreviewWidget(slide: slide));
+      final cap = await _capture(
+        tester,
+        key,
+        SlidePreviewWidget(slide: slide, projectPath: dir.path),
+      );
 
       ({int r, int g, int b}) pixelAt(double fx, double fy) {
         final x = (cap.width * fx).round().clamp(0, cap.width - 1);

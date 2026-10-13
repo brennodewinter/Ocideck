@@ -95,6 +95,7 @@ void main() {
     final notifier = _deckNotifier(
       Deck(
         title: 'proef',
+        projectPath: dir.path,
         slides: [
           Slide.create(SlideType.title).copyWith(title: 'Titel'),
           Slide.create(SlideType.image).copyWith(imagePath: path),
@@ -126,6 +127,7 @@ void main() {
     final notifier = _deckNotifier(
       Deck(
         title: 'proef',
+        projectPath: dir.path,
         slides: [Slide.create(SlideType.image).copyWith(imagePath: path)],
       ),
     );

@@ -833,9 +833,9 @@ void main() {
       );
     });
 
-    // Bij een beeldparen-vraag is de afbeelding het antwoord zelf. Ontbreekt
-    // ze, dan staat er in de zaal een lege tegel waar een antwoord hoort.
-    test('detects a missing answer image on an image-pair question', () {
+    // Zonder projectmap mag een externe bestandsnaam geen bestaanstest worden.
+    // De inhoudelijke afbeeldingscontrole begint zodra het deck een map heeft.
+    test('skips answer image file checks without a project path', () {
       final deck = Deck(
         title: 'Demo',
         slides: [
@@ -861,14 +861,13 @@ void main() {
             .issues
             .where((i) => i.kind == SlideQualityIssueKind.missingMediaFile)
             .length,
-        2,
+        0,
       );
     });
 
-    // Juist een deck dat nog niet is opgeslagen heeft de grootste kans op een
-    // kapotte verwijzing — daar hangt de slide nog aan een pad elders op de
-    // schijf. Tot voor kort zweeg de controle precies daar.
-    test('detects a missing file in a deck that has no project path', () {
+    // Een onopgeslagen deck heeft nog geen vertrouwde map. De kwaliteitsanalyse
+    // mag een absoluut pad daar niet als bestaan-orakel gebruiken.
+    test('skips file existence checks without a project path', () {
       final deck = Deck(
         title: 'Demo',
         slides: [
@@ -883,7 +882,7 @@ void main() {
             .analyze(deck)
             .issues
             .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
-        isTrue,
+        isFalse,
       );
     });
 
