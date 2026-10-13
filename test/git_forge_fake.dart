@@ -92,7 +92,7 @@ class FakePull {
   FakePull({required this.number, required this.head, required this.base});
   final int number;
   final String head;
-  final String base;
+  String base;
   bool merged = false;
 }
 
@@ -102,6 +102,13 @@ class FakeForge implements GitForge {
   FakeForge(this.repo);
 
   final FakeRepo repo;
+
+  /// Test hook for the race between the final read and the provider merge.
+  void Function()? beforeMerge;
+
+  /// Test hook for a PR retargeted between the two final PR reads.
+  void Function()? beforeSecondPullRequestLookup;
+  int _pullRequestLookupCount = 0;
 
   void _requireRef(String ref) {
     final r = ref.trim();
@@ -279,6 +286,8 @@ class FakeForge implements GitForge {
     int number, {
     PullRequestMergeMethod method = PullRequestMergeMethod.merge,
     bool deleteBranch = false,
+    String? expectedHeadSha,
+    String? expectedBaseBranch,
   }) async {
     final pull = repo.pulls.firstWhere(
       (p) => p.number == number,
@@ -287,9 +296,25 @@ class FakeForge implements GitForge {
         'Pull request niet gevonden',
       ),
     );
+    beforeMerge?.call();
+    beforeMerge = null;
+    final headSha = repo.resolveSha(pull.head);
+    if (expectedHeadSha != null && expectedHeadSha != headSha) {
+      throw const GitForgeException(
+        GitForgeError.server,
+        'De pull request is gewijzigd sinds de laatste controle',
+      );
+    }
+    if (expectedBaseBranch != null &&
+        pull.base.trim() != expectedBaseBranch.trim()) {
+      throw const GitForgeException(
+        GitForgeError.server,
+        'De pull request verwijst naar een andere doelbranch',
+      );
+    }
     // Merge = de base-branch schuift naar de head-commit.
     pull.merged = true;
-    repo.branches[pull.base.trim()] = repo.resolveSha(pull.head);
+    repo.branches[pull.base.trim()] = headSha;
     if (deleteBranch) repo.branches.remove(pull.head.trim());
     return PullRequestRef(
       number: number,
@@ -302,6 +327,11 @@ class FakeForge implements GitForge {
   @override
   Future<PullRequestRef?> pullRequestForBranch(String head) async {
     _requireRef(head);
+    _pullRequestLookupCount++;
+    if (_pullRequestLookupCount == 2) {
+      beforeSecondPullRequestLookup?.call();
+      beforeSecondPullRequestLookup = null;
+    }
     for (final p in repo.pulls) {
       if (!p.merged && p.head.trim() == head.trim()) {
         return PullRequestRef(

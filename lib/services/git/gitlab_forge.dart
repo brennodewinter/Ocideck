@@ -467,6 +467,8 @@ class GitLabForge with ForgeHttp implements GitForge, CodeSearchCapable {
     int number, {
     PullRequestMergeMethod method = PullRequestMergeMethod.merge,
     bool deleteBranch = false,
+    String? expectedHeadSha,
+    String? expectedBaseBranch,
   }) async {
     if (number <= 0) {
       throw const GitForgeException(
@@ -474,16 +476,28 @@ class GitLabForge with ForgeHttp implements GitForge, CodeSearchCapable {
         'Ongeldig merge-request-nummer',
       );
     }
-    final response = await sendJson(
-      'PUT',
-      ['merge_requests', '$number', 'merge'],
-      {
-        // GitLab kent squash als vlag, niet als merge-methode; rebase is een
-        // aparte endpoint. Voor onze doeleinden is de gewone merge genoeg.
-        if (method == PullRequestMergeMethod.squash) 'squash': true,
-        'should_remove_source_branch': deleteBranch,
-      },
-    );
+    if (expectedBaseBranch != null) {
+      final current = _pullRef(await getJson(['merge_requests', '$number']));
+      if (current?.base.trim() != expectedBaseBranch.trim()) {
+        throw const GitForgeException(
+          GitForgeError.server,
+          'De merge request verwijst naar een andere doelbranch',
+        );
+      }
+    }
+    final payload = <String, Object?>{
+      // GitLab kent squash als vlag, niet als merge-methode; rebase is een
+      // aparte endpoint. Voor onze doeleinden is de gewone merge genoeg.
+      if (method == PullRequestMergeMethod.squash) 'squash': true,
+      'should_remove_source_branch': deleteBranch,
+    };
+    final sha = expectedHeadSha;
+    if (sha is String) payload['sha'] = sha;
+    final response = await sendJson('PUT', [
+      'merge_requests',
+      '$number',
+      'merge',
+    ], payload);
     // 405 = niet mergebaar (openstaande discussies, pipelines), 409 = verzet.
     if (response.status == 405 || response.status == 409) {
       throw const GitForgeException(

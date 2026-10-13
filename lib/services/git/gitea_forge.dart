@@ -461,6 +461,8 @@ class GiteaForge with ForgeHttp implements GitForge {
     int number, {
     PullRequestMergeMethod method = PullRequestMergeMethod.merge,
     bool deleteBranch = false,
+    String? expectedHeadSha,
+    String? expectedBaseBranch,
   }) async {
     if (number <= 0) {
       throw const GitForgeException(
@@ -468,11 +470,24 @@ class GiteaForge with ForgeHttp implements GitForge {
         'Ongeldig pull-request-nummer',
       );
     }
-    final response = await sendJson(
-      'POST',
-      ['pulls', '$number', 'merge'],
-      {'Do': method.name, if (deleteBranch) 'delete_branch_after_merge': true},
-    );
+    if (expectedBaseBranch != null) {
+      final current = _pullRef(await getJson(['pulls', '$number']));
+      if (current?.base.trim() != expectedBaseBranch.trim()) {
+        throw const GitForgeException(
+          GitForgeError.server,
+          'De pull request verwijst naar een andere doelbranch',
+        );
+      }
+    }
+    final payload = <String, Object?>{'Do': method.name};
+    if (deleteBranch) payload['delete_branch_after_merge'] = true;
+    final sha = expectedHeadSha;
+    if (sha is String) payload['head_commit_id'] = sha;
+    final response = await sendJson('POST', [
+      'pulls',
+      '$number',
+      'merge',
+    ], payload);
     // Gitea meldt "kan nog niet mergen" (open reviews, conflicten) als 405.
     if (response.status == 405) {
       throw const GitForgeException(

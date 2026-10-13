@@ -68,39 +68,15 @@ extension TabsNotifierGitReview on TabsNotifier {
   Future<MergeResult> mergeConcept(
     GitForge forge, {
     required GitRepoConfig config,
+    required AppSettings settings,
     bool prune = true,
-  }) async {
-    final tab = currentState.current;
-    final origin = tab?.gitOrigin;
-    if (origin == null || !origin.matchesRepo(config)) {
-      return const MergeResult(status: MergeStatus.notOnWorkBranch);
-    }
-    if (origin.branch == config.defaultBranch) {
-      return const MergeResult(status: MergeStatus.notOnWorkBranch);
-    }
-
-    try {
-      final pr = await forge.pullRequestForBranch(origin.branch);
-      if (pr == null) {
-        return const MergeResult(status: MergeStatus.noPullRequest);
-      }
-      await forge.mergePullRequest(pr.number, deleteBranch: prune);
-      // Het concept is nu deel van de standaardbranch: takt daar weer op vast.
-      final head = await forge.headSha(config.defaultBranch);
-      tab!.gitOrigin = GitOrigin(
-        config: config,
-        branch: config.defaultBranch,
-        deckDir: origin.deckDir,
-        baseSha: head,
-        connectionId: origin.connectionId,
-      );
-      refreshTabs();
-      return const MergeResult(status: MergeStatus.merged);
-    } on GitForgeException catch (e) {
-      logWarning('mergeConcept: mergen mislukt', e);
-      return MergeResult(status: MergeStatus.failed, message: e.message);
-    }
-  }
+  }) => _mergeConcept(
+    this,
+    forge,
+    config: config,
+    settings: settings,
+    prune: prune,
+  );
 
   /// Leg de huidige versie van dit deck vast als release-tag `decks/<naam>/vX`
   /// op de kop van de standaardbranch (§9.4/D9). Achter dezelfde fail-closed
@@ -152,6 +128,124 @@ extension TabsNotifierGitReview on TabsNotifier {
   }
 }
 
+Future<MergeResult> _mergeConcept(
+  TabsNotifier tabs,
+  GitForge forge, {
+  required GitRepoConfig config,
+  required AppSettings settings,
+  required bool prune,
+}) async {
+  final tab = tabs.currentState.current;
+  final origin = tab?.gitOrigin;
+  if (origin == null || !origin.matchesRepo(config)) {
+    return const MergeResult(status: MergeStatus.notOnWorkBranch);
+  }
+  if (origin.branch == config.defaultBranch) {
+    return const MergeResult(status: MergeStatus.notOnWorkBranch);
+  }
+
+  try {
+    final pr = await forge.pullRequestForBranch(origin.branch);
+    if (pr == null) return const MergeResult(status: MergeStatus.noPullRequest);
+    if (pr.base.trim() != config.defaultBranch.trim()) {
+      return const MergeResult(
+        status: MergeStatus.failed,
+        message: 'De review verwijst naar een andere doelbranch.',
+      );
+    }
+    final checked = await _checkMergeHead(
+      tabs,
+      forge,
+      config: config,
+      settings: settings,
+      origin: origin,
+      pr: pr,
+    );
+    if (checked.result != null) return checked.result!;
+    await forge.mergePullRequest(
+      pr.number,
+      deleteBranch: prune,
+      expectedHeadSha: checked.head,
+      expectedBaseBranch: config.defaultBranch,
+    );
+    final head = await forge.headSha(config.defaultBranch);
+    tab!.gitOrigin = GitOrigin(
+      config: config,
+      branch: config.defaultBranch,
+      deckDir: origin.deckDir,
+      baseSha: head,
+      connectionId: origin.connectionId,
+    );
+    tabs.refreshTabs();
+    return const MergeResult(status: MergeStatus.merged);
+  } on GitForgeException catch (e) {
+    logWarning('mergeConcept: mergen mislukt', e);
+    return MergeResult(status: MergeStatus.failed, message: e.message);
+  }
+}
+
+Future<({String head, MergeResult? result})> _checkMergeHead(
+  TabsNotifier tabs,
+  GitForge forge, {
+  required GitRepoConfig config,
+  required AppSettings settings,
+  required GitOrigin origin,
+  required PullRequestRef pr,
+}) async {
+  final checkedHead = await forge.headSha(origin.branch);
+  final current = await tabs.readVersionDeck(
+    forge,
+    config: config,
+    deckDir: origin.deckDir,
+    tag: checkedHead,
+  );
+  final deck = current.deck;
+  if (deck == null) {
+    return (
+      head: checkedHead,
+      result: const MergeResult(
+        status: MergeStatus.failed,
+        message: 'De actuele reviewbranch kon niet worden gelezen.',
+      ),
+    );
+  }
+  final decision = ClassificationEnforcementPolicy.fromAppSettings(
+    settings,
+  ).evaluate(deckReleaseTlp(deck));
+  if (!decision.allowed) {
+    return (
+      head: checkedHead,
+      result: MergeResult(
+        status: MergeStatus.blocked,
+        classificationDecision: decision,
+      ),
+    );
+  }
+  if (await forge.headSha(origin.branch) != checkedHead) {
+    return (
+      head: checkedHead,
+      result: const MergeResult(
+        status: MergeStatus.failed,
+        message:
+            'De reviewbranch is gewijzigd; controleer het concept opnieuw.',
+      ),
+    );
+  }
+  final latestPr = await forge.pullRequestForBranch(origin.branch);
+  if (latestPr == null ||
+      latestPr.number != pr.number ||
+      latestPr.base.trim() != config.defaultBranch.trim()) {
+    return (
+      head: checkedHead,
+      result: const MergeResult(
+        status: MergeStatus.failed,
+        message: 'De review is gewijzigd; controleer het concept opnieuw.',
+      ),
+    );
+  }
+  return (head: checkedHead, result: null);
+}
+
 /// Hoe een [TabsNotifierGit.openForReview] afliep.
 enum ReviewStatus {
   /// De pull request is geopend; [ReviewResult.pr] draagt het nummer + de link.
@@ -199,6 +293,9 @@ enum MergeStatus {
   /// uitgebracht ter review.
   noPullRequest,
 
+  /// De actuele branchinhoud valt niet meer binnen het classificatiebeleid.
+  blocked,
+
   /// Er was geen concept om te mergen (geen tabblad, of het staat niet op een
   /// werkbranch).
   notOnWorkBranch,
@@ -213,7 +310,14 @@ class MergeResult {
   /// Uitlegbare tekst bij [MergeStatus.failed].
   final String? message;
 
-  const MergeResult({required this.status, this.message});
+  /// Gezet wanneer het classificatiebeleid het samenvoegen blokkeerde.
+  final ExportDecision? classificationDecision;
+
+  const MergeResult({
+    required this.status,
+    this.message,
+    this.classificationDecision,
+  });
 }
 
 /// Hoe een [TabsNotifierGit.tagRelease] afliep.

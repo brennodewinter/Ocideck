@@ -687,7 +687,12 @@ Future<void> _mergeConcept(BuildContext context, WidgetRef ref) async {
   final l10n = context.l10n;
   final result = await ref
       .read(tabsProvider.notifier)
-      .mergeConcept(forge, config: config, prune: prune);
+      .mergeConcept(
+        forge,
+        config: config,
+        settings: ref.read(settingsProvider),
+        prune: prune,
+      );
   if (!context.mounted) return;
   switch (result.status) {
     case MergeStatus.merged:
@@ -703,6 +708,13 @@ Future<void> _mergeConcept(BuildContext context, WidgetRef ref) async {
             l10n.d('Nog geen review — breng het concept eerst uit ter review.'),
           ),
         ),
+      );
+    case MergeStatus.blocked:
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        exportBlockMessage(l10n, result.classificationDecision) ??
+            l10n.d('Uitbrengen geblokkeerd door het classificatiebeleid.'),
       );
     case MergeStatus.notOnWorkBranch:
       messenger.showSnackBar(

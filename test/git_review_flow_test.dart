@@ -35,7 +35,9 @@ void main() {
 
   FakeRepo repo() => FakeRepo(
     branches: {'main': 'commit-main', workBranch: 'commit-work'},
-    files: {'$deckDir/deck.md': bytes('# start')},
+    files: {
+      '$deckDir/deck.md': bytes('---\nmarp: true\ntlp: green\n---\n# start'),
+    },
   );
 
   (ProviderContainer, TabsNotifier) build() {
@@ -203,7 +205,11 @@ void main() {
           title: 'Review',
         );
 
-        final result = await tabs.mergeConcept(forge, config: config);
+        final result = await tabs.mergeConcept(
+          forge,
+          config: config,
+          settings: const AppSettings(),
+        );
 
         expect(result.status, MergeStatus.merged);
         // main now points at the work branch's commit; the branch is pruned.
@@ -221,7 +227,11 @@ void main() {
       final forge = FakeForge(repo());
       seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
 
-      final result = await tabs.mergeConcept(forge, config: config);
+      final result = await tabs.mergeConcept(
+        forge,
+        config: config,
+        settings: const AppSettings(),
+      );
 
       expect(result.status, MergeStatus.noPullRequest);
       expect(forge.repo.branches['main'], 'commit-main'); // untouched
@@ -239,8 +249,124 @@ void main() {
         baseSha: 'commit-main',
       );
 
-      final result = await tabs.mergeConcept(forge, config: config);
+      final result = await tabs.mergeConcept(
+        forge,
+        config: config,
+        settings: const AppSettings(),
+      );
       expect(result.status, MergeStatus.notOnWorkBranch);
+    });
+
+    test('rechecks the branch deck before merging', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+      forge.repo.files['$deckDir/deck.md'] = bytes(
+        '---\nmarp: true\ntheme: ocideck\ntlp: red\ntitle: Verhoogd\n---\n'
+        '# Verhoogd',
+      );
+      await forge.openPullRequest(
+        head: workBranch,
+        base: 'main',
+        title: 'Review',
+      );
+
+      final result = await tabs.mergeConcept(
+        forge,
+        config: config,
+        settings: const AppSettings(maxReleaseExportTlpKey: 'amber'),
+      );
+
+      expect(result.status, MergeStatus.blocked);
+      expect(forge.repo.branches['main'], 'commit-main');
+    });
+
+    test('refuses a branch that changes during the merge request', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+      await forge.openPullRequest(
+        head: workBranch,
+        base: 'main',
+        title: 'Review',
+      );
+      forge.beforeMerge = () => forge.repo.branches[workBranch] = 'commit-race';
+
+      final result = await tabs.mergeConcept(
+        forge,
+        config: config,
+        settings: const AppSettings(),
+      );
+
+      expect(result.status, MergeStatus.failed);
+      expect(forge.repo.branches['main'], 'commit-main');
+    });
+
+    test('refuses a review aimed at another target branch', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+      await forge.openPullRequest(
+        head: workBranch,
+        base: 'staging',
+        title: 'Review',
+      );
+
+      final result = await tabs.mergeConcept(
+        forge,
+        config: config,
+        settings: const AppSettings(),
+      );
+
+      expect(result.status, MergeStatus.failed);
+      expect(forge.repo.branches['main'], 'commit-main');
+    });
+
+    test('refuses a review retargeted during the final merge check', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+      await forge.openPullRequest(
+        head: workBranch,
+        base: 'main',
+        title: 'Review',
+      );
+      forge.beforeSecondPullRequestLookup = () {
+        forge.repo.pulls.single.base = 'staging';
+      };
+
+      final result = await tabs.mergeConcept(
+        forge,
+        config: config,
+        settings: const AppSettings(),
+      );
+
+      expect(result.status, MergeStatus.failed);
+      expect(forge.repo.branches['main'], 'commit-main');
+    });
+
+    test('refuses a review retargeted while the provider merges', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+      await forge.openPullRequest(
+        head: workBranch,
+        base: 'main',
+        title: 'Review',
+      );
+      forge.beforeMerge = () {
+        forge.repo.pulls.single.base = 'staging';
+      };
+
+      final result = await tabs.mergeConcept(
+        forge,
+        config: config,
+        settings: const AppSettings(),
+      );
+
+      expect(result.status, MergeStatus.failed);
+      expect(forge.repo.branches['main'], 'commit-main');
+      expect(forge.repo.branches['staging'], isNull);
     });
   });
 

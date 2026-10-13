@@ -437,6 +437,8 @@ class GitHubForge with ForgeHttp implements GitForge {
     int number, {
     PullRequestMergeMethod method = PullRequestMergeMethod.merge,
     bool deleteBranch = false,
+    String? expectedHeadSha,
+    String? expectedBaseBranch,
   }) async {
     if (number <= 0) {
       throw const GitForgeException(
@@ -448,16 +450,27 @@ class GitHubForge with ForgeHttp implements GitForge {
     // De branchnaam moeten we dus ophalen vóór het mergen — daarna is de PR
     // gesloten en is dat een omweg.
     String? head;
-    if (deleteBranch) {
+    if (deleteBranch || expectedBaseBranch != null) {
       final pr = _pullRef(await getJson(['pulls', '$number']));
-      head = pr?.head.isEmpty ?? true ? null : pr!.head;
+      if (expectedBaseBranch != null &&
+          pr?.base.trim() != expectedBaseBranch.trim()) {
+        throw const GitForgeException(
+          GitForgeError.server,
+          'De pull request verwijst naar een andere doelbranch',
+        );
+      }
+      head = pr?.head;
+      if (head?.isEmpty ?? true) head = null;
     }
 
-    final response = await sendJson(
-      'PUT',
-      ['pulls', '$number', 'merge'],
-      {'merge_method': method.name},
-    );
+    final payload = <String, Object?>{'merge_method': method.name};
+    final sha = expectedHeadSha;
+    if (sha is String) payload['sha'] = sha;
+    final response = await sendJson('PUT', [
+      'pulls',
+      '$number',
+      'merge',
+    ], payload);
     // 405 = niet mergebaar (reviews, checks), 409 = de kop is verzet.
     if (response.status == 405 || response.status == 409) {
       throw const GitForgeException(
