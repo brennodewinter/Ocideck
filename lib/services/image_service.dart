@@ -312,10 +312,8 @@ class ImageService {
   /// containment (including symlinks via [resolveContainedRealPath]); on web
   /// only `mem:` paths resolve (through [WebAssetStore]). Returns null for an
   /// out-of-project path, a `mem:` miss, or a read error — never throws.
-  Future<Uint8List?> readSlideImageBytes(
-    String path, {
-    String? projectPath,
-  }) => readSlideAssetBytes(path, projectPath: projectPath);
+  Future<Uint8List?> readSlideImageBytes(String path, {String? projectPath}) =>
+      readSlideAssetBytes(path, projectPath: projectPath);
 
   /// Bounded byte reader shared by image and approved media export sinks.
   Future<Uint8List?> readSlideAssetBytes(

@@ -35,17 +35,22 @@ OpenKatInstallation _inst({
 );
 
 void main() {
-  test('trusted-internal HTTP never receives the reusable Knox token', () async {
-    final transport = _FakeTransport(
-      response: const OpenKatHttpResult(200, '{}'),
-    );
-    final client = OpenKatRockyClient(
-      installation: _inst(url: 'http://openkat.lan', lan: true),
-      token: 'secret', transport: transport, isWeb: false,
-    );
-    expect(client.canSend, isFalse);
-    expect(client.denialReason, 'https_required');
-  });
+  test(
+    'trusted-internal HTTP never receives the reusable Knox token',
+    () async {
+      final transport = _FakeTransport(
+        response: const OpenKatHttpResult(200, '{}'),
+      );
+      final client = OpenKatRockyClient(
+        installation: _inst(url: 'http://openkat.lan', lan: true),
+        token: 'secret',
+        transport: transport,
+        isWeb: false,
+      );
+      expect(client.canSend, isFalse);
+      expect(client.denialReason, 'https_required');
+    },
+  );
 
   group('SecretStore.openKatTokenKey', () {
     test('stabiel per installatie-id', () {

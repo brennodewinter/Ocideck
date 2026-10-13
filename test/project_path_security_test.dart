@@ -52,7 +52,9 @@ void main() {
       outsideSecret = File(p.join(tmp.path, 'secret.txt'))
         ..writeAsStringSync('top secret');
       File(
-        File(p.join(projectDir.path, 'images', 'real.png')).resolveSymbolicLinksSync(),
+        File(
+          p.join(projectDir.path, 'images', 'real.png'),
+        ).resolveSymbolicLinksSync(),
       ).writeAsBytesSync(const [0x89, 0x50, 0x4e, 0x47]);
     });
 
@@ -71,7 +73,9 @@ void main() {
     test('allows a genuine file inside the project', () {
       expect(
         resolveContainedRealPath('images/real.png', projectDir.path),
-        File(p.join(projectDir.path, 'images', 'real.png')).resolveSymbolicLinksSync(),
+        File(
+          p.join(projectDir.path, 'images', 'real.png'),
+        ).resolveSymbolicLinksSync(),
       );
     });
 

@@ -106,31 +106,43 @@ class _TokenReplyTransport implements OciServeHttpTransport {
 }
 
 void main() {
-  test('refuses an OIDC endpoint on another port before opening a browser', () async {
-    final browser = _Browser();
-    final transport = _AuthTransport();
-    final auth = OciServePkceAuthenticator(
-      settings: const OciServeSettings(baseUrl: 'https://learn.example'),
-      transport: transport,
-      browser: browser,
-      receiverFactory: () async => _Receiver(browser),
-    );
-    final installation = OciServeInstallation(
-      clientId: 'desktop', issuer: Uri.parse('https://id.example'),
-    );
-    final configuration = OciServeOidcConfiguration(
-      issuer: Uri.parse('https://id.example'),
-      authorizationEndpoint: Uri.parse('https://id.example/authorize'),
-      tokenEndpoint: Uri.parse('https://id.example:8443/token'),
-      jwksUri: Uri.parse('https://id.example/jwks'),
-      metadata: const {}, signingAlgorithms: const ['RS256'],
-    );
-    await expectLater(auth.login(installation, configuration), throwsA(
-      isA<OciServeException>().having((e) => e.code, 'code', 'identity_provider_host_mismatch'),
-    ));
-    expect(browser.opened, isNull);
-    expect(transport.urls, isEmpty);
-  });
+  test(
+    'refuses an OIDC endpoint on another port before opening a browser',
+    () async {
+      final browser = _Browser();
+      final transport = _AuthTransport();
+      final auth = OciServePkceAuthenticator(
+        settings: const OciServeSettings(baseUrl: 'https://learn.example'),
+        transport: transport,
+        browser: browser,
+        receiverFactory: () async => _Receiver(browser),
+      );
+      final installation = OciServeInstallation(
+        clientId: 'desktop',
+        issuer: Uri.parse('https://id.example'),
+      );
+      final configuration = OciServeOidcConfiguration(
+        issuer: Uri.parse('https://id.example'),
+        authorizationEndpoint: Uri.parse('https://id.example/authorize'),
+        tokenEndpoint: Uri.parse('https://id.example:8443/token'),
+        jwksUri: Uri.parse('https://id.example/jwks'),
+        metadata: const {},
+        signingAlgorithms: const ['RS256'],
+      );
+      await expectLater(
+        auth.login(installation, configuration),
+        throwsA(
+          isA<OciServeException>().having(
+            (e) => e.code,
+            'code',
+            'identity_provider_host_mismatch',
+          ),
+        ),
+      );
+      expect(browser.opened, isNull);
+      expect(transport.urls, isEmpty);
+    },
+  );
 
   test(
     'uses PKCE, state, nonce and rejects an unsigned/unverifiable ID token',
