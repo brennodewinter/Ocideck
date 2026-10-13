@@ -303,7 +303,6 @@ extension FileServicePackage on FileService {
     // Reserve bytes before reading assets so oversized packages fail fast (#1046).
     final budget = _PackageBudget(budgetBytes);
     void reserve(int n) => budget.reserve(n);
-
     // Bronpad → archiefpad, zodat dubbele bronnen maar eenmaal meegaan.
     final byAbsolutePath = <String, String>{};
     // Stabiel lidpad per mem:-asset, zodat imagePath en imagePath2 die
