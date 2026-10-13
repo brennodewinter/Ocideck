@@ -2,6 +2,7 @@ import 'package:archive/archive.dart';
 
 import '../../models/source_deck.dart';
 import '../../models/source_slide.dart';
+import '../../utils/import_budget.dart';
 import 'elearning_importer.dart';
 
 /// Leest AICC course-structure (.crs/.au/.cst/.des) (#1996).
@@ -10,7 +11,11 @@ import 'elearning_importer.dart';
 /// titels en beschrijvingen uit .crs, en les-elementen uit .au/.cst.
 class AiccReader extends ElearningFormatReader {
   @override
-  SourceDeck read(Archive archive, {required String basename}) {
+  SourceDeck read(
+    Archive archive, {
+    required String basename,
+    int maxSlides = 2000,
+  }) {
     String? crsContent;
     String? auContent;
     for (final f in archive) {
@@ -28,7 +33,7 @@ class AiccReader extends ElearningFormatReader {
     final slides = <SourceSlide>[];
 
     if (auContent != null) {
-      final auUnits = _parseAuUnits(auContent);
+      final auUnits = _parseAuUnits(auContent, maxSlides);
       for (var i = 0; i < auUnits.length; i++) {
         final unit = auUnits[i];
         slides.add(
@@ -63,13 +68,16 @@ class AiccReader extends ElearningFormatReader {
     return match?.group(1)?.trim();
   }
 
-  List<_AuUnit> _parseAuUnits(String au) {
+  List<_AuUnit> _parseAuUnits(String au, int maxSlides) {
     final units = <_AuUnit>[];
     for (final line in au.split('\n')) {
       final trimmed = line.trim();
       if (trimmed.isEmpty || trimmed.startsWith(';')) continue;
       final parts = trimmed.split(',');
       if (parts.length >= 3) {
+        if (units.length >= maxSlides) {
+          throw ImportBudgetException('$maxSlides dia\'s');
+        }
         units.add(
           _AuUnit(
             id: parts[0].trim(),

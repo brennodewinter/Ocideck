@@ -58,7 +58,11 @@ class ElearningImporter extends Importer {
     try {
       final archive = preDecoded ?? safeDecodeZip(bytes, budget: budget);
       final reader = _readerFor(_elearningFormat);
-      final deck = reader.read(archive, basename: path ?? '');
+      final deck = reader.read(
+        archive,
+        basename: path ?? '',
+        maxSlides: budget.maxSlides,
+      );
       onProgress?.call(1.0, 'eLearning: ${archive.length} entries');
       return Ok(deck);
     } on ImportBudgetException {
@@ -91,7 +95,11 @@ class ElearningImporter extends Importer {
 /// De gemeenschappelijke interface voor formaat-specifieke lezers.
 abstract class ElearningFormatReader {
   /// Lees het archief en bouw een [SourceDeck].
-  SourceDeck read(Archive archive, {required String basename});
+  SourceDeck read(
+    Archive archive, {
+    required String basename,
+    int maxSlides = 2000,
+  });
 }
 
 /// Een eenvoudige bron-slide voor eLearning-import. Hergebruikt het bestaande

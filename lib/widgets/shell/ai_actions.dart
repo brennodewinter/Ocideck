@@ -57,18 +57,29 @@ Deck _deckForExternalAi(Deck deck, WidgetRef ref) {
         marpStyle: projected.slides[i].marpStyle.copyWith(
           backgroundImage: deck.slides[i].marpStyle.backgroundImage,
         ),
-        customMarkdown:
-            const {
-              SlideType.question,
-              SlideType.chart,
-              SlideType.cockpit,
-              SlideType.code,
-            }.contains(deck.slides[i].type)
-            ? deck.slides[i].customMarkdown
-            : projected.slides[i].customMarkdown,
       ),
   ];
   return projected.copyWith(slides: restoredSlides);
+}
+
+const _structuredAiBodyTypes = {
+  SlideType.question,
+  SlideType.chart,
+  SlideType.cockpit,
+  SlideType.code,
+};
+
+Deck _restoreStructuredAiBodies(Deck original, Deck translated) {
+  return translated.copyWith(
+    slides: [
+      for (var i = 0; i < translated.slides.length; i++)
+        _structuredAiBodyTypes.contains(original.slides[i].type)
+            ? translated.slides[i].copyWith(
+                customMarkdown: original.slides[i].customMarkdown,
+              )
+            : translated.slides[i],
+    ],
+  );
 }
 
 /// "Vertaal met AI…" — vertaalt het hele deck (zichtbare tekst én
@@ -94,12 +105,18 @@ Future<void> translateDeckWithAi(BuildContext context, WidgetRef ref) async {
             .read(secretStoreProvider)
             .readAiApiKey(settings.baseUrl),
       );
-      return AiTranslateService(client).translateDeck(
+      final translated = await AiTranslateService(client).translateDeck(
         deck: _deckForExternalAi(deck, ref),
         languageCode: code,
         languageName: name,
         onProgress: onProgress,
         isCancelled: isCancelled,
+      );
+      if (translated == null) return null;
+      return DeckTranslationResult(
+        deck: _restoreStructuredAiBodies(deck, translated.deck),
+        translatedSlides: translated.translatedSlides,
+        failedSlides: translated.failedSlides,
       );
     },
   );

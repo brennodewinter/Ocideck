@@ -95,6 +95,15 @@ void main() {
     );
   });
 
+  test('_pickBytes leest gekozen bestanden met een harde bytegrens', () {
+    final source = File(
+      'lib/services/file/file_service_import.dart',
+    ).readAsStringSync();
+    expect(source, contains('_readPickedBytesCapped'));
+    expect(source, contains('readAsByteStream()'));
+    expect(source, contains('FileService.maxPackageBytes'));
+  });
+
   // Spiegel van de _pickPathGated-poort hierboven, nu voor opslaan.
   // file_picker.saveFile gebruikt op macOS een sheet (beginSheetModal) op het
   // Flutter-venster, die de CFBundleDocumentTypes-filter erft en niet

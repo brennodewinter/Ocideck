@@ -159,6 +159,14 @@ release-commit refs/tags/v1.2.3^{}
     );
   });
 
+  test('release-tokens komen niet in curl-argumenten terecht', () {
+    final text = source();
+    expect(text, isNot(contains(r'-H "Authorization: token $TOKEN"')));
+    expect(text, isNot(contains(r'-H "Authorization: Bearer $token"')));
+    expect(text, contains('header = "Authorization: token %s"'));
+    expect(text, contains('header = "Authorization: Bearer %s"'));
+  });
+
   test('--status kan zonder mirror niet compleet rapporteren', () {
     final body = functionBody('cmd_status');
     expect(body, contains('mirror-remote beschikbaar'));

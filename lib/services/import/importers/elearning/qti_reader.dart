@@ -2,6 +2,7 @@ import 'package:archive/archive.dart';
 
 import '../../models/source_deck.dart';
 import '../../models/source_slide.dart';
+import '../../utils/import_budget.dart';
 import 'elearning_importer.dart';
 
 /// Leest QTI 2.x/3.x assessment items en tests (#1994).
@@ -13,7 +14,11 @@ import 'elearning_importer.dart';
 /// auteur vraagt de vraag met de hand aan te vullen.
 class QtiReader extends ElearningFormatReader {
   @override
-  SourceDeck read(Archive archive, {required String basename}) {
+  SourceDeck read(
+    Archive archive, {
+    required String basename,
+    int maxSlides = 2000,
+  }) {
     // Zoek het eerste XML-bestand met QTI-namespace.
     String? qtiXml;
     String? qtiName;
@@ -46,7 +51,7 @@ class QtiReader extends ElearningFormatReader {
     }
 
     final title = _extractXmlValue(qtiXml, 'title') ?? 'QTI-import';
-    final items = _extractAssessmentItems(qtiXml);
+    final items = _extractAssessmentItems(qtiXml, maxSlides);
     final slides = <SourceSlide>[];
 
     for (var i = 0; i < items.length; i++) {
@@ -85,13 +90,16 @@ class QtiReader extends ElearningFormatReader {
     return match?.group(1)?.trim();
   }
 
-  List<_QtiItem> _extractAssessmentItems(String xml) {
+  List<_QtiItem> _extractAssessmentItems(String xml, int maxSlides) {
     final items = <_QtiItem>[];
     final itemRegex = RegExp(
       r'<assessmentItem[^>]*identifier="([^"]*)"[^>]*>(.*?)</assessmentItem>',
       dotAll: true,
     );
     for (final match in itemRegex.allMatches(xml)) {
+      if (items.length >= maxSlides) {
+        throw ImportBudgetException('$maxSlides dia\'s');
+      }
       final identifier = match.group(1) ?? '';
       final inner = match.group(2) ?? '';
       final title = _extractXmlValue(inner, 'title') ?? identifier;

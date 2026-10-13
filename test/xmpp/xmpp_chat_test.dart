@@ -245,6 +245,20 @@ void main() {
       );
     },
   );
+
+  test('chat history is bounded independently of dedup history', () async {
+    final env = await _ChatEnv.create(messageCap: 2);
+    addTearDown(env.dispose);
+
+    await env.sender.send('m1');
+    await env.settle();
+    await env.sender.send('m2');
+    await env.settle();
+    await env.sender.send('m3');
+    await env.settle();
+
+    expect(env.receiver.messages.map((m) => m.text), ['m2', 'm3']);
+  });
 }
 
 // ── test helpers ─────────────────────────────────────────────────────────────
@@ -282,6 +296,7 @@ class _ChatEnv {
 
   static Future<_ChatEnv> create({
     bool keyReceiver = true,
+    int messageCap = 256,
     int dedupCap = 256,
   }) async {
     const room = 'ocideck-chat@conference.example';
@@ -313,6 +328,7 @@ class _ChatEnv {
       roomJid: room,
       directory: CollabDeviceDirectory(),
       ownUserId: '$room/send',
+      messageCap: messageCap,
       dedupCap: dedupCap,
     );
     final receiver = XmppChat(
@@ -322,6 +338,7 @@ class _ChatEnv {
       roomJid: room,
       directory: receiverDirectory,
       ownUserId: '$room/recv',
+      messageCap: messageCap,
       dedupCap: dedupCap,
     );
 

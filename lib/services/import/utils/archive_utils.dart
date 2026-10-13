@@ -60,6 +60,11 @@ Archive safeDecodeZip(
   if (declaredEntries > budget.maxArchiveEntries) {
     throw ImportBudgetException('${budget.maxArchiveEntries} onderdelen');
   }
+  if (zipContainsSymlinkMetadata(bytes)) {
+    throw const FormatException(
+      'ZIP archive contains symbolic-link metadata and cannot be imported.',
+    );
+  }
   final archive = ZipDecoder().decodeBytes(bytes);
   if (archive.length > budget.maxArchiveEntries) {
     throw ImportBudgetException('${budget.maxArchiveEntries} onderdelen');
@@ -79,6 +84,71 @@ Archive safeDecodeZip(
     }
   }
   return archive;
+}
+
+/// True when the central directory marks an entry as a Unix symbolic link.
+///
+/// `ZipDecoder` reads the link target while decoding the central directory,
+/// before callers can apply their output budget. Rejecting this metadata here
+/// keeps an attacker-controlled link target from bypassing that budget.
+bool zipContainsSymlinkMetadata(List<int> bytes) {
+  const eocdSignature = 0x06054b50;
+  const centralSignature = 0x02014b50;
+  const zip64LocatorSignature = 0x07064b50;
+  const zip64EndSignature = 0x06064b50;
+  for (var i = bytes.length - 22; i >= 0; i--) {
+    if (!_rangeWithin(i, 22, bytes.length) || _u32(bytes, i) != eocdSignature) {
+      continue;
+    }
+    final commentLength = _u16(bytes, i + 20);
+    if (i + 22 + commentLength > bytes.length) continue;
+    int centralSize;
+    int centralOffset;
+    final centralSize16 = _u32(bytes, i + 12);
+    final centralOffset16 = _u32(bytes, i + 16);
+    if (centralSize16 != 0xFFFFFFFF && centralOffset16 != 0xFFFFFFFF) {
+      centralSize = centralSize16;
+      centralOffset = centralOffset16;
+    } else {
+      final locator = i - 20;
+      if (!_rangeWithin(locator, 20, bytes.length) ||
+          _u32(bytes, locator) != zip64LocatorSignature) {
+        continue;
+      }
+      final zip64Offset = _u64(bytes, locator + 8);
+      if (!_rangeWithin(zip64Offset, 56, bytes.length) ||
+          _u32(bytes, zip64Offset.toInt()) != zip64EndSignature) {
+        continue;
+      }
+      final zip64 = zip64Offset.toInt();
+      centralSize = _u64(bytes, zip64 + 40).toInt();
+      centralOffset = _u64(bytes, zip64 + 48).toInt();
+    }
+    if (!_rangeWithin(centralOffset, centralSize, i)) continue;
+    final end = centralOffset + centralSize;
+    var position = centralOffset;
+    while (position < end) {
+      if (!_rangeWithin(position, 46, end) ||
+          _u32(bytes, position) != centralSignature) {
+        break;
+      }
+      final headerLength =
+          46 +
+          _u16(bytes, position + 28) +
+          _u16(bytes, position + 30) +
+          _u16(bytes, position + 32);
+      if (!_rangeWithin(position, headerLength, end)) break;
+      final creatorSystem = bytes[position + 5];
+      final externalAttributes = _u32(bytes, position + 38);
+      if (creatorSystem == 3 &&
+          ((externalAttributes >> 16) & 0xF000) == 0xA000) {
+        return true;
+      }
+      position += headerLength;
+    }
+    return false;
+  }
+  return false;
 }
 
 /// Count the central-directory records without decoding the archive. A null

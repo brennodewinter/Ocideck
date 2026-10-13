@@ -185,7 +185,7 @@ extension SettingsTraces on SettingsNotifier {
     // wachtwoord dat in de sleutelbos achterblijft nadat de gebruiker "alles
     // terug" heeft gekozen, is precies het spoor dat hij dacht te wissen.
     await _secrets.deleteSecretsOf(currentState.connections);
-    await _secrets.deletePrivacyOwnIdentity();
+    await _secrets.deleteAllOciDeckSecrets();
     await _diskTraces.clearAllGitWorkingCopies();
     await _diskTraces.clearStyleLogos();
     await _diskTraces.clearGitSandbox();

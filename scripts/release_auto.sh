@@ -491,7 +491,8 @@ release_asset_url() { # release_asset_url RID NAAM → browser_download_url of l
 # Zo kan fase 3 de release lezen en verifiëren terwijl hij nog draft is.
 download_release_asset() { # download_release_asset URL DEST
   curl -fsSL --connect-timeout 10 --max-time 60 \
-    -H "Authorization: token $TOKEN" -o "$2" "$1" 2>/dev/null
+    --config <(printf 'header = "Authorization: token %s"\n' "$TOKEN") \
+    -o "$2" "$1" 2>/dev/null
 }
 
 # De versie in de downloadlinks van een opgehaalde downloadpagina (stdin → html).
@@ -2087,7 +2088,7 @@ scan_image_available() { # scan_image_available TAG
     | jq -r '.token // .access_token // empty' 2>/dev/null || true)"
   [ -n "$token" ] || return 1
   code="$(curl -sS --connect-timeout 10 --max-time 30 -o /dev/null -w '%{http_code}' \
-    -H "Authorization: Bearer $token" \
+    --config <(printf 'header = "Authorization: Bearer %s"\n' "$token") \
     -H 'Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json' \
     "https://pawprint.vigilis.online/v2/librekat/ocideck-scans/manifests/$image_tag" \
     2>/dev/null || true)"

@@ -82,6 +82,9 @@ bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
     if (entryCount == null || entryCount > FileService.maxPackageEntries) {
       throw const ExtractionLimitException();
     }
+    if (zipContainsSymlinkMetadata(bytes)) {
+      throw const ExtractionLimitException();
+    }
     final copy = Uint8List.fromList(bytes);
     final archive = ZipDecoder().decodeBytes(copy, password: password);
     if (archive.files.length > FileService.maxPackageEntries) {
@@ -107,11 +110,8 @@ bool _canDecodePackage(List<int> bytes, String password, int maxBytes) {
 extension FileServiceImport on FileService {
   /// De meervoudige variant van [FileService.pickMarkdownFile]: dezelfde
   /// filterloze kiezer, maar de gebruiker mag een stapel bestanden tegelijk
-  /// aanwijzen; elk opent daarna in een eigen tabblad (#1928). Levert een lege
-  /// lijst bij annuleren en op web (zie [_pickPathsGated]).
-  ///
-  /// In deze extensie en niet in de klasse: [FileService] zit tegen zijn
-  /// plafond, en kiezen hoort bij dit bestand.
+  /// aanwijzen; elk opent in een eigen tabblad (#1928). Levert leeg bij
+  /// annuleren en op web (zie [_pickPathsGated]).
   Future<List<String>> pickMarkdownFiles({String? initialDirectory}) {
     return _pickPathsGated(
       dialogTitle: _d('Presentaties openen'),
@@ -231,6 +231,9 @@ extension FileServiceImport on FileService {
       }
       if (entryCount > FileService.maxPackageEntries) {
         return const ImportOutcome.failed(ImportFailure.limitExceeded);
+      }
+      if (zipContainsSymlinkMetadata(zipBytes)) {
+        return const ImportOutcome.failed(ImportFailure.corrupt);
       }
       archive = ZipDecoder().decodeBytes(zipBytes, password: password);
     } catch (e, s) {
@@ -681,5 +684,25 @@ Future<({String name, Uint8List bytes})?> _pickBytes({
     type: FileType.any,
   );
   if (file == null) return null;
-  return (name: file.name, bytes: await file.readAsBytes());
+  final bytes = await _readPickedBytesCapped(
+    file,
+    maxBytes: FileService.maxPackageBytes,
+  );
+  return bytes == null ? null : (name: file.name, bytes: bytes);
+}
+
+/// Lees een gekozen bestand incrementeel zodat een bestandkiezer niet alsnog
+/// de hele schijf in één buffer kan zetten vóór de importlimiet hem ziet.
+Future<Uint8List?> _readPickedBytesCapped(
+  PlatformFile file, {
+  required int maxBytes,
+}) async {
+  final knownSize = file.lengthSync() ?? await file.length();
+  if (knownSize != null && knownSize > maxBytes) return null;
+  final builder = BytesBuilder(copy: false);
+  await for (final chunk in file.readAsByteStream()) {
+    if (chunk.length > maxBytes - builder.length) return null;
+    builder.add(chunk);
+  }
+  return builder.takeBytes();
 }

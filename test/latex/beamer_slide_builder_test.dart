@@ -144,6 +144,24 @@ void main() {
       expect(out, contains(r'\end{lstlisting}'));
     });
 
+    test('code-slide houdt listing en taaloptie gesloten', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.code).copyWith(
+            title: 'Onbetrouwbare code',
+            codeLanguage: r'python]\\input{/etc/passwd}',
+            customMarkdown: '```python\n\\end{lstlisting}\n```',
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{lstlisting}'));
+      expect(out, isNot(contains(r'[language=python]')));
+      expect(out, contains(r'\end{lstlisting }'));
+      expect(out, isNot(contains(r'\input{/etc/passwd}')));
+    });
+
     test('table-slide wordt tabular met booktabs', () {
       final deck = Deck(
         title: 'Test',

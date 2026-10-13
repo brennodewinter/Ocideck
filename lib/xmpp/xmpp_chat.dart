@@ -73,6 +73,7 @@ class XmppChat {
     required this.directory,
     required this.ownUserId,
     this.maxMessageChars = 4000,
+    this.messageCap = 256,
     this.dedupCap = 256,
     this.pendingCap = 256,
   }) : _channel = stanzaChannel,
@@ -98,6 +99,10 @@ class XmppChat {
 
   /// Cap op één bericht — blijft ruim onder de 512 KiB stanza-cap (§7).
   final int maxMessageChars;
+
+  /// Cap op de zichtbare geschiedenis; een goedgekeurde deelnemer kan anders
+  /// onbeperkt geheugen laten groeien met geldige chatberichten.
+  final int messageCap;
 
   /// Cap op de dedup-set (§4 "bounded like the message list"). Een vijandige
   /// server mag de set niet uitputten; de afruil is dat een id na verdrijving
@@ -142,7 +147,7 @@ class XmppChat {
       signed: true,
     );
     final id = _sealedId(sealed);
-    _messages.add(
+    _appendMessage(
       ChatMessage(
         userId: ownUserId,
         deviceId: _e2ee.deviceId,
@@ -210,7 +215,7 @@ class XmppChat {
       if (opened == null) {
         stillPending.add(sealed); // afzender/epoch nog niet — houd
       } else if (opened.isNotEmpty) {
-        _messages.add(_messageFrom(opened));
+        _appendMessage(_messageFrom(opened));
         progressed = true;
       }
       // opened leeg → misvormd/dup/slechte handtekening — drop fail-closed
@@ -274,6 +279,12 @@ class XmppChat {
   void _remember(String id) {
     if (_seenIds.length >= dedupCap) _seenIds.removeAt(0);
     _seenIds.add(id);
+  }
+
+  void _appendMessage(ChatMessage message) {
+    if (messageCap <= 0) return;
+    if (_messages.length >= messageCap) _messages.removeAt(0);
+    _messages.add(message);
   }
 
   /// Ruim de berichtenlijst op — testhulp voor de tampered-signature-test, die

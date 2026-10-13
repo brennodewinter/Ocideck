@@ -2,6 +2,7 @@ import 'package:archive/archive.dart';
 
 import '../../models/source_deck.dart';
 import '../../models/source_slide.dart';
+import '../../utils/import_budget.dart';
 import 'elearning_importer.dart';
 
 /// Leest cmi5 course packages en xAPI activity metadata (#1995).
@@ -10,10 +11,14 @@ import 'elearning_importer.dart';
 /// eruit. OciDeck wordt geen LRS en stuurt geen statements.
 class Cmi5Reader extends ElearningFormatReader {
   @override
-  SourceDeck read(Archive archive, {required String basename}) {
+  SourceDeck read(
+    Archive archive, {
+    required String basename,
+    int maxSlides = 2000,
+  }) {
     final cmi5Xml = _readFile(archive, 'cmi5.xml');
     if (cmi5Xml != null) {
-      return _parseCmi5(cmi5Xml, basename);
+      return _parseCmi5(cmi5Xml, basename, maxSlides);
     }
 
     // Losse xAPI JSON in het archief.
@@ -38,11 +43,11 @@ class Cmi5Reader extends ElearningFormatReader {
     );
   }
 
-  SourceDeck _parseCmi5(String xml, String basename) {
+  SourceDeck _parseCmi5(String xml, String basename, int maxSlides) {
     final title =
         _extractXmlAttribute(xml, 'course', 'title') ??
         basename.replaceAll(RegExp(r'\.[^.]+$'), '');
-    final aus = _extractAus(xml);
+    final aus = _extractAus(xml, maxSlides);
     final slides = <SourceSlide>[];
 
     for (var i = 0; i < aus.length; i++) {
@@ -107,10 +112,13 @@ class Cmi5Reader extends ElearningFormatReader {
     return match?.group(1)?.trim();
   }
 
-  List<_Cmi5Au> _extractAus(String xml) {
+  List<_Cmi5Au> _extractAus(String xml, int maxSlides) {
     final aus = <_Cmi5Au>[];
     final auRegex = RegExp(r'<au[^>]*id="([^"]*)"[^>]*>', dotAll: true);
     for (final match in auRegex.allMatches(xml)) {
+      if (aus.length >= maxSlides) {
+        throw ImportBudgetException('$maxSlides dia\'s');
+      }
       final id = match.group(1) ?? '';
       final fullMatch = match.group(0) ?? '';
       final url = _extractXmlAttribute(fullMatch, 'au', 'url') ?? '';
