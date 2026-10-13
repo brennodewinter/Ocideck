@@ -274,6 +274,23 @@ void main() {
       expect(fake.requests[1].query['continuation-token'], token);
       expect(fake.requests.every((r) => r.signatureValid), isTrue);
     });
+
+    test('weigert een herhaald continuation-token', () async {
+      const token = 'blijven-lopen';
+      final fake = await _FakeS3.start((req) async {
+        req.response.statusCode = 200;
+        req.response.write(_listXml(keys: const [], nextToken: token));
+      });
+      addTearDown(fake.stop);
+
+      await expectLater(
+        _serviceOn(fake.port).list(''),
+        throwsA(
+          isA<S3Exception>().having((e) => e.kind, 'kind', S3Error.tooLarge),
+        ),
+      );
+      expect(fake.requests, hasLength(2));
+    });
   });
 
   group('download', () {

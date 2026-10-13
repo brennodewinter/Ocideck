@@ -15,6 +15,7 @@ import 'pinned_http_client.dart';
 /// vult anders het werkgeheugen vóór de decoder ook maar iets te zien krijgt.
 /// 64 MiB is ruim boven elke realistische dia-afbeelding.
 const int kMaxRemoteMediaBytes = 64 * 1024 * 1024;
+const _remoteMediaBodyTimeout = Duration(seconds: 60);
 
 /// De afbeeldingsprovider voor een remote media-URL, met de socket vastgepind
 /// op het adres dat [NetGuard.safeResolve] heeft goedgekeurd.
@@ -54,7 +55,7 @@ Future<Uint8List> _fetchPinned(String url) async {
       throw _RemoteMediaRefused('HTTP ${response.statusCode}');
     }
     return await readCappedMedia(
-      response,
+      response.timeout(_remoteMediaBodyTimeout),
       contentLength: response.contentLength,
     );
   } catch (e) {

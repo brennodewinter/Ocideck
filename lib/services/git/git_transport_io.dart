@@ -26,6 +26,8 @@ class PinnedGitTransport implements GitTransport {
 
   final GitRepoConfig config;
 
+  static const _bodyTimeout = Duration(seconds: 60);
+
   HttpClient? _client;
 
   @override
@@ -92,7 +94,7 @@ class PinnedGitTransport implements GitTransport {
         );
       }
       final builder = BytesBuilder(copy: false);
-      await for (final chunk in response) {
+      await for (final chunk in response.timeout(_bodyTimeout)) {
         builder.add(chunk);
         if (builder.length > maxBytes) {
           throw const GitForgeException(

@@ -177,6 +177,11 @@ class S3Service {
   /// Aantal sleutels per ListObjectsV2-aanroep.
   static const int _pageSize = 1000;
 
+  /// Een corrupte of vijandige endpoint mag geen eindeloze reeks lege pagina's
+  /// laten produceren. Dit ligt ruim boven wat [maxListingEntries] nodig heeft
+  /// bij de ingestelde paginaomvang.
+  static const int _maxListingPages = 100;
+
   S3Signer get _signer => S3Signer(
     accessKeyId: bucket.accessKeyId.trim(),
     secretAccessKey: secretAccessKey,
@@ -351,7 +356,17 @@ class S3Service {
     try {
       final entries = <S3Entry>[];
       String? continuationToken;
+      final seenContinuationTokens = <String>{};
+      var pages = 0;
       do {
+        if (++pages > _maxListingPages ||
+            (continuationToken != null &&
+                !seenContinuationTokens.add(continuationToken))) {
+          throw S3Exception(
+            S3Error.tooLarge,
+            'Listing bevat te veel pagina\'s',
+          );
+        }
         final uri = bucket.uriForKey(
           '',
           query: {
@@ -506,14 +521,14 @@ class S3Service {
       // Vóór _checkStatus: deze statussen betekenen hier iets specifieks en
       // mogen niet als algemene serverfout wegvallen.
       if (response.statusCode == 412 || response.statusCode == 409) {
-        await response.drain<void>();
+        await response.timeout(_chunkTimeout).drain<void>();
         throw S3ConflictException(
           expectedEtag: ifMatch ?? '*',
           message: 'Bestand op de server gewijzigd (${response.statusCode})',
         );
       }
       if (response.statusCode == 501 && (ifMatch != null || onlyIfAbsent)) {
-        await response.drain<void>();
+        await response.timeout(_chunkTimeout).drain<void>();
         throw S3Exception(
           S3Error.conditionalUnsupported,
           'Dit endpoint ondersteunt geen voorwaardelijk schrijven',
@@ -521,7 +536,7 @@ class S3Service {
       }
       _checkStatus(response.statusCode);
       final newEtag = response.headers.value(HttpHeaders.etagHeader);
-      await response.drain<void>();
+      await response.timeout(_chunkTimeout).drain<void>();
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw S3Exception(
           S3Error.server,
@@ -573,7 +588,7 @@ class S3Service {
         const Duration(seconds: 20),
       );
       _checkStatus(response.statusCode);
-      await response.drain<void>();
+      await response.timeout(_chunkTimeout).drain<void>();
       if (response.statusCode != 200) {
         throw S3Exception(
           S3Error.server,
