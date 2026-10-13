@@ -91,6 +91,7 @@ class _EditableTableEmbed extends StatefulWidget {
 
 class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   late TableEmbedBinding _binding;
+  final GlobalKey _boundsKey = GlobalKey();
 
   TableEditController get _editor => _binding.editor;
 
@@ -100,6 +101,7 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   @override
   void initState() {
     super.initState();
+    widget.controllerStore.registerTableBounds(_boundsKey);
     _binding = TableEmbedBinding(
       controllerStore: widget.controllerStore,
       embedContext: widget.embedContext,
@@ -217,12 +219,14 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
 
   @override
   void dispose() {
+    widget.controllerStore.unregisterTableBounds(_boundsKey);
     _binding.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => Column(
+    key: _boundsKey,
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       if (_canBecomeTimeline)

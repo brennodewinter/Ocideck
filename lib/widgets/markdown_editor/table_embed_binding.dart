@@ -185,6 +185,26 @@ class TableEmbedControllerStore {
   >
   _entries = {};
 
+  final Set<GlobalKey> _tableBounds = {};
+
+  void registerTableBounds(GlobalKey key) => _tableBounds.add(key);
+
+  void unregisterTableBounds(GlobalKey key) => _tableBounds.remove(key);
+
+  /// Quill ziet ook tikken binnen de tabel. Gebruik haar werkelijke grenzen:
+  /// de hele embed heeft maar één documentpositie, ongeacht de tabelhoogte.
+  bool containsTableAt(Offset globalPosition) {
+    for (final key in _tableBounds) {
+      final renderObject = key.currentContext?.findRenderObject();
+      if (renderObject is! RenderBox || !renderObject.attached) continue;
+      if ((renderObject.localToGlobal(Offset.zero) & renderObject.size)
+          .contains(globalPosition)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /// Neemt de entry op [tableKey] over en geeft een verse eigenaarstoken
   /// terug. [release] van een oudere eigenaar is daarna werkloos: diens token
   /// past niet meer op de entry.
@@ -276,5 +296,6 @@ class TableEmbedControllerStore {
       entry.controller.dispose();
     }
     _entries.clear();
+    _tableBounds.clear();
   }
 }
