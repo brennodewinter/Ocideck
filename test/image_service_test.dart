@@ -14,6 +14,12 @@ void main() {
   late Directory tmp;
   final service = ImageService();
 
+  Uint8List png() {
+    final image = img.Image(width: 2, height: 2);
+    img.fill(image, color: img.ColorRgb8(20, 30, 40));
+    return Uint8List.fromList(img.encodePng(image));
+  }
+
   setUp(() => tmp = Directory.systemTemp.createTempSync('ocideck_img'));
   tearDown(() => tmp.deleteSync(recursive: true));
 
@@ -235,7 +241,7 @@ void main() {
         // Cross-import dedup: een herimport of aanverwante presentatie met
         // dezelfde afbeelding onder een andere naam mag geen duplicaat maken.
         addTearDown(WebAssetStore.clear);
-        final bytes = Uint8List.fromList([10, 20, 30, 40]);
+        final bytes = png();
         final project = Directory(p.join(tmp.path, 'project'))..createSync();
         // Bestaande afbeelding in de projectmap, andere naam.
         final existing =
@@ -291,15 +297,68 @@ void main() {
     test(
       'copies absolute video/audio into media/ and rewrites paths',
       () async {
-        final vid = File(p.join(tmp.path, 'clip.mp4'))..writeAsBytesSync([1]);
-        final aud = File(p.join(tmp.path, 'sound.mp3'))..writeAsBytesSync([2]);
+        final vid = File(p.join(tmp.path, 'clip.mp4'))
+          ..writeAsBytesSync(const [
+            0,
+            0,
+            0,
+            24,
+            0x66,
+            0x74,
+            0x79,
+            0x70,
+            0x69,
+            0x73,
+            0x6f,
+            0x6d,
+            0,
+            0,
+            2,
+            0,
+            0x69,
+            0x73,
+            0x6f,
+            0x6d,
+            0x69,
+            0x73,
+            0x6f,
+            0x32,
+          ]);
+        final aud = File(p.join(tmp.path, 'sound.mp3'))
+          ..writeAsBytesSync(const [
+            0x49,
+            0x44,
+            0x33,
+            0x04,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+          ]);
         final project = Directory(p.join(tmp.path, 'project'))..createSync();
 
-        final out = await service.copyMediaToProject([
-          Slide.create(
-            SlideType.video,
-          ).copyWith(videoPath: vid.path, audioPath: aud.path),
-        ], project.path);
+        final out = await service.copyMediaToProject(
+          [
+            Slide.create(
+              SlideType.video,
+            ).copyWith(videoPath: vid.path, audioPath: aud.path),
+          ],
+          project.path,
+          sourceProjectPath: tmp.path,
+        );
 
         expect(out.single.videoPath, 'media/clip.mp4');
         expect(out.single.audioPath, 'media/sound.mp3');
