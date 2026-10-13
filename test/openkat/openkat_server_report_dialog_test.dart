@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/openkat/openkat_installation.dart';
+import 'package:ocideck/services/openkat/openkat_rocky_client.dart';
 import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck/state/secret_store_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
@@ -28,6 +29,18 @@ Widget _app({
       home: Scaffold(body: child),
     ),
   );
+}
+
+class _FailingTransport implements OpenKatHttpTransport {
+  @override
+  Future<OpenKatHttpResult> get({
+    required Uri url,
+    required bool trustedInternal,
+    Map<String, String> headers = const {},
+    Duration timeout = const Duration(seconds: 30),
+  }) async {
+    throw const OpenKatRequestException('test failure');
+  }
 }
 
 Future<void> _waitForOpenKat(WidgetTester tester) async {
@@ -135,7 +148,18 @@ void main() {
           '{"id":"${b.id}","name":"Acc","baseUrl":"https://acc.example","trustedInternal":false,"lastStatus":"unchecked"}]',
     });
 
-    await tester.pumpWidget(_app(secrets: secrets));
+    await tester.pumpWidget(
+      _app(
+        secrets: secrets,
+        child: OpenKatServerReportDialog(
+          clientFactory: (installation, token) => OpenKatRockyClient(
+            installation: installation,
+            token: token,
+            transport: _FailingTransport(),
+          ),
+        ),
+      ),
+    );
     await _waitForOpenKat(tester);
     await tester.pumpAndSettle();
 
