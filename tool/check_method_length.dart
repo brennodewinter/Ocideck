@@ -52,7 +52,7 @@ const Map<String, int> methodLengthBaseline = {
   // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
   // kolommodus. De methode stond al op de limiet.
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
-      158, // +5 (#1999): eLearning-types in de missing-file switch.
+      154, // +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
   'lib/widgets/editors/title_editor.dart::_TitleEditorState.build': 278,
   // -113 (#1859): build is opgeknipt in helpers _buildSlideSettings,
