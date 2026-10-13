@@ -13,8 +13,9 @@ import '../services/asset_staging.dart';
 /// It does filesystem stats (`resolveSymbolicLinksSync`), so it is meant for
 /// non-hot read sinks that move file *bytes* out of the app (e.g. copy-to-
 /// clipboard), NOT the per-frame render path (a stat per image per frame would
-/// jank on network-mounted projects). Returns null when the file is missing or
-/// the realpath can't be taken.
+/// jank on network-mounted projects). A missing file is allowed when its
+/// existing ancestors remain inside the project, so retrying image loads can
+/// observe a file that arrives later.
 String? resolveContainedRealPath(String path, String? projectPath) {
   final resolved = resolveSlideAssetPath(path, projectPath);
   if (resolved == null || projectPath == null) return resolved;
@@ -23,7 +24,22 @@ String? resolveContainedRealPath(String path, String? projectPath) {
         ? File(resolved).resolveSymbolicLinksSync()
         : null;
   } on FileSystemException {
-    return null; // missing/unresolvable → refuse (can't copy anyway)
+    try {
+      final realBase = Directory(projectPath).resolveSymbolicLinksSync();
+      var ancestor = resolved;
+      while (FileSystemEntity.typeSync(ancestor, followLinks: false) ==
+          FileSystemEntityType.notFound) {
+        final parent = p.dirname(ancestor);
+        if (parent == ancestor) return null;
+        ancestor = parent;
+      }
+      final realAncestor = File(ancestor).resolveSymbolicLinksSync();
+      return realAncestor == realBase || p.isWithin(realBase, realAncestor)
+          ? resolved
+          : null;
+    } on FileSystemException {
+      return null;
+    }
   }
 }
 
@@ -52,7 +68,7 @@ bool isRenderPathContained(String resolved, String projectPath) {
   try {
     ok = _isInsideRealBase(resolved, projectPath);
   } on FileSystemException {
-    return false;
+    ok = _missingPathInsideRealBase(resolved, projectPath);
   }
   if (!ok) {
     if (_renderBlockedPaths.length >= 1024) {
@@ -61,6 +77,23 @@ bool isRenderPathContained(String resolved, String projectPath) {
     _renderBlockedPaths.add(cacheKey);
   }
   return ok;
+}
+
+bool _missingPathInsideRealBase(String resolved, String projectPath) {
+  try {
+    final realBase = Directory(projectPath).resolveSymbolicLinksSync();
+    var ancestor = resolved;
+    while (FileSystemEntity.typeSync(ancestor, followLinks: false) ==
+        FileSystemEntityType.notFound) {
+      final parent = p.dirname(ancestor);
+      if (parent == ancestor) return false;
+      ancestor = parent;
+    }
+    final realAncestor = File(ancestor).resolveSymbolicLinksSync();
+    return realAncestor == realBase || p.isWithin(realBase, realAncestor);
+  } on FileSystemException {
+    return false;
+  }
 }
 
 /// Clears the [isRenderPathContained] cache (tests).
