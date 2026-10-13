@@ -609,7 +609,7 @@ class WebdavService {
       // een server die een voorwaarde eist; voor de gebruiker hetzelfde
       // verhaal — eerst kijken wat er staat, niet blind overschrijven.
       if (response.statusCode == 412 || response.statusCode == 428) {
-        await response.drain<void>();
+        await response.timeout(_chunkTimeout).drain<void>();
         throw WebdavConflictException(
           expectedEtag: ifMatch ?? '*',
           message: 'Bestand op de server gewijzigd (${response.statusCode})',
@@ -617,7 +617,7 @@ class WebdavService {
       }
       _checkStatus(response.statusCode);
       final newEtag = response.headers.value(HttpHeaders.etagHeader);
-      await response.drain<void>();
+      await response.timeout(_chunkTimeout).drain<void>();
       if (response.statusCode != 200 &&
           response.statusCode != 201 &&
           response.statusCode != 204) {
@@ -665,7 +665,7 @@ class WebdavService {
         const Duration(seconds: 60),
       );
       final status = response.statusCode;
-      await response.drain<void>();
+      await response.timeout(_chunkTimeout).drain<void>();
       // 200/204 = weg; 404 = al weg (idempotent). Al het andere via _checkStatus,
       // dat een 3xx als `redirect` gooit — een doorverwezen DELETE mag niet als
       // succes wegvallen.
@@ -702,7 +702,7 @@ class WebdavService {
       final response = await request.close().timeout(
         const Duration(seconds: 30),
       );
-      await response.drain<void>();
+      await response.timeout(_chunkTimeout).drain<void>();
       // 201 aangemaakt, 405 bestaat al — beide goed. 401/403/5xx → fout.
       if (response.statusCode == 401) {
         throw WebdavException(WebdavError.auth, 'Aanmelden mislukt (401)');
@@ -741,7 +741,7 @@ class WebdavService {
         const Duration(seconds: 20),
       );
       _checkStatus(response.statusCode);
-      await response.drain<void>();
+      await response.timeout(_chunkTimeout).drain<void>();
       if (response.statusCode != 207) {
         throw WebdavException(
           WebdavError.server,

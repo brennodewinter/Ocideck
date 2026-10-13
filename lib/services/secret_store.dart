@@ -699,4 +699,46 @@ class SecretStore {
       }
     }
   }
+
+  /// Wis alle sleutelbos-items die deze app ooit zelf heeft aangemaakt.
+  ///
+  /// Een volledige `clearAll` zou ook sleutels van andere apps of oudere
+  /// gebruikersdata in dezelfde sleutelbos kunnen wissen. Daarom gebruiken we
+  /// de expliciete OciDeck-sleutelcatalogus en verwijderen we alleen bekende
+  /// voorvoegsels en vaste sleutels. Dit is de laatste stap van "alles
+  /// terugzetten": ook credentials waarvan de instellingen geen verbinding
+  /// meer bevatten (bijvoorbeeld XMPP, formulieren en OciServe) verdwijnen.
+  Future<void> deleteAllOciDeckSecrets() async {
+    if (!canStore) return;
+    try {
+      final keys = await _backend.keys();
+      const prefixes = <String>{
+        'webdav_pw::',
+        'ai_api_key::',
+        's3_secret::',
+        'git_pat::',
+        'xmpp_password::',
+        'collab_devseeds::',
+        'collab_trust::',
+        'libreplan_pw::',
+        'openkat_token::',
+        'ociserve_refresh::',
+        'ociserve_outbox::',
+      };
+      const fixed = <String>{formEditorialKeyKey, privacyOwnIdentityKey};
+      for (final key in keys) {
+        if (fixed.contains(key) || prefixes.any(key.startsWith)) {
+          try {
+            await _backend.delete(key);
+          } catch (e) {
+            logWarning('SecretStore.deleteAllOciDeckSecrets: delete failed', e);
+          }
+        }
+      }
+    } catch (e) {
+      // Reset blijft best effort, maar maakt de storing zichtbaar zonder de
+      // rest van het terugzetten te blokkeren.
+      logWarning('SecretStore.deleteAllOciDeckSecrets: key listing failed', e);
+    }
+  }
 }

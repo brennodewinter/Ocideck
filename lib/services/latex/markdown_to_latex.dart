@@ -225,16 +225,18 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   /// Of we in inline-code zitten — dan geen tekst-escaping.
   bool get _inInlineCode => _stack.any((c) => c == _Ctx.inlineCode);
 
-  bool get _suppressEscape => _inCodeBlock || _inInlineCode;
-
   /// De buffer waar we nu heen schrijven: [_rowBuf] binnen een tabel-cel,
   /// anders [output].
   StringBuffer get _buf => _inTable ? _rowBuf : output;
 
   @override
   void visitText(md.Text text) {
-    if (_suppressEscape) {
-      _buf.write(_restoreMath(text.text, escapeUnsafe: false));
+    if (_inCodeBlock) {
+      _buf.write(escapeLatexListing(text.text));
+      return;
+    }
+    if (_inInlineCode) {
+      _buf.write(_escapeCodeText(text.text));
       return;
     }
     _buf.write(_escapeProtectedText(text.text));
@@ -242,6 +244,14 @@ class _LatexNodeVisitor implements md.NodeVisitor {
 
   String _escapeProtectedText(String text) =>
       _restoreMath(_escapeText(text), escapeUnsafe: true);
+
+  String _escapeCodeText(String text) {
+    var source = text;
+    for (final entry in _mathBlocks.entries) {
+      source = source.replaceAll(entry.key, entry.value);
+    }
+    return _escapeText(source);
+  }
 
   /// Vervang math-placeholders door gevalideerde native wiskunde. Een formule
   /// met onbekende TeX-primitieven wordt zichtbare, geëscapete tekst.
@@ -417,10 +427,9 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   bool _visitCode(md.Element element) {
     if (_inCodeBlock) {
       // De <code> binnen <pre>: open het listing-blok met de taal.
-      final lang =
-          element.attributes['class']?.replaceAll('language-', '') ?? '';
+      final lang = safeLatexListingLanguage(element.attributes['class'] ?? '');
       output.write('\\begin{lstlisting}');
-      if (lang.isNotEmpty) output.write('[language=$lang]');
+      if (lang != null) output.write('[language=$lang]');
       output.write('\n');
       _stack.add(_Ctx.codeBlockBody);
     } else {
@@ -656,6 +665,21 @@ String _escapePlainText(String s) {
     result.write(char == r'$' ? r'\$' : _escapeChar(char));
   }
   return result.toString();
+}
+
+/// Keep attacker-authored listings inside the generated environment. The
+/// listings package recognizes this exact terminator even though its body is
+/// otherwise verbatim, so add a harmless space when it appears as content.
+String escapeLatexListing(String source) =>
+    source.replaceAll(r'\end{lstlisting}', r'\end{lstlisting }');
+
+/// Language names are inserted into a listings option argument. Reject
+/// punctuation that can close the option or introduce another TeX token.
+String? safeLatexListingLanguage(String raw) {
+  final language = raw.replaceFirst(RegExp(r'^language-'), '');
+  return RegExp(r'^[A-Za-z0-9][A-Za-z0-9+._-]*$').hasMatch(language)
+      ? language
+      : null;
 }
 
 const _safeMathCommands = <String>{

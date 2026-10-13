@@ -2,6 +2,7 @@ import 'package:archive/archive.dart';
 
 import '../../models/source_deck.dart';
 import '../../models/source_slide.dart';
+import '../../utils/import_budget.dart';
 import 'elearning_importer.dart';
 
 /// Leest IMS Manifest / SCORM-pakketten (#1993).
@@ -11,7 +12,11 @@ import 'elearning_importer.dart';
 /// worden als placeholders bewaard met een verwijzing naar het bronbestand.
 class ImsManifestReader extends ElearningFormatReader {
   @override
-  SourceDeck read(Archive archive, {required String basename}) {
+  SourceDeck read(
+    Archive archive, {
+    required String basename,
+    int maxSlides = 2000,
+  }) {
     final manifest = _readFile(archive, 'imsmanifest.xml');
     if (manifest == null) {
       return SourceDeck(
@@ -22,7 +27,7 @@ class ImsManifestReader extends ElearningFormatReader {
 
     final title =
         _extractXmlValue(manifest, 'title') ?? _titleFromBasename(basename);
-    final items = _extractItems(manifest);
+    final items = _extractItems(manifest, maxSlides);
     final slides = <SourceSlide>[];
 
     for (var i = 0; i < items.length; i++) {
@@ -71,13 +76,16 @@ class ImsManifestReader extends ElearningFormatReader {
     return match?.group(1)?.trim();
   }
 
-  List<_ImsItem> _extractItems(String xml) {
+  List<_ImsItem> _extractItems(String xml, int maxSlides) {
     final items = <_ImsItem>[];
     final itemRegex = RegExp(
       r'<item[^>]*identifier="([^"]*)"[^>]*>(.*?)</item>',
       dotAll: true,
     );
     for (final match in itemRegex.allMatches(xml)) {
+      if (items.length >= maxSlides) {
+        throw ImportBudgetException('$maxSlides dia\'s');
+      }
       final identifier = match.group(1) ?? '';
       final inner = match.group(2) ?? '';
       final title = _extractXmlValue(inner, 'title') ?? identifier;

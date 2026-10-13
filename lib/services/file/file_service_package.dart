@@ -142,6 +142,12 @@ List<PackageEntry>? _decodePackageEntries(
       logWarning('FileService.decodePackageEntries: too many archive entries');
       return null;
     }
+    if (zipContainsSymlinkMetadata(zipBytes)) {
+      logWarning(
+        'FileService.decodePackageEntries: symbolic-link metadata rejected',
+      );
+      return null;
+    }
     archive = ZipDecoder().decodeBytes(input, password: password);
   } catch (e, s) {
     logError('FileService.decodePackageEntries: ZIP decode failed', e, s);

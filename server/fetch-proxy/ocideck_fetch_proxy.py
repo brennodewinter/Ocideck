@@ -47,6 +47,7 @@ import socket
 import ssl
 import sys
 import threading
+import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, quote, urlparse
 
@@ -80,6 +81,12 @@ MAX_INFLIGHT = int(os.environ.get("OCIDECK_PROXY_MAX_INFLIGHT", "8"))
 _inflight = threading.BoundedSemaphore(MAX_INFLIGHT)
 CONNECT_TIMEOUT = 15
 READ_TIMEOUT = 60
+# Bound the whole upstream transfer as well as the idle gap between chunks.
+# Otherwise a source that sends one byte just before each idle timeout can hold
+# a worker slot indefinitely.
+MAX_TRANSFER_SECONDS = int(
+    os.environ.get("OCIDECK_PROXY_MAX_TRANSFER_SECONDS", "300")
+)
 CHUNK = 64 * 1024
 
 
@@ -159,7 +166,14 @@ class Handler(BaseHTTPRequestHandler):
     server_version = "OciDeckFetchProxy/1"
 
     def log_message(self, fmt, *args):  # geen URL's in de log (privacy)
-        sys.stderr.write("fetch-proxy: %s\n" % (fmt % args))
+        # BaseHTTPRequestHandler includes the complete request target in
+        # ``args``. The target is user data and can contain a bearer query
+        # token, so keep only the method in the access log.
+        safe_args = list(args)
+        if len(safe_args) >= 3:
+            request_line = str(safe_args[2])
+            safe_args[2] = request_line.split(" ", 1)[0] or "?"
+        sys.stderr.write("fetch-proxy: %s\n" % (fmt % tuple(safe_args)))
 
     def _refuse(self, code: int, reason: str):
         body = reason.encode("utf-8")
@@ -258,6 +272,7 @@ class Handler(BaseHTTPRequestHandler):
         try:
             conn = conn_cls(pinned, parsed.hostname, port)
             try:
+                deadline = time.monotonic() + MAX_TRANSFER_SECONDS
                 # http.client zet zelf de Host-header op de hostnaam die aan
                 # de constructor is gegeven — het gepinde IP blijft onzichtbaar.
                 conn.request(
@@ -268,7 +283,9 @@ class Handler(BaseHTTPRequestHandler):
                         "Accept": "*/*",
                     },
                 )
-                conn.sock.settimeout(READ_TIMEOUT)
+                conn.sock.settimeout(
+                    min(READ_TIMEOUT, max(0.001, deadline - time.monotonic()))
+                )
                 resp = conn.getresponse()
                 if 300 <= resp.status < 400:
                     return self._refuse(502, "redirects worden niet gevolgd")
@@ -292,6 +309,10 @@ class Handler(BaseHTTPRequestHandler):
 
                 total = 0
                 while True:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        raise TimeoutError("upstream transfer deadline exceeded")
+                    conn.sock.settimeout(min(READ_TIMEOUT, remaining))
                     chunk = resp.read(CHUNK)
                     if not chunk:
                         break

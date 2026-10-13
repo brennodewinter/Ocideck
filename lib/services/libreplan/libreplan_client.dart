@@ -59,6 +59,8 @@ class LibreplanRequestException implements Exception {
 class PinnedLibreplanTransport implements LibreplanHttpTransport {
   const PinnedLibreplanTransport();
 
+  static const _bodyTimeout = Duration(seconds: 60);
+
   /// Cap op de response body. Een LibrePlan-projectsnapshot is ruim voldoende
   /// onder 10 MB; een kwaadaardige server die meer stuurt wordt geweigerd.
   static const int maxResponseBytes = 10 * 1024 * 1024;
@@ -78,7 +80,7 @@ class PinnedLibreplanTransport implements LibreplanHttpTransport {
       headers.forEach(request.headers.set);
       final response = await request.close().timeout(timeout);
       final builder = BytesBuilder(copy: false);
-      await for (final chunk in response) {
+      await for (final chunk in response.timeout(_bodyTimeout)) {
         builder.add(chunk);
         if (builder.length > maxResponseBytes) {
           throw const LibreplanRequestException('response too large');

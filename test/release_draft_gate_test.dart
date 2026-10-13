@@ -180,6 +180,7 @@ curl() {
   for arg in "\$@"; do
     if [ "\$previous" = '-o' ]; then out="\$arg"; fi
     [ "\$arg" = 'Authorization: token test-token' ] && authorized=1
+    if [ "\$previous" = '--config' ] && grep -q 'test-token' "\$arg" 2>/dev/null; then authorized=1; fi
     previous="\$arg"
     url="\$arg"
   done

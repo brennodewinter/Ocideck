@@ -330,15 +330,16 @@ String _freeMarkdownSlide(Slide slide) {
 String _codeSlide(Slide slide) {
   final buf = StringBuffer();
   buf.write('\\begin{lstlisting}');
-  if (slide.codeLanguage.isNotEmpty) {
-    buf.write('[language=${slide.codeLanguage}]');
+  final language = safeLatexListingLanguage(slide.codeLanguage);
+  if (language != null) {
+    buf.write('[language=$language]');
   }
   buf.write('\n');
   // customMarkdown bevat de ruwe code als fenced block; we halen de code
   // eruit door de markdown-converter te laten runnen, die het als
   // lstlisting emitteert. Maar dat dubbel-wikkelt — dus we extracten de
   // code direct uit customMarkdown.
-  buf.write(_extractCode(slide.customMarkdown));
+  buf.write(escapeLatexListing(_extractCode(slide.customMarkdown)));
   buf.write('\n\\end{lstlisting}\n');
   return buf.toString();
 }
@@ -460,7 +461,7 @@ String _chartSlide(Slide slide) {
   // Upgrade path is pgfplots (fase 4).
   final buf = StringBuffer();
   buf.write('\\begin{lstlisting}\n');
-  buf.write(_extractCode(slide.customMarkdown));
+  buf.write(escapeLatexListing(_extractCode(slide.customMarkdown)));
   buf.write('\n\\end{lstlisting}\n');
   return buf.toString();
 }
@@ -471,7 +472,7 @@ String _cockpitSlide(Slide slide) {
   // is een TikZ-dashboard met meters.
   final buf = StringBuffer();
   buf.write('\\begin{lstlisting}\n');
-  buf.write(_extractCode(slide.customMarkdown));
+  buf.write(escapeLatexListing(_extractCode(slide.customMarkdown)));
   buf.write('\n\\end{lstlisting}\n');
   return buf.toString();
 }

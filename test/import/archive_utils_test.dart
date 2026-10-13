@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'dart:typed_data';
+
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/import/utils/archive_utils.dart';
@@ -136,6 +138,22 @@ void main() {
     expect(readZipEntryCount(bytes), 1);
   });
 
+  test('weigert Unix-symlinkmetadata vóór ZipDecoder', () {
+    final bytes = Uint8List.fromList(zipOf({'deck.md': '# deck'}));
+    final central = _centralDirectoryOffset(bytes);
+    // version made by: Unix creator (3) + ZIP version 20.
+    bytes[central + 4] = 20;
+    bytes[central + 5] = 3;
+    // external attributes: Unix S_IFLNK in the upper mode bits.
+    bytes[central + 38] = 0;
+    bytes[central + 39] = 0;
+    bytes[central + 40] = 0;
+    bytes[central + 41] = 0xA0;
+
+    expect(zipContainsSymlinkMetadata(bytes), isTrue);
+    expect(() => safeDecodeZip(bytes), throwsA(isA<FormatException>()));
+  });
+
   test('een te grote losse entry wordt geweigerd', () {
     expect(
       () => safeDecodeZip(
@@ -167,4 +185,16 @@ void main() {
       ),
     );
   });
+}
+
+int _centralDirectoryOffset(Uint8List bytes) {
+  for (var i = 0; i + 4 <= bytes.length; i++) {
+    if (bytes[i] == 0x50 &&
+        bytes[i + 1] == 0x4B &&
+        bytes[i + 2] == 0x01 &&
+        bytes[i + 3] == 0x02) {
+      return i;
+    }
+  }
+  throw StateError('central directory ontbreekt');
 }

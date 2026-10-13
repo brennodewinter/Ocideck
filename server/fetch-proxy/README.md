@@ -96,6 +96,7 @@ Een server-side fetcher is per definitie een SSRF-doelwit. De regels spiegelen
 | `OCIDECK_PROXY_PORT` | `8123` | Poort |
 | `OCIDECK_PROXY_MAX_BYTES` | `536870912` | Harde bytecap per opvraag (512 MiB) |
 | `OCIDECK_PROXY_MAX_INFLIGHT` | `8` | Hoeveel opvragen er tegelijk onderweg mogen zijn; daarboven volgt een 503 |
+| `OCIDECK_PROXY_MAX_TRANSFER_SECONDS` | `300` | Harde totale tijd voor één bronopvraag, naast de time-out tussen brokken |
 | `OCIDECK_PROXY_ALLOWED_PORTS` | `80,443,8080,8443` | Poorten die een deck-URL mag gebruiken; ruimer zetten maakt er een poortscanner van |
 | `OCIDECK_PROXY_ALLOWED_ORIGINS` | *(leeg)* | Komma-lijst. Leeg betekent **niet** "geen check": dan bedient het hulppunt alleen verzoeken met `Sec-Fetch-Site: same-origin`. Is de lijst gezet, dan volstaat die header óók, en anders moet `Origin` of `Referer` met een item beginnen. Direct ingetikte adressen en andere sites blijven geweigerd. *(Rechtgezet 22-07-2026: hier stond "leeg = geen check", wat het omgekeerde was van wat de code doet.)* |
 | `OCIDECK_PROXY_ALLOW_ANY` | *(leeg = uit)* | Op `1`/`true`/`yes` vervalt de origin-controle volledig en bedient het hulppunt elke aanvrager. Alleen doen achter authenticatie en snelheidsbegrenzing — zie hieronder. |

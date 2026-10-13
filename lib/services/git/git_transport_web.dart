@@ -24,6 +24,8 @@ class BrowserGitTransport implements GitTransport {
   final http.Client? _injected;
   http.Client? _owned;
 
+  static const _bodyTimeout = Duration(seconds: 60);
+
   http.Client get _client => _injected ?? (_owned ??= http.Client());
 
   /// Headernamen die een geheim dragen. Zie [_mayUseProxy].
@@ -201,7 +203,7 @@ class BrowserGitTransport implements GitTransport {
         );
       }
       final builder = BytesBuilder(copy: false);
-      await for (final chunk in streamed.stream) {
+      await for (final chunk in streamed.stream.timeout(_bodyTimeout)) {
         builder.add(chunk);
         if (builder.length > maxBytes) {
           throw const GitForgeException(

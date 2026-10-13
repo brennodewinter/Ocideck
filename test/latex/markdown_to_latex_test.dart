@@ -135,9 +135,30 @@ void main() {
       expect(out, contains(r'\end{lstlisting}'));
     });
 
+    test(
+      'code kan de lstlisting-omgeving niet sluiten of een taaloptie breken',
+      () {
+        final out = markdownToLatex(
+          '```evil]\\input{/etc/passwd}\n'
+          r'\end{lstlisting}'
+          '\n```\n',
+        );
+        expect(out, contains(r'\begin{lstlisting}'));
+        expect(out, isNot(contains(r'[language=evil]')));
+        expect(out, contains(r'\end{lstlisting }'));
+        expect(out, isNot(contains(r'\input{/etc/passwd}')));
+      },
+    );
+
     test('inline code wordt texttt', () {
       final out = markdownToLatex('Gebruik `print()` hiervoor.');
       expect(out, contains(r'\texttt{print()}'));
+    });
+
+    test('inline code blijft binnen de texttt-groep', () {
+      final out = markdownToLatex(r'Gebruik `}input{/etc/passwd}`.');
+      expect(out, contains(r'\texttt{\}input\{/etc/passwd\}}'));
+      expect(out, isNot(contains(r'\input{/etc/passwd}')));
     });
 
     test('wiskunde pass-through: dollar-syntax blijft ongewijzigd', () {

@@ -132,6 +132,8 @@ class OpenKatReportRef {
 class PinnedOpenKatTransport implements OpenKatHttpTransport {
   const PinnedOpenKatTransport();
 
+  static const _bodyTimeout = Duration(seconds: 60);
+
   /// Cap op de response. Org-/rapportlijsten zijn klein; een toekomstige JSON-
   /// payload van een aggregaat-rapport past ruim onder 20 MB.
   static const int maxResponseBytes = 20 * 1024 * 1024;
@@ -151,7 +153,7 @@ class PinnedOpenKatTransport implements OpenKatHttpTransport {
       headers.forEach(request.headers.set);
       final response = await request.close().timeout(timeout);
       final builder = BytesBuilder(copy: false);
-      await for (final chunk in response) {
+      await for (final chunk in response.timeout(_bodyTimeout)) {
         builder.add(chunk);
         if (builder.length > maxResponseBytes) {
           throw const OpenKatRequestException('response too large');

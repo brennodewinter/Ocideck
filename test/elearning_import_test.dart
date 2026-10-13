@@ -1,6 +1,7 @@
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/import/pipeline/format_detector.dart';
+import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/elearning/elearning_importer.dart';
 import 'package:ocideck/services/import/importers/elearning/ims_manifest_reader.dart';
 import 'package:ocideck/services/import/importers/elearning/qti_reader.dart';
@@ -8,6 +9,7 @@ import 'package:ocideck/services/import/importers/elearning/aicc_reader.dart';
 import 'package:ocideck/services/import/importers/elearning/olx_reader.dart';
 import 'package:ocideck/services/import/importers/elearning/cmi5_reader.dart';
 import 'package:ocideck/services/import/models/source_format.dart';
+import 'package:ocideck/services/import/utils/import_budget.dart';
 
 Archive _zipWith(Map<String, String> files) {
   final archive = Archive();
@@ -193,5 +195,27 @@ void main() {
       expect(ElearningImporter(SourceFormat.aicc).displayName, 'AICC');
       expect(ElearningImporter(SourceFormat.olx).displayName, 'OLX (Open edX)');
     });
+
+    test(
+      'begrens het aantal gegenereerde dia\'s vóór de lijst groeit',
+      () async {
+        final items = List.generate(
+          3,
+          (i) => '<item identifier="item$i"><title>Item $i</title></item>',
+        ).join();
+        final archive = _zipWith({
+          'imsmanifest.xml':
+              '<manifest><organization>$items</organization></manifest>',
+        });
+        final result = await ElearningImporter(SourceFormat.scorm).importBytes(
+          ZipEncoder().encodeBytes(archive),
+          path: 'too-many.zip',
+          budget: ImportBudget.forTest(maxSlides: 2),
+        );
+
+        expect(result.isErr, isTrue);
+        expect(result.errValue!.reason.name, 'tooLarge');
+      },
+    );
   });
 }

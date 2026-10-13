@@ -19,8 +19,13 @@ import 'openkat_installation_wizard.dart';
 
 /// Kiest installatie → organisatie → aggregaat-rapport, en begeleidt daarna
 /// de JSON-export (pad B) of probeert REST-JSON (pad A, als beschikbaar).
+typedef OpenKatClientFactory =
+    OpenKatRockyClient Function(OpenKatInstallation installation, String token);
+
 class OpenKatServerReportDialog extends ConsumerStatefulWidget {
-  const OpenKatServerReportDialog({super.key});
+  const OpenKatServerReportDialog({super.key, this.clientFactory});
+
+  final OpenKatClientFactory? clientFactory;
 
   static Future<void> show(BuildContext context) {
     return showDialog<void>(
@@ -409,7 +414,11 @@ class _OpenKatServerReportDialogState
           );
       return null;
     }
-    return OpenKatRockyClient(installation: installation, token: token);
+    return (widget.clientFactory ??
+        (installation, token) => OpenKatRockyClient(
+          installation: installation,
+          token: token,
+        ))(installation, token);
   }
 
   Future<void> _loadOrgs() async {

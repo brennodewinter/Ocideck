@@ -2,6 +2,7 @@ import 'package:archive/archive.dart';
 
 import '../../models/source_deck.dart';
 import '../../models/source_slide.dart';
+import '../../utils/import_budget.dart';
 import 'elearning_importer.dart';
 
 /// Leest OLX (Open Learning XML) pakketten (#1997).
@@ -10,7 +11,11 @@ import 'elearning_importer.dart';
 /// vertical structuur eruit, en mapt ze naar OciDeck-slides.
 class OlxReader extends ElearningFormatReader {
   @override
-  SourceDeck read(Archive archive, {required String basename}) {
+  SourceDeck read(
+    Archive archive, {
+    required String basename,
+    int maxSlides = 2000,
+  }) {
     final courseXml = _readFile(archive, 'course.xml');
     if (courseXml == null) {
       return SourceDeck(
@@ -29,7 +34,7 @@ class OlxReader extends ElearningFormatReader {
         _extractXmlValue(courseXml, 'display_name') ??
         _extractXmlAttribute(courseXml, 'course', 'course') ??
         'OLX-import';
-    final sequentials = _extractSequentials(courseXml);
+    final sequentials = _extractSequentials(courseXml, maxSlides);
     final slides = <SourceSlide>[];
 
     for (var i = 0; i < sequentials.length; i++) {
@@ -80,10 +85,13 @@ class OlxReader extends ElearningFormatReader {
     return match?.group(1)?.trim();
   }
 
-  List<_OlxSequential> _extractSequentials(String xml) {
+  List<_OlxSequential> _extractSequentials(String xml, int maxSlides) {
     final seqs = <_OlxSequential>[];
     final seqRegex = RegExp(r'<sequential[^>]*url_name="([^"]*)"[^>]*>');
     for (final match in seqRegex.allMatches(xml)) {
+      if (seqs.length >= maxSlides) {
+        throw ImportBudgetException('$maxSlides dia\'s');
+      }
       final url = match.group(1) ?? '';
       seqs.add(_OlxSequential(title: url, url: url));
     }
