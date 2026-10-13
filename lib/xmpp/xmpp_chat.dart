@@ -38,6 +38,7 @@ import '../collab/collab_crypto.dart';
 import '../collab/collab_device_directory.dart';
 import '../utils/content_hash.dart';
 import '../utils/log.dart';
+import '../utils/json_depth_guard.dart';
 import 'companion_demux.dart';
 import 'xmpp_session.dart';
 import 'xmpp_stanza.dart';
@@ -178,7 +179,7 @@ class XmppChat {
     final child = stanza.childByNs(chatType);
     if (child == null) return;
     try {
-      final decoded = jsonDecode(child.innerText);
+      final decoded = jsonDecodeGuarded(child.innerText);
       if (decoded is! Map<String, Object?>) {
         logWarning('xmpp.chat.notObject', decoded);
         return;

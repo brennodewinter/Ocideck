@@ -147,10 +147,16 @@ Future<String> _processImages(
     }
 
     final dataUri = src.startsWith('data:') ? src : await embedImage(src);
-    if (dataUri == null) continue;
+    if (dataUri == null) {
+      result = result.replaceFirst(original, '');
+      continue;
+    }
 
     final parsed = _parseDataUri(dataUri);
-    if (parsed == null) continue;
+    if (parsed == null) {
+      result = result.replaceFirst(original, '');
+      continue;
+    }
 
     final ext = _extensionForMediaType(parsed.mediaType);
     final name = 'image-${images.length}.$ext';

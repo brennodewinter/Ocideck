@@ -14,6 +14,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import '../../utils/json_depth_guard.dart';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -213,7 +214,7 @@ class OpenKatRockyClient {
     if (_isWeb) return false;
     if (!installation.isConfigured) return false;
     if (token.trim().isEmpty) return false;
-    if (!installation.isHttps && !installation.trustedInternal) return false;
+    if (!installation.isHttps) return false;
     return true;
   }
 
@@ -222,7 +223,7 @@ class OpenKatRockyClient {
     if (_isWeb) return 'desktop_only';
     if (!installation.isConfigured) return 'not_configured';
     if (token.trim().isEmpty) return 'token_missing';
-    if (!installation.isHttps && !installation.trustedInternal) {
+    if (!installation.isHttps) {
       return 'https_required';
     }
     return null;
@@ -359,7 +360,7 @@ class _ReportPage {
 }
 
 List<OpenKatOrganization> _parseOrganizationList(String body) {
-  final decoded = jsonDecode(body);
+  final decoded = jsonDecodeGuarded(body);
   if (decoded is List) {
     return [
       for (final item in decoded)
@@ -378,7 +379,7 @@ List<OpenKatOrganization> _parseOrganizationList(String body) {
 }
 
 _ReportPage _parseReportList(String body) {
-  final decoded = jsonDecode(body);
+  final decoded = jsonDecodeGuarded(body);
   if (decoded is List) {
     return _ReportPage([
       for (final item in decoded)

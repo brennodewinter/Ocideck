@@ -408,6 +408,7 @@ class _SnapEnv {
       companionDemux: authorityDemux,
       crypto: authorityCrypto,
       roomJid: room,
+      authorityDeviceId: authorityPub.deviceId,
       directory: CollabDeviceDirectory(),
       maxChunkChars: maxChunkChars,
     );
@@ -416,6 +417,7 @@ class _SnapEnv {
       companionDemux: receiverDemux,
       crypto: receiverCrypto,
       roomJid: room,
+      authorityDeviceId: authorityPub.deviceId,
       directory: receiverDirectory,
       maxChunkChars: maxChunkChars,
       maxAssembledSnapshots: maxAssembledSnapshots,

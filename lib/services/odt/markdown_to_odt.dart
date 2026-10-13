@@ -440,7 +440,7 @@ class _OdtNodeVisitor implements md.NodeVisitor {
     _buf.write(
       '<draw:frame draw:style-name="Graphics" text:anchor-type="paragraph" '
       'svg:width="15cm" svg:height="auto" draw:z-index="0">'
-      '<draw:image xlink:href="$src" xlink:type="simple">'
+      '<draw:image xlink:href="${xmlAttr(src)}" xlink:type="simple">'
       '<svg:title>${xmlEscape(alt)}</svg:title>'
       '</draw:image>'
       '</draw:frame>',

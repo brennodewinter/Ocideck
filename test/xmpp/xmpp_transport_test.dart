@@ -506,6 +506,7 @@ class _XmppEnv {
       companionDemux: hostDemux,
       crypto: hostCrypto,
       roomJid: room,
+      authorityDeviceId: 'host',
       peerResolver: resolve,
       resyncMinInterval: resyncMinInterval,
       resyncCoalesceWindow: resyncCoalesceWindow,
@@ -516,6 +517,7 @@ class _XmppEnv {
       companionDemux: guestDemux,
       crypto: guestCrypto,
       roomJid: room,
+      authorityDeviceId: 'host',
       peerResolver: resolve,
       onReconnected: guestChannel.onReconnected,
       resyncMinInterval: resyncMinInterval,
@@ -577,6 +579,7 @@ Future<CollabTransportPair> _createContractPair() async {
     companionDemux: aDemux,
     crypto: aCrypto,
     roomJid: room,
+    authorityDeviceId: 'alice',
     peerResolver: resolve,
   );
   final bTransport = XmppTransport(
@@ -584,6 +587,7 @@ Future<CollabTransportPair> _createContractPair() async {
     companionDemux: bDemux,
     crypto: bCrypto,
     roomJid: room,
+    authorityDeviceId: 'alice',
     peerResolver: resolve,
   );
 

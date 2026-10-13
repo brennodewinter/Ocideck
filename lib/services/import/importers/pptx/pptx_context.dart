@@ -4,6 +4,7 @@ import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
 import '../../utils/xml_utils.dart';
+import '../../utils/import_budget.dart';
 
 /// Opc part namespaces used by PPTX.
 class _Ns {
@@ -21,7 +22,9 @@ class _Ns {
 /// ids to targets. Targets are relative to the part's own folder, so
 /// `../media/image1.png` from `ppt/slides/` resolves to `ppt/media/image1.png`.
 class PptxContext {
-  PptxContext(this.archive);
+  PptxContext(this.archive, {this.budget = ImportBudget.standard});
+
+  final ImportBudget budget;
 
   final Archive archive;
 
@@ -43,7 +46,11 @@ class PptxContext {
   /// Decode a text part by path, or `null` when absent.
   String? readPart(String path) {
     final bytes = readPartBytes(path);
-    return bytes == null ? null : utf8.decode(bytes);
+    if (bytes == null) return null;
+    if (bytes.length > budget.maxXmlPartBytes) {
+      throw ImportBudgetException('${budget.maxXmlPartBytes} XML-bytes');
+    }
+    return utf8.decode(bytes);
   }
 
   List<int>? readPartBytes(String path) {
@@ -57,7 +64,7 @@ class PptxContext {
   XmlDocument? readXml(String path) {
     final src = readPart(path);
     if (src == null) return null;
-    return parseXmlSafe(src);
+    return parseXmlSafe(src, budget: budget);
   }
 
   /// Relationships for [partPath] as `{rId: target}`.

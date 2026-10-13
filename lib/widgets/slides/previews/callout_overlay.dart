@@ -32,7 +32,7 @@ ImageProvider? calloutImageProvider(String imagePath, String? projectPath) {
     final bytes = WebAssetStore.bytesFor(imagePath);
     return bytes == null ? null : cappedMemoryImage(bytes);
   }
-  final resolved = resolveSlideAssetPath(imagePath, projectPath);
+  final resolved = resolveContainedRealPath(imagePath, projectPath);
   if (resolved == null) return null;
   return cappedFileImage(File(resolved));
 }

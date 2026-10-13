@@ -122,6 +122,9 @@ class WebdavCollabLogStore implements CollabLogStore {
   final String opsDir;
 
   static const _suffix = '.json';
+  static const maxRecordBytes = 512 * 1024;
+  static const maxSnapshotBytes = 32 * 1024 * 1024;
+  static const maxBeaconBytes = 16 * 1024;
 
   String _pathFor(int seq) =>
       '$opsDir/${seq.toString().padLeft(12, '0')}$_suffix';
@@ -134,6 +137,17 @@ class WebdavCollabLogStore implements CollabLogStore {
   /// The beacon sits beside the snapshot under its own non-numeric name, so
   /// [listSequences] ignores it too.
   String get _beaconPath => '$opsDir/beacon$_suffix';
+
+  List<int> _encodeCapped(String value, int cap) {
+    if (value.length > cap) {
+      throw const FormatException('collab record too large');
+    }
+    final bytes = utf8.encode(value);
+    if (bytes.length > cap) {
+      throw const FormatException('collab record too large');
+    }
+    return bytes;
+  }
 
   @override
   Future<List<int>> listSequences() async {
@@ -166,7 +180,10 @@ class WebdavCollabLogStore implements CollabLogStore {
 
   @override
   Future<String> read(int seq) async {
-    final file = await service.download(_pathFor(seq));
+    final file = await service.download(
+      _pathFor(seq),
+      maxBytes: maxRecordBytes,
+    );
     return utf8.decode(file.bytes);
   }
 
@@ -175,7 +192,7 @@ class WebdavCollabLogStore implements CollabLogStore {
     try {
       await service.upload(
         _pathFor(seq),
-        utf8.encode(record),
+        _encodeCapped(record, maxRecordBytes),
         onlyIfAbsent: true,
       );
       return true;
@@ -192,7 +209,10 @@ class WebdavCollabLogStore implements CollabLogStore {
   @override
   Future<String?> readSnapshot() async {
     try {
-      final file = await service.download(_snapshotPath);
+      final file = await service.download(
+        _snapshotPath,
+        maxBytes: maxSnapshotBytes,
+      );
       return utf8.decode(file.bytes);
     } on WebdavException catch (e) {
       if (e.kind == WebdavError.notFound) return null; // none posted yet
@@ -204,13 +224,19 @@ class WebdavCollabLogStore implements CollabLogStore {
   Future<void> writeSnapshot(String snapshot) async {
     // Unconditional overwrite: only the authority writes the baseline, so there
     // is no If-Match/If-None-Match race to guard (unlike the op records).
-    await service.upload(_snapshotPath, utf8.encode(snapshot));
+    await service.upload(
+      _snapshotPath,
+      _encodeCapped(snapshot, maxSnapshotBytes),
+    );
   }
 
   @override
   Future<String?> readBeacon() async {
     try {
-      final file = await service.download(_beaconPath);
+      final file = await service.download(
+        _beaconPath,
+        maxBytes: maxBeaconBytes,
+      );
       return utf8.decode(file.bytes);
     } on WebdavException catch (e) {
       if (e.kind == WebdavError.notFound) return null; // pre-handover session
@@ -222,6 +248,6 @@ class WebdavCollabLogStore implements CollabLogStore {
   Future<void> writeBeacon(String beacon) async {
     // Unconditional overwrite: the beacon is last-write-wins advisory state
     // (§5.3). See the interface doc for why no conditional write is needed here.
-    await service.upload(_beaconPath, utf8.encode(beacon));
+    await service.upload(_beaconPath, _encodeCapped(beacon, maxBeaconBytes));
   }
 }

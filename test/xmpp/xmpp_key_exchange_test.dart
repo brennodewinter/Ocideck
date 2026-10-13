@@ -701,6 +701,7 @@ class _KeyEnv {
         companionDemux: hostDemux,
         crypto: hostCrypto,
         roomJid: room,
+        authorityDeviceId: 'host',
         peerResolver: hostResolve,
       );
       guestTransport = XmppTransport(
@@ -708,6 +709,7 @@ class _KeyEnv {
         companionDemux: guestDemux,
         crypto: guestCrypto,
         roomJid: room,
+        authorityDeviceId: 'host',
         peerResolver: guestResolve,
       );
     }

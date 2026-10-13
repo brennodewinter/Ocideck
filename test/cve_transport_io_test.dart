@@ -2,6 +2,8 @@
 library;
 
 import 'dart:io';
+import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/cve_transport.dart';
@@ -43,6 +45,31 @@ class _LocalRedirectClient implements HttpClient {
 /// is geen netwerk voor nodig — en dat is meteen de bewering: een geblokkeerde
 /// URI mag geen verbinding kosten om als geblokkeerd te gelden.
 void main() {
+  test('CVE metadata body is capped before retaining a chunk', () async {
+    await expectLater(
+      PinnedCveTransport.readBody(
+        Stream.value(List.filled(5, 65)),
+        maxBytes: 4,
+      ),
+      throwsA(isA<CveTransportException>()),
+    );
+    expect(
+      await PinnedCveTransport.readBody(Stream.value(utf8.encode('{}'))),
+      '{}',
+    );
+  });
+  test('CVE stalled body has an idle deadline', () async {
+    final source = StreamController<List<int>>();
+    await expectLater(
+      PinnedCveTransport.readBody(
+        source.stream,
+        timeout: const Duration(milliseconds: 10),
+      ),
+      throwsA(isA<TimeoutException>()),
+    );
+    await source.close();
+  });
+
   final transport = PinnedCveTransport();
 
   Future<String> reasonFor(String uri) async {

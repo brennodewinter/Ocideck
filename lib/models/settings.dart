@@ -632,9 +632,15 @@ class ThemeProfile {
   }
 
   factory ThemeProfile.fromJson(Map<String, Object?> json) {
+    String? stringValue(String key) =>
+        json[key] is String ? json[key] as String : null;
+
+    bool boolValue(String key, bool fallback) =>
+        json[key] is bool ? json[key] as bool : fallback;
+
     return ThemeProfile(
       slideBackgroundColor: _color(json['slideBackgroundColor'], '#FFFFFF'),
-      name: json['name'] as String? ?? 'Standaard',
+      name: stringValue('name') ?? 'Standaard',
       textColor: _color(json['textColor'], '#222222'),
       accentColor: _color(json['accentColor'], '#2E7D64'),
       checklistCheckedColor: _color(
@@ -645,7 +651,7 @@ class ThemeProfile {
         json['checklistUncheckedColor'],
         '#64748B',
       ),
-      checklistStrikeThrough: json['checklistStrikeThrough'] as bool? ?? true,
+      checklistStrikeThrough: boolValue('checklistStrikeThrough', true),
       bulletMarker: BulletMarker.values.firstWhere(
         (m) => m.name == json['bulletMarker'],
         orElse: () => BulletMarker.dot,
@@ -659,7 +665,7 @@ class ThemeProfile {
         json['tableHeaderBackgroundColor'] ?? json['accentColor'],
         '#2E7D64',
       ),
-      tableZebraStriped: json['tableZebraStriped'] as bool? ?? false,
+      tableZebraStriped: boolValue('tableZebraStriped', false),
       tableZebraColor: _color(json['tableZebraColor'], '#F1F5F9'),
       tableBorderStyle: TableBorderStyle.values.firstWhere(
         (s) => s.name == json['tableBorderStyle'],
@@ -668,31 +674,28 @@ class ThemeProfile {
       tableBorderColor: _color(json['tableBorderColor'], '#CBD5E1'),
       tableCellPaddingPx:
           (json['tableCellPaddingPx'] as num?)?.toDouble() ?? 8.0,
-      tableAccentHeaderBorder:
-          json['tableAccentHeaderBorder'] as bool? ?? false,
+      tableAccentHeaderBorder: boolValue('tableAccentHeaderBorder', false),
       titleBackgroundColor: _color(json['titleBackgroundColor'], '#1C2B47'),
       titleTextColor: _color(json['titleTextColor'], '#FFFFFF'),
       sectionBackgroundColor: _color(json['sectionBackgroundColor'], '#2E7D64'),
       codeBackgroundColor: _color(json['codeBackgroundColor'], '#282C34'),
       codeTextColor: _color(json['codeTextColor'], '#ABB2BF'),
-      codeHighlightSyntax: json['codeHighlightSyntax'] as bool? ?? true,
+      codeHighlightSyntax: boolValue('codeHighlightSyntax', true),
       codeFontFamily: _font(
         json['codeFontFamily'],
         AppSettings.codeFonts,
         'monospace',
       ),
-      logoPath: json['logoPath'] as String?,
-      logoPosition: json['logoPosition'] as String? ?? 'bottom-right',
+      logoPath: stringValue('logoPath'),
+      logoPosition: stringValue('logoPosition') ?? 'bottom-right',
       logoSize: (json['logoSize'] as num?)?.round() ?? 96,
-      brandStripPath: json['brandStripPath'] as String?,
+      brandStripPath: stringValue('brandStripPath'),
       brandStripHeight: ((json['brandStripHeight'] as num?)?.toDouble() ?? 0)
           .clamp(0.0, 0.25),
-      titleSubtitleInBrandStrip:
-          json['titleSubtitleInBrandStrip'] as bool? ?? false,
-      logoDarkPath: json['logoDarkPath'] as String?,
-      documentLogoPath: json['documentLogoPath'] as String?,
-      documentLogoPosition:
-          json['documentLogoPosition'] as String? ?? 'top-right',
+      titleSubtitleInBrandStrip: boolValue('titleSubtitleInBrandStrip', false),
+      logoDarkPath: stringValue('logoDarkPath'),
+      documentLogoPath: stringValue('documentLogoPath'),
+      documentLogoPosition: stringValue('documentLogoPosition') ?? 'top-right',
       documentLogoSize: (json['documentLogoSize'] as num?)?.round().clamp(
         32,
         480,
@@ -701,8 +704,8 @@ class ThemeProfile {
         (json['documentBodyFontSize'] as num?)?.toDouble() ??
             kDocumentDefaultBodyFontSize,
       ),
-      documentHeaderText: json['documentHeaderText'] as String? ?? '',
-      documentFooterText: json['documentFooterText'] as String? ?? '',
+      documentHeaderText: stringValue('documentHeaderText') ?? '',
+      documentFooterText: stringValue('documentFooterText') ?? '',
       documentHeadingColor: json['documentHeadingColor'] == null
           ? null
           : _color(json['documentHeadingColor'], '#222222'),
@@ -712,8 +715,7 @@ class ThemeProfile {
       documentBandBackgroundColor: json['documentBandBackgroundColor'] == null
           ? null
           : _color(json['documentBandBackgroundColor'], '#FFFFFF'),
-      documentShowPageNumbers:
-          json['documentShowPageNumbers'] as bool? ?? false,
+      documentShowPageNumbers: boolValue('documentShowPageNumbers', false),
       documentHeadingFontFamily: _optionalFont(
         json['documentHeadingFontFamily'],
         AppSettings.availableFonts,
@@ -727,12 +729,12 @@ class ThemeProfile {
         AppSettings.availableFonts,
         'Arial',
       ),
-      footerText: json['footerText'] as String? ?? '',
-      footerShowPageNumbers: json['footerShowPageNumbers'] as bool? ?? false,
-      footerPosition: json['footerPosition'] as String? ?? 'right',
-      closingSlideEnabled: json['closingSlideEnabled'] as bool? ?? false,
+      footerText: stringValue('footerText') ?? '',
+      footerShowPageNumbers: boolValue('footerShowPageNumbers', false),
+      footerPosition: stringValue('footerPosition') ?? 'right',
+      closingSlideEnabled: boolValue('closingSlideEnabled', false),
       closingSlideMarkdown:
-          json['closingSlideMarkdown'] as String? ?? '# Bedankt\n\nVragen?',
+          stringValue('closingSlideMarkdown') ?? '# Bedankt\n\nVragen?',
       animationDurationMs: clampThemeAnimationDuration(
         (json['animationDurationMs'] as num?)?.round() ??
             kThemeDefaultAnimationDurationMs,

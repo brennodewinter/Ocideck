@@ -28,6 +28,25 @@ void main() {
     return ZipEncoder().encode(archive);
   }
 
+  test('lying ZIP sizes cannot bypass actual inflation budget', () {
+    final bytes = Uint8List.fromList(zipOf({'large.txt': 'a' * 3000}));
+    final directory = _centralDirectoryOffset(bytes);
+    // Both ZIP size representations lie; the DEFLATE stream still expands.
+    for (final offset in [22, directory + 24]) {
+      bytes[offset] = 1;
+      bytes[offset + 1] = 0;
+      bytes[offset + 2] = 0;
+      bytes[offset + 3] = 0;
+    }
+    expect(
+      () => safeDecodeZip(
+        bytes,
+        budget: ImportBudget.forTest(maxUncompressedEntry: 32),
+      ),
+      throwsA(isA<ImportBudgetException>()),
+    );
+  });
+
   test('een gewoon archief komt er gewoon doorheen', () {
     final archive = safeDecodeZip(zipOf({'a.txt': 'hallo'}));
     expect(archive.map((f) => f.name), contains('a.txt'));

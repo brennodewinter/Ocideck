@@ -1,4 +1,5 @@
-import 'dart:convert';
+import 'dart:async';
+import '../cve_transport_io.dart';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart' show visibleForTesting;
@@ -116,7 +117,7 @@ class GithubBulkTransport implements CveBulkTransport {
     final request = await client.getUrl(url);
     request.headers.set(HttpHeaders.userAgentHeader, _userAgent);
     request.followRedirects = false;
-    return request.close();
+    return request.close().timeout(_chunkTimeout);
   }
 
   /// Volgt de redirect-keten met de hand, elke hop opnieuw door de poort.
@@ -127,7 +128,7 @@ class GithubBulkTransport implements CveBulkTransport {
       if (!response.isRedirect) return response;
 
       final location = response.headers.value(HttpHeaders.locationHeader);
-      await response.drain<void>();
+      await response.listen(null).cancel();
       if (location == null) {
         throw const CveIngestException(
           CveIngestFailure.networkFailed,
@@ -150,10 +151,7 @@ class GithubBulkTransport implements CveBulkTransport {
       if (response.statusCode != 200) {
         throw HttpException('HTTP ${response.statusCode}', uri: url);
       }
-      return await response
-          .timeout(_chunkTimeout)
-          .transform(utf8.decoder)
-          .join();
+      return await PinnedCveTransport.readBody(response).timeout(_chunkTimeout);
     } on SocketException catch (e) {
       throw CveIngestException(CveIngestFailure.networkFailed, e.message);
     } finally {

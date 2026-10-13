@@ -42,6 +42,7 @@ class _FakeImageService extends ImageService {
   @override
   Future<Uint8List?> readSlideImageBytes(
     String path, {
+    int maxBytes = ImageService.maxImageBytes,
     String? projectPath,
   }) async => Uint8List.fromList(const [1, 2, 3]);
 }

@@ -303,7 +303,6 @@ extension FileServicePackage on FileService {
     // Reserve bytes before reading assets so oversized packages fail fast (#1046).
     final budget = _PackageBudget(budgetBytes);
     void reserve(int n) => budget.reserve(n);
-
     // Bronpad → archiefpad, zodat dubbele bronnen maar eenmaal meegaan.
     final byAbsolutePath = <String, String>{};
     // Stabiel lidpad per mem:-asset, zodat imagePath en imagePath2 die
@@ -316,7 +315,7 @@ extension FileServicePackage on FileService {
       if (existing != null) return existing;
       final bytes = WebAssetStore.bytesFor(path);
       // Store leeg (bv. pagina herladen): niets om in te pakken.
-      if (bytes == null) return null;
+      if (bytes == null || !_packageAssetAllowed(bytes, subdir)) return null;
       reserve(bytes.length);
       final original = WebAssetStore.nameFor(path) ?? 'afbeelding.png';
       final base = _safeName(p.basenameWithoutExtension(original));
@@ -379,7 +378,8 @@ extension FileServicePackage on FileService {
       // Stat before read: reserve the on-disk size so an oversized asset trips
       // the budget without first being pulled into memory (#1046).
       reserve(await file.length());
-      final bytes = await file.readAsBytes();
+      final bytes = await _readPkg(abs, subdir);
+      if (bytes == null || !_packageAssetAllowed(bytes, subdir)) return '';
       archive.add(ArchiveFile(rel, bytes.length, bytes));
       added.add(rel);
       byAbsolutePath[abs] = rel;
@@ -822,3 +822,25 @@ String _packageFileName(Deck deck) =>
 /// voor een gewoon pakket wordt aangezien.
 String _dossierFileName(Deck deck) =>
     '${_safeName(deck.title)}_auditdossier.${FileService.packageExtension}';
+
+bool _packageAssetAllowed(List<int> bytes, String subdir) => subdir == 'media'
+    ? bytes.length <= ImageService.maxMediaBytes
+    : bytes.length <= ImageService.maxImageBytes;
+
+Future<List<int>?> _readPkg(String path, String subdir) async {
+  final maxBytes = subdir == 'media'
+      ? ImageService.maxMediaBytes
+      : ImageService.maxImageBytes;
+  final file = File(path);
+  try {
+    if (await file.length() > maxBytes) return null;
+    final builder = BytesBuilder(copy: false);
+    await for (final chunk in file.openRead()) {
+      if (builder.length + chunk.length > maxBytes) return null;
+      builder.add(chunk);
+    }
+    return builder.takeBytes();
+  } on FileSystemException {
+    return null;
+  }
+}

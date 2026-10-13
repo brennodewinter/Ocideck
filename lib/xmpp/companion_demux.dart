@@ -28,6 +28,7 @@ class CompanionDemux {
   CompanionDemux({
     required XmppStanzaChannel channel,
     this.onUnknownNamespace,
+    this.maxPendingStanzas = 256,
   }) {
     _sub = channel.stanzas.listen(_onStanza, onDone: _onDone);
   }
@@ -37,6 +38,8 @@ class CompanionDemux {
   /// gedropt. Niet voor productie-afhandeling — een onbekend payload-type is
   /// invoer, en de default (loggen + droppen) is fail-closed.
   final void Function(Stanza stanza)? onUnknownNamespace;
+  final int maxPendingStanzas;
+  int _pendingStanzas = 0;
 
   final _handlers = <String, Future<void> Function(Stanza)>{};
   late final StreamSubscription<Stanza> _sub;
@@ -60,41 +63,44 @@ class CompanionDemux {
   Iterable<String> get registeredNamespaces => _handlers.keys;
 
   void _onStanza(Stanza stanza) {
-    if (_disposed) return;
+    if (_disposed || _pendingStanzas >= maxPendingStanzas) return;
+    _pendingStanzas++;
     // Seriële verwerking: keten elke stanza aan de vorige (#1420). Dit beperkt
     // gelijktijdigheid tot 1 — een vloed stanzas start geen vloed gelijktijdige
     // crypto-handlers (AEAD-decryptie, Ed25519-verificatie). De afruil is dat
     // een trage handler (zware snapshot-reassemblage) latere stanzas vertraagt,
     // maar dat is acceptabeler dan een onresponsieve app.
-    _queue = _queue.then((_) async {
-      if (_disposed) return;
-      // Vind het eerste child-element met een xmlns en routeer naar de handler.
-      for (final child in stanza.children) {
-        final ns = _namespaceOf(child);
-        if (ns == null) continue;
-        final handler = _handlers[ns];
-        if (handler != null) {
-          // ponytail: een uitzondering in een handler mag de demux niet
-          // stilleggen — log en ga door, als een tweede namespace-brick niet
-          // mag blokkeren omdat de eerste een corrupte stanza kreeg.
-          try {
-            await handler(stanza);
-          } catch (e) {
-            logWarning('xmpp.demux.handler', e);
+    _queue = _queue
+        .then((_) async {
+          if (_disposed) return;
+          // Vind het eerste child-element met een xmlns en routeer naar de handler.
+          for (final child in stanza.children) {
+            final ns = _namespaceOf(child);
+            if (ns == null) continue;
+            final handler = _handlers[ns];
+            if (handler != null) {
+              // ponytail: een uitzondering in een handler mag de demux niet
+              // stilleggen — log en ga door, als een tweede namespace-brick niet
+              // mag blokkeren omdat de eerste een corrupte stanza kreeg.
+              try {
+                await handler(stanza);
+              } catch (e) {
+                logWarning('xmpp.demux.handler', e);
+              }
+              return;
+            }
           }
-          return;
-        }
-      }
-      // Onbekende namespace — fail-closed: log + drop. Log alleen een safe
-      // summary (kind, from, to, child-namespace) — niet de volledige stanza
-      // XML, die chat-berichten, device-keys of andere payload kan bevatten
-      // (#1431).
-      if (onUnknownNamespace != null) {
-        onUnknownNamespace!(stanza);
-      } else {
-        logWarning('xmpp.demux.unknownNamespace', _safeSummary(stanza));
-      }
-    });
+          // Onbekende namespace — fail-closed: log + drop. Log alleen een safe
+          // summary (kind, from, to, child-namespace) — niet de volledige stanza
+          // XML, die chat-berichten, device-keys of andere payload kan bevatten
+          // (#1431).
+          if (onUnknownNamespace != null) {
+            onUnknownNamespace!(stanza);
+          } else {
+            logWarning('xmpp.demux.unknownNamespace', _safeSummary(stanza));
+          }
+        })
+        .whenComplete(() => _pendingStanzas--);
   }
 
   void _onDone() {

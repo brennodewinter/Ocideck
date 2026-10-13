@@ -2,6 +2,7 @@
 library;
 
 import 'package:xml/xml.dart';
+import 'package:xml/xml_events.dart';
 
 import 'import_budget.dart';
 
@@ -27,6 +28,7 @@ XmlDocument? parseXmlSafe(
   if (src.length > budget.maxXmlPartBytes) return null;
   final cleaned = _removeDoctype(src);
   try {
+    requireXmlDepth(cleaned);
     return XmlDocument.parse(cleaned);
   } on Exception {
     return null;
@@ -76,4 +78,19 @@ String _removeDoctype(String src) {
     i = j;
   }
   return buffer.toString();
+}
+
+/// Checks nesting through events before constructing or traversing the tree.
+void requireXmlDepth(String source, {int maxDepth = 100}) {
+  var depth = 0;
+  for (final event in parseEvents(source)) {
+    if (event is XmlStartElementEvent) {
+      if (++depth > maxDepth) {
+        throw const FormatException('XML nesting limit exceeded');
+      }
+      if (event.isSelfClosing) depth--;
+    } else if (event is XmlEndElementEvent) {
+      depth--;
+    }
+  }
 }

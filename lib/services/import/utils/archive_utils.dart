@@ -4,6 +4,7 @@ library;
 import 'package:archive/archive.dart';
 
 import 'import_budget.dart';
+import '../../../utils/archive_limits.dart';
 
 /// Decode a zip buffer within the [budget]: input size, entry count, per-entry
 /// uncompressed size and total uncompressed size.
@@ -83,7 +84,25 @@ Archive safeDecodeZip(
       );
     }
   }
-  return archive;
+  final bounded = Archive();
+  var actual = 0;
+  for (final file in archive) {
+    if (!file.isFile) continue;
+    final limit =
+        budget.maxUncompressedEntry < budget.maxUncompressedTotal - actual
+        ? budget.maxUncompressedEntry
+        : budget.maxUncompressedTotal - actual;
+    try {
+      final output = CappedArchiveOutput(limit);
+      writeArchiveEntryCapped(file, output);
+      final data = output.getBytes();
+      actual += data.length;
+      bounded.addFile(ArchiveFile(file.name, data.length, data));
+    } on ExtractionLimitException {
+      throw ImportBudgetException('${humanBytes(limit)} uitgepakt');
+    }
+  }
+  return bounded;
 }
 
 /// True when the central directory marks an entry as a Unix symbolic link.

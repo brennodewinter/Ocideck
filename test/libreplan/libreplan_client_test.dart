@@ -84,7 +84,7 @@ void main() {
       expect(client.denialReason, isNull);
     });
 
-    test('true bij plain HTTP met trustedInternal', () {
+    test('false bij plain HTTP met trustedInternal', () {
       final client = LibreplanClient(
         settings: const LibreplanSettings(
           enabled: true,
@@ -94,7 +94,7 @@ void main() {
         ),
         isWeb: false,
       );
-      expect(client.canSend, isTrue);
+      expect(client.canSend, isFalse);
     });
   });
 
@@ -152,7 +152,7 @@ void main() {
       final client = LibreplanClient(
         settings: const LibreplanSettings(
           enabled: true,
-          baseUrl: 'http://libreplan.lan/libreplan/',
+          baseUrl: 'https://libreplan.lan/libreplan/',
           username: 'wsreader',
           trustedInternal: true,
         ),

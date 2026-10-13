@@ -537,6 +537,7 @@ class PrivacyProjection {
     // als `![…](pad)` in de body, en zonder deze slag reisde een geredigeerde
     // dia gewoon met zijn foto mee naar het scherm en de export — het veld was
     // leeg, de tekst niet.
+    final withoutStyles = stripInlineMediaStyles(slide.customMarkdown);
     final inline = inlineImagePaths(slide.customMarkdown);
     final questionImages = slide.type == SlideType.question
         ? slideImageRefs(
@@ -557,9 +558,13 @@ class PrivacyProjection {
         inline.length +
         questionImages.length +
         htmlImages.length +
-        (marpBackground.isEmpty || marpBackground == 'none' ? 0 : 1);
+        (marpBackground.isEmpty || marpBackground == 'none' ? 0 : 1) +
+        (withoutStyles == slide.customMarkdown ? 0 : 1);
     if (present == 0) return (slide: slide, count: 0);
-    final rewritten = rewriteSlideImagePaths(slide, (_) => '');
+    final rewritten = rewriteSlideImagePaths(
+      slide.copyWith(customMarkdown: withoutStyles),
+      (_) => '',
+    );
     return (
       slide: slide.copyWith(
         imagePath: '',
@@ -727,6 +732,7 @@ ThemeProfile _projectDocumentTheme(
   _DeckFieldProjector project,
   Map<String, String> renamedKeys,
 ) => deck.themeProfile.copyWith(
+  footerText: project('presentationFooter', deck.themeProfile.footerText),
   documentHeaderText: _projectDocumentChrome(
     deck,
     'documentHeader',

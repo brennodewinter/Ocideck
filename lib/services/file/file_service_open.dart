@@ -405,7 +405,7 @@ extension _FileServiceOpen on FileService {
       }
       // A chart's data link must stay inside the project (no absolute paths or
       // `../` escapes) — otherwise an untrusted deck could read arbitrary files.
-      final abs = resolveProjectRelative(deck.projectPath, spec.source!);
+      final abs = resolveContainedRealPath(spec.source!, deck.projectPath);
       final file = abs == null ? null : File(abs);
       if (file == null || !await file.exists()) {
         // The chart will draw empty. Say so: silence here reads as "this chart
@@ -562,7 +562,7 @@ extension _FileServiceOpen on FileService {
         )
         .toList();
     for (final abs in ours) {
-      if (referenced.contains(abs)) continue;
+      if (!_isStaleChartAsset(abs, referenced, dir)) continue;
       try {
         final file = File(abs);
         if (await file.exists()) await file.delete();
@@ -601,7 +601,7 @@ extension _FileServiceOpen on FileService {
       final spec = ChartSpec.parse(s.customMarkdown);
       final source = spec.source;
       if (source == null || !spec.hasInlineData) continue;
-      final abs = resolveProjectRelative(dir, source);
+      final abs = resolveContainedWritePath(source, dir);
       if (abs == null) {
         warnings.add(source); // buiten de projectmap; nooit schrijven
         continue;
@@ -672,10 +672,11 @@ extension _FileServiceOpen on FileService {
       }
       // Containment guard, matching _hydrateCharts: a chart source like
       // ../../../secret.csv must not be copied out of the project on Save As.
-      final resolved = resolveProjectRelative(deck.projectPath, src);
+      final resolved = resolveContainedRealPath(src, deck.projectPath);
       if (resolved == null) continue;
       final from = File(resolved);
-      final toPath = p.join(destDir, src);
+      final toPath = resolveContainedWritePath(src, destDir);
+      if (toPath == null) continue;
       if (from.path == toPath || !from.existsSync()) continue;
       final out = File(toPath);
       await out.parent.create(recursive: true);
@@ -683,6 +684,9 @@ extension _FileServiceOpen on FileService {
     }
   }
 }
+
+bool _isStaleChartAsset(String path, Set<String> referenced, String dir) =>
+    !referenced.contains(path) && resolveContainedRealPath(path, dir) != null;
 
 // ── De sidecar-poort ────────────────────────────────────────────────────────
 //

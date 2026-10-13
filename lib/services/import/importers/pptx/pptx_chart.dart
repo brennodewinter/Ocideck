@@ -1,4 +1,5 @@
 import 'package:xml/xml.dart';
+import '../../utils/xml_utils.dart';
 
 import '../../models/source_chart.dart';
 import 'pptx_context.dart';
@@ -11,7 +12,8 @@ import 'pptx_context.dart';
 /// formatting, axes titles, trendlines, and 3D effects are dropped (the
 /// pipeline records those as conversion issues elsewhere).
 SourceChart? parseChartXml(String xml) {
-  final doc = XmlDocument.parse(xml);
+  final doc = parseXmlSafe(xml);
+  if (doc == null) return null;
   final plotArea = descendantsLocal(doc, 'plotArea').firstOrNull;
   if (plotArea == null) return null;
 

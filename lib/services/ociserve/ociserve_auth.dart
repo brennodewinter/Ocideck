@@ -188,7 +188,8 @@ class OciServePkceAuthenticator implements OciServeAuthenticator {
       configuration.jwksUri,
     ]) {
       if (endpoint.host.toLowerCase() !=
-          configuration.issuer.host.toLowerCase()) {
+              configuration.issuer.host.toLowerCase() ||
+          endpoint.port != configuration.issuer.port) {
         throw const OciServeException('identity_provider_host_mismatch');
       }
     }
@@ -331,7 +332,10 @@ class OciServePkceAuthenticator implements OciServeAuthenticator {
   }
 
   static void _requireHttps(Uri uri) {
-    if (!uri.hasAuthority || uri.scheme.toLowerCase() != 'https') {
+    if (!uri.hasAuthority ||
+        uri.scheme.toLowerCase() != 'https' ||
+        uri.userInfo.isNotEmpty ||
+        uri.hasFragment) {
       throw const OciServeException('https_required');
     }
   }

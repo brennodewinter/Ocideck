@@ -160,7 +160,7 @@ ImageProvider? _cropProvider(String imagePath, String? projectPath) {
     final bytes = WebAssetStore.bytesFor(imagePath);
     return bytes == null ? null : cappedMemoryImage(bytes);
   }
-  final resolved = resolveSlideAssetPath(imagePath, projectPath);
+  final resolved = resolveContainedRealPath(imagePath, projectPath);
   if (resolved == null) return null;
   return cappedFileImage(File(resolved));
 }
@@ -283,7 +283,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     if (WebAssetStore.isMemPath(widget.imagePath)) {
       _originalBytes = WebAssetStore.bytesFor(widget.imagePath);
     } else {
-      final resolved = resolveSlideAssetPath(
+      final resolved = resolveContainedRealPath(
         widget.imagePath,
         widget.projectPath,
       );
@@ -384,7 +384,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       return WebAssetStore.put(bytes, name: copyName);
     }
 
-    final resolved = resolveSlideAssetPath(
+    final resolved = resolveContainedRealPath(
       widget.imagePath,
       widget.projectPath,
     );
@@ -404,7 +404,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       final base = _basePathFor(widget.imagePath);
       final baseResolved = base == null
           ? null
-          : resolveSlideAssetPath(base, widget.projectPath);
+          : resolveContainedRealPath(base, widget.projectPath);
       if (baseResolved != null && File(baseResolved).existsSync()) return base;
       // Het origineel is weg (hernoemd, opgeruimd). Dan is de gedraaide kopie
       // die er nu ligt het enige dat de dia heeft; laat hem staan.

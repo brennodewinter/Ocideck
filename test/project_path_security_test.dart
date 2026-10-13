@@ -52,7 +52,9 @@ void main() {
       outsideSecret = File(p.join(tmp.path, 'secret.txt'))
         ..writeAsStringSync('top secret');
       File(
-        p.join(projectDir.path, 'images', 'real.png'),
+        File(
+          p.join(projectDir.path, 'images', 'real.png'),
+        ).resolveSymbolicLinksSync(),
       ).writeAsBytesSync(const [0x89, 0x50, 0x4e, 0x47]);
     });
 
@@ -71,7 +73,9 @@ void main() {
     test('allows a genuine file inside the project', () {
       expect(
         resolveContainedRealPath('images/real.png', projectDir.path),
-        p.join(projectDir.path, 'images', 'real.png'),
+        File(
+          p.join(projectDir.path, 'images', 'real.png'),
+        ).resolveSymbolicLinksSync(),
       );
     });
 
@@ -88,14 +92,14 @@ void main() {
       expect(isRenderPathContained(escape, projectDir.path), isFalse);
       expect(isRenderPathContained(real, projectDir.path), isTrue);
       // Missing path is not a symlink escape — the normal load path handles it.
-      expect(isRenderPathContained(missing, projectDir.path), isTrue);
+      expect(isRenderPathContained(missing, projectDir.path), isFalse);
     });
 
     test('rechecks a path after it changes into an escaping symlink', () {
       resetRenderContainedCache();
       final mutable = p.join(projectDir.path, 'images', 'mutable.png');
 
-      expect(isRenderPathContained(mutable, projectDir.path), isTrue);
+      expect(isRenderPathContained(mutable, projectDir.path), isFalse);
       Link(mutable).createSync(outsideSecret.path);
 
       expect(isRenderPathContained(mutable, projectDir.path), isFalse);

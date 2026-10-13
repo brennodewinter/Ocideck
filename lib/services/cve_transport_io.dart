@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 import 'dart:typed_data' show BytesBuilder;
 
 import '../utils/net_guard.dart';
@@ -14,6 +15,7 @@ CveTransport createCveTransport() => PinnedCveTransport();
 /// validated address (so a DNS rebind can't reach an internal IP), block
 /// redirects, and cap the body. TLS still validates the original hostname.
 class PinnedCveTransport implements CveTransport {
+  static const transferTimeout = Duration(seconds: 30);
   static const _maxBytes = 2 * 1024 * 1024; // 2 MB
 
   @override
@@ -44,16 +46,24 @@ class PinnedCveTransport implements CveTransport {
       if (response.statusCode != 200) {
         throw CveTransportException('status ${response.statusCode}');
       }
-      final builder = BytesBuilder(copy: false);
-      await for (final chunk in response) {
-        builder.add(chunk);
-        if (builder.length > _maxBytes) {
-          throw const CveTransportException('too large');
-        }
-      }
-      return utf8.decode(builder.takeBytes());
+      return await readBody(response).timeout(transferTimeout);
     } finally {
       client.close(force: true);
     }
+  }
+
+  static Future<String> readBody(
+    Stream<List<int>> response, {
+    int maxBytes = _maxBytes,
+    Duration timeout = transferTimeout,
+  }) async {
+    final builder = BytesBuilder(copy: false);
+    await for (final chunk in response.timeout(timeout)) {
+      if (chunk.length > maxBytes - builder.length) {
+        throw const CveTransportException('too large');
+      }
+      builder.add(chunk);
+    }
+    return utf8.decode(builder.takeBytes());
   }
 }

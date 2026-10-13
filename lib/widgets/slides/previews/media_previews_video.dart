@@ -71,6 +71,7 @@ class _VideoPreviewState extends State<_VideoPreview>
         // naast het deck op schijf ook zonder die schakelaar speelt.
         final local = _resolvePath(vp, widget.projectPath);
         if (local != null || widget.projectPath != null) return local;
+        if (!widget.allowRemoteMedia) return null;
         return resolveDeckAssetUrl(vp, DeckAssetScope.read(context));
       case VideoSourceKind.remoteFile:
         // Live laden alleen als de gebruiker remote media heeft toegestaan én

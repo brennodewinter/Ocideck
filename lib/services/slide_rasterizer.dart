@@ -564,7 +564,7 @@ class SlideRasterizer {
   static String? _resolveOrMem(String imagePath, String? projectPath) =>
       WebAssetStore.isMemPath(imagePath)
       ? imagePath
-      : resolveSlideAssetPath(imagePath, projectPath);
+      : resolveContainedRealPath(imagePath, projectPath);
 }
 
 class _RasterSlideHost extends StatefulWidget {
