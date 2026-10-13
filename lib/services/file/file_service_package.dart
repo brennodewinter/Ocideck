@@ -316,7 +316,7 @@ extension FileServicePackage on FileService {
       if (existing != null) return existing;
       final bytes = WebAssetStore.bytesFor(path);
       // Store leeg (bv. pagina herladen): niets om in te pakken.
-      if (bytes == null) return null;
+      if (bytes == null || !_packageAssetAllowed(bytes, subdir)) return null;
       reserve(bytes.length);
       final original = WebAssetStore.nameFor(path) ?? 'afbeelding.png';
       final base = _safeName(p.basenameWithoutExtension(original));
@@ -379,7 +379,16 @@ extension FileServicePackage on FileService {
       // Stat before read: reserve the on-disk size so an oversized asset trips
       // the budget without first being pulled into memory (#1046).
       reserve(await file.length());
-      final bytes = await file.readAsBytes();
+      final bytes = await _img.readSlideAssetBytes(
+        abs,
+        projectPath: allowExternal
+            ? p.dirname(abs)
+            : (deck.projectPath ?? AssetStaging.rootPath),
+        maxBytes: subdir == 'media'
+            ? ImageService.maxMediaBytes
+            : ImageService.maxImageBytes,
+      );
+      if (bytes == null || !_packageAssetAllowed(bytes, subdir)) return '';
       archive.add(ArchiveFile(rel, bytes.length, bytes));
       added.add(rel);
       byAbsolutePath[abs] = rel;
@@ -822,3 +831,9 @@ String _packageFileName(Deck deck) =>
 /// voor een gewoon pakket wordt aangezien.
 String _dossierFileName(Deck deck) =>
     '${_safeName(deck.title)}_auditdossier.${FileService.packageExtension}';
+
+bool _packageAssetAllowed(List<int> bytes, String subdir) => subdir == 'media'
+    ? bytes.length <= ImageService.maxMediaBytes &&
+          ImageService.mediaMimeFromBytes(bytes.take(16).toList()) != null
+    : bytes.length <= ImageService.maxImageBytes &&
+          ImageService.looksLikeImage(bytes);

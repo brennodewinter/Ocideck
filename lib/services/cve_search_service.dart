@@ -1,4 +1,4 @@
-import 'dart:convert';
+import '../utils/json_depth_guard.dart';
 
 import '../models/cve_hit.dart';
 import '../utils/log.dart';
@@ -62,7 +62,7 @@ class LibrekatCveSource implements CveSource {
       '${_stripSlash(baseUrl)}/api/search',
     ).replace(queryParameters: {'q': query, 'limit': '25'});
     final body = await transport.getBody(uri);
-    final json = jsonDecode(body) as Map<String, dynamic>;
+    final json = jsonDecodeGuarded(body) as Map<String, dynamic>;
     final results = (json['results'] as List?) ?? const [];
     return [
       for (final r in results.whereType<Map<String, dynamic>>())
@@ -95,7 +95,7 @@ class EnisaCveSource implements CveSource {
       '${_stripSlash(baseUrl)}/api/search',
     ).replace(queryParameters: {'text': query, 'size': '25'});
     final body = await transport.getBody(uri);
-    final json = jsonDecode(body) as Map<String, dynamic>;
+    final json = jsonDecodeGuarded(body) as Map<String, dynamic>;
     final items = (json['items'] as List?) ?? const [];
     final hits = <CveHit>[];
     for (final item in items.whereType<Map<String, dynamic>>()) {
@@ -134,7 +134,7 @@ class MitreCveSource implements CveSource {
     final body = await transport.getBody(
       Uri.parse('${_stripSlash(baseUrl)}/api/cve/$id'),
     );
-    final json = jsonDecode(body) as Map<String, dynamic>;
+    final json = jsonDecodeGuarded(body) as Map<String, dynamic>;
     final meta = json['cveMetadata'] as Map<String, dynamic>? ?? const {};
     final containers = json['containers'] as Map<String, dynamic>? ?? const {};
     final cvss = _mitreCvss(containers);

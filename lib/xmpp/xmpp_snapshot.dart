@@ -43,6 +43,7 @@ import '../collab/collab_crypto.dart';
 import '../collab/collab_device_directory.dart';
 import '../collab/collab_snapshot.dart';
 import '../utils/log.dart';
+import '../utils/json_depth_guard.dart';
 import 'companion_demux.dart';
 import 'xmpp_session.dart';
 import 'xmpp_stanza.dart';
@@ -59,6 +60,7 @@ class XmppSnapshotChannel {
     required CollabCrypto crypto,
     required this.roomJid,
     required this.directory,
+    required this.authorityDeviceId,
     this.maxChunkChars = 48000,
     this.maxChunks = 512,
     this.maxPendingSnapshots = 4,
@@ -79,6 +81,7 @@ class XmppSnapshotChannel {
   final CollabCrypto _e2ee;
   final String roomJid;
   final CollabDeviceDirectory directory;
+  final String authorityDeviceId;
 
   /// Ongeveer de plaintext tekens per chunk-stanza — ruim onder de 512 KiB
   /// frame-cap (§7) na JSON + base64-overhead.
@@ -178,7 +181,7 @@ class XmppSnapshotChannel {
     final child = stanza.childByNs(snapshotType);
     if (child == null) return;
     try {
-      final decoded = jsonDecode(child.innerText);
+      final decoded = jsonDecodeGuarded(child.innerText);
       if (decoded is! Map<String, Object?>) {
         logWarning('xmpp.snapshot.notObject', decoded);
         return;
@@ -236,7 +239,7 @@ class XmppSnapshotChannel {
     for (var i = 0; i < count; i++) {
       blob.write(parts[i]!);
     }
-    final decoded = jsonDecode(blob.toString());
+    final decoded = jsonDecodeGuarded(blob.toString());
     if (decoded is! Map<String, Object?>) {
       logWarning('xmpp.snapshot.notEnvelope', id);
       return;
@@ -265,6 +268,10 @@ class XmppSnapshotChannel {
       _assembled.remove(id);
       return;
     }
+    if (sealed.senderDevice != authorityDeviceId) {
+      _assembled.remove(id);
+      return;
+    }
     final sender = directory.resolve(sealed.senderDevice);
     if (sender == null) return; // afzender nog onbekend — houd en retry
     try {
@@ -281,7 +288,7 @@ class XmppSnapshotChannel {
         logWarning('xmpp.snapshot.noPayload', id);
         return;
       }
-      final json = jsonDecode(raw);
+      final json = jsonDecodeGuarded(raw);
       if (json is! Map<String, Object?>) {
         logWarning('xmpp.snapshot.badPayload', id);
         return;

@@ -8,7 +8,7 @@
 // - **GET-only**: geen POST/DELETE — read-only consumer.
 // - **Basic Auth**: username:password → base64, wachtwoord uit de keychain.
 // - **NetGuard**: SSRF-guard, interne adressen dicht tenzij `trustedInternal`.
-// - **HTTPS verplicht**: plain HTTP alleen voor vertrouwde interne servers.
+// - **HTTPS verplicht**: plain HTTP wordt geweigerd, ook voor vertrouwde interne servers.
 // - **followRedirects = false**: een 3xx mag niet om de hostcontrole heen.
 // - **Desktop-only**: op web is de keychain niet veilig (fail-closed).
 // - **Logs**: base URL + username bij fout, nooit de response body (bevat
@@ -139,12 +139,12 @@ class LibreplanClient {
   /// Of de client mag verzoeken sturen — de beveiligingspoort.
   ///
   /// - **Desktop-only**: op web is de keychain niet veilig.
-  /// - **HTTPS verplicht**: plain HTTP alleen voor vertrouwde interne servers.
+  /// - **HTTPS verplicht**: plain HTTP wordt geweigerd, ook voor vertrouwde interne servers.
   /// - **Geconfigureerd**: base URL en username mogen niet leeg zijn.
   bool get canSend {
     if (_isWeb) return false;
     if (!settings.hasBackend) return false;
-    if (!settings.isHttps && !settings.trustedInternal) return false;
+    if (!settings.isHttps) return false;
     return true;
   }
 
@@ -152,8 +152,8 @@ class LibreplanClient {
   String? get denialReason {
     if (_isWeb) return 'LibrePlan-connector is alleen beschikbaar op desktop.';
     if (!settings.hasBackend) return 'Geen server geconfigureerd.';
-    if (!settings.isHttps && !settings.trustedInternal) {
-      return 'HTTPS verplicht tenzij de server vertrouwd intern is.';
+    if (!settings.isHttps) {
+      return 'HTTPS is verplicht.';
     }
     return null;
   }

@@ -428,8 +428,10 @@ extension FileServiceImport on FileService {
       return const ImportOutcome.failed(ImportFailure.unsupported);
     }
 
-    var base = p.basenameWithoutExtension(suggestedName);
-    if (base.isEmpty) base = 'presentatie';
+    final base = sanitizeFilename(
+      p.basenameWithoutExtension(suggestedName),
+      fallback: 'presentatie',
+    );
     // Vergelijk als bytes zoals writeStringAtomic ze schreef (utf8), zodat
     // een niet-UTF-8-bestand in een kandidaatmap gewoon "anders" is in
     // plaats van een decodeerfout.

@@ -13,10 +13,11 @@ import '../../utils/import_budget.dart';
 /// `Pictures/1000...png`, `ObjectCharts/1`). Targets are relative to the
 /// package root and may start with `./`.
 class OdpContext {
-  OdpContext(this.archive, {ImportBudget budget = ImportBudget.standard})
+  OdpContext(this.archive, {this.budget = ImportBudget.standard})
     : tableCells = ExpandedTableBudget(budget);
 
   final Archive archive;
+  final ImportBudget budget;
   final ExpandedTableBudget tableCells;
 
   Map<String, (double, double)>? _pageSizes;
@@ -28,7 +29,11 @@ class OdpContext {
     // ODF-onderdelen (content.xml, styles.xml, meta.xml) zijn UTF-8. Byte-voor-
     // byte lezen zou een meerbyte-teken als typografische aanhalingstekens of
     // een é uiteentrekken tot mojibake (#1194).
-    return bytes == null ? null : utf8.decode(bytes);
+    if (bytes == null) return null;
+    if (bytes.length > budget.maxXmlPartBytes) {
+      throw ImportBudgetException('${budget.maxXmlPartBytes} XML-bytes');
+    }
+    return utf8.decode(bytes);
   }
 
   List<int>? readPartBytes(String path) {
@@ -47,7 +52,7 @@ class OdpContext {
     return _parsed.putIfAbsent(path, () {
       final src = readPart(path);
       if (src == null) return null;
-      return parseXmlSafe(src);
+      return parseXmlSafe(src, budget: budget);
     });
   }
 

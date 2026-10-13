@@ -136,7 +136,6 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
     // A URL resolved from the deck URL itself (mediaUrlIsDeckAsset) was already
     // inside that boundary — the user picked that host for the deck.
     if (VideoSource.looksLikeUrl(path) &&
-        !mediaUrlIsDeckAsset(path) &&
         !await NetGuard.isAllowedRemoteUrlResolved(path)) {
       if (gen != _initGen) return;
       _loadFailure = MediaLoadFailure.remoteRefused;
@@ -268,6 +267,7 @@ class _AudioPlaybackState extends State<_AudioPlayback>
     // dat dit geen `allowRemoteMedia` vraagt.
     final local = _resolvePath(ap, widget.projectPath);
     if (local != null || widget.projectPath != null) return local;
+    if (!SlideLinkScope.allowRemoteMediaOf(context)) return null;
     return resolveDeckAssetUrl(ap, DeckAssetScope.read(context));
   }
 

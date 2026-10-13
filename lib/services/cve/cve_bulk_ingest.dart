@@ -6,6 +6,7 @@ import 'package:archive/archive.dart';
 
 import '../../models/local_cve_status.dart';
 import '../../utils/archive_limits.dart';
+import '../../utils/json_depth_guard.dart';
 import 'cve_record_parser.dart';
 import 'local_cve_index.dart';
 
@@ -187,7 +188,7 @@ class CveBulkIngest {
 
     final Object? json;
     try {
-      json = jsonDecode(body);
+      json = jsonDecodeGuarded(body);
     } on FormatException catch (e) {
       throw CveIngestException(CveIngestFailure.networkFailed, e.message);
     }
@@ -325,7 +326,7 @@ class CveBulkIngest {
   /// te zijn.
   String? _parse(List<int> bytes) {
     try {
-      final json = jsonDecode(utf8.decode(bytes));
+      final json = jsonDecodeGuarded(utf8.decode(bytes));
       if (json is! Map<String, dynamic>) return null;
       return CveRecordParser.parse(json)?.toIndexLine();
     } on FormatException {

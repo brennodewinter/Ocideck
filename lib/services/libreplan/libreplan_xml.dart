@@ -14,6 +14,7 @@
 // gesloten met een zichtbare fout.
 
 import 'package:xml/xml.dart';
+import '../import/utils/xml_utils.dart';
 
 /// Maximaal aantal geneste elementen voordat de parser weigert. Voorkomt
 /// pathologisch diepe XML (billion laughs-variant). Het design-doc stelt
@@ -279,13 +280,14 @@ XmlDocument? _parseSafely(String xml) {
     );
   }
   try {
-    final doc = XmlDocument.parse(xml);
-    if (_maxDepth(doc) > libreplanXmlMaxDepth) {
+    try {
+      requireXmlDepth(xml, maxDepth: libreplanXmlMaxDepth);
+    } on FormatException {
       throw const LibreplanXmlException(
         'XML overschrijdt de maximale diepte ($libreplanXmlMaxDepth)',
       );
     }
-    return doc;
+    return XmlDocument.parse(xml);
   } on XmlException {
     return null;
   } on LibreplanXmlException {
@@ -299,16 +301,6 @@ XmlElement? _findRoot(XmlDocument doc, String localName) {
     if (node is XmlElement && node.name.local == localName) return node;
   }
   return null;
-}
-
-/// Bereken de maximale diepte van de XML-structuur.
-int _maxDepth(XmlNode node, [int current = 0]) {
-  if (current > libreplanXmlMaxDepth) return current;
-  if (node.children.isEmpty) return current;
-  return node.children.fold(current, (max, child) {
-    final depth = _maxDepth(child, current + 1);
-    return depth > max ? depth : max;
-  });
 }
 
 LibreplanOrder _parseOrder(XmlElement el) {

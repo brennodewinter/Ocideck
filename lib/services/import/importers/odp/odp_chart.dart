@@ -1,4 +1,5 @@
 import 'package:xml/xml.dart';
+import '../../utils/xml_utils.dart';
 
 import '../../models/source_chart.dart';
 import '../../utils/import_budget.dart';
@@ -16,7 +17,8 @@ SourceChart? parseOdpChartXml(String xml, ExpandedTableBudget budget) {
   // `guardParse` in [parsePage], die hem als grafiekverlies noteert (#877) —
   // gelijk aan het PPTX-pad. Een `null`-retour betekent "wel leesbaar, maar geen
   // bruikbare grafiek", niet "onleesbaar"; dat verschil houdt de melding eerlijk.
-  final doc = XmlDocument.parse(xml);
+  final doc = parseXmlSafe(xml);
+  if (doc == null) return null;
   // `<chart:chart>` carries the class attribute; `<office:chart>` does not.
   final chartEl = doc.descendants
       .whereType<XmlElement>()

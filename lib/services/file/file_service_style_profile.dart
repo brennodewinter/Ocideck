@@ -19,6 +19,22 @@ const _styleProfileFormatVersion = 2;
 /// JSON, dus de round-trip blijft heel.
 const _styleProfileEncoder = JsonEncoder.withIndent('  ');
 
+bool _containsAbsoluteLocalImageReference(String markdown) {
+  final images = RegExp(r'!\[[^\]]*\]\((?:<([^>]+)>|([^)]*))\)');
+  for (final match in images.allMatches(markdown)) {
+    final source = (match.group(1) ?? match.group(2) ?? '').trim();
+    if (source.isEmpty) continue;
+    final uri = Uri.tryParse(source);
+    if (source.startsWith('/') ||
+        source.startsWith('\\\\') ||
+        RegExp(r'^[A-Za-z]:[\\\\/]').hasMatch(source) ||
+        uri?.scheme.toLowerCase() == 'file') {
+      return true;
+    }
+  }
+  return false;
+}
+
 /// Waarom een stijlprofiel-bestand geen profiel opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de rest verdient uitleg
 /// in de UI in plaats van een stil mislukken. Spiegelt [ImageImportFailure].
@@ -482,6 +498,10 @@ extension FileServiceStyleProfile on FileService {
     // fromJson is de gehardende poort: kleuren en lettertypes uit een vreemd
     // bestand komen nooit ongevalideerd in de CSS terecht.
     var profile = ThemeProfile.fromJson(raw);
+    if (profile.closingSlideEnabled &&
+        _containsAbsoluteLocalImageReference(profile.closingSlideMarkdown)) {
+      profile = profile.copyWith(closingSlideEnabled: false);
+    }
     var logoOmitted = false;
 
     final rawLogo = envelope['logo'];

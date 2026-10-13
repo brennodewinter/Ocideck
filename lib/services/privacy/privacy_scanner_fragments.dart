@@ -39,6 +39,12 @@ extension PrivacyScannerFragments on PrivacyScanner {
     // ongezien mee in elke export.
     yield (field: 'version', index: 0, text: deck.version, context: '');
     yield (field: 'date', index: 0, text: deck.date, context: '');
+    yield (
+      field: 'presentationFooter',
+      index: 0,
+      text: deck.themeProfile.footerText,
+      context: '',
+    );
     yield* deckMarpPrivacyFragments(deck);
     for (var i = 0; i < deck.standardsUsed.length; i++) {
       yield (

@@ -33,6 +33,7 @@ import '../collab/collab_crypto.dart';
 import '../collab/collab_transport.dart';
 import '../collab/deck_op.dart';
 import '../utils/log.dart';
+import '../utils/json_depth_guard.dart';
 import 'companion_demux.dart';
 import 'xmpp_session.dart';
 import 'xmpp_stanza.dart';
@@ -95,6 +96,8 @@ class XmppTransport implements CollabTransport {
     required CompanionDemux companionDemux,
     required CollabCrypto crypto,
     required this.roomJid,
+    required this.authorityDeviceId,
+    this.memberApprovalGate,
     required XmppPeerResolver peerResolver,
     this.onResyncRequested,
     this.resyncApprovalGate,
@@ -119,6 +122,8 @@ class XmppTransport implements CollabTransport {
   final CompanionDemux _demux;
   final CollabCrypto _e2ee;
   final String roomJid;
+  final String authorityDeviceId;
+  final bool Function(String deviceId)? memberApprovalGate;
   final XmppPeerResolver _resolvePeer;
 
   /// Wandklok voor de tijdgevoelige begrenzers van deze transport: de
@@ -257,7 +262,7 @@ class XmppTransport implements CollabTransport {
         // Autoritatieve ops (versie toegekend) dragen de autoriteit's
         // handtekening (P3 anti-impersonatie); een follower-intent (versie 0)
         // hoeft dat niet.
-        signed: op.version > 0,
+        signed: true,
       );
       _sendSealedGroupchat(OciDeckNamespace.op, sealed);
     });
@@ -284,7 +289,7 @@ class XmppTransport implements CollabTransport {
         {'kind': 'lock', 'from': participantId, 'lock': lockEventToJson(event)},
         room: roomJid,
         type: OciDeckNamespace.lock,
-        signed: false,
+        signed: true,
       );
       _sendSealedGroupchat(OciDeckNamespace.lock, sealed);
     });
@@ -386,7 +391,7 @@ class XmppTransport implements CollabTransport {
     final SealedEnvelope sealed;
     try {
       sealed = SealedEnvelope.fromContent(
-        jsonDecode(child.innerText) as Map<String, Object?>,
+        jsonDecodeGuarded(child.innerText) as Map<String, Object?>,
       );
     } on Exception catch (e) {
       logWarning('xmpp.transport.malformed', e);
@@ -397,6 +402,10 @@ class XmppTransport implements CollabTransport {
     }
     final sender = await _resolvePeer(sealed.senderDevice);
     if (sender == null) return _ApplyOutcome.retryLater;
+    if (memberApprovalGate != null &&
+        !memberApprovalGate!(sealed.senderDevice)) {
+      return _ApplyOutcome.permanentDrop;
+    }
     // Rate-limit per sender: een vijandige server kan een vloed ops sturen
     // die de decryptie-pipeline overspoelt (#1433). Drop als de sender boven
     // de limiet zit.
@@ -410,13 +419,34 @@ class XmppTransport implements CollabTransport {
         room: roomJid,
         type: namespace,
         sender: sender,
+        requireSignature: true,
       );
+      if (!_authorized(namespace, envelope, sealed.senderDevice)) {
+        return _ApplyOutcome.permanentDrop;
+      }
       _emit(namespace, envelope);
       return _ApplyOutcome.applied;
     } on Exception catch (e) {
       logWarning('xmpp.transport.open', e);
       return _ApplyOutcome.retryLater;
     }
+  }
+
+  bool _authorized(
+    String namespace,
+    Map<String, Object?> envelope,
+    String sender,
+  ) {
+    if (envelope['from'] != sender) return false;
+    if (namespace == OciDeckNamespace.op) {
+      final op = deckOpFromJson(_asObject(envelope['op']));
+      return op.version > 0
+          ? sender == authorityDeviceId
+          : op.version == 0 && op.authorId == sender;
+    }
+    final lock = lockEventFromJson(_asObject(envelope['lock']));
+    return lock.participantId == sender &&
+        (!lock.forced || sender == authorityDeviceId);
   }
 
   /// Emit een geopend op/lock-event op de juiste stream, met gap-detectie voor
@@ -464,7 +494,7 @@ class XmppTransport implements CollabTransport {
     final SealedEnvelope sealed;
     try {
       sealed = SealedEnvelope.fromContent(
-        jsonDecode(child.innerText) as Map<String, Object?>,
+        jsonDecodeGuarded(child.innerText) as Map<String, Object?>,
       );
     } on Exception catch (e) {
       logWarning('xmpp.transport.resync.malformed', e);
@@ -526,7 +556,7 @@ class XmppTransport implements CollabTransport {
         {'kind': 'resync', 'from': participantId},
         room: roomJid,
         type: OciDeckNamespace.resync,
-        signed: false,
+        signed: true,
       );
       _sendSealedGroupchat(OciDeckNamespace.resync, sealed);
     } on Exception catch (e) {

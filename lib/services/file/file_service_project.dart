@@ -60,8 +60,7 @@ Future<String?> _materializeMemStyleAsset(
   final filename = p.extension(basename).isEmpty
       ? '${p.basenameWithoutExtension(basename)}.png'
       : basename;
-  final logosDir = Directory(p.join(projectPath, 'logos'));
-  await logosDir.create(recursive: true);
+  final logosDir = await createContainedProjectDirectory(projectPath, 'logos');
   final destination = await resolveAssetDestinationForBytes(
     logosDir,
     filename,
@@ -179,22 +178,21 @@ extension _FileServiceProject on FileService {
   ) async {
     final dir = p.dirname(filePath);
 
-    final imagesDir = Directory(p.join(dir, 'images'));
-    final logosDir = Directory(p.join(dir, 'logos'));
-    final themesDir = Directory(p.join(dir, 'themes'));
-    await imagesDir.create(recursive: true);
-    await logosDir.create(recursive: true);
-    await themesDir.create(recursive: true);
-    // data/ hoort bij de vaste mapindeling; hij werd tot nu toe alleen
-    // toevallig aangemaakt door wie een CSV koppelde.
-    await Directory(p.join(dir, chartDataDirName)).create(recursive: true);
+    await createContainedProjectDirectory(dir, 'images');
+    await createContainedProjectDirectory(dir, 'logos');
+    final themesDir = await createContainedProjectDirectory(dir, 'themes');
+    await createContainedProjectDirectory(dir, chartDataDirName);
 
     final imageSlides = await _img.copyImagesToProject(
       deck.slides,
       dir,
       sourceProjectPath: deck.projectPath,
     );
-    final mediaSlides = await _img.copyMediaToProject(imageSlides, dir);
+    final mediaSlides = await _img.copyMediaToProject(
+      imageSlides,
+      dir,
+      sourceProjectPath: deck.projectPath,
+    );
     var updatedDeck = deck.copyWith(slides: mediaSlides, projectPath: dir);
     final logoAsset = await _copyLogoToProject(updatedDeck.themeProfile, dir);
     final stripAsset = await _copyBrandStripAsset(

@@ -106,7 +106,13 @@ class AiClientService {
   AiGateAllow _allowOrThrow() {
     final decision = gate();
     if (decision is AiGateDeny) throw AiGateException(decision.reason);
-    return decision as AiGateAllow;
+    final allow = decision as AiGateAllow;
+    if (allow.uri.userInfo.isNotEmpty ||
+        (allow.uri.scheme != 'https' &&
+            !NetGuard.isLiteralLoopbackHost(allow.uri.host))) {
+      throw const AiGateException(AiGateDenial.notConfigured);
+    }
+    return allow;
   }
 
   Map<String, String> _headers() {

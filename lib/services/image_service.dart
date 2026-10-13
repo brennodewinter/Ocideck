@@ -315,12 +315,20 @@ class ImageService {
   Future<Uint8List?> readSlideImageBytes(
     String path, {
     String? projectPath,
+  }) => readSlideAssetBytes(path, projectPath: projectPath);
+
+  /// Bounded byte reader shared by image and approved media export sinks.
+  Future<Uint8List?> readSlideAssetBytes(
+    String path, {
+    String? projectPath,
+    int maxBytes = maxImageBytes,
   }) async {
     if (path.isEmpty) return null;
     if (kIsWeb) {
-      return WebAssetStore.isMemPath(path)
+      final bytes = WebAssetStore.isMemPath(path)
           ? WebAssetStore.bytesFor(path)
           : null;
+      return bytes != null && bytes.length <= maxBytes ? bytes : null;
     }
     // This sink moves bytes out of the project (export, AI, repository
     // sidecars). Lexical containment is not enough: a project-internal symlink
@@ -328,7 +336,14 @@ class ImageService {
     final resolved = resolveContainedRealPath(path, projectPath);
     if (resolved == null) return null;
     try {
-      return await File(resolved).readAsBytes();
+      final file = File(resolved);
+      if (await file.length() > maxBytes) return null;
+      final builder = BytesBuilder(copy: false);
+      await for (final chunk in file.openRead()) {
+        if (builder.length + chunk.length > maxBytes) return null;
+        builder.add(chunk);
+      }
+      return builder.takeBytes();
     } catch (e, s) {
       logError('ImageService.readSlideImageBytes', e, s);
       return null;
@@ -402,8 +417,10 @@ class ImageService {
         return storeWebImage(bytes, name: 'geplakt.png');
       }
       if (projectPath != null && projectPath.isNotEmpty) {
-        final imagesDir = Directory(p.join(projectPath, 'images'));
-        await imagesDir.create(recursive: true);
+        final imagesDir = await createContainedProjectDirectory(
+          projectPath,
+          'images',
+        );
         final file = File(
           p.join(
             imagesDir.path,
@@ -484,8 +501,7 @@ class ImageService {
       }
       return staged;
     }
-    final destDir = Directory(p.join(projectPath, subdir));
-    await destDir.create(recursive: true);
+    final destDir = await createContainedProjectDirectory(projectPath, subdir);
     final normalized = p.normalize(sourcePath);
     if (p.isWithin(projectPath, normalized)) {
       // Met '/' de deck in — zie de toelichting bij pasteImage hierboven.
@@ -553,8 +569,10 @@ class ImageService {
     String projectPath, {
     String? sourceProjectPath,
   }) async {
-    final imagesDir = Directory(p.join(projectPath, 'images'));
-    await imagesDir.create(recursive: true);
+    final imagesDir = await createContainedProjectDirectory(
+      projectPath,
+      'images',
+    );
 
     // Alleen mem:-afbeeldingen gebruiken de inhoudsindex voor deduplicatie.
     // Een gewoon lokaal deck draagt na de eerste opslag uitsluitend relatieve
@@ -626,8 +644,10 @@ class ImageService {
           path,
     };
     if (targets.isEmpty) return source;
-    final imagesDir = Directory(p.join(projectPath, 'images'));
-    await imagesDir.create(recursive: true);
+    final imagesDir = await createContainedProjectDirectory(
+      projectPath,
+      'images',
+    );
 
     // Dezelfde inhoudsindex als bij slides: alleen bouwen als er een
     // mem:-pad bij zit, anders betaalt élke opslag een scan van images/.
@@ -669,7 +689,11 @@ class ImageService {
       projectPath,
       sourceProjectPath: sourceProjectPath,
     );
-    return copyMediaToProject(withImages, projectPath);
+    return copyMediaToProject(
+      withImages,
+      projectPath,
+      sourceProjectPath: sourceProjectPath,
+    );
   }
 
   /// Scan [imagesDir] en geef een kaart van SHA-256 → `images/<naam>` terug.
@@ -682,7 +706,11 @@ class ImageService {
       await for (final entry in imagesDir.list(followLinks: false)) {
         if (entry is! File) continue;
         try {
-          final bytes = await entry.readAsBytes();
+          final bytes = await readSlideImageBytes(
+            entry.path,
+            projectPath: p.dirname(imagesDir.path),
+          );
+          if (bytes == null || !looksLikeImage(bytes)) continue;
           final hash = sha256Hex(bytes);
           final rel = 'images/${p.basename(entry.path)}';
           map.putIfAbsent(hash, () => rel);
@@ -698,10 +726,13 @@ class ImageService {
 
   Future<List<Slide>> copyMediaToProject(
     List<Slide> slides,
-    String projectPath,
-  ) async {
-    final mediaDir = Directory(p.join(projectPath, 'media'));
-    await mediaDir.create(recursive: true);
+    String projectPath, {
+    String? sourceProjectPath,
+  }) async {
+    final mediaDir = await createContainedProjectDirectory(
+      projectPath,
+      'media',
+    );
 
     final updated = <Slide>[];
     for (final slide in slides) {
@@ -710,12 +741,14 @@ class ImageService {
         next.videoPath,
         mediaDir,
         isAudio: false,
+        sourceProjectPath: sourceProjectPath,
       );
       if (video != null) next = next.copyWith(videoPath: video);
       final audio = await _mediaToProject(
         next.audioPath,
         mediaDir,
         isAudio: true,
+        sourceProjectPath: sourceProjectPath,
       );
       if (audio != null) next = next.copyWith(audioPath: audio);
       updated.add(next);
@@ -732,8 +765,15 @@ class ImageService {
     String path,
     Directory mediaDir, {
     required bool isAudio,
+    String? sourceProjectPath,
   }) async {
     if (WebAssetStore.isMemPath(path)) {
+      final bytes = WebAssetStore.bytesFor(path);
+      if (bytes == null ||
+          bytes.length > maxMediaBytes ||
+          mediaMimeFromBytes(bytes.take(16).toList()) == null) {
+        return null;
+      }
       return _materializeMemAsset(
         path,
         mediaDir,
@@ -745,7 +785,15 @@ class ImageService {
       );
     }
     if (!_shouldCopy(path)) return null;
-    return _copyToDir(path, mediaDir);
+    final root = AssetStaging.isStagedPath(path)
+        ? AssetStaging.rootPath
+        : sourceProjectPath;
+    if (root == null) return null;
+    final trusted = resolveContainedRealPath(path, root);
+    if (trusted == null || !await _isAcceptableMedia(trusted, 'copyMedia')) {
+      return null;
+    }
+    return _copyToDir(trusted, mediaDir);
   }
 
   bool _shouldCopy(String path) {

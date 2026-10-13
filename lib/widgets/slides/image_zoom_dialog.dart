@@ -27,7 +27,7 @@ Future<void> showImageZoomDialog(
   if (memBytes != null) {
     provider = cappedMemoryImage(memBytes);
   } else {
-    final resolved = resolveSlideAssetPath(imagePath, projectPath);
+    final resolved = resolveContainedRealPath(imagePath, projectPath);
     if (resolved == null) return Future<void>.value();
     provider = cappedFileImage(File(resolved));
   }

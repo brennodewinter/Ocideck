@@ -42,7 +42,7 @@ void main() {
     test('allows absolute paths when the deck is unsaved', () {
       expect(
         resolveSlideAssetPath('/tmp/pasted.png', null),
-        p.normalize('/tmp/pasted.png'),
+        isNull,
       );
     });
 

@@ -354,3 +354,19 @@ Slide absolutizeSlideAssetPaths(Slide slide, String? basePath) {
         : next.marpStyle.copyWith(backgroundImage: bg),
   );
 }
+
+/// Redacted content must not carry opaque CSS media references. Removing the
+/// style boundary also covers CSS escapes and custom properties, which cannot
+/// safely be recognized with a url-only pattern.
+String stripInlineMediaStyles(String source) => source
+    .replaceAll(
+      RegExp(r'<style\b[^>]*>[\s\S]*?</style\s*>', caseSensitive: false),
+      '',
+    )
+    .replaceAll(
+      RegExp(
+        r'''\sstyle\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)''',
+        caseSensitive: false,
+      ),
+      '',
+    );

@@ -43,7 +43,7 @@ class PptxImporter extends Importer {
   }) async {
     try {
       final archive = preDecoded ?? safeDecodeZip(bytes, budget: budget);
-      final ctx = PptxContext(archive);
+      final ctx = PptxContext(archive, budget: budget);
 
       final slideRefs = _orderedSlidePaths(ctx);
       if (slideRefs.isEmpty) {

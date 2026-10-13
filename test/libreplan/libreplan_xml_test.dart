@@ -2,6 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/libreplan/libreplan_xml.dart';
 
 void main() {
+  test('very deep XML refuses before building a tree', () {
+    expect(
+      () => parseOrderList('${'<a>' * 10000}${'</a>' * 10000}'),
+      throwsA(isA<LibreplanXmlException>()),
+    );
+  });
+
   group('parseOrderList', () {
     test('parseert een hiërarchisch project met groepen en taken', () {
       const xml = '''

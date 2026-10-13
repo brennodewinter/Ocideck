@@ -58,10 +58,15 @@ extension SettingsNotifierConnections on SettingsNotifier {
       await prefs.remove('gitRepo');
     });
     for (final connection in gone) {
-      await _diskTraces.removeTracesOf(
+      final removal = await _diskTraces.removeTracesOf(
         connection,
         discardPendingWork: discardPendingWorkFor.contains(connection.id),
       );
+      if (removal.cleanupIncomplete) {
+        throw StateError(
+          'De lokale werkkopie van ${connection.name} kon niet volledig worden verwijderd.',
+        );
+      }
     }
   }
 

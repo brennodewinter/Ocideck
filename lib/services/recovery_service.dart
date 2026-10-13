@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../models/markdown_kind.dart';
 import '../utils/atomic_file.dart';
+import '../utils/chmod.dart';
 import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 
@@ -145,6 +146,15 @@ class RecoveryService {
   Future<Directory> _dir() async {
     final dir = await _resolveDir();
     if (!dir.existsSync()) await dir.create(recursive: true);
+    if (!kIsWeb && Platform.isLinux) {
+      final hardened = await chmodPath('700', dir.path);
+      if (!hardened) {
+        throw FileSystemException(
+          'Recovery directory could not be restricted to its owner',
+          dir.path,
+        );
+      }
+    }
     return dir;
   }
 

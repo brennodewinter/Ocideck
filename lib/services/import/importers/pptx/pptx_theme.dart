@@ -1,4 +1,5 @@
 import 'package:xml/xml.dart';
+import '../../utils/xml_utils.dart';
 
 import '../../models/source_theme.dart';
 import 'pptx_context.dart';
@@ -13,7 +14,8 @@ import 'pptx_context.dart';
 /// layouts do not carry them.
 SourceTheme parseTheme(String xml) {
   try {
-    final doc = XmlDocument.parse(xml);
+    final doc = parseXmlSafe(xml);
+    if (doc == null) return const SourceTheme();
     final clrScheme = descendantsLocal(doc, 'clrScheme').firstOrNull;
     final fontScheme = descendantsLocal(doc, 'fontScheme').firstOrNull;
 

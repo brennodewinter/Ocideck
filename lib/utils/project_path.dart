@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
+import '../services/asset_staging.dart';
+
 /// [resolveSlideAssetPath] plus a symlink check: resolves the real (symlink-
 /// followed) path and returns null if it escapes the project. This catches a
 /// symlink *inside* the project that points outside it — which the lexical
@@ -17,7 +19,9 @@ String? resolveContainedRealPath(String path, String? projectPath) {
   final resolved = resolveSlideAssetPath(path, projectPath);
   if (resolved == null || projectPath == null) return resolved;
   try {
-    return _isInsideRealBase(resolved, projectPath) ? resolved : null;
+    return _isInsideRealBase(resolved, projectPath)
+        ? File(resolved).resolveSymbolicLinksSync()
+        : null;
   } on FileSystemException {
     return null; // missing/unresolvable → refuse (can't copy anyway)
   }
@@ -48,7 +52,7 @@ bool isRenderPathContained(String resolved, String projectPath) {
   try {
     ok = _isInsideRealBase(resolved, projectPath);
   } on FileSystemException {
-    return true;
+    return false;
   }
   if (!ok) {
     if (_renderBlockedPaths.length >= 1024) {
@@ -97,7 +101,9 @@ String? resolveSlideAssetPath(String path, String? projectPath) {
   if (path.trim().isEmpty) return null;
 
   if (projectPath == null) {
-    return p.isAbsolute(path) ? p.normalize(path) : null;
+    return AssetStaging.isStagedPath(path)
+        ? resolveContainedRealPath(path, AssetStaging.rootPath)
+        : null;
   }
 
   if (p.isAbsolute(path)) {
@@ -189,4 +195,44 @@ String? resolveEditorAssetPath(String path, String? basePath) {
     return resolveProjectAbsolute(basePath, path) ?? p.normalize(path);
   }
   return resolveProjectRelative(basePath, path);
+}
+
+/// Resolve a generated project path before creating files or directories.
+/// Existing symlinks, including dangling ones, must resolve inside the project.
+String? resolveContainedWritePath(String path, String projectPath) {
+  final resolved = p.isAbsolute(path)
+      ? resolveProjectAbsolute(projectPath, path)
+      : resolveProjectRelative(projectPath, path);
+  if (resolved == null) return null;
+  try {
+    final realBase = Directory(projectPath).resolveSymbolicLinksSync();
+    var ancestor = resolved;
+    while (FileSystemEntity.typeSync(ancestor, followLinks: false) ==
+        FileSystemEntityType.notFound) {
+      final parent = p.dirname(ancestor);
+      if (parent == ancestor) return null;
+      ancestor = parent;
+    }
+    final real = File(ancestor).resolveSymbolicLinksSync();
+    if (real != realBase && !p.isWithin(realBase, real)) return null;
+    return resolved;
+  } on FileSystemException {
+    return null;
+  }
+}
+
+/// Create a generated asset directory only within the real project root.
+Future<Directory> createContainedProjectDirectory(
+  String projectPath,
+  String relativePath,
+) async {
+  final target = resolveContainedWritePath(relativePath, projectPath);
+  if (target == null) {
+    throw const FileSystemException('Asset directory escapes project');
+  }
+  final directory = await Directory(target).create(recursive: true);
+  if (resolveContainedWritePath(directory.path, projectPath) == null) {
+    throw const FileSystemException('Asset directory escapes project');
+  }
+  return directory;
 }

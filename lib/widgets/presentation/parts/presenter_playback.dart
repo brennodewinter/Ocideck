@@ -50,7 +50,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     if (kIsWeb) return;
     final resolved = trusted
         ? resolveTrustedAssetPath(path, widget.projectPath)
-        : resolveSlideAssetPath(path, widget.projectPath);
+        : resolveContainedRealPath(path, widget.projectPath);
     if (resolved == null) return;
     // Capped provider met dezelfde versie-key als de render, zodat het
     // voorlezen ook echt de getoonde decode warmt — een gedraaide of

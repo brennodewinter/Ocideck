@@ -165,11 +165,31 @@ Future<Deck> resolveRepoAssetsToMem(
 AssetByteResolver repoAssetBytes(String? projectPath) {
   final image = ImageService();
   return (path) async {
-    if (WebAssetStore.isMemPath(path)) return WebAssetStore.bytesFor(path);
+    if (WebAssetStore.isMemPath(path)) {
+      final bytes = WebAssetStore.bytesFor(path);
+      return _validatedRepoAsset(bytes);
+    }
     // Een Git-deck heeft geen lokale projectmap. Alleen door de app gestagede
     // media zijn dan een toegestane bron voor een nieuwe repository-asset.
     final root = projectPath ?? AssetStaging.rootPath;
     if (root == null) return null;
-    return image.readSlideImageBytes(path, projectPath: root);
+    return _validatedRepoAsset(
+      await image.readSlideAssetBytes(
+        path,
+        projectPath: root,
+        maxBytes: ImageService.maxMediaBytes,
+      ),
+    );
   };
+}
+
+Uint8List? _validatedRepoAsset(Uint8List? bytes) {
+  if (bytes == null) return null;
+  if (ImageService.looksLikeImage(bytes)) {
+    return bytes.length <= ImageService.maxImageBytes ? bytes : null;
+  }
+  return bytes.length <= ImageService.maxMediaBytes &&
+          ImageService.mediaMimeFromBytes(bytes.take(16).toList()) != null
+      ? bytes
+      : null;
 }

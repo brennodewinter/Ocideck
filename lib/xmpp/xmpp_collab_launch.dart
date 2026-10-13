@@ -380,6 +380,7 @@ _WireResult _wire({
     crypto: crypto,
     roomJid: roomJid,
     directory: directory,
+    authorityDeviceId: trustedHost?.deviceId ?? ownKeys.deviceId,
   );
   final presence = XmppPresenceBeacon(
     stanzaChannel: stanzaChannel,
@@ -402,6 +403,8 @@ _WireResult _wire({
     crypto: crypto,
     roomJid: roomJid,
     peerResolver: (id) async => directory.resolve(id),
+    authorityDeviceId: trustedHost?.deviceId ?? ownKeys.deviceId,
+    memberApprovalGate: trustedHost == null ? keyExchange.isApproved : null,
     onReconnected: onReconnected,
   );
   // Wire de key-change callback: als een nieuwe device-sleutel of epoch-

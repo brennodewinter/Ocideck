@@ -122,11 +122,23 @@ class DiskTraces {
 
     final support = await _support();
     final removed = <String>[];
+    var cleanupIncomplete = false;
     if (support != null) {
       for (final name in const [cloneDirName, mirrorDirName]) {
         final dir = Directory(p.join(support.path, name, slug));
-        if (await _deleteDir(dir)) removed.add(dir.path);
+        final existed = await dir.exists();
+        if (await _deleteDir(dir)) {
+          removed.add(dir.path);
+        } else if (existed) {
+          cleanupIncomplete = true;
+        }
       }
+    }
+    if (cleanupIncomplete) {
+      logWarning(
+        'DiskTraces: opruimen van $slug is niet volledig gelukt; wachtrij blijft bewaard',
+      );
+      return TraceRemoval(removedPaths: removed, cleanupIncomplete: true);
     }
     final keys = await outbox.clear();
     return TraceRemoval(removedPaths: removed, removedOutboxKeys: keys);
@@ -364,13 +376,15 @@ class TraceRemoval {
     this.removedPaths = const [],
     this.removedOutboxKeys = 0,
     this.refusedPendingCommits = 0,
+    this.cleanupIncomplete = false,
   });
 
   /// Er viel niets op te ruimen voor deze verbinding.
   const TraceRemoval.nothingToDo()
     : removedPaths = const [],
       removedOutboxKeys = 0,
-      refusedPendingCommits = 0;
+      refusedPendingCommits = 0,
+      cleanupIncomplete = false;
 
   /// De mappen die daadwerkelijk zijn verwijderd.
   final List<String> removedPaths;
@@ -380,6 +394,10 @@ class TraceRemoval {
 
   /// Meer dan nul wanneer er níets is opgeruimd omdat er nog werk wachtte.
   final int refusedPendingCommits;
+
+  /// True when a local copy existed but could not be deleted. The outbox is
+  /// retained in that case so the failed cleanup is visible and retryable.
+  final bool cleanupIncomplete;
 
   /// Of het opruimen is tegengehouden door wachtend werk.
   bool get refused => refusedPendingCommits > 0;

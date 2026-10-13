@@ -6,6 +6,7 @@ import 'package:image/image.dart' as img;
 import '../utils/image_limits.dart';
 import '../utils/image_resize.dart';
 import '../utils/log.dart';
+import '../utils/sanitize_svg.dart';
 
 /// De langste zijde waarop een afbeelding het HTML-document in gaat.
 ///
@@ -57,9 +58,18 @@ const _passThrough = {'.svg': 'image/svg+xml'};
 /// en het serienummer van het toestel meesturen naar iedereen die het rapport
 /// krijgt — in een document dat juist over andermans beveiliging gaat.
 HtmlEmbeddedImage? encodeForHtmlEmbed(Uint8List bytes, String source) {
-  if (bytes.isEmpty) return null;
+  if (bytes.isEmpty || bytes.length > 50 * 1024 * 1024) return null;
   final passThrough = _passThroughFor(source);
-  if (passThrough != null) return (mime: passThrough, bytes: bytes);
+  if (passThrough != null) {
+    try {
+      final safe = sanitizeMermaidSvg(utf8.decode(bytes));
+      return safe == null
+          ? null
+          : (mime: passThrough, bytes: Uint8List.fromList(utf8.encode(safe)));
+    } on FormatException {
+      return null;
+    }
+  }
 
   // A GIF is kept as-is to preserve its animation, but only once its declared
   // canvas is known to be within the decode cap — the SVG-style unconditional
