@@ -562,10 +562,7 @@ extension _FileServiceOpen on FileService {
         )
         .toList();
     for (final abs in ours) {
-      if (referenced.contains(abs) ||
-          resolveContainedRealPath(abs, dir) == null) {
-        continue;
-      }
+      if (!_isStaleChartAsset(abs, referenced, dir)) continue;
       try {
         final file = File(abs);
         if (await file.exists()) await file.delete();
@@ -687,6 +684,9 @@ extension _FileServiceOpen on FileService {
     }
   }
 }
+
+bool _isStaleChartAsset(String path, Set<String> referenced, String dir) =>
+    !referenced.contains(path) && resolveContainedRealPath(path, dir) != null;
 
 // ── De sidecar-poort ────────────────────────────────────────────────────────
 //

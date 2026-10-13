@@ -35,6 +35,12 @@ bool _containsAbsoluteLocalImageReference(String markdown) {
   return false;
 }
 
+ThemeProfile _sanitizeImportedStyleProfile(ThemeProfile profile) =>
+    profile.closingSlideEnabled &&
+        _containsAbsoluteLocalImageReference(profile.closingSlideMarkdown)
+    ? profile.copyWith(closingSlideEnabled: false)
+    : profile;
+
 /// Waarom een stijlprofiel-bestand geen profiel opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de rest verdient uitleg
 /// in de UI in plaats van een stil mislukken. Spiegelt [ImageImportFailure].
@@ -498,10 +504,7 @@ extension FileServiceStyleProfile on FileService {
     // fromJson is de gehardende poort: kleuren en lettertypes uit een vreemd
     // bestand komen nooit ongevalideerd in de CSS terecht.
     var profile = ThemeProfile.fromJson(raw);
-    if (profile.closingSlideEnabled &&
-        _containsAbsoluteLocalImageReference(profile.closingSlideMarkdown)) {
-      profile = profile.copyWith(closingSlideEnabled: false);
-    }
+    profile = _sanitizeImportedStyleProfile(profile);
     var logoOmitted = false;
 
     final rawLogo = envelope['logo'];

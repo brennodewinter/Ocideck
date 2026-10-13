@@ -379,15 +379,7 @@ extension FileServicePackage on FileService {
       // Stat before read: reserve the on-disk size so an oversized asset trips
       // the budget without first being pulled into memory (#1046).
       reserve(await file.length());
-      final bytes = await _img.readSlideAssetBytes(
-        abs,
-        projectPath: allowExternal
-            ? p.dirname(abs)
-            : (deck.projectPath ?? AssetStaging.rootPath),
-        maxBytes: subdir == 'media'
-            ? ImageService.maxMediaBytes
-            : ImageService.maxImageBytes,
-      );
+      final bytes = await _readPkg(_img, abs, deck, allowExternal, subdir);
       if (bytes == null || !_packageAssetAllowed(bytes, subdir)) return '';
       archive.add(ArchiveFile(rel, bytes.length, bytes));
       added.add(rel);
@@ -837,3 +829,19 @@ bool _packageAssetAllowed(List<int> bytes, String subdir) => subdir == 'media'
           ImageService.mediaMimeFromBytes(bytes.take(16).toList()) != null
     : bytes.length <= ImageService.maxImageBytes &&
           ImageService.looksLikeImage(bytes);
+
+Future<List<int>?> _readPkg(
+  ImageService imageService,
+  String path,
+  Deck deck,
+  bool allowExternal,
+  String subdir,
+) => imageService.readSlideAssetBytes(
+  path,
+  projectPath: allowExternal
+      ? p.dirname(path)
+      : (deck.projectPath ?? AssetStaging.rootPath),
+  maxBytes: subdir == 'media'
+      ? ImageService.maxMediaBytes
+      : ImageService.maxImageBytes,
+);
