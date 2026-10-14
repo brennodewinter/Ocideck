@@ -400,6 +400,13 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               scrollController: widget.scrollController,
               config: QuillEditorConfig(
                 onLaunchUrl: widget.onTapLink,
+                // De tabelcellen verwerken hun eigen taps en tekstfocus.
+                // Quill ziet dezelfde tik; zijn caret voor de gehele embed
+                // zou een lang document anders naar een andere rij scrollen.
+                onTapDown: (details, _) =>
+                    _tableEditors.containsTableAt(details.globalPosition),
+                onTapUp: (details, _) =>
+                    _tableEditors.containsTableAt(details.globalPosition),
                 editorKey: widget.editorKey,
                 expands: widget.expand,
                 padding: widget.contentPadding,

@@ -71,6 +71,7 @@ class _EditableTimelineEmbed extends StatefulWidget {
 
 class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
   late TableEmbedBinding _binding;
+  final GlobalKey _boundsKey = GlobalKey();
   bool _editing = false;
 
   TableEditController get _editor => _binding.editor;
@@ -80,6 +81,7 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
   @override
   void initState() {
     super.initState();
+    widget.controllerStore.registerTableBounds(_boundsKey);
     _binding = TableEmbedBinding(
       controllerStore: widget.controllerStore,
       embedContext: widget.embedContext,
@@ -274,6 +276,7 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
         ),
         if (_editing)
           Column(
+            key: _boundsKey,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -312,6 +315,7 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
 
   @override
   void dispose() {
+    widget.controllerStore.unregisterTableBounds(_boundsKey);
     _binding.dispose();
     super.dispose();
   }
