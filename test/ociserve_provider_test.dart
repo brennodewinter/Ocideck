@@ -7,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/learning_session.dart';
 import 'package:ocideck/models/ociserve_evidence.dart';
+import 'package:ocideck/models/ociserve_evidence_item.dart';
 import 'package:ocideck/models/ociserve_exam.dart';
 import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
@@ -272,6 +273,51 @@ class _FakeApi implements OciServeApi {
     sessions: const [],
     serverTime: DateTime.utc(2026, 9, 12),
   );
+
+  final evidenceCalls = <String>[];
+
+  @override
+  Future<List<OciServeEvidenceType>> evidenceTypes({
+    required String accessToken,
+    required String organizationId,
+  }) async {
+    evidenceCalls.add('types:$organizationId');
+    return const [
+      OciServeEvidenceType(id: 'type-1', slug: 'bhv', title: 'BHV-certificaat'),
+    ];
+  }
+
+  @override
+  Future<OciServeEvidenceItem> createEvidenceItem({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+    required String evidenceTypeId,
+    required String uploadId,
+    required String idempotencyKey,
+    DateTime? declaredValidUntil,
+  }) async {
+    lastIdempotencyKey = idempotencyKey;
+    evidenceCalls.add('create:$participantId:$evidenceTypeId:$uploadId');
+    return OciServeEvidenceItem(
+      id: 'item-1',
+      evidenceTypeId: evidenceTypeId,
+      status: OciServeEvidenceContentStatus.ingediend,
+      createdAt: DateTime.utc(2026, 9, 2),
+      uploadId: uploadId,
+      declaredValidUntil: declaredValidUntil,
+    );
+  }
+
+  @override
+  Future<List<OciServeEvidenceItem>> evidenceItems({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+  }) async {
+    evidenceCalls.add('items:$participantId');
+    return const [];
+  }
 
   OciServeExamAttempt attemptValue = OciServeExamAttempt(
     id: 'attempt',
@@ -1735,6 +1781,78 @@ void main() {
       );
       expect(submitted.id, 'attempt');
       expect(api.lastIdempotencyKey, 'key-submit');
+    });
+  });
+
+  group('bewijs aanleveren', () {
+    Future<OciServeNotifier> signedIn(ProviderContainer container) async {
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      expect(await notifier.login(), isTrue);
+      return notifier;
+    }
+
+    test('bewijssoorten en bewijsstukken gaan via de gateway', () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = await signedIn(container);
+
+      final types = await notifier.evidenceTypes('org');
+      expect(types.single.title, 'BHV-certificaat');
+
+      final item = await notifier.createEvidenceItem(
+        organizationId: 'org',
+        participantId: 'participant-1',
+        evidenceTypeId: 'type-1',
+        uploadId: 'upload-1',
+        idempotencyKey: 'key-item',
+        declaredValidUntil: DateTime.utc(2028, 1, 31),
+      );
+      expect(item.uploadId, 'upload-1');
+      expect(item.declaredValidUntil, DateTime.utc(2028, 1, 31));
+      expect(api.lastIdempotencyKey, 'key-item');
+
+      expect(
+        await notifier.evidenceItems(
+          organizationId: 'org',
+          participantId: 'participant-1',
+        ),
+        isEmpty,
+      );
+      expect(api.evidenceCalls, [
+        'types:org',
+        'create:participant-1:type-1:upload-1',
+        'items:participant-1',
+      ]);
+    });
+
+    test('weigert een organisatie zonder lidmaatschap', () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = await signedIn(container);
+
+      expect(
+        () => notifier.evidenceTypes('other-org'),
+        throwsA(isA<OciServeException>()),
+      );
+      expect(
+        () => notifier.createEvidenceItem(
+          organizationId: 'other-org',
+          participantId: 'participant-1',
+          evidenceTypeId: 'type-1',
+          uploadId: 'upload-1',
+          idempotencyKey: 'key',
+        ),
+        throwsA(isA<OciServeException>()),
+      );
+      expect(
+        () => notifier.evidenceItems(
+          organizationId: 'other-org',
+          participantId: 'participant-1',
+        ),
+        throwsA(isA<OciServeException>()),
+      );
+      expect(api.evidenceCalls, isEmpty);
     });
   });
 

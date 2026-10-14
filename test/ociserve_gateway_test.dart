@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_models.dart';
+import 'package:ocideck/models/ociserve_evidence_item.dart';
 import 'package:ocideck/models/ociserve_exam.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/services/ociserve/ociserve_gateway.dart';
@@ -540,6 +541,185 @@ void main() {
         );
       },
     );
+  });
+
+  group('bewijs aanleveren', () {
+    Map<String, Object?> typeJson(String id, String title, String status) => {
+      'id': id,
+      'slug': title.toLowerCase(),
+      'title': title,
+      'status': status,
+      'created_at': '2026-09-01T10:00:00Z',
+      'updated_at': '2026-09-01T10:00:00Z',
+    };
+
+    Map<String, Object?> itemJson({String status = 'ingediend'}) => {
+      'id': 'item-1',
+      'participant_id': 'p1',
+      'evidence_type_id': 'type-1',
+      'content_status': status,
+      'upload_id': 'upload-1',
+      'declared_valid_until': '2028-01-31T00:00:00Z',
+      'review_note': status == 'afgewezen' ? 'Onleesbaar' : null,
+      'created_at': '2026-09-02T10:00:00Z',
+    };
+
+    test('toont alleen gepubliceerde bewijssoorten', () async {
+      transport.responses.add(
+        _json({
+          'evidence_types': [
+            typeJson('type-1', 'BHV', 'published'),
+            typeJson('type-2', 'Concept', 'draft'),
+            typeJson('type-3', 'Oud', 'archived'),
+          ],
+        }),
+      );
+
+      final types = await gateway.evidenceTypes(
+        accessToken: 'access',
+        organizationId: 'org',
+      );
+
+      expect(transport.requests.single.method, 'GET');
+      expect(
+        transport.requests.single.url.path,
+        '/api/v1/organizations/org/evidence-types',
+      );
+      expect(types.map((type) => type.title), ['BHV']);
+    });
+
+    test('een bewijssoort zonder titel is een contractbreuk', () async {
+      transport.responses.add(
+        _json({
+          'evidence_types': [typeJson('type-1', '', 'published')],
+        }),
+      );
+
+      await expectLater(
+        gateway.evidenceTypes(accessToken: 'access', organizationId: 'org'),
+        throwsA(
+          isA<OciServeException>().having(
+            (error) => error.code,
+            'code',
+            'invalid_response',
+          ),
+        ),
+      );
+    });
+
+    test('een lijst zonder evidence_types is een contractbreuk', () async {
+      transport.responses.add(_json({'types': <Object?>[]}));
+
+      await expectLater(
+        gateway.evidenceTypes(accessToken: 'access', organizationId: 'org'),
+        throwsA(isA<OciServeException>()),
+      );
+    });
+
+    test('dient een schone upload in met idempotentiesleutel', () async {
+      transport.responses.add(_json(itemJson(), statusCode: 201));
+
+      final item = await gateway.createEvidenceItem(
+        accessToken: 'access',
+        organizationId: 'org',
+        participantId: 'p1',
+        evidenceTypeId: 'type-1',
+        uploadId: 'upload-1',
+        idempotencyKey: 'key-1',
+        declaredValidUntil: DateTime.utc(2028, 1, 31),
+      );
+
+      final request = transport.requests.single;
+      expect(request.method, 'POST');
+      expect(
+        request.url.path,
+        '/api/v1/organizations/org/participants/p1/evidence-items',
+      );
+      expect(request.headers['idempotency-key'], 'key-1');
+      final body = jsonDecode(utf8.decode(request.body!)) as Map;
+      expect(body['evidence_type_id'], 'type-1');
+      expect(body['upload_id'], 'upload-1');
+      expect(body['declared_valid_until'], '2028-01-31T00:00:00.000Z');
+      expect(item.id, 'item-1');
+      expect(item.status, OciServeEvidenceContentStatus.ingediend);
+      expect(item.uploadId, 'upload-1');
+    });
+
+    test('laat de einddatum weg als die niet is opgegeven', () async {
+      transport.responses.add(_json(itemJson(), statusCode: 201));
+
+      await gateway.createEvidenceItem(
+        accessToken: 'access',
+        organizationId: 'org',
+        participantId: 'p1',
+        evidenceTypeId: 'type-1',
+        uploadId: 'upload-1',
+        idempotencyKey: 'key-1',
+      );
+
+      final body =
+          jsonDecode(utf8.decode(transport.requests.single.body!)) as Map;
+      expect(body.containsKey('declared_valid_until'), isFalse);
+    });
+
+    test('een onbekende beoordelingsstatus is een contractbreuk', () async {
+      transport.responses.add(_json(itemJson(status: 'raar'), statusCode: 201));
+
+      await expectLater(
+        gateway.createEvidenceItem(
+          accessToken: 'access',
+          organizationId: 'org',
+          participantId: 'p1',
+          evidenceTypeId: 'type-1',
+          uploadId: 'upload-1',
+          idempotencyKey: 'key-1',
+        ),
+        throwsA(
+          isA<OciServeException>().having(
+            (error) => error.code,
+            'code',
+            'invalid_response',
+          ),
+        ),
+      );
+    });
+
+    test('leest de eigen bewijsstukken met hun beoordeling', () async {
+      transport.responses.add(
+        _json({
+          'evidence_items': [itemJson(), itemJson(status: 'afgewezen')],
+        }),
+      );
+
+      final items = await gateway.evidenceItems(
+        accessToken: 'access',
+        organizationId: 'org',
+        participantId: 'p1',
+      );
+
+      expect(transport.requests.single.method, 'GET');
+      expect(
+        transport.requests.single.url.path,
+        '/api/v1/organizations/org/participants/p1/evidence-items',
+      );
+      expect(items, hasLength(2));
+      expect(items.last.status, OciServeEvidenceContentStatus.afgewezen);
+      expect(items.last.reviewNote, 'Onleesbaar');
+      expect(items.first.declaredValidUntil, DateTime.utc(2028, 1, 31));
+    });
+
+    test('een lijst zonder evidence_items is een contractbreuk', () async {
+      transport.responses.add(_json({'items': <Object?>[]}));
+
+      await expectLater(
+        gateway.evidenceItems(
+          accessToken: 'access',
+          organizationId: 'org',
+          participantId: 'p1',
+        ),
+        throwsA(isA<OciServeException>()),
+      );
+    });
   });
 
   test('204 current item means only that all questions are answered', () async {
