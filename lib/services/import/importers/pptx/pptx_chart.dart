@@ -13,7 +13,7 @@ import 'pptx_context.dart';
 /// pipeline records those as conversion issues elsewhere).
 SourceChart? parseChartXml(String xml) {
   final doc = parseXmlSafe(xml);
-  if (doc == null) return null;
+  if (doc == null) throw const FormatException('Ongeldige PPTX-grafiek-XML');
   final plotArea = descendantsLocal(doc, 'plotArea').firstOrNull;
   if (plotArea == null) return null;
 

@@ -61,11 +61,15 @@ Future<void> _pumpOverlay(
   // Voorladen in plaats van wachten: de overlay krijgt zijn beeldmaat dan
   // synchroon en tekent in de eerste build. Hier stond 300 ms wandelklok, en
   // die gok viel op 01-09-2026 om op de linux-runner (taak 5200).
-  await warmImageCache(slide.imagePath);
+  await warmImageCache(
+    slide.imagePath,
+    projectPath: File(slide.imagePath).parent.path,
+  );
   await tester.pumpWidget(
     _host(
       CalloutOverlay(
         slide: slide,
+        projectPath: File(slide.imagePath).parent.path,
         profile: const ThemeProfile(),
         slotWidth: 400,
         slotHeight: 300,

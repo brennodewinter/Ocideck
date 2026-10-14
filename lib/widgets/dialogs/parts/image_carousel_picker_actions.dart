@@ -625,7 +625,18 @@ extension _CarouselActions on _ImageCarouselPickerState {
     final l10n = context.l10n;
     final name = p.basename(path);
     if (deliversByDownload) {
-      final bytes = await ImageService().readSlideImageBytes(path);
+      // De carrousel toont alleen bestanden uit de ingestelde bibliotheekmappen.
+      // Geef die map als vertrouwensgrens mee; een kaal absoluut pad wordt door
+      // de gedeelde exportlezer terecht geweigerd.
+      final source = p.normalize(path);
+      final root = [...widget.searchPaths, ..._extraRoots]
+          .map(p.normalize)
+          .where((candidate) => p.isWithin(candidate, source))
+          .firstOrNull;
+      final bytes = await ImageService().readSlideImageBytes(
+        path,
+        projectPath: root,
+      );
       if (!mounted) return;
       if (bytes == null ||
           deliverAsDownload([(name: name, bytes: bytes)], bundleName: name) ==

@@ -18,7 +18,7 @@ SourceChart? parseOdpChartXml(String xml, ExpandedTableBudget budget) {
   // gelijk aan het PPTX-pad. Een `null`-retour betekent "wel leesbaar, maar geen
   // bruikbare grafiek", niet "onleesbaar"; dat verschil houdt de melding eerlijk.
   final doc = parseXmlSafe(xml);
-  if (doc == null) return null;
+  if (doc == null) throw const FormatException('Ongeldige ODP-grafiek-XML');
   // `<chart:chart>` carries the class attribute; `<office:chart>` does not.
   final chartEl = doc.descendants
       .whereType<XmlElement>()

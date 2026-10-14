@@ -118,11 +118,12 @@ void main() {
       await tester.runAsync(() async {
         final handle = tester.ensureSemantics();
         final path = _writePng('ocideck_a11y_one');
-        await warmImageCache(path);
+        await warmImageCache(path, projectPath: File(path).parent.path);
         await tester.pumpWidget(
           _host(
             CalloutOverlay(
               slide: _slideWithCallouts(imagePath: path, callouts: [_inlet]),
+              projectPath: File(path).parent.path,
               profile: const ThemeProfile(),
               slotWidth: 400,
               slotHeight: 300,
@@ -142,11 +143,12 @@ void main() {
       await tester.runAsync(() async {
         final handle = tester.ensureSemantics();
         final path = _writePng('ocideck_a11y_multi');
-        await warmImageCache(path);
+        await warmImageCache(path, projectPath: File(path).parent.path);
         await tester.pumpWidget(
           _host(
             CalloutOverlay(
               slide: _slideWithCallouts(imagePath: path, callouts: [_twoBolts]),
+              projectPath: File(path).parent.path,
               profile: const ThemeProfile(),
               slotWidth: 400,
               slotHeight: 300,
@@ -176,7 +178,7 @@ void main() {
         await tester.runAsync(() async {
           final handle = tester.ensureSemantics();
           final path = _writePng('ocideck_a11y_reveal');
-          await warmImageCache(path);
+          await warmImageCache(path, projectPath: File(path).parent.path);
           final slide = _slideWithCallouts(
             imagePath: path,
             callouts: [_twoBolts, _inlet],
@@ -187,6 +189,7 @@ void main() {
             _host(
               CalloutOverlay(
                 slide: slide,
+                projectPath: File(path).parent.path,
                 profile: const ThemeProfile(),
                 slotWidth: 400,
                 slotHeight: 300,
@@ -214,6 +217,7 @@ void main() {
             _host(
               CalloutOverlay(
                 slide: slide,
+                projectPath: File(path).parent.path,
                 profile: const ThemeProfile(),
                 slotWidth: 400,
                 slotHeight: 300,
@@ -236,7 +240,7 @@ void main() {
       await tester.runAsync(() async {
         final handle = tester.ensureSemantics();
         final path = _writePng('ocideck_a11y_redact');
-        await warmImageCache(path);
+        await warmImageCache(path, projectPath: File(path).parent.path);
         await tester.pumpWidget(
           _host(
             CalloutOverlay(
@@ -244,6 +248,7 @@ void main() {
                 imagePath: path,
                 callouts: [_twoBolts, _inlet],
               ),
+              projectPath: File(path).parent.path,
               profile: const ThemeProfile(),
               slotWidth: 400,
               slotHeight: 300,
@@ -268,7 +273,7 @@ void main() {
       await tester.runAsync(() async {
         final handle = tester.ensureSemantics();
         final path = _writePng('ocideck_a11y_bullet');
-        await warmImageCache(path);
+        await warmImageCache(path, projectPath: File(path).parent.path);
         final slide = _slideWithCallouts(
           imagePath: path,
           callouts: [_twoBolts, _inlet],

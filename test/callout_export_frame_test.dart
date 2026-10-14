@@ -59,6 +59,7 @@ class _HostState extends State<_Host> {
             ? const SizedBox.expand()
             : CalloutOverlay(
                 slide: _slide,
+                projectPath: File(_slide.imagePath).parent.path,
                 profile: const ThemeProfile(),
                 slotWidth: 400,
                 slotHeight: 300,
@@ -151,7 +152,9 @@ void main() {
     late ImageStreamListener listener;
     await tester.runAsync(() async {
       final done = Completer<void>();
-      stream = cappedFileImage(File(path)).resolve(ImageConfiguration.empty);
+      stream = cappedFileImage(
+        File(File(path).resolveSymbolicLinksSync()),
+      ).resolve(ImageConfiguration.empty);
       listener = ImageStreamListener(
         (_, _) {
           if (!done.isCompleted) done.complete();
