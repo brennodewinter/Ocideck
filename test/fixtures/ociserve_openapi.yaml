@@ -1558,7 +1558,9 @@ paths:
       description: |
         Returns the org-wide authentication policy (required ACR/AMR, max
         auth age, strict mode). Requires `member:read`. Returns defaults
-        when no policy has been set.
+        when no policy has been set. Under a strict policy this route, like
+        every other route of the organization, requires a session that meets
+        it; see `strict_mode`.
       parameters:
         - name: organization_id
           in: path
@@ -1583,8 +1585,13 @@ paths:
       description: |
         Upserts the org-wide authentication policy. Requires `auth:policy`
         (owner only) and step-up authentication. Fail-closed: weakening the
-        policy (removing ACR/AMR requirements or increasing max_auth_age)
-        is rejected with 409 unless the current policy is already weaker.
+        policy (removing ACR/AMR requirements, increasing max_auth_age or
+        switching strict_mode off) is rejected with 409 unless the current
+        policy is already weaker. A strict policy that the saving owner's own
+        session does not meet is also rejected with 409, because it would lock
+        the organization out the moment it is saved. Values that cannot be
+        carried in a challenge, or an age outside 0..31622400, are rejected
+        with 400.
       parameters:
         - name: organization_id
           in: path
@@ -4874,6 +4881,50 @@ paths:
         "404":
           $ref: '#/components/responses/ProblemResponse'
 
+  /api/v1/organizations/{organization_id}/blueprints/{blueprint_id}/image:
+    put:
+      tags: [Blueprints]
+      summary: Set or remove the blueprint image
+      description: |
+        Attaches, replaces or (with `image_hash: null`) removes the image of a
+        blueprint in any status. The image must be a PNG, JPEG or WebP the
+        organization uploaded through the asset route. The actor must hold
+        `content:edit`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: blueprint_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogImageRequest'
+      responses:
+        "200":
+          description: The blueprint with its new image.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlueprintResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
   /api/v1/organizations/{organization_id}/blueprints/{blueprint_id}/draft:
     get:
       tags: [Blueprints]
@@ -5209,6 +5260,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CourseItem'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/courses/{course_id}/image:
+    put:
+      tags: [Courses]
+      summary: Set or remove the course image
+      description: |
+        Attaches, replaces or (with `image_hash: null`) removes the image of a
+        course in any status; the image is catalogue metadata, so no new
+        version is needed. The image must be a PNG, JPEG or WebP the
+        organization uploaded through the asset route. The actor must hold
+        `content:edit`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogImageRequest'
+      responses:
+        "200":
+          description: The course with its new image.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseItem'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
         "401":
           $ref: '#/components/responses/ProblemResponse'
         "403":
@@ -8363,7 +8459,7 @@ paths:
       tags: [Assessments]
       summary: List exam sessions admitted for the authenticated participant
       parameters: [{ name: org_id, in: path, required: true, schema: { type: string, format: uuid } }]
-      responses: { "200": { description: Candidate session list containing no blueprint or staff identifiers., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/CandidateExamSessionList' } } } } }
+      responses: { "200": { description: Candidate session list containing no blueprint or staff identifiers; the only blueprint-derived field is the image hash., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/CandidateExamSessionList' } } } } }
 
   /api/v1/organizations/{org_id}/me/exam-sessions/{session_id}/attempts:
     post:
@@ -9082,6 +9178,85 @@ paths:
         "404": { $ref: '#/components/responses/ProblemResponse' }
         "409": { $ref: '#/components/responses/ProblemResponse' }
 
+  /api/v1/organizations/{organization_id}/intake-readiness:
+    get:
+      tags: [Intake]
+      summary: Read the organization-level Managed Intake readiness state
+      description: |
+        Returns the organization-level state of Managed Intake and the
+        health checks behind it, so the administration UI can render an
+        activation card. `state` is `disabled` until the organization has
+        activated intake, `ready` once activated, and `degraded` when it is
+        activated but a runtime check (mail verification, object store,
+        quota headroom, retention wiring, public origin) currently fails.
+        The check list is
+        the actionable readmodel: each entry names a failing condition and a
+        safe detail string — never secrets, internal paths or personal data.
+        Requires `org:admin` or `intake:manage`.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Readiness readmodel.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeReadiness' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/intake-activation:
+    post:
+      tags: [Intake]
+      summary: Activate Managed Intake for the organization
+      description: |
+        Switches Managed Intake on for this organization. Activation is
+        fail-closed: it is refused with `errors/intake-not-ready` (409)
+        until every readiness check passes, including a verified SMTP
+        configuration (`/organizations/{organization_id}/setup/complete`).
+        The problem body carries `failed_checks`, so the client can show
+        the concrete recovery action per failing check. Requires `org:admin`
+        or `intake:manage` and an `Idempotency-Key`; re-activating an
+        already active organization returns the same ready state.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 } }
+      responses:
+        "200":
+          description: Intake activated — readiness readmodel in state `ready`.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeReadiness' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+    delete:
+      tags: [Intake]
+      summary: Deactivate Managed Intake for the organization
+      description: |
+        Switches Managed Intake off for this organization. Nothing is
+        deleted: drafts, submissions, revisions, grants and objects stay
+        readable through the existing endpoints. Deactivation stops new
+        respondent starts — challenge mails are no longer sent and new
+        uploads are refused with `errors/intake-disabled` — while
+        withdrawals stay possible for respondents holding a live grant.
+        The response's `effects` field states these consequences
+        explicitly. Requires `org:admin` or `intake:manage`; deactivating
+        an already disabled organization is an idempotent no-op.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Intake deactivated — state plus consequence contract.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IntakeDisabledResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
 components:
   schemas:
     SelfPrivacyDataResponse:
@@ -9619,6 +9794,7 @@ components:
         released_by: { type: string, format: uuid }
         revision: { type: integer, minimum: 1 }
         server_time: { type: string, format: date-time }
+        image_hash: { type: string, pattern: '^[0-9a-f]{64}$', description: Image of the session's blueprint, if it has one. }
     ExamSessionList:
       type: object
       additionalProperties: false
@@ -9636,6 +9812,7 @@ components:
         scheduled_start: { type: string, format: date-time }
         latest_admission_at: { type: string, format: date-time }
         absolute_deadline_at: { type: string, format: date-time }
+        image_hash: { type: string, pattern: '^[0-9a-f]{64}$', description: Image of the exam's blueprint, if it has one. }
     CandidateExamSessionList:
       type: object
       additionalProperties: false
@@ -11774,6 +11951,21 @@ components:
           type: string
         title:
           type: string
+        image_hash:
+          type: string
+          pattern: '^[0-9a-f]{64}$'
+          description: Optional hash of a PNG, JPEG, or WebP uploaded by this organization. Exam sessions show it to staff and candidates.
+
+    CatalogImageRequest:
+      type: object
+      additionalProperties: false
+      required: [image_hash]
+      description: Sets the image of a course or blueprint. The key is required; an explicit null detaches the current image.
+      properties:
+        image_hash:
+          type: [string, 'null']
+          pattern: '^[0-9a-f]{64}$'
+          description: Hash of a PNG, JPEG, or WebP uploaded by this organization, or null.
 
     BlueprintResponse:
       type: object
@@ -11789,6 +11981,10 @@ components:
         status:
           type: string
           enum: [draft, published, archived]
+        image_hash:
+          type: string
+          pattern: '^[0-9a-f]{64}$'
+          description: Hash of the organization-owned blueprint image, if present.
         created_at:
           type: string
           format: date-time
@@ -12909,17 +13105,38 @@ components:
       properties:
         required_acr:
           type: string
-          description: Required ACR value (empty when none required).
+          maxLength: 256
+          pattern: '^[\x21\x23-\x5B\x5D-\x7E]*$'
+          description: |
+            Required ACR value (empty when none required). Printable ASCII
+            without spaces, double quotes or backslashes, so it can be carried
+            as one `acr_values` element in a challenge.
         required_amr:
           type: array
-          items: { type: string }
-          description: Required AMR values.
+          maxItems: 16
+          items: { type: string, minLength: 1, maxLength: 256, pattern: '^[\x21\x23-\x5B\x5D-\x7E]+$' }
+          description: |
+            Required AMR values; all must be present in the session's `amr`.
+            Duplicates are folded. May be omitted, which reads back as `[]`.
         max_auth_age:
           type: integer
+          minimum: 0
+          maximum: 31622400
           description: Maximum authentication age in seconds (0 = no limit).
         strict_mode:
           type: boolean
-          description: When true, tokens not meeting the policy are rejected even if otherwise valid.
+          description: |
+            When true, the policy is enforced on every request a member makes
+            to the organization's resources (`/api/v1/organizations/{id}/…`):
+            a session that does not meet it is refused with `401` and an
+            RFC 9470 `insufficient_user_authentication` challenge, even if the
+            token is otherwise valid. When false the policy is advisory only
+            and never refuses a request.
+
+            Strict mode cannot be switched off once on, and a strict policy
+            cannot be saved unless the saving owner's own session meets it.
+            A caller without an active membership is not subject to the
+            policy and receives the same answer as before.
 
     IdentityOperation:
       type: object
@@ -14140,6 +14357,82 @@ components:
       required: [handled]
       properties:
         handled: { type: boolean }
+
+    IntakeReadinessCheck:
+      type: object
+      additionalProperties: false
+      required: [name, ok, detail]
+      properties:
+        name:
+          type: string
+          enum: [smtp, respondent_security, object_store, storage_quota, retention, public_origin]
+          description: Machine-readable check identifier; clients may map it to a recovery hint.
+        ok: { type: boolean }
+        detail:
+          type: string
+          description: Safe, human-readable condition — never secrets, paths or personal data.
+
+    IntakeLimits:
+      type: object
+      additionalProperties: false
+      required: [object_max_bytes, object_quota_bytes, object_used_bytes]
+      properties:
+        object_max_bytes:
+          type: integer
+          format: int64
+          description: Maximum size of a single submission object.
+        object_quota_bytes:
+          type: integer
+          format: int64
+          description: Total private object-storage quota for the organization; non-positive means unlimited.
+        object_used_bytes:
+          type: integer
+          format: int64
+          description: Bytes currently held in the private submission object store.
+
+    IntakeReadiness:
+      type: object
+      additionalProperties: false
+      required: [state, checks, public_base_url, operator_contact, limits]
+      properties:
+        state:
+          type: string
+          enum: [disabled, ready, degraded]
+          description: |
+            `disabled` until activated (or after deactivation), `ready` when
+            active with all checks green, `degraded` when active but a
+            runtime check currently fails.
+        activated_at: { type: string, format: date-time, description: Present only while activated. }
+        public_base_url:
+          type: string
+          description: Canonical public origin respondent links are built on; empty when not configured.
+        operator_contact:
+          type: string
+          description: Sender address respondents see in challenge mail; empty until SMTP is configured.
+        checks:
+          type: array
+          items: { $ref: '#/components/schemas/IntakeReadinessCheck' }
+          description: Ordered, actionable check list — the union of what activation requires.
+        limits:
+          $ref: '#/components/schemas/IntakeLimits'
+
+    IntakeDisabledResponse:
+      type: object
+      additionalProperties: false
+      required: [state, effects]
+      properties:
+        state: { type: string, enum: [disabled] }
+        effects:
+          type: object
+          additionalProperties: false
+          required: [new_starts, uploads, correction_rounds, withdrawals, existing_data, organizer_access]
+          properties:
+            new_starts: { type: string, description: What respondents see when starting anew. }
+            uploads: { type: string, description: Whether draft uploads and submits still work. }
+            correction_rounds: { type: string, description: Whether correction rounds can open or upload. }
+            withdrawals: { type: string, description: Whether erasure requests still work. }
+            existing_data: { type: string, description: What happens to stored respondent data. }
+            organizer_access: { type: string, description: Whether the organizer inbox and purge keep working. }
 
   responses:
     RequestTooLarge:
