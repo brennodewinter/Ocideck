@@ -4860,6 +4860,8 @@ for confirmation. OciDeck cannot establish who is behind the keyboard. The
 examining institution must organise human supervision when that assurance is
 required. Individual question selection and ordering reduce the value of
 looking at another participant's screen, but do not replace supervision.
+When the institution has given the exam an image, it appears beside the exam in
+the list so that you can recognise it; without one, OciDeck shows an icon.
 
 ### Your personal learning progress
 

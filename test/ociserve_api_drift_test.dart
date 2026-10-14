@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  45d9a87a4ccd39924df1305aa7922f0171abc23d
+// OciServe commit:  b43a53c6b9444a18ff3c47a2ffa9bc6c6f545d5e
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -16,12 +16,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_privacy_dictionary.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = '45d9a87a4ccd39924df1305aa7922f0171abc23d';
+const pinnedOciServeCommit = 'b43a53c6b9444a18ff3c47a2ffa9bc6c6f545d5e';
 
 /// SHA-256 of the pinned spec file itself — a spec silently replaced or
 /// hand-edited shows up here, not in a subtle field rename.
 const pinnedOciServeSpecSha256 =
-    '28809ba4b18c270705d382fb5f283af710c08aea302febf788f0ab7dfab3e0a3';
+    'c463dfa4aabc0a4cc5c5e10d6541789a9414a51216fb0a4e25a90b7bb42f0e9b';
 
 /// The capability catalogue the pinned spec declares (`info.x-capability-
 /// catalog-version`) and the intake capabilities OciDeck may rely on.
@@ -146,7 +146,11 @@ const gatewayRoutes = <GatewayRoute>[
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/organizations/{}/me/exam-sessions',
-    responseFields: ['exam_sessions', 'server_time'],
+    responseFields: [
+      'exam_sessions',
+      'server_time',
+      'exam_sessions.image_hash',
+    ],
   ),
   GatewayRoute(
     method: 'POST',

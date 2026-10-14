@@ -18,6 +18,7 @@ class OciServeExamSession {
     this.scheduledStart,
     this.latestAdmissionAt,
     this.absoluteDeadlineAt,
+    this.imageHash,
   });
 
   final String id;
@@ -25,6 +26,10 @@ class OciServeExamSession {
   final DateTime? scheduledStart;
   final DateTime? latestAdmissionAt;
   final DateTime? absoluteDeadlineAt;
+
+  /// De herkenningsafbeelding van het examen, een SHA-256 in kleine hex. Ze
+  /// komt van de toetsmatrijs; ontbreekt ze, dan toont de lijst een pictogram.
+  final String? imageHash;
 
   bool canStartAt(DateTime serverTime) {
     final now = serverTime.toUtc();
@@ -41,6 +46,7 @@ class OciServeExamSession {
       'scheduled_start',
       'latest_admission_at',
       'absolute_deadline_at',
+      'image_hash',
     });
     final id = (json['id'] as String? ?? '').trim();
     final status = (json['status'] as String? ?? '').trim();
@@ -54,8 +60,20 @@ class OciServeExamSession {
       scheduledStart: _optionalDate(json, 'scheduled_start'),
       latestAdmissionAt: _optionalDate(json, 'latest_admission_at'),
       absoluteDeadlineAt: _optionalDate(json, 'absolute_deadline_at'),
+      imageHash: _optionalImageHash(json),
     );
   }
+}
+
+/// Leest `image_hash`. Een waarde die geen SHA-256 is, weigert de hele sessie:
+/// de hash wordt later een pad naar de server, dus niets anders mag erdoor.
+String? _optionalImageHash(Map<String, Object?> json) {
+  final raw = json['image_hash'];
+  if (raw == null) return null;
+  if (raw is! String || !RegExp(r'^[0-9a-f]{64}$').hasMatch(raw)) {
+    throw const FormatException('invalid participant exam session');
+  }
+  return raw;
 }
 
 @immutable

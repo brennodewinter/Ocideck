@@ -22,6 +22,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Een examen toont zijn herkenningsafbeelding.** Heeft de organisatie de
+  toetsmatrijs een afbeelding gegeven, dan staat die in *Mijn examens* naast het
+  examen, zodat je het herkent. Zonder afbeelding blijft het pictogram. De
+  afbeelding gaat langs dezelfde gecontroleerde route als de cursusafbeeldingen:
+  type en hash worden gecontroleerd voordat ze getoond wordt. Dit vraagt een
+  OciServe waarin de examenlijst `image_hash` meestuurt.
 - **Aparte startmappen voor documenten en presentaties.** Onder *Instellingen
   → Opslag* kies je per soort een bibliotheek waar openen en opslaan beginnen.
   Leeg laten blijft de eerste bibliotheek. Er komt geen nieuw bestandsformaat

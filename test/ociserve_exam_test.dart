@@ -104,6 +104,48 @@ void main() {
     expect(session.canStartAt(DateTime.utc(2026, 9, 12, 11, 5)), isFalse);
   });
 
+  group('the exam image', () {
+    final base = {
+      'id': 'session-1',
+      'status': 'released',
+      'scheduled_start': '2026-09-12T11:00:00Z',
+      'latest_admission_at': '2026-09-12T11:15:00Z',
+      'absolute_deadline_at': '2026-09-12T12:00:00Z',
+    };
+    final hash = 'ab' * 32;
+
+    test('is read when the server sends one', () {
+      expect(
+        OciServeExamSession.fromJson({...base, 'image_hash': hash}).imageHash,
+        hash,
+      );
+    });
+
+    test('is absent for a blueprint without an image', () {
+      expect(OciServeExamSession.fromJson(base).imageHash, isNull);
+      expect(
+        OciServeExamSession.fromJson({...base, 'image_hash': null}).imageHash,
+        isNull,
+      );
+    });
+
+    test('rejects anything that is not a lowercase SHA-256', () {
+      for (final bad in [
+        'abc',
+        hash.toUpperCase(),
+        '../$hash',
+        '$hash/../x',
+        7,
+      ]) {
+        expect(
+          () => OciServeExamSession.fromJson({...base, 'image_hash': bad}),
+          throwsFormatException,
+          reason: '$bad',
+        );
+      }
+    });
+  });
+
   test('stored answer mutation rejects secret or display fields', () {
     final mutation = OciServeExamAnswerMutation.fromItem(
       organizationId: 'org',
