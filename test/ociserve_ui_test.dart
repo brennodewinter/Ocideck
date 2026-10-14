@@ -18,7 +18,9 @@ import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
+import 'package:ocideck/utils/image_limits.dart';
 import 'package:ocideck/widgets/app_shell.dart';
+import 'package:ocideck/widgets/dialogs/ociserve_exam_dialog.dart';
 import 'package:ocideck/widgets/dialogs/settings/integration_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings/ociserve_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings/integrations_panel.dart';
@@ -76,6 +78,7 @@ class _FixedOciServeNotifier extends OciServeNotifier {
     this.package,
     this.loginSucceeds = true,
     this.courseImages = const {},
+    this.examImageHash,
     int privacyFailures = 0,
     OciServePrivacyData? privacyData,
   }) : _privacyFailuresRemaining = privacyFailures,
@@ -95,6 +98,7 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   final OciServePackage? package;
   final bool loginSucceeds;
   final Map<String, Uint8List> courseImages;
+  final String? examImageHash;
   final OciServePrivacyData privacyDataValue;
   int _privacyFailuresRemaining;
   int privacyDataCalls = 0;
@@ -159,8 +163,12 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   @override
   Future<OciServeExamSessionList> examSessions(String organizationId) async =>
       OciServeExamSessionList(
-        sessions: const [
-          OciServeExamSession(id: 'exam-session', status: 'released'),
+        sessions: [
+          OciServeExamSession(
+            id: 'exam-session',
+            status: 'released',
+            imageHash: examImageHash,
+          ),
         ],
         serverTime: DateTime.utc(2026, 9, 12),
       );
@@ -289,28 +297,33 @@ const _authenticated = OciServeState(
   account: _account,
 );
 
-_FixedOciServeNotifier _lessonNotifier({bool? completed}) =>
-    _FixedOciServeNotifier(
-      _authenticated,
-      feed: const [_firstLesson],
-      progress: completed == null
-          ? const OciServeLearningState([])
-          : OciServeLearningState([
-              OciServeLessonState(
-                courseVersionId: 'version',
-                lessonId: 'one',
-                completed: completed,
-                lastSlideAnchor: 'einde',
-                displayedMilliseconds: 90000,
-              ),
-            ]),
-      package: OciServePackage(
-        bytes: _lessonPackage(),
-        sha256: 'test',
-        playbackPolicy: 'play-only',
-        packageProfile: 'ocideck-winzip-aes256-ae2-v1',
-      ),
-    );
+_FixedOciServeNotifier _lessonNotifier({
+  bool? completed,
+  String? examImageHash,
+  Map<String, Uint8List> courseImages = const {},
+}) => _FixedOciServeNotifier(
+  _authenticated,
+  examImageHash: examImageHash,
+  courseImages: courseImages,
+  feed: const [_firstLesson],
+  progress: completed == null
+      ? const OciServeLearningState([])
+      : OciServeLearningState([
+          OciServeLessonState(
+            courseVersionId: 'version',
+            lessonId: 'one',
+            completed: completed,
+            lastSlideAnchor: 'einde',
+            displayedMilliseconds: 90000,
+          ),
+        ]),
+  package: OciServePackage(
+    bytes: _lessonPackage(),
+    sha256: 'test',
+    playbackPolicy: 'play-only',
+    packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+  ),
+);
 
 Future<ProviderContainer> _pumpApp(
   WidgetTester tester,
@@ -1674,6 +1687,43 @@ void main() {
 
     expect(container.read(tabsProvider).current?.isOpen, isFalse);
     expect(find.byKey(const Key('ociserve-featured-course')), findsOneWidget);
+  });
+
+  testWidgets('een examen toont zijn herkenningsafbeelding in de lijst', (
+    tester,
+  ) async {
+    const hash =
+        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
+    final png = Uint8List.fromList(
+      base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9ZlOQAAAAASUVORK5CYII=',
+      ),
+    );
+    final notifier = _lessonNotifier(
+      examImageHash: hash,
+      courseImages: {hash: png},
+    );
+    await _pumpApp(tester, notifier);
+    await _openCourses(tester);
+    await tester.tap(find.byKey(const Key('ociserve-exams-button')));
+    await tester.pumpAndSettle();
+
+    final examImage = find.descendant(
+      of: find.byType(OciServeExamDialog),
+      matching: find.byWidgetPredicate(
+        (widget) => widget is Image && widget.image is CappedImage,
+      ),
+    );
+    expect(examImage, findsOneWidget);
+    // Het koppictogram van de dialoog blijft; alleen het examen zelf heeft er
+    // geen meer nodig.
+    expect(
+      find.descendant(
+        of: find.widgetWithText(ListTile, 'Examen'),
+        matching: find.byIcon(Icons.assignment_outlined),
+      ),
+      findsNothing,
+    );
   });
 
   testWidgets(

@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_exam.dart';
 import '../../state/ociserve_exam_provider.dart';
+import '../../state/ociserve_provider.dart';
+import '../../utils/image_limits.dart';
 
 class OciServeExamDialog extends StatelessWidget {
   const OciServeExamDialog({super.key, required this.organizationId});
@@ -157,7 +159,10 @@ class OciServeExamDialog extends StatelessWidget {
         for (final session in state.sessions)
           Card(
             child: ListTile(
-              leading: const Icon(Icons.assignment_outlined),
+              leading: _ExamSessionImage(
+                organizationId: organizationId,
+                imageHash: session.imageHash,
+              ),
               title: Text(l10n.d('Examen')),
               subtitle: Text(
                 [
@@ -222,6 +227,48 @@ class OciServeExamDialog extends StatelessWidget {
       ),
     );
     if (submit == true) await notifier.submit();
+  }
+}
+
+/// De herkenningsafbeelding van een examen, of het pictogram als ze ontbreekt
+/// of niet te laden is. Ze gaat langs dezelfde bounded beeldlaag als de
+/// cursusafbeeldingen: de bytes worden gecontroleerd op type en hash.
+class _ExamSessionImage extends ConsumerWidget {
+  const _ExamSessionImage({
+    required this.organizationId,
+    required this.imageHash,
+  });
+
+  final String organizationId;
+  final String? imageHash;
+
+  static const _size = 48.0;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    const icon = SizedBox.square(
+      dimension: _size,
+      child: Icon(Icons.assignment_outlined),
+    );
+    final hash = imageHash;
+    if (hash == null) return icon;
+    return SizedBox.square(
+      dimension: _size,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image(
+          image: CappedImage(
+            'ociserve-course:$hash',
+            () => ref
+                .read(ociServeProvider.notifier)
+                .courseImage(organizationId: organizationId, imageHash: hash),
+          ),
+          fit: BoxFit.cover,
+          semanticLabel: context.l10n.d('Examen'),
+          errorBuilder: (_, _, _) => icon,
+        ),
+      ),
+    );
   }
 }
 
