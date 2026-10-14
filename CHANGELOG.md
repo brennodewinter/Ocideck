@@ -22,6 +22,22 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Je ziet je examenuitslag.** Is een examen afgenomen en heeft de
+  examinator de uitslag vrijgegeven, dan staat die onder *Mijn uitslagen*: het
+  aantal goede antwoorden, het percentage en of je geslaagd bent. De server
+  berekent dat; OciDeck rekent niet zelf na. Zolang de uitslag niet is
+  vrijgegeven, staat er alleen dat hij nog komt. De uitslag kan meewegen voor een kwalificatie, maar
+  daarover beslist nog steeds een beoordelaar. Dit vraagt een OciServe met
+  `GET …/me/exam-results`.
+- **Bewijs aanleveren eindigt nu bij een beoordelaar.** Je kiest eerst de soort
+  bewijs, levert het bestand aan en OciDeck wacht op de veiligheidscontrole van de
+  server voordat het bewijsstuk wordt ingediend. Bij *Mijn bewijs* zie je
+  daarna per stuk of het is ingediend, in behandeling is, is geaccepteerd of
+  afgekeurd, met de opmerking van de beoordelaar erbij. Een bestand dat de
+  controle niet haalt, wordt niet ingediend; mislukt het aanleveren halverwege,
+  dan hergebruikt een nieuwe poging hetzelfde bestandsslot, zodat er geen dubbel
+  bewijsstuk ontstaat.
+
 - **Een examen toont zijn herkenningsafbeelding.** Heeft de organisatie de
   toetsmatrijs een afbeelding gegeven, dan staat die in *Mijn examens* naast het
   examen, zodat je het herkent. Zonder afbeelding blijft het pictogram. De

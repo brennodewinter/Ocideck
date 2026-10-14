@@ -1636,6 +1636,38 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Aanvulling gevraagd': 'Iarradh breis eolais',
+  'Aanvulling gevraagd.': 'Iarradh breis eolais.',
+  'Aanvulling gevraagd: {opmerking}': 'Iarradh breis eolais: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Níorbh fhéidir cineálacha fianaise a lódáil.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Níl aon chineál fianaise ar fáil. Iarr ar an eagraíocht iad a fhoilsiú.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Diúltaíodh don chomhad le linn an seiceála. Roghnaigh comhad eile.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Fuarthas an comhad agus fuarthas amach go bhfuil sé sábháilte. Níor cuireadh isteach lena mheas fós é.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Tá an comhad á sheiceáil fós. Bain triail eile as i gceann cúpla nóiméad.',
+  'Het bewijsstuk is ingetrokken.': 'Tarraingíodh siar an fhianaise.',
+  'Het bewijsstuk is verlopen.': 'Tá an fhianaise imithe in éag.',
+  'In behandeling bij een beoordelaar.': 'Tá measúnóir ag plé leis.',
+  'Ingediend': 'Curtha isteach',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Curtha isteach. Cuirfidh measúnóir súil air.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Roghnaigh an cineál fianaise a chuireann tú isteach.',
+  'Soort bewijs': 'Cineál fianaise',
+  'Soort: {soort}': 'Cineál: {soort}',
+  'Mijn uitslagen': 'Mo thorthaí',
+  'De uitslag is nog niet vrijgegeven.': 'Níor scaoileadh an toradh fós.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} as {totaal} ceart · {percentage}%',
+  'Niet geslaagd': 'Níor éirigh leis',
+  'De uitslagen konden niet worden geladen.':
+      'Níorbh fhéidir na torthaí a lódáil.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Feicfidh tú do thoradh faoi Mo scrúduithe a luaithe a scaoilfear é.',
   'Startmappen': 'Fillteáin tosaigh',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Cá dtosaíonn oscailt agus sábháil. Fág folamh chun an chéad leabharlann a úsáid.',

@@ -652,6 +652,39 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Aanvulling gevraagd': 'Oanfolling fersocht',
+  'Aanvulling gevraagd.': 'Oanfolling fersocht.',
+  'Aanvulling gevraagd: {opmerking}': 'Oanfolling fersocht: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'De soarten bewiis koenen net laden wurde.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Der binne gjin soarten bewiis beskikber. Freegje de organisaasje om se te publisearjen.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'It bestân is by de kontrôle ôfwiisd. Kies in oar bestân.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'It bestân is ûntfongen en feilich fûn. It is noch net yntsjinne foar beoardieling.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'It bestân wurdt noch kontrolearre. Besykje it oer in pear minuten opnij.',
+  'Het bewijsstuk is ingetrokken.': 'It bewiisstik is yntlutsen.',
+  'Het bewijsstuk is verlopen.': 'It bewiisstik is ferrûn.',
+  'In behandeling bij een beoordelaar.':
+      'Wurdt behannele troch in beoardieler.',
+  'Ingediend': 'Yntsjinne',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Yntsjinne. In beoardieler sjocht der nei.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Kies de soarte bewiis dy\'t jo oanleverje.',
+  'Soort bewijs': 'Soarte bewiis',
+  'Soort: {soort}': 'Soarte: {soort}',
+  'Mijn uitslagen': 'Myn útslaggen',
+  'De uitslag is nog niet vrijgegeven.': 'It útslach is noch net frijjûn.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} fan {totaal} goed · {percentage}%',
+  'Niet geslaagd': 'Net slagge',
+  'De uitslagen konden niet worden geladen.':
+      'De útslaggen koene net laden wurde.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Jo sjogge jo útslach ûnder Myn eksamens sadree\'t it frijjûn is.',
   'Startmappen': 'Begjinmappen',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wêr iepenjen en bewarjen begjint. Leech litte brûkt de earste bibleteek.',

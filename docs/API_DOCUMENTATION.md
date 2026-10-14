@@ -661,6 +661,23 @@ the authenticated client uses only self-scoped organisation routes:
 - `GET /api/v1/organizations/{organization_id}/me/privacy-data`
 - `POST /api/v1/organizations/{organization_id}/me/playback-sessions`
 
+Exam results and evidence use the same self-scoped identity rule:
+
+- `GET /api/v1/organizations/{organization_id}/me/exam-results` — the learner's
+  own results. `percentage` and `passed` are computed by the server and only
+  present once the organisation has released the attempt; OciDeck never derives
+  pass/fail from the pass mark.
+- `GET /api/v1/organizations/{organization_id}/evidence-types` — the published
+  evidence types a learner may choose from (`content:view`, which learners hold).
+- `POST /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items`
+  — submits a verified upload as evidence for review. It needs an
+  `Idempotency-Key` and an upload whose status is `clean`, so the client polls
+  `GET …/evidence-uploads/{evidence_id}` first (slot → bytes → verification →
+  item). A retry reuses the slot and the key; a rejected slot is not reused.
+- `GET /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items`
+  — the learner's own submitted items and their review status
+  (`content_status`, `review_note`).
+
 The package endpoint returns binary `.ocideck` bytes and must include a matching
 SHA-256 `Digest`, an `ETag`, and `X-OciServe-Playback-Policy: play-only`. The
 non-skipped slides in the package, in presentation order, form the lesson;

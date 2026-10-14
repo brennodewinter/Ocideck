@@ -12,6 +12,14 @@ mixin _OciServeExamMethods on OciServeNotifierBase {
     ).examSessions(accessToken: access, organizationId: organizationId);
   }
 
+  Future<OciServeExamResultList> examResults(String organizationId) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(
+      state.settings,
+    ).examResults(accessToken: access, organizationId: organizationId);
+  }
+
   Future<OciServeExamAttempt> startExamAttempt({
     required String organizationId,
     required String sessionId,

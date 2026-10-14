@@ -1606,6 +1606,38 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Aanvulling gevraagd': 'Supplering ønskes',
+  'Aanvulling gevraagd.': 'Supplering ønskes.',
+  'Aanvulling gevraagd: {opmerking}': 'Supplering ønskes: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Dokumentationstyperne kunne ikke indlæses.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Der er ingen dokumentationstyper tilgængelige. Bed organisationen om at offentliggøre dem.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Filen blev afvist ved kontrollen. Vælg en anden fil.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Filen er modtaget og vurderet som sikker. Den er endnu ikke indsendt til bedømmelse.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Filen er stadig under kontrol. Prøv igen om nogle minutter.',
+  'Het bewijsstuk is ingetrokken.': 'Dokumentationen er trukket tilbage.',
+  'Het bewijsstuk is verlopen.': 'Dokumentationen er udløbet.',
+  'In behandeling bij een beoordelaar.': 'Behandles af en bedømmer.',
+  'Ingediend': 'Indsendt',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Indsendt. En bedømmer ser på den.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Vælg den type dokumentation, du indsender.',
+  'Soort bewijs': 'Type dokumentation',
+  'Soort: {soort}': 'Dokumentationstype: {soort}',
+  'Mijn uitslagen': 'Mine resultater',
+  'De uitslag is nog niet vrijgegeven.': 'Resultatet er endnu ikke frigivet.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} af {totaal} rigtige · {percentage}%',
+  'Niet geslaagd': 'Ikke bestået',
+  'De uitslagen konden niet worden geladen.':
+      'Resultaterne kunne ikke indlæses.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Du kan se dit resultat under Mine eksamener, så snart det er frigivet.',
   'Startmappen': 'Startmapper',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hvor åbning og gemning begynder. Tomt felt bruger det første bibliotek.',

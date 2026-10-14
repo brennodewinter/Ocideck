@@ -649,6 +649,39 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Aanvulling gevraagd': 'Se solicita información adicional',
+  'Aanvulling gevraagd.': 'Se solicita información adicional.',
+  'Aanvulling gevraagd: {opmerking}':
+      'Se solicita información adicional: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'No se han podido cargar los tipos de evidencia.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'No hay tipos de evidencia disponibles. Pida a la organización que los publique.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'El archivo fue rechazado en la comprobación. Elija otro archivo.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'El archivo se ha recibido y se considera seguro. Todavía no se ha enviado para su evaluación.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'El archivo aún se está comprobando. Inténtelo de nuevo en unos minutos.',
+  'Het bewijsstuk is ingetrokken.': 'La evidencia ha sido retirada.',
+  'Het bewijsstuk is verlopen.': 'La evidencia ha caducado.',
+  'In behandeling bij een beoordelaar.': 'Lo está tramitando un evaluador.',
+  'Ingediend': 'Enviado',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Enviado. Un evaluador lo revisará.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Elija el tipo de evidencia que envía.',
+  'Soort bewijs': 'Tipo de evidencia',
+  'Soort: {soort}': 'Tipo: {soort}',
+  'Mijn uitslagen': 'Mis resultados',
+  'De uitslag is nog niet vrijgegeven.': 'El resultado aún no se ha publicado.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} de {totaal} correctas · {percentage}%',
+  'Niet geslaagd': 'No aprobado',
+  'De uitslagen konden niet worden geladen.':
+      'No se pudieron cargar los resultados.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Verá su resultado en mis exámenes en cuanto se publique.',
   'Startmappen': 'Carpetas de inicio',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Dónde empiezan abrir y guardar. Déjalo vacío para usar la primera biblioteca.',

@@ -649,6 +649,38 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Aanvulling gevraagd': 'Integrazione richiesta',
+  'Aanvulling gevraagd.': 'Integrazione richiesta.',
+  'Aanvulling gevraagd: {opmerking}': 'Integrazione richiesta: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Impossibile caricare i tipi di prova.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Non sono disponibili tipi di prova. Chiedi all\'organizzazione di pubblicarli.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Il file è stato rifiutato durante il controllo. Scegli un altro file.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Il file è stato ricevuto ed è risultato sicuro. Non è ancora stato inviato per la valutazione.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Il file è ancora in fase di controllo. Riprova tra qualche minuto.',
+  'Het bewijsstuk is ingetrokken.': 'La prova è stata ritirata.',
+  'Het bewijsstuk is verlopen.': 'La prova è scaduta.',
+  'In behandeling bij een beoordelaar.': 'In esame presso un valutatore.',
+  'Ingediend': 'Inviato',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Inviato. Un valutatore lo esaminerà.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Scegli il tipo di prova che stai inviando.',
+  'Soort bewijs': 'Tipo di prova',
+  'Soort: {soort}': 'Tipo: {soort}',
+  'Mijn uitslagen': 'I miei esiti',
+  'De uitslag is nog niet vrijgegeven.':
+      'L\'esito non è ancora stato rilasciato.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} su {totaal} corrette · {percentage}%',
+  'Niet geslaagd': 'Non superato',
+  'De uitslagen konden niet worden geladen.': 'Impossibile caricare gli esiti.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Vedrà il suo esito in I miei esami non appena sarà rilasciato.',
   'Startmappen': 'Cartelle di partenza',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Dove iniziano apertura e salvataggio. Lascia vuoto per usare la prima raccolta.',

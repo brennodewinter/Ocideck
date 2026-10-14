@@ -1612,6 +1612,37 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Aanvulling gevraagd': 'Vyžiadané doplnenie',
+  'Aanvulling gevraagd.': 'Vyžiadané doplnenie.',
+  'Aanvulling gevraagd: {opmerking}': 'Vyžiadané doplnenie: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Druhy dôkazov sa nepodarilo načítať.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Nie sú k dispozícii žiadne druhy dôkazov. Požiadajte organizáciu o ich zverejnenie.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Súbor bol pri kontrole odmietnutý. Vyberte iný súbor.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Súbor bol prijatý a uznaný za bezpečný. Zatiaľ nebol odoslaný na posúdenie.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Súbor sa ešte kontroluje. Skúste to znova o niekoľko minút.',
+  'Het bewijsstuk is ingetrokken.': 'Dôkaz bol stiahnutý.',
+  'Het bewijsstuk is verlopen.': 'Platnosť dôkazu uplynula.',
+  'In behandeling bij een beoordelaar.': 'Posudzuje ho hodnotiteľ.',
+  'Ingediend': 'Odoslané',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Odoslané. Hodnotiteľ sa naň pozrie.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Vyberte druh dôkazu, ktorý predkladáte.',
+  'Soort bewijs': 'Druh dôkazu',
+  'Soort: {soort}': 'Druh: {soort}',
+  'Mijn uitslagen': 'Moje výsledky',
+  'De uitslag is nog niet vrijgegeven.': 'Výsledok zatiaľ nebol zverejnený.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} z {totaal} správne · {percentage}%',
+  'Niet geslaagd': 'Neuspel',
+  'De uitslagen konden niet worden geladen.': 'Výsledky sa nepodarilo načítať.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Svoj výsledok uvidíte v časti Moje skúšky, hneď ako bude zverejnený.',
   'Startmappen': 'Štartovacie priečinky',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kde sa začína otváranie a ukladanie. Prázdne použije prvú knižnicu.',

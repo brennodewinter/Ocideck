@@ -652,6 +652,40 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Aanvulling gevraagd': 'Weitere Angaben angefordert',
+  'Aanvulling gevraagd.': 'Weitere Angaben angefordert.',
+  'Aanvulling gevraagd: {opmerking}':
+      'Weitere Angaben angefordert: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Die Nachweisarten konnten nicht geladen werden.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Es sind keine Nachweisarten verfügbar. Bitten Sie die Organisation, sie zu veröffentlichen.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Die Datei wurde bei der Prüfung abgelehnt. Wählen Sie eine andere Datei.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Die Datei wurde empfangen und als sicher befunden. Sie wurde noch nicht zur Beurteilung eingereicht.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Die Datei wird noch geprüft. Versuchen Sie es in einigen Minuten erneut.',
+  'Het bewijsstuk is ingetrokken.': 'Der Nachweis wurde zurückgezogen.',
+  'Het bewijsstuk is verlopen.': 'Der Nachweis ist abgelaufen.',
+  'In behandeling bij een beoordelaar.': 'Wird von einem Prüfer bearbeitet.',
+  'Ingediend': 'Eingereicht',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Eingereicht. Ein Prüfer sieht es sich an.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Wählen Sie die Art des Nachweises, den Sie einreichen.',
+  'Soort bewijs': 'Art des Nachweises',
+  'Soort: {soort}': 'Art: {soort}',
+  'Mijn uitslagen': 'Meine Ergebnisse',
+  'De uitslag is nog niet vrijgegeven.':
+      'Das Ergebnis wurde noch nicht freigegeben.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} von {totaal} richtig · {percentage}%',
+  'Niet geslaagd': 'Nicht bestanden',
+  'De uitslagen konden niet worden geladen.':
+      'Die Ergebnisse konnten nicht geladen werden.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Ihr Ergebnis sehen Sie unter Meine Prüfungen, sobald es freigegeben ist.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffnen und Speichern beginnen. Leer lassen verwendet die erste Bibliothek.',

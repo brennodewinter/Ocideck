@@ -1606,6 +1606,37 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Aanvulling gevraagd': 'Täydennystä pyydetty',
+  'Aanvulling gevraagd.': 'Täydennystä pyydetty.',
+  'Aanvulling gevraagd: {opmerking}': 'Täydennystä pyydetty: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Todisteiden lajeja ei voitu ladata.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Todisteiden lajeja ei ole saatavilla. Pyydä organisaatiota julkaisemaan ne.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Tiedosto hylättiin tarkistuksessa. Valitse toinen tiedosto.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Tiedosto on vastaanotettu ja todettu turvalliseksi. Sitä ei ole vielä lähetetty arvioitavaksi.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Tiedostoa tarkistetaan vielä. Yritä uudelleen muutaman minuutin kuluttua.',
+  'Het bewijsstuk is ingetrokken.': 'Todiste on peruutettu.',
+  'Het bewijsstuk is verlopen.': 'Todiste on vanhentunut.',
+  'In behandeling bij een beoordelaar.': 'Arvioija käsittelee sitä.',
+  'Ingediend': 'Lähetetty',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Lähetetty. Arvioija tarkastaa sen.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Valitse toimittamasi todisteen laji.',
+  'Soort bewijs': 'Todisteen laji',
+  'Soort: {soort}': 'Laji: {soort}',
+  'Mijn uitslagen': 'Omat tulokseni',
+  'De uitslag is nog niet vrijgegeven.': 'Tulosta ei ole vielä julkaistu.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed}/{totaal} oikein · {percentage}%',
+  'Niet geslaagd': 'Ei läpäissyt',
+  'De uitslagen konden niet worden geladen.': 'Tuloksia ei voitu ladata.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Näet tuloksesi kohdassa Minun kokeeni, kun se on julkaistu.',
   'Startmappen': 'Aloituskansiot',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Mistä avaaminen ja tallennus alkavat. Tyhjä käyttää ensimmäistä kirjastoa.',

@@ -440,6 +440,108 @@ void main() {
     );
   });
 
+  group('examenuitslagen', () {
+    OciServeHttpResponse noStore(Object value) => OciServeHttpResponse(
+      statusCode: 200,
+      headers: const {'cache-control': 'private, no-store'},
+      body: Uint8List.fromList(utf8.encode(jsonEncode(value))),
+    );
+
+    test(
+      'lezen van de eigen uitslagroute, zonder cijfers vóór vrijgave',
+      () async {
+        transport.responses.add(
+          noStore({
+            'results': [
+              {
+                'attempt_id': 'a1',
+                'exam_session_id': 's1',
+                'title': 'Theorie',
+                'status': 'scored',
+              },
+              {
+                'attempt_id': 'a2',
+                'exam_session_id': 's2',
+                'title': 'Praktijk',
+                'status': 'released',
+                'released_at': '2026-09-12T11:00:00Z',
+                'total_items': 4,
+                'correct_items': 3,
+                'percentage': 75,
+                'passed': false,
+              },
+            ],
+            'server_time': '2026-09-12T12:00:00Z',
+          }),
+        );
+
+        final list = await gateway.examResults(
+          accessToken: 'access',
+          organizationId: 'org',
+        );
+
+        expect(transport.requests.single.method, 'GET');
+        expect(
+          transport.requests.single.url.path,
+          endsWith('/organizations/org/me/exam-results'),
+        );
+        expect(list.results.first.released, isFalse);
+        expect(list.results.first.percentage, isNull);
+        expect(list.results.last.passed, isFalse);
+        expect(list.results.last.percentage, 75.0);
+      },
+    );
+
+    test('een antwoord zonder no-store wordt geweigerd', () async {
+      transport.responses.add(
+        _json({'results': <Object?>[], 'server_time': '2026-09-12T12:00:00Z'}),
+      );
+
+      await expectLater(
+        gateway.examResults(accessToken: 'access', organizationId: 'org'),
+        throwsA(
+          isA<OciServeException>().having(
+            (error) => error.code,
+            'code',
+            'exam_cache_policy_refused',
+          ),
+        ),
+      );
+    });
+
+    test(
+      'cijfers bij een niet-vrijgegeven poging zijn een contractbreuk',
+      () async {
+        transport.responses.add(
+          noStore({
+            'results': [
+              {
+                'attempt_id': 'a1',
+                'exam_session_id': 's1',
+                'title': 'Theorie',
+                'status': 'scored',
+                'percentage': 100,
+                'passed': true,
+              },
+            ],
+            'server_time': '2026-09-12T12:00:00Z',
+          }),
+        );
+
+        await expectLater(
+          gateway.examResults(accessToken: 'access', organizationId: 'org'),
+          throwsA(
+            isA<OciServeException>().having(
+              (error) => error.code,
+              'code',
+              'invalid_response',
+            ),
+          ),
+        );
+      },
+    );
+  });
+
   test('204 current item means only that all questions are answered', () async {
     transport.responses.add(
       OciServeHttpResponse(

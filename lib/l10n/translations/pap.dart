@@ -651,6 +651,37 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Aanvulling gevraagd': 'Komplemento pidi',
+  'Aanvulling gevraagd.': 'Komplemento pidi.',
+  'Aanvulling gevraagd: {opmerking}': 'Komplemento pidi: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Ku no por a karga e tiponan di prueba.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'No tin tipo di prueba disponibel. Pidi e organisashon pa publik nan.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'E archivo a wòrdu rechazá durante e kontròl. Skohe un otro archivo.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'E archivo a wòrdu risibí i a wòrdu konsiderá sigur. Ainda no a wòrdu entregá pa evaluashon.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'E archivo ta wòrdu kontrolá ainda. Purba di nobo den algun minüt.',
+  'Het bewijsstuk is ingetrokken.': 'E prueba a wòrdu retirá.',
+  'Het bewijsstuk is verlopen.': 'E prueba a kaduká.',
+  'In behandeling bij een beoordelaar.': 'Un evaluadó ta trata ku esaki.',
+  'Ingediend': 'Entregá',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Entregá. Un evaluadó lo wak esaki.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Skohe e tipo di prueba ku bo ta entregá.',
+  'Soort bewijs': 'Tipo di prueba',
+  'Soort: {soort}': 'Tipo: {soort}',
+  'Mijn uitslagen': 'Mi resultadonan',
+  'De uitslag is nog niet vrijgegeven.': 'E resultado ainda no a wòrdu liberá.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} di {totaal} korekto · {percentage}%',
+  'Niet geslaagd': 'No a pasa',
+  'De uitslagen konden niet worden geladen.': 'No por a karga e resultadonan.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Lo mira bo resultado bou di Mi èksamennan tan lihé ku e ta wòrdu liberá.',
   'Startmappen': 'Mapa di kuminsamentu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unda habri i warda ta kuminsá. Laga bashí ta usa e promé biblioteka.',

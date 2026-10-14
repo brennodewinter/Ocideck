@@ -652,6 +652,40 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Aanvulling gevraagd': 'Complément demandé',
+  'Aanvulling gevraagd.': 'Complément demandé.',
+  'Aanvulling gevraagd: {opmerking}': 'Complément demandé : {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Les types de justificatif n\'ont pas pu être chargés.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Aucun type de justificatif n\'est disponible. Demandez à l\'organisation de les publier.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Le fichier a été refusé lors du contrôle. Choisissez un autre fichier.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Le fichier a été reçu et jugé sûr. Il n\'a pas encore été soumis pour évaluation.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Le fichier est encore en cours de vérification. Réessayez dans quelques minutes.',
+  'Het bewijsstuk is ingetrokken.': 'Le justificatif a été retiré.',
+  'Het bewijsstuk is verlopen.': 'Le justificatif a expiré.',
+  'In behandeling bij een beoordelaar.':
+      'En cours de traitement par un évaluateur.',
+  'Ingediend': 'Soumis',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Soumis. Un évaluateur l\'examine.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Choisissez le type de justificatif que vous soumettez.',
+  'Soort bewijs': 'Type de justificatif',
+  'Soort: {soort}': 'Type : {soort}',
+  'Mijn uitslagen': 'Mes résultats',
+  'De uitslag is nog niet vrijgegeven.':
+      'Le résultat n\'a pas encore été publié.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} sur {totaal} correctes · {percentage} %',
+  'Niet geslaagd': 'Échec',
+  'De uitslagen konden niet worden geladen.':
+      'Les résultats n\'ont pas pu être chargés.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Vous verrez votre résultat sous Mes examens dès qu\'il sera publié.',
   'Startmappen': 'Dossiers de départ',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Là où l\'ouverture et l\'enregistrement commencent. Laisser vide utilise la première bibliothèque.',

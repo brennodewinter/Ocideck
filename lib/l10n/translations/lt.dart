@@ -1613,6 +1613,37 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Aanvulling gevraagd': 'Prašoma papildyti',
+  'Aanvulling gevraagd.': 'Prašoma papildyti.',
+  'Aanvulling gevraagd: {opmerking}': 'Prašoma papildyti: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Nepavyko įkelti įrodymų rūšių.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Įrodymų rūšių nėra. Paprašykite organizacijos jas paskelbti.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Failas buvo atmestas tikrinant. Pasirinkite kitą failą.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Failas gautas ir pripažintas saugiu. Jis dar nepateiktas vertinti.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Failas vis dar tikrinamas. Bandykite dar kartą po kelių minučių.',
+  'Het bewijsstuk is ingetrokken.': 'Įrodymas atšauktas.',
+  'Het bewijsstuk is verlopen.': 'Įrodymo galiojimas pasibaigė.',
+  'In behandeling bij een beoordelaar.': 'Jį nagrinėja vertintojas.',
+  'Ingediend': 'Pateikta',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Pateikta. Vertintojas jį peržiūrės.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Pasirinkite pateikiamo įrodymo rūšį.',
+  'Soort bewijs': 'Įrodymo rūšis',
+  'Soort: {soort}': 'Rūšis: {soort}',
+  'Mijn uitslagen': 'Mano rezultatai',
+  'De uitslag is nog niet vrijgegeven.': 'Rezultatas dar nepaskelbtas.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} iš {totaal} teisingų · {percentage}%',
+  'Niet geslaagd': 'Neišlaikė',
+  'De uitslagen konden niet worden geladen.': 'Nepavyko įkelti rezultatų.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Savo rezultatą matysite skiltyje Mano egzaminai, kai tik jis bus paskelbtas.',
   'Startmappen': 'Pradžios aplankai',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur prasideda atidarymas ir įrašymas. Tuščia naudoja pirmąją biblioteką.',

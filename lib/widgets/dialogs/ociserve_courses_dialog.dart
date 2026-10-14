@@ -2,7 +2,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_models.dart';
 import '../../state/ociserve_provider.dart';
 import '../../state/tabs_provider.dart';
@@ -16,6 +15,7 @@ import 'ociserve_course_summary.dart';
 import 'ociserve_courses_sidebar.dart';
 import 'ociserve_data_access.dart';
 import 'ociserve_evidence.dart';
+import 'ociserve_evidence_data.dart';
 import 'ociserve_exam_button.dart';
 import 'ociserve_learning_profile.dart';
 import 'ociserve_offerings_view.dart';
@@ -56,8 +56,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
   OciServePrivacyData? _privacyData;
   bool _evidenceLoading = false;
   String? _evidenceError;
-  List<EvidenceUpload> _evidenceUploads = const [];
-  List<OciServeQualification> _qualifications = const [];
+  OciServeEvidenceData _evidence = const OciServeEvidenceData();
 
   void _mutate(VoidCallback change) => setState(change);
 
@@ -275,7 +274,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
       _loadPrivacyData();
     }
     if (section == OciServeCoursesSection.evidence &&
-        _evidenceUploads.isEmpty &&
+        _evidence.uploads.isEmpty &&
         !_evidenceLoading) {
       _loadEvidence();
     }

@@ -27,21 +27,14 @@ extension _OciServeCoursesDialogEvidence on _OciServeCoursesDialogState {
         });
         return;
       }
-      final notifier = ref.read(ociServeProvider.notifier);
-      final results = await Future.wait<Object>([
-        notifier.listEvidence(
-          organizationId: org,
-          participantId: participantId,
-        ),
-        notifier.listQualifications(
-          organizationId: org,
-          participantId: participantId,
-        ),
-      ]);
+      final data = await OciServeEvidenceData.load(
+        ref.read(ociServeProvider.notifier),
+        organizationId: org,
+        participantId: participantId,
+      );
       if (!mounted || org != _organizationId) return;
       _mutate(() {
-        _evidenceUploads = results[0] as List<EvidenceUpload>;
-        _qualifications = results[1] as List<OciServeQualification>;
+        _evidence = data;
         _evidenceLoading = false;
       });
     } catch (error, stack) {
@@ -79,8 +72,11 @@ extension _OciServeCoursesDialogEvidence on _OciServeCoursesDialogState {
       );
     }
     return OciServeEvidence(
-      qualifications: _qualifications,
-      evidenceUploads: _evidenceUploads,
+      qualifications: _evidence.qualifications,
+      evidenceUploads: _evidence.uploads,
+      evidenceItems: _evidence.items,
+      evidenceTypes: _evidence.types,
+      participantId: _privacyData?.participantId ?? '',
       organizationId: _organizationId ?? '',
       onRefresh: _loadEvidence,
     );

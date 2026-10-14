@@ -1599,6 +1599,36 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Aanvulling gevraagd': 'Täiendust küsitud',
+  'Aanvulling gevraagd.': 'Täiendust on küsitud.',
+  'Aanvulling gevraagd: {opmerking}': 'Täiendust küsitud: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Tõendite liike ei õnnestunud laadida.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Tõendite liike pole saadaval. Paluge organisatsioonil need avaldada.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Fail lükati kontrollimisel tagasi. Valige mõni teine fail.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Fail on kätte saadud ja tunnistatud turvaliseks. Seda ei ole veel hindamiseks esitatud.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Faili kontrollitakse veel. Proovige mõne minuti pärast uuesti.',
+  'Het bewijsstuk is ingetrokken.': 'Tõend on tagasi võetud.',
+  'Het bewijsstuk is verlopen.': 'Tõend on aegunud.',
+  'In behandeling bij een beoordelaar.': 'Seda menetleb hindaja.',
+  'Ingediend': 'Esitatud',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Esitatud. Hindaja vaatab selle üle.',
+  'Kies de soort bewijs die u aanlevert.': 'Valige tõendi liik, mida esitate.',
+  'Soort bewijs': 'Tõendi liik',
+  'Soort: {soort}': 'Liik: {soort}',
+  'Mijn uitslagen': 'Minu tulemused',
+  'De uitslag is nog niet vrijgegeven.': 'Tulemust ei ole veel vabastatud.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} {totaal}-st õige · {percentage}%',
+  'Niet geslaagd': 'Ei sooritanud',
+  'De uitslagen konden niet worden geladen.': 'Tulemusi ei õnnestunud laadida.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Näed oma tulemust jaotises Minu eksamid, kui see on vabastatud.',
   'Startmappen': 'Alguskaustad',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kus avamine ja salvestamine algavad. Tühi kasutab esimest teeki.',

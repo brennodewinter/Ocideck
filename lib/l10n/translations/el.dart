@@ -1631,6 +1631,39 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Aanvulling gevraagd': 'Ζητήθηκε συμπλήρωση',
+  'Aanvulling gevraagd.': 'Ζητήθηκε συμπλήρωση.',
+  'Aanvulling gevraagd: {opmerking}': 'Ζητήθηκε συμπλήρωση: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Δεν ήταν δυνατή η φόρτωση των τύπων αποδεικτικών.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Δεν υπάρχουν διαθέσιμοι τύποι αποδεικτικών. Ζητήστε από τον οργανισμό να τους δημοσιεύσει.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Το αρχείο απορρίφθηκε κατά τον έλεγχο. Επιλέξτε άλλο αρχείο.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Το αρχείο ελήφθη και κρίθηκε ασφαλές. Δεν έχει υποβληθεί ακόμη για αξιολόγηση.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Το αρχείο ελέγχεται ακόμη. Δοκιμάστε ξανά σε λίγα λεπτά.',
+  'Het bewijsstuk is ingetrokken.': 'Το αποδεικτικό ανακλήθηκε.',
+  'Het bewijsstuk is verlopen.': 'Το αποδεικτικό έχει λήξει.',
+  'In behandeling bij een beoordelaar.': 'Εξετάζεται από αξιολογητή.',
+  'Ingediend': 'Υποβλήθηκε',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Υποβλήθηκε. Ένας αξιολογητής θα το δει.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Επιλέξτε τον τύπο αποδεικτικού που υποβάλλετε.',
+  'Soort bewijs': 'Τύπος αποδεικτικού',
+  'Soort: {soort}': 'Τύπος: {soort}',
+  'Mijn uitslagen': 'Τα αποτελέσματά μου',
+  'De uitslag is nog niet vrijgegeven.':
+      'Το αποτέλεσμα δεν έχει αποδεσμευτεί ακόμη.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} από {totaal} σωστά · {percentage}%',
+  'Niet geslaagd': 'Αποτυχία',
+  'De uitslagen konden niet worden geladen.':
+      'Δεν ήταν δυνατή η φόρτωση των αποτελεσμάτων.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Θα δείτε το αποτέλεσμά σας στο οι εξετάσεις μου μόλις αποδεσμευτεί.',
   'Startmappen': 'Φάκελοι έναρξης',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Από πού ξεκινούν το άνοιγμα και η αποθήκευση. Κενό σημαίνει την πρώτη βιβλιοθήκη.',

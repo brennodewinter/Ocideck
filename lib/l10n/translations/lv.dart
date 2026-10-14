@@ -1604,6 +1604,37 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Aanvulling gevraagd': 'Pieprasīts papildinājums',
+  'Aanvulling gevraagd.': 'Pieprasīts papildinājums.',
+  'Aanvulling gevraagd: {opmerking}': 'Pieprasīts papildinājums: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Pierādījumu veidus neizdevās ielādēt.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Nav pieejamu pierādījumu veidu. Palūdziet organizācijai tos publicēt.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Fails pārbaudē tika noraidīts. Izvēlieties citu failu.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Fails ir saņemts un atzīts par drošu. Tas vēl nav iesniegts vērtēšanai.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Fails vēl tiek pārbaudīts. Mēģiniet vēlreiz pēc dažām minūtēm.',
+  'Het bewijsstuk is ingetrokken.': 'Pierādījums ir atsaukts.',
+  'Het bewijsstuk is verlopen.': 'Pierādījuma derīguma termiņš ir beidzies.',
+  'In behandeling bij een beoordelaar.': 'To izskata vērtētājs.',
+  'Ingediend': 'Iesniegts',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Iesniegts. Vērtētājs to apskatīs.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Izvēlieties pierādījuma veidu, ko iesniedzat.',
+  'Soort bewijs': 'Pierādījuma veids',
+  'Soort: {soort}': 'Veids: {soort}',
+  'Mijn uitslagen': 'Mani rezultāti',
+  'De uitslag is nog niet vrijgegeven.': 'Rezultāts vēl nav atbrīvots.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} no {totaal} pareizi · {percentage}%',
+  'Niet geslaagd': 'Neizturēja',
+  'De uitslagen konden niet worden geladen.': 'Rezultātus neizdevās ielādēt.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Savu rezultātu redzēsiet sadaļā Mani eksāmeni, tiklīdz tas tiks atbrīvots.',
   'Startmappen': 'Sākuma mapes',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur sākas atvēršana un saglabāšana. Tukšs izmanto pirmo bibliotēku.',

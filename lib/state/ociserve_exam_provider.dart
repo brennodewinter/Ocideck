@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/ociserve_exam.dart';
+import '../models/ociserve_exam_result.dart';
 import '../services/ociserve/ociserve_exam_outbox.dart';
 import 'secret_store_provider.dart';
 import '../utils/log.dart';
@@ -49,6 +50,8 @@ class OciServeExamState {
     this.attemptId,
     this.item,
     this.errorCode,
+    this.results = const [],
+    this.resultsUnavailable = false,
   });
 
   final OciServeExamPhase phase;
@@ -58,6 +61,14 @@ class OciServeExamState {
   final String? attemptId;
   final OciServeCurrentExamItem? item;
   final String? errorCode;
+
+  /// De eigen formele pogingen, nieuwste eerst. Cijfers staan er pas in als de
+  /// organisatie de uitslag heeft vrijgegeven.
+  final List<OciServeExamResult> results;
+
+  /// Het ophalen van de uitslagen mislukte. Dat is geen reden om de examens
+  /// zelf te blokkeren: de lijst met sessies blijft bruikbaar.
+  final bool resultsUnavailable;
 
   OciServeExamState copyWith({
     OciServeExamPhase? phase,
@@ -69,6 +80,8 @@ class OciServeExamState {
     bool clearItem = false,
     String? errorCode,
     bool clearError = false,
+    List<OciServeExamResult>? results,
+    bool? resultsUnavailable,
   }) => OciServeExamState(
     phase: phase ?? this.phase,
     sessions: sessions ?? this.sessions,
@@ -77,6 +90,8 @@ class OciServeExamState {
     attemptId: attemptId ?? this.attemptId,
     item: clearItem ? null : item ?? this.item,
     errorCode: clearError ? null : errorCode ?? this.errorCode,
+    results: results ?? this.results,
+    resultsUnavailable: resultsUnavailable ?? this.resultsUnavailable,
   );
 }
 
@@ -112,8 +127,21 @@ class OciServeExamNotifier extends StateNotifier<OciServeExamState> {
         sessions: result.sessions,
         serverTime: result.serverTime,
       );
+      await _loadResults();
     } catch (error, stack) {
       _fail('exam_load_failed', error, stack);
+    }
+  }
+
+  /// Haalt de eigen uitslagen op. Een mislukking is zichtbaar maar niet fataal.
+  Future<void> _loadResults() async {
+    try {
+      final list = await api.examResults(organizationId);
+      if (!mounted) return;
+      state = state.copyWith(results: list.results, resultsUnavailable: false);
+    } catch (error, stack) {
+      logError('OciServe: examenuitslagen', error.runtimeType, stack);
+      if (mounted) state = state.copyWith(resultsUnavailable: true);
     }
   }
 
@@ -233,6 +261,7 @@ class OciServeExamNotifier extends StateNotifier<OciServeExamState> {
         clearItem: true,
         clearError: true,
       );
+      await _loadResults();
     } catch (error, stack) {
       _fail('exam_submit_failed', error, stack);
     }
