@@ -652,6 +652,26 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Omrekening naar euro': 'Omrekkening nei euro\'s',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Foar de EUR-werjefte brûkt OciDeck ien koers per sesje. Folje de koers sels yn of hel de ECB-referinsjekoers op.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Koers ophelje by Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ien fersyk per faluta nei api.frankfurter.dev mei allinnich de falutakoade; de tsjinst sjocht wol it IP-adres. Der wurde gjin presintaasjegegevens ferstjoerd.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Ophelje mislearre — folje de koers sels yn of gean sûnder koers fierder.',
+  'Zonder koers doorgaan': 'Sûnder koers fierdergean',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Gjin jildige koers — brûk bygelyks 0,92.',
+  'handmatig': 'mei de hân',
+  'peildatum': 'peildatum',
+  'verouderd': 'ferâldere',
+  'koers': 'koers',
+  'koers ontbreekt': 'koers ûntbrekt',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Koers ûntbrekt — EUR-lykweardich net berekkene.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'ynfierrigel(s) net omrekkene — koers ûntbriek.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Gjin nuttich foarstel is fûn. Folje de details sels yn.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -804,6 +824,45 @@ const _dutchSourceAddFy = {
       'De oerzjoch koe net as in dokument opendal.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Bewar de ferozijinginnen yn it oerzjochsdokument earst, of slút dat tabblad.',
+  'Kostenindicatie': 'Kostenindikaasje',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto of netto makket hjir net út — de opslach foar wurkjouwerskosten stiet der los by.',
+  'Aanwezigen en tarieven': 'Oanwêzigen en tarieven',
+  'Bedrag': 'Bedrach',
+  'Per uur': 'Per oere',
+  'Per maand': 'Per moanne',
+  'Per jaar': 'Per jier',
+  'Aanname voor de omrekening': 'Oannime foar de omrekkene',
+  'Betaalde uren per week': 'Betelle oeren de wike',
+  'Weken per jaar': 'Wiken it jier',
+  'Opslag werkgeverslasten (%)': 'Opslach wurkjouwerslêsten (%)',
+  'Voeg een aanwezige toe': 'Foech in oanwêzige ta',
+  'Samen': 'Gear',
+  'Start presentatie': 'Start presintaasje',
+  'per uur': 'de oere',
+  'Wordt omgerekend': 'Wurdt omrekkene',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Fol per oanwêzige in oer-, moanne- of jiertarief yn. Dit bliuwt op dit skerm en wurdt nea bewarre.',
+  'Kosten van aanwezigen': 'Kosten fan oanwêzigen',
+  'Uit': 'Út',
+  'Gewoon — alleen in het eindoverzicht': 'Gewoan — allinne yn de einôfsluting',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisyt — rinnend bedrach én einôfsluting',
+  'Uurtarief': 'Oertarief',
+  'Eén tarief voor de hele groep': 'Ien tarief foar de hiele groep',
+  'Per aanwezige, bij de start invullen': 'Per oanwêzige, by de start ynfolje',
+  'Groepsuurtarief': 'Groepsoertarief',
+  'Kosten = verstreken tijd × tarief.': 'Kosten = ferrune tiid × tarief.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wurdt by de start ynfold en net bewarre.',
+  'Valuta': 'Faluta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'In skatting fan de tiid dy\'t oanwêzigen kwyt binne — in yndikaasje, gjin boekhâldkundige kostpriis.',
+  'Diaformaat': 'Diaformaat',
+  'Scherm (16:9)': 'Skerm (16:9)',
+  'Papierformaat': 'Papierformaat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Kies in papierformaat foar hand-outs en eksporten op papier.',
   'Startmappen': 'Begjinmappen',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wêr iepenjen en bewarjen begjint. Leech litte brûkt de earste bibleteek.',

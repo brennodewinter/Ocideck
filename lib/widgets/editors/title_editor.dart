@@ -1,6 +1,8 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
+import '../../state/deck_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/image_crop_dialog.dart';
 import '_editor_field.dart';
@@ -102,7 +104,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
       context,
       imagePath: widget.slide.imagePath,
       projectPath: widget.captionBasePath,
-      frameAspect: 16 / 9,
+      frameAspect: slideAspectRatio(ref.read(deckProvider).deck?.slideSize),
       imageSize: widget.slide.imageSize,
       focalX: widget.slide.imageFocalX,
       focalY: widget.slide.imageFocalY,

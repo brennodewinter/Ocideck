@@ -450,6 +450,16 @@ const _reportingCss = r'''
 /// Feature 3: de `@page`-regel voor paginamaat en marges. Top-level CSS
 /// (buiten `@media print` — `@page` is zelf al een print-regel). Leeg wanneer
 /// geen van beide is gezet, zodat de browser-default geldt.
+
+/// Een papierformaat op het deck (#2433) verandert de diaverhouding: de
+/// basis-CSS blijft de 16:9-schermstandaard, dit overschrijft alleen de
+/// verhouding — `min-height` blijft de vloer voor doorlopende inhoud.
+String _slideAspectCss(PageSizeSpec? slideSize) {
+  if (slideSize == null) return '';
+  final (w, h) = slideSize.dimensions;
+  return '.slide{aspect-ratio:$w/$h}';
+}
+
 String _pageAtRuleCss(PageSizeSpec? size, PageMargins? margins) {
   if (size == null && margins == null) return '';
   // De marges zijn die van de auteur, onaangeroerd. Ze werden vroeger opgehoogd

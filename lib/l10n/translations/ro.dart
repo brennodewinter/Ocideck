@@ -1622,6 +1622,26 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Omrekening naar euro': 'Conversie în euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Pentru afișarea în EUR, OciDeck folosește un singur curs pe sesiune. Introduceți cursul manual sau preluați cursul de referință al BCE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Preia cursul de la Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'O cerere pe monedă către api.frankfurter.dev doar cu codul monedei; serviciul vede totuși adresa IP. Nu se trimit date ale prezentării.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Preluarea a eșuat — introduceți cursul manual sau continuați fără curs.',
+  'Zonder koers doorgaan': 'Continuă fără curs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Curs nevalid — folosiți, de exemplu, 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'data de referință',
+  'verouderd': 'depășit',
+  'koers': 'curs',
+  'koers ontbreekt': 'lipsește cursul',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Lipsește cursul — echivalentul în EUR nu a fost calculat.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'rând(uri) de intrare neconvertit(e) — lipsea cursul.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Nu a fost găsită nicio propunere utilă. Completați singuri detaliile.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1772,6 +1792,46 @@ const _dutchSourceAddRo = <String, String>{
       'Nu a putut fi deschis vizualizarea ca document.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Salvează modificările în documentul de vizualizare mai întâi sau închide acel tab.',
+  'Kostenindicatie': 'Indicație de cost',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brut sau net nu contează aici — adaosul pentru costurile angajatorului este separat.',
+  'Aanwezigen en tarieven': 'Participanți și tarife',
+  'Bedrag': 'Sumă',
+  'Per uur': 'Pe oră',
+  'Per maand': 'Pe lună',
+  'Per jaar': 'Pe an',
+  'Aanname voor de omrekening': 'Ipoteză pentru conversie',
+  'Betaalde uren per week': 'Ore plătite pe săptămână',
+  'Weken per jaar': 'Săptămâni pe an',
+  'Opslag werkgeverslasten (%)': 'Marjă costuri angajator (%)',
+  'Voeg een aanwezige toe': 'Adaugă un participant',
+  'Samen': 'Împreună',
+  'Start presentatie': 'Începe prezentarea',
+  'per uur': 'pe oră',
+  'Wordt omgerekend': 'Va fi convertit',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Introdu pentru fiecare participant o tarifare pe oră, lună sau an. Rămâne pe acest ecran și nu este salvată nicăieri.',
+  'Kosten van aanwezigen': 'Costul participanților',
+  'Uit': 'Dezactivat',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — doar în rezumatul final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — sumă curentă și rezumat final',
+  'Uurtarief': 'Tarif orar',
+  'Eén tarief voor de hele groep': 'Un singur tarif pentru tot grupul',
+  'Per aanwezige, bij de start invullen':
+      'Pe participant, completat la început',
+  'Groepsuurtarief': 'Tarif orar de grup',
+  'Kosten = verstreken tijd × tarief.': 'Cost = timp scurs × tarif.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Completat la început și nu este salvat.',
+  'Valuta': 'Monedă',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'O estimare a timpului pe care îl petrec participanții — o indicație, nu un preț de cost contabil.',
+  'Diaformaat': 'Format diapozitiv',
+  'Scherm (16:9)': 'Ecran (16:9)',
+  'Papierformaat': 'Format hârtie',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Alegeți un format de hârtie pentru materialele tipărite și exporturile pe hârtie.',
   'Startmappen': 'Dosare de pornire',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unde încep deschiderea și salvarea. Gol folosește prima bibliotecă.',

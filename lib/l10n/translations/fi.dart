@@ -1606,6 +1606,27 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Omrekening naar euro': 'Muunnos euroiksi',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR-näkymää varten OciDeck käyttää yhtä kurssia istuntoa kohti. Syötä kurssi itse tai hae EKP:n viitekurssi.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Hae kurssi Frankfurter-palvelusta (EKP)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Yksi pyyntö valuuttaa kohti osoitteeseen api.frankfurter.dev pelkällä valuuttakoodilla; palvelu kuitenkin näkee IP-osoitteen. Esitystietoja ei lähetetä.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Haku epäonnistui — syötä kurssi itse tai jatka ilman kurssia.',
+  'Zonder koers doorgaan': 'Jatka ilman kurssia',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Virheellinen kurssi — käytä esimerkiksi arvoa 0,92.',
+  'handmatig': 'manuaalisesti',
+  'peildatum': 'viitepäivä',
+  'verouderd': 'vanhentunut',
+  'koers': 'kurssi',
+  'koers ontbreekt': 'kurssi puuttuu',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurssi puuttuu — EUR-vastinetta ei laskettu.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'syöttörivi(ä) ei muunnettu — kurssi puuttui.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Hyödyllistä ehdotusta ei löytynyt. Täytä tiedot itse.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1753,6 +1774,46 @@ const _dutchSourceAddFi = <String, String>{
       'Näyttöluettelo ei voinut avautua dokumenttina.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Tallenna muutokset näyttöluettelodokumenttiin ensin tai sulje se välilehti.',
+  'Kostenindicatie': 'Kustannusarvio',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto tai netto ei ole väliä tässä — työnantajakustannusten korotus on erillinen.',
+  'Aanwezigen en tarieven': 'Osallistujat ja hinnat',
+  'Bedrag': 'Summa',
+  'Per uur': 'Tunnilta',
+  'Per maand': 'Kuukaudelta',
+  'Per jaar': 'Vuodelta',
+  'Aanname voor de omrekening': 'Laskennan oletus',
+  'Betaalde uren per week': 'Palkalliset tunnit viikossa',
+  'Weken per jaar': 'Viikkoa vuodessa',
+  'Opslag werkgeverslasten (%)': 'Työnantajakustannusten korotus (%)',
+  'Voeg een aanwezige toe': 'Lisää osallistuja',
+  'Samen': 'Yhteensä',
+  'Start presentatie': 'Aloita esitys',
+  'per uur': 'tunnilta',
+  'Wordt omgerekend': 'Muunnetaan',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Syötä jokaiselle osallistujalle tunti-, kuukausi- tai vuosihinta. Se jää tälle näytölle eikä sitä tallenneta.',
+  'Kosten van aanwezigen': 'Osallistujien kustannukset',
+  'Uit': 'Pois',
+  'Gewoon — alleen in het eindoverzicht': 'Normaali — vain loppuyhteenvedossa',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisiittinen — juokseva summa ja loppuyhteenveto',
+  'Uurtarief': 'Tuntihinta',
+  'Eén tarief voor de hele groep': 'Yksi hinta koko ryhmälle',
+  'Per aanwezige, bij de start invullen':
+      'Osallistujaa kohden, täytetään alussa',
+  'Groepsuurtarief': 'Ryhmän tuntihinta',
+  'Kosten = verstreken tijd × tarief.': 'Kustannus = kulunut aika × hinta.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Täytetään alussa eikä tallenneta.',
+  'Valuta': 'Valuutta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Arvio osallistujien käyttämästä ajasta — suuntaa antava, ei kirjanpidollinen omakustannus.',
+  'Diaformaat': 'Dian formaatti',
+  'Scherm (16:9)': 'Näyttö (16:9)',
+  'Papierformaat': 'Paperikoko',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Valitse paperikoko jakomateriaaleja ja paperille vientiä varten.',
   'Startmappen': 'Aloituskansiot',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Mistä avaaminen ja tallennus alkavat. Tyhjä käyttää ensimmäistä kirjastoa.',

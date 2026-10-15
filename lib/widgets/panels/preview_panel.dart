@@ -11,6 +11,7 @@ import '../../models/deck.dart';
 import '../../models/cvss_builder.dart' show CiaRating;
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/slide_reorder.dart';
@@ -457,6 +458,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   ],
                 ),
                 child: SlidePreviewWidget(
+                  slideAspect: slideAspectRatio(deck.slideSize),
                   slide: slide,
                   projectPath: deck.projectPath,
                   themeProfile: deck.themeProfile,
@@ -474,6 +476,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     idx,
                     deck.themeProfile,
                     deck.themeProfile.fontFamily,
+                    slideAspect: slideAspectRatio(deck.slideSize),
                   ),
                   splitRunPosition: splitRunPositionFor(deck.slides, idx),
                   menuCategory: slide.id == _menuCategorySlideId

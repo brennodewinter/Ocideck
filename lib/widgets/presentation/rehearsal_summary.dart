@@ -1,8 +1,11 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import '../../l10n/app_localizations.dart';
+import '../../models/presentation_cost.dart';
 import '../../models/rehearsal.dart';
+import '../../services/presentation_cost_session.dart' show CostRun;
 import '../../models/slide.dart';
+import '../../utils/exchange_rate_label.dart';
 import '../../theme/app_theme.dart';
 
 /// Toon de samenvatting van een oefenrun (sessie-only). Beschrijvend: totale
@@ -11,10 +14,12 @@ Future<void> showRehearsalSummary(
   BuildContext context, {
   required RehearsalRun run,
   required List<Slide> slides,
+  CostRun? costRun,
 }) {
   return showDialog<void>(
     context: context,
-    builder: (_) => _RehearsalSummaryDialog(run: run, slides: slides),
+    builder: (_) =>
+        _RehearsalSummaryDialog(run: run, slides: slides, costRun: costRun),
   );
 }
 
@@ -27,11 +32,39 @@ String _fmt(Duration d) {
   return neg ? '-$body' : body;
 }
 
+/// ' ≈ €x' voor een bedrag in een niet-EUR-valuta wanneer de sessie-koers
+/// bekend is — in een EUR-sessie of bij een ontbrekende koers is er geen
+/// equivalent om te tonen (#2438).
+String _eurSuffix(CostRun cost, int minor) {
+  final eur = cost.eurMinorOf(minor);
+  if (eur == null) return '';
+  return ' ≈ ${formatAmountMinor(eur, kCostCurrencies.first)}';
+}
+
+/// De herkomst van de sessie-koers als korte toevoeging op de basisregel:
+/// '· koers: Frankfurter (ECB), peildatum 2026-01-14', '· koers: handmatig …'
+/// of '· koers ontbreekt' wanneer de valuta geen EUR is maar de koers er niet
+/// was (#2438 — verzonnen bedragen tonen we niet).
+String _rateProvenance(AppLocalizations l10n, CostRun cost) {
+  if (cost.currency.code == 'EUR') return '';
+  final rate = cost.eurRate;
+  if (rate == null) return ' · ${l10n.d('koers ontbreekt')}';
+  return ' · ${l10n.d('koers')}: ${exchangeRateProvenance(l10n, rate)}';
+}
+
 class _RehearsalSummaryDialog extends StatelessWidget {
   final RehearsalRun run;
   final List<Slide> slides;
 
-  const _RehearsalSummaryDialog({required this.run, required this.slides});
+  /// De kostenstand van de sessie (#2437); `null` wanneer de kostenmodus uit
+  /// stond — dan verschijnt er ook nergens een bedrag.
+  final CostRun? costRun;
+
+  const _RehearsalSummaryDialog({
+    required this.run,
+    required this.slides,
+    this.costRun,
+  });
 
   String _label(SlideTiming t) {
     final slide = slides.firstWhere(
@@ -66,14 +99,38 @@ class _RehearsalSummaryDialog extends StatelessWidget {
 
   Future<void> _copy(BuildContext context) async {
     final l10n = context.l10n;
+    final cost = costRun;
     final buf = StringBuffer()
       ..writeln('${l10n.d('Totaal')}: ${_fmt(run.total)}');
     if (run.target != null) {
       buf.writeln('${l10n.d('Doeltijd')}: ${_fmt(run.target!)}');
     }
+    if (cost != null) {
+      final eurTotal = cost.eurMinorOf(cost.totalMinor);
+      buf.writeln(
+        '${l10n.d('Kostenindicatie')}: '
+        '${formatAmountMinor(cost.totalMinor, cost.currency)}'
+        '${eurTotal == null ? '' : ' ≈ ${formatAmountMinor(eurTotal, kCostCurrencies.first)}'} '
+        '(${formatAmountMinor(cost.hourlyRateMinor, cost.currency)} '
+        '${l10n.d('per uur')})',
+      );
+      if (cost.currency.code != 'EUR' && cost.eurRate == null) {
+        buf.writeln(l10n.d('Koers ontbreekt — EUR-equivalent niet berekend.'));
+      }
+      if (cost.unconvertedAttendees > 0) {
+        buf.writeln(
+          '${cost.unconvertedAttendees} '
+          '${l10n.d('invoerregel(s) niet omgerekend — koers ontbrak.')}',
+        );
+      }
+    }
     buf.writeln('');
     for (final t in run.perSlide) {
-      buf.writeln('${_label(t)}\t${_fmt(t.spent)}');
+      final costCell = cost == null
+          ? ''
+          : '\t${formatAmountMinor(cost.forSlide(t), cost.currency)}'
+                '${_eurSuffix(cost, cost.forSlide(t))}';
+      buf.writeln('${_label(t)}\t${_fmt(t.spent)}$costCell');
     }
     final attempts = _numberedAttempts;
     if (attempts.isNotEmpty) {
@@ -92,8 +149,15 @@ class _RehearsalSummaryDialog extends StatelessWidget {
     }
   }
 
-  /// Eén regel: omschrijving links, tijd rechts.
-  Widget _row(String label, String time, {Widget? leading}) => Padding(
+  /// Eén regel: omschrijving links, tijd rechts — bij een kostensessie
+  /// gevolgd door het afgeleide bedrag van díe dia (#2437).
+  Widget _row(
+    String label,
+    String time, {
+    Widget? leading,
+    String? cost,
+    bool wideCost = false,
+  }) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 3),
     child: Row(
       children: [
@@ -106,6 +170,19 @@ class _RehearsalSummaryDialog extends StatelessWidget {
           time,
           style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()]),
         ),
+        if (cost != null) ...[
+          const SizedBox(width: 12),
+          SizedBox(
+            width: wideCost ? 150 : 82,
+            child: Text(
+              cost,
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                fontFeatures: [FontFeature.tabularFigures()],
+              ),
+            ),
+          ),
+        ],
       ],
     ),
   );
@@ -138,6 +215,48 @@ class _RehearsalSummaryDialog extends StatelessWidget {
         ),
     ];
   }
+
+  /// Het kostenblok boven de per-dia-lijst (#2437, #2438): het totaal, de
+  /// berekeningsbasis met de herkomst van de koers, en — als er regels buiten
+  /// het totaal vielen — hoeveel.
+  List<Widget> _costBlock(
+    AppLocalizations l10n,
+    ColorScheme scheme,
+    CostRun cost,
+  ) => [
+    const SizedBox(height: 4),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: Text(
+            l10n.d('Kostenindicatie'),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        Text(
+          formatAmountMinor(cost.totalMinor, cost.currency) +
+              _eurSuffix(cost, cost.totalMinor),
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontFeatures: [FontFeature.tabularFigures()],
+          ),
+        ),
+      ],
+    ),
+    Text(
+      '${formatAmountMinor(cost.hourlyRateMinor, cost.currency)} '
+      '${l10n.d('per uur')}${_rateProvenance(l10n, cost)} · '
+      '${l10n.d('Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.')}',
+      style: TextStyle(fontSize: 11, color: scheme.onSurfaceVariant),
+    ),
+    if (cost.unconvertedAttendees > 0)
+      Text(
+        '${cost.unconvertedAttendees} '
+        '${l10n.d('invoerregel(s) niet omgerekend — koers ontbrak.')}',
+        style: TextStyle(fontSize: 11, color: AppTheme.warningFg),
+      ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -217,6 +336,8 @@ class _RehearsalSummaryDialog extends StatelessWidget {
                 ),
               ],
             ],
+            if (costRun case final cost?)
+              ..._costBlock(l10n, Theme.of(context).colorScheme, cost),
             const Divider(height: 24),
             Flexible(
               child: SingleChildScrollView(
@@ -228,7 +349,18 @@ class _RehearsalSummaryDialog extends StatelessWidget {
                       Text(l10n.d('Geen slides gemeten.'))
                     else
                       for (final t in run.perSlide)
-                        _row(_label(t), _fmt(t.spent)),
+                        _row(
+                          _label(t),
+                          _fmt(t.spent),
+                          wideCost: costRun?.eurRate != null,
+                          cost: costRun == null
+                              ? null
+                              : formatAmountMinor(
+                                      costRun!.forSlide(t),
+                                      costRun!.currency,
+                                    ) +
+                                    _eurSuffix(costRun!, costRun!.forSlide(t)),
+                        ),
                     // De vragen staan onder het slide-overzicht: elke keer dat
                     // een vraag beantwoord is, met de tijd van díe poging.
                     ..._questionSection(context),

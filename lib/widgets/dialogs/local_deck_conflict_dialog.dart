@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../services/git/deck_merge.dart';
 import '../../services/git/version_diff.dart';
 import '../../services/local_conflict.dart';
@@ -306,6 +307,7 @@ class LocalDeckCompareDialogState extends State<LocalDeckCompareDialog> {
         projectPath: conflict.theirs.projectPath,
         themeProfile: conflict.theirs.themeProfile,
         deckMarpStyle: conflict.theirs.marpStyle,
+        slideAspect: slideAspectRatio(conflict.theirs.slideSize),
       ),
       others: [
         SlideDiffRef(
@@ -314,6 +316,9 @@ class LocalDeckCompareDialogState extends State<LocalDeckCompareDialog> {
           projectPath: (beforeDeck ?? conflict.ours).projectPath,
           themeProfile: (beforeDeck ?? conflict.ours).themeProfile,
           deckMarpStyle: (beforeDeck ?? conflict.ours).marpStyle,
+          slideAspect: slideAspectRatio(
+            (beforeDeck ?? conflict.ours).slideSize,
+          ),
         ),
       ],
     );

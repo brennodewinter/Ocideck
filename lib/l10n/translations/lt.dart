@@ -1613,6 +1613,26 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Omrekening naar euro': 'Konvertavimas į eurus',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR rodymui „OciDeck“ naudoja vieną kursą per sesiją. Kursą įveskite patys arba gaukite ECB orientacinį kursą.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Gauti kursą iš „Frankfurter“ (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Viena užklausa kiekvienai valiutai į api.frankfurter.dev tik su valiutos kodu; paslauga mato IP adresą. Prezentacijos duomenys nesiunčiami.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Gauti nepavyko — kursą įveskite patys arba tęskite be kurso.',
+  'Zonder koers doorgaan': 'Tęsti be kurso',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Netinkamas kursas — naudokite, pvz., 0,92.',
+  'handmatig': 'rankiniu būdu',
+  'peildatum': 'kurso data',
+  'verouderd': 'pasenęs',
+  'koers': 'kursas',
+  'koers ontbreekt': 'trūksta kurso',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Trūksta kurso — ekvivalentas EUR neapskaičiuotas.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'įvesties eilutė(s) nekonvertuota(os) — trūko kurso.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Naudingo pasiūlymo nerasta. Užpildykite duomenis patys.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1762,6 +1782,46 @@ const _dutchSourceAddLt = <String, String>{
       'Perteklinis vaizdavimas negali būti atidarytas kaip dokumentas.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Pirmiausia išsaugokite pokyčius vaizdų dokumente arba uždarykite tą kortelę.',
+  'Kostenindicatie': 'Kainos indikacija',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ar neto čia nesvarbu — darbdavio išlaidų antkainis yra atskiras.',
+  'Aanwezigen en tarieven': 'Dalyviai ir įkainiai',
+  'Bedrag': 'Suma',
+  'Per uur': 'Per valandą',
+  'Per maand': 'Per mėnesį',
+  'Per jaar': 'Per metus',
+  'Aanname voor de omrekening': 'Perskaičiavimo prielaida',
+  'Betaalde uren per week': 'Apmokamos valandos per savaitę',
+  'Weken per jaar': 'Savaičių per metus',
+  'Opslag werkgeverslasten (%)': 'Darbdavio išlaidų antkainis (%)',
+  'Voeg een aanwezige toe': 'Pridėti dalyvį',
+  'Samen': 'Iš viso',
+  'Start presentatie': 'Pradėti pateiktį',
+  'per uur': 'per valandą',
+  'Wordt omgerekend': 'Bus perskaičiuota',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Įvesk kiekvienam dalyviui valandinį, mėnesinį ar metinį įkainį. Tai lieka šiame ekrane ir niekur nesaugoma.',
+  'Kosten van aanwezigen': 'Dalyvių kaina',
+  'Uit': 'Išjungta',
+  'Gewoon — alleen in het eindoverzicht':
+      'Įprasta — tik baigiamojoje apžvalgoje',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Aišku — einamoji suma ir baigiamoji apžvalga',
+  'Uurtarief': 'Valandinis įkainis',
+  'Eén tarief voor de hele groep': 'Vienas įkainis visai grupei',
+  'Per aanwezige, bij de start invullen': 'Už dalyvį, suvedama pradžioje',
+  'Groepsuurtarief': 'Grupės valandinis įkainis',
+  'Kosten = verstreken tijd × tarief.': 'Kaina = praėjęs laikas × įkainis.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Suvedama pradžioje ir neišsaugoma.',
+  'Valuta': 'Valiuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Dalyvių sugaišto laiko įvertis — orientyras, o ne buhalterinė savikaina.',
+  'Diaformaat': 'Skaidrės formatas',
+  'Scherm (16:9)': 'Ekranas (16:9)',
+  'Papierformaat': 'Popieriaus formatas',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Pasirinkite popieriaus formatą dalijamajai medžiagai ir eksportui popieriuje.',
   'Startmappen': 'Pradžios aplankai',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur prasideda atidarymas ir įrašymas. Tuščia naudoja pirmąją biblioteką.',

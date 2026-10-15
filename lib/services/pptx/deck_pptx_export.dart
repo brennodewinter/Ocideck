@@ -14,11 +14,15 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 
 import '../export_metadata.dart';
+import '../../models/slide_format.dart';
 import '../../utils/xml_escape.dart';
 
-// 16:9 widescreen slide size in EMU (English Metric Units): 13.333" x 7.5".
+// Slide width in EMU (English Metric Units): 13.333" — the standard
+// widescreen width. The height follows the deck's slide aspect (#2433):
+// 6858000 for 16:9, taller for portrait paper sizes.
 const int _slideWidthEmu = 12192000;
-const int _slideHeightEmu = 6858000;
+int _slideHeightEmu(double slideAspect) =>
+    (_slideWidthEmu / slideAspect).round();
 
 /// Bouwt een PPTX uit [images] — één gerasterde afbeelding per slide.
 ///
@@ -32,6 +36,8 @@ Uint8List buildDeckExportPptx(
   required String fallbackTitle,
   List<String>? notes,
   List<String>? altTexts,
+  // De diaverhouding (breedte/hoogte); standaard de schermverhouding 16:9.
+  double slideAspect = kScreenSlideAspect,
 }) {
   final archive = Archive();
   void addText(String name, String content) {
@@ -56,7 +62,10 @@ Uint8List buildDeckExportPptx(
     _coreProps(metadata, fallbackTitle: fallbackTitle),
   );
   addText('docProps/app.xml', _appProps(metadata));
-  addText('ppt/presentation.xml', _presentationXml(slideCount, hasNotes));
+  addText(
+    'ppt/presentation.xml',
+    _presentationXml(slideCount, hasNotes, slideAspect),
+  );
   addText(
     'ppt/_rels/presentation.xml.rels',
     _presentationRels(slideCount, hasNotes),
@@ -79,7 +88,7 @@ Uint8List buildDeckExportPptx(
     final altText = (altTexts != null && i < altTexts.length)
         ? altTexts[i].trim()
         : '';
-    addText('ppt/slides/slide$n.xml', _slideXml(altText));
+    addText('ppt/slides/slide$n.xml', _slideXml(altText, slideAspect));
     addText('ppt/slides/_rels/slide$n.xml.rels', _slideRels(n, hasNote));
     if (hasNote) {
       addText('ppt/notesSlides/notesSlide$n.xml', _notesSlideXml(noteFor[i]!));
@@ -249,7 +258,7 @@ String _appProps(ExportDocumentMetadata metadata) {
       '</Properties>';
 }
 
-String _presentationXml(int count, bool hasNotes) {
+String _presentationXml(int count, bool hasNotes, double slideAspect) {
   final sldIds = StringBuffer();
   for (var i = 0; i < count; i++) {
     // Slide relationship ids start at rId2 (rId1 = master).
@@ -268,7 +277,8 @@ String _presentationXml(int count, bool hasNotes) {
       // Schema order: notesMasterIdLst must precede sldIdLst.
       '$notesMasterIdLst'
       '<p:sldIdLst>$sldIds</p:sldIdLst>'
-      '<p:sldSz cx="$_slideWidthEmu" cy="$_slideHeightEmu" type="screen16x9"/>'
+      '<p:sldSz cx="$_slideWidthEmu" cy="${_slideHeightEmu(slideAspect)}"'
+      '${slideAspect == kScreenSlideAspect ? ' type="screen16x9"' : ''}/>'
       '<p:notesSz cx="6858000" cy="9144000"/>'
       '</p:presentation>';
 }
@@ -370,7 +380,7 @@ String _slideLayoutRels() {
       '</Relationships>';
 }
 
-String _slideXml(String altText) {
+String _slideXml(String altText, double slideAspect) {
   // `descr` is de alt-tekstsleuf van OOXML. Het gaat door de *attribuut*-escaper,
   // niet die van de tekstinhoud: een aanhalingsteken in een beschrijving zou het
   // attribuut anders openbreken.
@@ -388,7 +398,7 @@ String _slideXml(String altText) {
       '<p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>'
       '<p:blipFill><a:blip r:embed="rId2"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>'
       '<p:spPr><a:xfrm><a:off x="0" y="0"/>'
-      '<a:ext cx="$_slideWidthEmu" cy="$_slideHeightEmu"/></a:xfrm>'
+      '<a:ext cx="$_slideWidthEmu" cy="${_slideHeightEmu(slideAspect)}"/></a:xfrm>'
       '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr>'
       '</p:pic>'
       '</p:spTree></p:cSld>'

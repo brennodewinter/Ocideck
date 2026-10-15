@@ -1612,6 +1612,27 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Omrekening naar euro': 'Prepočet na eurá',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Pre zobrazenie v EUR používa OciDeck jeden kurz na reláciu. Kurz zadajte sami alebo stiahnite referenčný kurz ECB.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Stiahnuť kurz zo služby Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Jedna požiadavka na menu na api.frankfurter.dev len s kódom meny; služba však vidí IP adresu. Žiadne údaje prezentácie sa neodosielajú.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Sťahovanie zlyhalo — zadajte kurz sami alebo pokračujte bez kurzu.',
+  'Zonder koers doorgaan': 'Pokračovať bez kurzu',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Neplatný kurz — použite napríklad 0,92.',
+  'handmatig': 'ručne',
+  'peildatum': 'referenčný dátum',
+  'verouderd': 'zastaraný',
+  'koers': 'kurz',
+  'koers ontbreekt': 'kurz chýba',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurz chýba — ekvivalent v EUR nebol vypočítaný.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'riadok(y) vstupu neprepočítané — chýbal kurz.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Nebol nájdený žiadny užitočný návrh. Údaje si vyplňte sami.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1760,6 +1781,46 @@ const _dutchSourceAddSk = <String, String>{
       'Zoznam nemohol byť otvorený ako dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Uložte zmeny do dokumentu zoznamu najprv alebo zatvorte túto kartu.',
+  'Kostenindicatie': 'Odhad nákladov',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Hrubá alebo čistá suma tu nehrá rolu — prirážka na náklady zamestnávateľa je samostatná.',
+  'Aanwezigen en tarieven': 'Účastníci a sadzby',
+  'Bedrag': 'Suma',
+  'Per uur': 'Za hodinu',
+  'Per maand': 'Za mesiac',
+  'Per jaar': 'Za rok',
+  'Aanname voor de omrekening': 'Predpoklad pre prepočet',
+  'Betaalde uren per week': 'Platené hodiny za týždeň',
+  'Weken per jaar': 'Týždňov ročne',
+  'Opslag werkgeverslasten (%)': 'Prirážka nákladov zamestnávateľa (%)',
+  'Voeg een aanwezige toe': 'Pridať účastníka',
+  'Samen': 'Spolu',
+  'Start presentatie': 'Spustiť prezentáciu',
+  'per uur': 'za hodinu',
+  'Wordt omgerekend': 'Bude prepočítané',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Zadaj za každého účastníka hodinovú, mesačnú alebo ročnú sadzbu. Zostane na tejto obrazovke a nikde sa neukladá.',
+  'Kosten van aanwezigen': 'Náklady účastníkov',
+  'Uit': 'Vypnuté',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normálne — len v záverečnom prehľade',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicitné — bežiaca suma a záverečný prehľad',
+  'Uurtarief': 'Hodinová sadzba',
+  'Eén tarief voor de hele groep': 'Jedna sadzba pre celú skupinu',
+  'Per aanwezige, bij de start invullen': 'Za účastníka, vyplní sa na začiatku',
+  'Groepsuurtarief': 'Skupinová hodinová sadzba',
+  'Kosten = verstreken tijd × tarief.': 'Náklady = uplynutý čas × sadzba.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Vyplní sa na začiatku a neukladá sa.',
+  'Valuta': 'Mena',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Odhad času, ktorý účastníci venujú — orientačný údaj, nie účtovná vlastná cena.',
+  'Diaformaat': 'Formát snímky',
+  'Scherm (16:9)': 'Obrazovka (16:9)',
+  'Papierformaat': 'Formát papiera',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Vyberte formát papiera pre výtlačky a export na papier.',
   'Startmappen': 'Štartovacie priečinky',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kde sa začína otváranie a ukladanie. Prázdne použije prvú knižnicu.',

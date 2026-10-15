@@ -1599,6 +1599,27 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Omrekening naar euro': 'Teisendus eurodesse',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR-kuva jaoks kasutab OciDeck ühte kurssi seansi kohta. Sisestage kurss ise või tooge EKP viitekurss.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Too kurss teenusest Frankfurter (EKP)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Üks päring valuuta kohta aadressile api.frankfurter.dev ainult valuutakoodiga; teenus näeb siiski IP-aadressi. Esitluse andmeid ei saadeta.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Toomine ebaõnnestus — sisestage kurss ise või jätkake ilma kursita.',
+  'Zonder koers doorgaan': 'Jätka ilma kursita',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kehtetu kurss — kasutage näiteks 0,92.',
+  'handmatig': 'käsitsi',
+  'peildatum': 'viitekuupäev',
+  'verouderd': 'vananenud',
+  'koers': 'kurss',
+  'koers ontbreekt': 'kurss puudub',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurss puudub — EUR-vaste arvutamata.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'sisendrida(sid) teisendamata — kurss puudus.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Ühtegi kasulikku ettepanekut ei leitud. Täitke andmed ise.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1747,6 +1768,45 @@ const _dutchSourceAddEt = <String, String>{
       'Ülevaade ei saanud dokumentina avada.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Salvestage muudatused ülevaatedokumendis kõigepealt või sulgege see tab.',
+  'Kostenindicatie': 'Kulude indikatsioon',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto või neto ei ole siin oluline — tööandja kulude lisandus on eraldi.',
+  'Aanwezigen en tarieven': 'Osalejad ja hinnad',
+  'Bedrag': 'Summa',
+  'Per uur': 'Tunnis',
+  'Per maand': 'Kuus',
+  'Per jaar': 'Aastas',
+  'Aanname voor de omrekening': 'Arvutuse eeldus',
+  'Betaalde uren per week': 'Tasustatud tunnid nädalas',
+  'Weken per jaar': 'Nädalaid aastas',
+  'Opslag werkgeverslasten (%)': 'Tööandja kulude lisand (%)',
+  'Voeg een aanwezige toe': 'Lisa osaleja',
+  'Samen': 'Kokku',
+  'Start presentatie': 'Alusta esitlust',
+  'per uur': 'tunnis',
+  'Wordt omgerekend': 'Arvutatakse ümber',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Sisesta igale osalejale tunni-, kuu- või aastatasu. See jääb sellele ekraanile ega salvestu.',
+  'Kosten van aanwezigen': 'Osalejate kulu',
+  'Uit': 'Väljas',
+  'Gewoon — alleen in het eindoverzicht': 'Tavaline — ainult lõpukokkuvõttes',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Sõnaselge — jooksev summa ja lõpukokkuvõte',
+  'Uurtarief': 'Tunnitasu',
+  'Eén tarief voor de hele groep': 'Üks hind kogu rühmale',
+  'Per aanwezige, bij de start invullen': 'Osaleja kohta, sisestatakse alguses',
+  'Groepsuurtarief': 'Rühma tunnitasu',
+  'Kosten = verstreken tijd × tarief.': 'Kulu = möödunud aeg × hind.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Sisestatakse alguses ega salvestata.',
+  'Valuta': 'Valuuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Hinnang osalejate kulutatud ajale — suundumus, mitte raamatupidamislik omahind.',
+  'Diaformaat': 'Slaidi formaat',
+  'Scherm (16:9)': 'Ekraan (16:9)',
+  'Papierformaat': 'Paberiformaat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Valige paberiformaat jagamismaterjalide ja paberile ekspordi jaoks.',
   'Startmappen': 'Alguskaustad',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kus avamine ja salvestamine algavad. Tühi kasutab esimest teeki.',

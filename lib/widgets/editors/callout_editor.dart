@@ -11,6 +11,7 @@ import 'dart:math' as math;
 
 import 'package:material_ui/material_ui.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../models/image_callout.dart';
 import '../../services/callout_reference_allocator.dart';
 import '../../services/image_viewport_geometry.dart';
@@ -35,11 +36,16 @@ class CalloutEditorDialog extends StatefulWidget {
   final String? projectPath;
   final ValueChanged<Slide> onUpdate;
 
+  /// De diaverhouding waar de beeldsleuf onder valt (#2433) — het stage in de
+  /// dialoog toont dezelfde verhouding als de sleuf op de dia.
+  final double slideAspect;
+
   const CalloutEditorDialog({
     super.key,
     required this.slide,
     this.projectPath,
     required this.onUpdate,
+    this.slideAspect = kScreenSlideAspect,
   });
 
   @override
@@ -704,7 +710,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         Expanded(
           child: Center(
             child: AspectRatio(
-              aspectRatio: imgFraction * 16 / 9,
+              aspectRatio: imgFraction * widget.slideAspect,
               child: LayoutBuilder(
                 builder: (context, c) =>
                     _buildImageStack(intrinsic, c.maxWidth, c.maxHeight, l10n),
@@ -956,8 +962,8 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     final imgFraction =
         (widget.slide.imageSize > 0 ? widget.slide.imageSize / 100.0 : 0.40)
             .clamp(0.1, 0.70);
-    final repW = imgFraction * 16;
-    final repH = 9.0;
+    final repW = imgFraction * widget.slideAspect;
+    const repH = 1.0;
     final repainted = ImageViewportGeometry.paintedRect(
       imageW: intrinsic.width,
       imageH: intrinsic.height,

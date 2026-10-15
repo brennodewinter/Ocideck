@@ -1626,6 +1626,27 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Omrekening naar euro': 'Преобразуване в евро',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'За показване в EUR OciDeck използва един курс на сесия. Въведете курса сами или изтеглете референтния курс на ЕЦБ.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Изтегляне на курс от Frankfurter (ЕЦБ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Една заявка на валута към api.frankfurter.dev само с кода на валутата; услугата вижда IP адреса. Не се изпращат данни от презентацията.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Изтеглянето не успя — въведете курса сами или продължете без курс.',
+  'Zonder koers doorgaan': 'Продължи без курс',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Невалиден курс — използвайте например 0,92.',
+  'handmatig': 'ръчно',
+  'peildatum': 'референтна дата',
+  'verouderd': 'остарял',
+  'koers': 'курс',
+  'koers ontbreekt': 'липсва курс',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Липсва курс — равностойността в EUR не е изчислена.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'ред(ове) на въвеждане без преобразуване — липсваше курс.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Не беше намерено полезно предложение. Попълнете данните сами.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1777,6 +1798,46 @@ const _dutchSourceAddBg = <String, String>{
       'Прегледът не можа да бъде отворен като документ.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Първо запазете промените в документа на преглед или затворете тази секция.',
+  'Kostenindicatie': 'Индикация за разходи',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Бруто или нето няма значение тук — надбавката за разходи на работодателя е отделна.',
+  'Aanwezigen en tarieven': 'Присъстващи и ставки',
+  'Bedrag': 'Сума',
+  'Per uur': 'На час',
+  'Per maand': 'На месец',
+  'Per jaar': 'На година',
+  'Aanname voor de omrekening': 'Допускане за преизчисляването',
+  'Betaalde uren per week': 'Платени часове на седмица',
+  'Weken per jaar': 'Седмици годишно',
+  'Opslag werkgeverslasten (%)': 'Надценка за разходи на работодателя (%)',
+  'Voeg een aanwezige toe': 'Добави присъстващ',
+  'Samen': 'Общо',
+  'Start presentatie': 'Стартирай презентацията',
+  'per uur': 'на час',
+  'Wordt omgerekend': 'Ще се преизчисли',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Въведи за всеки присъстващ часова, месечна или годишна ставка. Остава на този екран и никъде не се записва.',
+  'Kosten van aanwezigen': 'Разходи за присъстващите',
+  'Uit': 'Изкл.',
+  'Gewoon — alleen in het eindoverzicht': 'Обикновено — само в крайния отчет',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Изрично — текуща сума и краен отчет',
+  'Uurtarief': 'Часова ставка',
+  'Eén tarief voor de hele groep': 'Една ставка за цялата група',
+  'Per aanwezige, bij de start invullen':
+      'На присъстващ, въвежда се в началото',
+  'Groepsuurtarief': 'Групова часова ставка',
+  'Kosten = verstreken tijd × tarief.': 'Разход = изминало време × ставка.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Въвежда се в началото и не се записва.',
+  'Valuta': 'Валута',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Оценка на времето, което присъстващите отделят — индикация, а не счетоводна себестойност.',
+  'Diaformaat': 'Формат на слайда',
+  'Scherm (16:9)': 'Екран (16:9)',
+  'Papierformaat': 'Формат на хартията',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Изберете формат на хартията за раздатъчни материали и експорт на хартия.',
   'Startmappen': 'Начални папки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Къде започват отварянето и записването. Празно използва първата библиотека.',

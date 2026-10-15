@@ -26,6 +26,7 @@ import '../models/scorecard_spec.dart';
 import '../models/settings.dart';
 import '../models/page_size.dart';
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import '../models/timeline.dart';
 import 'font_substitution.dart';
 import 'mermaid_theme.dart';
@@ -265,8 +266,12 @@ class MarpHtmlService {
     // draagt hetzelfde logo al als kop/voetband (zie [_withDocumentChrome]).
     final logoCss = effectiveTheme == null || continuous
         ? ''
-        : await _presentationLogoCss(effectiveTheme, embedImage, loadBytes);
-
+        : await _presentationLogoCss(
+            effectiveTheme,
+            embedImage,
+            loadBytes,
+            slideAspect: slideAspectRatio(parsedDeck?.slideSize),
+          );
     return '<!doctype html>\n'
         '<html lang="${_htmlAttr(htmlLang)}"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
@@ -275,7 +280,8 @@ class MarpHtmlService {
         '$headMeta'
         '<style>${exportBaseCss()}\n$css\n$hljsCss\n$_printCss'
         '${chapterPageBreak ? _chapterPageBreakCss : ''}'
-        '${_pageAtRuleCss(pageSize, pageMargins)}$logoCss</style>'
+        '${_pageAtRuleCss(pageSize, pageMargins)}$logoCss'
+        '${continuous ? '' : _slideAspectCss(parsedDeck?.slideSize)}</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked, 'marked')}'
         '${inline(purify, 'dompurify')}'

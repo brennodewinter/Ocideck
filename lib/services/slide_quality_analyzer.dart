@@ -13,6 +13,7 @@ import '../models/markdown_validation.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import '../models/slide_quality.dart';
 import '../models/video_source.dart';
 import '../utils/bundled_asset.dart';
@@ -119,11 +120,20 @@ Slide _blankOfType(SlideType type) => _blanks[type] ??= Slide.create(type);
 final Expando<_FitMemo> _fitScaleCache = Expando<_FitMemo>('slideFitScale');
 
 @visibleForTesting
-double memoizedFitScale(Slide slide, String font, double Function() compute) {
+double memoizedFitScale(
+  Slide slide,
+  String font,
+  double Function() compute, {
+  double slideAspect = kScreenSlideAspect,
+}) {
   final cached = _fitScaleCache[slide];
-  if (cached != null && cached.font == font) return cached.scale;
+  if (cached != null &&
+      cached.font == font &&
+      cached.slideAspect == slideAspect) {
+    return cached.scale;
+  }
   final scale = compute();
-  _fitScaleCache[slide] = _FitMemo(font, scale);
+  _fitScaleCache[slide] = _FitMemo(font, slideAspect, scale);
   return scale;
 }
 
@@ -185,6 +195,7 @@ class SlideQualityAnalyzer {
     theme: deck.themeProfile,
     font: deck.themeProfile.fontFamily,
     projectPath: deck.projectPath,
+    slideAspect: slideAspectRatio(deck.slideSize),
   );
 
   SlideQualityResult analyzeSlides({
@@ -192,6 +203,7 @@ class SlideQualityAnalyzer {
     required ThemeProfile theme,
     required String font,
     String? projectPath,
+    double slideAspect = kScreenSlideAspect,
   }) {
     final issues = <SlideQualityIssue>[];
     _checkThemeContrast(theme, issues, minContrastRatio: minContrastRatio);
@@ -200,12 +212,14 @@ class SlideQualityAnalyzer {
     for (var i = 0; i < slides.length; i++) {
       final slide = slides[i];
       if (slide.skipped) continue;
-      issues.addAll(_memoizedSlideIssues(slide, i, theme, font, projectPath));
+      issues.addAll(
+        _memoizedSlideIssues(slide, i, theme, font, projectPath, slideAspect),
+      );
     }
     // Bewust buiten de per-slide memo: of een slide klein rendert hangt af van
     // zijn buren, en die cache is op slide-identiteit gesleuteld. Binnen de memo
     // zou een melding blijven staan nadat de buurslide veranderde.
-    _checkSplitRuns(slides, theme, font, issues);
+    _checkSplitRuns(slides, theme, font, issues, slideAspect);
     // Ook deckbreed, en om dezelfde reden buiten de per-dia memo: of een sprong
     // ergens uitkomt hangt af van de ándere dia's.
     _checkDanglingJumps(slides, issues);
@@ -218,13 +232,15 @@ class SlideQualityAnalyzer {
     ThemeProfile theme,
     String font,
     String? projectPath,
+    double slideAspect,
   ) {
     final memo = _slideIssuesCache[slide];
     if (memo != null &&
         identical(memo.theme, theme) &&
         memo.font == font &&
         memo.projectPath == projectPath &&
-        memo.minContrastRatio == minContrastRatio) {
+        memo.minContrastRatio == minContrastRatio &&
+        memo.slideAspect == slideAspect) {
       if (memo.index == index) return memo.issues;
       // Slide is verschoven (invoegen/verwijderen elders): alleen de index in
       // de issues herschrijven, de analyse zelf blijft geldig.
@@ -245,7 +261,7 @@ class SlideQualityAnalyzer {
     final issues = <SlideQualityIssue>[];
     _checkMediaDescriptions(slide, index, issues);
     _checkSlideContrast(slide, index, theme, issues);
-    _checkTextDensity(slide, index, font, issues);
+    _checkTextDensity(slide, index, font, issues, slideAspect);
     _checkMissingMedia(slide, index, projectPath, issues);
     // Hangen alleen van de slide-inhoud af, dus veilig per slide te cachen.
     _checkQuestionAnswerable(slide, index, issues);
@@ -257,6 +273,7 @@ class SlideQualityAnalyzer {
       font: font,
       projectPath: projectPath,
       minContrastRatio: minContrastRatio,
+      slideAspect: slideAspect,
       index: index,
       issues: issues,
     );
@@ -705,9 +722,10 @@ class _BulletText {
 /// change invalidates the cached value without touching the [Expando] key.
 class _FitMemo {
   final String font;
+  final double slideAspect;
   final double scale;
 
-  const _FitMemo(this.font, this.scale);
+  const _FitMemo(this.font, this.slideAspect, this.scale);
 }
 
 /// Gememoiseerde split-run-schaal per slide. Een aparte cache naast
@@ -722,9 +740,10 @@ final Expando<_RunScaleMemo> _runScaleCache = Expando<_RunScaleMemo>(
 class _RunScaleMemo {
   final String font;
   final ThemeProfile theme;
+  final double slideAspect;
   final double scale;
 
-  const _RunScaleMemo(this.font, this.theme, this.scale);
+  const _RunScaleMemo(this.font, this.theme, this.slideAspect, this.scale);
 }
 
 /// Gememoiseerde per-slide issues plus alles waarvan de analyse afhangt, zodat
@@ -735,6 +754,7 @@ class _SlideIssuesMemo {
   final String font;
   final String? projectPath;
   final double minContrastRatio;
+  final double slideAspect;
   final int index;
   final List<SlideQualityIssue> issues;
 
@@ -743,6 +763,7 @@ class _SlideIssuesMemo {
     required this.font,
     required this.projectPath,
     required this.minContrastRatio,
+    required this.slideAspect,
     required this.index,
     required this.issues,
   });
@@ -753,6 +774,7 @@ class _SlideIssuesMemo {
         font: font,
         projectPath: projectPath,
         minContrastRatio: minContrastRatio,
+        slideAspect: slideAspect,
         index: newIndex,
         issues: reindexed,
       );

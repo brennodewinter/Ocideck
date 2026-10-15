@@ -1606,6 +1606,27 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Omrekening naar euro': 'Pretvorba v evre',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Za prikaz v EUR OciDeck uporablja en tečaj na sejo. Tečaj vnesite sami ali pridobite referenčni tečaj ECB.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Pridobi tečaj iz storitve Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ena zahteva na valuto na api.frankfurter.dev samo s kodo valute; storitev vidi naslov IP. Podatki predstavitve se ne pošiljajo.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Pridobivanje ni uspelo — tečaj vnesite sami ali nadaljujte brez tečaja.',
+  'Zonder koers doorgaan': 'Nadaljuj brez tečaja',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Neveljaven tečaj — uporabite na primer 0,92.',
+  'handmatig': 'ročno',
+  'peildatum': 'referenčni datum',
+  'verouderd': 'zastarel',
+  'koers': 'tečaj',
+  'koers ontbreekt': 'tečaj manjka',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Tečaj manjka — protivrednost v EUR ni izračunana.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'vrstice vnosa niso pretvorjene — manjkal je tečaj.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Najden ni bil noben uporaben predlog. Podatke izpolnite sami.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1755,6 +1776,46 @@ const _dutchSourceAddSl = <String, String>{
       'Pregled ni bilo mogoče odpreti kot dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Najprej shranite spremembe v dokumentu pregleda ali zaprite to zaveto.',
+  'Kostenindicatie': 'Ocena stroškov',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ali neto tukaj ni pomembno — pribitek za delodajalčeve stroške je ločen.',
+  'Aanwezigen en tarieven': 'Udeleženci in postavke',
+  'Bedrag': 'Znesek',
+  'Per uur': 'Na uro',
+  'Per maand': 'Na mesec',
+  'Per jaar': 'Na leto',
+  'Aanname voor de omrekening': 'Predpostavka za preračun',
+  'Betaalde uren per week': 'Plačane ure na teden',
+  'Weken per jaar': 'Tednov na leto',
+  'Opslag werkgeverslasten (%)': 'Dajatev stroškov delodajalca (%)',
+  'Voeg een aanwezige toe': 'Dodaj udeleženca',
+  'Samen': 'Skupaj',
+  'Start presentatie': 'Začni predstavitev',
+  'per uur': 'na uro',
+  'Wordt omgerekend': 'Bo preračunano',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Vnesi za vsakega udeleženca urno, mesečno ali letno postavko. Ostane na tem zaslonu in se nikamor ne shrani.',
+  'Kosten van aanwezigen': 'Strošek udeležencev',
+  'Uit': 'Izklopljeno',
+  'Gewoon — alleen in het eindoverzicht':
+      'Običajno — samo v zaključnem povzetku',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Izrecno — tekoči znesek in zaključni povzetek',
+  'Uurtarief': 'Urna postavka',
+  'Eén tarief voor de hele groep': 'Ena postavka za celotno skupino',
+  'Per aanwezige, bij de start invullen': 'Na udeleženca, vnese se ob začetku',
+  'Groepsuurtarief': 'Skupinska urna postavka',
+  'Kosten = verstreken tijd × tarief.': 'Strošek = pretečen čas × postavka.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Vnese se ob začetku in se ne shrani.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Ocena časa, ki ga udeleženci porabijo — pokazatelj, ne računovodska lastna cena.',
+  'Diaformaat': 'Format diapozitiva',
+  'Scherm (16:9)': 'Zaslon (16:9)',
+  'Papierformaat': 'Format papirja',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Izberite format papirja za razdajalni material in izvoz na papir.',
   'Startmappen': 'Začetne mape',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kje se začneta odpiranje in shranjevanje. Prazno uporabi prvo knjižnico.',

@@ -812,6 +812,26 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Omrekening naar euro': 'Conversion to euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'For the EUR display OciDeck uses one exchange rate per session. Enter the rate yourself or fetch the ECB reference rate.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Fetch rate from Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'One request per currency to api.frankfurter.dev with only the currency code; the service does see the IP address. No presentation data is sent.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Fetching failed — enter the rate yourself or continue without a rate.',
+  'Zonder koers doorgaan': 'Continue without a rate',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Not a valid rate — for example use 0.92.',
+  'handmatig': 'manual',
+  'peildatum': 'reference date',
+  'verouderd': 'outdated',
+  'koers': 'rate',
+  'koers ontbreekt': 'rate missing',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Rate missing — EUR equivalent not calculated.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'input line(s) not converted — rate was missing.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'No useful proposal was found. Fill in the details yourself.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -963,6 +983,46 @@ const _dutchSourceAddEn = {
       'The overview could not be opened as a document.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Save changes to the overview document first or close that tab.',
+  'Kostenindicatie': 'Cost indication',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Gross or net does not matter here — the employer-cost markup is separate.',
+  'Aanwezigen en tarieven': 'Attendees and rates',
+  'Bedrag': 'Amount',
+  'Per uur': 'Per hour',
+  'Per maand': 'Per month',
+  'Per jaar': 'Per year',
+  'Aanname voor de omrekening': 'Assumption for the conversion',
+  'Betaalde uren per week': 'Paid hours per week',
+  'Weken per jaar': 'Weeks per year',
+  'Opslag werkgeverslasten (%)': 'Employer cost markup (%)',
+  'Voeg een aanwezige toe': 'Add an attendee',
+  'Samen': 'Together',
+  'Start presentatie': 'Start presentation',
+  'per uur': 'per hour',
+  'Wordt omgerekend': 'Will be converted',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Enter an hourly, monthly or yearly amount per attendee. It stays on this screen and is never saved.',
+  'Kosten van aanwezigen': 'Cost of attendees',
+  'Uit': 'Off',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — only in the closing summary',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — running total and closing summary',
+  'Uurtarief': 'Hourly rate',
+  'Eén tarief voor de hele groep': 'One rate for the whole group',
+  'Per aanwezige, bij de start invullen': 'Per attendee, entered at the start',
+  'Groepsuurtarief': 'Group hourly rate',
+  'Kosten = verstreken tijd × tarief.': 'Cost = elapsed time × rate.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Entered at the start and never saved.',
+  'Valuta': 'Currency',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'An estimate of the time attendees spend — an indication, not an accounting cost price.',
+  'Diaformaat': 'Slide format',
+  'Scherm (16:9)': 'Screen (16:9)',
+  'Papierformaat': 'Paper size',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Choose a paper size for handouts and paper exports.',
   'Startmappen': 'Start folders',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Where opening and saving starts. Leave this empty to use the first library.',

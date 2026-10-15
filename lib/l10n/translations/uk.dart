@@ -1621,6 +1621,26 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Omrekening naar euro': 'Перерахунок в євро',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Для відображення в EUR OciDeck використовує один курс на сеанс. Введіть курс самостійно або отримайте референтний курс ЄЦБ.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Отримати курс із Frankfurter (ЄЦБ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Один запит на валюту до api.frankfurter.dev лише з кодом валюти; сервіс бачить IP-адресу. Жодні дані презентації не надсилаються.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Не вдалося отримати — введіть курс самостійно або продовжте без курсу.',
+  'Zonder koers doorgaan': 'Продовжити без курсу',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Недійсний курс — використайте, наприклад, 0,92.',
+  'handmatig': 'вручну',
+  'peildatum': 'дата курсу',
+  'verouderd': 'застарілий',
+  'koers': 'курс',
+  'koers ontbreekt': 'курс відсутній',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Курс відсутній — еквівалент в EUR не обчислено.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'рядок(и) введення не перераховано — бракувало курсу.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Жодної корисної пропозиції не знайдено. Заповніть реквізити самостійно.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1770,6 +1790,45 @@ const _dutchSourceAddUk = <String, String>{
       'Перегляд не зміг бути відкритий як документ.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Спочатку збережіть зміни у документі перегляду або закрийте це вікно.',
+  'Kostenindicatie': 'Оцінка витрат',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Брутто чи нетто тут не має значення — націнка на витрати роботодавця окрема.',
+  'Aanwezigen en tarieven': 'Присутні та ставки',
+  'Bedrag': 'Сума',
+  'Per uur': 'За годину',
+  'Per maand': 'За місяць',
+  'Per jaar': 'За рік',
+  'Aanname voor de omrekening': 'Припущення для перерахунку',
+  'Betaalde uren per week': 'Оплачувані години на тиждень',
+  'Weken per jaar': 'Тижнів на рік',
+  'Opslag werkgeverslasten (%)': 'Націнка на витрати роботодавця (%)',
+  'Voeg een aanwezige toe': 'Додати присутнього',
+  'Samen': 'Разом',
+  'Start presentatie': 'Почати презентацію',
+  'per uur': 'за годину',
+  'Wordt omgerekend': 'Буде перераховано',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Введи для кожного присутнього ставку за годину, місяць або рік. Це лишається на цьому екрані й ніде не зберігається.',
+  'Kosten van aanwezigen': 'Вартість присутніх',
+  'Uit': 'Вимк.',
+  'Gewoon — alleen in het eindoverzicht': 'Звичайний — лише в підсумку',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Явний — поточна сума й підсумок',
+  'Uurtarief': 'Погодинна ставка',
+  'Eén tarief voor de hele groep': 'Одна ставка для всієї групи',
+  'Per aanwezige, bij de start invullen': 'За присутнього, вводиться на старті',
+  'Groepsuurtarief': 'Групова погодинна ставка',
+  'Kosten = verstreken tijd × tarief.': 'Вартість = минулий час × ставка.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Вводиться на старті й не зберігається.',
+  'Valuta': 'Валюта',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Оцінка часу, який витрачають присутні, — орієнтир, а не бухгалтерська собівартість.',
+  'Diaformaat': 'Формат слайда',
+  'Scherm (16:9)': 'Екран (16:9)',
+  'Papierformaat': 'Формат паперу',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Оберіть формат паперу для роздаткових матеріалів і експорту на папір.',
   'Startmappen': 'Початкові теки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Звідки починаються відкриття й збереження. Порожнє значення — перша бібліотека.',

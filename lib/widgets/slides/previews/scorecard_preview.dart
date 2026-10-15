@@ -71,7 +71,7 @@ class _ScorecardPreview extends StatelessWidget {
             // what lets one figure grow into a hero instead of floating in a
             // strip at the top.
             width: w,
-            height: w * 9 / 16,
+            height: w / SlideAspectScope.of(context),
             child: Padding(
               padding: EdgeInsets.fromLTRB(
                 hPad,

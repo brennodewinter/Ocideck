@@ -54,6 +54,22 @@ const Map<String, int> methodLengthBaseline = {
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
       154, // +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
+  // +9 (#2433): de papersize/geometry-sleutels als ruwe waarden (één case)
+  // plus de slideSize-resolutie erna. De eigenlijke logica staat in
+  // document_page_setup.dart (slideSizeFromKeys); wat rest is veld + case.
+  'lib/services/markdown_parse/markdown_service_parse_front_matter.dart::_MarkdownParseFrontMatter._parseFrontMatter':
+      159, // +5 (#2435): vier ocideck_cost_*-case's vouwen naar één patroon —
+  // wat rest is veld + case + de assembly na de loop, zie costKeys.
+
+  // +1 (#2433): slideAspect als memo-sleutel op memoizedFitScale — de
+  // meting moet per deckverhouding gescheiden blijven. De methode stond al
+  // op de limiet.
+  'lib/services/slide_quality/slide_quality_analyzer_density.dart::_QualityDensityChecks._checkTextDensity':
+      151,
+  // +1 (#2433): de deckverhouding afleiden (slideAspect + logicalSizeFor)
+  // zodat het raster en het exportbudget het vel volgen. De methode stond
+  // al op de limiet.
+  'lib/services/slide_rasterizer.dart::SlideRasterizer.rasterize': 151,
   'lib/widgets/editors/title_editor.dart::_TitleEditorState.build': 278,
   // -113 (#1859): build is opgeknipt in helpers _buildSlideSettings,
   // _buildBulletList en _buildWorkSurface; de vorige 154-regels versie is

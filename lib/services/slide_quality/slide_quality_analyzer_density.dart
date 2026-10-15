@@ -11,6 +11,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
     int index,
     String font,
     List<SlideQualityIssue> issues,
+    double slideAspect,
   ) {
     switch (slide.type) {
       case SlideType.bullets:
@@ -20,7 +21,12 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
           memoizedFitScale(
             slide,
             font,
-            () => bulletsSlideFitScale(slide: slide, font: font),
+            () => bulletsSlideFitScale(
+              slide: slide,
+              font: font,
+              slideAspect: slideAspect,
+            ),
+            slideAspect: slideAspect,
           ),
         );
         _checkBulletReadability(
@@ -38,7 +44,12 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
           memoizedFitScale(
             slide,
             font,
-            () => bulletsSlideFitScale(slide: slide, font: font),
+            () => bulletsSlideFitScale(
+              slide: slide,
+              font: font,
+              slideAspect: slideAspect,
+            ),
+            slideAspect: slideAspect,
           ),
         );
         _checkBulletReadability(
@@ -54,7 +65,12 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
           memoizedFitScale(
             slide,
             font,
-            () => twoBulletsSlideFitScale(slide: slide, font: font),
+            () => twoBulletsSlideFitScale(
+              slide: slide,
+              font: font,
+              slideAspect: slideAspect,
+            ),
+            slideAspect: slideAspect,
           ),
         );
         _checkBulletReadability(
@@ -70,7 +86,12 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
           memoizedFitScale(
             slide,
             font,
-            () => bulletsImageSlideFitScale(slide: slide, font: font),
+            () => bulletsImageSlideFitScale(
+              slide: slide,
+              font: font,
+              slideAspect: slideAspect,
+            ),
+            slideAspect: slideAspect,
           ),
         );
         _checkBulletReadability(
@@ -80,7 +101,9 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
           twoColumn: false,
         );
       case SlideType.table:
-        issues.addAll(_tableDensityIssues(slide, index, font));
+        issues.addAll(
+          _tableDensityIssues(slide, index, font, slideAspect: slideAspect),
+        );
       case SlideType.matrix:
         // Een matrix is een tabel, dus dezelfde dichtheidstoets — maar hij toont
         // een kolom méér dan hij bewaart (de afgeleide RPN). Zonder die
@@ -92,6 +115,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
             index,
             font,
             extraColumns: matrixHasDerivedColumn(slide) ? 1 : 0,
+            slideAspect: slideAspect,
           ),
         );
       case SlideType.code:
@@ -491,6 +515,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
     ThemeProfile theme,
     String font,
     List<SlideQualityIssue> issues,
+    double slideAspect,
   ) {
     var i = 0;
     while (i < slides.length) {
@@ -501,7 +526,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       }
       final scales = [
         for (var k = start; k <= end; k++)
-          _memoizedRunScale(slides[k], theme, font),
+          _memoizedRunScale(slides[k], theme, font, slideAspect),
       ];
       final drag = splitRunDrag(scales, warningScale: kTextDensityWarningScale);
       if (drag != null) {
@@ -533,15 +558,26 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
     }
   }
 
-  double _memoizedRunScale(Slide slide, ThemeProfile theme, String font) {
+  double _memoizedRunScale(
+    Slide slide,
+    ThemeProfile theme,
+    String font,
+    double slideAspect,
+  ) {
     final cached = _runScaleCache[slide];
     if (cached != null &&
         cached.font == font &&
-        identical(cached.theme, theme)) {
+        identical(cached.theme, theme) &&
+        cached.slideAspect == slideAspect) {
       return cached.scale;
     }
-    final scale = splitRunMemberScale(slide, theme, font);
-    _runScaleCache[slide] = _RunScaleMemo(font, theme, scale);
+    final scale = splitRunMemberScale(
+      slide,
+      theme,
+      font,
+      slideAspect: slideAspect,
+    );
+    _runScaleCache[slide] = _RunScaleMemo(font, theme, slideAspect, scale);
     return scale;
   }
 }
@@ -557,6 +593,7 @@ List<SlideQualityIssue> _tableDensityIssues(
   int index,
   String font, {
   int extraColumns = 0,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
   if (rows.isEmpty) return const [];
@@ -568,7 +605,7 @@ List<SlideQualityIssue> _tableDensityIssues(
     colCount: colCount,
     slideWidth: w,
     tableWidth: tableReferenceWidth(w),
-    availH: tableReferenceAvailableHeight(w),
+    availH: tableReferenceAvailableHeight(w, slideAspect: slideAspect),
     font: font,
   ).cellSize;
   final minimum = tableCellFontMinimum(w);

@@ -18,6 +18,7 @@ Future<void> _addThemeCssArchiveMembers(
     profile,
     logoRel,
     brandStripRel,
+    deck.slideSize,
   );
   if (css == null) return;
   final cssBytes = utf8.encode(css);
@@ -607,6 +608,7 @@ extension FileServicePackage on FileService {
     ThemeProfile profile,
     String? logoRel,
     String? brandStripRel,
+    PageSizeSpec? slideSize,
   ) async {
     final safe = _safeThemeName(themeName);
     try {
@@ -618,6 +620,7 @@ extension FileServicePackage on FileService {
         profile,
         logoRel == null ? null : '../$logoRel',
         brandStripRel == null ? null : '../$brandStripRel',
+        slideSize,
       );
     } catch (e) {
       logWarning('FileService._packageThemeCss: theme asset not bundled', e);

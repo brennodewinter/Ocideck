@@ -1605,6 +1605,26 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Omrekening naar euro': 'Omräkning till euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'För EUR-visningen använder OciDeck en kurs per session. Ange kursen själv eller hämta ECB:s referenskurs.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Hämta kurs från Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'En begäran per valuta till api.frankfurter.dev med enbart valutakoden; tjänsten ser dock IP-adressen. Inga presentationsdata skickas.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Hämtningen misslyckades — ange kursen själv eller fortsätt utan kurs.',
+  'Zonder koers doorgaan': 'Fortsätt utan kurs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Ogiltig kurs — använd till exempel 0,92.',
+  'handmatig': 'manuellt',
+  'peildatum': 'referensdatum',
+  'verouderd': 'föråldrad',
+  'koers': 'kurs',
+  'koers ontbreekt': 'kurs saknas',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs saknas — EUR-motvärde har inte beräknats.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'inmatningsrad(er) ej omräknade — kursen saknades.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Inget användbart förslag hittades. Fyll i uppgifterna själv.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1753,6 +1773,46 @@ const _dutchSourceAddSv = <String, String>{
       'Översikten kunde inte öppnas som ett dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Spara ändringarna i dokumentet i översikten eller stäng fliken.',
+  'Kostenindicatie': 'Kostnadsindikation',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto eller netto spelar ingen roll här — arbetsgivarkostnadspåslaget är separat.',
+  'Aanwezigen en tarieven': 'Närvarande och taxor',
+  'Bedrag': 'Belopp',
+  'Per uur': 'Per timme',
+  'Per maand': 'Per månad',
+  'Per jaar': 'Per år',
+  'Aanname voor de omrekening': 'Antagande för omräkningen',
+  'Betaalde uren per week': 'Betalda timmar per vecka',
+  'Weken per jaar': 'Veckor per år',
+  'Opslag werkgeverslasten (%)': 'Påslag för arbetsgivarkostnader (%)',
+  'Voeg een aanwezige toe': 'Lägg till en närvarande',
+  'Samen': 'Tillsammans',
+  'Start presentatie': 'Starta presentationen',
+  'per uur': 'per timme',
+  'Wordt omgerekend': 'Omräknas',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Fyll i en tim-, månads- eller årsavgift per närvarande. Det stannar på den här skärmen och sparas inte.',
+  'Kosten van aanwezigen': 'Kostnad för närvarande',
+  'Uit': 'Av',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — bara i slutsammanfattningen',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — löpande belopp och slutsammanfattning',
+  'Uurtarief': 'Timtaxa',
+  'Eén tarief voor de hele groep': 'En taxa för hela gruppen',
+  'Per aanwezige, bij de start invullen': 'Per närvarande, fylls i vid start',
+  'Groepsuurtarief': 'Gruppens timtaxa',
+  'Kosten = verstreken tijd × tarief.': 'Kostnad = förfluten tid × taxa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Fylls i vid start och sparas inte.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'En uppskattning av den tid deltagarna lägger — en indikation, inte en redovisad självkostnad.',
+  'Diaformaat': 'Bildformat',
+  'Scherm (16:9)': 'Skärm (16:9)',
+  'Papierformaat': 'Pappersformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Välj ett pappersformat för handouts och export på papper.',
   'Startmappen': 'Startmappar',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Där öppna och spara börjar. Lämna tomt för att använda det första biblioteket.',

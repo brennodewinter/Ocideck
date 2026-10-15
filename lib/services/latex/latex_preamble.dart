@@ -268,12 +268,31 @@ String beamerPreamble(
   ExportDocumentMetadata meta, {
   String? theme,
   ThemeProfile? themeProfile,
+  PageSizeSpec? slideSize,
 }) {
   final buf = StringBuffer();
-  buf.write(
-    r'\documentclass[aspectratio=169]{beamer}'
-    '\n',
-  );
+  if (slideSize == null) {
+    buf.write(
+      r'\documentclass[aspectratio=169]{beamer}'
+      '\n',
+    );
+  } else {
+    // Beamer kent alleen vaste aspectratio-opties; een ISO-vel (#2433) zetten
+    // we via \geometry — beamer laadt dat pakket zelf al voor zijn
+    // papierformaat, dus een tweede \usepackage zou op een option clash
+    // stuklopen.
+    buf.write(
+      r'\documentclass{beamer}'
+      '\n',
+    );
+    String mm(double v) =>
+        v == v.roundToDouble() ? v.round().toString() : v.toString();
+    final (w, h) = slideSize.dimensions;
+    buf.write(
+      '\\geometry{paperwidth=${mm(w)}mm,'
+      'paperheight=${mm(h)}mm}\n',
+    );
+  }
   // Themakeuze — default is voldoende; metropolis is mooier maar niet altijd
   // geïnstalleerd.
   buf.write('\\usetheme{${theme ?? 'default'}}\n');
@@ -463,6 +482,10 @@ String buildBeamerDocument(
   ThemeProfile? themeProfile,
 }) {
   final body = buildBeamerBody(deck);
-  final preamble = beamerPreamble(metadata, themeProfile: themeProfile);
+  final preamble = beamerPreamble(
+    metadata,
+    themeProfile: themeProfile,
+    slideSize: deck.slideSize,
+  );
   return '$preamble\n$body\n$beamerPostamble\n';
 }

@@ -1631,6 +1631,27 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Omrekening naar euro': 'Μετατροπή σε ευρώ',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Για την εμφάνιση σε EUR το OciDeck χρησιμοποιεί μία ισοτιμία ανά συνεδρία. Εισαγωγή της ισοτιμίας με το χέρι ή ανάκτηση της ισοτιμίας αναφοράς της ΕΚΤ.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Ανάκτηση ισοτιμίας από Frankfurter (ΕΚΤ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ένα αίτημα ανά νόμισμα προς api.frankfurter.dev μόνο με τον κωδικό νομίσματος· η υπηρεσία βλέπει τη διεύθυνση IP. Δεν αποστέλλονται δεδομένα παρουσίασης.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Η ανάκτηση απέτυχε — εισαγωγή της ισοτιμίας με το χέρι ή συνέχεια χωρίς ισοτιμία.',
+  'Zonder koers doorgaan': 'Συνέχεια χωρίς ισοτιμία',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Μη έγκυρη ισοτιμία — χρήση π.χ. 0,92.',
+  'handmatig': 'χειροκίνητα',
+  'peildatum': 'ημερομηνία αναφοράς',
+  'verouderd': 'παρωχημένη',
+  'koers': 'ισοτιμία',
+  'koers ontbreekt': 'λείπει η ισοτιμία',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Λείπει η ισοτιμία — το ισοδύναμο σε EUR δεν υπολογίστηκε.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'γραμμή(ές) εισαγωγής χωρίς μετατροπή — έλειπε η ισοτιμία.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Δεν βρέθηκε χρήσιμη πρόταση. Συμπληρώστε μόνοι σας τα στοιχεία.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1783,6 +1804,46 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν μπόρεσε να ανοίξει η προβολή ως έγγραφο.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Αποθήκευσε τις αλλαγές στο έγγραφο προβολής πρώτα ή κλείσε αυτό το φύλλο εργασίας.',
+  'Kostenindicatie': 'Ένδειξη κόστους',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Μικτά ή καθαρά δεν παίζει ρόλο εδώ — η προσαύξηση εργοδοτικών επιβαρύνσεων είναι ξεχωριστή.',
+  'Aanwezigen en tarieven': 'Παρόντες και τιμές',
+  'Bedrag': 'Ποσό',
+  'Per uur': 'Ανά ώρα',
+  'Per maand': 'Ανά μήνα',
+  'Per jaar': 'Ανά έτος',
+  'Aanname voor de omrekening': 'Παραδοχή για τη μετατροπή',
+  'Betaalde uren per week': 'Αμειβόμενες ώρες ανά εβδομάδα',
+  'Weken per jaar': 'Εβδομάδες ανά έτος',
+  'Opslag werkgeverslasten (%)': 'Προσαύξηση εργοδοτικού κόστους (%)',
+  'Voeg een aanwezige toe': 'Προσθήκη παρόντος',
+  'Samen': 'Μαζί',
+  'Start presentatie': 'Έναρξη παρουσίασης',
+  'per uur': 'ανά ώρα',
+  'Wordt omgerekend': 'Θα μετατραπεί',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Συμπλήρωσε ανά παρόντα ωρομίσθιο, μηνιαίο ή ετήσιο ποσό. Μένει σε αυτή την οθόνη και δεν αποθηκεύεται πουθενά.',
+  'Kosten van aanwezigen': 'Κόστος παρόντων',
+  'Uit': 'Κλειστό',
+  'Gewoon — alleen in het eindoverzicht': 'Κανονικό — μόνο στην τελική σύνοψη',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Ρητό — τρέχον ποσό και τελική σύνοψη',
+  'Uurtarief': 'Ωρομίσθιο',
+  'Eén tarief voor de hele groep': 'Μία τιμή για όλη την ομάδα',
+  'Per aanwezige, bij de start invullen':
+      'Ανά παρόντα, συμπληρώνεται στην έναρξη',
+  'Groepsuurtarief': 'Ομαδικό ωρομίσθιο',
+  'Kosten = verstreken tijd × tarief.': 'Κόστος = παρελθών χρόνος × τιμή.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Συμπληρώνεται στην έναρξη και δεν αποθηκεύεται.',
+  'Valuta': 'Νόμισμα',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Εκτίμηση του χρόνου που δαπανούν οι παρόντες — ένδειξη, όχι λογιστικό κόστος.',
+  'Diaformaat': 'Μορφή διαφάνειας',
+  'Scherm (16:9)': 'Οθόνη (16:9)',
+  'Papierformaat': 'Μέγεθος χαρτιού',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Επιλέξτε μέγεθος χαρτιού για ενημερωτικά φυλλάδια και εξαγωγές σε χαρτί.',
   'Startmappen': 'Φάκελοι έναρξης',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Από πού ξεκινούν το άνοιγμα και η αποθήκευση. Κενό σημαίνει την πρώτη βιβλιοθήκη.',

@@ -215,6 +215,7 @@ against accessing internal/private network addresses.
 | **eLearning exam results and evidence (OciServe)** | The exam results you are allowed to see (score, percentage, passed or not) and, when you submit evidence, the file you choose with its name, type, size, hash, chosen evidence type and optional validity date | Your configured OciServe server and selected organisation |
 | **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
 | **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
+| **Cost mode — exchange rate** (you press *Fetch*, only for a currency other than the euro) | One request per currency, containing only the currency code (`/v1/latest?base=<code>&symbols=EUR`). The service sees your IP address. No presentation data, amounts, rates or attendee input is sent | `api.frankfurter.dev` (the European Central Bank's reference rates) |
 | **Embedded YouTube video** | A request for the player page and the video itself; the service can see that the video is being played | `youtube-nocookie.com` (and its media/thumbnail hosts) — **not** `youtube.com` |
 | **Embedded Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `vimeo.com` |
 

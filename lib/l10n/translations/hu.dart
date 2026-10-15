@@ -1608,6 +1608,27 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Omrekening naar euro': 'Átváltás euróra',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Az EUR-megjelenítéshez az OciDeck munkamenetenként egy árfolyamot használ. Az árfolyamot meg lehet adni kézzel, vagy le lehet kérni az EKB referencia-árfolyamát.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Árfolyam lekérése a Frankfurter szolgáltatástól (EKB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Pénznemenként egy kérés az api.frankfurter.dev felé, csak a pénznemkóddal; a szolgáltatás látja az IP-címet. Prezentációs adat nem kerül elküldésre.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'A lekérés sikertelen — az árfolyamot meg lehet adni kézzel, vagy árfolyam nélkül folytatható.',
+  'Zonder koers doorgaan': 'Folytatás árfolyam nélkül',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Érvénytelen árfolyam — például 0,92.',
+  'handmatig': 'kézzel',
+  'peildatum': 'referenciadátum',
+  'verouderd': 'elavult',
+  'koers': 'árfolyam',
+  'koers ontbreekt': 'hiányzik az árfolyam',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Hiányzik az árfolyam — az EUR-egyenérték nincs kiszámítva.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'bemeneti sor(ok) átváltatlan(ok) — hiányzott az árfolyam.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Nem található hasznos javaslat. Adja meg a részleteket saját maga.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1757,6 +1778,46 @@ const _dutchSourceAddHu = <String, String>{
       'Az áttekintés nem nyithatótott meg dokumentként.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Mentsük el először az áttekintés dokumentumában a változtatásokat vagy zárd be azt a lapot.',
+  'Kostenindicatie': 'Költségjelzés',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruttó vagy nettó itt nem számít — a munkáltatói költségráfordítás külön áll.',
+  'Aanwezigen en tarieven': 'Résztvevők és díjak',
+  'Bedrag': 'Összeg',
+  'Per uur': 'Óránként',
+  'Per maand': 'Havonta',
+  'Per jaar': 'Évente',
+  'Aanname voor de omrekening': 'Az átszámítás feltétele',
+  'Betaalde uren per week': 'Fizetett órák hetente',
+  'Weken per jaar': 'Hét évente',
+  'Opslag werkgeverslasten (%)': 'Munkáltatói költségráfordítás (%)',
+  'Voeg een aanwezige toe': 'Résztvevő hozzáadása',
+  'Samen': 'Összesen',
+  'Start presentatie': 'Prezentáció indítása',
+  'per uur': 'óránként',
+  'Wordt omgerekend': 'Átváltásra kerül',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Adj meg résztvevőnként óra-, havi vagy éves díjat. Ez a képernyőn marad és sehova nem kerül mentésre.',
+  'Kosten van aanwezigen': 'Résztvevők költsége',
+  'Uit': 'Ki',
+  'Gewoon — alleen in het eindoverzicht': 'Normál — csak a záró összegzésben',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — folyamatos összeg és záró összegzés',
+  'Uurtarief': 'Óradíj',
+  'Eén tarief voor de hele groep': 'Egy díj az egész csoportra',
+  'Per aanwezige, bij de start invullen':
+      'Résztvevőnként, a kezdéskor töltendő',
+  'Groepsuurtarief': 'Csoportos óradíj',
+  'Kosten = verstreken tijd × tarief.': 'Költség = eltelt idő × díj.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'A kezdéskor töltendő, nem kerül mentésre.',
+  'Valuta': 'Pénznem',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'A résztvevők által eltöltött idő becslése — irányadó, nem könyvelési önköltség.',
+  'Diaformaat': 'Diaformátum',
+  'Scherm (16:9)': 'Képernyő (16:9)',
+  'Papierformaat': 'Papírméret',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Válasszon papírméretet a kiosztandó anyagokhoz és a papíralapú exporthoz.',
   'Startmappen': 'Kezdőmappák',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hol a megnyitás és a mentés kezdődik. Üresen az első könyvtárat használja.',

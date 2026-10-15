@@ -33,8 +33,20 @@ class _FrontMatter {
   int presentationTargetSeconds = 0;
   PresentationTimingConfig presentationTiming =
       PresentationTimingConfig.disabled;
+
+  /// Het diaformaat als ISO-vel (`papersize:`/`geometry:`), of null voor de
+  /// schermstandaard 16:9. Zie [Deck.slideSize]. De ruwe waarden landen in
+  /// [formatKeys]; pas ná de loop staat vast welke sleutel wint
+  /// ([slideSizeFromKeys]: `papersize` gaat voor, zoals bij de documentpagina).
+  PageSizeSpec? slideSize;
+  final formatKeys = <String, String>{};
   bool showRehearsalSummary = false;
   bool playOnly = false;
+
+  /// Kostenmodus (#2435): de `ocideck_cost_*`-waarden onder hun korte naam;
+  /// de vertaling naar [PresentationCostConfig] gebeurt na de loop, zodat een
+  /// half ingevuld blok terugvalt op veilige standaarden in plaats van te falen.
+  final costKeys = <String, String>{};
 
   String improvementFramework = '';
   String improvementY01 = '';
@@ -166,6 +178,15 @@ extension _MarkdownParseFrontMatter on MarkdownService {
               fm.showRehearsalSummary = value == 'true';
             case 'ocideck_play_only':
               fm.playOnly = value == 'true';
+            case 'ocideck_cost_mode' ||
+                'ocideck_cost_input' ||
+                'ocideck_cost_currency' ||
+                'ocideck_cost_rate':
+              fm.costKeys[key.substring('ocideck_cost_'.length)] = value;
+            // Het diaformaat deelt zijn sleutels met de documentpaginaopmaak
+            // (`papersize:`/`geometry:` — het Pandoc-vocabulaire).
+            case 'papersize' || 'geometry':
+              fm.formatKeys[key] = value;
             case 'ocideck_improvement_framework':
               fm.improvementFramework = parseMarkdownYamlScalar(value);
             case 'ocideck_improvement_y01':
@@ -215,6 +236,10 @@ extension _MarkdownParseFrontMatter on MarkdownService {
     // geen key op kolom 0). Parse het apart uit de bronregels — de codec houdt
     // de raw lines bij voor de lossless nested merge (§2.5).
     fm.calloutBlock = parseCalloutBlock(fm.sourceLines);
+    fm.slideSize = slideSizeFromKeys(
+      fm.formatKeys['papersize'],
+      fm.formatKeys['geometry'],
+    );
     fm.presentationTiming = _parsePresentationTiming(fm.sourceLines);
     fm.body = content;
     return fm;

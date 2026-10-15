@@ -282,8 +282,14 @@ over the file. See §6.6 for why that changed.)
 | `format` | string/absent | Named presentation-timing preset. Recognised values are `pechakucha` (20 slides × 20 seconds) and `ignite` (20 slides × 15 seconds), case-insensitive. An unrecognised value has no timing effect and is retained on save. |
 | `timing` | nested block/absent | Generic timed-presentation settings. Recognised child fields are listed below. Not written when all settings have their defaults; ignored in favour of a recognised strict `format:` preset. |
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
-| `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. |
+| `ocideck_show_rehearsal_summary` | `true`/absent | Opt-in for the post-presentation timing summary. Absent (off) stays out of the file; only `true` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. A deck with the cost mode on (`ocideck_cost_mode`) shows the summary after the presentation regardless of this key, because that is where the total cost appears. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
+| `papersize` | string/absent | Portrait slide format (#2433): a lowercase ISO 216 paper name such as `a4`, in the same vocabulary Pandoc and the document page setup (§14) use, so another reader sees a sensible page size instead of an OciDeck-only key. Absent means the 16:9 screen format — the absent state of every Marp reader — so existing decks and hand-written Marp decks are unchanged. Landscape is written as `geometry`, see below. |
+| `geometry` | string/absent | Landscape slide format (#2433): only the sheet, e.g. `paperwidth=297mm,paperheight=210mm`. In Pandoc `papersize: a4` means portrait, so a landscape slide cannot be written as a paper name without lying. OciDeck only reads and replaces this exact sheet-only form as the slide format; a hand-written `geometry:` with margins belongs to the user (it is how a Marp deck is also run through Pandoc) and survives every save. If both keys are present, `papersize` wins, as on the document page. |
+| `ocideck_cost_mode` | `normal`/`explicit`/absent | Cost mode (#2435): an estimate of the attendees' time cost during this presentation. `normal` shows the cost only in the summary afterwards; `explicit` also shows a running total bottom-right during the presentation. Absent means off, and then none of the other `ocideck_cost_*` keys is written. An unknown value reads as off. |
+| `ocideck_cost_input` | `group`/`attendees` | How the hourly rate is entered: one fixed rate for the whole group (`group`, the default), or a private start screen where the presenter enters a rate or salary per attendee (`attendees`). Written only when the cost mode is on. |
+| `ocideck_cost_currency` | ISO 4217 code | The currency of the displayed amounts: `EUR` (default), `USD`, `GBP`, `CHF`, `JPY`, `SEK`, `NOK`, `DKK`, `PLN` or `CZK`. An unknown code reads as `EUR`. |
+| `ocideck_cost_rate` | decimal/absent | The group hourly rate in the major unit, plain digits with a dot and without a currency symbol (`75.50`, `75` for a currency without decimals). Written only for `group` and when greater than zero. An unreadable value reads as zero, which shows the basis but never a misleading `€ 0`. |
 | `ocideck_improvement_framework` | string/absent | Process-improvement framework for this deck: `dmaic`, `dmadv`, `kaizen`, `a3` or `8d`. Empty/absent = not set. |
 | `ocideck_improvement_y01` | string/absent | Free-text name/description of the primary Y metric (**Y-01**). Empty/absent = not set. |
 | `ocideck_improvement_y01_unit` | string/absent | Unit for Y-01 (e.g. `days`). Empty/absent = not set. |
@@ -342,6 +348,15 @@ The writer always emits `autoplay`, `stop-after-last-slide`, and
 absent slide limits. The runtime starts on slide 1, shows a separate 3‑2‑1
 countdown, derives the current slide from elapsed monotonic time, and treats
 paused time as outside the run.
+
+**What the cost mode never writes (#2435–#2438).** Only the four `ocideck_cost_*`
+keys above travel with the file. Individual hourly rates, salaries and the
+assumptions behind a conversion (paid hours, gross/net, employer surcharge) are
+entered on the presenter's private start screen and exist for that session only —
+they are not in the deck, an export, the clipboard or any log. The exchange rate
+used to show a euro equivalent for a foreign currency (rate, direction, source and
+reference date) is likewise fixed per session and never saved; the currency choice
+is the only part of it that is a presentation preference.
 
 **Migration (Y-01).** A deck that only has `ocideck_improvement_y01` (name, no
 limit keys) remains valid forever; missing limit keys mean `null`. Charts that

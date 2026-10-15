@@ -1621,6 +1621,26 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Omrekening naar euro': 'Conversio in euronum',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Ad monstrationem in EUR OciDeck unum cursum per sessionem adhibet. Cursum ipse inscribe vel cursum referentiae BCE pete.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Cursum a Frankfurter (BCE) pete',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Una petitio per nummum ad api.frankfurter.dev cum solo codice nummi; ministerium tamen inscriptionem IP videt. Nulla data praesentationis mittuntur.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Petitio defecit — cursum ipse inscribe vel sine cursu perge.',
+  'Zonder koers doorgaan': 'Sine cursu perge',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Cursus non validus — utere exempli gratia 0,92.',
+  'handmatig': 'manu',
+  'peildatum': 'dies referentiae',
+  'verouderd': 'obsoletus',
+  'koers': 'cursus',
+  'koers ontbreekt': 'cursus deest',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Cursus deest — aequivalens in EUR non computatum.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'linea(e) inputationis non conversa(e) — cursus deerat.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'nulla propositio utilis inventa est. Imple in details te ipsum.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1767,6 +1787,45 @@ const _dutchSourceAddLa = <String, String>{
       'Praefigium optinendum non potest sicut documentum aperiendum.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Conserva mutationes in documento praeficii, aut clausa tabulam illam.',
+  'Kostenindicatie': 'Sumptuum indicatio',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruttum an netum hic non refert — accrementum sumptuum conductoris separatum est.',
+  'Aanwezigen en tarieven': 'Praesentes et mercedes',
+  'Bedrag': 'Summa',
+  'Per uur': 'Per horam',
+  'Per maand': 'Per mensem',
+  'Per jaar': 'Per annum',
+  'Aanname voor de omrekening': 'Suppositio conversionis',
+  'Betaalde uren per week': 'Horae solutae per hebdomadam',
+  'Weken per jaar': 'Hebdomadae per annum',
+  'Opslag werkgeverslasten (%)': 'Additio sumptuum dativorum (%)',
+  'Voeg een aanwezige toe': 'Praesentem adde',
+  'Samen': 'Simul',
+  'Start presentatie': 'Praesentationem incipe',
+  'per uur': 'per horam',
+  'Wordt omgerekend': 'Convertetur',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Per singulum praesentem mercedem horariam, menstruam vel annuam inscribe. In hoc scaeno manet neque servatur.',
+  'Kosten van aanwezigen': 'Sumptus praesentium',
+  'Uit': 'Exclusum',
+  'Gewoon — alleen in het eindoverzicht': 'Sollemne — tantum in summa finali',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicitum — summa currens et recapitulatio finalis',
+  'Uurtarief': 'Merces horaria',
+  'Eén tarief voor de hele groep': 'Una merces pro universo coetu',
+  'Per aanwezige, bij de start invullen': 'Per praesentem, initio implendum',
+  'Groepsuurtarief': 'Merces horaria coetus',
+  'Kosten = verstreken tijd × tarief.': 'Sumptus = tempus elapsum × merces.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Initio implendum, numquam servandum.',
+  'Valuta': 'Moneta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Aestimatio temporis quod praesentes impendunt — indicium, non sumptus computabilis.',
+  'Diaformaat': 'Forma imaginis',
+  'Scherm (16:9)': 'Scrinium (16:9)',
+  'Papierformaat': 'Forma chartae',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Formam chartae pro manuscriptis et exportationibus in charta elige.',
   'Startmappen': 'Carpetae initiales',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Ubi aperire et servare incipiunt. Vacuum relictum prima bibliotheca utitur.',

@@ -20,9 +20,12 @@ import '../../models/question.dart';
 import '../../models/rehearsal.dart';
 import '../../models/settings.dart';
 import '../../models/presentation_step_plan.dart';
+import '../../models/presentation_cost.dart';
 import '../../models/presentation_timing.dart';
 import '../../models/playback.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
+import '../../models/page_size.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
 import '../../services/mic_monitor.dart';
@@ -32,6 +35,7 @@ import '../../services/quality_autofix.dart';
 import '../../services/question_round_builder.dart';
 import '../mermaid_render_host.dart';
 import '../../services/rehearsal_controller.dart';
+import '../../services/presentation_cost_session.dart';
 import '../../services/timed_presentation_controller.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/finding_context_score.dart';
@@ -57,6 +61,8 @@ import '../markdown_editor/markdown_editor.dart';
 import 'annotation_overlay.dart';
 import 'audience_controls_bar.dart';
 import 'audience_window.dart';
+import 'cost_overlay.dart';
+import 'cost_session_start.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
 import '../editors/editor_text_controller.dart';
@@ -215,6 +221,21 @@ class FullscreenPresenter extends StatefulWidget {
   /// Deck-level Y-01 metric for resolve-at-draw on improvement charts.
   final ImprovementY01Metric improvementY01;
 
+  /// De diaverhouding van het deck (scherm 16:9 wanneer het deck geen
+  /// papierformaat vastlegt) — zie [slideAspectRatio] (#2433).
+  final double slideAspect;
+
+  /// De kostenmodus van deze presentatie (#2435). Sessie-only in uitvoering:
+  /// de config komt uit het deck, de sessie zelf ([_costSession]) leeft hier
+  /// en gaat nooit richting schijf of export.
+  final PresentationCostConfig costConfig;
+
+  /// Wat de startschermen (#2436, #2438) leverden: het samengetelde
+  /// uurtarief, de sessie-vaste EUR-koers en hoeveel regels niet omgerekend
+  /// konden worden. Null bij het vaste groepstarief of wanneer de
+  /// kostenmodus uit staat; salarissen en aannames blijven bij het scherm.
+  final CostSessionSeed? costSeed;
+
   /// Test-seam voor de microfoon-doorvoer (#2158): productie laat dit leeg en
   /// krijgt bij de eerste aan-zet een [WebrtcMicMonitor]; een widget-test
   /// steekt een fake in, want de echte binding kan niet headless draaien.
@@ -249,6 +270,9 @@ class FullscreenPresenter extends StatefulWidget {
     this.onUserNotesChanged,
     this.improvementY01 = ImprovementY01Metric.empty,
     this.micMonitor,
+    this.slideAspect = kScreenSlideAspect,
+    this.costConfig = PresentationCostConfig.off,
+    this.costSeed,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -288,6 +312,18 @@ class FullscreenPresenter extends StatefulWidget {
     final organization = deck.organization;
     final reportLanguage = deck.language;
     final presentationTiming = deck.presentationTiming;
+    final slideSize = deck.slideSize;
+    final costConfig = deck.presentationCosts;
+
+    // Het kostenstartscherm (#2436, #2438) komt vóór de route: het
+    // publieksscherm bestaat dan nog niet. Annuleren start niets.
+    final costStart = await runCostStart(
+      context,
+      costConfig,
+      rehearsalMode: rehearsalMode,
+    );
+    if (costStart.cancelled) return null;
+    final costSeed = costStart.seed;
 
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
@@ -333,6 +369,9 @@ class FullscreenPresenter extends StatefulWidget {
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
+        slideSize: slideSize,
+        costConfig: costConfig,
+        costSeed: costSeed,
       );
     } else {
       return await show(
@@ -363,6 +402,9 @@ class FullscreenPresenter extends StatefulWidget {
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
+        slideSize: slideSize,
+        costConfig: costConfig,
+        costSeed: costSeed,
       );
     }
   }
@@ -396,6 +438,9 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
+    PageSizeSpec? slideSize,
+    PresentationCostConfig costConfig = PresentationCostConfig.off,
+    CostSessionSeed? costSeed,
   }) async {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
@@ -440,6 +485,9 @@ class FullscreenPresenter extends StatefulWidget {
                 initialUserNotes: initialUserNotes,
                 onUserNotesChanged: onUserNotesChanged,
                 improvementY01: improvementY01,
+                slideAspect: slideAspectRatio(slideSize),
+                costConfig: costConfig,
+                costSeed: costSeed,
               ),
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
@@ -487,6 +535,9 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
+    PageSizeSpec? slideSize,
+    PresentationCostConfig costConfig = PresentationCostConfig.off,
+    CostSessionSeed? costSeed,
   }) async {
     final argument = _dualWindowArguments(
       slides: slides,
@@ -502,6 +553,7 @@ class FullscreenPresenter extends StatefulWidget {
       themeProfile: themeProfile,
       marpStyle: marpStyle,
       cockpitColorScheme: cockpitColorScheme,
+      slideSize: slideSize,
     );
     WindowController? audience;
     AudienceWindowHandle? audienceHandle;
@@ -555,6 +607,9 @@ class FullscreenPresenter extends StatefulWidget {
           initialUserNotes: initialUserNotes,
           onUserNotesChanged: onUserNotesChanged,
           improvementY01: improvementY01,
+          slideSize: slideSize,
+          costConfig: costConfig,
+          costSeed: costSeed,
         );
       }
       return null;
@@ -593,6 +648,9 @@ class FullscreenPresenter extends StatefulWidget {
       initialUserNotes: initialUserNotes,
       onUserNotesChanged: onUserNotesChanged,
       improvementY01: improvementY01,
+      slideSize: slideSize,
+      costConfig: costConfig,
+      costSeed: costSeed,
     );
   }
 
@@ -657,6 +715,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Oefenklok: verstreken tijd, aftelling en per-slide-tijd. Sessie-only,
   /// puur meten (geen pacing). Resetbaar met R.
   late RehearsalController _rehearsal;
+
+  /// Kostenteller (#2435): loopt op een monotone klok vanaf de start van de
+  /// sessie. Null wanneer de kostenmodus uit staat — dan bestaat er niets om
+  /// per ongeluk te tonen of te bewaren. Reset mee met R.
+  PresentationCostSession? _costSession;
 
   /// Getypte cijfers om naar een slidenummer te springen (leeg = niet actief).
   String _typed = '';
@@ -792,6 +855,19 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _mermaidView.addListener(_broadcastMermaidView);
     _chartHover.addListener(_broadcastChartHover);
     _rehearsal = RehearsalController(target: widget.targetDuration);
+    if (widget.costConfig.isEnabled) {
+      // Bij 'per aanwezige' vult het startscherm (#2436) het tarief; tot dan
+      // rekent de sessie met 0 — het startscherm is verplicht, dus die nul
+      // is nooit zichtbaar als bedrag.
+      _costSession = PresentationCostSession(
+        currency: widget.costConfig.currency,
+        hourlyRateMinor: widget.costConfig.rateInput == CostRateInput.group
+            ? widget.costConfig.groupHourlyRateMinor
+            : widget.costSeed?.hourlyRateMinor ?? 0,
+        eurRate: widget.costSeed?.eurRate,
+        unconvertedAttendees: widget.costSeed?.unconvertedAttendees ?? 0,
+      );
+    }
     _focusNode = FocusNode();
     _userNotesFocusNode = FocusNode();
     _ink = {

@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/image_crop_dialog.dart';
@@ -34,6 +35,10 @@ class BulletsImageEditor extends StatefulWidget {
 
   final bool nestedInScrollView;
 
+  /// De diaverhouding van het deck (#2433) — de beeldsleuf en de crop-stage
+  /// hebben die verhouding, niet de vaste 16:9.
+  final double slideAspect;
+
   const BulletsImageEditor({
     super.key,
     required this.slide,
@@ -44,6 +49,7 @@ class BulletsImageEditor extends StatefulWidget {
     this.previousSlideIsNumbered = false,
     this.canContinueSplit = false,
     this.nestedInScrollView = false,
+    this.slideAspect = kScreenSlideAspect,
   });
 
   @override
@@ -377,7 +383,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       context,
       imagePath: widget.slide.imagePath,
       projectPath: widget.captionBasePath,
-      frameAspect: fraction * 16 / 9,
+      frameAspect: fraction * widget.slideAspect,
       imageSize: widget.slide.imageZoom,
       focalX: widget.slide.imageFocalX,
       focalY: widget.slide.imageFocalY,
@@ -405,6 +411,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         slide: widget.slide,
         projectPath: widget.captionBasePath,
         onUpdate: (updated) => widget.onUpdate(updated),
+        slideAspect: widget.slideAspect,
       ),
     );
   }

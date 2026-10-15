@@ -1604,6 +1604,26 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Omrekening naar euro': 'Konvertēšana eiro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR attēlošanai OciDeck izmanto vienu kursu sesijā. Ievadiet kursu paši vai iegūstiet ECB atsauces kursu.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Iegūt kursu no Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Viens pieprasījums katrai valūtai uz api.frankfurter.dev tikai ar valūtas kodu; pakalpojums gan redz IP adresi. Prezentācijas dati netiek sūtīti.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Iegūšana neizdevās — ievadiet kursu paši vai turpiniet bez kursa.',
+  'Zonder koers doorgaan': 'Turpināt bez kursa',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Nederīgs kurss — izmantojiet, piemēram, 0,92.',
+  'handmatig': 'manuāli',
+  'peildatum': 'atsauces datums',
+  'verouderd': 'novecojis',
+  'koers': 'kurss',
+  'koers ontbreekt': 'trūkst kursa',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Trūkst kursa — EUR ekvivalents nav aprēķināts.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'ievades rindas nav konvertētas — trūka kursa.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Netika atrasts neviens noderīgs priekšlikums. Aizpildiet informāciju pats.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1751,6 +1771,47 @@ const _dutchSourceAddLv = <String, String>{
       'Skats nevarēja būt atvērts kā dokumenta fails.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Pirms ielietiet izmaiņas skata dokumentā vai slēgtu to rindu.',
+  'Kostenindicatie': 'Izmaksu indikācija',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto vai neto šeit nav svarīgi — darba devēja izmaksu uzcenojums ir atsevišķs.',
+  'Aanwezigen en tarieven': 'Klātesošie un likmes',
+  'Bedrag': 'Summa',
+  'Per uur': 'Stundā',
+  'Per maand': 'Mēnesī',
+  'Per jaar': 'Gadā',
+  'Aanname voor de omrekening': 'Pieņēmums pārrēķinam',
+  'Betaalde uren per week': 'Apmaksātās stundas nedēļā',
+  'Weken per jaar': 'Nedēļas gadā',
+  'Opslag werkgeverslasten (%)': 'Darba devēja izmaksu uzcenojums (%)',
+  'Voeg een aanwezige toe': 'Pievienot klātesošu',
+  'Samen': 'Kopā',
+  'Start presentatie': 'Sākt prezentāciju',
+  'per uur': 'stundā',
+  'Wordt omgerekend': 'Tiks pārrēķināts',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Ievadi katram klātesošajam stundas, mēneša vai gada likmi. Tā paliek šajā ekrānā un nekur netiek saglabāta.',
+  'Kosten van aanwezigen': 'Klātesošo izmaksas',
+  'Uit': 'Izslēgts',
+  'Gewoon — alleen in het eindoverzicht':
+      'Parasts — tikai noslēguma kopsavilkumā',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Skaidrs — tekošā summa un noslēguma kopsavilkums',
+  'Uurtarief': 'Stundas likme',
+  'Eén tarief voor de hele groep': 'Viena likme visai grupai',
+  'Per aanwezige, bij de start invullen':
+      'Katram klātesošajam, aizpilda sākumā',
+  'Groepsuurtarief': 'Grupas stundas likme',
+  'Kosten = verstreken tijd × tarief.': 'Izmaksas = pagājušais laiks × likme.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Aizpildām sākumā, netiek saglabāts.',
+  'Valuta': 'Valūta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Novērtējums laikam, ko tērē klātesošie — indikācija, nevis grāmatvedības pašizmaksas.',
+  'Diaformaat': 'Slaida formāts',
+  'Scherm (16:9)': 'Ekrāns (16:9)',
+  'Papierformaat': 'Papīra formāts',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Izvēlieties papīra formātu izdales materiāliem un eksportam uz papīra.',
   'Startmappen': 'Sākuma mapes',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur sākas atvēršana un saglabāšana. Tukšs izmanto pirmo bibliotēku.',

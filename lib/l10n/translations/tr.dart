@@ -2514,6 +2514,26 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Omrekening naar euro': 'Euro\'ya çevirme',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR gösterimi için OciDeck oturum başına tek bir kur kullanır. Kuru kendiniz girin veya ECB referans kurunu alın.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Kuru Frankfurter\'dan (ECB) al',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Para birimi başına, yalnızca para birimi kodunu içeren tek bir istek api.frankfurter.dev adresine gider; hizmet IP adresini görür. Sunum verileri gönderilmez.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Alma başarısız oldu — kuru kendiniz girin veya kursuz devam edin.',
+  'Zonder koers doorgaan': 'Kursuz devam et',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Geçersiz kur — örneğin 0,92 kullanın.',
+  'handmatig': 'elle',
+  'peildatum': 'referans tarihi',
+  'verouderd': 'güncel değil',
+  'koers': 'kur',
+  'koers ontbreekt': 'kur eksik',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kur eksik — EUR karşılığı hesaplanmadı.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'girdi satır(lar)ı dönüştürülmedi — kur eksikti.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Faydalı bir teklif bulunamadı. Ayrıntıları kendiniz doldurun.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -2661,6 +2681,46 @@ const _dutchSourceAddTr = <String, String>{
       'Bu görünüm, bir belge olarak açılamadı.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Lütfen görünüm belgesindeki değişiklikleri önce kaydedin veya bu sekme kapalı olsun.',
+  'Kostenindicatie': 'Maliyet göstergesi',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brüt veya net burada fark etmez — işveren maliyeti payı ayrıdır.',
+  'Aanwezigen en tarieven': 'Katılımcılar ve ücretler',
+  'Bedrag': 'Tutar',
+  'Per uur': 'Saat başına',
+  'Per maand': 'Ay başına',
+  'Per jaar': 'Yıl başına',
+  'Aanname voor de omrekening': 'Çevrim varsayımı',
+  'Betaalde uren per week': 'Haftalık ücretli saat',
+  'Weken per jaar': 'Yıllık hafta',
+  'Opslag werkgeverslasten (%)': 'İşveren maliyet farkı (%)',
+  'Voeg een aanwezige toe': 'Katılımcı ekle',
+  'Samen': 'Toplam',
+  'Start presentatie': 'Sunumu başlat',
+  'per uur': 'saat başına',
+  'Wordt omgerekend': 'Çevrilecek',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Her katılımcı için saatlik, aylık veya yıllık ücret gir. Bu ekranda kalır ve hiçbir yere kaydedilmez.',
+  'Kosten van aanwezigen': 'Katılımcı maliyeti',
+  'Uit': 'Kapalı',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — yalnızca kapanış özetinde',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Açık — akan tutar ve kapanış özeti',
+  'Uurtarief': 'Saatlik ücret',
+  'Eén tarief voor de hele groep': 'Tüm grup için tek ücret',
+  'Per aanwezige, bij de start invullen':
+      'Katılımcı başına, başlangıçta girilir',
+  'Groepsuurtarief': 'Grup saat ücreti',
+  'Kosten = verstreken tijd × tarief.': 'Maliyet = geçen süre × ücret.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Başlangıçta girilir ve kaydedilmez.',
+  'Valuta': 'Para birimi',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Katılımcıların harcadığı zamanın tahmini — bir gösterge, muhasebe maliyeti değil.',
+  'Diaformaat': 'Slayt biçimi',
+  'Scherm (16:9)': 'Ekran (16:9)',
+  'Papierformaat': 'Kağıt boyutu',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Bildiriler ve kağıt çıktıları için bir kağıt boyutu seçin.',
   'Startmappen': 'Başlangıç klasörleri',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Açma ve kaydetmenin başladığı yer. Boş bırakmak ilk kitaplığı kullanır.',

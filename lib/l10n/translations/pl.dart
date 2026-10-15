@@ -1618,6 +1618,26 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Omrekening naar euro': 'Przeliczenie na euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Do wyświetlania w EUR OciDeck używa jednego kursu na sesję. Wpisz kurs samodzielnie lub pobierz kurs referencyjny EBC.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Pobierz kurs z Frankfurter (EBC)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Jedno zapytanie na walutę do api.frankfurter.dev, tylko z kodem waluty; usługa widzi jednak adres IP. Żadne dane prezentacji nie są wysyłane.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Pobieranie nie powiodło się — wpisz kurs samodzielnie lub kontynuuj bez kursu.',
+  'Zonder koers doorgaan': 'Kontynuuj bez kursu',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Nieprawidłowy kurs — użyj na przykład 0,92.',
+  'handmatig': 'ręcznie',
+  'peildatum': 'data odniesienia',
+  'verouderd': 'nieaktualny',
+  'koers': 'kurs',
+  'koers ontbreekt': 'brak kursu',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Brak kursu — równowartość w EUR nie została obliczona.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'wiersz(e) wejściowe nieprzeliczone — brakowało kursu.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Nie znaleziono żadnej przydatnej propozycji. Wypełnij szczegóły samodzielnie.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1770,6 +1790,46 @@ const _dutchSourceAddPl = <String, String>{
       'Przegląd nie mógł zostać otwarty jako dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Najpierw zapisz zmiany w dokumencie przeglądowym lub zamknij ten zakład.',
+  'Kostenindicatie': 'Wskazanie kosztów',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto czy netto nie ma tu znaczenia — narzut kosztów pracodawcy jest osobny.',
+  'Aanwezigen en tarieven': 'Uczestnicy i stawki',
+  'Bedrag': 'Kwota',
+  'Per uur': 'Na godzinę',
+  'Per maand': 'Na miesiąc',
+  'Per jaar': 'Na rok',
+  'Aanname voor de omrekening': 'Założenie do przeliczenia',
+  'Betaalde uren per week': 'Płatne godziny na tydzień',
+  'Weken per jaar': 'Tygodnie w roku',
+  'Opslag werkgeverslasten (%)': 'Narzut kosztów pracodawcy (%)',
+  'Voeg een aanwezige toe': 'Dodaj uczestnika',
+  'Samen': 'Razem',
+  'Start presentatie': 'Rozpocznij prezentację',
+  'per uur': 'na godzinę',
+  'Wordt omgerekend': 'Zostanie przeliczone',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Wpisz za każdego uczestnika stawkę godzinową, miesięczną lub roczną. Zostaje na tym ekranie i nigdzie nie jest zapisywana.',
+  'Kosten van aanwezigen': 'Koszt uczestników',
+  'Uit': 'Wył.',
+  'Gewoon — alleen in het eindoverzicht':
+      'Zwykły — tylko w podsumowaniu końcowym',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Jawny — bieżąca suma i podsumowanie końcowe',
+  'Uurtarief': 'Stawka godzinowa',
+  'Eén tarief voor de hele groep': 'Jedna stawka dla całej grupy',
+  'Per aanwezige, bij de start invullen': 'Za uczestnika, wpisywane na starcie',
+  'Groepsuurtarief': 'Grupowa stawka godzinowa',
+  'Kosten = verstreken tijd × tarief.': 'Koszt = upływ czasu × stawka.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wypełniane na starcie, nigdy niezapisywane.',
+  'Valuta': 'Waluta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Szacunek czasu poświęcanego przez uczestników — wskazanie, nie księgowy koszt własny.',
+  'Diaformaat': 'Format slajdu',
+  'Scherm (16:9)': 'Ekran (16:9)',
+  'Papierformaat': 'Format papieru',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Wybierz format papieru dla materiałów do rozdania i eksportów na papier.',
   'Startmappen': 'Foldery startowe',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Gdzie zaczyna się otwieranie i zapisywanie. Puste pole oznacza pierwszą bibliotekę.',

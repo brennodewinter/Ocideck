@@ -33,7 +33,6 @@ class _DeckStatusBar extends StatelessWidget {
   final String? exportDirectory;
   final Future<void> Function() onSave;
   final VoidCallback? onExport;
-  final String exportTooltip;
 
   /// Spring naar de eerste slide met een openstaande bevinding. Doorgegeven
   /// aan [_ExportReadinessChip] voor het klikdoel bij kwaliteit/privacy-issues.
@@ -55,7 +54,6 @@ class _DeckStatusBar extends StatelessWidget {
     required this.exportDirectory,
     required this.onSave,
     required this.onExport,
-    required this.exportTooltip,
     required this.readiness,
     required this.quality,
     this.remoteOrigin,
@@ -157,13 +155,6 @@ class _DeckStatusBar extends StatelessWidget {
               onSave: onSave,
               onExport: onExport,
               onJumpToFindings: onJumpToFindings,
-            ),
-            const SizedBox(width: 6),
-            _StatusAction(
-              icon: Icons.upload_file_outlined,
-              label: l10n.t('export'),
-              tooltip: exportTooltip,
-              onTap: onExport,
             ),
           ],
         ),

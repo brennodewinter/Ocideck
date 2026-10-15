@@ -1624,6 +1624,26 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Omrekening naar euro': 'Konverżjoni għall-euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Għall-wiri bl-EUR, OciDeck juża rata waħda ta\' skambju għal kull sessjoni. Daħħal ir-rata int stess jew ġib ir-rata ta\' referenza tal-BĊE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Ġib ir-rata minn Frankfurter (BĊE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Talba waħda għal kull munita lil api.frankfurter.dev bil-kodiċi tal-munita biss; is-servizz jara l-indirizz IP. Ma tintbagħat l-ebda dejta tal-preżentazzjoni.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'It-teħid falla — daħħal ir-rata int stess jew kompli mingħajr rata.',
+  'Zonder koers doorgaan': 'Kompli mingħajr rata',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Rata mhux valida — uża, pereżempju, 0,92.',
+  'handmatig': 'manwalment',
+  'peildatum': 'data ta\' referenza',
+  'verouderd': 'skaduta',
+  'koers': 'rata',
+  'koers ontbreekt': 'ir-rata nieqsa',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Ir-rata nieqsa — l-ekwivalenti f\'EUR ma ġiex ikkalkulat.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'linja/linji ta\' input mhux ikkonvertiti — ir-rata kienet nieqsa.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Ma nstabet l-ebda proposta utli. Imla d-dettalji lilek innifsek.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1774,6 +1794,46 @@ const _dutchSourceAddMt = <String, String>{
       'L-istidenza ma setax tinfeta bħala dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Ħutta l-ebda modifika fil-fildar u agħlaq il-tab.',
+  'Kostenindicatie': 'Indikazzjoni tal-ispiża',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Gross jew net ma jimpurtax hawn — il-markup tal-ispejjeż tal-mgħaddi huwa separat.',
+  'Aanwezigen en tarieven': 'Preżenti u rati',
+  'Bedrag': 'Ammont',
+  'Per uur': 'Fis-siegħa',
+  'Per maand': 'Fix-xahar',
+  'Per jaar': 'Fis-sena',
+  'Aanname voor de omrekening': 'Suppożizzjoni għall-konverżjoni',
+  'Betaalde uren per week': 'Sigħat imħallsa fil-ġimgħa',
+  'Weken per jaar': 'Ġimgħat fis-sena',
+  'Opslag werkgeverslasten (%)': 'Żieda fl-ispejjeż tal-impjegatur (%)',
+  'Voeg een aanwezige toe': 'Żid preżente',
+  'Samen': 'Flimkien',
+  'Start presentatie': 'Ibda l-preżentazzjoni',
+  'per uur': 'fis-siegħa',
+  'Wordt omgerekend': 'Jiġi kkontvertit',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Daħħal għal kull preżente rata fis-siegħa, fix-xahar jew fis-sena. Jibqa\' f\'dan l-iskrin u ma jinħażen imkien.',
+  'Kosten van aanwezigen': 'Spiża tal-preżenti',
+  'Uit': 'Mitfi',
+  'Gewoon — alleen in het eindoverzicht': 'Normali — biss fir-riepilog finali',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Espliċitu — ammont li jiġi u riepilog finali',
+  'Uurtarief': 'Rata fis-siegħa',
+  'Eén tarief voor de hele groep': 'Rata waħda għall-grupp kollu',
+  'Per aanwezige, bij de start invullen':
+      'Għal kull preżenti, jimtela fil-bidu',
+  'Groepsuurtarief': 'Rata fis-siegħa tal-grupp',
+  'Kosten = verstreken tijd × tarief.': 'Spiża = ħin li għadda × rata.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Jimtela fil-bidu u ma jinħażenx.',
+  'Valuta': 'Munita',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Stima tal-ħin li jintefqu l-preżenti — indikazzjoni, mhux prezz tal-ispiża ta\' kontabilità.',
+  'Diaformaat': 'Format tas-slide',
+  'Scherm (16:9)': 'Skrin (16:9)',
+  'Papierformaat': 'Format tal-karta',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Agħżel format tal-karta għal fuljetti u esportazzjonijiet fuq karta.',
   'Startmappen': 'Folders tal-bidu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Fejn jibdew il-ftuħ u s-salvataġġ. Vojet juża l-ewwel librerija.',

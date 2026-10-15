@@ -1606,6 +1606,26 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Omrekening naar euro': 'Omregning til euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Til EUR-visningen bruger OciDeck én kurs pr. session. Indtast kursen selv, eller hent ECB\'s referencekurs.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Hent kurs fra Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Én anmodning pr. valuta til api.frankfurter.dev med kun valutakoden; tjenesten ser dog IP-adressen. Der sendes ingen præsentationsdata.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Hentning mislykkedes — indtast kursen selv, eller fortsæt uden kurs.',
+  'Zonder koers doorgaan': 'Fortsæt uden kurs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Ugyldig kurs — brug for eksempel 0,92.',
+  'handmatig': 'manuelt',
+  'peildatum': 'skæringsdato',
+  'verouderd': 'forældet',
+  'koers': 'kurs',
+  'koers ontbreekt': 'kurs mangler',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs mangler — EUR-modværdi er ikke beregnet.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'inputlinje(r) ikke omregnet — kursen manglede.',
   'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
       'Der blev ikke fundet noget brugbart forslag. Udfyld selv detaljerne.',
   'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
@@ -1757,6 +1777,46 @@ const _dutchSourceAddDa = <String, String>{
       'Oversigten kunne ikke åbnes som et dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Gem ændringer i dokumentet for oversigtstabsfane først eller luk fanen.',
+  'Kostenindicatie': 'Omkostningsindikation',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto eller netto er ligegyldigt her — arbejdsgiveromkostnings-tillægget står separat.',
+  'Aanwezigen en tarieven': 'Deltagere og satser',
+  'Bedrag': 'Beløb',
+  'Per uur': 'Pr. time',
+  'Per maand': 'Pr. måned',
+  'Per jaar': 'Pr. år',
+  'Aanname voor de omrekening': 'Antagelse for omregningen',
+  'Betaalde uren per week': 'Betalte timer om ugen',
+  'Weken per jaar': 'Uger om året',
+  'Opslag werkgeverslasten (%)': 'Arbejdsgiveromkostningstillæg (%)',
+  'Voeg een aanwezige toe': 'Tilføj en deltager',
+  'Samen': 'Tilsammen',
+  'Start presentatie': 'Start præsentationen',
+  'per uur': 'i timen',
+  'Wordt omgerekend': 'Omregnes',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Indtast en time-, måneds- eller årssats pr. deltager. Det bliver på denne skærm og gemmes ingen steder.',
+  'Kosten van aanwezigen': 'Deltagernes omkostninger',
+  'Uit': 'Fra',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — kun i afslutningsoversigten',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplicit — løbende beløb og afslutningsoversigt',
+  'Uurtarief': 'Timesats',
+  'Eén tarief voor de hele groep': 'Én sats for hele gruppen',
+  'Per aanwezige, bij de start invullen': 'Pr. deltager, udfyldes ved start',
+  'Groepsuurtarief': 'Gruppens timesats',
+  'Kosten = verstreken tijd × tarief.': 'Omkostning = forløben tid × sats.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Udfyldes ved start og gemmes ikke.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Et skøn over den tid, deltagerne bruger — en indikation, ikke en regnskabsmæssig kostpris.',
+  'Diaformaat': 'Diasformat',
+  'Scherm (16:9)': 'Skærm (16:9)',
+  'Papierformaat': 'Papirformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Vælg et papirformat til handouts og eksport på papir.',
   'Startmappen': 'Startmapper',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hvor åbning og gemning begynder. Tomt felt bruger det første bibliotek.',

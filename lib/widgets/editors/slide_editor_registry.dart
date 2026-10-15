@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../models/improvement_y01.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
@@ -77,6 +78,10 @@ class SlideEditorContext {
   /// Primary Y metric from the deck, for histogram Y-01 limit linking.
   final ImprovementY01Metric deckY01;
 
+  /// De diaverhouding van het deck (#2433), voor editors die een beeldsleuf of
+  /// crop-stage in de diaverhouding tonen (bulletsImage, image, twoImages).
+  final double slideAspect;
+
   const SlideEditorContext({
     required this.slide,
     required this.onUpdate,
@@ -93,6 +98,7 @@ class SlideEditorContext {
     this.deckFindingSeverities = const [],
     this.deckResolvedCount = 0,
     this.deckY01 = ImprovementY01Metric.empty,
+    this.slideAspect = kScreenSlideAspect,
   });
 
   Key get _key => ValueKey(slide.id);
@@ -153,6 +159,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         previousSlideIsNumbered: c.previousSlideIsNumbered,
         canContinueSplit: c.canContinueSplit,
         nestedInScrollView: c.nestedInScrollView,
+        slideAspect: c.slideAspect,
       ),
       SlideType.twoImages: (c) => TwoImagesEditor(
         key: c._key,
@@ -161,6 +168,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         searchPaths: c.searchPaths,
         captionBasePath: c.captionBasePath,
         nestedInScrollView: c.nestedInScrollView,
+        slideAspect: c.slideAspect,
       ),
       SlideType.image: (c) => ImageSlideEditor(
         key: c._key,
@@ -170,6 +178,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         searchPaths: c.searchPaths,
         captionBasePath: c.captionBasePath,
         nestedInScrollView: c.nestedInScrollView,
+        slideAspect: c.slideAspect,
       ),
       SlideType.video: (c) => VideoSlideEditor(
         key: c._key,

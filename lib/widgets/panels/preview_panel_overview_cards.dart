@@ -380,6 +380,7 @@ class _OverviewSlideCard extends StatelessWidget {
                         child: ExcludeSemantics(
                           child: RepaintBoundary(
                             child: SlidePreviewWidget(
+                              slideAspect: slideAspectRatio(deck.slideSize),
                               slide: slide,
                               projectPath: deck.projectPath,
                               themeProfile: deck.themeProfile,
@@ -393,6 +394,7 @@ class _OverviewSlideCard extends StatelessWidget {
                                 index,
                                 deck.themeProfile,
                                 deck.themeProfile.fontFamily,
+                                slideAspect: slideAspectRatio(deck.slideSize),
                               ),
                               splitRunPosition: splitRunPositionFor(
                                 deck.slides,
