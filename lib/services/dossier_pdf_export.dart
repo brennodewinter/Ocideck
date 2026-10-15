@@ -48,53 +48,13 @@ Future<Uint8List> buildDossierPdf(
   bool privacyAcknowledged = false,
   List<ByteData> fallbackFonts = const [],
 }) async {
-  final verified = <(DossierEntry, String)>[];
-  for (final entry in dossier.entries) {
-    final result = await store.verify(entry);
-    final path = await store.resolvedPath(entry);
-    if (result.status != DossierIntegrityStatus.matches || path == null) {
-      throw FileSystemException(
-        'Dossierbron is gewijzigd of niet veilig leesbaar: ${result.status.name}',
-        entry.relativePath,
-      );
-    }
-    if (p.extension(path).toLowerCase() != '.md') {
-      throw FileSystemException(
-        'Alleen Markdown-bronnen zijn ondersteund',
-        path,
-      );
-    }
-    verified.add((entry, path));
-  }
+  final verified = await _verifiedSources(dossier, store);
+  final projection = _DossierPdfProjection(settings, profile);
 
-  final summaries = <PrivacyExportSummary>[];
-  final projectedMetadata = <String, String>{};
-  Future<String> display(String raw) async {
-    if (raw.trim().isEmpty) return '';
-    if (projectedMetadata[raw] case final String cached) return cached;
-    final bundle = await buildDocumentExportBundle(
-      raw,
-      projectPath: null,
-      profile: profile,
-      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
-      regions: settings.privacyRegions,
-      disabledRules: settings.privacyDisabledRules,
-      markdownService: MarkdownService(),
-    );
-    summaries.add(bundle.privacySummary);
-    final projected = projectedDocumentBodyForRendering(bundle).trim();
-    if (projected.isEmpty) {
-      throw const FormatException(
-        'Dossiermetadata kon niet veilig worden geprojecteerd',
-      );
-    }
-    return projectedMetadata[raw] = _safe(projected);
-  }
-
-  final dossierTitle = await display(dossier.title);
-  final dossierDescription = await display(dossier.description);
+  final dossierTitle = await projection.display(dossier.title);
+  final dossierDescription = await projection.display(dossier.description);
   final entryTitles = <String>[
-    for (final (entry, _) in verified) await display(entry.title),
+    for (final (entry, _) in verified) await projection.display(entry.title),
   ];
 
   final blocks = <PdfBlock>[
@@ -117,104 +77,19 @@ Future<Uint8List> buildDossierPdf(
   ];
   final images = <String, Uint8List>{};
   for (var i = 0; i < verified.length; i++) {
-    final (entry, path) = verified[i];
-    final sourceBytes = await File(path).readAsBytes();
-    if (sha256.convert(sourceBytes).toString() != entry.sha256) {
-      throw FileSystemException(
-        'Dossierbron is tijdens export gewijzigd',
-        path,
-      );
-    }
-    final source = MarkdownDocument.parse(utf8.decode(sourceBytes));
-    final body = source.body;
-    final bundle = await buildDocumentExportBundle(
-      body,
-      projectPath: p.dirname(path),
-      profile: profile,
-      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
-      regions: settings.privacyRegions,
-      disabledRules: settings.privacyDisabledRules,
-      markdownService: MarkdownService(),
-      tlp: source.tlp,
-      fields: source.fields,
-    );
-    final classificationDecision =
-        ClassificationEnforcementPolicy.fromAppSettings(
-          settings,
-        ).evaluate(bundle.audience.deck.tlp);
-    if (!classificationDecision.allowed) {
-      throw DossierPdfClassificationException(classificationDecision);
-    }
-    summaries.add(bundle.privacySummary);
-    final projected = projectedDocumentBodyForRendering(bundle);
-    final sourceBlocks = markdownToPdfBlocks(projected);
-    // Projection can remove image paths while preserving projected alt text.
-    // Raw paths are used only for locating safe image bytes.
-    final imageRefs = _imageSources(markdownToPdfBlocks(body));
-    final rebased = await _embedLocalImages(
-      sourceBlocks,
-      path,
-      entry.id,
-      imageRefs,
+    await _appendEntry(
+      blocks,
+      dossier,
+      verified[i].$1,
+      verified[i].$2,
+      i,
+      entryTitles[i],
+      projection,
       images,
+      includeInterleaves: includeInterleaves,
     );
-    blocks.add(const PdfPageBreakBlock());
-    if (includeInterleaves) {
-      final title = entryTitles[i];
-      blocks.add(PdfHeadingBlock(1, [PdfSpan(title)], title));
-      blocks.add(
-        PdfParagraphBlock([
-          PdfSpan('DOCUMENT ${dossier.numberFor(i)}', bold: true),
-        ]),
-      );
-      if (entry.description.trim().isNotEmpty) {
-        blocks.add(
-          PdfParagraphBlock([PdfSpan(await display(entry.description))]),
-        );
-      }
-      if (entry.documentDate case final String documentDate
-          when documentDate.trim().isNotEmpty) {
-        blocks.add(
-          PdfParagraphBlock([
-            const PdfSpan('Datum  ', bold: true),
-            PdfSpan(await display(documentDate)),
-          ]),
-        );
-      }
-      if (entry.author.trim().isNotEmpty) {
-        blocks.add(
-          PdfParagraphBlock([
-            const PdfSpan('Opsteller  ', bold: true),
-            PdfSpan(await display(entry.author)),
-          ]),
-        );
-      }
-      blocks.add(
-        PdfParagraphBlock([
-          const PdfSpan('SHA-256  ', bold: true),
-          PdfSpan(entry.sha256, code: true),
-        ]),
-      );
-      blocks.add(const PdfPageBreakBlock());
-    }
-    // A presentation source is deliberately laid out as document text.
-    blocks.add(PdfHeadingBlock(1, [PdfSpan(entryTitles[i])], entryTitles[i]));
-    blocks.addAll(rebased);
   }
-  final summary = PrivacyExportSummary(
-    unresolved: summaries.fold(0, (sum, item) => sum + item.unresolved),
-    accepted: summaries.fold(0, (sum, item) => sum + item.accepted),
-    shielded: summaries.fold(0, (sum, item) => sum + item.shielded),
-    redacted: summaries.fold(0, (sum, item) => sum + item.redacted),
-    setAside: summaries.fold(0, (sum, item) => sum + item.setAside),
-  );
-  final privacyDecision = PrivacyExportPolicy(
-    gate: settings.privacyExportGate,
-  ).evaluate(summary);
-  if (!privacyDecision.allowed &&
-      (privacyDecision.hardBlocked || !privacyAcknowledged)) {
-    throw DossierPdfPrivacyException(privacyDecision);
-  }
+  projection.checkPrivacy(privacyAcknowledged);
   return buildDocumentPdf(
     blocks,
     style: DocumentPdfStyle.fromTheme(const ThemeProfile()),
@@ -231,6 +106,167 @@ Future<Uint8List> buildDossierPdf(
     chrome: const DocumentPdfChrome(showPageNumbers: true),
   );
 }
+
+Future<List<(DossierEntry, String)>> _verifiedSources(
+  DocumentDossier dossier,
+  DocumentDossierStore store,
+) async {
+  final verified = <(DossierEntry, String)>[];
+  for (final entry in dossier.entries) {
+    final result = await store.verify(entry);
+    final path = await store.resolvedPath(entry);
+    if (result.status != DossierIntegrityStatus.matches || path == null) {
+      throw FileSystemException(
+        'Dossierbron is gewijzigd of niet veilig leesbaar: ${result.status.name}',
+        entry.relativePath,
+      );
+    }
+    if (p.extension(path).toLowerCase() != '.md') {
+      throw FileSystemException(
+        'Alleen Markdown-bronnen zijn ondersteund',
+        path,
+      );
+    }
+    verified.add((entry, path));
+  }
+  return verified;
+}
+
+class _DossierPdfProjection {
+  _DossierPdfProjection(this.settings, this.profile);
+
+  final AppSettings settings;
+  final PrivacyExportProfile profile;
+  final summaries = <PrivacyExportSummary>[];
+  final projectedMetadata = <String, String>{};
+
+  Future<String> display(String raw) async {
+    if (raw.trim().isEmpty) return '';
+    if (projectedMetadata[raw] case final String cached) return cached;
+    final bundle = await buildDocumentExportBundle(
+      raw,
+      projectPath: null,
+      profile: profile,
+      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+      regions: settings.privacyRegions,
+      disabledRules: settings.privacyDisabledRules,
+      markdownService: MarkdownService(),
+    );
+    summaries.add(bundle.privacySummary);
+    final projected = projectedDocumentBodyForRendering(bundle).trim();
+    if (projected.isEmpty) {
+      throw const FormatException(
+        'Dossiermetadata kon niet veilig worden geprojecteerd',
+      );
+    }
+    return projectedMetadata[raw] = _safe(projected);
+  }
+
+  void checkPrivacy(bool acknowledged) {
+    final summary = PrivacyExportSummary(
+      unresolved: summaries.fold(0, (sum, item) => sum + item.unresolved),
+      accepted: summaries.fold(0, (sum, item) => sum + item.accepted),
+      shielded: summaries.fold(0, (sum, item) => sum + item.shielded),
+      redacted: summaries.fold(0, (sum, item) => sum + item.redacted),
+      setAside: summaries.fold(0, (sum, item) => sum + item.setAside),
+    );
+    final decision = PrivacyExportPolicy(
+      gate: settings.privacyExportGate,
+    ).evaluate(summary);
+    if (!decision.allowed && (decision.hardBlocked || !acknowledged)) {
+      throw DossierPdfPrivacyException(decision);
+    }
+  }
+}
+
+Future<void> _appendEntry(
+  List<PdfBlock> blocks,
+  DocumentDossier dossier,
+  DossierEntry entry,
+  String path,
+  int index,
+  String title,
+  _DossierPdfProjection projection,
+  Map<String, Uint8List> images, {
+  required bool includeInterleaves,
+}) async {
+  final sourceBytes = await File(path).readAsBytes();
+  if (sha256.convert(sourceBytes).toString() != entry.sha256) {
+    throw FileSystemException('Dossierbron is tijdens export gewijzigd', path);
+  }
+  final source = MarkdownDocument.parse(utf8.decode(sourceBytes));
+  final body = source.body;
+  final settings = projection.settings;
+  final bundle = await buildDocumentExportBundle(
+    body,
+    projectPath: p.dirname(path),
+    profile: projection.profile,
+    ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+    regions: settings.privacyRegions,
+    disabledRules: settings.privacyDisabledRules,
+    markdownService: MarkdownService(),
+    tlp: source.tlp,
+    fields: source.fields,
+  );
+  final classificationDecision =
+      ClassificationEnforcementPolicy.fromAppSettings(
+        settings,
+      ).evaluate(bundle.audience.deck.tlp);
+  if (!classificationDecision.allowed) {
+    throw DossierPdfClassificationException(classificationDecision);
+  }
+  projection.summaries.add(bundle.privacySummary);
+  final sourceBlocks = markdownToPdfBlocks(
+    projectedDocumentBodyForRendering(bundle),
+  );
+  // Projection can remove image paths while preserving projected alt text.
+  // Raw paths are used only for locating safe image bytes.
+  final imageRefs = _imageSources(markdownToPdfBlocks(body));
+  final rebased = await _embedLocalImages(
+    sourceBlocks,
+    path,
+    entry.id,
+    imageRefs,
+    images,
+  );
+  blocks.add(const PdfPageBreakBlock());
+  if (includeInterleaves) {
+    blocks.addAll(await _interleaf(dossier, entry, index, title, projection));
+  }
+  // A presentation source is deliberately laid out as document text.
+  blocks.add(PdfHeadingBlock(1, [PdfSpan(title)], title));
+  blocks.addAll(rebased);
+}
+
+Future<List<PdfBlock>> _interleaf(
+  DocumentDossier dossier,
+  DossierEntry entry,
+  int index,
+  String title,
+  _DossierPdfProjection projection,
+) async => [
+  PdfHeadingBlock(1, [PdfSpan(title)], title),
+  PdfParagraphBlock([
+    PdfSpan('DOCUMENT ${dossier.numberFor(index)}', bold: true),
+  ]),
+  if (entry.description.trim().isNotEmpty)
+    PdfParagraphBlock([PdfSpan(await projection.display(entry.description))]),
+  if (entry.documentDate case final String date when date.trim().isNotEmpty)
+    PdfParagraphBlock([
+      const PdfSpan('Datum  ', bold: true),
+      PdfSpan(await projection.display(date)),
+    ]),
+  if (entry.author.trim().isNotEmpty)
+    PdfParagraphBlock([
+      const PdfSpan('Opsteller  ', bold: true),
+      PdfSpan(await projection.display(entry.author)),
+    ]),
+  PdfParagraphBlock([
+    const PdfSpan('SHA-256  ', bold: true),
+    PdfSpan(entry.sha256, code: true),
+  ]),
+  const PdfPageBreakBlock(),
+];
 
 String _safe(String value) => PrivacyProjection.redactText(value).text;
 
