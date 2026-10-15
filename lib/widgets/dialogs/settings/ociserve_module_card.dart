@@ -5,6 +5,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../models/ociserve_settings.dart';
 import '../../../services/secret_store.dart';
 import '../../../state/ociserve_provider.dart';
+import '../ociserve_invitation_dialog.dart';
 import '../../../theme/app_theme.dart';
 
 /// Configuration and sign-in body for the optional eLearning integration.
@@ -166,6 +167,12 @@ class _OciServeIntegrationBodyState
               TextButton(
                 onPressed: busy
                     ? null
+                    : () => OciServeInvitationDialog.show(context),
+                child: Text(l10n.d('Uitnodiging accepteren')),
+              ),
+              TextButton(
+                onPressed: busy
+                    ? null
                     : () => ref.read(ociServeProvider.notifier).logout(),
                 child: Text(l10n.d('Uitloggen')),
               ),
@@ -181,7 +188,9 @@ class _OciServeIntegrationBodyState
               style: TextStyle(fontSize: 11.5, color: colors.onSurfaceVariant),
             ),
         ] else
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: [
               FilledButton.icon(
                 onPressed: busy ? null : () => _login(settings),
@@ -192,6 +201,12 @@ class _OciServeIntegrationBodyState
                       )
                     : const Icon(Icons.login, size: 18),
                 label: Text(l10n.d('Inloggen')),
+              ),
+              TextButton(
+                onPressed: busy
+                    ? null
+                    : () => OciServeInvitationDialog.show(context),
+                child: Text(l10n.d('Uitnodiging gebruiken')),
               ),
             ],
           ),

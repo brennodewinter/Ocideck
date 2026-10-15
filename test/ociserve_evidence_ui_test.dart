@@ -846,7 +846,8 @@ class _EvidenceTestNotifier extends OciServeNotifier {
   Future<void> flushPendingReports() async {}
 
   @override
-  Future<bool> login() async => true;
+  Future<bool> login({bool forceLogin = false, String? loginHint}) async =>
+      true;
 }
 
 // ---------------------------------------------------------------------------

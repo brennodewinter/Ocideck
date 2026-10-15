@@ -38,6 +38,7 @@ part 'ociserve_provider_skills.dart';
 part 'ociserve_provider_portfolio.dart';
 part 'ociserve_provider_certificates.dart';
 part 'ociserve_provider_calendar.dart';
+part 'ociserve_provider_invitations.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
 /// consumers receive only the minimal account/membership read model.
@@ -210,8 +211,18 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     return state.authenticated;
   }
 
-  Future<bool> login() async {
-    if (state.settings.rememberLogin && await _restoreCachedLogin()) {
+  /// [loginHint] + [forceLogin] komen uit de uitnodigingsreis (#2425): de
+  /// aanmelding stuurt `login_hint` en `prompt=login` zodat een eventueel
+  /// nog openstaande sessie van de uitnodiger niet stilletjes wordt
+  /// hergebruikt. Een herstelde sessie slaat dat bewust over — dat zou juist
+  /// de inlog van de uitnodiger terugpakken.
+  Future<bool> login({String? loginHint, bool forceLogin = false}) async {
+    // Bij een uitnodiging slaan we de herstelde sessie over: die zou juist
+    // een bestaande inlog (bijv. van de uitnodiger) kunnen terugpakken.
+    if (loginHint == null &&
+        !forceLogin &&
+        state.settings.rememberLogin &&
+        await _restoreCachedLogin()) {
       return true;
     }
     final generation = ++_generation;
@@ -240,9 +251,12 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
       _requireAcceptedIdentityProvider(resolvedSettings, installation);
       final configuration = await gateway.discoverOidc(installation);
       if (generation != _generation) return false;
-      final tokens = await _authFactory(
-        resolvedSettings,
-      ).login(installation, configuration);
+      final tokens = await _authFactory(resolvedSettings).login(
+        installation,
+        configuration,
+        loginHint: loginHint,
+        forceLogin: forceLogin,
+      );
       final account = await gateway.me(tokens.accessToken);
       if (account.activeMemberships.isEmpty) {
         throw const OciServeException('no_active_membership');
@@ -1012,4 +1026,5 @@ class OciServeNotifier extends OciServeNotifierBase
         _OciServeSkillMethods,
         _OciServePortfolioMethods,
         _OciServeCertificateMethods,
-        _OciServeCalendarMethods {}
+        _OciServeCalendarMethods,
+        _OciServeInvitationMethods {}

@@ -255,7 +255,7 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   Future<void> flushPendingReports() async {}
 
   @override
-  Future<bool> login() async {
+  Future<bool> login({bool forceLogin = false, String? loginHint}) async {
     loginCalled = true;
     if (!loginSucceeds) {
       state = const OciServeState(

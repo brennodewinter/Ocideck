@@ -431,6 +431,28 @@ const gatewayRoutes = <GatewayRoute>[
     path: '/api/v1/organizations/{}/me/calendar-subscription',
     // 204 — no body.
   ),
+  // — Uitnodigingen (#2425): preview en registratie zijn publiek
+  // (security: []), acceptatie loopt op de bestaande sessie —
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/invitation-registration-preview',
+    security: 'none',
+    responseSchema: 'InvitationRegistrationPreview',
+    responseFields: ['invited_email'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/invitation-registrations',
+    security: 'none',
+    responseSchema: 'InvitationAcceptResult',
+    responseFields: ['organization_id', 'role'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/invitation-acceptances',
+    responseSchema: 'InvitationAcceptResult',
+    responseFields: ['organization_id', 'role'],
+  ),
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/organizations/{}/badges',

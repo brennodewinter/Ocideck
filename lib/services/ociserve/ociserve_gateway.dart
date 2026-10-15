@@ -31,6 +31,7 @@ part 'ociserve_gateway_skills.dart';
 part 'ociserve_gateway_portfolio.dart';
 part 'ociserve_gateway_certificates.dart';
 part 'ociserve_gateway_calendar.dart';
+part 'ociserve_gateway_invitations.dart';
 
 // Bibliotheekbreed in plaats van op OciServeGatewayBase: statische leden van
 // een klasse zijn voor `part`-mixins niet ongekwalificeerd bereikbaar, en
@@ -56,7 +57,8 @@ abstract class OciServeApi extends OciServePlanningApi
         OciServeSkillsApi,
         OciServePortfolioApi,
         OciServeCertificatesApi,
-        OciServeCalendarApi {
+        OciServeCalendarApi,
+        OciServeInvitationsApi {
   Future<OciServeInstallation> installation();
   Future<OciServeOidcConfiguration> discoverOidc(
     OciServeInstallation installation,
@@ -895,6 +897,7 @@ class OciServeGateway extends OciServeGatewayBase
         _OciServeSkills,
         _OciServePortfolio,
         _OciServeCertificates,
-        _OciServeCalendar {
+        _OciServeCalendar,
+        _OciServeInvitations {
   OciServeGateway({required super.settings, super.transport});
 }

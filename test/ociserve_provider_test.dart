@@ -64,6 +64,8 @@ class _FakeAuth implements OciServeAuthenticator {
   Future<OciServeTokens> login(
     OciServeInstallation installation,
     OciServeOidcConfiguration configuration, {
+    bool forceLogin = false,
+    String? loginHint,
     OciServeStepUpRequired? stepUp,
   }) async {
     if (stepUp != null) {
