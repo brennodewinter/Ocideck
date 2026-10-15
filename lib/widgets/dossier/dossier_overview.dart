@@ -679,6 +679,7 @@ class DossierOverview extends StatelessWidget {
           ],
           TextButton.icon(
             onPressed: busy ? null : () => _editEntry(context, entry),
+            style: TextButton.styleFrom(foregroundColor: palette.panelText),
             icon: const Icon(Icons.edit_outlined, size: 16),
             label: Text(l10n.d('Documentgegevens bewerken')),
           ),

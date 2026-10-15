@@ -162,6 +162,10 @@ void main() {
       expectContrast(find.text('bronstuk-0.md'), palette.panel);
       expectContrast(find.text('Nog niet gecontroleerd'), palette.panel);
       expectContrast(find.text('10'), AppTheme.amberVivid);
+      final editButton = tester.widget<TextButton>(
+        find.widgetWithText(TextButton, 'Documentgegevens bewerken').first,
+      );
+      expect(editButton.style!.foregroundColor!.resolve({}), palette.panelText);
     });
   }
 
