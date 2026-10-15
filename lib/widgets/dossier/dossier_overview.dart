@@ -572,7 +572,7 @@ class DossierOverview extends StatelessWidget {
               child: Text(
                 '${dossier.numberFor(index)}'.padLeft(2, '0'),
                 style: TextStyle(
-                  color: AppTheme.navy,
+                  color: Colors.black,
                   fontWeight: FontWeight.w800,
                   fontSize: compact ? 15 : 18,
                 ),
