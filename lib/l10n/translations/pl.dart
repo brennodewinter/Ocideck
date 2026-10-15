@@ -1618,6 +1618,22 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Kosten van aanwezigen': 'Koszt uczestników',
+  'Uit': 'Wył.',
+  'Gewoon — alleen in het eindoverzicht':
+      'Zwykły — tylko w podsumowaniu końcowym',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Jawny — bieżąca suma i podsumowanie końcowe',
+  'Uurtarief': 'Stawka godzinowa',
+  'Eén tarief voor de hele groep': 'Jedna stawka dla całej grupy',
+  'Per aanwezige, bij de start invullen': 'Za uczestnika, wpisywane na starcie',
+  'Groepsuurtarief': 'Grupowa stawka godzinowa',
+  'Kosten = verstreken tijd × tarief.': 'Koszt = upływ czasu × stawka.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wypełniane na starcie, nigdy niezapisywane.',
+  'Valuta': 'Waluta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Szacunek czasu poświęcanego przez uczestników — wskazanie, nie księgowy koszt własny.',
   'Diaformaat': 'Format slajdu',
   'Scherm (16:9)': 'Ekran (16:9)',
   'Papierformaat': 'Format papieru',

@@ -651,6 +651,23 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kosten van aanwezigen': 'Kosto di e presentenan',
+  'Uit': 'Pafora',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — solamente den e resumen final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explísito — suma korentí i resumen final',
+  'Uurtarief': 'Tarifa pa ora',
+  'Eén tarief voor de hele groep': 'Un tarifa pa henter e grupo',
+  'Per aanwezige, bij de start invullen':
+      'Pa persona presente, yena na e start',
+  'Groepsuurtarief': 'Tarifa pa ora di e grupo',
+  'Kosten = verstreken tijd × tarief.': 'Kosto = tempu pasa × tarifa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Ta wordu yena na e start i no ta wordu warda.',
+  'Valuta': 'Moneda',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Un estimashon di e tempu ku e presentenan ta pèrdè — un indikashon, no un kosto bukhoudkundig.',
   'Diaformaat': 'Formato di slide',
   'Scherm (16:9)': 'Pantaya (16:9)',
   'Papierformaat': 'Formato di papel',

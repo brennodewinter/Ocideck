@@ -34,6 +34,7 @@ extension DeckNotifierInfo on DeckNotifier {
     bool clearSlideSize = false,
     bool? showRehearsalSummary,
     bool? playOnly,
+    PresentationCostConfig? presentationCosts,
   }) {
     final deck = currentState.deck;
     if (deck == null) return;
@@ -57,6 +58,7 @@ extension DeckNotifierInfo on DeckNotifier {
         clearSlideSize: clearSlideSize,
         showRehearsalSummary: showRehearsalSummary,
         playOnly: playOnly,
+        presentationCosts: presentationCosts,
       ),
       coalesceKey: 'info',
     );

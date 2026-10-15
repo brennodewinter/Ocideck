@@ -1624,6 +1624,22 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kosten van aanwezigen': 'Spiża tal-preżenti',
+  'Uit': 'Mitfi',
+  'Gewoon — alleen in het eindoverzicht': 'Normali — biss fir-riepilog finali',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Espliċitu — ammont li jiġi u riepilog finali',
+  'Uurtarief': 'Rata fis-siegħa',
+  'Eén tarief voor de hele groep': 'Rata waħda għall-grupp kollu',
+  'Per aanwezige, bij de start invullen':
+      'Għal kull preżenti, jimtela fil-bidu',
+  'Groepsuurtarief': 'Rata fis-siegħa tal-grupp',
+  'Kosten = verstreken tijd × tarief.': 'Spiża = ħin li għadda × rata.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Jimtela fil-bidu u ma jinħażenx.',
+  'Valuta': 'Munita',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Stima tal-ħin li jintefqu l-preżenti — indikazzjoni, mhux prezz tal-ispiża ta\' kontabilità.',
   'Diaformaat': 'Format tas-slide',
   'Scherm (16:9)': 'Skrin (16:9)',
   'Papierformaat': 'Format tal-karta',

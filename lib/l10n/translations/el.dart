@@ -1631,6 +1631,22 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kosten van aanwezigen': 'Κόστος παρόντων',
+  'Uit': 'Κλειστό',
+  'Gewoon — alleen in het eindoverzicht': 'Κανονικό — μόνο στην τελική σύνοψη',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Ρητό — τρέχον ποσό και τελική σύνοψη',
+  'Uurtarief': 'Ωρομίσθιο',
+  'Eén tarief voor de hele groep': 'Μία τιμή για όλη την ομάδα',
+  'Per aanwezige, bij de start invullen':
+      'Ανά παρόντα, συμπληρώνεται στην έναρξη',
+  'Groepsuurtarief': 'Ομαδικό ωρομίσθιο',
+  'Kosten = verstreken tijd × tarief.': 'Κόστος = παρελθών χρόνος × τιμή.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Συμπληρώνεται στην έναρξη και δεν αποθηκεύεται.',
+  'Valuta': 'Νόμισμα',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Εκτίμηση του χρόνου που δαπανούν οι παρόντες — ένδειξη, όχι λογιστικό κόστος.',
   'Diaformaat': 'Μορφή διαφάνειας',
   'Scherm (16:9)': 'Οθόνη (16:9)',
   'Papierformaat': 'Μέγεθος χαρτιού',

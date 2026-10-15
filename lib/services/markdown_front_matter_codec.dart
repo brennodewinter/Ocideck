@@ -3,6 +3,7 @@ import 'dart:math' show max;
 import '../models/deck.dart';
 import '../models/document_signature.dart';
 import '../models/privacy_disposition.dart';
+import '../models/presentation_cost.dart';
 import '../models/presentation_timing.dart';
 import 'callout_codec.dart';
 import 'document_page_setup.dart';
@@ -109,6 +110,7 @@ List<String> ownedFrontMatterLines(
       out.add('papersize: ${slideSize.sizeName.toLowerCase()}');
     }
   }
+  _addCostKeys(out, deck.presentationCosts);
   if (deck.showRehearsalSummary) {
     out.add('ocideck_show_rehearsal_summary: true');
   }
@@ -264,4 +266,23 @@ String _unescape(String value) {
     }
   }
   return out.toString();
+}
+
+/// De kostenmodus (#2435): vier platte sleutels, en alleen wat de keuze
+/// nodig heeft — een uit-modus schrijft niets. Het groepstarief gaat als
+/// gewone decimale (grootste eenheid), want een bestand dat "75.00" laat
+/// zien is door iedereen te lezen; kleinste-eenheid-rekenwerk hoort bij de
+/// sessie, niet bij de serialisatie.
+void _addCostKeys(List<String> out, PresentationCostConfig costs) {
+  if (!costs.isEnabled) return;
+  out.add('ocideck_cost_mode: ${costs.mode.name}');
+  out.add('ocideck_cost_input: ${costs.rateInput.name}');
+  out.add('ocideck_cost_currency: ${costs.currencyCode}');
+  if (costs.rateInput == CostRateInput.group &&
+      costs.groupHourlyRateMinor > 0) {
+    out.add(
+      'ocideck_cost_rate: '
+      '${formatCostRateMajor(costs.groupHourlyRateMinor, costs.currency)}',
+    );
+  }
 }

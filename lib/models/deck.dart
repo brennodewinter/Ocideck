@@ -1,5 +1,6 @@
 import '../services/front_matter_merge.dart';
 import 'page_size.dart';
+import 'presentation_cost.dart';
 import 'presentation_timing.dart';
 import 'privacy_disposition.dart';
 import 'annotation.dart';
@@ -272,6 +273,12 @@ class Deck {
   /// documents al gebruikt, dus leesbaar buiten OciDeck.
   final PageSizeSpec? slideSize;
 
+  /// De kostenmodus van deze presentatie (#2435): modus, invoerroute,
+  /// groepstarief en valuta. De afwezige staat is uit. Round-trips als
+  /// `ocideck_cost_*`-sleutels; individuele tarieven en koersen horen bij de
+  /// sessie en staan hier nooit.
+  final PresentationCostConfig presentationCosts;
+
   /// Of het tijden-overzicht (oefenrun-samenvatting) ná deze presentatie
   /// verschijnt. De tijd wordt ALTIJD gemeten; dit bepaalt enkel of het
   /// eindscherm getoond wordt. Per presentatie ingesteld (presentatie-info).
@@ -456,6 +463,7 @@ class Deck {
     this.presentationTargetSeconds = 0,
     this.presentationTiming = PresentationTimingConfig.disabled,
     this.slideSize,
+    this.presentationCosts = PresentationCostConfig.off,
     this.showRehearsalSummary = false,
     this.playOnly = false,
     this.improvementFramework = '',
@@ -504,6 +512,7 @@ class Deck {
     PresentationTimingConfig? presentationTiming,
     PageSizeSpec? slideSize,
     bool clearSlideSize = false,
+    PresentationCostConfig? presentationCosts,
     bool? showRehearsalSummary,
     bool? playOnly,
     String? improvementFramework,
@@ -555,6 +564,7 @@ class Deck {
           presentationTargetSeconds ?? this.presentationTargetSeconds,
       presentationTiming: presentationTiming ?? this.presentationTiming,
       slideSize: clearSlideSize ? null : (slideSize ?? this.slideSize),
+      presentationCosts: presentationCosts ?? this.presentationCosts,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       playOnly: playOnly ?? this.playOnly,
       improvementFramework: improvementFramework ?? this.improvementFramework,

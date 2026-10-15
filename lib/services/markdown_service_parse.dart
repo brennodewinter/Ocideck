@@ -281,6 +281,7 @@ extension _MarkdownParse on MarkdownService {
       presentationTiming: fm.presentationTiming,
       slideSize: fm.slideSize,
       showRehearsalSummary: fm.showRehearsalSummary,
+      presentationCosts: presentationCostFromKeys(fm.costKeys),
       playOnly: fm.playOnly,
       improvementFramework: fm.improvementFramework,
       improvementY01Metric: ImprovementY01Metric(

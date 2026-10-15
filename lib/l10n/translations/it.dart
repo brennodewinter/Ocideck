@@ -649,6 +649,22 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Kosten van aanwezigen': 'Costo dei partecipanti',
+  'Uit': 'Off',
+  'Gewoon — alleen in het eindoverzicht': 'Normale — solo nel riepilogo finale',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Esplicito — importo corrente e riepilogo finale',
+  'Uurtarief': 'Tariffa oraria',
+  'Eén tarief voor de hele groep': 'Una tariffa per tutto il gruppo',
+  'Per aanwezige, bij de start invullen':
+      'Per partecipante, da compilare all\'avvio',
+  'Groepsuurtarief': 'Tariffa oraria di gruppo',
+  'Kosten = verstreken tijd × tarief.': 'Costo = tempo trascorso × tariffa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Viene compilato all\'avvio e non salvato.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Una stima del tempo impiegato dai partecipanti — un\'indicazione, non un costo contabile.',
   'Diaformaat': 'Formato diapositiva',
   'Scherm (16:9)': 'Schermo (16:9)',
   'Papierformaat': 'Formato carta',

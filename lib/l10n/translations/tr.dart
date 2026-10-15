@@ -2514,6 +2514,22 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Kosten van aanwezigen': 'Katılımcı maliyeti',
+  'Uit': 'Kapalı',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — yalnızca kapanış özetinde',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Açık — akan tutar ve kapanış özeti',
+  'Uurtarief': 'Saatlik ücret',
+  'Eén tarief voor de hele groep': 'Tüm grup için tek ücret',
+  'Per aanwezige, bij de start invullen':
+      'Katılımcı başına, başlangıçta girilir',
+  'Groepsuurtarief': 'Grup saat ücreti',
+  'Kosten = verstreken tijd × tarief.': 'Maliyet = geçen süre × ücret.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Başlangıçta girilir ve kaydedilmez.',
+  'Valuta': 'Para birimi',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Katılımcıların harcadığı zamanın tahmini — bir gösterge, muhasebe maliyeti değil.',
   'Diaformaat': 'Slayt biçimi',
   'Scherm (16:9)': 'Ekran (16:9)',
   'Papierformaat': 'Kağıt boyutu',

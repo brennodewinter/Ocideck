@@ -1634,6 +1634,22 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Kosten van aanwezigen': 'Custo dos participantes',
+  'Uit': 'Desativado',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — apenas no resumo final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explícito — valor corrente e resumo final',
+  'Uurtarief': 'Taxa horária',
+  'Eén tarief voor de hele groep': 'Uma taxa para todo o grupo',
+  'Per aanwezige, bij de start invullen':
+      'Por participante, a preencher no início',
+  'Groepsuurtarief': 'Taxa horária do grupo',
+  'Kosten = verstreken tijd × tarief.': 'Custo = tempo decorrido × taxa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Preenchido no início e nunca guardado.',
+  'Valuta': 'Moeda',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Uma estimativa do tempo que os participantes gastam — uma indicação, não um preço de custo contabilístico.',
   'Diaformaat': 'Formato do diapositivo',
   'Scherm (16:9)': 'Ecrã (16:9)',
   'Papierformaat': 'Formato de papel',

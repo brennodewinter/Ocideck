@@ -1604,6 +1604,23 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kosten van aanwezigen': 'Klātesošo izmaksas',
+  'Uit': 'Izslēgts',
+  'Gewoon — alleen in het eindoverzicht':
+      'Parasts — tikai noslēguma kopsavilkumā',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Skaidrs — tekošā summa un noslēguma kopsavilkums',
+  'Uurtarief': 'Stundas likme',
+  'Eén tarief voor de hele groep': 'Viena likme visai grupai',
+  'Per aanwezige, bij de start invullen':
+      'Katram klātesošajam, aizpilda sākumā',
+  'Groepsuurtarief': 'Grupas stundas likme',
+  'Kosten = verstreken tijd × tarief.': 'Izmaksas = pagājušais laiks × likme.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Aizpildām sākumā, netiek saglabāts.',
+  'Valuta': 'Valūta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Novērtējums laikam, ko tērē klātesošie — indikācija, nevis grāmatvedības pašizmaksas.',
   'Diaformaat': 'Slaida formāts',
   'Scherm (16:9)': 'Ekrāns (16:9)',
   'Papierformaat': 'Papīra formāts',

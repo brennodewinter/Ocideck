@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/page_size.dart';
+import 'package:ocideck/models/presentation_cost.dart';
 import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/improvement_y01.dart';
@@ -405,6 +406,16 @@ style: |
           // ongeschreven in de set.
           deck.copyWith(slideSize: PageSizeSpec.a4),
           deck.copyWith(slideSize: PageSizeSpec.a4Landscape),
+          // #2435: de kostenmodus schrijft vier sleutels, waarvan
+          // ocideck_cost_rate alleen bij een groepstarief.
+          deck.copyWith(
+            presentationCosts: const PresentationCostConfig(
+              mode: PresentationCostMode.explicit,
+              rateInput: CostRateInput.group,
+              groupHourlyRateMinor: 7500,
+              currencyCode: 'USD',
+            ),
+          ),
         ]) {
           geschreven.addAll(
             _frontMatter(

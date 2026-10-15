@@ -1609,6 +1609,21 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kosten van aanwezigen': 'Chöste vo de Teilnöhmer',
+  'Uit': 'Us',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — nur ide Abschlussübersicht',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explizit — laufende Betrag ond Abschlussübersicht',
+  'Uurtarief': 'Stundesatz',
+  'Eén tarief voor de hele groep': 'Ei Satz für di ganz Grupp',
+  'Per aanwezige, bij de start invullen': 'Pro Teilnöhmer, bim Start uusfülle',
+  'Groepsuurtarief': 'Gruppestundesatz',
+  'Kosten = verstreken tijd × tarief.': 'Chöste = verstricheni Ziit × Satz.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wird bim Start uusgfüllt ond nöd gspeicheret.',
+  'Valuta': 'Währig',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'E Schätzig vo de Ziit, wo Teilnöhmer verlöre — e Indikation, kän buchhalterische Selbstchöstepriis.',
   'Diaformaat': 'Folieformat',
   'Scherm (16:9)': 'Bildschirm (16:9)',
   'Papierformaat': 'Papierformat',

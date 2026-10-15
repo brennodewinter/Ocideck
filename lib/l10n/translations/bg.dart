@@ -1626,6 +1626,22 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kosten van aanwezigen': 'Разходи за присъстващите',
+  'Uit': 'Изкл.',
+  'Gewoon — alleen in het eindoverzicht': 'Обикновено — само в крайния отчет',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Изрично — текуща сума и краен отчет',
+  'Uurtarief': 'Часова ставка',
+  'Eén tarief voor de hele groep': 'Една ставка за цялата група',
+  'Per aanwezige, bij de start invullen':
+      'На присъстващ, въвежда се в началото',
+  'Groepsuurtarief': 'Групова часова ставка',
+  'Kosten = verstreken tijd × tarief.': 'Разход = изминало време × ставка.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Въвежда се в началото и не се записва.',
+  'Valuta': 'Валута',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Оценка на времето, което присъстващите отделят — индикация, а не счетоводна себестойност.',
   'Diaformaat': 'Формат на слайда',
   'Scherm (16:9)': 'Екран (16:9)',
   'Papierformaat': 'Формат на хартията',

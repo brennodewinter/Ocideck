@@ -385,6 +385,11 @@ extension _PresenterNavigation on _FullscreenPresenterState {
   }
 
   void _resetTimer() {
-    _rebuild(() => _rehearsal.reset());
+    _rebuild(() {
+      _rehearsal.reset();
+      // De kostenteller (#2435) volgt dezelfde grens: een reset van de
+      // oefenklok is een nieuwe sessie, dus begint ook het bedrag bij nul.
+      _costSession?.reset();
+    });
   }
 }

@@ -58,7 +58,9 @@ const Map<String, int> methodLengthBaseline = {
   // plus de slideSize-resolutie erna. De eigenlijke logica staat in
   // document_page_setup.dart (slideSizeFromKeys); wat rest is veld + case.
   'lib/services/markdown_parse/markdown_service_parse_front_matter.dart::_MarkdownParseFrontMatter._parseFrontMatter':
-      154,
+      159, // +5 (#2435): vier ocideck_cost_*-case's vouwen naar één patroon —
+  // wat rest is veld + case + de assembly na de loop, zie costKeys.
+
   // +1 (#2433): slideAspect als memo-sleutel op memoizedFitScale — de
   // meting moet per deckverhouding gescheiden blijven. De methode stond al
   // op de limiet.

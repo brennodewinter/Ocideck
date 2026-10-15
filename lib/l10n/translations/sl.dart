@@ -1606,6 +1606,22 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Kosten van aanwezigen': 'Strošek udeležencev',
+  'Uit': 'Izklopljeno',
+  'Gewoon — alleen in het eindoverzicht':
+      'Običajno — samo v zaključnem povzetku',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Izrecno — tekoči znesek in zaključni povzetek',
+  'Uurtarief': 'Urna postavka',
+  'Eén tarief voor de hele groep': 'Ena postavka za celotno skupino',
+  'Per aanwezige, bij de start invullen': 'Na udeleženca, vnese se ob začetku',
+  'Groepsuurtarief': 'Skupinska urna postavka',
+  'Kosten = verstreken tijd × tarief.': 'Strošek = pretečen čas × postavka.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Vnese se ob začetku in se ne shrani.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Ocena časa, ki ga udeleženci porabijo — pokazatelj, ne računovodska lastna cena.',
   'Diaformaat': 'Format diapozitiva',
   'Scherm (16:9)': 'Zaslon (16:9)',
   'Papierformaat': 'Format papirja',

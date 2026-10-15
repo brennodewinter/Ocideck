@@ -1606,6 +1606,22 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Kosten van aanwezigen': 'Osallistujien kustannukset',
+  'Uit': 'Pois',
+  'Gewoon — alleen in het eindoverzicht': 'Normaali — vain loppuyhteenvedossa',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisiittinen — juokseva summa ja loppuyhteenveto',
+  'Uurtarief': 'Tuntihinta',
+  'Eén tarief voor de hele groep': 'Yksi hinta koko ryhmälle',
+  'Per aanwezige, bij de start invullen':
+      'Osallistujaa kohden, täytetään alussa',
+  'Groepsuurtarief': 'Ryhmän tuntihinta',
+  'Kosten = verstreken tijd × tarief.': 'Kustannus = kulunut aika × hinta.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Täytetään alussa eikä tallenneta.',
+  'Valuta': 'Valuutta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Arvio osallistujien käyttämästä ajasta — suuntaa antava, ei kirjanpidollinen omakustannus.',
   'Diaformaat': 'Dian formaatti',
   'Scherm (16:9)': 'Näyttö (16:9)',
   'Papierformaat': 'Paperikoko',

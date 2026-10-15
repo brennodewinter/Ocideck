@@ -1621,6 +1621,21 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Kosten van aanwezigen': 'Вартість присутніх',
+  'Uit': 'Вимк.',
+  'Gewoon — alleen in het eindoverzicht': 'Звичайний — лише в підсумку',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Явний — поточна сума й підсумок',
+  'Uurtarief': 'Погодинна ставка',
+  'Eén tarief voor de hele groep': 'Одна ставка для всієї групи',
+  'Per aanwezige, bij de start invullen': 'За присутнього, вводиться на старті',
+  'Groepsuurtarief': 'Групова погодинна ставка',
+  'Kosten = verstreken tijd × tarief.': 'Вартість = минулий час × ставка.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Вводиться на старті й не зберігається.',
+  'Valuta': 'Валюта',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Оцінка часу, який витрачають присутні, — орієнтир, а не бухгалтерська собівартість.',
   'Diaformaat': 'Формат слайда',
   'Scherm (16:9)': 'Екран (16:9)',
   'Papierformaat': 'Формат паперу',

@@ -1599,6 +1599,21 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kosten van aanwezigen': 'Osalejate kulu',
+  'Uit': 'Väljas',
+  'Gewoon — alleen in het eindoverzicht': 'Tavaline — ainult lõpukokkuvõttes',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Sõnaselge — jooksev summa ja lõpukokkuvõte',
+  'Uurtarief': 'Tunnitasu',
+  'Eén tarief voor de hele groep': 'Üks hind kogu rühmale',
+  'Per aanwezige, bij de start invullen': 'Osaleja kohta, sisestatakse alguses',
+  'Groepsuurtarief': 'Rühma tunnitasu',
+  'Kosten = verstreken tijd × tarief.': 'Kulu = möödunud aeg × hind.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Sisestatakse alguses ega salvestata.',
+  'Valuta': 'Valuuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Hinnang osalejate kulutatud ajale — suundumus, mitte raamatupidamislik omahind.',
   'Diaformaat': 'Slaidi formaat',
   'Scherm (16:9)': 'Ekraan (16:9)',
   'Papierformaat': 'Paberiformaat',

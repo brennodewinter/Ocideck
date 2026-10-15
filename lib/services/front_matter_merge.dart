@@ -100,6 +100,13 @@ const Set<String> kOwnedFrontMatterKeys = {
   // en die blijft staan (zie [isSlideGeometryValue] bij de merge).
   'papersize',
   'geometry',
+  // De kostenmodus (#2435): vier platte sleutels, geschreven wanneer de modus
+  // aan staat. Individuele tarieven en koersen zijn sessiegegevens en komen
+  // hier bewust niet bij — ze horen niet in het gedeelde bestand.
+  'ocideck_cost_mode',
+  'ocideck_cost_input',
+  'ocideck_cost_currency',
+  'ocideck_cost_rate',
   // Image callouts (IMAGE_CALLOUTS.md §2). Owned sinds format v2: de codec
   // herschrijft het blok met de nested merge van §2.5 — alleen bewerkte entries
   // gaan door, onbekende/commentaar/malformed regels blijven byte-voor-byte.

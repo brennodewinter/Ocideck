@@ -1612,6 +1612,22 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Kosten van aanwezigen': 'Náklady účastníkov',
+  'Uit': 'Vypnuté',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normálne — len v záverečnom prehľade',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicitné — bežiaca suma a záverečný prehľad',
+  'Uurtarief': 'Hodinová sadzba',
+  'Eén tarief voor de hele groep': 'Jedna sadzba pre celú skupinu',
+  'Per aanwezige, bij de start invullen': 'Za účastníka, vyplní sa na začiatku',
+  'Groepsuurtarief': 'Skupinová hodinová sadzba',
+  'Kosten = verstreken tijd × tarief.': 'Náklady = uplynutý čas × sadzba.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Vyplní sa na začiatku a neukladá sa.',
+  'Valuta': 'Mena',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Odhad času, ktorý účastníci venujú — orientačný údaj, nie účtovná vlastná cena.',
   'Diaformaat': 'Formát snímky',
   'Scherm (16:9)': 'Obrazovka (16:9)',
   'Papierformaat': 'Formát papiera',

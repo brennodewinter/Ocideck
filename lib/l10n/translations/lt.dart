@@ -1613,6 +1613,22 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kosten van aanwezigen': 'Dalyvių kaina',
+  'Uit': 'Išjungta',
+  'Gewoon — alleen in het eindoverzicht':
+      'Įprasta — tik baigiamojoje apžvalgoje',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Aišku — einamoji suma ir baigiamoji apžvalga',
+  'Uurtarief': 'Valandinis įkainis',
+  'Eén tarief voor de hele groep': 'Vienas įkainis visai grupei',
+  'Per aanwezige, bij de start invullen': 'Už dalyvį, suvedama pradžioje',
+  'Groepsuurtarief': 'Grupės valandinis įkainis',
+  'Kosten = verstreken tijd × tarief.': 'Kaina = praėjęs laikas × įkainis.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Suvedama pradžioje ir neišsaugoma.',
+  'Valuta': 'Valiuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Dalyvių sugaišto laiko įvertis — orientyras, o ne buhalterinė savikaina.',
   'Diaformaat': 'Skaidrės formatas',
   'Scherm (16:9)': 'Ekranas (16:9)',
   'Papierformaat': 'Popieriaus formatas',

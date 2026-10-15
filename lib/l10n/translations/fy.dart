@@ -652,6 +652,21 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kosten van aanwezigen': 'Kosten fan oanwêzigen',
+  'Uit': 'Út',
+  'Gewoon — alleen in het eindoverzicht': 'Gewoan — allinne yn de einôfsluting',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisyt — rinnend bedrach én einôfsluting',
+  'Uurtarief': 'Oertarief',
+  'Eén tarief voor de hele groep': 'Ien tarief foar de hiele groep',
+  'Per aanwezige, bij de start invullen': 'Per oanwêzige, by de start ynfolje',
+  'Groepsuurtarief': 'Groepsoertarief',
+  'Kosten = verstreken tijd × tarief.': 'Kosten = ferrune tiid × tarief.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wurdt by de start ynfold en net bewarre.',
+  'Valuta': 'Faluta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'In skatting fan de tiid dy\'t oanwêzigen kwyt binne — in yndikaasje, gjin boekhâldkundige kostpriis.',
   'Diaformaat': 'Diaformaat',
   'Scherm (16:9)': 'Skerm (16:9)',
   'Papierformaat': 'Papierformaat',

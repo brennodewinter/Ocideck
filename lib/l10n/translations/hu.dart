@@ -1608,6 +1608,22 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kosten van aanwezigen': 'Résztvevők költsége',
+  'Uit': 'Ki',
+  'Gewoon — alleen in het eindoverzicht': 'Normál — csak a záró összegzésben',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — folyamatos összeg és záró összegzés',
+  'Uurtarief': 'Óradíj',
+  'Eén tarief voor de hele groep': 'Egy díj az egész csoportra',
+  'Per aanwezige, bij de start invullen':
+      'Résztvevőnként, a kezdéskor töltendő',
+  'Groepsuurtarief': 'Csoportos óradíj',
+  'Kosten = verstreken tijd × tarief.': 'Költség = eltelt idő × díj.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'A kezdéskor töltendő, nem kerül mentésre.',
+  'Valuta': 'Pénznem',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'A résztvevők által eltöltött idő becslése — irányadó, nem könyvelési önköltség.',
   'Diaformaat': 'Diaformátum',
   'Scherm (16:9)': 'Képernyő (16:9)',
   'Papierformaat': 'Papírméret',

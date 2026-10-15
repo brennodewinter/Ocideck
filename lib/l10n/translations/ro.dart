@@ -1622,6 +1622,22 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Kosten van aanwezigen': 'Costul participanților',
+  'Uit': 'Dezactivat',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — doar în rezumatul final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — sumă curentă și rezumat final',
+  'Uurtarief': 'Tarif orar',
+  'Eén tarief voor de hele groep': 'Un singur tarif pentru tot grupul',
+  'Per aanwezige, bij de start invullen':
+      'Pe participant, completat la început',
+  'Groepsuurtarief': 'Tarif orar de grup',
+  'Kosten = verstreken tijd × tarief.': 'Cost = timp scurs × tarif.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Completat la început și nu este salvat.',
+  'Valuta': 'Monedă',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'O estimare a timpului pe care îl petrec participanții — o indicație, nu un preț de cost contabil.',
   'Diaformaat': 'Format diapozitiv',
   'Scherm (16:9)': 'Ecran (16:9)',
   'Papierformaat': 'Format hârtie',

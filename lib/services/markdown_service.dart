@@ -9,6 +9,7 @@ import '../models/marp_style.dart';
 import '../models/menu.dart';
 import '../models/page_size.dart';
 import '../models/privacy_disposition.dart';
+import '../models/presentation_cost.dart';
 import '../models/presentation_timing.dart';
 import '../models/quality_disposition.dart';
 import '../models/display_window_spec.dart';

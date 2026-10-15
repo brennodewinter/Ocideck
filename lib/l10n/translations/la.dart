@@ -1621,6 +1621,21 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kosten van aanwezigen': 'Sumptus praesentium',
+  'Uit': 'Exclusum',
+  'Gewoon — alleen in het eindoverzicht': 'Sollemne — tantum in summa finali',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicitum — summa currens et recapitulatio finalis',
+  'Uurtarief': 'Merces horaria',
+  'Eén tarief voor de hele groep': 'Una merces pro universo coetu',
+  'Per aanwezige, bij de start invullen': 'Per praesentem, initio implendum',
+  'Groepsuurtarief': 'Merces horaria coetus',
+  'Kosten = verstreken tijd × tarief.': 'Sumptus = tempus elapsum × merces.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Initio implendum, numquam servandum.',
+  'Valuta': 'Moneta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Aestimatio temporis quod praesentes impendunt — indicium, non sumptus computabilis.',
   'Diaformaat': 'Forma imaginis',
   'Scherm (16:9)': 'Scrinium (16:9)',
   'Papierformaat': 'Forma chartae',

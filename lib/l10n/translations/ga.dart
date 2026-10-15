@@ -1636,6 +1636,22 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kosten van aanwezigen': 'Costas na bhfreastalaí',
+  'Uit': 'As',
+  'Gewoon — alleen in het eindoverzicht': 'Gnáth — san achoimre deiridh amháin',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Sainráite — suim reatha agus achoimre deiridh',
+  'Uurtarief': 'Ráta in aghaidh na huaire',
+  'Eén tarief voor de hele groep': 'Ráta amháin don ghrúpa ar fad',
+  'Per aanwezige, bij de start invullen':
+      'In aghaidh an fhreastalaí, le líonadh ag an tús',
+  'Groepsuurtarief': 'Ráta uaire an ghrúpa',
+  'Kosten = verstreken tijd × tarief.': 'Costas = am caite × ráta.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Líontar ag an tús é agus ní shábháiltear.',
+  'Valuta': 'Airgeadra',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Meastachán ar an am a chaitheann freastalaithe — táscaire, ní praghas costais chuntasaíochta.',
   'Diaformaat': 'Formáid na sleamhnáin',
   'Scherm (16:9)': 'Scáileán (16:9)',
   'Papierformaat': 'Méid páipéir',

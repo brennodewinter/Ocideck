@@ -1607,6 +1607,22 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Kosten van aanwezigen': 'Náklady účastníků',
+  'Uit': 'Vypnuto',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normální — jen v závěrečném přehledu',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicitní — průběžná částka a závěrečný přehled',
+  'Uurtarief': 'Hodinová sazba',
+  'Eén tarief voor de hele groep': 'Jedna sazba pro celou skupinu',
+  'Per aanwezige, bij de start invullen': 'Za účastníka, vyplní se na začátku',
+  'Groepsuurtarief': 'Skupinová hodinová sazba',
+  'Kosten = verstreken tijd × tarief.': 'Náklady = uběhlý čas × sazba.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Vyplní se na začátku a neukládá se.',
+  'Valuta': 'Měna',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Odhad času, který účastníci stráví — orientační hodnota, ne účetní nákladová cena.',
   'Diaformaat': 'Formát snímku',
   'Scherm (16:9)': 'Obrazovka (16:9)',
   'Papierformaat': 'Formát papíru',

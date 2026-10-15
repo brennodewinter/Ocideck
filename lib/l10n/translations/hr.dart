@@ -1610,6 +1610,22 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Kosten van aanwezigen': 'Trošak prisutnih',
+  'Uit': 'Isključeno',
+  'Gewoon — alleen in het eindoverzicht': 'Obično — samo u završnom sažetku',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplicitno — tekući iznos i završni sažetak',
+  'Uurtarief': 'Satnica',
+  'Eén tarief voor de hele groep': 'Jedna satnica za cijelu grupu',
+  'Per aanwezige, bij de start invullen':
+      'Po prisutnoj osobi, unosi se na početku',
+  'Groepsuurtarief': 'Grupna satnica',
+  'Kosten = verstreken tijd × tarief.': 'Trošak = proteklo vrijeme × satnica.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Unosi se na početku i ne sprema.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Procjena vremena koje prisutni troše — indikacija, ne računovodstvena cijena.',
   'Diaformaat': 'Format slajda',
   'Scherm (16:9)': 'Zaslon (16:9)',
   'Papierformaat': 'Format papira',

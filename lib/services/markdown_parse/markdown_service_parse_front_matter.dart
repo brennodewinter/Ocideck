@@ -43,6 +43,11 @@ class _FrontMatter {
   bool showRehearsalSummary = false;
   bool playOnly = false;
 
+  /// Kostenmodus (#2435): de `ocideck_cost_*`-waarden onder hun korte naam;
+  /// de vertaling naar [PresentationCostConfig] gebeurt na de loop, zodat een
+  /// half ingevuld blok terugvalt op veilige standaarden in plaats van te falen.
+  final costKeys = <String, String>{};
+
   String improvementFramework = '';
   String improvementY01 = '';
   String improvementY01Unit = '';
@@ -173,6 +178,11 @@ extension _MarkdownParseFrontMatter on MarkdownService {
               fm.showRehearsalSummary = value == 'true';
             case 'ocideck_play_only':
               fm.playOnly = value == 'true';
+            case 'ocideck_cost_mode' ||
+                'ocideck_cost_input' ||
+                'ocideck_cost_currency' ||
+                'ocideck_cost_rate':
+              fm.costKeys[key.substring('ocideck_cost_'.length)] = value;
             // Het diaformaat deelt zijn sleutels met de documentpaginaopmaak
             // (`papersize:`/`geometry:` — het Pandoc-vocabulaire).
             case 'papersize' || 'geometry':

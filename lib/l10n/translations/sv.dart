@@ -1605,6 +1605,22 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kosten van aanwezigen': 'Kostnad för närvarande',
+  'Uit': 'Av',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — bara i slutsammanfattningen',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — löpande belopp och slutsammanfattning',
+  'Uurtarief': 'Timtaxa',
+  'Eén tarief voor de hele groep': 'En taxa för hela gruppen',
+  'Per aanwezige, bij de start invullen': 'Per närvarande, fylls i vid start',
+  'Groepsuurtarief': 'Gruppens timtaxa',
+  'Kosten = verstreken tijd × tarief.': 'Kostnad = förfluten tid × taxa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Fylls i vid start och sparas inte.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'En uppskattning av den tid deltagarna lägger — en indikation, inte en redovisad självkostnad.',
   'Diaformaat': 'Bildformat',
   'Scherm (16:9)': 'Skärm (16:9)',
   'Papierformaat': 'Pappersformat',

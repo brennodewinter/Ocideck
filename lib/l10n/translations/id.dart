@@ -1606,6 +1606,21 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kosten van aanwezigen': 'Biaya peserta',
+  'Uit': 'Mati',
+  'Gewoon — alleen in het eindoverzicht': 'Biasa — hanya di ringkasan akhir',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisit — total berjalan dan ringkasan akhir',
+  'Uurtarief': 'Tarif per jam',
+  'Eén tarief voor de hele groep': 'Satu tarif untuk seluruh kelompok',
+  'Per aanwezige, bij de start invullen': 'Per peserta, diisi saat mulai',
+  'Groepsuurtarief': 'Tarif per jam grup',
+  'Kosten = verstreken tijd × tarief.': 'Biaya = waktu berlalu × tarif.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Diisi saat mulai dan tidak disimpan.',
+  'Valuta': 'Mata uang',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Perkiraan waktu yang dihabiskan peserta — indikasi, bukan harga pokok akuntansi.',
   'Diaformaat': 'Format slide',
   'Scherm (16:9)': 'Layar (16:9)',
   'Papierformaat': 'Ukuran kertas',

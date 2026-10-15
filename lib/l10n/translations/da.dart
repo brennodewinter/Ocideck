@@ -1606,6 +1606,22 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kosten van aanwezigen': 'Deltagernes omkostninger',
+  'Uit': 'Fra',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — kun i afslutningsoversigten',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplicit — løbende beløb og afslutningsoversigt',
+  'Uurtarief': 'Timesats',
+  'Eén tarief voor de hele groep': 'Én sats for hele gruppen',
+  'Per aanwezige, bij de start invullen': 'Pr. deltager, udfyldes ved start',
+  'Groepsuurtarief': 'Gruppens timesats',
+  'Kosten = verstreken tijd × tarief.': 'Omkostning = forløben tid × sats.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Udfyldes ved start og gemmes ikke.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Et skøn over den tid, deltagerne bruger — en indikation, ikke en regnskabsmæssig kostpris.',
   'Diaformaat': 'Diasformat',
   'Scherm (16:9)': 'Skærm (16:9)',
   'Papierformaat': 'Papirformat',

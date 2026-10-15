@@ -208,7 +208,10 @@ const Map<String, int> fileSizeBaseline = {
   // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
   // de drie regels die hem in de beamer-sync meenemen.
   'lib/widgets/presentation/fullscreen_presenter.dart':
-      1069, // +3 (#2433): de slideSize-parameter langs present ->
+      1102, // +32 (#2435): costConfig langs present → show/showDualScreen →
+  // widget plus het aanmaken van de kostensessie in initState — dezelfde
+  // onherleidbare plumbing als slideSize, nu voor een tweede deckveld.
+  // +3 (#2433): de slideSize-parameter langs present ->
   // showDualScreen — onherleidbare plumbing van een nieuw deckveld door een
   // bestaande signatuurketen.
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
@@ -293,7 +296,9 @@ const Map<String, int> fileSizeBaseline = {
   // doorvoer (init, submit, updateInfo) en de keuze in de dialoog — de picker
   // zelf is een losse widget (slide_size_picker.dart), wat hier rest is
   // dataplumbing.
-  'lib/widgets/dialogs/presentation_info_dialog.dart': 1013,
+  // +15 (#2435): de kostenmodus op PresentationInfo plus één pickerregel in de
+  // dialoog — de picker zelf is een losse widget (presentation_cost_picker.dart).
+  'lib/widgets/dialogs/presentation_info_dialog.dart': 1028,
   'lib/widgets/dialogs/settings_dialog.dart': 1046,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
@@ -520,7 +525,10 @@ const Map<String, int> classSizeBaseline = {
   // +29 (#1824): callout front-matter block schrijven + callout-anchor koppeling
   // in parse (ocideck_callouts: block inlesen en per-slide callouts invullen).
   'lib/services/markdown_service.dart#MarkdownService':
-      2438, // +10 (#2433): de ruwe papersize/geometry-velden op _FrontMatter
+      2452, // +13 (#2435): vier ocideck_cost_*-sleutels op _FrontMatter, vier
+  // case-takken en één assembly-regel — de vertaling naar
+  // PresentationCostConfig staat in presentation_cost.dart.
+  // +10 (#2433): de ruwe papersize/geometry-velden op _FrontMatter
   // en de twee case-takken. De eigenlijke resolutie staat in
   // document_page_setup.dart (slideSizeFromKeys); wat rest is veld + case. // +5 (#1999): eLearning-slidetypes in de serialize-switch. Verlaagd
   // van 2460: `_parsedCustomMarkdown` is naar het hoogste niveau getild — het

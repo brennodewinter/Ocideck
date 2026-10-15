@@ -8,6 +8,7 @@ import '../models/annotation.dart';
 import '../models/asset_origin.dart';
 import '../models/checklist_spec.dart';
 import '../models/deck.dart';
+import '../models/presentation_cost.dart';
 import '../models/presentation_timing.dart';
 import '../models/page_size.dart';
 import '../models/provenance_signature.dart';

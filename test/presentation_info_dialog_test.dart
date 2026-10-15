@@ -5,6 +5,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/presentation_timing.dart';
 import 'package:ocideck/models/page_size.dart';
+import 'package:ocideck/models/presentation_cost.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
@@ -328,6 +329,53 @@ void main() {
     await tester.pumpAndSettle();
 
     expect((await result!)!.slideSize, PageSizeSpec.a4);
+  });
+
+  testWidgets('kostenmodus en groepstarief komen in het resultaat', (
+    tester,
+  ) async {
+    Future<PresentationInfo?>? result;
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: ElevatedButton(
+                onPressed: () => result = PresentationInfoDialog.show(
+                  context,
+                  const Deck(title: 'Test'),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    // Standaard staat de kostenmodus uit en is er geen tariefveld.
+    expect(find.byKey(const ValueKey('cost-rate')), findsNothing);
+
+    await tester.ensureVisible(find.byKey(const ValueKey('cost-mode')));
+    await tester.tap(find.byKey(const ValueKey('cost-mode')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Gewoon — alleen in het eindoverzicht').last);
+    await tester.pumpAndSettle();
+
+    // Groepsuurtarief €75 invoeren.
+    await tester.ensureVisible(find.byKey(const ValueKey('cost-rate')));
+    await tester.enterText(find.byKey(const ValueKey('cost-rate')), '75');
+
+    await tester.ensureVisible(find.text('Opslaan'));
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+
+    final info = (await result!)!;
+    expect(info.presentationCosts.mode, PresentationCostMode.normal);
+    expect(info.presentationCosts.groupHourlyRateMinor, 7500);
+    expect(info.presentationCosts.currencyCode, 'EUR');
   });
 
   testWidgets('double-clicking date fills in the current date', (tester) async {
