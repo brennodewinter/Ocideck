@@ -2514,6 +2514,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Diaformaat': 'Slayt biçimi',
+  'Scherm (16:9)': 'Ekran (16:9)',
+  'Papierformaat': 'Kağıt boyutu',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Bildiriler ve kağıt çıktıları için bir kağıt boyutu seçin.',
   'Startmappen': 'Başlangıç klasörleri',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Açma ve kaydetmenin başladığı yer. Boş bırakmak ilk kitaplığı kullanır.',

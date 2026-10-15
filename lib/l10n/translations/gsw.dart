@@ -1609,6 +1609,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Diaformaat': 'Folieformat',
+  'Scherm (16:9)': 'Bildschirm (16:9)',
+  'Papierformaat': 'Papierformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Wähl es Papierformat für Handouts und Papier-Export.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffne und Speichere aafangt. Läer laa nimmt di erst Bibliothek.',

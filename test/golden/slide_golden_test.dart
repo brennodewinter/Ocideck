@@ -8,6 +8,7 @@ import 'package:ocideck/models/display_window_spec.dart';
 import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/slide_format.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 import '../slide_fixtures.dart';
@@ -31,26 +32,44 @@ Future<void> _match(
   bool settleImages = false,
   int? slideNumber,
   int? slideCount,
+  double slideAspect = kScreenSlideAspect,
 }) async {
+  // Staand formaat (#2433): onder een strakke SizedBox kan AspectRatio de
+  // verhouding niet afdwingen (tight constraints), dus een staand vel eist
+  // een losse constrain — zoals Center() in het preview-paneel — plus een
+  // viewport die het vel werkelijk past. De standaardtests houden hun
+  // bestaande strakke 1280x720-box zodat hun goldens ongewijzigd blijven.
+  final loose = slideAspect != kScreenSlideAspect;
+  if (loose) {
+    tester.view.physicalSize = Size(1400, (1400 / slideAspect).ceilToDouble());
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+  }
+  final preview = SlidePreviewWidget(
+    slide: slide,
+    themeProfile: profile,
+    deckMarpStyle: deckMarpStyle,
+    tlp: tlp,
+    showClassificationWatermark: watermark,
+    organization: watermark ? 'OciDeck BV' : '',
+    slideNumber: slideNumber,
+    slideCount: slideCount,
+    slideAspect: slideAspect,
+  );
   await tester.pumpWidget(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: SizedBox(
-            width: 1280,
-            height: 720,
-            child: SlidePreviewWidget(
-              slide: slide,
-              themeProfile: profile,
-              deckMarpStyle: deckMarpStyle,
-              tlp: tlp,
-              showClassificationWatermark: watermark,
-              organization: watermark ? 'OciDeck BV' : '',
-              slideNumber: slideNumber,
-              slideCount: slideCount,
-            ),
-          ),
+          child: loose
+              ? ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: 1280,
+                    maxHeight: 1280 / slideAspect,
+                  ),
+                  child: preview,
+                )
+              : SizedBox(width: 1280, height: 720, child: preview),
         ),
       ),
     ),
@@ -288,5 +307,34 @@ void main() {
         await _match(tester, 'type_${type.name}', slideMetInhoud(type));
       });
     }
+  });
+
+  // #2433: een staand papierformaat mag geen uitgerekte of afgebroken layout
+  // geven — de metrieken rekenen op de verhouding van het deck.
+  group('staand diaformaat (A4)', () {
+    const a4Portrait = 210 / 297;
+
+    testWidgets('title', (tester) async {
+      await _match(
+        tester,
+        'portrait_a4_title',
+        Slide.create(
+          SlideType.title,
+        ).copyWith(title: 'OciDeck', subtitle: 'Een ondertitel'),
+        slideAspect: a4Portrait,
+      );
+    });
+
+    testWidgets('bullets', (tester) async {
+      await _match(
+        tester,
+        'portrait_a4_bullets',
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Agenda',
+          bullets: ['Eerste punt', '\tSubpunt', 'Tweede punt', 'Derde punt'],
+        ),
+        slideAspect: a4Portrait,
+      );
+    });
   });
 }

@@ -74,6 +74,7 @@ class _TablePreview extends StatelessWidget {
     final rows = editor?.rows ?? slideRows;
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
 
+    final aspect = SlideAspectScope.of(context);
     final fit = _fit(
       rows: rows,
       colCount: colCount,
@@ -81,6 +82,7 @@ class _TablePreview extends StatelessWidget {
       safe: safe,
       titleSize: titleSize,
       caption: caption,
+      slideAspect: aspect,
     );
     final cellSize = fit.cellSize;
 
@@ -279,6 +281,7 @@ class _TablePreview extends StatelessWidget {
     required EdgeInsets safe,
     required double titleSize,
     required String caption,
+    required double slideAspect,
   }) {
     final tableWidth = w - pad * 2;
     final titleBlock = slide.title.isNotEmpty
@@ -292,7 +295,7 @@ class _TablePreview extends StatelessWidget {
               pad * 0.35
         : 0.0;
     final availH =
-        w * 9 / 16 -
+        w / slideAspect -
         (pad + safe.top) -
         _logoAwareBottomPadding(pad, safe.bottom) -
         titleBlock -

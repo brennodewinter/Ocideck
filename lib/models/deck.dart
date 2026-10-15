@@ -1,4 +1,5 @@
 import '../services/front_matter_merge.dart';
+import 'page_size.dart';
 import 'presentation_timing.dart';
 import 'privacy_disposition.dart';
 import 'annotation.dart';
@@ -264,6 +265,13 @@ class Deck {
   /// Automatische diatiming, eventueel afkomstig uit een strikt format-preset.
   final PresentationTimingConfig presentationTiming;
 
+  /// Het diaformaat als ISO/DIN-papierformaat, of `null` voor de
+  /// schermstandaard 16:9 (`slide_format.dart`). Bestaande en handgeschreven
+  /// decks dragen niets en blijven daarom 16:9. Round-trips via `papersize:`
+  /// (staand) of `geometry:` (liggend) — het vocabulaire dat Pandoc voor
+  /// documents al gebruikt, dus leesbaar buiten OciDeck.
+  final PageSizeSpec? slideSize;
+
   /// Of het tijden-overzicht (oefenrun-samenvatting) ná deze presentatie
   /// verschijnt. De tijd wordt ALTIJD gemeten; dit bepaalt enkel of het
   /// eindscherm getoond wordt. Per presentatie ingesteld (presentatie-info).
@@ -447,6 +455,7 @@ class Deck {
     this.privacy = PrivacyDisposition.warn,
     this.presentationTargetSeconds = 0,
     this.presentationTiming = PresentationTimingConfig.disabled,
+    this.slideSize,
     this.showRehearsalSummary = false,
     this.playOnly = false,
     this.improvementFramework = '',
@@ -493,6 +502,8 @@ class Deck {
     PrivacyDisposition? privacy,
     int? presentationTargetSeconds,
     PresentationTimingConfig? presentationTiming,
+    PageSizeSpec? slideSize,
+    bool clearSlideSize = false,
     bool? showRehearsalSummary,
     bool? playOnly,
     String? improvementFramework,
@@ -543,6 +554,7 @@ class Deck {
       presentationTargetSeconds:
           presentationTargetSeconds ?? this.presentationTargetSeconds,
       presentationTiming: presentationTiming ?? this.presentationTiming,
+      slideSize: clearSlideSize ? null : (slideSize ?? this.slideSize),
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       playOnly: playOnly ?? this.playOnly,
       improvementFramework: improvementFramework ?? this.improvementFramework,

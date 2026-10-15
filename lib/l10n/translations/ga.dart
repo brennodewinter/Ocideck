@@ -1636,6 +1636,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Diaformaat': 'Formáid na sleamhnáin',
+  'Scherm (16:9)': 'Scáileán (16:9)',
+  'Papierformaat': 'Méid páipéir',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Roghnaigh méid páipéir do dháileacháin agus easpórtálacha ar pháipéar.',
   'Startmappen': 'Fillteáin tosaigh',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Cá dtosaíonn oscailt agus sábháil. Fág folamh chun an chéad leabharlann a úsáid.',

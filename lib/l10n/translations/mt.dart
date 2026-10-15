@@ -1624,6 +1624,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Diaformaat': 'Format tas-slide',
+  'Scherm (16:9)': 'Skrin (16:9)',
+  'Papierformaat': 'Format tal-karta',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Agħżel format tal-karta għal fuljetti u esportazzjonijiet fuq karta.',
   'Startmappen': 'Folders tal-bidu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Fejn jibdew il-ftuħ u s-salvataġġ. Vojet juża l-ewwel librerija.',

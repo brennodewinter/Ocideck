@@ -205,6 +205,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
       ),
       child: ClipRect(
         child: SlidePreviewWidget(
+          slideAspect: slideAspectRatio(deck.slideSize),
           slide: slide,
           projectPath: deck.projectPath,
           themeProfile: deck.themeProfile,
@@ -227,7 +228,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
 
   Widget _emptyHero(AppLocalizations l10n, AppPalette palette, Deck deck) {
     return AspectRatio(
-      aspectRatio: 16 / 9,
+      aspectRatio: slideAspectRatio(deck.slideSize),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: palette.mutedText.withValues(alpha: 0.08),

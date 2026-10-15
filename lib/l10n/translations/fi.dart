@@ -1606,6 +1606,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Diaformaat': 'Dian formaatti',
+  'Scherm (16:9)': 'Näyttö (16:9)',
+  'Papierformaat': 'Paperikoko',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Valitse paperikoko jakomateriaaleja ja paperille vientiä varten.',
   'Startmappen': 'Aloituskansiot',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Mistä avaaminen ja tallennus alkavat. Tyhjä käyttää ensimmäistä kirjastoa.',

@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
 import '../../models/markdown_kind.dart';
+import '../../models/slide_format.dart';
 import '../../services/file_service.dart';
 import '../../theme/app_theme.dart';
 import '../reader/document_markdown_view.dart';
@@ -225,9 +226,10 @@ class _OpenPreviewPaneState extends State<OpenPreviewPane> {
         ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: AspectRatio(
-            aspectRatio: 16 / 9,
+            aspectRatio: slideAspectRatio(deck.slideSize),
             child: RepaintBoundary(
               child: SlidePreviewWidget(
+                slideAspect: slideAspectRatio(deck.slideSize),
                 slide: deck.slides.first,
                 projectPath: deck.projectPath,
                 themeProfile: deck.themeProfile,

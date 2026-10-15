@@ -602,6 +602,7 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
                 ],
               ),
               child: SlidePreviewWidget(
+                slideAspect: slideAspectRatio(deck.slideSize),
                 slide: renderSlides[index],
                 projectPath: deck.projectPath,
                 themeProfile: widget.themeProfile,

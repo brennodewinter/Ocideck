@@ -33,6 +33,13 @@ class _FrontMatter {
   int presentationTargetSeconds = 0;
   PresentationTimingConfig presentationTiming =
       PresentationTimingConfig.disabled;
+
+  /// Het diaformaat als ISO-vel (`papersize:`/`geometry:`), of null voor de
+  /// schermstandaard 16:9. Zie [Deck.slideSize]. De ruwe waarden landen in
+  /// [formatKeys]; pas ná de loop staat vast welke sleutel wint
+  /// ([slideSizeFromKeys]: `papersize` gaat voor, zoals bij de documentpagina).
+  PageSizeSpec? slideSize;
+  final formatKeys = <String, String>{};
   bool showRehearsalSummary = false;
   bool playOnly = false;
 
@@ -166,6 +173,10 @@ extension _MarkdownParseFrontMatter on MarkdownService {
               fm.showRehearsalSummary = value == 'true';
             case 'ocideck_play_only':
               fm.playOnly = value == 'true';
+            // Het diaformaat deelt zijn sleutels met de documentpaginaopmaak
+            // (`papersize:`/`geometry:` — het Pandoc-vocabulaire).
+            case 'papersize' || 'geometry':
+              fm.formatKeys[key] = value;
             case 'ocideck_improvement_framework':
               fm.improvementFramework = parseMarkdownYamlScalar(value);
             case 'ocideck_improvement_y01':
@@ -215,6 +226,10 @@ extension _MarkdownParseFrontMatter on MarkdownService {
     // geen key op kolom 0). Parse het apart uit de bronregels — de codec houdt
     // de raw lines bij voor de lossless nested merge (§2.5).
     fm.calloutBlock = parseCalloutBlock(fm.sourceLines);
+    fm.slideSize = slideSizeFromKeys(
+      fm.formatKeys['papersize'],
+      fm.formatKeys['geometry'],
+    );
     fm.presentationTiming = _parsePresentationTiming(fm.sourceLines);
     fm.body = content;
     return fm;

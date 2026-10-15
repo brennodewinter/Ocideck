@@ -1,5 +1,6 @@
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import '../utils/lru_cache.dart';
 import 'rich_text_layout.dart';
 import 'slide_layout_metrics.dart';
@@ -138,9 +139,15 @@ double? sharedSplitFitScale(
   List<Slide> slides,
   int index,
   ThemeProfile profile,
-  String font,
-) {
-  return splitRunLayoutIndex(slides, profile, font).fitScaleFor(index);
+  String font, {
+  double slideAspect = kScreenSlideAspect,
+}) {
+  return splitRunLayoutIndex(
+    slides,
+    profile,
+    font,
+    slideAspect: slideAspect,
+  ).fitScaleFor(index);
 }
 
 /// De voor één deck-/thema-/lettertyperevisie voorberekende split-runlayout.
@@ -163,7 +170,9 @@ class SplitRunLayoutIndex {
 }
 
 class _SplitRunLayoutMemo {
-  final indexes = LruCache<(ThemeProfile, String), SplitRunLayoutIndex>(8);
+  final indexes = LruCache<(ThemeProfile, String, double), SplitRunLayoutIndex>(
+    8,
+  );
 }
 
 /// Zwak gekoppeld aan de slidelijst: normale deckbewerkingen leveren een verse
@@ -181,14 +190,22 @@ final Expando<_SplitRunLayoutMemo> _splitRunLayoutCache =
 SplitRunLayoutIndex splitRunLayoutIndex(
   List<Slide> slides,
   ThemeProfile profile,
-  String font,
-) {
+  String font, {
+  double slideAspect = kScreenSlideAspect,
+}) {
   final memo = _splitRunLayoutCache[slides] ?? _SplitRunLayoutMemo();
   _splitRunLayoutCache[slides] = memo;
-  final key = (profile, font);
+  // De diaverhouding zit in de sleutel: een papierformaat verandert het
+  // hoogtebudget en dus elke gedeelde schaal.
+  final key = (profile, font, slideAspect);
   final cached = memo.indexes[key];
   if (cached != null) return cached;
-  final index = buildSplitRunLayoutIndex(slides, profile, font);
+  final index = buildSplitRunLayoutIndex(
+    slides,
+    profile,
+    font,
+    slideAspect: slideAspect,
+  );
   memo.indexes[key] = index;
   return index;
 }
@@ -212,10 +229,14 @@ SplitRunLayoutIndex buildSplitRunLayoutIndex(
   String font, {
   double Function(Slide slide, ThemeProfile profile, String font)?
   measureMember,
+  double slideAspect = kScreenSlideAspect,
 }) {
+  final measure =
+      measureMember ??
+      (slide, profile, font) =>
+          splitRunMemberScale(slide, profile, font, slideAspect: slideAspect);
   final ranges = <(int, int)>[for (var i = 0; i < slides.length; i++) (i, i)];
   final fitScales = List<double?>.filled(slides.length, null);
-  final measure = measureMember ?? splitRunMemberScale;
 
   var start = 0;
   while (start < slides.length) {
@@ -259,7 +280,12 @@ SplitRunLayoutIndex buildSplitRunLayoutIndex(
 /// Ook de maatstaf waartegen de kwaliteitscontrole afmeet of een pagina door
 /// zijn reeks wordt meegetrokken. Dezelfde functie voor beide, zodat een
 /// gemelde grootte de grootte is die je ziet.
-double splitRunMemberScale(Slide slide, ThemeProfile profile, String font) {
+double splitRunMemberScale(
+  Slide slide,
+  ThemeProfile profile,
+  String font, {
+  double slideAspect = kScreenSlideAspect,
+}) {
   // De smalle tekstkolom van een split-slide staat naast het beeld en volgt
   // daarom een eigen logoregel.
   final (top, bottom) = slide.showLogo
@@ -267,6 +293,7 @@ double splitRunMemberScale(Slide slide, ThemeProfile profile, String font) {
           kReferenceSlideWidth,
           profile,
           splitText: slide.type == SlideType.bulletsImage,
+          slideAspect: slideAspect,
         )
       : (0.0, 0.0);
   final vReserve = top + bottom;
@@ -275,16 +302,19 @@ double splitRunMemberScale(Slide slide, ThemeProfile profile, String font) {
       slide: slide,
       font: font,
       extraVReserve: vReserve,
+      slideAspect: slideAspect,
     ),
     SlideType.twoBullets => twoBulletsSlideFitScale(
       slide: slide,
       font: font,
       extraVReserve: vReserve,
+      slideAspect: slideAspect,
     ),
     _ => bulletsSlideFitScale(
       slide: slide,
       font: font,
       extraVReserve: vReserve,
+      slideAspect: slideAspect,
     ),
   };
 }

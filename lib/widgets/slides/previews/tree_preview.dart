@@ -29,10 +29,10 @@ class _TreePreview extends StatelessWidget {
     );
     return SizedBox(
       width: w,
-      height: w * 9 / 16,
+      height: w / SlideAspectScope.of(context),
       child: CustomPaint(
         painter: ScenePainter(scene),
-        size: Size(w, w * 9 / 16),
+        size: Size(w, w / SlideAspectScope.of(context)),
       ),
     );
   }

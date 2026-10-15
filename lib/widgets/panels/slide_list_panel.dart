@@ -9,6 +9,7 @@ import '../../l10n/export_block_localization.dart';
 import '../../models/deck.dart';
 import '../../models/library_folder.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
@@ -528,11 +529,13 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       slideCount: deck.slides.length,
       tlp: deck.tlp,
       organization: deck.organization,
+      slideAspect: slideAspectRatio(deck.slideSize),
       fitScaleOverride: sharedSplitFitScale(
         deck.slides,
         index,
         deck.themeProfile,
         deck.themeProfile.fontFamily,
+        slideAspect: slideAspectRatio(deck.slideSize),
       ),
       splitRunPosition: splitRunPositionFor(deck.slides, index),
       numberStart: numberStarts[index],

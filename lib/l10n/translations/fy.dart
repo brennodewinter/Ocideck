@@ -652,6 +652,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Diaformaat': 'Diaformaat',
+  'Scherm (16:9)': 'Skerm (16:9)',
+  'Papierformaat': 'Papierformaat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Kies in papierformaat foar hand-outs en eksporten op papier.',
   'Startmappen': 'Begjinmappen',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wêr iepenjen en bewarjen begjint. Leech litte brûkt de earste bibleteek.',

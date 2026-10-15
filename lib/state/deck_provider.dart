@@ -9,6 +9,7 @@ import '../models/asset_origin.dart';
 import '../models/checklist_spec.dart';
 import '../models/deck.dart';
 import '../models/presentation_timing.dart';
+import '../models/page_size.dart';
 import '../models/provenance_signature.dart';
 import '../models/improvement_y01.dart';
 import '../models/document_signature.dart';

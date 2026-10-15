@@ -1605,6 +1605,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Diaformaat': 'Bildformat',
+  'Scherm (16:9)': 'Skärm (16:9)',
+  'Papierformaat': 'Pappersformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Välj ett pappersformat för handouts och export på papper.',
   'Startmappen': 'Startmappar',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Där öppna och spara börjar. Lämna tomt för att använda det första biblioteket.',

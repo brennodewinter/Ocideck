@@ -1618,6 +1618,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Diaformaat': 'Format slajdu',
+  'Scherm (16:9)': 'Ekran (16:9)',
+  'Papierformaat': 'Format papieru',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Wybierz format papieru dla materiałów do rozdania i eksportów na papier.',
   'Startmappen': 'Foldery startowe',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Gdzie zaczyna się otwieranie i zapisywanie. Puste pole oznacza pierwszą bibliotekę.',

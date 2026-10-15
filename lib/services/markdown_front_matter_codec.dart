@@ -5,6 +5,7 @@ import '../models/document_signature.dart';
 import '../models/privacy_disposition.dart';
 import '../models/presentation_timing.dart';
 import 'callout_codec.dart';
+import 'document_page_setup.dart';
 import 'front_matter_merge.dart';
 
 // YAML scalars that need quoting to remain strings in Marp and other readers.
@@ -95,6 +96,19 @@ List<String> ownedFrontMatterLines(
     out.add('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
   }
   _addPresentationTiming(out, deck.presentationTiming);
+  // Het diaformaat (#2433) schrijven we in het Pandoc-vocabulaire, zoals de
+  // documentpagina het doet: staand als `papersize: a4`, liggend als
+  // `geometry` met alleen het vel — een `a4`-papiernaam betekent bij Pandoc
+  // staand, dus voor liggend liegen die bytes. De schermstandaard schrijft
+  // niets: 16:9 is de afwezige staat van elke Marp-lezer.
+  final slideSize = deck.slideSize;
+  if (slideSize != null) {
+    if (slideSize.landscape) {
+      out.add('geometry: ${slideGeometryValue(slideSize)}');
+    } else {
+      out.add('papersize: ${slideSize.sizeName.toLowerCase()}');
+    }
+  }
   if (deck.showRehearsalSummary) {
     out.add('ocideck_show_rehearsal_summary: true');
   }

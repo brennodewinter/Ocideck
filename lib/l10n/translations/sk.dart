@@ -1612,6 +1612,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Diaformaat': 'Formát snímky',
+  'Scherm (16:9)': 'Obrazovka (16:9)',
+  'Papierformaat': 'Formát papiera',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Vyberte formát papiera pre výtlačky a export na papier.',
   'Startmappen': 'Štartovacie priečinky',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kde sa začína otváranie a ukladanie. Prázdne použije prvú knižnicu.',

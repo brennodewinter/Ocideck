@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../state/deck_provider.dart';
 import '../slides/image_crop_dialog.dart';
 import '_editor_field.dart';
@@ -15,6 +16,10 @@ class TwoImagesEditor extends ConsumerStatefulWidget {
   final String? captionBasePath;
   final bool nestedInScrollView;
 
+  /// De diaverhouding van het deck (#2433) — elke beeldhelft levert
+  /// `fraction × slideAspect` als sleufverhouding voor de crop-stage.
+  final double slideAspect;
+
   const TwoImagesEditor({
     super.key,
     required this.slide,
@@ -22,6 +27,7 @@ class TwoImagesEditor extends ConsumerStatefulWidget {
     this.searchPaths = const [],
     this.captionBasePath,
     this.nestedInScrollView = false,
+    this.slideAspect = kScreenSlideAspect,
   });
 
   @override
@@ -100,7 +106,7 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
       context,
       imagePath: isSecond ? widget.slide.imagePath2 : widget.slide.imagePath,
       projectPath: widget.captionBasePath,
-      frameAspect: fraction * 16 / 9,
+      frameAspect: fraction * widget.slideAspect,
       imageSize: widget.slide.imageZoom,
       focalX: isSecond ? widget.slide.imageFocalX2 : widget.slide.imageFocalX,
       focalY: isSecond ? widget.slide.imageFocalY2 : widget.slide.imageFocalY,

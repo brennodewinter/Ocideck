@@ -1599,6 +1599,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Diaformaat': 'Slaidi formaat',
+  'Scherm (16:9)': 'Ekraan (16:9)',
+  'Papierformaat': 'Paberiformaat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Valige paberiformaat jagamismaterjalide ja paberile ekspordi jaoks.',
   'Startmappen': 'Alguskaustad',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kus avamine ja salvestamine algavad. Tühi kasutab esimest teeki.',

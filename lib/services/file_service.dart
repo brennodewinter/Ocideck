@@ -21,6 +21,8 @@ import '../models/chart.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../models/marp_style.dart';
+import '../models/page_size.dart';
+import '../models/slide_format.dart';
 import '../platform/platform_features.dart';
 import '../utils/archive_limits.dart';
 import '../utils/asset_destination.dart';

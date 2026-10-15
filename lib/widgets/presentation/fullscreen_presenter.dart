@@ -23,6 +23,8 @@ import '../../models/presentation_step_plan.dart';
 import '../../models/presentation_timing.dart';
 import '../../models/playback.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
+import '../../models/page_size.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
 import '../../services/mic_monitor.dart';
@@ -215,6 +217,10 @@ class FullscreenPresenter extends StatefulWidget {
   /// Deck-level Y-01 metric for resolve-at-draw on improvement charts.
   final ImprovementY01Metric improvementY01;
 
+  /// De diaverhouding van het deck (scherm 16:9 wanneer het deck geen
+  /// papierformaat vastlegt) — zie [slideAspectRatio] (#2433).
+  final double slideAspect;
+
   /// Test-seam voor de microfoon-doorvoer (#2158): productie laat dit leeg en
   /// krijgt bij de eerste aan-zet een [WebrtcMicMonitor]; een widget-test
   /// steekt een fake in, want de echte binding kan niet headless draaien.
@@ -249,6 +255,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.onUserNotesChanged,
     this.improvementY01 = ImprovementY01Metric.empty,
     this.micMonitor,
+    this.slideAspect = kScreenSlideAspect,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -288,6 +295,7 @@ class FullscreenPresenter extends StatefulWidget {
     final organization = deck.organization;
     final reportLanguage = deck.language;
     final presentationTiming = deck.presentationTiming;
+    final slideSize = deck.slideSize;
 
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
@@ -333,6 +341,7 @@ class FullscreenPresenter extends StatefulWidget {
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
+        slideSize: slideSize,
       );
     } else {
       return await show(
@@ -363,6 +372,7 @@ class FullscreenPresenter extends StatefulWidget {
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
+        slideSize: slideSize,
       );
     }
   }
@@ -396,6 +406,7 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
+    PageSizeSpec? slideSize,
   }) async {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
@@ -440,6 +451,7 @@ class FullscreenPresenter extends StatefulWidget {
                 initialUserNotes: initialUserNotes,
                 onUserNotesChanged: onUserNotesChanged,
                 improvementY01: improvementY01,
+                slideAspect: slideAspectRatio(slideSize),
               ),
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
@@ -487,6 +499,7 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
+    PageSizeSpec? slideSize,
   }) async {
     final argument = _dualWindowArguments(
       slides: slides,
@@ -502,6 +515,7 @@ class FullscreenPresenter extends StatefulWidget {
       themeProfile: themeProfile,
       marpStyle: marpStyle,
       cockpitColorScheme: cockpitColorScheme,
+      slideSize: slideSize,
     );
     WindowController? audience;
     AudienceWindowHandle? audienceHandle;
@@ -555,6 +569,7 @@ class FullscreenPresenter extends StatefulWidget {
           initialUserNotes: initialUserNotes,
           onUserNotesChanged: onUserNotesChanged,
           improvementY01: improvementY01,
+          slideSize: slideSize,
         );
       }
       return null;
@@ -593,6 +608,7 @@ class FullscreenPresenter extends StatefulWidget {
       initialUserNotes: initialUserNotes,
       onUserNotesChanged: onUserNotesChanged,
       improvementY01: improvementY01,
+      slideSize: slideSize,
     );
   }
 

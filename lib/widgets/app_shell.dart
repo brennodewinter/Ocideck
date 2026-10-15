@@ -30,6 +30,7 @@ import '../models/privacy_disposition.dart';
 import '../models/recent_file.dart';
 import '../models/settings.dart' show AppSettings;
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import '../models/used_tool.dart';
 import '../models/slide_quality.dart';
 import '../models/storage_connection.dart';

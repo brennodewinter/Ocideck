@@ -1622,6 +1622,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Diaformaat': 'Format diapozitiv',
+  'Scherm (16:9)': 'Ecran (16:9)',
+  'Papierformaat': 'Format hârtie',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Alegeți un format de hârtie pentru materialele tipărite și exporturile pe hârtie.',
   'Startmappen': 'Dosare de pornire',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unde încep deschiderea și salvarea. Gol folosește prima bibliotecă.',

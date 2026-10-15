@@ -1631,6 +1631,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Diaformaat': 'Μορφή διαφάνειας',
+  'Scherm (16:9)': 'Οθόνη (16:9)',
+  'Papierformaat': 'Μέγεθος χαρτιού',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Επιλέξτε μέγεθος χαρτιού για ενημερωτικά φυλλάδια και εξαγωγές σε χαρτί.',
   'Startmappen': 'Φάκελοι έναρξης',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Από πού ξεκινούν το άνοιγμα και η αποθήκευση. Κενό σημαίνει την πρώτη βιβλιοθήκη.',

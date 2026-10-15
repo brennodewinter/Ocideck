@@ -11,6 +11,7 @@ import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/presentation_step_plan.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../theme/presenter_palette.dart';
 import '../../services/markdown_service.dart';
 import '../mermaid_render_host.dart';
@@ -107,6 +108,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   String _reportLanguage = '';
   ThemeProfile _theme = const ThemeProfile();
   MarpStyle _marpStyle = const MarpStyle();
+  double _slideAspect = kScreenSlideAspect;
   CockpitColorScheme _scheme = CockpitColorScheme.standard;
   TlpLevel _tlp = TlpLevel.none;
   String _organization = '';
@@ -162,6 +164,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _index = (widget.args['index'] as num?)?.toInt() ?? 0;
     final deck = MarkdownService().parseDeck(markdown);
     _slides = deck?.slides ?? const [];
+    _slideAspect = slideAspectRatio(deck?.slideSize);
     _reportLanguage = deck?.language ?? '';
     // De styling komt naast de markdown binnen; zie [beamerStyleProfileKey].
     final profileJson = widget.args[beamerStyleProfileKey];
@@ -546,13 +549,13 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     ),
   );
 
-  /// A 16:9 slide letterboxed to fit the screen, mirroring the presenter's view.
+  /// A slide in the deck's aspect letterboxed to fit the screen, mirroring the presenter's view.
   Widget _canvas(Slide slide) {
     return LayoutBuilder(
       builder: (_, constraints) {
         final w = constraints.maxWidth;
         final h = constraints.maxHeight;
-        const ratio = 16.0 / 9.0;
+        final ratio = _slideAspect;
         double slideW, slideH;
         if (w / h > ratio) {
           slideH = h;
@@ -573,6 +576,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                 ChartHoverScope(
                   controller: _chartHover,
                   child: SlidePreviewWidget(
+                    slideAspect: _slideAspect,
                     slide: slide,
                     projectPath: _projectPath,
                     themeProfile: _theme,
@@ -589,6 +593,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                       _index,
                       _theme,
                       _theme.fontFamily,
+                      slideAspect: _slideAspect,
                     ),
                     splitRunPosition: splitRunPositionFor(_slides, _index),
                     richTextPage: _richTextPage,

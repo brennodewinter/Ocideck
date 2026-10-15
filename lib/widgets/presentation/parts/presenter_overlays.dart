@@ -576,8 +576,9 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: AspectRatio(
-                    aspectRatio: 16 / 9,
+                    aspectRatio: widget.slideAspect,
                     child: SlidePreviewWidget(
+                      slideAspect: widget.slideAspect,
                       slide: widget.slides[i],
                       projectPath: widget.projectPath,
                       themeProfile: widget.themeProfile,
@@ -595,6 +596,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                         i,
                         widget.themeProfile,
                         widget.themeProfile.fontFamily,
+                        slideAspect: widget.slideAspect,
                       ),
                       splitRunPosition: splitRunPositionFor(widget.slides, i),
                       improvementY01: widget.improvementY01,

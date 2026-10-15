@@ -1621,6 +1621,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Diaformaat': 'Forma imaginis',
+  'Scherm (16:9)': 'Scrinium (16:9)',
+  'Papierformaat': 'Forma chartae',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Formam chartae pro manuscriptis et exportationibus in charta elige.',
   'Startmappen': 'Carpetae initiales',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Ubi aperire et servare incipiunt. Vacuum relictum prima bibliotheca utitur.',

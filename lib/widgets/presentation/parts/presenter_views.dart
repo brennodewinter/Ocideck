@@ -18,13 +18,13 @@ bool _slideHasRemoteMedia(Slide slide) {
 }
 
 extension _PresenterViews on _FullscreenPresenterState {
-  /// A 16:9 slide sized to fit within the given constraints.
+  /// A slide in the deck's aspect sized to fit within the given constraints.
   Widget _slideCanvas(Slide slide) {
     return LayoutBuilder(
       builder: (_, constraints) {
         final w = constraints.maxWidth;
         final h = constraints.maxHeight;
-        const ratio = 16.0 / 9.0;
+        final ratio = widget.slideAspect;
         double slideW, slideH;
         if (w / h > ratio) {
           slideH = h;
@@ -46,6 +46,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                 ChartHoverScope(
                   controller: _chartHover,
                   child: SlidePreviewWidget(
+                    slideAspect: widget.slideAspect,
                     slide: slide,
                     projectPath: widget.projectPath,
                     themeProfile: widget.themeProfile,
@@ -61,6 +62,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                       _index,
                       widget.themeProfile,
                       widget.themeProfile.fontFamily,
+                      slideAspect: widget.slideAspect,
                     ),
                     splitRunPosition: splitRunPositionFor(
                       widget.slides,
@@ -277,13 +279,14 @@ extension _PresenterViews on _FullscreenPresenterState {
                 _SectionLabel(l10n.d('VOLGENDE')),
                 const SizedBox(height: 8),
                 AspectRatio(
-                  aspectRatio: 16 / 9,
+                  aspectRatio: widget.slideAspect,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: nextSlide != null
                         ? Container(
                             color: Colors.black,
                             child: SlidePreviewWidget(
+                              slideAspect: widget.slideAspect,
                               slide: nextSlide,
                               projectPath: widget.projectPath,
                               themeProfile: widget.themeProfile,
@@ -301,6 +304,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                                 _index + 1,
                                 widget.themeProfile,
                                 widget.themeProfile.fontFamily,
+                                slideAspect: widget.slideAspect,
                               ),
                               splitRunPosition: splitRunPositionFor(
                                 widget.slides,

@@ -1610,6 +1610,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Diaformaat': 'Format slajda',
+  'Scherm (16:9)': 'Zaslon (16:9)',
+  'Papierformaat': 'Format papira',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Odaberite format papira za materijale za podjelu i izvoz na papir.',
   'Startmappen': 'Početne mape',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Gdje počinju otvaranje i spremanje. Prazno koristi prvu knjižnicu.',

@@ -1,6 +1,7 @@
 import '../utils/lru_cache.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import '../utils/markdown_paste_cleanup.dart';
 import 'markdown_body_blocks.dart';
 import 'slide_layout_metrics.dart';
@@ -429,11 +430,12 @@ double logoSafeReserve(
   ThemeProfile profile, {
   bool corner = false,
   bool occupancy = false,
+  double slideAspect = kScreenSlideAspect,
 }) {
   if (profile.logoPath?.isEmpty ?? true) return 0;
   if (profile.brandStripPath?.isNotEmpty == true &&
       profile.brandStripHeight > 0) {
-    return w * 9 / 16 * profile.brandStripHeight;
+    return w / slideAspect * profile.brandStripHeight;
   }
   if (!occupancy && corner) return 0;
   final size = w * (profile.logoSize / 1280);
@@ -465,6 +467,7 @@ double logoSafeReserve(
   bool splitText = false,
   bool corner = false,
   bool occupancy = false,
+  double slideAspect = kScreenSlideAspect,
 }) {
   if (profile.logoPath?.isEmpty ?? true) return (0, 0);
   final hasStrip =
@@ -478,6 +481,7 @@ double logoSafeReserve(
     profile,
     corner: corner,
     occupancy: occupancy,
+    slideAspect: slideAspect,
   );
   return profile.logoPosition.startsWith('top') ? (reserved, 0) : (0, reserved);
 }
@@ -493,9 +497,13 @@ double richTextBodyAvailH(
   Slide slide,
   ThemeProfile profile, {
   required bool splitWithImage,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final vPad = splitWithImage ? w * 0.042 : w * 0.05;
-  final reserve = slide.showLogo ? logoSafeReserve(w, profile) : 0.0;
+  final slideHeight = w / slideAspect;
+  final reserve = slide.showLogo
+      ? logoSafeReserve(w, profile, slideAspect: slideAspect)
+      : 0.0;
   // A split (text+image) layout puts the text column beside a right-hand image,
   // so a right-side logo sits over the image and needs no text reserve (mirrors
   // the preview's split-layout safe insets).
@@ -511,7 +519,7 @@ double richTextBodyAvailH(
     defaultBottomPad: vPad,
     safeBottom: isTop ? 0.0 : effReserve,
   );
-  return (w * 9 / 16 - topPad - bottomPad).clamp(1.0, w * 9 / 16);
+  return (slideHeight - topPad - bottomPad).clamp(1.0, slideHeight);
 }
 
 /// Page count for a rich-text slide at reference slide dimensions.
@@ -519,6 +527,7 @@ int richTextPageCountForSlide({
   required Slide slide,
   required ThemeProfile profile,
   bool splitWithImage = false,
+  double slideAspect = kScreenSlideAspect,
 }) {
   if (!slideUsesRichText(slide)) return 1;
   const w = kReferenceSlideWidth;
@@ -537,6 +546,7 @@ int richTextPageCountForSlide({
     slide,
     profile,
     splitWithImage: splitWithImage,
+    slideAspect: slideAspect,
   );
   return planRichTextForSlide(
     slide: slide,
@@ -562,7 +572,11 @@ int richTextPageCountForSlide({
 ///
 /// Counting happens at [kReferenceSlideWidth], the same geometry the rasteriser
 /// lays out at, so the export splits exactly where the preview does.
-List<Slide> expandRichTextForRender(List<Slide> slides, ThemeProfile profile) {
+List<Slide> expandRichTextForRender(
+  List<Slide> slides,
+  ThemeProfile profile, {
+  double slideAspect = kScreenSlideAspect,
+}) {
   final out = <Slide>[];
   for (final slide in slides) {
     // Alleen de typen die een pagina ook echt tonen. Sinds #1409 pagineert
@@ -578,6 +592,7 @@ List<Slide> expandRichTextForRender(List<Slide> slides, ThemeProfile profile) {
       slide: slide,
       profile: profile,
       splitWithImage: slide.type.splitWithImage,
+      slideAspect: slideAspect,
     );
     if (pages <= 1) {
       out.add(slide);

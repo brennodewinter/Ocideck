@@ -1606,6 +1606,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Diaformaat': 'Diasformat',
+  'Scherm (16:9)': 'Skærm (16:9)',
+  'Papierformaat': 'Papirformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Vælg et papirformat til handouts og eksport på papir.',
   'Startmappen': 'Startmapper',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hvor åbning og gemning begynder. Tomt felt bruger det første bibliotek.',

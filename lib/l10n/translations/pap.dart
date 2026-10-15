@@ -651,6 +651,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Diaformaat': 'Formato di slide',
+  'Scherm (16:9)': 'Pantaya (16:9)',
+  'Papierformaat': 'Formato di papel',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Skohe un formato di papel pa hand-outs i eksportashon na papel.',
   'Startmappen': 'Mapa di kuminsamentu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unda habri i warda ta kuminsá. Laga bashí ta usa e promé biblioteka.',

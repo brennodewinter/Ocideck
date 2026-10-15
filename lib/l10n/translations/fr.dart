@@ -652,6 +652,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Diaformaat': 'Format des diapositives',
+  'Scherm (16:9)': 'Écran (16:9)',
+  'Papierformaat': 'Format papier',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Choisissez un format papier pour les documents à distribuer et les exports papier.',
   'Startmappen': 'Dossiers de départ',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Là où l\'ouverture et l\'enregistrement commencent. Laisser vide utilise la première bibliothèque.',

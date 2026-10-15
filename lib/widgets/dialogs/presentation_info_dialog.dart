@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/marp_compatibility.dart';
 import '../../models/presentation_timing.dart';
+import '../../models/page_size.dart';
 import '../../l10n/app_localizations.dart';
 import '../keyword_chips_editor.dart';
 import '../../services/markdown_service.dart';
@@ -18,6 +19,7 @@ import '../../services/reference_standards.dart';
 import '../../theme/app_theme.dart';
 import 'new_deck_dialog.dart' show ThemeProfileSwatch;
 import 'settings_dialog.dart';
+import 'slide_size_picker.dart';
 
 /// The editable general metadata of a presentation.
 class PresentationInfo {
@@ -46,6 +48,9 @@ class PresentationInfo {
   /// 'Alleen afspelen'-vergrendeling. Zie [Deck.playOnly].
   final bool playOnly;
 
+  /// Het diaformaat; `null` = de schermstandaard 16:9 (#2433).
+  final PageSizeSpec? slideSize;
+
   /// Naam van het gekozen stijlprofiel (null = ongewijzigd laten).
   final String? styleProfileName;
 
@@ -66,6 +71,7 @@ class PresentationInfo {
     this.showRehearsalSummary = true,
     this.playOnly = false,
     this.styleProfileName,
+    this.slideSize,
   });
 }
 
@@ -95,6 +101,8 @@ Future<void> editPresentationInfo(BuildContext context, WidgetRef ref) async {
     presentationTiming: info.presentationTiming,
     showRehearsalSummary: info.showRehearsalSummary,
     playOnly: info.playOnly,
+    slideSize: info.slideSize,
+    clearSlideSize: info.slideSize == null,
   );
   // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal) en
   // wordt meteen op het open deck toegepast.
@@ -171,6 +179,7 @@ class _PresentationInfoDialogState
   late final TextEditingController _customMinutes;
   late bool _showRehearsalSummary;
   late bool _playOnly;
+  late PageSizeSpec? _slideSize;
   MarpCompatReport? _marpCompat;
   late String _profileName;
 
@@ -203,6 +212,7 @@ class _PresentationInfoDialogState
     );
     _showRehearsalSummary = widget.deck.showRehearsalSummary;
     _playOnly = widget.deck.playOnly;
+    _slideSize = widget.deck.slideSize;
     _profileName = widget.deck.themeProfile.name;
   }
 
@@ -245,6 +255,7 @@ class _PresentationInfoDialogState
         presentationTiming: _presentationTiming,
         showRehearsalSummary: _showRehearsalSummary,
         playOnly: _playOnly,
+        slideSize: _slideSize,
         styleProfileName: _profileName,
       ),
     );
@@ -289,6 +300,11 @@ class _PresentationInfoDialogState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _presentationFormatControl(l10n),
+                const SizedBox(height: 16),
+                SlideSizePicker(
+                  value: _slideSize,
+                  onChanged: (v) => setState(() => _slideSize = v),
+                ),
                 const SizedBox(height: 20),
                 _metadataFields(),
                 const SizedBox(height: 16),

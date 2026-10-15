@@ -1626,6 +1626,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Diaformaat': 'Формат на слайда',
+  'Scherm (16:9)': 'Екран (16:9)',
+  'Papierformaat': 'Формат на хартията',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Изберете формат на хартията за раздатъчни материали и експорт на хартия.',
   'Startmappen': 'Начални папки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Къде започват отварянето и записването. Празно използва първата библиотека.',

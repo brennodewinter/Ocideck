@@ -6,6 +6,7 @@
 // regels, geen deck-kennis, en zo is het contract apart te toetsen.
 
 import 'callout_codec.dart';
+import 'document_page_setup.dart';
 
 /// De formaatversie die deze build schrijft (front-matter-sleutel
 /// [kFormatVersionKey]).
@@ -93,6 +94,12 @@ const Set<String> kOwnedFrontMatterKeys = {
   'ocideck_improvement_y01_target',
   'ocideck_improvement_y01_baseline',
   'ocideck_improvement_y01_goal',
+  // Het diaformaat (#2433): `papersize` is altijd van ons, `geometry` alleen
+  // wanneer de regel uitsluitend velafmetingen draagt — een `geometry` met
+  // marges schrijft alleen een gebruiker die het deck óók door Pandoc haalt,
+  // en die blijft staan (zie [isSlideGeometryValue] bij de merge).
+  'papersize',
+  'geometry',
   // Image callouts (IMAGE_CALLOUTS.md §2). Owned sinds format v2: de codec
   // herschrijft het blok met de nested merge van §2.5 — alleen bewerkte entries
   // gaan door, onbekende/commentaar/malformed regels blijven byte-voor-byte.
@@ -231,6 +238,12 @@ List<String> mergeFrontMatter({
       if (key == 'format' &&
           !byKey.containsKey(key) &&
           !_isTimedPresentationFormatLine(line)) {
+        inOwnedBlock = false;
+      }
+      // `geometry` is van ons voor zover het een dia-velformaat is; een regel
+      // met marges of andere Pandoc-velden is van de auteur en blijft staan.
+      if (key == 'geometry' &&
+          !isSlideGeometryValue(line.substring(line.indexOf(':') + 1))) {
         inOwnedBlock = false;
       }
       if (!inOwnedBlock) {

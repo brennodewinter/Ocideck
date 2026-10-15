@@ -13,6 +13,7 @@ import '../models/marp_style.dart';
 import '../models/document_signature.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import 'privacy/privacy_projection.dart';
 import 'web_asset_store.dart';
 import '../utils/bundled_asset.dart';
@@ -99,9 +100,14 @@ class RasterExportBudgetExceeded implements Exception {
 /// for every slide.
 class SlideRasterizer {
   /// Logical size used while laying out a slide. The real output resolution is
-  /// [logicalSize] * [pixelRatio]; because the preview is fully proportional
+  /// [logicalSizeFor] * [pixelRatio]; because the preview is fully proportional
   /// the logical size only affects sampling quality.
   static const Size logicalSize = Size(1280, 720);
+
+  /// Het logische dia-oppervlak voor verhouding [slideAspect] — de breedte is
+  /// de ijkbreedte, de hoogte volgt uit de gekozen diaverhouding (#2433).
+  static Size logicalSizeFor(double slideAspect) =>
+      Size(1280, 1280 / slideAspect);
 
   /// Hoe lang op één frame gewacht wordt voor de export opgeeft.
   ///
@@ -157,11 +163,14 @@ class SlideRasterizer {
   }) async {
     final slides = audience.slides;
     if (slides.isEmpty) return const [];
+    final aspect = slideAspectRatio(audience.deck.slideSize);
+    final logical = logicalSizeFor(aspect);
 
     _enforceExportBudget(
       slideCount: slides.length,
       targetWidth: targetWidth,
       maxExportBytes: maxExportBytes,
+      slideAspect: aspect,
     );
 
     // Alles wat de render nodig heeft, komt uit het geprojecteerde deck — niet
@@ -172,7 +181,7 @@ class SlideRasterizer {
     final signature = deck.signature;
 
     final overlay = Overlay.of(context, rootOverlay: true);
-    final pixelRatio = targetWidth / logicalSize.width;
+    final pixelRatio = targetWidth / logical.width;
 
     // The global image cache has a modest default budget (~100 MB / 1000
     // entries). A deck with several full-resolution photos blows past that, so
@@ -215,6 +224,8 @@ class SlideRasterizer {
       audience: audience,
       cockpitColorScheme: cockpitColorScheme,
       showClassificationWatermark: showClassificationWatermark,
+      slideAspect: aspect,
+      logicalSize: logical,
     );
 
     final results = <Uint8List>[];
@@ -249,6 +260,7 @@ class SlideRasterizer {
             i,
             themeProfile,
             themeProfile.fontFamily,
+            slideAspect: aspect,
           ),
           splitRunPosition: splitRunPositionFor(slides, i),
         );
@@ -291,9 +303,10 @@ class SlideRasterizer {
     required int slideCount,
     required int targetWidth,
     required int maxExportBytes,
+    double slideAspect = kScreenSlideAspect,
   }) {
-    final targetHeight = (targetWidth * logicalSize.height / logicalSize.width)
-        .round();
+    final logical = logicalSizeFor(slideAspect);
+    final targetHeight = (targetWidth * logical.height / logical.width).round();
     final estimatedBytes = slideCount * targetWidth * targetHeight * 4;
     if (estimatedBytes > maxExportBytes) {
       throw RasterExportBudgetExceeded(
@@ -313,6 +326,8 @@ class SlideRasterizer {
     required AudienceDeck audience,
     required CockpitColorScheme cockpitColorScheme,
     required bool showClassificationWatermark,
+    required double slideAspect,
+    required Size logicalSize,
   }) {
     final deck = audience.deck;
     final slides = audience.slides;
@@ -342,6 +357,8 @@ class SlideRasterizer {
           scopeCia: deckScopeCiaIndex(slides),
           reportLanguage: deck.language,
           improvementY01: deck.improvementY01Metric,
+          slideAspect: slideAspect,
+          logicalSize: logicalSize,
         ),
       ),
     );
@@ -584,6 +601,8 @@ class _RasterSlideHost extends StatefulWidget {
   final String reportLanguage;
   final Map<String, CiaRating> scopeCia;
   final ImprovementY01Metric improvementY01;
+  final double slideAspect;
+  final Size logicalSize;
 
   const _RasterSlideHost({
     super.key,
@@ -603,6 +622,8 @@ class _RasterSlideHost extends StatefulWidget {
     required this.reportLanguage,
     required this.scopeCia,
     this.improvementY01 = ImprovementY01Metric.empty,
+    this.slideAspect = kScreenSlideAspect,
+    this.logicalSize = SlideRasterizer.logicalSize,
   });
 
   @override
@@ -651,9 +672,10 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
     return RepaintBoundary(
       key: widget.repaintKey,
       child: SizedBox(
-        width: SlideRasterizer.logicalSize.width,
-        height: SlideRasterizer.logicalSize.height,
+        width: widget.logicalSize.width,
+        height: widget.logicalSize.height,
         child: SlidePreviewWidget(
+          slideAspect: widget.slideAspect,
           // Een gerasterde pagina (PDF/PPTX) kan niet scrollen: een groot
           // mermaid-diagram valt hier terug op passend verkleinen i.p.v. een
           // scrollvenster (#872), zodat het hele diagram op de pagina staat.

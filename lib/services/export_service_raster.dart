@@ -44,6 +44,7 @@ Future<Uint8List> _buildPptx(
     fallbackTitle: fallbackTitle,
     notes: _notesOf(audience),
     altTexts: _altTextsOf(audience),
+    slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
   ),
 );
 
@@ -60,6 +61,7 @@ Future<Uint8List> _buildOdp(
     metadata: metadata,
     fallbackTitle: fallbackTitle,
     altTexts: _altTextsOf(audience),
+    slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
   ),
 );
 
@@ -68,6 +70,7 @@ Future<Uint8List> _buildPdf(
   required ExportDocumentMetadata metadata,
   required String fallbackTitle,
   bool compress = false,
+  double slideAspect = kScreenSlideAspect,
 }) {
   return ExportService._offload(() async {
     final doc = pw.Document(
@@ -79,7 +82,7 @@ Future<Uint8List> _buildPdf(
       producer: metadata.producer,
     );
     // Page size in points; only the ratio matters for a full-bleed image.
-    const format = PdfPageFormat(1280, 720, marginAll: 0);
+    final format = PdfPageFormat(1280, 1280 / slideAspect, marginAll: 0);
     for (final png in images) {
       // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
       // compressed (JPEG) slide embeds just like the lossless one.
@@ -137,6 +140,7 @@ extension _ExportFormats on ExportService {
           metadata: docMeta,
           fallbackTitle: fallbackTitle,
           compress: compress,
+          slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
         );
       case ExportFormat.pptx:
         bytes = await _buildPptx(

@@ -30,6 +30,8 @@ extension DeckNotifierInfo on DeckNotifier {
     TlpLevel? tlp,
     int? presentationTargetSeconds,
     PresentationTimingConfig? presentationTiming,
+    PageSizeSpec? slideSize,
+    bool clearSlideSize = false,
     bool? showRehearsalSummary,
     bool? playOnly,
   }) {
@@ -51,6 +53,8 @@ extension DeckNotifierInfo on DeckNotifier {
         tlp: tlp,
         presentationTargetSeconds: presentationTargetSeconds,
         presentationTiming: presentationTiming,
+        slideSize: slideSize,
+        clearSlideSize: clearSlideSize,
         showRehearsalSummary: showRehearsalSummary,
         playOnly: playOnly,
       ),

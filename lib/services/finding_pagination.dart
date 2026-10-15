@@ -18,6 +18,7 @@ import 'package:flutter/foundation.dart';
 import '../models/finding_spec.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import 'rich_text_layout.dart';
 import 'slide_layout_metrics.dart';
 
@@ -191,6 +192,7 @@ List<FindingSpec> paginateFinding(
   FindingSpec spec, {
   String font = 'Arial',
   double extraVReserve = 0,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final present = [
     for (final s in _Section.values)
@@ -204,6 +206,7 @@ List<FindingSpec> paginateFinding(
         spec: spec,
         font: font,
         extraVReserve: extraVReserve,
+        slideAspect: slideAspect,
       ) >=
       _minSinglePageScale) {
     return [spec];
@@ -230,6 +233,7 @@ List<FindingSpec> paginateFinding(
       font: font,
       continuation: !isFirst,
       extraVReserve: extraVReserve,
+      slideAspect: slideAspect,
     );
     if (readable < _pagedReadableScale && current.isNotEmpty) {
       pages.add(current);
@@ -263,16 +267,18 @@ List<FindingSpec> paginateFinding(
 List<Slide> expandFindingsForRender(
   List<Slide> slides, {
   ThemeProfile? profile,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final out = <Slide>[];
   for (final slide in slides) {
     if (slide.type == SlideType.finding &&
         slide.findingRole == FindingRole.header) {
-      final metrics = _findingRenderMetrics(slide, profile);
+      final metrics = _findingRenderMetrics(slide, profile, slideAspect);
       final pages = paginateFinding(
         FindingSpec.parse(slide.customMarkdown),
         font: metrics.font,
         extraVReserve: metrics.extraVReserve,
+        slideAspect: slideAspect,
       );
       if (pages.length <= 1) {
         out.add(slide);
@@ -309,7 +315,11 @@ List<Slide> expandFindingsForRender(
 /// A finding that already fits one slide — including a page-slide produced by
 /// [expandFindingsForRender] — is returned unchanged, so this is a no-op on the
 /// paths that already paginate.
-FindingSpec firstRenderPageSpec(Slide slide, {ThemeProfile? profile}) {
+FindingSpec firstRenderPageSpec(
+  Slide slide, {
+  ThemeProfile? profile,
+  double slideAspect = kScreenSlideAspect,
+}) {
   final spec = FindingSpec.parse(slide.customMarkdown);
   // Already a render page? A page produced by [expandFindingsForRender] (the
   // presenter, the export, the paged main preview) carries the "(i/N)" marker
@@ -318,22 +328,29 @@ FindingSpec firstRenderPageSpec(Slide slide, {ThemeProfile? profile}) {
   // mangled, double-marked page — so leave any already-paginated page verbatim
   // and only split an un-split source finding.
   if (findingPageMarker.hasMatch(spec.heading)) return spec;
-  final metrics = _findingRenderMetrics(slide, profile);
+  final metrics = _findingRenderMetrics(slide, profile, slideAspect);
   return paginateFinding(
     spec,
     font: metrics.font,
     extraVReserve: metrics.extraVReserve,
+    slideAspect: slideAspect,
   ).first;
 }
 
 ({String font, double extraVReserve}) _findingRenderMetrics(
   Slide slide,
   ThemeProfile? profile,
+  double slideAspect,
 ) {
   final font = profile?.fontFamily ?? 'Arial';
   if (profile == null || !slide.showLogo) {
     return (font: font, extraVReserve: 0);
   }
-  final reserve = logoSafeReserve(kReferenceSlideWidth, profile, corner: true);
+  final reserve = logoSafeReserve(
+    kReferenceSlideWidth,
+    profile,
+    corner: true,
+    slideAspect: slideAspect,
+  );
   return (font: font, extraVReserve: reserve);
 }

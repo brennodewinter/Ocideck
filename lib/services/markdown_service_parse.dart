@@ -279,6 +279,7 @@ extension _MarkdownParse on MarkdownService {
       privacy: fm.privacy,
       presentationTargetSeconds: fm.presentationTargetSeconds.clamp(0, 86400),
       presentationTiming: fm.presentationTiming,
+      slideSize: fm.slideSize,
       showRehearsalSummary: fm.showRehearsalSummary,
       playOnly: fm.playOnly,
       improvementFramework: fm.improvementFramework,

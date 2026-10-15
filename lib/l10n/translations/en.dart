@@ -812,6 +812,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Diaformaat': 'Slide format',
+  'Scherm (16:9)': 'Screen (16:9)',
+  'Papierformaat': 'Paper size',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Choose a paper size for handouts and paper exports.',
   'Startmappen': 'Start folders',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Where opening and saving starts. Leave this empty to use the first library.',

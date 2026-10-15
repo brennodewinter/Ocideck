@@ -1604,6 +1604,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Diaformaat': 'Slaida formāts',
+  'Scherm (16:9)': 'Ekrāns (16:9)',
+  'Papierformaat': 'Papīra formāts',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Izvēlieties papīra formātu izdales materiāliem un eksportam uz papīra.',
   'Startmappen': 'Sākuma mapes',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur sākas atvēršana un saglabāšana. Tukšs izmanto pirmo bibliotēku.',

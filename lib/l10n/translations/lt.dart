@@ -1613,6 +1613,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Diaformaat': 'Skaidrės formatas',
+  'Scherm (16:9)': 'Ekranas (16:9)',
+  'Papierformaat': 'Popieriaus formatas',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Pasirinkite popieriaus formatą dalijamajai medžiagai ir eksportui popieriuje.',
   'Startmappen': 'Pradžios aplankai',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur prasideda atidarymas ir įrašymas. Tuščia naudoja pirmąją biblioteką.',

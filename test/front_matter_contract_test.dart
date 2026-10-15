@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/improvement_y01.dart';
@@ -399,6 +400,11 @@ style: |
               slideDuration: Duration(seconds: 30),
             ),
           ),
+          // #2433: het diaformaat schrijft papersize óf geometry — beide
+          // varianten meenemen, anders staat een van de owned sleutels
+          // ongeschreven in de set.
+          deck.copyWith(slideSize: PageSizeSpec.a4),
+          deck.copyWith(slideSize: PageSizeSpec.a4Landscape),
         ]) {
           geschreven.addAll(
             _frontMatter(

@@ -1634,6 +1634,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Diaformaat': 'Formato do diapositivo',
+  'Scherm (16:9)': 'Ecrã (16:9)',
+  'Papierformaat': 'Formato de papel',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Escolha um formato de papel para folhetos e exportações em papel.',
   'Startmappen': 'Pastas iniciais',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Onde abrir e guardar começam. Vazio usa a primeira biblioteca.',

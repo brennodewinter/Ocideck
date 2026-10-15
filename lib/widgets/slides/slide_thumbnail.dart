@@ -10,6 +10,7 @@ import '../../models/quality_disposition.dart';
 import '../../models/slide_quality.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../services/slide_image_refs.dart';
 import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
@@ -175,6 +176,9 @@ class SlideThumbnail extends ConsumerWidget {
   /// thumbnail reads the same as the slide it stands for.
   final String reportLanguage;
 
+  /// De diaverhouding van het deck (zie [SlidePreviewWidget.slideAspect]).
+  final double slideAspect;
+
   const SlideThumbnail({
     super.key,
     required this.slide,
@@ -198,6 +202,7 @@ class SlideThumbnail extends ConsumerWidget {
     this.numberStart = 1,
     this.scopeCia = const {},
     this.reportLanguage = '',
+    this.slideAspect = kScreenSlideAspect,
   });
 
   /// De twee badge-tonen van deze kaart: kwaliteit en privacy.
@@ -437,7 +442,7 @@ class SlideThumbnail extends ConsumerWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
         child: AspectRatio(
-          aspectRatio: 16 / 9,
+          aspectRatio: slideAspect,
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -448,6 +453,7 @@ class SlideThumbnail extends ConsumerWidget {
                 opacity: skipped || withheld ? 0.32 : 1,
                 child: RepaintBoundary(
                   child: SlidePreviewWidget(
+                    slideAspect: slideAspect,
                     slide: slide,
                     projectPath: projectPath,
                     themeProfile: themeProfile,

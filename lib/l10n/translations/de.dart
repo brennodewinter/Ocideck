@@ -652,6 +652,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Diaformaat': 'Folienformat',
+  'Scherm (16:9)': 'Bildschirm (16:9)',
+  'Papierformaat': 'Papierformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Wähle ein Papierformat für Handouts und Papier-Exporte.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffnen und Speichern beginnen. Leer lassen verwendet die erste Bibliothek.',

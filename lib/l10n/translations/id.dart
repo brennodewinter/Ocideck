@@ -1606,6 +1606,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Diaformaat': 'Format slide',
+  'Scherm (16:9)': 'Layar (16:9)',
+  'Papierformaat': 'Ukuran kertas',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Pilih ukuran kertas untuk handout dan ekspor ke kertas.',
   'Startmappen': 'Folder awal',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Di mana membuka dan menyimpan dimulai. Kosongkan untuk memakai pustaka pertama.',

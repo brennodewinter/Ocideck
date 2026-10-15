@@ -1608,6 +1608,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Diaformaat': 'Diaformátum',
+  'Scherm (16:9)': 'Képernyő (16:9)',
+  'Papierformaat': 'Papírméret',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Válasszon papírméretet a kiosztandó anyagokhoz és a papíralapú exporthoz.',
   'Startmappen': 'Kezdőmappák',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hol a megnyitás és a mentés kezdődik. Üresen az első könyvtárat használja.',

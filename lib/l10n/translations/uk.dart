@@ -1621,6 +1621,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Diaformaat': 'Формат слайда',
+  'Scherm (16:9)': 'Екран (16:9)',
+  'Papierformaat': 'Формат паперу',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Оберіть формат паперу для роздаткових матеріалів і експорту на папір.',
   'Startmappen': 'Початкові теки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Звідки починаються відкриття й збереження. Порожнє значення — перша бібліотека.',
