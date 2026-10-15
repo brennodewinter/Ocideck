@@ -95,6 +95,10 @@ class DocumentDossierStore {
           !_validRelativePath(entry.sourceRelativePath!)) {
         throw const FormatException('Ongeldig relatief bronpad');
       }
+      if (entry.documentDate != null &&
+          !DossierEntry.validDocumentDate(entry.documentDate!)) {
+        throw const FormatException('Ongeldige documentdatum');
+      }
       if (entry.numberOverride case final int number) {
         if (number < 1 || !manualNumbers.add(number)) {
           throw const FormatException('Dubbel of ongeldig dossiernummer');
@@ -367,10 +371,19 @@ class DocumentDossierStore {
       final link = entry.sourcePath == null || entry.sourceRelativePath != null
           ? Uri(pathSegments: p.posix.split(entry.relativePath)).toString()
           : Uri.file(entry.sourcePath!).toString();
+      buffer..writeln(
+        '${dossier.numberFor(index)}. [${_markdownText(entry.title)}]($link)',
+      );
+      if (entry.description.trim().isNotEmpty) {
+        buffer.writeln('   ${_markdownText(entry.description.trim())}');
+      }
+      if (entry.documentDate != null) {
+        buffer.writeln('   Datum: ${entry.documentDate}');
+      }
+      if (entry.author.trim().isNotEmpty) {
+        buffer.writeln('   Opsteller: ${_markdownText(entry.author.trim())}');
+      }
       buffer
-        ..writeln(
-          '${dossier.numberFor(index)}. [${_markdownText(entry.title)}]($link)',
-        )
         ..writeln('   SHA-256: `${entry.sha256}`')
         ..writeln();
     }
