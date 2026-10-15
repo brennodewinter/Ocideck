@@ -651,6 +651,22 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Referentie vastgelegd': 'Referensiya rekordá.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Kambionan no warda den tab; SHA-256 ta kontrolá e vershon riba disko.',
+  'Documenten controleren': 'Kontrolá dokumentonan',
+  'Dit nummer is al in gebruik.': 'E number aki ta den uso kaba.',
+  'Documenten openen': 'Habri dokumentonan',
+  'Eerdere SHA-256-waarden': 'Balornan anterior di SHA-256',
+  'Omschrijving wijzigen': 'Kambia deskripshon',
+  'Beginnummer wijzigen': 'Kambia number di kuminsamentu',
+  'Vindplaats': 'Lugá',
+  'Laatst gecontroleerd': 'Último kontrolá',
+  'Nummer wijzigen': 'Kambia number',
+  'Waar gaat dit dossier over?': 'Di kiko e dosier aki ta trata?',
+  'Nummer': 'Number',
+  'Gebruik een positief getal.': 'Usa un number positivo.',
+  'Automatisch nummer': 'Number outomátiko',
   'Aanvulling gevraagd': 'Komplemento pidi',
   'Aanvulling gevraagd.': 'Komplemento pidi.',
   'Aanvulling gevraagd: {opmerking}': 'Komplemento pidi: {opmerking}',
@@ -682,6 +698,72 @@ const _dutchSourceAddPap = {
   'De uitslagen konden niet worden geladen.': 'No por a karga e resultadonan.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Lo mira bo resultado bou di Mi èksamennan tan lihé ku e ta wòrdu liberá.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Solo dokumento e prezentashon digital (.md) ta poder a adicira.',
+  'OciDeck dossier': 'OciDeck Dosye',
+  'Alle documenten openen': 'Habri tur dokumento',
+  'Alleen overzicht': 'Solo mira el lista.',
+  'Alles controleren': 'Kontrolá tur kos',
+  'DOSSIER': 'DOSYE',
+  'De SHA-256 klopt al.': 'Sha-256 ta korta ya.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'E ta sinta e palabra e ta sinta fora e dossier. E dokumento archivo ta restaura.',
+  'Deze bijlage is niet beschikbaar.': 'E archivo e ta no disponible.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'E archivo e ta no poder kontrola.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'E archivo e ta no poder auka segura.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'E carpeta e dossier e ta ya existi. Seleciona otro nombre.',
+  'Dit dossier kon niet worden geopend.': 'E dossier e ta no poder auka.',
+  'Document gewijzigd': 'Dokumento e ta cambia.',
+  'Document niet leesbaar': 'El dokumento nuná tabay ta biba.',
+  'Document ontbreekt': 'El dokumento ta falta.',
+  'Document openen': 'Habri dokumento',
+  'Documenten toevoegen': 'Añadí dokumento',
+  'Dossier': 'Dosye',
+  'Dossier openen': 'Habri dosye',
+  'Dossier openen…': 'Abrir dossier…',
+  'Dossiertitel wijzigen': 'Cambia el titulo del dossier.',
+  'Een bijlage kon niet worden toegevoegd.': 'Un adjunto nuná tabay ta biba.',
+  'Een goed dossier begint hier': 'Un buen dossier ta komisa aisa.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Uza el maná o los flecha para cambia el orden. Los numero ta sigui automatico.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'El archivo ta cambia o nuná tabay ta biba. Kontrola otra vega.',
+  'Het dossier kon niet worden aangemaakt.': 'El dossier ta dificil kria.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Kisa ta ese nueva versión ta referencia pa el dossier.',
+  'Huidige SHA-256': 'SHA-256 actual',
+  'Inhoudsopgave en integriteitscontrole': 'Kontenido e kontrol di integridad',
+  'Meer opties': 'Mas opcionan',
+  'Naamloos dossier': 'Dossier sin nom',
+  'Nieuw dossier': 'Dosye nobo',
+  'Nieuwe versie vastleggen': 'Registrá vershon nobo',
+  'Nieuwe versie vastleggen?': '¿Registra un nueva versión?',
+  'Omhoog verplaatsen': 'Muevelo riba',
+  'Omlaag verplaatsen': 'Muevelo riba baje',
+  'Onveilige bestandsverwijzing': 'Referencia di archivo inseguro',
+  'Overzicht en bijlagen': 'Vista bishima ta adjunta',
+  'SHA-256 controleren': 'Verifika SHA-256',
+  'SHA-256 klopt': 'SHA-256 ta kopa',
+  'Sleep om te ordenen': 'Traiga pa organiza',
+  'Terug naar dossier': 'Bai bèk na dosye',
+  'Titel wijzigen': 'Muda titulo',
+  'Uit dossier verwijderen': 'Kita for di dosye',
+  'Uit dossier verwijderen?': 'Retira bishima?',
+  'Vastgelegde SHA-256': 'SHA-256 ta kopa',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Agregá dokumentonan. E archivonan original ta keda na nan lugá. Aki bo ta determiná e òrdu.',
+  'Wijziging opslaan is mislukt.': 'Ta kopa ta falla.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Ta deseo ta apertura ta adjunta na pestaña?',
+  'Als document openen': 'Pa abre un dokumento',
+  'Dossier maken': 'Krea dosye',
+  'Het overzicht kon niet als document worden geopend.':
+      'Lo panoramá no poder a ser abre komo dokumento.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Guarda los eskambios den dokumento panoramá primero o ciérre esa pestaña.',
   'Startmappen': 'Mapa di kuminsamentu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unda habri i warda ta kuminsá. Laga bashí ta usa e promé biblioteka.',

@@ -1613,6 +1613,22 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Referentie vastgelegd': 'Informacija fiksuota',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Kortelėje yra neįrašytų pakeitimų; SHA-256 tikrina diske esančią versiją.',
+  'Documenten controleren': 'Dokumentų tikrinimas',
+  'Dit nummer is al in gebruik.': 'Šis numeris jau naudojamas.',
+  'Documenten openen': 'Atidaryti dokumentus',
+  'Eerdere SHA-256-waarden': 'Ankstesnės SHA-256 reikšmės',
+  'Omschrijving wijzigen': 'Keisti aprašymą',
+  'Beginnummer wijzigen': 'Keisti pradinį numerį',
+  'Vindplaats': 'Vieta',
+  'Laatst gecontroleerd': 'Paskutinį kartą tikrinta',
+  'Nummer wijzigen': 'Keisti numerį',
+  'Waar gaat dit dossier over?': 'Apie ką šis dosjė?',
+  'Nummer': 'Numeris',
+  'Gebruik een positief getal.': 'Naudokite teigiamą skaičių.',
+  'Automatisch nummer': 'Automatinis numeris',
   'Aanvulling gevraagd': 'Prašoma papildyti',
   'Aanvulling gevraagd.': 'Prašoma papildyti.',
   'Aanvulling gevraagd: {opmerking}': 'Prašoma papildyti: {opmerking}',
@@ -1644,6 +1660,73 @@ const _dutchSourceAddLt = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Nepavyko įkelti rezultatų.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Savo rezultatą matysite skiltyje Mano egzaminai, kai tik jis bus paskelbtas.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Galima pridėti tik Markdown dokumentus ir pristatymus (.md).',
+  'OciDeck dossier': 'OciDeck Byla',
+  'Alle documenten openen': 'Atidaryti visus dokumentus',
+  'Alleen overzicht': 'Tiesiog peržiūrėti perteklių.',
+  'Alles controleren': 'Patikrinti viską',
+  'DOSSIER': 'BYLA',
+  'De SHA-256 klopt al.': 'SHA-256 sumaspa, viskas gerai.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Ši įrašas išnyksta iš dossirolės. Dokumento failas lieka išsaugotas.',
+  'Deze bijlage is niet beschikbaar.': 'Ši priedas neturime.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Šį pridedinį negalima patikrinti.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Šį pridedinį negalima saugiai atidaryti.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Ši dossirolės folder jau egzistuoja. Pasirinkite kitą pavadinimą.',
+  'Dit dossier kon niet worden geopend.': 'Ši dossirolė negali būti atidaryta.',
+  'Document gewijzigd': 'Dokumentas buvo pakeistas.',
+  'Document niet leesbaar': 'Dokumentas negalima skaityti',
+  'Document ontbreekt': 'Dokumentas trūksta',
+  'Document openen': 'Atidaryti dokumentą',
+  'Documenten toevoegen': 'Pridėti dokumentus',
+  'Dossier': 'Byla',
+  'Dossier openen': 'Atidaryti bylą',
+  'Dossier openen…': 'Dossierį atidaryti…',
+  'Dossiertitel wijzigen': 'Dossierio pavadinimą pakeisti',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Viena prielausa negali buvo pridėta.',
+  'Een goed dossier begint hier': 'Geras dossieris prasideda čia',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Naudokite rankenėlę arba pele, kad būtų pakeista tvarka. Skaitmenų numeriai sekasi automatiškai.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Failas pasikeitė arba negali buvo fiksuotas. Patikrinkite dar kartą.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossieris negalima buvo sukurti.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Šiuo būdu nauja failo versija tapo šio susiejimo nuoroda.',
+  'Huidige SHA-256': 'Šiuo metu SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Turinys ir integriteto patikra',
+  'Meer opties': 'Daugiau pasirinkimų',
+  'Naamloos dossier': 'Nenorimas susiejimas',
+  'Nieuw dossier': 'Nauja byla',
+  'Nieuwe versie vastleggen': 'Užfiksuoti naują versiją',
+  'Nieuwe versie vastleggen?': 'Ar norite užfiksuoti naują versiją?',
+  'Omhoog verplaatsen': 'Perėti aukštyn',
+  'Omlaag verplaatsen': 'Perėti žemyn',
+  'Onveilige bestandsverwijzing': 'Neįrašyta failo nuoroda',
+  'Overzicht en bijlagen': 'Perspetybė ir priedas',
+  'SHA-256 controleren': 'Patikrinti SHA-256 sumą',
+  'SHA-256 klopt': 'SHA-256 suma atitinka',
+  'Sleep om te ordenen': 'Jūs galite perbraukti, kad sudarytumėte tvarką',
+  'Terug naar dossier': 'Grįžti į bylą',
+  'Titel wijzigen': 'Pavadinimą pakeisti',
+  'Uit dossier verwijderen': 'Pašalinti iš bylos',
+  'Uit dossier verwijderen?': 'Ar norite pašalinti iš dokumento?',
+  'Vastgelegde SHA-256': 'Nufiksuota SHA-256 suma',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Pridėkite dokumentų. Originalūs failai lieka savo vietoje. Čia nustatykite jų eilės tvarką.',
+  'Wijziging opslaan is mislukt.': 'Nepavyko išsaugoti pokyčių.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Ar norite atidaryti priklausiusius failus lentelėse?',
+  'Als document openen': 'Dokumentą atidaryti',
+  'Dossier maken': 'Sukurti bylą',
+  'Het overzicht kon niet als document worden geopend.':
+      'Perteklinis vaizdavimas negali būti atidarytas kaip dokumentas.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Pirmiausia išsaugokite pokyčius vaizdų dokumente arba uždarykite tą kortelę.',
   'Startmappen': 'Pradžios aplankai',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur prasideda atidarymas ir įrašymas. Tuščia naudoja pirmąją biblioteką.',

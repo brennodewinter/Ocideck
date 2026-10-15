@@ -1622,6 +1622,22 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Referentie vastgelegd': 'Referința este înregistrată',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Modificări nesalvate în filă; SHA-256 verifică versiunea de pe disc.',
+  'Documenten controleren': 'Verificarea documentelor',
+  'Dit nummer is al in gebruik.': 'Acest număr este deja folosit.',
+  'Documenten openen': 'Deschide documente',
+  'Eerdere SHA-256-waarden': 'Valori SHA-256 anterioare',
+  'Omschrijving wijzigen': 'Schimbă descrierea',
+  'Beginnummer wijzigen': 'Schimbă numărul de început',
+  'Vindplaats': 'Locație',
+  'Laatst gecontroleerd': 'Ultima verificare',
+  'Nummer wijzigen': 'Schimbă numărul',
+  'Waar gaat dit dossier over?': 'Despre ce este acest dosar?',
+  'Nummer': 'Număr',
+  'Gebruik een positief getal.': 'Folosește un număr pozitiv.',
+  'Automatisch nummer': 'Număr automat',
   'Aanvulling gevraagd': 'Completare solicitată',
   'Aanvulling gevraagd.': 'Completare solicitată.',
   'Aanvulling gevraagd: {opmerking}': 'Completare solicitată: {opmerking}',
@@ -1655,6 +1671,73 @@ const _dutchSourceAddRo = <String, String>{
       'Rezultatele nu au putut fi încărcate.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Veți vedea rezultatul sub Examenele mele imediat ce este publicat.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Doar documentele Markdown și prezentările (.md) pot fi adăugate.',
+  'OciDeck dossier': 'OciDeck Dosar',
+  'Alle documenten openen': 'Deschide toate documentele',
+  'Alleen overzicht': 'Doar afisează o prezentare generală.',
+  'Alles controleren': 'Verifică tot',
+  'DOSSIER': 'DOSAR',
+  'De SHA-256 klopt al.': 'SHA-256-ul este verificat deja.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Intrarea dispare din dosar. Fișierul document este păstrat.',
+  'Deze bijlage is niet beschikbaar.': 'Această anexă nu este disponibilă.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Această anexă nu poate fi verificată.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Această anexă nu putea fi deschisă în siguranță.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Această hartă de dosar există deja. Alege o altă denumire.',
+  'Dit dossier kon niet worden geopend.': 'Acest dosar nu putea fi deschis.',
+  'Document gewijzigd': 'Documentul a fost modificat.',
+  'Document niet leesbaar': 'Fișierul nu poate fi citit.',
+  'Document ontbreekt': 'Fișierul lipsesc.',
+  'Document openen': 'Deschide documentul',
+  'Documenten toevoegen': 'Adaugă documente',
+  'Dossier': 'Dosar',
+  'Dossier openen': 'Deschide dosarul',
+  'Dossier openen…': 'Deschide dosarul…',
+  'Dossiertitel wijzigen': 'Modifică titlul dosarului.',
+  'Een bijlage kon niet worden toegevoegd.': 'O anexa nu a putut fi adăugată.',
+  'Een goed dossier begint hier': 'Un dosar bun începe aici.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Utilizează maneta sau săgețile pentru a modifica ordinea. Numerele se actualizează automat.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Fișierul s-a modificat sau nu a putut fi înregistrat. Verifică din nou.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossierul nu a putut fi creat.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Prin aceasta, noua versiune a fișierului devine referința pentru acest dosar.',
+  'Huidige SHA-256': 'SHA-256 curent',
+  'Inhoudsopgave en integriteitscontrole':
+      'Cuprins și verificare a integrității',
+  'Meer opties': 'Mai multe opțiuni',
+  'Naamloos dossier': 'Dossar neamț',
+  'Nieuw dossier': 'Dosar nou',
+  'Nieuwe versie vastleggen': 'Înregistrează versiunea nouă',
+  'Nieuwe versie vastleggen?': 'Înregistrează noua versiune?',
+  'Omhoog verplaatsen': 'Mută în sus',
+  'Omlaag verplaatsen': 'Mută în jos',
+  'Onveilige bestandsverwijzing': 'Referință de fișier nesigură',
+  'Overzicht en bijlagen': 'Privare și Anexe',
+  'SHA-256 controleren': 'Verificați SHA-256',
+  'SHA-256 klopt': 'SHA-256 este corect',
+  'Sleep om te ordenen': 'Trageți pentru a sorta',
+  'Terug naar dossier': 'Înapoi la dosar',
+  'Titel wijzigen': 'Modificați titlul',
+  'Uit dossier verwijderen': 'Elimină din dosar',
+  'Uit dossier verwijderen?': 'Eliminați din dosar?',
+  'Vastgelegde SHA-256': 'SHA-256 Stabilit',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Adaugă documente în această colecție. Originalele vor rămâne în locația lor inițială. Poți alege ordinea în care sunt afișate.',
+  'Wijziging opslaan is mislukt.': 'Salvarea modificării nu a reușit.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Doriți să deschideți și anexe în taburi?',
+  'Als document openen': 'Deschide documentul.',
+  'Dossier maken': 'Creează dosar',
+  'Het overzicht kon niet als document worden geopend.':
+      'Nu a putut fi deschis vizualizarea ca document.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Salvează modificările în documentul de vizualizare mai întâi sau închide acel tab.',
   'Startmappen': 'Dosare de pornire',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unde încep deschiderea și salvarea. Gol folosește prima bibliotecă.',

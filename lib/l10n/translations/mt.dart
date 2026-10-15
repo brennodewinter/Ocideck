@@ -1624,6 +1624,22 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Referentie vastgelegd': 'Ir-referenza ġiet irreġistrata',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Bidliet mhux issejvjati fit-tab; SHA-256 jiċċekkja l-verżjoni fuq id-diska.',
+  'Documenten controleren': 'Iċċekkjar tad-dokumenti',
+  'Dit nummer is al in gebruik.': 'Dan in-numru diġà qed jintuża.',
+  'Documenten openen': 'Iftaħ id-dokumenti',
+  'Eerdere SHA-256-waarden': 'Valuri SHA-256 preċedenti',
+  'Omschrijving wijzigen': 'Ibdel id-deskrizzjoni',
+  'Beginnummer wijzigen': 'Ibdel in-numru tal-bidu',
+  'Vindplaats': 'Post',
+  'Laatst gecontroleerd': 'Iċċekkjat l-aħħar',
+  'Nummer wijzigen': 'Ibdel in-numru',
+  'Waar gaat dit dossier over?': 'Dwar xiex huwa dan id-dossier?',
+  'Nummer': 'Numru',
+  'Gebruik een positief getal.': 'Uża numru pożittiv.',
+  'Automatisch nummer': 'Numru awtomatiku',
   'Aanvulling gevraagd': 'Mitluba aktar informazzjoni',
   'Aanvulling gevraagd.': 'Mitluba aktar informazzjoni.',
   'Aanvulling gevraagd: {opmerking}':
@@ -1657,6 +1673,74 @@ const _dutchSourceAddMt = <String, String>{
       'Ir-riżultati ma setgħux jitgħabbew.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Tara r-riżultat tiegħek taħt L-eżamijiet tiegħi hekk kif jiġi rrilaxxat.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'J\'istgħu jitfgħu biss dokumenti bil-Markdown u presentazzjonijiet (.md).',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Iftaħ id-dokumenti kollha',
+  'Alleen overzicht': 'Fakola bissa l-vista.',
+  'Alles controleren': 'Iċċekkja kollox',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'Il-SHA-256 hija tassew korretta.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'L-isem jitneħħa mill-dossi. L-fajl tal-dokument jibqa\' fil-ħażna.',
+  'Deze bijlage is niet beschikbaar.': 'Din il-aġenda mhux disponibbli.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Ma hemmx mod kif tittestja din l-aġenda.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Ma setax tiftaħ dan l-aġenda b\'mod sigur.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Din il-fjamda tad-dossi ġiet ħalliet qabel. Agħżel ismiet differenti.',
+  'Dit dossier kon niet worden geopend.': 'Dan il-dossi ma setax jinħoloq.',
+  'Document gewijzigd': 'Il-dokument inbidel.',
+  'Document niet leesbaar': 'Il-fihal mhux jistin.',
+  'Document ontbreekt': 'Il-fihal mhemmiex presenti.',
+  'Document openen': 'Iftaħ dokument',
+  'Documenten toevoegen': 'Żid dokumenti',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Iftaħ dossier',
+  'Dossier openen…': 'Ftaħ il-dossier…',
+  'Dossiertitel wijzigen': 'Ibdel it-titlu tad-dossier.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Żidietx fihil wieħed ma setax jitgħaddas.',
+  'Een goed dossier begint hier': 'Dossier żewġ għandu jibda hawn.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Uża l-impettata jew l-arroeċċi biex tibdel it-triqċa. In-numri se jżidu awtomatikament.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Il-fihal saret modifika jew ma setax tiġarrab. Ipprova fil-ġdid.',
+  'Het dossier kon niet worden aangemaakt.': 'L-arkiv ma setax jinħakkem.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Din tiżgura li l-ġabra ġdida tkun il-kunpunt ta\' riferenza għall-arkivju.',
+  'Huidige SHA-256': 'SHA-256 Attwali',
+  'Inhoudsopgave en integriteitscontrole':
+      'Fornutura u Kontroll ta\' Integrità',
+  'Meer opties': 'Aktar għażliet',
+  'Naamloos dossier': 'Arkivju mingħajja',
+  'Nieuw dossier': 'Dossier ġdid',
+  'Nieuwe versie vastleggen': 'Irreġistra verżjoni ġdida',
+  'Nieuwe versie vastleggen?': 'Fixxajk il-ġabra ġdida?',
+  'Omhoog verplaatsen': 'Iġbdu għand fuq.',
+  'Omlaag verplaatsen': 'Iġbdu għand taħt.',
+  'Onveilige bestandsverwijzing': 'Riferiment tal-fajl mhux sigur.',
+  'Overzicht en bijlagen': 'Ħarsa ġenerali u aġġunti',
+  'SHA-256 controleren': 'Ikkontrolla l-SHA-256',
+  'SHA-256 klopt': 'L-SHA-256 huwa korrett',
+  'Sleep om te ordenen': 'Ittawwar biex tordna',
+  'Terug naar dossier': 'Lura għad-dossier',
+  'Titel wijzigen': 'Ibdel il-title',
+  'Uit dossier verwijderen': 'Neħħi mid-dossier',
+  'Uit dossier verwijderen?': 'Neħel mill-dossi?',
+  'Vastgelegde SHA-256': 'SHA-256 li tkelltet',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Żid dokumenti. Il-fajls oriġinali jibqgħu fejn jinsabu. Hawn tagħżel l-ordni tagħhom.',
+  'Wijziging opslaan is mislukt.': 'L-edizzjoni ma saretx.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Tissuġġerixxi li taf খুল l-aġġunti wkoll fi tfessijiet?',
+  'Als document openen': 'Agri a dokument miftuħ',
+  'Dossier maken': 'Oħloq dossier',
+  'Het overzicht kon niet als document worden geopend.':
+      'L-istidenza ma setax tinfeta bħala dokument.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Ħutta l-ebda modifika fil-fildar u agħlaq il-tab.',
   'Startmappen': 'Folders tal-bidu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Fejn jibdew il-ftuħ u s-salvataġġ. Vojet juża l-ewwel librerija.',

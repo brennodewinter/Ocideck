@@ -649,6 +649,22 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Referentie vastgelegd': 'Riferimento registrato',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Modifiche non salvate nella scheda; SHA-256 verifica la versione su disco.',
+  'Documenten controleren': 'Verifica documenti',
+  'Dit nummer is al in gebruik.': 'Questo numero è già in uso.',
+  'Documenten openen': 'Apri documenti',
+  'Eerdere SHA-256-waarden': 'Valori SHA-256 precedenti',
+  'Omschrijving wijzigen': 'Modifica descrizione',
+  'Beginnummer wijzigen': 'Modifica numero iniziale',
+  'Vindplaats': 'Posizione',
+  'Laatst gecontroleerd': 'Ultimo controllo',
+  'Nummer wijzigen': 'Modifica numero',
+  'Waar gaat dit dossier over?': 'Di cosa tratta questo fascicolo?',
+  'Nummer': 'Numero',
+  'Gebruik een positief getal.': 'Usa un numero positivo.',
+  'Automatisch nummer': 'Numero automatico',
   'Aanvulling gevraagd': 'Integrazione richiesta',
   'Aanvulling gevraagd.': 'Integrazione richiesta.',
   'Aanvulling gevraagd: {opmerking}': 'Integrazione richiesta: {opmerking}',
@@ -681,6 +697,74 @@ const _dutchSourceAddIt = {
   'De uitslagen konden niet worden geladen.': 'Impossibile caricare gli esiti.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Vedrà il suo esito in I miei esami non appena sarà rilasciato.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Solo i documenti e le presentazioni in formato Markdown (.md) possono essere aggiunti.',
+  'OciDeck dossier': 'Dossier OciDeck',
+  'Alle documenten openen': 'Apri tutti i documenti',
+  'Alleen overzicht': 'Solo visualizza l\'anteprima.',
+  'Alles controleren': 'Controlla tutto',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'L\'hash SHA-256 è corretto.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'La voce viene rimossa dal dossier. Il file del documento rimane conservato.',
+  'Deze bijlage is niet beschikbaar.': 'Questo allegato non è disponibile.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Questo allegato non può essere controllato.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Questo allegato non è stato aperto in modo sicuro.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Questa cartella di dossier esiste già. Scegli un altro nome.',
+  'Dit dossier kon niet worden geopend.': 'Questo dossier non è stato aperto.',
+  'Document gewijzigd': 'Il documento è stato modificato.',
+  'Document niet leesbaar': 'Il documento non è leggibile.',
+  'Document ontbreekt': 'Il documento manca.',
+  'Document openen': 'Apri documento',
+  'Documenten toevoegen': 'Aggiungi documenti',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Apri dossier',
+  'Dossier openen…': 'Apri dossier…',
+  'Dossiertitel wijzigen': 'Modifica il titolo del dossier.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Un allegato non è stato possibile aggiungere.',
+  'Een goed dossier begint hier': 'Un buon dossier inizia qui.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Utilizza la maniglia o le frecce per modificare l\'ordine. I numeri cambiano automaticamente.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Il file è stato modificato o non è stato registrato. Controlla di nuovo.',
+  'Het dossier kon niet worden aangemaakt.': 'Il dossier non è stato creato.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Questo indica che la nuova versione del file sarà il riferimento per questo dossier.',
+  'Huidige SHA-256': 'SHA-256 corrente',
+  'Inhoudsopgave en integriteitscontrole': 'Indice e controllo dell\'integrità',
+  'Meer opties': 'Opzioni aggiuntive',
+  'Naamloos dossier': 'Dossier senza nome',
+  'Nieuw dossier': 'Nuovo dossier',
+  'Nieuwe versie vastleggen': 'Registra nuova versione',
+  'Nieuwe versie vastleggen?': 'Salvare nuova versione?',
+  'Omhoog verplaatsen': 'Spostare verso l\'alto',
+  'Omlaag verplaatsen': 'Spostare verso il basso',
+  'Onveilige bestandsverwijzing': 'Riferimento al file non sicuro',
+  'Overzicht en bijlagen': 'Panoramica e allegati',
+  'SHA-256 controleren': 'Verifica SHA-256',
+  'SHA-256 klopt': 'SHA-256 corrisponde',
+  'Sleep om te ordenen': 'Trascina per ordinare',
+  'Terug naar dossier': 'Torna al dossier',
+  'Titel wijzigen': 'Modifica il titolo',
+  'Uit dossier verwijderen': 'Rimuovi dal dossier',
+  'Uit dossier verwijderen?': 'Rimuovere dal dossier?',
+  'Vastgelegde SHA-256': 'SHA-256 memorizzata',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Aggiungi i documenti alla raccolta. I file originali rimangono dove li avevi. Puoi scegliere l\'ordine di visualizzazione qui.',
+  'Wijziging opslaan is mislukt.':
+      'Il salvataggio della modifica non è riuscito.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Desideri aprire anche gli allegati in schede?',
+  'Als document openen': 'Apri il documento.',
+  'Dossier maken': 'Crea dossier',
+  'Het overzicht kon niet als document worden geopend.':
+      'La visualizzazione non è stata aperta come documento.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Salva le modifiche nel documento di visualizzazione per primo o chiudi quella scheda.',
   'Startmappen': 'Cartelle di partenza',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Dove iniziano apertura e salvataggio. Lascia vuoto per usare la prima raccolta.',

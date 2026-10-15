@@ -1621,6 +1621,22 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Referentie vastgelegd': 'Referentia consignata',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Mutationes in tabula nondum servatae; SHA-256 versionem in disco inspicit.',
+  'Documenten controleren': 'Documenta inspicere',
+  'Dit nummer is al in gebruik.': 'Hic numerus iam adhibetur.',
+  'Documenten openen': 'Documenta aperire',
+  'Eerdere SHA-256-waarden': 'Valores SHA-256 priores',
+  'Omschrijving wijzigen': 'Descriptionem mutare',
+  'Beginnummer wijzigen': 'Numerum initialem mutare',
+  'Vindplaats': 'Locus',
+  'Laatst gecontroleerd': 'Novissime inspectum',
+  'Nummer wijzigen': 'Numerum mutare',
+  'Waar gaat dit dossier over?': 'De quo hoc dossier agit?',
+  'Nummer': 'Numerus',
+  'Gebruik een positief getal.': 'Numero positivo utere.',
+  'Automatisch nummer': 'Numerus automaticus',
   'Aanvulling gevraagd': 'Supplementum petitum',
   'Aanvulling gevraagd.': 'Supplementum petitum est.',
   'Aanvulling gevraagd: {opmerking}': 'Supplementum petitum: {opmerking}',
@@ -1651,6 +1667,73 @@ const _dutchSourceAddLa = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Eventus onerari non potuerunt.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Eventum tuum sub Meum scribendae videbis simulac emissus erit.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Solum documenta Markdown et praesentationes (.md) adhiberi possunt.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Omnia documenta aperire',
+  'Alleen overzicht': 'Solummodo prospectus ostenditur.',
+  'Alles controleren': 'Omnia verificare',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'Has SHA-256 congruere constat.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Haec notatio ex dossier evanescit. Filius documenti conservatur.',
+  'Deze bijlage is niet beschikbaar.': 'Haec annexa non praesta est.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Hanc annexam inspicientes non possunt.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Hanc annexam non securiter aperire potuerunt.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Haec repertorium dossier iam existit. Nomen alterum elige.',
+  'Dit dossier kon niet worden geopend.': 'Hoc dossier aperire non potuerunt.',
+  'Document gewijzigd': 'Documentum mutatum est.',
+  'Document niet leesbaar': 'Hic documentum non legitur.',
+  'Document ontbreekt': 'Documentum defectum est.',
+  'Document openen': 'Documentum aperire',
+  'Documenten toevoegen': 'Documenta addere',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Dossier aperire',
+  'Dossier openen…': 'Dossier aperire…',
+  'Dossiertitel wijzigen': 'Titulum dossier mutare.',
+  'Een bijlage kon niet worden toegevoegd.': 'Unus annexus non addi potest.',
+  'Een goed dossier begint hier': 'Unum bonum dossier hic incipit.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Usus habe intercidenum vel sagittas ad ordinem mutandum. Numeri proprie sequuntur.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Filius mutatus est vel non constans est. Redintegre.',
+  'Het dossier kon niet worden aangemaakt.': 'Inanis est dossier creandi.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Hoc indicat novam versionem filii quam referentiam habet hoc dossier.',
+  'Huidige SHA-256': 'SHA-256 praesentis',
+  'Inhoudsopgave en integriteitscontrole':
+      'Indice et verificatione integritatis',
+  'Meer opties': 'Plus optiones',
+  'Naamloos dossier': 'Dossier incerto nomine',
+  'Nieuw dossier': 'Novum dossier',
+  'Nieuwe versie vastleggen': 'Novam versionem consignare',
+  'Nieuwe versie vastleggen?': 'Versionem novam fixare an?',
+  'Omhoog verplaatsen': 'Ad summum transferre',
+  'Omlaag verplaatsen': 'Ad fundum transferre',
+  'Onveilige bestandsverwijzing': 'Referentia filii periculosa',
+  'Overzicht en bijlagen': 'Panoramica et Appendices',
+  'SHA-256 controleren': 'Verificatio SHA-256',
+  'SHA-256 klopt': 'SHA-256 congruet',
+  'Sleep om te ordenen': 'Truda mova ad ordinandum',
+  'Terug naar dossier': 'Ad dossier redire',
+  'Titel wijzigen': 'Titulum mutare',
+  'Uit dossier verwijderen': 'Ex dossier removere',
+  'Uit dossier verwijderen?': 'Removere ex dossier?',
+  'Vastgelegde SHA-256': 'SHA-256 fixus',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Documenta addere oportet. Originalia in locis suis manent. Hic ordinem exhibitionis constitue.',
+  'Wijziging opslaan is mislukt.': 'Mutatio conservandi abortuta est.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Visne appendices etiam in tabellaceis aperire?',
+  'Als document openen': 'Sicut documentum aperire',
+  'Dossier maken': 'Dossier creare',
+  'Het overzicht kon niet als document worden geopend.':
+      'Praefigium optinendum non potest sicut documentum aperiendum.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Conserva mutationes in documento praeficii, aut clausa tabulam illam.',
   'Startmappen': 'Carpetae initiales',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Ubi aperire et servare incipiunt. Vacuum relictum prima bibliotheca utitur.',

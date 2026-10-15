@@ -1599,6 +1599,22 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Referentie vastgelegd': 'Viide salvestatud',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Vahekaardil on salvestamata muudatusi; SHA-256 kontrollib kettal olevat versiooni.',
+  'Documenten controleren': 'Dokumentide kontrollimine',
+  'Dit nummer is al in gebruik.': 'See number on juba kasutusel.',
+  'Documenten openen': 'Ava dokumendid',
+  'Eerdere SHA-256-waarden': 'Varasemad SHA-256 väärtused',
+  'Omschrijving wijzigen': 'Muuda kirjeldust',
+  'Beginnummer wijzigen': 'Muuda algusnumbrit',
+  'Vindplaats': 'Asukoht',
+  'Laatst gecontroleerd': 'Viimati kontrollitud',
+  'Nummer wijzigen': 'Muuda numbrit',
+  'Waar gaat dit dossier over?': 'Mida see toimik käsitleb?',
+  'Nummer': 'Number',
+  'Gebruik een positief getal.': 'Kasutage positiivset arvu.',
+  'Automatisch nummer': 'Automaatne number',
   'Aanvulling gevraagd': 'Täiendust küsitud',
   'Aanvulling gevraagd.': 'Täiendust on küsitud.',
   'Aanvulling gevraagd: {opmerking}': 'Täiendust küsitud: {opmerking}',
@@ -1629,6 +1645,75 @@ const _dutchSourceAddEt = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Tulemusi ei õnnestunud laadida.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Näed oma tulemust jaotises Minu eksamid, kui see on vabastatud.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Lisada saab ainult Markdown-dokumente ja -esitlusi (.md).',
+  'OciDeck dossier': 'OciDeck Toimik',
+  'Alle documenten openen': 'Ava kõik dokumendid',
+  'Alleen overzicht': 'Vajalik on ainult ülevaade.',
+  'Alles controleren': 'Kontrolli kõike',
+  'DOSSIER': 'TOIMIK',
+  'De SHA-256 klopt al.': 'SHA-256 on juba õige.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Sissekiri kustutatakse dokumendist. Dokumendifail jääb säiliks.',
+  'Deze bijlage is niet beschikbaar.': 'See lisafail pole saadaval.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Seda lisafaiti ei saa kontrollida.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Seda lisafaiti ei saanud ohutult avada.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'See dokumendikinnitus juba olemas. Valige teine nimi.',
+  'Dit dossier kon niet worden geopend.':
+      'See dokumendikinnitus ei õnnestunud avada.',
+  'Document gewijzigd': 'Dokument on muudetud.',
+  'Document niet leesbaar': 'Dokumend ei lugitav',
+  'Document ontbreekt': 'Dokumend puudub',
+  'Document openen': 'Ava dokument',
+  'Documenten toevoegen': 'Lisa dokumente',
+  'Dossier': 'Toimik',
+  'Dossier openen': 'Ava toimik',
+  'Dossier openen…': 'Dokumendi kogu avamine…',
+  'Dossiertitel wijzigen': 'Dokumendikateid muuta',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Ühte lisandit ei õnnestunud lisada.',
+  'Een goed dossier begint hier': 'Hea dokumendikogum koosneb alustest.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Kasutage käepärast või nuppe järjedu muutmiseks. Numbrid järgnevad automaatselt.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Fail muutus või seda ei õnnestunud registreerida. Kontrollige uuesti.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossier ei saanud luua.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'See määrab uue failivariandi selle dokumendi jaoks.',
+  'Huidige SHA-256': 'SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Isiklikud leheküljed ja andmekontroll',
+  'Meer opties': 'Lisavõimalused',
+  'Naamloos dossier': 'Nimetamatu dokumend',
+  'Nieuw dossier': 'Uus toimik',
+  'Nieuwe versie vastleggen': 'Salvesta uus versioon',
+  'Nieuwe versie vastleggen?': 'Kas soovid salvestada uue variandi?',
+  'Omhoog verplaatsen': 'Liiga üles',
+  'Omlaag verplaatsen': 'Liiga alla',
+  'Onveilige bestandsverwijzing': 'Ohutu failireferendi',
+  'Overzicht en bijlagen': 'Ülevaade ja lisandid',
+  'SHA-256 controleren': 'Kontrolli SHA-256',
+  'SHA-256 klopt': 'SHA-256 on õige',
+  'Sleep om te ordenen': 'Drääbla järjestamiseks',
+  'Terug naar dossier': 'Tagasi toimiku juurde',
+  'Titel wijzigen': 'Pealkirja muuda',
+  'Uit dossier verwijderen': 'Eemalda toimikust',
+  'Uit dossier verwijderen?': 'Kas soovid eemaldada dokumendist?',
+  'Vastgelegde SHA-256': 'Salvestatud SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Lisa dokumente. Algupärased failid jäävad oma asukohta. Siin saad määrata nende järjestuse.',
+  'Wijziging opslaan is mislukt.': 'Muudatuste salvestamine ebaõnnestus.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Kas soovid avada lisandid ka vahetabelitesse?',
+  'Als document openen': 'Dokumendi avamiseks',
+  'Dossier maken': 'Loo toimik',
+  'Het overzicht kon niet als document worden geopend.':
+      'Ülevaade ei saanud dokumentina avada.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Salvestage muudatused ülevaatedokumendis kõigepealt või sulgege see tab.',
   'Startmappen': 'Alguskaustad',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kus avamine ja salvestamine algavad. Tühi kasutab esimest teeki.',

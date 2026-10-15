@@ -2514,6 +2514,22 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Referentie vastgelegd': 'Referans bilgisi kaydedilmiştir.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Sekmede kaydedilmemiş değişiklikler var; SHA-256 diskteki sürümü kontrol eder.',
+  'Documenten controleren': 'Belgeler kontrol ediliyor',
+  'Dit nummer is al in gebruik.': 'Bu numara zaten kullanılıyor.',
+  'Documenten openen': 'Belgeleri aç',
+  'Eerdere SHA-256-waarden': 'Önceki SHA-256 değerleri',
+  'Omschrijving wijzigen': 'Açıklamayı değiştir',
+  'Beginnummer wijzigen': 'Başlangıç numarasını değiştir',
+  'Vindplaats': 'Konum',
+  'Laatst gecontroleerd': 'Son kontrol',
+  'Nummer wijzigen': 'Numarayı değiştir',
+  'Waar gaat dit dossier over?': 'Bu dosyanın konusu nedir?',
+  'Nummer': 'Numara',
+  'Gebruik een positief getal.': 'Pozitif bir sayı kullanın.',
+  'Automatisch nummer': 'Otomatik numara',
   'Aanvulling gevraagd': 'Ek bilgi istendi',
   'Aanvulling gevraagd.': 'Ek bilgi istendi.',
   'Aanvulling gevraagd: {opmerking}': 'Ek bilgi istendi: {opmerking}',
@@ -2545,6 +2561,73 @@ const _dutchSourceAddTr = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Sonuçlar yüklenemedi.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Sonucunuzu yayımlandığında Sınavlarım altında göreceksiniz.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Sadece Markdown belgeleri ve sunumları (.md) eklenebilir.',
+  'OciDeck dossier': 'OciDeck Dosya',
+  'Alle documenten openen': 'Tüm belgeleri aç',
+  'Alleen overzicht': 'Sadece genel bakış',
+  'Alles controleren': 'Tümünü kontrol et',
+  'DOSSIER': 'DOSYA',
+  'De SHA-256 klopt al.': 'SHA-256 değeri zaten doğru.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Bu kayıt dosyadan siliniyor, belge dosyası korunuyor.',
+  'Deze bijlage is niet beschikbaar.': 'Bu ek belge mevcut değil.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Bu ek belge kontrol edilemiyor.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Bu ek belge güvenli bir şekilde açılamadı.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Bu klasör dosyası zaten mevcut. Başka bir isim seçin.',
+  'Dit dossier kon niet worden geopend.': 'Bu dosya açılamadı.',
+  'Document gewijzigd': 'Belge değiştirildi',
+  'Document niet leesbaar': 'Belgen okunamaz',
+  'Document ontbreekt': 'Belge eksik',
+  'Document openen': 'Belgeyi aç',
+  'Documenten toevoegen': 'Belge ekle',
+  'Dossier': 'Dosya',
+  'Dossier openen': 'Dosyayı aç',
+  'Dossier openen…': 'Dossyayı aç…',
+  'Dossiertitel wijzigen': 'Dossya başlığını değiştir',
+  'Een bijlage kon niet worden toegevoegd.': 'Bir ek belge eklenemedi.',
+  'Een goed dossier begint hier': 'İyi bir dosya burada başlar',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Tutamağı veya okları kullanarak sırayı değiştirin. Sayılar otomatik olarak güncellenecektir.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Dosya değişmiş veya kaydedilememiş olabilir. Tekrar deneyin.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dossyanın oluşturulamamış olması.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Bu, yeni dosya sürümünü bu dossyanın referansı yapar.',
+  'Huidige SHA-256': 'Mevcut SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'İçindekiler ve bütünlük kontrolü',
+  'Meer opties': 'Daha fazla seçenek',
+  'Naamloos dossier': 'Adını belirtmeyen dosya',
+  'Nieuw dossier': 'Yeni dosya',
+  'Nieuwe versie vastleggen': 'Yeni sürümü kaydet',
+  'Nieuwe versie vastleggen?': 'Yeni sürümü kaydetmek istiyor musunuz?',
+  'Omhoog verplaatsen': 'Yukarı taşı',
+  'Omlaag verplaatsen': 'Aşağı taşı',
+  'Onveilige bestandsverwijzing': 'Güvenli olmayan dosya bağlantısı',
+  'Overzicht en bijlagen': 'Görsel ve ekler',
+  'SHA-256 controleren': 'SHA-256 kontrolü',
+  'SHA-256 klopt': 'SHA-256 değeri doğru',
+  'Sleep om te ordenen': 'Sürükle ve bırakarak düzenle',
+  'Terug naar dossier': 'Dosyaya dön',
+  'Titel wijzigen': 'Başlığı değiştir',
+  'Uit dossier verwijderen': 'Dosyadan kaldır',
+  'Uit dossier verwijderen?': 'Dossyadan silmek istiyor musunuz?',
+  'Vastgelegde SHA-256': 'Belirlenmiş SHA-256 değeri',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Belge ekleyin. Özgün dosyalar yerlerinde kalır. Sıralamayı burada belirleyin.',
+  'Wijziging opslaan is mislukt.': 'Değişikliği kaydetme başarısız oldu.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Ekleri de sekmlerde açmak ister misiniz?',
+  'Als document openen': 'Bir belge açın',
+  'Dossier maken': 'Dosya oluştur',
+  'Het overzicht kon niet als document worden geopend.':
+      'Bu görünüm, bir belge olarak açılamadı.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Lütfen görünüm belgesindeki değişiklikleri önce kaydedin veya bu sekme kapalı olsun.',
   'Startmappen': 'Başlangıç klasörleri',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Açma ve kaydetmenin başladığı yer. Boş bırakmak ilk kitaplığı kullanır.',

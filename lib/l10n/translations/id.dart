@@ -1606,6 +1606,22 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Referentie vastgelegd': 'Referensi tercatat',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Perubahan belum disimpan di tab; SHA-256 memeriksa versi pada disk.',
+  'Documenten controleren': 'Memeriksa dokumen',
+  'Dit nummer is al in gebruik.': 'Nomor ini sudah digunakan.',
+  'Documenten openen': 'Buka dokumen',
+  'Eerdere SHA-256-waarden': 'Nilai SHA-256 sebelumnya',
+  'Omschrijving wijzigen': 'Ubah deskripsi',
+  'Beginnummer wijzigen': 'Ubah nomor awal',
+  'Vindplaats': 'Lokasi',
+  'Laatst gecontroleerd': 'Terakhir diperiksa',
+  'Nummer wijzigen': 'Ubah nomor',
+  'Waar gaat dit dossier over?': 'Apa isi berkas ini?',
+  'Nummer': 'Nomor',
+  'Gebruik een positief getal.': 'Gunakan angka positif.',
+  'Automatisch nummer': 'Nomor otomatis',
   'Aanvulling gevraagd': 'Diminta tambahan',
   'Aanvulling gevraagd.': 'Diminta tambahan.',
   'Aanvulling gevraagd: {opmerking}': 'Diminta tambahan: {opmerking}',
@@ -1637,6 +1653,75 @@ const _dutchSourceAddId = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Hasil tidak dapat dimuat.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Anda akan melihat hasil Anda di Ujian saya segera setelah dirilis.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Hanya dokumen Markdown dan presentasi (.md) yang dapat ditambahkan.',
+  'OciDeck dossier': 'OciDeck Berkas',
+  'Alle documenten openen': 'Buka semua dokumen',
+  'Alleen overzicht': 'Hanya menampilkan ringkasan',
+  'Alles controleren': 'Periksa semua',
+  'DOSSIER': 'BERKAS',
+  'De SHA-256 klopt al.': 'SHA-256 sudah sesuai.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Entri ini akan dihapus dari dossier. File dokumen tetap disimpan.',
+  'Deze bijlage is niet beschikbaar.': 'Lampiran ini tidak tersedia.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Lampiran ini tidak dapat diperiksa.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Lampiran ini tidak dapat dibuka dengan aman.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Folder dossier ini sudah ada. Pilih nama yang berbeda.',
+  'Dit dossier kon niet worden geopend.': 'Dossier ini tidak dapat dibuka.',
+  'Document gewijzigd': 'Dokumen telah diubah',
+  'Document niet leesbaar': 'Dokumen tidak dapat dibaca',
+  'Document ontbreekt': 'Dokumen hilang',
+  'Document openen': 'Buka dokumen',
+  'Documenten toevoegen': 'Tambahkan dokumen',
+  'Dossier': 'Berkas',
+  'Dossier openen': 'Buka berkas',
+  'Dossier openen…': 'Buka Dossier…',
+  'Dossiertitel wijzigen': 'Ubah Judul Dossier',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Satu lampiran tidak dapat ditambahkan.',
+  'Een goed dossier begint hier': 'Sebuah dossier yang baik dimulai di sini',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Gunakan gagang atau panah untuk mengubah urutan. Angka-angka akan mengikuti secara otomatis.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Berkas telah berubah atau tidak dapat dicatat. Periksa kembali.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dossier tersebut tidak dapat dibuat.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Ini memastikan versi file baru menjadi referensi untuk dossier ini.',
+  'Huidige SHA-256': 'SHA-256 Saat Ini',
+  'Inhoudsopgave en integriteitscontrole':
+      'Daftar Isi dan Pemeriksaan Integritas',
+  'Meer opties': 'Opsi Tambahan',
+  'Naamloos dossier': 'Dossier Tanpa Nama',
+  'Nieuw dossier': 'Berkas baru',
+  'Nieuwe versie vastleggen': 'Catat versi baru',
+  'Nieuwe versie vastleggen?': 'Ingin Mencatat Versi Baru?',
+  'Omhoog verplaatsen': 'Pindahkan ke Atas',
+  'Omlaag verplaatsen': 'Pindahkan ke Bawah',
+  'Onveilige bestandsverwijzing': 'Referensi File Tidak Aman',
+  'Overzicht en bijlagen': 'Ikhtisar dan lampiran',
+  'SHA-256 controleren': 'Periksa SHA-256',
+  'SHA-256 klopt': 'SHA-256 sesuai',
+  'Sleep om te ordenen': 'Seret untuk mengurutkan',
+  'Terug naar dossier': 'Kembali ke berkas',
+  'Titel wijzigen': 'Ubah judul',
+  'Uit dossier verwijderen': 'Hapus dari berkas',
+  'Uit dossier verwijderen?': 'Hapus dari dossier?',
+  'Vastgelegde SHA-256': 'SHA-256 yang ditetapkan',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Tambahkan dokumen ke koleksi ini. File aslinya tetap berada di lokasi semula. Anda dapat mengatur urutan tampilan di sini.',
+  'Wijziging opslaan is mislukt.': 'Penyimpanan perubahan gagal.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Apakah Anda ingin membuka lampiran dalam tab?',
+  'Als document openen': 'Buka dokumen',
+  'Dossier maken': 'Buat berkas',
+  'Het overzicht kon niet als document worden geopend.':
+      'Tampilan ini tidak dapat dibuka sebagai dokumen.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Simpan perubahan pada dokumen tampilan terlebih dahulu atau tutup tab tersebut.',
   'Startmappen': 'Folder awal',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Di mana membuka dan menyimpan dimulai. Kosongkan untuk memakai pustaka pertama.',

@@ -1609,6 +1609,22 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Referentie vastgelegd': 'D\'Referanz isch feschtlegt',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Nit gspeichereti Änderige im Tab; SHA-256 prüeft d Version uf dr Feschtplatte.',
+  'Documenten controleren': 'Dokumänt prüefe',
+  'Dit nummer is al in gebruik.': 'Die Nummere isch scho i Bruch.',
+  'Documenten openen': 'Dokumänt öffne',
+  'Eerdere SHA-256-waarden': 'Früehneri SHA-256-Wärt',
+  'Omschrijving wijzigen': 'Beschrybig ändere',
+  'Beginnummer wijzigen': 'Aafangsnummere ändere',
+  'Vindplaats': 'Standort',
+  'Laatst gecontroleerd': 'Zletscht prüeft',
+  'Nummer wijzigen': 'Nummere ändere',
+  'Waar gaat dit dossier over?': 'Worum gohts i däm Dossier?',
+  'Nummer': 'Nummere',
+  'Gebruik een positief getal.': 'Nimm e positiivi Zahl.',
+  'Automatisch nummer': 'Automatischi Nummere',
   'Aanvulling gevraagd': 'Ergänzung verlangt',
   'Aanvulling gevraagd.': 'Ergänzung verlangt.',
   'Aanvulling gevraagd: {opmerking}': 'Ergänzung verlangt: {opmerking}',
@@ -1641,6 +1657,74 @@ const _dutchSourceAddGsw = <String, String>{
       'D Ergäbnis hend nöd chöne glade wärde.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Dir gsehnd Ihres Ergäbnis under Meine Prüfungen, sobald es freigä isch.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Nur Markdown-Dokument und -Präsentatione (.md) chönd zuegfüegt werde.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Alli Dokument öffne',
+  'Alleen overzicht': 'Nur d\'Überblick.',
+  'Alles controleren': 'Alles prüefe',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'S\'SHA-256 isch scho korrekt.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'D\'Einträg verschwindt aus em Dossier. D\'Datei bleibt eso.',
+  'Deze bijlage is niet beschikbaar.': 'D\'Anhang isch nid verfügbar.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'D\'Anhang läb es nid kontrollierbar.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'D\'Anhang läb es nid sicher öppne küess.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'D\'Dossierverzeichnis isch scho existiert. Wähl e sunschtigi Näme.',
+  'Dit dossier kon niet worden geopend.': 'S\'Dossier läb es nid öppne küess.',
+  'Document gewijzigd': 'Dokument isch veränderet.',
+  'Document niet leesbaar': 'Dossièr isch unlesebar',
+  'Document ontbreekt': 'Dossièr isch fällig',
+  'Document openen': 'Dokument öffne',
+  'Documenten toevoegen': 'Dokument dezue tue',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Dossier öffne',
+  'Dossier openen…': 'Dossièr öppne mache…',
+  'Dossiertitel wijzigen': 'Dossièrtitel ändere',
+  'Een bijlage kon niet worden toegevoegd.': 'E Datei isch esch ungfägt wore.',
+  'Een goed dossier begint hier': 'E guet Dossièr fangt hier yym.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Dr Händgriff oder d Püile usnützt, zum d Ordniig ändere. D Nummerer folge automatisch.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'D Datei isch ändärd worde oder esch esch gange. Überchueche esch wieder.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dä Dossier chönnt nöd gmacht wär.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Däm gäbs die nöije Date-Version als Referenz für d\'s Dossier.',
+  'Huidige SHA-256': 'Aktuell SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Inhaltsverzeichnis und Integrizitätskontrolle',
+  'Meer opties': 'Mehr Optionä',
+  'Naamloos dossier': 'Ufgnännt Dossier',
+  'Nieuw dossier': 'Neus Dossier',
+  'Nieuwe versie vastleggen': 'Neui Version fescht halte',
+  'Nieuwe versie vastleggen?': 'Soll d\'näue Version festhätz wär?',
+  'Omhoog verplaatsen': 'Hoch verschiebä.',
+  'Omlaag verplaatsen': 'Däwär verschiebä.',
+  'Onveilige bestandsverwijzing': 'Ufgnännt Date-Verweis.',
+  'Overzicht en bijlagen': 'Ublage und Anhänge',
+  'SHA-256 controleren': 'SHA-256 Prüfe',
+  'SHA-256 klopt': 'SHA-256 stimmt',
+  'Sleep om te ordenen': 'Zuehändig zieh zum Ordnen',
+  'Terug naar dossier': 'Zrugg zum Dossier',
+  'Titel wijzigen': 'Titel ändere',
+  'Uit dossier verwijderen': 'Us em Dossier entferne',
+  'Uit dossier verwijderen?': 'Möchtest du’s aus Dossier löösche?',
+  'Vastgelegde SHA-256': 'Fixierte SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Füeg Dokument dezue. D’Originaldateie bliibed a ihrem Ort. Da bestimmisch d’Reihefolg.',
+  'Wijziging opslaan is mislukt.': 'Ändrig speichne isch missglückt.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Möchtest du die Anhänge au im Tabli öppne?',
+  'Als document openen': 'Dokument öppne',
+  'Dossier maken': 'Dossier erstelle',
+  'Het overzicht kon niet als document worden geopend.':
+      'Es isch nit gmacht worde, dass d\'Übersicht as Dokument öppnet worde isch.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Guets d\'Ändurig öpple in d\'Übersichts-Dokument, oder schliisse d\'Tablade.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffne und Speichere aafangt. Läer laa nimmt di erst Bibliothek.',

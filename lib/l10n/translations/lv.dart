@@ -1604,6 +1604,22 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Referentie vastgelegd': 'Atsauce fiksēta',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Cilnē ir nesaglabātas izmaiņas; SHA-256 pārbauda diskā esošo versiju.',
+  'Documenten controleren': 'Dokumentu pārbaude',
+  'Dit nummer is al in gebruik.': 'Šis numurs jau tiek izmantots.',
+  'Documenten openen': 'Atvērt dokumentus',
+  'Eerdere SHA-256-waarden': 'Iepriekšējās SHA-256 vērtības',
+  'Omschrijving wijzigen': 'Mainīt aprakstu',
+  'Beginnummer wijzigen': 'Mainīt sākuma numuru',
+  'Vindplaats': 'Atrašanās vieta',
+  'Laatst gecontroleerd': 'Pēdējo reizi pārbaudīts',
+  'Nummer wijzigen': 'Mainīt numuru',
+  'Waar gaat dit dossier over?': 'Par ko ir šī lieta?',
+  'Nummer': 'Numurs',
+  'Gebruik een positief getal.': 'Izmantojiet pozitīvu skaitli.',
+  'Automatisch nummer': 'Automātisks numurs',
   'Aanvulling gevraagd': 'Pieprasīts papildinājums',
   'Aanvulling gevraagd.': 'Pieprasīts papildinājums.',
   'Aanvulling gevraagd: {opmerking}': 'Pieprasīts papildinājums: {opmerking}',
@@ -1635,6 +1651,73 @@ const _dutchSourceAddLv = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Rezultātus neizdevās ielādēt.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Savu rezultātu redzēsiet sadaļā Mani eksāmeni, tiklīdz tas tiks atbrīvots.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Vienīgi Markdown dokumenti un prezentācijas (.md) var tikt pievienoti.',
+  'OciDeck dossier': 'OciDeck Lieta',
+  'Alle documenten openen': 'Atvērt visus dokumentus',
+  'Alleen overzicht': 'Izmantojiet tikai skatīties pārskatu.',
+  'Alles controleren': 'Pārbaudīt visu',
+  'DOSSIER': 'LIETA',
+  'De SHA-256 klopt al.': 'SHA-256 atbilst jau visām vērtībām.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Šis ieraksts tiek dzēsts no sērijas. Dokumenta fails tiek saglabāts.',
+  'Deze bijlage is niet beschikbaar.': 'Šī pievienotā lieta nav pieejama.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Šo pievienoto lietu nevar pārbaudīt.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Šo pievienoto lietu nevarēja droši atvērt.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Šāda mita jau ir eksistē. Izvēlieties citu nosaukumu.',
+  'Dit dossier kon niet worden geopend.': 'Šo sērijas nevarēja atvērt.',
+  'Document gewijzigd': 'Dokuments ir mainīts.',
+  'Document niet leesbaar': 'Dokuments nav lasāms',
+  'Document ontbreekt': 'Dokuments trūkst',
+  'Document openen': 'Atvērt dokumentu',
+  'Documenten toevoegen': 'Pievienot dokumentus',
+  'Dossier': 'Lieta',
+  'Dossier openen': 'Atvērt lietu',
+  'Dossier openen…': 'Atvērt dossiers…',
+  'Dossiertitel wijzigen': 'Mainīt dossiers nosaukumu',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Vienam pievienojumam izdevās neveicinas.',
+  'Een goed dossier begint hier': 'Labi dossiers sākas šeit',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Izmantojiet roktveidi vai pildzi, lai mainītu secību. Numuri tiek automātiski atjaunināti.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Failam mainījās vai tas netika fiksēts. Pārbaudiet vēlreiz.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossietis nevarēja tērvēt.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Tāpēc jaunā failu versija kļūs par šī attēla atziņu.',
+  'Huidige SHA-256': 'Pašreizējais SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Saturs un integritātes pārbaude',
+  'Meer opties': 'Vairāk iespēju',
+  'Naamloos dossier': 'Nevārdota attēla dota',
+  'Nieuw dossier': 'Jauna lieta',
+  'Nieuwe versie vastleggen': 'Fiksēt jaunu versiju',
+  'Nieuwe versie vastleggen?': 'Vai fiksēt jaunu versiju?',
+  'Omhoog verplaatsen': 'Pacelt uz augšu',
+  'Omlaag verplaatsen': 'Pacelt uz leju',
+  'Onveilige bestandsverwijzing': 'Neaizsargāta failu atziņa',
+  'Overzicht en bijlagen': 'Pārskats un pievienotnes',
+  'SHA-256 controleren': 'Pārbaudīt SHA-256',
+  'SHA-256 klopt': 'SHA-256 atbilst',
+  'Sleep om te ordenen': 'Kratīt, lai sakārtotu',
+  'Terug naar dossier': 'Atpakaļ uz lietu',
+  'Titel wijzigen': 'Mainīt nosaukumu',
+  'Uit dossier verwijderen': 'Izņemt no lietas',
+  'Uit dossier verwijderen?': 'Dzēst no saskatnes?',
+  'Vastgelegde SHA-256': 'Ievietotā SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Pievienojiet dokumentus. Oriģinālie faili paliek savās vietās. Šeit izvēlieties to secību.',
+  'Wijziging opslaan is mislukt.': 'Izmaiņu saglabāšana izdevusies neizdevās.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Vai vēlaties atvērt pievienotnes arī joslās?',
+  'Als document openen': 'Dokumentu atvērt',
+  'Dossier maken': 'Izveidot lietu',
+  'Het overzicht kon niet als document worden geopend.':
+      'Skats nevarēja būt atvērts kā dokumenta fails.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Pirms ielietiet izmaiņas skata dokumentā vai slēgtu to rindu.',
   'Startmappen': 'Sākuma mapes',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur sākas atvēršana un saglabāšana. Tukšs izmanto pirmo bibliotēku.',

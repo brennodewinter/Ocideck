@@ -1636,6 +1636,22 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Referentie vastgelegd': 'Tagairt taifeadta',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Athruithe neamhshábháilte sa chluaisín; seiceálann SHA-256 an leagan ar an diosca.',
+  'Documenten controleren': 'Doiciméid á seiceáil',
+  'Dit nummer is al in gebruik.': 'Tá an uimhir seo in úsáid cheana.',
+  'Documenten openen': 'Oscail doiciméid',
+  'Eerdere SHA-256-waarden': 'Luachanna SHA-256 roimhe seo',
+  'Omschrijving wijzigen': 'Athraigh an cur síos',
+  'Beginnummer wijzigen': 'Athraigh an uimhir thosaigh',
+  'Vindplaats': 'Suíomh',
+  'Laatst gecontroleerd': 'Seiceáilte go deireanach',
+  'Nummer wijzigen': 'Athraigh an uimhir',
+  'Waar gaat dit dossier over?': 'Cad faoi a bhfuil an sainchomhad seo?',
+  'Nummer': 'Uimhir',
+  'Gebruik een positief getal.': 'Úsáid uimhir dheimhneach.',
+  'Automatisch nummer': 'Uimhir uathoibríoch',
   'Aanvulling gevraagd': 'Iarradh breis eolais',
   'Aanvulling gevraagd.': 'Iarradh breis eolais.',
   'Aanvulling gevraagd: {opmerking}': 'Iarradh breis eolais: {opmerking}',
@@ -1668,6 +1684,74 @@ const _dutchSourceAddGa = <String, String>{
       'Níorbh fhéidir na torthaí a lódáil.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Feicfidh tú do thoradh faoi Mo scrúduithe a luaithe a scaoilfear é.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Ní féidir ach doiciméid agus láithreoireachtaí Markdown (.md) a chur leis.',
+  'OciDeck dossier': 'OciDeck Sainchomhad',
+  'Alle documenten openen': 'Oscail gach doiciméad',
+  'Alleen overzicht': 'Leáimid an fhoram amach amach.',
+  'Alles controleren': 'Seiceáil gach ceann',
+  'DOSSIER': 'SAINCHOMHAD',
+  'De SHA-256 klopt al.': 'Tá an SHA-256 ceart go raon.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Tá an béarniaigh seo ag dul as an dorn. Tá an faiche leabhar ag anochaint.',
+  'Deze bijlage is niet beschikbaar.': 'Níl an béarniaigh seo ar fáil.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Ní féidir an béarniaigh seo a cheannabhair.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Ní bhfaighneannaimid an béarniaigh seo go sábháilte.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Tá an samhlán seo ar fáil cheann. RogADH an t-ainm eile.',
+  'Dit dossier kon niet worden geopend.': 'Ní mheas an dorn seo.',
+  'Document gewijzigd': 'Tá an hábharat sin méadhnach.',
+  'Document niet leesbaar': 'Ní féidir leisteanú an doicheol',
+  'Document ontbreekt': 'Tá an doicheol gan bheith ann',
+  'Document openen': 'Oscail doiciméad',
+  'Documenten toevoegen': 'Cuir doiciméid leis',
+  'Dossier': 'Sainchomhad',
+  'Dossier openen': 'Oscail sainchomhad',
+  'Dossier openen…': 'Doicheol a oscailt…',
+  'Dossiertitel wijzigen': 'Tíotal doicheol a bhí oscailte',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Ní bhainfidh aon gcomhfhurt go breasta.',
+  'Een goed dossier begint hier': 'Tá doicheol foirfe ag tosaithe anseo',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Agus bain úsáid den gcomhthirt nó den ghrádh chun an t-ordlath a bhí oscailte. Tá na nuimhri a ghairí go héifeachtach.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Bhí an fhile ina bhféar nó ní bhí sé faoi chustaim. Faigh ar ais.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Ní féidir le doicéadan sin a chríochnú.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Leis sin, tá an leagan nua de an fail a bheith mar faisneis dó.',
+  'Huidige SHA-256': 'SHA-256 Curtha in Ollamh',
+  'Inhoudsopgave en integriteitscontrole': 'Luachmhar agus Scimeannas',
+  'Meer opties': 'Beafaí Mionscríbhinte',
+  'Naamloos dossier': 'Doicéadan Neamacha',
+  'Nieuw dossier': 'Sainchomhad nua',
+  'Nieuwe versie vastleggen': 'Taifead leagan nua',
+  'Nieuwe versie vastleggen?': 'An bhfuil doicéadan nua a shuí móraithe?',
+  'Omhoog verplaatsen': 'An fail a chur thar luach.',
+  'Omlaag verplaatsen': 'An fail a chur faiche.',
+  'Onveilige bestandsverwijzing': 'Faisneis neamhsharanthach de fail.',
+  'Overzicht en bijlagen': 'Gréasadh agus leathanach beartaithe',
+  'SHA-256 controleren': 'Tá an cheartacha SHA-256 a cheilt',
+  'SHA-256 klopt': 'Tá an cheartacha SHA-256 a cheilt',
+  'Sleep om te ordenen': 'Rogh ina bhfuil chun na hábhar a chur in ord',
+  'Terug naar dossier': 'Ar ais chuig an sainchomhad',
+  'Titel wijzigen': 'Sonrú an t-onnamhadh a bhí á rochtáil',
+  'Uit dossier verwijderen': 'Bain den sainchomhad',
+  'Uit dossier verwijderen?': 'An bhfuil an t-onnamhadh a bheith á bhaint as?',
+  'Vastgelegde SHA-256': 'Tá an cheartacha SHA-256 a chosaint',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Cuir doiciméid leis. Fanann na bunchomhaid ina suíomh bunaidh. Roghnaigh an t-ord anseo.',
+  'Wijziging opslaan is mislukt.': 'Ní raontaigh an sonrú a chur isteach.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Ba bhfuil tú ag iarraidh doiciméid beartaithe a theip ar fhadhbanna?',
+  'Als document openen': 'Faigh an sonraí ag rochadh',
+  'Dossier maken': 'Cruthaigh sainchomhad',
+  'Het overzicht kon niet als document worden geopend.':
+      'Ní bhfaighimid an fhoramáil ina theanntas mar sonraí',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Doigh na hathruithe ar an doiciméad maith, nó damhail an fhoinseán sin',
   'Startmappen': 'Fillteáin tosaigh',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Cá dtosaíonn oscailt agus sábháil. Fág folamh chun an chéad leabharlann a úsáid.',

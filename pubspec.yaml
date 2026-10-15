@@ -178,6 +178,8 @@ dev_dependencies:
   # MockPlatformInterfaceMixin comes from plugin_platform_interface.
   url_launcher_platform_interface: ^2.3.2
   plugin_platform_interface: ^2.1.8
+  # A fake file picker exercises dossier journeys without native dialogs.
+  file_selector_platform_interface: ^2.7.0
   # Parses pubspec.lock / pubspec.yaml in the SBOM generator (tool/sbom_build.dart)
   # and its test. Already resolved transitively; declared here so the tooling can
   # depend on it directly.

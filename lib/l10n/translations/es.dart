@@ -649,6 +649,22 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Referentie vastgelegd': 'La referencia está registrada',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Cambios sin guardar en la pestaña; SHA-256 comprueba la versión en disco.',
+  'Documenten controleren': 'Comprobando documentos',
+  'Dit nummer is al in gebruik.': 'Este número ya está en uso.',
+  'Documenten openen': 'Abrir documentos',
+  'Eerdere SHA-256-waarden': 'Valores SHA-256 anteriores',
+  'Omschrijving wijzigen': 'Cambiar descripción',
+  'Beginnummer wijzigen': 'Cambiar número inicial',
+  'Vindplaats': 'Ubicación',
+  'Laatst gecontroleerd': 'Última comprobación',
+  'Nummer wijzigen': 'Cambiar número',
+  'Waar gaat dit dossier over?': '¿De qué trata este expediente?',
+  'Nummer': 'Número',
+  'Gebruik een positief getal.': 'Use un número positivo.',
+  'Automatisch nummer': 'Número automático',
   'Aanvulling gevraagd': 'Se solicita información adicional',
   'Aanvulling gevraagd.': 'Se solicita información adicional.',
   'Aanvulling gevraagd: {opmerking}':
@@ -682,6 +698,73 @@ const _dutchSourceAddEs = {
       'No se pudieron cargar los resultados.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Verá su resultado en mis exámenes en cuanto se publique.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Solo los documentos y presentaciones en formato Markdown (.md) pueden ser añadidos.',
+  'OciDeck dossier': 'Expediente OciDeck',
+  'Alle documenten openen': 'Abrir todos los documentos',
+  'Alleen overzicht': 'Solo se muestra el resumen.',
+  'Alles controleren': 'Comprobar todo',
+  'DOSSIER': 'EXPEDIENTE',
+  'De SHA-256 klopt al.': 'El SHA-256 coincide ya.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'La entrada desaparece del dossier. El archivo del documento permanece guardado.',
+  'Deze bijlage is niet beschikbaar.': 'Este apéndice no está disponible.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Este apéndice no puede ser verificado.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Este apéndice no pudo ser abierto de forma segura.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Este directorio de dossier ya existe. Elija un nombre diferente.',
+  'Dit dossier kon niet worden geopend.': 'Este dossier no pudo ser abierto.',
+  'Document gewijzigd': 'Documento modificado',
+  'Document niet leesbaar': 'El documento no es legible.',
+  'Document ontbreekt': 'El documento falta.',
+  'Document openen': 'Abrir documento',
+  'Documenten toevoegen': 'Añadir documentos',
+  'Dossier': 'Expediente',
+  'Dossier openen': 'Abrir expediente',
+  'Dossier openen…': 'Abrir dossier…',
+  'Dossiertitel wijzigen': 'Cambiar título del dossier.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Un archivo adjunto no pudo ser añadido.',
+  'Een goed dossier begint hier': 'Un buen dossier comienza aquí.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Utilice el agarre o las flechas para cambiar el orden. Los números se actualizan automáticamente.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'El archivo ha cambiado o no se ha podido registrar. Verifique nuevamente.',
+  'Het dossier kon niet worden aangemaakt.': 'No se pudo crear el expediente.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Esto establece la nueva versión del archivo como referencia para este expediente.',
+  'Huidige SHA-256': 'SHA-256 actual',
+  'Inhoudsopgave en integriteitscontrole': 'Índice y control de integridad',
+  'Meer opties': 'Más opciones',
+  'Naamloos dossier': 'Expediente sin nombre',
+  'Nieuw dossier': 'Nuevo expediente',
+  'Nieuwe versie vastleggen': 'Registrar nueva versión',
+  'Nieuwe versie vastleggen?': '¿Guardar nueva versión?',
+  'Omhoog verplaatsen': 'Mover hacia arriba',
+  'Omlaag verplaatsen': 'Mover hacia abajo',
+  'Onveilige bestandsverwijzing': 'Referencia de archivo insegura',
+  'Overzicht en bijlagen': 'Resumen y anexos',
+  'SHA-256 controleren': 'Verificar SHA-256',
+  'SHA-256 klopt': 'El SHA-256 coincide',
+  'Sleep om te ordenen': 'Arrastra para ordenar',
+  'Terug naar dossier': 'Volver al expediente',
+  'Titel wijzigen': 'Cambiar título',
+  'Uit dossier verwijderen': 'Quitar del expediente',
+  'Uit dossier verwijderen?': '¿Eliminar del expediente?',
+  'Vastgelegde SHA-256': 'SHA-256 establecido',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Añade documentos a la colección. Los archivos originales permanecerán en su ubicación original. Puedes elegir el orden de visualización aquí.',
+  'Wijziging opslaan is mislukt.': 'No se pudo guardar la modificación.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      '¿Desea abrir los anexos también en pestañas?',
+  'Als document openen': 'Abrir documento',
+  'Dossier maken': 'Crear expediente',
+  'Het overzicht kon niet als document worden geopend.':
+      'La vista no pudo ser abierta como documento.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Guarde los cambios en el documento de la vista primero o cierre esa pestaña.',
   'Startmappen': 'Carpetas de inicio',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Dónde empiezan abrir y guardar. Déjalo vacío para usar la primera biblioteca.',

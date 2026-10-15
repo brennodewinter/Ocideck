@@ -1605,6 +1605,22 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Referentie vastgelegd': 'Referensen har registrerats',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Osparade ändringar på fliken; SHA-256 kontrollerar versionen på disken.',
+  'Documenten controleren': 'Kontrollerar dokument',
+  'Dit nummer is al in gebruik.': 'Det här numret används redan.',
+  'Documenten openen': 'Öppna dokument',
+  'Eerdere SHA-256-waarden': 'Tidigare SHA-256-värden',
+  'Omschrijving wijzigen': 'Ändra beskrivning',
+  'Beginnummer wijzigen': 'Ändra startnummer',
+  'Vindplaats': 'Plats',
+  'Laatst gecontroleerd': 'Senast kontrollerad',
+  'Nummer wijzigen': 'Ändra nummer',
+  'Waar gaat dit dossier over?': 'Vad handlar denna akt om?',
+  'Nummer': 'Nummer',
+  'Gebruik een positief getal.': 'Använd ett positivt tal.',
+  'Automatisch nummer': 'Automatiskt nummer',
   'Aanvulling gevraagd': 'Komplettering begärd',
   'Aanvulling gevraagd.': 'Komplettering begärd.',
   'Aanvulling gevraagd: {opmerking}': 'Komplettering begärd: {opmerking}',
@@ -1636,6 +1652,74 @@ const _dutchSourceAddSv = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Resultaten kunde inte läsas in.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Du ser ditt resultat under Mina tentor så snart det har släppts.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Endast Markdown-dokument och -presentationer (.md) kan läggas till.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Öppna alla dokument',
+  'Alleen overzicht': 'Endast översikt',
+  'Alles controleren': 'Kontrollera alla',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'SHA-256-hashen stämmer redan.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Posteringen försvinner ur dossiern. Dokumentfilen förblir sparad.',
+  'Deze bijlage is niet beschikbaar.': 'Denna bilaga är inte tillgänglig.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Denna bilaga kan inte kontrolleras.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Denna bilaga kunde inte säkert öppnas.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Denna mapp för dossiern finns redan. Välj ett annat namn.',
+  'Dit dossier kon niet worden geopend.': 'Denna dossier kunde inte öppnas.',
+  'Document gewijzigd': 'Dokumentet har ändrats',
+  'Document niet leesbaar': 'Dokumentet är inte läsbart.',
+  'Document ontbreekt': 'Dokumentet saknas.',
+  'Document openen': 'Öppna dokument',
+  'Documenten toevoegen': 'Lägg till dokument',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Öppna dossier',
+  'Dossier openen…': 'Öppna dossieret…',
+  'Dossiertitel wijzigen': 'Ändra dossietitel.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'En bilaga kunde inte läggas till.',
+  'Een goed dossier begint hier': 'Ett bra dossier börjar här.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Använd handtaget eller pilarna för att ändra ordningen. Numren följer automatiskt.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Filen har ändrats eller kunde inte sparas. Kontrollera igen.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossietet kunde inte skapas.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Detta säkerställer att den nya filversionen blir referensen för detta dossier.',
+  'Huidige SHA-256': 'Nuvarande SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Innehållsförteckning och integritetskontroll',
+  'Meer opties': 'Fler alternativ',
+  'Naamloos dossier': 'Namnlöst dossier',
+  'Nieuw dossier': 'Nytt dossier',
+  'Nieuwe versie vastleggen': 'Registrera ny version',
+  'Nieuwe versie vastleggen?': 'Spara en ny version?',
+  'Omhoog verplaatsen': 'Flytta upp',
+  'Omlaag verplaatsen': 'Flytta ner',
+  'Onveilige bestandsverwijzing': 'Osäker filreferens',
+  'Overzicht en bijlagen': 'Översikt och bilagor',
+  'SHA-256 controleren': 'Kontrollera SHA-256-summan',
+  'SHA-256 klopt': 'SHA-256-summan stämmer',
+  'Sleep om te ordenen': 'Dra för att ordna',
+  'Terug naar dossier': 'Tillbaka till dossier',
+  'Titel wijzigen': 'Ändra titel',
+  'Uit dossier verwijderen': 'Ta bort från dossier',
+  'Uit dossier verwijderen?': 'Ta bort från mappen?',
+  'Vastgelegde SHA-256': 'Fastställd SHA-256-summa',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Lägg till dokument. Originalfilerna ligger kvar där de är. Här väljer du ordningen.',
+  'Wijziging opslaan is mislukt.': 'Sparningen misslyckades.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Vill du öppna bilagorna i flikar?',
+  'Als document openen': 'Öppna dokumentet',
+  'Dossier maken': 'Skapa dossier',
+  'Het overzicht kon niet als document worden geopend.':
+      'Översikten kunde inte öppnas som ett dokument.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Spara ändringarna i dokumentet i översikten eller stäng fliken.',
   'Startmappen': 'Startmappar',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Där öppna och spara börjar. Lämna tomt för att använda det första biblioteket.',
