@@ -58,12 +58,11 @@ Future<Uint8List> buildDossierPdf(
   ];
 
   final blocks = <PdfBlock>[
-    PdfHeadingBlock(1, [PdfSpan(dossierTitle)], dossierTitle),
-    if (dossierDescription.isNotEmpty)
-      PdfParagraphBlock([PdfSpan(dossierDescription)]),
-    PdfParagraphBlock([
-      PdfSpan('${dossier.entries.length} documenten', bold: true),
-    ]),
+    PdfDossierPageBlock.cover(
+      title: dossierTitle,
+      description: dossierDescription,
+      documentCount: dossier.entries.length,
+    ),
     const PdfPageBreakBlock(),
     const PdfHeadingBlock(1, [PdfSpan('Inhoud')], 'Inhoud'),
     for (var i = 0; i < verified.length; i++)
@@ -245,26 +244,14 @@ Future<List<PdfBlock>> _interleaf(
   String title,
   _DossierPdfProjection projection,
 ) async => [
-  PdfHeadingBlock(1, [PdfSpan(title)], title),
-  PdfParagraphBlock([
-    PdfSpan('DOCUMENT ${dossier.numberFor(index)}', bold: true),
-  ]),
-  if (entry.description.trim().isNotEmpty)
-    PdfParagraphBlock([PdfSpan(await projection.display(entry.description))]),
-  if (entry.documentDate case final String date when date.trim().isNotEmpty)
-    PdfParagraphBlock([
-      const PdfSpan('Datum  ', bold: true),
-      PdfSpan(await projection.display(date)),
-    ]),
-  if (entry.author.trim().isNotEmpty)
-    PdfParagraphBlock([
-      const PdfSpan('Opsteller  ', bold: true),
-      PdfSpan(await projection.display(entry.author)),
-    ]),
-  PdfParagraphBlock([
-    const PdfSpan('SHA-256  ', bold: true),
-    PdfSpan(entry.sha256, code: true),
-  ]),
+  PdfDossierPageBlock.interleaf(
+    number: dossier.numberFor(index),
+    title: title,
+    description: await projection.display(entry.description),
+    date: await projection.display(entry.documentDate ?? ''),
+    author: await projection.display(entry.author),
+    sha256: entry.sha256,
+  ),
   const PdfPageBreakBlock(),
 ];
 

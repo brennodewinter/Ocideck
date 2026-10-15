@@ -115,6 +115,35 @@ sealed class PdfBlock {
   const PdfBlock();
 }
 
+/// A designed page in a dossier PDF. Ordinary document exports never emit it.
+class PdfDossierPageBlock extends PdfBlock {
+  const PdfDossierPageBlock.cover({
+    required this.title,
+    required this.description,
+    required this.documentCount,
+  }) : number = null,
+       date = '',
+       author = '',
+       sha256 = '';
+
+  const PdfDossierPageBlock.interleaf({
+    required this.number,
+    required this.title,
+    required this.description,
+    required this.date,
+    required this.author,
+    required this.sha256,
+  }) : documentCount = null;
+
+  final int? number;
+  final int? documentCount;
+  final String title;
+  final String description;
+  final String date;
+  final String author;
+  final String sha256;
+}
+
 /// Een kop, niveau 1 t/m 6. [level] 1 is een hoofdstuk.
 ///
 /// [outlineText] is de platte tekst zonder opmaak; die gaat naar de
