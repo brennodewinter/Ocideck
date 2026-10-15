@@ -30,6 +30,7 @@ part 'ociserve_provider_planning.dart';
 part 'ociserve_provider_exams.dart';
 part 'ociserve_provider_intake.dart';
 part 'ociserve_provider_evidence_items.dart';
+part 'ociserve_provider_account.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
 /// consumers receive only the minimal account/membership read model.
@@ -108,6 +109,16 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   /// herstellen of de bereikbaarheid testen — implementatie in
   /// ociserve_activation.dart.
   Future<void> _activateSession(OciServeSettings settings, int generation);
+
+  /// Auditregistraties — implementaties in ociserve_provider_account.dart.
+  /// Staan abstract op de basis omdat `login()` en `openLessonPackage()` ze
+  /// aanroepen en zelf in dit bestand leven.
+  Future<void> _auditOciDeckLogin(OciServeApi gateway, String accessToken);
+  Future<void> _auditLessonOpened({
+    required String organizationId,
+    required OciServeFeedItem lesson,
+    required String accessToken,
+  });
 
   Future<void> saveSettings(
     OciServeSettings settings, {
@@ -244,6 +255,10 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         serverReachable: true,
       );
       _flushInBackground();
+      // Alleen dit punt is een interactieve PKCE-aanmelding: refresh en
+      // herstelde sessies lopen via _activateSession/_accessToken en moeten
+      // geen auditpunt zetten (#2428).
+      unawaited(_auditOciDeckLogin(gateway, tokens.accessToken));
       return true;
     } catch (error, stack) {
       logError('OciServe: aanmelden afronden', error, stack);
@@ -539,7 +554,19 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         package.packageProfile,
         session,
       );
-      if (opened) _activeLessonSessions[session.playbackSessionId] = session;
+      if (opened) {
+        _activeLessonSessions[session.playbackSessionId] = session;
+        // Pas ná de digest-controle én een geslaagde open (#2428). De call
+        // mag afspelen niet vertragen: bijzaak die desnoods in de wachtrij
+        // belandt.
+        unawaited(
+          _auditLessonOpened(
+            organizationId: organizationId,
+            lesson: lesson,
+            accessToken: access,
+          ),
+        );
+      }
       return opened;
     } finally {
       if (!opened) await _closeLessonSessionBestEffort(session, access: access);
@@ -689,7 +716,9 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         .where(
           (item) =>
               item['account_id'] == accountId &&
-              (item['kind'] == null || item['kind'] == 'playback_report_v1'),
+              (item['kind'] == null ||
+                  item['kind'] == 'playback_report_v1' ||
+                  item['kind'] == 'lesson_opened_v1'),
         )
         .take(5)
         .toList();
@@ -709,14 +738,24 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         continue;
       }
       try {
-        final snapshot = OciServePlaybackSnapshot.fromJson(
-          Map<String, Object?>.from(item['snapshot']! as Map),
-        );
-        await gateway.reportPlayback(
-          accessToken: access,
-          organizationId: organizationId,
-          snapshot: snapshot,
-        );
+        if (item['kind'] == 'lesson_opened_v1') {
+          await gateway.markLessonOpened(
+            accessToken: access,
+            organizationId: organizationId,
+            versionId: item['version_id'] as String? ?? '',
+            lessonId: item['lesson_id'] as String? ?? '',
+            idempotencyKey: item['key'] as String? ?? '',
+          );
+        } else {
+          final snapshot = OciServePlaybackSnapshot.fromJson(
+            Map<String, Object?>.from(item['snapshot']! as Map),
+          );
+          await gateway.reportPlayback(
+            accessToken: access,
+            organizationId: organizationId,
+            snapshot: snapshot,
+          );
+        }
         sent.add(item);
       } catch (error, stack) {
         logError(
@@ -846,24 +885,31 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   Future<void> _enqueue(
     String organizationId,
     OciServePlaybackSnapshot snapshot,
-  ) => OciServeOutboxMutex.serialized(
-    state.settings.normalizedBaseUrl,
-    () async {
-      final pending = await _readOutbox();
-      if (pending.length >= 100) {
-        state = state.copyWith(warningCode: 'outbox_full');
-        throw const OciServeException('outbox_full');
-      }
-      pending.add({
-        'kind': 'playback_report_v1',
-        'account_id': state.account!.id,
-        'organization_id': organizationId,
-        'snapshot': snapshot.toJson(),
-      });
-      await _writeOutbox(pending);
-      state = state.copyWith(pendingReports: pending.length);
-    },
-  );
+  ) => _enqueueRaw({
+    'kind': 'playback_report_v1',
+    'account_id': state.account!.id,
+    'organization_id': organizationId,
+    'snapshot': snapshot.toJson(),
+  });
+
+  /// De versleutelde wachtrij voor nog niet verstuurde gebeurtenissen. Draagt
+  /// voortgangsrapporten (`playback_report_v1`) én de auditgebeurtenis
+  /// "les geopend" (`lesson_opened_v1`) — beide gaan mee bij de volgende
+  /// geslaagde flush.
+  Future<void> _enqueueRaw(Map<String, Object?> item) =>
+      OciServeOutboxMutex.serialized(
+        state.settings.normalizedBaseUrl,
+        () async {
+          final pending = await _readOutbox();
+          if (pending.length >= 100) {
+            state = state.copyWith(warningCode: 'outbox_full');
+            throw const OciServeException('outbox_full');
+          }
+          pending.add(item);
+          await _writeOutbox(pending);
+          state = state.copyWith(pendingReports: pending.length);
+        },
+      );
 
   Future<List<Map<String, Object?>>> _readOutbox({String? baseUrl}) async {
     final raw = await _secrets.readOciServeOutbox(
@@ -954,4 +1000,5 @@ class OciServeNotifier extends OciServeNotifierBase
         _OciServePlanningMethods,
         _OciServeExamMethods,
         _OciServeIntakeMethods,
-        _OciServeEvidenceItemMethods {}
+        _OciServeEvidenceItemMethods,
+        _OciServeAccountMethods {}

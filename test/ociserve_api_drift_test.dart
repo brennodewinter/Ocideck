@@ -119,6 +119,50 @@ const gatewayRoutes = <GatewayRoute>[
     path: '/api/v1/me/avatar',
     // Binary download — no JSON fields to check.
   ),
+  // — Account-audit en profielfoto (#2428) —
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/auth/ocideck-login',
+    // 204 audit-registratie — geen body om te lezen.
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/course-versions/{}/lessons/{}/opened',
+    // 204 audit-registratie — geen body om te lezen.
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/me/avatar',
+    responseSchema: 'AvatarResponse',
+    responseFields: ['hash'],
+  ),
+  GatewayRoute(
+    method: 'DELETE',
+    path: '/api/v1/me/avatar',
+    // 204 — geen body om te lezen.
+  ),
+  // — Account-audit en profielfoto (#2428) —
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/auth/ocideck-login',
+    // 204 audit-registratie — geen body om te lezen.
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/course-versions/{}/lessons/{}/opened',
+    // 204 audit-registratie — geen body om te lezen.
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/me/avatar',
+    responseSchema: 'AvatarResponse',
+    responseFields: ['hash'],
+  ),
+  GatewayRoute(
+    method: 'DELETE',
+    path: '/api/v1/me/avatar',
+    // 204 — geen body om te lezen.
+  ),
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/organizations/{}/me/learning-state',

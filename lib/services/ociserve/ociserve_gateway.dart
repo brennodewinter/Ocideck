@@ -22,10 +22,29 @@ part 'ociserve_gateway_planning.dart';
 part 'ociserve_gateway_exams.dart';
 part 'ociserve_gateway_intake.dart';
 part 'ociserve_gateway_evidence_items.dart';
+part 'ociserve_gateway_account.dart';
+
+// Bibliotheekbreed in plaats van op OciServeGatewayBase: statische leden van
+// een klasse zijn voor `part`-mixins niet ongekwalificeerd bereikbaar, en
+// elk nieuw deel (account, dossier, thema's) heeft ze nodig.
+const _uuid = Uuid();
+
+const int _jsonCap = 2 * 1024 * 1024;
+// Mirrors OciServe's published package limit so an oversized response is
+// stopped client-side before it can consume more memory than the contract.
+const int _packageCap = 32 * 1024 * 1024;
+const int _imageCap = 64 * 1024 * 1024;
+const int _avatarCap = 5 * 1024 * 1024;
+const int _privacyDataCap = 32 * 1024 * 1024;
+const int _evidenceCap = 64 * 1024 * 1024;
 
 /// Typed, bounded gateway for OciServe's learner-facing API.
 abstract class OciServeApi extends OciServePlanningApi
-    implements OciServeExamApi, OciServeIntakeApi, OciServeEvidenceItemApi {
+    implements
+        OciServeExamApi,
+        OciServeIntakeApi,
+        OciServeEvidenceItemApi,
+        OciServeAccountApi {
   Future<OciServeInstallation> installation();
   Future<OciServeOidcConfiguration> discoverOidc(
     OciServeInstallation installation,
@@ -135,17 +154,6 @@ abstract class OciServeGatewayBase implements OciServeApi, OciServeStepUpAware {
     required this.settings,
     OciServeHttpTransport? transport,
   }) : _transport = transport ?? createOciServeHttpTransport();
-
-  static const _uuid = Uuid();
-
-  static const int _jsonCap = 2 * 1024 * 1024;
-  // Mirrors OciServe's published package limit so an oversized response is
-  // stopped client-side before it can consume more memory than the contract.
-  static const int _packageCap = 32 * 1024 * 1024;
-  static const int _imageCap = 64 * 1024 * 1024;
-  static const int _avatarCap = 5 * 1024 * 1024;
-  static const int _privacyDataCap = 32 * 1024 * 1024;
-  static const int _evidenceCap = 64 * 1024 * 1024;
 
   final OciServeSettings settings;
   final OciServeHttpTransport _transport;
@@ -832,33 +840,35 @@ abstract class OciServeGatewayBase implements OciServeApi, OciServeStepUpAware {
     }
     return difference == 0;
   }
+}
 
-  static bool _hasMatchingImageSignature(List<int> bytes, String contentType) {
-    bool startsWith(List<int> signature) =>
-        bytes.length >= signature.length &&
-        List.generate(
-          signature.length,
-          (i) => bytes[i] == signature[i],
-        ).every((matches) => matches);
-    return switch (contentType) {
-      'image/png' => startsWith(const [
-        0x89,
-        0x50,
-        0x4e,
-        0x47,
-        0x0d,
-        0x0a,
-        0x1a,
-        0x0a,
-      ]),
-      'image/jpeg' => startsWith(const [0xff, 0xd8, 0xff]),
-      'image/webp' =>
-        bytes.length >= 12 &&
-            ascii.decode(bytes.sublist(0, 4), allowInvalid: true) == 'RIFF' &&
-            ascii.decode(bytes.sublist(8, 12), allowInvalid: true) == 'WEBP',
-      _ => false,
-    };
-  }
+/// Controleert dat [bytes] écht aan het verklaarde beeldtype voldoen — een
+/// content-type uit een request of header is een claim, geen bewijs.
+bool _hasMatchingImageSignature(List<int> bytes, String contentType) {
+  bool startsWith(List<int> signature) =>
+      bytes.length >= signature.length &&
+      List.generate(
+        signature.length,
+        (i) => bytes[i] == signature[i],
+      ).every((matches) => matches);
+  return switch (contentType) {
+    'image/png' => startsWith(const [
+      0x89,
+      0x50,
+      0x4e,
+      0x47,
+      0x0d,
+      0x0a,
+      0x1a,
+      0x0a,
+    ]),
+    'image/jpeg' => startsWith(const [0xff, 0xd8, 0xff]),
+    'image/webp' =>
+      bytes.length >= 12 &&
+          ascii.decode(bytes.sublist(0, 4), allowInvalid: true) == 'RIFF' &&
+          ascii.decode(bytes.sublist(8, 12), allowInvalid: true) == 'WEBP',
+    _ => false,
+  };
 }
 
 /// Typed, bounded gateway voor de OciServe learner-facing API: de kern uit
@@ -868,6 +878,7 @@ class OciServeGateway extends OciServeGatewayBase
         _OciServePlanning,
         _OciServeExams,
         _OciServeIntake,
-        _OciServeEvidenceItems {
+        _OciServeEvidenceItems,
+        _OciServeAccount {
   OciServeGateway({required super.settings, super.transport});
 }
