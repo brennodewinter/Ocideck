@@ -1621,6 +1621,36 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Aanvulling gevraagd': 'Supplementum petitum',
+  'Aanvulling gevraagd.': 'Supplementum petitum est.',
+  'Aanvulling gevraagd: {opmerking}': 'Supplementum petitum: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Genera probationum onerari non potuerunt.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Nulla genera probationum praesto sunt. Rogate ordinem ut ea publicet.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Fasciculus in inspectione repudiatus est. Alium fasciculum elige.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Fasciculus acceptus et tutus repertus est. Nondum ad aestimationem missus est.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Fasciculus adhuc inspicitur. Post paucas minutas iterum conare.',
+  'Het bewijsstuk is ingetrokken.': 'Probatio revocata est.',
+  'Het bewijsstuk is verlopen.': 'Probatio exspiravit.',
+  'In behandeling bij een beoordelaar.': 'A iudice tractatur.',
+  'Ingediend': 'Missum',
+  'Ingediend. Een beoordelaar kijkt ernaar.': 'Missum. Iudex id inspiciet.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Elige genus probationis quam mittis.',
+  'Soort bewijs': 'Genus probationis',
+  'Soort: {soort}': 'Genus: {soort}',
+  'Mijn uitslagen': 'Eventus mei',
+  'De uitslag is nog niet vrijgegeven.': 'Eventus nondum emissus est.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} ex {totaal} recta · {percentage}%',
+  'Niet geslaagd': 'Non approbatus',
+  'De uitslagen konden niet worden geladen.': 'Eventus onerari non potuerunt.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Eventum tuum sub Meum scribendae videbis simulac emissus erit.',
   'Startmappen': 'Carpetae initiales',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Ubi aperire et servare incipiunt. Vacuum relictum prima bibliotheca utitur.',

@@ -812,6 +812,39 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Aanvulling gevraagd': 'More information requested',
+  'Aanvulling gevraagd.': 'More information requested.',
+  'Aanvulling gevraagd: {opmerking}': 'More information requested: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'The evidence types could not be loaded.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'No evidence types are available. Ask the organisation to publish them.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'The file was rejected during the check. Choose another file.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'The file has been received and found safe. It has not yet been submitted for review.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'The file is still being checked. Try again in a few minutes.',
+  'Het bewijsstuk is ingetrokken.': 'The evidence has been withdrawn.',
+  'Het bewijsstuk is verlopen.': 'The evidence has expired.',
+  'In behandeling bij een beoordelaar.': 'Being handled by an assessor.',
+  'Ingediend': 'Submitted',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Submitted. An assessor will look at it.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Choose the type of evidence you are submitting.',
+  'Soort bewijs': 'Type of evidence',
+  'Soort: {soort}': 'Type: {soort}',
+  'Mijn uitslagen': 'My results',
+  'De uitslag is nog niet vrijgegeven.':
+      'The result has not been released yet.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} of {totaal} correct · {percentage}%',
+  'Niet geslaagd': 'Not passed',
+  'De uitslagen konden niet worden geladen.':
+      'The results could not be loaded.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'You will see your result under My exams as soon as it has been released.',
   'Startmappen': 'Start folders',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Where opening and saving starts. Leave this empty to use the first library.',

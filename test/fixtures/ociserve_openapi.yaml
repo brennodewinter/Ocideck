@@ -8454,6 +8454,64 @@ paths:
       requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/ExamIntervention' } } } }
       responses: { "204": { description: Applied and audited., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } } }, "400": { $ref: '#/components/responses/ProblemResponse' } }
 
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/release-results:
+    post:
+      tags: [Assessments]
+      summary: Release the results of every scored attempt in a closed session
+      description: |
+        Releases, in one transaction, every `scored` attempt of the session so a
+        reviewer does not have to release candidate by candidate. Requires
+        `assess:review` or `content:create` and a session that is `closed` (409
+        otherwise). Attempts that are not scored yet are left alone and counted in
+        `not_ready`; attempts that were already released are counted in
+        `already_released` and do not change, so repeating the call is safe. Each
+        release is audit-logged against the participant like the per-attempt
+        release.
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses:
+        "200": { description: What was released., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamResultsReleased' } } } }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/results:
+    get:
+      tags: [Assessments]
+      summary: Per-candidate outcome of a closed exam session
+      description: |
+        Shows an assessor who passed. The participant routes refuse formal attempts
+        and the supervision screen deliberately shows no score, so this is the one
+        place staff read the outcome. Requires `assess:review` or `content:create`
+        and a `closed` session (409 otherwise: during the sitting a score would be a
+        leak). Candidates who never started are listed with `not_started`. Score
+        fields appear for `scored` and `released` attempts, whether or not the result
+        is already released to the candidate. The read is audit-logged.
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: One row per admitted candidate., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamSessionResults' } } } }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/me/exam-results:
+    get:
+      tags: [Assessments]
+      summary: The authenticated participant's own formal exam results
+      description: |
+        Lists the newest 50 submitted formal attempts of the caller. Score fields
+        appear only once the result is released; before that the list says no more
+        than that the attempt was submitted. The older participant score route
+        refuses formal attempts, so this is where a candidate reads the outcome.
+      parameters: [{ name: org_id, in: path, required: true, schema: { type: string, format: uuid } }]
+      responses: { "200": { description: Results newest first., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamResultList' } } } } }
+
   /api/v1/organizations/{org_id}/me/exam-sessions:
     get:
       tags: [Assessments]
@@ -9877,6 +9935,61 @@ components:
         submitted_at: { type: string, format: date-time }
         scored_at: { type: string, format: date-time }
         released_at: { type: string, format: date-time }
+    ExamResult:
+      type: object
+      additionalProperties: false
+      required: [attempt_id, exam_session_id, title, status]
+      description: |
+        One formal attempt of the authenticated participant. The score fields
+        are present only when `status` is `released`.
+      properties:
+        attempt_id: { type: string, format: uuid }
+        exam_session_id: { type: string, format: uuid }
+        title: { type: string, description: Title of the exam blueprint. }
+        image_hash: { type: string, pattern: '^[0-9a-f]{64}$' }
+        status: { type: string, enum: [submitted, scored, released] }
+        submitted_at: { type: string, format: date-time }
+        released_at: { type: string, format: date-time }
+        total_items: { type: integer, minimum: 0 }
+        correct_items: { type: integer, minimum: 0 }
+        percentage: { type: number, minimum: 0, maximum: 100 }
+        passed: { type: boolean, description: Server verdict; absent when the blueprint version defines no pass mark. }
+    ExamResultsReleased:
+      type: object
+      additionalProperties: false
+      required: [released, already_released, not_ready]
+      properties:
+        released: { type: integer, minimum: 0, description: Attempts released by this call. }
+        already_released: { type: integer, minimum: 0 }
+        not_ready: { type: integer, minimum: 0, description: Attempts that are not scored yet and were left alone. }
+    ExamSessionResult:
+      type: object
+      additionalProperties: false
+      required: [participant_id, display_name, status]
+      properties:
+        participant_id: { type: string, format: uuid }
+        display_name: { type: string }
+        attempt_id: { type: string, format: uuid }
+        status: { type: string, enum: [not_started, in_progress, paused, invalidated, submitted, scored, released] }
+        total_items: { type: integer, minimum: 0 }
+        correct_items: { type: integer, minimum: 0 }
+        percentage: { type: number, minimum: 0, maximum: 100 }
+        passed: { type: boolean, description: Server verdict; absent when the blueprint version defines no pass mark. }
+    ExamSessionResults:
+      type: object
+      additionalProperties: false
+      required: [session_id, status, results]
+      properties:
+        session_id: { type: string, format: uuid }
+        status: { type: string, enum: [closed] }
+        results: { type: array, items: { $ref: '#/components/schemas/ExamSessionResult' } }
+    ExamResultList:
+      type: object
+      additionalProperties: false
+      required: [results, server_time]
+      properties:
+        results: { type: array, maxItems: 50, items: { $ref: '#/components/schemas/ExamResult' } }
+        server_time: { type: string, format: date-time }
     CurrentExamItem:
       type: object
       additionalProperties: false
@@ -11337,14 +11450,32 @@ components:
       properties:
         kind:
           type: string
-          enum: [course, evidence]
+          enum: [course, evidence, exam]
           description: |
             Bepaalt het type eis. Ontbreekt kind (of "course"), dan is het een
-            cursuseis; bestaande definities lezen ongewijzigd terug.
+            cursuseis; bestaande definities lezen ongewijzigd terug. Een
+            toets-eis (`exam`) is voldaan zodra de deelnemer een vrijgegeven
+            poging heeft op een versie van de blueprint die de norm haalt: de
+            beste poging telt, een latere mislukte herkansing trekt een behaalde
+            toets niet in.
         course_id:
           type: string
           format: uuid
           description: Vereist voor een cursuseis (kind=course of afwezig).
+        blueprint_id:
+          type: string
+          format: uuid
+          description: |
+            Vereist voor een toets-eis. De blueprint moet gepubliceerd zijn en
+            een norm hebben: `min_percentage` hieronder of een `pass_mark` in
+            zijn nieuwste versie, anders weigert de server de definitie (400).
+        min_percentage:
+          type: number
+          exclusiveMinimum: 0
+          maximum: 100
+          description: |
+            Norm voor een toets-eis; overschrijft de `pass_mark` van de
+            blueprintversie. Alleen bij kind=exam.
         title:
           type: string
         evidence_type:
@@ -11830,6 +11961,9 @@ components:
                 type: string
               course_id:
                 type: string
+              blueprint_id:
+                type: string
+                description: Present for a requirement of kind `exam`.
               min_assurance:
                 type: string
               met:
@@ -12020,6 +12154,20 @@ components:
           minimum: 1
           maximum: 10080
           description: Optional duration; the server computes an immutable deadline when the attempt starts.
+        pass_mark:
+          type: object
+          additionalProperties: false
+          required: [min_percentage]
+          description: |
+            Optional cut score. It is part of the immutable blueprint version, so
+            a published exam keeps the norm it was taken against; changing it
+            means publishing a new version. Without it attempts get a percentage
+            but no `passed` verdict.
+          properties:
+            min_percentage:
+              type: number
+              exclusiveMinimum: 0
+              maximum: 100
 
     BlueprintDraftResponse:
       type: object
@@ -12898,6 +13046,17 @@ components:
           items:
             type: string
             format: uuid
+        percentage:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: Share of correct items, rounded to one decimal. Absent when the attempt has no items.
+        passed:
+          type: boolean
+          description: |
+            Verdict against the blueprint version's `pass_mark`, decided by the
+            server. Absent while `manual_review_items` is not empty or when the
+            version defines no pass mark. Clients display it and never recompute.
 
     AttemptManualScoreRequest:
       type: object

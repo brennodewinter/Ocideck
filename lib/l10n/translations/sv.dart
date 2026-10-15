@@ -1605,6 +1605,37 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Aanvulling gevraagd': 'Komplettering begärd',
+  'Aanvulling gevraagd.': 'Komplettering begärd.',
+  'Aanvulling gevraagd: {opmerking}': 'Komplettering begärd: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Det gick inte att läsa in bevistyperna.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Inga bevistyper är tillgängliga. Be organisationen att publicera dem.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Filen avvisades vid kontrollen. Välj en annan fil.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Filen har tagits emot och bedömts som säker. Den har ännu inte skickats in för bedömning.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Filen kontrolleras fortfarande. Försök igen om några minuter.',
+  'Het bewijsstuk is ingetrokken.': 'Beviset har dragits tillbaka.',
+  'Het bewijsstuk is verlopen.': 'Beviset har löpt ut.',
+  'In behandeling bij een beoordelaar.': 'Behandlas av en bedömare.',
+  'Ingediend': 'Inskickat',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Inskickat. En bedömare tittar på det.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Välj vilken typ av bevis du skickar in.',
+  'Soort bewijs': 'Typ av bevis',
+  'Soort: {soort}': 'Typ: {soort}',
+  'Mijn uitslagen': 'Mina resultat',
+  'De uitslag is nog niet vrijgegeven.': 'Resultatet har ännu inte släppts.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} av {totaal} rätt · {percentage}%',
+  'Niet geslaagd': 'Underkänd',
+  'De uitslagen konden niet worden geladen.': 'Resultaten kunde inte läsas in.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Du ser ditt resultat under Mina tentor så snart det har släppts.',
   'Startmappen': 'Startmappar',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Där öppna och spara börjar. Lämna tomt för att använda det första biblioteket.',

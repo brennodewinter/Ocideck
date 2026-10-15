@@ -1606,6 +1606,38 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Aanvulling gevraagd': 'Zahtevana dopolnitev',
+  'Aanvulling gevraagd.': 'Zahtevana je dopolnitev.',
+  'Aanvulling gevraagd: {opmerking}': 'Zahtevana dopolnitev: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Vrst dokazil ni bilo mogoče naložiti.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Na voljo ni nobene vrste dokazil. Prosite organizacijo, naj jih objavi.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Datoteka je bila pri preverjanju zavrnjena. Izberite drugo datoteko.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Datoteka je prejeta in ocenjena kot varna. Še ni bila oddana v oceno.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Datoteka se še preverja. Poskusite znova čez nekaj minut.',
+  'Het bewijsstuk is ingetrokken.': 'Dokazilo je bilo umaknjeno.',
+  'Het bewijsstuk is verlopen.': 'Dokazilo je poteklo.',
+  'In behandeling bij een beoordelaar.': 'Obravnava ga ocenjevalec.',
+  'Ingediend': 'Oddano',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Oddano. Ocenjevalec si ga bo ogledal.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Izberite vrsto dokazila, ki ga oddajate.',
+  'Soort bewijs': 'Vrsta dokazila',
+  'Soort: {soort}': 'Vrsta: {soort}',
+  'Mijn uitslagen': 'Moji rezultati',
+  'De uitslag is nog niet vrijgegeven.': 'Rezultat še ni objavljen.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} od {totaal} pravilnih · {percentage}%',
+  'Niet geslaagd': 'Ni opravil',
+  'De uitslagen konden niet worden geladen.':
+      'Rezultatov ni bilo mogoče naložiti.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Svoj rezultat boste videli v razdelku Moji izpiti, ko bo objavljen.',
   'Startmappen': 'Začetne mape',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kje se začneta odpiranje in shranjevanje. Prazno uporabi prvo knjižnico.',

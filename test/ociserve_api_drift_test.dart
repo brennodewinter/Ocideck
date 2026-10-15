@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  b43a53c6b9444a18ff3c47a2ffa9bc6c6f545d5e
+// OciServe commit:  3c7c40f39456c71259b5958204de405b9dbd35af
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -16,12 +16,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_privacy_dictionary.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = 'b43a53c6b9444a18ff3c47a2ffa9bc6c6f545d5e';
+const pinnedOciServeCommit = '3c7c40f39456c71259b5958204de405b9dbd35af';
 
 /// SHA-256 of the pinned spec file itself — a spec silently replaced or
 /// hand-edited shows up here, not in a subtle field rename.
 const pinnedOciServeSpecSha256 =
-    'c463dfa4aabc0a4cc5c5e10d6541789a9414a51216fb0a4e25a90b7bb42f0e9b';
+    'c94de1dd15b6d384997652e6844d2e8a6c14b82e53529058d87a7cf1981e5c27';
 
 /// The capability catalogue the pinned spec declares (`info.x-capability-
 /// catalog-version`) and the intake capabilities OciDeck may rely on.
@@ -153,6 +153,25 @@ const gatewayRoutes = <GatewayRoute>[
     ],
   ),
   GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/me/exam-results',
+    responseFields: [
+      'results',
+      'server_time',
+      'results.attempt_id',
+      'results.exam_session_id',
+      'results.title',
+      'results.image_hash',
+      'results.status',
+      'results.submitted_at',
+      'results.released_at',
+      'results.total_items',
+      'results.correct_items',
+      'results.percentage',
+      'results.passed',
+    ],
+  ),
+  GatewayRoute(
     method: 'POST',
     path: '/api/v1/organizations/{}/me/exam-sessions/{}/attempts',
     responseFields: ['id', 'participant_id', 'status', 'started_at'],
@@ -219,6 +238,47 @@ const gatewayRoutes = <GatewayRoute>[
     path: '/api/v1/organizations/{}/evidence-uploads/{}',
     responseSchema: 'EvidenceResponse',
     responseFields: ['id', 'status'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/evidence-types',
+    responseSchema: 'EvidenceTypeList',
+    responseFields: [
+      'evidence_types',
+      'evidence_types.id',
+      'evidence_types.slug',
+      'evidence_types.title',
+      'evidence_types.status',
+    ],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/participants/{}/evidence-items',
+    responseSchema: 'EvidenceItemResponse',
+    responseFields: [
+      'id',
+      'evidence_type_id',
+      'content_status',
+      'upload_id',
+      'declared_valid_until',
+      'review_note',
+      'created_at',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/evidence-items',
+    responseSchema: 'EvidenceItemList',
+    responseFields: [
+      'evidence_items',
+      'evidence_items.id',
+      'evidence_items.evidence_type_id',
+      'evidence_items.content_status',
+      'evidence_items.upload_id',
+      'evidence_items.declared_valid_until',
+      'evidence_items.review_note',
+      'evidence_items.created_at',
+    ],
   ),
   GatewayRoute(
     method: 'GET',

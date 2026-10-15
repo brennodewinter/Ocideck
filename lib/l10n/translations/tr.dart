@@ -2514,6 +2514,37 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Aanvulling gevraagd': 'Ek bilgi istendi',
+  'Aanvulling gevraagd.': 'Ek bilgi istendi.',
+  'Aanvulling gevraagd: {opmerking}': 'Ek bilgi istendi: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.': 'Kanıt türleri yüklenemedi.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Kullanılabilir kanıt türü yok. Kuruluştan bunları yayımlamasını isteyin.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Dosya denetimde reddedildi. Başka bir dosya seçin.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Dosya alındı ve güvenli bulundu. Henüz değerlendirmeye gönderilmedi.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Dosya hâlâ denetleniyor. Birkaç dakika sonra yeniden deneyin.',
+  'Het bewijsstuk is ingetrokken.': 'Kanıt geri çekildi.',
+  'Het bewijsstuk is verlopen.': 'Kanıtın süresi doldu.',
+  'In behandeling bij een beoordelaar.':
+      'Bir değerlendirici tarafından ele alınıyor.',
+  'Ingediend': 'Gönderildi',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Gönderildi. Bir değerlendirici inceleyecek.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Gönderdiğiniz kanıtın türünü seçin.',
+  'Soort bewijs': 'Kanıt türü',
+  'Soort: {soort}': 'Tür: {soort}',
+  'Mijn uitslagen': 'Sonuçlarım',
+  'De uitslag is nog niet vrijgegeven.': 'Sonuç henüz yayımlanmadı.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{totaal} sorudan {goed} doğru · %{percentage}',
+  'Niet geslaagd': 'Geçmedi',
+  'De uitslagen konden niet worden geladen.': 'Sonuçlar yüklenemedi.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Sonucunuzu yayımlandığında Sınavlarım altında göreceksiniz.',
   'Startmappen': 'Başlangıç klasörleri',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Açma ve kaydetmenin başladığı yer. Boş bırakmak ilk kitaplığı kullanır.',

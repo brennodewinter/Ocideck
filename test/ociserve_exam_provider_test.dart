@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_exam.dart';
+import 'package:ocideck/models/ociserve_exam_result.dart';
 import 'package:ocideck/services/ociserve/ociserve_exam_outbox.dart';
 import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck/state/ociserve_exam_provider.dart';
@@ -13,7 +14,20 @@ class _ExamApi extends OciServeNotifier {
   final answerKeys = <String>[];
   bool failFirstAnswer = false;
   bool failCurrent = false;
+  bool failResults = false;
   int currentCalls = 0;
+  int resultCalls = 0;
+  List<OciServeExamResult> resultsValue = const [];
+
+  @override
+  Future<OciServeExamResultList> examResults(String organizationId) async {
+    resultCalls++;
+    if (failResults) throw StateError('offline');
+    return OciServeExamResultList(
+      results: resultsValue,
+      serverTime: DateTime.utc(2026, 9, 12),
+    );
+  }
 
   @override
   Future<OciServeExamSessionList> examSessions(String organizationId) async =>
@@ -215,5 +229,90 @@ void main() {
 
     expect(notifier.state.phase, OciServeExamPhase.failed);
     expect(notifier.state.phase, isNot(OciServeExamPhase.readyToSubmit));
+  });
+
+  group('uitslagen', () {
+    const released = OciServeExamResult(
+      attemptId: 'attempt-9',
+      examSessionId: 'session-9',
+      title: 'Theorie',
+      status: 'released',
+      totalItems: 10,
+      correctItems: 7,
+      percentage: 70,
+      passed: true,
+    );
+
+    test('worden bij het openen van de lijst geladen', () async {
+      final api = _ExamApi()..resultsValue = [released];
+      final notifier = OciServeExamNotifier(
+        organizationId: 'org',
+        api: api,
+        outbox: _outbox(secrets),
+      );
+      addTearDown(notifier.dispose);
+
+      await notifier.load();
+
+      expect(notifier.state.results.single.passed, isTrue);
+      expect(notifier.state.resultsUnavailable, isFalse);
+    });
+
+    test('worden na het inleveren opnieuw opgehaald', () async {
+      final api = _ExamApi();
+      final notifier = OciServeExamNotifier(
+        organizationId: 'org',
+        api: api,
+        outbox: _outbox(secrets),
+      );
+      addTearDown(notifier.dispose);
+      await notifier.load();
+      await notifier.start(notifier.state.sessions.single);
+      await notifier.answer('a');
+      final before = api.resultCalls;
+
+      await notifier.submit();
+
+      expect(api.resultCalls, before + 1);
+      expect(notifier.state.phase, OciServeExamPhase.submitted);
+    });
+
+    test(
+      'een mislukking blokkeert de examens niet maar is zichtbaar',
+      () async {
+        final api = _ExamApi()..failResults = true;
+        final notifier = OciServeExamNotifier(
+          organizationId: 'org',
+          api: api,
+          outbox: _outbox(secrets),
+        );
+        addTearDown(notifier.dispose);
+
+        await notifier.load();
+
+        expect(notifier.state.phase, OciServeExamPhase.sessions);
+        expect(notifier.state.sessions, hasLength(1));
+        expect(notifier.state.resultsUnavailable, isTrue);
+        expect(notifier.state.results, isEmpty);
+      },
+    );
+
+    test('een geslaagd laden na een mislukking wist de foutmelding', () async {
+      final api = _ExamApi()..failResults = true;
+      final notifier = OciServeExamNotifier(
+        organizationId: 'org',
+        api: api,
+        outbox: _outbox(secrets),
+      );
+      addTearDown(notifier.dispose);
+      await notifier.load();
+
+      api.failResults = false;
+      api.resultsValue = [released];
+      await notifier.load();
+
+      expect(notifier.state.resultsUnavailable, isFalse);
+      expect(notifier.state.results, hasLength(1));
+    });
   });
 }

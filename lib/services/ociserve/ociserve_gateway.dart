@@ -5,7 +5,9 @@ import 'package:crypto/crypto.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/ociserve_evidence.dart';
+import '../../models/ociserve_evidence_item.dart';
 import '../../models/ociserve_exam.dart';
+import '../../models/ociserve_exam_result.dart';
 import '../../models/ociserve_intake.dart';
 import '../../models/ociserve_models.dart';
 import '../../models/ociserve_settings.dart';
@@ -19,10 +21,11 @@ import '../../utils/content_hash.dart';
 part 'ociserve_gateway_planning.dart';
 part 'ociserve_gateway_exams.dart';
 part 'ociserve_gateway_intake.dart';
+part 'ociserve_gateway_evidence_items.dart';
 
 /// Typed, bounded gateway for OciServe's learner-facing API.
 abstract class OciServeApi extends OciServePlanningApi
-    implements OciServeExamApi, OciServeIntakeApi {
+    implements OciServeExamApi, OciServeIntakeApi, OciServeEvidenceItemApi {
   Future<OciServeInstallation> installation();
   Future<OciServeOidcConfiguration> discoverOidc(
     OciServeInstallation installation,
@@ -861,6 +864,10 @@ abstract class OciServeGatewayBase implements OciServeApi, OciServeStepUpAware {
 /// Typed, bounded gateway voor de OciServe learner-facing API: de kern uit
 /// [OciServeGatewayBase] plus de planning-methoden uit [_OciServePlanning].
 class OciServeGateway extends OciServeGatewayBase
-    with _OciServePlanning, _OciServeExams, _OciServeIntake {
+    with
+        _OciServePlanning,
+        _OciServeExams,
+        _OciServeIntake,
+        _OciServeEvidenceItems {
   OciServeGateway({required super.settings, super.transport});
 }

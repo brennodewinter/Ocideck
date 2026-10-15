@@ -6,6 +6,7 @@ import '../../models/ociserve_exam.dart';
 import '../../state/ociserve_exam_provider.dart';
 import '../../state/ociserve_provider.dart';
 import '../../utils/image_limits.dart';
+import 'ociserve_exam_results.dart';
 
 class OciServeExamDialog extends StatelessWidget {
   const OciServeExamDialog({super.key, required this.organizationId});
@@ -112,9 +113,21 @@ class OciServeExamDialog extends StatelessWidget {
         );
       case OciServeExamPhase.submitted:
         return Center(
-          child: Text(
-            l10n.d('Uw examen is ingeleverd.'),
-            style: Theme.of(context).textTheme.titleLarge,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                l10n.d('Uw examen is ingeleverd.'),
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                l10n.d(
+                  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.',
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         );
       case OciServeExamPhase.failed:
@@ -181,6 +194,10 @@ class OciServeExamDialog extends StatelessWidget {
               ),
             ),
           ),
+        OciServeExamResultsSection(
+          results: state.results,
+          unavailable: state.resultsUnavailable,
+        ),
       ],
     );
   }

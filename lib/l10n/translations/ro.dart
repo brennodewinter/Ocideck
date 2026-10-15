@@ -1622,6 +1622,39 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Aanvulling gevraagd': 'Completare solicitată',
+  'Aanvulling gevraagd.': 'Completare solicitată.',
+  'Aanvulling gevraagd: {opmerking}': 'Completare solicitată: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Tipurile de dovezi nu au putut fi încărcate.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Nu există tipuri de dovezi disponibile. Cereți organizației să le publice.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Fișierul a fost respins la verificare. Alegeți alt fișier.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Fișierul a fost primit și considerat sigur. Nu a fost încă trimis spre evaluare.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Fișierul este încă în curs de verificare. Încercați din nou peste câteva minute.',
+  'Het bewijsstuk is ingetrokken.': 'Dovada a fost retrasă.',
+  'Het bewijsstuk is verlopen.': 'Dovada a expirat.',
+  'In behandeling bij een beoordelaar.':
+      'Este în curs de tratare de către un evaluator.',
+  'Ingediend': 'Trimis',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Trimis. Un evaluator îl va examina.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Alegeți tipul de dovadă pe care o trimiteți.',
+  'Soort bewijs': 'Tipul de dovadă',
+  'Soort: {soort}': 'Tip: {soort}',
+  'Mijn uitslagen': 'Rezultatele mele',
+  'De uitslag is nog niet vrijgegeven.': 'Rezultatul nu a fost încă publicat.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} din {totaal} corecte · {percentage}%',
+  'Niet geslaagd': 'Respins',
+  'De uitslagen konden niet worden geladen.':
+      'Rezultatele nu au putut fi încărcate.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Veți vedea rezultatul sub Examenele mele imediat ce este publicat.',
   'Startmappen': 'Dosare de pornire',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unde încep deschiderea și salvarea. Gol folosește prima bibliotecă.',

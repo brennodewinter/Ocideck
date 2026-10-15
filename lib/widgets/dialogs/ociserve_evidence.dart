@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_evidence.dart';
+import '../../models/ociserve_evidence_item.dart';
 import '../../models/ociserve_portfolio.dart';
 import '../../services/pdf_evidence_service.dart';
 import '../../state/ociserve_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/error_snackbar.dart';
 import '../reader/pdf_evidence_viewer.dart';
+import 'ociserve_evidence_review.dart';
 import 'ociserve_evidence_submit.dart';
 import 'ociserve_portfolio_link.dart';
 
@@ -26,10 +28,20 @@ class OciServeEvidence extends StatelessWidget {
     required this.evidenceUploads,
     required this.organizationId,
     required this.onRefresh,
+    this.evidenceItems = const [],
+    this.evidenceTypes = const [],
+    this.participantId = '',
   });
 
   final List<OciServeQualification> qualifications;
   final List<EvidenceUpload> evidenceUploads;
+
+  /// De ingediende bewijsstukken en de soorten waar ze bij horen. Een upload is
+  /// pas een bewijsstuk voor een beoordelaar als hij is ingediend; de status
+  /// van de beoordeling komt van het bewijsstuk, niet van de upload.
+  final List<OciServeEvidenceItem> evidenceItems;
+  final List<OciServeEvidenceType> evidenceTypes;
+  final String participantId;
   final String organizationId;
   final VoidCallback onRefresh;
 
@@ -271,6 +283,7 @@ class OciServeEvidence extends StatelessWidget {
     final refreshed = await OciServeEvidenceSubmit.show(
       context,
       organizationId: organizationId,
+      participantId: participantId,
       badgeTitle: badgeTitle,
     );
     if (refreshed && context.mounted) onRefresh();
@@ -284,12 +297,22 @@ class OciServeEvidence extends StatelessWidget {
     EvidenceUpload upload,
   ) {
     final palette = AppPalette.of(theme);
-    final (statusLabel, statusColor) = _uploadStatusDisplay(
-      l10n,
-      theme,
-      upload,
-    );
-    final statusMessage = _uploadStatusMessage(l10n, locale, upload);
+    final item = upload.isClean ? evidenceItemFor(upload, evidenceItems) : null;
+    final (statusLabel, statusColor) = item != null
+        ? evidenceItemLabel(l10n, theme, item.status)
+        : _uploadStatusDisplay(l10n, theme, upload);
+    // Een schone upload is alleen veilig bevonden; geaccepteerd is hij pas als
+    // een beoordelaar het bewijsstuk heeft goedgekeurd.
+    final statusMessage = item != null
+        ? evidenceItemMessage(l10n, item)
+        : upload.isClean
+        ? l10n.d(
+            'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.',
+          )
+        : _uploadStatusMessage(l10n, locale, upload);
+    final typeTitle = item == null
+        ? null
+        : evidenceTypeTitle(item, evidenceTypes);
     final nextStep = _uploadNextStep(l10n, upload);
     return Card(
       margin: EdgeInsets.zero,
@@ -347,6 +370,13 @@ class OciServeEvidence extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
+            if (typeTitle != null) ...[
+              Text(
+                l10n.d('Soort: {soort}').replaceAll('{soort}', typeTitle),
+                style: theme.textTheme.bodySmall,
+              ),
+              const SizedBox(height: 4),
+            ],
             Text(statusMessage, style: theme.textTheme.bodyMedium),
             if (nextStep != null) ...[
               const SizedBox(height: 6),

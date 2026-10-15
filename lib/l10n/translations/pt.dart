@@ -1634,6 +1634,38 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Aanvulling gevraagd': 'Complemento solicitado',
+  'Aanvulling gevraagd.': 'Complemento solicitado.',
+  'Aanvulling gevraagd: {opmerking}': 'Complemento solicitado: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Não foi possível carregar os tipos de prova.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Não há tipos de prova disponíveis. Peça à organização que os publique.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'O ficheiro foi rejeitado na verificação. Escolha outro ficheiro.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'O ficheiro foi recebido e considerado seguro. Ainda não foi submetido para avaliação.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'O ficheiro ainda está a ser verificado. Tente novamente dentro de alguns minutos.',
+  'Het bewijsstuk is ingetrokken.': 'A prova foi retirada.',
+  'Het bewijsstuk is verlopen.': 'A prova expirou.',
+  'In behandeling bij een beoordelaar.': 'Em apreciação por um avaliador.',
+  'Ingediend': 'Submetido',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Submetido. Um avaliador vai analisá-lo.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Escolha o tipo de prova que está a submeter.',
+  'Soort bewijs': 'Tipo de prova',
+  'Soort: {soort}': 'Tipo: {soort}',
+  'Mijn uitslagen': 'Os meus resultados',
+  'De uitslag is nog niet vrijgegeven.': 'O resultado ainda não foi divulgado.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} de {totaal} certas · {percentage}%',
+  'Niet geslaagd': 'Reprovado',
+  'De uitslagen konden niet worden geladen.':
+      'Não foi possível carregar os resultados.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Verá o seu resultado em Meus exames assim que for divulgado.',
   'Startmappen': 'Pastas iniciais',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Onde abrir e guardar começam. Vazio usa a primeira biblioteca.',

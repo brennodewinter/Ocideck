@@ -1621,6 +1621,38 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Aanvulling gevraagd': 'Запит на доповнення',
+  'Aanvulling gevraagd.': 'Запитано доповнення.',
+  'Aanvulling gevraagd: {opmerking}': 'Запит на доповнення: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Не вдалося завантажити види доказів.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Немає доступних видів доказів. Попросіть організацію їх опублікувати.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Файл відхилено під час перевірки. Виберіть інший файл.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Файл отримано та визнано безпечним. Його ще не подано на оцінювання.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Файл ще перевіряється. Спробуйте ще раз за кілька хвилин.',
+  'Het bewijsstuk is ingetrokken.': 'Доказ відкликано.',
+  'Het bewijsstuk is verlopen.': 'Термін дії доказу минув.',
+  'In behandeling bij een beoordelaar.': 'Розглядається оцінювачем.',
+  'Ingediend': 'Подано',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Подано. Оцінювач перегляне його.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Виберіть вид доказу, який ви подаєте.',
+  'Soort bewijs': 'Вид доказу',
+  'Soort: {soort}': 'Вид: {soort}',
+  'Mijn uitslagen': 'Мої результати',
+  'De uitslag is nog niet vrijgegeven.': 'Результат ще не оприлюднено.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} із {totaal} правильних · {percentage}%',
+  'Niet geslaagd': 'Не склав',
+  'De uitslagen konden niet worden geladen.':
+      'Не вдалося завантажити результати.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Свій результат ви побачите в розділі Мої іспити, щойно його буде оприлюднено.',
   'Startmappen': 'Початкові теки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Звідки починаються відкриття й збереження. Порожнє значення — перша бібліотека.',

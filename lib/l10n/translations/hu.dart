@@ -1608,6 +1608,38 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Aanvulling gevraagd': 'Kiegészítés kérve',
+  'Aanvulling gevraagd.': 'Kiegészítést kértek.',
+  'Aanvulling gevraagd: {opmerking}': 'Kiegészítés kérve: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'A bizonyíték típusait nem sikerült betölteni.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Nincs elérhető bizonyíték-típus. Kérje meg a szervezetet, hogy tegye közzé őket.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'A fájlt az ellenőrzés során elutasították. Válasszon másik fájlt.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'A fájl megérkezett, és biztonságosnak találtuk. Értékelésre még nem nyújtották be.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'A fájl ellenőrzése még folyamatban van. Próbálja újra néhány perc múlva.',
+  'Het bewijsstuk is ingetrokken.': 'A bizonyítékot visszavonták.',
+  'Het bewijsstuk is verlopen.': 'A bizonyíték lejárt.',
+  'In behandeling bij een beoordelaar.': 'Egy értékelő foglalkozik vele.',
+  'Ingediend': 'Benyújtva',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Benyújtva. Egy értékelő megnézi.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Válassza ki a benyújtott bizonyíték típusát.',
+  'Soort bewijs': 'A bizonyíték típusa',
+  'Soort: {soort}': 'Típus: {soort}',
+  'Mijn uitslagen': 'Eredményeim',
+  'De uitslag is nog niet vrijgegeven.': 'Az eredmény még nincs közzétéve.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} a(z) {totaal}-ból helyes · {percentage}%',
+  'Niet geslaagd': 'Sikertelen',
+  'De uitslagen konden niet worden geladen.':
+      'Az eredményeket nem sikerült betölteni.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Az eredményét a(z) A vizsgáim alatt látja, amint közzétették.',
   'Startmappen': 'Kezdőmappák',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hol a megnyitás és a mentés kezdődik. Üresen az első könyvtárat használja.',

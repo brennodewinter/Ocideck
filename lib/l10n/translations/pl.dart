@@ -1618,6 +1618,39 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Aanvulling gevraagd': 'Prośba o uzupełnienie',
+  'Aanvulling gevraagd.': 'Poproszono o uzupełnienie.',
+  'Aanvulling gevraagd: {opmerking}': 'Prośba o uzupełnienie: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Nie udało się wczytać rodzajów dowodów.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Brak dostępnych rodzajów dowodów. Poproś organizację o ich opublikowanie.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Plik został odrzucony podczas kontroli. Wybierz inny plik.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Plik został odebrany i uznany za bezpieczny. Nie został jeszcze przesłany do oceny.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Plik jest nadal sprawdzany. Spróbuj ponownie za kilka minut.',
+  'Het bewijsstuk is ingetrokken.': 'Dowód został wycofany.',
+  'Het bewijsstuk is verlopen.': 'Dowód wygasł.',
+  'In behandeling bij een beoordelaar.':
+      'W trakcie rozpatrywania przez oceniającego.',
+  'Ingediend': 'Przesłano',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Przesłano. Oceniający się z nim zapozna.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Wybierz rodzaj dowodu, który przesyłasz.',
+  'Soort bewijs': 'Rodzaj dowodu',
+  'Soort: {soort}': 'Rodzaj: {soort}',
+  'Mijn uitslagen': 'Moje wyniki',
+  'De uitslag is nog niet vrijgegeven.':
+      'Wynik nie został jeszcze udostępniony.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} z {totaal} poprawnych · {percentage}%',
+  'Niet geslaagd': 'Nie zdał',
+  'De uitslagen konden niet worden geladen.': 'Nie udało się wczytać wyników.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Swój wynik zobaczysz w sekcji Moje egzaminy, gdy tylko zostanie udostępniony.',
   'Startmappen': 'Foldery startowe',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Gdzie zaczyna się otwieranie i zapisywanie. Puste pole oznacza pierwszą bibliotekę.',

@@ -1034,7 +1034,7 @@ also declares them, but see the [CI note](#continuous-integration).)
   hernoemde of hervormde route in OciServe laat deze poort rood worden —
   vóórdat een gebruiker een kapotte endpoint raakt.
 - **Pinned spec:** `test/fixtures/ociserve_openapi.yaml`, gekopieerd van
-  `brenno/OciServe` op commit `b43a53c6b9444a18ff3c47a2ffa9bc6c6f545d5e`
+  `brenno/OciServe` op commit `3c7c40f39456c71259b5958204de405b9dbd35af`
   (capabilitycatalogus v10, met het Managed Intake-contract uit ADR 0016).
 - **Pin bijwerken:**
   1. Kopieer `docs/openapi.yaml` uit de OciServe-repo naar

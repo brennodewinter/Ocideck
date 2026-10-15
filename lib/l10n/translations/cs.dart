@@ -1607,6 +1607,37 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Aanvulling gevraagd': 'Vyžádáno doplnění',
+  'Aanvulling gevraagd.': 'Vyžádáno doplnění.',
+  'Aanvulling gevraagd: {opmerking}': 'Vyžádáno doplnění: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Druhy důkazů se nepodařilo načíst.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Nejsou k dispozici žádné druhy důkazů. Požádejte organizaci o jejich zveřejnění.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Soubor byl při kontrole odmítnut. Vyberte jiný soubor.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Soubor byl přijat a shledán bezpečným. Dosud nebyl odeslán k posouzení.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Soubor se stále kontroluje. Zkuste to znovu za několik minut.',
+  'Het bewijsstuk is ingetrokken.': 'Důkaz byl stažen.',
+  'Het bewijsstuk is verlopen.': 'Platnost důkazu vypršela.',
+  'In behandeling bij een beoordelaar.': 'Posuzuje ho hodnotitel.',
+  'Ingediend': 'Odesláno',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Odesláno. Hodnotitel se na to podívá.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Vyberte druh důkazu, který předkládáte.',
+  'Soort bewijs': 'Druh důkazu',
+  'Soort: {soort}': 'Druh: {soort}',
+  'Mijn uitslagen': 'Moje výsledky',
+  'De uitslag is nog niet vrijgegeven.': 'Výsledek zatím nebyl zveřejněn.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} z {totaal} správně · {percentage}%',
+  'Niet geslaagd': 'Neuspěl',
+  'De uitslagen konden niet worden geladen.': 'Výsledky se nepodařilo načíst.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Svůj výsledek uvidíte v části Moje zkoušky, jakmile bude zveřejněn.',
   'Startmappen': 'Výchozí složky',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kde začíná otevírání a ukládání. Prázdné použije první knihovnu.',

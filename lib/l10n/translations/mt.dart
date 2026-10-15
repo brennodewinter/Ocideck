@@ -1624,6 +1624,39 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Aanvulling gevraagd': 'Mitluba aktar informazzjoni',
+  'Aanvulling gevraagd.': 'Mitluba aktar informazzjoni.',
+  'Aanvulling gevraagd: {opmerking}':
+      'Mitluba aktar informazzjoni: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'It-tipi ta\' evidenza ma setgħux jinġiebu.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Ma hemm l-ebda tip ta\' evidenza disponibbli. Itlob lill-organizzazzjoni tippubblikahom.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Il-fajl ġie miċħud waqt il-verifika. Agħżel fajl ieħor.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Il-fajl ntlaqa\' u nstab sikur. Għadu ma tressaqx għall-evalwazzjoni.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Il-fajl għadu qed jiġi vverifikat. Erġa\' pprova wara ftit minuti.',
+  'Het bewijsstuk is ingetrokken.': 'L-evidenza ġiet irtirata.',
+  'Het bewijsstuk is verlopen.': 'L-evidenza skadiet.',
+  'In behandeling bij een beoordelaar.': 'Qed jiġi trattat minn evalwatur.',
+  'Ingediend': 'Mressaq',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Mressaq. Evalwatur se jħares lejh.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Agħżel it-tip ta\' evidenza li qed tressaq.',
+  'Soort bewijs': 'Tip ta\' evidenza',
+  'Soort: {soort}': 'Tip: {soort}',
+  'Mijn uitslagen': 'Ir-riżultati tiegħi',
+  'De uitslag is nog niet vrijgegeven.': 'Ir-riżultat għadu mhux irrilaxxat.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} minn {totaal} korretti · {percentage}%',
+  'Niet geslaagd': 'Ma għaddiex',
+  'De uitslagen konden niet worden geladen.':
+      'Ir-riżultati ma setgħux jitgħabbew.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Tara r-riżultat tiegħek taħt L-eżamijiet tiegħi hekk kif jiġi rrilaxxat.',
   'Startmappen': 'Folders tal-bidu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Fejn jibdew il-ftuħ u s-salvataġġ. Vojet juża l-ewwel librerija.',

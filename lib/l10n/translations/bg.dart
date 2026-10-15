@@ -1626,6 +1626,38 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Aanvulling gevraagd': 'Поискано е допълване',
+  'Aanvulling gevraagd.': 'Поискано е допълване.',
+  'Aanvulling gevraagd: {opmerking}': 'Поискано е допълване: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Видовете доказателства не можаха да бъдат заредени.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Няма налични видове доказателства. Помолете организацията да ги публикува.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Файлът беше отхвърлен при проверката. Изберете друг файл.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Файлът е получен и е признат за безопасен. Все още не е подаден за оценяване.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Файлът все още се проверява. Опитайте отново след няколко минути.',
+  'Het bewijsstuk is ingetrokken.': 'Доказателството е оттеглено.',
+  'Het bewijsstuk is verlopen.': 'Доказателството е изтекло.',
+  'In behandeling bij een beoordelaar.': 'Разглежда се от оценител.',
+  'Ingediend': 'Подадено',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Подадено. Оценител ще го прегледа.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Изберете вида доказателство, което подавате.',
+  'Soort bewijs': 'Вид доказателство',
+  'Soort: {soort}': 'Вид: {soort}',
+  'Mijn uitslagen': 'Моите резултати',
+  'De uitslag is nog niet vrijgegeven.': 'Резултатът все още не е публикуван.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} от {totaal} верни · {percentage}%',
+  'Niet geslaagd': 'Не е издържал',
+  'De uitslagen konden niet worden geladen.':
+      'Резултатите не можаха да бъдат заредени.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Резултатът ви ще се покаже в Моите изпити, щом бъде публикуван.',
   'Startmappen': 'Начални папки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Къде започват отварянето и записването. Празно използва първата библиотека.',

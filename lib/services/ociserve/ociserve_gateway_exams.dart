@@ -23,6 +23,13 @@ abstract class OciServeExamApi {
     required String accessToken,
     required OciServeExamAnswerMutation mutation,
   });
+
+  /// De eigen formele pogingen van de cursist. Cijfers en oordeel komen er
+  /// pas bij als de uitslag is vrijgegeven.
+  Future<OciServeExamResultList> examResults({
+    required String accessToken,
+    required String organizationId,
+  });
   Future<OciServeExamAttempt> submitExamAttempt({
     required String accessToken,
     required String organizationId,
@@ -48,6 +55,25 @@ mixin _OciServeExams on OciServeGatewayBase {
       throw const OciServeException('exam_cache_policy_refused');
     }
     return _jsonObject(response);
+  }
+
+  @override
+  Future<OciServeExamResultList> examResults({
+    required String accessToken,
+    required String organizationId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api(['organizations', organizationId, 'me', 'exam-results']),
+      accessToken: accessToken,
+    );
+    try {
+      return OciServeExamResultList.fromJson(_examJson(response));
+    } catch (error, stack) {
+      if (error is OciServeException) rethrow;
+      logError('OciServe: examenuitslagen lezen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
   }
 
   @override

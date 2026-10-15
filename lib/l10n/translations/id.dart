@@ -1606,6 +1606,37 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Aanvulling gevraagd': 'Diminta tambahan',
+  'Aanvulling gevraagd.': 'Diminta tambahan.',
+  'Aanvulling gevraagd: {opmerking}': 'Diminta tambahan: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Jenis bukti tidak dapat dimuat.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Tidak ada jenis bukti yang tersedia. Minta organisasi untuk menerbitkannya.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Berkas ditolak saat pemeriksaan. Pilih berkas lain.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Berkas telah diterima dan dinyatakan aman. Berkas belum diajukan untuk dinilai.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Berkas masih diperiksa. Coba lagi dalam beberapa menit.',
+  'Het bewijsstuk is ingetrokken.': 'Bukti telah ditarik.',
+  'Het bewijsstuk is verlopen.': 'Bukti telah kedaluwarsa.',
+  'In behandeling bij een beoordelaar.': 'Sedang ditangani oleh penilai.',
+  'Ingediend': 'Diajukan',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Diajukan. Seorang penilai akan memeriksanya.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Pilih jenis bukti yang Anda ajukan.',
+  'Soort bewijs': 'Jenis bukti',
+  'Soort: {soort}': 'Jenis: {soort}',
+  'Mijn uitslagen': 'Hasil saya',
+  'De uitslag is nog niet vrijgegeven.': 'Hasil belum dirilis.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} dari {totaal} benar · {percentage}%',
+  'Niet geslaagd': 'Tidak lulus',
+  'De uitslagen konden niet worden geladen.': 'Hasil tidak dapat dimuat.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Anda akan melihat hasil Anda di Ujian saya segera setelah dirilis.',
   'Startmappen': 'Folder awal',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Di mana membuka dan menyimpan dimulai. Kosongkan untuk memakai pustaka pertama.',

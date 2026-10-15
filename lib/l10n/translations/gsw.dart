@@ -1609,6 +1609,38 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Aanvulling gevraagd': 'Ergänzung verlangt',
+  'Aanvulling gevraagd.': 'Ergänzung verlangt.',
+  'Aanvulling gevraagd: {opmerking}': 'Ergänzung verlangt: {opmerking}',
+  'De soorten bewijs konden niet worden geladen.':
+      'Die Nachweisarten konnten nicht geladen werden.',
+  'Er zijn geen soorten bewijs beschikbaar. Vraag de organisatie ze te publiceren.':
+      'Es sind keine Nachweisarten verfügbar. Bitten Sie die Organisation, sie zu veröffentlichen.',
+  'Het bestand is geweigerd bij de controle. Kies een ander bestand.':
+      'Die Datei wurde bei der Prüfung abgelehnt. Wählen Sie eine andere Datei.',
+  'Het bestand is ontvangen en veilig bevonden. Het is nog niet ingediend voor beoordeling.':
+      'Die Datei ist eingegangen und wurde als sicher befunden. Sie ist noch nicht zur Beurteilung eingereicht.',
+  'Het bestand wordt nog gecontroleerd. Probeer het over enkele minuten opnieuw.':
+      'Die Datei wird noch geprüft. Versuchen Sie es in ein paar Minuten erneut.',
+  'Het bewijsstuk is ingetrokken.': 'Der Nachweis wurde zurückgezogen.',
+  'Het bewijsstuk is verlopen.': 'Der Nachweis ist abgelaufen.',
+  'In behandeling bij een beoordelaar.': 'Wird von einem Prüfer bearbeitet.',
+  'Ingediend': 'Eingereicht',
+  'Ingediend. Een beoordelaar kijkt ernaar.':
+      'Eingereicht. Ein Prüfer schaut es sich an.',
+  'Kies de soort bewijs die u aanlevert.':
+      'Wählen Sie die Art des Nachweises, den Sie einreichen.',
+  'Soort bewijs': 'Art des Nachweises',
+  'Soort: {soort}': 'Art: {soort}',
+  'Mijn uitslagen': 'Mini Ergäbnis',
+  'De uitslag is nog niet vrijgegeven.': 'S Ergäbnis isch no nöd freigä worde.',
+  '{goed} van {totaal} goed · {percentage}%':
+      '{goed} vo {totaal} richtig · {percentage}%',
+  'Niet geslaagd': 'Nöd bestande',
+  'De uitslagen konden niet worden geladen.':
+      'D Ergäbnis hend nöd chöne glade wärde.',
+  'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
+      'Dir gsehnd Ihres Ergäbnis under Meine Prüfungen, sobald es freigä isch.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffne und Speichere aafangt. Läer laa nimmt di erst Bibliothek.',

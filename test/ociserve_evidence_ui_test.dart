@@ -6,13 +6,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/learning_session.dart';
 import 'package:ocideck/models/ociserve_evidence.dart';
+import 'package:ocideck/models/ociserve_evidence_item.dart';
 import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_portfolio.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
+import 'package:ocideck/utils/content_hash.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_courses_dialog.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_evidence.dart';
+import 'package:ocideck/widgets/dialogs/ociserve_evidence_data.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_evidence_submit.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_portfolio_link.dart';
 
@@ -152,6 +155,7 @@ void main() {
       WidgetTester tester, {
       List<OciServeQualification> qualifications = const [],
       List<EvidenceUpload> evidenceUploads = const [],
+      List<OciServeEvidenceItem> evidenceItems = const [],
     }) async {
       await tester.pumpWidget(
         ProviderScope(
@@ -168,6 +172,8 @@ void main() {
               body: OciServeEvidence(
                 qualifications: qualifications,
                 evidenceUploads: evidenceUploads,
+                evidenceItems: evidenceItems,
+                evidenceTypes: _bhvTypes,
                 organizationId: 'org',
                 onRefresh: () {},
               ),
@@ -248,10 +254,137 @@ void main() {
       expect(find.text('Openen'), findsNothing);
     });
 
+    testWidgets('clean upload without item is not yet submitted for review', (
+      tester,
+    ) async {
+      await pumpEvidence(tester, evidenceUploads: [_cleanUpload('u1')]);
+      expect(
+        find.text(
+          'Het bestand is ontvangen en veilig bevonden. '
+          'Het is nog niet ingediend voor beoordeling.',
+        ),
+        findsOneWidget,
+      );
+      expect(find.text('Geaccepteerd'), findsNothing);
+      expect(find.textContaining('Soort:'), findsNothing);
+    });
+
+    testWidgets('shows the review status of the submitted evidence item', (
+      tester,
+    ) async {
+      await pumpEvidence(
+        tester,
+        evidenceUploads: [_cleanUpload('u1')],
+        evidenceItems: [_item('u1', 'ingediend')],
+      );
+      expect(find.text('Ingediend'), findsOneWidget);
+      expect(
+        find.text('Ingediend. Een beoordelaar kijkt ernaar.'),
+        findsOneWidget,
+      );
+      expect(find.text('Soort: BHV-certificaat'), findsOneWidget);
+    });
+
+    testWidgets('shows the reviewer note when more evidence is requested', (
+      tester,
+    ) async {
+      await pumpEvidence(
+        tester,
+        evidenceUploads: [_cleanUpload('u1')],
+        evidenceItems: [
+          _item('u1', 'aanvulling_gevraagd', note: 'Pagina 2 ontbreekt'),
+        ],
+      );
+      expect(find.text('Aanvulling gevraagd'), findsOneWidget);
+      expect(
+        find.text('Aanvulling gevraagd: Pagina 2 ontbreekt'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('shows an accepted item and a rejected one without reason', (
+      tester,
+    ) async {
+      await pumpEvidence(
+        tester,
+        evidenceUploads: [_cleanUpload('u1'), _cleanUpload('u2')],
+        evidenceItems: [_item('u1', 'geaccepteerd'), _item('u2', 'afgewezen')],
+      );
+      expect(
+        find.text('Geaccepteerd. Het bewijsstuk is goedgekeurd.'),
+        findsOneWidget,
+      );
+      expect(
+        find.text('Afgekeurd. De beoordelaar heeft geen reden opgegeven.'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('ignores an item that belongs to another upload', (
+      tester,
+    ) async {
+      await pumpEvidence(
+        tester,
+        evidenceUploads: [_cleanUpload('u1')],
+        evidenceItems: [_item('andere', 'geaccepteerd')],
+      );
+      expect(find.text('Geaccepteerd'), findsNothing);
+      expect(
+        find.textContaining('nog niet ingediend voor beoordeling'),
+        findsOneWidget,
+      );
+    });
+
     testWidgets('shows portfolio section as unavailable', (tester) async {
       await pumpEvidence(tester);
       expect(find.text('Externe portefeuille'), findsOneWidget);
       expect(find.text('Portefeuille koppelen'), findsOneWidget);
+    });
+  });
+
+  group('OciServeEvidenceData', () {
+    Future<OciServeEvidenceData> load(OciServeNotifier Function() make) {
+      final container = ProviderContainer(
+        overrides: [ociServeProvider.overrideWith(make)],
+      );
+      addTearDown(container.dispose);
+      return OciServeEvidenceData.load(
+        container.read(ociServeProvider.notifier),
+        organizationId: 'org',
+        participantId: 'participant-1',
+      );
+    }
+
+    test('loads uploads, badges, types and submitted items together', () async {
+      final data = await load(
+        () => _ItemsNotifier(items: [_item('e1', 'ingediend')]),
+      );
+      expect(data.uploads.single.id, 'e1');
+      expect(data.qualifications.single.id, 'q1');
+      expect(data.types.single.title, 'BHV-certificaat');
+      expect(data.items.single.uploadId, 'e1');
+    });
+
+    test('keeps uploads and badges when the items cannot be read', () async {
+      final data = await load(() => _ItemsNotifier(itemsFail: true));
+      expect(data.uploads, hasLength(1));
+      expect(data.qualifications, hasLength(1));
+      expect(data.types, isEmpty);
+      expect(data.items, isEmpty);
+    });
+
+    test('keeps uploads and badges when the types cannot be read', () async {
+      final data = await load(() => _ItemsNotifier(typesFail: true));
+      expect(data.uploads, hasLength(1));
+      expect(data.types, isEmpty);
+      expect(data.items, isEmpty);
+    });
+
+    test('fails when the uploads themselves cannot be read', () async {
+      expect(
+        load(() => _ItemsNotifier(uploadsFail: true)),
+        throwsA(isA<StateError>()),
+      );
     });
   });
 
@@ -395,11 +528,26 @@ void main() {
   });
 
   group('OciServeEvidenceSubmit dialog', () {
-    Future<void> pumpSubmit(WidgetTester tester) async {
+    final pdf = Uint8List.fromList(List<int>.generate(64, (i) => i));
+    Future<({String name, Uint8List bytes})?> pickPdf() async =>
+        (name: 'bhv.pdf', bytes: pdf);
+
+    /// Opent de dialoog rechtstreeks, zodat de bestandskiezer en de wachttijd
+    /// van de controle te vervangen zijn. `result.value` houdt bij wat de
+    /// dialoog teruggaf: `true` na een geslaagde aanlevering.
+    Future<ValueNotifier<bool?>> pumpSubmit(
+      WidgetTester tester, {
+      _SubmitNotifier? notifier,
+      int maxPolls = 3,
+    }) async {
+      // Met de soortkeuze is de eerste stap hoger geworden.
+      await tester.binding.setSurfaceSize(const Size(900, 1400));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final result = ValueNotifier<bool?>(null);
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            ociServeProvider.overrideWith(() => _EvidenceTestNotifier()),
+            ociServeProvider.overrideWith(() => notifier ?? _SubmitNotifier()),
           ],
           child: MaterialApp(
             supportedLocales: AppLocalizations.supportedLocales,
@@ -411,11 +559,19 @@ void main() {
               body: Builder(
                 builder: (context) => Center(
                   child: ElevatedButton(
-                    onPressed: () => OciServeEvidenceSubmit.show(
-                      context,
-                      organizationId: 'org',
-                      badgeTitle: 'BHV',
-                    ),
+                    onPressed: () async {
+                      result.value = await showDialog<bool>(
+                        context: context,
+                        builder: (_) => OciServeEvidenceSubmit(
+                          organizationId: 'org',
+                          participantId: 'participant-1',
+                          badgeTitle: 'BHV',
+                          pollInterval: Duration.zero,
+                          maxPolls: maxPolls,
+                          pickFile: pickPdf,
+                        ),
+                      );
+                    },
                     child: const Text('Open'),
                   ),
                 ),
@@ -426,6 +582,39 @@ void main() {
       );
       await tester.pumpAndSettle();
       await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+      return result;
+    }
+
+    // De Stepper bouwt de knoppen van alle stappen; alleen die van de actieve
+    // stap is aan te raken.
+    Future<void> next(WidgetTester tester) async {
+      await tester.tap(find.text('Volgende').hitTestable());
+      await tester.pumpAndSettle();
+    }
+
+    Future<void> chooseType(WidgetTester tester) async {
+      await tester.tap(find.byKey(const ValueKey('evidence-type')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('BHV-certificaat').last);
+      await tester.pumpAndSettle();
+    }
+
+    Future<void> walkToConsent(WidgetTester tester) async {
+      await chooseType(tester);
+      await next(tester);
+      await tester.tap(find.text('Bestand kiezen'));
+      await tester.pumpAndSettle();
+      await next(tester);
+      await next(tester);
+    }
+
+    /// De server controleert en de aanlevering loopt via wachten op de status.
+    Future<void> submit(WidgetTester tester) async {
+      await tester.tap(find.text('Aanleveren').hitTestable());
+      for (var i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 20));
+      }
       await tester.pumpAndSettle();
     }
 
@@ -439,16 +628,42 @@ void main() {
       expect(find.textContaining('BHV'), findsOneWidget);
     });
 
+    testWidgets('asks for a type before continuing', (tester) async {
+      await pumpSubmit(tester);
+      await next(tester);
+      expect(find.text('Kies de soort bewijs die u aanlevert.'), findsOne);
+      expect(find.text('Kies een bestand om aan te leveren.'), findsNothing);
+    });
+
+    testWidgets('explains when the organisation has no evidence types', (
+      tester,
+    ) async {
+      await pumpSubmit(tester, notifier: _SubmitNotifier(types: const []));
+      expect(
+        find.textContaining('Er zijn geen soorten bewijs beschikbaar'),
+        findsOneWidget,
+      );
+      expect(find.byKey(const ValueKey('evidence-type')), findsNothing);
+    });
+
+    testWidgets('says so when the evidence types cannot be loaded', (
+      tester,
+    ) async {
+      await pumpSubmit(tester, notifier: _SubmitNotifier(typesFail: true));
+      expect(
+        find.text('De soorten bewijs konden niet worden geladen.'),
+        findsOneWidget,
+      );
+    });
+
     testWidgets('shows file error when continuing without file', (
       tester,
     ) async {
       await pumpSubmit(tester);
-      // Step 0 → 1: continue to Bestand step (Stepper renders a control per step).
-      await tester.tap(find.text('Volgende').first);
-      await tester.pumpAndSettle();
+      await chooseType(tester);
+      await next(tester);
       // Try to continue without a file.
-      await tester.tap(find.text('Volgende').first);
-      await tester.pumpAndSettle();
+      await next(tester);
       expect(find.text('Kies een bestand om aan te leveren.'), findsOneWidget);
     });
 
@@ -457,6 +672,161 @@ void main() {
       await tester.tap(find.text('Annuleren').first);
       await tester.pumpAndSettle();
       expect(find.text('Bewijs aanleveren'), findsNothing);
+    });
+
+    testWidgets('uploads the file and then creates the evidence item', (
+      tester,
+    ) async {
+      final notifier = _SubmitNotifier(statuses: ['uploaded', 'clean']);
+      final result = await pumpSubmit(tester, notifier: notifier);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(notifier.slotRequests, hasLength(1));
+      final request = notifier.slotRequests.single;
+      expect(request.filename, 'bhv.pdf');
+      expect(request.declaredType, 'application/pdf');
+      expect(request.declaredSize, pdf.length);
+      expect(request.declaredHash, sha256Hex(pdf));
+      expect(notifier.uploads.single.id, 'slot-1');
+      expect(notifier.uploads.single.bytes, pdf);
+      expect(notifier.detailPolls, 2);
+      expect(notifier.created, hasLength(1));
+      final created = notifier.created.single;
+      expect(created.typeId, 'type-bhv');
+      expect(created.uploadId, 'slot-1');
+      expect(created.participantId, 'participant-1');
+      expect(created.validUntil, isNull);
+      expect(created.key, isNotEmpty);
+      expect(result.value, isTrue);
+      expect(find.text('Bewijs aanleveren'), findsNothing);
+    });
+
+    testWidgets('never creates an item for a rejected upload', (tester) async {
+      final notifier = _SubmitNotifier(statuses: ['rejected']);
+      final result = await pumpSubmit(tester, notifier: notifier);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(
+        find.text(
+          'Het bestand is geweigerd bij de controle. Kies een ander bestand.',
+        ),
+        findsOneWidget,
+      );
+      expect(notifier.created, isEmpty);
+      expect(result.value, isNull);
+
+      // Een geweigerd slot is niet te hergebruiken: de nieuwe poging vraagt
+      // een nieuw slot aan.
+      notifier.statuses = ['clean'];
+      await submit(tester);
+      expect(notifier.slotRequests, hasLength(2));
+      expect(notifier.created, hasLength(1));
+      expect(notifier.created.single.uploadId, 'slot-2');
+      expect(result.value, isTrue);
+    });
+
+    testWidgets('keeps the slot while the check is still running', (
+      tester,
+    ) async {
+      final notifier = _SubmitNotifier(statuses: ['uploaded']);
+      final result = await pumpSubmit(tester, notifier: notifier, maxPolls: 2);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(
+        find.text(
+          'Het bestand wordt nog gecontroleerd. '
+          'Probeer het over enkele minuten opnieuw.',
+        ),
+        findsOneWidget,
+      );
+      expect(notifier.detailPolls, 2);
+      expect(notifier.created, isEmpty);
+      expect(result.value, isNull);
+
+      // Dezelfde upload telt niet dubbel: geen tweede slot, geen tweede upload.
+      notifier.statuses = ['clean'];
+      await submit(tester);
+      expect(notifier.slotRequests, hasLength(1));
+      expect(notifier.uploads, hasLength(1));
+      expect(notifier.created.single.uploadId, 'slot-1');
+      expect(result.value, isTrue);
+    });
+
+    testWidgets('retries a failed item creation with the same key', (
+      tester,
+    ) async {
+      final notifier = _SubmitNotifier(statuses: ['clean'], createFailures: 1);
+      final result = await pumpSubmit(tester, notifier: notifier);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(
+        find.text('Het aanleveren is mislukt. Probeer het opnieuw.'),
+        findsOneWidget,
+      );
+      expect(result.value, isNull);
+
+      await submit(tester);
+      expect(notifier.slotRequests, hasLength(1));
+      expect(notifier.created, hasLength(2));
+      expect(notifier.created.first.key, notifier.created.last.key);
+      expect(result.value, isTrue);
+    });
+
+    testWidgets('attaches the upload to the learner who submits it', (
+      tester,
+    ) async {
+      final notifier = _SubmitNotifier();
+      await pumpSubmit(tester, notifier: notifier);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(notifier.slotRequests.single.participantId, 'participant-1');
+      expect(
+        notifier.slotRequests.single.toJson()['participant_id'],
+        'participant-1',
+      );
+    });
+
+    testWidgets('asks for a fresh slot after the upload itself failed', (
+      tester,
+    ) async {
+      final notifier = _SubmitNotifier(uploadFailures: 1);
+      final result = await pumpSubmit(tester, notifier: notifier);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(
+        find.text('Het aanleveren is mislukt. Probeer het opnieuw.'),
+        findsOneWidget,
+      );
+      expect(notifier.created, isEmpty);
+      expect(result.value, isNull);
+
+      // Het eerste slot is nooit gevuld; de nieuwe poging begint opnieuw in
+      // plaats van eindeloos op dat lege slot te wachten.
+      await submit(tester);
+      expect(notifier.slotRequests, hasLength(2));
+      expect(notifier.uploads.single.id, 'slot-2');
+      expect(notifier.created.single.uploadId, 'slot-2');
+      expect(result.value, isTrue);
+    });
+
+    testWidgets('reports a failure to reserve the upload slot', (tester) async {
+      final notifier = _SubmitNotifier(slotFails: true);
+      final result = await pumpSubmit(tester, notifier: notifier);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(
+        find.text('Het aanleveren is mislukt. Probeer het opnieuw.'),
+        findsOneWidget,
+      );
+      expect(notifier.created, isEmpty);
+      expect(result.value, isNull);
     });
   });
 
@@ -552,6 +922,23 @@ class _EvidenceTestNotifier extends OciServeNotifier {
   ];
 
   @override
+  Future<List<OciServeEvidenceType>> evidenceTypes(
+    String organizationId,
+  ) async => const [
+    OciServeEvidenceType(
+      id: 'type-bhv',
+      slug: 'bhv-certificaat',
+      title: 'BHV-certificaat',
+    ),
+  ];
+
+  @override
+  Future<List<OciServeEvidenceItem>> evidenceItems({
+    required String organizationId,
+    required String participantId,
+  }) async => const [];
+
+  @override
   Future<List<OciServeQualification>> listQualifications({
     required String organizationId,
     required String participantId,
@@ -589,4 +976,198 @@ class _EvidenceTestNotifier extends OciServeNotifier {
 
   @override
   Future<bool> login() async => true;
+}
+
+// ---------------------------------------------------------------------------
+// Hulpen voor het aanleverpad
+// ---------------------------------------------------------------------------
+
+const _bhvTypes = [
+  OciServeEvidenceType(
+    id: 'type-bhv',
+    slug: 'bhv-certificaat',
+    title: 'BHV-certificaat',
+  ),
+];
+
+EvidenceUpload _cleanUpload(String id) => EvidenceUpload.fromJson({
+  'id': id,
+  'filename': '$id.pdf',
+  'declared_type': 'application/pdf',
+  'declared_size': 1024,
+  'declared_hash': 'h',
+  'status': 'clean',
+  'created_at': '2026-09-01T10:00:00Z',
+});
+
+OciServeEvidenceItem _item(String uploadId, String status, {String? note}) =>
+    OciServeEvidenceItem(
+      id: 'item-$uploadId',
+      evidenceTypeId: 'type-bhv',
+      status: OciServeEvidenceContentStatus.parse(status),
+      createdAt: DateTime.utc(2026, 9, 2),
+      uploadId: uploadId,
+      reviewNote: note,
+    );
+
+/// Legt vast wat het aanleverpad bij de server doet. `statuses` is wat de
+/// controle van de upload achtereenvolgens meldt; de laatste herhaalt zich.
+class _SubmitNotifier extends _EvidenceTestNotifier {
+  _SubmitNotifier({
+    this.statuses = const ['clean'],
+    this.types = _bhvTypes,
+    this.typesFail = false,
+    this.slotFails = false,
+    this.createFailures = 0,
+    this.uploadFailures = 0,
+  });
+
+  List<String> statuses;
+  final List<OciServeEvidenceType> types;
+  final bool typesFail;
+  final bool slotFails;
+  int createFailures;
+  int uploadFailures;
+
+  final slotRequests = <EvidenceUploadRequest>[];
+  final uploads = <({String id, Uint8List bytes})>[];
+  final created =
+      <
+        ({
+          String typeId,
+          String uploadId,
+          String participantId,
+          String key,
+          DateTime? validUntil,
+        })
+      >[];
+  int detailPolls = 0;
+
+  EvidenceUpload _upload(String id, String status) => EvidenceUpload.fromJson({
+    'id': id,
+    'filename': 'bhv.pdf',
+    'declared_type': 'application/pdf',
+    'declared_size': 64,
+    'declared_hash': 'h',
+    'status': status,
+    'created_at': '2026-09-01T10:00:00Z',
+  });
+
+  @override
+  Future<List<OciServeEvidenceType>> evidenceTypes(
+    String organizationId,
+  ) async {
+    if (typesFail) throw StateError('geen verbinding');
+    return types;
+  }
+
+  @override
+  Future<EvidenceUpload> requestEvidenceSlot({
+    required String organizationId,
+    required EvidenceUploadRequest request,
+  }) async {
+    if (slotFails) throw StateError('geen verbinding');
+    slotRequests.add(request);
+    return _upload('slot-${slotRequests.length}', 'pending');
+  }
+
+  @override
+  Future<EvidenceUpload> uploadEvidenceContent({
+    required String organizationId,
+    required String evidenceId,
+    required Uint8List bytes,
+    required String contentType,
+  }) async {
+    if (uploadFailures > 0) {
+      uploadFailures--;
+      throw StateError('geen verbinding');
+    }
+    uploads.add((id: evidenceId, bytes: bytes));
+    return _upload(evidenceId, 'uploaded');
+  }
+
+  @override
+  Future<EvidenceUpload> evidenceDetail({
+    required String organizationId,
+    required String evidenceId,
+  }) async {
+    final index = detailPolls < statuses.length
+        ? detailPolls
+        : statuses.length - 1;
+    detailPolls++;
+    return _upload(evidenceId, statuses[index]);
+  }
+
+  @override
+  Future<OciServeEvidenceItem> createEvidenceItem({
+    required String organizationId,
+    required String participantId,
+    required String evidenceTypeId,
+    required String uploadId,
+    required String idempotencyKey,
+    DateTime? declaredValidUntil,
+  }) async {
+    created.add((
+      typeId: evidenceTypeId,
+      uploadId: uploadId,
+      participantId: participantId,
+      key: idempotencyKey,
+      validUntil: declaredValidUntil,
+    ));
+    if (createFailures > 0) {
+      createFailures--;
+      throw StateError('geen verbinding');
+    }
+    return OciServeEvidenceItem(
+      id: 'item-1',
+      evidenceTypeId: evidenceTypeId,
+      status: OciServeEvidenceContentStatus.ingediend,
+      createdAt: DateTime.utc(2026, 9, 2),
+      uploadId: uploadId,
+    );
+  }
+}
+
+/// Een bewijsscherm waarvan de aparte onderdelen stuk kunnen gaan.
+class _ItemsNotifier extends _EvidenceTestNotifier {
+  _ItemsNotifier({
+    this.items = const [],
+    this.itemsFail = false,
+    this.typesFail = false,
+    this.uploadsFail = false,
+  });
+
+  final List<OciServeEvidenceItem> items;
+  final bool itemsFail;
+  final bool typesFail;
+  final bool uploadsFail;
+
+  @override
+  Future<List<EvidenceUpload>> listEvidence({
+    required String organizationId,
+    required String participantId,
+  }) async {
+    if (uploadsFail) throw StateError('geen verbinding');
+    return super.listEvidence(
+      organizationId: organizationId,
+      participantId: participantId,
+    );
+  }
+
+  @override
+  Future<List<OciServeEvidenceType>> evidenceTypes(
+    String organizationId,
+  ) async {
+    if (typesFail) throw StateError('geen verbinding');
+    return super.evidenceTypes(organizationId);
+  }
+
+  @override
+  Future<List<OciServeEvidenceItem>> evidenceItems({
+    required String organizationId,
+    required String participantId,
+  }) async {
+    if (itemsFail) throw StateError('geen verbinding');
+    return items;
+  }
 }
