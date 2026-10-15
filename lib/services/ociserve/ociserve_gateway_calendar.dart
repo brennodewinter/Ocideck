@@ -44,9 +44,12 @@ mixin _OciServeCalendar on OciServeGatewayBase {
       final raw = (json['url'] as String? ?? '').trim();
       final expiresAt = DateTime.tryParse(json['expires_at'] as String? ?? '');
       if (raw.isEmpty || expiresAt == null) throw const FormatException();
-      // `url` is relatief aan de API-basis; de gebruiker plakt hem in een
-      // agenda-app en heeft dus het absolute adres nodig.
-      final feedUrl = Uri.parse(settings.normalizedBaseUrl).resolve(raw);
+      // `url` is relatief aan de API-basis. Een absolute of scheme-relatieve
+      // link mag de OciServe-host niet verlaten: het token in de query is
+      // een geheim, en een vreemde host zou dat geheim meenemen.
+      final base = Uri.parse(settings.normalizedBaseUrl);
+      final feedUrl = base.resolve(raw);
+      if (!_sameHttpsOrigin(base, feedUrl)) throw const FormatException();
       return (feedUrl: feedUrl, expiresAt: expiresAt);
     } catch (error, stack) {
       // Alleen het type fout gaat de log in — nooit de URL met het token.
@@ -76,3 +79,12 @@ mixin _OciServeCalendar on OciServeGatewayBase {
     );
   }
 }
+
+/// Zelfde HTTPS-oorsprong als de OciServe. Userinfo telt niet mee als
+/// "dezelfde host": `https://token@learn.example` blijft op de host maar
+/// stopt een tweede geheim in de authority.
+bool _sameHttpsOrigin(Uri base, Uri candidate) =>
+    candidate.scheme.toLowerCase() == 'https' &&
+    candidate.userInfo.isEmpty &&
+    candidate.host.toLowerCase() == base.host.toLowerCase() &&
+    candidate.port == base.port;

@@ -88,6 +88,57 @@ void main() {
     },
   );
 
+  test('een absolute link op dezelfde host blijft geldig', () async {
+    transport.responses.add(
+      _json({
+        'url':
+            'https://learn.example/api/v1/organizations/org/me/calendar.ics?token=geheim123',
+        'expires_at': '2027-01-01T00:00:00Z',
+      }, statusCode: 201),
+    );
+
+    final result = await gateway.issueCalendarSubscription(
+      accessToken: 'access',
+      organizationId: 'org',
+      idempotencyKey: 'key-2',
+    );
+
+    expect(result.feedUrl.host, 'learn.example');
+    expect(result.feedUrl.queryParameters['token'], 'geheim123');
+  });
+
+  test(
+    'een agenda-link die de OciServe-host verlaat wordt geweigerd',
+    () async {
+      for (final url in [
+        'https://evil.example/calendar.ics?token=geheim123',
+        '//evil.example/calendar.ics?token=geheim123',
+        'https://learn.example@evil.example/calendar.ics?token=geheim123',
+        'https://token@learn.example/calendar.ics?token=geheim123',
+      ]) {
+        transport.responses.add(
+          _json({
+            'url': url,
+            'expires_at': '2027-01-01T00:00:00Z',
+          }, statusCode: 201),
+        );
+        Object? thrown;
+        try {
+          await gateway.issueCalendarSubscription(
+            accessToken: 'access',
+            organizationId: 'org',
+            idempotencyKey: 'key-vreemd',
+          );
+        } catch (error) {
+          thrown = error;
+        }
+        expect(thrown, isA<OciServeException>());
+        expect((thrown! as OciServeException).code, 'invalid_response');
+        expect(thrown.toString().contains('geheim123'), isFalse);
+      }
+    },
+  );
+
   test('intrekken is een DELETE zonder body', () async {
     transport.responses.add(
       OciServeHttpResponse(statusCode: 204, body: Uint8List(0)),
