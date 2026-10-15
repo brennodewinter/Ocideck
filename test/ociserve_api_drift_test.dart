@@ -326,6 +326,38 @@ const gatewayRoutes = <GatewayRoute>[
   ),
   GatewayRoute(
     method: 'GET',
+    path: '/api/v1/organizations/{}/skills',
+    responseSchema: 'SkillList',
+    responseFields: ['skills', 'skills.id', 'skills.title'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/skills/{}/versions',
+    responseSchema: 'SkillVersionList',
+    responseFields: ['versions', 'versions.id'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/skills/{}/badge-readiness',
+    responseSchema: 'BadgeReadiness',
+    responseFields: [
+      'skill_id',
+      'skill_title',
+      'kwalificatiesoort',
+      'validity_months',
+      'requirements',
+      'requirements.kind',
+      'requirements.title',
+      'requirements.met',
+      'requirements.evidence_type',
+      'requirements.course_id',
+      'requirements.blueprint_id',
+      'requirements.min_assurance',
+      'ready',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
     path: '/api/v1/organizations/{}/badges',
     // Returns an external URL — minimal schema check.
   ),

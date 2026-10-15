@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/learning_session.dart';
+import '../models/ociserve_badge_readiness.dart';
 import '../models/ociserve_evidence.dart';
 import '../models/ociserve_evidence_item.dart';
 import '../models/ociserve_exam.dart';
@@ -31,6 +32,7 @@ part 'ociserve_provider_exams.dart';
 part 'ociserve_provider_intake.dart';
 part 'ociserve_provider_evidence_items.dart';
 part 'ociserve_provider_account.dart';
+part 'ociserve_provider_skills.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
 /// consumers receive only the minimal account/membership read model.
@@ -1001,4 +1003,5 @@ class OciServeNotifier extends OciServeNotifierBase
         _OciServeExamMethods,
         _OciServeIntakeMethods,
         _OciServeEvidenceItemMethods,
-        _OciServeAccountMethods {}
+        _OciServeAccountMethods,
+        _OciServeSkillMethods {}

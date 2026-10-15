@@ -31,6 +31,7 @@ class OciServeEvidenceSubmit extends ConsumerStatefulWidget {
     required this.organizationId,
     required this.participantId,
     required this.badgeTitle,
+    this.presetTypeSlug,
     this.pollInterval = const Duration(milliseconds: 1500),
     this.maxPolls = 20,
     this.pickFile,
@@ -39,6 +40,10 @@ class OciServeEvidenceSubmit extends ConsumerStatefulWidget {
   final String organizationId;
   final String participantId;
   final String badgeTitle;
+
+  /// De slug van de bewijssoort die een openstaande badge-eis voorschrijft.
+  /// De soort wordt in stap 1 vooraf gekozen; de cursist kan hem nog wijzigen.
+  final String? presetTypeSlug;
 
   /// Hoe lang en hoe vaak we op de controle van de upload wachten voordat we
   /// de cursist vragen het later te proberen.
@@ -53,6 +58,7 @@ class OciServeEvidenceSubmit extends ConsumerStatefulWidget {
     required String organizationId,
     required String participantId,
     required String badgeTitle,
+    String? presetTypeSlug,
   }) async {
     final result = await showDialog<bool>(
       context: context,
@@ -60,6 +66,7 @@ class OciServeEvidenceSubmit extends ConsumerStatefulWidget {
         organizationId: organizationId,
         participantId: participantId,
         badgeTitle: badgeTitle,
+        presetTypeSlug: presetTypeSlug,
       ),
     );
     return result ?? false;
@@ -102,7 +109,18 @@ class _OciServeEvidenceSubmitState
           .read(ociServeProvider.notifier)
           .evidenceTypes(widget.organizationId);
       if (!mounted) return;
-      setState(() => _types = types);
+      setState(() {
+        _types = types;
+        final preset = widget.presetTypeSlug;
+        if (preset != null && preset.isNotEmpty) {
+          for (final type in types) {
+            if (type.slug == preset) {
+              _typeId = type.id;
+              break;
+            }
+          }
+        }
+      });
     } catch (error, stack) {
       logError('OciServe: bewijssoorten laden', error.runtimeType, stack);
       if (mounted) setState(() => _typesFailed = true);

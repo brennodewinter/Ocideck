@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/ociserve_badge_readiness.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_evidence_item.dart';
 import '../../models/ociserve_portfolio.dart';
@@ -31,6 +32,7 @@ class OciServeEvidence extends StatelessWidget {
     this.evidenceItems = const [],
     this.evidenceTypes = const [],
     this.participantId = '',
+    this.readiness = const {},
   });
 
   final List<OciServeQualification> qualifications;
@@ -42,6 +44,11 @@ class OciServeEvidence extends StatelessWidget {
   final List<OciServeEvidenceItem> evidenceItems;
   final List<OciServeEvidenceType> evidenceTypes;
   final String participantId;
+
+  /// Per badge (op `skill_version_id` van de kwalificatie) het leesmodel:
+  /// welke eisen de badge stelt en welke de cursist al heeft afgevinkt.
+  final Map<String, OciServeBadgeReadiness> readiness;
+
   final String organizationId;
   final VoidCallback onRefresh;
 
@@ -176,11 +183,96 @@ class OciServeEvidence extends StatelessWidget {
                   ),
               ],
             ),
+            _requirementsBlock(context, l10n, theme, palette, qual),
           ],
         ),
       ),
     );
   }
+
+  /// Per eis van de badge wat er al klopt en wat er nog ontbreekt. Een
+  /// openstaande bewijseis opent het aanleverpad met de soort al ingevuld.
+  Widget _requirementsBlock(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+    AppPalette palette,
+    OciServeQualification qual,
+  ) {
+    final model = readiness[qual.skillVersionId];
+    if (model == null || model.requirements.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 12),
+        Text(
+          model.ready
+              ? l10n.d('Alle eisen zijn vervuld.')
+              : l10n.d('Nog nodig voor deze badge'),
+          style: theme.textTheme.labelMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        for (final requirement in model.requirements)
+          _requirementRow(context, l10n, theme, palette, model, requirement),
+      ],
+    );
+  }
+
+  Widget _requirementRow(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+    AppPalette palette,
+    OciServeBadgeReadiness model,
+    OciServeBadgeRequirement requirement,
+  ) {
+    final met = requirement.met;
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Row(
+        children: [
+          Icon(
+            met ? Icons.check_circle : Icons.radio_button_unchecked,
+            size: 18,
+            color: met
+                ? theme.colorScheme.primary
+                : palette.accentInk.withValues(alpha: 0.5),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              requirement.title.isEmpty
+                  ? _requirementKindLabel(l10n, requirement.kind)
+                  : requirement.title,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: palette.accentInk.withValues(alpha: met ? 0.6 : 1.0),
+              ),
+            ),
+          ),
+          if (!met && requirement.kind == 'evidence')
+            TextButton(
+              onPressed: () => _openSubmit(
+                context,
+                badgeTitle: model.skillTitle,
+                presetTypeSlug: requirement.evidenceType,
+              ),
+              child: Text(l10n.d('Aanleveren')),
+            ),
+        ],
+      ),
+    );
+  }
+
+  /// Eén woord voor een eis zonder eigen titel, zodat de rij nooit leeg is.
+  String _requirementKindLabel(AppLocalizations l10n, String kind) =>
+      switch (kind) {
+        'evidence' => l10n.d('Bewijsstuk'),
+        'exam' => l10n.d('Toets'),
+        _ => l10n.d('Cursus'),
+      };
 
   Widget _statusChip(
     AppLocalizations l10n,
@@ -276,15 +368,19 @@ class OciServeEvidence extends StatelessWidget {
     );
   }
 
-  Future<void> _openSubmit(BuildContext context) async {
-    final badgeTitle = qualifications.isNotEmpty
-        ? qualifications.first.skillTitle
-        : '';
+  Future<void> _openSubmit(
+    BuildContext context, {
+    String? badgeTitle,
+    String? presetTypeSlug,
+  }) async {
     final refreshed = await OciServeEvidenceSubmit.show(
       context,
       organizationId: organizationId,
       participantId: participantId,
-      badgeTitle: badgeTitle,
+      badgeTitle:
+          badgeTitle ??
+          (qualifications.isNotEmpty ? qualifications.first.skillTitle : ''),
+      presetTypeSlug: presetTypeSlug,
     );
     if (refreshed && context.mounted) onRefresh();
   }

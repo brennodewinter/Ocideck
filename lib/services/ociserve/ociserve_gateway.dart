@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../models/ociserve_badge_readiness.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_evidence_item.dart';
 import '../../models/ociserve_exam.dart';
@@ -23,6 +24,7 @@ part 'ociserve_gateway_exams.dart';
 part 'ociserve_gateway_intake.dart';
 part 'ociserve_gateway_evidence_items.dart';
 part 'ociserve_gateway_account.dart';
+part 'ociserve_gateway_skills.dart';
 
 // Bibliotheekbreed in plaats van op OciServeGatewayBase: statische leden van
 // een klasse zijn voor `part`-mixins niet ongekwalificeerd bereikbaar, en
@@ -44,7 +46,8 @@ abstract class OciServeApi extends OciServePlanningApi
         OciServeExamApi,
         OciServeIntakeApi,
         OciServeEvidenceItemApi,
-        OciServeAccountApi {
+        OciServeAccountApi,
+        OciServeSkillsApi {
   Future<OciServeInstallation> installation();
   Future<OciServeOidcConfiguration> discoverOidc(
     OciServeInstallation installation,
@@ -879,6 +882,7 @@ class OciServeGateway extends OciServeGatewayBase
         _OciServeExams,
         _OciServeIntake,
         _OciServeEvidenceItems,
-        _OciServeAccount {
+        _OciServeAccount,
+        _OciServeSkills {
   OciServeGateway({required super.settings, super.transport});
 }
