@@ -1599,6 +1599,154 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Certificaatnummer: {nummer}': 'Sertifikaadi number: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Hindaja ei näe seda tükki enam. ',
+  'Deze uitnodiging hoort bij {adres}.': 'See kutse kuulub aadressile {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'See on teie kalendri link. Seda kuvatakse siin ainult üks kord — kleepige see ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Hankige olemasolevad märgid ja sertifikaadid välisest ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Teie organisatsioon on selle tagasi võtnud: {reden}',
+  'Uitgegeven op {datum}': 'Väljastatud {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Teie kalender on ühendatud kuni {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Teie kalendri link aegub {datum}. Uuendage linki enne kui see lakkab.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Teie organisatsioonil on juba teema „{naam}“. Kas soovite seda teemat oma versiooniga uuendada?',
+  '“{naam}” delen met de organisatie': 'Jaga „{naam}” organisatsiooniga',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}” muutub teie organisatsioonile nähtavaks.',
+  'Aanmelden': 'Logi sisse',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Sisselogimine ebaõnnestus. Proovige allpool uuesti.',
+  'Agenda koppelen': 'Ühenda kalender',
+  'Agenda-koppeling intrekken?': 'Tühistada kalendri ühendus?',
+  'Agenda-link vernieuwen?': 'Uuendada kalendri link?',
+  'Alle eisen zijn vervuld.': 'Kõik nõuded on täidetud.',
+  'Bekijken': 'Vaata',
+  'Bewaren': 'Salvesta',
+  'Bewijsstuk intrekken?': 'Tõend tagasi võtta?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Värskendamine ebaõnnestus. Proovige uuesti.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Sertifikaadid ilmuvad siia kohe, kui teie organisatsioon need väljastab.',
+  'Credential-bestand kiezen': 'Valige mandaatide fail',
+  'Credentials ophalen…': 'Mandaatide hankimine…',
+  'Cursus': 'Kursus',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'See ei ole kehtiv HTTPS-link mandaadile.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'See ei õnnestunud. Proovige uuesti.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Toiming ebaõnnestus. Proovige uuesti.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Pilt on liiga suur. Valige väiksem fail.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Hindaja ei näe seda tükki enam. Saate hiljem uusi tõendeid esitada.',
+  'De bron bevat geen leesbare credentials.':
+      'Allikas ei sisalda loetavaid mandaate.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Kutsenumbri ja koodi kombinatsioon ei klapi või kutse on aegunud või juba kasutatud.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Ühendamine ebaõnnestus. Proovige uuesti.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organisatsioon ja teised osalejad ei näe teie konto juures enam fotot.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organisatsioonil pole veel oma teemasid.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Vana link ei tööta enam. Kleepige uus link oma kalendrirakendusse uuesti.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profiilifotot ei salvestatud. Proovige uuesti.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Organisatsiooni teemasid ei õnnestunud hankida.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Kutse on vastu võetud. Organisatsioon on nüüd teie kontoga seotud.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Paroolid ei ühti.',
+  'Delen': 'Jaga',
+  'Delen als bewijs': 'Jaga tõendina',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Jagamine ebaõnnestus. Proovige uuesti.',
+  'Dit is de volledige definitie die meegaat:':
+      'See on kaasas käiv täielik määratlus:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'See on teie kalendri link. Seda kuvatakse siin ainult üks kord — kleepige see oma kalendrirakendusse. Igaüks, kellel on link, näeb teie kohtumisi; ärge jagage seda.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'See stiiliprofiil on jagamiseks liiga suur.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'See teema on sisseehitatud või kursuse poolt kasutusel ega saa seda kustutada.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Seda teemat ei õnnestunud üle võtta — formaat ei klapi.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Organisatsioonis on juba selle nimega teema olemas.',
+  'Geen credentials gevonden in deze bron.':
+      'Sellest allikast ei leitud mandaate.',
+  'Gereed': 'Valmis',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Hankige olemasolevad märgid ja sertifikaadid välisest portfellist ning jagage neid tõenditena. Teie valite, mida jagada.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Sertifikaati ei õnnestunud salvestada. Proovige uuesti.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Sertifikaati ei õnnestunud hankida. Proovige uuesti.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Jagamine ebaõnnestus. Kontrollige tõendi tüüpi ja proovige uuesti.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Tagasivõtmine ebaõnnestus. Proovige uuesti.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Tagasi võtmine ei õnnestunud. Proovige uuesti.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Keegi teine muutis just seda teemat. Üle kirjutada või võtta üle organisatsiooni versioon?',
+  'Ingebouwd': 'Sisseehitatud',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Teie organisatsioon on selle tagasi võtnud. See avaldus enam ei kehti.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Valige PNG-, JPEG- või WebP-pilt, mille suurus on kuni 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Valige parool, mis on vähemalt 12 tähemärki pikk.',
+  'Koppelen': 'Ühenda',
+  'Link gekopieerd.': 'Link kopeeritud.',
+  'Naam is al in gebruik': 'Nimi on juba kasutusel',
+  'Nieuwe link': 'Uus link',
+  'Nieuwe profielfoto kiezen': 'Valige uus profiilifoto',
+  'Nog geen certificaten.': 'Sertifikaate pole veel.',
+  'Nog nodig voor deze badge': 'Selle märgi jaoks veel vaja',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Hankimine ebaõnnestus. Kontrollige linki ja proovige uuesti.',
+  'Profielfoto kiezen': 'Valige profiilifoto',
+  'Profielfoto verwijderen': 'Eemaldage profiilifoto',
+  'Profielfoto wijzigen': 'Muutke profiilifotot',
+  'Publieke verificatielink': 'Avalik kinnituslink',
+  'Registreren en aanmelden': 'Registreeru ja logi sisse',
+  'Serverversie overnemen': 'Võta üle serveri versioon',
+  'Stijlprofiel delen met de organisatie?':
+      'Jagada stiiliprofiil organisatsiooniga?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Liiga palju katseid. Oodake hetk ja proovige uuesti.',
+  'Thema’s van de organisatie': 'Organisatsiooni teemad',
+  'Tussendoor gewijzigd': 'Vahepeal muudetud',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Olete registreeritud ja sisse loginud. Tere tulemast!',
+  'Uitgegeven': 'Väljastatud',
+  'Uitnodiging accepteren': 'Võta kutse vastu',
+  'Uitnodiging gebruiken': 'Kasuta kutset',
+  'Uitnodigingscode': 'Kutse kood',
+  'Uitnodigingsnummer': 'Kutsenumber',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Teie konto on loodud. Logige nüüd sisse kutsutud aadressi ja oma uue parooliga.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Teie konto ei tohi selles organisatsioonis teemasid hallata.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Teie kalendrirakendus ei pääse enam kohtumistele ligi. Kohtumised ise jäävad alles.',
+  'Uw naam': 'Teie nimi',
+  'Verwijderen bij de organisatie': 'Kustuta organisatsioonis',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Kustutamine ebaõnnestus. Proovige uuesti.',
+  'Vul uw naam in.': 'Sisestage oma nimi.',
+  'Wachtwoord herhalen': 'Korrake parooli',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Pange oma kohtumised oma kalendrisse — uuendatakse muudatuste ja tühistuste korral.',
   'Aanvulling gevraagd': 'Täiendust küsitud',
   'Aanvulling gevraagd.': 'Täiendust on küsitud.',
   'Aanvulling gevraagd: {opmerking}': 'Täiendust küsitud: {opmerking}',
@@ -2876,41 +3024,25 @@ const _dutchSourceAddEt = <String, String>{
   'Uw antwoord': 'Sinu vastus',
   'Antwoord indienen': 'Esitage vastus',
   'Geen verbinding': 'Ühendus puudub',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Te ei jaga sellest portfellist enam mandaate. ',
   'U hebt nog geen badges.': 'Teil ei ole veel märke.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Võite jagada tõendeid välisest portfellist (näiteks EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Esitate tõendi märgi kohta: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Esitate selle tõendi hindamiseks. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Sisselogimiseks suunatakse teid portfellipakkuja juurde. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Teie fail märgitakse kui „esitatud, veel kontrollimata” ',
-  'Verbinding maken…': 'Ühendamine…',
-  'Verbinding verbreken': 'Katkesta ühendus',
-  'Verbinding verbreken?': 'Kas katkestada ühendus?',
-  'Verbonden met {provider}': 'Ühendatud teenusega {provider}',
-  'Verbreken': 'Katkesta',
   'Verlopen': 'Aegunud',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Kui taotlete kustutamist, kaovad teie tõendid ja seotud hinnangud. Kustutamisregistri säilitamisreeglid näitavad, kas kehtiva säilitamiskohustuse tõttu jääb midagi alles.',
   'Wordt verzonden zodra je online bent.': 'Saadetakse kohe, kui olete võrgus.',
   'portefeuille': 'portfell',
-  '{aantal} credential(s) geselecteerd om te delen':
-      'Jagamiseks valiti {aantal} mandaati',
   '{bytes} bytes': '{bytes} baiti',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Töötlemisel alates {datum}. Tavaliselt kahe tööpäeva jooksul.',
   'Kies een bestand om aan te leveren.': 'Valige esitamiseks fail.',
-  'Kies wat u deelt': 'Valige, mida jagate',
   'Kies welke credentials u deelt als bewijs:':
       'Valige mandaadid, mida jagate tõendina:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Teie tõendit ei õnnestunud laadida. Proovige uuesti.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Ühendage väline portfell, et jagada olemasolevaid märke ja ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Jätke tühjaks, kui tõend kehtib piiramatult. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2919,18 +3051,9 @@ const _dutchSourceAddEt = <String, String>{
   'Mijn badges': 'Minu märgid',
   'Mijn bewijs': 'Minu tõendid',
   'Mijn bewijsstukken': 'Minu tõendavad dokumendid',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Pärast sisselogimist valite järgmises etapis, milliseid mandaate jagate. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Tõendavaid dokumente pole veel esitatud.',
   'Opgegeven': 'Esitatud',
-  'Opnieuw verbinden': 'Ühenda uuesti',
-  'Portefeuille koppelen': 'Seo portfell',
-  'Portefeuille verbinden': 'Ühenda portfell',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Valige mandaadid, mida soovite tõendina jagada. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Jätkamiseks sulgege portfellipakkuja aken.',
   'Toegekend op {datum}': 'Antud {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Lubatud vormingud: PNG, JPEG, WebP ja PDF. ',
@@ -2953,15 +3076,9 @@ const _dutchSourceAddEt = <String, String>{
       'Tõendavad dokumendid on failid, mille esitate märgi jaoks. Ülevaade näitab faili nime, kontrollkoodi, olekut ja seda, kes faili hindas. Failid ise selles ülevaates ei ole; hindaja saab neid siiski vaadata.',
   'Bezig met versturen…': 'Saatmine…',
   'Datum kiezen': 'Vali kuupäev',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Ühendus katkes. Saate uuesti ühenduda.',
-  'Deze functie is nog niet beschikbaar. ':
-      'See funktsioon ei ole veel saadaval. ',
   'Externe portefeuille': 'Väline portfell',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Vastu võetud. Tõend kiideti heaks.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Selles portfellis ei leitud mandaate.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Selle organisatsiooni jaoks ei leitud osaleja profiili.',
   'Geldig tot {datum}': 'Kehtib kuni {datum}',

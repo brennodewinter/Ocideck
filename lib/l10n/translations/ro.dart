@@ -1622,6 +1622,155 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Certificaatnummer: {nummer}': 'Număr de certificat: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Evaluatorul nu va mai vedea apoi această piesă. ',
+  'Deze uitnodiging hoort bij {adres}.':
+      'Această invitație aparține adresei {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Acesta este linkul dvs. de calendar. Este afișat aici o singură dată — lipiți-l ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Obțineți insignele și certificatele existente dintr-un ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Retras de organizația dvs.: {reden}',
+  'Uitgegeven op {datum}': 'Emis la {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Calendarul dvs. este conectat până la {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Linkul dvs. de calendar expiră la {datum}. Reînnoiți linkul înainte să înceteze.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Organizația dvs. are deja o temă „{naam}”. Doriți să actualizați acea temă cu versiunea dvs.?',
+  '“{naam}” delen met de organisatie': 'Partajați „{naam}” cu organizația',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}” devine vizibil pentru organizația dvs.',
+  'Aanmelden': 'Conectare',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Conectarea a eșuat. Încercați din nou mai jos.',
+  'Agenda koppelen': 'Conectare calendar',
+  'Agenda-koppeling intrekken?': 'Revocați conexiunea calendarului?',
+  'Agenda-link vernieuwen?': 'Reînnoiți linkul calendarului?',
+  'Alle eisen zijn vervuld.': 'Toate cerințele sunt îndeplinite.',
+  'Bekijken': 'Vizualizare',
+  'Bewaren': 'Salvare',
+  'Bewijsstuk intrekken?': 'Retrageți dovada?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Actualizarea a eșuat. Încercați din nou.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Certificatele apar aici de îndată ce organizația dvs. le emite.',
+  'Credential-bestand kiezen': 'Alegeți un fișier de credențiale',
+  'Credentials ophalen…': 'Se obțin credențialele…',
+  'Cursus': 'Curs',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Acesta nu este un link HTTPS valid către o credențială.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Nu a funcționat. Încercați din nou.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Acțiunea a eșuat. Încercați din nou.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Imaginea este prea mare. Alegeți un fișier mai mic.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Evaluatorul nu va mai vedea apoi această piesă. Puteți depune dovezi noi mai târziu.',
+  'De bron bevat geen leesbare credentials.':
+      'Sursa nu conține credențiale lizibile.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Combinația dintre numărul invitației și cod nu este corectă sau invitația a expirat ori a fost deja folosită.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Conectarea a eșuat. Încercați din nou.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organizația și ceilalți participanți nu vor mai vedea apoi o fotografie la contul dvs.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organizația nu are încă teme proprii.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Linkul vechi nu va mai funcționa. Lipiți din nou noul link în aplicația dvs. de calendar.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Fotografia de profil nu a fost salvată. Încercați din nou.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Temele organizației nu au putut fi preluate.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Invitația a fost acceptată. Organizația este acum asociată contului dvs.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Parolele nu coincid.',
+  'Delen': 'Partajare',
+  'Delen als bewijs': 'Partajați ca dovadă',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Partajarea a eșuat. Încercați din nou.',
+  'Dit is de volledige definitie die meegaat:':
+      'Aceasta este definiția completă care este inclusă:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Acesta este linkul dvs. de calendar. Este afișat aici o singură dată — lipiți-l în aplicația dvs. de calendar. Oricine are linkul vă poate vedea întâlnirile; nu-l partajați.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Acest profil de stil este prea mare pentru a fi partajat.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Această temă este integrată sau utilizată de un curs și nu poate fi ștearsă.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Această temă nu a putut fi preluată — formatul nu este corect.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'O temă cu acest nume există deja în organizație.',
+  'Geen credentials gevonden in deze bron.':
+      'Nicio credențială găsită în această sursă.',
+  'Gereed': 'Gata',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Obțineți insignele și certificatele existente dintr-un portofoliu extern și partajați-le ca dovezi. Dumneavoastră alegeți ce partajați.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Certificatul nu a putut fi salvat. Încercați din nou.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Certificatul nu a putut fi preluat. Încercați din nou.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Partajarea a eșuat. Verificați tipul de dovadă și încercați din nou.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Retragerea a eșuat. Încercați din nou.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Retragerea nu a reușit. Încercați din nou.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Altcineva tocmai a modificat această temă. Suprascrieți sau preluați versiunea organizației?',
+  'Ingebouwd': 'Integrat',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Retras de organizația dvs. Această declarație nu mai este valabilă.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Alegeți o imagine PNG, JPEG sau WebP de cel mult 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Alegeți o parolă de cel puțin 12 caractere.',
+  'Koppelen': 'Conectare',
+  'Link gekopieerd.': 'Link copiat.',
+  'Naam is al in gebruik': 'Numele este deja utilizat',
+  'Nieuwe link': 'Link nou',
+  'Nieuwe profielfoto kiezen': 'Alegeți o fotografie de profil nouă',
+  'Nog geen certificaten.': 'Încă nu există certificate.',
+  'Nog nodig voor deze badge': 'Încă necesar pentru această insignă',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Preluarea a eșuat. Verificați linkul și încercați din nou.',
+  'Profielfoto kiezen': 'Alegeți fotografia de profil',
+  'Profielfoto verwijderen': 'Eliminare fotografie de profil',
+  'Profielfoto wijzigen': 'Modificare fotografie de profil',
+  'Publieke verificatielink': 'Link public de verificare',
+  'Registreren en aanmelden': 'Înregistrare și conectare',
+  'Serverversie overnemen': 'Preluare versiune de server',
+  'Stijlprofiel delen met de organisatie?':
+      'Partajați profilul de stil cu organizația?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Prea multe încercări. Așteptați puțin și încercați din nou.',
+  'Thema’s van de organisatie': 'Temele organizației',
+  'Tussendoor gewijzigd': 'Modificat între timp',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Sunteți înregistrat și conectat. Bine ați venit!',
+  'Uitgegeven': 'Emis',
+  'Uitnodiging accepteren': 'Acceptare invitație',
+  'Uitnodiging gebruiken': 'Utilizare invitație',
+  'Uitnodigingscode': 'Cod de invitație',
+  'Uitnodigingsnummer': 'Număr de invitație',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Contul dvs. a fost creat. Conectați-vă acum cu adresa invitată și noua parolă.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Contul dvs. nu poate gestiona teme în această organizație.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Aplicația dvs. de calendar nu va mai putea accesa apoi întâlnirile. Întâlnirile în sine rămân.',
+  'Uw naam': 'Numele dvs.',
+  'Verwijderen bij de organisatie': 'Ștergere în organizație',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Ștergerea a eșuat. Încercați din nou.',
+  'Vul uw naam in.': 'Introduceți numele dvs.',
+  'Wachtwoord herhalen': 'Repetați parola',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Puneți-vă întâlnirile în propriul calendar — actualizate la modificări și anulări.',
   'Aanvulling gevraagd': 'Completare solicitată',
   'Aanvulling gevraagd.': 'Completare solicitată.',
   'Aanvulling gevraagd: {opmerking}': 'Completare solicitată: {opmerking}',
@@ -2924,42 +3073,26 @@ const _dutchSourceAddRo = <String, String>{
   'Uw antwoord': 'Răspunsul tău',
   'Antwoord indienen': 'Trimiteți răspunsul',
   'Geen verbinding': 'Fără conexiune',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Nu mai partajați credențiale din acest portofoliu. ',
   'U hebt nog geen badges.': 'Nu aveți încă insigne.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Puteți partaja dovezi dintr-un portofoliu extern (cum ar fi EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Trimiteți dovezi pentru: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Trimiteți această dovadă pentru evaluare. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Veți fi redirecționat către furnizorul portofoliului pentru autentificare. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Fișierul dvs. va fi marcat „declarat, încă neverificat” ',
-  'Verbinding maken…': 'Se conectează…',
-  'Verbinding verbreken': 'Deconectare',
-  'Verbinding verbreken?': 'Deconectați?',
-  'Verbonden met {provider}': 'Conectat la {provider}',
-  'Verbreken': 'Deconectare',
   'Verlopen': 'Expirat',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Dacă solicitați ștergerea, dovezile dvs. și evaluările aferente dispar. Regulile de păstrare din registrul ștergerilor arată dacă rămâne ceva pentru o obligație de păstrare în curs.',
   'Wordt verzonden zodra je online bent.':
       'Va fi trimis imediat ce sunteți online.',
   'portefeuille': 'portofoliu',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} credențiale selectate pentru partajare',
   '{bytes} bytes': '{bytes} octeți',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'În curs de procesare din {datum}. De obicei, în două zile lucrătoare.',
   'Kies een bestand om aan te leveren.': 'Alegeți un fișier de trimis.',
-  'Kies wat u deelt': 'Alegeți ce partajați',
   'Kies welke credentials u deelt als bewijs:':
       'Alegeți credențialele pe care le partajați ca dovadă:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Dovada dvs. nu a putut fi încărcată. Încercați din nou.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Conectați un portofoliu extern pentru a partaja insignele existente și ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Lăsați gol dacă dovada este valabilă nelimitat. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2968,18 +3101,9 @@ const _dutchSourceAddRo = <String, String>{
   'Mijn badges': 'Insignele mele',
   'Mijn bewijs': 'Dovezile mele',
   'Mijn bewijsstukken': 'Documentele mele justificative',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'După autentificare, la pasul următor alegeți credențialele pe care le partajați. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Nu au fost trimise încă documente justificative.',
   'Opgegeven': 'Declarat',
-  'Opnieuw verbinden': 'Reconectare',
-  'Portefeuille koppelen': 'Asociați portofoliul',
-  'Portefeuille verbinden': 'Conectați portofoliul',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Selectați credențialele pe care doriți să le partajați ca dovadă. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Închideți fereastra furnizorului portofoliului pentru a continua.',
   'Toegekend op {datum}': 'Acordat la {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Formate permise: PNG, JPEG, WebP și PDF. ',
@@ -3003,15 +3127,9 @@ const _dutchSourceAddRo = <String, String>{
       'Documentele justificative sunt fișiere pe care le trimiteți pentru o insignă. Prezentarea arată numele fișierului, codul de verificare, starea și cine l-a evaluat. Fișierele nu se află în această prezentare; un evaluator le poate consulta.',
   'Bezig met versturen…': 'Se trimite…',
   'Datum kiezen': 'Alegeți data',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Conexiunea a fost întreruptă. Vă puteți reconecta.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Această funcție nu este încă disponibilă. ',
   'Externe portefeuille': 'Portofoliu extern',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Acceptat. Documentul justificativ a fost aprobat.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Nu s-au găsit credențiale în acest portofoliu.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Nu s-a găsit un profil de participant pentru această organizație.',
   'Geldig tot {datum}': 'Valabil până la {datum}',

@@ -1605,6 +1605,153 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Certificaatnummer: {nummer}': 'Certifikatnummer: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Bedömaren ser då inte längre detta stycke. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Denna inbjudan hör till {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Detta är din kalenderlänk. Den visas här endast en gång — klistra in den ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Hämta befintliga badges och certifikat från en extern ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Återkallat av din organisation: {reden}',
+  'Uitgegeven op {datum}': 'Utfärdat den {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Din kalender är kopplad till {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Din kalenderlänk upphör {datum}. Förnya länken innan den slutar.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Din organisation har redan ett tema ”{naam}”. Vill du uppdatera det temat med din version?',
+  '“{naam}” delen met de organisatie': 'Dela ”{naam}” med organisationen',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '”{naam}” blir synlig för din organisation.',
+  'Aanmelden': 'Logga in',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Inloggningen misslyckades. Försök igen nedan.',
+  'Agenda koppelen': 'Koppla kalender',
+  'Agenda-koppeling intrekken?': 'Återkalla kalenderkopplingen?',
+  'Agenda-link vernieuwen?': 'Förnya kalenderlänken?',
+  'Alle eisen zijn vervuld.': 'Alla krav är uppfyllda.',
+  'Bekijken': 'Visa',
+  'Bewaren': 'Spara',
+  'Bewijsstuk intrekken?': 'Dra tillbaka beviset?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Uppdateringen misslyckades. Försök igen.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Certifikat visas här så snart din organisation utfärdar dem.',
+  'Credential-bestand kiezen': 'Välj fil med inloggningsuppgifter',
+  'Credentials ophalen…': 'Hämtar inloggningsuppgifter…',
+  'Cursus': 'Kurs',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Det är inte en giltig HTTPS-länk till inloggningsuppgifter.',
+  'Dat is niet gelukt. Probeer het opnieuw.': 'Det lyckades inte. Försök igen.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Åtgärden misslyckades. Försök igen.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Bilden är för stor. Välj en mindre fil.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Bedömaren ser då inte längre detta stycke. Du kan lämna in nya bevis senare.',
+  'De bron bevat geen leesbare credentials.':
+      'Källan innehåller inga läsbara inloggningsuppgifter.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Kombinationen av inbjudningsnummer och kod stämmer inte, eller så har inbjudan gått ut eller redan använts.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Kopplingen misslyckades. Försök igen.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organisationen och andra deltagare ser då inte längre något foto på ditt konto.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organisationen har inga egna teman ännu.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Den gamla länken fungerar då inte längre. Klistra in den nya länken i din kalenderapp igen.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profilfotot sparades inte. Försök igen.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Organisationens teman kunde inte hämtas.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Inbjudan har accepterats. Organisationen är nu kopplad till ditt konto.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Lösenorden stämmer inte överens.',
+  'Delen': 'Dela',
+  'Delen als bewijs': 'Dela som bevis',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Delningen misslyckades. Försök igen.',
+  'Dit is de volledige definitie die meegaat:':
+      'Detta är den fullständiga definitionen som följer med:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Detta är din kalenderlänk. Den visas här endast en gång — klistra in den i din kalenderapp. Alla som har länken kan se dina möten; dela den inte.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Den här stilprofilen är för stor för att delas.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Detta tema är inbyggt eller används av en kurs och kan inte tas bort.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Detta tema kunde inte övertas — formatet stämmer inte.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Det finns redan ett tema med detta namn i organisationen.',
+  'Geen credentials gevonden in deze bron.':
+      'Inga inloggningsuppgifter hittades i denna källa.',
+  'Gereed': 'Klar',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Hämta befintliga badges och certifikat från en extern portfölj och dela dem som bevis. Du väljer själv vad du delar.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Certifikatet kunde inte sparas. Försök igen.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Certifikatet kunde inte hämtas. Försök igen.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Delningen misslyckades. Kontrollera typen av bevis och försök igen.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Återkallelsen misslyckades. Försök igen.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Återkallelsen lyckades inte. Försök igen.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Någon annan har just ändrat detta tema. Skriva över eller ta över organisationens version?',
+  'Ingebouwd': 'Inbyggt',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Återkallat av din organisation. Detta uttalande gäller inte längre.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Välj en PNG-, JPEG- eller WebP-bild på högst 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Välj ett lösenord på minst 12 tecken.',
+  'Koppelen': 'Koppla',
+  'Link gekopieerd.': 'Länk kopierad.',
+  'Naam is al in gebruik': 'Namnet används redan',
+  'Nieuwe link': 'Ny länk',
+  'Nieuwe profielfoto kiezen': 'Välj nytt profilfoto',
+  'Nog geen certificaten.': 'Inga certifikat ännu.',
+  'Nog nodig voor deze badge': 'Fortfarande nödvändigt för detta badge',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Hämtningen misslyckades. Kontrollera länken och försök igen.',
+  'Profielfoto kiezen': 'Välj profilfoto',
+  'Profielfoto verwijderen': 'Ta bort profilfoto',
+  'Profielfoto wijzigen': 'Ändra profilfoto',
+  'Publieke verificatielink': 'Offentlig verifieringslänk',
+  'Registreren en aanmelden': 'Registrera och logga in',
+  'Serverversie overnemen': 'Ta över serverversionen',
+  'Stijlprofiel delen met de organisatie?':
+      'Dela stilprofilen med organisationen?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'För många försök. Vänta en stund och försök igen.',
+  'Thema’s van de organisatie': 'Organisationens teman',
+  'Tussendoor gewijzigd': 'Ändrat under tiden',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Du är registrerad och inloggad. Välkommen!',
+  'Uitgegeven': 'Utfärdat',
+  'Uitnodiging accepteren': 'Acceptera inbjudan',
+  'Uitnodiging gebruiken': 'Använd inbjudan',
+  'Uitnodigingscode': 'Inbjudningskod',
+  'Uitnodigingsnummer': 'Inbjudningsnummer',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Ditt konto har skapats. Logga nu in med den inbjudna adressen och ditt nya lösenord.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Ditt konto får inte hantera teman i denna organisation.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Din kalenderapp kan då inte längre komma åt mötena. Själva mötena finns kvar.',
+  'Uw naam': 'Ditt namn',
+  'Verwijderen bij de organisatie': 'Ta bort i organisationen',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Borttagningen misslyckades. Försök igen.',
+  'Vul uw naam in.': 'Ange ditt namn.',
+  'Wachtwoord herhalen': 'Upprepa lösenord',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Lägg dina möten i din egen kalender — uppdateras vid ändringar och inställanden.',
   'Aanvulling gevraagd': 'Komplettering begärd',
   'Aanvulling gevraagd.': 'Komplettering begärd.',
   'Aanvulling gevraagd: {opmerking}': 'Komplettering begärd: {opmerking}',
@@ -2886,41 +3033,25 @@ const _dutchSourceAddSv = <String, String>{
   'Uw antwoord': 'Ditt svar',
   'Antwoord indienen': 'Skicka svar',
   'Geen verbinding': 'Ingen anslutning',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Du delar då inte längre inloggningsuppgifter från denna portfölj. ',
   'U hebt nog geen badges.': 'Du har inga märken ännu.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Du kan dela bevis från en extern portfölj (som EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Du lämnar in bevis för: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Du lämnar in detta bevis för bedömning. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Du skickas vidare till portföljleverantören för att logga in. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Din fil markeras som ”uppgiven, ännu inte kontrollerad” ',
-  'Verbinding maken…': 'Ansluter…',
-  'Verbinding verbreken': 'Koppla från',
-  'Verbinding verbreken?': 'Koppla från?',
-  'Verbonden met {provider}': 'Ansluten till {provider}',
-  'Verbreken': 'Koppla från',
   'Verlopen': 'Utgånget',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Om du begär radering försvinner dina bevis och tillhörande bedömningar. Bevarandereglerna i raderingsregistret visar om något återstår på grund av en pågående bevarandeskyldighet.',
   'Wordt verzonden zodra je online bent.': 'Skickas så snart du är ansluten.',
   'portefeuille': 'portfölj',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} inloggningsuppgifter valda för delning',
   '{bytes} bytes': '{bytes} byte',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Under behandling sedan {datum}. Vanligtvis inom två arbetsdagar.',
   'Kies een bestand om aan te leveren.': 'Välj en fil att lämna in.',
-  'Kies wat u deelt': 'Välj vad du delar',
   'Kies welke credentials u deelt als bewijs:':
       'Välj vilka inloggningsuppgifter du delar som bevis:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Det gick inte att läsa in ditt bevis. Försök igen.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Anslut en extern portfölj för att dela dina befintliga märken och ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Lämna tomt om beviset gäller utan tidsgräns. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2929,18 +3060,9 @@ const _dutchSourceAddSv = <String, String>{
   'Mijn badges': 'Mina märken',
   'Mijn bewijs': 'Mina bevis',
   'Mijn bewijsstukken': 'Mina styrkande handlingar',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Efter inloggning väljer du i nästa steg vilka inloggningsuppgifter du delar. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Inga styrkande handlingar har lämnats in ännu.',
   'Opgegeven': 'Uppgiven',
-  'Opnieuw verbinden': 'Anslut igen',
-  'Portefeuille koppelen': 'Koppla portfölj',
-  'Portefeuille verbinden': 'Anslut portfölj',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Välj de inloggningsuppgifter som du vill dela som bevis. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Stäng portföljleverantörens fönster för att fortsätta.',
   'Toegekend op {datum}': 'Tilldelat {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Tillåtna format: PNG, JPEG, WebP och PDF. ',
@@ -2963,15 +3085,9 @@ const _dutchSourceAddSv = <String, String>{
       'Bevis är dokument du lämnar in för en bricka. Översikten visar filnamn, kontrollsumma, status och vem som har bedömt det. Själva filerna finns inte i denna översikt; en bedömare kan visa dem.',
   'Bezig met versturen…': 'Skickar…',
   'Datum kiezen': 'Välj datum',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Anslutningen har brutits. Du kan ansluta igen.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Denna funktion är ännu inte tillgänglig. ',
   'Externe portefeuille': 'Extern portfölj',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Accepterad. Beviset har godkänts.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Inga inloggningsuppgifter hittades i denna portfölj.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Ingen deltagarprofil hittades för denna organisation.',
   'Geldig tot {datum}': 'Giltig till {datum}',

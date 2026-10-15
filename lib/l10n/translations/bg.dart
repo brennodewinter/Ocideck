@@ -1626,6 +1626,154 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Certificaatnummer: {nummer}': 'Номер на сертификата: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Оценителят вече няма да вижда този елемент. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Тази покана принадлежи на {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Това е вашата връзка към календара. Тя се показва тук само веднъж — поставете я ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Извличайте съществуващи значки и сертификати от външен ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Оттеглено от вашата организация: {reden}',
+  'Uitgegeven op {datum}': 'Издаден на {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Вашият календар е свързан до {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Вашата връзка към календара изтича на {datum}. Подновете връзката, преди да спре.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Вашата организация вече има тема „{naam}“. Искате ли да актуализирате тази тема с вашата версия?',
+  '“{naam}” delen met de organisatie': 'Споделяне на „{naam}“ с организацията',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}“ става видима за вашата организация.',
+  'Aanmelden': 'Вход',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Входът не бе успешен. Опитайте отново по-долу.',
+  'Agenda koppelen': 'Свързване на календар',
+  'Agenda-koppeling intrekken?': 'Оттегляне на връзката с календара?',
+  'Agenda-link vernieuwen?': 'Подновяване на връзката към календара?',
+  'Alle eisen zijn vervuld.': 'Всички изисквания са изпълнени.',
+  'Bekijken': 'Преглед',
+  'Bewaren': 'Запази',
+  'Bewijsstuk intrekken?': 'Оттегляне на доказателството?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Актуализацията не бе успешна. Опитайте отново.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Сертификатите се появяват тук, щом вашата организация ги издаде.',
+  'Credential-bestand kiezen': 'Избор на файл с идентификационни данни',
+  'Credentials ophalen…': 'Извличане на идентификационни данни…',
+  'Cursus': 'Курс',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Това не е валидна HTTPS връзка към идентификационни данни.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Това не се получи. Опитайте отново.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Действието не бе успешно. Опитайте отново.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Изображението е твърде голямо. Изберете по-малък файл.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Оценителят вече няма да вижда този елемент. Можете да предоставите нови доказателства по-късно.',
+  'De bron bevat geen leesbare credentials.':
+      'Източникът не съдържа четими идентификационни данни.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Комбинацията от номер на покана и код е неправилна или поканата е изтекла, или вече е използвана.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Свързването не бе успешно. Опитайте отново.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Организацията и другите участници вече няма да виждат снимка към вашия акаунт.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Организацията все още няма собствени теми.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Старата връзка вече няма да работи. Поставете отново новата връзка в приложението си за календар.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Профилната снимка не бе запазена. Опитайте отново.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Темите на организацията не можаха да бъдат извлечени.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Поканата е приета. Организацията вече е свързана с вашия акаунт.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Паролите не съвпадат.',
+  'Delen': 'Споделяне',
+  'Delen als bewijs': 'Споделяне като доказателство',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Споделянето не бе успешно. Опитайте отново.',
+  'Dit is de volledige definitie die meegaat:':
+      'Това е пълната дефиниция, която се прилага:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Това е вашата връзка към календара. Тя се показва тук само веднъж — поставете я в приложението си за календар. Всеки с връзката може да вижда срещите ви; не я споделяйте.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Този стилов профил е твърде голям, за да бъде споделен.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Тази тема е вградена или се използва от курс и не може да бъде изтрита.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Тази тема не може да бъде пренесена — форматът не е правилен.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Тема с това име вече съществува в организацията.',
+  'Geen credentials gevonden in deze bron.':
+      'В този източник не са намерени идентификационни данни.',
+  'Gereed': 'Готово',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Извличайте съществуващи значки и сертификати от външен портфейл и ги споделяйте като доказателства. Вие избирате какво да споделяте.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Сертификатът не може да бъде запазен. Опитайте отново.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Сертификатът не може да бъде извлечен. Опитайте отново.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Споделянето се провали. Проверете вида на доказателството и опитайте отново.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Оттеглянето се провали. Опитайте отново.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Оттеглянето не бе успешно. Опитайте отново.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Някой друг току-що промени тази тема. Да се презапише ли или да се приеме версията на организацията?',
+  'Ingebouwd': 'Вграден',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Оттеглено от вашата организация. Това изявление вече не важи.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Изберете PNG, JPEG или WebP изображение с максимален размер 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Изберете парола с поне 12 знака.',
+  'Koppelen': 'Свързване',
+  'Link gekopieerd.': 'Връзката е копирана.',
+  'Naam is al in gebruik': 'Името вече се използва',
+  'Nieuwe link': 'Нова връзка',
+  'Nieuwe profielfoto kiezen': 'Избор на нова профилна снимка',
+  'Nog geen certificaten.': 'Все още няма сертификати.',
+  'Nog nodig voor deze badge': 'Все още необходимо за тази значка',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Извличането се провали. Проверете връзката и опитайте отново.',
+  'Profielfoto kiezen': 'Избор на профилна снимка',
+  'Profielfoto verwijderen': 'Премахване на профилната снимка',
+  'Profielfoto wijzigen': 'Промяна на профилната снимка',
+  'Publieke verificatielink': 'Публична връзка за проверка',
+  'Registreren en aanmelden': 'Регистрация и вход',
+  'Serverversie overnemen': 'Приемане на сървърната версия',
+  'Stijlprofiel delen met de organisatie?':
+      'Споделяне на стиловия профил с организацията?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Твърде много опити. Изчакайте малко и опитайте отново.',
+  'Thema’s van de organisatie': 'Теми на организацията',
+  'Tussendoor gewijzigd': 'Променено междувременно',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Регистрирани сте и сте влезли. Добре дошли!',
+  'Uitgegeven': 'Издаден',
+  'Uitnodiging accepteren': 'Приемане на поканата',
+  'Uitnodiging gebruiken': 'Използване на покана',
+  'Uitnodigingscode': 'Код на поканата',
+  'Uitnodigingsnummer': 'Номер на поканата',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Вашият акаунт е създаден. Влезте сега с поканения адрес и новата си парола.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Вашият акаунт не може да управлява теми в тази организация.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Вашето приложение за календар вече няма достъп до срещите. Самите срещи остават.',
+  'Uw naam': 'Вашето име',
+  'Verwijderen bij de organisatie': 'Изтриване в организацията',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Изтриването не бе успешно. Опитайте отново.',
+  'Vul uw naam in.': 'Въведете вашето име.',
+  'Wachtwoord herhalen': 'Повторете паролата',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Поставете срещите си в собствения си календар — актуализирано при промени и отмяни.',
   'Aanvulling gevraagd': 'Поискано е допълване',
   'Aanvulling gevraagd.': 'Поискано е допълване.',
   'Aanvulling gevraagd: {opmerking}': 'Поискано е допълване: {opmerking}',
@@ -2916,41 +3064,25 @@ const _dutchSourceAddBg = <String, String>{
   'Uw antwoord': 'Вашият отговор',
   'Antwoord indienen': 'Изпратете отговор',
   'Geen verbinding': 'Няма връзка',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Вече няма да споделяте идентификационни данни от този портфейл. ',
   'U hebt nog geen badges.': 'Все още нямате значки.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Можете да използвате доказателства от външен портфейл (като EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Подавате доказателства за: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Подавате този доказателствен документ за оценка. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Ще бъдете пренасочени към доставчика на портфейла, за да влезете. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Файлът ви ще бъде отбелязан като "подаден, все още непроверен" ',
-  'Verbinding maken…': 'Свързване…',
-  'Verbinding verbreken': 'Прекъсване на връзката',
-  'Verbinding verbreken?': 'Да се прекъсне ли връзката?',
-  'Verbonden met {provider}': 'Свързано с {provider}',
-  'Verbreken': 'Прекъсване',
   'Verlopen': 'Изтекъл',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Ако поискате изтриване, вашите доказателства и свързаните оценки ще изчезнат. Правилата за съхранение в регистъра за изтриване показват дали остава остатък по текущо задължение за съхранение.',
   'Wordt verzonden zodra je online bent.': 'Ще бъде изпратено, щом сте онлайн.',
   'portefeuille': 'портфейл',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} идентификационни данни са избрани за споделяне',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'В обработка от {datum}. Обикновено в рамките на два работни дни.',
   'Kies een bestand om aan te leveren.': 'Изберете файл за подаване.',
-  'Kies wat u deelt': 'Изберете какво споделяте',
   'Kies welke credentials u deelt als bewijs:':
       'Изберете кои идентификационни данни споделяте като доказателство:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Неуспешно зареждане на доказателствата. Опитайте отново.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Свържете външен портфейл, за да използвате съществуващите си значки и ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Оставете празно, ако доказателството е валидно безсрочно. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2959,18 +3091,9 @@ const _dutchSourceAddBg = <String, String>{
   'Mijn badges': 'Моите значки',
   'Mijn bewijs': 'Моите доказателства',
   'Mijn bewijsstukken': 'Моите доказателствени документи',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'След влизане в следващата стъпка избирате кои идентификационни данни да споделите. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Все още няма подадени доказателствени документи.',
   'Opgegeven': 'Подаден',
-  'Opnieuw verbinden': 'Свържете отново',
-  'Portefeuille koppelen': 'Свържете портфейл',
-  'Portefeuille verbinden': 'Свържете портфейл',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Изберете идентификационните данни, които искате да споделите като доказателство. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Затворете прозореца на доставчика на портфейла, за да продължите.',
   'Toegekend op {datum}': 'Присъдено на {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Разрешени формати: PNG, JPEG, WebP и PDF. ',
@@ -2993,15 +3116,9 @@ const _dutchSourceAddBg = <String, String>{
       'Доказателствата са файлове, които подавате за значка. Прегледът показва името на файла, кода за проверка, състоянието и кой го е оценил. Самите файлове не са в този преглед; оценител може да ги прегледа.',
   'Bezig met versturen…': 'Изпращане…',
   'Datum kiezen': 'Изберете дата',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Връзката е прекъсната. Можете да се свържете отново.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Тази функция все още не е налична. ',
   'Externe portefeuille': 'Външен портфейл',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Прието. Доказателството е одобрено.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'В този портфейл няма намерени идентификационни данни.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Не е намерен профил на участник за тази организация.',
   'Geldig tot {datum}': 'Валидно до {datum}',

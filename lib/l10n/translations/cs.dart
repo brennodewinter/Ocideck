@@ -1607,6 +1607,153 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Certificaatnummer: {nummer}': 'Číslo certifikátu: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Hodnotitel pak tento kus již neuvidí. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Tato pozvánka patří adrese {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Toto je váš odkaz na kalendář. Zobrazuje se zde pouze jednou — vložte jej ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Získejte stávající odznaky a certifikáty z externího ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Staženo vaší organizací: {reden}',
+  'Uitgegeven op {datum}': 'Vydáno {datum}',
+  'Uw agenda is gekoppeld tot {datum}.': 'Váš kalendář je propojen do {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Váš odkaz na kalendář vyprší {datum}. Obnovte odkaz, než přestane fungovat.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Vaše organizace již má motiv „{naam}“. Chcete tento motiv aktualizovat svou verzí?',
+  '“{naam}” delen met de organisatie': 'Sdílet „{naam}“ s organizací',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}“ se stane viditelným pro vaši organizaci.',
+  'Aanmelden': 'Přihlásit se',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Přihlášení se nezdařilo. Zkuste to znovu níže.',
+  'Agenda koppelen': 'Propojit kalendář',
+  'Agenda-koppeling intrekken?': 'Zrušit propojení kalendáře?',
+  'Agenda-link vernieuwen?': 'Obnovit odkaz kalendáře?',
+  'Alle eisen zijn vervuld.': 'Všechny požadavky jsou splněny.',
+  'Bekijken': 'Zobrazit',
+  'Bewaren': 'Uložit',
+  'Bewijsstuk intrekken?': 'Stáhnout důkaz?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Aktualizace se nezdařila. Zkuste to znovu.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Certifikáty se zde zobrazí, jakmile je vaše organizace vydá.',
+  'Credential-bestand kiezen': 'Vybrat soubor s digitálními osvědčeními',
+  'Credentials ophalen…': 'Načítání digitálních osvědčení…',
+  'Cursus': 'Kurz',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Toto není platný odkaz HTTPS na digitální osvědčení.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'To se nepovedlo. Zkuste to znovu.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Akce se nezdařila. Zkuste to znovu.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Obrázek je příliš velký. Vyberte menší soubor.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Hodnotitel pak tento kus již neuvidí. Nové důkazy můžete dodat později.',
+  'De bron bevat geen leesbare credentials.':
+      'Zdroj neobsahuje žádná čitelná digitální osvědčení.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Kombinace čísla pozvánky a kódu není správná, nebo pozvánka vypršela či byla již použita.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Propojení se nezdařilo. Zkuste to znovu.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organizace a ostatní účastníci pak již u vašeho účtu neuvidí fotografii.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organizace zatím nemá žádné vlastní motivy.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Starý odkaz pak přestane fungovat. Nový odkaz znovu vložte do své kalendářové aplikace.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profilová fotografie nebyla uložena. Zkuste to znovu.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Motivy organizace se nepodařilo načíst.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Pozvánka byla přijata. Organizace je nyní přiřazena k vašemu účtu.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Hesla se neshodují.',
+  'Delen': 'Sdílet',
+  'Delen als bewijs': 'Sdílet jako důkaz',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Sdílení se nezdařilo. Zkuste to znovu.',
+  'Dit is de volledige definitie die meegaat:':
+      'Toto je úplná definice, která se předává:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Toto je váš odkaz na kalendář. Zobrazuje se zde pouze jednou — vložte jej do své kalendářové aplikace. Kdokoli s odkazem může vidět vaše schůzky; nesdílejte jej.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Tento stylový profil je příliš velký na sdílení.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Tento motiv je vestavěný nebo ho používá kurz a nelze jej odstranit.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Tento motiv nebylo možné převzít — formát nesouhlasí.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Motiv s tímto názvem již v organizaci existuje.',
+  'Geen credentials gevonden in deze bron.':
+      'V tomto zdroji nebyla nalezena žádná digitální osvědčení.',
+  'Gereed': 'Hotovo',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Získejte stávající odznaky a certifikáty z externího portfolia a sdílejte je jako důkazy. Sami si vyberete, co sdílíte.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Certifikát nebylo možné uložit. Zkuste to znovu.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Certifikát nebylo možné načíst. Zkuste to znovu.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Sdílení selhalo. Zkontrolujte typ důkazu a zkuste to znovu.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Stažení selhalo. Zkuste to znovu.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Stažení se nezdařilo. Zkuste to znovu.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Někdo jiný právě upravil tento motiv. Přepsat, nebo převzít verzi organizace?',
+  'Ingebouwd': 'Vestavěný',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Staženo vaší organizací. Toto prohlášení již neplatí.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Vyberte obrázek PNG, JPEG nebo WebP o velikosti maximálně 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Zvolte heslo o délce alespoň 12 znaků.',
+  'Koppelen': 'Propojit',
+  'Link gekopieerd.': 'Odkaz zkopírován.',
+  'Naam is al in gebruik': 'Název se již používá',
+  'Nieuwe link': 'Nový odkaz',
+  'Nieuwe profielfoto kiezen': 'Vybrat novou profilovou fotografii',
+  'Nog geen certificaten.': 'Zatím žádné certifikáty.',
+  'Nog nodig voor deze badge': 'Stále potřebné pro tento odznak',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Načtení selhalo. Zkontrolujte odkaz a zkuste to znovu.',
+  'Profielfoto kiezen': 'Vybrat profilovou fotografii',
+  'Profielfoto verwijderen': 'Odebrat profilovou fotografii',
+  'Profielfoto wijzigen': 'Změnit profilovou fotografii',
+  'Publieke verificatielink': 'Veřejný ověřovací odkaz',
+  'Registreren en aanmelden': 'Zaregistrovat se a přihlásit',
+  'Serverversie overnemen': 'Převzít verzi serveru',
+  'Stijlprofiel delen met de organisatie?':
+      'Sdílet stylový profil s organizací?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Příliš mnoho pokusů. Počkejte chvíli a zkuste to znovu.',
+  'Thema’s van de organisatie': 'Motivy organizace',
+  'Tussendoor gewijzigd': 'Mezitím změněno',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Jste zaregistrování a přihlášení. Vítejte!',
+  'Uitgegeven': 'Vydáno',
+  'Uitnodiging accepteren': 'Přijmout pozvánku',
+  'Uitnodiging gebruiken': 'Použít pozvánku',
+  'Uitnodigingscode': 'Kód pozvánky',
+  'Uitnodigingsnummer': 'Číslo pozvánky',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Váš účet byl vytvořen. Přihlaste se nyní pozvanou adresou a novým heslem.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Váš účet nesmí v této organizaci spravovat motivy.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Vaše kalendářová aplikace pak již nebude mít přístup ke schůzkám. Samotné schůzky zůstanou.',
+  'Uw naam': 'Vaše jméno',
+  'Verwijderen bij de organisatie': 'Odstranit v organizaci',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Odstranění se nezdařilo. Zkuste to znovu.',
+  'Vul uw naam in.': 'Zadejte své jméno.',
+  'Wachtwoord herhalen': 'Zopakovat heslo',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Vložte si své schůzky do vlastního kalendáře — aktualizuje se při změnách a zrušeních.',
   'Aanvulling gevraagd': 'Vyžádáno doplnění',
   'Aanvulling gevraagd.': 'Vyžádáno doplnění.',
   'Aanvulling gevraagd: {opmerking}': 'Vyžádáno doplnění: {opmerking}',
@@ -2885,41 +3032,25 @@ const _dutchSourceAddCs = <String, String>{
   'Uw antwoord': 'Vaše odpověď',
   'Antwoord indienen': 'Odeslat odpověď',
   'Geen verbinding': 'Bez připojení',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Z tohoto portfolia již nebudete sdílet žádná digitální osvědčení. ',
   'U hebt nog geen badges.': 'Zatím nemáte žádné odznaky.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Můžete použít doklady z externího portfolia (například EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Předkládáte doklad k odznaku: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Tento doklad předkládáte k posouzení. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Budete přesměrováni k poskytovateli portfolia, kde se přihlásíte. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Váš soubor bude označen jako „odeslaný, dosud nezkontrolovaný“ ',
-  'Verbinding maken…': 'Připojování…',
-  'Verbinding verbreken': 'Odpojit',
-  'Verbinding verbreken?': 'Odpojit?',
-  'Verbonden met {provider}': 'Připojeno: {provider}',
-  'Verbreken': 'Odpojit',
   'Verlopen': 'Platnost skončila',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Pokud požádáte o výmaz, vaše doklady a související posouzení budou odstraněny. Pravidla uchovávání v registru výmazů ukazují, zda kvůli trvající povinnosti uchovávání zůstane zachována část údajů.',
   'Wordt verzonden zodra je online bent.': 'Odešle se, jakmile budete online.',
   'portefeuille': 'portfolio',
-  '{aantal} credential(s) geselecteerd om te delen':
-      'Vybraná digitální osvědčení ke sdílení: {aantal}',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Čeká na vyřízení od {datum}. Obvykle nejdéle dva pracovní dny.',
   'Kies een bestand om aan te leveren.': 'Vyberte soubor k odeslání.',
-  'Kies wat u deelt': 'Vyberte, co budete sdílet',
   'Kies welke credentials u deelt als bewijs:':
       'Vyberte digitální osvědčení, která chcete sdílet jako doklad:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Vaše podklady se nepodařilo načíst. Zkuste to znovu.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Připojte externí portfolio a použijte své stávající odznaky a ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Ponechte prázdné, pokud má doklad neomezenou platnost. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2928,18 +3059,9 @@ const _dutchSourceAddCs = <String, String>{
   'Mijn badges': 'Moje odznaky',
   'Mijn bewijs': 'Moje podklady',
   'Mijn bewijsstukken': 'Moje doklady',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Po přihlášení v dalším kroku vyberete digitální osvědčení, která chcete sdílet. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Dosud nebyly předloženy žádné doklady.',
   'Opgegeven': 'Odesláno',
-  'Opnieuw verbinden': 'Znovu připojit',
-  'Portefeuille koppelen': 'Propojit portfolio',
-  'Portefeuille verbinden': 'Připojit portfolio',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Vyberte digitální osvědčení, která chcete sdílet jako doklad. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Chcete-li pokračovat, zavřete okno poskytovatele portfolia.',
   'Toegekend op {datum}': 'Uděleno dne {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Povolené formáty: PNG, JPEG, WebP a PDF. ',
@@ -2962,14 +3084,9 @@ const _dutchSourceAddCs = <String, String>{
       'Doklady jsou soubory, které předkládáte k získání odznaku. Přehled uvádí název souboru, kontrolní součet, stav a osobu, která jej posoudila. Samotné soubory v tomto přehledu nejsou; posuzovatel si je však může zobrazit.',
   'Bezig met versturen…': 'Odesílání…',
   'Datum kiezen': 'Vybrat datum',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Připojení bylo přerušeno. Můžete se znovu připojit.',
-  'Deze functie is nog niet beschikbaar. ': 'Tato funkce zatím není dostupná. ',
   'Externe portefeuille': 'Externí portfolio',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Přijato. Doklad byl schválen.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'V tomto portfoliu nebyla nalezena žádná digitální osvědčení.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Pro tuto organizaci nebyl nalezen profil účastníka.',
   'Geldig tot {datum}': 'Platnost do {datum}',

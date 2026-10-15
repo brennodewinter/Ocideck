@@ -1610,6 +1610,153 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Certificaatnummer: {nummer}': 'Broj certifikata: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Ocjenjivač tada više neće vidjeti ovaj komad. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Ovaj poziv pripada adresi {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Ovo je vaša poveznica kalendara. Prikazuje se ovdje samo jednom — zalijepite je ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Dohvatite postojeće značke i certifikate iz vanjskog ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Povučeno od strane vaše organizacije: {reden}',
+  'Uitgegeven op {datum}': 'Izdano {datum}',
+  'Uw agenda is gekoppeld tot {datum}.': 'Vaš kalendar je povezan do {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Vaša poveznica kalendara istječe {datum}. Obnovite poveznicu prije nego što prestane.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Vaša organizacija već ima temu „{naam}“. Želite li tu temu ažurirati svojom verzijom?',
+  '“{naam}” delen met de organisatie': 'Podijeli „{naam}“ s organizacijom',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}“ postaje vidljivo vašoj organizaciji.',
+  'Aanmelden': 'Prijava',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Prijava nije uspjela. Pokušajte ponovno ispod.',
+  'Agenda koppelen': 'Poveži kalendar',
+  'Agenda-koppeling intrekken?': 'Povući povezivanje kalendara?',
+  'Agenda-link vernieuwen?': 'Obnoviti poveznicu kalendara?',
+  'Alle eisen zijn vervuld.': 'Svi su uvjeti ispunjeni.',
+  'Bekijken': 'Pregledaj',
+  'Bewaren': 'Spremi',
+  'Bewijsstuk intrekken?': 'Povući dokaz?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Ažuriranje nije uspjelo. Pokušajte ponovno.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Certifikati se ovdje pojavljuju čim ih vaša organizacija izda.',
+  'Credential-bestand kiezen': 'Odaberi datoteku vjerodajnica',
+  'Credentials ophalen…': 'Dohvaćanje vjerodajnica…',
+  'Cursus': 'Tečaj',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'To nije valjana HTTPS poveznica na vjerodajnicu.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'To nije uspjelo. Pokušajte ponovno.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Radnja nije uspjela. Pokušajte ponovno.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Slika je prevelika. Odaberite manju datoteku.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Ocjenjivač tada više neće vidjeti ovaj komad. Nove dokaze možete dostaviti kasnije.',
+  'De bron bevat geen leesbare credentials.':
+      'Izvor ne sadrži čitljive vjerodajnice.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Kombinacija broja poziva i koda nije točna ili je poziv istekao ili je već iskorišten.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Povezivanje nije uspjelo. Pokušajte ponovno.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organizacija i ostali sudionici tada više neće vidjeti fotografiju uz vaš račun.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organizacija još nema vlastitih tema.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Stara poveznica tada više neće raditi. Novu poveznicu ponovno zalijepite u svoju aplikaciju kalendara.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profilna fotografija nije spremljena. Pokušajte ponovno.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Teme organizacije nije bilo moguće dohvatiti.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Poziv je prihvaćen. Organizacija je sada povezana s vašim računom.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Lozinke se ne podudaraju.',
+  'Delen': 'Podijeli',
+  'Delen als bewijs': 'Podijeli kao dokaz',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Dijeljenje nije uspjelo. Pokušajte ponovno.',
+  'Dit is de volledige definitie die meegaat:':
+      'Ovo je potpuna definicija koja ide uz to:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Ovo je vaša poveznica kalendara. Prikazuje se ovdje samo jednom — zalijepite je u svoju aplikaciju kalendara. Svatko s poveznicom može vidjeti vaše termine; nemojte je dijeliti.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Ovaj stilski profil je prevelik za dijeljenje.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Ova tema je ugrađena ili je koristi tečaj i ne može se izbrisati.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Ovu temu nije bilo moguće preuzeti — format nije ispravan.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Tema s tim nazivom već postoji u organizaciji.',
+  'Geen credentials gevonden in deze bron.':
+      'U ovom izvoru nisu pronađene vjerodajnice.',
+  'Gereed': 'Gotovo',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Dohvatite postojeće značke i certifikate iz vanjskog novčanika i podijelite ih kao dokaze. Sami birate što dijelite.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Certifikat nije bilo moguće spremiti. Pokušajte ponovno.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Certifikat nije bilo moguće dohvatiti. Pokušajte ponovno.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Dijeljenje nije uspjelo. Provjerite vrstu dokaza i pokušajte ponovno.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Povlačenje nije uspjelo. Pokušajte ponovno.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Povlačenje nije uspjelo. Pokušajte ponovno.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Netko drugi upravo je izmijenio ovu temu. Prebrisati ili preuzeti verziju organizacije?',
+  'Ingebouwd': 'Ugrađeno',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Povučeno od strane vaše organizacije. Ova izjava više ne vrijedi.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Odaberite sliku PNG, JPEG ili WebP veličine najviše 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Odaberite lozinku od najmanje 12 znakova.',
+  'Koppelen': 'Poveži',
+  'Link gekopieerd.': 'Poveznica kopirana.',
+  'Naam is al in gebruik': 'Naziv je već u uporabi',
+  'Nieuwe link': 'Nova poveznica',
+  'Nieuwe profielfoto kiezen': 'Odaberi novu profilnu fotografiju',
+  'Nog geen certificaten.': 'Još nema certifikata.',
+  'Nog nodig voor deze badge': 'Još potrebno za ovu značku',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Dohvaćanje nije uspjelo. Provjerite poveznicu i pokušajte ponovno.',
+  'Profielfoto kiezen': 'Odaberi profilnu fotografiju',
+  'Profielfoto verwijderen': 'Ukloni profilnu fotografiju',
+  'Profielfoto wijzigen': 'Promijeni profilnu fotografiju',
+  'Publieke verificatielink': 'Javna poveznica za provjeru',
+  'Registreren en aanmelden': 'Registracija i prijava',
+  'Serverversie overnemen': 'Preuzmi verziju poslužitelja',
+  'Stijlprofiel delen met de organisatie?':
+      'Podijeliti stilski profil s organizacijom?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Previše pokušaja. Pričekajte trenutak i pokušajte ponovno.',
+  'Thema’s van de organisatie': 'Teme organizacije',
+  'Tussendoor gewijzigd': 'U međuvremenu izmijenjeno',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Registrirani ste i prijavljeni. Dobrodošli!',
+  'Uitgegeven': 'Izdano',
+  'Uitnodiging accepteren': 'Prihvati poziv',
+  'Uitnodiging gebruiken': 'Iskoristi poziv',
+  'Uitnodigingscode': 'Kod poziva',
+  'Uitnodigingsnummer': 'Broj poziva',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Vaš račun je stvoren. Prijavite se sada pozvanom adresom i novom lozinkom.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Vaš račun ne smije upravljati temama u ovoj organizaciji.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Vaša aplikacija kalendara tada više neće imati pristup sastancima. Sami termini ostaju.',
+  'Uw naam': 'Vaše ime',
+  'Verwijderen bij de organisatie': 'Izbriši u organizaciji',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Brisanje nije uspjelo. Pokušajte ponovno.',
+  'Vul uw naam in.': 'Unesite svoje ime.',
+  'Wachtwoord herhalen': 'Ponovite lozinku',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Stavite svoje sastanke u vlastiti kalendar — ažurirano pri promjenama i otkazivanjima.',
   'Aanvulling gevraagd': 'Zatraženo dopunjavanje',
   'Aanvulling gevraagd.': 'Zatraženo je dopunjavanje.',
   'Aanvulling gevraagd: {opmerking}': 'Zatraženo dopunjavanje: {opmerking}',
@@ -2895,42 +3042,26 @@ const _dutchSourceAddHr = <String, String>{
   'Uw antwoord': 'Vaš odgovor',
   'Antwoord indienen': 'Pošalji odgovor',
   'Geen verbinding': 'Nema veze',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Više nećete dijeliti vjerodajnice iz ovog novčanika. ',
   'U hebt nog geen badges.': 'Još nemate znački.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Možete koristiti dokaze iz vanjskog novčanika (kao što je EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Predajete dokaz za: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Predajete ovu datoteku dokaza na ocjenjivanje. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Bit ćete preusmjereni pružatelju novčanika radi prijave. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Vaša će datoteka biti označena kao "predano, još nije provjereno" ',
-  'Verbinding maken…': 'Povezivanje…',
-  'Verbinding verbreken': 'Prekini vezu',
-  'Verbinding verbreken?': 'Prekinuti vezu?',
-  'Verbonden met {provider}': 'Povezano s {provider}',
-  'Verbreken': 'Prekini',
   'Verlopen': 'Isteklo',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Ako zatražite brisanje, nestat će vaši dokazi i povezane ocjene. Pravila čuvanja u registru brisanja pokazuju ostaje li dio podataka zbog tekuće obveze čuvanja.',
   'Wordt verzonden zodra je online bent.':
       'Bit će poslano čim budete na mreži.',
   'portefeuille': 'novčanik',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} vjerodajnica odabrano za dijeljenje',
   '{bytes} bytes': '{bytes} bajtova',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'U obradi od {datum}. Obično u roku od dva radna dana.',
   'Kies een bestand om aan te leveren.': 'Odaberite datoteku za predaju.',
-  'Kies wat u deelt': 'Odaberite što dijelite',
   'Kies welke credentials u deelt als bewijs:':
       'Odaberite koje vjerodajnice dijelite kao dokaz:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Nije bilo moguće učitati vaš dokaz. Pokušajte ponovno.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Povežite vanjski novčanik kako biste svoje postojeće značke i ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Ostavite prazno ako dokaz vrijedi neograničeno. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2939,17 +3070,8 @@ const _dutchSourceAddHr = <String, String>{
   'Mijn badges': 'Moje značke',
   'Mijn bewijs': 'Moj dokaz',
   'Mijn bewijsstukken': 'Moje datoteke dokaza',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Nakon prijave u sljedećem koraku odabirete koje vjerodajnice dijelite. ',
   'Nog geen bewijsstukken aangeleverd.': 'Još nisu predane datoteke dokaza.',
   'Opgegeven': 'Predano',
-  'Opnieuw verbinden': 'Ponovno poveži',
-  'Portefeuille koppelen': 'Poveži novčanik',
-  'Portefeuille verbinden': 'Poveži novčanik',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Odaberite vjerodajnice koje želite dijeliti kao dokaz. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Zatvorite prozor pružatelja novčanika za nastavak.',
   'Toegekend op {datum}': 'Dodijeljeno {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Dopušteni formati: PNG, JPEG, WebP i PDF. ',
@@ -2972,14 +3094,9 @@ const _dutchSourceAddHr = <String, String>{
       'Datoteke dokaza su datoteke koje predajete za značku. Pregled prikazuje naziv datoteke, kontrolni kod, status i osobu koja ju je ocijenila. Same datoteke nisu u ovom pregledu; ocjenjivač ih može pregledati.',
   'Bezig met versturen…': 'Slanje…',
   'Datum kiezen': 'Odaberi datum',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Veza je prekinuta. Možete se ponovno povezati.',
-  'Deze functie is nog niet beschikbaar. ': 'Ova funkcija još nije dostupna. ',
   'Externe portefeuille': 'Vanjski novčanik',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Prihvaćeno. Datoteka dokaza je odobrena.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'U ovom novčaniku nisu pronađene vjerodajnice.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Za ovu organizaciju nije pronađen profil sudionika.',
   'Geldig tot {datum}': 'Vrijedi do {datum}',

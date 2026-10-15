@@ -2514,6 +2514,154 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Certificaatnummer: {nummer}': 'Sertifika numarası: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Değerlendirici artık bu parçayı göremez. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Bu davet {adres} adresine ait.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Bu sizin takvim bağlantınız. Burada yalnızca bir kez gösterilir — yapıştırın ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Mevcut rozetleri ve sertifikaları harici bir ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Kuruluşunuz tarafından geri çekildi: {reden}',
+  'Uitgegeven op {datum}': 'Verilme tarihi: {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Takviminiz {datum} tarihine kadar bağlı.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Takvim bağlantınız {datum} tarihinde sona eriyor. Durmadan önce bağlantıyı yenileyin.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Kuruluşunuzun zaten “{naam}” adlı bir teması var. Bu temayı kendi sürümünüzle güncellemek ister misiniz?',
+  '“{naam}” delen met de organisatie': '“{naam}” öğesini kuruluşla paylaş',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” kuruluşunuz için görünür olur.',
+  'Aanmelden': 'Giriş yap',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Giriş başarısız oldu. Aşağıda tekrar deneyin.',
+  'Agenda koppelen': 'Takvimi bağla',
+  'Agenda-koppeling intrekken?': 'Takvim bağlantısı geri çekilsin mi?',
+  'Agenda-link vernieuwen?': 'Takvim bağlantısı yenilensin mi?',
+  'Alle eisen zijn vervuld.': 'Tüm gereksinimler karşılandı.',
+  'Bekijken': 'Görüntüle',
+  'Bewaren': 'Kaydet',
+  'Bewijsstuk intrekken?': 'Kanıt geri çekilsin mi?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Güncelleme başarısız oldu. Tekrar deneyin.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Sertifikalar, kuruluşunuz onları verdiği anda burada görünür.',
+  'Credential-bestand kiezen': 'Kimlik bilgisi dosyası seçin',
+  'Credentials ophalen…': 'Kimlik bilgileri alınıyor…',
+  'Cursus': 'Kurs',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Bu, kimlik bilgisine giden geçerli bir HTTPS bağlantısı değil.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Bu işe yaramadı. Tekrar deneyin.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'İşlem başarısız oldu. Tekrar deneyin.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Resim çok büyük. Daha küçük bir dosya seçin.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Değerlendirici artık bu parçayı göremez. Daha sonra yeniden kanıt sunabilirsiniz.',
+  'De bron bevat geen leesbare credentials.':
+      'Kaynak okunabilir kimlik bilgisi içermiyor.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Davet numarası ve kodu kombinasyonu doğru değil ya da davetin süresi dolmuş veya zaten kullanılmış.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Bağlantı başarısız oldu. Tekrar deneyin.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Kuruluş ve diğer katılımcılar artık hesabınızda fotoğraf göremez.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Kuruluşun henüz kendi temaları yok.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Eski bağlantı artık çalışmaz. Yeni bağlantıyı takvim uygulamanıza tekrar yapıştırın.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profil fotoğrafı kaydedilmedi. Tekrar deneyin.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Kuruluşun temaları alınamadı.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Davet kabul edildi. Kuruluş artık hesabınıza bağlı.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Parolalar aynı değil.',
+  'Delen': 'Paylaş',
+  'Delen als bewijs': 'Kanıt olarak paylaş',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Paylaşım başarısız oldu. Tekrar deneyin.',
+  'Dit is de volledige definitie die meegaat:':
+      'Bununla birlikte giden tam tanım budur:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Bu sizin takvim bağlantınız. Burada yalnızca bir kez gösterilir — takvim uygulamanıza yapıştırın. Bağlantıya sahip herkes randevularınızı görebilir; bu yüzden paylaşmayın.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Bu stil profili paylaşılamayacak kadar büyük.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Bu tema yerleşiktir veya bir kurs tarafından kullanılıyor ve silinemez.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Bu tema alınamadı — biçim doğru değil.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Kuruluşta bu adla bir tema zaten var.',
+  'Geen credentials gevonden in deze bron.':
+      'Bu kaynakta kimlik bilgisi bulunamadı.',
+  'Gereed': 'Tamam',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Mevcut rozetleri ve sertifikaları harici bir cüzdandan alın ve kanıt olarak paylaşın. Neyi paylaşacağınıza siz karar verirsiniz.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Sertifika kaydedilemedi. Tekrar deneyin.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Sertifika alınamadı. Tekrar deneyin.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Paylaşım başarısız oldu. Kanıt türünü kontrol edip tekrar deneyin.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Geri çekme başarısız oldu. Tekrar deneyin.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Geri çekme işlemi başarısız oldu. Tekrar deneyin.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Bir başkası bu temayı az önce değiştirdi. Üzerine yazılsın mı, yoksa kuruluşun sürümü mü alınsın?',
+  'Ingebouwd': 'Yerleşik',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Kuruluşunuz tarafından geri çekildi. Bu beyan artık geçerli değil.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'En fazla 5 MB boyutunda bir PNG, JPEG veya WebP resmi seçin.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'En az 12 karakterli bir parola seçin.',
+  'Koppelen': 'Bağla',
+  'Link gekopieerd.': 'Bağlantı kopyalandı.',
+  'Naam is al in gebruik': 'Ad zaten kullanılıyor',
+  'Nieuwe link': 'Yeni bağlantı',
+  'Nieuwe profielfoto kiezen': 'Yeni profil fotoğrafı seçin',
+  'Nog geen certificaten.': 'Henüz sertifika yok.',
+  'Nog nodig voor deze badge': 'Bu rozet için hâlâ gerekli',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Alma işlemi başarısız oldu. Bağlantıyı kontrol edip tekrar deneyin.',
+  'Profielfoto kiezen': 'Profil fotoğrafı seçin',
+  'Profielfoto verwijderen': 'Profil fotoğrafını kaldır',
+  'Profielfoto wijzigen': 'Profil fotoğrafını değiştir',
+  'Publieke verificatielink': 'Herkese açık doğrulama bağlantısı',
+  'Registreren en aanmelden': 'Kaydol ve giriş yap',
+  'Serverversie overnemen': 'Sunucu sürümünü al',
+  'Stijlprofiel delen met de organisatie?':
+      'Stil profili kuruluşla paylaşılsın mı?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Çok fazla deneme. Biraz bekleyip tekrar deneyin.',
+  'Thema’s van de organisatie': 'Kuruluşun temaları',
+  'Tussendoor gewijzigd': 'Bu arada değiştirildi',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Kaydoldunuz ve giriş yaptınız. Hoş geldiniz!',
+  'Uitgegeven': 'Verildi',
+  'Uitnodiging accepteren': 'Daveti kabul et',
+  'Uitnodiging gebruiken': 'Daveti kullan',
+  'Uitnodigingscode': 'Davet kodu',
+  'Uitnodigingsnummer': 'Davet numarası',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Hesabınız oluşturuldu. Şimdi davet edilen adres ve yeni parolanızla giriş yapın.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Hesabınız bu kuruluşta tema yönetemez.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Takvim uygulamanız artık toplantılara erişemez. Randevuların kendisi durmaya devam eder.',
+  'Uw naam': 'Adınız',
+  'Verwijderen bij de organisatie': 'Kuruluşta sil',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Silme işlemi başarısız oldu. Tekrar deneyin.',
+  'Vul uw naam in.': 'Adınızı girin.',
+  'Wachtwoord herhalen': 'Parolayı tekrarla',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Toplantılarınızı kendi takviminize koyun — değişiklik ve iptallerde güncellenir.',
   'Aanvulling gevraagd': 'Ek bilgi istendi',
   'Aanvulling gevraagd.': 'Ek bilgi istendi.',
   'Aanvulling gevraagd: {opmerking}': 'Ek bilgi istendi: {opmerking}',
@@ -3787,42 +3935,26 @@ const _dutchSourceAddTr = <String, String>{
   'Uw antwoord': 'Cevabınız',
   'Antwoord indienen': 'Cevabı gönder',
   'Geen verbinding': 'Bağlantı yok',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Bu cüzdandaki kimlik bilgilerini artık paylaşmayacaksınız. ',
   'U hebt nog geen badges.': 'Henüz rozetiniz yok.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Harici bir cüzdandaki (EduBadges gibi) kanıtları ',
   'U levert bewijs aan voor: {badge}': '{badge} için kanıt gönderiyorsunuz',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Bu kanıt dosyasını değerlendirilmek üzere gönderiyorsunuz. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Oturum açmanız için cüzdan sağlayıcısına yönlendirileceksiniz. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Dosyanız "gönderildi, henüz kontrol edilmedi" olarak işaretlenecek ',
-  'Verbinding maken…': 'Bağlanıyor…',
-  'Verbinding verbreken': 'Bağlantıyı kes',
-  'Verbinding verbreken?': 'Bağlantı kesilsin mi?',
-  'Verbonden met {provider}': '{provider} ile bağlantı kuruldu',
-  'Verbreken': 'Bağlantıyı kes',
   'Verlopen': 'Süresi doldu',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Silme talebinde bulunursanız kanıt dosyalarınız ve bunlarla ilişkili değerlendirmeler silinir. Silme kaydındaki saklama kuralları, devam eden bir saklama yükümlülüğü nedeniyle geride herhangi bir veri kalıp kalmayacağını gösterir.',
   'Wordt verzonden zodra je online bent.':
       'Çevrimiçi olduğunuzda gönderilecek.',
   'portefeuille': 'cüzdan',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} kimlik bilgisi paylaşmak üzere seçildi',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       '{datum} tarihinden beri değerlendirme aşamasında. Genellikle iki iş günü içinde tamamlanır.',
   'Kies een bestand om aan te leveren.': 'Göndermek için bir dosya seçin.',
-  'Kies wat u deelt': 'Ne paylaşacağınızı seçin',
   'Kies welke credentials u deelt als bewijs:':
       'Kanıt olarak paylaşacağınız kimlik bilgilerini seçin:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Kanıtınız yüklenemedi. Lütfen tekrar deneyin.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Harici bir cüzdan bağlayarak mevcut rozetlerinizi ve ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Kanıt süresiz geçerliyse boş bırakın. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3831,17 +3963,8 @@ const _dutchSourceAddTr = <String, String>{
   'Mijn badges': 'Rozetlerim',
   'Mijn bewijs': 'Kanıtlarım',
   'Mijn bewijsstukken': 'Kanıt dosyalarım',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Oturum açtıktan sonra, sonraki adımda hangi kimlik bilgilerini paylaşacağınızı seçersiniz. ',
   'Nog geen bewijsstukken aangeleverd.': 'Henüz kanıt dosyası gönderilmedi.',
   'Opgegeven': 'Gönderildi',
-  'Opnieuw verbinden': 'Yeniden bağlan',
-  'Portefeuille koppelen': 'Cüzdanı bağla',
-  'Portefeuille verbinden': 'Cüzdanı bağla',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Kanıt olarak paylaşmak istediğiniz kimlik bilgilerini seçin. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Devam etmek için cüzdan sağlayıcısının penceresini kapatın.',
   'Toegekend op {datum}': '{datum} tarihinde verildi',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'İzin verilen biçimler: PNG, JPEG, WebP ve PDF. ',
@@ -3864,14 +3987,9 @@ const _dutchSourceAddTr = <String, String>{
       'Kanıt dosyaları, bir rozet için gönderdiğiniz belgelerdir. Genel bakışta dosya adı, sağlama toplamı, durum ve değerlendiren kişi gösterilir. Dosyaların kendileri bu genel bakışta yer almaz; ancak değerlendiren kişi onları görüntüleyebilir.',
   'Bezig met versturen…': 'Gönderiliyor…',
   'Datum kiezen': 'Tarih seç',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Bağlantı kesildi. Yeniden bağlanabilirsiniz.',
-  'Deze functie is nog niet beschikbaar. ': 'Bu özellik henüz kullanılamıyor. ',
   'Externe portefeuille': 'Harici cüzdan',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Kabul edildi. Kanıt dosyası onaylandı.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Bu cüzdanda kimlik bilgisi bulunamadı.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Bu kuruluş için katılımcı profili bulunamadı.',
   'Geldig tot {datum}': '{datum} tarihine kadar geçerli',

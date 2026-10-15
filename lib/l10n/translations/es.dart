@@ -649,6 +649,154 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Certificaatnummer: {nummer}': 'Número de certificado: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'El evaluador ya no verá esta pieza. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Esta invitación pertenece a {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Este es su enlace de calendario. Se muestra aquí una sola vez — péguelo ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Obtenga insignias y certificados existentes de una ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Retirado por su organización: {reden}',
+  'Uitgegeven op {datum}': 'Emitido el {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Su calendario está vinculado hasta {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Su enlace de calendario caduca el {datum}. Renueve el enlace antes de que deje de funcionar.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Su organización ya tiene un tema “{naam}”. ¿Desea actualizar ese tema con su versión?',
+  '“{naam}” delen met de organisatie': 'Compartir “{naam}” con la organización',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” se vuelve visible para su organización.',
+  'Aanmelden': 'Iniciar sesión',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'No se pudo iniciar sesión. Inténtelo de nuevo abajo.',
+  'Agenda koppelen': 'Vincular calendario',
+  'Agenda-koppeling intrekken?': '¿Revocar la vinculación del calendario?',
+  'Agenda-link vernieuwen?': '¿Renovar el enlace del calendario?',
+  'Alle eisen zijn vervuld.': 'Se cumplen todos los requisitos.',
+  'Bekijken': 'Ver',
+  'Bewaren': 'Guardar',
+  'Bewijsstuk intrekken?': '¿Retirar la evidencia?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'La actualización no se ha podido realizar. Inténtelo de nuevo.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Los certificados aparecen aquí en cuanto su organización los emita.',
+  'Credential-bestand kiezen': 'Elegir archivo de credenciales',
+  'Credentials ophalen…': 'Obteniendo credenciales…',
+  'Cursus': 'Curso',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Ese no es un enlace HTTPS válido a una credencial.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'No ha funcionado. Inténtelo de nuevo.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'La acción no se ha podido completar. Inténtelo de nuevo.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'La imagen es demasiado grande. Elija un archivo más pequeño.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'El evaluador ya no verá esta pieza. Puede aportar nuevas pruebas más adelante.',
+  'De bron bevat geen leesbare credentials.':
+      'La fuente no contiene credenciales legibles.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'La combinación de número de invitación y código no es correcta, o la invitación ha caducado o ya se ha utilizado.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'La vinculación no se ha podido realizar. Inténtelo de nuevo.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'La organización y otros participantes ya no verán ninguna foto en su cuenta.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'La organización aún no tiene temas propios.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'El enlace antiguo dejará de funcionar. Pegue de nuevo el nuevo enlace en su aplicación de calendario.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'La foto de perfil no se ha guardado. Inténtelo de nuevo.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'No se pudieron obtener los temas de la organización.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'La invitación ha sido aceptada. La organización ahora está asociada a su cuenta.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Las contraseñas no coinciden.',
+  'Delen': 'Compartir',
+  'Delen als bewijs': 'Compartir como evidencia',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'No se pudo compartir. Inténtelo de nuevo.',
+  'Dit is de volledige definitie die meegaat:':
+      'Esta es la definición completa que se incluye:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Este es su enlace de calendario. Se muestra aquí una sola vez — péguelo en su aplicación de calendario. Cualquiera que tenga el enlace puede ver sus citas; no lo comparta.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Este perfil de estilo es demasiado grande para compartir.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Este tema está integrado o lo usa un curso y no se puede eliminar.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Este tema no se pudo adoptar — el formato no es correcto.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Ya existe un tema con este nombre en la organización.',
+  'Geen credentials gevonden in deze bron.':
+      'No se encontraron credenciales en esta fuente.',
+  'Gereed': 'Listo',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Obtenga insignias y certificados existentes de una cartera externa y compártalos como evidencia. Usted elige qué compartir.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'El certificado no se pudo guardar. Inténtelo de nuevo.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'El certificado no se pudo obtener. Inténtelo de nuevo.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'La acción de compartir ha fallado. Compruebe el tipo de evidencia e inténtelo de nuevo.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'La retirada ha fallado. Inténtelo de nuevo.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'La retirada no se ha podido realizar. Inténtelo de nuevo.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Otra persona acaba de modificar este tema. ¿Sobrescribir o adoptar la versión de la organización?',
+  'Ingebouwd': 'Integrado',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Retirado por su organización. Esta declaración ya no es válida.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Elija una imagen PNG, JPEG o WebP de 5 MB como máximo.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Elija una contraseña de al menos 12 caracteres.',
+  'Koppelen': 'Vincular',
+  'Link gekopieerd.': 'Enlace copiado.',
+  'Naam is al in gebruik': 'El nombre ya está en uso',
+  'Nieuwe link': 'Nuevo enlace',
+  'Nieuwe profielfoto kiezen': 'Elegir nueva foto de perfil',
+  'Nog geen certificaten.': 'Aún no hay certificados.',
+  'Nog nodig voor deze badge': 'Aún necesario para esta insignia',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'La obtención ha fallado. Compruebe el enlace e inténtelo de nuevo.',
+  'Profielfoto kiezen': 'Elegir foto de perfil',
+  'Profielfoto verwijderen': 'Eliminar foto de perfil',
+  'Profielfoto wijzigen': 'Cambiar foto de perfil',
+  'Publieke verificatielink': 'Enlace de verificación público',
+  'Registreren en aanmelden': 'Registrarse e iniciar sesión',
+  'Serverversie overnemen': 'Adoptar la versión del servidor',
+  'Stijlprofiel delen met de organisatie?':
+      '¿Compartir el perfil de estilo con la organización?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Demasiados intentos. Espere un momento e inténtelo de nuevo.',
+  'Thema’s van de organisatie': 'Temas de la organización',
+  'Tussendoor gewijzigd': 'Modificado mientras tanto',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Está registrado y ha iniciado sesión. ¡Bienvenido!',
+  'Uitgegeven': 'Emitido',
+  'Uitnodiging accepteren': 'Aceptar invitación',
+  'Uitnodiging gebruiken': 'Usar invitación',
+  'Uitnodigingscode': 'Código de invitación',
+  'Uitnodigingsnummer': 'Número de invitación',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Su cuenta ha sido creada. Inicie sesión ahora con la dirección invitada y su nueva contraseña.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Su cuenta no puede gestionar temas en esta organización.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Su aplicación de calendario ya no podrá acceder a las reuniones. Las citas en sí permanecen.',
+  'Uw naam': 'Su nombre',
+  'Verwijderen bij de organisatie': 'Eliminar en la organización',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'No se pudo eliminar. Inténtelo de nuevo.',
+  'Vul uw naam in.': 'Introduzca su nombre.',
+  'Wachtwoord herhalen': 'Repetir contraseña',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Ponga sus reuniones en su propio calendario — actualizado ante cambios y cancelaciones.',
   'Aanvulling gevraagd': 'Se solicita información adicional',
   'Aanvulling gevraagd.': 'Se solicita información adicional.',
   'Aanvulling gevraagd: {opmerking}':
@@ -1946,42 +2094,26 @@ const _dutchSourceAddEs = {
   'Uw antwoord': 'tu respuesta',
   'Antwoord indienen': 'Enviar respuesta',
   'Geen verbinding': 'Sin conexión',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Entonces ya no compartirá credenciales desde esta cartera. ',
   'U hebt nog geen badges.': 'Aún no tiene insignias.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Puede utilizar pruebas de una cartera externa (como EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Está enviando pruebas para: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Está enviando este documento de prueba para su evaluación. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Será redirigido al proveedor de la cartera para iniciar sesión. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Su archivo se marcará como "enviado, aún no comprobado" ',
-  'Verbinding maken…': 'Conectando…',
-  'Verbinding verbreken': 'Desconectar',
-  'Verbinding verbreken?': '¿Desconectar?',
-  'Verbonden met {provider}': 'Conectado con {provider}',
-  'Verbreken': 'Desconectar',
   'Verlopen': 'Caducado',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Si solicita la eliminación, sus documentos de prueba y las evaluaciones asociadas desaparecerán. Las reglas de conservación del registro de eliminaciones muestran si queda algún remanente por una obligación de conservación en curso.',
   'Wordt verzonden zodra je online bent.':
       'Se enviará en cuanto esté en línea.',
   'portefeuille': 'cartera',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} credencial(es) seleccionada(s) para compartir',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'En trámite desde {datum}. Normalmente en un plazo de dos días laborables.',
   'Kies een bestand om aan te leveren.': 'Elija un archivo para enviar.',
-  'Kies wat u deelt': 'Elija qué comparte',
   'Kies welke credentials u deelt als bewijs:':
       'Elija qué credenciales comparte como prueba:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'No se pudieron cargar sus pruebas. Inténtelo de nuevo.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Conecte una cartera externa para usar sus insignias existentes y ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Déjelo vacío si la prueba tiene validez indefinida. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -1990,18 +2122,9 @@ const _dutchSourceAddEs = {
   'Mijn badges': 'Mis insignias',
   'Mijn bewijs': 'Mis pruebas',
   'Mijn bewijsstukken': 'Mis documentos de prueba',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Después de iniciar sesión, en el siguiente paso elige qué credenciales comparte. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Aún no se han enviado documentos de prueba.',
   'Opgegeven': 'Enviado',
-  'Opnieuw verbinden': 'Volver a conectar',
-  'Portefeuille koppelen': 'Vincular cartera',
-  'Portefeuille verbinden': 'Conectar cartera',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Seleccione las credenciales que desea compartir como prueba. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Cierre la ventana del proveedor de la cartera para continuar.',
   'Toegekend op {datum}': 'Concedido el {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Formatos permitidos: PNG, JPEG, WebP y PDF. ',
@@ -2024,15 +2147,9 @@ const _dutchSourceAddEs = {
       'Las evidencias son documentos que envías para una insignia. El resumen muestra el nombre del archivo, la suma de comprobación, el estado y quién lo evaluó. Los archivos mismos no están en este resumen; un evaluador puede verlos.',
   'Bezig met versturen…': 'Enviando…',
   'Datum kiezen': 'Elegir fecha',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'La conexión se ha interrumpido. Puede reconectar.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Esta función aún no está disponible. ',
   'Externe portefeuille': 'Cartera externa',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Aceptado. La evidencia ha sido aprobada.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'No se encontraron credenciales en esta cartera.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'No se encontró perfil de participante para esta organización.',
   'Geldig tot {datum}': 'Válido hasta {datum}',

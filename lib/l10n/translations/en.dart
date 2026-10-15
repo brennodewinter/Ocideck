@@ -812,6 +812,154 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Certificaatnummer: {nummer}': 'Certificate number: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'The assessor will then no longer see this piece. ',
+  'Deze uitnodiging hoort bij {adres}.': 'This invitation belongs to {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'This is your calendar link. It is shown here only once — paste it ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Fetch existing badges and certificates from an external ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Revoked by your organisation: {reden}',
+  'Uitgegeven op {datum}': 'Issued on {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Your calendar is linked until {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Your calendar link expires on {datum}. Renew the link before it stops.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Your organisation already has a theme “{naam}”. Do you want to update that theme with your version?',
+  '“{naam}” delen met de organisatie': 'Share “{naam}” with the organisation',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” becomes visible to your organisation.',
+  'Aanmelden': 'Sign in',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Sign-in failed. Try again below.',
+  'Agenda koppelen': 'Connect calendar',
+  'Agenda-koppeling intrekken?': 'Revoke calendar connection?',
+  'Agenda-link vernieuwen?': 'Renew calendar link?',
+  'Alle eisen zijn vervuld.': 'All requirements are met.',
+  'Bekijken': 'View',
+  'Bewaren': 'Save',
+  'Bewijsstuk intrekken?': 'Withdraw piece of evidence?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Update failed. Please try again.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Certificates appear here as soon as your organisation issues them.',
+  'Credential-bestand kiezen': 'Choose credential file',
+  'Credentials ophalen…': 'Fetching credentials…',
+  'Cursus': 'Course',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'That is not a valid HTTPS link to a credential.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'That didn\'t work. Please try again.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'The action failed. Please try again.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'The image is too large. Choose a smaller file.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'The assessor will then no longer see this piece. You can submit new evidence later.',
+  'De bron bevat geen leesbare credentials.':
+      'The source contains no readable credentials.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'The combination of invitation number and code is incorrect, or the invitation has expired or has already been used.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Linking failed. Please try again.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'The organisation and other participants will then no longer see a photo on your account.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'The organisation does not have any themes of its own yet.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'The old link will then no longer work. Paste the new link into your calendar app again.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'The profile photo was not saved. Please try again.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'The organisation\'s themes could not be retrieved.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'The invitation has been accepted. The organisation is now linked to your account.',
+  'De wachtwoorden zijn niet hetzelfde.': 'The passwords do not match.',
+  'Delen': 'Share',
+  'Delen als bewijs': 'Share as evidence',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Sharing failed. Please try again.',
+  'Dit is de volledige definitie die meegaat:':
+      'This is the full definition that goes with it:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'This is your calendar link. It is shown here only once — paste it into your calendar app. Anyone with the link can see your appointments, so do not share it.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'This style profile is too large to share.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'This theme is built in or in use by a course and cannot be deleted.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'This theme could not be imported — the format is incorrect.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'A theme with this name already exists at the organisation.',
+  'Geen credentials gevonden in deze bron.':
+      'No credentials found in this source.',
+  'Gereed': 'Done',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Fetch existing badges and certificates from an external portfolio and share them as evidence. You choose what you share.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'The certificate could not be saved. Please try again.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'The certificate could not be retrieved. Please try again.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Sharing failed. Check the type of evidence and try again.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'The withdrawal failed. Please try again.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'The withdrawal failed. Please try again.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Someone else has just modified this theme. Overwrite it, or adopt the organisation\'s version?',
+  'Ingebouwd': 'Built-in',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Revoked by your organisation. This statement is no longer valid.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Choose a PNG, JPEG or WebP image of at most 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Choose a password of at least 12 characters.',
+  'Koppelen': 'Connect',
+  'Link gekopieerd.': 'Link copied.',
+  'Naam is al in gebruik': 'Name is already in use',
+  'Nieuwe link': 'New link',
+  'Nieuwe profielfoto kiezen': 'Choose new profile photo',
+  'Nog geen certificaten.': 'No certificates yet.',
+  'Nog nodig voor deze badge': 'Still needed for this badge',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Fetching failed. Check the link and try again.',
+  'Profielfoto kiezen': 'Choose profile photo',
+  'Profielfoto verwijderen': 'Remove profile photo',
+  'Profielfoto wijzigen': 'Change profile photo',
+  'Publieke verificatielink': 'Public verification link',
+  'Registreren en aanmelden': 'Register and sign in',
+  'Serverversie overnemen': 'Adopt server version',
+  'Stijlprofiel delen met de organisatie?':
+      'Share style profile with the organisation?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Too many attempts. Wait a moment and try again.',
+  'Thema’s van de organisatie': 'Organisation themes',
+  'Tussendoor gewijzigd': 'Modified in the meantime',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'You are registered and signed in. Welcome!',
+  'Uitgegeven': 'Issued',
+  'Uitnodiging accepteren': 'Accept invitation',
+  'Uitnodiging gebruiken': 'Use invitation',
+  'Uitnodigingscode': 'Invitation code',
+  'Uitnodigingsnummer': 'Invitation number',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Your account has been created. Now sign in with the invited address and your new password.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Your account may not manage themes at this organisation.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Your calendar app can then no longer access the meetings. The appointments themselves remain.',
+  'Uw naam': 'Your name',
+  'Verwijderen bij de organisatie': 'Delete at the organisation',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Deleting failed. Please try again.',
+  'Vul uw naam in.': 'Enter your name.',
+  'Wachtwoord herhalen': 'Repeat password',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Put your meetings in your own calendar — updated when changes and cancellations occur.',
   'Aanvulling gevraagd': 'More information requested',
   'Aanvulling gevraagd.': 'More information requested.',
   'Aanvulling gevraagd: {opmerking}': 'More information requested: {opmerking}',
@@ -2097,43 +2245,27 @@ const _dutchSourceAddEn = {
   'Uw antwoord': 'Your answer',
   'Antwoord indienen': 'Submit answer',
   'Geen verbinding': 'No connection',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'You will no longer share credentials from this portfolio. ',
   'U hebt nog geen badges.': 'You do not have any badges yet.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'You can use evidence from an external portfolio (such as EduBadges) ',
   'U levert bewijs aan voor: {badge}':
       'You are submitting evidence for: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'You are submitting this evidence file for assessment. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'You will be redirected to the portfolio provider to log in. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Your file will be marked as "submitted, not yet checked" ',
-  'Verbinding maken…': 'Connecting…',
-  'Verbinding verbreken': 'Disconnect',
-  'Verbinding verbreken?': 'Disconnect?',
-  'Verbonden met {provider}': 'Connected to {provider}',
-  'Verbreken': 'Disconnect',
   'Verlopen': 'Expired',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'If you request deletion, your evidence files and the associated assessments will disappear. Retention rules in the deletion register show whether a remainder stays for an ongoing retention obligation.',
   'Wordt verzonden zodra je online bent.':
       'Will be sent as soon as you are online.',
   'portefeuille': 'portfolio',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} credential(s) selected to share',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Pending since {datum}. Usually within two working days.',
   'Kies een bestand om aan te leveren.': 'Choose a file to submit.',
-  'Kies wat u deelt': 'Choose what you share',
   'Kies welke credentials u deelt als bewijs:':
       'Choose which credentials you share as evidence:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Could not load your evidence. Please try again.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Connect an external portfolio to use your existing badges and ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Leave empty if the evidence is valid indefinitely. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2142,17 +2274,8 @@ const _dutchSourceAddEn = {
   'Mijn badges': 'My badges',
   'Mijn bewijs': 'My evidence',
   'Mijn bewijsstukken': 'My evidence files',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'After logging in, you choose in the next step which credentials you share. ',
   'Nog geen bewijsstukken aangeleverd.': 'No evidence files submitted yet.',
   'Opgegeven': 'Submitted',
-  'Opnieuw verbinden': 'Reconnect',
-  'Portefeuille koppelen': 'Connect portfolio',
-  'Portefeuille verbinden': 'Connect portfolio',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Select the credentials you want to share as evidence. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Close the portfolio provider window to continue.',
   'Toegekend op {datum}': 'Awarded on {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Allowed formats: PNG, JPEG, WebP and PDF. ',
@@ -2175,15 +2298,9 @@ const _dutchSourceAddEn = {
       'Evidence files are documents you submit for a badge. The overview shows the filename, checksum, status and who assessed it. The files themselves are not in this overview; an assessor can view them.',
   'Bezig met versturen…': 'Sending…',
   'Datum kiezen': 'Choose date',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'The connection has been broken. You can reconnect.',
-  'Deze functie is nog niet beschikbaar. ':
-      'This feature is not yet available. ',
   'Externe portefeuille': 'External portfolio',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Accepted. The evidence file has been approved.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'No credentials found in this portfolio.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'No participant profile found for this organisation.',
   'Geldig tot {datum}': 'Valid until {datum}',
