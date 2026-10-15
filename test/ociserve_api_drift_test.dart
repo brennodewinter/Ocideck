@@ -358,6 +358,45 @@ const gatewayRoutes = <GatewayRoute>[
   ),
   GatewayRoute(
     method: 'GET',
+    path: '/api/v1/organizations/{}/evidence-types/{}/versions',
+    responseSchema: 'EvidenceTypeVersionList',
+    responseFields: ['versions', 'versions.id', 'versions.version'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/participants/{}/evidence-items/{}/withdraw',
+    responseSchema: 'EvidenceItemResponse',
+    responseFields: ['id', 'content_status'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/participants/{}/portfolio-imports',
+    responseSchema: 'PortfolioImportCreateResponse',
+    responseFields: ['import_id'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/portfolio-imports/{}',
+    responseSchema: 'PortfolioImportResponse',
+    responseFields: [
+      'import_id',
+      'status',
+      'items',
+      'items.id',
+      'items.title',
+      'items.issuer_id',
+      'items.selected',
+    ],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path:
+        '/api/v1/organizations/{}/participants/{}/portfolio-imports/{}/select',
+    responseSchema: 'PortfolioImportSelectResponse',
+    responseFields: ['created_item_ids'],
+  ),
+  GatewayRoute(
+    method: 'GET',
     path: '/api/v1/organizations/{}/badges',
     // Returns an external URL — minimal schema check.
   ),

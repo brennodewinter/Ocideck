@@ -23,6 +23,24 @@ abstract class OciServeEvidenceItemApi {
     DateTime? declaredValidUntil,
   });
 
+  /// De gepubliceerde versies van een bewijssoort. De portefeuille-selectie
+  /// (#2423) heeft de versie-id nodig om een bewijsstuk te maken.
+  Future<List<OciServeEvidenceTypeVersion>> evidenceTypeVersions({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceTypeId,
+  });
+
+  /// Trekt een `ingediend` of `in_behandeling` bewijsstuk in. Alleen de
+  /// cursist zelf mag intrekken.
+  Future<OciServeEvidenceItem> withdrawEvidenceItem({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+    required String evidenceItemId,
+    required String idempotencyKey,
+  });
+
   /// De eigen bewijsstukken van de cursist.
   Future<List<OciServeEvidenceItem>> evidenceItems({
     required String accessToken,
@@ -96,6 +114,68 @@ mixin _OciServeEvidenceItems on OciServeGatewayBase {
       return OciServeEvidenceItem.fromJson(_jsonObject(response));
     } catch (error, stack) {
       logError('OciServe: bewijsstuk indienen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<List<OciServeEvidenceTypeVersion>> evidenceTypeVersions({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceTypeId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api([
+        'organizations',
+        organizationId,
+        'evidence-types',
+        evidenceTypeId,
+        'versions',
+      ]),
+      accessToken: accessToken,
+    );
+    try {
+      final raw = _jsonObject(response)['versions'];
+      if (raw is! List) throw const FormatException('type versions');
+      return List.unmodifiable([
+        for (final item in raw)
+          OciServeEvidenceTypeVersion.fromJson(
+            Map<String, Object?>.from(item as Map),
+          ),
+      ]);
+    } catch (error, stack) {
+      logError('OciServe: bewijssoortversies lezen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<OciServeEvidenceItem> withdrawEvidenceItem({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+    required String evidenceItemId,
+    required String idempotencyKey,
+  }) async {
+    final response = await _send(
+      method: 'POST',
+      url: _api([
+        'organizations',
+        organizationId,
+        'participants',
+        participantId,
+        'evidence-items',
+        evidenceItemId,
+        'withdraw',
+      ]),
+      accessToken: accessToken,
+      headers: {'idempotency-key': idempotencyKey},
+    );
+    try {
+      return OciServeEvidenceItem.fromJson(_jsonObject(response));
+    } catch (error, stack) {
+      logError('OciServe: bewijsstuk intrekken', error.runtimeType, stack);
       throw const OciServeException('invalid_response');
     }
   }

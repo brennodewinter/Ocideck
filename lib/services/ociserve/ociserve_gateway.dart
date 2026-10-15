@@ -11,6 +11,7 @@ import '../../models/ociserve_exam.dart';
 import '../../models/ociserve_exam_result.dart';
 import '../../models/ociserve_intake.dart';
 import '../../models/ociserve_models.dart';
+import '../../models/ociserve_portfolio_import.dart';
 import '../../models/ociserve_settings.dart';
 import '../../utils/log.dart';
 import '../../utils/zip_encryption.dart';
@@ -25,6 +26,7 @@ part 'ociserve_gateway_intake.dart';
 part 'ociserve_gateway_evidence_items.dart';
 part 'ociserve_gateway_account.dart';
 part 'ociserve_gateway_skills.dart';
+part 'ociserve_gateway_portfolio.dart';
 
 // Bibliotheekbreed in plaats van op OciServeGatewayBase: statische leden van
 // een klasse zijn voor `part`-mixins niet ongekwalificeerd bereikbaar, en
@@ -47,7 +49,8 @@ abstract class OciServeApi extends OciServePlanningApi
         OciServeIntakeApi,
         OciServeEvidenceItemApi,
         OciServeAccountApi,
-        OciServeSkillsApi {
+        OciServeSkillsApi,
+        OciServePortfolioApi {
   Future<OciServeInstallation> installation();
   Future<OciServeOidcConfiguration> discoverOidc(
     OciServeInstallation installation,
@@ -883,6 +886,7 @@ class OciServeGateway extends OciServeGatewayBase
         _OciServeIntake,
         _OciServeEvidenceItems,
         _OciServeAccount,
-        _OciServeSkills {
+        _OciServeSkills,
+        _OciServePortfolio {
   OciServeGateway({required super.settings, super.transport});
 }

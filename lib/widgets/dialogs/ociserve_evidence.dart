@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:file_selector/file_selector.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,15 +9,18 @@ import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_badge_readiness.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_evidence_item.dart';
-import '../../models/ociserve_portfolio.dart';
 import '../../services/pdf_evidence_service.dart';
 import '../../state/ociserve_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/atomic_file.dart';
 import '../../utils/error_snackbar.dart';
+import '../../utils/log.dart';
 import '../reader/pdf_evidence_viewer.dart';
 import 'ociserve_evidence_review.dart';
 import 'ociserve_evidence_submit.dart';
 import 'ociserve_portfolio_link.dart';
+
+part 'parts/ociserve_evidence_actions.dart';
 
 /// Het bewijsscherm — de vierde bestemming in de eLearning-zijbalk.
 ///
@@ -484,7 +491,21 @@ class OciServeEvidence extends StatelessWidget {
                 ),
               ),
             ],
-            if (upload.isClean &&
+            if (item != null &&
+                (item.status == OciServeEvidenceContentStatus.ingediend ||
+                    item.status ==
+                        OciServeEvidenceContentStatus.inBehandeling)) ...[
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerRight,
+                child: _EvidenceWithdrawButton(
+                  item: item,
+                  organizationId: organizationId,
+                  participantId: participantId,
+                  onWithdrawn: onRefresh,
+                ),
+              ),
+            ] else if (upload.isClean &&
                 upload.declaredType.startsWith('application/pdf')) ...[
               const SizedBox(height: 12),
               Align(
@@ -584,13 +605,6 @@ class OciServeEvidence extends StatelessWidget {
     AppLocalizations l10n,
     ThemeData theme,
   ) {
-    // Until OciServe#524 lands, the portfolio connection is unavailable.
-    // The UI shows the feature exists but is not yet active.
-    const connection = PortfolioConnection(
-      providerId: '',
-      providerName: '',
-      state: PortfolioConnectionState.unavailable,
-    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -605,7 +619,12 @@ class OciServeEvidence extends StatelessWidget {
           margin: EdgeInsets.zero,
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: OciServePortfolioLink(connection: connection),
+            child: OciServePortfolioLink(
+              organizationId: organizationId,
+              participantId: participantId,
+              evidenceTypes: evidenceTypes,
+              onShared: onRefresh,
+            ),
           ),
         ),
       ],
@@ -647,72 +666,4 @@ class OciServeEvidence extends StatelessWidget {
       ),
     );
   }
-}
-
-class _EvidenceOpenButton extends ConsumerStatefulWidget {
-  const _EvidenceOpenButton({
-    required this.upload,
-    required this.organizationId,
-  });
-
-  final EvidenceUpload upload;
-  final String organizationId;
-
-  @override
-  ConsumerState<_EvidenceOpenButton> createState() =>
-      _EvidenceOpenButtonState();
-}
-
-class _EvidenceOpenButtonState extends ConsumerState<_EvidenceOpenButton> {
-  bool _loading = false;
-
-  Future<void> _open() async {
-    setState(() => _loading = true);
-    try {
-      final bytes = await ref
-          .read(ociServeProvider.notifier)
-          .downloadEvidence(
-            organizationId: widget.organizationId,
-            evidenceId: widget.upload.id,
-          );
-      if (!mounted) return;
-      if (!isSupportedPdfEvidence(bytes)) {
-        showErrorSnackBar(
-          ScaffoldMessenger.of(context),
-          context.l10n,
-          bytes.length > maxPdfEvidenceBytes
-              ? context.l10n.d('Dit bestand is te groot om te openen.')
-              : context.l10n.d('Kon dit bestand niet openen.'),
-        );
-        return;
-      }
-      await PdfEvidenceViewer.open(
-        context,
-        bytes: bytes,
-        fileName: widget.upload.filename,
-      );
-    } on Object {
-      if (mounted) {
-        showErrorSnackBar(
-          ScaffoldMessenger.of(context),
-          context.l10n,
-          context.l10n.d('Kon dit bestand niet openen.'),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _loading = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) => FilledButton.tonalIcon(
-    onPressed: _loading ? null : _open,
-    icon: _loading
-        ? const SizedBox.square(
-            dimension: 16,
-            child: CircularProgressIndicator(strokeWidth: 2),
-          )
-        : const Icon(Icons.visibility_outlined),
-    label: Text(context.l10n.d('Openen')),
-  );
 }
