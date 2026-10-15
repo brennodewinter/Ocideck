@@ -652,6 +652,22 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Referentie vastgelegd': 'Referinsje fêstlein',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Net-opsleine wizigingen yn it ljepblêd; SHA-256 kontrolearret de ferzje op skiif.',
+  'Documenten controleren': 'Dokuminten kontrolearje',
+  'Dit nummer is al in gebruik.': 'Dit nûmer is al yn gebrûk.',
+  'Documenten openen': 'Dokuminten iepenje',
+  'Eerdere SHA-256-waarden': 'Eardere SHA-256-wearden',
+  'Omschrijving wijzigen': 'Beskriuwing feroarje',
+  'Beginnummer wijzigen': 'Begjinnûmer feroarje',
+  'Vindplaats': 'Lokaasje',
+  'Laatst gecontroleerd': 'Lêst kontrolearre',
+  'Nummer wijzigen': 'Nûmer feroarje',
+  'Waar gaat dit dossier over?': 'Wêr giet dit dossier oer?',
+  'Nummer': 'Nûmer',
+  'Gebruik een positief getal.': 'Brûk in posityf getal.',
+  'Automatisch nummer': 'Automatysk nûmer',
   'Aanvulling gevraagd': 'Oanfolling fersocht',
   'Aanvulling gevraagd.': 'Oanfolling fersocht.',
   'Aanvulling gevraagd: {opmerking}': 'Oanfolling fersocht: {opmerking}',
@@ -744,8 +760,8 @@ const _dutchSourceAddFy = {
   'Uit dossier verwijderen': 'Ut dossier fuortsmite',
   'Uit dossier verwijderen?': 'Ferjeakke fan it dossier?',
   'Vastgelegde SHA-256': 'De fêste SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Letterjes tafoegen. Se wurde as kopie by dit dossier bewaard en sjen út hjir yn dy wolgeunstige omdieling.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Foegje dokuminten ta. De orizjinele bestannen bliuwe op harren plak. Hjir bepaalst de folchoarder.',
   'Wijziging opslaan is mislukt.': 'De ferozijing opslove is mislearre.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Wilje jo de byleafen op tabbladen opnimme?',

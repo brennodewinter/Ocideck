@@ -1626,6 +1626,22 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Referentie vastgelegd': 'Препратката е записана',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Незапазени промени в раздела; SHA-256 проверява версията на диска.',
+  'Documenten controleren': 'Проверка на документи',
+  'Dit nummer is al in gebruik.': 'Този номер вече се използва.',
+  'Documenten openen': 'Отвори документи',
+  'Eerdere SHA-256-waarden': 'Предишни стойности на SHA-256',
+  'Omschrijving wijzigen': 'Промяна на описанието',
+  'Beginnummer wijzigen': 'Промяна на началния номер',
+  'Vindplaats': 'Местоположение',
+  'Laatst gecontroleerd': 'Последна проверка',
+  'Nummer wijzigen': 'Промяна на номера',
+  'Waar gaat dit dossier over?': 'За какво е това досие?',
+  'Nummer': 'Номер',
+  'Gebruik een positief getal.': 'Използвайте положително число.',
+  'Automatisch nummer': 'Автоматичен номер',
   'Aanvulling gevraagd': 'Поискано е допълване',
   'Aanvulling gevraagd.': 'Поискано е допълване.',
   'Aanvulling gevraagd: {opmerking}': 'Поискано е допълване: {opmerking}',
@@ -1717,8 +1733,8 @@ const _dutchSourceAddBg = <String, String>{
   'Uit dossier verwijderen': 'Премахни от досието',
   'Uit dossier verwijderen?': 'Искате ли да изтриете от папката?',
   'Vastgelegde SHA-256': 'Записаната SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Добавете документи. Те ще бъдат запазени като копия в тази папка и ще се показват тук в желания от вас ред.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Добавете документи към колекцията. Оригиналните файлове остават в първоначалното си местоположение. Можете да изберете реда на показване тук.',
   'Wijziging opslaan is mislukt.': 'Не успя да запазите промените.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Искате ли да отворите приложенията и в раздели?',

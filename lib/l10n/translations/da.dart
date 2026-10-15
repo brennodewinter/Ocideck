@@ -1606,6 +1606,22 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Referentie vastgelegd': 'Henvisningen er registreret.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Ikke-gemte ændringer i fanen; SHA-256 kontrollerer versionen på disken.',
+  'Documenten controleren': 'Kontrollerer dokumenter',
+  'Dit nummer is al in gebruik.': 'Dette nummer er allerede i brug.',
+  'Documenten openen': 'Åbn dokumenter',
+  'Eerdere SHA-256-waarden': 'Tidligere SHA-256-værdier',
+  'Omschrijving wijzigen': 'Rediger beskrivelse',
+  'Beginnummer wijzigen': 'Skift startnummer',
+  'Vindplaats': 'Placering',
+  'Laatst gecontroleerd': 'Sidst kontrolleret',
+  'Nummer wijzigen': 'Skift nummer',
+  'Waar gaat dit dossier over?': 'Hvad handler denne sag om?',
+  'Nummer': 'Nummer',
+  'Gebruik een positief getal.': 'Brug et positivt tal.',
+  'Automatisch nummer': 'Automatisk nummer',
   'Aanvulling gevraagd': 'Supplering ønskes',
   'Aanvulling gevraagd.': 'Supplering ønskes.',
   'Aanvulling gevraagd: {opmerking}': 'Supplering ønskes: {opmerking}',
@@ -1697,8 +1713,8 @@ const _dutchSourceAddDa = <String, String>{
   'Uit dossier verwijderen': 'Fjern fra dossier',
   'Uit dossier verwijderen?': 'Fjern fra dossiér?',
   'Vastgelegde SHA-256': 'Fastlagt SHA-256-værdi',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Tilføj dokumenter. De gemmes som kopier i denne dossiér og vises her i din rækkefølge.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Tilføj dokumenter til samlingen. De originale filer forbliver i deres oprindelige mappe. Du kan vælge, hvordan dokumenterne vises her.',
   'Wijziging opslaan is mislukt.': 'Ændringen blev ikke gemt.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Vil du åbne bilagene i faner?',

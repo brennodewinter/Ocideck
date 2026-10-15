@@ -1634,6 +1634,22 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Referentie vastgelegd': 'A referência está registrada.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Alterações não guardadas no separador; SHA-256 verifica a versão no disco.',
+  'Documenten controleren': 'Verificação de documentos',
+  'Dit nummer is al in gebruik.': 'Este número já está em uso.',
+  'Documenten openen': 'Abrir documentos',
+  'Eerdere SHA-256-waarden': 'Valores SHA-256 anteriores',
+  'Omschrijving wijzigen': 'Alterar descrição',
+  'Beginnummer wijzigen': 'Alterar número inicial',
+  'Vindplaats': 'Localização',
+  'Laatst gecontroleerd': 'Última verificação',
+  'Nummer wijzigen': 'Alterar número',
+  'Waar gaat dit dossier over?': 'Sobre o que é este dossiê?',
+  'Nummer': 'Número',
+  'Gebruik een positief getal.': 'Use um número positivo.',
+  'Automatisch nummer': 'Número automático',
   'Aanvulling gevraagd': 'Complemento solicitado',
   'Aanvulling gevraagd.': 'Complemento solicitado.',
   'Aanvulling gevraagd: {opmerking}': 'Complemento solicitado: {opmerking}',
@@ -1724,8 +1740,8 @@ const _dutchSourceAddPt = <String, String>{
   'Uit dossier verwijderen': 'Remover do dossiê',
   'Uit dossier verwijderen?': 'Remover do dossiêrio?',
   'Vastgelegde SHA-256': 'Hash SHA-256 aplicado',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Adicione documentos. Eles serão armazenados como cópias neste dossiêrio e aparecerão aqui na sua ordem.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Adicione documentos. Os ficheiros originais permanecem no seu local. Escolha aqui a ordem.',
   'Wijziging opslaan is mislukt.': 'A alteração não foi salva.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Deseja abrir os anexos em abas?',

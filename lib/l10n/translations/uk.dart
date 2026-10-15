@@ -1621,6 +1621,22 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Referentie vastgelegd': 'Посилання зафіксовано',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Незбережені зміни у вкладці; SHA-256 перевіряє версію на диску.',
+  'Documenten controleren': 'Перевірка документів',
+  'Dit nummer is al in gebruik.': 'Цей номер уже використовується.',
+  'Documenten openen': 'Відкрити документи',
+  'Eerdere SHA-256-waarden': 'Попередні значення SHA-256',
+  'Omschrijving wijzigen': 'Змінити опис',
+  'Beginnummer wijzigen': 'Змінити початковий номер',
+  'Vindplaats': 'Розташування',
+  'Laatst gecontroleerd': 'Востаннє перевірено',
+  'Nummer wijzigen': 'Змінити номер',
+  'Waar gaat dit dossier over?': 'Про що це досьє?',
+  'Nummer': 'Номер',
+  'Gebruik een positief getal.': 'Використовуйте додатне число.',
+  'Automatisch nummer': 'Автоматичний номер',
   'Aanvulling gevraagd': 'Запит на доповнення',
   'Aanvulling gevraagd.': 'Запитано доповнення.',
   'Aanvulling gevraagd: {opmerking}': 'Запит на доповнення: {opmerking}',
@@ -1710,8 +1726,8 @@ const _dutchSourceAddUk = <String, String>{
   'Uit dossier verwijderen': 'Вилучити з досьє',
   'Uit dossier verwijderen?': 'Видалити з файлу?',
   'Vastgelegde SHA-256': 'Зафіксований SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Додайте документи. Вони будуть збережені як копії до цього файлу та відображатимуться тут у вашому порядку.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Додайте документи до колекції. Оригінальні файли залишаться в початкових папках. Ви можете вибрати порядок їх відображення тут.',
   'Wijziging opslaan is mislukt.': 'Збереження змін не вдалося.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Бажаєте відкривати додатки також у вкладках?',

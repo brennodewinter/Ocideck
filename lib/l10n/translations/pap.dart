@@ -651,6 +651,22 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Referentie vastgelegd': 'Referensiya rekordá.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Kambionan no warda den tab; SHA-256 ta kontrolá e vershon riba disko.',
+  'Documenten controleren': 'Kontrolá dokumentonan',
+  'Dit nummer is al in gebruik.': 'E number aki ta den uso kaba.',
+  'Documenten openen': 'Habri dokumentonan',
+  'Eerdere SHA-256-waarden': 'Balornan anterior di SHA-256',
+  'Omschrijving wijzigen': 'Kambia deskripshon',
+  'Beginnummer wijzigen': 'Kambia number di kuminsamentu',
+  'Vindplaats': 'Lugá',
+  'Laatst gecontroleerd': 'Último kontrolá',
+  'Nummer wijzigen': 'Kambia number',
+  'Waar gaat dit dossier over?': 'Di kiko e dosier aki ta trata?',
+  'Nummer': 'Number',
+  'Gebruik een positief getal.': 'Usa un number positivo.',
+  'Automatisch nummer': 'Number outomátiko',
   'Aanvulling gevraagd': 'Komplemento pidi',
   'Aanvulling gevraagd.': 'Komplemento pidi.',
   'Aanvulling gevraagd: {opmerking}': 'Komplemento pidi: {opmerking}',
@@ -737,8 +753,8 @@ const _dutchSourceAddPap = {
   'Uit dossier verwijderen': 'Kita for di dosye',
   'Uit dossier verwijderen?': 'Retira bishima?',
   'Vastgelegde SHA-256': 'SHA-256 ta kopa',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Añaada dokumento. I nan ta ser kopia bishima e ta apari na e aki na tuma tú.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Agregá dokumentonan. E archivonan original ta keda na nan lugá. Aki bo ta determiná e òrdu.',
   'Wijziging opslaan is mislukt.': 'Ta kopa ta falla.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Ta deseo ta apertura ta adjunta na pestaña?',

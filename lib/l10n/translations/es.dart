@@ -649,6 +649,22 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Referentie vastgelegd': 'La referencia está registrada',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Cambios sin guardar en la pestaña; SHA-256 comprueba la versión en disco.',
+  'Documenten controleren': 'Comprobando documentos',
+  'Dit nummer is al in gebruik.': 'Este número ya está en uso.',
+  'Documenten openen': 'Abrir documentos',
+  'Eerdere SHA-256-waarden': 'Valores SHA-256 anteriores',
+  'Omschrijving wijzigen': 'Cambiar descripción',
+  'Beginnummer wijzigen': 'Cambiar número inicial',
+  'Vindplaats': 'Ubicación',
+  'Laatst gecontroleerd': 'Última comprobación',
+  'Nummer wijzigen': 'Cambiar número',
+  'Waar gaat dit dossier over?': '¿De qué trata este expediente?',
+  'Nummer': 'Número',
+  'Gebruik een positief getal.': 'Use un número positivo.',
+  'Automatisch nummer': 'Número automático',
   'Aanvulling gevraagd': 'Se solicita información adicional',
   'Aanvulling gevraagd.': 'Se solicita información adicional.',
   'Aanvulling gevraagd: {opmerking}':
@@ -738,8 +754,8 @@ const _dutchSourceAddEs = {
   'Uit dossier verwijderen': 'Quitar del expediente',
   'Uit dossier verwijderen?': '¿Eliminar del expediente?',
   'Vastgelegde SHA-256': 'SHA-256 establecido',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Añadir documentos. Estos se guardarán como copias dentro de este expediente y aparecerán aquí en tu orden.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Añade documentos a la colección. Los archivos originales permanecerán en su ubicación original. Puedes elegir el orden de visualización aquí.',
   'Wijziging opslaan is mislukt.': 'No se pudo guardar la modificación.',
   'Wil je de bijlagen ook in tabbladen openen?':
       '¿Desea abrir los anexos también en pestañas?',

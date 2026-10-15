@@ -812,6 +812,22 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Referentie vastgelegd': 'Reference recorded',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Unsaved changes in tab; SHA-256 checks the version on disk.',
+  'Documenten controleren': 'Checking documents',
+  'Dit nummer is al in gebruik.': 'This number is already in use.',
+  'Documenten openen': 'Open documents',
+  'Eerdere SHA-256-waarden': 'Previous SHA-256 values',
+  'Omschrijving wijzigen': 'Change description',
+  'Beginnummer wijzigen': 'Change starting number',
+  'Vindplaats': 'Location',
+  'Laatst gecontroleerd': 'Last checked',
+  'Nummer wijzigen': 'Change number',
+  'Waar gaat dit dossier over?': 'What is this dossier about?',
+  'Nummer': 'Number',
+  'Gebruik een positief getal.': 'Use a positive number.',
+  'Automatisch nummer': 'Automatic number',
   'Aanvulling gevraagd': 'More information requested',
   'Aanvulling gevraagd.': 'More information requested.',
   'Aanvulling gevraagd: {opmerking}': 'More information requested: {opmerking}',
@@ -903,8 +919,8 @@ const _dutchSourceAddEn = {
   'Uit dossier verwijderen': 'Remove from case file',
   'Uit dossier verwijderen?': 'Remove from case file?',
   'Vastgelegde SHA-256': 'Stored SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Add Documents. They will be stored as copies within this dossier and will appear here in your desired order.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Add documents. The original files stay where they are. Choose their order here.',
   'Wijziging opslaan is mislukt.': 'Saving Changes Failed.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Would you like to open the attachments in tabs?',

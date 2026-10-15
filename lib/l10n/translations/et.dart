@@ -1599,6 +1599,22 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Referentie vastgelegd': 'Viide salvestatud',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Vahekaardil on salvestamata muudatusi; SHA-256 kontrollib kettal olevat versiooni.',
+  'Documenten controleren': 'Dokumentide kontrollimine',
+  'Dit nummer is al in gebruik.': 'See number on juba kasutusel.',
+  'Documenten openen': 'Ava dokumendid',
+  'Eerdere SHA-256-waarden': 'Varasemad SHA-256 väärtused',
+  'Omschrijving wijzigen': 'Muuda kirjeldust',
+  'Beginnummer wijzigen': 'Muuda algusnumbrit',
+  'Vindplaats': 'Asukoht',
+  'Laatst gecontroleerd': 'Viimati kontrollitud',
+  'Nummer wijzigen': 'Muuda numbrit',
+  'Waar gaat dit dossier over?': 'Mida see toimik käsitleb?',
+  'Nummer': 'Number',
+  'Gebruik een positief getal.': 'Kasutage positiivset arvu.',
+  'Automatisch nummer': 'Automaatne number',
   'Aanvulling gevraagd': 'Täiendust küsitud',
   'Aanvulling gevraagd.': 'Täiendust on küsitud.',
   'Aanvulling gevraagd: {opmerking}': 'Täiendust küsitud: {opmerking}',
@@ -1687,8 +1703,8 @@ const _dutchSourceAddEt = <String, String>{
   'Uit dossier verwijderen': 'Eemalda toimikust',
   'Uit dossier verwijderen?': 'Kas soovid eemaldada dokumendist?',
   'Vastgelegde SHA-256': 'Salvestatud SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Lisada dokumente. Need säiliks koopia osana sellest dokumendist ja ilmuvad siin sinu järjekorras.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Lisa dokumente. Algupärased failid jäävad oma asukohta. Siin saad määrata nende järjestuse.',
   'Wijziging opslaan is mislukt.': 'Muudatuste salvestamine ebaõnnestus.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Kas soovid avada lisandid ka vahetabelitesse?',

@@ -1631,6 +1631,22 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Referentie vastgelegd': 'Η αναφορά καταγράφηκε',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Μη αποθηκευμένες αλλαγές στην καρτέλα· το SHA-256 ελέγχει την έκδοση στον δίσκο.',
+  'Documenten controleren': 'Έλεγχος εγγράφων',
+  'Dit nummer is al in gebruik.': 'Αυτός ο αριθμός χρησιμοποιείται ήδη.',
+  'Documenten openen': 'Άνοιγμα εγγράφων',
+  'Eerdere SHA-256-waarden': 'Προηγούμενες τιμές SHA-256',
+  'Omschrijving wijzigen': 'Αλλαγή περιγραφής',
+  'Beginnummer wijzigen': 'Αλλαγή αρχικού αριθμού',
+  'Vindplaats': 'Τοποθεσία',
+  'Laatst gecontroleerd': 'Τελευταίος έλεγχος',
+  'Nummer wijzigen': 'Αλλαγή αριθμού',
+  'Waar gaat dit dossier over?': 'Τι αφορά αυτός ο φάκελος;',
+  'Nummer': 'Αριθμός',
+  'Gebruik een positief getal.': 'Χρησιμοποιήστε θετικό αριθμό.',
+  'Automatisch nummer': 'Αυτόματος αριθμός',
   'Aanvulling gevraagd': 'Ζητήθηκε συμπλήρωση',
   'Aanvulling gevraagd.': 'Ζητήθηκε συμπλήρωση.',
   'Aanvulling gevraagd: {opmerking}': 'Ζητήθηκε συμπλήρωση: {opmerking}',
@@ -1723,8 +1739,8 @@ const _dutchSourceAddEl = <String, String>{
   'Uit dossier verwijderen': 'Αφαίρεση από τον φάκελο',
   'Uit dossier verwijderen?': 'Θέλετε να διαγράψετε επίσης από τον φάκελο;',
   'Vastgelegde SHA-256': 'Κατεστημένο SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Προσθέστε έγγραφα. Θα αποθηκευτούν ως αντίγραφα σε αυτόν τον φάκελο και θα εμφανίζονται εδώ στην προτιμώμενη σειρά σας.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Προσθέστε έγγραφα στην συλλογή σας. Τα αρχικά αρχεία παραμένουν στον αρχικό τους φάκελο. Μπορείτε να επιλέξετε τη σειρά εμφάνισης εδώ.',
   'Wijziging opslaan is mislukt.': 'Η αποθήκευση της αλλαγής απέτυχε.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Θέλετε να ανοίξετε επίσης τα παραρτήματα σε καρτέλες;',

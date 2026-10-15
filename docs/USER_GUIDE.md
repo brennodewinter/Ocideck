@@ -5069,34 +5069,33 @@ but carries on, so the remaining slides are still produced.
 
 Use the folder button beside the tabs, or **File → New dossier**, to create a
 document dossier. Choose a parent folder and a title. OciDeck creates a folder
-with `dossier.json`, a readable `overzicht.md`, and an `attachments/` subfolder.
-**Add documents** copies
-selected Markdown documents or presentations into that folder; your originals
-remain untouched. The dossier itself is a document-like cover and contents
-page, with the numbered order under your control. Drag a row or use its move
-actions; the numbers update immediately. Removing a row leaves its copied file
-in the folder.
+with `dossier.json` and a readable `overzicht.md`. **Add documents** selects
+existing local Markdown documents or presentations (`.md`). The dossier stores
+references to those source files; it does not copy or change them. Its cover
+and contents page show the numbered order. Drag a row or use its move actions
+to change that order; removing a row removes the reference only.
 
 Use **Open dossier** to reopen `dossier.json`. You can start with the overview
-alone or open its attachments in tabs as well. Selecting a row opens that
-document or presentation through OciDeck's normal safety checks. The visible
-**Back to dossier** button takes you from an attachment tab to the overview.
+alone or open the referenced documents in tabs as well. Selecting a row opens
+that document or presentation through OciDeck's normal safety checks. The
+visible **Back to dossier** button takes you from its tab to the overview.
 **Open as document** opens `overzicht.md` in the normal document tab, where the
 usual document export is available.
 
-Each row records the SHA-256 of the exact bytes copied into the dossier.
-**Check SHA-256** compares the current saved file with that recorded value;
+Each row records the SHA-256 of the source file's bytes when it was added.
+**Check SHA-256** compares the current saved source file with that value;
 **Check all** checks every row. A changed, missing or unreadable file is shown
 separately. Unsaved edits in an open tab are not part of this disk check. The
-recorded value changes only with **Record new version**, after a confirmation
-showing both hashes. SHA-256 here detects a difference from the reference
-stored in the same dossier; it does not prove who created or approved a file.
+recorded value changes only when you explicitly accept a new reference after
+seeing the previous and current hashes. SHA-256 here detects a difference from
+the value stored in the dossier; it does not prove who created or approved a file.
 You can check a file independently with `shasum -a 256 <filename>`.
 
 The Markdown overview remains readable without OciDeck; `dossier.json` keeps
-the editable order, relative paths and hashes. Keep both files and the
-`attachments/` folder together when moving or sharing a dossier. This
-version accepts local `.md` documents and presentations as attachments.
+the editable order, source paths and hashes. Keep both dossier files together.
+The source documents must still be available at their recorded paths when you
+open or verify the dossier. This version accepts local `.md` documents and
+presentations as references.
 
 Alongside presentations, OciDeck edits **documents**: a flowing, plain Markdown
 file rather than a deck of slides. A document is an ordinary `.md` with no slide

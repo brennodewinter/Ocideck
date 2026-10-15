@@ -19,13 +19,19 @@ void main() {
     if (await temp.exists()) await temp.delete(recursive: true);
   });
 
-  test('copies bytes, preserves source, and verifies exact contents', () async {
+  test('indexes original bytes and detects source changes', () async {
     final source = File(p.join(temp.path, 'source.md'));
     await source.writeAsString('Begin');
     var dossier = await store.create('Zaak');
     dossier = await store.addFile(dossier, source, title: 'Bijlage A');
     expect(dossier.entries.single.title, 'Bijlage A');
-    expect(dossier.entries.single.relativePath, startsWith('attachments/'));
+    expect(
+      dossier.entries.single.sourcePath,
+      await source.resolveSymbolicLinks(),
+    );
+    expect(dossier.entries.single.originalName, 'source.md');
+    expect(dossier.entries.single.sizeBytes, 5);
+    expect(dossier.entries.single.checkedAt, isNotNull);
     expect(await source.readAsString(), 'Begin');
     expect(
       (await store.verify(dossier.entries.single)).status,
@@ -36,9 +42,7 @@ void main() {
       dossier.entries.single.sha256,
     );
 
-    await File(
-      (await store.resolvedPath(dossier.entries.single))!,
-    ).writeAsString('Gewijzigd');
+    await source.writeAsString('Gewijzigd');
     expect(
       (await store.verify(dossier.entries.single)).status,
       DossierIntegrityStatus.changed,
@@ -57,6 +61,11 @@ void main() {
       throwsStateError,
     );
     dossier = await store.refreshReference(dossier, dossier.entries.single.id);
+    expect(
+      dossier.entries.single.hashHistory.single.sha256,
+      isNot(dossier.entries.single.sha256),
+    );
+    expect(dossier.entries.single.sizeBytes, 9);
     expect(
       (await store.verify(dossier.entries.single)).status,
       DossierIntegrityStatus.matches,
@@ -79,16 +88,8 @@ void main() {
       await store.save(reordered);
       final overview = await store.overviewFile.readAsString();
       expect(overview, startsWith('# Zaak \\#1\n'));
-      expect(
-        overview,
-        contains('1. [Presentatie](${reordered.entries[0].relativePath})'),
-      );
-      expect(
-        overview,
-        contains(
-          '2. [Eerste \\[stuk\\]](${reordered.entries[1].relativePath})',
-        ),
-      );
+      expect(overview, contains('1. [Presentatie](tweede.pptx)'));
+      expect(overview, contains('2. [Eerste \\[stuk\\]](eerste.md)'));
       for (final entry in reordered.entries) {
         expect(overview, contains('SHA-256: `${entry.sha256}`'));
       }
@@ -178,10 +179,131 @@ void main() {
     final source = File(p.join(temp.path, 'source.md'));
     await source.writeAsString('Text');
     dossier = await store.addFile(dossier, source);
-    await File((await store.resolvedPath(dossier.entries.single))!).delete();
+    await source.delete();
     expect(
       (await store.verify(dossier.entries.single)).status,
       DossierIntegrityStatus.missing,
     );
+  });
+
+  test('records check time without accepting changed bytes', () async {
+    final source = File(p.join(temp.path, 'source.md'));
+    await source.writeAsString('A');
+    var dossier = await store.create('Zaak');
+    dossier = await store.addFile(dossier, source);
+    final originalHash = dossier.entries.single.sha256;
+    await source.writeAsString('B');
+    final (checked, result) = await store.verifyAndRecord(
+      dossier,
+      dossier.entries.single,
+    );
+    expect(result.status, DossierIntegrityStatus.changed);
+    expect(result.checkedAt, isNotNull);
+    expect(checked.entries.single.sha256, originalHash);
+    final reopened = await store.load();
+    expect(reopened.entries.single.checkedAt, result.checkedAt);
+    expect(reopened.entries.single.sha256, originalHash);
+  });
+
+  test('migrates v1 copied attachment without losing unknown fields', () async {
+    final attachment = File(p.join(temp.path, 'attachments', 'old.md'));
+    await attachment.parent.create();
+    await attachment.writeAsString('old');
+    final legacy = {
+      'version': 1,
+      'title': 'Oud',
+      'entries': [
+        {
+          'id': 'old',
+          'title': 'Oud document',
+          'relativePath': 'attachments/old.md',
+          'sha256':
+              'cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4',
+          'futureEntry': 42,
+        },
+      ],
+      'createdAt': DateTime.utc(2020).toIso8601String(),
+      'updatedAt': DateTime.utc(2020).toIso8601String(),
+      'futureDossier': true,
+    };
+    await store.manifestFile.writeAsString(jsonEncode(legacy));
+    final dossier = await store.load();
+    expect(
+      await store.resolvedPath(dossier.entries.single),
+      await attachment.resolveSymbolicLinks(),
+    );
+    await store.save(dossier);
+    final migrated =
+        jsonDecode(await store.manifestFile.readAsString())
+            as Map<String, dynamic>;
+    expect(migrated['version'], 2);
+    expect(migrated['futureDossier'], true);
+    expect((migrated['entries'] as List).single['futureEntry'], 42);
+  });
+
+  test('source replacement by symlink is unsafe', () async {
+    final source = File(p.join(temp.path, 'source.md'));
+    await source.writeAsString('Original');
+    var dossier = await store.create('Zaak');
+    dossier = await store.addFile(dossier, source);
+    final outsideDir = await Directory.systemTemp.createTemp('dossier-escape-');
+    addTearDown(() => outsideDir.delete(recursive: true));
+    final outside = File(p.join(outsideDir.path, 'outside.md'));
+    await outside.writeAsString('Outside');
+    await source.delete();
+    await Link(source.path).create(outside.path);
+    expect(
+      (await store.verify(dossier.entries.single)).status,
+      DossierIntegrityStatus.unsafe,
+    );
+    expect(await store.resolvedPath(dossier.entries.single), isNull);
+  });
+
+  test('relative source follows dossier moved as a whole', () async {
+    final source = File(p.join(temp.path, 'inside.md'));
+    await source.writeAsString('Portable');
+    var dossier = await store.create('Zaak');
+    dossier = await store.addFile(dossier, source);
+    expect(dossier.entries.single.sourceRelativePath, 'inside.md');
+    final movedRoot = await Directory.systemTemp.createTemp('dossier-moved-');
+    addTearDown(() => movedRoot.delete(recursive: true));
+    final moved = await temp.rename(p.join(movedRoot.path, 'zaak'));
+    final movedStore = DocumentDossierStore(
+      File(p.join(moved.path, 'zaak.dossier.json')),
+    );
+    final reopened = await movedStore.load();
+    expect(
+      (await movedStore.verify(reopened.entries.single)).status,
+      DossierIntegrityStatus.matches,
+    );
+    expect(
+      await movedStore.resolvedPath(reopened.entries.single),
+      await File(p.join(moved.path, 'inside.md')).resolveSymbolicLinks(),
+    );
+  });
+
+  test('manual numbers reserve slots and duplicates are rejected', () async {
+    var dossier = await store.create('Zaak');
+    final first = File(p.join(temp.path, 'first.md'));
+    final second = File(p.join(temp.path, 'second.md'));
+    await first.writeAsString('1');
+    await second.writeAsString('2');
+    dossier = await store.addFile(dossier, first);
+    dossier = await store.addFile(dossier, second);
+    dossier = dossier.copyWith(
+      entries: [
+        dossier.entries.first.copyWith(numberOverride: 2),
+        dossier.entries.last,
+      ],
+    );
+    expect(dossier.displayNumbers, [2, 1]);
+    await store.save(dossier);
+    final duplicate = dossier.copyWith(
+      entries: [
+        dossier.entries.first,
+        dossier.entries.last.copyWith(numberOverride: 2),
+      ],
+    );
+    await expectLater(store.save(duplicate), throwsFormatException);
   });
 }

@@ -1608,6 +1608,22 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Referentie vastgelegd': 'A hivatkozás rögzítve van.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Mentetlen módosítások a lapon; a SHA-256 a lemezen lévő verziót ellenőrzi.',
+  'Documenten controleren': 'Dokumentumok ellenőrzése',
+  'Dit nummer is al in gebruik.': 'Ez a szám már használatban van.',
+  'Documenten openen': 'Dokumentumok megnyitása',
+  'Eerdere SHA-256-waarden': 'Korábbi SHA-256-értékek',
+  'Omschrijving wijzigen': 'Leírás módosítása',
+  'Beginnummer wijzigen': 'Kezdőszám módosítása',
+  'Vindplaats': 'Hely',
+  'Laatst gecontroleerd': 'Utoljára ellenőrizve',
+  'Nummer wijzigen': 'Szám módosítása',
+  'Waar gaat dit dossier over?': 'Miről szól ez a dosszié?',
+  'Nummer': 'Szám',
+  'Gebruik een positief getal.': 'Pozitív számot adjon meg.',
+  'Automatisch nummer': 'Automatikus szám',
   'Aanvulling gevraagd': 'Kiegészítés kérve',
   'Aanvulling gevraagd.': 'Kiegészítést kértek.',
   'Aanvulling gevraagd: {opmerking}': 'Kiegészítés kérve: {opmerking}',
@@ -1697,8 +1713,8 @@ const _dutchSourceAddHu = <String, String>{
   'Uit dossier verwijderen': 'Eltávolítás a dossziéból',
   'Uit dossier verwijderen?': 'El szeretnéd törölni a dossziéból?',
   'Vastgelegde SHA-256': 'Rögzített SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Adj hozzá dokumentumokat. Ezeket a dokumentumokat másolatként tároljuk ebben a dosszióban, és itt jelennek meg a megadott sorrendben.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Adj hozzá dokumentumokat. Az eredeti fájlok ott maradnak, ahol vannak. Itt állíthatod be a megjelenítési sorrendet.',
   'Wijziging opslaan is mislukt.': 'A módosítás nem sikerült.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Szeretnéd a mellékleteket is táblázatokba nyitni?',

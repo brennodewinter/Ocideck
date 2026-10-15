@@ -1604,6 +1604,22 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Referentie vastgelegd': 'Atsauce fiksēta',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Cilnē ir nesaglabātas izmaiņas; SHA-256 pārbauda diskā esošo versiju.',
+  'Documenten controleren': 'Dokumentu pārbaude',
+  'Dit nummer is al in gebruik.': 'Šis numurs jau tiek izmantots.',
+  'Documenten openen': 'Atvērt dokumentus',
+  'Eerdere SHA-256-waarden': 'Iepriekšējās SHA-256 vērtības',
+  'Omschrijving wijzigen': 'Mainīt aprakstu',
+  'Beginnummer wijzigen': 'Mainīt sākuma numuru',
+  'Vindplaats': 'Atrašanās vieta',
+  'Laatst gecontroleerd': 'Pēdējo reizi pārbaudīts',
+  'Nummer wijzigen': 'Mainīt numuru',
+  'Waar gaat dit dossier over?': 'Par ko ir šī lieta?',
+  'Nummer': 'Numurs',
+  'Gebruik een positief getal.': 'Izmantojiet pozitīvu skaitli.',
+  'Automatisch nummer': 'Automātisks numurs',
   'Aanvulling gevraagd': 'Pieprasīts papildinājums',
   'Aanvulling gevraagd.': 'Pieprasīts papildinājums.',
   'Aanvulling gevraagd: {opmerking}': 'Pieprasīts papildinājums: {opmerking}',
@@ -1691,8 +1707,8 @@ const _dutchSourceAddLv = <String, String>{
   'Uit dossier verwijderen': 'Izņemt no lietas',
   'Uit dossier verwijderen?': 'Dzēst no saskatnes?',
   'Vastgelegde SHA-256': 'Ievietotā SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Pievienot dokumentus. Tie tiek saglabāti kā kopijas šai saskatnei un parādīsies šeit tavā secībā.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Pievienojiet dokumentus. Oriģinālie faili paliek savās vietās. Šeit izvēlieties to secību.',
   'Wijziging opslaan is mislukt.': 'Izmaiņu saglabāšana izdevusies neizdevās.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Vai vēlaties atvērt pievienotnes arī joslās?',

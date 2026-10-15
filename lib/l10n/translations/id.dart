@@ -1606,6 +1606,22 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Referentie vastgelegd': 'Referensi tercatat',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Perubahan belum disimpan di tab; SHA-256 memeriksa versi pada disk.',
+  'Documenten controleren': 'Memeriksa dokumen',
+  'Dit nummer is al in gebruik.': 'Nomor ini sudah digunakan.',
+  'Documenten openen': 'Buka dokumen',
+  'Eerdere SHA-256-waarden': 'Nilai SHA-256 sebelumnya',
+  'Omschrijving wijzigen': 'Ubah deskripsi',
+  'Beginnummer wijzigen': 'Ubah nomor awal',
+  'Vindplaats': 'Lokasi',
+  'Laatst gecontroleerd': 'Terakhir diperiksa',
+  'Nummer wijzigen': 'Ubah nomor',
+  'Waar gaat dit dossier over?': 'Apa isi berkas ini?',
+  'Nummer': 'Nomor',
+  'Gebruik een positief getal.': 'Gunakan angka positif.',
+  'Automatisch nummer': 'Nomor otomatis',
   'Aanvulling gevraagd': 'Diminta tambahan',
   'Aanvulling gevraagd.': 'Diminta tambahan.',
   'Aanvulling gevraagd: {opmerking}': 'Diminta tambahan: {opmerking}',
@@ -1695,8 +1711,8 @@ const _dutchSourceAddId = <String, String>{
   'Uit dossier verwijderen': 'Hapus dari berkas',
   'Uit dossier verwijderen?': 'Hapus dari dossier?',
   'Vastgelegde SHA-256': 'SHA-256 yang ditetapkan',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Tambahkan dokumen. Dokumen-dokumen ini akan disimpan sebagai salinan dari dossier ini dan akan muncul di sini dalam urutan Anda.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Tambahkan dokumen ke koleksi ini. File aslinya tetap berada di lokasi semula. Anda dapat mengatur urutan tampilan di sini.',
   'Wijziging opslaan is mislukt.': 'Penyimpanan perubahan gagal.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Apakah Anda ingin membuka lampiran dalam tab?',

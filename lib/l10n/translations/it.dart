@@ -649,6 +649,22 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Referentie vastgelegd': 'Riferimento registrato',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Modifiche non salvate nella scheda; SHA-256 verifica la versione su disco.',
+  'Documenten controleren': 'Verifica documenti',
+  'Dit nummer is al in gebruik.': 'Questo numero è già in uso.',
+  'Documenten openen': 'Apri documenti',
+  'Eerdere SHA-256-waarden': 'Valori SHA-256 precedenti',
+  'Omschrijving wijzigen': 'Modifica descrizione',
+  'Beginnummer wijzigen': 'Modifica numero iniziale',
+  'Vindplaats': 'Posizione',
+  'Laatst gecontroleerd': 'Ultimo controllo',
+  'Nummer wijzigen': 'Modifica numero',
+  'Waar gaat dit dossier over?': 'Di cosa tratta questo fascicolo?',
+  'Nummer': 'Numero',
+  'Gebruik een positief getal.': 'Usa un numero positivo.',
+  'Automatisch nummer': 'Numero automatico',
   'Aanvulling gevraagd': 'Integrazione richiesta',
   'Aanvulling gevraagd.': 'Integrazione richiesta.',
   'Aanvulling gevraagd: {opmerking}': 'Integrazione richiesta: {opmerking}',
@@ -737,8 +753,8 @@ const _dutchSourceAddIt = {
   'Uit dossier verwijderen': 'Rimuovi dal dossier',
   'Uit dossier verwijderen?': 'Rimuovere dal dossier?',
   'Vastgelegde SHA-256': 'SHA-256 memorizzata',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Aggiungi documenti. Questi verranno conservati come copie all\'interno di questo dossier e appariranno qui nel tuo ordine.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Aggiungi i documenti alla raccolta. I file originali rimangono dove li avevi. Puoi scegliere l\'ordine di visualizzazione qui.',
   'Wijziging opslaan is mislukt.':
       'Il salvataggio della modifica non è riuscito.',
   'Wil je de bijlagen ook in tabbladen openen?':

@@ -1624,6 +1624,22 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Referentie vastgelegd': 'Ir-referenza ġiet irreġistrata',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Bidliet mhux issejvjati fit-tab; SHA-256 jiċċekkja l-verżjoni fuq id-diska.',
+  'Documenten controleren': 'Iċċekkjar tad-dokumenti',
+  'Dit nummer is al in gebruik.': 'Dan in-numru diġà qed jintuża.',
+  'Documenten openen': 'Iftaħ id-dokumenti',
+  'Eerdere SHA-256-waarden': 'Valuri SHA-256 preċedenti',
+  'Omschrijving wijzigen': 'Ibdel id-deskrizzjoni',
+  'Beginnummer wijzigen': 'Ibdel in-numru tal-bidu',
+  'Vindplaats': 'Post',
+  'Laatst gecontroleerd': 'Iċċekkjat l-aħħar',
+  'Nummer wijzigen': 'Ibdel in-numru',
+  'Waar gaat dit dossier over?': 'Dwar xiex huwa dan id-dossier?',
+  'Nummer': 'Numru',
+  'Gebruik een positief getal.': 'Uża numru pożittiv.',
+  'Automatisch nummer': 'Numru awtomatiku',
   'Aanvulling gevraagd': 'Mitluba aktar informazzjoni',
   'Aanvulling gevraagd.': 'Mitluba aktar informazzjoni.',
   'Aanvulling gevraagd: {opmerking}':
@@ -1714,8 +1730,8 @@ const _dutchSourceAddMt = <String, String>{
   'Uit dossier verwijderen': 'Neħħi mid-dossier',
   'Uit dossier verwijderen?': 'Neħel mill-dossi?',
   'Vastgelegde SHA-256': 'SHA-256 li tkelltet',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Aggiungi dokumenti. Dawn jiġu mmexxlex bħala kopji fi dan il-dossi u jispettaw hawn fl-ordni tiegħek.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Żid dokumenti. Il-fajls oriġinali jibqgħu fejn jinsabu. Hawn tagħżel l-ordni tagħhom.',
   'Wijziging opslaan is mislukt.': 'L-edizzjoni ma saretx.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Tissuġġerixxi li taf খুল l-aġġunti wkoll fi tfessijiet?',

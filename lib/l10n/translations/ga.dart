@@ -1636,6 +1636,22 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Referentie vastgelegd': 'Tagairt taifeadta',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Athruithe neamhshábháilte sa chluaisín; seiceálann SHA-256 an leagan ar an diosca.',
+  'Documenten controleren': 'Doiciméid á seiceáil',
+  'Dit nummer is al in gebruik.': 'Tá an uimhir seo in úsáid cheana.',
+  'Documenten openen': 'Oscail doiciméid',
+  'Eerdere SHA-256-waarden': 'Luachanna SHA-256 roimhe seo',
+  'Omschrijving wijzigen': 'Athraigh an cur síos',
+  'Beginnummer wijzigen': 'Athraigh an uimhir thosaigh',
+  'Vindplaats': 'Suíomh',
+  'Laatst gecontroleerd': 'Seiceáilte go deireanach',
+  'Nummer wijzigen': 'Athraigh an uimhir',
+  'Waar gaat dit dossier over?': 'Cad faoi a bhfuil an sainchomhad seo?',
+  'Nummer': 'Uimhir',
+  'Gebruik een positief getal.': 'Úsáid uimhir dheimhneach.',
+  'Automatisch nummer': 'Uimhir uathoibríoch',
   'Aanvulling gevraagd': 'Iarradh breis eolais',
   'Aanvulling gevraagd.': 'Iarradh breis eolais.',
   'Aanvulling gevraagd: {opmerking}': 'Iarradh breis eolais: {opmerking}',
@@ -1725,8 +1741,8 @@ const _dutchSourceAddGa = <String, String>{
   'Uit dossier verwijderen': 'Bain den sainchomhad',
   'Uit dossier verwijderen?': 'An bhfuil an t-onnamhadh a bheith á bhaint as?',
   'Vastgelegde SHA-256': 'Tá an cheartacha SHA-256 a chosaint',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Doigh doiciméid isteach. Tá siad cosúil le cóipe ag an t-onnamhadh seo agus tá siad ag appair anseo i do shréachadh',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Cuir doiciméid leis. Fanann na bunchomhaid ina suíomh bunaidh. Roghnaigh an t-ord anseo.',
   'Wijziging opslaan is mislukt.': 'Ní raontaigh an sonrú a chur isteach.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Ba bhfuil tú ag iarraidh doiciméid beartaithe a theip ar fhadhbanna?',

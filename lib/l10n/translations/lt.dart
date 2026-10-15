@@ -1613,6 +1613,22 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Referentie vastgelegd': 'Informacija fiksuota',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Kortelėje yra neįrašytų pakeitimų; SHA-256 tikrina diske esančią versiją.',
+  'Documenten controleren': 'Dokumentų tikrinimas',
+  'Dit nummer is al in gebruik.': 'Šis numeris jau naudojamas.',
+  'Documenten openen': 'Atidaryti dokumentus',
+  'Eerdere SHA-256-waarden': 'Ankstesnės SHA-256 reikšmės',
+  'Omschrijving wijzigen': 'Keisti aprašymą',
+  'Beginnummer wijzigen': 'Keisti pradinį numerį',
+  'Vindplaats': 'Vieta',
+  'Laatst gecontroleerd': 'Paskutinį kartą tikrinta',
+  'Nummer wijzigen': 'Keisti numerį',
+  'Waar gaat dit dossier over?': 'Apie ką šis dosjė?',
+  'Nummer': 'Numeris',
+  'Gebruik een positief getal.': 'Naudokite teigiamą skaičių.',
+  'Automatisch nummer': 'Automatinis numeris',
   'Aanvulling gevraagd': 'Prašoma papildyti',
   'Aanvulling gevraagd.': 'Prašoma papildyti.',
   'Aanvulling gevraagd: {opmerking}': 'Prašoma papildyti: {opmerking}',
@@ -1700,8 +1716,8 @@ const _dutchSourceAddLt = <String, String>{
   'Uit dossier verwijderen': 'Pašalinti iš bylos',
   'Uit dossier verwijderen?': 'Ar norite pašalinti iš dokumento?',
   'Vastgelegde SHA-256': 'Nufiksuota SHA-256 suma',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Pridėti dokumentus. Jie bus saugomi kaip kopijos šiam dokumentui ir pasirodys čia pagal jūsų tvarką.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Pridėkite dokumentų. Originalūs failai lieka savo vietoje. Čia nustatykite jų eilės tvarką.',
   'Wijziging opslaan is mislukt.': 'Nepavyko išsaugoti pokyčių.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Ar norite atidaryti priklausiusius failus lentelėse?',

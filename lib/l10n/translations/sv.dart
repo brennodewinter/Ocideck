@@ -1605,6 +1605,22 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Referentie vastgelegd': 'Referensen har registrerats',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Osparade ändringar på fliken; SHA-256 kontrollerar versionen på disken.',
+  'Documenten controleren': 'Kontrollerar dokument',
+  'Dit nummer is al in gebruik.': 'Det här numret används redan.',
+  'Documenten openen': 'Öppna dokument',
+  'Eerdere SHA-256-waarden': 'Tidigare SHA-256-värden',
+  'Omschrijving wijzigen': 'Ändra beskrivning',
+  'Beginnummer wijzigen': 'Ändra startnummer',
+  'Vindplaats': 'Plats',
+  'Laatst gecontroleerd': 'Senast kontrollerad',
+  'Nummer wijzigen': 'Ändra nummer',
+  'Waar gaat dit dossier over?': 'Vad handlar denna akt om?',
+  'Nummer': 'Nummer',
+  'Gebruik een positief getal.': 'Använd ett positivt tal.',
+  'Automatisch nummer': 'Automatiskt nummer',
   'Aanvulling gevraagd': 'Komplettering begärd',
   'Aanvulling gevraagd.': 'Komplettering begärd.',
   'Aanvulling gevraagd: {opmerking}': 'Komplettering begärd: {opmerking}',
@@ -1693,8 +1709,8 @@ const _dutchSourceAddSv = <String, String>{
   'Uit dossier verwijderen': 'Ta bort från dossier',
   'Uit dossier verwijderen?': 'Ta bort från mappen?',
   'Vastgelegde SHA-256': 'Fastställd SHA-256-summa',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Lägg till dokument. Dessa kommer att sparas som kopior i denna mapp och visas här i din ordning.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Lägg till dokument. Originalfilerna ligger kvar där de är. Här väljer du ordningen.',
   'Wijziging opslaan is mislukt.': 'Sparningen misslyckades.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Vill du öppna bilagorna i flikar?',

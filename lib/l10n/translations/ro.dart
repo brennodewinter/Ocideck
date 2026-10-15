@@ -1622,6 +1622,22 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Referentie vastgelegd': 'Referința este înregistrată',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Modificări nesalvate în filă; SHA-256 verifică versiunea de pe disc.',
+  'Documenten controleren': 'Verificarea documentelor',
+  'Dit nummer is al in gebruik.': 'Acest număr este deja folosit.',
+  'Documenten openen': 'Deschide documente',
+  'Eerdere SHA-256-waarden': 'Valori SHA-256 anterioare',
+  'Omschrijving wijzigen': 'Schimbă descrierea',
+  'Beginnummer wijzigen': 'Schimbă numărul de început',
+  'Vindplaats': 'Locație',
+  'Laatst gecontroleerd': 'Ultima verificare',
+  'Nummer wijzigen': 'Schimbă numărul',
+  'Waar gaat dit dossier over?': 'Despre ce este acest dosar?',
+  'Nummer': 'Număr',
+  'Gebruik een positief getal.': 'Folosește un număr pozitiv.',
+  'Automatisch nummer': 'Număr automat',
   'Aanvulling gevraagd': 'Completare solicitată',
   'Aanvulling gevraagd.': 'Completare solicitată.',
   'Aanvulling gevraagd: {opmerking}': 'Completare solicitată: {opmerking}',
@@ -1711,8 +1727,8 @@ const _dutchSourceAddRo = <String, String>{
   'Uit dossier verwijderen': 'Elimină din dosar',
   'Uit dossier verwijderen?': 'Eliminați din dosar?',
   'Vastgelegde SHA-256': 'SHA-256 Stabilit',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Adăugați documente. Acestea vor fi păstrate ca copii în acest dosar și vor apărea aici în ordinea dumneavoastră.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Adaugă documente în această colecție. Originalele vor rămâne în locația lor inițială. Poți alege ordinea în care sunt afișate.',
   'Wijziging opslaan is mislukt.': 'Salvarea modificării nu a reușit.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Doriți să deschideți și anexe în taburi?',

@@ -1609,6 +1609,22 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Referentie vastgelegd': 'D\'Referanz isch feschtlegt',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Nit gspeichereti Änderige im Tab; SHA-256 prüeft d Version uf dr Feschtplatte.',
+  'Documenten controleren': 'Dokumänt prüefe',
+  'Dit nummer is al in gebruik.': 'Die Nummere isch scho i Bruch.',
+  'Documenten openen': 'Dokumänt öffne',
+  'Eerdere SHA-256-waarden': 'Früehneri SHA-256-Wärt',
+  'Omschrijving wijzigen': 'Beschrybig ändere',
+  'Beginnummer wijzigen': 'Aafangsnummere ändere',
+  'Vindplaats': 'Standort',
+  'Laatst gecontroleerd': 'Zletscht prüeft',
+  'Nummer wijzigen': 'Nummere ändere',
+  'Waar gaat dit dossier over?': 'Worum gohts i däm Dossier?',
+  'Nummer': 'Nummere',
+  'Gebruik een positief getal.': 'Nimm e positiivi Zahl.',
+  'Automatisch nummer': 'Automatischi Nummere',
   'Aanvulling gevraagd': 'Ergänzung verlangt',
   'Aanvulling gevraagd.': 'Ergänzung verlangt.',
   'Aanvulling gevraagd: {opmerking}': 'Ergänzung verlangt: {opmerking}',
@@ -1698,8 +1714,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Uit dossier verwijderen': 'Us em Dossier entferne',
   'Uit dossier verwijderen?': 'Möchtest du’s aus Dossier löösche?',
   'Vastgelegde SHA-256': 'Fixierte SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Fiehlt Dokumente zue. Si wird als Kopie zu dere Dossier ghalt und schynt hier in deine Ordne tampil.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Füeg Dokument dezue. D’Originaldateie bliibed a ihrem Ort. Da bestimmisch d’Reihefolg.',
   'Wijziging opslaan is mislukt.': 'Ändrig speichne isch missglückt.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Möchtest du die Anhänge au im Tabli öppne?',

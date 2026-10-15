@@ -1610,6 +1610,22 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Referentie vastgelegd': 'Referenca je evidentirana',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Nespremljene promjene na kartici; SHA-256 provjerava verziju na disku.',
+  'Documenten controleren': 'Provjera dokumenata',
+  'Dit nummer is al in gebruik.': 'Ovaj se broj već koristi.',
+  'Documenten openen': 'Otvori dokumente',
+  'Eerdere SHA-256-waarden': 'Prethodne SHA-256 vrijednosti',
+  'Omschrijving wijzigen': 'Promijeni opis',
+  'Beginnummer wijzigen': 'Promijeni početni broj',
+  'Vindplaats': 'Lokacija',
+  'Laatst gecontroleerd': 'Zadnja provjera',
+  'Nummer wijzigen': 'Promijeni broj',
+  'Waar gaat dit dossier over?': 'O čemu je ovaj dosje?',
+  'Nummer': 'Broj',
+  'Gebruik een positief getal.': 'Upotrijebite pozitivan broj.',
+  'Automatisch nummer': 'Automatski broj',
   'Aanvulling gevraagd': 'Zatraženo dopunjavanje',
   'Aanvulling gevraagd.': 'Zatraženo je dopunjavanje.',
   'Aanvulling gevraagd: {opmerking}': 'Zatraženo dopunjavanje: {opmerking}',
@@ -1699,8 +1715,8 @@ const _dutchSourceAddHr = <String, String>{
   'Uit dossier verwijderen': 'Ukloni iz dosjea',
   'Uit dossier verwijderen?': 'Izbrisati iz popisa?',
   'Vastgelegde SHA-256': 'Zabeležena SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Dodajte dokumente. Oni će biti spremljeni kao kopije uz ovo popise i pojavit će se ovdje po vašem redu.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Dodajte dokumente. Izvorne datoteke ostaju na svojem mjestu. Ovdje odaberite njihov redoslijed.',
   'Wijziging opslaan is mislukt.': 'Spremanje promjene nije uspjelo.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Želite li i priloge otvoriti u karticama?',

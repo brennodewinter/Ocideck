@@ -1612,6 +1612,22 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Referentie vastgelegd': 'Referencia je zaznamenaná',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Neuložené zmeny na karte; SHA-256 kontroluje verziu na disku.',
+  'Documenten controleren': 'Kontrola dokumentov',
+  'Dit nummer is al in gebruik.': 'Toto číslo sa už používa.',
+  'Documenten openen': 'Otvoriť dokumenty',
+  'Eerdere SHA-256-waarden': 'Predchádzajúce hodnoty SHA-256',
+  'Omschrijving wijzigen': 'Zmeniť opis',
+  'Beginnummer wijzigen': 'Zmeniť počiatočné číslo',
+  'Vindplaats': 'Umiestnenie',
+  'Laatst gecontroleerd': 'Naposledy skontrolované',
+  'Nummer wijzigen': 'Zmeniť číslo',
+  'Waar gaat dit dossier over?': 'Čoho sa týka tento spis?',
+  'Nummer': 'Číslo',
+  'Gebruik een positief getal.': 'Použite kladné číslo.',
+  'Automatisch nummer': 'Automatické číslo',
   'Aanvulling gevraagd': 'Vyžiadané doplnenie',
   'Aanvulling gevraagd.': 'Vyžiadané doplnenie.',
   'Aanvulling gevraagd: {opmerking}': 'Vyžiadané doplnenie: {opmerking}',
@@ -1700,8 +1716,8 @@ const _dutchSourceAddSk = <String, String>{
   'Uit dossier verwijderen': 'Odstrániť zo spisu',
   'Uit dossier verwijderen?': 'Chcete odstrániť z záložky?',
   'Vastgelegde SHA-256': 'Uvedená SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Pridajte dokumenty. Budú uložené ako kópie k tomuto záložku a zobrazia sa tu v vašom poradí.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Pridajte dokumenty do zbierky. Originálne súbory zostanú na svojom mieste. Môžete tu tiež zvoliť poradie zobrazenia.',
   'Wijziging opslaan is mislukt.': 'Záznam bol uložený neúspešne.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Chcete tiež otvoriť prílohy v záložkách?',

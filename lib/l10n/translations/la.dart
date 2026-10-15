@@ -1621,6 +1621,22 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Referentie vastgelegd': 'Referentia consignata',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Mutationes in tabula nondum servatae; SHA-256 versionem in disco inspicit.',
+  'Documenten controleren': 'Documenta inspicere',
+  'Dit nummer is al in gebruik.': 'Hic numerus iam adhibetur.',
+  'Documenten openen': 'Documenta aperire',
+  'Eerdere SHA-256-waarden': 'Valores SHA-256 priores',
+  'Omschrijving wijzigen': 'Descriptionem mutare',
+  'Beginnummer wijzigen': 'Numerum initialem mutare',
+  'Vindplaats': 'Locus',
+  'Laatst gecontroleerd': 'Novissime inspectum',
+  'Nummer wijzigen': 'Numerum mutare',
+  'Waar gaat dit dossier over?': 'De quo hoc dossier agit?',
+  'Nummer': 'Numerus',
+  'Gebruik een positief getal.': 'Numero positivo utere.',
+  'Automatisch nummer': 'Numerus automaticus',
   'Aanvulling gevraagd': 'Supplementum petitum',
   'Aanvulling gevraagd.': 'Supplementum petitum est.',
   'Aanvulling gevraagd: {opmerking}': 'Supplementum petitum: {opmerking}',
@@ -1707,8 +1723,8 @@ const _dutchSourceAddLa = <String, String>{
   'Uit dossier verwijderen': 'Ex dossier removere',
   'Uit dossier verwijderen?': 'Removere ex dossier?',
   'Vastgelegde SHA-256': 'SHA-256 fixus',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Documenta addere. Hae sicut exempla ad hoc dossier servandae sunt et hic in tua ordine apparent.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Documenta addere oportet. Originalia in locis suis manent. Hic ordinem exhibitionis constitue.',
   'Wijziging opslaan is mislukt.': 'Mutatio conservandi abortuta est.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Visne appendices etiam in tabellaceis aperire?',

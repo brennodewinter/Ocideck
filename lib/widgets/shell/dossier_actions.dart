@@ -13,6 +13,13 @@ class _DossierController {
   DocumentDossier? _dossier;
   bool _showDossier = false;
   bool _dossierBusy = false;
+  int? _openingProgress;
+  int? _openingTotal;
+  int? _verificationProgress;
+  int? _verificationTotal;
+  bool _cancelOpening = false;
+  final Set<String> _dossierOpenedPaths = {};
+  final Map<String, String> _entryOpenPaths = {};
   final Map<String, DossierIntegrityStatus> _dossierVerification = {};
 
   Widget _dossierWorkspace(TabsState tabsState) => Column(
@@ -57,13 +64,10 @@ class _DossierController {
   );
 
   Future<void> _newDossier() async {
-    if (isWebPlatform) return;
-    final title = await DossierDialogs.editTitle(
-      context,
-      initialTitle: '',
-      creating: true,
-    );
-    if (title == null || title.trim().isEmpty || !context.mounted) return;
+    if (isWebPlatform || _dossierBusy) return;
+    final details = await DossierDialogs.createDossier(context);
+    if (details == null || !context.mounted) return;
+    final (title, description) = details;
     final parent = await getDirectoryPath();
     if (parent == null || !context.mounted) return;
     final name = sanitizeFilename(title.trim(), fallback: 'dossier');
@@ -79,13 +83,18 @@ class _DossierController {
       File(p.join(folder.path, 'dossier.json')),
     );
     try {
-      final dossier = await store.create(title.trim());
+      final dossier = await store.create(
+        title.trim(),
+        description: description,
+      );
       if (!context.mounted) return;
       _refreshDossier(() {
         _dossierStore = store;
         _dossier = dossier;
         _showDossier = true;
         _dossierVerification.clear();
+        _dossierOpenedPaths.clear();
+        _entryOpenPaths.clear();
       });
     } catch (error, stack) {
       logError('Dossierhandeling mislukt', error, stack);
@@ -98,7 +107,7 @@ class _DossierController {
   }
 
   Future<void> _openDossier() async {
-    if (isWebPlatform) return;
+    if (isWebPlatform || _dossierBusy) return;
     final file = await openFile(
       acceptedTypeGroups: [
         XTypeGroup(
@@ -117,13 +126,16 @@ class _DossierController {
         _dossier = dossier;
         _showDossier = true;
         _dossierVerification.clear();
+        _dossierOpenedPaths.clear();
+        _entryOpenPaths.clear();
       });
       final all = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
           title: Text(context.l10n.d('Dossier openen')),
           content: Text(
-            context.l10n.d('Wil je de bijlagen ook in tabbladen openen?'),
+            '${context.l10n.d('Wil je de bijlagen ook in tabbladen openen?')}\n\n'
+            '${dossier.entries.length} ${context.l10n.d('documenten')}',
           ),
           actions: [
             TextButton(
@@ -150,8 +162,14 @@ class _DossierController {
     dossier: _dossier!,
     busy: _dossierBusy,
     verification: _dossierVerification,
+    unsavedEntryIds: _unsavedDossierEntryIds(),
     onOpenEntry: (entry) => unawaited(_openDossierEntry(entry)),
     onOpenAll: () => unawaited(_openAllDossierEntries()),
+    openingProgress: _openingProgress,
+    openingTotal: _openingTotal,
+    verificationProgress: _verificationProgress,
+    verificationTotal: _verificationTotal,
+    onCancelOpening: () => _cancelOpening = true,
     onOpenAsDocument: () => unawaited(_openDossierOverviewDocument()),
     onAdd: () => unawaited(_addDossierEntries()),
     onVerifyEntry: (entry) => unawaited(_verifyDossierEntry(entry)),
@@ -187,6 +205,25 @@ class _DossierController {
     ),
     onRenameDossier: (title) =>
         unawaited(_changeDossier((d) => d.copyWith(title: title))),
+    onChangeDescription: (description) =>
+        unawaited(_changeDossier((d) => d.copyWith(description: description))),
+    onChangeStartNumber: (startNumber) =>
+        unawaited(_changeDossier((d) => d.copyWith(startNumber: startNumber))),
+    onChangeEntryNumber: (entry, number) => unawaited(
+      _changeDossier(
+        (d) => d.copyWith(
+          entries: [
+            for (final e in d.entries)
+              e.id == entry.id
+                  ? e.copyWith(
+                      numberOverride: number,
+                      clearNumberOverride: number == null,
+                    )
+                  : e,
+          ],
+        ),
+      ),
+    ),
   );
 
   Widget _dossierReturnBar() => Material(
@@ -211,9 +248,20 @@ class _DossierController {
     if (p.normalize(path) == p.normalize(p.join(root, 'overzicht.md'))) {
       return true;
     }
-    return _dossier!.entries.any(
-      (e) => p.normalize(p.join(root, e.relativePath)) == p.normalize(path),
-    );
+    return _dossierOpenedPaths.contains(p.normalize(path));
+  }
+
+  Set<String> _unsavedDossierEntryIds() {
+    final dirtyPaths = ref
+        .read(tabsProvider)
+        .tabs
+        .where((tab) => tab.isDirty && tab.openFilePath != null)
+        .map((tab) => p.normalize(tab.openFilePath!))
+        .toSet();
+    return {
+      for (final entry in _entryOpenPaths.entries)
+        if (dirtyPaths.contains(entry.value)) entry.key,
+    };
   }
 
   bool _dossierOverviewIsDirty() {
@@ -306,7 +354,10 @@ class _DossierController {
     }
   }
 
-  Future<void> _openDossierEntry(DossierEntry entry) async {
+  Future<void> _openDossierEntry(
+    DossierEntry entry, {
+    bool showTab = true,
+  }) async {
     final path = await _dossierStore?.resolvedPath(entry);
     if (path == null || !context.mounted) {
       if (context.mounted) {
@@ -317,7 +368,11 @@ class _DossierController {
     final outcome = await ref.read(tabsProvider.notifier).openFileByPath(path);
     if (!context.mounted) return;
     if (outcome == OpenResult.opened) {
-      _refreshDossier(() => _showDossier = false);
+      _refreshDossier(() {
+        _dossierOpenedPaths.add(p.normalize(path));
+        _entryOpenPaths[entry.id] = p.normalize(path);
+        if (showTab) _showDossier = false;
+      });
     } else {
       _dossierMessage(
         context.l10n.d('Deze bijlage kon niet veilig worden geopend.'),
@@ -343,22 +398,50 @@ class _DossierController {
   Future<void> _openAllDossierEntries() async {
     final dossier = _dossier;
     if (dossier == null || _dossierBusy) return;
-    _refreshDossier(() => _dossierBusy = true);
+    _refreshDossier(() {
+      _dossierBusy = true;
+      _cancelOpening = false;
+      _openingProgress = 0;
+      _openingTotal = dossier.entries.length;
+    });
     try {
       for (final entry in dossier.entries) {
-        if (!context.mounted) return;
-        await _openDossierEntry(entry);
+        if (!context.mounted || _cancelOpening) break;
+        await _openDossierEntry(entry, showTab: false);
+        if (!context.mounted) break;
+        _refreshDossier(() => _openingProgress = (_openingProgress ?? 0) + 1);
+        await Future<void>.delayed(Duration.zero);
       }
       if (context.mounted) _refreshDossier(() => _showDossier = true);
     } finally {
-      if (context.mounted) _refreshDossier(() => _dossierBusy = false);
+      if (context.mounted) {
+        _refreshDossier(() {
+          _dossierBusy = false;
+          _openingProgress = null;
+          _openingTotal = null;
+        });
+      }
     }
   }
 
   Future<void> _verifyDossierEntry(DossierEntry entry) async {
-    final result = await _dossierStore?.verify(entry);
-    if (result != null && context.mounted) {
-      _refreshDossier(() => _dossierVerification[entry.id] = result.status);
+    final store = _dossierStore;
+    final dossier = _dossier;
+    if (store == null || dossier == null) return;
+    try {
+      final (updated, result) = await store.verifyAndRecord(dossier, entry);
+      if (!context.mounted) return;
+      _refreshDossier(() {
+        _dossier = updated;
+        _dossierVerification[entry.id] = result.status;
+      });
+    } catch (error, stack) {
+      logError('Dossiercontrole mislukt', error, stack);
+      if (context.mounted) {
+        _dossierMessage(
+          context.l10n.d('Deze bijlage kan niet worden gecontroleerd.'),
+        );
+      }
     }
   }
 
@@ -438,13 +521,28 @@ class _DossierController {
   Future<void> _verifyAllDossierEntries() async {
     final dossier = _dossier;
     if (dossier == null || _dossierBusy) return;
-    _refreshDossier(() => _dossierBusy = true);
+    _refreshDossier(() {
+      _dossierBusy = true;
+      _verificationProgress = 0;
+      _verificationTotal = dossier.entries.length;
+    });
     try {
       for (final entry in dossier.entries) {
+        if (!context.mounted) break;
         await _verifyDossierEntry(entry);
+        if (!context.mounted) break;
+        _refreshDossier(
+          () => _verificationProgress = (_verificationProgress ?? 0) + 1,
+        );
       }
     } finally {
-      if (context.mounted) _refreshDossier(() => _dossierBusy = false);
+      if (context.mounted) {
+        _refreshDossier(() {
+          _dossierBusy = false;
+          _verificationProgress = null;
+          _verificationTotal = null;
+        });
+      }
     }
   }
 

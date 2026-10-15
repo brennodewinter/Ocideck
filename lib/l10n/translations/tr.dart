@@ -2514,6 +2514,22 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Referentie vastgelegd': 'Referans bilgisi kaydedilmiştir.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Sekmede kaydedilmemiş değişiklikler var; SHA-256 diskteki sürümü kontrol eder.',
+  'Documenten controleren': 'Belgeler kontrol ediliyor',
+  'Dit nummer is al in gebruik.': 'Bu numara zaten kullanılıyor.',
+  'Documenten openen': 'Belgeleri aç',
+  'Eerdere SHA-256-waarden': 'Önceki SHA-256 değerleri',
+  'Omschrijving wijzigen': 'Açıklamayı değiştir',
+  'Beginnummer wijzigen': 'Başlangıç numarasını değiştir',
+  'Vindplaats': 'Konum',
+  'Laatst gecontroleerd': 'Son kontrol',
+  'Nummer wijzigen': 'Numarayı değiştir',
+  'Waar gaat dit dossier over?': 'Bu dosyanın konusu nedir?',
+  'Nummer': 'Numara',
+  'Gebruik een positief getal.': 'Pozitif bir sayı kullanın.',
+  'Automatisch nummer': 'Otomatik numara',
   'Aanvulling gevraagd': 'Ek bilgi istendi',
   'Aanvulling gevraagd.': 'Ek bilgi istendi.',
   'Aanvulling gevraagd: {opmerking}': 'Ek bilgi istendi: {opmerking}',
@@ -2601,8 +2617,8 @@ const _dutchSourceAddTr = <String, String>{
   'Uit dossier verwijderen': 'Dosyadan kaldır',
   'Uit dossier verwijderen?': 'Dossyadan silmek istiyor musunuz?',
   'Vastgelegde SHA-256': 'Belirlenmiş SHA-256 değeri',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Belgeleri ekleyin. Bunlar dosyanın bir kopyası olarak saklanacak ve sizin tercih ettiğiniz sırayla burada görüntülenecektir.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Belge ekleyin. Özgün dosyalar yerlerinde kalır. Sıralamayı burada belirleyin.',
   'Wijziging opslaan is mislukt.': 'Değişikliği kaydetme başarısız oldu.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Ekleri de sekmlerde açmak ister misiniz?',

@@ -90,7 +90,7 @@ class _AppTabBar extends StatelessWidget {
                   for (int i = 0; i < tabsState.tabs.length; i++)
                     _TabChip(
                       tab: tabsState.tabs[i],
-                      isActive: i == tabsState.clampedIndex,
+                      isActive: !dossierActive && i == tabsState.clampedIndex,
                       showClose:
                           tabsState.tabs.length > 1 || tabsState.tabs[i].isOpen,
                       panelText: palette.panelText,

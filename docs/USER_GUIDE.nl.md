@@ -5150,6 +5150,42 @@ de slides wordt nog steeds geproduceerd.
 
 ## Documenten
 
+### Documentdossiers
+
+Maak met de mapknop naast de tabbladen of via **Bestand → Nieuw dossier** een
+documentdossier. Kies een bovenliggende map en een titel. OciDeck maakt een map
+met `dossier.json` en een leesbaar `overzicht.md`. Met **Documenten toevoegen**
+wijs je bestaande lokale Markdown-documenten of presentaties (`.md`) aan. Het
+dossier bewaart verwijzingen naar die bronbestanden; het kopieert of wijzigt ze
+niet. De omslag en inhoudsopgave tonen de genummerde volgorde. Versleep een
+regel of gebruik de verplaatsknoppen om de volgorde te wijzigen. Een regel
+verwijderen verwijdert alleen de verwijzing.
+
+Open `dossier.json` opnieuw met **Dossier openen**. Je kunt beginnen met alleen
+het overzicht of ook de aangewezen documenten in tabbladen openen. Met een klik
+op een regel open je het document of de presentatie via de gewone
+veiligheidscontroles van OciDeck. De zichtbare knop **Terug naar dossier** in
+het tabblad brengt je terug naar het overzicht. **Als document openen** opent
+`overzicht.md` in een gewoon documenttabblad, waar je de gebruikelijke
+documentexport kunt gebruiken.
+
+Iedere regel bewaart de SHA-256 van de bytes van het bronbestand op het moment
+van toevoegen. **SHA-256 controleren** vergelijkt het huidige opgeslagen
+bronbestand met die waarde; **Alles controleren** doet dit voor alle regels.
+Een gewijzigd, ontbrekend of onleesbaar bestand krijgt een afzonderlijke
+melding. Niet-opgeslagen bewerkingen in een geopend tabblad tellen niet mee
+bij deze schijfcontrole. De bewaarde waarde verandert pas als je na het zien
+van de oude en nieuwe hash expliciet een nieuwe referentie aanvaardt. Deze
+SHA-256 signaleert een verschil met de waarde in het dossier; hij bewijst niet
+wie een bestand heeft gemaakt of goedgekeurd. Met
+`shasum -a 256 <bestandsnaam>` kun je een bestand ook zelfstandig controleren.
+
+Het Markdown-overzicht blijft leesbaar zonder OciDeck; `dossier.json` bewaart
+de bewerkbare volgorde, bronpaden en hashes. Houd de twee dossierbestanden bij
+elkaar. De bronbestanden moeten nog op hun vastgelegde paden beschikbaar zijn
+wanneer je het dossier opent of controleert. Deze versie ondersteunt lokale
+`.md`-documenten en -presentaties als verwijzing.
+
 Naast presentaties bewerkt OciDeck **documenten**: een doorlopend, plat
 Markdown-bestand in plaats van een deck met dia's. Een document is een gewoon
 `.md` zonder diastructuur en zonder Marp-front-matter, zodat het in elk

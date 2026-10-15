@@ -1606,6 +1606,22 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Referentie vastgelegd': 'Viittaus on kirjattu',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Välilehdellä on tallentamattomia muutoksia; SHA-256 tarkistaa levyllä olevan version.',
+  'Documenten controleren': 'Asiakirjojen tarkistus',
+  'Dit nummer is al in gebruik.': 'Tämä numero on jo käytössä.',
+  'Documenten openen': 'Avaa asiakirjat',
+  'Eerdere SHA-256-waarden': 'Aiemmat SHA-256-arvot',
+  'Omschrijving wijzigen': 'Muuta kuvausta',
+  'Beginnummer wijzigen': 'Muuta aloitusnumeroa',
+  'Vindplaats': 'Sijainti',
+  'Laatst gecontroleerd': 'Viimeksi tarkistettu',
+  'Nummer wijzigen': 'Muuta numeroa',
+  'Waar gaat dit dossier over?': 'Mitä tämä asiakirjakansio koskee?',
+  'Nummer': 'Numero',
+  'Gebruik een positief getal.': 'Käytä positiivista lukua.',
+  'Automatisch nummer': 'Automaattinen numero',
   'Aanvulling gevraagd': 'Täydennystä pyydetty',
   'Aanvulling gevraagd.': 'Täydennystä pyydetty.',
   'Aanvulling gevraagd: {opmerking}': 'Täydennystä pyydetty: {opmerking}',
@@ -1693,8 +1709,8 @@ const _dutchSourceAddFi = <String, String>{
   'Uit dossier verwijderen': 'Poista asiakirjakansiosta',
   'Uit dossier verwijderen?': 'Poista kansiosta?',
   'Vastgelegde SHA-256': 'Tallennettu SHA-256',
-  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
-      'Lisää dokumentteja. Ne säilytetään kopioina tähän kansioon ja näkyvät täällä omassa järjestyksessäsi.',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Lisää asiakirjoja. Alkuperäiset tiedostot pysyvät paikoillaan. Valitse niiden järjestys tässä.',
   'Wijziging opslaan is mislukt.': 'Muutoksen tallennus epäonnistui.',
   'Wil je de bijlagen ook in tabbladen openen?':
       'Haluatko avata liitteet myös välilehdissä?',
