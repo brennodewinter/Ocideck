@@ -4420,6 +4420,21 @@ vastgezet; automatische nummers slaan zulke nummers over. `hashHistory` bevat
 eerdere referentiehashes als objecten `{ "sha256": "…", "recordedAt": "…" }`.
 Optionele velden kunnen in oudere items ontbreken.
 
+Versie 2 laat ook deze optionele, bewerkbare velden **per item** toe. Ze
+beschrijven de vermelding in het dossier en wijzigen de Markdown-bron niet:
+
+| JSON-veld | Betekenis |
+| --- | --- |
+| `description` | Korte omschrijving van het document; ontbreekt als zij leeg is. |
+| `documentDate` | Een geldige kalenderdatum uit het document als `JJJJ-MM-DD`, zonder veronderstelde tijdzone; ontbreekt als de datum onbekend is. |
+| `author` | Opsteller als vrije tekst; ontbreekt als deze leeg of onbekend is. |
+
+De bestaande verplichte `title` is de getoonde titel en is samen met deze
+velden bewerkbaar. Ze verschijnen in `overzicht.md`, dat een afgeleide weergave
+van het manifest blijft. AI kan alleen op uitdrukkelijk verzoek een voorstel
+doen als AI is ingesteld en toegestaan. De gebruiker beoordeelt en bewaart het
+voorstel; het manifest krijgt geen apart veld voor AI-herkomst.
+
 Bij controle wordt het huidige bestand op schijf gehasht en met `sha256`
 vergeleken. `checkedAt` legt het controletijdstip vast zonder de referentiehash
 te veranderen. Een nieuwe referentie accepteren is een aparte handeling die de
@@ -4428,3 +4443,14 @@ overeenstemming met de opgeslagen waarde, geen auteurschap of goedkeuring.
 Bij openen en controleren worden onveilige paden en vervangen symbolische
 links geweigerd. Deze versie ondersteunt lokale `.md`-documenten en
 -presentaties als verwijzing; PDF- en Office-bestanden worden niet ondersteund.
+
+De dossier-PDF is een **export** en hoort niet bij het formaat van de
+dossiermap. Hij begint met een omslag en een geordende inhoudsopgave. Daarna
+wordt elke verwezen `.md`-bron als documentinhoud gezet, ook als de bron een
+presentatie is. Een optionele pagina vóór elk document toont het
+dossiernummer, de titel, de korte omschrijving, de datum, de opsteller en de
+opgeslagen SHA-256 voor zover de optionele waarden aanwezig zijn. De export
+controleert elke bron tegen de opgeslagen SHA-256 en past het ingestelde
+classificatie- en privacy-exportbeleid toe. Geredigeerd is het standaardprofiel;
+volledig moet uitdrukkelijk worden gekozen. Export wijzigt de referentiehashes
+in het manifest niet.
