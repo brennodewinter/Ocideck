@@ -89,6 +89,17 @@ extension _SettingsProfile on _SettingsDialogState {
         onPressed: profiles.length <= 1 ? null : _deleteProfile,
         icon: const Icon(Icons.delete_outline, size: 18),
       ),
+      // Organisatie-thema's (#2429): alleen voor wie bewust verbonden is.
+      if (ref.watch(ociServeProvider).authenticated)
+        IconButton(
+          tooltip: l10n.d('Thema’s van de organisatie'),
+          onPressed: () => OciServeOrgThemes.show(
+            context,
+            current: _editedProfile(),
+            onAdopt: _adoptProfile,
+          ),
+          icon: const Icon(Icons.groups_outlined, size: 18),
+        ),
     ];
     // Op smal web (telefoonbreedte) passen vijf 48-px-knoppen niet naast het
     // tekstveld — de Row liep 4 px over (#1885). Onder 400 px gaan de knoppen

@@ -14,6 +14,7 @@ import '../../models/ociserve_intake.dart';
 import '../../models/ociserve_models.dart';
 import '../../models/ociserve_portfolio_import.dart';
 import '../../models/ociserve_settings.dart';
+import '../../models/ociserve_theme.dart';
 import '../../services/pdf_evidence_service.dart';
 import '../../utils/log.dart';
 import '../../utils/zip_encryption.dart';
@@ -31,6 +32,7 @@ part 'ociserve_gateway_skills.dart';
 part 'ociserve_gateway_portfolio.dart';
 part 'ociserve_gateway_certificates.dart';
 part 'ociserve_gateway_calendar.dart';
+part 'ociserve_gateway_themes.dart';
 part 'ociserve_gateway_invitations.dart';
 
 // Bibliotheekbreed in plaats van op OciServeGatewayBase: statische leden van
@@ -58,6 +60,7 @@ abstract class OciServeApi extends OciServePlanningApi
         OciServePortfolioApi,
         OciServeCertificatesApi,
         OciServeCalendarApi,
+        OciServeThemesApi,
         OciServeInvitationsApi {
   Future<OciServeInstallation> installation();
   Future<OciServeOidcConfiguration> discoverOidc(
@@ -898,6 +901,7 @@ class OciServeGateway extends OciServeGatewayBase
         _OciServePortfolio,
         _OciServeCertificates,
         _OciServeCalendar,
+        _OciServeThemes,
         _OciServeInvitations {
   OciServeGateway({required super.settings, super.transport});
 }

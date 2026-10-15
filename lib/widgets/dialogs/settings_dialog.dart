@@ -96,6 +96,7 @@ import 'settings/webdav_form.dart';
 import 'settings/webdav_panel.dart';
 import 'settings/set_aside_findings.dart';
 import 'settings/disabled_privacy_rules.dart';
+import 'ociserve_org_themes.dart';
 
 part 'parts/settings_dialog_sections.dart';
 part 'parts/settings_dialog_chrome.dart';

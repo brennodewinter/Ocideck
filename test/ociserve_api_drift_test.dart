@@ -453,6 +453,44 @@ const gatewayRoutes = <GatewayRoute>[
     responseSchema: 'InvitationAcceptResult',
     responseFields: ['organization_id', 'role'],
   ),
+  // — Themaregister (#2429): delen, ophalen met ETag, bijwerken met
+  // If-Match en verwijderen (409 = ingebouwd/in gebruik) —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/themes',
+    responseSchema: 'ThemeList',
+    responseFields: [
+      'themes',
+      'themes.id',
+      'themes.name',
+      'themes.definition',
+      'themes.is_builtin',
+      'next_cursor',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/themes/{}',
+    responseSchema: 'ThemeItem',
+    responseFields: ['id', 'name', 'definition', 'is_builtin'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/themes',
+    responseSchema: 'ThemeItem',
+    responseFields: ['id', 'name', 'definition', 'is_builtin'],
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/organizations/{}/themes/{}',
+    responseSchema: 'ThemeItem',
+    responseFields: ['id', 'name', 'definition', 'is_builtin'],
+  ),
+  GatewayRoute(
+    method: 'DELETE',
+    path: '/api/v1/organizations/{}/themes/{}',
+    // 204 — no body.
+  ),
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/organizations/{}/badges',

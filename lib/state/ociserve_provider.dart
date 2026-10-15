@@ -16,6 +16,7 @@ import '../models/ociserve_exam.dart';
 import '../models/ociserve_exam_result.dart';
 import '../models/ociserve_models.dart';
 import '../models/ociserve_settings.dart';
+import '../models/ociserve_theme.dart';
 import '../models/playback.dart';
 import '../services/ociserve/ociserve_auth.dart';
 import '../services/ociserve/ociserve_exam_outbox.dart';
@@ -38,6 +39,7 @@ part 'ociserve_provider_skills.dart';
 part 'ociserve_provider_portfolio.dart';
 part 'ociserve_provider_certificates.dart';
 part 'ociserve_provider_calendar.dart';
+part 'ociserve_provider_themes.dart';
 part 'ociserve_provider_invitations.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
@@ -1027,4 +1029,5 @@ class OciServeNotifier extends OciServeNotifierBase
         _OciServePortfolioMethods,
         _OciServeCertificateMethods,
         _OciServeCalendarMethods,
+        _OciServeThemeMethods,
         _OciServeInvitationMethods {}
