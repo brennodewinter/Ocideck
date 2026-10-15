@@ -1606,6 +1606,39 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Der blev ikke fundet noget brugbart forslag. Udfyld selv detaljerne.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI-forslaget kunne ikke hentes. Tjek AI-indstillingerne eller udfyld selv detaljerne.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Brug en gyldig dato såsom ÅÅÅÅ-MM-DD, eller lad feltet stå tomt.',
+  'Documentgegevens': 'Dokument data',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Disse detaljer beskriver dette dokument i dossieret. Kildefilen er ikke ændret.',
+  'Korte omschrijving': 'Kort beskrivelse',
+  'Waar gaat dit document over?': 'Hvad handler dette dokument om?',
+  'Documentdatum': 'Dokumentdato',
+  'JJJJ-MM-DD': 'ÅÅÅÅ-MM-DD',
+  'Opsteller': 'Dokumentforfatter',
+  'Gegevens voorstellen met AI': 'Foreslå detaljer med AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI-forslag afsluttet. Tjek og skift det, før du gemmer.',
+  'Dossier als PDF exporteren': 'Eksporter dossier som PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF\'en indeholder et omslag, en indholdsfortegnelse og alle dokumenter i dossierrækkefølge.',
+  'Tussenpagina vóór elk document': 'Mellemside før hvert dokument',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Med nummer, titel, beskrivelse, dato, forfatter og SHA-256.',
+  'Volledige gegevens tonen': 'Vis alle detaljer',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Personlige data fundet er skjult som standard. Vælg kun alle detaljer for den påtænkte modtager.',
+  'PDF maken': 'Opret PDF',
+  'Documentgegevens bewerken': 'Rediger dokumentoplysninger',
+  'Dossier-PDF opgeslagen': 'Dossier PDF gemt',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier PDF kunne ikke oprettes. Tjek det ændrede eller manglende kildedokument, og prøv igen.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier PDF kunne ikke oprettes. Prøv igen.',
   'Referentie vastgelegd': 'Henvisningen er registreret.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Ikke-gemte ændringer i fanen; SHA-256 kontrollerer versionen på disken.',

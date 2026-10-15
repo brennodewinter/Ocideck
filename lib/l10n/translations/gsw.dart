@@ -1609,6 +1609,39 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Es wurde kein nützlicher Vorschlag gefunden. Füllen Sie die Details selbst aus.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Der KI-Vorschlag konnte nicht abgerufen werden. Überprüfen Sie die KI-Einstellungen oder geben Sie die Details selbst ein.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Verwenden Sie ein gültiges Datum wie JJJJ-MM-TT oder lassen Sie das Feld leer.',
+  'Documentgegevens': 'Dokumentdaten',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Diese Details beschreiben dieses Dokument im Dossier. Die Quelldatei wird nicht geändert.',
+  'Korte omschrijving': 'Kurze Beschreibung',
+  'Waar gaat dit document over?': 'Worum geht es in diesem Dokument?',
+  'Documentdatum': 'Dokumentdatum',
+  'JJJJ-MM-DD': 'JJJJ-MM-TT',
+  'Opsteller': 'Verfasser',
+  'Gegevens voorstellen met AI': 'Aagabe mit KI vorschlaa',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'KI-Vorschlag abgeschlossen. Überprüfen und ändern Sie es vor dem Speichern.',
+  'Dossier als PDF exporteren': 'Dossier als PDF exportiere',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Das PDF enthält ein Cover, ein Inhaltsverzeichnis und alle Dokumente in Dossierreihenfolge.',
+  'Tussenpagina vóór elk document': 'Zwischenseite vor jedem Dokument',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Mit Nummer, Titel, Beschreibung, Datum, Autor und SHA-256.',
+  'Volledige gegevens tonen': 'Vollständige Details anzeigen',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Gefundene personenbezogene Daten werden standardmäßig ausgeblendet. Wählen Sie die vollständigen Angaben nur für den vorgesehenen Empfänger aus.',
+  'PDF maken': 'PDF erstellen',
+  'Documentgegevens bewerken': 'Dokumentinformationen bearbeiten',
+  'Dossier-PDF opgeslagen': 'Dossier-PDF gespeichert',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier-PDF konnte nicht erstellt werden. Überprüfen Sie das geänderte oder fehlende Quelldokument und versuchen Sie es erneut.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier-PDF konnte nicht erstellt werden. Versuchen Sie es erneut.',
   'Referentie vastgelegd': 'D\'Referanz isch feschtlegt',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Nit gspeichereti Änderige im Tab; SHA-256 prüeft d Version uf dr Feschtplatte.',

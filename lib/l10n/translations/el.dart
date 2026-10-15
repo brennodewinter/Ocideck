@@ -1631,6 +1631,39 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Δεν βρέθηκε χρήσιμη πρόταση. Συμπληρώστε μόνοι σας τα στοιχεία.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Δεν ήταν δυνατή η ανάκτηση της πρότασης AI. Ελέγξτε τις ρυθμίσεις AI ή συμπληρώστε τις λεπτομέρειες μόνοι σας.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Χρησιμοποιήστε μια έγκυρη ημερομηνία, όπως ΕΕΕΕ-ΜΜ-ΗΗ ή αφήστε το πεδίο κενό.',
+  'Documentgegevens': 'Δεδομένα εγγράφου',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Αυτές οι λεπτομέρειες περιγράφουν αυτό το έγγραφο στον φάκελο. Το αρχείο προέλευσης δεν έχει αλλάξει.',
+  'Korte omschrijving': 'Σύντομη περιγραφή',
+  'Waar gaat dit document over?': 'Τι αφορά αυτό το έγγραφο;',
+  'Documentdatum': 'Ημερομηνία εγγράφου',
+  'JJJJ-MM-DD': 'ΕΕΕΕ-ΜΜ-ΗΗ',
+  'Opsteller': 'Συντάκτης εγγράφου',
+  'Gegevens voorstellen met AI': 'Προτείνετε λεπτομέρειες με AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Ολοκληρώθηκε η πρόταση AI. Ελέγξτε και αλλάξτε το πριν το αποθηκεύσετε.',
+  'Dossier als PDF exporteren': 'Εξαγωγή φακέλου ως PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Το PDF περιέχει ένα εξώφυλλο, έναν πίνακα περιεχομένων και όλα τα έγγραφα με σειρά φακέλου.',
+  'Tussenpagina vóór elk document': 'Ενδιάμεση σελίδα πριν από κάθε έγγραφο',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Με αριθμό, τίτλο, περιγραφή, ημερομηνία, συγγραφέα και SHA-256.',
+  'Volledige gegevens tonen': 'Εμφάνιση πλήρεις λεπτομέρειες',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Τα προσωπικά δεδομένα που βρέθηκαν είναι κρυμμένα από προεπιλογή. Επιλέξτε τα πλήρη στοιχεία μόνο για τον προβλεπόμενο παραλήπτη.',
+  'PDF maken': 'Δημιουργία PDF',
+  'Documentgegevens bewerken': 'Επεξεργασία πληροφοριών εγγράφου',
+  'Dossier-PDF opgeslagen': 'Ο φάκελος PDF αποθηκεύτηκε',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Δεν ήταν δυνατή η δημιουργία του φακέλου PDF. Ελέγξτε το έγγραφο προέλευσης που έχει αλλάξει ή λείπει και δοκιμάστε ξανά.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Δεν ήταν δυνατή η δημιουργία του φακέλου PDF. Προσπαθήστε ξανά.',
   'Referentie vastgelegd': 'Η αναφορά καταγράφηκε',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Μη αποθηκευμένες αλλαγές στην καρτέλα· το SHA-256 ελέγχει την έκδοση στον δίσκο.',

@@ -1608,6 +1608,39 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nem található hasznos javaslat. Adja meg a részleteket saját maga.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Az AI-javaslat nem tölthető le. Ellenőrizze az AI-beállításokat, vagy adja meg az adatokat saját maga.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Használjon érvényes dátumot, például ÉÉÉÉ-HH-NN, vagy hagyja üresen a mezőt.',
+  'Documentgegevens': 'Dokumentum adatok',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ezek a részletek leírják ezt a dokumentumot a dossziéban. A forrásfájl nem módosul.',
+  'Korte omschrijving': 'Rövid leírás',
+  'Waar gaat dit document over?': 'Miről szól ez a dokumentum?',
+  'Documentdatum': 'Dokumentum dátuma',
+  'JJJJ-MM-DD': 'ÉÉÉÉ-HH-NN',
+  'Opsteller': 'A dokumentum szerzője',
+  'Gegevens voorstellen met AI': 'Javasoljon részleteket az AI segítségével',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Az AI javaslat elkészült. Mentés előtt ellenőrizze és módosítsa.',
+  'Dossier als PDF exporteren': 'A dokumentáció exportálása PDF formátumban',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'A PDF tartalmazza a borítót, a tartalomjegyzéket és az összes dokumentumot dosszié sorrendben.',
+  'Tussenpagina vóór elk document': 'Köztes oldal minden dokumentum előtt',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Számmal, címmel, leírással, dátummal, szerzővel és SHA-256-tal.',
+  'Volledige gegevens tonen': 'Teljes részletek megjelenítése',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'A talált személyes adatok alapértelmezés szerint rejtettek. A teljes részletet csak a címzett számára válassza ki.',
+  'PDF maken': 'PDF létrehozása',
+  'Documentgegevens bewerken': 'Szerkessze a dokumentum adatait',
+  'Dossier-PDF opgeslagen': 'A dosszié PDF mentve',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'A dokumentáció PDF létrehozása nem sikerült. Ellenőrizze a megváltozott vagy hiányzó forrásdokumentumot, és próbálja újra.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'A dokumentáció PDF létrehozása nem sikerült. Próbáld újra.',
   'Referentie vastgelegd': 'A hivatkozás rögzítve van.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Mentetlen módosítások a lapon; a SHA-256 a lemezen lévő verziót ellenőrzi.',

@@ -649,6 +649,40 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'No se encontró ninguna propuesta útil. Complete los detalles usted mismo.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'No se pudo recuperar la propuesta de IA. Verifique la configuración de AI o complete los detalles usted mismo.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Utilice una fecha válida como AAAA-MM-DD o deje el campo en blanco.',
+  'Documentgegevens': 'Datos del documento',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Estos detalles describen este documento en el expediente. El archivo fuente no se modifica.',
+  'Korte omschrijving': 'Breve descripción',
+  'Waar gaat dit document over?': '¿De qué trata este documento?',
+  'Documentdatum': 'Fecha del documento',
+  'JJJJ-MM-DD': 'AAAA-MM-DD',
+  'Opsteller': 'Autor del documento',
+  'Gegevens voorstellen met AI': 'Sugerir detalles con IA',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Propuesta de IA completada. Compruébalo y cámbialo antes de guardar.',
+  'Dossier als PDF exporteren': 'Exportar dossier como PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'El PDF contiene una portada, un índice y todos los documentos en orden de expediente.',
+  'Tussenpagina vóór elk document':
+      'Página intermedia antes de cada documento.',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Con número, título, descripción, fecha, autor y SHA-256.',
+  'Volledige gegevens tonen': 'Mostrar todos los detalles',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Los datos personales encontrados están ocultos de forma predeterminada. Elija los detalles completos solo para el destinatario previsto.',
+  'PDF maken': 'Crear PDF',
+  'Documentgegevens bewerken': 'Editar información del documento',
+  'Dossier-PDF opgeslagen': 'Dossier PDF guardado',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'No se pudo crear el PDF del dossier. Verifique el documento fuente modificado o faltante e inténtelo nuevamente.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'No se pudo crear el PDF del dossier. Intentar otra vez.',
   'Referentie vastgelegd': 'La referencia está registrada',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Cambios sin guardar en la pestaña; SHA-256 comprueba la versión en disco.',

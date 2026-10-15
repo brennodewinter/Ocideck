@@ -1626,6 +1626,39 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Не беше намерено полезно предложение. Попълнете данните сами.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Предложението за AI не можа да бъде извлечено. Проверете настройките на AI или попълнете подробностите сами.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Използвайте валидна дата като ГГГГ-ММ-ДД или оставете полето празно.',
+  'Documentgegevens': 'Данни за документи',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Тези подробности описват този документ в досието. Изходният файл не се променя.',
+  'Korte omschrijving': 'Кратко описание',
+  'Waar gaat dit document over?': 'За какво е този документ?',
+  'Documentdatum': 'Дата на документа',
+  'JJJJ-MM-DD': 'ГГГГ-ММ-ДД',
+  'Opsteller': 'Автор на документа',
+  'Gegevens voorstellen met AI': 'Предложете подробности с AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Предложението за изкуствен интелект е завършено. Проверете и го променете, преди да запазите.',
+  'Dossier als PDF exporteren': 'Експортиране на досие като PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF файлът съдържа корица, съдържание и всички документи в реда на досиетата.',
+  'Tussenpagina vóór elk document': 'Междинна страница преди всеки документ',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'С номер, заглавие, описание, дата, автор и SHA-256.',
+  'Volledige gegevens tonen': 'Покажи пълните подробности',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Намерените лични данни са скрити по подразбиране. Изберете пълни подробности само за предвидения получател.',
+  'PDF maken': 'Създайте PDF',
+  'Documentgegevens bewerken': 'Редактиране на информация за документа',
+  'Dossier-PDF opgeslagen': 'PDF досието е запазено',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'PDF досие не можа да бъде създадено. Проверете променения или липсващ изходен документ и опитайте отново.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'PDF досие не можа да бъде създадено. Опитайте отново.',
   'Referentie vastgelegd': 'Препратката е записана',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Незапазени промени в раздела; SHA-256 проверява версията на диска.',

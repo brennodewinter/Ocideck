@@ -1599,6 +1599,39 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Ühtegi kasulikku ettepanekut ei leitud. Täitke andmed ise.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Tehisintellekti ettepanekut ei saanud tuua. Kontrollige AI seadeid või sisestage üksikasjad ise.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Kasutage kehtivat kuupäeva (nt AAAA-KK-PP) või jätke väli tühjaks.',
+  'Documentgegevens': 'Dokumendi andmed',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Need üksikasjad kirjeldavad seda dokumenti toimikus. Lähtefaili ei muudeta.',
+  'Korte omschrijving': 'Lühikirjeldus',
+  'Waar gaat dit document over?': 'Millest see dokument räägib?',
+  'Documentdatum': 'Dokumendi kuupäev',
+  'JJJJ-MM-DD': 'AAAA-KK-PP',
+  'Opsteller': 'Dokumendi autor',
+  'Gegevens voorstellen met AI': 'Soovitage tehisintellektiga üksikasju',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI ettepanek on lõpetatud. Enne salvestamist kontrollige ja muutke seda.',
+  'Dossier als PDF exporteren': 'Ekspordi toimik PDF-vormingus',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF sisaldab kaant, sisukorda ja kõiki dokumente toimiku järjekorras.',
+  'Tussenpagina vóór elk document': 'Vaheleht enne iga dokumenti',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Numbri, pealkirja, kirjelduse, kuupäeva, autori ja SHA-256-ga.',
+  'Volledige gegevens tonen': 'Kuva kõik üksikasjad',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Leitud isikuandmed on vaikimisi peidetud. Valige täielikud üksikasjad ainult kavandatud adressaadi jaoks.',
+  'PDF maken': 'Looge PDF',
+  'Documentgegevens bewerken': 'Muutke dokumendi teavet',
+  'Dossier-PDF opgeslagen': 'Toimiku PDF on salvestatud',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Toimiku PDF-i ei saanud luua. Kontrollige muudetud või puuduvat lähtedokumenti ja proovige uuesti.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Toimiku PDF-i ei saanud luua. Proovi uuesti.',
   'Referentie vastgelegd': 'Viide salvestatud',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Vahekaardil on salvestamata muudatusi; SHA-256 kontrollib kettal olevat versiooni.',
