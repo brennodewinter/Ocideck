@@ -2514,6 +2514,39 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Faydalı bir teklif bulunamadı. Ayrıntıları kendiniz doldurun.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Yapay zeka teklifi alınamadı. AI ayarlarını kontrol edin veya ayrıntıları kendiniz doldurun.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'YYYY-AA-GG gibi geçerli bir tarih kullanın veya alanı boş bırakın.',
+  'Documentgegevens': 'Belge verileri',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Bu ayrıntılar bu belgeyi dosyada açıklamaktadır. Kaynak dosya değiştirilmez.',
+  'Korte omschrijving': 'Kısa açıklama',
+  'Waar gaat dit document over?': 'Bu belge neyle ilgili?',
+  'Documentdatum': 'Belge tarihi',
+  'JJJJ-MM-DD': 'YYYY-AA-GG',
+  'Opsteller': 'Belge yazarı',
+  'Gegevens voorstellen met AI': 'AI ile ayrıntıları önerin',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Yapay zeka teklifi tamamlandı. Kaydetmeden önce kontrol edin ve değiştirin.',
+  'Dossier als PDF exporteren': 'Dosyayı PDF olarak dışa aktar',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF, bir kapak, içindekiler tablosu ve tüm belgeleri dosya sırasına göre içerir.',
+  'Tussenpagina vóór elk document': 'Her belgeden önceki ara sayfa',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Numara, başlık, açıklama, tarih, yazar ve SHA-256 ile.',
+  'Volledige gegevens tonen': 'Tüm ayrıntıları göster',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Bulunan kişisel veriler varsayılan olarak gizlenir. Yalnızca amaçlanan alıcı için tüm ayrıntıları seçin.',
+  'PDF maken': 'PDF oluştur',
+  'Documentgegevens bewerken': 'Belge bilgilerini düzenle',
+  'Dossier-PDF opgeslagen': 'Dosya PDF\'si kaydedildi',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dosya PDF\'si oluşturulamadı. Değiştirilen veya eksik kaynak belgeyi kontrol edip tekrar deneyin.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dosya PDF\'si oluşturulamadı. Tekrar deneyin.',
   'Referentie vastgelegd': 'Referans bilgisi kaydedilmiştir.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Sekmede kaydedilmemiş değişiklikler var; SHA-256 diskteki sürümü kontrol eder.',

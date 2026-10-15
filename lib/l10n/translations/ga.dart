@@ -1636,6 +1636,40 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Ní bhfuarthas aon mholadh úsáideach. Líon isteach na sonraí tú féin.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Níorbh fhéidir an togra AI a aisghabháil. Seiceáil na socruithe AI ​​nó líon isteach na sonraí tú féin.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Bain úsáid as dáta bailí ar nós BBBB-MM-DD, nó fág bán an réimse.',
+  'Documentgegevens': 'Sonraí doiciméad',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Déanann na sonraí seo cur síos ar an doiciméad seo sa chomhad. Ní athraítear an comhad foinse.',
+  'Korte omschrijving': 'Cur síos gairid',
+  'Waar gaat dit document over?': 'Cad faoi atá an doiciméad seo?',
+  'Documentdatum': 'Dáta an doiciméid',
+  'JJJJ-MM-DD': 'BBBB-MM-LL',
+  'Opsteller': 'Údar doiciméid',
+  'Gegevens voorstellen met AI': 'Mol sonraí le AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Togra AI curtha i gcrích. Seiceáil agus athraigh é roimh shábháil.',
+  'Dossier als PDF exporteren': 'Comhad a onnmhairiú go pdf',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Tá clúdach, clár na n-ábhar, agus gach doiciméad in ord sainchomhaid sa PDF.',
+  'Tussenpagina vóór elk document':
+      'Leathanach idirmheánach roimh gach doiciméad',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Le uimhir, teideal, tuairisc, dáta, údar agus SHA-256.',
+  'Volledige gegevens tonen': 'Taispeáin sonraí iomlána',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Tá na sonraí pearsanta a aimsítear i bhfolach de réir réamhshocraithe. Roghnaigh sonraí iomlána don fhaighteoir beartaithe amháin.',
+  'PDF maken': 'Cruthaigh pdf',
+  'Documentgegevens bewerken': 'Cuir faisnéis doiciméad in eagar',
+  'Dossier-PDF opgeslagen': 'Comhad PDF a shábháil',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Níorbh fhéidir comhad PDF a chruthú. Seiceáil an doiciméad foinse athraithe nó in easnamh agus bain triail eile as.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Níorbh fhéidir comhad PDF a chruthú. Bain triail eile as.',
   'Referentie vastgelegd': 'Tagairt taifeadta',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Athruithe neamhshábháilte sa chluaisín; seiceálann SHA-256 an leagan ar an diosca.',

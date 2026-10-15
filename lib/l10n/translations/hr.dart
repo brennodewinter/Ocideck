@@ -1610,6 +1610,39 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nije pronađen nijedan koristan prijedlog. Sami ispunite podatke.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI prijedlog nije moguće dohvatiti. Provjerite AI postavke ili sami ispunite detalje.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Koristite važeći datum kao što je GGGG-MM-DD ili ostavite polje prazno.',
+  'Documentgegevens': 'Podaci o dokumentu',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ovi detalji opisuju ovaj dokument u dosjeu. Izvorna datoteka nije promijenjena.',
+  'Korte omschrijving': 'Kratki opis',
+  'Waar gaat dit document over?': 'O čemu se radi u ovom dokumentu?',
+  'Documentdatum': 'Datum dokumenta',
+  'JJJJ-MM-DD': 'GGGG-MM-DD',
+  'Opsteller': 'Autor dokumenta',
+  'Gegevens voorstellen met AI': 'Predloži detalje pomoću AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI prijedlog dovršen. Provjerite i promijenite ga prije spremanja.',
+  'Dossier als PDF exporteren': 'Izvoz dosjea kao PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF sadrži naslovnicu, sadržaj i sve dokumente prema redoslijedu dosjea.',
+  'Tussenpagina vóór elk document': 'Međustranica prije svakog dokumenta',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Sa brojem, naslovom, opisom, datumom, autorom i SHA-256.',
+  'Volledige gegevens tonen': 'Prikaži sve pojedinosti',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Pronađeni osobni podaci skriveni su prema zadanim postavkama. Odaberite sve pojedinosti samo za namjeravanog primatelja.',
+  'PDF maken': 'Izradi PDF',
+  'Documentgegevens bewerken': 'Uredite informacije o dokumentu',
+  'Dossier-PDF opgeslagen': 'Dosje PDF spremljen',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Nije moguće izraditi PDF dosjea. Provjerite promijenjeni ili nedostajući izvorni dokument i pokušajte ponovno.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Nije moguće izraditi PDF dosjea. Pokušajte ponovno.',
   'Referentie vastgelegd': 'Referenca je evidentirana',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Nespremljene promjene na kartici; SHA-256 provjerava verziju na disku.',

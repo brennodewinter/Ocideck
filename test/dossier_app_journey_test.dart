@@ -32,6 +32,12 @@ class _DossierPicker extends FileSelectorPlatform {
     String? initialDirectory,
     String? confirmButtonText,
   }) async => document == null ? null : XFile(document!);
+
+  @override
+  Future<FileSaveLocation?> getSaveLocation({
+    List<XTypeGroup>? acceptedTypeGroups,
+    SaveDialogOptions options = const SaveDialogOptions(),
+  }) async => FileSaveLocation('$directory/dossier-export.pdf');
 }
 
 void main() {
@@ -211,4 +217,54 @@ void main() {
       expect(find.byType(DossierOverview), findsOneWidget);
     },
   );
+
+  testWidgets('edit source facts and export a PDF from the dossier', (
+    tester,
+  ) async {
+    final source = File('${temp.path}/rapport.md');
+    await tester.runAsync(
+      () => source.writeAsString(
+        '# Rapport\n\nEen leesbare samenvatting van de bevindingen.',
+      ),
+    );
+    final store = DocumentDossierStore(File('${temp.path}/Zaak/dossier.json'));
+    await tester.runAsync(() async {
+      var dossier = await store.create('Zaak');
+      dossier = await store.addFile(dossier, source);
+    });
+    picker.document = store.manifestFile.path;
+    await start(tester);
+    await dossierMenu(tester, 'Dossier openen…');
+    await tester.tap(find.text('Alleen overzicht'));
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.text('Documentgegevens bewerken').first);
+    await tester.tap(find.text('Documentgegevens bewerken').first);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byType(TextField).at(1),
+      'De kern van het rapport.',
+    );
+    await tester.enterText(find.byType(TextField).at(2), '2026-10-15');
+    await tester.enterText(find.byType(TextField).at(3), 'Onderzoeksteam');
+    await tapUntil(
+      tester,
+      find.text('Opslaan'),
+      () =>
+          find.byType(AlertDialog).evaluate().isEmpty &&
+          find.text('De kern van het rapport.').evaluate().isNotEmpty,
+    );
+    final updated = (await tester.runAsync(store.load))!;
+    expect(updated.entries.single.description, 'De kern van het rapport.');
+    expect(updated.entries.single.documentDate, '2026-10-15');
+    expect(updated.entries.single.author, 'Onderzoeksteam');
+
+    await tester.tap(find.text('Dossier als PDF exporteren'));
+    await tester.pumpAndSettle();
+    expect(find.text('Tussenpagina vóór elk document'), findsOneWidget);
+    final output = File('${temp.path}/dossier-export.pdf');
+    await tapUntil(tester, find.text('PDF maken'), output.existsSync);
+    final bytes = (await tester.runAsync(output.readAsBytes))!;
+    expect(String.fromCharCodes(bytes.take(4)), '%PDF');
+  });
 }

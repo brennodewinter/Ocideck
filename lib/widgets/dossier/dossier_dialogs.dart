@@ -2,9 +2,37 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/document_dossier.dart';
+import '../../models/privacy_disposition.dart';
+
+typedef DossierEntryDetails = ({
+  String title,
+  String description,
+  String? documentDate,
+  String author,
+});
+
+typedef DossierPdfOptions = ({
+  bool includeInterleaves,
+  PrivacyExportProfile profile,
+});
 
 /// Small, focused prompts used by the dossier overview.
 abstract final class DossierDialogs {
+  static Future<DossierPdfOptions?> pdfExportOptions(BuildContext context) =>
+      showDialog<DossierPdfOptions>(
+        context: context,
+        builder: (_) => const _DossierPdfOptionsDialog(),
+      );
+
+  static Future<DossierEntryDetails?> editEntryDetails(
+    BuildContext context, {
+    required DossierEntry entry,
+    Future<DossierEntryDetails?> Function()? suggest,
+  }) => showDialog<DossierEntryDetails>(
+    context: context,
+    builder: (_) => _EntryDetailsDialog(entry: entry, suggest: suggest),
+  );
+
   static Future<(String, String)?> createDossier(BuildContext context) =>
       showDialog<(String, String)>(
         context: context,
@@ -345,6 +373,273 @@ class _NumberDialogState extends State<_NumberDialog> {
           child: Text(l10n.d('Annuleren')),
         ),
         FilledButton(onPressed: _submit, child: Text(l10n.d('Opslaan'))),
+      ],
+    );
+  }
+}
+
+class _EntryDetailsDialog extends StatefulWidget {
+  const _EntryDetailsDialog({required this.entry, this.suggest});
+
+  final DossierEntry entry;
+  final Future<DossierEntryDetails?> Function()? suggest;
+
+  @override
+  State<_EntryDetailsDialog> createState() => _EntryDetailsDialogState();
+}
+
+class _EntryDetailsDialogState extends State<_EntryDetailsDialog> {
+  late final TextEditingController _title;
+  late final TextEditingController _description;
+  late final TextEditingController _date;
+  late final TextEditingController _author;
+  bool _suggesting = false;
+  bool _hasSuggestion = false;
+  String? _dateError;
+  String? _suggestionError;
+
+  @override
+  void initState() {
+    super.initState();
+    _title = TextEditingController(text: widget.entry.title);
+    _description = TextEditingController(text: widget.entry.description);
+    _date = TextEditingController(text: widget.entry.documentDate ?? '');
+    _author = TextEditingController(text: widget.entry.author);
+  }
+
+  @override
+  void dispose() {
+    _title.dispose();
+    _description.dispose();
+    _date.dispose();
+    _author.dispose();
+    super.dispose();
+  }
+
+  Future<void> _suggest() async {
+    final callback = widget.suggest;
+    if (callback == null || _suggesting) return;
+    setState(() {
+      _suggesting = true;
+      _suggestionError = null;
+    });
+    try {
+      final result = await callback();
+      if (!mounted) return;
+      if (result == null) {
+        setState(
+          () => _suggestionError = context.l10n.d(
+            'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.',
+          ),
+        );
+        return;
+      }
+      _title.text = result.title.trim().isEmpty ? _title.text : result.title;
+      _description.text = result.description;
+      _date.text = result.documentDate ?? '';
+      _author.text = result.author;
+      setState(() {
+        _hasSuggestion = true;
+        _dateError = null;
+      });
+    } on Exception {
+      if (mounted) {
+        setState(
+          () => _suggestionError = context.l10n.d(
+            'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.',
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _suggesting = false);
+    }
+  }
+
+  void _save() {
+    final date = _date.text.trim();
+    if (_title.text.trim().isEmpty) return;
+    if (date.isNotEmpty && !_validDate(date)) {
+      setState(
+        () => _dateError = context.l10n.d(
+          'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.',
+        ),
+      );
+      return;
+    }
+    Navigator.of(context).pop((
+      title: _title.text.trim(),
+      description: _description.text.trim(),
+      documentDate: date.isEmpty ? null : date,
+      author: _author.text.trim(),
+    ));
+  }
+
+  bool _validDate(String value) {
+    if (!RegExp(r'^\d{4}-\d{2}-\d{2}$').hasMatch(value)) return false;
+    final date = DateTime.tryParse(value);
+    return date != null &&
+        '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}' ==
+            value;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.d('Documentgegevens')),
+      content: SizedBox(
+        width: 480,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.d(
+                  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.',
+                ),
+              ),
+              const SizedBox(height: 16),
+              if (widget.suggest != null) ...[
+                OutlinedButton.icon(
+                  onPressed: _suggesting ? null : _suggest,
+                  icon: _suggesting
+                      ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.auto_awesome_outlined),
+                  label: Text(l10n.d('Gegevens voorstellen met AI')),
+                ),
+                if (_hasSuggestion)
+                  Text(
+                    l10n.d(
+                      'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.',
+                    ),
+                  ),
+                if (_suggestionError != null) Text(_suggestionError!),
+                const SizedBox(height: 12),
+              ],
+              TextField(
+                controller: _title,
+                autofocus: true,
+                maxLength: 160,
+                decoration: InputDecoration(labelText: l10n.d('Titel')),
+              ),
+              TextField(
+                controller: _description,
+                maxLength: 500,
+                maxLines: 3,
+                decoration: InputDecoration(
+                  labelText: l10n.d('Korte omschrijving'),
+                  hintText: l10n.d('Waar gaat dit document over?'),
+                ),
+              ),
+              TextField(
+                controller: _date,
+                keyboardType: TextInputType.datetime,
+                maxLength: 10,
+                decoration: InputDecoration(
+                  labelText: l10n.d('Documentdatum'),
+                  hintText: l10n.d('JJJJ-MM-DD'),
+                  errorText: _dateError,
+                ),
+                onChanged: (_) => setState(() => _dateError = null),
+              ),
+              TextField(
+                controller: _author,
+                maxLength: 160,
+                decoration: InputDecoration(labelText: l10n.d('Opsteller')),
+              ),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        FilledButton(
+          onPressed: _suggesting ? null : _save,
+          child: Text(l10n.d('Opslaan')),
+        ),
+      ],
+    );
+  }
+}
+
+class _DossierPdfOptionsDialog extends StatefulWidget {
+  const _DossierPdfOptionsDialog();
+
+  @override
+  State<_DossierPdfOptionsDialog> createState() =>
+      _DossierPdfOptionsDialogState();
+}
+
+class _DossierPdfOptionsDialogState extends State<_DossierPdfOptionsDialog> {
+  bool _includeInterleaves = true;
+  PrivacyExportProfile _profile = PrivacyExportProfile.redacted;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.d('Dossier als PDF exporteren')),
+      content: SizedBox(
+        width: 460,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.d(
+                'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.',
+              ),
+            ),
+            const SizedBox(height: 12),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              value: _includeInterleaves,
+              onChanged: (value) => setState(() => _includeInterleaves = value),
+              title: Text(l10n.d('Tussenpagina vóór elk document')),
+              subtitle: Text(
+                l10n.d(
+                  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.',
+                ),
+              ),
+            ),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              value: _profile == PrivacyExportProfile.full,
+              onChanged: (value) => setState(
+                () => _profile = value
+                    ? PrivacyExportProfile.full
+                    : PrivacyExportProfile.redacted,
+              ),
+              title: Text(l10n.d('Volledige gegevens tonen')),
+              subtitle: Text(
+                l10n.d(
+                  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        FilledButton.icon(
+          onPressed: () => Navigator.of(
+            context,
+          ).pop((includeInterleaves: _includeInterleaves, profile: _profile)),
+          icon: const Icon(Icons.picture_as_pdf_outlined),
+          label: Text(l10n.d('PDF maken')),
+        ),
       ],
     );
   }

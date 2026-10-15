@@ -1604,6 +1604,39 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Netika atrasts neviens noderīgs priekšlikums. Aizpildiet informāciju pats.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI priekšlikumu nevarēja izgūt. Pārbaudiet AI iestatījumus vai aizpildiet informāciju pats.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Izmantojiet derīgu datumu, piemēram, GGGG-MM-DD, vai atstājiet lauku tukšu.',
+  'Documentgegevens': 'Dokumentu dati',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Šī informācija apraksta šo dokumentācijā iekļauto dokumentu. Avota fails netiek mainīts.',
+  'Korte omschrijving': 'Īss apraksts',
+  'Waar gaat dit document over?': 'Par ko ir šis dokuments?',
+  'Documentdatum': 'Dokumenta datums',
+  'JJJJ-MM-DD': 'GGGG-MM-DD',
+  'Opsteller': 'Dokumenta autors',
+  'Gegevens voorstellen met AI': 'Iesakiet informāciju, izmantojot AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI priekšlikums ir pabeigts. Pirms saglabāšanas pārbaudiet un mainiet to.',
+  'Dossier als PDF exporteren': 'Eksportēt dokumentāciju PDF formātā',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF failā ir vāks, satura rādītājs un visi dokumenti dokumentācijas secībā.',
+  'Tussenpagina vóór elk document': 'Starplapa pirms katra dokumenta',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Ar numuru, nosaukumu, aprakstu, datumu, autoru un SHA-256.',
+  'Volledige gegevens tonen': 'Rādīt visu informāciju',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Atrastie personas dati pēc noklusējuma ir paslēpti. Izvēlieties pilnu informāciju tikai paredzētajam adresātam.',
+  'PDF maken': 'Izveidot PDF',
+  'Documentgegevens bewerken': 'Rediģēt dokumenta informāciju',
+  'Dossier-PDF opgeslagen': 'Dokumentācijas PDF fails ir saglabāts',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dokumentācijas PDF failu nevarēja izveidot. Pārbaudiet izmainīto vai trūkstošo avota dokumentu un mēģiniet vēlreiz.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dokumentācijas PDF failu nevarēja izveidot. Mēģiniet vēlreiz.',
   'Referentie vastgelegd': 'Atsauce fiksēta',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Cilnē ir nesaglabātas izmaiņas; SHA-256 pārbauda diskā esošo versiju.',

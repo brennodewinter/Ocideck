@@ -1621,6 +1621,39 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'nulla propositio utilis inventa est. Imple in details te ipsum.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI rogatio insanabilis non est. Reprehendo AI occasus vel in singulis te imple.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Date valido utere ut YYYY-MM-DD, vel agrum blank relinqueret.',
+  'Documentgegevens': 'Notitiae documenti',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Singula haec documentum in fasciculo describunt. Fons lima non mutatur.',
+  'Korte omschrijving': 'Brevis descriptio',
+  'Waar gaat dit document over?': 'Quid est hoc documentum de?',
+  'Documentdatum': 'Dies documenti',
+  'JJJJ-MM-DD': 'AAAA-MM-DD',
+  'Opsteller': 'Auctor documenti',
+  'Gegevens voorstellen met AI': 'Notitias per AI suggerere',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI propositio perficitur. Compesce et mutare ante salutaris.',
+  'Dossier als PDF exporteren': 'Fasciculum ut PDF exportare',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF involucrum, tabulam contentorum et omnia documenta in ordine instrumenti continet.',
+  'Tussenpagina vóór elk document': 'Media pagina coram singulis documentis',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Cum numero, titulo, descriptione, date, authore et SHA-256.',
+  'Volledige gegevens tonen': 'Monstra plena singula',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Personalia notitia inventa occultatur per defaltam. Elige plena singula tantum in animo recipiens.',
+  'PDF maken': 'PDF creare',
+  'Documentgegevens bewerken': 'Documentum recensere informationes',
+  'Dossier-PDF opgeslagen': 'Dossier PDF servavit',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'PDF dossier creari non potuit. Compesce mutatum vel absentis fontem documentum et iterum tenta.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'PDF dossier creari non potuit. Iterum tenta.',
   'Referentie vastgelegd': 'Referentia consignata',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Mutationes in tabula nondum servatae; SHA-256 versionem in disco inspicit.',

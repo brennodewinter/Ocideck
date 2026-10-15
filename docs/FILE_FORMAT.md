@@ -4416,6 +4416,21 @@ numbers skip reserved overrides. `hashHistory` holds prior reference hashes as
 `{ "sha256": "…", "recordedAt": "…" }` objects. Optional fields may be absent
 in older entries.
 
+Version 2 also permits these optional, editable **entry** fields; they describe
+the dossier listing and do not modify the referenced Markdown source:
+
+| JSON field | Meaning |
+| --- | --- |
+| `description` | Short document summary; absent when empty. |
+| `documentDate` | Date stated in the document as a valid `YYYY-MM-DD` calendar date, without an inferred time zone; absent when unknown. |
+| `author` | Document author/preparer as free text; absent when empty or unknown. |
+
+`title` is the existing required display title and is editable alongside these
+fields. They appear in `overzicht.md`; that file remains a derived view of the
+manifest. AI can propose values only on an explicit user request when AI is
+configured and allowed. The user reviews and saves the proposal; no separate
+AI provenance field is written to the manifest.
+
 Verification hashes the current file on disk and compares it with `sha256`;
 `checkedAt` records when a check was made, without changing the reference hash.
 Accepting a new reference is a separate action that appends the previous hash
@@ -4423,3 +4438,13 @@ to `hashHistory`. A matching SHA-256 shows agreement with the stored value, not
 authorship or approval. Opening and checking references rejects unsafe paths
 and symbolic-link substitutions. Current dossier references are local `.md`
 documents and presentations; PDF and Office files are not supported.
+
+The dossier PDF is an **export**, not part of the dossier folder contract. It
+starts with a cover and ordered contents, then typesets each referenced `.md`
+source as document content, including presentation sources. An optional page
+before each document shows its dossier number, title, short summary, date,
+author, and stored SHA-256 when those optional values exist. The export checks
+every referenced source against its stored SHA-256 and applies the configured
+classification and privacy export policies. Its redacted profile is the
+default; the full profile must be chosen explicitly. Exporting does not update
+the manifest's reference hashes.

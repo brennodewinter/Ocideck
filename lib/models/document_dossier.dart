@@ -114,6 +114,9 @@ class DossierEntry {
     required this.title,
     required this.relativePath,
     required this.sha256,
+    this.description = '',
+    this.documentDate,
+    this.author = '',
     this.sourcePath,
     this.sourceRelativePath,
     this.originalName,
@@ -128,6 +131,11 @@ class DossierEntry {
   final String title;
   final String relativePath;
   final String sha256;
+  final String description;
+
+  /// ISO calendar date from the document, without an inferred time zone.
+  final String? documentDate;
+  final String author;
 
   /// Absolute path of the original source. Null for a legacy copied attachment.
   final String? sourcePath;
@@ -145,6 +153,10 @@ class DossierEntry {
     String? title,
     String? relativePath,
     String? sha256,
+    String? description,
+    String? documentDate,
+    bool clearDocumentDate = false,
+    String? author,
     int? sizeBytes,
     DateTime? checkedAt,
     List<DossierHashRevision>? hashHistory,
@@ -155,6 +167,9 @@ class DossierEntry {
     title: title ?? this.title,
     relativePath: relativePath ?? this.relativePath,
     sha256: sha256 ?? this.sha256,
+    description: description ?? this.description,
+    documentDate: clearDocumentDate ? null : documentDate ?? this.documentDate,
+    author: author ?? this.author,
     sourcePath: sourcePath,
     sourceRelativePath: sourceRelativePath,
     originalName: originalName,
@@ -183,6 +198,11 @@ class DossierEntry {
         json['sizeBytes'] != null &&
             (json['sizeBytes'] is! int || (json['sizeBytes'] as int) < 0) ||
         json['checkedAt'] != null && json['checkedAt'] is! String ||
+        json['description'] != null && json['description'] is! String ||
+        json['documentDate'] != null &&
+            (json['documentDate'] is! String ||
+                !validDocumentDate(json['documentDate'] as String)) ||
+        json['author'] != null && json['author'] is! String ||
         history != null && history is! List) {
       throw const FormatException('Ongeldig dossieritem');
     }
@@ -191,6 +211,9 @@ class DossierEntry {
       title: json['title'] as String,
       relativePath: json['relativePath'] as String,
       sha256: (json['sha256'] as String).toLowerCase(),
+      description: json['description'] as String? ?? '',
+      documentDate: json['documentDate'] as String?,
+      author: json['author'] as String? ?? '',
       sourcePath: json['sourcePath'] as String?,
       sourceRelativePath: json['sourceRelativePath'] as String?,
       originalName: json['originalName'] as String?,
@@ -214,6 +237,9 @@ class DossierEntry {
             'title',
             'relativePath',
             'sha256',
+            'description',
+            'documentDate',
+            'author',
             'sourcePath',
             'sourceRelativePath',
             'originalName',
@@ -232,6 +258,9 @@ class DossierEntry {
     'title': title,
     'relativePath': relativePath,
     'sha256': sha256,
+    if (description.isNotEmpty) 'description': description,
+    if (documentDate != null) 'documentDate': documentDate,
+    if (author.isNotEmpty) 'author': author,
     if (sourcePath != null) 'sourcePath': sourcePath,
     if (sourceRelativePath != null) 'sourceRelativePath': sourceRelativePath,
     if (originalName != null) 'originalName': originalName,
@@ -240,6 +269,15 @@ class DossierEntry {
     'hashHistory': hashHistory.map((revision) => revision.toJson()).toList(),
     if (numberOverride != null) 'numberOverride': numberOverride,
   };
+
+  static bool validDocumentDate(String value) {
+    if (!RegExp(r'^\d{4}-\d{2}-\d{2}$').hasMatch(value)) return false;
+    final parsed = DateTime.tryParse(value);
+    return parsed != null &&
+        parsed.year == int.parse(value.substring(0, 4)) &&
+        parsed.month == int.parse(value.substring(5, 7)) &&
+        parsed.day == int.parse(value.substring(8, 10));
+  }
 }
 
 class DossierHashRevision {

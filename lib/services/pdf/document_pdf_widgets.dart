@@ -29,6 +29,7 @@ import 'document_pdf_orphan_safe_table.dart';
 import 'document_pdf_style.dart';
 import 'document_pdf_table_widths.dart';
 import 'document_pdf_timeline.dart';
+import 'dossier_pdf_page.dart';
 
 part 'parts/document_pdf_tables.dart';
 
@@ -308,6 +309,12 @@ class DocumentPdfWidgets {
     PdfVerbatimBlock() => _verbatim(block),
     PdfTableBlock() => _table(block),
     PdfImageBlock() => _image(block),
+    PdfDossierPageBlock() => buildDossierPdfPage(
+      block,
+      fonts: fonts,
+      width: maxImageWidth,
+      height: maxImageHeight,
+    ),
     PdfPageBreakBlock() => pw.NewPage(),
     PdfTocBlock() => _toc(),
   };
