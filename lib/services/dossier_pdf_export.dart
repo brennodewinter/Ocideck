@@ -218,7 +218,10 @@ Future<Uint8List> buildDossierPdf(
   return buildDocumentPdf(
     blocks,
     style: DocumentPdfStyle.fromTheme(const ThemeProfile()),
-    fonts: DocumentPdfFonts.forFamily('Helvetica', fallbackFonts: fallbackFonts),
+    fonts: DocumentPdfFonts.forFamily(
+      'Helvetica',
+      fallbackFonts: fallbackFonts,
+    ),
     verbatimLabel: (kind) => switch (kind) {
       PdfVerbatimKind.math => 'Formule',
       PdfVerbatimKind.mermaid => 'Diagram',
