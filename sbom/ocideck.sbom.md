@@ -4,7 +4,7 @@
 
 This is **ocideck 0.6.15+41** (licence EUPL-1.2) and every third-party component it ships (227 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **800 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **801 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -73,7 +73,7 @@ The JSON documents carry **800 dependency relations** between these components: 
 | file_selector_ios _(transitive)_ | 0.5.3+6 | BSD-3-Clause | flutter | `pkg:pub/file_selector_ios@0.5.3+6` |
 | file_selector_linux _(transitive)_ | 0.9.4+1 | BSD-3-Clause | flutter | `pkg:pub/file_selector_linux@0.9.4+1` |
 | file_selector_macos _(transitive)_ | 0.9.5+1 | BSD-3-Clause | flutter | `pkg:pub/file_selector_macos@0.9.5+1` |
-| file_selector_platform_interface _(transitive)_ | 2.7.0 | BSD-3-Clause | flutter | `pkg:pub/file_selector_platform_interface@2.7.0` |
+| file_selector_platform_interface _(direct dev)_ | 2.7.0 | BSD-3-Clause | flutter | `pkg:pub/file_selector_platform_interface@2.7.0` |
 | file_selector_web _(transitive)_ | 0.9.5 | BSD-3-Clause | flutter | `pkg:pub/file_selector_web@0.9.5` |
 | file_selector_windows _(transitive)_ | 0.9.3+6 | BSD-3-Clause | flutter | `pkg:pub/file_selector_windows@0.9.3+6` |
 | fixnum _(transitive)_ | 1.1.1 | BSD-3-Clause | dart-lang | `pkg:pub/fixnum@1.1.1` |
