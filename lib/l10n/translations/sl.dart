@@ -1606,6 +1606,152 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Certificaatnummer: {nummer}': 'Številka certifikata: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Ocenjevalec tega kosa nato ne bo več videl. ',
+  'Deze uitnodiging hoort bij {adres}.': 'To povabilo pripada naslovu {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'To je vaša povezava do koledarja. Prikazana je tukaj le enkrat — prilepite jo ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Pridobite obstoječe značke in certifikate iz zunanjega ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Vaša organizacija ga je umaknila: {reden}',
+  'Uitgegeven op {datum}': 'Izdano {datum}',
+  'Uw agenda is gekoppeld tot {datum}.': 'Vaš koledar je povezan do {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Vaša povezava do koledarja poteče {datum}. Obnovite povezavo, preden preneha delovati.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Vaša organizacija že ima temo „{naam}“. Želite to temo posodobiti s svojo različico?',
+  '“{naam}” delen met de organisatie': 'Deli „{naam}“ z organizacijo',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}“ postane vidna vaši organizaciji.',
+  'Aanmelden': 'Prijava',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Prijava ni uspela. Poskusite znova spodaj.',
+  'Agenda koppelen': 'Poveži koledar',
+  'Agenda-koppeling intrekken?': 'Preklicati povezavo koledarja?',
+  'Agenda-link vernieuwen?': 'Obnoviti povezavo koledarja?',
+  'Alle eisen zijn vervuld.': 'Vse zahteve so izpolnjene.',
+  'Bekijken': 'Poglej',
+  'Bewaren': 'Shrani',
+  'Bewijsstuk intrekken?': 'Umakniti dokaz?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Posodobitev ni uspela. Poskusite znova.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Certifikati se tukaj prikažejo, takoj ko jih vaša organizacija izda.',
+  'Credential-bestand kiezen': 'Izberi datoteko poverilnic',
+  'Credentials ophalen…': 'Pridobivanje poverilnic…',
+  'Cursus': 'Tečaj',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'To ni veljavna povezava HTTPS do poverilnice.',
+  'Dat is niet gelukt. Probeer het opnieuw.': 'To ni uspelo. Poskusite znova.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Dejanje ni uspelo. Poskusite znova.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Slika je prevelika. Izberite manjšo datoteko.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Ocenjevalec tega kosa nato ne bo več videl. Nove dokaze lahko oddate pozneje.',
+  'De bron bevat geen leesbare credentials.':
+      'Vir ne vsebuje berljivih poverilnic.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Kombinacija številke povabila in kode ni pravilna ali pa je povabilo poteklo oz. že uporabljeno.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Povezava ni uspela. Poskusite znova.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organizacija in drugi udeleženci potem ne bodo več videli fotografije pri vašem računu.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organizacija še nima svojih tem.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Stara povezava potem ne bo več delovala. Novo povezavo znova prilepite v svojo aplikacijo koledarja.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profilna fotografija ni bila shranjena. Poskusite znova.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Tem organizacije ni bilo mogoče pridobiti.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Povabilo je bilo sprejeto. Organizacija je zdaj povezana z vašim računom.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Gesli se ne ujemata.',
+  'Delen': 'Deli',
+  'Delen als bewijs': 'Deli kot dokaz',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Deljenje ni uspelo. Poskusite znova.',
+  'Dit is de volledige definitie die meegaat:':
+      'To je celotna definicija, ki gre zraven:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'To je vaša povezava do koledarja. Prikazana je tukaj le enkrat — prilepite jo v svojo aplikacijo koledarja. Kdor ima povezavo, lahko vidi vaše sestanke; ne delite je.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Ta slogovni profil je prevelik za deljenje.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Ta tema je vgrajena ali jo uporablja tečaj in je ni mogoče izbrisati.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Te teme ni bilo mogoče prevzeti — oblika ni pravilna.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Tema s tem imenom v organizaciji že obstaja.',
+  'Geen credentials gevonden in deze bron.':
+      'V tem viru ni bilo najdenih poverilnic.',
+  'Gereed': 'Končano',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Pridobite obstoječe značke in certifikate iz zunanjega portfelja in jih delite kot dokaze. Sami izberete, kaj delite.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Certifikata ni bilo mogoče shraniti. Poskusite znova.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Certifikata ni bilo mogoče pridobiti. Poskusite znova.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Deljenje ni uspelo. Preverite vrsto dokaza in poskusite znova.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Umik ni uspel. Poskusite znova.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Umik ni uspel. Poskusite znova.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Nekdo drug je ravno spremenil to temo. Prepisati ali prevzeti različico organizacije?',
+  'Ingebouwd': 'Vgrajeno',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Umaknila ga je vaša organizacija. Ta izjava ne velja več.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Izberite sliko PNG, JPEG ali WebP, veliko največ 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Izberite geslo z vsaj 12 znaki.',
+  'Koppelen': 'Poveži',
+  'Link gekopieerd.': 'Povezava kopirana.',
+  'Naam is al in gebruik': 'Ime je že v uporabi',
+  'Nieuwe link': 'Nova povezava',
+  'Nieuwe profielfoto kiezen': 'Izberi novo profilno fotografijo',
+  'Nog geen certificaten.': 'Še ni certifikatov.',
+  'Nog nodig voor deze badge': 'Še potrebno za to značko',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Pridobivanje ni uspelo. Preverite povezavo in poskusite znova.',
+  'Profielfoto kiezen': 'Izberi profilno fotografijo',
+  'Profielfoto verwijderen': 'Odstrani profilno fotografijo',
+  'Profielfoto wijzigen': 'Spremeni profilno fotografijo',
+  'Publieke verificatielink': 'Javna povezava za preverjanje',
+  'Registreren en aanmelden': 'Registracija in prijava',
+  'Serverversie overnemen': 'Prevzemi različico strežnika',
+  'Stijlprofiel delen met de organisatie?':
+      'Deliti slogovni profil z organizacijo?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Preveč poskusov. Počakajte trenutek in poskusite znova.',
+  'Thema’s van de organisatie': 'Teme organizacije',
+  'Tussendoor gewijzigd': 'Vmes spremenjeno',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Registrirani in prijavljeni ste. Dobrodošli!',
+  'Uitgegeven': 'Izdano',
+  'Uitnodiging accepteren': 'Sprejmi povabilo',
+  'Uitnodiging gebruiken': 'Uporabi povabilo',
+  'Uitnodigingscode': 'Koda povabila',
+  'Uitnodigingsnummer': 'Številka povabila',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Vaš račun je bil ustvarjen. Prijavite se zdaj s povabljenim naslovom in novim geslom.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Vaš račun ne sme upravljati tem v tej organizaciji.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Vaša aplikacija koledarja potem ne bo več imela dostopa do srečanj. Sestanki sami ostanejo.',
+  'Uw naam': 'Vaše ime',
+  'Verwijderen bij de organisatie': 'Izbriši v organizaciji',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Brisanje ni uspelo. Poskusite znova.',
+  'Vul uw naam in.': 'Vnesite svoje ime.',
+  'Wachtwoord herhalen': 'Ponovi geslo',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Postavite svoje sestanke v svoj koledar — posodobljeno ob spremembah in odpovedih.',
   'Omrekening naar euro': 'Pretvorba v evre',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Za prikaz v EUR OciDeck uporablja en tečaj na sejo. Tečaj vnesite sami ali pridobite referenčni tečaj ECB.',
@@ -3067,42 +3213,26 @@ const _dutchSourceAddSl = <String, String>{
   'Uw antwoord': 'Vaš odgovor',
   'Antwoord indienen': 'Oddaj odgovor',
   'Geen verbinding': 'Ni povezave',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Iz tega portfelja ne delite več poverilnic. ',
   'U hebt nog geen badges.': 'Značk še nimate.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Dokazila iz zunanjega portfelja (na primer EduBadges) lahko delite ',
   'U levert bewijs aan voor: {badge}': 'Predložite dokazilo za: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'To dokazilo predložite v presojo. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Za prijavo boste preusmerjeni k ponudniku portfelja. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Vaša datoteka bo označena kot »prijavljena, še nepreverjena« ',
-  'Verbinding maken…': 'Povezovanje…',
-  'Verbinding verbreken': 'Prekini povezavo',
-  'Verbinding verbreken?': 'Prekinem povezavo?',
-  'Verbonden met {provider}': 'Povezano s {provider}',
-  'Verbreken': 'Prekini',
   'Verlopen': 'Poteklo',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Če zahtevate izbris, bodo vaša dokazila in povezane ocene izginile. Pravila hrambe v registru izbrisov pokažejo, ali zaradi veljavne obveznosti hrambe ostane še kak podatek.',
   'Wordt verzonden zodra je online bent.':
       'Poslano bo, takoj ko boste povezani v splet.',
   'portefeuille': 'portfelj',
-  '{aantal} credential(s) geselecteerd om te delen':
-      'Za skupno rabo je izbranih {aantal} poverilnic',
   '{bytes} bytes': '{bytes} bajtov',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'V obravnavi od {datum}. Navadno v dveh delovnih dneh.',
   'Kies een bestand om aan te leveren.': 'Izberite datoteko za predložitev.',
-  'Kies wat u deelt': 'Izberite, kaj delite',
   'Kies welke credentials u deelt als bewijs:':
       'Izberite poverilnice, ki jih delite kot dokazilo:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Vašega dokazila ni bilo mogoče naložiti. Poskusite znova.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Povežite zunanji portfelj, da delite obstoječe značke in ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Pustite prazno, če dokazilo velja neomejeno. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3111,18 +3241,9 @@ const _dutchSourceAddSl = <String, String>{
   'Mijn badges': 'Moje značke',
   'Mijn bewijs': 'Moja dokazila',
   'Mijn bewijsstukken': 'Moji dokazni dokumenti',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Po prijavi boste v naslednjem koraku izbrali poverilnice, ki jih delite. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Dokazni dokumenti še niso bili predloženi.',
   'Opgegeven': 'Prijavljeno',
-  'Opnieuw verbinden': 'Znova poveži',
-  'Portefeuille koppelen': 'Poveži portfelj',
-  'Portefeuille verbinden': 'Priključi portfelj',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Izberite poverilnice, ki jih želite deliti kot dokazilo. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Za nadaljevanje zaprite okno ponudnika portfelja.',
   'Toegekend op {datum}': 'Podeljeno {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Dovoljeni formati: PNG, JPEG, WebP in PDF. ',
@@ -3145,14 +3266,9 @@ const _dutchSourceAddSl = <String, String>{
       'Dokazni dokumenti so datoteke, ki jih predložite za značko. Pregled prikazuje ime datoteke, kontrolno kodo, stanje in kdo jo je ocenil. Datoteke same niso v tem pregledu; ocenjevalec si jih lahko ogleda.',
   'Bezig met versturen…': 'Pošiljanje…',
   'Datum kiezen': 'Izberi datum',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Povezava je bila prekinjena. Znova se lahko povežete.',
-  'Deze functie is nog niet beschikbaar. ': 'Ta funkcija še ni na voljo. ',
   'Externe portefeuille': 'Zunanji portfelj',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Sprejeto. Dokazilo je odobreno.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'V tem portfelju ni bilo najdenih poverilnic.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Za to organizacijo ni bilo najdenega profila udeleženca.',
   'Geldig tot {datum}': 'Velja do {datum}',

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../../models/ociserve_badge_readiness.dart';
+import '../../models/ociserve_certificate.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_evidence_item.dart';
 import '../../state/ociserve_provider.dart';
@@ -20,12 +22,23 @@ class OciServeEvidenceData {
     this.qualifications = const [],
     this.types = const [],
     this.items = const [],
+    this.readiness = const {},
+    this.certificates = const [],
   });
 
   final List<EvidenceUpload> uploads;
   final List<OciServeQualification> qualifications;
   final List<OciServeEvidenceType> types;
   final List<OciServeEvidenceItem> items;
+
+  /// Het leesmodel per badge, op de `skill_version_id` van de kwalificatie.
+  /// Leeg als de server het leesmodel niet geeft — het scherm toont dan alleen
+  /// de badges zelf.
+  final Map<String, OciServeBadgeReadiness> readiness;
+
+  /// De certificatenlijst. Leeg als de server hem niet geeft — certificaten
+  /// zijn een eigen sectie die het scherm dan simpelweg niet toont.
+  final List<OciServeCertificate> certificates;
 
   static Future<OciServeEvidenceData> load(
     OciServeNotifier notifier, {
@@ -42,8 +55,10 @@ class OciServeEvidenceData {
         participantId: participantId,
       ),
     ]);
+    final qualifications = results[1] as List<OciServeQualification>;
     var types = const <OciServeEvidenceType>[];
     var items = const <OciServeEvidenceItem>[];
+    var readiness = const <String, OciServeBadgeReadiness>{};
     try {
       types = await notifier.evidenceTypes(organizationId);
       items = await notifier.evidenceItems(
@@ -55,11 +70,35 @@ class OciServeEvidenceData {
       types = const [];
       items = const [];
     }
+    try {
+      readiness = await notifier.badgeReadinessByVersion(
+        organizationId: organizationId,
+        participantId: participantId,
+        skillVersionIds: {
+          for (final qual in qualifications) qual.skillVersionId,
+        },
+      );
+    } catch (error, stack) {
+      // Het leesmodel is versiering op de badgekaart; zonder server ervoor
+      // blijft het scherm volledig bruikbaar.
+      logError('OciServe: badge-leesmodellen laden', error.runtimeType, stack);
+    }
+    var certificates = const <OciServeCertificate>[];
+    try {
+      certificates = await notifier.participantCertificates(
+        organizationId: organizationId,
+        participantId: participantId,
+      );
+    } catch (error, stack) {
+      logError('OciServe: certificaten laden', error.runtimeType, stack);
+    }
     return OciServeEvidenceData(
       uploads: results[0] as List<EvidenceUpload>,
-      qualifications: results[1] as List<OciServeQualification>,
+      qualifications: qualifications,
       types: types,
       items: items,
+      readiness: readiness,
+      certificates: certificates,
     );
   }
 }

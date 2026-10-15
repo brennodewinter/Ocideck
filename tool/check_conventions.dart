@@ -303,7 +303,9 @@ const Map<String, int> fileSizeBaseline = {
   // +15 (#2435): de kostenmodus op PresentationInfo plus één pickerregel in de
   // dialoog — de picker zelf is een losse widget (presentation_cost_picker.dart).
   'lib/widgets/dialogs/presentation_info_dialog.dart': 1028,
-  'lib/widgets/dialogs/settings_dialog.dart': 1046,
+  // +1 (#2429): import van ociserve_org_themes voor de themaregister-knop
+  // in het profielonderdeel.
+  'lib/widgets/dialogs/settings_dialog.dart': 1047,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
       1017, // +26 (#1951): fileMtime + fileChangedSince.

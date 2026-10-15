@@ -1624,6 +1624,153 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Certificaatnummer: {nummer}': 'Numru taċ-ċertifikat: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'L-evalwatur ma jara din il-biċċa iktar. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Din l-istedina hija ta\' {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Din hija l-link tal-kalendarju tiegħek. Tintwera hawn darba biss — waħħalha ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Ġib badges u ċertifikati eżistenti minn ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Irtirat mill-organizzazzjoni tiegħek: {reden}',
+  'Uitgegeven op {datum}': 'Maħruġ nhar {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Il-kalendarju tiegħek huwa mqabbad sa {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Il-link tal-kalendarju tiegħek tiskadi nhar {datum}. Ġedded il-link qabel ma jieqaf.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'L-organizzazzjoni tiegħek diġà għandha tema “{naam}”. Trid taġġorna dik it-tema bil-verżjoni tiegħek?',
+  '“{naam}” delen met de organisatie': 'Aqsam “{naam}” mal-organizzazzjoni',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” issir viżibbli għall-organizzazzjoni tiegħek.',
+  'Aanmelden': 'Idħol',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Id-dħol ma rnexxielx. Erġa\' pprova hawn taħt.',
+  'Agenda koppelen': 'Qabbad il-kalendarju',
+  'Agenda-koppeling intrekken?': 'Tirtira l-konnessjoni tal-kalendarju?',
+  'Agenda-link vernieuwen?': 'Tiġedded il-link tal-kalendarju?',
+  'Alle eisen zijn vervuld.': 'Ir-rekwiżiti kollha huma milħuqa.',
+  'Bekijken': 'Ara',
+  'Bewaren': 'Salva',
+  'Bewijsstuk intrekken?': 'Tirtira l-evidenza?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'L-aġġornament ma rnexxielx. Erġa\' pprova.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Iċ-ċertifikati jidhru hawn hekk kif l-organizzazzjoni tiegħek joħorġuhom.',
+  'Credential-bestand kiezen': 'Agħżel fajl ta\' kredenzjali',
+  'Credentials ophalen…': 'Qed jiġu miġbura l-kredenzjali…',
+  'Cursus': 'Kors',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Din mhix link HTTPS valida għal kredenzjali.',
+  'Dat is niet gelukt. Probeer het opnieuw.': 'Ma rnexxielx. Erġa\' pprova.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'L-azzjoni ma rnexxiet. Erġa\' pprova.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'L-immaġini hija kbira wisq. Agħżel fajl iżgħar.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'L-evalwatur ma jara din il-biċċa iktar. Tista\' tressaq evidenza ġdida aktar tard.',
+  'De bron bevat geen leesbare credentials.':
+      'Is-sors ma fih l-ebda kredenzjali li jinqara.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Il-kombinazzjoni tan-numru tal-istedina u l-kodiċi mhijiex tajba, jew l-istedina skadiet jew diġà ntużat.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Il-konnessjoni ma rnexxiet. Erġa\' pprova.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'L-organizzazzjoni u l-parteċipanti l-oħra ma jarawx iktar ritratt fil-kont tiegħek.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'L-organizzazzjoni għadha ma għandhiex temi tagħha stess.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Il-link il-qadima ma taħdimx iktar. Waħħal il-link il-ġdida mill-ġdid fl-app tal-kalendarju tiegħek.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Ir-ritratt tal-profil ma ġewx salvat. Erġa\' pprova.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'It-temi tal-organizzazzjoni ma setgħux jiġu rkuprati.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'L-istedina ġiet aċċettata. L-organizzazzjoni issa hija marbuta mal-kont tiegħek.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Il-passwords mhumiex l-istess.',
+  'Delen': 'Aqsam',
+  'Delen als bewijs': 'Aqsam bħala evidenza',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Il-qsim ma rnexxa. Erġa\' pprova.',
+  'Dit is de volledige definitie die meegaat:':
+      'Din hija d-definizzjoni sħiħa li tmur magħha:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Din hija l-link tal-kalendarju tiegħek. Tintwera hawn darba biss — waħħalha fl-app tal-kalendarju tiegħek. Kulħadd li għandu l-link jista\' jara l-appuntamenti tiegħek; għalhekk taqsamhiex.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Dan il-profil tal-istil huwa kbir wisq biex jiġi mqassam.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Din it-tema hija inkorporata jew qed tintuża minn kors u ma tistax titħassar.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Din it-tema ma setgħatx tiġi adottata — il-format mhux tajjeb.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Diġà teżisti tema b\'dan l-isem fl-organizzazzjoni.',
+  'Geen credentials gevonden in deze bron.':
+      'Ma nstabu l-ebda kredenzjali f\'dan is-sors.',
+  'Gereed': 'Lest',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Ġib badges u ċertifikati eżistenti minn portafoll estern u aqsamhom bħala evidenza. Inti tagħżel x\'taqsam.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Iċ-ċertifikat ma setax jiġi salvat. Erġa\' pprova.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Iċ-ċertifikat ma setax jiġi rkuprat. Erġa\' pprova.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Il-qsim falla. Iċċekkja t-tip ta\' evidenza u erġa\' pprova.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Irt-ritir falla. Erġa\' pprova.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Irt-ritir ma rnexxielx. Erġa\' pprova.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Xi ħadd ieħor għad kif modifika din it-tema. Tissostitwixxih, jew tadotta l-verżjoni tal-organizzazzjoni?',
+  'Ingebouwd': 'Inkorporat',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Irtirat mill-organizzazzjoni tiegħek. Din id-dikjarazzjoni ma għadhiex valida.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Agħżel immaġini PNG, JPEG jew WebP ta\' mhux iktar minn 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Agħżel password ta\' mill-inqas 12-il karattru.',
+  'Koppelen': 'Qabbad',
+  'Link gekopieerd.': 'Link ikkupjat.',
+  'Naam is al in gebruik': 'L-isem diġà qed jintuża',
+  'Nieuwe link': 'Link ġdida',
+  'Nieuwe profielfoto kiezen': 'Agħżel ritratt tal-profil ġdid',
+  'Nog geen certificaten.': 'Għadha m\'hemmx ċertifikati.',
+  'Nog nodig voor deze badge': 'Għadu meħtieġ għal dan il-badge',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Ir-rekupru falla. Iċċekkja l-link u erġa\' pprova.',
+  'Profielfoto kiezen': 'Agħżel ritratt tal-profil',
+  'Profielfoto verwijderen': 'Neħħi r-ritratt tal-profil',
+  'Profielfoto wijzigen': 'Ibdel ir-ritratt tal-profil',
+  'Publieke verificatielink': 'Link ta\' verifika pubblika',
+  'Registreren en aanmelden': 'Irreġistra u idħol',
+  'Serverversie overnemen': 'Adotta l-verżjoni tas-server',
+  'Stijlprofiel delen met de organisatie?':
+      'Taqsam il-profil tal-istil mal-organizzazzjoni?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Wisq tentattivi. Stenna ftit u erġa\' pprova.',
+  'Thema’s van de organisatie': 'Temi tal-organizzazzjoni',
+  'Tussendoor gewijzigd': 'Modifikat filwaqt',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Inti rreġistrat u daħalt. Merħba!',
+  'Uitgegeven': 'Maħruġ',
+  'Uitnodiging accepteren': 'Aċċetta l-istedina',
+  'Uitnodiging gebruiken': 'Uża l-istedina',
+  'Uitnodigingscode': 'Kodiċi tal-istedina',
+  'Uitnodigingsnummer': 'Numru tal-istedina',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Il-kont tiegħek ġie maħluq. Idħol issa bl-indirizz mistieden u l-password l-ġdida tiegħek.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Il-kont tiegħek ma jistax jamministra temi f\'din l-organizzazzjoni.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'L-app tal-kalendarju tiegħek ma tkunx tista\' tassel għal-laqgħat iktar. L-appuntamenti nfushom jibqgħu.',
+  'Uw naam': 'Ismek',
+  'Verwijderen bij de organisatie': 'Ħassar fl-organizzazzjoni',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'It-tħassir ma rnexxielx. Erġa\' pprova.',
+  'Vul uw naam in.': 'Daħħal ismek.',
+  'Wachtwoord herhalen': 'Irrepeti l-password',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Poġġi l-laqgħat tiegħek fil-kalendarju tiegħek stess — jiġi aġġornat meta jkun hemm bidliet u kanċellazzjonijiet.',
   'Omrekening naar euro': 'Konverżjoni għall-euro',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Għall-wiri bl-EUR, OciDeck juża rata waħda ta\' skambju għal kull sessjoni. Daħħal ir-rata int stess jew ġib ir-rata ta\' referenza tal-BĊE.',
@@ -3102,43 +3249,27 @@ const _dutchSourceAddMt = <String, String>{
   'Uw antwoord': 'It-tweġiba tiegħek',
   'Antwoord indienen': 'Ibgħat tweġiba',
   'Geen verbinding': 'Ebda konnessjoni',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Ma tibqax taqsam kredenzjali minn dan il-portafoll. ',
   'U hebt nog geen badges.': 'Għad m’għandek l-ebda badge.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Tista’ tuża evidenza minn portafoll estern (bħal EduBadges) ',
   'U levert bewijs aan voor: {badge}':
       'Qed tissottometti evidenza għal: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Qed tissottometti dan il-fajl ta’ evidenza għall-valutazzjoni. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Se tiġi ridirett lejn il-fornitur tal-portafoll biex tilloggja. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Il-fajl tiegħek se jiġi mmarkat bħala “sottomess, għadu mhux ivverifikat” ',
-  'Verbinding maken…': 'Qed issir il-konnessjoni…',
-  'Verbinding verbreken': 'Skonnettja',
-  'Verbinding verbreken?': 'Skonnettja?',
-  'Verbonden met {provider}': 'Konness ma’ {provider}',
-  'Verbreken': 'Skonnettja',
   'Verlopen': 'Skadut',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Jekk titlob it-tħassir, il-fajls ta’ evidenza tiegħek u l-valutazzjonijiet assoċjati jitħassru. Ir-regoli taż-żamma fir-reġistru tat-tħassir juru jekk jibqax xi fdal minħabba obbligu taż-żamma li għadu fis-seħħ.',
   'Wordt verzonden zodra je online bent.':
       'Jintbagħat malli terġa’ tkun online.',
   'portefeuille': 'portafoll',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} kredenzjali magħżula għall-kondiviżjoni',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Pendenti minn {datum}. Normalment fi żmien jumejn tax-xogħol.',
   'Kies een bestand om aan te leveren.': 'Agħżel fajl biex tissottomettih.',
-  'Kies wat u deelt': 'Agħżel x’taqsam',
   'Kies welke credentials u deelt als bewijs:':
       'Agħżel liema kredenzjali taqsam bħala evidenza:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Ma setgħetx titgħabba l-evidenza tiegħek. Erġa’ pprova.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Qabbad portafoll estern biex tuża l-badges eżistenti tiegħek u ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Ħallih vojt jekk l-evidenza tibqa’ valida għal dejjem. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3147,18 +3278,9 @@ const _dutchSourceAddMt = <String, String>{
   'Mijn badges': 'Il-badges tiegħi',
   'Mijn bewijs': 'L-evidenza tiegħi',
   'Mijn bewijsstukken': 'Il-fajls ta’ evidenza tiegħi',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Wara li tilloggja, fil-pass li jmiss tagħżel liema kredenzjali taqsam. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Għadhom ma ġew sottomessi l-ebda fajls ta’ evidenza.',
   'Opgegeven': 'Sottomess',
-  'Opnieuw verbinden': 'Erġa’ qabbad',
-  'Portefeuille koppelen': 'Qabbad portafoll',
-  'Portefeuille verbinden': 'Qabbad portafoll',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Agħżel il-kredenzjali li tixtieq taqsam bħala evidenza. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Agħlaq it-tieqa tal-fornitur tal-portafoll biex tkompli.',
   'Toegekend op {datum}': 'Mogħti nhar {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Formati permessi: PNG, JPEG, WebP u PDF. ',
@@ -3181,15 +3303,9 @@ const _dutchSourceAddMt = <String, String>{
       'Il-fajls ta’ evidenza huma dokumenti li tissottometti għal badge. Il-ħarsa ġenerali turi l-isem tal-fajl, il-kodiċi tal-kontroll, l-istatus u min evalwah. Il-fajls infushom mhumiex f’din il-ħarsa ġenerali; evalwatur jista’ jarahom.',
   'Bezig met versturen…': 'Qed jintbagħat…',
   'Datum kiezen': 'Agħżel data',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Il-konnessjoni nqatgħet. Tista’ terġa’ tqabbad.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Din il-funzjoni għadha mhix disponibbli. ',
   'Externe portefeuille': 'Portafoll estern',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Aċċettat. Il-fajl ta’ evidenza ġie approvat.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Ma nstabu l-ebda kredenzjali f’dan il-portafoll.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Ma nstab l-ebda profil ta’ parteċipant għal din l-organizzazzjoni.',
   'Geldig tot {datum}': 'Validu sa {datum}',

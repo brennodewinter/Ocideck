@@ -1606,6 +1606,151 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Certificaatnummer: {nummer}': 'Nomor sertifikat: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Penilai tidak akan lagi melihat bagian ini. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Undangan ini milik {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Ini adalah tautan agenda Anda. Tautan ini ditampilkan di sini hanya sekali — tempelkan ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Ambil lencana dan sertifikat yang ada dari ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Ditarik oleh organisasi Anda: {reden}',
+  'Uitgegeven op {datum}': 'Diterbitkan pada {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Agenda Anda terhubung hingga {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Tautan agenda Anda kedaluwarsa pada {datum}. Perbarui tautan sebelum berhenti.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Organisasi Anda sudah memiliki tema “{naam}”. Apakah Anda ingin memperbarui tema itu dengan versi Anda?',
+  '“{naam}” delen met de organisatie': 'Bagikan “{naam}” dengan organisasi',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” menjadi terlihat oleh organisasi Anda.',
+  'Aanmelden': 'Masuk',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Masuk gagal. Coba lagi di bawah.',
+  'Agenda koppelen': 'Hubungkan agenda',
+  'Agenda-koppeling intrekken?': 'Cabut koneksi agenda?',
+  'Agenda-link vernieuwen?': 'Perbarui tautan agenda?',
+  'Alle eisen zijn vervuld.': 'Semua persyaratan telah terpenuhi.',
+  'Bekijken': 'Lihat',
+  'Bewaren': 'Simpan',
+  'Bewijsstuk intrekken?': 'Tarik bukti?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Pembaruan gagal. Coba lagi.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Sertifikat muncul di sini begitu organisasi Anda menerbitkannya.',
+  'Credential-bestand kiezen': 'Pilih file kredensial',
+  'Credentials ophalen…': 'Mengambil kredensial…',
+  'Cursus': 'Kursus',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Itu bukan tautan HTTPS yang valid ke kredensial.',
+  'Dat is niet gelukt. Probeer het opnieuw.': 'Itu tidak berhasil. Coba lagi.',
+  'De actie is niet gelukt. Probeer het opnieuw.': 'Tindakan gagal. Coba lagi.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Gambar terlalu besar. Pilih file yang lebih kecil.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Penilai tidak akan lagi melihat bagian ini. Anda dapat menyerahkan bukti baru nanti.',
+  'De bron bevat geen leesbare credentials.':
+      'Sumber tidak berisi kredensial yang dapat dibaca.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Kombinasi nomor undangan dan kode tidak cocok, atau undangan telah kedaluwarsa atau sudah digunakan.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Penghubungan gagal. Coba lagi.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organisasi dan peserta lain tidak akan lagi melihat foto di akun Anda.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organisasi belum memiliki tema sendiri.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Tautan lama tidak akan berfungsi lagi. Tempelkan tautan baru ke aplikasi kalender Anda lagi.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Foto profil tidak tersimpan. Coba lagi.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Tema organisasi tidak dapat diambil.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Undangan telah diterima. Organisasi kini terhubung ke akun Anda.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Kata sandi tidak sama.',
+  'Delen': 'Bagikan',
+  'Delen als bewijs': 'Bagikan sebagai bukti',
+  'Delen is niet gelukt. Probeer het opnieuw.': 'Berbagi gagal. Coba lagi.',
+  'Dit is de volledige definitie die meegaat:':
+      'Ini adalah definisi lengkap yang disertakan:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Ini adalah tautan agenda Anda. Tautan ini ditampilkan di sini hanya sekali — tempelkan ke aplikasi kalender Anda. Siapa pun yang memiliki tautan dapat melihat janji Anda; jadi jangan dibagikan.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Profil gaya ini terlalu besar untuk dibagikan.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Tema ini bawaan atau sedang digunakan oleh kursus dan tidak dapat dihapus.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Tema ini tidak dapat diambil alih — formatnya tidak cocok.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Tema dengan nama ini sudah ada di organisasi.',
+  'Geen credentials gevonden in deze bron.':
+      'Tidak ada kredensial ditemukan di sumber ini.',
+  'Gereed': 'Selesai',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Ambil lencana dan sertifikat yang ada dari portofolio eksternal dan bagikan sebagai bukti. Anda sendiri yang memilih apa yang dibagikan.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Sertifikat tidak dapat disimpan. Coba lagi.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Sertifikat tidak dapat diambil. Coba lagi.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Berbagi gagal. Periksa jenis bukti dan coba lagi.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Penarikan gagal. Coba lagi.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Penarikan tidak berhasil. Coba lagi.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Orang lain baru saja mengubah tema ini. Timpa, atau ambil versi organisasi?',
+  'Ingebouwd': 'Bawaan',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Ditarik oleh organisasi Anda. Pernyataan ini tidak berlaku lagi.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Pilih gambar PNG, JPEG, atau WebP berukuran maksimal 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Pilih kata sandi minimal 12 karakter.',
+  'Koppelen': 'Hubungkan',
+  'Link gekopieerd.': 'Tautan disalin.',
+  'Naam is al in gebruik': 'Nama sudah digunakan',
+  'Nieuwe link': 'Tautan baru',
+  'Nieuwe profielfoto kiezen': 'Pilih foto profil baru',
+  'Nog geen certificaten.': 'Belum ada sertifikat.',
+  'Nog nodig voor deze badge': 'Masih diperlukan untuk lencana ini',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Pengambilan gagal. Periksa tautan dan coba lagi.',
+  'Profielfoto kiezen': 'Pilih foto profil',
+  'Profielfoto verwijderen': 'Hapus foto profil',
+  'Profielfoto wijzigen': 'Ubah foto profil',
+  'Publieke verificatielink': 'Tautan verifikasi publik',
+  'Registreren en aanmelden': 'Daftar dan masuk',
+  'Serverversie overnemen': 'Ambil versi server',
+  'Stijlprofiel delen met de organisatie?':
+      'Bagikan profil gaya dengan organisasi?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Terlalu banyak percobaan. Tunggu sebentar lalu coba lagi.',
+  'Thema’s van de organisatie': 'Tema organisasi',
+  'Tussendoor gewijzigd': 'Diubah sementara itu',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Anda telah terdaftar dan masuk. Selamat datang!',
+  'Uitgegeven': 'Diterbitkan',
+  'Uitnodiging accepteren': 'Terima undangan',
+  'Uitnodiging gebruiken': 'Gunakan undangan',
+  'Uitnodigingscode': 'Kode undangan',
+  'Uitnodigingsnummer': 'Nomor undangan',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Akun Anda telah dibuat. Masuk sekarang dengan alamat yang diundang dan kata sandi baru Anda.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Akun Anda tidak boleh mengelola tema di organisasi ini.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Aplikasi kalender Anda tidak dapat lagi mengakses pertemuan. Janji itu sendiri tetap ada.',
+  'Uw naam': 'Nama Anda',
+  'Verwijderen bij de organisatie': 'Hapus di organisasi',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Penghapusan gagal. Coba lagi.',
+  'Vul uw naam in.': 'Masukkan nama Anda.',
+  'Wachtwoord herhalen': 'Ulangi kata sandi',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Masukkan pertemuan Anda ke kalender Anda sendiri — diperbarui saat ada perubahan dan pembatalan.',
   'Omrekening naar euro': 'Konversi ke euro',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Untuk tampilan EUR, OciDeck memakai satu kurs per sesi. Isi kurs sendiri atau ambil kurs referensi ECB.',
@@ -3063,42 +3208,26 @@ const _dutchSourceAddId = <String, String>{
   'Uw antwoord': 'Jawaban Anda',
   'Antwoord indienen': 'Kirimkan jawaban',
   'Geen verbinding': 'Tidak ada koneksi',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Setelah itu, Anda tidak lagi membagikan kredensial dari dompet ini. ',
   'U hebt nog geen badges.': 'Anda belum memiliki lencana.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Anda dapat menggunakan bukti dari dompet eksternal (seperti EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Anda mengirimkan bukti untuk: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Anda mengirimkan bukti ini untuk dinilai. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Anda akan diarahkan ke penyedia dompet untuk masuk. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Berkas Anda akan ditandai sebagai "dikirim, belum diperiksa" ',
-  'Verbinding maken…': 'Menghubungkan…',
-  'Verbinding verbreken': 'Putuskan koneksi',
-  'Verbinding verbreken?': 'Putuskan koneksi?',
-  'Verbonden met {provider}': 'Terhubung ke {provider}',
-  'Verbreken': 'Putuskan',
   'Verlopen': 'Kedaluwarsa',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Jika Anda meminta penghapusan, bukti dan penilaian terkait akan dihapus. Aturan retensi dalam register penghapusan menunjukkan apakah masih ada data yang disimpan karena kewajiban retensi yang sedang berlaku.',
   'Wordt verzonden zodra je online bent.':
       'Akan dikirim setelah Anda kembali online.',
   'portefeuille': 'dompet',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} kredensial dipilih untuk dibagikan',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Diproses sejak {datum}. Biasanya selesai dalam dua hari kerja.',
   'Kies een bestand om aan te leveren.': 'Pilih berkas untuk dikirim.',
-  'Kies wat u deelt': 'Pilih yang ingin Anda bagikan',
   'Kies welke credentials u deelt als bewijs:':
       'Pilih kredensial yang ingin Anda bagikan sebagai bukti:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Bukti Anda tidak dapat dimuat. Silakan coba lagi.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Hubungkan dompet eksternal untuk menggunakan lencana dan ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Biarkan kosong jika bukti berlaku tanpa batas waktu. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3107,17 +3236,8 @@ const _dutchSourceAddId = <String, String>{
   'Mijn badges': 'Lencana saya',
   'Mijn bewijs': 'Bukti saya',
   'Mijn bewijsstukken': 'Dokumen bukti saya',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Setelah masuk, pada langkah berikutnya Anda memilih kredensial yang akan dibagikan. ',
   'Nog geen bewijsstukken aangeleverd.': 'Belum ada bukti yang dikirim.',
   'Opgegeven': 'Dikirim',
-  'Opnieuw verbinden': 'Hubungkan kembali',
-  'Portefeuille koppelen': 'Hubungkan dompet',
-  'Portefeuille verbinden': 'Hubungkan dompet',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Pilih kredensial yang ingin Anda bagikan sebagai bukti. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Tutup jendela penyedia dompet untuk melanjutkan.',
   'Toegekend op {datum}': 'Diberikan pada {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Format yang diizinkan: PNG, JPEG, WebP, dan PDF. ',
@@ -3140,14 +3260,9 @@ const _dutchSourceAddId = <String, String>{
       'Bukti adalah dokumen yang Anda kirim untuk lencana. Ikhtisar menunjukkan nama file, checksum, status, dan siapa yang menilainya. File itu sendiri tidak ada dalam ikhtisar ini; penilai dapat melihatnya.',
   'Bezig met versturen…': 'Mengirim…',
   'Datum kiezen': 'Pilih tanggal',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Koneksi telah terputus. Anda dapat menyambung kembali.',
-  'Deze functie is nog niet beschikbaar. ': 'Fitur ini belum tersedia. ',
   'Externe portefeuille': 'Portofolio eksternal',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Diterima. Bukti telah disetujui.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Tidak ada kredensial ditemukan di portofolio ini.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Tidak ada profil peserta ditemukan untuk organisasi ini.',
   'Geldig tot {datum}': 'Berlaku hingga {datum}',

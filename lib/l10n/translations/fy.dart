@@ -652,6 +652,153 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Certificaatnummer: {nummer}': 'Sertifikaatnûmer: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'De beoardeler sjocht dit stik dan net mear. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Dizze útnoeging heart by {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Dit is jo aginda-keppeling. Hy stiet hjir ienmalich — plak him ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Hel besteande badges en sertifikaten binnen út in eksterne ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Ynlutsen troch jo organisaasje: {reden}',
+  'Uitgegeven op {datum}': 'Útjûn op {datum}',
+  'Uw agenda is gekoppeld tot {datum}.': 'Jo aginda is keppele oant {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Jo aginda-keppeling ferrint op {datum}. Fernij de keppeling eart dat er stopt.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Jo organisaasje hat al in tema “{naam}”. Wolle jo dat tema bywurkje mei jo ferzje?',
+  '“{naam}” delen met de organisatie': '“{naam}” diele mei de organisaasje',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” wurdt sichtber foar jo organisaasje.',
+  'Aanmelden': 'Oanmelde',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Oanmelden is net slagge. Probear it hjirûnder op \'e nij.',
+  'Agenda koppelen': 'Aginda keppelje',
+  'Agenda-koppeling intrekken?': 'Aginda-keppeling ynlûke?',
+  'Agenda-link vernieuwen?': 'Aginda-keppeling fernije?',
+  'Alle eisen zijn vervuld.': 'Oan alle easken is foldien.',
+  'Bekijken': 'Besjen',
+  'Bewaren': 'Bewarje',
+  'Bewijsstuk intrekken?': 'Bewiis ynlûke?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Bywurkjen is net slagge. Probear it op \'e nij.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Sertifikaten ferskine hjir sa gau as jo organisaasje se útjout.',
+  'Credential-bestand kiezen': 'Kies in bestân mei oanmeldgegevens',
+  'Credentials ophalen…': 'Oanmeldgegevens ophelje…',
+  'Cursus': 'Kursus',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Dat is gjin jildige HTTPS-keppeling nei oanmeldgegevens.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Dat is net slagge. Probear it op \'e nij.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'De aksje is net slagge. Probear it op \'e nij.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'De ôfbylding is te grut. Kies in lytsere triem.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'De beoardeler sjocht dit stik dan net mear. Jo kinne letter nij bewiis oanleverje.',
+  'De bron bevat geen leesbare credentials.':
+      'De boarne befettet gjin lêsbere oanmeldgegevens.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'De kombinaasje fan útnoegingsnûmer en koade kloppet net, of de útnoeging is ferrûn of al brûkt.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'De keppeling is net slagge. Probear it op \'e nij.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'De organisaasje en oare dielnimmers sjogge dan gjin foto mear by jo account.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'De organisaasje hat noch gjin eigen tema\'s.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'De âlde keppeling wurket dan net mear. Plak de nije keppeling op \'e nij yn jo aginda-app.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'De profielfoto is net bewarre. Probear it op \'e nij.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'De tema\'s fan de organisaasje koenen net ophelle wurde.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'De útnoeging is akseptearre. De organisaasje stiet no by jo account.',
+  'De wachtwoorden zijn niet hetzelfde.': 'De wachtwurden binne net itselde.',
+  'Delen': 'Diele',
+  'Delen als bewijs': 'Diele as bewiis',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Dielen is net slagge. Probear it op \'e nij.',
+  'Dit is de volledige definitie die meegaat:':
+      'Dit is de folsleine definysje dy\'t meigiet:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Dit is jo aginda-keppeling. Hy stiet hjir ienmalich — plak him yn jo aginda-app. Eltsenien mei de keppeling kin jo ôfspraken sjen; diel him dus net.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Dit stylprofyl is te grut om te dielen.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Dit tema is ynboud of wurdt brûkt troch in kursus en kin net fuortsmiten wurde.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Dit tema koe net oernaam wurde — it formaat kloppet net.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Der bestiet al in tema mei dizze namme by de organisaasje.',
+  'Geen credentials gevonden in deze bron.':
+      'Gjin oanmeldgegevens fûn yn dizze boarne.',
+  'Gereed': 'Klear',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Hel besteande badges en sertifikaten binnen út in eksterne portefúlje en diel se as bewiis. Jo kieze sels wat jo diele.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'It sertifikaat koe net bewarre wurde. Probear it op \'e nij.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'It sertifikaat koe net ophelle wurde. Probear it op \'e nij.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'It dielen is mislearre. Kontrolearje it soarte bewiis en probear op \'e nij.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'It ynlûken is mislearre. Probear it op \'e nij.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'It ynlûken is net slagge. Probear it op \'e nij.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'In oar hat dit tema krekt oanpast. Oerskriuwe, of de ferzje fan de organisaasje oernimme?',
+  'Ingebouwd': 'Ynboud',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Ynlutsen troch jo organisaasje. Dizze ferklearring jildt net mear.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Kies in PNG-, JPEG- of WebP-ôfbylding fan maksimaal 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Kies in wachtwurd fan teminsten 12 tekens.',
+  'Koppelen': 'Keppelje',
+  'Link gekopieerd.': 'Keppeling kopiearre.',
+  'Naam is al in gebruik': 'Namme is al yn gebrûk',
+  'Nieuwe link': 'Nije keppeling',
+  'Nieuwe profielfoto kiezen': 'Nije profielfoto kieze',
+  'Nog geen certificaten.': 'Noch gjin sertifikaten.',
+  'Nog nodig voor deze badge': 'Noch nedich foar dizze badge',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Opheljen is mislearre. Kontrolearje de keppeling en probear op \'e nij.',
+  'Profielfoto kiezen': 'Profielfoto kieze',
+  'Profielfoto verwijderen': 'Profielfoto fuortsmite',
+  'Profielfoto wijzigen': 'Profielfoto wizigje',
+  'Publieke verificatielink': 'Iepenbier ferifikaasjelink',
+  'Registreren en aanmelden': 'Registrearje en oanmelde',
+  'Serverversie overnemen': 'Serverferzje oernimme',
+  'Stijlprofiel delen met de organisatie?':
+      'Stylprofyl diele mei de organisaasje?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Te folle besykjen. Wachtsje efkes en probear it dan op \'e nij.',
+  'Thema’s van de organisatie': 'Tema\'s fan de organisaasje',
+  'Tussendoor gewijzigd': 'Tuskenbeiden wizige',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Jo binne registrearre en oameld. Wolkom!',
+  'Uitgegeven': 'Útjûn',
+  'Uitnodiging accepteren': 'Útnoeging akseptearje',
+  'Uitnodiging gebruiken': 'Útnoeging brûke',
+  'Uitnodigingscode': 'Útnoegingskoade',
+  'Uitnodigingsnummer': 'Útnoegingsnûmer',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Jo account is oanmakke. Meld jo no oan mei it útnoege adres en jo nije wachtwurd.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Jo account mei gjin tema\'s beheare by dizze organisaasje.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Jo aginda-app kin dan net mear by de byienkomsten. De ôfspraken sels bliuwe bestean.',
+  'Uw naam': 'Jo namme',
+  'Verwijderen bij de organisatie': 'Fuortsmite by de organisaasje',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Fuortsmiten is net slagge. Probear it op \'e nij.',
+  'Vul uw naam in.': 'Fol jo namme yn.',
+  'Wachtwoord herhalen': 'Wachtwurd werhelje',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Set jo byienkomsten yn jo eigen aginda — bywurke by wizigingen en ôfsizzingen.',
   'Omrekening naar euro': 'Omrekkening nei euro\'s',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Foar de EUR-werjefte brûkt OciDeck ien koers per sesje. Folje de koers sels yn of hel de ECB-referinsjekoers op.',
@@ -2117,42 +2264,26 @@ const _dutchSourceAddFy = {
   'Uw antwoord': 'Jo antwurd',
   'Antwoord indienen': 'Antwurd yntsjinje',
   'Geen verbinding': 'Gjin ferbining',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Jo diele dan gjin oanmeldgegevens mear út dizze portefúlje. ',
   'U hebt nog geen badges.': 'Jo hawwe noch gjin badges.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Jo kinne bewiis út in eksterne portefúlje diele (lykas EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Jo leverje bewiis oan foar: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Jo leverje dit bewiisstik oan foar beoardieling. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Jo wurde trochstjoerd nei de portefúljeprovider om yn te loggen. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Jo bestân wurdt markearre as „opjûn, noch net kontrolearre” ',
-  'Verbinding maken…': 'Ferbining meitsje…',
-  'Verbinding verbreken': 'Ferbining ferbrekke',
-  'Verbinding verbreken?': 'Ferbining ferbrekke?',
-  'Verbonden met {provider}': 'Ferbûn mei {provider}',
-  'Verbreken': 'Ferbrekke',
   'Verlopen': 'Ferrûn',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'As jo wiskjen oanfreegje, ferdwine jo bewiisstikken en de byhearrende beoardielingen. Bewarregels yn it wiskregister litte sjen oft der foar in rinnende bewarplicht noch wat oerbliuwt.',
   'Wordt verzonden zodra je online bent.':
       'Wurdt ferstjoerd sadree\'t jo online binne.',
   'portefeuille': 'portefúlje',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} oanmeldgegevens selektearre om te dielen',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Yn behanneling sûnt {datum}. Meastentiids binnen twa wurkdagen.',
   'Kies een bestand om aan te leveren.': 'Kies in bestân om oan te leverjen.',
-  'Kies wat u deelt': 'Kies wat jo diele',
   'Kies welke credentials u deelt als bewijs:':
       'Kies hokker oanmeldgegevens jo as bewiis diele:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Jo bewiis koe net laden wurde. Besykje it opnij.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Keppelje in eksterne portefúlje om jo besteande badges en ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Lit leech as it bewiis ûnbeheind jildich is. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2161,17 +2292,8 @@ const _dutchSourceAddFy = {
   'Mijn badges': 'Myn badges',
   'Mijn bewijs': 'Myn bewiis',
   'Mijn bewijsstukken': 'Myn bewiisstikken',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Nei it ynloggen kieze jo yn de folgjende stap hokker oanmeldgegevens jo diele. ',
   'Nog geen bewijsstukken aangeleverd.': 'Noch gjin bewiisstikken oanlevere.',
   'Opgegeven': 'Opjûn',
-  'Opnieuw verbinden': 'Opnij ferbine',
-  'Portefeuille koppelen': 'Portefúlje keppelje',
-  'Portefeuille verbinden': 'Portefúlje ferbine',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Selektearje de oanmeldgegevens dy’t jo as bewiis diele wolle. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Slút it finster fan de portefúljeprovider om fierder te gean.',
   'Toegekend op {datum}': 'Tawiisd op {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Talitten formaten: PNG, JPEG, WebP en PDF. ',
@@ -2194,15 +2316,9 @@ const _dutchSourceAddFy = {
       'Bewiisstikken binne bestannen dy’t jo foar in badge oanleverje. It oersjoch toant de bestânsnamme, kontrôlekoade, status en wa\'t it beoardiele hat. De bestannen sels steane net yn dit oersjoch; in beoardieler kin se wol besjen.',
   'Bezig met versturen…': 'Dwaande mei ferstjoeren…',
   'Datum kiezen': 'Datum kieze',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'De ferbining is ferbrutsen. Jo kinne opnij ferbine.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Dizze funksje is noch net beskikber. ',
   'Externe portefeuille': 'Eksterne portefúlje',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Akseptearre. It bewiisstik is goedkard.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Gjin oanmeldgegevens fûn yn dizze portefúlje.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Gjin dielnimmersprofyl fûn foar dizze organisaasje.',
   'Geldig tot {datum}': 'Jildich oant {datum}',

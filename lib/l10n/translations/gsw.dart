@@ -1609,6 +1609,154 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Certificaatnummer: {nummer}': 'Zertifikatsnummere: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'De Prüefer gseht das Stück de nüme. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Die Yyladig ghört zue {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Das isch din Kaländerlink. Er wird da nur eimal aazöigt — chlèb en ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Hol bschtehendi Badges und Zertifikat us ere externe ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Vo irire Organisation zruggno: {reden}',
+  'Uitgegeven op {datum}': 'Uusgstellt am {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Din Kaländer isch bis {datum} verchnüpft.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Din Kaländerlink löuft am {datum} ab. Erneuere de Link, bevor er stoppt.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Iri Organisation het scho es Thema „{naam}“. Wänd Si das Thema mit irire Version aktualisiere?',
+  '“{naam}” delen met de organisatie': '„{naam}“ mit de Organisation teile',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}“ wird für iri Organisation sichtbar.',
+  'Aanmelden': 'Aumelde',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'S Aumelde isch fählgschlage. Probiers une no emol.',
+  'Agenda koppelen': 'Kaländer verchnüpfe',
+  'Agenda-koppeling intrekken?': 'Kaländerverchnüpfig zruggneh?',
+  'Agenda-link vernieuwen?': 'Kaländerlink erneuere?',
+  'Alle eisen zijn vervuld.': 'Alli Aaforderige sind erfüllt.',
+  'Bekijken': 'Aaluege',
+  'Bewaren': 'Spichere',
+  'Bewijsstuk intrekken?': 'Bwiis zruggneh?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'S Aktualisiere isch fählgschlage. Probiers no emol.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Zertifikat erschiined da, sobald iri Organisation se uusstellt.',
+  'Credential-bestand kiezen': 'Datei mit Nachwiise wähle',
+  'Credentials ophalen…': 'Nachwiis werded gholt…',
+  'Cursus': 'Kurs',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Das isch kei gültige HTTPS-Link zu Nachwiise.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Das het nöd klappet. Probiers no emol.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'D Aktion isch fählgschlage. Probiers no emol.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'S Bild isch z gross. Wähl e chlineri Datei.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'De Prüefer gseht das Stück de nüme. Du chasch spööter neui Bwiis iriiche.',
+  'De bron bevat geen leesbare credentials.':
+      'D Quällä het kei läsbari Nachwiis.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'D Kombination us Yyladigsnummere und Code stimmt nöd, oder d Yyladig isch abgloffe oder scho bruucht worde.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'S Verchnüpfe isch fählgschlage. Probiers no emol.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'D Organisation und anderi Teilnehmer gseend de kei Foto me bi dim Konto.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'D Organisation het nonig kei eigeni Theme.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'De alt Link funktioniert de nüme. Chlèb de nöi Link nomal i diri Kaländer-App.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'S Profilfoto isch nöd gspicheret worde. Probiers no emol.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'D Theme vo de Organisation hend nöd chöne gholt werde.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'D Yyladig isch aagnoh worde. D Organisation isch jetz mit dim Konto verchnüpft.',
+  'De wachtwoorden zijn niet hetzelfde.': 'D Passwörter sind nöd gliich.',
+  'Delen': 'Teile',
+  'Delen als bewijs': 'Als Bwiis teile',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'S Teile isch fählgschlage. Probiers no emol.',
+  'Dit is de volledige definitie die meegaat:':
+      'Das isch d vollschtändigi Definition wo mitgaat:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Das isch din Kaländerlink. Er wird da nur eimal aazöigt — chlèb en i diri Kaländer-App. Jede mit em Link cha dini Tärmin gsee; teil en drum nöd.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Das Stilprofil isch z gross zum Teile.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Das Thema isch iibout oder wird von eme Kurs bruucht und cha nöd glöscht werde.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Das Thema het nöd chöne übernoh werde — s Format stimmt nöd.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Bi de Organisation git\'s scho es Thema mit däm Namä.',
+  'Geen credentials gevonden in deze bron.':
+      'Kei Nachwiis i dere Quällä gfunde.',
+  'Gereed': 'Färtig',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Hol bschtehendi Badges und Zertifikat us ere externe Brieftasche und teil se als Bwiis. Du wählisch säuber, was du teilsch.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'S Zertifikat het nöd chöne gspicheret werde. Probiers no emol.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'S Zertifikat het nöd chöne gholt werde. Probiers no emol.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'S Teile isch fählgschlage. Prüef d Art vom Bwiis und probiers no emol.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'S Zruggneh isch fählgschlage. Probiers no emol.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'S Zruggneh isch nöd gglückt. Probiers no emol.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Öpper andersch het das Thema grad aapasst. Überschriibe, oder d Version vo de Organisation übernäh?',
+  'Ingebouwd': 'Iibout',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Vo irire Organisation zruggno worde. Die Erchlärig gilt nüme.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Wähl es PNG-, JPEG- oder WebP-Bild vo höchschtens 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Wähl es Passwort mit mindeschtens 12 Zeiche.',
+  'Koppelen': 'Verchnüpfe',
+  'Link gekopieerd.': 'Link kopiert.',
+  'Naam is al in gebruik': 'Namä wird scho bruucht',
+  'Nieuwe link': 'Nöie Link',
+  'Nieuwe profielfoto kiezen': 'Nöis Profilfoto wähle',
+  'Nog geen certificaten.': 'Nonig kei Zertifikat.',
+  'Nog nodig voor deze badge': 'För das Badge no nötig',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'S Hole isch fählgschlage. Prüef de Link und probiers no emol.',
+  'Profielfoto kiezen': 'Profilfoto wähle',
+  'Profielfoto verwijderen': 'Profilfoto ewägnee',
+  'Profielfoto wijzigen': 'Profilfoto ändere',
+  'Publieke verificatielink': 'Öffentliche Verifiziierigslik',
+  'Registreren en aanmelden': 'Regischtriere und aumelde',
+  'Serverversie overnemen': 'Serverversion übernäh',
+  'Stijlprofiel delen met de organisatie?':
+      'Stilprofil mit de Organisation teile?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Z vill Versüch. Wart e Momänt und probiers de no emol.',
+  'Thema’s van de organisatie': 'Theme vo de Organisation',
+  'Tussendoor gewijzigd': 'Zwüschezitig gänderet',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Si sind regischtriert und aagmäldet. Willkomme!',
+  'Uitgegeven': 'Uusgstellt',
+  'Uitnodiging accepteren': 'Yyladig aanneh',
+  'Uitnodiging gebruiken': 'Yyladig bruuche',
+  'Uitnodigingscode': 'Yyladigscode',
+  'Uitnodigingsnummer': 'Yyladigsnummere',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Dis Konto isch aagleit worde. Mäld di jetz mit de iigladene Adrässe und dim nöie Passwort aa.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Dis Konto derf bi dere Organisation kei Theme verwalte.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Diri Kaländer-App cha de nüme bi d Tärmin. D Tärmin säuber bliibe bschteh.',
+  'Uw naam': 'Din Namä',
+  'Verwijderen bij de organisatie': 'Bi de Organisation lösche',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'S Lösche isch fählgschlage. Probiers no emol.',
+  'Vul uw naam in.': 'Gib din Namä ii.',
+  'Wachtwoord herhalen': 'Passwort widerhole',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Tu dini Tärmin i din eigene Kaländer — aktualisiert bi Änderige und Absage.',
   'Omrekening naar euro': 'Umrächnig i Euro',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Für d EUR-Aazeig bruucht OciDeck pro Sitzig ein Kurs. De Kurs sälber iitrage oder de EZB-Referänzkurs abruefe.',
@@ -3081,44 +3229,28 @@ const _dutchSourceAddGsw = <String, String>{
   'Uw antwoord': 'Ihre Antwort',
   'Antwoord indienen': 'Antwort abschicken',
   'Geen verbinding': 'Kei Verbindig',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Dann teilen Sie keine Nachweise mehr aus dieser Brieftasche. ',
   'U hebt nog geen badges.': 'Sie haben noch keine Abzeichen.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Sie können Nachweise aus einer externen Brieftasche (wie EduBadges) ',
   'U levert bewijs aan voor: {badge}':
       'Sie reichen einen Nachweis ein für: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Sie reichen diese Nachweisdatei zur Prüfung ein. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Sie werden zur Anmeldung an den Brieftaschenanbieter weitergeleitet. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Ihre Datei wird als "eingereicht, noch nicht geprüft" markiert ',
-  'Verbinding maken…': 'Verbindung wird hergestellt…',
-  'Verbinding verbreken': 'Verbindung trennen',
-  'Verbinding verbreken?': 'Verbindung trennen?',
-  'Verbonden met {provider}': 'Verbunden mit {provider}',
-  'Verbreken': 'Trennen',
   'Verlopen': 'Abgelaufen',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Wenn Sie die Löschung beantragen, verschwinden Ihre Nachweisdateien und die zugehörigen Bewertungen. Aufbewahrungsregeln im Löschregister zeigen, ob wegen einer laufenden Aufbewahrungspflicht ein Rest erhalten bleibt.',
   'Wordt verzonden zodra je online bent.':
       'Wird gesendet, sobald Sie online sind.',
   'portefeuille': 'Brieftasche',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} Nachweis(e) zum Teilen ausgewählt',
   '{bytes} bytes': '{bytes} Bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'In Bearbeitung seit {datum}. In der Regel innerhalb von zwei Arbeitstagen.',
   'Kies een bestand om aan te leveren.':
       'Wählen Sie eine einzureichende Datei aus.',
-  'Kies wat u deelt': 'Wählen Sie, was Sie teilen',
   'Kies welke credentials u deelt als bewijs:':
       'Wählen Sie, welche Nachweise Sie als Beleg teilen:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Ihr Nachweis konnte nicht geladen werden. Bitte versuchen Sie es erneut.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Verbinden Sie eine externe Brieftasche, um Ihre vorhandenen Abzeichen und ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Leer lassen, wenn der Nachweis unbegrenzt gültig ist. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3127,18 +3259,9 @@ const _dutchSourceAddGsw = <String, String>{
   'Mijn badges': 'Meine Abzeichen',
   'Mijn bewijs': 'Mein Nachweis',
   'Mijn bewijsstukken': 'Meine Nachweisdateien',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Nach der Anmeldung wählen Sie im nächsten Schritt, welche Nachweise Sie teilen. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Noch keine Nachweisdateien eingereicht.',
   'Opgegeven': 'Eingereicht',
-  'Opnieuw verbinden': 'Erneut verbinden',
-  'Portefeuille koppelen': 'Brieftasche verbinden',
-  'Portefeuille verbinden': 'Brieftasche verbinden',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Wählen Sie die Nachweise aus, die Sie als Beleg teilen möchten. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Schließen Sie das Fenster des Brieftaschenanbieters, um fortzufahren.',
   'Toegekend op {datum}': 'Vergeben am {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Zulässige Formate: PNG, JPEG, WebP und PDF. ',
@@ -3161,15 +3284,9 @@ const _dutchSourceAddGsw = <String, String>{
       'Nachweisdateien sind Dateien, die Sie für ein Abzeichen einreichen. Die Übersicht zeigt Dateiname, Prüfsumme, Status und wer sie geprüft hat. Die Dateien selbst sind nicht in dieser Übersicht; eine prüfende Person kann sie einsehen.',
   'Bezig met versturen…': 'Wird gesendet…',
   'Datum kiezen': 'Datum auswählen',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Die Verbindung wurde getrennt. Sie können sich erneut verbinden.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Diese Funktion ist noch nicht verfügbar. ',
   'Externe portefeuille': 'Externe Brieftasche',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Akzeptiert. Die Nachweisdatei wurde genehmigt.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Keine Nachweise in dieser Brieftasche gefunden.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Kein Teilnehmendenprofil für diese Organisation gefunden.',
   'Geldig tot {datum}': 'Gültig bis {datum}',

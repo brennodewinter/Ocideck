@@ -1608,6 +1608,154 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Certificaatnummer: {nummer}': 'Tanúsítványszám: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Az értékelő ekkor már nem látja ezt az elemet. ',
+  'Deze uitnodiging hoort bij {adres}.':
+      'Ez a meghívó a következő címhez tartozik: {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Ez az Ön naptárhivatkozása. Itt csak egyszer jelenik meg — illessze be ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Szerezze be a meglévő jelvényeket és tanúsítványokat egy külső ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Az Ön szervezete visszavonta: {reden}',
+  'Uitgegeven op {datum}': 'Kiadva: {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Naptára {datum}-ig van összekapcsolva.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Naptárhivatkozása {datum} napján lejár. Újítsa meg a hivatkozást, mielőtt leállna.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'A szervezetének már van „{naam}” nevű témája. Frissíti ezt a témát a saját verziójával?',
+  '“{naam}” delen met de organisatie': '„{naam}” megosztása a szervezettel',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}” láthatóvá válik a szervezete számára.',
+  'Aanmelden': 'Bejelentkezés',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'A bejelentkezés nem sikerült. Próbálja újra alább.',
+  'Agenda koppelen': 'Naptár összekapcsolása',
+  'Agenda-koppeling intrekken?': 'Visszavonja a naptárkapcsolatot?',
+  'Agenda-link vernieuwen?': 'Megújítja a naptárhivatkozást?',
+  'Alle eisen zijn vervuld.': 'Minden követelmény teljesült.',
+  'Bekijken': 'Megtekintés',
+  'Bewaren': 'Mentés',
+  'Bewijsstuk intrekken?': 'Visszavonja a bizonyítékot?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'A frissítés nem sikerült. Próbálja újra.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'A tanúsítványok itt jelennek meg, amint az Ön szervezete kiállítja őket.',
+  'Credential-bestand kiezen': 'Válasszon hitelesítőadat-fájlt',
+  'Credentials ophalen…': 'Hitelesítő adatok lekérése…',
+  'Cursus': 'Tanfolyam',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Ez nem érvényes HTTPS-hivatkozás hitelesítő adatra.',
+  'Dat is niet gelukt. Probeer het opnieuw.': 'Ez nem sikerült. Próbálja újra.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'A művelet nem sikerült. Próbálja újra.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'A kép túl nagy. Válasszon kisebb fájlt.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Az értékelő ekkor már nem látja ezt az elemet. Később új bizonyítékot nyújthat be.',
+  'De bron bevat geen leesbare credentials.':
+      'A forrás nem tartalmaz olvasható hitelesítő adatokat.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'A meghívószám és a kód kombinációja helytelen, vagy a meghívó lejárt, illetve már felhasználták.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Az összekapcsolás nem sikerült. Próbálja újra.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'A szervezet és a többi résztvevő ezután nem lát fényképet az Ön fiókjánál.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'A szervezetnek még nincsenek saját témái.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'A régi hivatkozás ezután nem működik. Illessze be újra az új hivatkozást a naptáralkalmazásába.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'A profilkép nem lett elmentve. Próbálja újra.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'A szervezet témáit nem sikerült lekérni.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'A meghívót elfogadták. A szervezet most már az Ön fiókjához tartozik.',
+  'De wachtwoorden zijn niet hetzelfde.': 'A jelszavak nem egyeznek.',
+  'Delen': 'Megosztás',
+  'Delen als bewijs': 'Megosztás bizonyítékként',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'A megosztás nem sikerült. Próbálja újra.',
+  'Dit is de volledige definitie die meegaat:':
+      'Ez a vele együtt átadott teljes definíció:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Ez az Ön naptárhivatkozása. Itt csak egyszer jelenik meg — illessze be a naptáralkalmazásába. Bárki, akinek megvan a hivatkozás, láthatja az időpontjait; ezért ne ossza meg.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Ez a stílusprofil túl nagy a megosztáshoz.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Ez a téma beépített vagy egy tanfolyam használja, és nem törölhető.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Ezt a témát nem sikerült átvenni — a formátum nem megfelelő.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'A szervezetnél már létezik ilyen nevű téma.',
+  'Geen credentials gevonden in deze bron.':
+      'Ebben a forrásban nem találhatók hitelesítő adatok.',
+  'Gereed': 'Kész',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Szerezze be a meglévő jelvényeket és tanúsítványokat egy külső tárcából, és ossza meg őket bizonyítékként. Ön választja ki, mit oszt meg.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'A tanúsítványt nem sikerült elmenteni. Próbálja újra.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'A tanúsítványt nem sikerült lekérni. Próbálja újra.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'A megosztás nem sikerült. Ellenőrizze a bizonyíték típusát, és próbálja újra.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'A visszavonás nem sikerült. Próbálja újra.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'A visszavonás nem sikerült. Próbálja újra.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Valaki más épp most módosította ezt a témát. Felülírja, vagy átveszi a szervezet verzióját?',
+  'Ingebouwd': 'Beépített',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Visszavonta az Ön szervezete. Ez a nyilatkozat már nem érvényes.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Válasszon legfeljebb 5 MB-os PNG-, JPEG- vagy WebP-képet.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Válasszon legalább 12 karakteres jelszót.',
+  'Koppelen': 'Összekapcsolás',
+  'Link gekopieerd.': 'Hivatkozás másolva.',
+  'Naam is al in gebruik': 'A név már használatban van',
+  'Nieuwe link': 'Új hivatkozás',
+  'Nieuwe profielfoto kiezen': 'Új profilkép választása',
+  'Nog geen certificaten.': 'Még nincsenek tanúsítványok.',
+  'Nog nodig voor deze badge': 'Még szükséges ehhez a jelvényhez',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'A lekérés nem sikerült. Ellenőrizze a hivatkozást, és próbálja újra.',
+  'Profielfoto kiezen': 'Profilkép választása',
+  'Profielfoto verwijderen': 'Profilkép eltávolítása',
+  'Profielfoto wijzigen': 'Profilkép módosítása',
+  'Publieke verificatielink': 'Nyilvános ellenőrző hivatkozás',
+  'Registreren en aanmelden': 'Regisztráció és bejelentkezés',
+  'Serverversie overnemen': 'Kiszolgálói verzió átvétele',
+  'Stijlprofiel delen met de organisatie?':
+      'Megosztja a stílusprofilt a szervezettel?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Túl sok próbálkozás. Várjon egy kicsit, majd próbálja újra.',
+  'Thema’s van de organisatie': 'A szervezet témái',
+  'Tussendoor gewijzigd': 'Időközben módosítva',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Regisztrált és bejelentkezett. Üdvözöljük!',
+  'Uitgegeven': 'Kiadva',
+  'Uitnodiging accepteren': 'Meghívó elfogadása',
+  'Uitnodiging gebruiken': 'Meghívó felhasználása',
+  'Uitnodigingscode': 'Meghívókód',
+  'Uitnodigingsnummer': 'Meghívószám',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Fiókja elkészült. Jelentkezzen be a meghívott címmel és új jelszavával.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Fiókja nem kezelhet témákat ennél a szervezetnél.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Naptáralkalmazása ezután nem fér hozzá az eseményekhez. Maguk az időpontok megmaradnak.',
+  'Uw naam': 'Az Ön neve',
+  'Verwijderen bij de organisatie': 'Törlés a szervezetnél',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'A törlés nem sikerült. Próbálja újra.',
+  'Vul uw naam in.': 'Adja meg a nevét.',
+  'Wachtwoord herhalen': 'Jelszó ismétlése',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Helyezze el eseményeit a saját naptárában — módosítások és lemondások esetén frissül.',
   'Omrekening naar euro': 'Átváltás euróra',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Az EUR-megjelenítéshez az OciDeck munkamenetenként egy árfolyamot használ. Az árfolyamot meg lehet adni kézzel, vagy le lehet kérni az EKB referencia-árfolyamát.',
@@ -3075,42 +3223,26 @@ const _dutchSourceAddHu = <String, String>{
   'Uw antwoord': 'A válaszod',
   'Antwoord indienen': 'Válasz elküldése',
   'Geen verbinding': 'Nincs kapcsolat',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Ekkor többé nem oszt meg hitelesítő adatokat ebből a tárcából. ',
   'U hebt nog geen badges.': 'Még nincsenek jelvényei.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Külső tárcából (például EduBadgesből) származó igazolásokat használhat ',
   'U levert bewijs aan voor: {badge}': 'Igazolást nyújt be ehhez: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Ezt az igazoló fájlt értékelésre nyújtja be. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'A bejelentkezéshez átirányítjuk a tárcaszolgáltatóhoz. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'A fájl jelölése „benyújtva, még nincs ellenőrizve” lesz ',
-  'Verbinding maken…': 'Kapcsolódás…',
-  'Verbinding verbreken': 'Kapcsolat bontása',
-  'Verbinding verbreken?': 'Bontja a kapcsolatot?',
-  'Verbonden met {provider}': 'Kapcsolódva ehhez: {provider}',
-  'Verbreken': 'Bontás',
   'Verlopen': 'Lejárt',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Ha törlést kér, az igazoló fájljai és a kapcsolódó értékelések eltűnnek. A törlési nyilvántartás megőrzési szabályai jelzik, marad-e vissza adat folyamatban lévő megőrzési kötelezettség miatt.',
   'Wordt verzonden zodra je online bent.':
       'A rendszer elküldi, amint online lesz.',
   'portefeuille': 'tárca',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} hitelesítő adat kiválasztva megosztásra',
   '{bytes} bytes': '{bytes} bájt',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Feldolgozás alatt {datum} óta. Általában két munkanapon belül.',
   'Kies een bestand om aan te leveren.': 'Válasszon ki egy benyújtandó fájlt.',
-  'Kies wat u deelt': 'Válassza ki, mit oszt meg',
   'Kies welke credentials u deelt als bewijs:':
       'Válassza ki, mely hitelesítő adatokat osztja meg igazolásként:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Az igazolást nem sikerült betölteni. Próbálja újra.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Csatlakoztasson külső tárcát a meglévő jelvényei és ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Hagyja üresen, ha az igazolás korlátlan ideig érvényes. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3119,17 +3251,8 @@ const _dutchSourceAddHu = <String, String>{
   'Mijn badges': 'Jelvényeim',
   'Mijn bewijs': 'Igazolásom',
   'Mijn bewijsstukken': 'Igazoló fájljaim',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Bejelentkezés után a következő lépésben kiválasztja a megosztott hitelesítő adatokat. ',
   'Nog geen bewijsstukken aangeleverd.': 'Még nincs benyújtott igazoló fájl.',
   'Opgegeven': 'Benyújtva',
-  'Opnieuw verbinden': 'Újracsatlakozás',
-  'Portefeuille koppelen': 'Tárca csatlakoztatása',
-  'Portefeuille verbinden': 'Tárca csatlakoztatása',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Válassza ki az igazolásként megosztani kívánt hitelesítő adatokat. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'A folytatáshoz zárja be a tárcaszolgáltató ablakát.',
   'Toegekend op {datum}': 'Kiállítva: {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Engedélyezett formátumok: PNG, JPEG, WebP és PDF. ',
@@ -3152,14 +3275,9 @@ const _dutchSourceAddHu = <String, String>{
       'Az igazoló fájlok olyan fájlok, amelyeket egy jelvényhez nyújt be. Az áttekintés a fájlnevet, ellenőrzőkódot, állapotot és az értékelő személyét mutatja. Maguk a fájlok nem szerepelnek ebben az áttekintésben; az értékelő megtekintheti őket.',
   'Bezig met versturen…': 'Küldés…',
   'Datum kiezen': 'Dátum kiválasztása',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'A kapcsolat megszakadt. Újra csatlakozhat.',
-  'Deze functie is nog niet beschikbaar. ': 'Ez a funkció még nem érhető el. ',
   'Externe portefeuille': 'Külső tárca',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Elfogadva. Az igazoló fájlt jóváhagyták.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Ebben a tárcában nem találhatók hitelesítő adatok.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Ehhez a szervezethez nem található résztvevői profil.',
   'Geldig tot {datum}': 'Érvényes eddig: {datum}',

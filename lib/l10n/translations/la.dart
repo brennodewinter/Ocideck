@@ -1621,6 +1621,154 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Certificaatnummer: {nummer}': 'Numerus certificati: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Iudex hanc partem deinde non amplius videbit. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Haec invitatio ad {adres} pertinet.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Hic est nexus calendarii tui. Hic semel tantum ostenditur — glutina ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Insignia et certificata ex porta ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Revocatum ab organizatione tua: {reden}',
+  'Uitgegeven op {datum}': 'Emissum die {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Calendarium tuum coniunctum est usque ad {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Nexus calendarii tui die {datum} exit. Nexum renova antequam desistit.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Organizatio tua iam thema “{naam}” habet. Visne illud thema versione tua renovare?',
+  '“{naam}” delen met de organisatie': '“{naam}” cum organizatione communica',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” organizationi tuae visibile fit.',
+  'Aanmelden': 'Adire',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Aditus non successit. Iterum infra tempta.',
+  'Agenda koppelen': 'Calendarium conecte',
+  'Agenda-koppeling intrekken?': 'Coniunctionem calendarii revocare?',
+  'Agenda-link vernieuwen?': 'Nexum calendarii renovare?',
+  'Alle eisen zijn vervuld.': 'Omnes condiciones impletae sunt.',
+  'Bekijken': 'Vide',
+  'Bewaren': 'Serva',
+  'Bewijsstuk intrekken?': 'Testimonium revocare?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Renovatio non successit. Iterum tempta.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Certificata hic apparent simulac organizatio tua ea emittit.',
+  'Credential-bestand kiezen': 'Fasciculum credentialium elige',
+  'Credentials ophalen…': 'Credentiales obtinentur…',
+  'Cursus': 'Cursus',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Hic nexus HTTPS ad credentialem non valet.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Id non successit. Iterum tempta.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Actio non successit. Iterum tempta.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Imago nimis magna est. Minorem fasciculum elige.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Iudex hanc partem deinde non amplius videbit. Testimonia nova postea suppeditare potes.',
+  'De bron bevat geen leesbare credentials.':
+      'Fons nullas credentiales legibiles continet.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Numeri invitationis et codicis coniunctio non congruit, aut invitatio elapsa est aut iam adhibita.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Coniunctio non successit. Iterum tempta.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organizatio et ceteri participes imaginem ad rationem tuam deinde non videbunt.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organizatio nulla themata propria adhuc habet.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Nexus vetus deinde non operietur. Nexum novum in applicatione calendarii tua iterum glutina.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Imago profili servata non est. Iterum tempta.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Themata organizationis obtineri non potuerunt.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Invitatio accepta est. Organizatio nunc ad rationem tuam adiuncta est.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Tesserae non congruunt.',
+  'Delen': 'Communica',
+  'Delen als bewijs': 'Communica ut testimonium',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Communicatio non successit. Iterum tempta.',
+  'Dit is de volledige definitie die meegaat:':
+      'Haec est plena definitio quae comitatur:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Hic est nexus calendarii tui. Hic semel tantum ostenditur — in applicatione calendarii glutina. Quisque nexum habens conventus tuos videre potest; noli communicare.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Hoc profilum stili nimis magnum est ad communicandum.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Hoc thema instructum est aut a cursu adhibetur et deleri non potest.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Hoc thema assumi non potuit — forma non congruit.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Thema hoc nomine iam apud organizationem exstat.',
+  'Geen credentials gevonden in deze bron.':
+      'Nullae credentiales in hoc fonte inventae.',
+  'Gereed': 'Factum',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Insignia et certificata ex porta externa obtine et communica ut testimonia. Ipse eligis quid communices.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Certificatum servari non potuit. Iterum tempta.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Certificatum obtineri non potuit. Iterum tempta.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Communicatio non successit. Genus testimonii inspice et iterum tempta.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Revocatio non successit. Iterum tempta.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Revocatio non successit. Iterum tempta.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Aliquis alius hoc thema modo mutavit. Superscribere, an versionem organizationis assumere?',
+  'Ingebouwd': 'Instructum',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Revocatum ab organizatione tua. Haec declaratio iam non valet.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Imaginem PNG, JPEG aut WebP non maiorem quam 5 MB elige.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Tesseram saltem duodecim litterarum elige.',
+  'Koppelen': 'Conecte',
+  'Link gekopieerd.': 'Nexus copiatus.',
+  'Naam is al in gebruik': 'Nomen iam in usu est',
+  'Nieuwe link': 'Nexus novus',
+  'Nieuwe profielfoto kiezen': 'Imaginem profili novam elige',
+  'Nog geen certificaten.': 'Nulla adhuc certificata.',
+  'Nog nodig voor deze badge': 'Adhuc necessarium huic insigni',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Obtentio non successit. Nexum inspice et iterum tempta.',
+  'Profielfoto kiezen': 'Imaginem profili elige',
+  'Profielfoto verwijderen': 'Imaginem profili remove',
+  'Profielfoto wijzigen': 'Imaginem profili muta',
+  'Publieke verificatielink': 'Nexus verificationis publicus',
+  'Registreren en aanmelden': 'Registra et adi',
+  'Serverversie overnemen': 'Versionem servi assume',
+  'Stijlprofiel delen met de organisatie?':
+      'Profilum stili cum organizatione communicare?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Nimis multi conatus. Paulisper morare et iterum tempta.',
+  'Thema’s van de organisatie': 'Themata organizationis',
+  'Tussendoor gewijzigd': 'Interim mutatum',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Registratus es et adiisti. Salve!',
+  'Uitgegeven': 'Emissum',
+  'Uitnodiging accepteren': 'Invitationem accipe',
+  'Uitnodiging gebruiken': 'Invitationem adhibe',
+  'Uitnodigingscode': 'Codex invitationis',
+  'Uitnodigingsnummer': 'Numerus invitationis',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Ratio tua creata est. Adi nunc inscriptione invitata et tessera nova.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Ratio tua themata apud hanc organizationem administrare non licet.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Applicatio calendarii tua ad conventus deinde accedere non poterit. Conventus ipsi manent.',
+  'Uw naam': 'Nomen tuum',
+  'Verwijderen bij de organisatie': 'Dele apud organizationem',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Deletio non successit. Iterum tempta.',
+  'Vul uw naam in.': 'Nomen tuum inscribe.',
+  'Wachtwoord herhalen': 'Tesseram repete',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Conventus tuos in calendario tuo proprio pone — mutationibus et abrogationibus renovatur.',
   'Omrekening naar euro': 'Conversio in euronum',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Ad monstrationem in EUR OciDeck unum cursum per sessionem adhibet. Cursum ipse inscribe vel cursum referentiae BCE pete.',
@@ -3077,42 +3225,26 @@ const _dutchSourceAddLa = <String, String>{
   'Uw antwoord': 'Responsum tuum',
   'Antwoord indienen': 'Submit responsum',
   'Geen verbinding': 'Nullus nexus',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Tum nulla credentialia ex hac porta amplius communicabis. ',
   'U hebt nog geen badges.': 'Nondum ulla insignia habes.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Probationem ex porta externa (ut EduBadges) adhibere potes ',
   'U levert bewijs aan voor: {badge}': 'Probationem mittis pro: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Hanc probationem iudicandam mittis. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Ad provisorem portae mitteris ut rationem tuam ineas. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Fasciculus tuus ut "missus, nondum examinatus" notabitur ',
-  'Verbinding maken…': 'Conectens…',
-  'Verbinding verbreken': 'Disiungere',
-  'Verbinding verbreken?': 'Conexio disiungenda?',
-  'Verbonden met {provider}': 'Conexio cum {provider} facta',
-  'Verbreken': 'Disiungere',
   'Verlopen': 'Exspiratum',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Si deletionem petis, probationes tuae atque aestimationes iis adiunctae delebuntur. Regulae servandi in registro deletionum indicant num aliquid propter obligationem servandi adhuc maneat.',
   'Wordt verzonden zodra je online bent.':
       'Mittetur simul ac nexum interretialem habueris.',
   'portefeuille': 'porta',
-  '{aantal} credential(s) geselecteerd om te delen':
-      'Numerus documentorum credentialium communicandorum: {aantal}',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Ex die {datum} tractatur. Plerumque intra duos dies operarios.',
   'Kies een bestand om aan te leveren.': 'Elige fasciculum mittendum.',
-  'Kies wat u deelt': 'Elige quid communices',
   'Kies welke credentials u deelt als bewijs:':
       'Elige quae credentialia pro probatione communices:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Probatio tua legi non potuit. Rursus conare.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Portam externam coniunge ut insignibus tuis iam exstantibus et ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Vacuum relinque si probatio sine termino valet. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3121,17 +3253,8 @@ const _dutchSourceAddLa = <String, String>{
   'Mijn badges': 'Insignia mea',
   'Mijn bewijs': 'Probatio mea',
   'Mijn bewijsstukken': 'Probationes meae',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Postquam rationem inieris, proximo gradu eliges quae credentialia communices. ',
   'Nog geen bewijsstukken aangeleverd.': 'Nullae probationes adhuc missae.',
   'Opgegeven': 'Missum',
-  'Opnieuw verbinden': 'Rursus conectere',
-  'Portefeuille koppelen': 'Portam adiungere',
-  'Portefeuille verbinden': 'Portam conectere',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Elige credentialia quae pro probatione communicare vis. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Fenestram provisoris portae claude ut pergas.',
   'Toegekend op {datum}': 'Attributum die {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Formae admissae: PNG, JPEG, WebP et PDF. ',
@@ -3154,15 +3277,9 @@ const _dutchSourceAddLa = <String, String>{
       'Probationes sunt documenta quae pro insigne mittis. Summarium ostendit nomen fasciculi, summa verificationis, status et quis iudicavit. Ipsa fasciculi non sunt in hoc summarium; iudex ea videre potest.',
   'Bezig met versturen…': 'Mittendo…',
   'Datum kiezen': 'Eligere diem',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Conexio interrupta est. Rursus conectere potes.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Haec functio adhuc non disponibilis. ',
   'Externe portefeuille': 'Porta externa',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Acceptus. Probatio approbata est.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Nullae credentiales in hac porta inventae.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Nullum proficulum participis pro hac organizatione inventum.',
   'Geldig tot {datum}': 'Validus usque ad {datum}',

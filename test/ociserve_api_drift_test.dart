@@ -119,6 +119,28 @@ const gatewayRoutes = <GatewayRoute>[
     path: '/api/v1/me/avatar',
     // Binary download — no JSON fields to check.
   ),
+  // — Account-audit en profielfoto (#2428) —
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/auth/ocideck-login',
+    // 204 audit-registratie — geen body om te lezen.
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/course-versions/{}/lessons/{}/opened',
+    // 204 audit-registratie — geen body om te lezen.
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/me/avatar',
+    responseSchema: 'AvatarResponse',
+    responseFields: ['hash'],
+  ),
+  GatewayRoute(
+    method: 'DELETE',
+    path: '/api/v1/me/avatar',
+    // 204 — geen body om te lezen.
+  ),
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/organizations/{}/me/learning-state',
@@ -279,6 +301,173 @@ const gatewayRoutes = <GatewayRoute>[
       'evidence_items.review_note',
       'evidence_items.created_at',
     ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/evidence-types/{}/versions',
+    responseSchema: 'EvidenceTypeVersionList',
+    responseFields: ['versions', 'versions.id', 'versions.version'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/participants/{}/evidence-items/{}/withdraw',
+    responseSchema: 'EvidenceItemResponse',
+    responseFields: ['id', 'content_status'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/participants/{}/portfolio-imports',
+    responseSchema: 'PortfolioImportCreateResponse',
+    responseFields: ['import_id'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/portfolio-imports/{}',
+    responseSchema: 'PortfolioImportResponse',
+    responseFields: [
+      'import_id',
+      'status',
+      'items',
+      'items.id',
+      'items.title',
+      'items.issuer_id',
+      'items.selected',
+    ],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path:
+        '/api/v1/organizations/{}/participants/{}/portfolio-imports/{}/select',
+    responseSchema: 'PortfolioImportSelectResponse',
+    responseFields: ['created_item_ids'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/skills',
+    responseSchema: 'SkillList',
+    responseFields: ['skills', 'skills.id', 'skills.title'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/skills/{}/versions',
+    responseSchema: 'SkillVersionList',
+    responseFields: ['versions', 'versions.id'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/skills/{}/badge-readiness',
+    responseSchema: 'BadgeReadiness',
+    responseFields: [
+      'skill_id',
+      'skill_title',
+      'kwalificatiesoort',
+      'validity_months',
+      'requirements',
+      'requirements.kind',
+      'requirements.title',
+      'requirements.met',
+      'requirements.evidence_type',
+      'requirements.course_id',
+      'requirements.blueprint_id',
+      'requirements.min_assurance',
+      'ready',
+    ],
+  ),
+  // — Certificaten (#2426): lijst + PDF-download —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/certificates',
+    responseSchema: 'CertificateList',
+    responseFields: [
+      'certificates',
+      'certificates.id',
+      'certificates.title',
+      'certificates.description',
+      'certificates.certificate_number',
+      'certificates.status',
+      'certificates.issued_at',
+      'certificates.revoked_at',
+      'certificates.revocation_reason',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/certificates/{}/pdf',
+    // Binary PDF — no JSON schema to check.
+  ),
+  // — Uitnodigingen (#2425): preview en registratie zijn publiek
+  // (security: []), acceptatie loopt op de bestaande sessie —
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/invitation-registration-preview',
+    security: 'none',
+    responseSchema: 'InvitationRegistrationPreview',
+    responseFields: ['invited_email'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/invitation-registrations',
+    security: 'none',
+    responseSchema: 'InvitationAcceptResult',
+    responseFields: ['organization_id', 'role'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/invitation-acceptances',
+    responseSchema: 'InvitationAcceptResult',
+    responseFields: ['organization_id', 'role'],
+  ),
+  // — Agenda-abonnement (#2427): eenmalige feed-URL uitgeven/roteren en
+  // intrekken. De `.ics`-feed zelf haalt de agenda-app van de gebruiker op —
+  // OciDeck roept hem niet aan en hoeft hem hier dus niet te registreren.
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/calendar-subscription',
+    responseSchema: 'CalendarSubscription',
+    responseFields: ['url', 'expires_at'],
+  ),
+  GatewayRoute(
+    method: 'DELETE',
+    path: '/api/v1/organizations/{}/me/calendar-subscription',
+    // 204 — no body.
+  ),
+  // — Themaregister (#2429): delen, ophalen met ETag, bijwerken met
+  // If-Match en verwijderen (409 = ingebouwd/in gebruik) —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/themes',
+    responseSchema: 'ThemeList',
+    responseFields: [
+      'themes',
+      'themes.id',
+      'themes.name',
+      'themes.definition',
+      'themes.is_builtin',
+      'next_cursor',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/themes/{}',
+    responseSchema: 'ThemeItem',
+    responseFields: ['id', 'name', 'definition', 'is_builtin'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/themes',
+    responseSchema: 'ThemeItem',
+    responseFields: ['id', 'name', 'definition', 'is_builtin'],
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/organizations/{}/themes/{}',
+    responseSchema: 'ThemeItem',
+    responseFields: ['id', 'name', 'definition', 'is_builtin'],
+  ),
+  GatewayRoute(
+    method: 'DELETE',
+    path: '/api/v1/organizations/{}/themes/{}',
+    // 204 — no body.
   ),
   GatewayRoute(
     method: 'GET',
@@ -525,6 +714,127 @@ const gatewayRoutes = <GatewayRoute>[
 /// Normalise a path so {param_name} becomes {} for comparison.
 String normalisePath(String path) =>
     path.replaceAll(RegExp(r'\{[^}]+\}'), '{}');
+
+/// Het deelnemersoppervlak van de gepinde spec (#2430): routes die OciDeck
+/// als deelnemers-app wél zou kunnen aanroepen. Dat zijn de `/me/`-routes
+/// van de aangemelde cursist, de participant-eigen `participants/{}/…`-paden
+/// en de publieke registratie-, intake- en auth-routes. Staf-routes zoals
+/// ledenbeheer, cursusbeheer en vouchers vallen er structureel buiten.
+bool inOciDeckSurface(String normalisedPath) =>
+    normalisedPath.contains('/me/') ||
+    normalisedPath.endsWith('/me') ||
+    normalisedPath.startsWith('/api/v1/organizations/{}/participants/') ||
+    normalisedPath.startsWith('/api/v1/installation') ||
+    normalisedPath.startsWith('/api/v1/invitation-') ||
+    normalisedPath.startsWith('/api/v1/intake/') ||
+    normalisedPath.startsWith('/api/v1/public/') ||
+    normalisedPath.startsWith('/api/v1/auth/') ||
+    normalisedPath.endsWith('/self-register');
+
+/// Spec-routes in het deelnemersoppervlak die OciDeck bewust níét aanroept,
+/// elk met de reden. Een route die hier staat moet daadwerkelijk onaangeroepen
+/// blijven: zodra de gateway hem gaat gebruiken, verdwijnt de regel —
+/// precies zoals de omgekeerde poort bedoeld is (#2430, naar Keiko #372).
+const unusedSpecRoutes = <String, String>{
+  // Browserflows van Keiko, niet van OciDeck.
+  'GET /api/v1/auth/web/login': 'browseraanmelding van Keiko',
+  'GET /api/v1/auth/web/callback': 'browseraanmelding van Keiko',
+  'GET /api/v1/auth/web/me': 'browseraanmelding van Keiko',
+  'GET /api/v1/auth/web/provider-logout': 'browseraanmelding van Keiko',
+  'POST /api/v1/auth/web/logout': 'browseraanmelding van Keiko',
+  'POST /api/v1/auth/web/backchannel-logout': 'browseraanmelding van Keiko',
+  'POST /api/v1/auth/keiko-login': 'auditpunt van Keiko, niet van OciDeck',
+  'POST /api/v1/auth/logout':
+      'OciDeck logt lokaal uit; serverlogout volgt als de sessie dat vraagt',
+  'POST /api/v1/installation/claim':
+      'eigenaar-setup van de server, geen deelnemer',
+
+  // De feed-URL draagt het token en wordt door de agenda-app van de
+  // gebruiker gelezen — OciDeck toont hem alleen eenmalig (#2427).
+  'GET /api/v1/organizations/{}/me/calendar.ics':
+      'wordt door de agenda-app van de gebruiker opgehaald (#2427)',
+
+  // Docentenopervlak dat bij Keiko hoort, niet bij de deelnemers-app.
+  'GET /api/v1/organizations/{}/me/teaching-sessions':
+      'docenten-overzicht; OciDeck is de deelnemers-app',
+
+  // Legacy-pakketroute is uitgeschakeld; OciDeck gebruikt
+  // lesson-playback-sessions voor het pakket.
+  'GET /api/v1/organizations/{}/me/course-versions/{}/lessons/{}/package':
+      'uitgeschakelde legacy-route; pakket loopt via lesson-playback-sessions',
+
+  // Deelnemerroutes die al door een /me/-equivalent of een andere route
+  // worden gedekt.
+  'GET /api/v1/organizations/{}/participants/{}':
+      'deelnemerprofiel komt via me en me/privacy-data',
+  'GET /api/v1/organizations/{}/participants/{}/feed':
+      'gedekt door me/learning-feed',
+  'GET /api/v1/organizations/{}/participants/{}/versions/{}/manifest':
+      'gedekt door me/lesson-playback-sessions/{}/package',
+  'GET /api/v1/organizations/{}/participants/{}/versions/{}/progress':
+      'gedekt door me/learning-state',
+  'POST /api/v1/organizations/{}/participants/{}/versions/{}/progress':
+      'gedekt door me/learning-state',
+  'GET /api/v1/organizations/{}/participants/{}/attempts/{}/score':
+      'gedekt door me/exam-results (#2424)',
+
+  // Staf- en beoordelaarsroutes over participant-paden — de deelnemer zelf
+  // mag ze niet aanroepen, de app hoeft ze dus ook niet te kennen.
+  'GET /api/v1/organizations/{}/participants/{}/attempts': 'stafroute',
+  'POST /api/v1/organizations/{}/participants/{}/attempts': 'stafroute',
+  'GET /api/v1/organizations/{}/participants/{}/attempts/{}': 'stafroute',
+  'POST /api/v1/organizations/{}/participants/{}/attempts/{}/submit':
+      'stafroute',
+  'POST /api/v1/organizations/{}/participants/{}/attempts/{}/score':
+      'stafroute',
+  'POST /api/v1/organizations/{}/participants/{}/attempts/{}/release':
+      'stafroute',
+  'GET /api/v1/organizations/{}/participants/{}/attempts/{}/answers':
+      'stafroute',
+  'PUT /api/v1/organizations/{}/participants/{}/attempts/{}/items/{}/answer':
+      'stafroute',
+  'GET /api/v1/organizations/{}/participants/{}/enrollments': 'stafroute',
+  'POST /api/v1/organizations/{}/participants/{}/enrollments': 'stafroute',
+  'POST /api/v1/organizations/{}/participants/{}/enrollments/{}/upgrade':
+      'stafroute',
+  'GET /api/v1/organizations/{}/participants/{}/participations': 'stafroute',
+  'GET /api/v1/organizations/{}/participants/{}/pe-awards': 'stafroute',
+  'POST /api/v1/organizations/{}/participants/{}/evidence-items/{}/review':
+      'beoordelaarsroute',
+  'POST /api/v1/organizations/{}/participants/{}/evidence-items/{}/source-check':
+      'beoordelaarsroute',
+  'POST /api/v1/organizations/{}/participants/{}/evidence-items/{}/verify-credential':
+      'beoordelaarsroute',
+  'POST /api/v1/organizations/{}/participants/{}/evidence-items/{}/holder-binding':
+      'beoordelaarsroute',
+
+  // Deelnemer-leesmodellen die nog geen scherm hebben — zichtbaar als
+  // achterstand, niet stilletjes.
+  'GET /api/v1/organizations/{}/participants/{}/evidence-items/{}':
+      'bewijsstuk-detail komt mee als de detailweergave erom vraagt',
+  'GET /api/v1/organizations/{}/participants/{}/evidence-items/{}/events':
+      'gebeurtenissen per stuk volgen met de detailweergave',
+  'GET /api/v1/organizations/{}/participants/{}/learning-statistics':
+      'statistiekscherm voor de deelnemer staat niet op de planning',
+  'GET /api/v1/organizations/{}/participants/{}/privacy/requests':
+      'privacy-verzoekenlijst volgt met de AVG-verzoekenflow',
+  'POST /api/v1/organizations/{}/participants/{}/privacy/export':
+      'AVG-exportverzoek volgt met de AVG-verzoekenflow',
+  'POST /api/v1/organizations/{}/participants/{}/privacy/delete':
+      'AVG-verwijderverzoek volgt met de AVG-verzoekenflow',
+  'POST /api/v1/organizations/{}/participants/{}/privacy/anonymize':
+      'AVG-anonimiseerverzoek volgt met de AVG-verzoekenflow',
+
+  // Zelfregistratie zonder uitnodiging is bewust uitgesteld: de
+  // beleidsvraag ligt bij OciServe#661.
+  'POST /api/v1/organizations/{}/self-register':
+      'wacht op het registratiebeleid (OciServe#661, #2425)',
+
+  // Verificatie door derden (werkgever, verificatieportaal) — niet de
+  // deelnemers-app.
+  'POST /api/v1/public/certificates/verify':
+      'publieke verificatie voor derden; OciDeck is de deelnemers-app',
+};
 
 /// Resolve a $ref like '#/components/schemas/Foo' to the actual node.
 dynamic resolveRef(dynamic node, String ref) {
@@ -849,6 +1159,68 @@ void main() {
       reason: 'The gateway calls at least 16 routes; the list must cover them',
     );
   });
+
+  // — De omgekeerde richting (#2430): routes die de server voor deelnemers
+  // biedt maar die niemand in OciDeck aanroept, mogen niet onzichtbaar
+  // blijven. —
+  test(
+    'every participant-facing spec route is called or consciously excepted',
+    () {
+      final called = {
+        for (final route in gatewayRoutes) '${route.method} ${route.path}',
+      };
+      final missing = <String>[];
+      for (final entry in specPaths.entries) {
+        if (!inOciDeckSurface(entry.key)) continue;
+        for (final method in entry.value.keys) {
+          final key = '$method ${entry.key}';
+          if (!called.contains(key) && !unusedSpecRoutes.containsKey(key)) {
+            missing.add(key);
+          }
+        }
+      }
+      expect(
+        missing,
+        isEmpty,
+        reason:
+            'Nieuwe deelnemersroutes in de pin: sluit ze aan in de gateway, of '
+            'zet ze met een reden in unusedSpecRoutes — $missing',
+      );
+    },
+  );
+
+  test(
+    'every unused exception exists in spec, is uncalled and has a reason',
+    () {
+      final called = {
+        for (final route in gatewayRoutes) '${route.method} ${route.path}',
+      };
+      for (final entry in unusedSpecRoutes.entries) {
+        final split = entry.key.split(' ');
+        expect(split.length, 2, reason: 'sleutel "METHOD pad" verwacht');
+        final (method, path) = (split[0], split[1]);
+        expect(
+          specPaths[path]?[method],
+          isNotNull,
+          reason:
+              '${entry.key} staat in de uitzonderingen maar niet in de '
+              'gepinde spec — de route bestaat niet meer, haal de regel weg',
+        );
+        expect(
+          called.contains(entry.key),
+          isFalse,
+          reason:
+              '${entry.key} wordt inmiddels aangeroepen — haal de uitzondering '
+              'weg, de forward-dekking is geregeld',
+        );
+        expect(
+          entry.value.trim(),
+          isNotEmpty,
+          reason: '${entry.key} mist een reden',
+        );
+      }
+    },
+  );
 }
 
 /// Recursively convert yaml_* nodes to plain Dart maps/lists for traversal.

@@ -49,11 +49,16 @@ abstract class OciServeAuthenticator {
   /// Meldt interactief aan in de systeembrowser. Met [stepUp] vraagt de
   /// aanmelding om wat een organisatie eist (RFC 9470): de gevraagde `acr` en
   /// een maximale leeftijd van de aanmelding, zodat de provider de bestaande
-  /// browsersessie niet zomaar hergebruikt.
+  /// browsersessie niet zomaar hergebruikt. Met [loginHint] en [forceLogin]
+  /// (uitnodigingsregistratie, #2425) stuurt de aanmelding `login_hint` en
+  /// `prompt=login`, zodat een nog actieve sessie van de uitnodiger niet
+  /// wordt hergebruikt.
   Future<OciServeTokens> login(
     OciServeInstallation installation,
     OciServeOidcConfiguration configuration, {
     OciServeStepUpRequired? stepUp,
+    String? loginHint,
+    bool forceLogin = false,
   });
 
   Future<OciServeTokens> refresh(
@@ -92,6 +97,8 @@ class OciServePkceAuthenticator implements OciServeAuthenticator {
     OciServeInstallation installation,
     OciServeOidcConfiguration configuration, {
     OciServeStepUpRequired? stepUp,
+    String? loginHint,
+    bool forceLogin = false,
   }) async {
     final client = _client(installation, configuration);
     final receiver = await _receiverFactory();
@@ -104,6 +111,9 @@ class OciServePkceAuthenticator implements OciServeAuthenticator {
         if (stepUp != null && stepUp.acrValues.isNotEmpty)
           'acr_values': stepUp.acrValues.join(' '),
         if (stepUp?.maxAge case final maxAge?) 'max_age': '${maxAge.inSeconds}',
+        if (loginHint != null && loginHint.trim().isNotEmpty)
+          'login_hint': loginHint.trim(),
+        if (forceLogin) 'prompt': 'login',
       },
     )..redirectUri = receiver.redirectUri;
     try {

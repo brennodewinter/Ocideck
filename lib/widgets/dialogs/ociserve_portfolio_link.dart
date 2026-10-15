@@ -1,397 +1,425 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../models/ociserve_portfolio.dart';
+import '../../models/ociserve_evidence_item.dart';
+import '../../models/ociserve_portfolio_import.dart';
+import '../../services/ociserve/ociserve_http.dart';
+import '../../state/ociserve_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/log.dart';
 
-/// De portefeuille-koppeling — stap 1: verbinden, stap 2: kiezen wat je deelt.
+/// De portefeuille-import — stap 1: credentials binnenhalen (via een publieke
+/// verificatielink of een gedownload credential-bestand), stap 2: zelf kiezen
+/// wat je deelt. Pas de aangevinkte items worden bewijsstuk in het dossier;
+/// de rest van de import-sessie blijft ongedeeld.
 ///
-/// OciServe#524 definieert het server-protocol. Tot die tijd toont dit
-/// widget een "nog niet beschikbaar" status, zodat de cursist weet dat
-/// de functie bestaat maar nog niet actief is.
-///
-/// Ontwerpregels:
-/// - Niet zoeken op e-mailadres — dat lekt persoonsgegevens naar de provider.
-/// - Tweestaps: eerst verbinden, dan pas kiezen wat je deelt.
-/// - De cursist ziet altijd wat hij al deelt en kan het intrekken.
-class OciServePortfolioLink extends StatefulWidget {
-  const OciServePortfolioLink({super.key, required this.connection});
+/// Ontwerpregels uit #2040:
+/// - Eerst alles ophalen, dan pas kiezen wat je deelt (minimalisatie).
+/// - Nooit zoeken op e-mailadres — dat lekt persoonsgegevens naar de provider.
+/// - De lokale ervaring is nergens afhankelijk van het slagen van de import.
+class OciServePortfolioLink extends ConsumerStatefulWidget {
+  const OciServePortfolioLink({
+    super.key,
+    required this.organizationId,
+    required this.participantId,
+    required this.evidenceTypes,
+    required this.onShared,
+    this.fetchDocument,
+    this.pickFile,
+  });
 
-  final PortfolioConnection connection;
+  final String organizationId;
+  final String participantId;
+  final List<OciServeEvidenceType> evidenceTypes;
+
+  /// Wordt aangeroepen nadat de keuze is gedeeld, zodat het scherm ververst.
+  final VoidCallback onShared;
+
+  /// Vervangt de publieke-link-fetch en de bestandskiezer; bedoeld voor tests.
+  final Future<Object?> Function(Uri url)? fetchDocument;
+  final Future<({String name, Uint8List bytes})?> Function()? pickFile;
 
   @override
-  State<OciServePortfolioLink> createState() => _OciServePortfolioLinkState();
+  ConsumerState<OciServePortfolioLink> createState() =>
+      _OciServePortfolioLinkState();
 }
 
-class _OciServePortfolioLinkState extends State<OciServePortfolioLink> {
+enum _Phase { idle, fetching, choosing, sharing }
+
+class _OciServePortfolioLinkState extends ConsumerState<OciServePortfolioLink> {
+  _Phase _phase = _Phase.idle;
+  final _linkController = TextEditingController();
+  OciServePortfolioImport? _import;
+  final Set<String> _selected = {};
+  String? _typeId;
+  String? _error;
+
+  /// Eén sleutel per poging, zodat een herhaling na een netwerkfout nooit een
+  /// tweede sessie of tweede selectie maakt. De sleutels resetten bij een
+  /// nieuwe importronde.
+  String _importKey = const Uuid().v4();
+  String _shareKey = const Uuid().v4();
+
+  @override
+  void dispose() {
+    _linkController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
-    return switch (widget.connection.state) {
-      PortfolioConnectionState.unavailable => _unavailable(l10n, theme),
-      PortfolioConnectionState.disconnected => _disconnected(l10n, theme),
-      PortfolioConnectionState.connecting => _connecting(l10n, theme),
-      PortfolioConnectionState.connected => _connected(l10n, theme),
-      PortfolioConnectionState.revoked => _revoked(l10n, theme),
+    return switch (_phase) {
+      _Phase.idle => _idle(l10n, theme),
+      _Phase.fetching => _fetching(l10n, theme),
+      _Phase.choosing || _Phase.sharing => _choosing(l10n, theme),
     };
   }
 
-  Widget _unavailable(AppLocalizations l10n, ThemeData theme) {
-    final palette = AppPalette.of(theme);
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-      child: Column(
-        children: [
-          Icon(
-            Icons.link_off_outlined,
-            size: 48,
-            color: palette.accentInk.withValues(alpha: 0.4),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            l10n.d('Portefeuille koppelen'),
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            l10n.d(
-              'U kunt bewijs uit een externe portefeuille (zoals EduBadges) '
-              'koppelen aan uw account. Deze functie is nog niet beschikbaar '
-              'voor uw organisatie.',
-            ),
-            textAlign: TextAlign.center,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: palette.accentInk.withValues(alpha: 0.6),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _disconnected(AppLocalizations l10n, ThemeData theme) {
+  Widget _idle(AppLocalizations l10n, ThemeData theme) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.d('Portefeuille koppelen'),
-          style: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
           l10n.d(
-            'Koppel een externe portefeuille om uw bestaande badges en '
-            'certificaten te gebruiken als bewijs. U kiest zelf wat u deelt.',
+            'Haal bestaande badges en certificaten binnen uit een externe '
+            'portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.',
           ),
           style: theme.textTheme.bodySmall?.copyWith(
             color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
           ),
         ),
-        const SizedBox(height: 16),
-        FilledButton.icon(
-          onPressed: () => _showConnectStep(l10n, theme),
-          icon: const Icon(Icons.link_outlined),
-          label: Text(l10n.d('Portefeuille verbinden')),
-        ),
-      ],
-    );
-  }
-
-  Widget _connecting(AppLocalizations l10n, ThemeData theme) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+        const SizedBox(height: 12),
         Text(
-          l10n.d('Portefeuille koppelen'),
-          style: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          l10n.d('Publieke verificatielink'),
+          style: theme.textTheme.labelMedium,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 6),
         Row(
           children: [
-            const SizedBox(
-              width: 16,
-              height: 16,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            ),
-            const SizedBox(width: 10),
-            Text(l10n.d('Verbinding maken…')),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Text(
-          l10n.d(
-            'Sluit het venster van de portefeuilleprovider af om verder te gaan.',
-          ),
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _connected(AppLocalizations l10n, ThemeData theme) {
-    final palette = AppPalette.of(theme);
-    final selected = widget.connection.selectedCredentials;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Icon(Icons.link_outlined, color: palette.accentInk),
-            const SizedBox(width: 8),
-            Text(
-              l10n
-                  .d('Verbonden met {provider}')
-                  .replaceAll(
-                    '{provider}',
-                    widget.connection.providerName.isEmpty
-                        ? l10n.d('portefeuille')
-                        : widget.connection.providerName,
-                  ),
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
+            Expanded(
+              child: TextField(
+                controller: _linkController,
+                decoration: InputDecoration(
+                  isDense: true,
+                  hintText: l10n.d('https://…'),
+                  border: const OutlineInputBorder(),
+                  errorText: _error == 'link_invalid'
+                      ? l10n.d(
+                          'Dat is geen geldige HTTPS-link naar een credential.',
+                        )
+                      : null,
+                ),
+                keyboardType: TextInputType.url,
+                onSubmitted: (_) => _fetchLink(),
               ),
             ),
-            const Spacer(),
-            TextButton.icon(
-              onPressed: () => _showRevokeConfirm(l10n, theme),
-              icon: const Icon(Icons.link_off_outlined, size: 18),
-              label: Text(l10n.d('Verbinding verbreken')),
+            const SizedBox(width: 8),
+            FilledButton.tonal(
+              onPressed: _fetchLink,
+              child: Text(l10n.d('Ophalen')),
             ),
           ],
         ),
         const SizedBox(height: 12),
-        if (widget.connection.credentials.isEmpty)
+        OutlinedButton.icon(
+          onPressed: _pickCredentialFile,
+          icon: const Icon(Icons.file_open_outlined),
+          label: Text(l10n.d('Credential-bestand kiezen')),
+        ),
+        if (_error != null && _error != 'link_invalid') ...[
+          const SizedBox(height: 12),
           Text(
-            l10n.d('Geen credentials gevonden in deze portefeuille.'),
+            _errorText(l10n, _error!),
             style: theme.textTheme.bodySmall?.copyWith(
-              color: palette.accentInk.withValues(alpha: 0.6),
+              color: theme.colorScheme.error,
             ),
-          )
-        else ...[
-          Text(
-            l10n.d('Kies welke credentials u deelt als bewijs:'),
-            style: theme.textTheme.bodyMedium,
           ),
-          const SizedBox(height: 8),
-          for (final cred in widget.connection.credentials) ...[
-            _credentialCard(l10n, theme, cred),
-            const SizedBox(height: 8),
-          ],
-          if (selected.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(
-              l10n
-                  .d('{aantal} credential(s) geselecteerd om te delen')
-                  .replaceAll('{aantal}', selected.length.toString()),
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: palette.accentInk,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
         ],
       ],
     );
   }
 
-  Widget _credentialCard(
-    AppLocalizations l10n,
-    ThemeData theme,
-    PortfolioCredential cred,
-  ) {
-    final palette = AppPalette.of(theme);
-    final locale = MaterialLocalizations.of(context);
-    return Card(
-      margin: EdgeInsets.zero,
-      child: CheckboxListTile(
-        value: cred.selected,
-        onChanged: (value) => setState(() {}),
-        title: Text(cred.title, style: theme.textTheme.bodyMedium),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              cred.issuer,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: palette.accentInk.withValues(alpha: 0.6),
-              ),
-            ),
-            if (cred.expiresAt != null)
-              Text(
-                l10n
-                    .d('Geldig tot {datum}')
-                    .replaceAll(
-                      '{datum}',
-                      locale.formatFullDate(cred.expiresAt!),
-                    ),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: cred.isActive
-                      ? palette.accentInk.withValues(alpha: 0.6)
-                      : theme.colorScheme.error,
-                ),
-              ),
-          ],
+  Widget _fetching(AppLocalizations l10n, ThemeData theme) {
+    return Row(
+      children: [
+        const SizedBox(
+          width: 16,
+          height: 16,
+          child: CircularProgressIndicator(strokeWidth: 2),
         ),
-        secondary: Icon(
-          cred.isActive
-              ? Icons.verified_outlined
-              : Icons.warning_amber_outlined,
-          color: cred.isActive
-              ? theme.colorScheme.primary
-              : theme.colorScheme.error,
-        ),
-      ),
+        const SizedBox(width: 10),
+        Text(l10n.d('Credentials ophalen…')),
+      ],
     );
   }
 
-  Widget _revoked(AppLocalizations l10n, ThemeData theme) {
+  Widget _choosing(AppLocalizations l10n, ThemeData theme) {
+    final palette = AppPalette.of(theme);
+    final items = _import?.items ?? const <OciServePortfolioImportItem>[];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.d('Portefeuille koppelen'),
-          style: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          l10n.d('Kies welke credentials u deelt als bewijs:'),
+          style: theme.textTheme.bodyMedium,
         ),
         const SizedBox(height: 8),
-        Text(
-          l10n.d('De verbinding is verbroken. U kunt opnieuw verbinden.'),
-          style: theme.textTheme.bodySmall,
+        if (items.isEmpty)
+          Text(
+            l10n.d('Geen credentials gevonden in deze bron.'),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: palette.accentInk.withValues(alpha: 0.6),
+            ),
+          )
+        else
+          for (final item in items)
+            CheckboxListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              value: _selected.contains(item.id),
+              onChanged: _phase == _Phase.sharing
+                  ? null
+                  : (value) => setState(() {
+                      if (value == true) {
+                        _selected.add(item.id);
+                      } else {
+                        _selected.remove(item.id);
+                      }
+                    }),
+              title: Text(item.title, style: theme.textTheme.bodyMedium),
+              subtitle: item.issuerId.isEmpty
+                  ? null
+                  : Text(
+                      item.issuerId,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: palette.accentInk.withValues(alpha: 0.6),
+                      ),
+                    ),
+            ),
+        const SizedBox(height: 12),
+        DropdownButtonFormField<String>(
+          key: const ValueKey('portfolio-type'),
+          initialValue: _typeId,
+          isExpanded: true,
+          decoration: InputDecoration(
+            labelText: l10n.d('Soort bewijs'),
+            border: const OutlineInputBorder(),
+          ),
+          items: [
+            for (final type in widget.evidenceTypes)
+              DropdownMenuItem(value: type.id, child: Text(type.title)),
+          ],
+          onChanged: _phase == _Phase.sharing
+              ? null
+              : (value) => setState(() => _typeId = value),
         ),
         const SizedBox(height: 16),
-        FilledButton.icon(
-          onPressed: () => _showConnectStep(l10n, theme),
-          icon: const Icon(Icons.link_outlined),
-          label: Text(l10n.d('Opnieuw verbinden')),
+        Row(
+          children: [
+            FilledButton.icon(
+              onPressed:
+                  _phase == _Phase.sharing ||
+                      _selected.isEmpty ||
+                      _typeId == null
+                  ? null
+                  : _share,
+              icon: _phase == _Phase.sharing
+                  ? const SizedBox.square(
+                      dimension: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.ios_share_outlined),
+              label: Text(l10n.d('Delen als bewijs')),
+            ),
+            const SizedBox(width: 8),
+            TextButton(
+              onPressed: _phase == _Phase.sharing ? null : _reset,
+              child: Text(l10n.t('cancel')),
+            ),
+          ],
         ),
+        if (_error != null) ...[
+          const SizedBox(height: 12),
+          Text(
+            _errorText(l10n, _error!),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.error,
+            ),
+          ),
+        ],
       ],
     );
   }
 
-  // — Two-step consent flow —
+  String _errorText(AppLocalizations l10n, String error) => switch (error) {
+    'no_credentials' => l10n.d('De bron bevat geen leesbare credentials.'),
+    'share_failed' => l10n.d(
+      'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.',
+    ),
+    _ => l10n.d('Ophalen is mislukt. Controleer de link en probeer opnieuw.'),
+  };
 
-  void _showConnectStep(AppLocalizations l10n, ThemeData theme) {
-    // Step 1: explain what connecting means, then proceed to step 2.
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.d('Portefeuille verbinden')),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.d(
-                'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. '
-                'OciDeck ontvangt geen wachtwoord en zoekt niet op e-mailadres.',
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              l10n.d(
-                'Na het inloggen kiest u in de volgende stap welke credentials u deelt. '
-                'U kunt de verbinding altijd weer verbreken.',
-              ),
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.t('cancel')),
-          ),
-          FilledButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _showChooseStep(l10n, theme);
-            },
-            child: Text(l10n.d('Doorgaan')),
-          ),
-        ],
-      ),
-    );
+  Future<void> _fetchLink() async {
+    final url = Uri.tryParse(_linkController.text.trim());
+    if (url == null ||
+        url.scheme.toLowerCase() != 'https' ||
+        url.host.isEmpty) {
+      setState(() => _error = 'link_invalid');
+      return;
+    }
+    await _startImport(() async {
+      final fetch = widget.fetchDocument;
+      if (fetch != null) {
+        return portfolioItemsFromJson(await fetch(url));
+      }
+      return ref.read(ociServeProvider.notifier).fetchPortfolioCredentials(url);
+    });
   }
 
-  void _showChooseStep(AppLocalizations l10n, ThemeData theme) {
-    // Step 2: choose what to share. This is the actual consent.
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.d('Kies wat u deelt')),
-        content: SizedBox(
-          width: 400,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                l10n.d(
-                  'Selecteer de credentials die u als bewijs wilt delen. '
-                  'Niet-geselecteerde credentials blijven in uw portefeuille '
-                  'maar worden niet gedeeld met deze organisatie.',
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                l10n.d(
-                  'Deze functie is nog niet beschikbaar. '
-                  'U kunt dit venster sluiten.',
-                ),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.error,
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.t('close')),
-          ),
-        ],
-      ),
-    );
+  Future<void> _pickCredentialFile() async {
+    await _startImport(() async {
+      final custom = widget.pickFile;
+      final file = custom != null
+          ? await custom()
+          : await () async {
+              final picked = await FilePicker.pickFiles(
+                type: FileType.custom,
+                allowedExtensions: const ['json'],
+                dialogTitle: context.l10n.d('Credential-bestand kiezen'),
+              );
+              if (picked.isEmpty) return null;
+              return (
+                name: picked.first.name,
+                bytes: await picked.first.readAsBytes(),
+              );
+            }();
+      if (file == null) return null;
+      try {
+        return portfolioItemsFromJson(jsonDecode(utf8.decode(file.bytes)));
+      } on Object {
+        setState(() => _error = 'no_credentials');
+        return null;
+      }
+    });
   }
 
-  void _showRevokeConfirm(AppLocalizations l10n, ThemeData theme) {
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.d('Verbinding verbreken?')),
-        content: Text(
-          l10n.d(
-            'U deelt dan geen credentials meer vanuit deze portefeuille. '
-            'Eerder aangeleverd bewijs blijft staan.',
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.t('cancel')),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(context),
-            style: FilledButton.styleFrom(
-              backgroundColor: theme.colorScheme.error,
-            ),
-            child: Text(l10n.d('Verbreken')),
-          ),
-        ],
-      ),
-    );
+  /// De import-sessie is het tussenstation: de credentials landen in het
+  /// eigen beeld van de cursist, pas bij `select` worden ze gedeeld.
+  Future<void> _startImport(
+    Future<List<PortfolioImportItemInput>?> Function() load,
+  ) async {
+    setState(() {
+      _phase = _Phase.fetching;
+      _error = null;
+      _import = null;
+      _selected.clear();
+      _typeId = null;
+      _importKey = const Uuid().v4();
+      _shareKey = const Uuid().v4();
+    });
+    try {
+      final items = await load();
+      if (!mounted) return;
+      if (items == null) {
+        setState(() => _phase = _Phase.idle);
+        return;
+      }
+      if (items.isEmpty) {
+        setState(() {
+          _phase = _Phase.idle;
+          _error = 'no_credentials';
+        });
+        return;
+      }
+      final notifier = ref.read(ociServeProvider.notifier);
+      final importId = await notifier.createPortfolioImport(
+        organizationId: widget.organizationId,
+        participantId: widget.participantId,
+        items: items,
+        idempotencyKey: _importKey,
+      );
+      final session = await notifier.portfolioImport(
+        organizationId: widget.organizationId,
+        participantId: widget.participantId,
+        importId: importId,
+      );
+      if (!mounted) return;
+      setState(() {
+        _import = session;
+        _phase = _Phase.choosing;
+      });
+    } catch (error, stack) {
+      logError('OciServe: portefeuille ophalen', error.runtimeType, stack);
+      if (mounted) {
+        setState(() {
+          _phase = _Phase.idle;
+          _error = 'fetch_failed';
+        });
+      }
+    }
+  }
+
+  Future<void> _share() async {
+    final session = _import;
+    final typeId = _typeId;
+    if (session == null || typeId == null || _selected.isEmpty) return;
+    setState(() {
+      _phase = _Phase.sharing;
+      _error = null;
+    });
+    try {
+      await ref
+          .read(ociServeProvider.notifier)
+          .sharePortfolioItems(
+            organizationId: widget.organizationId,
+            participantId: widget.participantId,
+            importId: session.importId,
+            selectedItemIds: _selected.toList(),
+            evidenceTypeId: typeId,
+            idempotencyKey: _shareKey,
+          );
+      if (!mounted) return;
+      setState(() {
+        _phase = _Phase.idle;
+        _import = null;
+        _selected.clear();
+        _typeId = null;
+      });
+      widget.onShared();
+    } on OciServeException {
+      if (mounted) {
+        setState(() {
+          _phase = _Phase.choosing;
+          _error = 'share_failed';
+        });
+      }
+    } catch (error, stack) {
+      logError('OciServe: portefeuille delen', error.runtimeType, stack);
+      if (mounted) {
+        setState(() {
+          _phase = _Phase.choosing;
+          _error = 'share_failed';
+        });
+      }
+    }
+  }
+
+  void _reset() {
+    setState(() {
+      _phase = _Phase.idle;
+      _import = null;
+      _selected.clear();
+      _typeId = null;
+      _error = null;
+      _linkController.clear();
+    });
   }
 }

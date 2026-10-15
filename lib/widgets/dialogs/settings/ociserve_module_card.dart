@@ -5,6 +5,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../models/ociserve_settings.dart';
 import '../../../services/secret_store.dart';
 import '../../../state/ociserve_provider.dart';
+import '../ociserve_invitation_dialog.dart';
 import '../../../theme/app_theme.dart';
 
 /// Configuration and sign-in body for the optional eLearning integration.
@@ -145,7 +146,24 @@ class _OciServeIntegrationBodyState
           ),
         ],
         const SizedBox(height: 12),
-        if (state.authenticated) ...[
+        _actionRow(l10n, state, settings, busy),
+      ],
+    );
+  }
+
+  /// Inloggen of uitloggen, plus de uitnodigingsknop. Ingelogd toont wie er
+  /// is aangemeld; uitgelogd de aanmeldknop naast de uitnodigingsreis.
+  Widget _actionRow(
+    AppLocalizations l10n,
+    OciServeState state,
+    OciServeSettings settings,
+    bool busy,
+  ) {
+    final colors = Theme.of(context).colorScheme;
+    if (state.authenticated) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Row(
             children: [
               Icon(
@@ -166,6 +184,12 @@ class _OciServeIntegrationBodyState
               TextButton(
                 onPressed: busy
                     ? null
+                    : () => OciServeInvitationDialog.show(context),
+                child: Text(l10n.d('Uitnodiging accepteren')),
+              ),
+              TextButton(
+                onPressed: busy
+                    ? null
                     : () => ref.read(ociServeProvider.notifier).logout(),
                 child: Text(l10n.d('Uitloggen')),
               ),
@@ -180,21 +204,27 @@ class _OciServeIntegrationBodyState
                   .replaceAll('{aantal}', '${state.pendingReports}'),
               style: TextStyle(fontSize: 11.5, color: colors.onSurfaceVariant),
             ),
-        ] else
-          Row(
-            children: [
-              FilledButton.icon(
-                onPressed: busy ? null : () => _login(settings),
-                icon: busy
-                    ? const SizedBox.square(
-                        dimension: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.login, size: 18),
-                label: Text(l10n.d('Inloggen')),
-              ),
-            ],
-          ),
+        ],
+      );
+    }
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        FilledButton.icon(
+          onPressed: busy ? null : () => _login(settings),
+          icon: busy
+              ? const SizedBox.square(
+                  dimension: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(Icons.login, size: 18),
+          label: Text(l10n.d('Inloggen')),
+        ),
+        TextButton(
+          onPressed: busy ? null : () => OciServeInvitationDialog.show(context),
+          child: Text(l10n.d('Uitnodiging gebruiken')),
+        ),
       ],
     );
   }

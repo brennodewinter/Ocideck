@@ -1621,6 +1621,153 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Certificaatnummer: {nummer}': 'Номер сертифіката: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Оцінювач більше не бачитиме цей елемент. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Це запрошення належить {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Це ваше посилання на календар. Воно показується тут лише один раз — вставте його ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Отримайте наявні бейджі та сертифікати із зовнішнього ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Відкликано вашою організацією: {reden}',
+  'Uitgegeven op {datum}': 'Видано {datum}',
+  'Uw agenda is gekoppeld tot {datum}.': 'Ваш календар підключено до {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Термін дії вашого посилання на календар завершується {datum}. Оновіть посилання, доки воно не припинило роботу.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Ваша організація вже має тему “{naam}”. Бажаєте оновити цю тему своєю версією?',
+  '“{naam}” delen met de organisatie': 'Поділитися “{naam}” з організацією',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” стає видимим для вашої організації.',
+  'Aanmelden': 'Увійти',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Не вдалося ввійти. Повторіть спробу нижче.',
+  'Agenda koppelen': 'Підключити календар',
+  'Agenda-koppeling intrekken?': 'Відкликати підключення календаря?',
+  'Agenda-link vernieuwen?': 'Оновити посилання на календар?',
+  'Alle eisen zijn vervuld.': 'Усі вимоги виконано.',
+  'Bekijken': 'Переглянути',
+  'Bewaren': 'Зберегти',
+  'Bewijsstuk intrekken?': 'Відкликати доказ?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Не вдалося оновити. Повторіть спробу.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Сертифікати з\'являться тут, щойно ваша організація їх видасть.',
+  'Credential-bestand kiezen': 'Вибрати файл цифрових посвідчень',
+  'Credentials ophalen…': 'Отримання цифрових посвідчень…',
+  'Cursus': 'Курс',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Це недійсне HTTPS-посилання на цифрове посвідчення.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Це не вдалося. Повторіть спробу.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Не вдалося виконати дію. Повторіть спробу.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Зображення завелике. Виберіть менший файл.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Оцінювач більше не бачитиме цей елемент. Ви зможете подати нові докази пізніше.',
+  'De bron bevat geen leesbare credentials.':
+      'Джерело не містить читабельних цифрових посвідчень.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Комбінація номера запрошення та коду неправильна, або термін дії запрошення минув, або його вже використано.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Не вдалося встановити зв\'язок. Повторіть спробу.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Організація та інші учасники більше не бачитимуть фото у вашому обліковому записі.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Організація ще не має власних тем.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Старе посилання тоді перестане працювати. Знову вставте нове посилання у свій застосунок календаря.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Фото профілю не було збережено. Повторіть спробу.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Не вдалося отримати теми організації.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Запрошення прийнято. Організація тепер пов\'язана з вашим обліковим записом.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Паролі не збігаються.',
+  'Delen': 'Поділитися',
+  'Delen als bewijs': 'Поділитися як доказом',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Не вдалося поділитися. Повторіть спробу.',
+  'Dit is de volledige definitie die meegaat:':
+      'Це повне визначення, яке додається:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Це ваше посилання на календар. Воно показується тут лише один раз — вставте його у застосунок календаря. Будь-хто, хто має посилання, може бачити ваші зустрічі; не діліться ним.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Цей стильовий профіль завеликий, щоб поділитися.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Ця тема вбудована або використовується курсом і не може бути видалена.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Не вдалося перейняти цю тему — формат неправильний.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Тема з такою назвою вже існує в організації.',
+  'Geen credentials gevonden in deze bron.':
+      'У цьому джерелі не знайдено цифрових посвідчень.',
+  'Gereed': 'Готово',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Отримайте наявні бейджі та сертифікати із зовнішнього гаманця й поділіться ними як доказами. Ви самі обираєте, чим поділитися.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Сертифікат не вдалося зберегти. Повторіть спробу.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Сертифікат не вдалося отримати. Повторіть спробу.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Не вдалося поділитися. Перевірте тип доказу та повторіть спробу.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Відкликання не вдалося. Повторіть спробу.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Відкликати не вдалося. Повторіть спробу.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Хтось інший щойно змінив цю тему. Перезаписати чи перейняти версію організації?',
+  'Ingebouwd': 'Вбудовано',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Відкликано вашою організацією. Ця заява більше не дійсна.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Виберіть зображення PNG, JPEG або WebP розміром не більше 5 МБ.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Виберіть пароль щонайменше з 12 символів.',
+  'Koppelen': 'Підключити',
+  'Link gekopieerd.': 'Посилання скопійовано.',
+  'Naam is al in gebruik': 'Назва вже використовується',
+  'Nieuwe link': 'Нове посилання',
+  'Nieuwe profielfoto kiezen': 'Вибрати нове фото профілю',
+  'Nog geen certificaten.': 'Сертифікатів поки немає.',
+  'Nog nodig voor deze badge': 'Ще потрібно для цього бейджа',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Не вдалося отримати. Перевірте посилання та повторіть спробу.',
+  'Profielfoto kiezen': 'Вибрати фото профілю',
+  'Profielfoto verwijderen': 'Видалити фото профілю',
+  'Profielfoto wijzigen': 'Змінити фото профілю',
+  'Publieke verificatielink': 'Публічне посилання для перевірки',
+  'Registreren en aanmelden': 'Зареєструватися й увійти',
+  'Serverversie overnemen': 'Перейняти версію сервера',
+  'Stijlprofiel delen met de organisatie?':
+      'Поділитися стильовим профілем з організацією?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Забагато спроб. Зачекайте трохи й повторіть спробу.',
+  'Thema’s van de organisatie': 'Теми організації',
+  'Tussendoor gewijzigd': 'Змінено у проміжку',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Ви зареєстровані й увійшли. Ласкаво просимо!',
+  'Uitgegeven': 'Видано',
+  'Uitnodiging accepteren': 'Прийняти запрошення',
+  'Uitnodiging gebruiken': 'Використати запрошення',
+  'Uitnodigingscode': 'Код запрошення',
+  'Uitnodigingsnummer': 'Номер запрошення',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Ваш обліковий запис створено. Увійдіть тепер за запрошеною адресою та новим паролем.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Вашому обліковому запису не дозволено керувати темами в цій організації.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Ваш застосунок календаря більше не матиме доступу до зустрічей. Самі зустрічі залишаться.',
+  'Uw naam': 'Ваше ім\'я',
+  'Verwijderen bij de organisatie': 'Видалити в організації',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Не вдалося видалити. Повторіть спробу.',
+  'Vul uw naam in.': 'Введіть своє ім\'я.',
+  'Wachtwoord herhalen': 'Повторіть пароль',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Розмістіть свої зустрічі у власному календарі — оновлюється при змінах і скасуваннях.',
   'Omrekening naar euro': 'Перерахунок в євро',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Для відображення в EUR OciDeck використовує один курс на сеанс. Введіть курс самостійно або отримайте референтний курс ЄЦБ.',
@@ -3074,42 +3221,26 @@ const _dutchSourceAddUk = <String, String>{
   'Uw antwoord': 'Ваша відповідь',
   'Antwoord indienen': 'Надішліть відповідь',
   'Geen verbinding': 'Немає з’єднання',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Після цього ви більше не надаватимете цифрові посвідчення з цього гаманця. ',
   'U hebt nog geen badges.': 'У вас ще немає бейджів.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Ви можете використати підтвердження із зовнішнього гаманця (наприклад EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Ви подаєте підтвердження для: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Ви подаєте цей підтвердний документ на оцінювання. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Вас буде переспрямовано до постачальника гаманця для входу. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Ваш файл буде позначено як «подано, ще не перевірено» ',
-  'Verbinding maken…': 'Підключення…',
-  'Verbinding verbreken': 'Від’єднати',
-  'Verbinding verbreken?': 'Від’єднати?',
-  'Verbonden met {provider}': 'Підключено до {provider}',
-  'Verbreken': 'Від’єднати',
   'Verlopen': 'Термін дії минув',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Якщо ви подасте запит на видалення, ваші підтвердні документи та пов’язані з ними оцінки зникнуть. Правила зберігання в реєстрі видалень показують, чи залишаться будь-які дані через чинний обов’язок щодо зберігання.',
   'Wordt verzonden zodra je online bent.':
       'Буде надіслано, щойно ви знову будете онлайн.',
   'portefeuille': 'гаманець',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} цифрових посвідчень вибрано для надання',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'На розгляді з {datum}. Зазвичай до двох робочих днів.',
   'Kies een bestand om aan te leveren.': 'Виберіть файл для подання.',
-  'Kies wat u deelt': 'Виберіть, чим поділитися',
   'Kies welke credentials u deelt als bewijs:':
       'Виберіть цифрові посвідчення, якими ви поділитеся як підтвердженням:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Не вдалося завантажити ваше підтвердження. Спробуйте ще раз.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Підключіть зовнішній гаманець, щоб використовувати наявні бейджі та ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Залиште порожнім, якщо підтвердження діє безстроково. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3118,17 +3249,8 @@ const _dutchSourceAddUk = <String, String>{
   'Mijn badges': 'Мої бейджі',
   'Mijn bewijs': 'Моє підтвердження',
   'Mijn bewijsstukken': 'Мої підтвердні документи',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Після входу на наступному кроці ви виберете, якими цифровими посвідченнями поділитися. ',
   'Nog geen bewijsstukken aangeleverd.': 'Підтвердних документів ще не подано.',
   'Opgegeven': 'Подано',
-  'Opnieuw verbinden': 'Підключити повторно',
-  'Portefeuille koppelen': 'Прив’язати гаманець',
-  'Portefeuille verbinden': 'Підключити гаманець',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Виберіть цифрові посвідчення, якими хочете поділитися як підтвердженням. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Закрийте вікно постачальника гаманця, щоб продовжити.',
   'Toegekend op {datum}': 'Присвоєно {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Дозволені формати: PNG, JPEG, WebP і PDF. ',
@@ -3151,14 +3273,9 @@ const _dutchSourceAddUk = <String, String>{
       'Підтвердні документи — це файли, які ви подаєте для бейджа. В огляді показано ім’я файлу, контрольну суму, статус і особу, яка його оцінила. Самих файлів у цьому огляді немає; оцінювач може їх переглянути.',
   'Bezig met versturen…': 'Надсилання…',
   'Datum kiezen': 'Вибрати дату',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'З’єднання розірвано. Ви можете підключитися знову.',
-  'Deze functie is nog niet beschikbaar. ': 'Ця функція ще недоступна. ',
   'Externe portefeuille': 'Зовнішній гаманець',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Прийнято. Підтвердний документ схвалено.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'У цьому гаманці не знайдено цифрових посвідчень.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Для цієї організації не знайдено профілю учасника.',
   'Geldig tot {datum}': 'Дійсне до {datum}',

@@ -5126,6 +5126,71 @@ vernieuwtoken, maar bewaart wachtende voortgang. Van server wisselen wordt
 geweigerd zolang die voortgang nog wacht; alleen het volledig terugzetten van
 lokale gegevens verwijdert de wachtrij bewust.
 
+### Deelnemen via een uitnodiging
+
+Een organisatie kan je een uitnodigingsnummer met een eenmalige code geven in
+plaats van te vragen eerst een account aan te maken. Kies onder **Integraties →
+eLearning** voor **Uitnodiging gebruiken** en vul beide in. OciDeck toont voor
+wie de uitnodiging is voordat er iets wordt aangemaakt. Heb je nog geen
+account, dan registreer je met het uitgenodigde e-mailadres, je naam en een
+zelfgekozen wachtwoord; daarna meldt OciDeck je aan. Ben je al aangemeld, dan
+koppelt accepteren de organisatie aan je bestaande account — de browser kan
+nog wel vragen te bevestigen dat jij het bent. Een verkeerde of verlopen
+combinatie levert één algemene melding, zodat de route niet kan verraden of
+een adres bestaat.
+
+### Inschrijvingen en je agenda
+
+**Mijn inschrijvingen** toont de bijeenkomsten waarvoor je bent ingeschreven —
+binnenkort, aangeboden en geweest — en laat je een aangeboden plaats bevestigen
+of afzeggen. De kaart **Agenda koppelen** maakt een persoonlijke agenda-link:
+plak hem eenmalig in je eigen agenda-app en je bijeenkomsten verschijnen daar,
+bijgewerkt bij wijzigingen en annuleringen. De link wordt precies één keer
+getoond; wie hem heeft, kan je afspraken lezen — deel hem dus niet.
+**Nieuwe link** roteert de link (de oude werkt direct niet meer) en
+**Intrekken** beëindigt het abonnement helemaal. OciDeck bewaart op je
+apparaat alleen de verloopdatum — de link zelf wordt nergens opgeslagen — en
+helpt je op tijd te vernieuwen voordat hij afloopt.
+
+### Badges, bewijs en certificaten
+
+**Mijn bewijs** toont de badges die je organisatie heeft uitgegeven, elk met de
+geldigheidsdatum. Onder een badge staat bij **Nog nodig voor deze badge** wat
+er nog ontbreekt — bijvoorbeeld een bewijsstuk, een cursus of een gehaald
+examen — en met **Aanleveren** naast een bewijseis open je het aanleverdialoog
+met die soort bewijs al gekozen.
+
+Onder de badges staan je uploads en de bewijsstukken die je ter beoordeling
+hebt ingediend: een upload in virusscan-quarantaine is nog geen bewijs, en een
+stuk toont zijn beoordelingsstatus van *ingediend* tot *geaccepteerd* of
+*afgewezen*. Een stuk dat nog niet beoordeeld is, kun je intrekken. Bij
+**Certificaten** staan de certificaten die de organisatie uitgaf;
+**Bekijken** opent de PDF in de alleen-lezen viewer en **Bewaren** zet een
+kopie op je schijf.
+
+Onder **Externe portefeuille** haal je credentials binnen die je elders al
+hebt: plak de publieke verificatielink of kies een credential-bestand, vink
+aan welke van de gevonden credentials je deelt — wat je niet aanvinkt, gaat
+nergens heen — en met **Delen als bewijs** lever je ze in als bewijs van de
+gekozen soort.
+
+### Profielfoto
+
+Je eLearning-profiel toont een foto als je er een instelt. Kies in de
+profielweergave **Profielfoto wijzigen** voor een PNG-, JPEG- of
+WebP-afbeelding tot 5 MB, of **Profielfoto verwijderen** om hem weg te halen;
+de organisatie en andere deelnemers zien dan geen foto meer bij je account.
+
+### Thema's van de organisatie
+
+Publiceert je organisatie eigen presentatiethema's, dan krijgt de themakiezer
+in de stijl-instellingen een knop **Thema's van de organisatie**. Die toont
+wat de organisatie deelt; overnemen kopieert de definitie naar je eigen
+stijlprofielen, en mag je ze beheren dan kun je een lokaal stijlprofiel ook
+terug publiceren. Bewerken twee mensen hetzelfde thema tegelijk, dan merkt
+OciDeck dat: je kiest dan bewust tussen overschrijven of de serverversie
+overnemen in plaats van dat de ander zijn wijziging stilletjes verdwijnt.
+
 ### SCORM, QTI, xAPI/cmi5, AICC en OLX importeren
 
 OciDeck kan de structuur van een eLearning-pakket lezen: SCORM en IMS Content

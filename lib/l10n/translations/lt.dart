@@ -1613,6 +1613,155 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Certificaatnummer: {nummer}': 'Sertifikato numeris: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Vertintojas tuomet to elemento nebematys. ',
+  'Deze uitnodiging hoort bij {adres}.':
+      'Šis kvietimas priklauso adresui {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Tai jūsų kalendoriaus nuoroda. Ji čia rodoma tik vieną kartą — įklijuokite ją ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Gaukite esamus ženklelius ir sertifikatus iš išorinės ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Jūsų organizacija atšaukė: {reden}',
+  'Uitgegeven op {datum}': 'Išduota {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Jūsų kalendorius susietas iki {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Jūsų kalendoriaus nuoroda baigia galioti {datum}. Atnaujinkite nuorodą, kol ji nenustojo veikti.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Jūsų organizacija jau turi temą „{naam}“. Ar norite atnaujinti šią temą savo versija?',
+  '“{naam}” delen met de organisatie': 'Bendrinti „{naam}“ su organizacija',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '„{naam}“ tampa matoma jūsų organizacijai.',
+  'Aanmelden': 'Prisijungti',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Prisijungti nepavyko. Bandykite dar kartą žemiau.',
+  'Agenda koppelen': 'Susieti kalendorių',
+  'Agenda-koppeling intrekken?': 'Atšaukti kalendoriaus susiejimą?',
+  'Agenda-link vernieuwen?': 'Atnaujinti kalendoriaus nuorodą?',
+  'Alle eisen zijn vervuld.': 'Visi reikalavimai įvykdyti.',
+  'Bekijken': 'Peržiūrėti',
+  'Bewaren': 'Išsaugoti',
+  'Bewijsstuk intrekken?': 'Atšaukti įrodymą?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Atnaujinti nepavyko. Bandykite dar kartą.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Sertifikatai čia pasirodys, kai tik jūsų organizacija juos išduos.',
+  'Credential-bestand kiezen': 'Pasirinkite kredencialų failą',
+  'Credentials ophalen…': 'Gaunami kredencialai…',
+  'Cursus': 'Kursas',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Tai nėra galiojanti HTTPS nuoroda į kredencialą.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'To nepavyko. Bandykite dar kartą.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Veiksmas nepavyko. Bandykite dar kartą.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Vaizdas per didelis. Pasirinkite mažesnį failą.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Vertintojas tuomet to elemento nebematys. Naujus įrodymus galėsite pateikti vėliau.',
+  'De bron bevat geen leesbare credentials.':
+      'Šaltinyje nėra įskaitomų kredencialų.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Kvietimo numerio ir kodo derinys neteisingas arba kvietimas pasibaigęs arba jau panaudotas.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Susieti nepavyko. Bandykite dar kartą.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organizacija ir kiti dalyviai nebematys nuotraukos prie jūsų paskyros.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organizacija dar neturi savo temų.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Senoji nuoroda nebeveiks. Naują nuorodą vėl įklijuokite į savo kalendoriaus programėlę.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profilio nuotrauka neišsaugota. Bandykite dar kartą.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Organizacijos temų nepavyko gauti.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Kvietimas priimtas. Organizacija dabar susieta su jūsų paskyra.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Slaptažodžiai nesutampa.',
+  'Delen': 'Bendrinti',
+  'Delen als bewijs': 'Bendrinti kaip įrodymą',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Bendrinti nepavyko. Bandykite dar kartą.',
+  'Dit is de volledige definitie die meegaat:':
+      'Tai išsamus apibrėžimas, kuris pridedamas:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Tai jūsų kalendoriaus nuoroda. Ji čia rodoma tik vieną kartą — įklijuokite ją į savo kalendoriaus programėlę. Bet kas, turintis nuorodą, gali matyti jūsų susitikimus; todėl ja nesidalykite.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Šis stiliaus profilis per didelis bendrinti.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Ši tema yra integruota arba ją naudoja kursas ir jos negalima ištrinti.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Šios temos nepavyko perimti — formatas neteisingas.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Organizacijoje jau yra tema tokiu pavadinimu.',
+  'Geen credentials gevonden in deze bron.':
+      'Šiame šaltinyje kredencialų nerasta.',
+  'Gereed': 'Atlikta',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Gaukite esamus ženklelius ir sertifikatus iš išorinės dėklės ir bendrinkite juos kaip įrodymus. Jūs patys renkatės, ką bendrinti.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Sertifikato nepavyko išsaugoti. Bandykite dar kartą.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Sertifikato nepavyko gauti. Bandykite dar kartą.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Bendrinti nepavyko. Patikrinkite įrodymo tipą ir bandykite dar kartą.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Atšaukimas nepavyko. Bandykite dar kartą.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Atšaukti nepavyko. Bandykite dar kartą.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Kažkas kitas ką tik pakeitė šią temą. Perrašyti ar perimti organizacijos versiją?',
+  'Ingebouwd': 'Integruota',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Jūsų organizacija atšaukė. Šis teiginys nebegalioja.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Pasirinkite PNG, JPEG arba WebP vaizdą, ne didesnį kaip 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Pasirinkite slaptažodį iš mažiausiai 12 simbolių.',
+  'Koppelen': 'Susieti',
+  'Link gekopieerd.': 'Nuoroda nukopijuota.',
+  'Naam is al in gebruik': 'Pavadinimas jau naudojamas',
+  'Nieuwe link': 'Nauja nuoroda',
+  'Nieuwe profielfoto kiezen': 'Pasirinkite naują profilio nuotrauką',
+  'Nog geen certificaten.': 'Sertifikatų dar nėra.',
+  'Nog nodig voor deze badge': 'Dar reikalinga šiam ženkleliui',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Gauti nepavyko. Patikrinkite nuorodą ir bandykite dar kartą.',
+  'Profielfoto kiezen': 'Pasirinkite profilio nuotrauką',
+  'Profielfoto verwijderen': 'Pašalinti profilio nuotrauką',
+  'Profielfoto wijzigen': 'Pakeisti profilio nuotrauką',
+  'Publieke verificatielink': 'Viešoji patvirtinimo nuoroda',
+  'Registreren en aanmelden': 'Registruotis ir prisijungti',
+  'Serverversie overnemen': 'Perimti serverio versiją',
+  'Stijlprofiel delen met de organisatie?':
+      'Bendrinti stiliaus profilį su organizacija?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Per daug bandymų. Palaukite šiek tiek ir bandykite dar kartą.',
+  'Thema’s van de organisatie': 'Organizacijos temos',
+  'Tussendoor gewijzigd': 'Tuo metu pakeista',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Jūs užsiregistravote ir prisijungėte. Sveiki atvykę!',
+  'Uitgegeven': 'Išduota',
+  'Uitnodiging accepteren': 'Priimti kvietimą',
+  'Uitnodiging gebruiken': 'Panaudoti kvietimą',
+  'Uitnodigingscode': 'Kvietimo kodas',
+  'Uitnodigingsnummer': 'Kvietimo numeris',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Jūsų paskyra sukurta. Dabar prisijunkite pakviestuoju adresu ir naujuoju slaptažodžiu.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Jūsų paskyra negali tvarkyti temų šioje organizacijoje.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Jūsų kalendoriaus programėlė tuomet nebegalės pasiekti susitikimų. Patys susitikimai lieka.',
+  'Uw naam': 'Jūsų vardas',
+  'Verwijderen bij de organisatie': 'Ištrinti organizacijoje',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Ištrinti nepavyko. Bandykite dar kartą.',
+  'Vul uw naam in.': 'Įveskite savo vardą.',
+  'Wachtwoord herhalen': 'Pakartokite slaptažodį',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Įdėkite savo susitikimus į savo kalendorių — atnaujinama keičiant ir atšaukiant.',
   'Omrekening naar euro': 'Konvertavimas į eurus',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'EUR rodymui „OciDeck“ naudoja vieną kursą per sesiją. Kursą įveskite patys arba gaukite ECB orientacinį kursą.',
@@ -3071,42 +3220,26 @@ const _dutchSourceAddLt = <String, String>{
   'Uw antwoord': 'Jūsų atsakymas',
   'Antwoord indienen': 'Pateikti atsakymą',
   'Geen verbinding': 'Nėra ryšio',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Tuomet nebesidalysite šios dėklės kredencialais. ',
   'U hebt nog geen badges.': 'Kol kas neturite jokių ženklelių.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Galite naudoti įrodymus iš išorinės dėklės (pvz., „EduBadges“) ',
   'U levert bewijs aan voor: {badge}': 'Pateikiate įrodymą ženkleliui: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Pateikiate šį įrodymo failą vertinti. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Būsite nukreipti į dėklės teikėjo svetainę prisijungti. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Jūsų failas bus pažymėtas kaip „pateikta, dar nepatikrinta“ ',
-  'Verbinding maken…': 'Jungiamasi…',
-  'Verbinding verbreken': 'Atsieti',
-  'Verbinding verbreken?': 'Atsieti?',
-  'Verbonden met {provider}': 'Susieta: {provider}',
-  'Verbreken': 'Atsieti',
   'Verlopen': 'Nebegalioja',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Jei pateiksite prašymą ištrinti, jūsų įrodymų failai ir su jais susiję vertinimai bus ištrinti. Ištrynimo registre pateiktos saugojimo taisyklės parodo, ar dėl tebegaliojančios prievolės saugoti duomenis liks jų dalis.',
   'Wordt verzonden zodra je online bent.':
       'Bus išsiųsta, kai tik prisijungsite prie interneto.',
   'portefeuille': 'dėklė',
-  '{aantal} credential(s) geselecteerd om te delen':
-      'Bendrinti pasirinkta kredencialų: {aantal}',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Nagrinėjama nuo {datum}. Paprastai užtrunka iki dviejų darbo dienų.',
   'Kies een bestand om aan te leveren.': 'Pasirinkite pateiktiną failą.',
-  'Kies wat u deelt': 'Pasirinkite, kuo dalysitės',
   'Kies welke credentials u deelt als bewijs:':
       'Pasirinkite kredencialus, kuriais dalysitės kaip įrodymais:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Nepavyko įkelti jūsų įrodymų. Bandykite dar kartą.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Susiekite išorinę dėklę, kad galėtumėte naudoti turimus ženklelius ir ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Palikite tuščią, jei įrodymas galioja neribotai. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3115,17 +3248,8 @@ const _dutchSourceAddLt = <String, String>{
   'Mijn badges': 'Mano ženkleliai',
   'Mijn bewijs': 'Mano įrodymai',
   'Mijn bewijsstukken': 'Mano įrodymų failai',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Prisijungę kitame žingsnyje pasirinksite, kuriais kredencialais dalysitės. ',
   'Nog geen bewijsstukken aangeleverd.': 'Įrodymų failų dar nepateikta.',
   'Opgegeven': 'Pateikta',
-  'Opnieuw verbinden': 'Susieti iš naujo',
-  'Portefeuille koppelen': 'Susieti dėklę',
-  'Portefeuille verbinden': 'Susieti dėklę',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Pasirinkite kredencialus, kuriais norite dalytis kaip įrodymais. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Norėdami tęsti, uždarykite dėklės teikėjo langą.',
   'Toegekend op {datum}': 'Suteikta {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Leidžiami formatai: PNG, JPEG, WebP ir PDF. ',
@@ -3148,14 +3272,9 @@ const _dutchSourceAddLt = <String, String>{
       'Įrodymų failai – tai dokumentai, kuriuos pateikiate ženkleliui gauti. Apžvalgoje rodomas failo pavadinimas, kontrolinė suma, būsena ir jį įvertinęs asmuo. Pačių failų šioje apžvalgoje nėra, tačiau vertintojas gali juos peržiūrėti.',
   'Bezig met versturen…': 'Siunčiama…',
   'Datum kiezen': 'Pasirinkti datą',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Ryšys nutrauktas. Galite susieti iš naujo.',
-  'Deze functie is nog niet beschikbaar. ': 'Ši funkcija dar nepasiekiama. ',
   'Externe portefeuille': 'Išorinė dėklė',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Priimta. Įrodymo failas patvirtintas.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Šioje dėklėje kredencialų nerasta.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Nerasta šios organizacijos dalyvio profilio.',
   'Geldig tot {datum}': 'Galioja iki {datum}',

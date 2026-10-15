@@ -1631,6 +1631,154 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Certificaatnummer: {nummer}': 'Αριθμός πιστοποιητικού: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Ο αξιολογητής δεν θα βλέπει πλέον αυτό το στοιχείο. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Αυτή η πρόσκληση ανήκει στο {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Αυτός είναι ο σύνδεσμος του ημερολογίου σας. Εμφανίζεται εδώ μόνο μία φορά — επικολλήστε τον ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Λάβετε υπάρχοντα σήματα και πιστοποιητικά από εξωτερικό ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Ανακλήθηκε από τον οργανισμό σας: {reden}',
+  'Uitgegeven op {datum}': 'Εκδόθηκε στις {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Το ημερολόγιό σας είναι συνδεδεμένο έως {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Ο σύνδεσμος του ημερολογίου σας λήγει στις {datum}. Ανανεώστε τον σύνδεσμο πριν σταματήσει.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Ο οργανισμός σας έχει ήδη ένα θέμα «{naam}». Θέλετε να ενημερώσετε αυτό το θέμα με τη δική σας έκδοση;',
+  '“{naam}” delen met de organisatie': 'Κοινοποίηση «{naam}» στον οργανισμό',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      'Το «{naam}» γίνεται ορατό στον οργανισμό σας.',
+  'Aanmelden': 'Σύνδεση',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Η σύνδεση απέτυχε. Δοκιμάστε ξανά παρακάτω.',
+  'Agenda koppelen': 'Σύνδεση ημερολογίου',
+  'Agenda-koppeling intrekken?': 'Ανάκληση σύνδεσης ημερολογίου;',
+  'Agenda-link vernieuwen?': 'Ανανέωση συνδέσμου ημερολογίου;',
+  'Alle eisen zijn vervuld.': 'Όλες οι απαιτήσεις πληρούνται.',
+  'Bekijken': 'Προβολή',
+  'Bewaren': 'Αποθήκευση',
+  'Bewijsstuk intrekken?': 'Ανάκληση αποδεικτικού στοιχείου;',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Η ενημέρωση απέτυχε. Δοκιμάστε ξανά.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Τα πιστοποιητικά εμφανίζονται εδώ μόλις τα εκδώσει ο οργανισμός σας.',
+  'Credential-bestand kiezen': 'Επιλογή αρχείου διαπιστευτηρίων',
+  'Credentials ophalen…': 'Λήψη διαπιστευτηρίων…',
+  'Cursus': 'Μάθημα',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Αυτός δεν είναι έγκυρος σύνδεσμος HTTPS σε διαπιστευτήριο.',
+  'Dat is niet gelukt. Probeer het opnieuw.': 'Δεν πέτυχε. Δοκιμάστε ξανά.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Η ενέργεια απέτυχε. Δοκιμάστε ξανά.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Η εικόνα είναι πολύ μεγάλη. Επιλέξτε ένα μικρότερο αρχείο.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Ο αξιολογητής δεν θα βλέπει πλέον αυτό το στοιχείο. Μπορείτε να υποβάλετε νέα αποδεικτικά στοιχεία αργότερα.',
+  'De bron bevat geen leesbare credentials.':
+      'Η πηγή δεν περιέχει αναγνώσιμα διαπιστευτήρια.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Ο συνδυασμός αριθμού πρόσκλησης και κωδικού δεν είναι σωστός ή η πρόσκληση έχει λήξει ή έχει ήδη χρησιμοποιηθεί.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Η σύνδεση απέτυχε. Δοκιμάστε ξανά.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Ο οργανισμός και οι άλλοι συμμετέχοντες δεν θα βλέπουν πλέον φωτογραφία στον λογαριασμό σας.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Ο οργανισμός δεν έχει ακόμη δικά του θέματα.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Ο παλιός σύνδεσμος δεν θα λειτουργεί πλέον. Επικολλήστε ξανά τον νέο σύνδεσμο στην εφαρμογή ημερολογίου σας.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Η φωτογραφία προφίλ δεν αποθηκεύτηκε. Δοκιμάστε ξανά.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Δεν ήταν δυνατή η ανάκτηση των θεμάτων του οργανισμού.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Η πρόσκληση έγινε αποδεκτή. Ο οργανισμός είναι πλέον συνδεδεμένος με τον λογαριασμό σας.',
+  'De wachtwoorden zijn niet hetzelfde.':
+      'Οι κωδικοί πρόσβασης δεν είναι ίδιοι.',
+  'Delen': 'Κοινοποίηση',
+  'Delen als bewijs': 'Κοινοποίηση ως απόδειξη',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Η κοινοποίηση απέτυχε. Δοκιμάστε ξανά.',
+  'Dit is de volledige definitie die meegaat:':
+      'Αυτός είναι ο πλήρης ορισμός που συνοδεύει:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Αυτός είναι ο σύνδεσμος του ημερολογίου σας. Εμφανίζεται εδώ μόνο μία φορά — επικολλήστε τον στην εφαρμογή ημερολογίου σας. Όποιος έχει τον σύνδεσμο μπορεί να δει τα ραντεβού σας· μην τον κοινοποιείτε.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Αυτό το προφίλ στυλ είναι πολύ μεγάλο για κοινοποίηση.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Αυτό το θέμα είναι ενσωματωμένο ή χρησιμοποιείται από μάθημα και δεν μπορεί να διαγραφεί.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Αυτό το θέμα δεν μπόρεσε να υιοθετηθεί — η μορφή δεν είναι σωστή.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Υπάρχει ήδη θέμα με αυτό το όνομα στον οργανισμό.',
+  'Geen credentials gevonden in deze bron.':
+      'Δεν βρέθηκαν διαπιστευτήρια σε αυτή την πηγή.',
+  'Gereed': 'Έτοιμο',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Λάβετε υπάρχοντα σήματα και πιστοποιητικά από εξωτερικό χαρτοφυλάκιο και κοινοποιήστε τα ως αποδεικτικά στοιχεία. Εσείς επιλέγετε τι θα κοινοποιήσετε.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Το πιστοποιητικό δεν μπόρεσε να αποθηκευτεί. Δοκιμάστε ξανά.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Το πιστοποιητικό δεν μπόρεσε να ανακτηθεί. Δοκιμάστε ξανά.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Η κοινοποίηση απέτυχε. Ελέγξτε τον τύπο απόδειξης και δοκιμάστε ξανά.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Η ανάκληση απέτυχε. Δοκιμάστε ξανά.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Η ανάκληση δεν πέτυχε. Δοκιμάστε ξανά.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Κάποιος άλλος μόλις τροποποίησε αυτό το θέμα. Να αντικατασταθεί ή να υιοθετηθεί η έκδοση του οργανισμού;',
+  'Ingebouwd': 'Ενσωματωμένο',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Ανακλήθηκε από τον οργανισμό σας. Αυτή η δήλωση δεν ισχύει πλέον.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Επιλέξτε εικόνα PNG, JPEG ή WebP έως 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Επιλέξτε κωδικό πρόσβασης με τουλάχιστον 12 χαρακτήρες.',
+  'Koppelen': 'Σύνδεση',
+  'Link gekopieerd.': 'Ο σύνδεσμος αντιγράφηκε.',
+  'Naam is al in gebruik': 'Το όνομα χρησιμοποιείται ήδη',
+  'Nieuwe link': 'Νέος σύνδεσμος',
+  'Nieuwe profielfoto kiezen': 'Επιλογή νέας φωτογραφίας προφίλ',
+  'Nog geen certificaten.': 'Δεν υπάρχουν ακόμη πιστοποιητικά.',
+  'Nog nodig voor deze badge': 'Απαιτείται ακόμη για αυτό το σήμα',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Η λήψη απέτυχε. Ελέγξτε τον σύνδεσμο και δοκιμάστε ξανά.',
+  'Profielfoto kiezen': 'Επιλογή φωτογραφίας προφίλ',
+  'Profielfoto verwijderen': 'Κατάργηση φωτογραφίας προφίλ',
+  'Profielfoto wijzigen': 'Αλλαγή φωτογραφίας προφίλ',
+  'Publieke verificatielink': 'Δημόσιος σύνδεσμος επαλήθευσης',
+  'Registreren en aanmelden': 'Εγγραφή και σύνδεση',
+  'Serverversie overnemen': 'Υιοθέτηση έκδοσης διακομιστή',
+  'Stijlprofiel delen met de organisatie?':
+      'Κοινοποίηση προφίλ στυλ στον οργανισμό;',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Πάρα πολλές προσπάθειες. Περιμένετε λίγο και δοκιμάστε ξανά.',
+  'Thema’s van de organisatie': 'Θέματα του οργανισμού',
+  'Tussendoor gewijzigd': 'Τροποποιήθηκε εν τω μεταξύ',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Έχετε εγγραφεί και συνδεθεί. Καλώς ορίσατε!',
+  'Uitgegeven': 'Εκδόθηκε',
+  'Uitnodiging accepteren': 'Αποδοχή πρόσκλησης',
+  'Uitnodiging gebruiken': 'Χρήση πρόσκλησης',
+  'Uitnodigingscode': 'Κωδικός πρόσκλησης',
+  'Uitnodigingsnummer': 'Αριθμός πρόσκλησης',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Ο λογαριασμός σας δημιουργήθηκε. Συνδεθείτε τώρα με την προσκεκλημένη διεύθυνση και τον νέο σας κωδικό.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Ο λογαριασμός σας δεν μπορεί να διαχειριστεί θέματα σε αυτόν τον οργανισμό.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Η εφαρμογή ημερολογίου σας δεν θα έχει πλέον πρόσβαση στις συναντήσεις. Τα ίδια τα ραντεβού παραμένουν.',
+  'Uw naam': 'Το όνομά σας',
+  'Verwijderen bij de organisatie': 'Διαγραφή στον οργανισμό',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Η διαγραφή απέτυχε. Δοκιμάστε ξανά.',
+  'Vul uw naam in.': 'Εισαγάγετε το όνομά σας.',
+  'Wachtwoord herhalen': 'Επανάληψη κωδικού πρόσβασης',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Τοποθετήστε τις συναντήσεις σας στο δικό σας ημερολόγιο — ενημερώνεται σε αλλαγές και ακυρώσεις.',
   'Omrekening naar euro': 'Μετατροπή σε ευρώ',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Για την εμφάνιση σε EUR το OciDeck χρησιμοποιεί μία ισοτιμία ανά συνεδρία. Εισαγωγή της ισοτιμίας με το χέρι ή ανάκτηση της ισοτιμίας αναφοράς της ΕΚΤ.',
@@ -3122,42 +3270,26 @@ const _dutchSourceAddEl = <String, String>{
   'Uw antwoord': 'Η απάντησή σας',
   'Antwoord indienen': 'Υποβολή απάντησης',
   'Geen verbinding': 'Χωρίς σύνδεση',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Τότε δεν κοινοποιείτε πλέον διαπιστευτήρια από αυτό το χαρτοφυλάκιο. ',
   'U hebt nog geen badges.': 'Δεν έχετε ακόμη σήματα.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Μπορείτε να κοινοποιήσετε αποδεικτικά από εξωτερικό χαρτοφυλάκιο (όπως το EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Υποβάλλετε αποδεικτικό για: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Υποβάλλετε αυτό το αποδεικτικό για αξιολόγηση. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Θα ανακατευθυνθείτε στον πάροχο χαρτοφυλακίου για σύνδεση. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Το αρχείο σας θα επισημανθεί ως «δηλωμένο, δεν έχει ακόμη ελεγχθεί» ',
-  'Verbinding maken…': 'Σύνδεση…',
-  'Verbinding verbreken': 'Αποσύνδεση',
-  'Verbinding verbreken?': 'Αποσύνδεση;',
-  'Verbonden met {provider}': 'Συνδέθηκε με {provider}',
-  'Verbreken': 'Αποσύνδεση',
   'Verlopen': 'Έληξε',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Αν ζητήσετε διαγραφή, τα αποδεικτικά σας και οι σχετικές αξιολογήσεις θα εξαφανιστούν. Οι κανόνες διατήρησης στο μητρώο διαγραφών δείχνουν αν απομένει κάτι λόγω ενεργής υποχρέωσης διατήρησης.',
   'Wordt verzonden zodra je online bent.':
       'Θα σταλεί μόλις συνδεθείτε στο διαδίκτυο.',
   'portefeuille': 'χαρτοφυλάκιο',
-  '{aantal} credential(s) geselecteerd om te delen':
-      'Επιλέχθηκαν {aantal} διαπιστευτήρια για κοινοποίηση',
   '{bytes} bytes': '{bytes} byte',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Υπό επεξεργασία από {datum}. Συνήθως εντός δύο εργάσιμων ημερών.',
   'Kies een bestand om aan te leveren.': 'Επιλέξτε αρχείο για υποβολή.',
-  'Kies wat u deelt': 'Επιλέξτε τι κοινοποιείτε',
   'Kies welke credentials u deelt als bewijs:':
       'Επιλέξτε ποια διαπιστευτήρια κοινοποιείτε ως αποδεικτικά:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Δεν ήταν δυνατή η φόρτωση του αποδεικτικού σας. Δοκιμάστε ξανά.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Συνδέστε εξωτερικό χαρτοφυλάκιο για να κοινοποιήσετε τα υπάρχοντα σήματα και ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Αφήστε κενό αν το αποδεικτικό ισχύει απεριόριστα. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3166,18 +3298,9 @@ const _dutchSourceAddEl = <String, String>{
   'Mijn badges': 'Τα σήματά μου',
   'Mijn bewijs': 'Τα αποδεικτικά μου',
   'Mijn bewijsstukken': 'Τα έγγραφα τεκμηρίωσής μου',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Μετά τη σύνδεση, στο επόμενο βήμα επιλέγετε ποια διαπιστευτήρια κοινοποιείτε. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Δεν έχουν υποβληθεί ακόμη έγγραφα τεκμηρίωσης.',
   'Opgegeven': 'Δηλώθηκε',
-  'Opnieuw verbinden': 'Επανασύνδεση',
-  'Portefeuille koppelen': 'Σύνδεση χαρτοφυλακίου',
-  'Portefeuille verbinden': 'Συνδέστε χαρτοφυλάκιο',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Επιλέξτε τα διαπιστευτήρια που θέλετε να κοινοποιήσετε ως αποδεικτικά. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Κλείστε το παράθυρο του παρόχου χαρτοφυλακίου για να συνεχίσετε.',
   'Toegekend op {datum}': 'Απονεμήθηκε στις {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Επιτρεπόμενες μορφές: PNG, JPEG, WebP και PDF. ',
@@ -3200,15 +3323,9 @@ const _dutchSourceAddEl = <String, String>{
       'Τα έγγραφα τεκμηρίωσης είναι αρχεία που υποβάλλετε για ένα σήμα. Η επισκόπηση δείχνει το όνομα αρχείου, τον κωδικό ελέγχου, την κατάσταση και ποιος το αξιολόγησε. Τα ίδια τα αρχεία δεν βρίσκονται σε αυτή την επισκόπηση· ένας αξιολογητής μπορεί όμως να τα δει.',
   'Bezig met versturen…': 'Αποστολή…',
   'Datum kiezen': 'Επιλογή ημερομηνίας',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Η σύνδεση διακόπηκε. Μπορείτε να συνδεθείτε ξανά.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Αυτή η λειτουργία δεν είναι ακόμη διαθέσιμη. ',
   'Externe portefeuille': 'Εξωτερικό χαρτοφυλάκιο',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Έγινε αποδεκτό. Το αποδεικτικό εγκρίθηκε.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Δεν βρέθηκαν διαπιστευτήρια σε αυτό το χαρτοφυλάκιο.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Δεν βρέθηκε προφίλ συμμετέχοντα για αυτόν τον οργανισμό.',
   'Geldig tot {datum}': 'Ισχύει έως {datum}',

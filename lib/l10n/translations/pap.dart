@@ -651,6 +651,153 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Certificaatnummer: {nummer}': 'Number di sertifikato: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'E evaluador lo mira e parti akí no mas. ',
+  'Deze uitnodiging hoort bij {adres}.': 'E invitashon akí ta di {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Esaki ta bo link di agenda. E ta mustra aki un biaha so — peg\'é ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Haña badges i sertifikatonan eksistente for di un ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Retirá pa bo organisashon: {reden}',
+  'Uitgegeven op {datum}': 'Emití riba {datum}',
+  'Uw agenda is gekoppeld tot {datum}.': 'Bo agenda ta konektá te {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Bo link di agenda ta skaduká riba {datum}. Renová e link promé ku e stòp.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Bo organisashon ya tin un tema “{naam}”. Bo kier aktualisá e tema ei ku bo vershon?',
+  '“{naam}” delen met de organisatie': 'Kompartí “{naam}” ku e organisashon',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” ta bira bishibel pa bo organisashon.',
+  'Aanmelden': 'Meld aan',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'No por a drenta. Purba atrobe aki bou.',
+  'Agenda koppelen': 'Konektá agenda',
+  'Agenda-koppeling intrekken?': 'Kanselá e konekshon di agenda?',
+  'Agenda-link vernieuwen?': 'Renová e link di agenda?',
+  'Alle eisen zijn vervuld.': 'Tur rekisito a keda kumpli.',
+  'Bekijken': 'Mira',
+  'Bewaren': 'Warda',
+  'Bewijsstuk intrekken?': 'Kanselá e evidensia?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'E aktualisashon a faya. Purba atrobe.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Sertifikatonan ta aparese aki mesora ku bo organisashon emité nan.',
+  'Credential-bestand kiezen': 'Skohe un file di kredensial',
+  'Credentials ophalen…': 'Obteniendo kredensialnan…',
+  'Cursus': 'Kurso',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Esey no ta un link HTTPS válido pa un kredensial.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Esey no a funshoná. Purba atrobe.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'E akshon a faya. Purba atrobe.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'E imagen ta mucho grandi. Skohe un file mas chikitu.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'E evaluador lo mira e parti akí no mas. Bo por entregá evidensia nobo despues.',
+  'De bron bevat geen leesbare credentials.':
+      'E fuente no ta kontené kredensialnan lesabel.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'E kombinashon di number di invitashon i kodigo no ta korekto, òf e invitashon a keda skaduká òf a keda usá kaba.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'E konekshon a faya. Purba atrobe.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'E organisashon i otro partisipantenan lo no mira foto mas na bo kuenta.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'E organisashon ainda no tin tema propio.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'E link bieu lo no funshoná mas. Pega e link nobo atrobe den bo app di agenda.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'E potrèt di perfil no a keda wardá. Purba atrobe.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'No por a haña e temanan di e organisashon.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'E invitashon a keda aseptá. E organisashon awor ta asosia ku bo kuenta.',
+  'De wachtwoorden zijn niet hetzelfde.': 'E kódigo di aksesonan no ta meskos.',
+  'Delen': 'Kompartí',
+  'Delen als bewijs': 'Kompartí komo evidensia',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'No por a kompartí. Purba atrobe.',
+  'Dit is de volledige definitie die meegaat:':
+      'Esaki ta e definishon kompleto ku ta bai ku ne:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Esaki ta bo link di agenda. E ta mustra aki un biaha so — peg\'é den bo app di agenda. Kada un ku tin e link por mira bo sitanan; p\'esei no kompart\'é.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'E perfil di stilo akí ta mucho grandi pa kompartí.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'E tema akí ta inkorporá òf ta wordu usá pa un kurso i no por keda eliminá.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'E tema akí no por a keda adoptá — e formato no ta korekto.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Ta eksistí kaba un tema ku e nòmber akí den e organisashon.',
+  'Geen credentials gevonden in deze bron.':
+      'No a haña kredensial den e fuente akí.',
+  'Gereed': 'Kla',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Haña badges i sertifikatonan eksistente for di un portafolio eksterno i kompartí nan komo evidensia. Bo mes ta skohe loke bo ta kompartí.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'No por a warda e sertifikato. Purba atrobe.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'No por a haña e sertifikato. Purba atrobe.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'E kompartishon a faya. Kontrolá e tipo di evidensia i purba atrobe.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'E retiro a faya. Purba atrobe.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'E retiro no a yega. Purba atrobe.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Un hende otro kaba di modifiká e tema akí. Ta sobre-skibí, òf tuma e vershon di e organisashon?',
+  'Ingebouwd': 'Inkorporá',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Retirá pa bo organisashon. E deklarashon akí no ta bal mas.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Skohe un imagen PNG, JPEG òf WebP di maksimo 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Skohe un kódigo di akseso di por lo ménos 12 karakter.',
+  'Koppelen': 'Konektá',
+  'Link gekopieerd.': 'Link kopiá.',
+  'Naam is al in gebruik': 'E nòmber ta den uso kaba',
+  'Nieuwe link': 'Link nobo',
+  'Nieuwe profielfoto kiezen': 'Skohe potrèt di perfil nobo',
+  'Nog geen certificaten.': 'Ainda no tin sertifikato.',
+  'Nog nodig voor deze badge': 'Ainda nesesario pa e badge akí',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'No por a hañ\'é. Kontrolá e link i purba atrobe.',
+  'Profielfoto kiezen': 'Skohe potrèt di perfil',
+  'Profielfoto verwijderen': 'Kita potrèt di perfil',
+  'Profielfoto wijzigen': 'Kambia potrèt di perfil',
+  'Publieke verificatielink': 'Link di verifikashon públiko',
+  'Registreren en aanmelden': 'Registrá i meld aan',
+  'Serverversie overnemen': 'Tuma e vershon di server',
+  'Stijlprofiel delen met de organisatie?':
+      'Kompartí perfil di stilo ku e organisashon?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Demasiado intento. Ward\'un rato i purba atrobe.',
+  'Thema’s van de organisatie': 'Temanan di e organisashon',
+  'Tussendoor gewijzigd': 'Kambia entre tanto',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Bo a registrá i drenta. Bon bini!',
+  'Uitgegeven': 'Emití',
+  'Uitnodiging accepteren': 'Aseptá invitashon',
+  'Uitnodiging gebruiken': 'Usa e invitashon',
+  'Uitnodigingscode': 'Kodigo di invitashon',
+  'Uitnodigingsnummer': 'Number di invitashon',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Bo kuenta a keda kreá. Meld bo awor ku e adrès invitá i bo kódigo di akseso nobo.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Bo kuenta no por manehá tema den e organisashon akí.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Bo app di agenda lo no por yega na e reunionan mas. E sitanan mes ta keda existí.',
+  'Uw naam': 'Bo nòmber',
+  'Verwijderen bij de organisatie': 'Eliminá den e organisashon',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'No por a eliminá. Purba atrobe.',
+  'Vul uw naam in.': 'Hinka bo nòmber.',
+  'Wachtwoord herhalen': 'Repití kódigo di akseso',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Pone bo reunionan den bo propio agenda — wordu aktualisá ora di kambio i kanselashon.',
   'Omrekening naar euro': 'Konversion pa euro',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Pa mustra den EUR, OciDeck ta usa un kurso pa sesion. Yena e kurso bo mes òf buska e kurso di referensia di BCE.',
@@ -2110,42 +2257,26 @@ const _dutchSourceAddPap = {
   'Uw antwoord': 'Bo kontesta',
   'Antwoord indienen': 'Entregá kontesta',
   'Geen verbinding': 'Sin konekshon',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'E ora ei bo no ta kompartí kredensialnan mas for di e portafolio aki. ',
   'U hebt nog geen badges.': 'Bo ainda no tin ningun badge.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Bo por usa prueba for di un portafolio eksterno (manera EduBadges) ',
   'U levert bewijs aan voor: {badge}': 'Bo ta entregá prueba pa: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Bo ta entregá e prueba aki pa evaluashon. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Bo ta wòrdu redirigí pa e proveedó di portafolio pa hasi login. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Bo file ta wòrdu marká komo "deklará, ainda no kontrolá" ',
-  'Verbinding maken…': 'Ta konektando…',
-  'Verbinding verbreken': 'Deskonektá',
-  'Verbinding verbreken?': 'Deskonektá?',
-  'Verbonden met {provider}': 'Konektá ku {provider}',
-  'Verbreken': 'Deskonektá',
   'Verlopen': 'Kaduká',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Si bo pidi pa eliminá bo datonan, bo pruebanan i e evaluashonnan korespondiente ta desaparesé. E reglanan di retenshon den e registro di eliminashon ta mustra si un resto ta keda pa un obligashon vigente pa retené dato.',
   'Wordt verzonden zodra je online bent.':
       'E lo wòrdu mandá asina ku bo ta online.',
   'portefeuille': 'portafolio',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} kredensial selektá pa kompartí',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Den proseso for di {datum}. Normalmente denter di dos dia di trabou.',
   'Kies een bestand om aan te leveren.': 'Skohe un file pa entregá.',
-  'Kies wat u deelt': 'Skohe loke bo ta kompartí',
   'Kies welke credentials u deelt als bewijs:':
       'Skohe kua kredensialnan bo ta kompartí komo prueba:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'No por a karga bo prueba. Purba atrobe.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Konektá un portafolio eksterno pa bo badgenan i ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Laga bashí si e prueba ta bálido sin límite. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -2154,17 +2285,8 @@ const _dutchSourceAddPap = {
   'Mijn badges': 'Mi badgenan',
   'Mijn bewijs': 'Mi prueba',
   'Mijn bewijsstukken': 'Mi pruebanan',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Despues di login, den e siguiente paso bo ta skohe kua kredensialnan bo ta kompartí. ',
   'Nog geen bewijsstukken aangeleverd.': 'Ainda no a entregá ningun prueba.',
   'Opgegeven': 'Deklará',
-  'Opnieuw verbinden': 'Konektá atrobe',
-  'Portefeuille koppelen': 'Enlasá portafolio',
-  'Portefeuille verbinden': 'Konektá portafolio',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Selektá e kredensialnan ku bo ke kompartí komo prueba. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Sera e bentana di e proveedó di portafolio pa sigui.',
   'Toegekend op {datum}': 'Otorgá riba {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Formatonan permití: PNG, JPEG, WebP i PDF. ',
@@ -2187,15 +2309,9 @@ const _dutchSourceAddPap = {
       'Pruebanan ta filenan ku bo ta entregá pa un badge. E resumen ta mustra nòmber di file, kódigo di kòntròl, status i ken a evaluá e. E filenan mes no ta den e resumen aki; un evaluadó sí por wak nan.',
   'Bezig met versturen…': 'Ta mandando…',
   'Datum kiezen': 'Skohe fecha',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'E konekshon a wòrdu deskonektá. Bo por konektá atrobe.',
-  'Deze functie is nog niet beschikbaar. ':
-      'E funshon aki ainda no ta disponibel. ',
   'Externe portefeuille': 'Portafolio eksterno',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Aseptá. E prueba a wòrdu aprobá.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'No a haña ningun kredensial den e portafolio aki.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'No a haña perfil di partisipante pa e organisashon aki.',
   'Geldig tot {datum}': 'Bálido te {datum}',

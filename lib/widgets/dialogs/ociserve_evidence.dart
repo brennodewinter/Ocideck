@@ -1,18 +1,27 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:file_selector/file_selector.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/ociserve_badge_readiness.dart';
+import '../../models/ociserve_certificate.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_evidence_item.dart';
-import '../../models/ociserve_portfolio.dart';
 import '../../services/pdf_evidence_service.dart';
 import '../../state/ociserve_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/atomic_file.dart';
 import '../../utils/error_snackbar.dart';
+import '../../utils/log.dart';
 import '../reader/pdf_evidence_viewer.dart';
 import 'ociserve_evidence_review.dart';
 import 'ociserve_evidence_submit.dart';
 import 'ociserve_portfolio_link.dart';
+
+part 'parts/ociserve_evidence_actions.dart';
 
 /// Het bewijsscherm — de vierde bestemming in de eLearning-zijbalk.
 ///
@@ -31,6 +40,8 @@ class OciServeEvidence extends StatelessWidget {
     this.evidenceItems = const [],
     this.evidenceTypes = const [],
     this.participantId = '',
+    this.readiness = const {},
+    this.certificates = const [],
   });
 
   final List<OciServeQualification> qualifications;
@@ -42,6 +53,14 @@ class OciServeEvidence extends StatelessWidget {
   final List<OciServeEvidenceItem> evidenceItems;
   final List<OciServeEvidenceType> evidenceTypes;
   final String participantId;
+
+  /// Per badge (op `skill_version_id` van de kwalificatie) het leesmodel:
+  /// welke eisen de badge stelt en welke de cursist al heeft afgevinkt.
+  final Map<String, OciServeBadgeReadiness> readiness;
+
+  /// De certificaten die de organisatie aan deze deelnemer heeft uitgegeven —
+  /// ook de ingetrokken exemplaren, die hier met die status blijven staan.
+  final List<OciServeCertificate> certificates;
   final String organizationId;
   final VoidCallback onRefresh;
 
@@ -59,6 +78,8 @@ class OciServeEvidence extends StatelessWidget {
               _badgesSection(context, l10n, theme),
               const SizedBox(height: 24),
               _uploadsSection(context, l10n, theme),
+              const SizedBox(height: 24),
+              _certificatesSection(context, l10n, theme),
               const SizedBox(height: 24),
               _portfolioSection(context, l10n, theme),
             ],
@@ -176,11 +197,96 @@ class OciServeEvidence extends StatelessWidget {
                   ),
               ],
             ),
+            _requirementsBlock(context, l10n, theme, palette, qual),
           ],
         ),
       ),
     );
   }
+
+  /// Per eis van de badge wat er al klopt en wat er nog ontbreekt. Een
+  /// openstaande bewijseis opent het aanleverpad met de soort al ingevuld.
+  Widget _requirementsBlock(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+    AppPalette palette,
+    OciServeQualification qual,
+  ) {
+    final model = readiness[qual.skillVersionId];
+    if (model == null || model.requirements.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 12),
+        Text(
+          model.ready
+              ? l10n.d('Alle eisen zijn vervuld.')
+              : l10n.d('Nog nodig voor deze badge'),
+          style: theme.textTheme.labelMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        for (final requirement in model.requirements)
+          _requirementRow(context, l10n, theme, palette, model, requirement),
+      ],
+    );
+  }
+
+  Widget _requirementRow(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+    AppPalette palette,
+    OciServeBadgeReadiness model,
+    OciServeBadgeRequirement requirement,
+  ) {
+    final met = requirement.met;
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Row(
+        children: [
+          Icon(
+            met ? Icons.check_circle : Icons.radio_button_unchecked,
+            size: 18,
+            color: met
+                ? theme.colorScheme.primary
+                : palette.accentInk.withValues(alpha: 0.5),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              requirement.title.isEmpty
+                  ? _requirementKindLabel(l10n, requirement.kind)
+                  : requirement.title,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: palette.accentInk.withValues(alpha: met ? 0.6 : 1.0),
+              ),
+            ),
+          ),
+          if (!met && requirement.kind == 'evidence')
+            TextButton(
+              onPressed: () => _openSubmit(
+                context,
+                badgeTitle: model.skillTitle,
+                presetTypeSlug: requirement.evidenceType,
+              ),
+              child: Text(l10n.d('Aanleveren')),
+            ),
+        ],
+      ),
+    );
+  }
+
+  /// Eén woord voor een eis zonder eigen titel, zodat de rij nooit leeg is.
+  String _requirementKindLabel(AppLocalizations l10n, String kind) =>
+      switch (kind) {
+        'evidence' => l10n.d('Bewijsstuk'),
+        'exam' => l10n.d('Toets'),
+        _ => l10n.d('Cursus'),
+      };
 
   Widget _statusChip(
     AppLocalizations l10n,
@@ -276,15 +382,19 @@ class OciServeEvidence extends StatelessWidget {
     );
   }
 
-  Future<void> _openSubmit(BuildContext context) async {
-    final badgeTitle = qualifications.isNotEmpty
-        ? qualifications.first.skillTitle
-        : '';
+  Future<void> _openSubmit(
+    BuildContext context, {
+    String? badgeTitle,
+    String? presetTypeSlug,
+  }) async {
     final refreshed = await OciServeEvidenceSubmit.show(
       context,
       organizationId: organizationId,
       participantId: participantId,
-      badgeTitle: badgeTitle,
+      badgeTitle:
+          badgeTitle ??
+          (qualifications.isNotEmpty ? qualifications.first.skillTitle : ''),
+      presetTypeSlug: presetTypeSlug,
     );
     if (refreshed && context.mounted) onRefresh();
   }
@@ -388,7 +498,21 @@ class OciServeEvidence extends StatelessWidget {
                 ),
               ),
             ],
-            if (upload.isClean &&
+            if (item != null &&
+                (item.status == OciServeEvidenceContentStatus.ingediend ||
+                    item.status ==
+                        OciServeEvidenceContentStatus.inBehandeling)) ...[
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerRight,
+                child: _EvidenceWithdrawButton(
+                  item: item,
+                  organizationId: organizationId,
+                  participantId: participantId,
+                  onWithdrawn: onRefresh,
+                ),
+              ),
+            ] else if (upload.isClean &&
                 upload.declaredType.startsWith('application/pdf')) ...[
               const SizedBox(height: 12),
               Align(
@@ -483,18 +607,161 @@ class OciServeEvidence extends StatelessWidget {
     };
   }
 
+  /// De certificaten die de organisatie heeft uitgegeven (#2426). De PDF
+  /// draagt een verificatiegeheim, dus geen deel- of kopieerknop — alleen
+  /// bekijken in de app en bewust bewaren naar een plek die de gebruiker kiest.
+  Widget _certificatesSection(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+  ) {
+    if (certificates.isEmpty) {
+      return _emptySection(
+        context,
+        l10n,
+        theme,
+        Icons.workspace_premium_outlined,
+        l10n.d('Nog geen certificaten.'),
+        l10n.d(
+          'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.',
+        ),
+      );
+    }
+    final locale = MaterialLocalizations.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Certificaten'),
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(height: 12),
+        for (final certificate in certificates) ...[
+          _certificateCard(context, l10n, theme, locale, certificate),
+          const SizedBox(height: 10),
+        ],
+      ],
+    );
+  }
+
+  Widget _certificateCard(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+    MaterialLocalizations locale,
+    OciServeCertificate certificate,
+  ) {
+    final palette = AppPalette.of(theme);
+    final revoked = certificate.isRevoked;
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.workspace_premium_outlined,
+                  color: revoked
+                      ? theme.colorScheme.error
+                      : theme.colorScheme.primary,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    certificate.title,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        (revoked
+                                ? theme.colorScheme.error
+                                : theme.colorScheme.primary)
+                            .withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    revoked ? l10n.d('Ingetrokken') : l10n.d('Uitgegeven'),
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: revoked
+                          ? theme.colorScheme.error
+                          : theme.colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              l10n
+                  .d('Uitgegeven op {datum}')
+                  .replaceAll(
+                    '{datum}',
+                    locale.formatFullDate(certificate.issuedAt.toLocal()),
+                  ),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: palette.accentInk.withValues(alpha: 0.7),
+              ),
+            ),
+            if (certificate.certificateNumber.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(
+                l10n
+                    .d('Certificaatnummer: {nummer}')
+                    .replaceAll('{nummer}', certificate.certificateNumber),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: palette.accentInk.withValues(alpha: 0.7),
+                ),
+              ),
+            ],
+            if (revoked) ...[
+              const SizedBox(height: 8),
+              Text(
+                certificate.revocationReason != null &&
+                        certificate.revocationReason!.isNotEmpty
+                    ? l10n
+                          .d('Ingetrokken door uw organisatie: {reden}')
+                          .replaceAll('{reden}', certificate.revocationReason!)
+                    : l10n.d(
+                        'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.',
+                      ),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.error,
+                ),
+              ),
+            ],
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerRight,
+              child: _CertificatePdfButton(
+                certificate: certificate,
+                organizationId: organizationId,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _portfolioSection(
     BuildContext context,
     AppLocalizations l10n,
     ThemeData theme,
   ) {
-    // Until OciServe#524 lands, the portfolio connection is unavailable.
-    // The UI shows the feature exists but is not yet active.
-    const connection = PortfolioConnection(
-      providerId: '',
-      providerName: '',
-      state: PortfolioConnectionState.unavailable,
-    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -509,7 +776,12 @@ class OciServeEvidence extends StatelessWidget {
           margin: EdgeInsets.zero,
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: OciServePortfolioLink(connection: connection),
+            child: OciServePortfolioLink(
+              organizationId: organizationId,
+              participantId: participantId,
+              evidenceTypes: evidenceTypes,
+              onShared: onRefresh,
+            ),
           ),
         ),
       ],
@@ -551,72 +823,4 @@ class OciServeEvidence extends StatelessWidget {
       ),
     );
   }
-}
-
-class _EvidenceOpenButton extends ConsumerStatefulWidget {
-  const _EvidenceOpenButton({
-    required this.upload,
-    required this.organizationId,
-  });
-
-  final EvidenceUpload upload;
-  final String organizationId;
-
-  @override
-  ConsumerState<_EvidenceOpenButton> createState() =>
-      _EvidenceOpenButtonState();
-}
-
-class _EvidenceOpenButtonState extends ConsumerState<_EvidenceOpenButton> {
-  bool _loading = false;
-
-  Future<void> _open() async {
-    setState(() => _loading = true);
-    try {
-      final bytes = await ref
-          .read(ociServeProvider.notifier)
-          .downloadEvidence(
-            organizationId: widget.organizationId,
-            evidenceId: widget.upload.id,
-          );
-      if (!mounted) return;
-      if (!isSupportedPdfEvidence(bytes)) {
-        showErrorSnackBar(
-          ScaffoldMessenger.of(context),
-          context.l10n,
-          bytes.length > maxPdfEvidenceBytes
-              ? context.l10n.d('Dit bestand is te groot om te openen.')
-              : context.l10n.d('Kon dit bestand niet openen.'),
-        );
-        return;
-      }
-      await PdfEvidenceViewer.open(
-        context,
-        bytes: bytes,
-        fileName: widget.upload.filename,
-      );
-    } on Object {
-      if (mounted) {
-        showErrorSnackBar(
-          ScaffoldMessenger.of(context),
-          context.l10n,
-          context.l10n.d('Kon dit bestand niet openen.'),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _loading = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) => FilledButton.tonalIcon(
-    onPressed: _loading ? null : _open,
-    icon: _loading
-        ? const SizedBox.square(
-            dimension: 16,
-            child: CircularProgressIndicator(strokeWidth: 2),
-          )
-        : const Icon(Icons.visibility_outlined),
-    label: Text(context.l10n.d('Openen')),
-  );
 }

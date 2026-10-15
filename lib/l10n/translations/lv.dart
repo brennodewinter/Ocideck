@@ -1604,6 +1604,155 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Certificaatnummer: {nummer}': 'Sertifikāta numurs: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Vērtētājs vairs neredzēs šo gabalu. ',
+  'Deze uitnodiging hoort bij {adres}.':
+      'Šis uzaicinājums pieder adresei {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Šī ir jūsu kalendāra saite. Tā šeit tiek parādīta tikai vienreiz — ielīmējiet to ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Iegūstiet esošās nozīmītes un sertifikātus no ārējā ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Jūsu organizācija ir atsaukusi: {reden}',
+  'Uitgegeven op {datum}': 'Izsniegts {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Jūsu kalendārs ir savienots līdz {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Jūsu kalendāra saite beidzas {datum}. Atjaunojiet saiti, pirms tā pārstāj darboties.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Jūsu organizācijai jau ir tēma “{naam}”. Vai vēlaties atjaunināt šo tēmu ar savu versiju?',
+  '“{naam}” delen met de organisatie': 'Kopīgot “{naam}” ar organizāciju',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '“{naam}” kļūst redzama jūsu organizācijai.',
+  'Aanmelden': 'Pierakstīties',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Pierakstīšanās neizdevās. Mēģiniet vēlreiz zemāk.',
+  'Agenda koppelen': 'Savienot kalendāru',
+  'Agenda-koppeling intrekken?': 'Atsaukt kalendāra savienojumu?',
+  'Agenda-link vernieuwen?': 'Atjaunot kalendāra saiti?',
+  'Alle eisen zijn vervuld.': 'Visas prasības ir izpildītas.',
+  'Bekijken': 'Skatīt',
+  'Bewaren': 'Saglabāt',
+  'Bewijsstuk intrekken?': 'Atsaukt pierādījumu?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Atjaunināšana neizdevās. Mēģiniet vēlreiz.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Sertifikāti parādīsies šeit, tiklīdz jūsu organizācija tos izsniegs.',
+  'Credential-bestand kiezen': 'Izvēlieties apliecinājumu failu',
+  'Credentials ophalen…': 'Apliecinājumu iegūšana…',
+  'Cursus': 'Kurss',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Tā nav derīga HTTPS saite uz apliecinājumu.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Tas neizdevās. Mēģiniet vēlreiz.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Darbība neizdevās. Mēģiniet vēlreiz.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Attēls ir pārāk liels. Izvēlieties mazāku failu.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Vērtētājs vairs neredzēs šo gabalu. Jaunus pierādījumus varēsiet iesniegt vēlāk.',
+  'De bron bevat geen leesbare credentials.':
+      'Avots nesatur lasāmus apliecinājumus.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Uzaicinājuma numura un koda kombinācija nav pareiza, vai arī uzaicinājums ir beidzies vai jau izmantots.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Savienošana neizdevās. Mēģiniet vēlreiz.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organizācija un citi dalībnieki vairs neredzēs fotoattēlu pie jūsu konta.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organizācijai vēl nav savu tēmu.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Vecā saite vairs nedarbosies. Vēlreiz ielīmējiet jauno saiti savā kalendāra lietotnē.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profila fotoattēls netika saglabāts. Mēģiniet vēlreiz.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Organizācijas tēmas neizdevās iegūt.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Uzaicinājums ir pieņemts. Organizācija tagad ir piesaistīta jūsu kontam.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Paroles nesakrīt.',
+  'Delen': 'Kopīgot',
+  'Delen als bewijs': 'Kopīgot kā pierādījumu',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Kopīgošana neizdevās. Mēģiniet vēlreiz.',
+  'Dit is de volledige definitie die meegaat:':
+      'Šī ir pilnā definīcija, kas tiek pievienota:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Šī ir jūsu kalendāra saite. Tā šeit tiek parādīta tikai vienreiz — ielīmējiet to savā kalendāra lietotnē. Ikviens, kam ir saite, var redzēt jūsu tikšanās; nekopīgojiet to.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Šis stila profils ir pārāk liels, lai to kopīgotu.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Šī tēma ir iebūvēta vai to izmanto kurss, un to nevar dzēst.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Šo tēmu neizdevās pārņemt — formāts nav pareizs.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Organizācijā jau pastāv tēma ar šādu nosaukumu.',
+  'Geen credentials gevonden in deze bron.':
+      'Šajā avotā nav atrasts neviens apliecinājums.',
+  'Gereed': 'Gatavs',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Iegūstiet esošās nozīmītes un sertifikātus no ārējā digitālā maka un kopīgojiet tos kā pierādījumus. Jūs pats izvēlaties, ko kopīgot.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Sertifikātu neizdevās saglabāt. Mēģiniet vēlreiz.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Sertifikātu neizdevās iegūt. Mēģiniet vēlreiz.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Kopīgošana neizdevās. Pārbaudiet pierādījuma veidu un mēģiniet vēlreiz.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Atsaukšana neizdevās. Mēģiniet vēlreiz.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Atsaukt neizdevās. Mēģiniet vēlreiz.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Kāds cits tikko ir izmainījis šo tēmu. Pārrakstīt vai pārņemt organizācijas versiju?',
+  'Ingebouwd': 'Iebūvēts',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Jūsu organizācija ir atsaukusi. Šis apgalvojums vairs nav spēkā.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Izvēlieties PNG, JPEG vai WebP attēlu, kura lielums nepārsniedz 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Izvēlieties paroli, kas ir vismaz 12 rakstzīmes gara.',
+  'Koppelen': 'Savienot',
+  'Link gekopieerd.': 'Saite nokopēta.',
+  'Naam is al in gebruik': 'Nosaukums jau tiek lietots',
+  'Nieuwe link': 'Jauna saite',
+  'Nieuwe profielfoto kiezen': 'Izvēlieties jaunu profila fotoattēlu',
+  'Nog geen certificaten.': 'Sertifikātu vēl nav.',
+  'Nog nodig voor deze badge': 'Joprojām nepieciešams šai nozīmītei',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Iegūšana neizdevās. Pārbaudiet saiti un mēģiniet vēlreiz.',
+  'Profielfoto kiezen': 'Izvēlieties profila fotoattēlu',
+  'Profielfoto verwijderen': 'Noņemt profila fotoattēlu',
+  'Profielfoto wijzigen': 'Mainīt profila fotoattēlu',
+  'Publieke verificatielink': 'Publiskā verifikācijas saite',
+  'Registreren en aanmelden': 'Reģistrēties un pierakstīties',
+  'Serverversie overnemen': 'Pārņemt servera versiju',
+  'Stijlprofiel delen met de organisatie?':
+      'Kopīgot stila profilu ar organizāciju?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Pārāk daudz mēģinājumu. Uzgaidiet brīdi un mēģiniet vēlreiz.',
+  'Thema’s van de organisatie': 'Organizācijas tēmas',
+  'Tussendoor gewijzigd': 'Tikmēr mainīts',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Jūs esat reģistrējies un pierakstījies. Laipni lūdzam!',
+  'Uitgegeven': 'Izsniegts',
+  'Uitnodiging accepteren': 'Pieņemt uzaicinājumu',
+  'Uitnodiging gebruiken': 'Izmantot uzaicinājumu',
+  'Uitnodigingscode': 'Uzaicinājuma kods',
+  'Uitnodigingsnummer': 'Uzaicinājuma numurs',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Jūsu konts ir izveidots. Tagad pierakstieties ar uzaicināto adresi un savu jauno paroli.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Jūsu konts nedrīkst pārvaldīt tēmas šajā organizācijā.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Jūsu kalendāra lietotne vairs nevarēs piekļūt sanāksmēm. Pašas tikšanās paliek.',
+  'Uw naam': 'Jūsu vārds',
+  'Verwijderen bij de organisatie': 'Dzēst organizācijā',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Dzēšana neizdevās. Mēģiniet vēlreiz.',
+  'Vul uw naam in.': 'Ievadiet savu vārdu.',
+  'Wachtwoord herhalen': 'Atkārtot paroli',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Ielieciet savas sanāksmes savā kalendārā — atjauninās, mainoties un atceļot.',
   'Omrekening naar euro': 'Konvertēšana eiro',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'EUR attēlošanai OciDeck izmanto vienu kursu sesijā. Ievadiet kursu paši vai iegūstiet ECB atsauces kursu.',
@@ -3059,43 +3208,27 @@ const _dutchSourceAddLv = <String, String>{
   'Uw antwoord': 'Jūsu atbilde',
   'Antwoord indienen': 'Iesniegt atbildi',
   'Geen verbinding': 'Nav savienojuma',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Jūs vairs nekopīgosiet apliecinājumus no šī digitālā maka. ',
   'U hebt nog geen badges.': 'Jums vēl nav nozīmīšu.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Varat izmantot pierādījumus no ārēja digitālā maka (piemēram, EduBadges) ',
   'U levert bewijs aan voor: {badge}':
       'Jūs iesniedzat pierādījumu nozīmītei: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Jūs iesniedzat šo apliecinošo dokumentu izvērtēšanai. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Lai pieteiktos, jūs novirzīs pie digitālā maka nodrošinātāja. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Jūsu fails tiks atzīmēts kā “iesniegts, vēl nav pārbaudīts” ',
-  'Verbinding maken…': 'Savienojas…',
-  'Verbinding verbreken': 'Atvienot',
-  'Verbinding verbreken?': 'Atvienot?',
-  'Verbonden met {provider}': 'Savienots ar {provider}',
-  'Verbreken': 'Atvienot',
   'Verlopen': 'Derīguma termiņš beidzies',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Ja pieprasāt dzēšanu, jūsu apliecinošie dokumenti un ar tiem saistītie vērtējumi tiks dzēsti. Dzēšanas reģistra glabāšanas noteikumi parāda, vai spēkā esoša glabāšanas pienākuma dēļ kaut kas vēl tiks saglabāts.',
   'Wordt verzonden zodra je online bent.':
       'Tiks nosūtīts, tiklīdz atkal būsiet tiešsaistē.',
   'portefeuille': 'digitālais maks',
-  '{aantal} credential(s) geselecteerd om te delen':
-      'Kopīgošanai atlasīto apliecinājumu skaits: {aantal}',
   '{bytes} bytes': '{bytes} baiti',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Tiek izskatīts kopš {datum}. Parasti divu darbdienu laikā.',
   'Kies een bestand om aan te leveren.': 'Izvēlieties iesniedzamo failu.',
-  'Kies wat u deelt': 'Izvēlieties, ko kopīgot',
   'Kies welke credentials u deelt als bewijs:':
       'Izvēlieties apliecinājumus, kurus kopīgosiet kā pierādījumu:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Neizdevās ielādēt jūsu pierādījumu. Mēģiniet vēlreiz.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Pievienojiet ārēju digitālo maku, lai izmantotu savas esošās nozīmītes un ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Atstājiet tukšu, ja pierādījumam nav derīguma termiņa. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3104,18 +3237,9 @@ const _dutchSourceAddLv = <String, String>{
   'Mijn badges': 'Manas nozīmītes',
   'Mijn bewijs': 'Mans pierādījums',
   'Mijn bewijsstukken': 'Mani apliecinošie dokumenti',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Pēc pieteikšanās nākamajā darbībā izvēlēsieties, kurus apliecinājumus kopīgot. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Vēl nav iesniegts neviens apliecinošs dokuments.',
   'Opgegeven': 'Iesniegts',
-  'Opnieuw verbinden': 'Savienot atkārtoti',
-  'Portefeuille koppelen': 'Pievienot digitālo maku',
-  'Portefeuille verbinden': 'Savienot digitālo maku',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Atlasiet apliecinājumus, kurus vēlaties kopīgot kā pierādījumu. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Lai turpinātu, aizveriet digitālā maka nodrošinātāja logu.',
   'Toegekend op {datum}': 'Piešķirta {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Atļautie formāti: PNG, JPEG, WebP un PDF. ',
@@ -3139,14 +3263,9 @@ const _dutchSourceAddLv = <String, String>{
       'Apliecinošie dokumenti ir faili, kurus iesniedzat nozīmītes saņemšanai. Pārskatā redzams faila nosaukums, kontrolsumma, statuss un vērtētājs. Pašu failu šajā pārskatā nav, taču vērtētājs var tos apskatīt.',
   'Bezig met versturen…': 'Notiek sūtīšana…',
   'Datum kiezen': 'Izvēlēties datumu',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Savienojums ir pārtraukts. Varat izveidot savienojumu atkārtoti.',
-  'Deze functie is nog niet beschikbaar. ': 'Šī funkcija vēl nav pieejama. ',
   'Externe portefeuille': 'Ārējs digitālais maks',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Pieņemts. Apliecinošais dokuments ir apstiprināts.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Šajā digitālajā makā nav atrasts neviens apliecinājums.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Šai organizācijai nav atrasts dalībnieka profils.',
   'Geldig tot {datum}': 'Derīgs līdz {datum}',

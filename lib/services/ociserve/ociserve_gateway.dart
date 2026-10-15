@@ -4,13 +4,18 @@ import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../models/ociserve_badge_readiness.dart';
+import '../../models/ociserve_certificate.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_evidence_item.dart';
 import '../../models/ociserve_exam.dart';
 import '../../models/ociserve_exam_result.dart';
 import '../../models/ociserve_intake.dart';
 import '../../models/ociserve_models.dart';
+import '../../models/ociserve_portfolio_import.dart';
 import '../../models/ociserve_settings.dart';
+import '../../models/ociserve_theme.dart';
+import '../../services/pdf_evidence_service.dart';
 import '../../utils/log.dart';
 import '../../utils/zip_encryption.dart';
 import 'ociserve_http.dart';
@@ -22,10 +27,41 @@ part 'ociserve_gateway_planning.dart';
 part 'ociserve_gateway_exams.dart';
 part 'ociserve_gateway_intake.dart';
 part 'ociserve_gateway_evidence_items.dart';
+part 'ociserve_gateway_account.dart';
+part 'ociserve_gateway_skills.dart';
+part 'ociserve_gateway_portfolio.dart';
+part 'ociserve_gateway_certificates.dart';
+part 'ociserve_gateway_calendar.dart';
+part 'ociserve_gateway_themes.dart';
+part 'ociserve_gateway_invitations.dart';
+
+// Bibliotheekbreed in plaats van op OciServeGatewayBase: statische leden van
+// een klasse zijn voor `part`-mixins niet ongekwalificeerd bereikbaar, en
+// elk nieuw deel (account, dossier, thema's) heeft ze nodig.
+const _uuid = Uuid();
+
+const int _jsonCap = 2 * 1024 * 1024;
+// Mirrors OciServe's published package limit so an oversized response is
+// stopped client-side before it can consume more memory than the contract.
+const int _packageCap = 32 * 1024 * 1024;
+const int _imageCap = 64 * 1024 * 1024;
+const int _avatarCap = 5 * 1024 * 1024;
+const int _privacyDataCap = 32 * 1024 * 1024;
+const int _evidenceCap = 64 * 1024 * 1024;
 
 /// Typed, bounded gateway for OciServe's learner-facing API.
 abstract class OciServeApi extends OciServePlanningApi
-    implements OciServeExamApi, OciServeIntakeApi, OciServeEvidenceItemApi {
+    implements
+        OciServeExamApi,
+        OciServeIntakeApi,
+        OciServeEvidenceItemApi,
+        OciServeAccountApi,
+        OciServeSkillsApi,
+        OciServePortfolioApi,
+        OciServeCertificatesApi,
+        OciServeCalendarApi,
+        OciServeThemesApi,
+        OciServeInvitationsApi {
   Future<OciServeInstallation> installation();
   Future<OciServeOidcConfiguration> discoverOidc(
     OciServeInstallation installation,
@@ -135,17 +171,6 @@ abstract class OciServeGatewayBase implements OciServeApi, OciServeStepUpAware {
     required this.settings,
     OciServeHttpTransport? transport,
   }) : _transport = transport ?? createOciServeHttpTransport();
-
-  static const _uuid = Uuid();
-
-  static const int _jsonCap = 2 * 1024 * 1024;
-  // Mirrors OciServe's published package limit so an oversized response is
-  // stopped client-side before it can consume more memory than the contract.
-  static const int _packageCap = 32 * 1024 * 1024;
-  static const int _imageCap = 64 * 1024 * 1024;
-  static const int _avatarCap = 5 * 1024 * 1024;
-  static const int _privacyDataCap = 32 * 1024 * 1024;
-  static const int _evidenceCap = 64 * 1024 * 1024;
 
   final OciServeSettings settings;
   final OciServeHttpTransport _transport;
@@ -832,33 +857,35 @@ abstract class OciServeGatewayBase implements OciServeApi, OciServeStepUpAware {
     }
     return difference == 0;
   }
+}
 
-  static bool _hasMatchingImageSignature(List<int> bytes, String contentType) {
-    bool startsWith(List<int> signature) =>
-        bytes.length >= signature.length &&
-        List.generate(
-          signature.length,
-          (i) => bytes[i] == signature[i],
-        ).every((matches) => matches);
-    return switch (contentType) {
-      'image/png' => startsWith(const [
-        0x89,
-        0x50,
-        0x4e,
-        0x47,
-        0x0d,
-        0x0a,
-        0x1a,
-        0x0a,
-      ]),
-      'image/jpeg' => startsWith(const [0xff, 0xd8, 0xff]),
-      'image/webp' =>
-        bytes.length >= 12 &&
-            ascii.decode(bytes.sublist(0, 4), allowInvalid: true) == 'RIFF' &&
-            ascii.decode(bytes.sublist(8, 12), allowInvalid: true) == 'WEBP',
-      _ => false,
-    };
-  }
+/// Controleert dat [bytes] écht aan het verklaarde beeldtype voldoen — een
+/// content-type uit een request of header is een claim, geen bewijs.
+bool _hasMatchingImageSignature(List<int> bytes, String contentType) {
+  bool startsWith(List<int> signature) =>
+      bytes.length >= signature.length &&
+      List.generate(
+        signature.length,
+        (i) => bytes[i] == signature[i],
+      ).every((matches) => matches);
+  return switch (contentType) {
+    'image/png' => startsWith(const [
+      0x89,
+      0x50,
+      0x4e,
+      0x47,
+      0x0d,
+      0x0a,
+      0x1a,
+      0x0a,
+    ]),
+    'image/jpeg' => startsWith(const [0xff, 0xd8, 0xff]),
+    'image/webp' =>
+      bytes.length >= 12 &&
+          ascii.decode(bytes.sublist(0, 4), allowInvalid: true) == 'RIFF' &&
+          ascii.decode(bytes.sublist(8, 12), allowInvalid: true) == 'WEBP',
+    _ => false,
+  };
 }
 
 /// Typed, bounded gateway voor de OciServe learner-facing API: de kern uit
@@ -868,6 +895,13 @@ class OciServeGateway extends OciServeGatewayBase
         _OciServePlanning,
         _OciServeExams,
         _OciServeIntake,
-        _OciServeEvidenceItems {
+        _OciServeEvidenceItems,
+        _OciServeAccount,
+        _OciServeSkills,
+        _OciServePortfolio,
+        _OciServeCertificates,
+        _OciServeCalendar,
+        _OciServeThemes,
+        _OciServeInvitations {
   OciServeGateway({required super.settings, super.transport});
 }

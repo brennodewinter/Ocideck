@@ -7,12 +7,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/learning_session.dart';
+import '../models/ociserve_badge_readiness.dart';
+import '../models/ociserve_certificate.dart';
+import '../models/ociserve_portfolio_import.dart';
 import '../models/ociserve_evidence.dart';
 import '../models/ociserve_evidence_item.dart';
 import '../models/ociserve_exam.dart';
 import '../models/ociserve_exam_result.dart';
 import '../models/ociserve_models.dart';
 import '../models/ociserve_settings.dart';
+import '../models/ociserve_theme.dart';
 import '../models/playback.dart';
 import '../services/ociserve/ociserve_auth.dart';
 import '../services/ociserve/ociserve_exam_outbox.dart';
@@ -30,6 +34,14 @@ part 'ociserve_provider_planning.dart';
 part 'ociserve_provider_exams.dart';
 part 'ociserve_provider_intake.dart';
 part 'ociserve_provider_evidence_items.dart';
+part 'ociserve_provider_account.dart';
+part 'ociserve_provider_skills.dart';
+part 'ociserve_provider_portfolio.dart';
+part 'ociserve_provider_certificates.dart';
+part 'ociserve_provider_calendar.dart';
+part 'ociserve_provider_themes.dart';
+part 'ociserve_provider_invitations.dart';
+part 'ociserve_provider_outbox.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
 /// consumers receive only the minimal account/membership read model.
@@ -108,6 +120,28 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   /// herstellen of de bereikbaarheid testen — implementatie in
   /// ociserve_activation.dart.
   Future<void> _activateSession(OciServeSettings settings, int generation);
+
+  /// Auditregistraties — implementaties in ociserve_provider_account.dart.
+  /// Staan abstract op de basis omdat `login()` en `openLessonPackage()` ze
+  /// aanroepen en zelf in dit bestand leven.
+  Future<void> _auditOciDeckLogin(OciServeApi gateway, String accessToken);
+  Future<void> _auditLessonOpened({
+    required String organizationId,
+    required OciServeFeedItem lesson,
+    required String accessToken,
+  });
+
+  /// De uitgaanswachtrij — implementaties in ociserve_provider_outbox.dart.
+  /// Abstract op de basis omdat `login()`, `saveSettings()`, de activatie-
+  /// flow en de account-methods ze aanroepen terwijl de wachtrij zelf in
+  /// een eigen part-bestand woont.
+  void _flushInBackground();
+  Future<void> _enqueue(
+    String organizationId,
+    OciServePlaybackSnapshot snapshot,
+  );
+  Future<void> _enqueueRaw(Map<String, Object?> item);
+  Future<List<Map<String, Object?>>> _readOutbox({String? baseUrl});
 
   Future<void> saveSettings(
     OciServeSettings settings, {
@@ -192,8 +226,18 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     return state.authenticated;
   }
 
-  Future<bool> login() async {
-    if (state.settings.rememberLogin && await _restoreCachedLogin()) {
+  /// [loginHint] + [forceLogin] komen uit de uitnodigingsreis (#2425): de
+  /// aanmelding stuurt `login_hint` en `prompt=login` zodat een eventueel
+  /// nog openstaande sessie van de uitnodiger niet stilletjes wordt
+  /// hergebruikt. Een herstelde sessie slaat dat bewust over — dat zou juist
+  /// de inlog van de uitnodiger terugpakken.
+  Future<bool> login({String? loginHint, bool forceLogin = false}) async {
+    // Bij een uitnodiging slaan we de herstelde sessie over: die zou juist
+    // een bestaande inlog (bijv. van de uitnodiger) kunnen terugpakken.
+    if (loginHint == null &&
+        !forceLogin &&
+        state.settings.rememberLogin &&
+        await _restoreCachedLogin()) {
       return true;
     }
     final generation = ++_generation;
@@ -222,9 +266,12 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
       _requireAcceptedIdentityProvider(resolvedSettings, installation);
       final configuration = await gateway.discoverOidc(installation);
       if (generation != _generation) return false;
-      final tokens = await _authFactory(
-        resolvedSettings,
-      ).login(installation, configuration);
+      final tokens = await _authFactory(resolvedSettings).login(
+        installation,
+        configuration,
+        loginHint: loginHint,
+        forceLogin: forceLogin,
+      );
       final account = await gateway.me(tokens.accessToken);
       if (account.activeMemberships.isEmpty) {
         throw const OciServeException('no_active_membership');
@@ -244,6 +291,10 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         serverReachable: true,
       );
       _flushInBackground();
+      // Alleen dit punt is een interactieve PKCE-aanmelding: refresh en
+      // herstelde sessies lopen via _activateSession/_accessToken en moeten
+      // geen auditpunt zetten (#2428).
+      unawaited(_auditOciDeckLogin(gateway, tokens.accessToken));
       return true;
     } catch (error, stack) {
       logError('OciServe: aanmelden afronden', error, stack);
@@ -539,7 +590,19 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         package.packageProfile,
         session,
       );
-      if (opened) _activeLessonSessions[session.playbackSessionId] = session;
+      if (opened) {
+        _activeLessonSessions[session.playbackSessionId] = session;
+        // Pas ná de digest-controle én een geslaagde open (#2428). De call
+        // mag afspelen niet vertragen: bijzaak die desnoods in de wachtrij
+        // belandt.
+        unawaited(
+          _auditLessonOpened(
+            organizationId: organizationId,
+            lesson: lesson,
+            accessToken: access,
+          ),
+        );
+      }
       return opened;
     } finally {
       if (!opened) await _closeLessonSessionBestEffort(session, access: access);
@@ -661,101 +724,6 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     await _enqueue(session.organizationId, snapshot);
   }
 
-  Future<void> flushPendingReports() {
-    final generation = _generation;
-    final running = _flushInFlight;
-    if (running != null && _flushGeneration == generation) return running;
-    final future = _nonInteractive(_flushPendingReports);
-    _flushInFlight = future;
-    _flushGeneration = generation;
-    return future.whenComplete(() {
-      if (identical(_flushInFlight, future)) {
-        _flushInFlight = null;
-        _flushGeneration = null;
-      }
-    });
-  }
-
-  Future<void> _flushPendingReports() async {
-    if (!state.authenticated || !_secrets.canStore) return;
-    final generation = _generation;
-    final settings = state.settings;
-    final baseUrl = settings.normalizedBaseUrl;
-    final accountId = state.account!.id;
-    final pending = await _readOutbox(baseUrl: baseUrl);
-    if (generation != _generation) return;
-    state = state.copyWith(pendingReports: pending.length);
-    final own = pending
-        .where(
-          (item) =>
-              item['account_id'] == accountId &&
-              (item['kind'] == null || item['kind'] == 'playback_report_v1'),
-        )
-        .take(5)
-        .toList();
-    if (own.isEmpty) return;
-    final access = await _accessToken();
-    if (generation != _generation) return;
-    final gateway = _gatewayFactory(settings);
-    final currentAccount = await gateway.me(access);
-    if (generation != _generation || currentAccount.id != accountId) return;
-    state = state.copyWith(account: currentAccount);
-    final sent = <Map<String, Object?>>{};
-    for (final item in own) {
-      final organizationId = item['organization_id'] as String? ?? '';
-      if (!currentAccount.activeMemberships.any(
-        (membership) => membership.organizationId == organizationId,
-      )) {
-        continue;
-      }
-      try {
-        final snapshot = OciServePlaybackSnapshot.fromJson(
-          Map<String, Object?>.from(item['snapshot']! as Map),
-        );
-        await gateway.reportPlayback(
-          accessToken: access,
-          organizationId: organizationId,
-          snapshot: snapshot,
-        );
-        sent.add(item);
-      } catch (error, stack) {
-        logError(
-          'OciServe: voortgang synchroniseren',
-          error.runtimeType,
-          stack,
-        );
-      }
-    }
-    if (generation != _generation) return;
-    final sentEncoded = sent.map(jsonEncode).toSet();
-    final remaining = await OciServeOutboxMutex.serialized(baseUrl, () async {
-      final latest = await _readOutbox(baseUrl: baseUrl);
-      final kept = latest
-          .where((item) => !sentEncoded.contains(jsonEncode(item)))
-          .toList();
-      await _writeOutbox(kept, baseUrl: baseUrl);
-      return kept;
-    });
-    if (generation != _generation) return;
-    state = state.copyWith(pendingReports: remaining.length);
-  }
-
-  void _flushInBackground() {
-    final generation = _generation;
-    unawaited(
-      flushPendingReports().catchError((Object error, StackTrace stack) {
-        logError(
-          'OciServe: voortgang op de achtergrond synchroniseren',
-          error.runtimeType,
-          stack,
-        );
-        if (generation == _generation) {
-          state = state.copyWith(warningCode: 'sync_failed');
-        }
-      }),
-    );
-  }
-
   Future<String> _accessToken() async {
     final current = _tokens;
     if (!state.authenticated || current == null) {
@@ -843,61 +811,6 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     }
   }
 
-  Future<void> _enqueue(
-    String organizationId,
-    OciServePlaybackSnapshot snapshot,
-  ) => OciServeOutboxMutex.serialized(
-    state.settings.normalizedBaseUrl,
-    () async {
-      final pending = await _readOutbox();
-      if (pending.length >= 100) {
-        state = state.copyWith(warningCode: 'outbox_full');
-        throw const OciServeException('outbox_full');
-      }
-      pending.add({
-        'kind': 'playback_report_v1',
-        'account_id': state.account!.id,
-        'organization_id': organizationId,
-        'snapshot': snapshot.toJson(),
-      });
-      await _writeOutbox(pending);
-      state = state.copyWith(pendingReports: pending.length);
-    },
-  );
-
-  Future<List<Map<String, Object?>>> _readOutbox({String? baseUrl}) async {
-    final raw = await _secrets.readOciServeOutbox(
-      baseUrl ?? state.settings.normalizedBaseUrl,
-    );
-    if (raw == null || raw.isEmpty) return [];
-    try {
-      final decoded = jsonDecode(raw);
-      if (decoded is! List || decoded.length > 100) {
-        throw const OciServeException('outbox_invalid');
-      }
-      return decoded
-          .map((item) => Map<String, Object?>.from(item as Map))
-          .toList();
-    } on OciServeException {
-      rethrow;
-    } catch (error, stack) {
-      logError('OciServe: voortgangswachtrij lezen', error.runtimeType, stack);
-      throw const OciServeException('outbox_invalid');
-    }
-  }
-
-  Future<void> _writeOutbox(
-    List<Map<String, Object?>> pending, {
-    String? baseUrl,
-  }) async {
-    final base = baseUrl ?? state.settings.normalizedBaseUrl;
-    if (pending.isEmpty) {
-      await _secrets.deleteOciServeOutbox(base);
-    } else {
-      await _secrets.writeOciServeOutbox(base, jsonEncode(pending));
-    }
-  }
-
   static String _safeErrorCode(Object error) => switch (error) {
     OciServeException(:final code) => code,
     SecretStoreUnsupported() => 'keychain_unavailable',
@@ -954,4 +867,12 @@ class OciServeNotifier extends OciServeNotifierBase
         _OciServePlanningMethods,
         _OciServeExamMethods,
         _OciServeIntakeMethods,
-        _OciServeEvidenceItemMethods {}
+        _OciServeEvidenceItemMethods,
+        _OciServeAccountMethods,
+        _OciServeSkillMethods,
+        _OciServePortfolioMethods,
+        _OciServeCertificateMethods,
+        _OciServeCalendarMethods,
+        _OciServeThemeMethods,
+        _OciServeInvitationMethods,
+        _OciServeOutboxMethods {}

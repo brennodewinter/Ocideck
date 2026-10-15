@@ -33,6 +33,27 @@ class OciServeEvidenceType {
   }
 }
 
+/// Een gepubliceerde versie van een bewijssoort
+/// (`EvidenceTypeVersionResponse`). De portefeuille-selectie koppelt een
+/// bewijsstuk aan zo'n versie; de nieuwste gepubliceerde versie is de enige
+/// die de server accepteert.
+@immutable
+class OciServeEvidenceTypeVersion {
+  const OciServeEvidenceTypeVersion({required this.id, required this.version});
+
+  final String id;
+  final int version;
+
+  factory OciServeEvidenceTypeVersion.fromJson(Map<String, Object?> json) {
+    final id = (json['id'] as String? ?? '').trim();
+    if (id.isEmpty) throw const FormatException('incomplete type version');
+    return OciServeEvidenceTypeVersion(
+      id: id,
+      version: (json['version'] as num?)?.toInt() ?? 0,
+    );
+  }
+}
+
 /// Waar een bewijsstuk staat in de beoordeling. Een onbekende waarde is een
 /// contractbreuk, geen standaardwaarde.
 enum OciServeEvidenceContentStatus {

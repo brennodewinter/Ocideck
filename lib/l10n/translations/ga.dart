@@ -1636,6 +1636,154 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Certificaatnummer: {nummer}': 'Uimhir teastais: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Ní fheicfidh an measúnóir an píosa seo níos mó ansin. ',
+  'Deze uitnodiging hoort bij {adres}.': 'Baineann an cuireadh seo le {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Seo é nasc d\'fhéilire. Taispeántar é anseo uair amháin amháin — greamaigh é ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Faigh suaitheantais agus teastais atá ann cheana as ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Tarraingíodh siar ag d\'eagraíocht: {reden}',
+  'Uitgegeven op {datum}': 'Eisithe ar {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Tá d\'fhéilire nasctha go dtí {datum}.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Rachaidh nasc d\'fhéilire in éag ar {datum}. Athnuaigh an nasc sula stopann sé.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Tá téama “{naam}” ag d\'eagraíocht cheana. Ar mhaith leat an téama sin a nuashonrú le do leagan?',
+  '“{naam}” delen met de organisatie': 'Comhroinn “{naam}” leis an eagraíocht',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      'Tagann “{naam}” le feiceáil do d\'eagraíocht.',
+  'Aanmelden': 'Logáil isteach',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Theip ar an logáil isteach. Bain triail eile aisti thíos.',
+  'Agenda koppelen': 'Nasc féilire',
+  'Agenda-koppeling intrekken?': 'Ceangal an fhéilire a tharraingt siar?',
+  'Agenda-link vernieuwen?': 'Nasc an fhéilire a athnuachan?',
+  'Alle eisen zijn vervuld.': 'Tá gach riachtanas comhlíonta.',
+  'Bekijken': 'Amharc',
+  'Bewaren': 'Sábháil',
+  'Bewijsstuk intrekken?': 'An fhianaise a tharraingt siar?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Theip ar an nuashonrú. Bain triail eile as.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Beidh teastais le feiceáil anseo a luaithe eiseoidh d\'eagraíocht iad.',
+  'Credential-bestand kiezen': 'Roghnaigh comhad dintiúir',
+  'Credentials ophalen…': 'Dintiúir á bhfáil…',
+  'Cursus': 'Cúrsa',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Ní nasc HTTPS bailí chuig dintiúir é sin.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Níor éirigh leis. Bain triail eile as.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Theip ar an ngníomh. Bain triail eile as.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Tá an íomhá rómhór. Roghnaigh comhad níos lú.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Ní fheicfidh an measúnóir an píosa seo níos mó ansin. Is féidir leat fianaise nua a chur isteach níos déanaí.',
+  'De bron bevat geen leesbare credentials.':
+      'Níl aon dintiúir inléite sa foinse.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Níl an teaglaim d\'uimhir chuiridh agus cód ceart, nó tá an cuireadh imithe in éag nó úsáidte cheana.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Theip ar an nascadh. Bain triail eile as.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Ní fheicfidh an eagraíocht agus rannpháirtithe eile grianghraf ag do chuntas níos mó ansin.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Níl aon téamaí dá cuid féin ag an eagraíocht go fóill.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Ní oibreoidh an seannasc níos mó ansin. Greamaigh an nasc nua isteach i d\'aip fhéilire arís.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Níor sábháilte an grianghraf próifíle. Bain triail eile as.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Níorbh fhéidir téamaí na heagraíochta a fháil.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Glacadh leis an gcuireadh. Tá an eagraíocht nasctha le do chuntas anois.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Níl na focail faire mar a chéile.',
+  'Delen': 'Comhroinn',
+  'Delen als bewijs': 'Comhroinn mar fhianaise',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Theip ar an gcomhroinnt. Bain triail eile as.',
+  'Dit is de volledige definitie die meegaat:':
+      'Seo é an sainmhíniú iomlán a ghabhann leis:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Seo é nasc d\'fhéilire. Taispeántar é anseo uair amháin amháin — greamaigh isteach i d\'aip fhéilire é. Is féidir le duine ar bith a bhfuil an nasc aige do choinní a fheiceáil; ná roinn é.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Tá an próifíl stíle seo rómhór le comhroinnt.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Tá an téama seo ionsuite nó in úsáid ag cúrsa agus ní féidir é a scriosadh.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Níorbh fhéidir an téama seo a ghlacadh — níl an formáid ceart.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Tá téama leis an ainm seo ann cheana san eagraíocht.',
+  'Geen credentials gevonden in deze bron.':
+      'Ní bhfuarthas aon dintiúir sa foinse seo.',
+  'Gereed': 'Réidh',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Faigh suaitheantais agus teastais atá ann cheana as punann sheachtrach agus comhroinn iad mar fhianaise. Tusa a roghnaíonn cad a roinnfidh tú.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Níorbh fhéidir an teastas a shábháil. Bain triail eile as.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Níorbh fhéidir an teastas a fháil. Bain triail eile as.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Theip ar an gcomhroinnt. Seiceáil an cineál fianaise agus bain triail eile as.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Theip ar an dtarraingt siar. Bain triail eile as.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Níor éirigh leis an dtarraingt siar. Bain triail eile as.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Rinne duine eile an téama seo a mhodhnú díreach anois. Forscríobh, nó glac leagan na heagraíochta?',
+  'Ingebouwd': 'Ionsuite',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Tarraingíodh siar ag d\'eagraíocht é. Ní bhíonn an ráiteas seo bailí a thuilleadh.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Roghnaigh íomhá PNG, JPEG nó WebP nach mó ná 5 MB.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Roghnaigh focal faire de 12 charachtar ar a laghad.',
+  'Koppelen': 'Nasc',
+  'Link gekopieerd.': 'Nasc cóipeáilte.',
+  'Naam is al in gebruik': 'Tá an t-ainm in úsáid cheana',
+  'Nieuwe link': 'Nasc nua',
+  'Nieuwe profielfoto kiezen': 'Roghnaigh grianghraf próifíle nua',
+  'Nog geen certificaten.': 'Gan teastais go fóill.',
+  'Nog nodig voor deze badge': 'Fós ag teastáil don tsuaitheantas seo',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Theip ar an bhfáil. Seiceáil an nasc agus bain triail eile as.',
+  'Profielfoto kiezen': 'Roghnaigh grianghraf próifíle',
+  'Profielfoto verwijderen': 'Bain an grianghraf próifíle',
+  'Profielfoto wijzigen': 'Athraigh an grianghraf próifíle',
+  'Publieke verificatielink': 'Nasc fíoraithe poiblí',
+  'Registreren en aanmelden': 'Cláraigh agus logáil isteach',
+  'Serverversie overnemen': 'Glac leagan an fhreastalaí',
+  'Stijlprofiel delen met de organisatie?':
+      'An bpróifíl stíle a chomhroinnt leis an eagraíocht?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'An iomca iarracht. Fan nóiméad agus bain triail eile as.',
+  'Thema’s van de organisatie': 'Téamaí na heagraíochta',
+  'Tussendoor gewijzigd': 'Mionathraithe idir an dá linn',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Tá tú cláraithe agus logáilte isteach. Fáilte!',
+  'Uitgegeven': 'Eisithe',
+  'Uitnodiging accepteren': 'Glac leis an gcuireadh',
+  'Uitnodiging gebruiken': 'Úsáid an cuireadh',
+  'Uitnodigingscode': 'Cód cuiridh',
+  'Uitnodigingsnummer': 'Uimhir chuiridh',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Cruthaíodh do chuntas. Logáil isteach anois leis an seoladh ar cuireadh chuige agus do phasfhocal nua.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Ní fhéadfadh do chuntas téamaí a bhainistiú ag an eagraíocht seo.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Ní bheidh rochtain ag d\'aip fhéilire ar na cruinnithe níos mó ansin. Fanann na coinní féin.',
+  'Uw naam': 'D\'ainm',
+  'Verwijderen bij de organisatie': 'Scrios san eagraíocht',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Theip ar an scriosadh. Bain triail eile as.',
+  'Vul uw naam in.': 'Cuir isteach d\'ainm.',
+  'Wachtwoord herhalen': 'Déan an focal faire a athrá',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Cuir do chruinnithe i d\'fhéilire féin — nuashonraithe nuair a athraítear nó a chuirtear ar ceal iad.',
   'Omrekening naar euro': 'Comhshó go euro',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'Chun an taispeáint in EUR a thaispeáint, úsáideann OciDeck ráta amháin in aghaidh an tseisiúin. Cuir an ráta isteach de láimh nó faigh ráta tagartha an BCE.',
@@ -3123,43 +3271,27 @@ const _dutchSourceAddGa = <String, String>{
   'Uw antwoord': 'Do fhreagra',
   'Antwoord indienen': 'Cuir freagra isteach',
   'Geen verbinding': 'Gan nasc',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Ní roinneann tú dintiúir ón bpunann seo a thuilleadh. ',
   'U hebt nog geen badges.': 'Níl aon suaitheantas agat fós.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Is féidir leat fianaise ó phunann sheachtrach (amhail EduBadges) a roinnt ',
   'U levert bewijs aan voor: {badge}':
       'Tá fianaise á cur isteach agat do: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Tá an fhianaise seo á cur isteach agat le measúnú. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Cuirfear ar aghaidh thú chuig soláthraí na punainne chun logáil isteach. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Marcálfar do chomhad mar „dearbhaithe, gan seiceáil fós” ',
-  'Verbinding maken…': 'Ag nascadh…',
-  'Verbinding verbreken': 'Dícheangail',
-  'Verbinding verbreken?': 'Dícheangail?',
-  'Verbonden met {provider}': 'Nasctha le {provider}',
-  'Verbreken': 'Dícheangail',
   'Verlopen': 'Imithe in éag',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Má iarrann tú scriosadh, imíonn d’fhianaise agus na measúnuithe gaolmhara. Léiríonn rialacha coinneála sa chlár scriosta an bhfágtar aon chuid de mar gheall ar oibleagáid choinneála leanúnach.',
   'Wordt verzonden zodra je online bent.':
       'Seolfar é a luaithe a bheidh tú ar líne.',
   'portefeuille': 'punann',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} ndintiúr roghnaithe le roinnt',
   '{bytes} bytes': '{bytes} beart',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Á phróiseáil ó {datum}. De ghnáth laistigh de dhá lá oibre.',
   'Kies een bestand om aan te leveren.': 'Roghnaigh comhad le cur isteach.',
-  'Kies wat u deelt': 'Roghnaigh an méid a roinneann tú',
   'Kies welke credentials u deelt als bewijs:':
       'Roghnaigh na dintiúir a roinneann tú mar fhianaise:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Níorbh fhéidir d’fhianaise a lódáil. Bain triail eile as.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Ceangail punann sheachtrach chun do shuaitheantais reatha agus ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Fág bán é má tá an fhianaise bailí gan teorainn. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3168,18 +3300,9 @@ const _dutchSourceAddGa = <String, String>{
   'Mijn badges': 'Mo shuaitheantais',
   'Mijn bewijs': 'Mo fhianaise',
   'Mijn bewijsstukken': 'Mo dhoiciméid fhianaise',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Tar éis logáil isteach, roghnaíonn tú sa chéad chéim eile na dintiúir a roinneann tú. ',
   'Nog geen bewijsstukken aangeleverd.':
       'Níl doiciméid fhianaise curtha isteach fós.',
   'Opgegeven': 'Dearbhaithe',
-  'Opnieuw verbinden': 'Athnasc',
-  'Portefeuille koppelen': 'Nasc punann',
-  'Portefeuille verbinden': 'Ceangail punann',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Roghnaigh na dintiúir is mian leat a roinnt mar fhianaise. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Dún fuinneog sholáthraí na punainne chun leanúint ar aghaidh.',
   'Toegekend op {datum}': 'Bronnadh ar {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Formáidí ceadaithe: PNG, JPEG, WebP agus PDF. ',
@@ -3203,14 +3326,9 @@ const _dutchSourceAddGa = <String, String>{
       'Is comhaid iad doiciméid fhianaise a chuireann tú isteach do shuaitheantas. Taispeánann an forléargas ainm an chomhaid, cód seiceála, stádas agus cé a rinne é a mheas. Níl na comhaid féin sa bhforléargas seo; féadann measúnóir iad a fheiceáil.',
   'Bezig met versturen…': 'Á sheoladh…',
   'Datum kiezen': 'Roghnaigh dáta',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Tá an nasc briste. Is féidir leat nascadh arís.',
-  'Deze functie is nog niet beschikbaar. ': 'Níl an fheidhm seo ar fáil fós. ',
   'Externe portefeuille': 'Punann sheachtrach',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Glactha. Tá an fhianaise ceadaithe.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Ní bhfuarthas aon dintiúir sa phunann seo.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Ní bhfuarthas próifíl rannpháirtí don eagraíocht seo.',
   'Geldig tot {datum}': 'Bailí go dtí {datum}',

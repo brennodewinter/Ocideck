@@ -1606,6 +1606,155 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Certificaatnummer: {nummer}': 'Sertifikaatin numero: {nummer}',
+  'De beoordelaar ziet dit stuk dan niet meer. ':
+      'Arvioija ei enää näe tätä kappaletta. ',
+  'Deze uitnodiging hoort bij {adres}.':
+      'Tämä kutsu kuuluu osoitteelle {adres}.',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem ':
+      'Tämä on kalenterilinkkisi. Se näytetään täällä vain kerran — liitä se ',
+  'Haal bestaande badges en certificaten binnen uit een externe ':
+      'Hae olemassa olevat merkit ja sertifikaatit ulkoisesta ',
+  'Ingetrokken door uw organisatie: {reden}':
+      'Organisaatiosi on perunut: {reden}',
+  'Uitgegeven op {datum}': 'Myönnetty {datum}',
+  'Uw agenda is gekoppeld tot {datum}.':
+      'Kalenterisi on yhdistetty {datum} asti.',
+  'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.':
+      'Kalenterilinkkisi vanhenee {datum}. Uudista linkki ennen kuin se lakkaa.',
+  'Uw organisatie heeft al een thema “{naam}”. Wilt u dat thema bijwerken met uw versie?':
+      'Organisaatiollasi on jo teema ”{naam}”. Haluatko päivittää kyseisen teeman omalla versiollasi?',
+  '“{naam}” delen met de organisatie': 'Jaa ”{naam}” organisaation kanssa',
+  '“{naam}” wordt zichtbaar voor uw organisatie.':
+      '”{naam}” tulee näkyviin organisaatiollesi.',
+  'Aanmelden': 'Kirjaudu sisään',
+  'Aanmelden is niet gelukt. Probeer het hieronder opnieuw.':
+      'Kirjautuminen epäonnistui. Yritä uudelleen alla.',
+  'Agenda koppelen': 'Yhdistä kalenteri',
+  'Agenda-koppeling intrekken?': 'Peruutetaanko kalenteriyhteys?',
+  'Agenda-link vernieuwen?': 'Uusitaanko kalenterilinkki?',
+  'Alle eisen zijn vervuld.': 'Kaikki vaatimukset on täytetty.',
+  'Bekijken': 'Näytä',
+  'Bewaren': 'Tallenna',
+  'Bewijsstuk intrekken?': 'Perutaanko todiste?',
+  'Bijwerken is niet gelukt. Probeer het opnieuw.':
+      'Päivitys epäonnistui. Yritä uudelleen.',
+  'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.':
+      'Sertifikaatit näkyvät täällä heti, kun organisaatiosi myöntää ne.',
+  'Credential-bestand kiezen': 'Valitse tunnistetietotiedosto',
+  'Credentials ophalen…': 'Haetaan tunnistetietoja…',
+  'Cursus': 'Kurssi',
+  'Dat is geen geldige HTTPS-link naar een credential.':
+      'Tämä ei ole kelvollinen HTTPS-linkki tunnistetietoihin.',
+  'Dat is niet gelukt. Probeer het opnieuw.':
+      'Se ei onnistunut. Yritä uudelleen.',
+  'De actie is niet gelukt. Probeer het opnieuw.':
+      'Toiminto epäonnistui. Yritä uudelleen.',
+  'De afbeelding is te groot. Kies een kleiner bestand.':
+      'Kuva on liian suuri. Valitse pienempi tiedosto.',
+  'De beoordelaar ziet dit stuk dan niet meer. U kunt later opnieuw bewijs aanleveren.':
+      'Arvioija ei enää näe tätä kappaletta. Voit toimittaa uusia todisteita myöhemmin.',
+  'De bron bevat geen leesbare credentials.':
+      'Lähteessä ei ole luettavia tunnistetietoja.',
+  'De combinatie van uitnodigingsnummer en code klopt niet, of de uitnodiging is verlopen of al gebruikt.':
+      'Kutsunumeron ja koodin yhdistelmä ei täsmää, tai kutsu on vanhentunut tai jo käytetty.',
+  'De koppeling is niet gelukt. Probeer het opnieuw.':
+      'Yhdistäminen epäonnistui. Yritä uudelleen.',
+  'De organisatie en andere deelnemers zien dan geen foto meer bij uw account.':
+      'Organisaatio ja muut osallistujat eivät enää näe kuvaa tililläsi.',
+  'De organisatie heeft nog geen eigen thema’s.':
+      'Organisaatiolla ei ole vielä omia teemoja.',
+  'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.':
+      'Vanha linkki ei enää toimi. Liitä uusi linkki uudelleen kalenterisovellukseesi.',
+  'De profielfoto is niet opgeslagen. Probeer het opnieuw.':
+      'Profiilikuvaa ei tallennettu. Yritä uudelleen.',
+  'De thema’s van de organisatie konden niet worden opgehaald.':
+      'Organisaation teemoja ei voitu hakea.',
+  'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.':
+      'Kutsu on hyväksytty. Organisaatio on nyt liitetty tiliisi.',
+  'De wachtwoorden zijn niet hetzelfde.': 'Salasanat eivät täsmää.',
+  'Delen': 'Jaa',
+  'Delen als bewijs': 'Jaa todisteena',
+  'Delen is niet gelukt. Probeer het opnieuw.':
+      'Jakaminen epäonnistui. Yritä uudelleen.',
+  'Dit is de volledige definitie die meegaat:':
+      'Tämä on mukana tuleva täydellinen määritelmä:',
+  'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem in uw agenda-app. Iedereen met de link kan uw afspraken zien; deel hem dus niet.':
+      'Tämä on kalenterilinkkisi. Se näytetään täällä vain kerran — liitä se kalenterisovellukseesi. Kuka tahansa linkin haltija voi nähdä tapaamisesi; älä jaa sitä.',
+  'Dit stijlprofiel is te groot om te delen.':
+      'Tämä tyyliprofiili on liian suuri jaettavaksi.',
+  'Dit thema is ingebouwd of in gebruik door een cursus en kan niet worden verwijderd.':
+      'Tämä teema on sisäänrakennettu tai kurssin käytössä, eikä sitä voi poistaa.',
+  'Dit thema kon niet worden overgenomen — het formaat klopt niet.':
+      'Tätä teemaa ei voitu ottaa käyttöön — muoto ei täsmää.',
+  'Er bestaat al een thema met deze naam bij de organisatie.':
+      'Organisaatiossa on jo samanniminen teema.',
+  'Geen credentials gevonden in deze bron.':
+      'Tästä lähteestä ei löytynyt tunnistetietoja.',
+  'Gereed': 'Valmis',
+  'Haal bestaande badges en certificaten binnen uit een externe portefeuille en deel ze als bewijs. U kiest zelf wat u deelt.':
+      'Hae olemassa olevat merkit ja sertifikaatit ulkoisesta lompakosta ja jaa ne todisteina. Sinä valitset, mitä jaat.',
+  'Het certificaat kon niet worden bewaard. Probeer het opnieuw.':
+      'Sertifikaattia ei voitu tallentaa. Yritä uudelleen.',
+  'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.':
+      'Sertifikaattia ei voitu hakea. Yritä uudelleen.',
+  'Het delen is mislukt. Controleer de soort bewijs en probeer opnieuw.':
+      'Jakaminen epäonnistui. Tarkista todisteen tyyppi ja yritä uudelleen.',
+  'Het intrekken is mislukt. Probeer het opnieuw.':
+      'Takaisinveto epäonnistui. Yritä uudelleen.',
+  'Het intrekken is niet gelukt. Probeer het opnieuw.':
+      'Takaisin veto ei onnistunut. Yritä uudelleen.',
+  'Iemand anders heeft dit thema net aangepast. Overschrijven, of de versie van de organisatie overnemen?':
+      'Joku muu on juuri muokannut tätä teemaa. Korvataanko vai otetaanko organisaation versio käyttöön?',
+  'Ingebouwd': 'Sisäänrakennettu',
+  'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.':
+      'Organisaatiosi on peruuttanut tämän. Tämä lausunto ei ole enää voimassa.',
+  'Kies een PNG-, JPEG- of WebP-afbeelding van maximaal 5 MB.':
+      'Valitse PNG-, JPEG- tai WebP-kuva, jonka koko on enintään 5 Mt.',
+  'Kies een wachtwoord van minstens 12 tekens.':
+      'Valitse salasana, jossa on vähintään 12 merkkiä.',
+  'Koppelen': 'Yhdistä',
+  'Link gekopieerd.': 'Linkki kopioitu.',
+  'Naam is al in gebruik': 'Nimi on jo käytössä',
+  'Nieuwe link': 'Uusi linkki',
+  'Nieuwe profielfoto kiezen': 'Valitse uusi profiilikuva',
+  'Nog geen certificaten.': 'Ei vielä sertifikaatteja.',
+  'Nog nodig voor deze badge': 'Tarvitaan vielä tähän merkkiin',
+  'Ophalen is mislukt. Controleer de link en probeer opnieuw.':
+      'Haku epäonnistui. Tarkista linkki ja yritä uudelleen.',
+  'Profielfoto kiezen': 'Valitse profiilikuva',
+  'Profielfoto verwijderen': 'Poista profiilikuva',
+  'Profielfoto wijzigen': 'Vaihda profiilikuva',
+  'Publieke verificatielink': 'Julkinen vahvistuslinkki',
+  'Registreren en aanmelden': 'Rekisteröidy ja kirjaudu sisään',
+  'Serverversie overnemen': 'Ota palvelimen versio käyttöön',
+  'Stijlprofiel delen met de organisatie?':
+      'Jaetaanko tyyliprofiili organisaation kanssa?',
+  'Te veel pogingen. Wacht even en probeer het dan opnieuw.':
+      'Liian monta yritystä. Odota hetki ja yritä uudelleen.',
+  'Thema’s van de organisatie': 'Organisaation teemat',
+  'Tussendoor gewijzigd': 'Muutettu sillä välin',
+  'U bent geregistreerd en aangemeld. Welkom!':
+      'Olet rekisteröitynyt ja kirjautunut sisään. Tervetuloa!',
+  'Uitgegeven': 'Myönnetty',
+  'Uitnodiging accepteren': 'Hyväksy kutsu',
+  'Uitnodiging gebruiken': 'Käytä kutsu',
+  'Uitnodigingscode': 'Kutsukoodi',
+  'Uitnodigingsnummer': 'Kutsunumero',
+  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.':
+      'Tilisi on luotu. Kirjaudu nyt sisään kutsutulla osoitteella ja uudella salasanallasi.',
+  'Uw account mag geen thema’s beheren bij deze organisatie.':
+      'Tilisi ei saa hallita teemoja tässä organisaatiossa.',
+  'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.':
+      'Kalenterisovelluksesi ei enää pääse käsiksi tapaamisiin. Itse tapaamiset säilyvät.',
+  'Uw naam': 'Nimesi',
+  'Verwijderen bij de organisatie': 'Poista organisaatiossa',
+  'Verwijderen is niet gelukt. Probeer het opnieuw.':
+      'Poistaminen epäonnistui. Yritä uudelleen.',
+  'Vul uw naam in.': 'Syötä nimesi.',
+  'Wachtwoord herhalen': 'Toista salasana',
+  'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
+      'Aseta tapaamisesi omaan kalenteriisi — päivittyy muutosten ja peruutusten yhteydessä.',
   'Omrekening naar euro': 'Muunnos euroiksi',
   'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
       'EUR-näkymää varten OciDeck käyttää yhtä kurssia istuntoa kohti. Syötä kurssi itse tai hae EKP:n viitekurssi.',
@@ -3067,43 +3216,27 @@ const _dutchSourceAddFi = <String, String>{
   'Uw antwoord': 'Sinun vastauksesi',
   'Antwoord indienen': 'Lähetä vastaus',
   'Geen verbinding': 'Ei yhteyttä',
-  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
-      'Et enää jaa tunnistetietoja tästä lompakosta. ',
   'U hebt nog geen badges.': 'Sinulla ei ole vielä tunnuksia.',
-  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
-      'Voit käyttää todisteita ulkoisesta lompakosta (kuten EduBadges) ',
   'U levert bewijs aan voor: {badge}':
       'Toimitat todisteita tunnusta varten: {badge}',
   'U levert dit bewijsstuk aan ter beoordeling. ':
       'Toimitat tämän todisteen arvioitavaksi. ',
-  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
-      'Sinut ohjataan lompakkopalveluun kirjautumaan. ',
   'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
       'Tiedostosi merkitään tilaan "toimitettu, ei vielä tarkistettu" ',
-  'Verbinding maken…': 'Yhdistetään…',
-  'Verbinding verbreken': 'Katkaise yhteys',
-  'Verbinding verbreken?': 'Katkaistaanko yhteys?',
-  'Verbonden met {provider}': 'Yhdistetty palveluun {provider}',
-  'Verbreken': 'Katkaise',
   'Verlopen': 'Vanhentunut',
   'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
       'Jos pyydät poistamista, todisteesi ja niihin liittyvät arvioinnit poistuvat. Poistorekisterin säilytyssäännöt osoittavat, jääkö jotakin jäljelle voimassa olevan säilytysvelvoitteen vuoksi.',
   'Wordt verzonden zodra je online bent.':
       'Lähetetään heti, kun olet verkossa.',
   'portefeuille': 'lompakko',
-  '{aantal} credential(s) geselecteerd om te delen':
-      '{aantal} tunnistetieto(a) valittu jaettavaksi',
   '{bytes} bytes': '{bytes} bytes',
   'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
       'Käsittelyssä alkaen {datum}. Tavallisesti kahden työpäivän kuluessa.',
   'Kies een bestand om aan te leveren.': 'Valitse toimitettava tiedosto.',
-  'Kies wat u deelt': 'Valitse, mitä jaat',
   'Kies welke credentials u deelt als bewijs:':
       'Valitse, mitkä tunnistetiedot jaat todisteena:',
   'Kon uw bewijs niet laden. Probeer het opnieuw.':
       'Todisteiden lataaminen epäonnistui. Yritä uudelleen.',
-  'Koppel een externe portefeuille om uw bestaande badges en ':
-      'Yhdistä ulkoinen lompakko käyttääksesi nykyisiä tunnuksiasi ja ',
   'Laat leeg als het bewijs onbeperkt geldig is. ':
       'Jätä tyhjäksi, jos todiste on voimassa toistaiseksi. ',
   'Lever een nieuw of gecorrigeerd bestand aan.':
@@ -3112,17 +3245,8 @@ const _dutchSourceAddFi = <String, String>{
   'Mijn badges': 'Omat tunnukseni',
   'Mijn bewijs': 'Omat todisteeni',
   'Mijn bewijsstukken': 'Omat todisteasiakirjani',
-  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
-      'Kirjautumisen jälkeen valitset seuraavassa vaiheessa, mitkä tunnistetiedot jaat. ',
   'Nog geen bewijsstukken aangeleverd.': 'Todisteita ei ole vielä toimitettu.',
   'Opgegeven': 'Toimitettu',
-  'Opnieuw verbinden': 'Yhdistä uudelleen',
-  'Portefeuille koppelen': 'Yhdistä lompakko',
-  'Portefeuille verbinden': 'Yhdistä lompakko',
-  'Selecteer de credentials die u als bewijs wilt delen. ':
-      'Valitse tunnistetiedot, jotka haluat jakaa todisteena. ',
-  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
-      'Sulje lompakkopalvelun ikkuna jatkaaksesi.',
   'Toegekend op {datum}': 'Myönnetty {datum}',
   'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
       'Sallitut muodot: PNG, JPEG, WebP ja PDF. ',
@@ -3145,15 +3269,9 @@ const _dutchSourceAddFi = <String, String>{
       'Todisteet ovat tunnusta varten toimitettavia tiedostoja. Yhteenveto näyttää tiedostonimen, tarkistuskoodin, tilan ja arvioijan. Tiedostoja ei näytetä tässä yhteenvedossa, mutta arvioija voi tarkastella niitä.',
   'Bezig met versturen…': 'Lähetetään…',
   'Datum kiezen': 'Valitse päivämäärä',
-  'De verbinding is verbroken. U kunt opnieuw verbinden.':
-      'Yhteys katkaistiin. Voit yhdistää uudelleen.',
-  'Deze functie is nog niet beschikbaar. ':
-      'Tämä toiminto ei ole vielä käytettävissä. ',
   'Externe portefeuille': 'Ulkoinen lompakko',
   'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
       'Hyväksytty. Todiste on hyväksytty.',
-  'Geen credentials gevonden in deze portefeuille.':
-      'Tästä lompakosta ei löytynyt tunnistetietoja.',
   'Geen deelnemerprofiel gevonden voor deze organisatie.':
       'Tälle organisaatiolle ei löytynyt osallistujaprofiilia.',
   'Geldig tot {datum}': 'Voimassa {datum} asti',

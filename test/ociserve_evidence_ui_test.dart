@@ -8,9 +8,10 @@ import 'package:ocideck/models/learning_session.dart';
 import 'package:ocideck/models/ociserve_evidence.dart';
 import 'package:ocideck/models/ociserve_evidence_item.dart';
 import 'package:ocideck/models/ociserve_models.dart';
-import 'package:ocideck/models/ociserve_portfolio.dart';
+import 'package:ocideck/models/ociserve_portfolio_import.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
+import 'package:ocideck/services/ociserve/ociserve_http.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/utils/content_hash.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_courses_dialog.dart';
@@ -24,130 +25,6 @@ import 'package:ocideck/widgets/dialogs/ociserve_portfolio_link.dart';
 // ---------------------------------------------------------------------------
 
 void main() {
-  // — Portfolio model —
-
-  group('PortfolioCredential', () {
-    test('parses from JSON with all fields', () {
-      final cred = PortfolioCredential.fromJson({
-        'id': 'cred-1',
-        'title': 'BHV Certificaat',
-        'issuer': 'ROC van Amsterdam',
-        'issued_at': '2026-01-15T10:00:00Z',
-        'expires_at': '2028-01-15T10:00:00Z',
-        'credential_type': 'OpenBadge',
-      });
-      expect(cred.id, 'cred-1');
-      expect(cred.title, 'BHV Certificaat');
-      expect(cred.issuer, 'ROC van Amsterdam');
-      expect(cred.credentialType, 'OpenBadge');
-      expect(cred.issuedAt, isNotNull);
-      expect(cred.expiresAt, isNotNull);
-      expect(cred.isActive, isTrue);
-    });
-
-    test('isActive is true when expiresAt is null', () {
-      const cred = PortfolioCredential(id: 'c', title: 't', issuer: 'i');
-      expect(cred.isActive, isTrue);
-    });
-
-    test('isActive is false when expired', () {
-      final cred = PortfolioCredential(
-        id: 'c',
-        title: 't',
-        issuer: 'i',
-        expiresAt: DateTime(2020, 1, 1),
-      );
-      expect(cred.isActive, isFalse);
-    });
-
-    test('copyWith toggles selected', () {
-      const cred = PortfolioCredential(id: 'c', title: 't', issuer: 'i');
-      final selected = cred.copyWith(selected: true);
-      expect(selected.selected, isTrue);
-      expect(cred.selected, isFalse);
-    });
-
-    test('throws on missing id', () {
-      expect(
-        () => PortfolioCredential.fromJson({'title': 't'}),
-        throwsFormatException,
-      );
-    });
-
-    test('parses with minimal fields and defaults', () {
-      final cred = PortfolioCredential.fromJson({'id': 'x'});
-      expect(cred.title, isEmpty);
-      expect(cred.issuer, isEmpty);
-      expect(cred.credentialType, isEmpty);
-      expect(cred.selected, isFalse);
-    });
-  });
-
-  group('PortfolioConnection', () {
-    test('parses a connected portfolio with credentials', () {
-      final conn = PortfolioConnection.fromJson({
-        'provider_id': 'edubadges',
-        'provider_name': 'EduBadges',
-        'state': 'connected',
-        'connected_at': '2026-09-01T10:00:00Z',
-        'credentials': [
-          {'id': 'c1', 'title': 'BHV', 'issuer': 'ROC'},
-          {'id': 'c2', 'title': 'EHBO', 'issuer': 'ROC'},
-        ],
-      });
-      expect(conn.providerId, 'edubadges');
-      expect(conn.providerName, 'EduBadges');
-      expect(conn.state, PortfolioConnectionState.connected);
-      expect(conn.credentials.length, 2);
-      // fromJson does not parse `selected`; use copyWith to mark selected.
-      final selected = conn.credentials[1].copyWith(selected: true);
-      expect(selected.selected, isTrue);
-      expect(conn.selectedCredentials, isEmpty);
-    });
-
-    test('defaults to unavailable for unknown state', () {
-      final conn = PortfolioConnection.fromJson({
-        'provider_id': 'p',
-        'state': 'unknown',
-      });
-      expect(conn.state, PortfolioConnectionState.unavailable);
-    });
-
-    test('parses all known states', () {
-      for (final entry in {
-        'disconnected': PortfolioConnectionState.disconnected,
-        'connecting': PortfolioConnectionState.connecting,
-        'connected': PortfolioConnectionState.connected,
-        'revoked': PortfolioConnectionState.revoked,
-        'unavailable': PortfolioConnectionState.unavailable,
-      }.entries) {
-        final conn = PortfolioConnection.fromJson({
-          'provider_id': 'p',
-          'state': entry.key,
-        });
-        expect(conn.state, entry.value);
-      }
-    });
-
-    test('throws on missing provider_id', () {
-      expect(
-        () => PortfolioConnection.fromJson({'state': 'connected'}),
-        throwsFormatException,
-      );
-    });
-
-    test('selectedCredentials is empty when none selected', () {
-      final conn = PortfolioConnection.fromJson({
-        'provider_id': 'p',
-        'state': 'connected',
-        'credentials': [
-          {'id': 'c1', 'title': 'BHV', 'issuer': 'ROC'},
-        ],
-      });
-      expect(conn.selectedCredentials, isEmpty);
-    });
-  });
-
   // — Widget tests —
 
   group('OciServeEvidence widget', () {
@@ -335,10 +212,131 @@ void main() {
       );
     });
 
-    testWidgets('shows portfolio section as unavailable', (tester) async {
+    testWidgets('shows the portfolio import section', (tester) async {
       await pumpEvidence(tester);
+      await tester.scrollUntilVisible(
+        find.text('Externe portefeuille'),
+        200,
+        scrollable: find.byType(Scrollable).last,
+      );
       expect(find.text('Externe portefeuille'), findsOneWidget);
-      expect(find.text('Portefeuille koppelen'), findsOneWidget);
+      expect(find.text('Ophalen'), findsOneWidget);
+      expect(find.text('Credential-bestand kiezen'), findsOneWidget);
+    });
+  });
+
+  group('acties op een bewijsstuk', () {
+    var refreshes = 0;
+
+    Future<_ActionsNotifier> pumpActions(
+      WidgetTester tester, {
+      required List<EvidenceUpload> uploads,
+      List<OciServeEvidenceItem> items = const [],
+      _ActionsNotifier? notifier,
+    }) async {
+      refreshes = 0;
+      final n = notifier ?? _ActionsNotifier();
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [ociServeProvider.overrideWith(() => n)],
+          child: MaterialApp(
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            home: Scaffold(
+              body: OciServeEvidence(
+                qualifications: const [],
+                evidenceUploads: uploads,
+                evidenceItems: items,
+                evidenceTypes: _bhvTypes,
+                organizationId: 'org',
+                onRefresh: () => refreshes++,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      return n;
+    }
+
+    testWidgets('intrekken vraagt eerst om bevestiging; annuleren doet niets', (
+      tester,
+    ) async {
+      final n = await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        items: [_item('u1', 'ingediend')],
+      );
+      await tester.tap(find.text('Intrekken'));
+      await tester.pumpAndSettle();
+      expect(find.text('Bewijsstuk intrekken?'), findsOneWidget);
+      await tester.tap(find.text('Annuleren'));
+      await tester.pumpAndSettle();
+      expect(n.withdrawn, isEmpty);
+      expect(refreshes, 0);
+    });
+
+    testWidgets('bevestigd intrekken trekt het stuk in en ververst de lijst', (
+      tester,
+    ) async {
+      final n = await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        items: [_item('u1', 'in_behandeling')],
+      );
+      await tester.tap(find.text('Intrekken'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Intrekken'));
+      await tester.pumpAndSettle();
+      expect(n.withdrawn, ['item-u1']);
+      expect(refreshes, 1);
+    });
+
+    testWidgets('een mislukte intrekking meldt dat en ververst niet', (
+      tester,
+    ) async {
+      final n = await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        items: [_item('u1', 'ingediend')],
+        notifier: _ActionsNotifier(failWithdraw: true),
+      );
+      await tester.tap(find.text('Intrekken'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Intrekken'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Het intrekken is mislukt'), findsOneWidget);
+      expect(n.withdrawn, isEmpty);
+      expect(refreshes, 0);
+    });
+
+    testWidgets('openen van iets dat geen PDF is, meldt dat in gewone taal', (
+      tester,
+    ) async {
+      await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        notifier: _ActionsNotifier(download: Uint8List.fromList([1, 2, 3])),
+      );
+      await tester.tap(find.text('Openen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Kon dit bestand niet openen.'), findsOneWidget);
+    });
+
+    testWidgets('openen valt netjes terug als het ophalen zelf mislukt', (
+      tester,
+    ) async {
+      await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        notifier: _ActionsNotifier(download: null),
+      );
+      await tester.tap(find.text('Openen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Kon dit bestand niet openen.'), findsOneWidget);
     });
   });
 
@@ -391,139 +389,128 @@ void main() {
   group('OciServePortfolioLink widget', () {
     Future<void> pumpLink(
       WidgetTester tester, {
-      required PortfolioConnection connection,
+      _PortfolioNotifier? notifier,
+      Future<Object?> Function(Uri url)? fetchDocument,
     }) async {
       await tester.pumpWidget(
-        MaterialApp(
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            ...GlobalMaterialLocalizations.delegates,
+        ProviderScope(
+          overrides: [
+            ociServeProvider.overrideWith(
+              () => notifier ?? _PortfolioNotifier(),
+            ),
           ],
-          home: Scaffold(body: OciServePortfolioLink(connection: connection)),
+          child: MaterialApp(
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            home: Scaffold(
+              body: OciServePortfolioLink(
+                organizationId: 'org',
+                participantId: 'p1',
+                evidenceTypes: _bhvTypes,
+                onShared: () {},
+                fetchDocument: fetchDocument,
+              ),
+            ),
+          ),
         ),
       );
-      // Use pump (not pumpAndSettle) — the connecting state has a spinner
-      // that animates forever and would time out pumpAndSettle.
       await tester.pump();
     }
 
-    testWidgets('shows unavailable message', (tester) async {
-      await pumpLink(
-        tester,
-        connection: const PortfolioConnection(
-          providerId: '',
-          providerName: '',
-          state: PortfolioConnectionState.unavailable,
-        ),
-      );
-      expect(find.text('Portefeuille koppelen'), findsOneWidget);
-      expect(find.textContaining('nog niet beschikbaar'), findsOneWidget);
-    });
-
-    testWidgets('shows connect button when disconnected', (tester) async {
-      await pumpLink(
-        tester,
-        connection: const PortfolioConnection(
-          providerId: 'p',
-          providerName: 'EduBadges',
-          state: PortfolioConnectionState.disconnected,
-        ),
-      );
-      expect(find.text('Portefeuille verbinden'), findsOneWidget);
-    });
-
-    testWidgets('shows connecting spinner', (tester) async {
-      await pumpLink(
-        tester,
-        connection: const PortfolioConnection(
-          providerId: 'p',
-          providerName: 'EduBadges',
-          state: PortfolioConnectionState.connecting,
-        ),
-      );
-      // Use pump (not pumpAndSettle) — the CircularProgressIndicator animates
-      // forever and would time out pumpAndSettle.
+    Future<void> pasteAndFetch(WidgetTester tester, String link) async {
+      await tester.enterText(find.byType(TextField), link);
+      await tester.tap(find.text('Ophalen'));
       await tester.pump();
-      expect(find.text('Verbinding maken…'), findsOneWidget);
+      await tester.pump();
+    }
+
+    testWidgets('toont linkveld en bestandsknop', (tester) async {
+      await pumpLink(tester);
+      expect(find.text('Ophalen'), findsOneWidget);
+      expect(find.text('Credential-bestand kiezen'), findsOneWidget);
     });
 
-    testWidgets('shows connected state with credentials', (tester) async {
-      await pumpLink(
-        tester,
-        connection: PortfolioConnection(
-          providerId: 'p',
-          providerName: 'EduBadges',
-          state: PortfolioConnectionState.connected,
-          credentials: [
-            const PortfolioCredential(
-              id: 'c1',
-              title: 'BHV',
-              issuer: 'ROC',
-              selected: true,
-            ),
-          ],
-        ),
-      );
-      expect(find.textContaining('Verbonden met'), findsOneWidget);
-      expect(find.text('BHV'), findsOneWidget);
-      expect(find.textContaining('credential(s) geselecteerd'), findsOneWidget);
+    testWidgets('een ongeldige link geeft een melding, geen crash', (
+      tester,
+    ) async {
+      await pumpLink(tester);
+      await pasteAndFetch(tester, 'http://niet-https.example/x');
+      expect(find.textContaining('geen geldige HTTPS-link'), findsOneWidget);
     });
 
-    testWidgets('shows revoke button when connected', (tester) async {
+    testWidgets('import via link toont de gevonden items om te kiezen', (
+      tester,
+    ) async {
+      final notifier = _PortfolioNotifier();
       await pumpLink(
         tester,
-        connection: const PortfolioConnection(
-          providerId: 'p',
-          providerName: 'EduBadges',
-          state: PortfolioConnectionState.connected,
-        ),
+        notifier: notifier,
+        fetchDocument: (url) async => {
+          'id': 'https://badges.example/cred/1',
+          'name': 'BHV Certificaat',
+          'issuer': {'id': 'https://roc.example'},
+        },
       );
-      expect(find.text('Verbinding verbreken'), findsOneWidget);
+      await pasteAndFetch(tester, 'https://badges.example/cred/1');
+      await tester.pump();
+      // De gevonden credential is naar de server gestuurd en de keuzelijst
+      // toont wat de server teruglevert.
+      expect(notifier.importedItems, hasLength(1));
+      expect(find.text('BHV Certificaat'), findsOneWidget);
+      expect(find.text('Delen als bewijs'), findsOneWidget);
     });
 
-    testWidgets('shows reconnect button when revoked', (tester) async {
+    testWidgets('deelt alleen de aangevinkte items', (tester) async {
+      final notifier = _PortfolioNotifier();
       await pumpLink(
         tester,
-        connection: const PortfolioConnection(
-          providerId: 'p',
-          providerName: 'EduBadges',
-          state: PortfolioConnectionState.revoked,
-        ),
+        notifier: notifier,
+        fetchDocument: (url) async => [
+          {
+            'id': 'https://badges.example/cred/1',
+            'name': 'BHV Certificaat',
+            'issuer': 'https://roc.example',
+          },
+          {
+            'id': 'https://badges.example/cred/2',
+            'name': 'EHBO Certificaat',
+            'issuer': 'https://roc.example',
+          },
+        ],
       );
-      expect(find.text('Opnieuw verbinden'), findsOneWidget);
-    });
-
-    testWidgets('opens connect dialog from disconnected state', (tester) async {
-      await pumpLink(
-        tester,
-        connection: const PortfolioConnection(
-          providerId: 'p',
-          providerName: 'EduBadges',
-          state: PortfolioConnectionState.disconnected,
-        ),
-      );
-      await tester.tap(find.text('Portefeuille verbinden'));
+      await pasteAndFetch(tester, 'https://badges.example/cred');
+      await tester.pump();
+      // Twee items gevonden; alleen het eerste wordt aangevinkt.
+      await tester.tap(find.text('BHV Certificaat'));
+      await tester.pump();
+      await tester.tap(find.text('Delen als bewijs'));
+      await tester.pump();
+      // De delen-knop is uitgeschakeld zonder gekozen bewijssoort.
+      expect(notifier.sharedItemIds, isNull);
+      await tester.tap(find.byKey(const ValueKey('portfolio-type')));
       await tester.pumpAndSettle();
-      expect(find.text('Doorgaan'), findsOneWidget);
-      await tester.tap(find.text('Doorgaan'));
+      await tester.tap(find.text('BHV-certificaat').last);
       await tester.pumpAndSettle();
-      expect(find.text('Kies wat u deelt'), findsOneWidget);
+      await tester.tap(find.text('Delen als bewijs'));
+      await tester.pump();
+      await tester.pump();
+      expect(notifier.sharedItemIds, ['item-1']);
+      expect(notifier.sharedTypeId, 'type-bhv');
     });
 
-    testWidgets('opens revoke confirm from connected state', (tester) async {
+    testWidgets('een mislukte fetch toont een melding in gewone taal', (
+      tester,
+    ) async {
       await pumpLink(
         tester,
-        connection: const PortfolioConnection(
-          providerId: 'p',
-          providerName: 'EduBadges',
-          state: PortfolioConnectionState.connected,
-        ),
+        fetchDocument: (url) async => throw StateError('offline'),
       );
-      await tester.tap(find.text('Verbinding verbreken'));
-      await tester.pumpAndSettle();
-      expect(find.text('Verbinding verbreken?'), findsOneWidget);
-      expect(find.text('Verbreken'), findsOneWidget);
+      await pasteAndFetch(tester, 'https://badges.example/cred/1');
+      await tester.pump();
+      expect(find.textContaining('Ophalen is mislukt'), findsOneWidget);
     });
   });
 
@@ -975,7 +962,8 @@ class _EvidenceTestNotifier extends OciServeNotifier {
   Future<void> flushPendingReports() async {}
 
   @override
-  Future<bool> login() async => true;
+  Future<bool> login({bool forceLogin = false, String? loginHint}) async =>
+      true;
 }
 
 // ---------------------------------------------------------------------------
@@ -1169,5 +1157,95 @@ class _ItemsNotifier extends _EvidenceTestNotifier {
   }) async {
     if (itemsFail) throw StateError('geen verbinding');
     return items;
+  }
+}
+
+class _PortfolioNotifier extends _EvidenceTestNotifier {
+  List<PortfolioImportItemInput>? importedItems;
+  List<String>? sharedItemIds;
+  String? sharedTypeId;
+
+  @override
+  Future<String> createPortfolioImport({
+    required String organizationId,
+    required String participantId,
+    required List<PortfolioImportItemInput> items,
+    required String idempotencyKey,
+  }) async {
+    importedItems = items;
+    return 'import-1';
+  }
+
+  @override
+  Future<OciServePortfolioImport> portfolioImport({
+    required String organizationId,
+    required String participantId,
+    required String importId,
+  }) async {
+    final items = importedItems ?? const <PortfolioImportItemInput>[];
+    return OciServePortfolioImport(
+      importId: importId,
+      status: 'open',
+      items: [
+        for (var i = 0; i < items.length; i++)
+          OciServePortfolioImportItem(
+            id: 'item-${i + 1}',
+            title: items[i].title,
+            issuerId: items[i].issuerId,
+          ),
+      ],
+    );
+  }
+
+  @override
+  Future<List<String>> sharePortfolioItems({
+    required String organizationId,
+    required String participantId,
+    required String importId,
+    required List<String> selectedItemIds,
+    required String evidenceTypeId,
+    required String idempotencyKey,
+  }) async {
+    sharedItemIds = selectedItemIds;
+    sharedTypeId = evidenceTypeId;
+    return selectedItemIds;
+  }
+}
+
+/// Legt vast welke bewijsstukken zijn ingetrokken en laat intrekken of
+/// ophalen op verzoek mislukken.
+class _ActionsNotifier extends _EvidenceTestNotifier {
+  _ActionsNotifier({this.failWithdraw = false, this.download});
+
+  final bool failWithdraw;
+
+  /// De bytes die [downloadEvidence] geeft; `null` laat het ophalen falen.
+  final Uint8List? download;
+  final withdrawn = <String>[];
+
+  @override
+  Future<OciServeEvidenceItem> withdrawEvidenceItem({
+    required String organizationId,
+    required String participantId,
+    required String evidenceItemId,
+  }) async {
+    if (failWithdraw) throw const OciServeException('stuk', statusCode: 500);
+    withdrawn.add(evidenceItemId);
+    return OciServeEvidenceItem(
+      id: evidenceItemId,
+      evidenceTypeId: 'type-bhv',
+      status: OciServeEvidenceContentStatus.ingetrokken,
+      createdAt: DateTime.utc(2026, 9, 2),
+    );
+  }
+
+  @override
+  Future<Uint8List> downloadEvidence({
+    required String organizationId,
+    required String evidenceId,
+  }) async {
+    final bytes = download;
+    if (bytes == null) throw const OciServeException('weg', statusCode: 404);
+    return bytes;
   }
 }

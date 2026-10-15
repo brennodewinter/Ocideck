@@ -225,7 +225,12 @@ class OciServeLearningProfile extends StatelessWidget {
           final identity = Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              OciServeAccountAvatar(account: account, name: name, size: 72),
+              OciServeAccountAvatar(
+                account: account,
+                name: name,
+                size: 72,
+                editable: true,
+              ),
               const SizedBox(width: 18),
               Flexible(
                 child: Column(
