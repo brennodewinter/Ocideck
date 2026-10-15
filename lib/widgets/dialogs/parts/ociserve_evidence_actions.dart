@@ -90,6 +90,110 @@ class _EvidenceWithdrawButtonState
   );
 }
 
+/// Haalt de certificaat-PDF op en biedt "Bekijken" en "Bewaren". De bytes
+/// gaan rechtstreeks naar de viewer of naar een pad dat de gebruiker zelf
+/// koos — geen tussencache, geen deelknop (het verificatiegeheim hoort bij
+/// dit document).
+class _CertificatePdfButton extends ConsumerStatefulWidget {
+  const _CertificatePdfButton({
+    required this.certificate,
+    required this.organizationId,
+  });
+
+  final OciServeCertificate certificate;
+  final String organizationId;
+
+  @override
+  ConsumerState<_CertificatePdfButton> createState() =>
+      _CertificatePdfButtonState();
+}
+
+class _CertificatePdfButtonState extends ConsumerState<_CertificatePdfButton> {
+  bool _loading = false;
+
+  String get _fileName {
+    final number = widget.certificate.certificateNumber;
+    final base = number.isEmpty ? widget.certificate.id : number;
+    return 'certificaat-$base.pdf';
+  }
+
+  Future<Uint8List?> _download() async {
+    setState(() => _loading = true);
+    try {
+      return await ref
+          .read(ociServeProvider.notifier)
+          .certificatePdf(
+            organizationId: widget.organizationId,
+            certificateId: widget.certificate.id,
+          );
+    } on Object {
+      if (mounted) {
+        showErrorSnackBar(
+          ScaffoldMessenger.of(context),
+          context.l10n,
+          context.l10n.d(
+            'Het certificaat kon niet worden opgehaald. Probeer het opnieuw.',
+          ),
+        );
+      }
+      return null;
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  Future<void> _view() async {
+    final bytes = await _download();
+    if (bytes == null || !mounted) return;
+    await PdfEvidenceViewer.open(context, bytes: bytes, fileName: _fileName);
+  }
+
+  Future<void> _save() async {
+    final bytes = await _download();
+    if (bytes == null || !mounted) return;
+    final location = await getSaveLocation(suggestedName: _fileName);
+    if (location == null || !mounted) return;
+    try {
+      await writeBytesAtomic(File(location.path), bytes);
+    } on Object {
+      if (mounted) {
+        showErrorSnackBar(
+          ScaffoldMessenger.of(context),
+          context.l10n,
+          context.l10n.d(
+            'Het certificaat kon niet worden bewaard. Probeer het opnieuw.',
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Wrap(
+      spacing: 8,
+      children: [
+        FilledButton.tonalIcon(
+          onPressed: _loading ? null : _view,
+          icon: _loading
+              ? const SizedBox.square(
+                  dimension: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(Icons.visibility_outlined),
+          label: Text(l10n.d('Bekijken')),
+        ),
+        TextButton.icon(
+          onPressed: _loading ? null : _save,
+          icon: const Icon(Icons.download_outlined),
+          label: Text(l10n.d('Bewaren')),
+        ),
+      ],
+    );
+  }
+}
+
 class _EvidenceOpenButton extends ConsumerStatefulWidget {
   const _EvidenceOpenButton({
     required this.upload,

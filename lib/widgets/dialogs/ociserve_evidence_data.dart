@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../models/ociserve_badge_readiness.dart';
+import '../../models/ociserve_certificate.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_evidence_item.dart';
 import '../../state/ociserve_provider.dart';
@@ -22,6 +23,7 @@ class OciServeEvidenceData {
     this.types = const [],
     this.items = const [],
     this.readiness = const {},
+    this.certificates = const [],
   });
 
   final List<EvidenceUpload> uploads;
@@ -33,6 +35,10 @@ class OciServeEvidenceData {
   /// Leeg als de server het leesmodel niet geeft — het scherm toont dan alleen
   /// de badges zelf.
   final Map<String, OciServeBadgeReadiness> readiness;
+
+  /// De certificatenlijst. Leeg als de server hem niet geeft — certificaten
+  /// zijn een eigen sectie die het scherm dan simpelweg niet toont.
+  final List<OciServeCertificate> certificates;
 
   static Future<OciServeEvidenceData> load(
     OciServeNotifier notifier, {
@@ -77,12 +83,22 @@ class OciServeEvidenceData {
       // blijft het scherm volledig bruikbaar.
       logError('OciServe: badge-leesmodellen laden', error.runtimeType, stack);
     }
+    var certificates = const <OciServeCertificate>[];
+    try {
+      certificates = await notifier.participantCertificates(
+        organizationId: organizationId,
+        participantId: participantId,
+      );
+    } catch (error, stack) {
+      logError('OciServe: certificaten laden', error.runtimeType, stack);
+    }
     return OciServeEvidenceData(
       uploads: results[0] as List<EvidenceUpload>,
       qualifications: qualifications,
       types: types,
       items: items,
       readiness: readiness,
+      certificates: certificates,
     );
   }
 }

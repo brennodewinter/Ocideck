@@ -395,6 +395,28 @@ const gatewayRoutes = <GatewayRoute>[
     responseSchema: 'PortfolioImportSelectResponse',
     responseFields: ['created_item_ids'],
   ),
+  // — Certificaten (#2426): lijst + PDF-download —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/certificates',
+    responseSchema: 'CertificateList',
+    responseFields: [
+      'certificates',
+      'certificates.id',
+      'certificates.title',
+      'certificates.description',
+      'certificates.certificate_number',
+      'certificates.status',
+      'certificates.issued_at',
+      'certificates.revoked_at',
+      'certificates.revocation_reason',
+    ],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/certificates/{}/pdf',
+    // Binary PDF — no JSON schema to check.
+  ),
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/organizations/{}/badges',

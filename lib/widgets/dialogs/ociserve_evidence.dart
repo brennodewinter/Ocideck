@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_badge_readiness.dart';
+import '../../models/ociserve_certificate.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_evidence_item.dart';
 import '../../services/pdf_evidence_service.dart';
@@ -40,6 +41,7 @@ class OciServeEvidence extends StatelessWidget {
     this.evidenceTypes = const [],
     this.participantId = '',
     this.readiness = const {},
+    this.certificates = const [],
   });
 
   final List<OciServeQualification> qualifications;
@@ -56,6 +58,9 @@ class OciServeEvidence extends StatelessWidget {
   /// welke eisen de badge stelt en welke de cursist al heeft afgevinkt.
   final Map<String, OciServeBadgeReadiness> readiness;
 
+  /// De certificaten die de organisatie aan deze deelnemer heeft uitgegeven —
+  /// ook de ingetrokken exemplaren, die hier met die status blijven staan.
+  final List<OciServeCertificate> certificates;
   final String organizationId;
   final VoidCallback onRefresh;
 
@@ -73,6 +78,8 @@ class OciServeEvidence extends StatelessWidget {
               _badgesSection(context, l10n, theme),
               const SizedBox(height: 24),
               _uploadsSection(context, l10n, theme),
+              const SizedBox(height: 24),
+              _certificatesSection(context, l10n, theme),
               const SizedBox(height: 24),
               _portfolioSection(context, l10n, theme),
             ],
@@ -598,6 +605,156 @@ class OciServeEvidence extends StatelessWidget {
         theme.colorScheme.error,
       ),
     };
+  }
+
+  /// De certificaten die de organisatie heeft uitgegeven (#2426). De PDF
+  /// draagt een verificatiegeheim, dus geen deel- of kopieerknop — alleen
+  /// bekijken in de app en bewust bewaren naar een plek die de gebruiker kiest.
+  Widget _certificatesSection(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+  ) {
+    if (certificates.isEmpty) {
+      return _emptySection(
+        context,
+        l10n,
+        theme,
+        Icons.workspace_premium_outlined,
+        l10n.d('Nog geen certificaten.'),
+        l10n.d(
+          'Certificaten verschijnen hier zodra uw organisatie ze uitgeeft.',
+        ),
+      );
+    }
+    final locale = MaterialLocalizations.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Certificaten'),
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(height: 12),
+        for (final certificate in certificates) ...[
+          _certificateCard(context, l10n, theme, locale, certificate),
+          const SizedBox(height: 10),
+        ],
+      ],
+    );
+  }
+
+  Widget _certificateCard(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+    MaterialLocalizations locale,
+    OciServeCertificate certificate,
+  ) {
+    final palette = AppPalette.of(theme);
+    final revoked = certificate.isRevoked;
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.workspace_premium_outlined,
+                  color: revoked
+                      ? theme.colorScheme.error
+                      : theme.colorScheme.primary,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    certificate.title,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        (revoked
+                                ? theme.colorScheme.error
+                                : theme.colorScheme.primary)
+                            .withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    revoked ? l10n.d('Ingetrokken') : l10n.d('Uitgegeven'),
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: revoked
+                          ? theme.colorScheme.error
+                          : theme.colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              l10n
+                  .d('Uitgegeven op {datum}')
+                  .replaceAll(
+                    '{datum}',
+                    locale.formatFullDate(certificate.issuedAt.toLocal()),
+                  ),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: palette.accentInk.withValues(alpha: 0.7),
+              ),
+            ),
+            if (certificate.certificateNumber.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(
+                l10n
+                    .d('Certificaatnummer: {nummer}')
+                    .replaceAll('{nummer}', certificate.certificateNumber),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: palette.accentInk.withValues(alpha: 0.7),
+                ),
+              ),
+            ],
+            if (revoked) ...[
+              const SizedBox(height: 8),
+              Text(
+                certificate.revocationReason != null &&
+                        certificate.revocationReason!.isNotEmpty
+                    ? l10n
+                          .d('Ingetrokken door uw organisatie: {reden}')
+                          .replaceAll('{reden}', certificate.revocationReason!)
+                    : l10n.d(
+                        'Ingetrokken door uw organisatie. Deze verklaring geldt niet meer.',
+                      ),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.error,
+                ),
+              ),
+            ],
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerRight,
+              child: _CertificatePdfButton(
+                certificate: certificate,
+                organizationId: organizationId,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _portfolioSection(

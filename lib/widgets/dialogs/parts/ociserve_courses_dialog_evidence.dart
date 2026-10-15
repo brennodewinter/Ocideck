@@ -78,6 +78,7 @@ extension _OciServeCoursesDialogEvidence on _OciServeCoursesDialogState {
       evidenceTypes: _evidence.types,
       participantId: _privacyData?.participantId ?? '',
       readiness: _evidence.readiness,
+      certificates: _evidence.certificates,
       organizationId: _organizationId ?? '',
       onRefresh: _loadEvidence,
     );
