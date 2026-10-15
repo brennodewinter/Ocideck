@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  b43a53c6b9444a18ff3c47a2ffa9bc6c6f545d5e
+// OciServe commit:  3c7c40f39456c71259b5958204de405b9dbd35af
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -16,12 +16,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_privacy_dictionary.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = 'b43a53c6b9444a18ff3c47a2ffa9bc6c6f545d5e';
+const pinnedOciServeCommit = '3c7c40f39456c71259b5958204de405b9dbd35af';
 
 /// SHA-256 of the pinned spec file itself — a spec silently replaced or
 /// hand-edited shows up here, not in a subtle field rename.
 const pinnedOciServeSpecSha256 =
-    'c463dfa4aabc0a4cc5c5e10d6541789a9414a51216fb0a4e25a90b7bb42f0e9b';
+    'c94de1dd15b6d384997652e6844d2e8a6c14b82e53529058d87a7cf1981e5c27';
 
 /// The capability catalogue the pinned spec declares (`info.x-capability-
 /// catalog-version`) and the intake capabilities OciDeck may rely on.
