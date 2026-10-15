@@ -18,7 +18,7 @@ class DossierOverview extends StatelessWidget {
     required this.onVerifyEntry,
     required this.onVerifyAll,
     required this.onRefreshReference,
-    required this.onRenameEntry,
+    required this.onEditEntryDetails,
     required this.onRemoveEntry,
     required this.onReorder,
     required this.onRenameDossier,
@@ -33,6 +33,8 @@ class DossierOverview extends StatelessWidget {
     this.onChangeDescription,
     this.onChangeStartNumber,
     this.onChangeEntryNumber,
+    this.onSuggestEntryDetails,
+    this.onExportPdf,
   });
 
   final DocumentDossier dossier;
@@ -43,7 +45,7 @@ class DossierOverview extends StatelessWidget {
   final ValueChanged<DossierEntry> onVerifyEntry;
   final VoidCallback onVerifyAll;
   final ValueChanged<DossierEntry> onRefreshReference;
-  final void Function(DossierEntry, String) onRenameEntry;
+  final void Function(DossierEntry, DossierEntryDetails) onEditEntryDetails;
   final ValueChanged<DossierEntry> onRemoveEntry;
   final ReorderCallback onReorder;
   final ValueChanged<String> onRenameDossier;
@@ -58,6 +60,9 @@ class DossierOverview extends StatelessWidget {
   final ValueChanged<String>? onChangeDescription;
   final ValueChanged<int>? onChangeStartNumber;
   final void Function(DossierEntry, int?)? onChangeEntryNumber;
+  final Future<DossierEntryDetails?> Function(DossierEntry)?
+  onSuggestEntryDetails;
+  final VoidCallback? onExportPdf;
 
   @override
   Widget build(BuildContext context) {
@@ -403,6 +408,16 @@ class DossierOverview extends StatelessWidget {
           ),
         ),
         if (dossier.entries.isNotEmpty) ...[
+          if (onExportPdf != null)
+            OutlinedButton.icon(
+              onPressed: busy ? null : onExportPdf,
+              icon: const Icon(Icons.picture_as_pdf_outlined),
+              label: Text(l10n.d('Dossier als PDF exporteren')),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+                side: BorderSide(color: Colors.white.withValues(alpha: 0.55)),
+              ),
+            ),
           OutlinedButton.icon(
             onPressed: busy ? null : onOpenAll,
             icon: const Icon(Icons.tab_rounded),
@@ -600,6 +615,44 @@ class DossierOverview extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (entry.description.trim().isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      entry.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: palette.panelText, fontSize: 13),
+                    ),
+                  ],
+                  if (entry.documentDate != null ||
+                      entry.author.trim().isNotEmpty) ...[
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: [
+                        if (entry.documentDate != null)
+                          _metadataChip(
+                            context,
+                            palette,
+                            entry.documentDate!,
+                            Icons.calendar_today_outlined,
+                          ),
+                        if (entry.author.trim().isNotEmpty)
+                          _metadataChip(
+                            context,
+                            palette,
+                            entry.author,
+                            Icons.person_outline_rounded,
+                          ),
+                      ],
+                    ),
+                  ],
+                  TextButton.icon(
+                    onPressed: busy ? null : () => _editEntry(context, entry),
+                    icon: const Icon(Icons.edit_outlined, size: 16),
+                    label: Text(l10n.d('Documentgegevens bewerken')),
+                  ),
                   const SizedBox(height: 5),
                   _sourceDetails(context, palette, entry),
                   Row(
@@ -744,7 +797,14 @@ class DossierOverview extends StatelessWidget {
         children: [
           Icon(icon, size: 12, color: palette.panelText),
           const SizedBox(width: 4),
-          Text(value, style: TextStyle(color: palette.panelText, fontSize: 11)),
+          Flexible(
+            child: Text(
+              value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: palette.panelText, fontSize: 11),
+            ),
+          ),
         ],
       ),
     ),
@@ -801,8 +861,11 @@ class DossierOverview extends StatelessWidget {
             ),
           ),
         PopupMenuItem(
-          value: _EntryAction.rename,
-          child: _menuRow(Icons.edit_outlined, l10n.d('Titel wijzigen')),
+          value: _EntryAction.details,
+          child: _menuRow(
+            Icons.edit_outlined,
+            l10n.d('Documentgegevens bewerken'),
+          ),
         ),
         if (onChangeEntryNumber != null)
           PopupMenuItem(
@@ -853,14 +916,8 @@ class DossierOverview extends StatelessWidget {
         onRefreshReference(entry);
       case _EntryAction.history:
         await DossierDialogs.showHashHistory(context, entry: entry);
-      case _EntryAction.rename:
-        final changed = await DossierDialogs.editTitle(
-          context,
-          initialTitle: entry.title,
-        );
-        if (changed != null && changed != entry.title) {
-          onRenameEntry(entry, changed);
-        }
+      case _EntryAction.details:
+        await _editEntry(context, entry);
       case _EntryAction.number:
         final changed = await DossierDialogs.editNumber(
           context,
@@ -886,6 +943,17 @@ class DossierOverview extends StatelessWidget {
         );
         if (confirmed) onRemoveEntry(entry);
     }
+  }
+
+  Future<void> _editEntry(BuildContext context, DossierEntry entry) async {
+    final details = await DossierDialogs.editEntryDetails(
+      context,
+      entry: entry,
+      suggest: onSuggestEntryDetails == null
+          ? null
+          : () => onSuggestEntryDetails!(entry),
+    );
+    if (details != null) onEditEntryDetails(entry, details);
   }
 
   (IconData, String, Color) _status(
@@ -929,4 +997,13 @@ class DossierOverview extends StatelessWidget {
   }
 }
 
-enum _EntryAction { verify, refresh, history, rename, number, up, down, remove }
+enum _EntryAction {
+  verify,
+  refresh,
+  history,
+  details,
+  number,
+  up,
+  down,
+  remove,
+}

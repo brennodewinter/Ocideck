@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/document_dossier.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dossier/dossier_overview.dart';
@@ -22,6 +23,9 @@ void main() {
         DossierEntry(
           id: '$i',
           title: 'Document ${i + 1}',
+          description: i == 0 ? 'Een korte beschrijving van het bewijs.' : '',
+          documentDate: i == 0 ? '2026-01-01' : null,
+          author: i == 0 ? 'Alex Auteur' : '',
           relativePath: 'attachments/$i.md',
           sha256: 'a' * 64,
           originalName: 'bronstuk-$i.md',
@@ -41,6 +45,9 @@ void main() {
     int? verificationProgress,
     int? verificationTotal,
     Set<String> unsavedEntryIds = const {},
+    void Function(DossierEntry, DossierEntryDetails)? onEditEntryDetails,
+    Future<DossierEntryDetails?> Function(DossierEntry)? onSuggestEntryDetails,
+    VoidCallback? onExportPdf,
   }) => MaterialApp(
     theme: theme ?? AppTheme.light,
     localizationsDelegates: const [AppLocalizations.delegate],
@@ -55,7 +62,9 @@ void main() {
         onVerifyEntry: (_) {},
         onVerifyAll: () {},
         onRefreshReference: (_) {},
-        onRenameEntry: (_, _) {},
+        onEditEntryDetails: onEditEntryDetails ?? (_, _) {},
+        onSuggestEntryDetails: onSuggestEntryDetails,
+        onExportPdf: onExportPdf,
         onRemoveEntry: (_) {},
         onReorder: onReorder ?? (_, _) {},
         onRenameDossier: (_) {},
@@ -263,5 +272,105 @@ void main() {
     expect(created, ('De map', 'Beschrijving'));
     expect(find.byType(AlertDialog), findsNothing);
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('document details are visible and can be edited together', (
+    tester,
+  ) async {
+    DossierEntryDetails? saved;
+    await tester.pumpWidget(
+      overview(onEditEntryDetails: (_, details) => saved = details),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Een korte beschrijving van het bewijs.'), findsOneWidget);
+    expect(find.text('2026-01-01'), findsOneWidget);
+    expect(find.text('Alex Auteur'), findsOneWidget);
+    await tester.ensureVisible(find.text('Documentgegevens bewerken').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Documentgegevens bewerken').first);
+    await tester.pumpAndSettle();
+    expect(find.byType(AlertDialog), findsOneWidget);
+    await tester.enterText(find.byType(TextField).at(1), 'Nieuwe samenvatting');
+    await tester.enterText(find.byType(TextField).at(2), '2026-02-31');
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('geldige datum'), findsOneWidget);
+    expect(saved, isNull);
+    await tester.enterText(find.byType(TextField).at(2), '2026-02-28');
+    await tester.enterText(find.byType(TextField).at(3), 'Nieuwe opsteller');
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+    expect(saved?.description, 'Nieuwe samenvatting');
+    expect(saved?.documentDate, '2026-02-28');
+    expect(saved?.author, 'Nieuwe opsteller');
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('AI fills a reviewable draft and does not save on its own', (
+    tester,
+  ) async {
+    DossierEntryDetails? saved;
+    var calls = 0;
+    await tester.pumpWidget(
+      overview(
+        onEditEntryDetails: (_, details) => saved = details,
+        onSuggestEntryDetails: (_) async {
+          calls++;
+          return (
+            title: 'Voorgestelde titel',
+            description: 'Een voorstel.',
+            documentDate: null,
+            author: '',
+          );
+        },
+      ),
+    );
+    await tester.ensureVisible(find.text('Documentgegevens bewerken').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Documentgegevens bewerken').first);
+    await tester.pumpAndSettle();
+    expect(calls, 0);
+    await tester.tap(find.text('Gegevens voorstellen met AI'));
+    await tester.pumpAndSettle();
+    expect(calls, 1);
+    expect(saved, isNull);
+    expect(find.textContaining('Controleer en wijzig'), findsOneWidget);
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+    expect(saved?.title, 'Voorgestelde titel');
+    expect(saved?.description, 'Een voorstel.');
+    expect(saved?.documentDate, isNull);
+  });
+
+  testWidgets('PDF export options default to interleaves and redaction', (
+    tester,
+  ) async {
+    DossierPdfOptions? chosen;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        localizationsDelegates: const [AppLocalizations.delegate],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: Builder(
+            builder: (context) => TextButton(
+              onPressed: () async =>
+                  chosen = await DossierDialogs.pdfExportOptions(context),
+              child: const Text('Exporteer dossier'),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('Exporteer dossier'));
+    await tester.pumpAndSettle();
+    final switches = tester.widgetList<SwitchListTile>(
+      find.byType(SwitchListTile),
+    );
+    expect(switches.map((widget) => widget.value), [true, false]);
+    await tester.tap(find.text('PDF maken'));
+    await tester.pumpAndSettle();
+    expect(chosen?.includeInterleaves, isTrue);
+    expect(chosen?.profile, PrivacyExportProfile.redacted);
   });
 }
