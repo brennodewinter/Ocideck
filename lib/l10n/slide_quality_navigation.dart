@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/slide_quality.dart';
+import '../models/slide_format.dart';
 import '../state/deck_provider.dart';
 import '../state/editor_provider.dart';
 import '../widgets/dialogs/presentation_info_dialog.dart';
@@ -69,6 +70,7 @@ void navigateToSlideQualityIssue({
         builder: (ctx) => CalloutEditorDialog(
           slide: deck.slides[issue.slideIndex],
           projectPath: deck.projectPath,
+          slideAspect: slideAspectRatio(deck.slideSize),
           onUpdate: (updated) => ref
               .read(deckProvider.notifier)
               .updateSlide(issue.slideIndex, updated),

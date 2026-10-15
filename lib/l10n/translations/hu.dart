@@ -1724,6 +1724,45 @@ const _dutchSourceAddHu = <String, String>{
       'Az áttekintés nem nyithatótott meg dokumentként.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Mentsük el először az áttekintés dokumentumában a változtatásokat vagy zárd be azt a lapot.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruttó vagy nettó itt nem számít — a munkáltatói költségráfordítás külön áll.',
+  'Aanwezigen en tarieven': 'Résztvevők és díjak',
+  'Bedrag': 'Összeg',
+  'Per uur': 'Óránként',
+  'Per maand': 'Havonta',
+  'Per jaar': 'Évente',
+  'Aanname voor de omrekening': 'Az átszámítás feltétele',
+  'Betaalde uren per week': 'Fizetett órák hetente',
+  'Weken per jaar': 'Hét évente',
+  'Opslag werkgeverslasten (%)': 'Munkáltatói költségráfordítás (%)',
+  'Voeg een aanwezige toe': 'Résztvevő hozzáadása',
+  'Samen': 'Összesen',
+  'Start presentatie': 'Prezentáció indítása',
+  'per uur': 'óránként',
+  'Wordt omgerekend': 'Átváltásra kerül',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Adj meg résztvevőnként óra-, havi vagy éves díjat. Ez a képernyőn marad és sehova nem kerül mentésre.',
+  'Kosten van aanwezigen': 'Résztvevők költsége',
+  'Uit': 'Ki',
+  'Gewoon — alleen in het eindoverzicht': 'Normál — csak a záró összegzésben',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — folyamatos összeg és záró összegzés',
+  'Uurtarief': 'Óradíj',
+  'Eén tarief voor de hele groep': 'Egy díj az egész csoportra',
+  'Per aanwezige, bij de start invullen':
+      'Résztvevőnként, a kezdéskor töltendő',
+  'Groepsuurtarief': 'Csoportos óradíj',
+  'Kosten = verstreken tijd × tarief.': 'Költség = eltelt idő × díj.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'A kezdéskor töltendő, nem kerül mentésre.',
+  'Valuta': 'Pénznem',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'A résztvevők által eltöltött idő becslése — irányadó, nem könyvelési önköltség.',
+  'Diaformaat': 'Diaformátum',
+  'Scherm (16:9)': 'Képernyő (16:9)',
+  'Papierformaat': 'Papírméret',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Válasszon papírméretet a kiosztandó anyagokhoz és a papíralapú exporthoz.',
   'Startmappen': 'Kezdőmappák',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hol a megnyitás és a mentés kezdődik. Üresen az első könyvtárat használja.',

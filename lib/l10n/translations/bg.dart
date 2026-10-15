@@ -1744,6 +1744,45 @@ const _dutchSourceAddBg = <String, String>{
       'Прегледът не можа да бъде отворен като документ.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Първо запазете промените в документа на преглед или затворете тази секция.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Бруто или нето няма значение тук — надбавката за разходи на работодателя е отделна.',
+  'Aanwezigen en tarieven': 'Присъстващи и ставки',
+  'Bedrag': 'Сума',
+  'Per uur': 'На час',
+  'Per maand': 'На месец',
+  'Per jaar': 'На година',
+  'Aanname voor de omrekening': 'Допускане за преизчисляването',
+  'Betaalde uren per week': 'Платени часове на седмица',
+  'Weken per jaar': 'Седмици годишно',
+  'Opslag werkgeverslasten (%)': 'Надценка за разходи на работодателя (%)',
+  'Voeg een aanwezige toe': 'Добави присъстващ',
+  'Samen': 'Общо',
+  'Start presentatie': 'Стартирай презентацията',
+  'per uur': 'на час',
+  'Wordt omgerekend': 'Ще се преизчисли',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Въведи за всеки присъстващ часова, месечна или годишна ставка. Остава на този екран и никъде не се записва.',
+  'Kosten van aanwezigen': 'Разходи за присъстващите',
+  'Uit': 'Изкл.',
+  'Gewoon — alleen in het eindoverzicht': 'Обикновено — само в крайния отчет',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Изрично — текуща сума и краен отчет',
+  'Uurtarief': 'Часова ставка',
+  'Eén tarief voor de hele groep': 'Една ставка за цялата група',
+  'Per aanwezige, bij de start invullen':
+      'На присъстващ, въвежда се в началото',
+  'Groepsuurtarief': 'Групова часова ставка',
+  'Kosten = verstreken tijd × tarief.': 'Разход = изминало време × ставка.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Въвежда се в началото и не се записва.',
+  'Valuta': 'Валута',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Оценка на времето, което присъстващите отделят — индикация, а не счетоводна себестойност.',
+  'Diaformaat': 'Формат на слайда',
+  'Scherm (16:9)': 'Екран (16:9)',
+  'Papierformaat': 'Формат на хартията',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Изберете формат на хартията за раздатъчни материали и експорт на хартия.',
   'Startmappen': 'Начални папки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Къде започват отварянето и записването. Празно използва първата библиотека.',

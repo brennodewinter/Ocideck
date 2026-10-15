@@ -1722,6 +1722,44 @@ const _dutchSourceAddId = <String, String>{
       'Tampilan ini tidak dapat dibuka sebagai dokumen.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Simpan perubahan pada dokumen tampilan terlebih dahulu atau tutup tab tersebut.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto atau netto tidak masalah di sini — markup biaya pemberi kerja terpisah.',
+  'Aanwezigen en tarieven': 'Peserta dan tarif',
+  'Bedrag': 'Jumlah',
+  'Per uur': 'Per jam',
+  'Per maand': 'Per bulan',
+  'Per jaar': 'Per tahun',
+  'Aanname voor de omrekening': 'Asumsi untuk konversi',
+  'Betaalde uren per week': 'Jam dibayar per minggu',
+  'Weken per jaar': 'Minggu per tahun',
+  'Opslag werkgeverslasten (%)': 'Markup biaya pemberi kerja (%)',
+  'Voeg een aanwezige toe': 'Tambah peserta',
+  'Samen': 'Bersama',
+  'Start presentatie': 'Mulai presentasi',
+  'per uur': 'per jam',
+  'Wordt omgerekend': 'Akan dikonversi',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Isi tarif per jam, per bulan, atau per tahun untuk tiap peserta. Ini tetap di layar ini dan tidak disimpan.',
+  'Kosten van aanwezigen': 'Biaya peserta',
+  'Uit': 'Mati',
+  'Gewoon — alleen in het eindoverzicht': 'Biasa — hanya di ringkasan akhir',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisit — total berjalan dan ringkasan akhir',
+  'Uurtarief': 'Tarif per jam',
+  'Eén tarief voor de hele groep': 'Satu tarif untuk seluruh kelompok',
+  'Per aanwezige, bij de start invullen': 'Per peserta, diisi saat mulai',
+  'Groepsuurtarief': 'Tarif per jam grup',
+  'Kosten = verstreken tijd × tarief.': 'Biaya = waktu berlalu × tarif.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Diisi saat mulai dan tidak disimpan.',
+  'Valuta': 'Mata uang',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Perkiraan waktu yang dihabiskan peserta — indikasi, bukan harga pokok akuntansi.',
+  'Diaformaat': 'Format slide',
+  'Scherm (16:9)': 'Layar (16:9)',
+  'Papierformaat': 'Ukuran kertas',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Pilih ukuran kertas untuk handout dan ekspor ke kertas.',
   'Startmappen': 'Folder awal',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Di mana membuka dan menyimpan dimulai. Kosongkan untuk memakai pustaka pertama.',

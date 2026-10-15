@@ -1724,6 +1724,45 @@ const _dutchSourceAddDa = <String, String>{
       'Oversigten kunne ikke åbnes som et dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Gem ændringer i dokumentet for oversigtstabsfane først eller luk fanen.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto eller netto er ligegyldigt her — arbejdsgiveromkostnings-tillægget står separat.',
+  'Aanwezigen en tarieven': 'Deltagere og satser',
+  'Bedrag': 'Beløb',
+  'Per uur': 'Pr. time',
+  'Per maand': 'Pr. måned',
+  'Per jaar': 'Pr. år',
+  'Aanname voor de omrekening': 'Antagelse for omregningen',
+  'Betaalde uren per week': 'Betalte timer om ugen',
+  'Weken per jaar': 'Uger om året',
+  'Opslag werkgeverslasten (%)': 'Arbejdsgiveromkostningstillæg (%)',
+  'Voeg een aanwezige toe': 'Tilføj en deltager',
+  'Samen': 'Tilsammen',
+  'Start presentatie': 'Start præsentationen',
+  'per uur': 'i timen',
+  'Wordt omgerekend': 'Omregnes',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Indtast en time-, måneds- eller årssats pr. deltager. Det bliver på denne skærm og gemmes ingen steder.',
+  'Kosten van aanwezigen': 'Deltagernes omkostninger',
+  'Uit': 'Fra',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — kun i afslutningsoversigten',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplicit — løbende beløb og afslutningsoversigt',
+  'Uurtarief': 'Timesats',
+  'Eén tarief voor de hele groep': 'Én sats for hele gruppen',
+  'Per aanwezige, bij de start invullen': 'Pr. deltager, udfyldes ved start',
+  'Groepsuurtarief': 'Gruppens timesats',
+  'Kosten = verstreken tijd × tarief.': 'Omkostning = forløben tid × sats.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Udfyldes ved start og gemmes ikke.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Et skøn over den tid, deltagerne bruger — en indikation, ikke en regnskabsmæssig kostpris.',
+  'Diaformaat': 'Diasformat',
+  'Scherm (16:9)': 'Skærm (16:9)',
+  'Papierformaat': 'Papirformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Vælg et papirformat til handouts og eksport på papir.',
   'Startmappen': 'Startmapper',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hvor åbning og gemning begynder. Tomt felt bruger det første bibliotek.',

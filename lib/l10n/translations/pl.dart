@@ -1736,6 +1736,45 @@ const _dutchSourceAddPl = <String, String>{
       'Przegląd nie mógł zostać otwarty jako dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Najpierw zapisz zmiany w dokumencie przeglądowym lub zamknij ten zakład.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto czy netto nie ma tu znaczenia — narzut kosztów pracodawcy jest osobny.',
+  'Aanwezigen en tarieven': 'Uczestnicy i stawki',
+  'Bedrag': 'Kwota',
+  'Per uur': 'Na godzinę',
+  'Per maand': 'Na miesiąc',
+  'Per jaar': 'Na rok',
+  'Aanname voor de omrekening': 'Założenie do przeliczenia',
+  'Betaalde uren per week': 'Płatne godziny na tydzień',
+  'Weken per jaar': 'Tygodnie w roku',
+  'Opslag werkgeverslasten (%)': 'Narzut kosztów pracodawcy (%)',
+  'Voeg een aanwezige toe': 'Dodaj uczestnika',
+  'Samen': 'Razem',
+  'Start presentatie': 'Rozpocznij prezentację',
+  'per uur': 'na godzinę',
+  'Wordt omgerekend': 'Zostanie przeliczone',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Wpisz za każdego uczestnika stawkę godzinową, miesięczną lub roczną. Zostaje na tym ekranie i nigdzie nie jest zapisywana.',
+  'Kosten van aanwezigen': 'Koszt uczestników',
+  'Uit': 'Wył.',
+  'Gewoon — alleen in het eindoverzicht':
+      'Zwykły — tylko w podsumowaniu końcowym',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Jawny — bieżąca suma i podsumowanie końcowe',
+  'Uurtarief': 'Stawka godzinowa',
+  'Eén tarief voor de hele groep': 'Jedna stawka dla całej grupy',
+  'Per aanwezige, bij de start invullen': 'Za uczestnika, wpisywane na starcie',
+  'Groepsuurtarief': 'Grupowa stawka godzinowa',
+  'Kosten = verstreken tijd × tarief.': 'Koszt = upływ czasu × stawka.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wypełniane na starcie, nigdy niezapisywane.',
+  'Valuta': 'Waluta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Szacunek czasu poświęcanego przez uczestników — wskazanie, nie księgowy koszt własny.',
+  'Diaformaat': 'Format slajdu',
+  'Scherm (16:9)': 'Ekran (16:9)',
+  'Papierformaat': 'Format papieru',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Wybierz format papieru dla materiałów do rozdania i eksportów na papier.',
   'Startmappen': 'Foldery startowe',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Gdzie zaczyna się otwieranie i zapisywanie. Puste pole oznacza pierwszą bibliotekę.',

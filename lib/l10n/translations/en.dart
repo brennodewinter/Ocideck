@@ -930,6 +930,45 @@ const _dutchSourceAddEn = {
       'The overview could not be opened as a document.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Save changes to the overview document first or close that tab.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Gross or net does not matter here — the employer-cost markup is separate.',
+  'Aanwezigen en tarieven': 'Attendees and rates',
+  'Bedrag': 'Amount',
+  'Per uur': 'Per hour',
+  'Per maand': 'Per month',
+  'Per jaar': 'Per year',
+  'Aanname voor de omrekening': 'Assumption for the conversion',
+  'Betaalde uren per week': 'Paid hours per week',
+  'Weken per jaar': 'Weeks per year',
+  'Opslag werkgeverslasten (%)': 'Employer cost markup (%)',
+  'Voeg een aanwezige toe': 'Add an attendee',
+  'Samen': 'Together',
+  'Start presentatie': 'Start presentation',
+  'per uur': 'per hour',
+  'Wordt omgerekend': 'Will be converted',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Enter an hourly, monthly or yearly amount per attendee. It stays on this screen and is never saved.',
+  'Kosten van aanwezigen': 'Cost of attendees',
+  'Uit': 'Off',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — only in the closing summary',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — running total and closing summary',
+  'Uurtarief': 'Hourly rate',
+  'Eén tarief voor de hele groep': 'One rate for the whole group',
+  'Per aanwezige, bij de start invullen': 'Per attendee, entered at the start',
+  'Groepsuurtarief': 'Group hourly rate',
+  'Kosten = verstreken tijd × tarief.': 'Cost = elapsed time × rate.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Entered at the start and never saved.',
+  'Valuta': 'Currency',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'An estimate of the time attendees spend — an indication, not an accounting cost price.',
+  'Diaformaat': 'Slide format',
+  'Scherm (16:9)': 'Screen (16:9)',
+  'Papierformaat': 'Paper size',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Choose a paper size for handouts and paper exports.',
   'Startmappen': 'Start folders',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Where opening and saving starts. Leave this empty to use the first library.',

@@ -1720,6 +1720,45 @@ const _dutchSourceAddSv = <String, String>{
       'Översikten kunde inte öppnas som ett dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Spara ändringarna i dokumentet i översikten eller stäng fliken.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto eller netto spelar ingen roll här — arbetsgivarkostnadspåslaget är separat.',
+  'Aanwezigen en tarieven': 'Närvarande och taxor',
+  'Bedrag': 'Belopp',
+  'Per uur': 'Per timme',
+  'Per maand': 'Per månad',
+  'Per jaar': 'Per år',
+  'Aanname voor de omrekening': 'Antagande för omräkningen',
+  'Betaalde uren per week': 'Betalda timmar per vecka',
+  'Weken per jaar': 'Veckor per år',
+  'Opslag werkgeverslasten (%)': 'Påslag för arbetsgivarkostnader (%)',
+  'Voeg een aanwezige toe': 'Lägg till en närvarande',
+  'Samen': 'Tillsammans',
+  'Start presentatie': 'Starta presentationen',
+  'per uur': 'per timme',
+  'Wordt omgerekend': 'Omräknas',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Fyll i en tim-, månads- eller årsavgift per närvarande. Det stannar på den här skärmen och sparas inte.',
+  'Kosten van aanwezigen': 'Kostnad för närvarande',
+  'Uit': 'Av',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — bara i slutsammanfattningen',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — löpande belopp och slutsammanfattning',
+  'Uurtarief': 'Timtaxa',
+  'Eén tarief voor de hele groep': 'En taxa för hela gruppen',
+  'Per aanwezige, bij de start invullen': 'Per närvarande, fylls i vid start',
+  'Groepsuurtarief': 'Gruppens timtaxa',
+  'Kosten = verstreken tijd × tarief.': 'Kostnad = förfluten tid × taxa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Fylls i vid start och sparas inte.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'En uppskattning av den tid deltagarna lägger — en indikation, inte en redovisad självkostnad.',
+  'Diaformaat': 'Bildformat',
+  'Scherm (16:9)': 'Skärm (16:9)',
+  'Papierformaat': 'Pappersformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Välj ett pappersformat för handouts och export på papper.',
   'Startmappen': 'Startmappar',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Där öppna och spara börjar. Lämna tomt för att använda det första biblioteket.',

@@ -1714,6 +1714,44 @@ const _dutchSourceAddEt = <String, String>{
       'Ülevaade ei saanud dokumentina avada.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Salvestage muudatused ülevaatedokumendis kõigepealt või sulgege see tab.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto või neto ei ole siin oluline — tööandja kulude lisandus on eraldi.',
+  'Aanwezigen en tarieven': 'Osalejad ja hinnad',
+  'Bedrag': 'Summa',
+  'Per uur': 'Tunnis',
+  'Per maand': 'Kuus',
+  'Per jaar': 'Aastas',
+  'Aanname voor de omrekening': 'Arvutuse eeldus',
+  'Betaalde uren per week': 'Tasustatud tunnid nädalas',
+  'Weken per jaar': 'Nädalaid aastas',
+  'Opslag werkgeverslasten (%)': 'Tööandja kulude lisand (%)',
+  'Voeg een aanwezige toe': 'Lisa osaleja',
+  'Samen': 'Kokku',
+  'Start presentatie': 'Alusta esitlust',
+  'per uur': 'tunnis',
+  'Wordt omgerekend': 'Arvutatakse ümber',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Sisesta igale osalejale tunni-, kuu- või aastatasu. See jääb sellele ekraanile ega salvestu.',
+  'Kosten van aanwezigen': 'Osalejate kulu',
+  'Uit': 'Väljas',
+  'Gewoon — alleen in het eindoverzicht': 'Tavaline — ainult lõpukokkuvõttes',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Sõnaselge — jooksev summa ja lõpukokkuvõte',
+  'Uurtarief': 'Tunnitasu',
+  'Eén tarief voor de hele groep': 'Üks hind kogu rühmale',
+  'Per aanwezige, bij de start invullen': 'Osaleja kohta, sisestatakse alguses',
+  'Groepsuurtarief': 'Rühma tunnitasu',
+  'Kosten = verstreken tijd × tarief.': 'Kulu = möödunud aeg × hind.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Sisestatakse alguses ega salvestata.',
+  'Valuta': 'Valuuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Hinnang osalejate kulutatud ajale — suundumus, mitte raamatupidamislik omahind.',
+  'Diaformaat': 'Slaidi formaat',
+  'Scherm (16:9)': 'Ekraan (16:9)',
+  'Papierformaat': 'Paberiformaat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Valige paberiformaat jagamismaterjalide ja paberile ekspordi jaoks.',
   'Startmappen': 'Alguskaustad',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kus avamine ja salvestamine algavad. Tühi kasutab esimest teeki.',

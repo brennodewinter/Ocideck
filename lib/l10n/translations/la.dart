@@ -1734,6 +1734,44 @@ const _dutchSourceAddLa = <String, String>{
       'Praefigium optinendum non potest sicut documentum aperiendum.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Conserva mutationes in documento praeficii, aut clausa tabulam illam.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruttum an netum hic non refert — accrementum sumptuum conductoris separatum est.',
+  'Aanwezigen en tarieven': 'Praesentes et mercedes',
+  'Bedrag': 'Summa',
+  'Per uur': 'Per horam',
+  'Per maand': 'Per mensem',
+  'Per jaar': 'Per annum',
+  'Aanname voor de omrekening': 'Suppositio conversionis',
+  'Betaalde uren per week': 'Horae solutae per hebdomadam',
+  'Weken per jaar': 'Hebdomadae per annum',
+  'Opslag werkgeverslasten (%)': 'Additio sumptuum dativorum (%)',
+  'Voeg een aanwezige toe': 'Praesentem adde',
+  'Samen': 'Simul',
+  'Start presentatie': 'Praesentationem incipe',
+  'per uur': 'per horam',
+  'Wordt omgerekend': 'Convertetur',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Per singulum praesentem mercedem horariam, menstruam vel annuam inscribe. In hoc scaeno manet neque servatur.',
+  'Kosten van aanwezigen': 'Sumptus praesentium',
+  'Uit': 'Exclusum',
+  'Gewoon — alleen in het eindoverzicht': 'Sollemne — tantum in summa finali',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicitum — summa currens et recapitulatio finalis',
+  'Uurtarief': 'Merces horaria',
+  'Eén tarief voor de hele groep': 'Una merces pro universo coetu',
+  'Per aanwezige, bij de start invullen': 'Per praesentem, initio implendum',
+  'Groepsuurtarief': 'Merces horaria coetus',
+  'Kosten = verstreken tijd × tarief.': 'Sumptus = tempus elapsum × merces.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Initio implendum, numquam servandum.',
+  'Valuta': 'Moneta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Aestimatio temporis quod praesentes impendunt — indicium, non sumptus computabilis.',
+  'Diaformaat': 'Forma imaginis',
+  'Scherm (16:9)': 'Scrinium (16:9)',
+  'Papierformaat': 'Forma chartae',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Formam chartae pro manuscriptis et exportationibus in charta elige.',
   'Startmappen': 'Carpetae initiales',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Ubi aperire et servare incipiunt. Vacuum relictum prima bibliotheca utitur.',

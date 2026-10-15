@@ -771,6 +771,44 @@ const _dutchSourceAddFy = {
       'De oerzjoch koe net as in dokument opendal.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Bewar de ferozijinginnen yn it oerzjochsdokument earst, of slút dat tabblad.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto of netto makket hjir net út — de opslach foar wurkjouwerskosten stiet der los by.',
+  'Aanwezigen en tarieven': 'Oanwêzigen en tarieven',
+  'Bedrag': 'Bedrach',
+  'Per uur': 'Per oere',
+  'Per maand': 'Per moanne',
+  'Per jaar': 'Per jier',
+  'Aanname voor de omrekening': 'Oannime foar de omrekkene',
+  'Betaalde uren per week': 'Betelle oeren de wike',
+  'Weken per jaar': 'Wiken it jier',
+  'Opslag werkgeverslasten (%)': 'Opslach wurkjouwerslêsten (%)',
+  'Voeg een aanwezige toe': 'Foech in oanwêzige ta',
+  'Samen': 'Gear',
+  'Start presentatie': 'Start presintaasje',
+  'per uur': 'de oere',
+  'Wordt omgerekend': 'Wurdt omrekkene',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Fol per oanwêzige in oer-, moanne- of jiertarief yn. Dit bliuwt op dit skerm en wurdt nea bewarre.',
+  'Kosten van aanwezigen': 'Kosten fan oanwêzigen',
+  'Uit': 'Út',
+  'Gewoon — alleen in het eindoverzicht': 'Gewoan — allinne yn de einôfsluting',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisyt — rinnend bedrach én einôfsluting',
+  'Uurtarief': 'Oertarief',
+  'Eén tarief voor de hele groep': 'Ien tarief foar de hiele groep',
+  'Per aanwezige, bij de start invullen': 'Per oanwêzige, by de start ynfolje',
+  'Groepsuurtarief': 'Groepsoertarief',
+  'Kosten = verstreken tijd × tarief.': 'Kosten = ferrune tiid × tarief.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wurdt by de start ynfold en net bewarre.',
+  'Valuta': 'Faluta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'In skatting fan de tiid dy\'t oanwêzigen kwyt binne — in yndikaasje, gjin boekhâldkundige kostpriis.',
+  'Diaformaat': 'Diaformaat',
+  'Scherm (16:9)': 'Skerm (16:9)',
+  'Papierformaat': 'Papierformaat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Kies in papierformaat foar hand-outs en eksporten op papier.',
   'Startmappen': 'Begjinmappen',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wêr iepenjen en bewarjen begjint. Leech litte brûkt de earste bibleteek.',

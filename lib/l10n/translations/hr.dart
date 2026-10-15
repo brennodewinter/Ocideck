@@ -1726,6 +1726,45 @@ const _dutchSourceAddHr = <String, String>{
       'Pregled nije mogao biti otvoren kao dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Najprije spremite izmjene u dokumenta pregleda ili zatvorite to natrag.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ili neto ovdje nije važno — uvećanje za troškove poslodavca je zasebno.',
+  'Aanwezigen en tarieven': 'Prisutni i satnice',
+  'Bedrag': 'Iznos',
+  'Per uur': 'Po satu',
+  'Per maand': 'Po mjesecu',
+  'Per jaar': 'Po godini',
+  'Aanname voor de omrekening': 'Pretpostavka za preračun',
+  'Betaalde uren per week': 'Plaćeni sati tjedno',
+  'Weken per jaar': 'Tjedana godišnje',
+  'Opslag werkgeverslasten (%)': 'Uvećanje troškova poslodavca (%)',
+  'Voeg een aanwezige toe': 'Dodaj prisutnog',
+  'Samen': 'Zajedno',
+  'Start presentatie': 'Pokreni prezentaciju',
+  'per uur': 'po satu',
+  'Wordt omgerekend': 'Preračunat će se',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Unesi po prisutnoj osobi satnicu, mjesečnu ili godišnju plaću. Ostaje na ovom zaslonu i nigdje se ne sprema.',
+  'Kosten van aanwezigen': 'Trošak prisutnih',
+  'Uit': 'Isključeno',
+  'Gewoon — alleen in het eindoverzicht': 'Obično — samo u završnom sažetku',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplicitno — tekući iznos i završni sažetak',
+  'Uurtarief': 'Satnica',
+  'Eén tarief voor de hele groep': 'Jedna satnica za cijelu grupu',
+  'Per aanwezige, bij de start invullen':
+      'Po prisutnoj osobi, unosi se na početku',
+  'Groepsuurtarief': 'Grupna satnica',
+  'Kosten = verstreken tijd × tarief.': 'Trošak = proteklo vrijeme × satnica.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Unosi se na početku i ne sprema.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Procjena vremena koje prisutni troše — indikacija, ne računovodstvena cijena.',
+  'Diaformaat': 'Format slajda',
+  'Scherm (16:9)': 'Zaslon (16:9)',
+  'Papierformaat': 'Format papira',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Odaberite format papira za materijale za podjelu i izvoz na papir.',
   'Startmappen': 'Početne mape',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Gdje počinju otvaranje i spremanje. Prazno koristi prvu knjižnicu.',

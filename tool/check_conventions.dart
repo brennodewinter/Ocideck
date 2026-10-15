@@ -207,7 +207,17 @@ const Map<String, int> fileSizeBaseline = {
   // staan al in het part-bestand presenter_beamer_payload.dart.
   // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
   // de drie regels die hem in de beamer-sync meenemen.
-  'lib/widgets/presentation/fullscreen_presenter.dart': 1066,
+  'lib/widgets/presentation/fullscreen_presenter.dart':
+      1135, // +33 (#2436): het sessietarief van het aanwezigenscherm langs
+  // present → show/showDualScreen → _runDualPresenter → widget — dezelfde
+  // onherleidbare plumbing als costConfig, nu voor een sessiewaarde die
+  // bewust niet in de config kan omdat hij nooit bewaard mag worden.
+  // +32 (#2435): costConfig langs present → show/showDualScreen →
+  // widget plus het aanmaken van de kostensessie in initState — dezelfde
+  // onherleidbare plumbing als slideSize, nu voor een tweede deckveld.
+  // +3 (#2433): de slideSize-parameter langs present ->
+  // showDualScreen — onherleidbare plumbing van een nieuw deckveld door een
+  // bestaande signatuurketen.
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
   // invalid geometry, missing anchor). Cohesief met de analyzer-staat.
   'lib/services/slide_quality_analyzer.dart': 1015,
@@ -270,7 +280,9 @@ const Map<String, int> fileSizeBaseline = {
   // Flutter de State van de vorige grafiekdia, inclusief de markering die daar
   // aan stond; de sleutel is het gedrag, er valt niets uit te halen.
   'lib/widgets/slides/slide_preview.dart':
-      1074, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
+      1083, // +9 (#2433): het slideAspect-veld met doc + constructor-doorvoer
+  // en de SlideAspectScope-wrap om de build — de scope is hoe geneste
+  // preview-parts de deckverhouding lezen; er valt niets uit te tillen. // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
   // +1 (#2159): import van RetryingImage voor media_previews_image.
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
@@ -284,6 +296,13 @@ const Map<String, int> fileSizeBaseline = {
   // import van de paginamaat-lokalisatie.
   // Verlaagd van 1034 naar 1033: het bestand meet 1033.
   // +16 (#1931): _pickLogoDark + _resolveLogoDarkPath.
+  // +13 (#2433): het slideSize-veld op PresentationInfo met doc plus de
+  // doorvoer (init, submit, updateInfo) en de keuze in de dialoog — de picker
+  // zelf is een losse widget (slide_size_picker.dart), wat hier rest is
+  // dataplumbing.
+  // +15 (#2435): de kostenmodus op PresentationInfo plus één pickerregel in de
+  // dialoog — de picker zelf is een losse widget (presentation_cost_picker.dart).
+  'lib/widgets/dialogs/presentation_info_dialog.dart': 1028,
   'lib/widgets/dialogs/settings_dialog.dart': 1046,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
@@ -442,7 +461,9 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      2875, // +26 (#1951): fileMtime + fileChangedSince.
+      2882, // +7 (#2433): de slideSize-parameter langs _buildThemeCss en de
+  // package-/project-thema-bouwers. De @size-math en pixelhoogte zelf staan
+  // in het formaatmodel (slide_format.dart); wat rest is doorvoer. // +26 (#1951): fileMtime + fileChangedSince.
   // vóór de .md schrijven (commit-punt) — markdown + recordWrittenBytes
   // gaan vooraf, zodat het zegel de juiste hash draagt.
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
@@ -508,7 +529,12 @@ const Map<String, int> classSizeBaseline = {
   // +29 (#1824): callout front-matter block schrijven + callout-anchor koppeling
   // in parse (ocideck_callouts: block inlesen en per-slide callouts invullen).
   'lib/services/markdown_service.dart#MarkdownService':
-      2428, // +5 (#1999): eLearning-slidetypes in de serialize-switch. Verlaagd
+      2452, // +13 (#2435): vier ocideck_cost_*-sleutels op _FrontMatter, vier
+  // case-takken en één assembly-regel — de vertaling naar
+  // PresentationCostConfig staat in presentation_cost.dart.
+  // +10 (#2433): de ruwe papersize/geometry-velden op _FrontMatter
+  // en de twee case-takken. De eigenlijke resolutie staat in
+  // document_page_setup.dart (slideSizeFromKeys); wat rest is veld + case. // +5 (#1999): eLearning-slidetypes in de serialize-switch. Verlaagd
   // van 2460: `_parsedCustomMarkdown` is naar het hoogste niveau getild — het
   // leest niets van de service, dus het hoorde nooit op de klasse. Meet 2428.
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
@@ -604,7 +630,10 @@ const Map<String, int> classSizeBaseline = {
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
   // invalid geometry, missing anchor) met tekst-ref-telling en entry-vergelijking.
   // De klasse meet 1097.
-  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1083,
+  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer':
+      1098, // +15 (#2433): de slideAspect-parameter door de metriek- en
+  // memo-functies — de kwaliteitsmeting moet op de deckverhouding rekenen; de
+  // parameter deelt de caches per formaat. Pure plumbing, geen gedrag.
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
   // naar losse widgets/helpers getild (chart_histogram_limits,
   // chart_type_toolbar, table_clipboard, DoeDesignDialog). Plafond verlaagd

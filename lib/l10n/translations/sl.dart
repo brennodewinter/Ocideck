@@ -1722,6 +1722,45 @@ const _dutchSourceAddSl = <String, String>{
       'Pregled ni bilo mogoče odpreti kot dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Najprej shranite spremembe v dokumentu pregleda ali zaprite to zaveto.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ali neto tukaj ni pomembno — pribitek za delodajalčeve stroške je ločen.',
+  'Aanwezigen en tarieven': 'Udeleženci in postavke',
+  'Bedrag': 'Znesek',
+  'Per uur': 'Na uro',
+  'Per maand': 'Na mesec',
+  'Per jaar': 'Na leto',
+  'Aanname voor de omrekening': 'Predpostavka za preračun',
+  'Betaalde uren per week': 'Plačane ure na teden',
+  'Weken per jaar': 'Tednov na leto',
+  'Opslag werkgeverslasten (%)': 'Dajatev stroškov delodajalca (%)',
+  'Voeg een aanwezige toe': 'Dodaj udeleženca',
+  'Samen': 'Skupaj',
+  'Start presentatie': 'Začni predstavitev',
+  'per uur': 'na uro',
+  'Wordt omgerekend': 'Bo preračunano',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Vnesi za vsakega udeleženca urno, mesečno ali letno postavko. Ostane na tem zaslonu in se nikamor ne shrani.',
+  'Kosten van aanwezigen': 'Strošek udeležencev',
+  'Uit': 'Izklopljeno',
+  'Gewoon — alleen in het eindoverzicht':
+      'Običajno — samo v zaključnem povzetku',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Izrecno — tekoči znesek in zaključni povzetek',
+  'Uurtarief': 'Urna postavka',
+  'Eén tarief voor de hele groep': 'Ena postavka za celotno skupino',
+  'Per aanwezige, bij de start invullen': 'Na udeleženca, vnese se ob začetku',
+  'Groepsuurtarief': 'Skupinska urna postavka',
+  'Kosten = verstreken tijd × tarief.': 'Strošek = pretečen čas × postavka.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Vnese se ob začetku in se ne shrani.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Ocena časa, ki ga udeleženci porabijo — pokazatelj, ne računovodska lastna cena.',
+  'Diaformaat': 'Format diapozitiva',
+  'Scherm (16:9)': 'Zaslon (16:9)',
+  'Papierformaat': 'Format papirja',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Izberite format papirja za razdajalni material in izvoz na papir.',
   'Startmappen': 'Začetne mape',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kje se začneta odpiranje in shranjevanje. Prazno uporabi prvo knjižnico.',

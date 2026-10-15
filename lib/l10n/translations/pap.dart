@@ -764,6 +764,46 @@ const _dutchSourceAddPap = {
       'Lo panoramá no poder a ser abre komo dokumento.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Guarda los eskambios den dokumento panoramá primero o ciérre esa pestaña.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto of netto no ta importantsia aki — e markap di kostonan di empleador ta apart.',
+  'Aanwezigen en tarieven': 'Presentenan i tarifanan',
+  'Bedrag': 'Suma',
+  'Per uur': 'Pa ora',
+  'Per maand': 'Pa lun',
+  'Per jaar': 'Pa aña',
+  'Aanname voor de omrekening': 'Suposishon pa e konvershon',
+  'Betaalde uren per week': 'Ora paga pa siman',
+  'Weken per jaar': 'Siman pa aña',
+  'Opslag werkgeverslasten (%)': 'Surtaks di kostonan di dunado (%)',
+  'Voeg een aanwezige toe': 'Añadi un presente',
+  'Samen': 'Hunto',
+  'Start presentatie': 'Kuminsá e presentashon',
+  'per uur': 'pa ora',
+  'Wordt omgerekend': 'Ta wordu konvertí',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Yena pa persona presente un tarifa pa ora, luna of aña. E keda riba e pantaya aki i no ta wordu warda.',
+  'Kosten van aanwezigen': 'Kosto di e presentenan',
+  'Uit': 'Pafora',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — solamente den e resumen final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explísito — suma korentí i resumen final',
+  'Uurtarief': 'Tarifa pa ora',
+  'Eén tarief voor de hele groep': 'Un tarifa pa henter e grupo',
+  'Per aanwezige, bij de start invullen':
+      'Pa persona presente, yena na e start',
+  'Groepsuurtarief': 'Tarifa pa ora di e grupo',
+  'Kosten = verstreken tijd × tarief.': 'Kosto = tempu pasa × tarifa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Ta wordu yena na e start i no ta wordu warda.',
+  'Valuta': 'Moneda',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Un estimashon di e tempu ku e presentenan ta pèrdè — un indikashon, no un kosto bukhoudkundig.',
+  'Diaformaat': 'Formato di slide',
+  'Scherm (16:9)': 'Pantaya (16:9)',
+  'Papierformaat': 'Formato di papel',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Skohe un formato di papel pa hand-outs i eksportashon na papel.',
   'Startmappen': 'Mapa di kuminsamentu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unda habri i warda ta kuminsá. Laga bashí ta usa e promé biblioteka.',

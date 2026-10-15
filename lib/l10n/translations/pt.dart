@@ -1751,6 +1751,45 @@ const _dutchSourceAddPt = <String, String>{
       'A visualização não pôde ser aberta como documento.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Salve as alterações no documento da visualização primeiro ou feche essa aba.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ou líquido não importa aqui — a margem dos custos do empregador é separada.',
+  'Aanwezigen en tarieven': 'Participantes e taxas',
+  'Bedrag': 'Montante',
+  'Per uur': 'Por hora',
+  'Per maand': 'Por mês',
+  'Per jaar': 'Por ano',
+  'Aanname voor de omrekening': 'Pressuposto para a conversão',
+  'Betaalde uren per week': 'Horas pagas por semana',
+  'Weken per jaar': 'Semanas por ano',
+  'Opslag werkgeverslasten (%)': 'Majoração de custos do empregador (%)',
+  'Voeg een aanwezige toe': 'Adicionar participante',
+  'Samen': 'No total',
+  'Start presentatie': 'Iniciar a apresentação',
+  'per uur': 'por hora',
+  'Wordt omgerekend': 'Será convertido',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Introduz uma taxa por hora, mês ou ano por participante. Fica neste ecrã e nunca é guardada.',
+  'Kosten van aanwezigen': 'Custo dos participantes',
+  'Uit': 'Desativado',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — apenas no resumo final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explícito — valor corrente e resumo final',
+  'Uurtarief': 'Taxa horária',
+  'Eén tarief voor de hele groep': 'Uma taxa para todo o grupo',
+  'Per aanwezige, bij de start invullen':
+      'Por participante, a preencher no início',
+  'Groepsuurtarief': 'Taxa horária do grupo',
+  'Kosten = verstreken tijd × tarief.': 'Custo = tempo decorrido × taxa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Preenchido no início e nunca guardado.',
+  'Valuta': 'Moeda',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Uma estimativa do tempo que os participantes gastam — uma indicação, não um preço de custo contabilístico.',
+  'Diaformaat': 'Formato do diapositivo',
+  'Scherm (16:9)': 'Ecrã (16:9)',
+  'Papierformaat': 'Formato de papel',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Escolha um formato de papel para folhetos e exportações em papel.',
   'Startmappen': 'Pastas iniciais',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Onde abrir e guardar começam. Vazio usa a primeira biblioteca.',

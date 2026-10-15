@@ -773,6 +773,46 @@ const _dutchSourceAddFr = {
       'Le résumé n\'a pas pu être ouvert en tant que document.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Sauvegardez d\'abord les modifications dans le document de résumé ou fermez cet onglet.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brut ou net ne change rien ici — la majoration des coûts employeur est séparée.',
+  'Aanwezigen en tarieven': 'Participants et taux',
+  'Bedrag': 'Montant',
+  'Per uur': 'Par heure',
+  'Per maand': 'Par mois',
+  'Per jaar': 'Par an',
+  'Aanname voor de omrekening': 'Hypothèse de conversion',
+  'Betaalde uren per week': 'Heures payées par semaine',
+  'Weken per jaar': 'Semaines par an',
+  'Opslag werkgeverslasten (%)': 'Majoration coûts employeur (%)',
+  'Voeg een aanwezige toe': 'Ajouter un participant',
+  'Samen': 'Ensemble',
+  'Start presentatie': 'Démarrer la présentation',
+  'per uur': 'par heure',
+  'Wordt omgerekend': 'Sera converti',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Saisis pour chaque participant un taux horaire, mensuel ou annuel. Cela reste sur cet écran et n\'est jamais enregistré.',
+  'Kosten van aanwezigen': 'Coût des participants',
+  'Uit': 'Off',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — seulement dans le bilan final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicite — montant courant et bilan final',
+  'Uurtarief': 'Taux horaire',
+  'Eén tarief voor de hele groep': 'Un seul taux pour tout le groupe',
+  'Per aanwezige, bij de start invullen':
+      'Par participant, à saisir au démarrage',
+  'Groepsuurtarief': 'Taux horaire du groupe',
+  'Kosten = verstreken tijd × tarief.': 'Coût = temps écoulé × taux.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Saisi au démarrage, jamais enregistré.',
+  'Valuta': 'Devise',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Une estimation du temps passé par les participants — une indication, pas un prix de revient comptable.',
+  'Diaformaat': 'Format des diapositives',
+  'Scherm (16:9)': 'Écran (16:9)',
+  'Papierformaat': 'Format papier',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Choisissez un format papier pour les documents à distribuer et les exports papier.',
   'Startmappen': 'Dossiers de départ',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Là où l\'ouverture et l\'enregistrement commencent. Laisser vide utilise la première bibliothèque.',

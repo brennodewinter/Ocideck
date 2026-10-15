@@ -1727,6 +1727,45 @@ const _dutchSourceAddLt = <String, String>{
       'Perteklinis vaizdavimas negali būti atidarytas kaip dokumentas.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Pirmiausia išsaugokite pokyčius vaizdų dokumente arba uždarykite tą kortelę.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ar neto čia nesvarbu — darbdavio išlaidų antkainis yra atskiras.',
+  'Aanwezigen en tarieven': 'Dalyviai ir įkainiai',
+  'Bedrag': 'Suma',
+  'Per uur': 'Per valandą',
+  'Per maand': 'Per mėnesį',
+  'Per jaar': 'Per metus',
+  'Aanname voor de omrekening': 'Perskaičiavimo prielaida',
+  'Betaalde uren per week': 'Apmokamos valandos per savaitę',
+  'Weken per jaar': 'Savaičių per metus',
+  'Opslag werkgeverslasten (%)': 'Darbdavio išlaidų antkainis (%)',
+  'Voeg een aanwezige toe': 'Pridėti dalyvį',
+  'Samen': 'Iš viso',
+  'Start presentatie': 'Pradėti pateiktį',
+  'per uur': 'per valandą',
+  'Wordt omgerekend': 'Bus perskaičiuota',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Įvesk kiekvienam dalyviui valandinį, mėnesinį ar metinį įkainį. Tai lieka šiame ekrane ir niekur nesaugoma.',
+  'Kosten van aanwezigen': 'Dalyvių kaina',
+  'Uit': 'Išjungta',
+  'Gewoon — alleen in het eindoverzicht':
+      'Įprasta — tik baigiamojoje apžvalgoje',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Aišku — einamoji suma ir baigiamoji apžvalga',
+  'Uurtarief': 'Valandinis įkainis',
+  'Eén tarief voor de hele groep': 'Vienas įkainis visai grupei',
+  'Per aanwezige, bij de start invullen': 'Už dalyvį, suvedama pradžioje',
+  'Groepsuurtarief': 'Grupės valandinis įkainis',
+  'Kosten = verstreken tijd × tarief.': 'Kaina = praėjęs laikas × įkainis.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Suvedama pradžioje ir neišsaugoma.',
+  'Valuta': 'Valiuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Dalyvių sugaišto laiko įvertis — orientyras, o ne buhalterinė savikaina.',
+  'Diaformaat': 'Skaidrės formatas',
+  'Scherm (16:9)': 'Ekranas (16:9)',
+  'Papierformaat': 'Popieriaus formatas',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Pasirinkite popieriaus formatą dalijamajai medžiagai ir eksportui popieriuje.',
   'Startmappen': 'Pradžios aplankai',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur prasideda atidarymas ir įrašymas. Tuščia naudoja pirmąją biblioteką.',

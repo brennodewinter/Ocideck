@@ -2628,6 +2628,45 @@ const _dutchSourceAddTr = <String, String>{
       'Bu görünüm, bir belge olarak açılamadı.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Lütfen görünüm belgesindeki değişiklikleri önce kaydedin veya bu sekme kapalı olsun.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brüt veya net burada fark etmez — işveren maliyeti payı ayrıdır.',
+  'Aanwezigen en tarieven': 'Katılımcılar ve ücretler',
+  'Bedrag': 'Tutar',
+  'Per uur': 'Saat başına',
+  'Per maand': 'Ay başına',
+  'Per jaar': 'Yıl başına',
+  'Aanname voor de omrekening': 'Çevrim varsayımı',
+  'Betaalde uren per week': 'Haftalık ücretli saat',
+  'Weken per jaar': 'Yıllık hafta',
+  'Opslag werkgeverslasten (%)': 'İşveren maliyet farkı (%)',
+  'Voeg een aanwezige toe': 'Katılımcı ekle',
+  'Samen': 'Toplam',
+  'Start presentatie': 'Sunumu başlat',
+  'per uur': 'saat başına',
+  'Wordt omgerekend': 'Çevrilecek',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Her katılımcı için saatlik, aylık veya yıllık ücret gir. Bu ekranda kalır ve hiçbir yere kaydedilmez.',
+  'Kosten van aanwezigen': 'Katılımcı maliyeti',
+  'Uit': 'Kapalı',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — yalnızca kapanış özetinde',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Açık — akan tutar ve kapanış özeti',
+  'Uurtarief': 'Saatlik ücret',
+  'Eén tarief voor de hele groep': 'Tüm grup için tek ücret',
+  'Per aanwezige, bij de start invullen':
+      'Katılımcı başına, başlangıçta girilir',
+  'Groepsuurtarief': 'Grup saat ücreti',
+  'Kosten = verstreken tijd × tarief.': 'Maliyet = geçen süre × ücret.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Başlangıçta girilir ve kaydedilmez.',
+  'Valuta': 'Para birimi',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Katılımcıların harcadığı zamanın tahmini — bir gösterge, muhasebe maliyeti değil.',
+  'Diaformaat': 'Slayt biçimi',
+  'Scherm (16:9)': 'Ekran (16:9)',
+  'Papierformaat': 'Kağıt boyutu',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Bildiriler ve kağıt çıktıları için bir kağıt boyutu seçin.',
   'Startmappen': 'Başlangıç klasörleri',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Açma ve kaydetmenin başladığı yer. Boş bırakmak ilk kitaplığı kullanır.',

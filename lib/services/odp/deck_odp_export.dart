@@ -21,13 +21,14 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 
 import '../../models/deck.dart' show TlpLevelX;
+import '../../models/slide_format.dart';
 import '../export_metadata.dart';
 import '../../utils/xml_escape.dart';
 
-/// Slide-breedte en -hoogte in cm (16:9, gelijk aan LibreOffice Impress
-/// standaard).
+/// Slide-breedte in cm (gelijk aan LibreOffice Impress standaard); de hoogte
+/// volgt uit de diaverhouding van het deck — 14.29 bij 16:9 (#2433).
 const odpSlideWidthCm = 25.4;
-const odpSlideHeightCm = 14.29;
+double odpSlideHeightCm(double slideAspect) => odpSlideWidthCm / slideAspect;
 
 /// Bouwt een ODP (OpenDocument Presentation) uit gerenderde slide-afbeeldingen.
 ///
@@ -43,6 +44,7 @@ Uint8List buildDeckExportOdp({
   required ExportDocumentMetadata metadata,
   required String fallbackTitle,
   List<String>? altTexts,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final archive = Archive();
   void addText(String name, String content) {
@@ -61,7 +63,7 @@ Uint8List buildDeckExportOdp({
   archive.add(mimetypeFile);
 
   addText('META-INF/manifest.xml', _odpManifest(slideCount));
-  addText('content.xml', _odpContentXml(slideCount, altTexts));
+  addText('content.xml', _odpContentXml(slideCount, altTexts, slideAspect));
   addText('meta.xml', _odpMetaXml(metadata, fallbackTitle: fallbackTitle));
 
   for (var i = 0; i < slideCount; i++) {
@@ -98,7 +100,11 @@ String _odpManifest(int slideCount) {
   return buf.toString();
 }
 
-String _odpContentXml(int slideCount, List<String>? altTexts) {
+String _odpContentXml(
+  int slideCount,
+  List<String>? altTexts,
+  double slideAspect,
+) {
   final buf = StringBuffer()
     ..writeln('<?xml version="1.0" encoding="UTF-8"?>')
     ..writeln(
@@ -137,7 +143,8 @@ String _odpContentXml(int slideCount, List<String>? altTexts) {
     buf.writeln(
       '<draw:page draw:name="page$i" draw:style-name="dp1">'
       '<draw:frame draw:style-name="gr1" svg:x="0cm" svg:y="0cm" '
-      'svg:width="${odpSlideWidthCm}cm" svg:height="${odpSlideHeightCm}cm">'
+      'svg:width="${odpSlideWidthCm}cm" '
+      'svg:height="${odpSlideHeightCm(slideAspect)}cm">'
       '<draw:image xlink:href="Pictures/image$i.png" xlink:type="simple"/>'
       '$desc'
       '</draw:frame>'

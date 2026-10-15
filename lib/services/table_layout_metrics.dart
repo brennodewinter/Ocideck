@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import '../models/slide_format.dart';
 import 'text_measurement.dart';
 
 /// Celmarges van de tabelpreview, hier gedeeld zodat meten en tekenen over
@@ -371,9 +372,14 @@ double tableFitCellSize({
 /// representatieve dia in plaats van over dé dia. De schatting is aan de ruime
 /// kant: liever een waarschuwing te weinig dan een die te vaak afgaat, want die
 /// laatste waarschuwt nergens meer voor.
-double tableReferenceAvailableHeight(double w) {
+double tableReferenceAvailableHeight(
+  double w, {
+  double slideAspect = kScreenSlideAspect,
+}) {
   final pad = w * 0.06;
-  return w * 9 / 16 - pad * 2 - (w * 0.038 * kTableCellLineHeight + pad * 0.35);
+  return w / slideAspect -
+      pad * 2 -
+      (w * 0.038 * kTableCellLineHeight + pad * 0.35);
 }
 
 /// De tabelbreedte op diabreedte [w], met de standaardranden eraf.

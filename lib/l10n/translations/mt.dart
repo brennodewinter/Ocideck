@@ -1741,6 +1741,45 @@ const _dutchSourceAddMt = <String, String>{
       'L-istidenza ma setax tinfeta bħala dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Ħutta l-ebda modifika fil-fildar u agħlaq il-tab.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Gross jew net ma jimpurtax hawn — il-markup tal-ispejjeż tal-mgħaddi huwa separat.',
+  'Aanwezigen en tarieven': 'Preżenti u rati',
+  'Bedrag': 'Ammont',
+  'Per uur': 'Fis-siegħa',
+  'Per maand': 'Fix-xahar',
+  'Per jaar': 'Fis-sena',
+  'Aanname voor de omrekening': 'Suppożizzjoni għall-konverżjoni',
+  'Betaalde uren per week': 'Sigħat imħallsa fil-ġimgħa',
+  'Weken per jaar': 'Ġimgħat fis-sena',
+  'Opslag werkgeverslasten (%)': 'Żieda fl-ispejjeż tal-impjegatur (%)',
+  'Voeg een aanwezige toe': 'Żid preżente',
+  'Samen': 'Flimkien',
+  'Start presentatie': 'Ibda l-preżentazzjoni',
+  'per uur': 'fis-siegħa',
+  'Wordt omgerekend': 'Jiġi kkontvertit',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Daħħal għal kull preżente rata fis-siegħa, fix-xahar jew fis-sena. Jibqa\' f\'dan l-iskrin u ma jinħażen imkien.',
+  'Kosten van aanwezigen': 'Spiża tal-preżenti',
+  'Uit': 'Mitfi',
+  'Gewoon — alleen in het eindoverzicht': 'Normali — biss fir-riepilog finali',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Espliċitu — ammont li jiġi u riepilog finali',
+  'Uurtarief': 'Rata fis-siegħa',
+  'Eén tarief voor de hele groep': 'Rata waħda għall-grupp kollu',
+  'Per aanwezige, bij de start invullen':
+      'Għal kull preżenti, jimtela fil-bidu',
+  'Groepsuurtarief': 'Rata fis-siegħa tal-grupp',
+  'Kosten = verstreken tijd × tarief.': 'Spiża = ħin li għadda × rata.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Jimtela fil-bidu u ma jinħażenx.',
+  'Valuta': 'Munita',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Stima tal-ħin li jintefqu l-preżenti — indikazzjoni, mhux prezz tal-ispiża ta\' kontabilità.',
+  'Diaformaat': 'Format tas-slide',
+  'Scherm (16:9)': 'Skrin (16:9)',
+  'Papierformaat': 'Format tal-karta',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Agħżel format tal-karta għal fuljetti u esportazzjonijiet fuq karta.',
   'Startmappen': 'Folders tal-bidu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Fejn jibdew il-ftuħ u s-salvataġġ. Vojet juża l-ewwel librerija.',

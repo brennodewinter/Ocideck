@@ -226,6 +226,7 @@ String buildBeamerMarkdown({
   String organization = '',
   String reportLanguage = '',
   ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
+  PageSizeSpec? slideSize,
 }) => MarkdownService().generateDeck(
   Deck(
     title: 'Presentatie',
@@ -236,6 +237,7 @@ String buildBeamerMarkdown({
     organization: organization,
     language: reportLanguage,
     improvementY01Metric: improvementY01,
+    slideSize: slideSize,
   ),
   inlineChartData: true,
 );
@@ -339,6 +341,7 @@ String _dualWindowArguments({
   required ThemeProfile themeProfile,
   required MarpStyle marpStyle,
   required CockpitColorScheme cockpitColorScheme,
+  PageSizeSpec? slideSize,
 }) => _audienceWindowArguments(
   markdown: buildBeamerMarkdown(
     slides: slides,
@@ -348,6 +351,7 @@ String _dualWindowArguments({
     organization: organization,
     reportLanguage: reportLanguage,
     improvementY01: improvementY01,
+    slideSize: slideSize,
   ),
   projectPath: projectPath,
   initialIndex: initialIndex,
@@ -388,6 +392,9 @@ Future<String?> _runDualPresenter(
   required Map<String, String> initialUserNotes,
   required void Function(Map<String, String>)? onUserNotesChanged,
   required ImprovementY01Metric improvementY01,
+  PageSizeSpec? slideSize,
+  PresentationCostConfig costConfig = PresentationCostConfig.off,
+  int attendeeRateMinor = 0,
 }) async {
   final hadWakeLock = await _wakeLockEnabled();
   await _enableWakeLock();
@@ -431,6 +438,9 @@ Future<String?> _runDualPresenter(
             initialUserNotes: initialUserNotes,
             onUserNotesChanged: onUserNotesChanged,
             improvementY01: improvementY01,
+            slideAspect: slideAspectRatio(slideSize),
+            costConfig: costConfig,
+            attendeeRateMinor: attendeeRateMinor,
           ),
         ),
         transitionsBuilder: (context, animation, secondary, child) =>

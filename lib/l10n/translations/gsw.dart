@@ -1725,6 +1725,44 @@ const _dutchSourceAddGsw = <String, String>{
       'Es isch nit gmacht worde, dass d\'Übersicht as Dokument öppnet worde isch.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Guets d\'Ändurig öpple in d\'Übersichts-Dokument, oder schliisse d\'Tablade.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto oder netto isch do egal — de Arbeitgäberchöschte-Ufschlag stoht separat.',
+  'Aanwezigen en tarieven': 'Teilnöhmer ond Sätz',
+  'Bedrag': 'Betrag',
+  'Per uur': 'Pro Stund',
+  'Per maand': 'Pro Monet',
+  'Per jaar': 'Pro Jahr',
+  'Aanname voor de omrekening': 'Aanaam für d\'Umrechnig',
+  'Betaalde uren per week': 'Bezahlti Stunde pro Wuche',
+  'Weken per jaar': 'Wuche pro Jahr',
+  'Opslag werkgeverslasten (%)': 'Ufschlag für Arbetgeberlaste (%)',
+  'Voeg een aanwezige toe': 'Teilnöhmer dezue tue',
+  'Samen': 'Zsäme',
+  'Start presentatie': 'Präsentation starte',
+  'per uur': 'pro Stund',
+  'Wordt omgerekend': 'Wird umgrechnet',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Gib pro Teilnöhmer en Stunde-, Monet- oder Jahressatz ii. Das blibt uf dem Bildschirm ond wird nirgend gspeicheret.',
+  'Kosten van aanwezigen': 'Chöste vo de Teilnöhmer',
+  'Uit': 'Us',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — nur ide Abschlussübersicht',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explizit — laufende Betrag ond Abschlussübersicht',
+  'Uurtarief': 'Stundesatz',
+  'Eén tarief voor de hele groep': 'Ei Satz für di ganz Grupp',
+  'Per aanwezige, bij de start invullen': 'Pro Teilnöhmer, bim Start uusfülle',
+  'Groepsuurtarief': 'Gruppestundesatz',
+  'Kosten = verstreken tijd × tarief.': 'Chöste = verstricheni Ziit × Satz.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wird bim Start uusgfüllt ond nöd gspeicheret.',
+  'Valuta': 'Währig',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'E Schätzig vo de Ziit, wo Teilnöhmer verlöre — e Indikation, kän buchhalterische Selbstchöstepriis.',
+  'Diaformaat': 'Folieformat',
+  'Scherm (16:9)': 'Bildschirm (16:9)',
+  'Papierformaat': 'Papierformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Wähl es Papierformat für Handouts und Papier-Export.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffne und Speichere aafangt. Läer laa nimmt di erst Bibliothek.',

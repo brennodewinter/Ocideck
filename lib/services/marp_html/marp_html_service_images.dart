@@ -79,8 +79,9 @@ const double _kSlidePxWidth = 1280;
 Future<String> _presentationLogoCss(
   ThemeProfile theme,
   HtmlImageResolver? embedImage,
-  Future<Uint8List> Function(String asset) loadBytes,
-) async {
+  Future<Uint8List> Function(String asset) loadBytes, {
+  double slideAspect = kScreenSlideAspect,
+}) async {
   final path = effectiveSlideLogoPath(theme);
   if (path == null || path.trim().isEmpty) return '';
   final uri = await _themeLogoDataUri(path, embedImage, loadBytes);
@@ -89,7 +90,9 @@ Future<String> _presentationLogoCss(
   final stripPath = theme.brandStripPath?.trim();
   if (stripPath != null && stripPath.isNotEmpty && theme.brandStripHeight > 0) {
     final stripUri = await _themeLogoDataUri(stripPath, embedImage, loadBytes);
-    if (stripUri != null) return _presentationBrandStripCss(theme, stripUri);
+    if (stripUri != null) {
+      return _presentationBrandStripCss(theme, stripUri, slideAspect);
+    }
   }
 
   final size = theme.logoSize;
@@ -120,10 +123,16 @@ Future<String> _presentationLogoCss(
       '.slide.logo-safe.logo-occupy{$safePad:${occupy}px}';
 }
 
-String _presentationBrandStripCss(ThemeProfile theme, String uri) {
+String _presentationBrandStripCss(
+  ThemeProfile theme,
+  String uri,
+  double slideAspect,
+) {
   final atTop = theme.logoPosition.startsWith('top');
   final edge = atTop ? 'top' : 'bottom';
-  final height = (720 * theme.brandStripHeight).round();
+  // De strook is een fractie van de diahoogte — die volgt uit de verhouding
+  // van het gekozen diaformaat (#2433), de schermstandaard is 1280×720.
+  final height = (1280 / slideAspect * theme.brandStripHeight).round();
   final safePad = atTop ? 'padding-top' : 'padding-bottom';
   final titleSubtitle = theme.titleSubtitleInBrandStrip
       ? '.slide.title.logo-safe h2{position:absolute;left:58px;$edge:'

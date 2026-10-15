@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/marp_style.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../services/slide_dedup_service.dart';
 import '../../theme/app_theme.dart';
 import '../slides/slide_preview.dart';
@@ -18,12 +19,16 @@ class SlideDiffRef {
   final ThemeProfile themeProfile;
   final MarpStyle deckMarpStyle;
 
+  /// De diaverhouding van het deck waar deze kant uit komt (#2433).
+  final double slideAspect;
+
   const SlideDiffRef({
     required this.label,
     required this.slide,
     required this.projectPath,
     required this.themeProfile,
     this.deckMarpStyle = const MarpStyle(),
+    this.slideAspect = kScreenSlideAspect,
   });
 }
 
@@ -156,8 +161,9 @@ class _SlideDiffDialogState extends State<SlideDiffDialog> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: AspectRatio(
-              aspectRatio: 16 / 9,
+              aspectRatio: ref.slideAspect,
               child: SlidePreviewWidget(
+                slideAspect: ref.slideAspect,
                 slide: ref.slide,
                 projectPath: ref.projectPath,
                 themeProfile: ref.themeProfile,

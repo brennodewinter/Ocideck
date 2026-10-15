@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:path/path.dart' as p;
 import '../../models/library_folder.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../services/file_service.dart';
 import '../../services/presentation_search/presentation_source.dart';
 import '../../services/slide_dedup_service.dart';
@@ -295,6 +296,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
       projectPath: h.source.deck.projectPath,
       themeProfile: h.source.deck.themeProfile,
       deckMarpStyle: h.source.deck.marpStyle,
+      slideAspect: slideAspectRatio(h.source.deck.slideSize),
     );
 
     SlideDiffDialog.show(
@@ -580,8 +582,9 @@ class _SlideHitCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: AspectRatio(
-                      aspectRatio: 16 / 9,
+                      aspectRatio: slideAspectRatio(deck.slideSize),
                       child: SlidePreviewWidget(
+                        slideAspect: slideAspectRatio(deck.slideSize),
                         slide: hit.slide,
                         projectPath: deck.projectPath,
                         themeProfile: deck.themeProfile,

@@ -57,6 +57,8 @@ import '../../models/discoveries_spec.dart';
 import '../../models/scorecard_spec.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
+import 'slide_aspect_scope.dart';
 import '../../services/menu_blocks.dart';
 import '../../models/timeline.dart';
 import '../../models/video_source.dart';
@@ -311,6 +313,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// de URL i.p.v. naar buiten te bellen.
   final bool allowRemoteMedia;
 
+  /// De diaverhouding (breedte/hoogte) van het deck, via
+  /// [slideAspectRatio]. De schermstandaard 16:9 is de default — alleen
+  /// aanroepers die het deck kennen zetten dit.
+  final double slideAspect;
+
   /// Vergroot grafieklabels voor weergave op afstand in presentatiemodus.
   final bool presentationMode;
 
@@ -470,6 +477,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.enableMedia = false,
     this.autoplayMedia = false,
     this.allowRemoteMedia = false,
+    this.slideAspect = kScreenSlideAspect,
     this.presentationMode = false,
     this.scrollableMermaid = false,
     this.scrollableTimeline = true,
@@ -517,52 +525,55 @@ class SlidePreviewWidget extends StatelessWidget {
     // falls back to Flutter's broken default — red letters with a yellow
     // underline — which is exactly what showed up in exports. Wrapping here
     // guarantees identical results in the preview and the export.
-    // The slide is a fixed 16:9 design surface whose sizes all derive from
+    // The slide is a fixed-aspect design surface whose sizes all derive from
     // its width; interface text scaling must not reflow it (the auto-fit
     // measuring assumes unscaled text), so the canvas opts out.
-    return MermaidRenderScope(
-      scrollable: scrollableMermaid,
-      viewController: mermaidViewController,
-      interactive: mermaidInteractive,
-      // Expliciete basis (param) gaat vóór op de ambient waarde (#2282).
-      child: DeckAssetScope(
-        deckUrl: remoteAssetBase ?? DeckAssetScope.maybeOf(context),
-        child: MediaQuery.withNoTextScaling(
-          child: _TableEditHost(
-            controller: presentationMode && slide.type == SlideType.table
-                ? tableEditController
-                : null,
-            child: _ChecklistInteractionHost(
-              // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
-              // schrijft de hele (zwartgelakte) slide terug. Zie
-              // [Slide.contentRedacted].
-              enabled:
-                  presentationMode &&
-                  onChecklistItemToggle != null &&
-                  !slide.contentRedacted,
-              onToggle: onChecklistItemToggle,
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                    color: AppTheme.parseHexColor(themeProfile.textColor),
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.normal,
-                    fontStyle: FontStyle.normal,
-                  ),
-                  child: SlideLinkScope(
-                    onTapLink: onLinkTap,
-                    hasBottomTlp: hasBottomRightTlp,
-                    allowRemoteMedia: allowRemoteMedia,
-                    mediaRedacted: slide.mediaRedacted,
-                    decodeMaxEdge: decodeMaxEdge,
-                    marpStyle: marpStyle,
-                    slideText: AppTheme.parseHexColor(themeProfile.textColor),
-                    slideBackground: AppTheme.parseHexColor(
-                      themeProfile.slideBackgroundColor,
+    return SlideAspectScope(
+      aspect: slideAspect,
+      child: MermaidRenderScope(
+        scrollable: scrollableMermaid,
+        viewController: mermaidViewController,
+        interactive: mermaidInteractive,
+        // Expliciete basis (param) gaat vóór op de ambient waarde (#2282).
+        child: DeckAssetScope(
+          deckUrl: remoteAssetBase ?? DeckAssetScope.maybeOf(context),
+          child: MediaQuery.withNoTextScaling(
+            child: _TableEditHost(
+              controller: presentationMode && slide.type == SlideType.table
+                  ? tableEditController
+                  : null,
+              child: _ChecklistInteractionHost(
+                // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
+                // schrijft de hele (zwartgelakte) slide terug. Zie
+                // [Slide.contentRedacted].
+                enabled:
+                    presentationMode &&
+                    onChecklistItemToggle != null &&
+                    !slide.contentRedacted,
+                onToggle: onChecklistItemToggle,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: DefaultTextStyle(
+                    style: TextStyle(
+                      color: AppTheme.parseHexColor(themeProfile.textColor),
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.normal,
+                      fontStyle: FontStyle.normal,
                     ),
-                    onEnableOnlineMedia: onEnableOnlineMedia,
-                    child: _buildSlide(slide.projectionWithViewLimit()),
+                    child: SlideLinkScope(
+                      onTapLink: onLinkTap,
+                      hasBottomTlp: hasBottomRightTlp,
+                      allowRemoteMedia: allowRemoteMedia,
+                      mediaRedacted: slide.mediaRedacted,
+                      decodeMaxEdge: decodeMaxEdge,
+                      marpStyle: marpStyle,
+                      slideText: AppTheme.parseHexColor(themeProfile.textColor),
+                      slideBackground: AppTheme.parseHexColor(
+                        themeProfile.slideBackgroundColor,
+                      ),
+                      onEnableOnlineMedia: onEnableOnlineMedia,
+                      child: _buildSlide(slide.projectionWithViewLimit()),
+                    ),
                   ),
                 ),
               ),
@@ -598,7 +609,7 @@ class SlidePreviewWidget extends StatelessWidget {
             : 1;
         final showRichTextControls = richTextPages > 1;
         return AspectRatio(
-          aspectRatio: 16 / 9,
+          aspectRatio: slideAspect,
           child: ClipRect(
             child: Stack(
               fit: StackFit.expand,

@@ -132,9 +132,13 @@ Future<_LogoProjectAsset> _copyBrandStripAsset(
   );
 }
 
-String _brandStripCss(ThemeProfile profile, String brandStripUrl) {
+String _brandStripCss(
+  ThemeProfile profile,
+  String brandStripUrl,
+  double slideHeightPx,
+) {
   final edge = profile.logoPosition.startsWith('top') ? 'top' : 'bottom';
-  final height = (720 * profile.brandStripHeight).round();
+  final height = (slideHeightPx * profile.brandStripHeight).round();
   final safePadding = profile.logoPosition.startsWith('top')
       ? 'padding-top'
       : 'padding-bottom';
@@ -210,6 +214,7 @@ extension _FileServiceProject on FileService {
       updatedDeck.marpStyle.footer,
       logoAsset.cssUrl,
       stripAsset.cssUrl,
+      updatedDeck.slideSize,
     );
     // Marp CLI laadt een stylesheet naast de deck niet uit zichzelf; de
     // standaardroute is een Marp-configuratiebestand dat de CSS via `themeSet`
@@ -317,6 +322,7 @@ extension _FileServiceProject on FileService {
     String footerText,
     String? logoUrl,
     String? brandStripUrl,
+    PageSizeSpec? slideSize,
   ) async {
     final safeThemeName = _safeThemeName(themeName);
     final dest = File(p.join(themesPath, '$safeThemeName.css'));
@@ -331,6 +337,7 @@ extension _FileServiceProject on FileService {
           themeWithFooterSafeLogo(profile, footerText),
           logoUrl,
           brandStripUrl,
+          slideSize,
         ),
       );
       return safeThemeName;
@@ -445,11 +452,14 @@ extension _FileServiceProject on FileService {
     ThemeProfile profile,
     String? logoUrl,
     String? brandStripUrl,
+    PageSizeSpec? slideSize,
   ) {
+    // De strookhoogte is een fractie van de diahoogte, niet van 720px.
+    final slideHeightPx = slideDesignHeight(slideSize);
     final logoCss = logoUrl == null
         ? ''
         : brandStripUrl != null && profile.brandStripHeight > 0
-        ? _brandStripCss(profile, brandStripUrl)
+        ? _brandStripCss(profile, brandStripUrl, slideHeightPx)
         : '''
 
 section.logo-safe {
@@ -482,7 +492,7 @@ section.no-logo::before {
 
     return '''
 $base
-
+${marpSizeDirective(slideSize)}
 /* OciDeck style profile */
 section {
   background: ${profile.slideBackgroundColor};

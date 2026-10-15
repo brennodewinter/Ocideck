@@ -1718,6 +1718,46 @@ const _dutchSourceAddLv = <String, String>{
       'Skats nevarēja būt atvērts kā dokumenta fails.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Pirms ielietiet izmaiņas skata dokumentā vai slēgtu to rindu.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto vai neto šeit nav svarīgi — darba devēja izmaksu uzcenojums ir atsevišķs.',
+  'Aanwezigen en tarieven': 'Klātesošie un likmes',
+  'Bedrag': 'Summa',
+  'Per uur': 'Stundā',
+  'Per maand': 'Mēnesī',
+  'Per jaar': 'Gadā',
+  'Aanname voor de omrekening': 'Pieņēmums pārrēķinam',
+  'Betaalde uren per week': 'Apmaksātās stundas nedēļā',
+  'Weken per jaar': 'Nedēļas gadā',
+  'Opslag werkgeverslasten (%)': 'Darba devēja izmaksu uzcenojums (%)',
+  'Voeg een aanwezige toe': 'Pievienot klātesošu',
+  'Samen': 'Kopā',
+  'Start presentatie': 'Sākt prezentāciju',
+  'per uur': 'stundā',
+  'Wordt omgerekend': 'Tiks pārrēķināts',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Ievadi katram klātesošajam stundas, mēneša vai gada likmi. Tā paliek šajā ekrānā un nekur netiek saglabāta.',
+  'Kosten van aanwezigen': 'Klātesošo izmaksas',
+  'Uit': 'Izslēgts',
+  'Gewoon — alleen in het eindoverzicht':
+      'Parasts — tikai noslēguma kopsavilkumā',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Skaidrs — tekošā summa un noslēguma kopsavilkums',
+  'Uurtarief': 'Stundas likme',
+  'Eén tarief voor de hele groep': 'Viena likme visai grupai',
+  'Per aanwezige, bij de start invullen':
+      'Katram klātesošajam, aizpilda sākumā',
+  'Groepsuurtarief': 'Grupas stundas likme',
+  'Kosten = verstreken tijd × tarief.': 'Izmaksas = pagājušais laiks × likme.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Aizpildām sākumā, netiek saglabāts.',
+  'Valuta': 'Valūta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Novērtējums laikam, ko tērē klātesošie — indikācija, nevis grāmatvedības pašizmaksas.',
+  'Diaformaat': 'Slaida formāts',
+  'Scherm (16:9)': 'Ekrāns (16:9)',
+  'Papierformaat': 'Papīra formāts',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Izvēlieties papīra formātu izdales materiāliem un eksportam uz papīra.',
   'Startmappen': 'Sākuma mapes',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur sākas atvēršana un saglabāšana. Tukšs izmanto pirmo bibliotēku.',

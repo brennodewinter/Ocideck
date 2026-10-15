@@ -773,6 +773,46 @@ const _dutchSourceAddDe = {
       'Das Übersichtsfenster konnte nicht als Dokument geöffnet werden.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Speichern Sie die Änderungen im Übersichtsdocument zuerst oder schließen Sie diese Registerkarte.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto oder netto ist hier egal — der Arbeitgeberkosten-Aufschlag steht separat.',
+  'Aanwezigen en tarieven': 'Teilnehmer und Sätze',
+  'Bedrag': 'Betrag',
+  'Per uur': 'Pro Stunde',
+  'Per maand': 'Pro Monat',
+  'Per jaar': 'Pro Jahr',
+  'Aanname voor de omrekening': 'Annahme für die Umrechnung',
+  'Betaalde uren per week': 'Bezahlte Stunden pro Woche',
+  'Weken per jaar': 'Wochen pro Jahr',
+  'Opslag werkgeverslasten (%)': 'Arbeitgeberlasten-Aufschlag (%)',
+  'Voeg een aanwezige toe': 'Teilnehmer hinzufügen',
+  'Samen': 'Zusammen',
+  'Start presentatie': 'Präsentation starten',
+  'per uur': 'pro Stunde',
+  'Wordt omgerekend': 'Wird umgerechnet',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Gib pro Teilnehmer einen Stunden-, Monats- oder Jahressatz ein. Das bleibt auf diesem Bildschirm und wird nicht gespeichert.',
+  'Kosten van aanwezigen': 'Kosten der Teilnehmer',
+  'Uit': 'Aus',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — nur in der Abschlussübersicht',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explizit — laufender Betrag und Abschlussübersicht',
+  'Uurtarief': 'Stundensatz',
+  'Eén tarief voor de hele groep': 'Ein Satz für die ganze Gruppe',
+  'Per aanwezige, bij de start invullen':
+      'Pro Teilnehmer, beim Start eintragen',
+  'Groepsuurtarief': 'Gruppenstundensatz',
+  'Kosten = verstreken tijd × tarief.': 'Kosten = verstrichene Zeit × Satz.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wird beim Start eingetragen und nicht gespeichert.',
+  'Valuta': 'Währung',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Eine Schätzung der Zeit, die Teilnehmer aufwenden — eine Indikation, kein buchhalterischer Selbstkostenpreis.',
+  'Diaformaat': 'Folienformat',
+  'Scherm (16:9)': 'Bildschirm (16:9)',
+  'Papierformaat': 'Papierformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Wähle ein Papierformat für Handouts und Papier-Exporte.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffnen und Speichern beginnen. Leer lassen verwendet die erste Bibliothek.',

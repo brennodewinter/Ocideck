@@ -9,6 +9,7 @@ import 'package:path/path.dart' as p;
 import '../../l10n/app_localizations.dart';
 import '../../models/image_callout.dart';
 import '../../models/video_source.dart';
+import '../../models/slide_format.dart';
 import '../../services/image_viewport_geometry.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/atomic_file.dart';
@@ -139,7 +140,7 @@ Future<ImageCropResult?> showImageCropDialog(
     builder: (_) => _ImageCropDialog(
       imagePath: imagePath,
       projectPath: projectPath,
-      frameAspect: frameAspect <= 0 ? 16 / 9 : frameAspect,
+      frameAspect: frameAspect <= 0 ? kScreenSlideAspect : frameAspect,
       imageSize: imageSize,
       focalX: focalX,
       focalY: focalY,

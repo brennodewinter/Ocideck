@@ -1750,6 +1750,45 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν μπόρεσε να ανοίξει η προβολή ως έγγραφο.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Αποθήκευσε τις αλλαγές στο έγγραφο προβολής πρώτα ή κλείσε αυτό το φύλλο εργασίας.',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Μικτά ή καθαρά δεν παίζει ρόλο εδώ — η προσαύξηση εργοδοτικών επιβαρύνσεων είναι ξεχωριστή.',
+  'Aanwezigen en tarieven': 'Παρόντες και τιμές',
+  'Bedrag': 'Ποσό',
+  'Per uur': 'Ανά ώρα',
+  'Per maand': 'Ανά μήνα',
+  'Per jaar': 'Ανά έτος',
+  'Aanname voor de omrekening': 'Παραδοχή για τη μετατροπή',
+  'Betaalde uren per week': 'Αμειβόμενες ώρες ανά εβδομάδα',
+  'Weken per jaar': 'Εβδομάδες ανά έτος',
+  'Opslag werkgeverslasten (%)': 'Προσαύξηση εργοδοτικού κόστους (%)',
+  'Voeg een aanwezige toe': 'Προσθήκη παρόντος',
+  'Samen': 'Μαζί',
+  'Start presentatie': 'Έναρξη παρουσίασης',
+  'per uur': 'ανά ώρα',
+  'Wordt omgerekend': 'Θα μετατραπεί',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Συμπλήρωσε ανά παρόντα ωρομίσθιο, μηνιαίο ή ετήσιο ποσό. Μένει σε αυτή την οθόνη και δεν αποθηκεύεται πουθενά.',
+  'Kosten van aanwezigen': 'Κόστος παρόντων',
+  'Uit': 'Κλειστό',
+  'Gewoon — alleen in het eindoverzicht': 'Κανονικό — μόνο στην τελική σύνοψη',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Ρητό — τρέχον ποσό και τελική σύνοψη',
+  'Uurtarief': 'Ωρομίσθιο',
+  'Eén tarief voor de hele groep': 'Μία τιμή για όλη την ομάδα',
+  'Per aanwezige, bij de start invullen':
+      'Ανά παρόντα, συμπληρώνεται στην έναρξη',
+  'Groepsuurtarief': 'Ομαδικό ωρομίσθιο',
+  'Kosten = verstreken tijd × tarief.': 'Κόστος = παρελθών χρόνος × τιμή.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Συμπληρώνεται στην έναρξη και δεν αποθηκεύεται.',
+  'Valuta': 'Νόμισμα',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Εκτίμηση του χρόνου που δαπανούν οι παρόντες — ένδειξη, όχι λογιστικό κόστος.',
+  'Diaformaat': 'Μορφή διαφάνειας',
+  'Scherm (16:9)': 'Οθόνη (16:9)',
+  'Papierformaat': 'Μέγεθος χαρτιού',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Επιλέξτε μέγεθος χαρτιού για ενημερωτικά φυλλάδια και εξαγωγές σε χαρτί.',
   'Startmappen': 'Φάκελοι έναρξης',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Από πού ξεκινούν το άνοιγμα και η αποθήκευση. Κενό σημαίνει την πρώτη βιβλιοθήκη.',

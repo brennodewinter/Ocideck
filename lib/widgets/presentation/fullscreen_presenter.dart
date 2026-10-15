@@ -20,9 +20,12 @@ import '../../models/question.dart';
 import '../../models/rehearsal.dart';
 import '../../models/settings.dart';
 import '../../models/presentation_step_plan.dart';
+import '../../models/presentation_cost.dart';
 import '../../models/presentation_timing.dart';
 import '../../models/playback.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
+import '../../models/page_size.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
 import '../../services/mic_monitor.dart';
@@ -32,6 +35,7 @@ import '../../services/quality_autofix.dart';
 import '../../services/question_round_builder.dart';
 import '../mermaid_render_host.dart';
 import '../../services/rehearsal_controller.dart';
+import '../../services/presentation_cost_session.dart';
 import '../../services/timed_presentation_controller.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/finding_context_score.dart';
@@ -52,6 +56,7 @@ import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
 import '../slides/previews/slide_preview_support.dart';
 import '../slides/slide_preview.dart';
+import '../dialogs/attendee_rates_dialog.dart';
 import '../dialogs/settings_dialog.dart';
 import '../markdown_editor/markdown_editor.dart';
 import 'annotation_overlay.dart';
@@ -215,6 +220,21 @@ class FullscreenPresenter extends StatefulWidget {
   /// Deck-level Y-01 metric for resolve-at-draw on improvement charts.
   final ImprovementY01Metric improvementY01;
 
+  /// De diaverhouding van het deck (scherm 16:9 wanneer het deck geen
+  /// papierformaat vastlegt) — zie [slideAspectRatio] (#2433).
+  final double slideAspect;
+
+  /// De kostenmodus van deze presentatie (#2435). Sessie-only in uitvoering:
+  /// de config komt uit het deck, de sessie zelf ([_costSession]) leeft hier
+  /// en gaat nooit richting schijf of export.
+  final PresentationCostConfig costConfig;
+
+  /// Het samengetelde uurtarief van de aanwezigen in kleinste eenheden van
+  /// [PresentationCostConfig.currency] — gevuld door het privé-startscherm
+  /// (#2436) wanneer [CostRateInput.attendees] geldt. Null bij het vaste
+  /// groepstarief; salarissen en aannames blijven bij het scherm.
+  final int? attendeeRateMinor;
+
   /// Test-seam voor de microfoon-doorvoer (#2158): productie laat dit leeg en
   /// krijgt bij de eerste aan-zet een [WebrtcMicMonitor]; een widget-test
   /// steekt een fake in, want de echte binding kan niet headless draaien.
@@ -249,6 +269,9 @@ class FullscreenPresenter extends StatefulWidget {
     this.onUserNotesChanged,
     this.improvementY01 = ImprovementY01Metric.empty,
     this.micMonitor,
+    this.slideAspect = kScreenSlideAspect,
+    this.costConfig = PresentationCostConfig.off,
+    this.attendeeRateMinor,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -288,6 +311,25 @@ class FullscreenPresenter extends StatefulWidget {
     final organization = deck.organization;
     final reportLanguage = deck.language;
     final presentationTiming = deck.presentationTiming;
+    final slideSize = deck.slideSize;
+    final costConfig = deck.presentationCosts;
+
+    // Bij 'tarieven per aanwezige' hoort het privé-inulscherm vóór de route —
+    // het publieksscherm bestaat dan nog niet (#2436). Annuleren start de
+    // presentatie niet, anders draaide ze met een misleidende nulprijs. De
+    // oefenmodus is een soloorbevoering: daar vraagt hij niets.
+    var attendeeRateMinor = 0;
+    if (costConfig.isEnabled &&
+        costConfig.rateInput == CostRateInput.attendees &&
+        !rehearsalMode) {
+      if (!context.mounted) return null;
+      final rate = await AttendeeRatesDialog.showForSessionRate(
+        context,
+        costConfig.currency,
+      );
+      if (rate == null) return null;
+      attendeeRateMinor = rate;
+    }
 
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
@@ -333,6 +375,9 @@ class FullscreenPresenter extends StatefulWidget {
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
+        slideSize: slideSize,
+        costConfig: costConfig,
+        attendeeRateMinor: attendeeRateMinor,
       );
     } else {
       return await show(
@@ -363,6 +408,9 @@ class FullscreenPresenter extends StatefulWidget {
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
+        slideSize: slideSize,
+        costConfig: costConfig,
+        attendeeRateMinor: attendeeRateMinor,
       );
     }
   }
@@ -396,6 +444,9 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
+    PageSizeSpec? slideSize,
+    PresentationCostConfig costConfig = PresentationCostConfig.off,
+    int attendeeRateMinor = 0,
   }) async {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
@@ -440,6 +491,9 @@ class FullscreenPresenter extends StatefulWidget {
                 initialUserNotes: initialUserNotes,
                 onUserNotesChanged: onUserNotesChanged,
                 improvementY01: improvementY01,
+                slideAspect: slideAspectRatio(slideSize),
+                costConfig: costConfig,
+                attendeeRateMinor: attendeeRateMinor,
               ),
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
@@ -487,6 +541,9 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
+    PageSizeSpec? slideSize,
+    PresentationCostConfig costConfig = PresentationCostConfig.off,
+    int attendeeRateMinor = 0,
   }) async {
     final argument = _dualWindowArguments(
       slides: slides,
@@ -502,6 +559,7 @@ class FullscreenPresenter extends StatefulWidget {
       themeProfile: themeProfile,
       marpStyle: marpStyle,
       cockpitColorScheme: cockpitColorScheme,
+      slideSize: slideSize,
     );
     WindowController? audience;
     AudienceWindowHandle? audienceHandle;
@@ -555,6 +613,9 @@ class FullscreenPresenter extends StatefulWidget {
           initialUserNotes: initialUserNotes,
           onUserNotesChanged: onUserNotesChanged,
           improvementY01: improvementY01,
+          slideSize: slideSize,
+          costConfig: costConfig,
+          attendeeRateMinor: attendeeRateMinor,
         );
       }
       return null;
@@ -593,6 +654,9 @@ class FullscreenPresenter extends StatefulWidget {
       initialUserNotes: initialUserNotes,
       onUserNotesChanged: onUserNotesChanged,
       improvementY01: improvementY01,
+      slideSize: slideSize,
+      costConfig: costConfig,
+      attendeeRateMinor: attendeeRateMinor,
     );
   }
 
@@ -657,6 +721,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Oefenklok: verstreken tijd, aftelling en per-slide-tijd. Sessie-only,
   /// puur meten (geen pacing). Resetbaar met R.
   late RehearsalController _rehearsal;
+
+  /// Kostenteller (#2435): loopt op een monotone klok vanaf de start van de
+  /// sessie. Null wanneer de kostenmodus uit staat — dan bestaat er niets om
+  /// per ongeluk te tonen of te bewaren. Reset mee met R.
+  PresentationCostSession? _costSession;
 
   /// Getypte cijfers om naar een slidenummer te springen (leeg = niet actief).
   String _typed = '';
@@ -792,6 +861,17 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _mermaidView.addListener(_broadcastMermaidView);
     _chartHover.addListener(_broadcastChartHover);
     _rehearsal = RehearsalController(target: widget.targetDuration);
+    if (widget.costConfig.isEnabled) {
+      // Bij 'per aanwezige' vult het startscherm (#2436) het tarief; tot dan
+      // rekent de sessie met 0 — het startscherm is verplicht, dus die nul
+      // is nooit zichtbaar als bedrag.
+      _costSession = PresentationCostSession(
+        currency: widget.costConfig.currency,
+        hourlyRateMinor: widget.costConfig.rateInput == CostRateInput.group
+            ? widget.costConfig.groupHourlyRateMinor
+            : widget.attendeeRateMinor ?? 0,
+      );
+    }
     _focusNode = FocusNode();
     _userNotesFocusNode = FocusNode();
     _ink = {

@@ -98,7 +98,8 @@ class _TitlePreview extends StatelessWidget {
 
   Widget _brandLockup(BuildContext context) {
     final pad = w * 0.045;
-    final stripHeight = w * 9 / 16 * profile.brandStripHeight;
+    final stripHeight =
+        w / SlideAspectScope.of(context) * profile.brandStripHeight;
     final color = AppTheme.parseHexColor(
       slide.titleTextColorOverride.isNotEmpty
           ? slide.titleTextColorOverride
