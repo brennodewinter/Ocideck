@@ -394,6 +394,7 @@ Future<String?> _runDualPresenter(
   required ImprovementY01Metric improvementY01,
   PageSizeSpec? slideSize,
   PresentationCostConfig costConfig = PresentationCostConfig.off,
+  int attendeeRateMinor = 0,
 }) async {
   final hadWakeLock = await _wakeLockEnabled();
   await _enableWakeLock();
@@ -439,6 +440,7 @@ Future<String?> _runDualPresenter(
             improvementY01: improvementY01,
             slideAspect: slideAspectRatio(slideSize),
             costConfig: costConfig,
+            attendeeRateMinor: attendeeRateMinor,
           ),
         ),
         transitionsBuilder: (context, animation, secondary, child) =>

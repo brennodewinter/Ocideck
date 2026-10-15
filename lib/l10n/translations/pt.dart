@@ -1634,6 +1634,24 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ou líquido não importa aqui — a margem dos custos do empregador é separada.',
+  'Aanwezigen en tarieven': 'Participantes e taxas',
+  'Bedrag': 'Montante',
+  'Per uur': 'Por hora',
+  'Per maand': 'Por mês',
+  'Per jaar': 'Por ano',
+  'Aanname voor de omrekening': 'Pressuposto para a conversão',
+  'Betaalde uren per week': 'Horas pagas por semana',
+  'Weken per jaar': 'Semanas por ano',
+  'Opslag werkgeverslasten (%)': 'Majoração de custos do empregador (%)',
+  'Voeg een aanwezige toe': 'Adicionar participante',
+  'Samen': 'No total',
+  'Start presentatie': 'Iniciar a apresentação',
+  'per uur': 'por hora',
+  'Wordt omgerekend': 'Será convertido',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Introduz uma taxa por hora, mês ou ano por participante. Fica neste ecrã e nunca é guardada.',
   'Kosten van aanwezigen': 'Custo dos participantes',
   'Uit': 'Desativado',
   'Gewoon — alleen in het eindoverzicht': 'Normal — apenas no resumo final',

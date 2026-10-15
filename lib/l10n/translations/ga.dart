@@ -1636,6 +1636,24 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto nó glan — ní dhéanann sé difríocht anseo; tá an mhargála ar chostais an fhostóra ar leith.',
+  'Aanwezigen en tarieven': 'Freastalaithe agus rátai',
+  'Bedrag': 'Suim',
+  'Per uur': 'In aghaidh na huaire',
+  'Per maand': 'In aghaidh na míosa',
+  'Per jaar': 'In aghaidh na bliana',
+  'Aanname voor de omrekening': 'Toimhde don tiontú',
+  'Betaalde uren per week': 'Uaireanta íoctha in aghaidh na seachtaine',
+  'Weken per jaar': 'Seachtainí sa bhliain',
+  'Opslag werkgeverslasten (%)': 'Barrmhéadú costais fostóra (%)',
+  'Voeg een aanwezige toe': 'Cuir freastalaí leis',
+  'Samen': 'Le chéile',
+  'Start presentatie': 'Tosaigh an chur i láthair',
+  'per uur': 'in aghaidh na huaire',
+  'Wordt omgerekend': 'Déanfar é a thiontú',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Cuir isteach ráta in aghaidh na huaire, na míosa nó na bliana do gach freastalaí. Fanann sé ar an scáileán seo agus ní shábháiltear é.',
   'Kosten van aanwezigen': 'Costas na bhfreastalaí',
   'Uit': 'As',
   'Gewoon — alleen in het eindoverzicht': 'Gnáth — san achoimre deiridh amháin',

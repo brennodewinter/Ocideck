@@ -1612,6 +1612,24 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Hrubá alebo čistá suma tu nehrá rolu — prirážka na náklady zamestnávateľa je samostatná.',
+  'Aanwezigen en tarieven': 'Účastníci a sadzby',
+  'Bedrag': 'Suma',
+  'Per uur': 'Za hodinu',
+  'Per maand': 'Za mesiac',
+  'Per jaar': 'Za rok',
+  'Aanname voor de omrekening': 'Predpoklad pre prepočet',
+  'Betaalde uren per week': 'Platené hodiny za týždeň',
+  'Weken per jaar': 'Týždňov ročne',
+  'Opslag werkgeverslasten (%)': 'Prirážka nákladov zamestnávateľa (%)',
+  'Voeg een aanwezige toe': 'Pridať účastníka',
+  'Samen': 'Spolu',
+  'Start presentatie': 'Spustiť prezentáciu',
+  'per uur': 'za hodinu',
+  'Wordt omgerekend': 'Bude prepočítané',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Zadaj za každého účastníka hodinovú, mesačnú alebo ročnú sadzbu. Zostane na tejto obrazovke a nikde sa neukladá.',
   'Kosten van aanwezigen': 'Náklady účastníkov',
   'Uit': 'Vypnuté',
   'Gewoon — alleen in het eindoverzicht':

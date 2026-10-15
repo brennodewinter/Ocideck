@@ -1613,6 +1613,24 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ar neto čia nesvarbu — darbdavio išlaidų antkainis yra atskiras.',
+  'Aanwezigen en tarieven': 'Dalyviai ir įkainiai',
+  'Bedrag': 'Suma',
+  'Per uur': 'Per valandą',
+  'Per maand': 'Per mėnesį',
+  'Per jaar': 'Per metus',
+  'Aanname voor de omrekening': 'Perskaičiavimo prielaida',
+  'Betaalde uren per week': 'Apmokamos valandos per savaitę',
+  'Weken per jaar': 'Savaičių per metus',
+  'Opslag werkgeverslasten (%)': 'Darbdavio išlaidų antkainis (%)',
+  'Voeg een aanwezige toe': 'Pridėti dalyvį',
+  'Samen': 'Iš viso',
+  'Start presentatie': 'Pradėti pateiktį',
+  'per uur': 'per valandą',
+  'Wordt omgerekend': 'Bus perskaičiuota',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Įvesk kiekvienam dalyviui valandinį, mėnesinį ar metinį įkainį. Tai lieka šiame ekrane ir niekur nesaugoma.',
   'Kosten van aanwezigen': 'Dalyvių kaina',
   'Uit': 'Išjungta',
   'Gewoon — alleen in het eindoverzicht':

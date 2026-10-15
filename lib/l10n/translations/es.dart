@@ -649,6 +649,24 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto o netto no importa aquí — el recargo de costes del empleador es independiente.',
+  'Aanwezigen en tarieven': 'Asistentes y tarifas',
+  'Bedrag': 'Importe',
+  'Per uur': 'Por hora',
+  'Per maand': 'Por mes',
+  'Per jaar': 'Por año',
+  'Aanname voor de omrekening': 'Supuesto para la conversión',
+  'Betaalde uren per week': 'Horas pagadas por semana',
+  'Weken per jaar': 'Semanas al año',
+  'Opslag werkgeverslasten (%)': 'Recargo de costes del empleador (%)',
+  'Voeg een aanwezige toe': 'Añadir un asistente',
+  'Samen': 'En conjunto',
+  'Start presentatie': 'Iniciar la presentación',
+  'per uur': 'por hora',
+  'Wordt omgerekend': 'Se convertirá',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Introduce por asistente una tarifa por hora, mensual o anual. Permanece en esta pantalla y no se guarda.',
   'Kosten van aanwezigen': 'Coste de los asistentes',
   'Uit': 'Desactivado',
   'Gewoon — alleen in het eindoverzicht': 'Normal — solo en el resumen final',

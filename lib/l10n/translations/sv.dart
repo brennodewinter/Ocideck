@@ -1605,6 +1605,24 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto eller netto spelar ingen roll här — arbetsgivarkostnadspåslaget är separat.',
+  'Aanwezigen en tarieven': 'Närvarande och taxor',
+  'Bedrag': 'Belopp',
+  'Per uur': 'Per timme',
+  'Per maand': 'Per månad',
+  'Per jaar': 'Per år',
+  'Aanname voor de omrekening': 'Antagande för omräkningen',
+  'Betaalde uren per week': 'Betalda timmar per vecka',
+  'Weken per jaar': 'Veckor per år',
+  'Opslag werkgeverslasten (%)': 'Påslag för arbetsgivarkostnader (%)',
+  'Voeg een aanwezige toe': 'Lägg till en närvarande',
+  'Samen': 'Tillsammans',
+  'Start presentatie': 'Starta presentationen',
+  'per uur': 'per timme',
+  'Wordt omgerekend': 'Omräknas',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Fyll i en tim-, månads- eller årsavgift per närvarande. Det stannar på den här skärmen och sparas inte.',
   'Kosten van aanwezigen': 'Kostnad för närvarande',
   'Uit': 'Av',
   'Gewoon — alleen in het eindoverzicht':

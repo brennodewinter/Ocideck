@@ -1624,6 +1624,24 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Gross jew net ma jimpurtax hawn — il-markup tal-ispejjeż tal-mgħaddi huwa separat.',
+  'Aanwezigen en tarieven': 'Preżenti u rati',
+  'Bedrag': 'Ammont',
+  'Per uur': 'Fis-siegħa',
+  'Per maand': 'Fix-xahar',
+  'Per jaar': 'Fis-sena',
+  'Aanname voor de omrekening': 'Suppożizzjoni għall-konverżjoni',
+  'Betaalde uren per week': 'Sigħat imħallsa fil-ġimgħa',
+  'Weken per jaar': 'Ġimgħat fis-sena',
+  'Opslag werkgeverslasten (%)': 'Żieda fl-ispejjeż tal-impjegatur (%)',
+  'Voeg een aanwezige toe': 'Żid preżente',
+  'Samen': 'Flimkien',
+  'Start presentatie': 'Ibda l-preżentazzjoni',
+  'per uur': 'fis-siegħa',
+  'Wordt omgerekend': 'Jiġi kkontvertit',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Daħħal għal kull preżente rata fis-siegħa, fix-xahar jew fis-sena. Jibqa\' f\'dan l-iskrin u ma jinħażen imkien.',
   'Kosten van aanwezigen': 'Spiża tal-preżenti',
   'Uit': 'Mitfi',
   'Gewoon — alleen in het eindoverzicht': 'Normali — biss fir-riepilog finali',

@@ -1599,6 +1599,24 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto või neto ei ole siin oluline — tööandja kulude lisandus on eraldi.',
+  'Aanwezigen en tarieven': 'Osalejad ja hinnad',
+  'Bedrag': 'Summa',
+  'Per uur': 'Tunnis',
+  'Per maand': 'Kuus',
+  'Per jaar': 'Aastas',
+  'Aanname voor de omrekening': 'Arvutuse eeldus',
+  'Betaalde uren per week': 'Tasustatud tunnid nädalas',
+  'Weken per jaar': 'Nädalaid aastas',
+  'Opslag werkgeverslasten (%)': 'Tööandja kulude lisand (%)',
+  'Voeg een aanwezige toe': 'Lisa osaleja',
+  'Samen': 'Kokku',
+  'Start presentatie': 'Alusta esitlust',
+  'per uur': 'tunnis',
+  'Wordt omgerekend': 'Arvutatakse ümber',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Sisesta igale osalejale tunni-, kuu- või aastatasu. See jääb sellele ekraanile ega salvestu.',
   'Kosten van aanwezigen': 'Osalejate kulu',
   'Uit': 'Väljas',
   'Gewoon — alleen in het eindoverzicht': 'Tavaline — ainult lõpukokkuvõttes',

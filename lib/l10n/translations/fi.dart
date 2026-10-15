@@ -1606,6 +1606,24 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto tai netto ei ole väliä tässä — työnantajakustannusten korotus on erillinen.',
+  'Aanwezigen en tarieven': 'Osallistujat ja hinnat',
+  'Bedrag': 'Summa',
+  'Per uur': 'Tunnilta',
+  'Per maand': 'Kuukaudelta',
+  'Per jaar': 'Vuodelta',
+  'Aanname voor de omrekening': 'Laskennan oletus',
+  'Betaalde uren per week': 'Palkalliset tunnit viikossa',
+  'Weken per jaar': 'Viikkoa vuodessa',
+  'Opslag werkgeverslasten (%)': 'Työnantajakustannusten korotus (%)',
+  'Voeg een aanwezige toe': 'Lisää osallistuja',
+  'Samen': 'Yhteensä',
+  'Start presentatie': 'Aloita esitys',
+  'per uur': 'tunnilta',
+  'Wordt omgerekend': 'Muunnetaan',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Syötä jokaiselle osallistujalle tunti-, kuukausi- tai vuosihinta. Se jää tälle näytölle eikä sitä tallenneta.',
   'Kosten van aanwezigen': 'Osallistujien kustannukset',
   'Uit': 'Pois',
   'Gewoon — alleen in het eindoverzicht': 'Normaali — vain loppuyhteenvedossa',

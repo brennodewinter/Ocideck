@@ -1606,6 +1606,24 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto eller netto er ligegyldigt her — arbejdsgiveromkostnings-tillægget står separat.',
+  'Aanwezigen en tarieven': 'Deltagere og satser',
+  'Bedrag': 'Beløb',
+  'Per uur': 'Pr. time',
+  'Per maand': 'Pr. måned',
+  'Per jaar': 'Pr. år',
+  'Aanname voor de omrekening': 'Antagelse for omregningen',
+  'Betaalde uren per week': 'Betalte timer om ugen',
+  'Weken per jaar': 'Uger om året',
+  'Opslag werkgeverslasten (%)': 'Arbejdsgiveromkostningstillæg (%)',
+  'Voeg een aanwezige toe': 'Tilføj en deltager',
+  'Samen': 'Tilsammen',
+  'Start presentatie': 'Start præsentationen',
+  'per uur': 'i timen',
+  'Wordt omgerekend': 'Omregnes',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Indtast en time-, måneds- eller årssats pr. deltager. Det bliver på denne skærm og gemmes ingen steder.',
   'Kosten van aanwezigen': 'Deltagernes omkostninger',
   'Uit': 'Fra',
   'Gewoon — alleen in het eindoverzicht':

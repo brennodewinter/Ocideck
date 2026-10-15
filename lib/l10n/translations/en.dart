@@ -812,6 +812,24 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Gross or net does not matter here — the employer-cost markup is separate.',
+  'Aanwezigen en tarieven': 'Attendees and rates',
+  'Bedrag': 'Amount',
+  'Per uur': 'Per hour',
+  'Per maand': 'Per month',
+  'Per jaar': 'Per year',
+  'Aanname voor de omrekening': 'Assumption for the conversion',
+  'Betaalde uren per week': 'Paid hours per week',
+  'Weken per jaar': 'Weeks per year',
+  'Opslag werkgeverslasten (%)': 'Employer cost markup (%)',
+  'Voeg een aanwezige toe': 'Add an attendee',
+  'Samen': 'Together',
+  'Start presentatie': 'Start presentation',
+  'per uur': 'per hour',
+  'Wordt omgerekend': 'Will be converted',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Enter an hourly, monthly or yearly amount per attendee. It stays on this screen and is never saved.',
   'Kosten van aanwezigen': 'Cost of attendees',
   'Uit': 'Off',
   'Gewoon — alleen in het eindoverzicht':

@@ -1610,6 +1610,24 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ili neto ovdje nije važno — uvećanje za troškove poslodavca je zasebno.',
+  'Aanwezigen en tarieven': 'Prisutni i satnice',
+  'Bedrag': 'Iznos',
+  'Per uur': 'Po satu',
+  'Per maand': 'Po mjesecu',
+  'Per jaar': 'Po godini',
+  'Aanname voor de omrekening': 'Pretpostavka za preračun',
+  'Betaalde uren per week': 'Plaćeni sati tjedno',
+  'Weken per jaar': 'Tjedana godišnje',
+  'Opslag werkgeverslasten (%)': 'Uvećanje troškova poslodavca (%)',
+  'Voeg een aanwezige toe': 'Dodaj prisutnog',
+  'Samen': 'Zajedno',
+  'Start presentatie': 'Pokreni prezentaciju',
+  'per uur': 'po satu',
+  'Wordt omgerekend': 'Preračunat će se',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Unesi po prisutnoj osobi satnicu, mjesečnu ili godišnju plaću. Ostaje na ovom zaslonu i nigdje se ne sprema.',
   'Kosten van aanwezigen': 'Trošak prisutnih',
   'Uit': 'Isključeno',
   'Gewoon — alleen in het eindoverzicht': 'Obično — samo u završnom sažetku',

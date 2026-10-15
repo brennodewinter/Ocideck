@@ -652,6 +652,24 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto of netto makket hjir net út — de opslach foar wurkjouwerskosten stiet der los by.',
+  'Aanwezigen en tarieven': 'Oanwêzigen en tarieven',
+  'Bedrag': 'Bedrach',
+  'Per uur': 'Per oere',
+  'Per maand': 'Per moanne',
+  'Per jaar': 'Per jier',
+  'Aanname voor de omrekening': 'Oannime foar de omrekkene',
+  'Betaalde uren per week': 'Betelle oeren de wike',
+  'Weken per jaar': 'Wiken it jier',
+  'Opslag werkgeverslasten (%)': 'Opslach wurkjouwerslêsten (%)',
+  'Voeg een aanwezige toe': 'Foech in oanwêzige ta',
+  'Samen': 'Gear',
+  'Start presentatie': 'Start presintaasje',
+  'per uur': 'de oere',
+  'Wordt omgerekend': 'Wurdt omrekkene',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Fol per oanwêzige in oer-, moanne- of jiertarief yn. Dit bliuwt op dit skerm en wurdt nea bewarre.',
   'Kosten van aanwezigen': 'Kosten fan oanwêzigen',
   'Uit': 'Út',
   'Gewoon — alleen in het eindoverzicht': 'Gewoan — allinne yn de einôfsluting',

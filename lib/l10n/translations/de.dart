@@ -652,6 +652,24 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto oder netto ist hier egal — der Arbeitgeberkosten-Aufschlag steht separat.',
+  'Aanwezigen en tarieven': 'Teilnehmer und Sätze',
+  'Bedrag': 'Betrag',
+  'Per uur': 'Pro Stunde',
+  'Per maand': 'Pro Monat',
+  'Per jaar': 'Pro Jahr',
+  'Aanname voor de omrekening': 'Annahme für die Umrechnung',
+  'Betaalde uren per week': 'Bezahlte Stunden pro Woche',
+  'Weken per jaar': 'Wochen pro Jahr',
+  'Opslag werkgeverslasten (%)': 'Arbeitgeberlasten-Aufschlag (%)',
+  'Voeg een aanwezige toe': 'Teilnehmer hinzufügen',
+  'Samen': 'Zusammen',
+  'Start presentatie': 'Präsentation starten',
+  'per uur': 'pro Stunde',
+  'Wordt omgerekend': 'Wird umgerechnet',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Gib pro Teilnehmer einen Stunden-, Monats- oder Jahressatz ein. Das bleibt auf diesem Bildschirm und wird nicht gespeichert.',
   'Kosten van aanwezigen': 'Kosten der Teilnehmer',
   'Uit': 'Aus',
   'Gewoon — alleen in het eindoverzicht':

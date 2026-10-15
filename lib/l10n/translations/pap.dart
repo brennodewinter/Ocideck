@@ -651,6 +651,24 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto of netto no ta importantsia aki — e markap di kostonan di empleador ta apart.',
+  'Aanwezigen en tarieven': 'Presentenan i tarifanan',
+  'Bedrag': 'Suma',
+  'Per uur': 'Pa ora',
+  'Per maand': 'Pa lun',
+  'Per jaar': 'Pa aña',
+  'Aanname voor de omrekening': 'Suposishon pa e konvershon',
+  'Betaalde uren per week': 'Ora paga pa siman',
+  'Weken per jaar': 'Siman pa aña',
+  'Opslag werkgeverslasten (%)': 'Surtaks di kostonan di dunado (%)',
+  'Voeg een aanwezige toe': 'Añadi un presente',
+  'Samen': 'Hunto',
+  'Start presentatie': 'Kuminsá e presentashon',
+  'per uur': 'pa ora',
+  'Wordt omgerekend': 'Ta wordu konvertí',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Yena pa persona presente un tarifa pa ora, luna of aña. E keda riba e pantaya aki i no ta wordu warda.',
   'Kosten van aanwezigen': 'Kosto di e presentenan',
   'Uit': 'Pafora',
   'Gewoon — alleen in het eindoverzicht':

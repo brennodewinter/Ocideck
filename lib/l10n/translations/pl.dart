@@ -1618,6 +1618,24 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto czy netto nie ma tu znaczenia — narzut kosztów pracodawcy jest osobny.',
+  'Aanwezigen en tarieven': 'Uczestnicy i stawki',
+  'Bedrag': 'Kwota',
+  'Per uur': 'Na godzinę',
+  'Per maand': 'Na miesiąc',
+  'Per jaar': 'Na rok',
+  'Aanname voor de omrekening': 'Założenie do przeliczenia',
+  'Betaalde uren per week': 'Płatne godziny na tydzień',
+  'Weken per jaar': 'Tygodnie w roku',
+  'Opslag werkgeverslasten (%)': 'Narzut kosztów pracodawcy (%)',
+  'Voeg een aanwezige toe': 'Dodaj uczestnika',
+  'Samen': 'Razem',
+  'Start presentatie': 'Rozpocznij prezentację',
+  'per uur': 'na godzinę',
+  'Wordt omgerekend': 'Zostanie przeliczone',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Wpisz za każdego uczestnika stawkę godzinową, miesięczną lub roczną. Zostaje na tym ekranie i nigdzie nie jest zapisywana.',
   'Kosten van aanwezigen': 'Koszt uczestników',
   'Uit': 'Wył.',
   'Gewoon — alleen in het eindoverzicht':

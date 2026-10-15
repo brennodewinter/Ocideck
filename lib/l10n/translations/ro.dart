@@ -1622,6 +1622,24 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brut sau net nu contează aici — adaosul pentru costurile angajatorului este separat.',
+  'Aanwezigen en tarieven': 'Participanți și tarife',
+  'Bedrag': 'Sumă',
+  'Per uur': 'Pe oră',
+  'Per maand': 'Pe lună',
+  'Per jaar': 'Pe an',
+  'Aanname voor de omrekening': 'Ipoteză pentru conversie',
+  'Betaalde uren per week': 'Ore plătite pe săptămână',
+  'Weken per jaar': 'Săptămâni pe an',
+  'Opslag werkgeverslasten (%)': 'Marjă costuri angajator (%)',
+  'Voeg een aanwezige toe': 'Adaugă un participant',
+  'Samen': 'Împreună',
+  'Start presentatie': 'Începe prezentarea',
+  'per uur': 'pe oră',
+  'Wordt omgerekend': 'Va fi convertit',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Introdu pentru fiecare participant o tarifare pe oră, lună sau an. Rămâne pe acest ecran și nu este salvată nicăieri.',
   'Kosten van aanwezigen': 'Costul participanților',
   'Uit': 'Dezactivat',
   'Gewoon — alleen in het eindoverzicht': 'Normal — doar în rezumatul final',

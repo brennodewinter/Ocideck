@@ -208,7 +208,11 @@ const Map<String, int> fileSizeBaseline = {
   // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
   // de drie regels die hem in de beamer-sync meenemen.
   'lib/widgets/presentation/fullscreen_presenter.dart':
-      1102, // +32 (#2435): costConfig langs present → show/showDualScreen →
+      1135, // +33 (#2436): het sessietarief van het aanwezigenscherm langs
+  // present → show/showDualScreen → _runDualPresenter → widget — dezelfde
+  // onherleidbare plumbing als costConfig, nu voor een sessiewaarde die
+  // bewust niet in de config kan omdat hij nooit bewaard mag worden.
+  // +32 (#2435): costConfig langs present → show/showDualScreen →
   // widget plus het aanmaken van de kostensessie in initState — dezelfde
   // onherleidbare plumbing als slideSize, nu voor een tweede deckveld.
   // +3 (#2433): de slideSize-parameter langs present ->

@@ -1631,6 +1631,24 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Μικτά ή καθαρά δεν παίζει ρόλο εδώ — η προσαύξηση εργοδοτικών επιβαρύνσεων είναι ξεχωριστή.',
+  'Aanwezigen en tarieven': 'Παρόντες και τιμές',
+  'Bedrag': 'Ποσό',
+  'Per uur': 'Ανά ώρα',
+  'Per maand': 'Ανά μήνα',
+  'Per jaar': 'Ανά έτος',
+  'Aanname voor de omrekening': 'Παραδοχή για τη μετατροπή',
+  'Betaalde uren per week': 'Αμειβόμενες ώρες ανά εβδομάδα',
+  'Weken per jaar': 'Εβδομάδες ανά έτος',
+  'Opslag werkgeverslasten (%)': 'Προσαύξηση εργοδοτικού κόστους (%)',
+  'Voeg een aanwezige toe': 'Προσθήκη παρόντος',
+  'Samen': 'Μαζί',
+  'Start presentatie': 'Έναρξη παρουσίασης',
+  'per uur': 'ανά ώρα',
+  'Wordt omgerekend': 'Θα μετατραπεί',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Συμπλήρωσε ανά παρόντα ωρομίσθιο, μηνιαίο ή ετήσιο ποσό. Μένει σε αυτή την οθόνη και δεν αποθηκεύεται πουθενά.',
   'Kosten van aanwezigen': 'Κόστος παρόντων',
   'Uit': 'Κλειστό',
   'Gewoon — alleen in het eindoverzicht': 'Κανονικό — μόνο στην τελική σύνοψη',

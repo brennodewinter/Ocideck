@@ -1626,6 +1626,24 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Бруто или нето няма значение тук — надбавката за разходи на работодателя е отделна.',
+  'Aanwezigen en tarieven': 'Присъстващи и ставки',
+  'Bedrag': 'Сума',
+  'Per uur': 'На час',
+  'Per maand': 'На месец',
+  'Per jaar': 'На година',
+  'Aanname voor de omrekening': 'Допускане за преизчисляването',
+  'Betaalde uren per week': 'Платени часове на седмица',
+  'Weken per jaar': 'Седмици годишно',
+  'Opslag werkgeverslasten (%)': 'Надценка за разходи на работодателя (%)',
+  'Voeg een aanwezige toe': 'Добави присъстващ',
+  'Samen': 'Общо',
+  'Start presentatie': 'Стартирай презентацията',
+  'per uur': 'на час',
+  'Wordt omgerekend': 'Ще се преизчисли',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Въведи за всеки присъстващ часова, месечна или годишна ставка. Остава на този екран и никъде не се записва.',
   'Kosten van aanwezigen': 'Разходи за присъстващите',
   'Uit': 'Изкл.',
   'Gewoon — alleen in het eindoverzicht': 'Обикновено — само в крайния отчет',

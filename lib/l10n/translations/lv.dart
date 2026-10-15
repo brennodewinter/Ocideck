@@ -1604,6 +1604,24 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto vai neto šeit nav svarīgi — darba devēja izmaksu uzcenojums ir atsevišķs.',
+  'Aanwezigen en tarieven': 'Klātesošie un likmes',
+  'Bedrag': 'Summa',
+  'Per uur': 'Stundā',
+  'Per maand': 'Mēnesī',
+  'Per jaar': 'Gadā',
+  'Aanname voor de omrekening': 'Pieņēmums pārrēķinam',
+  'Betaalde uren per week': 'Apmaksātās stundas nedēļā',
+  'Weken per jaar': 'Nedēļas gadā',
+  'Opslag werkgeverslasten (%)': 'Darba devēja izmaksu uzcenojums (%)',
+  'Voeg een aanwezige toe': 'Pievienot klātesošu',
+  'Samen': 'Kopā',
+  'Start presentatie': 'Sākt prezentāciju',
+  'per uur': 'stundā',
+  'Wordt omgerekend': 'Tiks pārrēķināts',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Ievadi katram klātesošajam stundas, mēneša vai gada likmi. Tā paliek šajā ekrānā un nekur netiek saglabāta.',
   'Kosten van aanwezigen': 'Klātesošo izmaksas',
   'Uit': 'Izslēgts',
   'Gewoon — alleen in het eindoverzicht':

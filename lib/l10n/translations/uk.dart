@@ -1621,6 +1621,24 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Брутто чи нетто тут не має значення — націнка на витрати роботодавця окрема.',
+  'Aanwezigen en tarieven': 'Присутні та ставки',
+  'Bedrag': 'Сума',
+  'Per uur': 'За годину',
+  'Per maand': 'За місяць',
+  'Per jaar': 'За рік',
+  'Aanname voor de omrekening': 'Припущення для перерахунку',
+  'Betaalde uren per week': 'Оплачувані години на тиждень',
+  'Weken per jaar': 'Тижнів на рік',
+  'Opslag werkgeverslasten (%)': 'Націнка на витрати роботодавця (%)',
+  'Voeg een aanwezige toe': 'Додати присутнього',
+  'Samen': 'Разом',
+  'Start presentatie': 'Почати презентацію',
+  'per uur': 'за годину',
+  'Wordt omgerekend': 'Буде перераховано',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Введи для кожного присутнього ставку за годину, місяць або рік. Це лишається на цьому екрані й ніде не зберігається.',
   'Kosten van aanwezigen': 'Вартість присутніх',
   'Uit': 'Вимк.',
   'Gewoon — alleen in het eindoverzicht': 'Звичайний — лише в підсумку',

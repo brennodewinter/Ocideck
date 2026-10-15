@@ -1606,6 +1606,24 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto atau netto tidak masalah di sini — markup biaya pemberi kerja terpisah.',
+  'Aanwezigen en tarieven': 'Peserta dan tarif',
+  'Bedrag': 'Jumlah',
+  'Per uur': 'Per jam',
+  'Per maand': 'Per bulan',
+  'Per jaar': 'Per tahun',
+  'Aanname voor de omrekening': 'Asumsi untuk konversi',
+  'Betaalde uren per week': 'Jam dibayar per minggu',
+  'Weken per jaar': 'Minggu per tahun',
+  'Opslag werkgeverslasten (%)': 'Markup biaya pemberi kerja (%)',
+  'Voeg een aanwezige toe': 'Tambah peserta',
+  'Samen': 'Bersama',
+  'Start presentatie': 'Mulai presentasi',
+  'per uur': 'per jam',
+  'Wordt omgerekend': 'Akan dikonversi',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Isi tarif per jam, per bulan, atau per tahun untuk tiap peserta. Ini tetap di layar ini dan tidak disimpan.',
   'Kosten van aanwezigen': 'Biaya peserta',
   'Uit': 'Mati',
   'Gewoon — alleen in het eindoverzicht': 'Biasa — hanya di ringkasan akhir',

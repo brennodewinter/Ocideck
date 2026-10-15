@@ -1609,6 +1609,24 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto oder netto isch do egal — de Arbeitgäberchöschte-Ufschlag stoht separat.',
+  'Aanwezigen en tarieven': 'Teilnöhmer ond Sätz',
+  'Bedrag': 'Betrag',
+  'Per uur': 'Pro Stund',
+  'Per maand': 'Pro Monet',
+  'Per jaar': 'Pro Jahr',
+  'Aanname voor de omrekening': 'Aanaam für d\'Umrechnig',
+  'Betaalde uren per week': 'Bezahlti Stunde pro Wuche',
+  'Weken per jaar': 'Wuche pro Jahr',
+  'Opslag werkgeverslasten (%)': 'Ufschlag für Arbetgeberlaste (%)',
+  'Voeg een aanwezige toe': 'Teilnöhmer dezue tue',
+  'Samen': 'Zsäme',
+  'Start presentatie': 'Präsentation starte',
+  'per uur': 'pro Stund',
+  'Wordt omgerekend': 'Wird umgrechnet',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Gib pro Teilnöhmer en Stunde-, Monet- oder Jahressatz ii. Das blibt uf dem Bildschirm ond wird nirgend gspeicheret.',
   'Kosten van aanwezigen': 'Chöste vo de Teilnöhmer',
   'Uit': 'Us',
   'Gewoon — alleen in het eindoverzicht': 'Normal — nur ide Abschlussübersicht',

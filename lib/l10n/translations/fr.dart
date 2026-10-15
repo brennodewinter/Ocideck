@@ -652,6 +652,24 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brut ou net ne change rien ici — la majoration des coûts employeur est séparée.',
+  'Aanwezigen en tarieven': 'Participants et taux',
+  'Bedrag': 'Montant',
+  'Per uur': 'Par heure',
+  'Per maand': 'Par mois',
+  'Per jaar': 'Par an',
+  'Aanname voor de omrekening': 'Hypothèse de conversion',
+  'Betaalde uren per week': 'Heures payées par semaine',
+  'Weken per jaar': 'Semaines par an',
+  'Opslag werkgeverslasten (%)': 'Majoration coûts employeur (%)',
+  'Voeg een aanwezige toe': 'Ajouter un participant',
+  'Samen': 'Ensemble',
+  'Start presentatie': 'Démarrer la présentation',
+  'per uur': 'par heure',
+  'Wordt omgerekend': 'Sera converti',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Saisis pour chaque participant un taux horaire, mensuel ou annuel. Cela reste sur cet écran et n\'est jamais enregistré.',
   'Kosten van aanwezigen': 'Coût des participants',
   'Uit': 'Off',
   'Gewoon — alleen in het eindoverzicht':

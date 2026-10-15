@@ -1621,6 +1621,24 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruttum an netum hic non refert — accrementum sumptuum conductoris separatum est.',
+  'Aanwezigen en tarieven': 'Praesentes et mercedes',
+  'Bedrag': 'Summa',
+  'Per uur': 'Per horam',
+  'Per maand': 'Per mensem',
+  'Per jaar': 'Per annum',
+  'Aanname voor de omrekening': 'Suppositio conversionis',
+  'Betaalde uren per week': 'Horae solutae per hebdomadam',
+  'Weken per jaar': 'Hebdomadae per annum',
+  'Opslag werkgeverslasten (%)': 'Additio sumptuum dativorum (%)',
+  'Voeg een aanwezige toe': 'Praesentem adde',
+  'Samen': 'Simul',
+  'Start presentatie': 'Praesentationem incipe',
+  'per uur': 'per horam',
+  'Wordt omgerekend': 'Convertetur',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Per singulum praesentem mercedem horariam, menstruam vel annuam inscribe. In hoc scaeno manet neque servatur.',
   'Kosten van aanwezigen': 'Sumptus praesentium',
   'Uit': 'Exclusum',
   'Gewoon — alleen in het eindoverzicht': 'Sollemne — tantum in summa finali',

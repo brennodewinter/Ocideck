@@ -1608,6 +1608,24 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruttó vagy nettó itt nem számít — a munkáltatói költségráfordítás külön áll.',
+  'Aanwezigen en tarieven': 'Résztvevők és díjak',
+  'Bedrag': 'Összeg',
+  'Per uur': 'Óránként',
+  'Per maand': 'Havonta',
+  'Per jaar': 'Évente',
+  'Aanname voor de omrekening': 'Az átszámítás feltétele',
+  'Betaalde uren per week': 'Fizetett órák hetente',
+  'Weken per jaar': 'Hét évente',
+  'Opslag werkgeverslasten (%)': 'Munkáltatói költségráfordítás (%)',
+  'Voeg een aanwezige toe': 'Résztvevő hozzáadása',
+  'Samen': 'Összesen',
+  'Start presentatie': 'Prezentáció indítása',
+  'per uur': 'óránként',
+  'Wordt omgerekend': 'Átváltásra kerül',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Adj meg résztvevőnként óra-, havi vagy éves díjat. Ez a képernyőn marad és sehova nem kerül mentésre.',
   'Kosten van aanwezigen': 'Résztvevők költsége',
   'Uit': 'Ki',
   'Gewoon — alleen in het eindoverzicht': 'Normál — csak a záró összegzésben',
