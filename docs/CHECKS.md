@@ -1036,6 +1036,14 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Pinned spec:** `test/fixtures/ociserve_openapi.yaml`, gekopieerd van
   `brenno/OciServe` op commit `3c7c40f39456c71259b5958204de405b9dbd35af`
   (capabilitycatalogus v10, met het Managed Intake-contract uit ADR 0016).
+- **Omgekeerde richting (#2430):** de poort kijkt ook de andere kant op.
+  `inOciDeckSurface` markeert het deelnemersoppervlak van de spec —
+  `/me/`-routes, participant-eigen `participants/{}/…`-paden en de publieke
+  registratie-, intake- en auth-routes. Elke route in dat oppervlak die
+  `gatewayRoutes` niet aanroept moet in `unusedSpecRoutes` staan, mét reden.
+  Een nieuwe `/me/`-route in een pin-update maakt de poort dus rood tot hij
+  is aangesloten of bewust uitgezonderd, en een uitzondering die niet meer
+  in de spec staat of inmiddels wél wordt aangeroepen, faalt op zichzelf.
 - **Pin bijwerken:**
   1. Kopieer `docs/openapi.yaml` uit de OciServe-repo naar
      `test/fixtures/ociserve_openapi.yaml`.
@@ -1044,7 +1052,10 @@ also declares them, but see the [CI note](#continuous-integration).)
      nieuwe specbestand (`shasum -a 256 test/fixtures/ociserve_openapi.yaml`).
   3. Voeg nieuwe gateway-routes toe aan `gatewayRoutes` in de test als de
      gateway er een heeft bijgekregen.
-  4. Draai `flutter test test/ociserve_api_drift_test.dart` — groen betekent
+  4. Route in het deelnemersoppervlak die OciDeck (nog) bewust niet
+     aanroept? Zet hem in `unusedSpecRoutes` met de reden — anders blijft
+     de poort rood. Haal de regel weg zodra de route is aangesloten.
+  5. Draai `flutter test test/ociserve_api_drift_test.dart` — groen betekent
      dat de client en de spec nog kloppen.
 - **Failure means:** OciServe heeft een route verwijderd, hernoemd of
   hervormd die OciDeck aanroept. Werk de pin bij (hierboven) of pas de
