@@ -85,7 +85,8 @@ class _OciServeEvidenceSubmitState
   bool _typeMissing = false;
 
   /// Een herhaalde poging gebruikt hetzelfde bestandsslot en dezelfde sleutel,
-  /// zodat een netwerkfout geen tweede upload of tweede bewijsstuk maakt.
+  /// zodat een netwerkfout geen tweede upload of tweede bewijsstuk maakt. Het
+  /// slot telt pas mee als de bytes erin staan.
   String? _slotId;
   final String _itemKey = const Uuid().v4();
 
@@ -178,6 +179,8 @@ class _OciServeEvidenceSubmitState
       var slotId = _slotId;
       if (slotId == null) {
         final mimeType = _detectMimeType(_fileName);
+        // Het slot hangt aan de cursist zelf: zonder deelnemer blijft de upload
+        // los van het dossier en toont "Mijn bewijs" het bewijsstuk niet.
         final slot = await notifier.requestEvidenceSlot(
           organizationId: widget.organizationId,
           request: EvidenceUploadRequest(
@@ -185,16 +188,19 @@ class _OciServeEvidenceSubmitState
             declaredType: mimeType,
             declaredSize: bytes.length,
             declaredHash: sha256Hex(bytes),
+            participantId: widget.participantId,
           ),
         );
         slotId = slot.id;
-        _slotId = slotId;
         await notifier.uploadEvidenceContent(
           organizationId: widget.organizationId,
           evidenceId: slotId,
           bytes: bytes,
           contentType: mimeType,
         );
+        // Pas nu is het slot te hergebruiken. Faalt de upload, dan blijft het
+        // slot leeg en wijst een nieuwe poging op een slot dat nooit vol komt.
+        _slotId = slotId;
       }
       final upload = await _awaitVerification(notifier, slotId);
       if (!mounted) return;

@@ -776,6 +776,45 @@ void main() {
       expect(result.value, isTrue);
     });
 
+    testWidgets('attaches the upload to the learner who submits it', (
+      tester,
+    ) async {
+      final notifier = _SubmitNotifier();
+      await pumpSubmit(tester, notifier: notifier);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(notifier.slotRequests.single.participantId, 'participant-1');
+      expect(
+        notifier.slotRequests.single.toJson()['participant_id'],
+        'participant-1',
+      );
+    });
+
+    testWidgets('asks for a fresh slot after the upload itself failed', (
+      tester,
+    ) async {
+      final notifier = _SubmitNotifier(uploadFailures: 1);
+      final result = await pumpSubmit(tester, notifier: notifier);
+      await walkToConsent(tester);
+      await submit(tester);
+
+      expect(
+        find.text('Het aanleveren is mislukt. Probeer het opnieuw.'),
+        findsOneWidget,
+      );
+      expect(notifier.created, isEmpty);
+      expect(result.value, isNull);
+
+      // Het eerste slot is nooit gevuld; de nieuwe poging begint opnieuw in
+      // plaats van eindeloos op dat lege slot te wachten.
+      await submit(tester);
+      expect(notifier.slotRequests, hasLength(2));
+      expect(notifier.uploads.single.id, 'slot-2');
+      expect(notifier.created.single.uploadId, 'slot-2');
+      expect(result.value, isTrue);
+    });
+
     testWidgets('reports a failure to reserve the upload slot', (tester) async {
       final notifier = _SubmitNotifier(slotFails: true);
       final result = await pumpSubmit(tester, notifier: notifier);
@@ -980,6 +1019,7 @@ class _SubmitNotifier extends _EvidenceTestNotifier {
     this.typesFail = false,
     this.slotFails = false,
     this.createFailures = 0,
+    this.uploadFailures = 0,
   });
 
   List<String> statuses;
@@ -987,6 +1027,7 @@ class _SubmitNotifier extends _EvidenceTestNotifier {
   final bool typesFail;
   final bool slotFails;
   int createFailures;
+  int uploadFailures;
 
   final slotRequests = <EvidenceUploadRequest>[];
   final uploads = <({String id, Uint8List bytes})>[];
@@ -1037,6 +1078,10 @@ class _SubmitNotifier extends _EvidenceTestNotifier {
     required Uint8List bytes,
     required String contentType,
   }) async {
+    if (uploadFailures > 0) {
+      uploadFailures--;
+      throw StateError('geen verbinding');
+    }
     uploads.add((id: evidenceId, bytes: bytes));
     return _upload(evidenceId, 'uploaded');
   }
