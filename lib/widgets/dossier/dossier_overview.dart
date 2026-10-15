@@ -328,58 +328,53 @@ class DossierOverview extends StatelessWidget {
                 if (onChangeDescription != null ||
                     onChangeStartNumber != null) ...[
                   const SizedBox(height: 14),
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      if (onChangeDescription != null)
-                        TextButton.icon(
-                          onPressed: busy
-                              ? null
-                              : () async {
-                                  final changed =
-                                      await DossierDialogs.editDescription(
-                                        context,
-                                        initialDescription: dossier.description,
-                                      );
-                                  if (changed != null) {
-                                    onChangeDescription!(changed);
-                                  }
-                                },
-                          icon: const Icon(Icons.notes_rounded),
-                          label: Text(l10n.d('Omschrijving wijzigen')),
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.white,
-                          ),
-                        ),
-                      if (onChangeStartNumber != null)
-                        TextButton.icon(
-                          onPressed: busy
-                              ? null
-                              : () async {
-                                  final changed =
-                                      await DossierDialogs.editNumber(
-                                        context,
-                                        initialNumber: dossier.startNumber,
-                                        title: l10n.d('Beginnummer wijzigen'),
-                                      );
-                                  if (changed != null) {
-                                    onChangeStartNumber!(changed);
-                                  }
-                                },
-                          icon: const Icon(Icons.format_list_numbered_rounded),
-                          label: Text(l10n.d('Beginnummer wijzigen')),
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.white,
-                          ),
-                        ),
-                    ],
-                  ),
+                  _coverSettings(context),
                 ],
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _coverSettings(BuildContext context) {
+    final l10n = context.l10n;
+    return Wrap(
+      spacing: 8,
+      children: [
+        if (onChangeDescription != null)
+          TextButton.icon(
+            onPressed: busy
+                ? null
+                : () async {
+                    final changed = await DossierDialogs.editDescription(
+                      context,
+                      initialDescription: dossier.description,
+                    );
+                    if (changed != null) onChangeDescription!(changed);
+                  },
+            icon: const Icon(Icons.notes_rounded),
+            label: Text(l10n.d('Omschrijving wijzigen')),
+            style: TextButton.styleFrom(foregroundColor: Colors.white),
+          ),
+        if (onChangeStartNumber != null)
+          TextButton.icon(
+            onPressed: busy
+                ? null
+                : () async {
+                    final changed = await DossierDialogs.editNumber(
+                      context,
+                      initialNumber: dossier.startNumber,
+                      title: l10n.d('Beginnummer wijzigen'),
+                    );
+                    if (changed != null) onChangeStartNumber!(changed);
+                  },
+            icon: const Icon(Icons.format_list_numbered_rounded),
+            label: Text(l10n.d('Beginnummer wijzigen')),
+            style: TextButton.styleFrom(foregroundColor: Colors.white),
+          ),
+      ],
     );
   }
 
