@@ -592,121 +592,14 @@ class DossierOverview extends StatelessWidget {
               ),
             ),
             SizedBox(width: compact ? 10 : 18),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: busy ? null : () => onOpenEntry(entry),
-                    borderRadius: BorderRadius.circular(6),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: Text(
-                        entry.title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: palette.panelText,
-                          fontWeight: FontWeight.w700,
-                          fontSize: compact ? 14 : 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  if (entry.description.trim().isNotEmpty) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      entry.description,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: palette.panelText, fontSize: 13),
-                    ),
-                  ],
-                  if (entry.documentDate != null ||
-                      entry.author.trim().isNotEmpty) ...[
-                    const SizedBox(height: 6),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 4,
-                      children: [
-                        if (entry.documentDate != null)
-                          _metadataChip(
-                            context,
-                            palette,
-                            entry.documentDate!,
-                            Icons.calendar_today_outlined,
-                          ),
-                        if (entry.author.trim().isNotEmpty)
-                          _metadataChip(
-                            context,
-                            palette,
-                            entry.author,
-                            Icons.person_outline_rounded,
-                          ),
-                      ],
-                    ),
-                  ],
-                  TextButton.icon(
-                    onPressed: busy ? null : () => _editEntry(context, entry),
-                    icon: const Icon(Icons.edit_outlined, size: 16),
-                    label: Text(l10n.d('Documentgegevens bewerken')),
-                  ),
-                  const SizedBox(height: 5),
-                  _sourceDetails(context, palette, entry),
-                  Row(
-                    children: [
-                      Icon(icon, size: 15, color: color),
-                      const SizedBox(width: 5),
-                      Flexible(
-                        child: Text(
-                          label,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: palette.panelText,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  if (unsavedEntryIds.contains(entry.id)) ...[
-                    const SizedBox(height: 5),
-                    Semantics(
-                      liveRegion: true,
-                      child: Text(
-                        l10n.d(
-                          'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.',
-                        ),
-                        style: TextStyle(
-                          color: AppTheme.amberVivid,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 4),
-                  if (entry.checkedAt != null)
-                    Text(
-                      '${status == null ? l10n.d('Referentie vastgelegd') : l10n.d('Laatst gecontroleerd')}: ${_formatCheckedAt(context, entry.checkedAt!)}',
-                      style: TextStyle(
-                        color: palette.panelText.withValues(alpha: 0.82),
-                        fontSize: 11,
-                      ),
-                    ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: SelectableText(
-                      '${l10n.d('SHA-256')} ${entry.sha256}',
-                      style: TextStyle(
-                        color: palette.panelText.withValues(alpha: 0.82),
-                        fontSize: compact ? 10 : 11,
-                        fontFamily: 'monospace',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            _entryCardContents(
+              context,
+              palette,
+              entry,
+              compact,
+              icon,
+              label,
+              color,
             ),
             IconButton(
               tooltip: l10n.d('Document openen'),
@@ -716,6 +609,131 @@ class DossierOverview extends StatelessWidget {
             _entryActions(context, palette, entry, index),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _entryCardContents(
+    BuildContext context,
+    AppPalette palette,
+    DossierEntry entry,
+    bool compact,
+    IconData icon,
+    String label,
+    Color color,
+  ) {
+    final l10n = context.l10n;
+    final status = verification[entry.id];
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: busy ? null : () => onOpenEntry(entry),
+            borderRadius: BorderRadius.circular(6),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Text(
+                entry.title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: palette.panelText,
+                  fontWeight: FontWeight.w700,
+                  fontSize: compact ? 14 : 16,
+                ),
+              ),
+            ),
+          ),
+          if (entry.description.trim().isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              entry.description,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: palette.panelText, fontSize: 13),
+            ),
+          ],
+          if (entry.documentDate != null || entry.author.trim().isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              children: [
+                if (entry.documentDate != null)
+                  _metadataChip(
+                    context,
+                    palette,
+                    entry.documentDate!,
+                    Icons.calendar_today_outlined,
+                  ),
+                if (entry.author.trim().isNotEmpty)
+                  _metadataChip(
+                    context,
+                    palette,
+                    entry.author,
+                    Icons.person_outline_rounded,
+                  ),
+              ],
+            ),
+          ],
+          TextButton.icon(
+            onPressed: busy ? null : () => _editEntry(context, entry),
+            icon: const Icon(Icons.edit_outlined, size: 16),
+            label: Text(l10n.d('Documentgegevens bewerken')),
+          ),
+          const SizedBox(height: 5),
+          _sourceDetails(context, palette, entry),
+          Row(
+            children: [
+              Icon(icon, size: 15, color: color),
+              const SizedBox(width: 5),
+              Flexible(
+                child: Text(
+                  label,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: palette.panelText, fontSize: 12),
+                ),
+              ),
+            ],
+          ),
+          if (unsavedEntryIds.contains(entry.id)) ...[
+            const SizedBox(height: 5),
+            Semantics(
+              liveRegion: true,
+              child: Text(
+                l10n.d(
+                  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.',
+                ),
+                style: TextStyle(
+                  color: AppTheme.amberVivid,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+          const SizedBox(height: 4),
+          if (entry.checkedAt != null)
+            Text(
+              '${status == null ? l10n.d('Referentie vastgelegd') : l10n.d('Laatst gecontroleerd')}: ${_formatCheckedAt(context, entry.checkedAt!)}',
+              style: TextStyle(
+                color: palette.panelText.withValues(alpha: 0.82),
+                fontSize: 11,
+              ),
+            ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SelectableText(
+              '${l10n.d('SHA-256')} ${entry.sha256}',
+              style: TextStyle(
+                color: palette.panelText.withValues(alpha: 0.82),
+                fontSize: compact ? 10 : 11,
+                fontFamily: 'monospace',
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -950,45 +968,5 @@ class DossierOverview extends StatelessWidget {
           : () => onSuggestEntryDetails!(entry),
     );
     if (details != null) onEditEntryDetails(entry, details);
-  }
-
-  (IconData, String, Color) _status(
-    BuildContext context,
-    DossierIntegrityStatus? status,
-    AppPalette palette,
-  ) {
-    final l10n = context.l10n;
-    return switch (status) {
-      DossierIntegrityStatus.matches => (
-        Icons.check_circle_rounded,
-        l10n.d('SHA-256 klopt'),
-        palette.panelText,
-      ),
-      DossierIntegrityStatus.changed => (
-        Icons.error_rounded,
-        l10n.d('Document gewijzigd'),
-        AppTheme.amberVivid,
-      ),
-      DossierIntegrityStatus.missing => (
-        Icons.error_outline_rounded,
-        l10n.d('Document ontbreekt'),
-        AppTheme.amberVivid,
-      ),
-      DossierIntegrityStatus.unreadable => (
-        Icons.warning_rounded,
-        l10n.d('Document niet leesbaar'),
-        AppTheme.amberVivid,
-      ),
-      DossierIntegrityStatus.unsafe => (
-        Icons.warning_rounded,
-        l10n.d('Onveilige bestandsverwijzing'),
-        AppTheme.amberVivid,
-      ),
-      null => (
-        Icons.shield_outlined,
-        l10n.d('Nog niet gecontroleerd'),
-        palette.panelText.withValues(alpha: 0.82),
-      ),
-    };
   }
 }
