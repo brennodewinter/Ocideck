@@ -216,6 +216,48 @@ class _RehearsalSummaryDialog extends StatelessWidget {
     ];
   }
 
+  /// Het kostenblok boven de per-dia-lijst (#2437, #2438): het totaal, de
+  /// berekeningsbasis met de herkomst van de koers, en — als er regels buiten
+  /// het totaal vielen — hoeveel.
+  List<Widget> _costBlock(
+    AppLocalizations l10n,
+    ColorScheme scheme,
+    CostRun cost,
+  ) => [
+    const SizedBox(height: 4),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: Text(
+            l10n.d('Kostenindicatie'),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        Text(
+          formatAmountMinor(cost.totalMinor, cost.currency) +
+              _eurSuffix(cost, cost.totalMinor),
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontFeatures: [FontFeature.tabularFigures()],
+          ),
+        ),
+      ],
+    ),
+    Text(
+      '${formatAmountMinor(cost.hourlyRateMinor, cost.currency)} '
+      '${l10n.d('per uur')}${_rateProvenance(l10n, cost)} · '
+      '${l10n.d('Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.')}',
+      style: TextStyle(fontSize: 11, color: scheme.onSurfaceVariant),
+    ),
+    if (cost.unconvertedAttendees > 0)
+      Text(
+        '${cost.unconvertedAttendees} '
+        '${l10n.d('invoerregel(s) niet omgerekend — koers ontbrak.')}',
+        style: TextStyle(fontSize: 11, color: AppTheme.warningFg),
+      ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -294,40 +336,8 @@ class _RehearsalSummaryDialog extends StatelessWidget {
                 ),
               ],
             ],
-            if (costRun case final cost?) ...[
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Text(
-                      l10n.d('Kostenindicatie'),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Text(
-                    formatAmountMinor(cost.totalMinor, cost.currency) +
-                        _eurSuffix(cost, cost.totalMinor),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontFeatures: [FontFeature.tabularFigures()],
-                    ),
-                  ),
-                ],
-              ),
-              Text(
-                '${formatAmountMinor(cost.hourlyRateMinor, cost.currency)} '
-                '${l10n.d('per uur')}${_rateProvenance(l10n, cost)} · '
-                '${l10n.d('Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.')}',
-                style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
-              ),
-              if (cost.unconvertedAttendees > 0)
-                Text(
-                  '${cost.unconvertedAttendees} '
-                  '${l10n.d('invoerregel(s) niet omgerekend — koers ontbrak.')}',
-                  style: TextStyle(fontSize: 11, color: Colors.orange.shade800),
-                ),
-            ],
+            if (costRun case final cost?)
+              ..._costBlock(l10n, Theme.of(context).colorScheme, cost),
             const Divider(height: 24),
             Flexible(
               child: SingleChildScrollView(

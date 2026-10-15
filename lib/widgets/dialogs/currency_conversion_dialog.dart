@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/exchange_rate.dart';
 import '../../models/presentation_cost.dart';
 import '../../services/exchange_rate_service.dart';
+import '../../theme/app_theme.dart';
 import '../../utils/exchange_rate_label.dart';
 
 /// Vraagt vóór de sessie één koers per benodigde vreemde valuta (#2438).
@@ -198,7 +199,7 @@ class _CurrencyConversionDialogState extends State<CurrencyConversionDialog> {
                         '${c.code}: ${exchangeRateProvenance(l10n, r)}',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Colors.grey.shade600,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -207,7 +208,7 @@ class _CurrencyConversionDialogState extends State<CurrencyConversionDialog> {
                     l10n.d(
                       'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.',
                     ),
-                    style: TextStyle(fontSize: 11, color: Colors.red.shade700),
+                    style: TextStyle(fontSize: 11, color: AppTheme.dangerFg),
                   ),
                 const SizedBox(height: 8),
                 TextButton.icon(
@@ -220,7 +221,10 @@ class _CurrencyConversionDialogState extends State<CurrencyConversionDialog> {
                   l10n.d(
                     'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.',
                   ),
-                  style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ),

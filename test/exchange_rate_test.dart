@@ -268,6 +268,19 @@ void main() {
       );
     });
 
+    test('volgt geen redirect en kapt een te groot antwoord af', () async {
+      var followed = true;
+      final client = MockClient((req) async {
+        followed = req.followRedirects;
+        return http.Response('', 302, headers: {'location': 'https://x.test/'});
+      });
+      expect(await fetchEurRate('USD', client: client), isNull);
+      expect(followed, isFalse);
+
+      final big = MockClient((_) async => http.Response('x' * 20000, 200));
+      expect(await fetchEurRate('USD', client: big), isNull);
+    });
+
     test('een netwerkfout is "koers ontbreekt", geen uitzondering', () async {
       final client = MockClient((_) async => throw http.ClientException('af'));
       expect(await fetchEurRate('USD', client: client), isNull);
