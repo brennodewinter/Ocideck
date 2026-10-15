@@ -11,6 +11,7 @@ import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_portfolio_import.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
+import 'package:ocideck/services/ociserve/ociserve_http.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/utils/content_hash.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_courses_dialog.dart';
@@ -221,6 +222,121 @@ void main() {
       expect(find.text('Externe portefeuille'), findsOneWidget);
       expect(find.text('Ophalen'), findsOneWidget);
       expect(find.text('Credential-bestand kiezen'), findsOneWidget);
+    });
+  });
+
+  group('acties op een bewijsstuk', () {
+    var refreshes = 0;
+
+    Future<_ActionsNotifier> pumpActions(
+      WidgetTester tester, {
+      required List<EvidenceUpload> uploads,
+      List<OciServeEvidenceItem> items = const [],
+      _ActionsNotifier? notifier,
+    }) async {
+      refreshes = 0;
+      final n = notifier ?? _ActionsNotifier();
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [ociServeProvider.overrideWith(() => n)],
+          child: MaterialApp(
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            home: Scaffold(
+              body: OciServeEvidence(
+                qualifications: const [],
+                evidenceUploads: uploads,
+                evidenceItems: items,
+                evidenceTypes: _bhvTypes,
+                organizationId: 'org',
+                onRefresh: () => refreshes++,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      return n;
+    }
+
+    testWidgets('intrekken vraagt eerst om bevestiging; annuleren doet niets', (
+      tester,
+    ) async {
+      final n = await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        items: [_item('u1', 'ingediend')],
+      );
+      await tester.tap(find.text('Intrekken'));
+      await tester.pumpAndSettle();
+      expect(find.text('Bewijsstuk intrekken?'), findsOneWidget);
+      await tester.tap(find.text('Annuleren'));
+      await tester.pumpAndSettle();
+      expect(n.withdrawn, isEmpty);
+      expect(refreshes, 0);
+    });
+
+    testWidgets('bevestigd intrekken trekt het stuk in en ververst de lijst', (
+      tester,
+    ) async {
+      final n = await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        items: [_item('u1', 'in_behandeling')],
+      );
+      await tester.tap(find.text('Intrekken'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Intrekken'));
+      await tester.pumpAndSettle();
+      expect(n.withdrawn, ['item-u1']);
+      expect(refreshes, 1);
+    });
+
+    testWidgets('een mislukte intrekking meldt dat en ververst niet', (
+      tester,
+    ) async {
+      final n = await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        items: [_item('u1', 'ingediend')],
+        notifier: _ActionsNotifier(failWithdraw: true),
+      );
+      await tester.tap(find.text('Intrekken'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Intrekken'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Het intrekken is mislukt'), findsOneWidget);
+      expect(n.withdrawn, isEmpty);
+      expect(refreshes, 0);
+    });
+
+    testWidgets('openen van iets dat geen PDF is, meldt dat in gewone taal', (
+      tester,
+    ) async {
+      await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        notifier: _ActionsNotifier(download: Uint8List.fromList([1, 2, 3])),
+      );
+      await tester.tap(find.text('Openen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Kon dit bestand niet openen.'), findsOneWidget);
+    });
+
+    testWidgets('openen valt netjes terug als het ophalen zelf mislukt', (
+      tester,
+    ) async {
+      await pumpActions(
+        tester,
+        uploads: [_cleanUpload('u1')],
+        notifier: _ActionsNotifier(download: null),
+      );
+      await tester.tap(find.text('Openen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Kon dit bestand niet openen.'), findsOneWidget);
     });
   });
 
@@ -1093,5 +1209,43 @@ class _PortfolioNotifier extends _EvidenceTestNotifier {
     sharedItemIds = selectedItemIds;
     sharedTypeId = evidenceTypeId;
     return selectedItemIds;
+  }
+}
+
+/// Legt vast welke bewijsstukken zijn ingetrokken en laat intrekken of
+/// ophalen op verzoek mislukken.
+class _ActionsNotifier extends _EvidenceTestNotifier {
+  _ActionsNotifier({this.failWithdraw = false, this.download});
+
+  final bool failWithdraw;
+
+  /// De bytes die [downloadEvidence] geeft; `null` laat het ophalen falen.
+  final Uint8List? download;
+  final withdrawn = <String>[];
+
+  @override
+  Future<OciServeEvidenceItem> withdrawEvidenceItem({
+    required String organizationId,
+    required String participantId,
+    required String evidenceItemId,
+  }) async {
+    if (failWithdraw) throw const OciServeException('stuk', statusCode: 500);
+    withdrawn.add(evidenceItemId);
+    return OciServeEvidenceItem(
+      id: evidenceItemId,
+      evidenceTypeId: 'type-bhv',
+      status: OciServeEvidenceContentStatus.ingetrokken,
+      createdAt: DateTime.utc(2026, 9, 2),
+    );
+  }
+
+  @override
+  Future<Uint8List> downloadEvidence({
+    required String organizationId,
+    required String evidenceId,
+  }) async {
+    final bytes = download;
+    if (bytes == null) throw const OciServeException('weg', statusCode: 404);
+    return bytes;
   }
 }

@@ -59,6 +59,11 @@ class _OciServeInvitationDialogState
   var _step = _InvitationStep.codes;
   var _busy = false;
   var _passwordVisible = false;
+
+  /// Na een geslaagde registratie is de deelnemer ook aangemeld, dus `_acceptOnly`
+  /// zegt dan 'accepteren'. Dit onthoudt langs welke weg de uitnodiging werd
+  /// gebruikt, zodat het slotscherm de juiste tekst toont.
+  var _registered = false;
   String? _error;
   String _invitedEmail = '';
 
@@ -174,6 +179,7 @@ class _OciServeInvitationDialogState
             password: password,
             idempotencyKey: _idempotencyKey,
           );
+      _registered = true;
       _password.clear();
       _passwordConfirm.clear();
       if (!mounted) return;
@@ -400,7 +406,7 @@ class _OciServeInvitationDialogState
         const SizedBox(width: 8),
         Expanded(
           child: Text(
-            _acceptOnly
+            _acceptOnly && !_registered
                 ? l10n.d(
                     'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.',
                   )
