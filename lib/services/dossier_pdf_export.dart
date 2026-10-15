@@ -46,6 +46,7 @@ Future<Uint8List> buildDossierPdf(
   bool includeInterleaves = true,
   PrivacyExportProfile profile = PrivacyExportProfile.redacted,
   bool privacyAcknowledged = false,
+  List<ByteData> fallbackFonts = const [],
 }) async {
   final verified = <(DossierEntry, String)>[];
   for (final entry in dossier.entries) {
@@ -66,10 +67,40 @@ Future<Uint8List> buildDossierPdf(
     verified.add((entry, path));
   }
 
+  final summaries = <PrivacyExportSummary>[];
+  final projectedMetadata = <String, String>{};
+  Future<String> display(String raw) async {
+    if (raw.trim().isEmpty) return '';
+    if (projectedMetadata[raw] case final String cached) return cached;
+    final bundle = await buildDocumentExportBundle(
+      raw,
+      projectPath: null,
+      profile: profile,
+      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+      regions: settings.privacyRegions,
+      disabledRules: settings.privacyDisabledRules,
+      markdownService: MarkdownService(),
+    );
+    summaries.add(bundle.privacySummary);
+    final projected = projectedDocumentBodyForRendering(bundle).trim();
+    if (projected.isEmpty) {
+      throw const FormatException(
+        'Dossiermetadata kon niet veilig worden geprojecteerd',
+      );
+    }
+    return projectedMetadata[raw] = _safe(projected);
+  }
+
+  final dossierTitle = await display(dossier.title);
+  final dossierDescription = await display(dossier.description);
+  final entryTitles = <String>[
+    for (final (entry, _) in verified) await display(entry.title),
+  ];
+
   final blocks = <PdfBlock>[
-    PdfHeadingBlock(1, [PdfSpan(_safe(dossier.title))], _safe(dossier.title)),
-    if (dossier.description.trim().isNotEmpty)
-      PdfParagraphBlock([PdfSpan(_safe(dossier.description))]),
+    PdfHeadingBlock(1, [PdfSpan(dossierTitle)], dossierTitle),
+    if (dossierDescription.isNotEmpty)
+      PdfParagraphBlock([PdfSpan(dossierDescription)]),
     PdfParagraphBlock([
       PdfSpan('${dossier.entries.length} documenten', bold: true),
     ]),
@@ -81,7 +112,7 @@ Future<Uint8List> buildDossierPdf(
           '${dossier.numberFor(i).toString().padLeft(2, '0')}   ',
           bold: true,
         ),
-        PdfSpan(_safe(verified[i].$1.title)),
+        PdfSpan(entryTitles[i]),
       ]),
   ];
   final images = <String, Uint8List>{};
@@ -114,13 +145,7 @@ Future<Uint8List> buildDossierPdf(
     if (!classificationDecision.allowed) {
       throw DossierPdfClassificationException(classificationDecision);
     }
-    final privacyDecision = PrivacyExportPolicy(
-      gate: settings.privacyExportGate,
-    ).evaluate(bundle.privacySummary);
-    if (!privacyDecision.allowed &&
-        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
-      throw DossierPdfPrivacyException(privacyDecision);
-    }
+    summaries.add(bundle.privacySummary);
     final projected = projectedDocumentBodyForRendering(bundle);
     final sourceBlocks = markdownToPdfBlocks(projected);
     // Projection can remove image paths while preserving projected alt text.
@@ -135,7 +160,7 @@ Future<Uint8List> buildDossierPdf(
     );
     blocks.add(const PdfPageBreakBlock());
     if (includeInterleaves) {
-      final title = _safe(entry.title);
+      final title = entryTitles[i];
       blocks.add(PdfHeadingBlock(1, [PdfSpan(title)], title));
       blocks.add(
         PdfParagraphBlock([
@@ -143,14 +168,16 @@ Future<Uint8List> buildDossierPdf(
         ]),
       );
       if (entry.description.trim().isNotEmpty) {
-        blocks.add(PdfParagraphBlock([PdfSpan(_safe(entry.description))]));
+        blocks.add(
+          PdfParagraphBlock([PdfSpan(await display(entry.description))]),
+        );
       }
       if (entry.documentDate case final String documentDate
           when documentDate.trim().isNotEmpty) {
         blocks.add(
           PdfParagraphBlock([
             const PdfSpan('Datum  ', bold: true),
-            PdfSpan(_safe(documentDate)),
+            PdfSpan(await display(documentDate)),
           ]),
         );
       }
@@ -158,7 +185,7 @@ Future<Uint8List> buildDossierPdf(
         blocks.add(
           PdfParagraphBlock([
             const PdfSpan('Opsteller  ', bold: true),
-            PdfSpan(_safe(entry.author)),
+            PdfSpan(await display(entry.author)),
           ]),
         );
       }
@@ -171,15 +198,27 @@ Future<Uint8List> buildDossierPdf(
       blocks.add(const PdfPageBreakBlock());
     }
     // A presentation source is deliberately laid out as document text.
-    blocks.add(
-      PdfHeadingBlock(1, [PdfSpan(_safe(entry.title))], _safe(entry.title)),
-    );
+    blocks.add(PdfHeadingBlock(1, [PdfSpan(entryTitles[i])], entryTitles[i]));
     blocks.addAll(rebased);
+  }
+  final summary = PrivacyExportSummary(
+    unresolved: summaries.fold(0, (sum, item) => sum + item.unresolved),
+    accepted: summaries.fold(0, (sum, item) => sum + item.accepted),
+    shielded: summaries.fold(0, (sum, item) => sum + item.shielded),
+    redacted: summaries.fold(0, (sum, item) => sum + item.redacted),
+    setAside: summaries.fold(0, (sum, item) => sum + item.setAside),
+  );
+  final privacyDecision = PrivacyExportPolicy(
+    gate: settings.privacyExportGate,
+  ).evaluate(summary);
+  if (!privacyDecision.allowed &&
+      (privacyDecision.hardBlocked || !privacyAcknowledged)) {
+    throw DossierPdfPrivacyException(privacyDecision);
   }
   return buildDocumentPdf(
     blocks,
     style: DocumentPdfStyle.fromTheme(const ThemeProfile()),
-    fonts: DocumentPdfFonts.forFamily('Helvetica'),
+    fonts: DocumentPdfFonts.forFamily('Helvetica', fallbackFonts: fallbackFonts),
     verbatimLabel: (kind) => switch (kind) {
       PdfVerbatimKind.math => 'Formule',
       PdfVerbatimKind.mermaid => 'Diagram',

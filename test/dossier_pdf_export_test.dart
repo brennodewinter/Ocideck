@@ -96,6 +96,34 @@ void main() {
     expect(text, contains('Bron'));
   });
 
+  test(
+    'one privacy decision covers every source and dossier metadata',
+    () async {
+      final first = File('${root.path}/one.md')
+        ..writeAsStringSync('# Een\n\nBSN 728398242.');
+      final second = File('${root.path}/two.md')
+        ..writeAsStringSync('# Twee\n\nBSN 728398242.');
+      var dossier = await store.create('BSN 728398242 dossier');
+      dossier = await store.addFile(dossier, first);
+      dossier = await store.addFile(dossier, second);
+      try {
+        await buildDossierPdf(dossier, store, settings: const AppSettings());
+        fail('A privacy decision was required');
+      } on DossierPdfPrivacyException catch (error) {
+        expect(error.decision.summary.unresolved, greaterThanOrEqualTo(2));
+      }
+      final text = pdfVisibleText(
+        await buildDossierPdf(
+          dossier,
+          store,
+          settings: const AppSettings(),
+          privacyAcknowledged: true,
+        ),
+      );
+      expect(text, isNot(contains('728398242')));
+    },
+  );
+
   test('changed and missing source abort before returning PDF bytes', () async {
     final source = File('${root.path}/source.md')..writeAsStringSync('# Bron');
     var dossier = await store.create('Dossier');
