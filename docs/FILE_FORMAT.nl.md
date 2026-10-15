@@ -22,6 +22,7 @@
 - [12. Redactiemanifest-bestanden (naast een export)](#12-redactie-manifestbestanden-naast-een-export)
 - [13. Aanvaarde bestanden en hun grenzen](#13-geaccepteerde-bestanden-en-hun-grenzen)
 - [14. Documenten (gewone `.md`, geen deck)](#14-documenten-gewone-md-geen-deck)
+- [15. Documentdossiers](#15-documentdossiers)
 
 *(Toegevoegd 2026-07-22: dit document had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repository-pagina niet. De noot gaf vroeger een regelaantal — ongeveer 2.253 — dat stilletjes was doorgegroeid naar ruwweg 3.280 op 2026-08-16; een getal dat niemand bijwerkt kun je beter weglaten dan verkeerd laten staan.)*
 
@@ -4382,3 +4383,48 @@ antwoordzones schrijft, is de weg om er een te beantwoorden.
 Ontwerp, grammatica, veldtypen, regelsemantiek en de validatiecodes:
 `docs/design/FORM_INTAKE.md` §4. De referentieparser is het losse pakket
 `packages/ocideck_form_core`.
+
+## 15. Documentdossiers
+
+Een documentdossier is een map met `dossier.json` en een afgeleid, leesbaar
+`overzicht.md`. OciDeck behandelt het dossier als **document**, ook wanneer een
+verwezen `.md`-bestand een presentatie is. De brondocumenten blijven op hun
+oorspronkelijke plek; toevoegen kopieert het bestand en de bijbehorende media
+niet. Dit formaat staat los van de versleutelde auditdossier-export in §6.
+
+`dossier.json` is UTF-8-JSON. OciDeck schrijft versie **2** en leest ook versie
+1; na opslaan wordt een versie-1-dossier versie 2. Onbekende sleutels op
+dossier- en itemniveau blijven behouden bij lezen en opslaan. De volgorde in
+`entries` is leidend; `overzicht.md` wordt daaruit opnieuw gemaakt. Bewaar
+beide bestanden bij elkaar. Als `overzicht.md` handmatig is gewijzigd,
+overschrijft OciDeck het bij de volgende dossierbewerking niet.
+
+| JSON-veld | Betekenis |
+| --- | --- |
+| `version` | Bij schrijven `2`; bij lezen wordt ook `1` aanvaard. |
+| `title`, `description` | Dossiertitel en optionele beschrijving. |
+| `createdAt`, `updatedAt` | UTC-tijdstippen in ISO 8601. |
+| `startNumber` | Eerste automatisch getoonde nummer; standaard `1`. |
+| `entries` | Geordende reeks documentverwijzingen. |
+
+Elk item heeft een stabiele `id`, getoonde `title`, `relativePath` en een
+`sha256` van de bronbytes als 64 hexadecimale tekens in kleine letters.
+`relativePath` is een POSIX-pad ten opzichte van de dossiermap, behouden voor
+oude gekopieerde bijlagen en links in het overzicht. Nieuwe items bewaren ook
+`sourcePath` (het oorspronkelijke absolute pad), `originalName`, `sizeBytes` en
+`checkedAt`. Staat de bron binnen de dossiermap, dan bewaart
+`sourceRelativePath` het verplaatsbare relatieve pad; dat gaat bij het openen
+vóór `sourcePath`. Een bron buiten die map blijft afhankelijk van het absolute
+pad. Met `numberOverride` kan een positief, uniek getoond nummer worden
+vastgezet; automatische nummers slaan zulke nummers over. `hashHistory` bevat
+eerdere referentiehashes als objecten `{ "sha256": "…", "recordedAt": "…" }`.
+Optionele velden kunnen in oudere items ontbreken.
+
+Bij controle wordt het huidige bestand op schijf gehasht en met `sha256`
+vergeleken. `checkedAt` legt het controletijdstip vast zonder de referentiehash
+te veranderen. Een nieuwe referentie accepteren is een aparte handeling die de
+vorige hash aan `hashHistory` toevoegt. Een overeenkomende SHA-256 toont
+overeenstemming met de opgeslagen waarde, geen auteurschap of goedkeuring.
+Bij openen en controleren worden onveilige paden en vervangen symbolische
+links geweigerd. Deze versie ondersteunt lokale `.md`-documenten en
+-presentaties als verwijzing; PDF- en Office-bestanden worden niet ondersteund.
