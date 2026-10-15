@@ -1,0 +1,295 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:crypto/crypto.dart';
+import 'package:path/path.dart' as p;
+
+import '../models/document_dossier.dart';
+import '../models/markdown_document.dart';
+import '../models/privacy_disposition.dart';
+import '../models/settings.dart' show AppSettings, ThemeProfile;
+import 'classification_enforcement_policy.dart';
+import 'classification_policy.dart';
+import 'document_dossier_store.dart';
+import 'document_export_service.dart';
+import 'markdown_service.dart';
+import 'pdf/document_pdf_blocks.dart';
+import 'pdf/document_pdf_fonts.dart';
+import 'pdf/document_pdf_renderer.dart';
+import 'pdf/document_pdf_style.dart';
+import 'pdf/markdown_to_pdf_blocks.dart';
+import 'privacy/privacy_own_identity.dart';
+import 'privacy/privacy_export_policy.dart';
+import 'privacy/privacy_projection.dart';
+
+class DossierPdfClassificationException implements Exception {
+  const DossierPdfClassificationException(this.decision);
+  final ExportDecision decision;
+}
+
+class DossierPdfPrivacyException implements Exception {
+  const DossierPdfPrivacyException(this.decision);
+  final PrivacyExportDecision decision;
+}
+
+/// Builds one document PDF from the dossier's verified, projected sources.
+///
+/// The caller writes the returned bytes only after this completes. A changed,
+/// missing or unsafe source therefore never produces a partial export. The
+/// redacted profile is the safe default; a full export requires an explicit
+/// profile choice in the calling UI.
+Future<Uint8List> buildDossierPdf(
+  DocumentDossier dossier,
+  DocumentDossierStore store, {
+  required AppSettings settings,
+  bool includeInterleaves = true,
+  PrivacyExportProfile profile = PrivacyExportProfile.redacted,
+  bool privacyAcknowledged = false,
+}) async {
+  final verified = <(DossierEntry, String)>[];
+  for (final entry in dossier.entries) {
+    final result = await store.verify(entry);
+    final path = await store.resolvedPath(entry);
+    if (result.status != DossierIntegrityStatus.matches || path == null) {
+      throw FileSystemException(
+        'Dossierbron is gewijzigd of niet veilig leesbaar: ${result.status.name}',
+        entry.relativePath,
+      );
+    }
+    if (p.extension(path).toLowerCase() != '.md') {
+      throw FileSystemException(
+        'Alleen Markdown-bronnen zijn ondersteund',
+        path,
+      );
+    }
+    verified.add((entry, path));
+  }
+
+  final blocks = <PdfBlock>[
+    PdfHeadingBlock(1, [PdfSpan(_safe(dossier.title))], _safe(dossier.title)),
+    if (dossier.description.trim().isNotEmpty)
+      PdfParagraphBlock([PdfSpan(_safe(dossier.description))]),
+    PdfParagraphBlock([
+      PdfSpan('${dossier.entries.length} documenten', bold: true),
+    ]),
+    const PdfPageBreakBlock(),
+    const PdfHeadingBlock(1, [PdfSpan('Inhoud')], 'Inhoud'),
+    for (var i = 0; i < verified.length; i++)
+      PdfParagraphBlock([
+        PdfSpan(
+          '${dossier.numberFor(i).toString().padLeft(2, '0')}   ',
+          bold: true,
+        ),
+        PdfSpan(_safe(verified[i].$1.title)),
+      ]),
+  ];
+  final images = <String, Uint8List>{};
+  for (var i = 0; i < verified.length; i++) {
+    final (entry, path) = verified[i];
+    final sourceBytes = await File(path).readAsBytes();
+    if (sha256.convert(sourceBytes).toString() != entry.sha256) {
+      throw FileSystemException(
+        'Dossierbron is tijdens export gewijzigd',
+        path,
+      );
+    }
+    final source = MarkdownDocument.parse(utf8.decode(sourceBytes));
+    final body = source.body;
+    final bundle = await buildDocumentExportBundle(
+      body,
+      projectPath: p.dirname(path),
+      profile: profile,
+      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+      regions: settings.privacyRegions,
+      disabledRules: settings.privacyDisabledRules,
+      markdownService: MarkdownService(),
+      tlp: source.tlp,
+      fields: source.fields,
+    );
+    final classificationDecision =
+        ClassificationEnforcementPolicy.fromAppSettings(
+          settings,
+        ).evaluate(bundle.audience.deck.tlp);
+    if (!classificationDecision.allowed) {
+      throw DossierPdfClassificationException(classificationDecision);
+    }
+    final privacyDecision = PrivacyExportPolicy(
+      gate: settings.privacyExportGate,
+    ).evaluate(bundle.privacySummary);
+    if (!privacyDecision.allowed &&
+        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
+      throw DossierPdfPrivacyException(privacyDecision);
+    }
+    final projected = projectedDocumentBodyForRendering(bundle);
+    final sourceBlocks = markdownToPdfBlocks(projected);
+    // Projection can remove image paths while preserving projected alt text.
+    // Raw paths are used only for locating safe image bytes.
+    final imageRefs = _imageSources(markdownToPdfBlocks(body));
+    final rebased = await _embedLocalImages(
+      sourceBlocks,
+      path,
+      entry.id,
+      imageRefs,
+      images,
+    );
+    blocks.add(const PdfPageBreakBlock());
+    if (includeInterleaves) {
+      final title = _safe(entry.title);
+      blocks.add(PdfHeadingBlock(1, [PdfSpan(title)], title));
+      blocks.add(
+        PdfParagraphBlock([
+          PdfSpan('DOCUMENT ${dossier.numberFor(i)}', bold: true),
+        ]),
+      );
+      if (entry.description.trim().isNotEmpty) {
+        blocks.add(PdfParagraphBlock([PdfSpan(_safe(entry.description))]));
+      }
+      if (entry.documentDate case final String documentDate
+          when documentDate.trim().isNotEmpty) {
+        blocks.add(
+          PdfParagraphBlock([
+            const PdfSpan('Datum  ', bold: true),
+            PdfSpan(_safe(documentDate)),
+          ]),
+        );
+      }
+      if (entry.author.trim().isNotEmpty) {
+        blocks.add(
+          PdfParagraphBlock([
+            const PdfSpan('Opsteller  ', bold: true),
+            PdfSpan(_safe(entry.author)),
+          ]),
+        );
+      }
+      blocks.add(
+        PdfParagraphBlock([
+          const PdfSpan('SHA-256  ', bold: true),
+          PdfSpan(entry.sha256, code: true),
+        ]),
+      );
+      blocks.add(const PdfPageBreakBlock());
+    }
+    // A presentation source is deliberately laid out as document text.
+    blocks.add(
+      PdfHeadingBlock(1, [PdfSpan(_safe(entry.title))], _safe(entry.title)),
+    );
+    blocks.addAll(rebased);
+  }
+  return buildDocumentPdf(
+    blocks,
+    style: DocumentPdfStyle.fromTheme(const ThemeProfile()),
+    fonts: DocumentPdfFonts.forFamily('Helvetica'),
+    verbatimLabel: (kind) => switch (kind) {
+      PdfVerbatimKind.math => 'Formule',
+      PdfVerbatimKind.mermaid => 'Diagram',
+      PdfVerbatimKind.chart => 'Grafiek',
+    },
+    images: images,
+    chrome: const DocumentPdfChrome(showPageNumbers: true),
+  );
+}
+
+String _safe(String value) => PrivacyProjection.redactText(value).text;
+
+/// Give each image a dossier-unique key and read only files beside its source.
+/// Symlinks and escapes are rejected before their bytes can enter the PDF.
+Future<List<PdfBlock>> _embedLocalImages(
+  List<PdfBlock> blocks,
+  String sourcePath,
+  String entryId,
+  List<String> imageRefs,
+  Map<String, Uint8List> images,
+) async {
+  final root = p.dirname(sourcePath);
+  var next = 0;
+  Future<List<PdfBlock>> visit(List<PdfBlock> source) async {
+    final output = <PdfBlock>[];
+    for (final block in source) {
+      switch (block) {
+        case PdfImageBlock(:final alt):
+          if (next >= imageRefs.length) {
+            throw const FormatException(
+              'Afbeeldingsverwijzing wijkt af na projectie',
+            );
+          }
+          final source = imageRefs[next];
+          final target = Uri.tryParse(source);
+          if (source.isEmpty ||
+              target == null ||
+              target.hasScheme ||
+              target.hasQuery ||
+              target.hasFragment ||
+              p.isAbsolute(source)) {
+            throw FileSystemException(
+              'Onveilige afbeeldingsverwijzing',
+              source,
+            );
+          }
+          final path = p.normalize(p.join(root, Uri.decodeComponent(source)));
+          if (!p.isWithin(root, path) ||
+              await FileSystemEntity.type(path, followLinks: false) !=
+                  FileSystemEntityType.file) {
+            throw FileSystemException(
+              'Onveilige afbeeldingsverwijzing',
+              source,
+            );
+          }
+          if (await File(path).resolveSymbolicLinks() != path) {
+            throw FileSystemException(
+              'Onveilige afbeeldingsverwijzing',
+              source,
+            );
+          }
+          final key = 'dossier-image:$entryId:${next++}';
+          images[key] = await File(path).readAsBytes();
+          output.add(PdfImageBlock(key, alt: alt));
+        case PdfQuoteBlock(:final blocks):
+          output.add(PdfQuoteBlock(await visit(blocks)));
+        case PdfListBlock(:final items, :final ordered, :final startNumber):
+          output.add(
+            PdfListBlock(
+              [
+                for (final item in items)
+                  PdfListItem(await visit(item.blocks), checked: item.checked),
+              ],
+              ordered: ordered,
+              startNumber: startNumber,
+            ),
+          );
+        default:
+          output.add(block);
+      }
+    }
+    return output;
+  }
+
+  final result = await visit(blocks);
+  if (next != imageRefs.length) {
+    throw const FormatException('Afbeeldingsverwijzing wijkt af na projectie');
+  }
+  return result;
+}
+
+List<String> _imageSources(List<PdfBlock> blocks) {
+  final result = <String>[];
+  void visit(List<PdfBlock> source) {
+    for (final block in source) {
+      switch (block) {
+        case PdfImageBlock(:final source):
+          result.add(source);
+        case PdfQuoteBlock(:final blocks):
+          visit(blocks);
+        case PdfListBlock(:final items):
+          for (final item in items) {
+            visit(item.blocks);
+          }
+        default:
+          break;
+      }
+    }
+  }
+
+  visit(blocks);
+  return result;
+}
