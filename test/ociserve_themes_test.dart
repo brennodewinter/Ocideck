@@ -8,6 +8,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
+import 'package:ocideck/models/ociserve_theme.dart';
 import 'package:ocideck/services/ociserve/ociserve_gateway.dart';
 import 'package:ocideck/services/ociserve/ociserve_http.dart';
 
@@ -198,6 +199,16 @@ void main() {
           isA<OciServeException>().having((e) => e.statusCode, 'status', 409),
         ),
       );
+    },
+  );
+
+  test(
+    'een lege of jokerteken-ETag is geen If-Match voor een stille bijwerking',
+    () {
+      expect(themeMatchToken(null), isNull);
+      expect(themeMatchToken('   '), isNull);
+      expect(themeMatchToken('*'), isNull);
+      expect(themeMatchToken(' "v3" '), '"v3"');
     },
   );
 }

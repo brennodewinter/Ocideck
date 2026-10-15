@@ -63,6 +63,18 @@ Future<void> _escape(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+/// De teller gebruikt een echte stopwatch. Onder een volle suite kan er
+/// tussen opbouw en assertie al een cent bij zijn getikt; de vorm van het
+/// bedrag blijft de afspraak, de exacte nul niet.
+String _overlayAmount(WidgetTester tester) => tester
+    .widget<Text>(
+      find.descendant(
+        of: find.byType(CostOverlay),
+        matching: find.byType(Text),
+      ),
+    )
+    .data!;
+
 void main() {
   group('lopend bedrag', () {
     testWidgets('expliciete modus toont het bedrag, beginnend bij nul', (
@@ -70,7 +82,7 @@ void main() {
     ) async {
       await _pump(tester, _host(cost: _explicit));
       expect(find.byType(CostOverlay), findsOneWidget);
-      expect(find.text('€0,00'), findsOneWidget);
+      expect(_overlayAmount(tester), matches(RegExp(r'^€\d+,\d{2}$')));
     });
 
     testWidgets('de overlay is sessie-bekleding, geen dia-inhoud', (
@@ -118,7 +130,10 @@ void main() {
           ),
         ),
       );
-      expect(find.text('\$0,00 ≈ €0,00'), findsOneWidget);
+      expect(
+        _overlayAmount(tester),
+        matches(RegExp(r'^\$\d+,\d{2} ≈ €\d+,\d{2}$')),
+      );
     });
 
     testWidgets('een USD-sessie zonder koers verzint geen EUR-bedrag', (

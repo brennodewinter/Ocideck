@@ -35,3 +35,13 @@ class OciServeTheme {
     );
   }
 }
+
+/// `If-Match` voor een bijwerking die de gebruiker nog niet als
+/// overschrijving heeft gekozen. Een ontbrekende ETag, of een letterlijke
+/// `*`, mag hier niet doorsijpelen: dat zou een naamconflict stil
+/// overschrijven.
+String? themeMatchToken(String? etag) {
+  final value = etag?.trim() ?? '';
+  if (value.isEmpty || value == '*') return null;
+  return value;
+}

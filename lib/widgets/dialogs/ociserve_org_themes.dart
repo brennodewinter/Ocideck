@@ -258,6 +258,17 @@ class _OciServeOrgThemesState extends ConsumerState<OciServeOrgThemes> {
       final detail = await ref
           .read(ociServeProvider.notifier)
           .organizationTheme(organizationId: org, themeId: existing.id);
+      final match = themeMatchToken(detail.etag);
+      if (match == null) {
+        if (mounted) {
+          showErrorSnackBar(
+            ScaffoldMessenger.of(context),
+            l10n,
+            l10n.d('Bijwerken is niet gelukt. Probeer het opnieuw.'),
+          );
+        }
+        return;
+      }
       await ref
           .read(ociServeProvider.notifier)
           .updateOrganizationTheme(
@@ -265,7 +276,7 @@ class _OciServeOrgThemesState extends ConsumerState<OciServeOrgThemes> {
             themeId: existing.id,
             name: name,
             definition: widget.current.toJson(),
-            ifMatch: detail.etag ?? '*',
+            ifMatch: match,
           );
       if (mounted) unawaited(_load());
     } on OciServeException catch (e) {
