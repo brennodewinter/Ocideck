@@ -4956,6 +4956,69 @@ retried after the next authenticated connection. Logout removes the refresh
 token but preserves pending progress. Changing server is refused while progress
 still waits; only the full local-data reset deliberately removes the queue.
 
+### Joining through an invitation
+
+An organisation can hand you an invitation number and a one-time code instead of
+asking you to create an account first. Under **Integraties → eLearning**, choose
+**Uitnodiging gebruiken** and enter both. OciDeck shows who the invitation is
+for before anything is created. If you do not have an account yet, you register
+with the invited e-mail address, your name and a password you choose yourself;
+OciDeck then signs you in. If you are already signed in, accepting links the
+organisation to your existing account — OciDeck may still ask the browser to
+confirm it is really you. A wrong or expired combination produces one generic
+message, so the route cannot be used to find out whether an address exists.
+
+### Bookings and your calendar
+
+**Mijn inschrijvingen** lists the sessions you are booked for — upcoming,
+offered and past — and lets you confirm or decline an offered place. The
+**Agenda koppelen** card creates a personal calendar link: paste it once into
+your own calendar app and your sessions appear there and stay updated on
+changes and cancellations. The link is shown exactly once; anyone holding it
+can read your appointments, so do not share it. **Nieuwe link** rotates the
+link (the old one stops working immediately) and **Intrekken** ends the
+subscription entirely. OciDeck keeps only the expiry date on your device —
+the link itself is never stored — and reminds you to renew before it lapses.
+
+### Badges, evidence and certificates
+
+**Mijn bewijs** shows the badges your organisation issued, each with its
+validity date. Under a badge, **Nog nodig voor deze badge** lists the
+requirements still open — for example a piece of evidence, a course or a
+passed exam — and an **Aanleveren** button next to an evidence requirement
+opens the submission dialog with that evidence type already selected.
+
+Below the badges sit your uploads and the evidence items you submitted for
+review: while an upload is still in virus-scan quarantine it is not yet
+evidence, and an item shows its review state from *ingediend* through
+*geaccepteerd* or *afgewezen*. An item that has not been reviewed yet can be
+withdrawn. **Certificaten** lists the certificates the organisation issued;
+**Bekijken** opens the PDF in the read-only viewer and **Bewaren** saves a
+copy to your disk.
+
+Under **Externe portefeuille** you can import credentials you already hold
+elsewhere: paste the public verification link or choose a credential file,
+pick which of the found credentials to share — nothing you leave unselected
+leaves the import — and **Delen als bewijs** submits them as evidence of the
+type you choose.
+
+### Profile photo
+
+Your eLearning profile shows a photo when you set one. On the profile view,
+choose **Profielfoto wijzigen** to pick a PNG, JPEG or WebP image up to 5 MB,
+or **Profielfoto verwijderen** to remove it; the organisation and other
+participants then see no photo on your account.
+
+### Organisation themes
+
+When your organisation publishes presentation themes, the theme picker in
+the style settings gains a **Thema's van de organisatie** button. It lists
+what the organisation shares; adopting one copies its definition into your
+own style profiles, and if you may manage them you can also publish a local
+style profile back to the organisation. Two people editing the same theme is
+detected: OciDeck then asks whether to overwrite the server version or adopt
+it instead of silently clobbering the other edit.
+
 ### Importing SCORM, QTI, xAPI/cmi5, AICC and OLX
 
 OciDeck can read the structure of an eLearning package: SCORM and IMS Content

@@ -58,6 +58,42 @@ All notable changes to OciDeck are documented in this file.
   opsommingsdia in een presentatie. Daarna is die tekst van jou: een latere
   opslag herschrijft hem niet, en weghalen laat `tlp:` staan. Een verzegeld
   deck krijgt geen extra dia.
+- **Deelnemen via een uitnodiging.** Een organisatie geeft je een
+  uitnodigingsnummer en een eenmalige code; onder *Integraties → eLearning*
+  staat *Uitnodiging gebruiken*. Je ziet voor wie de uitnodiging is, registreert
+  met het uitgenodigde adres, of accepteert hem bij je bestaande account. Een
+  verkeerde combinatie levert één algemene melding. Dit vraagt een OciServe
+  met de registratie- en acceptatieroutes voor uitnodigingen.
+- **Je bijeenkomsten in je eigen agenda.** In *Mijn inschrijvingen* staat
+  *Agenda koppelen*: een persoonlijke agenda-link die je eenmalig in je
+  agenda-app plakt en die bij wijzigingen en annuleringen meebeweegt. OciDeck
+  toont de link één keer en bewaart hem nergens — alleen de verloopdatum —
+  met *Nieuwe link* en *Intrekken* ernaast. Dit vraagt een OciServe met de
+  kalenderabonnement-routes.
+- **Per badge zie je wat er nog ontbreekt.** *Mijn bewijs* toont onder elke
+  badge welke eisen nog open staan — een bewijsstuk, een cursus, een examen —
+  met *Aanleveren* dat het aanleverdialoog opent met de juiste soort bewijs
+  al gekozen. Laadt het leesmodel niet, dan blijft de rest van het scherm
+  gewoon bruikbaar. Dit vraagt een OciServe met de badge-readiness-route.
+- **Certificaten en een externe portefeuille in Mijn bewijs.** Uitgegeven
+  certificaten bekijk je als PDF en bewaar je op schijf; een ingetrokken
+  certificaat blijft zichtbaar met die status. Met *Externe portefeuille*
+  haal je credentials binnen via een publieke verificatielink of een
+  credential-bestand, vink je aan wat je deelt — wat niet is aangevinkt gaat
+  nergens heen — en lever je de keuze in als bewijs. Een ingediend stuk dat
+  nog niet beoordeeld is, kun je intrekken. Dit vraagt een OciServe met de
+  certificaat- en portefeuille-import-routes.
+- **Profielfoto en auditspoor.** Op je leerprofiel kies of verwijder je een
+  profielfoto (PNG, JPEG of WebP tot 5 MB). Aanmelden en een les openen
+  meldt OciDeck aan de auditregistratie van de server, zodat je in *Mijn
+  gegevens* ziet wanneer er is ingelogd en welke lessen zijn geopend. Dit
+  vraagt een OciServe met de account- en avatar-routes.
+- **Thema's van de organisatie.** Publiceert je organisatie presentatie-
+  thema's, dan haal je ze binnen als lokale kopie vanuit de stijl-instellingen
+  — en mag je ze beheren, dan deel je een eigen stijlprofiel terug. Werken
+  twee mensen tegelijk aan hetzelfde thema, dan vraagt OciDeck bewust om
+  overschrijven of de serverversie overnemen. Dit vraagt een OciServe met de
+  thema-routes.
 
 ### Changed
 
