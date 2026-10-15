@@ -3343,6 +3343,82 @@ op een bepaalde dia pauzeerde om iets te controleren of te herstellen, is dat wa
 belandt. Een lange bevinding die over meerdere pagina's presenteerde keert terug naar zijn enkele bron-
 dia, en een dia die midden in de presentatie is verwijderd laat de selectie waar hij was.
 
+### Kostenmodus: wat de tijd van de aanwezigen kost (#2435–#2438)
+
+*Presentatie-eigenschappen → Kosten van aanwezigen* zet een **indicatie van de
+tijdkosten** van de mensen in de zaal aan, voor deze presentatie. Standaard staat
+hij **uit**, en het is een *schatting van tijd*, geen boekhoudkundige kostprijs — de
+samenvatting zegt dat elke keer dat ze een bedrag toont.
+
+- **Gewoon** toont niets tijdens het presenteren. Na afloop krijgt de samenvatting de
+  totale tijd, de totale kosten en de kosten per dia, op basis van de gemeten tijd
+  per dia.
+- **Expliciet** toont daarnaast een **oplopend totaal rechtsonder** op de dia, en op
+  het publieksvenster als dat er is. Het stijgt met de verstreken tijd, zonder sprongen
+  bij een diawissel, en begint op de eerste dia bij nul. Het is een sessie-overlay, geen
+  dia-inhoud: het komt nooit in een export terecht.
+
+De samenvatting verschijnt na afloop in beide modi — ook als *Tijden-overzicht tonen*
+uit staat — omdat daar het totaal staat. Staat de kostenmodus uit, dan verschijnt er
+nergens iets over kosten.
+
+**Het uurtarief** is óf **één tarief voor de hele groep** (onder dezelfde eigenschappen)
+óf **per aanwezige, bij de start in te vullen**. In het tweede geval verschijnt vóór de
+eerste dia een privéscherm: per persoon een bedrag per uur, maand of jaar en een
+valuta; namen worden niet gevraagd. Een maand- of jaarloon wordt omgerekend met
+aannames die je ziet en kunt aanpassen — betaalde uren per week, weken per jaar en een
+opslag voor werkgeverslasten — en het afgeleide uurtarief wordt getoond, zodat het
+resultaat te controleren is. Er wordt niets stilzwijgend aangenomen. Lege, negatieve,
+onrealistische of verkeerd opgemaakte bedragen en nul werkuren worden geweigerd, en
+*Annuleren* start de presentatie niet, in plaats van haar met een misleidende nul te
+starten.
+
+**Er blijft niets persoonlijks bewaard.** Individuele bedragen en salarissen leven
+alleen tijdens die sessie: niet in het `.md`-bestand, een export, het klembord of een
+logboek. Het startscherm staat alleen op het scherm van de presentator — nooit op een
+tweede scherm of het publieksvenster. Wat wél met het deck meereist, is de modus, de
+manier van invoeren, de valuta en (bij een groepstarief) dat ene tarief — zie
+[FILE_FORMAT.nl.md](FILE_FORMAT.nl.md). De klok start nadat je bevestigt, vóór de
+eerste dia, en wordt niet verstoord door diawissels of teruggaan. Een pauze stopt hem
+niet — de aanwezigen zitten er nog —, `R` zet hem terug op nul en voortijdig stoppen
+beëindigt hem op dat moment.
+
+**Andere valuta.** Kies een andere valuta dan de euro, dan wordt elk bedrag óók getoond
+met zijn **euro-equivalent** (`$ 10,00 ≈ € 9,20`), berekend met **één wisselkoers die
+voor de hele sessie vastligt**, zodat het lopende bedrag en het eindoverzicht met elkaar
+kloppen. Vóór de run krijg je een klein scherm om die koers vast te leggen — en dat is
+de enige plek waar de kostenmodus het netwerk op gaat, en alleen als jij erom vraagt:
+
+- **Ophalen** vraagt Frankfurter (de referentiekoersen van de Europese Centrale Bank) om
+  de koers van elke betrokken valuta: één verzoek per valuta, met niets anders dan de
+  valutacode. De dienst ziet wel je IP-adres. Er worden geen presentatiegegevens
+  verstuurd.
+- **Zelf invullen** kan ook, en de koers heet overal waar hij getoond wordt *handmatig*.
+- **Zonder koers doorgaan** laat de bedragen *koers ontbreekt* tonen in plaats van een
+  verzonnen eurobedrag. Invoerregels in een valuta zonder koers blijven buiten het
+  totaal, en de samenvatting zegt hoeveel.
+
+De koers, zijn bron en zijn peildatum staan bij het resultaat; een koers die ouder is
+dan een week heet *verouderd*. Bedragen in verschillende valuta worden pas opgeteld
+na omrekening naar één eenheid; het resultaat wordt half omhoog afgerond op de kleinste
+eenheid van de valuta (een valuta zonder decimalen, zoals de yen, toont hele eenheden).
+
+### Diaformaat: liggend of staand (#2433)
+
+Onder *Presentatie-eigenschappen → Diaformaat* kies je tussen het **schermformaat
+(16:9)** en een **papierformaat** (een ISO A-, B- of C-vel, **staand of liggend**). De
+keuze geldt voor de hele presentatie en blijft behouden na opslaan en heropenen;
+presentaties zonder keuze blijven 16:9, zoals voorheen.
+
+De editor, de miniaturen, de presentatiemodus, het publieksvenster en de exports (PDF,
+PowerPoint, OpenDocument, Beamer en HTML) gebruiken dezelfde verhouding, zodat er niets
+wordt afgesneden. De keuze reist mee in het leesbare bestand in het vocabulaire dat
+Pandoc al kent (`papersize:`, of `geometry:` met alleen het vel voor liggend), zodat een
+ander gereedschap een logische paginamaat ziet in plaats van een OciDeck-eigen sleutel;
+de details staan in [FILE_FORMAT.nl.md](FILE_FORMAT.nl.md). Het themabestand dat OciDeck naast
+het deck schrijft, draagt de bijbehorende `@size`-regel, zodat Marp zelf dezelfde verhouding
+toont. De papierinstelling van een *document* is een aparte instelling en blijft ongemoeid.
+
 ### Twee schermen (beamer + laptop)
 
 Wanneer een tweede scherm is aangesloten op **macOS, Windows of Linux**, toont OciDeck

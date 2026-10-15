@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../models/exchange_rate.dart';
+import '../utils/log.dart';
 
 /// De ECB-referentiekoersen, gepubliceerd via Frankfurter. Dit is dé
 /// enige plek waar de kostenmodus het netwerk op gaat, en alleen op
@@ -35,7 +36,11 @@ Future<ExchangeRate?> fetchEurRate(
     } finally {
       if (own) c.close();
     }
-  } catch (_) {
+  } on Exception catch (e) {
+    // Netwerkfout, time-out of een onleesbaar adres: "koers ontbreekt", geen
+    // uitzondering naar de gebruiker. De code van de valuta is geen geheim;
+    // het antwoord en het adres van de gebruiker komen er niet in.
+    logWarning('fetchEurRate: koers voor $code niet opgehaald', e);
     return null;
   }
 }
@@ -47,7 +52,7 @@ ExchangeRate? _parseRate(String code, String body) {
   final Object? decoded;
   try {
     decoded = jsonDecode(body);
-  } catch (_) {
+  } on FormatException {
     return null;
   }
   if (decoded is! Map) return null;

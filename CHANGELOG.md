@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Een lijst overleeft kopiëren vanaf het midden van een regel.** Begon je
+  selectie in de visuele stand niet exact op een regelbegin, dan verloren ook de
+  volledig geselecteerde volgende items hun bullet, nummering of vinkje. Een
+  gedeeltelijke eerste regel blijft tekst; alles daarna gaat met zijn eigen
+  opmaak mee. Een lijst die midden in een geneste structuur begint, krijgt
+  niveau 0 in plaats van als codeblok te worden gelezen. Het contextmenu
+  kopieert, knipt en plakt nu langs dezelfde route als Cmd/Ctrl+C, X en V.
+- **De dubbele exportknop rechtsonder is weg.** *Exporteren…* staat in het
+  hoofdmenu; de statuschip met exportgereedheid en bevindingen blijft.
 - **Een taaklijst overleeft knippen en plakken.** Kopiëren en knippen in de
   visuele stand zetten de Markdown op het klembord, inclusief `- [ ]` per
   regel. Knippen van een hele regel neemt de regelafsluiter mee, zodat er geen
@@ -22,6 +31,23 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Kostenmodus voor presentaties.** Onder *Presentatie-eigenschappen → Kosten van
+  aanwezigen* toont OciDeck een indicatie van de tijdkosten van de aanwezigen:
+  *gewoon* (alleen in het eindoverzicht) of *expliciet* (ook een oplopend bedrag
+  rechtsonder, ook op het publieksvenster). Het tarief is één groepstarief of per
+  aanwezige, op een privéscherm vóór de eerste dia, met omrekening van maand- en
+  jaarloon met zichtbare, aanpasbare aannames. Individuele bedragen blijven
+  sessiegegevens: nooit in het bestand, een export of het klembord. Bij een andere
+  valuta dan de euro staat elk bedrag er ook in euro bij, op één koers per sessie
+  — opgehaald bij Frankfurter (ECB) alleen als je daarom vraagt, of zelf
+  ingevuld; zonder koers staat er *koers ontbreekt* in plaats van een verzonnen
+  bedrag. Zie de gebruikersgids en `FILE_FORMAT.md`.
+- **Staand of liggend diaformaat.** Kies onder *Presentatie-eigenschappen →
+  Diaformaat* een papierformaat, staand of liggend, naast de schermstandaard
+  16:9. Bewerkweergave, miniaturen, presentatie, publieksscherm en alle exports
+  gebruiken dezelfde verhouding. De keuze reist mee in het Pandoc-vocabulaire
+  (`papersize:` / `geometry:`), zodat een ander gereedschap een logische
+  paginamaat ziet; bestaande decks blijven 16:9.
 - **Je ziet je examenuitslag.** Is een examen afgenomen en heeft de
   examinator de uitslag vrijgegeven, dan staat die onder *Mijn uitslagen*: het
   aantal goede antwoorden, het percentage en of je geslaagd bent. De server

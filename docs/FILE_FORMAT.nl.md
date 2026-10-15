@@ -281,8 +281,14 @@ het bestand. Zie §6.6 voor waarom dat veranderd is.)
 | `format` | string/afwezig | Benoemde preset voor presentatietiming. De herkende waarden zijn `pechakucha` (20 dia's × 20 seconden) en `ignite` (20 dia's × 15 seconden), niet hoofdlettergevoelig. Een onbekende waarde heeft geen timingseffect en blijft bij opslaan behouden. |
 | `timing` | genest blok/afwezig | Generieke instellingen voor een getimede presentatie. De herkende onderliggende velden staan hieronder. Wordt niet geschreven wanneer alle instellingen hun standaardwaarde hebben; een herkende strikte `format:`-preset wint. |
 | `ocideck_target_seconds` | int | Doelduur voor het aftellen van de presentator, in seconden. Alleen geschreven wanneer `> 0`. |
-| `ocideck_show_rehearsal_summary` | `false`/afwezig | Afmelden voor de tijdsamenvatting na de presentatie. Standaard (getoond) blijft uit het bestand; alleen `false` wordt geschreven. Wordt overschreven door `ocideck_play_only`: een alleen-afspelen-deck toont de samenvatting nooit, wat deze sleutel ook zegt. |
+| `ocideck_show_rehearsal_summary` | `true`/afwezig | Aanmelden voor de tijdsamenvatting na de presentatie. Afwezig (uit) blijft uit het bestand; alleen `true` wordt geschreven. Wordt overschreven door `ocideck_play_only`: een alleen-afspelen-deck toont de samenvatting nooit, wat deze sleutel ook zegt. Een deck met de kostenmodus aan (`ocideck_cost_mode`) toont de samenvatting na afloop los van deze sleutel, omdat daar de totale kosten staan. |
 | `ocideck_play_only` | `true`/afwezig | Alleen-afspelen-vergrendeling. Wanneer `true`, opent het deck vergrendeld: geen editor, werkbalk, menu's of export — alleen de eerste slide met een afspeelknop, schermvullend gepresenteerd. Het deck sluiten herstelt het normale bewerken. Standaard (ontgrendeld) blijft uit het bestand; alleen `true` wordt geschreven. Deze sleutel verwijderen ontgrendelt het deck. |
+| `papersize` | string/afwezig | Staand diaformaat (#2433): een ISO 216-papiernaam in kleine letters, zoals `a4`, in hetzelfde vocabulaire als Pandoc en de documentpagina-instelling (§14), zodat een andere lezer een logische paginamaat ziet in plaats van een OciDeck-eigen sleutel. Afwezig betekent het 16:9-schermformaat — de afwezige staat van elke Marp-lezer — dus bestaande en met de hand geschreven Marp-decks veranderen niet. Liggend wordt als `geometry` geschreven, zie hieronder. |
+| `geometry` | string/afwezig | Liggend diaformaat (#2433): alleen het vel, bijvoorbeeld `paperwidth=297mm,paperheight=210mm`. In Pandoc betekent `papersize: a4` staand, dus een liggende dia kan niet als papiernaam worden geschreven zonder te liegen. OciDeck leest en vervangt alleen deze vorm met enkel het vel als diaformaat; een met de hand geschreven `geometry:` met marges is van de gebruiker (zo haal je een Marp-deck ook door Pandoc) en overleeft elke opslag. Staan beide sleutels er, dan wint `papersize`, net als op de documentpagina. |
+| `ocideck_cost_mode` | `normal`/`explicit`/afwezig | Kostenmodus (#2435): een schatting van de tijdkosten van de aanwezigen tijdens deze presentatie. `normal` toont de kosten alleen in de samenvatting achteraf; `explicit` toont ook een oplopend totaal rechtsonder tijdens de presentatie. Afwezig betekent uit, en dan wordt geen van de andere `ocideck_cost_*`-sleutels geschreven. Een onbekende waarde leest als uit. |
+| `ocideck_cost_input` | `group`/`attendees` | Hoe het uurtarief wordt ingevoerd: één vast tarief voor de hele groep (`group`, de standaard), of een privé-startscherm waar de presentator per aanwezige een tarief of salaris invult (`attendees`). Alleen geschreven als de kostenmodus aan staat. |
+| `ocideck_cost_currency` | ISO 4217-code | De valuta van de getoonde bedragen: `EUR` (standaard), `USD`, `GBP`, `CHF`, `JPY`, `SEK`, `NOK`, `DKK`, `PLN` of `CZK`. Een onbekende code leest als `EUR`. |
+| `ocideck_cost_rate` | decimaal/afwezig | Het groepsuurtarief in de grootste eenheid, kale cijfers met een punt en zonder valutasymbool (`75.50`, `75` bij een valuta zonder decimalen). Alleen geschreven bij `group` en wanneer groter dan nul. Een onleesbare waarde leest als nul, wat de basis toont maar nooit een misleidende `€ 0`. |
 | `ocideck_improvement_framework` | string/afwezig | Procesverbeteringskader voor dit deck: `dmaic`, `dmadv`, `kaizen`, `a3` of `8d`. Leeg/afwezig = niet ingesteld. |
 | `ocideck_improvement_y01` | string/afwezig | Vrije-tekstnaam/-beschrijving van de primaire Y-metriek (**Y-01**). Leeg/afwezig = niet ingesteld. |
 | `ocideck_improvement_y01_unit` | string/afwezig | Eenheid voor Y-01 (bijv. `days`). Leeg/afwezig = niet ingesteld. |
@@ -341,6 +347,16 @@ altijd op in een niet-leeg generiek blok. Een duur van nul en afwezige
 dialimieten laat hij weg. De runtime begint op dia 1, toont een afzonderlijke
 3‑2‑1-aftelling, leidt de huidige dia af uit monotoon verstreken tijd en telt
 gepauzeerde tijd niet mee.
+
+**Wat de kostenmodus nooit schrijft (#2435–#2438).** Alleen de vier
+`ocideck_cost_*`-sleutels hierboven reizen mee met het bestand. Individuele
+uurtarieven, salarissen en de aannames achter een omrekening (betaalde uren,
+bruto/netto, werkgeverslasten) worden ingevuld op het privé-startscherm van de
+presentator en bestaan alleen tijdens die sessie — ze staan niet in het deck,
+een export, het klembord of een logboek. De wisselkoers waarmee bij een vreemde
+valuta een euro-equivalent wordt getoond (koers, richting, bron en peildatum) is
+eveneens per sessie vastgelegd en wordt nooit bewaard; alleen de valutakeuze is
+een presentatievoorkeur.
 
 **Migratie (Y-01).** Een deck dat alleen `ocideck_improvement_y01` heeft (naam, geen
 limietsleutels) blijft voor altijd geldig; ontbrekende limietsleutels betekenen `null`.

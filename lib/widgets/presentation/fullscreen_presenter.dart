@@ -19,8 +19,6 @@ import '../../models/marp_style.dart';
 import '../../models/question.dart';
 import '../../models/rehearsal.dart';
 import '../../models/settings.dart';
-import '../../models/attendee_input.dart';
-import '../../models/exchange_rate.dart';
 import '../../models/presentation_step_plan.dart';
 import '../../models/presentation_cost.dart';
 import '../../models/presentation_timing.dart';
@@ -58,14 +56,13 @@ import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
 import '../slides/previews/slide_preview_support.dart';
 import '../slides/slide_preview.dart';
-import '../dialogs/attendee_rates_dialog.dart';
-import '../dialogs/currency_conversion_dialog.dart';
 import '../dialogs/settings_dialog.dart';
 import '../markdown_editor/markdown_editor.dart';
 import 'annotation_overlay.dart';
 import 'audience_controls_bar.dart';
 import 'audience_window.dart';
 import 'cost_overlay.dart';
+import 'cost_session_start.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
 import '../editors/editor_text_controller.dart';
@@ -318,57 +315,15 @@ class FullscreenPresenter extends StatefulWidget {
     final slideSize = deck.slideSize;
     final costConfig = deck.presentationCosts;
 
-    // Bij 'tarieven per aanwezige' hoort het privé-inulscherm vóór de route —
-    // het publieksscherm bestaat dan nog niet (#2436). Annuleren start de
-    // presentatie niet, anders draaide ze met een misleidende nulprijs. De
-    // oefenmodus is een soloorbevoering: daar vraagt hij niets.
-    CostSessionSeed? costSeed;
-    if (costConfig.isEnabled && !rehearsalMode) {
-      final sessionCurrency = costConfig.currency;
-      var inputs = const <AttendeeInput>[];
-      var assumptions = const CostAssumptions();
-      if (costConfig.rateInput == CostRateInput.attendees) {
-        if (!context.mounted) return null;
-        final result = await AttendeeRatesDialog.show(
-          context,
-          sessionCurrency: sessionCurrency,
-        );
-        if (result == null) return null;
-        inputs = result.attendees;
-        assumptions = result.assumptions;
-      }
-      // #2438: vreemde valuta — van aanwezigen-regels of de sessievaluta
-      // zelf — vragen om één koers per sessie vóór het tellen begint.
-      // Annuleren start de presentatie niet; 'zonder koers' laat de
-      // bedragen als 'koers ontbreekt' zichtbaar in plaats van verzonnen.
-      final needing = currenciesNeedingRate(inputs, sessionCurrency);
-      var rates = const <String, ExchangeRate>{};
-      if (needing.isNotEmpty) {
-        if (!context.mounted) return null;
-        final got = await CurrencyConversionDialog.show(
-          context,
-          currencies: needing,
-        );
-        if (got == null) return null;
-        rates = got;
-      }
-      costSeed = CostSessionSeed(
-        hourlyRateMinor: costConfig.rateInput == CostRateInput.group
-            ? costConfig.groupHourlyRateMinor
-            : sumAttendeeRatesMinor(
-                inputs,
-                assumptions,
-                sessionCurrency,
-                rates,
-              ),
-        eurRate: rates[sessionCurrency.code],
-        unconvertedAttendees: unconvertedRateCount(
-          inputs,
-          sessionCurrency,
-          rates,
-        ),
-      );
-    }
+    // Het kostenstartscherm (#2436, #2438) komt vóór de route: het
+    // publieksscherm bestaat dan nog niet. Annuleren start niets.
+    final costStart = await runCostStart(
+      context,
+      costConfig,
+      rehearsalMode: rehearsalMode,
+    );
+    if (costStart.cancelled) return null;
+    final costSeed = costStart.seed;
 
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
