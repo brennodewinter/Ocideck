@@ -37,6 +37,7 @@ part 'ociserve_provider_account.dart';
 part 'ociserve_provider_skills.dart';
 part 'ociserve_provider_portfolio.dart';
 part 'ociserve_provider_certificates.dart';
+part 'ociserve_provider_calendar.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
 /// consumers receive only the minimal account/membership read model.
@@ -1010,4 +1011,5 @@ class OciServeNotifier extends OciServeNotifierBase
         _OciServeAccountMethods,
         _OciServeSkillMethods,
         _OciServePortfolioMethods,
-        _OciServeCertificateMethods {}
+        _OciServeCertificateMethods,
+        _OciServeCalendarMethods {}

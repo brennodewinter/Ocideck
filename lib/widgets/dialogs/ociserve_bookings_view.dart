@@ -2,6 +2,7 @@
 // binnenkort en geweest bijeenkomsten, de aangeboden-plek-flow en zelf
 // afmelden met het annuleervenster van de uitvoering.
 
+import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
@@ -37,6 +38,14 @@ class _OciServeBookingsViewState extends ConsumerState<OciServeBookingsView> {
   bool _loading = true;
   String? _error;
   List<OciServeBooking> _bookings = const [];
+
+  /// Agenda-abonnement (#2427): de verloopdatum uit apparaat-lokale staat en
+  /// — net na uitgeven of roteren — de eenmalige URL. Die URL gaat nooit een
+  /// opslag of log in; verdwijnt hij uit beeld, dan is roteren de enige weg
+  /// terug.
+  DateTime? _calendarExpiresAt;
+  String? _freshFeedUrl;
+  bool _calendarBusy = false;
   Map<String, OciServeOfferingSummary> _offerings = const {};
   Map<String, OciServeTrainingSession> _sessions = const {};
   String? _actingOn;
@@ -72,6 +81,15 @@ class _OciServeBookingsViewState extends ConsumerState<OciServeBookingsView> {
       }.take(_maxEnrichedOfferings);
       final offerings = <String, OciServeOfferingSummary>{};
       final sessions = <String, OciServeTrainingSession>{};
+      DateTime? calendarExpiresAt;
+      try {
+        calendarExpiresAt = await notifier.calendarSubscriptionExpiry(
+          widget.organizationId,
+        );
+      } catch (_) {
+        // Lokale metadata — als die niet leesbaar is, is de boekingenlijst
+        // nog steeds bruikbaar.
+      }
       for (final offeringId in offeringIds) {
         try {
           final offering = await notifier.courseOffering(
@@ -93,6 +111,7 @@ class _OciServeBookingsViewState extends ConsumerState<OciServeBookingsView> {
         _bookings = bookings;
         _offerings = offerings;
         _sessions = sessions;
+        _calendarExpiresAt = calendarExpiresAt;
         _loading = false;
       });
     } catch (error, stack) {
@@ -154,6 +173,7 @@ class _OciServeBookingsViewState extends ConsumerState<OciServeBookingsView> {
     return ListView(
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 28),
       children: [
+        _calendarCard(l10n, theme, palette),
         for (final booking in offered)
           _bookingCard(l10n, theme, palette, booking),
         if (upcoming.isNotEmpty) ...[
@@ -168,6 +188,262 @@ class _OciServeBookingsViewState extends ConsumerState<OciServeBookingsView> {
         ],
       ],
     );
+  }
+
+  /// De agenda-koppeling (#2427). Drie toestanden: geen abonnement (knop om
+  /// te koppelen), net uitgegeven (URL eenmalig in beeld met Kopieer), en
+  /// lopend (verloopdatum plus vernieuwen/intrekken).
+  Widget _calendarCard(
+    AppLocalizations l10n,
+    ThemeData theme,
+    AppPalette palette,
+  ) {
+    final material = MaterialLocalizations.of(context);
+    final expiresAt = _calendarExpiresAt;
+    final freshUrl = _freshFeedUrl;
+    // Twee weken vóór verloop waarschuwen, zodat het abonnement niet
+    // ongemerkt stopt met bijwerken.
+    final expiresSoon =
+        expiresAt != null &&
+        expiresAt.isBefore(DateTime.now().add(const Duration(days: 14)));
+    return Container(
+      margin: const EdgeInsets.only(bottom: 14),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: theme.colorScheme.outlineVariant),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.calendar_month_outlined, color: palette.mutedText),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  l10n.d('Agenda koppelen'),
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          if (freshUrl != null) ...[
+            Text(
+              l10n.d(
+                'Dit is uw agenda-link. Hij staat hier eenmalig — plak hem '
+                'in uw agenda-app. Iedereen met de link kan uw afspraken '
+                'zien; deel hem dus niet.',
+              ),
+              style: TextStyle(color: palette.mutedText, fontSize: 12.5),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: SelectableText(
+                freshUrl,
+                style: const TextStyle(fontSize: 12),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                FilledButton.tonalIcon(
+                  onPressed: () async {
+                    await Clipboard.setData(ClipboardData(text: freshUrl));
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(l10n.d('Link gekopieerd.'))),
+                    );
+                  },
+                  icon: const Icon(Icons.copy_outlined),
+                  label: Text(l10n.d('Kopieer')),
+                ),
+                const SizedBox(width: 10),
+                TextButton(
+                  onPressed: () => setState(() => _freshFeedUrl = null),
+                  child: Text(l10n.d('Gereed')),
+                ),
+              ],
+            ),
+          ] else if (expiresAt != null) ...[
+            Text(
+              expiresSoon
+                  ? l10n
+                        .d(
+                          'Uw agenda-link verloopt op {datum}. Vernieuw de link voor hij stopt.',
+                        )
+                        .replaceAll(
+                          '{datum}',
+                          material.formatFullDate(expiresAt.toLocal()),
+                        )
+                  : l10n
+                        .d('Uw agenda is gekoppeld tot {datum}.')
+                        .replaceAll(
+                          '{datum}',
+                          material.formatFullDate(expiresAt.toLocal()),
+                        ),
+              style: TextStyle(
+                color: expiresSoon
+                    ? theme.colorScheme.error
+                    : palette.mutedText,
+                fontSize: 12.5,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              children: [
+                FilledButton.tonal(
+                  onPressed: _calendarBusy ? null : _renewCalendar,
+                  child: Text(
+                    _calendarBusy ? l10n.d('Bezig…') : l10n.d('Nieuwe link'),
+                  ),
+                ),
+                TextButton(
+                  onPressed: _calendarBusy ? null : _revokeCalendar,
+                  child: Text(l10n.d('Intrekken')),
+                ),
+              ],
+            ),
+          ] else ...[
+            Text(
+              l10n.d(
+                'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.',
+              ),
+              style: TextStyle(color: palette.mutedText, fontSize: 12.5),
+            ),
+            const SizedBox(height: 10),
+            FilledButton.tonal(
+              onPressed: _calendarBusy ? null : _linkCalendar,
+              child: Text(
+                _calendarBusy ? l10n.d('Bezig…') : l10n.d('Koppelen'),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Future<void> _linkCalendar() async {
+    setState(() => _calendarBusy = true);
+    try {
+      final result = await ref
+          .read(ociServeProvider.notifier)
+          .issueCalendarSubscription(widget.organizationId);
+      if (!mounted) return;
+      setState(() {
+        _freshFeedUrl = result.feedUrl.toString();
+        _calendarExpiresAt = result.expiresAt;
+      });
+    } catch (error, stack) {
+      logError('OciServe: agenda koppelen', error.runtimeType, stack);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.l10n.d(
+                'De koppeling is niet gelukt. Probeer het opnieuw.',
+              ),
+            ),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _calendarBusy = false);
+    }
+  }
+
+  /// Vernieuwen = roteren: de server maakt de oude URL meteen ongeldig. Dat
+  /// vragen we eerst uit, want de agenda-app werkt dan niet meer tot de
+  /// nieuwe link erin staat.
+  Future<void> _renewCalendar() async {
+    final l10n = context.l10n;
+    final sure = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.d('Agenda-link vernieuwen?')),
+        content: Text(
+          l10n.d(
+            'De oude link werkt dan niet meer. Plak de nieuwe link opnieuw in uw agenda-app.',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.t('cancel')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.d('Vernieuwen')),
+          ),
+        ],
+      ),
+    );
+    if (sure != true || !mounted) return;
+    await _linkCalendar();
+  }
+
+  Future<void> _revokeCalendar() async {
+    final l10n = context.l10n;
+    final sure = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.d('Agenda-koppeling intrekken?')),
+        content: Text(
+          l10n.d(
+            'Uw agenda-app kan dan niet meer bij de bijeenkomsten. De afspraken zelf blijven bestaan.',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.t('cancel')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.d('Intrekken')),
+          ),
+        ],
+      ),
+    );
+    if (sure != true || !mounted) return;
+    setState(() => _calendarBusy = true);
+    try {
+      await ref
+          .read(ociServeProvider.notifier)
+          .revokeCalendarSubscription(widget.organizationId);
+      if (!mounted) return;
+      setState(() {
+        _calendarExpiresAt = null;
+        _freshFeedUrl = null;
+      });
+    } catch (error, stack) {
+      logError('OciServe: agenda intrekken', error.runtimeType, stack);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.l10n.d(
+                'Het intrekken is niet gelukt. Probeer het opnieuw.',
+              ),
+            ),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _calendarBusy = false);
+    }
   }
 
   Widget _sectionHeader(String title, ThemeData theme, AppPalette palette) =>

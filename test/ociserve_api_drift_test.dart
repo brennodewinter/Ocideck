@@ -417,6 +417,20 @@ const gatewayRoutes = <GatewayRoute>[
     path: '/api/v1/organizations/{}/certificates/{}/pdf',
     // Binary PDF — no JSON schema to check.
   ),
+  // — Agenda-abonnement (#2427): eenmalige feed-URL uitgeven/roteren en
+  // intrekken. De `.ics`-feed zelf haalt de agenda-app van de gebruiker op —
+  // OciDeck roept hem niet aan en hoeft hem hier dus niet te registreren.
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/calendar-subscription',
+    responseSchema: 'CalendarSubscription',
+    responseFields: ['url', 'expires_at'],
+  ),
+  GatewayRoute(
+    method: 'DELETE',
+    path: '/api/v1/organizations/{}/me/calendar-subscription',
+    // 204 — no body.
+  ),
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/organizations/{}/badges',

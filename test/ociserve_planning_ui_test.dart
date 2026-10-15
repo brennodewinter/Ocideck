@@ -13,6 +13,7 @@ import 'package:ocideck/services/ociserve/ociserve_http.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_bookings_view.dart';
 import 'package:ocideck/widgets/dialogs/ociserve_offerings_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const _account = OciServeAccount(
   id: 'learner',
@@ -218,6 +219,9 @@ Future<void> _pump(WidgetTester tester, Widget child, Object notifier) async {
 }
 
 void main() {
+  // Het agenda-abonnement (#2427) leest zijn verloopdatum uit SharedPreferences.
+  SharedPreferences.setMockInitialValues({});
+
   group('Mijn inschrijvingen', () {
     testWidgets('toont binnenkort, geweest en aangeboden boekingen', (
       tester,
