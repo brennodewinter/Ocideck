@@ -37,6 +37,9 @@ mixin _OciServeAccountMethods on OciServeNotifierBase {
     required String accessToken,
   }) async {
     if (!state.authenticated) return;
+    // Eén sleutel voor de eerste call én de herhaling. Een nieuwe sleutel
+    // zou dezelfde opening een tweede keer laten tellen.
+    final idempotencyKey = _uuid.v4();
     try {
       await _nonInteractive(
         () => _gatewayFactory(state.settings).markLessonOpened(
@@ -44,20 +47,29 @@ mixin _OciServeAccountMethods on OciServeNotifierBase {
           organizationId: organizationId,
           versionId: lesson.versionId,
           lessonId: lesson.lessonId,
-          idempotencyKey: _uuid.v4(),
+          idempotencyKey: idempotencyKey,
         ),
       );
-    } catch (error, stack) {
+    } on OciServeException catch (error, stack) {
       logError('OciServe: geopende les registreren', error.runtimeType, stack);
-      if (state.authenticated) {
-        await _enqueueLessonOpened(organizationId, lesson);
+      // Een 4xx is een afwijzing, geen transportstoring. Die mag de
+      // wachtrij niet blijven vergiftigen.
+      if (state.authenticated && _lessonOpenShouldQueue(error)) {
+        await _enqueueLessonOpened(organizationId, lesson, idempotencyKey);
       }
     }
+  }
+
+  bool _lessonOpenShouldQueue(OciServeException error) {
+    final status = error.statusCode;
+    if (status != null) return status >= 500;
+    return error.code == 'network' || error.code == 'timeout';
   }
 
   Future<void> _enqueueLessonOpened(
     String organizationId,
     OciServeFeedItem lesson,
+    String idempotencyKey,
   ) async {
     try {
       await _enqueueRaw({
@@ -68,7 +80,7 @@ mixin _OciServeAccountMethods on OciServeNotifierBase {
         'lesson_id': lesson.lessonId,
         // De sleutel reist mee in de wachtrij: een herzending van dezelfde
         // gebeurtenis draagt dezelfde sleutel en kan dus nooit dubbel tellen.
-        'key': _uuid.v4(),
+        'key': idempotencyKey,
       });
     } catch (error, stack) {
       logError(

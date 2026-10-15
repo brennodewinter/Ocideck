@@ -260,6 +260,24 @@ class _FakeApi implements OciServeApi {
     packageProfile: 'ocideck-winzip-aes256-ae2-v1',
   );
 
+  Object? lessonOpenedError;
+  int lessonOpenedCalls = 0;
+  final lessonOpenedKeys = <String>[];
+
+  @override
+  Future<void> markLessonOpened({
+    required String accessToken,
+    required String organizationId,
+    required String versionId,
+    required String lessonId,
+    required String idempotencyKey,
+  }) async {
+    lessonOpenedCalls++;
+    lessonOpenedKeys.add(idempotencyKey);
+    final error = lessonOpenedError;
+    if (error != null) throw error;
+  }
+
   @override
   Future<void> closeLessonSession({
     required String accessToken,
@@ -2062,4 +2080,82 @@ void main() {
       });
     }
   });
+
+  test('een mislukte les-open-audit herhaalt met dezelfde sleutel', () async {
+    api.lessonOpenedError = const OciServeException('network');
+    final container = _container(api, secrets);
+    addTearDown(container.dispose);
+    final notifier = container.read(ociServeProvider.notifier);
+    await notifier.saveSettings(_settings);
+    expect(await notifier.login(), isTrue);
+
+    expect(
+      await notifier.openLessonPackage(
+        organizationId: 'org',
+        lesson: const OciServeFeedItem(
+          versionId: 'v1',
+          lessonId: 'l1',
+          title: 'Les',
+        ),
+        open: (bytes, password, profile, session) async => true,
+      ),
+      isTrue,
+    );
+    final queued = await _lessonOpenKey(secrets);
+    expect(api.lessonOpenedKeys, [queued]);
+
+    api.lessonOpenedError = null;
+    await notifier.flushPendingReports();
+    expect(api.lessonOpenedKeys, [queued, queued]);
+  });
+
+  test('een afgewezen les-open komt niet in de wachtrij', () async {
+    api.lessonOpenedError = const OciServeException(
+      'http_error',
+      statusCode: 404,
+    );
+    final container = _container(api, secrets);
+    addTearDown(container.dispose);
+    final notifier = container.read(ociServeProvider.notifier);
+    await notifier.saveSettings(_settings);
+    expect(await notifier.login(), isTrue);
+
+    expect(
+      await notifier.openLessonPackage(
+        organizationId: 'org',
+        lesson: const OciServeFeedItem(
+          versionId: 'v1',
+          lessonId: 'l1',
+          title: 'Les',
+        ),
+        open: (bytes, password, profile, session) async => true,
+      ),
+      isTrue,
+    );
+    for (var i = 0; i < 50 && api.lessonOpenedCalls == 0; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 50));
+    expect(api.lessonOpenedCalls, 1);
+    expect(await secrets.readOciServeOutbox(_settings.baseUrl), isNull);
+
+    api.lessonOpenedError = null;
+    await notifier.flushPendingReports();
+    expect(api.lessonOpenedCalls, 1);
+  });
+}
+
+/// Wacht tot de les-open-audit in de versleutelde wachtrij staat en geeft
+/// de idempotentiesleutel terug.
+Future<String> _lessonOpenKey(SecretStore secrets) async {
+  for (var i = 0; i < 50; i++) {
+    final raw = await secrets.readOciServeOutbox(_settings.baseUrl);
+    if (raw != null && raw.contains('lesson_opened_v1')) {
+      final decoded = jsonDecode(raw) as List;
+      final item = Map<String, Object?>.from(decoded.single as Map);
+      return item['key']! as String;
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 20));
+  }
+  fail('les-open belandde niet in de wachtrij');
 }
