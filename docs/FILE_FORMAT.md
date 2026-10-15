@@ -18,6 +18,7 @@
 - [12. Redaction Manifest Files (Beside an Export)](#12-redaction-manifest-files-beside-an-export)
 - [13. Accepted Files and Their Limits](#13-accepted-files-and-their-limits)
 - [14. Documents (Plain `.md`, Not a Deck)](#14-documents-plain-md-not-a-deck)
+- [15. Document Dossiers](#15-document-dossiers)
 
 *(Added 2026-07-22: this document had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. The note used to give a line count — around 2,253 — which had quietly grown to roughly 3,280 by 2026-08-16; a figure nobody updates is better left out than left wrong.)*
 
@@ -4378,3 +4379,47 @@ is the way to answer one.
 Design, grammar, field types, rule semantics and the validation codes:
 `docs/design/FORM_INTAKE.md` §4. The reference parser is the standalone package
 `packages/ocideck_form_core`.
+
+## 15. Document Dossiers
+
+A document dossier is a folder containing `dossier.json` and a derived,
+human-readable `overzicht.md`. It is a **document** in OciDeck, even when a
+referenced `.md` file is a presentation. The source documents remain at their
+original locations; adding one does not copy its bytes or related assets. This
+format is separate from the encrypted audit-dossier export in §6.
+
+`dossier.json` is UTF-8 JSON. OciDeck writes version **2** and also reads version
+1; saving a version-1 dossier writes version 2. Unknown object keys on the
+dossier and entries survive a load/save cycle. The ordered `entries` array is
+the authoritative order, and `overzicht.md` is regenerated from it. Keep both
+files together. Manual changes to `overzicht.md` prevent OciDeck from
+overwriting it on the next dossier edit.
+
+| JSON field | Meaning |
+| --- | --- |
+| `version` | `2` when written; `1` is accepted on read. |
+| `title`, `description` | Dossier title and optional description. |
+| `createdAt`, `updatedAt` | UTC ISO 8601 timestamps. |
+| `startNumber` | First automatic display number; defaults to `1`. |
+| `entries` | Ordered array of document references. |
+
+Each entry has a stable `id`, display `title`, `relativePath`, and a lowercase
+64-character hexadecimal `sha256` of the source file's bytes. `relativePath`
+is a dossier-relative POSIX path, retained for legacy copied attachments and
+links in the overview. New entries also store `sourcePath` (the original
+absolute path), `originalName`, `sizeBytes`, and `checkedAt`. When the source
+is inside the dossier folder, `sourceRelativePath` records its portable
+dossier-relative path and takes precedence over `sourcePath` when resolving
+the file. A source outside that folder still depends on its absolute path.
+`numberOverride` optionally fixes a positive, unique display number; automatic
+numbers skip reserved overrides. `hashHistory` holds prior reference hashes as
+`{ "sha256": "…", "recordedAt": "…" }` objects. Optional fields may be absent
+in older entries.
+
+Verification hashes the current file on disk and compares it with `sha256`;
+`checkedAt` records when a check was made, without changing the reference hash.
+Accepting a new reference is a separate action that appends the previous hash
+to `hashHistory`. A matching SHA-256 shows agreement with the stored value, not
+authorship or approval. Opening and checking references rejects unsafe paths
+and symbolic-link substitutions. Current dossier references are local `.md`
+documents and presentations; PDF and Office files are not supported.
