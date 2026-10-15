@@ -9,6 +9,8 @@ import '../../l10n/app_localizations.dart';
 class AppMenuActions {
   final VoidCallback newDeck;
   final VoidCallback newDocument;
+  final VoidCallback newDossier;
+  final VoidCallback openDossier;
   final VoidCallback open;
 
   /// Sla het actieve tabblad op, ongeacht de soort. Dit is de soort-agnostische
@@ -26,6 +28,8 @@ class AppMenuActions {
   const AppMenuActions({
     required this.newDeck,
     required this.newDocument,
+    required this.newDossier,
+    required this.openDossier,
     required this.open,
     required this.save,
     required this.find,
@@ -198,6 +202,14 @@ PlatformMenu _fileMenu(
         PlatformMenuItem(
           label: l10n.d('Nieuw document'),
           onSelected: actions.newDocument,
+        ),
+        PlatformMenuItem(
+          label: l10n.d('Nieuw dossier'),
+          onSelected: actions.newDossier,
+        ),
+        PlatformMenuItem(
+          label: l10n.d('Dossier openen…'),
+          onSelected: actions.openDossier,
         ),
         PlatformMenuItem(
           label: l10n.t('openEllipsis'),

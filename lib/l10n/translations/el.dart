@@ -1664,6 +1664,76 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν ήταν δυνατή η φόρτωση των αποτελεσμάτων.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Θα δείτε το αποτέλεσμά σας στο οι εξετάσεις μου μόλις αποδεσμευτεί.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Μόνο τα έγγραφα και οι παρουσιάσεις σε μορφή Markdown (.md) μπορούν να προστεθούν.',
+  'OciDeck dossier': 'OciDeck Φάκελος',
+  'Alle documenten openen': 'Άνοιγμα όλων των εγγράφων',
+  'Alleen overzicht': 'Μόνο η προβολή.',
+  'Alles controleren': 'Έλεγχος όλων',
+  'DOSSIER': 'ΦΆΚΕΛΟΣ',
+  'De SHA-256 klopt al.': 'Ο SHA-256 είναι ήδη σωστός.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Η καταχώριση αφαιρείται από το φάκελο. Το αρχείο έγγραφου παραμένει αποθηκευμένο.',
+  'Deze bijlage is niet beschikbaar.': 'Αυτή η επισύναψη δεν είναι διαθέσιμη.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Αυτή η επισύναψη δεν μπορεί να ελεγχθεί.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Δεν ήταν δυνατό να ανοιχτεί αυτή η επισύναψη με ασφάλεια.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Αυτός ο φάκελος υπάρχει ήδη. Επιλέξτε ένα άλλο όνομα.',
+  'Dit dossier kon niet worden geopend.':
+      'Αυτό το φάκελο δεν ήταν δυνατό να ανοίξει.',
+  'Document gewijzigd': 'Το έγγραφο έχει τροποποιηθεί.',
+  'Document niet leesbaar': 'Το έγγραφο δεν είναι αναγνώσιμο.',
+  'Document ontbreekt': 'Το έγγραφο λείπει.',
+  'Document openen': 'Άνοιγμα εγγράφου',
+  'Documenten toevoegen': 'Προσθήκη εγγράφων',
+  'Dossier': 'Φάκελος',
+  'Dossier openen': 'Άνοιγμα φακέλου',
+  'Dossier openen…': 'Άνοιγμα φακέλου…',
+  'Dossiertitel wijzigen': 'Αλλαγή τίτλου φακέλου.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Ένα προσχέδιο δεν μπόρεσε να προστεθεί.',
+  'Een goed dossier begint hier': 'Ένας καλός φάκελος ξεκινάει από εδώ.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Χρησιμοποιήστε το κουμπί ή τα βέλη για να αλλάξετε τη σειρά. Οι αριθμοί θα ενημερωθούν αυτόματα.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Το αρχείο άλλαξε ή δεν καταγράφηκε. Ελέγξτε ξανά.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Δεν μπόρεσε να δημιουργηθεί το φάκελο.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Με αυτό γίνεται η νέα έκδοση αρχείου η αναφορά για αυτό το φάκελο.',
+  'Huidige SHA-256': 'Τρέχουσα SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Περιεχόμενο και έλεγχος ακεραιότητας',
+  'Meer opties': 'Περισσότερες επιλογές',
+  'Naamloos dossier': 'Άθως φάκελος',
+  'Nieuw dossier': 'Νέος φάκελος',
+  'Nieuwe versie vastleggen': 'Καταγραφή νέας έκδοσης',
+  'Nieuwe versie vastleggen?': 'Θα καταγραφεί νέα έκδοση;',
+  'Omhoog verplaatsen': 'Μετακίνηση προς τα πάνω',
+  'Omlaag verplaatsen': 'Μετακίνηση προς τα κάτω',
+  'Onveilige bestandsverwijzing': 'Μη ασφαλής αναφορά αρχείου',
+  'Overzicht en bijlagen': 'Επισκόπηση και Παραρτήματα',
+  'SHA-256 controleren': 'Έλεγχος SHA-256',
+  'SHA-256 klopt': 'Το SHA-256 ταιριάζει',
+  'Sleep om te ordenen': 'Τραβήξτε για να ταξινομήσετε',
+  'Terug naar dossier': 'Επιστροφή στον φάκελο',
+  'Titel wijzigen': 'Αλλαγή Τίτλου',
+  'Uit dossier verwijderen': 'Αφαίρεση από τον φάκελο',
+  'Uit dossier verwijderen?': 'Θέλετε να διαγράψετε επίσης από τον φάκελο;',
+  'Vastgelegde SHA-256': 'Κατεστημένο SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Προσθέστε έγγραφα. Θα αποθηκευτούν ως αντίγραφα σε αυτόν τον φάκελο και θα εμφανίζονται εδώ στην προτιμώμενη σειρά σας.',
+  'Wijziging opslaan is mislukt.': 'Η αποθήκευση της αλλαγής απέτυχε.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Θέλετε να ανοίξετε επίσης τα παραρτήματα σε καρτέλες;',
+  'Als document openen': 'Άνοιξε το έγγραφο',
+  'Dossier maken': 'Δημιουργία φακέλου',
+  'Het overzicht kon niet als document worden geopend.':
+      'Δεν μπόρεσε να ανοίξει η προβολή ως έγγραφο.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Αποθήκευσε τις αλλαγές στο έγγραφο προβολής πρώτα ή κλείσε αυτό το φύλλο εργασίας.',
   'Startmappen': 'Φάκελοι έναρξης',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Από πού ξεκινούν το άνοιγμα και η αποθήκευση. Κενό σημαίνει την πρώτη βιβλιοθήκη.',

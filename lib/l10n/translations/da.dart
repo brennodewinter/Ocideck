@@ -1638,6 +1638,76 @@ const _dutchSourceAddDa = <String, String>{
       'Resultaterne kunne ikke indlæses.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Du kan se dit resultat under Mine eksamener, så snart det er frigivet.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Kun Markdown-dokumenter og -præsentationer (.md) kan tilføjes.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Åbn alle dokumenter',
+  'Alleen overzicht': 'Kun overblikket vises',
+  'Alles controleren': 'Kontrollér alle',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'SHA-256-værdien stemmer overens med den.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Posteringen forsvinder fra dossiér. Dokumentfilen bevares.',
+  'Deze bijlage is niet beschikbaar.':
+      'Denne vedhæftede fil er ikke tilgængelig.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Denne vedhæftede fil kan ikke kontrolleres.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Denne vedhæftede fil kunne ikke sikkert åbnes.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Denne mappestruktur eksisterer allerede. Vælg et andet navn.',
+  'Dit dossier kon niet worden geopend.': 'Dette dossiér kunne ikke åbnes.',
+  'Document gewijzigd': 'Dokumentet er blevet ændret',
+  'Document niet leesbaar': 'Dokumentet er ikke læseligt.',
+  'Document ontbreekt': 'Dokumentet mangler.',
+  'Document openen': 'Åbn dokument',
+  'Documenten toevoegen': 'Tilføj dokumenter',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Åbn dossier',
+  'Dossier openen…': 'Åbn dossieret…',
+  'Dossiertitel wijzigen': 'Dossierets titel ændres.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'En vedhæftet kunne ikke tilføjes.',
+  'Een goed dossier begint hier': 'Et godt dossier begynder her.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Brug håndtaget eller pilene til at ændre rækkefølgen. Numrene følger automatisk.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Filen er ændret eller kunne ikke registreres. Tjek igen.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dossietet kunne ikke blive oprettet.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Dette sikrer, at den nye filversion er referencen for dette dossier.',
+  'Huidige SHA-256': 'Nuværende SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Indholdsfortegnelse og integritetskontrol',
+  'Meer opties': 'Flere muligheder',
+  'Naamloos dossier': 'Ubenavnt dossier',
+  'Nieuw dossier': 'Nyt dossier',
+  'Nieuwe versie vastleggen': 'Registrer ny version',
+  'Nieuwe versie vastleggen?': 'Fastlæg ny version?',
+  'Omhoog verplaatsen': 'Flyt opad',
+  'Omlaag verplaatsen': 'Flyt nedad',
+  'Onveilige bestandsverwijzing': 'Ugyldig filhenvisning',
+  'Overzicht en bijlagen': 'Oversigt og bilag',
+  'SHA-256 controleren': 'Kontroller SHA-256-værdien',
+  'SHA-256 klopt': 'SHA-256 stemmer overens',
+  'Sleep om te ordenen': 'Træk for at sortere',
+  'Terug naar dossier': 'Tilbage til dossier',
+  'Titel wijzigen': 'Omdøb titel',
+  'Uit dossier verwijderen': 'Fjern fra dossier',
+  'Uit dossier verwijderen?': 'Fjern fra dossiér?',
+  'Vastgelegde SHA-256': 'Fastlagt SHA-256-værdi',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Tilføj dokumenter. De gemmes som kopier i denne dossiér og vises her i din rækkefølge.',
+  'Wijziging opslaan is mislukt.': 'Ændringen blev ikke gemt.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Vil du åbne bilagene i faner?',
+  'Als document openen': 'Åbn dokumentet',
+  'Dossier maken': 'Opret dossier',
+  'Het overzicht kon niet als document worden geopend.':
+      'Oversigten kunne ikke åbnes som et dokument.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Gem ændringer i dokumentet for oversigtstabsfane først eller luk fanen.',
   'Startmappen': 'Startmapper',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hvor åbning og gemning begynder. Tomt felt bruger det første bibliotek.',

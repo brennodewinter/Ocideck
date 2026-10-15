@@ -1640,6 +1640,74 @@ const _dutchSourceAddHu = <String, String>{
       'Az eredményeket nem sikerült betölteni.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Az eredményét a(z) A vizsgáim alatt látja, amint közzétették.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Csak a Markdown-dokumentumok és prezentációk (.md) lehetnek hozzáadva.',
+  'OciDeck dossier': 'OciDeck Dosszié',
+  'Alle documenten openen': 'Az összes dokumentum megnyitása',
+  'Alleen overzicht': 'Csak a nézet megjelenítve.',
+  'Alles controleren': 'Összes ellenőrzése',
+  'DOSSIER': 'DOSSZIÉ',
+  'De SHA-256 klopt al.': 'A SHA-256 érték már megegyezik.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Ez a bejegyzés eltűnik a dossziéból. A dokumentum fájl megmarad.',
+  'Deze bijlage is niet beschikbaar.': 'Ez a melléklet nem áll rendelkezésre.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Ez a melléklet nem ellenőrizhető.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Ez a melléklet nem zárhatta volna biztonságosan.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Ez a mappakönyv már létezik. Válasszon egy másik nevet.',
+  'Dit dossier kon niet worden geopend.': 'Ez a dosszió nem nyílik meg.',
+  'Document gewijzigd': 'A dokumentum módosítva lett.',
+  'Document niet leesbaar': 'A dokument nem olvasható.',
+  'Document ontbreekt': 'A dokument hiányozik.',
+  'Document openen': 'Dokumentum megnyitása',
+  'Documenten toevoegen': 'Dokumentumok hozzáadása',
+  'Dossier': 'Dosszié',
+  'Dossier openen': 'Dosszié megnyitása',
+  'Dossier openen…': 'Dossziér megnyitása…',
+  'Dossiertitel wijzigen': 'Dossziértitel megváltoztatása.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Egy mellékletet nem sikerült hozzáadni.',
+  'Een goed dossier begint hier': 'Egy jó dossziér innen kezdve.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Használja a fogantyút vagy az nyílokat a sorrend megváltoztatásához. A számok automatikusan követik.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'A fájl megváltozott vagy nem rögzítve lett. Ellenőrizze újra.',
+  'Het dossier kon niet worden aangemaakt.':
+      'A dosszernem létrehozása nem sikerült.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Ez a beállítás a legújabb fájlverziót teszi referencia dosszerré.',
+  'Huidige SHA-256': 'Jelenlegi SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Töltetűj és integritásellenőrzés',
+  'Meer opties': 'További lehetőségek',
+  'Naamloos dossier': 'Névtelen dosszerről',
+  'Nieuw dossier': 'Új dosszié',
+  'Nieuwe versie vastleggen': 'Új verzió rögzítése',
+  'Nieuwe versie vastleggen?': 'Új verziót rögzíteni szeretne?',
+  'Omhoog verplaatsen': 'Felterelés',
+  'Omlaag verplaatsen': 'Leállítás',
+  'Onveilige bestandsverwijzing': 'Kockázatos fájlrefferencia',
+  'Overzicht en bijlagen': 'Áttekintés és mellékletek',
+  'SHA-256 controleren': 'SHA-256 ellenőrzés',
+  'SHA-256 klopt': 'A SHA-256 megelőző ellenőrzése',
+  'Sleep om te ordenen': 'Húzgas át a rendezéshez',
+  'Terug naar dossier': 'Vissza a dossziéhoz',
+  'Titel wijzigen': 'Cím módosítása',
+  'Uit dossier verwijderen': 'Eltávolítás a dossziéból',
+  'Uit dossier verwijderen?': 'El szeretnéd törölni a dossziéból?',
+  'Vastgelegde SHA-256': 'Rögzített SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Adj hozzá dokumentumokat. Ezeket a dokumentumokat másolatként tároljuk ebben a dosszióban, és itt jelennek meg a megadott sorrendben.',
+  'Wijziging opslaan is mislukt.': 'A módosítás nem sikerült.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Szeretnéd a mellékleteket is táblázatokba nyitni?',
+  'Als document openen': 'Dokumentot nyitás',
+  'Dossier maken': 'Dosszié létrehozása',
+  'Het overzicht kon niet als document worden geopend.':
+      'Az áttekintés nem nyithatótott meg dokumentként.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Mentsük el először az áttekintés dokumentumában a változtatásokat vagy zárd be azt a lapot.',
   'Startmappen': 'Kezdőmappák',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hol a megnyitás és a mentés kezdődik. Üresen az első könyvtárat használja.',

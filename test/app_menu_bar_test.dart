@@ -18,6 +18,8 @@ void main() {
   void note(String what) => fired.add(what);
 
   AppMenuActions appActions() => AppMenuActions(
+    newDossier: () {},
+    openDossier: () {},
     newDeck: () => note('newDeck'),
     newDocument: () => note('newDocument'),
     open: () => note('open'),

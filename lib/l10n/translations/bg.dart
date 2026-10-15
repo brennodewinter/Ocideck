@@ -1658,6 +1658,76 @@ const _dutchSourceAddBg = <String, String>{
       'Резултатите не можаха да бъдат заредени.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Резултатът ви ще се покаже в Моите изпити, щом бъде публикуван.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Само Markdown документи и презентации (.md) могат да бъдат добавени.',
+  'OciDeck dossier': 'OciDeck Досие',
+  'Alle documenten openen': 'Отвори всички документи',
+  'Alleen overzicht': 'Само преглед.',
+  'Alles controleren': 'Провери всички',
+  'DOSSIER': 'ДОСИЕ',
+  'De SHA-256 klopt al.': 'SHA-256 хешът е валиден.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Връзката към този документ изчезва от папката. Файлът на документа остава запазен.',
+  'Deze bijlage is niet beschikbaar.': 'Този файл не е наличен.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Този файл не може да бъде проверен.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Този файл не можеше да бъде безопасно отворен.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Тази папка за досие вече съществува. Изберете друго име.',
+  'Dit dossier kon niet worden geopend.':
+      'Това досие не можеше да бъде отворено.',
+  'Document gewijzigd': 'Документът е бил променен.',
+  'Document niet leesbaar': 'Документът не може да бъде прочетен.',
+  'Document ontbreekt': 'Липсва документ.',
+  'Document openen': 'Отвори документ',
+  'Documenten toevoegen': 'Добави документи',
+  'Dossier': 'Досие',
+  'Dossier openen': 'Отвори досие',
+  'Dossier openen…': 'Отворете файл…',
+  'Dossiertitel wijzigen': 'Променете заглавието на файла.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Едно прикачен файл не можа да бъде добавено.',
+  'Een goed dossier begint hier': 'Доброто събиране започва тук.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Използвайте дръжката или стрелките, за да промените реда. Номерата се актуализират автоматично.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Файлът е бил променен или не е бил записан. Проверете отново.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Не можеше да бъде създадена папката.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Това ще направи новата версия на файла да бъде референцията за тази папка.',
+  'Huidige SHA-256': 'Текущ SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Съдържание и проверка за интегритет',
+  'Meer opties': 'Допълнителни опции',
+  'Naamloos dossier': 'Папка без име',
+  'Nieuw dossier': 'Ново досие',
+  'Nieuwe versie vastleggen': 'Запиши нова версия',
+  'Nieuwe versie vastleggen?': 'Записване на нова версия?',
+  'Omhoog verplaatsen': 'Преместване нагоре',
+  'Omlaag verplaatsen': 'Преместване надолу',
+  'Onveilige bestandsverwijzing': 'Несигурна препратка към файл',
+  'Overzicht en bijlagen': 'Преглед и приложения',
+  'SHA-256 controleren': 'Проверка на SHA-256',
+  'SHA-256 klopt': 'SHA-256 съвпада',
+  'Sleep om te ordenen': 'Плъзнете, за да подредите',
+  'Terug naar dossier': 'Назад към досието',
+  'Titel wijzigen': 'Променете заглавието',
+  'Uit dossier verwijderen': 'Премахни от досието',
+  'Uit dossier verwijderen?': 'Искате ли да изтриете от папката?',
+  'Vastgelegde SHA-256': 'Записаната SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Добавете документи. Те ще бъдат запазени като копия в тази папка и ще се показват тук в желания от вас ред.',
+  'Wijziging opslaan is mislukt.': 'Не успя да запазите промените.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Искате ли да отворите приложенията и в раздели?',
+  'Als document openen': 'Отворете документ',
+  'Dossier maken': 'Създай досие',
+  'Het overzicht kon niet als document worden geopend.':
+      'Прегледът не можа да бъде отворен като документ.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Първо запазете промените в документа на преглед или затворете тази секция.',
   'Startmappen': 'Начални папки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Къде започват отварянето и записването. Празно използва първата библиотека.',

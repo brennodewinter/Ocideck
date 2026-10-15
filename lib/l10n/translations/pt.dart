@@ -1666,6 +1666,75 @@ const _dutchSourceAddPt = <String, String>{
       'Não foi possível carregar os resultados.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Verá o seu resultado em Meus exames assim que for divulgado.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Apenas documentos em Markdown e apresentações (.md) podem ser adicionados.',
+  'OciDeck dossier': 'Dossiê OciDeck',
+  'Alle documenten openen': 'Abrir todos os documentos',
+  'Alleen overzicht': 'Apenas visualização do resumo.',
+  'Alles controleren': 'Verificar tudo',
+  'DOSSIER': 'DOSSIÊ',
+  'De SHA-256 klopt al.': 'O hash SHA-256 já corresponde.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'A entrada desaparece do dossiário. O arquivo do documento permanece armazenado.',
+  'Deze bijlage is niet beschikbaar.': 'Este anexo não está disponível.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Este anexo não pode ser verificado.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Este anexo não pôde ser aberto com segurança.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Esta pasta de dossiário já existe. Escolha um nome diferente.',
+  'Dit dossier kon niet worden geopend.': 'Este dossiário não pôde ser aberto.',
+  'Document gewijzigd': 'Documento modificado',
+  'Document niet leesbaar': 'O documento não é legível.',
+  'Document ontbreekt': 'O documento está ausente.',
+  'Document openen': 'Abrir documento',
+  'Documenten toevoegen': 'Adicionar documentos',
+  'Dossier': 'Dossiê',
+  'Dossier openen': 'Abrir dossiê',
+  'Dossier openen…': 'Abrir dossier…',
+  'Dossiertitel wijzigen': 'Alterar título do dossiê.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Um anexo não pôde ser adicionado.',
+  'Een goed dossier begint hier': 'Um bom dossiê começa aqui.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Utilize o cabo ou as setas para alterar a ordem. Os números são atualizados automaticamente.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'O arquivo foi alterado ou não pôde ser registrado. Verifique novamente.',
+  'Het dossier kon niet worden aangemaakt.':
+      'OciDeck não conseguiu criar o dossiê.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Isso define a nova versão do arquivo como referência para este dossiê.',
+  'Huidige SHA-256': 'SHA-256 atual',
+  'Inhoudsopgave en integriteitscontrole':
+      'Sumário e verificação de integridade',
+  'Meer opties': 'Mais opções',
+  'Naamloos dossier': 'Dossiê sem nome',
+  'Nieuw dossier': 'Novo dossiê',
+  'Nieuwe versie vastleggen': 'Registar nova versão',
+  'Nieuwe versie vastleggen?': 'Registrar nova versão?',
+  'Omhoog verplaatsen': 'Mover para cima',
+  'Omlaag verplaatsen': 'Mover para baixo',
+  'Onveilige bestandsverwijzing': 'Referência de arquivo insegura',
+  'Overzicht en bijlagen': 'Visão geral e anexos',
+  'SHA-256 controleren': 'Verificar o hash SHA-256',
+  'SHA-256 klopt': 'O hash SHA-256 corresponde',
+  'Sleep om te ordenen': 'Arraste para organizar',
+  'Terug naar dossier': 'Voltar ao dossiê',
+  'Titel wijzigen': 'Alterar o título',
+  'Uit dossier verwijderen': 'Remover do dossiê',
+  'Uit dossier verwijderen?': 'Remover do dossiêrio?',
+  'Vastgelegde SHA-256': 'Hash SHA-256 aplicado',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Adicione documentos. Eles serão armazenados como cópias neste dossiêrio e aparecerão aqui na sua ordem.',
+  'Wijziging opslaan is mislukt.': 'A alteração não foi salva.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Deseja abrir os anexos em abas?',
+  'Als document openen': 'Abra o documento.',
+  'Dossier maken': 'Criar dossiê',
+  'Het overzicht kon niet als document worden geopend.':
+      'A visualização não pôde ser aberta como documento.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Salve as alterações no documento da visualização primeiro ou feche essa aba.',
   'Startmappen': 'Pastas iniciais',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Onde abrir e guardar começam. Vazio usa a primeira biblioteca.',

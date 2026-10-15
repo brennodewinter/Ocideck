@@ -685,6 +685,76 @@ const _dutchSourceAddFy = {
       'De útslaggen koene net laden wurde.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Jo sjogge jo útslach ûnder Myn eksamens sadree\'t it frijjûn is.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Allinnich Markdown-dokuminten en -presintaasjes (.md) kinne tafoege wurde.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Alle dokuminten iepenje',
+  'Alleen overzicht': 'Al mar\'r in besicht',
+  'Alles controleren': 'Alles kontrolearje',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'De SHA-256-hash kloppet al.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'De noaimeining ferdwynt út it dossier. It dokumentbestand bliuwt bewaard.',
+  'Deze bijlage is niet beschikbaar.': 'Diese bylage is net beskikbere.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Diese bylage kann net wurde kontroleare.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Diese bylage koene net feilich wurde ophelle.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Diese dossiermap bestaat al. Kies in oare nama.',
+  'Dit dossier kon niet worden geopend.':
+      'Dit dossier koene net wurde ophelle.',
+  'Document gewijzigd': 'Dokument feroaro',
+  'Document niet leesbaar': 'De dokument is net leesbaar.',
+  'Document ontbreekt': 'De dokument misselek.',
+  'Document openen': 'Dokumint iepenje',
+  'Documenten toevoegen': 'Dokuminten tafoegje',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Dossier iepenje',
+  'Dossier openen…': 'Dossier opendal…',
+  'Dossiertitel wijzigen': 'Dossiertitel feroziedegean.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'In bylage koe net wurde taaifoegean.',
+  'Een goed dossier begint hier': 'In goed dossier begint hier.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Boan de hângreep of de pijl om de regear te feroziedegean. De nummers folgjen automatysk.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'It bystân ferozâld of koe net wurde vastgehâld. Kontrolearren oars.',
+  'Het dossier kon niet worden aangemaakt.':
+      'It oerlikje kon net wurde mearmakke.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Dit betsjertwege de nije bestânsfoerheid as referinsje foar it oerlikje.',
+  'Huidige SHA-256': 'Hjoende SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Inhâldlist en kontrole fan integritet',
+  'Meer opties': 'Jammer oer oare opsjes',
+  'Naamloos dossier': 'Ondermoarre oerlikje',
+  'Nieuw dossier': 'Nij dossier',
+  'Nieuwe versie vastleggen': 'Nije ferzje fêstlizze',
+  'Nieuwe versie vastleggen?': 'Moatte de nije foerheid opsjechje?',
+  'Omhoog verplaatsen': 'Omheech ferhevelje',
+  'Omlaag verplaatsen': 'Omloppe ferhevelje',
+  'Onveilige bestandsverwijzing': 'Onseike bestânsferwizing',
+  'Overzicht en bijlagen': 'Oanblêd en byleafen',
+  'SHA-256 controleren': 'SHA-256 kontrolearje',
+  'SHA-256 klopt': 'De SHA-256 kin moai wêze',
+  'Sleep om te ordenen': 'Slepen om te sorjeienen',
+  'Terug naar dossier': 'Werom nei dossier',
+  'Titel wijzigen': 'Titel ferozjeane',
+  'Uit dossier verwijderen': 'Ut dossier fuortsmite',
+  'Uit dossier verwijderen?': 'Ferjeakke fan it dossier?',
+  'Vastgelegde SHA-256': 'De fêste SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Letterjes tafoegen. Se wurde as kopie by dit dossier bewaard en sjen út hjir yn dy wolgeunstige omdieling.',
+  'Wijziging opslaan is mislukt.': 'De ferozijing opslove is mislearre.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Wilje jo de byleafen op tabbladen opnimme?',
+  'Als document openen': 'Asin in dokument openjen',
+  'Dossier maken': 'Dossier meitsje',
+  'Het overzicht kon niet als document worden geopend.':
+      'De oerzjoch koe net as in dokument opendal.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Bewar de ferozijinginnen yn it oerzjochsdokument earst, of slút dat tabblad.',
   'Startmappen': 'Begjinmappen',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wêr iepenjen en bewarjen begjint. Leech litte brûkt de earste bibleteek.',

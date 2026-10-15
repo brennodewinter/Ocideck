@@ -686,6 +686,77 @@ const _dutchSourceAddDe = {
       'Die Ergebnisse konnten nicht geladen werden.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Ihr Ergebnis sehen Sie unter Meine Prüfungen, sobald es freigegeben ist.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Nur Markdown-Dokumente und -Präsentationen (.md) können hinzugefügt werden.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Alle Dokumente öffnen',
+  'Alleen overzicht': 'Nur die Übersicht',
+  'Alles controleren': 'Alles überprüfen',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'Die SHA-256-Summe stimmt bereits.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Die Angabe verschwindet aus dem Dossier. Die Dokumentdatei bleibt erhalten.',
+  'Deze bijlage is niet beschikbaar.': 'Diese Anlage ist nicht verfügbar.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Diese Anlage kann nicht überprüft werden.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Diese Anlage konnte nicht sicher geöffnet werden.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Dieses Dossier-Verzeichnis existiert bereits. Wählen Sie einen anderen Namen.',
+  'Dit dossier kon niet worden geopend.':
+      'Dieses Dossier konnte nicht geöffnet werden.',
+  'Document gewijzigd': 'Dokument geändert',
+  'Document niet leesbaar': 'Das Dokument ist nicht lesbar.',
+  'Document ontbreekt': 'Das Dokument fehlt.',
+  'Document openen': 'Dokument öffnen',
+  'Documenten toevoegen': 'Dokumente hinzufügen',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Dossier öffnen',
+  'Dossier openen…': 'Dossier öffnen…',
+  'Dossiertitel wijzigen': 'Dossiertitel ändern.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Eine Anlage konnte nicht hinzugefügt werden.',
+  'Een goed dossier begint hier': 'Ein gutes Dossier beginnt hier.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Verwenden Sie den Griff oder die Pfeile, um die Reihenfolge zu ändern. Die Nummern folgen automatisch.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Die Datei wurde geändert oder konnte nicht festgehalten werden. Bitte versuchen Sie es erneut.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Das Dossier konnte nicht erstellt werden.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Dadurch wird die neue Dateiversion der Referenz für dieses Dossier.',
+  'Huidige SHA-256': 'Aktuelle SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Inhaltsverzeichnis und Integritätsprüfung',
+  'Meer opties': 'Weitere Optionen',
+  'Naamloos dossier': 'Namensloses Dossier',
+  'Nieuw dossier': 'Neues Dossier',
+  'Nieuwe versie vastleggen': 'Neue Version erfassen',
+  'Nieuwe versie vastleggen?': 'Neue Version festhalten?',
+  'Omhoog verplaatsen': 'Nach oben verschieben',
+  'Omlaag verplaatsen': 'Nach unten verschieben',
+  'Onveilige bestandsverwijzing': 'Unsichere Dateiverweis',
+  'Overzicht en bijlagen': 'Übersicht und Anhang',
+  'SHA-256 controleren': 'SHA-256-Prüfen',
+  'SHA-256 klopt': 'SHA-256 stimmt',
+  'Sleep om te ordenen': 'Ziehen Sie, um zu ordnen',
+  'Terug naar dossier': 'Zurück zum Dossier',
+  'Titel wijzigen': 'Titel ändern',
+  'Uit dossier verwijderen': 'Aus dem Dossier entfernen',
+  'Uit dossier verwijderen?': 'Aus dem Dossier entfernen?',
+  'Vastgelegde SHA-256': 'Festgelegte SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Fügen Sie Dokumente hinzu. Diese werden als Kopien zu diesem Dossier hinzugefügt und hier in Ihrer Reihenfolge angezeigt.',
+  'Wijziging opslaan is mislukt.':
+      'Das Speichern der Änderung ist fehlgeschlagen.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Möchten Sie die Anhänge auch in Register öffnen?',
+  'Als document openen': 'Als Dokument öffnen',
+  'Dossier maken': 'Dossier erstellen',
+  'Het overzicht kon niet als document worden geopend.':
+      'Das Übersichtsfenster konnte nicht als Dokument geöffnet werden.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Speichern Sie die Änderungen im Übersichtsdocument zuerst oder schließen Sie diese Registerkarte.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffnen und Speichern beginnen. Leer lassen verwendet die erste Bibliothek.',

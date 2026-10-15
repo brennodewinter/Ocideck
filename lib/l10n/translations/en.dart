@@ -845,6 +845,75 @@ const _dutchSourceAddEn = {
       'The results could not be loaded.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'You will see your result under My exams as soon as it has been released.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Only Markdown documents and presentations (.md) can be added.',
+  'OciDeck dossier': 'OciDeck Case file',
+  'Alle documenten openen': 'Open all documents',
+  'Alleen overzicht': 'Overview only',
+  'Alles controleren': 'Check all',
+  'DOSSIER': 'CASE FILE',
+  'De SHA-256 klopt al.': 'The SHA-256 hash is correct.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'This entry will be removed from the dossier. The document file remains saved.',
+  'Deze bijlage is niet beschikbaar.': 'This attachment is not available.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'This attachment cannot be verified.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'This attachment could not be securely opened.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'This folder already exists. Please choose a different name.',
+  'Dit dossier kon niet worden geopend.': 'This dossier could not be opened.',
+  'Document gewijzigd': 'The document has been modified.',
+  'Document niet leesbaar': 'The document is unreadable.',
+  'Document ontbreekt': 'The document is missing.',
+  'Document openen': 'Open document',
+  'Documenten toevoegen': 'Add documents',
+  'Dossier': 'Case file',
+  'Dossier openen': 'Open case file',
+  'Dossier openen…': 'Open case file…',
+  'Dossiertitel wijzigen': 'Edit case file title',
+  'Een bijlage kon niet worden toegevoegd.':
+      'An attachment could not be added.',
+  'Een goed dossier begint hier': 'A great case file starts here',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Use the handle or the arrows to change the order. The numbers will update automatically.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'The file changed or could not be recorded. Check it again.',
+  'Het dossier kon niet worden aangemaakt.':
+      'The dossier could not be created.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'This designates the new file version as the reference for this dossier.',
+  'Huidige SHA-256': 'Current SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Table of Contents and Integrity Check',
+  'Meer opties': 'More Options',
+  'Naamloos dossier': 'Untitled case file',
+  'Nieuw dossier': 'New case file',
+  'Nieuwe versie vastleggen': 'Record new version',
+  'Nieuwe versie vastleggen?': 'Capture New Version?',
+  'Omhoog verplaatsen': 'Move Up',
+  'Omlaag verplaatsen': 'Move Down',
+  'Onveilige bestandsverwijzing': 'Unsafe File Reference',
+  'Overzicht en bijlagen': 'Overview and Attachments',
+  'SHA-256 controleren': 'Verify SHA-256',
+  'SHA-256 klopt': 'SHA-256 Matches',
+  'Sleep om te ordenen': 'Drag to Reorder',
+  'Terug naar dossier': 'Back to case file',
+  'Titel wijzigen': 'Rename Title',
+  'Uit dossier verwijderen': 'Remove from case file',
+  'Uit dossier verwijderen?': 'Remove from case file?',
+  'Vastgelegde SHA-256': 'Stored SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Add Documents. They will be stored as copies within this dossier and will appear here in your desired order.',
+  'Wijziging opslaan is mislukt.': 'Saving Changes Failed.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Would you like to open the attachments in tabs?',
+  'Als document openen': 'Open as document',
+  'Dossier maken': 'Create case file',
+  'Het overzicht kon niet als document worden geopend.':
+      'The overview could not be opened as a document.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Save changes to the overview document first or close that tab.',
   'Startmappen': 'Start folders',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Where opening and saving starts. Leave this empty to use the first library.',

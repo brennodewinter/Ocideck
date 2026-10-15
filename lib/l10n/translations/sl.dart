@@ -1638,6 +1638,74 @@ const _dutchSourceAddSl = <String, String>{
       'Rezultatov ni bilo mogoče naložiti.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Svoj rezultat boste videli v razdelku Moji izpiti, ko bo objavljen.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Le lahko dodate le Markdown datoteke in predstavitve (.md).',
+  'OciDeck dossier': 'OciDeck Dosje',
+  'Alle documenten openen': 'Odpri vse dokumente',
+  'Alleen overzicht': 'Prijaznite samo pregledate.',
+  'Alles controleren': 'Preveri vse',
+  'DOSSIER': 'DOSJE',
+  'De SHA-256 klopt al.': 'SHA-256 vrednost je pravilna.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Ta zapis se izmъкne iz dossiera. Datotepni datotek se ohrani.',
+  'Deze bijlage is niet beschikbaar.': 'Ta priloga ni na voljo.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Ta priloga ne more biti preverjena.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Ta priloga ni bila varno odprta.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Ta mapa za datoteko že obstaja. Izberite drugo ime.',
+  'Dit dossier kon niet worden geopend.': 'To datoteko ni bilo mogoče odpreti.',
+  'Document gewijzigd': 'Dokument je bil spremenjen.',
+  'Document niet leesbaar': 'Dokument ni more berljiv.',
+  'Document ontbreekt': 'Dokument manjka.',
+  'Document openen': 'Odpri dokument',
+  'Documenten toevoegen': 'Dodaj dokumente',
+  'Dossier': 'Dosje',
+  'Dossier openen': 'Odpri dosje',
+  'Dossier openen…': 'Odpreti dosje…',
+  'Dossiertitel wijzigen': 'Zamenjati naslov dosjeja.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Ena priloga ni bila mogoča za dodajanje.',
+  'Een goed dossier begint hier': 'Dobro poskušni dosje začne tukaj.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Uporabite ročico ali kazalnike, da spremenite vrstni red. Številke se bodo samodejno posodobili.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Datoteka se je spremenila ali ni bila zabeležena. Preverite znova.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Zapisnik ni bilo mogoče ustvariti.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'S tem se ustvari nova datotepna različica kot referenco za zapisnik.',
+  'Huidige SHA-256': 'Trenutni SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Vsebina in preverjanje celovitosti',
+  'Meer opties': 'Več možnosti',
+  'Naamloos dossier': 'Nepozimljen zapisnik',
+  'Nieuw dossier': 'Novi dosje',
+  'Nieuwe versie vastleggen': 'Zabeleži novo različico',
+  'Nieuwe versie vastleggen?': 'Zapisati novo različico?',
+  'Omhoog verplaatsen': 'Potežiti navzgor',
+  'Omlaag verplaatsen': 'Potežiti navzdol',
+  'Onveilige bestandsverwijzing': 'Nevarno datotepno referenco',
+  'Overzicht en bijlagen': 'Pregled in dodatki',
+  'SHA-256 controleren': 'Preveri SHA-256',
+  'SHA-256 klopt': 'SHA-256 velja',
+  'Sleep om te ordenen': 'Pritrdaj za vrstno urejanje',
+  'Terug naar dossier': 'Nazaj na dosje',
+  'Titel wijzigen': 'Zamenjaj naslov',
+  'Uit dossier verwijderen': 'Odstrani iz dosjeja',
+  'Uit dossier verwijderen?': 'Ali izbrisati iz datotek?',
+  'Vastgelegde SHA-256': 'Shranjena SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Dodaj dokumente. Te bodo shranjene kot kopije v tem datotekah in se bodo prikazale tukaj v tvoji vrstni sledi.',
+  'Wijziging opslaan is mislukt.': 'Shranjevanje spremembe je neuspešno.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Želiš tudi odpreti dodatke v zavirovih?',
+  'Als document openen': 'Dokument odprite.',
+  'Dossier maken': 'Ustvari dosje',
+  'Het overzicht kon niet als document worden geopend.':
+      'Pregled ni bilo mogoče odpreti kot dokument.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Najprej shranite spremembe v dokumentu pregleda ali zaprite to zaveto.',
   'Startmappen': 'Začetne mape',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kje se začneta odpiranje in shranjevanje. Prazno uporabi prvo knjižnico.',

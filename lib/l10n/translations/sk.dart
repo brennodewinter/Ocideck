@@ -1643,6 +1643,74 @@ const _dutchSourceAddSk = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Výsledky sa nepodarilo načítať.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Svoj výsledok uvidíte v časti Moje skúšky, hneď ako bude zverejnený.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Len Markdown-dokumenty a prezentácie (.md) môžu byť pridané.',
+  'OciDeck dossier': 'OciDeck Spis',
+  'Alle documenten openen': 'Otvoriť všetky dokumenty',
+  'Alleen overzicht': 'Len prehľad.',
+  'Alles controleren': 'Skontrolovať všetko',
+  'DOSSIER': 'SPIS',
+  'De SHA-256 klopt al.': 'SHA-256 hodnota je správna.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Znenia zmizne z tohto dossieru. Súbor zostane uložený.',
+  'Deze bijlage is niet beschikbaar.': 'Táto príloha nie je dostupná.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Táto príloha sa nedá skontrolovať.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Táto príloha sa nedala bezpečne otvoriť.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Tento adresár už existuje. Vyberte iné meno.',
+  'Dit dossier kon niet worden geopend.':
+      'Tento dossier sa nepodarilo otvoriť.',
+  'Document gewijzigd': 'Dokument bol zmenený',
+  'Document niet leesbaar': 'Dokument nie je čitateľný',
+  'Document ontbreekt': 'Dokument chýba',
+  'Document openen': 'Otvoriť dokument',
+  'Documenten toevoegen': 'Pridať dokumenty',
+  'Dossier': 'Spis',
+  'Dossier openen': 'Otvoriť spis',
+  'Dossier openen…': 'Otvoriť dossier…',
+  'Dossiertitel wijzigen': 'Zmeniť názov dossiéra',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Jednému prílohe sa nepodarilo pridať.',
+  'Een goed dossier begint hier': 'Dobrý dossier začína tu',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Použite pútko alebo šípky na zmenu poriadku. Čísla sa automaticky aktualizujú.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Súbor bol zmenený alebo sa nepodarilo zaznamenať. Skúste to znova.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossier sa nepodarilo vytvoriť.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Tým sa stane nová verzia súboru referenciou pre toto dossier.',
+  'Huidige SHA-256': 'Aktuálna SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Obsah a kontrola integrity',
+  'Meer opties': 'Ďalšie možnosti',
+  'Naamloos dossier': 'Bez názvu dossier',
+  'Nieuw dossier': 'Nový spis',
+  'Nieuwe versie vastleggen': 'Zaznamenať novú verziu',
+  'Nieuwe versie vastleggen?': 'Zaznamenať novú verziu?',
+  'Omhoog verplaatsen': 'Presunúť hore',
+  'Omlaag verplaatsen': 'Presunúť dole',
+  'Onveilige bestandsverwijzing': 'Nebezpečná referencia k súboru',
+  'Overzicht en bijlagen': 'Prehľad a prílohy',
+  'SHA-256 controleren': 'Kontrola SHA-256',
+  'SHA-256 klopt': 'SHA-256 je správna',
+  'Sleep om te ordenen': 'Prehlač pre zoradenie',
+  'Terug naar dossier': 'Späť k spisu',
+  'Titel wijzigen': 'Zmeniť názov',
+  'Uit dossier verwijderen': 'Odstrániť zo spisu',
+  'Uit dossier verwijderen?': 'Chcete odstrániť z záložky?',
+  'Vastgelegde SHA-256': 'Uvedená SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Pridajte dokumenty. Budú uložené ako kópie k tomuto záložku a zobrazia sa tu v vašom poradí.',
+  'Wijziging opslaan is mislukt.': 'Záznam bol uložený neúspešne.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Chcete tiež otvoriť prílohy v záložkách?',
+  'Als document openen': 'Ako dokument otvoriť',
+  'Dossier maken': 'Vytvoriť spis',
+  'Het overzicht kon niet als document worden geopend.':
+      'Zoznam nemohol byť otvorený ako dokument.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Uložte zmeny do dokumentu zoznamu najprv alebo zatvorte túto kartu.',
   'Startmappen': 'Štartovacie priečinky',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kde sa začína otváranie a ukladanie. Prázdne použije prvú knižnicu.',

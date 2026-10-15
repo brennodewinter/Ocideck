@@ -1638,6 +1638,72 @@ const _dutchSourceAddCs = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Výsledky se nepodařilo načíst.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Svůj výsledek uvidíte v části Moje zkoušky, jakmile bude zveřejněn.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Pouze Markdown soubory a prezentace (.md) lze přidat.',
+  'OciDeck dossier': 'OciDeck Spis',
+  'Alle documenten openen': 'Otevřít všechny dokumenty',
+  'Alleen overzicht': 'Pouze přehled',
+  'Alles controleren': 'Zkontrolovat vše',
+  'DOSSIER': 'SPIS',
+  'De SHA-256 klopt al.': 'SHA-256 hodnota je již správná.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Záznam zmizí z tohoto souboru. Souborový přípona zůstane uložena.',
+  'Deze bijlage is niet beschikbaar.': 'Tato příloha není dostupná.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Tuto přílohu nelze zkontrolovat.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Tuto přílohu nelze bezpečně otevřít.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Tento adresář již existuje. Vyberte jiný název.',
+  'Dit dossier kon niet worden geopend.': 'Toto dossier nemohlo být otevřeno.',
+  'Document gewijzigd': 'Dokument byl změněn',
+  'Document niet leesbaar': 'Dokument není čitelný',
+  'Document ontbreekt': 'Dokument chybí',
+  'Document openen': 'Otevřít dokument',
+  'Documenten toevoegen': 'Přidat dokumenty',
+  'Dossier': 'Spis',
+  'Dossier openen': 'Otevřít spis',
+  'Dossier openen…': 'Otevřít sborník…',
+  'Dossiertitel wijzigen': 'Změnit název sborníku',
+  'Een bijlage kon niet worden toegevoegd.': 'Přiložení nemohlo být přidáno.',
+  'Een goed dossier begint hier': 'Dobrá sbírka začíná zde',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Použijte zářič nebo šipky pro změnu pořadí. Čísla se automaticky aktualizují.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Soubor byl změněn nebo nebyl zaznamenán. Zkontrolujte znovu.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossier nemohlo být vytvořeno.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Tím se stane nová verze souboru referencí pro toto dossier.',
+  'Huidige SHA-256': 'Aktuální SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Obsah a kontrola integrity',
+  'Meer opties': 'Více možností',
+  'Naamloos dossier': 'Bez názvu dossier',
+  'Nieuw dossier': 'Nový spis',
+  'Nieuwe versie vastleggen': 'Zaznamenat novou verzi',
+  'Nieuwe versie vastleggen?': 'Zaznamenat novou verzi?',
+  'Omhoog verplaatsen': 'Posunout nahoru',
+  'Omlaag verplaatsen': 'Posunout dolů',
+  'Onveilige bestandsverwijzing': 'Nebezpečné odkaz na soubor',
+  'Overzicht en bijlagen': 'Přehled a přílohy',
+  'SHA-256 controleren': 'Zkontrolovat SHA-256',
+  'SHA-256 klopt': 'SHA-256 platí',
+  'Sleep om te ordenen': 'Přetáhněte pro řazení',
+  'Terug naar dossier': 'Zpět ke spisu',
+  'Titel wijzigen': 'Změnit název',
+  'Uit dossier verwijderen': 'Odebrat ze spisu',
+  'Uit dossier verwijderen?': 'Chcete odstranit ze souboru?',
+  'Vastgelegde SHA-256': 'Zaznamenaná SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Přidejte dokumenty. Tyto dokumenty budou uloženy jako kopie v tomto souboru a zobrazí se zde ve vašem pořadí.',
+  'Wijziging opslaan is mislukt.': 'Uložení změny se nepodařilo.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Chcete otevřít přílohy i v záložkách?',
+  'Als document openen': 'Soubor otevřít',
+  'Dossier maken': 'Vytvořit spis',
+  'Het overzicht kon niet als document worden geopend.':
+      'Přehled nemohl být otevřen jako soubor.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Nejprve uložte změny do dokumentu přehledu nebo ho zavřete.',
   'Startmappen': 'Výchozí složky',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kde začíná otevírání a ukládání. Prázdné použije první knihovnu.',

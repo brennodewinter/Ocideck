@@ -1637,6 +1637,73 @@ const _dutchSourceAddFi = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Tuloksia ei voitu ladata.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Näet tuloksesi kohdassa Minun kokeeni, kun se on julkaistu.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Vain Markdown-dokumentit ja -esitykset (.md) voidaan lisätä.',
+  'OciDeck dossier': 'OciDeck Asiakirjakansio',
+  'Alle documenten openen': 'Avaa kaikki asiakirjat',
+  'Alleen overzicht': 'Vain yleiskuva',
+  'Alles controleren': 'Tarkista kaikki',
+  'DOSSIER': 'ASIAKIRJAKANSIO',
+  'De SHA-256 klopt al.': 'SHA-256-tarkistus on jo oikein.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Merkintä poistuu tästä dossiesta. Dokumenttifile säilytetään.',
+  'Deze bijlage is niet beschikbaar.': 'Tämä liite ei ole saatavilla.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Tätä liitettä ei voida tarkistaa.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Tätä liitettä ei voitu avata turvallisesti.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Tämä dossiokansio on jo olemassa. Valitse toinen nimi.',
+  'Dit dossier kon niet worden geopend.': 'Tätä dossiota ei voitu avata.',
+  'Document gewijzigd': 'Dokumenti on muuttunut',
+  'Document niet leesbaar': 'Dokumenti ei ole luettavissa.',
+  'Document ontbreekt': 'Dokumentti puuttuu.',
+  'Document openen': 'Avaa asiakirja',
+  'Documenten toevoegen': 'Lisää asiakirjoja',
+  'Dossier': 'Asiakirjakansio',
+  'Dossier openen': 'Avaa asiakirjakansio',
+  'Dossier openen…': 'Dossierin avaaminen…',
+  'Dossiertitel wijzigen': 'Dossierin otsikko muutos.',
+  'Een bijlage kon niet worden toegevoegd.': 'Yksi liite ei voinut lisätä.',
+  'Een goed dossier begint hier': 'Hyvä dossier alkaa tästä.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Käytä vipua tai nuolia järjestystä muuttamaan. Numerot seuraavat automaattisesti.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Tiedosto muuttui tai sitä ei voitu tallentaa. Tarkista uudelleen.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossier ei voitu luoda.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Tällä tavoin uusi tiedostoverisio on viite tälle dossierille.',
+  'Huidige SHA-256': 'Nykyinen SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Sisällysluettelo ja eheyden tarkistus',
+  'Meer opties': 'Lisäasetukset',
+  'Naamloos dossier': 'Nimetön dossier',
+  'Nieuw dossier': 'Uusi asiakirjakansio',
+  'Nieuwe versie vastleggen': 'Tallenna uusi versio',
+  'Nieuwe versie vastleggen?': 'Tallennetaanko uusi versio?',
+  'Omhoog verplaatsen': 'Siirretään ylös.',
+  'Omlaag verplaatsen': 'Siirretään alas.',
+  'Onveilige bestandsverwijzing': 'Epävarma tiedostoviittaus.',
+  'Overzicht en bijlagen': 'Yhteenveto ja liitteet',
+  'SHA-256 controleren': 'SHA-256-tarkistus',
+  'SHA-256 klopt': 'SHA-256 on oikein',
+  'Sleep om te ordenen': 'Päivitä vetämällä',
+  'Terug naar dossier': 'Takaisin asiakirjakansioon',
+  'Titel wijzigen': 'Otsikko muokattavissa',
+  'Uit dossier verwijderen': 'Poista asiakirjakansiosta',
+  'Uit dossier verwijderen?': 'Poista kansiosta?',
+  'Vastgelegde SHA-256': 'Tallennettu SHA-256',
+  'Voeg documenten toe. Ze worden als kopie bij dit dossier bewaard en verschijnen hier in jouw volgorde.':
+      'Lisää dokumentteja. Ne säilytetään kopioina tähän kansioon ja näkyvät täällä omassa järjestyksessäsi.',
+  'Wijziging opslaan is mislukt.': 'Muutoksen tallennus epäonnistui.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Haluatko avata liitteet myös välilehdissä?',
+  'Als document openen': 'Avaa dokumentti',
+  'Dossier maken': 'Luo asiakirjakansio',
+  'Het overzicht kon niet als document worden geopend.':
+      'Näyttöluettelo ei voinut avautua dokumenttina.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Tallenna muutokset näyttöluettelodokumenttiin ensin tai sulje se välilehti.',
   'Startmappen': 'Aloituskansiot',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Mistä avaaminen ja tallennus alkavat. Tyhjä käyttää ensimmäistä kirjastoa.',
