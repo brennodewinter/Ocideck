@@ -1,10 +1,10 @@
 import 'package:material_ui/material_ui.dart';
-
 import '../../l10n/app_localizations.dart';
 import '../../models/document_dossier.dart';
 import '../../services/document_dossier_store.dart';
 import '../../theme/app_theme.dart';
 import 'dossier_dialogs.dart';
+part 'dossier_overview_action.dart';
 
 /// The dossier is a document in its own right, with its own cover and contents.
 class DossierOverview extends StatelessWidget {
@@ -36,7 +36,6 @@ class DossierOverview extends StatelessWidget {
     this.onSuggestEntryDetails,
     this.onExportPdf,
   });
-
   final DocumentDossier dossier;
   final ValueChanged<DossierEntry> onOpenEntry;
   final VoidCallback onOpenAll;
@@ -63,7 +62,6 @@ class DossierOverview extends StatelessWidget {
   final Future<DossierEntryDetails?> Function(DossierEntry)?
   onSuggestEntryDetails;
   final VoidCallback? onExportPdf;
-
   @override
   Widget build(BuildContext context) {
     final palette = AppPalette.of(Theme.of(context));
@@ -809,7 +807,6 @@ class DossierOverview extends StatelessWidget {
       ),
     ),
   );
-
   String _formatSize(int bytes) {
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
@@ -902,7 +899,6 @@ class DossierOverview extends StatelessWidget {
   Widget _menuRow(IconData icon, String label) => Row(
     children: [Icon(icon, size: 18), const SizedBox(width: 12), Text(label)],
   );
-
   void _act(
     BuildContext context,
     DossierEntry entry,
@@ -995,15 +991,4 @@ class DossierOverview extends StatelessWidget {
       ),
     };
   }
-}
-
-enum _EntryAction {
-  verify,
-  refresh,
-  history,
-  details,
-  number,
-  up,
-  down,
-  remove,
 }
