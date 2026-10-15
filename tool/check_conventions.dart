@@ -284,7 +284,9 @@ const Map<String, int> fileSizeBaseline = {
   // import van de paginamaat-lokalisatie.
   // Verlaagd van 1034 naar 1033: het bestand meet 1033.
   // +16 (#1931): _pickLogoDark + _resolveLogoDarkPath.
-  'lib/widgets/dialogs/settings_dialog.dart': 1046,
+  // +1 (#2429): import van ociserve_org_themes voor de themaregister-knop
+  // in het profielonderdeel.
+  'lib/widgets/dialogs/settings_dialog.dart': 1047,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
       1017, // +26 (#1951): fileMtime + fileChangedSince.

@@ -86,9 +86,10 @@ class _OciServeBookingsViewState extends ConsumerState<OciServeBookingsView> {
         calendarExpiresAt = await notifier.calendarSubscriptionExpiry(
           widget.organizationId,
         );
-      } catch (_) {
+      } catch (error) {
         // Lokale metadata — als die niet leesbaar is, is de boekingenlijst
         // nog steeds bruikbaar.
+        logWarning('OciServe: agenda-verloopdatum lezen', error);
       }
       for (final offeringId in offeringIds) {
         try {
