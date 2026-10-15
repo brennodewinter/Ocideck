@@ -371,7 +371,7 @@ class DocumentDossierStore {
       final link = entry.sourcePath == null || entry.sourceRelativePath != null
           ? Uri(pathSegments: p.posix.split(entry.relativePath)).toString()
           : Uri.file(entry.sourcePath!).toString();
-      buffer..writeln(
+      buffer.writeln(
         '${dossier.numberFor(index)}. [${_markdownText(entry.title)}]($link)',
       );
       if (entry.description.trim().isNotEmpty) {
