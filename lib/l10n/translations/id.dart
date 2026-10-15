@@ -1606,6 +1606,26 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Omrekening naar euro': 'Konversi ke euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Untuk tampilan EUR, OciDeck memakai satu kurs per sesi. Isi kurs sendiri atau ambil kurs referensi ECB.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Ambil kurs dari Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Satu permintaan per mata uang ke api.frankfurter.dev hanya dengan kode mata uang; layanan tersebut memang melihat alamat IP. Tidak ada data presentasi yang dikirim.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Pengambilan gagal — isi kurs sendiri atau lanjutkan tanpa kurs.',
+  'Zonder koers doorgaan': 'Lanjutkan tanpa kurs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kurs tidak valid — gunakan misalnya 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'tanggal acuan',
+  'verouderd': 'kedaluwarsa',
+  'koers': 'kurs',
+  'koers ontbreekt': 'kurs tidak ada',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs tidak ada — padanan EUR tidak dihitung.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'baris input tidak dikonversi — kurs tidak ada.',
   'Referentie vastgelegd': 'Referensi tercatat',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Perubahan belum disimpan di tab; SHA-256 memeriksa versi pada disk.',
@@ -1722,6 +1742,7 @@ const _dutchSourceAddId = <String, String>{
       'Tampilan ini tidak dapat dibuka sebagai dokumen.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Simpan perubahan pada dokumen tampilan terlebih dahulu atau tutup tab tersebut.',
+  'Kostenindicatie': 'Indikasi biaya',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruto atau netto tidak masalah di sini — markup biaya pemberi kerja terpisah.',
   'Aanwezigen en tarieven': 'Peserta dan tarif',

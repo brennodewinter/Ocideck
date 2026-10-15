@@ -652,6 +652,26 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Omrekening naar euro': 'Omrekkening nei euro\'s',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Foar de EUR-werjefte brûkt OciDeck ien koers per sesje. Folje de koers sels yn of hel de ECB-referinsjekoers op.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Koers ophelje by Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ien fersyk per faluta nei api.frankfurter.dev mei allinnich de falutakoade; de tsjinst sjocht wol it IP-adres. Der wurde gjin presintaasjegegevens ferstjoerd.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Ophelje mislearre — folje de koers sels yn of gean sûnder koers fierder.',
+  'Zonder koers doorgaan': 'Sûnder koers fierdergean',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Gjin jildige koers — brûk bygelyks 0,92.',
+  'handmatig': 'mei de hân',
+  'peildatum': 'peildatum',
+  'verouderd': 'ferâldere',
+  'koers': 'koers',
+  'koers ontbreekt': 'koers ûntbrekt',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Koers ûntbrekt — EUR-lykweardich net berekkene.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'ynfierrigel(s) net omrekkene — koers ûntbriek.',
   'Referentie vastgelegd': 'Referinsje fêstlein',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Net-opsleine wizigingen yn it ljepblêd; SHA-256 kontrolearret de ferzje op skiif.',
@@ -771,6 +791,7 @@ const _dutchSourceAddFy = {
       'De oerzjoch koe net as in dokument opendal.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Bewar de ferozijinginnen yn it oerzjochsdokument earst, of slút dat tabblad.',
+  'Kostenindicatie': 'Kostenindikaasje',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruto of netto makket hjir net út — de opslach foar wurkjouwerskosten stiet der los by.',
   'Aanwezigen en tarieven': 'Oanwêzigen en tarieven',

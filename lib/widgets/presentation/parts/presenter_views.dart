@@ -17,6 +17,32 @@ bool _slideHasRemoteMedia(Slide slide) {
   return false;
 }
 
+/// De expliciete kosten-overlay (#2437) voor op de diastack, of `null` bij
+/// 'gewoon'/'uit' — dan bestaat er niets om per ongeluk te tonen. Sessie-
+/// overlay, geen dia-inhoud: hij komt nooit in een export terecht. De overlay
+/// tikt zelf; [onTick] duwt het verse bedrag naar het publieksvenster.
+Widget? _costOverlayFor(
+  PresentationCostSession? session,
+  PresentationCostConfig config,
+  double slideW,
+  double slideH,
+  VoidCallback onTick,
+) {
+  if (session == null || config.mode != PresentationCostMode.explicit) {
+    return null;
+  }
+  return Positioned(
+    right: slideW * 0.015,
+    bottom: slideH * 0.02,
+    child: CostOverlay(
+      session: session,
+      currency: session.currency,
+      slideWidth: slideW,
+      onTick: onTick,
+    ),
+  );
+}
+
 extension _PresenterViews on _FullscreenPresenterState {
   /// A slide in the deck's aspect sized to fit within the given constraints.
   Widget _slideCanvas(Slide slide) {
@@ -146,6 +172,18 @@ extension _PresenterViews on _FullscreenPresenterState {
                   onStrokesChanged: _onStrokesChanged,
                   onLaserMove: _onLaserMove,
                   onActiveStrokeChanged: _onActiveStroke,
+                ),
+                // Rechtsonder op de dia, zie [_costOverlayFor].
+                ?_costOverlayFor(
+                  _costSession,
+                  widget.costConfig,
+                  slideW,
+                  slideH,
+                  () => _sendCostTick(
+                    widget.audience,
+                    _costSession,
+                    _costSession?.runId ?? 0,
+                  ),
                 ),
               ],
             ),

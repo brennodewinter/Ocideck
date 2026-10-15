@@ -19,6 +19,8 @@ import '../../models/marp_style.dart';
 import '../../models/question.dart';
 import '../../models/rehearsal.dart';
 import '../../models/settings.dart';
+import '../../models/attendee_input.dart';
+import '../../models/exchange_rate.dart';
 import '../../models/presentation_step_plan.dart';
 import '../../models/presentation_cost.dart';
 import '../../models/presentation_timing.dart';
@@ -57,11 +59,13 @@ import '../slides/chart_hover.dart';
 import '../slides/previews/slide_preview_support.dart';
 import '../slides/slide_preview.dart';
 import '../dialogs/attendee_rates_dialog.dart';
+import '../dialogs/currency_conversion_dialog.dart';
 import '../dialogs/settings_dialog.dart';
 import '../markdown_editor/markdown_editor.dart';
 import 'annotation_overlay.dart';
 import 'audience_controls_bar.dart';
 import 'audience_window.dart';
+import 'cost_overlay.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
 import '../editors/editor_text_controller.dart';
@@ -229,11 +233,11 @@ class FullscreenPresenter extends StatefulWidget {
   /// en gaat nooit richting schijf of export.
   final PresentationCostConfig costConfig;
 
-  /// Het samengetelde uurtarief van de aanwezigen in kleinste eenheden van
-  /// [PresentationCostConfig.currency] — gevuld door het privé-startscherm
-  /// (#2436) wanneer [CostRateInput.attendees] geldt. Null bij het vaste
-  /// groepstarief; salarissen en aannames blijven bij het scherm.
-  final int? attendeeRateMinor;
+  /// Wat de startschermen (#2436, #2438) leverden: het samengetelde
+  /// uurtarief, de sessie-vaste EUR-koers en hoeveel regels niet omgerekend
+  /// konden worden. Null bij het vaste groepstarief of wanneer de
+  /// kostenmodus uit staat; salarissen en aannames blijven bij het scherm.
+  final CostSessionSeed? costSeed;
 
   /// Test-seam voor de microfoon-doorvoer (#2158): productie laat dit leeg en
   /// krijgt bij de eerste aan-zet een [WebrtcMicMonitor]; een widget-test
@@ -271,7 +275,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.micMonitor,
     this.slideAspect = kScreenSlideAspect,
     this.costConfig = PresentationCostConfig.off,
-    this.attendeeRateMinor,
+    this.costSeed,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -318,17 +322,52 @@ class FullscreenPresenter extends StatefulWidget {
     // het publieksscherm bestaat dan nog niet (#2436). Annuleren start de
     // presentatie niet, anders draaide ze met een misleidende nulprijs. De
     // oefenmodus is een soloorbevoering: daar vraagt hij niets.
-    var attendeeRateMinor = 0;
-    if (costConfig.isEnabled &&
-        costConfig.rateInput == CostRateInput.attendees &&
-        !rehearsalMode) {
-      if (!context.mounted) return null;
-      final rate = await AttendeeRatesDialog.showForSessionRate(
-        context,
-        costConfig.currency,
+    CostSessionSeed? costSeed;
+    if (costConfig.isEnabled && !rehearsalMode) {
+      final sessionCurrency = costConfig.currency;
+      var inputs = const <AttendeeInput>[];
+      var assumptions = const CostAssumptions();
+      if (costConfig.rateInput == CostRateInput.attendees) {
+        if (!context.mounted) return null;
+        final result = await AttendeeRatesDialog.show(
+          context,
+          sessionCurrency: sessionCurrency,
+        );
+        if (result == null) return null;
+        inputs = result.attendees;
+        assumptions = result.assumptions;
+      }
+      // #2438: vreemde valuta — van aanwezigen-regels of de sessievaluta
+      // zelf — vragen om één koers per sessie vóór het tellen begint.
+      // Annuleren start de presentatie niet; 'zonder koers' laat de
+      // bedragen als 'koers ontbreekt' zichtbaar in plaats van verzonnen.
+      final needing = currenciesNeedingRate(inputs, sessionCurrency);
+      var rates = const <String, ExchangeRate>{};
+      if (needing.isNotEmpty) {
+        if (!context.mounted) return null;
+        final got = await CurrencyConversionDialog.show(
+          context,
+          currencies: needing,
+        );
+        if (got == null) return null;
+        rates = got;
+      }
+      costSeed = CostSessionSeed(
+        hourlyRateMinor: costConfig.rateInput == CostRateInput.group
+            ? costConfig.groupHourlyRateMinor
+            : sumAttendeeRatesMinor(
+                inputs,
+                assumptions,
+                sessionCurrency,
+                rates,
+              ),
+        eurRate: rates[sessionCurrency.code],
+        unconvertedAttendees: unconvertedRateCount(
+          inputs,
+          sessionCurrency,
+          rates,
+        ),
       );
-      if (rate == null) return null;
-      attendeeRateMinor = rate;
     }
 
     var displayCount = 0;
@@ -377,7 +416,7 @@ class FullscreenPresenter extends StatefulWidget {
         improvementY01: deck.improvementY01Metric,
         slideSize: slideSize,
         costConfig: costConfig,
-        attendeeRateMinor: attendeeRateMinor,
+        costSeed: costSeed,
       );
     } else {
       return await show(
@@ -410,7 +449,7 @@ class FullscreenPresenter extends StatefulWidget {
         improvementY01: deck.improvementY01Metric,
         slideSize: slideSize,
         costConfig: costConfig,
-        attendeeRateMinor: attendeeRateMinor,
+        costSeed: costSeed,
       );
     }
   }
@@ -446,7 +485,7 @@ class FullscreenPresenter extends StatefulWidget {
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
     PageSizeSpec? slideSize,
     PresentationCostConfig costConfig = PresentationCostConfig.off,
-    int attendeeRateMinor = 0,
+    CostSessionSeed? costSeed,
   }) async {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
@@ -493,7 +532,7 @@ class FullscreenPresenter extends StatefulWidget {
                 improvementY01: improvementY01,
                 slideAspect: slideAspectRatio(slideSize),
                 costConfig: costConfig,
-                attendeeRateMinor: attendeeRateMinor,
+                costSeed: costSeed,
               ),
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
@@ -543,7 +582,7 @@ class FullscreenPresenter extends StatefulWidget {
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
     PageSizeSpec? slideSize,
     PresentationCostConfig costConfig = PresentationCostConfig.off,
-    int attendeeRateMinor = 0,
+    CostSessionSeed? costSeed,
   }) async {
     final argument = _dualWindowArguments(
       slides: slides,
@@ -615,7 +654,7 @@ class FullscreenPresenter extends StatefulWidget {
           improvementY01: improvementY01,
           slideSize: slideSize,
           costConfig: costConfig,
-          attendeeRateMinor: attendeeRateMinor,
+          costSeed: costSeed,
         );
       }
       return null;
@@ -656,7 +695,7 @@ class FullscreenPresenter extends StatefulWidget {
       improvementY01: improvementY01,
       slideSize: slideSize,
       costConfig: costConfig,
-      attendeeRateMinor: attendeeRateMinor,
+      costSeed: costSeed,
     );
   }
 
@@ -869,7 +908,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         currency: widget.costConfig.currency,
         hourlyRateMinor: widget.costConfig.rateInput == CostRateInput.group
             ? widget.costConfig.groupHourlyRateMinor
-            : widget.attendeeRateMinor ?? 0,
+            : widget.costSeed?.hourlyRateMinor ?? 0,
+        eurRate: widget.costSeed?.eurRate,
+        unconvertedAttendees: widget.costSeed?.unconvertedAttendees ?? 0,
       );
     }
     _focusNode = FocusNode();

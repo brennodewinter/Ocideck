@@ -1622,6 +1622,26 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Omrekening naar euro': 'Conversie în euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Pentru afișarea în EUR, OciDeck folosește un singur curs pe sesiune. Introduceți cursul manual sau preluați cursul de referință al BCE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Preia cursul de la Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'O cerere pe monedă către api.frankfurter.dev doar cu codul monedei; serviciul vede totuși adresa IP. Nu se trimit date ale prezentării.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Preluarea a eșuat — introduceți cursul manual sau continuați fără curs.',
+  'Zonder koers doorgaan': 'Continuă fără curs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Curs nevalid — folosiți, de exemplu, 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'data de referință',
+  'verouderd': 'depășit',
+  'koers': 'curs',
+  'koers ontbreekt': 'lipsește cursul',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Lipsește cursul — echivalentul în EUR nu a fost calculat.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'rând(uri) de intrare neconvertit(e) — lipsea cursul.',
   'Referentie vastgelegd': 'Referința este înregistrată',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Modificări nesalvate în filă; SHA-256 verifică versiunea de pe disc.',
@@ -1738,6 +1758,7 @@ const _dutchSourceAddRo = <String, String>{
       'Nu a putut fi deschis vizualizarea ca document.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Salvează modificările în documentul de vizualizare mai întâi sau închide acel tab.',
+  'Kostenindicatie': 'Indicație de cost',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Brut sau net nu contează aici — adaosul pentru costurile angajatorului este separat.',
   'Aanwezigen en tarieven': 'Participanți și tarife',

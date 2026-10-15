@@ -1626,6 +1626,27 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Omrekening naar euro': 'Преобразуване в евро',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'За показване в EUR OciDeck използва един курс на сесия. Въведете курса сами или изтеглете референтния курс на ЕЦБ.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Изтегляне на курс от Frankfurter (ЕЦБ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Една заявка на валута към api.frankfurter.dev само с кода на валутата; услугата вижда IP адреса. Не се изпращат данни от презентацията.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Изтеглянето не успя — въведете курса сами или продължете без курс.',
+  'Zonder koers doorgaan': 'Продължи без курс',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Невалиден курс — използвайте например 0,92.',
+  'handmatig': 'ръчно',
+  'peildatum': 'референтна дата',
+  'verouderd': 'остарял',
+  'koers': 'курс',
+  'koers ontbreekt': 'липсва курс',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Липсва курс — равностойността в EUR не е изчислена.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'ред(ове) на въвеждане без преобразуване — липсваше курс.',
   'Referentie vastgelegd': 'Препратката е записана',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Незапазени промени в раздела; SHA-256 проверява версията на диска.',
@@ -1744,6 +1765,7 @@ const _dutchSourceAddBg = <String, String>{
       'Прегледът не можа да бъде отворен като документ.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Първо запазете промените в документа на преглед или затворете тази секция.',
+  'Kostenindicatie': 'Индикация за разходи',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Бруто или нето няма значение тук — надбавката за разходи на работодателя е отделна.',
   'Aanwezigen en tarieven': 'Присъстващи и ставки',

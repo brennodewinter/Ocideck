@@ -651,6 +651,26 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Omrekening naar euro': 'Konversion pa euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Pa mustra den EUR, OciDeck ta usa un kurso pa sesion. Yena e kurso bo mes òf buska e kurso di referensia di BCE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Buska kurso na Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Un petishon pa moneda pa api.frankfurter.dev ku e kódigo di moneda so; e servisio ta mira e adrès IP. No ta manda ningun dato di presentashon.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Buska a fayá — yena e kurso bo mes òf kontinua sin kurso.',
+  'Zonder koers doorgaan': 'Kontinua sin kurso',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kurso no válido — usa pa ehèmpel 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'fecha di referensia',
+  'verouderd': 'bieu',
+  'koers': 'kurso',
+  'koers ontbreekt': 'kurso ta falta',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurso ta falta — ekivalente den EUR no a wòrdu kalkulá.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'liña(nan) di entrada no a wòrdu konvertí — kurso tabata falta.',
   'Referentie vastgelegd': 'Referensiya rekordá.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Kambionan no warda den tab; SHA-256 ta kontrolá e vershon riba disko.',
@@ -764,6 +784,7 @@ const _dutchSourceAddPap = {
       'Lo panoramá no poder a ser abre komo dokumento.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Guarda los eskambios den dokumento panoramá primero o ciérre esa pestaña.',
+  'Kostenindicatie': 'Indikashon di kosto',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruto of netto no ta importantsia aki — e markap di kostonan di empleador ta apart.',
   'Aanwezigen en tarieven': 'Presentenan i tarifanan',

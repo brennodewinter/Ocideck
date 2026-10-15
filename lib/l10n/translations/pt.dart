@@ -1634,6 +1634,26 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Omrekening naar euro': 'Conversão para euros',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Para a apresentação em EUR, o OciDeck usa uma taxa por sessão. Introduzir a taxa manualmente ou obter a taxa de referência do BCE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Obter a taxa do Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Um pedido por moeda a api.frankfurter.dev apenas com o código da moeda; o serviço vê o endereço IP. Não são enviados dados da apresentação.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'A obtenção falhou — introduzir a taxa manualmente ou continuar sem taxa.',
+  'Zonder koers doorgaan': 'Continuar sem taxa',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Taxa inválida — usar, por exemplo, 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'data de referência',
+  'verouderd': 'desatualizada',
+  'koers': 'taxa',
+  'koers ontbreekt': 'falta a taxa',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Falta a taxa — equivalente em EUR não calculado.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'linha(s) de entrada não convertida(s) — faltava a taxa.',
   'Referentie vastgelegd': 'A referência está registrada.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Alterações não guardadas no separador; SHA-256 verifica a versão no disco.',
@@ -1751,6 +1771,7 @@ const _dutchSourceAddPt = <String, String>{
       'A visualização não pôde ser aberta como documento.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Salve as alterações no documento da visualização primeiro ou feche essa aba.',
+  'Kostenindicatie': 'Indicação de custo',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruto ou líquido não importa aqui — a margem dos custos do empregador é separada.',
   'Aanwezigen en tarieven': 'Participantes e taxas',

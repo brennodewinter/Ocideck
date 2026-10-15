@@ -652,6 +652,26 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Omrekening naar euro': 'Umrechnung in Euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Für die EUR-Anzeige verwendet OciDeck einen Kurs pro Sitzung. Den Kurs selbst eintragen oder den EZB-Referenzkurs abrufen.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Kurs von Frankfurter (EZB) abrufen',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Eine Anfrage pro Währung an api.frankfurter.dev, nur mit dem Währungscode; der Dienst sieht allerdings die IP-Adresse. Es werden keine Präsentationsdaten gesendet.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Abruf fehlgeschlagen — den Kurs selbst eintragen oder ohne Kurs fortfahren.',
+  'Zonder koers doorgaan': 'Ohne Kurs fortfahren',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kein gültiger Kurs — zum Beispiel 0,92 verwenden.',
+  'handmatig': 'manuell',
+  'peildatum': 'Stichtag',
+  'verouderd': 'veraltet',
+  'koers': 'Kurs',
+  'koers ontbreekt': 'Kurs fehlt',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs fehlt — EUR-Gegenwert nicht berechnet.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'Eingabezeile(n) nicht umgerechnet — Kurs fehlte.',
   'Referentie vastgelegd': 'Die Referenz ist festgehalten.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Ungespeicherte Änderungen im Tab; SHA-256 prüft die Version auf der Festplatte.',
@@ -773,6 +793,7 @@ const _dutchSourceAddDe = {
       'Das Übersichtsfenster konnte nicht als Dokument geöffnet werden.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Speichern Sie die Änderungen im Übersichtsdocument zuerst oder schließen Sie diese Registerkarte.',
+  'Kostenindicatie': 'Kostenindikation',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Brutto oder netto ist hier egal — der Arbeitgeberkosten-Aufschlag steht separat.',
   'Aanwezigen en tarieven': 'Teilnehmer und Sätze',

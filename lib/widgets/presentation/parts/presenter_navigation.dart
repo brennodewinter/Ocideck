@@ -390,6 +390,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       // De kostenteller (#2435) volgt dezelfde grens: een reset van de
       // oefenklok is een nieuwe sessie, dus begint ook het bedrag bij nul.
       _costSession?.reset();
+      _sendCostTick(widget.audience, _costSession, _costSession?.runId ?? 0);
     });
   }
 }

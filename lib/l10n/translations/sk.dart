@@ -1612,6 +1612,27 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Omrekening naar euro': 'Prepočet na eurá',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Pre zobrazenie v EUR používa OciDeck jeden kurz na reláciu. Kurz zadajte sami alebo stiahnite referenčný kurz ECB.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Stiahnuť kurz zo služby Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Jedna požiadavka na menu na api.frankfurter.dev len s kódom meny; služba však vidí IP adresu. Žiadne údaje prezentácie sa neodosielajú.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Sťahovanie zlyhalo — zadajte kurz sami alebo pokračujte bez kurzu.',
+  'Zonder koers doorgaan': 'Pokračovať bez kurzu',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Neplatný kurz — použite napríklad 0,92.',
+  'handmatig': 'ručne',
+  'peildatum': 'referenčný dátum',
+  'verouderd': 'zastaraný',
+  'koers': 'kurz',
+  'koers ontbreekt': 'kurz chýba',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurz chýba — ekvivalent v EUR nebol vypočítaný.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'riadok(y) vstupu neprepočítané — chýbal kurz.',
   'Referentie vastgelegd': 'Referencia je zaznamenaná',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Neuložené zmeny na karte; SHA-256 kontroluje verziu na disku.',
@@ -1727,6 +1748,7 @@ const _dutchSourceAddSk = <String, String>{
       'Zoznam nemohol byť otvorený ako dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Uložte zmeny do dokumentu zoznamu najprv alebo zatvorte túto kartu.',
+  'Kostenindicatie': 'Odhad nákladov',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Hrubá alebo čistá suma tu nehrá rolu — prirážka na náklady zamestnávateľa je samostatná.',
   'Aanwezigen en tarieven': 'Účastníci a sadzby',

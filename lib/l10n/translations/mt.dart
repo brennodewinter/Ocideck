@@ -1624,6 +1624,26 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Omrekening naar euro': 'Konverżjoni għall-euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Għall-wiri bl-EUR, OciDeck juża rata waħda ta\' skambju għal kull sessjoni. Daħħal ir-rata int stess jew ġib ir-rata ta\' referenza tal-BĊE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Ġib ir-rata minn Frankfurter (BĊE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Talba waħda għal kull munita lil api.frankfurter.dev bil-kodiċi tal-munita biss; is-servizz jara l-indirizz IP. Ma tintbagħat l-ebda dejta tal-preżentazzjoni.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'It-teħid falla — daħħal ir-rata int stess jew kompli mingħajr rata.',
+  'Zonder koers doorgaan': 'Kompli mingħajr rata',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Rata mhux valida — uża, pereżempju, 0,92.',
+  'handmatig': 'manwalment',
+  'peildatum': 'data ta\' referenza',
+  'verouderd': 'skaduta',
+  'koers': 'rata',
+  'koers ontbreekt': 'ir-rata nieqsa',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Ir-rata nieqsa — l-ekwivalenti f\'EUR ma ġiex ikkalkulat.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'linja/linji ta\' input mhux ikkonvertiti — ir-rata kienet nieqsa.',
   'Referentie vastgelegd': 'Ir-referenza ġiet irreġistrata',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Bidliet mhux issejvjati fit-tab; SHA-256 jiċċekkja l-verżjoni fuq id-diska.',
@@ -1741,6 +1761,7 @@ const _dutchSourceAddMt = <String, String>{
       'L-istidenza ma setax tinfeta bħala dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Ħutta l-ebda modifika fil-fildar u agħlaq il-tab.',
+  'Kostenindicatie': 'Indikazzjoni tal-ispiża',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Gross jew net ma jimpurtax hawn — il-markup tal-ispejjeż tal-mgħaddi huwa separat.',
   'Aanwezigen en tarieven': 'Preżenti u rati',

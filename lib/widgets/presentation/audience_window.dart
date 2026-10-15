@@ -23,6 +23,8 @@ import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
+import 'cost_overlay.dart';
+import '../../models/presentation_cost.dart';
 
 /// Het veld waaronder het stijlprofiel in de openings-envelop van het
 /// publieksvenster zit. Eén constante, gedeeld door de verzender en de
@@ -126,6 +128,19 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   int _blank = 0; // 0 = none, 1 = black, 2 = white
   int _timedPhase = -1;
   int _countdown = 3;
+
+  /// Het lopende sessietotaal van de expliciete kostenmodus (#2437), gepusht
+  /// door de presentator via 'costTick'. `null` = geen overlay — de standaard.
+  int? _costMinor;
+  String _costCurrency = 'EUR';
+
+  /// Het EUR-equivalent van [_costMinor] bij een sessie in een andere
+  /// valuta (#2438); `null` bij EUR of een ontbrekende koers.
+  int? _costEurMinor;
+
+  /// De sessierun waar [_costMinor] bij hoort; de presentator verhoogt hem
+  /// bij een reset zodat dit venster weet dat een lager bedrag klopt.
+  int _costRun = 0;
 
   /// Volgt de kijkstand (zoom + scrollpositie) van een groot mermaid-diagram op
   /// de presentatie-dia (#930): de presentator zoomt/scrolt, hier zetten we
@@ -317,6 +332,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         if ((m['index'] as num?)?.toInt() == _index) {
           _timelineView.setFraction((m['fraction'] as num?)?.toDouble() ?? 0);
         }
+      case 'costTick':
+        _applyCostTick(Map<String, dynamic>.from(call.arguments as Map));
       case 'chartHover':
         _applyChartHover(call.arguments);
       case 'question':
@@ -413,6 +430,24 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// Alleen als dit venster op dezelfde dia staat (net als 'mermaidView').
   /// Het volgnummer maakt een snelle hover A -> B -> weg bestand tegen
   /// berichten die door de vensterbrug buiten volgorde aankomen.
+  /// #2437: het oplopende sessietotaal van de expliciete kostenmodus. De
+  /// teller loopt monotoon binnen een run; een vertraagd bericht kan alleen
+  /// een oudere (kleinere) waarde dragen en wordt geweigerd — behalve bij een
+  /// nieuwe run, want een reset van de presentator moet hier ook tellen.
+  void _applyCostTick(Map<String, dynamic> m) {
+    if (!mounted) return;
+    final minor = (m['minor'] as num?)?.toInt();
+    final run = (m['run'] as num?)?.toInt() ?? 0;
+    if (minor == null || run < _costRun) return;
+    if (run == _costRun && _costMinor != null && minor < _costMinor!) return;
+    setState(() {
+      _costRun = run;
+      _costMinor = minor;
+      _costCurrency = (m['currency'] as String?) ?? _costCurrency;
+      _costEurMinor = (m['eur'] as num?)?.toInt();
+    });
+  }
+
   void _applyChartHover(Object? arguments) {
     final m = Map<String, dynamic>.from(arguments as Map);
     if (!mounted) return;
@@ -656,6 +691,22 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   interactive: false,
                   laserPoint: _laserIndex == _index ? _laserPoint : null,
                 ),
+                // Expliciete kostenmodus (#2437): het lopende sessietotaal
+                // rechtsonder op de beamerdia. Leest `_costMinor` uit de
+                // 'costTick'-berichten — nooit een dia-onderdeel.
+                if (_costMinor != null)
+                  Positioned(
+                    right: slideW * 0.015,
+                    bottom: slideH * 0.02,
+                    child: CostOverlay(
+                      minor: _costMinor!,
+                      eurMinor: _costEurMinor,
+                      currency:
+                          costCurrencyByCode(_costCurrency) ??
+                          kCostCurrencies.first,
+                      slideWidth: slideW,
+                    ),
+                  ),
               ],
             ),
           ),

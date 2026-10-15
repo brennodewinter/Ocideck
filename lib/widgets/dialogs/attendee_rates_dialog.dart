@@ -42,22 +42,6 @@ class AttendeeRatesDialog extends StatefulWidget {
     );
   }
 
-  /// Toont het scherm en rekent het antwoord direct om naar het
-  /// samengetelde uurtarief in [sessionCurrency]. `null` = geannuleerd —
-  /// de roeper start de sessie dan niet (#2436).
-  static Future<int?> showForSessionRate(
-    BuildContext context,
-    CostCurrency sessionCurrency,
-  ) async {
-    final result = await show(context, sessionCurrency: sessionCurrency);
-    if (result == null) return null;
-    return sumAttendeeRatesMinor(
-      result.attendees,
-      result.assumptions,
-      sessionCurrency,
-    );
-  }
-
   @override
   State<AttendeeRatesDialog> createState() => _AttendeeRatesDialogState();
 }
@@ -144,9 +128,10 @@ class _AttendeeRatesDialogState extends State<AttendeeRatesDialog> {
     );
   }
 
-  /// De sessie kan starten zodra minstens één geldige regel in de
-  /// sessievaluta staat én geen enkele regel rot is. Leeg-of-rot starten zou
-  /// een presentatie met een misleidende nulprijs betekenen (#2436).
+  /// De sessie kan starten zodra minstens één geldige regel staat én geen
+  /// enkele regel rot is — ook in een vreemde valuta, die wordt bij de
+  /// sessiestart omgerekend (#2438). Leeg-of-rot starten zou een
+  /// presentatie met een misleidende nulprijs betekenen (#2436).
   bool get _canStart {
     final assumptions = _assumptions;
     if (assumptions == null) return false;
@@ -155,7 +140,7 @@ class _AttendeeRatesDialogState extends State<AttendeeRatesDialog> {
       final text = row.amount.text.trim();
       if (text.isEmpty) continue;
       if (_rowRateMinor(row, assumptions) == null) return false;
-      if (row.currency.code == widget.sessionCurrency.code) any = true;
+      any = true;
     }
     return any;
   }

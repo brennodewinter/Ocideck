@@ -1604,6 +1604,26 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Omrekening naar euro': 'Konvertēšana eiro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR attēlošanai OciDeck izmanto vienu kursu sesijā. Ievadiet kursu paši vai iegūstiet ECB atsauces kursu.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Iegūt kursu no Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Viens pieprasījums katrai valūtai uz api.frankfurter.dev tikai ar valūtas kodu; pakalpojums gan redz IP adresi. Prezentācijas dati netiek sūtīti.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Iegūšana neizdevās — ievadiet kursu paši vai turpiniet bez kursa.',
+  'Zonder koers doorgaan': 'Turpināt bez kursa',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Nederīgs kurss — izmantojiet, piemēram, 0,92.',
+  'handmatig': 'manuāli',
+  'peildatum': 'atsauces datums',
+  'verouderd': 'novecojis',
+  'koers': 'kurss',
+  'koers ontbreekt': 'trūkst kursa',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Trūkst kursa — EUR ekvivalents nav aprēķināts.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'ievades rindas nav konvertētas — trūka kursa.',
   'Referentie vastgelegd': 'Atsauce fiksēta',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Cilnē ir nesaglabātas izmaiņas; SHA-256 pārbauda diskā esošo versiju.',
@@ -1718,6 +1738,7 @@ const _dutchSourceAddLv = <String, String>{
       'Skats nevarēja būt atvērts kā dokumenta fails.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Pirms ielietiet izmaiņas skata dokumentā vai slēgtu to rindu.',
+  'Kostenindicatie': 'Izmaksu indikācija',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruto vai neto šeit nav svarīgi — darba devēja izmaksu uzcenojums ir atsevišķs.',
   'Aanwezigen en tarieven': 'Klātesošie un likmes',

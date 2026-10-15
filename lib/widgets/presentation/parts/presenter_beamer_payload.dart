@@ -311,6 +311,29 @@ void _sendChartHover({
       });
 }
 
+/// Stuurt het lopende sessietotaal naar het publieksvenster (#2437), elke
+/// overlay-tik en na een reset. Alleen in expliciete modus actief — daar is
+/// het bedrag publiek opzet; het samengetelde tarief is dat trouwens ook,
+/// dus de beamer mag het zien. Top-level, net als [_sendChartHover].
+void _sendCostTick(
+  AudienceWindowHandle? audience,
+  PresentationCostSession? session,
+  int run,
+) {
+  if (session == null || audience?.controller == null) return;
+  audienceChannel
+      .invokeMethod('costTick', {
+        'minor': session.currentCostMinor,
+        'currency': session.currency.code,
+        'eur': session.eurMinorOf(session.currentCostMinor),
+        'run': run,
+      })
+      .catchError((Object e) {
+        logWarning('FullscreenPresenter: cost tick sync failed', e);
+        return null;
+      });
+}
+
 /// Slide-index → geëncodeerde annotaties voor het beamervenster-argument.
 /// Hoorde bij [FullscreenPresenter]; staat nu bij de enige aanroeper.
 Map<String, dynamic> _annotationsBySlideIndex(
@@ -394,7 +417,7 @@ Future<String?> _runDualPresenter(
   required ImprovementY01Metric improvementY01,
   PageSizeSpec? slideSize,
   PresentationCostConfig costConfig = PresentationCostConfig.off,
-  int attendeeRateMinor = 0,
+  CostSessionSeed? costSeed,
 }) async {
   final hadWakeLock = await _wakeLockEnabled();
   await _enableWakeLock();
@@ -440,7 +463,7 @@ Future<String?> _runDualPresenter(
             improvementY01: improvementY01,
             slideAspect: slideAspectRatio(slideSize),
             costConfig: costConfig,
-            attendeeRateMinor: attendeeRateMinor,
+            costSeed: costSeed,
           ),
         ),
         transitionsBuilder: (context, animation, secondary, child) =>

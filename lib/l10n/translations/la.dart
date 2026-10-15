@@ -1621,6 +1621,26 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Omrekening naar euro': 'Conversio in euronum',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Ad monstrationem in EUR OciDeck unum cursum per sessionem adhibet. Cursum ipse inscribe vel cursum referentiae BCE pete.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Cursum a Frankfurter (BCE) pete',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Una petitio per nummum ad api.frankfurter.dev cum solo codice nummi; ministerium tamen inscriptionem IP videt. Nulla data praesentationis mittuntur.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Petitio defecit — cursum ipse inscribe vel sine cursu perge.',
+  'Zonder koers doorgaan': 'Sine cursu perge',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Cursus non validus — utere exempli gratia 0,92.',
+  'handmatig': 'manu',
+  'peildatum': 'dies referentiae',
+  'verouderd': 'obsoletus',
+  'koers': 'cursus',
+  'koers ontbreekt': 'cursus deest',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Cursus deest — aequivalens in EUR non computatum.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'linea(e) inputationis non conversa(e) — cursus deerat.',
   'Referentie vastgelegd': 'Referentia consignata',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Mutationes in tabula nondum servatae; SHA-256 versionem in disco inspicit.',
@@ -1734,6 +1754,7 @@ const _dutchSourceAddLa = <String, String>{
       'Praefigium optinendum non potest sicut documentum aperiendum.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Conserva mutationes in documento praeficii, aut clausa tabulam illam.',
+  'Kostenindicatie': 'Sumptuum indicatio',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruttum an netum hic non refert — accrementum sumptuum conductoris separatum est.',
   'Aanwezigen en tarieven': 'Praesentes et mercedes',

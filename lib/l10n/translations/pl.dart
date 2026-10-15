@@ -1618,6 +1618,26 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Omrekening naar euro': 'Przeliczenie na euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Do wyświetlania w EUR OciDeck używa jednego kursu na sesję. Wpisz kurs samodzielnie lub pobierz kurs referencyjny EBC.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Pobierz kurs z Frankfurter (EBC)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Jedno zapytanie na walutę do api.frankfurter.dev, tylko z kodem waluty; usługa widzi jednak adres IP. Żadne dane prezentacji nie są wysyłane.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Pobieranie nie powiodło się — wpisz kurs samodzielnie lub kontynuuj bez kursu.',
+  'Zonder koers doorgaan': 'Kontynuuj bez kursu',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Nieprawidłowy kurs — użyj na przykład 0,92.',
+  'handmatig': 'ręcznie',
+  'peildatum': 'data odniesienia',
+  'verouderd': 'nieaktualny',
+  'koers': 'kurs',
+  'koers ontbreekt': 'brak kursu',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Brak kursu — równowartość w EUR nie została obliczona.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'wiersz(e) wejściowe nieprzeliczone — brakowało kursu.',
   'Referentie vastgelegd': 'Referencja udokumentowana',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Niezapisane zmiany na karcie; SHA-256 sprawdza wersję na dysku.',
@@ -1736,6 +1756,7 @@ const _dutchSourceAddPl = <String, String>{
       'Przegląd nie mógł zostać otwarty jako dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Najpierw zapisz zmiany w dokumencie przeglądowym lub zamknij ten zakład.',
+  'Kostenindicatie': 'Wskazanie kosztów',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Brutto czy netto nie ma tu znaczenia — narzut kosztów pracodawcy jest osobny.',
   'Aanwezigen en tarieven': 'Uczestnicy i stawki',

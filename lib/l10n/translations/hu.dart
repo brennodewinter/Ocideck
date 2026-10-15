@@ -1608,6 +1608,27 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Omrekening naar euro': 'Átváltás euróra',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Az EUR-megjelenítéshez az OciDeck munkamenetenként egy árfolyamot használ. Az árfolyamot meg lehet adni kézzel, vagy le lehet kérni az EKB referencia-árfolyamát.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Árfolyam lekérése a Frankfurter szolgáltatástól (EKB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Pénznemenként egy kérés az api.frankfurter.dev felé, csak a pénznemkóddal; a szolgáltatás látja az IP-címet. Prezentációs adat nem kerül elküldésre.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'A lekérés sikertelen — az árfolyamot meg lehet adni kézzel, vagy árfolyam nélkül folytatható.',
+  'Zonder koers doorgaan': 'Folytatás árfolyam nélkül',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Érvénytelen árfolyam — például 0,92.',
+  'handmatig': 'kézzel',
+  'peildatum': 'referenciadátum',
+  'verouderd': 'elavult',
+  'koers': 'árfolyam',
+  'koers ontbreekt': 'hiányzik az árfolyam',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Hiányzik az árfolyam — az EUR-egyenérték nincs kiszámítva.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'bemeneti sor(ok) átváltatlan(ok) — hiányzott az árfolyam.',
   'Referentie vastgelegd': 'A hivatkozás rögzítve van.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Mentetlen módosítások a lapon; a SHA-256 a lemezen lévő verziót ellenőrzi.',
@@ -1724,6 +1745,7 @@ const _dutchSourceAddHu = <String, String>{
       'Az áttekintés nem nyithatótott meg dokumentként.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Mentsük el először az áttekintés dokumentumában a változtatásokat vagy zárd be azt a lapot.',
+  'Kostenindicatie': 'Költségjelzés',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruttó vagy nettó itt nem számít — a munkáltatói költségráfordítás külön áll.',
   'Aanwezigen en tarieven': 'Résztvevők és díjak',

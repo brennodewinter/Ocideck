@@ -1606,6 +1606,27 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Omrekening naar euro': 'Muunnos euroiksi',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR-näkymää varten OciDeck käyttää yhtä kurssia istuntoa kohti. Syötä kurssi itse tai hae EKP:n viitekurssi.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Hae kurssi Frankfurter-palvelusta (EKP)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Yksi pyyntö valuuttaa kohti osoitteeseen api.frankfurter.dev pelkällä valuuttakoodilla; palvelu kuitenkin näkee IP-osoitteen. Esitystietoja ei lähetetä.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Haku epäonnistui — syötä kurssi itse tai jatka ilman kurssia.',
+  'Zonder koers doorgaan': 'Jatka ilman kurssia',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Virheellinen kurssi — käytä esimerkiksi arvoa 0,92.',
+  'handmatig': 'manuaalisesti',
+  'peildatum': 'viitepäivä',
+  'verouderd': 'vanhentunut',
+  'koers': 'kurssi',
+  'koers ontbreekt': 'kurssi puuttuu',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurssi puuttuu — EUR-vastinetta ei laskettu.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'syöttörivi(ä) ei muunnettu — kurssi puuttui.',
   'Referentie vastgelegd': 'Viittaus on kirjattu',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Välilehdellä on tallentamattomia muutoksia; SHA-256 tarkistaa levyllä olevan version.',
@@ -1720,6 +1741,7 @@ const _dutchSourceAddFi = <String, String>{
       'Näyttöluettelo ei voinut avautua dokumenttina.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Tallenna muutokset näyttöluettelodokumenttiin ensin tai sulje se välilehti.',
+  'Kostenindicatie': 'Kustannusarvio',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Brutto tai netto ei ole väliä tässä — työnantajakustannusten korotus on erillinen.',
   'Aanwezigen en tarieven': 'Osallistujat ja hinnat',

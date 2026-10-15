@@ -2514,6 +2514,26 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Omrekening naar euro': 'Euro\'ya çevirme',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR gösterimi için OciDeck oturum başına tek bir kur kullanır. Kuru kendiniz girin veya ECB referans kurunu alın.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Kuru Frankfurter\'dan (ECB) al',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Para birimi başına, yalnızca para birimi kodunu içeren tek bir istek api.frankfurter.dev adresine gider; hizmet IP adresini görür. Sunum verileri gönderilmez.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Alma başarısız oldu — kuru kendiniz girin veya kursuz devam edin.',
+  'Zonder koers doorgaan': 'Kursuz devam et',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Geçersiz kur — örneğin 0,92 kullanın.',
+  'handmatig': 'elle',
+  'peildatum': 'referans tarihi',
+  'verouderd': 'güncel değil',
+  'koers': 'kur',
+  'koers ontbreekt': 'kur eksik',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kur eksik — EUR karşılığı hesaplanmadı.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'girdi satır(lar)ı dönüştürülmedi — kur eksikti.',
   'Referentie vastgelegd': 'Referans bilgisi kaydedilmiştir.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Sekmede kaydedilmemiş değişiklikler var; SHA-256 diskteki sürümü kontrol eder.',
@@ -2628,6 +2648,7 @@ const _dutchSourceAddTr = <String, String>{
       'Bu görünüm, bir belge olarak açılamadı.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Lütfen görünüm belgesindeki değişiklikleri önce kaydedin veya bu sekme kapalı olsun.',
+  'Kostenindicatie': 'Maliyet göstergesi',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Brüt veya net burada fark etmez — işveren maliyeti payı ayrıdır.',
   'Aanwezigen en tarieven': 'Katılımcılar ve ücretler',

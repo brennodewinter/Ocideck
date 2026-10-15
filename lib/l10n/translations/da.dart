@@ -1606,6 +1606,26 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Omrekening naar euro': 'Omregning til euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Til EUR-visningen bruger OciDeck én kurs pr. session. Indtast kursen selv, eller hent ECB\'s referencekurs.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Hent kurs fra Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Én anmodning pr. valuta til api.frankfurter.dev med kun valutakoden; tjenesten ser dog IP-adressen. Der sendes ingen præsentationsdata.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Hentning mislykkedes — indtast kursen selv, eller fortsæt uden kurs.',
+  'Zonder koers doorgaan': 'Fortsæt uden kurs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Ugyldig kurs — brug for eksempel 0,92.',
+  'handmatig': 'manuelt',
+  'peildatum': 'skæringsdato',
+  'verouderd': 'forældet',
+  'koers': 'kurs',
+  'koers ontbreekt': 'kurs mangler',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs mangler — EUR-modværdi er ikke beregnet.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'inputlinje(r) ikke omregnet — kursen manglede.',
   'Referentie vastgelegd': 'Henvisningen er registreret.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Ikke-gemte ændringer i fanen; SHA-256 kontrollerer versionen på disken.',
@@ -1724,6 +1744,7 @@ const _dutchSourceAddDa = <String, String>{
       'Oversigten kunne ikke åbnes som et dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Gem ændringer i dokumentet for oversigtstabsfane først eller luk fanen.',
+  'Kostenindicatie': 'Omkostningsindikation',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Brutto eller netto er ligegyldigt her — arbejdsgiveromkostnings-tillægget står separat.',
   'Aanwezigen en tarieven': 'Deltagere og satser',

@@ -56,18 +56,21 @@ void main() {
   group('sumAttendeeRatesMinor', () {
     const a = CostAssumptions();
 
-    test('telt alleen de sessievaluta; vreemde wachten op #2438', () {
-      final sum = sumAttendeeRatesMinor(
-        [
-          _input(4000, CostPeriod.hour),
-          _input(5000, CostPeriod.hour, _usd),
-          _input(3000, CostPeriod.hour),
-        ],
-        a,
-        _eur,
-      );
-      expect(sum, 7000);
-    });
+    test(
+      'een vreemde valuta zonder koers telt niet mee (de omrekening: exchange_rate_test)',
+      () {
+        final sum = sumAttendeeRatesMinor(
+          [
+            _input(4000, CostPeriod.hour),
+            _input(5000, CostPeriod.hour, _usd),
+            _input(3000, CostPeriod.hour),
+          ],
+          a,
+          _eur,
+        );
+        expect(sum, 7000);
+      },
+    );
 
     test('lege invoer is nul', () {
       expect(sumAttendeeRatesMinor(const [], a, _eur), 0);

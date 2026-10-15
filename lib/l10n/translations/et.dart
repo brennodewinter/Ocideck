@@ -1599,6 +1599,27 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Omrekening naar euro': 'Teisendus eurodesse',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR-kuva jaoks kasutab OciDeck ühte kurssi seansi kohta. Sisestage kurss ise või tooge EKP viitekurss.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Too kurss teenusest Frankfurter (EKP)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Üks päring valuuta kohta aadressile api.frankfurter.dev ainult valuutakoodiga; teenus näeb siiski IP-aadressi. Esitluse andmeid ei saadeta.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Toomine ebaõnnestus — sisestage kurss ise või jätkake ilma kursita.',
+  'Zonder koers doorgaan': 'Jätka ilma kursita',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kehtetu kurss — kasutage näiteks 0,92.',
+  'handmatig': 'käsitsi',
+  'peildatum': 'viitekuupäev',
+  'verouderd': 'vananenud',
+  'koers': 'kurss',
+  'koers ontbreekt': 'kurss puudub',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurss puudub — EUR-vaste arvutamata.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'sisendrida(sid) teisendamata — kurss puudus.',
   'Referentie vastgelegd': 'Viide salvestatud',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Vahekaardil on salvestamata muudatusi; SHA-256 kontrollib kettal olevat versiooni.',
@@ -1714,6 +1735,7 @@ const _dutchSourceAddEt = <String, String>{
       'Ülevaade ei saanud dokumentina avada.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Salvestage muudatused ülevaatedokumendis kõigepealt või sulgege see tab.',
+  'Kostenindicatie': 'Kulude indikatsioon',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruto või neto ei ole siin oluline — tööandja kulude lisandus on eraldi.',
   'Aanwezigen en tarieven': 'Osalejad ja hinnad',

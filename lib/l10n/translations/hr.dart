@@ -1610,6 +1610,27 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Omrekening naar euro': 'Preračun u eure',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Za prikaz u EUR OciDeck koristi jedan tečaj po sesiji. Unesite tečaj sami ili dohvatite referentni tečaj ESB-a.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Dohvati tečaj iz usluge Frankfurter (ESB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Jedan zahtjev po valuti prema api.frankfurter.dev samo s kodom valute; usluga ipak vidi IP adresu. Podaci prezentacije se ne šalju.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Dohvaćanje nije uspjelo — unesite tečaj sami ili nastavite bez tečaja.',
+  'Zonder koers doorgaan': 'Nastavi bez tečaja',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Nevaljan tečaj — upotrijebite npr. 0,92.',
+  'handmatig': 'ručno',
+  'peildatum': 'datum tečaja',
+  'verouderd': 'zastarjelo',
+  'koers': 'tečaj',
+  'koers ontbreekt': 'nedostaje tečaj',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Nedostaje tečaj — protuvrijednost u EUR nije izračunana.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'redak/reci unosa nisu preračunati — nedostajao je tečaj.',
   'Referentie vastgelegd': 'Referenca je evidentirana',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Nespremljene promjene na kartici; SHA-256 provjerava verziju na disku.',
@@ -1726,6 +1747,7 @@ const _dutchSourceAddHr = <String, String>{
       'Pregled nije mogao biti otvoren kao dokument.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Najprije spremite izmjene u dokumenta pregleda ili zatvorite to natrag.',
+  'Kostenindicatie': 'Pokazatelj troškova',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruto ili neto ovdje nije važno — uvećanje za troškove poslodavca je zasebno.',
   'Aanwezigen en tarieven': 'Prisutni i satnice',

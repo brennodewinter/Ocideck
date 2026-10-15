@@ -1609,6 +1609,26 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Omrekening naar euro': 'Umrächnig i Euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Für d EUR-Aazeig bruucht OciDeck pro Sitzig ein Kurs. De Kurs sälber iitrage oder de EZB-Referänzkurs abruefe.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Kurs vo Frankfurter (EZB) abruefe',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ei Aafrag pro Wäährig a api.frankfurter.dev nume mit em Wäährigscode; dr Dienscht gsiht aber d IP-Adrässe. Es wärde kei Präsentationsdate gschickt.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Abruef fählgschlage — de Kurs sälber iitrage oder ohni Kurs wiiterfahre.',
+  'Zonder koers doorgaan': 'Ohni Kurs wiiterfahre',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kein gültige Kurs — zum Bispiil 0,92 bruuche.',
+  'handmatig': 'manuell',
+  'peildatum': 'Stichtag',
+  'verouderd': 'veraltet',
+  'koers': 'Kurs',
+  'koers ontbreekt': 'Kurs fählt',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs fählt — EUR-Gägewärt nöd berächnet.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'Iigabezile nöd umgrächnet — Kurs het gfählt.',
   'Referentie vastgelegd': 'D\'Referanz isch feschtlegt',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Nit gspeichereti Änderige im Tab; SHA-256 prüeft d Version uf dr Feschtplatte.',
@@ -1725,6 +1745,7 @@ const _dutchSourceAddGsw = <String, String>{
       'Es isch nit gmacht worde, dass d\'Übersicht as Dokument öppnet worde isch.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Guets d\'Ändurig öpple in d\'Übersichts-Dokument, oder schliisse d\'Tablade.',
+  'Kostenindicatie': 'Chöschtindikation',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Brutto oder netto isch do egal — de Arbeitgäberchöschte-Ufschlag stoht separat.',
   'Aanwezigen en tarieven': 'Teilnöhmer ond Sätz',

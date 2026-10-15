@@ -812,6 +812,26 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Omrekening naar euro': 'Conversion to euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'For the EUR display OciDeck uses one exchange rate per session. Enter the rate yourself or fetch the ECB reference rate.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Fetch rate from Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'One request per currency to api.frankfurter.dev with only the currency code; the service does see the IP address. No presentation data is sent.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Fetching failed — enter the rate yourself or continue without a rate.',
+  'Zonder koers doorgaan': 'Continue without a rate',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Not a valid rate — for example use 0.92.',
+  'handmatig': 'manual',
+  'peildatum': 'reference date',
+  'verouderd': 'outdated',
+  'koers': 'rate',
+  'koers ontbreekt': 'rate missing',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Rate missing — EUR equivalent not calculated.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'input line(s) not converted — rate was missing.',
   'Referentie vastgelegd': 'Reference recorded',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Unsaved changes in tab; SHA-256 checks the version on disk.',
@@ -930,6 +950,7 @@ const _dutchSourceAddEn = {
       'The overview could not be opened as a document.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Save changes to the overview document first or close that tab.',
+  'Kostenindicatie': 'Cost indication',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Gross or net does not matter here — the employer-cost markup is separate.',
   'Aanwezigen en tarieven': 'Attendees and rates',

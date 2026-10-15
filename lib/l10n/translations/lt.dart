@@ -1613,6 +1613,26 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Omrekening naar euro': 'Konvertavimas į eurus',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR rodymui „OciDeck“ naudoja vieną kursą per sesiją. Kursą įveskite patys arba gaukite ECB orientacinį kursą.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Gauti kursą iš „Frankfurter“ (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Viena užklausa kiekvienai valiutai į api.frankfurter.dev tik su valiutos kodu; paslauga mato IP adresą. Prezentacijos duomenys nesiunčiami.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Gauti nepavyko — kursą įveskite patys arba tęskite be kurso.',
+  'Zonder koers doorgaan': 'Tęsti be kurso',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Netinkamas kursas — naudokite, pvz., 0,92.',
+  'handmatig': 'rankiniu būdu',
+  'peildatum': 'kurso data',
+  'verouderd': 'pasenęs',
+  'koers': 'kursas',
+  'koers ontbreekt': 'trūksta kurso',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Trūksta kurso — ekvivalentas EUR neapskaičiuotas.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'įvesties eilutė(s) nekonvertuota(os) — trūko kurso.',
   'Referentie vastgelegd': 'Informacija fiksuota',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Kortelėje yra neįrašytų pakeitimų; SHA-256 tikrina diske esančią versiją.',
@@ -1727,6 +1747,7 @@ const _dutchSourceAddLt = <String, String>{
       'Perteklinis vaizdavimas negali būti atidarytas kaip dokumentas.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Pirmiausia išsaugokite pokyčius vaizdų dokumente arba uždarykite tą kortelę.',
+  'Kostenindicatie': 'Kainos indikacija',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Bruto ar neto čia nesvarbu — darbdavio išlaidų antkainis yra atskiras.',
   'Aanwezigen en tarieven': 'Dalyviai ir įkainiai',

@@ -649,6 +649,27 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Omrekening naar euro': 'Conversione in euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Per la visualizzazione in EUR OciDeck usa un solo tasso di cambio per sessione. Inserisci il tasso a mano o recupera il tasso di riferimento della BCE.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Recupera il tasso da Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Una richiesta per valuta a api.frankfurter.dev con il solo codice della valuta; il servizio vede però l\'indirizzo IP. Non vengono inviati dati della presentazione.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Recupero non riuscito — inserisci il tasso a mano o continua senza tasso.',
+  'Zonder koers doorgaan': 'Continua senza tasso',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Tasso non valido — usa ad esempio 0,92.',
+  'handmatig': 'manuale',
+  'peildatum': 'data di riferimento',
+  'verouderd': 'obsoleto',
+  'koers': 'tasso',
+  'koers ontbreekt': 'tasso mancante',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Tasso mancante — equivalente in EUR non calcolato.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'riga/righe di input non convertita/e — il tasso mancava.',
   'Referentie vastgelegd': 'Riferimento registrato',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Modifiche non salvate nella scheda; SHA-256 verifica la versione su disco.',
@@ -765,6 +786,7 @@ const _dutchSourceAddIt = {
       'La visualizzazione non è stata aperta come documento.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Salva le modifiche nel documento di visualizzazione per primo o chiudi quella scheda.',
+  'Kostenindicatie': 'Indicazione dei costi',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Lordo o netto non fa differenza qui — il markup dei costi a carico del datore è separato.',
   'Aanwezigen en tarieven': 'Partecipanti e tariffe',

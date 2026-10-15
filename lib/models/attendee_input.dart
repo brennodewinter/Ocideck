@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import 'exchange_rate.dart';
 import 'presentation_cost.dart';
 
 /// De periode waarover een ingevuld bedrag gaat (#2436).
@@ -92,18 +93,65 @@ int? hourlyRateMinorFor(AttendeeInput input, CostAssumptions assumptions) {
   return ((numerator + denominator ~/ BigInt.two) ~/ denominator).toInt();
 }
 
-/// Som van de afgeleide uurtarieven die al in [sessionCurrency] staan.
-/// Regels in een vreemde valuta tellen hier niet mee — die worden eerst
-/// omgerekend (#2438) voordat ze in het sessietotaal landen.
+/// De vreemde valuta waarvoor de sessie een EUR-koers nodig heeft (#2438):
+/// de valuta van aanwezigen-regels die niet in [sessionCurrency] staan, plus
+/// de sessievaluta zelf wanneer die niet EUR is (voor de EUR-weergave). EUR
+/// heeft nooit een koers nodig — het ís de spil.
+List<CostCurrency> currenciesNeedingRate(
+  List<AttendeeInput> inputs,
+  CostCurrency sessionCurrency,
+) {
+  final codes = {
+    for (final input in inputs)
+      if (input.currency.code != sessionCurrency.code) input.currency.code,
+    if (sessionCurrency.code != 'EUR') sessionCurrency.code,
+  };
+  return [
+    for (final c in kCostCurrencies)
+      if (codes.contains(c.code)) c,
+  ];
+}
+
+/// Som van de afgeleide uurtarieven in [sessionCurrency]. Regels in een
+/// vreemde valuta gaan eerst door de koersen in [rates] (#2438) — zonder
+/// koers tellen ze niet mee; dat is zichtbaar via [unconvertedRateCount].
 int sumAttendeeRatesMinor(
   List<AttendeeInput> inputs,
   CostAssumptions assumptions,
-  CostCurrency sessionCurrency,
-) {
+  CostCurrency sessionCurrency, [
+  Map<String, ExchangeRate> rates = const {},
+]) {
   var total = 0;
   for (final input in inputs) {
-    if (input.currency.code != sessionCurrency.code) continue;
-    total += hourlyRateMinorFor(input, assumptions) ?? 0;
+    final derived = hourlyRateMinorFor(input, assumptions);
+    if (derived == null) continue;
+    total +=
+        convertAmountMinor(derived, input.currency, sessionCurrency, rates) ??
+        0;
   }
   return total;
+}
+
+/// Hoeveel regels niet meetellen omdat hun koers ontbreekt — de sessie toont
+/// dat als 'koers ontbreekt' in plaats van stil te doen alsof die
+/// aanwezigen gratis waren.
+int unconvertedRateCount(
+  List<AttendeeInput> inputs,
+  CostCurrency sessionCurrency,
+  Map<String, ExchangeRate> rates,
+) {
+  var count = 0;
+  for (final input in inputs) {
+    if (input.currency.code == sessionCurrency.code) continue;
+    if (convertAmountMinor(
+          input.amountMinor,
+          input.currency,
+          sessionCurrency,
+          rates,
+        ) ==
+        null) {
+      count++;
+    }
+  }
+  return count;
 }

@@ -1636,6 +1636,26 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Omrekening naar euro': 'Comhshó go euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Chun an taispeáint in EUR a thaispeáint, úsáideann OciDeck ráta amháin in aghaidh an tseisiúin. Cuir an ráta isteach de láimh nó faigh ráta tagartha an BCE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Faigh an ráta ó Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Iarratas amháin in aghaidh an airgeadra chuig api.frankfurter.dev leis an gcód airgeadra amháin; feiceann an tseirbhís seoladh IP, áfach. Ní sheoltar aon sonraí cur i láthair.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Theip ar an bhfáil — cuir an ráta isteach de láimh nó lean ar aghaidh gan ráta.',
+  'Zonder koers doorgaan': 'Lean ar aghaidh gan ráta',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Ráta neamhbhailí — úsáid 0,92, mar shampla.',
+  'handmatig': 'de láimh',
+  'peildatum': 'dáta tagartha',
+  'verouderd': 'as dáta',
+  'koers': 'ráta',
+  'koers ontbreekt': 'ráta in easnamh',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Ráta in easnamh — níor ríomhadh an coibhéis in EUR.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'líne(acha) ionchuir nár athraíodh — bhí an ráta in easnamh.',
   'Referentie vastgelegd': 'Tagairt taifeadta',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Athruithe neamhshábháilte sa chluaisín; seiceálann SHA-256 an leagan ar an diosca.',
@@ -1752,6 +1772,7 @@ const _dutchSourceAddGa = <String, String>{
       'Ní bhfaighimid an fhoramáil ina theanntas mar sonraí',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Doigh na hathruithe ar an doiciméad maith, nó damhail an fhoinseán sin',
+  'Kostenindicatie': 'Táscaire costais',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Brutto nó glan — ní dhéanann sé difríocht anseo; tá an mhargála ar chostais an fhostóra ar leith.',
   'Aanwezigen en tarieven': 'Freastalaithe agus rátai',

@@ -1631,6 +1631,27 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Omrekening naar euro': 'Μετατροπή σε ευρώ',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Για την εμφάνιση σε EUR το OciDeck χρησιμοποιεί μία ισοτιμία ανά συνεδρία. Εισαγωγή της ισοτιμίας με το χέρι ή ανάκτηση της ισοτιμίας αναφοράς της ΕΚΤ.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Ανάκτηση ισοτιμίας από Frankfurter (ΕΚΤ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ένα αίτημα ανά νόμισμα προς api.frankfurter.dev μόνο με τον κωδικό νομίσματος· η υπηρεσία βλέπει τη διεύθυνση IP. Δεν αποστέλλονται δεδομένα παρουσίασης.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Η ανάκτηση απέτυχε — εισαγωγή της ισοτιμίας με το χέρι ή συνέχεια χωρίς ισοτιμία.',
+  'Zonder koers doorgaan': 'Συνέχεια χωρίς ισοτιμία',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Μη έγκυρη ισοτιμία — χρήση π.χ. 0,92.',
+  'handmatig': 'χειροκίνητα',
+  'peildatum': 'ημερομηνία αναφοράς',
+  'verouderd': 'παρωχημένη',
+  'koers': 'ισοτιμία',
+  'koers ontbreekt': 'λείπει η ισοτιμία',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Λείπει η ισοτιμία — το ισοδύναμο σε EUR δεν υπολογίστηκε.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'γραμμή(ές) εισαγωγής χωρίς μετατροπή — έλειπε η ισοτιμία.',
   'Referentie vastgelegd': 'Η αναφορά καταγράφηκε',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Μη αποθηκευμένες αλλαγές στην καρτέλα· το SHA-256 ελέγχει την έκδοση στον δίσκο.',
@@ -1750,6 +1771,7 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν μπόρεσε να ανοίξει η προβολή ως έγγραφο.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Αποθήκευσε τις αλλαγές στο έγγραφο προβολής πρώτα ή κλείσε αυτό το φύλλο εργασίας.',
+  'Kostenindicatie': 'Ένδειξη κόστους',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Μικτά ή καθαρά δεν παίζει ρόλο εδώ — η προσαύξηση εργοδοτικών επιβαρύνσεων είναι ξεχωριστή.',
   'Aanwezigen en tarieven': 'Παρόντες και τιμές',

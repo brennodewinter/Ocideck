@@ -1621,6 +1621,26 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Omrekening naar euro': 'Перерахунок в євро',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Для відображення в EUR OciDeck використовує один курс на сеанс. Введіть курс самостійно або отримайте референтний курс ЄЦБ.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Отримати курс із Frankfurter (ЄЦБ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Один запит на валюту до api.frankfurter.dev лише з кодом валюти; сервіс бачить IP-адресу. Жодні дані презентації не надсилаються.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Не вдалося отримати — введіть курс самостійно або продовжте без курсу.',
+  'Zonder koers doorgaan': 'Продовжити без курсу',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Недійсний курс — використайте, наприклад, 0,92.',
+  'handmatig': 'вручну',
+  'peildatum': 'дата курсу',
+  'verouderd': 'застарілий',
+  'koers': 'курс',
+  'koers ontbreekt': 'курс відсутній',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Курс відсутній — еквівалент в EUR не обчислено.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'рядок(и) введення не перераховано — бракувало курсу.',
   'Referentie vastgelegd': 'Посилання зафіксовано',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Незбережені зміни у вкладці; SHA-256 перевіряє версію на диску.',
@@ -1737,6 +1757,7 @@ const _dutchSourceAddUk = <String, String>{
       'Перегляд не зміг бути відкритий як документ.',
   'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
       'Спочатку збережіть зміни у документі перегляду або закрийте це вікно.',
+  'Kostenindicatie': 'Оцінка витрат',
   'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
       'Брутто чи нетто тут не має значення — націнка на витрати роботодавця окрема.',
   'Aanwezigen en tarieven': 'Присутні та ставки',
