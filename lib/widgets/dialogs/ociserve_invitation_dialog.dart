@@ -275,121 +275,12 @@ class _OciServeInvitationDialogState
               ],
             ),
             const SizedBox(height: 14),
-            if (_step == _InvitationStep.codes) ...[
-              if (!_acceptOnly)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: TextField(
-                    controller: _server,
-                    keyboardType: TextInputType.url,
-                    autocorrect: false,
-                    decoration: InputDecoration(
-                      labelText: l10n.d('eLearning-server'),
-                      hintText: l10n.d('https://leren.example.org'),
-                      isDense: true,
-                    ),
-                  ),
-                ),
-              TextField(
-                controller: _invitationId,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: l10n.d('Uitnodigingsnummer'),
-                  isDense: true,
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _secret,
-                autocorrect: false,
-                obscureText: true,
-                enableSuggestions: false,
-                decoration: InputDecoration(
-                  labelText: l10n.d('Uitnodigingscode'),
-                  isDense: true,
-                ),
-              ),
-              const SizedBox(height: 14),
-              FilledButton(
-                onPressed: _busy ? null : _checkInvitation,
-                child: Text(_busy ? l10n.d('Bezig…') : l10n.d('Doorgaan')),
-              ),
-            ],
-            if (_step == _InvitationStep.credentials) ...[
-              Text(
-                l10n
-                    .d('Deze uitnodiging hoort bij {adres}.')
-                    .replaceAll('{adres}', _invitedEmail),
-                style: TextStyle(color: palette.mutedText, fontSize: 12.5),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _displayName,
-                autocorrect: true,
-                decoration: InputDecoration(
-                  labelText: l10n.d('Uw naam'),
-                  isDense: true,
-                ),
-              ),
-              const SizedBox(height: 10),
-              _passwordField(l10n, _password, l10n.d('Wachtwoord')),
-              const SizedBox(height: 10),
-              _passwordField(
-                l10n,
-                _passwordConfirm,
-                l10n.d('Wachtwoord herhalen'),
-              ),
-              const SizedBox(height: 14),
-              FilledButton(
-                onPressed: _busy ? null : _register,
-                child: Text(
-                  _busy ? l10n.d('Bezig…') : l10n.d('Registreren en aanmelden'),
-                ),
-              ),
-            ],
-            if (_step == _InvitationStep.signingIn) ...[
-              Text(
-                l10n.d(
-                  'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.',
-                ),
-                style: TextStyle(color: palette.mutedText, fontSize: 12.5),
-              ),
-              const SizedBox(height: 14),
-              FilledButton.icon(
-                onPressed: _busy ? null : _signIn,
-                icon: _busy
-                    ? const SizedBox.square(
-                        dimension: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.login, size: 18),
-                label: Text(l10n.d('Aanmelden')),
-              ),
-            ],
-            if (_step == _InvitationStep.done) ...[
-              Row(
-                children: [
-                  Icon(Icons.check_circle_outline, color: AppTheme.accentFg),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      _acceptOnly
-                          ? l10n.d(
-                              'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.',
-                            )
-                          : l10n.d(
-                              'U bent geregistreerd en aangemeld. Welkom!',
-                            ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 14),
-              FilledButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(l10n.d('Sluiten')),
-              ),
-            ],
+            if (_step == _InvitationStep.codes) ..._codesStep(l10n),
+            if (_step == _InvitationStep.credentials)
+              ..._credentialsStep(l10n, palette),
+            if (_step == _InvitationStep.signingIn)
+              ..._signingInStep(l10n, palette),
+            if (_step == _InvitationStep.done) ..._doneStep(l10n),
             if (_error != null) ...[
               const SizedBox(height: 10),
               Text(
@@ -405,6 +296,125 @@ class _OciServeInvitationDialogState
       ),
     );
   }
+
+  /// Stap 1: server (alleen voor nieuwe deelnemers), uitnodigingsnummer en
+  /// code — daarmee haalt de preview op wie de uitnodiging betreft.
+  List<Widget> _codesStep(AppLocalizations l10n) => [
+    if (!_acceptOnly)
+      Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: TextField(
+          controller: _server,
+          keyboardType: TextInputType.url,
+          autocorrect: false,
+          decoration: InputDecoration(
+            labelText: l10n.d('eLearning-server'),
+            hintText: l10n.d('https://leren.example.org'),
+            isDense: true,
+          ),
+        ),
+      ),
+    TextField(
+      controller: _invitationId,
+      autocorrect: false,
+      decoration: InputDecoration(
+        labelText: l10n.d('Uitnodigingsnummer'),
+        isDense: true,
+      ),
+    ),
+    const SizedBox(height: 10),
+    TextField(
+      controller: _secret,
+      autocorrect: false,
+      obscureText: true,
+      enableSuggestions: false,
+      decoration: InputDecoration(
+        labelText: l10n.d('Uitnodigingscode'),
+        isDense: true,
+      ),
+    ),
+    const SizedBox(height: 14),
+    FilledButton(
+      onPressed: _busy ? null : _checkInvitation,
+      child: Text(_busy ? l10n.d('Bezig…') : l10n.d('Doorgaan')),
+    ),
+  ];
+
+  /// Stap 2 (nieuwe deelnemer): naam en tweemaal wachtwoord voor de
+  /// registratie. Het uitgenodigde adres staat erboven ter controle.
+  List<Widget> _credentialsStep(AppLocalizations l10n, AppPalette palette) => [
+    Text(
+      l10n
+          .d('Deze uitnodiging hoort bij {adres}.')
+          .replaceAll('{adres}', _invitedEmail),
+      style: TextStyle(color: palette.mutedText, fontSize: 12.5),
+    ),
+    const SizedBox(height: 10),
+    TextField(
+      controller: _displayName,
+      autocorrect: true,
+      decoration: InputDecoration(labelText: l10n.d('Uw naam'), isDense: true),
+    ),
+    const SizedBox(height: 10),
+    _passwordField(l10n, _password, l10n.d('Wachtwoord')),
+    const SizedBox(height: 10),
+    _passwordField(l10n, _passwordConfirm, l10n.d('Wachtwoord herhalen')),
+    const SizedBox(height: 14),
+    FilledButton(
+      onPressed: _busy ? null : _register,
+      child: Text(
+        _busy ? l10n.d('Bezig…') : l10n.d('Registreren en aanmelden'),
+      ),
+    ),
+  ];
+
+  /// Stap 3: na een geslaagde registratie meldt de deelnemer zich expliciet
+  /// aan met de nieuwe inlog — die loopt met login_hint zodat een eventuele
+  /// sessie van de uitnodiger niet stilletjes wordt hergebruikt.
+  List<Widget> _signingInStep(AppLocalizations l10n, AppPalette palette) => [
+    Text(
+      l10n.d(
+        'Uw account is aangemaakt. Meld u nu aan met het uitgenodigde adres en uw nieuwe wachtwoord.',
+      ),
+      style: TextStyle(color: palette.mutedText, fontSize: 12.5),
+    ),
+    const SizedBox(height: 14),
+    FilledButton.icon(
+      onPressed: _busy ? null : _signIn,
+      icon: _busy
+          ? const SizedBox.square(
+              dimension: 16,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            )
+          : const Icon(Icons.login, size: 18),
+      label: Text(l10n.d('Aanmelden')),
+    ),
+  ];
+
+  /// Stap 4: gereed — bij acceptatie alleen sluiten, bij registratie is de
+  /// deelnemer dan al aangemeld.
+  List<Widget> _doneStep(AppLocalizations l10n) => [
+    Row(
+      children: [
+        Icon(Icons.check_circle_outline, color: AppTheme.accentFg),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            _acceptOnly
+                ? l10n.d(
+                    'De uitnodiging is geaccepteerd. De organisatie staat nu bij uw account.',
+                  )
+                : l10n.d('U bent geregistreerd en aangemeld. Welkom!'),
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(height: 14),
+    FilledButton(
+      onPressed: () => Navigator.pop(context),
+      child: Text(l10n.d('Sluiten')),
+    ),
+  ];
 
   /// Wachtwoordveld met zichtbaarheidsknop en zonder autofill: het wachtwoord
   /// mag nergens belanden waar het niet voor bedoeld is.
