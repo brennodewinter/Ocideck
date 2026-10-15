@@ -109,6 +109,19 @@ void main() {
     expect(find.byIcon(Icons.description_outlined), findsWidgets);
   });
 
+  testWidgets('de statusbalk heeft geen losse exportknop meer (#2434)', (
+    tester,
+  ) async {
+    // De exportdialoog zit in het hoofdmenu; een tweede knop in de statusbalk
+    // voegde alleen visuele drukte toe. De exportgereedheid-chip blijft wél —
+    // die vertelt de staat en springt naar de bevinding, een andere functie.
+    await pumpShell(tester);
+
+    expect(find.byIcon(Icons.upload_file_outlined), findsNothing);
+    // De chip zelf is er nog: een net geladen deck moet eerst opgeslagen.
+    expect(find.text(l10n.d('Nog opslaan nodig')), findsOneWidget);
+  });
+
   testWidgets(
     'an edit flips the save chip to "unsaved" and shows a skip badge',
     (tester) async {

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart' show StateController;
@@ -19,9 +20,11 @@ import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
 import '../utils/physical_control_shortcut.dart';
 import '../utils/safe_filename.dart';
+import '../utils/atomic_file.dart';
 import '../utils/shortcut_label.dart';
 import '../models/asset_origin.dart';
 import '../models/deck.dart';
+import '../models/document_dossier.dart';
 import '../models/improvement_y01.dart';
 import '../models/learning_session.dart';
 import '../models/marp_compatibility.dart';
@@ -30,6 +33,7 @@ import '../models/privacy_disposition.dart';
 import '../models/recent_file.dart';
 import '../models/settings.dart' show AppSettings;
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import '../models/used_tool.dart';
 import '../models/slide_quality.dart';
 import '../models/storage_connection.dart';
@@ -54,6 +58,9 @@ import '../services/scope_coverage.dart';
 import '../services/classification_policy.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_integrity.dart';
+import '../services/document_dossier_store.dart';
+import '../services/dossier_ai_suggestions.dart';
+import '../services/dossier_pdf_export.dart';
 import '../services/download_delivery.dart';
 import '../services/export_metadata.dart' show kOciDeckVersion;
 import '../services/update_check_service.dart';
@@ -90,6 +97,8 @@ import '../state/document_provider.dart';
 import '../state/elearning_provider.dart';
 import '../state/forms_provider.dart';
 import 'document_editor_screen.dart';
+import 'dossier/dossier_overview.dart';
+import 'dossier/dossier_dialogs.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/image_privacy_provider.dart';
 import '../state/improvement_provider.dart';
@@ -141,6 +150,7 @@ import 'dialogs/ai_translate_dialog.dart';
 import 'dialogs/convert_to_document_dialog.dart';
 import 'dialogs/export_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
+import 'parts/document_export_pdf_support.dart' show loadPdfFallbackFonts;
 import 'dialogs/export_failure_text.dart';
 import 'dialogs/finalize_seal_dialog.dart';
 import 'dialogs/git_search_dialog.dart';
@@ -214,6 +224,7 @@ part 'shell/main_layout_shortcuts.dart';
 part 'shell/menu_commands.dart';
 part 'shell/module_prompts.dart';
 part 'shell/tab_bar.dart';
+part 'shell/dossier_actions.dart';
 part 'shell/welcome_screen.dart';
 part 'shell/welcome_screen_chrome.dart';
 part 'shell/welcome_status.dart';
@@ -233,6 +244,9 @@ class AppShell extends ConsumerStatefulWidget {
 }
 
 class _AppShellState extends ConsumerState<AppShell> {
+  late final _dossierController = _DossierController(this);
+
+  void _refreshDossier(VoidCallback change) => setState(change);
   late final OpenFileChannel _openFileChannel;
   late final NativeShortcutChannel _nativeShortcuts;
   bool _closeInProgress = false;
@@ -886,24 +900,7 @@ class _AppShellState extends ConsumerState<AppShell> {
             child: Material(
               child: Stack(
                 children: [
-                  Column(
-                    children: [
-                      _AppTabBar(
-                        tabsState: tabsState,
-                        onSelect: (i) =>
-                            ref.read(tabsProvider.notifier).selectTab(i),
-                        onClose: _onCloseTab,
-                        onAdd: () =>
-                            ref.read(tabsProvider.notifier).newEmptyTab(),
-                      ),
-                      Expanded(
-                        child: IndexedStack(
-                          index: tabsState.clampedIndex,
-                          children: _tabScopes(tabsState),
-                        ),
-                      ),
-                    ],
-                  ),
+                  _dossierController._dossierWorkspace(tabsState),
                   if (_dragging) const _DropOverlay(),
                   const MermaidRenderHostLayer(),
                 ],
@@ -919,6 +916,8 @@ class _AppShellState extends ConsumerState<AppShell> {
   AppMenuActions _menuActions(AppLocalizations l10n) => AppMenuActions(
     newDeck: () => ref.read(tabsProvider.notifier).newEmptyTab(),
     newDocument: () => newDocumentFromDialog(context),
+    newDossier: () => unawaited(_dossierController._newDossier()),
+    openDossier: () => unawaited(_dossierController._openDossier()),
     open: _openActive,
     save: _saveActive,
     find: ref.watch(tabsProvider).current?.documentNotifier == null

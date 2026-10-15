@@ -1774,6 +1774,76 @@ const _dutchSourceAddBg = <String, String>{
   'Wachtwoord herhalen': 'Повторете паролата',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Поставете срещите си в собствения си календар — актуализирано при промени и отмяни.',
+  'Omrekening naar euro': 'Преобразуване в евро',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'За показване в EUR OciDeck използва един курс на сесия. Въведете курса сами или изтеглете референтния курс на ЕЦБ.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Изтегляне на курс от Frankfurter (ЕЦБ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Една заявка на валута към api.frankfurter.dev само с кода на валутата; услугата вижда IP адреса. Не се изпращат данни от презентацията.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Изтеглянето не успя — въведете курса сами или продължете без курс.',
+  'Zonder koers doorgaan': 'Продължи без курс',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Невалиден курс — използвайте например 0,92.',
+  'handmatig': 'ръчно',
+  'peildatum': 'референтна дата',
+  'verouderd': 'остарял',
+  'koers': 'курс',
+  'koers ontbreekt': 'липсва курс',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Липсва курс — равностойността в EUR не е изчислена.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'ред(ове) на въвеждане без преобразуване — липсваше курс.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Не беше намерено полезно предложение. Попълнете данните сами.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Предложението за AI не можа да бъде извлечено. Проверете настройките на AI или попълнете подробностите сами.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Използвайте валидна дата като ГГГГ-ММ-ДД или оставете полето празно.',
+  'Documentgegevens': 'Данни за документи',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Тези подробности описват този документ в досието. Изходният файл не се променя.',
+  'Korte omschrijving': 'Кратко описание',
+  'Waar gaat dit document over?': 'За какво е този документ?',
+  'Documentdatum': 'Дата на документа',
+  'JJJJ-MM-DD': 'ГГГГ-ММ-ДД',
+  'Opsteller': 'Автор на документа',
+  'Gegevens voorstellen met AI': 'Предложете подробности с AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Предложението за изкуствен интелект е завършено. Проверете и го променете, преди да запазите.',
+  'Dossier als PDF exporteren': 'Експортиране на досие като PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF файлът съдържа корица, съдържание и всички документи в реда на досиетата.',
+  'Tussenpagina vóór elk document': 'Междинна страница преди всеки документ',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'С номер, заглавие, описание, дата, автор и SHA-256.',
+  'Volledige gegevens tonen': 'Покажи пълните подробности',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Намерените лични данни са скрити по подразбиране. Изберете пълни подробности само за предвидения получател.',
+  'PDF maken': 'Създайте PDF',
+  'Documentgegevens bewerken': 'Редактиране на информация за документа',
+  'Dossier-PDF opgeslagen': 'PDF досието е запазено',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'PDF досие не можа да бъде създадено. Проверете променения или липсващ изходен документ и опитайте отново.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'PDF досие не можа да бъде създадено. Опитайте отново.',
+  'Referentie vastgelegd': 'Препратката е записана',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Незапазени промени в раздела; SHA-256 проверява версията на диска.',
+  'Documenten controleren': 'Проверка на документи',
+  'Dit nummer is al in gebruik.': 'Този номер вече се използва.',
+  'Documenten openen': 'Отвори документи',
+  'Eerdere SHA-256-waarden': 'Предишни стойности на SHA-256',
+  'Omschrijving wijzigen': 'Промяна на описанието',
+  'Beginnummer wijzigen': 'Промяна на началния номер',
+  'Vindplaats': 'Местоположение',
+  'Laatst gecontroleerd': 'Последна проверка',
+  'Nummer wijzigen': 'Промяна на номера',
+  'Waar gaat dit dossier over?': 'За какво е това досие?',
+  'Nummer': 'Номер',
+  'Gebruik een positief getal.': 'Използвайте положително число.',
+  'Automatisch nummer': 'Автоматичен номер',
   'Aanvulling gevraagd': 'Поискано е допълване',
   'Aanvulling gevraagd.': 'Поискано е допълване.',
   'Aanvulling gevraagd: {opmerking}': 'Поискано е допълване: {opmerking}',
@@ -1806,6 +1876,116 @@ const _dutchSourceAddBg = <String, String>{
       'Резултатите не можаха да бъдат заредени.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Резултатът ви ще се покаже в Моите изпити, щом бъде публикуван.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Само Markdown документи и презентации (.md) могат да бъдат добавени.',
+  'OciDeck dossier': 'OciDeck Досие',
+  'Alle documenten openen': 'Отвори всички документи',
+  'Alleen overzicht': 'Само преглед.',
+  'Alles controleren': 'Провери всички',
+  'DOSSIER': 'ДОСИЕ',
+  'De SHA-256 klopt al.': 'SHA-256 хешът е валиден.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Връзката към този документ изчезва от папката. Файлът на документа остава запазен.',
+  'Deze bijlage is niet beschikbaar.': 'Този файл не е наличен.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Този файл не може да бъде проверен.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Този файл не можеше да бъде безопасно отворен.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Тази папка за досие вече съществува. Изберете друго име.',
+  'Dit dossier kon niet worden geopend.':
+      'Това досие не можеше да бъде отворено.',
+  'Document gewijzigd': 'Документът е бил променен.',
+  'Document niet leesbaar': 'Документът не може да бъде прочетен.',
+  'Document ontbreekt': 'Липсва документ.',
+  'Document openen': 'Отвори документ',
+  'Documenten toevoegen': 'Добави документи',
+  'Dossier': 'Досие',
+  'Dossier openen': 'Отвори досие',
+  'Dossier openen…': 'Отворете файл…',
+  'Dossiertitel wijzigen': 'Променете заглавието на файла.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Едно прикачен файл не можа да бъде добавено.',
+  'Een goed dossier begint hier': 'Доброто събиране започва тук.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Използвайте дръжката или стрелките, за да промените реда. Номерата се актуализират автоматично.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Файлът е бил променен или не е бил записан. Проверете отново.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Не можеше да бъде създадена папката.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Това ще направи новата версия на файла да бъде референцията за тази папка.',
+  'Huidige SHA-256': 'Текущ SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Съдържание и проверка за интегритет',
+  'Meer opties': 'Допълнителни опции',
+  'Naamloos dossier': 'Папка без име',
+  'Nieuw dossier': 'Ново досие',
+  'Nieuwe versie vastleggen': 'Запиши нова версия',
+  'Nieuwe versie vastleggen?': 'Записване на нова версия?',
+  'Omhoog verplaatsen': 'Преместване нагоре',
+  'Omlaag verplaatsen': 'Преместване надолу',
+  'Onveilige bestandsverwijzing': 'Несигурна препратка към файл',
+  'Overzicht en bijlagen': 'Преглед и приложения',
+  'SHA-256 controleren': 'Проверка на SHA-256',
+  'SHA-256 klopt': 'SHA-256 съвпада',
+  'Sleep om te ordenen': 'Плъзнете, за да подредите',
+  'Terug naar dossier': 'Назад към досието',
+  'Titel wijzigen': 'Променете заглавието',
+  'Uit dossier verwijderen': 'Премахни от досието',
+  'Uit dossier verwijderen?': 'Искате ли да изтриете от папката?',
+  'Vastgelegde SHA-256': 'Записаната SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Добавете документи към колекцията. Оригиналните файлове остават в първоначалното си местоположение. Можете да изберете реда на показване тук.',
+  'Wijziging opslaan is mislukt.': 'Не успя да запазите промените.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Искате ли да отворите приложенията и в раздели?',
+  'Als document openen': 'Отворете документ',
+  'Dossier maken': 'Създай досие',
+  'Het overzicht kon niet als document worden geopend.':
+      'Прегледът не можа да бъде отворен като документ.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Първо запазете промените в документа на преглед или затворете тази секция.',
+  'Kostenindicatie': 'Индикация за разходи',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Бруто или нето няма значение тук — надбавката за разходи на работодателя е отделна.',
+  'Aanwezigen en tarieven': 'Присъстващи и ставки',
+  'Bedrag': 'Сума',
+  'Per uur': 'На час',
+  'Per maand': 'На месец',
+  'Per jaar': 'На година',
+  'Aanname voor de omrekening': 'Допускане за преизчисляването',
+  'Betaalde uren per week': 'Платени часове на седмица',
+  'Weken per jaar': 'Седмици годишно',
+  'Opslag werkgeverslasten (%)': 'Надценка за разходи на работодателя (%)',
+  'Voeg een aanwezige toe': 'Добави присъстващ',
+  'Samen': 'Общо',
+  'Start presentatie': 'Стартирай презентацията',
+  'per uur': 'на час',
+  'Wordt omgerekend': 'Ще се преизчисли',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Въведи за всеки присъстващ часова, месечна или годишна ставка. Остава на този екран и никъде не се записва.',
+  'Kosten van aanwezigen': 'Разходи за присъстващите',
+  'Uit': 'Изкл.',
+  'Gewoon — alleen in het eindoverzicht': 'Обикновено — само в крайния отчет',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Изрично — текуща сума и краен отчет',
+  'Uurtarief': 'Часова ставка',
+  'Eén tarief voor de hele groep': 'Една ставка за цялата група',
+  'Per aanwezige, bij de start invullen':
+      'На присъстващ, въвежда се в началото',
+  'Groepsuurtarief': 'Групова часова ставка',
+  'Kosten = verstreken tijd × tarief.': 'Разход = изминало време × ставка.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Въвежда се в началото и не се записва.',
+  'Valuta': 'Валута',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Оценка на времето, което присъстващите отделят — индикация, а не счетоводна себестойност.',
+  'Diaformaat': 'Формат на слайда',
+  'Scherm (16:9)': 'Екран (16:9)',
+  'Papierformaat': 'Формат на хартията',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Изберете формат на хартията за раздатъчни материали и експорт на хартия.',
   'Startmappen': 'Начални папки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Къде започват отварянето и записването. Празно използва първата библиотека.',

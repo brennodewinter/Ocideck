@@ -326,6 +326,45 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
     widget.onDiscreteVisualEdit?.call();
   }
 
+  /// Het contextmenu (rechtermuisknop, lang drukken) kopieert, knipt en plakt
+  /// langs dezelfde route als Cmd/Ctrl+C, X en V. Quills eigen menu zet alleen
+  /// platte tekst op het klembord, en dan is het hele #2439-gat via de muis
+  /// weer open.
+  Widget _contextMenu(BuildContext context, QuillRawEditorState state) {
+    final items = [
+      for (final item in state.contextMenuButtonItems)
+        switch (item.type) {
+          ContextMenuButtonType.copy => item.copyWith(
+            onPressed: () {
+              state.hideToolbar();
+              _copySelection(cut: false);
+            },
+          ),
+          ContextMenuButtonType.cut => item.copyWith(
+            onPressed: () {
+              state.hideToolbar();
+              _copySelection(cut: true);
+            },
+          ),
+          // Plakken ook: Quills eigen plak kent onze Markdown-, afbeelding- en
+          // opschoonroute niet, en dan plakt het menu anders dan Cmd/Ctrl+V.
+          ContextMenuButtonType.paste => item.copyWith(
+            onPressed: () {
+              state.hideToolbar();
+              _pasteSanitized();
+            },
+          ),
+          _ => item,
+        },
+    ];
+    return TextFieldTapRegion(
+      child: AdaptiveTextSelectionToolbar.buttonItems(
+        buttonItems: items,
+        anchors: state.contextMenuAnchors,
+      ),
+    );
+  }
+
   Future<void> _pasteSanitized() async {
     if (widget.tryConsumePaste != null && await widget.tryConsumePaste!()) {
       return;
@@ -408,6 +447,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 onTapUp: (details, _) =>
                     _tableEditors.containsTableAt(details.globalPosition),
                 editorKey: widget.editorKey,
+                contextMenuBuilder: _contextMenu,
                 expands: widget.expand,
                 padding: widget.contentPadding,
                 placeholder: widget.hintText,

@@ -1768,6 +1768,75 @@ const _dutchSourceAddUk = <String, String>{
   'Wachtwoord herhalen': 'Повторіть пароль',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Розмістіть свої зустрічі у власному календарі — оновлюється при змінах і скасуваннях.',
+  'Omrekening naar euro': 'Перерахунок в євро',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Для відображення в EUR OciDeck використовує один курс на сеанс. Введіть курс самостійно або отримайте референтний курс ЄЦБ.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Отримати курс із Frankfurter (ЄЦБ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Один запит на валюту до api.frankfurter.dev лише з кодом валюти; сервіс бачить IP-адресу. Жодні дані презентації не надсилаються.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Не вдалося отримати — введіть курс самостійно або продовжте без курсу.',
+  'Zonder koers doorgaan': 'Продовжити без курсу',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Недійсний курс — використайте, наприклад, 0,92.',
+  'handmatig': 'вручну',
+  'peildatum': 'дата курсу',
+  'verouderd': 'застарілий',
+  'koers': 'курс',
+  'koers ontbreekt': 'курс відсутній',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Курс відсутній — еквівалент в EUR не обчислено.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'рядок(и) введення не перераховано — бракувало курсу.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Жодної корисної пропозиції не знайдено. Заповніть реквізити самостійно.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Не вдалося отримати пропозицію AI. Перевірте налаштування AI або заповніть деталі самостійно.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Використовуйте дійсну дату, наприклад РРРР-ММ-ДД, або залиште поле порожнім.',
+  'Documentgegevens': 'Дані документа',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ці деталі описують цей документ у досьє. Вихідний файл не змінено.',
+  'Korte omschrijving': 'Короткий опис',
+  'Waar gaat dit document over?': 'Про що цей документ?',
+  'Documentdatum': 'Дата документа',
+  'JJJJ-MM-DD': 'РРРР-ММ-ДД',
+  'Opsteller': 'Автор документа',
+  'Gegevens voorstellen met AI': 'Пропонуйте деталі за допомогою ШІ',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Пропозиція AI завершена. Перевірте та змініть його перед збереженням.',
+  'Dossier als PDF exporteren': 'Експортуйте досьє як PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF містить обкладинку, зміст і всі документи в порядку досьє.',
+  'Tussenpagina vóór elk document': 'Проміжна сторінка перед кожним документом',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'З номером, назвою, описом, датою, автором і SHA-256.',
+  'Volledige gegevens tonen': 'Показати повну інформацію',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Знайдені персональні дані за замовчуванням приховані. Вибирайте повну інформацію лише для одержувача.',
+  'PDF maken': 'Створити PDF',
+  'Documentgegevens bewerken': 'Редагувати інформацію про документ',
+  'Dossier-PDF opgeslagen': 'PDF-досьє збережено',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Не вдалося створити PDF-досьє. Перевірте змінений або відсутній вихідний документ і повторіть спробу.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Не вдалося створити PDF-досьє. Спробуйте знову.',
+  'Referentie vastgelegd': 'Посилання зафіксовано',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Незбережені зміни у вкладці; SHA-256 перевіряє версію на диску.',
+  'Documenten controleren': 'Перевірка документів',
+  'Dit nummer is al in gebruik.': 'Цей номер уже використовується.',
+  'Documenten openen': 'Відкрити документи',
+  'Eerdere SHA-256-waarden': 'Попередні значення SHA-256',
+  'Omschrijving wijzigen': 'Змінити опис',
+  'Beginnummer wijzigen': 'Змінити початковий номер',
+  'Vindplaats': 'Розташування',
+  'Laatst gecontroleerd': 'Востаннє перевірено',
+  'Nummer wijzigen': 'Змінити номер',
+  'Waar gaat dit dossier over?': 'Про що це досьє?',
+  'Nummer': 'Номер',
+  'Gebruik een positief getal.': 'Використовуйте додатне число.',
+  'Automatisch nummer': 'Автоматичний номер',
   'Aanvulling gevraagd': 'Запит на доповнення',
   'Aanvulling gevraagd.': 'Запитано доповнення.',
   'Aanvulling gevraagd: {opmerking}': 'Запит на доповнення: {opmerking}',
@@ -1800,6 +1869,113 @@ const _dutchSourceAddUk = <String, String>{
       'Не вдалося завантажити результати.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Свій результат ви побачите в розділі Мої іспити, щойно його буде оприлюднено.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Лише Markdown-документи та презентації (.md) можуть бути додані.',
+  'OciDeck dossier': 'OciDeck Досьє',
+  'Alle documenten openen': 'Відкрити всі документи',
+  'Alleen overzicht': 'Лише перегляд',
+  'Alles controleren': 'Перевірити все',
+  'DOSSIER': 'ДОСЬЄ',
+  'De SHA-256 klopt al.': 'SHA-256 перевірено.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Запис зникає з досьогодні. Файл документа залишається збереженим.',
+  'Deze bijlage is niet beschikbaar.': 'Ця довідка недоступна.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Цю довідку неможливо перевірити.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Цю довідку неможливо безпечно відкрити.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Це досьє вже існує. Виберіть іншу назву.',
+  'Dit dossier kon niet worden geopend.': 'Це досьє не вдалося відкрити.',
+  'Document gewijzigd': 'Документ було змінено',
+  'Document niet leesbaar': 'Документ нечитабельний',
+  'Document ontbreekt': 'Документ відсутній',
+  'Document openen': 'Відкрити документ',
+  'Documenten toevoegen': 'Додати документи',
+  'Dossier': 'Досьє',
+  'Dossier openen': 'Відкрити досьє',
+  'Dossier openen…': 'Відкрити файлове сховище…',
+  'Dossiertitel wijzigen': 'Змінити назву файлового сховища',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Одна з вкладок не вдалося додати.',
+  'Een goed dossier begint hier': 'Добре файлове сховище починається тут',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Використовуйте ручку або стрілки, щоб змінити порядок. Номери автоматично оновлюються.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Файл змінився або не був зафіксований. Перевірте ще раз.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Цей досьє не могло бути створено.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Це означає, що нова версія файлу стане посиланням для цього досьє.',
+  'Huidige SHA-256': 'Поточне SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Зміст та перевірка цілісності',
+  'Meer opties': 'Більше опцій',
+  'Naamloos dossier': 'Документ без назви',
+  'Nieuw dossier': 'Нове досьє',
+  'Nieuwe versie vastleggen': 'Зафіксувати нову версію',
+  'Nieuwe versie vastleggen?': 'Зафіксувати нову версію?',
+  'Omhoog verplaatsen': 'Перемістити вгору',
+  'Omlaag verplaatsen': 'Перемістити вниз',
+  'Onveilige bestandsverwijzing': 'Небезпечне посилання на файл',
+  'Overzicht en bijlagen': 'Перегляд та додатки',
+  'SHA-256 controleren': 'Перевірити SHA-256',
+  'SHA-256 klopt': 'SHA-256 збігається',
+  'Sleep om te ordenen': 'Перетягніть для сортування',
+  'Terug naar dossier': 'Повернутися до досьє',
+  'Titel wijzigen': 'Змінити назву',
+  'Uit dossier verwijderen': 'Вилучити з досьє',
+  'Uit dossier verwijderen?': 'Видалити з файлу?',
+  'Vastgelegde SHA-256': 'Зафіксований SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Додайте документи до колекції. Оригінальні файли залишаться в початкових папках. Ви можете вибрати порядок їх відображення тут.',
+  'Wijziging opslaan is mislukt.': 'Збереження змін не вдалося.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Бажаєте відкривати додатки також у вкладках?',
+  'Als document openen': 'Відкрити документ',
+  'Dossier maken': 'Створити досьє',
+  'Het overzicht kon niet als document worden geopend.':
+      'Перегляд не зміг бути відкритий як документ.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Спочатку збережіть зміни у документі перегляду або закрийте це вікно.',
+  'Kostenindicatie': 'Оцінка витрат',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Брутто чи нетто тут не має значення — націнка на витрати роботодавця окрема.',
+  'Aanwezigen en tarieven': 'Присутні та ставки',
+  'Bedrag': 'Сума',
+  'Per uur': 'За годину',
+  'Per maand': 'За місяць',
+  'Per jaar': 'За рік',
+  'Aanname voor de omrekening': 'Припущення для перерахунку',
+  'Betaalde uren per week': 'Оплачувані години на тиждень',
+  'Weken per jaar': 'Тижнів на рік',
+  'Opslag werkgeverslasten (%)': 'Націнка на витрати роботодавця (%)',
+  'Voeg een aanwezige toe': 'Додати присутнього',
+  'Samen': 'Разом',
+  'Start presentatie': 'Почати презентацію',
+  'per uur': 'за годину',
+  'Wordt omgerekend': 'Буде перераховано',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Введи для кожного присутнього ставку за годину, місяць або рік. Це лишається на цьому екрані й ніде не зберігається.',
+  'Kosten van aanwezigen': 'Вартість присутніх',
+  'Uit': 'Вимк.',
+  'Gewoon — alleen in het eindoverzicht': 'Звичайний — лише в підсумку',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Явний — поточна сума й підсумок',
+  'Uurtarief': 'Погодинна ставка',
+  'Eén tarief voor de hele groep': 'Одна ставка для всієї групи',
+  'Per aanwezige, bij de start invullen': 'За присутнього, вводиться на старті',
+  'Groepsuurtarief': 'Групова погодинна ставка',
+  'Kosten = verstreken tijd × tarief.': 'Вартість = минулий час × ставка.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Вводиться на старті й не зберігається.',
+  'Valuta': 'Валюта',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Оцінка часу, який витрачають присутні, — орієнтир, а не бухгалтерська собівартість.',
+  'Diaformaat': 'Формат слайда',
+  'Scherm (16:9)': 'Екран (16:9)',
+  'Papierformaat': 'Формат паперу',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Оберіть формат паперу для роздаткових матеріалів і експорту на папір.',
   'Startmappen': 'Початкові теки',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Звідки починаються відкриття й збереження. Порожнє значення — перша бібліотека.',

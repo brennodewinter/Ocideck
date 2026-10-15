@@ -27,6 +27,7 @@ import 'download_delivery.dart';
 export 'export_result.dart';
 import 'export_result.dart';
 import '../models/slide_quality.dart';
+import '../models/slide_format.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
 import 'html_image_embedder.dart';

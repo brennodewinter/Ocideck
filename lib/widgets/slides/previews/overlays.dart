@@ -37,7 +37,7 @@ class _LogoOverlay extends StatelessWidget {
         bottom: atTop ? null : 0,
         left: 0,
         right: 0,
-        height: slideWidth * 9 / 16 * brandStripHeight,
+        height: slideWidth / SlideAspectScope.of(context) * brandStripHeight,
         child: Stack(
           fit: StackFit.expand,
           children: [

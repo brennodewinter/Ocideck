@@ -223,3 +223,75 @@ DocumentPageSetup _parseGeometry(String? value) {
 
 String _mm(double mm) =>
     mm == mm.roundToDouble() ? mm.toStringAsFixed(0) : mm.toString();
+
+// ── Diaformaat (presentaties) ────────────────────────────────────────────────
+//
+// Een presentatie legt zijn diaverhouding vast in hetzelfde vocabulaire als de
+// documentpagina: `papersize:` voor een staand ISO-vel, `geometry:` met alleen
+// het vel voor een liggende. De helpers hieronder zijn de dia-varianten van de
+// documentparser — de dia heeft geen tekstspiegel, dus marges tellen niet mee
+// bij het herleiden van de maat.
+
+/// De paginamaat die een `papersize:`-waarde noemt (`a4`, `b5`, `a4paper`),
+/// of `null` wanneer hij geen bekende ISO-maat is.
+PageSizeSpec? pageSizeSpecFromName(String? value) => _parsePaperSize(value);
+
+/// De paginamaat die een `geometry:`-waarde vastlegt, of `null`.
+///
+/// Alleen `paperwidth`/`paperheight` tellen — de marges die een document in de
+/// zelfde sleutel meesturet horen bij een tekstspiegel die een dia niet kent,
+/// en mogen de maat niet onleesbaar maken.
+PageSizeSpec? pageSizeSpecFromGeometry(String? value) {
+  final v = value?.trim();
+  if (v == null || v.isEmpty) return null;
+  final fields = <String, double>{};
+  for (final part in v.split(',')) {
+    final kv = part.split('=');
+    if (kv.length != 2) continue;
+    final mm = double.tryParse(kv[1].trim().replaceAll('mm', '').trim());
+    if (mm == null) continue;
+    if (!mm.isFinite || mm <= 0) return null;
+    fields[kv[0].trim().toLowerCase()] = mm;
+  }
+  return _inferPaper(fields)?.size;
+}
+
+/// De `geometry:`-waarde die OciDeck voor een liggend diaformaat schrijft:
+/// alleen het vel, want een dia heeft geen marges. Een staand vel gaat als
+/// `papersize:` — precies zoals `_paperSizeValue` voor documenten kiest.
+String slideGeometryValue(PageSizeSpec size) {
+  final (w, h) = size.dimensions;
+  return 'paperwidth=${_mm(w)}mm,paperheight=${_mm(h)}mm';
+}
+
+/// Het diaformaat uit de twee sleutels die het kan dragen (`papersize:` en
+/// `geometry:`). `papersize` wint als beide er staan — zoals bij de
+/// documentpagina. Alleen de vorm die OciDeck zelf schrijft (alleen het vel)
+/// is een diaformaat; een handgeschreven Pandoc-`geometry` met marges is
+/// documentpaginaopmaak en levert `null`.
+PageSizeSpec? slideSizeFromKeys(String? papersize, String? geometry) =>
+    pageSizeSpecFromName(papersize) ??
+    (geometry != null && isSlideGeometryValue(geometry)
+        ? pageSizeSpecFromGeometry(geometry)
+        : null);
+
+/// Of een `geometry:`-waarde alleen velafmetingen draagt — de vorm die OciDeck
+/// voor dia's zelf schrijft en dus mag vervangen ([kOwnedFrontMatterKeys]).
+///
+/// Een `geometry:` met marges is bewust niet van ons: die schrijft alleen een
+/// gebruiker die zijn Marp-deck ook door Pandoc haalt, en die marge-informatie
+/// verdwijnt niet zomaar bij een opslag.
+bool isSlideGeometryValue(String value) {
+  final v = value.trim();
+  if (v.isEmpty) return false;
+  var sawField = false;
+  for (final part in v.split(',')) {
+    final kv = part.split('=');
+    if (kv.length != 2) return false;
+    final key = kv[0].trim().toLowerCase();
+    if (key != 'paperwidth' && key != 'paperheight') return false;
+    if (kv[1].trim().isEmpty) return false;
+    sawField = true;
+  }
+  return sawField;
+}

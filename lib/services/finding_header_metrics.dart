@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import '../models/finding_spec.dart';
 import 'markdown_body_blocks.dart' as md_body;
+import '../models/slide_format.dart';
 import 'slide_layout_metrics.dart'
     show
         kFitScaleBisectTolerance,
@@ -59,9 +60,10 @@ double findingHeaderFitScale({
   bool continuation = false,
   double maxScale = 1.0,
   double extraVReserve = 0,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final w = kReferenceSlideWidth;
-  final slideHeight = w * 9 / 16;
+  final slideHeight = w / slideAspect;
   final availW = w - w * _findingHPadFraction * 2;
   // Target a fraction of the height the scaffold actually gives the content: the
   // whole slide, less any logo strip the scaffold reserves *outside* the

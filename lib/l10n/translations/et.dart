@@ -1747,6 +1747,76 @@ const _dutchSourceAddEt = <String, String>{
   'Wachtwoord herhalen': 'Korrake parooli',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Pange oma kohtumised oma kalendrisse — uuendatakse muudatuste ja tühistuste korral.',
+  'Omrekening naar euro': 'Teisendus eurodesse',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR-kuva jaoks kasutab OciDeck ühte kurssi seansi kohta. Sisestage kurss ise või tooge EKP viitekurss.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Too kurss teenusest Frankfurter (EKP)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Üks päring valuuta kohta aadressile api.frankfurter.dev ainult valuutakoodiga; teenus näeb siiski IP-aadressi. Esitluse andmeid ei saadeta.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Toomine ebaõnnestus — sisestage kurss ise või jätkake ilma kursita.',
+  'Zonder koers doorgaan': 'Jätka ilma kursita',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kehtetu kurss — kasutage näiteks 0,92.',
+  'handmatig': 'käsitsi',
+  'peildatum': 'viitekuupäev',
+  'verouderd': 'vananenud',
+  'koers': 'kurss',
+  'koers ontbreekt': 'kurss puudub',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurss puudub — EUR-vaste arvutamata.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'sisendrida(sid) teisendamata — kurss puudus.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Ühtegi kasulikku ettepanekut ei leitud. Täitke andmed ise.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Tehisintellekti ettepanekut ei saanud tuua. Kontrollige AI seadeid või sisestage üksikasjad ise.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Kasutage kehtivat kuupäeva (nt AAAA-KK-PP) või jätke väli tühjaks.',
+  'Documentgegevens': 'Dokumendi andmed',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Need üksikasjad kirjeldavad seda dokumenti toimikus. Lähtefaili ei muudeta.',
+  'Korte omschrijving': 'Lühikirjeldus',
+  'Waar gaat dit document over?': 'Millest see dokument räägib?',
+  'Documentdatum': 'Dokumendi kuupäev',
+  'JJJJ-MM-DD': 'AAAA-KK-PP',
+  'Opsteller': 'Dokumendi autor',
+  'Gegevens voorstellen met AI': 'Soovitage tehisintellektiga üksikasju',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI ettepanek on lõpetatud. Enne salvestamist kontrollige ja muutke seda.',
+  'Dossier als PDF exporteren': 'Ekspordi toimik PDF-vormingus',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF sisaldab kaant, sisukorda ja kõiki dokumente toimiku järjekorras.',
+  'Tussenpagina vóór elk document': 'Vaheleht enne iga dokumenti',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Numbri, pealkirja, kirjelduse, kuupäeva, autori ja SHA-256-ga.',
+  'Volledige gegevens tonen': 'Kuva kõik üksikasjad',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Leitud isikuandmed on vaikimisi peidetud. Valige täielikud üksikasjad ainult kavandatud adressaadi jaoks.',
+  'PDF maken': 'Looge PDF',
+  'Documentgegevens bewerken': 'Muutke dokumendi teavet',
+  'Dossier-PDF opgeslagen': 'Toimiku PDF on salvestatud',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Toimiku PDF-i ei saanud luua. Kontrollige muudetud või puuduvat lähtedokumenti ja proovige uuesti.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Toimiku PDF-i ei saanud luua. Proovi uuesti.',
+  'Referentie vastgelegd': 'Viide salvestatud',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Vahekaardil on salvestamata muudatusi; SHA-256 kontrollib kettal olevat versiooni.',
+  'Documenten controleren': 'Dokumentide kontrollimine',
+  'Dit nummer is al in gebruik.': 'See number on juba kasutusel.',
+  'Documenten openen': 'Ava dokumendid',
+  'Eerdere SHA-256-waarden': 'Varasemad SHA-256 väärtused',
+  'Omschrijving wijzigen': 'Muuda kirjeldust',
+  'Beginnummer wijzigen': 'Muuda algusnumbrit',
+  'Vindplaats': 'Asukoht',
+  'Laatst gecontroleerd': 'Viimati kontrollitud',
+  'Nummer wijzigen': 'Muuda numbrit',
+  'Waar gaat dit dossier over?': 'Mida see toimik käsitleb?',
+  'Nummer': 'Number',
+  'Gebruik een positief getal.': 'Kasutage positiivset arvu.',
+  'Automatisch nummer': 'Automaatne number',
   'Aanvulling gevraagd': 'Täiendust küsitud',
   'Aanvulling gevraagd.': 'Täiendust on küsitud.',
   'Aanvulling gevraagd: {opmerking}': 'Täiendust küsitud: {opmerking}',
@@ -1777,6 +1847,114 @@ const _dutchSourceAddEt = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Tulemusi ei õnnestunud laadida.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Näed oma tulemust jaotises Minu eksamid, kui see on vabastatud.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Lisada saab ainult Markdown-dokumente ja -esitlusi (.md).',
+  'OciDeck dossier': 'OciDeck Toimik',
+  'Alle documenten openen': 'Ava kõik dokumendid',
+  'Alleen overzicht': 'Vajalik on ainult ülevaade.',
+  'Alles controleren': 'Kontrolli kõike',
+  'DOSSIER': 'TOIMIK',
+  'De SHA-256 klopt al.': 'SHA-256 on juba õige.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Sissekiri kustutatakse dokumendist. Dokumendifail jääb säiliks.',
+  'Deze bijlage is niet beschikbaar.': 'See lisafail pole saadaval.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Seda lisafaiti ei saa kontrollida.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Seda lisafaiti ei saanud ohutult avada.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'See dokumendikinnitus juba olemas. Valige teine nimi.',
+  'Dit dossier kon niet worden geopend.':
+      'See dokumendikinnitus ei õnnestunud avada.',
+  'Document gewijzigd': 'Dokument on muudetud.',
+  'Document niet leesbaar': 'Dokumend ei lugitav',
+  'Document ontbreekt': 'Dokumend puudub',
+  'Document openen': 'Ava dokument',
+  'Documenten toevoegen': 'Lisa dokumente',
+  'Dossier': 'Toimik',
+  'Dossier openen': 'Ava toimik',
+  'Dossier openen…': 'Dokumendi kogu avamine…',
+  'Dossiertitel wijzigen': 'Dokumendikateid muuta',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Ühte lisandit ei õnnestunud lisada.',
+  'Een goed dossier begint hier': 'Hea dokumendikogum koosneb alustest.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Kasutage käepärast või nuppe järjedu muutmiseks. Numbrid järgnevad automaatselt.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Fail muutus või seda ei õnnestunud registreerida. Kontrollige uuesti.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossier ei saanud luua.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'See määrab uue failivariandi selle dokumendi jaoks.',
+  'Huidige SHA-256': 'SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Isiklikud leheküljed ja andmekontroll',
+  'Meer opties': 'Lisavõimalused',
+  'Naamloos dossier': 'Nimetamatu dokumend',
+  'Nieuw dossier': 'Uus toimik',
+  'Nieuwe versie vastleggen': 'Salvesta uus versioon',
+  'Nieuwe versie vastleggen?': 'Kas soovid salvestada uue variandi?',
+  'Omhoog verplaatsen': 'Liiga üles',
+  'Omlaag verplaatsen': 'Liiga alla',
+  'Onveilige bestandsverwijzing': 'Ohutu failireferendi',
+  'Overzicht en bijlagen': 'Ülevaade ja lisandid',
+  'SHA-256 controleren': 'Kontrolli SHA-256',
+  'SHA-256 klopt': 'SHA-256 on õige',
+  'Sleep om te ordenen': 'Drääbla järjestamiseks',
+  'Terug naar dossier': 'Tagasi toimiku juurde',
+  'Titel wijzigen': 'Pealkirja muuda',
+  'Uit dossier verwijderen': 'Eemalda toimikust',
+  'Uit dossier verwijderen?': 'Kas soovid eemaldada dokumendist?',
+  'Vastgelegde SHA-256': 'Salvestatud SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Lisa dokumente. Algupärased failid jäävad oma asukohta. Siin saad määrata nende järjestuse.',
+  'Wijziging opslaan is mislukt.': 'Muudatuste salvestamine ebaõnnestus.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Kas soovid avada lisandid ka vahetabelitesse?',
+  'Als document openen': 'Dokumendi avamiseks',
+  'Dossier maken': 'Loo toimik',
+  'Het overzicht kon niet als document worden geopend.':
+      'Ülevaade ei saanud dokumentina avada.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Salvestage muudatused ülevaatedokumendis kõigepealt või sulgege see tab.',
+  'Kostenindicatie': 'Kulude indikatsioon',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto või neto ei ole siin oluline — tööandja kulude lisandus on eraldi.',
+  'Aanwezigen en tarieven': 'Osalejad ja hinnad',
+  'Bedrag': 'Summa',
+  'Per uur': 'Tunnis',
+  'Per maand': 'Kuus',
+  'Per jaar': 'Aastas',
+  'Aanname voor de omrekening': 'Arvutuse eeldus',
+  'Betaalde uren per week': 'Tasustatud tunnid nädalas',
+  'Weken per jaar': 'Nädalaid aastas',
+  'Opslag werkgeverslasten (%)': 'Tööandja kulude lisand (%)',
+  'Voeg een aanwezige toe': 'Lisa osaleja',
+  'Samen': 'Kokku',
+  'Start presentatie': 'Alusta esitlust',
+  'per uur': 'tunnis',
+  'Wordt omgerekend': 'Arvutatakse ümber',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Sisesta igale osalejale tunni-, kuu- või aastatasu. See jääb sellele ekraanile ega salvestu.',
+  'Kosten van aanwezigen': 'Osalejate kulu',
+  'Uit': 'Väljas',
+  'Gewoon — alleen in het eindoverzicht': 'Tavaline — ainult lõpukokkuvõttes',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Sõnaselge — jooksev summa ja lõpukokkuvõte',
+  'Uurtarief': 'Tunnitasu',
+  'Eén tarief voor de hele groep': 'Üks hind kogu rühmale',
+  'Per aanwezige, bij de start invullen': 'Osaleja kohta, sisestatakse alguses',
+  'Groepsuurtarief': 'Rühma tunnitasu',
+  'Kosten = verstreken tijd × tarief.': 'Kulu = möödunud aeg × hind.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Sisestatakse alguses ega salvestata.',
+  'Valuta': 'Valuuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Hinnang osalejate kulutatud ajale — suundumus, mitte raamatupidamislik omahind.',
+  'Diaformaat': 'Slaidi formaat',
+  'Scherm (16:9)': 'Ekraan (16:9)',
+  'Papierformaat': 'Paberiformaat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Valige paberiformaat jagamismaterjalide ja paberile ekspordi jaoks.',
   'Startmappen': 'Alguskaustad',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kus avamine ja salvestamine algavad. Tühi kasutab esimest teeki.',

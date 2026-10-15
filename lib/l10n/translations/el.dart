@@ -1779,6 +1779,76 @@ const _dutchSourceAddEl = <String, String>{
   'Wachtwoord herhalen': 'Επανάληψη κωδικού πρόσβασης',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Τοποθετήστε τις συναντήσεις σας στο δικό σας ημερολόγιο — ενημερώνεται σε αλλαγές και ακυρώσεις.',
+  'Omrekening naar euro': 'Μετατροπή σε ευρώ',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Για την εμφάνιση σε EUR το OciDeck χρησιμοποιεί μία ισοτιμία ανά συνεδρία. Εισαγωγή της ισοτιμίας με το χέρι ή ανάκτηση της ισοτιμίας αναφοράς της ΕΚΤ.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Ανάκτηση ισοτιμίας από Frankfurter (ΕΚΤ)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ένα αίτημα ανά νόμισμα προς api.frankfurter.dev μόνο με τον κωδικό νομίσματος· η υπηρεσία βλέπει τη διεύθυνση IP. Δεν αποστέλλονται δεδομένα παρουσίασης.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Η ανάκτηση απέτυχε — εισαγωγή της ισοτιμίας με το χέρι ή συνέχεια χωρίς ισοτιμία.',
+  'Zonder koers doorgaan': 'Συνέχεια χωρίς ισοτιμία',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Μη έγκυρη ισοτιμία — χρήση π.χ. 0,92.',
+  'handmatig': 'χειροκίνητα',
+  'peildatum': 'ημερομηνία αναφοράς',
+  'verouderd': 'παρωχημένη',
+  'koers': 'ισοτιμία',
+  'koers ontbreekt': 'λείπει η ισοτιμία',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Λείπει η ισοτιμία — το ισοδύναμο σε EUR δεν υπολογίστηκε.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'γραμμή(ές) εισαγωγής χωρίς μετατροπή — έλειπε η ισοτιμία.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Δεν βρέθηκε χρήσιμη πρόταση. Συμπληρώστε μόνοι σας τα στοιχεία.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Δεν ήταν δυνατή η ανάκτηση της πρότασης AI. Ελέγξτε τις ρυθμίσεις AI ή συμπληρώστε τις λεπτομέρειες μόνοι σας.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Χρησιμοποιήστε μια έγκυρη ημερομηνία, όπως ΕΕΕΕ-ΜΜ-ΗΗ ή αφήστε το πεδίο κενό.',
+  'Documentgegevens': 'Δεδομένα εγγράφου',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Αυτές οι λεπτομέρειες περιγράφουν αυτό το έγγραφο στον φάκελο. Το αρχείο προέλευσης δεν έχει αλλάξει.',
+  'Korte omschrijving': 'Σύντομη περιγραφή',
+  'Waar gaat dit document over?': 'Τι αφορά αυτό το έγγραφο;',
+  'Documentdatum': 'Ημερομηνία εγγράφου',
+  'JJJJ-MM-DD': 'ΕΕΕΕ-ΜΜ-ΗΗ',
+  'Opsteller': 'Συντάκτης εγγράφου',
+  'Gegevens voorstellen met AI': 'Προτείνετε λεπτομέρειες με AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Ολοκληρώθηκε η πρόταση AI. Ελέγξτε και αλλάξτε το πριν το αποθηκεύσετε.',
+  'Dossier als PDF exporteren': 'Εξαγωγή φακέλου ως PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Το PDF περιέχει ένα εξώφυλλο, έναν πίνακα περιεχομένων και όλα τα έγγραφα με σειρά φακέλου.',
+  'Tussenpagina vóór elk document': 'Ενδιάμεση σελίδα πριν από κάθε έγγραφο',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Με αριθμό, τίτλο, περιγραφή, ημερομηνία, συγγραφέα και SHA-256.',
+  'Volledige gegevens tonen': 'Εμφάνιση πλήρεις λεπτομέρειες',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Τα προσωπικά δεδομένα που βρέθηκαν είναι κρυμμένα από προεπιλογή. Επιλέξτε τα πλήρη στοιχεία μόνο για τον προβλεπόμενο παραλήπτη.',
+  'PDF maken': 'Δημιουργία PDF',
+  'Documentgegevens bewerken': 'Επεξεργασία πληροφοριών εγγράφου',
+  'Dossier-PDF opgeslagen': 'Ο φάκελος PDF αποθηκεύτηκε',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Δεν ήταν δυνατή η δημιουργία του φακέλου PDF. Ελέγξτε το έγγραφο προέλευσης που έχει αλλάξει ή λείπει και δοκιμάστε ξανά.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Δεν ήταν δυνατή η δημιουργία του φακέλου PDF. Προσπαθήστε ξανά.',
+  'Referentie vastgelegd': 'Η αναφορά καταγράφηκε',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Μη αποθηκευμένες αλλαγές στην καρτέλα· το SHA-256 ελέγχει την έκδοση στον δίσκο.',
+  'Documenten controleren': 'Έλεγχος εγγράφων',
+  'Dit nummer is al in gebruik.': 'Αυτός ο αριθμός χρησιμοποιείται ήδη.',
+  'Documenten openen': 'Άνοιγμα εγγράφων',
+  'Eerdere SHA-256-waarden': 'Προηγούμενες τιμές SHA-256',
+  'Omschrijving wijzigen': 'Αλλαγή περιγραφής',
+  'Beginnummer wijzigen': 'Αλλαγή αρχικού αριθμού',
+  'Vindplaats': 'Τοποθεσία',
+  'Laatst gecontroleerd': 'Τελευταίος έλεγχος',
+  'Nummer wijzigen': 'Αλλαγή αριθμού',
+  'Waar gaat dit dossier over?': 'Τι αφορά αυτός ο φάκελος;',
+  'Nummer': 'Αριθμός',
+  'Gebruik een positief getal.': 'Χρησιμοποιήστε θετικό αριθμό.',
+  'Automatisch nummer': 'Αυτόματος αριθμός',
   'Aanvulling gevraagd': 'Ζητήθηκε συμπλήρωση',
   'Aanvulling gevraagd.': 'Ζητήθηκε συμπλήρωση.',
   'Aanvulling gevraagd: {opmerking}': 'Ζητήθηκε συμπλήρωση: {opmerking}',
@@ -1812,6 +1882,116 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν ήταν δυνατή η φόρτωση των αποτελεσμάτων.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Θα δείτε το αποτέλεσμά σας στο οι εξετάσεις μου μόλις αποδεσμευτεί.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Μόνο τα έγγραφα και οι παρουσιάσεις σε μορφή Markdown (.md) μπορούν να προστεθούν.',
+  'OciDeck dossier': 'OciDeck Φάκελος',
+  'Alle documenten openen': 'Άνοιγμα όλων των εγγράφων',
+  'Alleen overzicht': 'Μόνο η προβολή.',
+  'Alles controleren': 'Έλεγχος όλων',
+  'DOSSIER': 'ΦΆΚΕΛΟΣ',
+  'De SHA-256 klopt al.': 'Ο SHA-256 είναι ήδη σωστός.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Η καταχώριση αφαιρείται από το φάκελο. Το αρχείο έγγραφου παραμένει αποθηκευμένο.',
+  'Deze bijlage is niet beschikbaar.': 'Αυτή η επισύναψη δεν είναι διαθέσιμη.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Αυτή η επισύναψη δεν μπορεί να ελεγχθεί.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Δεν ήταν δυνατό να ανοιχτεί αυτή η επισύναψη με ασφάλεια.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Αυτός ο φάκελος υπάρχει ήδη. Επιλέξτε ένα άλλο όνομα.',
+  'Dit dossier kon niet worden geopend.':
+      'Αυτό το φάκελο δεν ήταν δυνατό να ανοίξει.',
+  'Document gewijzigd': 'Το έγγραφο έχει τροποποιηθεί.',
+  'Document niet leesbaar': 'Το έγγραφο δεν είναι αναγνώσιμο.',
+  'Document ontbreekt': 'Το έγγραφο λείπει.',
+  'Document openen': 'Άνοιγμα εγγράφου',
+  'Documenten toevoegen': 'Προσθήκη εγγράφων',
+  'Dossier': 'Φάκελος',
+  'Dossier openen': 'Άνοιγμα φακέλου',
+  'Dossier openen…': 'Άνοιγμα φακέλου…',
+  'Dossiertitel wijzigen': 'Αλλαγή τίτλου φακέλου.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Ένα προσχέδιο δεν μπόρεσε να προστεθεί.',
+  'Een goed dossier begint hier': 'Ένας καλός φάκελος ξεκινάει από εδώ.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Χρησιμοποιήστε το κουμπί ή τα βέλη για να αλλάξετε τη σειρά. Οι αριθμοί θα ενημερωθούν αυτόματα.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Το αρχείο άλλαξε ή δεν καταγράφηκε. Ελέγξτε ξανά.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Δεν μπόρεσε να δημιουργηθεί το φάκελο.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Με αυτό γίνεται η νέα έκδοση αρχείου η αναφορά για αυτό το φάκελο.',
+  'Huidige SHA-256': 'Τρέχουσα SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Περιεχόμενο και έλεγχος ακεραιότητας',
+  'Meer opties': 'Περισσότερες επιλογές',
+  'Naamloos dossier': 'Άθως φάκελος',
+  'Nieuw dossier': 'Νέος φάκελος',
+  'Nieuwe versie vastleggen': 'Καταγραφή νέας έκδοσης',
+  'Nieuwe versie vastleggen?': 'Θα καταγραφεί νέα έκδοση;',
+  'Omhoog verplaatsen': 'Μετακίνηση προς τα πάνω',
+  'Omlaag verplaatsen': 'Μετακίνηση προς τα κάτω',
+  'Onveilige bestandsverwijzing': 'Μη ασφαλής αναφορά αρχείου',
+  'Overzicht en bijlagen': 'Επισκόπηση και Παραρτήματα',
+  'SHA-256 controleren': 'Έλεγχος SHA-256',
+  'SHA-256 klopt': 'Το SHA-256 ταιριάζει',
+  'Sleep om te ordenen': 'Τραβήξτε για να ταξινομήσετε',
+  'Terug naar dossier': 'Επιστροφή στον φάκελο',
+  'Titel wijzigen': 'Αλλαγή Τίτλου',
+  'Uit dossier verwijderen': 'Αφαίρεση από τον φάκελο',
+  'Uit dossier verwijderen?': 'Θέλετε να διαγράψετε επίσης από τον φάκελο;',
+  'Vastgelegde SHA-256': 'Κατεστημένο SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Προσθέστε έγγραφα στην συλλογή σας. Τα αρχικά αρχεία παραμένουν στον αρχικό τους φάκελο. Μπορείτε να επιλέξετε τη σειρά εμφάνισης εδώ.',
+  'Wijziging opslaan is mislukt.': 'Η αποθήκευση της αλλαγής απέτυχε.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Θέλετε να ανοίξετε επίσης τα παραρτήματα σε καρτέλες;',
+  'Als document openen': 'Άνοιξε το έγγραφο',
+  'Dossier maken': 'Δημιουργία φακέλου',
+  'Het overzicht kon niet als document worden geopend.':
+      'Δεν μπόρεσε να ανοίξει η προβολή ως έγγραφο.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Αποθήκευσε τις αλλαγές στο έγγραφο προβολής πρώτα ή κλείσε αυτό το φύλλο εργασίας.',
+  'Kostenindicatie': 'Ένδειξη κόστους',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Μικτά ή καθαρά δεν παίζει ρόλο εδώ — η προσαύξηση εργοδοτικών επιβαρύνσεων είναι ξεχωριστή.',
+  'Aanwezigen en tarieven': 'Παρόντες και τιμές',
+  'Bedrag': 'Ποσό',
+  'Per uur': 'Ανά ώρα',
+  'Per maand': 'Ανά μήνα',
+  'Per jaar': 'Ανά έτος',
+  'Aanname voor de omrekening': 'Παραδοχή για τη μετατροπή',
+  'Betaalde uren per week': 'Αμειβόμενες ώρες ανά εβδομάδα',
+  'Weken per jaar': 'Εβδομάδες ανά έτος',
+  'Opslag werkgeverslasten (%)': 'Προσαύξηση εργοδοτικού κόστους (%)',
+  'Voeg een aanwezige toe': 'Προσθήκη παρόντος',
+  'Samen': 'Μαζί',
+  'Start presentatie': 'Έναρξη παρουσίασης',
+  'per uur': 'ανά ώρα',
+  'Wordt omgerekend': 'Θα μετατραπεί',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Συμπλήρωσε ανά παρόντα ωρομίσθιο, μηνιαίο ή ετήσιο ποσό. Μένει σε αυτή την οθόνη και δεν αποθηκεύεται πουθενά.',
+  'Kosten van aanwezigen': 'Κόστος παρόντων',
+  'Uit': 'Κλειστό',
+  'Gewoon — alleen in het eindoverzicht': 'Κανονικό — μόνο στην τελική σύνοψη',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Ρητό — τρέχον ποσό και τελική σύνοψη',
+  'Uurtarief': 'Ωρομίσθιο',
+  'Eén tarief voor de hele groep': 'Μία τιμή για όλη την ομάδα',
+  'Per aanwezige, bij de start invullen':
+      'Ανά παρόντα, συμπληρώνεται στην έναρξη',
+  'Groepsuurtarief': 'Ομαδικό ωρομίσθιο',
+  'Kosten = verstreken tijd × tarief.': 'Κόστος = παρελθών χρόνος × τιμή.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Συμπληρώνεται στην έναρξη και δεν αποθηκεύεται.',
+  'Valuta': 'Νόμισμα',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Εκτίμηση του χρόνου που δαπανούν οι παρόντες — ένδειξη, όχι λογιστικό κόστος.',
+  'Diaformaat': 'Μορφή διαφάνειας',
+  'Scherm (16:9)': 'Οθόνη (16:9)',
+  'Papierformaat': 'Μέγεθος χαρτιού',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Επιλέξτε μέγεθος χαρτιού για ενημερωτικά φυλλάδια και εξαγωγές σε χαρτί.',
   'Startmappen': 'Φάκελοι έναρξης',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Από πού ξεκινούν το άνοιγμα και η αποθήκευση. Κενό σημαίνει την πρώτη βιβλιοθήκη.',

@@ -7,12 +7,22 @@ class _AppTabBar extends StatelessWidget {
   final ValueChanged<int> onSelect;
   final ValueChanged<int> onClose;
   final VoidCallback onAdd;
+  final String? dossierTitle;
+  final bool dossierActive;
+  final VoidCallback? onDossierSelect;
+  final VoidCallback? onNewDossier;
+  final VoidCallback? onOpenDossier;
 
   const _AppTabBar({
     required this.tabsState,
     required this.onSelect,
     required this.onClose,
     required this.onAdd,
+    this.dossierTitle,
+    this.dossierActive = false,
+    this.onDossierSelect,
+    this.onNewDossier,
+    this.onOpenDossier,
   });
 
   @override
@@ -37,10 +47,50 @@ class _AppTabBar extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
+                  if (dossierTitle != null)
+                    Semantics(
+                      button: true,
+                      selected: dossierActive,
+                      label: dossierTitle,
+                      child: InkWell(
+                        onTap: onDossierSelect,
+                        child: Container(
+                          constraints: const BoxConstraints(maxWidth: 200),
+                          height: 36,
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: dossierActive
+                                ? palette.panelText.withValues(alpha: 0.12)
+                                : Colors.transparent,
+                            border: Border(
+                              bottom: BorderSide(
+                                color: dossierActive
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Colors.transparent,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.folder_copy_outlined, size: 15),
+                              const SizedBox(width: 7),
+                              Flexible(
+                                child: Text(
+                                  dossierTitle!,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   for (int i = 0; i < tabsState.tabs.length; i++)
                     _TabChip(
                       tab: tabsState.tabs[i],
-                      isActive: i == tabsState.clampedIndex,
+                      isActive: !dossierActive && i == tabsState.clampedIndex,
                       showClose:
                           tabsState.tabs.length > 1 || tabsState.tabs[i].isOpen,
                       panelText: palette.panelText,
@@ -67,6 +117,27 @@ class _AppTabBar extends StatelessWidget {
               ),
             ),
           ),
+          if (onNewDossier != null && onOpenDossier != null)
+            PopupMenuButton<String>(
+              tooltip: l10n.d('Dossier'),
+              icon: Icon(
+                Icons.folder_copy_outlined,
+                size: 18,
+                color: palette.panelText,
+              ),
+              onSelected: (value) =>
+                  value == 'new' ? onNewDossier?.call() : onOpenDossier?.call(),
+              itemBuilder: (_) => [
+                PopupMenuItem(
+                  value: 'new',
+                  child: Text(l10n.d('Nieuw dossier')),
+                ),
+                PopupMenuItem(
+                  value: 'open',
+                  child: Text(l10n.d('Dossier openen…')),
+                ),
+              ],
+            ),
         ],
       ),
     );

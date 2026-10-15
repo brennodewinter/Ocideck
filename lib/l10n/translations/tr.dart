@@ -2662,6 +2662,75 @@ const _dutchSourceAddTr = <String, String>{
   'Wachtwoord herhalen': 'Parolayı tekrarla',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Toplantılarınızı kendi takviminize koyun — değişiklik ve iptallerde güncellenir.',
+  'Omrekening naar euro': 'Euro\'ya çevirme',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR gösterimi için OciDeck oturum başına tek bir kur kullanır. Kuru kendiniz girin veya ECB referans kurunu alın.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Kuru Frankfurter\'dan (ECB) al',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Para birimi başına, yalnızca para birimi kodunu içeren tek bir istek api.frankfurter.dev adresine gider; hizmet IP adresini görür. Sunum verileri gönderilmez.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Alma başarısız oldu — kuru kendiniz girin veya kursuz devam edin.',
+  'Zonder koers doorgaan': 'Kursuz devam et',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Geçersiz kur — örneğin 0,92 kullanın.',
+  'handmatig': 'elle',
+  'peildatum': 'referans tarihi',
+  'verouderd': 'güncel değil',
+  'koers': 'kur',
+  'koers ontbreekt': 'kur eksik',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kur eksik — EUR karşılığı hesaplanmadı.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'girdi satır(lar)ı dönüştürülmedi — kur eksikti.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Faydalı bir teklif bulunamadı. Ayrıntıları kendiniz doldurun.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Yapay zeka teklifi alınamadı. AI ayarlarını kontrol edin veya ayrıntıları kendiniz doldurun.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'YYYY-AA-GG gibi geçerli bir tarih kullanın veya alanı boş bırakın.',
+  'Documentgegevens': 'Belge verileri',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Bu ayrıntılar bu belgeyi dosyada açıklamaktadır. Kaynak dosya değiştirilmez.',
+  'Korte omschrijving': 'Kısa açıklama',
+  'Waar gaat dit document over?': 'Bu belge neyle ilgili?',
+  'Documentdatum': 'Belge tarihi',
+  'JJJJ-MM-DD': 'YYYY-AA-GG',
+  'Opsteller': 'Belge yazarı',
+  'Gegevens voorstellen met AI': 'AI ile ayrıntıları önerin',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Yapay zeka teklifi tamamlandı. Kaydetmeden önce kontrol edin ve değiştirin.',
+  'Dossier als PDF exporteren': 'Dosyayı PDF olarak dışa aktar',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF, bir kapak, içindekiler tablosu ve tüm belgeleri dosya sırasına göre içerir.',
+  'Tussenpagina vóór elk document': 'Her belgeden önceki ara sayfa',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Numara, başlık, açıklama, tarih, yazar ve SHA-256 ile.',
+  'Volledige gegevens tonen': 'Tüm ayrıntıları göster',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Bulunan kişisel veriler varsayılan olarak gizlenir. Yalnızca amaçlanan alıcı için tüm ayrıntıları seçin.',
+  'PDF maken': 'PDF oluştur',
+  'Documentgegevens bewerken': 'Belge bilgilerini düzenle',
+  'Dossier-PDF opgeslagen': 'Dosya PDF\'si kaydedildi',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dosya PDF\'si oluşturulamadı. Değiştirilen veya eksik kaynak belgeyi kontrol edip tekrar deneyin.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dosya PDF\'si oluşturulamadı. Tekrar deneyin.',
+  'Referentie vastgelegd': 'Referans bilgisi kaydedilmiştir.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Sekmede kaydedilmemiş değişiklikler var; SHA-256 diskteki sürümü kontrol eder.',
+  'Documenten controleren': 'Belgeler kontrol ediliyor',
+  'Dit nummer is al in gebruik.': 'Bu numara zaten kullanılıyor.',
+  'Documenten openen': 'Belgeleri aç',
+  'Eerdere SHA-256-waarden': 'Önceki SHA-256 değerleri',
+  'Omschrijving wijzigen': 'Açıklamayı değiştir',
+  'Beginnummer wijzigen': 'Başlangıç numarasını değiştir',
+  'Vindplaats': 'Konum',
+  'Laatst gecontroleerd': 'Son kontrol',
+  'Nummer wijzigen': 'Numarayı değiştir',
+  'Waar gaat dit dossier over?': 'Bu dosyanın konusu nedir?',
+  'Nummer': 'Numara',
+  'Gebruik een positief getal.': 'Pozitif bir sayı kullanın.',
+  'Automatisch nummer': 'Otomatik numara',
   'Aanvulling gevraagd': 'Ek bilgi istendi',
   'Aanvulling gevraagd.': 'Ek bilgi istendi.',
   'Aanvulling gevraagd: {opmerking}': 'Ek bilgi istendi: {opmerking}',
@@ -2693,6 +2762,113 @@ const _dutchSourceAddTr = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Sonuçlar yüklenemedi.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Sonucunuzu yayımlandığında Sınavlarım altında göreceksiniz.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Sadece Markdown belgeleri ve sunumları (.md) eklenebilir.',
+  'OciDeck dossier': 'OciDeck Dosya',
+  'Alle documenten openen': 'Tüm belgeleri aç',
+  'Alleen overzicht': 'Sadece genel bakış',
+  'Alles controleren': 'Tümünü kontrol et',
+  'DOSSIER': 'DOSYA',
+  'De SHA-256 klopt al.': 'SHA-256 değeri zaten doğru.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Bu kayıt dosyadan siliniyor, belge dosyası korunuyor.',
+  'Deze bijlage is niet beschikbaar.': 'Bu ek belge mevcut değil.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Bu ek belge kontrol edilemiyor.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Bu ek belge güvenli bir şekilde açılamadı.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Bu klasör dosyası zaten mevcut. Başka bir isim seçin.',
+  'Dit dossier kon niet worden geopend.': 'Bu dosya açılamadı.',
+  'Document gewijzigd': 'Belge değiştirildi',
+  'Document niet leesbaar': 'Belgen okunamaz',
+  'Document ontbreekt': 'Belge eksik',
+  'Document openen': 'Belgeyi aç',
+  'Documenten toevoegen': 'Belge ekle',
+  'Dossier': 'Dosya',
+  'Dossier openen': 'Dosyayı aç',
+  'Dossier openen…': 'Dossyayı aç…',
+  'Dossiertitel wijzigen': 'Dossya başlığını değiştir',
+  'Een bijlage kon niet worden toegevoegd.': 'Bir ek belge eklenemedi.',
+  'Een goed dossier begint hier': 'İyi bir dosya burada başlar',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Tutamağı veya okları kullanarak sırayı değiştirin. Sayılar otomatik olarak güncellenecektir.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Dosya değişmiş veya kaydedilememiş olabilir. Tekrar deneyin.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dossyanın oluşturulamamış olması.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Bu, yeni dosya sürümünü bu dossyanın referansı yapar.',
+  'Huidige SHA-256': 'Mevcut SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'İçindekiler ve bütünlük kontrolü',
+  'Meer opties': 'Daha fazla seçenek',
+  'Naamloos dossier': 'Adını belirtmeyen dosya',
+  'Nieuw dossier': 'Yeni dosya',
+  'Nieuwe versie vastleggen': 'Yeni sürümü kaydet',
+  'Nieuwe versie vastleggen?': 'Yeni sürümü kaydetmek istiyor musunuz?',
+  'Omhoog verplaatsen': 'Yukarı taşı',
+  'Omlaag verplaatsen': 'Aşağı taşı',
+  'Onveilige bestandsverwijzing': 'Güvenli olmayan dosya bağlantısı',
+  'Overzicht en bijlagen': 'Görsel ve ekler',
+  'SHA-256 controleren': 'SHA-256 kontrolü',
+  'SHA-256 klopt': 'SHA-256 değeri doğru',
+  'Sleep om te ordenen': 'Sürükle ve bırakarak düzenle',
+  'Terug naar dossier': 'Dosyaya dön',
+  'Titel wijzigen': 'Başlığı değiştir',
+  'Uit dossier verwijderen': 'Dosyadan kaldır',
+  'Uit dossier verwijderen?': 'Dossyadan silmek istiyor musunuz?',
+  'Vastgelegde SHA-256': 'Belirlenmiş SHA-256 değeri',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Belge ekleyin. Özgün dosyalar yerlerinde kalır. Sıralamayı burada belirleyin.',
+  'Wijziging opslaan is mislukt.': 'Değişikliği kaydetme başarısız oldu.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Ekleri de sekmlerde açmak ister misiniz?',
+  'Als document openen': 'Bir belge açın',
+  'Dossier maken': 'Dosya oluştur',
+  'Het overzicht kon niet als document worden geopend.':
+      'Bu görünüm, bir belge olarak açılamadı.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Lütfen görünüm belgesindeki değişiklikleri önce kaydedin veya bu sekme kapalı olsun.',
+  'Kostenindicatie': 'Maliyet göstergesi',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brüt veya net burada fark etmez — işveren maliyeti payı ayrıdır.',
+  'Aanwezigen en tarieven': 'Katılımcılar ve ücretler',
+  'Bedrag': 'Tutar',
+  'Per uur': 'Saat başına',
+  'Per maand': 'Ay başına',
+  'Per jaar': 'Yıl başına',
+  'Aanname voor de omrekening': 'Çevrim varsayımı',
+  'Betaalde uren per week': 'Haftalık ücretli saat',
+  'Weken per jaar': 'Yıllık hafta',
+  'Opslag werkgeverslasten (%)': 'İşveren maliyet farkı (%)',
+  'Voeg een aanwezige toe': 'Katılımcı ekle',
+  'Samen': 'Toplam',
+  'Start presentatie': 'Sunumu başlat',
+  'per uur': 'saat başına',
+  'Wordt omgerekend': 'Çevrilecek',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Her katılımcı için saatlik, aylık veya yıllık ücret gir. Bu ekranda kalır ve hiçbir yere kaydedilmez.',
+  'Kosten van aanwezigen': 'Katılımcı maliyeti',
+  'Uit': 'Kapalı',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — yalnızca kapanış özetinde',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Açık — akan tutar ve kapanış özeti',
+  'Uurtarief': 'Saatlik ücret',
+  'Eén tarief voor de hele groep': 'Tüm grup için tek ücret',
+  'Per aanwezige, bij de start invullen':
+      'Katılımcı başına, başlangıçta girilir',
+  'Groepsuurtarief': 'Grup saat ücreti',
+  'Kosten = verstreken tijd × tarief.': 'Maliyet = geçen süre × ücret.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Başlangıçta girilir ve kaydedilmez.',
+  'Valuta': 'Para birimi',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Katılımcıların harcadığı zamanın tahmini — bir gösterge, muhasebe maliyeti değil.',
+  'Diaformaat': 'Slayt biçimi',
+  'Scherm (16:9)': 'Ekran (16:9)',
+  'Papierformaat': 'Kağıt boyutu',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Bildiriler ve kağıt çıktıları için bir kağıt boyutu seçin.',
   'Startmappen': 'Başlangıç klasörleri',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Açma ve kaydetmenin başladığı yer. Boş bırakmak ilk kitaplığı kullanır.',

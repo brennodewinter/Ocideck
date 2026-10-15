@@ -1754,6 +1754,76 @@ const _dutchSourceAddCs = <String, String>{
   'Wachtwoord herhalen': 'Zopakovat heslo',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Vložte si své schůzky do vlastního kalendáře — aktualizuje se při změnách a zrušeních.',
+  'Omrekening naar euro': 'Převod na eura',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Pro zobrazení v EUR používá OciDeck jeden kurz na relaci. Kurz zadejte sami, nebo stáhněte referenční kurz ECB.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Stáhnout kurz ze služby Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Jeden požadavek na měnu na api.frankfurter.dev pouze s kódem měny; služba však vidí IP adresu. Žádná data prezentace se neodesílají.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Stažení se nezdařilo — zadejte kurz sami, nebo pokračujte bez kurzu.',
+  'Zonder koers doorgaan': 'Pokračovat bez kurzu',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Neplatný kurz — použijte například 0,92.',
+  'handmatig': 'ručně',
+  'peildatum': 'datum kurzu',
+  'verouderd': 'zastaralý',
+  'koers': 'kurz',
+  'koers ontbreekt': 'kurz chybí',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurz chybí — ekvivalent v EUR nebyl vypočten.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'řádek/řádky zadání nepřevedeny — chyběl kurz.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nebyl nalezen žádný užitečný návrh. Údaje si vyplňte sami.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Návrh AI se nepodařilo načíst. Zkontrolujte nastavení AI nebo vyplňte podrobnosti sami.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Použijte platné datum, například RRRR-MM-DD, nebo nechte pole prázdné.',
+  'Documentgegevens': 'Data dokumentu',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Tyto podrobnosti popisují tento dokument v dokumentaci. Zdrojový soubor se nezmění.',
+  'Korte omschrijving': 'Krátký popis',
+  'Waar gaat dit document over?': 'O čem je tento dokument?',
+  'Documentdatum': 'Datum dokumentu',
+  'JJJJ-MM-DD': 'YYYY-MM-DD',
+  'Opsteller': 'Autor dokumentu',
+  'Gegevens voorstellen met AI': 'Navrhněte podrobnosti pomocí AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Návrh AI dokončen. Před uložením jej zkontrolujte a změňte.',
+  'Dossier als PDF exporteren': 'Exportovat dokumentaci jako PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF obsahuje obálku, obsah a všechny dokumenty v pořadí dokumentace.',
+  'Tussenpagina vóór elk document': 'Mezistránka před každým dokumentem',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'S číslem, názvem, popisem, datem, autorem a SHA-256.',
+  'Volledige gegevens tonen': 'Zobrazit úplné podrobnosti',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Nalezené osobní údaje jsou ve výchozím nastavení skryté. Vyberte úplné podrobnosti pouze pro zamýšleného příjemce.',
+  'PDF maken': 'Vytvořit PDF',
+  'Documentgegevens bewerken': 'Upravit informace o dokumentu',
+  'Dossier-PDF opgeslagen': 'Soubor PDF uložen',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dokument PDF nelze vytvořit. Zkontrolujte změněný nebo chybějící zdrojový dokument a zkuste to znovu.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dokument PDF nelze vytvořit. Zkuste to znovu.',
+  'Referentie vastgelegd': 'Reference zaznamenána',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Neuložené změny na kartě; SHA-256 kontroluje verzi na disku.',
+  'Documenten controleren': 'Kontrola dokumentů',
+  'Dit nummer is al in gebruik.': 'Toto číslo se již používá.',
+  'Documenten openen': 'Otevřít dokumenty',
+  'Eerdere SHA-256-waarden': 'Předchozí hodnoty SHA-256',
+  'Omschrijving wijzigen': 'Změnit popis',
+  'Beginnummer wijzigen': 'Změnit počáteční číslo',
+  'Vindplaats': 'Umístění',
+  'Laatst gecontroleerd': 'Naposledy zkontrolováno',
+  'Nummer wijzigen': 'Změnit číslo',
+  'Waar gaat dit dossier over?': 'O čem je tento spis?',
+  'Nummer': 'Číslo',
+  'Gebruik een positief getal.': 'Použijte kladné číslo.',
+  'Automatisch nummer': 'Automatické číslo',
   'Aanvulling gevraagd': 'Vyžádáno doplnění',
   'Aanvulling gevraagd.': 'Vyžádáno doplnění.',
   'Aanvulling gevraagd: {opmerking}': 'Vyžádáno doplnění: {opmerking}',
@@ -1785,6 +1855,112 @@ const _dutchSourceAddCs = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Výsledky se nepodařilo načíst.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Svůj výsledek uvidíte v části Moje zkoušky, jakmile bude zveřejněn.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Pouze Markdown soubory a prezentace (.md) lze přidat.',
+  'OciDeck dossier': 'OciDeck Spis',
+  'Alle documenten openen': 'Otevřít všechny dokumenty',
+  'Alleen overzicht': 'Pouze přehled',
+  'Alles controleren': 'Zkontrolovat vše',
+  'DOSSIER': 'SPIS',
+  'De SHA-256 klopt al.': 'SHA-256 hodnota je již správná.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Záznam zmizí z tohoto souboru. Souborový přípona zůstane uložena.',
+  'Deze bijlage is niet beschikbaar.': 'Tato příloha není dostupná.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Tuto přílohu nelze zkontrolovat.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Tuto přílohu nelze bezpečně otevřít.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Tento adresář již existuje. Vyberte jiný název.',
+  'Dit dossier kon niet worden geopend.': 'Toto dossier nemohlo být otevřeno.',
+  'Document gewijzigd': 'Dokument byl změněn',
+  'Document niet leesbaar': 'Dokument není čitelný',
+  'Document ontbreekt': 'Dokument chybí',
+  'Document openen': 'Otevřít dokument',
+  'Documenten toevoegen': 'Přidat dokumenty',
+  'Dossier': 'Spis',
+  'Dossier openen': 'Otevřít spis',
+  'Dossier openen…': 'Otevřít sborník…',
+  'Dossiertitel wijzigen': 'Změnit název sborníku',
+  'Een bijlage kon niet worden toegevoegd.': 'Přiložení nemohlo být přidáno.',
+  'Een goed dossier begint hier': 'Dobrá sbírka začíná zde',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Použijte zářič nebo šipky pro změnu pořadí. Čísla se automaticky aktualizují.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Soubor byl změněn nebo nebyl zaznamenán. Zkontrolujte znovu.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossier nemohlo být vytvořeno.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Tím se stane nová verze souboru referencí pro toto dossier.',
+  'Huidige SHA-256': 'Aktuální SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Obsah a kontrola integrity',
+  'Meer opties': 'Více možností',
+  'Naamloos dossier': 'Bez názvu dossier',
+  'Nieuw dossier': 'Nový spis',
+  'Nieuwe versie vastleggen': 'Zaznamenat novou verzi',
+  'Nieuwe versie vastleggen?': 'Zaznamenat novou verzi?',
+  'Omhoog verplaatsen': 'Posunout nahoru',
+  'Omlaag verplaatsen': 'Posunout dolů',
+  'Onveilige bestandsverwijzing': 'Nebezpečné odkaz na soubor',
+  'Overzicht en bijlagen': 'Přehled a přílohy',
+  'SHA-256 controleren': 'Zkontrolovat SHA-256',
+  'SHA-256 klopt': 'SHA-256 platí',
+  'Sleep om te ordenen': 'Přetáhněte pro řazení',
+  'Terug naar dossier': 'Zpět ke spisu',
+  'Titel wijzigen': 'Změnit název',
+  'Uit dossier verwijderen': 'Odebrat ze spisu',
+  'Uit dossier verwijderen?': 'Chcete odstranit ze souboru?',
+  'Vastgelegde SHA-256': 'Zaznamenaná SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Přidejte dokumenty do této sbírky. Původní soubory zůstanou ve svém původním umístění. Zde si můžete zvolit pořadí zobrazení.',
+  'Wijziging opslaan is mislukt.': 'Uložení změny se nepodařilo.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Chcete otevřít přílohy i v záložkách?',
+  'Als document openen': 'Soubor otevřít',
+  'Dossier maken': 'Vytvořit spis',
+  'Het overzicht kon niet als document worden geopend.':
+      'Přehled nemohl být otevřen jako soubor.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Nejprve uložte změny do dokumentu přehledu nebo ho zavřete.',
+  'Kostenindicatie': 'Odhad nákladů',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Hrubá nebo čistá částka tu nehraje roli — přirážka na náklady zaměstnavatele je samostatná.',
+  'Aanwezigen en tarieven': 'Účastníci a sazby',
+  'Bedrag': 'Částka',
+  'Per uur': 'Za hodinu',
+  'Per maand': 'Za měsíc',
+  'Per jaar': 'Za rok',
+  'Aanname voor de omrekening': 'Předpoklad pro přepočet',
+  'Betaalde uren per week': 'Placené hodiny týdně',
+  'Weken per jaar': 'Týdnů ročně',
+  'Opslag werkgeverslasten (%)': 'Příplatek nákladů zaměstnavatele (%)',
+  'Voeg een aanwezige toe': 'Přidat účastníka',
+  'Samen': 'Dohromady',
+  'Start presentatie': 'Spustit prezentaci',
+  'per uur': 'za hodinu',
+  'Wordt omgerekend': 'Bude přepočteno',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Vyplň za každého účastníka hodinovou, měsíční nebo roční sazbu. Zůstane na této obrazovce a nikam se neukládá.',
+  'Kosten van aanwezigen': 'Náklady účastníků',
+  'Uit': 'Vypnuto',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normální — jen v závěrečném přehledu',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicitní — průběžná částka a závěrečný přehled',
+  'Uurtarief': 'Hodinová sazba',
+  'Eén tarief voor de hele groep': 'Jedna sazba pro celou skupinu',
+  'Per aanwezige, bij de start invullen': 'Za účastníka, vyplní se na začátku',
+  'Groepsuurtarief': 'Skupinová hodinová sazba',
+  'Kosten = verstreken tijd × tarief.': 'Náklady = uběhlý čas × sazba.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Vyplní se na začátku a neukládá se.',
+  'Valuta': 'Měna',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Odhad času, který účastníci stráví — orientační hodnota, ne účetní nákladová cena.',
+  'Diaformaat': 'Formát snímku',
+  'Scherm (16:9)': 'Obrazovka (16:9)',
+  'Papierformaat': 'Formát papíru',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Zvolte formát papíru pro handouty a export na papír.',
   'Startmappen': 'Výchozí složky',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kde začíná otevírání a ukládání. Prázdné použije první knihovnu.',

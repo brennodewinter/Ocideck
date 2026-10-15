@@ -1784,6 +1784,76 @@ const _dutchSourceAddGa = <String, String>{
   'Wachtwoord herhalen': 'Déan an focal faire a athrá',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Cuir do chruinnithe i d\'fhéilire féin — nuashonraithe nuair a athraítear nó a chuirtear ar ceal iad.',
+  'Omrekening naar euro': 'Comhshó go euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Chun an taispeáint in EUR a thaispeáint, úsáideann OciDeck ráta amháin in aghaidh an tseisiúin. Cuir an ráta isteach de láimh nó faigh ráta tagartha an BCE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Faigh an ráta ó Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Iarratas amháin in aghaidh an airgeadra chuig api.frankfurter.dev leis an gcód airgeadra amháin; feiceann an tseirbhís seoladh IP, áfach. Ní sheoltar aon sonraí cur i láthair.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Theip ar an bhfáil — cuir an ráta isteach de láimh nó lean ar aghaidh gan ráta.',
+  'Zonder koers doorgaan': 'Lean ar aghaidh gan ráta',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Ráta neamhbhailí — úsáid 0,92, mar shampla.',
+  'handmatig': 'de láimh',
+  'peildatum': 'dáta tagartha',
+  'verouderd': 'as dáta',
+  'koers': 'ráta',
+  'koers ontbreekt': 'ráta in easnamh',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Ráta in easnamh — níor ríomhadh an coibhéis in EUR.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'líne(acha) ionchuir nár athraíodh — bhí an ráta in easnamh.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Ní bhfuarthas aon mholadh úsáideach. Líon isteach na sonraí tú féin.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Níorbh fhéidir an togra AI a aisghabháil. Seiceáil na socruithe AI ​​nó líon isteach na sonraí tú féin.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Bain úsáid as dáta bailí ar nós BBBB-MM-DD, nó fág bán an réimse.',
+  'Documentgegevens': 'Sonraí doiciméad',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Déanann na sonraí seo cur síos ar an doiciméad seo sa chomhad. Ní athraítear an comhad foinse.',
+  'Korte omschrijving': 'Cur síos gairid',
+  'Waar gaat dit document over?': 'Cad faoi atá an doiciméad seo?',
+  'Documentdatum': 'Dáta an doiciméid',
+  'JJJJ-MM-DD': 'BBBB-MM-LL',
+  'Opsteller': 'Údar doiciméid',
+  'Gegevens voorstellen met AI': 'Mol sonraí le AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Togra AI curtha i gcrích. Seiceáil agus athraigh é roimh shábháil.',
+  'Dossier als PDF exporteren': 'Comhad a onnmhairiú go pdf',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Tá clúdach, clár na n-ábhar, agus gach doiciméad in ord sainchomhaid sa PDF.',
+  'Tussenpagina vóór elk document':
+      'Leathanach idirmheánach roimh gach doiciméad',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Le uimhir, teideal, tuairisc, dáta, údar agus SHA-256.',
+  'Volledige gegevens tonen': 'Taispeáin sonraí iomlána',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Tá na sonraí pearsanta a aimsítear i bhfolach de réir réamhshocraithe. Roghnaigh sonraí iomlána don fhaighteoir beartaithe amháin.',
+  'PDF maken': 'Cruthaigh pdf',
+  'Documentgegevens bewerken': 'Cuir faisnéis doiciméad in eagar',
+  'Dossier-PDF opgeslagen': 'Comhad PDF a shábháil',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Níorbh fhéidir comhad PDF a chruthú. Seiceáil an doiciméad foinse athraithe nó in easnamh agus bain triail eile as.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Níorbh fhéidir comhad PDF a chruthú. Bain triail eile as.',
+  'Referentie vastgelegd': 'Tagairt taifeadta',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Athruithe neamhshábháilte sa chluaisín; seiceálann SHA-256 an leagan ar an diosca.',
+  'Documenten controleren': 'Doiciméid á seiceáil',
+  'Dit nummer is al in gebruik.': 'Tá an uimhir seo in úsáid cheana.',
+  'Documenten openen': 'Oscail doiciméid',
+  'Eerdere SHA-256-waarden': 'Luachanna SHA-256 roimhe seo',
+  'Omschrijving wijzigen': 'Athraigh an cur síos',
+  'Beginnummer wijzigen': 'Athraigh an uimhir thosaigh',
+  'Vindplaats': 'Suíomh',
+  'Laatst gecontroleerd': 'Seiceáilte go deireanach',
+  'Nummer wijzigen': 'Athraigh an uimhir',
+  'Waar gaat dit dossier over?': 'Cad faoi a bhfuil an sainchomhad seo?',
+  'Nummer': 'Uimhir',
+  'Gebruik een positief getal.': 'Úsáid uimhir dheimhneach.',
+  'Automatisch nummer': 'Uimhir uathoibríoch',
   'Aanvulling gevraagd': 'Iarradh breis eolais',
   'Aanvulling gevraagd.': 'Iarradh breis eolais.',
   'Aanvulling gevraagd: {opmerking}': 'Iarradh breis eolais: {opmerking}',
@@ -1816,6 +1886,114 @@ const _dutchSourceAddGa = <String, String>{
       'Níorbh fhéidir na torthaí a lódáil.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Feicfidh tú do thoradh faoi Mo scrúduithe a luaithe a scaoilfear é.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Ní féidir ach doiciméid agus láithreoireachtaí Markdown (.md) a chur leis.',
+  'OciDeck dossier': 'OciDeck Sainchomhad',
+  'Alle documenten openen': 'Oscail gach doiciméad',
+  'Alleen overzicht': 'Leáimid an fhoram amach amach.',
+  'Alles controleren': 'Seiceáil gach ceann',
+  'DOSSIER': 'SAINCHOMHAD',
+  'De SHA-256 klopt al.': 'Tá an SHA-256 ceart go raon.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Tá an béarniaigh seo ag dul as an dorn. Tá an faiche leabhar ag anochaint.',
+  'Deze bijlage is niet beschikbaar.': 'Níl an béarniaigh seo ar fáil.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Ní féidir an béarniaigh seo a cheannabhair.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Ní bhfaighneannaimid an béarniaigh seo go sábháilte.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Tá an samhlán seo ar fáil cheann. RogADH an t-ainm eile.',
+  'Dit dossier kon niet worden geopend.': 'Ní mheas an dorn seo.',
+  'Document gewijzigd': 'Tá an hábharat sin méadhnach.',
+  'Document niet leesbaar': 'Ní féidir leisteanú an doicheol',
+  'Document ontbreekt': 'Tá an doicheol gan bheith ann',
+  'Document openen': 'Oscail doiciméad',
+  'Documenten toevoegen': 'Cuir doiciméid leis',
+  'Dossier': 'Sainchomhad',
+  'Dossier openen': 'Oscail sainchomhad',
+  'Dossier openen…': 'Doicheol a oscailt…',
+  'Dossiertitel wijzigen': 'Tíotal doicheol a bhí oscailte',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Ní bhainfidh aon gcomhfhurt go breasta.',
+  'Een goed dossier begint hier': 'Tá doicheol foirfe ag tosaithe anseo',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Agus bain úsáid den gcomhthirt nó den ghrádh chun an t-ordlath a bhí oscailte. Tá na nuimhri a ghairí go héifeachtach.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Bhí an fhile ina bhféar nó ní bhí sé faoi chustaim. Faigh ar ais.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Ní féidir le doicéadan sin a chríochnú.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Leis sin, tá an leagan nua de an fail a bheith mar faisneis dó.',
+  'Huidige SHA-256': 'SHA-256 Curtha in Ollamh',
+  'Inhoudsopgave en integriteitscontrole': 'Luachmhar agus Scimeannas',
+  'Meer opties': 'Beafaí Mionscríbhinte',
+  'Naamloos dossier': 'Doicéadan Neamacha',
+  'Nieuw dossier': 'Sainchomhad nua',
+  'Nieuwe versie vastleggen': 'Taifead leagan nua',
+  'Nieuwe versie vastleggen?': 'An bhfuil doicéadan nua a shuí móraithe?',
+  'Omhoog verplaatsen': 'An fail a chur thar luach.',
+  'Omlaag verplaatsen': 'An fail a chur faiche.',
+  'Onveilige bestandsverwijzing': 'Faisneis neamhsharanthach de fail.',
+  'Overzicht en bijlagen': 'Gréasadh agus leathanach beartaithe',
+  'SHA-256 controleren': 'Tá an cheartacha SHA-256 a cheilt',
+  'SHA-256 klopt': 'Tá an cheartacha SHA-256 a cheilt',
+  'Sleep om te ordenen': 'Rogh ina bhfuil chun na hábhar a chur in ord',
+  'Terug naar dossier': 'Ar ais chuig an sainchomhad',
+  'Titel wijzigen': 'Sonrú an t-onnamhadh a bhí á rochtáil',
+  'Uit dossier verwijderen': 'Bain den sainchomhad',
+  'Uit dossier verwijderen?': 'An bhfuil an t-onnamhadh a bheith á bhaint as?',
+  'Vastgelegde SHA-256': 'Tá an cheartacha SHA-256 a chosaint',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Cuir doiciméid leis. Fanann na bunchomhaid ina suíomh bunaidh. Roghnaigh an t-ord anseo.',
+  'Wijziging opslaan is mislukt.': 'Ní raontaigh an sonrú a chur isteach.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Ba bhfuil tú ag iarraidh doiciméid beartaithe a theip ar fhadhbanna?',
+  'Als document openen': 'Faigh an sonraí ag rochadh',
+  'Dossier maken': 'Cruthaigh sainchomhad',
+  'Het overzicht kon niet als document worden geopend.':
+      'Ní bhfaighimid an fhoramáil ina theanntas mar sonraí',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Doigh na hathruithe ar an doiciméad maith, nó damhail an fhoinseán sin',
+  'Kostenindicatie': 'Táscaire costais',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto nó glan — ní dhéanann sé difríocht anseo; tá an mhargála ar chostais an fhostóra ar leith.',
+  'Aanwezigen en tarieven': 'Freastalaithe agus rátai',
+  'Bedrag': 'Suim',
+  'Per uur': 'In aghaidh na huaire',
+  'Per maand': 'In aghaidh na míosa',
+  'Per jaar': 'In aghaidh na bliana',
+  'Aanname voor de omrekening': 'Toimhde don tiontú',
+  'Betaalde uren per week': 'Uaireanta íoctha in aghaidh na seachtaine',
+  'Weken per jaar': 'Seachtainí sa bhliain',
+  'Opslag werkgeverslasten (%)': 'Barrmhéadú costais fostóra (%)',
+  'Voeg een aanwezige toe': 'Cuir freastalaí leis',
+  'Samen': 'Le chéile',
+  'Start presentatie': 'Tosaigh an chur i láthair',
+  'per uur': 'in aghaidh na huaire',
+  'Wordt omgerekend': 'Déanfar é a thiontú',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Cuir isteach ráta in aghaidh na huaire, na míosa nó na bliana do gach freastalaí. Fanann sé ar an scáileán seo agus ní shábháiltear é.',
+  'Kosten van aanwezigen': 'Costas na bhfreastalaí',
+  'Uit': 'As',
+  'Gewoon — alleen in het eindoverzicht': 'Gnáth — san achoimre deiridh amháin',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Sainráite — suim reatha agus achoimre deiridh',
+  'Uurtarief': 'Ráta in aghaidh na huaire',
+  'Eén tarief voor de hele groep': 'Ráta amháin don ghrúpa ar fad',
+  'Per aanwezige, bij de start invullen':
+      'In aghaidh an fhreastalaí, le líonadh ag an tús',
+  'Groepsuurtarief': 'Ráta uaire an ghrúpa',
+  'Kosten = verstreken tijd × tarief.': 'Costas = am caite × ráta.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Líontar ag an tús é agus ní shábháiltear.',
+  'Valuta': 'Airgeadra',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Meastachán ar an am a chaitheann freastalaithe — táscaire, ní praghas costais chuntasaíochta.',
+  'Diaformaat': 'Formáid na sleamhnáin',
+  'Scherm (16:9)': 'Scáileán (16:9)',
+  'Papierformaat': 'Méid páipéir',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Roghnaigh méid páipéir do dháileacháin agus easpórtálacha ar pháipéar.',
   'Startmappen': 'Fillteáin tosaigh',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Cá dtosaíonn oscailt agus sábháil. Fág folamh chun an chéad leabharlann a úsáid.',

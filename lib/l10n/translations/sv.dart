@@ -1752,6 +1752,75 @@ const _dutchSourceAddSv = <String, String>{
   'Wachtwoord herhalen': 'Upprepa lösenord',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Lägg dina möten i din egen kalender — uppdateras vid ändringar och inställanden.',
+  'Omrekening naar euro': 'Omräkning till euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'För EUR-visningen använder OciDeck en kurs per session. Ange kursen själv eller hämta ECB:s referenskurs.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Hämta kurs från Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'En begäran per valuta till api.frankfurter.dev med enbart valutakoden; tjänsten ser dock IP-adressen. Inga presentationsdata skickas.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Hämtningen misslyckades — ange kursen själv eller fortsätt utan kurs.',
+  'Zonder koers doorgaan': 'Fortsätt utan kurs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Ogiltig kurs — använd till exempel 0,92.',
+  'handmatig': 'manuellt',
+  'peildatum': 'referensdatum',
+  'verouderd': 'föråldrad',
+  'koers': 'kurs',
+  'koers ontbreekt': 'kurs saknas',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs saknas — EUR-motvärde har inte beräknats.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'inmatningsrad(er) ej omräknade — kursen saknades.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Inget användbart förslag hittades. Fyll i uppgifterna själv.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI-förslaget kunde inte hämtas. Kontrollera AI-inställningarna eller fyll i uppgifterna själv.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Använd ett giltigt datum som ÅÅÅÅ-MM-DD, eller lämna fältet tomt.',
+  'Documentgegevens': 'Dokumentdata',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Dessa detaljer beskriver detta dokument i underlaget. Källfilen ändras inte.',
+  'Korte omschrijving': 'Kort beskrivning',
+  'Waar gaat dit document over?': 'Vad handlar det här dokumentet om?',
+  'Documentdatum': 'Dokumentdatum',
+  'JJJJ-MM-DD': 'ÅÅÅÅ-MM-DD',
+  'Opsteller': 'Dokumentförfattare',
+  'Gegevens voorstellen met AI': 'Föreslå detaljer med AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI-förslag färdigt. Kontrollera och ändra det innan du sparar.',
+  'Dossier als PDF exporteren': 'Exportera underlag som PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF-filen innehåller ett omslag, en innehållsförteckning och alla dokument i underlagsordning.',
+  'Tussenpagina vóór elk document': 'Mellansida före varje dokument',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Med nummer, titel, beskrivning, datum, författare och SHA-256.',
+  'Volledige gegevens tonen': 'Visa alla detaljer',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Personuppgifter som hittas är dolda som standard. Välj endast fullständig information för den avsedda mottagaren.',
+  'PDF maken': 'Skapa PDF',
+  'Documentgegevens bewerken': 'Redigera dokumentinformation',
+  'Dossier-PDF opgeslagen': 'Dossier PDF sparad',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dokumentdokumentet kunde inte skapas. Kontrollera det ändrade eller saknade källdokumentet och försök igen.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dokumentdokumentet kunde inte skapas. Försök igen.',
+  'Referentie vastgelegd': 'Referensen har registrerats',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Osparade ändringar på fliken; SHA-256 kontrollerar versionen på disken.',
+  'Documenten controleren': 'Kontrollerar dokument',
+  'Dit nummer is al in gebruik.': 'Det här numret används redan.',
+  'Documenten openen': 'Öppna dokument',
+  'Eerdere SHA-256-waarden': 'Tidigare SHA-256-värden',
+  'Omschrijving wijzigen': 'Ändra beskrivning',
+  'Beginnummer wijzigen': 'Ändra startnummer',
+  'Vindplaats': 'Plats',
+  'Laatst gecontroleerd': 'Senast kontrollerad',
+  'Nummer wijzigen': 'Ändra nummer',
+  'Waar gaat dit dossier over?': 'Vad handlar denna akt om?',
+  'Nummer': 'Nummer',
+  'Gebruik een positief getal.': 'Använd ett positivt tal.',
+  'Automatisch nummer': 'Automatiskt nummer',
   'Aanvulling gevraagd': 'Komplettering begärd',
   'Aanvulling gevraagd.': 'Komplettering begärd.',
   'Aanvulling gevraagd: {opmerking}': 'Komplettering begärd: {opmerking}',
@@ -1783,6 +1852,114 @@ const _dutchSourceAddSv = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Resultaten kunde inte läsas in.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Du ser ditt resultat under Mina tentor så snart det har släppts.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Endast Markdown-dokument och -presentationer (.md) kan läggas till.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Öppna alla dokument',
+  'Alleen overzicht': 'Endast översikt',
+  'Alles controleren': 'Kontrollera alla',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'SHA-256-hashen stämmer redan.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Posteringen försvinner ur dossiern. Dokumentfilen förblir sparad.',
+  'Deze bijlage is niet beschikbaar.': 'Denna bilaga är inte tillgänglig.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Denna bilaga kan inte kontrolleras.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Denna bilaga kunde inte säkert öppnas.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Denna mapp för dossiern finns redan. Välj ett annat namn.',
+  'Dit dossier kon niet worden geopend.': 'Denna dossier kunde inte öppnas.',
+  'Document gewijzigd': 'Dokumentet har ändrats',
+  'Document niet leesbaar': 'Dokumentet är inte läsbart.',
+  'Document ontbreekt': 'Dokumentet saknas.',
+  'Document openen': 'Öppna dokument',
+  'Documenten toevoegen': 'Lägg till dokument',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Öppna dossier',
+  'Dossier openen…': 'Öppna dossieret…',
+  'Dossiertitel wijzigen': 'Ändra dossietitel.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'En bilaga kunde inte läggas till.',
+  'Een goed dossier begint hier': 'Ett bra dossier börjar här.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Använd handtaget eller pilarna för att ändra ordningen. Numren följer automatiskt.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Filen har ändrats eller kunde inte sparas. Kontrollera igen.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossietet kunde inte skapas.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Detta säkerställer att den nya filversionen blir referensen för detta dossier.',
+  'Huidige SHA-256': 'Nuvarande SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Innehållsförteckning och integritetskontroll',
+  'Meer opties': 'Fler alternativ',
+  'Naamloos dossier': 'Namnlöst dossier',
+  'Nieuw dossier': 'Nytt dossier',
+  'Nieuwe versie vastleggen': 'Registrera ny version',
+  'Nieuwe versie vastleggen?': 'Spara en ny version?',
+  'Omhoog verplaatsen': 'Flytta upp',
+  'Omlaag verplaatsen': 'Flytta ner',
+  'Onveilige bestandsverwijzing': 'Osäker filreferens',
+  'Overzicht en bijlagen': 'Översikt och bilagor',
+  'SHA-256 controleren': 'Kontrollera SHA-256-summan',
+  'SHA-256 klopt': 'SHA-256-summan stämmer',
+  'Sleep om te ordenen': 'Dra för att ordna',
+  'Terug naar dossier': 'Tillbaka till dossier',
+  'Titel wijzigen': 'Ändra titel',
+  'Uit dossier verwijderen': 'Ta bort från dossier',
+  'Uit dossier verwijderen?': 'Ta bort från mappen?',
+  'Vastgelegde SHA-256': 'Fastställd SHA-256-summa',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Lägg till dokument. Originalfilerna ligger kvar där de är. Här väljer du ordningen.',
+  'Wijziging opslaan is mislukt.': 'Sparningen misslyckades.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Vill du öppna bilagorna i flikar?',
+  'Als document openen': 'Öppna dokumentet',
+  'Dossier maken': 'Skapa dossier',
+  'Het overzicht kon niet als document worden geopend.':
+      'Översikten kunde inte öppnas som ett dokument.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Spara ändringarna i dokumentet i översikten eller stäng fliken.',
+  'Kostenindicatie': 'Kostnadsindikation',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto eller netto spelar ingen roll här — arbetsgivarkostnadspåslaget är separat.',
+  'Aanwezigen en tarieven': 'Närvarande och taxor',
+  'Bedrag': 'Belopp',
+  'Per uur': 'Per timme',
+  'Per maand': 'Per månad',
+  'Per jaar': 'Per år',
+  'Aanname voor de omrekening': 'Antagande för omräkningen',
+  'Betaalde uren per week': 'Betalda timmar per vecka',
+  'Weken per jaar': 'Veckor per år',
+  'Opslag werkgeverslasten (%)': 'Påslag för arbetsgivarkostnader (%)',
+  'Voeg een aanwezige toe': 'Lägg till en närvarande',
+  'Samen': 'Tillsammans',
+  'Start presentatie': 'Starta presentationen',
+  'per uur': 'per timme',
+  'Wordt omgerekend': 'Omräknas',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Fyll i en tim-, månads- eller årsavgift per närvarande. Det stannar på den här skärmen och sparas inte.',
+  'Kosten van aanwezigen': 'Kostnad för närvarande',
+  'Uit': 'Av',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — bara i slutsammanfattningen',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — löpande belopp och slutsammanfattning',
+  'Uurtarief': 'Timtaxa',
+  'Eén tarief voor de hele groep': 'En taxa för hela gruppen',
+  'Per aanwezige, bij de start invullen': 'Per närvarande, fylls i vid start',
+  'Groepsuurtarief': 'Gruppens timtaxa',
+  'Kosten = verstreken tijd × tarief.': 'Kostnad = förfluten tid × taxa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Fylls i vid start och sparas inte.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'En uppskattning av den tid deltagarna lägger — en indikation, inte en redovisad självkostnad.',
+  'Diaformaat': 'Bildformat',
+  'Scherm (16:9)': 'Skärm (16:9)',
+  'Papierformaat': 'Pappersformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Välj ett pappersformat för handouts och export på papper.',
   'Startmappen': 'Startmappar',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Där öppna och spara börjar. Lämna tomt för att använda det första biblioteket.',

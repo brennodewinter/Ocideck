@@ -3245,6 +3245,79 @@ paused on a particular slide to check or fix something, that is where you land. 
 long finding that presented across several pages returns to its single source
 slide, and a slide deleted mid-presentation leaves the selection where it was.
 
+### Cost mode: what the attendees' time costs (#2435–#2438)
+
+*Presentation properties → Cost of attendees* turns on an **indication of the time
+cost** of the people in the room, for this presentation. It is **off by default**,
+and it is an *estimate of time*, not an accounting cost price — the summary says so
+every time it shows a figure.
+
+- **Normal** shows nothing while you present. After the run, the summary gets the
+  total time, the total cost and a cost per slide, based on the time measured per
+  slide.
+- **Explicit** also shows a **running total bottom-right** on the slide, and on the
+  audience window when there is one. It rises with the elapsed time without jumps
+  when you change slides, and starts at zero on the first slide. It is a session
+  overlay, not slide content: it never ends up in an export.
+
+The summary appears after the run in both modes — also when *Show timing summary* is
+off — because that is where the total is. With the cost mode off, nothing about cost
+appears anywhere.
+
+**The hourly rate** is either **one rate for the whole group** (set under the same
+properties) or **per attendee, entered at the start**. In the second case a private
+screen appears before the first slide: per person an amount per hour, month or
+year and a currency; names are not asked. A monthly or yearly salary is converted
+with assumptions you can see and change — paid hours per week, weeks per year and
+an employer-cost markup — and the derived hourly rate is shown, so the result can
+be checked. Nothing is assumed silently. Empty, negative, unrealistic or misformatted
+amounts and zero hours are refused, and *Cancel* does not start the presentation
+rather than start it at a misleading zero.
+
+**Nothing personal is kept.** Individual amounts and salaries live for that session
+only: not in the `.md` file, an export, the clipboard or any log. The start screen is
+shown on the presenter's screen only — never on a second screen or the audience
+window. What does travel with the deck is the mode, the way of entering the rate, the
+currency and (for a group rate) that one rate — see [FILE_FORMAT.md](FILE_FORMAT.md).
+The clock starts after you confirm, before the first slide, and is not disturbed by
+slide changes or by going back. A pause does not stop it — the attendees are still
+sitting there — `R` resets it to zero, and stopping early ends it at that moment.
+
+**Other currencies.** Choose another currency than the euro and every amount is also
+shown with its **euro equivalent** (`$ 10,00 ≈ € 9,20`), computed with **one exchange
+rate fixed for the whole session**, so the running total and the closing summary agree.
+Before the run you get a small screen to set that rate — and this is the only place the
+cost mode reaches the network, and only if you ask for it:
+
+- **Fetch** asks Frankfurter (the European Central Bank's reference rates) for the rate
+  of each currency involved: one request per currency, containing nothing but the
+  currency code. The service does see your IP address. No presentation data is sent.
+- **Enter it yourself** and the rate is labelled *manual* wherever it is shown.
+- **Continue without a rate** and the amounts show *rate missing* instead of an
+  invented euro figure. Input lines in a currency without a rate are left out of the
+  total, and the summary says how many.
+
+The rate, its source and its reference date are shown with the result; a rate older
+than a week is marked *outdated*. Amounts in different currencies are only added up
+after the conversion to one unit; the result is rounded half up to the smallest unit
+of the currency (a currency without decimals, such as the yen, shows whole units).
+
+### Slide format: landscape or portrait (#2433)
+
+Under *Presentation properties → Slide format* you choose between the **screen
+format (16:9)** and a **paper size** (an ISO A-, B- or C-sheet, **portrait or
+landscape**). The choice applies to the whole presentation and survives saving and
+reopening; presentations without a choice stay 16:9, as before.
+
+The editor, the thumbnails, presentation mode, the audience window and the exports
+(PDF, PowerPoint, OpenDocument, Beamer and HTML) all use the same ratio, so content
+is not cut off. The choice travels in the readable file in the vocabulary Pandoc
+already knows (`papersize:`, or `geometry:` with only the sheet for landscape), so
+another tool sees a sensible page size instead of an OciDeck-only key; the details
+are in [FILE_FORMAT.md](FILE_FORMAT.md). The theme file OciDeck writes next to the deck
+carries the matching `@size` rule, so Marp itself shows the same ratio. The paper
+setting of a *document* is a separate setting and is not affected.
+
 ### Two screens (beamer + laptop)
 
 When a second display is connected on **macOS, Windows, or Linux**, OciDeck
@@ -5127,6 +5200,59 @@ but carries on, so the remaining slides are still produced.
   is not available through the REST export.
 
 ## Documents
+
+### Document dossiers
+
+Use the folder button beside the tabs, or **File → New dossier**, to create a
+document dossier. Choose a parent folder and a title. OciDeck creates a folder
+with `dossier.json` and a readable `overzicht.md`. **Add documents** selects
+existing local Markdown documents or presentations (`.md`). The dossier stores
+references to those source files; it does not copy or change them. Its cover
+and contents page show the numbered order. Drag a row or use its move actions
+to change that order; removing a row removes the reference only.
+
+Each document row also has **Document details**. Set its dossier title, a short
+description, document date (`YYYY-MM-DD`), and author/preparer there. Leave a
+date or author blank when the source does not say. These details belong to the
+dossier listing; they do not edit the source. When AI is enabled and configured,
+**Suggest details with AI** can fill a draft from that Markdown source. Review
+and change the suggested values before you save. A suggestion is requested only
+when you press the button; large sources that cannot be read in full are not
+silently summarised.
+
+Use **Open dossier** to reopen `dossier.json`. You can start with the overview
+alone or open the referenced documents in tabs as well. Selecting a row opens
+that document or presentation through OciDeck's normal safety checks. The
+visible **Back to dossier** button takes you from its tab to the overview.
+**Open as document** opens `overzicht.md` in the normal document tab, where the
+usual document export is available.
+
+Each row records the SHA-256 of the source file's bytes when it was added.
+**Check SHA-256** compares the current saved source file with that value;
+**Check all** checks every row. A changed, missing or unreadable file is shown
+separately. Unsaved edits in an open tab are not part of this disk check. The
+recorded value changes only when you explicitly accept a new reference after
+seeing the previous and current hashes. SHA-256 here detects a difference from
+the value stored in the dossier; it does not prove who created or approved a file.
+You can check a file independently with `shasum -a 256 <filename>`.
+
+The Markdown overview remains readable without OciDeck; `dossier.json` keeps
+the editable order, source paths and hashes. Keep both dossier files together.
+The source documents must still be available at their recorded paths when you
+open or verify the dossier. This version accepts local `.md` documents and
+presentations as references.
+
+**Export dossier as PDF** makes one document-style PDF: a cover, numbered
+contents, and the referenced documents in dossier order. Choose whether to put
+an information page before each document. That page shows its number, title,
+available description, date and author, plus its stored SHA-256. A Markdown
+presentation is typeset as document content here, not exported as slides. The
+default privacy profile redacts detected personal data; choose the full profile
+explicitly if appropriate for the recipient. Classification and privacy export
+checks still apply. Before writing the PDF, OciDeck checks each source against
+the dossier's saved SHA-256. A missing or changed source stops the export; the
+PDF does not update the reference hash. PDF and Office files cannot be added as
+sources in this version.
 
 Alongside presentations, OciDeck edits **documents**: a flowing, plain Markdown
 file rather than a deck of slides. A document is an ordinary `.md` with no slide

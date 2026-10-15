@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import '../models/slide.dart';
+import '../models/slide_format.dart';
 import '../utils/lru_cache.dart';
 import 'markdown_body_blocks.dart' as md_body;
 import 'text_measurement.dart';
@@ -403,9 +404,10 @@ BulletPageSpec bulletPageSpec(
   Slide slide, {
   double extraVReserve = 0,
   bool includeChecklistProgress = true,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final w = kReferenceSlideWidth;
-  final slideHeight = w * 9 / 16;
+  final slideHeight = w / slideAspect;
   if (slide.type == SlideType.bulletsImage) {
     final leftPad = w * 0.038;
     final verticalPad = w * 0.042;
@@ -457,8 +459,13 @@ bool bulletsPageFitsAtScale({
   required double scale,
   required String font,
   double extraVReserve = 0,
+  double slideAspect = kScreenSlideAspect,
 }) {
-  final spec = bulletPageSpec(slide, extraVReserve: extraVReserve);
+  final spec = bulletPageSpec(
+    slide,
+    extraVReserve: extraVReserve,
+    slideAspect: slideAspect,
+  );
   return bulletsBlockHeight(
         scale: scale,
         availW: spec.availW,
@@ -485,11 +492,13 @@ double bulletsSlideFitScale({
   required String font,
   bool includeChecklistProgress = true,
   double extraVReserve = 0,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final spec = bulletPageSpec(
     slide,
     extraVReserve: extraVReserve,
     includeChecklistProgress: includeChecklistProgress,
+    slideAspect: slideAspect,
   );
   final bullets = slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();
   return bulletsFitScale(
@@ -667,6 +676,7 @@ double twoBulletsSlideFitScale({
   required Slide slide,
   required String font,
   double extraVReserve = 0,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final width = kReferenceSlideWidth;
   return twoBulletsLayout(
@@ -674,7 +684,7 @@ double twoBulletsSlideFitScale({
     font: font,
     width: width,
     contentW: width - width * 0.065 * 2,
-    layoutH: width * 9 / 16 - width * 0.045 * 2 - extraVReserve,
+    layoutH: width / slideAspect - width * 0.045 * 2 - extraVReserve,
   ).columnScale;
 }
 
@@ -888,8 +898,13 @@ double bulletsImageSlideFitScale({
   required Slide slide,
   required String font,
   double extraVReserve = 0,
+  double slideAspect = kScreenSlideAspect,
 }) {
-  final spec = bulletPageSpec(slide, extraVReserve: extraVReserve);
+  final spec = bulletPageSpec(
+    slide,
+    extraVReserve: extraVReserve,
+    slideAspect: slideAspect,
+  );
   final bullets = slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();
   return bulletsFitScale(
     availW: spec.availW,

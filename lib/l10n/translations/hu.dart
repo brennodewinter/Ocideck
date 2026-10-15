@@ -1756,6 +1756,76 @@ const _dutchSourceAddHu = <String, String>{
   'Wachtwoord herhalen': 'Jelszó ismétlése',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Helyezze el eseményeit a saját naptárában — módosítások és lemondások esetén frissül.',
+  'Omrekening naar euro': 'Átváltás euróra',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Az EUR-megjelenítéshez az OciDeck munkamenetenként egy árfolyamot használ. Az árfolyamot meg lehet adni kézzel, vagy le lehet kérni az EKB referencia-árfolyamát.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Árfolyam lekérése a Frankfurter szolgáltatástól (EKB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Pénznemenként egy kérés az api.frankfurter.dev felé, csak a pénznemkóddal; a szolgáltatás látja az IP-címet. Prezentációs adat nem kerül elküldésre.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'A lekérés sikertelen — az árfolyamot meg lehet adni kézzel, vagy árfolyam nélkül folytatható.',
+  'Zonder koers doorgaan': 'Folytatás árfolyam nélkül',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Érvénytelen árfolyam — például 0,92.',
+  'handmatig': 'kézzel',
+  'peildatum': 'referenciadátum',
+  'verouderd': 'elavult',
+  'koers': 'árfolyam',
+  'koers ontbreekt': 'hiányzik az árfolyam',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Hiányzik az árfolyam — az EUR-egyenérték nincs kiszámítva.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'bemeneti sor(ok) átváltatlan(ok) — hiányzott az árfolyam.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nem található hasznos javaslat. Adja meg a részleteket saját maga.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Az AI-javaslat nem tölthető le. Ellenőrizze az AI-beállításokat, vagy adja meg az adatokat saját maga.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Használjon érvényes dátumot, például ÉÉÉÉ-HH-NN, vagy hagyja üresen a mezőt.',
+  'Documentgegevens': 'Dokumentum adatok',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ezek a részletek leírják ezt a dokumentumot a dossziéban. A forrásfájl nem módosul.',
+  'Korte omschrijving': 'Rövid leírás',
+  'Waar gaat dit document over?': 'Miről szól ez a dokumentum?',
+  'Documentdatum': 'Dokumentum dátuma',
+  'JJJJ-MM-DD': 'ÉÉÉÉ-HH-NN',
+  'Opsteller': 'A dokumentum szerzője',
+  'Gegevens voorstellen met AI': 'Javasoljon részleteket az AI segítségével',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Az AI javaslat elkészült. Mentés előtt ellenőrizze és módosítsa.',
+  'Dossier als PDF exporteren': 'A dokumentáció exportálása PDF formátumban',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'A PDF tartalmazza a borítót, a tartalomjegyzéket és az összes dokumentumot dosszié sorrendben.',
+  'Tussenpagina vóór elk document': 'Köztes oldal minden dokumentum előtt',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Számmal, címmel, leírással, dátummal, szerzővel és SHA-256-tal.',
+  'Volledige gegevens tonen': 'Teljes részletek megjelenítése',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'A talált személyes adatok alapértelmezés szerint rejtettek. A teljes részletet csak a címzett számára válassza ki.',
+  'PDF maken': 'PDF létrehozása',
+  'Documentgegevens bewerken': 'Szerkessze a dokumentum adatait',
+  'Dossier-PDF opgeslagen': 'A dosszié PDF mentve',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'A dokumentáció PDF létrehozása nem sikerült. Ellenőrizze a megváltozott vagy hiányzó forrásdokumentumot, és próbálja újra.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'A dokumentáció PDF létrehozása nem sikerült. Próbáld újra.',
+  'Referentie vastgelegd': 'A hivatkozás rögzítve van.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Mentetlen módosítások a lapon; a SHA-256 a lemezen lévő verziót ellenőrzi.',
+  'Documenten controleren': 'Dokumentumok ellenőrzése',
+  'Dit nummer is al in gebruik.': 'Ez a szám már használatban van.',
+  'Documenten openen': 'Dokumentumok megnyitása',
+  'Eerdere SHA-256-waarden': 'Korábbi SHA-256-értékek',
+  'Omschrijving wijzigen': 'Leírás módosítása',
+  'Beginnummer wijzigen': 'Kezdőszám módosítása',
+  'Vindplaats': 'Hely',
+  'Laatst gecontroleerd': 'Utoljára ellenőrizve',
+  'Nummer wijzigen': 'Szám módosítása',
+  'Waar gaat dit dossier over?': 'Miről szól ez a dosszié?',
+  'Nummer': 'Szám',
+  'Gebruik een positief getal.': 'Pozitív számot adjon meg.',
+  'Automatisch nummer': 'Automatikus szám',
   'Aanvulling gevraagd': 'Kiegészítés kérve',
   'Aanvulling gevraagd.': 'Kiegészítést kértek.',
   'Aanvulling gevraagd: {opmerking}': 'Kiegészítés kérve: {opmerking}',
@@ -1788,6 +1858,114 @@ const _dutchSourceAddHu = <String, String>{
       'Az eredményeket nem sikerült betölteni.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Az eredményét a(z) A vizsgáim alatt látja, amint közzétették.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Csak a Markdown-dokumentumok és prezentációk (.md) lehetnek hozzáadva.',
+  'OciDeck dossier': 'OciDeck Dosszié',
+  'Alle documenten openen': 'Az összes dokumentum megnyitása',
+  'Alleen overzicht': 'Csak a nézet megjelenítve.',
+  'Alles controleren': 'Összes ellenőrzése',
+  'DOSSIER': 'DOSSZIÉ',
+  'De SHA-256 klopt al.': 'A SHA-256 érték már megegyezik.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Ez a bejegyzés eltűnik a dossziéból. A dokumentum fájl megmarad.',
+  'Deze bijlage is niet beschikbaar.': 'Ez a melléklet nem áll rendelkezésre.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Ez a melléklet nem ellenőrizhető.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Ez a melléklet nem zárhatta volna biztonságosan.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Ez a mappakönyv már létezik. Válasszon egy másik nevet.',
+  'Dit dossier kon niet worden geopend.': 'Ez a dosszió nem nyílik meg.',
+  'Document gewijzigd': 'A dokumentum módosítva lett.',
+  'Document niet leesbaar': 'A dokument nem olvasható.',
+  'Document ontbreekt': 'A dokument hiányozik.',
+  'Document openen': 'Dokumentum megnyitása',
+  'Documenten toevoegen': 'Dokumentumok hozzáadása',
+  'Dossier': 'Dosszié',
+  'Dossier openen': 'Dosszié megnyitása',
+  'Dossier openen…': 'Dossziér megnyitása…',
+  'Dossiertitel wijzigen': 'Dossziértitel megváltoztatása.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Egy mellékletet nem sikerült hozzáadni.',
+  'Een goed dossier begint hier': 'Egy jó dossziér innen kezdve.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Használja a fogantyút vagy az nyílokat a sorrend megváltoztatásához. A számok automatikusan követik.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'A fájl megváltozott vagy nem rögzítve lett. Ellenőrizze újra.',
+  'Het dossier kon niet worden aangemaakt.':
+      'A dosszernem létrehozása nem sikerült.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Ez a beállítás a legújabb fájlverziót teszi referencia dosszerré.',
+  'Huidige SHA-256': 'Jelenlegi SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Töltetűj és integritásellenőrzés',
+  'Meer opties': 'További lehetőségek',
+  'Naamloos dossier': 'Névtelen dosszerről',
+  'Nieuw dossier': 'Új dosszié',
+  'Nieuwe versie vastleggen': 'Új verzió rögzítése',
+  'Nieuwe versie vastleggen?': 'Új verziót rögzíteni szeretne?',
+  'Omhoog verplaatsen': 'Felterelés',
+  'Omlaag verplaatsen': 'Leállítás',
+  'Onveilige bestandsverwijzing': 'Kockázatos fájlrefferencia',
+  'Overzicht en bijlagen': 'Áttekintés és mellékletek',
+  'SHA-256 controleren': 'SHA-256 ellenőrzés',
+  'SHA-256 klopt': 'A SHA-256 megelőző ellenőrzése',
+  'Sleep om te ordenen': 'Húzgas át a rendezéshez',
+  'Terug naar dossier': 'Vissza a dossziéhoz',
+  'Titel wijzigen': 'Cím módosítása',
+  'Uit dossier verwijderen': 'Eltávolítás a dossziéból',
+  'Uit dossier verwijderen?': 'El szeretnéd törölni a dossziéból?',
+  'Vastgelegde SHA-256': 'Rögzített SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Adj hozzá dokumentumokat. Az eredeti fájlok ott maradnak, ahol vannak. Itt állíthatod be a megjelenítési sorrendet.',
+  'Wijziging opslaan is mislukt.': 'A módosítás nem sikerült.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Szeretnéd a mellékleteket is táblázatokba nyitni?',
+  'Als document openen': 'Dokumentot nyitás',
+  'Dossier maken': 'Dosszié létrehozása',
+  'Het overzicht kon niet als document worden geopend.':
+      'Az áttekintés nem nyithatótott meg dokumentként.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Mentsük el először az áttekintés dokumentumában a változtatásokat vagy zárd be azt a lapot.',
+  'Kostenindicatie': 'Költségjelzés',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruttó vagy nettó itt nem számít — a munkáltatói költségráfordítás külön áll.',
+  'Aanwezigen en tarieven': 'Résztvevők és díjak',
+  'Bedrag': 'Összeg',
+  'Per uur': 'Óránként',
+  'Per maand': 'Havonta',
+  'Per jaar': 'Évente',
+  'Aanname voor de omrekening': 'Az átszámítás feltétele',
+  'Betaalde uren per week': 'Fizetett órák hetente',
+  'Weken per jaar': 'Hét évente',
+  'Opslag werkgeverslasten (%)': 'Munkáltatói költségráfordítás (%)',
+  'Voeg een aanwezige toe': 'Résztvevő hozzáadása',
+  'Samen': 'Összesen',
+  'Start presentatie': 'Prezentáció indítása',
+  'per uur': 'óránként',
+  'Wordt omgerekend': 'Átváltásra kerül',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Adj meg résztvevőnként óra-, havi vagy éves díjat. Ez a képernyőn marad és sehova nem kerül mentésre.',
+  'Kosten van aanwezigen': 'Résztvevők költsége',
+  'Uit': 'Ki',
+  'Gewoon — alleen in het eindoverzicht': 'Normál — csak a záró összegzésben',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — folyamatos összeg és záró összegzés',
+  'Uurtarief': 'Óradíj',
+  'Eén tarief voor de hele groep': 'Egy díj az egész csoportra',
+  'Per aanwezige, bij de start invullen':
+      'Résztvevőnként, a kezdéskor töltendő',
+  'Groepsuurtarief': 'Csoportos óradíj',
+  'Kosten = verstreken tijd × tarief.': 'Költség = eltelt idő × díj.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'A kezdéskor töltendő, nem kerül mentésre.',
+  'Valuta': 'Pénznem',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'A résztvevők által eltöltött idő becslése — irányadó, nem könyvelési önköltség.',
+  'Diaformaat': 'Diaformátum',
+  'Scherm (16:9)': 'Képernyő (16:9)',
+  'Papierformaat': 'Papírméret',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Válasszon papírméretet a kiosztandó anyagokhoz és a papíralapú exporthoz.',
   'Startmappen': 'Kezdőmappák',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hol a megnyitás és a mentés kezdődik. Üresen az első könyvtárat használja.',

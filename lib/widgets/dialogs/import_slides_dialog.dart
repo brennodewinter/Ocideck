@@ -4,6 +4,8 @@ import 'package:path/path.dart' as p;
 import '../../models/marp_style.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
+import '../../models/page_size.dart';
 import '../../services/file_service.dart';
 import '../../services/slide_dedup_service.dart';
 import '../../services/slide_image_refs.dart';
@@ -233,6 +235,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
       projectPath: o.pres.deck.projectPath,
       themeProfile: o.pres.deck.themeProfile,
       deckMarpStyle: o.pres.deck.marpStyle,
+      slideAspect: slideAspectRatio(o.pres.deck.slideSize),
     );
 
     SlideDiffDialog.show(
@@ -573,6 +576,7 @@ class _PresentationSection extends StatelessWidget {
                   deck.projectPath,
                   deck.themeProfile,
                   deck.marpStyle,
+                  deck.slideSize,
                   presentation.modified,
                 ),
             ],
@@ -587,6 +591,7 @@ class _PresentationSection extends StatelessWidget {
     String? projectPath,
     ThemeProfile theme,
     MarpStyle deckMarpStyle,
+    PageSizeSpec? slideSize,
     DateTime? modified,
   ) {
     final group = groupByPrimaryId[slide.id];
@@ -596,6 +601,7 @@ class _PresentationSection extends StatelessWidget {
       projectPath: projectPath,
       themeProfile: theme,
       deckMarpStyle: deckMarpStyle,
+      slideAspect: slideAspectRatio(slideSize),
       modified: modified,
       selected: selectedIds.contains(slide.id),
       occurrences: group?.occurrences ?? const [],
@@ -614,6 +620,7 @@ class _SlideCard extends StatelessWidget {
   final String? projectPath;
   final ThemeProfile themeProfile;
   final MarpStyle deckMarpStyle;
+  final double slideAspect;
   final DateTime? modified;
   final bool selected;
 
@@ -628,6 +635,7 @@ class _SlideCard extends StatelessWidget {
     required this.projectPath,
     required this.themeProfile,
     required this.deckMarpStyle,
+    this.slideAspect = kScreenSlideAspect,
     required this.modified,
     required this.selected,
     required this.occurrences,
@@ -659,8 +667,9 @@ class _SlideCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: AspectRatio(
-                      aspectRatio: 16 / 9,
+                      aspectRatio: slideAspect,
                       child: SlidePreviewWidget(
+                        slideAspect: slideAspect,
                         slide: slide,
                         projectPath: projectPath,
                         themeProfile: themeProfile,

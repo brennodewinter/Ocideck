@@ -1,3 +1,4 @@
+import '../models/slide_format.dart';
 import 'slide_layout_metrics.dart';
 
 /// One renderable chunk of a rich-text markdown body.
@@ -90,6 +91,7 @@ MarkdownImageSpec? parseMarkdownImageBlock(String markdown) {
   required double contentW,
   required double refW,
   double scale = 1.0,
+  double slideAspect = kScreenSlideAspect,
 }) {
   final unit = refW / kMarkdownImageDirectiveSlideWidth;
   final width = spec.width == null
@@ -98,7 +100,7 @@ MarkdownImageSpec? parseMarkdownImageBlock(String markdown) {
   final height = (spec.height == null
       ? refW * kMarkdownImageDefaultHeightFraction * scale
       : spec.height! * unit * scale);
-  return (width: width, height: height.clamp(1.0, refW * 9 / 16));
+  return (width: width, height: height.clamp(1.0, refW / slideAspect));
 }
 
 /// Een HTML-commentaarregel (`<!-- … -->`): volgens de markdown-spec levert die

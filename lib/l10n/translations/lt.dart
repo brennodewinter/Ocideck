@@ -1762,6 +1762,77 @@ const _dutchSourceAddLt = <String, String>{
   'Wachtwoord herhalen': 'Pakartokite slaptažodį',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Įdėkite savo susitikimus į savo kalendorių — atnaujinama keičiant ir atšaukiant.',
+  'Omrekening naar euro': 'Konvertavimas į eurus',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR rodymui „OciDeck“ naudoja vieną kursą per sesiją. Kursą įveskite patys arba gaukite ECB orientacinį kursą.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Gauti kursą iš „Frankfurter“ (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Viena užklausa kiekvienai valiutai į api.frankfurter.dev tik su valiutos kodu; paslauga mato IP adresą. Prezentacijos duomenys nesiunčiami.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Gauti nepavyko — kursą įveskite patys arba tęskite be kurso.',
+  'Zonder koers doorgaan': 'Tęsti be kurso',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Netinkamas kursas — naudokite, pvz., 0,92.',
+  'handmatig': 'rankiniu būdu',
+  'peildatum': 'kurso data',
+  'verouderd': 'pasenęs',
+  'koers': 'kursas',
+  'koers ontbreekt': 'trūksta kurso',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Trūksta kurso — ekvivalentas EUR neapskaičiuotas.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'įvesties eilutė(s) nekonvertuota(os) — trūko kurso.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Naudingo pasiūlymo nerasta. Užpildykite duomenis patys.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI pasiūlymo nepavyko gauti. Patikrinkite AI nustatymus arba patys užpildykite išsamią informaciją.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Naudokite galiojančią datą, pvz., YYYY-MM-DD, arba palikite lauką tuščią.',
+  'Documentgegevens': 'Dokumento duomenys',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ši informacija apibūdina šį dokumentą dokumentacijoje. Šaltinio failas nepakeičiamas.',
+  'Korte omschrijving': 'Trumpas aprašymas',
+  'Waar gaat dit document over?': 'Apie ką šis dokumentas?',
+  'Documentdatum': 'Dokumento data',
+  'JJJJ-MM-DD': 'MMMM-MM-DD',
+  'Opsteller': 'Dokumento autorius',
+  'Gegevens voorstellen met AI':
+      'Pasiūlykite išsamios informacijos naudodami AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI pasiūlymas baigtas. Prieš išsaugodami patikrinkite ir pakeiskite.',
+  'Dossier als PDF exporteren': 'Eksportuoti dokumentaciją PDF formatu',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF rinkmenoje yra viršelis, turinys ir visi dokumentai dokumentacijos tvarka.',
+  'Tussenpagina vóór elk document':
+      'Tarpinis puslapis prieš kiekvieną dokumentą',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Su numeriu, pavadinimu, aprašymu, data, autoriumi ir SHA-256.',
+  'Volledige gegevens tonen': 'Rodyti visą informaciją',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Pagal numatytuosius nustatymus rasti asmeniniai duomenys yra paslėpti. Išsamią informaciją pasirinkite tik numatytam gavėjui.',
+  'PDF maken': 'Sukurti PDF',
+  'Documentgegevens bewerken': 'Redaguoti dokumento informaciją',
+  'Dossier-PDF opgeslagen': 'Dokumentacija išsaugota PDF formatu',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Nepavyko sukurti dokumentacijos PDF. Patikrinkite pakeistą arba trūkstamą šaltinio dokumentą ir bandykite dar kartą.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Nepavyko sukurti dokumentacijos PDF. Bandykite dar kartą.',
+  'Referentie vastgelegd': 'Informacija fiksuota',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Kortelėje yra neįrašytų pakeitimų; SHA-256 tikrina diske esančią versiją.',
+  'Documenten controleren': 'Dokumentų tikrinimas',
+  'Dit nummer is al in gebruik.': 'Šis numeris jau naudojamas.',
+  'Documenten openen': 'Atidaryti dokumentus',
+  'Eerdere SHA-256-waarden': 'Ankstesnės SHA-256 reikšmės',
+  'Omschrijving wijzigen': 'Keisti aprašymą',
+  'Beginnummer wijzigen': 'Keisti pradinį numerį',
+  'Vindplaats': 'Vieta',
+  'Laatst gecontroleerd': 'Paskutinį kartą tikrinta',
+  'Nummer wijzigen': 'Keisti numerį',
+  'Waar gaat dit dossier over?': 'Apie ką šis dosjė?',
+  'Nummer': 'Numeris',
+  'Gebruik een positief getal.': 'Naudokite teigiamą skaičių.',
+  'Automatisch nummer': 'Automatinis numeris',
   'Aanvulling gevraagd': 'Prašoma papildyti',
   'Aanvulling gevraagd.': 'Prašoma papildyti.',
   'Aanvulling gevraagd: {opmerking}': 'Prašoma papildyti: {opmerking}',
@@ -1793,6 +1864,113 @@ const _dutchSourceAddLt = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Nepavyko įkelti rezultatų.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Savo rezultatą matysite skiltyje Mano egzaminai, kai tik jis bus paskelbtas.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Galima pridėti tik Markdown dokumentus ir pristatymus (.md).',
+  'OciDeck dossier': 'OciDeck Byla',
+  'Alle documenten openen': 'Atidaryti visus dokumentus',
+  'Alleen overzicht': 'Tiesiog peržiūrėti perteklių.',
+  'Alles controleren': 'Patikrinti viską',
+  'DOSSIER': 'BYLA',
+  'De SHA-256 klopt al.': 'SHA-256 sumaspa, viskas gerai.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Ši įrašas išnyksta iš dossirolės. Dokumento failas lieka išsaugotas.',
+  'Deze bijlage is niet beschikbaar.': 'Ši priedas neturime.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Šį pridedinį negalima patikrinti.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Šį pridedinį negalima saugiai atidaryti.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Ši dossirolės folder jau egzistuoja. Pasirinkite kitą pavadinimą.',
+  'Dit dossier kon niet worden geopend.': 'Ši dossirolė negali būti atidaryta.',
+  'Document gewijzigd': 'Dokumentas buvo pakeistas.',
+  'Document niet leesbaar': 'Dokumentas negalima skaityti',
+  'Document ontbreekt': 'Dokumentas trūksta',
+  'Document openen': 'Atidaryti dokumentą',
+  'Documenten toevoegen': 'Pridėti dokumentus',
+  'Dossier': 'Byla',
+  'Dossier openen': 'Atidaryti bylą',
+  'Dossier openen…': 'Dossierį atidaryti…',
+  'Dossiertitel wijzigen': 'Dossierio pavadinimą pakeisti',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Viena prielausa negali buvo pridėta.',
+  'Een goed dossier begint hier': 'Geras dossieris prasideda čia',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Naudokite rankenėlę arba pele, kad būtų pakeista tvarka. Skaitmenų numeriai sekasi automatiškai.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Failas pasikeitė arba negali buvo fiksuotas. Patikrinkite dar kartą.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossieris negalima buvo sukurti.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Šiuo būdu nauja failo versija tapo šio susiejimo nuoroda.',
+  'Huidige SHA-256': 'Šiuo metu SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Turinys ir integriteto patikra',
+  'Meer opties': 'Daugiau pasirinkimų',
+  'Naamloos dossier': 'Nenorimas susiejimas',
+  'Nieuw dossier': 'Nauja byla',
+  'Nieuwe versie vastleggen': 'Užfiksuoti naują versiją',
+  'Nieuwe versie vastleggen?': 'Ar norite užfiksuoti naują versiją?',
+  'Omhoog verplaatsen': 'Perėti aukštyn',
+  'Omlaag verplaatsen': 'Perėti žemyn',
+  'Onveilige bestandsverwijzing': 'Neįrašyta failo nuoroda',
+  'Overzicht en bijlagen': 'Perspetybė ir priedas',
+  'SHA-256 controleren': 'Patikrinti SHA-256 sumą',
+  'SHA-256 klopt': 'SHA-256 suma atitinka',
+  'Sleep om te ordenen': 'Jūs galite perbraukti, kad sudarytumėte tvarką',
+  'Terug naar dossier': 'Grįžti į bylą',
+  'Titel wijzigen': 'Pavadinimą pakeisti',
+  'Uit dossier verwijderen': 'Pašalinti iš bylos',
+  'Uit dossier verwijderen?': 'Ar norite pašalinti iš dokumento?',
+  'Vastgelegde SHA-256': 'Nufiksuota SHA-256 suma',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Pridėkite dokumentų. Originalūs failai lieka savo vietoje. Čia nustatykite jų eilės tvarką.',
+  'Wijziging opslaan is mislukt.': 'Nepavyko išsaugoti pokyčių.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Ar norite atidaryti priklausiusius failus lentelėse?',
+  'Als document openen': 'Dokumentą atidaryti',
+  'Dossier maken': 'Sukurti bylą',
+  'Het overzicht kon niet als document worden geopend.':
+      'Perteklinis vaizdavimas negali būti atidarytas kaip dokumentas.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Pirmiausia išsaugokite pokyčius vaizdų dokumente arba uždarykite tą kortelę.',
+  'Kostenindicatie': 'Kainos indikacija',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ar neto čia nesvarbu — darbdavio išlaidų antkainis yra atskiras.',
+  'Aanwezigen en tarieven': 'Dalyviai ir įkainiai',
+  'Bedrag': 'Suma',
+  'Per uur': 'Per valandą',
+  'Per maand': 'Per mėnesį',
+  'Per jaar': 'Per metus',
+  'Aanname voor de omrekening': 'Perskaičiavimo prielaida',
+  'Betaalde uren per week': 'Apmokamos valandos per savaitę',
+  'Weken per jaar': 'Savaičių per metus',
+  'Opslag werkgeverslasten (%)': 'Darbdavio išlaidų antkainis (%)',
+  'Voeg een aanwezige toe': 'Pridėti dalyvį',
+  'Samen': 'Iš viso',
+  'Start presentatie': 'Pradėti pateiktį',
+  'per uur': 'per valandą',
+  'Wordt omgerekend': 'Bus perskaičiuota',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Įvesk kiekvienam dalyviui valandinį, mėnesinį ar metinį įkainį. Tai lieka šiame ekrane ir niekur nesaugoma.',
+  'Kosten van aanwezigen': 'Dalyvių kaina',
+  'Uit': 'Išjungta',
+  'Gewoon — alleen in het eindoverzicht':
+      'Įprasta — tik baigiamojoje apžvalgoje',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Aišku — einamoji suma ir baigiamoji apžvalga',
+  'Uurtarief': 'Valandinis įkainis',
+  'Eén tarief voor de hele groep': 'Vienas įkainis visai grupei',
+  'Per aanwezige, bij de start invullen': 'Už dalyvį, suvedama pradžioje',
+  'Groepsuurtarief': 'Grupės valandinis įkainis',
+  'Kosten = verstreken tijd × tarief.': 'Kaina = praėjęs laikas × įkainis.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Suvedama pradžioje ir neišsaugoma.',
+  'Valuta': 'Valiuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Dalyvių sugaišto laiko įvertis — orientyras, o ne buhalterinė savikaina.',
+  'Diaformaat': 'Skaidrės formatas',
+  'Scherm (16:9)': 'Ekranas (16:9)',
+  'Papierformaat': 'Popieriaus formatas',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Pasirinkite popieriaus formatą dalijamajai medžiagai ir eksportui popieriuje.',
   'Startmappen': 'Pradžios aplankai',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Kur prasideda atidarymas ir įrašymas. Tuščia naudoja pirmąją biblioteką.',

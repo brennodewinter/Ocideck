@@ -799,6 +799,75 @@ const _dutchSourceAddFy = {
   'Wachtwoord herhalen': 'Wachtwurd werhelje',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Set jo byienkomsten yn jo eigen aginda — bywurke by wizigingen en ôfsizzingen.',
+  'Omrekening naar euro': 'Omrekkening nei euro\'s',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Foar de EUR-werjefte brûkt OciDeck ien koers per sesje. Folje de koers sels yn of hel de ECB-referinsjekoers op.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Koers ophelje by Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ien fersyk per faluta nei api.frankfurter.dev mei allinnich de falutakoade; de tsjinst sjocht wol it IP-adres. Der wurde gjin presintaasjegegevens ferstjoerd.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Ophelje mislearre — folje de koers sels yn of gean sûnder koers fierder.',
+  'Zonder koers doorgaan': 'Sûnder koers fierdergean',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Gjin jildige koers — brûk bygelyks 0,92.',
+  'handmatig': 'mei de hân',
+  'peildatum': 'peildatum',
+  'verouderd': 'ferâldere',
+  'koers': 'koers',
+  'koers ontbreekt': 'koers ûntbrekt',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Koers ûntbrekt — EUR-lykweardich net berekkene.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'ynfierrigel(s) net omrekkene — koers ûntbriek.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Gjin nuttich foarstel is fûn. Folje de details sels yn.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'It AI-foarstel koe net ophelle wurde. Kontrolearje de AI-ynstellingen of folje de details sels yn.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Brûk in jildige datum lykas JJJJ-MM-DD, of lit it fjild leech.',
+  'Documentgegevens': 'Dokumint gegevens',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Dizze details beskriuwe dit dokumint yn it dossier. De boarne triem is net feroare.',
+  'Korte omschrijving': 'Koarte beskriuwing',
+  'Waar gaat dit document over?': 'Wêr giet dit dokumint oer?',
+  'Documentdatum': 'Dokumint datum',
+  'JJJJ-MM-DD': 'JJJJ-MM-DD',
+  'Opsteller': 'Dokumint skriuwer',
+  'Gegevens voorstellen met AI': 'Foarstelle details mei AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI foarstel foltôge. Kontrolearje en feroarje it foardat jo bewarje.',
+  'Dossier als PDF exporteren': 'Eksportearje dossier as PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'De PDF befettet in omslach, in ynhâldsopjefte, en alle dokuminten yn dossierfolchoarder.',
+  'Tussenpagina vóór elk document': 'Tussenside foar elk dokumint',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Mei nûmer, titel, beskriuwing, datum, skriuwer en SHA-256.',
+  'Volledige gegevens tonen': 'Lit folsleine details sjen',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Persoanlike gegevens fûn binne standert ferburgen. Kies folsleine details allinich foar de bedoelde ûntfanger.',
+  'PDF maken': 'Meitsje PDF',
+  'Documentgegevens bewerken': 'Bewurkje dokumint ynformaasje',
+  'Dossier-PDF opgeslagen': 'Dossier PDF bewarre',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier PDF koe net oanmakke wurde. Kontrolearje it feroare of ûntbrekkende boarnedokumint en besykje it nochris.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier PDF koe net oanmakke wurde. Besykje opnij.',
+  'Referentie vastgelegd': 'Referinsje fêstlein',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Net-opsleine wizigingen yn it ljepblêd; SHA-256 kontrolearret de ferzje op skiif.',
+  'Documenten controleren': 'Dokuminten kontrolearje',
+  'Dit nummer is al in gebruik.': 'Dit nûmer is al yn gebrûk.',
+  'Documenten openen': 'Dokuminten iepenje',
+  'Eerdere SHA-256-waarden': 'Eardere SHA-256-wearden',
+  'Omschrijving wijzigen': 'Beskriuwing feroarje',
+  'Beginnummer wijzigen': 'Begjinnûmer feroarje',
+  'Vindplaats': 'Lokaasje',
+  'Laatst gecontroleerd': 'Lêst kontrolearre',
+  'Nummer wijzigen': 'Nûmer feroarje',
+  'Waar gaat dit dossier over?': 'Wêr giet dit dossier oer?',
+  'Nummer': 'Nûmer',
+  'Gebruik een positief getal.': 'Brûk in posityf getal.',
+  'Automatisch nummer': 'Automatysk nûmer',
   'Aanvulling gevraagd': 'Oanfolling fersocht',
   'Aanvulling gevraagd.': 'Oanfolling fersocht.',
   'Aanvulling gevraagd: {opmerking}': 'Oanfolling fersocht: {opmerking}',
@@ -832,6 +901,115 @@ const _dutchSourceAddFy = {
       'De útslaggen koene net laden wurde.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Jo sjogge jo útslach ûnder Myn eksamens sadree\'t it frijjûn is.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Allinnich Markdown-dokuminten en -presintaasjes (.md) kinne tafoege wurde.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Alle dokuminten iepenje',
+  'Alleen overzicht': 'Al mar\'r in besicht',
+  'Alles controleren': 'Alles kontrolearje',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'De SHA-256-hash kloppet al.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'De noaimeining ferdwynt út it dossier. It dokumentbestand bliuwt bewaard.',
+  'Deze bijlage is niet beschikbaar.': 'Diese bylage is net beskikbere.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Diese bylage kann net wurde kontroleare.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Diese bylage koene net feilich wurde ophelle.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Diese dossiermap bestaat al. Kies in oare nama.',
+  'Dit dossier kon niet worden geopend.':
+      'Dit dossier koene net wurde ophelle.',
+  'Document gewijzigd': 'Dokument feroaro',
+  'Document niet leesbaar': 'De dokument is net leesbaar.',
+  'Document ontbreekt': 'De dokument misselek.',
+  'Document openen': 'Dokumint iepenje',
+  'Documenten toevoegen': 'Dokuminten tafoegje',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Dossier iepenje',
+  'Dossier openen…': 'Dossier opendal…',
+  'Dossiertitel wijzigen': 'Dossiertitel feroziedegean.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'In bylage koe net wurde taaifoegean.',
+  'Een goed dossier begint hier': 'In goed dossier begint hier.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Boan de hângreep of de pijl om de regear te feroziedegean. De nummers folgjen automatysk.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'It bystân ferozâld of koe net wurde vastgehâld. Kontrolearren oars.',
+  'Het dossier kon niet worden aangemaakt.':
+      'It oerlikje kon net wurde mearmakke.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Dit betsjertwege de nije bestânsfoerheid as referinsje foar it oerlikje.',
+  'Huidige SHA-256': 'Hjoende SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Inhâldlist en kontrole fan integritet',
+  'Meer opties': 'Jammer oer oare opsjes',
+  'Naamloos dossier': 'Ondermoarre oerlikje',
+  'Nieuw dossier': 'Nij dossier',
+  'Nieuwe versie vastleggen': 'Nije ferzje fêstlizze',
+  'Nieuwe versie vastleggen?': 'Moatte de nije foerheid opsjechje?',
+  'Omhoog verplaatsen': 'Omheech ferhevelje',
+  'Omlaag verplaatsen': 'Omloppe ferhevelje',
+  'Onveilige bestandsverwijzing': 'Onseike bestânsferwizing',
+  'Overzicht en bijlagen': 'Oanblêd en byleafen',
+  'SHA-256 controleren': 'SHA-256 kontrolearje',
+  'SHA-256 klopt': 'De SHA-256 kin moai wêze',
+  'Sleep om te ordenen': 'Slepen om te sorjeienen',
+  'Terug naar dossier': 'Werom nei dossier',
+  'Titel wijzigen': 'Titel ferozjeane',
+  'Uit dossier verwijderen': 'Ut dossier fuortsmite',
+  'Uit dossier verwijderen?': 'Ferjeakke fan it dossier?',
+  'Vastgelegde SHA-256': 'De fêste SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Foegje dokuminten ta. De orizjinele bestannen bliuwe op harren plak. Hjir bepaalst de folchoarder.',
+  'Wijziging opslaan is mislukt.': 'De ferozijing opslove is mislearre.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Wilje jo de byleafen op tabbladen opnimme?',
+  'Als document openen': 'Asin in dokument openjen',
+  'Dossier maken': 'Dossier meitsje',
+  'Het overzicht kon niet als document worden geopend.':
+      'De oerzjoch koe net as in dokument opendal.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Bewar de ferozijinginnen yn it oerzjochsdokument earst, of slút dat tabblad.',
+  'Kostenindicatie': 'Kostenindikaasje',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto of netto makket hjir net út — de opslach foar wurkjouwerskosten stiet der los by.',
+  'Aanwezigen en tarieven': 'Oanwêzigen en tarieven',
+  'Bedrag': 'Bedrach',
+  'Per uur': 'Per oere',
+  'Per maand': 'Per moanne',
+  'Per jaar': 'Per jier',
+  'Aanname voor de omrekening': 'Oannime foar de omrekkene',
+  'Betaalde uren per week': 'Betelle oeren de wike',
+  'Weken per jaar': 'Wiken it jier',
+  'Opslag werkgeverslasten (%)': 'Opslach wurkjouwerslêsten (%)',
+  'Voeg een aanwezige toe': 'Foech in oanwêzige ta',
+  'Samen': 'Gear',
+  'Start presentatie': 'Start presintaasje',
+  'per uur': 'de oere',
+  'Wordt omgerekend': 'Wurdt omrekkene',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Fol per oanwêzige in oer-, moanne- of jiertarief yn. Dit bliuwt op dit skerm en wurdt nea bewarre.',
+  'Kosten van aanwezigen': 'Kosten fan oanwêzigen',
+  'Uit': 'Út',
+  'Gewoon — alleen in het eindoverzicht': 'Gewoan — allinne yn de einôfsluting',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisyt — rinnend bedrach én einôfsluting',
+  'Uurtarief': 'Oertarief',
+  'Eén tarief voor de hele groep': 'Ien tarief foar de hiele groep',
+  'Per aanwezige, bij de start invullen': 'Per oanwêzige, by de start ynfolje',
+  'Groepsuurtarief': 'Groepsoertarief',
+  'Kosten = verstreken tijd × tarief.': 'Kosten = ferrune tiid × tarief.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wurdt by de start ynfold en net bewarre.',
+  'Valuta': 'Faluta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'In skatting fan de tiid dy\'t oanwêzigen kwyt binne — in yndikaasje, gjin boekhâldkundige kostpriis.',
+  'Diaformaat': 'Diaformaat',
+  'Scherm (16:9)': 'Skerm (16:9)',
+  'Papierformaat': 'Papierformaat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Kies in papierformaat foar hand-outs en eksporten op papier.',
   'Startmappen': 'Begjinmappen',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wêr iepenjen en bewarjen begjint. Leech litte brûkt de earste bibleteek.',

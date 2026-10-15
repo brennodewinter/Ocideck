@@ -797,6 +797,77 @@ const _dutchSourceAddEs = {
   'Wachtwoord herhalen': 'Repetir contraseña',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Ponga sus reuniones en su propio calendario — actualizado ante cambios y cancelaciones.',
+  'Omrekening naar euro': 'Conversión a euros',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Para mostrar el importe en EUR, OciDeck usa un solo tipo de cambio por sesión. Introducir el tipo de cambio manualmente u obtener el tipo de referencia del BCE.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Obtener el tipo de cambio de Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Una solicitud por divisa a api.frankfurter.dev con solo el código de la divisa; el servicio sí ve la dirección IP. No se envían datos de la presentación.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Error al obtenerlo — introducir el tipo de cambio manualmente o continuar sin él.',
+  'Zonder koers doorgaan': 'Continuar sin tipo de cambio',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Tipo de cambio no válido — usar, por ejemplo, 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'fecha de referencia',
+  'verouderd': 'desactualizado',
+  'koers': 'tipo de cambio',
+  'koers ontbreekt': 'falta el tipo de cambio',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Falta el tipo de cambio — equivalente en EUR no calculado.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'línea(s) de entrada sin convertir — faltaba el tipo de cambio.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'No se encontró ninguna propuesta útil. Complete los detalles usted mismo.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'No se pudo recuperar la propuesta de IA. Verifique la configuración de AI o complete los detalles usted mismo.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Utilice una fecha válida como AAAA-MM-DD o deje el campo en blanco.',
+  'Documentgegevens': 'Datos del documento',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Estos detalles describen este documento en el expediente. El archivo fuente no se modifica.',
+  'Korte omschrijving': 'Breve descripción',
+  'Waar gaat dit document over?': '¿De qué trata este documento?',
+  'Documentdatum': 'Fecha del documento',
+  'JJJJ-MM-DD': 'AAAA-MM-DD',
+  'Opsteller': 'Autor del documento',
+  'Gegevens voorstellen met AI': 'Sugerir detalles con IA',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Propuesta de IA completada. Compruébalo y cámbialo antes de guardar.',
+  'Dossier als PDF exporteren': 'Exportar dossier como PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'El PDF contiene una portada, un índice y todos los documentos en orden de expediente.',
+  'Tussenpagina vóór elk document':
+      'Página intermedia antes de cada documento.',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Con número, título, descripción, fecha, autor y SHA-256.',
+  'Volledige gegevens tonen': 'Mostrar todos los detalles',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Los datos personales encontrados están ocultos de forma predeterminada. Elija los detalles completos solo para el destinatario previsto.',
+  'PDF maken': 'Crear PDF',
+  'Documentgegevens bewerken': 'Editar información del documento',
+  'Dossier-PDF opgeslagen': 'Dossier PDF guardado',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'No se pudo crear el PDF del dossier. Verifique el documento fuente modificado o faltante e inténtelo nuevamente.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'No se pudo crear el PDF del dossier. Intentar otra vez.',
+  'Referentie vastgelegd': 'La referencia está registrada',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Cambios sin guardar en la pestaña; SHA-256 comprueba la versión en disco.',
+  'Documenten controleren': 'Comprobando documentos',
+  'Dit nummer is al in gebruik.': 'Este número ya está en uso.',
+  'Documenten openen': 'Abrir documentos',
+  'Eerdere SHA-256-waarden': 'Valores SHA-256 anteriores',
+  'Omschrijving wijzigen': 'Cambiar descripción',
+  'Beginnummer wijzigen': 'Cambiar número inicial',
+  'Vindplaats': 'Ubicación',
+  'Laatst gecontroleerd': 'Última comprobación',
+  'Nummer wijzigen': 'Cambiar número',
+  'Waar gaat dit dossier over?': '¿De qué trata este expediente?',
+  'Nummer': 'Número',
+  'Gebruik een positief getal.': 'Use un número positivo.',
+  'Automatisch nummer': 'Número automático',
   'Aanvulling gevraagd': 'Se solicita información adicional',
   'Aanvulling gevraagd.': 'Se solicita información adicional.',
   'Aanvulling gevraagd: {opmerking}':
@@ -830,6 +901,113 @@ const _dutchSourceAddEs = {
       'No se pudieron cargar los resultados.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Verá su resultado en mis exámenes en cuanto se publique.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Solo los documentos y presentaciones en formato Markdown (.md) pueden ser añadidos.',
+  'OciDeck dossier': 'Expediente OciDeck',
+  'Alle documenten openen': 'Abrir todos los documentos',
+  'Alleen overzicht': 'Solo se muestra el resumen.',
+  'Alles controleren': 'Comprobar todo',
+  'DOSSIER': 'EXPEDIENTE',
+  'De SHA-256 klopt al.': 'El SHA-256 coincide ya.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'La entrada desaparece del dossier. El archivo del documento permanece guardado.',
+  'Deze bijlage is niet beschikbaar.': 'Este apéndice no está disponible.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Este apéndice no puede ser verificado.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Este apéndice no pudo ser abierto de forma segura.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Este directorio de dossier ya existe. Elija un nombre diferente.',
+  'Dit dossier kon niet worden geopend.': 'Este dossier no pudo ser abierto.',
+  'Document gewijzigd': 'Documento modificado',
+  'Document niet leesbaar': 'El documento no es legible.',
+  'Document ontbreekt': 'El documento falta.',
+  'Document openen': 'Abrir documento',
+  'Documenten toevoegen': 'Añadir documentos',
+  'Dossier': 'Expediente',
+  'Dossier openen': 'Abrir expediente',
+  'Dossier openen…': 'Abrir dossier…',
+  'Dossiertitel wijzigen': 'Cambiar título del dossier.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Un archivo adjunto no pudo ser añadido.',
+  'Een goed dossier begint hier': 'Un buen dossier comienza aquí.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Utilice el agarre o las flechas para cambiar el orden. Los números se actualizan automáticamente.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'El archivo ha cambiado o no se ha podido registrar. Verifique nuevamente.',
+  'Het dossier kon niet worden aangemaakt.': 'No se pudo crear el expediente.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Esto establece la nueva versión del archivo como referencia para este expediente.',
+  'Huidige SHA-256': 'SHA-256 actual',
+  'Inhoudsopgave en integriteitscontrole': 'Índice y control de integridad',
+  'Meer opties': 'Más opciones',
+  'Naamloos dossier': 'Expediente sin nombre',
+  'Nieuw dossier': 'Nuevo expediente',
+  'Nieuwe versie vastleggen': 'Registrar nueva versión',
+  'Nieuwe versie vastleggen?': '¿Guardar nueva versión?',
+  'Omhoog verplaatsen': 'Mover hacia arriba',
+  'Omlaag verplaatsen': 'Mover hacia abajo',
+  'Onveilige bestandsverwijzing': 'Referencia de archivo insegura',
+  'Overzicht en bijlagen': 'Resumen y anexos',
+  'SHA-256 controleren': 'Verificar SHA-256',
+  'SHA-256 klopt': 'El SHA-256 coincide',
+  'Sleep om te ordenen': 'Arrastra para ordenar',
+  'Terug naar dossier': 'Volver al expediente',
+  'Titel wijzigen': 'Cambiar título',
+  'Uit dossier verwijderen': 'Quitar del expediente',
+  'Uit dossier verwijderen?': '¿Eliminar del expediente?',
+  'Vastgelegde SHA-256': 'SHA-256 establecido',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Añade documentos a la colección. Los archivos originales permanecerán en su ubicación original. Puedes elegir el orden de visualización aquí.',
+  'Wijziging opslaan is mislukt.': 'No se pudo guardar la modificación.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      '¿Desea abrir los anexos también en pestañas?',
+  'Als document openen': 'Abrir documento',
+  'Dossier maken': 'Crear expediente',
+  'Het overzicht kon niet als document worden geopend.':
+      'La vista no pudo ser abierta como documento.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Guarde los cambios en el documento de la vista primero o cierre esa pestaña.',
+  'Kostenindicatie': 'Indicación de coste',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto o netto no importa aquí — el recargo de costes del empleador es independiente.',
+  'Aanwezigen en tarieven': 'Asistentes y tarifas',
+  'Bedrag': 'Importe',
+  'Per uur': 'Por hora',
+  'Per maand': 'Por mes',
+  'Per jaar': 'Por año',
+  'Aanname voor de omrekening': 'Supuesto para la conversión',
+  'Betaalde uren per week': 'Horas pagadas por semana',
+  'Weken per jaar': 'Semanas al año',
+  'Opslag werkgeverslasten (%)': 'Recargo de costes del empleador (%)',
+  'Voeg een aanwezige toe': 'Añadir un asistente',
+  'Samen': 'En conjunto',
+  'Start presentatie': 'Iniciar la presentación',
+  'per uur': 'por hora',
+  'Wordt omgerekend': 'Se convertirá',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Introduce por asistente una tarifa por hora, mensual o anual. Permanece en esta pantalla y no se guarda.',
+  'Kosten van aanwezigen': 'Coste de los asistentes',
+  'Uit': 'Desactivado',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — solo en el resumen final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explícito — importe corriente y resumen final',
+  'Uurtarief': 'Tarifa por hora',
+  'Eén tarief voor de hele groep': 'Una tarifa para todo el grupo',
+  'Per aanwezige, bij de start invullen':
+      'Por asistente, se rellena al empezar',
+  'Groepsuurtarief': 'Tarifa por hora del grupo',
+  'Kosten = verstreken tijd × tarief.': 'Coste = tiempo transcurrido × tarifa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Se rellena al empezar y no se guarda.',
+  'Valuta': 'Moneda',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Una estimación del tiempo que dedican los asistentes — una indicación, no un coste contable.',
+  'Diaformaat': 'Formato de diapositiva',
+  'Scherm (16:9)': 'Pantalla (16:9)',
+  'Papierformaat': 'Formato de papel',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Elige un formato de papel para folletos y exportaciones en papel.',
   'Startmappen': 'Carpetas de inicio',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Dónde empiezan abrir y guardar. Déjalo vacío para usar la primera biblioteca.',

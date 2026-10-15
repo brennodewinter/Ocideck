@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../platform/platform_features.dart';
 import '../../models/deck.dart';
+import '../../models/slide_format.dart';
 import '../../models/improvement_y01.dart';
 import '../../models/display_window_spec.dart';
 import '../../models/privacy_disposition.dart';
@@ -139,6 +140,7 @@ class EditorPanel extends ConsumerWidget {
                   imgService,
                   searchPaths,
                   deck.projectPath,
+                  slideAspect: slideAspectRatio(deck.slideSize),
                   (variants) {
                     final first = deckNotifier.insertSlides(
                       variants,
@@ -386,6 +388,7 @@ class EditorPanel extends ConsumerWidget {
     List<Cvss4Severity> deckFindingSeverities = const [],
     int deckResolvedCount = 0,
     ImprovementY01Metric deckY01 = ImprovementY01Metric.empty,
+    double slideAspect = kScreenSlideAspect,
   }) {
     return slideEditorBuilders[slide.type]!(
       SlideEditorContext(
@@ -404,6 +407,7 @@ class EditorPanel extends ConsumerWidget {
         deckFindingSeverities: deckFindingSeverities,
         deckResolvedCount: deckResolvedCount,
         deckY01: deckY01,
+        slideAspect: slideAspect,
       ),
     );
   }

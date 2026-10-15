@@ -207,7 +207,17 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   /// Toon na afloop de oefenrun-samenvatting wanneer de deck-schakelaar aan
   /// staat. Sessie-only: niets wordt opgeslagen.
   Future<void> _maybeShowRehearsalSummary(RehearsalRun run) async {
-    if (widget.playOnly || !widget.showRehearsalSummary || !mounted) return;
-    await showRehearsalSummary(context, run: run, slides: widget.slides);
+    final costRun = _costSession?.finish();
+    if (widget.playOnly || !mounted) return;
+    // Staat de kostenmodus aan dan verschijnt het overzicht óók als de
+    // oefenrun-schakelaar uit staat — anders kwam de presentator nergens bij
+    // zijn eindbedrag (#2437).
+    if (costRun == null && !widget.showRehearsalSummary) return;
+    await showRehearsalSummary(
+      context,
+      run: run,
+      slides: widget.slides,
+      costRun: costRun,
+    );
   }
 }

@@ -17,14 +17,40 @@ bool _slideHasRemoteMedia(Slide slide) {
   return false;
 }
 
+/// De expliciete kosten-overlay (#2437) voor op de diastack, of `null` bij
+/// 'gewoon'/'uit' — dan bestaat er niets om per ongeluk te tonen. Sessie-
+/// overlay, geen dia-inhoud: hij komt nooit in een export terecht. De overlay
+/// tikt zelf; [onTick] duwt het verse bedrag naar het publieksvenster.
+Widget? _costOverlayFor(
+  PresentationCostSession? session,
+  PresentationCostConfig config,
+  double slideW,
+  double slideH,
+  VoidCallback onTick,
+) {
+  if (session == null || config.mode != PresentationCostMode.explicit) {
+    return null;
+  }
+  return Positioned(
+    right: slideW * 0.015,
+    bottom: slideH * 0.02,
+    child: CostOverlay(
+      session: session,
+      currency: session.currency,
+      slideWidth: slideW,
+      onTick: onTick,
+    ),
+  );
+}
+
 extension _PresenterViews on _FullscreenPresenterState {
-  /// A 16:9 slide sized to fit within the given constraints.
+  /// A slide in the deck's aspect sized to fit within the given constraints.
   Widget _slideCanvas(Slide slide) {
     return LayoutBuilder(
       builder: (_, constraints) {
         final w = constraints.maxWidth;
         final h = constraints.maxHeight;
-        const ratio = 16.0 / 9.0;
+        final ratio = widget.slideAspect;
         double slideW, slideH;
         if (w / h > ratio) {
           slideH = h;
@@ -46,6 +72,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                 ChartHoverScope(
                   controller: _chartHover,
                   child: SlidePreviewWidget(
+                    slideAspect: widget.slideAspect,
                     slide: slide,
                     projectPath: widget.projectPath,
                     themeProfile: widget.themeProfile,
@@ -61,6 +88,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                       _index,
                       widget.themeProfile,
                       widget.themeProfile.fontFamily,
+                      slideAspect: widget.slideAspect,
                     ),
                     splitRunPosition: splitRunPositionFor(
                       widget.slides,
@@ -144,6 +172,18 @@ extension _PresenterViews on _FullscreenPresenterState {
                   onStrokesChanged: _onStrokesChanged,
                   onLaserMove: _onLaserMove,
                   onActiveStrokeChanged: _onActiveStroke,
+                ),
+                // Rechtsonder op de dia, zie [_costOverlayFor].
+                ?_costOverlayFor(
+                  _costSession,
+                  widget.costConfig,
+                  slideW,
+                  slideH,
+                  () => _sendCostTick(
+                    widget.audience,
+                    _costSession,
+                    _costSession?.runId ?? 0,
+                  ),
                 ),
               ],
             ),
@@ -277,13 +317,14 @@ extension _PresenterViews on _FullscreenPresenterState {
                 _SectionLabel(l10n.d('VOLGENDE')),
                 const SizedBox(height: 8),
                 AspectRatio(
-                  aspectRatio: 16 / 9,
+                  aspectRatio: widget.slideAspect,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: nextSlide != null
                         ? Container(
                             color: Colors.black,
                             child: SlidePreviewWidget(
+                              slideAspect: widget.slideAspect,
                               slide: nextSlide,
                               projectPath: widget.projectPath,
                               themeProfile: widget.themeProfile,
@@ -301,6 +342,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                                 _index + 1,
                                 widget.themeProfile,
                                 widget.themeProfile.fontFamily,
+                                slideAspect: widget.slideAspect,
                               ),
                               splitRunPosition: splitRunPositionFor(
                                 widget.slides,

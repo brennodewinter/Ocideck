@@ -22,6 +22,7 @@
 - [12. Redactiemanifest-bestanden (naast een export)](#12-redactie-manifestbestanden-naast-een-export)
 - [13. Aanvaarde bestanden en hun grenzen](#13-geaccepteerde-bestanden-en-hun-grenzen)
 - [14. Documenten (gewone `.md`, geen deck)](#14-documenten-gewone-md-geen-deck)
+- [15. Documentdossiers](#15-documentdossiers)
 
 *(Toegevoegd 2026-07-22: dit document had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repository-pagina niet. De noot gaf vroeger een regelaantal — ongeveer 2.253 — dat stilletjes was doorgegroeid naar ruwweg 3.280 op 2026-08-16; een getal dat niemand bijwerkt kun je beter weglaten dan verkeerd laten staan.)*
 
@@ -280,8 +281,14 @@ het bestand. Zie §6.6 voor waarom dat veranderd is.)
 | `format` | string/afwezig | Benoemde preset voor presentatietiming. De herkende waarden zijn `pechakucha` (20 dia's × 20 seconden) en `ignite` (20 dia's × 15 seconden), niet hoofdlettergevoelig. Een onbekende waarde heeft geen timingseffect en blijft bij opslaan behouden. |
 | `timing` | genest blok/afwezig | Generieke instellingen voor een getimede presentatie. De herkende onderliggende velden staan hieronder. Wordt niet geschreven wanneer alle instellingen hun standaardwaarde hebben; een herkende strikte `format:`-preset wint. |
 | `ocideck_target_seconds` | int | Doelduur voor het aftellen van de presentator, in seconden. Alleen geschreven wanneer `> 0`. |
-| `ocideck_show_rehearsal_summary` | `false`/afwezig | Afmelden voor de tijdsamenvatting na de presentatie. Standaard (getoond) blijft uit het bestand; alleen `false` wordt geschreven. Wordt overschreven door `ocideck_play_only`: een alleen-afspelen-deck toont de samenvatting nooit, wat deze sleutel ook zegt. |
+| `ocideck_show_rehearsal_summary` | `true`/afwezig | Aanmelden voor de tijdsamenvatting na de presentatie. Afwezig (uit) blijft uit het bestand; alleen `true` wordt geschreven. Wordt overschreven door `ocideck_play_only`: een alleen-afspelen-deck toont de samenvatting nooit, wat deze sleutel ook zegt. Een deck met de kostenmodus aan (`ocideck_cost_mode`) toont de samenvatting na afloop los van deze sleutel, omdat daar de totale kosten staan. |
 | `ocideck_play_only` | `true`/afwezig | Alleen-afspelen-vergrendeling. Wanneer `true`, opent het deck vergrendeld: geen editor, werkbalk, menu's of export — alleen de eerste slide met een afspeelknop, schermvullend gepresenteerd. Het deck sluiten herstelt het normale bewerken. Standaard (ontgrendeld) blijft uit het bestand; alleen `true` wordt geschreven. Deze sleutel verwijderen ontgrendelt het deck. |
+| `papersize` | string/afwezig | Staand diaformaat (#2433): een ISO 216-papiernaam in kleine letters, zoals `a4`, in hetzelfde vocabulaire als Pandoc en de documentpagina-instelling (§14), zodat een andere lezer een logische paginamaat ziet in plaats van een OciDeck-eigen sleutel. Afwezig betekent het 16:9-schermformaat — de afwezige staat van elke Marp-lezer — dus bestaande en met de hand geschreven Marp-decks veranderen niet. Liggend wordt als `geometry` geschreven, zie hieronder. |
+| `geometry` | string/afwezig | Liggend diaformaat (#2433): alleen het vel, bijvoorbeeld `paperwidth=297mm,paperheight=210mm`. In Pandoc betekent `papersize: a4` staand, dus een liggende dia kan niet als papiernaam worden geschreven zonder te liegen. OciDeck leest en vervangt alleen deze vorm met enkel het vel als diaformaat; een met de hand geschreven `geometry:` met marges is van de gebruiker (zo haal je een Marp-deck ook door Pandoc) en overleeft elke opslag. Staan beide sleutels er, dan wint `papersize`, net als op de documentpagina. |
+| `ocideck_cost_mode` | `normal`/`explicit`/afwezig | Kostenmodus (#2435): een schatting van de tijdkosten van de aanwezigen tijdens deze presentatie. `normal` toont de kosten alleen in de samenvatting achteraf; `explicit` toont ook een oplopend totaal rechtsonder tijdens de presentatie. Afwezig betekent uit, en dan wordt geen van de andere `ocideck_cost_*`-sleutels geschreven. Een onbekende waarde leest als uit. |
+| `ocideck_cost_input` | `group`/`attendees` | Hoe het uurtarief wordt ingevoerd: één vast tarief voor de hele groep (`group`, de standaard), of een privé-startscherm waar de presentator per aanwezige een tarief of salaris invult (`attendees`). Alleen geschreven als de kostenmodus aan staat. |
+| `ocideck_cost_currency` | ISO 4217-code | De valuta van de getoonde bedragen: `EUR` (standaard), `USD`, `GBP`, `CHF`, `JPY`, `SEK`, `NOK`, `DKK`, `PLN` of `CZK`. Een onbekende code leest als `EUR`. |
+| `ocideck_cost_rate` | decimaal/afwezig | Het groepsuurtarief in de grootste eenheid, kale cijfers met een punt en zonder valutasymbool (`75.50`, `75` bij een valuta zonder decimalen). Alleen geschreven bij `group` en wanneer groter dan nul. Een onleesbare waarde leest als nul, wat de basis toont maar nooit een misleidende `€ 0`. |
 | `ocideck_improvement_framework` | string/afwezig | Procesverbeteringskader voor dit deck: `dmaic`, `dmadv`, `kaizen`, `a3` of `8d`. Leeg/afwezig = niet ingesteld. |
 | `ocideck_improvement_y01` | string/afwezig | Vrije-tekstnaam/-beschrijving van de primaire Y-metriek (**Y-01**). Leeg/afwezig = niet ingesteld. |
 | `ocideck_improvement_y01_unit` | string/afwezig | Eenheid voor Y-01 (bijv. `days`). Leeg/afwezig = niet ingesteld. |
@@ -340,6 +347,16 @@ altijd op in een niet-leeg generiek blok. Een duur van nul en afwezige
 dialimieten laat hij weg. De runtime begint op dia 1, toont een afzonderlijke
 3‑2‑1-aftelling, leidt de huidige dia af uit monotoon verstreken tijd en telt
 gepauzeerde tijd niet mee.
+
+**Wat de kostenmodus nooit schrijft (#2435–#2438).** Alleen de vier
+`ocideck_cost_*`-sleutels hierboven reizen mee met het bestand. Individuele
+uurtarieven, salarissen en de aannames achter een omrekening (betaalde uren,
+bruto/netto, werkgeverslasten) worden ingevuld op het privé-startscherm van de
+presentator en bestaan alleen tijdens die sessie — ze staan niet in het deck,
+een export, het klembord of een logboek. De wisselkoers waarmee bij een vreemde
+valuta een euro-equivalent wordt getoond (koers, richting, bron en peildatum) is
+eveneens per sessie vastgelegd en wordt nooit bewaard; alleen de valutakeuze is
+een presentatievoorkeur.
 
 **Migratie (Y-01).** Een deck dat alleen `ocideck_improvement_y01` heeft (naam, geen
 limietsleutels) blijft voor altijd geldig; ontbrekende limietsleutels betekenen `null`.
@@ -4382,3 +4399,74 @@ antwoordzones schrijft, is de weg om er een te beantwoorden.
 Ontwerp, grammatica, veldtypen, regelsemantiek en de validatiecodes:
 `docs/design/FORM_INTAKE.md` §4. De referentieparser is het losse pakket
 `packages/ocideck_form_core`.
+
+## 15. Documentdossiers
+
+Een documentdossier is een map met `dossier.json` en een afgeleid, leesbaar
+`overzicht.md`. OciDeck behandelt het dossier als **document**, ook wanneer een
+verwezen `.md`-bestand een presentatie is. De brondocumenten blijven op hun
+oorspronkelijke plek; toevoegen kopieert het bestand en de bijbehorende media
+niet. Dit formaat staat los van de versleutelde auditdossier-export in §6.
+
+`dossier.json` is UTF-8-JSON. OciDeck schrijft versie **2** en leest ook versie
+1; na opslaan wordt een versie-1-dossier versie 2. Onbekende sleutels op
+dossier- en itemniveau blijven behouden bij lezen en opslaan. De volgorde in
+`entries` is leidend; `overzicht.md` wordt daaruit opnieuw gemaakt. Bewaar
+beide bestanden bij elkaar. Als `overzicht.md` handmatig is gewijzigd,
+overschrijft OciDeck het bij de volgende dossierbewerking niet.
+
+| JSON-veld | Betekenis |
+| --- | --- |
+| `version` | Bij schrijven `2`; bij lezen wordt ook `1` aanvaard. |
+| `title`, `description` | Dossiertitel en optionele beschrijving. |
+| `createdAt`, `updatedAt` | UTC-tijdstippen in ISO 8601. |
+| `startNumber` | Eerste automatisch getoonde nummer; standaard `1`. |
+| `entries` | Geordende reeks documentverwijzingen. |
+
+Elk item heeft een stabiele `id`, getoonde `title`, `relativePath` en een
+`sha256` van de bronbytes als 64 hexadecimale tekens in kleine letters.
+`relativePath` is een POSIX-pad ten opzichte van de dossiermap, behouden voor
+oude gekopieerde bijlagen en links in het overzicht. Nieuwe items bewaren ook
+`sourcePath` (het oorspronkelijke absolute pad), `originalName`, `sizeBytes` en
+`checkedAt`. Staat de bron binnen de dossiermap, dan bewaart
+`sourceRelativePath` het verplaatsbare relatieve pad; dat gaat bij het openen
+vóór `sourcePath`. Een bron buiten die map blijft afhankelijk van het absolute
+pad. Met `numberOverride` kan een positief, uniek getoond nummer worden
+vastgezet; automatische nummers slaan zulke nummers over. `hashHistory` bevat
+eerdere referentiehashes als objecten `{ "sha256": "…", "recordedAt": "…" }`.
+Optionele velden kunnen in oudere items ontbreken.
+
+Versie 2 laat ook deze optionele, bewerkbare velden **per item** toe. Ze
+beschrijven de vermelding in het dossier en wijzigen de Markdown-bron niet:
+
+| JSON-veld | Betekenis |
+| --- | --- |
+| `description` | Korte omschrijving van het document; ontbreekt als zij leeg is. |
+| `documentDate` | Een geldige kalenderdatum uit het document als `JJJJ-MM-DD`, zonder veronderstelde tijdzone; ontbreekt als de datum onbekend is. |
+| `author` | Opsteller als vrije tekst; ontbreekt als deze leeg of onbekend is. |
+
+De bestaande verplichte `title` is de getoonde titel en is samen met deze
+velden bewerkbaar. Ze verschijnen in `overzicht.md`, dat een afgeleide weergave
+van het manifest blijft. AI kan alleen op uitdrukkelijk verzoek een voorstel
+doen als AI is ingesteld en toegestaan. De gebruiker beoordeelt en bewaart het
+voorstel; het manifest krijgt geen apart veld voor AI-herkomst.
+
+Bij controle wordt het huidige bestand op schijf gehasht en met `sha256`
+vergeleken. `checkedAt` legt het controletijdstip vast zonder de referentiehash
+te veranderen. Een nieuwe referentie accepteren is een aparte handeling die de
+vorige hash aan `hashHistory` toevoegt. Een overeenkomende SHA-256 toont
+overeenstemming met de opgeslagen waarde, geen auteurschap of goedkeuring.
+Bij openen en controleren worden onveilige paden en vervangen symbolische
+links geweigerd. Deze versie ondersteunt lokale `.md`-documenten en
+-presentaties als verwijzing; PDF- en Office-bestanden worden niet ondersteund.
+
+De dossier-PDF is een **export** en hoort niet bij het formaat van de
+dossiermap. Hij begint met een omslag en een geordende inhoudsopgave. Daarna
+wordt elke verwezen `.md`-bron als documentinhoud gezet, ook als de bron een
+presentatie is. Een optionele pagina vóór elk document toont het
+dossiernummer, de titel, de korte omschrijving, de datum, de opsteller en de
+opgeslagen SHA-256 voor zover de optionele waarden aanwezig zijn. De export
+controleert elke bron tegen de opgeslagen SHA-256 en past het ingestelde
+classificatie- en privacy-exportbeleid toe. Geredigeerd is het standaardprofiel;
+volledig moet uitdrukkelijk worden gekozen. Export wijzigt de referentiehashes
+in het manifest niet.

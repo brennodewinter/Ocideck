@@ -18,6 +18,7 @@
 - [12. Redaction Manifest Files (Beside an Export)](#12-redaction-manifest-files-beside-an-export)
 - [13. Accepted Files and Their Limits](#13-accepted-files-and-their-limits)
 - [14. Documents (Plain `.md`, Not a Deck)](#14-documents-plain-md-not-a-deck)
+- [15. Document Dossiers](#15-document-dossiers)
 
 *(Added 2026-07-22: this document had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. The note used to give a line count — around 2,253 — which had quietly grown to roughly 3,280 by 2026-08-16; a figure nobody updates is better left out than left wrong.)*
 
@@ -281,8 +282,14 @@ over the file. See §6.6 for why that changed.)
 | `format` | string/absent | Named presentation-timing preset. Recognised values are `pechakucha` (20 slides × 20 seconds) and `ignite` (20 slides × 15 seconds), case-insensitive. An unrecognised value has no timing effect and is retained on save. |
 | `timing` | nested block/absent | Generic timed-presentation settings. Recognised child fields are listed below. Not written when all settings have their defaults; ignored in favour of a recognised strict `format:` preset. |
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
-| `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. |
+| `ocideck_show_rehearsal_summary` | `true`/absent | Opt-in for the post-presentation timing summary. Absent (off) stays out of the file; only `true` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. A deck with the cost mode on (`ocideck_cost_mode`) shows the summary after the presentation regardless of this key, because that is where the total cost appears. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
+| `papersize` | string/absent | Portrait slide format (#2433): a lowercase ISO 216 paper name such as `a4`, in the same vocabulary Pandoc and the document page setup (§14) use, so another reader sees a sensible page size instead of an OciDeck-only key. Absent means the 16:9 screen format — the absent state of every Marp reader — so existing decks and hand-written Marp decks are unchanged. Landscape is written as `geometry`, see below. |
+| `geometry` | string/absent | Landscape slide format (#2433): only the sheet, e.g. `paperwidth=297mm,paperheight=210mm`. In Pandoc `papersize: a4` means portrait, so a landscape slide cannot be written as a paper name without lying. OciDeck only reads and replaces this exact sheet-only form as the slide format; a hand-written `geometry:` with margins belongs to the user (it is how a Marp deck is also run through Pandoc) and survives every save. If both keys are present, `papersize` wins, as on the document page. |
+| `ocideck_cost_mode` | `normal`/`explicit`/absent | Cost mode (#2435): an estimate of the attendees' time cost during this presentation. `normal` shows the cost only in the summary afterwards; `explicit` also shows a running total bottom-right during the presentation. Absent means off, and then none of the other `ocideck_cost_*` keys is written. An unknown value reads as off. |
+| `ocideck_cost_input` | `group`/`attendees` | How the hourly rate is entered: one fixed rate for the whole group (`group`, the default), or a private start screen where the presenter enters a rate or salary per attendee (`attendees`). Written only when the cost mode is on. |
+| `ocideck_cost_currency` | ISO 4217 code | The currency of the displayed amounts: `EUR` (default), `USD`, `GBP`, `CHF`, `JPY`, `SEK`, `NOK`, `DKK`, `PLN` or `CZK`. An unknown code reads as `EUR`. |
+| `ocideck_cost_rate` | decimal/absent | The group hourly rate in the major unit, plain digits with a dot and without a currency symbol (`75.50`, `75` for a currency without decimals). Written only for `group` and when greater than zero. An unreadable value reads as zero, which shows the basis but never a misleading `€ 0`. |
 | `ocideck_improvement_framework` | string/absent | Process-improvement framework for this deck: `dmaic`, `dmadv`, `kaizen`, `a3` or `8d`. Empty/absent = not set. |
 | `ocideck_improvement_y01` | string/absent | Free-text name/description of the primary Y metric (**Y-01**). Empty/absent = not set. |
 | `ocideck_improvement_y01_unit` | string/absent | Unit for Y-01 (e.g. `days`). Empty/absent = not set. |
@@ -341,6 +348,15 @@ The writer always emits `autoplay`, `stop-after-last-slide`, and
 absent slide limits. The runtime starts on slide 1, shows a separate 3‑2‑1
 countdown, derives the current slide from elapsed monotonic time, and treats
 paused time as outside the run.
+
+**What the cost mode never writes (#2435–#2438).** Only the four `ocideck_cost_*`
+keys above travel with the file. Individual hourly rates, salaries and the
+assumptions behind a conversion (paid hours, gross/net, employer surcharge) are
+entered on the presenter's private start screen and exist for that session only —
+they are not in the deck, an export, the clipboard or any log. The exchange rate
+used to show a euro equivalent for a foreign currency (rate, direction, source and
+reference date) is likewise fixed per session and never saved; the currency choice
+is the only part of it that is a presentation preference.
 
 **Migration (Y-01).** A deck that only has `ocideck_improvement_y01` (name, no
 limit keys) remains valid forever; missing limit keys mean `null`. Charts that
@@ -4378,3 +4394,72 @@ is the way to answer one.
 Design, grammar, field types, rule semantics and the validation codes:
 `docs/design/FORM_INTAKE.md` §4. The reference parser is the standalone package
 `packages/ocideck_form_core`.
+
+## 15. Document Dossiers
+
+A document dossier is a folder containing `dossier.json` and a derived,
+human-readable `overzicht.md`. It is a **document** in OciDeck, even when a
+referenced `.md` file is a presentation. The source documents remain at their
+original locations; adding one does not copy its bytes or related assets. This
+format is separate from the encrypted audit-dossier export in §6.
+
+`dossier.json` is UTF-8 JSON. OciDeck writes version **2** and also reads version
+1; saving a version-1 dossier writes version 2. Unknown object keys on the
+dossier and entries survive a load/save cycle. The ordered `entries` array is
+the authoritative order, and `overzicht.md` is regenerated from it. Keep both
+files together. Manual changes to `overzicht.md` prevent OciDeck from
+overwriting it on the next dossier edit.
+
+| JSON field | Meaning |
+| --- | --- |
+| `version` | `2` when written; `1` is accepted on read. |
+| `title`, `description` | Dossier title and optional description. |
+| `createdAt`, `updatedAt` | UTC ISO 8601 timestamps. |
+| `startNumber` | First automatic display number; defaults to `1`. |
+| `entries` | Ordered array of document references. |
+
+Each entry has a stable `id`, display `title`, `relativePath`, and a lowercase
+64-character hexadecimal `sha256` of the source file's bytes. `relativePath`
+is a dossier-relative POSIX path, retained for legacy copied attachments and
+links in the overview. New entries also store `sourcePath` (the original
+absolute path), `originalName`, `sizeBytes`, and `checkedAt`. When the source
+is inside the dossier folder, `sourceRelativePath` records its portable
+dossier-relative path and takes precedence over `sourcePath` when resolving
+the file. A source outside that folder still depends on its absolute path.
+`numberOverride` optionally fixes a positive, unique display number; automatic
+numbers skip reserved overrides. `hashHistory` holds prior reference hashes as
+`{ "sha256": "…", "recordedAt": "…" }` objects. Optional fields may be absent
+in older entries.
+
+Version 2 also permits these optional, editable **entry** fields; they describe
+the dossier listing and do not modify the referenced Markdown source:
+
+| JSON field | Meaning |
+| --- | --- |
+| `description` | Short document summary; absent when empty. |
+| `documentDate` | Date stated in the document as a valid `YYYY-MM-DD` calendar date, without an inferred time zone; absent when unknown. |
+| `author` | Document author/preparer as free text; absent when empty or unknown. |
+
+`title` is the existing required display title and is editable alongside these
+fields. They appear in `overzicht.md`; that file remains a derived view of the
+manifest. AI can propose values only on an explicit user request when AI is
+configured and allowed. The user reviews and saves the proposal; no separate
+AI provenance field is written to the manifest.
+
+Verification hashes the current file on disk and compares it with `sha256`;
+`checkedAt` records when a check was made, without changing the reference hash.
+Accepting a new reference is a separate action that appends the previous hash
+to `hashHistory`. A matching SHA-256 shows agreement with the stored value, not
+authorship or approval. Opening and checking references rejects unsafe paths
+and symbolic-link substitutions. Current dossier references are local `.md`
+documents and presentations; PDF and Office files are not supported.
+
+The dossier PDF is an **export**, not part of the dossier folder contract. It
+starts with a cover and ordered contents, then typesets each referenced `.md`
+source as document content, including presentation sources. An optional page
+before each document shows its dossier number, title, short summary, date,
+author, and stored SHA-256 when those optional values exist. The export checks
+every referenced source against its stored SHA-256 and applies the configured
+classification and privacy export policies. Its redacted profile is the
+default; the full profile must be chosen explicitly. Exporting does not update
+the manifest's reference hashes.

@@ -1755,6 +1755,76 @@ const _dutchSourceAddFi = <String, String>{
   'Wachtwoord herhalen': 'Toista salasana',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Aseta tapaamisesi omaan kalenteriisi — päivittyy muutosten ja peruutusten yhteydessä.',
+  'Omrekening naar euro': 'Muunnos euroiksi',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'EUR-näkymää varten OciDeck käyttää yhtä kurssia istuntoa kohti. Syötä kurssi itse tai hae EKP:n viitekurssi.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Hae kurssi Frankfurter-palvelusta (EKP)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Yksi pyyntö valuuttaa kohti osoitteeseen api.frankfurter.dev pelkällä valuuttakoodilla; palvelu kuitenkin näkee IP-osoitteen. Esitystietoja ei lähetetä.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Haku epäonnistui — syötä kurssi itse tai jatka ilman kurssia.',
+  'Zonder koers doorgaan': 'Jatka ilman kurssia',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Virheellinen kurssi — käytä esimerkiksi arvoa 0,92.',
+  'handmatig': 'manuaalisesti',
+  'peildatum': 'viitepäivä',
+  'verouderd': 'vanhentunut',
+  'koers': 'kurssi',
+  'koers ontbreekt': 'kurssi puuttuu',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurssi puuttuu — EUR-vastinetta ei laskettu.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'syöttörivi(ä) ei muunnettu — kurssi puuttui.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Hyödyllistä ehdotusta ei löytynyt. Täytä tiedot itse.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI-ehdotusta ei voitu hakea. Tarkista AI-asetukset tai täytä tiedot itse.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Käytä kelvollista päivämäärää, kuten VVVV-KK-PP, tai jätä kenttä tyhjäksi.',
+  'Documentgegevens': 'Asiakirjan tiedot',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Nämä tiedot kuvaavat tätä asiakirjaa aineistossa. Lähdetiedostoa ei ole muutettu.',
+  'Korte omschrijving': 'Lyhyt kuvaus',
+  'Waar gaat dit document over?': 'Mistä tässä asiakirjassa on kyse?',
+  'Documentdatum': 'Asiakirjan päivämäärä',
+  'JJJJ-MM-DD': 'VVVV-KK-PP',
+  'Opsteller': 'Asiakirjan kirjoittaja',
+  'Gegevens voorstellen met AI': 'Ehdota yksityiskohtia tekoälyllä',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI-ehdotus valmis. Tarkista ja muuta se ennen tallentamista.',
+  'Dossier als PDF exporteren': 'Vie aineisto PDF-muodossa',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF sisältää kannen, sisällysluettelon ja kaikki asiakirjat aineistojärjestyksessä.',
+  'Tussenpagina vóór elk document': 'Välisivu ennen jokaista asiakirjaa',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Numero, otsikko, kuvaus, päivämäärä, kirjoittaja ja SHA-256.',
+  'Volledige gegevens tonen': 'Näytä täydelliset tiedot',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Löydetyt henkilökohtaiset tiedot on oletusarvoisesti piilotettu. Valitse täydelliset tiedot vain aiotulle vastaanottajalle.',
+  'PDF maken': 'Luo PDF',
+  'Documentgegevens bewerken': 'Muokkaa asiakirjan tietoja',
+  'Dossier-PDF opgeslagen': 'Asiakirja PDF tallennettu',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'PDF-aineistoa ei voitu luoda. Tarkista muuttunut tai puuttuva lähdeasiakirja ja yritä uudelleen.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'PDF-aineistoa ei voitu luoda. Yritä uudelleen.',
+  'Referentie vastgelegd': 'Viittaus on kirjattu',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Välilehdellä on tallentamattomia muutoksia; SHA-256 tarkistaa levyllä olevan version.',
+  'Documenten controleren': 'Asiakirjojen tarkistus',
+  'Dit nummer is al in gebruik.': 'Tämä numero on jo käytössä.',
+  'Documenten openen': 'Avaa asiakirjat',
+  'Eerdere SHA-256-waarden': 'Aiemmat SHA-256-arvot',
+  'Omschrijving wijzigen': 'Muuta kuvausta',
+  'Beginnummer wijzigen': 'Muuta aloitusnumeroa',
+  'Vindplaats': 'Sijainti',
+  'Laatst gecontroleerd': 'Viimeksi tarkistettu',
+  'Nummer wijzigen': 'Muuta numeroa',
+  'Waar gaat dit dossier over?': 'Mitä tämä asiakirjakansio koskee?',
+  'Nummer': 'Numero',
+  'Gebruik een positief getal.': 'Käytä positiivista lukua.',
+  'Automatisch nummer': 'Automaattinen numero',
   'Aanvulling gevraagd': 'Täydennystä pyydetty',
   'Aanvulling gevraagd.': 'Täydennystä pyydetty.',
   'Aanvulling gevraagd: {opmerking}': 'Täydennystä pyydetty: {opmerking}',
@@ -1786,6 +1856,113 @@ const _dutchSourceAddFi = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Tuloksia ei voitu ladata.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Näet tuloksesi kohdassa Minun kokeeni, kun se on julkaistu.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Vain Markdown-dokumentit ja -esitykset (.md) voidaan lisätä.',
+  'OciDeck dossier': 'OciDeck Asiakirjakansio',
+  'Alle documenten openen': 'Avaa kaikki asiakirjat',
+  'Alleen overzicht': 'Vain yleiskuva',
+  'Alles controleren': 'Tarkista kaikki',
+  'DOSSIER': 'ASIAKIRJAKANSIO',
+  'De SHA-256 klopt al.': 'SHA-256-tarkistus on jo oikein.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Merkintä poistuu tästä dossiesta. Dokumenttifile säilytetään.',
+  'Deze bijlage is niet beschikbaar.': 'Tämä liite ei ole saatavilla.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Tätä liitettä ei voida tarkistaa.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Tätä liitettä ei voitu avata turvallisesti.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Tämä dossiokansio on jo olemassa. Valitse toinen nimi.',
+  'Dit dossier kon niet worden geopend.': 'Tätä dossiota ei voitu avata.',
+  'Document gewijzigd': 'Dokumenti on muuttunut',
+  'Document niet leesbaar': 'Dokumenti ei ole luettavissa.',
+  'Document ontbreekt': 'Dokumentti puuttuu.',
+  'Document openen': 'Avaa asiakirja',
+  'Documenten toevoegen': 'Lisää asiakirjoja',
+  'Dossier': 'Asiakirjakansio',
+  'Dossier openen': 'Avaa asiakirjakansio',
+  'Dossier openen…': 'Dossierin avaaminen…',
+  'Dossiertitel wijzigen': 'Dossierin otsikko muutos.',
+  'Een bijlage kon niet worden toegevoegd.': 'Yksi liite ei voinut lisätä.',
+  'Een goed dossier begint hier': 'Hyvä dossier alkaa tästä.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Käytä vipua tai nuolia järjestystä muuttamaan. Numerot seuraavat automaattisesti.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Tiedosto muuttui tai sitä ei voitu tallentaa. Tarkista uudelleen.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossier ei voitu luoda.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Tällä tavoin uusi tiedostoverisio on viite tälle dossierille.',
+  'Huidige SHA-256': 'Nykyinen SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Sisällysluettelo ja eheyden tarkistus',
+  'Meer opties': 'Lisäasetukset',
+  'Naamloos dossier': 'Nimetön dossier',
+  'Nieuw dossier': 'Uusi asiakirjakansio',
+  'Nieuwe versie vastleggen': 'Tallenna uusi versio',
+  'Nieuwe versie vastleggen?': 'Tallennetaanko uusi versio?',
+  'Omhoog verplaatsen': 'Siirretään ylös.',
+  'Omlaag verplaatsen': 'Siirretään alas.',
+  'Onveilige bestandsverwijzing': 'Epävarma tiedostoviittaus.',
+  'Overzicht en bijlagen': 'Yhteenveto ja liitteet',
+  'SHA-256 controleren': 'SHA-256-tarkistus',
+  'SHA-256 klopt': 'SHA-256 on oikein',
+  'Sleep om te ordenen': 'Päivitä vetämällä',
+  'Terug naar dossier': 'Takaisin asiakirjakansioon',
+  'Titel wijzigen': 'Otsikko muokattavissa',
+  'Uit dossier verwijderen': 'Poista asiakirjakansiosta',
+  'Uit dossier verwijderen?': 'Poista kansiosta?',
+  'Vastgelegde SHA-256': 'Tallennettu SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Lisää asiakirjoja. Alkuperäiset tiedostot pysyvät paikoillaan. Valitse niiden järjestys tässä.',
+  'Wijziging opslaan is mislukt.': 'Muutoksen tallennus epäonnistui.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Haluatko avata liitteet myös välilehdissä?',
+  'Als document openen': 'Avaa dokumentti',
+  'Dossier maken': 'Luo asiakirjakansio',
+  'Het overzicht kon niet als document worden geopend.':
+      'Näyttöluettelo ei voinut avautua dokumenttina.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Tallenna muutokset näyttöluettelodokumenttiin ensin tai sulje se välilehti.',
+  'Kostenindicatie': 'Kustannusarvio',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto tai netto ei ole väliä tässä — työnantajakustannusten korotus on erillinen.',
+  'Aanwezigen en tarieven': 'Osallistujat ja hinnat',
+  'Bedrag': 'Summa',
+  'Per uur': 'Tunnilta',
+  'Per maand': 'Kuukaudelta',
+  'Per jaar': 'Vuodelta',
+  'Aanname voor de omrekening': 'Laskennan oletus',
+  'Betaalde uren per week': 'Palkalliset tunnit viikossa',
+  'Weken per jaar': 'Viikkoa vuodessa',
+  'Opslag werkgeverslasten (%)': 'Työnantajakustannusten korotus (%)',
+  'Voeg een aanwezige toe': 'Lisää osallistuja',
+  'Samen': 'Yhteensä',
+  'Start presentatie': 'Aloita esitys',
+  'per uur': 'tunnilta',
+  'Wordt omgerekend': 'Muunnetaan',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Syötä jokaiselle osallistujalle tunti-, kuukausi- tai vuosihinta. Se jää tälle näytölle eikä sitä tallenneta.',
+  'Kosten van aanwezigen': 'Osallistujien kustannukset',
+  'Uit': 'Pois',
+  'Gewoon — alleen in het eindoverzicht': 'Normaali — vain loppuyhteenvedossa',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisiittinen — juokseva summa ja loppuyhteenveto',
+  'Uurtarief': 'Tuntihinta',
+  'Eén tarief voor de hele groep': 'Yksi hinta koko ryhmälle',
+  'Per aanwezige, bij de start invullen':
+      'Osallistujaa kohden, täytetään alussa',
+  'Groepsuurtarief': 'Ryhmän tuntihinta',
+  'Kosten = verstreken tijd × tarief.': 'Kustannus = kulunut aika × hinta.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Täytetään alussa eikä tallenneta.',
+  'Valuta': 'Valuutta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Arvio osallistujien käyttämästä ajasta — suuntaa antava, ei kirjanpidollinen omakustannus.',
+  'Diaformaat': 'Dian formaatti',
+  'Scherm (16:9)': 'Näyttö (16:9)',
+  'Papierformaat': 'Paperikoko',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Valitse paperikoko jakomateriaaleja ja paperille vientiä varten.',
   'Startmappen': 'Aloituskansiot',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Mistä avaaminen ja tallennus alkavat. Tyhjä käyttää ensimmäistä kirjastoa.',

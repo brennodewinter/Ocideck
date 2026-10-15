@@ -1751,6 +1751,75 @@ const _dutchSourceAddId = <String, String>{
   'Wachtwoord herhalen': 'Ulangi kata sandi',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Masukkan pertemuan Anda ke kalender Anda sendiri — diperbarui saat ada perubahan dan pembatalan.',
+  'Omrekening naar euro': 'Konversi ke euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Untuk tampilan EUR, OciDeck memakai satu kurs per sesi. Isi kurs sendiri atau ambil kurs referensi ECB.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Ambil kurs dari Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Satu permintaan per mata uang ke api.frankfurter.dev hanya dengan kode mata uang; layanan tersebut memang melihat alamat IP. Tidak ada data presentasi yang dikirim.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Pengambilan gagal — isi kurs sendiri atau lanjutkan tanpa kurs.',
+  'Zonder koers doorgaan': 'Lanjutkan tanpa kurs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kurs tidak valid — gunakan misalnya 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'tanggal acuan',
+  'verouderd': 'kedaluwarsa',
+  'koers': 'kurs',
+  'koers ontbreekt': 'kurs tidak ada',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs tidak ada — padanan EUR tidak dihitung.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'baris input tidak dikonversi — kurs tidak ada.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Tidak ada proposal berguna yang ditemukan. Isi sendiri detailnya.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Proposal AI tidak dapat diambil. Periksa pengaturan AI atau isi sendiri detailnya.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Gunakan tanggal yang valid seperti YYYY-MM-DD, atau kosongkan kolom tersebut.',
+  'Documentgegevens': 'Data dokumen',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Rincian ini menjelaskan dokumen ini dalam berkas. File sumber tidak diubah.',
+  'Korte omschrijving': 'Deskripsi singkat',
+  'Waar gaat dit document over?': 'Tentang apa dokumen ini?',
+  'Documentdatum': 'Tanggal dokumen',
+  'JJJJ-MM-DD': 'YYYY-MM-DD',
+  'Opsteller': 'Penulis dokumen',
+  'Gegevens voorstellen met AI': 'Sarankan detail dengan AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Proposal AI selesai. Periksa dan ubah sebelum disimpan.',
+  'Dossier als PDF exporteren': 'Ekspor dokumen sebagai PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF berisi sampul, daftar isi, dan semua dokumen dalam urutan berkas.',
+  'Tussenpagina vóór elk document': 'Halaman perantara sebelum setiap dokumen',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Dengan nomor, judul, deskripsi, tanggal, penulis dan SHA-256.',
+  'Volledige gegevens tonen': 'Tampilkan rincian lengkap',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Data pribadi yang ditemukan disembunyikan secara default. Pilih detail lengkap hanya untuk penerima yang dituju.',
+  'PDF maken': 'Buat PDF',
+  'Documentgegevens bewerken': 'Edit informasi dokumen',
+  'Dossier-PDF opgeslagen': 'Berkas PDF disimpan',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Berkas PDF tidak dapat dibuat. Periksa dokumen sumber yang diubah atau hilang dan coba lagi.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Berkas PDF tidak dapat dibuat. Coba lagi.',
+  'Referentie vastgelegd': 'Referensi tercatat',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Perubahan belum disimpan di tab; SHA-256 memeriksa versi pada disk.',
+  'Documenten controleren': 'Memeriksa dokumen',
+  'Dit nummer is al in gebruik.': 'Nomor ini sudah digunakan.',
+  'Documenten openen': 'Buka dokumen',
+  'Eerdere SHA-256-waarden': 'Nilai SHA-256 sebelumnya',
+  'Omschrijving wijzigen': 'Ubah deskripsi',
+  'Beginnummer wijzigen': 'Ubah nomor awal',
+  'Vindplaats': 'Lokasi',
+  'Laatst gecontroleerd': 'Terakhir diperiksa',
+  'Nummer wijzigen': 'Ubah nomor',
+  'Waar gaat dit dossier over?': 'Apa isi berkas ini?',
+  'Nummer': 'Nomor',
+  'Gebruik een positief getal.': 'Gunakan angka positif.',
+  'Automatisch nummer': 'Nomor otomatis',
   'Aanvulling gevraagd': 'Diminta tambahan',
   'Aanvulling gevraagd.': 'Diminta tambahan.',
   'Aanvulling gevraagd: {opmerking}': 'Diminta tambahan: {opmerking}',
@@ -1782,6 +1851,114 @@ const _dutchSourceAddId = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Hasil tidak dapat dimuat.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Anda akan melihat hasil Anda di Ujian saya segera setelah dirilis.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Hanya dokumen Markdown dan presentasi (.md) yang dapat ditambahkan.',
+  'OciDeck dossier': 'OciDeck Berkas',
+  'Alle documenten openen': 'Buka semua dokumen',
+  'Alleen overzicht': 'Hanya menampilkan ringkasan',
+  'Alles controleren': 'Periksa semua',
+  'DOSSIER': 'BERKAS',
+  'De SHA-256 klopt al.': 'SHA-256 sudah sesuai.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Entri ini akan dihapus dari dossier. File dokumen tetap disimpan.',
+  'Deze bijlage is niet beschikbaar.': 'Lampiran ini tidak tersedia.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Lampiran ini tidak dapat diperiksa.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Lampiran ini tidak dapat dibuka dengan aman.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Folder dossier ini sudah ada. Pilih nama yang berbeda.',
+  'Dit dossier kon niet worden geopend.': 'Dossier ini tidak dapat dibuka.',
+  'Document gewijzigd': 'Dokumen telah diubah',
+  'Document niet leesbaar': 'Dokumen tidak dapat dibaca',
+  'Document ontbreekt': 'Dokumen hilang',
+  'Document openen': 'Buka dokumen',
+  'Documenten toevoegen': 'Tambahkan dokumen',
+  'Dossier': 'Berkas',
+  'Dossier openen': 'Buka berkas',
+  'Dossier openen…': 'Buka Dossier…',
+  'Dossiertitel wijzigen': 'Ubah Judul Dossier',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Satu lampiran tidak dapat ditambahkan.',
+  'Een goed dossier begint hier': 'Sebuah dossier yang baik dimulai di sini',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Gunakan gagang atau panah untuk mengubah urutan. Angka-angka akan mengikuti secara otomatis.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Berkas telah berubah atau tidak dapat dicatat. Periksa kembali.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dossier tersebut tidak dapat dibuat.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Ini memastikan versi file baru menjadi referensi untuk dossier ini.',
+  'Huidige SHA-256': 'SHA-256 Saat Ini',
+  'Inhoudsopgave en integriteitscontrole':
+      'Daftar Isi dan Pemeriksaan Integritas',
+  'Meer opties': 'Opsi Tambahan',
+  'Naamloos dossier': 'Dossier Tanpa Nama',
+  'Nieuw dossier': 'Berkas baru',
+  'Nieuwe versie vastleggen': 'Catat versi baru',
+  'Nieuwe versie vastleggen?': 'Ingin Mencatat Versi Baru?',
+  'Omhoog verplaatsen': 'Pindahkan ke Atas',
+  'Omlaag verplaatsen': 'Pindahkan ke Bawah',
+  'Onveilige bestandsverwijzing': 'Referensi File Tidak Aman',
+  'Overzicht en bijlagen': 'Ikhtisar dan lampiran',
+  'SHA-256 controleren': 'Periksa SHA-256',
+  'SHA-256 klopt': 'SHA-256 sesuai',
+  'Sleep om te ordenen': 'Seret untuk mengurutkan',
+  'Terug naar dossier': 'Kembali ke berkas',
+  'Titel wijzigen': 'Ubah judul',
+  'Uit dossier verwijderen': 'Hapus dari berkas',
+  'Uit dossier verwijderen?': 'Hapus dari dossier?',
+  'Vastgelegde SHA-256': 'SHA-256 yang ditetapkan',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Tambahkan dokumen ke koleksi ini. File aslinya tetap berada di lokasi semula. Anda dapat mengatur urutan tampilan di sini.',
+  'Wijziging opslaan is mislukt.': 'Penyimpanan perubahan gagal.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Apakah Anda ingin membuka lampiran dalam tab?',
+  'Als document openen': 'Buka dokumen',
+  'Dossier maken': 'Buat berkas',
+  'Het overzicht kon niet als document worden geopend.':
+      'Tampilan ini tidak dapat dibuka sebagai dokumen.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Simpan perubahan pada dokumen tampilan terlebih dahulu atau tutup tab tersebut.',
+  'Kostenindicatie': 'Indikasi biaya',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto atau netto tidak masalah di sini — markup biaya pemberi kerja terpisah.',
+  'Aanwezigen en tarieven': 'Peserta dan tarif',
+  'Bedrag': 'Jumlah',
+  'Per uur': 'Per jam',
+  'Per maand': 'Per bulan',
+  'Per jaar': 'Per tahun',
+  'Aanname voor de omrekening': 'Asumsi untuk konversi',
+  'Betaalde uren per week': 'Jam dibayar per minggu',
+  'Weken per jaar': 'Minggu per tahun',
+  'Opslag werkgeverslasten (%)': 'Markup biaya pemberi kerja (%)',
+  'Voeg een aanwezige toe': 'Tambah peserta',
+  'Samen': 'Bersama',
+  'Start presentatie': 'Mulai presentasi',
+  'per uur': 'per jam',
+  'Wordt omgerekend': 'Akan dikonversi',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Isi tarif per jam, per bulan, atau per tahun untuk tiap peserta. Ini tetap di layar ini dan tidak disimpan.',
+  'Kosten van aanwezigen': 'Biaya peserta',
+  'Uit': 'Mati',
+  'Gewoon — alleen in het eindoverzicht': 'Biasa — hanya di ringkasan akhir',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplisit — total berjalan dan ringkasan akhir',
+  'Uurtarief': 'Tarif per jam',
+  'Eén tarief voor de hele groep': 'Satu tarif untuk seluruh kelompok',
+  'Per aanwezige, bij de start invullen': 'Per peserta, diisi saat mulai',
+  'Groepsuurtarief': 'Tarif per jam grup',
+  'Kosten = verstreken tijd × tarief.': 'Biaya = waktu berlalu × tarif.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Diisi saat mulai dan tidak disimpan.',
+  'Valuta': 'Mata uang',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Perkiraan waktu yang dihabiskan peserta — indikasi, bukan harga pokok akuntansi.',
+  'Diaformaat': 'Format slide',
+  'Scherm (16:9)': 'Layar (16:9)',
+  'Papierformaat': 'Ukuran kertas',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Pilih ukuran kertas untuk handout dan ekspor ke kertas.',
   'Startmappen': 'Folder awal',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Di mana membuka dan menyimpan dimulai. Kosongkan untuk memakai pustaka pertama.',

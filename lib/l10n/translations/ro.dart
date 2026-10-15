@@ -1771,6 +1771,76 @@ const _dutchSourceAddRo = <String, String>{
   'Wachtwoord herhalen': 'Repetați parola',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Puneți-vă întâlnirile în propriul calendar — actualizate la modificări și anulări.',
+  'Omrekening naar euro': 'Conversie în euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Pentru afișarea în EUR, OciDeck folosește un singur curs pe sesiune. Introduceți cursul manual sau preluați cursul de referință al BCE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Preia cursul de la Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'O cerere pe monedă către api.frankfurter.dev doar cu codul monedei; serviciul vede totuși adresa IP. Nu se trimit date ale prezentării.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Preluarea a eșuat — introduceți cursul manual sau continuați fără curs.',
+  'Zonder koers doorgaan': 'Continuă fără curs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Curs nevalid — folosiți, de exemplu, 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'data de referință',
+  'verouderd': 'depășit',
+  'koers': 'curs',
+  'koers ontbreekt': 'lipsește cursul',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Lipsește cursul — echivalentul în EUR nu a fost calculat.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'rând(uri) de intrare neconvertit(e) — lipsea cursul.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nu a fost găsită nicio propunere utilă. Completați singuri detaliile.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Propunerea AI nu a putut fi preluată. Verificați setările AI sau completați singuri detaliile.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Utilizați o dată validă, cum ar fi AAAA-LL-ZZ sau lăsați câmpul necompletat.',
+  'Documentgegevens': 'Datele documentului',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Aceste detalii descriu acest document în dosar. Fișierul sursă nu este schimbat.',
+  'Korte omschrijving': 'Scurtă descriere',
+  'Waar gaat dit document over?': 'Despre ce este acest document?',
+  'Documentdatum': 'Data documentului',
+  'JJJJ-MM-DD': 'AAAA-LL-ZZ',
+  'Opsteller': 'Autorul documentului',
+  'Gegevens voorstellen met AI': 'Sugerați detalii cu AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Propunerea AI finalizată. Verificați și modificați-l înainte de a salva.',
+  'Dossier als PDF exporteren': 'Exportați dosarul ca PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF-ul conține o copertă, un cuprins și toate documentele în ordinea dosarului.',
+  'Tussenpagina vóór elk document':
+      'Pagina intermediară înaintea fiecărui document',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Cu număr, titlu, descriere, dată, autor și SHA-256.',
+  'Volledige gegevens tonen': 'Afișați detaliile complete',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Datele personale găsite sunt ascunse în mod implicit. Alegeți detaliile complete numai pentru destinatarul vizat.',
+  'PDF maken': 'Creați PDF',
+  'Documentgegevens bewerken': 'Editați informațiile documentului',
+  'Dossier-PDF opgeslagen': 'Dosar PDF salvat',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dosarul PDF nu a putut fi creat. Verificați documentul sursă schimbat sau lipsă și încercați din nou.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dosarul PDF nu a putut fi creat. Încearcă din nou.',
+  'Referentie vastgelegd': 'Referința este înregistrată',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Modificări nesalvate în filă; SHA-256 verifică versiunea de pe disc.',
+  'Documenten controleren': 'Verificarea documentelor',
+  'Dit nummer is al in gebruik.': 'Acest număr este deja folosit.',
+  'Documenten openen': 'Deschide documente',
+  'Eerdere SHA-256-waarden': 'Valori SHA-256 anterioare',
+  'Omschrijving wijzigen': 'Schimbă descrierea',
+  'Beginnummer wijzigen': 'Schimbă numărul de început',
+  'Vindplaats': 'Locație',
+  'Laatst gecontroleerd': 'Ultima verificare',
+  'Nummer wijzigen': 'Schimbă numărul',
+  'Waar gaat dit dossier over?': 'Despre ce este acest dosar?',
+  'Nummer': 'Număr',
+  'Gebruik een positief getal.': 'Folosește un număr pozitiv.',
+  'Automatisch nummer': 'Număr automat',
   'Aanvulling gevraagd': 'Completare solicitată',
   'Aanvulling gevraagd.': 'Completare solicitată.',
   'Aanvulling gevraagd: {opmerking}': 'Completare solicitată: {opmerking}',
@@ -1804,6 +1874,113 @@ const _dutchSourceAddRo = <String, String>{
       'Rezultatele nu au putut fi încărcate.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Veți vedea rezultatul sub Examenele mele imediat ce este publicat.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Doar documentele Markdown și prezentările (.md) pot fi adăugate.',
+  'OciDeck dossier': 'OciDeck Dosar',
+  'Alle documenten openen': 'Deschide toate documentele',
+  'Alleen overzicht': 'Doar afisează o prezentare generală.',
+  'Alles controleren': 'Verifică tot',
+  'DOSSIER': 'DOSAR',
+  'De SHA-256 klopt al.': 'SHA-256-ul este verificat deja.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Intrarea dispare din dosar. Fișierul document este păstrat.',
+  'Deze bijlage is niet beschikbaar.': 'Această anexă nu este disponibilă.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Această anexă nu poate fi verificată.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Această anexă nu putea fi deschisă în siguranță.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Această hartă de dosar există deja. Alege o altă denumire.',
+  'Dit dossier kon niet worden geopend.': 'Acest dosar nu putea fi deschis.',
+  'Document gewijzigd': 'Documentul a fost modificat.',
+  'Document niet leesbaar': 'Fișierul nu poate fi citit.',
+  'Document ontbreekt': 'Fișierul lipsesc.',
+  'Document openen': 'Deschide documentul',
+  'Documenten toevoegen': 'Adaugă documente',
+  'Dossier': 'Dosar',
+  'Dossier openen': 'Deschide dosarul',
+  'Dossier openen…': 'Deschide dosarul…',
+  'Dossiertitel wijzigen': 'Modifică titlul dosarului.',
+  'Een bijlage kon niet worden toegevoegd.': 'O anexa nu a putut fi adăugată.',
+  'Een goed dossier begint hier': 'Un dosar bun începe aici.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Utilizează maneta sau săgețile pentru a modifica ordinea. Numerele se actualizează automat.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Fișierul s-a modificat sau nu a putut fi înregistrat. Verifică din nou.',
+  'Het dossier kon niet worden aangemaakt.': 'Dossierul nu a putut fi creat.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Prin aceasta, noua versiune a fișierului devine referința pentru acest dosar.',
+  'Huidige SHA-256': 'SHA-256 curent',
+  'Inhoudsopgave en integriteitscontrole':
+      'Cuprins și verificare a integrității',
+  'Meer opties': 'Mai multe opțiuni',
+  'Naamloos dossier': 'Dossar neamț',
+  'Nieuw dossier': 'Dosar nou',
+  'Nieuwe versie vastleggen': 'Înregistrează versiunea nouă',
+  'Nieuwe versie vastleggen?': 'Înregistrează noua versiune?',
+  'Omhoog verplaatsen': 'Mută în sus',
+  'Omlaag verplaatsen': 'Mută în jos',
+  'Onveilige bestandsverwijzing': 'Referință de fișier nesigură',
+  'Overzicht en bijlagen': 'Privare și Anexe',
+  'SHA-256 controleren': 'Verificați SHA-256',
+  'SHA-256 klopt': 'SHA-256 este corect',
+  'Sleep om te ordenen': 'Trageți pentru a sorta',
+  'Terug naar dossier': 'Înapoi la dosar',
+  'Titel wijzigen': 'Modificați titlul',
+  'Uit dossier verwijderen': 'Elimină din dosar',
+  'Uit dossier verwijderen?': 'Eliminați din dosar?',
+  'Vastgelegde SHA-256': 'SHA-256 Stabilit',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Adaugă documente în această colecție. Originalele vor rămâne în locația lor inițială. Poți alege ordinea în care sunt afișate.',
+  'Wijziging opslaan is mislukt.': 'Salvarea modificării nu a reușit.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Doriți să deschideți și anexe în taburi?',
+  'Als document openen': 'Deschide documentul.',
+  'Dossier maken': 'Creează dosar',
+  'Het overzicht kon niet als document worden geopend.':
+      'Nu a putut fi deschis vizualizarea ca document.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Salvează modificările în documentul de vizualizare mai întâi sau închide acel tab.',
+  'Kostenindicatie': 'Indicație de cost',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brut sau net nu contează aici — adaosul pentru costurile angajatorului este separat.',
+  'Aanwezigen en tarieven': 'Participanți și tarife',
+  'Bedrag': 'Sumă',
+  'Per uur': 'Pe oră',
+  'Per maand': 'Pe lună',
+  'Per jaar': 'Pe an',
+  'Aanname voor de omrekening': 'Ipoteză pentru conversie',
+  'Betaalde uren per week': 'Ore plătite pe săptămână',
+  'Weken per jaar': 'Săptămâni pe an',
+  'Opslag werkgeverslasten (%)': 'Marjă costuri angajator (%)',
+  'Voeg een aanwezige toe': 'Adaugă un participant',
+  'Samen': 'Împreună',
+  'Start presentatie': 'Începe prezentarea',
+  'per uur': 'pe oră',
+  'Wordt omgerekend': 'Va fi convertit',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Introdu pentru fiecare participant o tarifare pe oră, lună sau an. Rămâne pe acest ecran și nu este salvată nicăieri.',
+  'Kosten van aanwezigen': 'Costul participanților',
+  'Uit': 'Dezactivat',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — doar în rezumatul final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicit — sumă curentă și rezumat final',
+  'Uurtarief': 'Tarif orar',
+  'Eén tarief voor de hele groep': 'Un singur tarif pentru tot grupul',
+  'Per aanwezige, bij de start invullen':
+      'Pe participant, completat la început',
+  'Groepsuurtarief': 'Tarif orar de grup',
+  'Kosten = verstreken tijd × tarief.': 'Cost = timp scurs × tarif.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Completat la început și nu este salvat.',
+  'Valuta': 'Monedă',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'O estimare a timpului pe care îl petrec participanții — o indicație, nu un preț de cost contabil.',
+  'Diaformaat': 'Format diapozitiv',
+  'Scherm (16:9)': 'Ecran (16:9)',
+  'Papierformaat': 'Format hârtie',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Alegeți un format de hârtie pentru materialele tipărite și exporturile pe hârtie.',
   'Startmappen': 'Dosare de pornire',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unde încep deschiderea și salvarea. Gol folosește prima bibliotecă.',

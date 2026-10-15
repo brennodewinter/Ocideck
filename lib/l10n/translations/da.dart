@@ -1753,6 +1753,75 @@ const _dutchSourceAddDa = <String, String>{
   'Wachtwoord herhalen': 'Gentag adgangskode',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Sæt dine møder i din egen kalender — opdateret ved ændringer og aflysninger.',
+  'Omrekening naar euro': 'Omregning til euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Til EUR-visningen bruger OciDeck én kurs pr. session. Indtast kursen selv, eller hent ECB\'s referencekurs.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Hent kurs fra Frankfurter (ECB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Én anmodning pr. valuta til api.frankfurter.dev med kun valutakoden; tjenesten ser dog IP-adressen. Der sendes ingen præsentationsdata.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Hentning mislykkedes — indtast kursen selv, eller fortsæt uden kurs.',
+  'Zonder koers doorgaan': 'Fortsæt uden kurs',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Ugyldig kurs — brug for eksempel 0,92.',
+  'handmatig': 'manuelt',
+  'peildatum': 'skæringsdato',
+  'verouderd': 'forældet',
+  'koers': 'kurs',
+  'koers ontbreekt': 'kurs mangler',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs mangler — EUR-modværdi er ikke beregnet.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'inputlinje(r) ikke omregnet — kursen manglede.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Der blev ikke fundet noget brugbart forslag. Udfyld selv detaljerne.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI-forslaget kunne ikke hentes. Tjek AI-indstillingerne eller udfyld selv detaljerne.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Brug en gyldig dato såsom ÅÅÅÅ-MM-DD, eller lad feltet stå tomt.',
+  'Documentgegevens': 'Dokument data',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Disse detaljer beskriver dette dokument i dossieret. Kildefilen er ikke ændret.',
+  'Korte omschrijving': 'Kort beskrivelse',
+  'Waar gaat dit document over?': 'Hvad handler dette dokument om?',
+  'Documentdatum': 'Dokumentdato',
+  'JJJJ-MM-DD': 'ÅÅÅÅ-MM-DD',
+  'Opsteller': 'Dokumentforfatter',
+  'Gegevens voorstellen met AI': 'Foreslå detaljer med AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI-forslag afsluttet. Tjek og skift det, før du gemmer.',
+  'Dossier als PDF exporteren': 'Eksporter dossier som PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF\'en indeholder et omslag, en indholdsfortegnelse og alle dokumenter i dossierrækkefølge.',
+  'Tussenpagina vóór elk document': 'Mellemside før hvert dokument',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Med nummer, titel, beskrivelse, dato, forfatter og SHA-256.',
+  'Volledige gegevens tonen': 'Vis alle detaljer',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Personlige data fundet er skjult som standard. Vælg kun alle detaljer for den påtænkte modtager.',
+  'PDF maken': 'Opret PDF',
+  'Documentgegevens bewerken': 'Rediger dokumentoplysninger',
+  'Dossier-PDF opgeslagen': 'Dossier PDF gemt',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier PDF kunne ikke oprettes. Tjek det ændrede eller manglende kildedokument, og prøv igen.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier PDF kunne ikke oprettes. Prøv igen.',
+  'Referentie vastgelegd': 'Henvisningen er registreret.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Ikke-gemte ændringer i fanen; SHA-256 kontrollerer versionen på disken.',
+  'Documenten controleren': 'Kontrollerer dokumenter',
+  'Dit nummer is al in gebruik.': 'Dette nummer er allerede i brug.',
+  'Documenten openen': 'Åbn dokumenter',
+  'Eerdere SHA-256-waarden': 'Tidligere SHA-256-værdier',
+  'Omschrijving wijzigen': 'Rediger beskrivelse',
+  'Beginnummer wijzigen': 'Skift startnummer',
+  'Vindplaats': 'Placering',
+  'Laatst gecontroleerd': 'Sidst kontrolleret',
+  'Nummer wijzigen': 'Skift nummer',
+  'Waar gaat dit dossier over?': 'Hvad handler denne sag om?',
+  'Nummer': 'Nummer',
+  'Gebruik een positief getal.': 'Brug et positivt tal.',
+  'Automatisch nummer': 'Automatisk nummer',
   'Aanvulling gevraagd': 'Supplering ønskes',
   'Aanvulling gevraagd.': 'Supplering ønskes.',
   'Aanvulling gevraagd: {opmerking}': 'Supplering ønskes: {opmerking}',
@@ -1785,6 +1854,116 @@ const _dutchSourceAddDa = <String, String>{
       'Resultaterne kunne ikke indlæses.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Du kan se dit resultat under Mine eksamener, så snart det er frigivet.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Kun Markdown-dokumenter og -præsentationer (.md) kan tilføjes.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Åbn alle dokumenter',
+  'Alleen overzicht': 'Kun overblikket vises',
+  'Alles controleren': 'Kontrollér alle',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'SHA-256-værdien stemmer overens med den.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Posteringen forsvinder fra dossiér. Dokumentfilen bevares.',
+  'Deze bijlage is niet beschikbaar.':
+      'Denne vedhæftede fil er ikke tilgængelig.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Denne vedhæftede fil kan ikke kontrolleres.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Denne vedhæftede fil kunne ikke sikkert åbnes.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Denne mappestruktur eksisterer allerede. Vælg et andet navn.',
+  'Dit dossier kon niet worden geopend.': 'Dette dossiér kunne ikke åbnes.',
+  'Document gewijzigd': 'Dokumentet er blevet ændret',
+  'Document niet leesbaar': 'Dokumentet er ikke læseligt.',
+  'Document ontbreekt': 'Dokumentet mangler.',
+  'Document openen': 'Åbn dokument',
+  'Documenten toevoegen': 'Tilføj dokumenter',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Åbn dossier',
+  'Dossier openen…': 'Åbn dossieret…',
+  'Dossiertitel wijzigen': 'Dossierets titel ændres.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'En vedhæftet kunne ikke tilføjes.',
+  'Een goed dossier begint hier': 'Et godt dossier begynder her.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Brug håndtaget eller pilene til at ændre rækkefølgen. Numrene følger automatisk.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Filen er ændret eller kunne ikke registreres. Tjek igen.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dossietet kunne ikke blive oprettet.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Dette sikrer, at den nye filversion er referencen for dette dossier.',
+  'Huidige SHA-256': 'Nuværende SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Indholdsfortegnelse og integritetskontrol',
+  'Meer opties': 'Flere muligheder',
+  'Naamloos dossier': 'Ubenavnt dossier',
+  'Nieuw dossier': 'Nyt dossier',
+  'Nieuwe versie vastleggen': 'Registrer ny version',
+  'Nieuwe versie vastleggen?': 'Fastlæg ny version?',
+  'Omhoog verplaatsen': 'Flyt opad',
+  'Omlaag verplaatsen': 'Flyt nedad',
+  'Onveilige bestandsverwijzing': 'Ugyldig filhenvisning',
+  'Overzicht en bijlagen': 'Oversigt og bilag',
+  'SHA-256 controleren': 'Kontroller SHA-256-værdien',
+  'SHA-256 klopt': 'SHA-256 stemmer overens',
+  'Sleep om te ordenen': 'Træk for at sortere',
+  'Terug naar dossier': 'Tilbage til dossier',
+  'Titel wijzigen': 'Omdøb titel',
+  'Uit dossier verwijderen': 'Fjern fra dossier',
+  'Uit dossier verwijderen?': 'Fjern fra dossiér?',
+  'Vastgelegde SHA-256': 'Fastlagt SHA-256-værdi',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Tilføj dokumenter til samlingen. De originale filer forbliver i deres oprindelige mappe. Du kan vælge, hvordan dokumenterne vises her.',
+  'Wijziging opslaan is mislukt.': 'Ændringen blev ikke gemt.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Vil du åbne bilagene i faner?',
+  'Als document openen': 'Åbn dokumentet',
+  'Dossier maken': 'Opret dossier',
+  'Het overzicht kon niet als document worden geopend.':
+      'Oversigten kunne ikke åbnes som et dokument.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Gem ændringer i dokumentet for oversigtstabsfane først eller luk fanen.',
+  'Kostenindicatie': 'Omkostningsindikation',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto eller netto er ligegyldigt her — arbejdsgiveromkostnings-tillægget står separat.',
+  'Aanwezigen en tarieven': 'Deltagere og satser',
+  'Bedrag': 'Beløb',
+  'Per uur': 'Pr. time',
+  'Per maand': 'Pr. måned',
+  'Per jaar': 'Pr. år',
+  'Aanname voor de omrekening': 'Antagelse for omregningen',
+  'Betaalde uren per week': 'Betalte timer om ugen',
+  'Weken per jaar': 'Uger om året',
+  'Opslag werkgeverslasten (%)': 'Arbejdsgiveromkostningstillæg (%)',
+  'Voeg een aanwezige toe': 'Tilføj en deltager',
+  'Samen': 'Tilsammen',
+  'Start presentatie': 'Start præsentationen',
+  'per uur': 'i timen',
+  'Wordt omgerekend': 'Omregnes',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Indtast en time-, måneds- eller årssats pr. deltager. Det bliver på denne skærm og gemmes ingen steder.',
+  'Kosten van aanwezigen': 'Deltagernes omkostninger',
+  'Uit': 'Fra',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — kun i afslutningsoversigten',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplicit — løbende beløb og afslutningsoversigt',
+  'Uurtarief': 'Timesats',
+  'Eén tarief voor de hele groep': 'Én sats for hele gruppen',
+  'Per aanwezige, bij de start invullen': 'Pr. deltager, udfyldes ved start',
+  'Groepsuurtarief': 'Gruppens timesats',
+  'Kosten = verstreken tijd × tarief.': 'Omkostning = forløben tid × sats.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Udfyldes ved start og gemmes ikke.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Et skøn over den tid, deltagerne bruger — en indikation, ikke en regnskabsmæssig kostpris.',
+  'Diaformaat': 'Diasformat',
+  'Scherm (16:9)': 'Skærm (16:9)',
+  'Papierformaat': 'Papirformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Vælg et papirformat til handouts og eksport på papir.',
   'Startmappen': 'Startmapper',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Hvor åbning og gemning begynder. Tomt felt bruger det første bibliotek.',

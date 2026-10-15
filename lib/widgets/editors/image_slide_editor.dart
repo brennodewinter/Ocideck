@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart';
+import '../../models/slide_format.dart';
 import '../../services/image_service.dart';
 import '../slides/image_crop_dialog.dart';
 import '_editor_field.dart';
@@ -13,6 +14,10 @@ class ImageSlideEditor extends StatefulWidget {
   final String? captionBasePath;
   final bool nestedInScrollView;
 
+  /// De diaverhouding van het deck (#2433) — de crop-stage toont de sleuf in
+  /// dezelfde verhouding als de dia.
+  final double slideAspect;
+
   const ImageSlideEditor({
     super.key,
     required this.slide,
@@ -21,6 +26,7 @@ class ImageSlideEditor extends StatefulWidget {
     this.searchPaths = const [],
     this.captionBasePath,
     this.nestedInScrollView = false,
+    this.slideAspect = kScreenSlideAspect,
   });
 
   @override
@@ -79,7 +85,7 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
       context,
       imagePath: widget.slide.imagePath,
       projectPath: widget.captionBasePath,
-      frameAspect: 16 / 9,
+      frameAspect: widget.slideAspect,
       imageSize: widget.slide.imageSize,
       focalX: widget.slide.imageFocalX,
       focalY: widget.slide.imageFocalY,

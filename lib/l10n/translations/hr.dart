@@ -1757,6 +1757,76 @@ const _dutchSourceAddHr = <String, String>{
   'Wachtwoord herhalen': 'Ponovite lozinku',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Stavite svoje sastanke u vlastiti kalendar — ažurirano pri promjenama i otkazivanjima.',
+  'Omrekening naar euro': 'Preračun u eure',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Za prikaz u EUR OciDeck koristi jedan tečaj po sesiji. Unesite tečaj sami ili dohvatite referentni tečaj ESB-a.',
+  'Koers ophalen bij Frankfurter (ECB)':
+      'Dohvati tečaj iz usluge Frankfurter (ESB)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Jedan zahtjev po valuti prema api.frankfurter.dev samo s kodom valute; usluga ipak vidi IP adresu. Podaci prezentacije se ne šalju.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Dohvaćanje nije uspjelo — unesite tečaj sami ili nastavite bez tečaja.',
+  'Zonder koers doorgaan': 'Nastavi bez tečaja',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Nevaljan tečaj — upotrijebite npr. 0,92.',
+  'handmatig': 'ručno',
+  'peildatum': 'datum tečaja',
+  'verouderd': 'zastarjelo',
+  'koers': 'tečaj',
+  'koers ontbreekt': 'nedostaje tečaj',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Nedostaje tečaj — protuvrijednost u EUR nije izračunana.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'redak/reci unosa nisu preračunati — nedostajao je tečaj.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nije pronađen nijedan koristan prijedlog. Sami ispunite podatke.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI prijedlog nije moguće dohvatiti. Provjerite AI postavke ili sami ispunite detalje.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Koristite važeći datum kao što je GGGG-MM-DD ili ostavite polje prazno.',
+  'Documentgegevens': 'Podaci o dokumentu',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ovi detalji opisuju ovaj dokument u dosjeu. Izvorna datoteka nije promijenjena.',
+  'Korte omschrijving': 'Kratki opis',
+  'Waar gaat dit document over?': 'O čemu se radi u ovom dokumentu?',
+  'Documentdatum': 'Datum dokumenta',
+  'JJJJ-MM-DD': 'GGGG-MM-DD',
+  'Opsteller': 'Autor dokumenta',
+  'Gegevens voorstellen met AI': 'Predloži detalje pomoću AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI prijedlog dovršen. Provjerite i promijenite ga prije spremanja.',
+  'Dossier als PDF exporteren': 'Izvoz dosjea kao PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF sadrži naslovnicu, sadržaj i sve dokumente prema redoslijedu dosjea.',
+  'Tussenpagina vóór elk document': 'Međustranica prije svakog dokumenta',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Sa brojem, naslovom, opisom, datumom, autorom i SHA-256.',
+  'Volledige gegevens tonen': 'Prikaži sve pojedinosti',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Pronađeni osobni podaci skriveni su prema zadanim postavkama. Odaberite sve pojedinosti samo za namjeravanog primatelja.',
+  'PDF maken': 'Izradi PDF',
+  'Documentgegevens bewerken': 'Uredite informacije o dokumentu',
+  'Dossier-PDF opgeslagen': 'Dosje PDF spremljen',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Nije moguće izraditi PDF dosjea. Provjerite promijenjeni ili nedostajući izvorni dokument i pokušajte ponovno.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Nije moguće izraditi PDF dosjea. Pokušajte ponovno.',
+  'Referentie vastgelegd': 'Referenca je evidentirana',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Nespremljene promjene na kartici; SHA-256 provjerava verziju na disku.',
+  'Documenten controleren': 'Provjera dokumenata',
+  'Dit nummer is al in gebruik.': 'Ovaj se broj već koristi.',
+  'Documenten openen': 'Otvori dokumente',
+  'Eerdere SHA-256-waarden': 'Prethodne SHA-256 vrijednosti',
+  'Omschrijving wijzigen': 'Promijeni opis',
+  'Beginnummer wijzigen': 'Promijeni početni broj',
+  'Vindplaats': 'Lokacija',
+  'Laatst gecontroleerd': 'Zadnja provjera',
+  'Nummer wijzigen': 'Promijeni broj',
+  'Waar gaat dit dossier over?': 'O čemu je ovaj dosje?',
+  'Nummer': 'Broj',
+  'Gebruik een positief getal.': 'Upotrijebite pozitivan broj.',
+  'Automatisch nummer': 'Automatski broj',
   'Aanvulling gevraagd': 'Zatraženo dopunjavanje',
   'Aanvulling gevraagd.': 'Zatraženo je dopunjavanje.',
   'Aanvulling gevraagd: {opmerking}': 'Zatraženo dopunjavanje: {opmerking}',
@@ -1789,6 +1859,114 @@ const _dutchSourceAddHr = <String, String>{
       'Rezultati se nisu mogli učitati.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Svoj rezultat vidjet ćete u odjeljku Moji ispiti čim bude objavljen.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Samo Markdown dokumenti i prezentacije (.md) mogu se dodati.',
+  'OciDeck dossier': 'OciDeck Dosje',
+  'Alle documenten openen': 'Otvori sve dokumente',
+  'Alleen overzicht': 'Prikaži samo pregled.',
+  'Alles controleren': 'Provjeri sve',
+  'DOSSIER': 'DOSJE',
+  'De SHA-256 klopt al.': 'SHA-256 provjera je već uspješna.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Ovo natrag se uklanja iz dossijera. Datoteka ostaje pohranjena.',
+  'Deze bijlage is niet beschikbaar.': 'Ova priloga nije dostupna.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Ovaj prilog se ne može provjeriti.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Ovaj prilog nije mogao biti sigurno otvoren.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Ovaj direktorij se već nalazi. Odaberite drugo ime.',
+  'Dit dossier kon niet worden geopend.': 'Ovaj dosje nije mogao biti otvoren.',
+  'Document gewijzigd': 'Dokument je promijenjen.',
+  'Document niet leesbaar': 'Dokument nije čitljiv.',
+  'Document ontbreekt': 'Dokument je nedostupan.',
+  'Document openen': 'Otvori dokument',
+  'Documenten toevoegen': 'Dodaj dokumente',
+  'Dossier': 'Dosje',
+  'Dossier openen': 'Otvori dosje',
+  'Dossier openen…': 'Otvoriti dossijer…',
+  'Dossiertitel wijzigen': 'Promijeniti naslov dossijera.',
+  'Een bijlage kon niet worden toegevoegd.':
+      'Jedan priložaj nije mogao biti dodan.',
+  'Een goed dossier begint hier': 'Dobro je začeti dossijer ovdje.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Koristite ručku ili strelice za promjenu reda. Brojevi se automatski ažuriraju.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Datoteka se promijenila ili nije mogla biti zabilježena. Provjerite ponovno.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dossier nije moglo biti stvoreno.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Time je sada nova verzija referenca za ovo dossier.',
+  'Huidige SHA-256': 'Trenutačni SHA-256',
+  'Inhoudsopgave en integriteitscontrole': 'Sadržaj i provjera integritete',
+  'Meer opties': 'Dodatne opcije',
+  'Naamloos dossier': 'Dossier bez imena',
+  'Nieuw dossier': 'Novi dosje',
+  'Nieuwe versie vastleggen': 'Zabilježi novu verziju',
+  'Nieuwe versie vastleggen?': 'Želite li sačuvati novu verziju?',
+  'Omhoog verplaatsen': 'Pomišljati prema gore',
+  'Omlaag verplaatsen': 'Pomišljati prema dolje',
+  'Onveilige bestandsverwijzing': 'Nješkodna referenca na datoteku',
+  'Overzicht en bijlagen': 'Pregled i priloge',
+  'SHA-256 controleren': 'Provjeriti SHA-256',
+  'SHA-256 klopt': 'SHA-256 odgovara',
+  'Sleep om te ordenen': 'Povucite da uredite',
+  'Terug naar dossier': 'Natrag na dosje',
+  'Titel wijzigen': 'Promijeniti naslov',
+  'Uit dossier verwijderen': 'Ukloni iz dosjea',
+  'Uit dossier verwijderen?': 'Izbrisati iz popisa?',
+  'Vastgelegde SHA-256': 'Zabeležena SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Dodajte dokumente. Izvorne datoteke ostaju na svojem mjestu. Ovdje odaberite njihov redoslijed.',
+  'Wijziging opslaan is mislukt.': 'Spremanje promjene nije uspjelo.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Želite li i priloge otvoriti u karticama?',
+  'Als document openen': 'Otvorite dokument',
+  'Dossier maken': 'Izradi dosje',
+  'Het overzicht kon niet als document worden geopend.':
+      'Pregled nije mogao biti otvoren kao dokument.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Najprije spremite izmjene u dokumenta pregleda ili zatvorite to natrag.',
+  'Kostenindicatie': 'Pokazatelj troškova',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto ili neto ovdje nije važno — uvećanje za troškove poslodavca je zasebno.',
+  'Aanwezigen en tarieven': 'Prisutni i satnice',
+  'Bedrag': 'Iznos',
+  'Per uur': 'Po satu',
+  'Per maand': 'Po mjesecu',
+  'Per jaar': 'Po godini',
+  'Aanname voor de omrekening': 'Pretpostavka za preračun',
+  'Betaalde uren per week': 'Plaćeni sati tjedno',
+  'Weken per jaar': 'Tjedana godišnje',
+  'Opslag werkgeverslasten (%)': 'Uvećanje troškova poslodavca (%)',
+  'Voeg een aanwezige toe': 'Dodaj prisutnog',
+  'Samen': 'Zajedno',
+  'Start presentatie': 'Pokreni prezentaciju',
+  'per uur': 'po satu',
+  'Wordt omgerekend': 'Preračunat će se',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Unesi po prisutnoj osobi satnicu, mjesečnu ili godišnju plaću. Ostaje na ovom zaslonu i nigdje se ne sprema.',
+  'Kosten van aanwezigen': 'Trošak prisutnih',
+  'Uit': 'Isključeno',
+  'Gewoon — alleen in het eindoverzicht': 'Obično — samo u završnom sažetku',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Eksplicitno — tekući iznos i završni sažetak',
+  'Uurtarief': 'Satnica',
+  'Eén tarief voor de hele groep': 'Jedna satnica za cijelu grupu',
+  'Per aanwezige, bij de start invullen':
+      'Po prisutnoj osobi, unosi se na početku',
+  'Groepsuurtarief': 'Grupna satnica',
+  'Kosten = verstreken tijd × tarief.': 'Trošak = proteklo vrijeme × satnica.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Unosi se na početku i ne sprema.',
+  'Valuta': 'Valuta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Procjena vremena koje prisutni troše — indikacija, ne računovodstvena cijena.',
+  'Diaformaat': 'Format slajda',
+  'Scherm (16:9)': 'Zaslon (16:9)',
+  'Papierformaat': 'Format papira',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Odaberite format papira za materijale za podjelu i izvoz na papir.',
   'Startmappen': 'Početne mape',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Gdje počinju otvaranje i spremanje. Prazno koristi prvu knjižnicu.',

@@ -1769,6 +1769,75 @@ const _dutchSourceAddLa = <String, String>{
   'Wachtwoord herhalen': 'Tesseram repete',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Conventus tuos in calendario tuo proprio pone — mutationibus et abrogationibus renovatur.',
+  'Omrekening naar euro': 'Conversio in euronum',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Ad monstrationem in EUR OciDeck unum cursum per sessionem adhibet. Cursum ipse inscribe vel cursum referentiae BCE pete.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Cursum a Frankfurter (BCE) pete',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Una petitio per nummum ad api.frankfurter.dev cum solo codice nummi; ministerium tamen inscriptionem IP videt. Nulla data praesentationis mittuntur.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Petitio defecit — cursum ipse inscribe vel sine cursu perge.',
+  'Zonder koers doorgaan': 'Sine cursu perge',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Cursus non validus — utere exempli gratia 0,92.',
+  'handmatig': 'manu',
+  'peildatum': 'dies referentiae',
+  'verouderd': 'obsoletus',
+  'koers': 'cursus',
+  'koers ontbreekt': 'cursus deest',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Cursus deest — aequivalens in EUR non computatum.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'linea(e) inputationis non conversa(e) — cursus deerat.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'nulla propositio utilis inventa est. Imple in details te ipsum.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI rogatio insanabilis non est. Reprehendo AI occasus vel in singulis te imple.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Date valido utere ut YYYY-MM-DD, vel agrum blank relinqueret.',
+  'Documentgegevens': 'Notitiae documenti',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Singula haec documentum in fasciculo describunt. Fons lima non mutatur.',
+  'Korte omschrijving': 'Brevis descriptio',
+  'Waar gaat dit document over?': 'Quid est hoc documentum de?',
+  'Documentdatum': 'Dies documenti',
+  'JJJJ-MM-DD': 'AAAA-MM-DD',
+  'Opsteller': 'Auctor documenti',
+  'Gegevens voorstellen met AI': 'Notitias per AI suggerere',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI propositio perficitur. Compesce et mutare ante salutaris.',
+  'Dossier als PDF exporteren': 'Fasciculum ut PDF exportare',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF involucrum, tabulam contentorum et omnia documenta in ordine instrumenti continet.',
+  'Tussenpagina vóór elk document': 'Media pagina coram singulis documentis',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Cum numero, titulo, descriptione, date, authore et SHA-256.',
+  'Volledige gegevens tonen': 'Monstra plena singula',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Personalia notitia inventa occultatur per defaltam. Elige plena singula tantum in animo recipiens.',
+  'PDF maken': 'PDF creare',
+  'Documentgegevens bewerken': 'Documentum recensere informationes',
+  'Dossier-PDF opgeslagen': 'Dossier PDF servavit',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'PDF dossier creari non potuit. Compesce mutatum vel absentis fontem documentum et iterum tenta.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'PDF dossier creari non potuit. Iterum tenta.',
+  'Referentie vastgelegd': 'Referentia consignata',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Mutationes in tabula nondum servatae; SHA-256 versionem in disco inspicit.',
+  'Documenten controleren': 'Documenta inspicere',
+  'Dit nummer is al in gebruik.': 'Hic numerus iam adhibetur.',
+  'Documenten openen': 'Documenta aperire',
+  'Eerdere SHA-256-waarden': 'Valores SHA-256 priores',
+  'Omschrijving wijzigen': 'Descriptionem mutare',
+  'Beginnummer wijzigen': 'Numerum initialem mutare',
+  'Vindplaats': 'Locus',
+  'Laatst gecontroleerd': 'Novissime inspectum',
+  'Nummer wijzigen': 'Numerum mutare',
+  'Waar gaat dit dossier over?': 'De quo hoc dossier agit?',
+  'Nummer': 'Numerus',
+  'Gebruik een positief getal.': 'Numero positivo utere.',
+  'Automatisch nummer': 'Numerus automaticus',
   'Aanvulling gevraagd': 'Supplementum petitum',
   'Aanvulling gevraagd.': 'Supplementum petitum est.',
   'Aanvulling gevraagd: {opmerking}': 'Supplementum petitum: {opmerking}',
@@ -1799,6 +1868,112 @@ const _dutchSourceAddLa = <String, String>{
   'De uitslagen konden niet worden geladen.': 'Eventus onerari non potuerunt.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Eventum tuum sub Meum scribendae videbis simulac emissus erit.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Solum documenta Markdown et praesentationes (.md) adhiberi possunt.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Omnia documenta aperire',
+  'Alleen overzicht': 'Solummodo prospectus ostenditur.',
+  'Alles controleren': 'Omnia verificare',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'Has SHA-256 congruere constat.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'Haec notatio ex dossier evanescit. Filius documenti conservatur.',
+  'Deze bijlage is niet beschikbaar.': 'Haec annexa non praesta est.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'Hanc annexam inspicientes non possunt.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'Hanc annexam non securiter aperire potuerunt.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'Haec repertorium dossier iam existit. Nomen alterum elige.',
+  'Dit dossier kon niet worden geopend.': 'Hoc dossier aperire non potuerunt.',
+  'Document gewijzigd': 'Documentum mutatum est.',
+  'Document niet leesbaar': 'Hic documentum non legitur.',
+  'Document ontbreekt': 'Documentum defectum est.',
+  'Document openen': 'Documentum aperire',
+  'Documenten toevoegen': 'Documenta addere',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Dossier aperire',
+  'Dossier openen…': 'Dossier aperire…',
+  'Dossiertitel wijzigen': 'Titulum dossier mutare.',
+  'Een bijlage kon niet worden toegevoegd.': 'Unus annexus non addi potest.',
+  'Een goed dossier begint hier': 'Unum bonum dossier hic incipit.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Usus habe intercidenum vel sagittas ad ordinem mutandum. Numeri proprie sequuntur.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'Filius mutatus est vel non constans est. Redintegre.',
+  'Het dossier kon niet worden aangemaakt.': 'Inanis est dossier creandi.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Hoc indicat novam versionem filii quam referentiam habet hoc dossier.',
+  'Huidige SHA-256': 'SHA-256 praesentis',
+  'Inhoudsopgave en integriteitscontrole':
+      'Indice et verificatione integritatis',
+  'Meer opties': 'Plus optiones',
+  'Naamloos dossier': 'Dossier incerto nomine',
+  'Nieuw dossier': 'Novum dossier',
+  'Nieuwe versie vastleggen': 'Novam versionem consignare',
+  'Nieuwe versie vastleggen?': 'Versionem novam fixare an?',
+  'Omhoog verplaatsen': 'Ad summum transferre',
+  'Omlaag verplaatsen': 'Ad fundum transferre',
+  'Onveilige bestandsverwijzing': 'Referentia filii periculosa',
+  'Overzicht en bijlagen': 'Panoramica et Appendices',
+  'SHA-256 controleren': 'Verificatio SHA-256',
+  'SHA-256 klopt': 'SHA-256 congruet',
+  'Sleep om te ordenen': 'Truda mova ad ordinandum',
+  'Terug naar dossier': 'Ad dossier redire',
+  'Titel wijzigen': 'Titulum mutare',
+  'Uit dossier verwijderen': 'Ex dossier removere',
+  'Uit dossier verwijderen?': 'Removere ex dossier?',
+  'Vastgelegde SHA-256': 'SHA-256 fixus',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Documenta addere oportet. Originalia in locis suis manent. Hic ordinem exhibitionis constitue.',
+  'Wijziging opslaan is mislukt.': 'Mutatio conservandi abortuta est.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Visne appendices etiam in tabellaceis aperire?',
+  'Als document openen': 'Sicut documentum aperire',
+  'Dossier maken': 'Dossier creare',
+  'Het overzicht kon niet als document worden geopend.':
+      'Praefigium optinendum non potest sicut documentum aperiendum.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Conserva mutationes in documento praeficii, aut clausa tabulam illam.',
+  'Kostenindicatie': 'Sumptuum indicatio',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruttum an netum hic non refert — accrementum sumptuum conductoris separatum est.',
+  'Aanwezigen en tarieven': 'Praesentes et mercedes',
+  'Bedrag': 'Summa',
+  'Per uur': 'Per horam',
+  'Per maand': 'Per mensem',
+  'Per jaar': 'Per annum',
+  'Aanname voor de omrekening': 'Suppositio conversionis',
+  'Betaalde uren per week': 'Horae solutae per hebdomadam',
+  'Weken per jaar': 'Hebdomadae per annum',
+  'Opslag werkgeverslasten (%)': 'Additio sumptuum dativorum (%)',
+  'Voeg een aanwezige toe': 'Praesentem adde',
+  'Samen': 'Simul',
+  'Start presentatie': 'Praesentationem incipe',
+  'per uur': 'per horam',
+  'Wordt omgerekend': 'Convertetur',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Per singulum praesentem mercedem horariam, menstruam vel annuam inscribe. In hoc scaeno manet neque servatur.',
+  'Kosten van aanwezigen': 'Sumptus praesentium',
+  'Uit': 'Exclusum',
+  'Gewoon — alleen in het eindoverzicht': 'Sollemne — tantum in summa finali',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explicitum — summa currens et recapitulatio finalis',
+  'Uurtarief': 'Merces horaria',
+  'Eén tarief voor de hele groep': 'Una merces pro universo coetu',
+  'Per aanwezige, bij de start invullen': 'Per praesentem, initio implendum',
+  'Groepsuurtarief': 'Merces horaria coetus',
+  'Kosten = verstreken tijd × tarief.': 'Sumptus = tempus elapsum × merces.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Initio implendum, numquam servandum.',
+  'Valuta': 'Moneta',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Aestimatio temporis quod praesentes impendunt — indicium, non sumptus computabilis.',
+  'Diaformaat': 'Forma imaginis',
+  'Scherm (16:9)': 'Scrinium (16:9)',
+  'Papierformaat': 'Forma chartae',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Formam chartae pro manuscriptis et exportationibus in charta elige.',
   'Startmappen': 'Carpetae initiales',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Ubi aperire et servare incipiunt. Vacuum relictum prima bibliotheca utitur.',

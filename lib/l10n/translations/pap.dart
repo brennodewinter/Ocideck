@@ -798,6 +798,75 @@ const _dutchSourceAddPap = {
   'Wachtwoord herhalen': 'Repití kódigo di akseso',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Pone bo reunionan den bo propio agenda — wordu aktualisá ora di kambio i kanselashon.',
+  'Omrekening naar euro': 'Konversion pa euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Pa mustra den EUR, OciDeck ta usa un kurso pa sesion. Yena e kurso bo mes òf buska e kurso di referensia di BCE.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Buska kurso na Frankfurter (BCE)',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Un petishon pa moneda pa api.frankfurter.dev ku e kódigo di moneda so; e servisio ta mira e adrès IP. No ta manda ningun dato di presentashon.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Buska a fayá — yena e kurso bo mes òf kontinua sin kurso.',
+  'Zonder koers doorgaan': 'Kontinua sin kurso',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kurso no válido — usa pa ehèmpel 0,92.',
+  'handmatig': 'manual',
+  'peildatum': 'fecha di referensia',
+  'verouderd': 'bieu',
+  'koers': 'kurso',
+  'koers ontbreekt': 'kurso ta falta',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurso ta falta — ekivalente den EUR no a wòrdu kalkulá.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'liña(nan) di entrada no a wòrdu konvertí — kurso tabata falta.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'No a haña ningun proposishon útil. Yena e detayenan bo mes.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'E proposishon di AI no por a wòrdu rekuperá. Kontrolá e settingnan di AI òf yena e detayenan bo mes.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Usa un fecha bálido manera AAAA-MM-DD, òf laga e kampo blanku.',
+  'Documentgegevens': 'Dato di dokumento',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'E detayenan aki ta deskribí e dokumento aki den e dossier. E archivo di fuente no ta kambia.',
+  'Korte omschrijving': 'Deskripshon kòrtiku',
+  'Waar gaat dit document over?': 'Di kiko e dokumento aki ta trata?',
+  'Documentdatum': 'Fecha di dokumento',
+  'JJJJ-MM-DD': 'YYYY-MM-DD',
+  'Opsteller': 'Outor di e dokumento',
+  'Gegevens voorstellen met AI': 'Sugerí detayenan ku AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Proposishon di intiligensia artifisial kompletá. Kontrolá i kambia esaki promé ku warda.',
+  'Dossier als PDF exporteren': 'Eksportá dossier komo PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'E PDF ta kontené un portada, un tabel di kontenido, i tur dokumento den òrdu di dossier.',
+  'Tussenpagina vóór elk document': 'Página intermedio promé ku kada dokumento',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Ku number, título, deskripshon, fecha, outor i SHA-256.',
+  'Volledige gegevens tonen': 'Mustra detaye kompletu',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Datonan personal hañá ta skondí pa default. Skohe detayenan kompletu solamente pa e destinatario intenshoná.',
+  'PDF maken': 'Krea PDF',
+  'Documentgegevens bewerken': 'Editá informashon di dokumento',
+  'Dossier-PDF opgeslagen': 'Dossier PDF wardá',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier PDF no por a wòrdu kreá. Kontrolá e dokumento di fuente ku a kambia òf falta i purba atrobe.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier PDF no por a wòrdu kreá. Purba atrobe.',
+  'Referentie vastgelegd': 'Referensiya rekordá.',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Kambionan no warda den tab; SHA-256 ta kontrolá e vershon riba disko.',
+  'Documenten controleren': 'Kontrolá dokumentonan',
+  'Dit nummer is al in gebruik.': 'E number aki ta den uso kaba.',
+  'Documenten openen': 'Habri dokumentonan',
+  'Eerdere SHA-256-waarden': 'Balornan anterior di SHA-256',
+  'Omschrijving wijzigen': 'Kambia deskripshon',
+  'Beginnummer wijzigen': 'Kambia number di kuminsamentu',
+  'Vindplaats': 'Lugá',
+  'Laatst gecontroleerd': 'Último kontrolá',
+  'Nummer wijzigen': 'Kambia number',
+  'Waar gaat dit dossier over?': 'Di kiko e dosier aki ta trata?',
+  'Nummer': 'Number',
+  'Gebruik een positief getal.': 'Usa un number positivo.',
+  'Automatisch nummer': 'Number outomátiko',
   'Aanvulling gevraagd': 'Komplemento pidi',
   'Aanvulling gevraagd.': 'Komplemento pidi.',
   'Aanvulling gevraagd: {opmerking}': 'Komplemento pidi: {opmerking}',
@@ -829,6 +898,113 @@ const _dutchSourceAddPap = {
   'De uitslagen konden niet worden geladen.': 'No por a karga e resultadonan.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Lo mira bo resultado bou di Mi èksamennan tan lihé ku e ta wòrdu liberá.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Solo dokumento e prezentashon digital (.md) ta poder a adicira.',
+  'OciDeck dossier': 'OciDeck Dosye',
+  'Alle documenten openen': 'Habri tur dokumento',
+  'Alleen overzicht': 'Solo mira el lista.',
+  'Alles controleren': 'Kontrolá tur kos',
+  'DOSSIER': 'DOSYE',
+  'De SHA-256 klopt al.': 'Sha-256 ta korta ya.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'E ta sinta e palabra e ta sinta fora e dossier. E dokumento archivo ta restaura.',
+  'Deze bijlage is niet beschikbaar.': 'E archivo e ta no disponible.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'E archivo e ta no poder kontrola.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'E archivo e ta no poder auka segura.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'E carpeta e dossier e ta ya existi. Seleciona otro nombre.',
+  'Dit dossier kon niet worden geopend.': 'E dossier e ta no poder auka.',
+  'Document gewijzigd': 'Dokumento e ta cambia.',
+  'Document niet leesbaar': 'El dokumento nuná tabay ta biba.',
+  'Document ontbreekt': 'El dokumento ta falta.',
+  'Document openen': 'Habri dokumento',
+  'Documenten toevoegen': 'Añadí dokumento',
+  'Dossier': 'Dosye',
+  'Dossier openen': 'Habri dosye',
+  'Dossier openen…': 'Abrir dossier…',
+  'Dossiertitel wijzigen': 'Cambia el titulo del dossier.',
+  'Een bijlage kon niet worden toegevoegd.': 'Un adjunto nuná tabay ta biba.',
+  'Een goed dossier begint hier': 'Un buen dossier ta komisa aisa.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Uza el maná o los flecha para cambia el orden. Los numero ta sigui automatico.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'El archivo ta cambia o nuná tabay ta biba. Kontrola otra vega.',
+  'Het dossier kon niet worden aangemaakt.': 'El dossier ta dificil kria.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Kisa ta ese nueva versión ta referencia pa el dossier.',
+  'Huidige SHA-256': 'SHA-256 actual',
+  'Inhoudsopgave en integriteitscontrole': 'Kontenido e kontrol di integridad',
+  'Meer opties': 'Mas opcionan',
+  'Naamloos dossier': 'Dossier sin nom',
+  'Nieuw dossier': 'Dosye nobo',
+  'Nieuwe versie vastleggen': 'Registrá vershon nobo',
+  'Nieuwe versie vastleggen?': '¿Registra un nueva versión?',
+  'Omhoog verplaatsen': 'Muevelo riba',
+  'Omlaag verplaatsen': 'Muevelo riba baje',
+  'Onveilige bestandsverwijzing': 'Referencia di archivo inseguro',
+  'Overzicht en bijlagen': 'Vista bishima ta adjunta',
+  'SHA-256 controleren': 'Verifika SHA-256',
+  'SHA-256 klopt': 'SHA-256 ta kopa',
+  'Sleep om te ordenen': 'Traiga pa organiza',
+  'Terug naar dossier': 'Bai bèk na dosye',
+  'Titel wijzigen': 'Muda titulo',
+  'Uit dossier verwijderen': 'Kita for di dosye',
+  'Uit dossier verwijderen?': 'Retira bishima?',
+  'Vastgelegde SHA-256': 'SHA-256 ta kopa',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Agregá dokumentonan. E archivonan original ta keda na nan lugá. Aki bo ta determiná e òrdu.',
+  'Wijziging opslaan is mislukt.': 'Ta kopa ta falla.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Ta deseo ta apertura ta adjunta na pestaña?',
+  'Als document openen': 'Pa abre un dokumento',
+  'Dossier maken': 'Krea dosye',
+  'Het overzicht kon niet als document worden geopend.':
+      'Lo panoramá no poder a ser abre komo dokumento.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Guarda los eskambios den dokumento panoramá primero o ciérre esa pestaña.',
+  'Kostenindicatie': 'Indikashon di kosto',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Bruto of netto no ta importantsia aki — e markap di kostonan di empleador ta apart.',
+  'Aanwezigen en tarieven': 'Presentenan i tarifanan',
+  'Bedrag': 'Suma',
+  'Per uur': 'Pa ora',
+  'Per maand': 'Pa lun',
+  'Per jaar': 'Pa aña',
+  'Aanname voor de omrekening': 'Suposishon pa e konvershon',
+  'Betaalde uren per week': 'Ora paga pa siman',
+  'Weken per jaar': 'Siman pa aña',
+  'Opslag werkgeverslasten (%)': 'Surtaks di kostonan di dunado (%)',
+  'Voeg een aanwezige toe': 'Añadi un presente',
+  'Samen': 'Hunto',
+  'Start presentatie': 'Kuminsá e presentashon',
+  'per uur': 'pa ora',
+  'Wordt omgerekend': 'Ta wordu konvertí',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Yena pa persona presente un tarifa pa ora, luna of aña. E keda riba e pantaya aki i no ta wordu warda.',
+  'Kosten van aanwezigen': 'Kosto di e presentenan',
+  'Uit': 'Pafora',
+  'Gewoon — alleen in het eindoverzicht':
+      'Normal — solamente den e resumen final',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explísito — suma korentí i resumen final',
+  'Uurtarief': 'Tarifa pa ora',
+  'Eén tarief voor de hele groep': 'Un tarifa pa henter e grupo',
+  'Per aanwezige, bij de start invullen':
+      'Pa persona presente, yena na e start',
+  'Groepsuurtarief': 'Tarifa pa ora di e grupo',
+  'Kosten = verstreken tijd × tarief.': 'Kosto = tempu pasa × tarifa.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Ta wordu yena na e start i no ta wordu warda.',
+  'Valuta': 'Moneda',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'Un estimashon di e tempu ku e presentenan ta pèrdè — un indikashon, no un kosto bukhoudkundig.',
+  'Diaformaat': 'Formato di slide',
+  'Scherm (16:9)': 'Pantaya (16:9)',
+  'Papierformaat': 'Formato di papel',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Skohe un formato di papel pa hand-outs i eksportashon na papel.',
   'Startmappen': 'Mapa di kuminsamentu',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Unda habri i warda ta kuminsá. Laga bashí ta usa e promé biblioteka.',

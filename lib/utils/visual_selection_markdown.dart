@@ -45,7 +45,7 @@ VisualClipboardPayload? visualClipboardPayload(
       : safeEnd;
   final markdown = atLineStart
       ? _markdownOfRange(document, start, deleteEnd)
-      : document.getPlainText(start, safeEnd - start);
+      : _markdownFromMidLine(document, start, safeEnd);
   final cleaned = markdown.trimRight();
   if (cleaned.isEmpty) return null;
   return VisualClipboardPayload(
@@ -53,6 +53,32 @@ VisualClipboardPayload? visualClipboardPayload(
     end: deleteEnd,
     markdown: cleaned,
   );
+}
+
+/// Een selectie die midden in een regel begint (#2439). Het begin ervan is
+/// een tekstfragment: een deel van een lijstitem is geen lijstitem. Alles
+/// vanaf de volgende regel is wél hele regels en gaat met zijn eigen
+/// blokopmaak mee — anders verdwijnen bullets, nummering en vinkjes van elk
+/// volledig geselecteerd item, want platte tekst kent ze niet.
+String _markdownFromMidLine(Document document, int start, int end) {
+  final first = document.queryChild(start).node;
+  if (first is! Line) return document.getPlainText(start, end - start);
+  // Positie van de regelafsluiter van de eerste regel.
+  final firstLineBreak = first.documentOffset + first.length - 1;
+  if (end <= firstLineBreak) {
+    return document.getPlainText(start, end - start);
+  }
+  final head = document.getPlainText(start, firstLineBreak - start);
+  final tailStart = firstLineBreak + 1;
+  // De selectie eindigt precies achter het regeleinde: er valt niets meer te
+  // serialiseren. Zonder deze stop kreeg de ónderliggende regel een leeg
+  // lijstitem, omdat de afsluiter ontbrak en die met haar opmaak werd aangevuld.
+  if (end <= tailStart) return head;
+  final tail = _markdownOfRange(document, tailStart, end);
+  if (head.trim().isEmpty) return tail;
+  // Een lege regel ertussen: een genummerde lijst die niet met 1 begint kan in
+  // Markdown geen alinea onderbreken en zou aan het fragment vastplakken.
+  return '$head\n\n$tail';
 }
 
 bool _atLineStart(Document document, int start) {
@@ -82,7 +108,36 @@ String _markdownOfRange(Document document, int start, int end) {
     final attrs = node is Line ? node.style.toJson() : null;
     delta = delta.concat(Delta()..insert('\n', attrs));
   }
-  return MarkdownQuillCodec.markdownFromDocument(Document.fromDelta(delta));
+  return _clampListFragmentIndent(
+    MarkdownQuillCodec.markdownFromDocument(Document.fromDelta(delta)),
+  );
+}
+
+final _listLine = RegExp(r'^( *)(?:[-*+]|\d+[.)])(?: |$)');
+
+/// Een selectie die midden in een geneste lijst begint, levert een eerste
+/// item dat nog zijn oorspronkelijke inspringing draagt. Vier spaties vooraan
+/// leest Markdown als codeblok en het kopieerresultaat verliest zijn lijst
+/// (#2439). Een lijstfragment begint op niveau 0, en geen item ligt meer dan
+/// één niveau dieper dan het vorige: dat is wat Markdown als lijst herkent.
+String _clampListFragmentIndent(String markdown) {
+  final lines = markdown.split('\n');
+  final first = _listLine.firstMatch(lines.first);
+  if (first == null || first.group(1)!.isEmpty) return markdown;
+  const unit = 4;
+  var previous = -1;
+  for (var i = 0; i < lines.length; i++) {
+    final m = _listLine.firstMatch(lines[i]);
+    if (m == null) continue;
+    final level = m.group(1)!.length ~/ unit;
+    final clamped = level.clamp(0, previous + 1);
+    previous = clamped;
+    if (clamped != level) {
+      lines[i] =
+          ' ' * (clamped * unit) + lines[i].substring(m.group(1)!.length);
+    }
+  }
+  return lines.join('\n');
 }
 
 bool _endsWithNewline(Delta delta) {

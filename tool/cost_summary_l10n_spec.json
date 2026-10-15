@@ -1,0 +1,37 @@
+{
+  "comment": "#2437: live kostenoverlay + kostenblok in het eindoverzicht",
+  "additions": {
+    "Kostenindicatie": {
+      "en": "Cost indication",
+      "it": "Indicazione dei costi",
+      "de": "Kostenindikation",
+      "fr": "Indication de coût",
+      "es": "Indicación de coste",
+      "fy": "Kostenindikaasje",
+      "pap": "Indikashon di kosto",
+      "la": "Sumptuum indicatio",
+      "id": "Indikasi biaya",
+      "pl": "Wskazanie kosztów",
+      "uk": "Оцінка витрат",
+      "gsw": "Chöschtindikation",
+      "el": "Ένδειξη κόστους",
+      "da": "Omkostningsindikation",
+      "sv": "Kostnadsindikation",
+      "hr": "Pokazatelj troškova",
+      "cs": "Odhad nákladů",
+      "fi": "Kustannusarvio",
+      "bg": "Индикация за разходи",
+      "lv": "Izmaksu indikācija",
+      "lt": "Kainos indikacija",
+      "mt": "Indikazzjoni tal-ispiża",
+      "et": "Kulude indikatsioon",
+      "hu": "Költségjelzés",
+      "ga": "Táscaire costais",
+      "pt": "Indicação de custo",
+      "ro": "Indicație de cost",
+      "sk": "Odhad nákladov",
+      "sl": "Ocena stroškov",
+      "tr": "Maliyet göstergesi"
+    }
+  }
+}

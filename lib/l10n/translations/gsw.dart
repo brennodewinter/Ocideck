@@ -1757,6 +1757,75 @@ const _dutchSourceAddGsw = <String, String>{
   'Wachtwoord herhalen': 'Passwort widerhole',
   'Zet uw bijeenkomsten in uw eigen agenda — bijgewerkt bij wijzigingen en annuleringen.':
       'Tu dini Tärmin i din eigene Kaländer — aktualisiert bi Änderige und Absage.',
+  'Omrekening naar euro': 'Umrächnig i Euro',
+  'Voor de EUR-weergave gebruikt OciDeck één koers per sessie. Vul de koers zelf in of haal de ECB-referentiekoers op.':
+      'Für d EUR-Aazeig bruucht OciDeck pro Sitzig ein Kurs. De Kurs sälber iitrage oder de EZB-Referänzkurs abruefe.',
+  'Koers ophalen bij Frankfurter (ECB)': 'Kurs vo Frankfurter (EZB) abruefe',
+  'Eén verzoek per valuta naar api.frankfurter.dev met alleen de valutacode; de dienst ziet wel het IP-adres. Er worden geen presentatiegegevens verstuurd.':
+      'Ei Aafrag pro Wäährig a api.frankfurter.dev nume mit em Wäährigscode; dr Dienscht gsiht aber d IP-Adrässe. Es wärde kei Präsentationsdate gschickt.',
+  'Ophalen mislukt — vul de koers zelf in of ga zonder koers verder.':
+      'Abruef fählgschlage — de Kurs sälber iitrage oder ohni Kurs wiiterfahre.',
+  'Zonder koers doorgaan': 'Ohni Kurs wiiterfahre',
+  'Geen geldige koers — gebruik bijvoorbeeld 0,92.':
+      'Kein gültige Kurs — zum Bispiil 0,92 bruuche.',
+  'handmatig': 'manuell',
+  'peildatum': 'Stichtag',
+  'verouderd': 'veraltet',
+  'koers': 'Kurs',
+  'koers ontbreekt': 'Kurs fählt',
+  'Koers ontbreekt — EUR-equivalent niet berekend.':
+      'Kurs fählt — EUR-Gägewärt nöd berächnet.',
+  'invoerregel(s) niet omgerekend — koers ontbrak.':
+      'Iigabezile nöd umgrächnet — Kurs het gfählt.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Es wurde kein nützlicher Vorschlag gefunden. Füllen Sie die Details selbst aus.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Der KI-Vorschlag konnte nicht abgerufen werden. Überprüfen Sie die KI-Einstellungen oder geben Sie die Details selbst ein.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Verwenden Sie ein gültiges Datum wie JJJJ-MM-TT oder lassen Sie das Feld leer.',
+  'Documentgegevens': 'Dokumentdaten',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Diese Details beschreiben dieses Dokument im Dossier. Die Quelldatei wird nicht geändert.',
+  'Korte omschrijving': 'Kurze Beschreibung',
+  'Waar gaat dit document over?': 'Worum geht es in diesem Dokument?',
+  'Documentdatum': 'Dokumentdatum',
+  'JJJJ-MM-DD': 'JJJJ-MM-TT',
+  'Opsteller': 'Verfasser',
+  'Gegevens voorstellen met AI': 'Aagabe mit KI vorschlaa',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'KI-Vorschlag abgeschlossen. Überprüfen und ändern Sie es vor dem Speichern.',
+  'Dossier als PDF exporteren': 'Dossier als PDF exportiere',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Das PDF enthält ein Cover, ein Inhaltsverzeichnis und alle Dokumente in Dossierreihenfolge.',
+  'Tussenpagina vóór elk document': 'Zwischenseite vor jedem Dokument',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Mit Nummer, Titel, Beschreibung, Datum, Autor und SHA-256.',
+  'Volledige gegevens tonen': 'Vollständige Details anzeigen',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Gefundene personenbezogene Daten werden standardmäßig ausgeblendet. Wählen Sie die vollständigen Angaben nur für den vorgesehenen Empfänger aus.',
+  'PDF maken': 'PDF erstellen',
+  'Documentgegevens bewerken': 'Dokumentinformationen bearbeiten',
+  'Dossier-PDF opgeslagen': 'Dossier-PDF gespeichert',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier-PDF konnte nicht erstellt werden. Überprüfen Sie das geänderte oder fehlende Quelldokument und versuchen Sie es erneut.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier-PDF konnte nicht erstellt werden. Versuchen Sie es erneut.',
+  'Referentie vastgelegd': 'D\'Referanz isch feschtlegt',
+  'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
+      'Nit gspeichereti Änderige im Tab; SHA-256 prüeft d Version uf dr Feschtplatte.',
+  'Documenten controleren': 'Dokumänt prüefe',
+  'Dit nummer is al in gebruik.': 'Die Nummere isch scho i Bruch.',
+  'Documenten openen': 'Dokumänt öffne',
+  'Eerdere SHA-256-waarden': 'Früehneri SHA-256-Wärt',
+  'Omschrijving wijzigen': 'Beschrybig ändere',
+  'Beginnummer wijzigen': 'Aafangsnummere ändere',
+  'Vindplaats': 'Standort',
+  'Laatst gecontroleerd': 'Zletscht prüeft',
+  'Nummer wijzigen': 'Nummere ändere',
+  'Waar gaat dit dossier over?': 'Worum gohts i däm Dossier?',
+  'Nummer': 'Nummere',
+  'Gebruik een positief getal.': 'Nimm e positiivi Zahl.',
+  'Automatisch nummer': 'Automatischi Nummere',
   'Aanvulling gevraagd': 'Ergänzung verlangt',
   'Aanvulling gevraagd.': 'Ergänzung verlangt.',
   'Aanvulling gevraagd: {opmerking}': 'Ergänzung verlangt: {opmerking}',
@@ -1789,6 +1858,113 @@ const _dutchSourceAddGsw = <String, String>{
       'D Ergäbnis hend nöd chöne glade wärde.',
   'U ziet uw uitslag onder Mijn examens zodra die is vrijgegeven.':
       'Dir gsehnd Ihres Ergäbnis under Meine Prüfungen, sobald es freigä isch.',
+  'Alleen Markdown-documenten en -presentaties (.md) kunnen worden toegevoegd.':
+      'Nur Markdown-Dokument und -Präsentatione (.md) chönd zuegfüegt werde.',
+  'OciDeck dossier': 'OciDeck Dossier',
+  'Alle documenten openen': 'Alli Dokument öffne',
+  'Alleen overzicht': 'Nur d\'Überblick.',
+  'Alles controleren': 'Alles prüefe',
+  'DOSSIER': 'DOSSIER',
+  'De SHA-256 klopt al.': 'S\'SHA-256 isch scho korrekt.',
+  'De vermelding verdwijnt uit het dossier. Het documentbestand blijft bewaard.':
+      'D\'Einträg verschwindt aus em Dossier. D\'Datei bleibt eso.',
+  'Deze bijlage is niet beschikbaar.': 'D\'Anhang isch nid verfügbar.',
+  'Deze bijlage kan niet worden gecontroleerd.':
+      'D\'Anhang läb es nid kontrollierbar.',
+  'Deze bijlage kon niet veilig worden geopend.':
+      'D\'Anhang läb es nid sicher öppne küess.',
+  'Deze dossiermap bestaat al. Kies een andere naam.':
+      'D\'Dossierverzeichnis isch scho existiert. Wähl e sunschtigi Näme.',
+  'Dit dossier kon niet worden geopend.': 'S\'Dossier läb es nid öppne küess.',
+  'Document gewijzigd': 'Dokument isch veränderet.',
+  'Document niet leesbaar': 'Dossièr isch unlesebar',
+  'Document ontbreekt': 'Dossièr isch fällig',
+  'Document openen': 'Dokument öffne',
+  'Documenten toevoegen': 'Dokument dezue tue',
+  'Dossier': 'Dossier',
+  'Dossier openen': 'Dossier öffne',
+  'Dossier openen…': 'Dossièr öppne mache…',
+  'Dossiertitel wijzigen': 'Dossièrtitel ändere',
+  'Een bijlage kon niet worden toegevoegd.': 'E Datei isch esch ungfägt wore.',
+  'Een goed dossier begint hier': 'E guet Dossièr fangt hier yym.',
+  'Gebruik de handgreep of de pijlen om de volgorde te wijzigen. De nummers volgen automatisch.':
+      'Dr Händgriff oder d Püile usnützt, zum d Ordniig ändere. D Nummerer folge automatisch.',
+  'Het bestand veranderde of kon niet worden vastgelegd. Controleer opnieuw.':
+      'D Datei isch ändärd worde oder esch esch gange. Überchueche esch wieder.',
+  'Het dossier kon niet worden aangemaakt.':
+      'Dä Dossier chönnt nöd gmacht wär.',
+  'Hiermee wordt de nieuwe bestandsversie de referentie voor dit dossier.':
+      'Däm gäbs die nöije Date-Version als Referenz für d\'s Dossier.',
+  'Huidige SHA-256': 'Aktuell SHA-256',
+  'Inhoudsopgave en integriteitscontrole':
+      'Inhaltsverzeichnis und Integrizitätskontrolle',
+  'Meer opties': 'Mehr Optionä',
+  'Naamloos dossier': 'Ufgnännt Dossier',
+  'Nieuw dossier': 'Neus Dossier',
+  'Nieuwe versie vastleggen': 'Neui Version fescht halte',
+  'Nieuwe versie vastleggen?': 'Soll d\'näue Version festhätz wär?',
+  'Omhoog verplaatsen': 'Hoch verschiebä.',
+  'Omlaag verplaatsen': 'Däwär verschiebä.',
+  'Onveilige bestandsverwijzing': 'Ufgnännt Date-Verweis.',
+  'Overzicht en bijlagen': 'Ublage und Anhänge',
+  'SHA-256 controleren': 'SHA-256 Prüfe',
+  'SHA-256 klopt': 'SHA-256 stimmt',
+  'Sleep om te ordenen': 'Zuehändig zieh zum Ordnen',
+  'Terug naar dossier': 'Zrugg zum Dossier',
+  'Titel wijzigen': 'Titel ändere',
+  'Uit dossier verwijderen': 'Us em Dossier entferne',
+  'Uit dossier verwijderen?': 'Möchtest du’s aus Dossier löösche?',
+  'Vastgelegde SHA-256': 'Fixierte SHA-256',
+  'Voeg documenten toe. De originele bestanden blijven op hun plek. Hier bepaal je de volgorde.':
+      'Füeg Dokument dezue. D’Originaldateie bliibed a ihrem Ort. Da bestimmisch d’Reihefolg.',
+  'Wijziging opslaan is mislukt.': 'Ändrig speichne isch missglückt.',
+  'Wil je de bijlagen ook in tabbladen openen?':
+      'Möchtest du die Anhänge au im Tabli öppne?',
+  'Als document openen': 'Dokument öppne',
+  'Dossier maken': 'Dossier erstelle',
+  'Het overzicht kon niet als document worden geopend.':
+      'Es isch nit gmacht worde, dass d\'Übersicht as Dokument öppnet worde isch.',
+  'Sla wijzigingen in het overzichtsdocument eerst op of sluit dat tabblad.':
+      'Guets d\'Ändurig öpple in d\'Übersichts-Dokument, oder schliisse d\'Tablade.',
+  'Kostenindicatie': 'Chöschtindikation',
+  'Bruto of netto maakt hier niet uit — de opslag voor werkgeverslasten staat er los bij.':
+      'Brutto oder netto isch do egal — de Arbeitgäberchöschte-Ufschlag stoht separat.',
+  'Aanwezigen en tarieven': 'Teilnöhmer ond Sätz',
+  'Bedrag': 'Betrag',
+  'Per uur': 'Pro Stund',
+  'Per maand': 'Pro Monet',
+  'Per jaar': 'Pro Jahr',
+  'Aanname voor de omrekening': 'Aanaam für d\'Umrechnig',
+  'Betaalde uren per week': 'Bezahlti Stunde pro Wuche',
+  'Weken per jaar': 'Wuche pro Jahr',
+  'Opslag werkgeverslasten (%)': 'Ufschlag für Arbetgeberlaste (%)',
+  'Voeg een aanwezige toe': 'Teilnöhmer dezue tue',
+  'Samen': 'Zsäme',
+  'Start presentatie': 'Präsentation starte',
+  'per uur': 'pro Stund',
+  'Wordt omgerekend': 'Wird umgrechnet',
+  'Vul per aanwezige een uurtarief, maandloon of jaarloon in. Dit blijft op dit scherm en wordt nergens opgeslagen.':
+      'Gib pro Teilnöhmer en Stunde-, Monet- oder Jahressatz ii. Das blibt uf dem Bildschirm ond wird nirgend gspeicheret.',
+  'Kosten van aanwezigen': 'Chöste vo de Teilnöhmer',
+  'Uit': 'Us',
+  'Gewoon — alleen in het eindoverzicht': 'Normal — nur ide Abschlussübersicht',
+  'Expliciet — lopend bedrag én eindoverzicht':
+      'Explizit — laufende Betrag ond Abschlussübersicht',
+  'Uurtarief': 'Stundesatz',
+  'Eén tarief voor de hele groep': 'Ei Satz für di ganz Grupp',
+  'Per aanwezige, bij de start invullen': 'Pro Teilnöhmer, bim Start uusfülle',
+  'Groepsuurtarief': 'Gruppestundesatz',
+  'Kosten = verstreken tijd × tarief.': 'Chöste = verstricheni Ziit × Satz.',
+  'Wordt bij de start ingevuld en niet opgeslagen.':
+      'Wird bim Start uusgfüllt ond nöd gspeicheret.',
+  'Valuta': 'Währig',
+  'Een schatting van de tijd die aanwezigen kwijt zijn — een indicatie, geen boekhoudkundige kostprijs.':
+      'E Schätzig vo de Ziit, wo Teilnöhmer verlöre — e Indikation, kän buchhalterische Selbstchöstepriis.',
+  'Diaformaat': 'Folieformat',
+  'Scherm (16:9)': 'Bildschirm (16:9)',
+  'Papierformaat': 'Papierformat',
+  'Kies een papierformaat voor hand-outs en exports op papier.':
+      'Wähl es Papierformat für Handouts und Papier-Export.',
   'Startmappen': 'Startordner',
   'Waar openen en opslaan begint. Leeg laten gebruikt de eerste bibliotheek.':
       'Wo Öffne und Speichere aafangt. Läer laa nimmt di erst Bibliothek.',

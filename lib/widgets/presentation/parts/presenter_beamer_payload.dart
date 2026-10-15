@@ -226,6 +226,7 @@ String buildBeamerMarkdown({
   String organization = '',
   String reportLanguage = '',
   ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
+  PageSizeSpec? slideSize,
 }) => MarkdownService().generateDeck(
   Deck(
     title: 'Presentatie',
@@ -236,6 +237,7 @@ String buildBeamerMarkdown({
     organization: organization,
     language: reportLanguage,
     improvementY01Metric: improvementY01,
+    slideSize: slideSize,
   ),
   inlineChartData: true,
 );
@@ -309,6 +311,29 @@ void _sendChartHover({
       });
 }
 
+/// Stuurt het lopende sessietotaal naar het publieksvenster (#2437), elke
+/// overlay-tik en na een reset. Alleen in expliciete modus actief — daar is
+/// het bedrag publiek opzet; het samengetelde tarief is dat trouwens ook,
+/// dus de beamer mag het zien. Top-level, net als [_sendChartHover].
+void _sendCostTick(
+  AudienceWindowHandle? audience,
+  PresentationCostSession? session,
+  int run,
+) {
+  if (session == null || audience?.controller == null) return;
+  audienceChannel
+      .invokeMethod('costTick', {
+        'minor': session.currentCostMinor,
+        'currency': session.currency.code,
+        'eur': session.eurMinorOf(session.currentCostMinor),
+        'run': run,
+      })
+      .catchError((Object e) {
+        logWarning('FullscreenPresenter: cost tick sync failed', e);
+        return null;
+      });
+}
+
 /// Slide-index → geëncodeerde annotaties voor het beamervenster-argument.
 /// Hoorde bij [FullscreenPresenter]; staat nu bij de enige aanroeper.
 Map<String, dynamic> _annotationsBySlideIndex(
@@ -339,6 +364,7 @@ String _dualWindowArguments({
   required ThemeProfile themeProfile,
   required MarpStyle marpStyle,
   required CockpitColorScheme cockpitColorScheme,
+  PageSizeSpec? slideSize,
 }) => _audienceWindowArguments(
   markdown: buildBeamerMarkdown(
     slides: slides,
@@ -348,6 +374,7 @@ String _dualWindowArguments({
     organization: organization,
     reportLanguage: reportLanguage,
     improvementY01: improvementY01,
+    slideSize: slideSize,
   ),
   projectPath: projectPath,
   initialIndex: initialIndex,
@@ -388,6 +415,9 @@ Future<String?> _runDualPresenter(
   required Map<String, String> initialUserNotes,
   required void Function(Map<String, String>)? onUserNotesChanged,
   required ImprovementY01Metric improvementY01,
+  PageSizeSpec? slideSize,
+  PresentationCostConfig costConfig = PresentationCostConfig.off,
+  CostSessionSeed? costSeed,
 }) async {
   final hadWakeLock = await _wakeLockEnabled();
   await _enableWakeLock();
@@ -431,6 +461,9 @@ Future<String?> _runDualPresenter(
             initialUserNotes: initialUserNotes,
             onUserNotesChanged: onUserNotesChanged,
             improvementY01: improvementY01,
+            slideAspect: slideAspectRatio(slideSize),
+            costConfig: costConfig,
+            costSeed: costSeed,
           ),
         ),
         transitionsBuilder: (context, animation, secondary, child) =>
