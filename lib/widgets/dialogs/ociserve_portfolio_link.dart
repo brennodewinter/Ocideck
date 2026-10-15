@@ -109,7 +109,7 @@ class _OciServePortfolioLinkState extends ConsumerState<OciServePortfolioLink> {
                 controller: _linkController,
                 decoration: InputDecoration(
                   isDense: true,
-                  hintText: 'https://…',
+                  hintText: l10n.d('https://…'),
                   border: const OutlineInputBorder(),
                   errorText: _error == 'link_invalid'
                       ? l10n.d(
