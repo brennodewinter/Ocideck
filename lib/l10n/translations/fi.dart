@@ -1627,6 +1627,39 @@ const _dutchSourceAddFi = <String, String>{
       'Kurssi puuttuu — EUR-vastinetta ei laskettu.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'syöttörivi(ä) ei muunnettu — kurssi puuttui.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Hyödyllistä ehdotusta ei löytynyt. Täytä tiedot itse.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI-ehdotusta ei voitu hakea. Tarkista AI-asetukset tai täytä tiedot itse.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Käytä kelvollista päivämäärää, kuten VVVV-KK-PP, tai jätä kenttä tyhjäksi.',
+  'Documentgegevens': 'Asiakirjan tiedot',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Nämä tiedot kuvaavat tätä asiakirjaa aineistossa. Lähdetiedostoa ei ole muutettu.',
+  'Korte omschrijving': 'Lyhyt kuvaus',
+  'Waar gaat dit document over?': 'Mistä tässä asiakirjassa on kyse?',
+  'Documentdatum': 'Asiakirjan päivämäärä',
+  'JJJJ-MM-DD': 'VVVV-KK-PP',
+  'Opsteller': 'Asiakirjan kirjoittaja',
+  'Gegevens voorstellen met AI': 'Ehdota yksityiskohtia tekoälyllä',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI-ehdotus valmis. Tarkista ja muuta se ennen tallentamista.',
+  'Dossier als PDF exporteren': 'Vie aineisto PDF-muodossa',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF sisältää kannen, sisällysluettelon ja kaikki asiakirjat aineistojärjestyksessä.',
+  'Tussenpagina vóór elk document': 'Välisivu ennen jokaista asiakirjaa',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Numero, otsikko, kuvaus, päivämäärä, kirjoittaja ja SHA-256.',
+  'Volledige gegevens tonen': 'Näytä täydelliset tiedot',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Löydetyt henkilökohtaiset tiedot on oletusarvoisesti piilotettu. Valitse täydelliset tiedot vain aiotulle vastaanottajalle.',
+  'PDF maken': 'Luo PDF',
+  'Documentgegevens bewerken': 'Muokkaa asiakirjan tietoja',
+  'Dossier-PDF opgeslagen': 'Asiakirja PDF tallennettu',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'PDF-aineistoa ei voitu luoda. Tarkista muuttunut tai puuttuva lähdeasiakirja ja yritä uudelleen.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'PDF-aineistoa ei voitu luoda. Yritä uudelleen.',
   'Referentie vastgelegd': 'Viittaus on kirjattu',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Välilehdellä on tallentamattomia muutoksia; SHA-256 tarkistaa levyllä olevan version.',

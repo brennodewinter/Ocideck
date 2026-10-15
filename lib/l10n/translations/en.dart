@@ -832,6 +832,39 @@ const _dutchSourceAddEn = {
       'Rate missing — EUR equivalent not calculated.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'input line(s) not converted — rate was missing.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'No useful proposal was found. Fill in the details yourself.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'The AI ​​proposal could not be retrieved. Check the AI ​​settings or fill in the details yourself.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Use a valid date such as YYYY-MM-DD, or leave the field blank.',
+  'Documentgegevens': 'Document details',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'These details describe this document in the dossier. The source file is not changed.',
+  'Korte omschrijving': 'Short description',
+  'Waar gaat dit document over?': 'What is this document about?',
+  'Documentdatum': 'Document date',
+  'JJJJ-MM-DD': 'YYYY-MM-DD',
+  'Opsteller': 'Document author',
+  'Gegevens voorstellen met AI': 'Suggest details with AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI suggestions added. Review and edit them before saving.',
+  'Dossier als PDF exporteren': 'Export dossier as PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'The PDF contains a cover, a table of contents, and all documents in dossier order.',
+  'Tussenpagina vóór elk document': 'Intermediate page before each document',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'With number, title, description, date, author and SHA-256.',
+  'Volledige gegevens tonen': 'Show full details',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Personal data found is hidden by default. Choose full details only for the intended recipient.',
+  'PDF maken': 'Create PDF',
+  'Documentgegevens bewerken': 'Edit document information',
+  'Dossier-PDF opgeslagen': 'Dossier PDF saved',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier PDF could not be created. Check the changed or missing source document and try again.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier PDF could not be created. Try again.',
   'Referentie vastgelegd': 'Reference recorded',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Unsaved changes in tab; SHA-256 checks the version on disk.',

@@ -1633,6 +1633,41 @@ const _dutchSourceAddLt = <String, String>{
       'Trūksta kurso — ekvivalentas EUR neapskaičiuotas.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'įvesties eilutė(s) nekonvertuota(os) — trūko kurso.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Naudingo pasiūlymo nerasta. Užpildykite duomenis patys.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI pasiūlymo nepavyko gauti. Patikrinkite AI nustatymus arba patys užpildykite išsamią informaciją.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Naudokite galiojančią datą, pvz., YYYY-MM-DD, arba palikite lauką tuščią.',
+  'Documentgegevens': 'Dokumento duomenys',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ši informacija apibūdina šį dokumentą dokumentacijoje. Šaltinio failas nepakeičiamas.',
+  'Korte omschrijving': 'Trumpas aprašymas',
+  'Waar gaat dit document over?': 'Apie ką šis dokumentas?',
+  'Documentdatum': 'Dokumento data',
+  'JJJJ-MM-DD': 'MMMM-MM-DD',
+  'Opsteller': 'Dokumento autorius',
+  'Gegevens voorstellen met AI':
+      'Pasiūlykite išsamios informacijos naudodami AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI pasiūlymas baigtas. Prieš išsaugodami patikrinkite ir pakeiskite.',
+  'Dossier als PDF exporteren': 'Eksportuoti dokumentaciją PDF formatu',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF rinkmenoje yra viršelis, turinys ir visi dokumentai dokumentacijos tvarka.',
+  'Tussenpagina vóór elk document':
+      'Tarpinis puslapis prieš kiekvieną dokumentą',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Su numeriu, pavadinimu, aprašymu, data, autoriumi ir SHA-256.',
+  'Volledige gegevens tonen': 'Rodyti visą informaciją',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Pagal numatytuosius nustatymus rasti asmeniniai duomenys yra paslėpti. Išsamią informaciją pasirinkite tik numatytam gavėjui.',
+  'PDF maken': 'Sukurti PDF',
+  'Documentgegevens bewerken': 'Redaguoti dokumento informaciją',
+  'Dossier-PDF opgeslagen': 'Dokumentacija išsaugota PDF formatu',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Nepavyko sukurti dokumentacijos PDF. Patikrinkite pakeistą arba trūkstamą šaltinio dokumentą ir bandykite dar kartą.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Nepavyko sukurti dokumentacijos PDF. Bandykite dar kartą.',
   'Referentie vastgelegd': 'Informacija fiksuota',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Kortelėje yra neįrašytų pakeitimų; SHA-256 tikrina diske esančią versiją.',

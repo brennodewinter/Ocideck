@@ -673,6 +673,39 @@ const _dutchSourceAddFr = {
       'Taux manquant — équivalent en EUR non calculé.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'ligne(s) de saisie non convertie(s) — le taux manquait.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Aucune proposition utile n\'a été trouvée. Remplissez vous-même les détails.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'La proposition d\'IA n\'a pas pu être récupérée. Vérifiez les paramètres de l\'IA ou remplissez les détails vous-même.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Utilisez une date valide telle que AAAA-MM-JJ ou laissez le champ vide.',
+  'Documentgegevens': 'Données du document',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ces détails décrivent ce document dans le dossier. Le fichier source n\'est pas modifié.',
+  'Korte omschrijving': 'Brève description',
+  'Waar gaat dit document over?': 'De quoi parle ce document ?',
+  'Documentdatum': 'Date du document',
+  'JJJJ-MM-DD': 'AAAA-MM-JJ',
+  'Opsteller': 'Auteur',
+  'Gegevens voorstellen met AI': 'Proposer des informations avec l’IA',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Proposition d\'IA terminée. Vérifiez-le et modifiez-le avant de sauvegarder.',
+  'Dossier als PDF exporteren': 'Exporter le dossier en PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Le PDF contient une couverture, une table des matières et tous les documents classés par dossier.',
+  'Tussenpagina vóór elk document': 'Page intermédiaire avant chaque document',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Avec numéro, titre, description, date, auteur et SHA-256.',
+  'Volledige gegevens tonen': 'Afficher tous les détails',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Les données personnelles détectées sont masquées par défaut. Choisissez les données complètes uniquement pour le destinataire prévu.',
+  'PDF maken': 'Créer un PDF',
+  'Documentgegevens bewerken': 'Modifier les informations du document',
+  'Dossier-PDF opgeslagen': 'Dossier PDF enregistré',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Le dossier PDF n\'a pas pu être créé. Vérifiez le document source modifié ou manquant et réessayez.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Le dossier PDF n\'a pas pu être créé. Essayer à nouveau.',
   'Referentie vastgelegd': 'La référence est consignée',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Modifications non enregistrées dans l’onglet ; SHA-256 vérifie la version sur disque.',

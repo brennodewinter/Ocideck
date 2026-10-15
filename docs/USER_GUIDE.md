@@ -5075,6 +5075,15 @@ references to those source files; it does not copy or change them. Its cover
 and contents page show the numbered order. Drag a row or use its move actions
 to change that order; removing a row removes the reference only.
 
+Each document row also has **Document details**. Set its dossier title, a short
+description, document date (`YYYY-MM-DD`), and author/preparer there. Leave a
+date or author blank when the source does not say. These details belong to the
+dossier listing; they do not edit the source. When AI is enabled and configured,
+**Suggest details with AI** can fill a draft from that Markdown source. Review
+and change the suggested values before you save. A suggestion is requested only
+when you press the button; large sources that cannot be read in full are not
+silently summarised.
+
 Use **Open dossier** to reopen `dossier.json`. You can start with the overview
 alone or open the referenced documents in tabs as well. Selecting a row opens
 that document or presentation through OciDeck's normal safety checks. The
@@ -5096,6 +5105,18 @@ the editable order, source paths and hashes. Keep both dossier files together.
 The source documents must still be available at their recorded paths when you
 open or verify the dossier. This version accepts local `.md` documents and
 presentations as references.
+
+**Export dossier as PDF** makes one document-style PDF: a cover, numbered
+contents, and the referenced documents in dossier order. Choose whether to put
+an information page before each document. That page shows its number, title,
+available description, date and author, plus its stored SHA-256. A Markdown
+presentation is typeset as document content here, not exported as slides. The
+default privacy profile redacts detected personal data; choose the full profile
+explicitly if appropriate for the recipient. Classification and privacy export
+checks still apply. Before writing the PDF, OciDeck checks each source against
+the dossier's saved SHA-256. A missing or changed source stops the export; the
+PDF does not update the reference hash. PDF and Office files cannot be added as
+sources in this version.
 
 Alongside presentations, OciDeck edits **documents**: a flowing, plain Markdown
 file rather than a deck of slides. A document is an ordinary `.md` with no slide

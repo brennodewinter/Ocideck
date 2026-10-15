@@ -1625,6 +1625,39 @@ const _dutchSourceAddSv = <String, String>{
       'Kurs saknas — EUR-motvärde har inte beräknats.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'inmatningsrad(er) ej omräknade — kursen saknades.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Inget användbart förslag hittades. Fyll i uppgifterna själv.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'AI-förslaget kunde inte hämtas. Kontrollera AI-inställningarna eller fyll i uppgifterna själv.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Använd ett giltigt datum som ÅÅÅÅ-MM-DD, eller lämna fältet tomt.',
+  'Documentgegevens': 'Dokumentdata',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Dessa detaljer beskriver detta dokument i underlaget. Källfilen ändras inte.',
+  'Korte omschrijving': 'Kort beskrivning',
+  'Waar gaat dit document over?': 'Vad handlar det här dokumentet om?',
+  'Documentdatum': 'Dokumentdatum',
+  'JJJJ-MM-DD': 'ÅÅÅÅ-MM-DD',
+  'Opsteller': 'Dokumentförfattare',
+  'Gegevens voorstellen met AI': 'Föreslå detaljer med AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI-förslag färdigt. Kontrollera och ändra det innan du sparar.',
+  'Dossier als PDF exporteren': 'Exportera underlag som PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF-filen innehåller ett omslag, en innehållsförteckning och alla dokument i underlagsordning.',
+  'Tussenpagina vóór elk document': 'Mellansida före varje dokument',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Med nummer, titel, beskrivning, datum, författare och SHA-256.',
+  'Volledige gegevens tonen': 'Visa alla detaljer',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Personuppgifter som hittas är dolda som standard. Välj endast fullständig information för den avsedda mottagaren.',
+  'PDF maken': 'Skapa PDF',
+  'Documentgegevens bewerken': 'Redigera dokumentinformation',
+  'Dossier-PDF opgeslagen': 'Dossier PDF sparad',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dokumentdokumentet kunde inte skapas. Kontrollera det ändrade eller saknade källdokumentet och försök igen.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dokumentdokumentet kunde inte skapas. Försök igen.',
   'Referentie vastgelegd': 'Referensen har registrerats',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Osparade ändringar på fliken; SHA-256 kontrollerar versionen på disken.',

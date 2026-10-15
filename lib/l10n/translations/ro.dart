@@ -1642,6 +1642,40 @@ const _dutchSourceAddRo = <String, String>{
       'Lipsește cursul — echivalentul în EUR nu a fost calculat.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'rând(uri) de intrare neconvertit(e) — lipsea cursul.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nu a fost găsită nicio propunere utilă. Completați singuri detaliile.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Propunerea AI nu a putut fi preluată. Verificați setările AI sau completați singuri detaliile.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Utilizați o dată validă, cum ar fi AAAA-LL-ZZ sau lăsați câmpul necompletat.',
+  'Documentgegevens': 'Datele documentului',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Aceste detalii descriu acest document în dosar. Fișierul sursă nu este schimbat.',
+  'Korte omschrijving': 'Scurtă descriere',
+  'Waar gaat dit document over?': 'Despre ce este acest document?',
+  'Documentdatum': 'Data documentului',
+  'JJJJ-MM-DD': 'AAAA-LL-ZZ',
+  'Opsteller': 'Autorul documentului',
+  'Gegevens voorstellen met AI': 'Sugerați detalii cu AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Propunerea AI finalizată. Verificați și modificați-l înainte de a salva.',
+  'Dossier als PDF exporteren': 'Exportați dosarul ca PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF-ul conține o copertă, un cuprins și toate documentele în ordinea dosarului.',
+  'Tussenpagina vóór elk document':
+      'Pagina intermediară înaintea fiecărui document',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Cu număr, titlu, descriere, dată, autor și SHA-256.',
+  'Volledige gegevens tonen': 'Afișați detaliile complete',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Datele personale găsite sunt ascunse în mod implicit. Alegeți detaliile complete numai pentru destinatarul vizat.',
+  'PDF maken': 'Creați PDF',
+  'Documentgegevens bewerken': 'Editați informațiile documentului',
+  'Dossier-PDF opgeslagen': 'Dosar PDF salvat',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dosarul PDF nu a putut fi creat. Verificați documentul sursă schimbat sau lipsă și încercați din nou.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dosarul PDF nu a putut fi creat. Încearcă din nou.',
   'Referentie vastgelegd': 'Referința este înregistrată',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Modificări nesalvate în filă; SHA-256 verifică versiunea de pe disc.',

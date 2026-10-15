@@ -1627,6 +1627,39 @@ const _dutchSourceAddSl = <String, String>{
       'Tečaj manjka — protivrednost v EUR ni izračunana.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'vrstice vnosa niso pretvorjene — manjkal je tečaj.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Najden ni bil noben uporaben predlog. Podatke izpolnite sami.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Predloga AI ni bilo mogoče pridobiti. Preverite nastavitve AI ali sami vnesite podrobnosti.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Uporabite veljaven datum, kot je LLLL-MM-DD, ali pustite polje prazno.',
+  'Documentgegevens': 'Podatki o dokumentu',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Te podrobnosti opisujejo ta dokument v dokumentaciji. Izvorna datoteka ni spremenjena.',
+  'Korte omschrijving': 'Kratek opis',
+  'Waar gaat dit document over?': 'O čem govori ta dokument?',
+  'Documentdatum': 'Datum dokumenta',
+  'JJJJ-MM-DD': 'LLLL-MM-DD',
+  'Opsteller': 'Avtor dokumenta',
+  'Gegevens voorstellen met AI': 'Predlagajte podrobnosti z AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Predlog AI dokončan. Preverite in spremenite pred shranjevanjem.',
+  'Dossier als PDF exporteren': 'Izvozi dokumentacijo kot PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF vsebuje naslovnico, kazalo in vse dokumente v vrstnem redu dosjeja.',
+  'Tussenpagina vóór elk document': 'Vmesna stran pred vsakim dokumentom',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'S številko, naslovom, opisom, datumom, avtorjem in SHA-256.',
+  'Volledige gegevens tonen': 'Prikaži vse podrobnosti',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Najdeni osebni podatki so privzeto skriti. Izberite vse podrobnosti samo za predvidenega prejemnika.',
+  'PDF maken': 'Ustvari PDF',
+  'Documentgegevens bewerken': 'Uredite informacije o dokumentu',
+  'Dossier-PDF opgeslagen': 'Dosje PDF shranjen',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dosjeja PDF ni bilo mogoče ustvariti. Preverite spremenjeni ali manjkajoči izvorni dokument in poskusite znova.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dosjeja PDF ni bilo mogoče ustvariti. Poskusite znova.',
   'Referentie vastgelegd': 'Referenca je navedena.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Neshranjene spremembe v zavihku; SHA-256 preverja različico na disku.',

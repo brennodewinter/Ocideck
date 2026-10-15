@@ -672,6 +672,39 @@ const _dutchSourceAddFy = {
       'Koers ûntbrekt — EUR-lykweardich net berekkene.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'ynfierrigel(s) net omrekkene — koers ûntbriek.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Gjin nuttich foarstel is fûn. Folje de details sels yn.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'It AI-foarstel koe net ophelle wurde. Kontrolearje de AI-ynstellingen of folje de details sels yn.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Brûk in jildige datum lykas JJJJ-MM-DD, of lit it fjild leech.',
+  'Documentgegevens': 'Dokumint gegevens',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Dizze details beskriuwe dit dokumint yn it dossier. De boarne triem is net feroare.',
+  'Korte omschrijving': 'Koarte beskriuwing',
+  'Waar gaat dit document over?': 'Wêr giet dit dokumint oer?',
+  'Documentdatum': 'Dokumint datum',
+  'JJJJ-MM-DD': 'JJJJ-MM-DD',
+  'Opsteller': 'Dokumint skriuwer',
+  'Gegevens voorstellen met AI': 'Foarstelle details mei AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'AI foarstel foltôge. Kontrolearje en feroarje it foardat jo bewarje.',
+  'Dossier als PDF exporteren': 'Eksportearje dossier as PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'De PDF befettet in omslach, in ynhâldsopjefte, en alle dokuminten yn dossierfolchoarder.',
+  'Tussenpagina vóór elk document': 'Tussenside foar elk dokumint',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Mei nûmer, titel, beskriuwing, datum, skriuwer en SHA-256.',
+  'Volledige gegevens tonen': 'Lit folsleine details sjen',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Persoanlike gegevens fûn binne standert ferburgen. Kies folsleine details allinich foar de bedoelde ûntfanger.',
+  'PDF maken': 'Meitsje PDF',
+  'Documentgegevens bewerken': 'Bewurkje dokumint ynformaasje',
+  'Dossier-PDF opgeslagen': 'Dossier PDF bewarre',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier PDF koe net oanmakke wurde. Kontrolearje it feroare of ûntbrekkende boarnedokumint en besykje it nochris.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier PDF koe net oanmakke wurde. Besykje opnij.',
   'Referentie vastgelegd': 'Referinsje fêstlein',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Net-opsleine wizigingen yn it ljepblêd; SHA-256 kontrolearret de ferzje op skiif.',

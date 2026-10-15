@@ -1644,6 +1644,39 @@ const _dutchSourceAddMt = <String, String>{
       'Ir-rata nieqsa — l-ekwivalenti f\'EUR ma ġiex ikkalkulat.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'linja/linji ta\' input mhux ikkonvertiti — ir-rata kienet nieqsa.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Ma nstabet l-ebda proposta utli. Imla d-dettalji lilek innifsek.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Il-proposta AI ma setgħetx tiġi rkuprata. Iċċekkja s-settings tal-AI jew imla d-dettalji lilek innifsek.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Uża data valida bħal SSSS-XX-JJ, jew ħalli l-qasam vojt.',
+  'Documentgegevens': 'Dokument tad-dejta',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Dawn id-dettalji jiddeskrivu dan id-dokument fid-dossier. Il-fajl tas-sors ma jinbidelx.',
+  'Korte omschrijving': 'Deskrizzjoni qasira',
+  'Waar gaat dit document over?': 'X\'inhu dan id-dokument?',
+  'Documentdatum': 'Data tad-dokument',
+  'JJJJ-MM-DD': 'SSSS-XX-JJ',
+  'Opsteller': 'Awtur tad-dokument',
+  'Gegevens voorstellen met AI': 'Issuġġerixxi dettalji bl-AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Il-proposta tal-AI lesta. Iċċekkja u biddel qabel issalva.',
+  'Dossier als PDF exporteren': 'Esportazzjoni tad-dossier bħala PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Il-PDF fih qoxra, sommarju, u d-dokumenti kollha fl-ordni tad-dossier.',
+  'Tussenpagina vóór elk document': 'Paġna intermedja qabel kull dokument',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'B\'numru, titolu, deskrizzjoni, data, awtur u SHA-256.',
+  'Volledige gegevens tonen': 'Uri dettalji sħaħ',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Id-dejta personali misjuba hija moħbija awtomatikament. Agħżel dettalji sħaħ biss għar-riċevitur maħsub.',
+  'PDF maken': 'Oħloq PDF',
+  'Documentgegevens bewerken': 'Editja l-informazzjoni tad-dokument',
+  'Dossier-PDF opgeslagen': 'Dossier PDF salvat',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Id-dossier PDF ma setax jinħoloq. Iċċekkja d-dokument tas-sors mibdul jew nieqes u erġa\' pprova.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Id-dossier PDF ma setax jinħoloq. Erġa\' pprova.',
   'Referentie vastgelegd': 'Ir-referenza ġiet irreġistrata',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Bidliet mhux issejvjati fit-tab; SHA-256 jiċċekkja l-verżjoni fuq id-diska.',

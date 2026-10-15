@@ -670,6 +670,40 @@ const _dutchSourceAddIt = {
       'Tasso mancante — equivalente in EUR non calcolato.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'riga/righe di input non convertita/e — il tasso mancava.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Non è stata trovata alcuna proposta utile. Compila tu stesso i dettagli.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Non è stato possibile recuperare la proposta AI. Controlla le impostazioni dell\'IA o inserisci tu stesso i dettagli.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Utilizza una data valida come AAAA-MM-GG oppure lascia il campo vuoto.',
+  'Documentgegevens': 'Dati del documento',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Questi dettagli descrivono questo documento nel dossier. Il file di origine non viene modificato.',
+  'Korte omschrijving': 'Breve descrizione',
+  'Waar gaat dit document over?': 'Di cosa tratta questo documento?',
+  'Documentdatum': 'Data del documento',
+  'JJJJ-MM-DD': 'AAAA-MM-GG',
+  'Opsteller': 'Autore del documento',
+  'Gegevens voorstellen met AI':
+      'Suggerisci dettagli con l\'intelligenza artificiale',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Proposta AI completata. Controllalo e modificalo prima di salvare.',
+  'Dossier als PDF exporteren': 'Esporta il dossier come PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Il PDF contiene una copertina, un sommario e tutti i documenti in ordine di fascicolo.',
+  'Tussenpagina vóór elk document': 'Pagina intermedia prima di ogni documento',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Con numero, titolo, descrizione, data, autore e SHA-256.',
+  'Volledige gegevens tonen': 'Mostra tutti i dettagli',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'I dati personali trovati sono nascosti per impostazione predefinita. Scegli i dettagli completi solo per il destinatario previsto.',
+  'PDF maken': 'Crea PDF',
+  'Documentgegevens bewerken': 'Modifica le informazioni del documento',
+  'Dossier-PDF opgeslagen': 'PDF del fascicolo salvato',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Impossibile creare il PDF del dossier. Controlla il documento di origine modificato o mancante e riprova.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Impossibile creare il PDF del dossier. Riprova.',
   'Referentie vastgelegd': 'Riferimento registrato',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Modifiche non salvate nella scheda; SHA-256 verifica la versione su disco.',

@@ -1626,6 +1626,39 @@ const _dutchSourceAddId = <String, String>{
       'Kurs tidak ada — padanan EUR tidak dihitung.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'baris input tidak dikonversi — kurs tidak ada.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Tidak ada proposal berguna yang ditemukan. Isi sendiri detailnya.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Proposal AI tidak dapat diambil. Periksa pengaturan AI atau isi sendiri detailnya.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Gunakan tanggal yang valid seperti YYYY-MM-DD, atau kosongkan kolom tersebut.',
+  'Documentgegevens': 'Data dokumen',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Rincian ini menjelaskan dokumen ini dalam berkas. File sumber tidak diubah.',
+  'Korte omschrijving': 'Deskripsi singkat',
+  'Waar gaat dit document over?': 'Tentang apa dokumen ini?',
+  'Documentdatum': 'Tanggal dokumen',
+  'JJJJ-MM-DD': 'YYYY-MM-DD',
+  'Opsteller': 'Penulis dokumen',
+  'Gegevens voorstellen met AI': 'Sarankan detail dengan AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Proposal AI selesai. Periksa dan ubah sebelum disimpan.',
+  'Dossier als PDF exporteren': 'Ekspor dokumen sebagai PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF berisi sampul, daftar isi, dan semua dokumen dalam urutan berkas.',
+  'Tussenpagina vóór elk document': 'Halaman perantara sebelum setiap dokumen',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Dengan nomor, judul, deskripsi, tanggal, penulis dan SHA-256.',
+  'Volledige gegevens tonen': 'Tampilkan rincian lengkap',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Data pribadi yang ditemukan disembunyikan secara default. Pilih detail lengkap hanya untuk penerima yang dituju.',
+  'PDF maken': 'Buat PDF',
+  'Documentgegevens bewerken': 'Edit informasi dokumen',
+  'Dossier-PDF opgeslagen': 'Berkas PDF disimpan',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Berkas PDF tidak dapat dibuat. Periksa dokumen sumber yang diubah atau hilang dan coba lagi.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Berkas PDF tidak dapat dibuat. Coba lagi.',
   'Referentie vastgelegd': 'Referensi tercatat',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Perubahan belum disimpan di tab; SHA-256 memeriksa versi pada disk.',

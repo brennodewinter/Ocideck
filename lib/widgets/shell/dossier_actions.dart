@@ -171,20 +171,38 @@ class _DossierController {
     verificationTotal: _verificationTotal,
     onCancelOpening: () => _cancelOpening = true,
     onOpenAsDocument: () => unawaited(_openDossierOverviewDocument()),
+    onExportPdf: () => unawaited(_exportDossierPdf()),
     onAdd: () => unawaited(_addDossierEntries()),
     onVerifyEntry: (entry) => unawaited(_verifyDossierEntry(entry)),
     onVerifyAll: () => unawaited(_verifyAllDossierEntries()),
     onRefreshReference: (entry) => unawaited(_refreshDossierReference(entry)),
-    onRenameEntry: (entry, title) => unawaited(
+    onEditEntryDetails: (entry, details) => unawaited(
       _changeDossier(
         (d) => d.copyWith(
           entries: [
             for (final e in d.entries)
-              e.id == entry.id ? e.copyWith(title: title) : e,
+              e.id == entry.id
+                  ? e.copyWith(
+                      title: details.title,
+                      description: details.description,
+                      documentDate: details.documentDate,
+                      clearDocumentDate: details.documentDate == null,
+                      author: details.author,
+                    )
+                  : e,
           ],
         ),
       ),
     ),
+    onSuggestEntryDetails:
+        ref.watch(
+          settingsProvider.select(
+            (settings) =>
+                settings.aiSettings.enabled && settings.aiSettings.isConfigured,
+          ),
+        )
+        ? _suggestDossierEntryDetails
+        : null,
     onRemoveEntry: (entry) => unawaited(
       _changeDossier(
         (d) => d.copyWith(
@@ -225,6 +243,111 @@ class _DossierController {
       ),
     ),
   );
+
+  Future<DossierEntryDetails?> _suggestDossierEntryDetails(
+    DossierEntry entry,
+  ) async {
+    final store = _dossierStore;
+    if (store == null) return null;
+    final code = context.l10n.languageCode;
+    final appSettings = ref.read(settingsProvider);
+    final ai = appSettings.aiSettings;
+    final client = AiClientService(
+      settings: ai,
+      hasOutboundConsent: ref.read(consentProvider).hasAccepted,
+      apiKey: await ref.read(secretStoreProvider).readAiApiKey(ai.baseUrl),
+    );
+    final suggested = await DossierAiSuggestionsService(client, store).suggest(
+      entry,
+      languageName: AppLocalizations.languageNames[code] ?? 'English',
+      disabledRules: appSettings.privacyDisabledRules,
+      ownIdentity: OwnIdentity.fromLines(appSettings.privacyOwnIdentity),
+    );
+    if (suggested == null) return null;
+    return (
+      title: suggested.title,
+      description: suggested.description,
+      documentDate: suggested.documentDate.trim().isEmpty
+          ? null
+          : suggested.documentDate,
+      author: suggested.author,
+    );
+  }
+
+  Future<void> _exportDossierPdf() async {
+    final dossier = _dossier;
+    final store = _dossierStore;
+    if (dossier == null || store == null || _dossierBusy) return;
+    final options = await DossierDialogs.pdfExportOptions(context);
+    if (options == null || !context.mounted) return;
+    final suffix = options.profile == PrivacyExportProfile.full
+        ? context.l10n.d('volledig')
+        : context.l10n.d('geredigeerd');
+    final fileName =
+        '${sanitizeFilename('${dossier.title}-$suffix', fallback: 'dossier')}.pdf';
+    final destination = await getSaveLocation(
+      suggestedName: fileName,
+      initialDirectory: store.directory.path,
+    );
+    if (destination == null || !context.mounted) return;
+    final path = p.extension(destination.path).toLowerCase() == '.pdf'
+        ? destination.path
+        : '${destination.path}.pdf';
+    _refreshDossier(() => _dossierBusy = true);
+    try {
+      final fallbackFonts = await loadPdfFallbackFonts();
+      var privacyAcknowledged = false;
+      while (true) {
+        try {
+          final bytes = await buildDossierPdf(
+            dossier,
+            store,
+            settings: ref.read(settingsProvider),
+            includeInterleaves: options.includeInterleaves,
+            profile: options.profile,
+            privacyAcknowledged: privacyAcknowledged,
+            fallbackFonts: fallbackFonts,
+          );
+          await writeBytesAtomic(File(path), bytes);
+          if (context.mounted) {
+            _dossierMessage(
+              '${context.l10n.d('Dossier-PDF opgeslagen')}: $path',
+            );
+          }
+          return;
+        } on DossierPdfPrivacyException catch (error) {
+          if (!context.mounted || privacyAcknowledged) return;
+          final approved = await confirmDocumentPrivacyExport(
+            context,
+            error.decision,
+          );
+          if (!approved || !context.mounted) return;
+          privacyAcknowledged = true;
+        }
+      }
+    } on DossierPdfClassificationException catch (error) {
+      if (context.mounted) {
+        documentClassificationAllowed(context, error.decision);
+      }
+    } on FileSystemException catch (error, stack) {
+      logError('Dossier-PDF export mislukt', error, stack);
+      if (context.mounted) {
+        _dossierMessage(
+          '${context.l10n.d('Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.')} '
+          '${error.path ?? ''}',
+        );
+      }
+    } catch (error, stack) {
+      logError('Dossier-PDF export mislukt', error, stack);
+      if (context.mounted) {
+        _dossierMessage(
+          context.l10n.d('Dossier-PDF niet gemaakt. Probeer het opnieuw.'),
+        );
+      }
+    } finally {
+      if (context.mounted) _refreshDossier(() => _dossierBusy = false);
+    }
+  }
 
   Widget _dossierReturnBar() => Material(
     color: Theme.of(context).colorScheme.surfaceContainerHigh,

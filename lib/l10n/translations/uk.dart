@@ -1641,6 +1641,39 @@ const _dutchSourceAddUk = <String, String>{
       'Курс відсутній — еквівалент в EUR не обчислено.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'рядок(и) введення не перераховано — бракувало курсу.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Жодної корисної пропозиції не знайдено. Заповніть реквізити самостійно.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Не вдалося отримати пропозицію AI. Перевірте налаштування AI або заповніть деталі самостійно.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Використовуйте дійсну дату, наприклад РРРР-ММ-ДД, або залиште поле порожнім.',
+  'Documentgegevens': 'Дані документа',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Ці деталі описують цей документ у досьє. Вихідний файл не змінено.',
+  'Korte omschrijving': 'Короткий опис',
+  'Waar gaat dit document over?': 'Про що цей документ?',
+  'Documentdatum': 'Дата документа',
+  'JJJJ-MM-DD': 'РРРР-ММ-ДД',
+  'Opsteller': 'Автор документа',
+  'Gegevens voorstellen met AI': 'Пропонуйте деталі за допомогою ШІ',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Пропозиція AI завершена. Перевірте та змініть його перед збереженням.',
+  'Dossier als PDF exporteren': 'Експортуйте досьє як PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF містить обкладинку, зміст і всі документи в порядку досьє.',
+  'Tussenpagina vóór elk document': 'Проміжна сторінка перед кожним документом',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'З номером, назвою, описом, датою, автором і SHA-256.',
+  'Volledige gegevens tonen': 'Показати повну інформацію',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Знайдені персональні дані за замовчуванням приховані. Вибирайте повну інформацію лише для одержувача.',
+  'PDF maken': 'Створити PDF',
+  'Documentgegevens bewerken': 'Редагувати інформацію про документ',
+  'Dossier-PDF opgeslagen': 'PDF-досьє збережено',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Не вдалося створити PDF-досьє. Перевірте змінений або відсутній вихідний документ і повторіть спробу.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Не вдалося створити PDF-досьє. Спробуйте знову.',
   'Referentie vastgelegd': 'Посилання зафіксовано',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Незбережені зміни у вкладці; SHA-256 перевіряє версію на диску.',

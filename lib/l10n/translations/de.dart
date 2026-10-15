@@ -672,6 +672,39 @@ const _dutchSourceAddDe = {
       'Kurs fehlt — EUR-Gegenwert nicht berechnet.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'Eingabezeile(n) nicht umgerechnet — Kurs fehlte.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Es wurde kein nützlicher Vorschlag gefunden. Füllen Sie die Details selbst aus.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Der KI-Vorschlag konnte nicht abgerufen werden. Überprüfen Sie die KI-Einstellungen oder tragen Sie die Details selbst ein.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Verwenden Sie ein gültiges Datum wie JJJJ-MM-TT oder lassen Sie das Feld leer.',
+  'Documentgegevens': 'Dokumentdaten',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Diese Details beschreiben dieses Dokument im Dossier. Die Quelldatei wird nicht geändert.',
+  'Korte omschrijving': 'Kurze Beschreibung',
+  'Waar gaat dit document over?': 'Worum geht es in diesem Dokument?',
+  'Documentdatum': 'Dokumentdatum',
+  'JJJJ-MM-DD': 'JJJJ-MM-TT',
+  'Opsteller': 'Verfasser',
+  'Gegevens voorstellen met AI': 'Angaben mit KI vorschlagen',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'KI-Vorschlag abgeschlossen. Überprüfen und ändern Sie es vor dem Speichern.',
+  'Dossier als PDF exporteren': 'Dossier als PDF exportieren',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Das PDF enthält ein Cover, ein Inhaltsverzeichnis und alle Dokumente in Dossierreihenfolge.',
+  'Tussenpagina vóór elk document': 'Zwischenseite vor jedem Dokument',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Mit Nummer, Titel, Beschreibung, Datum, Autor und SHA-256.',
+  'Volledige gegevens tonen': 'Vollständige Details anzeigen',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Gefundene personenbezogene Daten werden standardmäßig geschwärzt. Wählen Sie vollständige Angaben nur für den vorgesehenen Empfänger.',
+  'PDF maken': 'PDF erstellen',
+  'Documentgegevens bewerken': 'Dokumentinformationen bearbeiten',
+  'Dossier-PDF opgeslagen': 'Dossier-PDF gespeichert',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier-PDF konnte nicht erstellt werden. Überprüfen Sie das geänderte oder fehlende Quelldokument und versuchen Sie es erneut.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier-PDF konnte nicht erstellt werden. Versuchen Sie es erneut.',
   'Referentie vastgelegd': 'Die Referenz ist festgehalten.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Ungespeicherte Änderungen im Tab; SHA-256 prüft die Version auf der Festplatte.',

@@ -671,6 +671,39 @@ const _dutchSourceAddPap = {
       'Kurso ta falta — ekivalente den EUR no a wòrdu kalkulá.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'liña(nan) di entrada no a wòrdu konvertí — kurso tabata falta.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'No a haña ningun proposishon útil. Yena e detayenan bo mes.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'E proposishon di AI no por a wòrdu rekuperá. Kontrolá e settingnan di AI òf yena e detayenan bo mes.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Usa un fecha bálido manera AAAA-MM-DD, òf laga e kampo blanku.',
+  'Documentgegevens': 'Dato di dokumento',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'E detayenan aki ta deskribí e dokumento aki den e dossier. E archivo di fuente no ta kambia.',
+  'Korte omschrijving': 'Deskripshon kòrtiku',
+  'Waar gaat dit document over?': 'Di kiko e dokumento aki ta trata?',
+  'Documentdatum': 'Fecha di dokumento',
+  'JJJJ-MM-DD': 'YYYY-MM-DD',
+  'Opsteller': 'Outor di e dokumento',
+  'Gegevens voorstellen met AI': 'Sugerí detayenan ku AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Proposishon di intiligensia artifisial kompletá. Kontrolá i kambia esaki promé ku warda.',
+  'Dossier als PDF exporteren': 'Eksportá dossier komo PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'E PDF ta kontené un portada, un tabel di kontenido, i tur dokumento den òrdu di dossier.',
+  'Tussenpagina vóór elk document': 'Página intermedio promé ku kada dokumento',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Ku number, título, deskripshon, fecha, outor i SHA-256.',
+  'Volledige gegevens tonen': 'Mustra detaye kompletu',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Datonan personal hañá ta skondí pa default. Skohe detayenan kompletu solamente pa e destinatario intenshoná.',
+  'PDF maken': 'Krea PDF',
+  'Documentgegevens bewerken': 'Editá informashon di dokumento',
+  'Dossier-PDF opgeslagen': 'Dossier PDF wardá',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dossier PDF no por a wòrdu kreá. Kontrolá e dokumento di fuente ku a kambia òf falta i purba atrobe.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dossier PDF no por a wòrdu kreá. Purba atrobe.',
   'Referentie vastgelegd': 'Referensiya rekordá.',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Kambionan no warda den tab; SHA-256 ta kontrolá e vershon riba disko.',

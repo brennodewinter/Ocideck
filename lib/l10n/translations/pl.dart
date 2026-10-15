@@ -1638,6 +1638,40 @@ const _dutchSourceAddPl = <String, String>{
       'Brak kursu — równowartość w EUR nie została obliczona.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'wiersz(e) wejściowe nieprzeliczone — brakowało kursu.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nie znaleziono żadnej przydatnej propozycji. Wypełnij szczegóły samodzielnie.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Nie udało się pobrać propozycji AI. Sprawdź ustawienia AI lub samodzielnie uzupełnij dane.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Użyj prawidłowej daty, takiej jak RRRR-MM-DD, lub pozostaw pole puste.',
+  'Documentgegevens': 'Dane dokumentu',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Szczegóły te opisują ten dokument w dokumentacji. Plik źródłowy nie ulega zmianie.',
+  'Korte omschrijving': 'Krótki opis',
+  'Waar gaat dit document over?': 'O co chodzi w tym dokumencie?',
+  'Documentdatum': 'Data dokumentu',
+  'JJJJ-MM-DD': 'RRRR-MM-DD',
+  'Opsteller': 'Autor dokumentu',
+  'Gegevens voorstellen met AI':
+      'Zaproponuj szczegóły za pomocą sztucznej inteligencji',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Propozycja AI ukończona. Sprawdź i zmień przed zapisaniem.',
+  'Dossier als PDF exporteren': 'Eksportuj dokumentację w formacie PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'Plik PDF zawiera okładkę, spis treści i wszystkie dokumenty w kolejności dokumentacji.',
+  'Tussenpagina vóór elk document': 'Strona pośrednia przed każdym dokumentem',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'Z numerem, tytułem, opisem, datą, autorem i SHA-256.',
+  'Volledige gegevens tonen': 'Pokaż pełne szczegóły',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Znalezione dane osobowe są domyślnie ukryte. Wybierz pełne dane tylko dla zamierzonego odbiorcy.',
+  'PDF maken': 'Utwórz plik PDF',
+  'Documentgegevens bewerken': 'Edytuj informacje o dokumencie',
+  'Dossier-PDF opgeslagen': 'Dokumentacja w formacie PDF została zapisana',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Nie można utworzyć pliku PDF dokumentacji. Sprawdź zmieniony lub brakujący dokument źródłowy i spróbuj ponownie.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Nie można utworzyć pliku PDF dokumentacji. Spróbuj ponownie.',
   'Referentie vastgelegd': 'Referencja udokumentowana',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Niezapisane zmiany na karcie; SHA-256 sprawdza wersję na dysku.',

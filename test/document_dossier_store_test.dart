@@ -135,6 +135,62 @@ void main() {
     expect((reread['entries'] as List).single['futureEntryField'], [42]);
   });
 
+  test('stores optional document facts and renders them safely', () async {
+    final source = File(p.join(temp.path, 'bijlage.md'));
+    await source.writeAsString('Inhoud');
+    var dossier = await store.create('Zaak');
+    dossier = await store.addFile(dossier, source);
+    final originalHash = dossier.entries.single.sha256;
+    final entry = dossier.entries.single.copyWith(
+      description: 'Kort *overzicht*\nmet tweede regel',
+      documentDate: '2024-02-29',
+      author: 'A. [Opsteller]',
+    );
+    dossier = dossier.copyWith(entries: [entry]);
+    await store.save(dossier);
+
+    final reread = (await store.load()).entries.single;
+    expect(reread.description, entry.description);
+    expect(reread.documentDate, '2024-02-29');
+    expect(reread.author, entry.author);
+    expect(reread.sha256, originalHash);
+    final overview = await store.overviewFile.readAsString();
+    expect(overview, contains('Kort \\*overzicht\\* met tweede regel'));
+    expect(overview, contains('Datum: 2024-02-29'));
+    expect(overview, contains('Opsteller: A\\. \\[Opsteller\\]'));
+    expect(overview, contains('SHA-256: `$originalHash`'));
+
+    await store.save(
+      dossier.copyWith(entries: [reread.copyWith(clearDocumentDate: true)]),
+    );
+    final cleared = (await store.load()).entries.single;
+    expect(cleared.documentDate, isNull);
+    expect((cleared.toJson()).containsKey('documentDate'), isFalse);
+  });
+
+  test('rejects invalid calendar dates on load and save', () async {
+    final source = File(p.join(temp.path, 'bijlage.md'));
+    await source.writeAsString('Inhoud');
+    var dossier = await store.create('Zaak');
+    dossier = await store.addFile(dossier, source);
+    await expectLater(
+      store.save(
+        dossier.copyWith(
+          entries: [
+            dossier.entries.single.copyWith(documentDate: '2023-02-29'),
+          ],
+        ),
+      ),
+      throwsFormatException,
+    );
+    final json =
+        jsonDecode(await store.manifestFile.readAsString())
+            as Map<String, dynamic>;
+    (json['entries'] as List).single['documentDate'] = '2024-2-9';
+    await store.manifestFile.writeAsString(jsonEncode(json));
+    await expectLater(store.load(), throwsFormatException);
+  });
+
   test(
     'rejects traversal and outside symlink before opening or hashing',
     () async {

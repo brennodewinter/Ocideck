@@ -1628,6 +1628,39 @@ const _dutchSourceAddCs = <String, String>{
       'Kurz chybí — ekvivalent v EUR nebyl vypočten.',
   'invoerregel(s) niet omgerekend — koers ontbrak.':
       'řádek/řádky zadání nepřevedeny — chyběl kurz.',
+  'Er is geen bruikbaar voorstel gevonden. Vul de gegevens zelf in.':
+      'Nebyl nalezen žádný užitečný návrh. Údaje si vyplňte sami.',
+  'Het AI-voorstel kon niet worden opgehaald. Controleer de AI-instellingen of vul de gegevens zelf in.':
+      'Návrh AI se nepodařilo načíst. Zkontrolujte nastavení AI nebo vyplňte podrobnosti sami.',
+  'Gebruik een geldige datum als JJJJ-MM-DD, of laat het veld leeg.':
+      'Použijte platné datum, například RRRR-MM-DD, nebo nechte pole prázdné.',
+  'Documentgegevens': 'Data dokumentu',
+  'Deze gegevens horen bij de vermelding in het dossier. Het bronbestand verandert niet.':
+      'Tyto podrobnosti popisují tento dokument v dokumentaci. Zdrojový soubor se nezmění.',
+  'Korte omschrijving': 'Krátký popis',
+  'Waar gaat dit document over?': 'O čem je tento dokument?',
+  'Documentdatum': 'Datum dokumentu',
+  'JJJJ-MM-DD': 'YYYY-MM-DD',
+  'Opsteller': 'Autor dokumentu',
+  'Gegevens voorstellen met AI': 'Navrhněte podrobnosti pomocí AI',
+  'AI-voorstel ingevuld. Controleer en wijzig het voordat je opslaat.':
+      'Návrh AI dokončen. Před uložením jej zkontrolujte a změňte.',
+  'Dossier als PDF exporteren': 'Exportovat dokumentaci jako PDF',
+  'De PDF bevat een omslag, inhoudsopgave en alle documenten in dossiervolgorde.':
+      'PDF obsahuje obálku, obsah a všechny dokumenty v pořadí dokumentace.',
+  'Tussenpagina vóór elk document': 'Mezistránka před každým dokumentem',
+  'Met nummer, titel, omschrijving, datum, opsteller en SHA-256.':
+      'S číslem, názvem, popisem, datem, autorem a SHA-256.',
+  'Volledige gegevens tonen': 'Zobrazit úplné podrobnosti',
+  'Standaard worden gevonden persoonsgegevens afgeschermd. Kies volledig alleen voor de juiste ontvanger.':
+      'Nalezené osobní údaje jsou ve výchozím nastavení skryté. Vyberte úplné podrobnosti pouze pro zamýšleného příjemce.',
+  'PDF maken': 'Vytvořit PDF',
+  'Documentgegevens bewerken': 'Upravit informace o dokumentu',
+  'Dossier-PDF opgeslagen': 'Soubor PDF uložen',
+  'Dossier-PDF niet gemaakt. Controleer de gewijzigde of ontbrekende bron en probeer opnieuw.':
+      'Dokument PDF nelze vytvořit. Zkontrolujte změněný nebo chybějící zdrojový dokument a zkuste to znovu.',
+  'Dossier-PDF niet gemaakt. Probeer het opnieuw.':
+      'Dokument PDF nelze vytvořit. Zkuste to znovu.',
   'Referentie vastgelegd': 'Reference zaznamenána',
   'Onopgeslagen wijzigingen in tabblad; SHA-256 controleert de schijfversie.':
       'Neuložené změny na kartě; SHA-256 kontroluje verzi na disku.',
