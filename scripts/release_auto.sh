@@ -2807,11 +2807,14 @@ assert_nightly_main_gate() {
 STEP="wachtwoord"
 read_token
 assert_no_pending_fixes
-assert_nightly_main_gate
 MINISIGN_PW=""
 
 # #7: faal vóór elke onherroepelijke stap; en in --resume is dit de enige gate.
+# Vraag en verifieer het minisign-wachtwoord vóór de mogelijk urenlange
+# linux-gate op main. Bij een rode gate hoeft de gebruiker daardoor niet na
+# lang wachten alsnog voor invoer terug te komen.
 preflight
+assert_nightly_main_gate
 
 # --preflight: hier houdt de repetitie op. Alles wat een release onderweg nodig
 # heeft is nu getoetst — referentiedata, schone werkboom, vrije werkboom, bekend
@@ -2841,8 +2844,8 @@ fi
 STEP="voorbereiden"
 section "Fase 1 — voorbereiden"
 git fetch origin --quiet
-# De eerste gate draait vóór de algemene preflight. Is main tijdens die
-# repetitie doorgeschoven, keur dan de werkelijk uit te checken tip eerst.
+# Is main tijdens de preflight of eerste gate doorgeschoven, keur dan de
+# werkelijk uit te checken tip opnieuw vóór de checkout.
 assert_nightly_main_gate
 [ -n "$APPROVED_MAIN_SHA" ] \
   || die "de linux-gate leverde geen goedgekeurde main-commit op — niets lokaal gemuteerd."
