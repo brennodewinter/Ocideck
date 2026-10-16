@@ -15,6 +15,11 @@ RAISE_FDS := ulimit -n 8192 2>/dev/null || true;
 # TEST_JOBS=18`, en op een runner die niets anders doet is dat ook zinnig.
 TEST_JOBS ?= $(shell n=$$(sysctl -n hw.logicalcpu 2>/dev/null || nproc 2>/dev/null || echo 4); if [ $$n -gt 6 ]; then echo $$((n - 4)); else echo 2; fi)
 TEST_JOBS_FLAG := $(if $(TEST_JOBS),--concurrency=$(TEST_JOBS),)
+# De Linux-CI kan onder volle suitebelasting een individuele I/O-test langer
+# dan Flutter's standaard 30 s laten wachten. Alleen de runner zet deze marge;
+# lokaal blijft de korte limiet gelden en een echte hang eindigt alsnog.
+TEST_TIMEOUT ?=
+TEST_TIMEOUT_FLAG := $(if $(TEST_TIMEOUT),--timeout=$(TEST_TIMEOUT),)
 
 # De beeldcontrole (`image_face_scan_io.dart`) draait op OpenCV via de native laag
 # van dartcv4 2.x. Die laadt NIET onder `flutter test`: de `@Native`/`@DefaultAsset`
@@ -181,7 +186,7 @@ test:
 	@echo "Command: flutter test --test-randomize-ordering-seed random"
 	@echo "Covers: all unit/widget tests under test/, including markdown round-trip, preview, export, provider, footer, and presenter tests."
 	@echo "Failure means: inspect the named failing test file and test case in the Flutter output."
-	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) --test-randomize-ordering-seed random --exclude-tags golden $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --test-randomize-ordering-seed random --exclude-tags golden $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Run the full test suite with coverage and summarise line coverage. The floor
 # guards against large regressions; raise it as coverage improves.
@@ -195,7 +200,7 @@ coverage:
 	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=80 --require-instrumented"
 	@echo "Covers: line coverage over lib/, plus: every lib/ file is in at least one test."
 	@echo "Failure means: coverage fell below the floor, or a lib/ file is in no test at all."
-	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) --coverage --test-randomize-ordering-seed random --exclude-tags golden $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	$(RAISE_FDS) flutter test $(TEST_JOBS_FLAG) $(TEST_TIMEOUT_FLAG) --coverage --test-randomize-ordering-seed random --exclude-tags golden $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 	dart run tool/coverage_summary.dart --min=80 --require-instrumented
 
 # The per-file floor, over the report `coverage` just wrote (no second test run).
