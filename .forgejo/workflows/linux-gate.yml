@@ -99,9 +99,9 @@ jobs:
     # `static-gate`/`scans` blijven op `docker` (capacity 4).
     runs-on: linux-serial
     # De suite mat 81 min onder volle belasting op 08-10-2026 en naderde in
-    # de v0.7.0-preflight al 110 min terwijl tests nog slaagden. Houd ruimte
+    # de v0.7.0-preflight al 110 min. Houd ruimte
     # voor de volledige suite, maar stop een echte hang vóór release_auto's
-    # ruimere grens van 270 min.
+    # ruimere grens van 300 min.
     timeout-minutes: 180
     env:
       PUB_CACHE: /home/ubuntu/.pub-cache

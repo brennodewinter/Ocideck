@@ -110,12 +110,12 @@ DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de livev
 WEBSITE_URL="${OCIDECK_WEBSITE_URL:-https://librekat.nl/nl/ocideck/}"
 # De poort-wachttijd (minuten). De linux-gate duurde op 08-10-2026 onder volle
 # runnerbelasting 81 min; de v0.7.0-preflight naderde de oude grens terwijl
-# tests nog slaagden. 270 min geeft de Linux-job (max 180 min) ook ruimte om
+# tests nog liepen. 300 min geeft de Linux-job (max 180 min) ook ruimte om
 # achter een andere volledige run op de serial-runner te wachten (81 min is
 # gemeten). De release start de handmatige workflows zelf en volgt hun taken;
 # sinds #2194 leveren ze bewust geen automatische PR-statuscontexten meer. Zie
 # wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
-GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-270}"
+GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-300}"
 # De wachttijd op de release-CI ná de tag (minuten). Die keten duurt ruim twee
 # uur: v0.6.4 2u05 en v0.6.5 2u14 (gate ~12 → Poort ~12 → macOS ~15 naast
 # Linux ~50 en web ~45 → publiceren → website). De oude vaste 60 min brak de
@@ -2212,7 +2212,7 @@ ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
 }
 
 # linux-gate draait de volledige suite op de capacity-1 serial-runner (81 min
-# gemeten onder volle belasting op 08-10-2026). Vandaar GATE_TIMEOUT_MIN (270)
+# gemeten onder volle belasting op 08-10-2026). Vandaar GATE_TIMEOUT_MIN (300)
 # mét voortgang. Een geaccepteerde dispatch die na vijf minuten nog geen RUN
 # opleverde is een registratieprobleem — een queued run zonder runner-taak is
 # via /actions/runs wél zichtbaar — geen reden om de overige wachttijd
