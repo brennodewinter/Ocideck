@@ -723,7 +723,7 @@ Forgejo endpoint (in v0.6.14 `/actions/tasks` stalled while the rest of the
 API kept answering) can never hold the whole status report hostage, and an
 unreadable probe is never mistaken for "absent".
 
-Also before the password, the pre-flight clears a **native-assets CMake cache
+At the start of pre-flight, before the password, the script clears a **native-assets CMake cache
 left by a previous package version**. `hooks_runner` keys its shared build
 directories on a hash of the build configuration, not on the package version,
 and each configuration has its own hash: after a bump of a package with a CMake
@@ -749,18 +749,18 @@ does. `--ondanks-fixes` lets a run proceed anyway and records that choice in the
 release log; `--resume` skips the check because the content of a running release
 is already fixed. `test/release_auto_pending_fixes_test.dart` pins the behaviour.
 
-The same pre-mutation section requires a green `linux-gate` on the exact
-`origin/main` tip. It reuses and follows an existing run, or dispatches one on
-`main` when the nightly schedule has not seen that commit yet. A red or
+The **pre-flight** checks everything the later, irreversible steps will need —
+the forge token, the `mirror` remote, the deploy host over ssh, a throwaway
+`minisign` signature, and the macOS signing identity plus notary profile. It
+asks for and verifies the minisign password before waiting for the Linux gate,
+so a wrong password fails promptly and the release can run unattended after
+the prompt.
+
+Before any release mutation, the chain requires a green `linux-gate` on the
+exact `origin/main` tip. It reuses and follows an existing run, or dispatches
+one on `main` when the nightly schedule has not seen that commit yet. A red or
 persistently unreadable run remains a hard stop. Phase 1 repeats the check after
 its final fetch, so it never branches from a newer, untested tip.
-
-Right after the password, a **pre-flight** checks everything the later,
-irreversible steps will need — the forge token, the `mirror` remote, the deploy
-host over ssh, a throwaway `minisign` signature, and the macOS signing identity
-plus notary profile — so a wrong password or an unreachable host fails in
-seconds, before the long build and the tag, instead of after (which is exactly
-how a real release once stranded at the very end).
 
 `scripts/release_auto.sh --preflight` runs that rehearsal on its own: the
 staleness gate, a clean and idle worktree, the token, the mirror, the deploy
