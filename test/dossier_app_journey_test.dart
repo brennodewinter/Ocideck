@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:file_selector_platform_interface/file_selector_platform_interface.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,7 +9,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/document_dossier_store.dart';
-import 'package:ocideck/services/open_file_channel.dart';
 import 'package:ocideck/widgets/dossier/dossier_overview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,10 +41,57 @@ class _DossierPicker extends FileSelectorPlatform {
   }) async => FileSaveLocation('$directory/dossier-export.pdf');
 }
 
+class _DossierFilePicker extends FilePickerPlatform {
+  String? document;
+
+  @override
+  Future<List<PlatformFile>> pickFiles({
+    String? dialogTitle,
+    String? initialDirectory,
+    FileType type = FileType.any,
+    List<String>? allowedExtensions,
+    void Function(FilePickerStatus)? onFileLoading,
+    int compressionQuality = 0,
+    AndroidOptions androidOptions = const AndroidOptions(),
+    DarwinOptions darwinOptions = const DarwinOptions(),
+    WindowsOptions windowsOptions = const WindowsOptions(),
+    LinuxOptions linuxOptions = const LinuxOptions(),
+    WebOptions webOptions = const WebOptions(),
+  }) async => document == null ? [] : [_DossierPlatformFile(document!)];
+}
+
+final class _DossierPlatformFile extends PlatformFile {
+  _DossierPlatformFile(String path) : uri = Uri.file(path);
+
+  @override
+  final Uri uri;
+
+  @override
+  String get name => uri.pathSegments.last;
+
+  @override
+  XFile get xFile => XFile(path!);
+
+  @override
+  int? lengthSync() => File(path!).lengthSync();
+
+  @override
+  Future<int?> length() => File(path!).length();
+
+  @override
+  Future<Uint8List> readAsBytes() => File(path!).readAsBytes();
+
+  @override
+  Stream<Uint8List> readAsByteStream() =>
+      File(path!).openRead().map(Uint8List.fromList);
+}
+
 void main() {
   late Directory temp;
   late _DossierPicker picker;
+  late _DossierFilePicker filePicker;
   late FileSelectorPlatform previous;
+  late FilePickerPlatform previousFilePicker;
 
   setUp(() async {
     AppLocalizations.setActiveLanguageCode('nl');
@@ -52,10 +100,14 @@ void main() {
     picker = _DossierPicker(temp.path);
     previous = FileSelectorPlatform.instance;
     FileSelectorPlatform.instance = picker;
+    filePicker = _DossierFilePicker();
+    previousFilePicker = FilePickerPlatform.instance;
+    FilePickerPlatform.instance = filePicker;
   });
 
   tearDown(() async {
     FileSelectorPlatform.instance = previous;
+    FilePickerPlatform.instance = previousFilePicker;
     await temp.delete(recursive: true);
   });
 
@@ -142,22 +194,12 @@ void main() {
     );
     await tester.runAsync(() => store.create('Dossier'));
     picker.document = store.manifestFile.path;
+    filePicker.document = source.path;
 
     await start(tester);
     await dossierMenu(tester, 'Dossier openen…');
     await tester.tap(find.text('Alleen overzicht'));
     await tester.pumpAndSettle();
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-      kOpenFileChannel,
-      (call) async => call.method == 'pickFile' ? [source.path] : null,
-    );
-    addTearDown(
-      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-        kOpenFileChannel,
-        null,
-      ),
-    );
-
     await tapUntil(
       tester,
       find.text('Documenten toevoegen'),
