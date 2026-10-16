@@ -105,6 +105,10 @@ jobs:
     timeout-minutes: 180
     env:
       PUB_CACHE: /home/ubuntu/.pub-cache
+      # De volle suite belast de runner genoeg om losse schijf-I/O-tests over
+      # Flutter's 30 s te duwen (run 11173). Houd een begrensde marge; tests
+      # met een eigen timeout behouden die eigen grens.
+      TEST_TIMEOUT: 3m
     # Voorgebakken CI-image (zie de kop van `static-gate.yml` en docs/CHECKS.md):
     # OS + node + build-toolchain + de gepinde, sha256-geverifieerde Flutter
     # (+ precache) zitten erin, dus de per-run-installatie vervalt. Het tag ís de
