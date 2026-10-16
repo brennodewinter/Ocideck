@@ -153,10 +153,23 @@ void main() {
 
   Future<void> compile(WidgetTester tester, String expected) async {
     await tester.tap(text('Samenstellen'));
+    await tester.pump();
+    // Wacht op het einde van de echte schijf-I/O, ook als de runner druk is.
+    // Een verkeerde uitkomst faalt daarna meteen met de getoonde melding in
+    // plaats van tien seconden op de verwachte tekst te blijven wachten.
     await pumpUntil(
       tester,
-      () => find.textContaining(expected).evaluate().isNotEmpty,
+      () =>
+          tester
+              .widget<FilledButton>(
+                find.widgetWithText(FilledButton, 'Samenstellen'),
+              )
+              .onPressed !=
+          null,
+      timeout: const Duration(seconds: 30),
+      reason: 'het samenstellen van het boek is niet afgerond',
     );
+    expect(find.textContaining(expected), findsOneWidget);
   }
 
   testWidgets(
