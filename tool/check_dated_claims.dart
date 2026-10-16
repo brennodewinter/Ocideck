@@ -173,7 +173,7 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
     '2.5 minute': 1,
     '2.5 minutes': 1,
     '22 minutes': 1,
-    // De release-CI-wacht: de standaardcaps (240 en 120), de duur van "Linux
+    // De release-CI-wacht: de standaardcaps (240 en 300), de duur van "Linux
     // bouwen" bij v0.6.5 (~50) en de oude vaste cap (60) die die run afbrak.
     // Geschiedenis en een instelling, geen belofte over hoe lang de keten
     // morgen duurt; de cap is uitdrukkelijk een vangnet.
@@ -182,7 +182,7 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
     '45 minute': 1,
     '50 min': 1,
     '60 min': 1,
-    '120 min': 1,
+    '300 min': 1,
     'half an hour': 1,
   },
 };

@@ -1,10 +1,9 @@
 @TestOn('vm')
 // Deze suite doet échte git-subprocessen (clone/commit/push/diff). Op de
-// Windows-CI zijn die onder gelijktijdige belasting fors trager dan de 30s die
-// het testframework standaard per test geeft, wat losstaande tests
-// intermitterend liet aflopen (#933). Alléén op Windows krijgen ze daarom ruimer
-// de tijd; elders blijft de strakke standaard staan, zodat een echte vastloper
-// lokaal snel opvalt.
+// CI zijn die onder gelijktijdige belasting fors trager dan de 30s die het
+// testframework standaard per test geeft. Eerst bleek dat op Windows (#933),
+// daarna op de Linux-releasepoort (run 11140). Op beide platforms krijgen deze
+// subprocess-tests daarom de ruime limiet; macOS houdt de strakke standaard.
 //
 // **Waarom acht minuten en niet drie.** Nagemeten op de spiegel-CI: deze dertig
 // gevallen deden er samen 5 min 32 s over, waar ze lokaal in 4 s klaar zijn —
@@ -18,7 +17,10 @@
 // `@OnPlatform` op bibliotheekniveau wordt door `flutter test` niet verwerkt
 // (alleen `dart test` doet dat). De per-test timeout via _wtest hieronder is de
 // werkelijke remedie; deze annotatie staat als documentatie van de bedoeling.
-@OnPlatform(<String, dynamic>{'windows': Timeout(Duration(minutes: 8))})
+@OnPlatform(<String, dynamic>{
+  'windows': Timeout(Duration(minutes: 8)),
+  'linux': Timeout(Duration(minutes: 8)),
+})
 library;
 
 import 'dart:convert';
@@ -105,21 +107,21 @@ Future<void> _rawGit(List<String> args, String cwd) async {
   }
 }
 
-/// Windows-ruime tijdlimiet voor tests die echte git-subprocessen draaien.
-/// Op andere platforms null, zodat de strakke standaard (30s) geldt.
+/// Ruime tijdlimiet op Windows en Linux voor echte git-subprocessen.
+/// Op macOS blijft de strakke standaard (30s) gelden.
 ///
 /// Ruimer dan de 300 s die [_rawGit] een enkele git-aanroep geeft: liep die af,
 /// dan hoort het testgeval die fout te kunnen mélden (mét plaats en stack) in
 /// plaats van er zelf overheen af te lopen. Zie de toelichting bovenaan dit
 /// bestand voor waarom de marges zo ruim zijn.
-final _windowsTimeout = Platform.isWindows
+final _gitProcessTimeout = Platform.isWindows || Platform.isLinux
     ? const Timeout(Duration(minutes: 8))
     : null;
 
-/// test() met de Windows-ruime tijdlimiet — `@OnPlatform` op bibliotheekniveau
+/// test() met de CI-ruime tijdlimiet — `@OnPlatform` op bibliotheekniveau
 /// wordt door `flutter test` niet verwerkt, dus per-test zetten (#933).
 void _wtest(String description, dynamic Function() body, {bool skip = false}) =>
-    test(description, body, timeout: _windowsTimeout, skip: skip);
+    test(description, body, timeout: _gitProcessTimeout, skip: skip);
 
 void main() {
   // ── Opslag-contract: gelijkwaardig aan DraftMirror ─────────────────────────

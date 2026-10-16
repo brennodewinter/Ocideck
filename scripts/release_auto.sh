@@ -109,12 +109,13 @@ DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de livev
 # naar wijst; daarom is ook hier de pagina die bezoekers krijgen de waarheid.
 WEBSITE_URL="${OCIDECK_WEBSITE_URL:-https://librekat.nl/nl/ocideck/}"
 # De poort-wachttijd (minuten). De linux-gate duurde op 08-10-2026 onder volle
-# runnerbelasting 81 min; 120 min geeft meetbare marge zonder ooit urenlang
-# onbegrensd te wachten. De release start de drie handmatige workflows zelf en
-# volgt hun taken;
+# runnerbelasting 81 min; de v0.7.0-preflight naderde de oude grens terwijl
+# tests nog liepen. 300 min geeft de Linux-job (max 180 min) ook ruimte om
+# achter een andere volledige run op de serial-runner te wachten (81 min is
+# gemeten). De release start de handmatige workflows zelf en volgt hun taken;
 # sinds #2194 leveren ze bewust geen automatische PR-statuscontexten meer. Zie
 # wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
-GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-120}"
+GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-300}"
 # De wachttijd op de release-CI ná de tag (minuten). Die keten duurt ruim twee
 # uur: v0.6.4 2u05 en v0.6.5 2u14 (gate ~12 → Poort ~12 → macOS ~15 naast
 # Linux ~50 en web ~45 → publiceren → website). De oude vaste 60 min brak de
@@ -2211,7 +2212,7 @@ ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
 }
 
 # linux-gate draait de volledige suite op de capacity-1 serial-runner (81 min
-# gemeten onder volle belasting op 08-10-2026). Vandaar GATE_TIMEOUT_MIN (120)
+# gemeten onder volle belasting op 08-10-2026). Vandaar GATE_TIMEOUT_MIN (300)
 # mét voortgang. Een geaccepteerde dispatch die na vijf minuten nog geen RUN
 # opleverde is een registratieprobleem — een queued run zonder runner-taak is
 # via /actions/runs wél zichtbaar — geen reden om de overige wachttijd
@@ -2806,11 +2807,14 @@ assert_nightly_main_gate() {
 STEP="wachtwoord"
 read_token
 assert_no_pending_fixes
-assert_nightly_main_gate
 MINISIGN_PW=""
 
 # #7: faal vóór elke onherroepelijke stap; en in --resume is dit de enige gate.
+# Vraag en verifieer het minisign-wachtwoord vóór de mogelijk urenlange
+# linux-gate op main. Bij een rode gate hoeft de gebruiker daardoor niet na
+# lang wachten alsnog voor invoer terug te komen.
 preflight
+assert_nightly_main_gate
 
 # --preflight: hier houdt de repetitie op. Alles wat een release onderweg nodig
 # heeft is nu getoetst — referentiedata, schone werkboom, vrije werkboom, bekend
@@ -2840,8 +2844,8 @@ fi
 STEP="voorbereiden"
 section "Fase 1 — voorbereiden"
 git fetch origin --quiet
-# De eerste gate draait vóór de algemene preflight. Is main tijdens die
-# repetitie doorgeschoven, keur dan de werkelijk uit te checken tip eerst.
+# Is main tijdens de preflight of eerste gate doorgeschoven, keur dan de
+# werkelijk uit te checken tip opnieuw vóór de checkout.
 assert_nightly_main_gate
 [ -n "$APPROVED_MAIN_SHA" ] \
   || die "de linux-gate leverde geen goedgekeurde main-commit op — niets lokaal gemuteerd."

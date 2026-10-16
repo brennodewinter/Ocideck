@@ -17,15 +17,17 @@ void main() {
 
   final autoScript = File(script).readAsStringSync();
 
-  test('de poort draait vóór preflight', () {
-    // Voer de echte top-level aanroepvolgorde uit met tracerende grenzen. De
-    // wachtwoordprompt mag binnen preflight verhuizen zolang de nightly gate
-    // runtime vóór die hele stap blijft.
+  test('preflight vraagt het wachtwoord vóór de lange main-poort', () {
+    // Voer de echte top-level aanroepvolgorde uit met tracerende grenzen.
+    // Preflight vraagt en toetst het wachtwoord; daarna mag de poort wachten.
     final lines = autoScript.split('\n');
     final start = lines.indexWhere(
       (line) => line.contains('De twee prompts (de enige interactie)'),
     );
-    final end = lines.indexWhere((line) => line.trim() == 'preflight', start);
+    final end = lines.indexWhere(
+      (line) => line.trim() == 'assert_nightly_main_gate',
+      start,
+    );
     expect(start, isNonNegative);
     expect(end, greaterThan(start));
     final topLevel = lines.sublist(start + 1, end + 1).join('\n');
@@ -45,7 +47,7 @@ $topLevel
     final result = Process.runSync('bash', [harness.path]);
     final calls = (result.stdout as String).trim().split('\n');
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
-    expect(calls.indexOf('nightly'), lessThan(calls.indexOf('preflight')));
+    expect(calls.indexOf('preflight'), lessThan(calls.indexOf('nightly')));
   });
 
   test('de ververste main-tip wordt vóór de fase-1-checkout herkeurd', () {
