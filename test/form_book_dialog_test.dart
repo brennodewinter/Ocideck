@@ -151,9 +151,7 @@ void main() {
   FormTemplatePick picks(String name, String body) =>
       (_) async => (name: name, text: body);
 
-  Future<void> compile(WidgetTester tester, String expected) async {
-    await tester.tap(text('Samenstellen'));
-    await tester.pump();
+  Future<void> waitForBookResult(WidgetTester tester, String expected) async {
     // Wacht op het einde van de echte schijf-I/O, ook als de runner druk is.
     // Een verkeerde uitkomst faalt daarna meteen met de getoonde melding in
     // plaats van tien seconden op de verwachte tekst te blijven wachten.
@@ -170,6 +168,12 @@ void main() {
       reason: 'het samenstellen van het boek is niet afgerond',
     );
     expect(find.textContaining(expected), findsOneWidget);
+  }
+
+  Future<void> compile(WidgetTester tester, String expected) async {
+    await tester.tap(text('Samenstellen'));
+    await tester.pump();
+    await waitForBookResult(tester, expected);
   }
 
   testWidgets(
@@ -379,22 +383,12 @@ void main() {
     await tester.tap(text('Hoofdstuksjabloon kiezen…'));
     await tester.pump();
     await compile(tester, 'Boek samengesteld.');
-    await tester.tap(text('Samenstellen'));
-    await pumpUntil(
+    await compile(
       tester,
-      () => text(
-        'Er staat al een boek met deze naam. Kies een andere naam.',
-      ).evaluate().isNotEmpty,
+      'Er staat al een boek met deze naam. Kies een andere naam.',
     );
     await tester.enterText(find.byType(TextField), 'a b');
-    await tester.tap(text('Samenstellen'));
-    await pumpUntil(
-      tester,
-      () => find
-          .textContaining('Gebruik voor de naam alleen letters')
-          .evaluate()
-          .isNotEmpty,
-    );
+    await compile(tester, 'Gebruik voor de naam alleen letters');
   });
 
   testWidgets('niets om in het boek te zetten zegt waarom', (tester) async {
@@ -695,10 +689,7 @@ void main() {
     await tester.pump();
     expect(find.textContaining('Boek samengesteld.'), findsNothing);
     expect(text('Boek openen'), findsNothing);
-    await pumpUntil(
-      tester,
-      () => find.textContaining('Boek samengesteld.').evaluate().isNotEmpty,
-    );
+    await waitForBookResult(tester, 'Boek samengesteld.');
   });
 
   testWidgets(
@@ -720,7 +711,12 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(Dialog), findsNothing);
       final book = File(p.join(workspace.root, 'book', 'boek.md'));
-      await pumpUntil(tester, () => book.existsSync());
+      await pumpUntil(
+        tester,
+        () => book.existsSync(),
+        timeout: const Duration(seconds: 30),
+        reason: 'de boekactie na het sluiten is niet afgerond',
+      );
       await tester.pump();
       expect(tester.takeException(), isNull);
     },

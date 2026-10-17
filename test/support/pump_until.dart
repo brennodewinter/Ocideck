@@ -21,6 +21,9 @@ import 'package:flutter_test/flutter_test.dart';
 /// duurt de test 5 ms. Duurt het onder belasting 3 seconden? Dan wacht ze 3
 /// seconden. De bovengrens is er alleen om een vastloper te laten falen met een
 /// leesbare melding in plaats van met een time-out van het testframework.
+/// Tien seconden bleek onder de volle Linux-suite te kort voor echte schijf-I/O
+/// (runs 11187 en 11190); dertig seconden blijft een begrensd vangnet en
+/// vertraagt tests die hun voorwaarde eerder bereiken niet.
 ///
 /// ── Gebruik ──
 ///
@@ -68,7 +71,7 @@ import 'package:flutter_test/flutter_test.dart';
 Future<void> pumpUntil(
   WidgetTester tester,
   bool Function() ready, {
-  Duration timeout = const Duration(seconds: 10),
+  Duration timeout = const Duration(seconds: 30),
   Duration step = const Duration(milliseconds: 20),
   String? reason,
 }) async {
