@@ -139,8 +139,6 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
   }
 
-  /// Laat de export echt lopen. Renderen en de PDF-assemblage (een isolate)
-  /// lopen op echte tijd; alleen pompen is niet genoeg, alleen wachten ook niet.
   /// Laat de export echt lopen.
   ///
   /// Renderen en de PDF-assemblage (een isolate) lopen op **echte** tijd, maar
@@ -169,16 +167,16 @@ void main() {
 
   Future<void> runExport(WidgetTester tester) async {
     // Wachten tot de export een uitkomst heeft: een PDF op schijf, of de
-    // mislukkingsmelding. Ruim budget — PDF-generatie rendert elke dia naar een
-    // afbeelding, encodeert en schrijft, en op de 4-core Linux-runner onder
-    // `--concurrency=14` krijgt elk proces ~28% van een core. Hier stond
-    // dezelfde lus met de hand geschreven; `pumpUntil` is hetzelfde patroon en
-    // faalt met een leesbare melding in plaats van stil door te lopen naar een
-    // toets die "geen bestand" zegt.
+    // mislukkingsmelding. Het pentestdeck heeft vijf dia's; de rasterizer mag
+    // per dia al 20 seconden op een frame wachten. De oude grens van 12 seconden
+    // liet deze toets op dezelfde main eenmaal slagen (run 11194) en eenmaal
+    // falen (run 11204) onder Linux-belasting. Twee minuten dekken vijf frames
+    // plus het samenstellen van de PDF, terwijl een echte vastloper begrensd
+    // blijft en een foutmelding meteen wordt gezien.
     await pumpUntil(
       tester,
       () => pdfsIn(tmp).isNotEmpty || failureTextIn(tester) != null,
-      timeout: const Duration(seconds: 12),
+      timeout: const Duration(minutes: 2),
       reason: 'de export leverde geen PDF en geen melding',
     );
   }
