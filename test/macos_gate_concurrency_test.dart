@@ -96,7 +96,7 @@ $body
       final result = runHarness(r'''
 api() {
   case "$1 $2" in
-    'GET /actions/runs?limit=50&workflow_id=macos-gate.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=macos-gate.yml')
       printf '%s\n' '{"workflow_runs":[
         {"id":5477,"prettyref":"main","workflow_id":"macos-gate.yml","status":"cancelled"},
         {"id":5480,"prettyref":"main","workflow_id":"macos-gate.yml","status":"success"},
@@ -125,7 +125,7 @@ macos_gate_tag_status
       final result = runHarness(r'''
 api() {
   case "$1 $2" in
-    'GET /actions/runs?limit=50&workflow_id=macos-gate.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=macos-gate.yml')
       printf '%s\n' '{"workflow_runs":[
         {"id":5490,"prettyref":"v9.9.9","workflow_id":"macos-gate.yml","status":"success"}
       ]}'

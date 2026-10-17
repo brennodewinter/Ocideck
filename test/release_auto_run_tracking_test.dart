@@ -100,7 +100,7 @@ api() {
   case "$1 $2" in
     'POST /actions/workflows/ci-image-scans.yml/dispatches')
       printf '' ;;  # 204: geen run-info terug
-    'GET /actions/runs?limit=50&workflow_id=ci-image-scans.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=ci-image-scans.yml')
       printf '%s\n' '{"workflow_runs":[{"id":778,"prettyref":"release/v9.9.9","workflow_id":"ci-image-scans.yml","status":"running"}]}'
       ;;
     'GET /actions/runs/778/jobs')
@@ -126,7 +126,7 @@ echo KLAAR
 BRANCH=release/v9.9.9
 api() {
   case "$1 $2" in
-    'GET /actions/runs?limit=50&workflow_id=release.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=release.yml')
       printf '%s\n' '{"workflow_runs":[
         {"id":100,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"},
         {"id":200,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"running"}

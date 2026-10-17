@@ -173,7 +173,7 @@ api() {
   ${apiFails ? 'return 22' : '''local method="\$1" path="\$2"
   [ -z '${trace?.path ?? ''}' ] || printf '%s %s\\n' "\$method" "\$path" >> '${trace?.path ?? '/dev/null'}'
   case "\$path" in
-    '/actions/runs?limit=50&workflow_id=linux-gate.yml')
+    '/actions/runs?limit=50&page=1&workflow_id=linux-gate.yml')
       if [ '${wrongListSchema ? '1' : '0'}' -eq 1 ]; then
         printf '%s\n' '{"message":"unexpected response"}'
         return 0

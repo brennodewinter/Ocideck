@@ -378,7 +378,7 @@ api() { # api METHOD PATH [curl-args…]
 # Leeg antwoord = geen run; exit≠0 = de API was onleesbaar, en onbekend is
 # niet afwezig — aanroepers behandelen dat apart.
 latest_workflow_run() { # latest_workflow_run WORKFLOW_ID REF
-  api GET "/actions/runs?limit=50&workflow_id=$1" \
+  api GET "/actions/runs?limit=50&page=1&workflow_id=$1" \
     | jq -r --arg ref "$2" --arg wf "$1" '
         [.workflow_runs[]? | select(.workflow_id == $wf) | select(.prettyref == $ref)]
         | sort_by(.id) | .[-1] // empty | "\(.id)|\(.status)"'
@@ -2181,7 +2181,9 @@ ensure_scans_image() {
 # een oudere poging versmelten (#2294).
 gate_task_snapshot() { # gate_task_snapshot SHA → "workflow|status|titel|run-id" per poort
   local sha="$1"
-  api GET '/actions/runs?limit=50' \
+  # Forgejo negeert `limit` zonder expliciete `page`; de volledige runhistorie
+  # kan dan de 25s-poll afbreken met onvolledige JSON.
+  api GET '/actions/runs?limit=50&page=1' \
     | jq -r --arg sha "$sha" '
         [.workflow_runs[]?
           | select(.commit_sha == $sha)
@@ -2705,7 +2707,7 @@ assert_nightly_main_gate() {
   while [ "$SECONDS" -lt "$deadline" ]; do
     polls=$((polls + 1))
     found=""; rsha=""; rstatus=""; rurl=""; lookup_failed=0
-    ids="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs?limit=50&workflow_id=linux-gate.yml" 2>/dev/null \
+    ids="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs?limit=50&page=1&workflow_id=linux-gate.yml" 2>/dev/null \
       | jq -r '
           if (.workflow_runs | type) != "array" then error("workflow_runs is geen array")
           elif any(.workflow_runs[];
