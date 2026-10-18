@@ -165,7 +165,9 @@ jobs:
     name: .deb proef op een schone Ubuntu
     needs: build-linux
     runs-on: docker
-    timeout-minutes: 20
+    # Een kale Ubuntu installeert de runtime opnieuw; onder runnerbelasting
+    # duurde apt al langer dan 20 minuten voordat de startproef begon.
+    timeout-minutes: 60
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:
@@ -216,7 +218,7 @@ jobs:
     name: AppImage proef op een schone Ubuntu
     needs: build-linux
     runs-on: docker
-    timeout-minutes: 20
+    timeout-minutes: 60
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:
