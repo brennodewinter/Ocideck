@@ -859,7 +859,7 @@ void main() {
         isTrue,
         reason:
             'The polling curls run without --max-time: one blackholed '
-            'connection hangs the 45-minute loop for hours.',
+            'connection hangs the bounded polling loop for hours.',
       );
     });
 
@@ -897,6 +897,7 @@ void main() {
         int? newRunAfterPolls = 3,
         String newRunConclusion = 'success',
         bool serveAssets = true,
+        bool staleActiveRunAtRedispatch = false,
       }) {
         final dir = Directory.systemTemp.createTempSync('win-redispatch-');
         addTearDown(() => dir.deleteSync(recursive: true));
@@ -922,7 +923,9 @@ case "\$url" in
     echo x >> "\$FAKE_DIR/dispatches"; exit 0 ;;
   */runs?per_page=*)
     RC=\$((RC+1)); echo "\$RC" > "\$RC_FILE"
-    if [ "\$RC" -lt ${newRunAfterPolls ?? 9999} ]; then
+    if [ "$staleActiveRunAtRedispatch" = true ] && [ "\$RC" -ge 2 ] && [ "\$RC" -lt 7 ]; then
+      printf '{"workflow_runs":[{"id":100,"head_branch":"v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/oud-actief"}]}\\n'
+    elif [ "\$RC" -lt ${staleActiveRunAtRedispatch ? 7 : newRunAfterPolls ?? 9999} ]; then
       printf '{"workflow_runs":[{"id":100,"head_branch":"v9.9.9","status":"completed","conclusion":"failure","html_url":"https://gh/oud"}]}\\n'
     elif [ "\$RC" -lt 5 ]; then
       printf '{"workflow_runs":[{"id":102,"head_branch":"v9.9.9","status":"in_progress","conclusion":null,"html_url":"https://gh/nieuw"}]}\\n'
@@ -930,10 +933,10 @@ case "\$url" in
       printf '{"workflow_runs":[{"id":102,"head_branch":"v9.9.9","status":"completed","conclusion":"$newRunConclusion","html_url":"https://gh/nieuw"}]}\\n'
     fi ;;
   */releases?per_page=*)
-    [ "\$RC" -ge ${serveAssets ? 5 : 9999} ] || { printf '[]\n'; exit 0; }
+    [ "\$RC" -ge ${serveAssets ? (staleActiveRunAtRedispatch ? 7 : 5) : 9999} ] || { printf '[]\n'; exit 0; }
     printf '[{"tag_name":"v9.9.9","draft":true,"assets":[{"name":"ocideck-windows-x64-9.9.9.zip","url":"https://api.github.com/assets/zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe","url":"https://api.github.com/assets/exe"},{"name":"ocideck-windows-cohort-9.9.9.json","url":"https://api.github.com/assets/cohort"}]}]\n' ;;
   */assets/*)
-    [ "\$RC" -ge ${serveAssets ? 5 : 9999} ] || exit 22
+    [ "\$RC" -ge ${serveAssets ? (staleActiveRunAtRedispatch ? 7 : 5) : 9999} ] || exit 22
     f="\${url##*/}"
     case "\$f" in
       zip) printf 'zipdata' > "\$out" ;;
@@ -953,7 +956,7 @@ exit 0
         }
         final step = File('${dir.path}/step.sh')
           ..writeAsStringSync(stepScript());
-        return Process.runSync(
+        final result = Process.runSync(
           'bash',
           [step.path],
           workingDirectory: dir.path,
@@ -965,7 +968,25 @@ exit 0
             'GH_DISPATCH_TOKEN': 'x',
           },
         );
+        final dispatchFile = File('${dir.path}/dispatches');
+        final dispatchCount = dispatchFile.existsSync()
+            ? dispatchFile.readAsLinesSync().length
+            : 0;
+        return ProcessResult(
+          result.pid,
+          result.exitCode,
+          '${result.stdout}\nDISPATCH_COUNT=$dispatchCount',
+          result.stderr,
+        );
       }
+
+      test('een zichtbare actieve run voorkomt een tweede dispatch', () {
+        final r = runStep(staleActiveRunAtRedispatch: true);
+        final out = '${r.stdout}\n${r.stderr}';
+        expect(r.exitCode, 0, reason: out);
+        expect(out, contains('DISPATCH_COUNT=1'));
+        expect(out, contains('geen extra dispatch'));
+      }, skip: Platform.isWindows);
 
       test(
         'een oude failure blijft informatief; de nieuwe run wordt gevolgd',
