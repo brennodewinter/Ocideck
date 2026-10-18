@@ -1427,7 +1427,7 @@ resume_capability_needs() {
 # (deploy-ssh, de handtekening). Deze functie faalt vóór elke mutatie.
 preflight() {
   STEP="pre-flight"
-  section "Pre-flight — forge, mirror, deploy-host en minisign toetsen"
+  section "Pre-flight — forge, bouwimage, mirror, deploy-host en minisign toetsen"
   # Afgeleide staat eerst: een CMake-cache van een vórige pakketversie (na een
   # dartcv4-bump) laat `flutter build macos` in fase 1 falen ná anderhalf uur
   # groene `make check-release`, omdat die bouw een andere configuratiehash
@@ -1437,6 +1437,22 @@ preflight() {
     || die "kon de native-assets-cache niet beoordelen (scripts/prune_stale_hook_cache.sh) — zie hierboven. Niets gemuteerd."
   api GET "" -o /dev/null \
     || die "forge-token werkt niet tegen $REPO_SLUG (keychain '$TOKEN_KEYCHAIN_SERVICE')."
+  # De release-jobs gebruiken een immutable digest. Een later opnieuw
+  # gepubliceerd versie-tag kan die digest uit het register laten verdwijnen;
+  # v0.7.0 faalde daardoor pas na de publieke tag bij web, Linux en Windows.
+  # Vraag de release-pins op vóór een NIEUWE tag naar buiten gaat. Een resume
+  # na de tag kan de workflowbron niet meer wijzigen en hoeft deze oude
+  # capaciteit dus niet opnieuw te toetsen.
+  if [ -z "$RESUME_TAG" ]; then
+    local image images
+    images="$(sed -n 's/^[[:space:]]*image: \(pawprint\.vigilis\.online\/librekat\/ocideck-ci:[^[:space:]]*\)$/\1/p' \
+      "$ROOT_DIR/.forgejo/workflows/release.yml" | sort -u)"
+    [ -n "$images" ] || die "release.yml bevat geen herkenbare CI-bouwimage; de pin kan niet worden getoetst."
+    while IFS= read -r image; do
+      docker manifest inspect "$image" >/dev/null 2>&1 \
+        || die "release-bouwimage $image is niet pullbaar — herstel de pin vóór de tagpush."
+    done <<<"$images"
+  fi
   # Bij --resume is een deel van de keten al af en de bijbehorende capaciteit
   # overbodig (#2303): een live webdemo vraagt geen deploy-SSH, een geldige
   # handtekening geen privésleutel, een al gepushte mirror-tag geen mirror.
