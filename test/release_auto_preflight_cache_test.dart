@@ -85,13 +85,20 @@ void main() {
   ProcessResult runPreflight({
     String deployHostIps = '192.0.2.10',
     String liveIp = '192.0.2.10',
+    String resumeTag = 'v9.9.9',
+    bool imageAvailable = true,
   }) {
+    if (resumeTag.isEmpty) {
+      final workflow = File('${root.path}/.forgejo/workflows/release.yml');
+      workflow.parent.createSync(recursive: true);
+      File('.forgejo/workflows/release.yml').copySync(workflow.path);
+    }
     final harness = File('${sandbox.path}/harness.sh')
       ..writeAsStringSync('''
 set -uo pipefail
 STEP=test
 ROOT_DIR='${root.path}'
-RESUME_TAG=v9.9.9
+RESUME_TAG='$resumeTag'
 TAG=v9.9.9
 NEW_VERSION=9.9.9
 REPO_SLUG=LibreKAT/Ocideck
@@ -104,6 +111,7 @@ log() { printf '%s\\n' "\$1"; }
 section() { printf '== %s ==\\n' "\$1"; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
 api() { return 0; }
+docker() { return ${imageAvailable ? 0 : 1}; }
 git() { return 0; }
 ssh() { printf '%s\n' '$deployHostIps'; }
 curl() { printf '%s' '$liveIp'; }
@@ -117,6 +125,16 @@ preflight
 ''');
     return Process.runSync('bash', [harness.path]);
   }
+
+  test('ontbrekende release-bouwimage stopt vóór de tag', () {
+    final result = runPreflight(resumeTag: '', imageAvailable: false);
+
+    expect(result.exitCode, isNot(0));
+    expect(
+      '${result.stdout}\n${result.stderr}',
+      contains('is niet pullbaar — herstel de pin vóór de tagpush'),
+    );
+  }, skip: skipOnWindows);
 
   test('een cache uit een vorige pakketversie gaat vóór de keten weg', () {
     final stale = writeCache('16e3573553', '2.3.0');
