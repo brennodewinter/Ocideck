@@ -4,6 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final source = File('scripts/release_auto.sh').readAsStringSync();
+  final skipOnWindows = Platform.isWindows
+      ? 'release_auto.sh draait alleen op macOS/Linux, niet onder Windows Git Bash'
+      : null;
 
   String function(String name) {
     final lines = source.split('\n');
@@ -42,7 +45,7 @@ assert_release_ci_secrets
     expect(result.exitCode, 42);
     expect(result.stderr, contains('GH_RELEASE_READ_TOKEN ontbreekt'));
     expect(result.stdout, isEmpty);
-  });
+  }, skip: skipOnWindows);
 
   test('rode Windows-run op exacte mergecommit stopt vóór de tag', () {
     final result = run(
@@ -65,7 +68,7 @@ assert_windows_merge_gate abcdef
     );
     expect(result.exitCode, 42);
     expect(result.stderr, contains('Windows-suite op merge abcdef is failure'));
-  });
+  }, skip: skipOnWindows);
 
   test('groene Windows-run op exacte mergecommit laat tagstap door', () {
     final result = run(
@@ -89,7 +92,7 @@ printf 'READY\n'
     );
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
     expect(result.stdout, contains('READY'));
-  });
+  }, skip: skipOnWindows);
 
   test('rode losse tagpoort verhindert fase 3', () {
     final result = run(
@@ -110,7 +113,7 @@ wait_tag_gates
     );
     expect(result.exitCode, 42);
     expect(result.stderr, contains('tagpoort op v9.9.9 is failure'));
-  });
+  }, skip: skipOnWindows);
 
   test('oude groene Forgejo-tagpoort op andere commit verhindert fase 3', () {
     final result = run(
@@ -130,7 +133,7 @@ wait_tag_gates
     );
     expect(result.exitCode, 42);
     expect(result.stderr, contains('in plaats van abcdef'));
-  });
+  }, skip: skipOnWindows);
 
   test('status meldt oude groene tagpoort op andere commit niet als groen', () {
     final result = run(
@@ -148,5 +151,5 @@ rm "$probe"
     );
     expect(result.exitCode, 0);
     expect(result.stdout, contains('0|Forgejo ci draait op andere commit'));
-  });
+  }, skip: skipOnWindows);
 }
