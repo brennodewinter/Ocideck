@@ -785,6 +785,21 @@ void main() {
       );
     });
 
+    test('the forge Windows job outlives its complete polling window', () {
+      final job = forgeYaml.split('  windows-ophalen:').last.split('\n  #')[0];
+      final outer = int.parse(
+        RegExp(r'timeout-minutes:\s*(\d+)').firstMatch(job)!.group(1)!,
+      );
+      final polls = int.parse(
+        RegExp(r'for POGING in \$\(seq 1 (\d+)\)').firstMatch(job)!.group(1)!,
+      );
+      expect(
+        outer,
+        greaterThan(polls + 5),
+        reason: 'The job timeout must allow the final poll and asset download.',
+      );
+    });
+
     test(
       'the mirror release stays draft; only the canonical release is public',
       () {
@@ -804,6 +819,22 @@ void main() {
     );
 
     test('the forge downloads the draft Windows assets with authentication', () {
+      expect(
+        forgeYaml,
+        contains(
+          r'GH_RELEASE_READ_TOKEN: ${{ secrets.GH_RELEASE_READ_TOKEN }}',
+        ),
+      );
+      expect(
+        forgeYaml,
+        contains(
+          r'GH_ASSET_TOKEN="${GH_RELEASE_READ_TOKEN:-$GH_DISPATCH_TOKEN}"',
+        ),
+      );
+      expect(
+        forgeYaml,
+        contains(r'release="$(gh_release_api "$API/releases?per_page=100"'),
+      );
       final start = forgeYaml.indexOf('  windows-ophalen:');
       final windows = forgeYaml.substring(
         start,

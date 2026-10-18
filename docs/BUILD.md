@@ -927,16 +927,19 @@ and <https://ocideck.librekat.nl/> is serving that same web bundle.
 The Windows artifact travels back as an asset on a **draft GitHub release**, not
 as a build artifact. It remains private on the mirror: only the complete,
 canonical Forge release is published. The `windows-ophalen` job retrieves the
-draft asset through GitHub's authenticated API with `GH_DISPATCH_TOKEN`.
+draft asset through GitHub's authenticated API with `GH_RELEASE_READ_TOKEN`
+when set, or `GH_DISPATCH_TOKEN` otherwise. The read token needs Contents: read
+on `brennodewinter/Ocideck`; the dispatch token needs Actions: read and write.
 
 *Starting* the build, however, is no longer left to chance. It used to rely on the
 tag push to the mirror triggering `.github/workflows/release.yml` there — but when
 the tag already exists on the mirror (an earlier attempt, or Forgejo's own push
 mirror) that push is a no-op and GitHub fires **no** `push` event, so the Windows
-build never starts and `windows-ophalen` waited out its 45-minute timeout (this
+build never starts and `windows-ophalen` waited out its then 45-minute timeout (this
 stranded `v0.3.6`). The job now **actively dispatches** the mirror workflow via
 `workflow_dispatch` using the `GH_DISPATCH_TOKEN` secret (a fine-grained GitHub PAT
-with *Actions: read and write* + *Contents: read* on `brennodewinter/Ocideck`),
+with *Actions: read and write* on `brennodewinter/Ocideck`; it also needs
+*Contents: read* if no separate `GH_RELEASE_READ_TOKEN` is configured),
 regardless of whether the push event fired. It is idempotent — if the asset or a
 running build already exists it does not dispatch again — and it polls the run
 status so a failed build stops the job promptly (with the run URL) instead of
