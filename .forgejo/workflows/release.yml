@@ -670,7 +670,9 @@ jobs:
     name: .deb proef op een schone Ubuntu
     needs: linux
     runs-on: docker
-    timeout-minutes: 20
+    # Dezelfde schone Ubuntu-proef als linux-build: geef apt ook na de tag
+    # genoeg tijd voordat de eigenlijke startproef van 20 seconden begint.
+    timeout-minutes: 60
     # Zelfde pin als deploy-web; kaal Ubuntu, géén bouwgereedschap.
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
@@ -742,7 +744,7 @@ jobs:
     name: AppImage proef op een schone Ubuntu
     needs: linux
     runs-on: docker
-    timeout-minutes: 20
+    timeout-minutes: 60
     container:
       image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:

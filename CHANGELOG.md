@@ -8,6 +8,9 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.0] — 2026-10-17
+
+
 ### Fixed
 
 - **Een lijst overleeft kopiëren vanaf het midden van een regel.** Begon je

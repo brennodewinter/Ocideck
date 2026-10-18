@@ -95,8 +95,8 @@ git() {
 }
 api() {
   case "\$2" in
-    '/actions/runs?limit=50&workflow_id=release.yml') sleep 30 ;;
-    '/actions/runs?limit=50&workflow_id=macos-gate.yml')
+    '/actions/runs?limit=50&page=1&workflow_id=release.yml') sleep 30 ;;
+    '/actions/runs?limit=50&page=1&workflow_id=macos-gate.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":901,"prettyref":"v9.9.9","workflow_id":"macos-gate.yml","status":"success"}]}'
       ;;
     '/pulls?state=all&limit=50') printf '%s\\n' '[]' ;;

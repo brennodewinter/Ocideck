@@ -146,13 +146,13 @@ api() {
     printf '%s %s\\n' "\$method" "\$path" >>"\$MUTATIONS"
   fi
   case "\$method \$path" in
-    'GET /actions/runs?limit=50&workflow_id=release.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=release.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
       ;;
     'GET /actions/runs/900/jobs')
       printf '%s\\n' '[{"name":"Release publiceren","status":"success","id":1,"attempt":1}]'
       ;;
-    'GET /actions/runs?limit=50&workflow_id=website-downloads.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=website-downloads.yml')
       if [ -n "\$WEBSITE_RUN" ]; then
         printf '{"workflow_runs":[{"id":901,"prettyref":"v9.9.9","workflow_id":"website-downloads.yml","status":"%s"}]}\\n' "\$WEBSITE_RUN"
       else

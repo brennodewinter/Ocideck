@@ -231,7 +231,7 @@ git() {
 }
 api() {
   case "\$2" in
-    '/actions/runs?limit=50&workflow_id=release.yml')
+    '/actions/runs?limit=50&page=1&workflow_id=release.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
       ;;
     '/actions/runs/900/jobs')
@@ -384,7 +384,7 @@ log() { :; }
 sleep() { :; }
 die() { printf '%s\\n' "\$1" >&2; exit 1; }
 api() {
-  if [ "\$1" = GET ] && [ "\$2" = '/actions/runs?limit=50&workflow_id=release.yml' ]; then
+  if [ "\$1" = GET ] && [ "\$2" = '/actions/runs?limit=50&page=1&workflow_id=release.yml' ]; then
     printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"running"}]}'
     return 0
   fi
@@ -472,7 +472,7 @@ sleep() { :; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
 api() {
   case "\$1 \$2" in
-    'GET /actions/runs?limit=50&workflow_id=release.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=release.yml')
       # De losse ci.yml-run op dezelfde tag mag de release-snapshot niet raken.
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"running"},{"id":901,"prettyref":"v9.9.9","workflow_id":"ci.yml","status":"failure"}]}'
       ;;
@@ -508,7 +508,7 @@ sleep() { :; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
 api() {
   case "\$1 \$2" in
-    'GET /actions/runs?limit=50&workflow_id=release.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=release.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"failure"}]}'
       ;;
     'GET /actions/runs/900/jobs')
@@ -575,7 +575,7 @@ git() {
 }
 api() {
   case "\$1 \$2" in
-    'GET /actions/runs?limit=50&workflow_id=release.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=release.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
       ;;
     'GET /actions/runs/900/jobs')
@@ -668,7 +668,7 @@ make() { return 0; }
 curl() { return 22; }
 die() { printf '%s\\n' "\$1" >&2; exit 1; }
 api() {
-  if [ "\$1" = GET ] && [ "\$2" = '/actions/runs?limit=50&workflow_id=release.yml' ]; then
+  if [ "\$1" = GET ] && [ "\$2" = '/actions/runs?limit=50&page=1&workflow_id=release.yml' ]; then
     printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"running"}]}'
     return 0
   fi
@@ -749,7 +749,7 @@ minisign() { return 0; }
 api() {
   local method="\$1" path="\$2" count
   case "\$method \$path" in
-    'GET /actions/runs?limit=50&workflow_id=release.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=release.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"failure"}]}'
       ;;
     'GET /actions/runs/900/jobs')
@@ -829,7 +829,7 @@ curl() {
 minisign() { printf 'verify\\n' >>"\$TRACE"; return 0; }
 api() {
   case "\$1 \$2" in
-    'GET /actions/runs?limit=50&workflow_id=release.yml')
+    'GET /actions/runs?limit=50&page=1&workflow_id=release.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
       ;;
     'GET /actions/runs/900/jobs')
