@@ -86,7 +86,8 @@ section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
 mark() { printf 'mark %s %s\\n' "\$1" "\$2"; }
 git() {
-  if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then return 0; fi
+  if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then printf '%s\\n' 'git@github.com:owner/repo.git'; return 0; fi
+  if [ "\$1 \$2" = 'ls-remote origin' ]; then printf '%s\\n' 'abcdef refs/tags/v9.9.9^{}'; return 0; fi
   case "\${*: -1}" in
     refs/heads/*) return 2 ;;
     refs/tags/*) return 0 ;;
@@ -96,14 +97,18 @@ git() {
 api() {
   case "\$2" in
     '/actions/runs?limit=50&page=1&workflow_id=release.yml') sleep 30 ;;
+    '/actions/runs?limit=50&page=1&workflow_id=ci.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":902,"prettyref":"v9.9.9","workflow_id":"ci.yml","status":"success"}]}' ;;
     '/actions/runs?limit=50&page=1&workflow_id=macos-gate.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":901,"prettyref":"v9.9.9","workflow_id":"macos-gate.yml","status":"success"}]}'
       ;;
+    '/actions/runs/901'|'/actions/runs/902') printf '%s\\n' '{"commit_sha":"abcdef"}' ;;
     '/pulls?state=all&limit=50') printf '%s\\n' '[]' ;;
     '/releases/tags/v9.9.9') printf '%s\\n' '{"id":41,"assets":[]}' ;;
     *) printf '%s\\n' '{}' ;;
   esac
 }
+gh() { printf '%s\\n' '[{"databaseId":903,"headSha":"abcdef","headBranch":"v9.9.9","status":"completed","conclusion":"success"}]'; }
 curl() {
   local out='' url='' previous='' arg
   for arg in "\$@"; do

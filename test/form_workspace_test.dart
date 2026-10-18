@@ -181,7 +181,7 @@ void main() {
       await workspace.publishForm(kook);
       final root = p.join(workspace.root, 'forms');
       Future<String> put(String path, List<int> bytes) async {
-        final file = File(p.join(root, path));
+        final file = File(p.joinAll([root, ...path.split('/')]));
         await file.parent.create(recursive: true);
         await file.writeAsBytes(bytes);
         return file.path;
@@ -907,7 +907,7 @@ void main() {
 
         final folder = workspace.submissionPath(sid);
         // Wat niet in de naamgrammatica past, telt niet mee.
-        await File(p.join(folder, 'images', 'nul.jpg')).writeAsBytes([1]);
+        await File(p.join(folder, 'images', 'naam!.jpg')).writeAsBytes([1]);
         await File(p.join(folder, 'images', 'x y.jpg')).writeAsBytes([1]);
         await File(p.join(folder, photoPath)).delete();
         final missing = await reviewed(sid);

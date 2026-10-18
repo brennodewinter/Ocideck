@@ -105,7 +105,16 @@ class PdfEvidenceService {
       return null;
     }
     final uri = Uri.tryParse(target);
-    if (uri != null && uri.hasScheme && uri.scheme != 'mem') return null;
+    // A Windows drive letter parses as a URI scheme. Keep it on the PDF path
+    // route so package export can reject an external file instead of retaining
+    // the original Markdown verbatim.
+    final windowsAbsolute = p.windows.isAbsolute(target);
+    if (!windowsAbsolute &&
+        uri != null &&
+        uri.hasScheme &&
+        uri.scheme != 'mem') {
+      return null;
+    }
     if (!(uri?.scheme == 'mem') &&
         p.extension(target).toLowerCase() != '.pdf') {
       return null;

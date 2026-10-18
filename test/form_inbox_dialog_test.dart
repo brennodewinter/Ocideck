@@ -749,6 +749,8 @@ void main() {
     tester,
   ) async {
     await open(tester, _Picks(), workspace: root);
+    await tester.ensureVisible(text('Register openen'));
+    await tester.pumpAndSettle();
     await tester.tap(text('Register openen'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));

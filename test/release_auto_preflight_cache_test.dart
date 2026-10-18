@@ -110,7 +110,13 @@ ${allFunctionDefinitions()}
 log() { printf '%s\\n' "\$1"; }
 section() { printf '== %s ==\\n' "\$1"; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
-api() { return 0; }
+need_cmd() { :; }
+api() {
+  case "\$2" in
+    /actions/secrets) printf '%s\\n' '[{"name":"GH_DISPATCH_TOKEN"},{"name":"GH_RELEASE_READ_TOKEN"},{"name":"RELEASE_TOKEN"}]' ;;
+    *) return 0 ;;
+  esac
+}
 docker() { return ${imageAvailable ? 0 : 1}; }
 git() { return 0; }
 ssh() { printf '%s\n' '$deployHostIps'; }

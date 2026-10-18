@@ -194,6 +194,27 @@ void main() {
     expect(members.keys.where((name) => name.startsWith('evidence/')), isEmpty);
   });
 
+  test('project package removes blocked Windows PDF evidence paths', () async {
+    final project = Directory(p.join(tmp.path, 'project'))..createSync();
+    const outside = r'C:\outside\secret.pdf';
+    final deck = Deck(
+      title: 'Evidence',
+      projectPath: project.path,
+      slides: [
+        Slide.create(
+          SlideType.freeMarkdown,
+        ).copyWith(customMarkdown: '[bewijs](<$outside>)'),
+      ],
+    );
+
+    final members = await file.buildPackageMembers(deck);
+    final markdown = utf8.decode(
+      members.entries.firstWhere((entry) => entry.key.endsWith('.md')).value,
+    );
+    expect(markdown, isNot(contains(outside)));
+    expect(members.keys.where((name) => name.startsWith('evidence/')), isEmpty);
+  });
+
   // Een pakket is bedoeld om weg te geven: wat er niet in zit, ziet de
   // ontvanger niet. Een afbeelding in de vrije tekst hoort er dus net zo goed
   // in als eentje in een afbeeldingsveld.
