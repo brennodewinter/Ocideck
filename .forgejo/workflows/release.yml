@@ -562,19 +562,23 @@ jobs:
           dispatch() { gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
             -d "{\"ref\":\"$TAG\"}"; }
           # Laatste run van de Windows-workflow op DEZE tag:
-          # "status conclusion url run_id". De run-id is de exacte toets voor
+          # "status|conclusion|url|run_id". Het scheidingsteken bewaart ook een
+          # lege conclusion zolang een run loopt; awk op spaties zou dan het
+          # runnummer verliezen en onterecht opnieuw dispatchen.
+          # De run-id is de exacte toets voor
           # "hoort deze run bij deze poging" (zie BASE_RID hieronder) én voor
           # de cohortcontrole: het paar moet uit precies die run komen.
           run_status() { gh_api "$API/actions/workflows/release.yml/runs?per_page=10" \
             | jq -r --arg t "$TAG" 'first(.workflow_runs[] | select(.head_branch==$t))
-                // {} | "\(.status // "") \(.conclusion // "") \(.html_url // "") \(.id // "")"'; }
+                // {} | "\(.status // "")|\(.conclusion // "")|\(.html_url // "")|\(.id // "")"'; }
 
           # #2 idempotent: staat het asset er al (push-event vuurde wél, of een
           # eerdere run), dan zijn we meteen klaar — mits het paar aantoonbaar
           # uit één cohort komt (#2313). Een gemengd paar weigeren en doorvallen
           # naar de lus: de spiegel kan op dat moment een verse upload doen.
           if have_asset; then
-            info="$(run_status || true)"; rid="$(printf '%s' "$info" | awk '{print $4}')"
+            info="$(run_status || true)"
+            IFS='|' read -r st cc LAST_URL rid <<< "$info"
             if verify_cohort "$rid"; then
               echo "Assets stonden er al: $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
             fi
@@ -588,8 +592,8 @@ jobs:
           # een build op deze tag, dan volgen we juist díe (OUR_RID): zijn
           # conclusie geldt wel voor ons.
           BASE_RID="" OUR_RID=""
-          info="$(run_status || true)"; st="$(printf '%s' "$info" | awk '{print $1}')"
-          BASE_RID="$(printf '%s' "$info" | awk '{print $4}')"
+          info="$(run_status || true)"
+          IFS='|' read -r st cc LAST_URL BASE_RID <<< "$info"
           # #2: draait er al een build op deze tag, dan niet nog eens dispatchen.
           if [ -n "$st" ] && [ "$st" != "completed" ] && [ "$st" != "null" ]; then
             echo "Er loopt al een Windows-build ($st) — niet opnieuw dispatchen."
@@ -600,17 +604,16 @@ jobs:
             sleep 10
           fi
 
-          # #5 poll op zowel het asset als de run-status; herdispatch als er na
-          # ~5 min geen run zichtbaar is; faal meteen (met run-URL) als de build faalt.
+          # #5 poll op zowel het asset als de run-status; herdispatch alleen als
+          # er na ~5 min geen nieuwe of lopende run zichtbaar is. GitHub kan een
+          # gelijktijdig gestarte run tonen vóór de eigen dispatch zichtbaar is;
+          # die opnieuw dispatchen zet een tweede build in de wachtrij.
           LAST_URL=""
-          for POGING in $(seq 1 45); do
+          for POGING in $(seq 1 90); do
             rid=""
             if [ -n "${GH_DISPATCH_TOKEN:-}" ]; then
               info="$(run_status || true)"
-              st="$(printf '%s' "$info" | awk '{print $1}')"
-              cc="$(printf '%s' "$info" | awk '{print $2}')"
-              LAST_URL="$(printf '%s' "$info" | awk '{print $3}')"
-              rid="$(printf '%s' "$info" | awk '{print $4}')"
+              IFS='|' read -r st cc LAST_URL rid <<< "$info"
               echo "[$POGING] run: ${st:-<geen>} ${cc:-} ${LAST_URL:-} ${rid:-}"
             fi
             if have_asset; then
@@ -631,7 +634,11 @@ jobs:
                 DEZE=1
               fi
               if [ "$POGING" -eq 5 ] && [ -z "$DEZE" ]; then
-                echo "Nog geen run van deze poging zichtbaar — opnieuw dispatchen."; dispatch || true
+                if [ -n "$rid" ] && [ -n "$st" ] && [ "$st" != "completed" ]; then
+                  echo "Er loopt al een Windows-build ($st, $rid) — geen extra dispatch."
+                else
+                  echo "Nog geen run van deze poging zichtbaar — opnieuw dispatchen."; dispatch || true
+                fi
               fi
               if [ "${cc:-}" = "failure" ] || [ "${cc:-}" = "cancelled" ]; then
                 if [ -n "$DEZE" ]; then
@@ -644,7 +651,7 @@ jobs:
             fi
             sleep 60
           done
-          echo "Na 45 minuten geen coherent cohort op $TAG (laatste run: ${LAST_URL:-onbekend})." >&2
+          echo "Na 90 minuten geen coherent cohort op $TAG (laatste run: ${LAST_URL:-onbekend})." >&2
           echo "Hertrigger deze release-workflow zodra de Windows-build groen is." >&2
           exit 1
 
