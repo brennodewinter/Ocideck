@@ -610,5 +610,87 @@ Een zin met een noot [^1] erin.
       // als los blok tegen de ondermarge.
       expect(find.textContaining('De noot hoort onderaan'), findsOneWidget);
     });
+
+    testWidgets(
+      'een noot langer dan het tekstvlak is scrollbaar bereikbaar (#2469)',
+      (tester) async {
+        final longNote = List.generate(
+          200,
+          (i) => 'Regel $i van een voetnoot die veel te lang is voor één blad.',
+        ).join(' ');
+        await pumpDoc(
+          tester,
+          '# Kop\n\nTekst met een noot [^1] erin.\n\n[^1]: $longNote\n',
+        );
+
+        // Het nootvlak knipt niet stil af: het is scrollbaar én meldt dat de
+        // noot doorloopt.
+        expect(
+          find.byKey(const Key('document-footnote-scroll')),
+          findsOneWidget,
+        );
+        expect(find.textContaining('langer dan het blad'), findsWidgets);
+
+        // De staart is bereikbaar: scrollen in het nootvlak toont het einde.
+        await tester.scrollUntilVisible(
+          find.textContaining('Regel 199'),
+          300,
+          scrollable: find.descendant(
+            of: find.byKey(const Key('document-footnote-scroll')),
+            matching: find.byType(Scrollable),
+          ),
+        );
+        expect(find.textContaining('Regel 199'), findsWidgets);
+      },
+    );
+
+    testWidgets(
+      'lange hoofdtekst en meerdere noten: overloopnoot blijft bereikbaar '
+      '(#2469)',
+      (tester) async {
+        final mainText = List.generate(
+          200,
+          (i) =>
+              'Hoofdtekst regel $i met genoeg woorden voor een volle alinea.',
+        ).join(' ');
+        final longNote = List.generate(
+          200,
+          (i) => 'Nootregel $i van een voetnoot die te lang is voor één blad.',
+        ).join(' ');
+        await pumpDoc(
+          tester,
+          '$mainText\n\n'
+          'Einde tekst met twee noten [^1] en [^2].\n\n'
+          '[^1]: Korte noot.\n'
+          '[^2]: $longNote\n',
+        );
+
+        // De korte noot staat gewoon in het vlak; de lange is scrollbaar met
+        // een doorgang-regel — de hoofdtekst dekt de noten nooit.
+        expect(find.textContaining('Korte noot.'), findsWidgets);
+        expect(find.textContaining('langer dan het blad'), findsWidgets);
+        await tester.scrollUntilVisible(
+          find.textContaining('Nootregel 199'),
+          300,
+          scrollable: find
+              .descendant(
+                of: find.byKey(const Key('document-footnote-scroll')),
+                matching: find.byType(Scrollable),
+              )
+              .last,
+        );
+        expect(find.textContaining('Nootregel 199'), findsWidgets);
+      },
+    );
+
+    testWidgets(
+      'een gewone noot krijgt geen doorgang-regel of scrollbalk (#2469)',
+      (tester) async {
+        await pumpDoc(tester, withNote);
+
+        expect(find.textContaining('De noot hoort onderaan'), findsOneWidget);
+        expect(find.textContaining('langer dan het blad'), findsNothing);
+      },
+    );
   });
 }

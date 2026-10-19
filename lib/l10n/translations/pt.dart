@@ -1634,6 +1634,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Esta nota é mais longa que a página — deslize para o resto',
   'Certificaatnummer: {nummer}': 'Número de certificado: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'O avaliador deixará então de ver esta peça. ',

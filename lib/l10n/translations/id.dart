@@ -1606,6 +1606,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Catatan ini lebih panjang dari halaman — gulir untuk sisanya',
   'Certificaatnummer: {nummer}': 'Nomor sertifikat: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Penilai tidak akan lagi melihat bagian ini. ',

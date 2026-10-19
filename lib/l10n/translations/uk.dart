@@ -1621,6 +1621,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Ця примітка довша за сторінку — прокрутіть для решти',
   'Certificaatnummer: {nummer}': 'Номер сертифіката: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Оцінювач більше не бачитиме цей елемент. ',

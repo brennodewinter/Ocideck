@@ -1621,6 +1621,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Haec nota longior est quam pagina — volumen verte pro reliquo',
   'Certificaatnummer: {nummer}': 'Numerus certificati: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Iudex hanc partem deinde non amplius videbit. ',

@@ -1607,6 +1607,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Tato poznámka je delší než stránka — pro zbytek posuňte',
   'Certificaatnummer: {nummer}': 'Číslo certifikátu: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Hodnotitel pak tento kus již neuvidí. ',

@@ -318,6 +318,20 @@ void main() {
       );
     });
 
+    test('een noot van meerdere paginas gaat volledig mee (#2469)', () {
+      final tail = 'Staart van een voetnoot die langer is dan één blad.';
+      final note = List.filled(200, 'Regel van de noot. ').join() + tail;
+      final blocks = markdownToPdfBlocks('Tekst met noot [^1].\n\n[^1]: $note');
+      // De PDF zet noten als blokken in de tekststroom — die verdelen vanzelf
+      // over vellen, dus de volledige inhoud moet er óók zijn (vergelijk met
+      // de paginaweergave, die het nootvlak scrollbaar maakt).
+      final noteText = blocks
+          .whereType<PdfParagraphBlock>()
+          .map((b) => b.spans.map((s) => s.text).join())
+          .join();
+      expect(noteText, contains(tail));
+    });
+
     test('een tijdlijn houdt zijn visuele semantiek voor de PDF (#1712)', () {
       final blocks = markdownToPdfBlocks(
         '<!-- timeline -->\n'

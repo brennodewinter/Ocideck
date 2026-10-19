@@ -1631,6 +1631,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Αυτή η σημείωση είναι μακρύτερη από τη σελίδα — κύλιση για τα υπόλοιπα',
   'Certificaatnummer: {nummer}': 'Αριθμός πιστοποιητικού: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ο αξιολογητής δεν θα βλέπει πλέον αυτό το στοιχείο. ',

@@ -1636,6 +1636,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Tá an nóta seo níos faide ná an leathanach — scrollaigh don chuid eile',
   'Certificaatnummer: {nummer}': 'Uimhir teastais: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ní fheicfidh an measúnóir an píosa seo níos mó ansin. ',

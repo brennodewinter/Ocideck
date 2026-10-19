@@ -1599,6 +1599,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'See märkus on leheküljest pikem — keri ülejäänu jaoks',
   'Certificaatnummer: {nummer}': 'Sertifikaadi number: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Hindaja ei näe seda tükki enam. ',

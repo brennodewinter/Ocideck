@@ -1622,6 +1622,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Această notă este mai lungă decât pagina — derulați pentru rest',
   'Certificaatnummer: {nummer}': 'Număr de certificat: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Evaluatorul nu va mai vedea apoi această piesă. ',

@@ -1624,6 +1624,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Din in-nota hi itwal mill-paġna — skrollja għall-bqija',
   'Certificaatnummer: {nummer}': 'Numru taċ-ċertifikat: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'L-evalwatur ma jara din il-biċċa iktar. ',

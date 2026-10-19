@@ -1609,6 +1609,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Die Anmerkig isch länger als s Blatt — für de Rescht scrolle',
   'Certificaatnummer: {nummer}': 'Zertifikatsnummere: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'De Prüefer gseht das Stück de nüme. ',
