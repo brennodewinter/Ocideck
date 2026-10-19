@@ -751,6 +751,14 @@ class ThemeProfile {
   int get effectiveDocumentLogoSize =>
       (documentLogoSize ?? logoSize).clamp(32, 480);
 
+  /// De breedte van het documentlogo zoals het op papier staat, in
+  /// typografische punten. [effectiveDocumentLogoSize] is in CSS-pixels
+  /// (96 dpi); delen door [kCssPxPerPoint] geeft dezelfde fysieke breedte
+  /// die de PDF tekent. Dit is de enige maat waaruit PDF-export, band en
+  /// voorvertoning werken — vroeger rekende elke laag een eigen schaal uit
+  /// en was het logo op papier onherstelbaar klein (#2462).
+  double get documentLogoWidthPt => effectiveDocumentLogoSize / kCssPxPerPoint;
+
   /// Hoeveel groter of kleiner de documenttekst staat dan de standaardmaat.
   ///
   /// Eén verhouding, want alles op een blad hangt aan dezelfde maat: een kop is

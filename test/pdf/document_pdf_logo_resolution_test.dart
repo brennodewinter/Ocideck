@@ -22,7 +22,7 @@ void main() {
   );
 
   test('leest de beeldmaat uit het bestand zelf', () {
-    final logo = logoResolutionOf(wide, boxSide: 72);
+    final logo = logoResolutionOf(wide, boxWidth: 72, boxHeight: 72);
     expect(logo, isNotNull);
     expect(logo!.pixelWidth, 4);
     expect(logo.pixelHeight, 2);
@@ -31,24 +31,33 @@ void main() {
   test('rekent de fijnheid op de plek waar het logo terechtkomt', () {
     // Breed beeld in een vierkant kader: de breedte raakt het kader het eerst,
     // dus 4 px wordt 72 pt oftewel één duim — 4 dpi.
-    expect(logoResolutionOf(wide, boxSide: 72)!.dpi, closeTo(4, 0.01));
+    expect(
+      logoResolutionOf(wide, boxWidth: 72, boxHeight: 72)!.dpi,
+      closeTo(4, 0.01),
+    );
     // Half zo groot geplaatst is twee keer zo fijn.
-    expect(logoResolutionOf(wide, boxSide: 36)!.dpi, closeTo(8, 0.01));
+    expect(
+      logoResolutionOf(wide, boxWidth: 36, boxHeight: 36)!.dpi,
+      closeTo(8, 0.01),
+    );
   });
 
   test('een logo dat te grof is voor drukwerk wordt als zodanig gemeld', () {
-    expect(logoResolutionOf(wide, boxSide: 72)!.isCoarse, isTrue);
+    expect(
+      logoResolutionOf(wide, boxWidth: 72, boxHeight: 72)!.isCoarse,
+      isTrue,
+    );
   });
 
   test('een logo dat fijn genoeg is klaagt niet', () {
     // 4 px op 1 pt breed is 288 dpi — ruim boven de drukondergrens.
-    final logo = logoResolutionOf(wide, boxSide: 1);
+    final logo = logoResolutionOf(wide, boxWidth: 1, boxHeight: 1);
     expect(logo!.dpi, greaterThan(LogoResolution.printFloor));
     expect(logo.isCoarse, isFalse);
   });
 
   test('het advies is de maat waarop het logo wél fijn genoeg zou zijn', () {
-    final logo = logoResolutionOf(wide, boxSide: 72)!;
+    final logo = logoResolutionOf(wide, boxWidth: 72, boxHeight: 72)!;
     // Van 4 dpi naar de ondergrens van 150 is ruim zevenendertig keer zoveel
     // beeld: 4 × 150 / 4 = 150 beeldpunten breed.
     expect(logo.advisedPixelWidth, 150);
@@ -61,14 +70,14 @@ void main() {
   });
 
   test('zonder logo valt er niets te melden', () {
-    expect(logoResolutionOf(null, boxSide: 72), isNull);
-    expect(logoResolutionOf(Uint8List(0), boxSide: 72), isNull);
+    expect(logoResolutionOf(null, boxWidth: 72, boxHeight: 72), isNull);
+    expect(logoResolutionOf(Uint8List(0), boxWidth: 72, boxHeight: 72), isNull);
   });
 
   test('bytes die geen afbeelding zijn leveren geen melding op', () {
     // Een SVG komt hier langs de resolver binnen; de rasterlezer maakt er niets
     // van. Dat mag geen uitzondering worden die de export meesleurt.
     final svg = Uint8List.fromList(utf8.encode('<svg xmlns="x"></svg>'));
-    expect(logoResolutionOf(svg, boxSide: 72), isNull);
+    expect(logoResolutionOf(svg, boxWidth: 72, boxHeight: 72), isNull);
   });
 }

@@ -599,6 +599,18 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         pageLabel: '$pageNumber',
         projectPath: widget.projectPath,
         compact: true,
+        // De echte spiegel en marge van dit vel: het logo schaalt dan exact
+        // mee met de pagina onder zich (#2462).
+        contentWidthPt: () {
+          final (w, _) = widget.pageSize.dimensions;
+          return (w - widget.margins.leftMm - widget.margins.rightMm) *
+              kPointsPerMm;
+        }(),
+        logoHeightBudgetPt: documentBandLogoHeightBudgetPt(
+          (header ? widget.margins.topMm : widget.margins.bottomMm) *
+              kPointsPerMm,
+          profile.documentBodyFontSize,
+        ),
       ),
     ),
   );

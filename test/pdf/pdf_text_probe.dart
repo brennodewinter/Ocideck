@@ -119,6 +119,23 @@ final _baseFont = RegExp(r'/BaseFont\s*/([A-Za-z0-9-]+)');
 final _fillColor = RegExp(
   r'([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s+rg(?![A-Za-z])',
 );
+
+/// De getekende afbeeldingsvlakken uit alle inhoudsstromen, als
+/// `(breedte, hoogte)` in punten.
+///
+/// `package:pdf` zet een afbeelding neer als `w 0 0 h x y cm /Naam Do`: de
+/// eerste twee getallen van de plaatsingsmatrix zijn de schaal op beide assen,
+/// dus de afmeting die het beeld op papier krijgt. Daarmee meet een test wat
+/// de lezer straks ziet, niet wat de code van plan was (#2462).
+List<(double, double)> pdfDrawnImageBoxes(Uint8List bytes) => [
+  for (final stream in _inflatedStreams(bytes))
+    for (final match in _drawnImage.allMatches(stream))
+      (double.parse(match.group(1)!), double.parse(match.group(2)!)),
+];
+
+final _drawnImage = RegExp(
+  r'(-?[\d.]+)\s+0\s+0\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+cm\s*/\S+\s+Do',
+);
 final _outlineTitle = RegExp(r'/Title\s*\(((?:[^()\\]|\\.)*)\)');
 
 /// Alle uitgepakte inhoudsstromen. Een stroom die niet met zlib is samengeperst

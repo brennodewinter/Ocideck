@@ -10,6 +10,7 @@
 // plek waar documentinhoud de map van de gebruiker verlaat.
 
 import 'dart:convert';
+import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:pdf/pdf.dart';
@@ -191,9 +192,35 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     renderMath: renderMath,
   );
   final logo = await _resolveLogo(theme.effectiveDocumentLogoPath, embedImage);
-  final logoWidth = ((theme.documentLogoSize ?? 32).toDouble() * 0.5).clamp(
-    24.0,
-    72.0,
+  // Eén gedeelde maat (#2462): `documentLogoWidthPt` is de papieren breedte
+  // die scherm en voorvertoning al beloven. De oude rekensom (`size * 0.5`,
+  // stil afgekapt op 72 pt) negeerde de terugval op `logoSize` en maakte
+  // zelfs een groot logo hooguit 72 pt — daarom las een huisstijl op de
+  // export niet.
+  //
+  // De begrenzingen die de band oplegt (aandeel van de tekstspiegel,
+  // margehoogte) rekent de renderer op het blad zelf uit; hier staan ze
+  // opnieuw, zodat de resolutiewaarschuwing over het kader praat dat er
+  // ook echt komt.
+  final size = pageSize ?? PageSizeSpec.a4;
+  final margins = pageMargins ?? const PageMargins();
+  final (trimWidthMm, _) = size.dimensions;
+  final contentWidthPt = mmToPt(trimWidthMm - margins.leftMm - margins.rightMm);
+  final logoWidth = math.min(
+    theme.documentLogoWidthPt,
+    contentWidthPt * kDocumentBandLogoWidthShare,
+  );
+  final logoBoxHeight = math.min(
+    logoWidth,
+    documentBandLogoHeightBudgetPt(
+      mmToPt(
+        (theme.documentLogoPosition.startsWith('top')
+                ? margins.topMm
+                : margins.bottomMm) +
+            margins.bleedMm,
+      ),
+      style.bodyFontSize,
+    ),
   );
 
   final fields = {
@@ -253,18 +280,24 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
       ].join(' '),
     ),
     tablesTooWide: tablesTooWide,
-    logo: logoResolutionOf(logo, boxSide: logoWidth),
+    logo: logoResolutionOf(logo, boxWidth: logoWidth, boxHeight: logoBoxHeight),
   );
 }
 
 /// Hoe fijn een rasterlogo op het blad terechtkomt.
 ///
-/// [boxSide] is de zijde van het vierkante kader waarin de band het logo met
-/// `BoxFit.contain` plaatst (zie `_logo` in `document_pdf_renderer.dart`): een
-/// breed logo raakt daarin de breedte, een hoog logo de hoogte. `null` wanneer
-/// er geen logo is of de maat er niet uit te lezen viel.
-LogoResolution? logoResolutionOf(Uint8List? bytes, {required double boxSide}) {
-  if (bytes == null || bytes.isEmpty || boxSide <= 0) return null;
+/// [boxWidth] en [boxHeight] vormen het kader waarin de band het logo met
+/// `BoxFit.contain` plaatst (zie `_logo` in `document_pdf_renderer.dart`):
+/// een breed logo raakt de breedte, een hoog logo de margehoogte. `null`
+/// wanneer er geen logo is of de maat er niet uit te lezen viel.
+LogoResolution? logoResolutionOf(
+  Uint8List? bytes, {
+  required double boxWidth,
+  required double boxHeight,
+}) {
+  if (bytes == null || bytes.isEmpty || boxWidth <= 0 || boxHeight <= 0) {
+    return null;
+  }
   final int pixelWidth;
   final int pixelHeight;
   try {
@@ -275,10 +308,9 @@ LogoResolution? logoResolutionOf(Uint8List? bytes, {required double boxSide}) {
     return null;
   }
   if (pixelWidth <= 0 || pixelHeight <= 0) return null;
-  // `contain` in een vierkant kader: de langste zijde van het beeld bepaalt de
-  // schaal, want die raakt het kader het eerst.
-  final longest = pixelWidth > pixelHeight ? pixelWidth : pixelHeight;
-  final placedWidth = pixelWidth * (boxSide / longest);
+  // `contain`: de as die het kader het eerst raakt bepaalt de schaal.
+  final placedWidth =
+      pixelWidth * math.min(boxWidth / pixelWidth, boxHeight / pixelHeight);
   if (placedWidth <= 0) return null;
   return LogoResolution(
     pixelWidth: pixelWidth,
