@@ -368,3 +368,13 @@ jobs:
           # eigen forge pusht. De GitHub-spiegel van de tap volgt via een
           # push-mirror — geen tweede release-job hier, anders pushen twee ketens
           # dezelfde cask en botsen ze. Zie issue #1227.
+
+      - name: Bewaar Windows-cohort voor de forge
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocideck-windows-cohort
+          path: |
+            ocideck-windows-x64-${{ env.VERSIE }}.zip
+            ocideck-windows-x64-setup-${{ env.VERSIE }}.exe
+            ocideck-windows-cohort-${{ env.VERSIE }}.json
+          if-no-files-found: error

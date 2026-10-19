@@ -818,23 +818,19 @@ void main() {
       },
     );
 
-    test('the forge downloads the draft Windows assets with authentication', () {
+    test('the forge downloads the exact Windows run artifact', () {
+      expect(mirrorYaml, contains('name: ocideck-windows-cohort'));
       expect(
-        forgeYaml,
-        contains(
-          r'GH_RELEASE_READ_TOKEN: ${{ secrets.GH_RELEASE_READ_TOKEN }}',
-        ),
+        mirrorYaml,
+        contains(r'ocideck-windows-cohort-${{ env.VERSIE }}.json'),
       );
       expect(
         forgeYaml,
-        contains(
-          r'GH_ASSET_TOKEN="${GH_RELEASE_READ_TOKEN:-$GH_DISPATCH_TOKEN}"',
-        ),
+        contains(r'$API/actions/runs/$rid/artifacts?per_page=100'),
       );
-      expect(
-        forgeYaml,
-        contains(r'release="$(gh_release_api "$API/releases?per_page=100"'),
-      );
+      expect(forgeYaml, contains('select(.name == "ocideck-windows-cohort"'));
+      expect(forgeYaml, contains(r'archive="$(mktemp)"'));
+      expect(forgeYaml, contains(r'unzip -p "$archive" "$f"'));
       final start = forgeYaml.indexOf('  windows-ophalen:');
       final windows = forgeYaml.substring(
         start,
@@ -846,11 +842,10 @@ void main() {
         ).hasMatch(windows),
         isTrue,
         reason:
-            'Without the GitHub token a draft is unreadable; this job must '
-            'fail closed instead of falling back to a public URL.',
+            'Without the GitHub token a private build artifact is unreadable.',
       );
       expect(windows, contains(r'Authorization: Bearer $GH_DISPATCH_TOKEN'));
-      expect(windows, contains('application/octet-stream'));
+      expect(windows, contains('application/vnd.github+json'));
       expect(
         windows,
         isNot(contains(r'https://github.com/$REPO/releases/download/$TAG/$f')),
@@ -963,21 +958,18 @@ case "\$url" in
     else
       printf '{"workflow_runs":[{"id":102,"head_branch":"v9.9.9","status":"completed","conclusion":"$newRunConclusion","html_url":"https://gh/nieuw"}]}\\n'
     fi ;;
-  */releases?per_page=*)
-    [ "\$RC" -ge ${serveAssets ? (staleActiveRunAtRedispatch ? 7 : 5) : 9999} ] || { printf '[]\n'; exit 0; }
-    printf '[{"tag_name":"v9.9.9","draft":true,"assets":[{"name":"ocideck-windows-x64-9.9.9.zip","url":"https://api.github.com/assets/zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe","url":"https://api.github.com/assets/exe"},{"name":"ocideck-windows-cohort-9.9.9.json","url":"https://api.github.com/assets/cohort"}]}]\n' ;;
-  */assets/*)
+  */actions/runs/102/artifacts?per_page=*)
+    [ "\$RC" -ge ${serveAssets ? (staleActiveRunAtRedispatch ? 7 : 5) : 9999} ] || { printf '{"artifacts":[]}\n'; exit 0; }
+    printf '{"artifacts":[{"name":"ocideck-windows-cohort","expired":false,"archive_download_url":"https://api.github.com/artifact.zip"}]}\n' ;;
+  */artifact.zip)
     [ "\$RC" -ge ${serveAssets ? (staleActiveRunAtRedispatch ? 7 : 5) : 9999} ] || exit 22
-    f="\${url##*/}"
-    case "\$f" in
-      zip) printf 'zipdata' > "\$out" ;;
-      exe) printf 'exedata' > "\$out" ;;
-      cohort)
-        z=\$(printf 'zipdata' | sha256sum | cut -d' ' -f1)
-        e=\$(printf 'exedata' | sha256sum | cut -d' ' -f1)
-        printf '{"tag_commit":"%s","run_id":102,"sha256":{"zip":"%s","installer":"%s"}}\\n' \\
-          "\$GITHUB_SHA" "\$z" "\$e" > "\$out" ;;
-    esac ;;
+    printf 'zipdata' > ocideck-windows-x64-9.9.9.zip
+    printf 'exedata' > ocideck-windows-x64-setup-9.9.9.exe
+    z=\$(printf 'zipdata' | sha256sum | cut -d' ' -f1)
+    e=\$(printf 'exedata' | sha256sum | cut -d' ' -f1)
+    printf '{"tag_commit":"%s","run_id":102,"sha256":{"zip":"%s","installer":"%s"}}\n' "\$GITHUB_SHA" "\$z" "\$e" > ocideck-windows-cohort-9.9.9.json
+    rm -f "\$out"
+    zip -qj "\$out" ocideck-windows-x64-9.9.9.zip ocideck-windows-x64-setup-9.9.9.exe ocideck-windows-cohort-9.9.9.json ;;
   *) exit 22 ;;
 esac
 exit 0
@@ -1015,14 +1007,14 @@ exit 0
         final r = runStep(staleActiveRunAtRedispatch: true);
         final out = '${r.stdout}\n${r.stderr}';
         expect(r.exitCode, 0, reason: out);
-        expect(out, contains('DISPATCH_COUNT=1'));
-        expect(out, contains('geen extra dispatch'));
+        expect(out, contains('DISPATCH_COUNT=0'));
+        expect(out, contains('niet opnieuw dispatchen'));
       }, skip: Platform.isWindows);
 
       test(
         'een oude failure blijft informatief; de nieuwe run wordt gevolgd',
         () {
-          final r = runStep();
+          final r = runStep(newRunAfterPolls: 5);
           final out = '${r.stdout}\n${r.stderr}';
           expect(r.exitCode, 0, reason: out);
           expect(out, contains('niet bij deze poging'));

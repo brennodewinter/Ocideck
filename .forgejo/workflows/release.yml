@@ -496,7 +496,6 @@ jobs:
       - name: Windows-build starten en ophalen
         env:
           GH_DISPATCH_TOKEN: ${{ secrets.GH_DISPATCH_TOKEN }}
-          GH_RELEASE_READ_TOKEN: ${{ secrets.GH_RELEASE_READ_TOKEN }}
         shell: bash
         run: |
           set -u
@@ -523,27 +522,27 @@ jobs:
             echo "GH_DISPATCH_TOKEN ontbreekt — draft Windows-assets zijn terecht niet publiek leesbaar." >&2
             exit 1
           fi
-          # Sommige fine-grained tokens mogen Actions dispatchen maar missen
-          # Contents: read. Een afzonderlijk lees-token kan de draft-assets
-          # ophalen zonder de dispatchbevoegdheid te wijzigen.
-          GH_ASSET_TOKEN="${GH_RELEASE_READ_TOKEN:-$GH_DISPATCH_TOKEN}"
-
           # Elke curl draagt een tijdslimiet: een geblackholede route (DROP
           # i.p.v. REJECT) laat een kale curl anders minutenlang per poging
           # hangen, en de 90-minutenlus hieronder telt pogingen, geen tijd.
           have_asset() {
-            local f release asset
-            release="$(gh_release_api "$API/releases?per_page=100" \
-              | jq -c --arg tag "$TAG" 'first(.[] | select(.tag_name == $tag and .draft == true)) // empty')" || return 1
-            test -n "$release" || return 1
+            local rid="${1:-}" artifact archive f
+            test -n "$rid" || return 1
+            artifact="$(gh_api "$API/actions/runs/$rid/artifacts?per_page=100" \
+              | jq -r 'first(.artifacts[] | select(.name == "ocideck-windows-cohort" and .expired == false) | .archive_download_url) // empty')" || return 1
+            test -n "$artifact" || return 1
+            archive="$(mktemp)" || return 1
+            if ! curl -fLsS --connect-timeout 15 --max-time 300 \
+              -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
+              -H 'Accept: application/vnd.github+json' -o "$archive" "$artifact"; then
+              rm -f "$archive"; return 1
+            fi
             for f in "${BESTANDEN[@]}" "$COHORT"; do
-              asset="$(printf '%s' "$release" | jq -r --arg name "$f" \
-                'first(.assets[] | select(.name == $name) | .url) // empty')"
-              test -n "$asset" || return 1
-              curl -fLsS --connect-timeout 15 --max-time 300 \
-                -H "Authorization: Bearer $GH_ASSET_TOKEN" \
-                -H 'Accept: application/octet-stream' -o "$f" "$asset" || return 1
+              if ! unzip -p "$archive" "$f" > "$f"; then
+                rm -f "$archive"; return 1
+              fi
             done
+            rm -f "$archive"
           }
           # Accepteer het paar alleen als het attest één en hetzelfde cohort
           # beschrijft: onze tagcommit, de nieuwste spiegelrun (alleen te
@@ -563,9 +562,6 @@ jobs:
           gh_api() { curl -fsS --connect-timeout 15 --max-time 60 \
             -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
             -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "$@"; }
-          gh_release_api() { curl -fsS --connect-timeout 15 --max-time 60 \
-            -H "Authorization: Bearer $GH_ASSET_TOKEN" \
-            -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "$@"; }
           dispatch() { gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
             -d "{\"ref\":\"$TAG\"}"; }
           # Laatste run van de Windows-workflow op DEZE tag:
@@ -583,9 +579,9 @@ jobs:
           # eerdere run), dan zijn we meteen klaar — mits het paar aantoonbaar
           # uit één cohort komt (#2313). Een gemengd paar weigeren en doorvallen
           # naar de lus: de spiegel kan op dat moment een verse upload doen.
-          if have_asset; then
-            info="$(run_status || true)"
-            IFS='|' read -r st cc LAST_URL rid <<< "$info"
+          info="$(run_status || true)"
+          IFS='|' read -r st cc LAST_URL rid <<< "$info"
+          if [ "$st" = completed ] && [ "$cc" = success ] && have_asset "$rid"; then
             if verify_cohort "$rid"; then
               echo "Assets stonden er al: $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
             fi
@@ -623,7 +619,7 @@ jobs:
               IFS='|' read -r st cc LAST_URL rid <<< "$info"
               echo "[$POGING] run: ${st:-<geen>} ${cc:-} ${LAST_URL:-} ${rid:-}"
             fi
-            if have_asset; then
+            if [ "${st:-}" = completed ] && [ "${cc:-}" = success ] && have_asset "$rid"; then
               if verify_cohort "$rid"; then
                 echo "Opgehaald na $POGING minuut/minuten (cohort geverifieerd): $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
               fi

@@ -371,16 +371,16 @@ api() { # api METHOD PATH [curl-args…]
   return "$rc"
 }
 
-# De releaseworkflow leest twee besloten GitHub-assets en schrijft een besloten
-# Forgejo-release. De jobtoken kan die assets niet betrouwbaar teruglezen.
+# De releaseworkflow leest het Windows-buildartefact en schrijft een besloten
+# Forgejo-release. De jobtoken kan release-assets niet betrouwbaar teruglezen.
 # Controleer uitsluitend namen: de secretwaarden mogen nooit in logs verschijnen.
 assert_release_ci_secrets() {
   local names required
   names="$(api GET '/actions/secrets' | jq -er '[.[]?.name]')" \
     || die "kon Forgejo CI-secretnamen niet lezen — publicatiecapaciteit onbekend; niets getagd."
-  for required in GH_DISPATCH_TOKEN GH_RELEASE_READ_TOKEN RELEASE_TOKEN; do
+  for required in GH_DISPATCH_TOKEN RELEASE_TOKEN; do
     jq -e --arg name "$required" 'index($name) != null' <<<"$names" >/dev/null \
-      || die "CI-secret $required ontbreekt — stel een blijvend repo-scoped secret in (GH_RELEASE_READ_TOKEN: GitHub Contents:read voor besloten draft; RELEASE_TOKEN: Forgejo write:repository voor release-assets). Gebruik geen breed persoonlijk token. Niets getagd."
+      || die "CI-secret $required ontbreekt — stel een blijvend repo-scoped secret in (GH_DISPATCH_TOKEN: GitHub Actions:read/write; RELEASE_TOKEN: Forgejo write:repository). Gebruik geen breed persoonlijk token. Niets getagd."
   done
 }
 
