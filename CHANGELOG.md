@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende
+  zijn breedte om via een eigen schaal (ingestelde maat × 0,5, afgekapt op
+  72 pt) en negeerde de terugval op het presentatielogo — daardoor werd zelfs
+  een groot beeldmerk hooguit een centimeter. Scherm, voorvertoning en PDF
+  delen nu één fysieke maat: de instelling in pixels staat voor diezelfde
+  breedte in punten op papier. Het logo blijft binnen een vast aandeel van
+  de tekstspiegel en binnen de bladmarge, zodat de koptekst en de eerste
+  regels niet onder het beeldmerk verdwijnen; die begrenzing is in de
+  stijlvoorvertoning meteen zichtbaar in plaats van stil.
 - **Een voetnoot langer dan een blad is niet langer onzichtbaar afgeknipt.**
   De paginaweergave knipte een noot die hoger was dan het tekstvlak stil af —
   de lezer zag alleen het stuk dat paste en had geen manier om bij de rest te

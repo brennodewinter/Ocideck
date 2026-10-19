@@ -1,11 +1,26 @@
+import 'dart:math' as math;
+
 import 'package:material_ui/material_ui.dart';
 
 import '../models/deck.dart';
+import '../models/page_size.dart';
 import '../models/settings.dart';
 import '../services/document_chrome_template.dart';
 import '../theme/app_theme.dart';
 import 'slides/inline_markdown.dart';
 import 'theme_profile_logo.dart';
+
+/// De tekstspiegel die een band zonder eigen paginamaat voorstelt: A4
+/// staand met de standaard bladmarges — het vel dat de stijlvoorvertoning
+/// toont (#2462).
+const double kDefaultDocumentContentWidthPt = 170 * kPointsPerMm;
+
+/// Het hoogtebudget van een bandlogo bij de standaard bladmarge en
+/// -basishoogte — dezelfde rekensom als de PDF (#2462).
+final double _defaultLogoHeightBudgetPt = documentBandLogoHeightBudgetPt(
+  25 * kPointsPerMm,
+  kDocumentDefaultBodyFontSize,
+);
 
 /// Een echte kop- of voettekstband voor documentoppervlakken.
 ///
@@ -21,6 +36,8 @@ class DocumentChromeBand extends StatelessWidget {
     this.compact = false,
     this.tlp = TlpLevel.none,
     this.fields = const {},
+    this.contentWidthPt = kDefaultDocumentContentWidthPt,
+    this.logoHeightBudgetPt,
   });
 
   final ThemeProfile profile;
@@ -30,6 +47,18 @@ class DocumentChromeBand extends StatelessWidget {
   final bool compact;
   final TlpLevel tlp;
   final Map<String, String> fields;
+
+  /// De breedte van de tekstspiegel die deze band voorstelt, in
+  /// typografische punten. Alleen in [compact]-stand schaalt het logo mee:
+  /// de band is dan een pagina in het klein en het beeldmerk moet hetzelfde
+  /// aandeel van het vel innemen als op papier.
+  final double contentWidthPt;
+
+  /// Hoe hoog het logovlak mag worden, in punten — de marge die deze band
+  /// voorstelt minus bandopvulling, zoals [documentBandLogoHeightBudgetPt]
+  /// die berekent. De paginaweergave geeft de eigenlijke marge mee; `null`
+  /// gebruikt de standaardrand uit [_defaultLogoHeightBudgetPt].
+  final double? logoHeightBudgetPt;
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +84,64 @@ class DocumentChromeBand extends StatelessWidget {
     final background = AppTheme.parseHexColor(
       profile.effectiveDocumentBandBackgroundColor,
     );
-    final documentLogoSize = profile.effectiveDocumentLogoSize.toDouble();
-    final logoWidth = compact
-        ? (documentLogoSize * 0.45).clamp(36.0, 144.0)
-        : documentLogoSize;
+    return LayoutBuilder(
+      builder: (context, constraints) => _band(
+        context,
+        constraints,
+        rightLogo,
+        color,
+        background,
+        text,
+        showPage,
+        showTlp,
+      ),
+    );
+  }
+
+  Widget _band(
+    BuildContext context,
+    BoxConstraints constraints,
+    bool rightLogo,
+    Color color,
+    Color background,
+    String text,
+    bool showPage,
+    bool showTlp,
+  ) {
+    final logoInBand =
+        (profile.effectiveDocumentLogoPath?.trim() ?? '').isNotEmpty &&
+        profile.documentLogoPosition.startsWith(header ? 'top' : 'bottom');
+    final path = profile.effectiveDocumentLogoPath?.trim() ?? '';
+    // Hoeveel pixels één punt op deze band beslaat: in de compacte
+    // voorvertoning is de band een verkleind vel, in de volle band staat
+    // elke punt voor `kCssPxPerPoint` pixels — dezelfde fysieke maat als de
+    // PDF (#2462).
+    final bandWidth = constraints.hasBoundedWidth
+        ? constraints.maxWidth
+        : contentWidthPt * kCssPxPerPoint;
+    final pxPerPt = compact ? bandWidth / contentWidthPt : kCssPxPerPoint;
+    // Dezelfde begrenzing als de PDF-band: het logo krijgt de gevraagde
+    // papierbreedte, maar nooit meer dan het vaste aandeel van de spiegel —
+    // de kop- of voetregel houdt zijn ruimte.
+    final logoWidth = math.min(
+      profile.documentLogoWidthPt * pxPerPt,
+      bandWidth * kDocumentBandLogoWidthShare,
+    );
+    // In compact hoort de hoogte bij de marge die de band voorstelt; in de
+    // volle band geldt de bestaande eigen begrenzing.
+    final logoHeight = compact
+        ? math.max(
+            0.0,
+            math.min(
+              logoWidth,
+              (logoHeightBudgetPt ?? _defaultLogoHeightBudgetPt) * pxPerPt,
+            ),
+          )
+        : (logoWidth * 0.5).clamp(32.0, 240.0);
     final row = Row(
       children: [
         if (logoInBand && !rightLogo) ...[
-          _logo(path, logoWidth, Alignment.centerLeft),
+          _logo(path, logoWidth, logoHeight, Alignment.centerLeft),
           SizedBox(width: compact ? 10 : 16),
         ],
         Expanded(
@@ -99,7 +178,7 @@ class DocumentChromeBand extends StatelessWidget {
         ],
         if (logoInBand && rightLogo) ...[
           SizedBox(width: compact ? 10 : 16),
-          _logo(path, logoWidth, Alignment.centerRight),
+          _logo(path, logoWidth, logoHeight, Alignment.centerRight),
         ],
       ],
     );
@@ -124,15 +203,13 @@ class DocumentChromeBand extends StatelessWidget {
     );
   }
 
-  Widget _logo(String path, double width, Alignment alignment) =>
+  Widget _logo(String path, double width, double height, Alignment alignment) =>
       ThemeProfileLogo(
         profile: profile,
         logoPath: path,
         projectPath: projectPath,
         width: width,
-        height: compact
-            ? (width * 0.5).clamp(22.0, 72.0)
-            : (width * 0.5).clamp(32.0, 240.0),
+        height: height,
         alignment: alignment,
       );
 

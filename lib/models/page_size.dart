@@ -328,3 +328,19 @@ bool marginsFitPaper(
   return margins.leftMm + margins.rightMm <= w - minContentMm &&
       margins.topMm + margins.bottomMm <= h - minContentMm;
 }
+
+/// Typografische punten per millimeter — een punt is 1/72 duim.
+const double kPointsPerMm = 72 / 25.4;
+
+/// Het aandeel van de tekstspiegel dat de kop- of voetband maximaal aan het
+/// documentlogo geeft; daarboven verdrukt het beeldmerk de tekst naast zich.
+/// Eén getal voor PDF, band en voorvertoning (#2462).
+const double kDocumentBandLogoWidthShare = 0.6;
+
+/// Hoe hoog een bandlogo binnen een bladmarge van [marginPt] punten mag
+/// worden, bij een basishoogte van [bodyFontSizePt]. De band woont ín de
+/// marge: haar tussenruimte (`0.8 ×` de basishoogte) en eigen opvulling
+/// moeten binnen de marge blijven, anders valt het beeldmerk over de eerste
+/// tekstregel heen.
+double documentBandLogoHeightBudgetPt(double marginPt, double bodyFontSizePt) =>
+    marginPt - bodyFontSizePt * 0.8 - 7;

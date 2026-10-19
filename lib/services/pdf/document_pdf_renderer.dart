@@ -12,6 +12,7 @@
 // tussen de rondes niet verschuift, is geen hoop maar bouw: de kolom met
 // nummers heeft in beide rondes dezelfde breedte (zie `_tocEntry`).
 
+import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:pdf/pdf.dart';
@@ -353,14 +354,31 @@ pw.Widget _band(
   required pw.ImageProvider? logo,
   required bool top,
 }) {
-  final showLogo = logo != null && chrome.logoAtTop == top;
+  // Twee begrenzingen die de papieren werkelijkheid oplegt: de kopregel moet
+  // ruimte houden (aandeel van de tekstspiegel) en de band mag de marge niet
+  // overstijgen (hoogtebudget). `package:pdf` zou een breder beeld gewoon
+  // tekenen — tot over de tekst heen.
+  final logoWidth = math.min(
+    chrome.logoWidth,
+    context.page.pageFormat.availableWidth * kDocumentBandLogoWidthShare,
+  );
+  final logoHeight = math.min(
+    logoWidth,
+    documentBandLogoHeightBudgetPt(
+      top
+          ? context.page.pageFormat.marginTop
+          : context.page.pageFormat.marginBottom,
+      style.bodyFontSize,
+    ),
+  );
+  final showLogo = logo != null && chrome.logoAtTop == top && logoHeight > 0;
   final textStyle = pw.TextStyle(
     fontSize: style.bandSize,
     color: style.bandTextColor,
   );
   final children = <pw.Widget>[
     if (showLogo && !chrome.logoAtRight)
-      _logo(logo, chrome.logoWidth)
+      _logo(logo, logoWidth, logoHeight)
     else
       pw.SizedBox(),
     pw.Expanded(child: builder.bandText(spans, style: textStyle)),
@@ -374,7 +392,7 @@ pw.Widget _band(
     if (showLogo && chrome.logoAtRight)
       pw.Padding(
         padding: const pw.EdgeInsets.only(left: 8),
-        child: _logo(logo, chrome.logoWidth),
+        child: _logo(logo, logoWidth, logoHeight),
       ),
   ];
   return pw.Container(
@@ -442,15 +460,17 @@ pw.ImageProvider? _logoImage(Uint8List? bytes) {
   }
 }
 
-pw.Widget _logo(pw.ImageProvider image, double width) => pw.Image(
-  image,
-  // Zowel breedte als hoogte begrensd, met `contain`: het logo schaalt binnen
-  // een `width` × `width`-kader naar zijn beeldverhouding. Een breed logo
-  // pakt de breedte als bindende maat (hoogte = width / verhouding), een
-  // vierkant logo de hoogte. Vóór deze begrenzing kreeg het logo in een
-  // `pw.Row` een onbegrensde breedte, viel het terug op zijn natuurlijke
-  // pixelmaat (250 × 59 pt, 72 ppi) en stond het uitgerekt over de band.
-  width: width,
-  height: width,
-  fit: pw.BoxFit.contain,
-);
+pw.Widget _logo(pw.ImageProvider image, double width, double height) =>
+    pw.Image(
+      image,
+      // Beide assen begrensd, met `contain`: het logo schaalt binnen het
+      // `width` × `height`-kader naar zijn beeldverhouding. Een breed logo
+      // pakt de breedte als bindende maat (hoogte = width / verhouding),
+      // een hoog logo de margehoogte uit [height]. Vóór deze begrenzing
+      // kreeg het logo in een `pw.Row` een onbegrensde breedte, viel het
+      // terug op zijn natuurlijke pixelmaat (250 × 59 pt, 72 ppi) en stond
+      // het uitgerekt over de band.
+      width: width,
+      height: height,
+      fit: pw.BoxFit.contain,
+    );
