@@ -72,7 +72,7 @@ void main() {
   group('visuele verenigbaarheid', () {
     test('de marker dwingt niet terug naar bronmodus', () {
       const source = 'A\n\n<!-- spacer -->\n\nB\n';
-      expect(markdownVisualLimitations(source), isEmpty);
+      expect(sourceFragmentRanges(source), isEmpty);
     });
   });
 

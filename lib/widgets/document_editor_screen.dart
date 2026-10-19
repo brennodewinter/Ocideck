@@ -68,11 +68,6 @@ import 'keyword_chips_editor.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
 import '../utils/visual_paste_delta.dart';
-import '../utils/markdown_visual_compatibility.dart'
-    show
-        firstVisualLimitation,
-        MarkdownVisualLimitation,
-        markdownRoundTripsVisually;
 import 'dialogs/convert_to_presentation_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
 import 'dialogs/tlp_audience_action.dart';
@@ -252,8 +247,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // bron hoort te werken.
     if (!scanFormBlocks(initialBody).isEmpty) {
       _viewMode = _DocViewMode.fill;
-    } else if (!markdownRoundTripsVisually(initialBody)) {
-      _viewMode = _DocViewMode.source;
     }
   }
 
@@ -291,8 +284,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // terug op de platte broneditor (niet-rondreisbare Markdown), dan zijn
     // bewerkingen gewoon bronbewerkingen — niet door de Quill-baseline heen
     // sturen (#1649).
-    final isVisualEdit =
-        _viewMode == _DocViewMode.visual && markdownRoundTripsVisually(body);
+    final isVisualEdit = _viewMode == _DocViewMode.visual;
     ref
         .read(documentProvider.notifier)
         .edit(
@@ -429,10 +421,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         // Alleen een wijziging van buiten hoeft hier opnieuw gecontroleerd te
         // worden. Gewoon typen is hierboven al door dezelfde poort gegaan;
         // een tweede volledige documentscan per letter voegt niets toe.
-        if (_viewMode == _DocViewMode.visual &&
-            !markdownRoundTripsVisually(body)) {
-          _autoFallbackToSource(body);
-        }
       }
     });
     final source = _controller.text;
@@ -542,8 +530,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // Invoegen via de bron zette het blok daardoor onderaan het document in
     // plaats van waar je stond — wat leest als "er gebeurt niets". Daar vraagt
     // de editor het zelf, op zijn eigen cursor.
-    if (_viewMode == _DocViewMode.visual &&
-        markdownRoundTripsVisually(_controller.text)) {
+    if (_viewMode == _DocViewMode.visual) {
       _requestVisualInsert(block: block, caret: at);
       return;
     }

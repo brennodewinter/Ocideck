@@ -51,9 +51,10 @@ void main() {
     // Een tabel round-trip't nu als embed → geen bronstand meer nodig.
     expect(markdownNeedsSourceMode('| A | B |\n|---|---|'), isFalse);
     expect(markdownNeedsSourceMode('Gewone **tekst**'), isFalse);
-    // Voetnoten en HTML-commentaar kan de brug nog niet verliesvrij aan.
+    // Voetnootdefinities en paginascheiding horen niet in één veld.
     expect(markdownNeedsSourceMode('Zie[^1]\n\n[^1]: noot'), isTrue);
-    expect(markdownNeedsSourceMode('<!-- verborgen -->'), isTrue);
+    // HTML-commentaar reist sinds #2463 als bronblok mee — geen bron-eis.
+    expect(markdownNeedsSourceMode('<!-- verborgen -->'), isFalse);
   });
 
   testWidgets('the inline field stays quiet — no floating toolbar on focus', (

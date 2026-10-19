@@ -25,6 +25,7 @@ import 'form_block_embed_builder.dart';
 import 'pentest_block_embed_builder.dart';
 import 'table_embed_builder.dart';
 import 'table_embed_binding.dart';
+import 'source_fragment_embed_builder.dart';
 import 'spacer_embed_builder.dart';
 import 'toc_embed_builder.dart';
 import 'timeline_table_embed_builder.dart';
@@ -542,6 +543,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   const MermaidEmbedBuilder(),
                   const PentestBlockEmbedBuilder(),
                   const FormBlockEmbedBuilder(),
+                  const SourceFragmentEmbedBuilder(),
                   const FootnoteRefEmbedBuilder(),
                   const FootnoteDefEmbedBuilder(),
                 ],
@@ -595,6 +597,6 @@ void insertSanitizedPlainText(QuillController controller, String raw) {
 /// Reloads the Quill document from sanitized markdown.
 void loadSanitizedMarkdown(QuillController controller, String markdown) {
   controller.document = MarkdownQuillCodec.documentFromMarkdown(
-    normalizeRichTextMarkdown(markdown),
+    normalizeRichTextMarkdownForStorage(markdown),
   );
 }

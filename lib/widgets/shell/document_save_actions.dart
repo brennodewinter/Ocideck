@@ -177,7 +177,7 @@ Future<void> _adoptSavedDocument(
 /// [savedSource] is de bron zoals die op schijf stond. De bron van [document] is
 /// de genormaliseerde round-trip mét gebruikersbewerkingen. We berekenen de
 /// baseline (round-trip zónder bewerkingen) via dezelfde weg als de visuele
-/// editor — `normalizeRichTextMarkdown` → `documentFromMarkdown` →
+/// editor — `normalizeRichTextMarkdownForStorage` → `documentFromMarkdown` →
 /// `markdownFromDocument` — en diff'en die tegen die bron om de echte
 /// bewerkingen te isoleren. Die diff toegepast op savedSource levert de
 /// byte-getrouwe versie op.
@@ -198,7 +198,7 @@ MarkdownDocument _patchVisualSave(
   final currSplit = splitDocumentFrontMatter(currentSource);
   final baseline = MarkdownQuillCodec.markdownFromDocument(
     MarkdownQuillCodec.documentFromMarkdown(
-      normalizeRichTextMarkdown(savedSplit.body),
+      normalizeRichTextMarkdownForStorage(savedSplit.body),
     ),
   );
   final patched = patchVisualEdits(

@@ -3060,14 +3060,6 @@ const _dutchSourceAddEn = {
       'A timeline uses two or three columns. Choose which columns from this table become the timeline. The remaining columns disappear from the table.',
   'Volgorde (marker)': 'Order (marker)',
   'Toelichting (optioneel)': 'Description (optional)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Line {n} contains HTML comments or HTML tags. The visual editor cannot display this — Source mode has been activated.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Line {n} contains escaped punctuation (such as \\*). The visual editor cannot display this losslessly — Source mode has been activated.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Line {n} is a loose table row outside a table block. The visual editor cannot display this — Source mode has been activated.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Source mode protects markup that the visual editor does not support losslessly. Switch to Source for these constructs.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'The logo will print grainy: the file is {breed}×{hoog} px, which works out to {dpi} dpi at this size.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -3644,8 +3636,6 @@ const _dutchSourceAddEn = {
   'Snel herstellen': 'Recover quickly',
   'Taak': 'Task',
   'Toegepaste versie': 'Applied version',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Visual editing is disabled because this Markdown cannot be converted losslessly.',
   'Wijzigingen vergelijken': 'Compare changes',
   'Wijzigingen verwerpen': 'Reject changes',
   'Zoek een opdracht…': 'Find an assignment…',

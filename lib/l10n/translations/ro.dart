@@ -3895,14 +3895,6 @@ const _dutchSourceAddRo = <String, String>{
       'O cronologie folosește două sau trei coloane. Alegeți ce coloane din acest tabel devin cronologia. Coloanele rămase dispar din tabel.',
   'Volgorde (marker)': 'Ordine (marcator)',
   'Toelichting (optioneel)': 'Descriere (opțional)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Linia {n} conține comentarii HTML sau etichete HTML. Editorul vizual nu le poate afișa — Modul sursă a fost activat.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Linia {n} conține punctuație escapată (cum ar fi \\*). Editorul vizual nu o poate afișa fără pierderi — Modul sursă a fost activat.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Linia {n} este un rând de tabel liber în afara unui bloc de tabel. Editorul vizual nu îl poate afișa — Modul sursă a fost activat.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Modul sursă protejează marcajul pe care editorul vizual nu îl suportă fără pierderi. Treceți la Sursă pentru aceste construcții.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo-ul va ieși granulat la tipărire: fișierul are {breed}×{hoog} px, ceea ce dă {dpi} dpi la această dimensiune.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4482,8 +4474,6 @@ const _dutchSourceAddRo = <String, String>{
   'Snel herstellen': 'Recuperează-te repede',
   'Taak': 'Sarcina',
   'Toegepaste versie': 'Versiune aplicată',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Editarea vizuală este dezactivată deoarece acest Markdown nu poate fi convertit fără pierderi.',
   'Wijzigingen vergelijken': 'Comparați modificările',
   'Wijzigingen verwerpen': 'Respingeți modificările',
   'Zoek een opdracht…': 'Găsiți o misiune...',

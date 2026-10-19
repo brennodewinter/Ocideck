@@ -3894,14 +3894,6 @@ const _dutchSourceAddPt = <String, String>{
       'Uma linha do tempo usa duas ou três colunas. Escolha quais colunas desta tabela formam a linha do tempo. As colunas restantes desaparecem da tabela.',
   'Volgorde (marker)': 'Ordem (marcador)',
   'Toelichting (optioneel)': 'Descrição (opcional)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'A linha {n} contém comentários HTML ou tags HTML. O editor visual não pode exibir isso — Modo fonte ativado.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'A linha {n} contém pontuação escapada (como \\*). O editor visual não pode exibi-la sem perdas — Modo fonte ativado.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'A linha {n} é uma linha de tabela solta fora de um bloco de tabela. O editor visual não pode exibi-la — Modo fonte ativado.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'O modo fonte protege marcação que o editor visual não suporta sem perdas. Mude para Fonte para estas construções.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'O logótipo sairá granulado na impressão: o ficheiro tem {breed}×{hoog} px, o que dá {dpi} dpi neste tamanho.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4483,8 +4475,6 @@ const _dutchSourceAddPt = <String, String>{
   'Snel herstellen': 'Recupere rapidamente',
   'Taak': 'Tarefa',
   'Toegepaste versie': 'Versão aplicada',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'A edição visual está desabilitada porque este Markdown não pode ser convertido sem perdas.',
   'Wijzigingen vergelijken': 'Comparar alterações',
   'Wijzigingen verwerpen': 'Rejeitar alterações',
   'Zoek een opdracht…': 'Encontre uma tarefa…',

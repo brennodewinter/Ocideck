@@ -19,7 +19,7 @@ final spacerMarkerLinePattern = RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$');
 /// De `<!-- spacer -->`-marker als blok-embed in de rijke-tekstlaag.
 ///
 /// Zonder deze embed was rauwe HTML-commentaar een reden om de héle visuele
-/// modus op brontekst terug te laten vallen ([markdownVisualLimitations]).
+/// modus op brontekst terug te laten vallen (`sourceFragmentRanges`).
 /// De marker draagt geen inhoud — alleen een plek — en komt als één blok
 /// door de heen-en-terugweg: byte-getrouw in de bron, atomair te selecteren
 /// en te verwijderen in de editor.

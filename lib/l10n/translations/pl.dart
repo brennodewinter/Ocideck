@@ -3871,14 +3871,6 @@ const _dutchSourceAddPl = <String, String>{
       'Oś czasu używa dwóch lub trzech kolumn. Wybierz, które kolumny z tej tabeli staną się osią czasu. Pozostałe kolumny znikną z tabeli.',
   'Volgorde (marker)': 'Kolejność (znacznik)',
   'Toelichting (optioneel)': 'Opis (opcjonalny)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Wiersz {n} zawiera komentarze HTML lub znaczniki HTML. Edytor wizualny nie może tego wyświetlić — Tryb źródła został aktywowany.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Wiersz {n} zawiera znaki interpunkcyjne ze znakiem ucieczki (np. \\*). Edytor wizualny nie może tego wyświetlić bez strat — Tryb źródła został aktywowany.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Wiersz {n} jest luźnym wierszem tabeli poza blokiem tabeli. Edytor wizualny nie może go wyświetlić — Tryb źródła został aktywowany.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Tryb źródła chroni znaczniki, których edytor wizualny nie obsługuje bez strat. Przejdź do Źródła dla tych konstrukcji.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo wydrukuje się ziarniście: plik ma {breed}×{hoog} px, co przy tym rozmiarze daje {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4460,8 +4452,6 @@ const _dutchSourceAddPl = <String, String>{
   'Snel herstellen': 'Szybko wyzdrowiej',
   'Taak': 'Zadanie',
   'Toegepaste versie': 'Wersja stosowana',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Edycja wizualna jest wyłączona, ponieważ tego Markdown nie można przekonwertować bezstratnie.',
   'Wijzigingen vergelijken': 'Porównaj zmiany',
   'Wijzigingen verwerpen': 'Odrzuć zmiany',
   'Zoek een opdracht…': 'Znajdź zadanie…',

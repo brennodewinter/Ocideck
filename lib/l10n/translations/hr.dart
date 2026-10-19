@@ -3851,14 +3851,6 @@ const _dutchSourceAddHr = <String, String>{
       'Vremenska crta koristi dva ili tri stupca. Odaberite koji stupci ove tablice postaju vremenska crta. Ostali stupci nestaju iz tablice.',
   'Volgorde (marker)': 'Redoslijed (oznaka)',
   'Toelichting (optioneel)': 'Opis (neobavezno)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Redak {n} sadrži HTML komentare ili HTML oznake. Vizualni editor ne može to prikazati — Način izvora aktiviran.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Redak {n} sadrži escaped interpunkciju (poput \\*). Vizualni editor ne može to prikazati bez gubitaka — Način izvora aktiviran.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Redak {n} je slobodni red tablice izvan bloka tablice. Vizualni editor ne može ga prikazati — Način izvora aktiviran.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Način izvora štiti oznake koje vizualni editor ne podržava bez gubitaka. Prebacite se na Izvor za ove konstrukcije.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logotip će biti zrnat na ispisu: datoteka je {breed}×{hoog} px, što pri ovoj veličini daje {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4436,8 +4428,6 @@ const _dutchSourceAddHr = <String, String>{
   'Snel herstellen': 'Brzo se oporavi',
   'Taak': 'zadatak',
   'Toegepaste versie': 'Primijenjena verzija',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Vizualno uređivanje je onemogućeno jer se ovaj Markdown ne može pretvoriti bez gubitaka.',
   'Wijzigingen vergelijken': 'Usporedite promjene',
   'Wijzigingen verwerpen': 'Odbaci promjene',
   'Zoek een opdracht…': 'Pronađite zadatak…',

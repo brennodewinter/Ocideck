@@ -3847,14 +3847,6 @@ const _dutchSourceAddSl = <String, String>{
       'Časovni trak uporablja dva ali tri stolpce. Izberite, kateri stolpci te tabele postanejo časovni trak. Preostali stolpci izginejo iz tabele.',
   'Volgorde (marker)': 'Vrstni red (oznaka)',
   'Toelichting (optioneel)': 'Opis (neobvezno)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Vrstica {n} vsebuje komentarje HTML ali oznake HTML. Vizualni urejevalnik tega ne more prikazati — Virni način aktiviran.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Vrstica {n} vsebuje escaped ločila (npr. \\*). Vizualni urejevalnik tega ne more prikazati brez izgub — Virni način aktiviran.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Vrstica {n} je proga vrstica tablice zunaj bloka tablice. Vizualni urejevalnik je ne more prikazati — Virni način aktiviran.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Virni način štiti oznake, ki jih vizualni urejevalnik ne podpira brez izgub. Preklopite na Vir za te konstrukte.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logotip se bo natisnil zrnato: datoteka meri {breed}×{hoog} px, kar pri tej velikosti pomeni {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4430,8 +4422,6 @@ const _dutchSourceAddSl = <String, String>{
   'Snel herstellen': 'Hitro si opomore',
   'Taak': 'Naloga',
   'Toegepaste versie': 'Uporabljena različica',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Vizualno urejanje je onemogočeno, ker tega Markdowna ni mogoče pretvoriti brez izgub.',
   'Wijzigingen vergelijken': 'Primerjaj spremembe',
   'Wijzigingen verwerpen': 'Zavrni spremembe',
   'Zoek een opdracht…': 'Poiščite nalogo …',

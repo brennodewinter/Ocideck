@@ -2,7 +2,7 @@
 ///
 /// **Waarom een embed en niet "gewoon een codeblok".** Een mermaid-fence is
 /// geldige, draagbare Markdown en viel daarom nooit onder
-/// [markdownVisualLimitations] — de scanner slaat alles binnen een fence
+/// [`sourceFragmentRanges`] — de scanner slaat alles binnen een fence
 /// bewust over. Het gevolg was dat de visuele modus wél openging, maar het
 /// diagram er als monospace brontekst in stond terwijl lezer, voorvertoning,
 /// Pagina's, PDF en HTML-export het diagram tekenden. Niet een terugval naar

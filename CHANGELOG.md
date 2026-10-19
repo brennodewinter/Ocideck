@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Bronblokken in de visuele documenteditor: niet-verliesvrije Markdown
+  blijft lokaal.** Stond er één HTML-commentaar, ontsnapt leesteken of losse
+  tabelregel in een document, dan dwong de visuele modus het héle bestand
+  naar de bronstand — of schreef de normalisatie je tekst stilletjes om.
+  Nu wordt alleen dát brok een bewerkbaar bronvlak (onderschrift *Bron*):
+  één atomaire embed met de bron er byte-voor-byte in, terwijl de tekst
+  ervoor en erna gewoon rijke tekst blijft. De automatische terugval naar
+  Bron-modus, de waarschuwingsbalk en de weigering bij het wisselen naar
+  Visueel zijn daarmee overbodig geworden en weggehaald (#2463).
 - **Bewuste witruimte tussen alinea's: `Extra ruimte` in het Invoegen-menu.**
   Een lege regel is geen bewuste ruimte — elke Markdown-tool normaliseert die
   weg. De nieuwe invoeging schrijft één `<!-- spacer -->`-marker op een eigen

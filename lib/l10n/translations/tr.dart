@@ -4739,14 +4739,6 @@ const _dutchSourceAddTr = <String, String>{
       'Bir zaman çizelgesi iki veya üç sütun kullanır. Bu tablodan hangi sütunların zaman çizelgesi olacağını seçin. Kalan sütunlar tablodan kaybolur.',
   'Volgorde (marker)': 'Sıra (işaretleyici)',
   'Toelichting (optioneel)': 'Açıklama (isteğe bağlı)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Satır {n} HTML yorumları veya HTML etiketleri içeriyor. Görsel editör bunu görüntüleyemiyor — Kaynak modu etkinleştirildi.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Satır {n} kaçırılmış noktalama işaretleri içeriyor (\\* gibi). Görsel editör bunu kayıpsız görüntüleyemiyor — Kaynak modu etkinleştirildi.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Satır {n} bir tablo bloğu dışında gevşek bir tablo satırıdır. Görsel editör bunu görüntüleyemiyor — Kaynak modu etkinleştirildi.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Kaynak modu, görsel editörün kayıpsız desteklemediği işaretlemeyi korur. Bu yapılar için Kaynağa geçin.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo baskıda taneli çıkacak: dosya {breed}×{hoog} px ve bu boyutta {dpi} dpi ediyor.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -5321,8 +5313,6 @@ const _dutchSourceAddTr = <String, String>{
   'Snel herstellen': 'Hızlı bir şekilde kurtarın',
   'Taak': 'Görev',
   'Toegepaste versie': 'Uygulanan sürüm',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Bu İşaretleme kayıpsız olarak dönüştürülemediğinden görsel düzenleme devre dışı bırakıldı.',
   'Wijzigingen vergelijken': 'Değişiklikleri karşılaştır',
   'Wijzigingen verwerpen': 'Değişiklikleri reddet',
   'Zoek een opdracht…': 'Bir görev bulun…',

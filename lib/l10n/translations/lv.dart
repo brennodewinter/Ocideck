@@ -3845,14 +3845,6 @@ const _dutchSourceAddLv = <String, String>{
       'Laika līnija izmanto divas vai trīs kolonnas. Izvēlieties, kuras kolonnas no šīs tabulas kļūst par laika līniju. Pārējās kolonnas pazūd no tabulas.',
   'Volgorde (marker)': 'Kārtība (marķieris)',
   'Toelichting (optioneel)': 'Apraksts (pēc izvēles)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Rinda {n} satur HTML komentārus vai HTML tagus. Vizuālais redaktors nevar tos parādīt — Avota režīms aktivizēts.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Rinda {n} satur escape\'tu interpunkciju (kā \\*). Vizuālais redaktors nevar to parādīt bez zudumiem — Avota režīms aktivizēts.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Rinda {n} ir brīva tabulas rinda ārpus tabulas bloka. Vizuālais redaktors nevar to parādīt — Avota režīms aktivizēts.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Avota režīms aizsargā iezīmējumu, kuru vizuālais redaktors neatbalsta bez zudumiem. Pārslēdzieties uz Avotu šīm konstrukcijām.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logotips tiks izdrukāts graudains: datne ir {breed}×{hoog} px, kas šajā izmērā dod {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4430,8 +4422,6 @@ const _dutchSourceAddLv = <String, String>{
   'Snel herstellen': 'Ātri atgūties',
   'Taak': 'Uzdevums',
   'Toegepaste versie': 'Lietišķā versija',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Vizuālā rediģēšana ir atspējota, jo šo Markdown nevar konvertēt bez zudumiem.',
   'Wijzigingen vergelijken': 'Salīdziniet izmaiņas',
   'Wijzigingen verwerpen': 'Noraidīt izmaiņas',
   'Zoek een opdracht…': 'Atrast uzdevumu…',

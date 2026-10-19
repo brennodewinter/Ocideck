@@ -284,20 +284,21 @@ The visual mode renders prose as WYSIWYG **but** shows table / chart / gantt /
 mermaid / image / block-math as **atomic, fully-rendered embed cards with an
 "Edit" affordance** (double-click, or an explicit button). The prose goes
 through the visual bridge; the blocks the bridge cannot round-trip losslessly
-(tables, raw HTML, footnotes — the known `markdownVisualLimitations`) are
+(tables, raw HTML, footnotes — what the limitation scan flags, since #2463
+travelling as `x-embed-source-fragment` source blocks) are
 **never touched by the bridge**. The source text (`MarkdownSourceDocument`) is
 **always** the truth. This is the rule that lets a WYSIWYG mode exist without
 ever silently corrupting a table.
 
 **When the bridge cannot round-trip, Visual stays editable (owner decision,
 2026-08-08).** An earlier build dropped the *whole* document to a read-only
-rendered view the moment any `markdownVisualLimitations` construct appeared
+rendered view the moment any limitation-scan construct appeared
 (raw HTML, a footnote, an escaped punctuation mark) — no formatting toolbar, no
 editing, only a note. That decided *for* the user that the document was not
-theirs to edit. It now degrades instead of locking: Visual falls back to the
-shared editor's **editable source surface** with the **full formatting toolbar**
-and a short warning ([`markdownSourceModeHint`]), while the insert palette in
-`_DocEditorToolbar` stays available throughout. The rich possibilities are
+theirs to edit. It now degrades instead of locking — and since #2463 it degrades *locally*:
+only the flagged stretch becomes an atomic, editable source block
+(`EmbeddableSourceFragment`, captioned *Bron*), the rest stays rich text. The
+earlier whole-document source fallback with its warning bar is gone. The rich possibilities are
 offered with a warning, never withheld. Source text is still the single truth —
 the bridge still never touches those constructs — so no round-trip guarantee is
 weakened; only the read-only wall is gone. (`DocumentEditorScreen._visualLayout`

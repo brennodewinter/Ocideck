@@ -5394,10 +5394,12 @@ stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
   afbeeldingen als bewerkbare blokken. Op een breed genoeg venster verschijnt ernaast
   een **overzichtsrail** met de koppen van het document; op een kop klikken scrolt
   ernaartoe. Bevat het bestand een constructie die de visuele brug niet verliesloos
-  kan rondzetten (ruwe HTML, voetnoten, ontsnapte leestekens), dan sluit Visueel je
-  **niet** buiten: je bewerkt de brontekst daar rechtstreeks verder, met dezelfde
-  opmaak-knoppenbalk, en een korte melding zegt dat dit deel als bron wordt bewerkt.
-  De rijke mogelijkheden blijven binnen bereik — OciDeck biedt ze aan en
+  kan rondzetten — HTML-commentaar, een ontsnapt leesteken, een losse tabelregel —
+  dan wordt alleen dát stuk een bewerkbaar **bronblok** (onderschrift *Bron*): één
+  atomair, monospace vlak met de tekst er byte-voor-byte in. Alles eromheen blijft
+  gewone rijke tekst, dus één `<!-- marp -->` of `\*` zet het hele document niet
+  meer op bron *(sinds 2026-09; daarvoor dwong zo'n regel de hele bewerker naar
+  de bronstand)*. De rijke mogelijkheden blijven binnen bereik — OciDeck biedt ze aan en
   waarschuwt, in plaats van voor jou te besluiten dat het document alleen-lezen is.
   De melding is een duidelijke balk boven het schrijfvlak: je hoort te weten dat
   je in de bron staat, anders weet je ook niet hoe je terugkomt.
@@ -5509,24 +5511,26 @@ tabel:
 | 2026-09-23T12:30:00.000Z | Herstelclaim weerlegd | Afgerond |
 ```
 
-#### Wanneer Visueel terugvalt op de bron *(toegevoegd 2026-08-20)*
+#### Bronblokken in Visueel *(toegevoegd 2026-08-20, gewijzigd 2026-09)*
 
 **Visueel** beschermt je Markdown: staat er iets in het document dat de
-rijke-tekstlaag niet kan terugvertalen zonder je tekst te veranderen, dan toont
-OciDeck de bron, met een balk die dat zegt. Twee dingen deden dat ten onrechte,
-en doen dat niet meer.
+rijke-tekstlaag niet kan terugvertalen zonder je tekst te veranderen, dan wordt
+alleen dát stuk een **bronblok** — een monospace vlak met onderschrift *Bron*
+dat de tekst er byte-voor-byte bewaart. De rest van het document blijft gewoon
+visueel schrijfbaar, en wat je in het vlak typt gaat ongewijzigd het bestand in.
 
 Een **regeleinde in een tabelcel** (`Shift+Enter`) wordt als `<br>` bewaard, en
 een getypte backslash als `\\`. Dat is de eigen schrijfwijze van de tabel — die
-reist als één ondeelbaar blok door Visueel — en telt dus niet meer als rauwe
-HTML of als ontsnapping. Typen in een tabel houdt je in Visueel.
+reist als één ondeelbaar blok door Visueel — en vormt dus ook geen bronblok.
+Typen in een tabel houdt je in Visueel.
 
-Wat er **wél** nog toe leidt is een **regel die met een pijp begint maar geen
-deel is van een echte tabel**: een koprij en een streepjesrij van ongelijke
-breedte, of een losse `| … |`-regel. Zo'n regel reist niet als tabelblok, en hem
-omzetten zou losse backslashes in je tekst achterlaten — dus OciDeck toont de
-bron in plaats van de regel stilletjes te beschadigen. Geef de koprij en de
-streepjesrij evenveel kolommen en Visueel neemt hem weer.
+Wat **wél** een bronblok wordt is bijvoorbeeld **HTML-commentaar** dat geen
+OciDeck-marker is, een **ontsnapt leesteken** als `\*`, of een **regel die met
+een pijp begint maar geen deel is van een echte tabel**: een koprij en een
+streepjesrij van ongelijke breedte, of een losse `| … |`-regel. Zo'n regel
+reist niet als tabelblok, en hem omzetten zou losse backslashes in je tekst
+achterlaten — dus blijft hij bron tot je hem aanpast. Geef de koprij en de
+streepjesrij evenveel kolommen en Visueel neemt hem weer als tabel.
 
 #### Afbeeldingen in een document *(toegevoegd 2026-08-20, gewijzigd 2026-08-20)*
 

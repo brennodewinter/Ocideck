@@ -177,31 +177,31 @@ void main() {
     );
   });
 
-  testWidgets('de Bron-fallback brengt de probleemregel in beeld', (
+  testWidgets('een bronblok diep in het document opent gewoon in Visueel', (
     tester,
   ) async {
-    // Een niet-verliesvrije constructie diep in het document: bij het openen
-    // staat de stand al op Bron, de knop Visueel triggert de fallback die de
-    // probleemregel aanwijst.
+    // Een niet-verliesvrije constructie dwong het hele document vroeger naar
+    // de bronstand. Sinds #2463 wordt alleen dát stuk een bewerkbaar
+    // bronvlak — de editor opent gewoon in Visueel en de tekst eromheen
+    // blijft rijke tekst.
     final fout =
         '${'# Kop\n\n'}${List.generate(50, (i) => 'Alinea ${i + 1} met wat tekst eromheen.').join('\n\n')}\n\n<!-- verborgen -->\n\nSlot van het stuk.\n';
-    await openEditor(tester, body: fout);
+    final n = await openEditor(tester, body: fout);
 
-    await tester.tap(find.text('Visueel'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 200));
+    final quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+    expect(
+      quill.controller.document.toPlainText(),
+      contains('Slot van het stuk'),
+      reason: 'de tekst ná het blok blijft gewone visuele tekst',
+    );
 
-    // De stand blijft Bron en de probleemregel is in beeld gescrold.
-    final veld = bronVeld(tester);
-    expect(
-      veld.controller!.selection.baseOffset,
-      veld.controller!.text.indexOf('<!-- verborgen -->'),
-      reason: 'de caret wijst de probleemregel aan',
-    );
-    expect(
-      veld.scrollController!.offset,
-      greaterThan(0),
-      reason: 'de probleemregel ligt in de viewport, niet bovenaan',
-    );
+    // Het blok zelf is één bewerkbaar bronvlak met de exacte bron erin.
+    final veld = tester
+        .widgetList<TextField>(find.byType(TextField))
+        .firstWhere(
+          (v) => (v.controller?.text ?? '').contains('<!-- verborgen -->'),
+        );
+    expect(veld.controller!.text, contains('<!-- verborgen -->'));
+    expect(n.state.document!.source, fout);
   });
 }

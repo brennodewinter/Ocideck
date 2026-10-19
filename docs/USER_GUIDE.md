@@ -5424,14 +5424,14 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   diagrams drawn in place as read-only cards *(since 2026-09-02; a ` ```chart `
   fence is still shown as its source there, and is edited in Source).* On a wide enough window an **outline rail** of the document's
   headings appears beside it; clicking a heading scrolls to it. If the file
-  contains a construct the visual bridge cannot round-trip losslessly (raw HTML,
-  escaped punctuation), Visual does **not** lock you out: it keeps you
-  editing the source text directly, with the same formatting toolbar, and shows a
-  short note that this part is edited as source. The rich possibilities stay
-  within reach — OciDeck offers them and warns, rather than deciding the document
-  is read-only for you. The note is a clear bar above the writing surface: you
-  should know you are in the source, otherwise you cannot know how to get back.
-  Inside a **table** every cell reads the way it prints — `**bold**` is bold and
+  contains a construct the rich-text bridge cannot round-trip losslessly —
+  an HTML comment, an escaped punctuation mark, a loose table line — only
+  that stretch of source becomes an editable **source block** (captioned
+  *Bron/Source*): one atomic, monospace box holding the text byte-for-byte.
+  Everything around it stays normal rich text, so one `<!-- marp -->` or `\*`
+  never pushes the whole document back to Source mode *(since 2026-09; before
+  that, such a line forced the entire editor into source).* Inside a
+  **table** every cell reads the way it prints — `**bold**` is bold and
   `` `code` `` sits on a code chip. Only the cell the caret is in shows its
   Markdown, because that is what you are editing at that moment. Typing,
   Backspace and navigation keep that cell, caret and scroll position in place;

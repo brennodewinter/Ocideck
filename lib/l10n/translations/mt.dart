@@ -3894,14 +3894,6 @@ const _dutchSourceAddMt = <String, String>{
       'Tieqa ta\' ħin tuża tnejn jew tliet kolonni. Agħżel liema kolonni minn din it-tabella jsiru t-tieqa ta\' ħin. Il-kolonni l-oħra jisparixxu mit-tabella.',
   'Volgorde (marker)': 'Ordni (marka)',
   'Toelichting (optioneel)': 'Deskrizzjoni (opzjonali)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Linja {n} fiha kumenti HTML jew tags HTML. L-editur viżwali ma jistax juri dan — Modu tas-sors attivat.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Linja {n} fiha puntwazzjoni b\'escape (bhal \\*). L-editur viżwali ma jistax juriha mingħajr telf — Modu tas-sors attivat.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Linja {n} hija riga ta\' tabella mhux marbuta ma\' blokk ta\' tabella. L-editur viżwali ma jistax juriha — Modu tas-sors attivat.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Il-modu tas-sors jipproteġi markup li l-editur viżwali ma jappoġġax mingħajr telf. Aqleb għas-Sors għal dawn il-kostruzzjonijiet.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Il-logo se jistampa granulari: il-fajl huwa {breed}×{hoog} px, li f\'dan id-daqs jagħti {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4485,8 +4477,6 @@ const _dutchSourceAddMt = <String, String>{
   'Snel herstellen': 'Jirkupra malajr',
   'Taak': 'Kompitu',
   'Toegepaste versie': 'Verżjoni applikata',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'L-editjar viżwali huwa diżattivat minħabba li dan Markdown ma jistax jiġi kkonvertit mingħajr telf.',
   'Wijzigingen vergelijken': 'Qabbel il-bidliet',
   'Wijzigingen verwerpen': 'Tiċħad il-bidliet',
   'Zoek een opdracht…': 'Sib inkarigu...',

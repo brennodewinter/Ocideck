@@ -92,8 +92,7 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
   /// leesvolgorde.
   void _insertFootnote() {
     final label = nextFootnoteLabel(_controller.text);
-    if (_viewMode == _DocViewMode.visual &&
-        markdownRoundTripsVisually(_controller.text)) {
+    if (_viewMode == _DocViewMode.visual) {
       _requestVisualInsert(footnoteLabel: label);
       return;
     }

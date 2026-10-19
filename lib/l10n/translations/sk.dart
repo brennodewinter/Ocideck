@@ -3848,14 +3848,6 @@ const _dutchSourceAddSk = <String, String>{
       'Časová os používa dva alebo tri stĺpce. Vyberte, ktoré stĺpce z tejto tabuľky sa stanú časovou osou. Zvyšné stĺpce zmiznú z tabuľky.',
   'Volgorde (marker)': 'Poradie (značka)',
   'Toelichting (optioneel)': 'Popis (voliteľné)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Riadok {n} obsahuje HTML komentáre alebo HTML značky. Vizuálny editor ich nemôže zobraziť — Režim zdroja aktivovaný.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Riadok {n} obsahuje escapovanú interpunkciu (napr. \\*). Vizuálny editor ich nemôže zobraziť bez strát — Režim zdroja aktivovaný.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Riadok {n} je voľný riadok tabuľky mimo bloku tabuľky. Vizuálny editor ho nemôže zobraziť — Režim zdroja aktivovaný.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Režim zdroja chráni značky, ktoré vizuálny editor nepodporuje bez strát. Prepnite na Zdroj pre tieto konštrukcie.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo sa vytlačí zrnito: súbor má {breed}×{hoog} px, čo pri tejto veľkosti dáva {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4432,8 +4424,6 @@ const _dutchSourceAddSk = <String, String>{
   'Snel herstellen': 'Rýchlo sa zotavte',
   'Taak': 'Úloha',
   'Toegepaste versie': 'Aplikovaná verzia',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Vizuálne úpravy sú zakázané, pretože tento Markdown nie je možné konvertovať bez straty.',
   'Wijzigingen vergelijken': 'Porovnajte zmeny',
   'Wijzigingen verwerpen': 'Odmietnuť zmeny',
   'Zoek een opdracht…': 'Nájdite úlohu…',

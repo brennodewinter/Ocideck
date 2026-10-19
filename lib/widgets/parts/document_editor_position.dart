@@ -16,10 +16,6 @@ extension _DocEditorPosition on _DocumentEditorScreenState {
   /// Brengt de huidige caret van de actieve schrijfstand in beeld — na een
   /// standwissel, maar ook na een zoeksprong die de cursor verplaatste.
   void _revealAnchor() => _position.reveal();
-
-  /// Automatische terugval naar Bron bij een niet-verliesvrije constructie —
-  /// ook als die van buitenaf binnenkomt, via [_onControllerChanged].
-  void _autoFallbackToSource(String body) => _position.autoFallback(body);
 }
 
 /// Meet en springt de documentplek bij standwissels tussen Visueel en Bron
@@ -41,18 +37,6 @@ class _DocPosition {
   /// het eerste zichtbare blok — dat na de opbouw expliciet in beeld komt.
   void changeViewMode(_DocViewMode mode) {
     if (mode == _state._viewMode) return;
-    // De gebruiker kiest Visueel, maar de bron bevat een constructie die de
-    // rijke-tekstlaag niet verliesvrij aankan. In plaats van de visuele modus
-    // te openen en daarin stilletjes terug te vallen op brontekst, blijven we
-    // in de Bron-modus en wijzen we de probleemregel aan — dat is waar de
-    // gebruiker iets aan kan doen.
-    if (mode == _DocViewMode.visual) {
-      final body = _state._controller.text;
-      if (!markdownRoundTripsVisually(body)) {
-        autoFallback(body);
-        return;
-      }
-    }
     if (_state._viewMode == _DocViewMode.visual ||
         _state._viewMode == _DocViewMode.source) {
       final offset = _viewAnchor().clamp(0, _state._controller.text.length);
@@ -73,55 +57,6 @@ class _DocPosition {
         reveal();
       });
     }
-  }
-
-  /// Wissel automatisch naar de Bron-modus en plaats de cursor op de eerste
-  /// regel die de visuele editor niet aankan. Toont een snackbar die zegt
-  /// *wat* er mis is en op welke regel, en scrollt naar de probleemregel.
-  void autoFallback(String body) {
-    final hit = firstVisualLimitation(body);
-    // Direct, zonder door [changeViewMode] — we zijn al aan het verlaten.
-    _state._rebuild(() => _state._viewMode = _DocViewMode.source);
-    if (hit == null) return;
-    final lines = body.split('\n');
-    final offset = lines
-        .take(hit.lineIndex)
-        .fold<int>(0, (sum, line) => sum + line.length + 1);
-    _state._applyingExternal = true;
-    _state._controller.selection = TextSelection.collapsed(
-      offset: offset.clamp(0, body.length),
-    );
-    _state._applyingExternal = false;
-    final l10n = _state.context.l10n;
-    final lineNo = hit.lineIndex + 1;
-    final message = switch (hit.limitation) {
-      MarkdownVisualLimitation.rawHtml =>
-        l10n
-            .d(
-              'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.',
-            )
-            .replaceAll('{n}', '$lineNo'),
-      MarkdownVisualLimitation.escapedPunctuation =>
-        l10n
-            .d(
-              'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.',
-            )
-            .replaceAll('{n}', '$lineNo'),
-      MarkdownVisualLimitation.looseTableLine =>
-        l10n
-            .d(
-              'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.',
-            )
-            .replaceAll('{n}', '$lineNo'),
-    };
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!_state.mounted) return;
-      _state._editorFocus.requestFocus();
-      reveal();
-      ScaffoldMessenger.maybeOf(
-        _state.context,
-      )?.showSnackBar(SnackBar(content: Text(message)));
-    });
   }
 
   /// De plek die de gebruiker in beeld heeft, als offset in de bron: de caret

@@ -3835,14 +3835,6 @@ const _dutchSourceAddCs = <String, String>{
       'Časová osa používá dva nebo tři sloupce. Vyberte, které sloupce z této tabulky se stanou časovou osou. Zbývající sloupce z tabulky zmizí.',
   'Volgorde (marker)': 'Pořadí (značka)',
   'Toelichting (optioneel)': 'Popis (volitelné)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Řádek {n} obsahuje HTML komentáře nebo HTML značky. Vizuální editor to nemůže zobrazit — Režim zdroje aktivován.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Řádek {n} obsahuje escapovanou interpunkci (např. \\*). Vizuální editor to nemůže zobrazit bez ztrát — Režim zdroje aktivován.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Řádek {n} je volný řádek tabulky mimo blok tabulky. Vizuální editor ho nemůže zobrazit — Režim zdroje aktivován.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Režim zdroje chrání značky, které vizuální editor nepodporuje bez ztrát. Přepněte na Zdroj pro tyto konstrukce.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo se vytiskne zrnitě: soubor má {breed}×{hoog} px, což při této velikosti dává {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4421,8 +4413,6 @@ const _dutchSourceAddCs = <String, String>{
   'Snel herstellen': 'Rychle se zotavte',
   'Taak': 'Úkol',
   'Toegepaste versie': 'Aplikovaná verze',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Vizuální úpravy jsou zakázány, protože tento Markdown nelze převést bezeztrátově.',
   'Wijzigingen vergelijken': 'Porovnejte změny',
   'Wijzigingen verwerpen': 'Odmítnout změny',
   'Zoek een opdracht…': 'Najít úkol…',

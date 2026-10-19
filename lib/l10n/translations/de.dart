@@ -2929,14 +2929,6 @@ const _dutchSourceAddDe = {
       'Eine Zeitleiste verwendet zwei oder drei Spalten. Wählen Sie, welche Spalten dieser Tabelle die Zeitleiste werden. Die restlichen Spalten verschwinden aus der Tabelle.',
   'Volgorde (marker)': 'Reihenfolge (Markierung)',
   'Toelichting (optioneel)': 'Beschreibung (optional)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Zeile {n} enthält HTML-Kommentare oder HTML-Tags. Der visuelle Editor kann dies nicht anzeigen — Quellmodus aktiviert.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Zeile {n} enthält escapte Interpunktion (wie \\*). Der visuelle Editor kann dies nicht verlustfrei anzeigen — Quellmodus aktiviert.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Zeile {n} ist eine lose Tabellenzeile außerhalb eines Tabellenblocks. Der visuelle Editor kann sie nicht anzeigen — Quellmodus aktiviert.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Der Quellmodus schützt Markup, das der visuelle Editor nicht verlustfrei unterstützt. Wechseln Sie für diese Konstrukte in die Quelle.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Das Logo wird körnig gedruckt: die Datei ist {breed}×{hoog} px und ergibt in dieser Größe {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -3521,8 +3513,6 @@ const _dutchSourceAddDe = {
   'Snel herstellen': 'Erholen Sie sich schnell',
   'Taak': 'Aufgabe',
   'Toegepaste versie': 'Angewandte Version',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Die visuelle Bearbeitung ist deaktiviert, da dieser Markdown nicht verlustfrei konvertiert werden kann.',
   'Wijzigingen vergelijken': 'Vergleichen Sie Änderungen',
   'Wijzigingen verwerpen': 'Änderungen ablehnen',
   'Zoek een opdracht…': 'Finden Sie eine Aufgabe…',

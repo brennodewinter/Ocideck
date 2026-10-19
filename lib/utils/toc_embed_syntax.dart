@@ -7,7 +7,7 @@ import '../services/table_of_contents.dart';
 ///
 /// De marker is een HTML-commentaar, en rauwe HTML was tot dusver een reden om
 /// de héle visuele modus te laten terugvallen op brontekst
-/// ([markdownVisualLimitations]). Dat is voor precies deze regel onnodig: hij
+/// (`sourceFragmentRanges`). Dat is voor precies deze regel onnodig: hij
 /// draagt geen inhoud, alleen een plek. Door hem — net als de GFM-tabel — als
 /// blok-embed door de heen-en-terugweg te dragen, blijft de visuele modus
 /// visueel en komt de marker er byte-getrouw weer uit.
