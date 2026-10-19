@@ -2939,14 +2939,6 @@ const _dutchSourceAddFr = {
       'Une chronologie utilise deux ou trois colonnes. Choisissez quelles colonnes de ce tableau deviennent la chronologie. Les colonnes restantes disparaissent du tableau.',
   'Volgorde (marker)': 'Ordre (marqueur)',
   'Toelichting (optioneel)': 'Description (facultatif)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'La ligne {n} contient des commentaires HTML ou des balises HTML. L\'éditeur visuel ne peut pas l\'afficher — Mode source activé.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'La ligne {n} contient une ponctuation échappée (comme \\*). L\'éditeur visuel ne peut pas l\'afficher sans perte — Mode source activé.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'La ligne {n} est une ligne de tableau lâche en dehors d\'un bloc de tableau. L\'éditeur visuel ne peut pas l\'afficher — Mode source activé.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Le mode source protège le balisage que l\'éditeur visuel ne prend pas en charge sans perte. Passez à Source pour ces constructions.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Le logo sortira granuleux à l\'impression : le fichier fait {breed}×{hoog} px, soit {dpi} dpi à cette taille.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -3536,8 +3528,6 @@ const _dutchSourceAddFr = {
   'Snel herstellen': 'Récupérez rapidement',
   'Taak': 'Tâche',
   'Toegepaste versie': 'Version appliquée',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'L\'édition visuelle est désactivée car ce Markdown ne peut pas être converti sans perte.',
   'Wijzigingen vergelijken': 'Comparer les modifications',
   'Wijzigingen verwerpen': 'Rejeter les modifications',
   'Zoek een opdracht…': 'Trouver une mission…',

@@ -2899,14 +2899,6 @@ const _dutchSourceAddFy = {
       'In tiidline brûkt twa of trije kolommen. Kiz hokker kolommen út dizze tabel de tiidline wurde. De oare kolommen ferdwine út de tabel.',
   'Volgorde (marker)': 'Folchoarder (markearring)',
   'Toelichting (optioneel)': 'Taljochting (opsjoneel)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Rigel {n} befettet HTML-kommintaren of HTML-tags. De fisuele editor kin dit net sjen litte — Boarnemodus is aktivearre.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Rigel {n} befettet ûntsnapte lêzestekens (lykas \\*). De fisuele editor kin dit net ferliesfrij sjen litte — Boarnemodus is aktivearre.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Rigel {n} is in losse tabelrigel bûten in tabelblok. De fisuele editor kin dit net sjen litte — Boarnemodus is aktivearre.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Boarnemodus beskermet opmaak dy\'t de fisuele editor net ferliesfrij stippet. Skeakelje nei Boarne foar dizze konstruksjes.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'It logo komt kerrelich út de printer: it bestân is {breed}×{hoog} px en komt op dizze maat út op {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -3487,8 +3479,6 @@ const _dutchSourceAddFy = {
   'Snel herstellen': 'Herstellen fluch',
   'Taak': 'Taak',
   'Toegepaste versie': 'Applied ferzje',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Fisuele bewurking is útskeakele om\'t dizze Markdown kin net sûnder ferlies konvertearre wurde.',
   'Wijzigingen vergelijken': 'Ferlykje feroarings',
   'Wijzigingen verwerpen': 'Feroarje feroarings',
   'Zoek een opdracht…': 'Sykje in opdracht ...',

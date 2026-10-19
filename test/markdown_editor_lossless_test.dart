@@ -59,9 +59,10 @@ class _HostState extends State<_Host> {
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
-  // De heen-en-terugweg door de rijke-tekstlaag is niet verliesvrij voor de
-  // constructies die de brug (nog) niet aankan: die vallen terug op de
-  // bronstand met de beschermende hint. Wie alleen kíjkt, houdt zijn tekst.
+  // Sinds #2463 is er geen bronstand-terugval meer: een constructie die de
+  // rijke-tekstlaag niet verliesvrij draagt, wordt één bewerkbaar bronblok
+  // (`x-embed-source-fragment`) midden in de visuele editor. Wie alleen kíjkt,
+  // houdt zijn tekst byte-getrouw.
   for (final geval in const [
     ('backslash-ontsnappingen', r'Prijs is 5 \* 3, pad C:\\temp'),
   ]) {
@@ -74,8 +75,10 @@ void main() {
       await tester.pumpWidget(_testApp(_Host(controller: controller)));
       await tester.tap(find.text('wissel'));
       await tester.pumpAndSettle();
-      expect(find.byType(QuillEditor), findsNothing);
-      expect(find.textContaining('Bronmodus beschermt opmaak'), findsOneWidget);
+      // De visuele editor blijft: het fragment is een bewerkbaar bronvlak,
+      // geen documentbrede terugval op bronmodus.
+      expect(find.byType(QuillEditor), findsOneWidget);
+      expect(find.widgetWithText(TextField, geval.$2), findsOneWidget);
       await tester.tap(find.text('wissel'));
       await tester.pumpAndSettle();
 

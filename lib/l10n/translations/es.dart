@@ -2915,14 +2915,6 @@ const _dutchSourceAddEs = {
       'Una cronología usa dos o tres columnas. Elige qué columnas de esta tabla forman la cronología. Las columnas restantes desaparecen de la tabla.',
   'Volgorde (marker)': 'Orden (marcador)',
   'Toelichting (optioneel)': 'Descripción (opcional)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'La línea {n} contiene comentarios HTML o etiquetas HTML. El editor visual no puede mostrarlo — Modo fuente activado.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'La línea {n} contiene puntuación escapada (como \\*). El editor visual no puede mostrarlo sin pérdida — Modo fuente activado.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'La línea {n} es una fila de tabla suelta fuera de un bloque de tabla. El editor visual no puede mostrarla — Modo fuente activado.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'El modo fuente protege el marcado que el editor visual no admite sin pérdida. Cambie a Fuente para estas construcciones.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'El logotipo saldrá granulado en la impresión: el archivo es de {breed}×{hoog} px, lo que da {dpi} ppp a este tamaño.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -3506,8 +3498,6 @@ const _dutchSourceAddEs = {
   'Snel herstellen': 'Recuperarse rápidamente',
   'Taak': 'Tarea',
   'Toegepaste versie': 'Versión aplicada',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'La edición visual está deshabilitada porque este Markdown no se puede convertir sin pérdidas.',
   'Wijzigingen vergelijken': 'Comparar cambios',
   'Wijzigingen verwerpen': 'Rechazar cambios',
   'Zoek een opdracht…': 'Encuentra una tarea...',

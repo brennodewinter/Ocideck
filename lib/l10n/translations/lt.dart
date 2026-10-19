@@ -3851,14 +3851,6 @@ const _dutchSourceAddLt = <String, String>{
       'Laiko juosta naudoja du ar tris stulpelius. Pasirinkite, kurie šios lentelės stulpeliai tampa laiko juosta. Likę stulpeliai dingsta iš lentelės.',
   'Volgorde (marker)': 'Eilė (žymeklis)',
   'Toelichting (optioneel)': 'Aprašymas (neprivaloma)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Eilutė {n} turi HTML komentarus ar HTML žymes. Vaizdinis redaktoris negali to rodyti — Šaltinio režimas aktyvuotas.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Eilutė {n} turi escape\'intą skyrybos ženklus (pvz. \\*). Vaizdinis redaktoris negali to rodyti be nuostolių — Šaltinio režimas aktyvuotas.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Eilutė {n} yra laisva lentelės eilutė už lentelės bloko. Vaizdinis redaktoris negali jos rodyti — Šaltinio režimas aktyvuotas.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Šaltinio režimas saugo žymėjimą, kurio vaizdinis redaktoris nepalaiko be nuostolių. Pereikite prie Šaltinio šioms konstrukcijoms.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logotipas bus išspausdintas grūdėtas: failas yra {breed}×{hoog} px, o šiuo dydžiu tai duoda {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4437,8 +4429,6 @@ const _dutchSourceAddLt = <String, String>{
   'Snel herstellen': 'Greitai atsigauti',
   'Taak': 'Užduotis',
   'Toegepaste versie': 'Taikoma versija',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Vaizdinis redagavimas išjungtas, nes šio žymėjimo negalima konvertuoti be nuostolių.',
   'Wijzigingen vergelijken': 'Palyginkite pakeitimus',
   'Wijzigingen verwerpen': 'Atmesti pakeitimus',
   'Zoek een opdracht…': 'Rasti užduotį…',

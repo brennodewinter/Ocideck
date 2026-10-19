@@ -672,8 +672,9 @@ brought up to date**, and an unknown thing is *preserved on write*, not stripped
 HTML comments are invisible to *other* Markdown readers. They are **not** invisible
 to OciDeck's document reader or visual editor, which today recognise only `toc`,
 `timeline` and the pentest markers: any other `<!--` line renders as a paragraph in
-the reader and switches the visual editor off (`markdownVisualLimitations` reports
-`rawHtml`). A form block is therefore a **new document block** and takes the full
+the reader and becomes a local source block in the visual editor (the
+limitation scan flags `rawHtml`; since #2463 such a stretch travels as an
+`x-embed-source-fragment` rather than switching the whole document off). A form block is therefore a **new document block** and takes the full
 chain of [`PENTEST_DOCUMENT.md`](PENTEST_DOCUMENT.md) §5.4, including its §5.5
 lesson that a block must travel through the visual editor **atomically** — exempting
 only the marker lines would let `DeltaToMarkdown` escape the answer text and lose it

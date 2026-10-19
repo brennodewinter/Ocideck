@@ -121,49 +121,42 @@ void main() {
   });
 
   testWidgets(
-    'Visueel: rauwe HTML schakelt automatisch naar Bron-modus met uitleg',
+    'Visueel: HTML-commentaar wordt een bronblok — de rest blijft visueel',
     (tester) async {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
       addTearDown(() => tester.binding.setSurfaceSize(null));
 
-      // Sinds #1777 round-trippen HTML-*tags* als platte tekst en zijn ze geen
-      // beperking meer; HTML-*commentaar* (`<!-- … -->`) wel — dat is metadata
-      // die in de bron hoort. Deze test gebruikt dus een comment, niet een tag.
+      // Sinds #2463 is er geen documentbrede terugval meer: een regel die de
+      // rijke-tekstlaag niet verliesvrij draagt (HTML-commentaar) wordt één
+      // atomaire embed met de bron verbatim — de tekst eromheen is gewoon
+      // visueel te schrijven.
       final n = DocumentNotifier()
         ..loadDocument(
           MarkdownDocument.parse('# Kop\n\n<!-- rauwe html -->\n\nTekst.'),
         );
       await tester.pumpWidget(harness(n));
-      // De auto-fallback gebeurt ná de eerste frame. Hier stonden twee kale
-      // `pump()`s — een gok op hoeveel frames dat kost, en die gok viel op
-      // 24/25-08-2026 vijf keer om op de linux-gate (taken 3421, 3433, 3439,
-      // 3448, 3480): de terugval was nog niet gebeurd en de visuele editor
-      // stond er nog. Wacht op de terugval zelf.
-      await pumpUntil(
-        tester,
-        () => find.byType(MarkdownNotesEditor).evaluate().isEmpty,
-        reason: 'de terugval naar Bron-modus bleef uit',
-      );
-      // Een constructie die de brug niet verliesvrij aankan, valt nu expliciet
-      // terug op de Bron-modus (bron + live weergave) — niet stilletjes op
-      // brontekst in de visuele modus.
-      expect(find.byType(MarkdownNotesEditor), findsNothing);
-      expect(find.byType(QuillEditor), findsNothing);
-      // De Bron-modus toont de live weergave naast de bron.
-      expect(find.byType(DocumentMarkdownView), findsOneWidget);
-      // De bron is bewerkbaar.
-      expect(find.byType(TextField), findsWidgets);
-      // De opmaakbalk van de bron-modus blijft binnen bereik.
-      expect(find.byTooltip('Vet'), findsOneWidget);
-      expect(find.byTooltip('Kop'), findsOneWidget);
+      await tester.pumpAndSettle();
 
-      // En het is écht bewerkbaar: typen stroomt live naar de notifier.
-      await tester.enterText(
-        find.byType(TextField).first,
-        '# Kop\n\n<!-- rauwe html -->\n\nGewijzigd.',
+      // De visuele editor staat er gewoon — geen automatische bronmodus.
+      expect(find.byType(MarkdownNotesEditor), findsOneWidget);
+      expect(find.byType(QuillEditor), findsOneWidget);
+      // Het commentaar is één bewerkbaar bronvlak met de exacte bron erin.
+      expect(
+        find.widgetWithText(TextField, '<!-- rauwe html -->'),
+        findsOneWidget,
       );
-      await tester.pump();
-      expect(n.currentState.document!.source, contains('Gewijzigd.'));
+
+      // En het bronvlak is écht bewerkbaar: typen stroomt terug in de bron,
+      // zonder de tekst eromheen aan te raken.
+      await tester.enterText(
+        find.widgetWithText(TextField, '<!-- rauwe html -->'),
+        '<!-- aangepast -->',
+      );
+      await tester.pumpAndSettle();
+      expect(
+        n.currentState.document!.source,
+        '# Kop\n<!-- aangepast -->\n\nTekst.',
+      );
       expect(n.currentState.isDirty, isTrue);
     },
   );

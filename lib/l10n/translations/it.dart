@@ -2923,14 +2923,6 @@ const _dutchSourceAddIt = {
       'Una timeline usa due o tre colonne. Scegli quali colonne di questa tabella diventano la timeline. Le colonne restanti scompariranno dalla tabella.',
   'Volgorde (marker)': 'Ordine (marcatore)',
   'Toelichting (optioneel)': 'Descrizione (opzionale)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Riga {n} contiene commenti HTML o tag HTML. L\'editor visuale non può visualizzarli — Modalità sorgente attivata.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Riga {n} contiene punteggiatura con escape (come \\*). L\'editor visuale non può visualizzarla senza perdite — Modalità sorgente attivata.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Riga {n} è una riga di tabella sciolta fuori da un blocco tabella. L\'editor visuale non può visualizzarla — Modalità sorgente attivata.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'La modalità sorgente protegge il markup che l\'editor visuale non supporta senza perdite. Passa a Sorgente per questi costrutti.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Il logo verrà stampato sgranato: il file è {breed}×{hoog} px, che a questa dimensione corrisponde a {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -3513,8 +3505,6 @@ const _dutchSourceAddIt = {
   'Snel herstellen': 'Recupera rapidamente',
   'Taak': 'Compito',
   'Toegepaste versie': 'Versione applicata',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'La modifica visiva è disabilitata perché questo Markdown non può essere convertito senza perdita di dati.',
   'Wijzigingen vergelijken': 'Confronta i cambiamenti',
   'Wijzigingen verwerpen': 'Rifiutare le modifiche',
   'Zoek een opdracht…': 'Trova un compito...',

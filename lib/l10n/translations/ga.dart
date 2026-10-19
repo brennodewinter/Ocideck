@@ -3913,14 +3913,6 @@ const _dutchSourceAddGa = <String, String>{
       'Úsáideann amlíne dhá nó trí cholún. Roghnaigh cé na colúin ón tábla seo a éireoidh in amlíne. Imeoidh na colúin eile den tábla.',
   'Volgorde (marker)': 'Ord (marcóir)',
   'Toelichting (optioneel)': 'Cur síos (roghnach)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Tá nótaí HTML nó clibeanna HTML ar líne {n}. Ní féidir leis an eagarthóir amhairc é seo a thaispeáint — Gníomhachtaíodh mód foinse.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Tá poncaíocht éalaithe ar líne {n} (mar \\*). Ní féidir leis an eagarthóir amhairc é seo a thaispeáint gan caillteanas — Gníomhachtaíodh mód foinse.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Is líne tábla scaoilte lasmuigh de bhloc tábla é líne {n}. Ní féidir leis an eagarthóir amhairc é seo a thaispeáint — Gníomhachtaíodh mód foinse.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Cosnaíonn mód foinse marcáil nach dtacaíonn an t-eagarthóir amhairc leo gan caillteanas. Athraigh go Foinse do na struchtúir seo.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Priontálfar an lógó gránach: is é {breed}×{hoog} px atá sa chomhad, rud a thugann {dpi} dpi ag an méid seo.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4507,8 +4499,6 @@ const _dutchSourceAddGa = <String, String>{
   'Snel herstellen': 'Ghnóthú go tapa',
   'Taak': 'Tasc',
   'Toegepaste versie': 'Leagan feidhmithe',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Tá an eagarthóireacht amhairc díchumasaithe toisc nach féidir an Markdown seo a thiontú gan chailliúint.',
   'Wijzigingen vergelijken': 'Déan comparáid idir athruithe',
   'Wijzigingen verwerpen': 'Diúltaigh athruithe',
   'Zoek een opdracht…': 'Aimsigh tasc…',

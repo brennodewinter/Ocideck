@@ -3913,14 +3913,6 @@ const _dutchSourceAddEl = <String, String>{
       'Ένα χρονοδιάγραμμα χρησιμοποιεί δύο ή τρεις στήλες. Επιλέξτε ποιες στήλες αυτού του πίνακα θα γίνουν το χρονοδιάγραμμα. Οι υπόλοιπες στήλες θα εξαφανιστούν από τον πίνακα.',
   'Volgorde (marker)': 'Σειρά (δείκτης)',
   'Toelichting (optioneel)': 'Περιγραφή (προαιρετικά)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Η γραμμή {n} περιέχει σχόλια HTML ή ετικέτες HTML. Ο οπτικός επεξεργαστής δεν μπορεί να τα εμφανίσει — Ενεργοποιήθηκε η λειτουργία πηγής.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Η γραμμή {n} περιέχει χαρακτήρες διαφυγής (όπως \\*). Ο οπτικός επεξεργαστής δεν μπορεί να τους εμφανίσει χωρίς απώλεια — Ενεργοποιήθηκε η λειτουργία πηγής.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Η γραμμή {n} είναι μια χαλαρή γραμμή πίνακα εκτός μπλοκ πίνακα. Ο οπτικός επεξεργαστής δεν μπορεί να την εμφανίσει — Ενεργοποιήθηκε η λειτουργία πηγής.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Η λειτουργία πηγής προστατεύει σήμανση που ο οπτικός επεξεργαστής δεν υποστηρίζει χωρίς απώλεια. Μεταβείτε στην Πηγή για αυτές τις κατασκευές.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Το λογότυπο θα εκτυπωθεί κοκκώδες: το αρχείο είναι {breed}×{hoog} px, δηλαδή {dpi} dpi σε αυτό το μέγεθος.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4507,8 +4499,6 @@ const _dutchSourceAddEl = <String, String>{
   'Snel herstellen': 'Ανάρρωση γρήγορα',
   'Taak': 'Εργασία',
   'Toegepaste versie': 'Εφαρμοσμένη έκδοση',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Η οπτική επεξεργασία είναι απενεργοποιημένη επειδή αυτό το Markdown δεν μπορεί να μετατραπεί χωρίς απώλειες.',
   'Wijzigingen vergelijken': 'Συγκρίνετε τις αλλαγές',
   'Wijzigingen verwerpen': 'Απόρριψη αλλαγών',
   'Zoek een opdracht…': 'Βρείτε μια εργασία…',

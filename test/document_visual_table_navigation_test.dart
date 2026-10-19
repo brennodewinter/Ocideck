@@ -66,7 +66,7 @@ void main() {
 
     // Nog steeds de rijke-tekstweergave, niet de brontekst-terugval.
     expect(find.byType(QuillEditor), findsOneWidget);
-    expect(markdownVisualLimitations(n.currentState.document!.body), isEmpty);
+    expect(sourceFragmentRanges(n.currentState.document!.body), isEmpty);
     // En de cellen staan er nog zoals ze stonden: geen documenttekst die in een
     // cel is geplakt, geen `<br>`.
     expect(n.currentState.document!.source, bron);

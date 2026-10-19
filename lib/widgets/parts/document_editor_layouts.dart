@@ -92,9 +92,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     TextSelection? visualCaret,
     TextSelection? sourceCaret,
   }) {
-    final quill =
-        _viewMode == _DocViewMode.visual &&
-            markdownRoundTripsVisually(_controller.text)
+    final quill = _viewMode == _DocViewMode.visual
         ? _visualEditorKey.currentState?.widget.controller
         : null;
     if (_pasteInlineAtVisualCaret(
@@ -157,14 +155,15 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   /// gedeelde [MarkdownNotesEditor] past zich aan de bron aan: gaat die verliesvrij
   /// door de WYSIWYG-laag (koppen, opmaak, lijsten, links én tabellen-als-embed),
   /// dan schrijf je in de rijke-tekstweergave. Bevat de bron een constructie die
-  /// de brug nog niet verliesvrij aankan (rauwe HTML, voetnoten, ontsnapte
-  /// leestekens), dan valt de editor terug op de **bewerkbare** brontekst mét de
-  /// volledige opmaakknoppenbalk en een waarschuwingsregel ([markdownSourceModeHint]).
+  /// de brug nog niet verliesvrij aankan (rauwe HTML, ontsnapte leestekens, een
+  /// losse tabelregel), dan wordt alleen dát stuk een bewerkbaar bronblok
+  /// (`EmbeddableSourceFragment`) — de rest blijft rijke tekst.
   ///
-  /// Bewust géén read-only leesweergave meer: OciDeck kiest niet vóór de gebruiker
-  /// dat een document niet te bewerken valt. De rijke mogelijkheden (opmaakbalk +
-  /// het invoeg-palet in [_DocEditorToolbar]) blijven altijd binnen bereik; alleen
-  /// de waarschuwing komt erbij. Wie liever de gerenderde weergave ernaast heeft,
+  /// Bewust géén read-only leesweergave en géén documentbrede bronterugval
+  /// meer: OciDeck kiest niet vóór de gebruiker dat een document niet visueel
+  /// te bewerken valt. De rijke mogelijkheden (opmaakbalk + het invoeg-palet
+  /// in [_DocEditorToolbar]) blijven altijd binnen bereik. Wie liever de
+  /// gerenderde weergave ernaast heeft,
   /// schakelt naar Bron (broneditor + live weergave, grafiek/tabel met dubbelklik).
   Widget _visualLayout(
     ThemeData theme,

@@ -3848,14 +3848,6 @@ const _dutchSourceAddFi = <String, String>{
       'Aikajana käyttää kahta tai kolmea saraketta. Valitse, mitkä sarakkeet tästä taulukosta tulevat aikajanaksi. Jäljellä olevat sarakkeet katoavat taulukosta.',
   'Volgorde (marker)': 'Järjestys (merkki)',
   'Toelichting (optioneel)': 'Kuvaus (valinnainen)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Rivi {n} sisältää HTML-kommentteja tai HTML-tageja. Visuaalinen editori ei voi näyttää tätä — Lähdetila aktivoitu.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Rivi {n} sisältää escapeutua välimerkkejä (kuten \\*). Visuaalinen editori ei voi näyttää tätä häviöttömästi — Lähdetila aktivoitu.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Rivi {n} on irrallinen taulurivi taululohkon ulkopuolella. Visuaalinen editori ei voi näyttää tätä — Lähdetila aktivoitu.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Lähdetila suojaa merkintöjä, joita visuaalinen editori ei tue häviöttömästi. Vaihda Lähteeseen näille rakenteille.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo tulostuu rakeisena: tiedosto on {breed}×{hoog} px, mikä tässä koossa vastaa {dpi} dpi:tä.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4431,8 +4423,6 @@ const _dutchSourceAddFi = <String, String>{
   'Snel herstellen': 'Toivu nopeasti',
   'Taak': 'Tehtävä',
   'Toegepaste versie': 'Sovellettu versio',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Visuaalinen muokkaus on poistettu käytöstä, koska tätä merkintää ei voida muuntaa häviöttömästi.',
   'Wijzigingen vergelijken': 'Vertaa muutoksia',
   'Wijzigingen verwerpen': 'Hylkää muutokset',
   'Zoek een opdracht…': 'Etsi tehtävä…',

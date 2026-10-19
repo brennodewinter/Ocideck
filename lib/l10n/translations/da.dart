@@ -3843,14 +3843,6 @@ const _dutchSourceAddDa = <String, String>{
       'En tidslinje bruger to eller tre kolonner. Vælg hvilke kolonner fra denne tabel der bliver tidslinjen. De resterende kolonner forsvinder fra tabellen.',
   'Volgorde (marker)': 'Rækkefølge (markør)',
   'Toelichting (optioneel)': 'Beskrivelse (valgfri)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Linje {n} indeholder HTML-kommentarer eller HTML-tags. Den visuelle editor kan ikke vise dette — Kildetilstand aktiveret.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Linje {n} indeholder escaped tegnsætning (som \\*). Den visuelle editor kan ikke vise dette tabsfrit — Kildetilstand aktiveret.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Linje {n} er en løs tabelrække uden for et tabelblok. Den visuelle editor kan ikke vise dette — Kildetilstand aktiveret.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Kildetilstand beskytter markup som den visuelle editor ikke understøtter tabsfrit. Skift til Kilde for disse konstruktioner.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logoet bliver kornet i print: filen er {breed}×{hoog} px, hvilket giver {dpi} dpi i denne størrelse.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4431,8 +4423,6 @@ const _dutchSourceAddDa = <String, String>{
   'Snel herstellen': 'Kom sig hurtigt',
   'Taak': 'Opgave',
   'Toegepaste versie': 'Anvendt version',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Visuel redigering er deaktiveret, fordi denne Markdown ikke kan konverteres tabsfrit.',
   'Wijzigingen vergelijken': 'Sammenlign ændringer',
   'Wijzigingen verwerpen': 'Afvis ændringer',
   'Zoek een opdracht…': 'Find en opgave...',

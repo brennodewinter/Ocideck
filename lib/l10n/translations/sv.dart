@@ -3845,14 +3845,6 @@ const _dutchSourceAddSv = <String, String>{
       'En tidslinje använder två eller tre kolumner. Välj vilka kolumner från denna tabell som blir tidslinjen. De återstående kolumnerna försvinner från tabellen.',
   'Volgorde (marker)': 'Ordning (markör)',
   'Toelichting (optioneel)': 'Beskrivning (valfri)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Rad {n} innehåller HTML-kommentarer eller HTML-taggar. Den visuella editorn kan inte visa detta — Källläge aktiverat.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Rad {n} innehåller escaped skiljetecken (som \\*). Den visuella editorn kan inte visa detta förlustfritt — Källläge aktiverat.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Rad {n} är en löst tabellrad utanför ett tabellblock. Den visuella editorn kan inte visa detta — Källläge aktiverat.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Källläge skyddar markup som den visuella editorn inte stöder förlustfritt. Växla till Källa för dessa konstruktioner.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logotypen blir kornig i tryck: filen är {breed}×{hoog} px, vilket ger {dpi} dpi i den här storleken.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4432,8 +4424,6 @@ const _dutchSourceAddSv = <String, String>{
   'Snel herstellen': 'Återhämta dig snabbt',
   'Taak': 'Uppgift',
   'Toegepaste versie': 'Tillämpad version',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Visuell redigering är inaktiverad eftersom denna Markdown inte kan konverteras förlustfritt.',
   'Wijzigingen vergelijken': 'Jämför förändringar',
   'Wijzigingen verwerpen': 'Avvisa ändringar',
   'Zoek een opdracht…': 'Hitta ett uppdrag...',

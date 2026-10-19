@@ -20,10 +20,15 @@ final _inlineCode = RegExp(r'`[^`\n]+`');
 // volle tag-reeks. Ze vroeger als `rawHtml` flaggen trapte een privacy-
 // redactieconventie als `<persoon1>` de visuele modus uit (#1777).
 final _rawHtml = RegExp(r'<!--');
-final _escapedPunctuation = RegExp(r'\\[\\`*{}\[\]()#+.!_>-]');
+// Volledige CommonMark-interpunctieklasse — niet alleen de tekens die
+// `DeltaToMarkdown` terug escapet. Ook `\;`, `\?`, `\~`, `\|` e.d. verdwijnen
+// stil in de codec (de parser haalt de backslash weg, de schrijver zet hem
+// nooit terug): precies de stille bronwijziging die een bronfragment juist
+// moet voorkomen.
+final _escapedPunctuation = RegExp(r'\\[!-/:-@\[-`{-~]');
 
 /// Constructs that the current rich-text bridge cannot round-trip without
-/// changing the author's Markdown source.
+/// changing the author's Markdown source **als gewone tekst**.
 ///
 /// A GFM table is deliberately **absent** here: it round-trips losslessly as an
 /// `x-embed-table` block embed (see `MarkdownQuillCodec` / `TableEmbedBuilder`),
@@ -31,12 +36,13 @@ final _escapedPunctuation = RegExp(r'\\[\\`*{}\[\]()#+.!_>-]');
 /// fall back to raw Markdown. Dat geldt voor de tabel als geheel: zijn regels
 /// worden hieronder overgeslagen zolang ze bij zo'n blok horen — zie
 /// [opensAtomicMarkdownTable] — en een tabelregel die er *niet* bij hoort levert
-/// juist [MarkdownVisualLimitation.looseTableLine] op.
+/// juist een hit op.
 ///
 /// Om dezelfde reden is de inhoudsopgave-marker `<!-- toc -->` géén `rawHtml`:
 /// hij reist als `x-embed-toc`-blok mee (zie `MarkdownQuillCodec` /
 /// `TocEmbedBuilder`). Zonder die uitzondering wierp één ingevoegde
-/// inhoudsopgave het hele document terug in de brontekst.
+/// inhoudsopgave het hele document terug in de brontekst. Hetzelfde geldt voor
+/// de `<!-- spacer -->`-marker (`x-embed-spacer`, #2464).
 ///
 /// En sinds de pentestgrammatica geldt dezelfde uitzondering voor de bereiken
 /// die als één **atomaire embed** reizen (PENTEST_DOCUMENT.md §5.5). De regel is
@@ -55,10 +61,19 @@ final _escapedPunctuation = RegExp(r'\\[\\`*{}\[\]()#+.!_>-]');
 /// `FootnoteDefSyntax`). Tot die embeds er waren, was één voetnoot genoeg om de
 /// hele visuele modus op brontekst terug te werpen — precies bij de functie
 /// waarvoor je hem het hardst nodig hebt.
-enum MarkdownVisualLimitation { rawHtml, escapedPunctuation, looseTableLine }
+///
+/// Sinds #2463 is wat rest óók geen documentbrede blokkade meer: de regels
+/// die deze pas aanwijst — HTML-commentaar, ontsnapte leestekens, losse
+/// tabelregels — reizen als `x-embed-source-fragment`: een lokaal bronblok
+/// midden in de visuele editor (zie [sourceFragmentRanges] en
+/// `EmbeddableSourceFragment`).
 
-Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
-  final limitations = <MarkdownVisualLimitation>{};
+/// De regelnummers (0-gebaseerd) die de rijke-tekstlaag niet verliesvrij
+/// als gewone tekst kan dragen — de detector achter [sourceFragmentRanges].
+/// Bewust geen echte Markdown-parse: de pas draait per toetsaanslag over de
+/// hele documenttekst.
+Set<int> _limitationLines(String markdown) {
+  final hits = <int>{};
   final lines = markdown.split('\n');
   // Eén extra lineaire pas, dezelfde orde als de lus hieronder. Bewust geen
   // echte Markdown-parse: deze functie draait per toetsaanslag over de hele
@@ -105,7 +120,7 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
     // antwoord; stil doorgaan sloopt de tabel (zoals bij een kop en een
     // scheidingsrij die niet even breed zijn).
     if (isMarkdownTableLine(line)) {
-      limitations.add(MarkdownVisualLimitation.looseTableLine);
+      hits.add(index);
       continue;
     }
     var supportedTimeline = false;
@@ -124,94 +139,96 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
         !spacerMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&
         _rawHtml.hasMatch(lineWithoutCode)) {
-      limitations.add(MarkdownVisualLimitation.rawHtml);
+      hits.add(index);
     }
     if (_escapedPunctuation.hasMatch(lineWithoutCode)) {
-      limitations.add(MarkdownVisualLimitation.escapedPunctuation);
+      hits.add(index);
     }
   }
-  return limitations;
+  return hits;
 }
 
-/// Of [markdown] in zijn geheel door de rijke-tekstlaag kan — oftewel: of de
-/// visuele stand echt de WYSIWYG-editor toont in plaats van de brontekst-
-/// terugval. De aanroeper die moet weten *waar* de tekst leeft (Quill of de
-/// bron-controller) heeft aan die ja/nee genoeg.
-bool markdownRoundTripsVisually(String markdown) =>
-    markdownVisualLimitations(markdown).isEmpty;
+/// Een regel die een eigen blok opent en daarom een fragmentgrens is: bij
+/// een uitbreiding over zo'n regel zou het fragment een heel ander blok
+/// meeslepen dat op zichzelf wél verliesvrij reist (een kop, een atomaire
+/// tabel, een voetnootdefinitie, een marker). Binnen een brok blijft alles
+/// bij elkaar — een lijstregel of een vervolgregel is géén grens.
+bool _isFragmentBoundary(
+  String line,
+  String? next,
+  bool Function(int) isAtomicLine,
+  int index,
+) {
+  if (line.trim().isEmpty) return true;
+  if (isAtomicLine(index)) return true;
+  if (RegExp(r'^\s*(```|~~~)').hasMatch(line)) return true;
+  if (RegExp(r'^\s{0,3}#{1,6}\s').hasMatch(line)) return true;
+  if (RegExp(r'^\s{0,3}(-{3,}|\*{3,}|_{3,})\s*$').hasMatch(line)) return true;
+  if (RegExp(r'^\s{0,3}\[\^[^\]]+\]:').hasMatch(line)) return true;
+  if (tocMarkerLinePattern.hasMatch(line) ||
+      spacerMarkerLinePattern.hasMatch(line) ||
+      line.trim() == documentTimelineMarker) {
+    return true;
+  }
+  return opensAtomicMarkdownTable(line, next);
+}
 
-/// De eerste regel die een visuele beperking veroorzaakt, met het soort
-/// beperking en het 0-gebaseerde regelnummer in de bron. `null` wanneer het
-/// document verliesvrij door de rijke-tekstlaag kan.
+/// De regelbereiken `[start, end)` die als bronfragment reizen — zie
+/// [EmbeddableSourceFragment] (`x-embed-source-fragment`).
 ///
-/// Dezelfde scanlogica en -volgorde als [markdownVisualLimitations], maar
-/// stopt bij de eerste hit. De documenteditor gebruikt dit om bij een
-/// fallback automatisch naar de Bron-modus te wisselen en de cursor op de
-/// probleemregel te zetten — zodat de gebruiker niet hoeft te raden wáár het
-/// misgaat.
-VisualLimitationHit? firstVisualLimitation(String markdown) {
+/// Eén bereik per aaneengesloten brok om elke regel die [_limitationLines]
+/// aanwijst: vanaf de probleemregel naar boven en beneden tot de eerste
+/// witregel of blokgrens. Witregel-begrensd is de enige grens die in beide
+/// richtingen byte-getrouw is — blok-embeds worden altijd met een witregel
+/// ertussen geschreven — en een bredere brok kan hooguit méér bron tonen dan
+/// strikt nodig, nooit tekst kwijtraken.
+///
+/// Grensregels zijn koppen, fences, regels die een atomaire tabel of een
+/// atomaire form/pentest-envelop openen, voetnootdefinities, `---` en de
+/// herkende `<!-- toc -->`/`<!-- spacer -->`/tijdlijn-markers: die reizen zelf
+/// al verliesvrij en horen niet in het bronblok thuis. Lijst- en
+/// citaatregels zijn bewust géén grens — ze zijn in Markdown één blok met hun
+/// vervolgregels, dus uitknippen zou de rondreis breken.
+List<(int, int)> sourceFragmentRanges(String markdown) {
   final lines = markdown.split('\n');
+  final hits = _limitationLines(markdown);
+  if (hits.isEmpty) return const [];
   final pentest = scanPentestBlocks(markdown);
   final forms = scanFormBlocks(markdown);
-  var fenced = false;
-  var inTable = false;
-  for (var index = 0; index < lines.length; index++) {
-    final line = lines[index];
-    if (pentest.isAtomicLine(index) || forms.isAtomicLine(index)) continue;
-    if (RegExp(r'^\s*```').hasMatch(line)) {
-      fenced = !fenced;
-      inTable = false;
-      continue;
+  bool isAtomic(int i) => pentest.isAtomicLine(i) || forms.isAtomicLine(i);
+
+  final ranges = <(int, int)>[];
+  for (final index in hits.toList()..sort()) {
+    var start = index;
+    var end = index + 1;
+    while (start > 0 &&
+        lines[start - 1].trim().isNotEmpty &&
+        !_isFragmentBoundary(
+          lines[start - 1],
+          lines[start],
+          isAtomic,
+          start - 1,
+        )) {
+      start--;
     }
-    if (fenced) continue;
-    if (inTable) {
-      if (isMarkdownTableLine(line)) continue;
-      inTable = false;
+    while (end < lines.length &&
+        lines[end].trim().isNotEmpty &&
+        !_isFragmentBoundary(
+          lines[end],
+          end + 1 < lines.length ? lines[end + 1] : null,
+          isAtomic,
+          end,
+        )) {
+      end++;
     }
-    if (opensAtomicMarkdownTable(
-      line,
-      index + 1 < lines.length ? lines[index + 1] : null,
-    )) {
-      inTable = true;
-      continue;
-    }
-    if (isMarkdownTableLine(line)) {
-      return VisualLimitationHit(
-        index,
-        MarkdownVisualLimitation.looseTableLine,
-      );
-    }
-    var supportedTimeline = false;
-    if (line.trim() == documentTimelineMarker) {
-      final header = index + 1 < lines.length ? lines[index + 1] : null;
-      final delimiter = index + 2 < lines.length ? lines[index + 2] : null;
-      supportedTimeline = isDocumentTimelineEnvelope(line, header, delimiter);
-    }
-    final lineWithoutCode = line.replaceAll(_inlineCode, '');
-    if (!tocMarkerLinePattern.hasMatch(line) &&
-        !spacerMarkerLinePattern.hasMatch(line) &&
-        !supportedTimeline &&
-        _rawHtml.hasMatch(lineWithoutCode)) {
-      return VisualLimitationHit(index, MarkdownVisualLimitation.rawHtml);
-    }
-    if (_escapedPunctuation.hasMatch(lineWithoutCode)) {
-      return VisualLimitationHit(
-        index,
-        MarkdownVisualLimitation.escapedPunctuation,
-      );
+    // Grenzend of overlappend met het vorige bereik → samenvoegen: twee
+    // probleemregels in dezelfde brok vormen één bronblok.
+    if (ranges.isNotEmpty && start <= ranges.last.$2) {
+      final last = ranges.last;
+      ranges[ranges.length - 1] = (last.$1, end > last.$2 ? end : last.$2);
+    } else {
+      ranges.add((start, end));
     }
   }
-  return null;
-}
-
-/// Eén gevonden beperking: het soort en de regel waarop het eerste probleem
-/// zit. Zie [firstVisualLimitation].
-class VisualLimitationHit {
-  const VisualLimitationHit(this.lineIndex, this.limitation);
-
-  /// 0-gebaseerd regelnummer in de bron (zoals `source.split('\n')` indexeert).
-  final int lineIndex;
-
-  /// Het soort beperking dat op [lineIndex] werd aangetroffen.
-  final MarkdownVisualLimitation limitation;
+  return ranges;
 }

@@ -27,7 +27,7 @@ import 'table_sort_actions.dart';
 /// Elke wijziging schrijft de tabel byte-getrouw terug in de embed; de
 /// markdown-round-trip (`MarkdownQuillCodec`) serialiseert hem weer als
 /// GFM-tabel. Dit is ook de reden dat een tabel geen visuele-modus-beperking
-/// meer is (`markdownVisualLimitations`): waar de heen-en-terugweg door de
+/// meer is (`sourceFragmentRanges`): waar de heen-en-terugweg door de
 /// platte rijke-tekstlaag een tabel tot losse woorden maalde, blijft hij nu één
 /// blok.
 class TableEmbedBuilder extends EmbedBuilder {

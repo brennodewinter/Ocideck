@@ -11,8 +11,6 @@ import '../../utils/markdown_caret_map.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/markdown_typing_shortcuts.dart';
 import '../../utils/markdown_paste_cleanup.dart';
-import '../../utils/markdown_visual_compatibility.dart';
-import '../../l10n/app_localizations.dart';
 import 'markdown_editor_theme.dart';
 import 'markdown_editor_toolbar.dart';
 import 'notes_editor_mode.dart';
@@ -242,14 +240,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
 
   NotesEditorMode get _requestedMode => widget.mode ?? _mode;
 
-  Set<MarkdownVisualLimitation> get _visualLimitations =>
-      markdownVisualLimitations(widget.controller.text);
-
-  NotesEditorMode get _effectiveMode =>
-      _requestedMode == NotesEditorMode.visual && _visualLimitations.isNotEmpty
-      ? NotesEditorMode.markdown
-      : _requestedMode;
-
   FocusNode get _focusNode => widget.focusNode ?? _ownedFocusNode!;
 
   bool get _document => widget.surfaceStyle == NotesSurfaceStyle.document;
@@ -262,16 +252,11 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   void initState() {
     super.initState();
     _mode = widget.initialMode;
-    if (widget.mode == null &&
-        _mode == NotesEditorMode.visual &&
-        _visualLimitations.isNotEmpty) {
-      _mode = NotesEditorMode.markdown;
-    }
     _markdownSnapshot = widget.controller.text;
     if (widget.focusNode == null) {
       _ownedFocusNode = FocusNode();
     }
-    if (_effectiveMode == NotesEditorMode.visual) {
+    if (_requestedMode == NotesEditorMode.visual) {
       _openVisualEditor();
     }
   }
@@ -279,13 +264,11 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   @override
   void didUpdateWidget(MarkdownNotesEditor oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final target = _effectiveMode;
+    final target = _requestedMode;
     if (target == NotesEditorMode.visual && _quillController == null) {
       _openVisualEditor();
     } else if (target == NotesEditorMode.markdown && _quillController != null) {
-      // An externally supplied unsupported construct must never be overwritten
-      // by flushing the older rich-text projection back to Markdown.
-      _closeVisualEditor(flush: _visualLimitations.isEmpty);
+      _closeVisualEditor(flush: true);
     }
     if (widget.controller.text != _markdownSnapshot &&
         !_syncingMarkdown &&
@@ -404,7 +387,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// Spring naar een Overzicht-kop: in markdown-modus de bron-cursor, in Quill
   /// de eerste treffer van de titel in de platte tekst.
   void _revealFromOutline(int? markdownOffset, String? title) {
-    if (_effectiveMode == NotesEditorMode.markdown) {
+    if (_requestedMode == NotesEditorMode.markdown) {
       final text = widget.controller.text;
       final offset = (markdownOffset ?? 0).clamp(0, text.length);
       widget.controller.selection = TextSelection.collapsed(offset: offset);
@@ -436,7 +419,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (start == null) return;
     final s = start.clamp(0, widget.controller.text.length);
     final e = (end ?? s).clamp(s, widget.controller.text.length);
-    if (_effectiveMode == NotesEditorMode.markdown) {
+    if (_requestedMode == NotesEditorMode.markdown) {
       widget.controller.selection = TextSelection(
         baseOffset: s,
         extentOffset: e,
@@ -469,7 +452,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (_quillController != null) return;
     _scrollController = ScrollController();
     final document = MarkdownQuillCodec.documentFromMarkdown(
-      normalizeRichTextMarkdown(widget.controller.text),
+      normalizeRichTextMarkdownForStorage(widget.controller.text),
     );
     _quillController = QuillController(
       document: document,
@@ -533,7 +516,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     _syncingMarkdown = true;
     _markdownSnapshot = widget.controller.text;
     quill.document = MarkdownQuillCodec.documentFromMarkdown(
-      normalizeRichTextMarkdown(_markdownSnapshot),
+      normalizeRichTextMarkdownForStorage(_markdownSnapshot),
     );
     quill.updateSelection(
       TextSelection.collapsed(offset: _visualCaretFromSource(quill.document)),
@@ -636,19 +619,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }
 
   void _onModeSelected(NotesEditorMode mode) {
-    if (mode == NotesEditorMode.visual && _visualLimitations.isNotEmpty) {
-      ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-        SnackBar(
-          content: Text(
-            context.l10n.d(
-              'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.',
-            ),
-          ),
-        ),
-      );
-      return;
-    }
-    final current = _effectiveMode;
+    final current = _requestedMode;
     if (mode == current) return;
     _transitionMode(from: current, to: mode);
     if (widget.mode == null) {
@@ -774,7 +745,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }
 
   Widget _buildEditorSurface() {
-    final field = _effectiveMode == NotesEditorMode.visual
+    final field = _requestedMode == NotesEditorMode.visual
         ? _buildVisualField()
         : _buildMarkdownField();
     if (widget.expand) {
@@ -786,7 +757,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   Widget _buildModeToggle() => MediaQuery.withClampedTextScaling(
     maxScaleFactor: 1.5,
     child: NotesModeToggle(
-      mode: _effectiveMode,
+      mode: _requestedMode,
       onModeChanged: _onModeSelected,
       style: widget.modeToggleStyle,
       foregroundColor: widget.editorTheme.toolbarIcon,
@@ -798,7 +769,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (!widget.showToolbar) return null;
     final quill = _quillController;
     final Widget bar;
-    if (_effectiveMode == NotesEditorMode.markdown) {
+    if (_requestedMode == NotesEditorMode.markdown) {
       bar = MarkdownEditorToolbar(
         controller: widget.controller,
         focusNode: _focusNode,
@@ -821,21 +792,12 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     return MediaQuery.withClampedTextScaling(maxScaleFactor: 1.5, child: bar);
   }
 
-  Widget? _buildLimitationHint() {
-    if (_visualLimitations.isEmpty ||
-        _effectiveMode != NotesEditorMode.markdown) {
-      return null;
-    }
-    return markdownSourceModeHint(context, widget.editorTheme);
-  }
-
   @override
   Widget build(BuildContext context) =>
       _document ? _buildDocumentLayout() : _buildPanelLayout();
 
   Widget _buildPanelLayout() {
     final toolbar = _buildToolbar(bordered: true);
-    final hint = _buildLimitationHint();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -844,8 +806,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
           const SizedBox(height: 6),
         ],
         if (toolbar != null) ...[toolbar, const SizedBox(height: 6)],
-        if (hint != null)
-          Padding(padding: const EdgeInsets.only(bottom: 6), child: hint),
         _buildEditorSurface(),
       ],
     );
@@ -855,7 +815,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// hairline) and a centred page you write on. Used by the expand dialog.
   Widget _buildDocumentLayout() {
     final toolbar = _buildToolbar(bordered: false);
-    final hint = _buildLimitationHint();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -880,15 +839,13 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
             ],
           ),
         ),
-        if (hint != null)
-          Padding(padding: const EdgeInsets.only(top: 8), child: hint),
         Expanded(child: _buildDocumentPage()),
       ],
     );
   }
 
   Widget _buildDocumentPage() {
-    final field = _effectiveMode == NotesEditorMode.visual
+    final field = _requestedMode == NotesEditorMode.visual
         ? _buildVisualField()
         : _buildMarkdownField();
     final maxW = widget.documentMaxWidth;
@@ -916,51 +873,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       ),
     );
   }
-}
-
-/// De melding dat je nu de *brontekst* bewerkt omdat de visuele stand deze
-/// opmaak nog niet verliesvrij aankan.
-///
-/// Bewust een zichtbare balk en geen fluistering. Hij stond er als grijze regel
-/// van 10,5 punt onder de knoppenbalk, en dat was precies de klacht uit #1565:
-/// de tekst valt uiteen in tekens, de standknop zegt nog "Visueel", en niets
-/// wijst je erop dat je in de bron staat. Wie niet weet waar hij is, weet ook
-/// niet hoe hij terugkomt.
-///
-/// En een zichtbare balk moet ook *leesbaar* zijn. Hij lag op
-/// `theme.codeBackground` — het paneel van een codeblok, in elk ingebouwd
-/// profiel bijna zwart — met de gewone alineakleur erop: in Vigilis dezelfde
-/// kleur als de achtergrond, in LibreKAT donkerblauw op bijna zwart. De enige
-/// melding die vertelt wáár je bent, was daarmee onleesbaar; de balk stond er
-/// wel en zei niets. Nu draagt hij dezelfde tint als een `code`-woord — een
-/// vlak dat per definitie tussen papier en letter ligt, dus de tekst houdt het
-/// contrast van de alinea. Zie [AppTheme.inlineCodeBackground].
-Widget markdownSourceModeHint(BuildContext context, MarkdownEditorTheme theme) {
-  return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-    decoration: BoxDecoration(
-      color: theme.inlineCodeBackground,
-      borderRadius: BorderRadius.circular(6),
-      border: Border.all(color: theme.border),
-    ),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // De inkt van de alinea, niet het accent: een accent kán geel zijn
-        // (Vigilis), en dat haalt op een licht vlak de 3:1 voor een icoon niet.
-        Icon(Icons.code, size: 18, color: theme.text),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Text(
-            context.l10n.d(
-              'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.',
-            ),
-            style: theme.bodyStyle.copyWith(fontSize: theme.fontSize - 1),
-          ),
-        ),
-      ],
-    ),
-  );
 }
 
 class _NotesSmartPasteIntent extends Intent {

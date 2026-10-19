@@ -3860,14 +3860,6 @@ const _dutchSourceAddLa = <String, String>{
       'Chronologia duas aut tres columnas utitur. Elige quae columnae huius tabulae chronologia fiant. Reliquae columnae e tabula disparabunt.',
   'Volgorde (marker)': 'Ordo (notula)',
   'Toelichting (optioneel)': 'Descriptio (facultativus)',
-  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Linea {n} commentarios HTML aut notulas HTML continet. Editor visualis hoc ostendere non potest — Modus fontis activatus est.',
-  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
-      'Linea {n} punctuationem effugam (sicut \\*) continet. Editor visualis hoc sine perdito ostendere non potest — Modus fontis activatus est.',
-  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
-      'Linea {n} est linea tabulae soluta extra tabulae blocum. Editor visualis hoc ostendere non potest — Modus fontis activatus est.',
-  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
-      'Modus fontis markup protegit quod editor visualis sine perdito non sustinet. Ad fontem pro his constructionibus transite.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Insigne granosum imprimetur: fasciculus {breed}×{hoog} px est, quod hac magnitudine {dpi} dpi efficit.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -4451,8 +4443,6 @@ const _dutchSourceAddLa = <String, String>{
   'Snel herstellen': 'Recuperet cito',
   'Taak': 'Negotium',
   'Toegepaste versie': 'Acta version',
-  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
-      'Visual recensio debilitata est quia Markdown haec detrimento converti non potest.',
   'Wijzigingen vergelijken': 'Compare mutationes',
   'Wijzigingen verwerpen': 'Repudiare mutationes',
   'Zoek een opdracht…': 'Invenire assignationem ...',

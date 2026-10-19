@@ -11,6 +11,7 @@ import 'list_block_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
 import 'mermaid_embed_syntax.dart';
 import 'pentest_block_embed_syntax.dart';
+import 'source_fragment_embed_syntax.dart';
 import 'toc_embed_syntax.dart';
 import 'spacer_embed_syntax.dart';
 import 'timeline_table_embed_syntax.dart';
@@ -21,7 +22,7 @@ import 'timeline_table_embed_syntax.dart';
 /// `x-embed-table`) door de heen- en terugweg gedragen, in plaats van als losse
 /// woorden uiteen te vallen. Zo blijft een tabel in de visuele editor een
 /// getekend, byte-getrouw round-trippend blok — de reden dat de tabel niet meer
-/// als markdown-beperking hoeft terug te vallen (zie [markdownVisualLimitations]).
+/// als markdown-beperking hoeft terug te vallen (zie `sourceFragmentRanges`).
 ///
 /// De inhoudsopgave-marker `<!-- toc -->` reist langs dezelfde weg als
 /// [EmbeddableToc] (`x-embed-toc`) — om dezelfde reden: hij is HTML, en zonder
@@ -48,6 +49,9 @@ class MarkdownQuillCodec {
     // De TOC-marker staat vóór de HTML-blokregel, anders slokt die hem als
     // rauwe HTML op en valt hij als losse tekst uiteen.
     blockSyntaxes: const [
+      // Eerst: de sentinelregels van `wrapSourceFragments` claimt niemand
+      // anders, maar de syntax moet vóór de standaard-alinearegel staan.
+      SourceFragmentSyntax(),
       TimelineTableSyntax(),
       // De twee pentest-syntaxen delen één patroon (de markerregel) en sluiten
       // elkaar uit op `canParse`: de bevindingkop tegenover de vier enveloppen
@@ -88,6 +92,8 @@ class MarkdownQuillCodec {
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.fromMdSyntax,
       EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.fromMdSyntax,
+      EmbeddableSourceFragment.fragmentType:
+          EmbeddableSourceFragment.fromMdSyntax,
     },
   );
   static final _deltaToMd = DeltaToMarkdown(
@@ -103,6 +109,8 @@ class MarkdownQuillCodec {
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.toMdSyntax,
       EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.toMdSyntax,
       EmbeddableListBlock.listBlockType: EmbeddableListBlock.toMdSyntax,
+      EmbeddableSourceFragment.fragmentType:
+          EmbeddableSourceFragment.toMdSyntax,
     },
     customTextAttrsHandlers: {
       Attribute.italic.key: CustomAttributeHandler(
@@ -124,7 +132,14 @@ class MarkdownQuillCodec {
     if (markdown.isEmpty) {
       return Document();
     }
-    return Document.fromDelta(_mdToDelta.convert(markdown));
+    // Wat de rijke-tekstlaag niet verliesvrij kan dragen (HTML-commentaar,
+    // ontsnapte leestekens, losse tabelregels) wordt vóór de parse in een
+    // sentinelpaar gewikkeld; `SourceFragmentSyntax` claimt dat bereik als één
+    // `x-embed-source-fragment` met de bron verbatim (#2463). Zo blijft alleen
+    // dát stuk bron — de rest van het document bewerk je gewoon visueel.
+    return Document.fromDelta(
+      _mdToDelta.convert(wrapSourceFragments(markdown)),
+    );
   }
 
   static String markdownFromDocument(Document document) {
@@ -167,11 +182,32 @@ class MarkdownQuillCodec {
 /// hem opeist, zoals ook de visuele poort en de brug doen; hij wordt daarmee
 /// precies één keer geschreven, nooit dubbel.
 String _normalizeQuillOutput(String raw) {
+  // Een bronfragment staat verbatim tussen zijn sentinelpaar in de rauwe
+  // uitvoer — de regels ertussen mogen de normalisatie niet aanraken (daar
+  // wonen juist de escapes en commentaar die gewone proza-normalisatie zou
+  // wegstrepen). De sentinelregels zelf zijn drager, geen inhoud: ze vallen
+  // weg voordat de tekst het bestand bereikt. Een begin zonder einde —
+  /// kan alleen als de gebruiker de sentinel letterlijk als tekst schreef —
+  // laat de resterende regels verbatim: teveel bewaren is veilig, wegstrepen
+  // nooit.
   final pentest = scanPentestBlocks(raw);
   final forms = scanFormBlocks(raw);
-  if (pentest.isEmpty && forms.isEmpty) return _normalizeProse(raw);
-
+  final begin = RegExp('^$sourceFragmentBegin\$');
+  final end = RegExp('^$sourceFragmentEnd\$');
   final lines = raw.split('\n');
+  final fragmentLines = <int>{};
+  for (var i = 0; i < lines.length; i++) {
+    if (!begin.hasMatch(lines[i])) continue;
+    var j = i + 1;
+    while (j < lines.length && !end.hasMatch(lines[j])) {
+      fragmentLines.add(j++);
+    }
+    if (j < lines.length) i = j; // verder na de eindsentinel
+  }
+  if (pentest.isEmpty && forms.isEmpty && fragmentLines.isEmpty) {
+    return _normalizeProse(raw);
+  }
+
   final out = <String>[];
   final prose = <String>[];
   void flushProse() {
@@ -181,7 +217,10 @@ String _normalizeQuillOutput(String raw) {
   }
 
   for (var i = 0; i < lines.length; i++) {
-    if (pentest.isAtomicLine(i) || forms.isAtomicLine(i)) {
+    if (begin.hasMatch(lines[i]) || end.hasMatch(lines[i])) continue;
+    if (pentest.isAtomicLine(i) ||
+        forms.isAtomicLine(i) ||
+        fragmentLines.contains(i)) {
       flushProse();
       out.add(lines[i]);
     } else {

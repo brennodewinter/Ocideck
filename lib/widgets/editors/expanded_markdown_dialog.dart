@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../services/table_of_contents.dart';
 import '../markdown_editor/markdown_editor.dart';
 
 /// Markdown that cannot round-trip losslessly through the visual editor, so the
@@ -13,22 +12,17 @@ import '../markdown_editor/markdown_editor.dart';
 ///
 /// A GFM table is deliberately **absent**: it round-trips as an `x-embed-table`
 /// block embed (see `MarkdownQuillCodec` / `TableEmbedBuilder`), so it stays
-/// editable in the visual editor instead of forcing raw source. De
-/// inhoudsopgave-marker `<!-- toc -->` is om dezelfde reden uitgezonderd van de
-/// HTML-commentaarregel hieronder: hij reist als `x-embed-toc`-blok mee.
+/// editable in the visual editor instead of forcing raw source. Om dezelfde
+/// reden is HTML-commentaar sinds #2463 geen bron-eis meer: zo'n regel reist
+/// als `x-embed-source-fragment` byte-getrouw én bewerkbaar mee. Wat rest is
+/// veldniveau-structuur — een voetnootdefinitie of paginascheiding hoort niet
+/// in één los veld thuis.
 bool markdownNeedsSourceMode(String markdown) {
-  final lines = markdown.split('\n');
   // `[^\]]` = "niet een `]`". Zónder de backslash leest Dart's (JS-achtige)
   // regex `[^]]` als "elk teken, gevolgd door een letterlijke `]`" en ving een
-  // echte voetnoot `[^1]:` nooit — die viel dan alsnog terug via de binnenste
-  // `markdownVisualLimitations`, maar deze poort hoort hem net zo te zien.
+  // echte voetnoot `[^1]:` nooit.
   return RegExp(r'^\[\^[^\]]+\]:', multiLine: true).hasMatch(markdown) ||
-      RegExp(r'^---\s*$', multiLine: true).allMatches(markdown).length >= 2 ||
-      lines.any(
-        (line) =>
-            line.trimLeft().startsWith('<!--') &&
-            !tocMarkerLinePattern.hasMatch(line),
-      );
+      RegExp(r'^---\s*$', multiLine: true).allMatches(markdown).length >= 2;
 }
 
 /// A roomy word-processor for one Markdown field.

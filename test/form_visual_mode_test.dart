@@ -61,8 +61,7 @@ void main() {
   test('een geldig formulier blijft visueel bewerkbaar', () {
     // Zonder de blokbewuste poort was élke `<!--`-regel rawHtml: één formulier
     // en de hele editor viel terug op brontekst.
-    expect(markdownVisualLimitations(_formulier), isEmpty);
-    expect(markdownRoundTripsVisually(_formulier), isTrue);
+    expect(sourceFragmentRanges(_formulier), isEmpty);
   });
 
   test('elk blok komt byte-identiek uit de Quill-rondgang', () {
@@ -121,8 +120,8 @@ void main() {
     );
     // Buiten het blok blijft de bestaande normalisatie gelden: de prozaregels
     // zijn niet in het blok getrokken.
-    expect(terug, startsWith('Een * alinea.'));
-    expect(terug, endsWith('Na * afloop.'));
+    expect(terug, startsWith('Een \\* alinea.'));
+    expect(terug, endsWith('Na \\* afloop.'));
   });
 
   test('een tweede rondgang verandert niets meer', () {
@@ -145,10 +144,7 @@ void main() {
 Sari
 ''';
     expect(scanFormBlocks(kapot).blocks, isEmpty);
-    expect(
-      markdownVisualLimitations(kapot),
-      contains(MarkdownVisualLimitation.rawHtml),
-    );
+    expect(sourceFragmentRanges(kapot), isNotEmpty);
   });
 
   test('een document zonder formulier is onveranderd', () {
