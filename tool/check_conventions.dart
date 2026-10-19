@@ -164,7 +164,10 @@ const Map<String, int> fileSizeBaseline = {
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
   'lib/state/tabs_provider.dart':
-      1052, // +10 (#1953): recoveryWriteErrorProvider
+      1057, // +5 (#2468): suggestedName-parameter langs de tab-aanmaak-keten
+  // en de dirty-markering die bij zo'n kopie hoort — cohesief met de
+  // aanmaak-lus hierboven.
+  // +10 (#1953): recoveryWriteErrorProvider
   // + onWriteError-callback bedrading in de constructor.
   // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
   // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
@@ -467,7 +470,9 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      2882, // +7 (#2433): de slideSize-parameter langs _buildThemeCss en de
+      2884, // +2 (#2468): de fileName-parameter op saveDocumentAs — de
+  // geïmporteerde naam bereikt zo de kiezer zonder omweg via de state.
+  // +7 (#2433): de slideSize-parameter langs _buildThemeCss en de
   // package-/project-thema-bouwers. De @size-math en pixelhoogte zelf staan
   // in het formaatmodel (slide_format.dart); wat rest is doorvoer. // +26 (#1951): fileMtime + fileChangedSince.
   // vóór de .md schrijven (commit-punt) — markdown + recordWrittenBytes

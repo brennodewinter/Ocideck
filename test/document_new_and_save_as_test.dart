@@ -18,6 +18,7 @@ import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
+import 'package:ocideck/widgets/shell/document_save_actions.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -57,6 +58,24 @@ void main() {
         null,
       ).saveDocumentAs(MarkdownDocument.parse('x'));
       expect(saved, isNull);
+    });
+
+    test('een voorgestelde naam komt in het bewaar-venster terecht', () async {
+      String? seen;
+      final files = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(),
+        saveDestination: ({dialogTitle, fileName, initialDirectory}) async {
+          seen = fileName;
+          return null;
+        },
+      );
+      await files.saveDocumentAs(
+        MarkdownDocument.parse('x'),
+        fileName: 'Offerte ACME.md',
+      );
+      expect(seen, 'Offerte ACME.md');
     });
   });
 
@@ -177,6 +196,49 @@ void main() {
       expect(current.documentNotifier!.currentState.isDirty, isFalse);
     });
 
+    // #2468: een DOCX/ODT-import draagt zijn bronnaam mee — de tab toont die
+    // naam in plaats van 'Nieuw', de tab is vuil (het is een niet-bewaarde
+    // conversie) en 'Opslaan als' stelt '<naam>.md' voor.
+    test(
+      'een voorgestelde naam labelt, markeert en stuurt Opslaan als',
+      () async {
+        final container = await containerWithLibrary(home);
+        container
+            .read(tabsProvider.notifier)
+            .newDocumentFromMarkdown(
+              '# Offerte\n\nwerk\n',
+              suggestedName: 'Offerte ACME',
+            );
+
+        final tab = container.read(tabsProvider).current!;
+        expect(tab.label, 'Offerte ACME');
+        expect(tab.isDirty, isTrue);
+        expect(
+          tab.documentNotifier!.currentState.suggestedName,
+          'Offerte ACME',
+        );
+
+        // Na een echte opslag wint de gekozen bestandsnaam het van de suggestie.
+        tab.documentNotifier!.markSaved(
+          filePath: p.join(home.path, 'gekozen.md'),
+        );
+        expect(tab.label, 'gekozen');
+      },
+    );
+
+    test(
+      'twee imports met dezelfde naam krijgen elk hun eigen tablabel',
+      () async {
+        final container = await containerWithLibrary(home);
+        final tabs = container.read(tabsProvider.notifier);
+        tabs.newDocumentFromMarkdown('# A\n', suggestedName: 'Offerte ACME');
+        tabs.newDocumentFromMarkdown('# B\n', suggestedName: 'Rapport 2026 Q3');
+
+        final labels = container.read(tabsProvider).tabs.map((t) => t.label);
+        expect(labels, containsAll(['Offerte ACME', 'Rapport 2026 Q3']));
+      },
+    );
+
     test('het nieuwe bestand komt bovenaan de recente lijst', () async {
       final container = await containerWithLibrary(home);
       final chosen = p.join(home.path, 'mijn_document.md');
@@ -243,5 +305,67 @@ void main() {
     expect(n.currentState.filePath, target);
     expect(n.currentState.isDirty, isFalse);
     expect(File(target).readAsStringSync(), '# Nieuw document\n');
+  });
+
+  testWidgets('Opslaan als stelt de geïmporteerde naam voor (#2468)', (
+    tester,
+  ) async {
+    final temp = Directory.systemTemp.createTempSync('saveas_import');
+    addTearDown(() => temp.deleteSync(recursive: true));
+    final target = p.join(temp.path, 'Offerte ACME.md');
+
+    String? seenFileName;
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('# Offerte\n'),
+        suggestedName: 'Offerte ACME',
+      );
+    n.markDirty();
+
+    late WidgetRef ref;
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          documentProvider.overrideWith((r) => n),
+          fileServiceProvider.overrideWithValue(
+            FileService(
+              MarkdownService(),
+              ImageService(),
+              () => const ThemeProfile(),
+              saveDestination:
+                  ({dialogTitle, fileName, initialDirectory}) async {
+                    seenFileName = fileName;
+                    return target;
+                  },
+            ),
+          ),
+        ],
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+            FlutterQuillLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Consumer(
+            builder: (context, r, _) {
+              ref = r;
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
+      ),
+    );
+
+    final saved = await tester.runAsync(
+      () => saveDocumentWithDestination(
+        tester.element(find.byType(SizedBox)),
+        ref,
+        n,
+      ),
+    );
+
+    expect(saved, isTrue);
+    expect(seenFileName, 'Offerte ACME.md');
   });
 }

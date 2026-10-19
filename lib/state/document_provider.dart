@@ -64,6 +64,13 @@ class DocumentState {
   /// het originele deck (#1646).
   final String? projectPath;
 
+  /// De voorgestelde naam voor een document dat nog geen [filePath] heeft —
+  /// bijvoorbeeld de stam van het geïmporteerde `.docx`/`.odt` (#2468). Het
+  /// tabblad toont hem in plaats van het neutrale "Nieuw" en 'Opslaan als'
+  /// stelt `<suggestedName>.md` voor. Verdwijnt uit beeld zodra er een echt
+  /// pad is; hij is een hint, geen identiteit.
+  final String? suggestedName;
+
   const DocumentState({
     this.document,
     this.isDirty = false,
@@ -79,6 +86,7 @@ class DocumentState {
     this.visualEdited = false,
     this.savedFileHash,
     this.projectPath,
+    this.suggestedName,
   });
 
   bool get hasUnsavedChanges => isDirty;
@@ -99,8 +107,10 @@ class DocumentState {
     bool? visualEdited,
     String? savedFileHash,
     String? projectPath,
+    String? suggestedName,
     bool clearError = false,
     bool clearFilePath = false,
+    bool clearSuggestedName = false,
   }) {
     return DocumentState(
       document: document ?? this.document,
@@ -117,6 +127,9 @@ class DocumentState {
       visualEdited: visualEdited ?? this.visualEdited,
       savedFileHash: savedFileHash ?? this.savedFileHash,
       projectPath: projectPath ?? this.projectPath,
+      suggestedName: clearSuggestedName
+          ? null
+          : (suggestedName ?? this.suggestedName),
     );
   }
 }
@@ -176,6 +189,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
     MarkdownDocument document, {
     String? filePath,
     String? projectPath,
+    String? suggestedName,
   }) {
     _clearHistory();
     state = DocumentState(
@@ -186,6 +200,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       visualEdited: false,
       savedFileHash: DocumentIntegrity.hashDocument(document),
       projectPath: projectPath,
+      suggestedName: suggestedName,
     );
   }
 

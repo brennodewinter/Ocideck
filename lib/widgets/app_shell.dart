@@ -16,6 +16,7 @@ import '../platform/native_shortcut_channel.dart';
 import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
+import '../utils/file_extension.dart';
 import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
 import '../utils/physical_control_shortcut.dart';
