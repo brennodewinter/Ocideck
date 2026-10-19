@@ -87,7 +87,15 @@ Future<void> importDocument(
     }
   }
 
-  container.read(tabsProvider.notifier).newDocumentFromMarkdown(markdown);
+  // De stam van het bronbestand reist mee: het tabblad heet 'Offerte ACME'
+  // in plaats van 'Nieuw' en 'Opslaan als' stelt 'Offerte ACME.md' voor —
+  // twee geïmporteerde documenten zijn zo meteen uit elkaar te houden (#2468).
+  container
+      .read(tabsProvider.notifier)
+      .newDocumentFromMarkdown(
+        markdown,
+        suggestedName: stemOfFileName(picked.name),
+      );
   messenger.showSnackBar(
     SnackBar(
       content: Text(

@@ -87,6 +87,25 @@ void main() {
     container.dispose();
   });
 
+  // #2468: het tabblad erft de bronnaam — 'Offerte ACME' in plaats van
+  // 'Nieuw' — en is meteen vuil, want de conversie staat nog nergens op schijf.
+  testWidgets('een geïmporteerde naam labelt het tabblad als onopgeslagen', (
+    tester,
+  ) async {
+    final (container, ctx) = await pump(tester);
+    await importDocument(
+      ctx,
+      fileOverride: (bytes: docxFixture(), name: 'Offerte ACME.docx'),
+    );
+    await tester.pump();
+
+    final tab = container.read(tabsProvider).current!;
+    expect(tab.label, 'Offerte ACME');
+    expect(tab.isDirty, isTrue);
+    expect(tab.documentNotifier!.currentState.suggestedName, 'Offerte ACME');
+    container.dispose();
+  });
+
   testWidgets('een onleesbaar bestand meldt de fout en opent geen tab', (
     tester,
   ) async {

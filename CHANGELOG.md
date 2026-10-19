@@ -16,6 +16,15 @@ All notable changes to OciDeck are documented in this file.
   document met `theme:` sprong een interne koplink een frontmatter-lengte te
   ver en kon de railmarkering wegvallen. Navigatie, actieve kop en
   editorselectie delen nu één coördinatenstelsel.
+### Added
+
+- **Een geïmporteerd document heet meteen naar zijn bron.** Bij het importeren
+  van een `.docx` of `.odt` — en bij het omzetten van een presentatie naar een
+  document — draagt het nieuwe tabblad de naam van waar de inhoud vandaan
+  kwam: 'Offerte ACME' in plaats van 'Nieuw'. Het tabblad is meteen
+  gemarkeerd als onopgeslagen (de conversie staat nog nergens op schijf) en
+  'Opslaan als' stelt `Offerte ACME.md` voor. Het oorspronkelijke kantoor-
+  bestand wordt nooit aangeraakt.
 
 ## [0.7.0] — 2026-10-17
 

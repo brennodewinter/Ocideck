@@ -537,8 +537,19 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// geen zegel mee — een document kent er geen. [projectPath] draagt de map
   /// van het originele deck mee, zodat afbeeldingsverwijzingen blijven
   /// werken (#1646).
-  void newDocumentFromMarkdown(String source, {String? projectPath}) {
-    _placeDocumentTab(MarkdownDocument.parse(source), projectPath: projectPath);
+  ///
+  /// [suggestedName] is de herkenbare naam van waar de tekst vandaan komt —
+  /// de stam van een geïmporteerd `.docx`/`.odt` (#2468).
+  void newDocumentFromMarkdown(
+    String source, {
+    String? projectPath,
+    String? suggestedName,
+  }) {
+    _placeDocumentTab(
+      MarkdownDocument.parse(source),
+      projectPath: projectPath,
+      suggestedName: suggestedName,
+    );
   }
 
   /// Bouwt een documenttabblad rond [document] en zet het naast de bestaande
@@ -549,11 +560,13 @@ class TabsNotifier extends StateNotifier<TabsState> {
     MarkdownDocument document, {
     String? filePath,
     String? projectPath,
+    String? suggestedName,
   }) {
     final tab = _createDocumentTab(
       document,
       filePath: filePath,
       projectPath: projectPath,
+      suggestedName: suggestedName,
     );
     state = state.copyWith(
       tabs: [...state.tabs, tab],
@@ -570,11 +583,20 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String? filePath,
     String? recoveryId,
     String? projectPath,
+    String? suggestedName,
   }) {
     final id = _nextId++;
     final key = recoveryId ?? _uuid.v4();
     final notifier = DocumentNotifier()
-      ..loadDocument(document, filePath: filePath, projectPath: projectPath);
+      ..loadDocument(
+        document,
+        filePath: filePath,
+        projectPath: projectPath,
+        suggestedName: suggestedName,
+      );
+    // Een kopie met een voorgestelde naam bestaat nog nergens op schijf —
+    // precies wat de dirty-stip en de herstelkopie zichtbaar maken (#2468).
+    if (suggestedName != null) notifier.markDirty();
     _subs[id] = notifier.stream.listen((st) {
       if (!mounted) return;
       if (!(st.isOpen && st.isDirty)) _recovery.discard(key);

@@ -18,7 +18,8 @@ part of 'app_shell.dart';
 /// Top-level en niet op de State: leest alles via parameters, en de klasse zit
 /// tegen haar plafond ([classSizeBaseline]).
 Future<void> convertDeckToDocument(BuildContext context, WidgetRef ref) async {
-  final deck = ref.read(deckProvider).deck;
+  final deckState = ref.read(deckProvider);
+  final deck = deckState.deck;
   if (deck == null) return;
   final confirmed = await ConvertToDocumentDialog.show(context);
   if (confirmed != true || !context.mounted) return;
@@ -29,7 +30,15 @@ Future<void> convertDeckToDocument(BuildContext context, WidgetRef ref) async {
   final source = DocumentDeckBridge.deckToDocumentMarkdown(deck);
   ref
       .read(tabsProvider.notifier)
-      .newDocumentFromMarkdown(source, projectPath: deck.projectPath);
+      .newDocumentFromMarkdown(
+        source,
+        projectPath: deck.projectPath,
+        // Dezelfde herkenbare naam als bij een import: het deck waar de kopie
+        // uit komt, anders zijn titel (#2468).
+        suggestedName: deckState.filePath != null
+            ? stemOfFileName(deckState.filePath!)
+            : (deck.title.isNotEmpty ? deck.title : null),
+      );
 }
 
 /// Open de volledige deck-preview. Top-level en niet op de State: leest alles

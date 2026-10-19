@@ -276,15 +276,19 @@ String _deckTabLabel(DeckNotifier deckNotifier) {
   return deck?.title.isNotEmpty == true ? deck!.title : _newTabLabel;
 }
 
-/// Het opschrift van een documenttabblad: de bestandsnaam, of [_newTabLabel]
-/// zolang het document niet is opgeslagen (zelfde neutrale val als een deck).
+/// Het opschrift van een documenttabblad: de bestandsnaam, de voorgestelde
+/// naam van een import of conversie (#2468), of [_newTabLabel] zolang het
+/// document niet is opgeslagen (zelfde neutrale val als een deck).
 String _documentTabLabel(DocumentNotifier documentNotifier) {
   if (!documentNotifier.mounted) return _newTabLabel;
-  final path = documentNotifier.currentState.filePath;
+  final st = documentNotifier.currentState;
+  final path = st.filePath;
   if (path != null && path.isNotEmpty) {
     final name = p.basenameWithoutExtension(path);
     if (name.isNotEmpty) return name;
   }
+  final suggested = st.suggestedName;
+  if (suggested != null && suggested.trim().isNotEmpty) return suggested;
   return _newTabLabel;
 }
 

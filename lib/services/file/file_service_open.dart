@@ -93,17 +93,19 @@ extension FileServiceDocumentOpen on FileService {
 
   /// Vraagt de gebruiker waar het document naartoe moet en schrijft het daar
   /// heen (nieuw of nog niet opgeslagen document, DOCUMENT_MODE.md §3).
+  /// [fileName] is de voorgestelde bestandsnaam in het venster (#2468).
   /// Levert het gekozen pad en document zoals opgeslagen, met afbeeldingen
   /// gematerialiseerd onder `images/`, of null bij annuleren of schrijffout.
   Future<({String path, MarkdownDocument document})?> saveDocumentAs(
     MarkdownDocument document, {
     String? initialDirectory,
     String? sourceProjectPath,
+    String? fileName,
   }) async => _writeDocumentToPicked(
     document,
     await _saveDestination(
       dialogTitle: _d('Opslaan als'),
-      fileName: 'document.md',
+      fileName: fileName ?? 'document.md',
       initialDirectory: initialDirectory,
     ),
     sourceProjectPath: sourceProjectPath,

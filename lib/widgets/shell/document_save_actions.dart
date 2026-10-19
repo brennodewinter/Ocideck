@@ -118,11 +118,19 @@ Future<bool> saveDocumentWithDestination(
   }
 
   // No path yet (a new document) or the path-save failed: "Save as…" keeps the
-  // work as a copy rather than losing it.
+  // work as a copy rather than losing it. An imported or converted copy brings
+  // the name it came from — that name wins the save dialog's proposal (#2468).
+  final suggested = state.suggestedName;
+  // Strip only what a file name cannot hold — the spaces and punctuation of
+  // the source name ('Offerte ACME') belong in the proposal, or the user no
+  // longer recognises their own file (#2468).
+  final stem =
+      suggested?.replaceAll(RegExp(r'[/\\<>:"|?*\x00-\x1f]'), '').trim() ?? '';
   final saved = await ref
       .read(fileServiceProvider)
       .saveDocumentAs(
         documentToSave,
+        fileName: stem.isNotEmpty ? '$stem.md' : 'document.md',
         initialDirectory: ref
             .read(settingsProvider)
             .startDirectoryFor(document: true),
