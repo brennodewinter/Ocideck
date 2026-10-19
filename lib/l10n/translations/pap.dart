@@ -651,6 +651,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'E nota aki ta mas largu ku e página — skrol pa e resto',
   'Certificaatnummer: {nummer}': 'Number di sertifikato: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'E evaluador lo mira e parti akí no mas. ',

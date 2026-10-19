@@ -1618,6 +1618,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Ta przypis jest dłuższy niż strona — przewiń, by zobaczyć resztę',
   'Certificaatnummer: {nummer}': 'Numer certyfikatu: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Oceniający nie zobaczy wtedy tego elementu. ',

@@ -10,6 +10,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **Een voetnoot langer dan een blad is niet langer onzichtbaar afgeknipt.**
+  De paginaweergave knipte een noot die hoger was dan het tekstvlak stil af —
+  de lezer zag alleen het stuk dat paste en had geen manier om bij de rest te
+  komen. Het nootvlak is nu scrollbaar met een zichtbare doorgang-regel en
+  scrollbalk, zodat de volledige noot bereikbaar blijft zonder over de
+  hoofdtekst of marges heen te vallen.
 - **Kopnavigatie in een document met stijl landt weer exact.** Klikken in het
   Overzicht en interne `[naar kop](#kop)`-links rekenden hun positie uit op de
   bron mét stijl-frontmatter, terwijl de editor de body bewerkt. Bij een

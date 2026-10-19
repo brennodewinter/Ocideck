@@ -652,6 +652,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Cette note est plus longue que la page — faites défiler pour la suite',
   'Certificaatnummer: {nummer}': 'Numéro de certificat : {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'L\'évaluateur ne verra alors plus cette pièce. ',

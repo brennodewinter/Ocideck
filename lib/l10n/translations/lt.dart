@@ -1613,6 +1613,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Ši pastaba ilgesnė už puslapį — slinkite likusiai daliai',
   'Certificaatnummer: {nummer}': 'Sertifikato numeris: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Vertintojas tuomet to elemento nebematys. ',

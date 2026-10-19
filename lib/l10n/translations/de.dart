@@ -652,6 +652,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Diese Anmerkung ist länger als die Seite — für den Rest scrollen',
   'Certificaatnummer: {nummer}': 'Zertifikatsnummer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Der Prüfer sieht dieses Stück dann nicht mehr. ',

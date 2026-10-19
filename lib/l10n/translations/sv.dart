@@ -1605,6 +1605,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Den här noten är längre än sidan — scrolla för resten',
   'Certificaatnummer: {nummer}': 'Certifikatnummer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Bedömaren ser då inte längre detta stycke. ',

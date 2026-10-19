@@ -2514,6 +2514,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Bu not sayfadan uzun — kalanı için kaydırın',
   'Certificaatnummer: {nummer}': 'Sertifika numarası: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Değerlendirici artık bu parçayı göremez. ',

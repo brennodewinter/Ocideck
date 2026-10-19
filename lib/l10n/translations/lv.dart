@@ -1604,6 +1604,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Šī piezīme ir garāka par lapu — ritiniet, lai redzētu pārējo',
   'Certificaatnummer: {nummer}': 'Sertifikāta numurs: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Vērtētājs vairs neredzēs šo gabalu. ',

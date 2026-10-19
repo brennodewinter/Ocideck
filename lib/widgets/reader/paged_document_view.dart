@@ -198,6 +198,25 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     return pages;
   }
 
+  /// Zijn de noten van dit vel samen hoger dan het tekstvlak? Dan laat
+  /// [_FootnotePane] ze scrollen en markeert de doorgang (#2469) — de noot
+  /// mag nooit stil verdwijnen.
+  bool _footnoteOverflow(List<Footnote> notes) {
+    final heights = _noteHeights;
+    if (heights == null) return false;
+    final indexOfLabel = {
+      for (var i = 0; i < _notes.length; i++) _notes[i].label: i,
+    };
+    var total = 0.0;
+    for (final note in notes) {
+      final i = indexOfLabel[note.label];
+      if (i != null && i < heights.length) {
+        total += heights[i] + _noteGapPx;
+      }
+    }
+    return total > _contentHeightPx;
+  }
+
   /// Het vel waarop hoogte [y] van het doorlopende document valt.
   static int _pageOf(double y, List<double> offsets) {
     var page = 0;
@@ -684,19 +703,17 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
               right: (widget.margins.rightMm * kPxPerMm) + bleedPx,
               bottom: _contentBottomPx + bleedPx,
               // ponytail: ceiling — een enkele noot die langer is dan de
-              // paginahoogte kan niet over vellen worden verdeeld; we clippen
-              // hem binnen het tekstvlak zodat hij niet overlapt met de
-              // hoofdtekst. Een volledige oplossing vereist het splitsen van
-              // de noot over pagina's, wat een grotere herontwerp van de
-              // paginaverdeling vraagt.
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: _contentHeightPx),
-                child: ClipRect(
-                  child: DocumentFootnotesView(
-                    notes: notes,
-                    themeProfile: widget.profile,
-                  ),
-                ),
+              // paginahoogte kan niet over vellen worden verdeeld; een
+              // volledige oplossing vereist het splitsen van de noot over
+              // pagina's, wat een grotere herontwerp van de paginaverdeling
+              // vraagt. Tot dan scrollt het nootvlak binnen het tekstvlak met
+              // een duidelijke doorgang-markering — nooit stil afknippen, want
+              // dan denkt de lezer dat de offerte compleet is (#2469).
+              child: _FootnotePane(
+                notes: notes,
+                themeProfile: widget.profile,
+                overflowing: _footnoteOverflow(notes),
+                maxHeight: _contentHeightPx,
               ),
             ),
           if (widget.margins.hasBleed)
@@ -823,6 +840,83 @@ class _RenderMeasuredBlock extends RenderProxyBox {
     // Ná de frame melden: een setState tijdens de layout mag niet.
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => onMeasured(index, measured),
+    );
+  }
+}
+
+/// Het nootvlak onderaan een vel. Past de inhoud binnen het tekstvlak, dan is
+/// dit een doodgewone kolom; is hij hoger — een noot die niet over vellen kan
+/// worden verdeeld — dan is de inhoud scrollbaar bereikbaar mét een
+/// doorgang-regel erboven (#2469). Stil afknippen mag nooit: de lezer zou de
+/// offerte anders ten onrechte als compleet beschouwen.
+class _FootnotePane extends StatefulWidget {
+  const _FootnotePane({
+    required this.notes,
+    required this.overflowing,
+    required this.maxHeight,
+    this.themeProfile,
+  });
+
+  final List<Footnote> notes;
+  final bool overflowing;
+
+  /// Hooguit het tekstvlak: de ClipRect houdt de inhoud op het papier; het
+  /// scrollen zelf zit in de [SingleChildScrollView] eronder.
+  final double maxHeight;
+  final ThemeProfile? themeProfile;
+
+  @override
+  State<_FootnotePane> createState() => _FootnotePaneState();
+}
+
+class _FootnotePaneState extends State<_FootnotePane> {
+  final _scroll = ScrollController();
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: widget.maxHeight),
+      child: ClipRect(
+        child: Scrollbar(
+          controller: _scroll,
+          thumbVisibility: widget.overflowing,
+          child: SingleChildScrollView(
+            // Met een sleutel: dit is hét scrollbare nootvlak — een toets moet de
+            // bereikbaarheid van een overloopnoot kunnen aanwijzen.
+            key: const Key('document-footnote-scroll'),
+            controller: _scroll,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (widget.overflowing)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text(
+                      context.l10n.d(
+                        'Deze noot is langer dan het blad — scroll voor de rest',
+                      ),
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: theme.colorScheme.outline,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
+                DocumentFootnotesView(
+                  notes: widget.notes,
+                  themeProfile: widget.themeProfile,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

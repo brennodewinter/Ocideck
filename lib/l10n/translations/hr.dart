@@ -1610,6 +1610,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Ova bilješka duža je od stranice — klizite za ostatak',
   'Certificaatnummer: {nummer}': 'Broj certifikata: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ocjenjivač tada više neće vidjeti ovaj komad. ',

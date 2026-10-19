@@ -1606,6 +1606,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Tämä viite on sivua pidempi — vieritä nähdäksesi lopun',
   'Certificaatnummer: {nummer}': 'Sertifikaatin numero: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Arvioija ei enää näe tätä kappaletta. ',

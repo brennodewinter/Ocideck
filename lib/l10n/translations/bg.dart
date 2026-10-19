@@ -1626,6 +1626,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Тази бележка е по-дълга от страницата — превъртете за останалото',
   'Certificaatnummer: {nummer}': 'Номер на сертификата: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Оценителят вече няма да вижда този елемент. ',

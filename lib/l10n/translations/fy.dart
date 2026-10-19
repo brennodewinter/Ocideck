@@ -652,6 +652,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze noot is langer dan het blad — scroll voor de rest':
+      'Dizze noat is langer as it blêd — skrol foar de rest',
   'Certificaatnummer: {nummer}': 'Sertifikaatnûmer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'De beoardeler sjocht dit stik dan net mear. ',
