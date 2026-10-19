@@ -345,10 +345,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Bron: cursor in de bron-editor + anker in de live weergave (docs-lezer-
   /// mechanisme).
   void _scrollToHeading(MarkdownOutlineEntry entry) {
-    final doc = ref.read(documentProvider).document;
-    final source = doc?.source ?? '';
-    final body = doc?.body ?? '';
-    final outline = buildMarkdownOutline(source);
+    // Het overzicht leeft op de bódy — de tekst die de controller bewerkt.
+    // Op de source (mét stijl-frontmatter) uitgerekende offsets landen een
+    // frontmatter-lengte te ver (#2465).
+    final body = _controller.text;
+    final outline = buildMarkdownOutline(body);
     final outlineIndex = outline.indexWhere(
       (e) => e.offset == entry.offset && e.title == entry.title,
     );

@@ -101,4 +101,101 @@ void main() {
           'Visueel niet leidend',
     );
   });
+
+  /// Overzicht-klikken en interne koplinks delen één coördinatenstelsel: de
+  /// bódy die de controller bewerkt (#2465). Het overzicht en de linkroute
+  /// bouwden hun koppen op de *source* — mét stijl-frontmatter — terwijl de
+  /// caret body-offsets verwacht. Bij een document met `theme:` landde een
+  /// interne koplink de lengte van het frontmatter-blok te ver.
+  testWidgets('overzicht en koplinks volgen de body, niet de source (#2465)', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    const doc =
+        '---\ntheme: Zakelijk\n---\n\n'
+        '# Alfa\n\n'
+        'Eerste tekst met [naar gamma](#gamma).\n\n'
+        '# Beta\n\n'
+        'Tweede tekst.\n\n'
+        '# Gamma\n\n'
+        'Derde tekst.\n';
+    final parsed = MarkdownDocument.parse(doc);
+    final body = parsed.body;
+    final notifier = DocumentNotifier()..loadDocument(parsed);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [documentProvider.overrideWith((_) => notifier)],
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+            FlutterQuillLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const DocumentEditorScreen(),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    int caret() {
+      // Visueel: de Quill-caret gespiegeld op de broncontroller van de
+      // notes-editor. Bron: de caret van het bronveld zelf.
+      final notes = find.byType(MarkdownNotesEditor);
+      if (notes.evaluate().isNotEmpty) {
+        return tester
+            .widget<MarkdownNotesEditor>(notes)
+            .controller
+            .selection
+            .baseOffset;
+      }
+      return tester
+          .widget<TextField>(find.byType(TextField))
+          .controller!
+          .selection
+          .baseOffset;
+    }
+
+    Future<void> tapRailHeading(String title) async {
+      final entry = find.descendant(
+        of: find.byKey(const Key('document-outline-rail')),
+        matching: find.text(title),
+      );
+      await tester.tap(entry);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+      // De markering loopt via een post-frame callback vanuit de
+      // caret-debounce — die staat pas na het volgende frame in de rail.
+      await tester.pump();
+    }
+
+    // Visueel: rail-klik zet de caret op de kopregel. De gespiegelde
+    // bronselectie landt dan ná de `# `-markering — in de koptekst zelf.
+    expect(find.byType(QuillEditor), findsOneWidget);
+    await tapRailHeading('Beta');
+    expect(
+      caret(),
+      inInclusiveRange(body.indexOf('# Beta'), body.indexOf('# Beta') + 6),
+    );
+
+    // Bron: rail-klik en interne koplink landen allebei exact op de kop.
+    await tester.tap(find.text('Bron'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    await tapRailHeading('Gamma');
+    expect(caret(), body.indexOf('# Gamma'));
+    expect(activeOutlineTitle(tester), 'Gamma');
+
+    await tester.tapOnText(find.textRange.ofSubstring('naar gamma'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(caret(), body.indexOf('# Gamma'));
+
+    await tapRailHeading('Alfa');
+    expect(caret(), body.indexOf('# Alfa'));
+  });
 }
