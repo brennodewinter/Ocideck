@@ -655,6 +655,12 @@ const _dutchSourceAddIt = {
       'Incolla saltato: il punto di inserimento è cambiato nel frattempo.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Taglia saltato: il testo è cambiato nel frattempo.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Quella destinazione è il tuo documento sorgente stesso. Un\'esportazione è una copia per un destinatario — l\'originale non viene mai sovrascritto. Scegli un altro nome o un\'altra cartella.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Questa esportazione è bloccata dalle impostazioni di classificazione.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Questa esportazione è bloccata dalla regola di esportazione della privacy.',
   'Certificaatnummer: {nummer}': 'Numero di certificato: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Il valutatore non vedrà più questo elemento. ',

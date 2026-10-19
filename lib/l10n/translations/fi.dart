@@ -1612,6 +1612,12 @@ const _dutchSourceAddFi = <String, String>{
       'Liittäminen ohitettiin: lisäyskohta on muuttunut sillä välin.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Leikkaaminen ohitettiin: teksti on muuttunut sillä välin.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Tuo kohde on lähdedokumenttisi itse. Vienti on kopio vastaanottajalle — alkuperäistä ei koskaan korvata. Valitse toinen nimi tai kansio.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Tämä vienti on luokitusasetusten estämä.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Tämä vienti on yksityisyyden vientisäännön estämä.',
   'Certificaatnummer: {nummer}': 'Sertifikaatin numero: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Arvioija ei enää näe tätä kappaletta. ',

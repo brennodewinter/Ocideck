@@ -34,7 +34,7 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (_, _) async => null,
+                onExport: (_, _) async => const DocumentExportCancelled(),
               ),
               child: const Text('open'),
             ),
@@ -68,7 +68,9 @@ void main() {
                 privacyChecksEnabled: true,
                 onExport: (_, format) async {
                   gotFormat = format;
-                  return '/tmp/rapport-volledig.pdf';
+                  return const DocumentExportWritten(
+                    '/tmp/rapport-volledig.pdf',
+                  );
                 },
               ),
               child: const Text('open'),
@@ -104,7 +106,9 @@ void main() {
                 onExport: (profile, format) async {
                   gotProfile = profile;
                   gotFormat = format;
-                  return '/tmp/rapport-geredigeerd.html';
+                  return const DocumentExportWritten(
+                    '/tmp/rapport-geredigeerd.html',
+                  );
                 },
               ),
               child: const Text('open'),
@@ -173,7 +177,8 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (profile, format) async => '/tmp/doc.md',
+                onExport: (profile, format) async =>
+                    const DocumentExportWritten('/tmp/doc.md'),
               ),
               child: const Text('open'),
             ),
@@ -183,6 +188,106 @@ void main() {
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();
       expect(find.text('Pakket (.ocideck)'), findsNothing);
+    });
+
+    testWidgets(
+      'toont de bouwwaarschuwingen blijvend in het resultaat (#2467)',
+      (tester) async {
+        await tester.pumpWidget(
+          _app(
+            Builder(
+              builder: (context) => TextButton(
+                onPressed: () => DocumentExportDialog.show(
+                  context,
+                  privacyChecksEnabled: true,
+                  onExport: (_, _) async => const DocumentExportWritten(
+                    '/tmp/rapport.pdf',
+                    warnings: [
+                      DocumentExportUnsupportedCharacters({0x65E5}),
+                      DocumentExportTablesTooWide(2),
+                    ],
+                  ),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        );
+        await tester.tap(find.text('open'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Exporteren…'));
+        await tester.pumpAndSettle();
+
+        // Het resultaat staat er én de waarschuwingen blijven zichtbaar —
+        // "geschreven" mag niet als "gecontroleerd" worden gelezen.
+        expect(find.textContaining('rapport.pdf'), findsOneWidget);
+        expect(find.textContaining('ontbreken erin'), findsOneWidget);
+        expect(
+          find.textContaining('tabellen passen niet op de bladbreedte'),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      'legt uit waarom bron-als-doel wordt geweigerd en biedt een nieuwe '
+      'poging (#2467)',
+      (tester) async {
+        await tester.pumpWidget(
+          _app(
+            Builder(
+              builder: (context) => TextButton(
+                onPressed: () => DocumentExportDialog.show(
+                  context,
+                  privacyChecksEnabled: true,
+                  onExport: (_, _) async => const DocumentExportRefused(
+                    DocumentExportRefusal.sourceIsTarget,
+                  ),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        );
+        await tester.tap(find.text('open'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Exporteren…'));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.textContaining('doel is je brondocument zelf'),
+          findsOneWidget,
+        );
+        // De opties staan er nog: de gebruiker kiest een ander doel en
+        // probeert opnieuw — niet de dialoog dicht zonder antwoord.
+        expect(find.text('Exporteren…'), findsOneWidget);
+      },
+    );
+
+    testWidgets('annuleren toont geen foutmelding (#2467)', (tester) async {
+      await tester.pumpWidget(
+        _app(
+          Builder(
+            builder: (context) => TextButton(
+              onPressed: () => DocumentExportDialog.show(
+                context,
+                privacyChecksEnabled: true,
+                onExport: (_, _) async => const DocumentExportCancelled(),
+              ),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Exporteren…'));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('De export is niet gelukt'), findsNothing);
+      expect(find.textContaining('geweigerd'), findsNothing);
+      // Gewoon terug bij de opties.
+      expect(find.text('Exporteren…'), findsOneWidget);
     });
   });
 

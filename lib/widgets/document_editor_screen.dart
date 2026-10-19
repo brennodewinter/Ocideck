@@ -55,7 +55,6 @@ import '../state/tabs_provider.dart';
 import '../theme/app_theme.dart';
 import '../utils/doc_link.dart' show headingSlug;
 import '../utils/document_front_matter.dart';
-import '../utils/error_snackbar.dart';
 import '../utils/file_extension.dart';
 import '../utils/image_search_paths.dart';
 import '../utils/footnotes.dart';
@@ -721,7 +720,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 /// de juiste extensie, en schrijft de export weg. Geeft het geschreven pad
 /// terug, of `null` als de gebruiker de bestandskiezer wegklikte of het
 /// schrijven mislukte.
-Future<String?> _writeDocumentExport(
+Future<DocumentExportOutcome> _writeDocumentExport(
   WidgetRef ref,
   BuildContext context,
   PrivacyExportProfile profile,
@@ -729,7 +728,7 @@ Future<String?> _writeDocumentExport(
 ) async {
   final state = ref.read(documentProvider);
   final document = state.document;
-  if (document == null) return null;
+  if (document == null) return const DocumentExportCancelled();
   // Exporteer de *body* (zonder het stijl-frontmatter-blok): de `theme:`-regel
   // is een OciDeck-aanwijzing, geen inhoud, en de stijl reist als het gekozen
   // profiel mee via `theme:` hieronder — niet als tekst in de uitvoer.
@@ -742,7 +741,6 @@ Future<String?> _writeDocumentExport(
   final settings = ref.read(settingsProvider);
   final exportSetup = effectiveDocumentPageSetup(settings, document.source);
   final l10n = context.l10n;
-  final messenger = ScaffoldMessenger.of(context);
   final title = document.fields['title'] ?? _documentTitle(body, filePath);
   final effectiveTheme =
       resolveDocumentStyleProfile(settings, document.styleName) ??
@@ -772,20 +770,20 @@ Future<String?> _writeDocumentExport(
         context,
         classificationPolicy.evaluate(bundle.audience.deck.tlp),
       )) {
-    return null;
+    return const DocumentExportCancelled();
   }
 
   final privacyPolicy = PrivacyExportPolicy(gate: settings.privacyExportGate);
   final privacyDecision = privacyPolicy.evaluate(bundle.privacySummary);
   if (!context.mounted ||
       !await confirmDocumentPrivacyExport(context, privacyDecision)) {
-    return null;
+    return const DocumentExportCancelled();
   }
   final privacyAcknowledged = !privacyDecision.allowed;
 
   if (!context.mounted ||
       !await _confirmWebExportAssetLoss(context, bundle, format)) {
-    return null;
+    return const DocumentExportCancelled();
   }
 
   // Op web kan de bestandskiezer geen pad vragen zonder de bytes al te hebben
@@ -811,7 +809,7 @@ Future<String?> _writeDocumentExport(
       title: bundle.audience.deck.title,
       projectPath: projectPath,
     );
-    if (outputPath == null) return null;
+    if (outputPath == null) return const DocumentExportCancelled();
     webFileName = null;
   }
 
@@ -845,30 +843,12 @@ Future<String?> _writeDocumentExport(
     pdfFallbackFonts: format == DocumentExportFormat.pdf
         ? await loadPdfFallbackFonts()
         : const [],
-    onPdfUnsupportedCharacters: (runes) =>
-        warnAboutUnsupportedCharacters(messenger, l10n, runes),
-    onPdfCoarseLogo: (logo) => warnAboutCoarseLogo(messenger, l10n, logo),
-    onPdfTablesTooWide: (count) =>
-        warnAboutTablesTooWide(messenger, l10n, count),
     renderMermaid: renderMermaidForPdf,
     renderMath: renderMathForPdf,
     outputPath: outputPath,
     sourcePath: filePath,
     webFileName: webFileName,
   );
-  // Op web is `null` hier de mislukte download — de andere twee null-redenen
-  // (geen pad, doel is de bron) horen bij het schijfpad. Zonder deze melding
-  // sloot de dialoog terug naar zijn opties zonder één woord, terwijl de
-  // gebruiker net op Exporteren had gedrukt (#1902).
-  if (delivered == null && deliversByDownload) {
-    showErrorSnackBar(
-      messenger,
-      l10n,
-      l10n.d(
-        'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
-      ),
-    );
-  }
   return delivered;
 }
 

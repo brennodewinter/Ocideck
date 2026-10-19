@@ -658,6 +658,12 @@ const _dutchSourceAddFy = {
       'Plakke oersloegen: it ynfoegpunt is ûnderwilens wizige.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Knippe oersloegen: de tekst is ûnderwilens wizige.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Dat doel is dyn boarnedokumint sels. In eksport is in kopy foar in ûntfanger — it orizjineel wurdt nea oerskreaun. Kies in oare namme of map.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Dizze eksport wurdt blokkearre troch de yndielingsynstellingen.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Dizze eksport wurdt blokkearre troch de privacy-eksportregel.',
   'Certificaatnummer: {nummer}': 'Sertifikaatnûmer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'De beoardeler sjocht dit stik dan net mear. ',

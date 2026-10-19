@@ -1610,6 +1610,12 @@ const _dutchSourceAddLv = <String, String>{
       'Ielīmēšana izlaista: ievietošanas vieta pa to laiku ir mainījusies.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Izgriešana izlaista: teksts pa to laiku ir mainījies.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Šis mērķis ir pats jūsu avota dokuments. Eksports ir kopija saņēmējam — oriģināls nekad netiek pārrakstīts. Izvēlieties citu nosaukumu vai mapi.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Šo eksportu bloķē klasifikācijas iestatījumi.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Šo eksportu bloķē privātuma eksporta noteikums.',
   'Certificaatnummer: {nummer}': 'Sertifikāta numurs: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Vērtētājs vairs neredzēs šo gabalu. ',

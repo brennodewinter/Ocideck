@@ -1619,6 +1619,12 @@ const _dutchSourceAddLt = <String, String>{
       'Įklijavimas praleistas: įterpimo vieta tuo metu pasikeitė.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Iškirpimas praleistas: tekstas tuo metu pasikeitė.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Tikslas yra pats jūsų šaltinio dokumentas. Eksportas yra kopija gavėjui — originalas niekada neperrašomas. Pasirinkite kitą pavadinimą ar aplanką.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Šį eksportą blokuoja klasifikavimo nustatymai.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Šį eksportą blokuoja privatumo eksporto taisyklė.',
   'Certificaatnummer: {nummer}': 'Sertifikato numeris: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Vertintojas tuomet to elemento nebematys. ',

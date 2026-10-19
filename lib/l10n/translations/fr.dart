@@ -658,6 +658,12 @@ const _dutchSourceAddFr = {
       'Collage ignoré : le point d\'insertion a changé entre-temps.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Coupage ignoré : le texte a changé entre-temps.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Cette destination est votre document source lui-même. Un export est une copie pour un destinataire — l\'original n\'est jamais écrasé. Choisissez un autre nom ou dossier.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Cet export est bloqué par les paramètres de classification.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Cet export est bloqué par la règle d\'export de confidentialité.',
   'Certificaatnummer: {nummer}': 'Numéro de certificat : {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'L\'évaluateur ne verra alors plus cette pièce. ',

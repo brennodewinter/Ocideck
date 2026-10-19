@@ -6,8 +6,6 @@
 // Flutter-vrij zijn (zie `lib/services/pdf/`): het laden van een asset en het
 // opzoeken van een vertaling zijn juist wél schilwerk, en horen dus hier.
 
-import 'package:material_ui/material_ui.dart'
-    show ScaffoldMessengerState, SnackBar, Text;
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 
 import '../../l10n/app_localizations.dart';
@@ -115,42 +113,6 @@ String tablesTooWideMessage(AppLocalizations l10n, int count) {
       '${l10n.d('Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.')}';
 }
 
-/// Meld dat de PDF is geschreven met een tabel die niet paste.
-///
-/// Een waarschuwing en geen fout: het bestand staat er, en de tabel is te lezen
-/// — alleen de lange waarden erin niet meer betrouwbaar over te nemen.
-void warnAboutTablesTooWide(
-  ScaffoldMessengerState messenger,
-  AppLocalizations l10n,
-  int count,
-) => messenger.showSnackBar(
-  SnackBar(
-    content: Text(tablesTooWideMessage(l10n, count)),
-    duration: const Duration(seconds: 8),
-  ),
-);
-
-/// Meld dat de PDF is geschreven maar tekens mist.
-///
-/// Het bestand staat er wél — daarom een waarschuwing en geen fout. Wat níet mag
-/// gebeuren is dat de gebruiker het zelf moet ontdekken: een teken dat geen
-/// enkele snede kent verdwijnt uit de tekstlaag, en dus ook uit zoeken,
-/// kopiëren en de voorleessoftware.
-///
-/// Neemt de messenger en niet een `BuildContext`: de aanroeper pakt hem vóór het
-/// wachten op de export vast, want daarna is de context niet meer te vertrouwen
-/// en zou de waarschuwing stil wegvallen.
-void warnAboutUnsupportedCharacters(
-  ScaffoldMessengerState messenger,
-  AppLocalizations l10n,
-  Set<int> runes,
-) => messenger.showSnackBar(
-  SnackBar(
-    content: Text(unsupportedCharactersMessage(l10n, runes)),
-    duration: const Duration(seconds: 8),
-  ),
-);
-
 /// De melding bij een logo dat te grof is voor drukwerk.
 ///
 /// Noemt de maten, want zonder die twee getallen is "te grof" een oordeel waar
@@ -171,22 +133,6 @@ String coarseLogoMessage(AppLocalizations l10n, LogoResolution logo) {
       .replaceAll('{px}', '${logo.advisedPixelWidth}');
   return '$measured $advice';
 }
-
-/// Meld dat de PDF is geschreven met een logo dat te grof is voor drukwerk.
-///
-/// Een waarschuwing en geen fout: het bestand staat er, en op het scherm valt
-/// het meestal niet op. Op papier wel — en dat merkt de gebruiker anders pas na
-/// het drukken.
-void warnAboutCoarseLogo(
-  ScaffoldMessengerState messenger,
-  AppLocalizations l10n,
-  LogoResolution logo,
-) => messenger.showSnackBar(
-  SnackBar(
-    content: Text(coarseLogoMessage(l10n, logo)),
-    duration: const Duration(seconds: 8),
-  ),
-);
 
 /// Hoe lang de export hoogstens op één tekening wacht.
 ///

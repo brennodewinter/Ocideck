@@ -1627,6 +1627,12 @@ const _dutchSourceAddLa = <String, String>{
       'Inserere praetermissum: locus inserendi interea mutatus est.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Recisio praetermissa: textus interea mutatus est.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Istud destinatio est ipsum documentum fontis tuum. Exportatio exemplar pro recipiente est — originale numquam rescribitur. Aliud nomen vel fasciculum elige.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Haec exportatio a constitutionibus classificationis prohibetur.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Haec exportatio regula exportationis privatae prohibetur.',
   'Certificaatnummer: {nummer}': 'Numerus certificati: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Iudex hanc partem deinde non amplius videbit. ',

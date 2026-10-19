@@ -1612,6 +1612,12 @@ const _dutchSourceAddId = <String, String>{
       'Tempel dilewati: titik sisipan telah berubah sementara itu.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Potong dilewati: teks telah berubah sementara itu.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Tujuan itu adalah dokumen sumber Anda sendiri. Ekspor adalah salinan untuk penerima — aslinya tidak pernah ditimpa. Pilih nama atau folder lain.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Ekspor ini diblokir oleh pengaturan klasifikasi.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Ekspor ini diblokir oleh aturan ekspor privasi.',
   'Certificaatnummer: {nummer}': 'Nomor sertifikat: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Penilai tidak akan lagi melihat bagian ini. ',

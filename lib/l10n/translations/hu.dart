@@ -1614,6 +1614,12 @@ const _dutchSourceAddHu = <String, String>{
       'Beillesztés kihagyva: a beszúrási pont időközben megváltozott.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Kivágás kihagyva: a szöveg időközben megváltozott.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Ez a cél maga a forrásdokumentum. Az export egy példány a címzettnek — az eredeti soha nem íródik felül. Válasszon más nevet vagy mappát.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Ezt az exportot a besorolási beállítások blokkolják.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Ezt az exportot az adatvédelmi exportszabály blokkolja.',
   'Certificaatnummer: {nummer}': 'Tanúsítványszám: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Az értékelő ekkor már nem látja ezt az elemet. ',

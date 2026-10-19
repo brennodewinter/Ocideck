@@ -818,6 +818,12 @@ const _dutchSourceAddEn = {
       'Paste skipped: the insertion point has changed in the meantime.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Cut skipped: the text has changed in the meantime.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'That destination is your source document itself. An export is a copy for a recipient — the original is never overwritten. Choose a different name or folder.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'This export is blocked by the classification settings.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'This export is blocked by the privacy export rule.',
   'Certificaatnummer: {nummer}': 'Certificate number: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'The assessor will then no longer see this piece. ',

@@ -1642,6 +1642,12 @@ const _dutchSourceAddGa = <String, String>{
       'Greamú scipeáilte: athraíodh an pointe ionsála idir an dá linn.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Gearradh scipeáilte: athraíodh an téacs idir an dá linn.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Is é an sprioc sin do dhoiciméad foinseach féin. Is cóip do fhaighteoir é onnmhairiú — ní fholaítear an bunchóip riamh. Roghnaigh ainm nó fillteán eile.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Tá an t-onnmhairiú seo blocáilte ag na socruithe aicmiúcháin.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Tá an t-onnmhairiú seo blocáilte ag riail onnmhairithe príobháideachta.',
   'Certificaatnummer: {nummer}': 'Uimhir teastais: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ní fheicfidh an measúnóir an píosa seo níos mó ansin. ',

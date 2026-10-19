@@ -1615,6 +1615,12 @@ const _dutchSourceAddGsw = <String, String>{
       'Iifüege übersprunge: d Iifüegposition het underdes gänderet.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Uusschnide übersprunge: de Teggscht het underdes gänderet.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Das Ziil isch dis Quelldokumänt sälber. En Export isch e Kopii für en Empfänger — s Original wird nie überschribe. Wähl en andere Namen oder Ordner.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Dää Export wird dur d Klassifizierigsiistellige blockiert.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Dää Export wird dur d Dateschutz-Exportregel blockiert.',
   'Certificaatnummer: {nummer}': 'Zertifikatsnummere: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'De Prüefer gseht das Stück de nüme. ',

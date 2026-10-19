@@ -1613,6 +1613,12 @@ const _dutchSourceAddCs = <String, String>{
       'Vložení přeskočeno: místo vložení se mezitím změnilo.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Vystřižení přeskočeno: text se mezitím změnil.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Tato destinace je váš zdrojový dokument. Export je kopie pro příjemce — originál se nikdy nepřepisuje. Zvolte jiný název nebo složku.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Tento export je blokován nastavením klasifikace.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Tento export je blokován pravidlem exportu soukromí.',
   'Certificaatnummer: {nummer}': 'Číslo certifikátu: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Hodnotitel pak tento kus již neuvidí. ',

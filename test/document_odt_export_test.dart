@@ -205,7 +205,7 @@ void main() {
       outputPath: out,
     );
 
-    expect(written, out);
+    expect((written as DocumentExportWritten).path, out);
     expect(await File(out).exists(), isTrue);
 
     // Het bestand is een geldige ZIP met ODT-structuur.
@@ -227,7 +227,7 @@ void main() {
       outputPath: out,
     );
 
-    expect(written, isNull);
+    expect(written, isA<DocumentExportRefused>());
     expect(await File(out).exists(), isFalse);
   });
 

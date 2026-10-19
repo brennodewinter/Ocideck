@@ -1605,6 +1605,12 @@ const _dutchSourceAddEt = <String, String>{
       'Kleepimine jäeti vahele: lisamiskoht on vahepeal muutunud.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Lõikamine jäeti vahele: tekst on vahepeal muutunud.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'See sihtkoht on teie lähtedokument ise. Eksport on koopia adressaadile — originaali ei kirjutata kunagi üle. Valige muu nimi või kaust.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Selle ekspordi blokeerivad klassifitseerimise seaded.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Selle ekspordi blokeerib privaatsuse ekspordireegel.',
   'Certificaatnummer: {nummer}': 'Sertifikaadi number: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Hindaja ei näe seda tükki enam. ',

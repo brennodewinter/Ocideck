@@ -1640,6 +1640,12 @@ const _dutchSourceAddPt = <String, String>{
       'Colagem ignorada: o ponto de inserção mudou entretanto.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Corte ignorado: o texto mudou entretanto.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Esse destino é o próprio documento de origem. Uma exportação é uma cópia para um destinatário — o original nunca é substituído. Escolha outro nome ou pasta.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Esta exportação está bloqueada pelas definições de classificação.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Esta exportação está bloqueada pela regra de exportação de privacidade.',
   'Certificaatnummer: {nummer}': 'Número de certificado: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'O avaliador deixará então de ver esta peça. ',

@@ -1628,6 +1628,12 @@ const _dutchSourceAddRo = <String, String>{
       'Lipire omisă: punctul de inserare s-a schimbat între timp.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Decupare omisă: textul s-a schimbat între timp.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Această destinație este chiar documentul sursă. Un export este o copie pentru un destinatar — originalul nu este suprascris niciodată. Alegeți alt nume sau folder.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Acest export este blocat de setările de clasificare.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Acest export este blocat de regula de export privind confidențialitatea.',
   'Certificaatnummer: {nummer}': 'Număr de certificat: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Evaluatorul nu va mai vedea apoi această piesă. ',

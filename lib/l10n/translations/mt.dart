@@ -1630,6 +1630,12 @@ const _dutchSourceAddMt = <String, String>{
       'Incollar injorat: il-punt ta\' inserzjoni nbidel fil-frattemp.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Qtugħ injorat: it-test nbidel fil-frattemp.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Dak id-destinazzjoni huwa d-dokument sors tiegħek stess. Esportazzjoni hija kopja għal riċevitur — l-oriġinal qatt ma jiġi miktub fuqu. Agħżel isem jew folder ieħor.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Din l-esportazzjoni hija mblukkata mill-issettjar tal-klassifikazzjoni.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Din l-esportazzjoni hija mblukkata mir-regola tal-esport tal-privatezza.',
   'Certificaatnummer: {nummer}': 'Numru taċ-ċertifikat: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'L-evalwatur ma jara din il-biċċa iktar. ',

@@ -1611,6 +1611,12 @@ const _dutchSourceAddSv = <String, String>{
       'Inklistring hoppades över: infogningspunkten har ändrats under tiden.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Klippning hoppades över: texten har ändrats under tiden.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Det målet är ditt källdokument. En export är en kopia för en mottagare — originalet skrivs aldrig över. Välj ett annat namn eller en annan mapp.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Den här exporten blockeras av klassificeringsinställningarna.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Den här exporten blockeras av integritetsregeln för export.',
   'Certificaatnummer: {nummer}': 'Certifikatnummer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Bedömaren ser då inte längre detta stycke. ',

@@ -655,6 +655,12 @@ const _dutchSourceAddEs = {
       'Pegar omitido: el punto de inserción ha cambiado mientras tanto.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Cortar omitido: el texto ha cambiado mientras tanto.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Ese destino es tu documento de origen. Una exportación es una copia para un destinatario — el original nunca se sobrescribe. Elige otro nombre o carpeta.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Esta exportación está bloqueada por la configuración de clasificación.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Esta exportación está bloqueada por la regla de exportación de privacidad.',
   'Certificaatnummer: {nummer}': 'Número de certificado: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'El evaluador ya no verá esta pieza. ',

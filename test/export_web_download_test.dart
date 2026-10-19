@@ -180,7 +180,7 @@ void main() {
       webFileName: 'rapport.md',
     );
 
-    expect(written, 'rapport.md');
+    expect((written as DocumentExportWritten).path, 'rapport.md');
     expect(calls, hasLength(1));
     expect(utf8.decode(calls.single.bytes), contains('Rapport'));
 
@@ -194,7 +194,7 @@ void main() {
         enforcementPolicy: const ClassificationEnforcementPolicy(),
         webFileName: 'rapport.md',
       ),
-      isNull,
+      isA<DocumentExportFailed>(),
     );
   });
 
@@ -220,7 +220,7 @@ void main() {
         webFileName: 'rapport.md',
       );
 
-      expect(written, isNull);
+      expect(written, isA<DocumentExportRefused>());
       expect(calls, isEmpty);
     },
   );

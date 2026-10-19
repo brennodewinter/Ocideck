@@ -124,12 +124,17 @@ void main() {
   });
 
   test('de documentexport geeft de tabelwaarschuwing door aan de schil', () {
-    // Zelfde bronpoort als hierboven: een melding die de exportdienst wél
-    // vuurt maar het bewerkscherm niet doorgeeft, bereikt niemand.
-    final source = File(
-      'lib/widgets/document_editor_screen.dart',
+    // Zelfde bronpoort als hierboven: een waarschuwing die de exportdienst
+    // wél verzamelt maar de dialoog niet toont, bereikt niemand. Sinds #2467
+    // reist hij als DocumentExportTablesTooWide in de uitkomst mee, en tekent
+    // de dialoog hem met tablesTooWideMessage in het resultaat.
+    final service = File(
+      'lib/services/document_export_service.dart',
     ).readAsStringSync();
-    expect(source, contains('onPdfTablesTooWide:'));
-    expect(source, contains('warnAboutTablesTooWide('));
+    expect(service, contains('DocumentExportTablesTooWide('));
+    final dialog = File(
+      'lib/widgets/dialogs/document_export_dialog.dart',
+    ).readAsStringSync();
+    expect(dialog, contains('tablesTooWideMessage('));
   });
 }
