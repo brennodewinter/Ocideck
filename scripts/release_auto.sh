@@ -2456,8 +2456,8 @@ assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
       queued|in_progress|waiting|pending|requested) ;;
       *) die "Windows-suite op merge ${merge:0:12} is $state (run $run_id) — niets getagd." ;;
     esac
-    [ "$SECONDS" -lt $((start + 7200)) ] \
-      || die "Windows-suite op merge ${merge:0:12} bleef langer dan 120 min actief — niets getagd."
+    [ "$SECONDS" -lt $((start + 9000)) ] \
+      || die "Windows-suite op merge ${merge:0:12} bleef langer dan 150 min actief — niets getagd."
     sleep 30
   done
 }

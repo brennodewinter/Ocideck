@@ -2380,8 +2380,10 @@ every list because a *bare* pin bump touches neither pubspec file.
   --exclude-tags golden` on `windows-2022`, once a week over `main` (Monday
   06:47 UTC) plus `workflow_dispatch`. It is the Windows twin of the Forgejo
   [`linux-gate.yml`](#forgejoworkflowslinux-gateyml--nightly-schedule-and-on-demand-workflow_dispatch)
-  nightly: **detection, not prevention** — a red run blocks nothing but names
-  the failing test, and at most a week of commits sits between it and green.
+  nightly. The weekly run detects problems early; before a release tag, the
+  release script dispatches this same suite on the exact merge commit and
+  requires a green result. The job limit includes room for cold-start and
+  post-job cleanup.
 - **Why it exists.** For years the suite saw Windows only on a `v*` tag (the
   `ci.yml` matrix below), while the local gate and both Forgejo gates run on
   macOS or Linux. Three release tags in a row (v0.6.3–v0.6.5) went red on

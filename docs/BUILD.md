@@ -778,6 +778,8 @@ suite on it and requires success. A red, missing, or unreadable result leaves
 the release untagged and can be retried with `--resume vX.Y.Z`. After the tag,
 the separate Forgejo `ci.yml`, macOS golden gate, and GitHub tag CI must also
 finish green before phase 3 publishes the release.
+The script's wait exceeds the Windows job limit, so the job can report its
+terminal result before the release gives up.
 
 `scripts/release_auto.sh --preflight` runs that rehearsal on its own: the
 staleness gate, a clean and idle worktree, the token, the mirror, the deploy
