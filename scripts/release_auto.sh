@@ -737,6 +737,22 @@ status_probe_site() {
   fi
 }
 
+homebrew_tap_current() {
+  scripts/verify_homebrew_cask.sh "$TAG"
+}
+
+status_probe_tap() {
+  local result
+  if result="$(homebrew_tap_current 2>&1)"; then
+    printf '1|%s\n' "$result" >"$1"
+  else
+    case "$result" in
+      *'Could not read'*|*'curl:'*) printf '?|%s\n' "$result" >"$1" ;;
+      *) printf '0|%s\n' "$result" >"$1" ;;
+    esac
+  fi
+}
+
 # mark3 TOESTAND PAYLOAD TEKST — als mark, maar met een derde toestand: ? is
 # expliciet onbekend (met reden), geen afwezig.
 mark3() {
@@ -770,12 +786,12 @@ cmd_status() {
   read_token
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
-  local has_sums=0 manifest_complete=0 sig_valid=0 web_live=0 website_live=0 ci_stable=0
+  local has_sums=0 manifest_complete=0 sig_valid=0 web_live=0 website_live=0 tap_live=0 ci_stable=0
   local live="" website_version="" mgate_ok=0 tag_gates_ok=0 tag_gate_failed=0
   local prnum="" prstate=""
   local probe_dir probe_fn probe pids="" n_done deadline
-  local st_branch st_pr st_tag_o st_tag_m st_release st_ci st_mgate st_tag_gates st_web st_site
-  local d_branch d_pr d_tag_o d_tag_m d_release d_ci d_mgate d_tag_gates d_web d_site
+  local st_branch st_pr st_tag_o st_tag_m st_release st_ci st_mgate st_tag_gates st_web st_site st_tap
+  local d_branch d_pr d_tag_o d_tag_m d_release d_ci d_mgate d_tag_gates d_web d_site d_tap
 
   # Alle sondes tegelijk opstarten; de deadline geldt voor het geheel, niet per
   # sonde. API_TRIES=1/API_MAX_TIME=25 houdt een enkele trage call binnen de
@@ -784,7 +800,7 @@ cmd_status() {
   probe_dir="$(mktemp -d)"
   for probe_fn in status_probe_branch status_probe_pr status_probe_tag_o \
       status_probe_tag_m status_probe_release status_probe_ci status_probe_mgate status_probe_tag_gates \
-      status_probe_web status_probe_site; do
+      status_probe_web status_probe_site status_probe_tap; do
     ( API_TRIES=1 API_MAX_TIME=25 "$probe_fn" "$probe_dir/${probe_fn#status_probe_}" ) \
       2>/dev/null &
     pids="$pids $!"
@@ -794,7 +810,7 @@ cmd_status() {
     # Alleen niet-lege uitslagen tellen: het >-redirect maakt het bestand al aan
     # voordat de sonde zijn regel heeft geschreven.
     n_done="$(find "$probe_dir" -type f ! -size 0 | wc -l | tr -d ' ')"
-    [ "$n_done" -ge 10 ] && break
+    [ "$n_done" -ge 11 ] && break
     sleep 0.2 2>/dev/null || sleep 1
   done
   for probe in $pids; do kill "$probe" 2>/dev/null || true; done
@@ -810,6 +826,7 @@ cmd_status() {
   status_read "$probe_dir" tag_gates; st_tag_gates="$R_ST"; d_tag_gates="$R_PAYLOAD"
   status_read "$probe_dir" web;     st_web="$R_ST";     d_web="$R_PAYLOAD"
   status_read "$probe_dir" site;    st_site="$R_ST";    d_site="$R_PAYLOAD"
+  status_read "$probe_dir" tap;     st_tap="$R_ST";     d_tap="$R_PAYLOAD"
   rm -rf "$probe_dir"
 
   [ "$st_branch" = 1 ] && has_branch=1
@@ -831,6 +848,7 @@ cmd_status() {
   [ "$st_web" = 1 ] && web_live=1
   [ "$st_web" = 0 ] && live="$d_web"
   [ "$st_site" = 1 ] && website_live=1
+  [ "$st_tap" = 1 ] && tap_live=1
   [ "$st_site" = 0 ] && website_version="$d_site"
   [ "$st_mgate" = 1 ] && mgate_ok=1
   [ "$st_tag_gates" = 1 ] && tag_gates_ok=1
@@ -906,12 +924,21 @@ cmd_status() {
     [ "$website_live" -eq 1 ] || websitedesc="$websitedesc (nu: $website_seen)"
     mark "$website_live" "$websitedesc"
   fi
+  mark3 "$st_tap" "$d_tap" "Homebrew-tap biedt $TAG aan"
 
   section "Advies"
   if [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$mgate_ok" -eq 1 ] && [ "$tag_gates_ok" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
-      && [ "$website_live" -eq 1 ] && [ "$has_mirror" -eq 1 ] && [ "$has_tag_m" -eq 1 ]; then
-    log "De release is publiek compleet: artefacten, handtekening, webdemo en downloadpagina kloppen."
+      && [ "$website_live" -eq 1 ] && [ "$tap_live" -eq 1 ] && [ "$has_mirror" -eq 1 ] && [ "$has_tag_m" -eq 1 ]; then
+    log "De release is publiek compleet: artefacten, handtekening, webdemo, downloadpagina en Homebrew-tap kloppen."
     log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
+  elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$mgate_ok" -eq 1 ] && [ "$tag_gates_ok" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
+      && [ "$website_live" -eq 1 ] && [ "$tap_live" -eq 0 ]; then
+    if [ "$st_tap" = '?' ]; then
+      log "De release is gepubliceerd, maar de Homebrew-tap is niet leesbaar ($d_tap)."
+    else
+      log "De release is gepubliceerd, maar de Homebrew-tap biedt $TAG nog niet aan."
+    fi
+    log "Controleer de update-cask-workflow van LibreKAT/homebrew-ocideck en hervat met: scripts/release_auto.sh --resume $TAG"
   elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$mgate_ok" -eq 1 ] && [ "$tag_gates_ok" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
       && [ "$website_live" -eq 0 ]; then
     if [ "$st_site" = '?' ]; then
@@ -1945,6 +1972,17 @@ phase3() {
       esac
     fi
     log "Publieke downloadpagina gecontroleerd: $WEBSITE_URL verwijst naar $TAG."
+
+    STEP="Homebrew-tap controleren"
+    local tap_deadline tap_result="" tap_wait="${HOMEBREW_WAIT_SECONDS:-2700}"
+    [[ "$tap_wait" =~ ^[0-9]+$ ]] || die "HOMEBREW_WAIT_SECONDS moet een aantal seconden zijn."
+    tap_deadline=$((SECONDS + tap_wait))
+    while ! tap_result="$(homebrew_tap_current 2>&1)"; do
+      [ "$SECONDS" -lt "$tap_deadline" ] \
+        || die "Homebrew-tap bleef achter bij $TAG: $tap_result — controleer LibreKAT/homebrew-ocideck/actions en hervat met: scripts/release_auto.sh --resume $TAG"
+      sleep 30
+    done
+    log "Homebrew-tap gecontroleerd: $TAG beschikbaar."
   fi
 }
 
