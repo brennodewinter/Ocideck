@@ -1043,7 +1043,14 @@ void main() {
       reason: 'de promptsectie hoort een eigen STEP te zetten.',
     );
     expect(stepIdx, lessThan(preflightIdx));
-    expect(functionBody('preflight'), contains('section "Wachtwoord"'));
+    expect(
+      functionBody('read_minisign_password'),
+      contains('STEP="wachtwoord"'),
+    );
+    expect(
+      functionBody('read_minisign_password'),
+      contains('section "Wachtwoord"'),
+    );
   });
 
   test('bouwen en notariseren melden zich als aparte stap', () {

@@ -12,8 +12,9 @@
 # Interactie zit VOORAAN en nergens anders:
 #   1. een menu kiest het volgende SemVer-niveau (patch/minor/major — geen 4e cijfer,
 #      OciDeck belooft strikte 3-delige SemVer, afgedwongen door check-version-bump);
-#   2. één prompt vraagt het minisign-sleutelwachtwoord (blijft alleen in het geheugen
-#      van deze run; wordt via een stdin-pipe aan minisign gevoerd, nooit naar schijf/log).
+#   2. minisign gebruikt het eenmalig ingestelde macOS-sleutelhangeritem, of
+#      vraagt het sleutelwachtwoord als dat item ontbreekt. Het blijft alleen
+#      in het geheugen van deze run en gaat via stdin naar minisign.
 #   De macOS-notarisatie leunt op de keychain-items op deze Mac (Developer-ID +
 #   notarytool-profiel) en vraagt zelf geen wachtwoord; is de keychain vergrendeld,
 #   dan faalt die stap zichtbaar (zie de fail-safe hieronder).
@@ -99,6 +100,7 @@ FORGE_API="${OCIDECK_FORGE_API:-https://pawprint.vigilis.online/api/v1}"
 REPO_SLUG="${OCIDECK_REPO_SLUG:-LibreKAT/Ocideck}"
 RELEASE_BASE_URL="${OCIDECK_RELEASE_BASE_URL:-https://pawprint.vigilis.online/${REPO_SLUG}/releases/download}"
 TOKEN_KEYCHAIN_SERVICE="${OCIDECK_TOKEN_SERVICE:-forgejo-pawprint-api}"
+MINISIGN_KEYCHAIN_SERVICE="${OCIDECK_MINISIGN_KEYCHAIN_SERVICE:-ocideck-minisign-password}"
 APPLICATIONS_DIR="${OCIDECK_APPLICATIONS_DIR:-/Applications}"
 # Zelfde standaard-doel als scripts/deploy_web.sh; de pre-flight toetst dat het
 # bereikbaar is vóór de tag, zodat deploy-web niet ná de tag strandt.
@@ -1507,6 +1509,34 @@ resume_capability_needs() {
   rm -rf "$t"
 }
 
+# Lees alleen wanneer een handtekening nog nodig is. Een ontbrekend item houdt
+# de bestaande interactieve route beschikbaar; een aanwezig maar ontoegankelijk
+# item is een fout (bijvoorbeeld een vergrendelde sleutelhanger), geen reden om
+# na uren wachten alsnog om invoer te vragen. De waarde gaat nooit naar een log,
+# bestand of commandoregel en blijft een niet-geëxporteerde shellvariabele.
+read_minisign_password() {
+  [ -z "${MINISIGN_PW:-}" ] || return 0
+  STEP="wachtwoord"
+  local lookup_rc=0
+  security find-generic-password -s "$MINISIGN_KEYCHAIN_SERVICE" >/dev/null 2>&1 \
+    || lookup_rc=$?
+  case "$lookup_rc" in
+    0)
+      MINISIGN_PW="$(security find-generic-password \
+        -s "$MINISIGN_KEYCHAIN_SERVICE" -w 2>/dev/null)" \
+        || die "minisign-wachtwoord staat in de sleutelhanger, maar kan niet worden gelezen — ontgrendel de sleutelhanger en probeer opnieuw."
+      log "Minisign-wachtwoord veilig uit de macOS-sleutelhanger geladen."
+      ;;
+    44)
+      section "Wachtwoord"
+      log "Geen minisign-wachtwoord in de sleutelhanger; handmatige invoer."
+      read -r -s -p "  minisign-wachtwoord: " MINISIGN_PW || true
+      echo
+      ;;
+    *) die "minisign-sleutelhangerstatus niet leesbaar (code $lookup_rc) — ontgrendel de sleutelhanger en probeer opnieuw." ;;
+  esac
+}
+
 # ── #7 Pre-flight: alles wat later onherroepelijk nodig is, nú toetsen ──────────
 # Vandaag brak de keten pas ná de tag op stappen die vooraf toetsbaar waren
 # (deploy-ssh, de handtekening). Deze functie faalt vóór elke mutatie.
@@ -1583,13 +1613,7 @@ preflight() {
   # push (#2324). Toetsen nu kost seconden; toen kostte het een releaserun.
   assert_appimagetool_pin
   if [ "$need_sign" -eq 1 ]; then
-    if [ -z "${MINISIGN_PW:-}" ]; then
-      section "Wachtwoord"
-      log "Het minisign-sleutelwachtwoord wordt nu gevraagd en blijft alleen in het"
-      log "geheugen van deze run (voor het tekenen van SHA256SUMS, geheel aan het eind)."
-      read -r -s -p "  minisign-wachtwoord: " MINISIGN_PW || true
-      echo
-    fi
+    read_minisign_password
     [ -n "$MINISIGN_PW" ] || die "leeg wachtwoord — afgebroken."
     # Proef-tekening: valideert sleutel én wachtwoord vóór de lange build/tag,
     # zodat een fout wachtwoord niet pas aan het eind (na de tag) opduikt.
