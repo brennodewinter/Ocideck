@@ -350,6 +350,7 @@ Future<Uint8List> buildDocumentExportBytes(
         footnotePlacement: footnotePlacement,
         footnotesTitle: footnotesTitle,
         embedImage: embedImage,
+        renderMermaid: themedRenderMermaid,
         sourcePath: sourcePath,
         outputPath: outputPath ?? '',
       );
