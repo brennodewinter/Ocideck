@@ -71,7 +71,7 @@ iso_to_epoch() {
 if [ -z "$TAG" ]; then
   # One release object, so one tag_name; splitting on commas keeps the match
   # anchored to that field instead of letting a greedy `.*` run past it.
-  TAG="$(curl -fsSL "$API/repos/$SOURCE_REPOSITORY/releases?limit=1" \
+  TAG="$(curl -fsSL --connect-timeout 10 --max-time 25 "$API/repos/$SOURCE_REPOSITORY/releases?limit=1" \
     | tr ',' '\n' | sed -n 's/.*"tag_name":"\([^"]*\)".*/\1/p' | head -n1)"
   if [ -z "$TAG" ]; then
     echo "Could not read the newest release tag from $SOURCE_REPOSITORY." >&2
@@ -102,7 +102,7 @@ if [ -n "${CASK_FILE:-}" ]; then
 else
   SOURCE="$TAP_REPOSITORY"
   CASK_URL="$API/repos/$TAP_REPOSITORY/raw/Casks/ocideck.rb"
-  if ! CASK="$(curl -fsSL "$CASK_URL")"; then
+  if ! CASK="$(curl -fsSL --connect-timeout 10 --max-time 25 "$CASK_URL")"; then
     echo "Could not read Casks/ocideck.rb from $TAP_REPOSITORY ($CASK_URL)." >&2
     echo "The tap is gone, private, or was never populated." >&2
     exit 1
@@ -144,7 +144,7 @@ else
   # HEAD rather than a branch name: the mirror follows whatever the tap's
   # default branch is called, and that is not this script's business.
   MIRROR_URL="https://raw.githubusercontent.com/$MIRROR_REPOSITORY/HEAD/Casks/ocideck.rb"
-  if ! MIRROR_CASK="$(curl -fsSL "$MIRROR_URL")"; then
+  if ! MIRROR_CASK="$(curl -fsSL --connect-timeout 10 --max-time 25 "$MIRROR_URL")"; then
     echo "Could not read the cask from mirror $MIRROR_REPOSITORY ($MIRROR_URL)." >&2
     echo "The mirror is gone or was never populated." >&2
     exit 1
@@ -162,7 +162,7 @@ fi
 # to catch up, so ask the release when it was published.
 PUBLISHED="${RELEASE_PUBLISHED_AT:-}"
 if [ -z "$PUBLISHED" ]; then
-  PUBLISHED="$(curl -fsSL "$API/repos/$SOURCE_REPOSITORY/releases/tags/$TAG" \
+  PUBLISHED="$(curl -fsSL --connect-timeout 10 --max-time 25 "$API/repos/$SOURCE_REPOSITORY/releases/tags/$TAG" \
     | tr ',' '\n' | sed -n 's/.*"published_at":"\([^"]*\)".*/\1/p' | head -n1)"
 fi
 

@@ -31,6 +31,7 @@ void main() {
   ProcessResult runPhase3({
     required String websiteVersion,
     String websiteRun = '',
+    bool tapCurrent = true,
   }) {
     final dir = Directory.systemTemp.createTempSync('ocideck-release-website-');
     addTearDown(() => dir.deleteSync(recursive: true));
@@ -58,6 +59,8 @@ REPO_SLUG=LibreKAT/Ocideck
 TOKEN=test-token
 MINISIGN_PW=test-password
 WEBSITE_RUN=$websiteRun
+TAP_CURRENT=${tapCurrent ? 1 : 0}
+HOMEBREW_WAIT_SECONDS=0
 TMP=
 STEP=test
 snap=
@@ -76,6 +79,7 @@ make() {
   fi
 }
 minisign() { return 0; }
+homebrew_tap_current() { [ "\$TAP_CURRENT" = 1 ]; }
 api() {
   local method="\$1" path="\$2"
   case "\$method \$path" in
@@ -166,5 +170,13 @@ printf 'DOOR\\n'
       ),
     );
     expect(output, contains('DOOR'));
+  }, skip: skipOnWindows);
+
+  test('fase 3 meldt een achtergebleven Homebrew-tap als onafgerond', () {
+    final result = runPhase3(websiteVersion: '9.9.9', tapCurrent: false);
+    final output = '${result.stdout}\n${result.stderr}';
+    expect(result.exitCode, isNot(0), reason: output);
+    expect(output, contains('Homebrew'));
+    expect(output, isNot(contains('DOOR')));
   }, skip: skipOnWindows);
 }

@@ -140,6 +140,7 @@ make() {
   fi
 }
 minisign() { return ${signatureValid ? 0 : 1}; }
+homebrew_tap_current() { return 0; }
 api() {
   local method="\$1" path="\$2"
   if [ "\$method" != GET ]; then

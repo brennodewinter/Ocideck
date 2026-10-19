@@ -197,6 +197,7 @@ cmd_status
   ProcessResult runStatus({
     required String liveVersion,
     String websiteVersion = '9.9.9',
+    bool tapCurrent = true,
     String pullsJson = '[]',
     bool releaseMissing = false,
   }) {
@@ -217,6 +218,7 @@ cmd_status
     return runReleaseHarness('''
 LIVE=${live.path}
 WEBSITE=${website.path}
+TAP_CURRENT=${tapCurrent ? 1 : 0}
 BRANCH=release/v9.9.9
 read_token() { :; }
 section() { printf '== %s ==\\n' "\$1"; }
@@ -284,6 +286,12 @@ curl() {
   esac
 }
 minisign() { return 0; }
+homebrew_tap_current() {
+  [ "\$TAP_CURRENT" = 1 ] && printf 'Tap is current\n' || {
+    printf 'Tap is stale\n' >&2
+    return 1
+  }
+}
 cmd_status
 ''');
   }
@@ -333,6 +341,14 @@ cmd_status
     );
     expect(output, isNot(contains('De release is publiek compleet')));
     expect(output, contains('--resume controleert daarna de publieke pagina'));
+  }, skip: skipOnWindows);
+
+  test('--status noemt een achtergebleven Homebrew-tap niet compleet', () {
+    final r = runStatus(liveVersion: '9.9.9', tapCurrent: false);
+    final output = '${r.stdout}\n${r.stderr}';
+    expect(output, contains('mark 0 Homebrew-tap'), reason: output);
+    expect(output, isNot(contains('De release is publiek compleet')));
+    expect(output, contains('homebrew-ocideck'));
   }, skip: skipOnWindows);
 
   test(
