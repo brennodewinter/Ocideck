@@ -771,7 +771,7 @@ cmd_status() {
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
   local has_sums=0 manifest_complete=0 sig_valid=0 web_live=0 website_live=0 ci_stable=0
-  local live="" website_version="" mgate_ok=0 tag_gates_ok=0
+  local live="" website_version="" mgate_ok=0 tag_gates_ok=0 tag_gate_failed=0
   local prnum="" prstate=""
   local probe_dir probe_fn probe pids="" n_done deadline
   local st_branch st_pr st_tag_o st_tag_m st_release st_ci st_mgate st_tag_gates st_web st_site
@@ -834,6 +834,12 @@ cmd_status() {
   [ "$st_site" = 0 ] && website_version="$d_site"
   [ "$st_mgate" = 1 ] && mgate_ok=1
   [ "$st_tag_gates" = 1 ] && tag_gates_ok=1
+  if [ "$st_tag_gates" = 0 ]; then
+    case "$d_tag_gates" in
+      *failure*|*cancelled*|*skipped*|*error*|*timed_out*|*action_required*|*stale*)
+        tag_gate_failed=1 ;;
+    esac
+  fi
   local website_seen="${website_version:+v$website_version}"
   [ -n "$website_seen" ] || website_seen="geen leesbare versie"
 
@@ -923,6 +929,10 @@ cmd_status() {
       log "Zet hem live met:  scripts/release_auto.sh --resume $TAG"
     fi
     log "(die verifieert de tag tegen origin, eist een schone werkboom en bouwt alleen vanaf de tag-commit)"
+  elif [ "$has_tag_o" -eq 1 ] && [ "$tag_gate_failed" -eq 1 ]; then
+    log "Een tagpoort is terminaal rood ($d_tag_gates). --resume herbouwt deze tag niet en neemt latere codefixes op main niet mee."
+    log "Herstel en herstart de poort op de bestaande tagcommit, of kies expliciet een nieuwe versie of gecontroleerd tagherstel."
+    log "Hervat pas wanneer de tagpoorten groen zijn op exact de releasecommit."
   elif [ "$has_tag_o" -eq 1 ]; then
     log "De tag staat vast, maar de release is nog niet af (mirror-tag / tekenen / deploy)."
     log "Maak DEZELFDE tag af met:  scripts/release_auto.sh --resume $TAG"
