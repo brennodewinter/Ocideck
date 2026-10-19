@@ -379,6 +379,33 @@ List<String> _applyEdits(
     }
 
     if (origIndices.isEmpty) {
+      // Een gewijzigde baseline-regel kan uit meerdere soft-wrapped bronregels
+      // zijn ontstaan. Vervang dan het volledige brongebied tussen de dichtst-
+      // bijzijnde gemapte regels; anders blijft de verwijderde tekst staan en
+      // wordt de nieuwe alinea erachter geplakt (#2474).
+      if (h.baselineStart < h.baselineEnd) {
+        var before = -1;
+        for (var bi = h.baselineStart - 1; bi >= 0; bi--) {
+          if (align[bi] >= 0) {
+            before = align[bi];
+            break;
+          }
+        }
+        var after = origLines.length;
+        for (var bi = h.baselineEnd; bi < baseLines.length; bi++) {
+          if (align[bi] >= 0) {
+            after = align[bi];
+            break;
+          }
+        }
+        if (after > before + 1) {
+          replacement[before + 1] = currSlice;
+          for (var oi = before + 2; oi < after; oi++) {
+            replacement[oi] = const [];
+          }
+          continue;
+        }
+      }
       // Pure invoeging — plaats vóór de volgende gemapte regel, of aan het eind.
       int? insertAfter;
       for (var bi = h.baselineEnd; bi < baseLines.length; bi++) {

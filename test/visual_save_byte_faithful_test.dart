@@ -113,6 +113,120 @@ void main() {
   });
 
   group('saveDocumentWithDestination vanuit Visueel', () {
+    testWidgets('ambigue regeleinde bewaart de zichtbare tekst', (
+      tester,
+    ) async {
+      final temp = Directory.systemTemp.createTempSync('visual_save_break');
+      addTearDown(() => temp.deleteSync(recursive: true));
+      final path = p.join(temp.path, 'offerte.md');
+      const source =
+          '# Offerte\n\nVooraf.\n\nVERVALLENPASSAGE  \nmet harde regelbreuk.\n\nAchteraf.\n';
+      final notifier = DocumentNotifier()
+        ..loadDocument(MarkdownDocument.parse(source), filePath: path);
+      const edited = '# Offerte\n\nVooraf.\n\nAchteraf.\n';
+      notifier.edit(roundTrip(edited), visualEdit: true);
+
+      late WidgetRef ref;
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            documentProvider.overrideWith((_) => notifier),
+            fileServiceProvider.overrideWithValue(
+              FileService(
+                MarkdownService(),
+                ImageService(),
+                () => throw UnimplementedError(),
+              ),
+            ),
+          ],
+          child: MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+              FlutterQuillLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Consumer(
+              builder: (context, r, _) {
+                ref = r;
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
+      );
+      final saved = await tester.runAsync(
+        () => saveDocumentWithDestination(
+          tester.element(find.byType(SizedBox)),
+          ref,
+          notifier,
+        ),
+      );
+      expect(saved, isTrue);
+      final onDisk = File(path).readAsStringSync();
+      expect(onDisk, isNot(contains('VERVALLENPASSAGE')));
+      expect(roundTrip(onDisk), roundTrip(edited));
+      expect(notifier.currentState.document!.source, onDisk);
+    });
+
+    testWidgets('verwijderde lopende tekst blijft weg na opslaan', (
+      tester,
+    ) async {
+      final temp = Directory.systemTemp.createTempSync('visual_save_delete');
+      addTearDown(() => temp.deleteSync(recursive: true));
+      final path = p.join(temp.path, 'offerte.md');
+      const source =
+          '# Offerte\n\nDit is de aanhef\nVERVALLENPASSAGE die weg moet\n'
+          'en hier loopt de tekst verder.\n';
+      final notifier = DocumentNotifier()
+        ..loadDocument(MarkdownDocument.parse(source), filePath: path);
+      const edited =
+          '# Offerte\n\nDit is de aanhef en hier loopt de tekst verder.\n';
+      notifier.edit(roundTrip(edited), visualEdit: true);
+
+      late WidgetRef ref;
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            documentProvider.overrideWith((_) => notifier),
+            fileServiceProvider.overrideWithValue(
+              FileService(
+                MarkdownService(),
+                ImageService(),
+                () => throw UnimplementedError(),
+              ),
+            ),
+          ],
+          child: MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+              FlutterQuillLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Consumer(
+              builder: (context, r, _) {
+                ref = r;
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
+      );
+      final saved = await tester.runAsync(
+        () => saveDocumentWithDestination(
+          tester.element(find.byType(SizedBox)),
+          ref,
+          notifier,
+        ),
+      );
+      expect(saved, isTrue);
+      final onDisk = File(path).readAsStringSync();
+      expect(onDisk, isNot(contains('VERVALLENPASSAGE')));
+      expect(roundTrip(onDisk), roundTrip(edited));
+      expect(notifier.currentState.document!.source, onDisk);
+    });
+
     testWidgets('schrijft alleen de bewerking weg, niet de normalisatiedrift', (
       tester,
     ) async {

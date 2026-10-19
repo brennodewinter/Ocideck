@@ -206,9 +206,17 @@ MarkdownDocument _patchVisualSave(
     baseline: baseline,
     current: currSplit.body,
   );
+  // Een gewijzigde alinea kan door de round-trip over meerdere bronregels
+  // verdeeld zijn. Als de byte-getrouwe patch daardoor tekst laat terugkomen,
+  // bewaar dan de tekst die de gebruiker daadwerkelijk in de editor ziet.
+  // Alleen in dit ambigue geval gaat de oorspronkelijke Markdown-opmaak verloren.
+  final verified = MarkdownQuillCodec.markdownFromDocument(
+    MarkdownQuillCodec.documentFromMarkdown(normalizeRichTextMarkdown(patched)),
+  );
+  final sourceToSave = verified == currSplit.body ? patched : currSplit.body;
   // Neem het huidige blok terug, niet het opgeslagen: zo overleeft een
   // tussentijdse stijl-/TLP-wijziging de opslag.
-  return document.withSource(currSplit.block + patched);
+  return document.withSource(currSplit.block + sourceToSave);
 }
 
 /// Wat de conflictlus teruggeeft aan [saveDocumentWithDestination].
