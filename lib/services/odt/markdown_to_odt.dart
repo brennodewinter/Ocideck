@@ -32,13 +32,15 @@ import '../../utils/xml_escape.dart';
 /// voetnoten, wel bij eindnoten).
 /// [footnotePlacement] bepaalt of noten als `footnote` (onderaan de pagina)
 /// of `endnote` (achterin) worden gemarkeerd.
-String markdownToOdtBody(
+OdtConversion markdownToOdtBody(
   String markdown, {
   bool chapterPageBreak = false,
   String footnotesTitle = 'Noten',
   FootnotePlacement footnotePlacement = FootnotePlacement.page,
 }) {
-  if (markdown.trim().isEmpty) return '';
+  if (markdown.trim().isEmpty) {
+    return const OdtConversion(body: '', mermaidSources: []);
+  }
 
   // Voetnoten: ODT-native noten. De verwijzing wordt een <text:note>, de
   // definities verdwijnen uit de body — ODT rendert de noot-inhoud zelf.
@@ -113,7 +115,23 @@ String markdownToOdtBody(
     );
   }
 
-  return out.trimRight();
+  return OdtConversion(
+    body: out.trimRight(),
+    mermaidSources: visitor.mermaidSources,
+  );
+}
+
+/// Het resultaat van de Markdown→ODT-conversie.
+class OdtConversion {
+  const OdtConversion({required this.body, required this.mermaidSources});
+
+  /// De body-XML (inhoud van `<office:text>`), met `OCIDECKMERMAID<i>END`-
+  /// sentinels die de export-service oplost.
+  final String body;
+
+  /// De bron van elk mermaid-blok, in volgorde van voorkomen — de
+  /// export-service rasteriseert deze naar PNG (of valt terug op de bron).
+  final List<String> mermaidSources;
 }
 
 /// De inline-markdown van een noot als ODT-fragment — vet, cursief, code en
@@ -213,6 +231,9 @@ class _OdtNodeVisitor implements md.NodeVisitor {
   _OdtNodeVisitor({this.chapterPageBreak = false});
 
   final StringBuffer output = StringBuffer();
+
+  /// De bron van elk mermaid-blok, in volgorde van voorkomen.
+  final List<String> mermaidSources = [];
 
   /// Of elk hoofdstuk (H1) op een nieuwe pagina begint (instelling).
   final bool chapterPageBreak;
@@ -413,6 +434,18 @@ class _OdtNodeVisitor implements md.NodeVisitor {
             (acc, t) => acc + t.text,
           ) ??
           '';
+
+      // Mermaid-diagrammen worden sentinels; de export-service rasteriseert
+      // ze naar PNG in Pictures/. De taal staat als class="language-X" op de
+      // <code> binnen een <pre> (#2471).
+      final classes = element.attributes['class'] ?? '';
+      final lang = RegExp(r'language-([\w-]+)').firstMatch(classes)?.group(1);
+      if (lang == 'mermaid') {
+        output.write('OCIDECKMERMAID${mermaidSources.length}END');
+        mermaidSources.add(codeText);
+        return false;
+      }
+
       final lines = codeText.split('\n');
       for (final line in lines) {
         output.write(

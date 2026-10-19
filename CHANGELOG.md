@@ -26,6 +26,13 @@ All notable changes to OciDeck are documented in this file.
   'Opslaan als' stelt `Offerte ACME.md` voor. Het oorspronkelijke kantoor-
   bestand wordt nooit aangeraakt.
 
+- **Mermaid-diagrammen in de ODT-export zijn weer plaatjes.** Een
+  ````mermaid`-blok eindigde als ontsnapte brontekst in het `.odt`-bestand.
+  De export rasteriseert het diagram nu naar een scherpe PNG in `Pictures/`,
+  met de stijlkleuren van het deck — zoals de DOCX- en PDF-export dat al
+  deden. Lukt de render niet, dan blijft de bron als letterlijke tekst
+  zichtbaar in plaats van te verdwijnen.
+
 ## [0.7.0] — 2026-10-17
 
 

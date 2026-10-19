@@ -25,9 +25,11 @@ import '../../models/deck.dart' show TlpLevelX;
 import '../../models/settings.dart';
 import '../document_export_service.dart' show projectedDocumentBodyForRendering;
 import '../document_footnote_setup.dart';
+import '../docx/svg_to_png.dart';
 import '../export_bundle.dart';
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
+import '../pdf/document_pdf_export.dart' show MermaidSvgResolver;
 import 'markdown_to_odt.dart';
 import '../../utils/hex_color.dart';
 import '../../utils/xml_escape.dart';
@@ -51,6 +53,7 @@ Future<Uint8List> buildDocumentExportOdt(
   FootnotePlacement footnotePlacement = FootnotePlacement.page,
   String footnotesTitle = 'Noten',
   HtmlImageResolver? embedImage,
+  MermaidSvgResolver? renderMermaid,
   String? sourcePath,
   String outputPath = '',
 }) async {
@@ -59,15 +62,25 @@ Future<Uint8List> buildDocumentExportOdt(
   final title = meta.displayTitle('Document');
 
   // 1. Markdown → ODT body-XML.
-  var odtBody = markdownToOdtBody(
+  final conversion = markdownToOdtBody(
     body,
     chapterPageBreak: chapterPageBreak,
     footnotesTitle: footnotesTitle,
     footnotePlacement: footnotePlacement,
   );
+  var odtBody = conversion.body;
 
-  // 2. Afbeeldingen: data-URI's → aparte bestanden in de ZIP.
   final images = <_OdtImage>[];
+
+  // 2. Mermaid-diagrammen rasteriseren naar PNG in Pictures/ (#2471).
+  odtBody = await _processMermaid(
+    odtBody,
+    conversion.mermaidSources,
+    renderMermaid,
+    images,
+  );
+
+  // 3. Afbeeldingen: data-URI's → aparte bestanden in de ZIP.
   if (embedImage != null) {
     odtBody = await _processImages(odtBody, embedImage, images);
   }
@@ -113,6 +126,51 @@ class _OdtImage {
   final String name;
   final Uint8List bytes;
   final String mediaType;
+}
+
+/// Vervang elke `OCIDECKMERMAID<i>END`-sentinel door een `draw:frame` met een
+/// gerasteriseerde PNG in Pictures/. Lukt de render niet (of is er geen
+/// [renderMermaid]), dan valt de sentinel terug op de mermaid-bron als
+/// Preformatted_Text — dezelfde afspraak als de DOCX- en PDF-export.
+Future<String> _processMermaid(
+  String odtBody,
+  List<String> sources,
+  MermaidSvgResolver? renderMermaid,
+  List<_OdtImage> images,
+) async {
+  var result = odtBody;
+  for (var i = 0; i < sources.length; i++) {
+    Uint8List? png;
+    if (renderMermaid != null) {
+      final svg = await renderMermaid(sources[i]);
+      if (svg != null && svg.trim().isNotEmpty) png = await svgToPng(svg);
+    }
+    final String replacement;
+    if (png == null) {
+      replacement = sources[i]
+          .split('\n')
+          .map(
+            (line) =>
+                '<text:p text:style-name="Preformatted_Text">'
+                '${xmlEscape(line)}</text:p>',
+          )
+          .join();
+    } else {
+      final name = 'mermaid-$i.png';
+      images.add(_OdtImage(name, png, 'image/png'));
+      replacement =
+          '<text:p text:style-name="Standard">'
+          '<draw:frame draw:style-name="Graphics" text:anchor-type="paragraph" '
+          'svg:width="15cm" svg:height="auto" draw:z-index="0">'
+          '<draw:image xlink:href="Pictures/$name" xlink:type="simple">'
+          '<svg:title>Mermaid-diagram</svg:title>'
+          '</draw:image>'
+          '</draw:frame>'
+          '</text:p>';
+    }
+    result = result.replaceAll('OCIDECKMERMAID${i}END', replacement);
+  }
+  return result;
 }
 
 /// Vervang alle `<draw:image xlink:href="...">` in [odtBody] door relatieve

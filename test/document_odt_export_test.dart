@@ -374,7 +374,7 @@ void main() {
       // codeblok moet een span blijven, geen Preformatted_Text-alinea.
       final body = markdownToOdtBody(
         '```\nfoo\n```\n\nAlinea met `code` erin.\n',
-      );
+      ).body;
       // Inline code is een span, geen eigen Preformatted_Text-alinea.
       expect(
         body,
@@ -383,7 +383,58 @@ void main() {
       expect(body, isNot(contains('Preformatted_Text>code</text:p>')));
     },
   );
+
+  group('odt: mermaid (#2471)', () {
+    test('mermaid-blok wordt een sentinel + bron verzameld', () {
+      final conv = markdownToOdtBody('```mermaid\ngraph TD\nA-->B\n```');
+      expect(conv.mermaidSources, hasLength(1));
+      expect(conv.mermaidSources.first, contains('graph TD'));
+      expect(conv.body, contains('OCIDECKMERMAID0END'));
+      // De ruwe bron staat niet als escapete tekst in de body.
+      expect(conv.body, isNot(contains('graph TD')));
+    });
+
+    test('mermaid-blok met renderer → PNG in Pictures/', () async {
+      final bundle = await buildBundle('```mermaid\ngraph TD\nA-->B\n```\n');
+      final bytes = await buildDocumentExportOdt(
+        bundle,
+        renderMermaid: (source) async => _minimalSvg,
+      );
+      final archive = ZipDecoder().decodeBytes(bytes);
+
+      final pictures = archive.files
+          .where((f) => f.name.startsWith('Pictures/'))
+          .map((f) => f.name)
+          .toList();
+      expect(pictures, contains('Pictures/mermaid-0.png'));
+
+      final content = _readEntry(archive, 'content.xml');
+      expect(content, contains('Pictures/mermaid-0.png'));
+      expect(content, isNot(contains('OCIDECKMERMAID')));
+      expect(content, isNot(contains('graph TD')));
+    });
+
+    test(
+      'mermaid-blok zonder renderer → terugval op bron in codeblok',
+      () async {
+        final bundle = await buildBundle('```mermaid\ngraph TD\nA-->B\n```\n');
+        final bytes = await buildDocumentExportOdt(bundle);
+        final archive = ZipDecoder().decodeBytes(bytes);
+        final content = _readEntry(archive, 'content.xml');
+
+        expect(content, isNot(contains('draw:frame')));
+        expect(content, isNot(contains('OCIDECKMERMAID')));
+        expect(content, contains('Preformatted_Text'));
+        expect(content, contains('graph TD'));
+      },
+    );
+  });
 }
+
+/// Een minimale geldige SVG voor de rasterisatie-test (een rode rechthoek).
+const String _minimalSvg =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 100 50">'
+    '<rect width="100" height="50" fill="red"/></svg>';
 
 String _readEntry(Archive archive, String name) {
   final entry = archive.find(name);
