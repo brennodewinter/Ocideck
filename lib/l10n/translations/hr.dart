@@ -1612,6 +1612,10 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ova bilješka duža je od stranice — klizite za ostatak',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Lijepljenje preskočeno: mjesto umetanja se u međuvremenu promijenilo.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Izrezivanje preskočeno: tekst se u međuvremenu promijenio.',
   'Certificaatnummer: {nummer}': 'Broj certifikata: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ocjenjivač tada više neće vidjeti ovaj komad. ',

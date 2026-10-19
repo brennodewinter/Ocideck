@@ -654,6 +654,10 @@ const _dutchSourceDe = {
 const _dutchSourceAddDe = {
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Diese Anmerkung ist länger als die Seite — für den Rest scrollen',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Einfügen übersprungen: Die Einfügeposition wurde inzwischen geändert.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Ausschneiden übersprungen: Der Text wurde inzwischen geändert.',
   'Certificaatnummer: {nummer}': 'Zertifikatsnummer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Der Prüfer sieht dieses Stück dann nicht mehr. ',

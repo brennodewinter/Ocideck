@@ -1608,6 +1608,10 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Tämä viite on sivua pidempi — vieritä nähdäksesi lopun',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Liittäminen ohitettiin: lisäyskohta on muuttunut sillä välin.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Leikkaaminen ohitettiin: teksti on muuttunut sillä välin.',
   'Certificaatnummer: {nummer}': 'Sertifikaatin numero: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Arvioija ei enää näe tätä kappaletta. ',

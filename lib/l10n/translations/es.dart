@@ -651,6 +651,10 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Esta nota es más larga que la página — desplácese para ver el resto',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Pegar omitido: el punto de inserción ha cambiado mientras tanto.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Cortar omitido: el texto ha cambiado mientras tanto.',
   'Certificaatnummer: {nummer}': 'Número de certificado: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'El evaluador ya no verá esta pieza. ',

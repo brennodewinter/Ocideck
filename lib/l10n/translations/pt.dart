@@ -1636,6 +1636,10 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Esta nota é mais longa que a página — deslize para o resto',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Colagem ignorada: o ponto de inserção mudou entretanto.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Corte ignorado: o texto mudou entretanto.',
   'Certificaatnummer: {nummer}': 'Número de certificado: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'O avaliador deixará então de ver esta peça. ',

@@ -1606,6 +1606,10 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Šī piezīme ir garāka par lapu — ritiniet, lai redzētu pārējo',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Ielīmēšana izlaista: ievietošanas vieta pa to laiku ir mainījusies.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Izgriešana izlaista: teksts pa to laiku ir mainījies.',
   'Certificaatnummer: {nummer}': 'Sertifikāta numurs: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Vērtētājs vairs neredzēs šo gabalu. ',

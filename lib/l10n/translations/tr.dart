@@ -2516,6 +2516,10 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Bu not sayfadan uzun — kalanı için kaydırın',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Yapıştırma atlandı: ekleme noktası bu sırada değişti.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Kesme atlandı: metin bu sırada değişti.',
   'Certificaatnummer: {nummer}': 'Sertifika numarası: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Değerlendirici artık bu parçayı göremez. ',

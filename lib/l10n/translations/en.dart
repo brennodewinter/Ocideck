@@ -814,6 +814,10 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'Deze noot is langer dan het blad — scroll voor de rest':
       'This note is longer than the page — scroll for the rest',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Paste skipped: the insertion point has changed in the meantime.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Cut skipped: the text has changed in the meantime.',
   'Certificaatnummer: {nummer}': 'Certificate number: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'The assessor will then no longer see this piece. ',

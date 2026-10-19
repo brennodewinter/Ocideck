@@ -1620,6 +1620,10 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta przypis jest dłuższy niż strona — przewiń, by zobaczyć resztę',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Wklejanie pominięto: punkt wstawiania zmienił się w międzyczasie.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Wycinanie pominięto: tekst zmienił się w międzyczasie.',
   'Certificaatnummer: {nummer}': 'Numer certyfikatu: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Oceniający nie zobaczy wtedy tego elementu. ',

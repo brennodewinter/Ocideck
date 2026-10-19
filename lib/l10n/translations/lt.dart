@@ -1615,6 +1615,10 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ši pastaba ilgesnė už puslapį — slinkite likusiai daliai',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Įklijavimas praleistas: įterpimo vieta tuo metu pasikeitė.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Iškirpimas praleistas: tekstas tuo metu pasikeitė.',
   'Certificaatnummer: {nummer}': 'Sertifikato numeris: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Vertintojas tuomet to elemento nebematys. ',

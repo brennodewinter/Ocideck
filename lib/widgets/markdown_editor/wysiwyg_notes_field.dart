@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/visual_selection_markdown.dart';
@@ -312,8 +315,24 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
       selection.end,
     );
     if (payload == null) return;
+    // De klembordschrijving is async: wijzigt de inhoud ondertussen, dan
+    // wijzen de vastgelegde offsets naar een ander bereik. Een knip wist
+    // dan niets — liever een kopie dan de verkeerde tekst weg (#2466).
+    var changed = false;
+    final changeWatch = cut
+        ? controller.document.changes.listen((_) => changed = true)
+        : null;
     await Clipboard.setData(ClipboardData(text: payload.markdown));
+    // Niet awaiten: de cancel heeft meteen effect, en een extra event-loop-
+    // beurt ná de klembordschrijving zou dit punt pas ná een settle bereiken.
+    unawaited(changeWatch?.cancel() ?? Future<void>.value());
     if (!cut || !mounted) return;
+    if (changed || !identical(widget.controller, controller)) {
+      _reportClipboardMoved(
+        'Knippen overgeslagen: de tekst is tussendoor gewijzigd.',
+      );
+      return;
+    }
     final length = controller.document.length;
     final start = payload.start.clamp(0, length);
     final end = payload.end.clamp(start, length);
@@ -366,21 +385,55 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
   }
 
   Future<void> _pasteSanitized() async {
-    if (widget.tryConsumePaste != null && await widget.tryConsumePaste!()) {
-      return;
+    // Plakken is één atomaire handeling op de positie van het moment van
+    // de opdracht: de caret én de revisie liggen vóór de eerste await vast.
+    // Verandert de inhoud tijdens de klembordlezing, dan gokken we niet
+    // naar een nieuwe plek maar melden we dat (#2466).
+    final controller = widget.controller;
+    final caret = controller.selection;
+    var changed = false;
+    final changeWatch = controller.document.changes.listen(
+      (_) => changed = true,
+    );
+    var consumed = false;
+    if (widget.tryConsumePaste != null) {
+      consumed = await widget.tryConsumePaste!();
     }
-    final data = await Clipboard.getData(Clipboard.kTextPlain);
+    final data = consumed
+        ? null
+        : await Clipboard.getData(Clipboard.kTextPlain);
+    unawaited(changeWatch.cancel());
+    if (consumed || !mounted) return;
     final raw = data?.text;
     if (raw == null || raw.isEmpty) return;
+    if (changed || !identical(widget.controller, controller)) {
+      _reportClipboardMoved(
+        'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.',
+      );
+      return;
+    }
     final text = sanitizeMarkdownPaste(raw);
-    final index = widget.controller.selection.baseOffset;
-    final length = widget.controller.selection.extentOffset - index;
-    widget.controller.replaceText(
+    final index = caret.isValid
+        ? caret.baseOffset.clamp(0, controller.document.length - 1)
+        : controller.document.length - 1;
+    final extent = caret.isValid
+        ? caret.extentOffset.clamp(index, controller.document.length - 1)
+        : index;
+    controller.replaceText(
       index,
-      length,
+      extent - index,
       text,
       TextSelection.collapsed(offset: index + text.length),
     );
+  }
+
+  /// Zegt dat een klembordhandeling is overgeslagen omdat het document
+  /// tijdens de async I/O veranderde — een melding, geen gok (#2466).
+  void _reportClipboardMoved(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(context.l10n.d(message))));
   }
 
   @override

@@ -192,6 +192,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// ingevoegd, of `null` wanneer de invoeging een gewoon blok is.
   String? _pendingFootnoteLabel;
 
+  /// De Quill-caret van het moment van de opdracht (#2466), of `null` voor de
+  /// caret van nu — zoals bij een synchrone invoeging vanuit de werkbalk.
+  TextSelection? _pendingInsertCaret;
+
   /// Waar tussen het aanvragen van zo'n invoeging en de controllerwijziging die
   /// eruit volgt: die ene wijziging is een eigen bewerking, geen voortzetting
   /// van het typen ervoor.
@@ -529,7 +533,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// eromheen; hier zetten we de controller en de bron gelijk en plaatsen we de
   /// cursor ná het blok, zodat je meteen verder kunt typen. Een expliciete
   /// bewerking (`coalesceKey: null`) — geen samenvoeging met eerder typen.
-  void _insertBlock(String block) {
+  /// [at] is de positie van het moment van de opdracht, in het
+  /// coördinatenstelsel van de actieve stand — door [_smartPaste] vastgelegd
+  /// vóór de async klembordlezing (#2466). `null` gebruikt de selectie van
+  /// nu, zoals bij een synchrone invoeging vanuit de werkbalk.
+  void _insertBlock(String block, {TextSelection? at}) {
     // In de visuele stand leeft de tekst in het Quill-document en staat de
     // cursor van de bron-controller stil op waar hij toevallig het laatst was.
     // Invoegen via de bron zette het blok daardoor onderaan het document in
@@ -537,10 +545,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // de editor het zelf, op zijn eigen cursor.
     if (_viewMode == _DocViewMode.visual &&
         markdownRoundTripsVisually(_controller.text)) {
-      _requestVisualInsert(block: block);
+      _requestVisualInsert(block: block, caret: at);
       return;
     }
-    final sel = _controller.selection;
+    final sel = at ?? _controller.selection;
     final (next, cursor) = insertBlockIntoSource(
       _controller.text,
       sel.start,
@@ -564,11 +572,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   ///
   /// Staat in de klasse en niet bij de andere invoegingen, omdat alleen een
   /// `State` zijn eigen [setState] mag aanroepen — een extensie ernaast niet.
-  void _requestVisualInsert({String? block, String? footnoteLabel}) {
+  void _requestVisualInsert({
+    String? block,
+    String? footnoteLabel,
+    TextSelection? caret,
+  }) {
     _expectVisualInsert = true;
     setState(() {
       _pendingInsertBlock = block;
       _pendingFootnoteLabel = footnoteLabel;
+      _pendingInsertCaret = caret;
       _insertSignal++;
     });
   }

@@ -1623,6 +1623,10 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ця примітка довша за сторінку — прокрутіть для решти',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Вставлення пропущено: точка вставлення змінилася в цей час.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Вирізання пропущено: текст змінився в цей час.',
   'Certificaatnummer: {nummer}': 'Номер сертифіката: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Оцінювач більше не бачитиме цей елемент. ',

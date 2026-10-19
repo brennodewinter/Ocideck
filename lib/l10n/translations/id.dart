@@ -1608,6 +1608,10 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Catatan ini lebih panjang dari halaman — gulir untuk sisanya',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Tempel dilewati: titik sisipan telah berubah sementara itu.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Potong dilewati: teks telah berubah sementara itu.',
   'Certificaatnummer: {nummer}': 'Nomor sertifikat: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Penilai tidak akan lagi melihat bagian ini. ',

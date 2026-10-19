@@ -1614,6 +1614,10 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Táto poznámka je dlhšia ako stránka — posuňte sa pre zvyšok',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Vloženie preskočené: miesto vloženia sa medzitým zmenilo.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Vystrihnutie preskočené: text sa medzitým zmenil.',
   'Certificaatnummer: {nummer}': 'Číslo certifikátu: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Hodnotiteľ potom tento kus už neuvidí. ',

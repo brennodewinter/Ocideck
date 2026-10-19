@@ -1633,6 +1633,10 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Αυτή η σημείωση είναι μακρύτερη από τη σελίδα — κύλιση για τα υπόλοιπα',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Η επικόλληση παραλείφθηκε: το σημείο εισαγωγής άλλαξε εν τω μεταξύ.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Η αποκοπή παραλείφθηκε: το κείμενο άλλαξε εν τω μεταξύ.',
   'Certificaatnummer: {nummer}': 'Αριθμός πιστοποιητικού: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ο αξιολογητής δεν θα βλέπει πλέον αυτό το στοιχείο. ',

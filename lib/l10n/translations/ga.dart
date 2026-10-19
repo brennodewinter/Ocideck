@@ -1638,6 +1638,10 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Tá an nóta seo níos faide ná an leathanach — scrollaigh don chuid eile',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Greamú scipeáilte: athraíodh an pointe ionsála idir an dá linn.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Gearradh scipeáilte: athraíodh an téacs idir an dá linn.',
   'Certificaatnummer: {nummer}': 'Uimhir teastais: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ní fheicfidh an measúnóir an píosa seo níos mó ansin. ',
