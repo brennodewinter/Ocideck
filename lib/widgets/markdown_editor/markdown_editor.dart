@@ -96,6 +96,11 @@ class MarkdownNotesEditor extends StatefulWidget {
   final int insertSignal;
   final String? insertMarkdownBlock;
 
+  /// De caret van het moment van de opdracht bij een [insertSignal]-blok —
+  /// vastgelegd vóór async klembord-I/O (#2466). `null` betekent: de caret
+  /// van nu, zoals bij een synchrone invoeging vanuit de werkbalk.
+  final TextSelection? insertCaret;
+
   /// Bij hetzelfde [insertSignal]: voeg een voetnoot met dit label in — het
   /// merkteken op de cursor en de (lege) notenregel onderaan het document.
   ///
@@ -144,6 +149,7 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.onVisualCaret,
     this.insertSignal = 0,
     this.insertMarkdownBlock,
+    this.insertCaret,
     this.insertFootnoteLabel,
     this.tryConsumePaste,
     this.onInsertImage,
@@ -291,13 +297,14 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       // niet (zelfde reden als bij het springen hieronder).
       final block = widget.insertMarkdownBlock;
       final footnote = widget.insertFootnoteLabel;
+      final caret = widget.insertCaret;
       final signal = widget.insertSignal;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted || widget.insertSignal != signal) return;
         if (footnote != null) {
           _insertFootnoteAtCaret(footnote);
         } else if (block != null) {
-          _insertMarkdownBlockAtCaret(block);
+          _insertMarkdownBlockAtCaret(block, caret: caret);
         }
       });
     }
@@ -327,12 +334,12 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// óp de plek zelf als die regel leeg is. Zo landt een tabel niet halverwege
   /// een zin. Het blok gaat eerst door dezelfde markdown→Quill-omzetting als de
   /// rest, zodat een tabel of inhoudsopgave meteen als embed verschijnt.
-  void _insertMarkdownBlockAtCaret(String block) {
+  void _insertMarkdownBlockAtCaret(String block, {TextSelection? caret}) {
     final quill = _quillController;
     if (quill == null) return;
     final blockDelta = MarkdownQuillCodec.documentFromMarkdown(block).toDelta();
     if (blockDelta.isEmpty) return;
-    final (at, ownLine) = _blockInsertOffset(quill);
+    final (at, ownLine) = _blockInsertOffset(quill, capturedCaret: caret);
     final change = Delta()..retain(at);
     if (ownLine) change.insert('\n');
     quill.compose(
@@ -379,11 +386,13 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// document sluit af met een regelafsluiter en Quill weigert een invoeging
   /// dáárachter. Dan landt het blok vlak vóór die afsluiter, met een eigen
   /// regelafsluiter ervoor — anders plakt het aan de laatste zin vast.
-  (int, bool) _blockInsertOffset(QuillController quill) {
+  (int, bool) _blockInsertOffset(
+    QuillController quill, {
+    TextSelection? capturedCaret,
+  }) {
     final end = quill.document.length - 1;
-    final caret = quill.selection.isValid
-        ? quill.selection.baseOffset.clamp(0, end)
-        : end;
+    final sel = capturedCaret ?? quill.selection;
+    final caret = sel.isValid ? sel.baseOffset.clamp(0, end) : end;
     final line = quill.document.queryChild(caret).node;
     if (line == null) return (end, true);
     // `length` telt de regelafsluiter mee: een lege regel is precies 1 lang.

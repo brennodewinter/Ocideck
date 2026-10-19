@@ -16,6 +16,15 @@ All notable changes to OciDeck are documented in this file.
   komen. Het nootvlak is nu scrollbaar met een zichtbare doorgang-regel en
   scrollbalk, zodat de volledige noot bereikbaar blijft zonder over de
   hoofdtekst of marges heen te vallen.
+- **Knippen en plakken op de plek van de opdracht, ook bij een traag
+  klembord.** Tijdens een trage `Clipboard.setData`/`getData` kon de
+  gebruiker verder typen of elders klikken; knippen waste dan een ander
+  bereik en slim plakken landde op een verraste plek. Beide routes leggen
+  nu stand, controllers, revisie én selectie vóór de eerste await vast:
+  knippen wist exact de gekopieerde selectie, plakken landt op de
+  oorspronkelijke positie, en bij een tussentijdse wijziging meldt de app
+  dat de bestemming is veranderd in plaats van te gokken. Eén
+  ongedaan-stap per handeling (#2466).
 - **Kopnavigatie in een document met stijl landt weer exact.** Klikken in het
   Overzicht en interne `[naar kop](#kop)`-links rekenden hun positie uit op de
   bron mét stijl-frontmatter, terwijl de editor de body bewerkt. Bij een

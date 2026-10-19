@@ -374,7 +374,9 @@ const Map<String, int> classSizeBaseline = {
   // als bij het bestand met lucht erboven, om dezelfde reden.
   // +11 (#1670): body i.p.v. source voor headingBlockIndex in _scrollToHeading.
   // +3 (#1759): stripLeadingFrontMatterLeakage op drie plekken in de editor.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1112,
+  // −62 (#2466): de slimme plakroute trok naar een top-level functie in
+  // document_editor_layouts — de klasse staat op 1050, plafond met lucht.
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1075,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.

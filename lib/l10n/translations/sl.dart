@@ -1608,6 +1608,10 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta opomba je daljša od strani — drsite za preostanek',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Lepljenje preskočeno: mesto vstavljanja se je medtem spremenilo.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Izrezovanje preskočeno: besedilo se je medtem spremenilo.',
   'Certificaatnummer: {nummer}': 'Številka certifikata: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ocenjevalec tega kosa nato ne bo več videl. ',

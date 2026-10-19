@@ -651,6 +651,10 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Questa nota è più lunga della pagina — scorri per il resto',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Incolla saltato: il punto di inserimento è cambiato nel frattempo.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Taglia saltato: il testo è cambiato nel frattempo.',
   'Certificaatnummer: {nummer}': 'Numero di certificato: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Il valutatore non vedrà più questo elemento. ',

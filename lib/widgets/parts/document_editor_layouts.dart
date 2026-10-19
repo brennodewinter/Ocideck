@@ -75,64 +75,23 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   /// Slim plakken: afbeelding → `![](…)`, spreadsheet → GFM-tabel, HTML van
   /// het klembord → Markdown, anders opgeschoonde platte tekst. Geeft `true`
   /// als de plak is afgehandeld (dan mag de editor niet nóg eens plakken).
-  Future<bool> _smartPaste() async {
-    // Vang de Quill-caret vóór de async klembordlezing: raakt de selectie in
-    // dat gat invalide, dan zou een tekstplak stilletjes op het einde van het
-    // document landen (#2138).
-    final visualCaret = _viewMode == _DocViewMode.visual
-        ? _visualEditorKey.currentState?.widget.controller.selection
-        : null;
-    final state = ref.read(documentProvider);
-    final projectPath = state.filePath == null
-        ? null
-        : p.dirname(state.filePath!);
-    final imageService = ref.read(imageServiceProvider);
-    final outcome = await imageService.pasteImageDetailed(
-      projectPath: projectPath,
-    );
-    if (!mounted) return false;
-    if (outcome.path != null) {
-      _insertBlock('![](${outcome.path})');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.d('Afbeelding geplakt'))),
-        );
-      }
-      return true;
-    }
-    // Geen afbeelding: stil als "geen klembordbeeld", anders de echte fout.
-    if (outcome.failure != null &&
-        outcome.failure != ImageImportFailure.noClipboardImage &&
-        mounted) {
-      reportImageImportFailure(context, outcome.failure);
-      return true;
-    }
-
-    final data = await Clipboard.getData(Clipboard.kTextPlain);
-    final html = await readClipboardHtml();
-    if (!mounted) return false;
-    final resolved = resolveClipboardMarkdown(plain: data?.text, html: html);
-    if (resolved == null) return false;
-
-    if (resolved.kind == ClipboardMarkdownKind.table) {
-      _insertBlock(resolved.text);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.d('Tabel geplakt'))),
-        );
-      }
-      return true;
-    }
-
-    _insertPastedMarkdown(resolved.text, visualCaret: visualCaret);
-    return true;
-  }
+  /// De inhoud staat in [_smartPasteDocument]: top-level, want deze klasse
+  /// zit op haar klasseplafond.
+  Future<bool> _smartPaste() => _smartPasteDocument(this);
 
   /// Zet [text] op de cursor in de bron, het bestaande pad voor platte tekst.
   /// In de visuele stand landt geplakte tekst op de Quill-caret — het blokpad
   /// van [_insertBlock] zoekt bewust het einde van de regel, wat voor een
   /// tabel klopt maar een zin onder de cursor zou zetten (#2138).
-  void _insertPastedMarkdown(String text, {TextSelection? visualCaret}) {
+  ///
+  /// [visualCaret] en [sourceCaret] zijn de carets die [_smartPaste] vóór de
+  /// async klembordlezing vastlegde (#2466); `null` betekent: de selectie
+  /// van nu, zoals bij een synchrone invoeging.
+  void _insertPastedMarkdown(
+    String text, {
+    TextSelection? visualCaret,
+    TextSelection? sourceCaret,
+  }) {
     final quill =
         _viewMode == _DocViewMode.visual &&
             markdownRoundTripsVisually(_controller.text)
@@ -147,7 +106,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
       return;
     }
     _applyingExternal = true;
-    _replaceSourceSelection(_controller, text);
+    _replaceSourceSelection(_controller, text, sel: sourceCaret);
     _applyingExternal = false;
     _commitDocumentBody(ref, _controller.text, coalesceKey: 'doc');
   }
@@ -305,6 +264,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     bordered: false,
     insertSignal: _insertSignal,
     insertMarkdownBlock: _pendingInsertBlock,
+    insertCaret: _pendingInsertCaret,
     insertFootnoteLabel: _pendingFootnoteLabel,
     revealSignal: _revealSignal,
     revealMarkdownOffset: _revealMarkdownOffset,
@@ -343,6 +303,127 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     tableEditorFor: (ordinal) => _sourceTableFor(this, ordinal),
     onTapLink: _handleEditorLink,
   );
+}
+
+/// De inhoud van [_DocumentEditorScreenState._smartPaste]: plakken is één
+/// atomaire handeling op de positie van het moment van de opdracht — stand,
+/// controllers, beide carets én de revisie liggen vóór de eerste await vast
+/// (#2466, uitbreiding op #2138). Verandert er iets tijdens de klembord-I/O —
+/// een toetsaanslag, een standwissel, een andere controller — dan gokken we
+/// niet naar een nieuwe plek maar melden we dat de bestemming is veranderd.
+///
+/// Top-level omdat de staat op zijn klasseplafond zit; private leden van
+/// [_DocumentEditorScreenState] zijn binnen dezelfde library bereikbaar.
+Future<bool> _smartPasteDocument(_DocumentEditorScreenState s) async {
+  final mode = s._viewMode;
+  final sourceController = s._controller;
+  final sourceText = sourceController.text;
+  final sourceCaret = sourceController.selection;
+  final quill = mode == _DocViewMode.visual
+      ? s._visualEditorKey.currentState?.widget.controller
+      : null;
+  final visualCaret = quill?.selection;
+  var visualChanged = false;
+  final visualWatch = quill?.document.changes.listen(
+    (_) => visualChanged = true,
+  );
+
+  final messenger = ScaffoldMessenger.of(s.context);
+  final l10n = s.context.l10n;
+
+  // Veranderde de bestemming tijdens een await? Dan: melden, niet gokken.
+  bool stale() =>
+      !identical(s._controller, sourceController) ||
+      sourceController.text != sourceText ||
+      s._viewMode != mode ||
+      visualChanged ||
+      (quill != null &&
+          !identical(
+            s._visualEditorKey.currentState?.widget.controller,
+            quill,
+          ));
+
+  bool bailIfStale() {
+    if (!s.mounted) return true;
+    if (!stale()) return false;
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          l10n.d(
+            'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.',
+          ),
+        ),
+      ),
+    );
+    return true;
+  }
+
+  final state = s.ref.read(documentProvider);
+  final projectPath = state.filePath == null
+      ? null
+      : p.dirname(state.filePath!);
+  final imageService = s.ref.read(imageServiceProvider);
+  final outcome = await imageService.pasteImageDetailed(
+    projectPath: projectPath,
+  );
+  if (!s.mounted) {
+    unawaited(visualWatch?.cancel() ?? Future<void>.value());
+    return false;
+  }
+  if (outcome.path != null) {
+    if (bailIfStale()) {
+      unawaited(visualWatch?.cancel() ?? Future<void>.value());
+      return true;
+    }
+    unawaited(visualWatch?.cancel() ?? Future<void>.value());
+    s._insertBlock(
+      '![](${outcome.path})',
+      at: mode == _DocViewMode.visual ? visualCaret : sourceCaret,
+    );
+    if (s.mounted) {
+      ScaffoldMessenger.of(s.context).showSnackBar(
+        SnackBar(content: Text(s.context.l10n.d('Afbeelding geplakt'))),
+      );
+    }
+    return true;
+  }
+  // Geen afbeelding: stil als "geen klembordbeeld", anders de echte fout.
+  if (outcome.failure != null &&
+      outcome.failure != ImageImportFailure.noClipboardImage &&
+      s.mounted) {
+    reportImageImportFailure(s.context, outcome.failure);
+    unawaited(visualWatch?.cancel() ?? Future<void>.value());
+    return true;
+  }
+
+  final data = await Clipboard.getData(Clipboard.kTextPlain);
+  final html = await readClipboardHtml();
+  unawaited(visualWatch?.cancel() ?? Future<void>.value());
+  if (!s.mounted) return false;
+  final resolved = resolveClipboardMarkdown(plain: data?.text, html: html);
+  if (resolved == null) return false;
+
+  if (bailIfStale()) return true;
+
+  if (resolved.kind == ClipboardMarkdownKind.table) {
+    s._insertBlock(
+      resolved.text,
+      at: mode == _DocViewMode.visual ? visualCaret : sourceCaret,
+    );
+    if (s.mounted) {
+      ScaffoldMessenger.of(s.context).showSnackBar(
+        SnackBar(content: Text(s.context.l10n.d('Tabel geplakt'))),
+      );
+    }
+    return true;
+  }
+
+  s._insertPastedMarkdown(
+    resolved.text,
+    visualCaret: visualCaret,
+    sourceCaret: sourceCaret,
+  );
+  return true;
 }
 
 /// De live weergave naast de bron: hetzelfde document als de lezer tekent, in
@@ -527,11 +608,16 @@ Future<void> _convertDocumentToPresentation(
 }
 
 /// Zet [text] op de selectie van [controller] — het plakpad voor de
-/// bronstand en voor blokken.
-void _replaceSourceSelection(TextEditingController controller, String text) {
-  final sel = controller.selection;
-  final start = sel.isValid ? sel.start : controller.text.length;
-  final end = sel.isValid ? sel.end : start;
+/// bronstand en voor blokken. [sel] is de selectie van het moment van de
+/// opdracht (#2466); `null` gebruikt de selectie van nu.
+void _replaceSourceSelection(
+  TextEditingController controller,
+  String text, {
+  TextSelection? sel,
+}) {
+  final s = sel ?? controller.selection;
+  final start = s.isValid ? s.start : controller.text.length;
+  final end = s.isValid ? s.end : start;
   controller.value = TextEditingValue(
     text: controller.text.replaceRange(start, end, text),
     selection: TextSelection.collapsed(offset: start + text.length),

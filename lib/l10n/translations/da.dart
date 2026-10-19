@@ -1608,6 +1608,10 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Denne note er længere end siden — rul for resten',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Indsætning sprunget over: indsætningspunktet er ændret i mellemtiden.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Klipning sprunget over: teksten er ændret i mellemtiden.',
   'Certificaatnummer: {nummer}': 'Certifikatnummer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Vurderingspersonen kan så ikke længere se dette stykke. ',

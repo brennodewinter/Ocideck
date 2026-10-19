@@ -1610,6 +1610,10 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ez a jegyzet hosszabb az oldalnál — görgessen a folytatásért',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Beillesztés kihagyva: a beszúrási pont időközben megváltozott.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Kivágás kihagyva: a szöveg időközben megváltozott.',
   'Certificaatnummer: {nummer}': 'Tanúsítványszám: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Az értékelő ekkor már nem látja ezt az elemet. ',

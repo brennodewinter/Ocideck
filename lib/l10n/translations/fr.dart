@@ -654,6 +654,10 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Cette note est plus longue que la page — faites défiler pour la suite',
+  'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
+      'Collage ignoré : le point d\'insertion a changé entre-temps.',
+  'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
+      'Coupage ignoré : le texte a changé entre-temps.',
   'Certificaatnummer: {nummer}': 'Numéro de certificat : {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'L\'évaluateur ne verra alors plus cette pièce. ',
