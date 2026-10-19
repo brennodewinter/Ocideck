@@ -756,10 +756,9 @@ asks for and verifies the minisign password before waiting for the Linux gate,
 so a wrong password fails promptly and the release can run unattended after
 the prompt.
 
-The repository must have three Forgejo Actions secrets before a fresh release:
-`GH_DISPATCH_TOKEN` to start the GitHub Windows build,
-`GH_RELEASE_READ_TOKEN` (a dedicated GitHub token with `Contents: read` on the
-private mirror) to fetch its draft assets, and `RELEASE_TOKEN` (a dedicated
+The repository must have two Forgejo Actions secrets before a fresh release:
+`GH_DISPATCH_TOKEN` (GitHub Actions: read and write on the mirror) to start the
+Windows build and download its build artifact, and `RELEASE_TOKEN` (a dedicated
 Forgejo token with `write:repository`) to upload and read back draft release
 assets. Configure them once as repo-scoped credentials, not copies of a broad
 personal token. Pre-flight checks their names only and never prints values.
@@ -943,12 +942,13 @@ and <https://ocideck.librekat.nl/> is serving that same web bundle.
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
 
-The Windows artifact travels back as an asset on a **draft GitHub release**, not
-as a build artifact. It remains private on the mirror: only the complete,
-canonical Forge release is published. The `windows-ophalen` job retrieves the
-draft asset through GitHub's authenticated API with `GH_RELEASE_READ_TOKEN`
-when set, or `GH_DISPATCH_TOKEN` otherwise. The read token needs Contents: read
-on `brennodewinter/Ocideck`; the dispatch token needs Actions: read and write.
+The Windows cohort travels back as an authenticated **GitHub Actions build
+artifact** from the exact successful Windows run. The mirror also keeps a draft
+GitHub release, but only the complete, canonical Forge release is published.
+The `windows-ophalen` job uses `GH_DISPATCH_TOKEN` with Actions: read and write
+on `brennodewinter/Ocideck`, then verifies the run ID, tag commit and hashes.
+GitHub does not show draft releases to a Contents:read-only token, so the
+separate `GH_RELEASE_READ_TOKEN` is no longer used.
 
 *Starting* the build, however, is no longer left to chance. It used to rely on the
 tag push to the mirror triggering `.github/workflows/release.yml` there — but when
@@ -957,8 +957,7 @@ mirror) that push is a no-op and GitHub fires **no** `push` event, so the Window
 build never starts and `windows-ophalen` waited out its then 45-minute timeout (this
 stranded `v0.3.6`). The job now **actively dispatches** the mirror workflow via
 `workflow_dispatch` using the `GH_DISPATCH_TOKEN` secret (a fine-grained GitHub PAT
-with *Actions: read and write* on `brennodewinter/Ocideck`; it also needs
-*Contents: read* if no separate `GH_RELEASE_READ_TOKEN` is configured),
+with *Actions: read and write* on `brennodewinter/Ocideck`),
 regardless of whether the push event fired. It is idempotent — if the asset or a
 running build already exists it does not dispatch again — and it polls the run
 status so a failed build stops the job promptly (with the run URL) instead of

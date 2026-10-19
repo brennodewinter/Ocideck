@@ -37,13 +37,13 @@ $body
   test('ontbrekend CI-secret stopt vóór de tag zonder waarden te tonen', () {
     final result = run(
       r'''
-api() { printf '%s\n' '[{"name":"GH_DISPATCH_TOKEN"},{"name":"RELEASE_TOKEN"}]'; }
+api() { printf '%s\n' '[{"name":"GH_DISPATCH_TOKEN"}]'; }
 assert_release_ci_secrets
 ''',
       ['assert_release_ci_secrets'],
     );
     expect(result.exitCode, 42);
-    expect(result.stderr, contains('GH_RELEASE_READ_TOKEN ontbreekt'));
+    expect(result.stderr, contains('RELEASE_TOKEN ontbreekt'));
     expect(result.stdout, isEmpty);
   }, skip: skipOnWindows);
 
