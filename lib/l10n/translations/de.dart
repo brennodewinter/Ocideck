@@ -652,6 +652,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Extra ruimte': 'Zusätzlicher Abstand',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Diese Anmerkung ist länger als die Seite — für den Rest scrollen',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

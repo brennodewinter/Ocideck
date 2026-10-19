@@ -1610,6 +1610,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Extra ruimte': 'Dodatni prostor',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ova bilješka duža je od stranice — klizite za ostatak',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

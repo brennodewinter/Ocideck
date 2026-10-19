@@ -8,6 +8,19 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Added
+
+- **Bewuste witruimte tussen alinea's: `Extra ruimte` in het Invoegen-menu.**
+  Een lege regel is geen bewuste ruimte — elke Markdown-tool normaliseert die
+  weg. De nieuwe invoeging schrijft één `<!-- spacer -->`-marker op een eigen
+  regel: zichtbaar en telbaar in de bron, in de visuele editor één
+  selecteerbaar blok (Backspace haalt het in zijn geheel weg, Undo zet het
+  terug), en in de leesweergave plus elke export precies één tekstregel
+  extra ruimte — PDF, HTML, DOCX, ODT, LaTeX en EPUB in eigen dialect.
+  Voor vreemde Markdown-lezers is het een onzichtbaar HTML-commentaar:
+  de gedocumenteerde terugval is dat de ruimte daar stil verdwijnt en de
+  tekst onafgebroken doorleest (#2464).
+
 ### Fixed
 
 - **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende

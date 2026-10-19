@@ -12,6 +12,7 @@ import 'markdown_paste_cleanup.dart';
 import 'mermaid_embed_syntax.dart';
 import 'pentest_block_embed_syntax.dart';
 import 'toc_embed_syntax.dart';
+import 'spacer_embed_syntax.dart';
 import 'timeline_table_embed_syntax.dart';
 
 /// Round-trip conversion between stored markdown and a Quill document.
@@ -58,6 +59,7 @@ class MarkdownQuillCodec {
       // grens woont in `packages/ocideck_form_core`. Ook vóór de HTML-regel.
       FormBlockSyntax(),
       TocMarkerSyntax(),
+      SpacerMarkerSyntax(),
       // Vóór de standaard-fenceregel: zonder deze regel werd een
       // ```mermaid-fence een gewoon codeblok en tekende de visuele editor
       // als enige weergave het diagram niet (#1920).
@@ -81,6 +83,7 @@ class MarkdownQuillCodec {
       EmbeddableFormBlock.blockType: EmbeddableFormBlock.fromMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
+      EmbeddableSpacer.spacerType: EmbeddableSpacer.fromMdSyntax,
       EmbeddableMermaid.mermaidType: EmbeddableMermaid.fromMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.fromMdSyntax,
@@ -94,6 +97,7 @@ class MarkdownQuillCodec {
       EmbeddableFormBlock.blockType: EmbeddableFormBlock.toMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
+      EmbeddableSpacer.spacerType: EmbeddableSpacer.toMdSyntax,
       EmbeddableMermaid.mermaidType: EmbeddableMermaid.toMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.toMdSyntax,

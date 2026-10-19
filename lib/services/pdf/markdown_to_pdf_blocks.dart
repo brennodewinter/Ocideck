@@ -60,13 +60,20 @@ List<PdfBlock> markdownToPdfBlocks(
   // een inhoudsopgave met tekst eronder. De LaTeX-converter heeft daar geen
   // last van omdat die zijn sentinel achteraf in de úítvoer vervangt; hier is de
   // marker een blok en moet hij dus ook als los blok de parser uit komen.
-  final withToc = source.replaceAll(
+  var preprocessed = source.replaceAll(
     RegExp(r'^<!-- toc -->[ \t]*$', multiLine: true),
     '\n$_tocSentinel\n',
   );
+  // `<!-- spacer -->` → dezelfde sentineltruc als de inhoudsopgave: als eigen
+  // alinea de parser in, zodat hij als los blok (niet als tekst in een alinea)
+  // terugkomt. Zie [PdfSpacerBlock].
+  preprocessed = preprocessed.replaceAll(
+    RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$', multiLine: true),
+    '\n$_spacerSentinel\n',
+  );
 
   final document = _pdfMarkdownDocument();
-  final nodes = document.parse(withToc);
+  final nodes = document.parse(preprocessed);
   final converter = _PdfBlockConverter(
     chapterPageBreak: chapterPageBreak,
     displayMath: math.blocks,
@@ -106,6 +113,10 @@ List<PdfSpan> markdownToPdfSpans(String markdown) {
 /// De marker die `<!-- toc -->` vervangt tijdens de parse. Geen leestekens die
 /// Markdown zelf betekenis geeft, zodat er onderweg niets aan verandert.
 const _tocSentinel = 'OCIDECKTABLEOFCONTENTSMARKER';
+
+/// De marker die `<!-- spacer -->` vervangt tijdens de parse. Dezelfde eisen
+/// als [_tocSentinel]: alleen letters, dus de markdown-parser laat hem staan.
+const _spacerSentinel = 'OCIDECKSPACERMARKER';
 
 String _footnoteSentinel(int number) => 'OCIDECKFOOTNOTE${number}END';
 
@@ -397,6 +408,10 @@ class _PdfBlockConverter {
     final spans = _spansOf(node);
     if (spans.length == 1 && spans.first.text.trim() == _tocSentinel) {
       out.add(const PdfTocBlock());
+      return;
+    }
+    if (spans.length == 1 && spans.first.text.trim() == _spacerSentinel) {
+      out.add(const PdfSpacerBlock());
       return;
     }
     if (spans.length == 1) {

@@ -1606,6 +1606,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Extra ruimte': 'Dodaten prostor',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta opomba je daljša od strani — drsite za preostanek',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

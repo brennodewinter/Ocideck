@@ -40,6 +40,7 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertImage;
   final VoidCallback onInsertPageBreak;
   final VoidCallback onInsertToc;
+  final VoidCallback onInsertSpacer;
   final VoidCallback onInsertFootnote;
 
   /// Staan de voetnoten van dít document achterin in plaats van onderaan de
@@ -100,6 +101,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertImage,
     required this.onInsertPageBreak,
     required this.onInsertToc,
+    required this.onInsertSpacer,
     required this.onInsertFootnote,
     required this.footnotesAtEnd,
     required this.onFootnotesAtEndChanged,
@@ -383,6 +385,7 @@ class _DocEditorToolbar extends StatelessWidget {
         3 => onInsertImage(),
         5 => onInsertPageBreak(),
         6 => onInsertToc(),
+        10 => onInsertSpacer(),
         7 => onApplyChapterBreaks(),
         8 => onInsertFootnote(),
         _ => onPaste(),
@@ -398,6 +401,7 @@ class _DocEditorToolbar extends StatelessWidget {
           Icons.insert_page_break_outlined,
           l10n.d('Pagina-einde'),
         ),
+        _insertItem(10, Icons.space_bar_outlined, l10n.d('Extra ruimte')),
         _insertItem(6, Icons.list_outlined, l10n.d('Inhoudsopgave')),
         _insertItem(8, Icons.superscript, l10n.d('Voetnoot')),
         const PopupMenuDivider(),

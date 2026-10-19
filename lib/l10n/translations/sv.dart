@@ -1605,6 +1605,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Extra ruimte': 'Extra utrymme',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Den här noten är längre än sidan — scrolla för resten',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

@@ -22,6 +22,7 @@ import '../../services/table_of_contents.dart';
 import '../../services/web_asset_store.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/bundled_asset.dart';
+import '../../utils/spacer_embed_syntax.dart';
 import '../../utils/doc_link.dart' show headingSlug;
 import '../../utils/footnotes.dart';
 import '../../utils/image_limits.dart';
@@ -397,6 +398,7 @@ class DocumentMarkdownView extends StatelessWidget {
       ),
     ),
     _Kind.toc => _bounded(_tocPreview(context, t)),
+    _Kind.spacer => _spacer(t),
   };
 
   /// Feature 4: live preview van de inhoudsopgave. Genereert de TOC uit de
@@ -573,9 +575,9 @@ class DocumentMarkdownView extends StatelessWidget {
         continue;
       }
 
-      // Feature 4: TOC-marker `<!-- toc -->` op een eigen regel.
-      if (trimmed == '<!-- toc -->') {
-        blocks.add(const _Block(_Kind.toc));
+      // Feature 4: atomaire markers op een eigen regel (zie _markerKind).
+      if (_markerKind(trimmed) case final marker?) {
+        blocks.add(_Block(marker));
         i++;
         continue;
       }
@@ -817,6 +819,21 @@ class DocumentMarkdownView extends StatelessWidget {
       child: chart,
     );
   }
+
+  /// De atomaire commentaar-markers als bloksoort, of `null` als de regel
+  /// geen marker is. Feature 4: `<!-- toc -->` op een eigen regel; de
+  /// `<!-- spacer -->` naast hem is één regel bewuste ruimte.
+  static _Kind? _markerKind(String trimmed) {
+    if (trimmed == '<!-- toc -->') return _Kind.toc;
+    if (spacerMarkerLinePattern.hasMatch(trimmed)) return _Kind.spacer;
+    return null;
+  }
+
+  /// De `<!-- spacer -->`-marker is in de leesweergave wat hij zegt: ruimte —
+  /// één bodytekstregel ([_Theme.body] draagt de gekozen lettergrootte en
+  /// regelhoogte, dus de ruimte schaalt mee met de documentstijl).
+  Widget _spacer(_Theme t) =>
+      SizedBox(height: t.body.fontSize! * (t.body.height ?? 1));
 
   Widget _rule(_Theme t) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 14),

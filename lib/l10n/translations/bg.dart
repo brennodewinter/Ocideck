@@ -1626,6 +1626,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Extra ruimte': 'Допълнително пространство',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Тази бележка е по-дълга от страницата — превъртете за останалото',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

@@ -67,31 +67,42 @@ OdtConversion markdownToOdtBody(
   // ODT-inhoudsopgave wordt. De markdown-package stript commentaar, dus
   // vervang vóór de parse.
   const tocSentinel = 'OCIDECKTABLEOFCONTENTSMARKER';
-  final withToc = source.replaceAll(
+  var preprocessed = source.replaceAll(
     RegExp(r'^<!-- toc -->\s*$', multiLine: true),
     tocSentinel,
+  );
+
+  // `<!-- spacer -->` → een eigen sentinelregel; na de conversie wordt de
+  // alinea eromheen leeg gemaakt tot een lege alinea = één regel extra ruimte.
+  const spacerSentinel = 'OCIDECKSPACERMARKER';
+  preprocessed = preprocessed.replaceAll(
+    RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$', multiLine: true),
+    spacerSentinel,
   );
 
   final document = md.Document(
     encodeHtml: true,
     extensionSet: md.ExtensionSet.gitHubFlavored,
   );
-  final nodes = document.parse(withToc);
+  final nodes = document.parse(preprocessed);
   final visitor = _OdtNodeVisitor(chapterPageBreak: chapterPageBreak);
   for (final node in nodes) {
     node.accept(visitor);
   }
 
-  var out = visitor.output.toString().replaceAll(
-    tocSentinel,
-    '<text:table-of-content text:name="Inhoudsopgave" text:protected="true">'
-    '<text:index-body>'
-    '<text:index-title text:style-name="Sect1_Heading">'
-    '<text:p text:style-name="Heading_20_1">${xmlEscape(footnotesTitle)}</text:p>'
-    '</text:index-title>'
-    '</text:index-body>'
-    '</text:table-of-content>',
-  );
+  var out = visitor.output
+      .toString()
+      .replaceAll(spacerSentinel, '')
+      .replaceAll(
+        tocSentinel,
+        '<text:table-of-content text:name="Inhoudsopgave" text:protected="true">'
+        '<text:index-body>'
+        '<text:index-title text:style-name="Sect1_Heading">'
+        '<text:p text:style-name="Heading_20_1">${xmlEscape(footnotesTitle)}</text:p>'
+        '</text:index-title>'
+        '</text:index-body>'
+        '</text:table-of-content>',
+      );
 
   // Tijdlijn-placeholders herstellen.
   for (var i = 0; i < timelines.odt.length; i++) {

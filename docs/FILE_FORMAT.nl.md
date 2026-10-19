@@ -4400,6 +4400,53 @@ Ontwerp, grammatica, veldtypen, regelsemantiek en de validatiecodes:
 `docs/design/FORM_INTAKE.md` §4. De referentieparser is het losse pakket
 `packages/ocideck_form_core`.
 
+### 14.15 Bewuste witruimte — de marker `<!-- spacer -->` *(toegevoegd 2026-10-19)*
+
+Een document kan opzettelijke verticale ruimte tussen twee blokken dragen — een
+adem tussen alinea's die iets betekent, anders dan de lege regels die blokken
+alleen *scheiden* en op zichzelf niets zeggen. Op schijf is dat **één
+HTML-commentaar op een eigen regel**, en verder niets:
+
+```
+Eerste alinea.
+
+<!-- spacer -->
+
+Tweede alinea.
+```
+
+De knop *Invoegen → Extra ruimte* schrijft precies die regel op de
+cursorpositie. Twee markers onder elkaar geven twee regels ruimte — de
+hoeveelheid is letterlijk telbaar in de bron, en dát is het punt: een lege
+regel wordt door elk Markdown-gereedschap weggenormaliseerd, dus een
+hoeveelheid ruimte kan alleen meereizen als een benoemde constructie.
+
+Dit is de positie van §14.10, maar kleiner: de **syntaxis** is niet van
+OciDeck (een HTML-commentaar is een constructie die elke Markdown-lezer kent
+en overslaat) en de **betekenis** wel. De gedocumenteerde terugval is daardoor
+eenvoudig en eerlijk: in een vreemde lezer verdwijnt de ruimte stilletjes en
+de tekst leest onafgebroken door — de marker kost een vreemde lezer niets en
+houdt niets gegijzeld. Een `<br>` op een eigen regel is eerst geprobeerd en
+afgevallen: Markdown parseert die als *inline*-HTML verlijmd aan de volgende
+alinea, waardoor hij een rijke-tekst-heen-en-terugreis niet als blok
+overleeft én voor niemand als instructie leest.
+
+Feiten die op schijf tellen:
+
+- **De marker is atomair in de visuele editor.** Hij is één embed, één
+  documentteken: aanklikken selecteert hem, Backspace/Delete haalt hem als
+  één blok weg, Ongedaan maken zet hem terug. Zijn bron overleeft een
+  heen-en-terugreis byte-identiek.
+- **Op het scherm is hij één bodytekstregel hoog**, in de editor met een
+  subtiel etiket zodat het blok zichtbaar en bereikbaar blijft; in de
+  leesweergave is hij gewoon de ruimte die hij is. Elke export schrijft
+  dezelfde hoeveelheid in eigen dialect (een lege alinea in ODT/DOCX/EPUB,
+  `\vspace{\baselineskip}` in LaTeX, een spacerblok in de PDF, een lege
+  `&nbsp;`-alinea in HTML).
+- **De `.md`-export houdt de marker**, want die is bron — de ruimte hoort bij
+  het document, anders dan de gegenereerde inhoudsopgave uit §14.10 die juist
+  verdwijnt.
+
 ## 15. Documentdossiers
 
 Een documentdossier is een map met `dossier.json` en een afgeleid, leesbaar

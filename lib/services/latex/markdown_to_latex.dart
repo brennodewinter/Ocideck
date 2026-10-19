@@ -68,11 +68,18 @@ String markdownToLatex(
   // sentinel zonder escape-gevoelige tekens doorheen, die na de conversie het
   // commando wordt.
   const tocSentinel = 'OCIDECKTABLEOFCONTENTSMARKER';
-  final withToc = source.replaceAll(
+  var preprocessed = source.replaceAll(
     RegExp(r'^<!-- toc -->\s*$', multiLine: true),
     tocSentinel,
   );
-  final protected = _MathProtector.protect(withToc);
+  // `<!-- spacer -->` → sentinel; na de conversie wordt hij `\vspace` op een
+  // eigen regel, één regelhoogte extra verticale ruimte.
+  const spacerSentinel = 'OCIDECKSPACERMARKER';
+  preprocessed = preprocessed.replaceAll(
+    RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$', multiLine: true),
+    spacerSentinel,
+  );
+  final protected = _MathProtector.protect(preprocessed);
   final document = md.Document(
     encodeHtml: false,
     extensionSet: md.ExtensionSet.gitHubFlavored,
@@ -87,10 +94,10 @@ String markdownToLatex(
   for (final node in nodes) {
     node.accept(visitor);
   }
-  var out = visitor.output.toString().replaceAll(
-    tocSentinel,
-    '\\tableofcontents',
-  );
+  var out = visitor.output
+      .toString()
+      .replaceAll(tocSentinel, '\\tableofcontents')
+      .replaceAll(spacerSentinel, '\\vspace{\\baselineskip}');
   for (var index = 0; index < timelines.latex.length; index++) {
     out = out.replaceAll('OCIDECKTIMELINE${index}END', timelines.latex[index]);
   }

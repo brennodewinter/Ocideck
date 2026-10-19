@@ -604,6 +604,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     onInsertChart: _insertChart,
     onInsertPageBreak: _insertPageBreak,
     onInsertToc: _insertToc,
+    onInsertSpacer: _insertSpacer,
     onInsertFootnote: _insertFootnote,
     footnotesAtEnd:
         documentFootnotePlacement(_pageSetupSource(ref)) ==

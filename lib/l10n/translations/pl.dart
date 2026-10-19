@@ -1618,6 +1618,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Extra ruimte': 'Dodatkowa przestrzeń',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta przypis jest dłuższy niż strona — przewiń, by zobaczyć resztę',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

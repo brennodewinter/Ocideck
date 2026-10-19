@@ -1621,6 +1621,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Extra ruimte': 'Spatium extra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Haec nota longior est quam pagina — volumen verte pro reliquo',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

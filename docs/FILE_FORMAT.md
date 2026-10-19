@@ -4395,6 +4395,49 @@ Design, grammar, field types, rule semantics and the validation codes:
 `docs/design/FORM_INTAKE.md` §4. The reference parser is the standalone package
 `packages/ocideck_form_core`.
 
+### 14.15 Deliberate whitespace — the `<!-- spacer -->` marker *(added 2026-10-19)*
+
+A document may carry intentional vertical space between two blocks — a pause
+between paragraphs that means something, as opposed to the blank lines that
+only *separate* blocks and carry no meaning of their own. On disk that is **one
+HTML comment on a line of its own**, and nothing else:
+
+```
+First paragraph.
+
+<!-- spacer -->
+
+Second paragraph.
+```
+
+The *Invoegen → Extra ruimte* ("Insert → Extra space") button writes exactly
+that line at the cursor. Two markers in a row give two lines of space — the
+amount is literally countable in the source, which is the point: a blank line
+is normalised away by every Markdown tool, so an amount of space can only
+travel as a named construct.
+
+This is §14.10's position, smaller: the **syntax** is not OciDeck's (an HTML
+comment is a construct every Markdown reader knows and skips) and the
+**meaning** is. The documented fallback is therefore simple and honest: in a
+foreign reader the space quietly disappears and the text reads on unbroken —
+the marker costs a foreign reader nothing and takes nothing hostage. A `<br>`
+on a line of its own was tried first and rejected: Markdown parses it as
+*inline* HTML glued to the following paragraph, so it neither survives a
+rich-text round trip as a block nor reads as an instruction to anyone else.
+
+Facts that matter on disk:
+
+- **The marker is atomic in the visual editor.** It is one embed, one
+  document character: clicking selects it, Backspace/Delete removes it as one
+  block, Undo restores it. Its source round-trips byte-identically.
+- **On screen it is one body line tall**, in the editor with a subtle label so
+  the block can be seen and reached; in the reader it is simply the space it
+  means. Each export writes the same amount in its own dialect (an empty
+  paragraph in ODT/DOCX/EPUB, `\vspace{\baselineskip}` in LaTeX, a spacer
+  block in the PDF, an empty `&nbsp;` paragraph in HTML).
+- **The `.md` export keeps the marker**, being source — the space is part of
+  the document, unlike the generated contents list of §14.10 which is dropped.
+
 ## 15. Document Dossiers
 
 A document dossier is a folder containing `dossier.json` and a derived,

@@ -651,6 +651,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Extra ruimte': 'Espasio ekstra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'E nota aki ta mas largu ku e página — skrol pa e resto',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':
