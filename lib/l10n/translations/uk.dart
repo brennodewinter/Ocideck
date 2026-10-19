@@ -1627,6 +1627,12 @@ const _dutchSourceAddUk = <String, String>{
       'Вставлення пропущено: точка вставлення змінилася в цей час.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Вирізання пропущено: текст змінився в цей час.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Це призначення — ваш вихідний документ. Експорт — це копія для одержувача; оригінал ніколи не перезаписується. Виберіть іншу назву або теку.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Цей експорт заблоковано налаштуваннями класифікації.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Цей експорт заблоковано правилом експорту конфіденційності.',
   'Certificaatnummer: {nummer}': 'Номер сертифіката: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Оцінювач більше не бачитиме цей елемент. ',

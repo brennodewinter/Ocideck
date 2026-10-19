@@ -82,7 +82,7 @@ void main() {
         enforcementPolicy: const ClassificationEnforcementPolicy(),
         outputPath: out,
       );
-      expect(written, out);
+      expect((written as DocumentExportWritten).path, out);
       final content = await File(out).readAsString();
       expect(content.contains('UNIEKPROZA'), isTrue);
       // Geen deck-scaffold: een document-export draagt geen `marp:`-kop.
@@ -103,7 +103,11 @@ void main() {
         enforcementPolicy: const ClassificationEnforcementPolicy(),
         outputPath: out,
       );
-      expect(written, isNull);
+      expect(written, isA<DocumentExportRefused>());
+      expect(
+        (written as DocumentExportRefused).reason,
+        DocumentExportRefusal.privacyBlocked,
+      );
       expect(File(out).existsSync(), isFalse);
     },
   );
@@ -123,7 +127,11 @@ void main() {
       privacyAcknowledged: true,
       outputPath: out,
     );
-    expect(written, isNull);
+    expect(written, isA<DocumentExportRefused>());
+    expect(
+      (written as DocumentExportRefused).reason,
+      DocumentExportRefusal.privacyBlocked,
+    );
     expect(File(out).existsSync(), isFalse);
   });
 
@@ -138,7 +146,7 @@ void main() {
       privacyAcknowledged: true,
       outputPath: out,
     );
-    expect(written, out);
+    expect((written as DocumentExportWritten).path, out);
     expect(await File(out).readAsString(), contains('728398242'));
   });
 
@@ -344,7 +352,7 @@ void main() {
         enforcementPolicy: const ClassificationEnforcementPolicy(),
         outputPath: out,
       );
-      expect(written, out);
+      expect((written as DocumentExportWritten).path, out);
       final html = await File(out).readAsString();
       expect(html.contains('<section class="document"'), isTrue);
       expect(html.contains('<section class="slide'), isFalse);
@@ -607,7 +615,7 @@ void main() {
             enforcementPolicy: policy,
             outputPath: out,
           );
-          expect(written, isNull, reason: format.name);
+          expect(written, isA<DocumentExportRefused>(), reason: format.name);
           expect(await File(out).exists(), isFalse, reason: format.name);
         }
       });
@@ -712,7 +720,12 @@ void main() {
         sourcePath: source.path,
       );
 
-      expect(written, isNull);
+      // Doel = bron: geweigerd mét reden, en de bronbytes blijven staan.
+      expect(written, isA<DocumentExportRefused>());
+      expect(
+        (written as DocumentExportRefused).reason,
+        DocumentExportRefusal.sourceIsTarget,
+      );
       expect(await source.readAsString(), 'ORIGINELE BRON');
     });
   });
@@ -992,6 +1005,57 @@ void main() {
         onPdfTablesTooWide: tooWide.add,
       );
       expect(tooWide, [1]);
+    });
+
+    test('pdf-bouwwaarschuwingen reizen mee in de uitkomst (#2467)', () async {
+      final bundle = await buildDocumentExportBundle(
+        '# Verslag\n\n'
+        '日本語 in de tekst.\n\n'
+        '| Bestandstype | SHA-256 | SHA-512 |\n'
+        '|---|---|---|\n'
+        '| EVTX | `${'a' * 64}` | `${'b' * 128}` |\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      final out = p.join(temp.path, 'verslag.pdf');
+      final outcome = await writeDocumentExport(
+        bundle,
+        DocumentExportFormat.pdf,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
+        outputPath: out,
+      );
+
+      // Het bestand staat er — én de waarschuwingen blijven bij het
+      // resultaat in plaats van onderweg te vervliegen.
+      expect(outcome, isA<DocumentExportWritten>());
+      final written = outcome as DocumentExportWritten;
+      expect(written.path, out);
+      expect(await File(out).exists(), isTrue);
+      expect(
+        written.warnings.whereType<DocumentExportUnsupportedCharacters>(),
+        hasLength(1),
+      );
+      expect(
+        written.warnings.whereType<DocumentExportTablesTooWide>(),
+        hasLength(1),
+      );
+    });
+
+    test('zonder uitvoerpad is de uitkomst geannuleerd (#2467)', () async {
+      await withBundle((bundle) async {
+        final outcome = await writeDocumentExport(
+          bundle,
+          DocumentExportFormat.md,
+          html: MarpHtmlService(loadAsset: _diskLoader),
+          enforcementPolicy: const ClassificationEnforcementPolicy(),
+        );
+        expect(outcome, isA<DocumentExportCancelled>());
+      });
     });
 
     test('sourcePath null → geen rebasing in md-bytes', () async {

@@ -2520,6 +2520,12 @@ const _dutchSourceAddTr = <String, String>{
       'Yapıştırma atlandı: ekleme noktası bu sırada değişti.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Kesme atlandı: metin bu sırada değişti.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Bu hedef kaynak belgenizin kendisi. Dışa aktarma, bir alıcı için bir kopyadır — orijinal asla üzerine yazılmaz. Başka bir ad veya klasör seçin.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Bu dışa aktarma sınıflandırma ayarları tarafından engellendi.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Bu dışa aktarma gizlilik dışa aktarma kuralı tarafından engellendi.',
   'Certificaatnummer: {nummer}': 'Sertifika numarası: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Değerlendirici artık bu parçayı göremez. ',

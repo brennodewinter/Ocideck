@@ -1,8 +1,10 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../l10n/export_block_localization.dart';
+import '../../services/download_delivery.dart';
 import '../../models/privacy_disposition.dart';
 import '../../services/classification_policy.dart';
 import '../../services/privacy/privacy_export_policy.dart';
@@ -10,6 +12,7 @@ import '../../services/document_export_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
+import '../parts/document_export_pdf_support.dart';
 import 'dialog_shell.dart';
 import 'export_failure_text.dart';
 
@@ -91,10 +94,13 @@ Future<bool> confirmDocumentPrivacyExport(
 /// documenteditor meelevert en het geschreven pad teruggeeft. Zo blijft de
 /// projectiegrens waar hij hoort en blijft deze widget puur presentatie.
 class DocumentExportDialog extends StatefulWidget {
-  /// Bouwt en schrijft de export voor het gekozen profiel en formaat, en geeft
-  /// het geschreven pad terug (of `null` bij wegklikken van de bestandskiezer of
-  /// een fout).
-  final Future<String?> Function(PrivacyExportProfile, DocumentExportFormat)
+  /// Bouwt en schrijft de export voor het gekozen profiel en formaat, en
+  /// geeft de uitkomst terug — geschreven mét waarschuwingen, geannuleerd,
+  /// geweigerd mét reden, of mislukt (#2467).
+  final Future<DocumentExportOutcome> Function(
+    PrivacyExportProfile,
+    DocumentExportFormat,
+  )
   onExport;
 
   /// Of de privacycontrole tijdens het bewerken aanstaat. Documentexport
@@ -109,7 +115,7 @@ class DocumentExportDialog extends StatefulWidget {
 
   static Future<void> show(
     BuildContext context, {
-    required Future<String?> Function(
+    required Future<DocumentExportOutcome> Function(
       PrivacyExportProfile,
       DocumentExportFormat,
     )
@@ -134,7 +140,7 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
   DocumentExportFormat _format = DocumentExportFormat.md;
 
   bool _busy = false;
-  String? _writtenPath;
+  DocumentExportOutcome? _outcome;
   String? _failure;
 
   Future<void> _run() async {
@@ -142,10 +148,10 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
       _busy = true;
       _failure = null;
     });
-    String? path;
+    DocumentExportOutcome? outcome;
     String? failure;
     try {
-      path = await widget.onExport(_profile, _format);
+      outcome = await widget.onExport(_profile, _format);
     } catch (error) {
       // Benoemd en niet kaal, en breder dan `on Exception`: de bestandskiezer
       // op web gooit een `ArgumentError`, en dat is een `Error` — een vangst op
@@ -161,7 +167,9 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
     if (!mounted) return;
     setState(() {
       _busy = false;
-      _writtenPath = path;
+      // Geannuleerd is geen toestand om te tonen: de gebruiker koos zelf om
+      // weg te klikken, dus de opties blijven gewoon staan (#2467).
+      _outcome = outcome is DocumentExportCancelled ? null : outcome;
       _failure = failure;
     });
   }
@@ -178,14 +186,20 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
         title: l10n.d('Document exporteren'),
         leading: const Icon(Icons.ios_share_outlined),
         body: SingleChildScrollView(
-          child: _writtenPath != null
-              ? _resultView(l10n, _writtenPath!)
+          child: _outcome is DocumentExportWritten
+              ? _resultView(l10n, _outcome as DocumentExportWritten)
               : _optionsView(l10n),
         ),
-        actions: _writtenPath != null
+        actions: _outcome is DocumentExportWritten
             ? [
+                if (!deliversByDownload)
+                  TextButton.icon(
+                    onPressed: _openWritten,
+                    icon: const Icon(Icons.open_in_new, size: 16),
+                    label: Text(l10n.d('Openen')),
+                  ),
                 TextButton(
-                  onPressed: () => setState(() => _writtenPath = null),
+                  onPressed: () => setState(() => _outcome = null),
                   child: Text(l10n.d('Nog een export')),
                 ),
                 TextButton(
@@ -230,8 +244,61 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           const SizedBox(height: 12),
           _failureNote(l10n, _failure!),
         ],
+        if (_outcome is DocumentExportRefused) ...[
+          const SizedBox(height: 12),
+          _refusalNote(l10n, _outcome as DocumentExportRefused),
+        ],
+        if (_outcome is DocumentExportFailed) ...[
+          const SizedBox(height: 12),
+          _failureNote(
+            l10n,
+            l10n.d(
+              'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
+            ),
+          ),
+        ],
       ],
     );
+  }
+
+  /// De export kon niet naar het gekozen doel. De gebruiker ziet nú pas waarom
+  /// — eerder verdween zo'n weigering als een zwijgende `null` (#2467).
+  Widget _refusalNote(AppLocalizations l10n, DocumentExportRefused refused) {
+    final text = switch (refused.reason) {
+      DocumentExportRefusal.sourceIsTarget => l10n.d(
+        'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.',
+      ),
+      DocumentExportRefusal.classificationBlocked => l10n.d(
+        'Deze export is geblokkeerd door de classificatie-instellingen.',
+      ),
+      DocumentExportRefusal.privacyBlocked => l10n.d(
+        'Deze export is geblokkeerd door de privacy-exportregel.',
+      ),
+    };
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppTheme.infoBg,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 11.5, color: AppTheme.slate700),
+      ),
+    );
+  }
+
+  /// Het geschreven bestand openen in de systeemviewer (desktop alleen; op web
+  /// leverde de browser de download al af). De knop is er voor wie het
+  /// resultaat meteen wil controleren in plaats van het pad te onthouden.
+  Future<void> _openWritten() async {
+    final outcome = _outcome;
+    if (outcome is! DocumentExportWritten) return;
+    try {
+      await launchUrl(Uri.file(outcome.path));
+    } on Exception catch (e) {
+      logWarning('DocumentExport: openen van ${outcome.path} mislukt', e);
+    }
   }
 
   /// Zegt dat het niet gelukt is, en wat de gebruiker nu kan doen.
@@ -394,30 +461,72 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
     );
   }
 
-  Widget _resultView(AppLocalizations l10n, String path) => Column(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      Icon(Icons.check_circle, color: AppTheme.successFg, size: 36),
-      const SizedBox(height: 12),
-      SelectableText(
-        '${exportDeliveryLabel(l10n)}\n$path',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 13, color: AppTheme.successFg),
-      ),
-      const SizedBox(height: 8),
-      TextButton.icon(
-        onPressed: () async {
-          final messenger = ScaffoldMessenger.of(context);
-          final copied = l10n.d('Gekopieerd');
-          await Clipboard.setData(ClipboardData(text: path));
-          if (!mounted) return;
-          messenger.showSnackBar(SnackBar(content: Text(copied)));
-        },
-        icon: const Icon(Icons.copy, size: 16),
-        label: Text(l10n.d('Kopiëren')),
-      ),
-    ],
-  );
+  Widget _resultView(AppLocalizations l10n, DocumentExportWritten written) =>
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check_circle, color: AppTheme.successFg, size: 36),
+          const SizedBox(height: 12),
+          SelectableText(
+            '${exportDeliveryLabel(l10n)}\n${written.path}',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 13, color: AppTheme.successFg),
+          ),
+          // De bouwwaarschuwingen horen blijvend bij het resultaat — het
+          // bestand staat er, maar "geëxporteerd" mag niet als "gecontroleerd"
+          // worden gelezen (#2467).
+          if (written.warnings.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            for (final warning in written.warnings) _warningNote(l10n, warning),
+          ],
+          const SizedBox(height: 8),
+          TextButton.icon(
+            onPressed: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              final copied = l10n.d('Gekopieerd');
+              await Clipboard.setData(ClipboardData(text: written.path));
+              if (!mounted) return;
+              messenger.showSnackBar(SnackBar(content: Text(copied)));
+            },
+            icon: const Icon(Icons.copy, size: 16),
+            label: Text(l10n.d('Kopiëren')),
+          ),
+        ],
+      );
+
+  Widget _warningNote(AppLocalizations l10n, DocumentExportWarning warning) =>
+      Container(
+        width: double.infinity,
+        margin: const EdgeInsets.only(bottom: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        decoration: BoxDecoration(
+          color: AppTheme.warningBg,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              Icons.warning_amber_outlined,
+              size: 15,
+              color: AppTheme.warningFg,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(switch (warning) {
+                DocumentExportUnsupportedCharacters(:final runes) =>
+                  unsupportedCharactersMessage(l10n, runes),
+                DocumentExportCoarseLogo(:final logo) => coarseLogoMessage(
+                  l10n,
+                  logo,
+                ),
+                DocumentExportTablesTooWide(:final count) =>
+                  tablesTooWideMessage(l10n, count),
+              }, style: TextStyle(fontSize: 11.5, color: AppTheme.warningFg)),
+            ),
+          ],
+        ),
+      );
 }
 
 /// Eén keuze in de formaatkiezer.

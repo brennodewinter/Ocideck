@@ -1624,6 +1624,12 @@ const _dutchSourceAddPl = <String, String>{
       'Wklejanie pominięto: punkt wstawiania zmienił się w międzyczasie.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Wycinanie pominięto: tekst zmienił się w międzyczasie.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Ten cel to sam dokument źródłowy. Eksport to kopia dla odbiorcy — oryginał nigdy nie jest nadpisywany. Wybierz inną nazwę lub folder.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Ten eksport jest zablokowany przez ustawienia klasyfikacji.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Ten eksport jest zablokowany przez regułę eksportu prywatności.',
   'Certificaatnummer: {nummer}': 'Numer certyfikatu: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Oceniający nie zobaczy wtedy tego elementu. ',

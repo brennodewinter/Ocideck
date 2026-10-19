@@ -1616,6 +1616,12 @@ const _dutchSourceAddHr = <String, String>{
       'Lijepljenje preskočeno: mjesto umetanja se u međuvremenu promijenilo.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Izrezivanje preskočeno: tekst se u međuvremenu promijenio.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Taj je cilj vaš izvorni dokument. Izvoz je kopija za primatelja — izvornik se nikad ne prepisuje. Odaberite drugi naziv ili mapu.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Ovaj je izvoz blokiran postavkama klasifikacije.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Ovaj je izvoz blokiran pravilom o izvozu privatnosti.',
   'Certificaatnummer: {nummer}': 'Broj certifikata: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ocjenjivač tada više neće vidjeti ovaj komad. ',

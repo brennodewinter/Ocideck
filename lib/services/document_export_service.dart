@@ -450,6 +450,87 @@ Future<Uint8List> _buildPdfBytes(
   return result.bytes;
 }
 
+/// Wat een documentexport opleverde — want niet elke `null` betekende
+/// hetzelfde (#2467): een weigering van het doel is iets anders dan een
+/// annulering door de gebruiker, en "geschreven" kan nog steeds
+/// waarschuwingen dragen die de lezer moet kunnen terugzien.
+sealed class DocumentExportOutcome {
+  const DocumentExportOutcome();
+}
+
+/// Het bestand staat er — [path] is de bestemming (desktop) of de
+/// downloadnaam (web). [warnings] vertelt wat er niet helemaal in paste:
+/// blijvend zichtbaar in het resultaat, nooit alleen een vluchtige melding
+/// tijdens het bouwen.
+final class DocumentExportWritten extends DocumentExportOutcome {
+  const DocumentExportWritten(this.path, {this.warnings = const []});
+
+  final String path;
+  final List<DocumentExportWarning> warnings;
+}
+
+/// De gebruiker koos geen doel — geen fout, geen melding.
+final class DocumentExportCancelled extends DocumentExportOutcome {
+  const DocumentExportCancelled();
+}
+
+/// Voor het schrijven geweigerd — de schil legt [reason] uit in plaats van
+/// stil terug te keren naar de opties.
+final class DocumentExportRefused extends DocumentExportOutcome {
+  const DocumentExportRefused(this.reason);
+
+  final DocumentExportRefusal reason;
+}
+
+/// Waarom een exportdoel werd geweigerd. Classificatie en privacy blijven
+/// apart herkenbaar — hun blokkade komt elders al met eigen uitleg.
+enum DocumentExportRefusal {
+  /// Het doel ís de bron (ook via alias of symlink): de export is een kopie,
+  /// en overschrijven zou de oorspronkelijke Markdown weggooien.
+  sourceIsTarget,
+
+  /// De classificatiepolitie stond deze export niet toe.
+  classificationBlocked,
+
+  /// De privacy-exportregel stond deze export niet toe.
+  privacyBlocked,
+}
+
+/// De levering zelf mislukte zonder dat er een uitzondering vloog — op web
+/// kan de browser de download weigeren.
+final class DocumentExportFailed extends DocumentExportOutcome {
+  const DocumentExportFailed();
+}
+
+/// Iets dat niet helemaal in de export paste — een waarschuwing, geen fout:
+/// het bestand staat er, maar de lezer hoort te weten wat er schort (#2467).
+sealed class DocumentExportWarning {
+  const DocumentExportWarning();
+}
+
+/// Tekens waarvoor geen enkele beschikbare snede een vorm had: ze ontbreken
+/// in de tekstlaag, en dus ook in zoeken, kopiëren en voorleessoftware.
+final class DocumentExportUnsupportedCharacters extends DocumentExportWarning {
+  const DocumentExportUnsupportedCharacters(this.runes);
+
+  final Set<int> runes;
+}
+
+/// Het logo komt onder de drukvloer uit — op papier ziet de lezer pixels.
+final class DocumentExportCoarseLogo extends DocumentExportWarning {
+  const DocumentExportCoarseLogo(this.logo);
+
+  final LogoResolution logo;
+}
+
+/// Tabellen die ook op de kleinste letter niet op de bladbreedte pasten:
+/// lange waarden zijn middenin afgebroken.
+final class DocumentExportTablesTooWide extends DocumentExportWarning {
+  const DocumentExportTablesTooWide(this.count);
+
+  final int count;
+}
+
 /// Schrijft een document-export naar [outputPath] (desktop) of als
 /// browser-download via [webFileName] (web), in het gevraegde [format].
 ///
@@ -494,10 +575,9 @@ Future<Uint8List> _buildPdfBytes(
 /// genegeerd. Op desktop is [outputPath] het pad dat atomisch wordt beschreven,
 /// en [webFileName] wordt genegeerd.
 ///
-/// Geeft het geschreven pad (desktop) of de bestandsnaam (web) terug, of
-/// `null` bij een geblokkeerde classificatie of privacycontrole, of wanneer het doel gelijk is
-/// aan de bron.
-Future<String?> writeDocumentExport(
+/// Geeft een [DocumentExportOutcome] terug: geschreven (met eventuele
+/// bouwwaarschuwingen), geannuleerd, geweigerd mét reden, of mislukt.
+Future<DocumentExportOutcome> writeDocumentExport(
   ExportBundle bundle,
   DocumentExportFormat format, {
   required MarpHtmlService html,
@@ -516,25 +596,29 @@ Future<String?> writeDocumentExport(
   List<ByteData> pdfFallbackFonts = const [],
   MermaidSvgResolver? renderMermaid,
   MathSvgResolver? renderMath,
-  void Function(Set<int> runes)? onPdfUnsupportedCharacters,
-  void Function(LogoResolution logo)? onPdfCoarseLogo,
-  void Function(int count)? onPdfTablesTooWide,
   String? outputPath,
   String? sourcePath,
   String? webFileName,
 }) async {
   if (!deliversByDownload) {
-    if (outputPath == null) return null;
-    if (await _sameFile(sourcePath, outputPath)) return null;
+    if (outputPath == null) return const DocumentExportCancelled();
+    if (await _sameFile(sourcePath, outputPath)) {
+      return const DocumentExportRefused(DocumentExportRefusal.sourceIsTarget);
+    }
   }
   if (!enforcementPolicy.evaluate(bundle.audience.deck.tlp).allowed) {
-    return null;
+    return const DocumentExportRefused(
+      DocumentExportRefusal.classificationBlocked,
+    );
   }
   final privacyDecision = privacyPolicy.evaluate(bundle.privacySummary);
   if (!privacyDecision.allowed &&
       (privacyDecision.hardBlocked || !privacyAcknowledged)) {
-    return null;
+    return const DocumentExportRefused(DocumentExportRefusal.privacyBlocked);
   }
+  // De bouwwaarschuwingen verzamelen we hier, zodat ze blijvend in het
+  // resultaat kunnen landen in plaats van onderweg te vervliegen (#2467).
+  final warnings = <DocumentExportWarning>[];
   final bytes = await buildDocumentExportBytes(
     bundle,
     format,
@@ -551,9 +635,11 @@ Future<String?> writeDocumentExport(
     pdfFallbackFonts: pdfFallbackFonts,
     renderMermaid: renderMermaid,
     renderMath: renderMath,
-    onPdfUnsupportedCharacters: onPdfUnsupportedCharacters,
-    onPdfTablesTooWide: onPdfTablesTooWide,
-    onPdfCoarseLogo: onPdfCoarseLogo,
+    onPdfUnsupportedCharacters: (runes) =>
+        warnings.add(DocumentExportUnsupportedCharacters(runes)),
+    onPdfTablesTooWide: (count) =>
+        warnings.add(DocumentExportTablesTooWide(count)),
+    onPdfCoarseLogo: (logo) => warnings.add(DocumentExportCoarseLogo(logo)),
     sourcePath: sourcePath,
     outputPath: deliversByDownload ? null : outputPath,
   );
@@ -561,12 +647,17 @@ Future<String?> writeDocumentExport(
     // Web: geen bestandssysteem — de bytes vertrekken als browserdownload.
     // `null` betekent dat de browser hem niet aannam; de schil zegt dat dan
     // ook, in plaats van een bestandsnaam te melden die nergens staat (#1902).
-    return deliverAsDownload([
+    final name = deliverAsDownload([
       (name: webFileName!, bytes: bytes),
     ], bundleName: bundleNameFor(webFileName));
+    return name == null
+        ? const DocumentExportFailed()
+        : DocumentExportWritten(name, warnings: warnings);
   }
+  // In de desktoptak is [outputPath] hier niet-null — de leeg- en
+  // gelijk-aan-bron-controle verlieten de functie al eerder.
   await writeBytesAtomic(File(outputPath!), bytes);
-  return outputPath;
+  return DocumentExportWritten(outputPath, warnings: warnings);
 }
 
 Future<bool> _sameFile(String? sourcePath, String outputPath) async {

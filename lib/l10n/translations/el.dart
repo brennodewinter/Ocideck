@@ -1637,6 +1637,12 @@ const _dutchSourceAddEl = <String, String>{
       'Η επικόλληση παραλείφθηκε: το σημείο εισαγωγής άλλαξε εν τω μεταξύ.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Η αποκοπή παραλείφθηκε: το κείμενο άλλαξε εν τω μεταξύ.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Αυτός ο προορισμός είναι το ίδιο το έγγραφο πηγής. Μια εξαγωγή είναι αντίγραφο για αποδέκτη — το πρωτότυπο δεν αντικαθίσταται ποτέ. Επιλέξτε άλλο όνομα ή φάκελο.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Αυτή η εξαγωγή αποκλείεται από τις ρυθμίσεις ταξινόμησης.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Αυτή η εξαγωγή αποκλείεται από τον κανόνα εξαγωγής απορρήτου.',
   'Certificaatnummer: {nummer}': 'Αριθμός πιστοποιητικού: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ο αξιολογητής δεν θα βλέπει πλέον αυτό το στοιχείο. ',

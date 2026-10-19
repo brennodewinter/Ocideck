@@ -62,7 +62,7 @@ void main() {
       metadata: const ExportDocumentMetadata(title: 'Rapport', language: 'nl'),
       outputPath: out,
     );
-    expect(written, out);
+    expect((written as DocumentExportWritten).path, out);
     final tex = await File(out).readAsString();
     // Preamble aanwezig
     expect(tex, contains(r'\documentclass'));

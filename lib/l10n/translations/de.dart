@@ -658,6 +658,12 @@ const _dutchSourceAddDe = {
       'Einfügen übersprungen: Die Einfügeposition wurde inzwischen geändert.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Ausschneiden übersprungen: Der Text wurde inzwischen geändert.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Dieses Ziel ist dein Quelldokument selbst. Ein Export ist eine Kopie für einen Empfänger — das Original wird nie überschrieben. Wähle einen anderen Namen oder Ordner.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Dieser Export wird durch die Klassifizierungseinstellungen blockiert.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Dieser Export wird durch die Datenschutz-Exportregel blockiert.',
   'Certificaatnummer: {nummer}': 'Zertifikatsnummer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Der Prüfer sieht dieses Stück dann nicht mehr. ',

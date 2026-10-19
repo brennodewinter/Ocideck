@@ -1612,6 +1612,12 @@ const _dutchSourceAddDa = <String, String>{
       'Indsætning sprunget over: indsætningspunktet er ændret i mellemtiden.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Klipning sprunget over: teksten er ændret i mellemtiden.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Den destination er dit kildedokument selv. Eksport er en kopi til en modtager — originalen overskrives aldrig. Vælg et andet navn eller en anden mappe.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Denne eksport er blokeret af klassificeringsindstillingerne.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Denne eksport er blokeret af privatlivs-eksportreglen.',
   'Certificaatnummer: {nummer}': 'Certifikatnummer: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Vurderingspersonen kan så ikke længere se dette stykke. ',

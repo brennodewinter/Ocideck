@@ -361,7 +361,7 @@ void main() {
         outputPath: out,
       );
 
-      expect(written, out);
+      expect((written as DocumentExportWritten).path, out);
       expect(await File(out).exists(), isTrue);
 
       final bytes = await File(out).readAsBytes();
@@ -384,7 +384,7 @@ void main() {
         outputPath: out,
       );
 
-      expect(written, isNull);
+      expect(written, isA<DocumentExportRefused>());
       expect(await File(out).exists(), isFalse);
     });
   });

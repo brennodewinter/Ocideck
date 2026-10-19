@@ -25,6 +25,14 @@ All notable changes to OciDeck are documented in this file.
   oorspronkelijke positie, en bij een tussentijdse wijziging meldt de app
   dat de bestemming is veranderd in plaats van te gokken. Eén
   ongedaan-stap per handeling (#2466).
+- **Exportwaarschuwingen en weigeringen blijven zichtbaar in het resultaat.**
+  De documentexport gaf bouwwaarschuwingen (tekens die de PDF niet draagt,
+  een te brede tabel, een grofkorrelig bedrijfslogo) alleen als vluchtige
+  melding door; wie de melding miste, zag een ogenschijnlijk schone export.
+  De export levert nu een getypeerde uitkomst — geschreven (met de
+  verzamelde waarschuwingen erbij), geannuleerd, geweigerd mét reden, of
+  mislukt — en de exportdialoog toont die blijvend in het resultaatscherm.
+
 - **Kopnavigatie in een document met stijl landt weer exact.** Klikken in het
   Overzicht en interne `[naar kop](#kop)`-links rekenden hun positie uit op de
   bron mét stijl-frontmatter, terwijl de editor de body bewerkt. Bij een

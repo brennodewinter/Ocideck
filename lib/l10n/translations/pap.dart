@@ -657,6 +657,12 @@ const _dutchSourceAddPap = {
       'Pegá omitido: e punto di insercion a cambia mientrastanto.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Kortá omitido: e teksto a cambia mientrastanto.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'E destino ei ta bo dokumento fuente mes. Un eksportashon ta un kopia pa un risibidó — e original nunka ta wordu sobre-eskribí. Skohe otro nòmber òf carpeta.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'E eksportashon aki ta bloké pa e konfigurashonnan di klasifikashon.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'E eksportashon aki ta bloké pa e regla di eksportashon di privasidat.',
   'Certificaatnummer: {nummer}': 'Number di sertifikato: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'E evaluador lo mira e parti akí no mas. ',

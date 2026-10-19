@@ -1632,6 +1632,12 @@ const _dutchSourceAddBg = <String, String>{
       'Поставянето е пропуснато: точката за вмъкване междувременно се промени.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Изрязването е пропуснато: текстът междувременно се промени.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Тази цел е самият изходен документ. Експортът е копие за получател — оригиналът никога не се презаписва. Изберете друго име или папка.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Този експорт е блокиран от настройките за класификация.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Този експорт е блокиран от правилото за експорт на поверителност.',
   'Certificaatnummer: {nummer}': 'Номер на сертификата: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Оценителят вече няма да вижда този елемент. ',

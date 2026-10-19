@@ -1612,6 +1612,12 @@ const _dutchSourceAddSl = <String, String>{
       'Lepljenje preskočeno: mesto vstavljanja se je medtem spremenilo.',
   'Knippen overgeslagen: de tekst is tussendoor gewijzigd.':
       'Izrezovanje preskočeno: besedilo se je medtem spremenilo.',
+  'Dat doel is je brondocument zelf. Een export is een kopie voor een ontvanger — het origineel wordt nooit overschreven. Kies een andere naam of map.':
+      'Ta cilj je vaš izvorni dokument. Izvoz je kopija za prejemnika — izvirnik se nikoli ne prepiše. Izberite drugo ime ali mapo.',
+  'Deze export is geblokkeerd door de classificatie-instellingen.':
+      'Ta izvoz blokirajo nastavitve klasifikacije.',
+  'Deze export is geblokkeerd door de privacy-exportregel.':
+      'Ta izvoz blokira pravilo o izvozu zasebnosti.',
   'Certificaatnummer: {nummer}': 'Številka certifikata: {nummer}',
   'De beoordelaar ziet dit stuk dan niet meer. ':
       'Ocenjevalec tega kosa nato ne bo več videl. ',
