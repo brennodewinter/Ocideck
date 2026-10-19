@@ -751,10 +751,16 @@ is already fixed. `test/release_auto_pending_fixes_test.dart` pins the behaviour
 
 The **pre-flight** checks everything the later, irreversible steps will need —
 the forge token, the `mirror` remote, the deploy host over ssh, a throwaway
-`minisign` signature, and the macOS signing identity plus notary profile. It
-asks for and verifies the minisign password before waiting for the Linux gate,
-so a wrong password fails promptly and the release can run unattended after
-the prompt.
+`minisign` signature, and the macOS signing identity plus notary profile. On
+macOS, run `scripts/setup_release_signing_keychain.sh` once in Terminal to put
+the minisign password in the login Keychain. The script checks it with a local
+test signature and removes a new item if verification fails. Release-auto reads
+that item without displaying the value; if it is absent, it still prompts in
+Terminal. A locked or unreadable Keychain fails early. This means processes
+running as the unlocked macOS user can potentially use the signing credential;
+keep the Mac account protected and do not copy the private key to CI. The
+password is verified before waiting for the Linux gate, so a wrong password
+fails promptly and the release can run unattended after retrieval.
 
 The repository must have two Forgejo Actions secrets before a fresh release:
 `GH_DISPATCH_TOKEN` (GitHub Actions: read and write on the mirror) to start the
