@@ -1624,6 +1624,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Extra ruimte': 'Spazju żejjed',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Din in-nota hi itwal mill-paġna — skrollja għall-bqija',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

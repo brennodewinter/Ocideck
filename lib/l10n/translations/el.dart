@@ -1631,6 +1631,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Extra ruimte': 'Επιπλέον χώρος',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Αυτή η σημείωση είναι μακρύτερη από τη σελίδα — κύλιση για τα υπόλοιπα',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

@@ -5620,6 +5620,27 @@ staat, zodat de export niet met een blanco pagina opent. De twee werken samen: d
 instelling breekt vóór elk hoofdstuk, en elke `---` die je zelf zet breekt waar jij
 hem neerzet.
 
+### Extra ruimte invoegen
+
+*(Toegevoegd 2026-10-19.)* Soms is een gat tussen twee alinea's de bedoeling —
+een adem voor een handtekeningblok, ruimte boven een tabel. Een lege regel kan
+die betekenis niet dragen: elk Markdown-gereedschap ziet lege regels als
+scheiding en haalt overtollige stilletjes weg. Het invoeg-palet heeft daarom een
+item **Extra ruimte** dat één regel op de cursor schrijft:
+
+```markdown
+<!-- spacer -->
+```
+
+De marker is een HTML-commentaar, dus elke andere Markdown-lezer slaat hem gewoon
+over — het bestand blijft draagbaar en de ruimte verdwijnt buiten OciDeck stil.
+Binnen OciDeck is hij één zichtbaar blok, ongeveer één tekstregel hoog; twee
+markers onder elkaar geven twee regels, dus de hoeveelheid is letterlijk telbaar
+in je bestand. In de visuele bewerker is de tussenruimte één blok dat je kunt
+aanklikken, met Backspace/Delete weghaalt en met Ongedaan maken terughaalt; in de
+leesweergave en elke export (PDF, HTML, Word, LibreOffice, LaTeX, EPUB) wordt het
+dezelfde extra ruimte.
+
 ### Een document een stijl geven
 
 Met de knop **Stijl** in de werkbalk kies je één documentbrede stijl: hetzelfde

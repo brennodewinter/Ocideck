@@ -2514,6 +2514,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Extra ruimte': 'Ekstra boşluk',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Bu not sayfadan uzun — kalanı için kaydırın',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

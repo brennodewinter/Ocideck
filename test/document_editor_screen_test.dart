@@ -1425,4 +1425,139 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(MarkdownFindBar), findsNothing);
   });
+
+  testWidgets('Visueel: een spacer valt niet terug op ruwe markdown', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          'Eerste alinea.\n\n<!-- spacer -->\n\nTweede alinea.\n',
+        ),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // De regressie: `<!-- spacer -->` is HTML-commentaar — zonder de
+    // uitzondering wierp de visuele modus het hele document terug op brontekst.
+    expect(find.byType(QuillEditor), findsOneWidget);
+    expect(find.textContaining('Bronmodus beschermt opmaak'), findsNothing);
+    // En de embed toont zijn aanduiding, geen letterlijke marker.
+    expect(find.text('Extra ruimte'), findsOneWidget);
+    expect(find.textContaining('<!-- spacer -->'), findsNothing);
+  });
+
+  testWidgets('Visueel: Extra ruimte invoegen landt op de cursor', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('Eerste alinea.\n\nTweede alinea.\n'),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    await tester.tap(find.byType(QuillEditor));
+    await tester.pumpAndSettle();
+    tester
+        .widget<QuillEditor>(find.byType(QuillEditor))
+        .controller
+        .updateSelection(
+          const TextSelection.collapsed(offset: 12),
+          ChangeSource.local,
+        );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Extra ruimte'));
+    await tester.pumpAndSettle();
+
+    final source = n.currentState.document!.source;
+    expect(
+      source,
+      contains('Eerste alinea.\n\n<!-- spacer -->\n\nTweede alinea.'),
+      reason: 'het blok hoort onder de regel van de cursor te landen',
+    );
+    expect(RegExp('<!-- spacer -->').allMatches(source).length, 1);
+    expect(source, isNot(contains('\n\n\n')));
+  });
+
+  testWidgets('Visueel: Backspace haalt de spacer als \u00e9\u00e9n blok weg', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('Voor.\n\n<!-- spacer -->\n\nNa.\n'),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pumpAndSettle();
+
+    // De embed is \u00e9\u00e9n teken in het Quill-document: 'Voor.\n' is zes
+    // tekens en de embed staat op offset 6. De caret hoort op offset 7 — het
+    // einde van het embedblok — zodat Backspace het blok zelf weghaalt en niet
+    // alleen de regeleinde erachter (waarmee 'Na.' aan de marker zou plakken).
+    await tester.tap(find.byType(QuillEditor));
+    await tester.pumpAndSettle();
+    final quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+    quill.controller.updateSelection(
+      const TextSelection.collapsed(offset: 7),
+      ChangeSource.local,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+    await pumpUntil(
+      tester,
+      () => !n.currentState.document!.source.contains('<!-- spacer -->'),
+    );
+
+    final source = n.currentState.document!.source;
+    expect(source, isNot(contains('<!-- spacer -->')));
+    expect(source, contains('Voor.'));
+    expect(source, contains('Na.'));
+  });
+
+  testWidgets('Visueel: Undo zet een weggehaalde spacer terug', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('Voor.\n\n<!-- spacer -->\n\nNa.\n'),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byType(QuillEditor));
+    await tester.pumpAndSettle();
+    final quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+    quill.controller.updateSelection(
+      const TextSelection.collapsed(offset: 7),
+      ChangeSource.local,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+    await pumpUntil(
+      tester,
+      () => !n.currentState.document!.source.contains('<!-- spacer -->'),
+    );
+
+    n.undo();
+    await pumpUntil(
+      tester,
+      () => n.currentState.document!.source.contains('<!-- spacer -->'),
+    );
+    expect(n.currentState.document!.source, contains('<!-- spacer -->'));
+  });
 }

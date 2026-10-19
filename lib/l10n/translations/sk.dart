@@ -1612,6 +1612,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Extra ruimte': 'Priestor navyše',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Táto poznámka je dlhšia ako stránka — posuňte sa pre zvyšok',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

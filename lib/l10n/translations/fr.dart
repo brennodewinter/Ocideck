@@ -652,6 +652,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Extra ruimte': 'Espace supplémentaire',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Cette note est plus longue que la page — faites défiler pour la suite',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

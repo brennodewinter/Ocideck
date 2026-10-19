@@ -293,6 +293,18 @@ class PdfTocBlock extends PdfBlock {
   String toString() => 'PdfTocBlock()';
 }
 
+/// Eén regel bewuste witruimte (`<!-- spacer -->`).
+///
+/// Het blok draagt geen inhoud; de renderer maakt er een kale tussenstuk van
+/// ter hoogte van een bodytekstregel. Meerdere markers onder elkaar geven
+/// meerdere regels — telbaar en voorspelbaar, zoals de bron ze schrijft.
+class PdfSpacerBlock extends PdfBlock {
+  const PdfSpacerBlock();
+
+  @override
+  String toString() => 'PdfSpacerBlock()';
+}
+
 /// Een blok dat OciDeck in een PDF niet zelf kan tekenen en daarom letterlijk
 /// laat zien: de bron, in vaste letterafstand, met een aanduiding erboven.
 ///

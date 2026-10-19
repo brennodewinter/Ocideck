@@ -1604,6 +1604,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Extra ruimte': 'Papildu vieta',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Šī piezīme ir garāka par lapu — ritiniet, lai redzētu pārējo',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

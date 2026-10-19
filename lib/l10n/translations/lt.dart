@@ -1613,6 +1613,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Extra ruimte': 'Papildoma erdvė',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ši pastaba ilgesnė už puslapį — slinkite likusiai daliai',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

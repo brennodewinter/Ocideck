@@ -5686,6 +5686,26 @@ break in front of it is left alone, so you never end up with a double `---` (and
 the message says so). A `---` or a `#` inside a fenced code block is code, not a
 break or a heading, and is left untouched — as is the front matter.
 
+### Inserting extra space
+
+*(Added 2026-10-19.)* Sometimes a gap between two paragraphs is deliberate — a
+breath before a signature block, room above a table. A blank line cannot carry
+that meaning: every Markdown tool treats blank lines as separators and quietly
+removes the extras. The insert palette therefore has an **Extra ruimte** ("Extra
+space") item that writes one line at the cursor:
+
+```markdown
+<!-- spacer -->
+```
+
+The marker is an HTML comment, so every other Markdown reader simply skips it —
+the file stays portable and the space just quietly disappears outside OciDeck.
+Inside OciDeck it is one visible block, about one text line tall; two markers in
+a row give two lines, so the amount is literally countable in your file. In the
+visual editor the spacer is a single block you can click, delete with
+Backspace/Delete and bring back with Undo; in the reader and every export (PDF,
+HTML, Word, LibreOffice, LaTeX, EPUB) it becomes the same extra space.
+
 ### Giving a document a style
 
 A **Style** button in the toolbar picks one document-wide style — a font-and-styling

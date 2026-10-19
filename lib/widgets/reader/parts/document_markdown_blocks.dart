@@ -22,6 +22,7 @@ enum _Kind {
   rule,
   image,
   toc,
+  spacer,
 }
 
 /// One parsed block: its kind plus whatever that kind needs to render and to be
@@ -197,7 +198,10 @@ Set<int> documentForcedPageBreaks(
       breaks.add(i);
       contentSinceBreak = 0;
     }
-    if (!rule) contentSinceBreak++;
+    // Een spacer is bewuste ruimte, geen inhoud: telt hij mee, dan dwarrelt
+    // `---` + spacer + kop uiteen naar een vel met álleén witruimte — een
+    // leeg blad (#2464 vraagt juist geen lege begin- of eindpagina's).
+    if (!rule && blocks[i].kind != _Kind.spacer) contentSinceBreak++;
   }
   return breaks;
 }

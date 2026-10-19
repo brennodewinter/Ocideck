@@ -1634,6 +1634,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Extra ruimte': 'Espaço extra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Esta nota é mais longa que a página — deslize para o resto',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

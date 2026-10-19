@@ -1621,6 +1621,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Extra ruimte': 'Додатковий простір',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ця примітка довша за сторінку — прокрутіть для решти',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

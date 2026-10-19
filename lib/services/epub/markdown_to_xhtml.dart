@@ -67,25 +67,37 @@ String markdownToXhtml(
   // nav-element wordt. De markdown-package stript commentaar, dus vervang
   // vóór de parse — net als de LaTeX-converter.
   const tocSentinel = 'OCIDECKTABLEOFCONTENTSMARKER';
-  final withToc = source.replaceAll(
+  var preprocessed = source.replaceAll(
     RegExp(r'^<!-- toc -->\s*$', multiLine: true),
     tocSentinel,
+  );
+
+  // `<!-- spacer -->` → een eigen sentinelregel; na de conversie wordt het
+  // `<p>`-blok eromheen een lege alinea met een onbreekbare spatie, zodat
+  // e-readers die lege elementen samenvouwen toch één regel ruimte tonen.
+  const spacerSentinel = 'OCIDECKSPACERMARKER';
+  preprocessed = preprocessed.replaceAll(
+    RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$', multiLine: true),
+    spacerSentinel,
   );
 
   final document = md.Document(
     encodeHtml: true,
     extensionSet: md.ExtensionSet.gitHubFlavored,
   );
-  final nodes = document.parse(withToc);
+  final nodes = document.parse(preprocessed);
   final visitor = _XhtmlNodeVisitor(chapterPageBreak: chapterPageBreak);
   for (final node in nodes) {
     node.accept(visitor);
   }
 
-  var out = visitor.output.toString().replaceAll(
-    tocSentinel,
-    '<nav epub:type="toc" id="ocideck-toc"><h2>${xmlEscape(footnotesTitle)}</h2></nav>',
-  );
+  var out = visitor.output
+      .toString()
+      .replaceAll(RegExp('<p>\\s*$spacerSentinel\\s*</p>'), '<p>&#160;</p>')
+      .replaceAll(
+        tocSentinel,
+        '<nav epub:type="toc" id="ocideck-toc"><h2>${xmlEscape(footnotesTitle)}</h2></nav>',
+      );
 
   // Tijdlijn-placeholders herstellen.
   for (var i = 0; i < timelines.xhtml.length; i++) {

@@ -1609,6 +1609,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Extra ruimte': 'Zuesätzliche Abstand',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Die Anmerkig isch länger als s Blatt — für de Rescht scrolle',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

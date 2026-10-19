@@ -1,4 +1,5 @@
 import '../services/table_of_contents.dart';
+import 'spacer_embed_syntax.dart';
 import '../services/document_timeline.dart';
 import '../services/markdown_table_lines.dart';
 import '../services/form_document_blocks.dart';
@@ -120,6 +121,7 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
     // `` `…` `` is platte tekst in Quill, geen Markdown-syntax.
     final lineWithoutCode = line.replaceAll(_inlineCode, '');
     if (!tocMarkerLinePattern.hasMatch(line) &&
+        !spacerMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&
         _rawHtml.hasMatch(lineWithoutCode)) {
       limitations.add(MarkdownVisualLimitation.rawHtml);
@@ -187,6 +189,7 @@ VisualLimitationHit? firstVisualLimitation(String markdown) {
     }
     final lineWithoutCode = line.replaceAll(_inlineCode, '');
     if (!tocMarkerLinePattern.hasMatch(line) &&
+        !spacerMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&
         _rawHtml.hasMatch(lineWithoutCode)) {
       return VisualLimitationHit(index, MarkdownVisualLimitation.rawHtml);

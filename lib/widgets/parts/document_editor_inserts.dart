@@ -75,6 +75,14 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
   /// export. De gegenereerde inhoud wordt niet in de `.md` opgeslagen.
   void _insertToc() => _insertBlock('<!-- toc -->');
 
+  /// Voeg bewuste witruimte in: één `<!-- spacer -->`-marker op de cursor,
+  /// ter hoogte van één tekstregel. Twee achter elkaar geeft twee regels —
+  /// de hoeveelheid staat letterlijk en telbaar in de bron. Net als `<!-- toc
+  /// -->` is het een HTML-commentaar dat elke vreemde Markdown-lezer
+  /// straffeloos weglaat; OciDeck rendert hem als verticale ruimte in de
+  /// editor, de weergave en elke export.
+  void _insertSpacer() => _insertBlock('<!-- spacer -->');
+
   /// Voeg een voetnoot in: het merkteken op de cursor, de lege notenregel
   /// eronder om te vullen.
   ///

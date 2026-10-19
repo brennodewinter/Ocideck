@@ -652,6 +652,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Extra ruimte': 'Ekstra romte',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Dizze noat is langer as it blêd — skrol foar de rest',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

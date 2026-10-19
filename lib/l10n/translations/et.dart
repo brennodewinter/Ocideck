@@ -1599,6 +1599,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Extra ruimte': 'Lisaruum',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'See märkus on leheküljest pikem — keri ülejäänu jaoks',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

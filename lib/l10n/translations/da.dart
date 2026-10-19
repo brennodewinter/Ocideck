@@ -1606,6 +1606,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Extra ruimte': 'Ekstra mellemrum',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Denne note er længere end siden — rul for resten',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

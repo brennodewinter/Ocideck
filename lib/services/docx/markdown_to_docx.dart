@@ -127,6 +127,15 @@ DocxConversion markdownToDocxBody(
     source = source.replaceAll('[^${note.label}]', sentinel);
   }
 
+  // `<!-- spacer -->` → een eigen sentinelregel; na de conversie wordt de
+  // tekst van die alinea leeggemaakt tot een lege alinea = één regel extra
+  // ruimte.
+  const spacerSentinel = 'OCIDECKSPACERMARKER';
+  source = source.replaceAll(
+    RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$', multiLine: true),
+    spacerSentinel,
+  );
+
   final document = md.Document(
     encodeHtml: true,
     extensionSet: md.ExtensionSet.gitHubFlavored,
@@ -141,7 +150,7 @@ DocxConversion markdownToDocxBody(
     node.accept(visitor);
   }
 
-  var out = visitor.output.toString();
+  var out = visitor.output.toString().replaceAll(spacerSentinel, '');
 
   // Tijdlijn-placeholders herstellen.
   for (var i = 0; i < timelines.docx.length; i++) {

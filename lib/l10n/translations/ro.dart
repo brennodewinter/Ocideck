@@ -1622,6 +1622,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Extra ruimte': 'Spațiu suplimentar',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Această notă este mai lungă decât pagina — derulați pentru rest',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

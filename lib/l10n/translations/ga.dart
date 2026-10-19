@@ -1636,6 +1636,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Extra ruimte': 'Spás breise',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Tá an nóta seo níos faide ná an leathanach — scrollaigh don chuid eile',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

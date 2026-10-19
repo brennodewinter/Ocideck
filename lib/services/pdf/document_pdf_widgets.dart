@@ -317,6 +317,8 @@ class DocumentPdfWidgets {
     ),
     PdfPageBreakBlock() => pw.NewPage(),
     PdfTocBlock() => _toc(),
+    // `<!-- spacer -->`: één bodytekstregel — maat plus 35% regelafstand.
+    PdfSpacerBlock() => pw.SizedBox(height: style.bodyFontSize * 1.35),
   };
 
   pw.Widget _heading(PdfHeadingBlock block) {

@@ -1608,6 +1608,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Extra ruimte': 'Extra térköz',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ez a jegyzet hosszabb az oldalnál — görgessen a folytatásért',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

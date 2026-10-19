@@ -1606,6 +1606,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Extra ruimte': 'Lisätilaa',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Tämä viite on sivua pidempi — vieritä nähdäksesi lopun',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

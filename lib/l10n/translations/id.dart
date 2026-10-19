@@ -1606,6 +1606,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Extra ruimte': 'Ruang ekstra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Catatan ini lebih panjang dari halaman — gulir untuk sisanya',
   'Plakken overgeslagen: de invoegpositie is tussendoor gewijzigd.':

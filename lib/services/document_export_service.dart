@@ -270,16 +270,16 @@ Future<Uint8List> buildDocumentExportBytes(
       // Feature 4: regenereer de TOC op de geprojecteerde body vóór renderen.
       // De marker blijft staan; marked rendert de GFM-lijst als klikbare nav.
       final htmlBody = projectedDocumentBodyForRendering(bundle);
-      final toc = generateTocMarkdown(htmlBody);
-      final htmlBodyWithToc = hasTocMarker(htmlBody)
-          ? replaceTocMarker(htmlBody, toc)
-          : htmlBody;
+      final htmlBodyWithToc = _htmlBodyWithToc(htmlBody);
+      // `<!-- spacer -->` → `&nbsp;`-alinea (het commentaar rendert niets).
+      final htmlOut = _htmlBodyWithSpacers(htmlBodyWithToc);
+
       // `marked` kent geen voetnoten, dus die worden hier al omgezet: merkteken
       // met een sprong, en de noten achteraan. Achteraan ook wanneer het
       // document om onderaan-de-bladzijde vraagt — een HTML-pagina heeft geen
       // bladzijden (KNOWN_LIMITATIONS.md).
       final out = await html.build(
-        documentWithHtmlFootnotes(htmlBodyWithToc, title: footnotesTitle),
+        documentWithHtmlFootnotes(htmlOut, title: footnotesTitle),
         continuous: true,
         chapterPageBreak: chapterPageBreak,
         theme: theme,
@@ -784,6 +784,22 @@ String _projectedMarkdown(
     documentFields,
   );
 }
+
+/// Feature 4: de `<!-- toc -->`-marker door de gegenereerde GFM-lijst
+/// vervangen (met de marker erboven) — `marked` rendert die als klikbare
+/// navigatie. Zonder marker blijft de body zoals hij is.
+String _htmlBodyWithToc(String body) => hasTocMarker(body)
+    ? replaceTocMarker(body, generateTocMarkdown(body))
+    : body;
+
+/// `<!-- spacer -->` → een alinea met een onbreekbare spatie: één regelhoogte
+/// extra ruimte, met de gewone alinea-afstand eromheen. Het commentaar zelf
+/// rendert `marked` onzichtbaar weg, dus de HTML-route vervangt hem vóór de
+/// conversie.
+String _htmlBodyWithSpacers(String body) => body.replaceAll(
+  RegExp(r'^[ \t]*<!--\s*spacer\s*-->[ \t]*$', multiLine: true),
+  '&nbsp;',
+);
 
 Map<String, String> _documentChromeFields(Deck deck) => {
   ...deck.documentFields,
