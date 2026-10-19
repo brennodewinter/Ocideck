@@ -8,6 +8,15 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- **Kopnavigatie in een document met stijl landt weer exact.** Klikken in het
+  Overzicht en interne `[naar kop](#kop)`-links rekenden hun positie uit op de
+  bron mét stijl-frontmatter, terwijl de editor de body bewerkt. Bij een
+  document met `theme:` sprong een interne koplink een frontmatter-lengte te
+  ver en kon de railmarkering wegvallen. Navigatie, actieve kop en
+  editorselectie delen nu één coördinatenstelsel.
+
 ## [0.7.0] — 2026-10-17
 
 

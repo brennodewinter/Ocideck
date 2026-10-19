@@ -560,7 +560,11 @@ Future<void> _followEditorDocumentLink(
 extension on _DocumentEditorScreenState {
   Future<void> _handleEditorLink(String href) => _followEditorDocumentLink(
     href,
-    source: ref.read(documentProvider).document?.source ?? '',
+    // Interne koplinks landen via [_scrollToHeading] op de bódy — de tekst
+    // die de controller bewerkt. De source is hier dezelfde tekst mét het
+    // stijl-frontmatter er nog vóór en zou elke ankersprong verkeerd leggen
+    // (#2465).
+    source: _controller.text,
     onAnchor: _scrollToHeading,
   );
 }
