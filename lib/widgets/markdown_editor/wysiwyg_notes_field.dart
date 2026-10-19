@@ -495,8 +495,18 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 // De tabelcellen verwerken hun eigen taps en tekstfocus.
                 // Quill ziet dezelfde tik; zijn caret voor de gehele embed
                 // zou een lang document anders naar een andere rij scrollen.
-                onTapDown: (details, _) =>
-                    _tableEditors.containsTableAt(details.globalPosition),
+                onTapDown: (details, _) {
+                  // Een tik buiten elke tabel bedoelt de documentcaret.
+                  // De skipRequestKeyboard-bewaker van een cel geldt zolang
+                  // die cel de aandacht heeft; als Quill daarna nooit om het
+                  // toetsenbord vroeg blijft de vlag als stil restant liggen
+                  // en slikt hij de eerste buitenklik (#2461).
+                  if (!_tableEditors.containsTableAt(details.globalPosition)) {
+                    widget.controller.skipRequestKeyboard = false;
+                    return false;
+                  }
+                  return true;
+                },
                 onTapUp: (details, _) =>
                     _tableEditors.containsTableAt(details.globalPosition),
                 editorKey: widget.editorKey,

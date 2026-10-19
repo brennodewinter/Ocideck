@@ -19,6 +19,15 @@ All notable changes to OciDeck are documented in this file.
   de tekstspiegel en binnen de bladmarge, zodat de koptekst en de eerste
   regels niet onder het beeldmerk verdwijnen; die begrenzing is in de
   stijlvoorvertoning meteen zichtbaar in plaats van stil.
+- **Eén klik wisselt weer tussen een tabelcel en de aangrenzende tekst.**
+  Zodra een cel focus had, bewaakte een eenmalige `skipRequestKeyboard`-vlag
+  de cel tegen een focuspoging van de editor. Vroeg die daarna nooit om het
+  toetsenbord, dan bleef de vlag stilletjes liggen — en slikte hij bij de
+  eerstvolgende klik buiten de tabel de focusaanvraag op, zodat er pas bij
+  de tweede klik een caret in de tekst verscheen. Een tik buiten elke tabel
+  laat de verlopen bewaker nu vervallen, zodat de eerste klik al de caret
+  plaatst en getypte tekst daar landt.
+
 - **Een voetnoot langer dan een blad is niet langer onzichtbaar afgeknipt.**
   De paginaweergave knipte een noot die hoger was dan het tekstvlak stil af —
   de lezer zag alleen het stuk dat paste en had geen manier om bij de rest te
