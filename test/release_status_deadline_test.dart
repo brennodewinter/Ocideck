@@ -223,4 +223,38 @@ cmd_status
     );
     expect(result.exitCode, 0, reason: output);
   }, skip: skipOnWindows);
+
+  test(
+    'een rode tagpoort raadt geen zinloze hervatting van de oude tag aan',
+    () {
+      final result = runReleaseHarness('''
+BRANCH=release/v9.9.9
+read_token() { :; }
+section() { printf '== %s ==\\n' "\$1"; }
+log() { printf '%s\\n' "\$1"; }
+mark() { printf 'mark %s %s\\n' "\$1" "\$2"; }
+status_probe_branch() { printf '0\\n' >"\$1"; }
+status_probe_pr() { printf '0\\n' >"\$1"; }
+status_probe_tag_o() { printf '1\\n' >"\$1"; }
+status_probe_tag_m() { printf '1\\n' >"\$1"; }
+status_probe_release() { printf '1|1 0 0 0\\n' >"\$1"; }
+status_probe_ci() { printf '1\\n' >"\$1"; }
+status_probe_mgate() { printf '1|success|42\\n' >"\$1"; }
+status_probe_tag_gates() { printf '0|GitHub ci: failure\\n' >"\$1"; }
+status_probe_web() { printf '0|9.9.8\\n' >"\$1"; }
+status_probe_site() { printf '0|9.9.8\\n' >"\$1"; }
+cmd_status
+''');
+      final output = '${result.stdout}\n${result.stderr}';
+      expect(result.exitCode, 0, reason: output);
+      expect(output, contains('GitHub ci: failure'), reason: output);
+      expect(
+        output,
+        contains('--resume herbouwt deze tag niet'),
+        reason: output,
+      );
+      expect(output, isNot(contains('Maak DEZELFDE tag af')), reason: output);
+    },
+    skip: skipOnWindows,
+  );
 }
