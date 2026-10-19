@@ -25,9 +25,8 @@
 # bij de merge, alleen ruim vóór de volgende tag. `workflow_dispatch` blijft
 # voor een tak die het eerder wil weten.
 #
-# **Geen artefact, geen gate.** Rood blokkeert niets — de tag-pijplijn is dat
-# wel — maar noemt de falende test bij naam, en er zitten hooguit een week
-# commits tussen.
+# **Geen artefact.** Een rode wekelijkse run blokkeert geen merge; het
+# releasescript eist dezelfde suite op de exacte mergecommit vóór de tag.
 name: Windows test suite (weekly)
 
 on:
@@ -51,8 +50,10 @@ jobs:
     # resolveert hem wel — houd de pin gelijk, los hem pas mee op als upstream
     # een pakket voor nieuwere MSVC's uitbrengt.
     runs-on: windows-2022
-    # De suite deed op de laatste tag-runs ~35-50 min op deze runner.
-    timeout-minutes: 75
+    # Run 39179149143 had alle 13.741 tests afgerond maar werd op de oude
+    # 75-minutengrens tijdens de afronding geannuleerd. Geef ook een koude
+    # cache en post-job-opruiming tijd om terminaal succes te melden.
+    timeout-minutes: 120
     steps:
       - name: Checkout
         uses: actions/checkout@v5

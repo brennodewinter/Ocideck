@@ -65,6 +65,10 @@ LSCOUNT=${counter.path}
 LS_AFTER=$lsAfter
 PUSH_RC=$pushRc
 sleep() { :; }
+# Deze proef isoleert uitsluitend de onzekere tagpush; de nieuwe poorten
+# krijgen eigen regressietests in release_auto_release_gates_test.dart.
+assert_release_ci_secrets() { :; }
+assert_windows_merge_gate() { :; }
 git() {
   printf '%s\\n' "\$*" >> "\$GITCALLS"
   case "\$*" in

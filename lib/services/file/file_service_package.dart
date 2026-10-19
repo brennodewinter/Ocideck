@@ -459,15 +459,15 @@ extension FileServicePackage on FileService {
     required void Function(int) reserve,
   }) async {
     if (kIsWeb || deck.projectPath == null) return null;
+    // A Windows absolute path must not become a project-relative filename on
+    // another host (where the native path parser treats backslashes literally).
+    if (p.windows.isAbsolute(path) && !p.isAbsolute(path)) return null;
     final abs = resolveContainedRealPath(path, deck.projectPath);
     if (abs == null) return null;
     final existing = byAbsolutePath[abs];
     if (existing != null) return existing;
-    final file = File(abs);
-    final size = await file.length();
-    if (size < 5 || size > maxPdfEvidenceBytes) return null;
-    final bytes = Uint8List.fromList(await file.readAsBytes());
-    if (!isSupportedPdfEvidence(bytes)) return null;
+    final bytes = await _readPackagePdfEvidence(abs);
+    if (bytes == null) return null;
     final rel = _freeArchivePath(added, 'evidence', abs);
     reserve(bytes.length);
     archive.add(ArchiveFile(rel, bytes.length, bytes));
@@ -843,6 +843,18 @@ Future<List<int>?> _readPkg(String path, String subdir) async {
       builder.add(chunk);
     }
     return builder.takeBytes();
+  } on FileSystemException {
+    return null;
+  }
+}
+
+Future<Uint8List?> _readPackagePdfEvidence(String path) async {
+  final file = File(path);
+  try {
+    final size = await file.length();
+    if (size < 5 || size > maxPdfEvidenceBytes) return null;
+    final bytes = Uint8List.fromList(await file.readAsBytes());
+    return isSupportedPdfEvidence(bytes) ? bytes : null;
   } on FileSystemException {
     return null;
   }

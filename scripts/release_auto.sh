@@ -371,6 +371,27 @@ api() { # api METHOD PATH [curl-args…]
   return "$rc"
 }
 
+# De releaseworkflow leest twee besloten GitHub-assets en schrijft een besloten
+# Forgejo-release. De jobtoken kan die assets niet betrouwbaar teruglezen.
+# Controleer uitsluitend namen: de secretwaarden mogen nooit in logs verschijnen.
+assert_release_ci_secrets() {
+  local names required
+  names="$(api GET '/actions/secrets' | jq -er '[.[]?.name]')" \
+    || die "kon Forgejo CI-secretnamen niet lezen — publicatiecapaciteit onbekend; niets getagd."
+  for required in GH_DISPATCH_TOKEN GH_RELEASE_READ_TOKEN RELEASE_TOKEN; do
+    jq -e --arg name "$required" 'index($name) != null' <<<"$names" >/dev/null \
+      || die "CI-secret $required ontbreekt — stel een blijvend repo-scoped secret in (GH_RELEASE_READ_TOKEN: GitHub Contents:read voor besloten draft; RELEASE_TOKEN: Forgejo write:repository voor release-assets). Gebruik geen breed persoonlijk token. Niets getagd."
+  done
+}
+
+remote_tag_commit() { # remote_tag_commit REMOTE
+  local remote="$1" refs
+  refs="$(git ls-remote "$remote" "refs/tags/$TAG" "refs/tags/$TAG^{}")" || return 2
+  [ -n "$refs" ] || return 1
+  printf '%s\n' "$refs" | awk '$2 ~ /\^\{\}$/ { peeled=$1 } $2 !~ /\^\{\}$/ { direct=$1 }
+    END { print (peeled != "" ? peeled : direct) }'
+}
+
 # De nieuwste workflowrun van één workflow op één ref, als "id|status".
 # /actions/runs kent een run zodra hij bestaat — ook queued of nog zonder
 # runner-taak. Dat is precies wat /actions/tasks niet kan: die toont alleen
@@ -664,12 +685,36 @@ status_probe_ci() {
 }
 
 status_probe_mgate() {
-  local mgate rc=0
+  local mgate rc=0 run_sha tag_sha
   mgate="$(macos_gate_tag_status)" || rc=$?
   if [ "$rc" -ne 0 ]; then printf '?|Forgejo-API onleesbaar\n' >"$1"
   elif [ -z "$mgate" ]; then printf '0\n' >"$1"
-  elif [ "${mgate%%|*}" = "success" ]; then printf '1|%s\n' "$mgate" >"$1"
+  elif [ "${mgate%%|*}" = "success" ]; then
+    run_sha="$(api GET "/actions/runs/${mgate##*|}" | jq -r '.commit_sha // empty')" \
+      || { printf '?|macOS-tagpoortcommit onleesbaar\n' >"$1"; return; }
+    tag_sha="$(remote_tag_commit origin)" \
+      || { printf '?|tagcommit onleesbaar\n' >"$1"; return; }
+    if [ "$run_sha" = "$tag_sha" ]; then printf '1|%s\n' "$mgate" >"$1"
+    else printf '0|macOS-poort draait op andere commit\n' >"$1"; fi
   else printf '0|%s\n' "$mgate" >"$1"; fi
+}
+
+status_probe_tag_gates() {
+  local fg repo sha runs gh_state fg_sha
+  fg="$(latest_workflow_run ci.yml "$TAG")" || { printf '?|Forgejo-tagpoort onleesbaar\n' >"$1"; return; }
+  [ "${fg#*|}" = success ] || { printf '0|Forgejo ci: %s\n' "${fg#*|}" >"$1"; return; }
+  repo="$(git remote get-url mirror | sed -E 's#^(git@github.com:|https://github.com/)##; s#\.git$##')"
+  sha="$(remote_tag_commit origin)" || { printf '?|tagcommit onleesbaar\n' >"$1"; return; }
+  fg_sha="$(api GET "/actions/runs/${fg%%|*}" | jq -r '.commit_sha // empty')" \
+    || { printf '?|Forgejo-tagpoortcommit onleesbaar\n' >"$1"; return; }
+  [ "$fg_sha" = "$sha" ] || { printf '0|Forgejo ci draait op andere commit\n' >"$1"; return; }
+  runs="$(gh run list -R "$repo" --workflow ci.yml --event push --limit 100 \
+    --json databaseId,headSha,headBranch,status,conclusion)" \
+    || { printf '?|GitHub-tagpoort onleesbaar\n' >"$1"; return; }
+  gh_state="$(jq -r --arg sha "$sha" --arg tag "$TAG" \
+    '[.[] | select(.headSha == $sha and .headBranch == $tag)] | sort_by(.databaseId) | last | if . == null then "geen run" elif .status == "completed" then .conclusion else .status end' <<<"$runs")"
+  if [ "$gh_state" = success ]; then printf '1|Forgejo ci en GitHub ci groen\n' >"$1"
+  else printf '0|GitHub ci: %s\n' "$gh_state" >"$1"; fi
 }
 
 status_probe_web() {
@@ -726,11 +771,11 @@ cmd_status() {
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
   local has_sums=0 manifest_complete=0 sig_valid=0 web_live=0 website_live=0 ci_stable=0
-  local live="" website_version="" mgate_ok=0
+  local live="" website_version="" mgate_ok=0 tag_gates_ok=0
   local prnum="" prstate=""
   local probe_dir probe_fn probe pids="" n_done deadline
-  local st_branch st_pr st_tag_o st_tag_m st_release st_ci st_mgate st_web st_site
-  local d_branch d_pr d_tag_o d_tag_m d_release d_ci d_mgate d_web d_site
+  local st_branch st_pr st_tag_o st_tag_m st_release st_ci st_mgate st_tag_gates st_web st_site
+  local d_branch d_pr d_tag_o d_tag_m d_release d_ci d_mgate d_tag_gates d_web d_site
 
   # Alle sondes tegelijk opstarten; de deadline geldt voor het geheel, niet per
   # sonde. API_TRIES=1/API_MAX_TIME=25 houdt een enkele trage call binnen de
@@ -738,7 +783,7 @@ cmd_status() {
   # letterlijk opgesomd zodat de definitie-voor-aanroep-test ze kan volgen.
   probe_dir="$(mktemp -d)"
   for probe_fn in status_probe_branch status_probe_pr status_probe_tag_o \
-      status_probe_tag_m status_probe_release status_probe_ci status_probe_mgate \
+      status_probe_tag_m status_probe_release status_probe_ci status_probe_mgate status_probe_tag_gates \
       status_probe_web status_probe_site; do
     ( API_TRIES=1 API_MAX_TIME=25 "$probe_fn" "$probe_dir/${probe_fn#status_probe_}" ) \
       2>/dev/null &
@@ -749,7 +794,7 @@ cmd_status() {
     # Alleen niet-lege uitslagen tellen: het >-redirect maakt het bestand al aan
     # voordat de sonde zijn regel heeft geschreven.
     n_done="$(find "$probe_dir" -type f ! -size 0 | wc -l | tr -d ' ')"
-    [ "$n_done" -ge 9 ] && break
+    [ "$n_done" -ge 10 ] && break
     sleep 0.2 2>/dev/null || sleep 1
   done
   for probe in $pids; do kill "$probe" 2>/dev/null || true; done
@@ -762,6 +807,7 @@ cmd_status() {
   status_read "$probe_dir" release; st_release="$R_ST"; d_release="$R_PAYLOAD"
   status_read "$probe_dir" ci;      st_ci="$R_ST";      d_ci="$R_PAYLOAD"
   status_read "$probe_dir" mgate;   st_mgate="$R_ST";   d_mgate="$R_PAYLOAD"
+  status_read "$probe_dir" tag_gates; st_tag_gates="$R_ST"; d_tag_gates="$R_PAYLOAD"
   status_read "$probe_dir" web;     st_web="$R_ST";     d_web="$R_PAYLOAD"
   status_read "$probe_dir" site;    st_site="$R_ST";    d_site="$R_PAYLOAD"
   rm -rf "$probe_dir"
@@ -787,6 +833,7 @@ cmd_status() {
   [ "$st_site" = 1 ] && website_live=1
   [ "$st_site" = 0 ] && website_version="$d_site"
   [ "$st_mgate" = 1 ] && mgate_ok=1
+  [ "$st_tag_gates" = 1 ] && tag_gates_ok=1
   local website_seen="${website_version:+v$website_version}"
   [ -n "$website_seen" ] || website_seen="geen leesbare versie"
 
@@ -819,6 +866,7 @@ cmd_status() {
   fi
   mark3 "$st_release" "$d_release" "release aangemaakt op de forge"
   mark3 "$st_ci" "$d_ci" "release-CI terminaal groen; geen actieve schrijver"
+  mark3 "$st_tag_gates" "$d_tag_gates" "Forgejo- en GitHub-tagpoorten groen"
   # De golden-poort op de tag (#2321): geen releasejob, maar wél de enige plek
   # waar de goldens van de uitgebrachte commit bewezen worden. Een afwezige of
   # geannuleerde tagrun mag niet onzichtbaar blijven.
@@ -854,11 +902,11 @@ cmd_status() {
   fi
 
   section "Advies"
-  if [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
+  if [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$mgate_ok" -eq 1 ] && [ "$tag_gates_ok" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
       && [ "$website_live" -eq 1 ] && [ "$has_mirror" -eq 1 ] && [ "$has_tag_m" -eq 1 ]; then
     log "De release is publiek compleet: artefacten, handtekening, webdemo en downloadpagina kloppen."
     log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
-  elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
+  elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$mgate_ok" -eq 1 ] && [ "$tag_gates_ok" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
       && [ "$website_live" -eq 0 ]; then
     if [ "$st_site" = '?' ]; then
       log "Alles is uitgebracht en getekend; de publieke downloadpagina is onleesbaar ($d_site) — status onbekend, niet afwezig."
@@ -866,7 +914,7 @@ cmd_status() {
       log "Alles is uitgebracht en getekend, maar de publieke downloadpagina toont $website_seen in plaats van $TAG."
     fi
     log "Controleer de deployhost/DNS en publiceer de website opnieuw; --resume controleert daarna de publieke pagina."
-  elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
+  elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$mgate_ok" -eq 1 ] && [ "$tag_gates_ok" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
     if [ "$st_web" = '?' ]; then
       log "Alles is uitgebracht en getekend; de webdemo-status is onbekend ($d_web) — niet afwezig."
       log "Verifieer met:  scripts/release_auto.sh --resume $TAG"
@@ -1437,6 +1485,13 @@ preflight() {
     || die "kon de native-assets-cache niet beoordelen (scripts/prune_stale_hook_cache.sh) — zie hierboven. Niets gemuteerd."
   api GET "" -o /dev/null \
     || die "forge-token werkt niet tegen $REPO_SLUG (keychain '$TOKEN_KEYCHAIN_SERVICE')."
+  # Een verse release mag niet pas na de publieke tag ontdekken dat de
+  # publicatie- of spiegelcredentials ontbreken. Een bestaande tag kan bij
+  # --resume al complete CI hebben; die route blijft dan beschikbaar.
+  if [ -z "$RESUME_TAG" ]; then
+    need_cmd gh
+    assert_release_ci_secrets
+  fi
   # De release-jobs gebruiken een immutable digest. Een later opnieuw
   # gepubliceerd versie-tag kan die digest uit het register laten verdwijnen;
   # v0.7.0 faalde daardoor pas na de publieke tag bij web, Linux en Windows.
@@ -2331,14 +2386,6 @@ merge_commit_of_pr() { # merge_commit_of_pr PR_NUMBER
   api GET "/pulls/$1" | jq -r '.merge_commit_sha // empty'
 }
 
-remote_tag_commit() { # remote_tag_commit REMOTE
-  local remote="$1" refs
-  refs="$(git ls-remote "$remote" "refs/tags/$TAG" "refs/tags/$TAG^{}")" || return 2
-  [ -n "$refs" ] || return 1
-  printf '%s\n' "$refs" | awk '$2 ~ /\^\{\}$/ { peeled=$1 } $2 !~ /\^\{\}$/ { direct=$1 }
-    END { print (peeled != "" ? peeled : direct) }'
-}
-
 assert_tag_commit() { # assert_tag_commit LABEL ACTUAL EXPECTED
   local label="$1" actual="$2" expected="$3"
   [ -n "$actual" ] && [ "$actual" = "$expected" ] \
@@ -2355,6 +2402,64 @@ assert_release_merge_tree() { # assert_release_merge_tree MERGE_SHA
   [ -n "$merge_tree" ] && [ "$merge_tree" = "$head_tree" ] \
     || die "de merge-tree wijkt af van de gekeurde release-head — er zou ongekeurde inhoud in de tag belanden. Niets getagd."
   log "Merge-tree is bytegelijk aan de gekeurde release-head (${merge_tree:0:12})."
+}
+
+# De wekelijkse Windows-suite is geen mergepoort. Vóór de onomkeerbare tag
+# maken we haar voor precies de merge-commit alsnog een releasepoort.
+assert_windows_merge_gate() { # assert_windows_merge_gate MERGE_SHA
+  local merge="$1" repo mirror_sha origin_sha runs run_id baseline_id state start=$SECONDS
+  repo="$(git remote get-url mirror | sed -E 's#^(git@github.com:|https://github.com/)##; s#\.git$##')"
+  [[ "$repo" =~ ^[^/]+/[^/]+$ ]] || die "GitHub-mirrorrepo niet betrouwbaar bepaald — niets getagd."
+  command -v gh >/dev/null || die "gh ontbreekt — Windows-suite vóór de tag niet te starten."
+  section "Windows-suite op de merge-commit vóór de tag"
+  while :; do
+    origin_sha="$(git ls-remote origin refs/heads/main | awk 'NR==1 {print $1}')" \
+      || die "origin/main niet leesbaar vóór de Windows-poort."
+    [ "$origin_sha" = "$merge" ] \
+      || die "origin/main verschoof na de release-merge — tag $TAG niet automatisch."
+    mirror_sha="$(git ls-remote mirror refs/heads/main | awk 'NR==1 {print $1}')" \
+      || die "mirror/main niet leesbaar vóór de Windows-poort."
+    [ "$mirror_sha" = "$merge" ] && break
+    [ "$SECONDS" -lt $((start + 900)) ] \
+      || die "mirror/main bereikte merge ${merge:0:12} niet binnen 15 min — niets getagd."
+    sleep 20
+  done
+  runs="$(gh run list -R "$repo" --workflow windows-test-check.yml --branch main \
+    --event workflow_dispatch --limit 100 \
+    --json databaseId,headSha,status,conclusion)" \
+    || die "GitHub Windows-runlijst niet leesbaar — niets getagd."
+  run_id="$(jq -r --arg sha "$merge" '[.[] | select(.headSha == $sha)] | sort_by(.databaseId) | last | .databaseId // empty' <<<"$runs")"
+  if [ -z "$run_id" ]; then
+    baseline_id="$(jq -r '[.[].databaseId] | max // 0' <<<"$runs")"
+    gh workflow run windows-test-check.yml -R "$repo" --ref main >/dev/null \
+      || die "Windows-suite op mirror/main kon niet worden gestart — niets getagd."
+    for _ in $(seq 1 30); do
+      runs="$(gh run list -R "$repo" --workflow windows-test-check.yml --branch main \
+        --event workflow_dispatch --limit 100 \
+        --json databaseId,headSha,status,conclusion)" \
+        || die "nieuwe GitHub Windows-run niet leesbaar — niets getagd."
+      run_id="$(jq -r --arg sha "$merge" --argjson before "$baseline_id" \
+        '[.[] | select(.headSha == $sha and .databaseId > $before)] | sort_by(.databaseId) | first | .databaseId // empty' <<<"$runs")"
+      [ -n "$run_id" ] && break
+      sleep 10
+    done
+    [ -n "$run_id" ] || die "GitHub Windows-dispatch niet aan exacte merge-commit te koppelen — niets getagd."
+  fi
+  log "Windows-suite run $run_id op ${merge:0:12} volgen."
+  start=$SECONDS
+  while :; do
+    state="$(gh run view "$run_id" -R "$repo" --json headSha,status,conclusion \
+      | jq -r --arg sha "$merge" 'if .headSha != $sha then "wrong-sha" elif .status == "completed" then .conclusion else .status end')" \
+      || die "Windows-run $run_id niet leesbaar — niets getagd."
+    case "$state" in
+      success) log "Windows-suite op merge ${merge:0:12} groen (run $run_id)."; return 0 ;;
+      queued|in_progress|waiting|pending|requested) ;;
+      *) die "Windows-suite op merge ${merge:0:12} is $state (run $run_id) — niets getagd." ;;
+    esac
+    [ "$SECONDS" -lt $((start + 9000)) ] \
+      || die "Windows-suite op merge ${merge:0:12} bleef langer dan 150 min actief — niets getagd."
+    sleep 30
+  done
 }
 
 # De mirror-tag (GitHub-spiegel) is een eigen faalpunt naast origin: de origin-push
@@ -2427,6 +2532,8 @@ tag_and_push() { # tag_and_push MERGE_SHA
     | sed -n 's/^version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p')"
   [ "$tagged_version" = "$NEW_VERSION" ] \
     || die "merge-commit $mergesha draagt versie '${tagged_version:-onbekend}', niet $NEW_VERSION — dit is niet de release-commit. Niets getagd; controleer de PR."
+  assert_release_ci_secrets
+  assert_windows_merge_gate "$mergesha"
   section "Fase 2 — tag $TAG pushen (de publieke release-keten start hierna)"
   log "Ctrl-C binnen 8 seconden om af te breken (hierna is de tag onherroepelijk)."
   for i in 8 7 6 5 4 3 2 1; do printf '\r   %s… ' "$i"; sleep 1; done; printf '\r          \n'
@@ -2517,28 +2624,58 @@ follow_ci() {
   if [ "$running" -ne 0 ] || ! release_ci_completion_seen "$snap"; then
     die "release-CI voor $TAG is na ${cap} minuten nog actief of niet volledig zichtbaar — fase 3 wordt niet gestart; hervat later met: scripts/release_auto.sh --resume $TAG"
   fi
-  # De losse ci.yml-poort heet simpelweg `gate` en draait náást release.yml op
-  # dezelfde tag. Rood daar is een testuitslag om naar te kijken, geen
-  # gefaalde releasejob; het zegt niets over de artefacten. Benoem het apart,
-  # anders leest de operator "release-job faalde" en gaat de verkeerde kant op.
-  if printf '%s\n' "$snap" | grep -q '^failure|gate$'; then
-    log "Terzijde: de losse ci.yml-poort (gate) op $TAG is rood. Dat is een testrun naast de"
-    log "releaseketen, geen releasejob — bekijk de uitslag, maar de release gaat door."
+  if release_ci_has_failure "$snap"; then
+    die "release-CI voor $TAG bevat een gefaalde of overgeslagen job — niets publiceren; herstel en hervat dezelfde tag."
   fi
-  # Dezelfde terzijde voor de golden-poort op de tag (#2321): die run staat in
-  # zijn eigen tag-groep en wordt hier expliciet gevolgd — een afwezige of
-  # geannuleerde tagrun mag niet onzichtbaar blijven.
-  local mgate=""
-  mgate="$(macos_gate_tag_status || true)"
-  case "$mgate" in
-    "")      log "Terzijde: geen macos-gate-run op $TAG gevonden — de golden-poort van de tagcommit is onbewezen." ;;
-    success\|*) log "macos-gate (goldens) op $TAG is groen (run ${mgate##*|})." ;;
-    *)       log "Terzijde: macos-gate op $TAG is ${mgate%%|*} (run ${mgate##*|}) — de golden-poort van de tagcommit is niet groen." ;;
-  esac
-  if printf '%s\n' "$snap" | grep -v '^failure|gate$' | grep -q '^failure|'; then
-    log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
-    log "Herstel de upstream-job en maak DEZELFDE tag af met '--resume $TAG'; her-tag niet."
-  fi
+  wait_tag_gates
+}
+
+# Alle tag-poorten zijn releasevoorwaarden, ook wanneer release.yml zelf groen
+# werd. Ze lopen in aparte workflows en mogen bij een snelle releasejob nog
+# wachten; alleen terminal succes op deze tag én commit opent fase 3.
+wait_tag_gates() {
+  local repo sha fg mg gh_runs gh_state gh_id fg_state mg_state fg_sha mg_sha start=$SECONDS
+  repo="$(git remote get-url mirror | sed -E 's#^(git@github.com:|https://github.com/)##; s#\.git$##')"
+  sha="$(git rev-list -n 1 "$TAG")" || die "tagcommit ontbreekt voor de poortcontrole."
+  [[ "$repo" =~ ^[^/]+/[^/]+$ ]] || die "GitHub-mirrorrepo niet betrouwbaar bepaald."
+  while :; do
+    fg="$(API_TRIES=1 API_MAX_TIME=25 latest_workflow_run ci.yml "$TAG")" \
+      || die "Forgejo-tagpoort onleesbaar — niets publiceren."
+    mg="$(API_TRIES=1 API_MAX_TIME=25 macos_gate_tag_status)" \
+      || die "macOS-tagpoort onleesbaar — niets publiceren."
+    fg_state="${fg#*|}"; mg_state="${mg%%|*}"
+    if [ -n "$fg" ]; then
+      fg_sha="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs/${fg%%|*}" | jq -r '.commit_sha // empty')" \
+        || die "Forgejo-tagpoortcommit onleesbaar — niets publiceren."
+      [ "$fg_sha" = "$sha" ] || die "Forgejo-tagpoort draait op ${fg_sha:-onbekend} in plaats van $sha — niets publiceren."
+    fi
+    if [ -n "$mg" ]; then
+      mg_sha="$(API_TRIES=1 API_MAX_TIME=25 api GET "/actions/runs/${mg##*|}" | jq -r '.commit_sha // empty')" \
+        || die "macOS-tagpoortcommit onleesbaar — niets publiceren."
+      [ "$mg_sha" = "$sha" ] || die "macOS-tagpoort draait op ${mg_sha:-onbekend} in plaats van $sha — niets publiceren."
+    fi
+    gh_runs="$(gh run list -R "$repo" --workflow ci.yml --event push --limit 100 \
+      --json databaseId,headSha,headBranch,status,conclusion)" \
+      || die "GitHub-tagpoort onleesbaar — niets publiceren."
+    gh_state="$(jq -r --arg sha "$sha" --arg tag "$TAG" \
+      '[.[] | select(.headSha == $sha and .headBranch == $tag)] | sort_by(.databaseId) | last | if . == null then "missing" elif .status == "completed" then .conclusion else .status end' <<<"$gh_runs")"
+    gh_id="$(jq -r --arg sha "$sha" --arg tag "$TAG" \
+      '[.[] | select(.headSha == $sha and .headBranch == $tag)] | sort_by(.databaseId) | last | .databaseId // empty' <<<"$gh_runs")"
+    case "$fg_state:$mg_state:$gh_state" in
+      success:success:success)
+        log "Tagpoorten groen: Forgejo ci ${fg%%|*}, macOS ${mg##*|}, GitHub $gh_id."
+        return 0 ;;
+    esac
+    for state in "$fg_state" "$mg_state" "$gh_state"; do
+      case "$state" in
+        failure|cancelled|skipped|error|timed_out|action_required|startup_failure|stale)
+          die "een tagpoort op $TAG is $state (Forgejo $fg, macOS $mg, GitHub $gh_id/$gh_state) — niets publiceren; herstel en hervat dezelfde tag." ;;
+      esac
+    done
+    [ "$SECONDS" -lt $((start + 7200)) ] \
+      || die "tagpoorten op $TAG niet alle groen binnen 120 min (Forgejo $fg, macOS $mg, GitHub $gh_id/$gh_state) — niets publiceren."
+    sleep 30
+  done
 }
 
 # --resume: hervat een onderbroken release vanaf het punt waar het bleef. Kijkt wat

@@ -15,6 +15,9 @@ import 'package:yaml/yaml.dart';
 /// contexts vormen. Daarnaast staat de naconditie structureel: ná de push-stap
 /// leest een eigen stap het exacte tag terug uit de registry.
 void main() {
+  final skipShellOnWindows = Platform.isWindows
+      ? 'de image-publish guard draait in de Linux-shell van Forgejo CI'
+      : null;
   const workflows = <String>[
     '.forgejo/workflows/ci-image.yml',
     '.forgejo/workflows/ci-image-scans.yml',
@@ -82,7 +85,7 @@ void main() {
           isNot(contains('publish=yes')),
           reason: 'groen zonder image is een leugen — #2301.',
         );
-      });
+      }, skip: skipShellOnWindows);
 
       test(
         'handmatige dispatch zonder credentials: rood, ook buiten canonical',
@@ -94,6 +97,7 @@ void main() {
           );
           expect(code, isNot(0));
         },
+        skip: skipShellOnWindows,
       );
 
       test('expliciete fork-context mag groen overslaan', () {
@@ -104,7 +108,7 @@ void main() {
         );
         expect(code, 0);
         expect(out, contains('publish=no'));
-      });
+      }, skip: skipShellOnWindows);
 
       test('met credentials op canonical: publish=yes', () {
         final (code, out) = runGuard(
@@ -116,7 +120,7 @@ void main() {
         );
         expect(code, 0);
         expect(out, contains('publish=yes'));
-      });
+      }, skip: skipShellOnWindows);
 
       test('naconditie: de registrytag wordt ná de push teruggelezen', () {
         expect(pushIndex, greaterThan(-1), reason: 'push-stap verwacht');

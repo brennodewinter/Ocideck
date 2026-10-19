@@ -162,7 +162,9 @@ List<String> packageProblems({
               .toList()
             ..sort((a, b) => a.path.compareTo(b.path));
       for (final file in files) {
-        final rel = file.path.substring(dir.path.length + 1);
+        final rel = file.path
+            .substring(dir.path.length + 1)
+            .replaceAll('\\', '/');
         final lines = file.readAsLinesSync();
         for (var i = 0; i < lines.length; i++) {
           final line = lines[i];

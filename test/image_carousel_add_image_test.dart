@@ -63,7 +63,8 @@ void main() {
       () async {
         final project = Directory('${tempDir.path}/deck')..createSync();
         final dest = await imageArchiveDestination(['${project.path}/images']);
-        expect(dest?.path, p.join(project.path, 'images'));
+        expect(dest, isNotNull);
+        expect(p.equals(dest!.path, p.join(project.path, 'images')), isTrue);
         expect(Directory('${project.path}/images').existsSync(), isTrue);
       },
     );

@@ -190,55 +190,66 @@ echo "\$FAKE_SHA  \$1"
     return (result, calls);
   }
 
-  group('publish_debian_package.sh against a fake endpoint', () {
-    late Directory tmp;
-    setUp(() => tmp = Directory.systemTemp.createTempSync('debpublish'));
-    tearDown(() => tmp.deleteSync(recursive: true));
+  group(
+    'publish_debian_package.sh against a fake endpoint',
+    () {
+      late Directory tmp;
+      setUp(() => tmp = Directory.systemTemp.createTempSync('debpublish'));
+      tearDown(() => tmp.deleteSync(recursive: true));
 
-    test(
-      'PUT lands but answer is lost: reconcile adopts it, one writer',
-      () async {
-        final (result, calls) = await runDebianPublish(tmp, 'lost');
-        expect(result.exitCode, 0, reason: '${result.stderr}');
-        expect(
-          '${result.stdout}',
-          contains('already published with the same sha256'),
-        );
-        expect(
-          calls.where((c) => c.contains('/upload')).length,
-          1,
-          reason: 'a second PUT after an uncertain first one is a double write',
-        );
-      },
-    );
-
-    test('lost PUT with unreachable reconcile reports unknown state', () async {
-      final (result, calls) = await runDebianPublish(
-        tmp,
-        'lost-unreconcilable',
+      test(
+        'PUT lands but answer is lost: reconcile adopts it, one writer',
+        () async {
+          final (result, calls) = await runDebianPublish(tmp, 'lost');
+          expect(result.exitCode, 0, reason: '${result.stderr}');
+          expect(
+            '${result.stdout}',
+            contains('already published with the same sha256'),
+          );
+          expect(
+            calls.where((c) => c.contains('/upload')).length,
+            1,
+            reason:
+                'a second PUT after an uncertain first one is a double write',
+          );
+        },
       );
-      expect(result.exitCode, 1);
-      expect('${result.stderr}', contains('Externe toestand onbekend'));
-      expect(calls.where((c) => c.contains('/upload')).length, 1);
-    });
 
-    test('409 with different remote bytes fails closed', () async {
-      final (result, _) = await runDebianPublish(tmp, 'conflict');
-      expect(result.exitCode, 1);
-      expect('${result.stderr}', contains('different package bytes'));
-    });
+      test(
+        'lost PUT with unreachable reconcile reports unknown state',
+        () async {
+          final (result, calls) = await runDebianPublish(
+            tmp,
+            'lost-unreconcilable',
+          );
+          expect(result.exitCode, 1);
+          expect('${result.stderr}', contains('Externe toestand onbekend'));
+          expect(calls.where((c) => c.contains('/upload')).length, 1);
+        },
+      );
 
-    test('a blackhole endpoint ends bounded, without a second write', () async {
-      // A real TCP listener that accepts and never answers — the class of
-      // failure that used to hang the job for hours. Real curl, real
-      // --max-time; the env only shortens the deadlines for the test.
-      final server = await ServerSocket.bind(InternetAddress.loopbackIPv4, 0);
-      server.listen((_) {}); // accept, then silence
-      final sw = Stopwatch()..start();
-      try {
-        final deb = File('${tmp.path}/ocideck.deb')..writeAsBytesSync([1]);
-        final bin = Directory('${tmp.path}/bin')..createSync();
-        File('${bin.path}/dpkg-deb').writeAsStringSync('''
+      test('409 with different remote bytes fails closed', () async {
+        final (result, _) = await runDebianPublish(tmp, 'conflict');
+        expect(result.exitCode, 1);
+        expect('${result.stderr}', contains('different package bytes'));
+      });
+
+      test(
+        'a blackhole endpoint ends bounded, without a second write',
+        () async {
+          // A real TCP listener that accepts and never answers — the class of
+          // failure that used to hang the job for hours. Real curl, real
+          // --max-time; the env only shortens the deadlines for the test.
+          final server = await ServerSocket.bind(
+            InternetAddress.loopbackIPv4,
+            0,
+          );
+          server.listen((_) {}); // accept, then silence
+          final sw = Stopwatch()..start();
+          try {
+            final deb = File('${tmp.path}/ocideck.deb')..writeAsBytesSync([1]);
+            final bin = Directory('${tmp.path}/bin')..createSync();
+            File('${bin.path}/dpkg-deb').writeAsStringSync('''
 #!/bin/bash
 case "\$3" in
   Package) echo ocideck ;;
@@ -246,31 +257,38 @@ case "\$3" in
   Architecture) echo amd64 ;;
 esac
 ''');
-        Process.runSync('chmod', ['+x', '${bin.path}/dpkg-deb']);
-        final result = await Process.run(
-          'bash',
-          ['scripts/publish_debian_package.sh', deb.path],
-          environment: {
-            'PATH': '${bin.path}:${Platform.environment['PATH']}',
-            'PACKAGE_TOKEN': 'x',
-            'FORGEJO_SERVER_URL': 'http://127.0.0.1:${server.port}',
-            'OCI_CURL_CONNECT_TIMEOUT': '1',
-            'OCI_CURL_PUT_MAX_TIME': '2',
-            'OCI_CURL_GET_MAX_TIME': '2',
-          },
-        );
-        sw.stop();
-        expect(result.exitCode, 1);
-        expect(
-          sw.elapsed.inSeconds,
-          lessThan(30),
-          reason: 'the blackhole still hung the publisher for ${sw.elapsed}',
-        );
-        expect('${result.stderr}', contains('Upload-timeout'));
-        expect('${result.stderr}', contains('Externe toestand onbekend'));
-      } finally {
-        await server.close();
-      }
-    }, timeout: const Timeout(Duration(seconds: 60)));
-  });
+            Process.runSync('chmod', ['+x', '${bin.path}/dpkg-deb']);
+            final result = await Process.run(
+              'bash',
+              ['scripts/publish_debian_package.sh', deb.path],
+              environment: {
+                'PATH': '${bin.path}:${Platform.environment['PATH']}',
+                'PACKAGE_TOKEN': 'x',
+                'FORGEJO_SERVER_URL': 'http://127.0.0.1:${server.port}',
+                'OCI_CURL_CONNECT_TIMEOUT': '1',
+                'OCI_CURL_PUT_MAX_TIME': '2',
+                'OCI_CURL_GET_MAX_TIME': '2',
+              },
+            );
+            sw.stop();
+            expect(result.exitCode, 1);
+            expect(
+              sw.elapsed.inSeconds,
+              lessThan(30),
+              reason:
+                  'the blackhole still hung the publisher for ${sw.elapsed}',
+            );
+            expect('${result.stderr}', contains('Upload-timeout'));
+            expect('${result.stderr}', contains('Externe toestand onbekend'));
+          } finally {
+            await server.close();
+          }
+        },
+        timeout: const Timeout(Duration(seconds: 60)),
+      );
+    },
+    skip: Platform.isWindows
+        ? 'de Debian publisher en zijn shell-fixtures draaien op Linux'
+        : null,
+  );
 }

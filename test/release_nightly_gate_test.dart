@@ -48,7 +48,7 @@ $topLevel
     final calls = (result.stdout as String).trim().split('\n');
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
     expect(calls.indexOf('preflight'), lessThan(calls.indexOf('nightly')));
-  });
+  }, skip: skipOnWindows);
 
   test('de ververste main-tip wordt vóór de fase-1-checkout herkeurd', () {
     final phaseOne = autoScript.indexOf('section "Fase 1 — voorbereiden"');
@@ -270,190 +270,198 @@ printf 'DOOR\\n'
     ], workingDirectory: Directory.current.path);
   }
 
-  test('een groene nachtrun op de tip laat de release door', () {
-    final r = runGate(
-      runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],
-    );
-    final output = '${r.stdout}\n${r.stderr}';
-    expect(r.exitCode, 0, reason: output);
-    expect(output, contains('DOOR'));
-  });
-
-  test('zonder groene tiprun start en volgt de release zelf linux-gate', () {
-    final trace = File(
-      '${Directory.systemTemp.path}/ocideck-nightly-dispatch-$pid.log',
-    );
-    addTearDown(() {
-      if (trace.existsSync()) trace.deleteSync();
-    });
-    final r = runGate(runs: [], trace: trace);
-    final output = '${r.stdout}\n${r.stderr}';
-    expect(r.exitCode, 0, reason: output);
-    expect(output, contains('DOOR'));
-    expect(
-      trace.readAsStringSync(),
-      contains('POST /actions/workflows/linux-gate.yml/dispatches'),
-    );
-    expect(trace.readAsStringSync(), contains('GET /actions/runs/9800'));
-  });
-
-  test(
-    'een lege dispatchbevestiging wordt via de aangemaakte run hersteld',
-    () {
-      final r = runGate(runs: [], dispatchResponse: '');
-      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
-    },
-  );
-
-  test('een andere workflow op dezelfde SHA telt niet als linux-gate', () {
-    final trace = File(
-      '${Directory.systemTemp.path}/ocideck-nightly-workflow-id-$pid.log',
-    );
-    addTearDown(() {
-      if (trace.existsSync()) trace.deleteSync();
-    });
-    final r = runGate(
-      runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],
-      listWorkflowId: 'other.yml',
-      trace: trace,
-    );
-    expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
-    expect(
-      trace.readAsStringSync(),
-      contains('POST /actions/workflows/linux-gate.yml/dispatches'),
-    );
-  });
-
-  test('een onjuist lijstschema veroorzaakt geen dispatch', () {
-    final trace = File(
-      '${Directory.systemTemp.path}/ocideck-nightly-schema-$pid.log',
-    );
-    addTearDown(() {
-      if (trace.existsSync()) trace.deleteSync();
-    });
-    final r = runGate(runs: [], wrongListSchema: true, trace: trace);
-    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
-    expect(trace.readAsStringSync(), isNot(contains('POST ')));
-  });
-
-  test('een onvolledig lijstitem veroorzaakt geen dispatch', () {
-    final trace = File(
-      '${Directory.systemTemp.path}/ocideck-nightly-list-item-$pid.log',
-    );
-    addTearDown(() {
-      if (trace.existsSync()) trace.deleteSync();
-    });
-    final r = runGate(runs: [], malformedListItem: true, trace: trace);
-    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
-    expect(trace.readAsStringSync(), isNot(contains('POST ')));
-  });
-
-  test('ongeldige run-details veroorzaken geen dispatch', () {
-    final trace = File(
-      '${Directory.systemTemp.path}/ocideck-nightly-detail-$pid.log',
-    );
-    addTearDown(() {
-      if (trace.existsSync()) trace.deleteSync();
-    });
-    final r = runGate(
-      runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
-      wrongDetailSchema: true,
-      trace: trace,
-    );
-    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
-    expect(trace.readAsStringSync(), isNot(contains('POST ')));
-  });
-
-  test('een tweede releaseproces kan niet dubbel dispatchen', () {
-    final trace = File(
-      '${Directory.systemTemp.path}/ocideck-nightly-lock-$pid.log',
-    );
-    addTearDown(() {
-      if (trace.existsSync()) trace.deleteSync();
-    });
-    final r = runGate(runs: [], lockHeld: true, trace: trace);
-    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
-    expect('${r.stdout}\n${r.stderr}', contains('andere release'));
-    expect(
-      trace.existsSync() ? trace.readAsStringSync() : '',
-      isNot(contains('POST ')),
-    );
-  });
-
-  test('een lock zonder pid wordt nooit automatisch verwijderd', () {
-    final r = runGate(runs: [], lockMissingPid: true);
-    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
-    expect('${r.stdout}\n${r.stderr}', contains('achtergebleven'));
-  });
-
-  test('een lock van een gestopt proces wordt nooit automatisch vervangen', () {
-    final r = runGate(runs: [], lockDeadPid: true);
-    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
-    expect('${r.stdout}\n${r.stderr}', contains('achtergebleven'));
-  });
-
-  test('een late lege runlijst krijgt een nieuwe registratietermijn', () {
-    final r = runGate(
-      runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
-      delayedListGap: true,
-    );
-    expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
-    expect('${r.stdout}\n${r.stderr}', contains('DOOR'));
-  });
-
-  test(
-    'een rode nachtrun stopt vóór elke mutatie, met run- en foutcontext',
-    () {
+  group('bash gate harness', () {
+    test('een groene nachtrun op de tip laat de release door', () {
       final r = runGate(
-        runs: [
-          '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|failure',
-          '9700|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success',
-        ],
+        runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],
       );
       final output = '${r.stdout}\n${r.stderr}';
-      expect(r.exitCode, isNot(0), reason: output);
-      expect(output, contains('https://forge.invalid/r/9718'));
-      expect(output, contains('gate-linux'));
-      expect(output, contains('FAILED test/foo_test.dart'));
-      expect(output, isNot(contains('checkout-opruiming')));
-    },
-  );
-
-  test('een lopende tiprun wordt gevolgd zonder dubbele dispatch', () {
-    final trace = File(
-      '${Directory.systemTemp.path}/ocideck-nightly-running-$pid.log',
-    );
-    addTearDown(() {
-      if (trace.existsSync()) trace.deleteSync();
+      expect(r.exitCode, 0, reason: output);
+      expect(output, contains('DOOR'));
     });
-    final r = runGate(
-      runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
-      runningBecomesSuccess: true,
-      requireLockWhileRunning: true,
-      trace: trace,
+
+    test('zonder groene tiprun start en volgt de release zelf linux-gate', () {
+      final trace = File(
+        '${Directory.systemTemp.path}/ocideck-nightly-dispatch-$pid.log',
+      );
+      addTearDown(() {
+        if (trace.existsSync()) trace.deleteSync();
+      });
+      final r = runGate(runs: [], trace: trace);
+      final output = '${r.stdout}\n${r.stderr}';
+      expect(r.exitCode, 0, reason: output);
+      expect(output, contains('DOOR'));
+      expect(
+        trace.readAsStringSync(),
+        contains('POST /actions/workflows/linux-gate.yml/dispatches'),
+      );
+      expect(trace.readAsStringSync(), contains('GET /actions/runs/9800'));
+    });
+
+    test(
+      'een lege dispatchbevestiging wordt via de aangemaakte run hersteld',
+      () {
+        final r = runGate(runs: [], dispatchResponse: '');
+        expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      },
     );
-    final output = '${r.stdout}\n${r.stderr}';
-    expect(r.exitCode, 0, reason: output);
-    expect(output, contains('DOOR'));
-    expect(trace.readAsStringSync(), isNot(contains('POST ')));
-  });
 
-  test('een nieuw gedispatchte rode run blijft fail-closed', () {
-    final r = runGate(runs: [], dispatchedStatus: 'failure');
-    final output = '${r.stdout}\n${r.stderr}';
-    expect(r.exitCode, isNot(0), reason: output);
-    expect(output, contains('https://forge.invalid/r/9800'));
-  });
+    test('een andere workflow op dezelfde SHA telt niet als linux-gate', () {
+      final trace = File(
+        '${Directory.systemTemp.path}/ocideck-nightly-workflow-id-$pid.log',
+      );
+      addTearDown(() {
+        if (trace.existsSync()) trace.deleteSync();
+      });
+      final r = runGate(
+        runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success'],
+        listWorkflowId: 'other.yml',
+        trace: trace,
+      );
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      expect(
+        trace.readAsStringSync(),
+        contains('POST /actions/workflows/linux-gate.yml/dispatches'),
+      );
+    });
 
-  test('een onbereikbare forge-API maakt de toestand onbekend, niet groen', () {
-    final r = runGate(runs: [], apiFails: true);
-    expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
-  });
+    test('een onjuist lijstschema veroorzaakt geen dispatch', () {
+      final trace = File(
+        '${Directory.systemTemp.path}/ocideck-nightly-schema-$pid.log',
+      );
+      addTearDown(() {
+        if (trace.existsSync()) trace.deleteSync();
+      });
+      final r = runGate(runs: [], wrongListSchema: true, trace: trace);
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect(trace.readAsStringSync(), isNot(contains('POST ')));
+    });
 
-  test('--resume slaat de nachtelijke main-poort over', () {
-    // api die faalt bewijst dat er niets gelezen wordt: de inhoud van de
-    // lopende release ligt al vast, een later rood main-run is irrelevant.
-    final r = runGate(runs: [], resumeTag: 'v9.9.9', apiFails: true);
-    expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+    test('een onvolledig lijstitem veroorzaakt geen dispatch', () {
+      final trace = File(
+        '${Directory.systemTemp.path}/ocideck-nightly-list-item-$pid.log',
+      );
+      addTearDown(() {
+        if (trace.existsSync()) trace.deleteSync();
+      });
+      final r = runGate(runs: [], malformedListItem: true, trace: trace);
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect(trace.readAsStringSync(), isNot(contains('POST ')));
+    });
+
+    test('ongeldige run-details veroorzaken geen dispatch', () {
+      final trace = File(
+        '${Directory.systemTemp.path}/ocideck-nightly-detail-$pid.log',
+      );
+      addTearDown(() {
+        if (trace.existsSync()) trace.deleteSync();
+      });
+      final r = runGate(
+        runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
+        wrongDetailSchema: true,
+        trace: trace,
+      );
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect(trace.readAsStringSync(), isNot(contains('POST ')));
+    });
+
+    test('een tweede releaseproces kan niet dubbel dispatchen', () {
+      final trace = File(
+        '${Directory.systemTemp.path}/ocideck-nightly-lock-$pid.log',
+      );
+      addTearDown(() {
+        if (trace.existsSync()) trace.deleteSync();
+      });
+      final r = runGate(runs: [], lockHeld: true, trace: trace);
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect('${r.stdout}\n${r.stderr}', contains('andere release'));
+      expect(
+        trace.existsSync() ? trace.readAsStringSync() : '',
+        isNot(contains('POST ')),
+      );
+    });
+
+    test('een lock zonder pid wordt nooit automatisch verwijderd', () {
+      final r = runGate(runs: [], lockMissingPid: true);
+      expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      expect('${r.stdout}\n${r.stderr}', contains('achtergebleven'));
+    });
+
+    test(
+      'een lock van een gestopt proces wordt nooit automatisch vervangen',
+      () {
+        final r = runGate(runs: [], lockDeadPid: true);
+        expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+        expect('${r.stdout}\n${r.stderr}', contains('achtergebleven'));
+      },
+    );
+
+    test('een late lege runlijst krijgt een nieuwe registratietermijn', () {
+      final r = runGate(
+        runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
+        delayedListGap: true,
+      );
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+      expect('${r.stdout}\n${r.stderr}', contains('DOOR'));
+    });
+
+    test(
+      'een rode nachtrun stopt vóór elke mutatie, met run- en foutcontext',
+      () {
+        final r = runGate(
+          runs: [
+            '9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|failure',
+            '9700|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|success',
+          ],
+        );
+        final output = '${r.stdout}\n${r.stderr}';
+        expect(r.exitCode, isNot(0), reason: output);
+        expect(output, contains('https://forge.invalid/r/9718'));
+        expect(output, contains('gate-linux'));
+        expect(output, contains('FAILED test/foo_test.dart'));
+        expect(output, isNot(contains('checkout-opruiming')));
+      },
+    );
+
+    test('een lopende tiprun wordt gevolgd zonder dubbele dispatch', () {
+      final trace = File(
+        '${Directory.systemTemp.path}/ocideck-nightly-running-$pid.log',
+      );
+      addTearDown(() {
+        if (trace.existsSync()) trace.deleteSync();
+      });
+      final r = runGate(
+        runs: ['9718|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|running'],
+        runningBecomesSuccess: true,
+        requireLockWhileRunning: true,
+        trace: trace,
+      );
+      final output = '${r.stdout}\n${r.stderr}';
+      expect(r.exitCode, 0, reason: output);
+      expect(output, contains('DOOR'));
+      expect(trace.readAsStringSync(), isNot(contains('POST ')));
+    });
+
+    test('een nieuw gedispatchte rode run blijft fail-closed', () {
+      final r = runGate(runs: [], dispatchedStatus: 'failure');
+      final output = '${r.stdout}\n${r.stderr}';
+      expect(r.exitCode, isNot(0), reason: output);
+      expect(output, contains('https://forge.invalid/r/9800'));
+    });
+
+    test(
+      'een onbereikbare forge-API maakt de toestand onbekend, niet groen',
+      () {
+        final r = runGate(runs: [], apiFails: true);
+        expect(r.exitCode, isNot(0), reason: '${r.stdout}\n${r.stderr}');
+      },
+    );
+
+    test('--resume slaat de nachtelijke main-poort over', () {
+      // api die faalt bewijst dat er niets gelezen wordt: de inhoud van de
+      // lopende release ligt al vast, een later rood main-run is irrelevant.
+      final r = runGate(runs: [], resumeTag: 'v9.9.9', apiFails: true);
+      expect(r.exitCode, 0, reason: '${r.stdout}\n${r.stderr}');
+    });
   }, skip: skipOnWindows);
 }

@@ -756,11 +756,30 @@ asks for and verifies the minisign password before waiting for the Linux gate,
 so a wrong password fails promptly and the release can run unattended after
 the prompt.
 
+The repository must have three Forgejo Actions secrets before a fresh release:
+`GH_DISPATCH_TOKEN` to start the GitHub Windows build,
+`GH_RELEASE_READ_TOKEN` (a dedicated GitHub token with `Contents: read` on the
+private mirror) to fetch its draft assets, and `RELEASE_TOKEN` (a dedicated
+Forgejo token with `write:repository`) to upload and read back draft release
+assets. Configure them once as repo-scoped credentials, not copies of a broad
+personal token. Pre-flight checks their names only and never prints values.
+An already completed tag CI can be resumed without reintroducing secrets that
+its jobs no longer need.
+
 Before any release mutation, the chain requires a green `linux-gate` on the
 exact `origin/main` tip. It reuses and follows an existing run, or dispatches
 one on `main` when the nightly schedule has not seen that commit yet. A red or
 persistently unreadable run remains a hard stop. Phase 1 repeats the check after
 its final fetch, so it never branches from a newer, untested tip.
+
+After the release PR merges and before the tag, the script waits until
+`mirror/main` equals that exact merge commit, then runs the GitHub Windows
+suite on it and requires success. A red, missing, or unreadable result leaves
+the release untagged and can be retried with `--resume vX.Y.Z`. After the tag,
+the separate Forgejo `ci.yml`, macOS golden gate, and GitHub tag CI must also
+finish green before phase 3 publishes the release.
+The script's wait exceeds the Windows job limit, so the job can report its
+terminal result before the release gives up.
 
 `scripts/release_auto.sh --preflight` runs that rehearsal on its own: the
 staleness gate, a clean and idle worktree, the token, the mirror, the deploy

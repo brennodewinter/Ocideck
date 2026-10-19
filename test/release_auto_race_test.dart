@@ -70,7 +70,8 @@ read_token() { :; }
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
 git() {
-  if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then return 0; fi
+  if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then printf '%s\\n' 'git@github.com:owner/repo.git'; return 0; fi
+  if [ "\$1 \$2" = 'ls-remote origin' ]; then printf '%s\\n' 'abcdef refs/tags/v9.9.9^{}'; return 0; fi
   case "\${*: -1}" in
     refs/heads/*) return 2 ;;
     refs/tags/*) return 0 ;;
@@ -222,7 +223,8 @@ section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
 mark() { printf 'mark %s %s\\n' "\$1" "\$2"; }
 git() {
-  if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then return 0; fi
+  if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then printf '%s\\n' 'git@github.com:owner/repo.git'; return 0; fi
+  if [ "\$1 \$2" = 'ls-remote origin' ]; then printf '%s\\n' 'abcdef refs/tags/v9.9.9^{}'; return 0; fi
   case "\${*: -1}" in
     refs/heads/*) return 2 ;;
     refs/tags/*) return 0 ;;
@@ -231,6 +233,12 @@ git() {
 }
 api() {
   case "\$2" in
+    '/actions/runs?limit=50&page=1&workflow_id=ci.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":901,"prettyref":"v9.9.9","workflow_id":"ci.yml","status":"success"}]}' ;;
+    '/actions/runs?limit=50&page=1&workflow_id=macos-gate.yml')
+      printf '%s\\n' '{"workflow_runs":[{"id":902,"prettyref":"v9.9.9","workflow_id":"macos-gate.yml","status":"success"}]}' ;;
+    '/actions/runs/901'|'/actions/runs/902')
+      printf '%s\\n' '{"commit_sha":"abcdef"}' ;;
     '/actions/runs?limit=50&page=1&workflow_id=release.yml')
       printf '%s\\n' '{"workflow_runs":[{"id":900,"prettyref":"v9.9.9","workflow_id":"release.yml","status":"success"}]}'
       ;;
@@ -244,6 +252,7 @@ api() {
     *) printf '%s\\n' '{}' ;;
   esac
 }
+gh() { printf '%s\\n' '[{"databaseId":903,"headSha":"abcdef","headBranch":"v9.9.9","status":"completed","conclusion":"success"}]'; }
 curl() {
   local out='' url='' previous='' arg write_code=0
   for arg in "\$@"; do
@@ -470,6 +479,7 @@ section() { :; }
 log() { printf '%s\\n' "\$1"; }
 sleep() { :; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
+wait_tag_gates() { :; }  # Deze casus isoleert de duur van release.yml.
 api() {
   case "\$1 \$2" in
     'GET /actions/runs?limit=50&page=1&workflow_id=release.yml')
@@ -519,8 +529,8 @@ api() {
 }
 follow_ci
 ''');
-    expect(result.exitCode, 0, reason: 'stderr: ${result.stderr}');
-    expect(result.stdout, contains('minstens één release-job faalde'));
+    expect(result.exitCode, isNot(0), reason: 'stderr: ${result.stderr}');
+    expect(result.stderr, contains('niets publiceren'));
   }, skip: skipOnWindows);
 
   // Fase 3 bouwt de webdemo uit de wérkboom. Een --resume van v0.6.5 draaide
