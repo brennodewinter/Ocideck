@@ -11,12 +11,14 @@ import '../../services/markdown_table_codec.dart';
 import '../../services/ocideck_marked_table.dart';
 import '../../services/ocideck_markers.dart';
 import '../../services/risk_bowtie.dart';
+import '../../services/risk_bowtie_diagram.dart';
 import '../../services/risk_calc.dart';
 import '../../services/risk_dossier.dart';
 import '../../services/risk_view.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/ocideck_table_embed_syntax.dart';
 import '../../utils/table_row_permutation.dart';
+import '../reader/doc_mermaid_view.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
 import 'markdown_editor_theme.dart';
@@ -264,6 +266,10 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
   /// bewust vervangen. Een rij-permutatie (sortering) is géén overschrijving —
   /// verwijzingen volgen ID's, niet posities (§3.7).
   bool _calcGuardOpen = false;
+
+  /// De Tabel/Diagram-schakelaar van #2496: het diagram is een afgeleide
+  /// vertoning van dezelfde tabel — wisselen verandert niets aan de bron.
+  bool _bowtieDiagram = false;
 
   void _guardCalcOverwrite(String newSource) {
     if (_calcGuardOpen) return;
@@ -633,8 +639,10 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
-            // Op een bowtie-model: een begeleid pad-skelet eronder.
-            if (carrier?.kind == OciMarkerKinds.bowtie)
+            // Op een bowtie-model: een begeleid pad-skelet eronder, en de
+            // schakelaar tussen de bewerkbare tabel en het afgeleide
+            // diagram (#2496).
+            if (carrier?.kind == OciMarkerKinds.bowtie) ...[
               TextButton.icon(
                 onPressed: _addBowtiePath,
                 icon: const Icon(Icons.account_tree_outlined, size: 16),
@@ -643,6 +651,30 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
+              SegmentedButton<bool>(
+                segments: [
+                  ButtonSegment(
+                    value: false,
+                    label: Text(
+                      l10n.d('Tabel'),
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    icon: const Icon(Icons.table_rows_outlined, size: 15),
+                  ),
+                  ButtonSegment(
+                    value: true,
+                    label: Text(
+                      l10n.d('Diagram'),
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    icon: const Icon(Icons.hub_outlined, size: 15),
+                  ),
+                ],
+                selected: {_bowtieDiagram},
+                onSelectionChanged: (s) =>
+                    setState(() => _bowtieDiagram = s.first),
+              ),
+            ],
             // Eén chip per afgeleide kolom: "ƒ kolom = formule", met de
             // enige twee handelingen die erop passen — bewerken of de
             // bewuste, bevestigde verwijdering (#2491).
@@ -693,17 +725,69 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
             ),
           ],
         ),
-        DocumentMarkdownView(
-          _binding.tableSource,
-          maxTextWidth: null,
-          themeProfile: widget.profile,
-          chartTheme: widget.profile,
-          // Een gekoppelde weergave is lees-only in de editor: de cellen
-          // zijn afschriften van de bron en zouden bij de volgende verversing
-          // toch verdwijnen (D2). Bron- en registertabellen bewerk je wel.
-          tableEditController: isView ? null : _editor,
-          onSortTableColumn: isView ? null : _sort,
-        ),
+        if (_bowtieDiagram &&
+            carrier?.kind == OciMarkerKinds.bowtie &&
+            table != null)
+          _bowtieDiagramView(context, table)
+        else
+          DocumentMarkdownView(
+            _binding.tableSource,
+            maxTextWidth: null,
+            themeProfile: widget.profile,
+            chartTheme: widget.profile,
+            // Een gekoppelde weergave is lees-only in de editor: de cellen
+            // zijn afschriften van de bron en zouden bij de volgende
+            // verversing toch verdwijnen (D2). Bron- en registertabellen
+            // bewerk je wel.
+            tableEditController: isView ? null : _editor,
+            onSortTableColumn: isView ? null : _sort,
+          ),
+      ],
+    );
+  }
+
+  /// De diagram-stand van #2496: het afgeleide Mermaid-plaatje boven de
+  /// tabel, met de open paden als concept-waarschuwing erboven — een
+  /// onvolledige bowtie mag nooit als complete dekking lezen. Rendert de
+  /// WebView niet, dan valt [DocMermaidView] terug op de tabel zelf.
+  Widget _bowtieDiagramView(BuildContext context, OciMarkedTable table) {
+    final l10n = context.l10n;
+    final gaps = [
+      for (final path in ociBowtiePaths(table))
+        if (!path.isComplete) '${path.id}: ${path.gaps.join(', ')}',
+    ];
+    final mmd = ociBowtieMermaid(table);
+    final tableView = DocumentMarkdownView(
+      _binding.tableSource,
+      maxTextWidth: null,
+      themeProfile: widget.profile,
+      chartTheme: widget.profile,
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (gaps.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(
+              '${l10n.d('Concept — pad mist')} ${gaps.join('; ')}',
+              style: TextStyle(
+                fontSize: 12,
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ),
+        if (mmd == null)
+          tableView
+        else
+          Semantics(
+            label: ociBowtieSemanticsLabel(table),
+            child: DocMermaidView(
+              source: mmd,
+              fallback: tableView,
+              dark: Theme.of(context).brightness == Brightness.dark,
+            ),
+          ),
       ],
     );
   }

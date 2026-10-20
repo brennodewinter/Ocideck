@@ -10,6 +10,17 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Bowtie-diagram uit de risicotabel, overal dezelfde vertoning.** Een
+  `<!-- ocideck:bowtie -->`-tabel toont nu met één schakelaar als diagram:
+  dreigingen links, preventieve barrières, het topgebeurtenis centraal,
+  mitigerende barrières en gevolgen rechts — deterministisch afgeleid uit
+  dezelfde tabel, dus tabel en plaatje lopen nooit uiteen. Gedeelde
+  maatregelen delen één knoop; de status staat als tekst én lijnstijl in
+  beeld, zodat een voorgestelde barrière er nooit uitziet als bewezen
+  dekking. Lezer, voorvertoning en alle exportformaten tekenen hetzelfde
+  diagram (met de tabel als leesbare terugval), en een open pad meldt zich
+  als concept — nooit als complete dekking (#2495, #2496).
+
 - **Bronblokken in de visuele documenteditor: niet-verliesvrije Markdown
   blijft lokaal.** Stond er één HTML-commentaar, ontsnapt leesteken of losse
   tabelregel in een document, dan dwong de visuele modus het héle bestand

@@ -249,6 +249,15 @@ impact overview in the UI — stored scores are never silently rewritten.
   differ from the measure row only through an explicit override column.
 - An incomplete bowtie (missing top event, open path side) is a draft:
   valid to keep, visibly warned — never rendered as full coverage.
+- The graphical diagram is a **derived projection**, never a second
+  source (#2496): OciDeck draws a deterministic Mermaid `flowchart LR`
+  from the table — threats left, preventive barriers in series, the top
+  event centred, mitigating barriers and consequences right. Barrier
+  nodes are shared by `measure` id; threat/top/consequence nodes are
+  shared by name. A barrier's status is drawn as text AND line style —
+  a proposed barrier never looks like proven protection. Rendering
+  surfaces (reader, preview, exports) show the diagram with the table as
+  the readable fallback; the source file itself is never rewritten.
 
 ## 4. Full example
 
