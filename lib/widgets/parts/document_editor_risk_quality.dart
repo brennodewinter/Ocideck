@@ -133,19 +133,28 @@ Widget _riskQualityTile(
                 ),
               ),
             ),
-            if (f.repair == RiskQualityRepair.refreshView)
+            if (f.repair != RiskQualityRepair.none)
               TextButton(
                 onPressed: () {
-                  final next = regenerateOciView(
-                    s._controller.text,
-                    f.repairTable!,
-                  );
+                  final next = switch (f.repair) {
+                    RiskQualityRepair.refreshView => regenerateOciView(
+                      s._controller.text,
+                      f.repairTable!,
+                    ),
+                    RiskQualityRepair.recalculateCalc => recalculateOciTable(
+                      s._controller.text,
+                      f.repairTable!,
+                    ),
+                    RiskQualityRepair.none => null,
+                  };
                   if (next == null) return;
                   _commitDocumentBody(s.ref, next, coalesceKey: null);
                   refresh();
                 },
                 child: Text(
-                  l10n.d('Verversen'),
+                  f.repair == RiskQualityRepair.recalculateCalc
+                      ? l10n.d('Herberekenen')
+                      : l10n.d('Verversen'),
                   style: const TextStyle(fontSize: 11),
                 ),
               )

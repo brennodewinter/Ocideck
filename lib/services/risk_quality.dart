@@ -11,6 +11,7 @@ library;
 import '../models/risk_dossier.dart';
 import 'ocideck_marked_table.dart';
 import 'ocideck_markers.dart';
+import 'risk_calc.dart';
 import 'risk_dossier.dart';
 import 'risk_view.dart';
 
@@ -24,7 +25,7 @@ enum RiskQualitySeverity { error, warning }
 /// Welke veilige herstelactie bij een bevinding past. Alleen
 /// [refreshView] mag de bron aanraken; alle andere bevindingen vragen om
 /// menselijke keuze en tonen alleen waar en wat.
-enum RiskQualityRepair { none, refreshView }
+enum RiskQualityRepair { none, refreshView, recalculateCalc }
 
 /// Eén bevinding op één plek: welke tabel, welk record, welke regel —
 /// genoeg om ernaartoe te springen in elke weergave van het bestand.
@@ -354,6 +355,101 @@ RiskQualityReport riskQualityFindings(String source) {
           ),
         );
       }
+    }
+  }
+
+  // --- Afgeleide cellen (calc, §3.7) ------------------------------------
+  for (final table in dossier.scan.tables) {
+    if (!(table.marker?.versionSupported ?? false)) continue;
+    final defs = ociCalcDefs(table);
+    if (defs.isEmpty) continue;
+    for (final def in defs) {
+      if (def.col.isEmpty || !ociCalcExprParses(def.marker)) {
+        findings.add(
+          RiskQualityFinding(
+            severity: RiskQualitySeverity.error,
+            code: 'calc-invalid',
+            line: table.blockStart + 1,
+            tableId: table.id,
+            message:
+                'Formule op "${def.col.isEmpty ? '?' : def.col}" '
+                'is niet te lezen: "${def.expr}".',
+            consequence:
+                'De afgeleide kolom toont "—" — de marker blijft bewaard '
+                'maar rekent niet mee.',
+          ),
+        );
+      }
+    }
+    final eval = evaluateOciTableCalc(table);
+    if (eval.cycleSeen) {
+      findings.add(
+        RiskQualityFinding(
+          severity: RiskQualitySeverity.error,
+          code: 'calc-cycle',
+          line: table.blockStart + 1,
+          tableId: table.id,
+          message: 'Een formule verwijst (indirect) naar zichzelf.',
+          consequence:
+              'De betrokken cellen zijn onbekend — de cyclus vergt een '
+              'menselijke keuze over de bedoelde berekening.',
+        ),
+      );
+    }
+    var drift = 0;
+    var firstDrift = '';
+    for (var r = 0; r < eval.results.length; r++) {
+      for (var d = 0; d < defs.length; d++) {
+        final result = eval.results[r][d];
+        final label = table.contractRows[r]['id']?.trim().isNotEmpty == true
+            ? table.contractRows[r]['id']!.trim()
+            : 'rij ${r + 1}';
+        if (result.error != null && result.error != CalcErrors.cycle) {
+          findings.add(
+            RiskQualityFinding(
+              severity: RiskQualitySeverity.error,
+              code: result.error!,
+              line: _rowLine(table, r),
+              tableId: table.id,
+              recordId: table.contractRows[r]['id']?.trim(),
+              message:
+                  'Berekening "${defs[d].col}" op $label mislukt '
+                  '(${result.error == CalcErrors.divZero ? 'deling door nul' : 'overflow'}).',
+              consequence: 'De cel toont "—" — geen 0, geen oud getal.',
+            ),
+          );
+          continue;
+        }
+        if (result.error != null) continue; // cyclus al gemeld
+        // Drift: de opgeslagen cel ≠ de herberekende waarde. De mens
+        // beslist — de reparatie schrijft de uitkomst, niet het oordeel.
+        final stored = table.cell(r, defs[d].col);
+        final computed = formatCalcValue(result.value);
+        if (stored.trim() != computed) {
+          drift++;
+          firstDrift = firstDrift.isEmpty
+              ? 'rij ${r + 1}: "$stored" → "$computed"'
+              : firstDrift;
+        }
+      }
+    }
+    if (drift > 0) {
+      findings.add(
+        RiskQualityFinding(
+          severity: RiskQualitySeverity.warning,
+          code: 'calc-drift',
+          line: table.blockStart + 1,
+          tableId: table.id,
+          message:
+              'De opgeslagen afgeleide waarden lopen achter '
+              '($firstDrift${drift > 1 ? ', +${drift - 1} meer' : ''}).',
+          consequence:
+              'De tabel toont niet wat de formule nu oplevert — '
+              'herberekenen schrijft de uitkomst bij, nooit de invoer.',
+          repair: RiskQualityRepair.recalculateCalc,
+          repairTable: table,
+        ),
+      );
     }
   }
 
