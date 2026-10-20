@@ -42,9 +42,15 @@ const String kImageFaceRuleId = 'image.face';
 final imageFaceScannerProvider = Provider<Future<ImageFaceScanner>>((
   ref,
 ) async {
+  ImageFaceScanner? scanner;
+  var disposed = false;
+  ref.onDispose(() {
+    disposed = true;
+    scanner?.dispose();
+  });
   final model = await rootBundle.load(kFaceModelAsset);
-  final scanner = createImageFaceScanner(model.buffer.asUint8List());
-  ref.onDispose(scanner.dispose);
+  scanner = createImageFaceScanner(model.buffer.asUint8List());
+  if (disposed) scanner.dispose();
   return scanner;
 });
 
@@ -164,14 +170,14 @@ Future<List<SlideQualityIssue>> computeImagePrivacyRawIssues(Ref ref) async {
   final deck = ref.watch(deckProvider.select((s) => s.deck));
   if (deck == null) return const [];
 
+  final images = _imagesOf(deck);
+  if (images.isEmpty) return const [];
+
   final scanner = await ref.watch(imageFaceScannerProvider);
   // Draait de native laag niet (web, of een build zonder OpenCV), dan melden we
   // niets — en het paneel met uitgevoerde controles laat de beeldcontrole weg,
   // zodat een lege uitslag niet als "niets gevonden" leest.
   if (!scanner.isSupported) return const [];
-
-  final images = _imagesOf(deck);
-  if (images.isEmpty) return const [];
 
   final service = ref.read(imageServiceProvider);
   final issues = <SlideQualityIssue>[];

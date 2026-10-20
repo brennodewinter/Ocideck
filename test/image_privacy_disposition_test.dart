@@ -76,6 +76,27 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
+  test('een deck zonder beelden bouwt geen gezichtsscanner', () async {
+    var scannerRequested = false;
+    final container = ProviderContainer(
+      overrides: [
+        deckProvider.overrideWith(
+          (ref) => _deckNotifier(
+            Deck(slides: [Slide.create(SlideType.title)], title: 'proef'),
+          ),
+        ),
+        imageFaceScannerProvider.overrideWith((ref) async {
+          scannerRequested = true;
+          return _AlwaysOneFace();
+        }),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    expect(await container.read(imagePrivacyRawIssuesProvider.future), isEmpty);
+    expect(scannerRequested, isFalse);
+  });
+
   test('een onbeslist beeld levert een melding op', () async {
     final container = _container(Deck(slides: [_imageSlide()], title: 'proef'));
     addTearDown(container.dispose);
