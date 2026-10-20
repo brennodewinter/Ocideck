@@ -1624,6 +1624,194 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" jidhreġ darbtejn (wkoll fil-linja {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" mhux numru għal {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Il-kalkolu "{kolom}" fuq {rij} falla ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Il-barriera tidher koperta iżda mhix.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'L-element bowtie "{element}" jirreferi għall-miżura "{maatregel}", li ma teżistix.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Punteġġi barra mill-iskala jfixklu l-RPN, il-probabbiltà×impatt u kull projezzjoni li tiddependi fuqhom.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Il-kolonna derivata turi "—" — il-marka tibqa’ iżda ma tgħoddx.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Il-kopja ma tistax terġa’ tinbena mingħajr is-sors — it-tfiriġ jew it-tħassir hija l-għażla umana.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Iċ-ċelluli kkoinvolti huma mhux magħrufa — iċ-ċiklu jitkellem għażla umana dwar il-kalkolu intenzjonat.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Iċ-ċellula turi "—" — la 0, la numru qadim.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Il-validità ({geldigheid}) skadiet.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Ir-rabta ma tagħmel xejn; il-miżura ma tgħoddx għar-raġunament net.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Il-miżura tista’ tkun skadiet; punteġġi netti li jistrieħu fuqha jitolbu rivalutazzjoni.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Il-miżura tidher li tkopri riskju li ma jeżistix.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Il-valuri derivati maħżuna huma lura ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'L-iskala "{schaal}" mhix f’dan il-fajl u lanqas mhiex isem inkorporat.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'It-tabella ma turiex dak li l-formula tagħti issa — il-kalkolu mill-ġdid jikteb ir-riżultat, qatt l-input.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'It-tabella turi dak li s-sors ma jgħidx aktar — ir-riffriskar jibniha mill-ġdid mis-sors.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Il-vista ssemmi s-sors "{bron}", li mhux f’dan il-fajl.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Il-vista tiddevja mis-sors: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Formula tirreferi (indirettament) għal ruħha.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Punteġġ illiġibbli jgħodd bħala ċifra mhux affidabbli, mhux bħala żero.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Barriera preventiva fuq il-lemin ma tmitiga xejn — il-passaġġ imbagħad jirrakkonta storja oħra.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'M’hemmx evidenza li l-miżura taħdem — punteġġi netti li jappoġġjaw fuqha huma skoperti.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Il-formula fuq "{kolom}" ma tistax titqara: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'L-element jinsab barra kull storja ta’ passaġġ — ma jgħodd imkien.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Mhux ċar jekk din il-barriera tkoprix xi ħaġa.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Il-passaġġ huwa abbozz — mhux kopertura kompluta biex tesporta jew tippreżenta.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Ir-riskju residwu mhux substantjat — esportazzjoni tissuġġerixxi aktar ċertezza milli hemm.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Punteġġ nett mingħajr miżura ttestjata/li taħdem jew raġunament net.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Il-passaġġ "{pad}" jonqos: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Il-linja {n} m’għandhiex ID.',
+  'Rij {n} heeft geen pad.': 'Il-linja {n} m’għandhiex passaġġ.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Ir-rwol "{rol}" ma jappartjenix lin-naħa "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Ir-rwol "{rol}" mhuwiex rwol bowtie magħruf.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Il-punteġġ {waarde} għal {kolom} jaqa’ barra l-iskala 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Il-punteġġi ma jistgħux jiġu vverifikati sakemm l-iskala tonqos.',
+  'Status "{status}" is geen bekend token.':
+      'L-istatus "{status}" mhux token magħruf.',
+  'Status "{status}" zonder toetsdatum.':
+      'Status "{status}" mingħajr data tat-test.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Jirreferi għall-miżura "{maatregel}", li ma teżistix.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Jirreferi għar-riskju "{risico}", li ma jeżistix.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Ir-referenzi għal "{id}" huma ambigwi: liema ringiela hija intenzjonata hija għażla umana.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Mingħajr ID xejn ma jista’ jindirizza din il-linja — il-visti, il-miżuri u l-kontroll innifsu jaqbżuha.',
+  'deling door nul': 'qasma b’żero',
+  'rij {n}': 'linja {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'linja {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'linja {r} kolonna {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} oħra)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} oħra',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), ċwievet tal-kolonna, ċavetta@ID, sum avg min max count wsum. Mhux magħruf qatt ma huwa 0.',
+  'Afgeleide cel overschreven': 'Cella derivata miktuba fuq',
+  'Afgeleide kolom': 'Kolonna derivata',
+  'Als risicoregister markeren…': 'Immarka bħala reġistru tar-riskji…',
+  'Beoordelaar (naam/rol)': 'Assessjar (isem/rwol)',
+  'Beoordelingsschaal': 'Skala ta\' valutazzjoni',
+  'Berekening toevoegen': 'Żid kalkolu',
+  'Berekening…': 'Kalkolu…',
+  'Blokkerende fouten': 'Żbalji blokanti',
+  'Bowtie-model': 'Mudell bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Gross — biss l-istima oriġinali',
+  'Concept — pad mist': 'Abbozz — mogħdija nieqsa',
+  'De brontabel van deze weergave is niet gevonden.':
+      'It-tabella tas-sors ta\' din il-viżjoni ma nstabx.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'If-ċifri mhumiex affidabbli sakemm dawn jeżistu.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Il-formola għadha ma marretx — x\'kienet l-intenzjoni?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Din il-kolonna ssir kolonna ordinarja: iċ-ċelloli iżommu l-aħħar valur ikkalkulat tagħhom bħala test sempliċi.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Din il-projezzjoni ma tajbitx mal-metodu tas-sors.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Din it-tabella m\'għandhiex ringieli li jistgħu jirreġistraw bħala riskju.',
+  'Diagram': 'Dijagramma',
+  'Doel van de beoordeling': 'L-għan tal-valutazzjoni',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Theddid, ostakoli u konsegwenzi madwar avveniment wieħed',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Stima sempliċi: kemm probabbli × kemm kbira l-konsegwenza',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Tabella vojta għal miżuri b\'fażi taż-żminijiet',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Jekk tesporta xorta, il-fajl joħroġ bħala abbozz b\'ċifri mhux ċerti — iftaħ il-ħarsa ġenerali biex tirranġahom l-ewwel.',
+  'Expressie': 'Espressjoni',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Modi ta\' nuqqas b\'severità, probabbiltà u skoperta (S×O×D)',
+  'Formule bewerken': 'Editja l-formola',
+  'Formule vervangen': 'Sostituwixxi l-formola',
+  'Formule verwijderen': 'Neħħi l-formola',
+  'Formule verwijderen?': 'Tneħħi l-formola?',
+  'Ga naar': 'Mur għal',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Ebda konstatament — l-ID, il-punteġġi u l-viżjonijiet marbuta huma korretti.',
+  'Gekoppelde weergave': 'Viżjoni marbuta',
+  'Gekoppelde weergave toevoegen': 'Żid viżjoni marbuta',
+  'Gekoppelde weergave…': 'Viżjoni marbuta…',
+  'Herberekenen': 'Ikkalkula mill-ġdid',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Kontenut biex jiġi rivedut; wieħed għandu buttuna ta\' tiswija sikura.',
+  'Je typte in een berekende kolom': 'Kitebt f\'kolonna kkalkolata',
+  'Kans × impact': 'Probabbiltà × impatt',
+  'Loskoppelen als momentopname': 'Aqla\' bħala snapshot',
+  'Maatregelenregister': 'Reġistru tal-miżuri',
+  'Maatregelenregister toevoegen': 'Żid reġistru tal-miżuri',
+  'Marker verwijderen': 'Neħħi l-markatur',
+  'Markeren': 'Immarka',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Nett — biss l-istima wara l-miżuri',
+  'Nieuw risicodossier': 'Dossier ġdid tar-riskji',
+  'Onbetrouwbare risico-cijfers in export':
+      'Ċifri tar-riskju mhux affidabbli fl-esportazzjoni',
+  'Overzicht — bruto én netto naast elkaar':
+      'Ħarsa ġenerali — gross u nett ġenub ma\' ġenub',
+  'Pad toevoegen': 'Żid mogħdija',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prijorità — ordnat skont il-punteġġ, imbagħad skont is-severità',
+  'Risico-kwaliteitscontrole': 'Kontroll tal-kwalità tar-riskju',
+  'Risicodossier…': 'Dossier tar-riskji…',
+  'Risicoregister': 'Reġistru tar-riskji',
+  'Tabel als risicoregister markeren':
+      'Immarka t-tabella bħala reġistru tar-riskji',
+  'Terugzetten': 'Erġa\' lura',
+  'Verversen': 'Aġġorna',
+  'Vrij meenemen': 'Ħu b\'mod liberu',
+  'Wat beoordeel je en waarvoor?': 'X\'qed tivvaluta u għal xiex?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Assenja liema kolonna għandha liema tifsira. Kolonni mingħajr tifsira jibqgħu kolonni ħielsa — xejn ma jintilef. Ringieli mingħajr ID jieħu numru R.',
+  'blokkerende bevinding(en):': 'konstatament(i) blokanti:',
+  'bron': 'sors',
+  'schaal': 'skala',
+  'Geen bewerkbare tabel op deze pagina':
+      'L-ebda tabella editabbli f\'din il-paġna',
+  'Presentatie afsluiten': 'Agħlaq il-preżentazzjoni',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Saru bidliet matul is-sessjoni. X\'għandu jsir bihom?',
+  'Verwerpen': 'Armi',
+  'Bewaren als kopie': 'Issejvja bħala kopja',
+  'Bewaren in document': 'Issejvja fid-dokument',
+  'beamer': 'proġettur',
+  'beamer: niet bereikbaar': 'proġettur: mhux milħuq',
+  'Bewerken sluiten (Esc)': 'Agħlaq l-editjar (Esc)',
+  'Presenteer document…': 'Ippreżenta d-dokument…',
+  'Presenteer document': 'Ippreżenta d-dokument',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Immarka liema tabelli jistgħu jiġu editjati direttament matul il-preżentazzjoni. Il-kontenut l-ieħor kollu jibqa biss għall-qari.',
   'Extra ruimte': 'Spazju żejjed',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Din in-nota hi itwal mill-paġna — skrollja għall-bqija',

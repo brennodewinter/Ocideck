@@ -1605,6 +1605,192 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" förekommer två gånger (även på rad {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" är inte ett tal för {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Beräkningen "{kolom}" på {rij} misslyckades ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Barriären ser täckt ut men är det inte.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie-elementet "{element}" hänvisar till åtgärd "{maatregel}", som inte finns.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Poäng utanför skalan förvränger RPN, sannolikhet×påverkan och varje projektion som räknar på dem.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Den härledda kolumnen visar "—" — markören bevaras men räknas inte.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Avskriften kan inte återskapas utan sin källa — att koppla loss eller ta bort är det mänskliga valet.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'De berörda cellerna är okända — cykeln kräver ett mänskligt beslut om den avsedda beräkningen.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Cellen visar "—" — ingen 0, inget gammalt tal.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Giltigheten ({geldigheid}) har löpt ut.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Länken gör ingenting; åtgärden räknas inte till nettomotiveringen.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Åtgärden kan ha löpt ut; nettopoäng som vilar på den behöver omprövas.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Åtgärden verkar täcka en risk som inte finns.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'De lagrade härledda värdena ligger efter ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Skalan "{schaal}" finns inte i den här filen och är inte heller ett inbyggt namn.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabellen visar inte vad formeln nu ger — att räkna om skriver över resultatet, aldrig indatan.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabellen visar vad källan inte längre säger — att uppdatera bygger om den från källan.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Vyn anger källan "{bron}", som inte finns i den här filen.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Vyn avviker från källan: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'En formel refererar (indirekt) till sig själv.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'En oläslig poäng räknas som ett opålitligt värde, inte som noll.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'En preventiv barriär till höger mildrar ingenting — vägen berättar då en annan historia.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Det finns inget bevis för att åtgärden fungerar — nettopoäng som bygger på den är otäckta.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formeln på "{kolom}" är inte läsbar: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Elementet ligger utanför varje vägs berättelse — det räknas ingenstans.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Det är oklart om denna barriär täcker något.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Vägen är en skiss — ingen komplett täckning att exportera eller presentera med.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Restrisken är inte underbyggd — en export skulle då antyda större säkerhet än vad som finns.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Nettopoäng utan testad/fungerande åtgärd eller nettomotivering.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Vägen "{pad}" saknar: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Rad {n} har inget ID.',
+  'Rij {n} heeft geen pad.': 'Rad {n} har ingen väg.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Rollen "{rol}" hör inte till sidan "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Rollen "{rol}" är inte en känd bowtie-roll.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Poängen {waarde} för {kolom} ligger utanför skalan 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Poängen kan inte granskas så länge skalan saknas.',
+  'Status "{status}" is geen bekend token.':
+      'Statusen "{status}" är inte en känd token.',
+  'Status "{status}" zonder toetsdatum.': 'Status "{status}" utan testdatum.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Hänvisar till åtgärd "{maatregel}", som inte finns.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Hänvisar till risk "{risico}", som inte finns.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Hänvisningar till "{id}" är tvetydiga: vilken rad som avses är ett mänskligt val.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Utan ID kan inget adressera denna rad — vyer, åtgärder och själva kontrollen hoppar över den.',
+  'deling door nul': 'division med noll',
+  'rij {n}': 'rad {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'rad {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'rad {r} kolumn {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} fler)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} fler',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), kolumnnycklar, nyckel@ID, sum avg min max count wsum. Okänt är aldrig 0.',
+  'Afgeleide cel overschreven': 'Härledd cell överskriven',
+  'Afgeleide kolom': 'Härledd kolumn',
+  'Als risicoregister markeren…': 'Markera som riskregister…',
+  'Beoordelaar (naam/rol)': 'Bedömare (namn/roll)',
+  'Beoordelingsschaal': 'Bedömningsskala',
+  'Berekening toevoegen': 'Lägg till beräkning',
+  'Berekening…': 'Beräkning…',
+  'Blokkerende fouten': 'Blockerande fel',
+  'Bowtie-model': 'Bowtie-modell',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Brutto — endast den ursprungliga bedömningen',
+  'Concept — pad mist': 'Utkast — sökväg saknas',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Källtabellen för den här vyn hittades inte.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Siffrorna är inte tillförlitliga så länge dessa finns kvar.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formeln är inte borta ännu — vad var avsikten?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Den här kolumnen blir en vanlig kolumn: cellerna behåller sitt senast beräknade värde som oformaterad text.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Den här projektionen passar inte källans metod.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Den här tabellen har inga rader att registrera som risk.',
+  'Diagram': 'Diagram',
+  'Doel van de beoordeling': 'Syftet med bedömningen',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Hot, barriärer och konsekvenser kring en händelse',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'En enkel uppskattning: hur sannolikt × hur stor konsekvensen',
+  'Een lege tabel voor maatregelen met levensfase':
+      'En tom tabell för åtgärder med livscykelfas',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Exporterar du ändå går filen ut som utkast med osäkra siffror — öppna översikten för att åtgärda dem först.',
+  'Expressie': 'Uttryck',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Fellägen med allvar, sannolikhet och detektion (S×O×D)',
+  'Formule bewerken': 'Redigera formel',
+  'Formule vervangen': 'Ersätt formel',
+  'Formule verwijderen': 'Ta bort formel',
+  'Formule verwijderen?': 'Ta bort formel?',
+  'Ga naar': 'Gå till',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Inga fynd — ID:n, poäng och länkade vyer stämmer.',
+  'Gekoppelde weergave': 'Länkad vy',
+  'Gekoppelde weergave toevoegen': 'Lägg till länkad vy',
+  'Gekoppelde weergave…': 'Länkad vy…',
+  'Herberekenen': 'Beräkna om',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Innehåll att granska; ett har en säker reparationsknapp.',
+  'Je typte in een berekende kolom': 'Du skrev i en beräknad kolumn',
+  'Kans × impact': 'Sannolikhet × påverkan',
+  'Loskoppelen als momentopname': 'Koppla loss som ögonblicksbild',
+  'Maatregelenregister': 'Åtgärdsregister',
+  'Maatregelenregister toevoegen': 'Lägg till åtgärdsregister',
+  'Marker verwijderen': 'Ta bort markör',
+  'Markeren': 'Markera',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Netto — endast bedömningen efter åtgärder',
+  'Nieuw risicodossier': 'Ny riskdossier',
+  'Onbetrouwbare risico-cijfers in export':
+      'Otillförlitliga risksiffror i exporten',
+  'Overzicht — bruto én netto naast elkaar':
+      'Översikt — brutto och netto sida vid sida',
+  'Pad toevoegen': 'Lägg till sökväg',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritet — sorterad efter poäng, sedan efter allvar',
+  'Risico-kwaliteitscontrole': 'Riskkvalitetskontroll',
+  'Risicodossier…': 'Riskdossier…',
+  'Risicoregister': 'Riskregister',
+  'Tabel als risicoregister markeren': 'Markera tabell som riskregister',
+  'Terugzetten': 'Återställ',
+  'Verversen': 'Uppdatera',
+  'Vrij meenemen': 'Ta med fritt',
+  'Wat beoordeel je en waarvoor?': 'Vad bedömer du, och för vad?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Tilldela vilken kolumn som har vilken betydelse. Kolumner utan betydelse förblir fria kolumner — inget går förlorat. Rader utan ID får ett R-nummer.',
+  'blokkerende bevinding(en):': 'blockerande fynd:',
+  'bron': 'källa',
+  'schaal': 'skala',
+  'Geen bewerkbare tabel op deze pagina':
+      'Ingen redigerbar tabell på den här sidan',
+  'Presentatie afsluiten': 'Avsluta presentationen',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Ändringar har gjorts under sessionen. Vad ska hända med dem?',
+  'Verwerpen': 'Kassera',
+  'Bewaren als kopie': 'Spara som kopia',
+  'Bewaren in document': 'Spara i dokumentet',
+  'beamer': 'projektor',
+  'beamer: niet bereikbaar': 'projektor: ej nåbar',
+  'Bewerken sluiten (Esc)': 'Stäng redigering (Esc)',
+  'Presenteer document…': 'Presentera dokument…',
+  'Presenteer document': 'Presentera dokument',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Markera vilka tabeller som får redigeras live under presentationen. Allt annat innehåll förblir skrivskyddat.',
   'Extra ruimte': 'Extra utrymme',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Den här noten är längre än sidan — scrolla för resten',

@@ -1621,6 +1621,193 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" bis occurrit (etiam in linea {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" non est numerus pro {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Computatio "{kolom}" in {rij} defecit ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Claustrum tectum videtur sed non est.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Elementum bowtie "{element}" refert ad mensuram "{maatregel}", quae non est.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Notae extra scalam RPN, probabilitatem×effectum et omnem proiectionem turbant.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Columna derivata "—" ostendit — signum manet sed non numeratur.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Exemplum sine fonte restitui non potest — solvere aut delere est electio humana.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Cellulae implicatae ignotae sunt — cyclus electionem humanam de computatione destinata postulat.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Cella "—" ostendit — non 0, non numerus vetus.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Validitas ({geldigheid}) exspirata est.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Nexus nihil agit; mensura in ratione neta non numeratur.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Mensura exspirata esse potest; notae netae in ea innixae reexamen postulant.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Mensura periculum quod non est tegere videtur.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Valores derivati repositi cunctantur ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Scala "{schaal}" non in hoc fasciculo est nec nomen inaedificatum.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabula non ostendit quid formula nunc producat — recalculatio effectum rescribit, numquam ingressum.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabula ostendit quod fons iam non dicit — refricatio eam e fonte restruit.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Visus fontem "{bron}" nominat, qui in hoc fasciculo non est.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Visus a fonte discedit: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Formula (indirecte) ad se ipsam refert.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Nota illegibilis ut numerus infidelis numeratur, non ut nihil.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Claustrum praeventivum dextrorsum nihil mitigat — iter aliam narrationem narrat.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Nullum argumentum est mensuram operari — notae netae in ea innixae detectae sunt.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formula in "{kolom}" legi non potest: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Elementum extra omnem narrationem itineris stat — nusquam numeratur.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Incertum est num hoc claustrum quid tegat.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Iter adumbratio est — non tegmen completum ad exportandum vel praesentandum.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Periculum residuum non sustentatur — exportatio tum plus certitudinis suggereret quam est.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Nota neta sine mensura probata/operante aut ratione neta.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Itineri "{pad}" deest: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Linea {n} ID non habet.',
+  'Rij {n} heeft geen pad.': 'Linea {n} iter non habet.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Persona "{rol}" non ad latus "{zijde}" pertinet.',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Persona "{rol}" non est persona bowtie cognita.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Nota {waarde} pro {kolom} extra scalam 1–{max} cadit.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Notae probari non possunt dum scala deest.',
+  'Status "{status}" is geen bekend token.':
+      'Status "{status}" non est tessera cognita.',
+  'Status "{status}" zonder toetsdatum.':
+      'Status "{status}" sine die probationis.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Refert ad mensuram "{maatregel}", quae non est.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Refert ad periculum "{risico}", quod non est.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Reference ad "{id}" incertae sunt: quae linea destinata sit electio humana est.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Sine ID nihil hanc lineam appellare potest — visus, mensurae et ipsa probatio eam praetereunt.',
+  'deling door nul': 'divisio per nihil',
+  'rij {n}': 'linea {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'linea {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'linea {r} columna {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} plures)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} plures',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), claves columnae, clavis@ID, sum avg min max count wsum. Ignotum numquam est 0.',
+  'Afgeleide cel overschreven': 'Cella derivata superscripta',
+  'Afgeleide kolom': 'Columna derivata',
+  'Als risicoregister markeren…': 'Signa ut registrum periculorum…',
+  'Beoordelaar (naam/rol)': 'Aestimator (nomen/munus)',
+  'Beoordelingsschaal': 'Scala aestimationis',
+  'Berekening toevoegen': 'Adde computationem',
+  'Berekening…': 'Computatio…',
+  'Blokkerende fouten': 'Errores obstantes',
+  'Bowtie-model': 'Exemplar bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Grossum — sola aestimatio primaeva',
+  'Concept — pad mist': 'Draft — orbita deest',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Tabula fons huius conspectus non inventa est.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Numeri fide digni non sunt quamdiu hi manent.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formula nondum ablata est — quid erat propositum?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Haec columna fit columna ordinaria: cellulae ultimum valorem computatum ut textum planum servant.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Haec proiectio methodo fontis non convenit.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Haec tabula versus nullos habet qui ut periculum recorderentur.',
+  'Diagram': 'Diagramma',
+  'Doel van de beoordeling': 'Propositum aestimationis',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Minae, claustra et eventa circa unum accidens',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Aestimatio simplex: quam probabile × quam magnum effectum',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Tabula vacua remediis cum stadio vitae',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Si tamen exportas, fasciculus ut draft cum numeris incertis exit — conspectum aperi ut eos prius restituas.',
+  'Expressie': 'Expressio',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Modi defectus cum severitate, occurrentia et detectione (S×O×D)',
+  'Formule bewerken': 'Recense formulam',
+  'Formule vervangen': 'Substitue formulam',
+  'Formule verwijderen': 'Remove formulam',
+  'Formule verwijderen?': 'Formulam removene?',
+  'Ga naar': 'Vade ad',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Nulla inventa — ID, puncta et conspectus conexi recte sunt.',
+  'Gekoppelde weergave': 'Conspectus conexus',
+  'Gekoppelde weergave toevoegen': 'Adde conspectum conexum',
+  'Gekoppelde weergave…': 'Conspectus conexus…',
+  'Herberekenen': 'Recomputa',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Materia recognoscenda; unus habet puga restitutionis tuta.',
+  'Je typte in een berekende kolom': 'In columna computata scripsisti',
+  'Kans × impact': 'Probabilitas × effectus',
+  'Loskoppelen als momentopname': 'Disiunge ut instantaneum',
+  'Maatregelenregister': 'Registrum remediorum',
+  'Maatregelenregister toevoegen': 'Adde registrum remediorum',
+  'Marker verwijderen': 'Remove notam',
+  'Markeren': 'Signa',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Netum — sola aestimatio post remedia',
+  'Nieuw risicodossier': 'Novum fasciculus periculi',
+  'Onbetrouwbare risico-cijfers in export':
+      'Numeri periculi infideles in exportatione',
+  'Overzicht — bruto én netto naast elkaar':
+      'Conspectus — grossum et netum iuxta',
+  'Pad toevoegen': 'Adde orbitam',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritas — ordinata per punctum, deinde per severitatem',
+  'Risico-kwaliteitscontrole': 'Qualitatis periculi inspectio',
+  'Risicodossier…': 'Fasciculus periculi…',
+  'Risicoregister': 'Registrum periculorum',
+  'Tabel als risicoregister markeren': 'Tabulam signa ut registrum periculorum',
+  'Terugzetten': 'Restitue',
+  'Verversen': 'Renova',
+  'Vrij meenemen': 'Libere porta',
+  'Wat beoordeel je en waarvoor?': 'Quid aestimas, et cui rei?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Adscribe cui columnae quae significatio sit. Columnae sine significatione liberae manent — nihil perit. Versus sine ID numerum R accipiunt.',
+  'blokkerende bevinding(en):': 'inventum/a obstans/ia:',
+  'bron': 'fons',
+  'schaal': 'scala',
+  'Geen bewerkbare tabel op deze pagina':
+      'Nulla tabula mutabilis in hac pagina',
+  'Presentatie afsluiten': 'Praesentationem claude',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'In sessione mutationes factae sunt. Quid his fieri debet?',
+  'Verwerpen': 'Abiice',
+  'Bewaren als kopie': 'Serva ut exemplar',
+  'Bewaren in document': 'Serva in documento',
+  'beamer': 'projectorium',
+  'beamer: niet bereikbaar': 'projectorium: non pervenibile',
+  'Bewerken sluiten (Esc)': 'Claude recensionem (Esc)',
+  'Presenteer document…': 'Praesenta documentum…',
+  'Presenteer document': 'Praesenta documentum',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Elige quae tabulae per praesentationem vivae mutari possint. Cetera omnia legenda tantum manent.',
   'Extra ruimte': 'Spatium extra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Haec nota longior est quam pagina — volumen verte pro reliquo',

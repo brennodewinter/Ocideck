@@ -1,6 +1,6 @@
 // Tests voor de gekoppelde tabelweergaven uit #2489: materialisatie uit de
 // bron, sorteren/filteren, gen-hint versus echte celvergelijking, en de
-/// schrijfroutes (nieuw maken, verversen).
+// schrijfroutes (nieuw maken, verversen).
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/ocideck_marked_table.dart';
@@ -131,7 +131,7 @@ void main() {
       );
       // De fixturetabel heet ki; bouw hem uit de li-bron.
       final source = '$li\n';
-      final t = scanOciMarkedTables(source + 'x').tables.first;
+      final t = scanOciMarkedTables('${source}x').tables.first;
       expect(t.id, 'ki');
       final rows = ociViewMaterialize(
         RiskDossier.read(li),

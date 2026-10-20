@@ -1609,6 +1609,192 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" chunnt zwee mol vor (au uf Zeile {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" isch kei Zahl für {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Berechnig "{kolom}" uf {rij} fählgschlage ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'D Barrière gseht deckt us, isch aber nöd.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'S Bowtie-Element "{element}" verwiist uf d Maßnahm "{maatregel}", wo’s nöd git.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Scores usserhalb vo de Skala verzerrde RPN, Woorschinlichkeit×Würchig ond jedi Projektion wo druf zellt.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'D abgleiteti Spalte zeigt "—" — d Markierig blibt, zellt aber nöd mit.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'D Abschrift cha ohni Quälli nöd wiederhärgestellt wärde — Abchopple oder Lösche isch d menschlichi Wahl.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'D betroffene Zälle sind unbekannt — de Zyklus verlangt e menschlichi Entscheidig über d beabsichtigti Berechnig.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'D Zäll zeigt "—" — kei 0, kei alti Zahl.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'D Gültigkeit ({geldigheid}) isch abgloffe.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'D Verchäpflig macht nüt; d Maßnahm zellt nöd für d Netto-Begründig.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'D Maßnahm cha verfalle sii; Netto-Scores wo druf rueh bruuched e Neubeurteilig.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'D Maßnahm gseht us, als deck si es Risiko wo’s nöd git.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'D gspicherete abgleitete Wärt hindedra hinke ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'D Skala "{schaal}" isch nöd i dere Datei und au kei yybouti Name.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'D Tabelle zeigt nöd, was d Formel jetzt ergit — Neuberechne schribt s Ergebnis nööch, nie d Yygab.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'D Tabelle zeigt, was d Quälli nüme seit — Verfrische bout si us de Quälli nöi uf.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'D Aasicht nennt Quälli "{bron}", wo nöd i dere Datei isch.',
+  'De weergave wijkt af van de bron: {details}.':
+      'D Aasicht wicht vo de Quälli ab: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'E Formel verwiist (indirekt) uf sich sälber.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'En unläsbara Score zellt als unzuverlässigi Zahl, nöd als Null.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'E präventivi Barrière rechts mildert nüt — de Wäg verzellt denn e andri Gschicht.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Es git kei Bewys, dass d Maßnahm wirkt — Netto-Scores wo druf basiered sind ungedeckt.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'D Formel uf "{kolom}" isch nöd läsbar: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'S Element staht usserhalb vo jedere Wäggschicht — s zellt nirgends mit.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Es isch unklar, öb die Barrière öppis deckt.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'De Wäg isch e Skizzi — kei vollständigi Deckig zum Exportiere oder Präsentiere.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'S Restrisiko isch nöd begründet — en Export würd denn meh Sicherheit suggeriere, als es git.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Netto-Score ohni gtesteti/funktionierendi Maßnahm oder Netto-Begründig.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Wäg "{pad}" fählt: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Zile {n} het kei ID.',
+  'Rij {n} heeft geen pad.': 'Zile {n} het kei Wäg.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'D Rolle "{rol}" ghöört nöd uf Siti "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'D Rolle "{rol}" isch kei bekannti Bowtie-Rolle.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'De Score {waarde} für {kolom} lit usserhalb vo de Skala 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Scores chönd nöd gprüeft wärde, solang d Skala fählt.',
+  'Status "{status}" is geen bekend token.':
+      'De Status "{status}" isch kei bekanntes Token.',
+  'Status "{status}" zonder toetsdatum.': 'Status "{status}" ohni Prüefdatum.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Verwiist uf d Maßnahm "{maatregel}", wo’s nöd git.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Verwiist ufs Risiko "{risico}", wo’s nöd git.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Verwys uf "{id}" sind unklar: weli Zile gmeint isch, isch e menschlichi Entscheidig.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Ohni ID cha nüt die Zile adrässiere — Aasichte, Maßnahme und d Prüefig sälber überspringed si.',
+  'deling door nul': 'Division dur Null',
+  'rij {n}': 'Zile {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'Zile {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'Zile {r} Spalte {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} meh)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} meh',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), Spalteschlüssel, Schlüssel@ID, sum avg min max count wsum. Unbekannt isch nie 0.',
+  'Afgeleide cel overschreven': 'Abglaiteti Zäll überschribe',
+  'Afgeleide kolom': 'Abglaiteti Spalte',
+  'Als risicoregister markeren…': 'Als Risikoregischter markiere…',
+  'Beoordelaar (naam/rol)': 'Bewärter (Name/Rolle)',
+  'Beoordelingsschaal': 'Bewärtigsskala',
+  'Berekening toevoegen': 'Berächnig zuefüege',
+  'Berekening…': 'Berächnig…',
+  'Blokkerende fouten': 'Blockierendi Fähler',
+  'Bowtie-model': 'Bowtie-Modäll',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Brutto — nume d urschprünglichi Yschätzig',
+  'Concept — pad mist': 'Entwurf — Pfad fählt',
+  'De brontabel van deze weergave is niet gevonden.':
+      'D Quälltabälle vo dere Aasicht isch nöd gfunde worde.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'D Zahle sind nöd verlässlich, solang die da sind.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'D Formel isch no nöd wäg — was isch d Absicht gsi?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Die Spalte wird e gwöhnlichi Spalte: d Zälle bhalte ire letscht berächnet Wärt als flachi Tekscht.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Die Projäkzion passt nöd zur Methode vo de Quäll.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Die Tabälle het kei Zile, wo me as Risiko feschthalte chönnt.',
+  'Diagram': 'Diagramm',
+  'Doel van de beoordeling': 'Zwäck vo de Bewärtig',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Drohige, Barrière und Konsequänze um es Ereignis',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'E eifachi Yschätzig: wie wahrschinli × wie gross d Folg',
+  'Een lege tabel voor maatregelen met levensfase':
+      'E lääri Tabälle für Maßnahme mit Läbensphase',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Exportiersch trotzdem, goot d Datei als Entwurf mit unsichere Zahle use — öffne d Übersicht, zum se zersch z berichtige.',
+  'Expressie': 'Usdruck',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Fählermoduse mit Schwäri, Uftrete und Entdeckig (S×O×D)',
+  'Formule bewerken': 'Formel bearbeite',
+  'Formule vervangen': 'Formel ersetze',
+  'Formule verwijderen': 'Formel entfärne',
+  'Formule verwijderen?': 'Formel entfärne?',
+  'Ga naar': 'Gang zu',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Kei Befund — IDs, Wärt und verlinkti Aasichte stimmed.',
+  'Gekoppelde weergave': 'Verlinkti Aasicht',
+  'Gekoppelde weergave toevoegen': 'Verlinkti Aasicht zuefüege',
+  'Gekoppelde weergave…': 'Verlinkti Aasicht…',
+  'Herberekenen': 'Nöi berächne',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Inhaltlich zum nooluege; eine het e sicheri Reparatur-Chnopf.',
+  'Je typte in een berekende kolom': 'Du hesch in e berächneti Spalte tippt',
+  'Kans × impact': 'Wahrschinlichkeit × Uswirkig',
+  'Loskoppelen als momentopname': 'Als Schnappschuss löse',
+  'Maatregelenregister': 'Maßnameregischter',
+  'Maatregelenregister toevoegen': 'Maßnameregischter zuefüege',
+  'Marker verwijderen': 'Markär entfärne',
+  'Markeren': 'Markiere',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Netto — nume d Yschätzig nach Maßnahme',
+  'Nieuw risicodossier': 'Nöis Risikodossier',
+  'Onbetrouwbare risico-cijfers in export':
+      'Unzuverlässigi Risikozahle im Export',
+  'Overzicht — bruto én netto naast elkaar':
+      'Übersicht — Brutto und Netto näbenand',
+  'Pad toevoegen': 'Pfad zuefüege',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Priorität — sortiert nach Wärt, denn nach Schwäri',
+  'Risico-kwaliteitscontrole': 'Risiko-Qualitätskontrolle',
+  'Risicodossier…': 'Risikodossier…',
+  'Risicoregister': 'Risikoregischter',
+  'Tabel als risicoregister markeren': 'Tabälle als Risikoregischter markiere',
+  'Terugzetten': 'Zruggsetze',
+  'Verversen': 'Aktualisiere',
+  'Vrij meenemen': 'Frej übernäh',
+  'Wat beoordeel je en waarvoor?': 'Was bewärtisch, und wafer?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Wys zue, welli Spalte welli Bedütig het. Spalte ohni Bedütig blibe freji Spalte — nüt goot verlore. Zile ohni ID überchömme e R-Nummere.',
+  'blokkerende bevinding(en):': 'blockierendi Befund:',
+  'bron': 'Quäll',
+  'schaal': 'Skala',
+  'Geen bewerkbare tabel op deze pagina':
+      'Kei bearbeitbari Tabälle uf dere Siite',
+  'Presentatie afsluiten': 'Präsentation beände',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Während de Sitzig sind Änderige gmacht worde. Was sött demit gscheh?',
+  'Verwerpen': 'Verwärfe',
+  'Bewaren als kopie': 'Als Kopie spichere',
+  'Bewaren in document': 'Im Dokumänt spichere',
+  'beamer': 'Beamer',
+  'beamer: niet bereikbaar': 'Beamer: nöd erreichbar',
+  'Bewerken sluiten (Esc)': 'Bearbeite beände (Esc)',
+  'Presenteer document…': 'Dokumänt präsentiere…',
+  'Presenteer document': 'Dokumänt präsentiere',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Häckele aa, welli Tabälle während de Präsentation live bearbeitet wärde dörfed. Alli ander Inhalt blybed nume lesbar.',
   'Extra ruimte': 'Zuesätzliche Abstand',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Die Anmerkig isch länger als s Blatt — für de Rescht scrolle',

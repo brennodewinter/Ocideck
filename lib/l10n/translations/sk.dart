@@ -1612,6 +1612,191 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" sa vyskytuje dvakrát (aj na riadku {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" nie je číslo pre {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Výpočet "{kolom}" na {rij} zlyhal ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Bariéra vyzerá pokrytá, ale nie je.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Prvok bowtie "{element}" odkazuje na opatrenie "{maatregel}", ktoré neexistuje.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Skóre mimo škály narúša RPN, pravdepodobnosť×dopad a každú projekciu, ktorá na ne spolieha.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Odvodený stĺpec zobrazuje "—" — značka zostáva, ale nepočíta sa.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Kopírovanie sa bez zdroja nedá obnoviť — odpojenie alebo zmazanie je ľudské rozhodnutie.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Dotknuté bunky sú neznáme — cyklus vyžaduje ľudské rozhodnutie o zamýšľanom výpočte.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Bunka zobrazuje "—" — žiadna 0, žiadne staré číslo.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Platnosť ({geldigheid}) vypršala.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Odkaz nerobí nič; opatrenie sa do netto-zdôvodnenia nepočíta.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Opatrenie mohlo stratiť platnosť; netto skóre, ktoré na ňom stoja, si vyžaduje prehodnotenie.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Opatrenie zdanlivo kryje riziko, ktoré neexistuje.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Uložené odvodené hodnoty zaostávajú ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Škála "{schaal}" nie je v tomto súbore a nie je to ani vstavaný názov.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabuľka neukazuje, čo vzorec teraz produkuje — prepočet prepíše výsledok, nikdy vstup.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabuľka ukazuje, čo zdroj už nehovorí — obnovenie ju znova vybuduje zo zdroja.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Pohľad uvádza zdroj "{bron}", ktorý v tomto súbore nie je.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Pohľad sa líši od zdroja: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Vzorec sa odvoláva (nepriamo) sám na seba.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Nečitateľné skóre sa počíta ako nespoľahlivé číslo, nie ako nula.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Preventívna bariéra vpravo nič nezmierňuje — cesta potom rozpráva iný príbeh.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Neexistuje dôkaz, že opatrenie funguje — netto skóre, ktoré na ňom stoja, sú nekryté.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Vzorec na "{kolom}" sa nedá prečítať: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Prvok stojí mimo každého príbehu cesty — nepočíta sa nikde.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Nie je jasné, či táto bariéra niečo pokrýva.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Cesta je náčrt — nie úplné pokrytie na export či prezentáciu.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Reziduálne riziko nie je podložené — export by potom naznačoval väčšiu istotu, než existuje.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Netto skóre bez overeného/funkčného opatrenia alebo netto zdôvodnenia.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Ceste "{pad}" chýba: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Riadok {n} nemá ID.',
+  'Rij {n} heeft geen pad.': 'Riadok {n} nemá cestu.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Rola "{rol}" nepatrí na stranu "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Rola "{rol}" nie je známa bowtie rola.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Skóre {waarde} pre {kolom} je mimo škály 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Skóre sa nedá overiť, kým chýba škála.',
+  'Status "{status}" is geen bekend token.':
+      'Stav "{status}" nie je známy token.',
+  'Status "{status}" zonder toetsdatum.': 'Stav "{status}" bez dátumu testu.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Odkazuje na opatrenie "{maatregel}", ktoré neexistuje.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Odkazuje na riziko "{risico}", ktoré neexistuje.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Odkazy na "{id}" sú nejednoznačné: ktorý riadok je myslený, je ľudské rozhodnutie.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Bez ID nemôže nič osloviť tento riadok — pohľady, opatrenia aj samotná kontrola ho preskakujú.',
+  'deling door nul': 'delenie nulou',
+  'rij {n}': 'riadok {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'riadok {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'riadok {r} stĺpec {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} ďalších)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} ďalších',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), kľúče stĺpcov, kľúč@ID, sum avg min max count wsum. Neznáme nie je nikdy 0.',
+  'Afgeleide cel overschreven': 'Odvodená bunka prepísaná',
+  'Afgeleide kolom': 'Odvodený stĺpec',
+  'Als risicoregister markeren…': 'Označiť ako register rizík…',
+  'Beoordelaar (naam/rol)': 'Hodnotiteľ (meno/rola)',
+  'Beoordelingsschaal': 'Hodnotiaca škála',
+  'Berekening toevoegen': 'Pridať výpočet',
+  'Berekening…': 'Výpočet…',
+  'Blokkerende fouten': 'Blokujúce chyby',
+  'Bowtie-model': 'Model bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting': 'Hrubé — len pôvodný odhad',
+  'Concept — pad mist': 'Návrh — cesta chýba',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Zdrojová tabuľka tohto zobrazenia sa nenašla.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Čísla nie sú spoľahlivé, kým tieto existujú.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Vzorec ešte nezmizol — aký bol zámer?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Tento stĺpec sa stane obyčajným stĺpcom: bunky si ponechajú svoju poslednú vypočítanú hodnotu ako obyčajný text.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Táto projekcia nezodpovedá metóde zdroja.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Táto tabuľka nemá riadky na zaznamenanie ako riziko.',
+  'Diagram': 'Diagram',
+  'Doel van de beoordeling': 'Účel hodnotenia',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Hrozby, bariéry a následky okolo jednej udalosti',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Jednoduchý odhad: ako pravdepodobné × aký veľký následok',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Prázdna tabuľka pre opatrenia s fázou životného cyklu',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Ak napriek tomu exportujete, súbor odíde ako návrh s neistými číslami — otvorte prehľad a najskôr ich opravte.',
+  'Expressie': 'Výraz',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Režimy zlyhania so závažnosťou, výskytom a detekciou (S×O×D)',
+  'Formule bewerken': 'Upraviť vzorec',
+  'Formule vervangen': 'Nahradiť vzorec',
+  'Formule verwijderen': 'Odstrániť vzorec',
+  'Formule verwijderen?': 'Odstrániť vzorec?',
+  'Ga naar': 'Prejsť na',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Žiadne zistenia — ID, skóre a prepojené zobrazenia sú v poriadku.',
+  'Gekoppelde weergave': 'Prepojené zobrazenie',
+  'Gekoppelde weergave toevoegen': 'Pridať prepojené zobrazenie',
+  'Gekoppelde weergave…': 'Prepojené zobrazenie…',
+  'Herberekenen': 'Prepočítať',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Obsah na skontrolovanie; jeden má bezpečné tlačidlo opravy.',
+  'Je typte in een berekende kolom': 'Písali ste do vypočítaného stĺpca',
+  'Kans × impact': 'Pravdepodobnosť × vplyv',
+  'Loskoppelen als momentopname': 'Odpojiť ako snímku',
+  'Maatregelenregister': 'Register opatrení',
+  'Maatregelenregister toevoegen': 'Pridať register opatrení',
+  'Marker verwijderen': 'Odstrániť značku',
+  'Markeren': 'Označiť',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Čisté — len odhad po opatreniach',
+  'Nieuw risicodossier': 'Nový rizikový register',
+  'Onbetrouwbare risico-cijfers in export':
+      'Nespoločlivé rizikové čísla v exporte',
+  'Overzicht — bruto én netto naast elkaar':
+      'Prehľad — hrubé aj čisté vedľa seba',
+  'Pad toevoegen': 'Pridať cestu',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Priorita — zoradené podľa skóre, potom podľa závažnosti',
+  'Risico-kwaliteitscontrole': 'Kontrola kvality rizika',
+  'Risicodossier…': 'Rizikový register…',
+  'Risicoregister': 'Register rizík',
+  'Tabel als risicoregister markeren': 'Označiť tabuľku ako register rizík',
+  'Terugzetten': 'Vrátiť späť',
+  'Verversen': 'Obnoviť',
+  'Vrij meenemen': 'Voľne preniesť',
+  'Wat beoordeel je en waarvoor?': 'Čo hodnotíš a načo?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Priradiť, ktorý stĺpec má aký význam. Stĺpce bez významu zostávajú voľnými — nič sa nestráca. Riadky bez ID dostanú číslo R.',
+  'blokkerende bevinding(en):': 'blokujúce zistenie(a):',
+  'bron': 'zdroj',
+  'schaal': 'škála',
+  'Geen bewerkbare tabel op deze pagina':
+      'Na tejto stránke nie je žiadna upraviteľná tabuľka',
+  'Presentatie afsluiten': 'Ukončiť prezentáciu',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Počas relácie sa vykonali zmeny. Čo sa s nimi má stať?',
+  'Verwerpen': 'Zahodiť',
+  'Bewaren als kopie': 'Uložiť ako kópiu',
+  'Bewaren in document': 'Uložiť do dokumentu',
+  'beamer': 'projektor',
+  'beamer: niet bereikbaar': 'projektor: nedostupný',
+  'Bewerken sluiten (Esc)': 'Zavrieť úpravy (Esc)',
+  'Presenteer document…': 'Prezentovať dokument…',
+  'Presenteer document': 'Prezentovať dokument',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Začiarknite, ktoré tabuľky môžu byť počas prezentácie upravované naživo. Všetok ostatný obsah zostane iba na čítanie.',
   'Extra ruimte': 'Priestor navyše',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Táto poznámka je dlhšia ako stránka — posuňte sa pre zvyšok',

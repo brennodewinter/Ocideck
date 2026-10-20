@@ -1618,6 +1618,192 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" występuje dwa razy (także w wierszu {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" nie jest liczbą dla {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Obliczenie "{kolom}" w {rij} nie powiodło się ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Bariera wygląda na pokrytą, ale nie jest.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Element bowtie "{element}" odwołuje się do środka "{maatregel}", który nie istnieje.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Oceny poza skalą zaburzają RPN, prawdopodobieństwo×wpływ i każdą projekcję, która na nich polega.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Kolumna pochodna pokazuje "—" — znacznik zostaje, ale się nie liczy.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Kopii nie da się odbudować bez źródła — odpięcie lub usunięcie to ludzka decyzja.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Zaangażowane komórki są nieznane — cykl wymaga ludzkiej decyzji o zamierzonym obliczeniu.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Komórka pokazuje "—" — ani 0, ani stara liczba.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Ważność ({geldigheid}) wygasła.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Powiązanie nic nie robi; środek nie liczy się do uzasadnienia netto.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Środek mógł wygasnąć; oparte na nim oceny netto wymagają ponownej oceny.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Środek zdaje się pokrywać ryzyko, które nie istnieje.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Zapisane wartości pochodne są nieaktualne ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Skali "{schaal}" nie ma w tym pliku i nie jest to też nazwa wbudowana.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabela nie pokazuje, co formuła teraz daje — przeliczenie nadpisuje wynik, nigdy dane wejściowe.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabela pokazuje to, czego źródło już nie mówi — odświeżenie buduje ją od nowa ze źródła.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Widok wskazuje źródło "{bron}", którego nie ma w tym pliku.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Widok odbiega od źródła: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Formuła odnosi się (pośrednio) do siebie.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Nieczytelna ocena liczy się jako niewiarygodna liczba, nie jako zero.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Bariéra prewencyjna po prawej niczego nie łagodzi — ścieżka opowiada wtedy inną historię.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Brak dowodów, że środek działa — oparte na nim oceny netto są niepokryte.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formuła w "{kolom}" jest nieczytelna: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Element znajduje się poza każdą historią ścieżki — nigdzie się nie liczy.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Niejasne, czy ta bariera cokolwiek pokrywa.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Ścieżka to szkic — nie kompletne pokrycie do eksportu ani prezentacji.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Ryzyko rezydualne nie jest uzasadnione — eksport sugerowałby wtedy większą pewność, niż jest.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Ocena netto bez przetestowanego/działającego środka ani uzasadnienia netto.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Ścieżce "{pad}" brakuje: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Wiersz {n} nie ma ID.',
+  'Rij {n} heeft geen pad.': 'Wiersz {n} nie ma ścieżki.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Rola "{rol}" nie należy do strony "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Rola "{rol}" nie jest znaną rolą bowtie.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Ocena {waarde} dla {kolom} wychodzi poza skalę 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Ocen nie można zweryfikować, dopóki brakuje skali.',
+  'Status "{status}" is geen bekend token.':
+      'Status "{status}" nie jest znanym tokenem.',
+  'Status "{status}" zonder toetsdatum.': 'Status "{status}" bez daty testu.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Odwołuje się do środka "{maatregel}", który nie istnieje.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Odwołuje się do ryzyka "{risico}", które nie istnieje.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Odwołania do "{id}" są niejasne: który wiersz jest zamierzony, to ludzka decyzja.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Bez ID nic nie może zaadresować tego wiersza — widoki, środki i sama kontrola go pomijają.',
+  'deling door nul': 'dzielenie przez zero',
+  'rij {n}': 'wiersz {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'wiersz {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'wiersz {r} kolumna {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} więcej)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} więcej',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), klucze kolumn, klucz@ID, sum avg min max count wsum. Nieznane to nigdy 0.',
+  'Afgeleide cel overschreven': 'Nadpisano komórkę pochodną',
+  'Afgeleide kolom': 'Kolumna pochodna',
+  'Als risicoregister markeren…': 'Oznacz jako rejestr ryzyk…',
+  'Beoordelaar (naam/rol)': 'Oceniający (imię/rola)',
+  'Beoordelingsschaal': 'Skala ocen',
+  'Berekening toevoegen': 'Dodaj obliczenie',
+  'Berekening…': 'Obliczenie…',
+  'Blokkerende fouten': 'Błędy blokujące',
+  'Bowtie-model': 'Model bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Brutto — tylko początkowa ocena',
+  'Concept — pad mist': 'Szkic — brak ścieżki',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Nie znaleziono tabeli źródłowej tego widoku.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Liczby są niewiarygodne, dopóki te występują.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formuła jeszcze nie zniknęła — jaki był zamiar?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Ta kolumna staje się zwykłą kolumną: komórki zachowują ostatnią obliczoną wartość jako zwykły tekst.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Ta projekcja nie pasuje do metody źródła.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Ta tabela nie ma wierszy do zapisania jako ryzyko.',
+  'Diagram': 'Diagram',
+  'Doel van de beoordeling': 'Cel oceny',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Zagrożenia, bariery i skutki wokół jednego zdarzenia',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Prosta ocena: jak prawdopodobne × jak duży skutek',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Pusta tabela dla środków z fazą cyklu życia',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Jeśli mimo to wyeksportujesz, plik wyjdzie jako szkic z niepewnymi liczbami — otwórz przegląd, aby je najpierw naprawić.',
+  'Expressie': 'Wyrażenie',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Tryby awarii z wagą, występowaniem i wykrywalnością (S×O×D)',
+  'Formule bewerken': 'Edytuj formułę',
+  'Formule vervangen': 'Zastąp formułę',
+  'Formule verwijderen': 'Usuń formułę',
+  'Formule verwijderen?': 'Usunąć formułę?',
+  'Ga naar': 'Przejdź do',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Brak ustaleń — ID, wyniki i powiązane widoki są poprawne.',
+  'Gekoppelde weergave': 'Widok powiązany',
+  'Gekoppelde weergave toevoegen': 'Dodaj widok powiązany',
+  'Gekoppelde weergave…': 'Widok powiązany…',
+  'Herberekenen': 'Przelicz',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Treść do przejrzenia; jedna ma bezpieczny przycisk naprawy.',
+  'Je typte in een berekende kolom': 'Wpisałeś w kolumnie obliczanej',
+  'Kans × impact': 'Prawdopodobieństwo × skutek',
+  'Loskoppelen als momentopname': 'Odłącz jako migawkę',
+  'Maatregelenregister': 'Rejestr środków',
+  'Maatregelenregister toevoegen': 'Dodaj rejestr środków',
+  'Marker verwijderen': 'Usuń znacznik',
+  'Markeren': 'Oznacz',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Netto — tylko ocena po środkach',
+  'Nieuw risicodossier': 'Nowy rejestr ryzyk',
+  'Onbetrouwbare risico-cijfers in export':
+      'Niewiarygodne liczby ryzyka w eksporcie',
+  'Overzicht — bruto én netto naast elkaar':
+      'Przegląd — brutto i netto obok siebie',
+  'Pad toevoegen': 'Dodaj ścieżkę',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Priorytet — posortowane wg wyniku, potem wg wagi',
+  'Risico-kwaliteitscontrole': 'Kontrola jakości ryzyka',
+  'Risicodossier…': 'Rejestr ryzyk…',
+  'Risicoregister': 'Rejestr ryzyk',
+  'Tabel als risicoregister markeren': 'Oznacz tabelę jako rejestr ryzyk',
+  'Terugzetten': 'Przywróć',
+  'Verversen': 'Odśwież',
+  'Vrij meenemen': 'Przenieś swobodnie',
+  'Wat beoordeel je en waarvoor?': 'Co oceniasz i po co?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Przypisz, która kolumna ma jakie znaczenie. Kolumny bez znaczenia pozostają wolnymi kolumnami — nic nie ginie. Wiersze bez ID otrzymują numer R.',
+  'blokkerende bevinding(en):': 'blokujące ustalenie(a):',
+  'bron': 'źródło',
+  'schaal': 'skala',
+  'Geen bewerkbare tabel op deze pagina':
+      'Brak edytowalnej tabeli na tej stronie',
+  'Presentatie afsluiten': 'Zakończ prezentację',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Podczas sesji wprowadzono zmiany. Co powinno się z nimi stać?',
+  'Verwerpen': 'Odrzuć',
+  'Bewaren als kopie': 'Zapisz jako kopię',
+  'Bewaren in document': 'Zapisz w dokumencie',
+  'beamer': 'projektor',
+  'beamer: niet bereikbaar': 'projektor: nieosiągalny',
+  'Bewerken sluiten (Esc)': 'Zakończ edycję (Esc)',
+  'Presenteer document…': 'Prezentuj dokument…',
+  'Presenteer document': 'Prezentuj dokument',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Zaznacz, które tabele mogą być edytowane na żywo podczas prezentacji. Cała pozostała treść pozostaje tylko do odczytu.',
   'Extra ruimte': 'Dodatkowa przestrzeń',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ta przypis jest dłuższy niż strona — przewiń, by zobaczyć resztę',

@@ -21,8 +21,7 @@ Future<void> _openRiskQuality(_DocumentEditorScreenState s) {
             child: report.isClean
                 ? Text(
                     l10n.d(
-                      'Geen bevindingen — IDs, scores en gekoppelde '
-                      'weergaven kloppen.',
+                      'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.',
                     ),
                   )
                 : SingleChildScrollView(
@@ -34,8 +33,7 @@ Future<void> _openRiskQuality(_DocumentEditorScreenState s) {
                           _riskQualityHeader(
                             l10n.d('Blokkerende fouten'),
                             l10n.d(
-                              'De cijfers zijn niet betrouwbaar zolang deze '
-                              'er zijn.',
+                              'De cijfers zijn niet betrouwbaar zolang deze er zijn.',
                             ),
                           ),
                           for (final f in report.errors)
@@ -51,8 +49,7 @@ Future<void> _openRiskQuality(_DocumentEditorScreenState s) {
                           _riskQualityHeader(
                             l10n.d('Waarschuwingen'),
                             l10n.d(
-                              'Inhoudelijk om na te lopen; één heeft een '
-                              'veilige herstelknop.',
+                              'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.',
                             ),
                           ),
                           for (final f in report.warnings)

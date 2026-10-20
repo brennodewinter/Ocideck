@@ -67,6 +67,9 @@ import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
 import '../editors/editor_text_controller.dart';
 import '../reader/table_edit_controller.dart';
+import '../reader/document_markdown_view.dart';
+import '../../services/markdown_table_codec.dart';
+import '../../utils/document_pagination.dart';
 
 part 'parts/presenter_beamer_payload.dart';
 part 'parts/presenter_questions.dart';
@@ -78,6 +81,7 @@ part 'parts/presenter_navigation.dart';
 part 'parts/presenter_keys.dart';
 part 'parts/presenter_notes.dart';
 part 'parts/presenter_overlays.dart';
+part 'parts/presenter_document.dart';
 part 'parts/presenter_content.dart';
 part 'parts/presenter_views.dart';
 part 'parts/presenter_support.dart';

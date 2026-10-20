@@ -100,6 +100,11 @@ const Set<String> _quoteScannerHomes = {
   // shape (walk chars, track "…" with backslash-escapes) is unavoidable for a
   // string-aware scan, and the stdlib has no equivalent.
   'lib/utils/json_depth_guard.dart',
+  // Not a CSV splitter: the `<!-- ocideck:* -->` marker grammar is
+  // space-separated `key="value"` attributes with \" and \\ escapes
+  // (RISK_FORMAT.md §2), not comma-separated fields — parseCsvLine splits on
+  // commas and would mangle values containing spaces or commas.
+  'lib/services/ocideck_markers.dart',
 };
 
 /// UI imports inside `lib/services/`. RATCHET: may shrink, never grow.
@@ -599,8 +604,13 @@ const Map<String, int> classSizeBaseline = {
   // zetten van een notitie is top-level geworden. Wat overblijft raakt allemaal
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
+  // +4 (#2486): een rijpermutatie (sorteren/verplaatsen) doorbreekt de
+  // coalescing in updateSlide — een sortering is een eigen undo-stap, geen
+  // verlengstuk van de typstap ervoor. De beslissing hoort bij de
+  // _mutate-callsite; de permutatie-detectie staat in
+  // table_row_permutation.dart.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1460, // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
+      1464, // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening

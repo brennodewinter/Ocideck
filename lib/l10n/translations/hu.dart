@@ -1608,6 +1608,195 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" kétszer szerepel (a {regel}. sorban is).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" nem szám a(z) {kolom} mezőhöz.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'A(z) "{kolom}" számítás a(z) {rij} soron nem sikerült ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'A gát fedettnek tűnik, de nem az.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'A(z) "{element}" bowtie-elem a nem létező "{maatregel}" intézkedésre hivatkozik.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'A skálán kívüli pontszámok torzítják az RPN-t, a valószínűség×hatást és minden rájuk épülő vetítést.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'A származtatott oszlop "—"-t mutat — a jelölő megmarad, de nem számít.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'A másolat forrás nélkül nem állítható vissza — a lecsatolás vagy törlés emberi döntés.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Az érintett cellák ismeretlenek — a kör emberi döntést kíván a szándékolt számításról.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'A cella "—"-t mutat — sem 0, sem régi szám.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Az érvényesség ({geldigheid}) lejárt.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'A kapcsolat nem csinál semmit; az intézkedés nem számít a nettó alapba.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Az intézkedés lejárhatott; a rá épülő nettó pontszámok felülvizsgálatot igényelnek.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Az intézkedés látszólag egy nem létező kockázatot fed.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'A tárolt származtatott értékek le vannak maradva ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'A(z) "{schaal}" skála nincs ebben a fájlban és beépített név sem.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'A táblázat nem mutatja, amit a képlet most ad — az újraszámítás az eredményt írja át, sosem a bemenetet.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'A táblázat azt mutatja, amit a forrás már nem mond — a frissítés újraépíti a forrásból.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'A nézet a(z) "{bron}" forrást nevezi meg, amely nincs ebben a fájlban.',
+  'De weergave wijkt af van de bron: {details}.':
+      'A nézet eltér a forrástól: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'A képlet (közvetve) önmagára hivatkozik.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Az olvashatatlan pontszám megbízhatatlan számnak számít, nem nullának.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'A jobb oldali megelőző gát semmit sem enyhít — az út akkor más történetet mesél.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Nincs bizonyíték, hogy az intézkedés működik — a rá támaszkodó nettó pontszámok fedezetlenek.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'A(z) "{kolom}" képlete nem olvasható: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Az elem minden úttörténeten kívül áll — sehol sem számít.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Nem világos, hogy ez a gát bármit fed-e.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Az út csak vázlat — nem teljes fedezet exportáláshoz vagy prezentáláshoz.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'A maradványkockázat nincs alátámasztva — egy export több bizonyosságot sugallna, mint amennyi van.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Nettó pontszám tesztelt/működő intézkedés vagy nettó alap nélkül.',
+  'Pad "{pad}" mist: {ontbrekend}.':
+      'A(z) "{pad}" úthoz hiányzik: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'A(z) {n}. sornak nincs azonosítója.',
+  'Rij {n} heeft geen pad.': 'A(z) {n}. sornak nincs útja.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'A(z) "{rol}" szerep nem a(z) "{zijde}" oldalra tartozik.',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'A(z) "{rol}" szerep nem ismert bowtie-szerep.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'A(z) {waarde} pontszám a(z) {kolom} mezőre kívül esik az 1–{max} skálán.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'A pontszámok nem ellenőrizhetők, amíg a skála hiányzik.',
+  'Status "{status}" is geen bekend token.':
+      'A(z) "{status}" állapot nem ismert jel.',
+  'Status "{status}" zonder toetsdatum.':
+      '"{status}" állapot vizsgálati dátum nélkül.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'A nem létező "{maatregel}" intézkedésre hivatkozik.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'A nem létező "{risico}" kockázatra hivatkozik.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'A(z) "{id}"-re mutató hivatkozások bizonytalanok: melyik sor a szándékolt, az emberi döntés.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Azonosító nélkül semmi nem tudja megszólítani ezt a sort — a nézetek, intézkedések és maga az ellenőrzés is átugorja.',
+  'deling door nul': 'nullával osztás',
+  'rij {n}': '{n}. sor',
+  'rij {n}: "{oud}" → "{nieuw}"': '{n}. sor: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      '{r}. sor {c}. oszlop: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} további)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} további',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), oszlopkulcsok, kulcs@ID, sum avg min max count wsum. Ismeretlen sosem 0.',
+  'Afgeleide cel overschreven': 'Származtatott cella felülírva',
+  'Afgeleide kolom': 'Származtatott oszlop',
+  'Als risicoregister markeren…': 'Megjelölés kockázatregiszterként…',
+  'Beoordelaar (naam/rol)': 'Értékelő (név/szerep)',
+  'Beoordelingsschaal': 'Értékelési skála',
+  'Berekening toevoegen': 'Számítás hozzáadása',
+  'Berekening…': 'Számítás…',
+  'Blokkerende fouten': 'Blokkoló hibák',
+  'Bowtie-model': 'Bowtie-modell',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Bruttó — csak az eredeti becslés',
+  'Concept — pad mist': 'Vázlat — útvonal hiányzik',
+  'De brontabel van deze weergave is niet gevonden.':
+      'A nézet forrástáblája nem található.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'A számok nem megbízhatóak, amíg ezek fennállnak.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'A képlet még nem tűnt el — mi volt a szándék?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Ez az oszlop hagyományos oszloppá válik: a cellák megtartják utolsó számított értéküket egyszerű szövegként.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Ez a projekció nem illik a forrás módszeréhez.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Ennek a táblázatnak nincsenek sorai, amelyek kockázatként rögzíthetők.',
+  'Diagram': 'Diagram',
+  'Doel van de beoordeling': 'Az értékelés célja',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Fenyegetések, korlátok és következmények egy esemény körül',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Egyszerű becslés: mennyire valószínű × mekkora a következmény',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Üres táblázat intézkedésekhez életciklus-fázissal',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Ha mégis exportál, a fájl piszkozatként megy ki bizonytalan számokkal — nyissa meg az áttekintést, hogy előbb kijavítsa őket.',
+  'Expressie': 'Kifejezés',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Hibamódok súlyossággal, előfordulással és felismerhetőséggel (S×O×D)',
+  'Formule bewerken': 'Képlet szerkesztése',
+  'Formule vervangen': 'Képlet cseréje',
+  'Formule verwijderen': 'Képlet eltávolítása',
+  'Formule verwijderen?': 'Eltávolítja a képletet?',
+  'Ga naar': 'Ugrás ide:',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Nincs megállapítás — az ID-k, pontszámok és kapcsolt nézetek rendben vannak.',
+  'Gekoppelde weergave': 'Kapcsolt nézet',
+  'Gekoppelde weergave toevoegen': 'Kapcsolt nézet hozzáadása',
+  'Gekoppelde weergave…': 'Kapcsolt nézet…',
+  'Herberekenen': 'Újraszámítás',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Tartalom ellenőrzésre; egynek van biztonságos javítógombja.',
+  'Je typte in een berekende kolom': 'Számított oszlopba írt',
+  'Kans × impact': 'Valószínűség × hatás',
+  'Loskoppelen als momentopname': 'Leválasztás pillanatképként',
+  'Maatregelenregister': 'Intézkedés-nyilvántartás',
+  'Maatregelenregister toevoegen': 'Intézkedés-nyilvántartás hozzáadása',
+  'Marker verwijderen': 'Jelölő eltávolítása',
+  'Markeren': 'Megjelölés',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Nettó — csak az intézkedések utáni becslés',
+  'Nieuw risicodossier': 'Új kockázati dosszié',
+  'Onbetrouwbare risico-cijfers in export':
+      'Megbízhatatlan kockázati számok az exportban',
+  'Overzicht — bruto én netto naast elkaar':
+      'Áttekintés — bruttó és nettó egymás mellett',
+  'Pad toevoegen': 'Útvonal hozzáadása',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritás — pontszám, majd súlyosság szerint rendezve',
+  'Risico-kwaliteitscontrole': 'Kockázat-minőségellenőrzés',
+  'Risicodossier…': 'Kockázati dosszié…',
+  'Risicoregister': 'Kockázatregiszter',
+  'Tabel als risicoregister markeren':
+      'Táblázat megjelölése kockázatregiszterként',
+  'Terugzetten': 'Visszaállítás',
+  'Verversen': 'Frissítés',
+  'Vrij meenemen': 'Szabadon átvinni',
+  'Wat beoordeel je en waarvoor?': 'Mit értékel, és mire?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Rendelje hozzá, melyik oszlopnak mi a jelentése. A jelentés nélküli oszlopok szabad oszlopok maradnak — semmi sem vész el. Az ID nélküli sorok R-számot kapnak.',
+  'blokkerende bevinding(en):': 'blokkoló megállapítás(ok):',
+  'bron': 'forrás',
+  'schaal': 'skála',
+  'Geen bewerkbare tabel op deze pagina':
+      'Nincs szerkeszthető táblázat ezen az oldalon',
+  'Presentatie afsluiten': 'Prezentáció bezárása',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'A munkafolyamat során módosítások történtek. Mi történjen velük?',
+  'Verwerpen': 'Elvetés',
+  'Bewaren als kopie': 'Mentés másolatként',
+  'Bewaren in document': 'Mentés a dokumentumba',
+  'beamer': 'projektor',
+  'beamer: niet bereikbaar': 'projektor: nem érhető el',
+  'Bewerken sluiten (Esc)': 'Szerkesztés bezárása (Esc)',
+  'Presenteer document…': 'Dokumentum prezentálása…',
+  'Presenteer document': 'Dokumentum prezentálása',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Jelölje be, mely táblázatok szerkeszthetők élőben a prezentáció alatt. Minden más tartalom írásvédett marad.',
   'Extra ruimte': 'Extra térköz',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ez a jegyzet hosszabb az oldalnál — görgessen a folytatásért',

@@ -10,6 +10,20 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Documentpresentatie met live tabelbewerking.** Een Markdown-document
+  presenteer je nu zoals hij is — pagina voor pagina via dezelfde
+  pagina-einden als de export (`---`, en hoofdstukken alleen als de
+  hoofdstuk-pagina-instelling aan staat). Tijdens het opstarten wijs je aan
+  welke tabellen live bewerkt mogen worden; de rest van de inhoud blijft
+  alleen-lezen. E of het potlood opent de bewerkmodus voor de eerste
+  aangewezen tabel op de pagina, Esc sluit alleen de bewerkmodus. Alleen
+  bevestigde celwijzigingen gaan de bron in — via dezelfde chirurgische
+  terugschrijf als de Bron-preview — en gaan pas dan in volgorde naar het
+  publieksscherm; op één scherm is er geen publieksvenster. Bij het
+  afsluiten kies je expliciet: bewaren in het document, bewaren als kopie
+  in een nieuw tabblad, of verwerpen — zonder sessie-edits sluit de
+  presentatie gewoon (#2487).
+
 - **Bowtie-diagram uit de risicotabel, overal dezelfde vertoning.** Een
   `<!-- ocideck:bowtie -->`-tabel toont nu met één schakelaar als diagram:
   dreigingen links, preventieve barrières, het topgebeurtenis centraal,

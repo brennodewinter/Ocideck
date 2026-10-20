@@ -72,6 +72,9 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onOpenSettings;
   final VoidCallback onEditFields;
   final VoidCallback onConvertToPresentation;
+
+  /// Presenteer het document zoals hij is — #2487.
+  final VoidCallback onPresentDocument;
   final TextEditingController controller;
   final FocusNode editorFocus;
 
@@ -128,6 +131,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onOpenSettings,
     required this.onEditFields,
     required this.onConvertToPresentation,
+    required this.onPresentDocument,
     required this.controller,
     required this.editorFocus,
     required this.docTheme,
@@ -608,6 +612,8 @@ class _DocEditorToolbar extends StatelessWidget {
             onOpenSettings();
           case 1:
             onConvertToPresentation();
+          case 5:
+            onPresentDocument();
           case 2:
             onFootnotesAtEndChanged(!footnotesAtEnd);
           case 3:
@@ -662,6 +668,21 @@ class _DocEditorToolbar extends StatelessWidget {
               const Icon(Icons.settings_outlined, size: 17),
               const SizedBox(width: 10),
               Expanded(child: Text(l10n.t('settings'))),
+            ],
+          ),
+        ),
+        PopupMenuItem<int>(
+          value: 5,
+          child: Row(
+            children: [
+              const Icon(Icons.present_to_all_outlined, size: 17),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  l10n.d('Presenteer document…'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
         ),

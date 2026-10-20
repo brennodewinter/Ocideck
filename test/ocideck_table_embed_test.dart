@@ -20,9 +20,12 @@ Een alinea vooraf.
 | R-001 | Sensor valt uit | 7 |
 ''';
 
-  Future<QuillController> pumpEditor(WidgetTester tester) async {
+  Future<QuillController> pumpEditor(
+    WidgetTester tester, [
+    String body = source,
+  ]) async {
     final controller = QuillController(
-      document: MarkdownQuillCodec.documentFromMarkdown(source),
+      document: MarkdownQuillCodec.documentFromMarkdown(body),
       selection: const TextSelection.collapsed(offset: 0),
     );
     addTearDown(controller.dispose);
@@ -146,5 +149,91 @@ Een alinea vooraf.
     expect(terug, contains('| R-2 | Kabel breekt | 1 |'));
     // De brontabel zelf bleef onaangeroerd.
     expect(terug, contains('| R-1 | Sensor valt uit | 7 | 3 |'));
+  });
+
+  testWidgets('berekening toevoegen schrijft een calc-marker en rekent', (
+    tester,
+  ) async {
+    const calcSource = '''
+<!-- ocideck:risks v1 id=hoofd method=fmea rev=1 next=2 cols=id,failure,s_b,x-prio -->
+| ID | Faalwijze | S b | Prio |
+|---|---|---|---|
+| R-001 | Sensor valt uit | 7 |  |
+''';
+    final controller = await pumpEditor(tester, calcSource);
+
+    await tester.tap(find.textContaining('Berekening'));
+    await tester.pumpAndSettle();
+    expect(find.text('Berekening toevoegen'), findsOneWidget);
+
+    await tester.tap(find.byType(DropdownButtonFormField<String>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('x-prio').last);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.byType(TextField),
+      ),
+      's_b * 2',
+    );
+    await tester.pump();
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+
+    final terug = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(terug, contains('<!-- ocideck:calc col=x-prio expr="s_b * 2" -->'));
+    // De kolom materialiseert meteen: 7 * 2 = 14.
+    expect(terug, contains('| 14 |'));
+  });
+
+  testWidgets('gekoppelde weergave maken voegt een view-marker toe', (
+    tester,
+  ) async {
+    final controller = await pumpEditor(tester);
+
+    await tester.tap(find.textContaining('Gekoppelde weergave'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.textContaining('Netto'));
+    await tester.pumpAndSettle();
+
+    final terug = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(
+      terug,
+      contains('<!-- ocideck:view v1 source=hoofd projection=netto'),
+    );
+  });
+
+  testWidgets('als risicoregister markeren mappt kolommen expliciet', (
+    tester,
+  ) async {
+    const plain = '''
+Een alinea vooraf.
+
+| ID | Faalwijze | Ernst |
+|---|---|---|
+| A | Sensor valt uit | 7 |
+''';
+    final controller = await pumpEditor(tester, plain);
+
+    await tester.tap(find.textContaining('Als risicoregister markeren'));
+    await tester.pumpAndSettle();
+    expect(find.text('Tabel als risicoregister markeren'), findsOneWidget);
+
+    // Methode staat op FMEA; wijs 'Ernst' toe aan de bruto-S.
+    await tester.tap(find.byType(DropdownButton<String?>).first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.textContaining('id').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(DropdownButton<String?>).at(2));
+    await tester.pumpAndSettle();
+    await tester.tap(find.textContaining('s_b').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Markeren'));
+    await tester.pumpAndSettle();
+
+    final terug = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(terug, contains('<!-- ocideck:risks v1'));
+    expect(terug, contains('method=fmea'));
   });
 }

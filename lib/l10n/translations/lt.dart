@@ -1613,6 +1613,192 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" pasitaiko du kartus (taip pat eilutėje {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" nėra skaičius stulpeliui {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Skaičiavimas "{kolom}" eilutėje {rij} nepavyko ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Barjeras atrodo uždengtas, bet nėra.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie elementas "{element}" nurodo priemonę "{maatregel}", kurios nėra.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Už skalės ribų esantys balai iškreipia RPN, tikimybę×poveikį ir bet kurią projekciją, kuri į juos remiasi.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Išvestinis stulpelis rodo "—" — žymeklis išsaugomas, bet neįskaičiuojamas.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Kopijos be šaltinio atkurti negalima — atsiejimas arba ištrynimas yra žmogaus pasirinkimas.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Susiję langeliai nežinomi — ciklas reikalauja žmogaus sprendimo dėl numatyto skaičiavimo.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Langelis rodo "—" — nei 0, nei senas skaičius.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Galiojimas ({geldigheid}) pasibaigė.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Sąsaja nieko nedaro; priemonė neįskaičiuojama į grynąjį pagrindimą.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Priemonė galėjo nustoti galioti; į ją remiantys grynieji balai reikalauja peržiūros.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Priemonė tarsi dengia riziką, kurios nėra.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Išsaugotos išvestinės reikšmės atsilieka ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Skalės "{schaal}" nėra šiame faile ir ji nėra integruotas pavadinimas.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Lentelė nerodo, ką formulė dabar duoda — perskaičiavimas perrašo rezultatą, niekada įvestį.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Lentelė rodo tai, ko šaltinis daugiau nebetvirtina — atnaujinimas ją atstato iš šaltinio.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Rodinys nurodo šaltinį "{bron}", kurio šiame faile nėra.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Rodinys skiriasi nuo šaltinio: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Formulė (netiesiogiai) nurodo pati save.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Neįskaitomas balas laikomas nepatikimu skaičiumi, o ne nuliu.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Kairėje esantis prevencinis barjeras nieko nemitiguoja — kelias tada pasakoja kitą istoriją.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Nėra įrodymų, kad priemonė veikia — į ją remiantys grynieji balai yra nepadengti.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formulė stulpelyje "{kolom}" neįskaitoma: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Elementas yra už bet kokio kelio pasakojimo ribų — jis niekur neįskaičiuojamas.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Neaišku, ar šis barjeras ką nors dengia.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Kelias yra eskizas — ne visa apimtis eksportui ar pristatymui.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Liekamoji rizika nepagrįsta — eksportas tuomet rodytų didesnį tikrumą, nei yra.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Grynasis balas be patikrintos/veikiančios priemonės arba grynojo pagrindimo.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Keliui "{pad}" trūksta: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Eilutė {n} neturi ID.',
+  'Rij {n} heeft geen pad.': 'Eilutė {n} neturi kelio.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Vaidmuo "{rol}" netelpa pusėje "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Vaidmuo "{rol}" nėra žinomas bowtie vaidmuo.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Balas {waarde} stulpeliui {kolom} yra už skalės 1–{max} ribų.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Balų negalima tikrinti, kol trūksta skalės.',
+  'Status "{status}" is geen bekend token.':
+      'Būsena "{status}" nėra žinomas žymuo.',
+  'Status "{status}" zonder toetsdatum.':
+      'Būsena "{status}" be tikrinimo datos.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Nurodo priemonę "{maatregel}", kurios nėra.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Nurodo riziką "{risico}", kurios nėra.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Nuorodos į "{id}" yra dviprasmiškos: kuri eilutė turima omenyje, yra žmogaus pasirinkimas.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Be ID niekas negali kreiptis į šią eilutę — rodiniai, priemonės ir pats tikrinimas ją praleidžia.',
+  'deling door nul': 'dalyba iš nulio',
+  'rij {n}': 'eilutė {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'eilutė {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'eilutė {r} stulpelis {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} daugiau)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} daugiau',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), stulpelio raktai, raktas@ID, sum avg min max count wsum. Nežinoma niekada nėra 0.',
+  'Afgeleide cel overschreven': 'Išvestinis langelis perrašytas',
+  'Afgeleide kolom': 'Išvestinis stulpelis',
+  'Als risicoregister markeren…': 'Pažymėti kaip rizikų registrą…',
+  'Beoordelaar (naam/rol)': 'Vertintojas (vardas/vaidmuo)',
+  'Beoordelingsschaal': 'Vertinimo skalė',
+  'Berekening toevoegen': 'Pridėti skaičiavimą',
+  'Berekening…': 'Skaičiavimas…',
+  'Blokkerende fouten': 'Blokuojantys klaidos',
+  'Bowtie-model': '„Bowtie“ modelis',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Bruto — tik pradinis įvertinimas',
+  'Concept — pad mist': 'Juodraštis — trūksta kelio',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Šio rodinio šaltinio lentelė nerasta.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Skaičiai nepatikimi, kol jie yra.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formulė dar neišnyko — koks buvo tikslas?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Šis stulpelis tampa paprastu stulpeliu: langeliai išlaiko paskutinę apskaičiuotą reikšmę kaip paprastą tekstą.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Ši projekcija neatitinka šaltinio metodo.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Ši lentelė neturi eilučių, kurias būtų galima užfiksuoti kaip riziką.',
+  'Diagram': 'Diagrama',
+  'Doel van de beoordeling': 'Vertinimo tikslas',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Grėsmės, barjerai ir pasekmės aplink vieną įvykį',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Paprastas įvertinimas: kiek tikėtina × kiek didelė pasekmė',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Tuščia lentelė priemonėms su gyvavimo ciklo faze',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Jei vis tiek eksportuosite, failas išeis kaip juodraštis su netiksliais skaičiais — atidarykite apžvalgą, kad pirmiausia juos ištaisytumėte.',
+  'Expressie': 'Išraiška',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Gedimo režimai su sunkumu, tikimybe ir aptikimu (S×O×D)',
+  'Formule bewerken': 'Redaguoti formulę',
+  'Formule vervangen': 'Pakeisti formulę',
+  'Formule verwijderen': 'Pašalinti formulę',
+  'Formule verwijderen?': 'Pašalinti formulę?',
+  'Ga naar': 'Eiti į',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Nėra pastabų — ID, įverčiai ir susieti rodiniai teisingi.',
+  'Gekoppelde weergave': 'Susietas rodinys',
+  'Gekoppelde weergave toevoegen': 'Pridėti susietą rodinį',
+  'Gekoppelde weergave…': 'Susietas rodinys…',
+  'Herberekenen': 'Perskaičiuoti',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Turinys peržiūrėti; vienas turi saugų taisymo mygtuką.',
+  'Je typte in een berekende kolom': 'Įvedėte tekstą į skaičiuojamą stulpelį',
+  'Kans × impact': 'Tikimybė × poveikis',
+  'Loskoppelen als momentopname': 'Atjungti kaip momentinę kopiją',
+  'Maatregelenregister': 'Priemonių registras',
+  'Maatregelenregister toevoegen': 'Pridėti priemonių registrą',
+  'Marker verwijderen': 'Pašalinti žymeklį',
+  'Markeren': 'Pažymėti',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Neto — tik įvertinimas po priemonių',
+  'Nieuw risicodossier': 'Naujas rizikų registras',
+  'Onbetrouwbare risico-cijfers in export':
+      'Nepatikimi rizikos skaičiai eksporte',
+  'Overzicht — bruto én netto naast elkaar': 'Apžvalga — bruto ir neto šalia',
+  'Pad toevoegen': 'Pridėti kelią',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritetas — surikiuota pagal balą, tada pagal sunkumą',
+  'Risico-kwaliteitscontrole': 'Rizikos kokybės kontrolė',
+  'Risicodossier…': 'Rizikų registras…',
+  'Risicoregister': 'Rizikų registras',
+  'Tabel als risicoregister markeren': 'Pažymėti lentelę kaip rizikų registrą',
+  'Terugzetten': 'Atkurti',
+  'Verversen': 'Atnaujinti',
+  'Vrij meenemen': 'Laisvai perkelti',
+  'Wat beoordeel je en waarvoor?': 'Ką vertini ir kam?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Priskirkite, kuris stulpelis turi kokią reikšmę. Stulpeliai be reikšmės lieka laisvi — niekas neprarandama. Eilutės be ID gauna R numerį.',
+  'blokkerende bevinding(en):': 'blokuojanti(s) pastaba(os):',
+  'bron': 'šaltinis',
+  'schaal': 'skalė',
+  'Geen bewerkbare tabel op deze pagina':
+      'Šiame puslapyje nėra redaguojamos lentelės',
+  'Presentatie afsluiten': 'Baigti pristatymą',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Seanso metu buvo atlikti pakeitimai. Ką su jais daryti?',
+  'Verwerpen': 'Atmesti',
+  'Bewaren als kopie': 'Išsaugoti kaip kopiją',
+  'Bewaren in document': 'Išsaugoti dokumente',
+  'beamer': 'projektorius',
+  'beamer: niet bereikbaar': 'projektorius: nepasiekiamas',
+  'Bewerken sluiten (Esc)': 'Uždaryti redagavimą (Esc)',
+  'Presenteer document…': 'Pristatyti dokumentą…',
+  'Presenteer document': 'Pristatyti dokumentą',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Pažymėkite, kurias lenteles galima redaguoti tiesiogiai pristatymo metu. Visas kitas turinys lieka tik skaitymui.',
   'Extra ruimte': 'Papildoma erdvė',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ši pastaba ilgesnė už puslapį — slinkite likusiai daliai',

@@ -9,6 +9,9 @@
 /// overschrijven (D2, §8).
 library;
 
+import 'dart:ui' show Locale;
+
+import '../l10n/app_localizations.dart';
 import '../models/risk_dossier.dart';
 import 'markdown_table_codec.dart';
 import 'ocideck_marked_table.dart';
@@ -16,6 +19,11 @@ import 'ocideck_markers.dart';
 import 'risk_dossier.dart';
 import 'risk_dossier_scaffold.dart';
 import 'table_sort.dart';
+
+/// Zichtbare tekst, dus door l10n — `d()` kijkt naar de actieve taal, de
+/// constructor-locale is een formaliteit (dezelfde contextloze route als
+/// export_service).
+AppLocalizations get _l10n => const AppLocalizations(Locale('nl'));
 
 /// Afgeleide kolomsleutels die een weergave mag noemen — geen contractkeys
 /// in de bron, wel materialiseerbaar als zichtbare waarde (§3.3).
@@ -405,7 +413,14 @@ OciViewCheck checkOciView(String source, OciMarkedTable view) {
         final s = c < sRow.length ? sRow[c] : '';
         final computed_ = c < cRow.length ? cRow[c] : '';
         if (s.trim() != computed_.trim()) {
-          mismatches.add('rij ${r + 1} kolom ${c + 1}: "$s" → "$computed_"');
+          mismatches.add(
+            _l10n
+                .d('rij {r} kolom {c}: "{oud}" → "{nieuw}"')
+                .replaceAll('{r}', '${r + 1}')
+                .replaceAll('{c}', '${c + 1}')
+                .replaceAll('{oud}', s)
+                .replaceAll('{nieuw}', computed_),
+          );
         }
       }
     }

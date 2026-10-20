@@ -2514,6 +2514,191 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" iki kez geçiyor ({regel}. satırda da).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}", {kolom} için bir sayı değil.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      '"{kolom}" hesaplaması {rij} üzerinde başarısız oldu ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Bariyer kapsanmış görünüyor ama değil.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie öğesi "{element}", var olmayan "{maatregel}" önlemine başvuruyor.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Ölçek dışı puanlar RPN’yi, olasılık×etkiyi ve bunlara dayanan her projeksiyonu bozar.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Türetilmiş sütun "—" gösteriyor — işaretçi korunur ama sayılmaz.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Kopya kaynağı olmadan yeniden oluşturulamaz — bağlantıyı kesmek veya silmek insanın seçimidir.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'İlgili hücreler bilinmiyor — döngü, amaçlanan hesaplama için insan kararı gerektirir.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Hücre "—" gösteriyor — ne 0 ne eski bir sayı.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Geçerlilik ({geldigheid}) süresi doldu.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Bağlantı hiçbir şey yapmıyor; önlem net gerekçeye dahil sayılmaz.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Önlemin süresi dolmuş olabilir; ona dayanan net puanlar yeniden değerlendirme ister.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Önlem var olmayan bir riski kapsıyor gibi görünüyor.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Saklanan türetilmiş değerler geride ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      '"{schaal}" ölçeği bu dosyada yok ve yerleşik bir ad da değil.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tablo, formülün şu an ürettiğini göstermiyor — yeniden hesaplama sonucu yazar, girdiyi asla.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tablo, kaynağın artık söylemediğini gösteriyor — yenileme onu kaynaktan yeniden kurar.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Görünüm, bu dosyada olmayan "{bron}" kaynağını adlandırıyor.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Görünüm kaynaktan sapıyor: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Bir formül (dolaylı olarak) kendisine başvuruyor.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Okunamaz bir puan güvenilmez bir rakam sayılır, sıfır değil.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Sağdaki önleyici bariyer hiçbir şeyi hafifletmez — yol o zaman farklı bir hikâye anlatır.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Önlemin işe yaradığına dair kanıt yok — ona dayanan net puanlar kapsanmamış.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      '"{kolom}" üzerindeki formül okunamıyor: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Öğe her yol hikâyesinin dışında — hiçbir yerde sayılmaz.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Bu bariyerin bir şeyi kapsayıp kapsamadığı belirsiz.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Yol bir taslak — dışa aktarılacak ya da sunulacak tam bir kapsam değil.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Artık risk gerekçelendirilmemiş — bir dışa aktarım o zaman var olandan fazla kesinlik önerirdi.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Test edilmiş/çalışan bir önlem veya net gerekçe olmadan net puan.',
+  'Pad "{pad}" mist: {ontbrekend}.': '"{pad}" yolunda eksik: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': '{n} satırının kimliği yok.',
+  'Rij {n} heeft geen pad.': '{n} satırının yolu yok.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      '"{rol}" rolü "{zijde}" tarafına ait değil.',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      '"{rol}" rolü bilinen bir bowtie rolü değil.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      '{kolom} için {waarde} puanı 1–{max} ölçeğinin dışında.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Ölçek eksik olduğu sürece puanlar denetlenemez.',
+  'Status "{status}" is geen bekend token.':
+      '"{status}" durumu bilinen bir belirteç değil.',
+  'Status "{status}" zonder toetsdatum.':
+      '"{status}" durumu, test tarihi olmadan.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Var olmayan "{maatregel}" önlemine başvuruyor.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Var olmayan "{risico}" riskine başvuruyor.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      '"{id}" başvuruları belirsiz: hangi satırın kastedildiği insani bir seçimdir.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Kimlik olmadan hiçbir şey bu satıra hitap edemez — görünümler, önlemler ve kontrolün kendisi onu atlar.',
+  'deling door nul': 'sıfıra bölme',
+  'rij {n}': 'satır {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'satır {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'satır {r} sütun {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} tane daha)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} tane daha',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), sütun anahtarları, anahtar@ID, sum avg min max count wsum. Bilinmeyen asla 0 değildir.',
+  'Afgeleide cel overschreven': 'Türetilmiş hücre üzerine yazıldı',
+  'Afgeleide kolom': 'Türetilmiş sütun',
+  'Als risicoregister markeren…': 'Risk kaydı olarak işaretle…',
+  'Beoordelaar (naam/rol)': 'Değerlendirici (ad/rol)',
+  'Beoordelingsschaal': 'Değerlendirme ölçeği',
+  'Berekening toevoegen': 'Hesaplama ekle',
+  'Berekening…': 'Hesaplama…',
+  'Blokkerende fouten': 'Engelleyici hatalar',
+  'Bowtie-model': 'Papyon modeli',
+  'Bruto — alleen de oorspronkelijke inschatting': 'Brüt — yalnızca ilk tahmin',
+  'Concept — pad mist': 'Taslak — yol eksik',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Bu görünümün kaynak tablosu bulunamadı.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Bunlar varken rakamlar güvenilir değil.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formül henüz kaybolmadı — amaç neydi?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Bu sütun normal bir sütun olur: hücreler son hesaplanan değerlerini düz metin olarak saklar.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Bu projeksiyon kaynağın yöntemine uymuyor.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Bu tabloda risk olarak kaydedilecek satır yok.',
+  'Diagram': 'Diyagram',
+  'Doel van de beoordeling': 'Değerlendirmenin amacı',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Tek bir olay etrafında tehditler, bariyerler ve sonuçlar',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Basit bir tahmin: ne kadar olası × sonucun ne kadar büyük olduğu',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Yaşam döngüsü aşamalı önlemler için boş bir tablo',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Yine de dışa aktarırsanız dosya belirsiz rakamlarla taslak olarak çıkar — önce raporu açıp düzeltin.',
+  'Expressie': 'İfade',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Şiddet, olasılık ve tespit ile hata modları (S×O×D)',
+  'Formule bewerken': 'Formülü düzenle',
+  'Formule vervangen': 'Formülü değiştir',
+  'Formule verwijderen': 'Formülü kaldır',
+  'Formule verwijderen?': 'Formül kaldırılsın mı?',
+  'Ga naar': 'Git',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Bulgu yok — ID\'ler, puanlar ve bağlantılı görünümler doğru.',
+  'Gekoppelde weergave': 'Bağlantılı görünüm',
+  'Gekoppelde weergave toevoegen': 'Bağlantılı görünüm ekle',
+  'Gekoppelde weergave…': 'Bağlantılı görünüm…',
+  'Herberekenen': 'Yeniden hesapla',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'İncelenecek içerik; birinin güvenli onarım düğmesi var.',
+  'Je typte in een berekende kolom': 'Hesaplanmış bir sütuna yazdınız',
+  'Kans × impact': 'Olasılık × etki',
+  'Loskoppelen als momentopname': 'Anlık görüntü olarak ayır',
+  'Maatregelenregister': 'Önlem kaydı',
+  'Maatregelenregister toevoegen': 'Önlem kaydı ekle',
+  'Marker verwijderen': 'İşaretçiyi kaldır',
+  'Markeren': 'İşaretle',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Net — yalnızca önlemlerden sonraki tahmin',
+  'Nieuw risicodossier': 'Yeni risk dosyası',
+  'Onbetrouwbare risico-cijfers in export':
+      'Dışa aktarımda güvenilmez risk rakamları',
+  'Overzicht — bruto én netto naast elkaar':
+      'Genel bakış — brüt ve net yan yana',
+  'Pad toevoegen': 'Yol ekle',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Öncelik — puana, sonra şiddete göre sıralandı',
+  'Risico-kwaliteitscontrole': 'Risk kalite kontrolü',
+  'Risicodossier…': 'Risk dosyası…',
+  'Risicoregister': 'Risk kaydı',
+  'Tabel als risicoregister markeren': 'Tabloyu risk kaydı olarak işaretle',
+  'Terugzetten': 'Geri al',
+  'Verversen': 'Yenile',
+  'Vrij meenemen': 'Serbestçe taşı',
+  'Wat beoordeel je en waarvoor?': 'Neyi, ne için değerlendiriyorsunuz?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Hangi sütunun hangi anlama geldiğini atayın. Anlamsız sütunlar serbest sütun olarak kalır — hiçbir şey kaybolmaz. ID\'siz satırlar bir R numarası alır.',
+  'blokkerende bevinding(en):': 'engelleyici bulgu(lar):',
+  'bron': 'kaynak',
+  'schaal': 'ölçek',
+  'Geen bewerkbare tabel op deze pagina': 'Bu sayfada düzenlenebilir tablo yok',
+  'Presentatie afsluiten': 'Sunumu kapat',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Oturum sırasında değişiklikler yapıldı. Bunlarla ne yapılsın?',
+  'Verwerpen': 'At',
+  'Bewaren als kopie': 'Kopya olarak kaydet',
+  'Bewaren in document': 'Belgeye kaydet',
+  'beamer': 'projektör',
+  'beamer: niet bereikbaar': 'projektör: erişilemez',
+  'Bewerken sluiten (Esc)': 'Düzenlemeyi kapat (Esc)',
+  'Presenteer document…': 'Belgeyi sun…',
+  'Presenteer document': 'Belgeyi sun',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Sunum sırasında hangi tabloların canlı düzenlenebileceğini işaretleyin. Diğer tüm içerik salt okunur kalır.',
   'Extra ruimte': 'Ekstra boşluk',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Bu not sayfadan uzun — kalanı için kaydırın',

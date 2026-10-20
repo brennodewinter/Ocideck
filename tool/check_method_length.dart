@@ -47,8 +47,11 @@ const Map<String, int> methodLengthBaseline = {
   // in de top-level _parseImageLine-helper.
   // +11 (#1647): Setext-kopherkenning in de paragraaf-fallback — de
   // _isSetextUnderline-helper staat buiten de methode.
+  // +10 (#2496): de `<!-- ocideck:* -->`-marker-run in de parse-loop. De loop
+  // zelf staat in de top-level _skipOciMarkers-helper; wat rest is de
+  // herkenning plus de delegatie.
   'lib/widgets/reader/document_markdown_view.dart::DocumentMarkdownView._parse':
-      165,
+      180,
   // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
   // kolommodus. De methode stond al op de limiet.
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':

@@ -12,6 +12,7 @@ import '../../models/settings.dart';
 import '../../models/presentation_step_plan.dart';
 import '../../models/slide.dart';
 import '../../models/slide_format.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/presenter_palette.dart';
 import '../../services/markdown_service.dart';
 import '../mermaid_render_host.dart';
@@ -22,6 +23,7 @@ import '../../utils/url_launcher_util.dart';
 import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
 import '../slides/slide_preview.dart';
+import '../reader/document_markdown_view.dart';
 import 'annotation_overlay.dart';
 import 'cost_overlay.dart';
 import '../../models/presentation_cost.dart';
@@ -121,6 +123,15 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   int _index = 0;
   int _richTextPage = 0;
 
+  /// Documentpresentatie (#2487): `kind: 'document'` in de openings-envelop
+  /// schakelt dit venster naar de documentmodus — geen dia's maar
+  /// pagina-markdowns, gevoed door 'docUpdate'-snapshots. De volgorde wordt
+  /// met hetzelfde volgnummer bewaakt als de dia-updates.
+  bool _docMode = false;
+  List<String> _docPages = const [];
+  int _docRev = 0;
+  int _docLastSeq = -1;
+
   /// De categorie die de presentator open heeft op een keuze-menudia (#1162);
   /// dit venster volgt, het kiest niet zelf.
   int _menuCategory = 0;
@@ -177,15 +188,35 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     final markdown = widget.args['markdown'] as String? ?? '';
     _projectPath = widget.args['projectPath'] as String?;
     _index = (widget.args['index'] as num?)?.toInt() ?? 0;
-    final deck = MarkdownService().parseDeck(markdown);
-    _slides = deck?.slides ?? const [];
-    _slideAspect = slideAspectRatio(deck?.slideSize);
-    _reportLanguage = deck?.language ?? '';
     // De styling komt naast de markdown binnen; zie [beamerStyleProfileKey].
     final profileJson = widget.args[beamerStyleProfileKey];
     _theme = profileJson is Map
         ? ThemeProfile.fromJson(Map<String, Object?>.from(profileJson))
         : const ThemeProfile();
+    if (widget.args['kind'] == 'document') {
+      // Documentmodus (#2487): de pagina's staan als regelbereiken in de
+      // envelop; updates leveren telkens de volledige pagina, dus een
+      // gemiste of herstartte sessie heelt met de volgende snapshot.
+      _docMode = true;
+      final lines = markdown.split('\n');
+      final ranges = widget.args['pages'];
+      _docPages = [
+        if (ranges is List)
+          for (final r in ranges)
+            if (r is List && r.length == 2)
+              lines
+                  .sublist(
+                    (r[0] as num).toInt().clamp(0, lines.length),
+                    (r[1] as num).toInt().clamp(0, lines.length),
+                  )
+                  .join('\n'),
+      ];
+      if (_docPages.isEmpty) _docPages = [markdown];
+    }
+    final deck = _docMode ? null : MarkdownService().parseDeck(markdown);
+    _slides = deck?.slides ?? const [];
+    _slideAspect = slideAspectRatio(deck?.slideSize);
+    _reportLanguage = deck?.language ?? '';
     final marpStyleJson = widget.args['marpStyle'];
     _marpStyle = marpStyleJson is Map
         ? MarpStyle.fromJson(Map<String, Object?>.from(marpStyleJson))
@@ -279,8 +310,30 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _countdown = (message['countdown'] as num?)?.toInt() ?? 3;
   }
 
+  /// Documentpresentatie (#2487): elke bevestigde edit én elke paginawissel
+  /// duwt de volledige pagina met revisie — een gemiste update heelt met de
+  /// volgende snapshot, een oude overschrijft nooit een nieuwere.
+  void _applyDocUpdate(Object? arguments) {
+    final m = Map<String, dynamic>.from(arguments as Map);
+    if (!mounted) return;
+    final seq = (m['seq'] as num?)?.toInt();
+    if (isStaleUpdateSeq(seq, _docLastSeq)) return;
+    if (seq != null) _docLastSeq = seq;
+    final i = (m['index'] as num?)?.toInt();
+    final page = m['markdown'] as String?;
+    setState(() {
+      if (i != null && i >= 0) _index = i.clamp(0, _docPages.length - 1);
+      if (page != null && i != null && i < _docPages.length) {
+        _docPages[i] = page;
+      }
+      _docRev = (m['rev'] as num?)?.toInt() ?? _docRev;
+    });
+  }
+
   Future<dynamic> _onPresenterCall(MethodCall call) async {
     switch (call.method) {
+      case 'docUpdate':
+        _applyDocUpdate(call.arguments);
       case 'update':
         final m = Map<String, dynamic>.from(call.arguments as Map);
         if (!mounted) return null;
@@ -531,6 +584,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   }
 
   Widget _body() {
+    if (_docMode) return _docBody();
     if (_slides.isEmpty) return const SizedBox.shrink();
     if (_timedPhase == 0) return _timedWaitingSurface();
     if (_timedPhase == 1) return _timedCountdownSurface();
@@ -543,6 +597,25 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
       onTap: () => _send('next'),
       onSecondaryTap: () => _send('prev'),
       child: SizedBox.expand(child: _canvas(slide)),
+    );
+  }
+
+  /// De documentmodus (#2487): de huidige pagina als leesweergave — de
+  /// beamer bewerkt nooit; wat hier staat is de laatste bevestigde revisie.
+  Widget _docBody() {
+    if (_docPages.isEmpty) return const SizedBox.shrink();
+    final page = _docPages[_index.clamp(0, _docPages.length - 1)];
+    return ColoredBox(
+      color: AppTheme.parseHexColor(_theme.slideBackgroundColor),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 40),
+        child: DocumentMarkdownView(
+          page,
+          maxTextWidth: null,
+          themeProfile: _theme,
+          chartTheme: _theme,
+        ),
+      ),
     );
   }
 

@@ -1622,6 +1622,194 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" apare de două ori (și la linia {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" nu este un număr pentru {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Calculul "{kolom}" pe {rij} a eșuat ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Bariera pare acoperită, dar nu este.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Elementul bowtie "{element}" trimitere la măsura "{maatregel}", care nu există.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Scorurile în afara scalei distorsionează RPN, probabilitatea×impactul și orice proiecție care se bazează pe ele.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Coloana derivată arată "—" — marcatorul este păstrat dar nu contează.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Copia nu poate fi reconstruită fără sursă — detașarea sau ștergerea este alegerea umană.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Celulele implicate sunt necunoscute — ciclul cere o alegere umană asupra calculului intenționat.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Celula arată "—" — nici 0, nici un număr vechi.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Valabilitatea ({geldigheid}) a expirat.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Legătura nu face nimic; măsura nu contează pentru motivația netă.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Măsura poate fi expirat; scorurile nete care se sprijină pe ea cer reevaluare.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Măsura pare să acopere un risc care nu există.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Valorile derivate stocate sunt în urmă ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Scala "{schaal}" nu este în acest fișier și nici nu este un nume încorporat.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabelul nu arată ce produce formula acum — recalcularea rescrie rezultatul, niciodată intrarea.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabelul arată ce sursa nu mai spune — reîmprospătarea îl reconstruiește din sursă.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Vizualizarea numește sursa "{bron}", care nu este în acest fișier.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Vizualizarea diferă de sursă: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'O formulă se referă (indirect) la ea însăși.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Un scor ilizibil contează ca o cifră nesigură, nu ca zero.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'O barieră preventivă în dreapta nu atenuează nimic — drumul spune atunci o altă poveste.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Nu există dovezi că măsura funcționează — scorurile nete care se sprijină pe ea sunt neacoperite.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formula de pe "{kolom}" nu poate fi citită: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Elementul stă în afara oricărei povești de drum — nu contează nicăieri.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Nu este clar dacă această barieră acoperă ceva.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Drumul este o schiță — nu o acoperire completă de exportat sau prezentat.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Riscul rezidual nu este fundamentat — un export ar sugera atunci mai multă certitudine decât există.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Scor net fără măsură testată/funcțională sau motivație netă.',
+  'Pad "{pad}" mist: {ontbrekend}.':
+      'Drumului "{pad}" îi lipsește: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Rândul {n} nu are un ID.',
+  'Rij {n} heeft geen pad.': 'Rândul {n} nu are drum.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Rolul "{rol}" nu aparține părții "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Rolul "{rol}" nu este un rol bowtie cunoscut.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Scorul {waarde} pentru {kolom} cade în afara scalei 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Scorurile nu pot fi verificate cât timp scara lipsește.',
+  'Status "{status}" is geen bekend token.':
+      'Statusul "{status}" nu este un token cunoscut.',
+  'Status "{status}" zonder toetsdatum.':
+      'Status "{status}" fără dată de testare.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Trimite la măsura "{maatregel}", care nu există.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Trimite la riscul "{risico}", care nu există.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Trimiterile la "{id}" sunt ambigue: care rând este vizat este o alegere umană.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Fără ID nimic nu poate adresa acest rând — vizualizările, măsurile și chiar controlul îl sar.',
+  'deling door nul': 'împărțire la zero',
+  'rij {n}': 'rând {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'rând {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'rând {r} coloană {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} mai multe)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} mai multe',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), chei de coloană, cheie@ID, sum avg min max count wsum. Necunoscut nu este niciodată 0.',
+  'Afgeleide cel overschreven': 'Celulă derivată suprascrisă',
+  'Afgeleide kolom': 'Coloană derivată',
+  'Als risicoregister markeren…': 'Marchează ca registru de riscuri…',
+  'Beoordelaar (naam/rol)': 'Evaluator (nume/rol)',
+  'Beoordelingsschaal': 'Scară de evaluare',
+  'Berekening toevoegen': 'Adaugă calcul',
+  'Berekening…': 'Calcul…',
+  'Blokkerende fouten': 'Erori de blocare',
+  'Bowtie-model': 'Model bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Brut — doar estimarea inițială',
+  'Concept — pad mist': 'Ciornă — cale lipsă',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Tabelul sursă al acestei vizualizări nu a fost găsit.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Cifrele nu sunt fiabile cât timp acestea există.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formula nu a dispărut încă — care era intenția?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Această coloană devine o coloană obișnuită: celulele își păstrează ultima valoare calculată ca text simplu.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Această proiecție nu se potrivește metodei sursei.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Acest tabel nu are rânduri de înregistrat ca risc.',
+  'Diagram': 'Diagramă',
+  'Doel van de beoordeling': 'Scopul evaluării',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Amenințări, bariere și consecințe în jurul unui eveniment',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'O estimare simplă: cât de probabil × cât de mare consecința',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Un tabel gol pentru măsuri cu fază de viață',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Dacă exporți oricum, fișierul iese ca ciornă cu cifre incerte — deschide rezumatul pentru a le corecta mai întâi.',
+  'Expressie': 'Expresie',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Moduri de defectare cu severitate, probabilitate și detecție (S×O×D)',
+  'Formule bewerken': 'Editează formula',
+  'Formule vervangen': 'Înlocuiește formula',
+  'Formule verwijderen': 'Șterge formula',
+  'Formule verwijderen?': 'Ștergi formula?',
+  'Ga naar': 'Mergi la',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Nicio constatare — ID-urile, scorurile și vizualizările legate sunt corecte.',
+  'Gekoppelde weergave': 'Vizualizare legată',
+  'Gekoppelde weergave toevoegen': 'Adaugă vizualizare legată',
+  'Gekoppelde weergave…': 'Vizualizare legată…',
+  'Herberekenen': 'Recalculează',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Conținut de revizuit; una are un buton de reparare sigur.',
+  'Je typte in een berekende kolom': 'Ați tastat într-o coloană calculată',
+  'Kans × impact': 'Probabilitate × impact',
+  'Loskoppelen als momentopname': 'Detachează ca instantaneu',
+  'Maatregelenregister': 'Registru de măsuri',
+  'Maatregelenregister toevoegen': 'Adaugă registru de măsuri',
+  'Marker verwijderen': 'Elimină marcajul',
+  'Markeren': 'Marchează',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Net — doar estimarea după măsuri',
+  'Nieuw risicodossier': 'Dosar de riscuri nou',
+  'Onbetrouwbare risico-cijfers in export': 'Cifre de risc nefiabile în export',
+  'Overzicht — bruto én netto naast elkaar':
+      'Prezentare — brut și net alăturat',
+  'Pad toevoegen': 'Adaugă cale',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritate — sortat după scor, apoi după severitate',
+  'Risico-kwaliteitscontrole': 'Controlul calității riscului',
+  'Risicodossier…': 'Dosar de riscuri…',
+  'Risicoregister': 'Registru de riscuri',
+  'Tabel als risicoregister markeren':
+      'Marchează tabelul ca registru de riscuri',
+  'Terugzetten': 'Revenire',
+  'Verversen': 'Reîmprospătează',
+  'Vrij meenemen': 'Ia liber',
+  'Wat beoordeel je en waarvoor?': 'Ce evaluezi și pentru ce?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Atribuie care coloană are care semnificație. Coloanele fără semnificație rămân coloane libere — nimic nu se pierde. Rândurile fără ID primesc un număr R.',
+  'blokkerende bevinding(en):': 'constatare(i) de blocare:',
+  'bron': 'sursă',
+  'schaal': 'scară',
+  'Geen bewerkbare tabel op deze pagina':
+      'Niciun tabel editabil pe această pagină',
+  'Presentatie afsluiten': 'Închide prezentarea',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Au fost făcute modificări în timpul sesiunii. Ce trebuie făcut cu ele?',
+  'Verwerpen': 'Renunță',
+  'Bewaren als kopie': 'Salvează ca copie',
+  'Bewaren in document': 'Salvează în document',
+  'beamer': 'proiector',
+  'beamer: niet bereikbaar': 'proiector: indisponibil',
+  'Bewerken sluiten (Esc)': 'Închide editarea (Esc)',
+  'Presenteer document…': 'Prezintă documentul…',
+  'Presenteer document': 'Prezintă documentul',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Bifați care tabele pot fi editate live în timpul prezentării. Tot celălalt conținut rămâne doar pentru citire.',
   'Extra ruimte': 'Spațiu suplimentar',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Această notă este mai lungă decât pagina — derulați pentru rest',

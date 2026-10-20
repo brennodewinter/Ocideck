@@ -13,6 +13,10 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'Bowtie',
+  's_n * o_n * d_n',
+  'ƒ {kolom} = {formule}',
+  'overflow',
   // 'Server' is in het Engels hetzelfde woord; de andere talen wijken af.
   'Server: {server}',
   // Alleen plaatsvervangers: er valt in het Engels letterlijk niets te vertalen.
@@ -51,6 +55,8 @@ const unchangedInEnglish = {
   'Gantt',
   'Auto',
   'Week',
+  // 'Diagram' is in het Engels hetzelfde woord; de andere talen wijken af.
+  'Diagram',
   // Toetsnaam: 'Esc' blijft 'Esc', ook in het Engels (zie unchangedInAllLanguages).
   'Esc',
   // 'dev' is in het Engels dezelfde afkorting (zie unchangedInAllLanguages).
@@ -287,6 +293,10 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'Bowtie',
+  's_n * o_n * d_n',
+  'ƒ {kolom} = {formule}',
+  'overflow',
   'YYYY-MM-DD',
   '{id} · v{versie}',
   'Marp',

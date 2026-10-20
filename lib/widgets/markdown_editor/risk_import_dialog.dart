@@ -44,10 +44,7 @@ Future<RiskImportChoice?> showRiskImportDialog(
                 children: [
                   Text(
                     l10n.d(
-                      'Wijs toe welke kolom welke betekenis heeft. Kolommen '
-                      'zonder betekenis blijven als vrije kolom bestaan — er '
-                      'gaat niets verloren. Rijen zonder ID krijgen een '
-                      'R-nummer.',
+                      'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.',
                     ),
                     style: Theme.of(ctx).textTheme.bodySmall,
                   ),
@@ -68,7 +65,7 @@ Future<RiskImportChoice?> showRiskImportDialog(
                           child: RadioListTile<RiskMethod>(
                             value: RiskMethod.fmea,
                             dense: true,
-                            title: const Text('FMEA'),
+                            title: Text(l10n.d('FMEA')),
                           ),
                         ),
                         Expanded(

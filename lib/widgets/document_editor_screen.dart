@@ -93,6 +93,10 @@ import 'forms/form_image_picker.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'markdown_editor/table_embed_binding.dart';
 import 'reader/document_markdown_view.dart';
+import '../platform/platform_features.dart';
+import 'presentation/display_info.dart';
+import 'presentation/fullscreen_presenter.dart'
+    show DocumentExitChoice, presentDocument;
 import 'reader/table_edit_controller.dart';
 import 'reader/paged_document_view.dart';
 import 'reader/writing_page_breaks.dart';
@@ -109,6 +113,7 @@ part 'parts/document_source_field.dart';
 part 'parts/document_source_rewrites.dart';
 part 'parts/document_editor_inserts.dart';
 part 'parts/document_editor_position.dart';
+part 'parts/document_editor_presenter.dart';
 part 'parts/document_editor_risk_quality.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
@@ -340,6 +345,14 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// ongemoeid. Zie [_convertDocumentToPresentation] voor de bevestiging en
   /// het nieuwe tabblad.
   Future<void> _convertToPresentation() => _convertDocumentToPresentation(this);
+
+  /// Presenteer dit document zoals hij is — de zelfde body, pagina voor
+  /// pagina, met live bewerken op vooraf aangewezen tabellen (#2487). De
+  /// aanwijsdialoog, de tweede-scherm-grens en de afsluitkeuze-afhandeling
+  /// staan in parts/document_editor_presenter.dart — ze raken geen veld
+  /// van de State.
+  Future<void> _presentDocument() =>
+      _presentDocumentSession(context, ref, _controller.text);
 
   /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.
   ///
@@ -623,6 +636,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ),
     onEditFields: () => unawaited(_editDocumentFields(context, ref)),
     onConvertToPresentation: _convertToPresentation,
+    onPresentDocument: _presentDocument,
     controller: _controller,
     editorFocus: _editorFocus,
     docTheme: _docSurfaceTheme(theme, _styleProfile),

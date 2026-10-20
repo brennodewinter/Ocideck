@@ -6392,6 +6392,30 @@ bevestigingsvenster zegt wat er verloren gaat voordat er iets gebeurt:
   dat een presentatie en een document geen perfecte spiegel van elkaar zijn — de
   splitsing is een voorstel, geen bijectie.
 
+### Een document presenteren
+
+*(Toegevoegd 2026-10-20, #2487.)* **Presenteer document…** in het ⋮-menu van de
+documentwerkbalk toont het document zoals het is — geen omgezette dia's, maar de
+doorlopende tekst pagina voor pagina. De pagina-einden zijn dezelfde als bij de
+export: een `---` op blokniveau breekt de pagina, en hoofdstukken beginnen alleen
+een nieuwe pagina als de instelling *Nieuw hoofdstuk op een nieuwe pagina* aan
+staat.
+
+Vóór het starten vink je aan welke tabellen tijdens het presenteren live bewerkt
+mogen worden; zonder aanvinken is alles alleen-lezen. In de presentatie opent
+**E** — of de knop *Tabel bewerken (E)* — de bewerkmodus voor de eerste
+aangewezen tabel op de pagina; **Esc** sluit alleen de bewerkmodus, niet de
+presentatie. Wat je typt blijft op je eigen scherm totdat de cel is afgerond:
+pas dan schrijft OciDeck de wijziging in het document (dezelfde chirurgische
+terugschrijf als de Bron-preview) en stuurt het scherm het bijgewerkte beeld naar
+het publieksscherm — met een tweede scherm loopt dat beeld in volgorde mee; zonder
+tweede scherm presenteer je enkelscherm.
+
+Bij het afsluiten kiest de presentator expliciet wat er met de sessie gebeurt:
+**Bewaren in document**, **Bewaren als kopie** (een nieuw tabblad; het origineel
+blijft ongemoeid) of **Verwerpen**. Zonder bewerkingen verschijnt die keuze niet
+en sluit de presentatie gewoon.
+
 ## Markdown-modus
 
 Het code-icoon in de werkbalk schakelt de bewerker naar **Markdown-modus**: het hele deck wordt

@@ -318,10 +318,9 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
         builder: (dialogContext) => AlertDialog(
           title: Text(l10n.d('Afgeleide cel overschreven')),
           content: Text(
-            l10n.d(
-              'Je typte in een berekende kolom (${cols.join(', ')}). '
-              'De formule is nog niet weg — wat was de bedoeling?',
-            ),
+            '${l10n.d('Je typte in een berekende kolom')} '
+            '(${cols.join(', ')}). '
+            '${l10n.d('De formule is nog niet weg — wat was de bedoeling?')}',
           ),
           actions: [
             TextButton(
@@ -447,7 +446,7 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
                     onChanged: (_) => setD(() {}),
                     decoration: InputDecoration(
                       labelText: l10n.d('Expressie'),
-                      hintText: 's_n * o_n * d_n',
+                      hintText: l10n.d('s_n * o_n * d_n'),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -458,8 +457,7 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
                   const SizedBox(height: 4),
                   Text(
                     l10n.d(
-                      '+ - * / ( ), kolomsleutels, sleutel@ID, '
-                      'sum avg min max count wsum. Onbekend is nooit 0.',
+                      '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.',
                     ),
                     style: const TextStyle(fontSize: 10.5),
                   ),
@@ -518,8 +516,7 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
         title: Text(l10n.d('Formule verwijderen?')),
         content: Text(
           l10n.d(
-            'De kolom "$col" wordt een gewone kolom: de cellen houden '
-            'hun laatste berekende waarde als platte tekst.',
+            'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.',
           ),
         ),
         actions: [
@@ -683,7 +680,10 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
                 InputChip(
                   avatar: const Icon(Icons.functions, size: 15),
                   label: Text(
-                    'ƒ ${def.col} = ${def.expr}',
+                    l10n
+                        .d('ƒ {kolom} = {formule}')
+                        .replaceAll('{kolom}', def.col)
+                        .replaceAll('{formule}', def.expr),
                     style: const TextStyle(fontSize: 11.5),
                   ),
                   visualDensity: VisualDensity.compact,

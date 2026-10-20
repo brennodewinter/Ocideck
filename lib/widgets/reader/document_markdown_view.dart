@@ -386,7 +386,7 @@ class DocumentMarkdownView extends StatelessWidget {
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
     _Kind.chart => _chart(t, b.text, kindOrdinal),
-    _Kind.table => _tableOrBowtie(t, b, kindOrdinal),
+    _Kind.table => _tableOrBowtie(this, t, b, kindOrdinal),
     _Kind.timeline => _TimelineEventView(
       theme: t,
       event: b,
@@ -565,39 +565,10 @@ class DocumentMarkdownView extends StatelessWidget {
       // `<!-- ocideck:* -->`-markers zijn machine-metadata: het contract
       // belooft dat een lezer ze negeert, dus zijn ze hier onzichtbaar.
       // De drager van een bowtie-blok tagt zijn tabel — waar geen
-      // cel-editor aan hangt toont hij als afgeleid diagram (#2496).
+      // cel-editor aan hangt toont hij als afgeleid diagram (#2496). De
+      // parse-loop zelf staat in parts/document_markdown_table.dart.
       if (isOciTableMarkerLine(line)) {
-        var mEnd = i;
-        String? carrier;
-        while (mEnd < lines.length && isOciTableMarkerLine(lines[mEnd])) {
-          final m = parseOciTableMarker(lines[mEnd]);
-          if (carrier == null && m != null && m.kind != OciMarkerKinds.calc) {
-            carrier = m.kind;
-          }
-          mEnd++;
-        }
-        var j = mEnd;
-        while (j < lines.length && lines[j].trim().isEmpty) {
-          j++;
-        }
-        final boundTable =
-            j + 1 < lines.length &&
-            isMarkdownTableLine(lines[j]) &&
-            isMarkdownTableDelimiterRow(lines[j + 1]);
-        if (carrier == OciMarkerKinds.bowtie && boundTable) {
-          final parsed = _parseTableAt(lines, j);
-          blocks.add(
-            _Block(
-              _Kind.table,
-              rows: parsed.block.rows,
-              aligns: parsed.block.aligns,
-              source: lines.sublist(i, parsed.end).join('\n'),
-            ),
-          );
-          i = parsed.end;
-        } else {
-          i = mEnd;
-        }
+        i = _skipOciMarkers(lines, i, blocks);
         continue;
       }
 
@@ -825,33 +796,8 @@ class DocumentMarkdownView extends StatelessWidget {
     renderer: mermaidRenderer,
   );
 
-  /// Een `<!-- ocideck:bowtie -->`-tabel (#2496): waar geen cel-editor aan
-  /// hangt (lezer, Pagina's, niet-bewerkbare voorvertoning) is dit het
-  /// afgeleide diagram; in de bewerkbare Bron-preview blijft het de
-  /// tabel. [b.source] draagt dan marker+tabel-bron, de zoektekst blijft
-  /// die van de tabelrijen en de schermlezer krijgt de paden als tekst.
-  Widget _tableOrBowtie(_Theme t, _Block b, int ordinal) {
-    if (b.source.isEmpty) return _table(t, b.rows, b.aligns, ordinal);
-    final editor =
-        tableEditorFor?.call(ordinal) ??
-        (ordinal == 0 ? tableEditController : null);
-    if (editor != null) return _table(t, b.rows, b.aligns, ordinal);
-    final marked = scanOciMarkedTables(b.source).tables.firstOrNull;
-    final mmd = marked == null ? null : ociBowtieMermaid(marked);
-    final fallback = _table(t, b.rows, b.aligns, ordinal);
-    if (marked == null || mmd == null) return fallback;
-    return Semantics(
-      label: ociBowtieSemanticsLabel(marked),
-      child: DocMermaidView(
-        source: mmd,
-        fallback: fallback,
-        dark: t.dark,
-        scaleToFit: scaleMermaidToFit,
-        renderer: mermaidRenderer,
-      ),
-    );
-  }
-
+  /// Een `<!-- ocideck:bowtie -->`-tabel (#2496): zie [_tableOrBowtie] in
+  /// parts/document_markdown_table.dart.
   /// Een ```chart-blok als gerenderde grafiek (statische SVG, dezelfde renderlaag
   /// als de HTML-export). Draagt het blok geen inline cijfers (bv. een
   /// `source:`-verwijzing die nog niet gehydrateerd is), dan valt het terug op

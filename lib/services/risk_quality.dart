@@ -8,6 +8,9 @@
 /// afschrijving van de bron (D2, §3.6).
 library;
 
+import 'dart:ui' show Locale;
+
+import '../l10n/app_localizations.dart';
 import '../models/risk_dossier.dart';
 import 'ocideck_marked_table.dart';
 import 'ocideck_markers.dart';
@@ -108,13 +111,28 @@ class RiskQualityReport {
 int _rowLine(OciMarkedTable table, int rowIndex) =>
     table.tableStart + 3 + rowIndex;
 
+/// Zichtbare tekst, dus door l10n — `d()` kijkt naar de actieve taal, de
+/// constructor-locale is een formaliteit (dezelfde contextloze route als
+/// export_service en display_window_service).
+AppLocalizations get _l10n => const AppLocalizations(Locale('nl'));
+
 /// Draait de volledige controle over [source]. O(n) over de regels —
 /// de scanner loopt het bestand één keer, de records één keer.
 RiskQualityReport riskQualityFindings(String source) {
   final dossier = RiskDossier.read(source);
   final findings = <RiskQualityFinding>[];
+  _idIntegrity(dossier, findings);
+  _scoreAndNettoChecks(dossier, findings);
+  _measureLifecycleChecks(dossier, findings);
+  _bowtieChecks(dossier, findings);
+  _calcChecks(dossier, findings);
+  _viewChecks(source, dossier, findings);
+  findings.sort((a, b) => a.line - b.line);
+  return RiskQualityReport(findings);
+}
 
-  // --- ID-integriteit, over álle contracttabellen ----------------------
+/// ID-integriteit, over álle contracttabellen.
+void _idIntegrity(RiskDossier dossier, List<RiskQualityFinding> findings) {
   for (final table in dossier.scan.tables) {
     if (!(table.marker?.versionSupported ?? false)) continue;
     if (table.kind == OciMarkerKinds.view) continue;
@@ -135,11 +153,15 @@ RiskQualityReport riskQualityFindings(String source) {
             line: _rowLine(table, i),
             tableId: table.id,
             message: bowtie
-                ? 'Rij ${i + 1} heeft geen pad.'
-                : 'Rij ${i + 1} heeft geen ID.',
-            consequence:
-                'Zonder ID kan niets deze rij aanspreken — weergaven, '
-                'maatregelen en de controle zelf slaan hem over.',
+                ? _l10n
+                      .d('Rij {n} heeft geen pad.')
+                      .replaceAll('{n}', '${i + 1}')
+                : _l10n
+                      .d('Rij {n} heeft geen ID.')
+                      .replaceAll('{n}', '${i + 1}'),
+            consequence: _l10n.d(
+              'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.',
+            ),
           ),
         );
         continue;
@@ -153,12 +175,15 @@ RiskQualityReport riskQualityFindings(String source) {
             line: _rowLine(table, i),
             tableId: table.id,
             recordId: id,
-            message:
-                '"$id" komt twee keer voor '
-                '(ook op regel ${seen[id]! + 1}).',
-            consequence:
-                'Verwijzingen naar "$id" zijn onzeker: welke rij is bedoeld, '
-                'is een menselijke keuze.',
+            message: _l10n
+                .d('"{id}" komt twee keer voor (ook op regel {regel}).')
+                .replaceAll('{id}', id)
+                .replaceAll('{regel}', '${seen[id]! + 1}'),
+            consequence: _l10n
+                .d(
+                  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.',
+                )
+                .replaceAll('{id}', id),
           ),
         );
       } else {
@@ -166,8 +191,14 @@ RiskQualityReport riskQualityFindings(String source) {
       }
     }
   }
+}
 
-  // --- Schaal en scores per risicoregister -----------------------------
+/// Schaal en scores per risicoregister: leesbaar, binnen schaal, netto
+/// alleen met grondslag, en geen verweesde maatregel-verwijzingen.
+void _scoreAndNettoChecks(
+  RiskDossier dossier,
+  List<RiskQualityFinding> findings,
+) {
   for (final table in dossier.riskTables) {
     final marker = table.marker!;
     final method = RiskMethod.parse(marker.attr('method') ?? '');
@@ -181,12 +212,14 @@ RiskQualityReport riskQualityFindings(String source) {
           code: 'scale-unknown',
           line: table.blockStart + 1,
           tableId: table.id,
-          message:
-              'De schaal "$scaleName" staat niet in dit bestand '
-              'en is ook geen ingebouwde naam.',
-          consequence:
-              'Scores zijn niet te toetsen zolang de schaal '
-              'ontbreekt.',
+          message: _l10n
+              .d(
+                'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.',
+              )
+              .replaceAll('{schaal}', scaleName),
+          consequence: _l10n.d(
+            'Scores zijn niet te toetsen zolang de schaal ontbreekt.',
+          ),
         ),
       );
     }
@@ -207,11 +240,13 @@ RiskQualityReport riskQualityFindings(String source) {
               line: line,
               tableId: table.id,
               recordId: record.id.isEmpty ? null : record.id,
-              message:
-                  '"$raw" is geen getal voor ${ociContractHeaderName(key)}.',
-              consequence:
-                  'Een onleesbare score rekent als onbetrouwbaar cijfer, '
-                  'niet als nul.',
+              message: _l10n
+                  .d('"{waarde}" is geen getal voor {kolom}.')
+                  .replaceAll('{waarde}', raw)
+                  .replaceAll('{kolom}', ociContractHeaderName(key)),
+              consequence: _l10n.d(
+                'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.',
+              ),
             ),
           );
         } else if (max > 0 && (value < 1 || value > max)) {
@@ -222,12 +257,16 @@ RiskQualityReport riskQualityFindings(String source) {
               line: line,
               tableId: table.id,
               recordId: record.id.isEmpty ? null : record.id,
-              message:
-                  'Score $value voor ${ociContractHeaderName(key)} '
-                  'valt buiten de schaal 1–$max.',
-              consequence:
-                  'Buiten-schaal-scores verstoren RPN, kans×impact '
-                  'en elke projectie die erop rekent.',
+              message: _l10n
+                  .d(
+                    'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.',
+                  )
+                  .replaceAll('{waarde}', '$value')
+                  .replaceAll('{kolom}', ociContractHeaderName(key))
+                  .replaceAll('{max}', '$max'),
+              consequence: _l10n.d(
+                'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.',
+              ),
             ),
           );
         }
@@ -249,12 +288,12 @@ RiskQualityReport riskQualityFindings(String source) {
               line: line,
               tableId: table.id,
               recordId: record.id.isEmpty ? null : record.id,
-              message:
-                  'Netto-score zonder getoetste/werkende maatregel '
-                  'of netto-grondslag.',
-              consequence:
-                  'Het residu-risico is niet onderbouwd — een '
-                  'export suggereert dan meer zekerheid dan er is.',
+              message: _l10n.d(
+                'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.',
+              ),
+              consequence: _l10n.d(
+                'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.',
+              ),
             ),
           );
         }
@@ -269,18 +308,26 @@ RiskQualityReport riskQualityFindings(String source) {
               line: line,
               tableId: table.id,
               recordId: record.id.isEmpty ? null : record.id,
-              message: 'Verwijst naar maatregel "$mId", die niet bestaat.',
-              consequence:
-                  'De koppeling doet niets; de maatregel telt '
-                  'niet mee voor de netto-grondslag.',
+              message: _l10n
+                  .d('Verwijst naar maatregel "{maatregel}", die niet bestaat.')
+                  .replaceAll('{maatregel}', mId),
+              consequence: _l10n.d(
+                'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.',
+              ),
             ),
           );
         }
       }
     }
   }
+}
 
-  // --- Maatregelen: levenscyclus en terugverwijzingen -------------------
+/// Maatregelen: levenscyclus en terugverwijzingen — een getoetste/werkende
+/// maatregel zonder toetsdatum of bewijs is belofte zonder bewijs.
+void _measureLifecycleChecks(
+  RiskDossier dossier,
+  List<RiskQualityFinding> findings,
+) {
   for (final table in dossier.measureTables) {
     for (var i = 0; i < table.bodyRows.length; i++) {
       final measure = MeasureRecord(table.contractRows[i]);
@@ -295,10 +342,12 @@ RiskQualityReport riskQualityFindings(String source) {
               line: line,
               tableId: table.id,
               recordId: id,
-              message: 'Verwijst naar risico "$rId", dat niet bestaat.',
-              consequence:
-                  'De maatregel lijkt een risico te dekken dat '
-                  'er niet is.',
+              message: _l10n
+                  .d('Verwijst naar risico "{risico}", dat niet bestaat.')
+                  .replaceAll('{risico}', rId),
+              consequence: _l10n.d(
+                'De maatregel lijkt een risico te dekken dat er niet is.',
+              ),
             ),
           );
         }
@@ -315,10 +364,12 @@ RiskQualityReport riskQualityFindings(String source) {
               line: line,
               tableId: table.id,
               recordId: id,
-              message: 'Status "${status.token}" zonder toetsdatum.',
-              consequence:
-                  'Er is geen bewijs dat de maatregel werkt — '
-                  'netto-scores die erop steunen zijn ongedekt.',
+              message: _l10n
+                  .d('Status "{status}" zonder toetsdatum.')
+                  .replaceAll('{status}', status.token),
+              consequence: _l10n.d(
+                'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.',
+              ),
             ),
           );
         }
@@ -331,20 +382,24 @@ RiskQualityReport riskQualityFindings(String source) {
               line: line,
               tableId: table.id,
               recordId: id,
-              message: 'De geldigheid (${measure.expires}) is verlopen.',
-              consequence:
-                  'De maatregel kan vervallen zijn; netto-scores '
-                  'die erop rusten vragen hertoetsing.',
+              message: _l10n
+                  .d('De geldigheid ({geldigheid}) is verlopen.')
+                  .replaceAll('{geldigheid}', measure.expires),
+              consequence: _l10n.d(
+                'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.',
+              ),
             ),
           );
         }
       }
     }
   }
+}
 
-  // --- Bowtie: padintegriteit, rol/zijde, status, verwijzingen ----------
-  // (#2495) Een open pad is een concept — waarschuwing, nooit stille
-  // dekking; een verweesde maatregel of foute zijde is altijd te melden.
+/// Bowtie (#2495): padintegriteit, rol/zijde, status en verwijzingen. Een
+/// open pad is een concept — waarschuwing, nooit stille dekking; een
+/// verweesde maatregel of foute zijde is altijd te melden.
+void _bowtieChecks(RiskDossier dossier, List<RiskQualityFinding> findings) {
   for (final table in dossier.bowtieTables) {
     for (var i = 0; i < table.bodyRows.length; i++) {
       final element = BowtieElement(table.contractRows[i]);
@@ -359,10 +414,12 @@ RiskQualityReport riskQualityFindings(String source) {
             line: line,
             tableId: table.id,
             recordId: record,
-            message: 'Rol "${element.role}" is geen bekende bowtie-rol.',
-            consequence:
-                'Het element staat buiten elk padverhaal — '
-                'het telt nergens mee.',
+            message: _l10n
+                .d('Rol "{rol}" is geen bekende bowtie-rol.')
+                .replaceAll('{rol}', element.role),
+            consequence: _l10n.d(
+              'Het element staat buiten elk padverhaal — het telt nergens mee.',
+            ),
           ),
         );
       } else if (role != null) {
@@ -376,10 +433,13 @@ RiskQualityReport riskQualityFindings(String source) {
               line: line,
               tableId: table.id,
               recordId: record,
-              message: 'Rol "$role" hoort niet op zijde "$side".',
-              consequence:
-                  'Een preventieve barrière rechts mitigeert '
-                  'niets — het pad leest dan een ander verhaal.',
+              message: _l10n
+                  .d('Rol "{rol}" hoort niet op zijde "{zijde}".')
+                  .replaceAll('{rol}', role)
+                  .replaceAll('{zijde}', side),
+              consequence: _l10n.d(
+                'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.',
+              ),
             ),
           );
         }
@@ -393,8 +453,12 @@ RiskQualityReport riskQualityFindings(String source) {
             line: line,
             tableId: table.id,
             recordId: record,
-            message: 'Status "$status" is geen bekend token.',
-            consequence: 'Het is onduidelijk of deze barrière iets dekt.',
+            message: _l10n
+                .d('Status "{status}" is geen bekend token.')
+                .replaceAll('{status}', status),
+            consequence: _l10n.d(
+              'Het is onduidelijk of deze barrière iets dekt.',
+            ),
           ),
         );
       }
@@ -407,10 +471,13 @@ RiskQualityReport riskQualityFindings(String source) {
             line: line,
             tableId: table.id,
             recordId: record,
-            message:
-                'Bowtie-element "${element.element}" verwijst naar '
-                'maatregel "$mId", die niet bestaat.',
-            consequence: 'De barrière lijkt gedekt maar is dat niet.',
+            message: _l10n
+                .d(
+                  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.',
+                )
+                .replaceAll('{element}', element.element)
+                .replaceAll('{maatregel}', mId),
+            consequence: _l10n.d('De barrière lijkt gedekt maar is dat niet.'),
           ),
         );
       }
@@ -425,17 +492,23 @@ RiskQualityReport riskQualityFindings(String source) {
             line: table.blockStart + 1,
             tableId: table.id,
             recordId: path.id,
-            message: 'Pad "${path.id}" mist: ${path.gaps.join(', ')}.',
-            consequence:
-                'Het pad is een schets — geen complete dekking '
-                'om mee te exporteren of te presenteren.',
+            message: _l10n
+                .d('Pad "{pad}" mist: {ontbrekend}.')
+                .replaceAll('{pad}', path.id)
+                .replaceAll('{ontbrekend}', path.gaps.join(', ')),
+            consequence: _l10n.d(
+              'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.',
+            ),
           ),
         );
       }
     }
   }
+}
 
-  // --- Afgeleide cellen (calc, §3.7) ------------------------------------
+/// Afgeleide cellen (calc, §3.7): onleesbare formules, cycli, rekenfouten
+/// en drift tussen opgeslagen en herberekende waarde.
+void _calcChecks(RiskDossier dossier, List<RiskQualityFinding> findings) {
   for (final table in dossier.scan.tables) {
     if (!(table.marker?.versionSupported ?? false)) continue;
     final defs = ociCalcDefs(table);
@@ -448,12 +521,13 @@ RiskQualityReport riskQualityFindings(String source) {
             code: 'calc-invalid',
             line: table.blockStart + 1,
             tableId: table.id,
-            message:
-                'Formule op "${def.col.isEmpty ? '?' : def.col}" '
-                'is niet te lezen: "${def.expr}".',
-            consequence:
-                'De afgeleide kolom toont "—" — de marker blijft bewaard '
-                'maar rekent niet mee.',
+            message: _l10n
+                .d('Formule op "{kolom}" is niet te lezen: "{formule}".')
+                .replaceAll('{kolom}', def.col.isEmpty ? '?' : def.col)
+                .replaceAll('{formule}', def.expr),
+            consequence: _l10n.d(
+              'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.',
+            ),
           ),
         );
       }
@@ -466,10 +540,10 @@ RiskQualityReport riskQualityFindings(String source) {
           code: 'calc-cycle',
           line: table.blockStart + 1,
           tableId: table.id,
-          message: 'Een formule verwijst (indirect) naar zichzelf.',
-          consequence:
-              'De betrokken cellen zijn onbekend — de cyclus vergt een '
-              'menselijke keuze over de bedoelde berekening.',
+          message: _l10n.d('Een formule verwijst (indirect) naar zichzelf.'),
+          consequence: _l10n.d(
+            'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.',
+          ),
         ),
       );
     }
@@ -480,7 +554,7 @@ RiskQualityReport riskQualityFindings(String source) {
         final result = eval.results[r][d];
         final label = table.contractRows[r]['id']?.trim().isNotEmpty == true
             ? table.contractRows[r]['id']!.trim()
-            : 'rij ${r + 1}';
+            : _l10n.d('rij {n}').replaceAll('{n}', '${r + 1}');
         if (result.error != null && result.error != CalcErrors.cycle) {
           findings.add(
             RiskQualityFinding(
@@ -489,10 +563,19 @@ RiskQualityReport riskQualityFindings(String source) {
               line: _rowLine(table, r),
               tableId: table.id,
               recordId: table.contractRows[r]['id']?.trim(),
-              message:
-                  'Berekening "${defs[d].col}" op $label mislukt '
-                  '(${result.error == CalcErrors.divZero ? 'deling door nul' : 'overflow'}).',
-              consequence: 'De cel toont "—" — geen 0, geen oud getal.',
+              message: _l10n
+                  .d('Berekening "{kolom}" op {rij} mislukt ({reden}).')
+                  .replaceAll('{kolom}', defs[d].col)
+                  .replaceAll('{rij}', label)
+                  .replaceAll(
+                    '{reden}',
+                    result.error == CalcErrors.divZero
+                        ? _l10n.d('deling door nul')
+                        : _l10n.d('overflow'),
+                  ),
+              consequence: _l10n.d(
+                'De cel toont "—" — geen 0, geen oud getal.',
+              ),
             ),
           );
           continue;
@@ -505,7 +588,11 @@ RiskQualityReport riskQualityFindings(String source) {
         if (stored.trim() != computed) {
           drift++;
           firstDrift = firstDrift.isEmpty
-              ? 'rij ${r + 1}: "$stored" → "$computed"'
+              ? _l10n
+                    .d('rij {n}: "{oud}" → "{nieuw}"')
+                    .replaceAll('{n}', '${r + 1}')
+                    .replaceAll('{oud}', stored)
+                    .replaceAll('{nieuw}', computed)
               : firstDrift;
         }
       }
@@ -517,20 +604,35 @@ RiskQualityReport riskQualityFindings(String source) {
           code: 'calc-drift',
           line: table.blockStart + 1,
           tableId: table.id,
-          message:
-              'De opgeslagen afgeleide waarden lopen achter '
-              '($firstDrift${drift > 1 ? ', +${drift - 1} meer' : ''}).',
-          consequence:
-              'De tabel toont niet wat de formule nu oplevert — '
-              'herberekenen schrijft de uitkomst bij, nooit de invoer.',
+          message: _l10n
+              .d('De opgeslagen afgeleide waarden lopen achter ({details}).')
+              .replaceAll(
+                '{details}',
+                drift > 1
+                    ? _l10n
+                          .d('{eerste}, +{n} meer')
+                          .replaceAll('{eerste}', firstDrift)
+                          .replaceAll('{n}', '${drift - 1}')
+                    : firstDrift,
+              ),
+          consequence: _l10n.d(
+            'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.',
+          ),
           repair: RiskQualityRepair.recalculateCalc,
           repairTable: table,
         ),
       );
     }
   }
+}
 
-  // --- Gekoppelde weergaven --------------------------------------------
+/// Gekoppelde weergaven: bron aanwezig en de afschrijving gelijk aan wat
+/// de bron nu zegt.
+void _viewChecks(
+  String source,
+  RiskDossier dossier,
+  List<RiskQualityFinding> findings,
+) {
   for (final view in dossier.viewTables) {
     final check = checkOciView(source, view);
     final sourceId = view.marker?.attr('source') ?? '';
@@ -541,12 +643,14 @@ RiskQualityReport riskQualityFindings(String source) {
           code: 'view-source-missing',
           line: view.blockStart + 1,
           tableId: view.id,
-          message:
-              'De weergave noemt bron "$sourceId", '
-              'die niet in dit bestand staat.',
-          consequence:
-              'De afschrijving is onherstelbaar zonder bron — '
-              'loskoppelen of verwijderen is de menselijke keuze.',
+          message: _l10n
+              .d(
+                'De weergave noemt bron "{bron}", die niet in dit bestand staat.',
+              )
+              .replaceAll('{bron}', sourceId),
+          consequence: _l10n.d(
+            'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.',
+          ),
         ),
       );
     } else if (check.mismatches.isNotEmpty) {
@@ -556,22 +660,26 @@ RiskQualityReport riskQualityFindings(String source) {
           code: 'view-mismatch',
           line: view.blockStart + 1,
           tableId: view.id,
-          message:
-              'De weergave wijkt af van de bron: '
-              '${check.mismatches.first}'
-              '${check.mismatches.length > 1 ? ' (+${check.mismatches.length - 1} meer)' : ''}.',
-          consequence:
-              'De tabel toont wat de bron niet meer zegt — '
-              'verversen herbouwt hem uit de bron.',
+          message: _l10n
+              .d('De weergave wijkt af van de bron: {details}.')
+              .replaceAll(
+                '{details}',
+                check.mismatches.length > 1
+                    ? _l10n
+                          .d('{eerste} (+{n} meer)')
+                          .replaceAll('{eerste}', check.mismatches.first)
+                          .replaceAll('{n}', '${check.mismatches.length - 1}')
+                    : check.mismatches.first,
+              ),
+          consequence: _l10n.d(
+            'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.',
+          ),
           repair: RiskQualityRepair.refreshView,
           repairTable: view,
         ),
       );
     }
   }
-
-  findings.sort((a, b) => a.line - b.line);
-  return RiskQualityReport(findings);
 }
 
 /// Leesbare naam van een contractkolom voor meldingen.

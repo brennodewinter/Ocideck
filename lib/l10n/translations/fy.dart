@@ -652,6 +652,191 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" komt twa kear foar (ek op rigel {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" is gjin getal foar {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Berekning "{kolom}" op {rij} mislearre ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'De barriêre liket dekt mar is dat net.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie-elemint "{element}" ferwiist nei maatregel "{maatregel}", dy’t net bestiet.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Skoares bûten de skaal fersteure RPN, kâns×ynfloed en elke projeksje dy’t derop rekkent.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'De ôflaatte kolom toant "—" — de markearring bliuwt mar telt net mei.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'De ôfskrift kin net werom boud wurde sûnder boarne — losmeitsjen of fuortsmiten is de minsklike kar.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'De belutsen sellen binne ûnbekend — de syklus freget in minsklike kar oer de bedoelde berekning.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'De sel toant "—" — gjin 0, gjin âld getal.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'De jildichheid ({geldigheid}) is ferrûn.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'De keppeling docht neat; de maatregel telt net mei foar de netto-grûnslach.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'De maatregel kin ferrûn wêze; netto-skoares dy’t derop steane freegje hertoetsing.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'De maatregel liket in risiko te dekkjen dat der net is.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'De opslein ôflate wearde rinne efter ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'De skaal "{schaal}" stiet net yn dit bestân en is ek gjin ynboude namme.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'De tabel toant net wat de formule no oplevert — opnij rekkenjen skriuwt de útkomst by, nea de ynfier.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'De tabel toant wat de boarne net mear seit — fernijen bout him opnij út de boarne.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'De werjefte neamet boarne "{bron}", dy’t net yn dit bestân stiet.',
+  'De weergave wijkt af van de bron: {details}.':
+      'De werjefte wijkt ôf fan de boarne: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'In formule ferwiist (yndirekt) nei harsels.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'In ûnlêsbere skoare rekkent as ûnbetrouber sifer, net as nul.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'In previntive barriêre rjochts mitigeart neat — it paad fertelt dan in oar ferhaal.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Der is gjin bewiis dat de maatregel wurket — netto-skoares dy’t derop steane binne ûndekt.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formule op "{kolom}" is net te lêzen: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'It elemint stiet bûten elt paadferhaal — it telt nearne mei.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'It is ûndúdlik oft dizze barriêre wat dekt.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'It paad is in skets — gjin folsleine dekking om mei te eksportearjen of te presintearjen.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'It residu-risiko is net ûnderboud — in eksport soe dan mear wisheid suggerearje as der is.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Netto-skoare sûnder teste/wurkjende maatregel of netto-grûnslach.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Paad "{pad}" mist: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Rigel {n} hat gjin ID.',
+  'Rij {n} heeft geen pad.': 'Rigel {n} hat gjin paad.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Rol "{rol}" heart net op side "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Rol "{rol}" is gjin bekende bowtie-rol.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Skoare {waarde} foar {kolom} falt bûten de skaal 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Skoares binne net te toetsen salang’t de skaal ûntbrekt.',
+  'Status "{status}" is geen bekend token.':
+      'Steat "{status}" is gjin bekend token.',
+  'Status "{status}" zonder toetsdatum.': 'Steat "{status}" sûnder toetsdatum.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Ferwiist nei maatregel "{maatregel}", dy’t net bestiet.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Ferwiist nei risiko "{risico}", dat net bestiet.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Ferwizingen nei "{id}" binne ûnwis: hokker rigel bedoeld is, is in minsklike kar.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Sûnder ID kin neat dizze rigel oansprekke — werjeften, maatregels en de kontrôle sels slaan him oer.',
+  'deling door nul': 'dielen troch nul',
+  'rij {n}': 'rigel {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'rigel {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'rigel {r} kolom {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} mear)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} mear',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), kolomkaaien, kaai@ID, sum avg min max count wsum. Unbekend is nea 0.',
+  'Afgeleide cel overschreven': 'Oflate sel oerskreaun',
+  'Afgeleide kolom': 'Oflate kolom',
+  'Als risicoregister markeren…': 'Markearje as risikoregister…',
+  'Beoordelaar (naam/rol)': 'Beoardeler (namme/rol)',
+  'Beoordelingsschaal': 'Beoardelingsskaal',
+  'Berekening toevoegen': 'Berekkening tafoegje',
+  'Berekening…': 'Berekkening…',
+  'Blokkerende fouten': 'Blokkearjende flaters',
+  'Bowtie-model': 'Bowtie-model',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Bruto — allinnich de oarspronklike ynskatting',
+  'Concept — pad mist': 'Untwurpen — paad mist',
+  'De brontabel van deze weergave is niet gevonden.':
+      'De boarnetabel fan dizze werjefte is net fûn.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'De sifers binne net betrouber salang\'t dizze der binne.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'De formule is noch net wei — wat wie de bedoeling?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Dizze kolom wurdt in gewoane kolom: de sellen hâlde harren lêste berekkene wearde as flatte tekst.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Dizze projeksje past net by de metoade fan de boarne.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Dizze tabel hat gjin rigen om as risiko fêst te lizzen.',
+  'Diagram': 'Diagram',
+  'Doel van de beoordeling': 'Doel fan de beoardieling',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Bedrigingen, barriêres en gefolgen om ien barren',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'In ienfâldige ynskatting: hoe wierskynlik × hoe grut it gefolch',
+  'Een lege tabel voor maatregelen met levensfase':
+      'In lege tabel foar maatregels mei libbensfase',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Eksportearst dochs, dan giet it bestân as untwurpen mei ûnwisse sifers út — iepenje it oersjoch om se earst te werstellen.',
+  'Expressie': 'Ekspresje',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Falwizen mei earnst, kâns en deteksje (S×O×D)',
+  'Formule bewerken': 'Formule bewurke',
+  'Formule vervangen': 'Formule ferfange',
+  'Formule verwijderen': 'Formule fuortsmite',
+  'Formule verwijderen?': 'Formule fuortsmite?',
+  'Ga naar': 'Gean nei',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Gjin befiningen — IDs, skoaren en keppele werjeften kloppe.',
+  'Gekoppelde weergave': 'Keppele werjefte',
+  'Gekoppelde weergave toevoegen': 'Keppele werjefte tafoegje',
+  'Gekoppelde weergave…': 'Keppele werjefte…',
+  'Herberekenen': 'Opnij berekenje',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Ynhâldlik om nei te rinnen; ien hat in feilige werstelknop.',
+  'Je typte in een berekende kolom': 'Jo typten yn in berekkene kolom',
+  'Kans × impact': 'Kâns × ynfloed',
+  'Loskoppelen als momentopname': 'Losmeitsje as momintopname',
+  'Maatregelenregister': 'Maatregelsregister',
+  'Maatregelenregister toevoegen': 'Maatregelsregister tafoegje',
+  'Marker verwijderen': 'Marker fuortsmite',
+  'Markeren': 'Markearje',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Netto — allinnich de ynskatting nei maatregels',
+  'Nieuw risicodossier': 'Nij risikodossier',
+  'Onbetrouwbare risico-cijfers in export':
+      'Unbetroubere risikosifers yn eksport',
+  'Overzicht — bruto én netto naast elkaar':
+      'Oersjoch — bruto én netto njonken elkoar',
+  'Pad toevoegen': 'Paad tafoegje',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioriteit — sorteard op skoare, dêrnei op earnst',
+  'Risico-kwaliteitscontrole': 'Risiko-kwaliteitskontrôle',
+  'Risicodossier…': 'Risikodossier…',
+  'Risicoregister': 'Risikoregister',
+  'Tabel als risicoregister markeren': 'Tabel as risikoregister markearje',
+  'Terugzetten': 'Weromsette',
+  'Verversen': 'Fernije',
+  'Vrij meenemen': 'Frij meinomje',
+  'Wat beoordeel je en waarvoor?': 'Wat beoardielest, en wêrfoar?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Wiz ta hokker kolom hokker betsjutting hat. Kolommen sûnder betsjutting bliuwe frije kolommen — der giet neat ferlern. Rigen sûnder ID krije in R-nûmer.',
+  'blokkerende bevinding(en):': 'blokkearjende befining(en):',
+  'bron': 'boarne',
+  'schaal': 'skaal',
+  'Geen bewerkbare tabel op deze pagina': 'Gjin bewurkbere tabel op dizze side',
+  'Presentatie afsluiten': 'Presintaasje ôfslute',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Der binne wizigingen makke tidens de sesje. Wat moat dêrmei barre?',
+  'Verwerpen': 'Werpsmiet',
+  'Bewaren als kopie': 'Bewarje as kopy',
+  'Bewaren in document': 'Bewarje yn dokumint',
+  'beamer': 'beamer',
+  'beamer: niet bereikbaar': 'beamer: net berikber',
+  'Bewerken sluiten (Esc)': 'Bewurken slute (Esc)',
+  'Presenteer document…': 'Presintearje dokumint…',
+  'Presenteer document': 'Presintearje dokumint',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Finkje oan hokker tabellen tidens de presintaasje live bewurke wurde meie. Al oare ynhâld bliuwt allinnich-lêzen.',
   'Extra ruimte': 'Ekstra romte',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Dizze noat is langer as it blêd — skrol foar de rest',
