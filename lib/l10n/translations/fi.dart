@@ -1606,6 +1606,193 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" esiintyy kahdesti (myös rivillä {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" ei ole luku sarakkeelle {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Laskenta "{kolom}" rivillä {rij} epäonnistui ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Este vaikuttaa katetulta, mutta ei ole.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie-elementti "{element}" viittaa toimenpiteeseen "{maatregel}", jota ei ole.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Asteikon ulkopuoliset pisteet vääristävät RPN:n, todennäköisyys×vaikutuksen ja jokaisen niihin nojaavan projektion.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Johdettu sarake näyttää "—" — merkintä säilyy mutta ei lasketa.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Kopiota ei voi rakentaa uudelleen ilman lähdettä — irrottaminen tai poistaminen on ihmisen valinta.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Kyseiset solut ovat tuntemattomia — sykli vaatii ihmisen päätöksen tarkoitetusta laskennasta.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Solu näyttää "—" — ei 0:a, ei vanhaa lukua.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Voimassaolo ({geldigheid}) on umpeutunut.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Linkki ei tee mitään; toimenpide ei laskene netto-perusteisiin.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Toimenpide on voinut raueta; sen varaan nojaavat nettopisteet vaativat uusinta-arvioinnin.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Toimenpide näyttää kattavan riskin, jota ei ole.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Tallennetut johdetut arvot ovat jäljessä ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Asteikkoa "{schaal}" ei ole tässä tiedostossa eikä se ole sisäänrakennettu nimi.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Taulukko ei näytä mitä kaava nyt tuottaa — uudelleenlaskenta kirjoittaa tuloksen uudelleen, ei koskaan syötettä.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Taulukko näyttää mitä lähde ei enää sano — päivittäminen rakentaa sen uudelleen lähteestä.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Näkymä nimee lähteen "{bron}", jota ei ole tässä tiedostossa.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Näkymä poikkeaa lähteestä: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Kaava viittaa (epäsuorasti) itseensä.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Lukukelvoton pistemäärä lasketaan epäluotettavaksi luvuksi, ei nollaksi.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Oikealla oleva ehkäisevä este ei lievennä mitään — polku kertoo silloin toisen tarinan.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Ei ole näyttöä siitä, että toimenpide toimii — sen varaan perustuvat nettopisteet ovat katteettomia.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Kaava sarakkeessa "{kolom}" ei ole luettavissa: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Elementti on jokaisen polkutarinan ulkopuolella — se ei laskene missään.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'On epäselvää, kattaako tämä este mitään.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Polku on luonnos — ei täydellistä kattavuutta vietäväksi tai esitettäväksi.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Jäännösriskiä ei ole perusteltu — vienti viittaisi silloin suurempaan varmuuteen kuin on.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Nettopistemäärä ilman testattua/toimivaa toimenpidettä tai netto-perustetta.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Polulta "{pad}" puuttuu: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Rivillä {n} ei ole tunnusta.',
+  'Rij {n} heeft geen pad.': 'Rivillä {n} ei ole polkua.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Rooli "{rol}" ei kuulu puolelle "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Rooli "{rol}" ei ole tunnettu bowtie-rooli.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Pistemäärä {waarde} sarakkeelle {kolom} menee asteikon 1–{max} ulkopuolelle.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Pisteitä ei voi tarkistaa niin kauan kuin asteikko puuttuu.',
+  'Status "{status}" is geen bekend token.':
+      'Tila "{status}" ei ole tunnettu tunnus.',
+  'Status "{status}" zonder toetsdatum.':
+      'Tila "{status}" ilman testauspäivämäärää.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Viittaa toimenpiteeseen "{maatregel}", jota ei ole.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Viittaa riskiin "{risico}", jota ei ole.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Viittaukset tunnukseen "{id}" ovat epäselviä: se, mitä riviä tarkoitetaan, on ihmisen valinta.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Ilman tunnusta mikään ei voi osoittaa tähän riviin — näkymät, toimenpiteet ja itse tarkistus ohittavat sen.',
+  'deling door nul': 'jakaminen nollalla',
+  'rij {n}': 'rivi {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'rivi {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'rivi {r} sarake {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} lisää)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} lisää',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), sarakeavaimet, avain@ID, sum avg min max count wsum. Tuntematon ei ole koskaan 0.',
+  'Afgeleide cel overschreven': 'Johdettu solu korvattu',
+  'Afgeleide kolom': 'Johdettu sarake',
+  'Als risicoregister markeren…': 'Merkitse riskirekisteriksi…',
+  'Beoordelaar (naam/rol)': 'Arvioija (nimi/rooli)',
+  'Beoordelingsschaal': 'Arviointiasteikko',
+  'Berekening toevoegen': 'Lisää laskelma',
+  'Berekening…': 'Laskelma…',
+  'Blokkerende fouten': 'Estävät virheet',
+  'Bowtie-model': 'Bowtie-malli',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Brutto — vain alkuperäinen arvio',
+  'Concept — pad mist': 'Luonnos — polku puuttuu',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Tämän näkymän lähdetaulukkoa ei löytynyt.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Luvut eivät ole luotettavia niin kauan kuin näitä on.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Kaava ei ole vielä poissa — mikä oli tarkoitus?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Tästä sarakkeesta tulee tavallinen sarake: solut säilyttävät viimeisen lasketun arvonsa pelkkänä tekstinä.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Tämä projektio ei sovi lähteen menetelmään.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Tässä taulukossa ei ole rivejä, jotka voisi kirjata riskiksi.',
+  'Diagram': 'Kaavio',
+  'Doel van de beoordeling': 'Arvioinnin tarkoitus',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Uhat, esteet ja seuraukset yhden tapahtuman ympärillä',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Yksinkertainen arvio: kuinka todennäköinen × kuinka suuri seuraus',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Tyhjä taulukko toimenpiteille elinkaarivaiheella',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Jos viet silti, tiedosto lähtee luonnoksena epävarmoine luvuineen — avaa yhteenveto korjataksesi ne ensin.',
+  'Expressie': 'Lauseke',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Vikamuodot vakavuudella, todennäköisyydellä ja havaitsemisella (S×O×D)',
+  'Formule bewerken': 'Muokkaa kaavaa',
+  'Formule vervangen': 'Korvaa kaava',
+  'Formule verwijderen': 'Poista kaava',
+  'Formule verwijderen?': 'Poistetaanko kaava?',
+  'Ga naar': 'Siirry kohteeseen',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Ei havaintoja — tunnukset, pisteet ja linkitetyt näkymät ovat kunnossa.',
+  'Gekoppelde weergave': 'Linkitetty näkymä',
+  'Gekoppelde weergave toevoegen': 'Lisää linkitetty näkymä',
+  'Gekoppelde weergave…': 'Linkitetty näkymä…',
+  'Herberekenen': 'Laske uudelleen',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Sisältöä tarkistettavaksi; yhdellä on turvallinen korjauspainike.',
+  'Je typte in een berekende kolom': 'Kirjoitit laskettuun sarakkeeseen',
+  'Kans × impact': 'Todennäköisyys × vaikutus',
+  'Loskoppelen als momentopname': 'Irrota tilannekuvana',
+  'Maatregelenregister': 'Toimenpiderekisteri',
+  'Maatregelenregister toevoegen': 'Lisää toimenpiderekisteri',
+  'Marker verwijderen': 'Poista merkki',
+  'Markeren': 'Merkitse',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Netto — vain arvio toimenpiteiden jälkeen',
+  'Nieuw risicodossier': 'Uusi riskikansio',
+  'Onbetrouwbare risico-cijfers in export':
+      'Epäluotettavat riskiluvut viennissä',
+  'Overzicht — bruto én netto naast elkaar':
+      'Yhteenveto — brutto ja netto rinnakkain',
+  'Pad toevoegen': 'Lisää polku',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioriteetti — järjestetty pistemäärän, sitten vakavuuden mukaan',
+  'Risico-kwaliteitscontrole': 'Riskin laaduntarkistus',
+  'Risicodossier…': 'Riskikansio…',
+  'Risicoregister': 'Riskirekisteri',
+  'Tabel als risicoregister markeren': 'Merkitse taulukko riskirekisteriksi',
+  'Terugzetten': 'Palauta',
+  'Verversen': 'Päivitä',
+  'Vrij meenemen': 'Ota vapaasti mukaan',
+  'Wat beoordeel je en waarvoor?': 'Mitä arvioit, ja mihin?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Määritä, millä sarakkeella on mikä merkitys. Merkityksettömät sarakkeet jäävät vapaiksi sarakkeiksi — mitään ei katoa. ID:tä vailla olevat rivit saavat R-numeron.',
+  'blokkerende bevinding(en):': 'estävä(t) havainto/havainnot:',
+  'bron': 'lähde',
+  'schaal': 'asteikko',
+  'Geen bewerkbare tabel op deze pagina':
+      'Tällä sivulla ei ole muokattavaa taulukkoa',
+  'Presentatie afsluiten': 'Lopeta esitys',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Istunnon aikana tehtiin muutoksia. Mitä niille pitäisi tehdä?',
+  'Verwerpen': 'Hylkää',
+  'Bewaren als kopie': 'Tallenna kopiona',
+  'Bewaren in document': 'Tallenna asiakirjaan',
+  'beamer': 'projektori',
+  'beamer: niet bereikbaar': 'projektori: ei tavoitettavissa',
+  'Bewerken sluiten (Esc)': 'Sulje muokkaus (Esc)',
+  'Presenteer document…': 'Esitä asiakirja…',
+  'Presenteer document': 'Esitä asiakirja',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Valitse, mitä taulukoita saa muokata livenä esityksen aikana. Kaikki muu sisältö pysyy vain luku -tilassa.',
   'Extra ruimte': 'Lisätilaa',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Tämä viite on sivua pidempi — vieritä nähdäksesi lopun',

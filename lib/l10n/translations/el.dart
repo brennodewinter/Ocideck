@@ -1631,6 +1631,194 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      'Το "{id}" εμφανίζεται δύο φορές (επίσης στη γραμμή {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      'Το "{waarde}" δεν είναι αριθμός για {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Ο υπολογισμός "{kolom}" στο {rij} απέτυχε ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Το εμπόδιο φαίνεται καλυμμένο αλλά δεν είναι.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Το στοιχείο bowtie "{element}" παραπέμπει στο μέτρο "{maatregel}", που δεν υπάρχει.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Οι βαθμολογίες εκτός κλίμακας διαστρεβλώνουν το RPN, την πιθανότητα×επίδραση και κάθε προβολή που βασίζεται σε αυτές.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Η παράγωγη στήλη εμφανίζει "—" — ο δείκτης διατηρείται αλλά δεν μετράει.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Το αντίγραφο δεν μπορεί να ανακατασκευαστεί χωρίς την πηγή — η αποσύνδεση ή η διαγραφή είναι ανθρώπινη επιλογή.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Τα εμπλεκόμενα κελιά είναι άγνωστα — ο κύκλος απαιτεί ανθρώπινη επιλογή για τον ενδεδειγμένο υπολογισμό.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Το κελί εμφανίζει "—" — ούτε 0 ούτε παλιός αριθμός.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Η ισχύς ({geldigheid}) έχει λήξει.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Ο σύνδεσμος δεν κάνει τίποτα· το μέτρο δεν μετράει για την καθαρή αιτιολόγηση.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Το μέτρο μπορεί να έχει λήξει· οι καθαρές βαθμολογίες που στηρίζονται σε αυτό χρειάζονται επανεκτίμηση.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Το μέτρο φαίνεται να καλύπτει έναν κίνδυνο που δεν υπάρχει.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Οι αποθηκευμένες παράγωγες τιμές καθυστερούν ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Η κλίμακα "{schaal}" δεν υπάρχει σε αυτό το αρχείο και δεν είναι ενσωματωμένο όνομα.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Ο πίνακας δεν δείχνει τι παράγει τώρα ο τύπος — ο επανυπολογισμός ξαναγράφει το αποτέλεσμα, ποτέ την είσοδο.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Ο πίνακας δείχνει ό,τι η πηγή δεν λέει πια — η ανανέωση τον ξαναχτίζει από την πηγή.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Η προβολή ονομάζει πηγή "{bron}", που δεν υπάρχει σε αυτό το αρχείο.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Η προβολή αποκλίνει από την πηγή: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Ένας τύπος παραπέμπει (έμμεσα) στον εαυτό του.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Μια δυσανάγνωστη βαθμολογία μετράει ως μη αξιόπιστος αριθμός, όχι ως μηδέν.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Ένα προληπτικό εμπόδιο στα δεξιά δεν μετριάζει τίποτα — η διαδρομή αφηγείται τότε άλλη ιστορία.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Δεν υπάρχει απόδειξη ότι το μέτρο λειτουργεί — οι καθαρές βαθμολογίες που στηρίζονται σε αυτό είναι ακάλυπτες.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Ο τύπος στο "{kolom}" δεν είναι αναγνώσιμος: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Το στοιχείο βρίσκεται εκτός κάθε αφήγησης διαδρομής — δεν μετράει πουθενά.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Δεν είναι σαφές αν αυτό το εμπόδιο καλύπτει κάτι.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Η διαδρομή είναι σκίτσο — όχι πλήρης κάλυψη για εξαγωγή ή παρουσίαση.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Το υπολειμματικό ρίσκο δεν τεκμηριώνεται — μια εξαγωγή θα υπονοούσε τότε μεγαλύτερη βεβαιότητα από όση υπάρχει.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Καθαρή βαθμολογία χωρίς δοκιμασμένο/λειτουργικό μέτρο ή καθαρή αιτιολόγηση.',
+  'Pad "{pad}" mist: {ontbrekend}.':
+      'Στη διαδρομή "{pad}" λείπει: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Η γραμμή {n} δεν έχει ID.',
+  'Rij {n} heeft geen pad.': 'Η γραμμή {n} δεν έχει διαδρομή.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Ο ρόλος "{rol}" δεν ανήκει στην πλευρά "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Ο ρόλος "{rol}" δεν είναι γνωστός ρόλος bowtie.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Η βαθμολογία {waarde} για {kolom} βρίσκεται εκτός της κλίμακας 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Οι βαθμολογίες δεν μπορούν να ελεγχθούν όσο λείπει η κλίμακα.',
+  'Status "{status}" is geen bekend token.':
+      'Η κατάσταση "{status}" δεν είναι γνωστό διακριτικό.',
+  'Status "{status}" zonder toetsdatum.':
+      'Κατάσταση "{status}" χωρίς ημερομηνία ελέγχου.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Παραπέμπει στο μέτρο "{maatregel}", που δεν υπάρχει.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Παραπέμπει στον κίνδυνο "{risico}", που δεν υπάρχει.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Οι αναφορές στο "{id}" είναι ασαφείς: ποια γραμμή εννοείται είναι ανθρώπινη επιλογή.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Χωρίς ID τίποτα δεν μπορεί να απευθυνθεί σε αυτή τη γραμμή — οι προβολές, τα μέτρα και ο ίδιος ο έλεγχος την παρακάμπτουν.',
+  'deling door nul': 'διαίρεση με μηδέν',
+  'rij {n}': 'γραμμή {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'γραμμή {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'γραμμή {r} στήλη {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} ακόμη)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} ακόμη',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), κλειδιά στήλης, κλειδί@ID, sum avg min max count wsum. Το άγνωστο δεν είναι ποτέ 0.',
+  'Afgeleide cel overschreven': 'Αντικαταστάθηκε παράγωγο κελί',
+  'Afgeleide kolom': 'Παράγωγη στήλη',
+  'Als risicoregister markeren…': 'Σήμανση ως μητρώο κινδύνων…',
+  'Beoordelaar (naam/rol)': 'Αξιολογητής (όνομα/ρόλος)',
+  'Beoordelingsschaal': 'Κλίμακα αξιολόγησης',
+  'Berekening toevoegen': 'Προσθήκη υπολογισμού',
+  'Berekening…': 'Υπολογισμός…',
+  'Blokkerende fouten': 'Αποκλειστικά σφάλματα',
+  'Bowtie-model': 'Μοντέλο bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Μικτό — μόνο η αρχική εκτίμηση',
+  'Concept — pad mist': 'Πρόχειρο — λείπει διαδρομή',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Ο πίνακας πηγής αυτής της προβολής δεν βρέθηκε.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Οι αριθμοί δεν είναι αξιόπιστοι όσο υπάρχουν αυτά.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Ο τύπος δεν έχει φύγει ακόμη — ποια ήταν η πρόθεση;',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Αυτή η στήλη γίνεται απλή στήλη: τα κελιά κρατούν την τελευταία υπολογισμένη τιμή ως απλό κείμενο.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Αυτή η προβολή δεν ταιριάζει στη μέθοδο της πηγής.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Αυτός ο πίνακας δεν έχει γραμμές για καταγραφή ως κίνδυνος.',
+  'Diagram': 'Διάγραμμα',
+  'Doel van de beoordeling': 'Σκοπός της αξιολόγησης',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Απειλές, φράγματα και συνέπειες γύρω από ένα γεγονός',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Μια απλή εκτίμηση: πόσο πιθανό × πόσο μεγάλη η συνέπεια',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Ένας κενός πίνακας για μέτρα με φάση ζωής',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Αν εξάγετε ούτως ή άλλως, το αρχείο βγαίνει ως πρόχειρο με αβέβαιους αριθμούς — ανοίξτε την επισκόπηση για να τα διορθώσετε πρώτα.',
+  'Expressie': 'Έκφραση',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Τρόποι αστοχίας με σοβαρότητα, συχνότητα και ανίχνευση (S×O×D)',
+  'Formule bewerken': 'Επεξεργασία τύπου',
+  'Formule vervangen': 'Αντικατάσταση τύπου',
+  'Formule verwijderen': 'Κατάργηση τύπου',
+  'Formule verwijderen?': 'Κατάργηση του τύπου;',
+  'Ga naar': 'Μετάβαση σε',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Κανένα εύρημα — τα ID, τα σκορ και οι συνδεδεμένες προβολές είναι σωστά.',
+  'Gekoppelde weergave': 'Συνδεδεμένη προβολή',
+  'Gekoppelde weergave toevoegen': 'Προσθήκη συνδεδεμένης προβολής',
+  'Gekoppelde weergave…': 'Συνδεδεμένη προβολή…',
+  'Herberekenen': 'Επανυπολογισμός',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Περιεχόμενο προς εξέταση· ένα έχει ασφαλές κουμπί επιδιόρθωσης.',
+  'Je typte in een berekende kolom': 'Πληκτρολογήσατε σε υπολογισμένη στήλη',
+  'Kans × impact': 'Πιθανότητα × αντίκτυπος',
+  'Loskoppelen als momentopname': 'Αποσύνδεση ως στιγμιότυπο',
+  'Maatregelenregister': 'Μητρώο μέτρων',
+  'Maatregelenregister toevoegen': 'Προσθήκη μητρώου μέτρων',
+  'Marker verwijderen': 'Κατάργηση δείκτη',
+  'Markeren': 'Σήμανση',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Καθαρό — μόνο η εκτίμηση μετά τα μέτρα',
+  'Nieuw risicodossier': 'Νέος φάκελος κινδύνων',
+  'Onbetrouwbare risico-cijfers in export':
+      'Αναξιόπιστοι αριθμοί κινδύνου στην εξαγωγή',
+  'Overzicht — bruto én netto naast elkaar':
+      'Επισκόπηση — μικτό και καθαρό δίπλα-δίπλα',
+  'Pad toevoegen': 'Προσθήκη διαδρομής',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Προτεραιότητα — ταξινομημένο κατά σκορ, μετά κατά σοβαρότητα',
+  'Risico-kwaliteitscontrole': 'Έλεγχος ποιότητας κινδύνου',
+  'Risicodossier…': 'Φάκελος κινδύνων…',
+  'Risicoregister': 'Μητρώο κινδύνων',
+  'Tabel als risicoregister markeren': 'Σήμανση πίνακα ως μητρώο κινδύνων',
+  'Terugzetten': 'Επαναφορά',
+  'Verversen': 'Ανανέωση',
+  'Vrij meenemen': 'Ελεύθερη μεταφορά',
+  'Wat beoordeel je en waarvoor?': 'Τι αξιολογείτε και γιατί;',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Αντιστοιχίστε ποια στήλη έχει ποια σημασία. Οι στήλες χωρίς σημασία παραμένουν ελεύθερες — τίποτα δεν χάνεται. Οι γραμμές χωρίς ID παίρνουν αριθμό R.',
+  'blokkerende bevinding(en):': 'αποκλειστικό(ά) εύρημα(τα):',
+  'bron': 'πηγή',
+  'schaal': 'κλίμακα',
+  'Geen bewerkbare tabel op deze pagina':
+      'Δεν υπάρχει επεξεργάσιμος πίνακας σε αυτή τη σελίδα',
+  'Presentatie afsluiten': 'Έξοδος από την παρουσίαση',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Έγιναν αλλαγές κατά τη συνεδρία. Τι πρέπει να γίνει με αυτές;',
+  'Verwerpen': 'Απόρριψη',
+  'Bewaren als kopie': 'Αποθήκευση ως αντίγραφο',
+  'Bewaren in document': 'Αποθήκευση στο έγγραφο',
+  'beamer': 'προβολέας',
+  'beamer: niet bereikbaar': 'προβολέας: μη προσβάσιμος',
+  'Bewerken sluiten (Esc)': 'Κλείσιμο επεξεργασίας (Esc)',
+  'Presenteer document…': 'Παρουσίαση εγγράφου…',
+  'Presenteer document': 'Παρουσίαση εγγράφου',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Επιλέξτε ποιοι πίνακες μπορούν να επεξεργαστούν ζωντανά κατά την παρουσίαση. Όλο το υπόλοιπο περιεχόμενο παραμένει μόνο για ανάγνωση.',
   'Extra ruimte': 'Επιπλέον χώρος',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Αυτή η σημείωση είναι μακρύτερη από τη σελίδα — κύλιση για τα υπόλοιπα',

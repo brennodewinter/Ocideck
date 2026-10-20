@@ -1610,6 +1610,191 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" se pojavljuje dvaput (također u retku {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.': '"{waarde}" nije broj za {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Izračun "{kolom}" na {rij} nije uspio ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Barijera izgleda pokrivena, ali nije.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie-element "{element}" upućuje na mjeru "{maatregel}" koja ne postoji.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Ocjene izvan skale narušavaju RPN, vjerojatnost×utjecaj i svaku projekciju koja se na njih oslanja.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Izvedeni stupac prikazuje "—" — oznaka ostaje, ali se ne računa.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Presjek se bez izvora ne može obnoviti — odvajanje ili brisanje je ljudski izbor.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Zahvaćene ćelije su nepoznate — ciklus traži ljudsku odluku o namjernom izračunu.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Ćelija prikazuje "—" — ni 0 ni stari broj.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Valjanost ({geldigheid}) je istekla.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Poveznica ne radi ništa; mjera se ne računa u neto-obrazloženje.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Mjera je možda istekla; neto ocjene koje se na nju oslanjaju traže ponovnu procjenu.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Mjera naizgled pokriva rizik koji ne postoji.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Pohranjene izvedene vrijednosti zaostaju ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Skala "{schaal}" nije u ovoj datoteci i nije ni ugrađeni naziv.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tablica ne pokazuje što formula sada daje — preračunavanje prepisuje rezultat, nikad ulaz.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tablica pokazuje što izvor više ne govori — osvježavanje je ponovno gradi iz izvora.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Prikaz navodi izvor "{bron}" koji nije u ovoj datoteci.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Prikaz odstupa od izvora: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Formula se (neizravno) poziva sama na sebe.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Nečitljiva ocjena računa se kao nepouzdani broj, ne kao nula.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Preventivna barijera desno ne ublažava ništa — put tada priča drugu priču.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Nema dokaza da mjera djeluje — neto ocjene koje se na nju oslanjaju su nepokrivene.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formula na "{kolom}" nije čitljiva: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Element stoji izvan svake priče puta — nigdje se ne računa.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Nije jasno pokriva li ova barijera išta.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Put je skica — ne potpuna pokrivenost za izvoz ili prezentaciju.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Preostali rizik nije obrazložen — izvoz bi tada sugerirao više sigurnosti nego što je ima.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Neto ocjena bez testirane/djelujuće mjere ili neto obrazloženja.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Putu "{pad}" nedostaje: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Redak {n} nema ID.',
+  'Rij {n} heeft geen pad.': 'Redak {n} nema put.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Uloga "{rol}" ne pripada na stranu "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Uloga "{rol}" nije poznata bowtie uloga.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Ocjena {waarde} za {kolom} pada izvan skale 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Ocjene se ne mogu provjeriti dok nedostaje skala.',
+  'Status "{status}" is geen bekend token.':
+      'Status "{status}" nije poznati token.',
+  'Status "{status}" zonder toetsdatum.':
+      'Status "{status}" bez datuma testiranja.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Upućuje na mjeru "{maatregel}" koja ne postoji.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Upućuje na rizik "{risico}" koji ne postoji.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Upućivanja na "{id}" su nejasna: koji redak je namijenjen, ljudski je izbor.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Bez ID-a ništa ne može adresirati ovaj redak — prikazi, mjere i sama kontrola ga preskaču.',
+  'deling door nul': 'dijeljenje nulom',
+  'rij {n}': 'redak {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'redak {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'redak {r} stupac {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} više)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} više',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), ključevi stupaca, ključ@ID, sum avg min max count wsum. Nepoznato nikad nije 0.',
+  'Afgeleide cel overschreven': 'Izvedena ćelija prepisana',
+  'Afgeleide kolom': 'Izvedeni stupac',
+  'Als risicoregister markeren…': 'Označi kao registar rizika…',
+  'Beoordelaar (naam/rol)': 'Ocjenitelj (ime/uloga)',
+  'Beoordelingsschaal': 'Ljestvica ocjenjivanja',
+  'Berekening toevoegen': 'Dodaj izračun',
+  'Berekening…': 'Izračun…',
+  'Blokkerende fouten': 'Blokirajuće pogreške',
+  'Bowtie-model': 'Model leptir-mašne',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Bruto — samo izvorna procjena',
+  'Concept — pad mist': 'Nacrt — put nedostaje',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Izvorna tablica ovog prikaza nije pronađena.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Brojke nisu pouzdane dok god ovi postoje.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formula još nije nestala — što je bila namjera?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Ovaj stupac postaje običan stupac: ćelije zadržavaju svoju posljednju izračunatu vrijednost kao običan tekst.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Ova projekcija ne odgovara metodi izvora.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Ova tablica nema redaka za zabilježiti kao rizik.',
+  'Diagram': 'Dijagram',
+  'Doel van de beoordeling': 'Svrha procjene',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Prijednje, barijere i posljedice oko jednog događaja',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Jednostavna procjena: koliko vjerojatno × koliko velika posljedica',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Prazna tablica za mjere s fazom životnog vijeka',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Izvezete li ipak, datoteka izlazi kao nacrt s nesigurnim brojkama — otvorite pregled da ih prvo ispravite.',
+  'Expressie': 'Izraz',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Načini kvara s težinom, vjerojatnošću i otkrivanjem (S×O×D)',
+  'Formule bewerken': 'Uredi formulu',
+  'Formule vervangen': 'Zamijeni formulu',
+  'Formule verwijderen': 'Ukloni formulu',
+  'Formule verwijderen?': 'Ukloniti formulu?',
+  'Ga naar': 'Idi na',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Nema nalaza — ID-evi, rezultati i povezani prikazi su točni.',
+  'Gekoppelde weergave': 'Povezani prikaz',
+  'Gekoppelde weergave toevoegen': 'Dodaj povezani prikaz',
+  'Gekoppelde weergave…': 'Povezani prikaz…',
+  'Herberekenen': 'Ponovno izračunaj',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Sadržaj za pregled; jedan ima sigurni gumb za popravak.',
+  'Je typte in een berekende kolom': 'Upisali ste u izračunati stupac',
+  'Kans × impact': 'Vjerojatnost × učinak',
+  'Loskoppelen als momentopname': 'Odvoji kao snimku',
+  'Maatregelenregister': 'Registar mjera',
+  'Maatregelenregister toevoegen': 'Dodaj registar mjera',
+  'Marker verwijderen': 'Ukloni oznaku',
+  'Markeren': 'Označi',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Neto — samo procjena nakon mjera',
+  'Nieuw risicodossier': 'Novi rizični dosje',
+  'Onbetrouwbare risico-cijfers in export': 'Nepouzdane brojke rizika u izvozu',
+  'Overzicht — bruto én netto naast elkaar':
+      'Pregled — bruto i neto jedno pored drugog',
+  'Pad toevoegen': 'Dodaj put',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritet — sortirano po rezultatu, zatim po težini',
+  'Risico-kwaliteitscontrole': 'Kontrola kvalitete rizika',
+  'Risicodossier…': 'Rizični dosje…',
+  'Risicoregister': 'Registar rizika',
+  'Tabel als risicoregister markeren': 'Označi tablicu kao registar rizika',
+  'Terugzetten': 'Vrati',
+  'Verversen': 'Osvježi',
+  'Vrij meenemen': 'Slobodno prenesi',
+  'Wat beoordeel je en waarvoor?': 'Što procjenjuješ i čemu?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Dodijelite koji stupac ima koje značenje. Stupci bez značenja ostaju slobodni stupci — ništa se ne gubi. Retci bez ID-a dobivaju R-broj.',
+  'blokkerende bevinding(en):': 'blokirajući nalazi:',
+  'bron': 'izvor',
+  'schaal': 'ljestvica',
+  'Geen bewerkbare tabel op deze pagina':
+      'Nema tablice koja se može uređivati na ovoj stranici',
+  'Presentatie afsluiten': 'Zatvori prezentaciju',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Tijekom sesije napravljene su izmjene. Što učiniti s njima?',
+  'Verwerpen': 'Odbaci',
+  'Bewaren als kopie': 'Spremi kao kopiju',
+  'Bewaren in document': 'Spremi u dokument',
+  'beamer': 'projektor',
+  'beamer: niet bereikbaar': 'projektor: nedostupan',
+  'Bewerken sluiten (Esc)': 'Zatvori uređivanje (Esc)',
+  'Presenteer document…': 'Prezentiraj dokument…',
+  'Presenteer document': 'Prezentiraj dokument',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Označite koje se tablice smiju uređivati uživo tijekom prezentacije. Sav ostali sadržaj ostaje samo za čitanje.',
   'Extra ruimte': 'Dodatni prostor',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Ova bilješka duža je od stranice — klizite za ostatak',

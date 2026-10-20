@@ -16,6 +16,9 @@ import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
 import '../../services/markdown_table_codec.dart';
 import '../../services/document_timeline.dart';
+import '../../services/ocideck_marked_table.dart';
+import '../../services/ocideck_markers.dart';
+import '../../services/risk_bowtie_diagram.dart';
 import '../../services/form_document_blocks.dart';
 import '../../services/table_layout_metrics.dart';
 import '../../services/table_of_contents.dart';
@@ -383,7 +386,7 @@ class DocumentMarkdownView extends StatelessWidget {
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
     _Kind.chart => _chart(t, b.text, kindOrdinal),
-    _Kind.table => _table(t, b.rows, b.aligns, kindOrdinal),
+    _Kind.table => _tableOrBowtie(this, t, b, kindOrdinal),
     _Kind.timeline => _TimelineEventView(
       theme: t,
       event: b,
@@ -557,6 +560,16 @@ class DocumentMarkdownView extends StatelessWidget {
           i = parsed.end;
           continue;
         }
+      }
+
+      // `<!-- ocideck:* -->`-markers zijn machine-metadata: het contract
+      // belooft dat een lezer ze negeert, dus zijn ze hier onzichtbaar.
+      // De drager van een bowtie-blok tagt zijn tabel — waar geen
+      // cel-editor aan hangt toont hij als afgeleid diagram (#2496). De
+      // parse-loop zelf staat in parts/document_markdown_table.dart.
+      if (isOciTableMarkerLine(line)) {
+        i = _skipOciMarkers(lines, i, blocks);
+        continue;
       }
 
       if (isMarkdownTableLine(line) &&
@@ -783,6 +796,8 @@ class DocumentMarkdownView extends StatelessWidget {
     renderer: mermaidRenderer,
   );
 
+  /// Een `<!-- ocideck:bowtie -->`-tabel (#2496): zie [_tableOrBowtie] in
+  /// parts/document_markdown_table.dart.
   /// Een ```chart-blok als gerenderde grafiek (statische SVG, dezelfde renderlaag
   /// als de HTML-export). Draagt het blok geen inline cijfers (bv. een
   /// `source:`-verwijzing die nog niet gehydrateerd is), dan valt het terug op

@@ -154,7 +154,6 @@ class _TimelineViewSync {
 
 /// Guards teardown of the secondary audience window so native close is only
 /// invoked once (double-close on Linux can crash the embedder).
-@visibleForTesting
 class AudienceWindowHandle {
   AudienceWindowHandle(
     this.controller, {

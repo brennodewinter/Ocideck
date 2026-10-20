@@ -43,6 +43,17 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertSpacer;
   final VoidCallback onInsertFootnote;
 
+  /// Nieuw risicodossier (FMEA / kans × impact / Bowtie) met methodekeuze —
+  /// #2492. Opent een dialoog; zelf geen gewone blokinvoeging.
+  final VoidCallback onInsertRiskDossier;
+
+  /// Het aantal bevindingen van de risico-kwaliteitscontrole (#2490) en de
+  /// knop die het overzicht opent. `0` = schoon, de knop toont dan zonder
+  /// badge — aanwezig blijven hoort: de controle is een belofte, geen
+  /// verrassing.
+  final int riskQualityCount;
+  final VoidCallback onRiskQuality;
+
   /// Staan de voetnoten van dít document achterin in plaats van onderaan de
   /// bladzijde, en de omschakeling ervoor. De keuze landt in de front matter
   /// van het document zelf.
@@ -61,6 +72,9 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onOpenSettings;
   final VoidCallback onEditFields;
   final VoidCallback onConvertToPresentation;
+
+  /// Presenteer het document zoals hij is — #2487.
+  final VoidCallback onPresentDocument;
   final TextEditingController controller;
   final FocusNode editorFocus;
 
@@ -103,6 +117,9 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertToc,
     required this.onInsertSpacer,
     required this.onInsertFootnote,
+    required this.onInsertRiskDossier,
+    required this.riskQualityCount,
+    required this.onRiskQuality,
     required this.footnotesAtEnd,
     required this.onFootnotesAtEndChanged,
     required this.onApplyChapterBreaks,
@@ -114,6 +131,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onOpenSettings,
     required this.onEditFields,
     required this.onConvertToPresentation,
+    required this.onPresentDocument,
     required this.controller,
     required this.editorFocus,
     required this.docTheme,
@@ -225,6 +243,19 @@ class _DocEditorToolbar extends StatelessWidget {
                         tooltip: l10n.d('Zoeken'),
                         onPressed: onFind,
                         icon: const Icon(Icons.search, size: 18),
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      IconButton(
+                        tooltip: l10n.d('Risico-kwaliteitscontrole'),
+                        onPressed: onRiskQuality,
+                        icon: Badge(
+                          isLabelVisible: riskQualityCount > 0,
+                          label: Text('$riskQualityCount'),
+                          child: const Icon(
+                            Icons.fact_check_outlined,
+                            size: 18,
+                          ),
+                        ),
                         visualDensity: VisualDensity.compact,
                       ),
                       if (mode != _DocViewMode.fill) ...[
@@ -388,6 +419,7 @@ class _DocEditorToolbar extends StatelessWidget {
         10 => onInsertSpacer(),
         7 => onApplyChapterBreaks(),
         8 => onInsertFootnote(),
+        11 => onInsertRiskDossier(),
         _ => onPaste(),
       },
       itemBuilder: (context) => [
@@ -404,6 +436,7 @@ class _DocEditorToolbar extends StatelessWidget {
         _insertItem(10, Icons.space_bar_outlined, l10n.d('Extra ruimte')),
         _insertItem(6, Icons.list_outlined, l10n.d('Inhoudsopgave')),
         _insertItem(8, Icons.superscript, l10n.d('Voetnoot')),
+        _insertItem(11, Icons.policy_outlined, l10n.d('Risicodossier…')),
         const PopupMenuDivider(),
         _insertItem(
           7,
@@ -579,6 +612,8 @@ class _DocEditorToolbar extends StatelessWidget {
             onOpenSettings();
           case 1:
             onConvertToPresentation();
+          case 5:
+            onPresentDocument();
           case 2:
             onFootnotesAtEndChanged(!footnotesAtEnd);
           case 3:
@@ -633,6 +668,21 @@ class _DocEditorToolbar extends StatelessWidget {
               const Icon(Icons.settings_outlined, size: 17),
               const SizedBox(width: 10),
               Expanded(child: Text(l10n.t('settings'))),
+            ],
+          ),
+        ),
+        PopupMenuItem<int>(
+          value: 5,
+          child: Row(
+            children: [
+              const Icon(Icons.present_to_all_outlined, size: 17),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  l10n.d('Presenteer document…'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
         ),

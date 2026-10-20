@@ -651,6 +651,194 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" ta parse dos biaha (tambe na liña {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" no ta un number pa {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Kalkulashon "{kolom}" na {rij} a faya ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'E barera ta parse kubri pero no ta.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Elemento bowtie "{element}" ta referí na medida "{maatregel}", ku no ta eksistí.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Puntuashon fuera di skala ta stroba RPN, probabilitat×impakto i tur proyekshon ku ta konta ku nan.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'E kolom derivá ta mustra "—" — e markadó ta keda pero no ta konta.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'E kopia no por ser rekonstruí sin su fuente — deskonektá of eliminá ta e desishon humano.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'E sèlnan envolukto ta deskonosí — e siklo ta pidi un desishon humano tokante e kalkulashon intensioná.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'E sèl ta mustra "—" — ni 0, ni number bieuw.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'E balides ({geldigheid}) a vensé.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'E konekshon no ta hasi nada; e medida no ta konta pa e base neto.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'E medida por a vensé; puntuashon neto ku ta lomba riba dje ta pidi un rebalorashon.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'E medida ta parse di ta kobrí un riesgo ku no ta eksistí.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'E balornan derivá warda ta keda atrás ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'E skala "{schaal}" no ta den e archivo i tambe no ta un nòmber integrá.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'E tabla no ta mustra loke e formula ta produsí awor — rekalukulá ta re-scribi e resultado, nunka e entrada.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'E tabla ta mustra loke e fuente no ta bisa mas — refresh ta rekonstruí dje for di e fuente.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'E vista ta menshoná fuente "{bron}", ku no ta den e archivo.',
+  'De weergave wijkt af van de bron: {details}.':
+      'E vista ta desviá for di e fuente: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Un formula ta referí (indirektamente) riba su mes.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Un puntuashon ilegibel ta konta komo un sifra no konfiabel, no komo sero.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Un barera preventivo na banda drechi no ta mitigá nada — e kaminda ta konta un otro storia.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'No tin prueba ku e medida ta funshoná — puntuashon neto ku ta basá riba dje ta diskubrí.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'E formula riba "{kolom}" no por ser lesá: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'E elemento ta para afo di tur storia di kaminda — no ta konta na nikau.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'No ta kla si e barera aki ta kobrí algu.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'E kaminda ta un skets — no ta un kubertura kompleto pa eksportá of presentá.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'E riesgo residual no ta fundamentá — un ekspòrt lo sugerí mas siguridat ku loke tin.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Puntuashon neto sin medida probá/funshonal ni base neto.',
+  'Pad "{pad}" mist: {ontbrekend}.':
+      'Na e kaminda "{pad}" ta faltando: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Liña {n} no tin ID.',
+  'Rij {n} heeft geen pad.': 'Liña {n} no tin kaminda.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'E rol "{rol}" no pertenesé na e banda "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'E rol "{rol}" no ta un rol bowtie konosí.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'E puntuashon {waarde} pa {kolom} ta kai fuera di e skala 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'E puntuashonnan no por ser kontrolá mientras e skala ta faltando.',
+  'Status "{status}" is geen bekend token.':
+      'E status "{status}" no ta un token konosí.',
+  'Status "{status}" zonder toetsdatum.':
+      'Status "{status}" sin fecha di prueba.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Ta referí na medida "{maatregel}", ku no ta eksistí.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Ta referí na riesgo "{risico}", ku no ta eksistí.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'E referensianan na "{id}" ta insegur: kua liña ta bedòi ta un desishon humano.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Sin ID nada por dirigí na e liña aki — e vistanan, e medidanan i e kontrol mes ta salt’é.',
+  'deling door nul': 'dividí pa sero',
+  'rij {n}': 'liña {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'liña {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'liña {r} kolom {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} mas)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} mas',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), klave di kolom, klave@ID, sum avg min max count wsum. Deskonosí nunka ta 0.',
+  'Afgeleide cel overschreven': 'Sélula derivá a wòrdu sobre-skirbí',
+  'Afgeleide kolom': 'Kolom derivá',
+  'Als risicoregister markeren…': 'Marká komo registro di riesgo…',
+  'Beoordelaar (naam/rol)': 'Evaluador (nòmber/ròl)',
+  'Beoordelingsschaal': 'Eskala di evaluashon',
+  'Berekening toevoegen': 'Agregá kalkulashon',
+  'Berekening…': 'Kalkulashon…',
+  'Blokkerende fouten': 'Erornan ku ta bloka',
+  'Bowtie-model': 'Modelo bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Bruto — solamente e stimashon orisinal',
+  'Concept — pad mist': 'Bosèk — kaminda ta faltando',
+  'De brontabel van deze weergave is niet gevonden.':
+      'No a haña e tafel fuente di e bista aki.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'E sifranan no ta konfiabel mientras esakinan ta presente.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'E fórmula ainda no a bai — kua tabata e intenshon?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'E kolom aki ta bira un kolom normal: e sélulanan ta konservá nan último balor kalkulá komo teksto simple.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'E proyekshon aki no ta kombiná ku e método di e fuente.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'E tafel aki no tin fila pa registrá komo riesgo.',
+  'Diagram': 'Diagrama',
+  'Doel van de beoordeling': 'Meta di e evaluashon',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Menasa, barera i konsekuensha rònt di un evento',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Un stimashon simple: kuantu probabel × kuantu grandi e konsekuensha',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Un tafel bashí pa medidanan ku fase di bida',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Si eksportá tog, e archivo ta sali komo bosèk ku sifra inseguru — habri e resumen pa drecha nan promé.',
+  'Expressie': 'Ekspreshon',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Modo di fayo ku severidat, okurensia i detekshon (S×O×D)',
+  'Formule bewerken': 'Editá e fórmula',
+  'Formule vervangen': 'Reemplasá e fórmula',
+  'Formule verwijderen': 'Kitá e fórmula',
+  'Formule verwijderen?': 'Kitá e fórmula?',
+  'Ga naar': 'Bai na',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Sin deskubrimentu — IDnan, skor i bistanan konektá ta korekto.',
+  'Gekoppelde weergave': 'Bista konektá',
+  'Gekoppelde weergave toevoegen': 'Agregá bista konektá',
+  'Gekoppelde weergave…': 'Bista konektá…',
+  'Herberekenen': 'Rekalkulá',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Kontenido pa repasá; unu tin un boton di reparashon sigur.',
+  'Je typte in een berekende kolom': 'Bo a skirbi den un kolom kalkulá',
+  'Kans × impact': 'Probabilidat × impakto',
+  'Loskoppelen als momentopname': 'Deskonektá komo snapshot',
+  'Maatregelenregister': 'Registro di medida',
+  'Maatregelenregister toevoegen': 'Agregá registro di medida',
+  'Marker verwijderen': 'Kitá e markadó',
+  'Markeren': 'Marká',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Neto — solamente e stimashon despues di medida',
+  'Nieuw risicodossier': 'Dossier di riesgo nobo',
+  'Onbetrouwbare risico-cijfers in export':
+      'Sifranan di riesgo no konfiabel den eksportashon',
+  'Overzicht — bruto én netto naast elkaar':
+      'Resumen — bruto i neto banda di otro',
+  'Pad toevoegen': 'Agregá kaminda',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioridat — ordená segun skor, despues segun severidat',
+  'Risico-kwaliteitscontrole': 'Kontrol di kalidat di riesgo',
+  'Risicodossier…': 'Dossier di riesgo…',
+  'Risicoregister': 'Registro di riesgo',
+  'Tabel als risicoregister markeren': 'Marká tafel komo registro di riesgo',
+  'Terugzetten': 'Restaurá',
+  'Verversen': 'Refreská',
+  'Vrij meenemen': 'Hiba liberamente',
+  'Wat beoordeel je en waarvoor?': 'Kiko bo ta evaluá, i pa ki?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Asigná kua kolom tin kua nifikashon. Kolomnan sin nifikashon ta keda komo kolom liber — nada ta perde. Filanan sin ID ta haña un number R.',
+  'blokkerende bevinding(en):': 'deskubrimentu(nan) blokante:',
+  'bron': 'fuente',
+  'schaal': 'eskala',
+  'Geen bewerkbare tabel op deze pagina':
+      'No tin tabla pa editá riba e página aki',
+  'Presentatie afsluiten': 'Sali di e presentashon',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'A hasi kambionan durante e seshon. Kua mester sosode kun nan?',
+  'Verwerpen': 'Deskartá',
+  'Bewaren als kopie': 'Gardá komo kopia',
+  'Bewaren in document': 'Gardá den e dokumento',
+  'beamer': 'proyektor',
+  'beamer: niet bereikbaar': 'proyektor: no alkansebel',
+  'Bewerken sluiten (Esc)': 'Sera edishon (Esc)',
+  'Presenteer document…': 'Presentá e dokumento…',
+  'Presenteer document': 'Presentá e dokumento',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Marká kua tablanan por wòrdu editá na bibu durante e presentashon. Tur otro kontenido keda di solo lesamentu.',
   'Extra ruimte': 'Espasio ekstra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'E nota aki ta mas largu ku e página — skrol pa e resto',

@@ -484,16 +484,24 @@ TableEditController? _sourceTableFor(
         (surface: 'source-preview', ordinal: ordinal),
         gfm,
         onChanged: (rows, alignments) {
+          final current = s._controller.text;
+          final before = decodeMarkdownTableRows(
+            current.split('\n').sublist(range[0], range[1]),
+          );
           final next = replaceNthTableBlock(
-            s._controller.text,
+            current,
             ordinal,
             encodeMarkdownTable(rows, alignments: alignments),
           );
-          if (next != s._controller.text) {
+          if (next != current) {
+            // Een rijpermutatie (sorteren) is een discrete handeling: die mag
+            // niet met de typstap ervoor samensmelten in één undo (#2486).
             _commitDocumentBody(
               s.ref,
               next,
-              coalesceKey: 'source-table-$ordinal',
+              coalesceKey: isTableRowPermutation(before, rows)
+                  ? null
+                  : 'source-table-$ordinal',
             );
           }
         },

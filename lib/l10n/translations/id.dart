@@ -1606,6 +1606,193 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" muncul dua kali (juga di baris {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" bukan angka untuk {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Perhitungan "{kolom}" pada {rij} gagal ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Penghalang tampak terlindungi tetapi tidak.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Elemen bowtie "{element}" merujuk ke tindakan "{maatregel}" yang tidak ada.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Skor di luar skala mengacaukan RPN, probabilitas×dampak, dan setiap proyeksi yang bergantung padanya.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Kolom turunan menampilkan "—" — penanda disimpan tetapi tidak dihitung.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Salinan tidak dapat dibangun ulang tanpa sumbernya — melepas tautan atau menghapus adalah pilihan manusia.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Sel yang terlibat tidak diketahui — siklus memerlukan keputusan manusia tentang perhitungan yang dimaksud.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Sel menampilkan "—" — bukan 0, bukan angka lama.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Masa berlaku ({geldigheid}) telah kedaluwarsa.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Tautan tidak melakukan apa pun; tindakan tidak dihitung untuk dasar neto.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Tindakan mungkin sudah kedaluwarsa; skor neto yang bertumpu padanya memerlukan pengujian ulang.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Tindakan tampak mencakup risiko yang tidak ada.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Nilai turunan yang tersimpan tertinggal ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Skala "{schaal}" tidak ada di berkas ini dan bukan juga nama bawaan.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabel tidak menampilkan apa yang dihasilkan rumus sekarang — menghitung ulang menulis hasilnya, tidak pernah masukannya.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabel menampilkan apa yang tidak lagi dikatakan sumber — menyegarkan membangunnya kembali dari sumber.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Tampilan menyebut sumber "{bron}", yang tidak ada di berkas ini.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Tampilan menyimpang dari sumber: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Rumus merujuk (secara tidak langsung) pada dirinya sendiri.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Skor yang tidak terbaca dihitung sebagai angka yang tidak dapat diandalkan, bukan nol.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Penghalang pencegah di kanan tidak menitigasi apa pun — jalurnya lalu bercerita lain.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Tidak ada bukti bahwa tindakan itu berhasil — skor neto yang bertumpu padanya tidak terlindungi.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Rumus pada "{kolom}" tidak dapat dibaca: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Elemen berada di luar setiap cerita jalur — tidak dihitung di mana pun.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Tidak jelas apakah penghalang ini mencakup sesuatu.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Jalur ini masih sketsa — bukan cakupan lengkap untuk diekspor atau dipresentasikan.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Risiko residu tidak didukung — ekspor akan menyarankan kepastian lebih dari yang ada.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Skor neto tanpa tindakan yang teruji/berfungsi atau dasar neto.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Jalur "{pad}" kehilangan: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Baris {n} tidak punya ID.',
+  'Rij {n} heeft geen pad.': 'Baris {n} tidak punya jalur.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Peran "{rol}" tidak termasuk di sisi "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Peran "{rol}" bukan peran bowtie yang dikenal.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Skor {waarde} untuk {kolom} berada di luar skala 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Skor tidak dapat diuji selama skala tidak ada.',
+  'Status "{status}" is geen bekend token.':
+      'Status "{status}" bukan token yang dikenal.',
+  'Status "{status}" zonder toetsdatum.':
+      'Status "{status}" tanpa tanggal pengujian.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Merujuk ke tindakan "{maatregel}" yang tidak ada.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Merujuk ke risiko "{risico}" yang tidak ada.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Referensi ke "{id}" tidak pasti: baris mana yang dimaksud adalah pilihan manusia.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Tanpa ID, tidak ada yang bisa merujuk baris ini — tampilan, tindakan, dan pemeriksaannya sendiri melewatkannya.',
+  'deling door nul': 'pembagian dengan nol',
+  'rij {n}': 'baris {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'baris {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'baris {r} kolom {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} lainnya)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} lainnya',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), kunci kolom, kunci@ID, sum avg min max count wsum. Tidak dikenal tidak pernah 0.',
+  'Afgeleide cel overschreven': 'Sel turunan ditimpa',
+  'Afgeleide kolom': 'Kolom turunan',
+  'Als risicoregister markeren…': 'Tandai sebagai register risiko…',
+  'Beoordelaar (naam/rol)': 'Penilai (nama/peran)',
+  'Beoordelingsschaal': 'Skala penilaian',
+  'Berekening toevoegen': 'Tambah perhitungan',
+  'Berekening…': 'Perhitungan…',
+  'Blokkerende fouten': 'Kesalahan pemblokir',
+  'Bowtie-model': 'Model bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Bruto — hanya estimasi awal',
+  'Concept — pad mist': 'Konsep — jalur hilang',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Tabel sumber untuk tampilan ini tidak ditemukan.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Angka-angka tidak dapat dipercaya selama ini masih ada.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Rumusnya belum hilang — apa maksudnya?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Kolom ini menjadi kolom biasa: sel-selnya menyimpan nilai hitungan terakhir sebagai teks biasa.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Proyeksi ini tidak cocok dengan metode sumbernya.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Tabel ini tidak memiliki baris untuk dicatat sebagai risiko.',
+  'Diagram': 'Diagram',
+  'Doel van de beoordeling': 'Tujuan penilaian',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Ancaman, penghalang, dan konsekuensi di sekitar satu peristiwa',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Perkiraan sederhana: seberapa mungkin × seberapa besar akibatnya',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Tabel kosong untuk tindakan dengan tahap siklus hidup',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Jika Anda tetap mengekspor, berkas keluar sebagai draf dengan angka yang tidak pasti — buka laporan untuk memperbaikinya dulu.',
+  'Expressie': 'Ekspresi',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Mode kegagalan dengan keparahan, kemungkinan, dan deteksi (S×O×D)',
+  'Formule bewerken': 'Edit rumus',
+  'Formule vervangen': 'Ganti rumus',
+  'Formule verwijderen': 'Hapus rumus',
+  'Formule verwijderen?': 'Hapus rumus?',
+  'Ga naar': 'Buka',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Tidak ada temuan — ID, skor, dan tampilan tertaut sudah benar.',
+  'Gekoppelde weergave': 'Tampilan tertaut',
+  'Gekoppelde weergave toevoegen': 'Tambah tampilan tertaut',
+  'Gekoppelde weergave…': 'Tampilan tertaut…',
+  'Herberekenen': 'Hitung ulang',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Konten untuk ditinjau; satu memiliki tombol perbaikan yang aman.',
+  'Je typte in een berekende kolom': 'Anda mengetik di kolom terhitung',
+  'Kans × impact': 'Probabilitas × dampak',
+  'Loskoppelen als momentopname': 'Lepaskan sebagai snapshot',
+  'Maatregelenregister': 'Register tindakan',
+  'Maatregelenregister toevoegen': 'Tambah register tindakan',
+  'Marker verwijderen': 'Hapus penanda',
+  'Markeren': 'Tandai',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Neto — hanya estimasi setelah tindakan',
+  'Nieuw risicodossier': 'Dossier risiko baru',
+  'Onbetrouwbare risico-cijfers in export':
+      'Angka risiko tidak andal dalam ekspor',
+  'Overzicht — bruto én netto naast elkaar':
+      'Ikhtisar — bruto dan neto berdampingan',
+  'Pad toevoegen': 'Tambah jalur',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritas — diurutkan berdasarkan skor, lalu keparahan',
+  'Risico-kwaliteitscontrole': 'Kontrol kualitas risiko',
+  'Risicodossier…': 'Dossier risiko…',
+  'Risicoregister': 'Register risiko',
+  'Tabel als risicoregister markeren': 'Tandai tabel sebagai register risiko',
+  'Terugzetten': 'Kembalikan',
+  'Verversen': 'Muat ulang',
+  'Vrij meenemen': 'Bawa bebas',
+  'Wat beoordeel je en waarvoor?': 'Apa yang Anda nilai, dan untuk apa?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Tetapkan kolom mana memiliki makna apa. Kolom tanpa makna tetap menjadi kolom bebas — tidak ada yang hilang. Baris tanpa ID mendapat nomor R.',
+  'blokkerende bevinding(en):': 'temuan pemblokir:',
+  'bron': 'sumber',
+  'schaal': 'skala',
+  'Geen bewerkbare tabel op deze pagina':
+      'Tidak ada tabel yang dapat diedit di halaman ini',
+  'Presentatie afsluiten': 'Keluar dari presentasi',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Ada perubahan yang dibuat selama sesi. Apa yang harus dilakukan dengannya?',
+  'Verwerpen': 'Buang',
+  'Bewaren als kopie': 'Simpan sebagai salinan',
+  'Bewaren in document': 'Simpan di dokumen',
+  'beamer': 'proyektor',
+  'beamer: niet bereikbaar': 'proyektor: tidak terjangkau',
+  'Bewerken sluiten (Esc)': 'Tutup penyuntingan (Esc)',
+  'Presenteer document…': 'Presentasikan dokumen…',
+  'Presenteer document': 'Presentasikan dokumen',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Centang tabel mana yang boleh disunting langsung selama presentasi. Semua konten lain tetap hanya-baca.',
   'Extra ruimte': 'Ruang ekstra',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Catatan ini lebih panjang dari halaman — gulir untuk sisanya',

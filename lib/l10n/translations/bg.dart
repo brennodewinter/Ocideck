@@ -1626,6 +1626,193 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" се среща два пъти (също на ред {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.': '"{waarde}" не е число за {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Изчислението "{kolom}" на {rij} се провали ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Бариерата изглежда покрита, но не е.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Елементът bowtie "{element}" препраща към мярка "{maatregel}", която не съществува.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Оценки извън скалата изкривяват RPN, вероятност×въздействие и всяка проекция, която разчита на тях.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Изведената колона показва "—" — маркерът се запазва, но не се брои.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Копието не може да се възстанови без източника — откачането или изтриването е човешки избор.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Засегнатите клетки са неизвестни — цикълът изисква човешки избор за предвиденото изчисление.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Клетката показва "—" — нито 0, нито старо число.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Валидността ({geldigheid}) е изтекла.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Връзката не прави нищо; мярката не се брои към нетното обосноваване.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Мярката може да е изтекла; нетните оценки, които разчитат на нея, изискват преоценка.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Мярката привидно покрива риск, който не съществува.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Запазените производни стойности изостават ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Скалата "{schaal}" не е в този файл и не е вградено име.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Таблицата не показва какво формулата вече дава — преизчислението презаписва резултата, никога входа.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Таблицата показва какво източникът вече не казва — опресняването я възстановява от източника.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Изгледът назовава източник "{bron}", който не е в този файл.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Изгледът се отклонява от източника: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Формула се отнася (индиректно) към самата себе си.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Нечетлива оценка се смята за ненадеждно число, а не за нула.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Превантивната бариера вдясно не смекчава нищо — пътят тогава разказва друга история.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Няма доказателство, че мярката работи — нетните оценки, които разчитат на нея, са непокрити.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Формулата на "{kolom}" не може да се прочете: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Елементът стои извън всяка история на пътя — не се брои никъде.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Не е ясно дали тази бариера покрива нещо.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Пътят е скица — не пълно покритие за експортиране или представяне.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Остатъчният риск не е обоснован — експортът би внушавал повече сигурност, отколкото има.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Нетна оценка без проверена/работеща мярка или нетно обосноваване.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'На пътя "{pad}" липсва: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Ред {n} няма идентификатор.',
+  'Rij {n} heeft geen pad.': 'Ред {n} няма път.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Ролята "{rol}" не принадлежи на страна "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Ролята "{rol}" не е известна bowtie роля.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Оценка {waarde} за {kolom} излиза извън скалата 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Оценките не могат да се проверят, докато скалата липсва.',
+  'Status "{status}" is geen bekend token.':
+      'Статусът "{status}" не е познат токен.',
+  'Status "{status}" zonder toetsdatum.':
+      'Статус "{status}" без дата на проверка.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Препраща към мярка "{maatregel}", която не съществува.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Препраща към риск "{risico}", който не съществува.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Препратките към "{id}" са нееднозначни: кой ред се има предвид е човешки избор.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Без идентификатор нищо не може да адресира този ред — изгледите, мерките и самата проверка го пропускат.',
+  'deling door nul': 'деление на нула',
+  'rij {n}': 'ред {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'ред {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'ред {r} колона {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} още)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} още',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), ключове на колони, ключ@ID, sum avg min max count wsum. Неизвестното никога не е 0.',
+  'Afgeleide cel overschreven': 'Производната клетка е презаписана',
+  'Afgeleide kolom': 'Производна колона',
+  'Als risicoregister markeren…': 'Маркирай като регистър на рисковете…',
+  'Beoordelaar (naam/rol)': 'Оценител (име/роля)',
+  'Beoordelingsschaal': 'Скала за оценяване',
+  'Berekening toevoegen': 'Добави изчисление',
+  'Berekening…': 'Изчисление…',
+  'Blokkerende fouten': 'Блокиращи грешки',
+  'Bowtie-model': 'Модел bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Бруто — само първоначалната оценка',
+  'Concept — pad mist': 'Чернова — липсва път',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Изходната таблица на този изглед не е намерена.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Цифрите не са надеждни, докато тези съществуват.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Формулата още не е изчезнала — какво беше целта?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Тази колона става обикновена колона: клетките запазват последната си изчислена стойност като обикновен текст.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Тази проекция не съответства на метода на източника.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Тази таблица няма редове за записване като риск.',
+  'Diagram': 'Диаграма',
+  'Doel van de beoordeling': 'Цел на оценката',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Заплахи, бариери и последствия около едно събитие',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Проста оценка: колко вероятно × колко голямо последствието',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Празна таблица за мерки с фаза от жизнения цикъл',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Ако все пак експортирате, файлът излиза като чернова с несигурни цифри — отворете прегледа, за да ги поправите първо.',
+  'Expressie': 'Израз',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Начини на отказ с тежест, вероятност и откриваемост (S×O×D)',
+  'Formule bewerken': 'Редактирай формулата',
+  'Formule vervangen': 'Замени формулата',
+  'Formule verwijderen': 'Премахни формулата',
+  'Formule verwijderen?': 'Да се премахне ли формулата?',
+  'Ga naar': 'Отиди на',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Няма констатации — ID, резултати и свързани изгледи са верни.',
+  'Gekoppelde weergave': 'Свързан изглед',
+  'Gekoppelde weergave toevoegen': 'Добави свързан изглед',
+  'Gekoppelde weergave…': 'Свързан изглед…',
+  'Herberekenen': 'Преизчисли',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Съдържание за преглед; едно има безопасен бутон за поправка.',
+  'Je typte in een berekende kolom': 'Въведохте в изчислена колона',
+  'Kans × impact': 'Вероятност × въздействие',
+  'Loskoppelen als momentopname': 'Откачи като моментна снимка',
+  'Maatregelenregister': 'Регистър на мерките',
+  'Maatregelenregister toevoegen': 'Добави регистър на мерките',
+  'Marker verwijderen': 'Премахни маркера',
+  'Markeren': 'Маркирай',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Нето — само оценката след мерките',
+  'Nieuw risicodossier': 'Ново досие на рисковете',
+  'Onbetrouwbare risico-cijfers in export':
+      'Ненадеждни рискови цифри в експорта',
+  'Overzicht — bruto én netto naast elkaar':
+      'Преглед — бруто и нето едно до друго',
+  'Pad toevoegen': 'Добави път',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Приоритет — сортирано по резултат, после по тежест',
+  'Risico-kwaliteitscontrole': 'Контрол на качеството на риска',
+  'Risicodossier…': 'Досие на рисковете…',
+  'Risicoregister': 'Регистър на рисковете',
+  'Tabel als risicoregister markeren':
+      'Маркирай таблицата като регистър на рисковете',
+  'Terugzetten': 'Възстанови',
+  'Verversen': 'Опресни',
+  'Vrij meenemen': 'Пренеси свободно',
+  'Wat beoordeel je en waarvoor?': 'Какво оценяваш и за какво?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Задайте коя колона има кое значение. Колоните без значение остават свободни — нищо не се губи. Редовете без ID получават R-номер.',
+  'blokkerende bevinding(en):': 'блокираща(и) констатация(и):',
+  'bron': 'източник',
+  'schaal': 'скала',
+  'Geen bewerkbare tabel op deze pagina':
+      'Няма редактируема таблица на тази страница',
+  'Presentatie afsluiten': 'Изход от презентацията',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'По време на сесията бяха направени промени. Какво да стане с тях?',
+  'Verwerpen': 'Отхвърли',
+  'Bewaren als kopie': 'Запази като копие',
+  'Bewaren in document': 'Запази в документа',
+  'beamer': 'проектор',
+  'beamer: niet bereikbaar': 'проектор: недостъпен',
+  'Bewerken sluiten (Esc)': 'Затвори редактирането (Esc)',
+  'Presenteer document…': 'Представи документа…',
+  'Presenteer document': 'Представи документа',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Отметнете кои таблици могат да се редактират на живо по време на презентацията. Всичко останало остава само за четене.',
   'Extra ruimte': 'Допълнително пространство',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Тази бележка е по-дълга от страницата — превъртете за останалото',

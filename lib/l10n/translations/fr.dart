@@ -652,6 +652,194 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" apparaît deux fois (aussi à la ligne {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" n’est pas un nombre pour {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Le calcul "{kolom}" sur {rij} a échoué ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'La barrière semble couverte mais ne l’est pas.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'L’élément bowtie "{element}" renvoie à la mesure "{maatregel}", qui n’existe pas.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Les scores hors échelle faussent le RPN, la probabilité×impact et toute projection qui s’y appuie.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'La colonne dérivée affiche «—» — le marqueur est conservé mais ne compte pas.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'La copie ne peut pas être reconstruite sans sa source — détacher ou supprimer est le choix humain.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Les cellules concernées sont inconnues — le cycle exige un choix humain sur le calcul voulu.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'La cellule affiche «—» — ni 0 ni un ancien nombre.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'La validité ({geldigheid}) est expirée.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Le lien ne fait rien ; la mesure ne compte pas pour la justification nette.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'La mesure peut avoir expiré ; les scores nets qui reposent dessus demandent une réévaluation.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'La mesure semble couvrir un risque qui n’existe pas.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Les valeurs dérivées stockées sont en retard ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'L’échelle "{schaal}" n’est pas dans ce fichier et n’est pas non plus un nom intégré.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Le tableau ne montre pas ce que la formule produit maintenant — le recalcul réécrit le résultat, jamais l’entrée.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Le tableau montre ce que la source ne dit plus — l’actualisation le reconstruit depuis la source.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'La vue nomme la source "{bron}", qui n’est pas dans ce fichier.',
+  'De weergave wijkt af van de bron: {details}.':
+      'La vue diffère de la source : {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Une formule se réfère (indirectement) à elle-même.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Un score illisible compte comme un chiffre non fiable, pas comme zéro.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Une barrière préventive à droite ne mitige rien — le chemin raconte alors une autre histoire.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Il n’y a aucune preuve que la mesure fonctionne — les scores nets qui s’appuient dessus sont non couverts.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'La formule sur "{kolom}" est illisible : "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'L’élément se situe hors de tout récit de chemin — il ne compte nulle part.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'On ne sait pas si cette barrière couvre quelque chose.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Le chemin est une esquisse — pas une couverture complète à exporter ou à présenter.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Le risque résiduel n’est pas étayé — un export suggérerait alors plus de certitude qu’il n’y en a.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Score net sans mesure testée/fonctionnelle ni justification nette.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Le chemin "{pad}" manque : {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'La ligne {n} n’a pas d’ID.',
+  'Rij {n} heeft geen pad.': 'La ligne {n} n’a pas de chemin.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Le rôle "{rol}" ne se place pas du côté "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Le rôle "{rol}" n’est pas un rôle bowtie connu.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Le score {waarde} pour {kolom} sort de l’échelle 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Les scores ne peuvent pas être vérifiés tant que l’échelle manque.',
+  'Status "{status}" is geen bekend token.':
+      'Le statut "{status}" n’est pas un jeton connu.',
+  'Status "{status}" zonder toetsdatum.':
+      'Statut "{status}" sans date de test.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Renvoie à la mesure "{maatregel}", qui n’existe pas.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Renvoie au risque "{risico}", qui n’existe pas.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Les renvois à "{id}" sont ambigus : la ligne visée relève d’un choix humain.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Sans ID, rien ne peut adresser cette ligne — les vues, les mesures et le contrôle lui-même l’ignorent.',
+  'deling door nul': 'division par zéro',
+  'rij {n}': 'ligne {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'ligne {n} : «{oud}» → «{nieuw}»',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'ligne {r} colonne {c} : «{oud}» → «{nieuw}»',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} autres)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} autres',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), clés de colonne, clé@ID, sum avg min max count wsum. Inconnu n\'est jamais 0.',
+  'Afgeleide cel overschreven': 'Cellule dérivée écrasée',
+  'Afgeleide kolom': 'Colonne dérivée',
+  'Als risicoregister markeren…': 'Marquer comme registre des risques…',
+  'Beoordelaar (naam/rol)': 'Évaluateur (nom/rôle)',
+  'Beoordelingsschaal': 'Échelle d\'évaluation',
+  'Berekening toevoegen': 'Ajouter un calcul',
+  'Berekening…': 'Calcul…',
+  'Blokkerende fouten': 'Erreurs bloquantes',
+  'Bowtie-model': 'Modèle nœud papillon',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Brut — seulement l\'estimation initiale',
+  'Concept — pad mist': 'Brouillon — chemin manquant',
+  'De brontabel van deze weergave is niet gevonden.':
+      'La table source de cette vue est introuvable.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Les chiffres ne sont pas fiables tant que ceux-ci subsistent.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'La formule n\'est pas encore supprimée — quelle était l\'intention ?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Cette colonne devient une colonne ordinaire : les cellules conservent leur dernière valeur calculée en texte brut.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Cette projection ne correspond pas à la méthode de la source.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Ce tableau n\'a pas de lignes à enregistrer comme risque.',
+  'Diagram': 'Diagramme',
+  'Doel van de beoordeling': 'Objet de l\'évaluation',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Menaces, barrières et conséquences autour d\'un événement',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Une estimation simple : quelle probabilité × quelle ampleur de conséquence',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Un tableau vide pour les mesures avec phase de vie',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Si vous exportez quand même, le fichier part comme brouillon avec des chiffres incertains — ouvrez le rapport pour les corriger d\'abord.',
+  'Expressie': 'Expression',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Modes de défaillance avec gravité, occurrence et détection (S×O×D)',
+  'Formule bewerken': 'Modifier la formule',
+  'Formule vervangen': 'Remplacer la formule',
+  'Formule verwijderen': 'Supprimer la formule',
+  'Formule verwijderen?': 'Supprimer la formule ?',
+  'Ga naar': 'Aller à',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Aucune constatation — les IDs, scores et vues liées sont corrects.',
+  'Gekoppelde weergave': 'Vue liée',
+  'Gekoppelde weergave toevoegen': 'Ajouter une vue liée',
+  'Gekoppelde weergave…': 'Vue liée…',
+  'Herberekenen': 'Recalculer',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Contenu à vérifier ; l\'un a un bouton de réparation sûr.',
+  'Je typte in een berekende kolom': 'Vous avez tapé dans une colonne calculée',
+  'Kans × impact': 'Probabilité × impact',
+  'Loskoppelen als momentopname': 'Détacher comme instantané',
+  'Maatregelenregister': 'Registre des mesures',
+  'Maatregelenregister toevoegen': 'Ajouter un registre des mesures',
+  'Marker verwijderen': 'Supprimer le marqueur',
+  'Markeren': 'Marquer',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Net — seulement l\'estimation après les mesures',
+  'Nieuw risicodossier': 'Nouveau dossier de risque',
+  'Onbetrouwbare risico-cijfers in export':
+      'Chiffres de risque peu fiables dans l\'export',
+  'Overzicht — bruto én netto naast elkaar':
+      'Vue d\'ensemble — brut et net côte à côte',
+  'Pad toevoegen': 'Ajouter un chemin',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Priorité — trié par score, puis par gravité',
+  'Risico-kwaliteitscontrole': 'Contrôle qualité des risques',
+  'Risicodossier…': 'Dossier de risque…',
+  'Risicoregister': 'Registre des risques',
+  'Tabel als risicoregister markeren':
+      'Marquer le tableau comme registre des risques',
+  'Terugzetten': 'Rétablir',
+  'Verversen': 'Actualiser',
+  'Vrij meenemen': 'Reprendre librement',
+  'Wat beoordeel je en waarvoor?': 'Qu\'évaluez-vous, et pour quoi ?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Attribuez à chaque colonne sa signification. Les colonnes sans signification restent des colonnes libres — rien n\'est perdu. Les lignes sans ID reçoivent un numéro R.',
+  'blokkerende bevinding(en):': 'constatation(s) bloquante(s) :',
+  'bron': 'source',
+  'schaal': 'échelle',
+  'Geen bewerkbare tabel op deze pagina':
+      'Aucun tableau modifiable sur cette page',
+  'Presentatie afsluiten': 'Quitter la présentation',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Des modifications ont été apportées pendant la session. Que doit-on en faire ?',
+  'Verwerpen': 'Ignorer',
+  'Bewaren als kopie': 'Enregistrer comme copie',
+  'Bewaren in document': 'Enregistrer dans le document',
+  'beamer': 'vidéoprojecteur',
+  'beamer: niet bereikbaar': 'vidéoprojecteur : inaccessible',
+  'Bewerken sluiten (Esc)': 'Fermer l\'édition (Échap)',
+  'Presenteer document…': 'Présenter le document…',
+  'Presenteer document': 'Présenter le document',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Cochez les tableaux qui peuvent être modifiés en direct pendant la présentation. Tout le reste reste en lecture seule.',
   'Extra ruimte': 'Espace supplémentaire',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Cette note est plus longue que la page — faites défiler pour la suite',

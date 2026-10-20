@@ -64,6 +64,12 @@ import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';
 import '../utils/document_stats.dart';
+import '../models/risk_dossier.dart';
+import '../services/risk_dossier_scaffold.dart';
+import '../services/risk_calc.dart';
+import '../services/risk_quality.dart';
+import '../services/risk_view.dart';
+import '../utils/table_row_permutation.dart';
 import 'keyword_chips_editor.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
@@ -87,6 +93,10 @@ import 'forms/form_image_picker.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'markdown_editor/table_embed_binding.dart';
 import 'reader/document_markdown_view.dart';
+import '../platform/platform_features.dart';
+import 'presentation/display_info.dart';
+import 'presentation/fullscreen_presenter.dart'
+    show DocumentExitChoice, presentDocument;
 import 'reader/table_edit_controller.dart';
 import 'reader/paged_document_view.dart';
 import 'reader/writing_page_breaks.dart';
@@ -103,6 +113,8 @@ part 'parts/document_source_field.dart';
 part 'parts/document_source_rewrites.dart';
 part 'parts/document_editor_inserts.dart';
 part 'parts/document_editor_position.dart';
+part 'parts/document_editor_presenter.dart';
+part 'parts/document_editor_risk_quality.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
 /// Markdown-bron, rechts een live weergave. De bron *ís* de waarheid — elke
@@ -333,6 +345,14 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// ongemoeid. Zie [_convertDocumentToPresentation] voor de bevestiging en
   /// het nieuwe tabblad.
   Future<void> _convertToPresentation() => _convertDocumentToPresentation(this);
+
+  /// Presenteer dit document zoals hij is — de zelfde body, pagina voor
+  /// pagina, met live bewerken op vooraf aangewezen tabellen (#2487). De
+  /// aanwijsdialoog, de tweede-scherm-grens en de afsluitkeuze-afhandeling
+  /// staan in parts/document_editor_presenter.dart — ze raken geen veld
+  /// van de State.
+  Future<void> _presentDocument() =>
+      _presentDocumentSession(context, ref, _controller.text);
 
   /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.
   ///
@@ -593,6 +613,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     onInsertToc: _insertToc,
     onInsertSpacer: _insertSpacer,
     onInsertFootnote: _insertFootnote,
+    onInsertRiskDossier: () => unawaited(_insertRiskDossier()),
+    riskQualityCount: riskQualityFindings(_controller.text).findings.length,
+    onRiskQuality: () => unawaited(_openRiskQuality(this)),
     footnotesAtEnd:
         documentFootnotePlacement(_pageSetupSource(ref)) ==
         FootnotePlacement.document,
@@ -613,6 +636,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ),
     onEditFields: () => unawaited(_editDocumentFields(context, ref)),
     onConvertToPresentation: _convertToPresentation,
+    onPresentDocument: _presentDocument,
     controller: _controller,
     editorFocus: _editorFocus,
     docTheme: _docSurfaceTheme(theme, _styleProfile),
@@ -724,11 +748,18 @@ Future<DocumentExportOutcome> _writeDocumentExport(
   // dat door herhaald plakken meerdere blokken heeft, lekt ze anders als tekst
   // in de uitvoer (#1726).
   final body = stripLeadingFrontMatterLeakage(document.body);
+  final l10n = context.l10n;
+  // De risico-poort vóór de bundel: blokkerende bevindingen betekenen
+  // onbetrouwbare cijfers in elke afgeleide — niet stil door laten (#2490).
+  // De toets is dezelfde pure scan als het overzicht in de werkbalk.
+  if (!context.mounted ||
+      !await confirmRiskQualityExport(context, riskQualityFindings(body))) {
+    return const DocumentExportCancelled();
+  }
   final filePath = state.filePath;
   final projectPath = filePath == null ? null : p.dirname(filePath);
   final settings = ref.read(settingsProvider);
   final exportSetup = effectiveDocumentPageSetup(settings, document.source);
-  final l10n = context.l10n;
   final title = document.fields['title'] ?? _documentTitle(body, filePath);
   final effectiveTheme =
       resolveDocumentStyleProfile(settings, document.styleName) ??

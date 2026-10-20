@@ -34,6 +34,7 @@ import 'odt/document_odt_export.dart';
 import 'docx/document_docx_export.dart';
 import 'privacy/privacy_own_identity.dart';
 import 'privacy/privacy_export_policy.dart';
+import 'risk_bowtie_diagram.dart';
 import '../utils/document_front_matter.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
@@ -174,7 +175,10 @@ String projectedDocumentBody(ExportBundle bundle) =>
 /// De `.md`-export gebruikt dit **niet**: daar zijn de markers bronbezit en
 /// reizen ze mee, onzichtbaar voor elke andere Markdown-lezer.
 String projectedDocumentBodyForRendering(ExportBundle bundle) =>
-    stripFormMarkers(projectedDocumentBody(bundle));
+    // De Bowtie-tabel krijgt zijn afgeleide Mermaid-diagram ervóór (#2496):
+    // dezelfde bron, geen tweede waarheid, en de tabel blijft staan als
+    // inspecteerbare laag én leesbare terugval.
+    markdownWithBowtieDiagrams(stripFormMarkers(projectedDocumentBody(bundle)));
 
 /// True wanneer [markdown] verwijzingen bevat naar bestanden die naast het
 /// document horen — een relatief of absoluut mediapad, een `mem:`-asset, of

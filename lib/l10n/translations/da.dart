@@ -1606,6 +1606,191 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" forekommer to gange (også på linje {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" er ikke et tal for {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Beregningen "{kolom}" på {rij} mislykkedes ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Barrieren ser dækket ud, men er det ikke.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie-elementet "{element}" henviser til tiltag "{maatregel}", som ikke findes.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Scores uden for skalaen forvrænger RPN, sandsynlighed×indvirkning og enhver projektion der regner på dem.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Den afledte kolonne viser "—" — markøren bevares men tæller ikke.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Afskriften kan ikke genskabes uden sin kilde — frakobling eller sletning er det menneskelige valg.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'De berørte celler er ukendte — cyklussen kræver et menneskeligt valg om den tilsigtede beregning.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Cellen viser "—" — ikke 0, ikke et gammelt tal.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Gyldigheden ({geldigheid}) er udløbet.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Koblingen gør intet; tiltaget tæller ikke med i netto-begrundelsen.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Tiltaget kan være udløbet; nettoscores der hviler på det kræver revurdering.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Tiltaget ser ud til at dække en risiko, der ikke findes.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'De gemte afledte værdier halter bagefter ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Skalaen "{schaal}" findes ikke i denne fil og er heller ikke et indbygget navn.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabellen viser ikke hvad formlen nu giver — genberegning overskriver resultatet, aldrig inddata.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabellen viser hvad kilden ikke længere siger — opdatering genopbygger den fra kilden.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Visningen nævner kilden "{bron}", som ikke findes i denne fil.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Visningen afviger fra kilden: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'En formel henviser (indirekte) til sig selv.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'En ulæselig score tæller som et upålideligt tal, ikke som nul.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'En præventiv barriere til højre mitigerer intet — stien fortæller så en anden historie.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Der er ingen evidens for at tiltaget virker — nettoscores der bygger på det er udækkede.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formlen på "{kolom}" kan ikke læses: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Elementet står uden for enhver sti-historie — det tæller ingen steder.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Det er uklart om denne barriere dækker noget.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Stien er en skitse — ikke en komplet dækning at eksportere eller præsentere med.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Residualrisikoen er ikke underbygget — en eksport ville da antyde mere sikkerhed end der er.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Nettoscore uden testet/virkende tiltag eller netto-begrundelse.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Stien "{pad}" mangler: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Række {n} har intet ID.',
+  'Rij {n} heeft geen pad.': 'Række {n} har ingen sti.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Rollen "{rol}" hører ikke til siden "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Rollen "{rol}" er ikke en kendt bowtie-rolle.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Scoren {waarde} for {kolom} ligger uden for skalaen 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Scores kan ikke kontrolleres, så længe skalaen mangler.',
+  'Status "{status}" is geen bekend token.':
+      'Statussen "{status}" er ikke et kendt token.',
+  'Status "{status}" zonder toetsdatum.': 'Status "{status}" uden testdato.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Henviser til tiltag "{maatregel}", som ikke findes.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Henviser til risiko "{risico}", som ikke findes.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Henvisninger til "{id}" er tvetydige: hvilken række der menes, er et menneskeligt valg.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Uden ID kan intet adressere denne række — visninger, tiltag og selve kontrollen springer den over.',
+  'deling door nul': 'division med nul',
+  'rij {n}': 'række {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'række {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'række {r} kolonne {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} flere)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} flere',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), kolonnenøgler, nøgle@ID, sum avg min max count wsum. Ukendt er aldrig 0.',
+  'Afgeleide cel overschreven': 'Afledt celle overskrevet',
+  'Afgeleide kolom': 'Afledt kolonne',
+  'Als risicoregister markeren…': 'Markér som risikoregister…',
+  'Beoordelaar (naam/rol)': 'Vurderer (navn/rolle)',
+  'Beoordelingsschaal': 'Vurderingsskala',
+  'Berekening toevoegen': 'Tilføj beregning',
+  'Berekening…': 'Beregning…',
+  'Blokkerende fouten': 'Blokerende fejl',
+  'Bowtie-model': 'Bowtie-model',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Brutto — kun den oprindelige vurdering',
+  'Concept — pad mist': 'Kladde — sti mangler',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Kildetabellen for denne visning blev ikke fundet.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Tallene er ikke pålidelige, så længe disse er der.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formlen er ikke væk endnu — hvad var hensigten?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Denne kolonne bliver en almindelig kolonne: cellerne beholder deres sidste beregnede værdi som almindelig tekst.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Denne projektion passer ikke til kildens metode.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Denne tabel har ingen rækker at registrere som risiko.',
+  'Diagram': 'Diagram',
+  'Doel van de beoordeling': 'Formålet med vurderingen',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Trusler, barrierer og konsekvenser omkring én hændelse',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'En simpel vurdering: hvor sandsynligt × hvor stor konsekvensen',
+  'Een lege tabel voor maatregelen met levensfase':
+      'En tom tabel til foranstaltninger med livsfase',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Eksporterer du alligevel, går filen ud som kladde med usikre tal — åbn oversigten for at rette dem først.',
+  'Expressie': 'Udtryk',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Fejltilstande med alvor, sandsynlighed og detektion (S×O×D)',
+  'Formule bewerken': 'Redigér formel',
+  'Formule vervangen': 'Erstat formel',
+  'Formule verwijderen': 'Fjern formel',
+  'Formule verwijderen?': 'Fjern formel?',
+  'Ga naar': 'Gå til',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Ingen fund — ID\'er, scores og koblede visninger stemmer.',
+  'Gekoppelde weergave': 'Koblet visning',
+  'Gekoppelde weergave toevoegen': 'Tilføj koblet visning',
+  'Gekoppelde weergave…': 'Koblet visning…',
+  'Herberekenen': 'Genberegn',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Indhold at gennemgå; én har en sikker reparationsknap.',
+  'Je typte in een berekende kolom': 'Du skrev i en beregnet kolonne',
+  'Kans × impact': 'Sandsynlighed × konsekvens',
+  'Loskoppelen als momentopname': 'Frakobl som øjebliksbillede',
+  'Maatregelenregister': 'Foranstaltningsregister',
+  'Maatregelenregister toevoegen': 'Tilføj foranstaltningsregister',
+  'Marker verwijderen': 'Fjern markør',
+  'Markeren': 'Markér',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Netto — kun vurderingen efter foranstaltninger',
+  'Nieuw risicodossier': 'Ny risikomappe',
+  'Onbetrouwbare risico-cijfers in export': 'Upålidelige risikotal i eksporten',
+  'Overzicht — bruto én netto naast elkaar':
+      'Oversigt — brutto og netto side om side',
+  'Pad toevoegen': 'Tilføj sti',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritet — sorteret efter score, derefter efter alvor',
+  'Risico-kwaliteitscontrole': 'Risiko-kvalitetskontrol',
+  'Risicodossier…': 'Risikomappe…',
+  'Risicoregister': 'Risikoregister',
+  'Tabel als risicoregister markeren': 'Markér tabel som risikoregister',
+  'Terugzetten': 'Gendan',
+  'Verversen': 'Opdatér',
+  'Vrij meenemen': 'Tag frit med',
+  'Wat beoordeel je en waarvoor?': 'Hvad vurderer du, og til hvad?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Tildel hvilken kolonne der har hvilken betydning. Kolonner uden betydning forbliver frie kolonner — intet går tabt. Rækker uden ID får et R-nummer.',
+  'blokkerende bevinding(en):': 'blokerende fund:',
+  'bron': 'kilde',
+  'schaal': 'skala',
+  'Geen bewerkbare tabel op deze pagina':
+      'Ingen redigerbar tabel på denne side',
+  'Presentatie afsluiten': 'Afslut præsentation',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Der blev foretaget ændringer under sessionen. Hvad skal der ske med dem?',
+  'Verwerpen': 'Kassér',
+  'Bewaren als kopie': 'Gem som kopi',
+  'Bewaren in document': 'Gem i dokumentet',
+  'beamer': 'projektor',
+  'beamer: niet bereikbaar': 'projektor: ikke tilgængelig',
+  'Bewerken sluiten (Esc)': 'Luk redigering (Esc)',
+  'Presenteer document…': 'Præsentér dokument…',
+  'Presenteer document': 'Præsentér dokument',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Markér hvilke tabeller der må redigeres live under præsentationen. Alt andet indhold forbliver skrivebeskyttet.',
   'Extra ruimte': 'Ekstra mellemrum',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Denne note er længere end siden — rul for resten',

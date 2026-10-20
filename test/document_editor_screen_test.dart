@@ -1004,6 +1004,8 @@ void main() {
   testWidgets(
     'het palet zet hoofdstukafbrekingen in de bron, ongedaan te maken',
     (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
       final n = DocumentNotifier()
         ..loadDocument(
           MarkdownDocument.parse(
@@ -1039,6 +1041,8 @@ void main() {
   testWidgets('een tweede keer toepassen verandert de bron niet', (
     tester,
   ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
     final n = DocumentNotifier()
       ..loadDocument(
         MarkdownDocument.parse('# Een\n\nAlfa\n\n---\n\n# Twee\n'),
@@ -1059,6 +1063,70 @@ void main() {
       find.text('Elk hoofdstuk begon al op een nieuwe pagina'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('kwaliteitscontrole toont bevindingen en springt naar de regel', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          '<!-- ocideck:risks v1 id=hoofd method=fmea cols=id,failure,s_b -->\n'
+          '| ID | Faalwijze | S b |\n'
+          '|---|---|---|\n'
+          '| R-1 | Sensor valt uit | 7 |\n'
+          '| R-1 | Kabel breekt | 4 |\n',
+        ),
+      );
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.byTooltip('Risico-kwaliteitscontrole'));
+    await tester.pumpAndSettle();
+
+    // Een dubbel ID is een blokkerende fout met een 'Ga naar'-knop.
+    expect(find.text('Blokkerende fouten'), findsOneWidget);
+    expect(find.textContaining('R-1'), findsWidgets);
+    await tester.tap(find.text('Ga naar'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Blokkerende fouten'), findsNothing);
+  });
+
+  testWidgets('presentatie-aanwijzing: vink een tabel aan en annuleer', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          '# Risico\n\n'
+          '| ID | Faalwijze |\n'
+          '|---|---|\n'
+          '| R-1 | Sensor valt uit |\n',
+        ),
+      );
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.byTooltip('Meer'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Presenteer document…'));
+    await tester.pumpAndSettle();
+
+    // De aanwijsdialoog somt de tabellen van het document op.
+    expect(find.text('Presenteer document'), findsOneWidget);
+    expect(find.textContaining('Tabel 1'), findsOneWidget);
+    await tester.tap(find.byType(CheckboxListTile));
+    await tester.pump();
+    await tester.tap(find.text('Annuleren'));
+    await tester.pumpAndSettle();
+
+    // Geannuleerd: geen presentatie, het document staat ongemoeid.
+    expect(n.currentState.document!.source, contains('| R-1 |'));
   });
 
   /// Roekt een sneltoets aan via de [CallbackShortcuts]-binding, zoals de

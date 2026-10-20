@@ -286,9 +286,18 @@ extension DeckNotifierSlides on DeckNotifier {
     // Snel typen op dezelfde slide telt als één ongedaan-maken-stap. Sleutel op
     // de stabiele slide-id, niet de index: na verwijderen/herordenen mag een
     // bewerking op een ándere slide (zelfde index) niet meecoalescen.
+    // Een rijpermutatie (sorteren, verplaatsen) is daarentegen een discrete
+    // handeling: die smelt nooit samen met de typstap ervoor (#2486).
     _mutate(
       deck.copyWith(slides: slides),
-      coalesceKey: bumpRevision ? null : 'slide:${updated.id}',
+      coalesceKey:
+          bumpRevision ||
+              isTableRowPermutation(
+                deck.slides[index].tableRows,
+                updated.tableRows,
+              )
+          ? null
+          : 'slide:${updated.id}',
       bumpRevision: bumpRevision,
     );
   }

@@ -6343,6 +6343,29 @@ before anything happens:
   presentation and a document are not a perfect mirror of each other — the split
   is a proposal, not a bijection.
 
+### Presenting a document
+
+*(Added 2026-10-20, #2487.)* **Presenteer document…** in the document toolbar's
+⋮ menu presents the document as it is — not converted slides, but the continuous
+text page by page. The page breaks are the same ones the export uses: a
+block-level `---` breaks the page, and chapters only start a new page when the
+*New chapter on a new page* setting is on.
+
+Before starting you tick which tables may be edited live during the
+presentation; with nothing ticked, everything is read-only. In the presentation,
+**E** — or the *Tabel bewerken (E)* button — opens edit mode for the first
+designated table on the page; **Esc** closes only the edit mode, not the
+presentation. What you type stays on your own screen until the cell is
+committed: only then does OciDeck write the change into the document (the same
+surgical write-back as the Source preview) and push the updated view to the
+audience screen — with a second display that view follows in order; without one
+you present single-screen.
+
+When leaving, the presenter explicitly chooses what happens to the session:
+**Save in document**, **Save as copy** (a new tab; the original stays untouched)
+or **Discard**. Without edits the choice never appears and the presentation
+simply closes.
+
 ## Markdown mode
 
 The toolbar code icon switches the editor to **Markdown mode**: the whole deck is

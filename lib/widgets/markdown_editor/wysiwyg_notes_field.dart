@@ -23,6 +23,7 @@ import 'markdown_editor_theme.dart';
 import 'mermaid_embed_builder.dart';
 import 'form_block_embed_builder.dart';
 import 'pentest_block_embed_builder.dart';
+import 'ocideck_table_embed_builder.dart';
 import 'table_embed_builder.dart';
 import 'table_embed_binding.dart';
 import 'source_fragment_embed_builder.dart';
@@ -530,6 +531,10 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 embedBuilders: [
                   const ImageEmbedBuilder(),
                   TimelineTableEmbedBuilder(
+                    onDiscreteEdit: widget.onDiscreteVisualEdit,
+                    controllerStore: _tableEditors,
+                  ),
+                  OciMarkedTableEmbedBuilder(
                     onDiscreteEdit: widget.onDiscreteVisualEdit,
                     controllerStore: _tableEditors,
                   ),

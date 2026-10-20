@@ -1599,6 +1599,193 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" esineb kaks korda (ka real {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" ei ole arv veeru {kolom} jaoks.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Arvutus "{kolom}" real {rij} ebaõnnestus ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Tõke näib kaetud, kuid ei ole.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie-element "{element}" viitab meetmele "{maatregel}", mida pole olemas.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Skaalast väljas olevad hinded moonutavad RPN-i, tõenäosus×mõju ning iga nende peal arvutavat projektsiooni.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Tuletatud veerg näitab "—" — marker säilib, kuid ei lähe arvesse.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Koondvalmidist ei saa ilma allikata taastada — lahtiühendamine või kustutamine on inimese valik.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Kõnealused lahtrid on teadmata — tsükkel nõuab inimese otsust kavandatud arvutuse kohta.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Lahter näitab "—" — ei 0, ei vana arvu.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Kehtivus ({geldigheid}) on aegunud.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Seos ei tee midagi; meede ei lähe neto-põhjendusse arvesse.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Meede võib olla aegunud; sellele toetuvad neto-hinded vajavad uuesti hindamist.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Meede näib katvat riski, mida pole olemas.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Salvestatud tuletatud väärtused on maas ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Skaala "{schaal}" pole selles failis ega ole ka sisseehitatud nimi.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabel ei näita, mida valem nüüd annab — ümberarvutus kirjutab tulemuse üle, mitte kunagi sisendi.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabel näitab seda, mida allikas enam ei ütle — värskendamine ehitab selle allikast uuesti.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Vaade nimetab allikat "{bron}", mida selles failis pole.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Vaade erineb allikast: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Valem viitab (kaudselt) iseendale.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Loetamatu hinne loetakse ebausaldusväärseks arvuks, mitte nulliks.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Paremal olev ennetav tõke ei leevenda midagi — rada räägib siis teist lugu.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Puuduvad tõendid, et meede toimib — sellele toetuvad neto-hinded on katmata.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Valem veerus "{kolom}" ei ole loetav: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Element asub väljaspool igat raja lugu — see ei lähe kuskil arvesse.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Ebaselge, kas see tõke midagi katab.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Rada on visand — mitte täielik katvus ekspordiks või esitluseks.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Jääkrisk ei ole põhjendatud — eksport viitaks siis suuremale kindlusele, kui tegelikult on.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Neto-hinne ilma testitud/töötava meetme või neto-põhjenduseta.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Rajal "{pad}" puudub: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Real {n} pole ID-d.',
+  'Rij {n} heeft geen pad.': 'Real {n} pole rada.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Roll "{rol}" ei kuulu küljele "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Roll "{rol}" ei ole tuntud bowtie-roll.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Hinne {waarde} veeru {kolom} jaoks jääb välja skaalast 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Hindeid ei saa kontrollida, kuni skaala puudub.',
+  'Status "{status}" is geen bekend token.':
+      'Olek "{status}" ei ole tuntud tunnus.',
+  'Status "{status}" zonder toetsdatum.':
+      'Olek "{status}" ilma testimiskuupäevata.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Viitab meetmele "{maatregel}", mida pole olemas.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Viitab riskile "{risico}", mida pole olemas.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Viited "{id}"-le on ebaselged: millist rida silmas peetakse, on inimese valik.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Ilma ID-ta ei saa miski sellele reale viidata — vaated, meetmed ja kontroll ise jätavad selle vahele.',
+  'deling door nul': 'nulliga jagamine',
+  'rij {n}': 'rida {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'rida {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'rida {r} veerg {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} veel)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} veel',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), veeruvõtmed, võti@ID, sum avg min max count wsum. Tundmatu ei ole kunagi 0.',
+  'Afgeleide cel overschreven': 'Tuletatud lahter üle kirjutatud',
+  'Afgeleide kolom': 'Tuletatud veerg',
+  'Als risicoregister markeren…': 'Märgi riskiregristriks…',
+  'Beoordelaar (naam/rol)': 'Hindaja (nimi/roll)',
+  'Beoordelingsschaal': 'Hindamisskaala',
+  'Berekening toevoegen': 'Lisa arvutus',
+  'Berekening…': 'Arvutus…',
+  'Blokkerende fouten': 'Blokeerivad vead',
+  'Bowtie-model': 'Bowtie-mudel',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Bruto — ainult esialgne hinnang',
+  'Concept — pad mist': 'Mustand — tee puudub',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Selle vaate lähtetabelit ei leitud.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Numbrid pole usaldusväärsed, kuni need on olemas.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Valem ei ole veel kadunud — mis oli kavatsus?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'See veerg muutub tavaliseks veeruks: lahtrid säilitavad oma viimase arvutatud väärtuse lihttekstina.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'See projektsioon ei sobi allika meetodiga.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Selles tabelis pole ridu, mida riskina registreerida.',
+  'Diagram': 'Skeem',
+  'Doel van de beoordeling': 'Hindamise eesmärk',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Ohud, tõkked ja tagajärjed ühe sündmuse ümber',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Lihtne hinnang: kui tõenäoline × kui suur tagajärg',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Tühi tabel meetmete koos elutsükli faasiga',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Kui ekspordid ikkagi, läheb fail välja mustandina ebakindlate arvudega — ava ülevaade, et need enne parandada.',
+  'Expressie': 'Avaldis',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Rikkerežiimid raskuse, tõenäosuse ja avastatavusega (S×O×D)',
+  'Formule bewerken': 'Muuda valemit',
+  'Formule vervangen': 'Asenda valem',
+  'Formule verwijderen': 'Eemalda valem',
+  'Formule verwijderen?': 'Eemaldatakse valem?',
+  'Ga naar': 'Mine',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Leide pole — ID-d, skoorid ja lingitud vaated klopivad.',
+  'Gekoppelde weergave': 'Lingitud vaade',
+  'Gekoppelde weergave toevoegen': 'Lisa lingitud vaade',
+  'Gekoppelde weergave…': 'Lingitud vaade…',
+  'Herberekenen': 'Arvuta uuesti',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Sisu ülevaatamiseks; ühel on turvaline parandusnupp.',
+  'Je typte in een berekende kolom': 'Kirjutasid arvutatud veergu',
+  'Kans × impact': 'Tõenäosus × mõju',
+  'Loskoppelen als momentopname': 'Ühenda lahti hetktõmmisena',
+  'Maatregelenregister': 'Meetmeregister',
+  'Maatregelenregister toevoegen': 'Lisa meetmeregister',
+  'Marker verwijderen': 'Eemalda marker',
+  'Markeren': 'Märgi',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Netto — ainult hinnang pärast meetmeid',
+  'Nieuw risicodossier': 'Uus riskikaust',
+  'Onbetrouwbare risico-cijfers in export':
+      'Ebausaldusväärsed riskiarvud ekspordis',
+  'Overzicht — bruto én netto naast elkaar':
+      'Ülevaade — bruto ja netto kõrvuti',
+  'Pad toevoegen': 'Lisa tee',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioriteet — järjestatud skoori, siis raskuse järgi',
+  'Risico-kwaliteitscontrole': 'Riski kvaliteedikontroll',
+  'Risicodossier…': 'Riskikaust…',
+  'Risicoregister': 'Riskiregister',
+  'Tabel als risicoregister markeren': 'Märgi tabel riskiregristriks',
+  'Terugzetten': 'Taasta',
+  'Verversen': 'Värskenda',
+  'Vrij meenemen': 'Võta vabalt kaasa',
+  'Wat beoordeel je en waarvoor?': 'Mida hindad ja milleks?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Määra, millisel veerul on milline tähendus. Tähenduseta veerud jäävad vabadeks veergudeks — midagi ei kao. ID-ta read saavad R-numbri.',
+  'blokkerende bevinding(en):': 'blokeeriv(ad) leid(ud):',
+  'bron': 'allikas',
+  'schaal': 'skaala',
+  'Geen bewerkbare tabel op deze pagina':
+      'Sellel lehel pole redigeeritavat tabelit',
+  'Presentatie afsluiten': 'Lõpeta esitlus',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Seanssi ajal tehti muudatusi. Mida nendega teha?',
+  'Verwerpen': 'Hülga',
+  'Bewaren als kopie': 'Salvesta koopiana',
+  'Bewaren in document': 'Salvesta dokumenti',
+  'beamer': 'projektor',
+  'beamer: niet bereikbaar': 'projektor: pole kättesaadav',
+  'Bewerken sluiten (Esc)': 'Sulge redigeerimine (Esc)',
+  'Presenteer document…': 'Esitle dokumenti…',
+  'Presenteer document': 'Esitle dokumenti',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Märgi, milliseid tabeleid võib esitluse ajal reaalajas redigeerida. Kõik muu sisu jääb kirjutuskaitstuks.',
   'Extra ruimte': 'Lisaruum',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'See märkus on leheküljest pikem — keri ülejäänu jaoks',

@@ -2,6 +2,7 @@ import '../services/table_of_contents.dart';
 import 'spacer_embed_syntax.dart';
 import '../services/document_timeline.dart';
 import '../services/markdown_table_lines.dart';
+import '../services/ocideck_markers.dart';
 import '../services/form_document_blocks.dart';
 import '../services/pentest_blocks.dart';
 
@@ -82,8 +83,14 @@ Set<int> _limitationLines(String markdown) {
   final forms = scanFormBlocks(markdown);
   var fenced = false;
   var inTable = false;
+  // Regels binnen een atomaire `<!-- ocideck:* -->`-envelop (markerblok +
+  // witregels + contracttabel, RISK_FORMAT §5) reizen als één
+  // `x-embed-ocideck-table` en worden niet apart gescand — een marker of een
+  // cel-ontsnapping is daar eigen schrijfwijze, geen rauwe invoer.
+  var ociEnvelopeUntil = -1;
   for (var index = 0; index < lines.length; index++) {
     final line = lines[index];
+    if (index <= ociEnvelopeUntil) continue;
     // Wat als één embed reist, gaat nooit door de rijke-tekstconversie en kan
     // daar dus ook niet stukgaan.
     if (pentest.isAtomicLine(index) || forms.isAtomicLine(index)) continue;
@@ -93,6 +100,25 @@ Set<int> _limitationLines(String markdown) {
       continue;
     }
     if (fenced) continue;
+    if (isOciTableMarkerLine(line)) {
+      var j = index + 1;
+      while (j < lines.length &&
+          (isOciTableMarkerLine(lines[j]) || lines[j].trim().isEmpty)) {
+        j++;
+      }
+      if (j + 1 < lines.length &&
+          isMarkdownTableLine(lines[j]) &&
+          isMarkdownTableDelimiterRow(lines[j + 1])) {
+        var end = j + 2;
+        while (end < lines.length && isMarkdownTableLine(lines[end])) {
+          end++;
+        }
+        ociEnvelopeUntil = end - 1;
+        continue;
+      }
+      // Een weesmarker bindt niet en is wél gewoon gescand commentaar —
+      // die hoort zichtbaar bron te blijven (bronfragment).
+    }
     // Een GFM-tabel reist als één `x-embed-table`-blok — precies de reden dat
     // hij niet in deze opsomming staat. Zijn regels horen dus ook niet gescand
     // te worden: een `<br>` uit een celregeleinde en de `\|`, `\\` en `\<` van
@@ -167,7 +193,8 @@ bool _isFragmentBoundary(
   if (RegExp(r'^\s{0,3}\[\^[^\]]+\]:').hasMatch(line)) return true;
   if (tocMarkerLinePattern.hasMatch(line) ||
       spacerMarkerLinePattern.hasMatch(line) ||
-      line.trim() == documentTimelineMarker) {
+      line.trim() == documentTimelineMarker ||
+      isOciTableMarkerLine(line)) {
     return true;
   }
   return opensAtomicMarkdownTable(line, next);

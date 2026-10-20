@@ -10,6 +10,31 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Documentpresentatie met live tabelbewerking.** Een Markdown-document
+  presenteer je nu zoals hij is — pagina voor pagina via dezelfde
+  pagina-einden als de export (`---`, en hoofdstukken alleen als de
+  hoofdstuk-pagina-instelling aan staat). Tijdens het opstarten wijs je aan
+  welke tabellen live bewerkt mogen worden; de rest van de inhoud blijft
+  alleen-lezen. E of het potlood opent de bewerkmodus voor de eerste
+  aangewezen tabel op de pagina, Esc sluit alleen de bewerkmodus. Alleen
+  bevestigde celwijzigingen gaan de bron in — via dezelfde chirurgische
+  terugschrijf als de Bron-preview — en gaan pas dan in volgorde naar het
+  publieksscherm; op één scherm is er geen publieksvenster. Bij het
+  afsluiten kies je expliciet: bewaren in het document, bewaren als kopie
+  in een nieuw tabblad, of verwerpen — zonder sessie-edits sluit de
+  presentatie gewoon (#2487).
+
+- **Bowtie-diagram uit de risicotabel, overal dezelfde vertoning.** Een
+  `<!-- ocideck:bowtie -->`-tabel toont nu met één schakelaar als diagram:
+  dreigingen links, preventieve barrières, het topgebeurtenis centraal,
+  mitigerende barrières en gevolgen rechts — deterministisch afgeleid uit
+  dezelfde tabel, dus tabel en plaatje lopen nooit uiteen. Gedeelde
+  maatregelen delen één knoop; de status staat als tekst én lijnstijl in
+  beeld, zodat een voorgestelde barrière er nooit uitziet als bewezen
+  dekking. Lezer, voorvertoning en alle exportformaten tekenen hetzelfde
+  diagram (met de tabel als leesbare terugval), en een open pad meldt zich
+  als concept — nooit als complete dekking (#2495, #2496).
+
 - **Bronblokken in de visuele documenteditor: niet-verliesvrije Markdown
   blijft lokaal.** Stond er één HTML-commentaar, ontsnapt leesteken of losse
   tabelregel in een document, dan dwong de visuele modus het héle bestand
@@ -56,6 +81,13 @@ All notable changes to OciDeck are documented in this file.
   komen. Het nootvlak is nu scrollbaar met een zichtbare doorgang-regel en
   scrollbalk, zodat de volledige noot bereikbaar blijft zonder over de
   hoofdtekst of marges heen te vallen.
+- **Een tabelsortering is nu overal één eigen ongedaan-stap.** Sorteerde je
+  een kolom vlak na het typen in een tabel — in de Bron-weergave van een
+  document of in een tabeldia — dan smolt die sortering samen met de typstap
+  ervoor in één undo, zodat *Ongedaan maken* ook je getypte tekst
+  terugdraaide. Een zuivere rijverwisseling breekt de samenvoeging nu
+  altijd: de sortering staat op zichzelf, de rijen houden hun gegevens bij
+  elkaar en *Opnieuw* zet dezelfde rangschikking terug (#2486).
 - **Knippen en plakken op de plek van de opdracht, ook bij een traag
   klembord.** Tijdens een trage `Clipboard.setData`/`getData` kon de
   gebruiker verder typen of elders klikken; knippen waste dan een ander

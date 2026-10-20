@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:markdown_quill/markdown_quill.dart';
 import 'package:ocideck/utils/list_block_embed_syntax.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
+import 'package:ocideck/utils/ocideck_table_embed_syntax.dart';
 import 'package:ocideck/utils/toc_embed_syntax.dart';
 
 void main() {
@@ -60,6 +61,68 @@ Afsluiting.''';
     expect(restored, contains('| Ontwerp | 120 | 12% |'));
     expect(restored, contains('| Bouw | 340 | 8% |'));
     expect(restored, contains('Afsluiting.'));
+  });
+
+  test('een gemarkeerde contracttabel reist als één embed en terug', () {
+    // De risicodossier-markers (RISK_FORMAT §5) mogen in de visuele stand
+    // geen los bronblok worden: marker en tabel zijn samen het contract.
+    const source = '''# Rapport
+
+<!-- ocideck:risks v1 id=hoofd method=fmea rev=3 next=4 cols=id,failure,s_b -->
+| ID | Faalwijze | S b |
+|---|---|---|
+| R-001 | Sensor valt uit | 7 |
+
+Afsluiting.''';
+
+    final document = MarkdownQuillCodec.documentFromMarkdown(source);
+    final embeds = document
+        .toDelta()
+        .toList()
+        .where((op) => op.data is Map)
+        .map((op) => (op.data as Map).keys.first)
+        .toList();
+    expect(embeds, contains(EmbeddableOciMarkedTable.blockType));
+    // Geen bronfragment voor de marker — de envelop is atomair.
+    expect(embeds, isNot(contains('x-embed-source-fragment')));
+
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+    expect(
+      restored,
+      contains(
+        '<!-- ocideck:risks v1 id=hoofd method=fmea rev=3 next=4 '
+        'cols=id,failure,s_b -->',
+      ),
+    );
+    expect(restored, contains('| R-001 | Sensor valt uit | 7 |'));
+    expect(restored, contains('Afsluiting.'));
+  });
+
+  test('een gestapelde calc-marker reist in dezelfde embed mee', () {
+    const source = '''<!-- ocideck:risks v1 id=hoofd next=2 cols=id,s_b -->
+<!-- ocideck:calc col=rpn expr="s_b * 2" -->
+| ID | S b |
+|---|---|
+| R-001 | 5 |''';
+
+    final document = MarkdownQuillCodec.documentFromMarkdown(source);
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+    expect(
+      restored,
+      contains('<!-- ocideck:risks v1 id=hoofd next=2 cols=id,s_b -->'),
+    );
+    expect(restored, contains('<!-- ocideck:calc col=rpn expr="s_b * 2" -->'));
+  });
+
+  test('een weesmarker blijft een bronblok, geen tabel-embed', () {
+    const source = '''<!-- ocideck:risks v1 id=zwever -->
+
+Gewone tekst eronder.''';
+
+    final document = MarkdownQuillCodec.documentFromMarkdown(source);
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+    expect(restored, contains('<!-- ocideck:risks v1 id=zwever -->'));
+    expect(restored, contains('Gewone tekst eronder.'));
   });
 
   test('de inhoudsopgave-marker wordt een embed en komt er weer uit', () {

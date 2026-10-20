@@ -812,6 +812,191 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" occurs twice (also on line {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" is not a number for {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Calculation "{kolom}" on {rij} failed ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'The barrier looks covered but is not.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie element "{element}" refers to measure "{maatregel}", which does not exist.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Out-of-scale scores distort RPN, probability×impact and every projection that relies on them.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'The derived column shows "—" — the marker is kept but does not count.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'The copy cannot be rebuilt without its source — detaching or deleting is the human choice.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'The cells involved are unknown — the cycle requires a human decision about the intended calculation.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'The cell shows "—" — no 0, no stale number.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'The validity ({geldigheid}) has expired.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'The link does nothing; the measure does not count towards the net rationale.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'The measure may have lapsed; net scores resting on it need re-assessment.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'The measure appears to cover a risk that does not exist.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'The stored derived values are behind ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'The scale "{schaal}" is not in this file and is not a built-in name either.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'The table does not show what the formula now produces — recalculating rewrites the result, never the input.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'The table shows what the source no longer says — refreshing rebuilds it from the source.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'The view names source "{bron}", which is not in this file.',
+  'De weergave wijkt af van de bron: {details}.':
+      'The view deviates from the source: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'A formula refers (indirectly) to itself.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'An unreadable score counts as an unreliable figure, not as zero.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'A preventive barrier on the right mitigates nothing — the path then tells a different story.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'There is no evidence the measure works — net scores relying on it are uncovered.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formula on "{kolom}" cannot be read: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'The element sits outside every path story — it counts nowhere.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'It is unclear whether this barrier covers anything.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'The path is a sketch — not complete coverage to export or present with.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'The residual risk is not substantiated — an export would then suggest more certainty than exists.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Net score without a tested/working measure or a net rationale.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Path "{pad}" is missing: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Row {n} has no ID.',
+  'Rij {n} heeft geen pad.': 'Row {n} has no path.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Role "{rol}" does not belong on side "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Role "{rol}" is not a known bowtie role.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Score {waarde} for {kolom} falls outside the 1–{max} scale.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Scores cannot be checked as long as the scale is missing.',
+  'Status "{status}" is geen bekend token.':
+      'Status "{status}" is not a known token.',
+  'Status "{status}" zonder toetsdatum.':
+      'Status "{status}" without a test date.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Refers to measure "{maatregel}", which does not exist.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Refers to risk "{risico}", which does not exist.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'References to "{id}" are ambiguous: which row is meant is a human choice.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Without an ID nothing can address this row — views, measures and the check itself skip it.',
+  'deling door nul': 'division by zero',
+  'rij {n}': 'row {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'row {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'row {r} column {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} more)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} more',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), column keys, key@ID, sum avg min max count wsum. Unknown is never 0.',
+  'Afgeleide cel overschreven': 'Derived cell overwritten',
+  'Afgeleide kolom': 'Derived column',
+  'Als risicoregister markeren…': 'Mark as risk register…',
+  'Beoordelaar (naam/rol)': 'Assessor (name/role)',
+  'Beoordelingsschaal': 'Rating scale',
+  'Berekening toevoegen': 'Add calculation',
+  'Berekening…': 'Calculation…',
+  'Blokkerende fouten': 'Blocking errors',
+  'Bowtie-model': 'Bowtie model',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Gross — only the original estimate',
+  'Concept — pad mist': 'Draft — path missing',
+  'De brontabel van deze weergave is niet gevonden.':
+      'The source table for this view was not found.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'The figures are unreliable as long as these remain.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'The formula is not gone yet — what did you mean to do?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'This column becomes a regular column: the cells keep their last computed value as plain text.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'This projection does not fit the method of the source.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'This table has no rows to record as a risk.',
+  'Diagram': 'Diagram',
+  'Doel van de beoordeling': 'Purpose of the assessment',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Threats, barriers and consequences around one event',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'A simple estimate: how likely × how big the consequence',
+  'Een lege tabel voor maatregelen met levensfase':
+      'An empty table for measures with lifecycle stage',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'If you export anyway, the file goes out as a draft with unreliable figures — open the report to fix them first.',
+  'Expressie': 'Expression',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Failure modes with severity, occurrence and detection (S×O×D)',
+  'Formule bewerken': 'Edit formula',
+  'Formule vervangen': 'Replace formula',
+  'Formule verwijderen': 'Remove formula',
+  'Formule verwijderen?': 'Remove formula?',
+  'Ga naar': 'Go to',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'No findings — IDs, scores and linked views check out.',
+  'Gekoppelde weergave': 'Linked view',
+  'Gekoppelde weergave toevoegen': 'Add linked view',
+  'Gekoppelde weergave…': 'Linked view…',
+  'Herberekenen': 'Recalculate',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Content to review; one has a safe repair button.',
+  'Je typte in een berekende kolom': 'You typed in a computed column',
+  'Kans × impact': 'Probability × impact',
+  'Loskoppelen als momentopname': 'Detach as snapshot',
+  'Maatregelenregister': 'Measures register',
+  'Maatregelenregister toevoegen': 'Add measures register',
+  'Marker verwijderen': 'Remove marker',
+  'Markeren': 'Mark',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Net — only the estimate after measures',
+  'Nieuw risicodossier': 'New risk dossier',
+  'Onbetrouwbare risico-cijfers in export': 'Unreliable risk figures in export',
+  'Overzicht — bruto én netto naast elkaar':
+      'Overview — gross and net side by side',
+  'Pad toevoegen': 'Add path',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Priority — sorted by score, then by severity',
+  'Risico-kwaliteitscontrole': 'Risk quality check',
+  'Risicodossier…': 'Risk dossier…',
+  'Risicoregister': 'Risk register',
+  'Tabel als risicoregister markeren': 'Mark table as risk register',
+  'Terugzetten': 'Revert',
+  'Verversen': 'Refresh',
+  'Vrij meenemen': 'Carry over freely',
+  'Wat beoordeel je en waarvoor?': 'What are you assessing, and for what?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Assign which column has which meaning. Columns without a meaning remain as free columns — nothing is lost. Rows without an ID get an R-number.',
+  'blokkerende bevinding(en):': 'blocking finding(s):',
+  'bron': 'source',
+  'schaal': 'scale',
+  'Geen bewerkbare tabel op deze pagina': 'No editable table on this page',
+  'Presentatie afsluiten': 'Exit presentation',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Changes were made during the session. What should happen to them?',
+  'Verwerpen': 'Discard',
+  'Bewaren als kopie': 'Save as copy',
+  'Bewaren in document': 'Save in document',
+  'beamer': 'projector',
+  'beamer: niet bereikbaar': 'projector: unreachable',
+  'Bewerken sluiten (Esc)': 'Stop editing (Esc)',
+  'Presenteer document…': 'Present document…',
+  'Presenteer document': 'Present document',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Select which tables may be edited live during the presentation. All other content stays read-only.',
   'Extra ruimte': 'Extra space',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'This note is longer than the page — scroll for the rest',

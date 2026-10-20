@@ -1636,6 +1636,192 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      'Tagann "{id}" faoi dhó (ar líne {regel} freisin).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      'Ní uimhir í "{waarde}" do {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Theip ar an ríomh "{kolom}" ar {rij} ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Breathnaíonn an bacainn clúdaithe ach níl.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Tagraíonn eilimint bowtie "{element}" don bheart "{maatregel}", nach bhfuil ann.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Cuireann scóir lasmuigh den scála as riocht RPN, dóchúlacht×tionchar agus gach teilgean a bhraitheann orthu.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Taispeánann an colún díorthaithe "—" — coimeádtar an marcóir ach ní áirítear é.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Ní féidir an chóip a atógáil gan an fhoinse — dícheangal nó scriosadh an rogha daonna.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Tá na cealla i gceist anaithnid — éilíonn an timthriall rogha daonna ar an ríomh beartaithe.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Taispeánann an cill "—" — ná 0, ná sean-uimhir.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Tá an bhailíocht ({geldigheid}) imithe in éag.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Ní dhéanann an nasc aon rud; ní áirítear an beart san áiteamh glan.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'D’fhéadfadh an beart a bheith imithe in éag; teastaíonn athmheasúnú ó na scóir ghlana a bhraitheann air.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Dealraíonn sé go gclúdaíonn an beart riosca nach bhfuil ann.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Tá na luachanna díorthaithe stóráilte ar gcúl ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Níl an scála "{schaal}" sa chomhad seo agus ní ainm ionsuite é ach an oiread.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Ní thaispeánann an tábla a dtugann an fhoirmle anois — scríobhann an athríomh an toradh, riamh an t-ionchur.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Taispeánann an tábla a rud nach deir an fhoinse a thuilleadh — tógann athnuachan ón bhfoinse é.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Ainmníonn an t-amharc an fhoinse "{bron}", nach bhfuil sa chomhad seo.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Éiríonn an t-amharc ón bhfoinse: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Déanann foirmle tagairt (go hindireach) di féin.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Áirítear scór doléite mar fhigiúr neamhiontaofa, ní mar nialas.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Ní mhaolaíonn bacainn choisctheach ar dheis aon rud — insíonn an conair scéal eile ansin.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Níl aon fhianaise ann go n-oibríonn an beart — tá scóir ghlana a bhraitheann air gan chlúdach.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Ní féidir an fhoirmle ar "{kolom}" a léamh: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Tá an eilimint lasmuigh de gach scéal conaire — ní áirítear in áit ar bith í.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Níl sé soiléir an gclúdaíonn an bhacainn seo aon rud.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Is dréacht é an conair — ní clúdach iomlán lena onnmhairiú ná lena láithriú.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Níl an riosca iarmharach bunaithe — thabharfadh onnmhairiú le fios níos mó cinnteachta ná mar atá ann.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Scór glan gan bheart tástáilte/oibriúil ná áiteamh glan.',
+  'Pad "{pad}" mist: {ontbrekend}.':
+      'Tá easpa ón gconair "{pad}": {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Níl aitheantas ag líne {n}.',
+  'Rij {n} heeft geen pad.': 'Níl conair ag líne {n}.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Ní bhaineann an ról "{rol}" leis an taobh "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.': 'Ní ról bowtie aithnid é "{rol}".',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Titeann an scór {waarde} do {kolom} lasmuigh den scála 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Ní féidir scóir a sheiceáil fad is atá an scála ar iarraidh.',
+  'Status "{status}" is geen bekend token.':
+      'Ní comhartha aithnid é an stádas "{status}".',
+  'Status "{status}" zonder toetsdatum.': 'Stádas "{status}" gan dáta tástála.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Tagraíonn sé don bheart "{maatregel}", nach bhfuil ann.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Tagraíonn sé don riosca "{risico}", nach bhfuil ann.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Tá tagairtí do "{id}" amhraiste: cén líne atá i gceist, is rogha daonna é.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Gan ID ní féidir aon rud an líne seo a aimsiú — scipeann na hamhairc, na bearta agus an tseiceáil féin í.',
+  'deling door nul': 'roinnt ar nialas',
+  'rij {n}': 'líne {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'líne {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'líne {r} colún {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} eile)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} eile',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), eochracha colún, eochair@ID, sum avg min max count wsum. Níl anaithnid 0 riamh.',
+  'Afgeleide cel overschreven': 'Cill dhireach forscríofa',
+  'Afgeleide kolom': 'Colún díorthaithe',
+  'Als risicoregister markeren…': 'Marcáil mar chlár riosca…',
+  'Beoordelaar (naam/rol)': 'Measúnóir (ainm/ról)',
+  'Beoordelingsschaal': 'Scála measúnaithe',
+  'Berekening toevoegen': 'Cuir ríomh leis',
+  'Berekening…': 'Ríomh…',
+  'Blokkerende fouten': 'Earráidí blocálacha',
+  'Bowtie-model': 'Múnla bowtie',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Comhlán — an meastachán bunaidh amháin',
+  'Concept — pad mist': 'Dréacht — cosán in easnamh',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Níor aimsíodh tábla foinse an amhairc seo.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Níl na figiúirí iontaofa fad is atá siad seo ann.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Níl an fhoirmle imithe go fóil — cad ba é an rún?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Éiríonn an colún seo ina ghnáthcholún: coinníonn na cealla a luach ríofa deireanach mar ghnáth-théacs.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Ní fhreagras an teilgean seo modh na foinse.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Níl aon shraitheanna sa tábla seo le taifeadadh mar riosca.',
+  'Diagram': 'Léaráid',
+  'Doel van de beoordeling': 'Cuspóir an mheasúnaithe',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Bagairtí, bacairní agus iarmhairtí timpeall aon teagmhais',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Meastachán simplí: cé chomh dóchúil × cé chomh mór an iarmhairt',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Tábla folamh do bhearta le céim saoil',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Má onnmhaireoidh tú mar sin féin, téann an comhad amach mar dréacht le figiúirí éiginnte — oscail an t-athbhreithniú chun iad a cheartú ar dtús.',
+  'Expressie': 'Slonn',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Modhanna teipe le déine, dóchúlacht agus brait (S×O×D)',
+  'Formule bewerken': 'Cuir an fhoirmle in eagar',
+  'Formule vervangen': 'Ionadaigh an fhoirmle',
+  'Formule verwijderen': 'Bain an fhoirmle',
+  'Formule verwijderen?': 'Bain an fhoirmle?',
+  'Ga naar': 'Téigh go',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Gan aon fhionnachtana — tá na hIDanna, na scóir agus na hamhairc nasctha i gceart.',
+  'Gekoppelde weergave': 'Amharc nasctha',
+  'Gekoppelde weergave toevoegen': 'Cuir amharc nasctha leis',
+  'Gekoppelde weergave…': 'Amharc nasctha…',
+  'Herberekenen': 'Athríomh',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Ábhar le hathbhreithniú; tá cnaipe deisithe sábháilte ag ceann amháin.',
+  'Je typte in een berekende kolom': 'Scríobh tú i gcolún ríofa',
+  'Kans × impact': 'Dóchúlacht × tionchar',
+  'Loskoppelen als momentopname': 'Dí-nasc mar chuimhneachán',
+  'Maatregelenregister': 'Clár na mbeart',
+  'Maatregelenregister toevoegen': 'Cuir clár beart leis',
+  'Marker verwijderen': 'Bain an marcóir',
+  'Markeren': 'Marcáil',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Glan — an meastachán tar éis bearta amháin',
+  'Nieuw risicodossier': 'Comhad riosca nua',
+  'Onbetrouwbare risico-cijfers in export':
+      'Figiúirí riosca neamhiontaofa san onnmhairiú',
+  'Overzicht — bruto én netto naast elkaar':
+      'Forbhreathnú — comhlán agus glan taobh ar taobh',
+  'Pad toevoegen': 'Cuir cosán leis',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Tosaíocht — sórtáilte de réir scóir, ansin de réir déine',
+  'Risico-kwaliteitscontrole': 'Seiceáil cáilíochta riosca',
+  'Risicodossier…': 'Comhad riosca…',
+  'Risicoregister': 'Clár riosca',
+  'Tabel als risicoregister markeren': 'Marcáil an tábla mar chlár riosca',
+  'Terugzetten': 'Cuir ar ais',
+  'Verversen': 'Athnuaigh',
+  'Vrij meenemen': 'Tabhair leat go saor',
+  'Wat beoordeel je en waarvoor?': 'Cad a mheasúnóidh tú, agus cad chuige?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Sann cén colún a bhfuil cén bhrí aige. Fanann colúin gan bhrí mar cholúin shaor — níl aon rud caillte. Faigheann sraitheanna gan ID uimhir R.',
+  'blokkerende bevinding(en):': 'fionnachtana ionchoscaithe:',
+  'bron': 'foinse',
+  'schaal': 'scála',
+  'Geen bewerkbare tabel op deze pagina':
+      'Níl tábla in-eagarthóireachta ar an leathanach seo',
+  'Presentatie afsluiten': 'Dún an cur i láthair',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Rinneadh athruithe le linn an tseisiúin. Cad ba cheart a dhéanamh leo?',
+  'Verwerpen': 'Cuir amú',
+  'Bewaren als kopie': 'Sábháil mar chóip',
+  'Bewaren in document': 'Sábháil sa doiciméad',
+  'beamer': 'teilgeoir',
+  'beamer: niet bereikbaar': 'teilgeoir: nach bhfuil rochtan air',
+  'Bewerken sluiten (Esc)': 'Dún an t-eagarthóireacht (Esc)',
+  'Presenteer document…': 'Cur an doiciméad i láthair…',
+  'Presenteer document': 'Cur an doiciméad i láthair',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Marcáil na táblaí is féidir a chur in eagar beo le linn an chur i láthair. Fanann gach ábhar eile inléite amháin.',
   'Extra ruimte': 'Spás breise',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Tá an nóta seo níos faide ná an leathanach — scrollaigh don chuid eile',

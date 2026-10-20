@@ -8,6 +8,7 @@ import '../../services/download_delivery.dart';
 import '../../models/privacy_disposition.dart';
 import '../../services/classification_policy.dart';
 import '../../services/privacy/privacy_export_policy.dart';
+import '../../services/risk_quality.dart';
 import '../../services/document_export_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/error_snackbar.dart';
@@ -77,6 +78,60 @@ Future<bool> confirmDocumentPrivacyExport(
             onPressed: () => Navigator.pop(dialogContext, true),
             child: Text(l10n.d('Toch exporteren')),
           ),
+      ],
+    ),
+  );
+  return confirmed == true;
+}
+
+/// De risico-exportpoort (#2490): bij blokkerende bevindingen gaat een
+/// export niet stil door — de gebruiker bevestigt bewust dat het een
+/// onvolledig concept is, of annuleert en herstelt eerst.
+Future<bool> confirmRiskQualityExport(
+  BuildContext context,
+  RiskQualityReport report,
+) async {
+  if (!report.hasErrors) return true;
+  final l10n = context.l10n;
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (dialogContext) => AlertDialog(
+      title: Text(l10n.d('Onbetrouwbare risico-cijfers in export')),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${report.errors.length} ${l10n.d('blokkerende bevinding(en):')}',
+            ),
+            const SizedBox(height: 8),
+            for (final f in report.errors)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  'L${f.line}  ${f.message}',
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+            const SizedBox(height: 8),
+            Text(
+              l10n.d(
+                'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.',
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(dialogContext, false),
+          child: Text(l10n.t('cancel')),
+        ),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(dialogContext, true),
+          child: Text(l10n.d('Toch exporteren')),
+        ),
       ],
     ),
   );

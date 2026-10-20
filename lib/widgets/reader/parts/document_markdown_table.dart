@@ -259,3 +259,80 @@ TextStyle _cellStyle(
         color: t.tableHeaderText,
       )
     : t.body.copyWith(fontSize: cellSize, color: t.tableText);
+
+/// Een run `<!-- ocideck:* -->`-markers op regel [i] van [lines]. Markers zijn
+/// machine-metadata: het contract belooft dat een lezer ze negeert, dus is de
+/// run onzichtbaar — behalve als een `bowtie`-drager aan een tabel bindt: die
+/// tabel wordt dan een [_Block] mét bron (marker + tabel), zodat
+/// [_tableOrBowtie] hem elders als afgeleid diagram kan tonen (#2496).
+/// Geeft de regelindex ná de run terug.
+///
+/// Top-level, zoals [_parseTableAt] zelf: puur over de regellijst, en de
+/// klasse staat op haar plafond.
+int _skipOciMarkers(List<String> lines, int i, List<_Block> blocks) {
+  var mEnd = i;
+  String? carrier;
+  while (mEnd < lines.length && isOciTableMarkerLine(lines[mEnd])) {
+    final m = parseOciTableMarker(lines[mEnd]);
+    if (carrier == null && m != null && m.kind != OciMarkerKinds.calc) {
+      carrier = m.kind;
+    }
+    mEnd++;
+  }
+  var j = mEnd;
+  while (j < lines.length && lines[j].trim().isEmpty) {
+    j++;
+  }
+  final boundTable =
+      j + 1 < lines.length &&
+      isMarkdownTableLine(lines[j]) &&
+      isMarkdownTableDelimiterRow(lines[j + 1]);
+  if (carrier == OciMarkerKinds.bowtie && boundTable) {
+    final parsed = _parseTableAt(lines, j);
+    blocks.add(
+      _Block(
+        _Kind.table,
+        rows: parsed.block.rows,
+        aligns: parsed.block.aligns,
+        source: lines.sublist(i, parsed.end).join('\n'),
+      ),
+    );
+    return parsed.end;
+  }
+  return mEnd;
+}
+
+/// Een `<!-- ocideck:bowtie -->`-tabel (#2496): waar geen cel-editor aan hangt
+/// (lezer, Pagina's, niet-bewerkbare voorvertoning) is dit het afgeleide
+/// diagram; in de bewerkbare Bron-preview blijft het de tabel. [b.source]
+/// draagt dan marker+tabel-bron, de zoektekst blijft die van de tabelrijen en
+/// de schermlezer krijgt de paden als tekst.
+///
+/// Top-level: samengesteld uit publieke velden en [view._table], en de klasse
+/// staat op haar plafond.
+Widget _tableOrBowtie(
+  DocumentMarkdownView view,
+  _Theme t,
+  _Block b,
+  int ordinal,
+) {
+  if (b.source.isEmpty) return view._table(t, b.rows, b.aligns, ordinal);
+  final editor =
+      view.tableEditorFor?.call(ordinal) ??
+      (ordinal == 0 ? view.tableEditController : null);
+  if (editor != null) return view._table(t, b.rows, b.aligns, ordinal);
+  final marked = scanOciMarkedTables(b.source).tables.firstOrNull;
+  final mmd = marked == null ? null : ociBowtieMermaid(marked);
+  final fallback = view._table(t, b.rows, b.aligns, ordinal);
+  if (marked == null || mmd == null) return fallback;
+  return Semantics(
+    label: ociBowtieSemanticsLabel(marked),
+    child: DocMermaidView(
+      source: mmd,
+      fallback: fallback,
+      dark: t.dark,
+      scaleToFit: view.scaleMermaidToFit,
+      renderer: view.mermaidRenderer,
+    ),
+  );
+}

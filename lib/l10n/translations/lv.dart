@@ -1604,6 +1604,190 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  '"{id}" komt twee keer voor (ook op regel {regel}).':
+      '"{id}" parādās divreiz (arī rindā {regel}).',
+  '"{waarde}" is geen getal voor {kolom}.':
+      '"{waarde}" nav skaitlis kolonnai {kolom}.',
+  'Berekening "{kolom}" op {rij} mislukt ({reden}).':
+      'Aprēķins "{kolom}" rindā {rij} neizdevās ({reden}).',
+  'De barrière lijkt gedekt maar is dat niet.':
+      'Barjera izskatās nosegta, bet tāda nav.',
+  'Bowtie-element "{element}" verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Bowtie elements "{element}" atsaucas uz pasākumu "{maatregel}", kas neeksistē.',
+  'Buiten-schaal-scores verstoren RPN, kans×impact en elke projectie die erop rekent.':
+      'Ārpus skalas esošie vērtējumi sagroza RPN, varbūtību×ietekmi un katru projekciju, kas uz tiem balstās.',
+  'De afgeleide kolom toont "—" — de marker blijft bewaard maar rekent niet mee.':
+      'Atvasinātā kolonna rāda "—" — marķieris saglabājas, bet netiek skaitīts.',
+  'De afschrijving is onherstelbaar zonder bron — loskoppelen of verwijderen is de menselijke keuze.':
+      'Kopiju bez avota nevar atjaunot — atvienošana vai dzēšana ir cilvēka izvēle.',
+  'De betrokken cellen zijn onbekend — de cyclus vergt een menselijke keuze over de bedoelde berekening.':
+      'Iesaistītās šūnas ir nezināmas — cikls prasa cilvēka izvēli par iecerēto aprēķinu.',
+  'De cel toont "—" — geen 0, geen oud getal.':
+      'Šūna rāda "—" — ne 0, ne vecs skaitlis.',
+  'De geldigheid ({geldigheid}) is verlopen.':
+      'Derīgums ({geldigheid}) ir beidzies.',
+  'De koppeling doet niets; de maatregel telt niet mee voor de netto-grondslag.':
+      'Saite nedarbojas; pasākums netiek skaitīts neto pamatojumā.',
+  'De maatregel kan vervallen zijn; netto-scores die erop rusten vragen hertoetsing.':
+      'Pasākums var būt zaudējis spēku; uz to balstītie neto vērtējumi prasa pārbaudi.',
+  'De maatregel lijkt een risico te dekken dat er niet is.':
+      'Pasākums, šķiet, sedz risku, kāda nav.',
+  'De opgeslagen afgeleide waarden lopen achter ({details}).':
+      'Saglabātās atvasinātās vērtības atpaliek ({details}).',
+  'De schaal "{schaal}" staat niet in dit bestand en is ook geen ingebouwde naam.':
+      'Skala "{schaal}" nav šajā failā un tā arī nav iebūvēts nosaukums.',
+  'De tabel toont niet wat de formule nu oplevert — herberekenen schrijft de uitkomst bij, nooit de invoer.':
+      'Tabula nerāda, ko formula tagad dod — pārrēķins pārraksta rezultātu, nekad ne ievadi.',
+  'De tabel toont wat de bron niet meer zegt — verversen herbouwt hem uit de bron.':
+      'Tabula rāda to, ko avots vairs nesaka — atsvaidzināšana to pārbūvē no avota.',
+  'De weergave noemt bron "{bron}", die niet in dit bestand staat.':
+      'Skats nosauc avotu "{bron}", kas nav šajā failā.',
+  'De weergave wijkt af van de bron: {details}.':
+      'Skats atšķiras no avota: {details}.',
+  'Een formule verwijst (indirect) naar zichzelf.':
+      'Formula atsaucas (netieši) uz sevi pašu.',
+  'Een onleesbare score rekent als onbetrouwbaar cijfer, niet als nul.':
+      'Neizlasāms vērtējums skaitās kā neuzticams skaitlis, nevis nulle.',
+  'Een preventieve barrière rechts mitigeert niets — het pad leest dan een ander verhaal.':
+      'Preventīvā barjera labajā pusē neko ne mazina — ceļš tad stāsta citu stāstu.',
+  'Er is geen bewijs dat de maatregel werkt — netto-scores die erop steunen zijn ongedekt.':
+      'Nav pierādījumu, ka pasākums darbojas — uz to balstītie neto vērtējumi ir neatklāti.',
+  'Formule op "{kolom}" is niet te lezen: "{formule}".':
+      'Formulu kolonnā "{kolom}" nevar nolasīt: "{formule}".',
+  'Het element staat buiten elk padverhaal — het telt nergens mee.':
+      'Elements atrodas ārpus katras ceļa stāsta — tas nekur neskaitās.',
+  'Het is onduidelijk of deze barrière iets dekt.':
+      'Nav skaidrs, vai šī barjera kaut ko sedz.',
+  'Het pad is een schets — geen complete dekking om mee te exporteren of te presenteren.':
+      'Ceļš ir skice — nevisa pilnīga pārsegs, ko eksportēt vai prezentēt.',
+  'Het residu-risico is niet onderbouwd — een export suggereert dan meer zekerheid dan er is.':
+      'Atlikušais risks nav pamatots — eksports tad liecinātu par lielāku noteiktību nekā ir.',
+  'Netto-score zonder getoetste/werkende maatregel of netto-grondslag.':
+      'Neto vērtējums bez pārbaudīta/strādājoša pasākuma vai neto pamatojuma.',
+  'Pad "{pad}" mist: {ontbrekend}.': 'Ceļam "{pad}" trūkst: {ontbrekend}.',
+  'Rij {n} heeft geen ID.': 'Rindai {n} nav ID.',
+  'Rij {n} heeft geen pad.': 'Rindai {n} nav ceļa.',
+  'Rol "{rol}" hoort niet op zijde "{zijde}".':
+      'Loma "{rol}" nepieder pusē "{zijde}".',
+  'Rol "{rol}" is geen bekende bowtie-rol.':
+      'Loma "{rol}" nav zināma bowtie loma.',
+  'Score {waarde} voor {kolom} valt buiten de schaal 1–{max}.':
+      'Vērtējums {waarde} kolonnai {kolom} ir ārpus skalas 1–{max}.',
+  'Scores zijn niet te toetsen zolang de schaal ontbreekt.':
+      'Vērtējumus nevar pārbaudīt, kamēr trūkst skalas.',
+  'Status "{status}" is geen bekend token.':
+      'Statuss "{status}" nav zināms tokens.',
+  'Status "{status}" zonder toetsdatum.':
+      'Statuss "{status}" bez pārbaudes datuma.',
+  'Verwijst naar maatregel "{maatregel}", die niet bestaat.':
+      'Atsaucas uz pasākumu "{maatregel}", kas neeksistē.',
+  'Verwijst naar risico "{risico}", dat niet bestaat.':
+      'Atsaucas uz risku "{risico}", kas neeksistē.',
+  'Verwijzingen naar "{id}" zijn onzeker: welke rij is bedoeld, is een menselijke keuze.':
+      'Atsauces uz "{id}" ir neskaidras: kura rinda domāta, ir cilvēka izvēle.',
+  'Zonder ID kan niets deze rij aanspreken — weergaven, maatregelen en de controle zelf slaan hem over.':
+      'Bez ID nekas nevar uzrunāt šo rindu — skati, pasākumi un pati pārbaude to izlaiž.',
+  'deling door nul': 'dalīšana ar nulli',
+  'rij {n}': 'rinda {n}',
+  'rij {n}: "{oud}" → "{nieuw}"': 'rinda {n}: "{oud}" → "{nieuw}"',
+  'rij {r} kolom {c}: "{oud}" → "{nieuw}"':
+      'rinda {r} kolonna {c}: "{oud}" → "{nieuw}"',
+  '{eerste} (+{n} meer)': '{eerste} (+{n} vēl)',
+  '{eerste}, +{n} meer': '{eerste}, +{n} vēl',
+  '+ - * / ( ), kolomsleutels, sleutel@ID, sum avg min max count wsum. Onbekend is nooit 0.':
+      '+ - * / ( ), kolonnu atslēgas, atslēga@ID, sum avg min max count wsum. Nezināms nekad nav 0.',
+  'Afgeleide cel overschreven': 'Atvasinātā šūna pārrakstīta',
+  'Afgeleide kolom': 'Atvasinātā kolonna',
+  'Als risicoregister markeren…': 'Atzīmēt kā risku reģistru…',
+  'Beoordelaar (naam/rol)': 'Vērtētājs (vārds/loma)',
+  'Beoordelingsschaal': 'Vērtēšanas skala',
+  'Berekening toevoegen': 'Pievienot aprēķinu',
+  'Berekening…': 'Aprēķins…',
+  'Blokkerende fouten': 'Bloķējošas kļūdas',
+  'Bowtie-model': 'Bowtie modelis',
+  'Bruto — alleen de oorspronkelijke inschatting':
+      'Bruto — tikai sākotnējais novērtējums',
+  'Concept — pad mist': 'Melnraksts — trūkst ceļa',
+  'De brontabel van deze weergave is niet gevonden.':
+      'Šī skata avota tabula nav atrasta.',
+  'De cijfers zijn niet betrouwbaar zolang deze er zijn.':
+      'Skaitļi nav uzticami, kamēr šie pastāv.',
+  'De formule is nog niet weg — wat was de bedoeling?':
+      'Formula vēl nav zudusi — kāds bija nodoms?',
+  'Deze kolom wordt een gewone kolom: de cellen houden hun laatste berekende waarde als platte tekst.':
+      'Šī kolonna kļūst par parastu kolonnu: šūnas saglabā savu pēdējo aprēķināto vērtību kā vienkāršu tekstu.',
+  'Deze projectie past niet bij de methode van de bron.':
+      'Šī projekcija neatbilst avota metodei.',
+  'Deze tabel heeft geen rijen om als risico vast te leggen.':
+      'Šai tabulai nav rindu, ko reģistrēt kā risku.',
+  'Diagram': 'Diagramma',
+  'Doel van de beoordeling': 'Novērtējuma mērķis',
+  'Dreigingen, barrières en gevolgen rond één gebeurtenis':
+      'Draudi, barjeras un sekas ap vienu notikumu',
+  'Een eenvoudige inschatting: hoe waarschijnlijk × hoe groot het gevolg':
+      'Vienkāršs novērtējums: cik iespējams × cik lielas sekas',
+  'Een lege tabel voor maatregelen met levensfase':
+      'Tukša tabula pasākumiem ar dzīves cikla fāzi',
+  'Exporteer je toch, dan gaat het bestand als concept met onzekere cijfers uit — open het overzicht om ze eerst te herstellen.':
+      'Ja tomēr eksportēsiet, fails izies kā melnraksts ar neskaidriem skaitļiem — atveriet pārskatu, lai tos vispirms izlabotu.',
+  'Expressie': 'Izteiksme',
+  'Faalwijzen met ernst, kans en detectie (S×O×D)':
+      'Atteices režīmi ar smagumu, biežumu un atklājamību (S×O×D)',
+  'Formule bewerken': 'Rediģēt formulu',
+  'Formule vervangen': 'Aizstāt formulu',
+  'Formule verwijderen': 'Noņemt formulu',
+  'Formule verwijderen?': 'Noņemt formulu?',
+  'Ga naar': 'Doties uz',
+  'Geen bevindingen — IDs, scores en gekoppelde weergaven kloppen.':
+      'Nav konstatējumu — ID, vērtējumi un saistītie skati ir pareizi.',
+  'Gekoppelde weergave': 'Saistītais skats',
+  'Gekoppelde weergave toevoegen': 'Pievienot saistītu skatu',
+  'Gekoppelde weergave…': 'Saistītais skats…',
+  'Herberekenen': 'Pārrēķināt',
+  'Inhoudelijk om na te lopen; één heeft een veilige herstelknop.':
+      'Saturs pārskatīšanai; vienam ir droša labošanas poga.',
+  'Je typte in een berekende kolom': 'Jūs ierakstījāt aprēķinātajā kolonnā',
+  'Kans × impact': 'Varbūtība × ietekme',
+  'Loskoppelen als momentopname': 'Atvienot kā momentuzņēmumu',
+  'Maatregelenregister': 'Pasākumu reģistrs',
+  'Maatregelenregister toevoegen': 'Pievienot pasākumu reģistru',
+  'Marker verwijderen': 'Noņemt marķieri',
+  'Markeren': 'Atzīmēt',
+  'Netto — alleen de inschatting ná maatregelen':
+      'Neto — tikai novērtējums pēc pasākumiem',
+  'Nieuw risicodossier': 'Jauna risku mapīte',
+  'Onbetrouwbare risico-cijfers in export': 'Neuzticami riska skaitļi eksportā',
+  'Overzicht — bruto én netto naast elkaar': 'Pārskats — bruto un neto blakus',
+  'Pad toevoegen': 'Pievienot ceļu',
+  'Prioriteit — gesorteerd op score, daarna op ernst':
+      'Prioritāte — kārtots pēc rezultāta, tad pēc smaguma',
+  'Risico-kwaliteitscontrole': 'Riska kvalitātes kontrole',
+  'Risicodossier…': 'Risku mapīte…',
+  'Risicoregister': 'Risku reģistrs',
+  'Tabel als risicoregister markeren': 'Atzīmēt tabulu kā risku reģistru',
+  'Terugzetten': 'Atjaunot',
+  'Verversen': 'Atsvaidzināt',
+  'Vrij meenemen': 'Pārņemt brīvi',
+  'Wat beoordeel je en waarvoor?': 'Ko vērtē un kādam nolūkam?',
+  'Wijs toe welke kolom welke betekenis heeft. Kolommen zonder betekenis blijven als vrije kolom bestaan — er gaat niets verloren. Rijen zonder ID krijgen een R-nummer.':
+      'Piešķiriet, kurai kolonnai ir kura nozīme. Kolonnas bez nozīmes paliek brīvas — nekas netiek zaudēts. Rindas bez ID saņem R-numuru.',
+  'blokkerende bevinding(en):': 'bloķējošs(i) konstatējums(i):',
+  'bron': 'avots',
+  'schaal': 'skala',
+  'Geen bewerkbare tabel op deze pagina': 'Šajā lapā nav rediģējamas tabulas',
+  'Presentatie afsluiten': 'Aizvērt prezentāciju',
+  'Er zijn wijzigingen gemaakt tijdens de sessie. Wat moet daarmee gebeuren?':
+      'Sesijas laikā tika veiktas izmaiņas. Kas ar tām jādara?',
+  'Verwerpen': 'Atmest',
+  'Bewaren als kopie': 'Saglabāt kā kopiju',
+  'Bewaren in document': 'Saglabāt dokumentā',
+  'beamer': 'projektors',
+  'beamer: niet bereikbaar': 'projektors: nav sasniedzams',
+  'Bewerken sluiten (Esc)': 'Aizvērt rediģēšanu (Esc)',
+  'Presenteer document…': 'Prezentēt dokumentu…',
+  'Presenteer document': 'Prezentēt dokumentu',
+  'Vink aan welke tabellen tijdens de presentatie live bewerkt mogen worden. Alle andere inhoud blijft alleen-lezen.':
+      'Atzīmējiet, kuras tabulas prezentācijas laikā drīkst rediģēt tiešraidē. Viss pārējais saturs paliek tikai lasāms.',
   'Extra ruimte': 'Papildu vieta',
   'Deze noot is langer dan het blad — scroll voor de rest':
       'Šī piezīme ir garāka par lapu — ritiniet, lai redzētu pārējo',
