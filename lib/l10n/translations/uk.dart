@@ -1621,6 +1621,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afbeeldingen omwisselen': 'Поміняти зображення місцями',
+  'Afbeelding links': 'Ліве зображення',
+  'Breedte afbeeldingspaneel': 'Ширина панелі зображення',
+  'Bullets (rechts)': 'Пункти (праворуч)',
+  'Tekst (rechts)': 'Текст (праворуч)',
+  'Afbeelding (links)': 'Зображення (ліворуч)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" зустрічається двічі (також у рядку {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

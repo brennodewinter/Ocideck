@@ -1612,6 +1612,12 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeeldingen omwisselen': 'Vymeniť obrázky',
+  'Afbeelding links': 'Ľavý obrázok',
+  'Breedte afbeeldingspaneel': 'Šírka panela obrázka',
+  'Bullets (rechts)': 'Odrážky (vpravo)',
+  'Tekst (rechts)': 'Text (vpravo)',
+  'Afbeelding (links)': 'Obrázok (vľavo)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" sa vyskytuje dvakrát (aj na riadku {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

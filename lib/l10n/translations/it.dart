@@ -649,6 +649,12 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Afbeeldingen omwisselen': 'Scambia le immagini',
+  'Afbeelding links': 'Immagine sinistra',
+  'Breedte afbeeldingspaneel': 'Larghezza del pannello immagine',
+  'Bullets (rechts)': 'Punti (destra)',
+  'Tekst (rechts)': 'Testo (destra)',
+  'Afbeelding (links)': 'Immagine (sinistra)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" compare due volte (anche alla riga {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

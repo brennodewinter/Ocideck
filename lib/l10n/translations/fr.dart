@@ -652,6 +652,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afbeeldingen omwisselen': 'Permuter les images',
+  'Afbeelding links': 'Image gauche',
+  'Breedte afbeeldingspaneel': 'Largeur du panneau image',
+  'Bullets (rechts)': 'Puces (droite)',
+  'Tekst (rechts)': 'Texte (droite)',
+  'Afbeelding (links)': 'Image (gauche)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" apparaît deux fois (aussi à la ligne {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

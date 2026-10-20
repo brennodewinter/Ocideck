@@ -1606,6 +1606,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeeldingen omwisselen': 'Vaihda kuvien paikat',
+  'Afbeelding links': 'Vasen kuva',
+  'Breedte afbeeldingspaneel': 'Kuvapaneelin leveys',
+  'Bullets (rechts)': 'Luettelomerkit (oikealla)',
+  'Tekst (rechts)': 'Teksti (oikealla)',
+  'Afbeelding (links)': 'Kuva (vasemmalla)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" esiintyy kahdesti (myös rivillä {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

@@ -1599,6 +1599,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeeldingen omwisselen': 'Vaheta piltide kohad',
+  'Afbeelding links': 'Vasak pilt',
+  'Breedte afbeeldingspaneel': 'Pildipaneeli laius',
+  'Bullets (rechts)': 'Täpid (paremal)',
+  'Tekst (rechts)': 'Tekst (paremal)',
+  'Afbeelding (links)': 'Pilt (vasakul)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" esineb kaks korda (ka real {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

@@ -1622,6 +1622,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeeldingen omwisselen': 'Schimbă imaginile între ele',
+  'Afbeelding links': 'Imagine stânga',
+  'Breedte afbeeldingspaneel': 'Lățime panou imagine',
+  'Bullets (rechts)': 'Bullets (dreapta)',
+  'Tekst (rechts)': 'Text (dreapta)',
+  'Afbeelding (links)': 'Imagine (stânga)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" apare de două ori (și la linia {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

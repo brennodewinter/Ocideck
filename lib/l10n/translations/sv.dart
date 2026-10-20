@@ -1605,6 +1605,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeeldingen omwisselen': 'Byt plats på bilderna',
+  'Afbeelding links': 'Vänster bild',
+  'Breedte afbeeldingspaneel': 'Bildpanelens bredd',
+  'Bullets (rechts)': 'Punkter (höger)',
+  'Tekst (rechts)': 'Text (höger)',
+  'Afbeelding (links)': 'Bild (vänster)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" förekommer två gånger (även på rad {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

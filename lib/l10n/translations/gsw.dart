@@ -1609,6 +1609,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeeldingen omwisselen': 'Bilder vertuusche',
+  'Afbeelding links': 'Links Bild',
+  'Breedte afbeeldingspaneel': 'Breiti vom Bildpanel',
+  'Bullets (rechts)': 'Bullets (rächts)',
+  'Tekst (rechts)': 'Täxt (rächts)',
+  'Afbeelding (links)': 'Bild (links)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" chunnt zwee mol vor (au uf Zeile {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

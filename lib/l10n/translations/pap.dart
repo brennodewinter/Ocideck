@@ -651,6 +651,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeeldingen omwisselen': 'Kambia e imágennan',
+  'Afbeelding links': 'Imágen robes',
+  'Breedte afbeeldingspaneel': 'Hanchura di e panel di imágen',
+  'Bullets (rechts)': 'Bullets (banda drechi)',
+  'Tekst (rechts)': 'Teksto (banda drechi)',
+  'Afbeelding (links)': 'Imágen (banda robes)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" ta parse dos biaha (tambe na liña {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

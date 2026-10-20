@@ -1610,6 +1610,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeeldingen omwisselen': 'Zamijeni slike',
+  'Afbeelding links': 'Lijeva slika',
+  'Breedte afbeeldingspaneel': 'Širina ploče sa slikom',
+  'Bullets (rechts)': 'Natuknice (desno)',
+  'Tekst (rechts)': 'Tekst (desno)',
+  'Afbeelding (links)': 'Slika (lijevo)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" se pojavljuje dvaput (također u retku {regel}).',
   '"{waarde}" is geen getal voor {kolom}.': '"{waarde}" nije broj za {kolom}.',

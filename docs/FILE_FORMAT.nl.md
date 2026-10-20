@@ -1050,6 +1050,17 @@ opslag zijn de commentaren weg.
 </div>
 ```
 
+Zet `<!-- ocideck_split_image_side: left -->` vóór de inhoud om de
+zijafbeelding links te tonen. Dezelfde `split-image`-div wijst die afbeelding
+aan; alleen de positie verandert, niet de Markdown-volgorde of het
+afbeeldingspad. Zonder het commentaar blijft de afbeelding rechts. De
+paneelbreedte in `_style` geldt voor de afbeelding aan de gekozen kant. Marp
+gebruikt voor de linkerindeling ook de afgeleide waarden
+`--split-direction: rtl` en de opvulling in `_style`; het meegeleverde
+Marp-thema tekent daarmee die indeling. Het commentaar bewaart de keuze, ook
+wanneer de afbeeldingssleuf leeg is. Marp negeert het en leest tekst en
+afbeelding nog steeds.
+
 **De `split-image`-div bepaalt welke afbeelding de zijafbeelding is.** Op een slide waarvan de
 inhoud rijke tekst is (§ *Rijke tekst*), wordt alleen een `![…](…)` **binnen** die div de
 `imagePath`; een in de `split-text`-helft is een afbeelding in de lopende tekst en
@@ -1068,6 +1079,10 @@ inhoud en wordt langs het bullet-pad gelezen.
 
 # Optional heading
 ```
+
+Afbeeldingen omwisselen in de editor verwisselt de linker- en rechtergegevens
+en schrijft dezelfde standaard-Marp-achtergronddirectives in de nieuwe volgorde.
+Er komt geen aparte wisselvlag bij.
 
 **Grote afbeelding** (geen class)
 ```markdown
@@ -3162,6 +3177,7 @@ serializer ze schrijft.)*
 | --- | --- |
 | `<!-- _class: ... -->` | Slidetype + gedrag (§4). |
 | `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout van een `split`-slide. |
+| `<!-- ocideck_split_image_side: left -->` | Zet de zijafbeelding van een `split`-slide links. Afwezig = afbeelding rechts (§5). |
 | `<!-- ocideck_two_bullets_left/right[_title]: <base64url> -->` | **Vervallen (0.1.0).** Was de canonieke opslag voor de twee bulletkolommen; de zichtbare `<ul><li>` draagt ze nu (§5). Wordt nog uit oudere bestanden gelezen, verdwijnt bij het opslaan. |
 | `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide overschrijving van de bulletmarkering (bullets/two-bullets/bullets+image). Afwezig = neem de `bulletMarker` van het thema over (§3.2). |
 | `<!-- ocideck_image_focus: x,y -->` | Brandpunt voor het bijsnijden van het beeld (0..1 per as, `0.5,0.5` = midden) voor het beeld van de slide. Bepaalt welk deel in beeld blijft wanneer het plaatje wordt bijgesneden (fill/zoom, of een vast beeldpaneel). Alleen geschreven wanneer niet gecentreerd. |

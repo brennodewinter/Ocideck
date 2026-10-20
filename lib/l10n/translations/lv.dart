@@ -1604,6 +1604,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeeldingen omwisselen': 'Samainīt attēlus vietām',
+  'Afbeelding links': 'Kreisais attēls',
+  'Breedte afbeeldingspaneel': 'Attēla paneļa platums',
+  'Bullets (rechts)': 'Aizzīmes (pa labi)',
+  'Tekst (rechts)': 'Teksts (pa labi)',
+  'Afbeelding (links)': 'Attēls (pa kreisi)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" parādās divreiz (arī rindā {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

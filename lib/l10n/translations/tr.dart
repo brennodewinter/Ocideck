@@ -2514,6 +2514,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Afbeeldingen omwisselen': 'Görsellerin yerini değiştir',
+  'Afbeelding links': 'Sol görsel',
+  'Breedte afbeeldingspaneel': 'Görsel panelinin genişliği',
+  'Bullets (rechts)': 'Maddeler (sağ)',
+  'Tekst (rechts)': 'Metin (sağ)',
+  'Afbeelding (links)': 'Görsel (sol)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" iki kez geçiyor ({regel}. satırda da).',
   '"{waarde}" is geen getal voor {kolom}.':

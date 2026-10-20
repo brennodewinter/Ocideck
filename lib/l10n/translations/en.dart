@@ -812,6 +812,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Afbeeldingen omwisselen': 'Swap images',
+  'Afbeelding links': 'Left image',
+  'Breedte afbeeldingspaneel': 'Image panel width',
+  'Bullets (rechts)': 'Bullets (right)',
+  'Tekst (rechts)': 'Text (right)',
+  'Afbeelding (links)': 'Image (left)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" occurs twice (also on line {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

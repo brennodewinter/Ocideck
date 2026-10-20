@@ -1606,6 +1606,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeeldingen omwisselen': 'Tukar gambar',
+  'Afbeelding links': 'Gambar kiri',
+  'Breedte afbeeldingspaneel': 'Lebar panel gambar',
+  'Bullets (rechts)': 'Bullet (kanan)',
+  'Tekst (rechts)': 'Teks (kanan)',
+  'Afbeelding (links)': 'Gambar (kiri)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" muncul dua kali (juga di baris {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':
