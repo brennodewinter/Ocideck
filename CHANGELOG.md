@@ -56,6 +56,13 @@ All notable changes to OciDeck are documented in this file.
   komen. Het nootvlak is nu scrollbaar met een zichtbare doorgang-regel en
   scrollbalk, zodat de volledige noot bereikbaar blijft zonder over de
   hoofdtekst of marges heen te vallen.
+- **Een tabelsortering is nu overal één eigen ongedaan-stap.** Sorteerde je
+  een kolom vlak na het typen in een tabel — in de Bron-weergave van een
+  document of in een tabeldia — dan smolt die sortering samen met de typstap
+  ervoor in één undo, zodat *Ongedaan maken* ook je getypte tekst
+  terugdraaide. Een zuivere rijverwisseling breekt de samenvoeging nu
+  altijd: de sortering staat op zichzelf, de rijen houden hun gegevens bij
+  elkaar en *Opnieuw* zet dezelfde rangschikking terug (#2486).
 - **Knippen en plakken op de plek van de opdracht, ook bij een traag
   klembord.** Tijdens een trage `Clipboard.setData`/`getData` kon de
   gebruiker verder typen of elders klikken; knippen waste dan een ander

@@ -41,6 +41,7 @@ import '../services/user_notes_codec.dart';
 import '../platform/platform_features.dart';
 import '../utils/bullet_fixes.dart';
 import '../utils/table_pagination.dart';
+import '../utils/table_row_permutation.dart';
 import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';

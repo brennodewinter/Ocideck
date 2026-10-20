@@ -64,6 +64,7 @@ import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';
 import '../utils/document_stats.dart';
+import '../utils/table_row_permutation.dart';
 import 'keyword_chips_editor.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
