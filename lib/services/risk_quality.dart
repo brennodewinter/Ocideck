@@ -11,6 +11,7 @@ library;
 import '../models/risk_dossier.dart';
 import 'ocideck_marked_table.dart';
 import 'ocideck_markers.dart';
+import 'risk_bowtie.dart';
 import 'risk_calc.dart';
 import 'risk_dossier.dart';
 import 'risk_view.dart';
@@ -119,7 +120,10 @@ RiskQualityReport riskQualityFindings(String source) {
     if (table.kind == OciMarkerKinds.view) continue;
     final seen = <String, int>{};
     final rows = table.bodyRows;
-    final idCol = table.cols.indexOf('id');
+    // Een bowtie-rij adresseert via `path`, niet `id`; hetzelfde pad mag
+    // bewust meerdere rijen hebben — verdubbeling is daar geen fout.
+    final bowtie = table.kind == OciMarkerKinds.bowtie;
+    final idCol = table.cols.indexOf(bowtie ? 'path' : 'id');
     for (var i = 0; i < rows.length; i++) {
       final id = (idCol >= 0 && idCol < rows[i].length ? rows[i][idCol] : '')
           .trim();
@@ -130,7 +134,9 @@ RiskQualityReport riskQualityFindings(String source) {
             code: 'missing-id',
             line: _rowLine(table, i),
             tableId: table.id,
-            message: 'Rij ${i + 1} heeft geen ID.',
+            message: bowtie
+                ? 'Rij ${i + 1} heeft geen pad.'
+                : 'Rij ${i + 1} heeft geen ID.',
             consequence:
                 'Zonder ID kan niets deze rij aanspreken — weergaven, '
                 'maatregelen en de controle zelf slaan hem over.',
@@ -138,6 +144,7 @@ RiskQualityReport riskQualityFindings(String source) {
         );
         continue;
       }
+      if (bowtie) continue;
       if (seen.containsKey(id)) {
         findings.add(
           RiskQualityFinding(
@@ -335,23 +342,93 @@ RiskQualityReport riskQualityFindings(String source) {
     }
   }
 
-  // --- Bowtie: verweesde maatregel-koppelingen --------------------------
+  // --- Bowtie: padintegriteit, rol/zijde, status, verwijzingen ----------
+  // (#2495) Een open pad is een concept — waarschuwing, nooit stille
+  // dekking; een verweesde maatregel of foute zijde is altijd te melden.
   for (final table in dossier.bowtieTables) {
     for (var i = 0; i < table.bodyRows.length; i++) {
       final element = BowtieElement(table.contractRows[i]);
+      final line = _rowLine(table, i);
+      final record = element.path.isEmpty ? null : element.path;
+      final role = ociBowtieRoles[element.role.trim()];
+      if (role == null && element.role.trim().isNotEmpty) {
+        findings.add(
+          RiskQualityFinding(
+            severity: RiskQualitySeverity.warning,
+            code: 'bowtie-role',
+            line: line,
+            tableId: table.id,
+            recordId: record,
+            message: 'Rol "${element.role}" is geen bekende bowtie-rol.',
+            consequence:
+                'Het element staat buiten elk padverhaal — '
+                'het telt nergens mee.',
+          ),
+        );
+      } else if (role != null) {
+        final side = element.side.trim();
+        final sides = ociBowtieRoleSides[role];
+        if (sides != null && !sides.contains(side)) {
+          findings.add(
+            RiskQualityFinding(
+              severity: RiskQualitySeverity.warning,
+              code: 'bowtie-role-side',
+              line: line,
+              tableId: table.id,
+              recordId: record,
+              message: 'Rol "$role" hoort niet op zijde "$side".',
+              consequence:
+                  'Een preventieve barrière rechts mitigeert '
+                  'niets — het pad leest dan een ander verhaal.',
+            ),
+          );
+        }
+      }
+      final status = element.status.trim();
+      if (status.isNotEmpty && !ociBowtieStatuses.contains(status)) {
+        findings.add(
+          RiskQualityFinding(
+            severity: RiskQualitySeverity.warning,
+            code: 'bowtie-status',
+            line: line,
+            tableId: table.id,
+            recordId: record,
+            message: 'Status "$status" is geen bekend token.',
+            consequence: 'Het is onduidelijk of deze barrière iets dekt.',
+          ),
+        );
+      }
       final mId = element.measure;
       if (mId.isNotEmpty && dossier.measureById(mId) == null) {
         findings.add(
           RiskQualityFinding(
             severity: RiskQualitySeverity.warning,
             code: 'measure-orphan',
-            line: _rowLine(table, i),
+            line: line,
             tableId: table.id,
-            recordId: element.path.isEmpty ? null : element.path,
+            recordId: record,
             message:
                 'Bowtie-element "${element.element}" verwijst naar '
                 'maatregel "$mId", die niet bestaat.',
             consequence: 'De barrière lijkt gedekt maar is dat niet.',
+          ),
+        );
+      }
+    }
+    // Padvolledigheid: een open pad is concept, zichtbaar benoemd.
+    for (final path in ociBowtiePaths(table)) {
+      if (!path.isComplete) {
+        findings.add(
+          RiskQualityFinding(
+            severity: RiskQualitySeverity.warning,
+            code: 'bowtie-incomplete',
+            line: table.blockStart + 1,
+            tableId: table.id,
+            recordId: path.id,
+            message: 'Pad "${path.id}" mist: ${path.gaps.join(', ')}.',
+            consequence:
+                'Het pad is een schets — geen complete dekking '
+                'om mee te exporteren of te presenteren.',
           ),
         );
       }

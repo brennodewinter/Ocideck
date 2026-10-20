@@ -10,6 +10,7 @@ import '../../models/settings.dart' show ThemeProfile;
 import '../../services/markdown_table_codec.dart';
 import '../../services/ocideck_marked_table.dart';
 import '../../services/ocideck_markers.dart';
+import '../../services/risk_bowtie.dart';
 import '../../services/risk_calc.dart';
 import '../../services/risk_dossier.dart';
 import '../../services/risk_view.dart';
@@ -538,6 +539,23 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
     );
   }
 
+  /// "Pad toevoegen" op een bowtie-tabel (#2495): het skelet van één pad
+  /// (dreiging → preventieve barrière → topgebeurtenis → mitigerende
+  /// barrière → gevolg) onderaan, met het eerstvolgende vrije padnummer.
+  /// Één discrete stap — leeg tot de mens invult.
+  void _addBowtiePath() {
+    final table = scanOciMarkedTables(_source).tables.firstOrNull;
+    if (table == null) return;
+    final n = ociNextBowtiePathNumber(table);
+    final rows = ociBowtiePathSkeleton(table, 'P-$n');
+    _binding.clearPending();
+    _binding.replaceSource(
+      appendOciTableRows(_source, table, rows),
+      discrete: true,
+      onDiscreteEdit: widget.onDiscreteEdit,
+    );
+  }
+
   /// "Loskoppelen als momentopname" (#2489/D2): de markerregels verdwijnen en
   /// wat overblijft is een gewone, leesbare tabel — dezelfde uitstap als de
   /// instap. Expliciet en ongedaan te maken, nooit stilletjes.
@@ -612,6 +630,16 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
                 icon: const Icon(Icons.table_view_outlined, size: 16),
                 label: Text(
                   l10n.d('Gekoppelde weergave…'),
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+            // Op een bowtie-model: een begeleid pad-skelet eronder.
+            if (carrier?.kind == OciMarkerKinds.bowtie)
+              TextButton.icon(
+                onPressed: _addBowtiePath,
+                icon: const Icon(Icons.account_tree_outlined, size: 16),
+                label: Text(
+                  l10n.d('Pad toevoegen'),
                   style: const TextStyle(fontSize: 12),
                 ),
               ),
