@@ -71,6 +71,32 @@ void main() {
       expect(rows.map((r) => r.first), ['R-1', 'R-2', 'R-3']);
     });
 
+    test('sort=priority: product dalend, bij gelijkspel ernst dalend', () {
+      // R-2 (6·7·5=210) voor R-1 (8·4·3=96); bij gelijke RPN wint de
+      // hogere S — hoge ernst verdrinkt niet in het product (#2493).
+      const dossier2 = '''
+<!-- ocideck:risks v1 id=hoofd method=fmea scale=sod-1-10 rev=3 next=4 cols=id,failure,s_b,o_b,d_b,s_n,o_n,d_n -->
+| ID | Faalwijze | S b | O b | D b | S n | O n | D n |
+|---|---|---|---|---|---|---|---|
+| R-1 | Ventiel lekt | 8 | 4 | 3 | 8 | 2 | 3 |
+| R-2 | Sensor blind | 6 | 7 | 5 | 6 | 3 | 5 |
+| R-3 | Zachte bug | 10 | 4 | 4 | 10 | 4 | 4 |
+| R-4 | Harde klap | 8 | 4 | 5 | 8 | 4 | 5 |
+''';
+      final source =
+          '$dossier2\n<!-- ocideck:view v1 source=hoofd projection=prioriteit sort=priority gen=3 -->\n'
+          '| ID |\n|---|';
+      final view = scanOciMarkedTables(source).tables.last;
+      final rows = ociViewMaterialize(
+        RiskDossier.read(dossier2),
+        view,
+      )!.skip(1).toList();
+      // R-3: 10·4·4=160; R-4: 8·4·5=160 → gelijk, S wint → R-3 eerst.
+      expect(rows.map((r) => r.first), ['R-3', 'R-4', 'R-2', 'R-1']);
+      // De afgeleide RPN-kolom staat er materialiseerd bij.
+      expect(rows.first.last, '160');
+    });
+
     test('filter=key:value houdt alleen passende rijen over', () {
       final view = _view(
         'source=hoofd projection=netto filter=s_b:6 gen=3',
@@ -92,10 +118,10 @@ void main() {
     });
 
     test('afgeleide rpn materialiseert, onbekend rendert —', () {
-      final view = _view(
-        'source=hoofd cols=id,rpn,rpn_n gen=3',
-        const ['| ID |', '|---|'],
-      );
+      final view = _view('source=hoofd cols=id,rpn,rpn_n gen=3', const [
+        '| ID |',
+        '|---|',
+      ]);
       final rows = ociViewMaterialize(
         RiskDossier.read(_dossier),
         view,

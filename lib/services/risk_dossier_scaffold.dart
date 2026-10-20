@@ -57,6 +57,13 @@ const ociContractHeaderLabels = <String, String>{
   'role': 'Rol',
   'element': 'Element',
   'measure': 'Maatregel',
+  // Afgeleide sleutels voor weergaven en calc — nooit contractkolommen.
+  'rpn': 'RPN',
+  'rpn_b': 'RPN b',
+  'rpn_n': 'RPN n',
+  'score': 'Score',
+  'score_b': 'Score b',
+  'score_n': 'Score n',
 };
 
 /// De contractkolommen van een `risks`-tabel per methode (§3.3).

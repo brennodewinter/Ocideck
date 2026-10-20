@@ -167,6 +167,12 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
             onPressed: () => Navigator.pop(dialogContext, 'overview'),
             child: Text(l10n.d('Overzicht — bruto én netto naast elkaar')),
           ),
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(dialogContext, 'prioriteit'),
+            child: Text(
+              l10n.d('Prioriteit — gesorteerd op score, daarna op ernst'),
+            ),
+          ),
         ],
       ),
     );
@@ -174,7 +180,13 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
     final docMd = MarkdownQuillCodec.markdownFromDocument(
       widget.embedContext.controller.document,
     );
-    final block = createOciViewBlock(RiskDossier.read(docMd), id, projection);
+    final block = createOciViewBlock(
+      RiskDossier.read(docMd),
+      id,
+      projection,
+      // De benoemde regel: product dalend, dan S→O→D — geen AP-claim.
+      sort: projection == 'prioriteit' ? 'priority' : null,
+    );
     if (block == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

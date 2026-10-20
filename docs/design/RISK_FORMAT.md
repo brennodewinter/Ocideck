@@ -185,8 +185,15 @@ impact overview in the UI — stored scores are never silently rewritten.
 ```
 
 - `source` = `id` of a marked table in the same file. `projection` is a
-  named subset (`bruto`, `netto`, `overview`) or omitted for an explicit
+  named subset (`bruto`, `netto`, `overview`, `prioriteit` — overview plus
+  the derived RPN/score column) or omitted for an explicit
   `cols=`/`filter=`/`sort=` projection.
+- `sort=<key>:<asc|desc>` sorts materialised rows by one column;
+  `sort=priority` applies the **named priority rule**: netto (else bruto)
+  product descending, tie-broken by S, then O, then D descending, then ID.
+  The rule exists so a high-severity row stays visible where its product
+  alone would bury it. It is deliberately **not** AIAG/VDA Action
+  Priority — that licensed method is not implemented or claimed.
 - The table body holds the materialised values (D2). OciDeck regenerates
   them on open/edit/export and marks the cells read-only; a foreign edit is
   a discrepancy the quality check shows with inspect/adjust/detach choices.

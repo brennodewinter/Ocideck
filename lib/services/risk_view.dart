@@ -40,6 +40,19 @@ List<String>? ociViewProjectionCols(
     'o_n',
     'd_n',
   ],
+  // 'prioriteit': het overzicht plus de afgeleide RPN-kolom, bedoeld om
+  // met sort=priority te dragen (#2493).
+  ('prioriteit', RiskMethod.fmea) => const [
+    'id',
+    'failure',
+    's_b',
+    'o_b',
+    'd_b',
+    's_n',
+    'o_n',
+    'd_n',
+    'rpn',
+  ],
   ('bruto', RiskMethod.likelihoodImpact) => const ['id', 'event', 'l_b', 'i_b'],
   ('netto', RiskMethod.likelihoodImpact) => const ['id', 'event', 'l_n', 'i_n'],
   ('overview', RiskMethod.likelihoodImpact) => const [
@@ -49,6 +62,15 @@ List<String>? ociViewProjectionCols(
     'i_b',
     'l_n',
     'i_n',
+  ],
+  ('prioriteit', RiskMethod.likelihoodImpact) => const [
+    'id',
+    'event',
+    'l_b',
+    'i_b',
+    'l_n',
+    'i_n',
+    'score',
   ],
   _ => null,
 };
@@ -157,7 +179,18 @@ List<List<String>>? ociViewMaterialize(
   var materialized = [
     for (final r in rows) [for (final key in plan.cols) _viewCell(r, key)],
   ];
-  if (plan.sortKey != null) {
+  if (plan.sortKey == 'priority') {
+    // De benoemde prioriteringsregel uit §3.6 (#2493): RPN of score dalend,
+    // bij gelijkspel S → O → D dalend — zodat hoge ernst zichtbaar blijft
+    // waar alleen het product hem zou verdrinken. Bewust géén AIAG/VDA AP;
+    // die methode claimen we niet.
+    final indexed = [for (var i = 0; i < rows.length; i++) i];
+    indexed.sort((a, b) => _priorityCompare(rows[a], rows[b], method));
+    materialized = [
+      for (final i in indexed)
+        [for (final key in plan.cols) _viewCell(rows[i], key)],
+    ];
+  } else if (plan.sortKey != null) {
     final sortCol = plan.cols.indexOf(plan.sortKey!);
     if (sortCol >= 0) {
       // Dezelfde sortering als elke tabelsortering: leeg onderaan,
@@ -188,6 +221,34 @@ List<List<String>>? ociViewMaterialize(
   ];
 }
 
+/// De prioriteringsvergelijker van §3.6: product dalend, dan S, O, D
+/// dalend, dan ID voor een stabiele ordening. Netto wint van bruto — de
+/// prioriteit beschrijft wat er nóú aandacht vraagt; onbekend zinkt naar
+/// onderen (nooit 0, nooit boven beoordeelde rijen).
+int _priorityCompare(RiskRecord a, RiskRecord b, RiskMethod method) {
+  int? product(RiskRecord r) => switch (method) {
+    RiskMethod.fmea => r.rpnNetto ?? r.rpnBruto,
+    RiskMethod.likelihoodImpact => r.scoreNetto ?? r.scoreBruto,
+    RiskMethod.bowtie => null,
+  };
+  int? s(RiskRecord r) => r.sN ?? r.sB;
+  int? o(RiskRecord r) => r.oN ?? r.oB ?? r.lN ?? r.lB;
+  int? d(RiskRecord r) => r.dN ?? r.dB ?? r.iN ?? r.iB;
+  final pa = product(a), pb = product(b);
+  if (pa == null && pb == null) return a.id.compareTo(b.id);
+  if (pa == null) return 1;
+  if (pb == null) return -1;
+  if (pa != pb) return pb - pa;
+  for (final key in [s, o, d]) {
+    final va = key(a), vb = key(b);
+    if (va == null && vb == null) continue;
+    if (va == null) return 1;
+    if (vb == null) return -1;
+    if (va != vb) return vb - va;
+  }
+  return a.id.compareTo(b.id);
+}
+
 /// Bouwt het blok van een nieuwe gekoppelde weergave op [sourceId]:
 /// `view`-marker (met `gen=` op de huidige bron-`rev`) plus de meteen
 /// gematerialiseerde tabel. [projection] is `bruto`/`netto`/`overview` —
@@ -197,8 +258,9 @@ List<List<String>>? ociViewMaterialize(
 String? createOciViewBlock(
   RiskDossier dossier,
   String sourceId,
-  String projection,
-) {
+  String projection, {
+  String? sort,
+}) {
   final sourceTable = dossier.tableById(sourceId);
   if (sourceTable == null) return null;
   final method = RiskMethod.parse(sourceTable.marker?.attr('method') ?? '');
@@ -213,6 +275,7 @@ String? createOciViewBlock(
       'source': sourceId,
       'projection': projection,
       if (rev != null) 'gen': '$rev',
+      'sort': ?sort,
       'cols': ociViewProjectionCols(projection, method)!.join(','),
     },
   );
