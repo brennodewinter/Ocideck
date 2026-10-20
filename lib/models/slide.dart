@@ -447,13 +447,8 @@ class Slide {
   final MarpStyle marpStyle;
   final double advanceDuration; // 0 = no auto-advance
   final int imageSize; // 0 = auto; image: bg %, bulletsImage: panel %
-  /// Bullets-with-image only. Absent `ocideck_split_image_side` keeps the
-  /// original right-hand layout for older decks.
-  final bool splitImageOnLeft;
-
-  /// Panel-image zoom for bulletsImage/twoImages: 0 = cover (vult slot, snijdt
-  /// bij), 100 = hele afbeelding zichtbaar (contain), >100 = inzoomen. Full-
-  /// bleed slots (image/title/section) gebruiken [imageSize] voor zoom.
+  final bool splitImageOnLeft; // absent marker keeps the image on the right
+  /// Panel zoom: 0 = cover, 100 = contain, >100 = zoom; full-bleed uses [imageSize].
   final int imageZoom;
   final bool titleImageOverlay; // darken title background image for readability
   final bool

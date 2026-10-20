@@ -36,6 +36,15 @@ final _reSplitImageSide = RegExp(
   r'^<!--\s*ocideck_split_image_side:\s*(left|right)\s*-->$',
 );
 
+bool _takeSplitImageOnLeft(SlideType type, List<String> preservedLines) {
+  if (type != SlideType.bulletsImage) return false;
+  final imageOnLeft = preservedLines.any(
+    (line) => _reSplitImageSide.firstMatch(line.trim())?.group(1) == 'left',
+  );
+  preservedLines.removeWhere((line) => _reSplitImageSide.hasMatch(line.trim()));
+  return imageOnLeft;
+}
+
 /// `_class`-tokens van opgeheven slidetypes en het type dat ze nu opleveren.
 ///
 /// Het losse 'actions'-type is opgeheven: het was een tabel met een vaste kop en
@@ -533,17 +542,7 @@ extension _MarkdownParse on MarkdownService {
     final showFooter = !classTokens.contains('no-footer');
     final imageTitleAbove =
         type == SlideType.image && classTokens.contains('image-title-above');
-    final splitImageOnLeft =
-        type == SlideType.bulletsImage &&
-        d.preservedMarpLines.any(
-          (line) =>
-              _reSplitImageSide.firstMatch(line.trim())?.group(1) == 'left',
-        );
-    if (type == SlideType.bulletsImage) {
-      d.preservedMarpLines.removeWhere(
-        (line) => _reSplitImageSide.hasMatch(line.trim()),
-      );
-    }
+    final splitImageOnLeft = _takeSplitImageOnLeft(type, d.preservedMarpLines);
 
     final effectiveClass = classTokens
         .where(
