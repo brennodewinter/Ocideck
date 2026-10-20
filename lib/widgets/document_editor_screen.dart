@@ -66,6 +66,8 @@ import '../utils/url_launcher_util.dart';
 import '../utils/document_stats.dart';
 import '../models/risk_dossier.dart';
 import '../services/risk_dossier_scaffold.dart';
+import '../services/risk_quality.dart';
+import '../services/risk_view.dart';
 import '../utils/table_row_permutation.dart';
 import 'keyword_chips_editor.dart';
 import '../platform/clipboard_html.dart';
@@ -106,6 +108,7 @@ part 'parts/document_source_field.dart';
 part 'parts/document_source_rewrites.dart';
 part 'parts/document_editor_inserts.dart';
 part 'parts/document_editor_position.dart';
+part 'parts/document_editor_risk_quality.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
 /// Markdown-bron, rechts een live weergave. De bron *ís* de waarheid — elke
@@ -597,6 +600,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     onInsertSpacer: _insertSpacer,
     onInsertFootnote: _insertFootnote,
     onInsertRiskDossier: () => unawaited(_insertRiskDossier()),
+    riskQualityCount: riskQualityFindings(_controller.text).findings.length,
+    onRiskQuality: () => unawaited(_openRiskQuality(this)),
     footnotesAtEnd:
         documentFootnotePlacement(_pageSetupSource(ref)) ==
         FootnotePlacement.document,
@@ -728,11 +733,18 @@ Future<DocumentExportOutcome> _writeDocumentExport(
   // dat door herhaald plakken meerdere blokken heeft, lekt ze anders als tekst
   // in de uitvoer (#1726).
   final body = stripLeadingFrontMatterLeakage(document.body);
+  final l10n = context.l10n;
+  // De risico-poort vóór de bundel: blokkerende bevindingen betekenen
+  // onbetrouwbare cijfers in elke afgeleide — niet stil door laten (#2490).
+  // De toets is dezelfde pure scan als het overzicht in de werkbalk.
+  if (!context.mounted ||
+      !await confirmRiskQualityExport(context, riskQualityFindings(body))) {
+    return const DocumentExportCancelled();
+  }
   final filePath = state.filePath;
   final projectPath = filePath == null ? null : p.dirname(filePath);
   final settings = ref.read(settingsProvider);
   final exportSetup = effectiveDocumentPageSetup(settings, document.source);
-  final l10n = context.l10n;
   final title = document.fields['title'] ?? _documentTitle(body, filePath);
   final effectiveTheme =
       resolveDocumentStyleProfile(settings, document.styleName) ??

@@ -47,6 +47,13 @@ class _DocEditorToolbar extends StatelessWidget {
   /// #2492. Opent een dialoog; zelf geen gewone blokinvoeging.
   final VoidCallback onInsertRiskDossier;
 
+  /// Het aantal bevindingen van de risico-kwaliteitscontrole (#2490) en de
+  /// knop die het overzicht opent. `0` = schoon, de knop toont dan zonder
+  /// badge — aanwezig blijven hoort: de controle is een belofte, geen
+  /// verrassing.
+  final int riskQualityCount;
+  final VoidCallback onRiskQuality;
+
   /// Staan de voetnoten van dít document achterin in plaats van onderaan de
   /// bladzijde, en de omschakeling ervoor. De keuze landt in de front matter
   /// van het document zelf.
@@ -108,6 +115,8 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertSpacer,
     required this.onInsertFootnote,
     required this.onInsertRiskDossier,
+    required this.riskQualityCount,
+    required this.onRiskQuality,
     required this.footnotesAtEnd,
     required this.onFootnotesAtEndChanged,
     required this.onApplyChapterBreaks,
@@ -230,6 +239,19 @@ class _DocEditorToolbar extends StatelessWidget {
                         tooltip: l10n.d('Zoeken'),
                         onPressed: onFind,
                         icon: const Icon(Icons.search, size: 18),
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      IconButton(
+                        tooltip: l10n.d('Risico-kwaliteitscontrole'),
+                        onPressed: onRiskQuality,
+                        icon: Badge(
+                          isLabelVisible: riskQualityCount > 0,
+                          label: Text('$riskQualityCount'),
+                          child: const Icon(
+                            Icons.fact_check_outlined,
+                            size: 18,
+                          ),
+                        ),
                         visualDensity: VisualDensity.compact,
                       ),
                       if (mode != _DocViewMode.fill) ...[
