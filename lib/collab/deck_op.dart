@@ -462,13 +462,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     SlideField.imageTitleAbove => slide.copyWith(
       imageTitleAbove: _cast<bool>(value, field),
     ),
-    SlideField.splitImageOnLeft => slide.copyWith(
-      splitImageOnLeft: _cast<bool>(value, field),
-    ),
+    SlideField.splitImageOnLeft => _setImageSide(slide, value, field),
     SlideField.showLogo => slide.copyWith(showLogo: _cast<bool>(value, field)),
-    SlideField.showFooter => slide.copyWith(
-      showFooter: _cast<bool>(value, field),
-    ),
+    SlideField.showFooter => slide.copyWith(showFooter: _bool(value, field)),
     SlideField.skipped => slide.copyWith(skipped: _cast<bool>(value, field)),
     SlideField.isDetail => slide.copyWith(isDetail: _cast<bool>(value, field)),
     SlideField.tableEditable => slide.copyWith(
@@ -620,6 +616,11 @@ int _indexOfSlide(Deck deck, String slideId) {
   }
   return index;
 }
+
+Slide _setImageSide(Slide slide, Object? value, SlideField field) =>
+    slide.copyWith(splitImageOnLeft: _cast<bool>(value, field));
+
+bool _bool(Object? value, SlideField field) => _cast<bool>(value, field);
 
 /// Cast [value] to [T], failing closed with a clear message naming the [field].
 T _cast<T>(Object? value, Object field) {

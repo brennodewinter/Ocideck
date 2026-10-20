@@ -37,7 +37,7 @@ const Map<String, int> methodLengthBaseline = {
   // +12 (#1879): de "paneelvullend"-checkbox voor bulletsImage. De methode
   // stond al op de limiet.
   'lib/widgets/editors/bullets_image_editor.dart::_BulletsImageEditorState.build':
-      127,
+      122,
   // +13 (#1655, #1654): voetnoot-clip met ConstrainedBox + RepaintBoundary
   // in het documentvenster. De methode stond al op de limiet.
   'lib/widgets/reader/paged_document_view.dart::_PagedDocumentViewState._sheet':
@@ -107,7 +107,7 @@ const Map<String, int> methodLengthBaseline = {
   // menu-optietokens uit `effectiveClass`. Pure doorvoer van een nieuw veld.
   // Verlaagd van 208 naar 202: de rij losse tokenvergelijkingen in
   // `effectiveClass` werd één aanroep van `isOcideckWrittenClassToken`.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 202,
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 200,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -138,7 +138,8 @@ const Map<String, int> methodLengthBaseline = {
   // +2 (#1162): menuLayout-parameter + doorvoer in copyWith.
   // +6 (#1824): callouts, calloutPresentation, calloutReveal-parameters +
   // doorvoer in copyWith voor image callouts.
-  'lib/models/slide.dart::Slide.copyWith': 172,
+  // One more stored layout choice needs one parameter and one constructor field.
+  'lib/models/slide.dart::Slide.copyWith': 174,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   // Verlaagd van 188 naar 186, en daarna naar 183: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
@@ -158,7 +159,7 @@ const Map<String, int> methodLengthBaseline = {
   // switch, één case per veld, niet uit te tillen.
   // +9 (#1824): callouts, calloutPresentation, calloutReveal — drie nieuwe
   // cases in de exhaustive switch, zelfde vorm, niet uit te tillen.
-  'lib/collab/deck_op.dart::_slideWithField': 201,
+  'lib/collab/deck_op.dart::_slideWithField': 200,
 };
 
 bool _isTranslationData(String path) =>

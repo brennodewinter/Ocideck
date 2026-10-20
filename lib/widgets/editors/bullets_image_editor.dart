@@ -239,29 +239,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
               _emit();
             },
           ),
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(l10n.d('Afbeelding links')),
-          value: widget.slide.splitImageOnLeft,
-          onChanged: (value) =>
-              widget.onUpdate(widget.slide.copyWith(splitImageOnLeft: value)),
-        ),
-        if (_listStyle == ListStyle.richText) ...[
-          const SizedBox(height: 16),
-          SectionLabel(
-            widget.slide.splitImageOnLeft ? 'Tekst (rechts)' : 'Tekst (links)',
-          ),
-          AiCondenseButton(slide: widget.slide),
-          _richTextField(),
-        ] else ...[
-          const SizedBox(height: 16),
-          SectionLabel(
-            widget.slide.splitImageOnLeft
-                ? 'Bullets (rechts)'
-                : 'Bullets (links)',
-          ),
-          _bulletEditor(l10n),
-        ],
+        ..._positionedTextFields(context),
         const SizedBox(height: 16),
         SectionLabel(
           widget.slide.splitImageOnLeft
@@ -320,6 +298,29 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       ],
     );
   }
+
+  List<Widget> _positionedTextFields(BuildContext context) => [
+    SwitchListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(context.l10n.d('Afbeelding links')),
+      value: widget.slide.splitImageOnLeft,
+      onChanged: (value) =>
+          widget.onUpdate(widget.slide.copyWith(splitImageOnLeft: value)),
+    ),
+    const SizedBox(height: 16),
+    if (_listStyle == ListStyle.richText) ...[
+      SectionLabel(
+        widget.slide.splitImageOnLeft ? 'Tekst (rechts)' : 'Tekst (links)',
+      ),
+      AiCondenseButton(slide: widget.slide),
+      _richTextField(),
+    ] else ...[
+      SectionLabel(
+        widget.slide.splitImageOnLeft ? 'Bullets (rechts)' : 'Bullets (links)',
+      ),
+      _bulletEditor(context.l10n),
+    ],
+  ];
 
   Widget _bulletEditor(AppLocalizations l10n) => Column(
     children: [

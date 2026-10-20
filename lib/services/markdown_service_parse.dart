@@ -499,7 +499,6 @@ extension _MarkdownParse on MarkdownService {
     );
 
     final imageSize = _cappedImageSize(body.imageSize, d.styleImageWidth);
-
     final tableDecoded = _decodeTableWithAlignment(body.tableLines);
     final tableRows = tableDecoded.rows;
     // Vul de uitlijning aan tot het aantal kolommen: een scheidingsrij zonder
@@ -529,7 +528,6 @@ extension _MarkdownParse on MarkdownService {
       h2: body.h2,
       paragraph: body.paragraph,
     );
-
     final titleColumns = _titleColumnFields(
       type,
       body.sawBgLeft,
@@ -538,8 +536,6 @@ extension _MarkdownParse on MarkdownService {
       body.bgRightWidth,
       imageSize,
     );
-    final showLogo = !classTokens.contains('no-logo');
-    final showFooter = !classTokens.contains('no-footer');
     final imageTitleAbove =
         type == SlideType.image && classTokens.contains('image-title-above');
     final splitImageOnLeft = _takeSplitImageOnLeft(type, d.preservedMarpLines);
@@ -610,8 +606,8 @@ extension _MarkdownParse on MarkdownService {
       preservedMarpLines: d.preservedMarpLines,
       marpStyle: d.marpStyle,
       advanceDuration: d.advanceDuration,
-      showLogo: showLogo,
-      showFooter: showFooter,
+      showLogo: !classTokens.contains('no-logo'),
+      showFooter: !classTokens.contains('no-footer'),
       skipped: d.skipped,
       isDetail: d.isDetail,
       tlp: d.tlp,

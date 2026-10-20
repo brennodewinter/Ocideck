@@ -68,7 +68,6 @@ class _BulletsImagePreview extends StatelessWidget {
     if (slide.listStyle == ListStyle.richText) {
       return _buildRichTextWithImage(context);
     }
-
     final leftPad = w * 0.038;
     final verticalPad = w * 0.042;
     // Keep the gap between the text column and the image equal to the slide's
