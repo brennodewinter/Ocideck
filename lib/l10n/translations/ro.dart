@@ -462,7 +462,6 @@ const _dutchSourceRo = {
   'Zoom afbeelding': 'Zoom imagine',
   'Afbeelding (rechts)': 'Imagine (dreapta)',
   'Bullets (links)': 'Bullets (stânga)',
-  'Breedte afbeeldingspaneel (rechts)': 'Lățime panou imagine (dreapta)',
   'Linker afbeelding': 'Imagine stânga',
   'Rechter afbeelding': 'Imagine dreapta',
   'Verdeling (links / rechts)': 'Împărțire (stânga / dreapta)',

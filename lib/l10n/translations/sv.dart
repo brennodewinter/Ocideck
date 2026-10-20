@@ -459,7 +459,6 @@ const _dutchSourceSv = {
   'Zoom afbeelding': 'Bildzoom',
   'Afbeelding (rechts)': 'Bild (höger)',
   'Bullets (links)': 'Punkter (vänster)',
-  'Breedte afbeeldingspaneel (rechts)': 'Bildpanelens bredd (höger)',
   'Linker afbeelding': 'Vänster bild',
   'Rechter afbeelding': 'Höger bild',
   'Verdeling (links / rechts)': 'Fördelning (vänster / höger)',

@@ -4928,7 +4928,6 @@ const _dutchSourceAddDe = {
   'Titeltekstkleur': 'Farbe des Titeltextes',
   'Knippen': 'Schneiden',
   'Geen achtergrondafbeelding': 'Kein Hintergrundbild',
-  'Breedte afbeeldingspaneel (rechts)': 'Breite des Bildbereichs (rechts)',
   'Verdeling (links / rechts)': 'Aufteilung (links / rechts)',
   'TYPE': 'TYP',
   'STIJL': 'STIL',

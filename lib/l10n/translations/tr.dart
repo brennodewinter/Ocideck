@@ -456,7 +456,6 @@ const _dutchSourceTr = {
   'Zoom afbeelding': 'Görsel yakınlaştırma',
   'Afbeelding (rechts)': 'Görsel (sağ)',
   'Bullets (links)': 'Maddeler (sol)',
-  'Breedte afbeeldingspaneel (rechts)': 'Görsel panelinin genişliği (sağ)',
   'Linker afbeelding': 'Sol görsel',
   'Rechter afbeelding': 'Sağ görsel',
   'Verdeling (links / rechts)': 'Bölme (sol / sağ)',

@@ -461,8 +461,6 @@ const _dutchSourceLt = {
   'Zoom afbeelding': 'Paveikslėlio mastelis',
   'Afbeelding (rechts)': 'Paveikslėlis (dešinėje)',
   'Bullets (links)': 'Ženklai (kairėje)',
-  'Breedte afbeeldingspaneel (rechts)':
-      'Paveikslėlio srities plotis (dešinėje)',
   'Linker afbeelding': 'Kairysis paveikslėlis',
   'Rechter afbeelding': 'Dešinysis paveikslėlis',
   'Verdeling (links / rechts)': 'Padalijimas (kairė / dešinė)',

@@ -461,7 +461,6 @@ const _dutchSourceSk = {
   'Zoom afbeelding': 'Priblíženie obrázka',
   'Afbeelding (rechts)': 'Obrázok (vpravo)',
   'Bullets (links)': 'Odrážky (vľavo)',
-  'Breedte afbeeldingspaneel (rechts)': 'Šírka panela obrázka (vpravo)',
   'Linker afbeelding': 'Ľavý obrázok',
   'Rechter afbeelding': 'Pravý obrázok',
   'Verdeling (links / rechts)': 'Rozdelenie (vľavo / vpravo)',

@@ -465,7 +465,6 @@ const _dutchSourcePl = {
   'Zoom afbeelding': 'Powiększenie obrazu',
   'Afbeelding (rechts)': 'Obraz (po prawej)',
   'Bullets (links)': 'Punktory (po lewej)',
-  'Breedte afbeeldingspaneel (rechts)': 'Szerokość panelu obrazu (po prawej)',
   'Linker afbeelding': 'Lewy obraz',
   'Rechter afbeelding': 'Prawy obraz',
   'Verdeling (links / rechts)': 'Podział (lewa / prawa)',

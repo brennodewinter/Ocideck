@@ -47,7 +47,9 @@ void main() {
 
       expect(find.text('Doornummeren vanaf vorige slide'), findsOneWidget);
 
-      await tester.tap(find.byType(Switch));
+      await tester.tap(
+        find.widgetWithText(SwitchListTile, 'Doornummeren vanaf vorige slide'),
+      );
       await tester.pump();
       expect(updated.continueNumbering, isTrue);
     },

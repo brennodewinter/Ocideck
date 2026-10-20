@@ -458,7 +458,6 @@ const _dutchSourceEn = {
   'Zoom afbeelding': 'Image zoom',
   'Afbeelding (rechts)': 'Image (right)',
   'Bullets (links)': 'Bullets (left)',
-  'Breedte afbeeldingspaneel (rechts)': 'Image panel width (right)',
   'Linker afbeelding': 'Left image',
   'Rechter afbeelding': 'Right image',
   'Verdeling (links / rechts)': 'Split (left / right)',

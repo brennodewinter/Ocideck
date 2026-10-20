@@ -461,7 +461,6 @@ const _dutchSourceCs = {
   'Zoom afbeelding': 'Přiblížení obrázku',
   'Afbeelding (rechts)': 'Obrázek (vpravo)',
   'Bullets (links)': 'Odrážky (vlevo)',
-  'Breedte afbeeldingspaneel (rechts)': 'Šířka panelu obrázku (vpravo)',
   'Linker afbeelding': 'Levý obrázek',
   'Rechter afbeelding': 'Pravý obrázek',
   'Verdeling (links / rechts)': 'Rozdělení (vlevo / vpravo)',

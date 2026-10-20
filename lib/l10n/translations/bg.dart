@@ -463,8 +463,6 @@ const _dutchSourceBg = {
   'Zoom afbeelding': 'Мащаб на изображението',
   'Afbeelding (rechts)': 'Изображение (дясно)',
   'Bullets (links)': 'Водещи символи (ляво)',
-  'Breedte afbeeldingspaneel (rechts)':
-      'Ширина на панела с изображение (дясно)',
   'Linker afbeelding': 'Ляво изображение',
   'Rechter afbeelding': 'Дясно изображение',
   'Verdeling (links / rechts)': 'Разделяне (ляво / дясно)',

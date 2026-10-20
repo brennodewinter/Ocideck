@@ -462,7 +462,6 @@ const _dutchSourceLa = {
   'Zoom afbeelding': 'Amplificatio imaginis',
   'Afbeelding (rechts)': 'Imago (dextra)',
   'Bullets (links)': 'Notae (sinistra)',
-  'Breedte afbeeldingspaneel (rechts)': 'Latitudo tabulae imaginis (dextra)',
   'Linker afbeelding': 'Imago sinistra',
   'Rechter afbeelding': 'Imago dextra',
   'Verdeling (links / rechts)': 'Divisio (sinistra / dextra)',

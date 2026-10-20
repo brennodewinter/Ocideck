@@ -467,7 +467,6 @@ const _dutchSourceGa = {
   'Zoom afbeelding': 'Zúmáil íomhá',
   'Afbeelding (rechts)': 'Íomhá (ar dheis)',
   'Bullets (links)': 'Urchair (ar chlé)',
-  'Breedte afbeeldingspaneel (rechts)': 'Leithead an phainéil íomhá (ar dheis)',
   'Linker afbeelding': 'Íomhá chlé',
   'Rechter afbeelding': 'Íomhá dheas',
   'Verdeling (links / rechts)': 'Roinnt (clé / deas)',

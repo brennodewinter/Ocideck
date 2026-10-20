@@ -460,7 +460,6 @@ const _dutchSourceEt = {
   'Zoom afbeelding': 'Pildi suum',
   'Afbeelding (rechts)': 'Pilt (paremal)',
   'Bullets (links)': 'Täpid (vasakul)',
-  'Breedte afbeeldingspaneel (rechts)': 'Pildipaneeli laius (paremal)',
   'Linker afbeelding': 'Vasak pilt',
   'Rechter afbeelding': 'Parem pilt',
   'Verdeling (links / rechts)': 'Jaotus (vasak / parem)',

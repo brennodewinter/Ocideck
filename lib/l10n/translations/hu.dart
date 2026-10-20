@@ -461,7 +461,6 @@ const _dutchSourceHu = {
   'Zoom afbeelding': 'Kép nagyítása',
   'Afbeelding (rechts)': 'Kép (jobbra)',
   'Bullets (links)': 'Felsorolás (balra)',
-  'Breedte afbeeldingspaneel (rechts)': 'Képpanel szélessége (jobbra)',
   'Linker afbeelding': 'Bal oldali kép',
   'Rechter afbeelding': 'Jobb oldali kép',
   'Verdeling (links / rechts)': 'Felosztás (bal / jobb)',

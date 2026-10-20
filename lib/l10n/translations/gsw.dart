@@ -463,7 +463,6 @@ const _dutchSourceGsw = {
   'Zoom afbeelding': 'Bild-Zoom',
   'Afbeelding (rechts)': 'Bild (rächts)',
   'Bullets (links)': 'Bullets (links)',
-  'Breedte afbeeldingspaneel (rechts)': 'Breiti vom Bildpanel (rächts)',
   'Linker afbeelding': 'Links Bild',
   'Rechter afbeelding': 'Rächts Bild',
   'Verdeling (links / rechts)': 'Uufteilig (links / rächts)',

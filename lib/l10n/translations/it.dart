@@ -4934,8 +4934,6 @@ const _dutchSourceAddIt = {
   'Titeltekstkleur': 'Colore del testo del titolo',
   'Knippen': 'Taglio',
   'Geen achtergrondafbeelding': 'Nessuna immagine di sfondo',
-  'Breedte afbeeldingspaneel (rechts)':
-      'Larghezza del pannello immagine (destra)',
   'Verdeling (links / rechts)': 'Divisione (sinistra / destra)',
   'TYPE': 'TIPO',
   'STIJL': 'STILE',

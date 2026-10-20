@@ -462,7 +462,6 @@ const _dutchSourceDa = {
   'Zoom afbeelding': 'Billedzoom',
   'Afbeelding (rechts)': 'Billede (højre)',
   'Bullets (links)': 'Bullets (venstre)',
-  'Breedte afbeeldingspaneel (rechts)': 'Bredde på billedpanel (højre)',
   'Linker afbeelding': 'Venstre billede',
   'Rechter afbeelding': 'Højre billede',
   'Verdeling (links / rechts)': 'Opdeling (venstre / højre)',

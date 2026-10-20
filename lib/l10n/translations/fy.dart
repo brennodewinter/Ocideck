@@ -4884,8 +4884,6 @@ const _dutchSourceAddFy = {
   'Titeltekstkleur': 'Kleur fan de titeltekst',
   'Knippen': 'Knippe',
   'Geen achtergrondafbeelding': 'Gjin eftergrûnôfbylding',
-  'Breedte afbeeldingspaneel (rechts)':
-      'Breedte fan it ôfbyldingspaniel (rjochts)',
   'Verdeling (links / rechts)': 'Ferdieling (lofts / rjochts)',
   'TYPE': 'TYPE',
   'STIJL': 'STIL',

@@ -459,7 +459,6 @@ const _dutchSourceFi = {
   'Zoom afbeelding': 'Kuvan zoomaus',
   'Afbeelding (rechts)': 'Kuva (oikealla)',
   'Bullets (links)': 'Luettelomerkit (vasemmalla)',
-  'Breedte afbeeldingspaneel (rechts)': 'Kuvapaneelin leveys (oikealla)',
   'Linker afbeelding': 'Vasen kuva',
   'Rechter afbeelding': 'Oikea kuva',
   'Verdeling (links / rechts)': 'Jako (vasen / oikea)',

@@ -4890,8 +4890,6 @@ const _dutchSourceAddPap = {
   'Titeltekstkleur': 'Koló di e teksto di título',
   'Knippen': 'Kòrtamentu',
   'Geen achtergrondafbeelding': 'Sin imágen di fondo',
-  'Breedte afbeeldingspaneel (rechts)':
-      'Hanchura di e panel di imágen (banda drechi)',
   'Verdeling (links / rechts)': 'Divishon (banda robes / banda drechi)',
   'TYPE': 'TIPO',
   'STIJL': 'STILO',

@@ -468,7 +468,6 @@ const _dutchSourceEl = {
   'Zoom afbeelding': 'Ζουμ εικόνας',
   'Afbeelding (rechts)': 'Εικόνα (δεξιά)',
   'Bullets (links)': 'Κουκκίδες (αριστερά)',
-  'Breedte afbeeldingspaneel (rechts)': 'Πλάτος πλαισίου εικόνας (δεξιά)',
   'Linker afbeelding': 'Αριστερή εικόνα',
   'Rechter afbeelding': 'Δεξιά εικόνα',
   'Verdeling (links / rechts)': 'Διαχωρισμός (αριστερά / δεξιά)',

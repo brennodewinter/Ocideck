@@ -459,7 +459,6 @@ const _dutchSourceId = {
   'Zoom afbeelding': 'Zoom gambar',
   'Afbeelding (rechts)': 'Gambar (kanan)',
   'Bullets (links)': 'Bullet (kiri)',
-  'Breedte afbeeldingspaneel (rechts)': 'Lebar panel gambar (kanan)',
   'Linker afbeelding': 'Gambar kiri',
   'Rechter afbeelding': 'Gambar kanan',
   'Verdeling (links / rechts)': 'Pembagian (kiri / kanan)',

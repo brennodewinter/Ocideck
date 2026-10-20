@@ -4952,7 +4952,6 @@ const _dutchSourceAddFr = {
   'Titeltekstkleur': 'Couleur du texte du titre',
   'Knippen': 'Découpe',
   'Geen achtergrondafbeelding': 'Aucune image d\'arrière-plan',
-  'Breedte afbeeldingspaneel (rechts)': 'Largeur du panneau image (droite)',
   'Verdeling (links / rechts)': 'Répartition (gauche / droite)',
   'TYPE': 'TYPE',
   'STIJL': 'STYLE',

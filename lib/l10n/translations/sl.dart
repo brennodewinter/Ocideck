@@ -460,7 +460,6 @@ const _dutchSourceSl = {
   'Zoom afbeelding': 'Povečava slike',
   'Afbeelding (rechts)': 'Slika (desno)',
   'Bullets (links)': 'Alineje (levo)',
-  'Breedte afbeeldingspaneel (rechts)': 'Širina slikovnega panela (desno)',
   'Linker afbeelding': 'Leva slika',
   'Rechter afbeelding': 'Desna slika',
   'Verdeling (links / rechts)': 'Razdelitev (levo / desno)',

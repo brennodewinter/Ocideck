@@ -460,7 +460,6 @@ const _dutchSourceHr = {
   'Zoom afbeelding': 'Zumiranje slike',
   'Afbeelding (rechts)': 'Slika (desno)',
   'Bullets (links)': 'Natuknice (lijevo)',
-  'Breedte afbeeldingspaneel (rechts)': 'Širina ploče sa slikom (desno)',
   'Linker afbeelding': 'Lijeva slika',
   'Rechter afbeelding': 'Desna slika',
   'Verdeling (links / rechts)': 'Podjela (lijevo / desno)',

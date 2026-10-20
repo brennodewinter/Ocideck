@@ -464,7 +464,6 @@ const _dutchSourceMt = {
   'Zoom afbeelding': 'Zoom tal-immaġni',
   'Afbeelding (rechts)': 'Immaġni (lemin)',
   'Bullets (links)': 'Bullets (xellug)',
-  'Breedte afbeeldingspaneel (rechts)': 'Wisa\' tal-panew tal-immaġni (lemin)',
   'Linker afbeelding': 'Immaġni tax-xellug',
   'Rechter afbeelding': 'Immaġni tal-lemin',
   'Verdeling (links / rechts)': 'Qsim (xellug / lemin)',

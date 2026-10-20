@@ -465,7 +465,6 @@ const _dutchSourceUk = {
   'Zoom afbeelding': 'Масштаб зображення',
   'Afbeelding (rechts)': 'Зображення (праворуч)',
   'Bullets (links)': 'Пункти (ліворуч)',
-  'Breedte afbeeldingspaneel (rechts)': 'Ширина панелі зображення (праворуч)',
   'Linker afbeelding': 'Ліве зображення',
   'Rechter afbeelding': 'Праве зображення',
   'Verdeling (links / rechts)': 'Розподіл (ліворуч / праворуч)',

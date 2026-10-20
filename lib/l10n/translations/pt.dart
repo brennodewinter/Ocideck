@@ -466,7 +466,6 @@ const _dutchSourcePt = {
   'Zoom afbeelding': 'Zoom da imagem',
   'Afbeelding (rechts)': 'Imagem (direita)',
   'Bullets (links)': 'Marcadores (esquerda)',
-  'Breedte afbeeldingspaneel (rechts)': 'Largura do painel de imagem (direita)',
   'Linker afbeelding': 'Imagem esquerda',
   'Rechter afbeelding': 'Imagem direita',
   'Verdeling (links / rechts)': 'Divisão (esquerda / direita)',

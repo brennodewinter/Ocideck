@@ -459,7 +459,6 @@ const _dutchSourceLv = {
   'Zoom afbeelding': 'Attēla tuvinājums',
   'Afbeelding (rechts)': 'Attēls (pa labi)',
   'Bullets (links)': 'Aizzīmes (pa kreisi)',
-  'Breedte afbeeldingspaneel (rechts)': 'Attēla paneļa platums (pa labi)',
   'Linker afbeelding': 'Kreisais attēls',
   'Rechter afbeelding': 'Labais attēls',
   'Verdeling (links / rechts)': 'Sadalījums (pa kreisi / pa labi)',
