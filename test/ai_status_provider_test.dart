@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ai_settings.dart';
 import 'package:ocideck/services/ai_client_service.dart';
 import 'package:ocideck/services/ai_security_gate.dart';
+import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck/state/ai_status_provider.dart';
+import 'package:ocideck/state/secret_store_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +31,13 @@ class _FakeTransport implements AiHttpTransport {
     if (e != null) throw e;
     return const AiHttpResult(200, '{}');
   }
+}
+
+class _FakeSecretStore extends SecretStore {
+  _FakeSecretStore() : super(canStore: false);
+
+  @override
+  Future<String?> readAiApiKey(String baseUrl) async => null;
 }
 
 const _local = AiSettings(
@@ -76,6 +85,39 @@ void main() {
       await _settle();
       expect(c.read(aiStatusProvider).availability, AiAvailability.reachable);
       expect(transport.calls, 1);
+    });
+
+    testWidgets('uitgeschakelde AI stopt periodieke statuscontrole', (
+      tester,
+    ) async {
+      SharedPreferences.setMockInitialValues({});
+      final transport = _FakeTransport();
+      final c = ProviderContainer(
+        overrides: [
+          aiHttpTransportProvider.overrideWithValue(transport),
+          secretStoreProvider.overrideWithValue(_FakeSecretStore()),
+        ],
+      );
+      addTearDown(c.dispose);
+      final sub = c.listen(aiStatusProvider, (_, _) {});
+      addTearDown(sub.close);
+      await tester.pump();
+      await c.read(settingsProvider.notifier).setAiSettings(_local);
+      await tester.pump();
+      expect(c.read(aiStatusProvider).availability, AiAvailability.checking);
+      await tester.pump(kAiStatusRefreshInterval);
+      await tester.pump();
+      expect(transport.calls, greaterThan(1));
+
+      await c
+          .read(settingsProvider.notifier)
+          .setAiSettings(const AiSettings(enabled: false));
+      await tester.pump();
+      expect(c.read(aiStatusProvider).availability, AiAvailability.hidden);
+      final callsWhenDisabled = transport.calls;
+      await tester.pump(kAiStatusRefreshInterval * 2);
+      await tester.pump();
+      expect(transport.calls, callsWhenDisabled);
     });
 
     test('endpoint geeft fout → niet bereikbaar', () async {
