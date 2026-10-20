@@ -63,6 +63,31 @@ void main() {
     SlideType.bulletsImage,
   ).copyWith(bullets: bullets, listStyle: listStyle, imagePath: imagePath);
 
+  testWidgets('image side switch defaults right and can move image left', (
+    tester,
+  ) async {
+    var updated = bulletsImage(imagePath: 'images/side.png');
+    await tester.pumpWidget(
+      _host(
+        BulletsImageEditor(
+          slide: updated,
+          onUpdate: (s) => updated = s,
+          imageService: ImageService(),
+        ),
+      ),
+    );
+
+    final sideSwitch = find.widgetWithText(SwitchListTile, 'Afbeelding links');
+    expect(sideSwitch, findsOneWidget);
+    expect(tester.widget<SwitchListTile>(sideSwitch).value, isFalse);
+    await tester.ensureVisible(sideSwitch);
+    await tester.tap(sideSwitch);
+    await tester.pump();
+
+    expect(updated.splitImageOnLeft, isTrue);
+    expect(updated.imagePath, 'images/side.png');
+  });
+
   testWidgets('editing the title emits the new title', (tester) async {
     var updated = bulletsImage();
     await tester.pumpWidget(
@@ -341,9 +366,10 @@ void main() {
     );
     await tester.pump();
 
-    // The only Switch in checklist mode is the progress toggle.
     expect(find.text('Voortgangsgrafiek tonen'), findsOneWidget);
-    await tester.tap(find.byType(Switch));
+    await tester.tap(
+      find.widgetWithText(SwitchListTile, 'Voortgangsgrafiek tonen'),
+    );
     await tester.pump();
     expect(updated.showChecklistProgress, isTrue);
 
@@ -373,15 +399,15 @@ void main() {
       await tester.pump();
 
       expect(find.text('Doornummeren vanaf vorige slide'), findsOneWidget);
-      await tester.tap(find.byType(Switch));
+      await tester.tap(
+        find.widgetWithText(SwitchListTile, 'Doornummeren vanaf vorige slide'),
+      );
       await tester.pump();
       expect(updated.continueNumbering, isTrue);
     },
   );
 
   testWidgets('image zoom control changes the panel width', (tester) async {
-    // No image path keeps the panel short enough that the zoom control stays
-    // within the lazy list's viewport.
     var updated = bulletsImage();
     await tester.pumpWidget(
       _host(
@@ -394,6 +420,11 @@ void main() {
     );
     await tester.pump();
 
+    await tester.scrollUntilVisible(
+      find.byType(Slider),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
     final slider = tester.widget<Slider>(find.byType(Slider));
     slider.onChanged!(60.0);
     await tester.pump();

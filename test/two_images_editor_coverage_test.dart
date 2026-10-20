@@ -150,4 +150,75 @@ void main() {
     expect(latest()!.imageSize, inInclusiveRange(20, 80));
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets(
+    'swapping images keeps each image with its own metadata and width',
+    (tester) async {
+      final slide = Slide.create(SlideType.twoImages).copyWith(
+        title: 'Voor en na',
+        imagePath: 'images/left.png',
+        imagePath2: 'images/right.png',
+        imageCaption: 'Links',
+        imageCaption2: 'Rechts',
+        imageAltText: 'Links beschreven',
+        imageAltText2: 'Rechts beschreven',
+        imageFocalX: 0.2,
+        imageFocalY: 0.3,
+        imageFocalX2: 0.7,
+        imageFocalY2: 0.8,
+        imageSize: 65,
+        aiAssistedFields: const ['imageAltText', 'title'],
+      );
+      final latest = await pump(tester, slide);
+
+      final swap = find.text('Afbeeldingen omwisselen');
+      await tester.ensureVisible(swap);
+      await tester.tap(swap);
+      await tester.pump();
+
+      final out = latest()!;
+      expect(out.title, 'Voor en na');
+      expect(out.imagePath, 'images/right.png');
+      expect(out.imagePath2, 'images/left.png');
+      expect(out.imageCaption, 'Rechts');
+      expect(out.imageCaption2, 'Links');
+      expect(out.imageAltText, 'Rechts beschreven');
+      expect(out.imageAltText2, 'Links beschreven');
+      expect(out.imageFocalX, 0.7);
+      expect(out.imageFocalY, 0.8);
+      expect(out.imageFocalX2, 0.2);
+      expect(out.imageFocalY2, 0.3);
+      expect(out.imageSize, 35);
+      expect(out.aiAssistedFields, containsAll(['imageAltText2', 'title']));
+      expect(out.aiAssistedFields, isNot(contains('imageAltText')));
+    },
+  );
+
+  testWidgets('swapping moves a filled image into an empty slot', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.twoImages).copyWith(
+      imagePath: 'images/only.png',
+      imageCaption: 'Eenzijdig',
+      imageAltText: 'Eén afbeelding',
+      aiAssistedFields: const ['imageAltText'],
+    );
+    final latest = await pump(tester, slide);
+
+    final swap = find.text('Afbeeldingen omwisselen');
+    await tester.ensureVisible(swap);
+    await tester.tap(swap);
+    await tester.pump();
+
+    final out = latest()!;
+    expect(out.imagePath, isEmpty);
+    expect(out.imagePath2, 'images/only.png');
+    expect(out.imageCaption, isEmpty);
+    expect(out.imageCaption2, 'Eenzijdig');
+    expect(out.imageAltText, isEmpty);
+    expect(out.imageAltText2, 'Eén afbeelding');
+    expect(out.imageSize, anyOf(0, 50));
+    expect(out.aiAssistedFields, contains('imageAltText2'));
+    expect(out.aiAssistedFields, isNot(contains('imageAltText')));
+  });
 }

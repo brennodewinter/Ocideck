@@ -460,7 +460,6 @@ const _dutchSourceEt = {
   'Zoom afbeelding': 'Pildi suum',
   'Afbeelding (rechts)': 'Pilt (paremal)',
   'Bullets (links)': 'Täpid (vasakul)',
-  'Breedte afbeeldingspaneel (rechts)': 'Pildipaneeli laius (paremal)',
   'Linker afbeelding': 'Vasak pilt',
   'Rechter afbeelding': 'Parem pilt',
   'Verdeling (links / rechts)': 'Jaotus (vasak / parem)',
@@ -1599,6 +1598,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeeldingen omwisselen': 'Vaheta piltide kohad',
+  'Afbeelding links': 'Vasak pilt',
+  'Breedte afbeeldingspaneel': 'Pildipaneeli laius',
+  'Bullets (rechts)': 'Täpid (paremal)',
+  'Tekst (rechts)': 'Tekst (paremal)',
+  'Afbeelding (links)': 'Pilt (vasakul)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" esineb kaks korda (ka real {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

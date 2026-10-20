@@ -181,22 +181,27 @@ String _twoBulletsSlide(Slide slide) {
 
 String _bulletsImageSlide(Slide slide) {
   final buf = StringBuffer();
-  buf.write('\\begin{columns}\n');
-  buf.write('\\begin{column}{0.55\\textwidth}\n');
-  buf.write(_bulletsToLatex(slide.bullets, slide.listStyle));
-  buf.write('\\end{column}\n');
-  buf.write('\\begin{column}{0.40\\textwidth}\n');
+  final image = StringBuffer();
+  image.write('\\begin{column}{0.40\\textwidth}\n');
   if (slide.imagePath.isNotEmpty) {
     if (slide.callouts.isNotEmpty) {
-      buf.write(_calloutImageTikz(slide));
+      image.write(_calloutImageTikz(slide));
     } else {
-      buf.write(
+      image.write(
         r'\includegraphics[width=\textwidth]{'
         '${_escapeImagePath(slide.imagePath)}}\n',
       );
     }
   }
-  buf.write('\\end{column}\n');
+  image.write('\\end{column}\n');
+  final text =
+      '\\begin{column}{0.55\\textwidth}\n'
+      '${_bulletsToLatex(slide.bullets, slide.listStyle)}'
+      '\\end{column}\n';
+  buf.write('\\begin{columns}\n');
+  if (slide.splitImageOnLeft) buf.write(image);
+  buf.write(text);
+  if (!slide.splitImageOnLeft) buf.write(image);
   buf.write('\\end{columns}\n');
   return buf.toString();
 }

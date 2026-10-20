@@ -32,6 +32,18 @@ final _reBgSideWidth = RegExp(r'!\[bg[^\]]*?(?:left|right):(\d+)%');
 final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
+final _reSplitImageSide = RegExp(
+  r'^<!--\s*ocideck_split_image_side:\s*(left|right)\s*-->$',
+);
+
+bool _takeSplitImageOnLeft(SlideType type, List<String> preservedLines) {
+  if (type != SlideType.bulletsImage) return false;
+  final imageOnLeft = preservedLines.any(
+    (line) => _reSplitImageSide.firstMatch(line.trim())?.group(1) == 'left',
+  );
+  preservedLines.removeWhere((line) => _reSplitImageSide.hasMatch(line.trim()));
+  return imageOnLeft;
+}
 
 /// `_class`-tokens van opgeheven slidetypes en het type dat ze nu opleveren.
 ///
@@ -487,7 +499,6 @@ extension _MarkdownParse on MarkdownService {
     );
 
     final imageSize = _cappedImageSize(body.imageSize, d.styleImageWidth);
-
     final tableDecoded = _decodeTableWithAlignment(body.tableLines);
     final tableRows = tableDecoded.rows;
     // Vul de uitlijning aan tot het aantal kolommen: een scheidingsrij zonder
@@ -517,7 +528,6 @@ extension _MarkdownParse on MarkdownService {
       h2: body.h2,
       paragraph: body.paragraph,
     );
-
     final titleColumns = _titleColumnFields(
       type,
       body.sawBgLeft,
@@ -526,10 +536,9 @@ extension _MarkdownParse on MarkdownService {
       body.bgRightWidth,
       imageSize,
     );
-    final showLogo = !classTokens.contains('no-logo');
-    final showFooter = !classTokens.contains('no-footer');
     final imageTitleAbove =
         type == SlideType.image && classTokens.contains('image-title-above');
+    final splitImageOnLeft = _takeSplitImageOnLeft(type, d.preservedMarpLines);
 
     final effectiveClass = classTokens
         .where(
@@ -573,6 +582,7 @@ extension _MarkdownParse on MarkdownService {
       imageSize: titleColumns.imageSize,
       titleImageOverlay: d.titleImageOverlay,
       imageTitleAbove: imageTitleAbove,
+      splitImageOnLeft: splitImageOnLeft,
       titleTextColorOverride: d.titleTextColorOverride,
       titleColumnLayout: titleColumns.layout,
       titleColumnWidth: titleColumns.width,
@@ -596,8 +606,8 @@ extension _MarkdownParse on MarkdownService {
       preservedMarpLines: d.preservedMarpLines,
       marpStyle: d.marpStyle,
       advanceDuration: d.advanceDuration,
-      showLogo: showLogo,
-      showFooter: showFooter,
+      showLogo: !classTokens.contains('no-logo'),
+      showFooter: !classTokens.contains('no-footer'),
       skipped: d.skipped,
       isDetail: d.isDetail,
       tlp: d.tlp,

@@ -81,6 +81,23 @@ void main() {
       expectReproduces(before, after);
     });
 
+    test('moving the split image left reaches the other client', () {
+      final before = Deck(
+        title: 'd',
+        slides: [Slide(id: 'a', type: SlideType.bulletsImage)],
+      );
+      final after = Deck(
+        title: 'd',
+        slides: [before.slides.single.copyWith(splitImageOnLeft: true)],
+      );
+      final ops = deckDiffToOps(before, after, authorId: 'a');
+
+      expect(ops, hasLength(1));
+      expect((ops.single as SetSlideField).field, SlideField.splitImageOnLeft);
+      expect(applyAll(before, ops).slides.single.splitImageOnLeft, isTrue);
+      expectReproduces(before, after);
+    });
+
     test('a list field change is carried whole', () {
       final before = Deck(
         title: 'd',

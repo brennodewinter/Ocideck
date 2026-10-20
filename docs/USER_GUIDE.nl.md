@@ -829,6 +829,18 @@ Tekstvelden ondersteunen inline Markdown (`**vet**`, `*cursief*`, `` `code` ``,
 kleuring, `$…$` / `$$…$$` LaTeX-wiskunde, en ` ```mermaid `-diagrammen (weergegeven
 in voorbeeld, presentator, PDF/PPTX en HTML-export).
 
+Zet bij een slide met **opsomming + afbeelding** de schakelaar **Afbeelding links**
+aan om de afbeelding links en de opsomming (of rijke tekst) rechts te tonen. Staat
+de schakelaar uit, dan blijft de gebruikelijke indeling met tekst links en
+afbeelding rechts. **Breedte afbeeldingspaneel** regelt de afbeeldingskant in
+beide indelingen. De keuze wordt als optioneel
+`<!-- ocideck_split_image_side: left -->`-commentaar in het deck opgeslagen;
+zonder dat commentaar blijft de afbeelding rechts. Bij een
+slide met **twee afbeeldingen** verwisselt **Afbeeldingen omwisselen** de linker-
+en rechterafbeelding, inclusief bijschriften, alternatieve tekst,
+bijsnijbrandpunten en paneelbreedtes. In de Markdown blijven het gewone `![bg left:…]`- en
+`![bg right:…]`-afbeeldingen; er komt geen aparte indelingsmarkering bij.
+
 ### Opsommingen en lijsten
 
 Een opsommingsslide heeft een optionele titel en subkop en een lijst die je rij voor rij

@@ -468,7 +468,6 @@ const _dutchSourceEl = {
   'Zoom afbeelding': 'Ζουμ εικόνας',
   'Afbeelding (rechts)': 'Εικόνα (δεξιά)',
   'Bullets (links)': 'Κουκκίδες (αριστερά)',
-  'Breedte afbeeldingspaneel (rechts)': 'Πλάτος πλαισίου εικόνας (δεξιά)',
   'Linker afbeelding': 'Αριστερή εικόνα',
   'Rechter afbeelding': 'Δεξιά εικόνα',
   'Verdeling (links / rechts)': 'Διαχωρισμός (αριστερά / δεξιά)',
@@ -1631,6 +1630,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeeldingen omwisselen': 'Ανταλλαγή εικόνων',
+  'Afbeelding links': 'Αριστερή εικόνα',
+  'Breedte afbeeldingspaneel': 'Πλάτος πλαισίου εικόνας',
+  'Bullets (rechts)': 'Κουκκίδες (δεξιά)',
+  'Tekst (rechts)': 'Κείμενο (δεξιά)',
+  'Afbeelding (links)': 'Εικόνα (αριστερά)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       'Το "{id}" εμφανίζεται δύο φορές (επίσης στη γραμμή {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

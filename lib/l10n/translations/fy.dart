@@ -652,6 +652,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeeldingen omwisselen': 'Ofbyldings omwikselje',
+  'Afbeelding links': 'Linker ôfbylding',
+  'Breedte afbeeldingspaneel': 'Breedte fan it ôfbyldingspaniel',
+  'Bullets (rechts)': 'Bullets (rjochts)',
+  'Tekst (rechts)': 'Tekst (rjochts)',
+  'Afbeelding (links)': 'Ofbylding (lofts)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" komt twa kear foar (ek op rigel {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':
@@ -4878,8 +4884,6 @@ const _dutchSourceAddFy = {
   'Titeltekstkleur': 'Kleur fan de titeltekst',
   'Knippen': 'Knippe',
   'Geen achtergrondafbeelding': 'Gjin eftergrûnôfbylding',
-  'Breedte afbeeldingspaneel (rechts)':
-      'Breedte fan it ôfbyldingspaniel (rjochts)',
   'Verdeling (links / rechts)': 'Ferdieling (lofts / rjochts)',
   'TYPE': 'TYPE',
   'STIJL': 'STIL',

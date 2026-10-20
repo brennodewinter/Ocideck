@@ -466,7 +466,6 @@ const _dutchSourcePt = {
   'Zoom afbeelding': 'Zoom da imagem',
   'Afbeelding (rechts)': 'Imagem (direita)',
   'Bullets (links)': 'Marcadores (esquerda)',
-  'Breedte afbeeldingspaneel (rechts)': 'Largura do painel de imagem (direita)',
   'Linker afbeelding': 'Imagem esquerda',
   'Rechter afbeelding': 'Imagem direita',
   'Verdeling (links / rechts)': 'Divisão (esquerda / direita)',
@@ -1634,6 +1633,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Afbeeldingen omwisselen': 'Trocar imagens',
+  'Afbeelding links': 'Imagem esquerda',
+  'Breedte afbeeldingspaneel': 'Largura do painel de imagem',
+  'Bullets (rechts)': 'Marcadores (direita)',
+  'Tekst (rechts)': 'Texto (direita)',
+  'Afbeelding (links)': 'Imagem (esquerda)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" aparece duas vezes (também na linha {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

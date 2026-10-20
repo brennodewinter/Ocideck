@@ -461,7 +461,6 @@ const _dutchSourceSk = {
   'Zoom afbeelding': 'Priblíženie obrázka',
   'Afbeelding (rechts)': 'Obrázok (vpravo)',
   'Bullets (links)': 'Odrážky (vľavo)',
-  'Breedte afbeeldingspaneel (rechts)': 'Šírka panela obrázka (vpravo)',
   'Linker afbeelding': 'Ľavý obrázok',
   'Rechter afbeelding': 'Pravý obrázok',
   'Verdeling (links / rechts)': 'Rozdelenie (vľavo / vpravo)',
@@ -1612,6 +1611,12 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeeldingen omwisselen': 'Vymeniť obrázky',
+  'Afbeelding links': 'Ľavý obrázok',
+  'Breedte afbeeldingspaneel': 'Šírka panela obrázka',
+  'Bullets (rechts)': 'Odrážky (vpravo)',
+  'Tekst (rechts)': 'Text (vpravo)',
+  'Afbeelding (links)': 'Obrázok (vľavo)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" sa vyskytuje dvakrát (aj na riadku {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

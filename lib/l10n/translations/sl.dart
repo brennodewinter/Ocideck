@@ -460,7 +460,6 @@ const _dutchSourceSl = {
   'Zoom afbeelding': 'Povečava slike',
   'Afbeelding (rechts)': 'Slika (desno)',
   'Bullets (links)': 'Alineje (levo)',
-  'Breedte afbeeldingspaneel (rechts)': 'Širina slikovnega panela (desno)',
   'Linker afbeelding': 'Leva slika',
   'Rechter afbeelding': 'Desna slika',
   'Verdeling (links / rechts)': 'Razdelitev (levo / desno)',
@@ -1606,6 +1605,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeeldingen omwisselen': 'Zamenjaj sliki',
+  'Afbeelding links': 'Leva slika',
+  'Breedte afbeeldingspaneel': 'Širina slikovnega panela',
+  'Bullets (rechts)': 'Alineje (desno)',
+  'Tekst (rechts)': 'Besedilo (desno)',
+  'Afbeelding (links)': 'Slika (levo)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" se pojavi dvakrat (tudi v vrstici {regel}).',
   '"{waarde}" is geen getal voor {kolom}.': '"{waarde}" ni število za {kolom}.',

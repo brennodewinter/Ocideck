@@ -464,7 +464,6 @@ const _dutchSourceMt = {
   'Zoom afbeelding': 'Zoom tal-immaġni',
   'Afbeelding (rechts)': 'Immaġni (lemin)',
   'Bullets (links)': 'Bullets (xellug)',
-  'Breedte afbeeldingspaneel (rechts)': 'Wisa\' tal-panew tal-immaġni (lemin)',
   'Linker afbeelding': 'Immaġni tax-xellug',
   'Rechter afbeelding': 'Immaġni tal-lemin',
   'Verdeling (links / rechts)': 'Qsim (xellug / lemin)',
@@ -1624,6 +1623,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afbeeldingen omwisselen': 'Aqleb l-immaġnijiet',
+  'Afbeelding links': 'Immaġni tax-xellug',
+  'Breedte afbeeldingspaneel': 'Wisa\' tal-panew tal-immaġni',
+  'Bullets (rechts)': 'Bullets (lemin)',
+  'Tekst (rechts)': 'Test (lemin)',
+  'Afbeelding (links)': 'Immaġni (xellug)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" jidhreġ darbtejn (wkoll fil-linja {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

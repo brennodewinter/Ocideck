@@ -459,7 +459,6 @@ const _dutchSourceFi = {
   'Zoom afbeelding': 'Kuvan zoomaus',
   'Afbeelding (rechts)': 'Kuva (oikealla)',
   'Bullets (links)': 'Luettelomerkit (vasemmalla)',
-  'Breedte afbeeldingspaneel (rechts)': 'Kuvapaneelin leveys (oikealla)',
   'Linker afbeelding': 'Vasen kuva',
   'Rechter afbeelding': 'Oikea kuva',
   'Verdeling (links / rechts)': 'Jako (vasen / oikea)',
@@ -1606,6 +1605,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeeldingen omwisselen': 'Vaihda kuvien paikat',
+  'Afbeelding links': 'Vasen kuva',
+  'Breedte afbeeldingspaneel': 'Kuvapaneelin leveys',
+  'Bullets (rechts)': 'Luettelomerkit (oikealla)',
+  'Tekst (rechts)': 'Teksti (oikealla)',
+  'Afbeelding (links)': 'Kuva (vasemmalla)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" esiintyy kahdesti (myös rivillä {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

@@ -465,7 +465,6 @@ const _dutchSourceUk = {
   'Zoom afbeelding': 'Масштаб зображення',
   'Afbeelding (rechts)': 'Зображення (праворуч)',
   'Bullets (links)': 'Пункти (ліворуч)',
-  'Breedte afbeeldingspaneel (rechts)': 'Ширина панелі зображення (праворуч)',
   'Linker afbeelding': 'Ліве зображення',
   'Rechter afbeelding': 'Праве зображення',
   'Verdeling (links / rechts)': 'Розподіл (ліворуч / праворуч)',
@@ -1621,6 +1620,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afbeeldingen omwisselen': 'Поміняти зображення місцями',
+  'Afbeelding links': 'Ліве зображення',
+  'Breedte afbeeldingspaneel': 'Ширина панелі зображення',
+  'Bullets (rechts)': 'Пункти (праворуч)',
+  'Tekst (rechts)': 'Текст (праворуч)',
+  'Afbeelding (links)': 'Зображення (ліворуч)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" зустрічається двічі (також у рядку {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

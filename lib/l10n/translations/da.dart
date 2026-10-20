@@ -462,7 +462,6 @@ const _dutchSourceDa = {
   'Zoom afbeelding': 'Billedzoom',
   'Afbeelding (rechts)': 'Billede (højre)',
   'Bullets (links)': 'Bullets (venstre)',
-  'Breedte afbeeldingspaneel (rechts)': 'Bredde på billedpanel (højre)',
   'Linker afbeelding': 'Venstre billede',
   'Rechter afbeelding': 'Højre billede',
   'Verdeling (links / rechts)': 'Opdeling (venstre / højre)',
@@ -1606,6 +1605,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeeldingen omwisselen': 'Byt billederne om',
+  'Afbeelding links': 'Venstre billede',
+  'Breedte afbeeldingspaneel': 'Bredde på billedpanel',
+  'Bullets (rechts)': 'Bullets (højre)',
+  'Tekst (rechts)': 'Tekst (højre)',
+  'Afbeelding (links)': 'Billede (venstre)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" forekommer to gange (også på linje {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

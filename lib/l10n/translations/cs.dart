@@ -461,7 +461,6 @@ const _dutchSourceCs = {
   'Zoom afbeelding': 'Přiblížení obrázku',
   'Afbeelding (rechts)': 'Obrázek (vpravo)',
   'Bullets (links)': 'Odrážky (vlevo)',
-  'Breedte afbeeldingspaneel (rechts)': 'Šířka panelu obrázku (vpravo)',
   'Linker afbeelding': 'Levý obrázek',
   'Rechter afbeelding': 'Pravý obrázek',
   'Verdeling (links / rechts)': 'Rozdělení (vlevo / vpravo)',
@@ -1607,6 +1606,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Afbeeldingen omwisselen': 'Prohodit obrázky',
+  'Afbeelding links': 'Levý obrázek',
+  'Breedte afbeeldingspaneel': 'Šířka panelu obrázku',
+  'Bullets (rechts)': 'Odrážky (vpravo)',
+  'Tekst (rechts)': 'Text (vpravo)',
+  'Afbeelding (links)': 'Obrázek (vlevo)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" se vyskytuje dvakrát (také na řádku {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

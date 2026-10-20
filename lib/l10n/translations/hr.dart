@@ -460,7 +460,6 @@ const _dutchSourceHr = {
   'Zoom afbeelding': 'Zumiranje slike',
   'Afbeelding (rechts)': 'Slika (desno)',
   'Bullets (links)': 'Natuknice (lijevo)',
-  'Breedte afbeeldingspaneel (rechts)': 'Širina ploče sa slikom (desno)',
   'Linker afbeelding': 'Lijeva slika',
   'Rechter afbeelding': 'Desna slika',
   'Verdeling (links / rechts)': 'Podjela (lijevo / desno)',
@@ -1610,6 +1609,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeeldingen omwisselen': 'Zamijeni slike',
+  'Afbeelding links': 'Lijeva slika',
+  'Breedte afbeeldingspaneel': 'Širina ploče sa slikom',
+  'Bullets (rechts)': 'Natuknice (desno)',
+  'Tekst (rechts)': 'Tekst (desno)',
+  'Afbeelding (links)': 'Slika (lijevo)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" se pojavljuje dvaput (također u retku {regel}).',
   '"{waarde}" is geen getal voor {kolom}.': '"{waarde}" nije broj za {kolom}.',

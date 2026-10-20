@@ -461,7 +461,6 @@ const _dutchSourceHu = {
   'Zoom afbeelding': 'Kép nagyítása',
   'Afbeelding (rechts)': 'Kép (jobbra)',
   'Bullets (links)': 'Felsorolás (balra)',
-  'Breedte afbeeldingspaneel (rechts)': 'Képpanel szélessége (jobbra)',
   'Linker afbeelding': 'Bal oldali kép',
   'Rechter afbeelding': 'Jobb oldali kép',
   'Verdeling (links / rechts)': 'Felosztás (bal / jobb)',
@@ -1608,6 +1607,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afbeeldingen omwisselen': 'Képek felcserélése',
+  'Afbeelding links': 'Bal oldali kép',
+  'Breedte afbeeldingspaneel': 'Képpanel szélessége',
+  'Bullets (rechts)': 'Felsorolás (jobbra)',
+  'Tekst (rechts)': 'Szöveg (jobbra)',
+  'Afbeelding (links)': 'Kép (balra)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" kétszer szerepel (a {regel}. sorban is).',
   '"{waarde}" is geen getal voor {kolom}.':

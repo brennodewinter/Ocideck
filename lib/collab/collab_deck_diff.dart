@@ -183,6 +183,7 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.audioAutoplay => slide.audioAutoplay,
     SlideField.titleImageOverlay => slide.titleImageOverlay,
     SlideField.imageTitleAbove => slide.imageTitleAbove,
+    SlideField.splitImageOnLeft => slide.splitImageOnLeft,
     SlideField.showLogo => slide.showLogo,
     SlideField.showFooter => slide.showFooter,
     SlideField.skipped => slide.skipped,

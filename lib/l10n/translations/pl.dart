@@ -465,7 +465,6 @@ const _dutchSourcePl = {
   'Zoom afbeelding': 'Powiększenie obrazu',
   'Afbeelding (rechts)': 'Obraz (po prawej)',
   'Bullets (links)': 'Punktory (po lewej)',
-  'Breedte afbeeldingspaneel (rechts)': 'Szerokość panelu obrazu (po prawej)',
   'Linker afbeelding': 'Lewy obraz',
   'Rechter afbeelding': 'Prawy obraz',
   'Verdeling (links / rechts)': 'Podział (lewa / prawa)',
@@ -1618,6 +1617,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeeldingen omwisselen': 'Zamień obrazy miejscami',
+  'Afbeelding links': 'Lewy obraz',
+  'Breedte afbeeldingspaneel': 'Szerokość panelu obrazu',
+  'Bullets (rechts)': 'Punktory (po prawej)',
+  'Tekst (rechts)': 'Tekst (po prawej)',
+  'Afbeelding (links)': 'Obraz (po lewej)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" występuje dwa razy (także w wierszu {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

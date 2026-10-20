@@ -68,7 +68,6 @@ class _BulletsImagePreview extends StatelessWidget {
     if (slide.listStyle == ListStyle.richText) {
       return _buildRichTextWithImage(context);
     }
-
     final leftPad = w * 0.038;
     final verticalPad = w * 0.042;
     // Keep the gap between the text column and the image equal to the slide's
@@ -105,9 +104,9 @@ class _BulletsImagePreview extends StatelessWidget {
       slide: slide,
       profile: profile,
       safe: safe,
-      pad: leftPad,
+      pad: slide.splitImageOnLeft ? 0 : leftPad,
       vPad: verticalPad,
-      rightPad: 0,
+      rightPad: slide.splitImageOnLeft ? leftPad : 0,
     );
 
     return Container(
@@ -116,7 +115,8 @@ class _BulletsImagePreview extends StatelessWidget {
         children: [
           Positioned(
             top: imageSafe.top,
-            right: 0,
+            left: slide.splitImageOnLeft ? 0 : null,
+            right: slide.splitImageOnLeft ? null : 0,
             bottom: imageSafe.bottom,
             width: imgWidth,
             child: Stack(
@@ -150,8 +150,8 @@ class _BulletsImagePreview extends StatelessWidget {
           ),
           Positioned(
             top: 0,
-            left: 0,
-            right: imgWidth + gap,
+            left: slide.splitImageOnLeft ? imgWidth + gap : 0,
+            right: slide.splitImageOnLeft ? 0 : imgWidth + gap,
             bottom: 0,
             child: LayoutBuilder(
               builder: (context, constraints) {
@@ -286,9 +286,9 @@ class _BulletsImagePreview extends StatelessWidget {
       slide: slide,
       profile: profile,
       safe: safe,
-      pad: leftPad,
+      pad: slide.splitImageOnLeft ? 0 : leftPad,
       vPad: verticalPad,
-      rightPad: 0,
+      rightPad: slide.splitImageOnLeft ? leftPad : 0,
     );
 
     return Container(
@@ -297,7 +297,8 @@ class _BulletsImagePreview extends StatelessWidget {
         children: [
           Positioned(
             top: 0,
-            right: 0,
+            left: slide.splitImageOnLeft ? 0 : null,
+            right: slide.splitImageOnLeft ? null : 0,
             bottom: 0,
             width: imgWidth,
             child: Stack(
@@ -330,8 +331,8 @@ class _BulletsImagePreview extends StatelessWidget {
           ),
           Positioned(
             top: 0,
-            left: 0,
-            right: imgWidth + gap,
+            left: slide.splitImageOnLeft ? imgWidth + gap : 0,
+            right: slide.splitImageOnLeft ? 0 : imgWidth + gap,
             bottom: 0,
             child: LayoutBuilder(
               builder: (context, constraints) {

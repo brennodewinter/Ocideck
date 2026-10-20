@@ -1084,6 +1084,17 @@ save the comments are gone.
 </div>
 ```
 
+To place the side image on the left, add
+`<!-- ocideck_split_image_side: left -->` before the body. The same
+`split-image` div still identifies that image; its position changes, not the
+Markdown order or image path. Without the comment, the image remains on the
+right. The panel width in `_style` applies to the image on whichever side it
+appears. For the left layout, OciDeck also writes the derived
+`--split-direction: rtl` and padding values in `_style`, which the bundled
+Marp theme uses to draw that layout. The comment is the saved choice, including
+when the image slot is empty; Marp ignores it and still reads the text and
+image.
+
 **The `split-image` div decides which image is the side image.** On a slide whose
 body is rich text (§ *Rich text*), only a `![…](…)` **inside** that div becomes
 `imagePath`; one in the `split-text` half is an image in the running text and
@@ -1102,6 +1113,10 @@ body and is read down the bullet path.
 
 # Optional heading
 ```
+
+Swapping the images in the editor swaps the left/right image data and writes
+these same standard Marp background directives in the new order. It adds no
+separate swap flag.
 
 **Large image** (no class)
 ```markdown
@@ -3195,6 +3210,7 @@ are listed below in the same order the serializer writes them.)*
 | --- | --- |
 | `<!-- _class: ... -->` | Slide type + behavior (§4). |
 | `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout of a `split` slide. |
+| `<!-- ocideck_split_image_side: left -->` | Put the side image of a `split` slide on the left. Absent = image on the right (§5). |
 | `<!-- ocideck_two_bullets_left/right[_title]: <base64url> -->` | **Retired (0.1.0).** Was the canonical storage for the two bullet columns; the visible `<ul><li>` now carries them (§5). Still read from older files, dropped on save. |
 | `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). |
 | `<!-- ocideck_image_focus: x,y -->` | Image crop focal point (0..1 per axis, `0.5,0.5` = centre) for the slide's image. Decides which part stays in view when the picture is cropped (fill/zoom, or a fixed image panel). Written only when not centred. |

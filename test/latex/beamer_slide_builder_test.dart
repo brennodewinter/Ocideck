@@ -54,6 +54,29 @@ void main() {
       expect(out, contains(r'\end{itemize}'));
     });
 
+    test('bulletsImage zet de afbeelding links wanneer gevraagd', () {
+      String render({required bool imageOnLeft}) => buildBeamerBody(
+        Deck(
+          title: 'Test',
+          slides: [
+            Slide.create(SlideType.bulletsImage).copyWith(
+              bullets: const ['Tekst rechts'],
+              imagePath: 'links.png',
+              splitImageOnLeft: imageOnLeft,
+            ),
+          ],
+        ),
+      );
+
+      final left = render(imageOnLeft: true);
+      final right = render(imageOnLeft: false);
+      expect(left.indexOf('links.png'), lessThan(left.indexOf('Tekst rechts')));
+      expect(
+        right.indexOf('links.png'),
+        greaterThan(right.indexOf('Tekst rechts')),
+      );
+    });
+
     test('numbered bullets-slide wordt enumerate', () {
       final deck = Deck(
         title: 'Test',

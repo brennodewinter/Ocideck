@@ -623,6 +623,39 @@ void main() {
       expect(out.imageCaption, 'Een onderschrift');
     });
 
+    test('bulletsImage left side survives Markdown round-trip', () {
+      final slide = Slide.create(SlideType.bulletsImage).copyWith(
+        title: 'Profiel',
+        bullets: const ['Eerste punt'],
+        imagePath: 'images/portret.png',
+        splitImageOnLeft: true,
+      );
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'Demo', slides: [slide]),
+      );
+
+      expect(markdown, contains('<!-- ocideck_split_image_side: left -->'));
+      expect(markdown, isNot(contains('split-image-left')));
+      final out = _roundTrip(slide);
+      expect(out.type, SlideType.bulletsImage);
+      expect(out.splitImageOnLeft, isTrue);
+      expect(out.imagePath, slide.imagePath);
+      expect(out.bullets, slide.bullets);
+    });
+
+    test('bulletsImage remains image-right without a side directive', () {
+      final slide = Slide.create(
+        SlideType.bulletsImage,
+      ).copyWith(bullets: const ['Punt'], imagePath: 'images/portret.png');
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'Demo', slides: [slide]),
+      );
+
+      expect(markdown, contains('_class: split'));
+      expect(markdown, isNot(contains('ocideck_split_image_side')));
+      expect(_roundTrip(slide).splitImageOnLeft, isFalse);
+    });
+
     test('bulletsImage richText slide round-trips with custom markdown', () {
       const body = 'Dit is **vet** tekst\n\n- Een lijst in markdown';
       final out = _roundTrip(
@@ -647,6 +680,22 @@ void main() {
       expect(markdown, contains('ocideck_list_style: richText'));
       expect(markdown, contains('images/portret.png'));
       expect(markdown, contains('Dit is **vet** tekst'));
+    });
+
+    test('bulletsImage richText keeps the left image and body', () {
+      const body = 'Tekst **rechts** met een eigen ![grafiek](grafiek.png).';
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          listStyle: ListStyle.richText,
+          customMarkdown: body,
+          imagePath: 'images/links.png',
+          splitImageOnLeft: true,
+        ),
+      );
+
+      expect(out.splitImageOnLeft, isTrue);
+      expect(out.imagePath, 'images/links.png');
+      expect(out.customMarkdown, body);
     });
 
     test('an image inside the text survives next to the side image', () {

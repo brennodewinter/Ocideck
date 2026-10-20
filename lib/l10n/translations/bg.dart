@@ -463,8 +463,6 @@ const _dutchSourceBg = {
   'Zoom afbeelding': 'Мащаб на изображението',
   'Afbeelding (rechts)': 'Изображение (дясно)',
   'Bullets (links)': 'Водещи символи (ляво)',
-  'Breedte afbeeldingspaneel (rechts)':
-      'Ширина на панела с изображение (дясно)',
   'Linker afbeelding': 'Ляво изображение',
   'Rechter afbeelding': 'Дясно изображение',
   'Verdeling (links / rechts)': 'Разделяне (ляво / дясно)',
@@ -1626,6 +1624,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afbeeldingen omwisselen': 'Размени изображенията',
+  'Afbeelding links': 'Ляво изображение',
+  'Breedte afbeeldingspaneel': 'Ширина на панела с изображение',
+  'Bullets (rechts)': 'Водещи символи (дясно)',
+  'Tekst (rechts)': 'Текст (дясно)',
+  'Afbeelding (links)': 'Изображение (ляво)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" се среща два пъти (също на ред {regel}).',
   '"{waarde}" is geen getal voor {kolom}.': '"{waarde}" не е число за {kolom}.',

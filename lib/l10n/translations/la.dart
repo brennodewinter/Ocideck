@@ -462,7 +462,6 @@ const _dutchSourceLa = {
   'Zoom afbeelding': 'Amplificatio imaginis',
   'Afbeelding (rechts)': 'Imago (dextra)',
   'Bullets (links)': 'Notae (sinistra)',
-  'Breedte afbeeldingspaneel (rechts)': 'Latitudo tabulae imaginis (dextra)',
   'Linker afbeelding': 'Imago sinistra',
   'Rechter afbeelding': 'Imago dextra',
   'Verdeling (links / rechts)': 'Divisio (sinistra / dextra)',
@@ -1621,6 +1620,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeeldingen omwisselen': 'Imagines permutare',
+  'Afbeelding links': 'Imago sinistra',
+  'Breedte afbeeldingspaneel': 'Latitudo tabulae imaginis',
+  'Bullets (rechts)': 'Notae (dextra)',
+  'Tekst (rechts)': 'Textus (dextra)',
+  'Afbeelding (links)': 'Imago (sinistra)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" bis occurrit (etiam in linea {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

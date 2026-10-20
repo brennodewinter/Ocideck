@@ -54,7 +54,10 @@ final RegExp _styleImageWidthComment = RegExp(r'--image-width:\s*(\d+)%');
 
 String _splitImageWidthStyle(String slideMarkdown) {
   final m = _styleImageWidthComment.firstMatch(slideMarkdown);
-  return m == null ? '' : '--image-width:${m.group(1)}%';
+  final width = m == null ? '' : '--image-width:${m.group(1)}%';
+  const leftSide = '<!-- ocideck_split_image_side: left -->';
+  if (!slideMarkdown.contains(leftSide)) return width;
+  return '$width;--split-direction:rtl;--split-padding-left:0px;--split-padding-right:48px';
 }
 
 final RegExp _safeCssGradient = RegExp(

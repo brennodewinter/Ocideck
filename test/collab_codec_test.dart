@@ -64,6 +64,7 @@ Slide maximalSlide() => Slide(
   ),
   advanceDuration: 3.5,
   imageSize: 42,
+  splitImageOnLeft: true,
   titleImageOverlay: false,
   imageTitleAbove: true,
   titleTextColorOverride: '#FFFFFF',
@@ -156,6 +157,7 @@ void main() {
       expect(r.marpStyle, s.marpStyle);
       expect(r.advanceDuration, s.advanceDuration);
       expect(r.imageSize, s.imageSize);
+      expect(r.splitImageOnLeft, s.splitImageOnLeft);
       expect(r.titleImageOverlay, s.titleImageOverlay);
       expect(r.imageTitleAbove, s.imageTitleAbove);
       expect(r.titleTextColorOverride, s.titleTextColorOverride);
@@ -268,6 +270,13 @@ void main() {
           authorId: 'p',
           slideId: 's',
           field: SlideField.skipped,
+          value: true,
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.splitImageOnLeft,
           value: true,
         ),
         const SetSlideField(

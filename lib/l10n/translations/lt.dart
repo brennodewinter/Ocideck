@@ -461,8 +461,6 @@ const _dutchSourceLt = {
   'Zoom afbeelding': 'Paveikslėlio mastelis',
   'Afbeelding (rechts)': 'Paveikslėlis (dešinėje)',
   'Bullets (links)': 'Ženklai (kairėje)',
-  'Breedte afbeeldingspaneel (rechts)':
-      'Paveikslėlio srities plotis (dešinėje)',
   'Linker afbeelding': 'Kairysis paveikslėlis',
   'Rechter afbeelding': 'Dešinysis paveikslėlis',
   'Verdeling (links / rechts)': 'Padalijimas (kairė / dešinė)',
@@ -1613,6 +1611,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afbeeldingen omwisselen': 'Sukeisti paveikslėlius vietomis',
+  'Afbeelding links': 'Kairysis paveikslėlis',
+  'Breedte afbeeldingspaneel': 'Paveikslėlio srities plotis',
+  'Bullets (rechts)': 'Ženklai (dešinėje)',
+  'Tekst (rechts)': 'Tekstas (dešinėje)',
+  'Afbeelding (links)': 'Paveikslėlis (kairėje)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" pasitaiko du kartus (taip pat eilutėje {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

@@ -355,6 +355,8 @@ class EditorPanel extends ConsumerWidget {
       notes: slide.notes,
       advanceDuration: slide.advanceDuration,
       imageSize: slide.imageSize,
+      splitImageOnLeft:
+          newType == SlideType.bulletsImage && slide.splitImageOnLeft,
       showLogo: slide.showLogo,
       showFooter: slide.showFooter,
       tlp: slide.tlp,

@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Afbeeldingen wisselen bij twee indelingen (#2502).** Bij twee afbeeldingen
+  verwisselt één knop de linker- en rechterafbeelding met hun bijschrift,
+  alternatieve tekst, bijsnijbrandpunt en paneelbreedte. Bij bullets met afbeelding zet **Afbeelding
+  links** de afbeelding aan de andere kant; zonder die keuze blijft ze rechts.
+  De tweede indeling gebruikt het optionele `ocideck_split_image_side`-commentaar in de
+  deck-Markdown. Twee afbeeldingen houden hun bestaande Marp-indeling.
+
 - **Documentpresentatie met live tabelbewerking.** Een Markdown-document
   presenteer je nu zoals hij is — pagina voor pagina via dezelfde
   pagina-einden als de export (`---`, en hoofdstukken alleen als de

@@ -463,7 +463,6 @@ const _dutchSourceGsw = {
   'Zoom afbeelding': 'Bild-Zoom',
   'Afbeelding (rechts)': 'Bild (rächts)',
   'Bullets (links)': 'Bullets (links)',
-  'Breedte afbeeldingspaneel (rechts)': 'Breiti vom Bildpanel (rächts)',
   'Linker afbeelding': 'Links Bild',
   'Rechter afbeelding': 'Rächts Bild',
   'Verdeling (links / rechts)': 'Uufteilig (links / rächts)',
@@ -1609,6 +1608,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeeldingen omwisselen': 'Bilder vertuusche',
+  'Afbeelding links': 'Links Bild',
+  'Breedte afbeeldingspaneel': 'Breiti vom Bildpanel',
+  'Bullets (rechts)': 'Bullets (rächts)',
+  'Tekst (rechts)': 'Täxt (rächts)',
+  'Afbeelding (links)': 'Bild (links)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" chunnt zwee mol vor (au uf Zeile {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

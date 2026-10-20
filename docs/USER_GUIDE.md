@@ -779,6 +779,17 @@ Text fields support inline Markdown (`**bold**`, `*italic*`, `` `code` ``,
 highlighting, `$…$` / `$$…$$` LaTeX math, and ` ```mermaid ` diagrams (rendered
 in preview, presenter, PDF/PPTX, and HTML export).
 
+For a **bullets + image** slide, use **Image left** in its editor to put the
+picture on the left and the bullets (or rich text) on the right. Leave the switch
+off for the familiar text-left, image-right layout. The image-panel width
+control applies to the picture's side in either layout. The choice is saved in
+the deck as the optional `<!-- ocideck_split_image_side: left -->` comment; decks
+without it keep the image on the right. For a **two images** slide, **Swap images** exchanges the
+left and right pictures, including their captions, alt text, crop focal points
+and panel widths.
+The saved Markdown still uses the ordinary `![bg left:…]` and `![bg right:…]`
+images, so there is no extra layout marker for that action.
+
 ### Bullets and lists
 
 A bullets slide has an optional title and subheading and a list you edit row by

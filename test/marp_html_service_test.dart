@@ -775,6 +775,26 @@ void main() {}
       expect(html, contains('<section class="slide split"'));
     });
 
+    test(
+      'left image directive mirrors the split grid in HTML export',
+      () async {
+        final html = await exportHtml([
+          Slide.create(SlideType.bulletsImage).copyWith(
+            bullets: const ['Een'],
+            imagePath: 'foto.png',
+            imageSize: 55,
+            splitImageOnLeft: true,
+          ),
+        ]);
+        expect(html, contains('class="slide split"'));
+        expect(html, contains('direction:var(--split-direction,ltr)'));
+        expect(html, contains('--split-direction:rtl'));
+        expect(html, contains('--split-padding-left:0px'));
+        expect(html, contains('--split-padding-right:48px'));
+        expect(html, contains('--image-width:55%'));
+      },
+    );
+
     test('split CSS rules are present in the export stylesheet', () async {
       final html = await exportHtml([
         Slide.create(SlideType.bulletsImage).copyWith(

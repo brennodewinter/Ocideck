@@ -649,6 +649,12 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Afbeeldingen omwisselen': 'Intercambiar imágenes',
+  'Afbeelding links': 'Imagen izquierda',
+  'Breedte afbeeldingspaneel': 'Ancho del panel de imagen',
+  'Bullets (rechts)': 'Viñetas (derecha)',
+  'Tekst (rechts)': 'Texto (derecha)',
+  'Afbeelding (links)': 'Imagen (izquierda)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" aparece dos veces (también en la línea {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':
@@ -4913,7 +4919,6 @@ const _dutchSourceAddEs = {
   'Titeltekstkleur': 'Color del texto del título',
   'Knippen': 'Recorte',
   'Geen achtergrondafbeelding': 'Sin imagen de fondo',
-  'Breedte afbeeldingspaneel (rechts)': 'Ancho del panel de imagen (derecha)',
   'Verdeling (links / rechts)': 'División (izquierda / derecha)',
   'TYPE': 'TIPO',
   'STIJL': 'ESTILO',

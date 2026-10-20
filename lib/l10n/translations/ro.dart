@@ -462,7 +462,6 @@ const _dutchSourceRo = {
   'Zoom afbeelding': 'Zoom imagine',
   'Afbeelding (rechts)': 'Imagine (dreapta)',
   'Bullets (links)': 'Bullets (stânga)',
-  'Breedte afbeeldingspaneel (rechts)': 'Lățime panou imagine (dreapta)',
   'Linker afbeelding': 'Imagine stânga',
   'Rechter afbeelding': 'Imagine dreapta',
   'Verdeling (links / rechts)': 'Împărțire (stânga / dreapta)',
@@ -1622,6 +1621,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeeldingen omwisselen': 'Schimbă imaginile între ele',
+  'Afbeelding links': 'Imagine stânga',
+  'Breedte afbeeldingspaneel': 'Lățime panou imagine',
+  'Bullets (rechts)': 'Bullets (dreapta)',
+  'Tekst (rechts)': 'Text (dreapta)',
+  'Afbeelding (links)': 'Imagine (stânga)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       '"{id}" apare de două ori (și la linia {regel}).',
   '"{waarde}" is geen getal voor {kolom}.':

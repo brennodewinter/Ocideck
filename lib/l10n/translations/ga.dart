@@ -467,7 +467,6 @@ const _dutchSourceGa = {
   'Zoom afbeelding': 'Zúmáil íomhá',
   'Afbeelding (rechts)': 'Íomhá (ar dheis)',
   'Bullets (links)': 'Urchair (ar chlé)',
-  'Breedte afbeeldingspaneel (rechts)': 'Leithead an phainéil íomhá (ar dheis)',
   'Linker afbeelding': 'Íomhá chlé',
   'Rechter afbeelding': 'Íomhá dheas',
   'Verdeling (links / rechts)': 'Roinnt (clé / deas)',
@@ -1636,6 +1635,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeeldingen omwisselen': 'Malartaigh na híomhánna',
+  'Afbeelding links': 'Íomhá chlé',
+  'Breedte afbeeldingspaneel': 'Leithead an phainéil íomhá',
+  'Bullets (rechts)': 'Urchair (ar dheis)',
+  'Tekst (rechts)': 'Téacs (ar dheis)',
+  'Afbeelding (links)': 'Íomhá (ar chlé)',
   '"{id}" komt twee keer voor (ook op regel {regel}).':
       'Tagann "{id}" faoi dhó (ar líne {regel} freisin).',
   '"{waarde}" is geen getal voor {kolom}.':

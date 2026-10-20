@@ -446,10 +446,9 @@ class Slide {
   final List<String> preservedMarpLines;
   final MarpStyle marpStyle;
   final double advanceDuration; // 0 = no auto-advance
-  final int imageSize; // 0 = auto; image: bg %, bulletsImage: right panel %
-  /// Panel-image zoom for bulletsImage/twoImages: 0 = cover (vult slot, snijdt
-  /// bij), 100 = hele afbeelding zichtbaar (contain), >100 = inzoomen. Full-
-  /// bleed slots (image/title/section) gebruiken [imageSize] voor zoom.
+  final int imageSize; // 0 = auto; image: bg %, bulletsImage: panel %
+  final bool splitImageOnLeft; // absent marker keeps the image on the right
+  /// Panel zoom: 0 = cover, 100 = contain, >100 = zoom; full-bleed uses [imageSize].
   final int imageZoom;
   final bool titleImageOverlay; // darken title background image for readability
   final bool
@@ -705,6 +704,7 @@ class Slide {
     this.marpStyle = const MarpStyle(),
     this.advanceDuration = 0,
     this.imageSize = 0,
+    this.splitImageOnLeft = false,
     this.imageZoom = 0,
     this.titleImageOverlay = true,
     this.imageTitleAbove = false,
@@ -879,6 +879,7 @@ class Slide {
       marpStyle: src.marpStyle,
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
+      splitImageOnLeft: src.splitImageOnLeft,
       imageZoom: src.imageZoom,
       titleImageOverlay: src.titleImageOverlay,
       imageTitleAbove: src.imageTitleAbove,
@@ -958,6 +959,7 @@ class Slide {
     MarpStyle? marpStyle,
     double? advanceDuration,
     int? imageSize,
+    bool? splitImageOnLeft,
     int? imageZoom,
     bool? titleImageOverlay,
     bool? imageTitleAbove,
@@ -1043,6 +1045,7 @@ class Slide {
     marpStyle: marpStyle ?? this.marpStyle,
     advanceDuration: advanceDuration ?? this.advanceDuration,
     imageSize: imageSize ?? this.imageSize,
+    splitImageOnLeft: splitImageOnLeft ?? this.splitImageOnLeft,
     imageZoom: imageZoom ?? this.imageZoom,
     titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
     imageTitleAbove: imageTitleAbove ?? this.imageTitleAbove,
