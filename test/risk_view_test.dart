@@ -117,6 +117,39 @@ void main() {
       expect(ociViewMaterialize(RiskDossier.read(_dossier), view), isNull);
     });
 
+    test('kans × impact-klasse bandt het product deterministisch', () {
+      const li = '''
+<!-- ocideck:risks v1 id=ki method=likelihood-impact scale=li-1-5 rev=1 next=3 cols=id,event,l_b,i_b,l_n,i_n -->
+| ID | Gebeurtenis | K b | I b | K n | I n |
+|---|---|---|---|---|---|
+| R-1 | Brand in opslag | 4 | 4 | 1 | 4 |
+| R-2 | Stroomuitval | 2 | 2 | | |
+''';
+      final view = _view(
+        'source=ki projection=prioriteit sort=priority gen=1',
+        const ['| ID |', '|---|'],
+      );
+      // De fixturetabel heet ki; bouw hem uit de li-bron.
+      final source = '$li\n';
+      final t = scanOciMarkedTables(source + 'x').tables.first;
+      expect(t.id, 'ki');
+      final rows = ociViewMaterialize(
+        RiskDossier.read(li),
+        scanOciMarkedTables(
+          '$li\n<!-- ocideck:view v1 source=ki projection=prioriteit sort=priority gen=1 -->\n| ID |\n|---|',
+        ).tables.last,
+      )!.skip(1).toList();
+      // Prioriteit ordent op residu-score (netto ?? bruto): R-1 residu
+      // 4, R-2 bruto 4 — de tiebreak op kans zet R-2 (l=2) voor.
+      expect(rows[0].first, 'R-2');
+      expect(rows[0].last, 'laag'); // bruto 4 → 'laag'
+      // R-1: bruto 16 → 'hoog' (klasse hoort bij dezelfde headline-score).
+      expect(rows[1].first, 'R-1');
+      expect(rows[1][rows[1].length - 2], '16'); // score = bruto
+      expect(rows[1].last, 'hoog');
+      expect(view.id, isNull);
+    });
+
     test('afgeleide rpn materialiseert, onbekend rendert —', () {
       final view = _view('source=hoofd cols=id,rpn,rpn_n gen=3', const [
         '| ID |',

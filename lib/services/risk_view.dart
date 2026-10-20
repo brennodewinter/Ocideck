@@ -19,7 +19,30 @@ import 'table_sort.dart';
 
 /// Afgeleide kolomsleutels die een weergave mag noemen — geen contractkeys
 /// in de bron, wel materialiseerbaar als zichtbare waarde (§3.3).
-const _derivedKeys = {'rpn', 'rpn_b', 'rpn_n', 'score', 'score_b', 'score_n'};
+const _derivedKeys = {
+  'rpn',
+  'rpn_b',
+  'rpn_n',
+  'score',
+  'score_b',
+  'score_n',
+  'klasse',
+  'klasse_b',
+  'klasse_n',
+};
+
+/// De benoemde bandregel voor kans × impact op `li-1-5` (§3.3, #2494):
+/// het product 1–25 valt in vier klassen. Transparant en deterministisch;
+/// op een andere schaal is de klasse '—', geen geraden label.
+String? _riskClass(int? score) {
+  if (score == null || score < 1 || score > 25) return null;
+  return switch (score) {
+    <= 4 => 'laag',
+    <= 9 => 'midden',
+    <= 16 => 'hoog',
+    _ => 'zeer hoog',
+  };
+}
 
 /// De benoemde projecties uit §3.6, per methode opgelost naar
 /// contractkolommen. `null` = de naam is geen projectie — dan geldt `cols=`
@@ -71,6 +94,7 @@ List<String>? ociViewProjectionCols(
     'l_n',
     'i_n',
     'score',
+    'klasse',
   ],
   _ => null,
 };
@@ -144,6 +168,11 @@ String _viewCell(RiskRecord record, String key) {
     'score' => record.scoreBruto ?? record.rpnBruto,
     'score_b' => record.scoreBruto,
     'score_n' => record.scoreNetto,
+    // 'klasse' hoort bij dezelfde kopregel-score als 'score'/'rpn' —
+    // de bruto-waarde. Netto en bruto apart staan in klasse_b/klasse_n.
+    'klasse' => _riskClass(record.scoreBruto ?? record.rpnBruto),
+    'klasse_b' => _riskClass(record.scoreBruto),
+    'klasse_n' => _riskClass(record.scoreNetto),
     _ => null,
   };
   if (_derivedKeys.contains(key)) {

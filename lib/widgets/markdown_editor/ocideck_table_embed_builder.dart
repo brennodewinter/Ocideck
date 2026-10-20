@@ -567,10 +567,13 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
     final id = marker.attr('id');
     final source = marker.attr('source');
     final method = marker.attr('method');
+    final scale = marker.attr('scale');
     final parts = <String>[
       kind,
       if (id != null) '· $id',
       if (method != null) '· $method',
+      // De gebruikte schaal hoort zichtbaar naast de scores (#2494).
+      if (scale != null) '· ${l10n.d('schaal')}: $scale',
       if (marker.kind == OciMarkerKinds.view && source != null)
         '· ${l10n.d('bron')}: $source',
     ];

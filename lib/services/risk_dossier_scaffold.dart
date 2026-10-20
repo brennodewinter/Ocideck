@@ -64,6 +64,9 @@ const ociContractHeaderLabels = <String, String>{
   'score': 'Score',
   'score_b': 'Score b',
   'score_n': 'Score n',
+  'klasse': 'Klasse',
+  'klasse_b': 'Klasse b',
+  'klasse_n': 'Klasse n',
 };
 
 /// De contractkolommen van een `risks`-tabel per methode (§3.3).
@@ -94,6 +97,7 @@ List<String> ociRiskContractCols(RiskMethod method) => switch (method) {
     'existing_measures',
     'l_b',
     'i_b',
+    'evidence',
     'measures',
     'l_n',
     'i_n',
