@@ -43,6 +43,10 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertSpacer;
   final VoidCallback onInsertFootnote;
 
+  /// Nieuw risicodossier (FMEA / kans × impact / Bowtie) met methodekeuze —
+  /// #2492. Opent een dialoog; zelf geen gewone blokinvoeging.
+  final VoidCallback onInsertRiskDossier;
+
   /// Staan de voetnoten van dít document achterin in plaats van onderaan de
   /// bladzijde, en de omschakeling ervoor. De keuze landt in de front matter
   /// van het document zelf.
@@ -103,6 +107,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertToc,
     required this.onInsertSpacer,
     required this.onInsertFootnote,
+    required this.onInsertRiskDossier,
     required this.footnotesAtEnd,
     required this.onFootnotesAtEndChanged,
     required this.onApplyChapterBreaks,
@@ -388,6 +393,7 @@ class _DocEditorToolbar extends StatelessWidget {
         10 => onInsertSpacer(),
         7 => onApplyChapterBreaks(),
         8 => onInsertFootnote(),
+        11 => onInsertRiskDossier(),
         _ => onPaste(),
       },
       itemBuilder: (context) => [
@@ -404,6 +410,7 @@ class _DocEditorToolbar extends StatelessWidget {
         _insertItem(10, Icons.space_bar_outlined, l10n.d('Extra ruimte')),
         _insertItem(6, Icons.list_outlined, l10n.d('Inhoudsopgave')),
         _insertItem(8, Icons.superscript, l10n.d('Voetnoot')),
+        _insertItem(11, Icons.policy_outlined, l10n.d('Risicodossier…')),
         const PopupMenuDivider(),
         _insertItem(
           7,

@@ -5,8 +5,13 @@ import 'package:markdown_quill/markdown_quill.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../../services/markdown_table_codec.dart';
 import '../../services/document_timeline.dart';
+import '../../services/risk_dossier.dart';
+import '../../services/risk_dossier_scaffold.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/markdown_quill_codec.dart';
+import '../../utils/ocideck_table_embed_syntax.dart';
 import '../../utils/timeline_table_embed_syntax.dart';
+import 'risk_import_dialog.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
 import 'markdown_editor_theme.dart';
@@ -136,6 +141,48 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
     }
   }
 
+  /// "Als risicoregister markeren…" (#2492): de expliciete kolommapping uit
+  /// §7 — de gebruiker wijst toe welke kolom welke contractbetekenis heeft,
+  /// ongemapte kolommen reizen als `x-*` mee en rijen zonder ID krijgen een
+  /// vers `R-###` voorbij het hoogste nummer in dit document.
+  Future<void> _asRiskRegister() async {
+    final decoded = decodeMarkdownTableRows(
+      _binding.tableSource.trimRight().split('\n'),
+    );
+    if (decoded.length < 2) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'Deze tabel heeft geen rijen om als risico vast te leggen.',
+            ),
+          ),
+        ),
+      );
+      return;
+    }
+    final choice = await showRiskImportDialog(context, decoded.first);
+    if (!mounted || choice == null) return;
+    // Nummer door vanaf het hoogste R-### dat dit document al kent — een ID
+    // wordt nooit hergebruikt (§3.1).
+    final docMarkdown = MarkdownQuillCodec.markdownFromDocument(
+      widget.embedContext.controller.document,
+    );
+    final result = importTableAsRiskRegister(
+      _binding.tableSource.trimRight().split('\n'),
+      choice.method,
+      mapping: choice.mapping,
+      startNext: ociNextFreeRiskNumber(docMarkdown),
+    );
+    _binding.clearPending();
+    _binding.replaceSource(
+      result.markdown,
+      discrete: true,
+      onDiscreteEdit: widget.onDiscreteEdit,
+      embed: EmbeddableOciMarkedTable(result.markdown),
+    );
+  }
+
   Future<void> _asTimeline() async {
     final current = _binding.tableSource;
     final lines = current.trimRight().split('\n');
@@ -232,10 +279,20 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
       if (_canBecomeTimeline)
         Align(
           alignment: Alignment.centerRight,
-          child: TextButton.icon(
-            onPressed: () => _asTimeline(),
-            icon: const Icon(Icons.timeline_outlined),
-            label: Text(context.l10n.d('Als tijdlijn weergeven')),
+          child: Wrap(
+            spacing: 4,
+            children: [
+              TextButton.icon(
+                onPressed: () => _asRiskRegister(),
+                icon: const Icon(Icons.policy_outlined),
+                label: Text(context.l10n.d('Als risicoregister markeren…')),
+              ),
+              TextButton.icon(
+                onPressed: () => _asTimeline(),
+                icon: const Icon(Icons.timeline_outlined),
+                label: Text(context.l10n.d('Als tijdlijn weergeven')),
+              ),
+            ],
           ),
         ),
       DocumentMarkdownView(

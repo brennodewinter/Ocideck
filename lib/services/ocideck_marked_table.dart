@@ -243,6 +243,32 @@ String rewriteOciMarkedTable(
   return lines.join('\n');
 }
 
+/// Splitst één gecombineerd markerblok (zoals het in de atomaire embed of in
+/// [OciMarkedTable] zit) in zijn markerregels en de tabelbron. De visuele
+/// editor bewerkt de tabel en schrijft hem met [markOciTable] weer bij de
+/// markers terug — dezelfde rol als `unmarkTimeline`/`markTableAsTimeline`.
+({List<String> markerLines, String table}) splitOciMarkedBlock(String source) {
+  final lines = source.split('\n');
+  final markers = <String>[];
+  var i = 0;
+  while (i < lines.length && isOciTableMarkerLine(lines[i])) {
+    markers.add(lines[i]);
+    i++;
+  }
+  // Witregels tussen markerblok en tabel (§2) zijn opmaak, geen inhoud:
+  // bij terugschrijven staat de marker direct boven de tabel — de canonieke
+  // vorm die ook de atomaire embed spreekt.
+  while (i < lines.length && lines[i].trim().isEmpty) {
+    i++;
+  }
+  return (markerLines: markers, table: lines.sublist(i).join('\n'));
+}
+
+/// Zet [markerLines] weer direct boven de tabel — de bindingsvorm die zowel
+/// de scanner als de atomaire embed als één contract leest.
+String markOciTable(List<String> markerLines, String tableSource) =>
+    [...markerLines, tableSource].join('\n');
+
 /// Zet op de draagende marker van [table] het attribuut [key] op [value]
 /// (`null` verwijdert) en schrijft het blok terug — de andere markerregels
 /// (o.a. gestapelde `calc`'s) en de tabel zelf blijven byte-getrouw.

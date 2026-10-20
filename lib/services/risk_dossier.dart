@@ -109,6 +109,31 @@ String ociContractIdPrefix(OciMarkedTable table) => switch (table.kind) {
 String formatOciContractId(String prefix, int n) =>
     '$prefix-${n.toString().padLeft(3, '0')}';
 
+/// Het eerste vrije `R-###`-nummer voor een nieuw register in [source]:
+/// één hoger dan het grootste `R-###` dat in de gemarkeerde tabellen van dit
+/// bestand voorkomt — óók in verwijzingsvelden als `measures`/`risks`, zodat
+/// een verwijderd risico zijn ID nooit terugkrijgt (§3.1). Geen gemarkeerde
+/// inhoud → `1`.
+int ociNextFreeRiskNumber(String source) {
+  final pattern = RegExp(r'\bR-(\d+)');
+  var max = 0;
+  for (final t in scanOciMarkedTables(source).tables) {
+    for (final row in t.decodedRows) {
+      for (final cell in row) {
+        for (final m in pattern.allMatches(cell)) {
+          final n = int.parse(m.group(1)!);
+          if (n > max) max = n;
+        }
+      }
+    }
+    final next = t.next;
+    if (t.kind == OciMarkerKinds.risks && next != null && next - 1 > max) {
+      max = next - 1;
+    }
+  }
+  return max + 1;
+}
+
 /// Kent het volgende contract-ID uit op [table]: `R-###`/`M-###` uit de
 /// `next=`-teller van de marker, die meteen wordt opgehoogd — een ID wordt
 /// per bestand nooit hergebruikt, óók niet na verwijderen (§3.1).

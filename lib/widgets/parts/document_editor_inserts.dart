@@ -42,6 +42,136 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
     );
   }
 
+  /// Voeg een nieuw risicodossier in (#2492): de methodekeuze in gewone taal,
+  /// dan het gemarkeerde contractblok op de cursor. De tabellen komen leeg —
+  /// "nog niet beoordeeld" is de beginstand; er wordt nooit een score
+  /// voorgeschreven (RISK_FORMAT §9). Het maatregelenregister staat standaard
+  /// aan: risico en maatregel horen bij elkaar, en een leeg register is één
+  /// verwijdering, geen opgelegde structuur.
+  Future<void> _insertRiskDossier() async {
+    final l10n = context.l10n;
+    final choice = await showDialog<(RiskMethod, bool, RiskDossierContext)>(
+      context: context,
+      builder: (dialogContext) {
+        var method = RiskMethod.fmea;
+        var withMeasures = true;
+        final purpose = TextEditingController();
+        final assessor = TextEditingController();
+        final date = TextEditingController(
+          text:
+              '${DateTime.now().year}-'
+              '${DateTime.now().month.toString().padLeft(2, '0')}-'
+              '${DateTime.now().day.toString().padLeft(2, '0')}',
+        );
+        return StatefulBuilder(
+          builder: (context, setDialog) => AlertDialog(
+            title: Text(l10n.d('Nieuw risicodossier')),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: purpose,
+                    decoration: InputDecoration(
+                      labelText: l10n.d('Doel van de beoordeling'),
+                      hintText: l10n.d('Wat beoordeel je en waarvoor?'),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: assessor,
+                    decoration: InputDecoration(
+                      labelText: l10n.d('Beoordelaar (naam/rol)'),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: date,
+                    decoration: InputDecoration(labelText: l10n.d('Datum')),
+                  ),
+                  const SizedBox(height: 8),
+                  RadioGroup<RiskMethod>(
+                    groupValue: method,
+                    onChanged: (v) => setDialog(() => method = v!),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        RadioListTile<RiskMethod>(
+                          value: RiskMethod.fmea,
+                          title: const Text('FMEA'),
+                          subtitle: Text(
+                            l10n.d(
+                              'Faalwijzen met ernst, kans en detectie (S×O×D)',
+                            ),
+                          ),
+                        ),
+                        RadioListTile<RiskMethod>(
+                          value: RiskMethod.likelihoodImpact,
+                          title: Text(l10n.d('Kans × impact')),
+                          subtitle: Text(
+                            l10n.d(
+                              'Een eenvoudige inschatting: hoe waarschijnlijk × '
+                              'hoe groot het gevolg',
+                            ),
+                          ),
+                        ),
+                        RadioListTile<RiskMethod>(
+                          value: RiskMethod.bowtie,
+                          title: const Text('Bowtie'),
+                          subtitle: Text(
+                            l10n.d(
+                              'Dreigingen, barrières en gevolgen rond één '
+                              'gebeurtenis',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  CheckboxListTile(
+                    value: withMeasures,
+                    onChanged: (v) => setDialog(() => withMeasures = v ?? true),
+                    title: Text(l10n.d('Maatregelenregister toevoegen')),
+                    subtitle: Text(
+                      l10n.d('Een lege tabel voor maatregelen met levensfase'),
+                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: Text(l10n.d('Annuleren')),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(dialogContext, (
+                  method,
+                  withMeasures,
+                  RiskDossierContext(
+                    purpose: purpose.text.trim(),
+                    assessor: assessor.text.trim(),
+                    date: date.text.trim(),
+                  ),
+                )),
+                child: Text(l10n.d('Invoegen')),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+    if (choice == null || !mounted) return;
+    _insertBlock(
+      riskDossierScaffold(
+        choice.$1,
+        withMeasures: choice.$2,
+        context: choice.$3,
+      ),
+    );
+  }
+
   /// Voeg een tijdlijn in als gemarkeerde tabel met de drie koppen. Een datum
   /// is de veilige standaard: tijd is optioneel en wordt pas bij het kiezen van
   /// een echt tijdstip als UTC opgeslagen.

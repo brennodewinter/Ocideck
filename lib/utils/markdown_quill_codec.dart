@@ -14,6 +14,7 @@ import 'pentest_block_embed_syntax.dart';
 import 'source_fragment_embed_syntax.dart';
 import 'toc_embed_syntax.dart';
 import 'spacer_embed_syntax.dart';
+import 'ocideck_table_embed_syntax.dart';
 import 'timeline_table_embed_syntax.dart';
 
 /// Round-trip conversion between stored markdown and a Quill document.
@@ -53,6 +54,10 @@ class MarkdownQuillCodec {
       // anders, maar de syntax moet vóór de standaard-alinearegel staan.
       SourceFragmentSyntax(),
       TimelineTableSyntax(),
+      // Het risicodossier-contract (RISK_FORMAT §5): een `<!-- ocideck:* -->
+      // -markerblok plus de tabel eronder is één atomaire embed. Vóór de
+      // HTML-blokregel, anders slokt die het commentaar op.
+      OciMarkedTableSyntax(),
       // De twee pentest-syntaxen delen één patroon (de markerregel) en sluiten
       // elkaar uit op `canParse`: de bevindingkop tegenover de vier enveloppen
       // die in hun geheel atomair zijn. Ze staan vóór de HTML-blokregel, anders
@@ -83,6 +88,7 @@ class MarkdownQuillCodec {
     customElementToEmbeddable: {
       EmbeddableTimelineTable.timelineType:
           EmbeddableTimelineTable.fromMdSyntax,
+      EmbeddableOciMarkedTable.blockType: EmbeddableOciMarkedTable.fromMdSyntax,
       EmbeddablePentestBlock.blockType: EmbeddablePentestBlock.fromMdSyntax,
       EmbeddableFormBlock.blockType: EmbeddableFormBlock.fromMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
@@ -99,6 +105,7 @@ class MarkdownQuillCodec {
   static final _deltaToMd = DeltaToMarkdown(
     customEmbedHandlers: {
       EmbeddableTimelineTable.timelineType: EmbeddableTimelineTable.toMdSyntax,
+      EmbeddableOciMarkedTable.blockType: EmbeddableOciMarkedTable.toMdSyntax,
       EmbeddablePentestBlock.blockType: EmbeddablePentestBlock.toMdSyntax,
       EmbeddableFormBlock.blockType: EmbeddableFormBlock.toMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
