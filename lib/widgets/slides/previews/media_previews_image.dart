@@ -488,7 +488,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
   }
 
   final tint = _placeholderTint(context);
-  return Container(
+  final fullPlaceholder = Container(
     color: tint.fill,
     padding: const EdgeInsets.all(16),
     child: Center(
@@ -550,6 +550,32 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
         ],
       ),
     ),
+  );
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      // A video embed can be much smaller than its slide in the thumbnail rail.
+      // Keep the reason visible there without laying out the URL and settings
+      // action in a slot that cannot fit them.
+      if (constraints.maxHeight < 180 || constraints.maxWidth < 220) {
+        return Container(
+          color: tint.fill,
+          padding: const EdgeInsets.all(4),
+          alignment: Alignment.center,
+          child: Text(
+            title,
+            style: TextStyle(
+              color: tint.text,
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        );
+      }
+      return fullPlaceholder;
+    },
   );
 }
 

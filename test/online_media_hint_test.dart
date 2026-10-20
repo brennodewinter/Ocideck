@@ -107,4 +107,35 @@ void main() {
       reason: 'buiten de editor is de instelling niet te openen, dus geen knop',
     );
   });
+
+  testWidgets('geblokkeerde online video past in een kleine thumbnail', (
+    tester,
+  ) async {
+    final slide = Slide.create(
+      SlideType.video,
+    ).copyWith(videoPath: 'https://youtu.be/dQw4w9WgXcQ');
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [AppLocalizations.delegate],
+        locale: const Locale('nl'),
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 134,
+              height: 75.375,
+              child: SlidePreviewWidget(slide: slide, allowRemoteMedia: false),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Online media staat uit'), findsOneWidget);
+    expect(
+      tester.takeException(),
+      isNull,
+      reason:
+          'de melding mag buiten de zichtbare thumbnail geen RenderFlex-overloop veroorzaken',
+    );
+  });
 }
