@@ -23,7 +23,7 @@ Future<File> _writeRedPng(String dir) async {
 }
 
 void main() {
-  testWidgets('bulletsImage paints the image on the right panel', (
+  testWidgets('bulletsImage paints the image on its selected side', (
     tester,
   ) async {
     await tester.runAsync(() async {
@@ -45,57 +45,60 @@ void main() {
         imageSize: 40,
       );
 
-      final key = GlobalKey();
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Center(
-              child: RepaintBoundary(
-                key: key,
-                child: SizedBox(
-                  width: 800,
-                  height: 450,
-                  child: SlidePreviewWidget(
-                    slide: slide,
-                    projectPath: dir.path,
+      for (final imageOnLeft in [false, true]) {
+        final key = GlobalKey();
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: RepaintBoundary(
+                  key: key,
+                  child: SizedBox(
+                    width: 800,
+                    height: 450,
+                    child: SlidePreviewWidget(
+                      slide: slide.copyWith(splitImageOnLeft: imageOnLeft),
+                      projectPath: dir.path,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      );
+        );
 
-      // Let the file image decode and paint.
-      await Future<void>.delayed(const Duration(milliseconds: 300));
-      await tester.pump();
+        // Let the file image decode and paint.
+        await Future<void>.delayed(const Duration(milliseconds: 300));
+        await tester.pump();
 
-      final boundary =
-          key.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final image = await boundary.toImage(pixelRatio: 1.0);
-      final bytes = (await image.toByteData(
-        format: ui.ImageByteFormat.rawRgba,
-      ))!.buffer.asUint8List();
+        final boundary =
+            key.currentContext!.findRenderObject() as RenderRepaintBoundary;
+        final image = await boundary.toImage(pixelRatio: 1.0);
+        final bytes = (await image.toByteData(
+          format: ui.ImageByteFormat.rawRgba,
+        ))!.buffer.asUint8List();
 
-      ({int r, int g, int b}) pixelAt(int x, int y) {
-        final i = (y * image.width + x) * 4;
-        return (r: bytes[i], g: bytes[i + 1], b: bytes[i + 2]);
+        ({int r, int g, int b}) pixelAt(int x, int y) {
+          final i = (y * image.width + x) * 4;
+          return (r: bytes[i], g: bytes[i + 1], b: bytes[i + 2]);
+        }
+
+        final right = pixelAt((image.width * 0.95).round(), image.height ~/ 2);
+        final left = pixelAt((image.width * 0.05).round(), image.height ~/ 2);
+        final imageSide = imageOnLeft ? left : right;
+        final textSide = imageOnLeft ? right : left;
+        expect(
+          imageSide.r > 200 && imageSide.g < 80 && imageSide.b < 80,
+          isTrue,
+          reason:
+              'Image panel should be red (left: $imageOnLeft) but was $imageSide',
+        );
+        expect(
+          textSide.r,
+          greaterThan(200),
+          reason: 'Text panel background should be white (left: $imageOnLeft)',
+        );
       }
-
-      // Right 40% panel must be the (red) image; left panel the white text bg.
-      final right = pixelAt((image.width * 0.95).round(), image.height ~/ 2);
-      final left = pixelAt((image.width * 0.05).round(), image.height ~/ 2);
-
-      expect(
-        right.r > 200 && right.g < 80 && right.b < 80,
-        isTrue,
-        reason: 'Image panel should be red but was $right',
-      );
-      expect(
-        left.r,
-        greaterThan(200),
-        reason: 'Text panel background should be white',
-      );
 
       dir.deleteSync(recursive: true);
     });

@@ -822,6 +822,21 @@ marp: true
       );
     });
 
+    test('does not warn on the left split-image directive', () {
+      const md =
+          '---\nmarp: true\n---\n\n<!-- _class: split -->\n'
+          '<!-- ocideck_split_image_side: left -->\n\n'
+          '<div class="split-text">\n\n- Punt\n\n</div>\n'
+          '<div class="split-image">\n\n![](foto.png)\n\n</div>\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any(
+          (i) => i.message.contains('ocideck_split_image_side'),
+        ),
+        isFalse,
+      );
+    });
+
     test('warns on an unsupported scoped Marp directive', () {
       const md =
           '---\nmarp: true\n---\n\n<!-- _paginate: false -->\n\n# Slide\n';

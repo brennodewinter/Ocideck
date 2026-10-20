@@ -150,6 +150,7 @@ const kSupportedCommentDirectives = {
   'ocideck_checklist_scope',
   'ocideck_continue_numbering',
   'ocideck_continue_split',
+  'ocideck_split_image_side',
   'ocideck_title_image_overlay',
   'ocideck_title_text_color',
   'ocideck_bullet_marker',

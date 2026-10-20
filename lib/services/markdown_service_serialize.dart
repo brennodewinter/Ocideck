@@ -221,8 +221,11 @@ extension _MarkdownSerialize on MarkdownService {
       final pct = (slide.imageSize > 0 ? slide.imageSize : 40).clamp(20, 70);
       final textScale = _splitTextScale(slide);
       buf.writeln(
-        '<!-- _style: --image-width: $pct%; --split-text-scale: ${textScale.toStringAsFixed(2)}; -->',
+        '<!-- _style: --image-width: $pct%; --split-text-scale: ${textScale.toStringAsFixed(2)};${slide.splitImageOnLeft ? ' --split-direction: rtl; --split-padding-left: 0px; --split-padding-right: 48px;' : ''} -->',
       );
+      if (slide.splitImageOnLeft) {
+        buf.writeln('<!-- ocideck_split_image_side: left -->');
+      }
       buf.writeln();
       buf.writeln(
         '<div class="split-text" style="font-size: ${textScale.toStringAsFixed(2)}em">',
@@ -244,6 +247,9 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln();
       buf.writeln('</div>');
     } else {
+      if (slide.splitImageOnLeft) {
+        buf.writeln('<!-- ocideck_split_image_side: left -->');
+      }
       if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
       if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
       _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);

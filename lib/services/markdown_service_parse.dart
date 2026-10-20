@@ -32,6 +32,9 @@ final _reBgSideWidth = RegExp(r'!\[bg[^\]]*?(?:left|right):(\d+)%');
 final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
+final _reSplitImageSide = RegExp(
+  r'^<!--\s*ocideck_split_image_side:\s*(left|right)\s*-->$',
+);
 
 /// `_class`-tokens van opgeheven slidetypes en het type dat ze nu opleveren.
 ///
@@ -530,6 +533,17 @@ extension _MarkdownParse on MarkdownService {
     final showFooter = !classTokens.contains('no-footer');
     final imageTitleAbove =
         type == SlideType.image && classTokens.contains('image-title-above');
+    final splitImageOnLeft =
+        type == SlideType.bulletsImage &&
+        d.preservedMarpLines.any(
+          (line) =>
+              _reSplitImageSide.firstMatch(line.trim())?.group(1) == 'left',
+        );
+    if (type == SlideType.bulletsImage) {
+      d.preservedMarpLines.removeWhere(
+        (line) => _reSplitImageSide.hasMatch(line.trim()),
+      );
+    }
 
     final effectiveClass = classTokens
         .where(
@@ -573,6 +587,7 @@ extension _MarkdownParse on MarkdownService {
       imageSize: titleColumns.imageSize,
       titleImageOverlay: d.titleImageOverlay,
       imageTitleAbove: imageTitleAbove,
+      splitImageOnLeft: splitImageOnLeft,
       titleTextColorOverride: d.titleTextColorOverride,
       titleColumnLayout: titleColumns.layout,
       titleColumnWidth: titleColumns.width,

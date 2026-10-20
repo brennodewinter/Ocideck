@@ -72,13 +72,17 @@ section.split {
   --image-width: 40%;
   --split-margin: 48px;
   --split-text-scale: 1;
+  --split-padding-left: var(--split-margin);
+  --split-padding-right: 0px;
   display: grid;
+  direction: var(--split-direction, ltr);
   grid-template-columns: minmax(0, 1fr) var(--image-width);
   gap: var(--split-margin);
-  padding: 48px 0 48px var(--split-margin);
+  padding: 48px var(--split-padding-right) 48px var(--split-padding-left);
 }
 
 section.split .split-text {
+  direction: ltr;
   font-size: calc(1em * var(--split-text-scale));
   min-width: 0;
 }
@@ -99,6 +103,7 @@ section.split .split-text li {
 }
 
 section.split .split-image {
+  direction: ltr;
   position: relative;
   align-self: stretch;
   min-height: calc(100vh - 96px);

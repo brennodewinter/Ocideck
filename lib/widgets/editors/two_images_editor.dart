@@ -94,6 +94,33 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
     );
   }
 
+  void _swapImages() {
+    final slide = widget.slide;
+    String swapDraftField(String field) => switch (field) {
+      'imageCaption' => 'imageCaption2',
+      'imageCaption2' => 'imageCaption',
+      'imageAltText' => 'imageAltText2',
+      'imageAltText2' => 'imageAltText',
+      _ => field,
+    };
+    widget.onUpdate(
+      slide.copyWith(
+        imagePath: slide.imagePath2,
+        imagePath2: slide.imagePath,
+        imageCaption: slide.imageCaption2,
+        imageCaption2: slide.imageCaption,
+        imageAltText: slide.imageAltText2,
+        imageAltText2: slide.imageAltText,
+        imageFocalX: slide.imageFocalX2,
+        imageFocalY: slide.imageFocalY2,
+        imageFocalX2: slide.imageFocalX,
+        imageFocalY2: slide.imageFocalY,
+        imageSize: slide.imageSize == 0 ? 0 : 100 - slide.imageSize,
+        aiAssistedFields: slide.aiAssistedFields.map(swapDraftField).toList(),
+      ),
+    );
+  }
+
   Future<void> _openCrop(bool isSecond) async {
     // Each picture covers its half-panel; the split (imageSize) sets the widths.
     // Crop adjusts both the zoom (0=cover, 100=contain, >100=zoom in) and the
@@ -154,6 +181,12 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
           hint: 'Tekst onder de afbeeldingen',
         ),
         const SizedBox(height: 20),
+        OutlinedButton.icon(
+          icon: const Icon(Icons.swap_horiz, size: 18),
+          label: Text(context.l10n.d('Afbeeldingen omwisselen')),
+          onPressed: _swapImages,
+        ),
+        const SizedBox(height: 12),
         const SectionLabel('Linker afbeelding'),
         ImagePickerBar(
           imagePath: widget.slide.imagePath,
