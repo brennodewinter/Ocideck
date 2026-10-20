@@ -1,11 +1,18 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 import 'package:markdown_quill/markdown_quill.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/settings.dart' show ThemeProfile;
+import '../../services/markdown_table_codec.dart';
 import '../../services/ocideck_marked_table.dart';
 import '../../services/ocideck_markers.dart';
+import '../../services/risk_dossier.dart';
+import '../../services/risk_view.dart';
+import '../../utils/markdown_quill_codec.dart';
 import '../../utils/ocideck_table_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
@@ -126,6 +133,111 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
     }
   }
 
+  /// "Gekoppelde weergave…" op een brontabel: kies de projectie en de
+  /// materialisatie landt als eigen embed direct ná dit blok (#2489). De
+  /// weergave is meteen bruikbaar — de cellen staan er al, de marker is de
+  /// enige koppeling die OciDeck extra begrijpt.
+  Future<void> _insertLinkedView() async {
+    final table = scanOciMarkedTables(_source).tables.firstOrNull;
+    final id = table?.id;
+    if (table == null || id == null) return;
+    final l10n = context.l10n;
+    final projection = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => SimpleDialog(
+        title: Text(l10n.d('Gekoppelde weergave toevoegen')),
+        children: [
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(dialogContext, 'bruto'),
+            child: Text(
+              l10n.d('Bruto — alleen de oorspronkelijke inschatting'),
+            ),
+          ),
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(dialogContext, 'netto'),
+            child: Text(l10n.d('Netto — alleen de inschatting ná maatregelen')),
+          ),
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(dialogContext, 'overview'),
+            child: Text(l10n.d('Overzicht — bruto én netto naast elkaar')),
+          ),
+        ],
+      ),
+    );
+    if (!mounted || projection == null) return;
+    final docMd = MarkdownQuillCodec.markdownFromDocument(
+      widget.embedContext.controller.document,
+    );
+    final block = createOciViewBlock(RiskDossier.read(docMd), id, projection);
+    if (block == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.d('Deze projectie past niet bij de methode van de bron.'),
+          ),
+        ),
+      );
+      return;
+    }
+    // Na dit blok invoegen: de embed zelf is één positie, de witregel ertussen
+    // de tweede — zoals elke blokinvoeging in deze editor werkt.
+    final controller = widget.embedContext.controller;
+    final at =
+        widget.embedContext.node.documentOffset +
+        widget.embedContext.node.length;
+    controller.compose(
+      Delta()
+        ..retain(at)
+        ..insert('\n')
+        ..insert(EmbeddableOciMarkedTable(block).toJson()),
+      const TextSelection.collapsed(offset: 0),
+      ChangeSource.local,
+    );
+    widget.onDiscreteEdit?.call();
+  }
+
+  /// "Verversen" op een gekoppelde weergave: herbouw de materialisatie uit
+  /// de brontabel in dít document en zet `gen=` op diens `rev`. Expliciete
+  /// handeling — een handedit in de weergave verdwijnt dan wel, maar alleen
+  /// na een bewuste knop, nooit stilletjes (D2, #2490 laat de discrepantie
+  /// eerst zien).
+  void _refreshView() {
+    final view = scanOciMarkedTables(_source).tables.firstOrNull;
+    if (view == null) return;
+    final docMd = MarkdownQuillCodec.markdownFromDocument(
+      widget.embedContext.controller.document,
+    );
+    final dossier = RiskDossier.read(docMd);
+    final rows = ociViewMaterialize(dossier, view);
+    if (rows == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d('De brontabel van deze weergave is niet gevonden.'),
+          ),
+        ),
+      );
+      return;
+    }
+    final carrier = view.marker!;
+    final sourceTable = dossier.tableById(carrier.attr('source')!);
+    final rev = sourceTable?.rev;
+    final markers = [
+      for (final m in view.markers)
+        identical(m, carrier)
+            ? carrier.withAttr('gen', rev == null ? null : '$rev')
+            : m,
+    ];
+    _binding.clearPending();
+    _binding.replaceSource(
+      markOciTable([
+        for (final m in markers) m.toComment(),
+      ], encodeMarkdownTable(rows)),
+      discrete: true,
+      onDiscreteEdit: widget.onDiscreteEdit,
+    );
+  }
+
   /// "Loskoppelen als momentopname" (#2489/D2): de markerregels verdwijnen en
   /// wat overblijft is een gewone, leesbare tabel — dezelfde uitstap als de
   /// instap. Expliciet en ongedaan te maken, nooit stilletjes.
@@ -171,6 +283,7 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
     final scan = scanOciMarkedTables(_source);
     final table = scan.tables.firstOrNull;
     final carrier = table?.marker;
+    final isView = carrier?.kind == OciMarkerKinds.view;
     return Column(
       key: _boundsKey,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -189,11 +302,32 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
                 ),
                 visualDensity: VisualDensity.compact,
               ),
+            // Op een bronregister: een gekoppelde projectie eronder maken.
+            if (carrier?.kind == OciMarkerKinds.risks)
+              TextButton.icon(
+                onPressed: () => unawaited(_insertLinkedView()),
+                icon: const Icon(Icons.table_view_outlined, size: 16),
+                label: Text(
+                  l10n.d('Gekoppelde weergave…'),
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+            // Een weergave is een materialisatie: de cellen horen bij de
+            // bron, niet bij handedit — verversen is de enige schrijfweg.
+            if (isView)
+              TextButton.icon(
+                onPressed: _refreshView,
+                icon: const Icon(Icons.refresh, size: 16),
+                label: Text(
+                  l10n.d('Verversen'),
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
             TextButton.icon(
               onPressed: _detach,
               icon: const Icon(Icons.link_off, size: 16),
               label: Text(
-                carrier?.kind == OciMarkerKinds.view
+                isView
                     ? l10n.d('Loskoppelen als momentopname')
                     : l10n.d('Marker verwijderen'),
                 style: const TextStyle(fontSize: 12),
@@ -206,8 +340,11 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
           maxTextWidth: null,
           themeProfile: widget.profile,
           chartTheme: widget.profile,
-          tableEditController: _editor,
-          onSortTableColumn: _sort,
+          // Een gekoppelde weergave is lees-only in de editor: de cellen
+          // zijn afschriften van de bron en zouden bij de volgende verversing
+          // toch verdwijnen (D2). Bron- en registertabellen bewerk je wel.
+          tableEditController: isView ? null : _editor,
+          onSortTableColumn: isView ? null : _sort,
         ),
       ],
     );

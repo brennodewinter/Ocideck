@@ -84,4 +84,67 @@ Een alinea vooraf.
     expect(terug, contains('| R-001 | Sensor valt uit | 7 |'));
     expect(terug, contains('Een alinea vooraf.'));
   });
+
+  testWidgets('verversen herbouwt een gekoppelde weergave uit de bron', (
+    tester,
+  ) async {
+    const viewSource = '''
+<!-- ocideck:risks v1 id=hoofd method=fmea rev=3 next=4 cols=id,failure,s_b,s_n -->
+| ID | Faalwijze | S b | S n |
+|---|---|---|---|
+| R-1 | Sensor valt uit | 7 | 3 |
+| R-2 | Kabel breekt | 5 | 1 |
+
+<!-- ocideck:view v1 source=hoofd projection=netto gen=1 cols=id,failure,s_n -->
+| ID | Faalwijze | S n |
+|---|---|---|
+| R-1 | VERLOPEN | 9 |
+''';
+    final controller = QuillController(
+      document: MarkdownQuillCodec.documentFromMarkdown(viewSource),
+      selection: const TextSelection.collapsed(offset: 0),
+    );
+    addTearDown(controller.dispose);
+    final focus = FocusNode();
+    addTearDown(focus.dispose);
+    final scroll = ScrollController();
+    addTearDown(scroll.dispose);
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+          FlutterQuillLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: SizedBox(
+            width: 900,
+            height: 600,
+            child: WysiwygNotesField(
+              controller: controller,
+              scrollController: scroll,
+              focusNode: focus,
+              editorTheme: MarkdownEditorTheme.documentSurface(
+                scheme: const ColorScheme.light(),
+              ),
+              hintText: '',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await tester.tap(find.textContaining('Verversen'));
+    await tester.pump();
+
+    final terug = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(terug, contains('gen=3'));
+    expect(terug, isNot(contains('VERLOPEN')));
+    // De projectie toont id + faalwijze + alleen S n uit de bron.
+    expect(terug, contains('| R-2 | Kabel breekt | 1 |'));
+    // De brontabel zelf bleef onaangeroerd.
+    expect(terug, contains('| R-1 | Sensor valt uit | 7 | 3 |'));
+  });
 }
