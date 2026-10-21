@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,6 +7,8 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/panels/editor_panel.dart';
+import 'package:ocideck/widgets/panels/slide_list_panel.dart';
+import 'package:ocideck/models/slide.dart';
 
 const _l10n = AppLocalizations(Locale('nl'));
 
@@ -18,6 +21,65 @@ Future<void> _switchToMarkdownMode(WidgetTester tester, Finder scope) async {
 
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+
+  testWidgets('Delete removes selected speaker note text, not the slide', (
+    tester,
+  ) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final deckNotifier = container.read(deckProvider.notifier);
+    deckNotifier.newDeck('Test');
+    deckNotifier.addSlide(SlideType.bullets);
+    final slide = container.read(deckProvider).deck!.slides.first;
+    deckNotifier.updateSlide(0, slide.copyWith(notes: 'Bewaar verwijder dit'));
+
+    await tester.binding.setSurfaceSize(const Size(1400, 1200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+            FlutterQuillLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const Scaffold(
+            body: Row(
+              children: [
+                SizedBox(width: 320, child: SlideListPanel(railWidth: 320)),
+                Expanded(child: EditorPanel()),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final notes = find.byKey(ValueKey('speaker-notes-${slide.id}-p0'));
+    final field = find.descendant(
+      of: notes,
+      matching: find.byType(QuillEditor),
+    );
+    await tester.tap(field);
+    await tester.pump();
+    tester
+        .widget<QuillEditor>(field)
+        .controller
+        .updateSelection(
+          const TextSelection(baseOffset: 7, extentOffset: 20),
+          ChangeSource.local,
+        );
+    await tester.sendKeyEvent(LogicalKeyboardKey.delete);
+    await tester.pump();
+
+    final deck = container.read(deckProvider).deck!;
+    expect(deck.slides, hasLength(2));
+    expect(deck.slides.first.notes, 'Bewaar');
+  });
 
   testWidgets('speaker notes and user notes are separate fields', (
     tester,
