@@ -1,9 +1,17 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
+import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/improvement_y01.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/widgets/presentation/annotation_overlay.dart';
 import 'package:ocideck/widgets/presentation/audience_window.dart';
+import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 import 'package:ocideck/widgets/slides/previews/slide_preview_support.dart';
 
@@ -678,6 +686,193 @@ void main() {
       await tester.pumpWidget(const SizedBox());
     },
   );
+
+  testWidgets('a live table edit carries its column alignment to the beamer', (
+    tester,
+  ) async {
+    const tableDeck =
+        '---\n'
+        'title: Audience Demo\n'
+        '---\n'
+        '<!-- _class: table -->\n'
+        '# Cijfers\n'
+        '\n'
+        '| Rol | Waarde |\n'
+        '| --- | --- |\n'
+        '| Bestuur | oud |\n';
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': tableDeck,
+      'index': 0,
+    });
+    await tester.pumpAndSettle();
+
+    await _fromPresenter(tester, 'tableUpdate', {
+      'seq': 1,
+      'slideIndex': 0,
+      'tableRows': [
+        ['Rol', 'Waarde'],
+        ['Bestuur', 'nieuw'],
+      ],
+      'alignments': ['left', 'right'],
+    });
+    await tester.pump();
+
+    expect(
+      tester
+          .widget<SlidePreviewWidget>(find.byType(SlidePreviewWidget))
+          .slide
+          .tableColumnAlignments,
+      [TableAlign.left, TableAlign.right],
+    );
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a late snapshot never undoes a newer table or checklist edit', (
+    tester,
+  ) async {
+    // Elk bericht bevat de hele tabel/lijst. Komt een oudere na een nieuwere
+    // binnen, dan zou de zaal een waarde zien die de spreker allang verlaten
+    // heeft — en die blijft staan, want er komt niets meer achteraan.
+    const deck =
+        '---\n'
+        'title: Audience Demo\n'
+        '---\n'
+        '<!-- _class: table -->\n'
+        '# Cijfers\n'
+        '\n'
+        '| Rol | Waarde |\n'
+        '| --- | --- |\n'
+        '| Bestuur | oud |\n';
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': deck,
+      'index': 0,
+    });
+    await tester.pumpAndSettle();
+
+    Future<void> table(int seq, String value) =>
+        _fromPresenter(tester, 'tableUpdate', {
+          'seq': seq,
+          'slideIndex': 0,
+          'tableRows': [
+            ['Rol', 'Waarde'],
+            ['Bestuur', value],
+          ],
+        });
+    await table(2, 'nieuw');
+    await table(1, 'ouder');
+    await tester.pump();
+
+    expect(find.text('nieuw'), findsOneWidget);
+    expect(find.text('ouder'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('replaceDeck zet de annotaties op de verschoven indexen', (
+    tester,
+  ) async {
+    // Na een live-splitsing schuiven dia's op. De beamer houdt streken per
+    // index bij, dus zonder nieuwe toewijzing staat een tekening op de
+    // verkeerde dia.
+    final stroke = InkStroke(
+      tool: InkTool.pen,
+      color: 0xFFEF4444,
+      width: 0.004,
+      points: const [Offset(0.1, 0.1), Offset(0.4, 0.4)],
+      id: 'a',
+    );
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _twoSlideMarkdown,
+      'index': 0,
+      'ink': {
+        '0': encodeStrokes([stroke]),
+      },
+    });
+    await tester.pumpAndSettle();
+    List<InkStroke> shown() =>
+        tester.widget<AnnotationLayer>(find.byType(AnnotationLayer)).strokes;
+    expect(shown(), hasLength(1));
+
+    await _fromPresenter(tester, 'replaceDeck', {
+      'markdown': _twoSlideMarkdown,
+      'index': 0,
+      'ink': {
+        '1': encodeStrokes([stroke]),
+      },
+    });
+    await tester.pump();
+
+    expect(shown(), isEmpty);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('sendDeckReplaceToAudience houdt Y-01 en annotaties bij', (
+    tester,
+  ) async {
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    Map<String, dynamic>? sent;
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method != 'invokeMethod') return null;
+      final envelope = Map<String, dynamic>.from(call.arguments as Map);
+      if (envelope['method'] == 'replaceDeck') {
+        sent = Map<String, dynamic>.from(envelope['arguments'] as Map);
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+    final slides = [
+      Slide.create(SlideType.title).copyWith(title: 'Een'),
+      Slide.create(SlideType.title).copyWith(title: 'Twee'),
+    ];
+    final stroke = InkStroke(
+      tool: InkTool.pen,
+      color: 0xFFEF4444,
+      width: 0.004,
+      points: const [Offset(0.1, 0.1), Offset(0.4, 0.4)],
+      id: 'a',
+    );
+
+    sendDeckReplaceToAudience(
+      AudienceWindowHandle(
+        WindowController.fromWindowId('test'),
+        closeImpl: (_) async {},
+      ),
+      slides: slides,
+      projectPath: null,
+      themeProfile: const ThemeProfile(),
+      tlp: TlpLevel.none,
+      organization: '',
+      reportLanguage: '',
+      index: 1,
+      improvementY01: const ImprovementY01Metric(name: 'Doorlooptijd'),
+      annotations: {
+        slides[1].id: [stroke],
+      },
+    );
+    await tester.pump();
+
+    final payload = sent!;
+    expect(
+      MarkdownService()
+          .parseDeck(payload['markdown'] as String)!
+          .improvementY01Metric
+          .name,
+      'Doorlooptijd',
+    );
+    expect((payload['ink'] as Map).keys, ['1']);
+  });
 
   testWidgets('an unknown message from the presenter is ignored, not fatal', (
     tester,

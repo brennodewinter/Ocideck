@@ -74,6 +74,11 @@ class _AudienceSyncTracker {
 
   int get nextSequence => ++_sequence;
 
+  /// Eigen teller voor de momentopnamen van tabel en checklist: die zijn niet
+  /// aan de dia-update gebonden, maar een oudere mag een nieuwere niet wissen.
+  int _contentSequence = 0;
+  int get nextContentSequence => ++_contentSequence;
+
   bool indexChanged(_AudienceSyncSnapshot snapshot) =>
       snapshot.index != _last?.index;
 
