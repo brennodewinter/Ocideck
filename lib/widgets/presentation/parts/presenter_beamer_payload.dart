@@ -180,6 +180,7 @@ class AudienceWindowHandle {
 String _audienceWindowArguments({
   required String markdown,
   required String? projectPath,
+  required String? remoteAssetBase,
   required int initialIndex,
   required Map<String, dynamic> inkByIndex,
   required bool showClassificationWatermark,
@@ -190,6 +191,7 @@ String _audienceWindowArguments({
 }) => jsonEncode({
   'markdown': markdown,
   'projectPath': projectPath,
+  'remoteAssetBase': remoteAssetBase,
   'index': initialIndex,
   'ink': inkByIndex,
   'classificationWatermarkEnabled': showClassificationWatermark,
@@ -352,6 +354,7 @@ Map<String, dynamic> _annotationsBySlideIndex(
 String _dualWindowArguments({
   required List<Slide> slides,
   required String? projectPath,
+  required String? remoteAssetBase,
   required int initialIndex,
   required TlpLevel tlp,
   required String organization,
@@ -376,6 +379,7 @@ String _dualWindowArguments({
     slideSize: slideSize,
   ),
   projectPath: projectPath,
+  remoteAssetBase: remoteAssetBase,
   initialIndex: initialIndex,
   inkByIndex: _annotationsBySlideIndex(slides, annotations),
   showClassificationWatermark: showClassificationWatermark,

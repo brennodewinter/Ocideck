@@ -23,6 +23,7 @@ import '../../utils/url_launcher_util.dart';
 import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
 import '../slides/slide_preview.dart';
+import '../slides/previews/slide_preview_support.dart';
 import '../reader/document_markdown_view.dart';
 import 'annotation_overlay.dart';
 import 'cost_overlay.dart';
@@ -119,6 +120,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   bool _showClassificationWatermark = false;
   bool _allowRemoteMedia = false;
   String? _projectPath;
+  String? _remoteAssetBase;
   ImprovementY01Metric _improvementY01 = ImprovementY01Metric.empty;
   int _index = 0;
   int _richTextPage = 0;
@@ -187,6 +189,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     super.initState();
     final markdown = widget.args['markdown'] as String? ?? '';
     _projectPath = widget.args['projectPath'] as String?;
+    _remoteAssetBase = widget.args['remoteAssetBase'] as String?;
     _index = (widget.args['index'] as num?)?.toInt() ?? 0;
     // De styling komt naast de markdown binnen; zie [beamerStyleProfileKey].
     final profileJson = widget.args[beamerStyleProfileKey];
@@ -577,7 +580,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         body: Focus(
           autofocus: true,
           onKeyEvent: _handleKey,
-          child: Stack(children: [_body(), const MermaidRenderHostLayer()]),
+          child: DeckAssetScope(
+            deckUrl: _remoteAssetBase,
+            child: Stack(children: [_body(), const MermaidRenderHostLayer()]),
+          ),
         ),
       ),
     );

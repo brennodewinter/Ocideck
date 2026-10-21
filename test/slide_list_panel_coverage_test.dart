@@ -406,4 +406,25 @@ void main() {
     expect(container.read(editorProvider).selection.length, 3);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('Delete in slide search text does not delete a slide', (
+    tester,
+  ) async {
+    final container = _container();
+    container.read(deckProvider.notifier).loadDeck(_titledDeck(['A', 'B']));
+    await _pump(tester, container);
+
+    final search = find.byType(TextField);
+    await tester.enterText(search, 'zoektekst');
+    final controller = tester.widget<TextField>(search).controller!;
+    controller.selection = TextSelection(
+      baseOffset: 0,
+      extentOffset: controller.text.length,
+    );
+    await tester.sendKeyEvent(LogicalKeyboardKey.delete);
+    await tester.pump();
+
+    expect(container.read(deckProvider).deck!.slides, hasLength(2));
+    expect(controller.text, isEmpty);
+  });
 }

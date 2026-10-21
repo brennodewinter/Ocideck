@@ -135,7 +135,8 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
 
   bool get _textInputHasFocus {
     final context = FocusManager.instance.primaryFocus?.context;
-    return context?.widget is EditableText;
+    return context?.widget is EditableText ||
+        context?.findAncestorWidgetOfExactType<EditableText>() != null;
   }
 
   GlobalKey _keyForSlide(Slide slide) {
