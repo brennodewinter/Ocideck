@@ -682,9 +682,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// scherm onverwacht verdwijnt, zodat Escape alsnog doet wat de
   /// documentatie belooft (#1862).
   bool _wasFullscreen = false;
-  DateTime? _displayTransitionUntil;
-  bool _displayTransitionSawExit = false;
-  bool _displaySwitchInProgress = false;
+  final _displayGuard = _DisplayTransitionGuard();
 
   /// Presenter view (notities, klok, volgende slide) vs. publieksweergave.
   bool _presenterView = false;
@@ -973,17 +971,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _fullscreenGuard = Timer.periodic(const Duration(milliseconds: 300), (_) {
         if (!mounted || _exiting) return;
         final fs = isPresenterFullscreen();
-        final deadline = _displayTransitionUntil;
-        if (deadline != null && DateTime.now().isBefore(deadline)) {
-          if (!fs) {
-            _displayTransitionSawExit = true;
-            return;
-          }
-          if (_displayTransitionSawExit) {
-            _displayTransitionUntil = null;
-            _displayTransitionSawExit = false;
-          }
-        }
+        if (_displayGuard.ignoresFullscreenLoss(fs)) return;
         if (fs) {
           _wasFullscreen = true;
         } else if (_wasFullscreen) {
