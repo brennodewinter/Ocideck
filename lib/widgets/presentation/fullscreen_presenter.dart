@@ -679,8 +679,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// macOS en in de browser onderschept het platform Escape om het volledig
   /// scherm te verlaten — de toets bereikt Flutter niet. De [_fullscreenGuard]
   /// pollt [isPresenterFullscreen] en verlaat de presentatie zodra het volledig
-  /// scherm onverwacht verdwijnt, zodat Escape alsnog doet wat de
-  /// documentatie belooft (#1862).
+  /// scherm onverwacht verdwijnt, zodat Escape de presentatie sluit (#1862).
   bool _wasFullscreen = false;
   final _displayGuard = _DisplayTransitionGuard();
 
