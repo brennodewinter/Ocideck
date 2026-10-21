@@ -22,11 +22,28 @@ extension _PresenterDisplays on _FullscreenPresenterState {
   }
 
   Future<void> _moveToDisplay(int index) async {
-    if (_displays.length < 2) return;
+    if (_displays.length < 2 || _displaySwitchInProgress) return;
+    _displaySwitchInProgress = true;
+    final previous = _displayIndex;
     try {
+      // Keep the audience opposite the presenter and avoid moving the main
+      // fullscreen Space if the secondary window cannot move.
+      await widget.audience?.controller?.coverScreen(presenterScreen: index);
+      _displayTransitionSawExit = false;
+      _displayTransitionUntil = DateTime.now().add(const Duration(seconds: 15));
       moveToDisplay(index, _displays);
       if (mounted) _rebuild(() => _displayIndex = index);
     } catch (e) {
+      try {
+        await widget.audience?.controller?.coverScreen(
+          presenterScreen: previous,
+        );
+      } catch (restoreError) {
+        logWarning(
+          '_FullscreenPresenterState: audience restore failed',
+          restoreError,
+        );
+      }
       logError('_FullscreenPresenterState._moveToDisplay: failed', e);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -35,6 +52,8 @@ extension _PresenterDisplays on _FullscreenPresenterState {
           ),
         );
       }
+    } finally {
+      _displaySwitchInProgress = false;
     }
   }
 

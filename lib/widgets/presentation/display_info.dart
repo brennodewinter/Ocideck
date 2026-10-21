@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 
 import 'display_info_data.dart';
 export 'display_info_data.dart';
@@ -7,10 +8,19 @@ import 'display_info_io.dart'
     as impl;
 
 /// Geeft alle schermen terug, of een lege lijst op web / als het faalt.
-List<DisplayInfo> getAllDisplays() => impl.getAllDisplays();
+@visibleForTesting
+List<DisplayInfo> Function()? debugGetAllDisplays;
+@visibleForTesting
+Offset? Function()? debugGetCurrentWindowCenter;
+@visibleForTesting
+void Function(int, List<DisplayInfo>)? debugMoveToDisplay;
+
+List<DisplayInfo> getAllDisplays() =>
+    (debugGetAllDisplays ?? impl.getAllDisplays)();
 
 /// Geeft het centrum van het huidige venster terug, of null op web / als het faalt.
-Offset? getCurrentWindowCenter() => impl.getCurrentWindowCenter();
+Offset? getCurrentWindowCenter() =>
+    (debugGetCurrentWindowCenter ?? impl.getCurrentWindowCenter)();
 
 /// Index van het scherm dat [point] bevat, in de volgorde waarin het platform
 /// zijn schermen opsomt — dezelfde volgorde die `coverScreen(presenterScreen:)`
@@ -40,4 +50,4 @@ int? presenterScreenIndex() {
 /// Verhuist het venster naar scherm [index] en zet het in volledig scherm.
 /// No-op op web; best-effort op desktop.
 void moveToDisplay(int index, List<DisplayInfo> displays) =>
-    impl.moveToDisplay(index, displays);
+    (debugMoveToDisplay ?? impl.moveToDisplay)(index, displays);

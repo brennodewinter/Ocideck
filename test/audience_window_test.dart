@@ -5,6 +5,7 @@ import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/widgets/presentation/audience_window.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
+import 'package:ocideck/widgets/slides/previews/slide_preview_support.dart';
 
 /// A small but representative deck: a title slide plus a bullets slide, enough
 /// to exercise the audience window's markdown parsing and slide rendering.
@@ -96,6 +97,31 @@ void _mockBridge(WidgetTester tester) {
 }
 
 void main() {
+  testWidgets('remote image base survives a live deck update', (tester) async {
+    _mockBridge(tester);
+    const base = 'https://example.test/slides/deck.md';
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _deckMarkdown,
+      'index': 0,
+      'remoteAssetBase': base,
+    });
+    expect(
+      tester.widget<DeckAssetScope>(find.byType(DeckAssetScope).first).deckUrl,
+      base,
+    );
+    await _fromPresenter(tester, 'replaceDeck', {
+      'markdown': _twoSlideMarkdown,
+      'index': 1,
+    });
+    await tester.pump();
+    expect(
+      tester.widget<DeckAssetScope>(find.byType(DeckAssetScope).first).deckUrl,
+      base,
+    );
+    expect(find.text('Tweede dia'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets(
     'renders a normal slide from the markdown args without throwing',
     (tester) async {
