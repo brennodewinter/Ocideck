@@ -28,14 +28,14 @@ extension _PresenterDisplays on _FullscreenPresenterState {
     try {
       // Keep the audience opposite the presenter and avoid moving the main
       // fullscreen Space if the secondary window cannot move.
-      await widget.audience?.controller?.coverScreen(presenterScreen: index);
+      await widget.audience?.controller.coverScreen(presenterScreen: index);
       _displayTransitionSawExit = false;
       _displayTransitionUntil = DateTime.now().add(const Duration(seconds: 15));
       moveToDisplay(index, _displays);
       if (mounted) _rebuild(() => _displayIndex = index);
     } catch (e) {
       try {
-        await widget.audience?.controller?.coverScreen(
+        await widget.audience?.controller.coverScreen(
           presenterScreen: previous,
         );
       } catch (restoreError) {

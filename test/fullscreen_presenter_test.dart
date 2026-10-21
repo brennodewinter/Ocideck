@@ -148,9 +148,10 @@ void main() {
     const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
     const windows = MethodChannel('mixin.one/desktop_multi_window');
     final covers = <Map<String, dynamic>>[];
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
-      call,
-    ) async => null);
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      bridge,
+      (call) async => null,
+    );
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(windows, (
       call,
     ) async {
@@ -186,16 +187,18 @@ void main() {
     expect(find.byIcon(Icons.screen_share_outlined), findsOneWidget);
     await tester.binding.defaultBinaryMessenger.handlePlatformMessage(
       bridge.name,
-      bridge.codec.encodeMethodCall(MethodCall('methodCall', {
-        'channel': 'ocideck/presenter',
-        'method': 'key',
-        'arguments': {
-          'keyId': LogicalKeyboardKey.keyS.keyId,
-          'meta': false,
-          'control': false,
-          'shift': false,
-        },
-      })),
+      bridge.codec.encodeMethodCall(
+        MethodCall('methodCall', {
+          'channel': 'ocideck/presenter',
+          'method': 'key',
+          'arguments': {
+            'keyId': LogicalKeyboardKey.keyS.keyId,
+            'meta': false,
+            'control': false,
+            'shift': false,
+          },
+        }),
+      ),
       (_) {},
     );
     await tester.pumpAndSettle();
