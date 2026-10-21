@@ -78,8 +78,12 @@ extension _PresenterTable on _FullscreenPresenterState {
     if (!_dual) return;
     audienceChannel
         .invokeMethod('tableUpdate', {
+          'seq': _audienceSync.nextContentSequence,
           'slideIndex': slideIndex,
           'tableRows': updated.tableRows,
+          // Kolomuitlijning is bewerkbaar en verhuist mee met kolommen;
+          // zonder dit toonde de zaal na een wijziging de oude uitlijning.
+          'alignments': [for (final a in updated.tableColumnAlignments) a.name],
         })
         .catchError((Object e) {
           // Audience-window sync is best-effort, but a fully silent failure

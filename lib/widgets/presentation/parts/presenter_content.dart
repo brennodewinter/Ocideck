@@ -66,6 +66,8 @@ void sendDeckReplaceToAudience(
   required String organization,
   required String reportLanguage,
   required int index,
+  required ImprovementY01Metric improvementY01,
+  required Map<String, List<InkStroke>> annotations,
 }) {
   if (audience?.controller == null) return;
   final markdown = buildBeamerMarkdown(
@@ -75,9 +77,16 @@ void sendDeckReplaceToAudience(
     tlp: tlp,
     organization: organization,
     reportLanguage: reportLanguage,
+    improvementY01: improvementY01,
   );
   audienceChannel
-      .invokeMethod('replaceDeck', {'markdown': markdown, 'index': index})
+      .invokeMethod('replaceDeck', {
+        'markdown': markdown,
+        'index': index,
+        // De beamer houdt annotaties per index bij; na een splitsing schuiven
+        // die op, dus de oude sleutels wijzen dan naar een andere dia.
+        'ink': _annotationsBySlideIndex(slides, annotations),
+      })
       .catchError((Object e) {
         logWarning('FullscreenPresenter: audience deck replace failed', e);
         return null;
@@ -217,6 +226,7 @@ extension _PresenterContent on _FullscreenPresenterState {
     if (_dual) {
       audienceChannel
           .invokeMethod('checklistUpdate', {
+            'seq': _audienceSync.nextContentSequence,
             'slideIndex': slideIndex,
             'bullets': updated.bullets,
             'bullets2': updated.bullets2,
@@ -266,6 +276,8 @@ extension _PresenterContent on _FullscreenPresenterState {
         organization: widget.organization,
         reportLanguage: widget.reportLanguage,
         index: _index,
+        improvementY01: widget.improvementY01,
+        annotations: _ink,
       );
     }
   }

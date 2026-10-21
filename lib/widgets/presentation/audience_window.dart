@@ -170,6 +170,18 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   // Hoogst verwerkte 'update'-sequencenummer; oudere berichten worden genegeerd.
   int _lastUpdateSeq = -1;
 
+  /// Hoogste volgnummer per soort momentopname en dia (tabel, checklist). Elk
+  /// bericht bevat de hele inhoud, dus een late oudere zou de nieuwere wissen.
+  final Map<String, int> _snapshotSeq = {};
+
+  bool _staleSnapshot(String kind, int slide, Object? seq) {
+    final n = (seq as num?)?.toInt();
+    final key = '$kind:$slide';
+    if (isStaleUpdateSeq(n, _snapshotSeq[key] ?? -1)) return true;
+    if (n != null) _snapshotSeq[key] = n;
+    return false;
+  }
+
   // Annotation layer, keyed by slide index (the beamer has no stable ids).
   final Map<int, List<InkStroke>> _ink = {};
   int? _laserIndex;
@@ -436,6 +448,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         final m = Map<String, dynamic>.from(call.arguments as Map);
         final i = (m['slideIndex'] as num?)?.toInt();
         if (i == null || i < 0 || i >= _slides.length || !mounted) return null;
+        if (_staleSnapshot('checklist', i, m['seq'])) return null;
         setState(() {
           _slides[i] = _slides[i].copyWith(
             bullets: List<String>.from(m['bullets'] as List? ?? const []),
@@ -444,22 +457,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           invalidateSplitRunLayout(_slides);
         });
       case 'tableUpdate':
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        final i = (m['slideIndex'] as num?)?.toInt();
-        if (i == null || i < 0 || i >= _slides.length || !mounted) return null;
-        final raw = m['tableRows'] as List?;
-        if (raw == null) return null;
-        final rows = raw
-            .map(
-              (row) => List<String>.from(
-                (row as List).map((cell) => cell.toString()),
-              ),
-            )
-            .toList();
-        setState(() {
-          _slides[i] = _slides[i].copyWith(tableRows: rows);
-          invalidateSplitRunLayout(_slides);
-        });
+        _applyTableUpdate(Map<String, dynamic>.from(call.arguments as Map));
       case 'replaceDeck':
         // Een live-fix tijdens presenteren (#914) kan het aantal dia's
         // veranderen (splitsen); de smalle bullet-/tabelkanalen volstaan dan
@@ -472,14 +470,58 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         );
         final next = deck?.slides ?? const <Slide>[];
         final i = (m['index'] as num?)?.toInt() ?? _index;
+        final ink = m['ink'];
         setState(() {
           _slides = next;
+          if (ink is Map) _replaceInk(ink);
           _index = next.isEmpty ? 0 : i.clamp(0, next.length - 1);
           _improvementY01 =
               deck?.improvementY01Metric ?? ImprovementY01Metric.empty;
         });
     }
     return null;
+  }
+
+  /// Een live tabelwijziging van de presentator: rijen én uitlijning, want
+  /// beide zijn bewerkbaar en verhuizen mee met kolommen.
+  void _applyTableUpdate(Map<String, dynamic> m) {
+    final i = (m['slideIndex'] as num?)?.toInt();
+    if (i == null || i < 0 || i >= _slides.length || !mounted) return;
+    final raw = m['tableRows'] as List?;
+    if (raw == null || _staleSnapshot('table', i, m['seq'])) return;
+    final rows = raw
+        .map(
+          (row) =>
+              List<String>.from((row as List).map((cell) => cell.toString())),
+        )
+        .toList();
+    final aligns = m['alignments'];
+    setState(() {
+      _slides[i] = _slides[i].copyWith(
+        tableRows: rows,
+        // Een oudere presenter stuurt geen uitlijning: dan blijft die staan.
+        tableColumnAlignments: aligns is List
+            ? [
+                for (final a in aligns)
+                  TableAlign.values.firstWhere(
+                    (v) => v.name == a,
+                    orElse: () => TableAlign.left,
+                  ),
+              ]
+            : null,
+      );
+      invalidateSplitRunLayout(_slides);
+    });
+  }
+
+  /// Annotaties hangen aan de index; die is na een nieuwe reeks verschoven,
+  /// dus de oude sleutels kloppen niet meer.
+  void _replaceInk(Map<dynamic, dynamic> ink) {
+    _ink.clear();
+    ink.forEach((k, v) {
+      final n = int.tryParse('$k');
+      if (n != null && v is List) _ink[n] = decodeStrokes(v);
+    });
   }
 
   /// De presentator zweeft over de grafiek; toon dezelfde markering hier.
