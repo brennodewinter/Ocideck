@@ -652,6 +652,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Transcriptie en opname': 'Transkripsje en opname',
+  'Opname loopt': 'Opname rint',
+  'Opname stoppen': 'Opname stopje',
+  'Microfoon': 'Mikrofoan',
+  'Systeemgeluid': 'Systeemlûd',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Meitsje in transcript fan in opname of besteand lûdsbestân — as bewurkber Markdown-dokumint, mei in dúdlike kar oft it orizjineel bewarre bliuwt. Lokaal wêr\'t it kin; in eigen tsjinner allinnich as jo dy kieze. De opnameboarnen en engines folgje yn folgjende ferzjes.',
   'Afbeeldingen omwisselen': 'Ofbyldings omwikselje',
   'Afbeelding links': 'Linker ôfbylding',
   'Breedte afbeeldingspaneel': 'Breedte fan it ôfbyldingspaniel',

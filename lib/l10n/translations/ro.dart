@@ -1621,6 +1621,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Transcriptie en opname': 'Transcriere și înregistrare',
+  'Opname loopt': 'Înregistrare în desfășurare',
+  'Opname stoppen': 'Oprește înregistrarea',
+  'Microfoon': 'Microfon',
+  'Systeemgeluid': 'Sunetul sistemului',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Creați o transcriere a unei înregistrări sau a unui fișier audio existent — ca document Markdown editabil, cu o alegere clară dacă originalul este păstrat. Local acolo unde este posibil; propriul server numai dacă îl alegeți. Sursele de înregistrare și motoarele urmează în versiunile viitoare.',
   'Afbeeldingen omwisselen': 'Schimbă imaginile între ele',
   'Afbeelding links': 'Imagine stânga',
   'Breedte afbeeldingspaneel': 'Lățime panou imagine',

@@ -649,6 +649,13 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Transcriptie en opname': 'Trascrizione e registrazione',
+  'Opname loopt': 'Registrazione in corso',
+  'Opname stoppen': 'Interrompi la registrazione',
+  'Microfoon': 'Microfono',
+  'Systeemgeluid': 'Audio di sistema',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Crea una trascrizione di una registrazione o di un file audio esistente — come documento Markdown modificabile, con una scelta chiara sulla conservazione dell\'originale. In locale dove possibile; il proprio server solo se lo si sceglie. Le sorgenti di registrazione e i motori arriveranno nelle versioni successive.',
   'Afbeeldingen omwisselen': 'Scambia le immagini',
   'Afbeelding links': 'Immagine sinistra',
   'Breedte afbeeldingspaneel': 'Larghezza del pannello immagine',

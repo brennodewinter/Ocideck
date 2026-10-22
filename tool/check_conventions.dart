@@ -313,7 +313,8 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/dialogs/presentation_info_dialog.dart': 1028,
   // +1 (#2429): import van ociserve_org_themes voor de themaregister-knop
   // in het profielonderdeel.
-  'lib/widgets/dialogs/settings_dialog.dart': 1047,
+  // +1 (#2510): import van de transcriptie-modulekaart.
+  'lib/widgets/dialogs/settings_dialog.dart': 1048,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
       1017, // +26 (#1951): fileMtime + fileChangedSince.

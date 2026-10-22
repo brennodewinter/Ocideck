@@ -651,6 +651,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Transcriptie en opname': 'Transkripshon i grabashon',
+  'Opname loopt': 'Grabashon ta andando',
+  'Opname stoppen': 'Stop e grabashon',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Sonido di sistema',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Krea un transkripshon di un grabashon òf di un bestand di audio eksistente — komo dokumento Markdown editabel, ku un skohe kla si e original wordu wardá. Lokal kaminda posibel; bo prop server solamente si bo skohe dje. E fuentenan di grabashon i e enginenan ta bin den vershonan mas lat.',
   'Afbeeldingen omwisselen': 'Kambia e imágennan',
   'Afbeelding links': 'Imágen robes',
   'Breedte afbeeldingspaneel': 'Hanchura di e panel di imágen',

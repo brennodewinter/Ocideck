@@ -1605,6 +1605,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Transcriptie en opname': 'Transskription og optagelse',
+  'Opname loopt': 'Optagelse i gang',
+  'Opname stoppen': 'Stop optagelse',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Systemlyd',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Lav en transskription af en optagelse eller en eksisterende lydfil — som et redigerbart Markdown-dokument, med et klart valg om originalen bevares. Lokalt hvor muligt; din egen server kun hvis du vælger den. Optagekilder og motorer følger i senere versioner.',
   'Afbeeldingen omwisselen': 'Byt billederne om',
   'Afbeelding links': 'Venstre billede',
   'Breedte afbeeldingspaneel': 'Bredde på billedpanel',

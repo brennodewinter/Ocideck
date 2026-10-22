@@ -1611,6 +1611,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Transcriptie en opname': 'Transkripcija ir įrašymas',
+  'Opname loopt': 'Įrašymas vyksta',
+  'Opname stoppen': 'Sustabdyti įrašymą',
+  'Microfoon': 'Mikrofonas',
+  'Systeemgeluid': 'Sistemos garsas',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Sukurkite įrašo arba esamo garso failo transkripciją — kaip redaguojamą Markdown dokumentą, su aiškiu pasirinkimu, ar originalas išsaugomas. Vietoje, kai įmanoma; savo serveris tik jei jį pasirenkate. Įrašymo šaltiniai ir varikliai atkeliaus vėlesnėse versijose.',
   'Afbeeldingen omwisselen': 'Sukeisti paveikslėlius vietomis',
   'Afbeelding links': 'Kairysis paveikslėlis',
   'Breedte afbeeldingspaneel': 'Paveikslėlio srities plotis',

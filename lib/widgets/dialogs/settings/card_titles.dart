@@ -28,6 +28,7 @@ String moduleCardTitle(ModuleId id, AppLocalizations l10n) => switch (id) {
   // van de integratie "eLearning volgen" (cursussen afnemen) — #2186.
   ModuleId.elearning => l10n.d('eLearning maken'),
   ModuleId.forms => l10n.d('Formulieren en inzendingen'),
+  ModuleId.transcription => l10n.d('Transcriptie en opname'),
 };
 
 /// De titel van een integratiekaart — op Integraties én op de

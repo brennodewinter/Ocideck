@@ -1611,6 +1611,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Transcriptie en opname': 'Prepis a nahrávanie',
+  'Opname loopt': 'Nahrávanie prebieha',
+  'Opname stoppen': 'Zastaviť nahrávanie',
+  'Microfoon': 'Mikrofón',
+  'Systeemgeluid': 'Systémový zvuk',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Vytvorte prepis nahrávky alebo existujúceho zvukového súboru — ako upraviteľný dokument Markdown, s jasnou voľbou, či sa originál zachová. Lokálne, kde je to možné; vlastný server len ak si ho zvolíte. Zdroje nahrávania a enginy prídu v nasledujúcich verziách.',
   'Afbeeldingen omwisselen': 'Vymeniť obrázky',
   'Afbeelding links': 'Ľavý obrázok',
   'Breedte afbeeldingspaneel': 'Šírka panela obrázka',

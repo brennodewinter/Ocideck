@@ -91,6 +91,20 @@ machine (desktop) or in your browser tab (web). This includes:
   mean a photograph can sit in the temp directory of a deck you never saved.
   Stale session folders are removed on startup after 7 days, on the same clock as
   the snapshots above, and saving the deck moves the files to the project folder.
+- **Recordings (Transcriptie en opname).** The optional transcription module —
+  off by default, switched on under Settings → Uitbreidingen — treats a
+  recording the same way a staged image is treated: while a session runs, the
+  durable file is written to a per-session folder under the operating system's
+  temporary directory, on Linux restricted to your own account like the
+  snapshot folders. A recording that never reaches a saved transcript is
+  swept on startup after 7 days; the transcript's own save flow decides
+  explicitly whether the original moves into `media/` beside the `.md` or is
+  deleted. In the browser build there is no staging folder at all — the
+  recording lives in memory and dies with the tab. Nothing in this module
+  sends audio or transcript text anywhere: not to the AI assistant (its
+  backend contract is chat text, not audio — see *The AI assistant is off by
+  default and fail-closed*), and not to any server unless a future version's
+  explicitly chosen ASR-server profile asks you, per task, where it may go.
 - **Git working copies.** Connecting a git repository puts a real clone — full
   deck content and history — in a per-user application-support folder, plus a
   queue of commits that haven't been pushed yet. Unlike autosave snapshots these

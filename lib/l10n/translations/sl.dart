@@ -1605,6 +1605,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Transcriptie en opname': 'Prepis in snemanje',
+  'Opname loopt': 'Snemanje poteka',
+  'Opname stoppen': 'Ustavi snemanje',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Sistemski zvok',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Ustvarite prepis posnetka ali obstoječe zvočne datoteke — kot uredljiv dokument Markdown, z jasno izbiro, ali se izvirnik ohrani. Lokalno, kjer je mogoče; lastni strežnik samo, če ga izberete. Viri snemanja in pogoni prihajajo v naslednjih različicah.',
   'Afbeeldingen omwisselen': 'Zamenjaj sliki',
   'Afbeelding links': 'Leva slika',
   'Breedte afbeeldingspaneel': 'Širina slikovnega panela',

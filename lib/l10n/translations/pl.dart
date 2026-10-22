@@ -1617,6 +1617,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Transcriptie en opname': 'Transkrypcja i nagrywanie',
+  'Opname loopt': 'Nagrywanie w toku',
+  'Opname stoppen': 'Zatrzymaj nagrywanie',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Dźwięk systemu',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Utwórz transkrypcję nagrania lub istniejącego pliku audio — jako edytowalny dokument Markdown, z jasnym wyborem, czy oryginał jest zachowywany. Lokalnie, gdzie to możliwe; własny serwer tylko jeśli go wybierzesz. Źródła nagrań i silniki pojawią się w kolejnych wersjach.',
   'Afbeeldingen omwisselen': 'Zamień obrazy miejscami',
   'Afbeelding links': 'Lewy obraz',
   'Breedte afbeeldingspaneel': 'Szerokość panelu obrazu',

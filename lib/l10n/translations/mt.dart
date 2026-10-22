@@ -1623,6 +1623,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Transcriptie en opname': 'Traskrizzjoni u reġistrazzjoni',
+  'Opname loopt': 'Reġistrazzjoni għaddejja',
+  'Opname stoppen': 'Waqqaf ir-reġistrazzjoni',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Ħoss tas-sistema',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Oħloq traskrizzjoni ta\' reġistrazzjoni jew ta\' fajl awdjo eżistenti — bħala dokument Markdown editabbli, b\'għażla ċara jekk l-oriġinal jinżammx. Lokalment fejn possibbli; is-server tiegħek biss jekk tagħżlu. Is-sorsi tar-reġistrazzjoni u l-magni jaslu f\'verżjonijiet li ġejjin.',
   'Afbeeldingen omwisselen': 'Aqleb l-immaġnijiet',
   'Afbeelding links': 'Immaġni tax-xellug',
   'Breedte afbeeldingspaneel': 'Wisa\' tal-panew tal-immaġni',

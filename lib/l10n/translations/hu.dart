@@ -1607,6 +1607,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Transcriptie en opname': 'Átírás és felvétel',
+  'Opname loopt': 'Felvétel folyamatban',
+  'Opname stoppen': 'Felvétel leállítása',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Rendszerhang',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Készítsen átiratot egy felvételről vagy egy meglévő hangfájlról — szerkeszthető Markdown-dokumentumként, egyértelmű választással, hogy az eredeti megmarad-e. Helyben, ahol lehetséges; saját kiszolgáló csak akkor, ha azt választja. A felvételi források és motorok későbbi verziókban érkeznek.',
   'Afbeeldingen omwisselen': 'Képek felcserélése',
   'Afbeelding links': 'Bal oldali kép',
   'Breedte afbeeldingspaneel': 'Képpanel szélessége',

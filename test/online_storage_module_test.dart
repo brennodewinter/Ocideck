@@ -127,6 +127,7 @@ void main() {
         ModuleId.libreplan,
         ModuleId.elearning,
         ModuleId.forms,
+        ModuleId.transcription,
       ]);
     });
   });

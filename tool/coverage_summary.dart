@@ -202,6 +202,10 @@ const Set<String> uncoveredBaseline = {
   // door ociserve_web_stubs_test.
   'lib/services/ociserve/ociserve_auth_platform.dart',
   'lib/services/ociserve/ociserve_http_factory.dart',
+  // NO EXECUTABLE LINES: `recording_staging.dart` is de conditional-exportnaad
+  // van de opnamestaging — één export-regel, geen statements. De io-helft wordt
+  // rechtstreeks gedekt door recording_staging_test; de stub is een no-op.
+  'lib/services/transcription/recording_staging.dart',
   // NO EXECUTABLE LINES: `mermaid_config.dart` is één bron van waarheid voor de
   // mermaid-instellingen — alleen const-declaraties, lcov schrijft er geen
   // record voor. PLATFORM: `mermaid_web_renderer.dart` is de web-helft die

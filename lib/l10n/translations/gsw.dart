@@ -1608,6 +1608,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Transcriptie en opname': 'Transkription und Ufnahm',
+  'Opname loopt': 'Ufnahm lauft',
+  'Opname stoppen': 'Ufnahm stoppe',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Systemton',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Mach e Transkription von ere Ufnahm oder von eme vorhandene Audiodatei — als bearbeitsbars Markdown-Dokument, mit ere klare Wahl, öb s Original bhalte wird. Lokal wos goht; en eigene Server nume wenn Du en wählsch. D Ufnahmquelle und Engines chöme in spötere Versione.',
   'Afbeeldingen omwisselen': 'Bilder vertuusche',
   'Afbeelding links': 'Links Bild',
   'Breedte afbeeldingspaneel': 'Breiti vom Bildpanel',

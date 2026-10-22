@@ -652,6 +652,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Transcriptie en opname': 'Transkription und Aufnahme',
+  'Opname loopt': 'Aufnahme läuft',
+  'Opname stoppen': 'Aufnahme stoppen',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Systemton',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Erstellen Sie ein Transkript einer Aufnahme oder einer vorhandenen Audiodatei — als bearbeitbares Markdown-Dokument, mit einer klaren Wahl, ob das Original aufbewahrt wird. Lokal wo möglich; ein eigener Server nur, wenn Sie ihn wählen. Aufnahmequellen und Engines folgen in späteren Versionen.',
   'Afbeeldingen omwisselen': 'Bilder tauschen',
   'Afbeelding links': 'Linkes Bild',
   'Breedte afbeeldingspaneel': 'Breite des Bildbereichs',

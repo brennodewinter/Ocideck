@@ -199,11 +199,13 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   ...callRail(ref),
                 ],
               );
-              // Banners stack above the workspace: the collab verification
-              // prompt (self-hiding — see CollabVerifyBanner) and the read-only
-              // finalized lock.
+              // Banners stack above the workspace: de opname-indicator (alleen
+              // zichtbaar tijdens een sessie, maar dan boven élke tab), de
+              // collab verification prompt (self-hiding — see
+              // CollabVerifyBanner) en de read-only finalized lock.
               return Column(
                 children: [
+                  const RecordingIndicator(),
                   const CollabVerifyBanner(),
                   if (deck.finalized) _finalizedBanner(context, l10n),
                   Expanded(child: workspace),
