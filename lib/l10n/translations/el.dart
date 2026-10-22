@@ -1630,6 +1630,29 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Transcript': 'Απομαγνητοφώνηση',
+  'Opnieuw controleren': 'Έλεγχος ξανά',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Το αρχείο ήχου μετακινήθηκε ή διαγράφηκε. Η απομαγνητοφώνηση παραμένει πλήρως διαθέσιμη.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Ο δείκτης απομαγνητοφώνησης δεν βρίσκεται στην πρώτη γραμμή· το έγγραφο αντιμετωπίζεται ως απλό κείμενο.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Υπάρχουν περισσότεροι από ένας δείκτες απομαγνητοφώνησης· το έγγραφο αντιμετωπίζεται ως απλό κείμενο.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Ο δείκτης απομαγνητοφώνησης είναι κατεστραμμένος· το έγγραφο αντιμετωπίζεται ως απλό κείμενο.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Η αναφορά ήχου στον δείκτη απομαγνητοφώνησης δείχνει εκτός του φακέλου του έργου· το έγγραφο αντιμετωπίζεται ως απλό κείμενο.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Ο δείκτης απομαγνητοφώνησης προέρχεται από νεότερη έκδοση· το έγγραφο αντιμετωπίζεται ως απλό κείμενο.',
+  'Nieuwe transcripttekst': 'Νέο κείμενο απομαγνητοφώνησης',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Το κείμενο στο έγγραφο τροποποιήθηκε χειροκίνητα. Επιλέξτε ποιο κείμενο θα διατηρηθεί· το άλλο θα χαθεί.',
+  'Huidige tekst': 'Τρέχον κείμενο',
+  'Nieuwe tekst': 'Νέο κείμενο',
+  'Huidige tekst behouden': 'Διατήρηση τρέχοντος κειμένου',
+  'Nieuwe tekst toepassen': 'Εφαρμογή νέου κειμένου',
+  'De transcripttekst is te groot om toe te passen.':
+      'Το κείμενο της απομαγνητοφώνησης είναι πολύ μεγάλο για εφαρμογή.',
   'Transcriptie en opname': 'Μεταγραφή και εγγραφή',
   'Opname loopt': 'Εγγραφή σε εξέλιξη',
   'Opname stoppen': 'Διακοπή εγγραφής',

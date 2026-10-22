@@ -1605,6 +1605,29 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Transcript': 'Transskription',
+  'Opnieuw controleren': 'Kontrollér igen',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Lydfilen er blevet flyttet eller slettet. Transskriptionen forbliver fuldt tilgængelig.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Transskriptionsmarkøren står ikke på første linje; dokumentet behandles som almindelig tekst.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Der er mere end én transskriptionsmarkør; dokumentet behandles som almindelig tekst.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Transskriptionsmarkøren er beskadiget; dokumentet behandles som almindelig tekst.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Lyreferencen i transskriptionsmarkøren peger uden for projektmappen; dokumentet behandles som almindelig tekst.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Transskriptionsmarkøren er fra en nyere version; dokumentet behandles som almindelig tekst.',
+  'Nieuwe transcripttekst': 'Ny transskriptionstekst',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Teksten i dokumentet er blevet ændret manuelt. Vælg hvilken tekst der bevares; den anden går tabt.',
+  'Huidige tekst': 'Nuværende tekst',
+  'Nieuwe tekst': 'Ny tekst',
+  'Huidige tekst behouden': 'Bevar nuværende tekst',
+  'Nieuwe tekst toepassen': 'Anvend ny tekst',
+  'De transcripttekst is te groot om toe te passen.':
+      'Transskriptionsteksten er for stor til at blive anvendt.',
   'Transcriptie en opname': 'Transskription og optagelse',
   'Opname loopt': 'Optagelse i gang',
   'Opname stoppen': 'Stop optagelse',

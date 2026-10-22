@@ -1605,6 +1605,29 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Transcript': 'Litterointi',
+  'Opnieuw controleren': 'Tarkista uudelleen',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Äänitiedosto on siirretty tai poistettu. Litterointi säilyy täysin käytettävissä.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Litterointimerkki ei ole ensimmäisellä rivillä; asiakirjaa käsitellään tavallisena tekstinä.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Litterointimerkkejä on useampi kuin yksi; asiakirjaa käsitellään tavallisena tekstinä.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Litterointimerkki on vioittunut; asiakirjaa käsitellään tavallisena tekstinä.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Litterointimerkin ääniviittaus osoittaa projektikansion ulkopuolelle; asiakirjaa käsitellään tavallisena tekstinä.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Litterointimerkki on uudemmasta versiosta; asiakirjaa käsitellään tavallisena tekstinä.',
+  'Nieuwe transcripttekst': 'Uusi litterointiteksti',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Asiakirjan tekstiä on muokattu käsin. Valitse, kumpi teksti säilytetään; toinen menetetään.',
+  'Huidige tekst': 'Nykyinen teksti',
+  'Nieuwe tekst': 'Uusi teksti',
+  'Huidige tekst behouden': 'Säilytä nykyinen teksti',
+  'Nieuwe tekst toepassen': 'Käytä uutta tekstiä',
+  'De transcripttekst is te groot om toe te passen.':
+      'Litterointiteksti on liian suuri käytettäväksi.',
   'Transcriptie en opname': 'Litterointi ja äänitys',
   'Opname loopt': 'Äänitys käynnissä',
   'Opname stoppen': 'Lopeta äänitys',

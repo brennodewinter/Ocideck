@@ -649,6 +649,29 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Transcript': 'Transcripción',
+  'Opnieuw controleren': 'Comprobar de nuevo',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'El archivo de audio se ha movido o eliminado. La transcripción sigue totalmente disponible.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'El marcador de transcripción no está en la primera línea; el documento se trata como texto normal.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Hay más de un marcador de transcripción; el documento se trata como texto normal.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'El marcador de transcripción está dañado; el documento se trata como texto normal.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'La referencia de audio del marcador de transcripción apunta fuera de la carpeta del proyecto; el documento se trata como texto normal.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'El marcador de transcripción es de una versión más reciente; el documento se trata como texto normal.',
+  'Nieuwe transcripttekst': 'Nuevo texto de transcripción',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'El texto del documento se ha modificado a mano. Elige qué texto se conserva; el otro se perderá.',
+  'Huidige tekst': 'Texto actual',
+  'Nieuwe tekst': 'Texto nuevo',
+  'Huidige tekst behouden': 'Conservar el texto actual',
+  'Nieuwe tekst toepassen': 'Aplicar el texto nuevo',
+  'De transcripttekst is te groot om toe te passen.':
+      'El texto de la transcripción es demasiado grande para aplicarlo.',
   'Transcriptie en opname': 'Transcripción y grabación',
   'Opname loopt': 'Grabación en curso',
   'Opname stoppen': 'Detener la grabación',

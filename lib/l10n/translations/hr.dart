@@ -1609,6 +1609,29 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Transcript': 'Transkript',
+  'Opnieuw controleren': 'Provjeri ponovno',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Audio datoteka je premještena ili izbrisana. Transkript ostaje u potpunosti dostupan.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Oznaka transkripta nije u prvom retku; dokument se tretira kao običan tekst.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Postoji više od jedne oznake transkripta; dokument se tretira kao običan tekst.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Oznaka transkripta je oštećena; dokument se tretira kao običan tekst.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Referenca na zvuk u oznaci transkripta pokazuje izvan mape projekta; dokument se tretira kao običan tekst.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Oznaka transkripta je novije verzije; dokument se tretira kao običan tekst.',
+  'Nieuwe transcripttekst': 'Novi tekst transkripta',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Tekst u dokumentu ručno je izmijenjen. Odaberite koji se tekst čuva; drugi će se izgubiti.',
+  'Huidige tekst': 'Trenutačni tekst',
+  'Nieuwe tekst': 'Novi tekst',
+  'Huidige tekst behouden': 'Zadrži trenutačni tekst',
+  'Nieuwe tekst toepassen': 'Primijeni novi tekst',
+  'De transcripttekst is te groot om toe te passen.':
+      'Tekst transkripta prevelik je za primjenu.',
   'Transcriptie en opname': 'Transkripcija i snimanje',
   'Opname loopt': 'Snimanje u tijeku',
   'Opname stoppen': 'Zaustavi snimanje',

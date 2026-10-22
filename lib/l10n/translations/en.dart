@@ -811,6 +811,29 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Transcript': 'Transcript',
+  'Opnieuw controleren': 'Check again',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'The audio file has been moved or deleted. The transcript remains fully available.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'The transcript marker is not on the first line; the document is treated as plain text.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'There is more than one transcript marker; the document is treated as plain text.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'The transcript marker is malformed; the document is treated as plain text.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'The audio reference in the transcript marker points outside the project folder; the document is treated as plain text.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'The transcript marker is from a newer version; the document is treated as plain text.',
+  'Nieuwe transcripttekst': 'New transcript text',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'The text in the document was edited by hand. Choose which text is kept; the other is lost.',
+  'Huidige tekst': 'Current text',
+  'Nieuwe tekst': 'New text',
+  'Huidige tekst behouden': 'Keep current text',
+  'Nieuwe tekst toepassen': 'Apply new text',
+  'De transcripttekst is te groot om toe te passen.':
+      'The transcript text is too large to apply.',
   'Transcriptie en opname': 'Transcription and recording',
   'Opname loopt': 'Recording in progress',
   'Opname stoppen': 'Stop recording',

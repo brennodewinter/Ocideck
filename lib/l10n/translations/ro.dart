@@ -1621,6 +1621,29 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Transcript': 'Transcriere',
+  'Opnieuw controleren': 'Verifică din nou',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Fișierul audio a fost mutat sau șters. Transcrierea rămâne complet disponibilă.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Marcajul de transcriere nu se află pe prima linie; documentul este tratat ca text obișnuit.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Există mai mult de un marcaj de transcriere; documentul este tratat ca text obișnuit.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Marcajul de transcriere este deteriorat; documentul este tratat ca text obișnuit.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Referința audio din marcajul de transcriere indică în afara folderului proiectului; documentul este tratat ca text obișnuit.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Marcajul de transcriere este dintr-o versiune mai nouă; documentul este tratat ca text obișnuit.',
+  'Nieuwe transcripttekst': 'Text nou de transcriere',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Textul din document a fost modificat manual. Alegeți care text este păstrat; celălalt se pierde.',
+  'Huidige tekst': 'Text curent',
+  'Nieuwe tekst': 'Text nou',
+  'Huidige tekst behouden': 'Păstrează textul curent',
+  'Nieuwe tekst toepassen': 'Aplică textul nou',
+  'De transcripttekst is te groot om toe te passen.':
+      'Textul transcrierii este prea mare pentru a fi aplicat.',
   'Transcriptie en opname': 'Transcriere și înregistrare',
   'Opname loopt': 'Înregistrare în desfășurare',
   'Opname stoppen': 'Oprește înregistrarea',

@@ -651,6 +651,29 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Transcript': 'Transkripshon',
+  'Opnieuw controleren': 'Kontrolá atrobe',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'E archivo di audio a wordu move of eliminá. E transkripshon ta keda kompletamente disponibel.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'E markadó di transkripshon no ta riba e promé liña; e dokumento ta wordu trata komo teksto normal.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Tin mas di un markadó di transkripshon; e dokumento ta wordu trata komo teksto normal.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'E markadó di transkripshon ta dañá; e dokumento ta wordu trata komo teksto normal.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'E referensia di audio den e markadó di transkripshon ta puntra pafor di e carpeta di e proyecto; e dokumento ta wordu trata komo teksto normal.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'E markadó di transkripshon ta di un version mas nobo; e dokumento ta wordu trata komo teksto normal.',
+  'Nieuwe transcripttekst': 'Teksto di transkripshon nobo',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'E teksto den e dokumento a wordu adaptá manualmente. Skohe kua teksto ta keda warda; e otro lo bai perdi.',
+  'Huidige tekst': 'Teksto aktual',
+  'Nieuwe tekst': 'Teksto nobo',
+  'Huidige tekst behouden': 'Konservá e teksto aktual',
+  'Nieuwe tekst toepassen': 'Apliká e teksto nobo',
+  'De transcripttekst is te groot om toe te passen.':
+      'E teksto di transkripshon ta muchu grandi pa apliké.',
   'Transcriptie en opname': 'Transkripshon i grabashon',
   'Opname loopt': 'Grabashon ta andando',
   'Opname stoppen': 'Stop e grabashon',

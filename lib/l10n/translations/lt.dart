@@ -1611,6 +1611,29 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Transcript': 'Transkripcija',
+  'Opnieuw controleren': 'Tikrinti dar kartą',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Garso failas buvo perkeltas arba ištrintas. Transkripcija lieka visiškai prieinama.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Transkripcijos žymeklis nėra pirmoje eilutėje; dokumentas traktuojamas kaip įprastas tekstas.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Yra daugiau nei vienas transkripcijos žymeklis; dokumentas traktuojamas kaip įprastas tekstas.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Transkripcijos žymeklis pažeistas; dokumentas traktuojamas kaip įprastas tekstas.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Garso nuoroda transkripcijos žymeklyje rodo už projekto aplanko ribų; dokumentas traktuojamas kaip įprastas tekstas.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Transkripcijos žymeklis yra iš naujesnės versijos; dokumentas traktuojamas kaip įprastas tekstas.',
+  'Nieuwe transcripttekst': 'Naujas transkripcijos tekstas',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Dokumento tekstas buvo pakeistas ranka. Pasirinkite, kuris tekstas išsaugomas; kitas bus prarastas.',
+  'Huidige tekst': 'Dabartinis tekstas',
+  'Nieuwe tekst': 'Naujas tekstas',
+  'Huidige tekst behouden': 'Išsaugoti dabartinį tekstą',
+  'Nieuwe tekst toepassen': 'Taikyti naują tekstą',
+  'De transcripttekst is te groot om toe te passen.':
+      'Transkripcijos tekstas per didelis pritaikyti.',
   'Transcriptie en opname': 'Transkripcija ir įrašymas',
   'Opname loopt': 'Įrašymas vyksta',
   'Opname stoppen': 'Sustabdyti įrašymą',

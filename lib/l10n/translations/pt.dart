@@ -1633,6 +1633,29 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Transcript': 'Transcrição',
+  'Opnieuw controleren': 'Verificar novamente',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'O ficheiro de áudio foi movido ou eliminado. A transcrição permanece totalmente disponível.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'O marcador de transcrição não está na primeira linha; o documento é tratado como texto normal.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Há mais do que um marcador de transcrição; o documento é tratado como texto normal.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'O marcador de transcrição está corrompido; o documento é tratado como texto normal.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'A referência de áudio no marcador de transcrição aponta para fora da pasta do projeto; o documento é tratado como texto normal.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'O marcador de transcrição é de uma versão mais recente; o documento é tratado como texto normal.',
+  'Nieuwe transcripttekst': 'Novo texto de transcrição',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'O texto do documento foi alterado manualmente. Escolha que texto é mantido; o outro será perdido.',
+  'Huidige tekst': 'Texto atual',
+  'Nieuwe tekst': 'Novo texto',
+  'Huidige tekst behouden': 'Manter texto atual',
+  'Nieuwe tekst toepassen': 'Aplicar novo texto',
+  'De transcripttekst is te groot om toe te passen.':
+      'O texto da transcrição é demasiado grande para ser aplicado.',
   'Transcriptie en opname': 'Transcrição e gravação',
   'Opname loopt': 'Gravação em curso',
   'Opname stoppen': 'Parar a gravação',

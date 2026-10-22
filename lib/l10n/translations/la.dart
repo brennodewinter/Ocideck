@@ -1620,6 +1620,29 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Transcript': 'Exscriptum',
+  'Opnieuw controleren': 'Iterum verifica',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Fasciculus phonographicus motus aut deletus est. Exscriptum omnino praesto manet.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Signum exscriptionis in prima linea non stat; documentum ut textus ordinarius tractatur.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Plura signa exscriptionis adsunt; documentum ut textus ordinarius tractatur.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Signum exscriptionis corruptum est; documentum ut textus ordinarius tractatur.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Relatio soni in signo exscriptionis extra folderam propositi monstrat; documentum ut textus ordinarius tractatur.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Signum exscriptionis ex versione recentiore est; documentum ut textus ordinarius tractatur.',
+  'Nieuwe transcripttekst': 'Novus textus exscriptionis',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Textus in documento manu mutatus est. Elige quis textus servetur; alter peribit.',
+  'Huidige tekst': 'Textus praesens',
+  'Nieuwe tekst': 'Textus novus',
+  'Huidige tekst behouden': 'Textum praesentem serva',
+  'Nieuwe tekst toepassen': 'Novum textum adhibe',
+  'De transcripttekst is te groot om toe te passen.':
+      'Textus exscriptionis nimis magnus est adhibendus.',
   'Transcriptie en opname': 'Transcriptio et recordatio',
   'Opname loopt': 'Recordatio procedit',
   'Opname stoppen': 'Recordationem siste',

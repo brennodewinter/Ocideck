@@ -4454,6 +4454,62 @@ Facts that matter on disk:
 - **The `.md` export keeps the marker**, being source — the space is part of
   the document, unlike the generated contents list of §14.10 which is dropped.
 
+### 14.16 Transcript — the `<!-- transcript -->` marker *(added 2026-10-26)*
+
+A transcript is an ordinary document — plain `.md`, no front-matter
+requirement — that OciDeck recognises by **one HTML comment on a line of its
+own**, the same mechanism as `<!-- toc -->`, `<!-- form -->` and
+`<!-- spacer -->`: unprefixed, ignorable by every other reader, and reported
+rather than silently dropped when malformed (the §14.14 rule applies):
+
+```markdown
+<!-- transcript version=1 audio="media/opname-20261022-1403.m4a" -->
+# Transcript — vergadering 22 oktober
+
+Bron: [opname-20261022-1403.m4a](media/opname-20261022-1403.m4a)
+Opgenomen: 2026-10-22 14:03 · Bron: microfoon · Duur: 0:41:12
+Engine: whisper.cpp `base` (lokaal) · Taal: nl
+
+---
+
+Eerste alinea van de tekst…
+```
+
+Facts that matter on disk:
+
+- **Position and count.** The marker is the first marker of the file — the
+  first line of the body, directly under the front matter when the document
+  carries any — and occurs at most once. `version` is a monotonically
+  increasing integer, the document-level counterpart of `ocideck_format`;
+  a version OciDeck does not know is reported, not interpreted.
+- **`audio` is the only machine-readable attribute**: a project-relative
+  path into `media/`, under the same containment guard as every other asset
+  reference — absolute paths and `../` escapes are refused, not followed.
+  It is absent when the original recording was not kept; the marker stays,
+  because "this text came from a transcription" remains true and visible.
+- **The provenance block is ordinary text.** Heading, source link, recording
+  moment, source kind, duration, engine and language are human-readable
+  lines — written once at creation and then owned by the author, never
+  rewritten silently. Timestamps and speaker labels are plain text too
+  (`[h:mm:ss] **Spreker n:**`), present only where the engine delivered them.
+- **The transcript body is what lies under the `---` rule** that follows the
+  provenance block — the only region a later model pass may replace, and
+  only after a visible comparison whenever the text was touched by hand.
+- **In the visual editor the marker is atomic** (`x-embed-transcript`): one
+  block, byte-identical through a rich-text round trip, shown as a subtle
+  "Transcript" label with the audio file name. A line that is *almost* a
+  marker stays a source fragment — it is meant to look like raw source.
+- **On export.** The `.md` export keeps marker and provenance text, being
+  source; the audio link travels as written — a recipient gets the
+  *reference*, never embedded audio bytes. There is no `.ocideck` package
+  route for documents (§14.4), and this design does not carve one out.
+
+Design, lifecycle and the capability matrix: `docs/design/TRANSCRIPTION.md`.
+The code lives under `lib/services/transcription/` (marker grammar,
+document writer, update planning, audio probe) with the editor seams in
+`lib/utils/transcript_embed_syntax.dart` and
+`lib/widgets/transcript_document_extras.dart`.
+
 ## 15. Document Dossiers
 
 A document dossier is a folder containing `dossier.json` and a derived,

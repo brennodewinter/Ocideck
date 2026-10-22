@@ -1603,6 +1603,29 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Transcript': 'Transkripcija',
+  'Opnieuw controleren': 'Pārbaudīt vēlreiz',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Audio fails ir pārvietots vai izdzēsts. Transkripcija joprojām ir pilnībā pieejama.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Transkripcijas marķieris nav pirmajā rindā; dokuments tiek apstrādāts kā parasts teksts.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Ir vairāk nekā viens transkripcijas marķieris; dokuments tiek apstrādāts kā parasts teksts.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Transkripcijas marķieris ir bojāts; dokuments tiek apstrādāts kā parasts teksts.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Audio atsauce transkripcijas marķierī norāda ārpus projekta mapes; dokuments tiek apstrādāts kā parasts teksts.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Transkripcijas marķieris ir no jaunākas versijas; dokuments tiek apstrādāts kā parasts teksts.',
+  'Nieuwe transcripttekst': 'Jauns transkripcijas teksts',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Dokumenta teksts ir manuāli labots. Izvēlieties, kurš teksts tiek saglabāts; otrs tiks zaudēts.',
+  'Huidige tekst': 'Pašreizējais teksts',
+  'Nieuwe tekst': 'Jaunais teksts',
+  'Huidige tekst behouden': 'Saglabāt pašreizējo tekstu',
+  'Nieuwe tekst toepassen': 'Lietot jauno tekstu',
+  'De transcripttekst is te groot om toe te passen.':
+      'Transkripcijas teksts ir pārāk liels, lai to lietotu.',
   'Transcriptie en opname': 'Transkripcija un ierakstīšana',
   'Opname loopt': 'Ierakstīšana notiek',
   'Opname stoppen': 'Apturēt ierakstīšanu',

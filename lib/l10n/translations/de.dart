@@ -652,6 +652,29 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Transcript': 'Transkript',
+  'Opnieuw controleren': 'Erneut prüfen',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Die Audiodatei wurde verschoben oder gelöscht. Das Transkript bleibt vollständig verfügbar.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Der Transkript-Marker steht nicht in der ersten Zeile; das Dokument wird als normaler Text behandelt.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Es gibt mehrere Transkript-Marker; das Dokument wird als normaler Text behandelt.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Der Transkript-Marker ist beschädigt; das Dokument wird als normaler Text behandelt.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Die Audioreferenz im Transkript-Marker zeigt außerhalb des Projektordners; das Dokument wird als normaler Text behandelt.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Der Transkript-Marker stammt von einer neueren Version; das Dokument wird als normaler Text behandelt.',
+  'Nieuwe transcripttekst': 'Neuer Transkripttext',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Der Text im Dokument wurde manuell angepasst. Wähle, welcher Text behalten wird; der andere geht verloren.',
+  'Huidige tekst': 'Aktueller Text',
+  'Nieuwe tekst': 'Neuer Text',
+  'Huidige tekst behouden': 'Aktuellen Text behalten',
+  'Nieuwe tekst toepassen': 'Neuen Text anwenden',
+  'De transcripttekst is te groot om toe te passen.':
+      'Der Transkripttext ist zu groß zum Anwenden.',
   'Transcriptie en opname': 'Transkription und Aufnahme',
   'Opname loopt': 'Aufnahme läuft',
   'Opname stoppen': 'Aufnahme stoppen',

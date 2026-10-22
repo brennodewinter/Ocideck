@@ -98,6 +98,7 @@ import 'presentation/display_info.dart';
 import 'presentation/fullscreen_presenter.dart'
     show DocumentExitChoice, presentDocument;
 import 'reader/table_edit_controller.dart';
+import 'transcript_document_extras.dart';
 import 'reader/paged_document_view.dart';
 import 'reader/writing_page_breaks.dart';
 import 'shell/document_save_actions.dart';
@@ -485,6 +486,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               color: theme.colorScheme.outlineVariant,
             ),
             if (_find.visible) _findBar(),
+            // Marker-melding + toepassingsverzoeken van de transcriptmodule
+            // (#2511); voor een gewoon document rendert dit niets.
+            const TranscriptDocumentExtras(),
             Expanded(
               child: DocumentImageScope(
                 projectPath: _documentProjectPath(ref),

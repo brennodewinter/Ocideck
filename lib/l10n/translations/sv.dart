@@ -1604,6 +1604,29 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Transcript': 'Transkription',
+  'Opnieuw controleren': 'Kontrollera igen',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Ljudfilen har flyttats eller tagits bort. Transkriptionen finns kvar i sin helhet.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Transkriptionsmarkören står inte på första raden; dokumentet behandlas som vanlig text.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Det finns fler än en transkriptionsmarkör; dokumentet behandlas som vanlig text.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Transkriptionsmarkören är skadad; dokumentet behandlas som vanlig text.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Ljudreferensen i transkriptionsmarkören pekar utanför projektmappen; dokumentet behandlas som vanlig text.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Transkriptionsmarkören är från en nyare version; dokumentet behandlas som vanlig text.',
+  'Nieuwe transcripttekst': 'Ny transkriptionstext',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Texten i dokumentet har ändrats manuellt. Välj vilken text som ska behållas; den andra går förlorad.',
+  'Huidige tekst': 'Nuvarande text',
+  'Nieuwe tekst': 'Ny text',
+  'Huidige tekst behouden': 'Behåll nuvarande text',
+  'Nieuwe tekst toepassen': 'Tillämpa ny text',
+  'De transcripttekst is te groot om toe te passen.':
+      'Transkriptionstexten är för stor för att tillämpas.',
   'Transcriptie en opname': 'Transkribering och inspelning',
   'Opname loopt': 'Inspelning pågår',
   'Opname stoppen': 'Stoppa inspelningen',

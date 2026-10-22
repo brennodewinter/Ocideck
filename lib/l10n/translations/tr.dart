@@ -2513,6 +2513,29 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Transcript': 'Transkript',
+  'Opnieuw controleren': 'Yeniden denetle',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Ses dosyası taşındı veya silindi. Transkript tamamen erişilebilir durumda kalır.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Transkript işaretçisi ilk satırda değil; belge düz metin olarak işlenir.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Birden fazla transkript işaretçisi var; belge düz metin olarak işlenir.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Transkript işaretçisi bozuk; belge düz metin olarak işlenir.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Transkript işaretçisindeki ses referansı proje klasörünün dışını gösteriyor; belge düz metin olarak işlenir.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Transkript işaretçisi daha yeni bir sürümden; belge düz metin olarak işlenir.',
+  'Nieuwe transcripttekst': 'Yeni transkript metni',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Belgedeki metin elle değiştirildi. Hangi metnin saklanacağını seçin; diğeri kaybolur.',
+  'Huidige tekst': 'Geçerli metin',
+  'Nieuwe tekst': 'Yeni metin',
+  'Huidige tekst behouden': 'Geçerli metni koru',
+  'Nieuwe tekst toepassen': 'Yeni metni uygula',
+  'De transcripttekst is te groot om toe te passen.':
+      'Transkript metni uygulanamayacak kadar büyük.',
   'Transcriptie en opname': 'Transkripsiyon ve kayıt',
   'Opname loopt': 'Kayıt devam ediyor',
   'Opname stoppen': 'Kaydı durdur',

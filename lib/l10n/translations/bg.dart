@@ -1624,6 +1624,29 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Transcript': 'Транскрипция',
+  'Opnieuw controleren': 'Провери отново',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Аудиофайлът е преместен или изтрит. Транскрипцията остава напълно достъпна.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Маркерът за транскрипция не е на първия ред; документът се третира като обикновен текст.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Има повече от един маркер за транскрипция; документът се третира като обикновен текст.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Маркерът за транскрипция е повреден; документът се третира като обикновен текст.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Препратката към аудио в маркера за транскрипция сочи извън папката на проекта; документът се третира като обикновен текст.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Маркерът за транскрипция е от по-нова версия; документът се третира като обикновен текст.',
+  'Nieuwe transcripttekst': 'Нов текст на транскрипцията',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Текстът в документа е променен ръчно. Изберете кой текст да се запази; другият ще бъде загубен.',
+  'Huidige tekst': 'Текущ текст',
+  'Nieuwe tekst': 'Нов текст',
+  'Huidige tekst behouden': 'Запази текущия текст',
+  'Nieuwe tekst toepassen': 'Приложи новия текст',
+  'De transcripttekst is te groot om toe te passen.':
+      'Текстът на транскрипцията е твърде голям за прилагане.',
   'Transcriptie en opname': 'Транскрипция и запис',
   'Opname loopt': 'Записът продължава',
   'Opname stoppen': 'Спиране на записа',
