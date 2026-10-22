@@ -284,7 +284,7 @@ void main() {
       expect(sessionEdits.last.tableRows[1][1], '250');
       expect(tableUpdates.last['slideIndex'], 0);
       expect(tableUpdates.last['tableRows'], sessionEdits.last.tableRows);
-      expect(tableUpdates.last['alignments'], isA<List>());
+      expect(tableUpdates.last['alignments'], isA<List<dynamic>>());
       expect(tableUpdates.last['seq'], isA<int>());
 
       await tester.pumpWidget(const SizedBox());
