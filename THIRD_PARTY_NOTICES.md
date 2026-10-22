@@ -36,7 +36,7 @@ Shipped inside the app and embedded into the **offline HTML export**
 | [marked](https://github.com/markedjs/marked) | Markdown → HTML in the export | MIT |
 | [highlight.js](https://github.com/highlightjs/highlight.js) | Code highlighting in the export | BSD-3-Clause |
 | [highlight.js GitHub theme](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css) (`highlight.css`) | The colours for that highlighting; hash-pinned, no npm package of its own | BSD-3-Clause |
-| [DOMPurify](https://github.com/cure53/DOMPurify) | Sanitises the rendered Markdown before it hits the DOM in the export | Apache-2.0 / MPL-2.0 |
+| [DOMPurify 3.4.17](https://github.com/cure53/DOMPurify/releases/tag/3.4.17) | Sanitises the rendered Markdown before it hits the DOM in the export | Apache-2.0 / MPL-2.0 |
 | [Mermaid](https://github.com/mermaid-js/mermaid) | Diagrams in the export | MIT |
 | [MathJax](https://github.com/mathjax/MathJax) (`tex-svg.js`) | Math rendering in the export | Apache-2.0 |
 | [EB Garamond](https://github.com/octaviopardo/EBGaramond12) font | Bundled deck font | SIL Open Font License 1.1 |
