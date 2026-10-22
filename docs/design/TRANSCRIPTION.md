@@ -385,6 +385,16 @@ abstract class CaptureSession {
   /// supports it. Absent means "no live route", not "live failed".
   Stream<AudioChunk>? get liveChunks;
 
+  /// One event when the source ends on its own — device gone, shared tab
+  /// closed, permission revoked mid-capture. Absent where a source has no
+  /// spontaneous end (a file does not "run"). The session boundary (#2510)
+  /// subscribes to this and stops the recording: a capture that kept going
+  /// after its source died would run invisibly, which §2.3 forbids.
+  /// (Added when #2510 implemented this boundary — the spontaneous-end
+  /// channel is what makes "stop provably on source/permission loss"
+  /// testable instead of aspirational.)
+  Stream<CaptureEndCause>? get ended;
+
   /// Stops capture; resolves when the durable file is complete and flushed.
   Future<RecordedAudio> stop();
 }

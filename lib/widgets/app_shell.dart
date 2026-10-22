@@ -78,6 +78,7 @@ import '../services/export_bundle.dart';
 import '../services/privacy/privacy_projection.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
+import '../services/transcription/recording_session.dart';
 import 'mermaid_render_host.dart';
 import '../models/git_settings.dart';
 import '../services/git/asset_index.dart';
@@ -93,6 +94,7 @@ import '../services/webdav_service.dart';
 import '../services/web_deck_index.dart';
 import '../state/collab_session_provider.dart';
 import '../state/deck_provider.dart';
+import '../state/transcription_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/document_provider.dart';
 import '../state/elearning_provider.dart';
@@ -197,6 +199,7 @@ import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/collab_chat_panel.dart';
 import 'panels/call_panel.dart';
+import 'panels/recording_indicator.dart';
 import 'panels/slide_list_panel.dart';
 import 'privacy_badge.dart';
 import 'collab_verify_banner.dart';
@@ -212,6 +215,7 @@ part 'app_shell_menu.dart';
 
 // Shell sub-widgets and helpers, split into part files for navigability; the parts share this library's imports and private scope.
 part 'shell/provenance_actions.dart';
+part 'shell/recording_lifecycle.dart';
 part 'shell/shell_actions.dart';
 part 'shell/shell_actions_present.dart';
 part 'shell/shell_actions_export.dart';
@@ -299,6 +303,8 @@ class _AppShellState extends ConsumerState<AppShell> {
       (session) =>
           ref.read(ociServeProvider.notifier).closeLessonSession(session),
     );
+    // Verlopen opname-staging vegen — zie _sweepStaleRecordings.
+    _sweepStaleRecordings(ref);
     ref.read(ociServeProvider.notifier).closeLearningTabsLocally = () =>
         closeLearningTabsLocally(ref.read(tabsProvider.notifier));
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -514,6 +520,8 @@ class _AppShellState extends ConsumerState<AppShell> {
     for (final session in sessions) {
       await ref.read(ociServeProvider.notifier).closeLessonSession(session);
     }
+    // Lopende opname stoppen vóór de native quit — zie _stopRecordingBeforeQuit.
+    await _stopRecordingBeforeQuit(ref);
     if (mounted) await settleUiBeforeNativeQuit(context);
     await quitApp();
   }

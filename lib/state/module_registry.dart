@@ -20,6 +20,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'collaboration_provider.dart';
 import 'meeting_session_provider.dart';
 import 'info_safety_provider.dart';
+import 'transcription_provider.dart';
 import 'online_storage_provider.dart';
 import 'import_module_provider.dart';
 import 'managementsysteem_provider.dart';
@@ -45,6 +46,7 @@ enum ModuleId {
   libreplan,
   elearning,
   forms,
+  transcription,
 }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
@@ -154,5 +156,10 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.forms,
     enabled: formsEnabledProvider,
     revealed: formsRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.transcription,
+    enabled: transcriptionEnabledProvider,
+    revealed: transcriptionRevealProvider,
   ),
 ];

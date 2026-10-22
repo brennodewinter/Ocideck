@@ -1605,6 +1605,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Transcriptie en opname': 'Transkripsi dan perekaman',
+  'Opname loopt': 'Perekaman berlangsung',
+  'Opname stoppen': 'Hentikan perekaman',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Audio sistem',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Buat transkrip dari rekaman atau berkas audio yang ada — sebagai dokumen Markdown yang dapat disunting, dengan pilihan jelas apakah aslinya disimpan. Lokal jika memungkinkan; server sendiri hanya jika Anda memilihnya. Sumber rekaman dan mesin menyusul di versi berikutnya.',
   'Afbeeldingen omwisselen': 'Tukar gambar',
   'Afbeelding links': 'Gambar kiri',
   'Breedte afbeeldingspaneel': 'Lebar panel gambar',

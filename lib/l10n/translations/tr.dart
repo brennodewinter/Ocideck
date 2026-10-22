@@ -2513,6 +2513,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Transcriptie en opname': 'Transkripsiyon ve kayıt',
+  'Opname loopt': 'Kayıt devam ediyor',
+  'Opname stoppen': 'Kaydı durdur',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Sistem sesi',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Bir kaydın veya mevcut bir ses dosyasının dökümünü oluşturun — düzenlenebilir bir Markdown belgesi olarak, orijinalin saklanıp saklanmayacağına dair net bir seçimle. Mümkün olduğunda yerel; kendi sunucunuz yalnızca siz seçerseniz. Kayıt kaynakları ve motorlar sonraki sürümlerde gelecek.',
   'Afbeeldingen omwisselen': 'Görsellerin yerini değiştir',
   'Afbeelding links': 'Sol görsel',
   'Breedte afbeeldingspaneel': 'Görsel panelinin genişliği',

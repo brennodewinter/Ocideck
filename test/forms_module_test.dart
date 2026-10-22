@@ -79,8 +79,8 @@ void main() {
       expect(c.read(formsRevealProvider), isFalse);
     });
 
-    test('het register bevat Formulieren, als laatste', () {
-      expect(moduleRegistry.last.id, ModuleId.forms);
+    test('het register bevat Formulieren', () {
+      expect(moduleRegistry.map((e) => e.id), contains(ModuleId.forms));
     });
   });
 

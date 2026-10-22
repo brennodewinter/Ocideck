@@ -1620,6 +1620,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Transcriptie en opname': 'Transcriptio et recordatio',
+  'Opname loopt': 'Recordatio procedit',
+  'Opname stoppen': 'Recordationem siste',
+  'Microfoon': 'Microphonum',
+  'Systeemgeluid': 'Sonus systematis',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Transcriptionem recordationis vel existentis audiofili fac — ut documentum Markdown editabile, clara optione utrum originale servetur. Localiter ubi fieri potest; proprius server tantum si eligas. Fontes recordationis et engines in versionibus sequentibus venient.',
   'Afbeeldingen omwisselen': 'Imagines permutare',
   'Afbeelding links': 'Imago sinistra',
   'Breedte afbeeldingspaneel': 'Latitudo tabulae imaginis',

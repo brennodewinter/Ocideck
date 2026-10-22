@@ -1620,6 +1620,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Transcriptie en opname': 'Транскрипція та запис',
+  'Opname loopt': 'Запис триває',
+  'Opname stoppen': 'Зупинити запис',
+  'Microfoon': 'Мікрофон',
+  'Systeemgeluid': 'Системний звук',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Створіть транскрипцію запису або наявного аудіофайлу — як редагований документ Markdown, із чітким вибором щодо збереження оригіналу. Локально, де це можливо; власний сервер лише за вашим вибором. Джерела запису та рушії з\'являться в наступних версіях.',
   'Afbeeldingen omwisselen': 'Поміняти зображення місцями',
   'Afbeelding links': 'Ліве зображення',
   'Breedte afbeeldingspaneel': 'Ширина панелі зображення',

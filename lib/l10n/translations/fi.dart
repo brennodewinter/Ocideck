@@ -1605,6 +1605,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Transcriptie en opname': 'Litterointi ja äänitys',
+  'Opname loopt': 'Äänitys käynnissä',
+  'Opname stoppen': 'Lopeta äänitys',
+  'Microfoon': 'Mikrofoni',
+  'Systeemgeluid': 'Järjestelmän ääni',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Tee litterointi äänityksestä tai olemassa olevasta äänitiedostosta — muokattavana Markdown-dokumenttina, selkeällä valinnalla säilyykö alkuperäinen. Paikallisesti kun mahdollista; oma palvelin vain jos sellaisen valitset. Äänityslähteet ja moottorit tulevat myöhemmissä versioissa.',
   'Afbeeldingen omwisselen': 'Vaihda kuvien paikat',
   'Afbeelding links': 'Vasen kuva',
   'Breedte afbeeldingspaneel': 'Kuvapaneelin leveys',

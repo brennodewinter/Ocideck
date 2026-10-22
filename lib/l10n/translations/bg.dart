@@ -1624,6 +1624,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Transcriptie en opname': 'Транскрипция и запис',
+  'Opname loopt': 'Записът продължава',
+  'Opname stoppen': 'Спиране на записа',
+  'Microfoon': 'Микрофон',
+  'Systeemgeluid': 'Системен звук',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Създайте транскрипция на запис или съществуващ аудиофайл — като редактируем Markdown документ, с ясен избор дали оригиналът се пази. Локално, когато е възможно; собствен сървър само ако го изберете. Източниците на запис и машините идват в следващи версии.',
   'Afbeeldingen omwisselen': 'Размени изображенията',
   'Afbeelding links': 'Ляво изображение',
   'Breedte afbeeldingspaneel': 'Ширина на панела с изображение',

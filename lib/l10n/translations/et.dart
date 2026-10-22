@@ -1598,6 +1598,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Transcriptie en opname': 'Transkriptsioon ja salvestus',
+  'Opname loopt': 'Salvestus käib',
+  'Opname stoppen': 'Peata salvestus',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Süsteemiheli',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Loo salvestuse või olemasoleva helifaili transkriptsioon — redigeeritava Markdown-dokumendina, selge valikuga, kas originaal säilitatakse. Kohapeal kui võimalik; oma server ainult siis, kui selle valid. Salvestusallikad ja mootorid tulevad hilisemates versioonides.',
   'Afbeeldingen omwisselen': 'Vaheta piltide kohad',
   'Afbeelding links': 'Vasak pilt',
   'Breedte afbeeldingspaneel': 'Pildipaneeli laius',

@@ -82,6 +82,7 @@ import 'settings/video_calls_module_card.dart';
 import 'settings/managementsysteem_module_card.dart';
 import 'settings/elearning_module_card.dart';
 import 'settings/forms_module_card.dart';
+import 'settings/transcription_module_card.dart';
 import 'settings/libreplan_integration_card.dart';
 import 'settings/libreplan_module_card.dart';
 import 'libreplan_import_dialog.dart';

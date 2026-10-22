@@ -1635,6 +1635,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Transcriptie en opname': 'Trascríobh agus taifead',
+  'Opname loopt': 'Taifead ar siúl',
+  'Opname stoppen': 'Stop an taifead',
+  'Microfoon': 'Micreafón',
+  'Systeemgeluid': 'Fuaim an chórais',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Déan tras-scríobh de thaifead nó de chomhad fuaime atá ann cheana — mar dhoiciméad Markdown inathraithe, le rogha shoiléir an gcoinntear an bunleagan. Go háitiúil nuair is féidir; do fhreastalaí féin ach amháin má roghnaíonn tú é. Tiocfaidh foinsí taifid agus inneall i leaganacha níos déanaí.',
   'Afbeeldingen omwisselen': 'Malartaigh na híomhánna',
   'Afbeelding links': 'Íomhá chlé',
   'Breedte afbeeldingspaneel': 'Leithead an phainéil íomhá',

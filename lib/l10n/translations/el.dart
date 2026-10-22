@@ -1630,6 +1630,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Transcriptie en opname': 'Μεταγραφή και εγγραφή',
+  'Opname loopt': 'Εγγραφή σε εξέλιξη',
+  'Opname stoppen': 'Διακοπή εγγραφής',
+  'Microfoon': 'Μικρόφωνο',
+  'Systeemgeluid': 'Ήχος συστήματος',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Δημιουργήστε μεταγραφή μιας εγγραφής ή ενός υπάρχοντος αρχείου ήχου — ως επεξεργάσιμο έγγραφο Markdown, με σαφή επιλογή για το αν το πρωτότυπο διατηρείται. Τοπικά όπου είναι δυνατόν· ο δικός σας διακομιστής μόνο αν τον επιλέξετε. Οι πηγές εγγραφής και οι μηχανές έρχονται σε επόμενες εκδόσεις.',
   'Afbeeldingen omwisselen': 'Ανταλλαγή εικόνων',
   'Afbeelding links': 'Αριστερή εικόνα',
   'Breedte afbeeldingspaneel': 'Πλάτος πλαισίου εικόνας',

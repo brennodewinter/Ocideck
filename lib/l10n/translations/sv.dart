@@ -1604,6 +1604,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Transcriptie en opname': 'Transkribering och inspelning',
+  'Opname loopt': 'Inspelning pågår',
+  'Opname stoppen': 'Stoppa inspelningen',
+  'Microfoon': 'Mikrofon',
+  'Systeemgeluid': 'Systemljud',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
+      'Skapa en transkribering av en inspelning eller en befintlig ljudfil — som ett redigerbart Markdown-dokument, med ett tydligt val om originalet sparas. Lokalt där det är möjligt; din egen server bara om du väljer den. Inspelningskällor och motorer kommer i senare versioner.',
   'Afbeeldingen omwisselen': 'Byt plats på bilderna',
   'Afbeelding links': 'Vänster bild',
   'Breedte afbeeldingspaneel': 'Bildpanelens bredd',
