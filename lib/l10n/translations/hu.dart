@@ -1607,6 +1607,29 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Transcript': 'Átirat',
+  'Opnieuw controleren': 'Újraellenőrzés',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'A hangfájlt áthelyezték vagy törölték. Az átirat továbbra is teljes egészében elérhető.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Az átirat-jelölő nem az első sorban áll; a dokumentum egyszerű szövegként kerül kezelésre.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Egynél több átirat-jelölő található; a dokumentum egyszerű szövegként kerül kezelésre.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Az átirat-jelölő sérült; a dokumentum egyszerű szövegként kerül kezelésre.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Az átirat-jelölőben lévő hanghivatkozás a projektmappán kívülre mutat; a dokumentum egyszerű szövegként kerül kezelésre.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Az átirat-jelölő egy újabb verzióból származik; a dokumentum egyszerű szövegként kerül kezelésre.',
+  'Nieuwe transcripttekst': 'Új átiratszöveg',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'A dokumentum szövegét kézzel módosították. Válassza ki, melyik szöveg maradjon meg; a másik elvész.',
+  'Huidige tekst': 'Jelenlegi szöveg',
+  'Nieuwe tekst': 'Új szöveg',
+  'Huidige tekst behouden': 'Jelenlegi szöveg megtartása',
+  'Nieuwe tekst toepassen': 'Új szöveg alkalmazása',
+  'De transcripttekst is te groot om toe te passen.':
+      'Az átiratszöveg túl nagy az alkalmazáshoz.',
   'Transcriptie en opname': 'Átírás és felvétel',
   'Opname loopt': 'Felvétel folyamatban',
   'Opname stoppen': 'Felvétel leállítása',

@@ -1,4 +1,5 @@
 import '../services/table_of_contents.dart';
+import '../services/transcription/transcript_marker.dart';
 import 'spacer_embed_syntax.dart';
 import '../services/document_timeline.dart';
 import '../services/markdown_table_lines.dart';
@@ -163,6 +164,10 @@ Set<int> _limitationLines(String markdown) {
     final lineWithoutCode = line.replaceAll(_inlineCode, '');
     if (!tocMarkerLinePattern.hasMatch(line) &&
         !spacerMarkerLinePattern.hasMatch(line) &&
+        // De transcript-marker reist als `x-embed-transcript` mee; alleen de
+        // geldige grammatica is uitgezonderd — een bijna-marker hoort juist
+        // in een bronfragment thuis (#2511).
+        !transcriptMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&
         _rawHtml.hasMatch(lineWithoutCode)) {
       hits.add(index);
@@ -193,6 +198,7 @@ bool _isFragmentBoundary(
   if (RegExp(r'^\s{0,3}\[\^[^\]]+\]:').hasMatch(line)) return true;
   if (tocMarkerLinePattern.hasMatch(line) ||
       spacerMarkerLinePattern.hasMatch(line) ||
+      transcriptMarkerLinePattern.hasMatch(line) ||
       line.trim() == documentTimelineMarker ||
       isOciTableMarkerLine(line)) {
     return true;

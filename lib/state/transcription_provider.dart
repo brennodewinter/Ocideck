@@ -9,6 +9,8 @@
 // uit #2510. De opname stopt netjes (de capture rondt zijn stagingbestand
 // af), de herstelperiode bewaart wat er lag, en het transcript staat er
 // niet zomaar een halfbestand bij.
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,6 +44,55 @@ final recordingManagerProvider = Provider<RecordingManager>((ref) {
 final transcriptionEngineProvider = Provider<TranscriptionEngine?>(
   (ref) => null,
 );
+
+/// Een verzoek aan het open transcriptdocument: pas deze binnenkomende tekst
+/// toe — een definitieve pass na opname, of een nieuwe modelrun. De sessie
+/// die hem schreef weet welke tekst er al stond en geeft die mee als
+/// [baseline]; wijkt de huidige body daarvan af, dan heeft iemand hem
+/// aangeraakt en mag alleen de gebruiker besluiten (§3.1: provenance en
+/// tekst die iemand bewerkte zijn geen klad).
+class TranscriptApplyRequest {
+  TranscriptApplyRequest({required this.incoming, this.baseline});
+
+  /// De binnenkomende transcripttekst voor onder de `---`-scheiding.
+  final String incoming;
+
+  /// De tekst die de sessie er eerder zelf neerzette, als die er is.
+  final String? baseline;
+
+  /// `true` = de tekst is overgenomen; `false` = de gebruiker koos zijn
+  /// eigen tekst, of de weg ernaartoe was versperd.
+  final completer = Completer<bool>();
+}
+
+/// Hooguit één openstaand toepassingsverzoek. De producers (#2515 bestand,
+/// #2522 live+definitief) zetten hem; de documenteditor beantwoordt hem.
+final transcriptApplyRequestProvider =
+    NotifierProvider<TranscriptApplyNotifier, TranscriptApplyRequest?>(
+      TranscriptApplyNotifier.new,
+    );
+
+class TranscriptApplyNotifier extends Notifier<TranscriptApplyRequest?> {
+  @override
+  TranscriptApplyRequest? build() => null;
+
+  /// Dient een verzoek in en wacht op de afloop. Een nieuw verzoek lost een
+  /// hangend verzoek op met `false` — de tekst waarop hij draaide is inmiddels
+  /// vervangen, dus doorgaan had stil de nieuwe staat overschreven.
+  Future<bool> request({required String incoming, String? baseline}) {
+    state?.completer.complete(false);
+    final next = TranscriptApplyRequest(incoming: incoming, baseline: baseline);
+    state = next;
+    return next.completer.future;
+  }
+
+  /// De antwoordkant — de editor meldt of de tekst overgenomen is.
+  void resolve(bool applied) {
+    final pending = state;
+    state = null;
+    pending?.completer.complete(applied);
+  }
+}
 
 final transcriptionModuleProvider =
     NotifierProvider<TranscriptionModuleNotifier, TranscriptionModuleState>(

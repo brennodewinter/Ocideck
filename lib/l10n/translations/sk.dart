@@ -1611,6 +1611,29 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Transcript': 'Prepis',
+  'Opnieuw controleren': 'Skontrolovať znova',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Zvukový súbor bol presunutý alebo vymazaný. Prepis zostáva plne k dispozícii.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Značka prepisu nie je na prvom riadku; dokument sa spracováva ako obyčajný text.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Je tu viac ako jedna značka prepisu; dokument sa spracováva ako obyčajný text.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Značka prepisu je poškodená; dokument sa spracováva ako obyčajný text.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Odkaz na zvuk v značke prepisu ukazuje mimo priečinka projektu; dokument sa spracováva ako obyčajný text.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Značka prepisu pochádza z novšej verzie; dokument sa spracováva ako obyčajný text.',
+  'Nieuwe transcripttekst': 'Nový text prepisu',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Text v dokumente bol ručne upravený. Vyberte, ktorý text sa zachová; druhý sa stratí.',
+  'Huidige tekst': 'Aktuálny text',
+  'Nieuwe tekst': 'Nový text',
+  'Huidige tekst behouden': 'Zachovať aktuálny text',
+  'Nieuwe tekst toepassen': 'Použiť nový text',
+  'De transcripttekst is te groot om toe te passen.':
+      'Text prepisu je príliš veľký na použitie.',
   'Transcriptie en opname': 'Prepis a nahrávanie',
   'Opname loopt': 'Nahrávanie prebieha',
   'Opname stoppen': 'Zastaviť nahrávanie',

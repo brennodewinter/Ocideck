@@ -1598,6 +1598,29 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Transcript': 'Transkriptsioon',
+  'Opnieuw controleren': 'Kontrolli uuesti',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Helifail on teisaldatud või kustutatud. Transkriptsioon jääb täielikult kättesaadavaks.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Transkriptsiooni marker ei ole esimesel real; dokumenti käsitletakse tavalise tekstina.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Transkriptsiooni markereid on rohkem kui üks; dokumenti käsitletakse tavalise tekstina.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Transkriptsiooni marker on vigane; dokumenti käsitletakse tavalise tekstina.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Heliviide transkriptsiooni markeris osutab väljapoole projektikausta; dokumenti käsitletakse tavalise tekstina.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Transkriptsiooni marker pärineb uuemast versioonist; dokumenti käsitletakse tavalise tekstina.',
+  'Nieuwe transcripttekst': 'Uus transkriptsiooni tekst',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Dokumendi teksti on käsitsi muudetud. Valige, kumb tekst säilitatakse; teine läheb kaotsi.',
+  'Huidige tekst': 'Praegune tekst',
+  'Nieuwe tekst': 'Uus tekst',
+  'Huidige tekst behouden': 'Säilita praegune tekst',
+  'Nieuwe tekst toepassen': 'Rakenda uus tekst',
+  'De transcripttekst is te groot om toe te passen.':
+      'Transkriptsiooni tekst on rakendamiseks liiga suur.',
   'Transcriptie en opname': 'Transkriptsioon ja salvestus',
   'Opname loopt': 'Salvestus käib',
   'Opname stoppen': 'Peata salvestus',

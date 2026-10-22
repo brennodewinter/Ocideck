@@ -14,6 +14,7 @@ import 'pentest_block_embed_syntax.dart';
 import 'source_fragment_embed_syntax.dart';
 import 'toc_embed_syntax.dart';
 import 'spacer_embed_syntax.dart';
+import 'transcript_embed_syntax.dart';
 import 'ocideck_table_embed_syntax.dart';
 import 'timeline_table_embed_syntax.dart';
 
@@ -69,6 +70,9 @@ class MarkdownQuillCodec {
       FormBlockSyntax(),
       TocMarkerSyntax(),
       SpacerMarkerSyntax(),
+      // De transcript-marker (`<!-- transcript … -->`) reist als eigen embed;
+      // alleen de geldige grammatica — een bijna-marker blijft bronfragment.
+      TranscriptMarkerSyntax(),
       // Vóór de standaard-fenceregel: zonder deze regel werd een
       // ```mermaid-fence een gewoon codeblok en tekende de visuele editor
       // als enige weergave het diagram niet (#1920).
@@ -94,6 +98,7 @@ class MarkdownQuillCodec {
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
       EmbeddableSpacer.spacerType: EmbeddableSpacer.fromMdSyntax,
+      EmbeddableTranscript.transcriptType: EmbeddableTranscript.fromMdSyntax,
       EmbeddableMermaid.mermaidType: EmbeddableMermaid.fromMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.fromMdSyntax,
@@ -111,6 +116,7 @@ class MarkdownQuillCodec {
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
       EmbeddableSpacer.spacerType: EmbeddableSpacer.toMdSyntax,
+      EmbeddableTranscript.transcriptType: EmbeddableTranscript.toMdSyntax,
       EmbeddableMermaid.mermaidType: EmbeddableMermaid.toMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.toMdSyntax,

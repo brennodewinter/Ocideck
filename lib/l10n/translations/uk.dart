@@ -1620,6 +1620,29 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Transcript': 'Транскрипт',
+  'Opnieuw controleren': 'Перевірити ще раз',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Аудіофайл було переміщено або видалено. Транскрипт залишається повністю доступним.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Маркер транскрипту не стоїть у першому рядку; документ обробляється як звичайний текст.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Транскрипт-маркерів кілька; документ обробляється як звичайний текст.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Маркер транскрипту пошкоджено; документ обробляється як звичайний текст.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Посилання на аудіо в маркері транскрипту вказує за межі теки проєкту; документ обробляється як звичайний текст.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Маркер транскрипту від новішої версії; документ обробляється як звичайний текст.',
+  'Nieuwe transcripttekst': 'Новий текст транскрипту',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Текст у документі було змінено вручну. Виберіть, який текст зберегти; інший буде втрачено.',
+  'Huidige tekst': 'Поточний текст',
+  'Nieuwe tekst': 'Новий текст',
+  'Huidige tekst behouden': 'Зберегти поточний текст',
+  'Nieuwe tekst toepassen': 'Застосувати новий текст',
+  'De transcripttekst is te groot om toe te passen.':
+      'Текст транскрипту завеликий для застосування.',
   'Transcriptie en opname': 'Транскрипція та запис',
   'Opname loopt': 'Запис триває',
   'Opname stoppen': 'Зупинити запис',

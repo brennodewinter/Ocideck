@@ -1605,6 +1605,29 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Transcript': 'Prepis',
+  'Opnieuw controleren': 'Preveri znova',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Zvočna datoteka je bila premaknjena ali izbrisana. Prepis ostaja v celoti na voljo.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Označevalnik prepisa ni v prvi vrstici; dokument se obravnava kot navadno besedilo.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Označevalnikov prepisa je več kot en; dokument se obravnava kot navadno besedilo.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Označevalnik prepisa je poškodovan; dokument se obravnava kot navadno besedilo.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Sklic na zvok v označevalniku prepisa kaže zunaj mape projekta; dokument se obravnava kot navadno besedilo.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Označevalnik prepisa je novejše različice; dokument se obravnava kot navadno besedilo.',
+  'Nieuwe transcripttekst': 'Novo besedilo prepisa',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Besedilo v dokumentu je bilo ročno spremenjeno. Izberite, katero besedilo se ohrani; drugo bo izgubljeno.',
+  'Huidige tekst': 'Trenutno besedilo',
+  'Nieuwe tekst': 'Novo besedilo',
+  'Huidige tekst behouden': 'Obdrži trenutno besedilo',
+  'Nieuwe tekst toepassen': 'Uporabi novo besedilo',
+  'De transcripttekst is te groot om toe te passen.':
+      'Besedilo prepisa je preveliko za uporabo.',
   'Transcriptie en opname': 'Prepis in snemanje',
   'Opname loopt': 'Snemanje poteka',
   'Opname stoppen': 'Ustavi snemanje',

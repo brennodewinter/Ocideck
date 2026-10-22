@@ -30,6 +30,7 @@ import 'source_fragment_embed_builder.dart';
 import 'spacer_embed_builder.dart';
 import 'toc_embed_builder.dart';
 import 'timeline_table_embed_builder.dart';
+import 'transcript_embed_builder.dart';
 
 /// The Quill [DefaultStyles] for the document/notes WYSIWYG surface, derived
 /// entirely from [theme] so every block honours the app theme.
@@ -545,6 +546,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   const DividerEmbedBuilder(),
                   const TocEmbedBuilder(),
                   const SpacerEmbedBuilder(),
+                  const TranscriptEmbedBuilder(),
                   const MermaidEmbedBuilder(),
                   const PentestBlockEmbedBuilder(),
                   const FormBlockEmbedBuilder(),

@@ -1608,6 +1608,29 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Transcript': 'Transkript',
+  'Opnieuw controleren': 'Nomol prüefe',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'D Audiodatei isch verschobe oder glöscht worde. S Transkript blibt vollständig verfüegbar.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'De Transkript-Marker staht nöd uf de erste Zile; s Dokumänt wird als normali Tekst behandlet.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Es het mee as ei Transkript-Marker; s Dokumänt wird als normali Tekst behandlet.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'De Transkript-Marker isch beschädigt; s Dokumänt wird als normali Tekst behandlet.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'D Audioreferänz im Transkript-Marker zeigt usserhalb vom Projäktordner; s Dokumänt wird als normali Tekst behandlet.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'De Transkript-Marker isch von ere nöiere Version; s Dokumänt wird als normali Tekst behandlet.',
+  'Nieuwe transcripttekst': 'Neui Transkripttekst',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'De Teggscht im Dokumänt isch vo Hand aapasst worde. Wehl, welere Teggscht bhale wird; de andere gaht verlore.',
+  'Huidige tekst': 'Aktuelle Teggscht',
+  'Nieuwe tekst': 'Nöi Teggscht',
+  'Huidige tekst behouden': 'Aktuelle Teggscht bhale',
+  'Nieuwe tekst toepassen': 'Nöie Teggscht aawände',
+  'De transcripttekst is te groot om toe te passen.':
+      'De Transkriptteggscht isch z gross zum Aawände.',
   'Transcriptie en opname': 'Transkription und Ufnahm',
   'Opname loopt': 'Ufnahm lauft',
   'Opname stoppen': 'Ufnahm stoppe',

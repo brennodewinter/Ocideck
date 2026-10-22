@@ -652,6 +652,29 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Transcript': 'Transcription',
+  'Opnieuw controleren': 'Vérifier à nouveau',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Le fichier audio a été déplacé ou supprimé. La transcription reste entièrement disponible.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Le marqueur de transcription n\'est pas sur la première ligne ; le document est traité comme du texte ordinaire.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Il y a plusieurs marqueurs de transcription ; le document est traité comme du texte ordinaire.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Le marqueur de transcription est corrompu ; le document est traité comme du texte ordinaire.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'La référence audio du marqueur de transcription pointe en dehors du dossier du projet ; le document est traité comme du texte ordinaire.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Le marqueur de transcription est d\'une version plus récente ; le document est traité comme du texte ordinaire.',
+  'Nieuwe transcripttekst': 'Nouveau texte de transcription',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Le texte du document a été modifié à la main. Choisissez quel texte est conservé ; l\'autre sera perdu.',
+  'Huidige tekst': 'Texte actuel',
+  'Nieuwe tekst': 'Nouveau texte',
+  'Huidige tekst behouden': 'Conserver le texte actuel',
+  'Nieuwe tekst toepassen': 'Appliquer le nouveau texte',
+  'De transcripttekst is te groot om toe te passen.':
+      'Le texte de la transcription est trop volumineux pour être appliqué.',
   'Transcriptie en opname': 'Transcription et enregistrement',
   'Opname loopt': 'Enregistrement en cours',
   'Opname stoppen': 'Arrêter l\'enregistrement',

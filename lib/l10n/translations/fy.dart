@@ -652,6 +652,29 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Transcript': 'Transkript',
+  'Opnieuw controleren': 'Op \'e nij kontrolearje',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'It audiobestân is ferpleatst of wiske. It transkript bliuwt folslein beskikber.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'De transkript-markearring stiet net op de earste rigel; it dokumint wurdt as gewoane tekst behannele.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Der steane mear as ien transkript-markearrings yn; it dokumint wurdt as gewoane tekst behannele.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'De transkript-markearring is skansearre; it dokumint wurdt as gewoane tekst behannele.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'De audiowerwizing yn de transkript-markearring wiist bûten de projektmap; it dokumint wurdt as gewoane tekst behannele.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'De transkript-markearring is fan in nijere ferzje; it dokumint wurdt as gewoane tekst behannele.',
+  'Nieuwe transcripttekst': 'Nije transkripttekst',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'De tekst yn it dokumint is hânmjittich oanpast. Kies hokker tekst bewarre bliuwt; de oare giet ferlern.',
+  'Huidige tekst': 'Hjoeddeistige tekst',
+  'Nieuwe tekst': 'Nije tekst',
+  'Huidige tekst behouden': 'Hjoeddeistige tekst behâlde',
+  'Nieuwe tekst toepassen': 'Nije tekst tapasse',
+  'De transcripttekst is te groot om toe te passen.':
+      'De transkripttekst is te grut om ta te passen.',
   'Transcriptie en opname': 'Transkripsje en opname',
   'Opname loopt': 'Opname rint',
   'Opname stoppen': 'Opname stopje',

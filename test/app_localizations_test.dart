@@ -81,6 +81,9 @@ const unchangedInEnglish = {
   'Media (WebRTC)',
   // Callout-editor: 'Pins' is identiek in het Engels.
   'Pins',
+  // 'Transcript' is in het Engels hetzelfde woord; de andere talen wijken af
+  // (Duits Transkript, Frans Transcription, Fins Litterointi, …).
+  'Transcript',
   'CVSS',
   // Het documenttabblad: het Engels houdt 'Document' identiek aan het
   // Nederlands, maar andere talen vertalen het wél (Italiaans Documento, Duits

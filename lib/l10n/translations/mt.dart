@@ -1623,6 +1623,29 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Transcript': 'Traskrizzjoni',
+  'Opnieuw controleren': 'Iċċekkja mill-ġdid',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Il-fajl tal-awdjo ġie mċaqlaq jew imħassar. It-traskrizzjoni tibqa\' disponibbli għal kollox.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Il-markatur tat-traskrizzjoni mhuwiex fl-ewwel linja; id-dokument jiġi trattat bħala test normali.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Hemm iktar minn markatur wieħed tat-traskrizzjoni; id-dokument jiġi trattat bħala test normali.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Il-markatur tat-traskrizzjoni huwa bil-ħsara; id-dokument jiġi trattat bħala test normali.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Ir-referenza tal-awdjo fil-markatur tat-traskrizzjoni tipponta barra l-folfer tal-proġett; id-dokument jiġi trattat bħala test normali.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Il-markatur tat-traskrizzjoni huwa ta\' verżjoni iktar ġdida; id-dokument jiġi trattat bħala test normali.',
+  'Nieuwe transcripttekst': 'Test ġdid tat-traskrizzjoni',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'It-test fid-dokument ġie mmodifikat manwalment. Agħżel liema test jinżamm; l-ieħor jintilef.',
+  'Huidige tekst': 'Test attwali',
+  'Nieuwe tekst': 'Test ġdid',
+  'Huidige tekst behouden': 'Żomm it-test attwali',
+  'Nieuwe tekst toepassen': 'Applika t-test il-ġdid',
+  'De transcripttekst is te groot om toe te passen.':
+      'It-test tat-traskrizzjoni huwa kbir wisq biex jiġi applikat.',
   'Transcriptie en opname': 'Traskrizzjoni u reġistrazzjoni',
   'Opname loopt': 'Reġistrazzjoni għaddejja',
   'Opname stoppen': 'Waqqaf ir-reġistrazzjoni',

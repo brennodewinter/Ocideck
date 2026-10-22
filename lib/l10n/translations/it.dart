@@ -649,6 +649,29 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Transcript': 'Trascrizione',
+  'Opnieuw controleren': 'Controlla di nuovo',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Il file audio è stato spostato o eliminato. La trascrizione resta completamente disponibile.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Il marcatore di trascrizione non è sulla prima riga; il documento viene trattato come testo normale.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'C\'è più di un marcatore di trascrizione; il documento viene trattato come testo normale.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Il marcatore di trascrizione è danneggiato; il documento viene trattato come testo normale.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Il riferimento audio nel marcatore di trascrizione punta fuori dalla cartella del progetto; il documento viene trattato come testo normale.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Il marcatore di trascrizione è di una versione più recente; il documento viene trattato come testo normale.',
+  'Nieuwe transcripttekst': 'Nuovo testo della trascrizione',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Il testo nel documento è stato modificato a mano. Scegli quale testo conservare; l\'altro andrà perso.',
+  'Huidige tekst': 'Testo attuale',
+  'Nieuwe tekst': 'Nuovo testo',
+  'Huidige tekst behouden': 'Mantieni il testo attuale',
+  'Nieuwe tekst toepassen': 'Applica il nuovo testo',
+  'De transcripttekst is te groot om toe te passen.':
+      'Il testo della trascrizione è troppo grande per essere applicato.',
   'Transcriptie en opname': 'Trascrizione e registrazione',
   'Opname loopt': 'Registrazione in corso',
   'Opname stoppen': 'Interrompi la registrazione',

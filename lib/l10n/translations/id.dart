@@ -1605,6 +1605,29 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Transcript': 'Transkrip',
+  'Opnieuw controleren': 'Periksa lagi',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Berkas audio telah dipindahkan atau dihapus. Transkrip tetap tersedia sepenuhnya.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Penanda transkrip tidak berada di baris pertama; dokumen diperlakukan sebagai teks biasa.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Ada lebih dari satu penanda transkrip; dokumen diperlakukan sebagai teks biasa.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Penanda transkrip rusak; dokumen diperlakukan sebagai teks biasa.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Referensi audio pada penanda transkrip menunjuk ke luar folder proyek; dokumen diperlakukan sebagai teks biasa.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Penanda transkrip berasal dari versi yang lebih baru; dokumen diperlakukan sebagai teks biasa.',
+  'Nieuwe transcripttekst': 'Teks transkrip baru',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Teks dalam dokumen telah diubah secara manual. Pilih teks mana yang disimpan; yang lain akan hilang.',
+  'Huidige tekst': 'Teks saat ini',
+  'Nieuwe tekst': 'Teks baru',
+  'Huidige tekst behouden': 'Pertahankan teks saat ini',
+  'Nieuwe tekst toepassen': 'Terapkan teks baru',
+  'De transcripttekst is te groot om toe te passen.':
+      'Teks transkrip terlalu besar untuk diterapkan.',
   'Transcriptie en opname': 'Transkripsi dan perekaman',
   'Opname loopt': 'Perekaman berlangsung',
   'Opname stoppen': 'Hentikan perekaman',

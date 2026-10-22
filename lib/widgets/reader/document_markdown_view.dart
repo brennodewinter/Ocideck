@@ -22,6 +22,7 @@ import '../../services/risk_bowtie_diagram.dart';
 import '../../services/form_document_blocks.dart';
 import '../../services/table_layout_metrics.dart';
 import '../../services/table_of_contents.dart';
+import '../../services/transcription/transcript_marker.dart';
 import '../../services/web_asset_store.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/bundled_asset.dart';
@@ -402,6 +403,7 @@ class DocumentMarkdownView extends StatelessWidget {
     ),
     _Kind.toc => _bounded(_tocPreview(context, t)),
     _Kind.spacer => _spacer(t),
+    _Kind.transcript => _bounded(_TranscriptMarkerLine(t)),
   };
 
   /// Feature 4: live preview van de inhoudsopgave. Genereert de TOC uit de
@@ -841,6 +843,12 @@ class DocumentMarkdownView extends StatelessWidget {
   static _Kind? _markerKind(String trimmed) {
     if (trimmed == '<!-- toc -->') return _Kind.toc;
     if (spacerMarkerLinePattern.hasMatch(trimmed)) return _Kind.spacer;
+    // De transcript-marker is provenance, geen inhoud — hij krijgt dezelfde
+    // subtiele aanduiding als in de schrijfweergave. Een bijna-marker is
+    // hier géén marker: die blijft zichtbaar rauwe tekst (§14.14).
+    if (transcriptMarkerLinePattern.hasMatch(trimmed)) {
+      return _Kind.transcript;
+    }
     return null;
   }
 

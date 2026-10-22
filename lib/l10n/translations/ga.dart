@@ -1635,6 +1635,29 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Transcript': 'Tras-scríobh',
+  'Opnieuw controleren': 'Seiceáil arís',
+  'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
+      'Bogadh nó scriosadh an comhad fuaime. Fanann an tras-scríobh ar fáil go hiomlán.',
+  'De transcript-marker staat niet op de eerste regel; het document wordt als gewone tekst behandeld.':
+      'Níl an marcóir tras-scríofa ar an gcéad líne; déileáiltear leis an doiciméad mar ghnáth-théacs.',
+  'Er staan meerdere transcript-markers in; het document wordt als gewone tekst behandeld.':
+      'Tá níos mó ná marcóir tras-scríofa amháin ann; déileáiltear leis an doiciméad mar ghnáth-théacs.',
+  'De transcript-marker is beschadigd; het document wordt als gewone tekst behandeld.':
+      'Tá an marcóir tras-scríofa lochtach; déileáiltear leis an doiciméad mar ghnáth-théacs.',
+  'De audioverwijzing in de transcript-marker wijst buiten de projectmap; het document wordt als gewone tekst behandeld.':
+      'Tá an tagairt fuaime sa mharcóir tras-scríofa ag díriú lasmuigh de fhillteán an tionscadail; déileáiltear leis an doiciméad mar ghnáth-théacs.',
+  'De transcript-marker is van een nieuwere versie; het document wordt als gewone tekst behandeld.':
+      'Is ó leagan níos nuaí an marcóir tras-scríofa; déileáiltear leis an doiciméad mar ghnáth-théacs.',
+  'Nieuwe transcripttekst': 'Téacs nua tras-scríofa',
+  'De tekst in het document is handmatig aangepast. Kies welke tekst bewaard blijft; de andere gaat verloren.':
+      'Athraíodh an téacs sa doiciméad de láimh. Roghnaigh cén téacs a choinneofar; caillfear an téacs eile.',
+  'Huidige tekst': 'Téacs reatha',
+  'Nieuwe tekst': 'Téacs nua',
+  'Huidige tekst behouden': 'Coinnigh an téacs reatha',
+  'Nieuwe tekst toepassen': 'Cuir an téacs nua i bhfeidhm',
+  'De transcripttekst is te groot om toe te passen.':
+      'Tá téacs an tras-scríofa ró-mhór le cur i bhfeidhm.',
   'Transcriptie en opname': 'Trascríobh agus taifead',
   'Opname loopt': 'Taifead ar siúl',
   'Opname stoppen': 'Stop an taifead',

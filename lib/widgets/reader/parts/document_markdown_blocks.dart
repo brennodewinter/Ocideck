@@ -23,6 +23,7 @@ enum _Kind {
   image,
   toc,
   spacer,
+  transcript,
 }
 
 /// One parsed block: its kind plus whatever that kind needs to render and to be
@@ -707,3 +708,34 @@ Widget _checkMarker(_Theme t, {required bool checked}) => SizedBox(
     ),
   ),
 );
+
+/// De transcript-marker in de leesweergave: het bewijs "deze tekst komt uit
+/// een transcriptie" — één regel, niet meer. De provenance eronder is gewone
+/// tekst en spreekt voor zich. Eigen widget in plaats van een methode op de
+/// view, zodat die onder zijn klassenplafond blijft (#2511).
+class _TranscriptMarkerLine extends StatelessWidget {
+  const _TranscriptMarkerLine(this.t);
+
+  final _Theme t;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Icon(Icons.mic_none, size: 14, color: t.subheading),
+          const SizedBox(width: 6),
+          Text(
+            context.l10n.d('Transcript'),
+            style: t.body.copyWith(
+              fontSize: 12,
+              color: t.subheading,
+              letterSpacing: 0.4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
