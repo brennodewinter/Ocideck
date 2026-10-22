@@ -43,7 +43,9 @@ void main() {
           // bouwafval; `third_party/`, `node_modules/` en de
           // `ephemeral/.plugin_symlinks/` van de bureaubladbouw zijn andermans
           // documentatie — een kapotte link daarin zegt niets over deze repo
-          // en is niet van ons om te repareren.
+          // en is niet van ons om te repareren. `.claude/` bevat onder andere
+          // `worktrees/` met losse checkouts van agent-sessies: hun Markdown is
+          // een andere werkkopie, geen inhoud van deze.
           const buiten = [
             'build',
             '.dart_tool',
@@ -51,6 +53,7 @@ void main() {
             'node_modules',
             'ephemeral',
             'Pods',
+            '.claude',
           ];
           return !p.split(rel).any(buiten.contains);
         })
