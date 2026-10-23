@@ -196,6 +196,9 @@ import 'shell/openkat_import_action.dart';
 import 'shell/dropped_files.dart';
 import 'shell/presentation_import_action.dart';
 import 'shell/transcribe_file_action.dart';
+import 'dialogs/recording_finished_dialog.dart';
+import 'shell/record_microphone_action.dart';
+import 'shell/record_system_action.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/collab_chat_panel.dart';
@@ -868,6 +871,7 @@ class _AppShellState extends ConsumerState<AppShell> {
     _listenSidecarSkipped(context, ref);
     _listenSealTamper(context, ref);
     _listenRecoveryWriteError(context, ref);
+    _listenRecordingFinished(context, ref);
 
     _listenUnsavedWork(context, ref);
 

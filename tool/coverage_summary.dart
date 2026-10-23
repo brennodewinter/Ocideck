@@ -206,6 +206,20 @@ const Set<String> uncoveredBaseline = {
   // van de opnamestaging — één export-regel, geen statements. De io-helft wordt
   // rechtstreeks gedekt door recording_staging_test; de stub is een no-op.
   'lib/services/transcription/recording_staging.dart',
+  // NO EXECUTABLE LINES: dezelfde vorm conditional-exportnaad voor de
+  // microfoonregistratie (#2516). De io-helft en de stub worden
+  // rechtstreeks gedekt door mic_capture_registry_test.
+  'lib/services/transcription/mic_capture_registry.dart',
+  // PLATFORM: de webhelft van de opnameregistratie (#2517, #2521). Onder
+  // `flutter test` wint `dart.library.io`, dus dit bestand laadt niet in
+  // de VM. De beslissingen (secure context, Firefox/Safari) staan in
+  // `web_media_source.dart` en worden daar getest.
+  'lib/services/transcription/mic_capture_registry_web.dart',
+  'lib/services/transcription/web_media_browser_web.dart',
+  // NO EXECUTABLE LINES: conditional-exportnaad voor de staginglijst
+  // (#2516). De io-helft wordt gedekt door staged_recordings_test; de
+  // stub wordt daar direct aangeroepen.
+  'lib/services/transcription/staged_recordings.dart',
   // NO EXECUTABLE LINES: `transcript_audio_probe.dart` is dezelfde vorm
   // conditional naad voor de audio-bestaansscan — één export-regel. De
   // io-helft wordt gedekt door transcript_audio_probe_test; de stub wordt er

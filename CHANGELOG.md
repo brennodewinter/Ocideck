@@ -10,6 +10,35 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Microfoon opnemen op de desktop (#2516).** Onder Uitbreidingen zet je
+  Transcriptie en opname aan. Daarna staat bij Importeren **Microfoon
+  opnemen…**: kies een invoer of de systeemstandaard, lees de regel over
+  andermans toestemming, en test desgewenst anderhalve seconde het niveau
+  zonder dat er iets bewaard wordt. Opnemen schrijft 16 kHz mono PCM van de
+  microfoon in de kamer — niet het geluid van een andere app — naar een
+  tijdelijke map. De strook met Stop blijft zichtbaar, met het niveau zolang
+  de microfoon meeloopt. Na Stop, een weggevallen microfoon of een volle
+  schijf kies je: nu transcriberen, zeven dagen bewaren, of weggooien. De
+  presentatie-doorvoer en een opname delen één microfoon; de ander wacht.
+  In de browser staat dezelfde knop: de pagina vraagt pas bij Opnemen, en
+  de opname blijft in het tabblad (`mem:`). Een herladen tabblad is het
+  bestand kwijt. Ingebouwd, USB en Bluetooth op de drie desktops is hier
+  nog niet op echte hardware bewezen.
+
+- **Systeemgeluid, combinatie en voorlopige tekst.** Op de desktop staat
+  bij Importeren ook **Systeemgeluid opnemen…** en, als beide bronnen er
+  zijn, **Microfoon en systeemgeluid opnemen…**. De combinatie schrijft
+  één stereo-WAV: links de microfoon, rechts het systeemgeluid. Linux
+  gebruikt een uitvoermonitor; macOS ScreenCaptureKit (13+) en Windows
+  WASAPI-loopback zijn eigen kanalen, niet een tweede microfoongreep.
+  In de browser heet de route **Tabgeluid opnemen…**. Firefox en Safari
+  leveren dat geluid niet; het venster zegt dat en neemt niets op. Voorlopige tekst verschijnt alleen als een engine een
+  streaming-route meldt. De lokale whisper-cli en de batch-server doen
+  dat niet: hun bewezen contract is een bestand achteraf, geen live
+  verbinding. De opname wacht niet op de tekst. Geen van deze routes is
+  hier op echte hardware bewezen. De Windows-build is op deze machine
+  niet gecompileerd.
+
 - **Afbeeldingen wisselen bij twee indelingen (#2502).** Bij twee afbeeldingen
   verwisselt één knop de linker- en rechterafbeelding met hun bijschrift,
   alternatieve tekst, bijsnijbrandpunt en paneelbreedte. Bij bullets met afbeelding zet **Afbeelding

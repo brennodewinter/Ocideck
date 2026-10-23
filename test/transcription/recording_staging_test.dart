@@ -41,6 +41,13 @@ void main() {
     },
   );
 
+  test('listSessionDirs noemt alleen echte sessiemappen', () async {
+    final dir = await staging.createSessionDir();
+    File(p.join(root.path, 'los.txt')).writeAsStringSync('geen map');
+    final listed = await staging.listSessionDirs();
+    expect(listed, [dir]);
+  });
+
   test('discardDir verwijdert de sessiemap, null doet niets', () async {
     final dir = await staging.createSessionDir();
     await staging.discardDir(dir);
@@ -90,6 +97,7 @@ void main() {
       await s.discardDir(null);
       await s.sweep(maxAge: const Duration(days: 7));
       await s.discardAll();
+      expect(await s.listSessionDirs(), isEmpty);
     });
 
     test('de fabriek geeft de no-op terug', () {

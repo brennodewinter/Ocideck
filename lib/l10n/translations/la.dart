@@ -1620,6 +1620,63 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Systeemgeluid opnemen…': 'Sonum systematis excipere…',
+  'Systeemgeluid opnemen': 'Sonum systematis excipere',
+  'Tabgeluid opnemen…': 'Sonum schedae excipere…',
+  'Tabgeluid opnemen': 'Sonum schedae excipere',
+  'Microfoon en systeemgeluid opnemen…':
+      'Microphonum et sonum systematis excipere…',
+  'Microfoon en systeemgeluid opnemen':
+      'Microphonum et sonum systematis excipere',
+  'Voorlopige tekst': 'Textus provisus',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Textus tardat. Exceptio ipsa pergit.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Sinistra microphonum, dextra sonus systematis.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Hoc sonum huius apparatus excipit, non colloquium in alia applicatione.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Sonus systematis in hac compositione non praesto est.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Da OciDeck in constitutionibus systematis aditum ad sonum systematis.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Scheda nullum sonum communicavit. Elige scheda et sonum nota.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Sonus systematis excipi non potuit',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Sonus schedae in hoc navigatro non praesto est.',
+  'Microfoon opnemen…': 'Microphonum excipere…',
+  'Microfoon opnemen': 'Microphonum excipere',
+  'Systeemstandaard': 'Defectum systematis',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Alios excipere eorum consensum poscere potest.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Hoc est microphonum in conclavi, non sonus alterius programmatis.',
+  'Niveau testen': 'Planitiem probare',
+  'Opnemen': 'Excipe',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Probatio ipsa desinit. Nihil adhuc servatur.',
+  'Eerdere opnames': 'Exceptiones priores',
+  'Nu transcriberen': 'Nunc transcribe',
+  'Opname weggooien': 'Exceptionem abicere',
+  'ingebouwd': 'insitum',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Transmissio praesentationis microphonum iam tenet. Eam primum exstingue — duae sessiones simul resonarent.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Spatium liberum non sufficit ut exceptio incipiat. Exceptiones iam peractae manent.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Discus impletus est. Haec exceptio desinit; priores peractae manent.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Microphonum excidit. Quod iam aderat servatum est.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Exceptio in hoc instrumento est. Nunc eam transcribe, aut septem dies serva ut id postea facias.',
+  'Opname bewaard': 'Exceptio servata',
+  'Bewaar voor later': 'Serva in posterum',
+  'Microfoonopname': 'Exceptio microphoni',
+  'Microfoon-doorvoer kan niet starten':
+      'Transmissio microphoni incipere non potest',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Exceptio iam currit. Eam primum siste — duae sessiones microphoni simul resonarent.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'nullus decodor in hoc systemate (afconvert deest) — solum PCM-WAV directe legi potest',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

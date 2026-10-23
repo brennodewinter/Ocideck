@@ -19,7 +19,13 @@ import 'dart:convert';
 import '../models/asr_server_profile.dart';
 import '../services/transcription/asr_engine_factory.dart';
 import '../services/transcription/capture_source.dart';
+import '../services/transcription/combination_source.dart';
+import '../services/transcription/desktop_mic_source.dart';
 import '../services/transcription/file_capture_source.dart';
+import '../services/transcription/live_pass.dart';
+import '../services/transcription/mic_capture_port.dart';
+import '../services/transcription/mic_capture_registry.dart';
+import '../services/transcription/mic_session_gate.dart';
 import '../services/transcription/local_whisper_engine.dart';
 import '../services/transcription/recording_session.dart';
 import '../services/transcription/recording_staging.dart';
@@ -51,6 +57,30 @@ final recordingManagerProvider = Provider<RecordingManager>((ref) {
   return RecordingManager(staging: ref.watch(recordingStagingProvider));
 });
 
+/// Het niveau van de lopende microfoonopname, 0..1. De indicator leest
+/// het; de bron schrijft het. Buiten een opname staat het op 0.
+final micLevelProvider = NotifierProvider<MicLevelNotifier, double>(
+  MicLevelNotifier.new,
+);
+
+class MicLevelNotifier extends Notifier<double> {
+  @override
+  double build() => 0;
+
+  void set(double value) => state = value;
+}
+
+/// De poort die doorvoer en opname delen. Eén houder tegelijk.
+final micSessionGateProvider = Provider<MicSessionGate>(
+  (ref) => MicSessionGate.instance,
+);
+
+/// De platformbinding. Op web beschrijft de poort de browser zonder hem
+/// te openen; de bron zelf neemt op.
+final micCapturePortProvider = Provider<MicCapturePort>(
+  (ref) => createMicCapturePort(),
+);
+
 /// De capture-bronnen die dit platform klaar heeft staan, op soort.
 ///
 /// De kaart is bewust een `Provider` en geen dienst met eigen logica:
@@ -60,11 +90,40 @@ final recordingManagerProvider = Provider<RecordingManager>((ref) {
 /// (#2514) toont dit register.
 ///
 /// #2515 registreerde de bestandsbron — die bestaat op elk platform dat
-/// deze provider bouwt (zijn stub meldt eerlijk `unavailable`). #2516 en
-/// verder vullen de capture-bronnen.
-final captureSourcesProvider = Provider<Map<CaptureSourceKind, CaptureSource>>(
-  (ref) => {CaptureSourceKind.file: createFileCaptureSource()},
-);
+/// deze provider bouwt (zijn stub meldt eerlijk `unavailable`). Desktop
+/// vult microfoon, systeemgeluid en de combinatie; web vult microfoon
+/// en tabgeluid.
+final captureSourcesProvider = Provider<Map<CaptureSourceKind, CaptureSource>>((
+  ref,
+) {
+  final sources = <CaptureSourceKind, CaptureSource>{
+    CaptureSourceKind.file: createFileCaptureSource(),
+  };
+  final mic = createDesktopMicrophoneSource(
+    port: ref.watch(micCapturePortProvider),
+    gate: ref.watch(micSessionGateProvider),
+    onLevel: (level) => ref.read(micLevelProvider.notifier).set(level),
+  );
+  if (mic != null) sources[CaptureSourceKind.microphone] = mic;
+  final webMic = createWebMicrophoneSource(
+    gate: ref.watch(micSessionGateProvider),
+  );
+  if (webMic != null) sources[CaptureSourceKind.microphone] = webMic;
+  final system = createSystemAudioSource();
+  if (system != null) sources[CaptureSourceKind.systemAudio] = system;
+  final display = createWebDisplaySource();
+  if (display != null) sources[CaptureSourceKind.systemAudio] = display;
+  final micSource = sources[CaptureSourceKind.microphone];
+  final systemSource = sources[CaptureSourceKind.systemAudio];
+  if (micSource is DesktopMicrophoneSource &&
+      systemSource is DesktopMicrophoneSource) {
+    sources[CaptureSourceKind.combination] = CombinationSource(
+      microphone: micSource,
+      systemAudio: systemSource,
+    );
+  }
+  return sources;
+});
 
 /// De transcriptie-engine die op dit platform klaarstaat: de lokale
 /// whisper-engine met het gekozen model — op desktop als helperproces
@@ -292,12 +351,41 @@ class TranscriptionModuleNotifier extends Notifier<TranscriptionModuleState> {
   }
 }
 
+/// Voorlopige tekst van een live-engine, plus of die tekst achterloopt.
+/// Leeg zolang geen engine `transcribeLive` levert — de batchroute liegt
+/// hier niet.
+class ProvisionalCaption {
+  const ProvisionalCaption({this.text = '', this.lagging = false});
+
+  final String text;
+  final bool lagging;
+}
+
+class ProvisionalCaptionNotifier extends Notifier<ProvisionalCaption> {
+  @override
+  ProvisionalCaption build() => const ProvisionalCaption();
+
+  void show(String text, {required bool lagging}) {
+    state = ProvisionalCaption(text: text, lagging: lagging);
+  }
+
+  void clear() => state = const ProvisionalCaption();
+}
+
+final provisionalCaptionProvider =
+    NotifierProvider<ProvisionalCaptionNotifier, ProvisionalCaption>(
+      ProvisionalCaptionNotifier.new,
+    );
+
 /// Houdt de lopende [RecordingHandle]. `start()` is de enige weg naar een
 /// sessie — met de bron en het toestemmingsbewijs die de manager eist.
 /// `stopAll` is de enige weg eraf, voor elke eindreden.
 class RecordingSessionNotifier extends Notifier<RecordingHandle?> {
   @override
   RecordingHandle? build() => null;
+
+  LivePass? _live;
+  StreamSubscription<PartialTranscript>? _partials;
 
   /// Start een opname via de sessiegrens. Gooit de getypte fouten van
   /// [RecordingManager.start] door naar de aanroepende flow.
@@ -306,26 +394,77 @@ class RecordingSessionNotifier extends Notifier<RecordingHandle?> {
     required Set<CaptureSourceKind> kinds,
     required RecordingConsent consent,
     String? sourcePath,
+    String? inputDeviceId,
   }) async {
     final handle = await ref
         .read(recordingManagerProvider)
-        .start(source, kinds: kinds, consent: consent, sourcePath: sourcePath);
+        .start(
+          source,
+          kinds: kinds,
+          consent: consent,
+          sourcePath: sourcePath,
+          inputDeviceId: inputDeviceId,
+        );
     state = handle;
+    _attachLive(handle);
     handle.events.listen((event) {
       // De manager ruimt `_active` zelf op; de provider spiegelt hem zodat
       // watchers (indicator) de laatste fase nog zien. `ended`/`failed` is
       // de enige emissie die ertoe doet — daarna is de stream dicht.
+      // `mounted`: de app kan de provider al weggooien terwijl de stop
+      // nog een gebeurtenis aflevert.
+      if (!ref.mounted) return;
       if (state == handle && event.phase != RecordingPhase.recording) {
+        unawaited(_dropLive());
         state = null;
       }
     });
     return handle;
   }
 
+  void _attachLive(RecordingHandle handle) {
+    final engine = ref.read(transcriptionEngineProvider);
+    if (engine == null || handle.liveChunks == null) return;
+    final pass = LivePass();
+    _live = pass;
+    try {
+      final partials = pass.attach(
+        engine: engine,
+        chunks: handle.liveChunks,
+        onLag: (lagging) {
+          if (!ref.mounted) return;
+          final current = ref.read(provisionalCaptionProvider);
+          ref
+              .read(provisionalCaptionProvider.notifier)
+              .show(current.text, lagging: lagging);
+        },
+      );
+      if (partials == null) return;
+      _partials = partials.listen((part) {
+        if (!ref.mounted) return;
+        ref
+            .read(provisionalCaptionProvider.notifier)
+            .show(part.text, lagging: pass.lagging);
+      });
+    } on Object {
+      unawaited(pass.close());
+      _live = null;
+    }
+  }
+
+  Future<void> _dropLive() async {
+    await _partials?.cancel();
+    _partials = null;
+    await _live?.close();
+    _live = null;
+    if (ref.mounted) ref.read(provisionalCaptionProvider.notifier).clear();
+  }
+
   /// Stop de lopende opname om [reason] — elke eindweg uit #2510 loopt
   /// hier doorheen.
   Future<void> stopAll(RecordingEndReason reason) async {
     await ref.read(recordingManagerProvider).stop(reason);
+    await _dropLive();
     state = null;
   }
 }

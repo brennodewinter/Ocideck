@@ -34,6 +34,7 @@
 - [LibrePlan connector (optional)](#libreplan-connector-optional)
 - [Documents](#documents)
 - [Markdown mode](#markdown-mode)
+- [Transcription and recording](#transcription-and-recording)
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
 
@@ -6518,6 +6519,33 @@ Issues are reported with a **line number**, a **severity**, and a short message.
 Implementation: `lib/services/markdown_validator.dart` (unit tests in
 `test/markdown_validator_test.dart`).
 
+## Transcription and recording
+
+The module is off until you turn **Transcription and recording** on under
+Extensions. On the desktop app, **Import → Record microphone…** lets you pick
+an input or leave the system default, reminds you that recording other people
+may need their consent, and can test the level for a second and a half without
+keeping anything. Record writes 16 kHz mono PCM of the microphone in the room
+— not another application's audio — to a temporary folder. A strip with Stop
+stays visible, and shows the level while the microphone is the source.
+
+When you stop, or the microphone drops out, or the disk fills up, you choose:
+transcribe now, keep the file for seven days, or discard it. Presentation
+pass-through and a recording share one microphone; the other waits.
+
+**Import → Record system audio…** records what this computer plays, after the
+same consent line. **Import → Record microphone and system audio…** writes one
+stereo file: the microphone on the left, system audio on the right. In the
+browser the microphone row is there too, and **Record tab audio…** is offered
+where the browser can actually share a tab's sound (Chromium). Firefox and
+Safari do not, and the dialog says so instead of recording a silent video.
+A browser recording stays in the tab; reloading loses it. Provisional text
+appears only when the transcription engine reports a live route. The local
+whisper tool and the batch server do not, so you still get the text from
+**Transcribe now** after you stop. Built-in, USB and Bluetooth inputs, and
+system audio, on macOS, Windows and Linux are the intended route; this text
+does not claim they were each proven on hardware here.
+
 ## What the browser version cannot do
 
 OciDeck also runs entirely inside a browser tab, with no application backend
@@ -6548,6 +6576,7 @@ before you open a client's deck on it. Hosting the same bundle yourself is
 | Cloud AI | Blocked on purpose, not by the browser. |
 | Importing a deck from a URL | **Works**, through the same security gate as on desktop. |
 | Importing OpenKAT reports | Visible on Integraties but **disabled** — folder import and server tokens need desktop (keychain and local folders). |
+| Recording from the microphone | **Works** for the microphone in the room, and for a browser tab's audio where Chromium can share it. The file stays in the tab (`mem:`) until you save; a reload loses it. Firefox and Safari do not share tab audio. |
 | Dragging a file onto the window | **Works** — a deck, a package, an image or a presentation to import. The browser hands over the file's contents rather than a path, so the same content gate applies as everywhere else. *(Fixed 21-09-2026; until then the page's own security policy refused to read a dropped file back, so a drop did nothing at all and said nothing either.)* |
 | Importing **one** PowerPoint, Keynote or Impress file | **Works**. The conversion runs on the bytes you picked and the result opens in a tab. |
 | Importing **several** presentations at once | Absent. The queue writes each converted deck as a file into a folder you choose, and the browser has no folder to choose. The dialog says so rather than offering a button that cannot work. |

@@ -1605,6 +1605,61 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Systeemgeluid opnemen…': 'Rekam audio sistem…',
+  'Systeemgeluid opnemen': 'Rekam audio sistem',
+  'Tabgeluid opnemen…': 'Rekam audio tab…',
+  'Tabgeluid opnemen': 'Rekam audio tab',
+  'Microfoon en systeemgeluid opnemen…': 'Rekam mikrofon dan audio sistem…',
+  'Microfoon en systeemgeluid opnemen': 'Rekam mikrofon dan audio sistem',
+  'Voorlopige tekst': 'Teks sementara',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Teksnya tertinggal. Rekaman itu sendiri terus berjalan.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Kiri mikrofon, kanan audio sistem.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Ini merekam suara perangkat ini, bukan percakapan di aplikasi lain.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Audio sistem tidak tersedia pada pengaturan ini.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Beri OciDeck akses ke audio sistem di pengaturan sistem.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Tab tidak membagikan audio. Pilih tab dan centang audionya.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Audio sistem tidak dapat direkam',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Audio tab tidak tersedia di peramban ini.',
+  'Microfoon opnemen…': 'Rekam mikrofon…',
+  'Microfoon opnemen': 'Rekam mikrofon',
+  'Systeemstandaard': 'Bawaan sistem',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Merekam orang lain dapat meminta persetujuan mereka.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Ini mikrofon di ruangan, bukan suara aplikasi lain.',
+  'Niveau testen': 'Uji tingkat',
+  'Opnemen': 'Rekam',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Tes berhenti sendiri. Belum ada yang disimpan.',
+  'Eerdere opnames': 'Rekaman sebelumnya',
+  'Nu transcriberen': 'Transkripsikan sekarang',
+  'Opname weggooien': 'Buang rekaman',
+  'ingebouwd': 'bawaan',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Penerusan presentasi sudah memakai mikrofon. Matikan dulu — dua sesi sekaligus akan bersuara balik.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Ruang disk kosong tidak cukup untuk memulai rekaman. Rekaman yang sudah selesai tetap ada.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Disk penuh. Rekaman ini berhenti; rekaman yang sudah selesai tetap ada.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofon terputus. Yang sudah ada tetap tersimpan.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Rekaman ada di perangkat ini. Transkripsikan sekarang, atau simpan tujuh hari untuk nanti.',
+  'Opname bewaard': 'Rekaman disimpan',
+  'Bewaar voor later': 'Simpan untuk nanti',
+  'Microfoonopname': 'Rekaman mikrofon',
+  'Microfoon-doorvoer kan niet starten':
+      'Penerusan mikrofon tidak dapat dimulai',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Ada rekaman yang berjalan. Hentikan dulu — dua sesi mikrofon sekaligus akan bersuara balik.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'tidak ada dekoder di sistem ini (afconvert hilang) — hanya PCM-WAV yang bisa dibaca langsung',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

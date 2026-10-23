@@ -1607,6 +1607,60 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Systeemgeluid opnemen…': 'Rendszerhang felvétele…',
+  'Systeemgeluid opnemen': 'Rendszerhang felvétele',
+  'Tabgeluid opnemen…': 'Lap hangjának felvétele…',
+  'Tabgeluid opnemen': 'Lap hangjának felvétele',
+  'Microfoon en systeemgeluid opnemen…': 'Mikrofon és rendszerhang felvétele…',
+  'Microfoon en systeemgeluid opnemen': 'Mikrofon és rendszerhang felvétele',
+  'Voorlopige tekst': 'Előzetes szöveg',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'A szöveg lemaradt. Maga a felvétel megy tovább.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, sztereó. Balra a mikrofon, jobbra a rendszerhang.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Ez az eszköz hangját veszi fel, nem egy hívást egy másik alkalmazásban.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'A rendszerhang ezen az elrendezésen nem érhető el.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Adjon az OciDecknek hozzáférést a rendszerhanghoz a rendszerbeállításokban.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'A lap nem osztott meg hangot. Válasszon lapot, és jelölje be a hangot.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'A rendszerhangot nem sikerült felvenni',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'A lap hangja ebben a böngészőben nem érhető el.',
+  'Microfoon opnemen…': 'Mikrofon felvétele…',
+  'Microfoon opnemen': 'Mikrofon felvétele',
+  'Systeemstandaard': 'Rendszer alapértelmezett',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Mások felvétele az ő hozzájárulásukat kérheti.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Ez a mikrofon a szobában, nem egy másik alkalmazás hangja.',
+  'Niveau testen': 'Szint próba',
+  'Opnemen': 'Felvétel',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'A próba magától leáll. Még semmi nincs megőrizve.',
+  'Eerdere opnames': 'Korábbi felvételek',
+  'Nu transcriberen': 'Átirat most',
+  'Opname weggooien': 'Felvétel elvetése',
+  'ingebouwd': 'beépített',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'A prezentáció figyelése már használja a mikrofont. Előbb kapcsold ki — két munkamenet egyszerre gerjedne.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Nincs elég szabad lemezterület egy felvétel indításához. A korábban befejezett felvételek megmaradnak.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'A lemez megtelt. Ez a felvétel leáll; a korábban befejezettek megmaradnak.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'A mikrofon eltűnt. Ami már megvolt, megmaradt.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'A felvétel ezen az eszközön van. Írd át most, vagy őrizd meg hét napig, és csináld később.',
+  'Opname bewaard': 'Felvétel megőrizve',
+  'Bewaar voor later': 'Megőrzés későbbre',
+  'Microfoonopname': 'Mikrofonfelvétel',
+  'Microfoon-doorvoer kan niet starten': 'A mikrofonfigyelés nem indulhat',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Felvétel fut. Előbb állítsd le — két mikrofonmunkamenet egyszerre gerjedne.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'nincs dekódoló ezen a rendszeren (afconvert hiányzik) — csak a PCM-WAV olvasható közvetlenül',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

@@ -22,6 +22,10 @@ abstract class RecordingStaging {
 
   /// Alles wissen — de expliciete wisactie, los van verloop.
   Future<void> discardAll();
+
+  /// De sessiemappen die er nu liggen, jongste eerst is niet beloofd.
+  /// Leeg waar geen bestandssysteemstaging is.
+  Future<List<String>> listSessionDirs();
 }
 
 /// Web: geen staging op schijf, dus niets om te maken, vegen of wissen.
@@ -39,6 +43,9 @@ class NoopRecordingStaging implements RecordingStaging {
 
   @override
   Future<void> discardAll() async {}
+
+  @override
+  Future<List<String>> listSessionDirs() async => const [];
 }
 
 RecordingStaging createRecordingStaging() => const NoopRecordingStaging();

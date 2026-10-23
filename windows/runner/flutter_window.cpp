@@ -3,6 +3,8 @@
 #include <optional>
 
 #include "desktop_multi_window/desktop_multi_window_plugin.h"
+#include "mic_capture.h"
+#include "system_capture.h"
 #include "flutter/generated_plugin_registrant.h"
 
 FlutterWindow::FlutterWindow(const flutter::DartProject& project)
@@ -26,6 +28,8 @@ bool FlutterWindow::OnCreate() {
     return false;
   }
   RegisterPlugins(flutter_controller_->engine());
+  RegisterMicCapture(flutter_controller_->engine()->messenger(), GetHandle());
+  RegisterSystemCapture(flutter_controller_->engine()->messenger(), GetHandle());
   DesktopMultiWindowSetWindowCreatedCallback([](void* controller) {
     auto* flutter_view_controller =
         reinterpret_cast<flutter::FlutterViewController*>(controller);
@@ -46,6 +50,8 @@ bool FlutterWindow::OnCreate() {
 }
 
 void FlutterWindow::OnDestroy() {
+  ShutdownMicCapture();
+  ShutdownSystemCapture();
   if (flutter_controller_) {
     flutter_controller_ = nullptr;
   }
@@ -65,6 +71,15 @@ FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
     if (result) {
       return *result;
     }
+  }
+
+  if (message == kMicCaptureMessage) {
+    HandleMicCaptureMessage(wparam, lparam);
+    return 0;
+  }
+  if (message == kSystemCaptureMessage) {
+    HandleSystemCaptureMessage(wparam, lparam);
+    return 0;
   }
 
   switch (message) {

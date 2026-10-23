@@ -1624,6 +1624,61 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Systeemgeluid opnemen…': 'Запис на системен звук…',
+  'Systeemgeluid opnemen': 'Запис на системен звук',
+  'Tabgeluid opnemen…': 'Запис на звука от раздела…',
+  'Tabgeluid opnemen': 'Запис на звука от раздела',
+  'Microfoon en systeemgeluid opnemen…': 'Запис на микрофон и системен звук…',
+  'Microfoon en systeemgeluid opnemen': 'Запис на микрофон и системен звук',
+  'Voorlopige tekst': 'Предварителен текст',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Текстът изостава. Самият запис продължава.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, стерео. Отляво микрофонът, отдясно системният звук.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Това записва звука на това устройство, не разговор в друго приложение.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Системният звук не е наличен при тази конфигурация.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Дайте на OciDeck достъп до системния звук в системните настройки.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Разделът не сподели звук. Изберете раздел и отметнете звука.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Системният звук не можа да бъде записан',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Звукът от раздела не е наличен в този браузър.',
+  'Microfoon opnemen…': 'Запис на микрофон…',
+  'Microfoon opnemen': 'Запис на микрофон',
+  'Systeemstandaard': 'Системен по подразбиране',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Записът на други хора може да изисква тяхното съгласие.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Това е микрофонът в стаята, не звукът на друго приложение.',
+  'Niveau testen': 'Пробвай нивото',
+  'Opnemen': 'Запис',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Тестът спира сам. Все още нищо не се пази.',
+  'Eerdere opnames': 'По-ранни записи',
+  'Nu transcriberen': 'Транскрибирай сега',
+  'Opname weggooien': 'Изхвърли записа',
+  'ingebouwd': 'вграден',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Мониторингът на презентацията вече ползва микрофона. Изключете го първо — две сесии наведнъж биха завили.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Няма достатъчно свободно място, за да започне запис. По-рано завършените записи остават.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Дискът се напълни. Този запис спира; по-рано завършените остават.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Микрофонът отпадна. Каквото вече беше там, е запазено.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Записът е на това устройство. Транскрибирайте го сега или го пазете седем дни, за да го направите по-късно.',
+  'Opname bewaard': 'Записът е запазен',
+  'Bewaar voor later': 'Запази за по-късно',
+  'Microfoonopname': 'Запис от микрофон',
+  'Microfoon-doorvoer kan niet starten':
+      'Мониторингът на микрофона не може да започне',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Тече запис. Спрете го първо — две микрофонни сесии наведнъж биха завили.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'без декодер на тази система (afconvert липсва) — само PCM-WAV може да се чете директно',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

@@ -54,12 +54,18 @@ enum CaptureAvailability {
 /// vertaald door de sessiegrens naar een [RecordingEndReason].
 enum CaptureEndCause {
   /// De bron verdween of stopte van buitenaf: apparaat weg, gedeelde tab
-  /// gesloten, schermdeling beëindigd door de OS.
+  /// gesloten, schermdeling beëindigd door de OS. Een Bluetooth-wissel
+  /// hoort hier ook: de opname volgt het nieuwe apparaat niet stil.
   sourceLost,
 
   /// Het platform trok de toestemming in terwijl de opname liep
   /// (microfoonvoorkeur omgezet, schermtoestemming herroepen).
   permissionRevoked,
+
+  /// De duurzame file kon niet verder geschreven worden. Eerder
+  /// afgeronde opnames blijven onaangeroerd; deze file is tot de
+  /// laatste geslaagde flush nog afspeelbaar.
+  storageFailed,
 }
 
 /// Een deelstukje live-audio voor de provisionele route (§4.2,
@@ -118,6 +124,8 @@ class CaptureRequest {
     required this.consent,
     this.stagingDir,
     this.sourcePath,
+    this.inputDeviceId,
+    this.persistFile = true,
   });
 
   /// Gevraagde bronnen — één voor de enkelvoudige routes, `microfoon` +
@@ -134,6 +142,15 @@ class CaptureRequest {
   /// Wordt gerefereerd, niet gekopieerd — de bewaarkeuze bij Opslaan
   /// beslist of er een kopie in `media/` komt (§3.2).
   final String? sourcePath;
+
+  /// Alleen voor `microphone`: het invoerapparaat, of null voor de
+  /// systeemstandaard. Onbekende id's blijven zo kiesbaar; de bron
+  /// weigert ze pas als het platform ze niet kan openen.
+  final String? inputDeviceId;
+
+  /// False wanneer een combinatie de bytes zelf bewaart. De bron levert
+  /// dan alleen live-blokken en opent geen eigen bestand.
+  final bool persistFile;
 }
 
 /// Waar bytes vandaan komen. Platformroutes implementeren dit; de rest van

@@ -1605,6 +1605,61 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Systeemgeluid opnemen…': 'Optag systemlyd…',
+  'Systeemgeluid opnemen': 'Optag systemlyd',
+  'Tabgeluid opnemen…': 'Optag fanebladets lyd…',
+  'Tabgeluid opnemen': 'Optag fanebladets lyd',
+  'Microfoon en systeemgeluid opnemen…': 'Optag mikrofon og systemlyd…',
+  'Microfoon en systeemgeluid opnemen': 'Optag mikrofon og systemlyd',
+  'Voorlopige tekst': 'Foreløbig tekst',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Teksten er bagud. Selve optagelsen fortsætter.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Mikrofonen til venstre, systemlyden til højre.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Dette optager lyden fra denne enhed, ikke en samtale i en anden app.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Systemlyd er ikke tilgængelig på denne opsætning.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Giv OciDeck adgang til systemlyd i systemindstillingerne.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Fanen delte ingen lyd. Vælg en fane og slå lyden til.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Systemlyden kunne ikke optages',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Fanebladets lyd er ikke tilgængelig i denne browser.',
+  'Microfoon opnemen…': 'Optag mikrofon…',
+  'Microfoon opnemen': 'Optag mikrofon',
+  'Systeemstandaard': 'Systemstandard',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Optagelse af andre kan kræve deres samtykke.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Dette er mikrofonen i rummet, ikke lyden fra en anden app.',
+  'Niveau testen': 'Test niveau',
+  'Opnemen': 'Optag',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Testen stopper af sig selv. Der gemmes endnu ingenting.',
+  'Eerdere opnames': 'Tidligere optagelser',
+  'Nu transcriberen': 'Transskribér nu',
+  'Opname weggooien': 'Kassér optagelsen',
+  'ingebouwd': 'indbygget',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Præsentationens monitorering bruger allerede mikrofonen. Slå den fra først — to sessioner på én gang ville give tilbagekobling.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Der er for lidt ledig plads til at starte en optagelse. Tidligere afsluttede optagelser bliver liggende.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Disken blev fuld. Denne optagelse stopper; tidligere afsluttede bliver liggende.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofonen faldt væk. Det, der allerede stod, er gemt.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Optagelsen ligger på denne enhed. Transskribér den nu, eller gem den i syv dage for at gøre det senere.',
+  'Opname bewaard': 'Optagelse gemt',
+  'Bewaar voor later': 'Gem til senere',
+  'Microfoonopname': 'Mikrofonoptagelse',
+  'Microfoon-doorvoer kan niet starten':
+      'Mikrofon-monitorering kan ikke starte',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Der kører en optagelse. Stop den først — to mikrofonsessioner på én gang ville give tilbagekobling.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'ingen afkoder på dette system (afconvert mangler) — kun PCM-WAV kan læses direkte',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

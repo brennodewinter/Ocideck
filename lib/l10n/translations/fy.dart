@@ -652,6 +652,61 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Systeemgeluid opnemen…': 'Systeemlûd opnimme…',
+  'Systeemgeluid opnemen': 'Systeemlûd opnimme',
+  'Tabgeluid opnemen…': 'Ljepblêdlûd opnimme…',
+  'Tabgeluid opnemen': 'Ljepblêdlûd opnimme',
+  'Microfoon en systeemgeluid opnemen…': 'Mikrofoan en systeemlûd opnimme…',
+  'Microfoon en systeemgeluid opnemen': 'Mikrofoan en systeemlûd opnimme',
+  'Voorlopige tekst': 'Foarlopige tekst',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'De tekst rint efter. De opname sels giet troch.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Links de mikrofoan, rjochts it systeemlûd.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Dit nimt it lûd fan dit apparaat op, net in petear yn in oare app.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Systeemlûd is op dizze opstelling net beskikber.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Jou OciDeck tagong ta systeemlûd yn de systeemynstellingen.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'It ljepblêd dielde gjin lûd. Kies in ljepblêd en set it lûd oan.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'It systeemlûd koe net opnommen wurde',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Ljepblêdlûd is yn dizze browser net beskikber.',
+  'Microfoon opnemen…': 'Mikrofoan opnimme…',
+  'Microfoon opnemen': 'Mikrofoan opnimme',
+  'Systeemstandaard': 'Systeemstandert',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Opnimmen fan oaren kin harren tastimming freegje.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Dit is de mikrofoan yn \'e keamer, net it lûd fan in oare app.',
+  'Niveau testen': 'Nivo teste',
+  'Opnemen': 'Opnimme',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'De test stoppet fan sels. Der wurdt noch neat bewarre.',
+  'Eerdere opnames': 'Eardere opnamen',
+  'Nu transcriberen': 'No transkribearje',
+  'Opname weggooien': 'Opname fuortsmite',
+  'ingebouwd': 'ynboud',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'De presintaasje-trochfeuring brûkt de mikrofoan al. Set dy earst út — twa sesjes tagelyk soene omgalmje.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Der is te min frije skiifromte om in opname te starten. Earder ôfrûne opnamen bliuwe stean.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'De skiif rekke fol. Dizze opname stoppet; earder ôfrûne opnamen bliuwe stean.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'De mikrofoan foel wei. Wat der al stie is bewarre.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'De opname stiet op dit apparaat. Transkribearje him no, of bewarje him sân dagen om dat letter te dwaan.',
+  'Opname bewaard': 'Opname bewarre',
+  'Bewaar voor later': 'Bewarje foar letter',
+  'Microfoonopname': 'Mikrofoanopname',
+  'Microfoon-doorvoer kan niet starten':
+      'Mikrofoan-trochfeuring kin net starte',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Der rint in opname. Stopje dy earst — twa mikrofoansesjes tagelyk soene omgalmje.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'gjin dekoderer op dit systeem (afconvert ûntbrekt) — allinne PCM-WAV kin streekrjocht lêzen',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

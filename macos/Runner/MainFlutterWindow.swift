@@ -24,6 +24,11 @@ class MainFlutterWindow: NSWindow {
     // Bridge macOS "open document" events to Flutter. Registered only on the
     // main window's engine, not on audience/beamer sub-windows.
     OpenFileHandler.shared.register(messenger: flutterViewController.engine.binaryMessenger)
+    MicCapture.shared.register(messenger: flutterViewController.engine.binaryMessenger)
+    if #available(macOS 13.0, *) {
+      SystemCapture.shared.register(
+        messenger: flutterViewController.engine.binaryMessenger)
+    }
     ClipboardHtmlHandler.shared.register(
       messenger: flutterViewController.engine.binaryMessenger)
     shortcutChannel = FlutterMethodChannel(

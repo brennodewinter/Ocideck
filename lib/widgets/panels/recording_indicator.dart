@@ -53,6 +53,7 @@ class _RecordingIndicatorState extends ConsumerState<RecordingIndicator> {
     final running =
         '${l10n.d('Opname loopt')}: ${_sourceLabel(handle.kinds, l10n)}';
     final duration = _formatDuration(handle.elapsed);
+    final caption = ref.watch(provisionalCaptionProvider);
     return Semantics(
       liveRegion: true,
       label: '$running, $duration',
@@ -64,38 +65,60 @@ class _RecordingIndicatorState extends ConsumerState<RecordingIndicator> {
           decoration: BoxDecoration(
             border: Border(bottom: BorderSide(color: AppTheme.iceBlue)),
           ),
-          child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                Icons.fiber_manual_record,
-                size: 14,
-                color: AppTheme.dangerFg,
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  '$running · $duration',
-                  style: const TextStyle(fontSize: 12),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Semantics(
-                button: true,
-                // "Stop" alleen zegt een schermlezer niet wát er stopt.
-                label: l10n.d('Opname stoppen'),
-                child: ExcludeSemantics(
-                  child: OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      visualDensity: VisualDensity.compact,
-                      foregroundColor: AppTheme.dangerFg,
+              Row(
+                children: [
+                  Icon(
+                    Icons.fiber_manual_record,
+                    size: 14,
+                    color: AppTheme.dangerFg,
+                  ),
+                  const SizedBox(width: 8),
+                  if (handle.kinds.contains(CaptureSourceKind.microphone))
+                    _levelMark(ref.watch(micLevelProvider)),
+                  Expanded(
+                    child: Text(
+                      '$running · $duration',
+                      style: const TextStyle(fontSize: 12),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    icon: const Icon(Icons.stop_outlined, size: 16),
-                    label: Text(l10n.d('Stoppen')),
-                    onPressed: handle.stop,
+                  ),
+                  const SizedBox(width: 8),
+                  Semantics(
+                    button: true,
+                    // "Stop" alleen zegt een schermlezer niet wát er stopt.
+                    label: l10n.d('Opname stoppen'),
+                    child: ExcludeSemantics(
+                      child: OutlinedButton.icon(
+                        style: OutlinedButton.styleFrom(
+                          visualDensity: VisualDensity.compact,
+                          foregroundColor: AppTheme.dangerFg,
+                        ),
+                        icon: const Icon(Icons.stop_outlined, size: 16),
+                        label: Text(l10n.d('Stoppen')),
+                        onPressed: handle.stop,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              if (caption.text.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    '${l10n.d('Voorlopige tekst')}: ${caption.text}',
+                    style: const TextStyle(fontSize: 12),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-              ),
+              if (caption.lagging)
+                Text(
+                  l10n.d('De tekst loopt achter. De opname zelf gaat door.'),
+                  style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+                ),
             ],
           ),
         ),
@@ -106,6 +129,17 @@ class _RecordingIndicatorState extends ConsumerState<RecordingIndicator> {
 
 /// De bronlabel(s) voor de strook. `combinatie` is geen eigen naam maar de
 /// twee kanalen die hij samenbrengt; meerdere bronnen in één sessie idem.
+Widget _levelMark(double level) {
+  return Padding(
+    padding: const EdgeInsets.only(right: 8),
+    child: SizedBox(
+      width: 48,
+      height: 6,
+      child: LinearProgressIndicator(value: level.clamp(0, 1)),
+    ),
+  );
+}
+
 String _sourceLabel(Set<CaptureSourceKind> kinds, AppLocalizations l10n) {
   String label(CaptureSourceKind kind) => switch (kind) {
     CaptureSourceKind.file => l10n.d('Bestand'),

@@ -8,6 +8,7 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/asr_server_profile.dart';
 import 'package:ocideck/services/transcription/asr_server_engine.dart';
+import 'package:ocideck/services/transcription/capture_source.dart';
 import 'package:ocideck/services/transcription/asr_transport.dart';
 import 'package:ocideck/services/transcription/transcription_engine.dart';
 import 'package:ocideck/services/transcription/transcription_errors.dart';
@@ -274,5 +275,14 @@ void main() {
       expect(probe.status, AsrProbeStatus.refused);
       expect(probe.detail, 'disabled');
     });
+  });
+
+  test('de batchserver heeft geen live-route', () async {
+    final caps = await engine(FakeTransport()).capabilities();
+    expect(caps.streaming, isFalse);
+    expect(
+      engine(FakeTransport()).transcribeLive(const Stream<AudioChunk>.empty()),
+      isNull,
+    );
   });
 }

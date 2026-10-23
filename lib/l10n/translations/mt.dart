@@ -1623,6 +1623,63 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Systeemgeluid opnemen…': 'Irrekordja l-ħoss tas-sistema…',
+  'Systeemgeluid opnemen': 'Irrekordja l-ħoss tas-sistema',
+  'Tabgeluid opnemen…': 'Irrekordja l-ħoss tat-tab…',
+  'Tabgeluid opnemen': 'Irrekordja l-ħoss tat-tab',
+  'Microfoon en systeemgeluid opnemen…':
+      'Irrekordja l-mikrofonu u l-ħoss tas-sistema…',
+  'Microfoon en systeemgeluid opnemen':
+      'Irrekordja l-mikrofonu u l-ħoss tas-sistema',
+  'Voorlopige tekst': 'Test proviżorju',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'It-test qed jibqa\' lura. Ir-reġistrazzjoni nnifisha tkompli.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Ix-xellug il-mikrofonu, il-lemin il-ħoss tas-sistema.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Dan jirreġistra l-ħoss ta\' dan l-apparat, mhux sejħa f\'app ieħor.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Il-ħoss tas-sistema mhux disponibbli fuq dan is-setup.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Agħti lil OciDeck aċċess għall-ħoss tas-sistema fis-settings tas-sistema.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'It-tab ma qasam l-ebda ħoss. Agħżel tab u mmarka l-ħoss.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Il-ħoss tas-sistema ma setax jiġi rreġistrat',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Il-ħoss tat-tab mhux disponibbli f\'dan il-browser.',
+  'Microfoon opnemen…': 'Irrekordja l-mikrofonu…',
+  'Microfoon opnemen': 'Irrekordja l-mikrofonu',
+  'Systeemstandaard': 'Standard tas-sistema',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'L-irrekordjar ta\' oħrajn jista\' jitlob il-kunsens tagħhom.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Dan il-mikrofonu fil-kamra, mhux il-ħoss ta\' app oħra.',
+  'Niveau testen': 'Ittestja l-livell',
+  'Opnemen': 'Irrekordja',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'It-test jieqaf waħdu. Għad m\'hemm xejn merfugħ.',
+  'Eerdere opnames': 'Rekordings ta\' qabel',
+  'Nu transcriberen': 'Ittraskrivi issa',
+  'Opname weggooien': 'Armi r-rekording',
+  'ingebouwd': 'mibni',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Il-pass-through tal-preżentazzjoni diġà qed juża l-mikrofonu. Itfi dak l-ewwel — żewġ sessjonijiet flimkien jagħmlu feedback.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'M\'hemmx biżżejjed spazju ħieles biex tibda rekording. Ir-rekordings lesti minn qabel jibqgħu.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Id-diska mtliet. Dan ir-rekording jieqaf; dawk lesti minn qabel jibqgħu.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Il-mikrofonu waqa\'. Dak li kien hemm diġà huwa merfugħ.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Ir-rekording qiegħed fuq dan l-apparat. Ittraskrivih issa, jew żommu sebat ijiem biex tagħmel dan wara.',
+  'Opname bewaard': 'Rekording merfugħ',
+  'Bewaar voor later': 'Żomm għal wara',
+  'Microfoonopname': 'Rekording tal-mikrofonu',
+  'Microfoon-doorvoer kan niet starten':
+      'Il-pass-through tal-mikrofonu ma jistax jibda',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Hemm rekording għaddej. Waqqfu l-ewwel — żewġ sessjonijiet tal-mikrofonu flimkien jagħmlu feedback.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'b\'iddekoder f\'dan is-sistema (afconvert nieqes) — biss PCM-WAV jista\' jinqara direttament',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

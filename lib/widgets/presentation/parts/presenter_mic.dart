@@ -24,6 +24,10 @@ Future<void> _toggleMicMonitor(_FullscreenPresenterState state) async {
   if (state._micBusy) return;
   final monitor = state._micMonitor ??=
       state.widget.micMonitor ?? WebrtcMicMonitor();
+  if (MicSessionGate.instance.holder == MicHolder.recording) {
+    _showMicBlockedByRecording(state.context);
+    return;
+  }
   if (monitor.running) {
     await monitor.stop();
     if (state.mounted) {
@@ -93,6 +97,29 @@ void _showMicStartFailed(BuildContext context) {
             onPressed: () => _openMicSystemSettings(),
             child: Text(l10n.d('Open systeeminstellingen')),
           ),
+        TextButton(
+          onPressed: () => Navigator.of(ctx).pop(),
+          child: Text(l10n.d('Sluiten')),
+        ),
+      ],
+    ),
+  );
+}
+
+/// De opname heeft de microfoon. Doorvoer erbij zou een tweede greep zijn
+/// en via de luidsprekers terug de opname in lopen.
+void _showMicBlockedByRecording(BuildContext context) {
+  final l10n = context.l10n;
+  showDialog<void>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.d('Microfoon-doorvoer kan niet starten')),
+      content: Text(
+        l10n.d(
+          'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.',
+        ),
+      ),
+      actions: [
         TextButton(
           onPressed: () => Navigator.of(ctx).pop(),
           child: Text(l10n.d('Sluiten')),

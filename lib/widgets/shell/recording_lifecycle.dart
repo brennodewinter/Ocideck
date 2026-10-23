@@ -18,6 +18,38 @@ void _sweepStaleRecordings(WidgetRef ref) {
   );
 }
 
+/// Na een bewuste stop, bronverlies of volle schijf kiest de gebruiker
+/// wat er met de file gebeurt. Afsluiten en de module uitzetten laten
+/// de staging liggen zonder nog een dialoog — het venster is dan weg
+/// of de gebruiker koos al.
+void _listenRecordingFinished(BuildContext context, WidgetRef ref) {
+  ref.listen(recordingSessionProvider, (previous, next) {
+    if (next == null) return;
+    final handle = next;
+    handle.events.listen((event) {
+      if (!context.mounted) return;
+      final reason = event.reason;
+      if (reason == null) return;
+      if (reason == RecordingEndReason.appQuit ||
+          reason == RecordingEndReason.moduleDisabled) {
+        return;
+      }
+      if (event.phase != RecordingPhase.ended) return;
+      final audio = handle.result;
+      if (audio == null || audio.durablePath.isEmpty) return;
+      unawaited(
+        showRecordingFinishedDialog(
+          context,
+          ref,
+          audio: audio,
+          sessionDir: handle.stagingDir,
+          reason: reason,
+        ),
+      );
+    });
+  });
+}
+
 /// Stop een lopende opname vóór het venster weg is. Wordt pas aangeroepen
 /// ná de keuze voor sluiten — bij "annuleren" komt deze code niet aan de
 /// beurt en loopt de opname gewoon door. De duurzame file wordt nog netjes

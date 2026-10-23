@@ -1621,6 +1621,63 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Systeemgeluid opnemen…': 'Înregistrare sunet de sistem…',
+  'Systeemgeluid opnemen': 'Înregistrare sunet de sistem',
+  'Tabgeluid opnemen…': 'Înregistrare sunet filă…',
+  'Tabgeluid opnemen': 'Înregistrare sunet filă',
+  'Microfoon en systeemgeluid opnemen…':
+      'Înregistrare microfon și sunet de sistem…',
+  'Microfoon en systeemgeluid opnemen':
+      'Înregistrare microfon și sunet de sistem',
+  'Voorlopige tekst': 'Text provizoriu',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Textul rămâne în urmă. Înregistrarea propriu-zisă continuă.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. La stânga microfonul, la dreapta sunetul de sistem.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Aceasta înregistrează sunetul acestui aparat, nu o convorbire din altă aplicație.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Sunetul de sistem nu este disponibil pe această configurație.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Acordați OciDeck acces la sunetul de sistem în setările de sistem.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Fila nu a partajat sunet. Alegeți o filă și bifați sunetul.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Sunetul de sistem nu a putut fi înregistrat',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Sunetul filei nu este disponibil în acest browser.',
+  'Microfoon opnemen…': 'Înregistrare microfon…',
+  'Microfoon opnemen': 'Înregistrare microfon',
+  'Systeemstandaard': 'Implicitul sistemului',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Înregistrarea altor persoane le poate cere consimțământul.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Acesta este microfonul din cameră, nu sunetul altei aplicații.',
+  'Niveau testen': 'Testează nivelul',
+  'Opnemen': 'Înregistrează',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Testul se oprește singur. Încă nu se păstrează nimic.',
+  'Eerdere opnames': 'Înregistrări anterioare',
+  'Nu transcriberen': 'Transcrie acum',
+  'Opname weggooien': 'Aruncă înregistrarea',
+  'ingebouwd': 'încorporat',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Monitorizarea prezentării folosește deja microfonul. Opriți-o întâi — două sesiuni deodată ar fluiera.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Nu este destul spațiu liber ca să înceapă o înregistrare. Înregistrările deja încheiate rămân.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Discul s-a umplut. Această înregistrare se oprește; cele deja încheiate rămân.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Microfonul a căzut. Ce era deja acolo este păstrat.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Înregistrarea este pe acest aparat. Transcrieți-o acum, sau păstrați-o șapte zile ca să o faceți mai târziu.',
+  'Opname bewaard': 'Înregistrare păstrată',
+  'Bewaar voor later': 'Păstrează pentru mai târziu',
+  'Microfoonopname': 'Înregistrare de microfon',
+  'Microfoon-doorvoer kan niet starten':
+      'Monitorizarea microfonului nu poate porni',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Rulează o înregistrare. Opriți-o întâi — două sesiuni de microfon deodată ar fluiera.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'fără decodor pe acest sistem (afconvert lipsește) — doar PCM-WAV poate fi citit direct',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

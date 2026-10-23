@@ -1611,6 +1611,60 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Systeemgeluid opnemen…': 'Nahrať systémový zvuk…',
+  'Systeemgeluid opnemen': 'Nahrať systémový zvuk',
+  'Tabgeluid opnemen…': 'Nahrať zvuk karty…',
+  'Tabgeluid opnemen': 'Nahrať zvuk karty',
+  'Microfoon en systeemgeluid opnemen…': 'Nahrať mikrofón a systémový zvuk…',
+  'Microfoon en systeemgeluid opnemen': 'Nahrať mikrofón a systémový zvuk',
+  'Voorlopige tekst': 'Predbežný text',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Text mešká. Samotná nahrávka pokračuje.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Vľavo mikrofón, vpravo systémový zvuk.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Toto nahráva zvuk tohto zariadenia, nie hovor v inej aplikácii.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Systémový zvuk nie je na tomto nastavení k dispozícii.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Povoľte OciDeck prístup k systémovému zvuku v systémových nastaveniach.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Karta nezdieľala zvuk. Vyberte kartu a zaškrtnite zvuk.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Systémový zvuk sa nepodarilo nahrať',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Zvuk karty nie je v tomto prehliadači k dispozícii.',
+  'Microfoon opnemen…': 'Nahrať mikrofón…',
+  'Microfoon opnemen': 'Nahrať mikrofón',
+  'Systeemstandaard': 'Systémové predvolené',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Nahrávanie iných môže vyžadovať ich súhlas.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Toto je mikrofón v miestnosti, nie zvuk inej aplikácie.',
+  'Niveau testen': 'Vyskúšať úroveň',
+  'Opnemen': 'Nahrať',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Test sa zastaví sám. Zatiaľ sa nič neuchováva.',
+  'Eerdere opnames': 'Skoršie nahrávky',
+  'Nu transcriberen': 'Prepísať teraz',
+  'Opname weggooien': 'Zahodiť nahrávku',
+  'ingebouwd': 'vstavaný',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Odpočúvanie prezentácie už mikrofón používa. Najprv ho vypnite — dve relácie naraz by sa rozhučali.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Nie je dosť voľného miesta na začatie nahrávky. Skôr dokončené nahrávky ostávajú.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Disk sa naplnil. Táto nahrávka končí; skôr dokončené ostávajú.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofón vypadol. Čo už tam bolo, je uchované.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Nahrávka je na tomto zariadení. Prepíšte ju teraz, alebo ju sedem dní uschovajte a urobte to neskôr.',
+  'Opname bewaard': 'Nahrávka uchovaná',
+  'Bewaar voor later': 'Uschovať na neskôr',
+  'Microfoonopname': 'Nahrávka mikrofónu',
+  'Microfoon-doorvoer kan niet starten': 'Odpočúvanie mikrofónu nemôže začať',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Beží nahrávka. Najprv ju zastavte — dve mikrofónové relácie naraz by sa rozhučali.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'v tomto systéme nie je dekodér (afconvert chýba) — iba PCM-WAV možno čítať priamo',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

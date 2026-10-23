@@ -28,12 +28,16 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<!-- Microfoon-doorvoer tijdens presenteren (#2158). Zonder deze key
-	     weigert TCC de microfoon en crasht de app bij getUserMedia — ook met
-	     de sandbox uit. De tekst zegt bewust wat er gebeurt: doorvoer, geen
-	     opname. -->
+	<!-- Microfoon: doorvoer tijdens presenteren (#2158) én, als de
+	     gebruiker dat zelf start, een opname op dit apparaat (#2516).
+	     Zonder deze key weigert TCC de microfoon. De tekst noemt beide,
+	     want een belofte "er wordt niets opgenomen" is onwaar zodra
+	     opnemen kan. Er gaat nog steeds niets het apparaat af tenzij de
+	     gebruiker apart een serverroute kiest voor transcriptie. -->
 	<key>NSMicrophoneUsageDescription</key>
-	<string>OciDeck gebruikt de microfoon alleen voor de microfoon-doorvoer tijdens het presenteren: je stem gaat direct naar de luidsprekers, er wordt niets opgenomen of verstuurd.</string>
+	<string>OciDeck gebruikt de microfoon voor doorvoer tijdens het presenteren en, als u dat zelf start, voor een opname die op dit apparaat blijft. Er wordt niets verstuurd.</string>
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>OciDeck gebruikt systeemgeluid alleen als u dat zelf start, voor een opname die op dit apparaat blijft. Het beeld wordt niet bewaard en er wordt niets verstuurd.</string>
 	<key>FLTEnableMergedPlatformUIThread</key>
 	<true/>
 	<key>CFBundleDocumentTypes</key>

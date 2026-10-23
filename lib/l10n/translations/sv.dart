@@ -1604,6 +1604,60 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Systeemgeluid opnemen…': 'Spela in systemljud…',
+  'Systeemgeluid opnemen': 'Spela in systemljud',
+  'Tabgeluid opnemen…': 'Spela in flikens ljud…',
+  'Tabgeluid opnemen': 'Spela in flikens ljud',
+  'Microfoon en systeemgeluid opnemen…': 'Spela in mikrofon och systemljud…',
+  'Microfoon en systeemgeluid opnemen': 'Spela in mikrofon och systemljud',
+  'Voorlopige tekst': 'Preliminär text',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Texten ligger efter. Själva inspelningen fortsätter.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Mikrofonen till vänster, systemljudet till höger.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Det här spelar in ljudet från den här enheten, inte ett samtal i en annan app.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Systemljud är inte tillgängligt i den här uppsättningen.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Ge OciDeck åtkomst till systemljud i systeminställningarna.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Fliken delade inget ljud. Välj en flik och kryssa i ljudet.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Systemljudet kunde inte spelas in',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Flikens ljud är inte tillgängligt i den här webbläsaren.',
+  'Microfoon opnemen…': 'Spela in mikrofon…',
+  'Microfoon opnemen': 'Spela in mikrofon',
+  'Systeemstandaard': 'Systemstandard',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Att spela in andra kan kräva deras samtycke.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Det här är mikrofonen i rummet, inte ljudet från en annan app.',
+  'Niveau testen': 'Testa nivån',
+  'Opnemen': 'Spela in',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Testet stannar av sig självt. Ingenting sparas ännu.',
+  'Eerdere opnames': 'Tidigare inspelningar',
+  'Nu transcriberen': 'Transkribera nu',
+  'Opname weggooien': 'Släng inspelningen',
+  'ingebouwd': 'inbyggd',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Presentationens monitorering använder redan mikrofonen. Stäng av den först — två sessioner samtidigt skulle runda.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Det finns för lite ledigt utrymme för att starta en inspelning. Tidigare avslutade inspelningar ligger kvar.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Disken blev full. Den här inspelningen stannar; tidigare avslutade ligger kvar.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofonen föll bort. Det som redan fanns är sparat.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Inspelningen finns på den här enheten. Transkribera den nu, eller spara den i sju dagar för att göra det senare.',
+  'Opname bewaard': 'Inspelning sparad',
+  'Bewaar voor later': 'Spara till senare',
+  'Microfoonopname': 'Mikrofoninspelning',
+  'Microfoon-doorvoer kan niet starten': 'Mikrofonmonitorering kan inte starta',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'En inspelning pågår. Stoppa den först — två mikrofonpass samtidigt skulle runda.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'ingen avkodare på detta system (afconvert saknas) — endast PCM-WAV kan läsas direkt',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

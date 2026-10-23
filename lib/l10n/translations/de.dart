@@ -652,6 +652,61 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Systeemgeluid opnemen…': 'Systemton aufnehmen…',
+  'Systeemgeluid opnemen': 'Systemton aufnehmen',
+  'Tabgeluid opnemen…': 'Tab-Ton aufnehmen…',
+  'Tabgeluid opnemen': 'Tab-Ton aufnehmen',
+  'Microfoon en systeemgeluid opnemen…': 'Mikrofon und Systemton aufnehmen…',
+  'Microfoon en systeemgeluid opnemen': 'Mikrofon und Systemton aufnehmen',
+  'Voorlopige tekst': 'Vorläufiger Text',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Der Text hinkt hinterher. Die Aufnahme selbst läuft weiter.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, Stereo. Links das Mikrofon, rechts der Systemton.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Das nimmt den Ton dieses Geräts auf, nicht ein Gespräch in einer anderen App.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Systemton ist auf dieser Anordnung nicht verfügbar.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Gib OciDeck in den Systemeinstellungen Zugriff auf den Systemton.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Der Tab hat keinen Ton geteilt. Wähle einen Tab und aktiviere den Ton.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Der Systemton konnte nicht aufgenommen werden',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Tab-Ton ist in diesem Browser nicht verfügbar.',
+  'Microfoon opnemen…': 'Mikrofon aufnehmen…',
+  'Microfoon opnemen': 'Mikrofon aufnehmen',
+  'Systeemstandaard': 'Systemstandard',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Die Aufnahme anderer kann ihre Zustimmung verlangen.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Das ist das Mikrofon im Raum, nicht der Ton einer anderen App.',
+  'Niveau testen': 'Pegel testen',
+  'Opnemen': 'Aufnehmen',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Der Test stoppt von selbst. Es wird noch nichts aufbewahrt.',
+  'Eerdere opnames': 'Frühere Aufnahmen',
+  'Nu transcriberen': 'Jetzt transkribieren',
+  'Opname weggooien': 'Aufnahme verwerfen',
+  'ingebouwd': 'eingebaut',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Die Präsentations-Durchschleifung nutzt das Mikrofon schon. Schalten Sie die zuerst aus — zwei Sitzungen zugleich würden rückkoppeln.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Es ist zu wenig freier Speicherplatz da, um eine Aufnahme zu starten. Bereits abgeschlossene Aufnahmen bleiben stehen.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Der Datenträger wurde voll. Diese Aufnahme stoppt; bereits abgeschlossene Aufnahmen bleiben stehen.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Das Mikrofon ist weggefallen. Was schon da stand, ist aufbewahrt.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Die Aufnahme liegt auf diesem Gerät. Transkribieren Sie sie jetzt, oder bewahren Sie sie sieben Tage auf, um das später zu tun.',
+  'Opname bewaard': 'Aufnahme aufbewahrt',
+  'Bewaar voor later': 'Für später aufbewahren',
+  'Microfoonopname': 'Mikrofonaufnahme',
+  'Microfoon-doorvoer kan niet starten':
+      'Mikrofon-Durchschleifung kann nicht starten',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Es läuft eine Aufnahme. Stoppen Sie die zuerst — zwei Mikrofonsitzungen zugleich würden rückkoppeln.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'kein Decoder auf diesem System (afconvert fehlt) — nur PCM-WAV kann direkt gelesen werden',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

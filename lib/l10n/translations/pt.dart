@@ -1633,6 +1633,63 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Systeemgeluid opnemen…': 'Gravar o áudio do sistema…',
+  'Systeemgeluid opnemen': 'Gravar o áudio do sistema',
+  'Tabgeluid opnemen…': 'Gravar o áudio do separador…',
+  'Tabgeluid opnemen': 'Gravar o áudio do separador',
+  'Microfoon en systeemgeluid opnemen…':
+      'Gravar o microfone e o áudio do sistema…',
+  'Microfoon en systeemgeluid opnemen':
+      'Gravar o microfone e o áudio do sistema',
+  'Voorlopige tekst': 'Texto provisório',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'O texto está atrasado. A gravação em si continua.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, estéreo. À esquerda o microfone, à direita o áudio do sistema.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Isto grava o som deste aparelho, não uma chamada noutra aplicação.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'O áudio do sistema não está disponível nesta configuração.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Dê ao OciDeck acesso ao áudio do sistema nas definições do sistema.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'O separador não partilhou áudio. Escolha um separador e marque o áudio.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'O áudio do sistema não pôde ser gravado',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'O áudio do separador não está disponível neste navegador.',
+  'Microfoon opnemen…': 'Gravar microfone…',
+  'Microfoon opnemen': 'Gravar microfone',
+  'Systeemstandaard': 'Predefinição do sistema',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Gravar outras pessoas pode exigir o consentimento delas.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Este é o microfone na sala, não o som de outra aplicação.',
+  'Niveau testen': 'Testar o nível',
+  'Opnemen': 'Gravar',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'O teste pára sozinho. Ainda não se guarda nada.',
+  'Eerdere opnames': 'Gravações anteriores',
+  'Nu transcriberen': 'Transcrever agora',
+  'Opname weggooien': 'Deitar fora a gravação',
+  'ingebouwd': 'incorporado',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'A monitorização da apresentação já usa o microfone. Desligue-a primeiro — duas sessões ao mesmo tempo realimentariam.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Não há espaço livre suficiente para começar uma gravação. As gravações já concluídas ficam.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'O disco encheu. Esta gravação pára; as já concluídas ficam.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'O microfone caiu. O que já estava fica guardado.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'A gravação está neste aparelho. Transcreva-a agora, ou guarde-a sete dias para o fazer depois.',
+  'Opname bewaard': 'Gravação guardada',
+  'Bewaar voor later': 'Guardar para depois',
+  'Microfoonopname': 'Gravação de microfone',
+  'Microfoon-doorvoer kan niet starten':
+      'A monitorização do microfone não pode começar',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Há uma gravação a decorrer. Pare-a primeiro — duas sessões de microfone ao mesmo tempo realimentariam.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'sem descodificador neste sistema (afconvert em falta) — apenas PCM-WAV pode ser lido diretamente',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

@@ -145,13 +145,13 @@ Four source kinds, spelled as the UI names them:
   need their consent. It is a reminder, not a legal gate — the same honesty
   the meeting-adapter rules apply (`COLLABORATION.md` §7.1.6: recording
   indicators and provider consent flows are preserved, not replicated).
-- **A platform promise must not outrun the feature.** The macOS build today
-  declares `NSMicrophoneUsageDescription` as *"wordt niets opgenomen of
-  verstuurd"* — the string exists for the mic monitor (#2158), which is
-  pass-through only. The moment a recording route lands, that text becomes
-  false and must be rewritten in the same change that enables recording
-  (#2516); shipping recording under a "nothing is recorded" permission string
-  is a lie the OS shows in our name.
+- **The macOS permission string matches the feature.** `NSMicrophoneUsageDescription`
+  says the microphone is used for pass-through while presenting and, when
+  you start it yourself, for a recording that stays on this device, and that
+  nothing is sent. The earlier sentence ("wordt niets opgenomen of
+  verstuurd") was the pass-through-only promise of the mic monitor (#2158).
+  It was rewritten in the same change that enables recording (#2516): the
+  OS shows that sentence in our name, so it has to be true.
 
 ### 2.4 The result the user gets
 
@@ -647,8 +647,10 @@ loopback activation API on newer Windows 11. "The call's audio" is honest;
 that is a `capabilities()` answer, not an assumption.
 ⁵ PipeWire/PulseAudio expose sink *monitors* (the output mix); per-app
 capture is possible through PipeWire stream routing but setup-dependent, and
-a bare-ALSA setup has no monitor at all. Honest status until a real session
-proves it. ([docs.pipewire.org/.../module_loopback](https://docs.pipewire.org/page_module_loopback.html))
+a bare-ALSA setup has no monitor at all. The app lists only `.monitor`
+sources and records them with the same `parecord` path as the microphone.
+That is still unproven on a real session (#2523), so the cell stays *niet
+getest*. ([docs.pipewire.org/.../module_loopback](https://docs.pipewire.org/page_module_loopback.html))
 ⁶ `decodeAudioData` codec coverage is browser-dependent; formats the browser
 cannot decode are `DecodeFailed`.
 ⁷ Chrome/Edge/Firefox record (Opus/WebM); Safari's MediaRecorder exists but
@@ -679,7 +681,7 @@ with the honest label "room capture may include speaker output".
 | Local desktop engine (whisper.cpp `whisper-cli` subprocess, #2512) | beschikbaar on macOS arm64/x86_64 (measured, §4.5); Linux/Windows build from the same pinned source — real-hardware proof pending there |
 | Local web engine (WASM, #2513) | beschikbaar onder voorwaarde — gemeten op de echte artifacten in Chrome, Firefox en Safari/WebKit (§4.6); vereist COOP/COEP-headers van de host (de bundel levert ze via `.htaccess`), anders meldt de engine `noIsolation`. Aanbod: `small` en `base`; `large-v3-turbo` past niet in 2 GB WASM-geheugen. |
 | Batch server (#2524) | beschikbaar — geïmplementeerd achter de egresspoort (§4.3): loopback/LAN/cloud-tiers met eigen opt-ins, whisper.cpp-`whisper-server`-protocol; compatibiliteit met andere ASR-servers wordt niet geclaimd |
-| Live server (#2525) | proven per configured profile only; unproven protocol ⇒ route absent |
+| Live server (#2525) | afwezig. Het bewezen whisper-server-contract is alleen `POST /inference` (batch, #2524). `transcribeLive` geeft null terug en `streaming` blijft false tot een engine een streaming-protocol zelf meldt. Er is geen verzonnen live-client. De pass in `live_pass.dart` (#2522) staat klaar en doet niets zolang die melding uitblijft. |
 
 ---
 

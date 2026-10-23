@@ -116,6 +116,22 @@ void main() {
     expect(manager.active, isNull);
   });
 
+  test('volle schijf stopt met storageFailed en laat het resultaat staan', () async {
+    final handle = await startMic();
+    final ended = Completer<RecordingEvent>();
+    handle.events.listen((e) {
+      if (e.phase != RecordingPhase.recording) ended.complete(e);
+    });
+
+    source.lastSession!.failStorage();
+    final event = await ended.future;
+
+    expect(event.reason, RecordingEndReason.storageFailed);
+    expect(handle.phase, RecordingPhase.ended);
+    expect(handle.result, isNotNull);
+    expect(manager.active, isNull);
+  });
+
   test('appQuit en moduleDisabled lopen door dezelfde stop', () async {
     for (final reason in [
       RecordingEndReason.appQuit,

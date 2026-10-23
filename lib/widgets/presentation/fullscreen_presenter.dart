@@ -29,6 +29,7 @@ import '../../models/page_size.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
 import '../../services/mic_monitor.dart';
+import '../../services/transcription/mic_session_gate.dart';
 import '../../services/mic_monitor_webrtc.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/quality_autofix.dart';

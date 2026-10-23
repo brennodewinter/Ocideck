@@ -30,6 +30,10 @@ enum RecordingEndReason {
 
   /// De app sloot. De staging blijft bestaan voor de herstelperiode (§3.2).
   appQuit,
+
+  /// De schijf of het schrijfbudget hield verdere audio tegen. De
+  /// gedeeltelijke file blijft staan; oudere afgeronde opnames niet.
+  storageFailed,
 }
 
 /// Waar een lopende opname in zijn leven staat.
@@ -90,6 +94,10 @@ class RecordingHandle {
   final _events = StreamController<RecordingEvent>.broadcast();
   Stream<RecordingEvent> get events => _events.stream;
 
+  /// Live-blokken van de lopende opname, of null als de bron die niet
+  /// levert. De provisionele tekst leest hier; de file blijft de kopie.
+  Stream<AudioChunk>? get liveChunks => _capture.liveChunks;
+
   RecordingPhase _phase = RecordingPhase.recording;
   RecordingPhase get phase => _phase;
 
@@ -143,6 +151,7 @@ class RecordingManager {
     required Set<CaptureSourceKind> kinds,
     required RecordingConsent consent,
     String? sourcePath,
+    String? inputDeviceId,
   }) async {
     if (_active != null) {
       throw StateError('Er loopt al een opname');
@@ -166,6 +175,7 @@ class RecordingManager {
       consent: consent,
       stagingDir: stagingDir,
       sourcePath: sourcePath,
+      inputDeviceId: inputDeviceId,
     );
     final CaptureSession capture;
     try {
@@ -187,16 +197,19 @@ class RecordingManager {
     );
     _active = handle;
     _endedSub = capture.ended?.listen((cause) {
-      unawaited(
-        stop(
-          cause == CaptureEndCause.permissionRevoked
-              ? RecordingEndReason.permissionLost
-              : RecordingEndReason.sourceLost,
-        ),
-      );
+      unawaited(stop(_reasonFor(cause)));
     });
     return handle;
   }
+
+  /// Vertaalt een spontaan einde naar de reden die de indicator en de
+  /// afronddialoog te zien krijgen. Uitputtend, zodat een nieuwe
+  /// [CaptureEndCause] hier niet stil in `sourceLost` verdwijnt.
+  RecordingEndReason _reasonFor(CaptureEndCause cause) => switch (cause) {
+    CaptureEndCause.permissionRevoked => RecordingEndReason.permissionLost,
+    CaptureEndCause.sourceLost => RecordingEndReason.sourceLost,
+    CaptureEndCause.storageFailed => RecordingEndReason.storageFailed,
+  };
 
   /// Stop de lopende opname, om welke reden dan ook. De enige plek waar
   /// tracks worden afgebroken: `ended`/`failed` bereik je nergens anders
