@@ -323,6 +323,11 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
     // voor wie hem zoekt, geen extra regel hoogte voor wie hem niet nodig
     // heeft. In de gestapelde variant deelt hij de regel met de mapknop.
     final sort = _sortButton(l10n);
+    final refresh = IconButton(
+      tooltip: l10n.d('Vernieuwen'),
+      onPressed: _directory == null || _loading ? null : _scan,
+      icon: const Icon(Icons.refresh),
+    );
     return LayoutBuilder(
       builder: (context, constraints) {
         final stacked =
@@ -337,6 +342,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
               Row(
                 children: [
                   Expanded(child: folder),
+                  refresh,
                   sort,
                 ],
               ),
@@ -348,6 +354,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
             Expanded(child: search),
             const SizedBox(width: 8),
             folder,
+            refresh,
             sort,
           ],
         );

@@ -608,6 +608,11 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           ),
         ),
         const SizedBox(width: 8),
+        IconButton(
+          tooltip: l10n.d('Vernieuwen'),
+          onPressed: _roots.isEmpty || _loading ? null : _scan,
+          icon: const Icon(Icons.refresh),
+        ),
         Tooltip(
           message: _roots.isEmpty
               ? l10n.d('Geen bibliotheek')

@@ -109,6 +109,34 @@ void main() {
     expect(find.byType(OpenPresentationDialog), findsOneWidget);
   });
 
+  testWidgets('Openen ziet een extern aangemaakt bestand na verversen', (
+    tester,
+  ) async {
+    File('${dir.path}/demo.md').deleteSync();
+    await tester.pumpWidget(
+      _host(
+        (context) => OpenPresentationDialog.show(
+          context,
+          fileService: _fileService(dir.path),
+          libraries: [LibraryFolder(name: 'Test', path: dir.path)],
+        ),
+      ),
+    );
+    await _openAndScan(tester);
+
+    File('${dir.path}/vers.md').writeAsStringSync('# Vers document\n');
+    expect(find.text('Vers document'), findsNothing);
+
+    await tester.tap(find.byTooltip('Vernieuwen'));
+    await tester.pump();
+    await pumpUntil(
+      tester,
+      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+      reason: 'de vernieuwde mapscan bleef laden',
+    );
+    expect(find.text('Vers document'), findsOneWidget);
+  });
+
   testWidgets('ScanLibraryDialog scans known locations and renders', (
     WidgetTester tester,
   ) async {
@@ -166,5 +194,34 @@ void main() {
 
     expect(find.byType(ImportSlidesDialog), findsOneWidget);
     expect(find.byType(OciDialogShell), findsOneWidget);
+  });
+
+  testWidgets('Slides importeren ziet een extern aangemaakt deck na verversen', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(
+        (context) => ImportSlidesDialog.show(
+          context,
+          fileService: _fileService(dir.path),
+          initialDirectory: dir.path,
+        ),
+      ),
+    );
+    await _openAndScan(tester);
+
+    File('${dir.path}/vers.md').writeAsStringSync(
+      '---\nmarp: true\ntheme: ocideck\ntitle: Vers deck\n---\n\n# Vers deck\n',
+    );
+    expect(find.text('Vers deck'), findsNothing);
+
+    await tester.tap(find.byTooltip('Vernieuwen'));
+    await tester.pump();
+    await pumpUntil(
+      tester,
+      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+      reason: 'de vernieuwde mapscan bleef laden',
+    );
+    expect(find.text('Vers deck'), findsWidgets);
   });
 }
