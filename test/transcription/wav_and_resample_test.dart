@@ -8,6 +8,7 @@ import 'package:ocideck/services/transcription/media_sniff.dart';
 import 'package:ocideck/services/transcription/pcm_resample.dart';
 import 'package:ocideck/services/transcription/transcription_errors.dart';
 import 'package:ocideck/services/transcription/wav_sink_io.dart';
+import 'package:ocideck/services/transcription/wav_sink_stub.dart' as stub;
 
 void main() {
   late Directory dir;
@@ -119,5 +120,17 @@ void main() {
     expect(pcmRms(Uint8List(8)), 0);
     final full = ByteData(2)..setInt16(0, -32768, Endian.little);
     expect(pcmRms(full.buffer.asUint8List()), 1);
+  });
+
+  test('de web-stub schrijft geen bestand', () async {
+    final wav = stub.IncrementalWav('mem:recording.wav');
+    expect(wav.dataBytes, 0);
+    expect(wav.duration, Duration.zero);
+    await expectLater(wav.open(), throwsUnsupportedError);
+    await wav.add(Uint8List(0));
+    await expectLater(wav.add(Uint8List(2)), throwsUnsupportedError);
+    await wav.close();
+    expect(await stub.repairWavHeader(''), isFalse);
+    expect(await stub.repairWavHeader('mem:recording.wav'), isFalse);
   });
 }

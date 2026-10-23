@@ -220,6 +220,11 @@ const Set<String> uncoveredBaseline = {
   // (#2516). De io-helft wordt gedekt door staged_recordings_test; de
   // stub wordt daar direct aangeroepen.
   'lib/services/transcription/staged_recordings.dart',
+  // NO EXECUTABLE LINES: `wav_sink.dart` is alleen de opnameconstanten
+  // (klok, bestandsnaam, byteplafond). lcov schrijft geen record voor een
+  // bestand zonder uitvoerbare regel. Het schrijven zit in wav_sink_io.dart
+  // en wordt gedekt door wav_and_resample_test; de web-stub door dezelfde toets.
+  'lib/services/transcription/wav_sink.dart',
   // NO EXECUTABLE LINES: `transcript_audio_probe.dart` is dezelfde vorm
   // conditional naad voor de audio-bestaansscan — één export-regel. De
   // io-helft wordt gedekt door transcript_audio_probe_test; de stub wordt er
