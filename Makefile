@@ -111,6 +111,7 @@ help:
 	@echo "  make build-windows-installer  Wrap that build in an installer (Windows only)."
 	@echo "  make winget-manifest TAG=vX.Y.Z  Generate the community manifest from a published stable release."
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
+	@echo "  make build-linux-debian12  Build native Linux in a Debian 12 Docker container."
 	@echo "  make build-all       Build web + this OS's native desktop target."
 	@echo "  make release TAG=vX.Y.Z  Orchestrate a release: tag-guard + Phase 1 (validate/build/sign); guides the irreversible steps."
 	@echo "  make build-release   Build verified web + macOS release artifacts."
@@ -1343,6 +1344,12 @@ build-linux: prune-hook-cache sbom-verify
 	scripts/bundle_whisper_cli.sh linux
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart run tool/check_bundled_docs_fresh.dart build/linux
+
+# Compile a native Linux bundle against Debian 12's runtime libraries in Docker.
+# The builder writes the bundle and tarball to outputs/ocideck-local-builds/.
+.PHONY: build-linux-debian12
+build-linux-debian12:
+	OCIDECK_SOURCE_DIR="$(CURDIR)" scripts/debian12_builder/build.sh
 
 # Package the Linux bundle into portable, self-hostable formats — Phase 1 of the
 # Linux install route (#1227, docs/design/LINUX_PACKAGING.md): AppImage, .deb and
