@@ -14,10 +14,7 @@ import 'transcription_errors.dart';
 import 'wav_sink.dart';
 
 class CombinationSource extends CaptureSource {
-  CombinationSource({
-    required this._microphone,
-    required this._systemAudio,
-  });
+  CombinationSource({required this._microphone, required this._systemAudio});
 
   final CaptureSource _microphone;
   final CaptureSource _systemAudio;
