@@ -1,8 +1,11 @@
 @TestOn('vm')
 library;
 
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:archive/archive.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaml/yaml.dart';
 
@@ -928,12 +931,35 @@ void main() {
         final dir = Directory.systemTemp.createTempSync('win-redispatch-');
         addTearDown(() => dir.deleteSync(recursive: true));
         Directory('${dir.path}/bin').createSync();
+        final zipBytes = utf8.encode('zipdata');
+        final installerBytes = utf8.encode('exedata');
+        final cohortBytes = utf8.encode(
+          jsonEncode({
+            'tag_commit': 'deadbeef',
+            'run_id': 102,
+            'sha256': {
+              'zip': sha256.convert(zipBytes).toString(),
+              'installer': sha256.convert(installerBytes).toString(),
+            },
+          }),
+        );
+        final archive = Archive()
+          ..add(ArchiveFile.bytes('ocideck-windows-x64-9.9.9.zip', zipBytes))
+          ..add(
+            ArchiveFile.bytes(
+              'ocideck-windows-x64-setup-9.9.9.exe',
+              installerBytes,
+            ),
+          )
+          ..add(
+            ArchiveFile.bytes('ocideck-windows-cohort-9.9.9.json', cohortBytes),
+          );
+        File(
+          '${dir.path}/artifact.zip',
+        ).writeAsBytesSync(ZipEncoder().encode(archive));
         File(
           '${dir.path}/bin/sleep',
         ).writeAsStringSync('#!/bin/bash\nexit 0\n');
-        File(
-          '${dir.path}/bin/sha256sum',
-        ).writeAsStringSync('#!/bin/bash\nexec shasum -a 256 "\$@"\n');
         File('${dir.path}/bin/curl').writeAsStringSync('''
 #!/bin/bash
 out='' url='' prev=''
@@ -963,18 +989,12 @@ case "\$url" in
     printf '{"artifacts":[{"name":"ocideck-windows-cohort","expired":false,"archive_download_url":"https://api.github.com/artifact.zip"}]}\n' ;;
   */artifact.zip)
     [ "\$RC" -ge ${serveAssets ? (staleActiveRunAtRedispatch ? 7 : 5) : 9999} ] || exit 22
-    printf 'zipdata' > ocideck-windows-x64-9.9.9.zip
-    printf 'exedata' > ocideck-windows-x64-setup-9.9.9.exe
-    z=\$(printf 'zipdata' | sha256sum | cut -d' ' -f1)
-    e=\$(printf 'exedata' | sha256sum | cut -d' ' -f1)
-    printf '{"tag_commit":"%s","run_id":102,"sha256":{"zip":"%s","installer":"%s"}}\n' "\$GITHUB_SHA" "\$z" "\$e" > ocideck-windows-cohort-9.9.9.json
-    rm -f "\$out"
-    zip -qj "\$out" ocideck-windows-x64-9.9.9.zip ocideck-windows-x64-setup-9.9.9.exe ocideck-windows-cohort-9.9.9.json ;;
+    cp "\$FAKE_DIR/artifact.zip" "\$out" ;;
   *) exit 22 ;;
 esac
 exit 0
 ''');
-        for (final f in ['sleep', 'curl', 'sha256sum']) {
+        for (final f in ['sleep', 'curl']) {
           Process.runSync('chmod', ['+x', '${dir.path}/bin/$f']);
         }
         final step = File('${dir.path}/step.sh')
