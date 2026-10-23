@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ai_settings.dart';
@@ -64,16 +66,29 @@ Future<ProviderContainer> _container({_FakeTransport? transport}) async {
   return c;
 }
 
-/// Laat de asynchrone consent-init én de endpoint-ping landen.
-Future<void> _settle() =>
-    Future<void>.delayed(const Duration(milliseconds: 10));
+/// Wacht op de echte endpoint-uitkomst, ook onder een drukke testsuite.
+Future<void> _settle(ProviderContainer c) async {
+  final done = Completer<void>();
+  final sub = c.listen(aiStatusProvider, (_, status) {
+    if (status.availability != AiAvailability.checking && !done.isCompleted) {
+      done.complete();
+    }
+  });
+  try {
+    if (c.read(aiStatusProvider).availability == AiAvailability.checking) {
+      await done.future.timeout(const Duration(seconds: 5));
+    }
+  } finally {
+    sub.close();
+  }
+}
 
 void main() {
   group('aiStatusProvider', () {
     test('AI uit → verborgen, geen netwerk', () async {
       final transport = _FakeTransport();
       final c = await _container(transport: transport);
-      await _settle();
+      await _settle(c);
       expect(c.read(aiStatusProvider).availability, AiAvailability.hidden);
       expect(transport.calls, 0);
     });
@@ -82,7 +97,7 @@ void main() {
       final transport = _FakeTransport();
       final c = await _container(transport: transport);
       await c.read(settingsProvider.notifier).setAiSettings(_local);
-      await _settle();
+      await _settle(c);
       expect(c.read(aiStatusProvider).availability, AiAvailability.reachable);
       expect(transport.calls, 1);
     });
@@ -124,7 +139,7 @@ void main() {
       final transport = _FakeTransport(error: AiRequestException('network'));
       final c = await _container(transport: transport);
       await c.read(settingsProvider.notifier).setAiSettings(_local);
-      await _settle();
+      await _settle(c);
       expect(c.read(aiStatusProvider).availability, AiAvailability.unreachable);
     });
 
@@ -134,7 +149,7 @@ void main() {
       await c
           .read(settingsProvider.notifier)
           .setAiSettings(const AiSettings(enabled: true));
-      await _settle();
+      await _settle(c);
       expect(c.read(aiStatusProvider).availability, AiAvailability.denied);
       expect(transport.calls, 0);
     });
@@ -152,7 +167,7 @@ void main() {
               model: 'm',
             ),
           );
-      await _settle();
+      await _settle(c);
       final status = c.read(aiStatusProvider);
       expect(status.availability, AiAvailability.denied);
       expect(status.denial, AiGateDenial.cloudNeedsConsent);
