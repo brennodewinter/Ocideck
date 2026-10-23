@@ -223,7 +223,8 @@ class PresentationImportService {
     if (prepared == null) {
       return PresentationImportResult.failed(prep.failure!);
     }
-    if (prepared.sourceDeck.slides.isEmpty) {
+    if (filename.toLowerCase().endsWith('.potx') &&
+        prepared.sourceDeck.slides.isEmpty) {
       return PresentationImportResult.failed(
         ImportFailure(
           'Een leeg PowerPoint-sjabloon moet afzonderlijk als stijl worden geïmporteerd.',
