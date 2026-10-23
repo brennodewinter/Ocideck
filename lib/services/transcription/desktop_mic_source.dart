@@ -16,6 +16,7 @@ import 'mic_session_gate.dart';
 import 'pcm_resample.dart';
 import 'transcription_errors.dart';
 import 'wav_sink.dart';
+import 'wav_sink_stub.dart' if (dart.library.io) 'wav_sink_io.dart' as wav_file;
 
 /// Minimaal vrije ruimte vóór de microfoon open gaat. Minder dan dit en
 /// we starten niet — een opname die meteen vastloopt is geen opname.
@@ -91,9 +92,9 @@ class DesktopMicrophoneSource extends CaptureSource {
         }
       }
       live = await _port.open(deviceId: request.inputDeviceId);
-      IncrementalWav? wav;
+      wav_file.IncrementalWav? wav;
       if (request.persistFile && stagingDir != null) {
-        wav = IncrementalWav(
+        wav = wav_file.IncrementalWav(
           p.join(stagingDir, recordingWavName),
           maxBytes: maxRecordingBytes,
         );
@@ -123,7 +124,7 @@ class DesktopMicrophoneSource extends CaptureSource {
 class _DesktopMicSession implements CaptureSession {
   _DesktopMicSession({
     required MicCaptureLive live,
-    required IncrementalWav? wav,
+    required wav_file.IncrementalWav? wav,
     required this._gate,
     required this._onLevel,
     required this._kinds,
@@ -154,7 +155,7 @@ class _DesktopMicSession implements CaptureSession {
   }
 
   final MicCaptureLive _live;
-  final IncrementalWav? _wav;
+  final wav_file.IncrementalWav? _wav;
   final MicSessionGate? _gate;
   final void Function(double level)? _onLevel;
   final Set<CaptureSourceKind> _kinds;
@@ -250,7 +251,7 @@ class _DesktopMicSession implements CaptureSession {
       try {
         await wav.close();
       } on IoFailed {
-        await repairWavHeader(durablePath);
+        await wav_file.repairWavHeader(durablePath);
       }
     }
     _onLevel?.call(0);

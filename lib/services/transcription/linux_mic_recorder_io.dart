@@ -158,6 +158,9 @@ Map<String, String> linuxRecorderEnvironment() {
     'DBUS_SESSION_BUS_ADDRESS',
     'PIPEWIRE_RUNTIME_DIR',
     'LANG',
+    // which en df heten bij naam. Zonder PATH vinden ze zichzelf niet,
+    // en de rest van de omgeving erven we bewust niet.
+    'PATH',
   };
   final env = <String, String>{'LC_ALL': 'C'};
   for (final key in allow) {
@@ -307,6 +310,8 @@ class _LinuxLive implements MicCaptureLive {
         _plan.executable,
         _plan.args,
         environment: linuxRecorderEnvironment(),
+        includeParentEnvironment: false,
+        runInShell: false,
         mode: ProcessStartMode.normal,
       );
       if (_stopped) {
@@ -314,6 +319,8 @@ class _LinuxLive implements MicCaptureLive {
         return;
       }
       _process = process;
+      // Ongelezen stderr vult de pijp en laat parecord vastlopen.
+      process.stderr.listen((_) {});
       process.stdout.listen((chunk) {
         if (!_stopped && chunk.isNotEmpty) {
           _frames.add(MicPcmFrame(Uint8List.fromList(chunk)));
@@ -349,10 +356,13 @@ Future<LinuxMicTools> _defaultLookup() async {
   String? sources;
   if (pactl != null) {
     try {
-      final result = await Process.run(pactl, const [
-        'list',
-        'sources',
-      ], environment: linuxRecorderEnvironment());
+      final result = await Process.run(
+        pactl,
+        const ['list', 'sources'],
+        environment: linuxRecorderEnvironment(),
+        includeParentEnvironment: false,
+        runInShell: false,
+      );
       if (result.exitCode == 0) sources = result.stdout as String;
     } on ProcessException {
       sources = null;
@@ -367,7 +377,13 @@ Future<LinuxMicTools> _defaultLookup() async {
 
 Future<String?> _which(String name) async {
   try {
-    final result = await Process.run('which', [name]);
+    final result = await Process.run(
+      'which',
+      [name],
+      environment: linuxRecorderEnvironment(),
+      includeParentEnvironment: false,
+      runInShell: false,
+    );
     if (result.exitCode != 0) return null;
     final path = (result.stdout as String).trim();
     if (path.isEmpty || path.contains('\n') || path.contains('\r')) {
@@ -383,7 +399,13 @@ Future<String?> _which(String name) async {
 /// te lezen is — dan beslist het schrijven zelf, niet een gok.
 Future<int?> dfFreeBytes(String directory) async {
   try {
-    final result = await Process.run('df', ['-Pk', directory]);
+    final result = await Process.run(
+      'df',
+      ['-Pk', directory],
+      environment: linuxRecorderEnvironment(),
+      includeParentEnvironment: false,
+      runInShell: false,
+    );
     if (result.exitCode != 0) return null;
     final lines = (result.stdout as String).trim().split('\n');
     if (lines.length < 2) return null;

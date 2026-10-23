@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/transcription/media_sniff.dart';
 import 'package:ocideck/services/transcription/pcm_resample.dart';
 import 'package:ocideck/services/transcription/transcription_errors.dart';
-import 'package:ocideck/services/transcription/wav_sink.dart';
+import 'package:ocideck/services/transcription/wav_sink_io.dart';
 
 void main() {
   late Directory dir;

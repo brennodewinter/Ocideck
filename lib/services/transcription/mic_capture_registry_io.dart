@@ -3,7 +3,7 @@ import 'dart:io';
 import 'capture_source.dart';
 import 'channel_mic_port.dart';
 import 'desktop_mic_source.dart';
-import 'linux_mic_recorder.dart';
+import 'linux_mic_recorder_io.dart';
 import 'mic_capture_port.dart';
 import 'mic_session_gate.dart';
 

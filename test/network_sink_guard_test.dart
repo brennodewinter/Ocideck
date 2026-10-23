@@ -278,6 +278,12 @@ void main() {
     // met argv-array, geen schil, lege omgeving, tijdslimiet en kill.
     // De decoder heeft geen netwerkcode — lokaal systeemsubproces.
     'lib/services/transcription/file_capture_source_io.dart': 1,
+    // Linux-opname (#2516, #2520). Vier starts, allemaal argv zonder
+    // schil en zonder geërfde omgeving: parecord (de opname), pactl
+    // (de bronnenlijst), which (het pad van die twee) en df (vrije
+    // ruimte). PATH staat op de toelatingslijst omdat which en df bij
+    // naam heten; de rest van de omgeving gaat niet mee.
+    'lib/services/transcription/linux_mic_recorder_io.dart': 4,
   };
 
   test('een subproces blijft binnen de twee plekken die het mogen', () {

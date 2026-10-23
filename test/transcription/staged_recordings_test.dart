@@ -9,7 +9,7 @@ import 'package:ocideck/services/transcription/recording_staging_stub.dart';
 import 'package:ocideck/services/transcription/staged_recordings_io.dart';
 import 'package:ocideck/services/transcription/staged_recordings_stub.dart'
     as stub;
-import 'package:ocideck/services/transcription/wav_sink.dart';
+import 'package:ocideck/services/transcription/wav_sink_io.dart';
 import 'package:path/path.dart' as p;
 
 void main() {

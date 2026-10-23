@@ -6,7 +6,7 @@ import 'package:path/path.dart' as p;
 import 'media_sniff.dart';
 import 'recording_staging.dart';
 import 'staged_recordings_stub.dart' hide listStagedMicRecordings;
-import 'wav_sink.dart';
+import 'wav_sink_io.dart';
 
 export 'staged_recordings_stub.dart' show StagedMicRecording;
 

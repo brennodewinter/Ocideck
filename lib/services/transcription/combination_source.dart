@@ -12,6 +12,7 @@ import 'package:path/path.dart' as p;
 import 'capture_source.dart';
 import 'transcription_errors.dart';
 import 'wav_sink.dart';
+import 'wav_sink_stub.dart' if (dart.library.io) 'wav_sink_io.dart' as wav_file;
 
 class CombinationSource extends CaptureSource {
   CombinationSource({required this._microphone, required this._systemAudio});
@@ -85,7 +86,7 @@ class CombinationSource extends CaptureSource {
       await system.stop();
       throw const SourceUnavailable('deze bronnen leveren geen losse kanalen');
     }
-    final wav = IncrementalWav(
+    final wav = wav_file.IncrementalWav(
       p.join(stagingDir, recordingWavName),
       channels: 2,
     );
@@ -98,7 +99,7 @@ class _CombinationSession implements CaptureSession {
   _CombinationSession({
     required CaptureSession mic,
     required CaptureSession system,
-    required IncrementalWav wav,
+    required wav_file.IncrementalWav wav,
   }) : _mic = mic,
        _system = system,
        _wav = wav,
@@ -123,7 +124,7 @@ class _CombinationSession implements CaptureSession {
 
   final CaptureSession _mic;
   final CaptureSession _system;
-  final IncrementalWav _wav;
+  final wav_file.IncrementalWav _wav;
   final _left = _PcmBuffer();
   final _right = _PcmBuffer();
   final _ended = StreamController<CaptureEndCause>.broadcast();
@@ -243,7 +244,7 @@ class _CombinationSession implements CaptureSession {
     try {
       await _wav.close();
     } on IoFailed {
-      await repairWavHeader(durablePath);
+      await wav_file.repairWavHeader(durablePath);
     }
     if (!_ended.isClosed) await _ended.close();
     if (!_liveOut.isClosed) await _liveOut.close();

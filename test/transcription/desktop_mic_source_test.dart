@@ -9,12 +9,12 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/transcription/capture_source.dart';
 import 'package:ocideck/services/transcription/desktop_mic_source.dart';
-import 'package:ocideck/services/transcription/linux_mic_recorder.dart';
+import 'package:ocideck/services/transcription/linux_mic_recorder_io.dart';
 import 'package:ocideck/services/transcription/media_sniff.dart';
 import 'package:ocideck/services/transcription/mic_capture_port.dart';
 import 'package:ocideck/services/transcription/mic_session_gate.dart';
 import 'package:ocideck/services/transcription/transcription_errors.dart';
-import 'package:ocideck/services/transcription/wav_sink.dart';
+import 'package:ocideck/services/transcription/wav_sink_io.dart';
 import 'package:path/path.dart' as p;
 
 class _Live implements MicCaptureLive {
@@ -277,6 +277,7 @@ Source #2
         'PIPEWIRE_RUNTIME_DIR',
         'LANG',
         'LC_ALL',
+        'PATH',
       };
       expect(env.keys.every(allow.contains), isTrue);
     },

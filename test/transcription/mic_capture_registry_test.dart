@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/transcription/channel_mic_port.dart';
 import 'package:ocideck/services/transcription/desktop_mic_source.dart';
-import 'package:ocideck/services/transcription/linux_mic_recorder.dart';
+import 'package:ocideck/services/transcription/linux_mic_recorder_io.dart';
 import 'package:ocideck/services/transcription/capture_source.dart';
 import 'package:ocideck/services/transcription/mic_capture_port.dart';
 import 'package:ocideck/services/transcription/mic_capture_registry_io.dart'
