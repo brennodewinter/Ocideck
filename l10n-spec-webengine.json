@@ -1,0 +1,36 @@
+{
+  "additions": {
+    "Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)": {
+      "en": "This browser or hosting cannot run a local speech engine (cross-origin isolation is missing)",
+      "de": "Dieser Browser oder dieses Hosting kann keine lokale Sprach-Engine ausführen (Cross-Origin-Isolation fehlt)",
+      "fr": "Ce navigateur ou cet hébergement ne peut pas exécuter de moteur vocal local (l'isolation cross-origin manque)",
+      "es": "Este navegador o alojamiento no puede ejecutar un motor de voz local (falta aislamiento de origen cruzado)",
+      "it": "Questo browser o hosting non può eseguire un motore vocale locale (manca l'isolamento cross-origin)",
+      "pt": "Este navegador ou alojamento não consegue executar um motor de voz local (falta isolamento de origem cruzada)",
+      "pl": "Ta przeglądarka lub hosting nie może uruchomić lokalnego silnika mowy (brak izolacji cross-origin)",
+      "sv": "Den här webbläsaren eller hostingen kan inte köra en lokal talmotor (cross-origin-isolering saknas)",
+      "da": "Denne browser eller hosting kan ikke køre en lokal talemotor (cross-origin-isolering mangler)",
+      "fi": "Tämä selain tai isännöinti ei voi ajaa paikallista puhemoottoria (cross-origin-isolaatio puuttuu)",
+      "et": "See brauser või majutus ei saa käivitada kohalikku kõnemootorit (cross-origin isolatsioon puudub)",
+      "lv": "Šī pārlūkprogramma vai mitināšana nevar palaist lokālu runas dzinēju (trūkst cross-origin izolācijas)",
+      "lt": "Ši naršyklė ar talpinimas negali paleisti vietinio kalbos variklio (trūksta cross-origin izoliacijos)",
+      "cs": "Tento prohlížeč nebo hosting nemůže spustit lokální řečový engine (chybí cross-origin izolace)",
+      "sk": "Tento prehliadač alebo hosting nemôže spustiť lokálny rečový engine (chýba cross-origin izolácia)",
+      "sl": "Ta brskalnik ali gostovanje ne more zagnati lokalnega govornega motorja (manjka cross-origin izolacija)",
+      "hr": "Ovaj preglednik ili hosting ne može pokrenuti lokalni govorni pogon (nedostaje cross-origin izolacija)",
+      "hu": "Ez a böngésző vagy tárhely nem tud helyi beszédmotort futtatni (hiányzik a cross-origin izoláció)",
+      "ro": "Acest browser sau hosting nu poate rula un motor vocal local (lipsește izolarea cross-origin)",
+      "bg": "Този браузър или хостинг не може да стартира локален речеви двигател (липсва cross-origin изолация)",
+      "el": "Αυτό το πρόγραμμα περιήγησης ή η φιλοξενία δεν μπορεί να εκτελέσει τοπική μηχανή ομιλίας (λείπει η απομόνωση cross-origin)",
+      "uk": "Цей браузер або хостинг не може запустити локальний мовний рушій (відсутня cross-origin ізоляція)",
+      "tr": "Bu tarayıcı veya barındırma yerel bir konuşma motoru çalıştıramaz (cross-origin izolasyonu eksik)",
+      "id": "Peramban atau hosting ini tidak dapat menjalankan mesin ucapan lokal (isolasi cross-origin tidak ada)",
+      "fy": "Dizze browser of hosting kin gjin lokale spraak-engine draaie (cross-origin isolaasje ûntbrekt)",
+      "gsw": "Dä Browser oder das Hosting cha kei lokali Spraach-Engine laufe la (Cross-Origin-Isolierig fählt)",
+      "pap": "E browser of hosting akí no por koré un motor di voz lokal (falta aislamiento cross-origin)",
+      "mt": "Dan il-browser jew il-hosting ma jistax jħaddem magna tal-vuċi lokali (l-iżolament cross-origin nieqes)",
+      "ga": "Ní féidir leis an mbrabhsálaí nó óstach seo inneall urlabhra áitiúil a rith (tá an t-éalú cross-origin in easnamh)",
+      "la": "Hic navigator vel hospitium machinam locutionis localem agere non potest (isolatio cross-origin deest)"
+    }
+  }
+}

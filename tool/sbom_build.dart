@@ -740,7 +740,7 @@ List<SbomComponent> _whisperRuntime() {
       ref: 'runtime:whisper.cpp@$version',
       group: 'native-runtime',
       type: 'application',
-      name: 'whisper.cpp (whisper-cli)',
+      name: 'whisper.cpp (whisper-cli / whisper-wasm)',
       version: version,
       purl: 'pkg:github/ggml-org/whisper.cpp@$version',
       sha256: m['tarballSha256'] as String?,
@@ -751,10 +751,12 @@ List<SbomComponent> _whisperRuntime() {
       supplierUrl: m['upstream'] as String?,
       dependsOn: const [],
       note:
-          'Local speech-recognition helper compiled from the pinned source '
-          'tarball by scripts/build_whisper_cli.sh and shipped inside the '
-          'desktop bundles. Model weights are never bundled — the user '
-          'downloads them through the guarded catalog flow (#2512).',
+          'Local speech-recognition engine compiled from the pinned source '
+          'tarball twice over: scripts/build_whisper_cli.sh ships whisper-cli '
+          'inside the desktop bundles, and the Emscripten build in '
+          'web/whisper/ ships inside the web bundle (#2513, hash-pinned by '
+          'web/whisper/manifest.json). Model weights are never bundled — '
+          'the user downloads them through the guarded catalog flow.',
     ),
   ];
 }

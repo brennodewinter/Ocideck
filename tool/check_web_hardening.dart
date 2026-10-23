@@ -186,8 +186,14 @@ void main() {
       'Referrer-Policy',
       'Strict-Transport-Security',
       'Permissions-Policy',
+      // Cross-origin isolation unlocks SharedArrayBuffer, which the
+      // pthread-based whisper WASM engine needs (#2513). Without these two
+      // headers the engine capability reports unavailable — silent removal
+      // here would quietly drop web transcription.
+      'Cross-Origin-Opener-Policy',
+      'Cross-Origin-Embedder-Policy',
     ]) {
-      require(conf.contains(h), '.htaccess must set $h (#849).');
+      require(conf.contains(h), '.htaccess must set $h (#849/#2513).');
     }
   }
 

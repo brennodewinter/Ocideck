@@ -1,0 +1,33 @@
+{
+  "probe": "bridge",
+  "model": "ggml-tiny.bin",
+  "audio": "vlot.wav",
+  "threads": 4,
+  "lang": "nl",
+  "sab": true,
+  "isocross": true,
+  "supported": true,
+  "errors": [],
+  "modelFetchMs": 173,
+  "modelInitMs": 94,
+  "audioSec": 29.2,
+  "inferMs": 4289,
+  "rtf": 0.15,
+  "cancelled": false,
+  "segments": 5,
+  "text": "Het vlot uit Wikipedia, de vrijje encycloppen die en elp. Wikipedia.org.Het vlot is een buurtschap in de Nederlandse gemeente A&M gelegen in de provincie Gelderland.Het ligt op de Zuidelijke Rijn over tussen Elden en Teril.Deze opnamen alle textvallen onder de creatiefkommens gelijk delen licensieBescheekbaar op Creative Commons.org.",
+  "memMB": 153,
+  "totalMs": 4721,
+  "net": [
+    "http://127.0.0.1:8931/whisper/bridge.js",
+    "http://127.0.0.1:8931/ggml-tiny.bin",
+    "http://127.0.0.1:8931/favicon.ico",
+    "http://127.0.0.1:8931/whisper/libmain.js",
+    "http://127.0.0.1:8931/whisper/libmain.wasm",
+    "http://127.0.0.1:8931/vlot.wav",
+    "http://127.0.0.1:8931/whisper/libmain.js",
+    "http://127.0.0.1:8931/whisper/libmain.js",
+    "http://127.0.0.1:8931/whisper/libmain.js",
+    "http://127.0.0.1:8931/whisper/libmain.js"
+  ]
+}

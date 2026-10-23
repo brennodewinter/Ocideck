@@ -90,6 +90,12 @@ class _EngineStatusLine extends ConsumerWidget {
             Icons.error_outline,
             l10n.d('Deze processorarchitectuur heeft geen lokale engine'),
           ),
+          LocalEngineSupport.noIsolation => (
+            Icons.error_outline,
+            l10n.d(
+              'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)',
+            ),
+          ),
           null => (Icons.hourglass_empty, l10n.d('Engine: controleren…')),
         };
         return Padding(

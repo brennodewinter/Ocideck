@@ -165,6 +165,24 @@ void main() {
     );
   });
 
+  test('cross-origin isolatie staat aan voor de WASM-transcriptie', () {
+    // SharedArrayBuffer bestaat alleen in een cross-origin-geïsoleerde context,
+    // en de whisper-engine is pthread-WASM — zonder SAB abort de module bij
+    // het starten van de werkers. Deze twee headers zijn de enige route naar
+    // `crossOriginIsolated`; haal ze weg en de webcapability valt terug naar
+    // "niet beschikbaar" zonder dat een test het merkt (#2513).
+    expect(
+      headerValue('Cross-Origin-Opener-Policy'),
+      equals('same-origin'),
+      reason: 'COOP isolaart de browsertab voor SharedArrayBuffer',
+    );
+    expect(
+      headerValue('Cross-Origin-Embedder-Policy'),
+      equals('require-corp'),
+      reason: 'COEP is de tweede helft van crossOriginIsolated',
+    );
+  });
+
   test('HSTS is conservatief: includeSubDomains, geen preload', () {
     final hsts = headerValue('Strict-Transport-Security');
     expect(hsts, isNotNull, reason: 'HSTS heeft geen meta-vorm; het moet hier');

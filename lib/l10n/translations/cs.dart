@@ -1606,6 +1606,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
+      'Tento prohlížeč nebo hosting nemůže spustit lokální řečový engine (chybí cross-origin izolace)',
   'Whisper': 'Whisper',
   'MIT · whisper.cpp': 'MIT · whisper.cpp',
   'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':

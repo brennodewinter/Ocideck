@@ -1,0 +1,39 @@
+--- a/examples/whisper.wasm/emscripten.cpp	2026-10-23 14:13:23
++++ b/examples/whisper.wasm/emscripten.cpp	2026-10-23 14:13:28
+@@ -10,6 +10,9 @@
+ 
+ std::vector<struct whisper_context *> g_contexts(4, nullptr);
+ 
++// OciDeck #2513: abort_callback zodat Cancel de worker eerlijk stopt.
++static volatile bool g_cancelRequested = false;
++
+ static inline int mpow2(int n) {
+     int p = 1;
+     while (p <= n) p *= 2;
+@@ -17,6 +20,10 @@
+ }
+ 
+ EMSCRIPTEN_BINDINGS(whisper) {
++    emscripten::function("requestCancel", emscripten::optional_override([]() {
++        g_cancelRequested = true;
++    }));
++
+     emscripten::function("init", emscripten::optional_override([](const std::string & path_model) {
+         if (g_worker.joinable()) {
+             g_worker.join();
+@@ -64,7 +71,15 @@
+             return -2;
+         }
+ 
++        g_cancelRequested = false;
++
+         struct whisper_full_params params = whisper_full_default_params(whisper_sampling_strategy::WHISPER_SAMPLING_GREEDY);
++
++        params.abort_callback = [](void *) -> bool {
++            return g_cancelRequested;
++        };
++        params.abort_callback_user_data = nullptr;
++
+         bool is_multilingual = whisper_is_multilingual(g_contexts[index]);
+ 
+         params.print_realtime   = true;

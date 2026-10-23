@@ -41,15 +41,21 @@ void main() {
 
     for (final file in files) {
       final isIo = file.path.endsWith('_io.dart');
+      final isWeb = file.path.endsWith('_web.dart');
       final imports = RegExp(
         "import\\s+'([^']+)'",
       ).allMatches(file.readAsStringSync()).map((m) => m.group(1)!);
       for (final uri in imports) {
         for (final bad in forbidden) {
-          // `dart:io` is de enige toegestane uitzondering, en alleen in de
-          // `_io`-gesplitste stagingfile — die draait per definitie niet
-          // op web en is precies waar bestandssysteem hoort.
+          // `dart:io` en `package:web` zijn de twee toegestane uitzonderingen,
+          // elk alleen in zijn eigen gesplitste helft: `_io` is waar het
+          // bestandssysteem en de NetGuard-sockets horen, `_web` is waar de
+          // browser-API's horen — IndexedDB voor de modelopslag, WebCrypto voor
+          // de hash en de gebruiker-gestarte `fetch` voor het model (#2513).
+          // De fetch daar is het web-equivalent van de NetGuard-route: de
+          // browser toetst elke redirect-hop via CORS.
           if (bad == 'dart:io' && isIo) continue;
+          if (bad == 'package:web' && isWeb) continue;
           expect(
             uri.contains(bad),
             isFalse,

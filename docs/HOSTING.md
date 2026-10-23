@@ -200,6 +200,28 @@ ignore `.htaccess` entirely and still need the snippets above. The header CSP is
 kept byte-for-byte identical to the `<meta>` one by a test and the web-hardening
 check.
 
+### Cross-origin isolation (required for local transcription)
+
+Local transcription on web runs a pthread-based WASM build of whisper.cpp,
+and WebAssembly threads need `SharedArrayBuffer`, which browsers only expose in
+a **cross-origin-isolated** context. Send both headers on every response:
+
+```
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+```
+
+Without them the app still works — the engine simply reports the web capability
+as unavailable, which is the honest degraded state — but local transcription
+will never start. COEP `require-corp` is safe here because the CSP above already
+confines every subresource axis to `'self'`, `blob:` and `data:`; the gate it
+adds over `no-cors` subresource loads has nothing left to break. The
+user-initiated model download is a CORS `fetch`, which COEP does not govern.
+
+The shipped `.htaccess` sets both headers, so on Apache hosts they follow the
+same rule as the rest of the header hardening: automatic when `mod_headers` +
+`AllowOverride` permit it, otherwise move them into the vhost config.
+
 ### `Strict-Transport-Security`
 
 Send it, and send it on every response:
