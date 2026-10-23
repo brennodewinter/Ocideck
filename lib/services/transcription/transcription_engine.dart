@@ -93,13 +93,33 @@ class PartialTranscript {
   final Duration offset;
 }
 
+/// De bewuste toestemming voor één servertaak (§4.3: per taak, met host én
+/// bestand benoemd). De consentdialoog is de enige eerlijke maker; de
+/// engine toetst of de bevestigde waarden exact overeenkomen met wat hij
+/// gaat versturen — alles anders is [ConsentRequired].
+class ServerConsent {
+  const ServerConsent({required this.host, required this.audioPath});
+
+  /// De host die in de bevestiging stond — moet gelijk zijn aan de host
+  /// van het serverprofiel.
+  final String host;
+
+  /// De audioverwijzing die in de bevestiging stond — moet gelijk zijn aan
+  /// de `AudioRef.path` van deze taak.
+  final String audioPath;
+}
+
 /// Keuzes voor één transcriptietaak. Klein gehouden: wat elke engine
 /// eerlijk kan aannemen, niet wat één leverancier toevallig kent.
 class TranscriptionOptions {
-  const TranscriptionOptions({this.language});
+  const TranscriptionOptions({this.language, this.serverConsent});
 
   /// Gewenste taal (bijv. `nl`), of null voor "laat de engine detecteren".
   final String? language;
+
+  /// Verplicht voor een `batchServer`/`liveServer`-engine; een lokale
+  /// engine negeert dit veld.
+  final ServerConsent? serverConsent;
 }
 
 /// Verwijzing naar duurzame audio voor [TranscriptionEngine.transcribe] —

@@ -103,8 +103,21 @@ machine (desktop) or in your browser tab (web). This includes:
   recording lives in memory and dies with the tab. Nothing in this module
   sends audio or transcript text anywhere: not to the AI assistant (its
   backend contract is chat text, not audio — see *The AI assistant is off by
-  default and fail-closed*), and not to any server unless a future version's
-  explicitly chosen ASR-server profile asks you, per task, where it may go.
+  default and fail-closed*), and not to any server either — with one
+  deliberate exception. You may configure an **ASR server profile** (Settings
+  → Uitbreidingen, off and unconfigured by default): a server *you* name, in
+  three trust classes (this device, a trusted LAN address, or an external
+  HTTPS service — each behind its own explicit opt-in). Audio leaves the
+  device only for a transcription task you confirmed one by one, with the
+  host and the exact file named in the confirmation; the confirmation for
+  one file never covers another. There is no silent fallback — when local
+  transcription fails, OciDeck reports it instead of uploading anyway. The
+  optional API key lives in the OS keychain and travels only in the request's
+  `Authorization` header — never in the URL, the settings file, the
+  transcript or the logs. What the server itself does with the audio is that
+  server's policy — OciDeck cannot promise deletion there; the transcript's
+  provenance line names the profile so a reader sees the text came from
+  outside the device.
   The speech models the local engine runs are files on this device: the app
   shows which are installed and fetches one only when you ask it to (see the
   *Transcription speech model* row of the egress table below). Deleting a
@@ -245,6 +258,7 @@ against accessing internal/private network addresses.
 | **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
 | **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
 | **Transcription speech model** (you press *Binnenhalen/Download* in the Transcriptie module) | One GET per model, at a revision pinned in the build; the file's size and SHA-256 are fixed beforehand and verified after the download — nothing is uploaded | `huggingface.co`, then the CDN host it redirects to |
+| **Transcription via an ASR server** (only with a configured server profile — off by default — and a per-task confirmation naming host and file) | The audio file you confirmed (one `POST /inference` multipart upload, whisper-server protocol); on HTTPS endpoints an optional API key travels in the `Authorization` header only. A connectivity probe you can run first sends no audio. What the server keeps or deletes is that server's policy, not an OciDeck guarantee | The server you configured: a loopback address, a LAN host you explicitly trusted, or an external HTTPS endpoint you confirmed |
 | **Cost mode — exchange rate** (you press *Fetch*, only for a currency other than the euro) | One request per currency, containing only the currency code (`/v1/latest?base=<code>&symbols=EUR`). The service sees your IP address. No presentation data, amounts, rates or attendee input is sent | `api.frankfurter.dev` (the European Central Bank's reference rates) |
 | **Embedded YouTube video** | A request for the player page and the video itself; the service can see that the video is being played | `youtube-nocookie.com` (and its media/thumbnail hosts) — **not** `youtube.com` |
 | **Embedded Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `vimeo.com` |

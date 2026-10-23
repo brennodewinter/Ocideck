@@ -160,6 +160,43 @@ class SecretStore {
     }
   }
 
+  /// Keychain-sleutel voor de API-sleutel van een ASR-serverprofiel
+  /// (#2524), gekeyd op de genormaliseerde basis-URL — een eigen prefix zodat
+  /// een AI-sleutel nooit per ongeluk meereist naar een transcriptieserver.
+  static String asrApiKeyKey(String baseUrl) {
+    final normalized = baseUrl.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'asr_api_key::$normalized';
+  }
+
+  Future<void> writeAsrApiKey(String baseUrl, String apiKey) async {
+    _requireStorage('writeAsrApiKey');
+    try {
+      await _backend.write(asrApiKeyKey(baseUrl), apiKey);
+    } catch (e) {
+      logError('SecretStore.writeAsrApiKey: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readAsrApiKey(String baseUrl) async {
+    if (!canStore) return null;
+    try {
+      return await _backend.read(asrApiKeyKey(baseUrl));
+    } catch (e) {
+      logError('SecretStore.readAsrApiKey: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteAsrApiKey(String baseUrl) async {
+    if (!canStore) return;
+    try {
+      await _backend.delete(asrApiKeyKey(baseUrl));
+    } catch (e) {
+      logWarning('SecretStore.deleteAsrApiKey: keychain delete failed', e);
+    }
+  }
+
   /// Keychain-sleutel voor de secret access key van een S3-bron, gekeyd op het
   /// genormaliseerde endpoint plus de access key id. Twee buckets op hetzelfde
   /// endpoint met dezelfde sleutel delen daardoor één entry, wat klopt: het ís
