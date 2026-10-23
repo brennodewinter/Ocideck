@@ -1635,6 +1635,33 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Cruthaigh tras-scríobh de thaifeadadh nó de chomhad fuaime atá ann cheana — mar dhoiciméad Markdown in-eagarthóireachta, le rogha shoiléir an gcoinntear an t-eagrán bunaidh. Go háitiúil nuair is féidir; do fhreastalaí féin ach amháin má roghnaíonn tú é.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Múnla urlabhra áitiúil — fanann sé ar an bhfeiste seo; ní théann aon rud chuig freastalaí',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Inneall: réidh — tá an cúntóir áitiúil i láthair',
+  'Engine ontbreekt in deze installatie':
+      'Tá an t-inneall ar iarraidh sa shuiteáil seo',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Níl inneall áitiúil ag an ailtireacht phróiseálaí seo',
+  'Engine: controleren…': 'Inneall: á sheiceáil…',
+  'Licht — snel, minder nauwkeurig': 'Éadrom — tapa, níos lú cruinn',
+  'Nauwkeurig — beste kwaliteit, groot': 'Cruinn — an caighdeán is fearr, mór',
+  'Gebalanceerd — aanbevolen': 'Cothromaithe — molta',
+  'Bezig met binnenhalen': 'Á íoslódáil',
+  'Geïnstalleerd en getoetst': 'Suiteáilte agus deimhnithe',
+  'Geïnstalleerd': 'Suiteáilte',
+  'Niet geïnstalleerd': 'Níl sé suiteáilte',
+  'Binnenhalen': 'Íoslódáil',
+  'afgebroken': 'cealaithe',
+  'netwerkfout': 'earráid líonra',
+  'door de beveiliging geweigerd': 'diúltaíodh ag an gciseal slándála',
+  'controlesom klopt niet — probeer opnieuw':
+      'ní fhreastalaíonn an tsuim sheiceála — bain triail eile as',
+  'schrijffout op schijf': 'earráid scríofa diosca',
   'Transcript': 'Tras-scríobh',
   'Opnieuw controleren': 'Seiceáil arís',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1663,8 +1690,6 @@ const _dutchSourceAddGa = <String, String>{
   'Opname stoppen': 'Stop an taifead',
   'Microfoon': 'Micreafón',
   'Systeemgeluid': 'Fuaim an chórais',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Déan tras-scríobh de thaifead nó de chomhad fuaime atá ann cheana — mar dhoiciméad Markdown inathraithe, le rogha shoiléir an gcoinntear an bunleagan. Go háitiúil nuair is féidir; do fhreastalaí féin ach amháin má roghnaíonn tú é. Tiocfaidh foinsí taifid agus inneall i leaganacha níos déanaí.',
   'Afbeeldingen omwisselen': 'Malartaigh na híomhánna',
   'Afbeelding links': 'Íomhá chlé',
   'Breedte afbeeldingspaneel': 'Leithead an phainéil íomhá',

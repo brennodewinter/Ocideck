@@ -231,6 +231,9 @@ const Set<String> loanKeys = {
   'Smal (860 px)',
   'Forgejo of Gitea',
   'Nextcloud of ownCloud',
+  // Eigennaam plus SPDX-licentiecode — er staat geen vertaalbaar woord in.
+  'Whisper',
+  'MIT · whisper.cpp',
 };
 
 /// Eén vertaalregel die de Nederlandse bron letterlijk doorliet.

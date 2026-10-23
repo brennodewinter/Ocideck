@@ -1605,6 +1605,33 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Lav en transskription af en optagelse eller en eksisterende lydfil — som et redigerbart Markdown-dokument, med et klart valg om originalen bevares. Lokalt hvor muligt; din egen server kun hvis du vælger den.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokal talemodel — bliver på denne enhed; intet sendes til en server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Motor: klar — den lokale hjælper er til stede',
+  'Engine ontbreekt in deze installatie':
+      'Motoren mangler i denne installation',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Denne processorarkitektur har ingen lokal motor',
+  'Engine: controleren…': 'Motor: kontrollerer…',
+  'Licht — snel, minder nauwkeurig': 'Let — hurtig, mindre præcis',
+  'Nauwkeurig — beste kwaliteit, groot': 'Præcis — bedste kvalitet, stor',
+  'Gebalanceerd — aanbevolen': 'Afbalanceret — anbefalet',
+  'Bezig met binnenhalen': 'Downloader',
+  'Geïnstalleerd en getoetst': 'Installeret og verificeret',
+  'Geïnstalleerd': 'Installeret',
+  'Niet geïnstalleerd': 'Ikke installeret',
+  'Binnenhalen': 'Hent',
+  'afgebroken': 'annulleret',
+  'netwerkfout': 'netværksfejl',
+  'door de beveiliging geweigerd': 'afvist af sikkerhedslaget',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrolsum stemmer ikke — prøv igen',
+  'schrijffout op schijf': 'skrivefejl på disk',
   'Transcript': 'Transskription',
   'Opnieuw controleren': 'Kontrollér igen',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1633,8 +1660,6 @@ const _dutchSourceAddDa = <String, String>{
   'Opname stoppen': 'Stop optagelse',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Systemlyd',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Lav en transskription af en optagelse eller en eksisterende lydfil — som et redigerbart Markdown-dokument, med et klart valg om originalen bevares. Lokalt hvor muligt; din egen server kun hvis du vælger den. Optagekilder og motorer følger i senere versioner.',
   'Afbeeldingen omwisselen': 'Byt billederne om',
   'Afbeelding links': 'Venstre billede',
   'Breedte afbeeldingspaneel': 'Bredde på billedpanel',

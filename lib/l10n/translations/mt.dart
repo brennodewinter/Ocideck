@@ -1623,6 +1623,33 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Oħloq traskrizzjoni ta\' reġistrazzjoni jew ta\' fajl awdjo eżistenti — bħala dokument Markdown editabbli, b\'għażla ċara jekk l-oriġinal jinżammx. Lokalkament fejn possibbli; server tiegħek biss jekk tagħżel dan.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Mudell tat-taħdit lokali — jibqa\' fuq dan l-apparat; xejn ma jmur għand server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Magna: lesta — l-assistent lokali huwa preżenti',
+  'Engine ontbreekt in deze installatie':
+      'Il-magna nieqsa f\'din l-installazzjoni',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Din l-arkitettura tal-proċessur m\'għandhiex magna lokali',
+  'Engine: controleren…': 'Magna: qed tiverifika…',
+  'Licht — snel, minder nauwkeurig': 'Ħfief — mgħaġġel, inqas preċiż',
+  'Nauwkeurig — beste kwaliteit, groot': 'Preċiż — l-aqwa kwalità, kbir',
+  'Gebalanceerd — aanbevolen': 'Ibbilanċjat — rakkomandat',
+  'Bezig met binnenhalen': 'Qed jitniżżel',
+  'Geïnstalleerd en getoetst': 'Installat u vverifikat',
+  'Geïnstalleerd': 'Installat',
+  'Niet geïnstalleerd': 'Mhux installat',
+  'Binnenhalen': 'Niżżel',
+  'afgebroken': 'mikkanċellat',
+  'netwerkfout': 'żball tan-netwerk',
+  'door de beveiliging geweigerd': 'rifjutat mis-saff tas-sigurtà',
+  'controlesom klopt niet — probeer opnieuw':
+      'iċ-checksum ma jaqbelx — erġa pprova',
+  'schrijffout op schijf': 'żball fil-kitba fuq id-disk',
   'Transcript': 'Traskrizzjoni',
   'Opnieuw controleren': 'Iċċekkja mill-ġdid',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1651,8 +1678,6 @@ const _dutchSourceAddMt = <String, String>{
   'Opname stoppen': 'Waqqaf ir-reġistrazzjoni',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Ħoss tas-sistema',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Oħloq traskrizzjoni ta\' reġistrazzjoni jew ta\' fajl awdjo eżistenti — bħala dokument Markdown editabbli, b\'għażla ċara jekk l-oriġinal jinżammx. Lokalment fejn possibbli; is-server tiegħek biss jekk tagħżlu. Is-sorsi tar-reġistrazzjoni u l-magni jaslu f\'verżjonijiet li ġejjin.',
   'Afbeeldingen omwisselen': 'Aqleb l-immaġnijiet',
   'Afbeelding links': 'Immaġni tax-xellug',
   'Breedte afbeeldingspaneel': 'Wisa\' tal-panew tal-immaġni',

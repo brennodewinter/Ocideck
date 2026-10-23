@@ -1607,6 +1607,33 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Készítsen átiratot egy felvételből vagy egy meglévő hangfájlból — szerkeszthető Markdown-dokumentumként, egyértelmű választással az eredeti megőrzéséről. Helyben, ahol lehetséges; saját kiszolgáló csak ha azt választja.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Helyi beszédmodell — ezen az eszközön marad; semmi nem megy kiszolgálóra',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Motor: kész — a helyi segéd jelen van',
+  'Engine ontbreekt in deze installatie':
+      'A motor hiányzik ebből a telepítésből',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Ez a processzorarchitektúra nem rendelkezik helyi motorral',
+  'Engine: controleren…': 'Motor: ellenőrzés…',
+  'Licht — snel, minder nauwkeurig': 'Könnyű — gyors, kevésbé pontos',
+  'Nauwkeurig — beste kwaliteit, groot': 'Pontos — legjobb minőség, nagy',
+  'Gebalanceerd — aanbevolen': 'Kiegyensúlyozott — ajánlott',
+  'Bezig met binnenhalen': 'Letöltés folyamatban',
+  'Geïnstalleerd en getoetst': 'Telepítve és ellenőrizve',
+  'Geïnstalleerd': 'Telepítve',
+  'Niet geïnstalleerd': 'Nincs telepítve',
+  'Binnenhalen': 'Letöltés',
+  'afgebroken': 'megszakítva',
+  'netwerkfout': 'hálózati hiba',
+  'door de beveiliging geweigerd': 'a biztonsági réteg elutasította',
+  'controlesom klopt niet — probeer opnieuw':
+      'az ellenőrzőösszeg nem stimmel — próbálja újra',
+  'schrijffout op schijf': 'lemezírási hiba',
   'Transcript': 'Átirat',
   'Opnieuw controleren': 'Újraellenőrzés',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1635,8 +1662,6 @@ const _dutchSourceAddHu = <String, String>{
   'Opname stoppen': 'Felvétel leállítása',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Rendszerhang',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Készítsen átiratot egy felvételről vagy egy meglévő hangfájlról — szerkeszthető Markdown-dokumentumként, egyértelmű választással, hogy az eredeti megmarad-e. Helyben, ahol lehetséges; saját kiszolgáló csak akkor, ha azt választja. A felvételi források és motorok későbbi verziókban érkeznek.',
   'Afbeeldingen omwisselen': 'Képek felcserélése',
   'Afbeelding links': 'Bal oldali kép',
   'Breedte afbeeldingspaneel': 'Képpanel szélessége',

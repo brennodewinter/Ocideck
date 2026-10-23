@@ -651,6 +651,33 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Krea un transkripshon di un grabacion òf di un archivo di audio eksistente — komo dokumento Markdown editable, ku un skohe klá si e original ta wordu warda. Lokalmente kaminda por; bo mesun server solamente si bo skohe esey.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Modelo di bos lokal — ta keda riba e aparato akí; nada ta bai pa un server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Motor: kla — e yudante lokal ta presente',
+  'Engine ontbreekt in deze installatie':
+      'E motor ta faltando den e instalacion akí',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'E arkitektura di prosesador akí no tin motor lokal',
+  'Engine: controleren…': 'Motor: ta kontrolá…',
+  'Licht — snel, minder nauwkeurig': 'Liviano — rápido, ménos akurato',
+  'Nauwkeurig — beste kwaliteit, groot': 'Akurato — mihor kalidad, grandi',
+  'Gebalanceerd — aanbevolen': 'Balansiá — rekomendá',
+  'Bezig met binnenhalen': 'Ta baha',
+  'Geïnstalleerd en getoetst': 'Instalá i verifiká',
+  'Geïnstalleerd': 'Instalá',
+  'Niet geïnstalleerd': 'No instalá',
+  'Binnenhalen': 'Baha',
+  'afgebroken': 'kanselá',
+  'netwerkfout': 'eror di ret',
+  'door de beveiliging geweigerd': 'rechasa pa e kapa di seguridad',
+  'controlesom klopt niet — probeer opnieuw':
+      'checksum no ta kuadra — purba atrobe',
+  'schrijffout op schijf': 'eror di skirbi riba disk',
   'Transcript': 'Transkripshon',
   'Opnieuw controleren': 'Kontrolá atrobe',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -679,8 +706,6 @@ const _dutchSourceAddPap = {
   'Opname stoppen': 'Stop e grabashon',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Sonido di sistema',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Krea un transkripshon di un grabashon òf di un bestand di audio eksistente — komo dokumento Markdown editabel, ku un skohe kla si e original wordu wardá. Lokal kaminda posibel; bo prop server solamente si bo skohe dje. E fuentenan di grabashon i e enginenan ta bin den vershonan mas lat.',
   'Afbeeldingen omwisselen': 'Kambia e imágennan',
   'Afbeelding links': 'Imágen robes',
   'Breedte afbeeldingspaneel': 'Hanchura di e panel di imágen',

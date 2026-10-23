@@ -1,0 +1,12 @@
+{
+  "name": "whisper.cpp",
+  "version": "1.9.5",
+  "description": "Lokale spraakherkenningsruntime (whisper-cli helper) voor OciDeck-transcriptie",
+  "upstream": "https://github.com/ggml-org/whisper.cpp",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ggml-org/whisper.cpp/blob/v1.9.5/LICENSE",
+  "tarball": "https://github.com/ggml-org/whisper.cpp/archive/refs/tags/v1.9.5.tar.gz",
+  "tarballSha256": "ff1a9053feb509ff9d7729703355541ae9690073a6b1c40eb692c962e0dc1720",
+  "binary": "whisper-cli",
+  "notes": "Statisch gebouwd (-DBUILD_SHARED_LIBS=OFF) zodat het artefact één bestand is. Op macOS met Metal-backend; CPU-terugval werkt overal. GGML_NATIVE uit op distributiebuilds zodat binaire instructieset-basislijnen kloppen."
+}

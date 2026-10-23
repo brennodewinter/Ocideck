@@ -1605,6 +1605,32 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Luo litterointi äänityksestä tai olemassa olevasta äänitiedostosta — muokattavana Markdown-dokumenttina, selkeällä valinnalla säilytetäänkö alkuperäinen. Paikallisesti kun mahdollista; oma palvelin vain jos valitset sen.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Paikallinen puhemalli — pysyy tällä laitteella; mitään ei lähetetä palvelimelle',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Moottori: valmis — paikallinen apuohjelma on olemassa',
+  'Engine ontbreekt in deze installatie': 'Moottori puuttuu tästä asennuksesta',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Tällä suoritinarkkitehtuurilla ei ole paikallista moottoria',
+  'Engine: controleren…': 'Moottori: tarkistetaan…',
+  'Licht — snel, minder nauwkeurig': 'Kevyt — nopea, vähemmän tarkka',
+  'Nauwkeurig — beste kwaliteit, groot': 'Tarkka — paras laatu, suuri',
+  'Gebalanceerd — aanbevolen': 'Tasapainoinen — suositeltu',
+  'Bezig met binnenhalen': 'Ladataan',
+  'Geïnstalleerd en getoetst': 'Asennettu ja tarkistettu',
+  'Geïnstalleerd': 'Asennettu',
+  'Niet geïnstalleerd': 'Ei asennettu',
+  'Binnenhalen': 'Lataa',
+  'afgebroken': 'peruutettu',
+  'netwerkfout': 'verkkovirhe',
+  'door de beveiliging geweigerd': 'tietoturvakerros esti',
+  'controlesom klopt niet — probeer opnieuw':
+      'tarkistussumma ei täsmää — yritä uudelleen',
+  'schrijffout op schijf': 'levyn kirjoitusvirhe',
   'Transcript': 'Litterointi',
   'Opnieuw controleren': 'Tarkista uudelleen',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1633,8 +1659,6 @@ const _dutchSourceAddFi = <String, String>{
   'Opname stoppen': 'Lopeta äänitys',
   'Microfoon': 'Mikrofoni',
   'Systeemgeluid': 'Järjestelmän ääni',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Tee litterointi äänityksestä tai olemassa olevasta äänitiedostosta — muokattavana Markdown-dokumenttina, selkeällä valinnalla säilyykö alkuperäinen. Paikallisesti kun mahdollista; oma palvelin vain jos sellaisen valitset. Äänityslähteet ja moottorit tulevat myöhemmissä versioissa.',
   'Afbeeldingen omwisselen': 'Vaihda kuvien paikat',
   'Afbeelding links': 'Vasen kuva',
   'Breedte afbeeldingspaneel': 'Kuvapaneelin leveys',

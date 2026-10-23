@@ -71,6 +71,12 @@ if [ ! -f "$BUNDLE_DIR/ocideck.exe" ]; then
   exit 1
 fi
 
+# De lokale transcriptie-helper (#2512): bouwt hem uit de gepinde bron als
+# dat nog niet gebeurd is (idempotent) en legt whisper-cli.exe naast
+# ocideck.exe — dezelfde stap die `make build-windows` al zette, hier als
+# vangnet voor een bundel die buiten die route om is gebouwd.
+scripts/bundle_whisper_cli.sh windows
+
 # One version, read from the one place that holds it. `version: 0.4.6+20` -> 0.4.6
 VERSION="${VERSION:-$(sed -n 's/^version:[[:space:]]*\([0-9][^+[:space:]]*\).*/\1/p' pubspec.yaml)}"
 if [ -z "$VERSION" ]; then

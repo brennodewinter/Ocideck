@@ -1605,6 +1605,32 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Ustvari prepis posnetka ali obstoječe zvočne datoteke — kot uredljiv dokument Markdown z jasno izbiro, ali se izvirnik ohrani. Lokalno, kjer je mogoče; lastni strežnik le, če ga izberete.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokalni govorni model — ostane na tej napravi; nič ne gre na strežnik',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Pogon: pripravljen — lokalni pomočnik je prisoten',
+  'Engine ontbreekt in deze installatie': 'V tej namestitvi manjka pogon',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Ta arhitektura procesorja nima lokalnega pogona',
+  'Engine: controleren…': 'Pogon: preverjam…',
+  'Licht — snel, minder nauwkeurig': 'Lahek — hiter, manj natančen',
+  'Nauwkeurig — beste kwaliteit, groot': 'Natančen — najboljša kakovost, velik',
+  'Gebalanceerd — aanbevolen': 'Uravnotežen — priporočen',
+  'Bezig met binnenhalen': 'Prenašanje',
+  'Geïnstalleerd en getoetst': 'Nameščen in preverjen',
+  'Geïnstalleerd': 'Nameščen',
+  'Niet geïnstalleerd': 'Ni nameščen',
+  'Binnenhalen': 'Prenesi',
+  'afgebroken': 'preklicano',
+  'netwerkfout': 'omrežna napaka',
+  'door de beveiliging geweigerd': 'zavrnjeno s strani varnostne plasti',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrolna vsota se ne ujema — poskusite znova',
+  'schrijffout op schijf': 'napaka pisanja na disk',
   'Transcript': 'Prepis',
   'Opnieuw controleren': 'Preveri znova',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1633,8 +1659,6 @@ const _dutchSourceAddSl = <String, String>{
   'Opname stoppen': 'Ustavi snemanje',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Sistemski zvok',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Ustvarite prepis posnetka ali obstoječe zvočne datoteke — kot uredljiv dokument Markdown, z jasno izbiro, ali se izvirnik ohrani. Lokalno, kjer je mogoče; lastni strežnik samo, če ga izberete. Viri snemanja in pogoni prihajajo v naslednjih različicah.',
   'Afbeeldingen omwisselen': 'Zamenjaj sliki',
   'Afbeelding links': 'Leva slika',
   'Breedte afbeeldingspaneel': 'Širina slikovnega panela',

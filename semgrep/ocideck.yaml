@@ -34,7 +34,11 @@ rules:
       Een subproces laat zich niet door NetGuard onderscheppen — het praat
       buiten de guard om met het netwerk. In lib/services/git/ is dat een
       bewuste, empirisch getoetste uitzondering waar de guard via git-config
-      wordt opgelegd. Daarbuiten is een nieuw subproces een gat.
+      wordt opgelegd; de whisper-cli-helper in
+      lib/services/transcription/local_whisper_engine_io.dart is de tweede —
+      een lokaal gebundlede inferentie-binary zonder netwerkcode, gestart
+      met een lege environment (#2512). Daarbuiten is een nieuw subproces
+      een gat.
     pattern-either:
       - pattern: Process.run(...)
       - pattern: Process.start(...)
@@ -43,7 +47,9 @@ rules:
       # Alleen uitgeleverde code. tool/ is ontwikkelgereedschap dat per
       # definitie dart, flutter en git aanroept; daar gaat deze zorg niet over.
       include: ["**/lib/**"]
-      exclude: ["**/lib/services/git/**"]
+      exclude:
+        - "**/lib/services/git/**"
+        - "**/lib/services/transcription/local_whisper_engine_io.dart"
 
   - id: ocideck-zwakke-random-voor-geheim
     languages: [dart]

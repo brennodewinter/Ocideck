@@ -1611,6 +1611,32 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Vytvorte prepis nahrávky alebo existujúceho zvukového súboru — ako upraviteľný dokument Markdown s jasnou voľbou, či sa originál zachová. Lokálne, kde to ide; vlastný server len ak si ho zvolíte.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokálny hlasový model — zostáva v tomto zariadení; nič nejde na server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Engine: pripravený — lokálny pomocník je prítomný',
+  'Engine ontbreekt in deze installatie': 'V tejto inštalácii chýba engine',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Táto architektúra procesora nemá lokálny engine',
+  'Engine: controleren…': 'Engine: kontrolujem…',
+  'Licht — snel, minder nauwkeurig': 'Ľahký — rýchly, menej presný',
+  'Nauwkeurig — beste kwaliteit, groot': 'Presný — najlepšia kvalita, veľký',
+  'Gebalanceerd — aanbevolen': 'Vyvážený — odporúčaný',
+  'Bezig met binnenhalen': 'Sťahuje sa',
+  'Geïnstalleerd en getoetst': 'Nainštalované a overené',
+  'Geïnstalleerd': 'Nainštalované',
+  'Niet geïnstalleerd': 'Nenainštalované',
+  'Binnenhalen': 'Stiahnuť',
+  'afgebroken': 'zrušené',
+  'netwerkfout': 'chyba siete',
+  'door de beveiliging geweigerd': 'odmietnuté bezpečnostnou vrstvou',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrolný súčet nesúhlasí — skúste znova',
+  'schrijffout op schijf': 'chyba zápisu na disk',
   'Transcript': 'Prepis',
   'Opnieuw controleren': 'Skontrolovať znova',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1639,8 +1665,6 @@ const _dutchSourceAddSk = <String, String>{
   'Opname stoppen': 'Zastaviť nahrávanie',
   'Microfoon': 'Mikrofón',
   'Systeemgeluid': 'Systémový zvuk',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Vytvorte prepis nahrávky alebo existujúceho zvukového súboru — ako upraviteľný dokument Markdown, s jasnou voľbou, či sa originál zachová. Lokálne, kde je to možné; vlastný server len ak si ho zvolíte. Zdroje nahrávania a enginy prídu v nasledujúcich verziách.',
   'Afbeeldingen omwisselen': 'Vymeniť obrázky',
   'Afbeelding links': 'Ľavý obrázok',
   'Breedte afbeeldingspaneel': 'Šírka panela obrázka',

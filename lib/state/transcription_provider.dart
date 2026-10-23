@@ -11,14 +11,18 @@
 // niet zomaar een halfbestand bij.
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/transcription/capture_source.dart';
+import '../services/transcription/local_whisper_engine.dart';
 import '../services/transcription/recording_session.dart';
 import '../services/transcription/recording_staging.dart';
 import '../services/transcription/transcription_engine.dart';
+import '../services/transcription/whisper_model.dart';
 import '../utils/log.dart';
+import 'transcription_model_provider.dart';
 
 const transcriptionModuleEnabledKey = 'transcriptionModuleEnabled';
 
@@ -35,15 +39,22 @@ final recordingManagerProvider = Provider<RecordingManager>((ref) {
   return RecordingManager(staging: ref.watch(recordingStagingProvider));
 });
 
-/// De transcriptie-engine die op dit platform klaarstaat — `null` tot een
-/// latere route er een registreert (#2512 desktop, #2513 web, #2524/#2525
-/// serverprofielen). `null` is geen afwezigheid maar een capaciteit: de
-/// grens beantwoordt hem als `engineUnavailable` (§4.4). Opnemen mag dus
-/// nog steeds — alleen van een vers opgenomen bestand komt nog geen
-/// transcript.
-final transcriptionEngineProvider = Provider<TranscriptionEngine?>(
-  (ref) => null,
-);
+/// De transcriptie-engine die op dit platform klaarstaat: op desktop de
+/// lokale whisper-engine met het gekozen model (#2512); op web nog `null`
+/// tot #2513 zijn engine levert. `null` is geen afwezigheid maar een
+/// capaciteit: de grens beantwoordt hem als `engineUnavailable` (§4.4).
+/// Opnemen mag dus nog steeds — alleen van een vers opgenomen bestand komt
+/// dan geen transcript.
+///
+/// De provider bouwt opnieuw zodra de gekozen model-id wijzigt; een lopende
+/// `transcribe` is daar immuun voor omdat hij zijn eigen instantie vasthoudt.
+final transcriptionEngineProvider = Provider<TranscriptionEngine?>((ref) {
+  if (kIsWeb) return null;
+  final model =
+      whisperModelById(ref.watch(selectedTranscriptionModelProvider)) ??
+      whisperModelCatalog.first;
+  return createLocalWhisperEngine(model: model);
+});
 
 /// Een verzoek aan het open transcriptdocument: pas deze binnenkomende tekst
 /// toe — een definitieve pass na opname, of een nieuwe modelrun. De sessie

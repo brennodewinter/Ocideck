@@ -1297,6 +1297,8 @@ build-macos: prune-hook-cache sbom-verify
 	@echo "Command: flutter build macos --release"
 	@echo "Output: build/macos/Build/Products/Release/*.app"
 	flutter build macos --release
+	@echo "== OciDeck helper: whisper-cli in de bundel =="
+	scripts/bundle_whisper_cli.sh macos
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart run tool/check_bundled_docs_fresh.dart build/macos
 
@@ -1305,6 +1307,8 @@ build-windows: prune-hook-cache sbom-verify
 	@echo "Command: flutter build windows --release"
 	@echo "Output: build/windows/x64/runner/Release"
 	flutter build windows --release
+	@echo "== OciDeck helper: whisper-cli in de bundel =="
+	scripts/bundle_whisper_cli.sh windows
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart run tool/check_bundled_docs_fresh.dart build/windows
 
@@ -1335,6 +1339,8 @@ build-linux: prune-hook-cache sbom-verify
 	@echo "Command: flutter build linux --release"
 	@echo "Output: build/linux/x64/release/bundle"
 	flutter build linux --release
+	@echo "== OciDeck helper: whisper-cli in de bundel =="
+	scripts/bundle_whisper_cli.sh linux
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart run tool/check_bundled_docs_fresh.dart build/linux
 

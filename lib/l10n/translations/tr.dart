@@ -2513,6 +2513,32 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Bir kaydın veya var olan bir ses dosyasının transkriptini oluşturun — düzenlenebilir bir Markdown belgesi olarak, orijinalin saklanıp saklanmayacağına dair net bir seçimle. Mümkün olduğunda yerel; kendi sunucunuz yalnızca siz seçerseniz.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Yerel konuşma modeli — bu aygıtta kalır; hiçbir şey bir sunucuya gitmez',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Motor: hazır — yerel yardımcı mevcut',
+  'Engine ontbreekt in deze installatie': 'Bu kurulumda motor eksik',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Bu işlemci mimarisinin yerel motoru yok',
+  'Engine: controleren…': 'Motor: denetleniyor…',
+  'Licht — snel, minder nauwkeurig': 'Hafif — hızlı, daha az doğru',
+  'Nauwkeurig — beste kwaliteit, groot': 'Doğru — en iyi kalite, büyük',
+  'Gebalanceerd — aanbevolen': 'Dengeli — önerilen',
+  'Bezig met binnenhalen': 'İndiriliyor',
+  'Geïnstalleerd en getoetst': 'Kuruldu ve doğrulandı',
+  'Geïnstalleerd': 'Kurulu',
+  'Niet geïnstalleerd': 'Kurulu değil',
+  'Binnenhalen': 'İndir',
+  'afgebroken': 'iptal edildi',
+  'netwerkfout': 'ağ hatası',
+  'door de beveiliging geweigerd': 'güvenlik katmanı reddetti',
+  'controlesom klopt niet — probeer opnieuw':
+      'sağlama toplamı uyuşmuyor — yeniden deneyin',
+  'schrijffout op schijf': 'disk yazma hatası',
   'Transcript': 'Transkript',
   'Opnieuw controleren': 'Yeniden denetle',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -2541,8 +2567,6 @@ const _dutchSourceAddTr = <String, String>{
   'Opname stoppen': 'Kaydı durdur',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Sistem sesi',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Bir kaydın veya mevcut bir ses dosyasının dökümünü oluşturun — düzenlenebilir bir Markdown belgesi olarak, orijinalin saklanıp saklanmayacağına dair net bir seçimle. Mümkün olduğunda yerel; kendi sunucunuz yalnızca siz seçerseniz. Kayıt kaynakları ve motorlar sonraki sürümlerde gelecek.',
   'Afbeeldingen omwisselen': 'Görsellerin yerini değiştir',
   'Afbeelding links': 'Sol görsel',
   'Breedte afbeeldingspaneel': 'Görsel panelinin genişliği',

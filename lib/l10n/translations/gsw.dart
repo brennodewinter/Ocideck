@@ -1608,6 +1608,32 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Erstell es Transkript von ere Ufnahm oder ere vorhandene Audiodatei — als bearbeitbars Markdown-Dokument, mit ere klare Wahl, ob s Original behalte wird. Lokal wos goot; en eigene Server nur, wennd en wählsches.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokals Spraamodel — bliibt uf dem Gärät; nüt goot an en Server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Engine: bereit — de lokali Hälfer isch da',
+  'Engine ontbreekt in deze installatie': 'De Engine fählt i dere Installation',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Die Prozässerarchitektur het kei lokali Engine',
+  'Engine: controleren…': 'Engine: prüefe…',
+  'Licht — snel, minder nauwkeurig': 'Liecht — schnäll, weniger gnau',
+  'Nauwkeurig — beste kwaliteit, groot': 'Gnau — bescht Qualität, gross',
+  'Gebalanceerd — aanbevolen': 'Usgwoge — empfohle',
+  'Bezig met binnenhalen': 'Aam laade',
+  'Geïnstalleerd en getoetst': 'Installiert und prüeft',
+  'Geïnstalleerd': 'Installiert',
+  'Niet geïnstalleerd': 'Nöd installiert',
+  'Binnenhalen': 'Abelade',
+  'afgebroken': 'abroche',
+  'netwerkfout': 'Netzwärkfähler',
+  'door de beveiliging geweigerd': 'vo de Sicherheitschicht abglent',
+  'controlesom klopt niet — probeer opnieuw':
+      'Prüefsumme stimmt nöd — nomol versueche',
+  'schrijffout op schijf': 'Schribfähler uf de Disk',
   'Transcript': 'Transkript',
   'Opnieuw controleren': 'Nomol prüefe',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1636,8 +1662,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Opname stoppen': 'Ufnahm stoppe',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Systemton',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Mach e Transkription von ere Ufnahm oder von eme vorhandene Audiodatei — als bearbeitsbars Markdown-Dokument, mit ere klare Wahl, öb s Original bhalte wird. Lokal wos goht; en eigene Server nume wenn Du en wählsch. D Ufnahmquelle und Engines chöme in spötere Versione.',
   'Afbeeldingen omwisselen': 'Bilder vertuusche',
   'Afbeelding links': 'Links Bild',
   'Breedte afbeeldingspaneel': 'Breiti vom Bildpanel',

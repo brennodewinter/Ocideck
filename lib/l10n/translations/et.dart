@@ -1598,6 +1598,32 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Loo salvestisest või olemasolevast helifailist transkript — redigeeritava Markdown-dokumendina, selge valikuga, kas originaal säilitatakse. Kohapeal, kui võimalik; oma server ainult siis, kui selle valid.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Kohalik kõnemudel — jääb sellele seadmesse; midagi ei lähe serverisse',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Mootor: valmis — kohalik abiline on olemas',
+  'Engine ontbreekt in deze installatie': 'Mootor puudub sellest paigaldusest',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Selle protsessoriarhitektuuril pole kohalikku mootorit',
+  'Engine: controleren…': 'Mootor: kontrollin…',
+  'Licht — snel, minder nauwkeurig': 'Kerge — kiire, vähem täpne',
+  'Nauwkeurig — beste kwaliteit, groot': 'Täpne — parim kvaliteet, suur',
+  'Gebalanceerd — aanbevolen': 'Tasakaalustatud — soovitatav',
+  'Bezig met binnenhalen': 'Laadin alla',
+  'Geïnstalleerd en getoetst': 'Paigaldatud ja kontrollitud',
+  'Geïnstalleerd': 'Paigaldatud',
+  'Niet geïnstalleerd': 'Pole paigaldatud',
+  'Binnenhalen': 'Laadi alla',
+  'afgebroken': 'tühistatud',
+  'netwerkfout': 'võrguviga',
+  'door de beveiliging geweigerd': 'turvakiht keelas',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrollsumma ei klapi — proovi uuesti',
+  'schrijffout op schijf': 'kettakirjutusviga',
   'Transcript': 'Transkriptsioon',
   'Opnieuw controleren': 'Kontrolli uuesti',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1626,8 +1652,6 @@ const _dutchSourceAddEt = <String, String>{
   'Opname stoppen': 'Peata salvestus',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Süsteemiheli',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Loo salvestuse või olemasoleva helifaili transkriptsioon — redigeeritava Markdown-dokumendina, selge valikuga, kas originaal säilitatakse. Kohapeal kui võimalik; oma server ainult siis, kui selle valid. Salvestusallikad ja mootorid tulevad hilisemates versioonides.',
   'Afbeeldingen omwisselen': 'Vaheta piltide kohad',
   'Afbeelding links': 'Vasak pilt',
   'Breedte afbeeldingspaneel': 'Pildipaneeli laius',

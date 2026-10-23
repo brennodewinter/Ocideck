@@ -1611,6 +1611,32 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Sukurkite įrašo arba esamo garso failo transkripciją — kaip redaguojamą Markdown dokumentą su aiškiu pasirinkimu, ar originalas išsaugomas. Vietoje, kai įmanoma; savo serveris tik jei jį pasirenkate.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Vietinis kalbos modelis — lieka šiame įrenginyje; niekas nesiunčiama į serverį',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Variklis: paruoštas — vietinis pagalbininkas yra',
+  'Engine ontbreekt in deze installatie': 'Šiame diegime trūksta variklio',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Ši procesoriaus architektūra neturi vietinio variklio',
+  'Engine: controleren…': 'Variklis: tikrinama…',
+  'Licht — snel, minder nauwkeurig': 'Lengvas — greitas, mažiau tikslus',
+  'Nauwkeurig — beste kwaliteit, groot': 'Tikslus — geriausia kokybė, didelis',
+  'Gebalanceerd — aanbevolen': 'Subalansuotas — rekomenduojamas',
+  'Bezig met binnenhalen': 'Vyksta atsisiuntimas',
+  'Geïnstalleerd en getoetst': 'Įdiegta ir patikrinta',
+  'Geïnstalleerd': 'Įdiegta',
+  'Niet geïnstalleerd': 'Neįdiegta',
+  'Binnenhalen': 'Atsisiųsti',
+  'afgebroken': 'atšaukta',
+  'netwerkfout': 'tinklo klaida',
+  'door de beveiliging geweigerd': 'atmetė saugos sluoksnis',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrolinė suma nesutampa — bandykite dar kartą',
+  'schrijffout op schijf': 'disko rašymo klaida',
   'Transcript': 'Transkripcija',
   'Opnieuw controleren': 'Tikrinti dar kartą',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1639,8 +1665,6 @@ const _dutchSourceAddLt = <String, String>{
   'Opname stoppen': 'Sustabdyti įrašymą',
   'Microfoon': 'Mikrofonas',
   'Systeemgeluid': 'Sistemos garsas',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Sukurkite įrašo arba esamo garso failo transkripciją — kaip redaguojamą Markdown dokumentą, su aiškiu pasirinkimu, ar originalas išsaugomas. Vietoje, kai įmanoma; savo serveris tik jei jį pasirenkate. Įrašymo šaltiniai ir varikliai atkeliaus vėlesnėse versijose.',
   'Afbeeldingen omwisselen': 'Sukeisti paveikslėlius vietomis',
   'Afbeelding links': 'Kairysis paveikslėlis',
   'Breedte afbeeldingspaneel': 'Paveikslėlio srities plotis',

@@ -105,6 +105,10 @@ machine (desktop) or in your browser tab (web). This includes:
   backend contract is chat text, not audio — see *The AI assistant is off by
   default and fail-closed*), and not to any server unless a future version's
   explicitly chosen ASR-server profile asks you, per task, where it may go.
+  The speech models the local engine runs are files on this device: the app
+  shows which are installed and fetches one only when you ask it to (see the
+  *Transcription speech model* row of the egress table below). Deleting a
+  model in Settings deletes the file; nothing else removes it.
 - **Git working copies.** Connecting a git repository puts a real clone — full
   deck content and history — in a per-user application-support folder, plus a
   queue of commits that haven't been pushed yet. Unlike autosave snapshots these
@@ -234,6 +238,7 @@ against accessing internal/private network addresses.
 | **eLearning profile photo and themes (OciServe)** | The profile image you upload, and — when you publish a style profile to your organisation — its theme definition | Your configured OciServe server and selected organisation |
 | **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
 | **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
+| **Transcription speech model** (you press *Binnenhalen/Download* in the Transcriptie module) | One GET per model, at a revision pinned in the build; the file's size and SHA-256 are fixed beforehand and verified after the download — nothing is uploaded | `huggingface.co`, then the CDN host it redirects to |
 | **Cost mode — exchange rate** (you press *Fetch*, only for a currency other than the euro) | One request per currency, containing only the currency code (`/v1/latest?base=<code>&symbols=EUR`). The service sees your IP address. No presentation data, amounts, rates or attendee input is sent | `api.frankfurter.dev` (the European Central Bank's reference rates) |
 | **Embedded YouTube video** | A request for the player page and the video itself; the service can see that the video is being played | `youtube-nocookie.com` (and its media/thumbnail hosts) — **not** `youtube.com` |
 | **Embedded Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `vimeo.com` |

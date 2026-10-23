@@ -1620,6 +1620,33 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Створіть транскрипт запису або наявного аудіофайлу — як редагований документ Markdown із чітким вибором, чи зберігати оригінал. Локально, де це можливо; власний сервер лише якщо ви його обираєте.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Локальна мовна модель — залишається на цьому пристрої; нічого не йде на сервер',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Рушій: готовий — локальний помічник наявний',
+  'Engine ontbreekt in deze installatie':
+      'У цьому встановленні відсутній рушій',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Ця архітектура процесора не має локального рушія',
+  'Engine: controleren…': 'Рушій: перевірка…',
+  'Licht — snel, minder nauwkeurig': 'Легкий — швидкий, менш точний',
+  'Nauwkeurig — beste kwaliteit, groot': 'Точний — найкраща якість, великий',
+  'Gebalanceerd — aanbevolen': 'Збалансований — рекомендований',
+  'Bezig met binnenhalen': 'Завантажується',
+  'Geïnstalleerd en getoetst': 'Встановлено й перевірено',
+  'Geïnstalleerd': 'Встановлено',
+  'Niet geïnstalleerd': 'Не встановлено',
+  'Binnenhalen': 'Завантажити',
+  'afgebroken': 'скасовано',
+  'netwerkfout': 'мережева помилка',
+  'door de beveiliging geweigerd': 'відхилено рівнем безпеки',
+  'controlesom klopt niet — probeer opnieuw':
+      'контрольна сума не збігається — спробуйте ще раз',
+  'schrijffout op schijf': 'помилка запису на диск',
   'Transcript': 'Транскрипт',
   'Opnieuw controleren': 'Перевірити ще раз',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1648,8 +1675,6 @@ const _dutchSourceAddUk = <String, String>{
   'Opname stoppen': 'Зупинити запис',
   'Microfoon': 'Мікрофон',
   'Systeemgeluid': 'Системний звук',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Створіть транскрипцію запису або наявного аудіофайлу — як редагований документ Markdown, із чітким вибором щодо збереження оригіналу. Локально, де це можливо; власний сервер лише за вашим вибором. Джерела запису та рушії з\'являться в наступних версіях.',
   'Afbeeldingen omwisselen': 'Поміняти зображення місцями',
   'Afbeelding links': 'Ліве зображення',
   'Breedte afbeeldingspaneel': 'Ширина панелі зображення',

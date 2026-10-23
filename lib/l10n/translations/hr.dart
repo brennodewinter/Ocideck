@@ -1609,6 +1609,32 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Napravite transkript snimke ili postojeće zvučne datoteke — kao dokument Markdown koji se može uređivati, s jasnim izborom zadržava li se izvornik. Lokalno gdje je moguće; vlastiti poslužitelj samo ako ga odaberete.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokalni govorni model — ostaje na ovom uređaju; ništa ne ide na poslužitelj',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Pogon: spreman — lokalni pomagač je prisutan',
+  'Engine ontbreekt in deze installatie': 'U ovoj instalaciji nedostaje pogon',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Ova arhitektura procesora nema lokalni pogon',
+  'Engine: controleren…': 'Pogon: provjeravam…',
+  'Licht — snel, minder nauwkeurig': 'Lagani — brz, manje točan',
+  'Nauwkeurig — beste kwaliteit, groot': 'Točan — najbolja kvaliteta, velik',
+  'Gebalanceerd — aanbevolen': 'Uravnotežen — preporučen',
+  'Bezig met binnenhalen': 'Preuzimanje u tijeku',
+  'Geïnstalleerd en getoetst': 'Instalirano i provjereno',
+  'Geïnstalleerd': 'Instalirano',
+  'Niet geïnstalleerd': 'Nije instalirano',
+  'Binnenhalen': 'Preuzmi',
+  'afgebroken': 'otkazano',
+  'netwerkfout': 'mrežna pogreška',
+  'door de beveiliging geweigerd': 'odbio sigurnosni sloj',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrolni zbroj ne odgovara — pokušajte ponovno',
+  'schrijffout op schijf': 'pogreška pisanja na disk',
   'Transcript': 'Transkript',
   'Opnieuw controleren': 'Provjeri ponovno',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1637,8 +1663,6 @@ const _dutchSourceAddHr = <String, String>{
   'Opname stoppen': 'Zaustavi snimanje',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Sistemski zvuk',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Napravite transkripciju snimke ili postojeće audio datoteke — kao dokument Markdown koji se može uređivati, s jasnim izborom čuva li se original. Lokalno gdje je moguće; vlastiti poslužitelj samo ako ga odaberete. Izvori snimanja i enginei dolaze u sljedećim verzijama.',
   'Afbeeldingen omwisselen': 'Zamijeni slike',
   'Afbeelding links': 'Lijeva slika',
   'Breedte afbeeldingspaneel': 'Širina ploče sa slikom',

@@ -1605,6 +1605,32 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Buat transkrip rekaman atau berkas audio yang ada — sebagai dokumen Markdown yang dapat disunting, dengan pilihan jelas apakah aslinya disimpan. Lokal bila memungkinkan; server sendiri hanya jika Anda memilihnya.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Model suara lokal — tetap di perangkat ini; tidak ada yang dikirim ke server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Mesin: siap — pembantu lokal tersedia',
+  'Engine ontbreekt in deze installatie': 'Mesin tidak ada dalam instalasi ini',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Arsitektur prosesor ini tidak memiliki mesin lokal',
+  'Engine: controleren…': 'Mesin: memeriksa…',
+  'Licht — snel, minder nauwkeurig': 'Ringan — cepat, kurang akurat',
+  'Nauwkeurig — beste kwaliteit, groot': 'Akurat — kualitas terbaik, besar',
+  'Gebalanceerd — aanbevolen': 'Seimbang — direkomendasikan',
+  'Bezig met binnenhalen': 'Sedang mengunduh',
+  'Geïnstalleerd en getoetst': 'Terpasang dan terverifikasi',
+  'Geïnstalleerd': 'Terpasang',
+  'Niet geïnstalleerd': 'Belum terpasang',
+  'Binnenhalen': 'Unduh',
+  'afgebroken': 'dibatalkan',
+  'netwerkfout': 'kesalahan jaringan',
+  'door de beveiliging geweigerd': 'ditolak oleh lapisan keamanan',
+  'controlesom klopt niet — probeer opnieuw':
+      'checksum tidak cocok — coba lagi',
+  'schrijffout op schijf': 'kesalahan penulisan disk',
   'Transcript': 'Transkrip',
   'Opnieuw controleren': 'Periksa lagi',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1633,8 +1659,6 @@ const _dutchSourceAddId = <String, String>{
   'Opname stoppen': 'Hentikan perekaman',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Audio sistem',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Buat transkrip dari rekaman atau berkas audio yang ada — sebagai dokumen Markdown yang dapat disunting, dengan pilihan jelas apakah aslinya disimpan. Lokal jika memungkinkan; server sendiri hanya jika Anda memilihnya. Sumber rekaman dan mesin menyusul di versi berikutnya.',
   'Afbeeldingen omwisselen': 'Tukar gambar',
   'Afbeelding links': 'Gambar kiri',
   'Breedte afbeeldingspaneel': 'Lebar panel gambar',

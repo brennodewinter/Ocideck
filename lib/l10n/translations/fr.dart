@@ -652,6 +652,34 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Créez une transcription d\'un enregistrement ou d\'un fichier audio existant — sous forme de document Markdown modifiable, avec un choix clair de conserver l\'original. En local si possible ; votre propre serveur seulement si vous le choisissez.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Modèle vocal local — reste sur cet appareil ; rien n\'est envoyé à un serveur',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Moteur : prêt — le moteur local est présent',
+  'Engine ontbreekt in deze installatie':
+      'Le moteur est absent de cette installation',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Cette architecture de processeur n\'a pas de moteur local',
+  'Engine: controleren…': 'Moteur : vérification…',
+  'Licht — snel, minder nauwkeurig': 'Léger — rapide, moins précis',
+  'Nauwkeurig — beste kwaliteit, groot':
+      'Précis — meilleure qualité, volumineux',
+  'Gebalanceerd — aanbevolen': 'Équilibré — recommandé',
+  'Bezig met binnenhalen': 'Téléchargement en cours',
+  'Geïnstalleerd en getoetst': 'Installé et vérifié',
+  'Geïnstalleerd': 'Installé',
+  'Niet geïnstalleerd': 'Non installé',
+  'Binnenhalen': 'Télécharger',
+  'afgebroken': 'annulé',
+  'netwerkfout': 'erreur réseau',
+  'door de beveiliging geweigerd': 'refusé par la couche de sécurité',
+  'controlesom klopt niet — probeer opnieuw':
+      'somme de contrôle incorrecte — réessayez',
+  'schrijffout op schijf': 'erreur d\'écriture disque',
   'Transcript': 'Transcription',
   'Opnieuw controleren': 'Vérifier à nouveau',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -680,8 +708,6 @@ const _dutchSourceAddFr = {
   'Opname stoppen': 'Arrêter l\'enregistrement',
   'Microfoon': 'Microphone',
   'Systeemgeluid': 'Son système',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Créez une transcription d\'un enregistrement ou d\'un fichier audio existant — sous forme de document Markdown modifiable, avec un choix clair sur la conservation de l\'original. Local quand c\'est possible ; votre propre serveur seulement si vous le choisissez. Les sources d\'enregistrement et les moteurs suivront dans des versions ultérieures.',
   'Afbeeldingen omwisselen': 'Permuter les images',
   'Afbeelding links': 'Image gauche',
   'Breedte afbeeldingspaneel': 'Largeur du panneau image',
