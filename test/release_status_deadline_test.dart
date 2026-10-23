@@ -72,6 +72,8 @@ $mocksAndCall
           '<a href="https://forge.invalid/releases/download/v9.9.9/'
           'ocideck-linux-x86_64-9.9.9.AppImage">appimage</a>\n'
           '<a href="https://forge.invalid/releases/download/v9.9.9/'
+          'ocideck-linux-debian12-x86_64-9.9.9.tar.gz">debian12</a>\n'
+          '<a href="https://forge.invalid/releases/download/v9.9.9/'
           'ocideck-macos-9.9.9.zip">mac</a>\n'
           '<a href="https://forge.invalid/releases/download/v9.9.9/'
           'ocideck-windows-x64-setup-9.9.9.exe">windows</a>\n',

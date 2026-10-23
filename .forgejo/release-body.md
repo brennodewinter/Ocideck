@@ -15,6 +15,7 @@ version in your browser. Your deck stays in the tab; nothing is uploaded.
 | Linux — Debian / Ubuntu / Mint | `ocideck-linux-amd64-@VERSIE@.deb` |
 | Linux — Fedora / openSUSE | `ocideck-linux-x86_64-@VERSIE@.rpm` |
 | Linux — portable tarball | `ocideck-linux-x64-@VERSIE@.tar.gz` |
+| Linux — Debian 12 compatible, x86-64 | `ocideck-linux-debian12-x86_64-@VERSIE@.tar.gz` |
 | Web bundle (self-hosting) | `ocideck-web-@VERSIE@.tar.gz` |
 
 Also attached: the Software Bill of Materials in CycloneDX
@@ -60,6 +61,12 @@ None is sandboxed or store-signed; each wraps the same bundle listed above.
   (or `sudo zypper install ./ocideck-linux-x86_64-@VERSIE@.rpm`).
 - **Any distribution** — unpack `ocideck-linux-x64-@VERSIE@.tar.gz` and run
   `./ocideck`.
+
+If an older distribution rejects that bundle because of glibc or libstdc++, use
+`ocideck-linux-debian12-x86_64-@VERSIE@.tar.gz` instead. It is the same source
+commit compiled inside Debian 12 using the pinned Flutter SDK, and runs as a
+normal Linux desktop app after extraction. It is x86-64 only. You can also
+[build it yourself with Docker](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/tag/@TAG@/scripts/debian12_builder/README.md).
 
 All four need GTK 3, `libsecret-1` and `liblzma5`; the `.deb` and `.rpm` pull
 them in, and any GTK desktop already has them. For the AppImage or tarball on a

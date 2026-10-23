@@ -14,6 +14,9 @@ Het script leest OciDecks Flutter-pin uit `.tool-versions`. Een pin zoals
 - circa 15–25 GB vrije schijfruimte tijdens de eerste build
 - internettoegang voor de broncode, Flutter en Dart-pakketten
 
+De uitvoer is een x86-64 Linux-app. Op een ARM-host bouwt Docker die via
+emulatie; dat duurt langer en levert geen ARM-app op.
+
 ## Bouwen
 
 Vanuit de root van een OciDeck-checkout bouw je de **huidige commit** met:

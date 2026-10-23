@@ -34,25 +34,22 @@ if [[ -z "${flutter_version}" ]]; then
   exit 1
 fi
 
-case "$(uname -m)" in
-  x86_64) target_arch="amd64" ;;
-  aarch64 | arm64) target_arch="arm64" ;;
-  *)
-    echo "Fout: niet-ondersteunde hostarchitectuur: $(uname -m)" >&2
-    exit 1
-    ;;
-esac
+# The pinned Flutter Linux SDK is available for x86-64; Docker can emulate it
+# on an ARM host, so the output stays the same architecture as the release.
+target_arch="amd64"
 
 mkdir -p "${result_dir}" "${pub_cache_dir}"
 image="ocideck-debian12-builder:flutter-${flutter_version}"
 
 "${engine[@]}" build \
+  --platform linux/amd64 \
   --build-arg "FLUTTER_VERSION=${flutter_version}" \
   --build-arg "TARGETARCH=${target_arch}" \
   --tag "${image}" \
   "${builder_dir}"
 
 "${engine[@]}" run --rm \
+  --platform linux/amd64 \
   --user "$(id -u):$(id -g)" \
   --env HOME=/tmp/build-home \
   --volume "${source_dir}:/src" \

@@ -1,4 +1,4 @@
-FROM debian:12-slim
+FROM debian:12-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
 
 ARG FLUTTER_VERSION
 ARG TARGETARCH
@@ -17,6 +17,7 @@ RUN apt-get update \
         curl \
         file \
         git \
+        jq \
         libasound2-dev \
         libayatana-appindicator3-dev \
         libblkid-dev \
@@ -48,17 +49,22 @@ RUN apt-get update \
 
 RUN test -n "${FLUTTER_VERSION}" \
     && architecture="${TARGETARCH:-$(dpkg --print-architecture)}" \
+    && test "${architecture}" = amd64 \
     && archive_version="${FLUTTER_VERSION%-stable}" \
-    && case "${architecture}" in \
-         amd64) archive="flutter_linux_${archive_version}-stable.tar.xz" ;; \
-         arm64) archive="flutter_linux_arm64_${archive_version}-stable.tar.xz" ;; \
-         *) echo "Niet-ondersteunde architectuur: ${architecture}" >&2; exit 1 ;; \
-       esac \
+    && archive="flutter_linux_${archive_version}-stable.tar.xz" \
+    && curl --proto '=https' --tlsv1.2 -fL \
+         https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json \
+         -o /tmp/releases.json \
+    && sha="$(jq -r --arg archive "stable/linux/${archive}" \
+         '.releases[] | select(.channel == "stable" and .archive == $archive) | .sha256' \
+         /tmp/releases.json)" \
+    && test -n "${sha}" \
     && curl --proto '=https' --tlsv1.2 -fL \
          "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/${archive}" \
          -o /tmp/flutter.tar.xz \
+    && echo "${sha}  /tmp/flutter.tar.xz" | sha256sum -c - \
     && tar -xJf /tmp/flutter.tar.xz -C /opt \
-    && rm /tmp/flutter.tar.xz \
+    && rm /tmp/flutter.tar.xz /tmp/releases.json \
     && git config --system --add safe.directory /opt/flutter \
     && flutter config --no-analytics --enable-linux-desktop \
     && flutter precache --linux \

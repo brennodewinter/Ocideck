@@ -392,6 +392,43 @@ jobs:
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.rpm
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.AppImage
 
+  linux-debian12:
+    name: Linux bouwen op Debian 12
+    needs: gate
+    runs-on: docker
+    timeout-minutes: 180
+    steps:
+      - name: Docker-gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends nodejs git docker.io iproute2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Docker-daemon vinden
+        id: dockerd
+        run: |
+          set -eu
+          GW="$(ip -4 route show default | awk '{print $3; exit}')"
+          test -n "$GW"
+          echo "host=tcp://$GW:2375" >> "$GITHUB_OUTPUT"
+      - name: Native Debian 12-app bouwen
+        env:
+          DOCKER_DAEMON: ${{ steps.dockerd.outputs.host }}
+        run: |
+          set -eu
+          for i in $(seq 1 30); do
+            docker -H "$DOCKER_DAEMON" info >/dev/null 2>&1 && break
+            sleep 2
+          done
+          docker -H "$DOCKER_DAEMON" info >/dev/null
+          scripts/build_debian12_release.sh "${GITHUB_REF_NAME#v}"
+      - name: Artifact bewaren
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: ocideck-linux-debian12
+          path: dist/ocideck-linux-debian12-x86_64-*.tar.gz
+
   macos:
     name: macOS bouwen
     needs: gate
@@ -797,7 +834,7 @@ jobs:
 
   publiceren:
     name: Release publiceren
-    needs: [web, linux, macos, windows-ophalen, consumer-deb, consumer-rpm, consumer-appimage]
+    needs: [web, linux, linux-debian12, macos, windows-ophalen, consumer-deb, consumer-rpm, consumer-appimage]
     runs-on: docker
     # Deze job muteeert buiten ons gebaande pad: elke call draagt daarom een
     # connect- én responstime-out (de curl-flags in de stappen; een endpoint dat
@@ -825,6 +862,8 @@ jobs:
         with: { name: ocideck-web, path: dist }
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux-debian12, path: dist }
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-macos, path: dist }
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2

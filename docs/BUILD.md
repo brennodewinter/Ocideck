@@ -329,8 +329,8 @@ on the machine — see [Linux packaging](#linux-packaging).
 [`scripts/debian12_builder/`](../scripts/debian12_builder/README.md). It writes
 an ordinary Linux app bundle and tarball, not a container image to run. This
 route is useful when the official Ubuntu-built binary needs newer glibc or
-libstdc++ than a Debian 12 host has. The target architecture follows the Docker
-host (`amd64` or `arm64`); Docker does not make one binary work on both.
+libstdc++ than a Debian 12 host has. The output is x86-64, including when
+Docker runs on an ARM host through emulation; it does not run on ARM Linux.
 
 Use `make build-release` for the normal manual release path on macOS. It runs
 `make check-web` first, so the browser bundle is built with
@@ -953,6 +953,7 @@ and <https://ocideck.librekat.nl/> is serving that same web bundle.
 | --- | --- | --- |
 | Web bundle | forge `docker` runner, prebaked `ocideck-ci` image | `make check-web`: hardened build **and** its verification |
 | Linux x64 — tarball, AppImage, `.deb`, `.rpm` | forge `docker` runner, prebaked `ocideck-ci` image | native desktop build on the baked toolchain, then `make package-linux` |
+| Linux x64 — Debian 12 tarball | forge `docker` runner, Debian 12 builder | same source commit compiled against Debian 12, then archived |
 | macOS | forge, `macos` runner | Apple licenses macOS for Apple hardware only |
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
