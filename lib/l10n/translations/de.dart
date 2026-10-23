@@ -652,6 +652,33 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Erstellen Sie ein Transkript einer Aufnahme oder einer vorhandenen Audiodatei — als bearbeitbares Markdown-Dokument, mit einer klaren Wahl, ob das Original behalten wird. Lokal wo möglich; ein eigener Server nur, wenn Sie ihn wählen.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokales Sprachmodell — bleibt auf diesem Gerät; nichts geht an einen Server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Engine: bereit — der lokale Helfer ist vorhanden',
+  'Engine ontbreekt in deze installatie':
+      'Die Engine fehlt in dieser Installation',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Diese Prozessorarchitektur hat keine lokale Engine',
+  'Engine: controleren…': 'Engine: wird geprüft…',
+  'Licht — snel, minder nauwkeurig': 'Leicht — schnell, weniger genau',
+  'Nauwkeurig — beste kwaliteit, groot': 'Genau — beste Qualität, groß',
+  'Gebalanceerd — aanbevolen': 'Ausgewogen — empfohlen',
+  'Bezig met binnenhalen': 'Wird heruntergeladen',
+  'Geïnstalleerd en getoetst': 'Installiert und geprüft',
+  'Geïnstalleerd': 'Installiert',
+  'Niet geïnstalleerd': 'Nicht installiert',
+  'Binnenhalen': 'Herunterladen',
+  'afgebroken': 'abgebrochen',
+  'netwerkfout': 'Netzwerkfehler',
+  'door de beveiliging geweigerd': 'von der Sicherheitsschicht abgelehnt',
+  'controlesom klopt niet — probeer opnieuw':
+      'Prüfsumme stimmt nicht — erneut versuchen',
+  'schrijffout op schijf': 'Festplattenschreibfehler',
   'Transcript': 'Transkript',
   'Opnieuw controleren': 'Erneut prüfen',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -680,8 +707,6 @@ const _dutchSourceAddDe = {
   'Opname stoppen': 'Aufnahme stoppen',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Systemton',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Erstellen Sie ein Transkript einer Aufnahme oder einer vorhandenen Audiodatei — als bearbeitbares Markdown-Dokument, mit einer klaren Wahl, ob das Original aufbewahrt wird. Lokal wo möglich; ein eigener Server nur, wenn Sie ihn wählen. Aufnahmequellen und Engines folgen in späteren Versionen.',
   'Afbeeldingen omwisselen': 'Bilder tauschen',
   'Afbeelding links': 'Linkes Bild',
   'Breedte afbeeldingspaneel': 'Breite des Bildbereichs',

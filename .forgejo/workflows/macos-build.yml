@@ -49,6 +49,13 @@ jobs:
       - name: macOS-release bouwen
         run: flutter build macos --release
 
+      # De lokale transcriptie-helper (whisper-cli, #2512) wordt uit de
+      # gepinde bron gebouwd en in Contents/Helpers gezet — dezelfde stap
+      # als `make build-macos`, hier los omdat de workflow flutter direct
+      # aanroept.
+      - name: whisper-cli-helper in de bundel
+        run: scripts/bundle_whisper_cli.sh macos
+
       # Deze runner is persistent (build/ blijft staan tussen runs), dus een
       # incrementele build zou verouderde doc-assets kunnen meenemen. Toets dat
       # de docs in de .app byte-voor-byte gelijk zijn aan docs/ op schijf.

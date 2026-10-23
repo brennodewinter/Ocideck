@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:0094ca89-a308-52cd-80c4-d2d2c75efa44",
+  "serialNumber": "urn:uuid:8934919d-84fa-5582-8bff-7e41f1ecbca8",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-22T20:56:09.833121Z",
+    "timestamp": "2026-10-23T08:38:23.069900Z",
     "tools": {
       "components": [
         {
@@ -9102,6 +9102,52 @@
       ]
     },
     {
+      "bom-ref": "runtime:whisper.cpp@1.9.5",
+      "type": "application",
+      "supplier": {
+        "name": "Georgi Gerganov and contributors",
+        "url": [
+          "https://github.com/ggml-org/whisper.cpp"
+        ]
+      },
+      "name": "whisper.cpp (whisper-cli)",
+      "version": "1.9.5",
+      "purl": "pkg:github/ggml-org/whisper.cpp@1.9.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ff1a9053feb509ff9d7729703355541ae9690073a6b1c40eb692c962e0dc1720"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/ggml-org/whisper.cpp/archive/refs/tags/v1.9.5.tar.gz"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/ggml-org/whisper.cpp"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "native-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Local speech-recognition helper compiled from the pinned source tarball by scripts/build_whisper_cli.sh and shipped inside the desktop bundles. Model weights are never bundled — the user downloads them through the guarded catalog flow (#2512)."
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:npm/dompurify@3.4.17",
       "type": "library",
       "name": "dompurify",
@@ -9533,6 +9579,7 @@
         "pkg:pub/xml@7.0.1",
         "pkg:pub/yaml@3.1.4",
         "runtime:pdfium@chromium-7811",
+        "runtime:whisper.cpp@1.9.5",
         "sdk:dart@^3.12.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter@3.47.7",
@@ -11306,6 +11353,10 @@
     },
     {
       "ref": "runtime:pdfium@chromium-7811",
+      "dependsOn": []
+    },
+    {
+      "ref": "runtime:whisper.cpp@1.9.5",
       "dependsOn": []
     },
     {

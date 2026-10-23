@@ -702,6 +702,7 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
 /// represented as a package of its own. Keeping it separate prevents the MIT
 /// wrapper licence from hiding the runtime that actually parses untrusted PDFs.
 List<SbomComponent> _nativeRuntimes() => [
+  ..._whisperRuntime(),
   SbomComponent(
     ref: 'runtime:pdfium@chromium-7811',
     group: 'native-runtime',
@@ -725,6 +726,38 @@ List<SbomComponent> _nativeRuntimes() => [
         'Other native targets are release-pinned by the upstream build hook.',
   ),
 ];
+
+/// The whisper.cpp helper for local transcription (#2512). Values come from
+/// `native/whisper_cli/manifest.json` so the build script and the SBOM read
+/// one pin instead of two lists that can drift apart.
+List<SbomComponent> _whisperRuntime() {
+  final file = File('native/whisper_cli/manifest.json');
+  if (!file.existsSync()) return const [];
+  final m = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+  final version = m['version'] as String;
+  return [
+    SbomComponent(
+      ref: 'runtime:whisper.cpp@$version',
+      group: 'native-runtime',
+      type: 'application',
+      name: 'whisper.cpp (whisper-cli)',
+      version: version,
+      purl: 'pkg:github/ggml-org/whisper.cpp@$version',
+      sha256: m['tarballSha256'] as String?,
+      downloadUrl: m['tarball'] as String?,
+      vcsUrl: m['upstream'] as String?,
+      license: m['license'] as String? ?? 'MIT',
+      supplier: 'Georgi Gerganov and contributors',
+      supplierUrl: m['upstream'] as String?,
+      dependsOn: const [],
+      note:
+          'Local speech-recognition helper compiled from the pinned source '
+          'tarball by scripts/build_whisper_cli.sh and shipped inside the '
+          'desktop bundles. Model weights are never bundled — the user '
+          'downloads them through the guarded catalog flow (#2512).',
+    ),
+  ];
+}
 
 /// The copyright holder a bundled font's OFL text names, as
 /// `Copyright 2011 The Roboto Project Authors (https://…)`.

@@ -1621,6 +1621,33 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Creați o transcriere a unei înregistrări sau a unui fișier audio existent — ca document Markdown editabil, cu alegerea clară dacă originalul este păstrat. Local unde este posibil; propriul server numai dacă îl alegeți.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Model vocal local — rămâne pe acest dispozitiv; nimic nu merge la un server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Motor: gata — ajutorul local este prezent',
+  'Engine ontbreekt in deze installatie':
+      'Motorul lipsește din această instalare',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Această arhitectură de procesor nu are motor local',
+  'Engine: controleren…': 'Motor: se verifică…',
+  'Licht — snel, minder nauwkeurig': 'Ușor — rapid, mai puțin precis',
+  'Nauwkeurig — beste kwaliteit, groot': 'Precis — cea mai bună calitate, mare',
+  'Gebalanceerd — aanbevolen': 'Echilibrat — recomandat',
+  'Bezig met binnenhalen': 'Se descarcă',
+  'Geïnstalleerd en getoetst': 'Instalat și verificat',
+  'Geïnstalleerd': 'Instalat',
+  'Niet geïnstalleerd': 'Neinstalat',
+  'Binnenhalen': 'Descarcă',
+  'afgebroken': 'anulat',
+  'netwerkfout': 'eroare de rețea',
+  'door de beveiliging geweigerd': 'refuzat de stratul de securitate',
+  'controlesom klopt niet — probeer opnieuw':
+      'suma de control nu se potrivește — încercați din nou',
+  'schrijffout op schijf': 'eroare de scriere pe disc',
   'Transcript': 'Transcriere',
   'Opnieuw controleren': 'Verifică din nou',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1649,8 +1676,6 @@ const _dutchSourceAddRo = <String, String>{
   'Opname stoppen': 'Oprește înregistrarea',
   'Microfoon': 'Microfon',
   'Systeemgeluid': 'Sunetul sistemului',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Creați o transcriere a unei înregistrări sau a unui fișier audio existent — ca document Markdown editabil, cu o alegere clară dacă originalul este păstrat. Local acolo unde este posibil; propriul server numai dacă îl alegeți. Sursele de înregistrare și motoarele urmează în versiunile viitoare.',
   'Afbeeldingen omwisselen': 'Schimbă imaginile între ele',
   'Afbeelding links': 'Imagine stânga',
   'Breedte afbeeldingspaneel': 'Lățime panou imagine',

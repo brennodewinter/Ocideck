@@ -811,6 +811,32 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Create a transcript of a recording or an existing audio file — as an editable Markdown document, with a clear choice about whether the original is kept. Local where possible; your own server only if you choose one.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Local speech model — stays on this device; nothing goes to a server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Engine: ready — the local helper is present',
+  'Engine ontbreekt in deze installatie':
+      'Engine is missing from this installation',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'This processor architecture has no local engine',
+  'Engine: controleren…': 'Engine: checking…',
+  'Licht — snel, minder nauwkeurig': 'Light — fast, less accurate',
+  'Nauwkeurig — beste kwaliteit, groot': 'Accurate — best quality, large',
+  'Gebalanceerd — aanbevolen': 'Balanced — recommended',
+  'Bezig met binnenhalen': 'Downloading',
+  'Geïnstalleerd en getoetst': 'Installed and verified',
+  'Geïnstalleerd': 'Installed',
+  'Niet geïnstalleerd': 'Not installed',
+  'Binnenhalen': 'Download',
+  'afgebroken': 'cancelled',
+  'netwerkfout': 'network error',
+  'door de beveiliging geweigerd': 'refused by the security layer',
+  'controlesom klopt niet — probeer opnieuw': 'checksum mismatch — try again',
+  'schrijffout op schijf': 'disk write error',
   'Transcript': 'Transcript',
   'Opnieuw controleren': 'Check again',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -839,8 +865,6 @@ const _dutchSourceAddEn = {
   'Opname stoppen': 'Stop recording',
   'Microfoon': 'Microphone',
   'Systeemgeluid': 'System audio',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Create a transcript of a recording or an existing audio file — as an editable Markdown document, with a clear choice about whether the original is kept. Local where possible; your own server only if you choose one. Recording sources and engines follow in future versions.',
   'Afbeeldingen omwisselen': 'Swap images',
   'Afbeelding links': 'Left image',
   'Breedte afbeeldingspaneel': 'Image panel width',

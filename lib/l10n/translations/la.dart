@@ -1620,6 +1620,32 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Transcriptum fac e recordatione vel file soni exstanti — ut documentum Markdown editabile, cum optione clara utrum originale servetur. Localiter ubi fieri potest; proprium server solum si id eligis.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Exemplar vocis locale — in hoc instrumento manet; nil ad servum it',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Machina: parata — adiutor localis adest',
+  'Engine ontbreekt in deze installatie': 'Machina in hac installatione deest',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Haec architectura processoria machinam localem non habet',
+  'Engine: controleren…': 'Machina: verificatur…',
+  'Licht — snel, minder nauwkeurig': 'Leve — celerum, minus accuratum',
+  'Nauwkeurig — beste kwaliteit, groot': 'Accuratum — optima qualitas, magnum',
+  'Gebalanceerd — aanbevolen': 'Libratum — commendatum',
+  'Bezig met binnenhalen': 'Deducitur',
+  'Geïnstalleerd en getoetst': 'Installatum et probatum',
+  'Geïnstalleerd': 'Installatum',
+  'Niet geïnstalleerd': 'Non installatum',
+  'Binnenhalen': 'Deduc',
+  'afgebroken': 'interruptum',
+  'netwerkfout': 'error retis',
+  'door de beveiliging geweigerd': 'a strato securitatis recusatum',
+  'controlesom klopt niet — probeer opnieuw':
+      'summa probationis non congruit — iterum tempta',
+  'schrijffout op schijf': 'error scribendi in disco',
   'Transcript': 'Exscriptum',
   'Opnieuw controleren': 'Iterum verifica',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1648,8 +1674,6 @@ const _dutchSourceAddLa = <String, String>{
   'Opname stoppen': 'Recordationem siste',
   'Microfoon': 'Microphonum',
   'Systeemgeluid': 'Sonus systematis',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Transcriptionem recordationis vel existentis audiofili fac — ut documentum Markdown editabile, clara optione utrum originale servetur. Localiter ubi fieri potest; proprius server tantum si eligas. Fontes recordationis et engines in versionibus sequentibus venient.',
   'Afbeeldingen omwisselen': 'Imagines permutare',
   'Afbeelding links': 'Imago sinistra',
   'Breedte afbeeldingspaneel': 'Latitudo tabulae imaginis',

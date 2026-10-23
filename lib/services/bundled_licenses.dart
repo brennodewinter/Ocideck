@@ -105,6 +105,12 @@ abstract final class BundledLicenses {
       licenseAsset: 'assets/models/YuNet-LICENSE.txt',
     ),
     BundledLicense(
+      component: 'whisper.cpp speech engine (whisper-cli)',
+      license: 'MIT',
+      source: 'https://github.com/ggml-org/whisper.cpp',
+      licenseAsset: 'assets/licenses/whisper-cpp-LICENSE.txt',
+    ),
+    BundledLicense(
       component: 'PDFium rendering engine',
       license: 'BSD-3-Clause',
       source: 'https://pdfium.googlesource.com/pdfium/',

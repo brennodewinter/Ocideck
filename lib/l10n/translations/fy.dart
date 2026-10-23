@@ -652,6 +652,33 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Meitsje in transkript fan in opname of in besteand audiobestân — as bewurkber Markdown-dokumint, mei in dúdlike kar oft it orizjineel bewarre bliuwt. Lokaal as it kin; in eigen server allinnich as jo dy kieze.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokaal spraakmodel — bliuwt op dit apparaat; der giet neat nei in server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Engine: ree — de lokale help is der',
+  'Engine ontbreekt in deze installatie':
+      'De engine ûntbrekt yn dizze installaasje',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Dizze prosessorarsjitektuer hat gjin lokale engine',
+  'Engine: controleren…': 'Engine: kontrolearje…',
+  'Licht — snel, minder nauwkeurig': 'Ljocht — fluch, minder krekt',
+  'Nauwkeurig — beste kwaliteit, groot': 'Krekt — bêste kwaliteit, grut',
+  'Gebalanceerd — aanbevolen': 'Balansearre — oanrikkemandearre',
+  'Bezig met binnenhalen': 'Wurdt binnenhelle',
+  'Geïnstalleerd en getoetst': 'Ynstallearre en kontrolearre',
+  'Geïnstalleerd': 'Ynstallearre',
+  'Niet geïnstalleerd': 'Net ynstallearre',
+  'Binnenhalen': 'Binnenhelje',
+  'afgebroken': 'ôfbrutsen',
+  'netwerkfout': 'netwurkflater',
+  'door de beveiliging geweigerd': 'wegere troch de feilichheidslaach',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontraalsum klopt net — probearje opnij',
+  'schrijffout op schijf': 'skriuwflater op skiif',
   'Transcript': 'Transkript',
   'Opnieuw controleren': 'Op \'e nij kontrolearje',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -680,8 +707,6 @@ const _dutchSourceAddFy = {
   'Opname stoppen': 'Opname stopje',
   'Microfoon': 'Mikrofoan',
   'Systeemgeluid': 'Systeemlûd',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Meitsje in transcript fan in opname of besteand lûdsbestân — as bewurkber Markdown-dokumint, mei in dúdlike kar oft it orizjineel bewarre bliuwt. Lokaal wêr\'t it kin; in eigen tsjinner allinnich as jo dy kieze. De opnameboarnen en engines folgje yn folgjende ferzjes.',
   'Afbeeldingen omwisselen': 'Ofbyldings omwikselje',
   'Afbeelding links': 'Linker ôfbylding',
   'Breedte afbeeldingspaneel': 'Breedte fan it ôfbyldingspaniel',

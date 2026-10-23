@@ -1606,6 +1606,32 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Vytvořte přepis nahrávky nebo existujícího zvukového souboru — jako upravitelný dokument Markdown s jasnou volbou, zda se originál zachová. Lokálně, kde to jde; vlastní server jen pokud si ho zvolíte.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokální hlasový model — zůstává v tomto zařízení; nic nejde na server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Engine: připraven — lokální pomocník je přítomen',
+  'Engine ontbreekt in deze installatie': 'V této instalaci chybí engine',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Tato architektura procesoru nemá lokální engine',
+  'Engine: controleren…': 'Engine: kontroluji…',
+  'Licht — snel, minder nauwkeurig': 'Lehký — rychlý, méně přesný',
+  'Nauwkeurig — beste kwaliteit, groot': 'Přesný — nejlepší kvalita, velký',
+  'Gebalanceerd — aanbevolen': 'Vyvážený — doporučený',
+  'Bezig met binnenhalen': 'Probíhá stahování',
+  'Geïnstalleerd en getoetst': 'Nainstalováno a ověřeno',
+  'Geïnstalleerd': 'Nainstalováno',
+  'Niet geïnstalleerd': 'Nenainstalováno',
+  'Binnenhalen': 'Stáhnout',
+  'afgebroken': 'zrušeno',
+  'netwerkfout': 'chyba sítě',
+  'door de beveiliging geweigerd': 'odmítnuto bezpečnostní vrstvou',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrolní součet nesouhlasí — zkuste znovu',
+  'schrijffout op schijf': 'chyba zápisu na disk',
   'Transcript': 'Přepis',
   'Opnieuw controleren': 'Zkontrolovat znovu',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1634,8 +1660,6 @@ const _dutchSourceAddCs = <String, String>{
   'Opname stoppen': 'Zastavit nahrávání',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Systémový zvuk',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Vytvořte přepis nahrávky nebo existujícího zvukového souboru — jako upravitelný dokument Markdown, s jasnou volbou, zda se originál zachová. Lokálně, kde je to možné; vlastní server jen pokud si ho zvolíte. Zdroje nahrávání a enginy přijdou v dalších verzích.',
   'Afbeeldingen omwisselen': 'Prohodit obrázky',
   'Afbeelding links': 'Levý obrázek',
   'Breedte afbeeldingspaneel': 'Šířka panelu obrázku',

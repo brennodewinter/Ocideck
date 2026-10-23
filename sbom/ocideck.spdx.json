@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.0+42",
-  "documentNamespace": "https://ocideck.app/spdx/6bb752c6-5dd4-5971-8aab-c26c9d3c0c7e",
+  "documentNamespace": "https://ocideck.app/spdx/6eb21d92-398f-5bfb-8760-f3ec524474b4",
   "creationInfo": {
-    "created": "2026-10-22T20:56:09.833121Z",
+    "created": "2026-10-23T08:38:23.069900Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4858,7 +4858,31 @@
       "comment": "Platform-specific runtime bundled by pdfium_dart/pdfium_flutter. The web WASM in pdfrx 2.6.1 has SHA-256 5b2cbb18e9dc361dae375e971c7e75f7306d39b7749ad4fced475579e6a549df; the Darwin XCFramework archive is pinned upstream as 948d9257f53f01cbed74b81bb8adc8758e52ac9390751772de7889026d32d5a1. Other native targets are release-pinned by the upstream build hook."
     },
     {
-      "SPDXID": "SPDXRef-219-dompurify",
+      "SPDXID": "SPDXRef-219-whisper.cpp--whisper-cli-",
+      "name": "whisper.cpp (whisper-cli)",
+      "versionInfo": "1.9.5",
+      "supplier": "Organization: Georgi Gerganov and contributors",
+      "downloadLocation": "https://github.com/ggml-org/whisper.cpp/archive/refs/tags/v1.9.5.tar.gz",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ff1a9053feb509ff9d7729703355541ae9690073a6b1c40eb692c962e0dc1720"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:github/ggml-org/whisper.cpp@1.9.5"
+        }
+      ],
+      "comment": "Local speech-recognition helper compiled from the pinned source tarball by scripts/build_whisper_cli.sh and shipped inside the desktop bundles. Model weights are never bundled — the user downloads them through the guarded catalog flow (#2512)."
+    },
+    {
+      "SPDXID": "SPDXRef-220-dompurify",
       "name": "dompurify",
       "versionInfo": "3.4.17",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/dompurify@3.4.17/dist/purify.min.js",
@@ -4881,7 +4905,7 @@
       "comment": "Vendored into purify.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-220-highlight.js",
+      "SPDXID": "SPDXRef-221-highlight.js",
       "name": "highlight.js",
       "versionInfo": "11.11.1",
       "downloadLocation": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js",
@@ -4904,7 +4928,7 @@
       "comment": "Vendored into highlight.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-221-marked",
+      "SPDXID": "SPDXRef-222-marked",
       "name": "marked",
       "versionInfo": "18.0.5",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/marked@18.0.5/lib/marked.umd.js",
@@ -4927,7 +4951,7 @@
       "comment": "Vendored into marked.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-222-mathjax",
+      "SPDXID": "SPDXRef-223-mathjax",
       "name": "mathjax",
       "versionInfo": "3.2.2",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js",
@@ -4950,7 +4974,7 @@
       "comment": "Vendored into tex-svg.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-223-mermaid",
+      "SPDXID": "SPDXRef-224-mermaid",
       "name": "mermaid",
       "versionInfo": "11.16.1",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js",
@@ -4973,7 +4997,7 @@
       "comment": "Vendored into mermaid.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-224-dart",
+      "SPDXID": "SPDXRef-225-dart",
       "name": "dart",
       "versionInfo": "^3.12.0",
       "supplier": "Organization: dart-lang",
@@ -4984,7 +5008,7 @@
       "comment": "Dart SDK constraint from pubspec.yaml (environment.sdk)."
     },
     {
-      "SPDXID": "SPDXRef-225-flutter",
+      "SPDXID": "SPDXRef-226-flutter",
       "name": "flutter",
       "versionInfo": "3.47.7",
       "supplier": "Organization: flutter",
@@ -4995,7 +5019,7 @@
       "comment": "Pinned build SDK (.tool-versions)."
     },
     {
-      "SPDXID": "SPDXRef-226-desktop-multi-window",
+      "SPDXID": "SPDXRef-227-desktop-multi-window",
       "name": "desktop_multi_window",
       "versionInfo": "0.3.1",
       "supplier": "Organization: MixinNetwork",
@@ -5013,7 +5037,7 @@
       "comment": "Vendored fork in third_party/desktop_multi_window; the local changes are recorded in third_party/desktop_multi_window/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     },
     {
-      "SPDXID": "SPDXRef-227-markdown-quill",
+      "SPDXID": "SPDXRef-228-markdown-quill",
       "name": "markdown_quill",
       "versionInfo": "4.3.0",
       "supplier": "Organization: TarekkMA",
@@ -5085,12 +5109,12 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-226-desktop-multi-window"
+      "relatedSpdxElement": "SPDXRef-227-desktop-multi-window"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-227-markdown-quill"
+      "relatedSpdxElement": "SPDXRef-228-markdown-quill"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5125,27 +5149,27 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-219-dompurify"
+      "relatedSpdxElement": "SPDXRef-220-dompurify"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-220-highlight.js"
+      "relatedSpdxElement": "SPDXRef-221-highlight.js"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-221-marked"
+      "relatedSpdxElement": "SPDXRef-222-marked"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-222-mathjax"
+      "relatedSpdxElement": "SPDXRef-223-mathjax"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-223-mermaid"
+      "relatedSpdxElement": "SPDXRef-224-mermaid"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5405,7 +5429,12 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-224-dart"
+      "relatedSpdxElement": "SPDXRef-219-whisper.cpp--whisper-cli-"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-225-dart"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5415,7 +5444,7 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-225-flutter"
+      "relatedSpdxElement": "SPDXRef-226-flutter"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -9023,22 +9052,22 @@
       "relatedSpdxElement": "SPDXRef-30-dartage"
     },
     {
-      "spdxElementId": "SPDXRef-226-desktop-multi-window",
+      "spdxElementId": "SPDXRef-227-desktop-multi-window",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-55-flutter"
     },
     {
-      "spdxElementId": "SPDXRef-227-markdown-quill",
+      "spdxElementId": "SPDXRef-228-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-19-collection"
     },
     {
-      "spdxElementId": "SPDXRef-227-markdown-quill",
+      "spdxElementId": "SPDXRef-228-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-66-flutter-quill"
     },
     {
-      "spdxElementId": "SPDXRef-227-markdown-quill",
+      "spdxElementId": "SPDXRef-228-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-100-markdown"
     }

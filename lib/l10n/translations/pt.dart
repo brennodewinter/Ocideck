@@ -1633,6 +1633,32 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Crie uma transcrição de uma gravação ou de um ficheiro de áudio existente — como documento Markdown editável, com uma escolha clara de manter o original. Localmente sempre que possível; o seu próprio servidor apenas se o escolher.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Modelo de voz local — permanece neste dispositivo; nada vai para um servidor',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Motor: pronto — o auxiliar local está presente',
+  'Engine ontbreekt in deze installatie': 'O motor falta nesta instalação',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Esta arquitetura de processador não tem motor local',
+  'Engine: controleren…': 'Motor: a verificar…',
+  'Licht — snel, minder nauwkeurig': 'Leve — rápido, menos preciso',
+  'Nauwkeurig — beste kwaliteit, groot': 'Preciso — melhor qualidade, grande',
+  'Gebalanceerd — aanbevolen': 'Equilibrado — recomendado',
+  'Bezig met binnenhalen': 'A descarregar',
+  'Geïnstalleerd en getoetst': 'Instalado e verificado',
+  'Geïnstalleerd': 'Instalado',
+  'Niet geïnstalleerd': 'Não instalado',
+  'Binnenhalen': 'Descarregar',
+  'afgebroken': 'cancelado',
+  'netwerkfout': 'erro de rede',
+  'door de beveiliging geweigerd': 'recusado pela camada de segurança',
+  'controlesom klopt niet — probeer opnieuw':
+      'soma de verificação incorreta — tente novamente',
+  'schrijffout op schijf': 'erro de escrita em disco',
   'Transcript': 'Transcrição',
   'Opnieuw controleren': 'Verificar novamente',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1661,8 +1687,6 @@ const _dutchSourceAddPt = <String, String>{
   'Opname stoppen': 'Parar a gravação',
   'Microfoon': 'Microfone',
   'Systeemgeluid': 'Áudio do sistema',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Crie uma transcrição de uma gravação ou de um ficheiro de áudio existente — como documento Markdown editável, com uma escolha clara sobre se o original é conservado. Local sempre que possível; o seu próprio servidor apenas se o escolher. As fontes de gravação e os motores chegam em versões futuras.',
   'Afbeeldingen omwisselen': 'Trocar imagens',
   'Afbeelding links': 'Imagem esquerda',
   'Breedte afbeeldingspaneel': 'Largura do painel de imagem',

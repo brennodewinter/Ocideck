@@ -1624,6 +1624,32 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Създайте транскрипция на запис или съществуващ аудиофайл — като редактируем Markdown документ с ясен избор дали оригиналът се запазва. Локално, когато е възможно; собствен сървър само ако го изберете.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Локален речев модел — остава на това устройство; нищо не отива към сървър',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Двигател: готов — локалният помощник е наличен',
+  'Engine ontbreekt in deze installatie': 'В тази инсталация липсва двигателят',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Тази процесорна архитектура няма локален двигател',
+  'Engine: controleren…': 'Двигател: проверява се…',
+  'Licht — snel, minder nauwkeurig': 'Лек — бърз, по-малко точен',
+  'Nauwkeurig — beste kwaliteit, groot': 'Точен — най-добро качество, голям',
+  'Gebalanceerd — aanbevolen': 'Балансиран — препоръчителен',
+  'Bezig met binnenhalen': 'Изтегля се',
+  'Geïnstalleerd en getoetst': 'Инсталиран и проверен',
+  'Geïnstalleerd': 'Инсталиран',
+  'Niet geïnstalleerd': 'Не е инсталиран',
+  'Binnenhalen': 'Изтегли',
+  'afgebroken': 'отменено',
+  'netwerkfout': 'мрежова грешка',
+  'door de beveiliging geweigerd': 'отхвърлено от слоя за сигурност',
+  'controlesom klopt niet — probeer opnieuw':
+      'контролната сума не съвпада — опитайте отново',
+  'schrijffout op schijf': 'грешка при запис на диск',
   'Transcript': 'Транскрипция',
   'Opnieuw controleren': 'Провери отново',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1652,8 +1678,6 @@ const _dutchSourceAddBg = <String, String>{
   'Opname stoppen': 'Спиране на записа',
   'Microfoon': 'Микрофон',
   'Systeemgeluid': 'Системен звук',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Създайте транскрипция на запис или съществуващ аудиофайл — като редактируем Markdown документ, с ясен избор дали оригиналът се пази. Локално, когато е възможно; собствен сървър само ако го изберете. Източниците на запис и машините идват в следващи версии.',
   'Afbeeldingen omwisselen': 'Размени изображенията',
   'Afbeelding links': 'Ляво изображение',
   'Breedte afbeeldingspaneel': 'Ширина на панела с изображение',

@@ -121,6 +121,10 @@ void main() {
     // OpenKAT Rocky-client (desktop): gebruikt buildPinnedClient — de enige
     // uitgaande socket van de live OpenKAT-koppeling.
     'lib/services/openkat/openkat_rocky_client.dart': 0,
+    // Modeldownloader (#2512): buildPinnedModelClient — hetzelfde recept
+    // als buildPinnedClient. Elke redirect-hop gaat opnieuw door
+    // NetGuard.safeResolve + connectPinned; één constructie.
+    'lib/services/transcription/model_download_io.dart': 1,
   };
 
   test('media fetch sinks stay behind the NetGuard resolve gate', () {
@@ -198,6 +202,11 @@ void main() {
         // Knox Token-auth. De enige uitgaande socket van de live
         // OpenKAT-koppeling.
         'lib/services/openkat/openkat_rocky_client.dart',
+        // Modeldownloader (#2512): NetGuard.safeResolve + socket-pin per
+        // redirect-hop via buildPinnedModelClient — hetzelfde recept als
+        // buildPinnedClient, want huggingface.co → cdn.hf.co mag niet
+        // automatisch gevolgd worden. GET-only op https.
+        'lib/services/transcription/model_download_io.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '
@@ -259,6 +268,12 @@ void main() {
     // ervoor, en het pad komt van `path_provider` of is dat van een bestand dat de aanroeper
     // zojuist zelf maakte. Dart heeft geen permissie-API.
     'lib/utils/chmod.dart': 1,
+    // De whisper-cli-helper (#2512). Dezelfde §10.2-vorm als de git-laag:
+    // argv-array zonder schil, includeParentEnvironment: false met een
+    // toelatingslijst-omgeving, begrensde uitvoer en een SIGKILL-tijdslimiet.
+    // De binary heeft bovendien geen netwerkcode — het subproces-gat is er
+    // dus alleen voor de vorm, niet voor het netwerk.
+    'lib/services/transcription/local_whisper_engine_io.dart': 1,
   };
 
   test('een subproces blijft binnen de twee plekken die het mogen', () {

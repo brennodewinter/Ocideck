@@ -27,6 +27,12 @@ paths = [
   '''^\.dart_tool/''',
   '''^build/''',
 
+  # De uitgepakte bron- en buildboom van de whisper-cli-helper (#2512):
+  # gitignored werkmateriaal van scripts/build_whisper_cli.sh. Bevat
+  # upstreams eigen CI-workflows met placeholder-sleutels (ccache-keys).
+  '''^native/whisper_cli/build/''',
+  '''^native/whisper_cli/bin/''',
+
   # Lokale werkinstellingen, ook gitignored. Staan buiten de repo-inhoud.
   '''^\.claude/''',
 

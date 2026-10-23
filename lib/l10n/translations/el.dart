@@ -1630,6 +1630,33 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Δημιουργήστε απομαγνητοφώνηση ηχογράφησης ή υπάρχοντος αρχείου ήχου — ως επεξεργάσιμο έγγραφο Markdown, με σαφή επιλογή διατήρησης του πρωτοτύπου. Τοπικά όπου είναι δυνατόν· δικός σας διακομιστής μόνο αν τον επιλέξετε.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Τοπικό μοντέλο ομιλίας — παραμένει σε αυτή τη συσκευή· τίποτα δεν πηγαίνει σε διακομιστή',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Μηχανή: έτοιμη — το τοπικό βοήθημα υπάρχει',
+  'Engine ontbreekt in deze installatie':
+      'Η μηχανή λείπει από αυτή την εγκατάσταση',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Αυτή η αρχιτεκτονική επεξεργαστή δεν έχει τοπική μηχανή',
+  'Engine: controleren…': 'Μηχανή: έλεγχος…',
+  'Licht — snel, minder nauwkeurig': 'Ελαφρύ — γρήγορο, λιγότερο ακριβές',
+  'Nauwkeurig — beste kwaliteit, groot': 'Ακριβές — καλύτερη ποιότητα, μεγάλο',
+  'Gebalanceerd — aanbevolen': 'Ισορροπημένο — προτεινόμενο',
+  'Bezig met binnenhalen': 'Γίνεται λήψη',
+  'Geïnstalleerd en getoetst': 'Εγκατεστημένο και επαληθευμένο',
+  'Geïnstalleerd': 'Εγκατεστημένο',
+  'Niet geïnstalleerd': 'Δεν είναι εγκατεστημένο',
+  'Binnenhalen': 'Λήψη',
+  'afgebroken': 'ακυρώθηκε',
+  'netwerkfout': 'σφάλμα δικτύου',
+  'door de beveiliging geweigerd': 'απορρίφθηκε από το επίπεδο ασφαλείας',
+  'controlesom klopt niet — probeer opnieuw':
+      'το άθροισμα ελέγχου δεν ταιριάζει — δοκιμάστε ξανά',
+  'schrijffout op schijf': 'σφάλμα εγγραφής δίσκου',
   'Transcript': 'Απομαγνητοφώνηση',
   'Opnieuw controleren': 'Έλεγχος ξανά',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1658,8 +1685,6 @@ const _dutchSourceAddEl = <String, String>{
   'Opname stoppen': 'Διακοπή εγγραφής',
   'Microfoon': 'Μικρόφωνο',
   'Systeemgeluid': 'Ήχος συστήματος',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Δημιουργήστε μεταγραφή μιας εγγραφής ή ενός υπάρχοντος αρχείου ήχου — ως επεξεργάσιμο έγγραφο Markdown, με σαφή επιλογή για το αν το πρωτότυπο διατηρείται. Τοπικά όπου είναι δυνατόν· ο δικός σας διακομιστής μόνο αν τον επιλέξετε. Οι πηγές εγγραφής και οι μηχανές έρχονται σε επόμενες εκδόσεις.',
   'Afbeeldingen omwisselen': 'Ανταλλαγή εικόνων',
   'Afbeelding links': 'Αριστερή εικόνα',
   'Breedte afbeeldingspaneel': 'Πλάτος πλαισίου εικόνας',

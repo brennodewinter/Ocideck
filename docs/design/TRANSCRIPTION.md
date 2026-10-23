@@ -76,10 +76,10 @@ answer to "where does the audio go".
   (#2512/#2513); the app shows what is installed and what a route needs.
 - **No mandatory server, cloud account, Ollama or Python install.** Local
   processing is an option everywhere it is proven feasible; a consciously
-  chosen server is a second route (§4.5), never a requirement.
+  chosen server is a second route (§4.3), never a requirement.
 - **The existing AI assistant is not a speech engine.** `AiClientService`
   speaks chat/completions; it never receives audio, transcript text, or model
-  bytes. An ASR server gets its own profile and protocol (§4.5). Any future
+  bytes. An ASR server gets its own profile and protocol (§4.3). Any future
   opt-in that would let AI Assist see transcripts is a separate design, not an
   assumption of this one.
 - **Android and iOS are out of scope.** They exist as Flutter project folders
@@ -477,6 +477,63 @@ The UI maps each type to a named next step (grant the permission / pick
 another source / install a model / choose a smaller route), which is what
 "an impossible route is explained beforehand" means mechanically.
 
+### 4.5 The local desktop engine — whisper.cpp (#2512)
+
+**Runtime.** The engine is the pinned `whisper-cli` binary from
+[whisper.cpp](https://github.com/ggml-org/whisper.cpp) **v1.9.5** (source
+archive SHA-256 `ff1a9053feb509ff9d7729703355541ae9690073a6b1c40eb692c962e0dc1720`;
+manifest in `native/whisper_cli/manifest.json`, built by
+`scripts/build_whisper_cli.sh`). v1.9.5 ships no usable upstream binaries, so
+we build from the pinned source: macOS produces a single static, universal
+(x86_64 + arm64) binary with Metal + Accelerate enabled; Linux and Windows
+build the same source with their native toolchain. Building from source —
+not vendoring a binary — is also what makes the runtime auditable in the
+SBOM (`tool/sbom_build.dart`, component group `native-runtime`).
+
+**Process boundary.** The engine runs as a **subprocess**, never linked in:
+a native crash kills a helper process, not the app, and no third-party code
+ever shares our address space. argv is fixed (`-m <model> -l <lang> -f
+<wav> -oj -of <dir>`) — no shell, no string interpolation. The child
+environment is an allowlist (`LC_ALL=C`, `HOME=<workdir>`): no `PATH`, no
+inherited credentials. stdout/stderr are capped, the run has a timeout, and
+kill/cancel maps to `Cancelled` while timeouts and non-zero exits map to
+`EngineUnavailable`/`CapacityExceeded` (§4.4). JSON output is parsed per
+segment (`timestamps`/`offsets`/`text`); whisper's leading segment spaces
+are preserved because they carry the word spacing.
+
+**Input.** WAV/PCM is the proven input — the same format `recording_staging`
+produces. Compressed containers return `DecodeFailed` until a decoder route
+is proven (#2515); the engine does not silently accept what it cannot read.
+
+**Model management.** Models are **never bundled** and never fetched
+implicitly. The catalog (`whisper_model.dart`) pins each model to a Hugging
+Face *revision* (`5359861c739e955e79d9a303bcbc70fb988958b1`), with byte
+size and SHA-256 per entry — the hash is the only admission ticket.
+Downloads are the module's one egress: user-initiated, HTTPS-only, NetGuard
+per redirect hop, streamed to a `.part` file that becomes the model only
+after size + SHA-256 verification. Storage lives in the app-support
+directory with path containment (`../../` cannot escape) and symlink
+refusal; `delete` is the only removal path.
+
+**Measured** on Apple Silicon (arm64, Metal), `whisper-cli` v1.9.5 static
+binary, Dutch spoken-Wikipedia WAV (CC BY-SA, 29.2 s, 16 kHz mono):
+
+| Model | Download | Disk peak RSS | Wall time | Speed | Dutch quality |
+|---|---|---|---|---|---|
+| `ggml-tiny.bin` | 74 MiB | ~268 MB | 0.43 s | ~68× RT | broken words, unusable for serious text |
+| `ggml-base.bin` | 142 MiB | ~378 MB | 0.36 s | ~81× RT | readable outline, frequent errors |
+| `ggml-small.bin` | 465 MiB | ~850 MB | 0.67 s | ~44× RT | good, residual word errors ("T Flot", "Rijnhoever") |
+| `ggml-large-v3-turbo.bin` | 1.5 GiB | ~1.9 GB | 1.27 s | ~23× RT | clean; recommended where memory allows |
+
+Model load is the dominant startup cost for turbo (812 ms of the 1.2 s);
+tiny/base load in ~50 ms. The catalog ships three of these (`small` as
+default, `large-v3-turbo`, `base`); `tiny` is left out because the measured
+output was not honest enough to offer. These are single-machine numbers —
+the catalog's tier labels (`light`/`balanced`/`accurate`) exist so the UI
+can warn before a 1.5 GiB download lands on a 4 GB machine, not to promise
+a measured result on every device. CPU-only operation (no Metal/Vulkan) is
+the fallback everywhere — speed drops, correctness does not.
+
 ---
 
 ## 5. Capability matrix
@@ -543,7 +600,7 @@ with the honest label "room capture may include speaker output".
 
 | Route | Status |
 |---|---|
-| Local desktop engine (whisper.cpp behind platform channel, #2512) | beschikbaar-path; model management user-driven, nothing bundled |
+| Local desktop engine (whisper.cpp `whisper-cli` subprocess, #2512) | beschikbaar on macOS arm64/x86_64 (measured, §4.5); Linux/Windows build from the same pinned source — real-hardware proof pending there |
 | Local web engine (WASM, #2513) | niet getest — whisper.wasm is proven for tiny/base-class models inside WASM memory and threading limits; heavier local models on web are not claimed ([whisper.wasm README](https://github.com/ggml-org/whisper.cpp/blob/master/examples/whisper.wasm/README.md)). WASM threads also need COOP/COEP isolation headers — a real constraint for the hosted bundle, checked on the actual deployment. |
 | Batch server (#2524) | proven per configured profile only; protocol + consent in §4.3 |
 | Live server (#2525) | proven per configured profile only; unproven protocol ⇒ route absent |
@@ -580,7 +637,7 @@ with the honest label "room capture may include speaker output".
 |---|---|
 | #2510 (grenzen, toestemming, verwijdering) | §2.3 consent model, §4.4 error taxonomy, §3.2 lifecycle |
 | #2511 (Markdown-resultaat) | §3.1 marker + provenance, §3.3 test requirements |
-| #2512 (lokale engine desktop) | §4.2 `local` engine kind, §5.3 |
+| #2512 (lokale engine desktop) | §4.2 `local` engine kind, §4.5 runtime/modelbeheer/metingen, §5.3 |
 | #2513 (web-inferentie bewijs) | §5.3 WASM row, §3.2 web storage bounds |
 | #2514 (instellingen-uitbreiding) | §1 module placement, §2.1 capability tiers, §5 matrix as in-app content |
 | #2515 (bestand → transcript) | §3.2 file-source lifecycle, `DecodeFailed`/`CapacityExceeded` |

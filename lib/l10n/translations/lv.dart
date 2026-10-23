@@ -1603,6 +1603,32 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Izveido ieraksta vai esoša audiofaila transkripciju — kā rediģējamu Markdown dokumentu ar skaidru izvēli, vai oriģināls tiek saglabāts. Lokāli, ja iespējams; savs serveris tikai tad, ja to izvēlies.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokāls runas modelis — paliek šajā ierīcē; nekas netiek sūtīts uz serveri',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Dzinējs: gatavs — lokālais palīgs ir klāt',
+  'Engine ontbreekt in deze installatie': 'Dzinējs trūkst šajā instalācijā',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Šai procesora arhitektūrai nav lokālā dzinēja',
+  'Engine: controleren…': 'Dzinējs: pārbauda…',
+  'Licht — snel, minder nauwkeurig': 'Viegls — ātrs, mazāk precīzs',
+  'Nauwkeurig — beste kwaliteit, groot': 'Precīzs — labākā kvalitāte, liels',
+  'Gebalanceerd — aanbevolen': 'Līdzsvarots — ieteicams',
+  'Bezig met binnenhalen': 'Notiek lejupielāde',
+  'Geïnstalleerd en getoetst': 'Instalēts un pārbaudīts',
+  'Geïnstalleerd': 'Instalēts',
+  'Niet geïnstalleerd': 'Nav instalēts',
+  'Binnenhalen': 'Lejupielādēt',
+  'afgebroken': 'atcelts',
+  'netwerkfout': 'tīkla kļūda',
+  'door de beveiliging geweigerd': 'noraidīja drošības slānis',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrolsumma neatbilst — mēģini vēlreiz',
+  'schrijffout op schijf': 'diska rakstīšanas kļūda',
   'Transcript': 'Transkripcija',
   'Opnieuw controleren': 'Pārbaudīt vēlreiz',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1631,8 +1657,6 @@ const _dutchSourceAddLv = <String, String>{
   'Opname stoppen': 'Apturēt ierakstīšanu',
   'Microfoon': 'Mikrofons',
   'Systeemgeluid': 'Sistēmas skaņa',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Izveidojiet ieraksta vai esoša audiofaila transkripciju — kā rediģējamu Markdown dokumentu, ar skaidru izvēli, vai oriģināls tiek saglabāts. Lokāli, kur iespējams; sava servere tikai tad, ja to izvēlaties. Ieraksta avoti un dzinēji sekos nākamajās versijās.',
   'Afbeeldingen omwisselen': 'Samainīt attēlus vietām',
   'Afbeelding links': 'Kreisais attēls',
   'Breedte afbeeldingspaneel': 'Attēla paneļa platums',

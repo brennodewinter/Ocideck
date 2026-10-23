@@ -1604,6 +1604,33 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Whisper': 'Whisper',
+  'MIT · whisper.cpp': 'MIT · whisper.cpp',
+  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':
+      'Skapa en transkription av en inspelning eller en befintlig ljudfil — som ett redigerbart Markdown-dokument, med ett tydligt val om originalet ska behållas. Lokalt där det går; en egen server bara om du väljer en.',
+  'Lokaal spraakmodel — blijft op dit apparaat; er gaat niets naar een server':
+      'Lokal talmodell — stannar på den här enheten; inget skickas till en server',
+  'Engine: gereed — de lokale helper is aanwezig':
+      'Motor: redo — den lokala hjälpen finns',
+  'Engine ontbreekt in deze installatie':
+      'Motorn saknas i den här installationen',
+  'Deze processorarchitectuur heeft geen lokale engine':
+      'Den här processorarkitekturen har ingen lokal motor',
+  'Engine: controleren…': 'Motor: kontrollerar…',
+  'Licht — snel, minder nauwkeurig': 'Lätt — snabb, mindre exakt',
+  'Nauwkeurig — beste kwaliteit, groot': 'Exakt — bästa kvalitet, stor',
+  'Gebalanceerd — aanbevolen': 'Balanserad — rekommenderas',
+  'Bezig met binnenhalen': 'Laddar ner',
+  'Geïnstalleerd en getoetst': 'Installerad och verifierad',
+  'Geïnstalleerd': 'Installerad',
+  'Niet geïnstalleerd': 'Inte installerad',
+  'Binnenhalen': 'Hämta',
+  'afgebroken': 'avbruten',
+  'netwerkfout': 'nätverksfel',
+  'door de beveiliging geweigerd': 'nekad av säkerhetslagret',
+  'controlesom klopt niet — probeer opnieuw':
+      'kontrollsumman stämmer inte — försök igen',
+  'schrijffout op schijf': 'skivskrivningsfel',
   'Transcript': 'Transkription',
   'Opnieuw controleren': 'Kontrollera igen',
   'Het audiobestand is verplaatst of verwijderd. Het transcript blijft volledig beschikbaar.':
@@ -1632,8 +1659,6 @@ const _dutchSourceAddSv = <String, String>{
   'Opname stoppen': 'Stoppa inspelningen',
   'Microfoon': 'Mikrofon',
   'Systeemgeluid': 'Systemljud',
-  'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest. De opnamebronnen en engines volgen in volgende versies.':
-      'Skapa en transkribering av en inspelning eller en befintlig ljudfil — som ett redigerbart Markdown-dokument, med ett tydligt val om originalet sparas. Lokalt där det är möjligt; din egen server bara om du väljer den. Inspelningskällor och motorer kommer i senare versioner.',
   'Afbeeldingen omwisselen': 'Byt plats på bilderna',
   'Afbeelding links': 'Vänster bild',
   'Breedte afbeeldingspaneel': 'Bildpanelens bredd',

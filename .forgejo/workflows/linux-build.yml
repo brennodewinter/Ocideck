@@ -129,6 +129,13 @@ jobs:
       - name: Linux-release bouwen
         run: flutter build linux --release
 
+      # whisper-cli-helper (#2512): uit de gepinde bron gebouwd en naast
+      # het hoofdbestand in de bundel gezet — dezelfde stap als
+      # `make build-linux`, hier los omdat de workflow flutter direct
+      # aanroept. cmake/clang zijn er al: `flutter build linux` eist ze.
+      - name: whisper-cli-helper in de bundel
+        run: scripts/bundle_whisper_cli.sh linux
+
       # Toets dat de docs in de bundel byte-voor-byte gelijk zijn aan docs/ op
       # schijf, zodat een incrementele build nooit verouderde documentatie
       # meelevert.

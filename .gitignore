@@ -79,3 +79,5 @@ tool/marp-check/node_modules/
 
 # Per-package coverage written by `make test-packages`
 packages/*/coverage/
+native/whisper_cli/bin/
+native/whisper_cli/build/

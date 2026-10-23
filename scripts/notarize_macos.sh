@@ -397,6 +397,15 @@ while IFS= read -r -d '' f; do
   codesign --force --options runtime --timestamp -s "$IDENTITY" "$f"
 done < <(find "$APP/Contents/Frameworks" -maxdepth 1 -mindepth 1 \
   \( -name '*.framework' -o -name '*.dylib' \) -print0)
+# De whisper-cli-helper uit #2512 is een apart uitvoerbaar bestand onder
+# Contents/Helpers en moet vóór de buitenbundel getekend zijn — inside-out,
+# zelfde hardened-runtime vlaggen.
+if [[ -d "$APP/Contents/Helpers" ]]; then
+  while IFS= read -r -d '' f; do
+    echo "  ${f#"$APP"/}"
+    codesign --force --options runtime --timestamp -s "$IDENTITY" "$f"
+  done < <(find "$APP/Contents/Helpers" -type f -perm -u+x -print0)
+fi
 codesign --force --options runtime --timestamp \
   --entitlements "$ENTITLEMENTS" -s "$IDENTITY" "$APP"
 
