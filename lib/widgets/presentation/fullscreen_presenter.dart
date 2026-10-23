@@ -1131,6 +1131,4 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       ),
     );
   }
-
-  // ── Rasteroverzicht (snel naar een slide springen) ───────────────────────
 }

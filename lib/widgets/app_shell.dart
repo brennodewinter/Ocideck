@@ -875,10 +875,7 @@ class _AppShellState extends ConsumerState<AppShell> {
 
     _listenUnsavedWork(context, ref);
 
-    // Twee post-open meldingen over wáár het bestand belandde — byte-identieke
-    // kopie elders, of terugval op de documentenmap toen de ingestelde thuismap
-    // onbereikbaar bleek. Ze delen het luister-patroon en wonen als top-level
-    // helpers naast [_listenChartDataWarning] om app_shell.dart klein te houden.
+    // Top-level naast [_listenChartDataWarning]: dit bestand zit op zijn plafond.
     _listenDuplicateCopyNotice(context, ref);
     _listenImportHomeUnavailable(context, ref);
 
