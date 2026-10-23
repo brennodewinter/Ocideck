@@ -1620,6 +1620,141 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'dit platform': 'haec suggesta',
+  'API-sleutel': 'Clavis API',
+  'Afgebroken': 'Interruptum',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Solum profilum servatum et activum infra — per singula officia rursus permissionem petit',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Solum dum conventus activus cum fonte soni systematis probato — ille fons hic nondum praebitus',
+  'Batch / live': 'Massa / vivum',
+  'Bestaand audio/videobestand': 'Fasciculus audiovisualis iam inveniens',
+  'Beveiligde context': 'Contextus tutus',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Confirma vocem ad hanc destinationem externam certam ire posse — haec sola permissio hac via petitur.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Confirma hanc orationem in tua rete esse; tunc modo oratio privata repagulum retis transire potest.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Primum confirma vocem ad hoc servitium externum ire posse',
+  'Bevestiging vereist': 'Confirmatio necessaria',
+  'Cross-origin isolatie': 'Seclusio trans-origines',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'Clavis API ut caput securum it, non in URL. Eadem confirmatio est quam omnis transcriptio postulabit.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Servitium externum https postulat — http foras inacceptabile est',
+  'Eigen ASR-server': 'Server ASR proprius',
+  'Eigen naam (optioneel)': 'Nomen proprium (non necesse)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Server proprius in rete fida (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Terminus deest vel invalidus — utere URL http(s) nudo sine nomine usoris aut tessera',
+  'Engine': 'Machina',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profilum servatum sed clausum est — elige genus server ad emendandum vel utendum.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Unum secundum soni testi silentis (~32 kB) mittitur ad',
+  'Externe ASR-dienst (https)': 'Servitium ASR externum (https)',
+  'Externe dienst bevestigd': 'Servitium externum confirmatum',
+  'Geen server (lokaal houden)': 'Nullo server (manere localiter)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Nullus server electus — transcriptio localis manet.',
+  'Geen serverklasse gekozen': 'Nullum genus server electum',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'Iter LAN primum "Oratio interna fida" postulat',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Localiter — nulla vox hac machina egreditur',
+  'Lokaal — op dit apparaat': 'Localiter — in hac machina',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback ad hanc ipsam machinam solum ire potest — utere 127.0.0.1 aut localhost',
+  'Microfoon + systeemgeluid': 'Microphonum + sonus systematis',
+  'Microfoonpermissie': 'Permissio microphoni',
+  'Model': 'Exemplar',
+  'Modellen': 'Exemplaria',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modulus clausus — nullae deductiones, nullum microphonum, nulla officia latentia. Optiones infra ad conspectum et purgationem visibiles manent.',
+  'OciDeck-gesprek': 'Conloquium OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Ignotum — systema permissionem ad primam solum registrationem petit; aperire Optiones nullam quaestionem excitat',
+  'Op dit apparaat (loopback)': 'In hac machina (loopback)',
+  'Opslag en retentie': 'Repositio et retentio',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Pro electione et clausum nisi accendatur: vox tunc ad server transcriptionis tuo arbitrio it. Locale manet defalte; numquam inter duo recursus tacitus est.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Solum profilum activum petitiones mittere potest; clausum est: nihil exit.',
+  'Platform': 'Suggestum',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Porta sinit: petitiones exire possunt',
+  'Profiel actief': 'Profilum activum',
+  'Profiel opslaan': 'Profilum serva',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profilum clausum est — accende "Profilum activum" ut mittas',
+  'Route': 'Iter',
+  'Server antwoordde': 'Server respondit',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Server respondit transcriptione vacua — ut silentio speratur',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Server attingibilis et ut server HTTP respondit',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Server attingibilis sed authentificationem postulat — clavem API inspice vel imple',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Server inattingibilis vel rennuit — inspice oram, TLS et num server currat',
+  'Server weigerde of was onbereikbaar':
+      'Server rennuit vel inattingibilis fuit',
+  'Serveradres (basis-URL)': 'Oratio server (URL basis)',
+  'Serverklasse': 'Genus server',
+  'Serverprofiel niet bruikbaar': 'Profilum server inutile',
+  'Standaard: er vertrekt geen audio': 'Defalte: nulla vox machinam egreditur',
+  'Status op dit apparaat': 'Status in hac machina',
+  'Systeem-/appgeluid': 'Sonus systematis/app',
+  'Test met echte audio': 'Proba cum sono vero',
+  'Test mislukt': 'Proba defecit',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transcriptio in tabulas it; num sonus originalis servetur, in Servando eligis',
+  'Upload te groot': 'Oneratio nimis magna',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Ab hac pagina web solum https (aut loopback) potest — navigator http ad hanc orationem obstruit',
+  'Verbinding testen (zonder audio)': 'Connexionem proba (sine sono)',
+  'Vertrouwd intern adres': 'Oratio interna fida',
+  'Vrije opslag': 'Spatium liberum',
+  'aanwezig': 'praesens',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'praesens, sed nullum receptaculum soni utile',
+  'batch én provisionele live-tekst': 'massa et textus vivus provisorius',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'transcriptio per massam; textus vivus hac via non potest',
+  'beschikbaar': 'praebitum',
+  'controleren…': 'inspiciens…',
+  'detecteren…': 'deprehendens…',
+  'geen engine beschikbaar': 'nulla machina praebita',
+  'geïnstalleerd': 'institutum',
+  'geïnstalleerd en getoetst': 'institutum et probatum',
+  'ja — de lokale wasm-engine kan draaien':
+      'ita — machina wasm localis currere potest',
+  'ja — https': 'ita — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'localis — haec architectura processoris machinam non habet',
+  'lokaal — geen cross-origin isolatie':
+      'localis — nulla seclusio trans-origines',
+  'lokaal — gereed': 'localis — paratus',
+  'lokaal — helper ontbreekt in deze installatie':
+      'localis — adiutor in hac instauratione deest',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'minime — hospitalitas caret COOP/COEP; coniectura localis currere nequit (vide HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'minime — sine https nullum armillarium et nulla probatio exemplaris',
+  'niet beschikbaar op deze opstelling': 'non praebitum in hac conformatione',
+  'niet geïnstalleerd': 'non institutum',
+  'nog niet beschikbaar op dit platform': 'nondum praebitum in hoc suggesto',
+  'nog niet bewezen op dit apparaat': 'nondum probatum in hac machina',
+  'ontbreekt — opname in de browser kan niet':
+      'deest — registratio in navigatore fieri nequit',
+  'opgeslagen — leeg laten houdt hem':
+      'servata — vacuum relinquere eam retinet',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'in linea originis apparet',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'verisimiliter — permissio primo usu sequitur',
+  'wordt binnengehaald': 'defertur',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Hic navigator vel hospitium machinam locutionis localem agere non potest (isolatio cross-origin deest)',
   'Whisper': 'Whisper',

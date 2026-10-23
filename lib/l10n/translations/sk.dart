@@ -1611,6 +1611,141 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'dit platform': 'tejto platforme',
+  'API-sleutel': 'API kľúč',
+  'Afgebroken': 'Zrušené',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Len uložený, aktívny profil nižšie — pri každej úlohe znova žiada o povolenie',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Možné len počas aktívnej schôdze s overeným zdrojom systémového zvuku — ten zdroj tu zatiaľ nie je dostupný',
+  'Batch / live': 'Dávka / naživo',
+  'Bestaand audio/videobestand': 'Existujúci audio-/videosúbor',
+  'Beveiligde context': 'Zabezpečený kontext',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Potvrďte, že zvuk smie ísť na tento konkrétny externý cieľ — to je jediné oprávnenie, o ktoré táto cesta žiada.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Potvrďte, že táto adresa je vo vašej vlastnej sieti; až potom smie súkromná adresa prejsť sieťovým blokom.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Najprv potvrďte, že zvuk smie ísť k tejto externej službe',
+  'Bevestiging vereist': 'Vyžaduje sa potvrdenie',
+  'Cross-origin isolatie': 'Cross-origin izolácia',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'API kľúč ide ako zabezpečená hlavička, nie v URL. Je to rovnaké potvrdenie, aké bude žiadať každá transkripčná úloha.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Externá služba vyžaduje https — http von je neprijateľné',
+  'Eigen ASR-server': 'Vlastný ASR server',
+  'Eigen naam (optioneel)': 'Vlastný názov (voliteľné)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Vlastný server v dôveryhodnej sieti (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint chýba alebo je neplatný — použite holú http(s) URL bez používateľského mena či hesla',
+  'Engine': 'Engine',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profil je uložený, ale vypnutý — zvoľte triedu servera na jeho úpravu alebo použitie.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Odosiela sa jedna sekunda tichého testovacieho audia (~32 kB) na',
+  'Externe ASR-dienst (https)': 'Externá ASR služba (https)',
+  'Externe dienst bevestigd': 'Externá služba potvrdená',
+  'Geen server (lokaal houden)': 'Žiadny server (zostať lokálny)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Nebol vybraný server — transkripcia zostáva lokálna.',
+  'Geen serverklasse gekozen': 'Nebola zvolená trieda servera',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN cesta vyžaduje najprv „Dôveryhodná interná adresa“',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokálne — žiadny zvuk neopúšťa toto zariadenie',
+  'Lokaal — op dit apparaat': 'Lokálne — na tomto zariadení',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback smie ísť len na toto zariadenie — použite 127.0.0.1 alebo localhost',
+  'Microfoon + systeemgeluid': 'Mikrofón + systémový zvuk',
+  'Microfoonpermissie': 'Oprávnenie k mikrofónu',
+  'Model': 'Model',
+  'Modellen': 'Modely',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modul je vypnutý — žiadne sťahovania, žiadny mikrofón, žiadne úlohy na pozadí. Nastavenia nižšie zostávajú viditeľné na prehľad a upratovanie.',
+  'OciDeck-gesprek': 'Hovor OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Neznáme — systém žiada oprávnenie až pri prvom nahrávaní; otvorenie Nastavení nespustí výzvu',
+  'Op dit apparaat (loopback)': 'Na tomto zariadení (loopback)',
+  'Opslag en retentie': 'Ukladanie a uchovávanie',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Voliteľné a vypnuté, kým nezapnete: zvuk potom ide na transkripčný server, ktorý si vyberiete. Lokálne je predvolené; medzi oboma nikdy nie je tichý fallback.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Len aktívny profil môže odosielať požiadavky; vypnuté znamená: nič neodchádza.',
+  'Platform': 'Platforma',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Brána povoľuje: požiadavky môžu odísť',
+  'Profiel actief': 'Profil aktívny',
+  'Profiel opslaan': 'Uložiť profil',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profil je vypnutý — na odosielanie zapnite „Profil aktívny“',
+  'Route': 'Trasa',
+  'Server antwoordde': 'Server odpovedal',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Server odpovedal prázdnym transkriptom — pri tichom testovacom zvuku očakávané',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Server dostupný a odpovedal ako HTTP server',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Server dostupný, ale vyžaduje overenie — skontrolujte alebo vyplňte API kľúč',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Server nedostupný alebo odmietol — skontrolujte adresu, TLS a či server beží',
+  'Server weigerde of was onbereikbaar': 'Server odmietol alebo bol nedostupný',
+  'Serveradres (basis-URL)': 'Adresa servera (základná URL)',
+  'Serverklasse': 'Trieda servera',
+  'Serverprofiel niet bruikbaar': 'Profil servera nie je použiteľný',
+  'Standaard: er vertrekt geen audio':
+      'Predvolené: žiadny zvuk neopúšťa zariadenie',
+  'Status op dit apparaat': 'Stav na tomto zariadení',
+  'Systeem-/appgeluid': 'Systémový/aplikačný zvuk',
+  'Test met echte audio': 'Test so skutočným audiom',
+  'Test mislukt': 'Test zlyhal',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkript ide do decku; či sa audio-originál uchová, zvolíte pri Uložení',
+  'Upload te groot': 'Nahrávanie príliš veľké',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Z tejto webovej stránky je možné len https (alebo loopback) — prehliadač blokuje http na túto adresu',
+  'Verbinding testen (zonder audio)': 'Otestovať spojenie (bez audia)',
+  'Vertrouwd intern adres': 'Dôveryhodná interná adresa',
+  'Vrije opslag': 'Voľné úložisko',
+  'aanwezig': 'prítomný',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'prítomný, ale žiadny použiteľný audiokontajner',
+  'batch én provisionele live-tekst': 'dávkovo aj provizórny živý text',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'dávková transkripcia; živý text táto cesta nedokáže',
+  'beschikbaar': 'dostupný',
+  'controleren…': 'kontroluje sa…',
+  'detecteren…': 'detekuje sa…',
+  'geen engine beschikbaar': 'žiadna engine k dispozícii',
+  'geïnstalleerd': 'nainštalované',
+  'geïnstalleerd en getoetst': 'nainštalované a overené',
+  'ja — de lokale wasm-engine kan draaien':
+      'áno — lokálny wasm engine môže bežať',
+  'ja — https': 'áno — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokálny — táto architektúra procesora nemá engine',
+  'lokaal — geen cross-origin isolatie':
+      'lokálny — žiadna cross-origin izolácia',
+  'lokaal — gereed': 'lokálny — pripravený',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokálny — v tejto inštalácii chýba helper',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'nie — hosting chýba COOP/COEP; lokálna inferencia nemôže bežať (pozri HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'nie — bez https žiadna kľúčenka ani overenie modelu',
+  'niet beschikbaar op deze opstelling': 'v tomto nastavení nedostupné',
+  'niet geïnstalleerd': 'nenainštalované',
+  'nog niet beschikbaar op dit platform':
+      'na tejto platforme zatiaľ nedostupné',
+  'nog niet bewezen op dit apparaat': 'na tomto zariadení zatiaľ nepreukázané',
+  'ontbreekt — opname in de browser kan niet':
+      'chýba — nahrávanie v prehliadači nie je možné',
+  'opgeslagen — leeg laten houdt hem': 'uložené — nechať prázdne ho zachová',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'objaví sa v riadku proveniencie',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'pravdepodobne — oprávnenie príde pri prvom použití',
+  'wordt binnengehaald': 'sťahuje sa',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Tento prehliadač alebo hosting nemôže spustiť lokálny rečový engine (chýba cross-origin izolácia)',
   'Whisper': 'Whisper',

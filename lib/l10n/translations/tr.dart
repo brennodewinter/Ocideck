@@ -2513,6 +2513,138 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'dit platform': 'bu platformda',
+  'API-sleutel': 'API anahtarı',
+  'Afgebroken': 'İptal edildi',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Yalnızca aşağıdaki kayıtlı, etkin profil — her görevde yeniden izin ister',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Yalnızca kanıtlanmış bir sistem sesi kaynağıyla aktif toplantı sırasında mümkün — o kaynak burada henüz mevcut değil',
+  'Batch / live': 'Toplu / canlı',
+  'Bestaand audio/videobestand': 'Mevcut ses/video dosyası',
+  'Beveiligde context': 'Güvenli bağlam',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Sesin bu belirli harici hedefe gidebileceğini onaylayın — bu rotanın istediği tek izin budur.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Bu adresin kendi ağınızda olduğunu onaylayın; ancak o zaman özel bir adres ağ engelini geçebilir.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Önce sesin bu harici servise gidebileceğini onaylayın',
+  'Bevestiging vereist': 'Onay gerekli',
+  'Cross-origin isolatie': 'Cross-origin izolasyonu',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'API anahtarı URL\'de değil, güvenli bir başlık olarak gider. Bu, her transkripsiyon görevinin isteyeceği aynı onaydır.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Harici bir servis https gerektirir — dışarıya http kabul edilemez',
+  'Eigen ASR-server': 'Kendi ASR sunucusu',
+  'Eigen naam (optioneel)': 'Özel ad (isteğe bağlı)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Güvenilir ağda kendi sunucusu (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint eksik veya geçersiz — içinde kullanıcı adı veya şifre olmayan çıplak bir http(s) URL kullanın',
+  'Engine': 'Motor',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Bir profil kayıtlı ama devre dışı — düzenlemek veya kullanmak için bir sunucu sınıfı seçin.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Bir saniyelik sessiz test sesi (~32 kB) şuraya gönderiliyor:',
+  'Externe ASR-dienst (https)': 'Harici ASR hizmeti (https)',
+  'Externe dienst bevestigd': 'Harici hizmet onaylandı',
+  'Geen server (lokaal houden)': 'Sunucu yok (yerel kalsın)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Sunucu seçilmedi — transkripsiyon yerel kalır.',
+  'Geen serverklasse gekozen': 'Sunucu sınıfı seçilmedi',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN rotası önce "Güvenilir dahili adres" ister',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Yerel — hiçbir ses bu cihazdan çıkmaz',
+  'Lokaal — op dit apparaat': 'Yerel — bu cihazda',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback yalnızca bu cihaza gidebilir — 127.0.0.1 veya localhost kullanın',
+  'Microfoon + systeemgeluid': 'Mikrofon + sistem sesi',
+  'Microfoonpermissie': 'Mikrofon izni',
+  'Model': 'Model',
+  'Modellen': 'Modeller',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modül kapalı — indirme yok, mikrofon yok, arka plan görevi yok. Aşağıdaki ayarlar genel bakış ve temizlik için görünür kalır.',
+  'OciDeck-gesprek': 'OciDeck araması',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Bilinmiyor — sistem yalnızca ilk kayıtta izin ister; Ayarları açmak hiçbir istem tetiklemez',
+  'Op dit apparaat (loopback)': 'Bu cihazda (loopback)',
+  'Opslag en retentie': 'Depolama ve saklama',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'İsteğe bağlı ve siz açmadan kapalı: ses o zaman kendi seçtiğiniz bir transkripsiyon sunucusuna gider. Yerel varsayılan olarak kalır; ikisi arasında asla sessiz bir geri dönüş yoktur.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Yalnızca etkin profil istek gönderebilir; kapalı demek: hiçbir şey çıkmaz.',
+  'Platform': 'Platform',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Kapı izin veriyor: istekler gönderilebilir',
+  'Profiel actief': 'Profil etkin',
+  'Profiel opslaan': 'Profili kaydet',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profil kapalı — göndermek için "Profil etkin"i açın',
+  'Route': 'Rota',
+  'Server antwoordde': 'Sunucu yanıtladı',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Sunucu boş transkriptle yanıtladı — sessiz test sesi için beklenen',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Sunucu erişilebilir ve HTTP sunucusu olarak yanıtladı',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Sunucu erişilebilir ama kimlik doğrulama istiyor — API anahtarını kontrol edin veya girin',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Sunucu erişilemez veya reddetti — adresi, TLS\'yi ve sunucunun çalıştığını kontrol edin',
+  'Server weigerde of was onbereikbaar': 'Sunucu reddetti veya erişilemezdi',
+  'Serveradres (basis-URL)': 'Sunucu adresi (temel URL)',
+  'Serverklasse': 'Sunucu sınıfı',
+  'Serverprofiel niet bruikbaar': 'Sunucu profili kullanılamaz',
+  'Standaard: er vertrekt geen audio': 'Varsayılan: ses cihazdan çıkmaz',
+  'Status op dit apparaat': 'Bu cihazdaki durum',
+  'Systeem-/appgeluid': 'Sistem/uygulama sesi',
+  'Test met echte audio': 'Gerçek sesle test',
+  'Test mislukt': 'Test başarısız',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkript deck\'e girer; ses orijinalinin de saklanıp saklanmayacağını Kaydet\'te siz seçersiniz',
+  'Upload te groot': 'Yükleme çok büyük',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Bu web sayfasından yalnızca https (veya loopback) mümkün — tarayıcı bu adrese http\'yi engeller',
+  'Verbinding testen (zonder audio)': 'Bağlantıyı test et (ses yok)',
+  'Vertrouwd intern adres': 'Güvenilir dahili adres',
+  'Vrije opslag': 'Boş depolama',
+  'aanwezig': 'mevcut',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'mevcut ama kullanılabilir ses kapsayıcı yok',
+  'batch én provisionele live-tekst': 'toplu ve geçici canlı metin',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'toplu transkripsiyon; canlı metin bu rotada olmaz',
+  'beschikbaar': 'kullanılabilir',
+  'controleren…': 'kontrol ediliyor…',
+  'detecteren…': 'algılanıyor…',
+  'geen engine beschikbaar': 'kullanılabilir motor yok',
+  'geïnstalleerd': 'kurulu',
+  'geïnstalleerd en getoetst': 'kurulu ve doğrulanmış',
+  'ja — de lokale wasm-engine kan draaien':
+      'evet — yerel wasm motoru çalışabilir',
+  'ja — https': 'evet — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'yerel — bu işlemci mimarisinin motoru yok',
+  'lokaal — geen cross-origin isolatie': 'yerel — cross-origin izolasyonu yok',
+  'lokaal — gereed': 'yerel — hazır',
+  'lokaal — helper ontbreekt in deze installatie':
+      'yerel — bu kurulumda yardımcı eksik',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'hayır — hosting COOP/COEP eksik; yerel çıkarım çalışamaz (bkz. HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'hayır — https olmadan anahtarlık ve model doğrulaması yok',
+  'niet beschikbaar op deze opstelling': 'bu kurulumda kullanılamaz',
+  'niet geïnstalleerd': 'kurulu değil',
+  'nog niet beschikbaar op dit platform': 'bu platformda henüz mevcut değil',
+  'nog niet bewezen op dit apparaat': 'bu cihazda henüz kanıtlanmadı',
+  'ontbreekt — opname in de browser kan niet':
+      'yok — tarayıcıda kayıt mümkün değil',
+  'opgeslagen — leeg laten houdt hem': 'kaydedildi — boş bırakmak onu tutar',
+  'server': 'sunucu',
+  'verschijnt in de provenienceregel': 'kaynak satırında görünür',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'muhtemelen — izin ilk kullanımda gelir',
+  'wordt binnengehaald': 'indiriliyor',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Bu tarayıcı veya barındırma yerel bir konuşma motoru çalıştıramaz (cross-origin izolasyonu eksik)',
   'Whisper': 'Whisper',

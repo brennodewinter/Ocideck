@@ -1,0 +1,39 @@
+{
+ "additions": {
+  "dit platform": {
+   "en": "this platform",
+   "de": "dieser Plattform",
+   "fr": "cette plateforme",
+   "es": "esta plataforma",
+   "it": "questa piattaforma",
+   "pt": "nesta plataforma",
+   "pl": "tej platformie",
+   "sv": "denna plattform",
+   "da": "denne platform",
+   "fi": "tällä alustalla",
+   "et": "sellel platvormil",
+   "lv": "šajā platformā",
+   "lt": "šioje platformoje",
+   "cs": "této platformě",
+   "sk": "tejto platforme",
+   "sl": "tej platformi",
+   "hr": "ovoj platformi",
+   "hu": "ezen a platformon",
+   "ro": "această platformă",
+   "bg": "тази платформа",
+   "el": "αυτή την πλατφόρμα",
+   "uk": "цій платформі",
+   "tr": "bu platformda",
+   "id": "platform ini",
+   "fy": "dit platfoarm",
+   "gsw": "dere Plattform",
+   "pap": "e plataforma akí",
+   "ga": "an t-ardán seo",
+   "la": "haec suggesta",
+   "mt": "din il-pjattaforma"
+  }
+ },
+ "unchanged": [
+  "web"
+ ]
+}

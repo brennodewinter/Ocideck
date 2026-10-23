@@ -811,6 +811,138 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'dit platform': 'this platform',
+  'API-sleutel': 'API key',
+  'Afgebroken': 'Cancelled',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Only the saved, active profile below — it asks permission again per task',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Only possible during an active meeting with a proven system audio source — that source is not available here yet',
+  'Batch / live': 'Batch / live',
+  'Bestaand audio/videobestand': 'Existing audio/video file',
+  'Beveiligde context': 'Secure context',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Confirm that audio may go to this specific external destination — that is the only permission this route asks for.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Confirm that this address is on your own network; only then may a private address pass the network block.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'First confirm that audio may go to this external service',
+  'Bevestiging vereist': 'Confirmation required',
+  'Cross-origin isolatie': 'Cross-origin isolation',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'The API key travels as a secured header, not in the URL. This is the same confirmation every transcription task will ask for.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'An external service requires https — http to the outside is unacceptable',
+  'Eigen ASR-server': 'Own ASR server',
+  'Eigen naam (optioneel)': 'Custom name (optional)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Own server on a trusted network (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint missing or invalid — use a bare http(s) URL without username or password in it',
+  'Engine': 'Engine',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'A profile is saved but disabled — choose a server class to edit or use it.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'One second of silent test audio (~32 kB) is sent to',
+  'Externe ASR-dienst (https)': 'External ASR service (https)',
+  'Externe dienst bevestigd': 'External service confirmed',
+  'Geen server (lokaal houden)': 'No server (keep local)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'No server chosen — transcription stays local.',
+  'Geen serverklasse gekozen': 'No server class chosen',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'The LAN route first requires "Trusted internal address"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Local — no audio leaves this device',
+  'Lokaal — op dit apparaat': 'Local — on this device',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback may only go to this device itself — use 127.0.0.1 or localhost',
+  'Microfoon + systeemgeluid': 'Microphone + system audio',
+  'Microfoonpermissie': 'Microphone permission',
+  'Model': 'Model',
+  'Modellen': 'Models',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Module is off — no downloads, no microphone, no background tasks. The settings below stay findable for overview and cleanup.',
+  'OciDeck-gesprek': 'OciDeck call',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Unknown — the system asks permission only at the first recording; opening Settings triggers no prompt',
+  'Op dit apparaat (loopback)': 'On this device (loopback)',
+  'Opslag en retentie': 'Storage and retention',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Optional and off unless you enable it: audio then goes to a transcription server of your own choosing. Local remains the default; there is never a silent fallback between the two.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Only an active profile can send requests; off means: nothing leaves.',
+  'Platform': 'Platform',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Gate allows: requests may leave',
+  'Profiel actief': 'Profile active',
+  'Profiel opslaan': 'Save profile',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profile is off — enable "Profile active" to send',
+  'Route': 'Route',
+  'Server antwoordde': 'Server answered',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Server answered with an empty transcript — expected for silent test audio',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Server reachable and answered as an HTTP server',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Server reachable but requires authentication — check or fill in the API key',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Server unreachable or refused — check the address, TLS and whether the server is running',
+  'Server weigerde of was onbereikbaar': 'Server refused or was unreachable',
+  'Serveradres (basis-URL)': 'Server address (base URL)',
+  'Serverklasse': 'Server class',
+  'Serverprofiel niet bruikbaar': 'Server profile not usable',
+  'Standaard: er vertrekt geen audio': 'Default: no audio leaves the device',
+  'Status op dit apparaat': 'Status on this device',
+  'Systeem-/appgeluid': 'System/app audio',
+  'Test met echte audio': 'Test with real audio',
+  'Test mislukt': 'Test failed',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'The transcript goes into the deck; whether the audio original is kept too is your choice at Save',
+  'Upload te groot': 'Upload too large',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'From this web page only https (or loopback) is possible — the browser blocks http to this address',
+  'Verbinding testen (zonder audio)': 'Test connection (no audio)',
+  'Vertrouwd intern adres': 'Trusted internal address',
+  'Vrije opslag': 'Free storage',
+  'aanwezig': 'present',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'present, but no usable audio container',
+  'batch én provisionele live-tekst': 'batch and provisional live text',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'batch transcription; live text is not possible on this route',
+  'beschikbaar': 'available',
+  'controleren…': 'checking…',
+  'detecteren…': 'detecting…',
+  'geen engine beschikbaar': 'no engine available',
+  'geïnstalleerd': 'installed',
+  'geïnstalleerd en getoetst': 'installed and verified',
+  'ja — de lokale wasm-engine kan draaien':
+      'yes — the local wasm engine can run',
+  'ja — https': 'yes — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'local — this processor architecture has no engine',
+  'lokaal — geen cross-origin isolatie': 'local — no cross-origin isolation',
+  'lokaal — gereed': 'local — ready',
+  'lokaal — helper ontbreekt in deze installatie':
+      'local — helper missing from this installation',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'no — hosting lacks COOP/COEP; local inference cannot run (see HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'no — without https no keychain and no model verification',
+  'niet beschikbaar op deze opstelling': 'not available in this setup',
+  'niet geïnstalleerd': 'not installed',
+  'nog niet beschikbaar op dit platform': 'not yet available on this platform',
+  'nog niet bewezen op dit apparaat': 'not yet proven on this device',
+  'ontbreekt — opname in de browser kan niet':
+      'missing — browser recording is not possible',
+  'opgeslagen — leeg laten houdt hem': 'stored — leaving it empty keeps it',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'appears in the provenance line',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'probably — permission follows on first use',
+  'wordt binnengehaald': 'being fetched',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'This browser or hosting cannot run a local speech engine (cross-origin isolation is missing)',
   'Whisper': 'Whisper',

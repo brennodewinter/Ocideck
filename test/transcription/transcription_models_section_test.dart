@@ -45,7 +45,7 @@ void main() {
 
   tearDown(() => temp.deleteSync(recursive: true));
 
-  Widget app() => ProviderScope(
+  Widget app({bool moduleEnabled = true}) => ProviderScope(
     overrides: [
       transcriptionModelStoreProvider.overrideWithValue(store),
       transcriptionModelDownloaderProvider.overrideWithValue(
@@ -66,7 +66,9 @@ void main() {
         ...GlobalMaterialLocalizations.delegates,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const Scaffold(body: TranscriptionModelsSection()),
+      home: Scaffold(
+        body: TranscriptionModelsSection(moduleEnabled: moduleEnabled),
+      ),
     ),
   );
 
@@ -109,6 +111,21 @@ void main() {
       ctx,
     ).read(transcriptionModelManagerProvider);
     expect(mirror[model.id]?.downloading, isTrue);
+  });
+
+  testWidgets('module uit = Binnenhalen uit, verwijderen blijft kunnen', (
+    tester,
+  ) async {
+    await tester.pumpWidget(app(moduleEnabled: false));
+    await refresh(tester);
+    await tester.pumpAndSettle();
+    final button = tester.widget<TextButton>(
+      find.ancestor(
+        of: find.text('Binnenhalen'),
+        matching: find.byType(TextButton),
+      ),
+    );
+    expect(button.onPressed, isNull);
   });
 
   testWidgets('voltooide download → Geïnstalleerd; vuilnis → weer afwezig', (

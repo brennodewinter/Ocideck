@@ -1598,6 +1598,141 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'dit platform': 'sellel platvormil',
+  'API-sleutel': 'API-võti',
+  'Afgebroken': 'Katkestatud',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Ainult salvestatud, aktiivne profiil allpool — ta küsib luba uuesti iga ülesande kohta',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Võimalik vaid aktiivse koosoleku ajal tõestatud süsteemiheliallikaga — seda allikat pole siin veel saadaval',
+  'Batch / live': 'Pakk / reaalajas',
+  'Bestaand audio/videobestand': 'Olemasolev heli-/videofail',
+  'Beveiligde context': 'Turvaline kontekst',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Kinnita, et heli võib minna sellele konkreetsele välisele sihtkohale — see on ainus luba, mida see tee küsib.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Kinnita, et see aadress on teie enda võrgus; alles siis võib privaatne aadress võrgu blokaadi läbida.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Kinnita esmalt, et heli võib minna sellesse välise teenusesse',
+  'Bevestiging vereist': 'Nõutav kinnitus',
+  'Cross-origin isolatie': 'Cross-origin isolatsioon',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'API-võti läheb turvatud päisena, mitte URL-is. See on sama kinnitus, mida iga transkriptsiooniteühis küsib.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Väline teenus nõuab https-i — http väljapoole on vastuvõetamatu',
+  'Eigen ASR-server': 'Oma ASR-server',
+  'Eigen naam (optioneel)': 'Enda nimi (valikuline)',
+  'Eigen server in vertrouwd netwerk (LAN)': 'Oma server usaldusvõrgus (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Lõpppunkt puudub või on vigane — kasuta paljast http(s)-URL-i ilma kasutajanime ega salasõnata',
+  'Engine': 'Mootor',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profiil on salvestatud, kuid välja lülitatud — vali serveriklass, et seda muuta või kasutada.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Saadetakse üks sekund vaikset testheli (~32 kB) aadressile',
+  'Externe ASR-dienst (https)': 'Väline ASR-teenus (https)',
+  'Externe dienst bevestigd': 'Väline teenus kinnitatud',
+  'Geen server (lokaal houden)': 'Serverit pole (jää kohalikuks)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Serverit pole valitud — transkriptsioon jääb kohalikuks.',
+  'Geen serverklasse gekozen': 'Serveriklassi pole valitud',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN-tee nõuab esmalt "Usaldatud sisemine aadress"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Kohalik — heli ei lahku sellest seadmest',
+  'Lokaal — op dit apparaat': 'Kohalik — selles seadmes',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback võib minna ainult sellesse seadmesse — kasuta 127.0.0.1 või localhost',
+  'Microfoon + systeemgeluid': 'Mikrofon + süsteemiheli',
+  'Microfoonpermissie': 'Mikrofoni luba',
+  'Model': 'Mudel',
+  'Modellen': 'Mudelid',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Moodul on väljas — pole allalaadimisi, mikrofoni ega taustatöid. Allolevad seaded jäävad leitavaks ülevaate ja koristuse jaoks.',
+  'OciDeck-gesprek': 'OciDecki kõne',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Tundmatu — süsteem küsib luba alles esimesel salvestusel; seadete avamine ei käivita päringut',
+  'Op dit apparaat (loopback)': 'Selles seadmes (loopback)',
+  'Opslag en retentie': 'Salvestus ja säilitamine',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Valikuline ja väljas, kui te ei lülita sisse: heli läheb siis teie valitud transkriptsiooniserverisse. Kohalik on vaikimisi; kunagi pole nende vahel vaikset taganemisvarianti.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Ainult aktiivne profiil saab päringuid saata; väljas tähendab: midagi ei lähe.',
+  'Platform': 'Platvorm',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Värav lubab: päringud võivad lahkuda',
+  'Profiel actief': 'Profiil aktiivne',
+  'Profiel opslaan': 'Salvesta profiil',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profiil on väljas — saatmiseks lülita sisse "Profiil aktiivne"',
+  'Route': 'Marsruut',
+  'Server antwoordde': 'Server vastas',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Server vastas tühja transkriptsiooniga — vaikse testheli puhul oodatud',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Server kättesaadav ja vastas HTTP-serverina',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Server kättesaadav, kuid nõuab autentimist — kontrolli või täida API-võti',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Server pole kättesaadav või keeldus — kontrolli aadressi, TLS-i ja kas server töötab',
+  'Server weigerde of was onbereikbaar':
+      'Server keeldus või polnud kättesaadav',
+  'Serveradres (basis-URL)': 'Serveri aadress (põhi-URL)',
+  'Serverklasse': 'Serveriklass',
+  'Serverprofiel niet bruikbaar': 'Serveriprofiil pole kasutatav',
+  'Standaard: er vertrekt geen audio': 'Vaikimisi: heli ei lahku seadmest',
+  'Status op dit apparaat': 'Olek selles seadmes',
+  'Systeem-/appgeluid': 'Süsteemi-/rakenduse heli',
+  'Test met echte audio': 'Test päris heli',
+  'Test mislukt': 'Test ebaõnnestus',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkriptsioon läheb deki; kas heli originaal säilitatakse, valite Salvestamisel',
+  'Upload te groot': 'Üleslaadimine liiga suur',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Sellelt veebilehelt on võimalik ainult https (või loopback) — brauser blokeerib http sellele aadressile',
+  'Verbinding testen (zonder audio)': 'Testi ühendust (ilma helita)',
+  'Vertrouwd intern adres': 'Usaldatud sisemine aadress',
+  'Vrije opslag': 'Vaba salvestusruum',
+  'aanwezig': 'olemas',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'olemas, kuid sobiv heliümbris puudub',
+  'batch én provisionele live-tekst': 'pakk ja esialgne reaalaja tekst',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'pakktranskriptsioon; reaalaja tekst ei saa seda teed',
+  'beschikbaar': 'saadaval',
+  'controleren…': 'kontrollin…',
+  'detecteren…': 'tuvastan…',
+  'geen engine beschikbaar': 'mootorit pole',
+  'geïnstalleerd': 'paigaldatud',
+  'geïnstalleerd en getoetst': 'paigaldatud ja kontrollitud',
+  'ja — de lokale wasm-engine kan draaien':
+      'jah — kohalik wasm-mootor saab töötada',
+  'ja — https': 'jah — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'kohalik — sellel protsessoriarhitektuuril pole mootorit',
+  'lokaal — geen cross-origin isolatie':
+      'kohalik — cross-origin isolatsiooni pole',
+  'lokaal — gereed': 'kohalik — valmis',
+  'lokaal — helper ontbreekt in deze installatie':
+      'kohalik — abiline puudub selles paigaldusest',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'ei — hostingu-l pole COOP/COEP; kohalik inferents ei saa töötada (vt HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'ei — ilma https-ta võtmeräni ja mudeli kontrolli pole',
+  'niet beschikbaar op deze opstelling': 'pole saadaval selles seadistuses',
+  'niet geïnstalleerd': 'pole paigaldatud',
+  'nog niet beschikbaar op dit platform':
+      'pole veel sellel platvormil saadaval',
+  'nog niet bewezen op dit apparaat': 'pole veel selles seadmes tõestatud',
+  'ontbreekt — opname in de browser kan niet':
+      'puudub — brauseris salvestamine ei ole võimalik',
+  'opgeslagen — leeg laten houdt hem':
+      'salvestatud — tühjaks jätmine säilitab selle',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'ilmub päritolureale',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'tõenäoliselt — luba tuleb esimesel kasutusel',
+  'wordt binnengehaald': 'laaditakse alla',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'See brauser või majutus ei saa käivitada kohalikku kõnemootorit (cross-origin isolatsioon puudub)',
   'Whisper': 'Whisper',

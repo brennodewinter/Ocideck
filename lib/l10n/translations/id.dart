@@ -1605,6 +1605,141 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'dit platform': 'platform ini',
+  'API-sleutel': 'Kunci API',
+  'Afgebroken': 'Dibatalkan',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Hanya profil tersimpan dan aktif di bawah — ia meminta izin lagi per tugas',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Hanya mungkin selama rapat aktif dengan sumber audio sistem yang terbukti — sumber itu belum tersedia di sini',
+  'Batch / live': 'Batch / live',
+  'Bestaand audio/videobestand': 'Berkas audio/video yang ada',
+  'Beveiligde context': 'Konteks aman',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Konfirmasi bahwa audio boleh pergi ke tujuan eksternal spesifik ini — itulah satu-satunya izin yang diminta rute ini.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Konfirmasi bahwa alamat ini ada di jaringan Anda sendiri; baru kemudian alamat privat boleh melewati blokir jaringan.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Konfirmasi dulu bahwa audio boleh pergi ke layanan eksternal ini',
+  'Bevestiging vereist': 'Perlu konfirmasi',
+  'Cross-origin isolatie': 'Isolasi cross-origin',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'Kunci API dikirim sebagai header aman, bukan di URL. Ini konfirmasi yang sama yang akan diminta setiap tugas transkripsi.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Layanan eksternal mensyaratkan https — http ke luar tidak dapat diterima',
+  'Eigen ASR-server': 'Server ASR sendiri',
+  'Eigen naam (optioneel)': 'Nama kustom (opsional)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Server sendiri di jaringan tepercaya (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint hilang atau tidak valid — gunakan URL http(s) polos tanpa nama pengguna atau kata sandi',
+  'Engine': 'Mesin',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profil tersimpan tetapi nonaktif — pilih kelas server untuk mengedit atau memakainya.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Satu detik audio uji senyap (~32 kB) dikirim ke',
+  'Externe ASR-dienst (https)': 'Layanan ASR eksternal (https)',
+  'Externe dienst bevestigd': 'Layanan eksternal dikonfirmasi',
+  'Geen server (lokaal houden)': 'Tanpa server (tetap lokal)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Tidak ada server dipilih — transkripsi tetap lokal.',
+  'Geen serverklasse gekozen': 'Kelas server belum dipilih',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'Rute LAN pertama-tama memerlukan "Alamat internal tepercaya"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokal — tidak ada audio yang keluar dari perangkat ini',
+  'Lokaal — op dit apparaat': 'Lokal — di perangkat ini',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback hanya boleh ke perangkat ini — gunakan 127.0.0.1 atau localhost',
+  'Microfoon + systeemgeluid': 'Mikrofon + audio sistem',
+  'Microfoonpermissie': 'Izin mikrofon',
+  'Model': 'Model',
+  'Modellen': 'Model',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modul nonaktif — tanpa unduhan, tanpa mikrofon, tanpa tugas latar. Pengaturan di bawah tetap dapat ditemukan untuk tinjauan dan pembersihan.',
+  'OciDeck-gesprek': 'Panggilan OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Tidak diketahui — sistem meminta izin hanya saat rekaman pertama; membuka Pengaturan tidak memicu prompt',
+  'Op dit apparaat (loopback)': 'Di perangkat ini (loopback)',
+  'Opslag en retentie': 'Penyimpanan dan retensi',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Opsional dan mati kecuali Anda mengaktifkannya: audio lalu pergi ke server transkripsi yang Anda pilih sendiri. Lokal tetap menjadi bawaan; tidak pernah ada fallback diam-diam di antara keduanya.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Hanya profil aktif yang bisa mengirim permintaan; mati berarti: tidak ada yang keluar.',
+  'Platform': 'Platform',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Gerbang mengizinkan: permintaan boleh keluar',
+  'Profiel actief': 'Profil aktif',
+  'Profiel opslaan': 'Simpan profil',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profil nonaktif — aktifkan "Profil aktif" untuk mengirim',
+  'Route': 'Rute',
+  'Server antwoordde': 'Server menjawab',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Server menjawab dengan transkrip kosong — wajar untuk audio uji senyap',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Server terjangkau dan menjawab sebagai server HTTP',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Server terjangkau tetapi meminta autentikasi — periksa atau isi kunci API',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Server tidak terjangkau atau menolak — periksa alamat, TLS, dan apakah server berjalan',
+  'Server weigerde of was onbereikbaar': 'Server menolak atau tidak terjangkau',
+  'Serveradres (basis-URL)': 'Alamat server (URL dasar)',
+  'Serverklasse': 'Kelas server',
+  'Serverprofiel niet bruikbaar': 'Profil server tidak dapat dipakai',
+  'Standaard: er vertrekt geen audio':
+      'Bawaan: tidak ada audio yang keluar dari perangkat',
+  'Status op dit apparaat': 'Status di perangkat ini',
+  'Systeem-/appgeluid': 'Audio sistem/aplikasi',
+  'Test met echte audio': 'Uji dengan audio sungguhan',
+  'Test mislukt': 'Uji gagal',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkrip masuk ke deck; apakah audio asli ikut tersimpan Anda pilih saat Simpan',
+  'Upload te groot': 'Unggahan terlalu besar',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Dari halaman web ini hanya https (atau loopback) yang mungkin — browser memblokir http ke alamat ini',
+  'Verbinding testen (zonder audio)': 'Uji koneksi (tanpa audio)',
+  'Vertrouwd intern adres': 'Alamat internal tepercaya',
+  'Vrije opslag': 'Penyimpanan kosong',
+  'aanwezig': 'ada',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'ada, tapi tidak ada kontainer audio yang bisa dipakai',
+  'batch én provisionele live-tekst': 'batch dan teks live sementara',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'transkripsi batch; teks live tidak bisa lewat rute ini',
+  'beschikbaar': 'tersedia',
+  'controleren…': 'memeriksa…',
+  'detecteren…': 'mendeteksi…',
+  'geen engine beschikbaar': 'tidak ada mesin tersedia',
+  'geïnstalleerd': 'terpasang',
+  'geïnstalleerd en getoetst': 'terpasang dan terverifikasi',
+  'ja — de lokale wasm-engine kan draaien':
+      'ya — mesin wasm lokal dapat berjalan',
+  'ja — https': 'ya — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokal — arsitektur prosesor ini tidak punya mesin',
+  'lokaal — geen cross-origin isolatie':
+      'lokal — tidak ada isolasi cross-origin',
+  'lokaal — gereed': 'lokal — siap',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokal — helper tidak ada di instalasi ini',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'tidak — hosting tidak punya COOP/COEP; inferensi lokal tidak bisa jalan (lihat HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'tidak — tanpa https tidak ada gantungan kunci dan verifikasi model',
+  'niet beschikbaar op deze opstelling': 'tidak tersedia di konfigurasi ini',
+  'niet geïnstalleerd': 'belum terpasang',
+  'nog niet beschikbaar op dit platform': 'belum tersedia di platform ini',
+  'nog niet bewezen op dit apparaat': 'belum terbukti di perangkat ini',
+  'ontbreekt — opname in de browser kan niet':
+      'tidak ada — perekaman di browser tidak mungkin',
+  'opgeslagen — leeg laten houdt hem':
+      'tersimpan — kosongkan untuk mempertahankannya',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'muncul di baris provenance',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'kemungkinan — izin menyusul saat penggunaan pertama',
+  'wordt binnengehaald': 'sedang diunduh',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Peramban atau hosting ini tidak dapat menjalankan mesin ucapan lokal (isolasi cross-origin tidak ada)',
   'Whisper': 'Whisper',

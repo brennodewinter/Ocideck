@@ -1630,6 +1630,144 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'dit platform': 'αυτή την πλατφόρμα',
+  'API-sleutel': 'Κλειδί API',
+  'Afgebroken': 'Ακυρώθηκε',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Μόνο το αποθηκευμένο, ενεργό προφίλ παρακάτω — ζητά ξανά άδεια ανά εργασία',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Δυνατό μόνο κατά τη διάρκεια ενεργής σύσκεψης με αποδεδειγμένη πηγή ήχου συστήματος — αυτή η πηγή δεν είναι ακόμη διαθέσιμη εδώ',
+  'Batch / live': 'Δέσμη / ζωντανά',
+  'Bestaand audio/videobestand': 'Υπάρχον αρχείο ήχου/βίντεο',
+  'Beveiligde context': 'Ασφαλές πλαίσιο',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Επιβεβαιώστε ότι ο ήχος μπορεί να πάει σε αυτόν τον συγκεκριμένο εξωτερικό προορισμό — αυτή είναι η μόνη άδεια που ζητά αυτή η διαδρομή.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Επιβεβαιώστε ότι αυτή η διεύθυνση είναι στο δικό σας δίκτυο· μόνο τότε μια ιδιωτική διεύθυνση μπορεί να περάσει το μπλοκ δικτύου.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Πρώτα επιβεβαιώστε ότι ο ήχος μπορεί να πάει σε αυτή την εξωτερική υπηρεσία',
+  'Bevestiging vereist': 'Απαιτείται επιβεβαίωση',
+  'Cross-origin isolatie': 'Απομόνωση cross-origin',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'Το κλειδί API ταξιδεύει ως ασφαλής κεφαλίδα, όχι στο URL. Είναι η ίδια επιβεβαίωση που θα ζητά κάθε εργασία μεταγραφής.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Μια εξωτερική υπηρεσία απαιτεί https — http προς τα έξω είναι απαράδεκτο',
+  'Eigen ASR-server': 'Δικός server ASR',
+  'Eigen naam (optioneel)': 'Προσαρμοσμένο όνομα (προαιρετικό)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Δικός σας server σε αξιόπιστο δίκτυο (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Το endpoint λείπει ή είναι άκυρο — χρησιμοποιήστε γυμνό http(s) URL χωρίς όνομα χρήστη ή κωδικό',
+  'Engine': 'Μηχανή',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Ένα προφίλ είναι αποθηκευμένο αλλά απενεργοποιημένο — επιλέξτε κλάση server για επεξεργασία ή χρήση.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Αποστέλλεται ένα δευτερόλεπτο σιωπηλού δοκιμαστικού ήχου (~32 kB) σε',
+  'Externe ASR-dienst (https)': 'Εξωτερική υπηρεσία ASR (https)',
+  'Externe dienst bevestigd': 'Επιβεβαιωμένη εξωτερική υπηρεσία',
+  'Geen server (lokaal houden)': 'Χωρίς server (παραμονή τοπικά)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Δεν επιλέχθηκε server — η μεταγραφή παραμένει τοπική.',
+  'Geen serverklasse gekozen': 'Δεν επιλέχθηκε κλάση server',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'Η διαδρομή LAN απαιτεί πρώτα «Αξιόπιστη εσωτερική διεύθυνση»',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Τοπικά — κανένας ήχος δεν φεύγει από τη συσκευή',
+  'Lokaal — op dit apparaat': 'Τοπικά — σε αυτή τη συσκευή',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Το loopback μπορεί να πάει μόνο σε αυτή τη συσκευή — χρησιμοποιήστε 127.0.0.1 ή localhost',
+  'Microfoon + systeemgeluid': 'Μικρόφωνο + ήχος συστήματος',
+  'Microfoonpermissie': 'Άδεια μικροφώνου',
+  'Model': 'Μοντέλο',
+  'Modellen': 'Μοντέλα',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Η μονάδα είναι απενεργοποιημένη — χωρίς λήψεις, χωρίς μικρόφωνο, χωρίς εργασίες στο παρασκήνιο. Οι ρυθμίσεις παρακάτω παραμένουν ορατές για επισκόπηση και καθαρισμό.',
+  'OciDeck-gesprek': 'Κλήση OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Άγνωστο — το σύστημα ζητά άδεια μόνο στην πρώτη εγγραφή· το άνοιγμα των Ρυθμίσεων δεν προκαλεί προτροπή',
+  'Op dit apparaat (loopback)': 'Σε αυτή τη συσκευή (loopback)',
+  'Opslag en retentie': 'Αποθήκευση και διατήρηση',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Προαιρετικό και απενεργοποιημένο εκτός αν το ενεργοποιήσετε: ο ήχος πηγαίνει τότε σε server μεταγραφής που εσείς επιλέγετε. Το τοπικό παραμένει προεπιλογή· δεν υπάρχει ποτέ σιωπηλή εναλλαγή μεταξύ τους.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Μόνο ένα ενεργό προφίλ μπορεί να στείλει αιτήματα· απενεργοποιημένο σημαίνει: τίποτα δεν φεύγει.',
+  'Platform': 'Πλατφόρμα',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Η πύλη επιτρέπει: τα αιτήματα μπορούν να φύγουν',
+  'Profiel actief': 'Προφίλ ενεργό',
+  'Profiel opslaan': 'Αποθήκευση προφίλ',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Το προφίλ είναι ανενεργό — ενεργοποιήστε «Προφίλ ενεργό» για αποστολή',
+  'Route': 'Διαδρομή',
+  'Server antwoordde': 'Ο server απάντησε',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Ο server απάντησε με κενή μεταγραφή — αναμενόμενο για σιωπηλό δοκιμαστικό ήχο',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Ο server προσβάσιμος και απάντησε ως HTTP server',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Ο server προσβάσιμος αλλά απαιτεί έλεγχο ταυτότητας — ελέγξτε ή συμπληρώστε το κλειδί API',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Ο server μη προσβάσιμος ή απέρριψε — ελέγξτε διεύθυνση, TLS και αν ο server τρέχει',
+  'Server weigerde of was onbereikbaar':
+      'Ο server απέρριψε ή ήταν απροσπέλαστος',
+  'Serveradres (basis-URL)': 'Διεύθυνση server (βασικό URL)',
+  'Serverklasse': 'Κλάση server',
+  'Serverprofiel niet bruikbaar': 'Το προφίλ server δεν είναι χρησιμοποιήσιμο',
+  'Standaard: er vertrekt geen audio':
+      'Προεπιλογή: κανένας ήχος δεν φεύγει από τη συσκευή',
+  'Status op dit apparaat': 'Κατάσταση σε αυτή τη συσκευή',
+  'Systeem-/appgeluid': 'Ήχος συστήματος/εφαρμογής',
+  'Test met echte audio': 'Δοκιμή με πραγματικό ήχο',
+  'Test mislukt': 'Η δοκιμή απέτυχε',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Η μεταγραφή πηγαίνει στο deck· αν το πρωτότυπο ήχου διατηρείται, το επιλέγετε στην Αποθήκευση',
+  'Upload te groot': 'Η μεταφόρτωση είναι πολύ μεγάλη',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Από αυτή τη σελίδα μόνο https (ή loopback) είναι δυνατό — ο browser μπλοκάρει http σε αυτή τη διεύθυνση',
+  'Verbinding testen (zonder audio)': 'Δοκιμή σύνδεσης (χωρίς ήχο)',
+  'Vertrouwd intern adres': 'Αξιόπιστη εσωτερική διεύθυνση',
+  'Vrije opslag': 'Ελεύθερος χώρος',
+  'aanwezig': 'παρών',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'παρών, αλλά κανένα χρησιμοποιήσιμο κοντέινερ ήχου',
+  'batch én provisionele live-tekst': 'δέσμη και προσωρινό ζωντανό κείμενο',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'μεταγραφή δέσμης· το ζωντανό κείμενο δεν μπορεί σε αυτή τη διαδρομή',
+  'beschikbaar': 'διαθέσιμο',
+  'controleren…': 'έλεγχος…',
+  'detecteren…': 'ανίχνευση…',
+  'geen engine beschikbaar': 'δεν υπάρχει διαθέσιμη μηχανή',
+  'geïnstalleerd': 'εγκατεστημένο',
+  'geïnstalleerd en getoetst': 'εγκατεστημένο και επαληθευμένο',
+  'ja — de lokale wasm-engine kan draaien':
+      'ναι — η τοπική μηχανή wasm μπορεί να τρέξει',
+  'ja — https': 'ναι — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'τοπικό — αυτή η αρχιτεκτονική επεξεργαστή δεν έχει μηχανή',
+  'lokaal — geen cross-origin isolatie':
+      'τοπικό — χωρίς απομόνωση cross-origin',
+  'lokaal — gereed': 'τοπικό — έτοιμο',
+  'lokaal — helper ontbreekt in deze installatie':
+      'τοπικό — ο βοηθός λείπει από αυτή την εγκατάσταση',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'όχι — η φιλοξενία δεν έχει COOP/COEP· η τοπική εξαγωγή δεν μπορεί να τρέξει (βλ. HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'όχι — χωρίς https δεν υπάρχει μπρελόκ και επαλήθευση μοντέλου',
+  'niet beschikbaar op deze opstelling': 'μη διαθέσιμο σε αυτή τη διαμόρφωση',
+  'niet geïnstalleerd': 'δεν είναι εγκατεστημένο',
+  'nog niet beschikbaar op dit platform':
+      'δεν είναι ακόμη διαθέσιμο σε αυτή την πλατφόρμα',
+  'nog niet bewezen op dit apparaat':
+      'δεν έχει αποδειχθεί ακόμη σε αυτή τη συσκευή',
+  'ontbreekt — opname in de browser kan niet':
+      'λείπει — η εγγραφή στον browser δεν είναι δυνατή',
+  'opgeslagen — leeg laten houdt hem':
+      'αποθηκευμένο — αν το αφήσετε κενό διατηρείται',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'εμφανίζεται στη γραμμή προέλευσης',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'πιθανώς — η άδεια ακολουθεί στην πρώτη χρήση',
+  'wordt binnengehaald': 'κατέβασμα σε εξέλιξη',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Αυτό το πρόγραμμα περιήγησης ή η φιλοξενία δεν μπορεί να εκτελέσει τοπική μηχανή ομιλίας (λείπει η απομόνωση cross-origin)',
   'Whisper': 'Whisper',

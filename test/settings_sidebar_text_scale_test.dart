@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/services/transcription/model_store_io.dart';
+import 'package:ocideck/state/transcription_model_provider.dart';
+import 'package:ocideck/state/transcription_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -47,8 +52,21 @@ void main() {
     await tester.binding.setSurfaceSize(const Size(1500, 1100));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
+    // De transcriptiekaart mount zijn secties ook als de module uit staat —
+    // zonder deze overrides zou de test de echte modelmap doorzoeken, de
+    // lokale engine aftasten en audiobronnen op de testhost enumereren.
+    final modelsDir = Directory.systemTemp.createTempSync('sidebar_models_');
+    addTearDown(() => modelsDir.deleteSync(recursive: true));
+
     await tester.pumpWidget(
       ProviderScope(
+        overrides: [
+          transcriptionModelStoreProvider.overrideWithValue(
+            IoModelStore(root: modelsDir),
+          ),
+          transcriptionEngineProvider.overrideWith((ref) => null),
+          captureSourcesProvider.overrideWithValue(const {}),
+        ],
         // Een eigen sleutel per schaal: zonder dat houdt de Navigator van de
         // vorige MaterialApp zijn dialoogroute vast en tikt de tweede tap op
         // een modale sluier in plaats van op de knop.

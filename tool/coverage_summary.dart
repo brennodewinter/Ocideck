@@ -232,6 +232,12 @@ const Set<String> uncoveredBaseline = {
   // NIET: die gebruikt geen js_interop en wordt rechtstreeks gedekt door
   // asr_server_profile_test.
   'lib/services/transcription/asr_transport_web.dart',
+  // PLATFORM: `environment_probe_web.dart` (#2514) is de webhelft van de
+  // passieve platformprobe — `dart:js_interop`/`package:web` laden niet in
+  // de VM-runner. De io- en stub-helft staan wél onder
+  // environment_probe_test; de web-waarden zijn getters die alleen in een
+  // echte browser iets zeggen.
+  'lib/services/transcription/environment_probe_web.dart',
   // NO EXECUTABLE LINES: `mermaid_config.dart` is één bron van waarheid voor de
   // mermaid-instellingen — alleen const-declaraties, lcov schrijft er geen
   // record voor. PLATFORM: `mermaid_web_renderer.dart` is de web-helft die

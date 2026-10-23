@@ -50,6 +50,17 @@ final recordingManagerProvider = Provider<RecordingManager>((ref) {
   return RecordingManager(staging: ref.watch(recordingStagingProvider));
 });
 
+/// De capture-bronnen die dit platform klaar heeft staan, op soort.
+///
+/// De kaart is bewust een `Provider` en geen dienst met eigen logica:
+/// een platformhelft registreert zijn bron hier door de provider te
+/// overschrijven; zonder registratie is de soort eerlijk "nog niet
+/// beschikbaar" in plaats van stil weggelaten. De instellingskaart
+/// (#2514) toont dit register; #2516 en verder vullen het.
+final captureSourcesProvider = Provider<Map<CaptureSourceKind, CaptureSource>>(
+  (ref) => const {},
+);
+
 /// De transcriptie-engine die op dit platform klaarstaat: de lokale
 /// whisper-engine met het gekozen model — op desktop als helperproces
 /// (#2512), op web als wasm in de tab (#2513). Of die werkelijk kan,

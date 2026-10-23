@@ -1605,6 +1605,140 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'dit platform': 'tej platformi',
+  'API-sleutel': 'API ključ',
+  'Afgebroken': 'Prekinjeno',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Samo shranjeni, aktivni profil spodaj — pri vsaki nalogi znova prosi za dovoljenje',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Mogoče le med aktivnim srečanjem z dokazanim sistemskim zvočnim virom — ta vir tu še ni na voljo',
+  'Batch / live': 'Paketno / v živo',
+  'Bestaand audio/videobestand': 'Obstoječa zvočna/videodatoteka',
+  'Beveiligde context': 'Varen kontekst',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Potrdite, da sme zvok iti na ta specifični zunanji cilj — to je edino dovoljenje, ki ga ta pot zahteva.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Potrdite, da je ta naslov v vašem omrežju; šele takrat sme zasebni naslov iti skozi omrežno blokado.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Najprej potrdite, da sme zvok iti k tej zunanji storitvi',
+  'Bevestiging vereist': 'Zahtevana je potrditev',
+  'Cross-origin isolatie': 'Cross-origin izolacija',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'API ključ gre kot zaščiten header, ne v URL. To je ista potrditev, ki jo bo zahtevala vsaka prepisovalna naloga.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Zunanja storitev zahteva https — http navzven je nesprejemljiv',
+  'Eigen ASR-server': 'Lasten ASR strežnik',
+  'Eigen naam (optioneel)': 'Lastno ime (izbirno)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Lastni strežnik v zaupanja vrednem omrežju (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Končna točka manjka ali je neveljavna — uporabite golo http(s) URL brez uporabniškega imena ali gesla',
+  'Engine': 'Mehanizem',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profil je shranjen, a izklopljen — izberite razred strežnika za urejanje ali uporabo.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Pošlje se ena sekunda tihega testnega zvoka (~32 kB) na',
+  'Externe ASR-dienst (https)': 'Zunanja storitev ASR (https)',
+  'Externe dienst bevestigd': 'Zunanja storitev potrjena',
+  'Geen server (lokaal houden)': 'Brez strežnika (ostani lokalno)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Strežnik ni izbran — prepis ostaja lokalen.',
+  'Geen serverklasse gekozen': 'Razred strežnika ni izbran',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN pot najprej zahteva »Zaupanja vreden notranji naslov«',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokalno — zvok ne zapusti te naprave',
+  'Lokaal — op dit apparaat': 'Lokalno — na tej napravi',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback sme iti le na to napravo — uporabite 127.0.0.1 ali localhost',
+  'Microfoon + systeemgeluid': 'Mikrofon + sistemski zvok',
+  'Microfoonpermissie': 'Dovoljenje za mikrofon',
+  'Model': 'Model',
+  'Modellen': 'Modeli',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modul je izklopljen — ni prenosov, ni mikrofona, ni opravil v ozadju. Spodnje nastavitve ostanejo vidne za pregled in urejanje.',
+  'OciDeck-gesprek': 'Klic OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Neznano — sistem prosi za dovoljenje šele ob prvem snemanju; odpiranje Nastavitev ne sproži poziva',
+  'Op dit apparaat (loopback)': 'Na tej napravi (loopback)',
+  'Opslag en retentie': 'Shranjevanje in hramba',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Izbirno in izklopljeno, dokler ne vklopite: zvok gre takrat na prepisovalni strežnik, ki ga izberete sami. Lokalno ostaja privzeto; med njima ni nikoli tiho preklapljanje.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Samo aktiven profil lahko pošilja zahteve; izklopljeno pomeni: nič ne odide.',
+  'Platform': 'Platforma',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Vrata dovoljujejo: zahteve lahko odidejo',
+  'Profiel actief': 'Profil aktiven',
+  'Profiel opslaan': 'Shrani profil',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profil je izklopljen — za pošiljanje vklopite »Profil aktiven«',
+  'Route': 'Pot',
+  'Server antwoordde': 'Strežnik se je odzval',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Strežnik se je odzval s praznim prepisom — pričakovano za tihi testni zvok',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Strežnik dosegljiv in se je odzval kot HTTP strežnik',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Strežnik dosegljiv, a zahteva overitev — preverite ali vnesite API ključ',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Strežnik nedosegljiv ali zavrnil — preverite naslov, TLS in ali strežnik deluje',
+  'Server weigerde of was onbereikbaar':
+      'Strežnik je zavrnil ali bil nedosegljiv',
+  'Serveradres (basis-URL)': 'Naslov strežnika (osnovni URL)',
+  'Serverklasse': 'Razred strežnika',
+  'Serverprofiel niet bruikbaar': 'Profil strežnika ni uporaben',
+  'Standaard: er vertrekt geen audio': 'Privzeto: zvok ne zapusti naprave',
+  'Status op dit apparaat': 'Stanje na tej napravi',
+  'Systeem-/appgeluid': 'Sistemski/aplikacijski zvok',
+  'Test met echte audio': 'Preizkus s pravim zvokom',
+  'Test mislukt': 'Preizkus ni uspel',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Prepis gre v deck; ali se zvočni izvirnik ohrani, izberete pri Shranjevanju',
+  'Upload te groot': 'Nalaganje preveliko',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'S te spletne strani je možen le https (ali loopback) — brskalnik blokira http na ta naslov',
+  'Verbinding testen (zonder audio)': 'Preizkusi povezavo (brez zvoka)',
+  'Vertrouwd intern adres': 'Zaupanja vreden notranji naslov',
+  'Vrije opslag': 'Prost prostor',
+  'aanwezig': 'prisoten',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'prisoten, a ni uporabnega zvočnega vsebnika',
+  'batch én provisionele live-tekst': 'paketno in začasno besedilo v živo',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'paketni prepis; besedilo v živo te poti ne zmore',
+  'beschikbaar': 'na voljo',
+  'controleren…': 'preverjanje…',
+  'detecteren…': 'zaznavanje…',
+  'geen engine beschikbaar': 'ni mehanizma na voljo',
+  'geïnstalleerd': 'nameščen',
+  'geïnstalleerd en getoetst': 'nameščen in preverjen',
+  'ja — de lokale wasm-engine kan draaien':
+      'da — lokalni wasm mehanizem lahko teče',
+  'ja — https': 'da — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokalen — ta procesorska arhitektura nima mehanizma',
+  'lokaal — geen cross-origin isolatie': 'lokalen — ni cross-origin izolacije',
+  'lokaal — gereed': 'lokalen — pripravljen',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokalen — v tej namestitvi manjka pomočnik',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'ne — gostovanje nima COOP/COEP; lokalno sklepanje ne more teči (glej HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'ne — brez https ni ključev in ni preverjanja modela',
+  'niet beschikbaar op deze opstelling': 'ni na voljo v tej postavitvi',
+  'niet geïnstalleerd': 'ni nameščen',
+  'nog niet beschikbaar op dit platform': 'še ni na voljo na tej platformi',
+  'nog niet bewezen op dit apparaat': 'še ni dokazano na tej napravi',
+  'ontbreekt — opname in de browser kan niet':
+      'manjka — snemanje v brskalniku ni mogoče',
+  'opgeslagen — leeg laten houdt hem':
+      'shranjen — pustite prazno, da se ohrani',
+  'server': 'strežnik',
+  'verschijnt in de provenienceregel': 'se prikaže v vrstici izvora',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'verjetno — dovoljenje sledi ob prvi uporabi',
+  'wordt binnengehaald': 'se prenaša',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Ta brskalnik ali gostovanje ne more zagnati lokalnega govornega motorja (manjka cross-origin izolacija)',
   'Whisper': 'Whisper',
