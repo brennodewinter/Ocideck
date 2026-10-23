@@ -77,6 +77,11 @@ All notable changes to OciDeck are documented in this file.
   Zodra een cel focus had, bewaakte een eenmalige `skipRequestKeyboard`-vlag
   de cel tegen een focuspoging van de editor. Vroeg die daarna nooit om het
   toetsenbord, dan bleef de vlag stilletjes liggen — en slikte hij bij de
+- **Een tijdlijn loopt niet meer over het logo heen.** Een tijdlijn vult de
+  resthoogte van de dia, maar hield alleen de spleet achter het logo vrij; bij
+  de stap-voor-stap opbouw schoven de onderste stappen daardoor onder of
+  tegen het logo. Net als tabellen, grafieken en Gantt reserveert hij nu het
+  hele logovak, in de app, de presentatie en de HTML-export.
   eerstvolgende klik buiten de tabel de focusaanvraag op, zodat er pas bij
   de tweede klik een caret in de tekst verscheen. Een tik buiten elke tabel
   laat de verlopen bewaker nu vervallen, zodat de eerste klik al de caret
