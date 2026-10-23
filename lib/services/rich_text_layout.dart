@@ -409,7 +409,8 @@ const double kLogoBottomInsetFraction = 0.12;
 bool logoRequiresOccupancyReserve(SlideType type) =>
     type == SlideType.table ||
     type == SlideType.chart ||
-    type == SlideType.gantt;
+    type == SlideType.gantt ||
+    type == SlideType.timeline;
 
 /// Vertical space a shown logo reserves from its slide edge.
 ///

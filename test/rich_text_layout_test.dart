@@ -160,6 +160,9 @@ void main() {
       );
       expect(logoRequiresOccupancyReserve(SlideType.table), isTrue);
       expect(logoRequiresOccupancyReserve(SlideType.chart), isTrue);
+      // Een tijdlijn vult de resthoogte; de onderste stappen kwamen over het
+      // logo zodra de opbouw ze onthulde.
+      expect(logoRequiresOccupancyReserve(SlideType.timeline), isTrue);
       expect(logoRequiresOccupancyReserve(SlideType.bullets), isFalse);
     });
 
