@@ -19,6 +19,7 @@ import 'dart:convert';
 import '../models/asr_server_profile.dart';
 import '../services/transcription/asr_engine_factory.dart';
 import '../services/transcription/capture_source.dart';
+import '../services/transcription/file_capture_source.dart';
 import '../services/transcription/local_whisper_engine.dart';
 import '../services/transcription/recording_session.dart';
 import '../services/transcription/recording_staging.dart';
@@ -56,9 +57,13 @@ final recordingManagerProvider = Provider<RecordingManager>((ref) {
 /// een platformhelft registreert zijn bron hier door de provider te
 /// overschrijven; zonder registratie is de soort eerlijk "nog niet
 /// beschikbaar" in plaats van stil weggelaten. De instellingskaart
-/// (#2514) toont dit register; #2516 en verder vullen het.
+/// (#2514) toont dit register.
+///
+/// #2515 registreerde de bestandsbron — die bestaat op elk platform dat
+/// deze provider bouwt (zijn stub meldt eerlijk `unavailable`). #2516 en
+/// verder vullen de capture-bronnen.
 final captureSourcesProvider = Provider<Map<CaptureSourceKind, CaptureSource>>(
-  (ref) => const {},
+  (ref) => {CaptureSourceKind.file: createFileCaptureSource()},
 );
 
 /// De transcriptie-engine die op dit platform klaarstaat: de lokale

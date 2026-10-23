@@ -1633,6 +1633,70 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'sem descodificador neste sistema (afconvert em falta) — apenas PCM-WAV pode ser lido diretamente',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'sem descodificador neste sistema (ffmpeg em falta) — apenas PCM-WAV pode ser lido diretamente',
+  'codecdekking hangt van deze browser af':
+      'a compatibilidade do codec depende deste navegador',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js em falta neste bundle — sem descodificação',
+  'geen decoder voor dit formaat': 'sem descodificador para este formato',
+  'geen decode mogelijk': 'descodificação impossível',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Não foi possível guardar o áudio junto ao documento; a referência está em falta.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'A rota do servidor exige um consentimento ainda não confirmado.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'O ficheiro é demasiado grande ou o áudio demasiado longo para esta rota.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'O ficheiro é demasiado grande ou não há memória livre suficiente.',
+  'Audio of video transcriberen': 'Transcrever áudio ou vídeo',
+  'Audio- of videobestand kiezen': 'Escolher um ficheiro de áudio ou vídeo',
+  'Audio/video transcriberen…': 'Transcrever áudio/vídeo…',
+  'Automatisch detecteren': 'Detetar automaticamente',
+  'Bestand decoderen…': 'A descodificar ficheiro…',
+  'Bewaar een kopie van de audio naast het document':
+      'Manter uma cópia do áudio junto ao documento',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Ao guardar, é copiado para media/ junto ao .md.',
+  'Duur': 'Duração',
+  'Er ging iets mis bij het transcriberen.':
+      'Algo correu mal durante a transcrição.',
+  'Formaat': 'Formato',
+  'Grootte': 'Tamanho',
+  'Het bestand kon niet worden gelezen.': 'Não foi possível ler o ficheiro.',
+  'Het bronbestand blijft ongewijzigd.':
+      'O ficheiro de origem permanece inalterado.',
+  'Stop': 'Parar',
+  'Transcriberen': 'Transcrever',
+  'Transcriberen…': 'Transcrever…',
+  'Uploaden en transcriberen': 'Enviar e transcrever',
+  'Verwachte opslag': 'Armazenamento previsto',
+  'bestand': 'ficheiro',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'sem cópia extra — o ficheiro é lido diretamente',
+  'lokaal': 'local',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'O ficheiro contém vozes de terceiros? O seu consentimento pode ser necessário.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Tudo fica neste dispositivo — o áudio não vai para lado nenhum.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'O áudio de {bestand} vai para {host}. Nada mais sai deste dispositivo.',
+  'De bron is niet beschikbaar: {reden}':
+      'A fonte não está disponível: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'O servidor recusou ou estava inacessível: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'O motor de transcrição não está pronto: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Este formato não é suportado neste dispositivo: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Sem fala encontrada em {bestand}. O ficheiro está inalterado.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Não foi possível descodificar o ficheiro: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Não foi possível ler o ficheiro: {reden}',
   'dit platform': 'nesta plataforma',
   'API-sleutel': 'Chave de API',
   'Afgebroken': 'Cancelado',

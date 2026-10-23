@@ -136,4 +136,43 @@ void main() {
       );
     });
   });
+
+  group('withTranscriptAudioLink', () {
+    const doc =
+        '<!-- transcript version=1 -->\n# T\n\nDit is het transcript.\n';
+
+    test('zet audio op een marker die er nog geen droeg', () {
+      final out = withTranscriptAudioLink(doc, 'media/clip.wav');
+      expect(out, isNotNull);
+      expect(
+        out,
+        '<!-- transcript version=1 audio="media/clip.wav" -->\n'
+        '# T\n\nDit is het transcript.\n',
+        reason: 'alleen de markerregel verandert — de rest blijft byte-getrouw',
+      );
+    });
+
+    test('weigert paden die de media-containment niet halen', () {
+      for (final pad in [
+        '/tmp/clip.wav',
+        'media/../geheim.txt',
+        'media\\clip.wav',
+        'C:\\clip.wav',
+        'andere/clip.wav',
+        'https://x/clip.wav',
+        '',
+      ]) {
+        expect(withTranscriptAudioLink(doc, pad), isNull, reason: pad);
+      }
+    });
+
+    test('een marker met audio wordt niet overschreven', () {
+      const met = '<!-- transcript version=1 audio="media/a.wav" -->\n# T\n';
+      expect(withTranscriptAudioLink(met, 'media/b.wav'), isNull);
+    });
+
+    test('een document zonder marker raakt niets', () {
+      expect(withTranscriptAudioLink('# T\n', 'media/clip.wav'), isNull);
+    });
+  });
 }

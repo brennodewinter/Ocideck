@@ -1608,6 +1608,70 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'kei Decoder uf dem System (afconvert fählt) — nur PCM-WAV cha direkt gläse werde',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'kei Decoder uf dem System (ffmpeg fählt) — nur PCM-WAV cha direkt gläse werde',
+  'codecdekking hangt van deze browser af':
+      'Codec-Unterstützig häng vo dem Browser ab',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js fählt in dem Bundle — kei Dekodierig',
+  'geen decoder voor dit formaat': 'kei Decoder für das Format',
+  'geen decode mogelijk': 'kei Dekodierig möglich',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'D Audio het nid chönne nebem Dokument gspicheret werde; d Verchnüpfung fählt.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'D Serverroute verlangt e Zuestimmig, wo no nid bestätigt isch.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'D Datei isch z gross oder d Audio z lang für die Route.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'D Datei isch z gross oder es isch nid gnue Schpycher frei.',
+  'Audio of video transcriberen': 'Audio oder Video transkribiere',
+  'Audio- of videobestand kiezen': 'En Audio- oder Videodatei wähle',
+  'Audio/video transcriberen…': 'Audio/Video transkribiere…',
+  'Automatisch detecteren': 'Automatisch erkenne',
+  'Bestand decoderen…': 'Datei wird dekodiert…',
+  'Bewaar een kopie van de audio naast het document':
+      'En Kopie vom Audio nebem Dokument bhalte',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Bim Spychere wird er i media/ nebed d .md kopiert.',
+  'Duur': 'Dauer',
+  'Er ging iets mis bij het transcriberen.':
+      'Bim Transkribiere isch öppis schiefgange.',
+  'Formaat': 'Format',
+  'Grootte': 'Grössi',
+  'Het bestand kon niet worden gelezen.':
+      'Die Datei het nid chönne gläse werde.',
+  'Het bronbestand blijft ongewijzigd.': 'D Quelldatei blibt unveränderet.',
+  'Stop': 'Stopp',
+  'Transcriberen': 'Transkribiere',
+  'Transcriberen…': 'Transkribiere…',
+  'Uploaden en transcriberen': 'Ufelade und transkribiere',
+  'Verwachte opslag': 'Erwarteti Spycher',
+  'bestand': 'Datei',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'kei zuesätzlichi Kopie — d Datei wird direkt gläse',
+  'lokaal': 'lokal',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Enthält d Datei fremdi Stimme? Ihri Zuestimmig cha erforderlich sii.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Alls blibt uf dem Gerät — d Audio gaat nöd ewäg.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'D Audio us {bestand} gaht zu {host}. Nüd anders verlot das Gerät.',
+  'De bron is niet beschikbaar: {reden}':
+      'D Quelle isch nid verfügbar: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'D Server het abglähnt oder isch unerriichbar: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'D Transkriptions-Engine isch nid parat: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Das Format wird uf dem Gerät nid understützt: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Kei Spraach in {bestand} gfunde. D Datei isch unveränderet.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'D Datei het nid chönne dekodiert werde: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'D Datei het nid chönne gläse werde: {reden}',
   'dit platform': 'dere Plattform',
   'API-sleutel': 'API-Schlüssel',
   'Afgebroken': 'Abroche',

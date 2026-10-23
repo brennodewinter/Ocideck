@@ -1607,6 +1607,67 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'nincs dekódoló ezen a rendszeren (afconvert hiányzik) — csak a PCM-WAV olvasható közvetlenül',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'nincs dekódoló ezen a rendszeren (ffmpeg hiányzik) — csak a PCM-WAV olvasható közvetlenül',
+  'codecdekking hangt van deze browser af':
+      'a kodek támogatása ettől a böngészőtől függ',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js hiányzik ebből a csomagból — nincs dekódolás',
+  'geen decoder voor dit formaat': 'nincs dekódoló ehhez a formátumhoz',
+  'geen decode mogelijk': 'dekódolás nem lehetséges',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'A hang nem menthető a dokumentum mellé; hiányzik a hivatkozás.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'A szerverútvonal olyan hozzájárulást igényel, amely még nincs megerősítve.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'A fájl túl nagy vagy a hang túl hosszú ehhez az útvonalhoz.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'A fájl túl nagy vagy nincs elég szabad memória.',
+  'Audio of video transcriberen': 'Hang vagy videó átírása',
+  'Audio- of videobestand kiezen': 'Hang- vagy videofájl kiválasztása',
+  'Audio/video transcriberen…': 'Hang/videó átírása…',
+  'Automatisch detecteren': 'Automatikus felismerés',
+  'Bestand decoderen…': 'Fájl dekódolása…',
+  'Bewaar een kopie van de audio naast het document':
+      'Hang másolatának megtartása a dokumentum mellett',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Mentéskor a media/ mappába másolódik a .md mellé.',
+  'Duur': 'Időtartam',
+  'Er ging iets mis bij het transcriberen.': 'Hiba történt az átírás során.',
+  'Formaat': 'Formátum',
+  'Grootte': 'Méret',
+  'Het bestand kon niet worden gelezen.': 'A fájlt nem sikerült beolvasni.',
+  'Het bronbestand blijft ongewijzigd.': 'A forrásfájl változatlan marad.',
+  'Stop': 'Leállítás',
+  'Transcriberen': 'Átírás',
+  'Transcriberen…': 'Átírás…',
+  'Uploaden en transcriberen': 'Feltöltés és átírás',
+  'Verwachte opslag': 'Várható tárhely',
+  'bestand': 'fájl',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'nincs extra másolat — a fájl közvetlenül olvasva',
+  'lokaal': 'helyi',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Tartalmaz a fájl mások hangjait? Hozzájárulásukra lehet szükség.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Mind ezen az eszközön marad — a hang nem megy sehova.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'A {bestand} hangja a {host} címre megy. Semmi más nem hagyja el ezt az eszközt.',
+  'De bron is niet beschikbaar: {reden}': 'A forrás nem érhető el: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'A szerver elutasította vagy elérhetetlen volt: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Az átíró motor nem áll készen: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Ez a formátum nem támogatott ezen az eszközön: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Nem található beszéd a {bestand} fájlban. A fájl változatlan.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'A fájlt nem sikerült dekódolni: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'A fájlt nem sikerült beolvasni: {reden}',
   'dit platform': 'ezen a platformon',
   'API-sleutel': 'API-kulcs',
   'Afgebroken': 'Megszakítva',

@@ -1605,6 +1605,67 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'tidak ada dekoder di sistem ini (afconvert hilang) — hanya PCM-WAV yang bisa dibaca langsung',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'tidak ada dekoder di sistem ini (ffmpeg hilang) — hanya PCM-WAV yang bisa dibaca langsung',
+  'codecdekking hangt van deze browser af':
+      'dukungan codec bergantung pada browser ini',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js hilang di paket ini — tanpa dekode',
+  'geen decoder voor dit formaat': 'tidak ada dekoder untuk format ini',
+  'geen decode mogelijk': 'dekode tidak mungkin',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Audio tidak dapat disimpan di samping dokumen; referensi hilang.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Rute server memerlukan persetujuan yang belum dikonfirmasi.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'File terlalu besar atau audio terlalu panjang untuk rute ini.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'File terlalu besar atau tidak ada cukup memori bebas.',
+  'Audio of video transcriberen': 'Transkripsi audio atau video',
+  'Audio- of videobestand kiezen': 'Pilih file audio atau video',
+  'Audio/video transcriberen…': 'Transkripsi audio/video…',
+  'Automatisch detecteren': 'Deteksi otomatis',
+  'Bestand decoderen…': 'Mendekode file…',
+  'Bewaar een kopie van de audio naast het document':
+      'Simpan salinan audio di samping dokumen',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Saat menyimpan, disalin ke media/ di samping .md.',
+  'Duur': 'Durasi',
+  'Er ging iets mis bij het transcriberen.': 'Sesuatu salah saat transkripsi.',
+  'Formaat': 'Format',
+  'Grootte': 'Ukuran',
+  'Het bestand kon niet worden gelezen.': 'File tidak dapat dibaca.',
+  'Het bronbestand blijft ongewijzigd.': 'File sumber tetap tidak berubah.',
+  'Stop': 'Berhenti',
+  'Transcriberen': 'Transkripsi',
+  'Transcriberen…': 'Transkripsi…',
+  'Uploaden en transcriberen': 'Unggah dan transkripsi',
+  'Verwachte opslag': 'Penyimpanan perkiraan',
+  'bestand': 'file',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'tanpa salinan ekstra — file dibaca langsung',
+  'lokaal': 'lokal',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Apakah file berisi suara orang lain? Persetujuan mereka mungkin diperlukan.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Semua tetap di perangkat ini — audio tidak ke mana-mana.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Audio dari {bestand} menuju {host}. Tidak ada yang lain meninggalkan perangkat ini.',
+  'De bron is niet beschikbaar: {reden}': 'Sumber tidak tersedia: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Server menolak atau tidak dapat dijangkau: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Mesin transkripsi belum siap: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Format ini tidak didukung di perangkat ini: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Tidak ada ucapan ditemukan di {bestand}. File tidak berubah.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'File tidak dapat didekode: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'File tidak dapat dibaca: {reden}',
   'dit platform': 'platform ini',
   'API-sleutel': 'Kunci API',
   'Afgebroken': 'Dibatalkan',

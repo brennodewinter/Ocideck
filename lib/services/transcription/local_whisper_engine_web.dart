@@ -42,6 +42,7 @@ extension type _JsWhisperBridge(JSObject _) implements JSObject {
     JSFloat32Array pcm,
     JSString lang,
     JSNumber threads,
+    JSFunction? onSegment,
   );
   external JSPromise<JSFloat32Array> decodeAudio(JSUint8Array bytes);
   external void requestCancel();
@@ -156,6 +157,10 @@ class WebWhisperEngine implements LocalWhisperEngine {
       logError('WebWhisperEngine: audiodecode', e, s);
       throw const DecodeFailed('audiocontainer niet te decoderen');
     }
+    // Elk segment dat valt is een stukje voortgang: eindtijd van het
+    // segment gedeeld door de audioduur (#2515).
+    final onProgress = options.onProgress;
+    final durationMs = pcm.length / 16000 * 1000;
     final JSObject raw;
     try {
       raw = await bridge
@@ -164,6 +169,12 @@ class WebWhisperEngine implements LocalWhisperEngine {
             pcm.toJS,
             (options.language ?? 'auto').toJS,
             _threads.toJS,
+            onProgress == null || durationMs <= 0
+                ? null
+                : ((JSNumber t1) {
+                    final f = t1.toDartDouble / durationMs;
+                    onProgress(f > 1 ? 1.0 : f);
+                  }).toJS,
           )
           .toDart;
     } catch (e) {

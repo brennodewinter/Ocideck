@@ -1611,6 +1611,68 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'v tomto systéme nie je dekodér (afconvert chýba) — iba PCM-WAV možno čítať priamo',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'v tomto systéme nie je dekodér (ffmpeg chýba) — iba PCM-WAV možno čítať priamo',
+  'codecdekking hangt van deze browser af':
+      'podpora kodekov závisí od tohto prehliadača',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js chýba v tomto balíku — bez dekódovania',
+  'geen decoder voor dit formaat': 'žiadny dekodér pre tento formát',
+  'geen decode mogelijk': 'dekódovanie nemožné',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Zvuk sa nepodarilo uložiť vedľa dokumentu; chýba odkaz.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Trasa servera vyžaduje súhlas, ktorý ešte nebol potvrdený.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Súbor je príliš veľký alebo zvuk príliš dlhý pre túto trasu.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Súbor je príliš veľký alebo nie je dost voľnej pamäte.',
+  'Audio of video transcriberen': 'Transkribovať zvuk alebo video',
+  'Audio- of videobestand kiezen': 'Vybrať zvukový alebo video súbor',
+  'Audio/video transcriberen…': 'Transkribovať zvuk/video…',
+  'Automatisch detecteren': 'Detegovať automaticky',
+  'Bestand decoderen…': 'Dekódovanie súboru…',
+  'Bewaar een kopie van de audio naast het document':
+      'Ponechať kópiu zvuku vedľa dokumentu',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Pri uložení je skopírovaný do media/ vedľa .md.',
+  'Duur': 'Trvanie',
+  'Er ging iets mis bij het transcriberen.':
+      'Počas transkripcie sa niečo pokazilo.',
+  'Formaat': 'Formát',
+  'Grootte': 'Veľkosť',
+  'Het bestand kon niet worden gelezen.': 'Súbor sa nepodarilo prečítať.',
+  'Het bronbestand blijft ongewijzigd.': 'Zdrojový súbor zostáva nezmenený.',
+  'Stop': 'Zastaviť',
+  'Transcriberen': 'Transkribovať',
+  'Transcriberen…': 'Transkribovať…',
+  'Uploaden en transcriberen': 'Nahrať a transkribovať',
+  'Verwachte opslag': 'Očakávané úložisko',
+  'bestand': 'súbor',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'bez ďalšej kópie — súbor je čítaný priamo',
+  'lokaal': 'miestny',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Obsahuje súbor hlasy iných osôb? Môže byť vyžadovaný ich súhlas.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Všetko zostáva na tomto zariadení — zvuk nikam neide.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Zvuk z {bestand} ide na {host}. Nič iné neopúšťa toto zariadenie.',
+  'De bron is niet beschikbaar: {reden}': 'Zdroj nie je dostupný: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Server odmietol alebo bol nedostupný: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Transkripčný engine nie je pripravený: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Tento formát nie je na tomto zariadení podporovaný: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'V {bestand} sa nenašla žiadna reč. Súbor je nezmenený.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Súbor sa nepodarilo dekódovať: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Súbor sa nepodarilo prečítať: {reden}',
   'dit platform': 'tejto platforme',
   'API-sleutel': 'API kľúč',
   'Afgebroken': 'Zrušené',

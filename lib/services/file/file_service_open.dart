@@ -101,6 +101,7 @@ extension FileServiceDocumentOpen on FileService {
     String? initialDirectory,
     String? sourceProjectPath,
     String? fileName,
+    String? transcriptAudioPath,
   }) async => _writeDocumentToPicked(
     document,
     await _saveDestination(
@@ -109,6 +110,7 @@ extension FileServiceDocumentOpen on FileService {
       initialDirectory: initialDirectory,
     ),
     sourceProjectPath: sourceProjectPath,
+    transcriptAudioPath: transcriptAudioPath,
   );
 }
 
@@ -122,6 +124,7 @@ Future<({String path, MarkdownDocument document})?> _writeDocumentToPicked(
   MarkdownDocument document,
   String? dest, {
   String? sourceProjectPath,
+  String? transcriptAudioPath,
 }) async {
   if (dest == null) return null;
   final path = withExtension(dest, '.md');
@@ -129,6 +132,7 @@ Future<({String path, MarkdownDocument document})?> _writeDocumentToPicked(
     document,
     path,
     sourceProjectPath: sourceProjectPath,
+    transcriptAudioPath: transcriptAudioPath,
   );
   return written == null ? null : (path: path, document: written);
 }
@@ -152,9 +156,15 @@ Future<MarkdownDocument?> saveDocument(
   MarkdownDocument document,
   String filePath, {
   String? sourceProjectPath,
+
+  /// De bewaarkeuze uit de transcriptie-flow (#2515, §3.2): het door de
+  /// gebruiker gekozen bronbestand dat mee naar `media/` kopieert; de
+  /// marker krijgt dan zijn `audio=`-verwijzing. Null = geen keuze, of
+  /// "niet bewaren" — de marker blijft zoals hij is.
+  String? transcriptAudioPath,
 }) async {
   try {
-    final written = kIsWeb
+    var written = kIsWeb
         ? document
         : document.withSource(
             await ImageService().copyDocumentImagesToProject(
@@ -163,6 +173,17 @@ Future<MarkdownDocument?> saveDocument(
               sourceProjectPath: sourceProjectPath,
             ),
           );
+    if (!kIsWeb && transcriptAudioPath != null) {
+      final rel = await copyTranscriptAudioToMedia(
+        transcriptAudioPath,
+        p.dirname(filePath),
+      );
+      if (rel != null) {
+        written = written.withSource(
+          withTranscriptAudioLink(written.source, rel) ?? written.source,
+        );
+      }
+    }
     await writeBytesAtomic(File(filePath), written.toBytes());
     return written;
   } catch (e) {

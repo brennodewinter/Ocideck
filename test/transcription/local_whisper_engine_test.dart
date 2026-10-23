@@ -91,6 +91,7 @@ void main() {
             List<String> argv, {
             Map<String, String>? environment,
             required Duration timeout,
+            void Function(String line)? onStderrLine,
           }) {
             argvs.add(argv);
             envs.add(environment);
@@ -147,6 +148,8 @@ void main() {
           '-oj',
           '-of',
           anything,
+          // Voortgang per segment naar stderr (#2515).
+          '-pp',
         ]);
         expect(result.segments, hasLength(2));
         expect(result.segments.first.start, Duration.zero);
@@ -156,6 +159,38 @@ void main() {
         expect(workDir.listSync().isEmpty, isTrue);
       },
     );
+
+    test('streamt `-pp`-voortgang naar options.onProgress', () async {
+      final r = runnerWriting(() => {'transcription': <Map<String, Object>>[]});
+      final base = r.runner;
+      final progress = <double>[];
+      final e = IoLocalWhisperEngine(
+        store: store,
+        runner: (exe, argv, {environment, required timeout, onStderrLine}) {
+          // De fake speelt na: whisper-cli print deze regels per
+          // verwerkt segment naar stderr.
+          onStderrLine?.call('progress =   0%');
+          onStderrLine?.call('progress =  37%');
+          onStderrLine?.call('progress = 100%');
+          onStderrLine?.call('geen voortgangsregel');
+          return base(
+            exe,
+            argv,
+            environment: environment,
+            timeout: timeout,
+            onStderrLine: onStderrLine,
+          );
+        },
+        executable: '/usr/bin/true',
+        model: model,
+        workDir: workDir,
+      );
+      await e.transcribe(
+        AudioRef(wav.path),
+        TranscriptionOptions(onProgress: progress.add),
+      );
+      expect(progress, [0.0, 0.37, 1.0]);
+    });
 
     test('taal null valt terug op auto', () async {
       final r = runnerWriting(() => {'transcription': <Map<String, Object>>[]});
@@ -229,16 +264,17 @@ void main() {
 
     test('niet-nul exit is EngineUnavailable met stderr', () async {
       final e = engine(
-        (exe, argv, {environment, required timeout}) => WhisperRun(
-          done: Future.value(
-            const WhisperResult(
-              exitCode: 1,
-              stdout: '',
-              stderr: 'bad model file',
+        (exe, argv, {environment, required timeout, onStderrLine}) =>
+            WhisperRun(
+              done: Future.value(
+                const WhisperResult(
+                  exitCode: 1,
+                  stdout: '',
+                  stderr: 'bad model file',
+                ),
+              ),
+              kill: () {},
             ),
-          ),
-          kill: () {},
-        ),
       );
       await expectLater(
         e.transcribe(AudioRef(wav.path), const TranscriptionOptions()),
@@ -254,16 +290,17 @@ void main() {
 
     test('out-of-memory in stderr is CapacityExceeded', () async {
       final e = engine(
-        (exe, argv, {environment, required timeout}) => WhisperRun(
-          done: Future.value(
-            const WhisperResult(
-              exitCode: 1,
-              stdout: '',
-              stderr: 'ggml: failed to allocate memory',
+        (exe, argv, {environment, required timeout, onStderrLine}) =>
+            WhisperRun(
+              done: Future.value(
+                const WhisperResult(
+                  exitCode: 1,
+                  stdout: '',
+                  stderr: 'ggml: failed to allocate memory',
+                ),
+              ),
+              kill: () {},
             ),
-          ),
-          kill: () {},
-        ),
       );
       await expectLater(
         e.transcribe(AudioRef(wav.path), const TranscriptionOptions()),
@@ -275,17 +312,18 @@ void main() {
       'timeout is EngineUnavailable — de run is weg, audio blijft',
       () async {
         final e = engine(
-          (exe, argv, {environment, required timeout}) => WhisperRun(
-            done: Future.value(
-              const WhisperResult(
-                exitCode: -9,
-                stdout: '',
-                stderr: '',
-                timedOut: true,
+          (exe, argv, {environment, required timeout, onStderrLine}) =>
+              WhisperRun(
+                done: Future.value(
+                  const WhisperResult(
+                    exitCode: -9,
+                    stdout: '',
+                    stderr: '',
+                    timedOut: true,
+                  ),
+                ),
+                kill: () {},
               ),
-            ),
-            kill: () {},
-          ),
         );
         await expectLater(
           e.transcribe(AudioRef(wav.path), const TranscriptionOptions()),
@@ -312,7 +350,13 @@ void main() {
           );
         },
       );
-      final e = engine((exe, argv, {environment, required timeout}) {
+      final e = engine((
+        exe,
+        argv, {
+        environment,
+        required timeout,
+        onStderrLine,
+      }) {
         started.complete();
         return handle;
       });
@@ -328,7 +372,13 @@ void main() {
     });
 
     test('kapotte JSON-uitvoer is EngineUnavailable', () async {
-      final e = engine((exe, argv, {environment, required timeout}) {
+      final e = engine((
+        exe,
+        argv, {
+        environment,
+        required timeout,
+        onStderrLine,
+      }) {
         final of = argv[argv.indexOf('-of') + 1];
         File('$of.json').writeAsStringSync('{"transcription": 42}');
         return WhisperRun(
@@ -346,12 +396,13 @@ void main() {
 
     test('exit 0 zonder uitvoerbestand is EngineUnavailable', () async {
       final e = engine(
-        (exe, argv, {environment, required timeout}) => WhisperRun(
-          done: Future.value(
-            const WhisperResult(exitCode: 0, stdout: '', stderr: ''),
-          ),
-          kill: () {},
-        ),
+        (exe, argv, {environment, required timeout, onStderrLine}) =>
+            WhisperRun(
+              done: Future.value(
+                const WhisperResult(exitCode: 0, stdout: '', stderr: ''),
+              ),
+              kill: () {},
+            ),
       );
       await expectLater(
         e.transcribe(AudioRef(wav.path), const TranscriptionOptions()),

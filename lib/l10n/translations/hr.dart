@@ -1609,6 +1609,70 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'u ovom sustavu nema dekodera (afconvert nedostaje) — samo PCM-WAV se može čitati izravno',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'u ovom sustavu nema dekodera (ffmpeg nedostaje) — samo PCM-WAV se može čitati izravno',
+  'codecdekking hangt van deze browser af':
+      'podrška za kodeke ovisi o ovom pregledniku',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js nedostaje u ovom paketu — bez dekodiranja',
+  'geen decoder voor dit formaat': 'nema dekodera za ovaj format',
+  'geen decode mogelijk': 'dekodiranje nije moguće',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Zvuk se nije mogao spremiti uz dokument; nedostaje referenca.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Putanja poslužitelja zahtijeva pristanak koji još nije potvrđen.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Datoteka je prevelika ili zvuk predug za ovu rutu.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Datoteka je prevelika ili nema dovoljno slobodne memorije.',
+  'Audio of video transcriberen': 'Transkribiraj zvuk ili video',
+  'Audio- of videobestand kiezen': 'Odaberi zvučnu ili video datoteku',
+  'Audio/video transcriberen…': 'Transkribiraj zvuk/video…',
+  'Automatisch detecteren': 'Otkrij automatski',
+  'Bestand decoderen…': 'Dekodiranje datoteke…',
+  'Bewaar een kopie van de audio naast het document':
+      'Zadrži kopiju zvuka uz dokument',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Pri spremanju kopira se u media/ uz .md.',
+  'Duur': 'Trajanje',
+  'Er ging iets mis bij het transcriberen.':
+      'Nešto je pošlo po zlu tijekom transkripcije.',
+  'Formaat': 'Format',
+  'Grootte': 'Veličina',
+  'Het bestand kon niet worden gelezen.':
+      'Datoteku nije bilo moguće pročitati.',
+  'Het bronbestand blijft ongewijzigd.':
+      'Izvorna datoteka ostaje nepromijenjena.',
+  'Stop': 'Zaustavi',
+  'Transcriberen': 'Transkribiraj',
+  'Transcriberen…': 'Transkribiraj…',
+  'Uploaden en transcriberen': 'Učitaj i transkribiraj',
+  'Verwachte opslag': 'Očekivani prostor',
+  'bestand': 'datoteka',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'bez dodatne kopije — datoteka se čita izravno',
+  'lokaal': 'lokalni',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Sadrži li datoteka tuđe glasove? Možda je potreban njihov pristanak.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Sve ostaje na ovom uređaju — zvuk ne ide nigdje.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Zvuk iz {bestand} ide na {host}. Ništa drugo ne napušta ovaj uređaj.',
+  'De bron is niet beschikbaar: {reden}': 'Izvor nije dostupan: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Poslužitelj je odbio ili bio nedostupan: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Transkripcijski motor nije spreman: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Ovaj format nije podržan na ovom uređaju: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Govor nije pronađen u {bestand}. Datoteka je nepromijenjena.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Datoteku nije bilo moguće dekodirati: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Datoteku nije bilo moguće pročitati: {reden}',
   'dit platform': 'ovoj platformi',
   'API-sleutel': 'API ključ',
   'Afgebroken': 'Prekinuto',

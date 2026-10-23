@@ -38,6 +38,9 @@ const unchangedInEnglish = {
   // Het Engels heeft hetzelfde woord als het Nederlands ("Later" op de knop die een stap
   // uitstelt); de andere talen niet, dus alleen hier.
   'Later',
+  // 'Stop' is in het Engels hetzelfde woord als het Nederlands; de andere
+  // talen wijken af (Arrêter, Detener, …), dus alleen op de Engelse lijst.
+  'Stop',
   // "Team" is in het Engels en het Nederlands hetzelfde woord (de knop en het venster van de redactie).
   'Team',
   'Team…',

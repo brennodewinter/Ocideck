@@ -652,6 +652,68 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'gjin dekoderer op dit systeem (afconvert ûntbrekt) — allinne PCM-WAV kin streekrjocht lêzen',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'gjin dekoderer op dit systeem (ffmpeg ûntbrekt) — allinne PCM-WAV kin streekrjocht lêzen',
+  'codecdekking hangt van deze browser af':
+      'koadekstipe hinget fan dizze browser ôf',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js ûntbrekt yn dizze bundle — gjin dekodearring',
+  'geen decoder voor dit formaat': 'gjin dekoderer foar dit formaat',
+  'geen decode mogelijk': 'dekodearring net mooglik',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'De audio koe net njonken it dokumint bewarre wurde; de ferwizing ûntbrekt.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'De serverrûte freget in tastimming dy\'t noch net befêstige is.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'It bestân is te grut of de audio te lang foar dizze rûte.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'It bestân is te grut of der is te min ûnthâld frij.',
+  'Audio of video transcriberen': 'Audio of fideo transkribearje',
+  'Audio- of videobestand kiezen': 'In audio- of fideobestân kieze',
+  'Audio/video transcriberen…': 'Audio/fideo transkribearje…',
+  'Automatisch detecteren': 'Automatysk detektearje',
+  'Bestand decoderen…': 'Bestân dekodearje…',
+  'Bewaar een kopie van de audio naast het document':
+      'In kopye fan \'e audio njonken it dokumint bewarje',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'By Opslaan wurdt er nei media/ njonken de .md kopiearre.',
+  'Duur': 'Doer',
+  'Er ging iets mis bij het transcriberen.':
+      'Der gie wat mis by it transkribearjen.',
+  'Formaat': 'Formaat',
+  'Grootte': 'Grutte',
+  'Het bestand kon niet worden gelezen.': 'It bestân koe net lêzen wurde.',
+  'Het bronbestand blijft ongewijzigd.': 'It boarnebestân bliuwt net wizige.',
+  'Stop': 'Stop',
+  'Transcriberen': 'Transkribearje',
+  'Transcriberen…': 'Transkribearje…',
+  'Uploaden en transcriberen': 'Oplade en transkribearje',
+  'Verwachte opslag': 'Ferwachte opslach',
+  'bestand': 'bestân',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'gjin ekstra kopy — it bestân wurdt streekrjocht lêzen',
+  'lokaal': 'lokaal',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Befettet it bestân stimmen fan oaren? Harren tastimming kin needsaaklik wêze.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Alles bliuwt op dit apparaat — de audio giet nearne hinne.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'De audio út {bestand} giet nei {host}. Neitsjes oars ferlit dit apparaat.',
+  'De bron is niet beschikbaar: {reden}': 'De boarne is net beskikber: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'De server wegere of wie ûnberikber: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'De transkriptje-motor is net klear: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Dit formaat wurdt net stipe op dit apparaat: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Gjin spraak fûn yn {bestand}. It bestân is net wizige.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'It bestân koe net dekodearre wurde: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'It bestân koe net lêzen wurde: {reden}',
   'dit platform': 'dit platfoarm',
   'API-sleutel': 'API-kaai',
   'Afgebroken': 'Ôfbrutsen',

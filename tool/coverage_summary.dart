@@ -238,6 +238,16 @@ const Set<String> uncoveredBaseline = {
   // environment_probe_test; de web-waarden zijn getters die alleen in een
   // echte browser iets zeggen.
   'lib/services/transcription/environment_probe_web.dart',
+  // PLATFORM: `file_capture_source_web.dart` (#2515) is de webhelft van de
+  // bestandsbron — decodeert via `decodeAudioData` (dart:js_interop), komt
+  // dus nooit in een VM-testrapport. De io-helft is rechtstreeks gedekt door
+  // file_capture_source_io_test; de stub door web_stubs_test.
+  'lib/services/transcription/file_capture_source_web.dart',
+  // PLATFORM: `transcribe_file_action.dart` (#2515) is de menu/welkomst-
+  // ingang die een bestandskiezer opent (FilePicker/file_selector) en de
+  // dialoog toont — de kiezer kan niet headless draaien. De dialoog zelf
+  // is gedekt door transcribe_file_dialog_test.
+  'lib/widgets/shell/transcribe_file_action.dart',
   // NO EXECUTABLE LINES: `mermaid_config.dart` is één bron van waarheid voor de
   // mermaid-instellingen — alleen const-declaraties, lcov schrijft er geen
   // record voor. PLATFORM: `mermaid_web_renderer.dart` is de web-helft die

@@ -1621,6 +1621,68 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'fără decodor pe acest sistem (afconvert lipsește) — doar PCM-WAV poate fi citit direct',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'fără decodor pe acest sistem (ffmpeg lipsește) — doar PCM-WAV poate fi citit direct',
+  'codecdekking hangt van deze browser af':
+      'suportul codecului depinde de acest browser',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js lipsește din acest pachet — fără decodare',
+  'geen decoder voor dit formaat': 'fără decodor pentru acest format',
+  'geen decode mogelijk': 'decodare imposibilă',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Audio nu a putut fi salvat lângă document; referința lipsește.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Ruta serverului necesită un consimțământ neconfirmat încă.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Fișierul este prea mare sau audio prea lung pentru această rută.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Fișierul este prea mare sau nu există memorie liberă suficientă.',
+  'Audio of video transcriberen': 'Transcrie audio sau video',
+  'Audio- of videobestand kiezen': 'Alege un fișier audio sau video',
+  'Audio/video transcriberen…': 'Transcrie audio/video…',
+  'Automatisch detecteren': 'Detectează automat',
+  'Bestand decoderen…': 'Decodare fișier…',
+  'Bewaar een kopie van de audio naast het document':
+      'Păstrează o copie a audio-ului lângă document',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'La salvare este copiat în media/ lângă .md.',
+  'Duur': 'Durată',
+  'Er ging iets mis bij het transcriberen.':
+      'Ceva a mers greșit în timpul transcrierii.',
+  'Formaat': 'Format',
+  'Grootte': 'Dimensiune',
+  'Het bestand kon niet worden gelezen.': 'Fișierul nu a putut fi citit.',
+  'Het bronbestand blijft ongewijzigd.': 'Fișierul sursă rămâne neschimbat.',
+  'Stop': 'Oprește',
+  'Transcriberen': 'Transcrie',
+  'Transcriberen…': 'Transcrie…',
+  'Uploaden en transcriberen': 'Încarcă și transcrie',
+  'Verwachte opslag': 'Stocare estimată',
+  'bestand': 'fișier',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'fără copie suplimentară — fișierul este citit direct',
+  'lokaal': 'local',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Fișierul conține voci ale altor persoane? Poate fi necesar consimțământul lor.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Totul rămâne pe acest dispozitiv — audio nu merge nicăieri.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Audio din {bestand} merge la {host}. Nimic altceva nu părăsește acest dispozitiv.',
+  'De bron is niet beschikbaar: {reden}': 'Sursa nu este disponibilă: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Serverul a refuzat sau a fost inaccesibil: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Motorul de transcriere nu este pregătit: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Acest format nu este acceptat pe acest dispozitiv: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Nu s-a găsit vorbire în {bestand}. Fișierul este neschimbat.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Fișierul nu a putut fi decodat: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Fișierul nu a putut fi citit: {reden}',
   'dit platform': 'această platformă',
   'API-sleutel': 'Cheie API',
   'Afgebroken': 'Anulat',

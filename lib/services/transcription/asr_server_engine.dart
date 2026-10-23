@@ -212,6 +212,7 @@ class AsrServerEngine implements TranscriptionEngine {
   Stream<PartialTranscript>? transcribeLive(Stream<AudioChunk> chunks) => null;
 
   /// Breekt een lopende upload af; `transcribe` voltooit met [Cancelled].
+  @override
   void cancel() => _current?.cancel();
 
   AsrGateAllow _allowOrThrow() {

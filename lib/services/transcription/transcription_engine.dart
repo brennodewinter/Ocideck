@@ -112,7 +112,11 @@ class ServerConsent {
 /// Keuzes voor één transcriptietaak. Klein gehouden: wat elke engine
 /// eerlijk kan aannemen, niet wat één leverancier toevallig kent.
 class TranscriptionOptions {
-  const TranscriptionOptions({this.language, this.serverConsent});
+  const TranscriptionOptions({
+    this.language,
+    this.serverConsent,
+    this.onProgress,
+  });
 
   /// Gewenste taal (bijv. `nl`), of null voor "laat de engine detecteren".
   final String? language;
@@ -120,6 +124,12 @@ class TranscriptionOptions {
   /// Verplicht voor een `batchServer`/`liveServer`-engine; een lokale
   /// engine negeert dit veld.
   final ServerConsent? serverConsent;
+
+  /// Voortgang per verwerkt audiosegment: een fractie 0..1 van de duur
+  /// als die bekend is (#2515). Engines die niets zinnigs kunnen zeggen
+  /// (een server met één bulkantwoord) roepen hem simpelweg niet — de
+  /// UI toont dan een onbepaalde voortgang, geen verzonnen percentage.
+  final void Function(double fraction)? onProgress;
 }
 
 /// Verwijzing naar duurzame audio voor [TranscriptionEngine.transcribe] —
@@ -150,4 +160,8 @@ abstract class TranscriptionEngine {
   /// Provisionele tekst over live blokken — alleen `liveServer` en lokale
   /// engines met `streaming`. Null betekent "geen live route".
   Stream<PartialTranscript>? transcribeLive(Stream<AudioChunk> chunks);
+
+  /// Breekt een lopende [transcribe] af; de toekomst voltooit met
+  /// [Cancelled]. Niets aan de hand als er niets liep.
+  void cancel();
 }

@@ -651,6 +651,68 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'no tin dekoder riba e sistema aki (afconvert ta falta) — solamente PCM-WAV por wòrdu leé direktemente',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'no tin dekoder riba e sistema aki (ffmpeg ta falta) — solamente PCM-WAV por wòrdu leé direktemente',
+  'codecdekking hangt van deze browser af':
+      'sostené di codec ta dependé di e browser aki',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js ta falta den e bundle aki — sin dekoda',
+  'geen decoder voor dit formaat': 'no tin dekoder pa e formato aki',
+  'geen decode mogelijk': 'no ta posibel dekoda',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'No a por warda e audio banda di e dokumento; e referensia ta falta.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'E ruta di server ta pidi un permission ku ainda no ta konfirmá.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'E fail ta muchu grandi òf e audio muchu largu pa e ruta aki.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'E fail ta muchu grandi òf no tin sufisiente memoria liber.',
+  'Audio of video transcriberen': 'Transkribí audio òf video',
+  'Audio- of videobestand kiezen': 'Skoge un fail di audio òf video',
+  'Audio/video transcriberen…': 'Transkribí audio/video…',
+  'Automatisch detecteren': 'Detektá otomátikamente',
+  'Bestand decoderen…': 'Dekodifikando fail…',
+  'Bewaar een kopie van de audio naast het document':
+      'Mantén un kopia di audio banda di e dokumento',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Na warda, e ta kopia pa media/ banda di e .md.',
+  'Duur': 'Durashon',
+  'Er ging iets mis bij het transcriberen.':
+      'Algo bai robes durante e transkribishon.',
+  'Formaat': 'Formato',
+  'Grootte': 'Tamaño',
+  'Het bestand kon niet worden gelezen.': 'No a por leé e fail.',
+  'Het bronbestand blijft ongewijzigd.': 'E fail di origen ta keda sin kambio.',
+  'Stop': 'Stòp',
+  'Transcriberen': 'Transkribí',
+  'Transcriberen…': 'Transkribí…',
+  'Uploaden en transcriberen': 'Subi i transkribí',
+  'Verwachte opslag': 'Spasio spera',
+  'bestand': 'fail',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'sin kopia ekstra — e fail ta wòrdu leé direktemente',
+  'lokaal': 'lokal',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'E fail ta kontené bos di otro? Mester kisas nan ta duna permission.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Tur ta keda riba e aparato — e audio no ta bai ningun parti.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'E audio for di {bestand} ta bai pa {host}. Nada mas no ta sali for di e aparato aki.',
+  'De bron is niet beschikbaar: {reden}': 'E fuente no ta disponibel: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'E server a nega òf no taba alkansabel: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'E motor di transkribishon no ta klaar: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'E formato aki no ta wòrdu sostené riba e aparato aki: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'No a haya palabra den {bestand}. E fail ta keda sin kambio.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'No a por dekoda e fail: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'No a por leé e fail: {reden}',
   'dit platform': 'e plataforma akí',
   'API-sleutel': 'Yabi di API',
   'Afgebroken': 'Kanselá',

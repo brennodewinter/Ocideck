@@ -10,6 +10,7 @@ import '../../models/markdown_document.dart';
 import '../../models/markdown_kind.dart';
 import '../../services/document_integrity.dart';
 import '../../services/file_service.dart';
+import '../../services/transcription/transcript_marker.dart';
 import '../../state/deck_provider.dart' show fileServiceProvider;
 import '../../state/document_provider.dart';
 import '../../state/tabs_provider.dart'
@@ -94,6 +95,7 @@ Future<bool> saveDocumentWithDestination(
       documentToSave,
       path,
       sourceProjectPath: state.projectPath ?? p.dirname(path),
+      transcriptAudioPath: state.pendingAudioPath,
     );
     if (written != null) {
       // Werk de notifier bij met de versie zoals die op schijf staat —
@@ -111,6 +113,7 @@ Future<bool> saveDocumentWithDestination(
       await ref
           .read(settingsProvider.notifier)
           .addRecentFile(path, kind: MarkdownKind.document);
+      if (context.mounted) _warnIfAudioLinkMissed(context, state, written);
       return true;
     }
     // Writing to the existing path failed (read-only, moved, no permission):
@@ -137,6 +140,7 @@ Future<bool> saveDocumentWithDestination(
         sourceProjectPath:
             state.projectPath ??
             (state.filePath == null ? null : p.dirname(state.filePath!)),
+        transcriptAudioPath: state.pendingAudioPath,
       );
   if (saved == null) return false;
   await _adoptSavedDocument(
@@ -146,7 +150,33 @@ Future<bool> saveDocumentWithDestination(
     saved.document,
     oldSource: document.source,
   );
+  if (context.mounted) {
+    _warnIfAudioLinkMissed(context, state, saved.document);
+  }
   return true;
+}
+
+/// De bewaarkeuze van de transcriptie-flow is gehonoreerd als de
+/// opgeslagen bron zijn `audio=`-verwijzing droeg — zo niet, dan mislukte
+/// de kopie naar `media/` en melden we dat, in plaats van stil een
+/// linkloos document achter te laten (#2515, §3.2).
+void _warnIfAudioLinkMissed(
+  BuildContext context,
+  DocumentState state,
+  MarkdownDocument written,
+) {
+  if (state.pendingAudioPath == null) return;
+  final detection = detectTranscript(written.source);
+  if (detection is ValidTranscript && detection.marker.audioPath != null) {
+    return;
+  }
+  showErrorSnackBar(
+    ScaffoldMessenger.of(context),
+    context.l10n,
+    context.l10n.d(
+      'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.',
+    ),
+  );
 }
 
 /// Neemt het zojuist gekozen schrijfpad over in de notifier: tabblad wijst

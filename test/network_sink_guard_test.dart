@@ -274,6 +274,10 @@ void main() {
     // De binary heeft bovendien geen netwerkcode — het subproces-gat is er
     // dus alleen voor de vorm, niet voor het netwerk.
     'lib/services/transcription/local_whisper_engine_io.dart': 1,
+    // De bestandsdecoder (#2515). Dezelfde §10.2-vorm: afconvert/ffmpeg
+    // met argv-array, geen schil, lege omgeving, tijdslimiet en kill.
+    // De decoder heeft geen netwerkcode — lokaal systeemsubproces.
+    'lib/services/transcription/file_capture_source_io.dart': 1,
   };
 
   test('een subproces blijft binnen de twee plekken die het mogen', () {

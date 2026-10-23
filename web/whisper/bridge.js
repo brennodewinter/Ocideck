@@ -92,7 +92,9 @@
 
   // Definitieve pass over 16 kHz mono f32. Levert {segments, cancelled} —
   // een afgebroken run is een expliciete uitkomst, geen stille afkap.
-  async function transcribe(ctxIndex, pcm, lang, threads) {
+  // `onSegment` (optioneel, #2515) krijgt elk segment zodra het valt —
+  // de Dart-kant rekent dat om naar een voortgangsfractie.
+  async function transcribe(ctxIndex, pcm, lang, threads, onSegment) {
     const M = await ensureModule();
     state.cancelled = false;
     const result = new Promise((resolve, reject) => {
@@ -104,7 +106,9 @@
         if (m) {
           const t0 = (+m[1] * 3600 + +m[2] * 60 + +m[3]) * 1000;
           const t1 = (+m[4] * 3600 + +m[5] * 60 + +m[6]) * 1000;
-          segments.push({ t0: Math.round(t0), t1: Math.round(t1), text: m[7] });
+          const seg = { t0: Math.round(t0), t1: Math.round(t1), text: m[7] };
+          segments.push(seg);
+          if (onSegment) onSegment(seg.t1);
         }
         if (t.indexOf('total time') !== -1) {
           state.onLine = null;

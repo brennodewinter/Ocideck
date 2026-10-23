@@ -1630,6 +1630,70 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'χωρίς αποκωδικοποιητή σε αυτό το σύστημα (λείπει afconvert) — μόνο το PCM-WAV διαβάζεται απευθείας',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'χωρίς αποκωδικοποιητή σε αυτό το σύστημα (λείπει ffmpeg) — μόνο το PCM-WAV διαβάζεται απευθείας',
+  'codecdekking hangt van deze browser af':
+      'η υποστήριξη codec εξαρτάται από αυτόν τον περιηγητή',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'λείπει το whisper/bridge.js σε αυτό το πακέτο — χωρίς αποκωδικοποίηση',
+  'geen decoder voor dit formaat': 'χωρίς αποκωδικοποιητή για αυτή τη μορφή',
+  'geen decode mogelijk': 'αδύνατη η αποκωδικοποίηση',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Δεν ήταν δυνατή η αποθήκευση του ήχου δίπλα στο έγγραφο· λείπει η αναφορά.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Η διαδρομή διακομιστή απαιτεί συγκατάθεση που δεν έχει επιβεβαιωθεί ακόμη.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Το αρχείο είναι πολύ μεγάλο ή ο ήχος πολύ μακρός για αυτή τη διαδρομή.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Το αρχείο είναι πολύ μεγάλο ή δεν υπάρχει αρκετή ελεύθερη μνήμη.',
+  'Audio of video transcriberen': 'Μεταγραφή ήχου ή βίντεο',
+  'Audio- of videobestand kiezen': 'Επιλογή αρχείου ήχου ή βίντεο',
+  'Audio/video transcriberen…': 'Μεταγραφή ήχου/βίντεο…',
+  'Automatisch detecteren': 'Αυτόματη ανίχνευση',
+  'Bestand decoderen…': 'Αποκωδικοποίηση αρχείου…',
+  'Bewaar een kopie van de audio naast het document':
+      'Διατήρηση αντιγράφου του ήχου δίπλα στο έγγραφο',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Κατά την αποθήκευση αντιγράφεται στο media/ δίπλα στο .md.',
+  'Duur': 'Διάρκεια',
+  'Er ging iets mis bij het transcriberen.':
+      'Κάτι πήγε στραβά κατά τη μεταγραφή.',
+  'Formaat': 'Μορφή',
+  'Grootte': 'Μέγεθος',
+  'Het bestand kon niet worden gelezen.':
+      'Δεν ήταν δυνατή η ανάγνωση του αρχείου.',
+  'Het bronbestand blijft ongewijzigd.':
+      'Το αρχείο προέλευσης παραμένει αμετάβλητο.',
+  'Stop': 'Διακοπή',
+  'Transcriberen': 'Μεταγραφή',
+  'Transcriberen…': 'Μεταγραφή…',
+  'Uploaden en transcriberen': 'Μεταφόρτωση και μεταγραφή',
+  'Verwachte opslag': 'Αναμενόμενη αποθήκευση',
+  'bestand': 'αρχείο',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'χωρίς επιπλέον αντίγραφο — το αρχείο διαβάζεται απευθείας',
+  'lokaal': 'τοπικό',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Περιέχει το αρχείο φωνές άλλων; Μπορεί να απαιτείται η συγκατάθεσή τους.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Όλα παραμένουν σε αυτή τη συσκευή — ο ήχος δεν πηγαίνει πουθενά.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Ο ήχος από το {bestand} πηγαίνει στο {host}. Τίποτα άλλο δεν φεύγει από αυτή τη συσκευή.',
+  'De bron is niet beschikbaar: {reden}': 'Η πηγή δεν είναι διαθέσιμη: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Ο διακομιστής αρνήθηκε ή ήταν απρόσιτος: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Η μηχανή μεταγραφής δεν είναι έτοιμη: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Αυτή η μορφή δεν υποστηρίζεται σε αυτή τη συσκευή: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Δεν βρέθηκε ομιλία στο {bestand}. Το αρχείο παραμένει αμετάβλητο.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Δεν ήταν δυνατή η αποκωδικοποίηση του αρχείου: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Δεν ήταν δυνατή η ανάγνωση του αρχείου: {reden}',
   'dit platform': 'αυτή την πλατφόρμα',
   'API-sleutel': 'Κλειδί API',
   'Afgebroken': 'Ακυρώθηκε',

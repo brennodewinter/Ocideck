@@ -139,6 +139,7 @@ class CaptureRequest {
 /// Waar bytes vandaan komen. Platformroutes implementeren dit; de rest van
 /// de app kent alleen dit gezicht.
 abstract class CaptureSource {
+  const CaptureSource();
   CaptureSourceKind get kind;
 
   /// Alleen detectie. Triggert nooit een toestemmingsprompt, opent nooit

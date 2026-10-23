@@ -1603,6 +1603,68 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'šajā sistēmā nav atkodētāja (afconvert trūkst) — tikai PCM-WAV var lasīt tieši',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'šajā sistēmā nav atkodētāja (ffmpeg trūkst) — tikai PCM-WAV var lasīt tieši',
+  'codecdekking hangt van deze browser af':
+      'kodeka atbalsts ir atkarīgs no šīs pārlūkprogrammas',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js trūkst šajā pakotnē — bez atkodēšanas',
+  'geen decoder voor dit formaat': 'nav atkodētāja šim formātam',
+  'geen decode mogelijk': 'atkodēšana nav iespējama',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Audio nevarēja saglabāt blakus dokumentam; trūkst atsauces.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Servera maršruts prasa piekrišanu, kas vēl nav apstiprināta.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Fails ir pārāk liels vai audio pārāk garš šim maršrutam.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Fails ir pārāk liels vai brīvās atmiņas nav pietiekami.',
+  'Audio of video transcriberen': 'Transkribēt audio vai video',
+  'Audio- of videobestand kiezen': 'Izvēlēties audio vai video failu',
+  'Audio/video transcriberen…': 'Transkribēt audio/video…',
+  'Automatisch detecteren': 'Noteikt automātiski',
+  'Bestand decoderen…': 'Atkodē failu…',
+  'Bewaar een kopie van de audio naast het document':
+      'Saglabāt audio kopiju blakus dokumentam',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Saglabājot tas tiek kopēts uz media/ blakus .md.',
+  'Duur': 'Ilgums',
+  'Er ging iets mis bij het transcriberen.':
+      'Transkribēšanas laikā kaut kas nogāja greizi.',
+  'Formaat': 'Formāts',
+  'Grootte': 'Izmērs',
+  'Het bestand kon niet worden gelezen.': 'Failu nevarēja nolasīt.',
+  'Het bronbestand blijft ongewijzigd.': 'Avota fails paliek nemainīgs.',
+  'Stop': 'Apturēt',
+  'Transcriberen': 'Transkribēt',
+  'Transcriberen…': 'Transkribēt…',
+  'Uploaden en transcriberen': 'Augšupielādēt un transkribēt',
+  'Verwachte opslag': 'Paredzētā krātuve',
+  'bestand': 'fails',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'bez papildu kopijas — fails tiek lasīts tieši',
+  'lokaal': 'lokāls',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Vai fails satur citu balsis? Var būt nepieciešama viņu piekrišana.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Viss paliek šajā ierīcē — audio nekur neiet.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Audio no {bestand} iet uz {host}. Nekas cits neatstāj šo ierīci.',
+  'De bron is niet beschikbaar: {reden}': 'Avots nav pieejams: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Serveris atteica vai bija nesasniedzams: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Transkribēšanas dzinējs nav gatavs: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Šis formāts šajā ierīcē nav atbalstīts: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Runa nav atrasta {bestand}. Fails ir nemainīgs.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Failu nevarēja atkodēt: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Failu nevarēja nolasīt: {reden}',
   'dit platform': 'šajā platformā',
   'API-sleutel': 'API atslēga',
   'Afgebroken': 'Pārtraukts',

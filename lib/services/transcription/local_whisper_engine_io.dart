@@ -52,6 +52,10 @@ typedef WhisperRunner =
       List<String> arguments, {
       Map<String, String>? environment,
       required Duration timeout,
+
+      /// Complete stderr-regels terwijl ze binnenkomen — `-pp` print
+      /// `progress = N%` per verwerkt segment (#2515).
+      void Function(String line)? onStderrLine,
     });
 
 /// De lokale whisper.cpp-engine op desktop (§4.4). Regels van §10.2 passen
@@ -164,12 +168,10 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
       throw const IoFailed('het audiobestand bestaat niet (meer)');
     }
     if (!wav.path.toLowerCase().endsWith('.wav')) {
-      // §5.1 noot 1: WAV/PCM is de eenduidige basis; gecomprimeerde
-      // containers vragen een decoder die een later ticket bewijst (#2515).
-      throw const DecodeFailed(
-        'de lokale engine leest alleen PCM-WAV; decode van dit formaat '
-        'is nog niet bewezen',
-      );
+      // §5.1 noot 1: WAV/PCM is de eenduidige basis; de bestandsbron
+      // decodeert elke andere container vóór de engine (#2515) — komt er
+      // toch iets anders binnen, dan is dit het eerlijke antwoord.
+      throw const DecodeFailed('de lokale engine leest alleen PCM-WAV');
     }
 
     final modelPath = await _verifiedModelPath();
@@ -198,9 +200,20 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
         '-oj',
         '-of',
         outBase,
+        // Voortgang per verwerkt segment naar stderr (#2515) — de flow
+        // toont hem; zonder callback kost de vlag niets.
+        '-pp',
       ],
       environment: _hardenedEnv(workDir.path),
       timeout: timeout,
+      onStderrLine: options.onProgress == null
+          ? null
+          : (line) {
+              final m = _progressPattern.firstMatch(line);
+              if (m != null) {
+                options.onProgress!(int.parse(m.group(1)!) / 100);
+              }
+            },
     );
     _current = run;
     WhisperResult result;
@@ -424,6 +437,10 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
   static String _cap(String s, int max) =>
       s.length <= max ? s : '${s.substring(0, max)}…';
 
+  /// `progress = NN%` op stderr (whisper.cpp cli, `-pp` — één regel per
+  /// verwerkt segment).
+  static final _progressPattern = RegExp(r'progress =\s*(\d+)%');
+
   /// De echte start: één proces, argv-array, geen shell, begrensde pijpen
   /// en een `SIGKILL`-tijdslimiet — het patroon van git_cli_io._spawn.
   static WhisperRun _spawn(
@@ -431,6 +448,7 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
     List<String> arguments, {
     Map<String, String>? environment,
     required Duration timeout,
+    void Function(String line)? onStderrLine,
   }) {
     Process? process;
     var killed = false;
@@ -449,7 +467,21 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
       final out = _CappedCollector(_maxOutputBytes);
       final err = _CappedCollector(_maxOutputBytes);
       final outSub = proc.stdout.listen(out.add);
-      final errSub = proc.stderr.listen(err.add);
+      // stderr doet dubbel werk: begrensd verzamelen voor foutdiagnose,
+      // én regel-voor-regel doorleveren voor `-pp`-voortgang.
+      var errCarry = '';
+      final errSub = proc.stderr.listen((chunk) {
+        err.add(chunk);
+        if (onStderrLine != null) {
+          errCarry += utf8.decode(chunk, allowMalformed: true);
+          var idx = errCarry.indexOf('\n');
+          while (idx >= 0) {
+            onStderrLine(errCarry.substring(0, idx));
+            errCarry = errCarry.substring(idx + 1);
+            idx = errCarry.indexOf('\n');
+          }
+        }
+      });
       final drained = Future.wait([
         outSub.asFuture<void>().catchError((Object _) {}),
         errSub.asFuture<void>().catchError((Object _) {}),

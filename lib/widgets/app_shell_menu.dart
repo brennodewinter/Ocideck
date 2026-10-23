@@ -153,6 +153,15 @@ List<PickerOption<String>> importSourceOptions(
       icon: Icons.slideshow_outlined,
       label: presentationImportLabel(l10n),
     ),
+  // Bestandstranscriptie (audio/video → transcriptdocument): achter de
+  // Transcriptie-module — zichtbaar zodra die aan staat, onzichtbaar als
+  // hij uit is (#2515).
+  if (ref.read(transcriptionRevealProvider))
+    (
+      value: 'transcribe_file',
+      icon: Icons.graphic_eq_outlined,
+      label: transcribeFileLabel(l10n),
+    ),
   ...openKatImportChoices(ref, l10n),
 ];
 
@@ -309,6 +318,8 @@ extension _MainLayoutMenu on _MainLayoutState {
         await _importUrl();
       case 'import_presentation':
         await importPresentation(context, ref);
+      case 'transcribe_file':
+        await transcribeFile(context);
       default:
         await dispatchOpenKatShellAction(context, ref, action);
     }
