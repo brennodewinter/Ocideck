@@ -2557,8 +2557,9 @@ deck unchanged.
 
 *(Added 2026-07-24.)*
 
-**Presentaties importeren…** turns a PowerPoint (`.pptx`), LibreOffice
-Impress (`.odp`) or Apple Keynote (`.key`) file into a real OciDeck deck: typed
+**Presentaties importeren…** turns a PowerPoint (`.pptx`, or a `.potx` template
+containing sample slides), LibreOffice Impress (`.odp`) or Apple Keynote (`.key`)
+file into a real OciDeck deck: typed
 slides you can edit, in ordinary Marp Markdown, not a stack of pictures of
 somebody else's slides. It lives behind the **Importeren** module
 (**Instellingen → Uitbreidingen → Importeren**, off by default), so it appears
@@ -2567,6 +2568,19 @@ module now covers only this presentation import; OpenKAT moved out to its own
 integration, described above.)* Unlike the OpenKAT import it reads the bytes of
 the file you picked rather than a folder on disk, so this one exists in the
 browser version too.
+
+**A PowerPoint template without slides becomes a reusable style.** Select the
+`.potx` through the same import action. OciDeck previews title, content and
+section colours and lists the values it can and cannot take. Give the style a
+new name and save it; existing presentations keep their selected style. The
+first slide master's colours and font, and any available background, footer and
+slide numbers can be used. After inspecting a fixed corner logo or brand strip,
+you can choose to include it. Free positioning, PowerPoint layouts, animations,
+transitions, additional masters and other fixed pictures are not carried into
+the style. A template without usable style properties is rejected without
+creating an empty profile. `.potm` is unsupported. A `.potx` with sample slides
+follows the normal presentation import; check the slides and formatting after
+conversion.
 
 You will find it in two places: on the **opening screen**, directly under
 *Nieuwe presentatie* — the same spot *Document importeren…* occupies under
@@ -2578,7 +2592,7 @@ leads to `.docx`/`.odt`.)*
 
 **If you reach for "Openen…" instead, OciDeck points you the right way.**
 *(Added 2026-08-03, #1175.)* "Openen…" is for Markdown and `.ocideck` files, so
-picking a `.pptx`/`.odp`/`.key` there used to dead-end on "this file is not
+picking a `.pptx`/`.potx`/`.odp`/`.key` there used to dead-end on "this file is not
 readable text — OciDeck opens Markdown", with no hint that an import even exists.
 Now that message recognises the presentation and offers a way out: with the
 **Importeren** module on, the notice carries an **Importeren** button that starts
@@ -2588,7 +2602,7 @@ sends you to **Instellingen** to switch the module on, rather than silently
 enabling it.
 
 **You can also drag presentations straight onto the window.** *(Added
-2026-08-03, #1175.)* Dropping one or more `.pptx`/`.odp`/`.key` files onto
+2026-08-03, #1175.)* Dropping one or more `.pptx`/`.potx`/`.odp`/`.key` files onto
 OciDeck sends them into the same import — one file opens directly, several go to
 the queue dialog (order and destination), exactly like the menu item. A mixed
 drop is fine: Markdown, images and presentations each take their own route. With
