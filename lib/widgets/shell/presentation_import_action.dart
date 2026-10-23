@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
+import '../../models/settings.dart';
 import '../../services/file_service.dart' hide ImportFailure;
 import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
@@ -194,15 +195,7 @@ Future<void> importPresentation(
     }
     return;
   }
-  final templateTheme =
-      chosen.name.toLowerCase().endsWith('.potx') &&
-          logo?.profile == null &&
-          prepared.sourceDeck.theme != null
-      ? importedThemeProfile(
-          prepared.sourceDeck.theme,
-          name: stemOfFileName(chosen.name),
-        )
-      : null;
+  final templateTheme = _templateThemeFor(prepared, chosen.name, logo);
   final deck = templateTheme == null
       ? built.deck
       : built.deck.copyWith(themeProfile: templateTheme);
@@ -214,6 +207,22 @@ Future<void> importPresentation(
     messenger: messenger,
     l10n: l10n,
     preserveThemeProfile: logo?.profile != null || templateTheme != null,
+  );
+}
+
+ThemeProfile? _templateThemeFor(
+  PreparedImport prepared,
+  String filename,
+  ImportLogoResolution? logo,
+) {
+  if (!filename.toLowerCase().endsWith('.potx') ||
+      logo?.profile != null ||
+      prepared.sourceDeck.theme == null) {
+    return null;
+  }
+  return importedThemeProfile(
+    prepared.sourceDeck.theme,
+    name: stemOfFileName(filename),
   );
 }
 
