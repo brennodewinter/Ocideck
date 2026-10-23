@@ -1605,6 +1605,68 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'ei dekooderia tässä järjestelmässä (afconvert puuttuu) — vain PCM-WAV voidaan lukea suoraan',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'ei dekooderia tässä järjestelmässä (ffmpeg puuttuu) — vain PCM-WAV voidaan lukea suoraan',
+  'codecdekking hangt van deze browser af':
+      'koodekin tuki riippuu tästä selaimesta',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js puuttuu tästä paketista — ei dekoodausta',
+  'geen decoder voor dit formaat': 'ei dekooderia tälle muodolle',
+  'geen decode mogelijk': 'dekoodaus ei mahdollinen',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Ääntä ei voitu tallentaa asiakirjan viereen; viite puuttuu.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Palvelinreitti vaatii suostumuksen, jota ei ole vielä vahvistettu.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Tiedosto on liian suuri tai ääni liian pitkä tälle reitille.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Tiedosto on liian suuri tai vapaata muistia ei ole tarpeeksi.',
+  'Audio of video transcriberen': 'Transkriboi ääntä tai videota',
+  'Audio- of videobestand kiezen': 'Valitse ääni- tai videotiedosto',
+  'Audio/video transcriberen…': 'Transkriboi ääni/video…',
+  'Automatisch detecteren': 'Tunnista automaattisesti',
+  'Bestand decoderen…': 'Puretaan tiedostoa…',
+  'Bewaar een kopie van de audio naast het document':
+      'Säilytä kopio äänestä asiakirjan vieressä',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Tallennettaessa se kopioidaan media/-kansioon .md-tiedoston viereen.',
+  'Duur': 'Kesto',
+  'Er ging iets mis bij het transcriberen.': 'Transkriptiossa tapahtui virhe.',
+  'Formaat': 'Muoto',
+  'Grootte': 'Koko',
+  'Het bestand kon niet worden gelezen.': 'Tiedostoa ei voitu lukea.',
+  'Het bronbestand blijft ongewijzigd.':
+      'Lähdetiedosto säilyy muuttumattomana.',
+  'Stop': 'Pysäytä',
+  'Transcriberen': 'Transkriboi',
+  'Transcriberen…': 'Transkriboi…',
+  'Uploaden en transcriberen': 'Lataa ja transkriboi',
+  'Verwachte opslag': 'Odotettu tallennustila',
+  'bestand': 'tiedosto',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'ei ylimääräistä kopiota — tiedosto luetaan suoraan',
+  'lokaal': 'paikallinen',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Sisältääkö tiedosto muiden ääniä? Heidän suostumuksensa voi olla tarpeen.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Kaikki pysyy tällä laitteella — ääni ei mene mihinkään.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Ääni tiedostosta {bestand} menee osoitteeseen {host}. Mikään muu ei poistu tästä laitteesta.',
+  'De bron is niet beschikbaar: {reden}': 'Lähde ei ole saatavilla: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Palvelin kieltäytyi tai oli tavoittamattomissa: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Transkriptiomoottori ei ole valmis: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Tätä muotoa ei tueta tällä laitteella: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Puhea ei löytynyt tiedostosta {bestand}. Tiedosto on muuttumaton.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Tiedostoa ei voitu purkaa: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Tiedostoa ei voitu lukea: {reden}',
   'dit platform': 'tällä alustalla',
   'API-sleutel': 'API-avain',
   'Afgebroken': 'Keskeytetty',

@@ -168,6 +168,24 @@ TranscriptDetection detectTranscript(String source) {
   return const NoTranscript();
 }
 
+/// Zet `audio="<rel>"` op de marker van [source] — de bewaarkeuze die bij
+/// Opslaan landt (#2515, §3.2). Alleen op een geldige marker die nog géén
+/// audio droeg én een pad dat de containment-regel haalt; al het andere
+/// levert null, de aanroeper schrijft dan ongewijzigd door.
+String? withTranscriptAudioLink(String source, String audioRelPath) {
+  if (!_isContainedMediaPath(audioRelPath)) return null;
+  final detection = detectTranscript(source);
+  if (detection is! ValidTranscript || detection.marker.audioPath != null) {
+    return null;
+  }
+  // De markerregel is verbatim bekend — één vervanging, de rest van het
+  // document blijft byte-getrouw.
+  return source.replaceFirst(
+    detection.marker.line,
+    formatTranscriptMarker(audioRelPath: audioRelPath),
+  );
+}
+
 /// De containment-regel voor `audio="…"`: een relatief pad in `media/`,
 /// zonder absolute vorm, schema, schijfletter of `..`-segment. Lexicaal —
 /// de echte bestandscheck gebeurt bij het lezen (zie `transcript_audio_probe`).

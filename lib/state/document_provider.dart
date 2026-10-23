@@ -71,6 +71,13 @@ class DocumentState {
   /// pad is; hij is een hint, geen identiteit.
   final String? suggestedName;
 
+  /// De bewaarkeuze van de transcriptie-flow (#2515): het door de gebruiker
+  /// gekozen bronbestand dat bij Opslaan naar `media/` naast het document
+  /// kopieert, waarna de marker zijn `audio=`-verwijzing krijgt. Transient —
+  /// leeft alleen in deze staat, nooit in het bestand; [markSaved] wist hem
+  /// zodra de keuze is geland.
+  final String? pendingAudioPath;
+
   const DocumentState({
     this.document,
     this.isDirty = false,
@@ -87,6 +94,7 @@ class DocumentState {
     this.savedFileHash,
     this.projectPath,
     this.suggestedName,
+    this.pendingAudioPath,
   });
 
   bool get hasUnsavedChanges => isDirty;
@@ -108,9 +116,11 @@ class DocumentState {
     String? savedFileHash,
     String? projectPath,
     String? suggestedName,
+    String? pendingAudioPath,
     bool clearError = false,
     bool clearFilePath = false,
     bool clearSuggestedName = false,
+    bool clearPendingAudio = false,
   }) {
     return DocumentState(
       document: document ?? this.document,
@@ -130,6 +140,9 @@ class DocumentState {
       suggestedName: clearSuggestedName
           ? null
           : (suggestedName ?? this.suggestedName),
+      pendingAudioPath: clearPendingAudio
+          ? null
+          : (pendingAudioPath ?? this.pendingAudioPath),
     );
   }
 }
@@ -190,6 +203,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
     String? filePath,
     String? projectPath,
     String? suggestedName,
+    String? pendingAudioPath,
   }) {
     _clearHistory();
     state = DocumentState(
@@ -201,6 +215,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       savedFileHash: DocumentIntegrity.hashDocument(document),
       projectPath: projectPath,
       suggestedName: suggestedName,
+      pendingAudioPath: pendingAudioPath,
     );
   }
 
@@ -306,6 +321,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
           (state.document == null
               ? DocumentIntegrity.hashMarkdown('')
               : DocumentIntegrity.hashDocument(state.document!)),
+      clearPendingAudio: true,
     );
   }
 

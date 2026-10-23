@@ -50,6 +50,10 @@ rules:
       exclude:
         - "**/lib/services/git/**"
         - "**/lib/services/transcription/local_whisper_engine_io.dart"
+        # De bestandsdecoder (#2515) start afconvert/ffmpeg — een lokaal
+        # systeemsubproces zonder netwerkcode, met een lege environment,
+        # net als de whisper-cli. De bron wordt nooit aangeraakt.
+        - "**/lib/services/transcription/file_capture_source_io.dart"
 
   - id: ocideck-zwakke-random-voor-geheim
     languages: [dart]

@@ -2,6 +2,9 @@
 // zonder schijf en zonder subproces moeten ze eerlijk weigeren — absent,
 // UnsupportedSource — in plaats van iets voor te wenden.
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/services/transcription/capture_source.dart';
+import 'package:ocideck/services/transcription/file_capture_source_stub.dart'
+    as file_stub;
 import 'package:ocideck/services/transcription/local_whisper_engine.dart';
 import 'package:ocideck/services/transcription/local_whisper_engine_stub.dart'
     as engine_stub;
@@ -78,6 +81,32 @@ void main() {
       expect(
         engine_stub.createLocalWhisperEngine(model: model),
         isA<engine_stub.StubLocalWhisperEngine>(),
+      );
+    });
+  });
+
+  group('bestandsbron-stub (platform zonder file-route)', () {
+    test('probe is unavailable; describe en start weigeren getypt', () async {
+      const source = file_stub.StubFileCaptureSource();
+      expect(source.kind, CaptureSourceKind.file);
+      expect(await source.probe(), CaptureAvailability.unavailable);
+      expect(
+        () => source.describe('/tmp/clip.wav'),
+        throwsA(isA<SourceUnavailable>()),
+      );
+      expect(
+        () => source.start(
+          const CaptureRequest(
+            kinds: {CaptureSourceKind.file},
+            consent: RecordingConsent(participantNoticeAcknowledged: true),
+            sourcePath: '/tmp/clip.wav',
+          ),
+        ),
+        throwsA(isA<SourceUnavailable>()),
+      );
+      expect(
+        file_stub.createFileCaptureSource(),
+        isA<file_stub.StubFileCaptureSource>(),
       );
     });
   });

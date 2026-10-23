@@ -56,6 +56,8 @@ import 'markdown_safety.dart';
 import 'markdown_service.dart';
 import 'open_file_channel.dart';
 import 'slide_image_refs.dart';
+import 'transcript_audio_copy.dart';
+import 'transcription/transcript_marker.dart';
 import 'web_asset_store.dart';
 
 part 'file/file_service_net.dart';

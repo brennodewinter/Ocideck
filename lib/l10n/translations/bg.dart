@@ -1624,6 +1624,68 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'без декодер на тази система (afconvert липсва) — само PCM-WAV може да се чете директно',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'без декодер на тази система (ffmpeg липсва) — само PCM-WAV може да се чете директно',
+  'codecdekking hangt van deze browser af':
+      'поддръжката на кодека зависи от този браузър',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js липсва в този пакет — без декодиране',
+  'geen decoder voor dit formaat': 'без декодер за този формат',
+  'geen decode mogelijk': 'декодирането е невъзможно',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Аудиото не можа да бъде запазено до документа; препратката липсва.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Сървърният маршрут изисква съгласие, което все още не е потвърдено.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Файлът е твърде голям или аудиото твърде дълго за този маршрут.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Файлът е твърде голям или няма достатъчно свободна памет.',
+  'Audio of video transcriberen': 'Транскрибирай аудио или видео',
+  'Audio- of videobestand kiezen': 'Изберете аудио или видео файл',
+  'Audio/video transcriberen…': 'Транскрибирай аудио/видео…',
+  'Automatisch detecteren': 'Открий автоматично',
+  'Bestand decoderen…': 'Декодиране на файл…',
+  'Bewaar een kopie van de audio naast het document':
+      'Запазете копие от аудиото до документа',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'При запазване се копира в media/ до .md.',
+  'Duur': 'Продължителност',
+  'Er ging iets mis bij het transcriberen.':
+      'Нещо се обърка по време на транскрипцията.',
+  'Formaat': 'Формат',
+  'Grootte': 'Размер',
+  'Het bestand kon niet worden gelezen.': 'Файлът не можа да бъде прочетен.',
+  'Het bronbestand blijft ongewijzigd.': 'Изходният файл остава непроменен.',
+  'Stop': 'Спри',
+  'Transcriberen': 'Транскрибирай',
+  'Transcriberen…': 'Транскрибирай…',
+  'Uploaden en transcriberen': 'Качване и транскрибиране',
+  'Verwachte opslag': 'Очаквано място',
+  'bestand': 'файл',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'без допълнително копие — файлът се чете директно',
+  'lokaal': 'локален',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Съдържа ли файлът чужди гласове? Може да е необходимо тяхното съгласие.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Всичко остава на това устройство — аудиото не отива никъде.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Аудиото от {bestand} отива към {host}. Нищо друго не напуска това устройство.',
+  'De bron is niet beschikbaar: {reden}': 'Източникът не е наличен: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Сървърът отказа или беше недостъпен: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Транскрипционният двигател не е готов: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Този формат не се поддържа на това устройство: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Не е намерена реч в {bestand}. Файлът е непроменен.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Файлът не можа да бъде декодиран: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Файлът не можа да бъде прочетен: {reden}',
   'dit platform': 'тази платформа',
   'API-sleutel': 'API ключ',
   'Afgebroken': 'Прекъснато',

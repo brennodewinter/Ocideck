@@ -671,6 +671,18 @@ class _WelcomeScreen extends ConsumerWidget {
       label: Text(documentImportLabel(l10n)),
       onPressed: () => importDocument(context),
     ),
+    // Audio/video → transcript (#2515): ook een document dat ergens
+    // vandaan komt. Alleen zichtbaar terwijl de Transcriptie-module aan
+    // staat — dezelfde poort als het menu-item.
+    if (ref.watch(transcriptionRevealProvider)) ...[
+      const SizedBox(height: 8),
+      _wideSecondaryButton(
+        style: _secondaryButtonStyle(Theme.of(context).colorScheme),
+        icon: Icons.graphic_eq_outlined,
+        label: Text(transcribeFileLabel(l10n)),
+        onPressed: () => transcribeFile(context),
+      ),
+    ],
   ];
 
   /// De terugweg vanuit PowerPoint, Keynote of Impress, pal onder 'Nieuwe

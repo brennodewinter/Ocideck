@@ -1620,6 +1620,68 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'nullus decodor in hoc systemate (afconvert deest) — solum PCM-WAV directe legi potest',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'nullus decodor in hoc systemate (ffmpeg deest) — solum PCM-WAV directe legi potest',
+  'codecdekking hangt van deze browser af':
+      'codec sustentatio ab hoc navigatore dependet',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js in hoc fasciculo deest — sine decodando',
+  'geen decoder voor dit formaat': 'nullus decodor pro hoc formata',
+  'geen decode mogelijk': 'nulla decodatio possibilis',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Sonus iuxta documentum servari non potuit; desunt referentia',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Via serveris consensus postulat nondum confirmatus',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'File nimis magnus vel sonus nimis longus ad hanc viam',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'File nimis magnus vel memoria libera non sufficit',
+  'Audio of video transcriberen': 'Sonum vel video transcribe',
+  'Audio- of videobestand kiezen': 'Elige file soni vel video',
+  'Audio/video transcriberen…': 'Sonum/video transcribe…',
+  'Automatisch detecteren': 'Automate detege',
+  'Bestand decoderen…': 'File decodans…',
+  'Bewaar een kopie van de audio naast het document':
+      'Copiam soni iuxta documentum serva',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Salvans in media/ iuxta .md copiatur',
+  'Duur': 'Duratio',
+  'Er ging iets mis bij het transcriberen.':
+      'Aliquid in transcribendo male factum',
+  'Formaat': 'Forma',
+  'Grootte': 'Magnitudo',
+  'Het bestand kon niet worden gelezen.': 'File legi non potuit',
+  'Het bronbestand blijft ongewijzigd.': 'File fontis inmutatum manet',
+  'Stop': 'Sto',
+  'Transcriberen': 'Transcribe',
+  'Transcriberen…': 'Transcribe…',
+  'Uploaden en transcriberen': 'Carica et transcribe',
+  'Verwachte opslag': 'Exspectata conditura',
+  'bestand': 'file',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'sine copia supplementaria — file directe legitur',
+  'lokaal': 'localis',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Continet file voces aliorum? Eorum consensus fortasse necessarius',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Omnia in hoc apparatu manent — sonus nusquam it',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Sonus ex {bestand} it ad {host}. Nihil aliud hoc apparatum relinquit',
+  'De bron is niet beschikbaar: {reden}': 'Fons non disponitur: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Server recusavit aut inaccessibilis fuit: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Motor transcribendi non paratus: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Hic formatus in hoc apparatu non sustinetur: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Nulla oratio in {bestand} inventa. File inmutatus manet',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'File decodi non potuit: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'File legi non potuit: {reden}',
   'dit platform': 'haec suggesta',
   'API-sleutel': 'Clavis API',
   'Afgebroken': 'Interruptum',

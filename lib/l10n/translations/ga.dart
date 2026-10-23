@@ -1635,6 +1635,69 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'níl aon díchódóir ar an gcóras seo (afconvert in easnamh) — is féidir PCM-WAV amháin a léamh go díreach',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'níl aon díchódóir ar an gcóras seo (ffmpeg in easnamh) — is féidir PCM-WAV amháin a léamh go díreach',
+  'codecdekking hangt van deze browser af':
+      'brathann tacaíocht an chóidíocsa ar an mbrabhsálaí seo',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js in easnamh sa phacáiste seo — gan díchódú',
+  'geen decoder voor dit formaat': 'níl aon díchódóir don bhformáid seo',
+  'geen decode mogelijk': 'ní féidir aon díchódú',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Níorbh fhéidir an fhuaim a shábháil in aice leis an gcáipéis; tá an tagairt in easnamh.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Éilíonn bealach an fhreastalaí comhaontú nár deimhníodh fós.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Tá an comhad rómhór nó an fhuaim rófhada don bhealach seo.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Tá an comhad rómhór nó níl go leor cuimhne saor.',
+  'Audio of video transcriberen': 'Trascribh fuaime nó físe',
+  'Audio- of videobestand kiezen': 'Roghnaigh comhad fuaime nó físe',
+  'Audio/video transcriberen…': 'Trascribh fuaime/físe…',
+  'Automatisch detecteren': 'Braith go huathoibríoch',
+  'Bestand decoderen…': 'Ag díchódú comhad…',
+  'Bewaar een kopie van de audio naast het document':
+      'Coinnigh cóip den fhuaim in aice leis an gcáipéis',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Ag sábháil, cóipeáiltear é go media/ in aice leis an .md.',
+  'Duur': 'Aga',
+  'Er ging iets mis bij het transcriberen.':
+      'Chuaigh rud éigin amú le linn na trascribhtha.',
+  'Formaat': 'Formáid',
+  'Grootte': 'Méid',
+  'Het bestand kon niet worden gelezen.': 'Níorbh fhéidir an comhad a léamh.',
+  'Het bronbestand blijft ongewijzigd.':
+      'Fanann an comhad foinseach gan athrú.',
+  'Stop': 'Stad',
+  'Transcriberen': 'Trascribh',
+  'Transcriberen…': 'Trascribh…',
+  'Uploaden en transcriberen': 'Uaslódáil agus trascribh',
+  'Verwachte opslag': 'Stórás a bhfuil súil leis',
+  'bestand': 'comhad',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'gan cóip bhreise — léitear an comhad go díreach',
+  'lokaal': 'áitiúil',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'An bhfuil guthanna daoine eile sa chomhad? Féadfaidh a gcomhaontú a bheith ag teastáil.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Fanann gach rud ar an bhfeiste seo — ní théann an fhuaim áit ar bith.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Téann an fhuaim ó {bestand} go {host}. Ní fhágann aon rud eile an feiste seo.',
+  'De bron is niet beschikbaar: {reden}': 'Níl an foinse ar fáil: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Dhiúltaigh an freastalaí nó bhí sé dorochtana: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Níl an t-inneall trascribhtha réidh: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Ní thacaítear leis an bhformáid seo ar an bhfeiste seo: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Níor aimsíodh aon chaint i {bestand}. Tá an comhad gan athrú.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Níorbh fhéidir an comhad a dhíchódú: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Níorbh fhéidir an comhad a léamh: {reden}',
   'dit platform': 'an t-ardán seo',
   'API-sleutel': 'Eochair API',
   'Afgebroken': 'Cealaithe',

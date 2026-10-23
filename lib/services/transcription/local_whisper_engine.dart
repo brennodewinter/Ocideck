@@ -67,8 +67,8 @@ class LocalEngineStatus {
 }
 
 /// De lokale engine. Naast de contractmethoden heeft hij [status] (waarom
-/// is hij wel/niet klaar) en [cancel] — de interface kent geen
-/// annuleringstoken, dus hangt de Stop-knop aan de concrete klasse.
+/// is hij wel/niet klaar) — [cancel] staat sinds #2515 op de interface
+/// zelf, omdat elke Stop-knop hem engine-neutraal nodig heeft.
 abstract class LocalWhisperEngine implements TranscriptionEngine {
   /// Toetst architectuur en helper-aanwezigheid. Goedkoop en zuiver:
   /// raakt geen model en start niets.
@@ -80,6 +80,7 @@ abstract class LocalWhisperEngine implements TranscriptionEngine {
   /// Breekt een lopende [transcribe] af — het proces wordt met `SIGKILL`
   /// beëindigd en de toekomst voltooit met [Cancelled]. Niets aan de hand
   /// als er niets liep.
+  @override
   void cancel();
 }
 

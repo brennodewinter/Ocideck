@@ -195,6 +195,7 @@ import 'shell/new_document_action.dart';
 import 'shell/openkat_import_action.dart';
 import 'shell/dropped_files.dart';
 import 'shell/presentation_import_action.dart';
+import 'shell/transcribe_file_action.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/collab_chat_panel.dart';

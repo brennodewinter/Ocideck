@@ -811,6 +811,68 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'no decoder on this system (afconvert missing) — only PCM-WAV can be read directly',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'no decoder on this system (ffmpeg missing) — only PCM-WAV can be read directly',
+  'codecdekking hangt van deze browser af':
+      'codec support depends on this browser',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js missing in this bundle — no decode',
+  'geen decoder voor dit formaat': 'no decoder for this format',
+  'geen decode mogelijk': 'no decode possible',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'The audio could not be saved alongside the document; the reference is missing.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'The server route requires consent that has not yet been confirmed.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'The file is too large or the audio too long for this route.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'The file is too large or there is not enough free memory.',
+  'Audio of video transcriberen': 'Transcribe audio or video',
+  'Audio- of videobestand kiezen': 'Choose an audio or video file',
+  'Audio/video transcriberen…': 'Transcribe audio/video…',
+  'Automatisch detecteren': 'Detect automatically',
+  'Bestand decoderen…': 'Decoding file…',
+  'Bewaar een kopie van de audio naast het document':
+      'Keep a copy of the audio alongside the document',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'On Save it is copied to media/ next to the .md.',
+  'Duur': 'Duration',
+  'Er ging iets mis bij het transcriberen.':
+      'Something went wrong during transcription.',
+  'Formaat': 'Format',
+  'Grootte': 'Size',
+  'Het bestand kon niet worden gelezen.': 'The file could not be read.',
+  'Het bronbestand blijft ongewijzigd.': 'The source file remains unchanged.',
+  'Stop': 'Stop',
+  'Transcriberen': 'Transcribe',
+  'Transcriberen…': 'Transcribe…',
+  'Uploaden en transcriberen': 'Upload and transcribe',
+  'Verwachte opslag': 'Expected storage',
+  'bestand': 'file',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'no extra copy — the file is read directly',
+  'lokaal': 'local',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Does the file contain others\' voices? Their consent may be needed.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Everything stays on this device — the audio goes nowhere.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'The audio from {bestand} goes to {host}. Nothing else leaves this device.',
+  'De bron is niet beschikbaar: {reden}': 'The source is unavailable: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'The server refused or was unreachable: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'The transcription engine is not ready: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'This format is not supported on this device: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'No speech found in {bestand}. The file is unchanged.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'The file could not be decoded: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'The file could not be read: {reden}',
   'dit platform': 'this platform',
   'API-sleutel': 'API key',
   'Afgebroken': 'Cancelled',

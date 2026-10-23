@@ -1605,6 +1605,68 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'ingen afkoder på dette system (afconvert mangler) — kun PCM-WAV kan læses direkte',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'ingen afkoder på dette system (ffmpeg mangler) — kun PCM-WAV kan læses direkte',
+  'codecdekking hangt van deze browser af':
+      'codec-understøttelse afhænger af denne browser',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js mangler i denne bundle — ingen afkodning',
+  'geen decoder voor dit formaat': 'ingen afkoder til dette format',
+  'geen decode mogelijk': 'afkodning ikke mulig',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Lyden kunne ikke gemmes ved siden af dokumentet; referencen mangler.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Serverruten kræver et samtykke, der endnu ikke er bekræftet.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Filen er for stor eller lyden for lang til denne rute.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Filen er for stor eller der er ikke nok ledig hukommelse.',
+  'Audio of video transcriberen': 'Transskribér lyd eller video',
+  'Audio- of videobestand kiezen': 'Vælg en lyd- eller videofil',
+  'Audio/video transcriberen…': 'Transskribér lyd/video…',
+  'Automatisch detecteren': 'Detektér automatisk',
+  'Bestand decoderen…': 'Afkoder fil…',
+  'Bewaar een kopie van de audio naast het document':
+      'Behold en kopi af lyden ved siden af dokumentet',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Ved gemning kopieres den til media/ ved siden af .md.',
+  'Duur': 'Varighed',
+  'Er ging iets mis bij het transcriberen.':
+      'Noget gik galt under transskriptionen.',
+  'Formaat': 'Format',
+  'Grootte': 'Størrelse',
+  'Het bestand kon niet worden gelezen.': 'Filen kunne ikke læses.',
+  'Het bronbestand blijft ongewijzigd.': 'Kildefilen forbliver uændret.',
+  'Stop': 'Stop',
+  'Transcriberen': 'Transskribér',
+  'Transcriberen…': 'Transskribér…',
+  'Uploaden en transcriberen': 'Upload og transskribér',
+  'Verwachte opslag': 'Forventet plads',
+  'bestand': 'fil',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'ingen ekstra kopi — filen læses direkte',
+  'lokaal': 'lokal',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Indeholder filen andres stemmer? Deres samtykke kan være nødvendigt.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Alt forbliver på denne enhed — lyden går ingen steder.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Lyden fra {bestand} går til {host}. Intet andet forlader denne enhed.',
+  'De bron is niet beschikbaar: {reden}': 'Kilden er ikke tilgængelig: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Serveren nægtede eller var utilgængelig: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Transskriptionsmotoren er ikke klar: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Dette format understøttes ikke på denne enhed: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Ingen tale fundet i {bestand}. Filen er uændret.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Filen kunne ikke afkodes: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Filen kunne ikke læses: {reden}',
   'dit platform': 'denne platform',
   'API-sleutel': 'API-nøgle',
   'Afgebroken': 'Afbrudt',

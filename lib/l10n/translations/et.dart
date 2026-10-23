@@ -1598,6 +1598,68 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'selles süsteemis pole dekodeerijat (afconvert puudub) — ainult PCM-WAV saab otse lugeda',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'selles süsteemis pole dekodeerijat (ffmpeg puudub) — ainult PCM-WAV saab otse lugeda',
+  'codecdekking hangt van deze browser af':
+      'koodeki tugi sõltub sellest brauserist',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js puudub selles paketis — dekodeerimine puudub',
+  'geen decoder voor dit formaat': 'pole dekodeerijat selle formaadi jaoks',
+  'geen decode mogelijk': 'dekodeerimine võimatu',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Heli ei saanud dokumendi kõrval salvestada; viide puudub.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Serveri marsruut nõuab nõusolekut, mis pole veel kinnitatud.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Fail on liiga suur või heli liiga pikk selle marsruudi jaoks.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Fail on liiga suur või vaba mälu pole piisav.',
+  'Audio of video transcriberen': 'Transkribeeri heli või videot',
+  'Audio- of videobestand kiezen': 'Vali heli- või videofail',
+  'Audio/video transcriberen…': 'Transkribeeri heli/video…',
+  'Automatisch detecteren': 'Tuvasta automaatselt',
+  'Bestand decoderen…': 'Faili dekodeerimine…',
+  'Bewaar een kopie van de audio naast het document':
+      'Hoia audio koopia dokumendi kõrval',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Salvestamisel kopeeritakse see media/ kausta .md kõrval.',
+  'Duur': 'Kestus',
+  'Er ging iets mis bij het transcriberen.':
+      'Transkribeerimisel läks midagi valesti.',
+  'Formaat': 'Formaat',
+  'Grootte': 'Suurus',
+  'Het bestand kon niet worden gelezen.': 'Faili ei saanud lugeda.',
+  'Het bronbestand blijft ongewijzigd.': 'Allikafail jääb muutmata.',
+  'Stop': 'Peata',
+  'Transcriberen': 'Transkribeeri',
+  'Transcriberen…': 'Transkribeeri…',
+  'Uploaden en transcriberen': 'Laadi üles ja transkribeeri',
+  'Verwachte opslag': 'Eeldatav salvestusruum',
+  'bestand': 'fail',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'lisakoopiat pole — fail loetakse otse',
+  'lokaal': 'kohalik',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Kas fail sisaldab teiste hääli? Nende nõusolek võib olla vajalik.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Kõik jääb sellesse seadmesse — heli ei lähe kuhugi.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Heli failist {bestand} läheb hosti {host}. Midagi muud ei lahku sellest seadmest.',
+  'De bron is niet beschikbaar: {reden}': 'Allikas pole saadaval: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Server keeldus või oli kättesaamatu: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Transkribeerimismootor pole valmis: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Seda formaati ei toetata selles seadmes: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Kõnet ei leitud failist {bestand}. Fail on muutmata.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Faili ei saanud dekodeerida: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Faili ei saanud lugeda: {reden}',
   'dit platform': 'sellel platvormil',
   'API-sleutel': 'API-võti',
   'Afgebroken': 'Katkestatud',

@@ -169,9 +169,9 @@ const Map<String, int> fileSizeBaseline = {
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
   'lib/state/tabs_provider.dart':
-      1057, // +5 (#2468): suggestedName-parameter langs de tab-aanmaak-keten
-  // en de dirty-markering die bij zo'n kopie hoort — cohesief met de
-  // aanmaak-lus hierboven.
+      1063, // +6 (#2515): pendingAudioPath-parameter door
+  // newDocumentFromMarkdown — de bewaarkeuze voor bestandstranscriptie
+  // reist mee naar de tab en landt bij Opslaan in media/.
   // +10 (#1953): recoveryWriteErrorProvider
   // + onWriteError-callback bedrading in de constructor.
   // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
@@ -317,7 +317,9 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart': 1048,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
-      1017, // +26 (#1951): fileMtime + fileChangedSince.
+      1018, // +1 (#2515): transcriptAudioPath-parameter op
+  // saveDocumentWithDestination — de bewaarkeuze bereikt de
+  // media-kopie in file_service_open.
   // +82 (#1859/#1863/#1864): layout-herstructurering met _buildSlideSettings,
   // _buildBulletList en _buildWorkSurface; State-level controller + geselecteerd
   // doel; venstermaat-klemming en Nederlandse termen. De build-methode kromp
@@ -478,8 +480,9 @@ const Map<String, int> classSizeBaseline = {
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
   'lib/services/file_service.dart#FileService':
-      2884, // +2 (#2468): de fileName-parameter op saveDocumentAs — de
-  // geïmporteerde naam bereikt zo de kiezer zonder omweg via de state.
+      2886, // +2 (#2515): transcriptAudioPath langs
+  // saveDocumentWithDestination — de bewaarkeuze bereikt de
+  // media-kopie in file_service_open.
   // +7 (#2433): de slideSize-parameter langs _buildThemeCss en de
   // package-/project-thema-bouwers. De @size-math en pixelhoogte zelf staan
   // in het formaatmodel (slide_format.dart); wat rest is doorvoer. // +26 (#1951): fileMtime + fileChangedSince.
@@ -525,7 +528,10 @@ const Map<String, int> classSizeBaseline = {
   // +12 (#1637): notPresentation→document-router in openDeckFromBytes.
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2284, // +5 (#1953): onWriteError
+  'lib/state/tabs_provider.dart#TabsNotifier':
+      2286, // +2 (#2515): pendingAudioPath-doorlus in
+  // newDocumentFromMarkdown — de bewaarkeuze voor bestandstranscriptie
+  // reist mee naar de tab-state.
   // bedrading in constructor + recoveryWriteErrorProvider.
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).

@@ -2513,6 +2513,67 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'bu sistemde dekoder yok (afconvert eksik) — yalnızca PCM-WAV doğrudan okunabilir',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'bu sistemde dekoder yok (ffmpeg eksik) — yalnızca PCM-WAV doğrudan okunabilir',
+  'codecdekking hangt van deze browser af':
+      'codec desteği bu tarayıcıya bağlıdır',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js bu pakette eksik — dekoder yok',
+  'geen decoder voor dit formaat': 'bu biçim için dekoder yok',
+  'geen decode mogelijk': 'dekode imkansız',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Ses belgenin yanına kaydedilemedi; referans eksik.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Sunucu rotası henüz onaylanmamış bir onay gerektirir.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Dosya bu rota için çok büyük veya ses çok uzun.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Dosya çok büyük veya yeterli boş bellek yok.',
+  'Audio of video transcriberen': 'Ses veya video transkripsiyonu',
+  'Audio- of videobestand kiezen': 'Ses veya video dosyası seç',
+  'Audio/video transcriberen…': 'Ses/video transkripsiyonu…',
+  'Automatisch detecteren': 'Otomatik algıla',
+  'Bestand decoderen…': 'Dosya çözümleniyor…',
+  'Bewaar een kopie van de audio naast het document':
+      'Ses kopyasını belgenin yanında tut',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Kaydederken media/ klasörüne .md yanına kopyalanır.',
+  'Duur': 'Süre',
+  'Er ging iets mis bij het transcriberen.':
+      'Transkripsiyon sırasında bir şeyler ters gitti.',
+  'Formaat': 'Biçim',
+  'Grootte': 'Boyut',
+  'Het bestand kon niet worden gelezen.': 'Dosya okunamadı.',
+  'Het bronbestand blijft ongewijzigd.': 'Kaynak dosya değişmeden kalır.',
+  'Stop': 'Durdur',
+  'Transcriberen': 'Transkribe et',
+  'Transcriberen…': 'Transkribe et…',
+  'Uploaden en transcriberen': 'Yükle ve transkribe et',
+  'Verwachte opslag': 'Beklenen depolama',
+  'bestand': 'dosya',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'ekstra kopya yok — dosya doğrudan okunur',
+  'lokaal': 'yerel',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Dosya başkalarının seslerini içeriyor mu? Onların onayı gerekebilir.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Her şey bu cihazda kalır — ses hiçbir yere gitmez.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      '{bestand} dosyasındaki ses {host} adresine gider. Başka hiçbir şey bu cihazdan ayrılmaz.',
+  'De bron is niet beschikbaar: {reden}': 'Kaynak kullanılamıyor: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Sunucu reddetti veya erişilemezdi: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Transkripsiyon motoru hazır değil: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Bu biçim bu cihazda desteklenmiyor: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      '{bestand} dosyasında konuşma bulunamadı. Dosya değişmedi.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Dosya çözülemedi: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}': 'Dosya okunamadı: {reden}',
   'dit platform': 'bu platformda',
   'API-sleutel': 'API anahtarı',
   'Afgebroken': 'İptal edildi',

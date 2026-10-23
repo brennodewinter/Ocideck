@@ -1623,6 +1623,68 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'b\'iddekoder f\'dan is-sistema (afconvert nieqes) — biss PCM-WAV jista\' jinqara direttament',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'b\'iddekoder f\'dan is-sistema (ffmpeg nieqes) — biss PCM-WAV jista\' jinqara direttament',
+  'codecdekking hangt van deze browser af':
+      'l-appoġġ tal-codec jiddependi minn dan il-browser',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'whisper/bridge.js nieqes f\'dan il-pakkett — bla iddekodifika',
+  'geen decoder voor dit formaat': 'b\'iddekoder għal dan il-format',
+  'geen decode mogelijk': 'iddekodifika mhux possibbli',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'L-awdjo ma setax jiġi ssejvjat maġenb id-dokument; ir-referenza nieqsu',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Ir-rotta tas-server teħtieġ kunsens li għadu ma ġix ikkonfermat',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Il-fajl huwa kbir wisq jew l-awdjo twil wisq għal din ir-rotta',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Il-fajl huwa kbir wisq jew ma hemmx biżżejjed memorja ħielsa',
+  'Audio of video transcriberen': 'Transkrivi awdjo jew vidjo',
+  'Audio- of videobestand kiezen': 'Agħżel fajl awdjo jew vidjo',
+  'Audio/video transcriberen…': 'Transkrivi awdjo/vidjo…',
+  'Automatisch detecteren': 'Rikonoxxi awtomatikament',
+  'Bestand decoderen…': 'Iddekodifika l-fajl…',
+  'Bewaar een kopie van de audio naast het document':
+      'Żomm kopja tal-awdjo maġenb id-dokument',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Meta tissejvja, jiġi kkopjat f\'media/ maġenb il-.md.',
+  'Duur': 'Tul',
+  'Er ging iets mis bij het transcriberen.':
+      'Xi ħaġa marret ħażin matul it-transkrippjoni',
+  'Formaat': 'Format',
+  'Grootte': 'Daqs',
+  'Het bestand kon niet worden gelezen.': 'Il-fajl ma setax jinqara',
+  'Het bronbestand blijft ongewijzigd.': 'Il-fajl sors jibqa\' mingħajr bidla',
+  'Stop': 'Ieqaf',
+  'Transcriberen': 'Transkrivi',
+  'Transcriberen…': 'Transkrivi…',
+  'Uploaden en transcriberen': 'Tella\' u transkrivi',
+  'Verwachte opslag': 'Spazju mistenni',
+  'bestand': 'fajl',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'mingħajr kopja żejda — il-fajl jinqara direttament',
+  'lokaal': 'lokali',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Il-fajl fih vuċijiet ta\' nies oħra? Jista\' jkun meħtieġ il-kunsens tagħhom',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Kollox jibqa\' fuq dan l-apparat — l-awdjo marri mkien',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'L-awdjo minn {bestand} imur għand {host}. Xejn ieħor ma jitlaq minn dan l-apparat',
+  'De bron is niet beschikbaar: {reden}': 'Is-sors mhux disponibbli: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Is-server ċaħad jew ma kienx aċċessibbli: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Il-magna tat-transkrippjoni mhix lesta: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Din il-format mhix appoġġjata fuq dan l-apparat: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Ma nstabx kelma f\'{bestand}. Il-fajl baqa\' l-istess',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Il-fajl ma setax jiġi ddekodifikat: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Il-fajl ma setax jinqara: {reden}',
   'dit platform': 'din il-pjattaforma',
   'API-sleutel': 'Ċavetta API',
   'Afgebroken': 'Ikkanċellat',

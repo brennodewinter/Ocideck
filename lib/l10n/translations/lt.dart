@@ -1611,6 +1611,68 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
+      'šioje sistemoje nėra dekoderio (afconvert trūksta) — tik PCM-WAV galima skaityti tiesiogiai',
+  'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
+      'šioje sistemoje nėra dekoderio (ffmpeg trūksta) — tik PCM-WAV galima skaityti tiesiogiai',
+  'codecdekking hangt van deze browser af':
+      'kodekų palaikymas priklauso nuo šios naršyklės',
+  'whisper/bridge.js ontbreekt in deze bundle — geen decode':
+      'trūksta whisper/bridge.js šiame pakete — be dekodavimo',
+  'geen decoder voor dit formaat': 'nėra dekoderio šiam formatui',
+  'geen decode mogelijk': 'dekodavimas neįmanomas',
+  'De audio kon niet naast het document worden bewaard; de verwijzing ontbreekt.':
+      'Garso nepavyko išsaugoti šalia dokumento; trūksta nuorodos.',
+  'De serverroute vraagt een toestemming die nog niet is bevestigd.':
+      'Serverio maršrutas reikalauja sutikimo, kuris dar nepatvirtintas.',
+  'Het bestand is te groot of de audio te lang voor deze route.':
+      'Failas per didelis arba garsas per ilgas šiam maršrutui.',
+  'Het bestand is te groot of er is te weinig geheugen vrij.':
+      'Failas per didelis arba nepakanka laisvos atminties.',
+  'Audio of video transcriberen': 'Transkribuoti garso ar vaizdo įrašą',
+  'Audio- of videobestand kiezen': 'Pasirinkti garso ar vaizdo failą',
+  'Audio/video transcriberen…': 'Transkribuoti audio/vaizdo įrašą…',
+  'Automatisch detecteren': 'Aptikti automatiškai',
+  'Bestand decoderen…': 'Dekoduojamas failas…',
+  'Bewaar een kopie van de audio naast het document':
+      'Išsaugoti garso kopiją šalia dokumento',
+  'Bij Opslaan wordt hij naar media/ naast het .md gekopieerd.':
+      'Išsaugant jis nukopijuojamas į media/ šalia .md.',
+  'Duur': 'Trukmė',
+  'Er ging iets mis bij het transcriberen.':
+      'Transkripcijos metu kažkas nutiko ne taip.',
+  'Formaat': 'Formatas',
+  'Grootte': 'Dydis',
+  'Het bestand kon niet worden gelezen.': 'Failo nepavyko perskaityti.',
+  'Het bronbestand blijft ongewijzigd.': 'Šaltinio failas lieka nepakeistas.',
+  'Stop': 'Stabdyti',
+  'Transcriberen': 'Transkribuoti',
+  'Transcriberen…': 'Transkribuoti…',
+  'Uploaden en transcriberen': 'Įkelti ir transkribuoti',
+  'Verwachte opslag': 'Numatyta vieta',
+  'bestand': 'failas',
+  'geen extra kopie — het bestand wordt direct gelezen':
+      'be papildomos kopijos — failas skaitomas tiesiogiai',
+  'lokaal': 'vietinis',
+  'Bevat het bestand andermans stemmen? Hun toestemming kan nodig zijn.':
+      'Ar faile yra kitų asmenų balsų? Gali prireikti jų sutikimo.',
+  'Alles blijft op dit apparaat — de audio gaat nergens heen.':
+      'Viskas lieka šiame įrenginyje — garsas niekur nenukeliauja.',
+  'De audio uit {bestand} gaat naar {host}. Niets anders verlaat dit apparaat.':
+      'Garsas iš {bestand} eina į {host}. Nieko kito neapleidžia šio įrenginio.',
+  'De bron is niet beschikbaar: {reden}': 'Šaltinis nepasiekiamas: {reden}',
+  'De server weigerde of was onbereikbaar: {reden}':
+      'Serveris atsisakė arba buvo nepasiekiamas: {reden}',
+  'De transcriptie-engine is niet klaar: {reden}':
+      'Transkripcijos variklis nepasirengęs: {reden}',
+  'Dit formaat kan niet op dit apparaat: {reden}':
+      'Šis formatas nepalaikomas šiame įrenginyje: {reden}',
+  'Geen spraak gevonden in {bestand}. Het bestand is ongewijzigd.':
+      'Kalbos nerasta {bestand}. Failas nepakeistas.',
+  'Het bestand kon niet worden gedecodeerd: {reden}':
+      'Failo nepavyko dekoduoti: {reden}',
+  'Het bestand kon niet worden gelezen: {reden}':
+      'Failo nepavyko perskaityti: {reden}',
   'dit platform': 'šioje platformoje',
   'API-sleutel': 'API raktas',
   'Afgebroken': 'Nutraukta',

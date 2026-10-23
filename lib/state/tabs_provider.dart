@@ -544,11 +544,13 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String source, {
     String? projectPath,
     String? suggestedName,
+    String? pendingAudioPath,
   }) {
     _placeDocumentTab(
       MarkdownDocument.parse(source),
       projectPath: projectPath,
       suggestedName: suggestedName,
+      pendingAudioPath: pendingAudioPath,
     );
   }
 
@@ -561,12 +563,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String? filePath,
     String? projectPath,
     String? suggestedName,
+    String? pendingAudioPath,
   }) {
     final tab = _createDocumentTab(
       document,
       filePath: filePath,
       projectPath: projectPath,
       suggestedName: suggestedName,
+      pendingAudioPath: pendingAudioPath,
     );
     state = state.copyWith(
       tabs: [...state.tabs, tab],
@@ -584,6 +588,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String? recoveryId,
     String? projectPath,
     String? suggestedName,
+    String? pendingAudioPath,
   }) {
     final id = _nextId++;
     final key = recoveryId ?? _uuid.v4();
@@ -593,6 +598,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
         filePath: filePath,
         projectPath: projectPath,
         suggestedName: suggestedName,
+        pendingAudioPath: pendingAudioPath,
       );
     // Een kopie met een voorgestelde naam bestaat nog nergens op schijf —
     // precies wat de dirty-stip en de herstelkopie zichtbaar maken (#2468).
