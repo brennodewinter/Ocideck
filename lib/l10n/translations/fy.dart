@@ -707,6 +707,35 @@ const _dutchSourceAddFy = {
       'Mikrofoan-trochfeuring kin net starte',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Der rint in opname. Stopje dy earst — twa mikrofoansesjes tagelyk soene omgalmje.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Ymportearje it lege sjabloan {bestand} apart as styl.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Ofbyldings dy\'t net lêzen wurde koene',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Ymportearje PowerPoint-sjabloan as styl',
+  'Voorbeeld van de OciDeck-stijl': 'Foarbyld fan de OciDeck-styl',
+  'Overgenomen:': 'Oernommen:',
+  'Niet overgenomen:': 'Net oannommen:',
+  'Dit beeld als vast logo gebruiken':
+      'Brûk dizze ôfbylding as in permanint logo',
+  'Naam van stijl': 'Styl namme',
+  'Deze stijlnaam bestaat al.': 'Dizze stylnamme bestiet al.',
+  'Stijl bewaren': 'Bewarje styl',
+  'Accentkleur': 'Accent kleur',
+  'Tekstkleur': 'Tekst kleur',
+  'Dia-achtergrond': 'Slide eftergrûn',
+  'Dianummers': 'Slide nûmers',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Dit sjabloan befettet gjin styl dy\'t OciDeck kin oannimme.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Oanpaste posysjonearring en PowerPoint-yndielingen',
+  'Animaties en overgangen': 'Animaasjes en transysjes',
+  'Extra diamasters; de eerste is gekozen':
+      'Oanfoljende slide masters; de earste wurdt keazen',
+  'Andere vaste afbeeldingen': 'Oare fêste bylden',
+  'De stijl kon niet worden bewaard.': 'De styl koe net bewarre wurde.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Styl bewarre foar nije presintaasjes.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'gjin dekoderer op dit systeem (afconvert ûntbrekt) — allinne PCM-WAV kin streekrjocht lêzen',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

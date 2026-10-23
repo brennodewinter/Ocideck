@@ -1662,6 +1662,36 @@ const _dutchSourceAddGsw = <String, String>{
   'Microfoon-doorvoer kan niet starten': 'Mikrofon-Durchleitig cha nöd starte',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Es lauft e Ufnahm. Stopp die zersch — zwei Mikrofonsitzige uf eimol würde rückkopple.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importieren Sie die leere Vorlage {bestand} separat als Stil.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Bilder, die nicht gelesen werden konnten',
+  'PowerPoint-sjabloon als stijl importeren':
+      'PowerPoint-Vorlage als Stil importieren',
+  'Voorbeeld van de OciDeck-stijl': 'Beispiel für den OciDeck-Stil',
+  'Overgenomen:': 'Übernommen:',
+  'Niet overgenomen:': 'Nicht übernommen:',
+  'Dit beeld als vast logo gebruiken':
+      'Verwenden Sie dieses Bild als dauerhaftes Logo',
+  'Naam van stijl': 'Stilname',
+  'Deze stijlnaam bestaat al.': 'Dieser Stilname existiert bereits.',
+  'Stijl bewaren': 'Stil speichern',
+  'Accentkleur': 'Akzentfarbe',
+  'Tekstkleur': 'Textfarbe',
+  'Dia-achtergrond': 'Folienhintergrund',
+  'Dianummers': 'Foliennummern',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Diese Vorlage enthält keinen Stil, den OciDeck übernehmen kann.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Benutzerdefinierte Positionierung und PowerPoint-Layouts',
+  'Animaties en overgangen': 'Animationen und Übergänge',
+  'Extra diamasters; de eerste is gekozen':
+      'Zusätzliche Folienmaster; der erste wird gewählt',
+  'Andere vaste afbeeldingen': 'Andere feste Bilder',
+  'De stijl kon niet worden bewaard.':
+      'Der Stil konnte nicht gespeichert werden.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stil für neue Präsentationen gespeichert.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'kei Decoder uf dem System (afconvert fählt) — nur PCM-WAV cha direkt gläse werde',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

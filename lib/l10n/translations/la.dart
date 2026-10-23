@@ -1677,6 +1677,34 @@ const _dutchSourceAddLa = <String, String>{
       'Transmissio microphoni incipere non potest',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Exceptio iam currit. Eam primum siste — duae sessiones microphoni simul resonarent.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'blank templates {bestand} seorsim importare ut stylum.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Imagines quae legi non poterant',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Import PowerPoint template sicut style',
+  'Voorbeeld van de OciDeck-stijl': 'Exemplum orationis OciDeck',
+  'Overgenomen:': 'Susceperunt;',
+  'Niet overgenomen:': 'Non adoptavit;',
+  'Dit beeld als vast logo gebruiken': 'Hac imagine utere ut permanens logo',
+  'Naam van stijl': 'Nomen style',
+  'Deze stijlnaam bestaat al.': 'Iam hoc nomen style exstat.',
+  'Stijl bewaren': 'Servo style',
+  'Accentkleur': 'Accentus color',
+  'Tekstkleur': 'Textus color',
+  'Dia-achtergrond': 'Fundus diapositivae',
+  'Dianummers': 'Numeri slide',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Exemplum hoc non continet stilum quem OciDeck adoptare potest.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Dispositio libera et formae PowerPoint',
+  'Animaties en overgangen': 'Animationes et transitiones',
+  'Extra diamasters; de eerste is gekozen':
+      'Adiectis dictum dominis; primus eligitur',
+  'Andere vaste afbeeldingen': 'Aliae imagines fixae',
+  'De stijl kon niet worden bewaard.': 'Oratio servari non potuit.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stylus novas praesentationes servavit.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'nullus decodor in hoc systemate (afconvert deest) — solum PCM-WAV directe legi potest',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

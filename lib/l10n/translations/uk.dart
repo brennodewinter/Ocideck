@@ -1675,6 +1675,35 @@ const _dutchSourceAddUk = <String, String>{
       'Моніторинг мікрофона не може початися',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Триває запис. Спершу зупиніть його — дві мікрофонні сесії одразу дали б зворотний зв\'язок.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Імпортуйте порожній шаблон {bestand} окремо як стиль.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Зображення, які неможливо прочитати',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Імпортуйте шаблон PowerPoint як стиль',
+  'Voorbeeld van de OciDeck-stijl': 'Приклад стилю OciDeck',
+  'Overgenomen:': 'Прийняв:',
+  'Niet overgenomen:': 'Не прийнято:',
+  'Dit beeld als vast logo gebruiken':
+      'Використовуйте це зображення як постійний логотип',
+  'Naam van stijl': 'Назва стилю',
+  'Deze stijlnaam bestaat al.': 'Ця назва стилю вже існує.',
+  'Stijl bewaren': 'Зберегти стиль',
+  'Accentkleur': 'Акцентний колір',
+  'Tekstkleur': 'Колір тексту',
+  'Dia-achtergrond': 'Фон слайда',
+  'Dianummers': 'Номери слайдів',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Цей шаблон не містить стилю, який може прийняти OciDeck.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Спеціальне позиціонування та макети PowerPoint',
+  'Animaties en overgangen': 'Анімації та переходи',
+  'Extra diamasters; de eerste is gekozen':
+      'Додаткові слайд-майстри; вибирається перший',
+  'Andere vaste afbeeldingen': 'Інші фіксовані зображення',
+  'De stijl kon niet worden bewaard.': 'Не вдалося зберегти стиль.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Стиль збережено для нових презентацій.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'без декодера у цій системі (afconvert відсутній) — лише PCM-WAV можна читати безпосередньо',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

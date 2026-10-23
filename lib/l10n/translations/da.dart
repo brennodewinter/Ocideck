@@ -1660,6 +1660,35 @@ const _dutchSourceAddDa = <String, String>{
       'Mikrofon-monitorering kan ikke starte',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Der kører en optagelse. Stop den først — to mikrofonsessioner på én gang ville give tilbagekobling.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importer den tomme skabelon {bestand} separat som en stil.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Billeder der ikke kunne læses',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importer PowerPoint-skabelon som stil',
+  'Voorbeeld van de OciDeck-stijl': 'Eksempel på OciDeck-stilen',
+  'Overgenomen:': 'Overtaget:',
+  'Niet overgenomen:': 'Ikke vedtaget:',
+  'Dit beeld als vast logo gebruiken':
+      'Brug dette billede som et permanent logo',
+  'Naam van stijl': 'Stilnavn',
+  'Deze stijlnaam bestaat al.': 'Dette stilnavn findes allerede.',
+  'Stijl bewaren': 'Gem stil',
+  'Accentkleur': 'Accent farve',
+  'Tekstkleur': 'Tekstfarve',
+  'Dia-achtergrond': 'Slide baggrund',
+  'Dianummers': 'Slide numre',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Denne skabelon indeholder ikke en stil, som OciDeck kan anvende.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Brugerdefineret positionering og PowerPoint-layouts',
+  'Animaties en overgangen': 'Animationer og overgange',
+  'Extra diamasters; de eerste is gekozen':
+      'Yderligere slide mastere; den første er valgt',
+  'Andere vaste afbeeldingen': 'Andre faste billeder',
+  'De stijl kon niet worden bewaard.': 'Stilen kunne ikke gemmes.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stil gemt til nye præsentationer.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'ingen afkoder på dette system (afconvert mangler) — kun PCM-WAV kan læses direkte',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

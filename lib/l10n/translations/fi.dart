@@ -1661,6 +1661,31 @@ const _dutchSourceAddFi = <String, String>{
   'Microfoon-doorvoer kan niet starten': 'Mikrofonin läpikuuntelu ei voi alkaa',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Tallennus on käynnissä. Pysäytä se ensin — kaksi mikrofoni-istuntoa yhtä aikaa kiertäisi.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Tuo tyhjä malli {bestand} erikseen tyylinä.',
+  'Afbeeldingen die niet konden worden gelezen': 'Kuvat, joita ei voitu lukea',
+  'PowerPoint-sjabloon als stijl importeren': 'Tuo PowerPoint-malli tyylinä',
+  'Voorbeeld van de OciDeck-stijl': 'Esimerkki OciDeck-tyylistä',
+  'Overgenomen:': 'Otettu haltuun:',
+  'Niet overgenomen:': 'Ei hyväksytty:',
+  'Dit beeld als vast logo gebruiken': 'Käytä tätä kuvaa pysyvänä logona',
+  'Naam van stijl': 'Tyylin nimi',
+  'Deze stijlnaam bestaat al.': 'Tämä tyylinimi on jo olemassa.',
+  'Stijl bewaren': 'Tallenna tyyli',
+  'Accentkleur': 'Aksenttiväri',
+  'Tekstkleur': 'Tekstin väri',
+  'Dia-achtergrond': 'Dia tausta',
+  'Dianummers': 'Dianumerot',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Tämä malli ei sisällä tyyliä, jota OciDeck voi omaksua.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Mukautettu sijoittelu ja PowerPoint-asettelut',
+  'Animaties en overgangen': 'Animaatiot ja siirtymät',
+  'Extra diamasters; de eerste is gekozen': 'Muita dioja; ensimmäinen valitaan',
+  'Andere vaste afbeeldingen': 'Muut kiinteät kuvat',
+  'De stijl kon niet worden bewaard.': 'Tyyliä ei voitu tallentaa.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Tyyli tallennettu uusia esityksiä varten.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'ei dekooderia tässä järjestelmässä (afconvert puuttuu) — vain PCM-WAV voidaan lukea suoraan',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

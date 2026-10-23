@@ -1661,6 +1661,34 @@ const _dutchSourceAddHu = <String, String>{
   'Microfoon-doorvoer kan niet starten': 'A mikrofonfigyelés nem indulhat',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Felvétel fut. Előbb állítsd le — két mikrofonmunkamenet egyszerre gerjedne.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importálja az üres sablont {bestand} külön stílusként.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Képek, amelyeket nem lehetett olvasni',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importálja a PowerPoint-sablont stílusként',
+  'Voorbeeld van de OciDeck-stijl': 'Példa az OciDeck stílusra',
+  'Overgenomen:': 'Átvetve:',
+  'Niet overgenomen:': 'Nem fogadták el:',
+  'Dit beeld als vast logo gebruiken': 'Használja ezt a képet állandó logóként',
+  'Naam van stijl': 'Stílusnév',
+  'Deze stijlnaam bestaat al.': 'Ez a stílusnév már létezik.',
+  'Stijl bewaren': 'Stílus mentése',
+  'Accentkleur': 'Kiemelt szín',
+  'Tekstkleur': 'Szöveg színe',
+  'Dia-achtergrond': 'Dia háttér',
+  'Dianummers': 'Diaszámok',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Ez a sablon nem tartalmaz olyan stílust, amelyet az OciDeck át tud venni.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Egyedi pozicionálás és PowerPoint elrendezések',
+  'Animaties en overgangen': 'Animációk és átmenetek',
+  'Extra diamasters; de eerste is gekozen':
+      'További diamesterek; az elsőt választják',
+  'Andere vaste afbeeldingen': 'Egyéb fix képek',
+  'De stijl kon niet worden bewaard.': 'A stílust nem sikerült menteni.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stílus mentve az új prezentációkhoz.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'nincs dekódoló ezen a rendszeren (afconvert hiányzik) — csak a PCM-WAV olvasható közvetlenül',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

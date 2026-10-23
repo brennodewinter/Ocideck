@@ -1679,6 +1679,35 @@ const _dutchSourceAddBg = <String, String>{
       'Мониторингът на микрофона не може да започне',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Тече запис. Спрете го първо — две микрофонни сесии наведнъж биха завили.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Импортирайте празния шаблон {bestand} отделно като стил.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Изображения, които не могат да бъдат прочетени',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Импортирайте шаблон на PowerPoint като стил',
+  'Voorbeeld van de OciDeck-stijl': 'Пример за стил OciDeck',
+  'Overgenomen:': 'Поето:',
+  'Niet overgenomen:': 'Не е прието:',
+  'Dit beeld als vast logo gebruiken':
+      'Използвайте това изображение като постоянно лого',
+  'Naam van stijl': 'Име на стила',
+  'Deze stijlnaam bestaat al.': 'Това име на стил вече съществува.',
+  'Stijl bewaren': 'Запазете стила',
+  'Accentkleur': 'Цвят на акцента',
+  'Tekstkleur': 'Цвят на текста',
+  'Dia-achtergrond': 'Фон на слайд',
+  'Dianummers': 'Номера на слайдове',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Този шаблон не съдържа стил, който OciDeck може да приеме.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Персонализирано позициониране и оформления на PowerPoint',
+  'Animaties en overgangen': 'Анимации и преходи',
+  'Extra diamasters; de eerste is gekozen':
+      'Допълнителни слайд мастери; избрано е първото',
+  'Andere vaste afbeeldingen': 'Други фиксирани изображения',
+  'De stijl kon niet worden bewaard.': 'Стилът не можа да бъде запазен.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Стилът е запазен за нови презентации.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'без декодер на тази система (afconvert липсва) — само PCM-WAV може да се чете директно',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

@@ -865,6 +865,34 @@ const _dutchSourceAddEn = {
   'Microfoon-doorvoer kan niet starten': 'Microphone pass-through cannot start',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'A recording is running. Stop it first — two microphone sessions at once would feed back.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Import the blank template {bestand} separately as a style.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Images that could not be read',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Import PowerPoint template as style',
+  'Voorbeeld van de OciDeck-stijl': 'Example of the OciDeck style',
+  'Overgenomen:': 'Taken over:',
+  'Niet overgenomen:': 'Not adopted:',
+  'Dit beeld als vast logo gebruiken': 'Use this image as a permanent logo',
+  'Naam van stijl': 'Style name',
+  'Deze stijlnaam bestaat al.': 'This style name already exists.',
+  'Stijl bewaren': 'Save style',
+  'Accentkleur': 'Accent color',
+  'Tekstkleur': 'Text color',
+  'Dia-achtergrond': 'Slide background',
+  'Dianummers': 'Slide numbers',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'This template does not contain a style that OciDeck can adopt.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Custom positioning and PowerPoint layouts',
+  'Animaties en overgangen': 'Animations and transitions',
+  'Extra diamasters; de eerste is gekozen':
+      'Additional slide masters; the first is chosen',
+  'Andere vaste afbeeldingen': 'Other fixed images',
+  'De stijl kon niet worden bewaard.': 'The style could not be saved.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Style saved for new presentations.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'no decoder on this system (afconvert missing) — only PCM-WAV can be read directly',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

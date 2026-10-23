@@ -1680,6 +1680,34 @@ const _dutchSourceAddMt = <String, String>{
       'Il-pass-through tal-mikrofonu ma jistax jibda',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Hemm rekording għaddej. Waqqfu l-ewwel — żewġ sessjonijiet tal-mikrofonu flimkien jagħmlu feedback.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importa l-mudell vojt {bestand} separatament bħala stil.',
+  'Afbeeldingen die niet konden worden gelezen': 'Stampi li ma setgħux jinqraw',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importa mudell PowerPoint bħala stil',
+  'Voorbeeld van de OciDeck-stijl': 'Eżempju tal-istil OciDeck',
+  'Overgenomen:': 'Ittieħdet f\'idejh:',
+  'Niet overgenomen:': 'Mhux adottat:',
+  'Dit beeld als vast logo gebruiken':
+      'Uża din l-immaġni bħala logo permanenti',
+  'Naam van stijl': 'Isem tal-istil',
+  'Deze stijlnaam bestaat al.': 'Dan l-isem tal-istil diġà jeżisti.',
+  'Stijl bewaren': 'Ħlief stil',
+  'Accentkleur': 'Kulur aċċent',
+  'Tekstkleur': 'Kulur tat-test',
+  'Dia-achtergrond': 'Sfond slide',
+  'Dianummers': 'Numri slide',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Dan il-mudell ma fihx stil li OciDeck jista\' jadotta.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Pożizzjonament personalizzat u layouts bil-PowerPoint',
+  'Animaties en overgangen': 'Animazzjonijiet u tranżizzjonijiet',
+  'Extra diamasters; de eerste is gekozen':
+      'Slide masters addizzjonali; l-ewwel jintgħażel',
+  'Andere vaste afbeeldingen': 'Stampi oħra fissi',
+  'De stijl kon niet worden bewaard.': 'L-istil ma setax jiġi salvat.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stil salvat għal preżentazzjonijiet ġodda.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'b\'iddekoder f\'dan is-sistema (afconvert nieqes) — biss PCM-WAV jista\' jinqara direttament',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

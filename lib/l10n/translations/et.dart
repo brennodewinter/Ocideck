@@ -1652,6 +1652,34 @@ const _dutchSourceAddEt = <String, String>{
   'Microfoon-doorvoer kan niet starten': 'Mikrofoni läbilask ei saa alata',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Salvestus käib. Peata see esmalt — kaks mikrofoniseanssi korraga tekitaksid tagasisidet.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importige tühi mall {bestand} stiilina eraldi.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Pildid, mida ei saanud lugeda',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importige PowerPointi mall stiilina',
+  'Voorbeeld van de OciDeck-stijl': 'OciDecki stiili näide',
+  'Overgenomen:': 'Üle võetud:',
+  'Niet overgenomen:': 'Pole vastu võetud:',
+  'Dit beeld als vast logo gebruiken': 'Kasutage seda pilti püsiva logona',
+  'Naam van stijl': 'Stiili nimi',
+  'Deze stijlnaam bestaat al.': 'See stiili nimi on juba olemas.',
+  'Stijl bewaren': 'Salvesta stiil',
+  'Accentkleur': 'Aktsentvärv',
+  'Tekstkleur': 'Teksti värv',
+  'Dia-achtergrond': 'Slaidi taust',
+  'Dianummers': 'Slaidi numbrid',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'See mall ei sisalda stiili, mida OciDeck saaks omaks võtta.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Kohandatud positsioneerimine ja PowerPointi paigutused',
+  'Animaties en overgangen': 'Animatsioonid ja üleminekud',
+  'Extra diamasters; de eerste is gekozen':
+      'Täiendavad slaidimeistrid; valitakse esimene',
+  'Andere vaste afbeeldingen': 'Muud fikseeritud pildid',
+  'De stijl kon niet worden bewaard.': 'Stiili ei õnnestunud salvestada.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Uute esitluste jaoks salvestatud stiil.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'selles süsteemis pole dekodeerijat (afconvert puudub) — ainult PCM-WAV saab otse lugeda',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

@@ -1660,6 +1660,35 @@ const _dutchSourceAddId = <String, String>{
       'Penerusan mikrofon tidak dapat dimulai',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Ada rekaman yang berjalan. Hentikan dulu — dua sesi mikrofon sekaligus akan bersuara balik.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Impor templat kosong {bestand} secara terpisah sebagai gaya.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Gambar yang tidak bisa dibaca',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Impor template PowerPoint sebagai gaya',
+  'Voorbeeld van de OciDeck-stijl': 'Contoh gaya OciDeck',
+  'Overgenomen:': 'Diambil alih:',
+  'Niet overgenomen:': 'Tidak diadopsi:',
+  'Dit beeld als vast logo gebruiken':
+      'Gunakan gambar ini sebagai logo permanen',
+  'Naam van stijl': 'Nama gaya',
+  'Deze stijlnaam bestaat al.': 'Nama gaya ini sudah ada.',
+  'Stijl bewaren': 'Simpan gaya',
+  'Accentkleur': 'Warna aksen',
+  'Tekstkleur': 'Warna teks',
+  'Dia-achtergrond': 'Latar belakang geser',
+  'Dianummers': 'Nomor geser',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Templat ini tidak berisi gaya yang dapat diadopsi oleh OciDeck.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Pemosisian khusus dan tata letak PowerPoint',
+  'Animaties en overgangen': 'Animasi dan transisi',
+  'Extra diamasters; de eerste is gekozen':
+      'Master slide tambahan; yang pertama dipilih',
+  'Andere vaste afbeeldingen': 'Gambar tetap lainnya',
+  'De stijl kon niet worden bewaard.': 'Gayanya tidak dapat disimpan.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Gaya disimpan untuk presentasi baru.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'tidak ada dekoder di sistem ini (afconvert hilang) — hanya PCM-WAV yang bisa dibaca langsung',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

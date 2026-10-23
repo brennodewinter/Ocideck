@@ -1660,6 +1660,34 @@ const _dutchSourceAddSl = <String, String>{
       'Spremljanje mikrofona se ne more začeti',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Posnetek teče. Najprej ga ustavite — dve mikrofonski seji hkrati bi tulili.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Uvozite prazno predlogo {bestand} ločeno kot slog.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Slike, ki jih ni bilo mogoče prebrati',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Uvozite PowerPointovo predlogo kot slog',
+  'Voorbeeld van de OciDeck-stijl': 'Primer sloga OciDeck',
+  'Overgenomen:': 'Prevzeto:',
+  'Niet overgenomen:': 'Ni sprejeto:',
+  'Dit beeld als vast logo gebruiken': 'Uporabite to sliko kot trajni logotip',
+  'Naam van stijl': 'Ime sloga',
+  'Deze stijlnaam bestaat al.': 'To ime sloga že obstaja.',
+  'Stijl bewaren': 'Shranite slog',
+  'Accentkleur': 'Poudarjena barva',
+  'Tekstkleur': 'Barva besedila',
+  'Dia-achtergrond': 'Ozadje diapozitiva',
+  'Dianummers': 'Številke diapozitivov',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Ta predloga ne vsebuje sloga, ki bi ga lahko sprejel OciDeck.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Položaj po meri in PowerPoint postavitve',
+  'Animaties en overgangen': 'Animacije in prehodi',
+  'Extra diamasters; de eerste is gekozen':
+      'Dodatni diapozitivi; prvi je izbran',
+  'Andere vaste afbeeldingen': 'Druge fiksne slike',
+  'De stijl kon niet worden bewaard.': 'Sloga ni bilo mogoče shraniti.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Slog shranjen za nove predstavitve.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'v tem sistemu ni dekodirnika (afconvert manjka) — samo PCM-WAV se lahko bere neposredno',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':
