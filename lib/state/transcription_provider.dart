@@ -14,6 +14,10 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'dart:convert';
+
+import '../models/asr_server_profile.dart';
+import '../services/transcription/asr_engine_factory.dart';
 import '../services/transcription/capture_source.dart';
 import '../services/transcription/local_whisper_engine.dart';
 import '../services/transcription/recording_session.dart';
@@ -24,6 +28,14 @@ import '../utils/log.dart';
 import 'transcription_model_provider.dart';
 
 const transcriptionModuleEnabledKey = 'transcriptionModuleEnabled';
+
+/// Prefs-sleutel voor het ASR-serverprofiel (#2524) — één JSON-blob, de
+/// sleutel zelf staat in de sleutelbos (`SecretStore.asrApiKeyKey`).
+const asrServerProfileKey = 'asrServerProfile';
+
+/// Prefs-sleutel voor de gekozen transcriptieroute: `local` (standaard)
+/// of `server` (#2524). De instellingskaart van #2514 stelt hem.
+const transcriptionRouteKey = 'transcriptionRoute';
 
 /// De staginggrens van de opnamemodule. Heeft een eigen provider omdat de
 /// shell hem bij opstarten laat vegen én tests hem vervangen door een
@@ -44,9 +56,93 @@ final recordingManagerProvider = Provider<RecordingManager>((ref) {
 /// bepaalt zijn `status()`/`capabilities()`; op web hangt dat af van
 /// cross-origin isolatie (§5.3).
 ///
+/// Het ASR-serverprofiel (#2524): standaard uit en zonder endpoint. De
+/// instellingskaart van #2514 is zijn schrijver.
+final asrServerProfileProvider =
+    NotifierProvider<AsrServerProfileNotifier, AsrServerProfile>(
+      AsrServerProfileNotifier.new,
+    );
+
+class AsrServerProfileNotifier extends Notifier<AsrServerProfile> {
+  @override
+  AsrServerProfile build() {
+    _load();
+    return const AsrServerProfile();
+  }
+
+  Future<void> _load() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final raw = prefs.getString(asrServerProfileKey);
+      if (raw == null) return;
+      state = AsrServerProfile.fromJson(
+        Map<String, Object?>.from(jsonDecode(raw) as Map),
+      );
+    } catch (e, s) {
+      // Kapotte opgeslagen JSON = geen profiel — fail-closed, nooit raden.
+      logError('AsrServerProfileNotifier: profiel lezen', e, s);
+    }
+  }
+
+  Future<void> set(AsrServerProfile profile) async {
+    state = profile;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(asrServerProfileKey, jsonEncode(profile.toJson()));
+    } catch (e, s) {
+      logError('AsrServerProfileNotifier: profiel schrijven', e, s);
+    }
+  }
+}
+
+/// De gekozen transcriptieroute (`local`/`server`). Standaard lokaal —
+/// de serverroute bestaat pas als de gebruiker hem aanzet (#2524), en
+/// valt nooit stil de andere kant op.
+final transcriptionRouteProvider =
+    NotifierProvider<TranscriptionRouteNotifier, String>(
+      TranscriptionRouteNotifier.new,
+    );
+
+class TranscriptionRouteNotifier extends Notifier<String> {
+  @override
+  String build() {
+    _load();
+    return 'local';
+  }
+
+  Future<void> _load() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      state = prefs.getString(transcriptionRouteKey) ?? 'local';
+    } catch (e, s) {
+      logError('TranscriptionRouteNotifier: route lezen', e, s);
+    }
+  }
+
+  Future<void> set(String route) async {
+    state = route;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(transcriptionRouteKey, route);
+    } catch (e, s) {
+      logError('TranscriptionRouteNotifier: route schrijven', e, s);
+    }
+  }
+}
+
 /// De provider bouwt opnieuw zodra de gekozen model-id wijzigt; een lopende
 /// `transcribe` is daar immuun voor omdat hij zijn eigen instantie vasthoudt.
 final transcriptionEngineProvider = Provider<TranscriptionEngine?>((ref) {
+  final route = ref.watch(transcriptionRouteProvider);
+  if (route == 'server') {
+    final profile = ref.watch(asrServerProfileProvider);
+    if (profile.isConfigured) {
+      return createAsrServerEngine(profile);
+    }
+    // Server gekozen maar niet bruikbaar geconfigureerd: terug naar lokaal
+    // is de veilige richting (er verlaat dan niets het apparaat); de
+    // instellingskaart toont waarom de keuze niet draagt.
+  }
   // Zoek in de platformcatalogus — niet de hele lijst: een op desktop
   // opgeslagen keuze voor een model dat web niet kan dragen (bv.
   // `large-v3-turbo`) mag hier nooit de web-engine voeden.

@@ -223,6 +223,15 @@ const Set<String> uncoveredBaseline = {
   'lib/services/transcription/local_whisper_engine_web.dart',
   'lib/services/transcription/model_download_web.dart',
   'lib/services/transcription/model_store_web.dart',
+  // PLATFORM: `asr_transport_web.dart` (#2524) is de webhelft van de
+  // ASR-servertransport — `dart:js_interop`/`package:web` (fetch +
+  // AbortController + TextDecoder) laden niet in de VM-runner. Zijn
+  // contract is identiek aan de io-helft, die wél onder echte sockets
+  // getest is (asr_transport_io_test: pinning, redirectweigering,
+  // bytecap, abort). De sibling `asr_audio_source_web.dart` staat hier
+  // NIET: die gebruikt geen js_interop en wordt rechtstreeks gedekt door
+  // asr_server_profile_test.
+  'lib/services/transcription/asr_transport_web.dart',
   // NO EXECUTABLE LINES: `mermaid_config.dart` is één bron van waarheid voor de
   // mermaid-instellingen — alleen const-declaraties, lcov schrijft er geen
   // record voor. PLATFORM: `mermaid_web_renderer.dart` is de web-helft die

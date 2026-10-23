@@ -454,6 +454,27 @@ off-device. **Local processing never falls back to upload**: if the local
 engine fails, the user is told and chooses; silent rerouting to a configured
 server is the hidden-upload this epic forbids.
 
+**Implemented (#2524).** The profile (`models/asr_server_profile.dart`) knows
+three trust classes, each behind its own explicit opt-in: `loopback` (a server
+on this device — the only place plain `http://` is acceptable, `localhost`
+included but re-verified per resolved address), `lan` (a private/LAN address,
+only after `trustedInternal`), and `cloud` (external, HTTPS-only, only after
+`cloudConfirmed` for that destination). `AsrServerGate` renders a pure
+allow/deny decision before anything leaves; the transport gets an
+`AiResolveStrategy` and pins the socket on IO (`buildPinnedClient`, redirects
+refused), while on web the browser is the boundary (CORS/preflight/mixed
+content — LAN-`http` is refused there because it can never work). The wire
+protocol is the *proven* whisper.cpp `whisper-server` contract — `POST
+/inference`, multipart `file` + `response_format=verbose_json` — not a claim
+of universal ASR-server compatibility. Consent is a `ServerConsent` token the
+engine compares strictly to what it is about to send (host + audio path); a
+`probe()` connectivity check sends no audio, a real audio test is a separate
+deliberate act. The API key lives in `SecretStore` under
+`asr_api_key::<normalized-base-url>` and appears only in the `Authorization`
+header. Uploads cap at 400 MB, responses at 16 MB, cancel aborts the request
+as `Cancelled`, and a failed upload leaves the source audio untouched —
+retrying is a new user choice, never automatic.
+
 ### 4.4 Error taxonomy (typed, before platform code)
 
 ```dart
@@ -657,7 +678,7 @@ with the honest label "room capture may include speaker output".
 |---|---|
 | Local desktop engine (whisper.cpp `whisper-cli` subprocess, #2512) | beschikbaar on macOS arm64/x86_64 (measured, §4.5); Linux/Windows build from the same pinned source — real-hardware proof pending there |
 | Local web engine (WASM, #2513) | beschikbaar onder voorwaarde — gemeten op de echte artifacten in Chrome, Firefox en Safari/WebKit (§4.6); vereist COOP/COEP-headers van de host (de bundel levert ze via `.htaccess`), anders meldt de engine `noIsolation`. Aanbod: `small` en `base`; `large-v3-turbo` past niet in 2 GB WASM-geheugen. |
-| Batch server (#2524) | proven per configured profile only; protocol + consent in §4.3 |
+| Batch server (#2524) | beschikbaar — geïmplementeerd achter de egresspoort (§4.3): loopback/LAN/cloud-tiers met eigen opt-ins, whisper.cpp-`whisper-server`-protocol; compatibiliteit met andere ASR-servers wordt niet geclaimd |
 | Live server (#2525) | proven per configured profile only; unproven protocol ⇒ route absent |
 
 ---
