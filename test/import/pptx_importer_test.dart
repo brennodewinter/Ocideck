@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/pptx/pptx_importer.dart';
+import 'package:ocideck/services/import/logo_detection.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
 import 'package:ocideck/services/import/models/source_chart.dart';
 import 'package:ocideck/services/import/models/source_video.dart';
@@ -341,6 +342,34 @@ void main() {
     expect(result.isErr, isTrue);
   });
 
+  test('empty POTX keeps a selectable fixed master logo', () async {
+    final result = await PptxImporter().importBytes(
+      emptyPotxFixture(withLogo: true),
+      path: 'style.potx',
+    );
+    expect(result.isOk, isTrue);
+    final deck = result.okValue!;
+    expect(deck.slides, isEmpty);
+    expect(deck.templateMasterCount, 1);
+    expect(deck.templateImages, hasLength(1));
+    expect(deck.theme?.slideBackgroundColor, '#F6F7F8');
+    expect(deck.theme?.footerText, 'LibreKAT');
+    expect(deck.theme?.showPageNumbers, isTrue);
+    final logos = templateLogoCandidates(deck);
+    expect(logos, hasLength(1));
+    expect(logos.first.image.placement!.isLogoLikeAtVerticalEdge, isTrue);
+  });
+
+  test('empty POTX reports a missing master image', () async {
+    final result = await PptxImporter().importBytes(
+      emptyPotxFixture(withLogo: true, missingLogo: true),
+      path: 'broken-style.potx',
+    );
+    expect(result.isOk, isTrue);
+    expect(result.okValue!.templateImages, isEmpty);
+    expect(result.okValue!.issues, isNotEmpty);
+  });
+
   test('reads the theme of a POTX with no sample slides', () async {
     final bytes = _zip({
       '[Content_Types].xml':
@@ -359,7 +388,7 @@ void main() {
 
     final result = await PptxImporter().importBytes(bytes, path: 'merk.POTX');
     expect(result.isOk, isTrue);
-    final deck = (result as Ok).value;
+    final deck = result.okValue!;
     expect(deck.slides, isEmpty);
     expect(deck.theme?.accentColor, '#2E7D64');
     expect(deck.theme?.textColor, '#222222');

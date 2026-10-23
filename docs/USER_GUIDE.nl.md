@@ -2677,7 +2677,8 @@ extra diamasters en andere vaste afbeeldingen worden geen onderdeel van de
 stijl. Als er geen bruikbare stijlkenmerken zijn, meldt OciDeck dat zonder een
 leeg profiel op te slaan. Een `.potm` wordt niet ondersteund. Een `.potx` met
 voorbeelddia's volgt de gewone presentatie-import; controleer de dia's en hun
-opmaak na conversie.
+opmaak na conversie. Een leeg `.potx` in een importwachtrij wordt niet als leeg
+deck opgeslagen: importeer dat bestand afzonderlijk om de stijl te beoordelen.
 
 **Als je in plaats daarvan naar "Openen…" grijpt, wijst OciDeck je de goede kant
 op.** *(Toegevoegd 2026-08-03, #1175.)* "Openen…" is voor Markdown- en

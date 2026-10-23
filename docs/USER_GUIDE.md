@@ -2580,7 +2580,8 @@ transitions, additional masters and other fixed pictures are not carried into
 the style. A template without usable style properties is rejected without
 creating an empty profile. `.potm` is unsupported. A `.potx` with sample slides
 follows the normal presentation import; check the slides and formatting after
-conversion.
+conversion. A slide-free `.potx` in an import queue is not saved as an empty
+deck: import that file separately to review its style.
 
 You will find it in two places: on the **opening screen**, directly under
 *Nieuwe presentatie* — the same spot *Document importeren…* occupies under

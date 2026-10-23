@@ -32,6 +32,7 @@ import '../dialogs/import_security_alarm_dialog.dart';
 import '../dialogs/import_rename_dialog.dart';
 import '../dialogs/presentation_import_progress_dialog.dart';
 import '../dialogs/presentation_import_queue_dialog.dart';
+import '../dialogs/import_template_style_dialog.dart';
 import '../../utils/file_extension.dart';
 
 /// Eén gekozen bestand: de bytes plus de naam waaronder het gekozen werd.
@@ -146,6 +147,11 @@ Future<void> importPresentation(
   // geen vage snackbar meer achteraan te zetten.
   if (prepared == null) return;
 
+  if (prepared.sourceDeck.slides.isEmpty) {
+    await _importEmptyTemplateStyle(context, ref, prepared, chosen.name);
+    return;
+  }
+
   final ImportLogoResolution? logo;
   try {
     logo = await _resolveImportLogo(
@@ -188,7 +194,18 @@ Future<void> importPresentation(
     }
     return;
   }
-  final deck = built.deck;
+  final templateTheme =
+      chosen.name.toLowerCase().endsWith('.potx') &&
+          logo?.profile == null &&
+          prepared.sourceDeck.theme != null
+      ? importedThemeProfile(
+          prepared.sourceDeck.theme,
+          name: stemOfFileName(chosen.name),
+        )
+      : null;
+  final deck = templateTheme == null
+      ? built.deck
+      : built.deck.copyWith(themeProfile: templateTheme);
   await _openImportedDeck(
     context,
     ref,
@@ -196,8 +213,129 @@ Future<void> importPresentation(
     problemCount: built.problemSlides.length,
     messenger: messenger,
     l10n: l10n,
-    preserveThemeProfile: logo?.profile != null,
+    preserveThemeProfile: logo?.profile != null || templateTheme != null,
   );
+}
+
+Future<void> _importEmptyTemplateStyle(
+  BuildContext context,
+  WidgetRef ref,
+  PreparedImport prepared,
+  String filename,
+) async {
+  final sourceDeck = prepared.sourceDeck;
+  final source = sourceDeck.theme;
+  final logoCandidate = kIsWeb
+      ? null
+      : templateLogoCandidates(sourceDeck).firstOrNull;
+  final l10n = context.l10n;
+  final suggestedName = stemOfFileName(filename);
+  final profile = importedThemeProfile(source, name: suggestedName);
+  final imported = <String>[
+    if (source?.accentColor != null &&
+        profile.accentColor == source!.accentColor)
+      l10n.d('Accentkleur'),
+    if (source?.textColor != null && profile.textColor == source!.textColor)
+      l10n.d('Tekstkleur'),
+    if (source?.fontFamily != null && profile.fontFamily == source!.fontFamily)
+      l10n.d('Lettertype'),
+    if (source?.slideBackgroundColor != null &&
+        profile.slideBackgroundColor == source!.slideBackgroundColor)
+      l10n.d('Dia-achtergrond'),
+    if (source?.titleBackgroundColor != null &&
+        profile.titleBackgroundColor == source!.titleBackgroundColor)
+      l10n.d('Titelachtergrond'),
+    if (source?.sectionBackgroundColor != null &&
+        profile.sectionBackgroundColor == source!.sectionBackgroundColor)
+      l10n.d('Sectieachtergrond'),
+    if (source?.footerText != null && profile.footerText == source!.footerText)
+      l10n.d('Voettekst'),
+    if (source?.showPageNumbers != null &&
+        profile.footerShowPageNumbers == source!.showPageNumbers)
+      l10n.d('Dianummers'),
+  ];
+  if (imported.isEmpty && logoCandidate == null) {
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      l10n,
+      l10n.d('Dit sjabloon bevat geen stijl die OciDeck kan overnemen.'),
+    );
+    return;
+  }
+  final name = await ImportTemplateStyleDialog.ask(
+    context,
+    profile: profile,
+    suggestedName: suggestedName,
+    importedDetails: imported,
+    omittedDetails: [
+      l10n.d('Vrije plaatsing en PowerPoint-layouts'),
+      l10n.d('Animaties en overgangen'),
+      if (sourceDeck.templateMasterCount > 1)
+        l10n.d('Extra diamasters; de eerste is gekozen'),
+      if (sourceDeck.templateImages.length > (logoCandidate == null ? 0 : 1))
+        l10n.d('Andere vaste afbeeldingen'),
+      if (sourceDeck.issues.isNotEmpty)
+        l10n.d('Afbeeldingen die niet konden worden gelezen'),
+    ],
+    logoCandidate: logoCandidate,
+    existingNames: ref
+        .read(settingsProvider)
+        .themeProfiles
+        .map((p) => p.name)
+        .toSet(),
+  );
+  if (name == null || !context.mounted) return;
+  try {
+    var stored = profile.copyWith(name: name.name);
+    if (name.useLogo && logoCandidate != null) {
+      final files = ref.read(fileServiceProvider);
+      final logoPath = await files.materializeImportedStyleLogo(
+        logoCandidate.image.bytes,
+        profileName: name.name,
+      );
+      if (logoPath == null) {
+        throw StateError('Template logo could not be saved');
+      }
+      String? brandStripPath;
+      if (logoCandidate.brandStrip case final strip?) {
+        brandStripPath = await files.materializeImportedStyleLogo(
+          strip.bytes,
+          profileName: '${name.name} merkstrook',
+        );
+        if (brandStripPath == null) {
+          throw StateError('Template brand strip could not be saved');
+        }
+      }
+      stored = importedLogoProfile(
+        deck: sourceDeck,
+        candidate: logoCandidate,
+        logoPath: logoPath,
+        brandStripPath: brandStripPath,
+        name: name.name,
+      );
+    }
+    await addThemeProfileWithoutSelection(
+      ref.read(settingsProvider.notifier),
+      stored,
+    );
+  } catch (e, s) {
+    logError('importTemplateStyle', e, s);
+    if (context.mounted) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        l10n.d('De stijl kon niet worden bewaard.'),
+      );
+    }
+    return;
+  }
+  if (context.mounted) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(l10n.d('Stijl bewaard voor nieuwe presentaties.')),
+      ),
+    );
+  }
 }
 
 Future<ImportLogoResolution?> _resolveImportLogo(
@@ -447,11 +585,11 @@ String presentationImportLabel(AppLocalizations l10n) =>
 /// bestandskiezer én voor de herkenning bij een mislukte "Openen": groeit een
 /// importeur mee, dan groeien beide mee. Bewust formaat-loos in de teksten
 /// eromheen, zodat er niets te herzien valt als er een formaat bij komt.
-const presentationImportExtensions = ['pptx', 'odp', 'key'];
+const presentationImportExtensions = ['pptx', 'potx', 'odp', 'key'];
 
 /// Herkent aan de bestandsnaam of dit een presentatie is die de import kan
 /// omzetten. Gebruikt bij een mislukte "Openen": koos de gebruiker eigenlijk
-/// een `.pptx`/`.odp`/`.key`, dan is een import de bedoeling — geen Markdown.
+/// een `.pptx`/`.potx`/`.odp`/`.key`, dan is een import de bedoeling — geen Markdown.
 bool isImportablePresentationName(String name) {
   final dot = name.lastIndexOf('.');
   if (dot < 0) return false;

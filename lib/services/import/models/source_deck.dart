@@ -1,6 +1,7 @@
 import 'conversion_issue.dart';
 import 'source_slide.dart';
 import 'source_theme.dart';
+import 'source_image.dart';
 
 /// A parsed source presentation: deck-level metadata plus its [slides].
 ///
@@ -15,6 +16,8 @@ class SourceDeck {
     this.author = '',
     this.theme,
     this.issues = const [],
+    this.templateImages = const [],
+    this.templateMasterCount = 0,
   });
 
   /// Slides in source order; indices match each slide's `index` field.
@@ -33,4 +36,8 @@ class SourceDeck {
   /// (e.g. a whole format whose internals the import cannot parse yet). The deck builder
   /// appends one trailing "not converted" note slide listing these.
   final List<ConversionIssue> issues;
+
+  /// Fixed pictures from the selected layout/master of a slide-less template.
+  final List<SourceImage> templateImages;
+  final int templateMasterCount;
 }

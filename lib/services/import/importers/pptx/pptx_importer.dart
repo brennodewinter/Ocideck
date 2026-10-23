@@ -5,6 +5,7 @@ import '../../core/result.dart';
 import '../../models/conversion_issue.dart';
 import '../../models/source_format.dart';
 import '../../models/source_deck.dart';
+import '../../models/source_image.dart';
 import '../../models/source_slide.dart';
 import '../../models/source_theme.dart';
 import '../../pipeline/parse_guard.dart';
@@ -14,6 +15,7 @@ import '../../../../utils/log.dart';
 import '../import_failure.dart';
 import '../importer.dart';
 import 'pptx_context.dart';
+import 'pptx_inherited_media.dart';
 import 'pptx_slide.dart';
 import 'pptx_theme.dart';
 
@@ -48,12 +50,16 @@ class PptxImporter extends Importer {
       final slideRefs = _orderedSlidePaths(ctx);
       if (slideRefs.isEmpty) {
         if (path?.toLowerCase().endsWith('.potx') == true && _isTemplate(ctx)) {
+          final template = _templateAssets(ctx);
           return Ok(
             SourceDeck(
               slides: const [],
               title: _coreProperty(ctx, 'title'),
               author: _coreProperty(ctx, 'creator'),
               theme: _templateTheme(ctx),
+              templateImages: template.images,
+              templateMasterCount: _templateMasterCount(ctx),
+              issues: template.issues,
             ),
           );
         }
@@ -220,7 +226,71 @@ class PptxImporter extends Importer {
     if (master == null || ctx.readPart(master) == null) return null;
     final theme = ctx.firstRelatedPart(master, 'ppt/theme/');
     final themeXml = ctx.readPart(theme ?? 'ppt/theme/theme1.xml');
-    return themeXml == null ? null : parseTheme(themeXml);
+    final parsed = themeXml == null
+        ? const SourceTheme()
+        : parseTheme(themeXml);
+    final masterXml = ctx.readXml(master);
+    if (masterXml == null) return themeXml == null ? null : parsed;
+    final background = descendantsLocal(masterXml, 'bgPr').firstOrNull;
+    final color = background == null
+        ? null
+        : descendantsLocal(
+            background,
+            'srgbClr',
+          ).firstOrNull?.getAttribute('val');
+    final footer = masterXml.descendants
+        .whereType<XmlElement>()
+        .where(
+          (shape) =>
+              shape.name.local == 'sp' &&
+              descendantsLocal(
+                shape,
+                'ph',
+              ).any((ph) => ph.getAttribute('type') == 'ftr'),
+        )
+        .firstOrNull;
+    final footerText = footer == null
+        ? null
+        : descendantsLocal(
+            footer,
+            't',
+          ).map((part) => part.innerText).join().trim();
+    final hf = descendantsLocal(masterXml, 'hf').firstOrNull;
+    return SourceTheme(
+      accentColor: parsed.accentColor,
+      textColor: parsed.textColor,
+      fontFamily: parsed.fontFamily,
+      slideBackgroundColor:
+          color == null || !RegExp(r'^[0-9A-Fa-f]{6}$').hasMatch(color)
+          ? null
+          : '#${color.toUpperCase()}',
+      footerText: footerText?.isEmpty == true ? null : footerText,
+      showPageNumbers: hf == null ? null : hf.getAttribute('sldNum') == '1',
+    );
+  }
+
+  ({List<SourceImage> images, List<ConversionIssue> issues}) _templateAssets(
+    PptxContext ctx,
+  ) {
+    final master = ctx.firstRelatedPart(
+      'ppt/presentation.xml',
+      'ppt/slideMasters/',
+    );
+    return master == null
+        ? (images: <SourceImage>[], issues: <ConversionIssue>[])
+        : templatePictures(ctx, master);
+  }
+
+  int _templateMasterCount(PptxContext ctx) {
+    const part = 'ppt/presentation.xml';
+    final rels = ctx.relsFor(part);
+    return rels.keys
+        .where(
+          (id) =>
+              ctx.resolveRel(rels, id, part)?.startsWith('ppt/slideMasters/') ==
+              true,
+        )
+        .length;
   }
 
   SourceTheme? _deckTheme(PptxContext ctx, String firstSlidePath) {

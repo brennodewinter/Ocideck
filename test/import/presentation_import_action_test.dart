@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:convert';
 
 import 'package:archive/archive.dart';
 import 'package:material_ui/material_ui.dart';
@@ -10,6 +11,7 @@ import 'package:ocideck/services/import/pipeline/import_runner.dart';
 import 'package:ocideck/services/import/pipeline/import_task.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/import_module_provider.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/shell/presentation_import_action.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -162,6 +164,71 @@ void main() {
 
     // De nieuwe tab startte een periodieke autosave-timer; ruim de container op
     // binnen de fake-async-test zodat die timer niet als "pending" blijft staan.
+    container.dispose();
+  });
+
+  testWidgets('leeg potx bewaart stijl pas na bevestiging', (tester) async {
+    final (container, ctx, ref) = await pump(tester);
+    final originalCount = container.read(settingsProvider).themeProfiles.length;
+    final originalSelection = container
+        .read(settingsProvider)
+        .selectedThemeProfileName;
+    final future = importPresentation(
+      ctx,
+      ref,
+      fileOverride: (bytes: emptyPotxFixture(), name: 'Huisstijl.potx'),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      find.text('PowerPoint-sjabloon als stijl importeren'),
+      findsOneWidget,
+    );
+    expect(find.text('• Accentkleur'), findsOneWidget);
+    expect(find.text('• Lettertype'), findsOneWidget);
+    expect(
+      find.text('• Vrije plaatsing en PowerPoint-layouts'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Stijl bewaren'));
+    await tester.pumpAndSettle();
+    await future;
+
+    final settings = container.read(settingsProvider);
+    expect(settings.themeProfiles.length, originalCount + 1);
+    expect(settings.selectedThemeProfileName, originalSelection);
+    final added = settings.themeProfiles.last;
+    expect(added.name, 'Huisstijl');
+    expect(added.accentColor, '#2E7D64');
+    expect(added.textColor, '#222222');
+    expect(added.fontFamily, 'Georgia');
+    expect(_openDeck(container), isNull);
+    final prefs = await SharedPreferences.getInstance();
+    expect(
+      (jsonDecode(prefs.getString('themeProfiles')!) as List)
+          .cast<Map<String, dynamic>>()
+          .any((profile) => profile['name'] == 'Huisstijl'),
+      isTrue,
+    );
+    container.dispose();
+  });
+
+  testWidgets('annuleren van leeg potx bewaart geen stijl', (tester) async {
+    final (container, ctx, ref) = await pump(tester);
+    final originalCount = container.read(settingsProvider).themeProfiles.length;
+    final future = importPresentation(
+      ctx,
+      ref,
+      fileOverride: (bytes: emptyPotxFixture(), name: 'Huisstijl.potx'),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Annuleren'));
+    await tester.pumpAndSettle();
+    await future;
+    expect(
+      container.read(settingsProvider).themeProfiles.length,
+      originalCount,
+    );
+    expect(_openDeck(container), isNull);
     container.dispose();
   });
 

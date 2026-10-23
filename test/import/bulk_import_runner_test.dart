@@ -105,6 +105,21 @@ void main() {
     expect(rec.paths, [inUit('Goed.md')]);
   });
 
+  test('een leeg potx schrijft geen leeg deck in de wachtrij', () async {
+    final rec = recorder();
+    final summary = await runner(rec.write).run([
+      BulkImportItem(bytes: emptyPotxFixture(), name: 'stijl.potx'),
+      BulkImportItem(
+        bytes: pptxFixture(titel: 'Goed'),
+        name: 'goed.pptx',
+      ),
+    ], targetDirectory: '/uit');
+
+    expect(summary.failed, 1);
+    expect(summary.outcomes.first.failure?.args['formaat'], 'potx');
+    expect(rec.paths, [inUit('Goed.md')]);
+  });
+
   test('een schrijffout landt op dat ene bestand, niet op de rij', () async {
     final rec = recorder(failOn: {inUit('Een.md')});
     final summary = await runner(rec.write).run([

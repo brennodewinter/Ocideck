@@ -56,20 +56,35 @@ Uint8List pptxFixture({String titel = 'Plan'}) {
 Uint8List corruptFixture() => Uint8List.fromList([1, 2, 3, 4, 5]);
 
 /// A slide-free POTX with one master and a distinct editable colour scheme.
-Uint8List emptyPotxFixture() {
+Uint8List emptyPotxFixture({bool withLogo = false, bool missingLogo = false}) {
   final parts = <String, String>{
     '[Content_Types].xml':
         '<Types><Override PartName="/ppt/presentation.xml" '
         'ContentType="application/vnd.openxmlformats-officedocument.presentationml.template.main+xml"/></Types>',
     'ppt/presentation.xml':
-        '<p:presentation xmlns:p="$_p" xmlns:r="$_r"><p:sldIdLst/></p:presentation>',
+        '<p:presentation xmlns:p="$_p" xmlns:r="$_r">'
+        '<p:sldSz cx="12192000" cy="6858000"/><p:sldIdLst/></p:presentation>',
     'ppt/_rels/presentation.xml.rels':
         '<Relationships xmlns="$_pkg"><Relationship Id="rId1" '
         'Type="$_r/slideMaster" Target="slideMasters/slideMaster1.xml"/></Relationships>',
-    'ppt/slideMasters/slideMaster1.xml': '<p:sldMaster xmlns:p="$_p"/>',
+    'ppt/slideMasters/slideMaster1.xml':
+        '<p:sldMaster xmlns:p="$_p" xmlns:a="$_a" xmlns:r="$_r">'
+        '<p:cSld><p:bg><p:bgPr><a:solidFill><a:srgbClr val="F6F7F8"/>'
+        '</a:solidFill></p:bgPr></p:bg><p:spTree>'
+        '<p:sp><p:nvSpPr><p:cNvPr id="21" name="Footer"/>'
+        '<p:cNvSpPr/><p:nvPr><p:ph type="ftr"/></p:nvPr></p:nvSpPr>'
+        '<p:txBody><a:p><a:r><a:t>LibreKAT</a:t></a:r></a:p></p:txBody></p:sp>'
+        '${withLogo ? '<p:pic><p:nvPicPr>'
+                  '<p:cNvPr id="20" name="Corner logo"/><p:cNvPicPr/><p:nvPr/>'
+                  '</p:nvPicPr><p:blipFill><a:blip r:embed="rId2"/>'
+                  '</p:blipFill><p:spPr><a:xfrm><a:off x="10000000" y="5900000"/>'
+                  '<a:ext cx="1000000" cy="500000"/></a:xfrm></p:spPr></p:pic>' : ''}'
+        '</p:spTree></p:cSld><p:hf sldNum="1"/></p:sldMaster>',
     'ppt/slideMasters/_rels/slideMaster1.xml.rels':
         '<Relationships xmlns="$_pkg"><Relationship Id="rId1" '
-        'Type="$_r/theme" Target="../theme/theme1.xml"/></Relationships>',
+        'Type="$_r/theme" Target="../theme/theme1.xml"/>'
+        '${withLogo ? '<Relationship Id="rId2" Type="$_r/image" Target="../media/logo.png"/>' : ''}'
+        '</Relationships>',
     'ppt/theme/theme1.xml':
         '<a:theme xmlns:a="$_a"><a:clrScheme>'
         '<a:dk1><a:srgbClr val="222222"/></a:dk1>'
@@ -82,6 +97,16 @@ Uint8List emptyPotxFixture() {
     final data = Uint8List.fromList(content.codeUnits);
     archive.addFile(ArchiveFile.bytes(name, data));
   });
+  if (withLogo && !missingLogo) {
+    final logo = img.Image(width: 20, height: 10)
+      ..clear(img.ColorRgb8(210, 24, 48));
+    archive.addFile(
+      ArchiveFile.bytes(
+        'ppt/media/logo.png',
+        Uint8List.fromList(img.encodePng(logo)),
+      ),
+    );
+  }
   return Uint8List.fromList(ZipEncoder().encode(archive));
 }
 

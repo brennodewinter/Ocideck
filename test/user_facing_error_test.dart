@@ -146,6 +146,18 @@ void main() {
       expect(text, isNot(contains('{formaat}')));
     });
 
+    test('een leeg potx in de wachtrij wijst naar stijlimport', () {
+      final text = importFailureText(
+        l10n,
+        failure(
+          pres.ImportFailureReason.noSlides,
+          args: {'bestand': 'merk.potx', 'formaat': 'potx'},
+        ),
+      );
+      expect(text, contains('merk.potx'));
+      expect(text, contains('afzonderlijk als stijl'));
+    });
+
     test('de ruwe technische message komt nooit op het scherm', () {
       // `message` is voor het log; de gebruiker krijgt de vertaalde tekst.
       final text = importFailureText(

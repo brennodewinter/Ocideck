@@ -128,11 +128,18 @@ String importFailureText(AppLocalizations l10n, pres.ImportFailure failure) {
     pres.ImportFailureReason.formatNotSupported => fill(
       l10n.d('Het {formaat}-formaat wordt nog niet ondersteund ({bestand}).'),
     ),
-    pres.ImportFailureReason.noSlides => fill(
-      l10n.d(
-        'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?',
-      ),
-    ),
+    pres.ImportFailureReason.noSlides =>
+      failure.args['formaat'] == 'potx'
+          ? fill(
+              l10n.d(
+                'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.',
+              ),
+            )
+          : fill(
+              l10n.d(
+                'Geen dia’s gevonden in {bestand} — is dit een geldig {formaat}-bestand?',
+              ),
+            ),
     pres.ImportFailureReason.unreadable => fill(
       l10n.d('Kon {bestand} niet lezen als {formaat}-presentatie.'),
     ),

@@ -5,6 +5,7 @@ import 'package:image/image.dart' as img;
 import 'models/source_deck.dart';
 import 'models/source_image.dart';
 import 'models/source_slide.dart';
+import 'models/source_theme.dart';
 import '../../models/settings.dart';
 
 enum ImportLogoEdge { top, bottom }
@@ -111,6 +112,27 @@ List<ImportLogoCandidate> detectImportLogoCandidates(SourceDeck deck) {
   result.sort((a, b) => b.occurrenceCount.compareTo(a.occurrenceCount));
   return result;
 }
+
+/// A template master is itself evidence of deck-wide imagery; no repetition
+/// across slides is possible when the template has no slides.
+List<ImportLogoCandidate> templateLogoCandidates(SourceDeck deck) => [
+  for (final source in deck.templateImages)
+    if (source.placement case final placement?)
+      if (placement.isLogoLikeAtVerticalEdge ||
+          placement.isWideBrandStripAtVerticalEdge)
+        if (_candidateImage(source) case final candidate?)
+          ImportLogoCandidate(
+            image: candidate,
+            sourceSha256: source.sha256,
+            slideIndexes: const [0],
+            edge: placement.isAtTop
+                ? ImportLogoEdge.top
+                : ImportLogoEdge.bottom,
+            brandStrip: placement.isWideBrandStripAtVerticalEdge
+                ? source
+                : null,
+          ),
+];
 
 /// Een gewone kleine hoekafbeelding is al een bruikbaar logo. Een brede
 /// modelstrook is dat niet: sla je die rechtstreeks op, dan blijft het echte
@@ -230,6 +252,8 @@ SourceDeck sourceDeckWithoutLogo(
   author: deck.author,
   theme: deck.theme,
   issues: deck.issues,
+  templateImages: deck.templateImages,
+  templateMasterCount: deck.templateMasterCount,
   slides: [
     for (final slide in deck.slides)
       SourceSlide(
@@ -275,8 +299,7 @@ ThemeProfile importedLogoProfile({
       : 'right';
   final vertical = candidate.edge == ImportLogoEdge.top ? 'top' : 'bottom';
   final json = <String, Object?>{
-    ...base.toJson(),
-    'name': name,
+    ...importedThemeProfile(source, name: name, base: base).toJson(),
     'logoPath': logoPath,
     'logoPosition': '$vertical-$horizontal',
     // De renderer ijkt `logoSize` op een dia van 1280 px breed. Met 960 werd
@@ -287,18 +310,28 @@ ThemeProfile importedLogoProfile({
       'brandStripHeight': candidate.brandStrip!.placement!.height,
       'titleSubtitleInBrandStrip': true,
     },
-    if (source?.slideBackgroundColor != null)
-      'slideBackgroundColor': source!.slideBackgroundColor,
-    if (source?.textColor != null) 'textColor': source!.textColor,
-    if (source?.accentColor != null) 'accentColor': source!.accentColor,
-    if (source?.titleBackgroundColor != null)
-      'titleBackgroundColor': source!.titleBackgroundColor,
-    if (source?.sectionBackgroundColor != null)
-      'sectionBackgroundColor': source!.sectionBackgroundColor,
-    if (source?.fontFamily != null) 'fontFamily': source!.fontFamily,
-    if (source?.footerText != null) 'footerText': source!.footerText,
-    if (source?.showPageNumbers != null)
-      'footerShowPageNumbers': source!.showPageNumbers,
   };
   return ThemeProfile.fromJson(json);
 }
+
+/// Map only values the source actually provides; ThemeProfile validates them.
+ThemeProfile importedThemeProfile(
+  SourceTheme? source, {
+  required String name,
+  ThemeProfile base = const ThemeProfile(),
+}) => ThemeProfile.fromJson({
+  ...base.toJson(),
+  'name': name,
+  if (source?.slideBackgroundColor != null)
+    'slideBackgroundColor': source!.slideBackgroundColor,
+  if (source?.textColor != null) 'textColor': source!.textColor,
+  if (source?.accentColor != null) 'accentColor': source!.accentColor,
+  if (source?.titleBackgroundColor != null)
+    'titleBackgroundColor': source!.titleBackgroundColor,
+  if (source?.sectionBackgroundColor != null)
+    'sectionBackgroundColor': source!.sectionBackgroundColor,
+  if (source?.fontFamily != null) 'fontFamily': source!.fontFamily,
+  if (source?.footerText != null) 'footerText': source!.footerText,
+  if (source?.showPageNumbers != null)
+    'footerShowPageNumbers': source!.showPageNumbers,
+});
