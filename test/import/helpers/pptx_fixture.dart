@@ -55,6 +55,36 @@ Uint8List pptxFixture({String titel = 'Plan'}) {
 /// Bytes die géén archief zijn — de "onleesbaar bestand"-kant van de rij.
 Uint8List corruptFixture() => Uint8List.fromList([1, 2, 3, 4, 5]);
 
+/// A slide-free POTX with one master and a distinct editable colour scheme.
+Uint8List emptyPotxFixture() {
+  final parts = <String, String>{
+    '[Content_Types].xml':
+        '<Types><Override PartName="/ppt/presentation.xml" '
+        'ContentType="application/vnd.openxmlformats-officedocument.presentationml.template.main+xml"/></Types>',
+    'ppt/presentation.xml':
+        '<p:presentation xmlns:p="$_p" xmlns:r="$_r"><p:sldIdLst/></p:presentation>',
+    'ppt/_rels/presentation.xml.rels':
+        '<Relationships xmlns="$_pkg"><Relationship Id="rId1" '
+        'Type="$_r/slideMaster" Target="slideMasters/slideMaster1.xml"/></Relationships>',
+    'ppt/slideMasters/slideMaster1.xml': '<p:sldMaster xmlns:p="$_p"/>',
+    'ppt/slideMasters/_rels/slideMaster1.xml.rels':
+        '<Relationships xmlns="$_pkg"><Relationship Id="rId1" '
+        'Type="$_r/theme" Target="../theme/theme1.xml"/></Relationships>',
+    'ppt/theme/theme1.xml':
+        '<a:theme xmlns:a="$_a"><a:clrScheme>'
+        '<a:dk1><a:srgbClr val="222222"/></a:dk1>'
+        '<a:accent1><a:srgbClr val="2E7D64"/></a:accent1>'
+        '</a:clrScheme><a:fontScheme><a:majorFont>'
+        '<a:latin typeface="Georgia"/></a:majorFont></a:fontScheme></a:theme>',
+  };
+  final archive = Archive();
+  parts.forEach((name, content) {
+    final data = Uint8List.fromList(content.codeUnits);
+    archive.addFile(ArchiveFile.bytes(name, data));
+  });
+  return Uint8List.fromList(ZipEncoder().encode(archive));
+}
+
 /// Een klein merkdeck dat dezelfde relevante PowerPoint-opbouw gebruikt als
 /// echte organisatietemplates: de omslag en slotachtergrond staan in een
 /// dia-indeling, terwijl een brede merkvoet via het diamodel wordt geerfd.
