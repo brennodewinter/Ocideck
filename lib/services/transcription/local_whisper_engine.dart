@@ -8,11 +8,13 @@
 // (servertijd? nee: het is lokaal) is alleen de startkost, en die meet de
 // benchmark in §7 op ~135 ms.
 //
-// Twee uitvoerders:
+// Drie uitvoerders:
 //  * `_io`   — macOS/Windows/Linux: bundel-binary zoeken, model hashen,
 //              `whisper-cli` starten met argv-array, tijdslimiet, kill;
-//  * `_stub` — web: de route bestaat niet; `capabilities()` geeft dat
-//              eerlijk terug in plaats van een engine voor te wenden.
+//  * `_web`  — web: dezelfde whisper.cpp als WASM in de tab, achter de
+//              bridge in `web/whisper/` (vereist cross-origin isolatie);
+//  * `_stub` — platforms die geen van beide hebben: de route bestaat er
+//              niet en `status()` zegt dat eerlijk.
 //
 // Drie harde regels uit het contract, hier afgedwongen:
 //  * het modelpad komt alleen uit `TranscriptionModelStore.modelPath` —
@@ -25,6 +27,7 @@ import 'dart:async';
 
 import 'local_whisper_engine_stub.dart'
     if (dart.library.io) 'local_whisper_engine_io.dart'
+    if (dart.library.js_interop) 'local_whisper_engine_web.dart'
     as impl;
 
 import 'transcription_engine.dart';
@@ -42,8 +45,14 @@ enum LocalEngineSupport {
   unsupportedArchitecture,
 
   /// De helper ontbreekt in het artefact (bijv. een dev-run zonder
-  /// `OCIDECK_WHISPER_CLI`) — een eerlijke "kan niet", geen crash.
+  /// `OCIDECK_WHISPER_CLI`, of een webbundle zonder `whisper/`) — een
+  /// eerlijke "kan niet", geen crash.
   missingHelper,
+
+  /// Alleen web: de pagina is niet cross-origin geïsoleerd of de browser
+  /// mist `SharedArrayBuffer` — zonder die kan de met pthreads gebouwde
+  /// wasm niet draaien (§5.3, HOSTING.md vereiste headers).
+  noIsolation,
 }
 
 /// De status zoals `capabilities()` hem nodig heeft: een enkelvoudige

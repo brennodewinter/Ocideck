@@ -1624,6 +1624,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
+      'Този браузър или хостинг не може да стартира локален речеви двигател (липсва cross-origin изолация)',
   'Whisper': 'Whisper',
   'MIT · whisper.cpp': 'MIT · whisper.cpp',
   'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':

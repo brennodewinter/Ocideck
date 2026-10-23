@@ -55,8 +55,12 @@
   # plaintext-downgrade window on the first schemeless request. See HOSTING.md §3.
   Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
 
-  # Cross-Origin-Embedder-Policy (ZAP 90004) is deliberately NOT set. `require-corp`
-  # can break cross-origin resources and needs testing against the URL-import and
-  # any embed a permissive deployment re-enables; it is the weakest of the
-  # findings and not worth shipping blind. Revisit with a real cross-origin test.
+  # Cross-origin isolation: required for SharedArrayBuffer, which the
+  # pthread-based whisper WASM engine needs for local transcription (#2513).
+  # Safe to set here because the CSP above already confines every subresource
+  # axis (img/media/frame) to 'self', blob: and data: — COEP's no-cors gate
+  # therefore has nothing left to break. The user-initiated model download is
+  # a CORS fetch, which COEP does not govern.
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Embedder-Policy "require-corp"
 </IfModule>

@@ -105,7 +105,7 @@ abstract final class BundledLicenses {
       licenseAsset: 'assets/models/YuNet-LICENSE.txt',
     ),
     BundledLicense(
-      component: 'whisper.cpp speech engine (whisper-cli)',
+      component: 'whisper.cpp speech engine (whisper-cli / whisper-wasm)',
       license: 'MIT',
       source: 'https://github.com/ggml-org/whisper.cpp',
       licenseAsset: 'assets/licenses/whisper-cpp-LICENSE.txt',

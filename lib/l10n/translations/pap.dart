@@ -651,6 +651,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
+      'E browser of hosting akí no por koré un motor di voz lokal (falta aislamiento cross-origin)',
   'Whisper': 'Whisper',
   'MIT · whisper.cpp': 'MIT · whisper.cpp',
   'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':

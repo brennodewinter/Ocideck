@@ -27,9 +27,12 @@ final transcriptionModelDownloaderProvider = Provider<ModelDownloader>(
 
 /// De aanbieding zoals de manager hem afloopt — een provider (net als de
 /// store en downloader) zodat tests de catalogus kunnen vervangen zonder
-/// aan de const-lijst te morrelen.
+/// aan de const-lijst te morrelen. Op web bevat hij alleen modellen die de
+/// wasm-engine echt kan laden (§4.6: het 2 GB-plafond sluit `large-*` uit).
 final whisperModelCatalogProvider = Provider<List<WhisperModel>>(
-  (ref) => whisperModelCatalog,
+  (ref) => kIsWeb
+      ? whisperModelCatalog.where((m) => m.webCapable).toList()
+      : whisperModelCatalog,
 );
 
 /// De toestand van één catalogusitem zoals de UI hem tekent.
@@ -139,7 +142,14 @@ class TranscriptionModelManager
   }
 
   Future<void> _refreshAll() async {
-    if (kIsWeb || !ref.mounted) return;
+    if (!ref.mounted) return;
+    // Afgebroken downloads mogen geen `.part`-rest achterlaten dat eeuwig
+    // opslag vreet — op web is dat een heel model in IndexedDB.
+    try {
+      await ref.read(transcriptionModelStoreProvider).sweepPartials();
+    } catch (e, s) {
+      logError('ModelManager: .part-resten vegen', e, s);
+    }
     for (final model in ref.read(whisperModelCatalogProvider)) {
       if (_statusOf(model.id).downloading) continue;
       final install = await _stateOf(model);
@@ -164,9 +174,7 @@ class TranscriptionModelManager
     // De poort kijkt naar de `downloading`-vlag, niet alleen naar _active:
     // die map vult pas na de eerste awaits, dus wie hem alleen bewaakt laat
     // een tweede download in het opstartvenster toch door.
-    if (kIsWeb ||
-        _active.isNotEmpty ||
-        state.values.any((s) => s.downloading)) {
+    if (_active.isNotEmpty || state.values.any((s) => s.downloading)) {
       return;
     }
     final store = ref.read(transcriptionModelStoreProvider);
@@ -235,7 +243,6 @@ class TranscriptionModelManager
   /// Verwijdert een geïnstalleerd model — expliciet, nooit als bijvangst
   /// van een mislukte download of een enginefout.
   Future<void> delete(WhisperModel model) async {
-    if (kIsWeb) return;
     try {
       await ref.read(transcriptionModelStoreProvider).delete(model);
     } catch (e, s) {

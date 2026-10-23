@@ -1635,6 +1635,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
+      'Ní féidir leis an mbrabhsálaí nó óstach seo inneall urlabhra áitiúil a rith (tá an t-éalú cross-origin in easnamh)',
   'Whisper': 'Whisper',
   'MIT · whisper.cpp': 'MIT · whisper.cpp',
   'Maak een transcript van een opname of van een bestaand audiobestand — als bewerkbaar Markdown-document, met een duidelijke keuze of het origineel bewaard blijft. Lokaal waar mogelijk; een eigen server alleen als u die kiest.':

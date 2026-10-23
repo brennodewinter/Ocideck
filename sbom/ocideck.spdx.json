@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.0+42",
-  "documentNamespace": "https://ocideck.app/spdx/6eb21d92-398f-5bfb-8760-f3ec524474b4",
+  "documentNamespace": "https://ocideck.app/spdx/1ebe6f13-088e-5fbb-8f93-94aecb05f6bd",
   "creationInfo": {
-    "created": "2026-10-23T08:38:23.069900Z",
+    "created": "2026-10-23T12:43:25.354830Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4858,8 +4858,8 @@
       "comment": "Platform-specific runtime bundled by pdfium_dart/pdfium_flutter. The web WASM in pdfrx 2.6.1 has SHA-256 5b2cbb18e9dc361dae375e971c7e75f7306d39b7749ad4fced475579e6a549df; the Darwin XCFramework archive is pinned upstream as 948d9257f53f01cbed74b81bb8adc8758e52ac9390751772de7889026d32d5a1. Other native targets are release-pinned by the upstream build hook."
     },
     {
-      "SPDXID": "SPDXRef-219-whisper.cpp--whisper-cli-",
-      "name": "whisper.cpp (whisper-cli)",
+      "SPDXID": "SPDXRef-219-whisper.cpp--whisper-cli---whisper-wasm-",
+      "name": "whisper.cpp (whisper-cli / whisper-wasm)",
       "versionInfo": "1.9.5",
       "supplier": "Organization: Georgi Gerganov and contributors",
       "downloadLocation": "https://github.com/ggml-org/whisper.cpp/archive/refs/tags/v1.9.5.tar.gz",
@@ -4879,7 +4879,7 @@
           "referenceLocator": "pkg:github/ggml-org/whisper.cpp@1.9.5"
         }
       ],
-      "comment": "Local speech-recognition helper compiled from the pinned source tarball by scripts/build_whisper_cli.sh and shipped inside the desktop bundles. Model weights are never bundled — the user downloads them through the guarded catalog flow (#2512)."
+      "comment": "Local speech-recognition engine compiled from the pinned source tarball twice over: scripts/build_whisper_cli.sh ships whisper-cli inside the desktop bundles, and the Emscripten build in web/whisper/ ships inside the web bundle (#2513, hash-pinned by web/whisper/manifest.json). Model weights are never bundled — the user downloads them through the guarded catalog flow."
     },
     {
       "SPDXID": "SPDXRef-220-dompurify",
@@ -5429,7 +5429,7 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-219-whisper.cpp--whisper-cli-"
+      "relatedSpdxElement": "SPDXRef-219-whisper.cpp--whisper-cli---whisper-wasm-"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",

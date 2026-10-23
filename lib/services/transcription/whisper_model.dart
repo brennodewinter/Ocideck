@@ -7,13 +7,15 @@
 // elke extra keuze is een extra keuze die de gebruiker moet begrijpen.
 //
 // Waarom deze drie:
-//  * `base` en `tiny` produceerden in de proef op Nederlandse spraak te veel
-//    verwisselde woorden om als standaard aan te bieden (zie §4.5) — `base`
-//    staat er wél bij als lichtste optie voor zwakke hardware, eerlijk
-//    gelabeld als "licht";
 //  * `small` is de kleinste die op Nederlands bruikbaar scoort;
 //  * `large-v3-turbo` levert de kwaliteit die het issue vraagt en draait op
-//    hedendaagse desktophardware ruim sneller dan realtime.
+//    hedendaagse desktophardware ruim sneller dan realtime — maar past niet
+//    in het 2 GB-WASM-geheugen (§4.6), dus `webCapable: false`;
+//  * `base` produceerde te veel verwisselde woorden om als standaard aan te
+//    bieden (§4.5) maar staat er als eerlijk gelabelde lichte optie — op web
+//    is hij de lichtste die werkt (~290 MB geheugen, §4.6). `tiny` blijft
+//    bewust weg, op web net als op desktop: gemeten output was niet
+//    bruikbaar genoeg om aan te bieden.
 //
 // De URL's pinnen op de commit van de model-repository (niet op `main`),
 // en elke rij draagt de SHA-256 van het `.bin`-bestand. Downloaden zonder
@@ -38,6 +40,7 @@ class WhisperModel {
     required this.downloadBytes,
     required this.diskBytes,
     required this.tier,
+    this.webCapable = true,
   });
 
   /// Stabiele sleutel voor instellingen en `EngineCapabilities.requiresModel`.
@@ -62,6 +65,12 @@ class WhisperModel {
   /// Eerlijke kwaliteitsaanduiding voor in de UI: `light` (snel, zwakker),
   /// `balanced` (standaard), `accurate` (grootst, best).
   final String tier;
+
+  /// Kan de WASM-engine dit model dragen? Het 2 GB-adresplafond van
+  /// WebAssembly sluit `large-v3-turbo` uit — de proef in §4.6 toonde zijn
+  /// `init` afbreken. Zo'n rij biedt de webbuild niet aan (geen knop naar
+  /// een gegarandeerde mislukking).
+  final bool webCapable;
 
   /// De URL waar dit model vandaan komt — https, op de repository-revisie
   /// gepind. Het pad mag nooit uit dit patroon ontsnappen: de downloader
@@ -91,6 +100,7 @@ const whisperModelCatalog = <WhisperModel>[
     downloadBytes: 1624555275,
     diskBytes: 1624555275,
     tier: 'accurate',
+    webCapable: false,
   ),
   WhisperModel(
     id: 'base',

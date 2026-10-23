@@ -534,7 +534,62 @@ can warn before a 1.5 GiB download lands on a 4 GB machine, not to promise
 a measured result on every device. CPU-only operation (no Metal/Vulkan) is
 the fallback everywhere — speed drops, correctness does not.
 
----
+### 4.6 The local web engine — whisper.cpp as WASM (#2513)
+
+**Runtime.** The same pinned whisper.cpp v1.9.5 source, compiled by
+Emscripten (`emscripten/emsdk:3.1.74` Docker image) into `web/whisper/
+libmain.js` + `libmain.wasm`, plus our own thin `bridge.js` that lazy-loads
+the module, feeds model bytes into its virtual FS, parses segment lines,
+and forwards cancel to whisper's `abort_callback` (patch:
+`native/whisper_wasm/emscripten-cancel.patch`). The artifacts are
+hash-pinned in `web/whisper/manifest.json`; a test fails the build if a
+binary is hand-edited.
+
+**The hard precondition.** The build uses WASM pthreads, which need
+`SharedArrayBuffer`, which exists only under cross-origin isolation:
+`Cross-Origin-Opener-Policy: same-origin` + `Cross-Origin-Embedder-Policy:
+require-corp` on every response. Without those headers the page still loads
+but the engine reports `LocalEngineSupport.noIsolation` — a specific,
+honest capability, not a crash (measured: `isSupported() → false`, and a
+forced run aborts visibly rather than hanging). The shipped `.htaccess`
+sets both headers; HOSTING.md §3 documents the requirement and why COEP is
+safe here (the CSP already pins all subresources to 'self'/blob:/data:, and
+the model download is a CORS fetch that COEP does not govern).
+
+**Storage and download.** Models live in IndexedDB (`ocideck-transcription`)
+as Blobs; downloads write a `.part` key first and promote to the real key
+only after a WebCrypto SHA-256 match — same semantics as `.part` on disk.
+The browser may evict IndexedDB under storage pressure; that surfaces as
+`absent`, never as corruption, and the user re-downloads. `fetch` in CORS
+mode is the egress: the browser itself checks every redirect hop — our
+equivalent of NetGuard's hop-by-hop rule — and a hop without CORS consent
+fails visibly as `networkFailed`.
+
+**Measured** through the shipped `bridge.js` on the real artifacts
+(4 threads, `lang=nl`, Dutch spoken-Wikipedia WAV, localhost with
+COOP+COEP):
+
+| Browser | `tiny` 29.2 s | `base` 29.2 s | `base` 212 s | `small` 29.2 s | `small` 212 s |
+|---|---|---|---|---|---|
+| Chrome | RTF 0.15, ~153 MB | RTF 0.21, ~286 MB | RTF 0.30, ~298 MB | RTF 0.75, ~934 MB | RTF 0.81, ~946 MB |
+| Firefox | RTF 0.18 | — | RTF 0.33 | — | RTF 0.89 |
+| Safari / WebKit | RTF 0.17, ~152 MB | — | RTF 0.23–0.32 | — | — |
+
+`large-v3-turbo` (1.5 GiB) aborts visibly at `init` — the 2 GB WASM memory
+ceiling — so the catalog marks it `webCapable: false` and web never offers
+a button that must fail. `tiny` is excluded everywhere for quality (§4.5).
+The honest web offer is therefore `small` (default) and `base` (light).
+Cancellation was measured: `requestCancel` stops a 212 s run at ~4 s with
+`cancelled: true`. All probe traffic was same-origin; the harness and full
+result files live in `native/whisper_wasm/probe/`.
+
+**Boundaries.** Long audio is transcoded once to 16 kHz mono by
+`OfflineAudioContext` (the `decodeAudioData` route — container coverage is
+a browser property, failure is `DecodeFailed`) and then run as one pass; a
+212 s file on `small` took 171 s on Chrome. There is no streaming live
+transcript on web — `transcribeLive` returns null and the definitive pass
+is the only output. Tab reload loses `mem:` audio, which is why the save
+flow's export-before-reload warning matters (§3.2).
 
 ## 5. Capability matrix
 
@@ -601,7 +656,7 @@ with the honest label "room capture may include speaker output".
 | Route | Status |
 |---|---|
 | Local desktop engine (whisper.cpp `whisper-cli` subprocess, #2512) | beschikbaar on macOS arm64/x86_64 (measured, §4.5); Linux/Windows build from the same pinned source — real-hardware proof pending there |
-| Local web engine (WASM, #2513) | niet getest — whisper.wasm is proven for tiny/base-class models inside WASM memory and threading limits; heavier local models on web are not claimed ([whisper.wasm README](https://github.com/ggml-org/whisper.cpp/blob/master/examples/whisper.wasm/README.md)). WASM threads also need COOP/COEP isolation headers — a real constraint for the hosted bundle, checked on the actual deployment. |
+| Local web engine (WASM, #2513) | beschikbaar onder voorwaarde — gemeten op de echte artifacten in Chrome, Firefox en Safari/WebKit (§4.6); vereist COOP/COEP-headers van de host (de bundel levert ze via `.htaccess`), anders meldt de engine `noIsolation`. Aanbod: `small` en `base`; `large-v3-turbo` past niet in 2 GB WASM-geheugen. |
 | Batch server (#2524) | proven per configured profile only; protocol + consent in §4.3 |
 | Live server (#2525) | proven per configured profile only; unproven protocol ⇒ route absent |
 

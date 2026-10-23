@@ -11,7 +11,6 @@
 // niet zomaar een halfbestand bij.
 import 'dart:async';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,21 +38,25 @@ final recordingManagerProvider = Provider<RecordingManager>((ref) {
   return RecordingManager(staging: ref.watch(recordingStagingProvider));
 });
 
-/// De transcriptie-engine die op dit platform klaarstaat: op desktop de
-/// lokale whisper-engine met het gekozen model (#2512); op web nog `null`
-/// tot #2513 zijn engine levert. `null` is geen afwezigheid maar een
-/// capaciteit: de grens beantwoordt hem als `engineUnavailable` (§4.4).
-/// Opnemen mag dus nog steeds — alleen van een vers opgenomen bestand komt
-/// dan geen transcript.
+/// De transcriptie-engine die op dit platform klaarstaat: de lokale
+/// whisper-engine met het gekozen model — op desktop als helperproces
+/// (#2512), op web als wasm in de tab (#2513). Of die werkelijk kan,
+/// bepaalt zijn `status()`/`capabilities()`; op web hangt dat af van
+/// cross-origin isolatie (§5.3).
 ///
 /// De provider bouwt opnieuw zodra de gekozen model-id wijzigt; een lopende
 /// `transcribe` is daar immuun voor omdat hij zijn eigen instantie vasthoudt.
 final transcriptionEngineProvider = Provider<TranscriptionEngine?>((ref) {
-  if (kIsWeb) return null;
-  final model =
-      whisperModelById(ref.watch(selectedTranscriptionModelProvider)) ??
-      whisperModelCatalog.first;
-  return createLocalWhisperEngine(model: model);
+  // Zoek in de platformcatalogus — niet de hele lijst: een op desktop
+  // opgeslagen keuze voor een model dat web niet kan dragen (bv.
+  // `large-v3-turbo`) mag hier nooit de web-engine voeden.
+  final catalog = ref.watch(whisperModelCatalogProvider);
+  final selectedId = ref.watch(selectedTranscriptionModelProvider);
+  WhisperModel? model;
+  for (final m in catalog) {
+    if (m.id == selectedId) model = m;
+  }
+  return createLocalWhisperEngine(model: model ?? catalog.first);
 });
 
 /// Een verzoek aan het open transcriptdocument: pas deze binnenkomende tekst

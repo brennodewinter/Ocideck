@@ -14,9 +14,11 @@
 //  * annuleren of falen ruimt het deelbestand op.
 //
 // De facade deelt de statussen en het resultaat; `_io` draagt het
-// transport en `_stub` het weglaten ervan op platforms zonder schijf.
+// transport, `_web` de fetch/IndexedDB-variant, en `_stub` het weglaten
+// ervan op platforms die geen van beide hebben.
 import 'model_download_stub.dart'
     if (dart.library.io) 'model_download_io.dart'
+    if (dart.library.js_interop) 'model_download_web.dart'
     as impl;
 
 import 'model_store.dart';

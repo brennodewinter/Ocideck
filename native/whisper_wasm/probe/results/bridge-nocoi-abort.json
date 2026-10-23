@@ -1,0 +1,26 @@
+{
+  "probe": "bridge",
+  "model": "ggml-tiny.bin",
+  "audio": "vlot.wav",
+  "threads": 4,
+  "lang": "nl",
+  "sab": false,
+  "isocross": false,
+  "supported": false,
+  "errors": [
+    "RuntimeError: Aborted(). Build with -sASSERTIONS for more info.\n    at abort (http://127.0.0.1:8932/whisper/libmain.js:1:8374)\n    at __abort_js (http://127.0.0.1:8932/whisper/libmain.js:1:69004)\n    at http://127.0.0.1:8932/whisper/libmain.wasm:wasm-function[135]:0x7968\n    at http://127.0.0.1:8932/whisper/libmain.wasm:wasm-function[85]:0x44f5\n    at http://127.0.0.1:8932/whisper/libmain.wasm:wasm-function[1166]:0x11448d\n    at http://127.0.0.1:8932/whisper/libmain.wasm:wasm-function[1168]:0x1145b0\n    at Object.full_default (eval at newFunc (http://127.0.0.1:8932/whisper/libmain.js:1:74202), <anonymous>:9:10)\n    at Object.transcribe (http://127.0.0.1:8932/whisper/bridge.js:115:19)\n    at async http://127.0.0.1:8932/probe-bridge.html?model=ggml-tiny.bin&audio=vlot.wav:41:17"
+  ],
+  "modelFetchMs": 151,
+  "modelInitMs": 89,
+  "audioSec": 29.2,
+  "memMB": 153,
+  "totalMs": 411,
+  "net": [
+    "http://127.0.0.1:8932/whisper/bridge.js",
+    "http://127.0.0.1:8932/ggml-tiny.bin",
+    "http://127.0.0.1:8932/favicon.ico",
+    "http://127.0.0.1:8932/whisper/libmain.js",
+    "http://127.0.0.1:8932/whisper/libmain.wasm",
+    "http://127.0.0.1:8932/vlot.wav"
+  ]
+}

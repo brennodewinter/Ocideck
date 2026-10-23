@@ -4,14 +4,15 @@
 //
 //  * `_io`    — desktop: `getApplicationSupportDirectory()/transcription/
 //               models`, met pad-containment en symlink-weigering;
-//  * `_stub`  — web: er is geen schijf; elk antwoord is "niet geïnstalleerd"
-//               en elke beheeractie een `UnsupportedSource`.
+//  * `_web`   — web: IndexedDB met `.part`-sleutels en WebCrypto-hashes;
+//  * `_stub`  — platforms die geen van beide hebben.
 //
 // De store kent de catalogus, controleert grootte en SHA-256 en ruimt
 // `.part`-resten van afgebroken downloads op. Hij downloadt zelf niets —
 // dat is de downloader, die hier alleen zijn eindbestand parkeert.
 import 'model_store_stub.dart'
     if (dart.library.io) 'model_store_io.dart'
+    if (dart.library.js_interop) 'model_store_web.dart'
     as impl;
 
 import 'whisper_model.dart';

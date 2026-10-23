@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:8934919d-84fa-5582-8bff-7e41f1ecbca8",
+  "serialNumber": "urn:uuid:b9d15102-0934-5008-8190-5717f93d05d7",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-23T08:38:23.069900Z",
+    "timestamp": "2026-10-23T12:43:25.354830Z",
     "tools": {
       "components": [
         {
@@ -9110,7 +9110,7 @@
           "https://github.com/ggml-org/whisper.cpp"
         ]
       },
-      "name": "whisper.cpp (whisper-cli)",
+      "name": "whisper.cpp (whisper-cli / whisper-wasm)",
       "version": "1.9.5",
       "purl": "pkg:github/ggml-org/whisper.cpp@1.9.5",
       "licenses": [
@@ -9143,7 +9143,7 @@
         },
         {
           "name": "ocideck:note",
-          "value": "Local speech-recognition helper compiled from the pinned source tarball by scripts/build_whisper_cli.sh and shipped inside the desktop bundles. Model weights are never bundled — the user downloads them through the guarded catalog flow (#2512)."
+          "value": "Local speech-recognition engine compiled from the pinned source tarball twice over: scripts/build_whisper_cli.sh ships whisper-cli inside the desktop bundles, and the Emscripten build in web/whisper/ ships inside the web bundle (#2513, hash-pinned by web/whisper/manifest.json). Model weights are never bundled — the user downloads them through the guarded catalog flow."
         }
       ]
     },

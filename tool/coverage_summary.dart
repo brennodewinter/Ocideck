@@ -211,6 +211,18 @@ const Set<String> uncoveredBaseline = {
   // io-helft wordt gedekt door transcript_audio_probe_test; de stub wordt er
   // direct aangeroepen.
   'lib/services/transcription/transcript_audio_probe.dart',
+  // PLATFORM: de drie webhelften van de transcriptienaad (#2513). Ze lopen
+  // via `dart:js_interop`/`package:web` en laden dus niet in de VM-runner —
+  // de conditional imports kiezen onder `flutter test` altijd de io- of
+  // stub-helft. De contracten zijn hetzelfde als de gedekte helften
+  // (TranscriptionModelStore via model_store_test, ModelDownloader via
+  // model_download_test, LocalWhisperEngine via local_whisper_engine_test);
+  // het werkelijke web-gedrag (isolatiepoort, decode, inferentie, cancel)
+  // is gemeten in een echte browser via native/whisper_wasm/probe/ — zie
+  // docs/design/TRANSCRIPTION.md §4.6.
+  'lib/services/transcription/local_whisper_engine_web.dart',
+  'lib/services/transcription/model_download_web.dart',
+  'lib/services/transcription/model_store_web.dart',
   // NO EXECUTABLE LINES: `mermaid_config.dart` is één bron van waarheid voor de
   // mermaid-instellingen — alleen const-declaraties, lcov schrijft er geen
   // record voor. PLATFORM: `mermaid_web_renderer.dart` is de web-helft die

@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>bridge-probe</title></head>
+<body>
+<pre id="out">bridge-probe loading…</pre>
+<!-- Deze probe test de échte shipped shim (web/whisper/bridge.js) met zijn
+     lazy-loaded libmain.js — niet de kale Module-API. Server moet COOP/COEP
+     zetten (server.py --coi) zoals de .htaccess van de bundel dat doet. -->
+<script src="whisper/bridge.js"></script>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const model = q.get('model') || 'ggml-tiny.bin';
+  const audioFile = q.get('audio') || 'vlot.wav';
+  const threads = parseInt(q.get('threads') || '4', 10);
+  const lang = q.get('lang') || 'nl';
+  const cancelAfterMs = parseInt(q.get('cancelMs') || '0', 10);
+  const res = {
+    probe: 'bridge', model, audio: audioFile, threads, lang,
+    sab: typeof SharedArrayBuffer !== 'undefined',
+    isocross: crossOriginIsolated === true,
+    supported: window.ocideckWhisper.isSupported(),
+    errors: [],
+  };
+  const t0 = performance.now();
+  try {
+    const mbuf = new Uint8Array(await (await fetch(model)).arrayBuffer());
+    res.modelFetchMs = Math.round(performance.now() - t0);
+    const ctx = await window.ocideckWhisper.loadModel(mbuf);
+    res.modelInitMs = Math.round(performance.now() - t0) - res.modelFetchMs;
+    if (ctx <= 0) throw new Error('loadModel returned ' + ctx);
+
+    const abytes = new Uint8Array(await (await fetch(audioFile)).arrayBuffer());
+    const pcm = await window.ocideckWhisper.decodeAudio(abytes);
+    res.audioSec = Math.round((pcm.length / 16000) * 10) / 10;
+
+    if (cancelAfterMs > 0) {
+      setTimeout(() => window.ocideckWhisper.requestCancel(), cancelAfterMs);
+    }
+    const tInfer = performance.now();
+    const out = await window.ocideckWhisper.transcribe(ctx, pcm, lang, threads);
+    res.inferMs = Math.round(performance.now() - tInfer);
+    res.rtf = Math.round((res.inferMs / 1000 / res.audioSec) * 100) / 100;
+    res.cancelled = out.cancelled;
+    res.segments = out.segments.length;
+    res.text = out.segments.map(s => s.text).join('').slice(0, 400);
+    window.ocideckWhisper.free(ctx);
+  } catch (e) {
+    res.errors.push(String(e && e.stack || e));
+  }
+  if (performance.memory) {
+    res.memMB = Math.round(performance.memory.usedJSHeapSize / 1048576);
+  }
+  res.totalMs = Math.round(performance.now() - t0);
+  res.net = performance.getEntriesByType('resource').map(e => e.name);
+  try {
+    await fetch('/result', { method: 'POST', body: JSON.stringify(res, null, 2) });
+    document.getElementById('out').textContent += '\nRESULT POSTED';
+  } catch (e) {
+    document.getElementById('out').textContent += '\nPOST FAILED: ' + e;
+  }
+})();
+</script>
+</body>
+</html>

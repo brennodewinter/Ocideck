@@ -279,7 +279,7 @@ The JSON documents carry **802 dependency relations** between these components: 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
 | PDFium | 144.0.7811.0 | BSD-3-Clause AND Apache-2.0 | The PDFium Authors | `pkg:generic/pdfium@144.0.7811.0` |
-| whisper.cpp (whisper-cli) | 1.9.5 | MIT | Georgi Gerganov and contributors | `pkg:github/ggml-org/whisper.cpp@1.9.5` |
+| whisper.cpp (whisper-cli / whisper-wasm) | 1.9.5 | MIT | Georgi Gerganov and contributors | `pkg:github/ggml-org/whisper.cpp@1.9.5` |
 
 ### Build SDKs (2)
 

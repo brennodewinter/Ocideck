@@ -1,0 +1,19 @@
+{
+  "model": "ggml-tiny.bin",
+  "audio": "vlot.wav",
+  "threads": 4,
+  "lang": "nl",
+  "sab": false,
+  "isocross": false,
+  "errors": [
+    "RuntimeError: Aborted(). Build with -sASSERTIONS for more info.\n    at abort (http://127.0.0.1:8931/libmain.js:1:8374)\n    at __abort_js (http://127.0.0.1:8931/libmain.js:1:69004)\n    at http://127.0.0.1:8931/libmain.wasm:wasm-function[135]:0x795f\n    at http://127.0.0.1:8931/libmain.wasm:wasm-function[85]:0x44ec\n    at http://127.0.0.1:8931/libmain.wasm:wasm-function[1172]:0x119353\n    at http://127.0.0.1:8931/libmain.wasm:wasm-function[1200]:0x119df0\n    at Object.full_default (eval at newFunc (http://127.0.0.1:8931/libmain.js:1:74202), <anonymous>:9:10)\n    at http://127.0.0.1:8931/probe.html?model=ggml-tiny.bin&audio=vlot.wav&threads=4:62:22"
+  ],
+  "net": [],
+  "moduleInitMs": 14,
+  "modelFetchMs": 52,
+  "modelInitMs": 58,
+  "audioSec": 29.2,
+  "memMB": 153,
+  "totalMs": 397,
+  "log": "probe loading…"
+}

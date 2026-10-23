@@ -108,7 +108,13 @@ machine (desktop) or in your browser tab (web). This includes:
   The speech models the local engine runs are files on this device: the app
   shows which are installed and fetches one only when you ask it to (see the
   *Transcription speech model* row of the egress table below). Deleting a
-  model in Settings deletes the file; nothing else removes it.
+  model in Settings deletes the file; nothing else removes it. In the
+  browser build a downloaded model lives in IndexedDB — browser storage that
+  the browser itself may evict under disk pressure — and the download runs
+  through an ordinary CORS `fetch`, so the browser's own cross-origin rules
+  police every redirect. Inference happens in-page in WebAssembly; no audio
+  byte leaves the tab (measured: the probe in `native/whisper_wasm/probe/`
+  logs every request — all same-origin).
 - **Git working copies.** Connecting a git repository puts a real clone — full
   deck content and history — in a per-user application-support folder, plus a
   queue of commits that haven't been pushed yet. Unlike autosave snapshots these
