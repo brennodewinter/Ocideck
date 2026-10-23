@@ -960,6 +960,13 @@ void main() {
         File(
           '${dir.path}/bin/sleep',
         ).writeAsStringSync('#!/bin/bash\nexit 0\n');
+        File('${dir.path}/bin/sha256sum').writeAsStringSync(
+          '#!/bin/bash\n'
+          'if [ -x /usr/bin/sha256sum ]; then\n'
+          '  exec /usr/bin/sha256sum "\$@"\n'
+          'fi\n'
+          'exec shasum -a 256 "\$@"\n',
+        );
         File('${dir.path}/bin/curl').writeAsStringSync('''
 #!/bin/bash
 out='' url='' prev=''
@@ -994,7 +1001,7 @@ case "\$url" in
 esac
 exit 0
 ''');
-        for (final f in ['sleep', 'curl']) {
+        for (final f in ['sleep', 'curl', 'sha256sum']) {
           Process.runSync('chmod', ['+x', '${dir.path}/bin/$f']);
         }
         final step = File('${dir.path}/step.sh')
