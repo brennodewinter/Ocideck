@@ -27,7 +27,7 @@ arch_dir() {
 case "$PLATFORM" in
   macos)
     SRC="native/whisper_cli/bin/macos-$(arch_dir)/whisper-cli"
-    APP=$(ls -d build/macos/Build/Products/Release/*.app | head -1)
+    APP=$(find build/macos/Build/Products/Release -maxdepth 1 -type d -name '*.app' -print -quit 2>/dev/null || true)
     [[ -z "$APP" ]] && { echo "geen .app onder build/macos/…" >&2; exit 1; }
     mkdir -p "$APP/Contents/Helpers"
     install -m 0755 "$SRC" "$APP/Contents/Helpers/whisper-cli"
