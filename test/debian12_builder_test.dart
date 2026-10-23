@@ -14,7 +14,10 @@ void main() {
     ).readAsStringSync();
     expect(workflow, contains('linux-debian12:'));
     expect(workflow, contains('scripts/build_debian12_release.sh'));
+    expect(workflow, contains('consumer-debian12:'));
+    expect(workflow, contains('needs: linux-debian12'));
     expect(workflow, contains('needs: [web, linux, linux-debian12,'));
+    expect(workflow, contains('consumer-deb, consumer-debian12, consumer-rpm'));
     expect(workflow, contains('name: ocideck-linux-debian12, path: dist'));
     expect(
       release,

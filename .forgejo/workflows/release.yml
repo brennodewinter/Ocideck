@@ -13,6 +13,7 @@
 #
 #   web      → geharde bundel, plus de live deploy naar ocideck.librekat.nl
 #   linux    → x64-bundel als tar.gz
+#   linux-debian12 → native x86-64-bundel gebouwd in Debian 12
 #   macos    → .app als zip (op de Mac-runner)
 #   windows  → opgehaald van de spiegel
 #   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS.
@@ -755,6 +756,45 @@ jobs:
             exit 1
           fi
 
+  consumer-debian12:
+    name: Debian 12-archief proef op een schone Debian 12
+    needs: linux-debian12
+    runs-on: docker
+    timeout-minutes: 60
+    container:
+      image: debian:12-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux-debian12, path: dist }
+      - name: Uitpakken, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends \
+            xvfb fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
+            libayatana-appindicator3-1 libgles2 libegl1
+          mkdir -p /tmp/ocideck-test
+          tar -xzf "dist/ocideck-linux-debian12-x86_64-${GITHUB_REF_NAME#v}.tar.gz" -C /tmp/ocideck-test
+          cd /tmp/ocideck-test/ocideck-linux-debian12-*
+          test -x ./ocideck
+          if ldd ./ocideck | grep 'not found'; then
+            echo "Het Debian 12-archief mist een runtimebibliotheek." >&2
+            exit 1
+          fi
+          set +e
+          timeout 20 xvfb-run -a ./ocideck
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
   consumer-rpm:
     name: .rpm proef op een schone Fedora
     needs: linux
@@ -834,7 +874,7 @@ jobs:
 
   publiceren:
     name: Release publiceren
-    needs: [web, linux, linux-debian12, macos, windows-ophalen, consumer-deb, consumer-rpm, consumer-appimage]
+    needs: [web, linux, linux-debian12, macos, windows-ophalen, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage]
     runs-on: docker
     # Deze job muteeert buiten ons gebaande pad: elke call draagt daarom een
     # connect- én responstime-out (de curl-flags in de stappen; een endpoint dat
