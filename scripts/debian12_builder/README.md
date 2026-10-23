@@ -16,6 +16,19 @@ Het script leest OciDecks Flutter-pin uit `.tool-versions`. Een pin zoals
 
 ## Bouwen
 
+Vanuit de root van een OciDeck-checkout bouw je de **huidige commit** met:
+
+```bash
+make build-linux-debian12
+```
+
+Dit werkt ook vanuit een Git-worktree (waar `.git` een bestand is). De uitvoer
+komt in `outputs/ocideck-local-builds/` en wordt niet automatisch gepubliceerd.
+
+Het losse script hieronder gebruikt standaard een eigen broncheckout in
+`work/ocideck-src`; bij herhaald bouwen blijft die bewust op dezelfde commit
+tot je `UPDATE_SOURCE=1` zet.
+
 Open een terminal in deze map en voer uit:
 
 ```bash

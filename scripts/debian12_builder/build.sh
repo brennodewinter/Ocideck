@@ -21,7 +21,7 @@ EOF
   exit 1
 fi
 
-if [[ ! -d "${source_dir}/.git" ]]; then
+if [[ ! -e "${source_dir}/.git" ]]; then
   mkdir -p "$(dirname -- "${source_dir}")"
   git clone https://github.com/brennodewinter/Ocideck.git "${source_dir}"
 elif [[ "${UPDATE_SOURCE:-0}" == "1" ]]; then
