@@ -121,34 +121,41 @@ class _LineNumberGutter extends StatelessWidget {
       child: SizedBox(
         width: 44,
         child: ClipRect(
-          child: AnimatedBuilder(
-            animation: scrollController,
-            builder: (context, child) {
-              final offset = scrollController.hasClients
-                  ? scrollController.offset
-                  : 0.0;
-              return Transform.translate(
-                offset: Offset(0, 16 - offset),
-                child: child,
-              );
-            },
-            child: OverflowBox(
-              alignment: Alignment.topCenter,
-              maxWidth: 44,
-              minWidth: 44,
-              maxHeight: double.infinity,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  for (var index = 0; index < lineCount; index++)
-                    _LineNumberCell(
-                      line: index + 1,
-                      severity: issueLines[index + 1],
-                      onTap: onLineTap,
-                    ),
-                ],
-              ),
+          child: LayoutBuilder(
+            builder: (context, constraints) => AnimatedBuilder(
+              animation: scrollController,
+              builder: (context, _) {
+                final offset = scrollController.hasClients
+                    ? scrollController.offset
+                    : 0.0;
+                final first =
+                    ((offset - 16) / _MarkdownDeckEditorState._lineHeight)
+                        .floor()
+                        .clamp(0, lineCount);
+                final last =
+                    ((offset + constraints.maxHeight - 16) /
+                            _MarkdownDeckEditorState._lineHeight)
+                        .ceil()
+                        .clamp(0, lineCount);
+                return Stack(
+                  children: [
+                    for (var index = first; index < last; index++)
+                      Positioned(
+                        top:
+                            16 +
+                            index * _MarkdownDeckEditorState._lineHeight -
+                            offset,
+                        left: 0,
+                        right: 0,
+                        child: _LineNumberCell(
+                          line: index + 1,
+                          severity: issueLines[index + 1],
+                          onTap: onLineTap,
+                        ),
+                      ),
+                  ],
+                );
+              },
             ),
           ),
         ),

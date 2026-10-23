@@ -36,6 +36,44 @@ Future<void> sendControlKey(WidgetTester tester, LogicalKeyboardKey key) async {
 }
 
 void main() {
+  testWidgets('large deck builds only visible line numbers while scrolling', (
+    tester,
+  ) async {
+    final source = List.generate(
+      120,
+      (i) => '# Slide $i\n' * 20,
+    ).join('\n---\n');
+    await tester.pumpWidget(_host(content: source, onApply: (_) {}));
+
+    expect(find.text('1'), findsWidgets);
+    expect(find.text('2000'), findsNothing);
+    expect(
+      find
+          .byWidgetPredicate(
+            (w) => w.runtimeType.toString() == '_LineNumberCell',
+          )
+          .evaluate()
+          .length,
+      lessThan(100),
+    );
+
+    final field = tester.widget<TextField>(find.byType(TextField).last);
+    field.scrollController!.jumpTo(
+      field.scrollController!.position.maxScrollExtent,
+    );
+    await tester.pump();
+    expect(find.text('1'), findsNothing);
+    expect(
+      find
+          .byWidgetPredicate(
+            (w) => w.runtimeType.toString() == '_LineNumberCell',
+          )
+          .evaluate()
+          .length,
+      lessThan(100),
+    );
+  });
+
   testWidgets('opens find bar on Ctrl+F', (tester) async {
     await tester.pumpWidget(
       _host(content: '# Titel\n\nfoo bar', onApply: (_) {}),
