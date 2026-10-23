@@ -20,6 +20,13 @@ void main() {
     expect(detectFormatFromBytes(bytes), SourceFormat.pptx);
   });
 
+  test('detects a POTX presentation by its package marker', () {
+    final bytes = zipWith({'ppt/presentation.xml': utf8Bytes('<p/>')});
+    final v = validateFormatFromBytes(bytes, basename: 'merk.POTX');
+    expect(v.format, SourceFormat.pptx);
+    expect(v.isValid, isTrue);
+  });
+
   test('detects ODP by the mimetype entry', () {
     final bytes = zipWith({
       'mimetype': utf8Bytes('application/vnd.oasis.opendocument.presentation'),
@@ -71,6 +78,10 @@ void main() {
     );
     expect(
       detectFormatFromBytes(bytes, basename: 'deck.pptx'),
+      SourceFormat.pptx,
+    );
+    expect(
+      detectFormatFromBytes(bytes, basename: 'deck.potx'),
       SourceFormat.pptx,
     );
     expect(

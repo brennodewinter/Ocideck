@@ -17,7 +17,7 @@ import 'pptx_context.dart';
 import 'pptx_slide.dart';
 import 'pptx_theme.dart';
 
-/// Imports a PowerPoint `.pptx` (Open XML) presentation.
+/// Imports a PowerPoint `.pptx` presentation or `.potx` template with slides.
 ///
 /// The package is unzipped once; `presentation.xml`'s `sldIdLst` gives the
 /// slide order, each `sldId`'s `r:id` is resolved through
@@ -47,6 +47,16 @@ class PptxImporter extends Importer {
 
       final slideRefs = _orderedSlidePaths(ctx);
       if (slideRefs.isEmpty) {
+        if (path?.toLowerCase().endsWith('.potx') == true && _isTemplate(ctx)) {
+          return Ok(
+            SourceDeck(
+              slides: const [],
+              title: _coreProperty(ctx, 'title'),
+              author: _coreProperty(ctx, 'creator'),
+              theme: _templateTheme(ctx),
+            ),
+          );
+        }
         return const Err(
           ImportFailure(
             'Geen slides gevonden — is dit een geldig .pptx?',
@@ -189,6 +199,28 @@ class PptxImporter extends Importer {
       if (el.name.local == localName) return el.innerText.trim();
     }
     return '';
+  }
+
+  bool _isTemplate(PptxContext ctx) {
+    final contentTypes = ctx.readXml('[Content_Types].xml');
+    if (contentTypes == null) return false;
+    return descendantsLocal(contentTypes, 'Override').any(
+      (entry) =>
+          entry.getAttribute('PartName') == '/ppt/presentation.xml' &&
+          entry.getAttribute('ContentType') ==
+              'application/vnd.openxmlformats-officedocument.presentationml.template.main+xml',
+    );
+  }
+
+  SourceTheme? _templateTheme(PptxContext ctx) {
+    final master = ctx.firstRelatedPart(
+      'ppt/presentation.xml',
+      'ppt/slideMasters/',
+    );
+    if (master == null || ctx.readPart(master) == null) return null;
+    final theme = ctx.firstRelatedPart(master, 'ppt/theme/');
+    final themeXml = ctx.readPart(theme ?? 'ppt/theme/theme1.xml');
+    return themeXml == null ? null : parseTheme(themeXml);
   }
 
   SourceTheme? _deckTheme(PptxContext ctx, String firstSlidePath) {

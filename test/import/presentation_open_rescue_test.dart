@@ -11,9 +11,10 @@ void main() {
   const l10n = AppLocalizations(Locale('nl'));
 
   group('isImportablePresentationName', () {
-    test('herkent de drie importformaten, hoofdletters inbegrepen', () {
+    test('herkent de importformaten, hoofdletters inbegrepen', () {
       expect(isImportablePresentationName('talk.odp'), isTrue);
       expect(isImportablePresentationName('deck.pptx'), isTrue);
+      expect(isImportablePresentationName('merk.POTX'), isTrue);
       expect(isImportablePresentationName('keynote.key'), isTrue);
       expect(isImportablePresentationName('LUID.ODP'), isTrue);
       expect(isImportablePresentationName('/home/kwoot/verhaal.odp'), isTrue);

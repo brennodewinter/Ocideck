@@ -341,6 +341,31 @@ void main() {
     expect(result.isErr, isTrue);
   });
 
+  test('reads the theme of a POTX with no sample slides', () async {
+    final bytes = _zip({
+      '[Content_Types].xml':
+          '<Types><Override PartName="/ppt/presentation.xml" '
+          'ContentType="application/vnd.openxmlformats-officedocument.presentationml.template.main+xml"/></Types>',
+      'ppt/presentation.xml': _presentationXml(0),
+      'ppt/_rels/presentation.xml.rels':
+          '<Relationships xmlns="$_pkg"><Relationship Id="rId1" '
+          'Type="$_r/slideMaster" Target="slideMasters/slideMaster1.xml"/></Relationships>',
+      'ppt/slideMasters/slideMaster1.xml': '<p:sldMaster xmlns:p="$_p"/>',
+      'ppt/slideMasters/_rels/slideMaster1.xml.rels':
+          '<Relationships xmlns="$_pkg"><Relationship Id="rId1" '
+          'Type="$_r/theme" Target="../theme/theme2.xml"/></Relationships>',
+      'ppt/theme/theme2.xml': _themeXml(),
+    });
+
+    final result = await PptxImporter().importBytes(bytes, path: 'merk.POTX');
+    expect(result.isOk, isTrue);
+    final deck = (result as Ok).value;
+    expect(deck.slides, isEmpty);
+    expect(deck.theme?.accentColor, '#2E7D64');
+    expect(deck.theme?.textColor, '#222222');
+    expect(deck.theme?.fontFamily, 'Georgia');
+  });
+
   test('extracts images via blip r:embed relationships', () async {
     final imageBytes = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A];
     final bytes = _zip({

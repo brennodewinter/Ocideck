@@ -16,7 +16,7 @@ import '../utils/import_budget.dart';
 /// classified by what it actually is.
 ///
 /// The marker entries are stable across versions:
-/// - **PPTX** always contains `ppt/presentation.xml`.
+/// - **PPTX/POTX** always contains `ppt/presentation.xml`.
 /// - **ODP** carries its media type in the uncompressed `mimetype` entry
 ///   (`application/vnd.oasis.opendocument.presentation`).
 /// - **KEY** stores Snappy-protobuf in `Index/*.iwa` (older IWA packages) or
@@ -186,7 +186,9 @@ FormatValidation validateFormatFromArchive(
 
 SourceFormat _byExtension(String path) {
   final lower = path.toLowerCase();
-  if (lower.endsWith('.pptx')) return SourceFormat.pptx;
+  if (lower.endsWith('.pptx') || lower.endsWith('.potx')) {
+    return SourceFormat.pptx;
+  }
   if (lower.endsWith('.odp')) return SourceFormat.odp;
   if (lower.endsWith('.key')) return SourceFormat.key;
   // eLearning-formaten op extensie (fallback binnen ZIP).
