@@ -1620,6 +1620,141 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'dit platform': 'цій платформі',
+  'API-sleutel': 'Ключ API',
+  'Afgebroken': 'Скасовано',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Лише збережений, активний профіль нижче — він знову просить дозвіл для кожного завдання',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Можливо лише під час активної наради з доведеним джерелом системного звуку — це джерело тут ще недоступне',
+  'Batch / live': 'Пакет / наживо',
+  'Bestaand audio/videobestand': 'Наявний аудіо-/відеофайл',
+  'Beveiligde context': 'Безпечний контекст',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Підтвердьте, що аудіо може йти до цього конкретного зовнішнього призначення — це єдиний дозвіл, який просить цей маршрут.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Підтвердьте, що ця адреса у вашій мережі; лише тоді приватна адреса може пройти мережеве блокування.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Спочатку підтвердьте, що аудіо може йти до цієї зовнішньої служби',
+  'Bevestiging vereist': 'Потрібне підтвердження',
+  'Cross-origin isolatie': 'Cross-origin ізоляція',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'Ключ API іде як захищений заголовок, не в URL. Це те саме підтвердження, яке проситиме кожне завдання транскрипції.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Зовнішня служба вимагає https — http назовні неприйнятно',
+  'Eigen ASR-server': 'Власний ASR-сервер',
+  'Eigen naam (optioneel)': 'Власна назва (необов\'язково)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Власний сервер у довіреній мережі (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Кінцева точка відсутня або недійсна — використовуйте голий http(s) URL без імені користувача чи пароля',
+  'Engine': 'Рушій',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Профіль збережено, але вимкнено — оберіть клас сервера, щоб редагувати або використовувати.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Надсилається одна секунда тихого тестового аудіо (~32 kB) на',
+  'Externe ASR-dienst (https)': 'Зовнішній сервіс ASR (https)',
+  'Externe dienst bevestigd': 'Зовнішній сервіс підтверджено',
+  'Geen server (lokaal houden)': 'Без сервера (лишитися локально)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Сервер не обрано — транскрипція залишається локальною.',
+  'Geen serverklasse gekozen': 'Клас сервера не обрано',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'Маршрут LAN спочатку вимагає «Довірена внутрішня адреса»',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Локально — аудіо не залишає цей пристрій',
+  'Lokaal — op dit apparaat': 'Локально — на цьому пристрої',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback може йти лише на цей пристрій — використовуйте 127.0.0.1 або localhost',
+  'Microfoon + systeemgeluid': 'Мікрофон + системний звук',
+  'Microfoonpermissie': 'Дозвіл на мікрофон',
+  'Model': 'Модель',
+  'Modellen': 'Моделі',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Модуль вимкнено — без завантажень, мікрофона чи фонових задач. Налаштування нижче залишаються видимими для огляду й прибирання.',
+  'OciDeck-gesprek': 'Дзвінок OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Невідомо — система запитує дозвіл лише під час першого запису; відкриття Налаштувань не викликає підказку',
+  'Op dit apparaat (loopback)': 'На цьому пристрої (loopback)',
+  'Opslag en retentie': 'Зберігання та утримання',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Опціонально і вимкнено, доки ви не ввімкнете: аудіо тоді йде на транскрипційний сервер за вашим вибором. Локальний лишається стандартом; між ними ніколи немає тихого переключення.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Лише активний профіль може надсилати запити; вимкнено означає: нічого не виходить.',
+  'Platform': 'Платформа',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Брама дозволяє: запити можуть вирушати',
+  'Profiel actief': 'Профіль активний',
+  'Profiel opslaan': 'Зберегти профіль',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Профіль вимкнено — увімкніть «Профіль активний», щоб надсилати',
+  'Route': 'Маршрут',
+  'Server antwoordde': 'Сервер відповів',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Сервер відповів порожнім транскриптом — очікувано для тихого тестового аудіо',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Сервер доступний і відповів як HTTP-сервер',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Сервер доступний, але вимагає автентифікації — перевірте або заповніть ключ API',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Сервер недоступний або відхилив — перевірте адресу, TLS і чи сервер працює',
+  'Server weigerde of was onbereikbaar': 'Сервер відхилив або був недоступний',
+  'Serveradres (basis-URL)': 'Адреса сервера (базовий URL)',
+  'Serverklasse': 'Клас сервера',
+  'Serverprofiel niet bruikbaar': 'Профіль сервера непридатний',
+  'Standaard: er vertrekt geen audio':
+      'За замовчуванням: аудіо не залишає пристрій',
+  'Status op dit apparaat': 'Стан на цьому пристрої',
+  'Systeem-/appgeluid': 'Системний/програмний звук',
+  'Test met echte audio': 'Тест із реальним аудіо',
+  'Test mislukt': 'Тест не вдався',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Транскрипт потрапляє в деку; чи зберігається аудіо-оригінал, ви обираєте при Збереженні',
+  'Upload te groot': 'Завантаження завелике',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'З цієї вебсторінки можливий лише https (або loopback) — браузер блокує http на цю адресу',
+  'Verbinding testen (zonder audio)': 'Перевірити з\'єднання (без аудіо)',
+  'Vertrouwd intern adres': 'Довірена внутрішня адреса',
+  'Vrije opslag': 'Вільне сховище',
+  'aanwezig': 'наявний',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'наявний, але немає придатного аудіоконтейнера',
+  'batch én provisionele live-tekst': 'пакет і тимчасовий текст наживо',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'пакетна транскрипція; текст наживо цей маршрут не може',
+  'beschikbaar': 'доступний',
+  'controleren…': 'перевірка…',
+  'detecteren…': 'виявлення…',
+  'geen engine beschikbaar': 'немає доступного рушія',
+  'geïnstalleerd': 'встановлено',
+  'geïnstalleerd en getoetst': 'встановлено й перевірено',
+  'ja — de lokale wasm-engine kan draaien':
+      'так — локальний wasm-рушій може працювати',
+  'ja — https': 'так — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'локальний — ця архітектура процесора не має рушія',
+  'lokaal — geen cross-origin isolatie':
+      'локальний — без cross-origin ізоляції',
+  'lokaal — gereed': 'локальний — готовий',
+  'lokaal — helper ontbreekt in deze installatie':
+      'локальний — у цьому встановленні відсутній помічник',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'ні — хостинг не має COOP/COEP; локальний висновок не може працювати (див. HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'ні — без https немає сховища ключів і перевірки моделі',
+  'niet beschikbaar op deze opstelling': 'недоступно в цьому налаштуванні',
+  'niet geïnstalleerd': 'не встановлено',
+  'nog niet beschikbaar op dit platform': 'ще недоступно на цій платформі',
+  'nog niet bewezen op dit apparaat': 'ще не доведено на цьому пристрої',
+  'ontbreekt — opname in de browser kan niet':
+      'відсутній — запис у браузері неможливий',
+  'opgeslagen — leeg laten houdt hem':
+      'збережено — залиште порожнім, щоб зберегти',
+  'server': 'сервер',
+  'verschijnt in de provenienceregel': 'з\'являється в рядку походження',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'імовірно — дозвіл надійде при першому використанні',
+  'wordt binnengehaald': 'завантажується',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Цей браузер або хостинг не може запустити локальний мовний рушій (відсутня cross-origin ізоляція)',
   'Whisper': 'Whisper',

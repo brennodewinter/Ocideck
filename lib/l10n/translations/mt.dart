@@ -1623,6 +1623,141 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'dit platform': 'din il-pjattaforma',
+  'API-sleutel': 'Ċavetta API',
+  'Afgebroken': 'Ikkanċellat',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Biss il-profil salvat u attiv hawn taħt — jitolb il-permess mill-ġdid għal kull kompitu',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Possibbli biss waqt laqgħa attiva b\'sors ta\' awdjo tas-sistema ppruvat — dak is-sors m\'huwiex disponibbli hawn għadu',
+  'Batch / live': 'Lott / live',
+  'Bestaand audio/videobestand': 'Fajl awdjo/vidjo eżistenti',
+  'Beveiligde context': 'Kuntest sigur',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Ikkonferma li l-awdjo jista\' jmur lejn din id-destinazzjoni esterna speċifika — dak huwa l-uniku permess li din ir-rotta titlob.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Ikkonferma li dan l-indirizz huwa fin-network tiegħek; biss dak iż-żmien indirizz privat jista\' jgħaddi l-blokk tan-netwerk.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'L-ewwel ikkonferma li l-awdjo jista\' jmur lejn dan is-servizz estern',
+  'Bevestiging vereist': 'Konferma meħtieġa',
+  'Cross-origin isolatie': 'Iżolament cross-origin',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'Iċ-ċavetta API tmur bħala header sikur, mhux fl-URL. Din hija l-istess konferma li kull kompitu ta\' traskrizzjoni ser jitlob.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Servizz estern jeħtieġ https — http lejn barra huwa inaċċettabbli',
+  'Eigen ASR-server': 'Server ASR tiegħek stess',
+  'Eigen naam (optioneel)': 'Isem personalizzat (opzjonali)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Server tiegħek fuq netwerk fiduċjat (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint nieqes jew invalidu — uża URL http(s) sempliċi mingħajr isem utent jew password ġo fih',
+  'Engine': 'Magna',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profil huwa salvat iżda diżattivat — agħżel klassi ta\' server biex teditjah jew tużah.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Jintbagħat sekonda waħda ta\' awdjo tat-test siekta (~32 kB) lejn',
+  'Externe ASR-dienst (https)': 'Servizz ASR estern (https)',
+  'Externe dienst bevestigd': 'Servizz estern ikkonfermat',
+  'Geen server (lokaal houden)': 'Ebda server (ibqa\' lokali)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'L-ebda server magħżul — it-traskrizzjoni tibqa\' lokali.',
+  'Geen serverklasse gekozen': 'L-ebda klassi ta\' server magħżula',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'Ir-rotta LAN l-ewwel titlob "Indirizz intern fiduċjat"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokali — l-ebda awdjo ma jitilajx minn dan l-apparat',
+  'Lokaal — op dit apparaat': 'Lokali — fuq dan l-apparat',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback jista\' jmur biss għal dan l-apparat innifsu — uża 127.0.0.1 jew localhost',
+  'Microfoon + systeemgeluid': 'Mikrofonu + awdjo tas-sistema',
+  'Microfoonpermissie': 'Permess tal-mikrofonu',
+  'Model': 'Mudell',
+  'Modellen': 'Mudelli',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Il-modulu huwa magħluq — l-ebda downloads, l-ebda mikrofonu, l-ebda kompiti fl-isfond. Is-settings hawn taħt jibqgħu viżibbli għal ħarsa ġenerali u tindif.',
+  'OciDeck-gesprek': 'Telefonata OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Mhux magħruf — is-sistema jitlob permess biss fl-ewwel reġistrazzjoni; il-ftuħ tas-Settings ma jtejjeb l-ebda prompt',
+  'Op dit apparaat (loopback)': 'Fuq dan l-apparat (loopback)',
+  'Opslag en retentie': 'Ħażna u żamma',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Opzjonali u barra sakemm ma tixgħelx: l-awdjo jmur lejn server ta\' traskrizzjoni li tagħżel int. Lokali jibqa\' d-default; qatt ma jkun hemm fallback siekt bejniethom.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Profil attiv biss jista\' jibgħat talbiet; magħluq tfisser: xejn ma joħroġ.',
+  'Platform': 'Piattaforma',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Il-porta tippermetti: it-talbiet jistgħu joħorġu',
+  'Profiel actief': 'Profil attiv',
+  'Profiel opslaan': 'Issejvja l-profil',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Il-profil huwa magħluq — ixgħel "Profil attiv" biex tibgħat',
+  'Route': 'Rotta',
+  'Server antwoordde': 'Is-server wieġeb',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Is-server wieġeb b\'traskrizzjoni vojta — mistenni għal awdjo tat-test siekta',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Server jista\' jintlaħaq u wieġeb bħala server HTTP',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Server jista\' jintlaħaq iżda jeħtieġ awtentikazzjoni — iċċekkja jew imla ċ-ċavetta API',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Is-server ma nistax jilħaq jew irrifjuta — iċċekkja l-indirizz, TLS u jekk is-server qed jaħdem',
+  'Server weigerde of was onbereikbaar':
+      'Is-server irrifjuta jew ma kienx jista\' jintlaħaq',
+  'Serveradres (basis-URL)': 'Indirizz tas-server (URL bażi)',
+  'Serverklasse': 'Klassi ta\' server',
+  'Serverprofiel niet bruikbaar': 'Profil tas-server mhux utilizzabbli',
+  'Standaard: er vertrekt geen audio':
+      'Default: l-ebda awdjo ma jitilajx mill-apparat',
+  'Status op dit apparaat': 'Status fuq dan l-apparat',
+  'Systeem-/appgeluid': 'Awdjo tas-sistema/app',
+  'Test met echte audio': 'Ittestja b\'awdjo reali',
+  'Test mislukt': 'It-test falla',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'It-traskrizzjoni tidħol fid-deck; jekk l-awdjo oriġinali jinżamm ukoll tagħżel meta Tiffranka',
+  'Upload te groot': 'It-tlugħ kbir wisq',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Minn din il-paġna web https biss (jew loopback) huwa possibbli — il-browser jimblokka http lejn dan l-indirizz',
+  'Verbinding testen (zonder audio)': 'Ittestja l-konnessjoni (bla awdjo)',
+  'Vertrouwd intern adres': 'Indirizz intern fiduċjat',
+  'Vrije opslag': 'Ħażna ħielsa',
+  'aanwezig': 'preżenti',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'preżenti, iżda l-ebda kontenitur ta\' awdjo utilizzabbli',
+  'batch én provisionele live-tekst': 'lott u test live proviżorju',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'traskrizzjoni bil-lott; test live ma jistax f\'din ir-rotta',
+  'beschikbaar': 'disponibbli',
+  'controleren…': 'qed jiċċekkja…',
+  'detecteren…': 'qed jindividwa…',
+  'geen engine beschikbaar': 'l-ebda magna disponibbli',
+  'geïnstalleerd': 'installat',
+  'geïnstalleerd en getoetst': 'installat u vverifikat',
+  'ja — de lokale wasm-engine kan draaien':
+      'iva — il-magna wasm lokali tista\' taħdem',
+  'ja — https': 'iva — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokali — din l-arkitettura tal-proċessur m\'għandhiex magna',
+  'lokaal — geen cross-origin isolatie': 'lokali — ebda iżolament cross-origin',
+  'lokaal — gereed': 'lokali — lesta',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokali — il-helper nieqes f\'din l-installazzjoni',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'le — il-hosting jonqos COOP/COEP; inferenza lokali ma tistax taħdem (ara HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'le — mingħajr https ebda kkanċellier u ebda verifika tal-mudell',
+  'niet beschikbaar op deze opstelling': 'mhux disponibbli f\'dan is-setup',
+  'niet geïnstalleerd': 'mhux installat',
+  'nog niet beschikbaar op dit platform':
+      'għadu mhux disponibbli fuq din il-pjattaforma',
+  'nog niet bewezen op dit apparaat': 'għadu mhux ipprovdut fuq dan l-apparat',
+  'ontbreekt — opname in de browser kan niet':
+      'nieqes — irrekordjar fil-browser ma jistax',
+  'opgeslagen — leeg laten houdt hem': 'maħżun — ħalliha vojta biex iżommu',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'jidher fil-linja tal-provenjenza',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'probabbilment — il-permess jiġi fl-ewwel użu',
+  'wordt binnengehaald': 'qed jiġi mniżżel',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Dan il-browser jew il-hosting ma jistax jħaddem magna tal-vuċi lokali (l-iżolament cross-origin nieqes)',
   'Whisper': 'Whisper',

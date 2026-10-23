@@ -17,7 +17,12 @@ import '../../../theme/app_theme.dart';
 /// binnenhaalt: naam, omvang, licentie en bron — plus de toestand en de
 /// knop die erbij hoort. Niets hier start een download vanzelf.
 class TranscriptionModelsSection extends ConsumerWidget {
-  const TranscriptionModelsSection({super.key});
+  const TranscriptionModelsSection({super.key, required this.moduleEnabled});
+
+  /// Binnenhalen van een model mag pas als de module aan staat — de sectie
+  /// blijft wél zichtbaar als hij uit staat, zodat de gebruiker kan zien
+  /// wat er al op schijf ligt en dat kan opruimen.
+  final bool moduleEnabled;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,6 +59,7 @@ class TranscriptionModelsSection extends ConsumerWidget {
                 _ModelRow(
                   model: model,
                   status: states[model.id] ?? const TranscriptionModelStatus(),
+                  moduleEnabled: moduleEnabled,
                   l10n: l10n,
                 ),
             ],
@@ -122,11 +128,13 @@ class _ModelRow extends ConsumerWidget {
   const _ModelRow({
     required this.model,
     required this.status,
+    required this.moduleEnabled,
     required this.l10n,
   });
 
   final WhisperModel model;
   final TranscriptionModelStatus status;
+  final bool moduleEnabled;
   final AppLocalizations l10n;
 
   String _tierLabel() => switch (model.tier) {
@@ -179,9 +187,15 @@ class _ModelRow extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 4),
               child: LinearProgressIndicator(value: status.progress),
             ),
+          // De actie staat ónder de tekst, niet als trailing-kolom: bij
+          // tekstschaal 200% heeft een knop in de trailing-positie geen
+          // ruimte naast een drieregelige titel en faalt de tile-layout.
+          Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: _action(manager, installed),
+          ),
         ],
       ),
-      secondary: _action(manager, installed),
     );
   }
 
@@ -203,7 +217,7 @@ class _ModelRow extends ConsumerWidget {
     return TextButton.icon(
       icon: const Icon(Icons.download_outlined, size: 16),
       label: Text(l10n.d('Binnenhalen'), style: const TextStyle(fontSize: 12)),
-      onPressed: () => manager.download(model),
+      onPressed: moduleEnabled ? () => manager.download(model) : null,
     );
   }
 

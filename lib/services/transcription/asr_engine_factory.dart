@@ -14,12 +14,19 @@ import 'asr_audio_source.dart';
 import 'asr_server_engine.dart';
 import 'asr_transport.dart';
 
-AsrServerEngine createAsrServerEngine(AsrServerProfile profile) {
+AsrServerEngine createAsrServerEngine(
+  AsrServerProfile profile, {
+  Future<String?> Function()? apiKeyReader,
+}) {
   final secrets = SecretStore();
   return AsrServerEngine(
     profile: profile,
-    apiKeyReader: () async =>
-        secrets.canStore ? secrets.readAsrApiKey(profile.baseUrl) : null,
+    // De instellingskaart geeft een eigen lezer mee voor het ingetypte —
+    // nog niet bewaarde — sleutelveld; zonder die leest de sleutelbos.
+    apiKeyReader:
+        apiKeyReader ??
+        (() async =>
+            secrets.canStore ? secrets.readAsrApiKey(profile.baseUrl) : null),
     transport: createAsrTransport(),
     audioReader: readAsrAudio,
   );

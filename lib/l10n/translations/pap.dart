@@ -651,6 +651,141 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'dit platform': 'e plataforma akí',
+  'API-sleutel': 'Yabi di API',
+  'Afgebroken': 'Kanselá',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Solamente e perfil kwarda i aktivo abou — pa kada tarea e ta pidi permiso di nobo',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Solamente posibel durante un reunion aktivo ku un fuente di audio di sistema prová — e fuente ei ainda no ta disponibel aki',
+  'Batch / live': 'Batch / live',
+  'Bestaand audio/videobestand': 'Archivo di audio/video eksistente',
+  'Beveiligde context': 'Konteksto seku',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Konfirmá ku audio por bai pa e destinashon eksterno spesifiko akí — esei ta e úniko permiso ku e ruta akí ta pidi.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Konfirmá ku e adres akí ta den bo mes ret; solamente anto un adres privá por pasa e blokeo di ret.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Konfirmá promé ku audio por bai pa e servisio eksterno akí',
+  'Bevestiging vereist': 'Konfirmashon mester',
+  'Cross-origin isolatie': 'Aislamiento cross-origin',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'E yabi di API ta bai komo header seku, no den e URL. Esaki ta e mesun konfirmashon ku kada tarea di transkripshon lo pidi.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Un servisio eksterno ta eksihí https — http pa afo ta inaseptabel',
+  'Eigen ASR-server': 'Servidor ASR propio',
+  'Eigen naam (optioneel)': 'Nòmber propio (opsional)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Propio servidor den ret konfiabel (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint ta falta of ta invalido — usa un URL http(s) basiko sin nòmber di usuario of kontrasenya aden',
+  'Engine': 'Motor',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Un perfil ta kwarda pero apagá — skohe un klase di servidor pa edit\'é of us\'é.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Ta manda un sekundo di audio di test silensioso (~32 kB) pa',
+  'Externe ASR-dienst (https)': 'Servisio ASR eksterno (https)',
+  'Externe dienst bevestigd': 'Servisio eksterno konfirmá',
+  'Geen server (lokaal houden)': 'Sin servidor (keda lokal)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Ningun servidor skohé — transkripshon ta keda lokal.',
+  'Geen serverklasse gekozen': 'Ningun klase di servidor skohé',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'E ruta LAN ta pidi promé "Adres interno konfiabel"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokal — ningun audio ta sali for di e aparato aki',
+  'Lokaal — op dit apparaat': 'Lokal — riba e aparato aki',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback por bai solamente pa e aparato aki mes — usa 127.0.0.1 of localhost',
+  'Microfoon + systeemgeluid': 'Mikrofon + audio di sistema',
+  'Microfoonpermissie': 'Permiso di mikrofon',
+  'Model': 'Modelo',
+  'Modellen': 'Modelo',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Módulo ta apagá — sin download, sin mikrofon, sin tarea den fondo. E konfigurashonnan abou ta keda visibel pa sirka i limpiesa.',
+  'OciDeck-gesprek': 'Yamada OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Deskonosí — e sistema ta pidi permiso solamente na promé grabashon; habrí e Konfigurashon no ta aktivá ningun prompt',
+  'Op dit apparaat (loopback)': 'Riba e aparato aki (loopback)',
+  'Opslag en retentie': 'Almasenamentu i retenshon',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Opshonal i apagá, sin ku bo no aktib\'é: e audio ta bai pa un servidor di transkripshon ku bo ta skohe bo mes. Lokal ta keda e standard; nunka tin un fallback silensioso entre nan.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Solamente un perfil aktivo por manda petishonnan; apagá ke men: nada ta sali.',
+  'Platform': 'Plataforma',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Porta ta permití: petishonnan por sali',
+  'Profiel actief': 'Perfil aktivo',
+  'Profiel opslaan': 'Kwarda perfil',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Perfil ta apagá — aktiva "Perfil aktivo" pa manda',
+  'Route': 'Ruta',
+  'Server antwoordde': 'Servidor a respondé',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Servidor a respondé ku transkripshon bashí — ta sperá pa audio di test silensioso',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Servidor alkansabel i a respondé komo servidor HTTP',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Servidor alkansabel pero ta eksihí autentikashon — kontrolá of yena e yabi di API',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Servidor no alkansabel òf a nenga — chèk adres, TLS i si e servidor ta korendo',
+  'Server weigerde of was onbereikbaar':
+      'Servidor a nenga òf tabata no alkansabel',
+  'Serveradres (basis-URL)': 'Adres di servidor (URL base)',
+  'Serverklasse': 'Klase di servidor',
+  'Serverprofiel niet bruikbaar': 'Perfil di servidor no usabel',
+  'Standaard: er vertrekt geen audio':
+      'Default: ningun audio ta sali for di e aparato',
+  'Status op dit apparaat': 'Status riba e aparato aki',
+  'Systeem-/appgeluid': 'Audio di sistema/aplikashon',
+  'Test met echte audio': 'Test ku audio real',
+  'Test mislukt': 'Test a faya',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'E transkripshon ta bai den e deck; si e audio original ta keda warda bo ta skohe na Kwarda',
+  'Upload te groot': 'Karga di archivo masha grandi',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'For di e pagina web aki solamente https (of loopback) ta posibel — e browser ta bloka http pa e adres aki',
+  'Verbinding testen (zonder audio)': 'Test konekshon (sin audio)',
+  'Vertrouwd intern adres': 'Adres interno konfiabel',
+  'Vrije opslag': 'Almasenamentu liber',
+  'aanwezig': 'presente',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'presente, pero sin kontener di audio usabel',
+  'batch én provisionele live-tekst': 'batch i teksto vivo provisional',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'transkripshon di batch; teksto vivo no por via e ruta aki',
+  'beschikbaar': 'disponibel',
+  'controleren…': 'ta kontrolando…',
+  'detecteren…': 'ta detektando…',
+  'geen engine beschikbaar': 'ningun motor disponibel',
+  'geïnstalleerd': 'instalá',
+  'geïnstalleerd en getoetst': 'instalá i verifiká',
+  'ja — de lokale wasm-engine kan draaien': 'si — e motor wasm lokal por kore',
+  'ja — https': 'si — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokal — e arkitektura di prosesador aki no tin motor',
+  'lokaal — geen cross-origin isolatie': 'lokal — sin aislamiento cross-origin',
+  'lokaal — gereed': 'lokal — kla',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokal — e helper ta falta den e instalashon aki',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'nò — hosting no tin COOP/COEP; inferensia lokal no por kore (mira HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'nò — sin https no tin yabi-kadena ni verifikashon di modelo',
+  'niet beschikbaar op deze opstelling':
+      'no disponibel den e konfigurashon aki',
+  'niet geïnstalleerd': 'no instalá',
+  'nog niet beschikbaar op dit platform':
+      'aínda no disponibel riba e plataforma aki',
+  'nog niet bewezen op dit apparaat': 'aínda no prová riba e aparato aki',
+  'ontbreekt — opname in de browser kan niet':
+      'manca — grabashon den e browser no por',
+  'opgeslagen — leeg laten houdt hem': 'kwarda — lora bashí ta ward\'é',
+  'server': 'servidor',
+  'verschijnt in de provenienceregel': 'ta parse na e liña di provenansa',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'probablemente — permiso ta bin promé ku promé uso',
+  'wordt binnengehaald': 'ta wordu hinka',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'E browser of hosting akí no por koré un motor di voz lokal (falta aislamiento cross-origin)',
   'Whisper': 'Whisper',

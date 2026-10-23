@@ -1635,6 +1635,142 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'dit platform': 'an t-ardán seo',
+  'API-sleutel': 'Eochair API',
+  'Afgebroken': 'Cealaithe',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Ach an próifíl sábháilte, ghníomhach thíos — iarrann sé cead arís in aghaidh an tasc',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Is féidir é le linn cruinniú gníomhach amháin le foinse fuaime córais chruthaithe — níl an foinse sin ar fáil anseo fós',
+  'Batch / live': 'Baisce / beo',
+  'Bestaand audio/videobestand': 'Comhad fuaime/físe atá ann',
+  'Beveiligde context': 'Comhthéacs slán',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Deimhnigh gur féidir leis an bhfuaim dul chuig an gceann scríbe seachtrach ar leith seo — sin an t-aon chead a iarrann an bealach seo.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Deimhnigh go bhfuil an seoladh seo ar do líonra féin; ní fhéadfaidh seoladh príobháideach an bac líonra a rith ach ansin.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Deimhnigh ar dtús gur féidir leis an bhfuaim dul chuig an tseirbhís sheachtrach seo',
+  'Bevestiging vereist': 'Dearbhú ag teastáil',
+  'Cross-origin isolatie': 'Leithlisiú trasdhorchais',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'Taistealaíonn an eochair API mar cheanntásc slán, ní sa URL. Sin an dearbhú céanna a iarrfaidh gach tasc tras-scríofa.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Éilíonn seirbhís sheachtrach https — níl http amach inghlactha',
+  'Eigen ASR-server': 'Freastalaí ASR féin',
+  'Eigen naam (optioneel)': 'Ainm saincheaptha (roghnach)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Freastalaí féin ar líonra iontaofa (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint ar iarraidh nó neamhbhailí — úsáid URL http(s) lom gan ainm úsáideora ná pasfhocal ann',
+  'Engine': 'Inneall',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Tá próifíl sábháilte ach díchumasaithe — roghnaigh aicme freastalaí chun í a chur in eagar nó a úsáid.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Seoltar soicind amháin de thástáilfhuaim chiúin (~32 kB) chuig',
+  'Externe ASR-dienst (https)': 'Seirbhís ASR sheachrach (https)',
+  'Externe dienst bevestigd': 'Seirbhís sheachtrach deimhnithe',
+  'Geen server (lokaal houden)': 'Gan freastalaí (fan áitiúil)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Níor roghnaíodh freastalaí — fanann an tras-scríobh áitiúil.',
+  'Geen serverklasse gekozen': 'Níor roghnaíodh aicme freastalaí',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'Éilíonn an bealach LAN "Seoladh inmheánach iontaofa" ar dtús',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Áitiúil — ní fhágann aon fhuaim an gléas seo',
+  'Lokaal — op dit apparaat': 'Áitiúil — ar an ngléas seo',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Ní fhéadfaidh loopback dul ach chuig an ngléas seo féin — úsáid 127.0.0.1 nó localhost',
+  'Microfoon + systeemgeluid': 'Micreafón + fuaim an chórais',
+  'Microfoonpermissie': 'Cead micreafóin',
+  'Model': 'Múnla',
+  'Modellen': 'Múnlaí',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Tá an modúl as — gan íoslódálacha, gan micreafón, gan tascanna cúlra. Fanann na socruithe thíos infheicthe le haghaidh forbhreathnú agus glantacháin.',
+  'OciDeck-gesprek': 'Glao OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      ' Anaithnid — ní iarrann an córas cead ach ag an gcéad taifeadadh; ní tharraingíonn Oscailt na Socruithe aon leid',
+  'Op dit apparaat (loopback)': 'Ar an ngléas seo (loopback)',
+  'Opslag en retentie': 'Stóráil agus coinneáil',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Roghnach agus as go dtí go gcastar é: téann an fhuaim chuig freastalaí tras-scríofa a roghnaíonn tú. Fanann an áitiúil ina réamhshocrú; níl aon fhillteán ciúin eatarthu.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Ní féidir ach le próifíl ghníomhach iarratais a sheoladh; as ciallaíonn: ní imíonn aon rud.',
+  'Platform': 'Ardán',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Ceadaíonn an geata: féadfaidh iarratais imeacht',
+  'Profiel actief': 'Próifíl gníomhach',
+  'Profiel opslaan': 'Sábháil an phróifíl',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Tá an phróifíl as — cas air "Próifíl ghníomhach" chun seoladh',
+  'Route': 'Bealach',
+  'Server antwoordde': 'D\'fhreagair an freastalaí',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'D\'fhreagair an freastalaí le tras-scríobh folamh — ag súil leis do thástáil fhuaim chiúin',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Freastalaí inrochtana agus d\'fhreagair sé mar fhreastalaí HTTP',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Freastalaí inrochtana ach éilíonn sé fíordheimhniú — seiceáil nó líon isteach an eochair API',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Freastalaí dorochtana nó dhiúltaigh — seiceáil an seoladh, TLS agus an bhfuil an freastalaí ag rith',
+  'Server weigerde of was onbereikbaar':
+      'Dhiúltaigh an freastalaí nó bhí sé dorochtana',
+  'Serveradres (basis-URL)': 'Seoladh an fhreastalaí (URL bunaithe)',
+  'Serverklasse': 'Aicme freastalaí',
+  'Serverprofiel niet bruikbaar': 'Próifíl freastalaí nach bhfuil inúsáidte',
+  'Standaard: er vertrekt geen audio':
+      'Réamhshocrú: ní fhágann aon fhuaim an gléas',
+  'Status op dit apparaat': 'Stádas ar an ngléas seo',
+  'Systeem-/appgeluid': 'Fuaim chórais/feidhmchláir',
+  'Test met echte audio': 'Tástáil le fíorfhuaim',
+  'Test mislukt': 'Theip an tástáil',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Téann an tras-scríobh isteach sa deck; cibé an gcoimeádtar an fhuaim bhunaidh roghnaíonn tú ag Sábháil',
+  'Upload te groot': 'Uaslódáil rómhór',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Ón leathanach gréasáin seo ní féidir ach https (nó loopback) — cuireann an brabhsálaí bac ar http chuig an seoladh seo',
+  'Verbinding testen (zonder audio)': 'Tástáil an nasc (gan fhuaim)',
+  'Vertrouwd intern adres': 'Seoladh inmheánach iontaofa',
+  'Vrije opslag': 'Stóráil shaor',
+  'aanwezig': 'i láthair',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'i láthair, ach gan coimeádán fuaime inúsáidte',
+  'batch én provisionele live-tekst': 'baisce agus téacs beo sealadach',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'tras-scríobh bhaisce; ní féidir téacs beo ar an mbealach seo',
+  'beschikbaar': 'ar fáil',
+  'controleren…': 'ag seiceáil…',
+  'detecteren…': 'ag braiteadh…',
+  'geen engine beschikbaar': 'níl aon inneall ar fáil',
+  'geïnstalleerd': 'suiteáilte',
+  'geïnstalleerd en getoetst': 'suiteáilte agus deimhnithe',
+  'ja — de lokale wasm-engine kan draaien':
+      'is féidir — is féidir leis an inneall wasm áitiúil rith',
+  'ja — https': 'tá — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'áitiúil — níl inneall ag an ailtireacht phróiseálaí seo',
+  'lokaal — geen cross-origin isolatie':
+      'áitiúil — gan leithlisiú trasdhorchais',
+  'lokaal — gereed': 'áitiúil — réidh',
+  'lokaal — helper ontbreekt in deze installatie':
+      'áitiúil — tá an cúntóir in easnamh sa shuiteáil seo',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'níl — níl COOP/COEP ag an óstáil; ní féidir leis an tátal áitiúil rith (féach HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'níl — gan https níl eochairfháinne ná fíorú múnla',
+  'niet beschikbaar op deze opstelling': 'níl sé ar fáil sa tsocrú seo',
+  'niet geïnstalleerd': 'níl sé suiteáilte',
+  'nog niet beschikbaar op dit platform': 'níl sé ar fáil fós ar an ardán seo',
+  'nog niet bewezen op dit apparaat': 'níl sé cruthaithe fós ar an ngléas seo',
+  'ontbreekt — opname in de browser kan niet':
+      'ar iarraidh — ní féidir taifeadadh sa bhrabhsálaí',
+  'opgeslagen — leeg laten houdt hem':
+      'sábháilte — fág folamh é chun é a choinneáil',
+  'server': 'freastalaí',
+  'verschijnt in de provenienceregel': 'feictear sa líne fhoinse',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'is dócha — tagann cead ar an gcéad úsáid',
+  'wordt binnengehaald': 'á íoslódáil',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Ní féidir leis an mbrabhsálaí nó óstach seo inneall urlabhra áitiúil a rith (tá an t-éalú cross-origin in easnamh)',
   'Whisper': 'Whisper',

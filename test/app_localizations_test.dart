@@ -13,6 +13,18 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'web',
+  'MediaRecorder',
+  'https://asr.uwdomein.nl',
+  // Transcriptie-instellingen: het Engels houdt deze leenwoorden identiek aan
+  // het Nederlands; de andere talen vertalen ze wel (Duits Modell, Grieks
+  // Μοντέλο, Estisch mudel, …), dus alleen op de Engelse witte lijst.
+  'Engine',
+  'Model',
+  'Platform',
+  'Route',
+  'server',
+  'Batch / live',
   'Whisper',
   'MIT · whisper.cpp',
   'Bowtie',
@@ -298,6 +310,9 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'web',
+  'MediaRecorder',
+  'https://asr.uwdomein.nl',
   'Whisper',
   'MIT · whisper.cpp',
   'Bowtie',

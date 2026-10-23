@@ -1621,6 +1621,141 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'dit platform': 'această platformă',
+  'API-sleutel': 'Cheie API',
+  'Afgebroken': 'Anulat',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Doar profilul salvat și activ de mai jos — cere din nou permisiunea la fiecare sarcină',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Posibil doar în timpul unei întâlniri active cu o sursă audio de sistem dovedită — acea sursă nu este încă disponibilă aici',
+  'Batch / live': 'Lot / live',
+  'Bestaand audio/videobestand': 'Fișier audio/video existent',
+  'Beveiligde context': 'Context securizat',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Confirmați că audio-ul poate merge la această destinație externă specifică — aceasta este singura permisiune pe care o cere această rută.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Confirmați că această adresă este în rețeaua dvs.; numai atunci o adresă privată poate trece blocajul de rețea.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Mai întâi confirmați că audio-ul poate merge la acest serviciu extern',
+  'Bevestiging vereist': 'Confirmare necesară',
+  'Cross-origin isolatie': 'Izolare cross-origin',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'Cheia API circulă ca header securizat, nu în URL. Este aceeași confirmare pe care o va cere fiecare sarcină de transcriere.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Un serviciu extern necesită https — http către exterior este inacceptabil',
+  'Eigen ASR-server': 'Server ASR propriu',
+  'Eigen naam (optioneel)': 'Nume personalizat (opțional)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Server propriu în rețea de încredere (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint lipsă sau invalid — folosiți un URL http(s) gol fără nume de utilizator sau parolă',
+  'Engine': 'Motor',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Un profil este salvat dar dezactivat — alegeți o clasă de server pentru a-l edita sau utiliza.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Se trimite o secundă de audio de test mut (~32 kB) către',
+  'Externe ASR-dienst (https)': 'Serviciu ASR extern (https)',
+  'Externe dienst bevestigd': 'Serviciu extern confirmat',
+  'Geen server (lokaal houden)': 'Fără server (păstrează local)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Niciun server ales — transcrierea rămâne locală.',
+  'Geen serverklasse gekozen': 'Nicio clasă de server aleasă',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'Ruta LAN cere întâi „Adresă internă de încredere“',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Local — niciun audio nu părăsește acest dispozitiv',
+  'Lokaal — op dit apparaat': 'Local — pe acest dispozitiv',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback poate merge doar către acest dispozitiv — folosiți 127.0.0.1 sau localhost',
+  'Microfoon + systeemgeluid': 'Microfon + sunet de sistem',
+  'Microfoonpermissie': 'Permisiune microfon',
+  'Model': 'Model',
+  'Modellen': 'Modele',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modulul este oprit — fără descărcări, fără microfon, fără sarcini în fundal. Setările de mai jos rămân accesibile pentru vedere de ansamblu și curățare.',
+  'OciDeck-gesprek': 'Apel OciDeck',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Necunoscut — sistemul cere permisiunea abia la prima înregistrare; deschiderea Setărilor nu declanșează prompt',
+  'Op dit apparaat (loopback)': 'Pe acest dispozitiv (loopback)',
+  'Opslag en retentie': 'Stocare și retenție',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Opțional și oprit dacă nu-l activați: audio-ul merge atunci la un server de transcriere ales de dvs. Local rămâne implicit; nu există niciodată o revenire silențioasă între cele două.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Doar un profil activ poate trimite cereri; oprit înseamnă: nimic nu pleacă.',
+  'Platform': 'Platformă',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Poarta permite: cererile pot pleca',
+  'Profiel actief': 'Profil activ',
+  'Profiel opslaan': 'Salvează profilul',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profilul este oprit — activați „Profil activ“ pentru a trimite',
+  'Route': 'Rută',
+  'Server antwoordde': 'Serverul a răspuns',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Serverul a răspuns cu o transcriere goală — așteptat pentru audio de test mut',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Server accesibil și a răspuns ca server HTTP',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Server accesibil, dar cere autentificare — verificați sau completați cheia API',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Server inaccesibil sau a refuzat — verificați adresa, TLS și dacă serverul rulează',
+  'Server weigerde of was onbereikbaar':
+      'Serverul a refuzat sau a fost inaccesibil',
+  'Serveradres (basis-URL)': 'Adresa serverului (URL de bază)',
+  'Serverklasse': 'Clasă de server',
+  'Serverprofiel niet bruikbaar': 'Profilul de server nu este utilizabil',
+  'Standaard: er vertrekt geen audio':
+      'Implicit: niciun audio nu părăsește dispozitivul',
+  'Status op dit apparaat': 'Stare pe acest dispozitiv',
+  'Systeem-/appgeluid': 'Sunet de sistem/aplicație',
+  'Test met echte audio': 'Test cu audio real',
+  'Test mislukt': 'Test eșuat',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transcrierea ajunge în deck; dacă originalul audio se păstrează o alegeți la Salvare',
+  'Upload te groot': 'Încărcarea este prea mare',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'De pe această pagină web este posibil doar https (sau loopback) — browserul blochează http către această adresă',
+  'Verbinding testen (zonder audio)': 'Testează conexiunea (fără audio)',
+  'Vertrouwd intern adres': 'Adresă internă de încredere',
+  'Vrije opslag': 'Spațiu liber',
+  'aanwezig': 'prezent',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'prezent, dar niciun container audio utilizabil',
+  'batch én provisionele live-tekst': 'lot și text live provizoriu',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'transcriere pe lot; textul live nu e posibil pe această rută',
+  'beschikbaar': 'disponibil',
+  'controleren…': 'se verifică…',
+  'detecteren…': 'se detectează…',
+  'geen engine beschikbaar': 'niciun motor disponibil',
+  'geïnstalleerd': 'instalat',
+  'geïnstalleerd en getoetst': 'instalat și verificat',
+  'ja — de lokale wasm-engine kan draaien':
+      'da — motorul wasm local poate rula',
+  'ja — https': 'da — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'local — această arhitectură de procesor nu are motor',
+  'lokaal — geen cross-origin isolatie': 'local — fără izolare cross-origin',
+  'lokaal — gereed': 'local — gata',
+  'lokaal — helper ontbreekt in deze installatie':
+      'local — lipsește helperul din această instalare',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'nu — găzduirea nu are COOP/COEP; inferența locală nu poate rula (vezi HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'nu — fără https nu există breloc și verificarea modelului',
+  'niet beschikbaar op deze opstelling': 'indisponibil în această configurație',
+  'niet geïnstalleerd': 'neinstalat',
+  'nog niet beschikbaar op dit platform':
+      'încă indisponibil pe această platformă',
+  'nog niet bewezen op dit apparaat': 'nedovedit încă pe acest dispozitiv',
+  'ontbreekt — opname in de browser kan niet':
+      'lipsește — înregistrarea în browser nu este posibilă',
+  'opgeslagen — leeg laten houdt hem': 'stocată — lăsată goală o păstrează',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'apare în linia de proveniență',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'probabil — permisiunea urmează la prima utilizare',
+  'wordt binnengehaald': 'se descarcă',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Acest browser sau hosting nu poate rula un motor vocal local (lipsește izolarea cross-origin)',
   'Whisper': 'Whisper',

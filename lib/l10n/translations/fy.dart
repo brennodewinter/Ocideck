@@ -652,6 +652,139 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'dit platform': 'dit platfoarm',
+  'API-sleutel': 'API-kaai',
+  'Afgebroken': 'Ôfbrutsen',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Allinne it bewarre, aktive profyl hjirûnder — per taak freget hy opnij tastimming',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Allinne mooglik tidens in aktive gearkomste mei in bewiisde systeemaudioboarne — dy boarne is hjir noch net beskikber',
+  'Batch / live': 'Batch / live',
+  'Bestaand audio/videobestand': 'Besteand audio-/fideobestân',
+  'Beveiligde context': 'Befeilige kontekst',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Befêstigje dat audio nei dizze spesifike eksterne bestimming mei — dat is de iennichste tastimming dy\'t dizze rûte freget.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Befêstigje dat dit adres op jo eigen netwurk stiet; dan pas mei in privee-adres de netwurkblokkade pass.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Befêstigje earst dat audio nei dizze eksterne tsjinst mei',
+  'Bevestiging vereist': 'Befêstiging fereaske',
+  'Cross-origin isolatie': 'Cross-origin isolaasje',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'De API-kaai giet mei as befeilige header, net yn de URL. Dit is deselde befêstiging dy\'t elke transkripsjetaak straks freget.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'In eksterne tsjinst fereasket https — http nei bûten is ûnoannimlik',
+  'Eigen ASR-server': 'Eigen ASR-tsjinner',
+  'Eigen naam (optioneel)': 'Eigen namme (opsjoneel)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Eigen tsjinner yn fertroud netwurk (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint ûntbrekt of is ûnjildich — brûk in kale http(s)-URL sûnder brûkersnamme of wachtwurd derin',
+  'Engine': 'Engine',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Der is in profyl bewarre mar útskeakele — kies in tsjinnerklasse om it te bewurkjen of te brûken.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Der wurdt ien sekonde stille testaudio (~32 kB) ferstjoerd nei',
+  'Externe ASR-dienst (https)': 'Eksterne ASR-tsjinst (https)',
+  'Externe dienst bevestigd': 'Eksterne tsjinst befêstige',
+  'Geen server (lokaal houden)': 'Gjin tsjinner (lokaal hâlde)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Gjin tsjinner keazen — transkripsje bliuwt lokaal.',
+  'Geen serverklasse gekozen': 'Gjin tsjinnerklasse keazen',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN-rûte freget earst "Fertroud yntern adres"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokaal — gjin audio ferlit dit apparaat',
+  'Lokaal — op dit apparaat': "Lokaal — op 't apparaat",
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback mei allinne nei dit apparaat sels — brûk 127.0.0.1 of localhost',
+  'Microfoon + systeemgeluid': 'Mikrofoan + systeemlûd',
+  'Microfoonpermissie': 'Mikrofoanpermisje',
+  'Model': 'Model',
+  'Modellen': 'Modellen',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Module stiet út — gjin downloads, gjin mikrofoan, gjin eftergrûntaken. De ynstellingen hjirûnder bliuwe fynber foar oersjoch en oprjochtsje.',
+  'OciDeck-gesprek': 'OciDeck-peteer',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Ûnbekend — it systeem freget pas by de earste opname tastimming; it iepenjen fan Ynstellingen triggert gjin prompt',
+  'Op dit apparaat (loopback)': "Op 't apparaat (loopback)",
+  'Opslag en retentie': 'Opslach en bewaring',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Opsjoneel en út as jo it oan sette: audio giet dan nei in transkripsjetsjinner dy\'t jo sels kieze. Lokaal bliuwt de standert; der is nea in stille fallback tusken beide.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Allinne in aktyf profyl kin fersiken ferstjoere; út betsjut: neat giet fuort.',
+  'Platform': 'Platfoarm',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Poarte stiet ta: fersiken meie fuort',
+  'Profiel actief': 'Profyl aktyf',
+  'Profiel opslaan': 'Profyl bewarje',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profyl stiet út — set "Profyl aktyf" oan om te ferstjoeren',
+  'Route': 'Rûte',
+  'Server antwoordde': 'Tsjinner antwurde',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Tsjinner antwurde mei leech transkript — ferwachte foar stille testaudio',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Tsjinner berikber en antwurde as HTTP-tsjinner',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Tsjinner berikber mar easket autentikaasje — kontrolearje of folje de API-kaai yn',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Tsjinner ûnberikber of wegere — kontrolearje adres, TLS en oft de tsjinner draait',
+  'Server weigerde of was onbereikbaar': 'Tsjinner wegere of wie ûnberikber',
+  'Serveradres (basis-URL)': 'Tsjinneradres (basis-URL)',
+  'Serverklasse': 'Tsjinnerklasse',
+  'Serverprofiel niet bruikbaar': 'Tsjinnerprofyl net brûkber',
+  'Standaard: er vertrekt geen audio':
+      'Standert: gjin audio ferlit it apparaat',
+  'Status op dit apparaat': 'Steat op dit apparaat',
+  'Systeem-/appgeluid': 'Systeem-/applûd',
+  'Test met echte audio': 'Test mei echte audio',
+  'Test mislukt': 'Test mislearre',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkript komt yn it deck; oft it audio-orizjineel bewarre bliuwt kiest jo by Opslaan',
+  'Upload te groot': 'Upload te grut',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Fan dizze webside kin allinne https (of loopback) — de browser blokkearret http nei dit adres',
+  'Verbinding testen (zonder audio)': 'Ferbining teste (sûnder audio)',
+  'Vertrouwd intern adres': 'Fertroud yntern adres',
+  'Vrije opslag': 'Frije opslach',
+  'aanwezig': 'oanwêzich',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'oanwêzich, mar gjin brûkbere audiocontainer',
+  'batch én provisionele live-tekst': 'batch en foarige live-tekst',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'batchtranskripsje; live-tekst kin dizze rûte net',
+  'beschikbaar': 'beskikber',
+  'controleren…': 'kontrolearje…',
+  'detecteren…': 'detektearje…',
+  'geen engine beschikbaar': 'gjin engine beskikber',
+  'geïnstalleerd': 'ynstallearre',
+  'geïnstalleerd en getoetst': 'ynstallearre en kontrolearre',
+  'ja — de lokale wasm-engine kan draaien':
+      'ja — de lokale wasm-engine kin draaie',
+  'ja — https': 'Ja — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokaal — dizze prosessorarsjitektuer hat gjin engine',
+  'lokaal — geen cross-origin isolatie': 'lokaal — gjin cross-origin isolaasje',
+  'lokaal — gereed': 'lokaal — ree',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokaal — helper ûntbrekt yn dizze ynstallaasje',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'nee — hosting mist COOP/COEP; lokale inferinsje kin net (sjoch HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'nee — sûnder https gjin kaaiwai en gjin modelkontrole',
+  'niet beschikbaar op deze opstelling': 'net beskikber yn dizze opset',
+  'niet geïnstalleerd': 'net ynstallearre',
+  'nog niet beschikbaar op dit platform': 'noch net beskikber op dit platfoarm',
+  'nog niet bewezen op dit apparaat': 'noch net bewiisd op dit apparaat',
+  'ontbreekt — opname in de browser kan niet':
+      'ûntbrekt — opname yn de browser kin net',
+  'opgeslagen — leeg laten houdt hem': 'bewarre — leech litte hâldt him',
+  'server': 'tsjinner',
+  'verschijnt in de provenienceregel': 'ferskynt yn de oarsprongrigel',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'mooglik — tastimming folget by earste gebrûk',
+  'wordt binnengehaald': 'wurdt binnhelle',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Dizze browser of hosting kin gjin lokale spraak-engine draaie (cross-origin isolaasje ûntbrekt)',
   'Whisper': 'Whisper',

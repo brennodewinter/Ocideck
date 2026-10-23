@@ -1611,6 +1611,140 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'dit platform': 'šioje platformoje',
+  'API-sleutel': 'API raktas',
+  'Afgebroken': 'Nutraukta',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Tik išsaugotas, aktyvus profilis žemiau — jis iš naujo prašo leidimo kiekvienai užduočiai',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Galima tik aktyvaus susitikimo metu su įrodyta sistemos garso šaltiniu — tas šaltinis čia dar nepasiekiamas',
+  'Batch / live': 'Paketinė / tiesiogiai',
+  'Bestaand audio/videobestand': 'Esamas garso/vaizdo failas',
+  'Beveiligde context': 'Saugus kontekstas',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Patvirtinkite, kad garsas gali keliauti į šį konkretų išorinį tikslą — tai vienintelis leidimas, kurio ši maršruto prašo.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Patvirtinkite, kad šis adresas yra jūsų tinkle; tik tada privatus adresas gali praeiti tinklo blokavimą.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Pirmiausia patvirtinkite, kad garsas gali keliauti į šią išorinę tarnybą',
+  'Bevestiging vereist': 'Reikalingas patvirtinimas',
+  'Cross-origin isolatie': 'Cross-origin izoliacija',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'API raktas keliauja kaip saugi antraštė, ne URL. Tai tas pats patvirtinimas, kurio prašys kiekviena transkripcijos užduotis.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Išorinei tarnybai reikalingas https — http į išorę yra nepriimtinas',
+  'Eigen ASR-server': 'Savas ASR serveris',
+  'Eigen naam (optioneel)': 'Nuosavas pavadinimas (neprivaloma)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Nuosavas serveris patikimame tinkle (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Galutinis taškas trūksta arba neteisingas — naudokite gryną http(s) URL be vartotojo vardo ar slaptažodžio',
+  'Engine': 'Variklis',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profilis išsaugotas, bet išjungtas — pasirinkite serverio klasę, kad jį redaguotumėte ar naudotumėte.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Išsiunčiama viena sekundė tylios testinės garso (~32 kB) į',
+  'Externe ASR-dienst (https)': 'Išorinė ASR paslauga (https)',
+  'Externe dienst bevestigd': 'Išorinė paslauga patvirtinta',
+  'Geen server (lokaal houden)': 'Jokio serverio (likti vietiniam)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Serveris nepasirinktas — transkripcija lieka vietinė.',
+  'Geen serverklasse gekozen': 'Serverio klasė nepasirinkta',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN maršrutas pirmiausia reikalauja „Patikimas vidinis adresas“',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Vietinis — garsas neišeina iš šio įrenginio',
+  'Lokaal — op dit apparaat': 'Vietinis — šiame įrenginyje',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback gali eiti tik į patį įrenginį — naudokite 127.0.0.1 arba localhost',
+  'Microfoon + systeemgeluid': 'Mikrofonas + sistemos garsas',
+  'Microfoonpermissie': 'Mikrofono leidimas',
+  'Model': 'Modelis',
+  'Modellen': 'Modeliai',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modulis išjungtas — jokių atsisiuntimų, mikrofono ar foninių užduočių. Toliau esantys nustatymai lieka randami apžvalgai ir tvarkymui.',
+  'OciDeck-gesprek': 'OciDeck skambutis',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Nežinoma — sistema prašo leidimo tik pirmąjį įrašymą; nustatymų atidarymas neatsiragina raginimo',
+  'Op dit apparaat (loopback)': 'Šiame įrenginyje (loopback)',
+  'Opslag en retentie': 'Saugojimas ir laikymas',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Pasirinktina ir išjungta, kol neįjungsite: garsas tada eina į jūsų pasirinktą transkripcijos serverį. Vietinis lieka numatytuoju; niekada nėra tylaus persijungimo tarp jų.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Tik aktyvus profilis gali siųsti užklausas; išjungta reiškia: niekas neišeina.',
+  'Platform': 'Platforma',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Vartai leidžia: užklausos gali išeiti',
+  'Profiel actief': 'Profilis aktyvus',
+  'Profiel opslaan': 'Išsaugoti profilį',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profilis išjungtas — įjunkite „Profilis aktyvus“, kad siųstumėte',
+  'Route': 'Maršrutas',
+  'Server antwoordde': 'Serveris atsakė',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Serveris atsakė tuščia transkripcija — tikėtina tyliam testiniam garsui',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Serveris pasiekiamas ir atsakė kaip HTTP serveris',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Serveris pasiekiamas, bet reikalauja autentifikacijos — patikrinkite arba įveskite API raktą',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Serveris nepasiekiamas arba atmetė — patikrinkite adresą, TLS ir ar serveris veikia',
+  'Server weigerde of was onbereikbaar':
+      'Serveris atmetė arba buvo nepasiekiamas',
+  'Serveradres (basis-URL)': 'Serverio adresas (bazinis URL)',
+  'Serverklasse': 'Serverio klasė',
+  'Serverprofiel niet bruikbaar': 'Serverio profilis nenaudojamas',
+  'Standaard: er vertrekt geen audio': 'Numatyta: garsas neišeina iš įrenginio',
+  'Status op dit apparaat': 'Būsena šiame įrenginyje',
+  'Systeem-/appgeluid': 'Sistemos/programos garsas',
+  'Test met echte audio': 'Bandykite su tikru garsu',
+  'Test mislukt': 'Bandymas nepavyko',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkripcija patenka į deką; ar garso originalas išsaugomas, renkatės Išsaugant',
+  'Upload te groot': 'Įkėlimas per didelis',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Iš šio tinklalapio galimas tik https (arba loopback) — naršyklė blokuoja http į šį adresą',
+  'Verbinding testen (zonder audio)': 'Tikrinti ryšį (be garso)',
+  'Vertrouwd intern adres': 'Patikimas vidinis adresas',
+  'Vrije opslag': 'Laisva saugykla',
+  'aanwezig': 'yra',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'yra, bet nėra tinkamo garso konteinerio',
+  'batch én provisionele live-tekst': 'paketinė ir laikiną tiesioginė tekstą',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'paketinė transkripcija; tiesioginis tekstas negali šiuo keliu',
+  'beschikbaar': 'pasiekiamas',
+  'controleren…': 'tikrinama…',
+  'detecteren…': 'nustatoma…',
+  'geen engine beschikbaar': 'nėra variklio',
+  'geïnstalleerd': 'įdiegtas',
+  'geïnstalleerd en getoetst': 'įdiegta ir patikrinta',
+  'ja — de lokale wasm-engine kan draaien':
+      'taip — vietinis wasm variklis gali veikti',
+  'ja — https': 'taip — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'vietinis — ši procesoriaus architektūra neturi variklio',
+  'lokaal — geen cross-origin isolatie':
+      'vietinis — nėra cross-origin izoliacijos',
+  'lokaal — gereed': 'vietinis — paruoštas',
+  'lokaal — helper ontbreekt in deze installatie':
+      'vietinis — šioje diegime trūksta pagalbininko',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'ne — hostinge trūksta COOP/COEP; vietinė inferencija negali veikti (žr. HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'ne — be https nėra raktinės ir modelio patikros',
+  'niet beschikbaar op deze opstelling': 'nepasiekiama šioje sąrankoje',
+  'niet geïnstalleerd': 'neįdiegtas',
+  'nog niet beschikbaar op dit platform': 'dar nepasiekiama šioje platformoje',
+  'nog niet bewezen op dit apparaat': 'dar neįrodyta šiame įrenginyje',
+  'ontbreekt — opname in de browser kan niet':
+      'trūksta — įrašymas naršyklėje negalimas',
+  'opgeslagen — leeg laten houdt hem': 'išsaugota — palikus tuščią, ji lieka',
+  'server': 'serveris',
+  'verschijnt in de provenienceregel': 'rodomas kilmės eilutėje',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'greičiausiai — leidimas atiteks pirmą kartą naudojant',
+  'wordt binnengehaald': 'atsiunčiama',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Ši naršyklė ar talpinimas negali paleisti vietinio kalbos variklio (trūksta cross-origin izoliacijos)',
   'Whisper': 'Whisper',

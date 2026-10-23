@@ -1605,6 +1605,141 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'dit platform': 'tällä alustalla',
+  'API-sleutel': 'API-avain',
+  'Afgebroken': 'Keskeytetty',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Vain tallennettu, käytössä oleva profiili alla — se pyytää lupaa uudelleen joka tehtävässä',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Mahdollista vain aktiivisen kokouksen aikana todetulla järjestelmä-äänilähteellä — sitä lähdettä ei ole vielä saatavilla',
+  'Batch / live': 'Erä / reaaliaikainen',
+  'Bestaand audio/videobestand': 'Olemassa oleva ääni-/videotiedosto',
+  'Beveiligde context': 'Suojattu konteksti',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Vahvista, että ääni saa mennä tähän tiettyyn ulkoiseen kohteeseen — se on ainoa lupa, mitä tämä reitti pyytää.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Vahvista, että osoite on omassa verkossasi; vasta silloin yksityinen osoite saa ohittaa verkkorajauksen.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Vahvista ensin, että ääni saa mennä tähän ulkoiseen palveluun',
+  'Bevestiging vereist': 'Vahvistus vaaditaan',
+  'Cross-origin isolatie': 'Cross-origin-eristys',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'API-avain kulkee suojattuna otsikkona, ei URL:ssä. Tämä on sama vahvistus, jonka jokainen transkriptiotehtävä pyytää.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Ulkoinen palvelu edellyttää https:ää — http ulospäin on hyväksymätöntä',
+  'Eigen ASR-server': 'Oma ASR-palvelin',
+  'Eigen naam (optioneel)': 'Oma nimi (valinnainen)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Oma palvelin luotetussa verkossa (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Päätepiste puuttuu tai on virheellinen — käytä paljasta http(s)-URL:ia ilman käyttäjätunnusta tai salasanaa',
+  'Engine': 'Moottori',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profiili on tallennettu mutta pois käytöstä — valitse palvelinluokka muokataksesi tai käyttääksesi sitä.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Yksi sekunti hiljaista testiääntä (~32 kB) lähetetään osoitteeseen',
+  'Externe ASR-dienst (https)': 'Ulkoinen ASR-palvelu (https)',
+  'Externe dienst bevestigd': 'Ulkoinen palvelu vahvistettu',
+  'Geen server (lokaal houden)': 'Ei palvelinta (pysy paikallisena)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Palvelinta ei valittu — transkriptio pysyy paikallisena.',
+  'Geen serverklasse gekozen': 'Palvelinluokkaa ei valittu',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN-reitti edellyttää ensin "Luotettu sisäinen osoite"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Paikallinen — ääni ei lähde tästä laitteesta',
+  'Lokaal — op dit apparaat': 'Paikallinen — tällä laitteella',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback saa mennä vain tähän laitteeseen — käytä 127.0.0.1 tai localhost',
+  'Microfoon + systeemgeluid': 'Mikrofoni + järjestelmäääni',
+  'Microfoonpermissie': 'Mikrofonin käyttöoikeus',
+  'Model': 'Malli',
+  'Modellen': 'Mallit',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Moduuli on pois — ei latauksia, ei mikrofonia, ei taustatehtäviä. Alla olevat asetukset pysyvät löydettävissä yleiskuvaan ja siivoukseen.',
+  'OciDeck-gesprek': 'OciDeck-puhelu',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Tuntematon — järjestelmä pyytää lupaa vasta ensimmäisellä tallennuksella; asetusten avaaminen ei käynnistä pyyntöä',
+  'Op dit apparaat (loopback)': 'Tällä laitteella (loopback)',
+  'Opslag en retentie': 'Tallennus ja säilyttäminen',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Valinnainen ja pois päältä, ellet ota käyttöön: ääni menee silloin valitsemallesi transkriptiopalvelimelle. Paikallinen on oletus; molempien välillä ei ole koskaan hiljaista varareittiä.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Vain aktiivinen profiili voi lähettää pyyntöjä; pois tarkoittaa: mikään ei lähde.',
+  'Platform': 'Alusta',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Portti sallii: pyynnöt saavat lähteä',
+  'Profiel actief': 'Profiili käytössä',
+  'Profiel opslaan': 'Tallenna profiili',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profiili on pois — ota käyttöön "Profiili käytössä" lähettääksesi',
+  'Route': 'Reitti',
+  'Server antwoordde': 'Palvelin vastasi',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Palvelin vastasi tyhjällä transkriptiolla — odotettu hiljaiselle testiäänelle',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Palvelin tavoitettavissa ja vastasi HTTP-palvelimena',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Palvelin tavoitettavissa mutta vaatii todennuksen — tarkista tai täytä API-avain',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Palvelin tavoittamaton tai kieltäytyi — tarkista osoite, TLS ja onko palvelin käynnissä',
+  'Server weigerde of was onbereikbaar':
+      'Palvelin kieltäytyi tai oli tavoittamaton',
+  'Serveradres (basis-URL)': 'Palvelimen osoite (perus-URL)',
+  'Serverklasse': 'Palvelinluokka',
+  'Serverprofiel niet bruikbaar': 'Palvelinprofiili ei käytettävissä',
+  'Standaard: er vertrekt geen audio': 'Oletus: ääni ei lähde laitteesta',
+  'Status op dit apparaat': 'Tila tällä laitteella',
+  'Systeem-/appgeluid': 'Järjestelmä-/sovellusääni',
+  'Test met echte audio': 'Testaa oikealla äänellä',
+  'Test mislukt': 'Testi epäonnistui',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkriptio menee deckkiin; säilytetäänkö äänialkuperäinen, päätät Tallennuksessa',
+  'Upload te groot': 'Lähetys liian suuri',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Tältä verkkosivulta vain https (tai loopback) on mahdollinen — selain estää http:n tähän osoitteeseen',
+  'Verbinding testen (zonder audio)': 'Testaa yhteys (ilman ääntä)',
+  'Vertrouwd intern adres': 'Luotettu sisäinen osoite',
+  'Vrije opslag': 'Vapaa tallennustila',
+  'aanwezig': 'läsnä',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'läsnä, mutta ei käyttökelpoista äänikontaineria',
+  'batch én provisionele live-tekst': 'erä ja alustava reaaliaikainen teksti',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'erätranskriptio; reaaliaikainen teksti ei onnistu tällä reitillä',
+  'beschikbaar': 'käytettävissä',
+  'controleren…': 'tarkistetaan…',
+  'detecteren…': 'tunnistetaan…',
+  'geen engine beschikbaar': 'ei moottoria saatavilla',
+  'geïnstalleerd': 'asennettu',
+  'geïnstalleerd en getoetst': 'asennettu ja tarkistettu',
+  'ja — de lokale wasm-engine kan draaien':
+      'kyllä — paikallinen wasm-moottori voi toimia',
+  'ja — https': 'kyllä — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'paikallinen — tällä prosessoriarkkitehtuurilla ei ole moottoria',
+  'lokaal — geen cross-origin isolatie':
+      'paikallinen — ei cross-origin-eristystä',
+  'lokaal — gereed': 'paikallinen — valmis',
+  'lokaal — helper ontbreekt in deze installatie':
+      'paikallinen — apuri puuttuu tästä asennuksesta',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'ei — hostingilta puuttuu COOP/COEP; paikallinen inferenssi ei voi toimia (katso HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'ei — ilman https ei avainnipppua eikä mallin varmennusta',
+  'niet beschikbaar op deze opstelling': 'ei saatavilla tässä asetelmassa',
+  'niet geïnstalleerd': 'ei asennettu',
+  'nog niet beschikbaar op dit platform': 'ei vielä saatavilla tällä alustalla',
+  'nog niet bewezen op dit apparaat': 'ei vielä todistettu tällä laitteella',
+  'ontbreekt — opname in de browser kan niet':
+      'puuttuu — tallennus selaimessa ei onnistu',
+  'opgeslagen — leeg laten houdt hem':
+      'tallennettu — tyhjäksi jättäminen säilyttää sen',
+  'server': 'palvelin',
+  'verschijnt in de provenienceregel': 'näkyy alkuperärivissä',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'luultavasti — lupa seuraa ensimmäisellä käytöllä',
+  'wordt binnengehaald': 'haetaan',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Tämä selain tai isännöinti ei voi ajaa paikallista puhemoottoria (cross-origin-isolaatio puuttuu)',
   'Whisper': 'Whisper',

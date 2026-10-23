@@ -1608,6 +1608,139 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'dit platform': 'dere Plattform',
+  'API-sleutel': 'API-Schlüssel',
+  'Afgebroken': 'Abroche',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Nur s gschpicheret, aktiv Profil une — pro Ufgab frogt\'s nomal um Erlaubnis',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Nur währed ere aktive Versammlig mit ere bewieste Systemaudioquäll möglich — die Quäll isch da no nit verfüegbar',
+  'Batch / live': 'Batch / live',
+  'Bestaand audio/videobestand': 'Vorhandeni Audio-/Videodatei',
+  'Beveiligde context': 'Sichere Kontext',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Bestätiged Si, dass Audio zu dere bestimmte externe Destination dörf — das isch die einzigi Erlaubnis, wo die Route verlangt.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Bestätiged Si, dass die Adräss in Iirem Netzwärch isch; erst deen darf e privati Adräss d Netzwärchsperri passiere.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Bestätiged Si zerscht, dass Audio zu däm externe Dienscht dörf',
+  'Bevestiging vereist': 'Bestätigung erforderlich',
+  'Cross-origin isolatie': 'Cross-Origin-Isolierig',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'De API-Schlüssel gaht als gschützte Header mit, nit im URL. Das isch di gliich Bestätigung, wo jedi Transkriptionsufgab verlangt.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'En externe Dienscht brucht https — http naa usse isch inakzeptabel',
+  'Eigen ASR-server': 'Eigenä ASR-Server',
+  'Eigen naam (optioneel)': 'Eigene Name (optional)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Eigene Server im vertraute Netzwärch (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpunkt fählt oder isch ungültig — verwänded Si e nackti http(s)-URL ohni Benutzername oder Passwort drin',
+  'Engine': 'Engine',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Es Profil isch gschpicheret aber deaktiviert — wähled Si e Serverklasse zum Bearbeite oder Nutze.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'E Sekunde stilli Testaudio (~32 kB) wird gsendet a',
+  'Externe ASR-dienst (https)': 'Externe ASR-Dienschte (https)',
+  'Externe dienst bevestigd': 'Externe Dienschte bestätigt',
+  'Geen server (lokaal houden)': 'Kei Server (lokal bliibe)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Kei Server gwählt — Transkription bliibt lokal.',
+  'Geen serverklasse gekozen': 'Kei Serverklasse gwählt',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'D LAN-Route verlangt zerscht "Vertrauti interni Adräss"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokal — kes Audio verlahrt des Gerät',
+  'Lokaal — op dit apparaat': 'Lokal — uf däm Gerät',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback dörf nume zu däm Gerät sälber — verwänded Si 127.0.0.1 oder localhost',
+  'Microfoon + systeemgeluid': 'Mikrofon + Systemton',
+  'Microfoonpermissie': 'Mikrofonberächtigung',
+  'Model': 'Modäll',
+  'Modellen': 'Modäll',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modul isch us — kei Downloads, kei Mikrofon, kei Hintergrundufgabe. D Iistellige une bliibe sichtbar für Übersicht und Ufruume.',
+  'OciDeck-gesprek': 'OciDeck-Aaruèf',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Unbekannt — s System frogt erst bii dr erste Ufnahm um Erlaubnis; s Öffne vo Iistellige löst kei Abfrog uus',
+  'Op dit apparaat (loopback)': 'Uf däm Gerät (Loopback)',
+  'Opslag en retentie': 'Spycherig und Ufbeharig',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Optional und us, solang Si\'s nit aaschalte: Audio gaht deen an ene Transkriptionsserver vo Iire Wahl. Lokal bliibt de Standard; es git nie en stille Fallback zwüsche beide.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Nur es aktivs Profil cha Aafrage sende; us heisst: nüt verlahrt.',
+  'Platform': 'Plattform',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Tor erloubt: Aafrage dörfed use',
+  'Profiel actief': 'Profil aktiv',
+  'Profiel opslaan': 'Profil spychere',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profil isch us — schalt "Profil aktiv" aa zum Sende',
+  'Route': 'Route',
+  'Server antwoordde': 'Server het gantwortet',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Server het mit eme läärä Transkript gantwortet — bii stille Testaudio erwarted',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Server erreichbar und het als HTTP-Server gantwortet',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Server erreichbar, aber verlangt Authentifizierig — API-Schlüssel prüefe oder uusfülle',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Server unerreichbar oder verweigered — Adräss, TLS und öb de Server lauft prüefe',
+  'Server weigerde of was onbereikbaar':
+      'Server het verweigered oder isch unerreichbar gsi',
+  'Serveradres (basis-URL)': 'Serveradräss (Basis-URL)',
+  'Serverklasse': 'Serverklasse',
+  'Serverprofiel niet bruikbaar': 'Serverprofil nit bruuchbar',
+  'Standaard: er vertrekt geen audio': 'Standard: kes Audio verlahrt s Gerät',
+  'Status op dit apparaat': 'Status uf däm Gerät',
+  'Systeem-/appgeluid': 'System-/App-Ton',
+  'Test met echte audio': 'Test mit ächtem Audio',
+  'Test mislukt': 'Test fählgschlaa',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'S Transkript chunnt is Deck; öb s Audio-Original mit ufbeharrt wird, wähled Si bim Spychere',
+  'Upload te groot': 'Upload z gross',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Vo dere Websiite isch nur https (oder Loopback) möglich — de Browser blockiert http zu dere Adräss',
+  'Verbinding testen (zonder audio)': 'Verbindig teste (ohni Audio)',
+  'Vertrouwd intern adres': 'Vertrauti interni Adräss',
+  'Vrije opslag': 'Freie Spycher',
+  'aanwezig': 'vorhande',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'vorhande, aber kei bruuchbare Audio-Container',
+  'batch én provisionele live-tekst': 'Batch und provisorische Live-Täxt',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'Batch-Transkription; Live-Täxt cha die Route nit',
+  'beschikbaar': 'verfüegbar',
+  'controleren…': 'prüefe…',
+  'detecteren…': 'erkenne…',
+  'geen engine beschikbaar': 'kei Engine verfüegbar',
+  'geïnstalleerd': 'installiert',
+  'geïnstalleerd en getoetst': 'installiert und prüeft',
+  'ja — de lokale wasm-engine kan draaien':
+      'ja — di lokal Wasm-Engine cha laufe',
+  'ja — https': 'Ja — HTTPS',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokal — die Prozässorarchitektür het kei Engine',
+  'lokaal — geen cross-origin isolatie': 'lokal — kei Cross-Origin-Isolierig',
+  'lokaal — gereed': 'lokal — parat',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokal — Helper fählt in dere Installation',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'nei — Hosting het kei COOP/COEP; lokal Inferänz cha nit laufe (lueg HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'nei — ohni https kei Schlüsselbund und kei Modällverifikation',
+  'niet beschikbaar op deze opstelling': 'in däre Konfiguration nit verfüegbar',
+  'niet geïnstalleerd': 'nit installiert',
+  'nog niet beschikbaar op dit platform': 'uf däre Plattform no nit verfüegbar',
+  'nog niet bewezen op dit apparaat': 'uf däm Gerät no nit erwised',
+  'ontbreekt — opname in de browser kan niet':
+      'fählt — Ufnahm im Browser isch nit möglich',
+  'opgeslagen — leeg laten houdt hem': 'gschpicheret — läär loh bhalde',
+  'server': 'Server',
+  'verschijnt in de provenienceregel': 'erschiint in dr Proveniänz-Zile',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'wahrschinli — Berächtigung chunnt bim erste Gebruuch',
+  'wordt binnengehaald': 'wird gholt',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Dä Browser oder das Hosting cha kei lokali Spraach-Engine laufe la (Cross-Origin-Isolierig fählt)',
   'Whisper': 'Whisper',

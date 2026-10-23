@@ -114,21 +114,27 @@ void main() {
   testWidgets('de modulekaart schakelt de module aan', (tester) async {
     await tester.pumpWidget(
       const ProviderScope(
-        child: MaterialApp(home: Scaffold(body: TranscriptionModuleCard())),
+        child: MaterialApp(
+          // De kaart toont sinds #2514 al zijn secties; in de echte dialoog
+          // staat hij in een scrollview — hier dezelfde ruimte geven.
+          home: Scaffold(
+            body: SingleChildScrollView(child: TranscriptionModuleCard()),
+          ),
+        ),
       ),
     );
     await tester.pumpAndSettle();
 
     expect(find.text('Transcriptie en opname'), findsOneWidget);
-    expect(
-      tester.widget<SwitchListTile>(find.byType(SwitchListTile)).value,
-      isFalse,
+    // De kaart toont sinds #2514 altijd zijn secties; de eerste
+    // SwitchListTile is de moduleschakelaar, daarna volgen de
+    // profielschakelaars van het serverprofiel.
+    final moduleSwitch = find.byType(SwitchListTile).first;
+    expect(tester.widget<SwitchListTile>(moduleSwitch).value, isFalse);
+    await tester.tap(
+      find.descendant(of: moduleSwitch, matching: find.byType(Switch)),
     );
-    await tester.tap(find.byType(Switch));
     await tester.pumpAndSettle();
-    expect(
-      tester.widget<SwitchListTile>(find.byType(SwitchListTile)).value,
-      isTrue,
-    );
+    expect(tester.widget<SwitchListTile>(moduleSwitch).value, isTrue);
   });
 }

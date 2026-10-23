@@ -1607,6 +1607,139 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'dit platform': 'ezen a platformon',
+  'API-sleutel': 'API-kulcs',
+  'Afgebroken': 'Megszakítva',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Csak az alábbi mentett, aktív profil — feladatonként újra engedélyt kér',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Csak aktív megbeszélés közben lehetséges, bebizonyított rendszerhangforrással — az a forrás itt még nem érhető el',
+  'Batch / live': 'Kötegelt / élő',
+  'Bestaand audio/videobestand': 'Meglévő hang-/videofájl',
+  'Beveiligde context': 'Biztonságos környezet',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Erősítse meg, hogy a hang mehet erre a konkrét külső célra — ez az egyetlen engedély, amit ez az útvonal kér.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Erősítse meg, hogy ez a cím az Ön hálózatában van; csak akkor haladhat át a privát cím a hálózati blokkon.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Előbb erősítse meg, hogy a hang mehet ehhez a külső szolgáltatáshoz',
+  'Bevestiging vereist': 'Megerősítés szükséges',
+  'Cross-origin isolatie': 'Cross-origin izoláció',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'Az API-kulcs védett fejlécként megy, nem az URL-ben. Ez ugyanaz a megerősítés, amit minden transzkripciós feladat kérni fog.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Külső szolgáltatás https-t igényel — http kifelé elfogadhatatlan',
+  'Eigen ASR-server': 'Saját ASR-kiszolgáló',
+  'Eigen naam (optioneel)': 'Egyéni név (opcionális)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Saját kiszolgáló megbízható hálózatban (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Végpont hiányzik vagy érvénytelen — használjon csupasz http(s) URL-t felhasználónév és jelszó nélkül',
+  'Engine': 'Motor',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Egy profil el van mentve, de ki van kapcsolva — válasszon kiszolgálóosztályt a szerkesztéshez vagy használathoz.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Egy másodperc csendes teszthang (~32 kB) kerül elküldésre ide:',
+  'Externe ASR-dienst (https)': 'Külső ASR-szolgáltatás (https)',
+  'Externe dienst bevestigd': 'Külső szolgáltatás megerősítve',
+  'Geen server (lokaal houden)': 'Nincs kiszolgáló (maradjon helyi)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Nincs kiszolgáló kiválasztva — a transzkripció helyi marad.',
+  'Geen serverklasse gekozen': 'Nincs kiszolgálóosztály kiválasztva',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'A LAN útvonal előbb „Megbízható belső cím“-et kér',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Helyi — hang nem hagyja el ezt a készüléket',
+  'Lokaal — op dit apparaat': 'Helyi — ezen a készüléken',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'A loopback csak erre a készülékre mehet — használja a 127.0.0.1-et vagy localhostot',
+  'Microfoon + systeemgeluid': 'Mikrofon + rendszerhang',
+  'Microfoonpermissie': 'Mikrofon-engedély',
+  'Model': 'Modell',
+  'Modellen': 'Modellek',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'A modul ki van kapcsolva — nincs letöltés, nincs mikrofon, nincs háttérfeladat. Az alábbi beállítások áttekintéshez és rendezéshez láthatók maradnak.',
+  'OciDeck-gesprek': 'OciDeck-hívás',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Ismeretlen — a rendszer csak az első felvételnél kér engedélyt; a Beállítások megnyitása nem vált ki promptot',
+  'Op dit apparaat (loopback)': 'Ezen a készüléken (loopback)',
+  'Opslag en retentie': 'Tárolás és megőrzés',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Opcionális és ki van kapcsolva, amíg nem kapcsolja be: a hang ekkor egy általa választott transzkripciós kiszolgálóra megy. A helyi az alapértelmezett; a kettő között soha nincs csendes visszaesés.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Csak aktív profil küldhet kéréseket; kikapcsolva azt jelenti: semmi nem távozik.',
+  'Platform': 'Platform',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'A kapu engedélyezi: a kérések kimehetnek',
+  'Profiel actief': 'Profil aktív',
+  'Profiel opslaan': 'Profil mentése',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'A profil ki van kapcsolva — küldéshez kapcsolja be a „Profil aktív“ kapcsolót',
+  'Route': 'Útvonal',
+  'Server antwoordde': 'A kiszolgáló válaszolt',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'A kiszolgáló üres transzkripttel válaszolt — csendes teszthangnál várható',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'A kiszolgáló elérhető és HTTP-kiszolgálóként válaszolt',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'A kiszolgáló elérhető, de hitelesítést igényel — ellenőrizze vagy töltse ki az API-kulcsot',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'A kiszolgáló elérhetetlen vagy elutasította — ellenőrizze a címet, a TLS-t és hogy fut-e',
+  'Server weigerde of was onbereikbaar':
+      'A kiszolgáló elutasította vagy elérhetetlen volt',
+  'Serveradres (basis-URL)': 'Kiszolgáló címe (alap-URL)',
+  'Serverklasse': 'Kiszolgálóosztály',
+  'Serverprofiel niet bruikbaar': 'A kiszolgálóprofil nem használható',
+  'Standaard: er vertrekt geen audio':
+      'Alapértelmezett: hang nem hagyja el a készüléket',
+  'Status op dit apparaat': 'Állapot ezen a készüléken',
+  'Systeem-/appgeluid': 'Rendszer-/alkalmazáshang',
+  'Test met echte audio': 'Teszt valódi hanggal',
+  'Test mislukt': 'Teszt sikertelen',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'A transzkript a deckbe kerül; hogy a hang-eredeti is megmarad-e, a Mentéskor választja',
+  'Upload te groot': 'A feltöltés túl nagy',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Erről a weboldalról csak https (vagy loopback) lehetséges — a böngésző blokkolja a http-t erre a címre',
+  'Verbinding testen (zonder audio)': 'Kapcsolat tesztelése (hang nélkül)',
+  'Vertrouwd intern adres': 'Megbízható belső cím',
+  'Vrije opslag': 'Szabad tárhely',
+  'aanwezig': 'jelen',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'jelen, de nincs használható hangtároló',
+  'batch én provisionele live-tekst': 'kötegelt és ideiglenes élő szöveg',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'kötegelt transzkripció; élő szöveg ez az út nem tudja',
+  'beschikbaar': 'elérhető',
+  'controleren…': 'ellenőrzés…',
+  'detecteren…': 'észlelés…',
+  'geen engine beschikbaar': 'nincs elérhető motor',
+  'geïnstalleerd': 'telepítve',
+  'geïnstalleerd en getoetst': 'telepítve és ellenőrizve',
+  'ja — de lokale wasm-engine kan draaien': 'igen — a helyi wasm motor futhat',
+  'ja — https': 'igen — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'helyi — ehhez a processzorarchitektúrához nincs motor',
+  'lokaal — geen cross-origin isolatie': 'helyi — nincs cross-origin izoláció',
+  'lokaal — gereed': 'helyi — kész',
+  'lokaal — helper ontbreekt in deze installatie':
+      'helyi — a segédprogram hiányzik ebből a telepítésből',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'nem — a hostingból hiányzik a COOP/COEP; a helyi következtetés nem fut (lásd HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'nem — https nélkül nincs kulcstartó és modell-ellenőrzés',
+  'niet beschikbaar op deze opstelling': 'ebben a felállásban nem érhető el',
+  'niet geïnstalleerd': 'nincs telepítve',
+  'nog niet beschikbaar op dit platform': 'még nem érhető el ezen a platformon',
+  'nog niet bewezen op dit apparaat': 'még nem bizonyított ezen a készüléken',
+  'ontbreekt — opname in de browser kan niet':
+      'hiányzik — a felvétel a böngészőben nem lehetséges',
+  'opgeslagen — leeg laten houdt hem': 'tárolva — üresen hagyva megmarad',
+  'server': 'kiszolgáló',
+  'verschijnt in de provenienceregel': 'megjelenik a provenienszsorban',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'valószínűleg — az engedély az első használatkor jön',
+  'wordt binnengehaald': 'letöltés alatt',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Ez a böngésző vagy tárhely nem tud helyi beszédmotort futtatni (hiányzik a cross-origin izoláció)',
   'Whisper': 'Whisper',

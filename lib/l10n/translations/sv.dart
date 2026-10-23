@@ -1604,6 +1604,140 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'dit platform': 'denna plattform',
+  'API-sleutel': 'API-nyckel',
+  'Afgebroken': 'Avbruten',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Bara den sparade, aktiva profilen nedan — den ber om tillåtelse igen per uppgift',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Möjligt bara under ett aktivt möte med en beprövad systemljudkälla — den källan är inte tillgänglig här ännu',
+  'Batch / live': 'Batch / live',
+  'Bestaand audio/videobestand': 'Befintlig ljud-/videofil',
+  'Beveiligde context': 'Säker kontext',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Bekräfta att ljud får gå till denna specifika externa destination — det är den enda tillåtelse denna väg ber om.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Bekräfta att adressen ligger i ditt eget nätverk; först då får en privat adress passera nätverksspärren.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Bekräfta först att ljud får gå till denna externa tjänst',
+  'Bevestiging vereist': 'Bekräftelse krävs',
+  'Cross-origin isolatie': 'Cross-origin-isolering',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'API-nyckeln skickas som en säkrad header, inte i URL:en. Det är samma bekräftelse som varje transkriptionsuppgift kommer att be om.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'En extern tjänst kräver https — http utåt är oacceptabelt',
+  'Eigen ASR-server': 'Egen ASR-server',
+  'Eigen naam (optioneel)': 'Eget namn (valfritt)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Egen server i betrott nätverk (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Endpoint saknas eller är ogiltig — använd en naken http(s)-URL utan användarnamn eller lösenord',
+  'Engine': 'Motor',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'En profil är sparad men inaktiverad — välj en serverklass för att redigera eller använda den.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'En sekund tyst testljud (~32 kB) skickas till',
+  'Externe ASR-dienst (https)': 'Extern ASR-tjänst (https)',
+  'Externe dienst bevestigd': 'Extern tjänst bekräftad',
+  'Geen server (lokaal houden)': 'Ingen server (behåll lokalt)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Ingen server vald — transkriptionen förblir lokal.',
+  'Geen serverklasse gekozen': 'Ingen serverklass vald',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN-vägen kräver först "Betrodd intern adress"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokalt — inget ljud lämnar den här enheten',
+  'Lokaal — op dit apparaat': 'Lokalt — på den här enheten',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback får bara gå till den här enheten — använd 127.0.0.1 eller localhost',
+  'Microfoon + systeemgeluid': 'Mikrofon + systemljud',
+  'Microfoonpermissie': 'Mikrofonbehörighet',
+  'Model': 'Modell',
+  'Modellen': 'Modeller',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modulen är av — inga nedladdningar, ingen mikrofon, inga bakgrundsjobb. Inställningarna nedan förblir synliga för överblick och rensning.',
+  'OciDeck-gesprek': 'OciDeck-samtal',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Okänt — systemet ber om tillåtelse först vid första inspelningen; att öppna Inställningar triggar ingen prompt',
+  'Op dit apparaat (loopback)': 'På den här enheten (loopback)',
+  'Opslag en retentie': 'Lagring och bevarande',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Valfritt och av om du inte slår på det: ljud går då till en transkriptionsserver du själv väljer. Lokalt är standard; det finns aldrig en tyst fallback mellan dem.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Bara en aktiv profil kan skicka förfrågningar; av betyder: inget lämnar.',
+  'Platform': 'Plattform',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Grinden tillåter: förfrågningar får lämna',
+  'Profiel actief': 'Profil aktiv',
+  'Profiel opslaan': 'Spara profil',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profilen är av — slå på "Profil aktiv" för att skicka',
+  'Route': 'Väg',
+  'Server antwoordde': 'Servern svarade',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Servern svarade med en tom transkription — väntat för tyst testljud',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Servern nåbar och svarade som en HTTP-server',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Servern nåbar men kräver autentisering — kontrollera eller fyll i API-nyckeln',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Servern oåtkomlig eller nekade — kontrollera adress, TLS och att servern körs',
+  'Server weigerde of was onbereikbaar': 'Servern nekade eller var oåtkomlig',
+  'Serveradres (basis-URL)': 'Serveradress (bas-URL)',
+  'Serverklasse': 'Serverklass',
+  'Serverprofiel niet bruikbaar': 'Serverprofilen är inte användbar',
+  'Standaard: er vertrekt geen audio': 'Standard: inget ljud lämnar enheten',
+  'Status op dit apparaat': 'Status på den här enheten',
+  'Systeem-/appgeluid': 'System-/appljud',
+  'Test met echte audio': 'Testa med äkta ljud',
+  'Test mislukt': 'Testet misslyckades',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkriptionen hamnar i decket; om ljudoriginalet sparas väljer du vid Spara',
+  'Upload te groot': 'Uppladdningen är för stor',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'Från denna webbsida går bara https (eller loopback) — webbläsaren blockerar http till denna adress',
+  'Verbinding testen (zonder audio)': 'Testa anslutning (utan ljud)',
+  'Vertrouwd intern adres': 'Betrodd intern adress',
+  'Vrije opslag': 'Fritt lagringsutrymme',
+  'aanwezig': 'närvarande',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'närvarande, men ingen användbar ljudcontainer',
+  'batch én provisionele live-tekst': 'batch och preliminär livetext',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'batchtranskription; livetext kan inte denna väg',
+  'beschikbaar': 'tillgänglig',
+  'controleren…': 'kontrollerar…',
+  'detecteren…': 'detekterar…',
+  'geen engine beschikbaar': 'ingen motor tillgänglig',
+  'geïnstalleerd': 'installerad',
+  'geïnstalleerd en getoetst': 'installerad och verifierad',
+  'ja — de lokale wasm-engine kan draaien':
+      'ja — den lokala wasm-motorn kan köras',
+  'ja — https': 'Ja — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokal — denna processorarkitektur har ingen motor',
+  'lokaal — geen cross-origin isolatie': 'lokal — ingen cross-origin-isolering',
+  'lokaal — gereed': 'lokal — redo',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokal — hjälparen saknas i denna installation',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'nej — hosting saknar COOP/COEP; lokal inferens kan inte köras (se HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'nej — utan https ingen nyckelring och ingen modellverifiering',
+  'niet beschikbaar op deze opstelling':
+      'inte tillgänglig i den här uppställningen',
+  'niet geïnstalleerd': 'inte installerad',
+  'nog niet beschikbaar op dit platform':
+      'ännu inte tillgänglig på den här plattformen',
+  'nog niet bewezen op dit apparaat': 'ännu inte bevisat på den här enheten',
+  'ontbreekt — opname in de browser kan niet':
+      'saknas — inspelning i webbläsaren är inte möjlig',
+  'opgeslagen — leeg laten houdt hem': 'sparat — lämna tomt för att behålla',
+  'server': 'server',
+  'verschijnt in de provenienceregel': 'visas i proveniensraden',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'förmodligen — behörighet följer vid första användningen',
+  'wordt binnengehaald': 'hämtas',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Den här webbläsaren eller hostingen kan inte köra en lokal talmotor (cross-origin-isolering saknas)',
   'Whisper': 'Whisper',

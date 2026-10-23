@@ -8,14 +8,17 @@ import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
 import 'module_card.dart';
 import 'transcription_models_section.dart';
+import 'transcription_server_section.dart';
+import 'transcription_status_section.dart';
 
 /// De modulekaart voor Transcriptie en opname op Instellingen → Uitbreidingen
-/// (docs/design/TRANSCRIPTION.md §1, #2510).
+/// (docs/design/TRANSCRIPTION.md §1, #2510; instellingsoppervlak #2514).
 ///
-/// Standaard uit. De tekst is bewust eerlijk over de rijpheid: de sessiegrens
-/// en de bewaarregels zijn er, de bronnen en engines zelf volgen per platform
-/// in latere deeltickets — de schakelaar zet de grens klaar, geen
-/// beloofde opnameknop.
+/// Standaard uit, en de inhoud blijft óók uitgeschakeld zichtbaar: de
+/// statusmatrix, modelbeheer (opruimen mag altijd) en het serverprofiel
+/// zijn juist dan de plek om te zien wát aan- of wegklikken betekent.
+/// De schakelaar zet alleen de werkzame kant aan — detectie hieronder
+/// vraagt nooit een permissie, opent geen apparaat en raakt geen netwerk.
 class TranscriptionModuleCard extends ConsumerWidget {
   const TranscriptionModuleCard({super.key});
 
@@ -44,9 +47,70 @@ class TranscriptionModuleCard extends ConsumerWidget {
             ),
             secondary: const Icon(Icons.transcribe_outlined),
           ),
-          // Pas met de schakelaar aan is er een engine om modellen voor
-          // te beheren — de sectie verschijnt dus samen met hem.
-          if (state.enabled) const TranscriptionModelsSection(),
+          if (!state.enabled)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                l10n.d(
+                  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.',
+                ),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+              ),
+            ),
+          _RouteChoice(),
+          const TranscriptionStatusSection(),
+          TranscriptionModelsSection(moduleEnabled: state.enabled),
+          const TranscriptionServerSection(),
+          const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+/// De verwerkingsroute: lokaal (standaard) of het eigen serverprofiel.
+/// De keuze bepaalt welke engine `transcriptionEngineProvider` bouwt —
+/// hij valt nooit stil de andere kant op (§4.3).
+class _RouteChoice extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final route = ref.watch(transcriptionRouteProvider);
+    return RadioGroup<String>(
+      groupValue: route,
+      onChanged: (v) {
+        if (v != null) {
+          ref.read(transcriptionRouteProvider.notifier).set(v);
+        }
+      },
+      child: Column(
+        children: [
+          RadioListTile<String>(
+            dense: true,
+            value: 'local',
+            title: Text(
+              l10n.d('Lokaal — op dit apparaat'),
+              style: const TextStyle(fontSize: 13),
+            ),
+            subtitle: Text(
+              l10n.d('Standaard: er vertrekt geen audio'),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+            ),
+          ),
+          RadioListTile<String>(
+            dense: true,
+            value: 'server',
+            title: Text(
+              l10n.d('Eigen ASR-server'),
+              style: const TextStyle(fontSize: 13),
+            ),
+            subtitle: Text(
+              l10n.d(
+                'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming',
+              ),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+            ),
+          ),
         ],
       ),
     );

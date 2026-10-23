@@ -1603,6 +1603,140 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'dit platform': 'šajā platformā',
+  'API-sleutel': 'API atslēga',
+  'Afgebroken': 'Pārtraukts',
+  'Alleen het bewaarde, actieve profiel hieronder — per taak vraagt hij opnieuw toestemming':
+      'Tikai saglabātais, aktīvais profils zemāk — tas katram uzdevumam no jauna prasa atļauju',
+  'Alleen mogelijk tijdens een actieve vergadering met een bewezen systeemaudiobron — die bron is hier nog niet beschikbaar':
+      'Iespējams tikai aktīvas tikšanās laikā ar pārbaudītu sistēmas audio avotu — tas avots šeit vēl nav pieejams',
+  'Batch / live': 'Pakešu / tiešraide',
+  'Bestaand audio/videobestand': 'Esošs audio/video fails',
+  'Beveiligde context': 'Drošs konteksts',
+  'Bevestig dat audio naar deze specifieke externe bestemming mag — dat is de enige toestemming die deze route vraagt.':
+      'Apstipriniet, ka audio drīkst nonākt pie šī konkrētā ārējā galamērķa — tā ir vienīgā atļauja, ko šis ceļš prasa.',
+  'Bevestig dat dit adres op uw eigen netwerk staat; pas dan mag een privé-adres de netwerkblokkade passeren.':
+      'Apstipriniet, ka šī adrese ir jūsu tīklā; tikai tad privātā adrese drīkst šķērsot tīkla bloķēšanu.',
+  'Bevestig eerst dat audio naar deze externe dienst mag':
+      'Vispirms apstipriniet, ka audio drīkst iet uz šo ārējo servisu',
+  'Bevestiging vereist': 'Nepieciešams apstiprinājums',
+  'Cross-origin isolatie': 'Cross-origin izolācija',
+  'De API-sleutel gaat mee als beveiligde header, niet in de URL. Dit is dezelfde bevestiging die elke transcriptietaak straks vraagt.':
+      'API atslēga dodas kā droša galvene, nevis URL. Tas ir tas pats apstiprinājums, ko prasīs katra transkripcijas uzdevums.',
+  'Een externe dienst vereist https — http naar buiten is onacceptabel':
+      'Ārējam servisam nepieciešams https — http uz āru ir nepieņemams',
+  'Eigen ASR-server': 'Savs ASR serveris',
+  'Eigen naam (optioneel)': 'Savs nosaukums (neobligāti)',
+  'Eigen server in vertrouwd netwerk (LAN)':
+      'Savs serveris uzticamā tīklā (LAN)',
+  'Endpoint ontbreekt of is ongeldig — gebruik een kale http(s)-URL zonder gebruikersnaam of wachtwoord erin':
+      'Galapunkts trūkst vai ir nederīgs — izmantojiet kailu http(s) URL bez lietotājvārda vai paroles',
+  'Engine': 'Dzinējs',
+  'Er is een profiel bewaard maar uitgeschakeld — kies een serverklasse om het te bewerken of te gebruiken.':
+      'Profils ir saglabāts, bet atspējots — izvēlieties servera klasi, lai to labotu vai lietotu.',
+  'Er wordt één seconde stille testaudio (~32 kB) verstuurd naar':
+      'Tiek nosūtīta viena sekunde klusa testa audio (~32 kB) uz',
+  'Externe ASR-dienst (https)': 'Ārējs ASR serviss (https)',
+  'Externe dienst bevestigd': 'Ārējs serviss apstiprināts',
+  'Geen server (lokaal houden)': 'Bez servera (palikt lokāli)',
+  'Geen server gekozen — transcriptie blijft lokaal.':
+      'Serveris nav izvēlēts — transkripcija paliek lokāla.',
+  'Geen serverklasse gekozen': 'Servera klase nav izvēlēta',
+  'LAN-route vraagt eerst "Vertrouwd intern adres"':
+      'LAN ceļš vispirms pieprasa "Uzticama iekšējā adrese"',
+  'Lokaal — er vertrekt geen audio van dit apparaat':
+      'Lokāli — audio neiziet no šīs ierīces',
+  'Lokaal — op dit apparaat': 'Lokāli — šajā ierīcē',
+  'Loopback mag alleen naar dit apparaat zelf — gebruik 127.0.0.1 of localhost':
+      'Loopback drīkst iet tikai uz pašu ierīci — izmantojiet 127.0.0.1 vai localhost',
+  'Microfoon + systeemgeluid': 'Mikrofons + sistēmas skaņa',
+  'Microfoonpermissie': 'Mikrofona atļauja',
+  'Model': 'Modelis',
+  'Modellen': 'Modeļi',
+  'Module staat uit — geen downloads, geen microfoon, geen achtergrondtaken. De instellingen hieronder blijven vindbaar voor overzicht en opruimen.':
+      'Modulis ir izslēgts — nav lejupielāžu, mikrofona vai fona uzdevumu. Zemāk esošie iestatījumi paliek atrodami pārskatam un uzkopšanai.',
+  'OciDeck-gesprek': 'OciDeck zvans',
+  'Onbekend — pas bij de eerste opname vraagt het systeem toestemming; instellingen openen triggert geen prompt':
+      'Nezināms — sistēma prasa atļauju tikai pirmajā ierakstā; iestatījumu atvēršana neizsauc uzvedni',
+  'Op dit apparaat (loopback)': 'Šajā ierīcē (loopback)',
+  'Opslag en retentie': 'Glabāšana un saglabāšana',
+  'Optioneel en uit tenzij u het aanzet: audio gaat dan naar een transcriptieserver die u zelf kiest. Lokaal blijft de standaard; er is nooit een stille fallback tussen beide.':
+      'Izvēles un izslēgts, ja neieslēdzat: audio tad nonāk uz jūsu izvēlētu transkripcijas serveri. Lokālais ir noklusējums; nekad nav klusa rezerves pārslēgšanās starp tiem.',
+  'Pas een actief profiel kan verzoeken versturen; uit betekent: niets vertrekt.':
+      'Tikai aktīvs profils var sūtīt pieprasījumus; izslēgts nozīmē: nekas neiziet.',
+  'Platform': 'Platforma',
+  'Poort staat toe: verzoeken mogen vertrekken':
+      'Vārti atļauj: pieprasījumi drīkst iziet',
+  'Profiel actief': 'Profils aktīvs',
+  'Profiel opslaan': 'Saglabāt profilu',
+  'Profiel staat uit — zet "Profiel actief" aan om te versturen':
+      'Profils ir izslēgts — ieslēdziet "Profils aktīvs", lai sūtītu',
+  'Route': 'Maršruts',
+  'Server antwoordde': 'Serveris atbildēja',
+  'Server antwoordde met een leeg transcript — verwacht voor stille testaudio':
+      'Serveris atbildēja ar tukšu transkripciju — gaidāms klusam testa audio',
+  'Server bereikbaar en antwoordde als HTTP-server':
+      'Serveris sasniedzams un atbildēja kā HTTP serveris',
+  'Server bereikbaar maar eist authenticatie — controleer of vul de API-sleutel':
+      'Serveris sasniedzams, bet prasa autentifikāciju — pārbaudiet vai aizpildiet API atslēgu',
+  'Server onbereikbaar of geweigerd — controleer adres, TLS en of de server draait':
+      'Serveris nepieejams vai atteicās — pārbaudi adresi, TLS un vai serveris strādā',
+  'Server weigerde of was onbereikbaar':
+      'Serveris atteicās vai bija nepieejams',
+  'Serveradres (basis-URL)': 'Servera adrese (bāzes URL)',
+  'Serverklasse': 'Servera klase',
+  'Serverprofiel niet bruikbaar': 'Servera profils nav lietojams',
+  'Standaard: er vertrekt geen audio': 'Noklusēti: audio neiziet no ierīces',
+  'Status op dit apparaat': 'Statuss šajā ierīcē',
+  'Systeem-/appgeluid': 'Sistēmas/lietotnes skaņa',
+  'Test met echte audio': 'Pārbaudi ar īstu audio',
+  'Test mislukt': 'Tests neizdevās',
+  'Transcript komt in het deck; of het audio-origineel mee bewaard blijft kiest u bij Opslaan':
+      'Transkripcija nonāk dekā; vai audio oriģināls tiek saglabāts, izvēlaties Saglabājot',
+  'Upload te groot': 'Augšupielāde pārāk liela',
+  'Vanaf deze webpagina kan alleen https (of loopback) — de browser blokkeert http naar dit adres':
+      'No šīs tīmekļa lapas iespējams tikai https (vai loopback) — pārlūks bloķē http uz šo adresi',
+  'Verbinding testen (zonder audio)': 'Pārbaudi savienojumu (bez audio)',
+  'Vertrouwd intern adres': 'Uzticama iekšējā adrese',
+  'Vrije opslag': 'Brīvā krātuve',
+  'aanwezig': 'klāt',
+  'aanwezig, maar geen bruikbare audiocontainer':
+      'klāt, bet nav lietojams audio konteiners',
+  'batch én provisionele live-tekst':
+      'pakešu un provizoriskā tiešraides teksts',
+  'batchtranscriptie; live-tekst kan deze route niet':
+      'pakešu transkripcija; tiešraides teksts šajā ceļā nevar',
+  'beschikbaar': 'pieejams',
+  'controleren…': 'pārbauda…',
+  'detecteren…': 'nosaka…',
+  'geen engine beschikbaar': 'nav pieejams dzinējs',
+  'geïnstalleerd': 'instalēts',
+  'geïnstalleerd en getoetst': 'instalēts un pārbaudīts',
+  'ja — de lokale wasm-engine kan draaien':
+      'jā — lokālais wasm dzinējs var darboties',
+  'ja — https': 'jā — https',
+  'lokaal — deze processorarchitectuur heeft geen engine':
+      'lokāls — šai procesora arhitektūrai nav dzinēja',
+  'lokaal — geen cross-origin isolatie': 'lokāls — nav cross-origin izolācijas',
+  'lokaal — gereed': 'lokāls — gatavs',
+  'lokaal — helper ontbreekt in deze installatie':
+      'lokāls — šajā instalācijā trūkst palīga',
+  'nee — hosting mist COOP/COEP; lokale inferentie kan niet (zie HOSTING.md)':
+      'nē — hostingam trūkst COOP/COEP; lokālā inferencija nevar darboties (skat. HOSTING.md)',
+  'nee — zonder https geen sleutelbos en geen modelverificatie':
+      'nē — bez https nav atslēgu saiša un modeļa pārbaudes',
+  'niet beschikbaar op deze opstelling': 'nav pieejams šajā konfigurācijā',
+  'niet geïnstalleerd': 'nav instalēts',
+  'nog niet beschikbaar op dit platform': 'vēl nav pieejams šajā platformā',
+  'nog niet bewezen op dit apparaat': 'vēl nav pierādīts šajā ierīcē',
+  'ontbreekt — opname in de browser kan niet':
+      'trūkst — ierakstīšana pārlūkā nav iespējama',
+  'opgeslagen — leeg laten houdt hem': 'saglabāta — atstājot tukšu, tā paliek',
+  'server': 'serveris',
+  'verschijnt in de provenienceregel': 'parādās izcelsmes rindā',
+  'waarschijnlijk — toestemming volgt bij eerste gebruik':
+      'iespējams — atļauja seko pirmajai lietošanai',
+  'wordt binnengehaald': 'tiek lejupielādēts',
   'Deze browser of hosting kan geen lokale spraakengine draaien (cross-origin isolatie ontbreekt)':
       'Šī pārlūkprogramma vai mitināšana nevar palaist lokālu runas dzinēju (trūkst cross-origin izolācijas)',
   'Whisper': 'Whisper',

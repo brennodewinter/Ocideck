@@ -218,6 +218,7 @@ const Set<String> loanKeys = {
   // Engelse leenuitdrukkingen die het Nederlands onvertaald overnam; het
   // Nederlands zegt niet "spurtbeoordeling" of "nabespreking na de actie".
   'Accent / bullets',
+  'Batch / live',
   'Sprint review / demo',
   'CAB / release readiness',
   'Post-incident review / lessons learned',
