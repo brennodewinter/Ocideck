@@ -1,0 +1,126 @@
+# Gepinde docker-jitsi-meet-stack voor de OciDeck-callproeven (#2540).
+#
+# Vier services uit upstream docker-jitsi-meet (web, prosody, jicofo, jvb) met
+# alleen de environment-doorgifte die dit testbed zelf zet. De volledige
+# upstream docker-compose.yml staat op tag stable-11248 van
+# github.com/jitsi/docker-jitsi-meet; wijzigingen daarin (nieuwe env-namen)
+# gelden hier pas na een bewuste bump van JITSI_IMAGE_VERSION in .env.
+#
+# Alle poorten binden op 127.0.0.1: de stack is loopback-only, er valt vanaf
+# andere machines niets te bereiken.
+
+name: ocideck-jitsi-testbed
+
+services:
+  # Web-UI van de tweede, onafhankelijke client; nginx proxyt ook
+  # /xmpp-websocket en /colibri-ws naar prosody resp. jvb.
+  web:
+    image: ${JITSI_IMAGE_REPO:-ghcr.io/jitsi}/web:${JITSI_IMAGE_VERSION:?zet JITSI_IMAGE_VERSION in .env}
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run:size=16M,mode=1750,exec
+      - /tmp:size=16M,mode=1777,noexec
+    ports:
+      - '127.0.0.1:${HTTP_PORT:-8000}:8000'
+    volumes:
+      - ${CONFIG}/web:/config
+      # Corrigeert de websocket-/bosh-URL die upstream bij DISABLE_HTTPS=1
+      # foutief als wss://http://… opbouwt. Wordt achter config.js geplakt.
+      - ./web/custom-config.js:/config/custom-config.js:ro
+    environment:
+      - AUTH_TYPE
+      - DISABLE_HTTPS
+      - ENABLE_AUTH
+      - ENABLE_GUESTS
+      - ENABLE_P2P
+      - ENABLE_THIRD_PARTY_REQUESTS
+      - ENABLE_XMPP_WEBSOCKET
+      - PUBLIC_URL
+      - TZ
+    depends_on:
+      - prosody
+    networks:
+      meet.jitsi:
+
+  # XMPP-signalling (Prosody + Jitsi-modules uit het jitsi/prosody-image).
+  prosody:
+    image: ${JITSI_IMAGE_REPO:-ghcr.io/jitsi}/prosody:${JITSI_IMAGE_VERSION:?zet JITSI_IMAGE_VERSION in .env}
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run:size=16M,mode=1750,exec
+      - /tmp:size=16M,mode=1777,noexec
+    ports:
+      # Directe WebSocket-poort voor OciDeck-clients (preflight/join, #2533+).
+      # Apart van de web-proxy zodat signalering zonder nginx te meten is.
+      - '127.0.0.1:${PROSODY_WS_PORT:-15280}:5280'
+    volumes:
+      - ${CONFIG}/prosody/config:/config
+      - ${CONFIG}/prosody/data:/var/lib/prosody
+    environment:
+      - AUTH_TYPE
+      - ENABLE_AUTH
+      - ENABLE_GUESTS
+      - ENABLE_XMPP_WEBSOCKET
+      - JICOFO_AUTH_PASSWORD
+      - JICOFO_COMPONENT_SECRET
+      - JVB_AUTH_PASSWORD
+      - TZ
+    networks:
+      meet.jitsi:
+        aliases:
+          - ${XMPP_SERVER:-xmpp.meet.jitsi}
+
+  # Conference focus: alloceert kamers, wijst de JVB aan, stuurt Jingle.
+  jicofo:
+    image: ${JITSI_IMAGE_REPO:-ghcr.io/jitsi}/jicofo:${JITSI_IMAGE_VERSION:?zet JITSI_IMAGE_VERSION in .env}
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run:size=32M,mode=1750,exec
+      - /tmp:size=16M,mode=1777,noexec
+    volumes:
+      - ${CONFIG}/jicofo:/config
+    environment:
+      - AUTH_TYPE
+      - ENABLE_AUTH
+      - JICOFO_AUTH_PASSWORD
+      - JICOFO_COMPONENT_SECRET
+      - TZ
+      - XMPP_SERVER
+    depends_on:
+      - prosody
+    networks:
+      meet.jitsi:
+
+  # Selective Forwarding Unit: alle mediapakketten lopen hierdoor (P2P staat
+  # uit in .env, zodat de proef altijd de SFU-route test).
+  jvb:
+    image: ${JITSI_IMAGE_REPO:-ghcr.io/jitsi}/jvb:${JITSI_IMAGE_VERSION:?zet JITSI_IMAGE_VERSION in .env}
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run:size=32M,mode=1750,exec
+      - /tmp:size=16M,mode=1777,noexec
+    ports:
+      - '127.0.0.1:${JVB_PORT:-10000}:${JVB_PORT:-10000}/udp'
+    volumes:
+      - ${CONFIG}/jvb:/config
+    environment:
+      - DISABLE_AWS_HARVESTER
+      - DOCKER_HOST_ADDRESS
+      - JVB_ADVERTISE_IPS
+      - JVB_AUTH_PASSWORD
+      - JVB_DISABLE_STUN
+      - JVB_PORT
+      - TZ
+      - XMPP_SERVER
+    depends_on:
+      - prosody
+    networks:
+      meet.jitsi:
+
+# Eigen netwerk zodat de services elkaar via xmpp.meet.jitsi bereiken.
+networks:
+  meet.jitsi:

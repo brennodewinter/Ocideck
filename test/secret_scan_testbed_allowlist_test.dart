@@ -34,45 +34,54 @@ void main() {
   });
 
   test('elk gegenereerd testbed-pad staat in beide secret-scanner-allowlists', () {
-    const testbedDir = 'testbed/docker-jitsi-meet';
-    final gitignore = File('$testbedDir/.gitignore');
-    expect(
-      gitignore.existsSync(),
-      isTrue,
-      reason: 'het testbed hoort een .gitignore te hebben',
-    );
-
-    // De gegenereerde paden die het testbed zélf declareert (regels zonder #).
-    final generated = gitignore
-        .readAsLinesSync()
-        .map((l) => l.trim())
-        .where((l) => l.isNotEmpty && !l.startsWith('#'))
-        .toList();
-    expect(
-      generated,
-      isNotEmpty,
-      reason: 'testbed/.gitignore hoort gegenereerde paden te noemen',
-    );
-
     // De allowlists schrijven regexen met ontsnapte punten (`\.env`); we
     // vergelijken op het letterlijke pad, dus halen we de backslashes eruit.
     String plain(String s) => s.replaceAll(r'\', '');
     final gitleaks = plain(File('.gitleaks.toml').readAsStringSync());
     final trufflehog = plain(File('.trufflehogignore').readAsStringSync());
 
-    for (final entry in generated) {
-      final path = '$testbedDir/$entry'; // bv. testbed/docker-jitsi-meet/.env
+    // Elke testbed-map met een eigen .gitignore valt onder deze invariant:
+    // nieuwe testbeds (zoals jitsi-meet uit #2540) worden automatisch mee-
+    // getoetst zodra ze hun gegenereerde paden declareren.
+    final testbedDirs = Directory('testbed')
+        .listSync()
+        .whereType<Directory>()
+        .where((d) => File('${d.path}/.gitignore').existsSync())
+        .map((d) => d.path)
+        .toList();
+    expect(
+      testbedDirs,
+      isNotEmpty,
+      reason: 'minstens één testbed met .gitignore wordt verwacht',
+    );
+
+    for (final testbedDir in testbedDirs) {
+      // De gegenereerde paden die het testbed zélf declareert (regels zonder #).
+      final generated = File('$testbedDir/.gitignore')
+          .readAsLinesSync()
+          .map((l) => l.trim())
+          .where((l) => l.isNotEmpty && !l.startsWith('#'))
+          .toList();
       expect(
-        gitleaks.contains(path),
-        isTrue,
-        reason: '.gitleaks.toml moet $path uitsluiten (gitleaks dir .)',
+        generated,
+        isNotEmpty,
+        reason: '$testbedDir/.gitignore hoort gegenereerde paden te noemen',
       );
-      expect(
-        trufflehog.contains(path),
-        isTrue,
-        reason:
-            '.trufflehogignore moet $path uitsluiten (trufflehog filesystem .)',
-      );
+
+      for (final entry in generated) {
+        final path = '$testbedDir/$entry'; // bv. testbed/docker-jitsi-meet/.env
+        expect(
+          gitleaks.contains(path),
+          isTrue,
+          reason: '.gitleaks.toml moet $path uitsluiten (gitleaks dir .)',
+        );
+        expect(
+          trufflehog.contains(path),
+          isTrue,
+          reason:
+              '.trufflehogignore moet $path uitsluiten (trufflehog filesystem .)',
+        );
+      }
     }
   });
 }

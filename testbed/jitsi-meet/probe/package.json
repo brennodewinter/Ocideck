@@ -1,0 +1,8 @@
+{
+  "name": "jitsi-testbed-probe",
+  "private": true,
+  "description": "Tweepersoonsproef voor het gepinde Jitsi-testbed (issue #2540). Rijdt de systeem-Chrome via playwright-core; installeert geen eigen browser.",
+  "dependencies": {
+    "playwright-core": "1.57.0"
+  }
+}

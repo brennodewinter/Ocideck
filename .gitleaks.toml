@@ -47,6 +47,16 @@ paths = [
   '''^testbed/docker-jitsi-meet/\.jitsi-config/''',
   '''^testbed/docker-jitsi-meet/\.env$''',
 
+  # Het volledige Jitsi-calltestbed (#2540): dezelfde categorie wegwerp-
+  # materiaal — compose-`.env` met servicewachtwoorden, gerenderde prosody-
+  # config met certs onder `config/`, geredigeerde bewijslogs onder
+  # `evidence/` en node-afhankelijkheden van de probe.
+  '''^testbed/jitsi-meet/\.env$''',
+  '''^testbed/jitsi-meet/config/''',
+  '''^testbed/jitsi-meet/evidence/''',
+  '''^testbed/jitsi-meet/probe/node_modules/''',
+  '''^testbed/jitsi-meet/probe/probe-out/''',
+
   # ── Het detectiecorpus van OciWacht ────────────────────────────────────────
   # Dit is de kern van de afweging. De privacyscanner moet geheimen kúnnen
   # herkennen, en dat bewijs je alleen met strings die er echt uitzien. Deze
