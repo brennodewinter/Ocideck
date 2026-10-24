@@ -176,7 +176,7 @@ void main() {
     expect(delete, greaterThan(verify));
     expect(finalAudit, greaterThan(delete));
     expect(run, contains(r'[.[] | select(.name==$n)] | length'));
-    expect(run, contains('dist/ bevat niet exact de elf verwachte'));
+    expect(run, contains('dist/ bevat niet exact de veertien verwachte'));
     for (final asset in [
       'SHA256SUMS',
       r'ocideck-$VERSIE.cdx.json',
