@@ -61,8 +61,11 @@ sandbox; the other packages run as normal desktop applications.
 - **Debian / Ubuntu / Mint** — `sudo apt install ./ocideck-linux-amd64-@VERSIE@.deb`.
 - **Fedora / openSUSE** — `sudo dnf install ./ocideck-linux-x86_64-@VERSIE@.rpm`
   (or `sudo zypper install ./ocideck-linux-x86_64-@VERSIE@.rpm`).
-- **Flatpak** — install Flatpak and the GNOME 50 runtime from a Flatpak remote,
-  then run `flatpak install ./ocideck-linux-x86_64-@VERSIE@.flatpak` and
+- **Flatpak** — install Flatpak through your distribution, then add a remote
+  that provides GNOME 50 (for example,
+  `flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo`).
+  Run `flatpak install flathub org.gnome.Platform//50`,
+  `flatpak install ./ocideck-linux-x86_64-@VERSIE@.flatpak` and
   `flatpak run com.dewinter.ocideck`. This direct bundle does not include its
   runtime and is not a Flathub app listing. It grants access to your home files,
   network, audio, display and Secret Service so OciDeck can work there.

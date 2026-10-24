@@ -74,8 +74,11 @@ flowchart LR
 
 ## Installing on Linux
 
-The release page offers a direct Flatpak download for x86-64 Linux. Install
-Flatpak and the GNOME 50 runtime from a Flatpak remote first, then run
+The release page offers a direct Flatpak download for x86-64 Linux. After
+installing Flatpak through your distribution, add a remote that provides the
+GNOME 50 runtime (for example,
+`flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo`),
+then run `flatpak install flathub org.gnome.Platform//50`,
 `flatpak install ./ocideck-linux-x86_64-<version>.flatpak` and
 `flatpak run com.dewinter.ocideck`. The OciDeck app is not listed on Flathub;
 only the runtime may come from there. Flatpak can access your home files,
