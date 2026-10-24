@@ -1,0 +1,45 @@
+name: debian12-build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.forgejo/workflows/debian12-build.yml'
+      - 'scripts/debian12_builder/**'
+      - 'scripts/build_debian12_release.sh'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.tool-versions'
+
+jobs:
+  native-build:
+    runs-on: docker
+    timeout-minutes: 180
+    steps:
+      - name: Docker-gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates nodejs git docker.io iproute2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Debian 12-archief bouwen op x86-64
+        run: |
+          set -eu
+          GW="$(ip -4 route show default | awk '{print $3; exit}')"
+          test -n "$GW"
+          export DOCKER_DAEMON="tcp://$GW:2375"
+          for i in $(seq 1 30); do
+            docker -H "$DOCKER_DAEMON" info >/dev/null 2>&1 && break
+            sleep 2
+          done
+          docker -H "$DOCKER_DAEMON" info >/dev/null
+          VERSION="$(sed -n 's/^version:[[:space:]]*\([^+]*\).*/\1/p' pubspec.yaml)"
+          test -n "$VERSION"
+          scripts/build_debian12_release.sh "$VERSION"
+      - name: Gebouwd archief bewaren
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: ocideck-linux-debian12
+          path: dist/ocideck-linux-debian12-x86_64-*.tar.gz

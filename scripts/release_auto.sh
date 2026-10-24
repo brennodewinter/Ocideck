@@ -486,6 +486,7 @@ expected_release_assets() {
     "ocideck-linux-amd64-$NEW_VERSION.deb" \
     "ocideck-linux-x86_64-$NEW_VERSION.rpm" \
     "ocideck-linux-x86_64-$NEW_VERSION.AppImage" \
+    "ocideck-linux-debian12-x86_64-$NEW_VERSION.tar.gz" \
     "ocideck-macos-$NEW_VERSION.zip" \
     "ocideck-windows-x64-$NEW_VERSION.zip" \
     "ocideck-windows-x64-setup-$NEW_VERSION.exe" \
@@ -536,7 +537,7 @@ website_html_has_expected_downloads() {
   while IFS= read -r asset; do
     printf '%s' "$html" | grep -Fq "/releases/download/$TAG/$asset" || return 1
   done < <(expected_release_assets \
-    | grep -E 'linux-amd64.*\.deb$|linux-x86_64.*\.AppImage$|macos-.*\.zip$|windows-x64-setup-.*\.exe$')
+    | grep -E 'linux-amd64.*\.deb$|linux-x86_64.*\.AppImage$|linux-debian12.*\.tar\.gz$|macos-.*\.zip$|windows-x64-setup-.*\.exe$')
 }
 
 website_has_expected_downloads() {

@@ -210,6 +210,8 @@ cmd_status
         '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
         'ocideck-linux-x86_64-$websiteVersion.AppImage">appimage</a>\n'
         '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
+        'ocideck-linux-debian12-x86_64-$websiteVersion.tar.gz">debian12</a>\n'
+        '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
         'ocideck-macos-$websiteVersion.zip">mac</a>\n'
         '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
         'ocideck-windows-x64-setup-$websiteVersion.exe">windows</a>\n',
@@ -863,7 +865,7 @@ api() {
       ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41}' ;;
     'GET /releases/41/assets')
-      printf '%s\\n' '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"name":"SHA256SUMS.minisig","browser_download_url":"https://dl.invalid/x/SHA256SUMS.minisig"}]'
+      printf '%s\\n' '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-linux-debian12-x86_64-9.9.9.tar.gz"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"name":"SHA256SUMS.minisig","browser_download_url":"https://dl.invalid/x/SHA256SUMS.minisig"}]'
       ;;
     POST*) printf '%s\\n' '{"id":42}' ;;
     *) printf '%s\\n' '{}' ;;

@@ -13,6 +13,7 @@
 #
 #   web      → geharde bundel, plus de live deploy naar ocideck.librekat.nl
 #   linux    → x64-bundel als tar.gz
+#   linux-debian12 → native x86-64-bundel gebouwd in Debian 12
 #   macos    → .app als zip (op de Mac-runner)
 #   windows  → opgehaald van de spiegel
 #   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS.
@@ -392,6 +393,43 @@ jobs:
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.rpm
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.AppImage
 
+  linux-debian12:
+    name: Linux bouwen op Debian 12
+    needs: gate
+    runs-on: docker
+    timeout-minutes: 180
+    steps:
+      - name: Docker-gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates nodejs git docker.io iproute2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Docker-daemon vinden
+        id: dockerd
+        run: |
+          set -eu
+          GW="$(ip -4 route show default | awk '{print $3; exit}')"
+          test -n "$GW"
+          echo "host=tcp://$GW:2375" >> "$GITHUB_OUTPUT"
+      - name: Native Debian 12-app bouwen
+        env:
+          DOCKER_DAEMON: ${{ steps.dockerd.outputs.host }}
+        run: |
+          set -eu
+          for i in $(seq 1 30); do
+            docker -H "$DOCKER_DAEMON" info >/dev/null 2>&1 && break
+            sleep 2
+          done
+          docker -H "$DOCKER_DAEMON" info >/dev/null
+          scripts/build_debian12_release.sh "${GITHUB_REF_NAME#v}"
+      - name: Artifact bewaren
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+        with:
+          name: ocideck-linux-debian12
+          path: dist/ocideck-linux-debian12-x86_64-*.tar.gz
+
   macos:
     name: macOS bouwen
     needs: gate
@@ -718,6 +756,45 @@ jobs:
             exit 1
           fi
 
+  consumer-debian12:
+    name: Debian 12-archief proef op een schone Debian 12
+    needs: linux-debian12
+    runs-on: docker
+    timeout-minutes: 60
+    container:
+      image: debian:12-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux-debian12, path: dist }
+      - name: Uitpakken, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends \
+            xvfb fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
+            libayatana-appindicator3-1 libgles2 libegl1
+          mkdir -p /tmp/ocideck-test
+          tar -xzf "dist/ocideck-linux-debian12-x86_64-${GITHUB_REF_NAME#v}.tar.gz" -C /tmp/ocideck-test
+          cd /tmp/ocideck-test/ocideck-linux-debian12-*
+          test -x ./ocideck
+          if ldd ./ocideck | grep 'not found'; then
+            echo "Het Debian 12-archief mist een runtimebibliotheek." >&2
+            exit 1
+          fi
+          set +e
+          timeout 20 xvfb-run -a ./ocideck
+          rc=$?
+          set -e
+          if [ "$rc" -ne 124 ]; then
+            echo "OciDeck kwam niet op of viel binnen 20 s weg (exit $rc)." >&2
+            exit 1
+          fi
+
   consumer-rpm:
     name: .rpm proef op een schone Fedora
     needs: linux
@@ -797,7 +874,7 @@ jobs:
 
   publiceren:
     name: Release publiceren
-    needs: [web, linux, macos, windows-ophalen, consumer-deb, consumer-rpm, consumer-appimage]
+    needs: [web, linux, linux-debian12, macos, windows-ophalen, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage]
     runs-on: docker
     # Deze job muteeert buiten ons gebaande pad: elke call draagt daarom een
     # connect- én responstime-out (de curl-flags in de stappen; een endpoint dat
@@ -825,6 +902,8 @@ jobs:
         with: { name: ocideck-web, path: dist }
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux-debian12, path: dist }
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-macos, path: dist }
       - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2

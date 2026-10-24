@@ -306,14 +306,16 @@ make check        # format-check + analyze + conventions + method-length + dead-
 
 ## Building release apps
 
-Each platform has a `make` target (each only builds on its own OS — Flutter
-cannot cross-compile a desktop bundle):
+Each platform has a `make` target. Native desktop bundles normally build on
+their own OS; the Debian 12 Docker builder provides a Linux environment on a
+host with Docker:
 
 ```sh
 make build-release  # verified web bundle + macOS .app
 make build-macos     # flutter build macos --release    → build/macos/Build/Products/Release/*.app
 make build-windows   # flutter build windows --release  → build/windows/x64/runner/Release
 make build-linux     # flutter build linux --release    → build/linux/x64/release/bundle
+make build-linux-debian12  # native Linux app built inside Debian 12 → outputs/ocideck-local-builds/
 make package-linux VERSION=<v>   # AppImage + .deb + .rpm from that bundle → dist/
 make build-web       # hardened web bundle              → build/web
 make build-all       # web + this machine's native desktop target
@@ -322,6 +324,13 @@ make build-all       # web + this machine's native desktop target
 `make package-linux` needs a bundle from `make build-linux` first (it is not a
 prerequisite, so the release job does not build twice) and the packaging tools
 on the machine — see [Linux packaging](#linux-packaging).
+
+`make build-linux-debian12` uses the current checkout and the builder from
+[`scripts/debian12_builder/`](../scripts/debian12_builder/README.md). It writes
+an ordinary Linux app bundle and tarball, not a container image to run. This
+route is useful when the official Ubuntu-built binary needs newer glibc or
+libstdc++ than a Debian 12 host has. The output is x86-64, including when
+Docker runs on an ARM host through emulation; it does not run on ARM Linux.
 
 Use `make build-release` for the normal manual release path on macOS. It runs
 `make check-web` first, so the browser bundle is built with
@@ -944,6 +953,7 @@ and <https://ocideck.librekat.nl/> is serving that same web bundle.
 | --- | --- | --- |
 | Web bundle | forge `docker` runner, prebaked `ocideck-ci` image | `make check-web`: hardened build **and** its verification |
 | Linux x64 — tarball, AppImage, `.deb`, `.rpm` | forge `docker` runner, prebaked `ocideck-ci` image | native desktop build on the baked toolchain, then `make package-linux` |
+| Linux x64 — Debian 12 tarball | forge `docker` runner, Debian 12 builder | same source commit compiled against Debian 12, then archived |
 | macOS | forge, `macos` runner | Apple licenses macOS for Apple hardware only |
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |

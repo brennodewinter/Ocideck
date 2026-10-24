@@ -72,6 +72,10 @@ minisign.key
 # Release-artefacten (lokaal gebouwd; nooit committen — belanden anders in de release-tag)
 dist/
 
+# Local Debian 12 Docker builder sources, cache and build outputs.
+/work/
+/outputs/
+
 # De gepinde Marp CLI-check (`tool/marp-check`) installeert lokaal Node-pakketten
 # (waaronder Chromium via puppeteer). `package.json` en `package-lock.json` zijn
 # wél geversioneerd (de pin); `node_modules/` is een lokaal artefact, geen bron.
