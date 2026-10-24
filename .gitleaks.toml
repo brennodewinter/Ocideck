@@ -75,6 +75,12 @@ paths = [
   '''^test/privacy_[a-z_]+_test\.dart$''',
   '''^test/native_git_mirror_test\.dart$''',
 
+  # ── De link-resolver-tests (#2533) ─────────────────────────────────────────
+  # Bevatten expres een URL met ingebedde credentials (`user:pass@host`) — het
+  # bewijs dat de resolver die vorm juist weigert. Zelfde categorie als het
+  # OciWacht-corpus hierboven: de waarde bestaat om geheim-vormig te zijn.
+  '''^test/meetings/meeting_link_resolver_test\.dart$''',
+
   # ── De age-testvectoren ────────────────────────────────────────────────────
   # Het gepubliceerde C2SP-corpus (CCTV) bevat per vector een `identity: AGE-SECRET-KEY-1…`
   # — de sleutel waarmee dat ene testbestand opent, publiek sinds het in CCTV staat, en

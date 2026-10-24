@@ -15,6 +15,7 @@
 
 import 'meeting_event.dart';
 import 'meeting_participant.dart';
+import 'meeting_provider_profile.dart';
 
 /// How well a provider can be joined from OciDeck for a given link.
 enum MeetingSupport {
@@ -50,13 +51,23 @@ enum MeetingFailureReason {
 /// Producing a match must make **no** network request (`NATIVE_CALLS.md` §7.1.6,
 /// "no probing").
 class MeetingLinkMatch {
-  const MeetingLinkMatch({required this.providerId, required this.invitation});
+  const MeetingLinkMatch({
+    required this.providerId,
+    required this.invitation,
+    this.viaProfile,
+  });
 
   final String providerId;
 
   /// The recognised invitation, already stripped of fragments/tracking params by
   /// the resolver before it reaches an adapter (`NATIVE_CALLS.md` §7.1.6).
   final Uri invitation;
+
+  /// The user-approved profile that recognised this link, when the match did
+  /// not come from a built-in trusted host. Carries the explicit trust
+  /// decisions (trustedInternal, cert pin) that preflight/join need; null for
+  /// built-in hosts, which use the ordinary (untrusted-internal) posture.
+  final MeetingProviderProfile? viaProfile;
 }
 
 /// Typed support and policy facts resolved after the user acts, never a boolean
@@ -69,6 +80,7 @@ class MeetingPreflight {
     this.identityLabel,
     this.egressOrigins = const <String>[],
     this.failureReason,
+    this.diagnosticsDetail,
   });
 
   final MeetingSupport support;
@@ -84,6 +96,11 @@ class MeetingPreflight {
 
   /// Set only when [support] is [MeetingSupport.unsupported] or a join is refused.
   final MeetingFailureReason? failureReason;
+
+  /// Short, non-secret detail for diagnostics/support (e.g. "config.js HTTP
+  /// 404", "websocket host refused"). Never carries credentials or full URLs
+  /// with paths — adapters keep it coarse.
+  final String? diagnosticsDetail;
 
   /// Whether a join may proceed at all from these facts.
   bool get canJoin =>

@@ -1598,6 +1598,60 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ruumi-nimi',
+  'Vergaderlink controleren': 'Kontrolli koosoleku linki',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Kleebi link koosolekule. OciDeck kontrollib esmalt kohalikult, millise teenusega on tegu; serveriga luuakse ühendus alles siis, kui küsite eelkontrolli.',
+  'Vergaderlink': 'Koosoleku link',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Koosolekuga liitumine tuleb järgmises versioonis; see kontroll ei võimalda veel liituda.',
+  'Preflight uitvoeren': 'Käivita eelkontroll',
+  'Controleer': 'Kontrolli',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Link kandis sisselogimisluba; see eemaldati ja seda ei salvestata.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Tuvastatud Jitsi-koosolekuna teie kinnitatud serveri kaudu',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Tuvastatud Jitsi-koosolekuna (meet.jit.si). Eelkontroll toob andmed serverist.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck ei tunne seda linki toetatud teenuse koosolekuna.',
+  'Dit is geen geldige link.': 'See ei ole kehtiv link.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Ainult http(s)-lingid võivad olla koosolek.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'See link sisaldab kasutajanime või parooli; seda ei kasutata.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Seda linki ei tuvastata automaatselt. Millist koosolekuteenust see server kasutab?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Jäta see server meelde kui Jitsi-paigaldis',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'See server on minu enda (sisemises) võrgus — privaatne aadress, märkige ainult kui haldat seda serverit',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'See server on minu enda (sisemises) võrgus',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Server kätte saadud — külalispääs töötab ja koosolekukomponent leiti.',
+  'U verschijnt als': 'Te paistate kui',
+  'Media is end-to-end versleuteld.': 'Meedia on otsast-otsani krüpteeritud.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Meedia ei ole otsast-otsani krüpteeritud (see läbib serverit).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Meedia otsast-otsani krüpteerimine on teadmata.',
+  'Verkeer gaat naar': 'Liiklus läheb',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'See server nõuab kontot; anonüümsed külalised ei saa liituda.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Külalispääs on selles serveris keelatud.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'See koosolek nõuab moderaatori kinnitust.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'See server ei paku koosolekuvormi, mida OciDeck toetab.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Server ei ole kättesaadav või keeldus ühendusest.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Liitu videokooseolekutega ja esitle OciDeckist oma liidesega: osalejad sinu slaidi kõrval, mitte teise rakenduse aknas. Bring-your-own-server (Jitsi); OciDeck ei hosti midagi ja hoiab kõneandmed tehisintellektist eemal. Ise liitumine tuleb järgmises versioonis; lingikontroll ja eelkontroll on juba olemas.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Kontrolli, kas Jitsi-koosoleku link on kättesaadav ja mida server lubab, enne kui liitud. Veel ei liituta.',
   'Systeemgeluid opnemen…': 'Salvesta süsteemiheli…',
   'Systeemgeluid opnemen': 'Salvesta süsteemiheli',
   'Tabgeluid opnemen…': 'Salvesta vahekaardi heli…',
@@ -5031,8 +5085,6 @@ const _dutchSourceAddEt = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Protsesside parendamise tööriistad (SIPOC, DMAIC, Kaizen ja A3). Vaikimisi välja lülitatud; seotud mallide ja slaidipaigutuste kasutamiseks lubage laiendus.',
   'Videovergaderingen': 'Videokoosolekud',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Liitu videokoosolekutega ja esitle OciDeckist oma liidesega: osalejad su slaidi kõrval, mitte teise rakenduse aknas. Bring-your-own-server (Jitsi); OciDeck ei majuta midagi ja hoiab vestlusandmed AI-st eemal. Ühendus koosolekuteenusega lisandub tulevases versioonis.',
   'Videovergadering': 'Videokoosolek',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Aktiivset koosolekut veel pole. Ühendus koosolekuteenusega lisatakse tulevases versioonis.',

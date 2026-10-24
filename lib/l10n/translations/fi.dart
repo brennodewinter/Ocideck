@@ -1605,6 +1605,60 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/huoneen-nimi',
+  'Vergaderlink controleren': 'Tarkista kokouslinkki',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Liitä linkki kokoukseen. OciDeck tarkistaa ensin paikallisesti, mikä palvelu on kyseessä; palvelimeen muodostetaan yhteys vain, kun pyydät esitarkistusta.',
+  'Vergaderlink': 'Kokouslinkki',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Kokoukseen osallistuminen tulee seuraavassa versiossa; tämä tarkistus ei vielä mahdollista osallistumista.',
+  'Preflight uitvoeren': 'Suorita esitarkistus',
+  'Controleer': 'Tarkista',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Linkki sisälsi kirjautumistunnisteen; se on poistettu eikä sitä tallenneta.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Tunnistettu Jitsi-kokoukseksi hyväksytyn palvelimesi kautta',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Tunnistettu Jitsi-kokoukseksi (meet.jit.si). Esitarkistus hakee tiedot palvelimelta.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck ei tunnista tätä linkkiä tuetun palvelun kokoukseksi.',
+  'Dit is geen geldige link.': 'Tämä ei ole kelvollinen linkki.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Vain http(s)-linkit voivat olla kokous.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Tämä linkki sisältää käyttäjätunnuksen tai salasanan; sitä ei käytetä.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Tätä linkkiä ei tunnisteta automaattisesti. Mitä kokouspalvelua tämä palvelin käyttää?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Muista tämä palvelin Jitsi-asennuksena',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Tämä palvelin on omassa (sisäisessä) verkossani — yksityisosoite, valitse vain jos hallinnoit tätä palvelinta',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Tämä palvelin on omassa (sisäisessä) verkossani',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Palvelin tavoitettu — vieraspääsy toimii ja kokouskomponentti löydettiin.',
+  'U verschijnt als': 'Näyt olevan',
+  'Media is end-to-end versleuteld.': 'Media on salattu päästä päähän.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Media ei ole päästä päähän -salattua (se kulkee palvelimen kautta).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Median päästä päähän -salaus on tuntematon.',
+  'Verkeer gaat naar': 'Liikenne menee',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Tämä palvelin vaatii tilin; anonyymit vieraat eivät voi osallistua.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Vieraspääsy on poistettu käytöstä tällä palvelimella.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Tämä kokous vaatii valvojan hyväksynnän.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Tämä palvelin ei tarjoa kokousmuotoa, jota OciDeck tukee.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Palvelin ei ole tavoitettavissa tai hylkäsi yhteyden.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Osallistu videokokouksiin ja esitä OciDeckistä omalla käyttöliittymällä: osallistujat diasi vieressä, ei toisen sovelluksen ikkunassa. Bring-your-own-server (Jitsi); OciDeck ei isännöi mitään ja pitää puhelutiedot tekoälyn ulkopuolella. Itse osallistuminen tulee seuraavassa versiossa; linkkitarkistus ja esitarkistus ovat jo olemassa.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Tarkista, onko Jitsi-kokouslinkki tavoitettavissa ja mitä palvelin sallii, ennen kuin osallistut. Ei vielä osallistuta.',
   'Systeemgeluid opnemen…': 'Tallenna järjestelmän ääni…',
   'Systeemgeluid opnemen': 'Tallenna järjestelmän ääni',
   'Tabgeluid opnemen…': 'Tallenna välilehden ääni…',
@@ -5041,8 +5095,6 @@ const _dutchSourceAddFi = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Työkalut prosessien parantamiseen (SIPOC, DMAIC, Kaizen ja A3). Oletusarvoisesti pois päältä; ota laajennus käyttöön käyttääksesi siihen liittyviä malleja ja diojen asetteluja.',
   'Videovergaderingen': 'Videokokoukset',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Osallistu videokokouksiin ja esitä OciDeckistä omalla käyttöliittymällä: osallistujat diasi vieressä, eivät toisen sovelluksen ikkunassa. Bring-your-own-server (Jitsi); OciDeck ei isännöi mitään ja pitää keskustelutiedot poissa tekoälystä. Yhteys kokouspalveluun tulee tulevassa versiossa.',
   'Videovergadering': 'Videokokous',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Ei aktiivista kokousta vielä. Yhteys kokouspalveluun lisätään tulevassa versiossa.',

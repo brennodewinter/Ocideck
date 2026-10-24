@@ -652,6 +652,60 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/keamer-namme',
+  'Vergaderlink controleren': 'Gearkommelink kontrolearje',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Plak in keppeling nei in gearkomste. OciDeck kontrolearret earst lokaal hokker tsjinst dit is; allinne as jo om in preflight freegje wurdt ferbining makke mei de server.',
+  'Vergaderlink': 'Gearkommelink',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Meidwaan oan in gearkomste komt yn in folgjende ferzje; dizze kontrole makket noch gjin dielname mooglik.',
+  'Preflight uitvoeren': 'Preflight útfiere',
+  'Controleer': 'Kontrolearje',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'De keppeling droech in ynlogtoken; dy is fuortsmiten en wurdt net bewarre.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Weromkend as Jitsi-gear komste fia jo goedkarde server',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Weromkend as Jitsi-gear komste (meet.jit.si). Preflight hellet de gegevens fan de server ôf.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck werkent dizze keppeling net as in gearkomste fan in stipe tsjinst.',
+  'Dit is geen geldige link.': 'Dit is gjin jildige keppeling.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Allinne http(s)-keppelings kinne in gearkomste wêze.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Dizze keppeling befettet in brûkersnamme of wachtwurd; dat wurdt net brûkt.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Dizze keppeling wurdt net automatysk weromkend. Hokker gearkomstsjinst brûkt dizze server?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Unthâld dizze server as Jitsi-ynstallaasje',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Dizze server stiet op myn eigen (yntrene) netwurk — privee-adres, allinnich oanfinkje as jo dizze server beheare',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Dizze server stiet op myn eigen (yntrene) netwurk',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Server berikt — gasttagong wurket en de gearkomstkomponint is fûn.',
+  'U verschijnt als': 'Jo ferskine as',
+  'Media is end-to-end versleuteld.': 'Media is ein-oan-ein fersifere.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Media is net ein-oan-ein fersifere (giet fia de server).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Ein-oan-ein-fersifering fan media is ûnbekend.',
+  'Verkeer gaat naar': 'Ferkear giet nei',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Dizze server freget in akkount; anonime gasten kinne net meidwaan.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Gasttagong is útskeakele op dizze server.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Dizze gearkomste freget tastimming fan in moderator.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Dizze server biedt gjin gearkomstfoarm dy\'t OciDeck stipet.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'De server is net berikber of wegere de ferbining.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Doch mei oan fideogearkomsten en presintearje fan OciDeck út mei in eigen ynterface: dielnimmers njonken jo dia, net yn it finster fan in oare app. Bring-your-own-server (Jitsi); OciDeck hostet neat en hâldt de peteergegevens bûten AI. Meidwaan sels folget yn in folgjende ferzje; de linkkontrôle en preflight binne der al.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Kontrolearje oft in Jitsi-gear kommelink berikber is en wat de server tastiet, eardat jo meidogge. Der wurdt noch net meidien.',
   'Systeemgeluid opnemen…': 'Systeemlûd opnimme…',
   'Systeemgeluid opnemen': 'Systeemlûd opnimme',
   'Tabgeluid opnemen…': 'Ljepblêdlûd opnimme…',
@@ -4097,8 +4151,6 @@ const _dutchSourceAddFy = {
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Helpmiddels foar prosesferbettering (SIPOC, DMAIC, Kaizen en A3). Standert út; skeakelje de útwreiding yn om de byhearrende sjabloanen en dia-yndielingen te brûken.',
   'Videovergaderingen': 'Fideofergaderingen',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Doch mei oan fideofergaderingen en presintearje fanút OciDeck mei in eigen ynterface: de dielnimmers njonken jo slide, net yn it finster fan in oare app. Bring-your-own-server (Jitsi); OciDeck hostet neat en hâldt de peteargegevens bûten AI. De ferbining mei in gearkomstetsjinst folget yn in folgjende ferzje.',
   'Videovergadering': 'Fideofergadering',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Noch gjin aktive gearkomste. It ferbinen mei in gearkomstetsjinst wurdt yn in folgjende ferzje tafoege.',

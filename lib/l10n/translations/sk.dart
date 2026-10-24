@@ -1611,6 +1611,60 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nazov-miestnosti',
+  'Vergaderlink controleren': 'Skontrolovať odkaz na schôdzku',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Vložte odkaz na schôdzku. OciDeck najprv lokálne skontroluje, o akú službu ide; k serveru sa pripojí až keď požiadate o predbežnú kontrolu.',
+  'Vergaderlink': 'Odkaz na schôdzku',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Pripojenie ku schôdzke príde v ďalšej verzii; táto kontrola zatiaľ neumožňuje pripojiť sa.',
+  'Preflight uitvoeren': 'Vykonať predbežnú kontrolu',
+  'Controleer': 'Skontrolovať',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Odkaz nesl prihlasovací token; bol odstránený a neukladá sa.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Rozpoznané ako Jitsi schôdzka cez váš schválený server',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Rozpoznané ako Jitsi schôdzka (meet.jit.si). Predbežná kontrola získa údaje zo servera.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck nerozpoznáva tento odkaz ako schôdzku podporovanej služby.',
+  'Dit is geen geldige link.': 'Toto nie je platný odkaz.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Iba odkazy http(s) môžu byť schôdzka.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Tento odkaz obsahuje používateľské meno alebo heslo; nepoužíva sa.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Tento odkaz sa nerozpozná automaticky. Akú službu schôdziek používa tento server?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Zapamätať tento server ako nasadenie Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Tento server je v mojej vlastnej (internej) sieti — súkromná adresa, zaškrtnite iba ak tento server spravujete',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Tento server je v mojej vlastnej (internej) sieti',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Server dosiahnutý — hosťovský prístup funguje a schôdzková komponenta bola nájdená.',
+  'U verschijnt als': 'Vystupujete ako',
+  'Media is end-to-end versleuteld.': 'Médiá sú end-to-end šifrované.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Médiá nie sú end-to-end šifrované (prechádzajú cez server).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'End-to-end šifrovanie médií je neznáme.',
+  'Verkeer gaat naar': 'Prevádzka ide na',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Tento server vyžaduje účet; anonymní hostia sa nemôžu pripojiť.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Hosťovský prístup je na tomto serveri vypnutý.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Táto schôdzka vyžaduje schválenie moderátorom.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Tento server neponúka žiadnu formu schôdzky, ktorú OciDeck podporuje.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Server je nedostupný alebo odmietol pripojenie.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Pripájajte sa na videoschôdzky a prezentujte z OciDeck s vlastným rozhraním: účastníci vedľa vášho slajdu, nie v okne inej aplikácie. Bring-your-own-server (Jitsi); OciDeck nič nehostuje a drží dáta hovorov mimo AI. Samotné pripojenie príde v ďalšej verzii; kontrola odkazu a preflight už existujú.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Skontrolujte, či je odkaz na Jitsi schôdzku dostupný a čo server povoľuje, skôr než sa pripojíte. Zatiaľ sa nepripájate.',
   'Systeemgeluid opnemen…': 'Nahrať systémový zvuk…',
   'Systeemgeluid opnemen': 'Nahrať systémový zvuk',
   'Tabgeluid opnemen…': 'Nahrať zvuk karty…',
@@ -5041,8 +5095,6 @@ const _dutchSourceAddSk = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Nástroje na zlepšovanie procesov (SIPOC, DMAIC, Kaizen a A3). Predvolene vypnuté; povoľte rozšírenie na používanie súvisiacich šablón a rozložení snímok.',
   'Videovergaderingen': 'Videostretnutia',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Pripojte sa k videostretnutiam a prezentujte z OciDecku s vlastným rozhraním: účastníci vedľa vašej snímky, nie v okne inej aplikácie. Bring-your-own-server (Jitsi); OciDeck nič nehostuje a údaje konverzácií drží mimo AI. Pripojenie k službe pre stretnutia pribudne v budúcej verzii.',
   'Videovergadering': 'Videostretnutie',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Zatiaľ žiadne aktívne stretnutie. Pripojenie k službe pre stretnutia sa pridá v budúcej verzii.',

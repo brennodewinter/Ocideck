@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 .PHONY: package-deps
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
@@ -69,6 +69,7 @@ help:
 	@echo "  make test-services   Caption/description/image service tests."
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
 	@echo "  make test-xmpp-integration  XMPP collab over real Prosody (needs Docker; not in check)."
+	@echo "  make test-jitsi-integration Jitsi preflight over the pinned testbed (needs Docker; not in check)."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make dast            Advisory ZAP baseline over a served build (DAST_URL=… for a real host)."
@@ -333,6 +334,14 @@ test-xmpp-integration:
 	@echo "Prerequisite: cd testbed/docker-jitsi-meet && docker compose up -d"
 	@echo "Failure means: the Prosody stack is not running, or a collab flow broke against a real server."
 	OCIDECK_XMPP_INTEGRATION=1 flutter test test/xmpp/xmpp_docker_jitsi_integration_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+
+test-jitsi-integration:
+	@echo "== OciDeck integration: Jitsi preflight against the pinned testbed =="
+	@echo "Command: OCIDECK_JITSI_INTEGRATION=1 flutter test test/meetings/jitsi_preflight_testbed_test.dart"
+	@echo "Covers: config.js fetch + anonymous XMPP + XEP-0030 MUC discovery against the real stack."
+	@echo "Prerequisite: cd testbed/jitsi-meet && ./run.sh up"
+	@echo "Failure means: the full Jitsi stack is not running, or preflight broke against a real deployment."
+	OCIDECK_JITSI_INTEGRATION=1 flutter test test/meetings/jitsi_preflight_testbed_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Advisory dependency freshness report; not part of normal check because it can
 # depend on network availability and does not imply the current code is broken.

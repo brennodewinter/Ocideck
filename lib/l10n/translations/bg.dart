@@ -1624,6 +1624,60 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ime-na-staya',
+  'Vergaderlink controleren': 'Проверка на връзката за среща',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Поставете връзка към среща. OciDeck първо локално проверява за коя услуга става въпрос; връзка със сървъра се установява едва когато поискате предварителна проверка.',
+  'Vergaderlink': 'Връзка за среща',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Присъединяването към среща идва в следваща версия; тази проверка все още не позволява участие.',
+  'Preflight uitvoeren': 'Изпълни предварителна проверка',
+  'Controleer': 'Провери',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Връзката носеше токен за вход; той е премахнат и не се съхранява.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Разпознато като Jitsi среща чрез вашия одобрен сървър',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Разпознато като Jitsi среща (meet.jit.si). Предварителната проверка извлича данните от сървъра.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck не разпознава тази връзка като среща на поддържана услуга.',
+  'Dit is geen geldige link.': 'Това не е валидна връзка.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Само http(s) връзки могат да бъдат среща.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Тази връзка съдържа потребителско име или парола; тя не се използва.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Тази връзка не се разпознава автоматично. Коя услуга за срещи използва този сървър?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Запомни този сървър като Jitsi инсталация',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Този сървър е в моята собствена (вътрешна) мрежа — частен адрес, отбележете само ако администрирате този сървър',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Този сървър е в моята собствена (вътрешна) мрежа',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Сървърът е достигнат — гост достъпът работи и компонентът за срещи е намерен.',
+  'U verschijnt als': 'Изглеждате като',
+  'Media is end-to-end versleuteld.': 'Медиите са криптирани от край до край.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Медиите не са криптирани от край до край (минават през сървъра).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Криптирането от край до край на медиите е неизвестно.',
+  'Verkeer gaat naar': 'Трафикът отива към',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Този сървър изисква акаунт; анонимни гости не могат да участват.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Гост достъпът е изключен на този сървър.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Тази среща изисква одобрение от модератор.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Този сървър не предлага форма на среща, която OciDeck поддържа.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Сървърът е недостъпен или отказа връзката.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Участвайте във видеосрещи и представяйте от OciDeck със собствен интерфейс: участниците до вашия слайд, а не в прозореца на друго приложение. Bring-your-own-server (Jitsi); OciDeck не хоства нищо и пази данните от разговори извън AI. Самото участие идва в следваща версия; проверката на връзка и предварителната проверка вече съществуват.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Проверете дали връзката за Jitsi среща е достъпна и какво позволява сървърът, преди да се присъедините. Все още не се участва.',
   'Systeemgeluid opnemen…': 'Запис на системен звук…',
   'Systeemgeluid opnemen': 'Запис на системен звук',
   'Tabgeluid opnemen…': 'Запис на звука от раздела…',
@@ -5082,8 +5136,6 @@ const _dutchSourceAddBg = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Инструменти за подобряване на процесите (SIPOC, DMAIC, Kaizen и A3). Изключени по подразбиране; включете разширението, за да използвате свързаните шаблони и оформления на слайдове.',
   'Videovergaderingen': 'Видеосрещи',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Присъединявайте се към видеосрещи и презентирайте от OciDeck със собствен интерфейс: участниците до вашия слайд, а не в прозореца на друго приложение. Bring-your-own-server (Jitsi); OciDeck не хоства нищо и държи данните от разговорите далеч от AI. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
   'Videovergadering': 'Видеосреща',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Все още няма активна среща. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',

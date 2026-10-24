@@ -811,6 +811,60 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/room-name',
+  'Vergaderlink controleren': 'Check meeting link',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Paste a link to a meeting. OciDeck first checks locally which service this is; only when you ask for a preflight is a connection made to the server.',
+  'Vergaderlink': 'Meeting link',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Joining a meeting comes in a next version; this check does not allow joining yet.',
+  'Preflight uitvoeren': 'Run preflight',
+  'Controleer': 'Check',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'The link carried a login token; it was removed and is not stored.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Recognised as a Jitsi meeting via your approved server',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Recognised as a Jitsi meeting (meet.jit.si). Preflight fetches the details from the server.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck does not recognise this link as a meeting of a supported service.',
+  'Dit is geen geldige link.': 'This is not a valid link.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Only http(s) links can be a meeting.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'This link contains a username or password; it is not used.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'This link is not recognised automatically. Which meeting service does this server use?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Remember this server as a Jitsi deployment',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'This server is on my own (internal) network — private address, only tick if you operate this server',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'This server is on my own (internal) network',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Server reached — guest access works and the meeting component was found.',
+  'U verschijnt als': 'You appear as',
+  'Media is end-to-end versleuteld.': 'Media is end-to-end encrypted.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Media is not end-to-end encrypted (it passes through the server).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'End-to-end encryption of media is unknown.',
+  'Verkeer gaat naar': 'Traffic goes to',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'This server requires an account; anonymous guests cannot join.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Guest access is disabled on this server.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'This meeting requires approval from a moderator.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'This server offers no meeting form that OciDeck supports.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'The server is unreachable or refused the connection.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Join video meetings and present from OciDeck with your own interface: participants next to your slide, not in another app\'s window. Bring-your-own-server (Jitsi); OciDeck hosts nothing and keeps call data out of AI. Joining itself comes in a next version; the link check and preflight are already here.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Check whether a Jitsi meeting link is reachable and what the server allows, before you join. Nothing is joined yet.',
   'Systeemgeluid opnemen…': 'Record system audio…',
   'Systeemgeluid opnemen': 'Record system audio',
   'Tabgeluid opnemen…': 'Record tab audio…',
@@ -4249,8 +4303,6 @@ const _dutchSourceAddEn = {
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Tools for process improvement (SIPOC, DMAIC, Kaizen and A3). Off by default; enable the extension to use the related templates and slide layouts.',
   'Videovergaderingen': 'Video meetings',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Join video meetings and present from OciDeck with a dedicated interface: participants beside your slide, not in another app\'s window. Bring-your-own-server (Jitsi); OciDeck hosts nothing and keeps the conversation data out of AI. Connecting to a meeting service will follow in a future version.',
   'Videovergadering': 'Video meeting',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'No active meeting yet. Connecting to a meeting service will be added in a future version.',

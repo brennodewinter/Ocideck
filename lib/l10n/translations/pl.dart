@@ -1617,6 +1617,60 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nazwa-pokoju',
+  'Vergaderlink controleren': 'Sprawdź link do spotkania',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Wklej link do spotkania. OciDeck najpierw lokalnie sprawdza, jaka to usługa; połączenie z serwerem następuje dopiero, gdy poprosisz o kontrolę wstępną.',
+  'Vergaderlink': 'Link do spotkania',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Dołączanie do spotkań pojawi się w kolejnej wersji; ta kontrola nie pozwala jeszcze dołączyć.',
+  'Preflight uitvoeren': 'Wykonaj kontrolę wstępną',
+  'Controleer': 'Sprawdź',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Link zawierał token logowania; został usunięty i nie jest przechowywany.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Rozpoznano jako spotkanie Jitsi przez zatwierdzony serwer',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Rozpoznano spotkanie Jitsi (meet.jit.si). Kontrola wstępna pobiera dane z serwera.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck nie rozpoznaje tego linku jako spotkania obsługiwanej usługi.',
+  'Dit is geen geldige link.': 'To nie jest prawidłowy link.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Tylko linki http(s) mogą być spotkaniem.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Ten link zawiera nazwę użytkownika lub hasło; nie jest używany.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Ten link nie jest rozpoznawany automatycznie. Jakiej usługi spotkań używa ten serwer?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Zapamiętaj ten serwer jako wdrożenie Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Ten serwer jest w mojej własnej (wewnętrznej) sieci — adres prywatny, zaznacz tylko jeśli administrujesz tym serwerem',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Ten serwer jest w mojej własnej (wewnętrznej) sieci',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Serwer osiągnięty — dostęp gościa działa, a komponent spotkań został znaleziony.',
+  'U verschijnt als': 'Występujesz jako',
+  'Media is end-to-end versleuteld.': 'Media są szyfrowane end-to-end.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Media nie są szyfrowane end-to-end (przechodzą przez serwer).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Szyfrowanie end-to-end mediów jest nieznane.',
+  'Verkeer gaat naar': 'Ruch idzie do',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Ten serwer wymaga konta; anonimowi goście nie mogą dołączyć.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Dostęp gościa jest wyłączony na tym serwerze.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'To spotkanie wymaga zgody moderatora.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Ten serwer nie oferuje żadnej formy spotkania obsługiwanej przez OciDeck.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Serwer jest nieosiągalny lub odrzucił połączenie.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Dołączaj do wideospotkań i prezentuj z OciDeck we własnym interfejsie: uczestnicy obok Twojego slajdu, a nie w oknie innej aplikacji. Bring-your-own-server (Jitsi); OciDeck niczego nie hostuje i trzyma dane rozmów poza AI. Samo dołączanie pojawi się w kolejnej wersji; kontrola linku i preflight już są.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Sprawdź, czy link do spotkania Jitsi jest osiągalny i co pozwala serwer, zanim dołączysz. Na razie nie dołączasz.',
   'Systeemgeluid opnemen…': 'Nagrywaj dźwięk systemowy…',
   'Systeemgeluid opnemen': 'Nagrywaj dźwięk systemowy',
   'Tabgeluid opnemen…': 'Nagrywaj dźwięk karty…',
@@ -5072,8 +5126,6 @@ const _dutchSourceAddPl = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Narzędzia do doskonalenia procesów (SIPOC, DMAIC, Kaizen i A3). Domyślnie wyłączone; włącz rozszerzenie, aby korzystać z powiązanych szablonów i układów slajdów.',
   'Videovergaderingen': 'Wideokonferencje',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Dołączaj do wideokonferencji i prezentuj z OciDeck we własnym interfejsie: uczestnicy obok slajdu, a nie w oknie innej aplikacji. Bring-your-own-server (Jitsi); OciDeck niczego nie hostuje i trzyma dane rozmów z dala od AI. Połączenie z usługą spotkań pojawi się w przyszłej wersji.',
   'Videovergadering': 'Wideokonferencja',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Brak aktywnego spotkania. Łączenie z usługą spotkań zostanie dodane w przyszłej wersji.',

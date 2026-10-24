@@ -49,6 +49,11 @@
 ^test/privacy_[a-z_]+_test\.dart$
 ^test/native_git_mirror_test\.dart$
 
+# Link-resolver-tests (#2533): bevatten expres een URL met ingebedde
+# credentials (user:pass@host) om te bewijzen dat de resolver die weigert —
+# geheim-vormig bij bestaansreden, zelfde categorie als het OciWacht-corpus.
+^test/meetings/meeting_link_resolver_test\.dart$
+
 # De gepinde Marp CLI-check installeert lokaal Node-pakketten (gitignored). Hun
 # testbestanden bevatten voorbeeld-URI's met placeholder credentials (een HTTP-
 # voorbeeld met user:pass@host en een MongoDB-voorbeeld met username:password)

@@ -1611,6 +1611,60 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/kambario-pavadinimas',
+  'Vergaderlink controleren': 'Tikrinti susitikimo nuorodą',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Įklijuokite nuorodą į susitikimą. OciDeck pirmiausia vietoje patikrina, kokia tai paslauga; su serveriu jungiamasi tik tada, kai paprašote išankstinio patikrinimo.',
+  'Vergaderlink': 'Susitikimo nuoroda',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Prisijungimas prie susitikimo bus kitoje versijoje; šis patikrinimas dar neleidžia dalyvauti.',
+  'Preflight uitvoeren': 'Vykdyti išankstinį patikrinimą',
+  'Controleer': 'Tikrinti',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Nuorodoje buvo prisijungimo raktas; jis pašalintas ir nesaugomas.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Atpažinta kaip Jitsi susitikimas per jūsų patvirtintą serverį',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Atpažinta kaip Jitsi susitikimas (meet.jit.si). Išankstinis patikrinimas gauna duomenis iš serverio.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck neatpažįsta šios nuorodos kaip palaikomos paslaugos susitikimo.',
+  'Dit is geen geldige link.': 'Tai nėra galiojanti nuoroda.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Tik http(s) nuorodos gali būti susitikimas.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Šioje nuorodoje yra vartotojo vardas arba slaptažodis; jis nenaudojamas.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Ši nuoroda neatpažįstama automatiškai. Kokią susitikimų paslaugą naudoja šis serveris?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Prisiminti šį serverį kaip Jitsi diegimą',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Šis serveris yra mano pačių (vidiniame) tinkle — privatus adresas, pažymėkite tik jei administruojate šį serverį',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Šis serveris yra mano pačių (vidiniame) tinkle',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Serveris pasiektas — svečio prieiga veikia ir susitikimų komponentas rastas.',
+  'U verschijnt als': 'Jūs rodomas(-a) kaip',
+  'Media is end-to-end versleuteld.': 'Medija yra šifruota nuo galo iki galo.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Medija nėra šifruota nuo galo iki galo (ji eina per serverį).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Medijos šifravimas nuo galo iki galo nežinomas.',
+  'Verkeer gaat naar': 'Srautas eina į',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Šis serveris reikalauja paskyros; anoniminiai svečiai negali dalyvauti.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Svečio prieiga šiame serveryje išjungta.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Šis susitikimas reikalauja moderatoriaus patvirtinimo.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Šis serveris nesiūlo susitikimo formos, kurią OciDeck palaikytų.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Serveris nepasiekiamas arba atmetė ryšį.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Dalyvaukite vaizdo susitikimuose ir pristatykite iš OciDeck su savo sąsaja: dalyviai šalia jūsų skaidrės, o ne kitos programos lange. Bring-your-own-server (Jitsi); OciDeck nieko netalpina ir laiko pokalbių duomenis toliau nuo AI. Pats prisijungimas bus kitoje versijoje; nuorodos patikra ir išankstinis patikrinimas jau yra.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Patikrinkite, ar Jitsi susitikimo nuoroda pasiekiama ir ką leidžia serveris, prieš prisijungdami. Kol kas neprisijungiama.',
   'Systeemgeluid opnemen…': 'Įrašyti sistemos garsą…',
   'Systeemgeluid opnemen': 'Įrašyti sistemos garsą',
   'Tabgeluid opnemen…': 'Įrašyti kortelės garsą…',
@@ -5046,8 +5100,6 @@ const _dutchSourceAddLt = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Procesų tobulinimo įrankiai (SIPOC, DMAIC, Kaizen ir A3). Pagal numatytuosius nustatymus išjungti; įjunkite plėtinį, kad galėtumėte naudoti susijusius šablonus ir skaidrių išdėstymus.',
   'Videovergaderingen': 'Vaizdo susitikimai',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Prisijunkite prie vaizdo susitikimų ir pristatykite iš OciDeck su sava sąsaja: dalyviai šalia jūsų skaidrės, o ne kitos programos lange. Bring-your-own-server (Jitsi); OciDeck nieko nepriglobia ir pokalbių duomenis laiko atokiau nuo DI. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
   'Videovergadering': 'Vaizdo susitikimas',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Aktyvaus susitikimo dar nėra. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',

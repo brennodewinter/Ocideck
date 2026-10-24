@@ -1603,6 +1603,60 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/telpas-nosaukums',
+  'Vergaderlink controleren': 'Pārbaudīt sanāksmes saiti',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Ielīmējiet saiti uz sanāksmi. OciDeck vispirms lokāli pārbauda, kāds pakalpojums tas ir; savienojums ar serveri tiek izveidots tikai tad, kad pieprasāt iepriekšējo pārbaudi.',
+  'Vergaderlink': 'Sanāksmes saite',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Pievienošanās sanāksmei būs nākamajā versijā; šī pārbaude vēl neļauj piedalīties.',
+  'Preflight uitvoeren': 'Veikt iepriekšējo pārbaudi',
+  'Controleer': 'Pārbaudīt',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Saitē bija ielūguma marķieris; tas ir noņemts un netiek saglabāts.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Atpazīts kā Jitsi sanāksme caur jūsu apstiprināto serveri',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Atpazīts kā Jitsi sanāksme (meet.jit.si). Iepriekšējā pārbaude iegūst datus no servera.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck neatpazīst šo saiti kā atbalstītā pakalpojuma sanāksmi.',
+  'Dit is geen geldige link.': 'Šī nav derīga saite.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Tikai http(s) saites var būt sanāksme.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Šī saite satur lietotājvārdu vai paroli; tas netiek izmantots.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Šī saite netiek atpazīta automātiski. Kādu sanāksmju pakalpojumu šis serveris izmanto?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Atcerēties šo serveri kā Jitsi izvietojumu',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Šis serveris ir manā paša (iekšējā) tīklā — privāta adrese, atzīmējiet tikai, ja pārvaldāt šo serveri',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Šis serveris ir manā paša (iekšējā) tīklā',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Serveris sasniegts — viesa piekļuve darbojas un sanāksmju komponents atrasts.',
+  'U verschijnt als': 'Jūs parādāties kā',
+  'Media is end-to-end versleuteld.': 'Mediji ir šifrēti no gala līdz galam.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Mediji nav šifrēti no gala līdz galam (tie iet caur serveri).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Mediju šifrēšana no gala līdz galam ir nezināma.',
+  'Verkeer gaat naar': 'Satiksme iet uz',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Šis serveris pieprasa kontu; anonīmie viesi nevar pievienoties.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Viesa piekļuve šajā serverī ir atspējota.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Šai sanāksmei nepieciešama moderātora apstiprināšana.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Šis serveris nepiedāvā sanāksmju formu, ko OciDeck atbalsta.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Serveris nav sasniedzams vai atteica savienojumu.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Piedalieties videokonferencēs un prezentējiet no OciDeck ar savu saskarni: dalībnieki blakus slaidam, nevis citas lietotnes logā. Bring-your-own-server (Jitsi); OciDeck neko nehosto un tur sarunu datus ārpus AI. Pati pievienošanās būs nākamajā versijā; saites pārbaude un iepriekšējā pārbaude jau ir.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Pārbaudiet, vai Jitsi sanāksmes saite ir sasniedzama un ko serveris atļauj, pirms pievienojaties. Pievienošanās vēl nenotiek.',
   'Systeemgeluid opnemen…': 'Ierakstīt sistēmas skaņu…',
   'Systeemgeluid opnemen': 'Ierakstīt sistēmas skaņu',
   'Tabgeluid opnemen…': 'Ierakstīt cilnes skaņu…',
@@ -5038,8 +5092,6 @@ const _dutchSourceAddLv = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Rīki procesu uzlabošanai (SIPOC, DMAIC, Kaizen un A3). Pēc noklusējuma izslēgti; iespējojiet paplašinājumu, lai izmantotu saistītās veidnes un slaidu izkārtojumus.',
   'Videovergaderingen': 'Videosanāksmes',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Pievienojieties videosanāksmēm un prezentējiet no OciDeck ar savu saskarni: dalībnieki blakus jūsu slaidam, nevis citas lietotnes logā. Bring-your-own-server (Jitsi); OciDeck neko nemitina un sarunu datus tur prom no MI. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
   'Videovergadering': 'Videosanāksme',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Vēl nav aktīvas sanāksmes. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',

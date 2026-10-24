@@ -1605,6 +1605,60 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ime-sobe',
+  'Vergaderlink controleren': 'Preveri povezavo sestanka',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Prilepite povezavo do sestanka. OciDeck najprej lokalno preveri, za katero storitev gre; povezava s strežnikom se vzpostavi šele, ko zahtevate predhodno preverjanje.',
+  'Vergaderlink': 'Povezava sestanka',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Pridružitev sestanku prihaja v naslednji različici; ta preverba še ne omogoča udeležbe.',
+  'Preflight uitvoeren': 'Izvedi predhodno preverjanje',
+  'Controleer': 'Preveri',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Povezava je nosila prijavni žeton; odstranjen je in se ne shranjuje.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Prepoznano kot Jitsi sestanek prek vašega odobrenega strežnika',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Prepoznano kot Jitsi sestanek (meet.jit.si). Predhodno preverjanje pridobi podatke s strežnika.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck ne prepozna te povezave kot sestanka podprte storitve.',
+  'Dit is geen geldige link.': 'To ni veljavna povezava.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Le povezave http(s) so lahko sestanek.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Ta povezava vsebuje uporabniško ime ali geslo; ni se uporabi.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Ta povezava ni samodejno prepoznana. Katero storitev sestankov uporablja ta strežnik?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Zapomni si ta strežnik kot namestitev Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Ta strežnik je v mojem lastnem (internem) omrežju — zasebni naslov, označite le če ta strežnik upravljate',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Ta strežnik je v mojem lastnem (internem) omrežju',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Strežnik dosežen — gostujoči dostop deluje in sestavni del sestankov je bil najden.',
+  'U verschijnt als': 'Prikazani ste kot',
+  'Media is end-to-end versleuteld.': 'Mediji so šifrirani od konca do konca.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Mediji niso šifrirani od konca do konca (grejo prek strežnika).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Šifriranje medijev od konca do konca je neznano.',
+  'Verkeer gaat naar': 'Promet gre na',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Ta strežnik zahteva račun; anonimni gostje se ne morejo pridružiti.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Gostujoči dostop je na tem strežniku onemogočen.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Ta sestanek zahteva odobritev moderatorja.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Ta strežnik ne ponuja oblike sestanka, ki jo OciDeck podpira.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Strežnik ni dosegljiv ali je zavrnil povezavo.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Pridružujte se videosestankom in predstavljajte iz OciDeck z lastnim vmesnikom: udeleženci ob vašem diapozitivu, ne v oknu druge aplikacije. Bring-your-own-server (Jitsi); OciDeck ne gosti ničesar in drži podatke pogovorov izven UI. Sama pridružitev prihaja v naslednji različici; preverjanje povezave in predhodno preverjanje že obstajata.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Preverite, ali je povezava Jitsi sestanka dosegljiva in kaj strežnik dovoli, preden se pridružite. Pridružitev še ni mogoča.',
   'Systeemgeluid opnemen…': 'Snemaj sistemski zvok…',
   'Systeemgeluid opnemen': 'Snemaj sistemski zvok',
   'Tabgeluid opnemen…': 'Snemaj zvok zavihka…',
@@ -5038,8 +5092,6 @@ const _dutchSourceAddSl = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Orodja za izboljševanje procesov (SIPOC, DMAIC, Kaizen in A3). Privzeto izklopljena; omogočite razširitev za uporabo povezanih predlog in postavitev diapozitivov.',
   'Videovergaderingen': 'Videosestanki',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Pridružite se videosestankom in predstavljajte iz OciDecka z lastnim vmesnikom: udeleženci ob vašem diapozitivu, ne v oknu druge aplikacije. Bring-your-own-server (Jitsi); OciDeck ničesar ne gosti in podatke pogovorov ohranja stran od UI. Povezava s storitvijo za sestanke bo dodana v prihodnji različici.',
   'Videovergadering': 'Videosestanek',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Še ni aktivnega sestanka. Povezava s storitvijo za sestanke bo dodana v prihodnji različici.',

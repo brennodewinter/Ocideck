@@ -105,6 +105,10 @@ const Set<String> _quoteScannerHomes = {
   // (RISK_FORMAT.md §2), not comma-separated fields — parseCsvLine splits on
   // commas and would mangle values containing spaces or commas.
   'lib/services/ocideck_markers.dart',
+  // Not a CSV splitter: strips // and /* */ comments from a deployment's
+  // config.js while respecting '…', "…" and `…` literals with backslash
+  // escapes — a text-level scan no CSV or JSON parser can do.
+  'lib/meetings/providers/jitsi/jitsi_config.dart',
 };
 
 /// UI imports inside `lib/services/`. RATCHET: may shrink, never grow.

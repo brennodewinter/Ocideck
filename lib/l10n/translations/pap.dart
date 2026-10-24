@@ -651,6 +651,60 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nmber-di-kamber',
+  'Vergaderlink controleren': 'Kontrolá e link di reunion',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Pega un link di reunion. OciDeck promé ta kontrolá lokalmente kua servicio ta esaki; solamente ora bo pidi un preflight ta hasi konekshon ku e servidor.',
+  'Vergaderlink': 'Link di reunion',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Partisipá na un reunion ta bin den un versión próksimo; e kontrol aki ainda no ta permití partisipá.',
+  'Preflight uitvoeren': 'Hasi preflight',
+  'Controleer': 'Kontrolá',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'E link tabata kargá un token di login; e a wordu kita i no ta wòrdu warda.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Rekonosí komo reunion Jitsi via bo servidor aprobá',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Rekonosí komo reunion Jitsi (meet.jit.si). Preflight ta haña e informashon di e servidor.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck no ta rekonosé e link aki komo reunion di un servicio soportá.',
+  'Dit is geen geldige link.': 'Esaki no ta un link bálido.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Solamente linknan http(s) por ta un reunion.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'E link aki ta kontené un nòmber di usador òf kòntrasenya; esey no ta wòrdu usá.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'E link aki no ta wòrdu rekonosé automátikamente. Kua servicio di reunion e servidor aki ta usá?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Kòrda e servidor aki komo instalashon Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'E servidor aki ta den mi propio ret (interno) — adrès privá, marka solamente si bo ta operá e servidor aki',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'E servidor aki ta den mi propio ret (interno)',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Servidor alkansá — akeso di guest ta funshoná i e komponent di reunion a wòrdu hañá.',
+  'U verschijnt als': 'Bo ta parse komo',
+  'Media is end-to-end versleuteld.': 'Media ta enkriptá di punta pa punta.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Media no ta enkriptá di punta pa punta (e ta pasa via e servidor).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Enkripshon di media di punta pa punta ta deskonosí.',
+  'Verkeer gaat naar': 'Trafiko ta bai na',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'E servidor aki ta pidi un kuenta; guestnan anónimo no por partisipá.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Akeso di guest ta desaktivá riba e servidor aki.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'E reunion aki ta pidi aprobashon di un moderadó.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'E servidor aki no ta ofresé un forma di reunion ku OciDeck ta soportá.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'E servidor no ta alkansabel òf a nenga e konekshon.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Partisipá na reunionnan di video i presentá for di OciDeck ku bo propio interfas: partisipantenan banda di bo slide, no den bentana di otro app. Bring-your-own-server (Jitsi); OciDeck no ta hostia nada i ta tene e datonan di yamada for di AI. Partisipá mes ta bin den un versión próksimo; e kontrol di link i preflight ya ta eksistí.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Kontrolá si un link di reunion Jitsi ta alkansabel i loke e servidor ta permití, promé ku bo partisipá. Ainda no ta partisipá.',
   'Systeemgeluid opnemen…': 'Graba sonidonan di sistema…',
   'Systeemgeluid opnemen': 'Graba sonidonan di sistema',
   'Tabgeluid opnemen…': 'Graba sonidonan di e tab…',
@@ -4097,8 +4151,6 @@ const _dutchSourceAddPap = {
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Hulpmidinan pa mehoramentu di proseso (SIPOC, DMAIC, Kaizen i A3). Standardmente apagá; aktivá e ekstensión pa usa e plantianan i diseñonan di diapositiva relashoná.',
   'Videovergaderingen': 'Reunionnan di video',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Partisipá na reunionnan di video i presentá for di OciDeck ku un interfase propio: e partisipantenan banda di bo slide, no den e bentana di un otro app. Bring-your-own-server (Jitsi); OciDeck no ta hospedá nada i ta tene e datonan di konbersashon pafó di IA. E koneksion ku un servisio di reunion lo sigui den un versión futuro.',
   'Videovergadering': 'Reunion di video',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Ainda no tin un reunion aktivo. E koneksion ku un servisio di reunion lo wòrdu añadí den un versión futuro.',

@@ -6,6 +6,7 @@ import '../../../state/meeting_session_provider.dart';
 import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
 import 'card_titles.dart';
+import '../meeting_preflight_dialog.dart';
 import '../xmpp_test_connection_dialog.dart';
 import 'media_preflight_tile.dart';
 import 'module_card.dart';
@@ -39,13 +40,32 @@ class VideoCallsModuleCard extends ConsumerWidget {
             ),
             subtitle: Text(
               l10n.d(
-                'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.',
+                'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
             secondary: const Icon(Icons.video_camera_front_outlined),
           ),
           if (state.enabled) ...[
+            Divider(height: 1, color: AppTheme.iceBlue),
+            ListTile(
+              leading: const Icon(Icons.link_outlined),
+              title: Text(
+                l10n.d('Vergaderlink controleren'),
+                style: const TextStyle(fontSize: 13),
+              ),
+              subtitle: Text(
+                l10n.d(
+                  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.',
+                ),
+                style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+              ),
+              trailing: const Icon(Icons.chevron_right, size: 18),
+              onTap: () => showDialog<void>(
+                context: context,
+                builder: (_) => const MeetingPreflightDialog(),
+              ),
+            ),
             Divider(height: 1, color: AppTheme.iceBlue),
             ListTile(
               leading: const Icon(Icons.lan_outlined),

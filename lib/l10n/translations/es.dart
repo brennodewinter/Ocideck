@@ -649,6 +649,61 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nombre-de-sala',
+  'Vergaderlink controleren': 'Comprobar enlace de reunión',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Pegue un enlace a una reunión. OciDeck comprueba primero en local qué servicio es; solo cuando pida una comprobación previa se conectará al servidor.',
+  'Vergaderlink': 'Enlace de reunión',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Unirse a una reunión llegará en una próxima versión; esta comprobación aún no permite participar.',
+  'Preflight uitvoeren': 'Ejecutar comprobación previa',
+  'Controleer': 'Comprobar',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'El enlace llevaba un token de inicio de sesión; se ha eliminado y no se guarda.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Reconocido como reunión Jitsi a través de su servidor aprobado',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Reconocido como reunión Jitsi (meet.jit.si). La comprobación previa obtiene los datos del servidor.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck no reconoce este enlace como una reunión de un servicio compatible.',
+  'Dit is geen geldige link.': 'Este no es un enlace válido.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Solo los enlaces http(s) pueden ser una reunión.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Este enlace contiene un usuario o contraseña; no se utiliza.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Este enlace no se reconoce automáticamente. ¿Qué servicio de reuniones usa este servidor?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Recordar este servidor como despliegue Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Este servidor está en mi propia red (interna) — dirección privada, marque solo si usted administra este servidor',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Este servidor está en mi propia red (interna)',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Servidor alcanzado — el acceso de invitado funciona y se encontró el componente de reunión.',
+  'U verschijnt als': 'Usted aparece como',
+  'Media is end-to-end versleuteld.':
+      'Los medios están cifrados de extremo a extremo.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Los medios no están cifrados de extremo a extremo (pasan por el servidor).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'El cifrado de extremo a extremo de los medios es desconocido.',
+  'Verkeer gaat naar': 'El tráfico va a',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Este servidor requiere una cuenta; los invitados anónimos no pueden participar.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'El acceso de invitado está desactivado en este servidor.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Esta reunión requiere la aprobación de un moderador.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Este servidor no ofrece ninguna forma de reunión que OciDeck admita.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'El servidor no está accesible o rechazó la conexión.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Participe en videorreuniones y presente desde OciDeck con su propia interfaz: participantes junto a su diapositiva, no en la ventana de otra app. Bring-your-own-server (Jitsi); OciDeck no aloja nada y mantiene los datos de llamadas fuera de la IA. La participación en sí llegará en una próxima versión; la comprobación de enlace y la verificación previa ya existen.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Compruebe si un enlace de reunión Jitsi es accesible y qué permite el servidor, antes de participar. Aún no se participa.',
   'Systeemgeluid opnemen…': 'Grabar el audio del sistema…',
   'Systeemgeluid opnemen': 'Grabar el audio del sistema',
   'Tabgeluid opnemen…': 'Grabar el audio de la pestaña…',
@@ -4126,8 +4181,6 @@ const _dutchSourceAddEs = {
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Herramientas para la mejora de procesos (SIPOC, DMAIC, Kaizen y A3). Desactivadas de forma predeterminada; active la extensión para usar las plantillas y los diseños de diapositivas relacionados.',
   'Videovergaderingen': 'Videoconferencias',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Únete a videoconferencias y presenta desde OciDeck con una interfaz propia: los participantes junto a tu diapositiva, no en la ventana de otra aplicación. Bring-your-own-server (Jitsi); OciDeck no aloja nada y mantiene los datos de la conversación fuera de la IA. La conexión con un servicio de reuniones llegará en una versión futura.',
   'Videovergadering': 'Videoconferencia',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Aún no hay ninguna reunión activa. La conexión con un servicio de reuniones se añadirá en una versión futura.',

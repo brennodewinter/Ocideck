@@ -1608,6 +1608,60 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/zimmer-name',
+  'Vergaderlink controleren': 'Meeting-Link prüefe',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Füeg e Link zu ere Besprächig ii. OciDeck prüeft zerscht lokaal, um welle Dienscht es goot; e Verbindig zum Server wird erst gmacht, wenn Si en Preflight aaforderet.',
+  'Vergaderlink': 'Meeting-Link',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Mitmache bi ere Besprächig chunnt in ere nächschte Version; die Prüefig ermöglicht nonig d\'Teilnahm.',
+  'Preflight uitvoeren': 'Preflight uusfüere',
+  'Controleer': 'Prüefe',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'De Link het e Aamäld-Token trait; es isch entfernt worde und wird nit gspeicheret.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Als Jitsi-Meeting über Ihri freigeehni Server erkannt',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Als Jitsi-Meeting erkannt (meet.jit.si). Preflight hollt d\'Date vom Server.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck erkennt dä Link nit als Besprächig vomne unterstützte Dienscht.',
+  'Dit is geen geldige link.': 'Das isch kei gültige Link.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Nur http(s)-Links chöi e Besprächig sii.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Dä Link enthält e Benutzername oder es Passwort; das wird nit brucht.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Dä Link wird nit automatisch erkannt. Welle Meeting-Dienscht brucht dä Server?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Dä Server als Jitsi-Installation merke',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Dä Server staht in mim eigene (interne) Netz — privati Adräss, nur aachrüüzle wenn Si dä Server betrüübet',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Dä Server staht in mim eigene (interne) Netz',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Server erreicht — Gascht-Zuegang funktioniert und d\'Meeting-Komponent isch gfunde worde.',
+  'U verschijnt als': 'Si erschinet als',
+  'Media is end-to-end versleuteld.': 'Medie sind End-zu-End-verschlüsslet.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Medie sind nit End-zu-End-verschlüsslet (si löifed über de Server).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'D\'End-zu-End-Verschlüsselig vo de Medie isch unbekannt.',
+  'Verkeer gaat naar': 'Verkehr gaat a',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Dä Server bruucht es Konto; anonymi Gäst chöi nit mitmache.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Gascht-Zuegang isch uf däm Server deaktiviert.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Die Besprächig bruucht d\'Zuestimmig vomne Moderator.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Dä Server bietet kei Besprächigsform, wo OciDeck unterstützt.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'De Server isch nit erreichbar oder het d\'Verbindig abglehnt.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Nämet Teil ah Video-Besprächige und präsentieret us OciDeck mit ere eigene Oberflächi: d\'Teilnehmende näben Eurer Folia, nit im Fänschter vun ere andere App. Bring-your-own-server (Jitsi); OciDeck hostet nüüt und haldt d\'Gsprööchsdaten us de KI use. S\'Mitmache sälber chunnt in ere nächschte Version; d\'Link-Prüefig und Preflight git\'s scho.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Prüefed, öb e Jitsi-Meeting-Link erreichbar isch und was de Server erloubt, bevor Si mitmachet. Es wird nonig mitgmacht.',
   'Systeemgeluid opnemen…': 'Systemsound uufnäh…',
   'Systeemgeluid opnemen': 'Systemsound uufnäh',
   'Tabgeluid opnemen…': 'Tab-Sound uufnäh…',
@@ -5066,8 +5120,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Hilfsmittel zur Prozessverbesserig (SIPOC, DMAIC, Kaizen und A3). Standardmässig us; aktivier d’Erweiterig, um d’zugehörige Vorlage und Folielayouts z’bruuche.',
   'Videovergaderingen': 'Videokonferänze',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Mach bi Videokonferänze mit und präsentier us OciDeck mit ere eigene Oberflächi: d Teilnehmer näbet dim Slide, nöd im Fäischter vo nere andere App. Bring-your-own-server (Jitsi); OciDeck hostet nüüt und haltet d Gsprächsdate vo de KI ewäg. D Aabindig an e Sitzigsdienscht chunt inere spöötere Version.',
   'Videovergadering': 'Videokonferänz',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Na kei aktivi Sitzig. D Aabindig an e Sitzigsdienscht chunt inere spöötere Version dezue.',

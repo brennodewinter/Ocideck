@@ -1623,6 +1623,61 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/isem-tal-kamra',
+  'Vergaderlink controleren': 'Iċċekkja l-link tal-laqgħa',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Waħħal link għal laqgħa. OciDeck jiċċekkja l-ewwel lokalment liema servizz hu dan; konnessjoni mas-server issir biss meta titlob kontroll minn qabel.',
+  'Vergaderlink': 'Link tal-laqgħa',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Parteċipazzjoni f\'laqgħa ġejja f\'versjoni oħra; dan il-kontroll għadu ma jippermetti l-parteċipazzjoni.',
+  'Preflight uitvoeren': 'Mexxi l-kontroll minn qabel',
+  'Controleer': 'Iċċekkja',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Il-link kellu token għall-login; tneħħa u ma jiġix maħżun.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Rrikonoxxut bħala laqgħa Jitsi permezz tas-server approvat tiegħek',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Rrikonoxxut bħala laqgħa Jitsi (meet.jit.si). Il-kontroll minn qabel jiġbed id-dejta mis-server.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck ma jirrikonoxxix dan il-link bħala laqgħa ta\' servizz appoġġjat.',
+  'Dit is geen geldige link.': 'Dan mhux link validu.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Biss links http(s) jistgħu jkunu laqgħa.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Dan il-link fih isem tal-utent jew password; ma jintużax.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Dan il-link ma jiġix rikonoxxut awtomatikament. Liema servizz ta\' laqgħat juża dan is-server?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Fakkar dan is-server bħala deployment Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Dan is-server huwa fin-netwerk (intern) tiegħi — indirizz privat, immarka biss jekk tamministra dan is-server',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Dan is-server huwa fin-netwerk (intern) tiegħi',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Server milħuq — l-aċċess għall-mistednin jaħdem u l-komponent tal-laqgħat nstema.',
+  'U verschijnt als': 'Jidhru bħala',
+  'Media is end-to-end versleuteld.':
+      'Il-midja hija kkriptata minn tarf għal tarf.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Il-midja mhijiex kkriptata minn tarf għal tarf (tgħaddi mis-server).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'L-enkrizzjoni mill-aħħar għall-aħħar tal-midja hija mhux magħrufa.',
+  'Verkeer gaat naar': 'It-traffiku imur lejn',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Dan is-server jeħtieġ kont; mistednin anonimi ma jistgħux jipparteċipaw.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'L-aċċess għall-mistednin huwa diżattivat fuq dan is-server.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Din il-laqgħa teħtieġ approvazzjoni minn moderatur.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Dan is-server ma joffri l-ebda forma ta\' laqgħa li OciDeck jappoġġja.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Is-server ma jistax jintlaħaq jew irrifjuta l-konnessjoni.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Ħu sehem f\'laqgħat bil-video u ppreżenta minn OciDeck b\'interface tiegħek stess: il-parteċipanti ħdejn is-slide tiegħek, mhux fit-tieqa ta\' app oħra. Bring-your-own-server (Jitsi); OciDeck ma jospitax xejn u iżomm id-dejta tal-telefonati barra mill-AI. Il-parteċipazzjoni nnifisha ġejja f\'versjoni oħra; il-kontroll tal-link u l-preflight diġà jeżistu.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Iċċekkja jekk link ta\' laqgħa Jitsi huwiex aċċessibbli u x\'jippermetti s-server, qabel ma tissieħeb. Għadu ma jiġi sseħħeb xejn.',
   'Systeemgeluid opnemen…': 'Irrekordja l-ħoss tas-sistema…',
   'Systeemgeluid opnemen': 'Irrekordja l-ħoss tas-sistema',
   'Tabgeluid opnemen…': 'Irrekordja l-ħoss tat-tab…',
@@ -5101,8 +5156,6 @@ const _dutchSourceAddMt = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Għodod għat-titjib tal-proċessi (SIPOC, DMAIC, Kaizen u A3). Mitfija b’mod awtomatiku; attiva l-estensjoni biex tuża l-mudelli u t-taqsimiet ta’ slides relatati.',
   'Videovergaderingen': 'Laqgħat bil-vidjo',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Ingħaqad ma\' laqgħat bil-vidjo u ppreżenta minn OciDeck b\'interfaċċja tiegħu stess: il-parteċipanti maġenb l-islajd tiegħek, mhux fit-tieqa ta\' app oħra. Bring-your-own-server (Jitsi); OciDeck ma jospita xejn u jżomm id-data tal-konverżazzjoni \'l bogħod mill-IA. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
   'Videovergadering': 'Laqgħa bil-vidjo',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Għad m\'hemm l-ebda laqgħa attiva. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',

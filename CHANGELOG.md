@@ -103,6 +103,27 @@ All notable changes to OciDeck are documented in this file.
   verzamelt. OciDeck zelf kan nog niet aan zo'n call deelnemen — dit is de
   meetomgeving waartegen dat straks moet worden bewezen.
 
+- **Vergaderlinks herkennen en de server vooraf controleren (#2533).** Bij
+  de module Videovergaderingen staat nu **Vergaderlink controleren**.
+  Plak een Jitsi-link en OciDeck herkent die lokaal — zonder de server ook
+  maar één pakket te sturen. Fragmenten zoals `#config.startWithAudioMuted=false`
+  en gebruikersnaam:wachtwoord in de link worden zichtbaar gestript: ze
+  zetten nooit stiekem de microfoon aan en worden niet bewaard. Herkent
+  OciDeck de server niet, dan vraagt het welke leverancier die draait —
+  een link die eruitziet als Jitsi kiest nooit zelf stilletjes een
+  aanbieder. Alleen als je op **Preflight uitvoeren** drukt, gaat er
+  netwerkverkeer naar de getoonde adressen: de app leest de
+  `config.js`-verklaring van de deployment, opent een anonieme
+  XMPP-sessie en vraagt via servicediscovery welke conferentiecomponent
+  de server écht aanbiedt. Voor een intern adres vink je eerst "dit is
+  een vertrouwde interne server". Je kunt zo'n self-hosted deployment
+  opslaan als profiel — gekoppeld aan precies dat ene adres, dus een
+  subdomein geldt niet als meegegooid. De controle toont wat de app
+  weet — bereikbaarheid, gasttoegang, media-versleuteling, je anonieme
+  schermnaam — en zegt erbij dat deelnemen zelf pas in een latere
+  versie komt. Bewezen tegen de gepinde testomgeving: de anonieme
+  preflight vond daar de echte conferentiecomponent `muc.meet.jitsi`.
+
 ### Fixed
 
 - **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende

@@ -1605,6 +1605,60 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nama-ruangan',
+  'Vergaderlink controleren': 'Periksa tautan rapat',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Tempel tautan ke sebuah rapat. OciDeck lebih dulu memeriksa secara lokal layanan apa ini; koneksi ke server hanya dibuat saat Anda meminta prapemeriksaan.',
+  'Vergaderlink': 'Tautan rapat',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Bergabung ke rapat akan hadir di versi berikutnya; pemeriksaan ini belum memungkinkan bergabung.',
+  'Preflight uitvoeren': 'Jalankan prapemeriksaan',
+  'Controleer': 'Periksa',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Tautan membawa token masuk; sudah dihapus dan tidak disimpan.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Dikenali sebagai rapat Jitsi melalui server yang Anda setujui',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Dikenali sebagai rapat Jitsi (meet.jit.si). Prapemeriksaan mengambil data dari server.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck tidak mengenali tautan ini sebagai rapat dari layanan yang didukung.',
+  'Dit is geen geldige link.': 'Ini bukan tautan yang valid.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Hanya tautan http(s) yang bisa berupa rapat.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Tautan ini berisi nama pengguna atau kata sandi; tidak digunakan.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Tautan ini tidak dikenali secara otomatis. Layanan rapat apa yang digunakan server ini?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Ingat server ini sebagai deployment Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Server ini ada di jaringan (internal) saya sendiri — alamat privat, centang hanya jika Anda mengelola server ini',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Server ini ada di jaringan (internal) saya sendiri',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Server tercapai — akses tamu berfungsi dan komponen rapat ditemukan.',
+  'U verschijnt als': 'Anda tampil sebagai',
+  'Media is end-to-end versleuteld.': 'Media dienkripsi ujung-ke-ujung.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Media tidak dienkripsi ujung-ke-ujung (melewati server).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Enkripsi ujung-ke-ujung media tidak diketahui.',
+  'Verkeer gaat naar': 'Lalu lintas menuju',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Server ini memerlukan akun; tamu anonim tidak dapat bergabung.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Akses tamu dinonaktifkan di server ini.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Rapat ini memerlukan persetujuan moderator.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Server ini tidak menawarkan bentuk rapat yang didukung OciDeck.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Server tidak dapat dijangkau atau menolak koneksi.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Ikuti rapat video dan presentasikan dari OciDeck dengan antarmuka sendiri: peserta di samping slide Anda, bukan di jendela aplikasi lain. Bring-your-own-server (Jitsi); OciDeck tidak menghosting apa pun dan menjaga data panggilan di luar AI. Bergabung sendiri akan hadir di versi berikutnya; pemeriksaan tautan dan prapemeriksaan sudah ada.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Periksa apakah tautan rapat Jitsi dapat dijangkau dan apa yang diizinkan server, sebelum Anda bergabung. Belum ada yang bergabung.',
   'Systeemgeluid opnemen…': 'Rekam audio sistem…',
   'Systeemgeluid opnemen': 'Rekam audio sistem',
   'Tabgeluid opnemen…': 'Rekam audio tab…',
@@ -5040,8 +5094,6 @@ const _dutchSourceAddId = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Perkakas untuk peningkatan proses (SIPOC, DMAIC, Kaizen, dan A3). Nonaktif secara default; aktifkan ekstensi untuk menggunakan templat dan tata letak slide terkait.',
   'Videovergaderingen': 'Rapat video',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Ikuti rapat video dan presentasikan dari OciDeck dengan antarmuka tersendiri: peserta di samping slide Anda, bukan di jendela aplikasi lain. Bring-your-own-server (Jitsi); OciDeck tidak meng-host apa pun dan menjaga data percakapan tetap jauh dari AI. Koneksi ke layanan rapat akan menyusul pada versi mendatang.',
   'Videovergadering': 'Rapat video',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Belum ada rapat aktif. Koneksi ke layanan rapat akan ditambahkan pada versi mendatang.',

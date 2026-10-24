@@ -1,6 +1,6 @@
 # OciDeck — Native Calls: one interface, Jitsi + Matrix backends (Design)
 
-> **Status:** design proposal — partially built (F1–F3.4a landed; F3.4b next) · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — partially built (F1–F3.4a + Jitsi recognition/preflight landed; F3.4b media join next) · **Status last reviewed:** 2026-10-24 · **Published by:** Stichting LibreKAT
 
 > **A design proposal — not yet implemented.**
 > This document describes a *future* capability. It is kept separate from the
@@ -27,10 +27,10 @@
 > **backend exclusivity** (§1). The maintainer also gave **GO to build** (2026-08-02),
 > with the sub-choices in §10: `lib/xmpp/` from scratch, and media E2EE uniform across
 > platforms until the upstream fix. The dependencies landed only after the
-> build-conditions. **F1–F3.4a have since landed** — the provider-neutral interface, the
-> from-scratch XMPP core, MUC + companion pairing, and the `flutter_webrtc` media-core
-> seam; the next slice is **F3.4b**, the real Jitsi media join. A dated status (what is
-> built, what remains) is in **§7.1**.
+> build-conditions. **F1–F3.4a have since landed**, and since then also the **Jitsi
+> recognition + preflight slice (#2533)** — link resolver, deployment profiles, the
+> `config.js` reader and XEP-0030 discovery; the next slice is **F3.4b**, the real
+> Jitsi media join. A dated status (what is built, what remains) is in **§7.1**.
 
 ---
 
@@ -365,13 +365,13 @@ Native Jitsi covers both joining and hosting: hosting = point at a Jitsi deploym
 you control. LiveKit/MatrixRTC remains the cleaner backend for a *pure* own SFU
 (COLLABORATION.md §7 says so) and arrives in F5 behind the same contract.
 
-### 7.1 Build status — landed vs. remaining (2026-08-08)
+### 7.1 Build status — landed vs. remaining (2026-10-24)
 
-The table above is the plan; this is where it actually stands. **F1–F3.4a have
-landed on `main`; the media join and everything after it are unbuilt.** The
-`lib/xmpp/` core and the provider-neutral `lib/meetings/` interface exist and are
-tested — but no real call has been joined yet, and the companion channel carries
-nothing yet.
+The table above is the plan; this is where it actually stands. **F1–F3.4a plus the
+Jitsi recognition/preflight slice (#2533) have landed on `main`; the media join and
+everything after it are unbuilt.** The `lib/xmpp/` core, the provider-neutral
+`lib/meetings/` interface and the Jitsi preflight path exist and are tested — but no
+real call has been joined yet, and the companion channel carries nothing yet.
 
 **Landed (on `main`, behind the default-off Videovergaderingen module):**
 
@@ -394,6 +394,18 @@ nothing yet.
   `meeting_media_core_webrtc.dart` (the thin libwebrtc binding — `selfTest()`
   provably touches no network) + `MediaPreflightTile`. **Opens no real media** — it is
   the foundation under the join.
+- **Jitsi recognition + preflight** (#2533). `lib/meetings/providers/jitsi/` exists:
+  `meeting_link_resolver.dart` (pure, zero-network `match` — strips `#config.*`
+  overrides, tracking params and credentials; a hint only rephrases the question the
+  UI asks), `meeting_provider_profile.dart` (exact-origin approved deployments),
+  `meeting_nick.dart` (CSPRNG anonymous nicks — resolves the F3.4b carry-over about
+  colliding fixed nicks), `xmpp_disco.dart` (XEP-0030 — resolves the carry-over about
+  discovering the MUC component instead of hardcoding `conference.<domain>`), the
+  conservative `config.js` reader over the NetGuard-pinned fetch seam (web fails
+  closed), and `MeetingPreflightDialog` behind the module card. `join` throws a
+  typed `UnimplementedError` — no join call reaches the app yet. Proven against the
+  pinned testbed (`make test-jitsi-integration`): anonymous session, discovered
+  `muc.meet.jitsi`.
 - Plus later XMPP hardening (#1316–1320, #1366–1370): bounded stanza sizes/counts and
   resource-exhaustion limits.
 
@@ -403,16 +415,15 @@ files listed here are the truth on disk.)*
 
 **Remaining, as concrete buildable slices:**
 
-1. **F3.4b — the real Jitsi media join** (the headline gap; nothing here exists yet —
-   there is no `lib/meetings/providers/`). Build the Jitsi `MeetingSession` adapter
-   (`lib/meetings/providers/jitsi/jitsi_signaling.dart` — Jingle + source signalling +
-   Colibri2; `jitsi_presence.dart`) driving `meeting_media_core_webrtc`; receive remote
-   tracks into OciDeck tiles; camera/mic uplink; **screen share**. Carry-over musts from
-   the F3.4a reviews: **pin the `flutter_webrtc` log level** once the stack is driven for
-   real; **derive unique nicks** (the test dialog's fixed `'ocideck'` nick makes two
-   anonymous clients collide with a 409); **disco the MUC component (XEP-0030)** instead
-   of hardcoding `conference.<domain>`. Testbed: `docker-jitsi-meet` + two clients.
-   Covers **joining**.
+1. **F3.4b — the real Jitsi media join** (the headline gap; #2533 landed the
+   recognition/preflight half — `join` still throws). Build the Jitsi `MeetingSession`
+   adapter (`lib/meetings/providers/jitsi/jitsi_signaling.dart` — Jingle + source
+   signalling + Colibri2; `jitsi_presence.dart`) driving `meeting_media_core_webrtc`;
+   receive remote tracks into OciDeck tiles; camera/mic uplink; **screen share**.
+   Carry-over musts from the F3.4a reviews: **pin the `flutter_webrtc` log level**
+   once the stack is driven for real. *(Done in #2533: unique nicks via
+   `meeting_nick.dart`; XEP-0030 MUC discovery via `xmpp_disco.dart`.)* Testbed:
+   `testbed/jitsi-meet` + two clients. Covers **joining**.
 2. **Companion data plane over XMPP — `XmppTransport implements CollabTransport`**
    (net-new; `CollabTransport` today has only loopback / WebDAV / Matrix-relay). Wire
    `xmpp_muc` + `companion_room` to actually carry ops/locks/presence/chat, so the

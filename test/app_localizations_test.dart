@@ -14,6 +14,9 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// delen.
 const unchangedInEnglish = {
   'USB',
+  // Eigennaam van de vergaderdienst; identiek in het Engels én in vrijwel
+  // alle andere talen (alleen hier en op unchangedInAllLanguages witgelijst).
+  'Jitsi',
   'Bluetooth',
   'web',
   'MediaRecorder',

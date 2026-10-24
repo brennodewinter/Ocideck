@@ -31,7 +31,7 @@ van de testaccounts staan alleen in `.env` — nooit in git of in de docs.
 | Image-versie (4 services) | `stable-11248` | `.env` → `JITSI_IMAGE_VERSION` |
 | Compose-wiring | eigen minimale compose | `docker-compose.yml` |
 | Jitsi-domain / MUC | `meet.jitsi` / `muc.meet.jitsi` | upstream defaults |
-| Signalling client→server | `ws://localhost:8000/xmpp-websocket` (via web) | `custom-config.js` |
+| Signalling client→server | `ws://127.0.0.1:8000/xmpp-websocket` (via web) | `custom-config.js` |
 | Signalling direct | `ws://localhost:15280/xmpp-websocket` | `PROSODY_WS_PORT` |
 | Media client→SFU | UDP `127.0.0.1:10000` | `JVB_PORT`, `JVB_ADVERTISE_IPS` |
 | TURN/STUN | **bewust geen** (zie grenzen) | `JVB_DISABLE_STUN=1` |

@@ -1607,6 +1607,60 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/szobanev',
+  'Vergaderlink controleren': 'Értekezlet-hivatkozás ellenőrzése',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Illessze be az értekezlet hivatkozását. Az OciDeck először helyben ellenőrzi, melyik szolgáltatásról van szó; a kiszolgálóhoz csak akkor kapcsolódik, ha előzetes ellenőrzést kér.',
+  'Vergaderlink': 'Értekezlet-hivatkozás',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Az értekezlethez való csatlakozás a következő verzióban érkezik; ez az ellenőrzés még nem teszi lehetővé a csatlakozást.',
+  'Preflight uitvoeren': 'Előzetes ellenőrzés futtatása',
+  'Controleer': 'Ellenőrzés',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'A hivatkozás bejelentkezési tokent tartalmazott; azt eltávolítottuk és nem tároljuk.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Jitsi-értekezletként felismerve az Ön jóváhagyott kiszolgálóján keresztül',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Jitsi-értekezletként felismerve (meet.jit.si). Az előzetes ellenőrzés lekéri az adatokat a kiszolgálótól.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'Az OciDeck nem ismeri fel ezt a hivatkozást támogatott szolgáltatás értekezleteként.',
+  'Dit is geen geldige link.': 'Ez nem érvényes hivatkozás.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Csak http(s) hivatkozás lehet értekezlet.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Ez a hivatkozás felhasználónevet vagy jelszót tartalmaz; azt nem használjuk.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Ez a hivatkozás nem ismerhető fel automatikusan. Melyik értekezlet-szolgáltatást használja ez a kiszolgáló?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Jegyezze meg ezt a kiszolgálót Jitsi-telepítésként',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Ez a kiszolgáló a saját (belső) hálózatomon van — privát cím, csak akkor jelölje be, ha Ön üzemelteti ezt a kiszolgálót',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Ez a kiszolgáló a saját (belső) hálózatomon van',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Kiszolgáló elérve — a vendéghozzáférés működik, és az értekezlet-komponens megtalálható.',
+  'U verschijnt als': 'Ön így jelenik meg:',
+  'Media is end-to-end versleuteld.': 'A média végpontok között titkosított.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'A média nincs végpontok között titkosítva (a kiszolgálón keresztül halad).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'A média végpontok közötti titkosítása ismeretlen.',
+  'Verkeer gaat naar': 'A forgalom ide megy:',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Ez a kiszolgáló fiókot igényel; névtelen vendégek nem csatlakozhatnak.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'A vendéghozzáférés le van tiltva ezen a kiszolgálón.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Ez az értekezlet moderátori jóváhagyást igényel.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Ez a kiszolgáló nem kínál olyan értekezlet-formát, amelyet az OciDeck támogat.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'A kiszolgáló nem érhető el, vagy elutasította a kapcsolatot.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Csatlakozzon videoértekezletekhez, és mutasson be az OciDeckből saját felülettel: a résztvevők a diája mellett, nem egy másik alkalmazás ablakában. Bring-your-own-server (Jitsi); az OciDeck semmit sem üzemeltet, és a beszélgetésadatokat távol tartja az AI-tól. Maga a csatlakozás a következő verzióban érkezik; a hivatkozás-ellenőrzés és az előzetes ellenőrzés már megvan.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Ellenőrizze, hogy elérhető-e egy Jitsi-értekezlet hivatkozása, és mit enged a kiszolgáló, mielőtt csatlakozna. Csatlakozás még nem történik.',
   'Systeemgeluid opnemen…': 'Rendszerhang felvétele…',
   'Systeemgeluid opnemen': 'Rendszerhang felvétele',
   'Tabgeluid opnemen…': 'Lap hangjának felvétele…',
@@ -5060,8 +5114,6 @@ const _dutchSourceAddHu = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Eszközök folyamatfejlesztéshez (SIPOC, DMAIC, Kaizen és A3). Alapértelmezés szerint ki vannak kapcsolva; a kapcsolódó sablonok és diaelrendezések használatához engedélyezze a bővítményt.',
   'Videovergaderingen': 'Videokonferenciák',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Csatlakozzon videokonferenciákhoz, és tartson előadást az OciDeckből saját felülettel: a résztvevők a diája mellett, nem egy másik alkalmazás ablakában. Bring-your-own-server (Jitsi); az OciDeck semmit sem tárol, és a beszélgetési adatokat távol tartja az AI-tól. A megbeszélési szolgáltatáshoz való csatlakozás egy későbbi verzióban következik.',
   'Videovergadering': 'Videokonferencia',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Még nincs aktív megbeszélés. A megbeszélési szolgáltatáshoz való csatlakozás egy későbbi verzióban lesz elérhető.',

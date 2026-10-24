@@ -2513,6 +2513,60 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/oda-adi',
+  'Vergaderlink controleren': 'Toplantı bağlantısını denetle',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Bir toplantı bağlantısı yapıştırın. OciDeck önce yerel olarak hangi hizmet olduğunu denetler; sunucuya yalnızca siz ön denetim istediğinizde bağlanılır.',
+  'Vergaderlink': 'Toplantı bağlantısı',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Toplantıya katılma sonraki bir sürümde gelecek; bu denetim henüz katılımı mümkün kılmıyor.',
+  'Preflight uitvoeren': 'Ön denetimi çalıştır',
+  'Controleer': 'Denetle',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Bağlantı bir oturum açma jetonu taşıyordu; kaldırıldı ve saklanmıyor.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Onaylı sunucunuz üzerinden Jitsi toplantısı olarak tanındı',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Jitsi toplantısı olarak tanındı (meet.jit.si). Ön denetim bilgileri sunucudan alır.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck bu bağlantıyı desteklenen bir hizmetin toplantısı olarak tanımıyor.',
+  'Dit is geen geldige link.': 'Bu geçerli bir bağlantı değil.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Yalnızca http(s) bağlantıları bir toplantı olabilir.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Bu bağlantı kullanıcı adı veya parola içeriyor; kullanılmıyor.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Bu bağlantı otomatik olarak tanınmıyor. Bu sunucu hangi toplantı hizmetini kullanıyor?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Bu sunucuyu Jitsi kurulumu olarak hatırla',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Bu sunucu kendi (iç) ağımda — özel adres, yalnızca bu sunucuyu siz yönetiyorsanız işaretleyin',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Bu sunucu kendi (iç) ağımda',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Sunucuya ulaşıldı — konuk erişimi çalışıyor ve toplantı bileşeni bulundu.',
+  'U verschijnt als': 'Şu adla görünürsünüz:',
+  'Media is end-to-end versleuteld.': 'Medya uçtan uca şifreli.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Medya uçtan uca şifreli değil (sunucu üzerinden geçer).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Medyanın uçtan uca şifrelemesi bilinmiyor.',
+  'Verkeer gaat naar': 'Trafik şuraya gider:',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Bu sunucu bir hesap gerektiriyor; anonim konuklar katılamaz.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Bu sunucuda konuk erişimi kapalı.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Bu toplantı bir moderatörün onayını gerektirir.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Bu sunucu OciDeck\'in desteklediği bir toplantı biçimi sunmuyor.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Sunucuya ulaşılamıyor veya bağlantıyı reddetti.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Video toplantılara katılın ve OciDeck\'ten kendi arayüzünüzle sunun: katılımcılar slaytınızın yanında, başka bir uygulamanın penceresinde değil. Bring-your-own-server (Jitsi); OciDeck hiçbir şey barındırmaz ve görüşme verilerini AI\'dan uzak tutar. Katılımın kendisi sonraki bir sürümde gelecek; bağlantı denetimi ve ön denetim zaten mevcut.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Katılmadan önce bir Jitsi toplantı bağlantısının erişilebilir olup olmadığını ve sunucunun neye izin verdiğini denetleyin. Henüz katılım yok.',
   'Systeemgeluid opnemen…': 'Sistem sesini kaydet…',
   'Systeemgeluid opnemen': 'Sistem sesini kaydet',
   'Tabgeluid opnemen…': 'Sekme sesini kaydet…',
@@ -5922,8 +5976,6 @@ const _dutchSourceAddTr = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Süreç iyileştirme araçları (SIPOC, DMAIC, Kaizen ve A3). Varsayılan olarak kapalıdır; ilgili şablonları ve slayt düzenlerini kullanmak için uzantıyı etkinleştirin.',
   'Videovergaderingen': 'Görüntülü toplantılar',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Görüntülü toplantılara katıl ve OciDeck\'ten kendi arayüzüyle sun: katılımcılar başka bir uygulamanın penceresinde değil, slaydının yanında. Bring-your-own-server (Jitsi); OciDeck hiçbir şey barındırmaz ve konuşma verilerini AI\'dan uzak tutar. Bir toplantı hizmetine bağlantı, ileriki bir sürümde gelecek.',
   'Videovergadering': 'Görüntülü toplantı',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Henüz etkin bir toplantı yok. Bir toplantı hizmetine bağlanma özelliği ileriki bir sürümde eklenecek.',

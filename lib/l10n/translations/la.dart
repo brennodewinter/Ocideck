@@ -1620,6 +1620,60 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nomen-conclavis',
+  'Vergaderlink controleren': 'Videocoetūs nexum exscribe',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Glutina nexum ad coetum. OciDeck primum localiter probat quod ministerium sit; iunctio ad servitorem solum fit cum volationem praeuolans petis.',
+  'Vergaderlink': 'Nexus coetūs',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Participatio in coetu in uersione proxima ueniet; haec probatio participationem nondum sinit.',
+  'Preflight uitvoeren': 'Volatum praeuolans exerce',
+  'Controleer': 'Proba',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Nexus tessellam admissionis ferebat; remota est nec seruatur.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Agnitus ut coetus Jitsi per seruitorem tuum probatum',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Agnitus ut coetus Jitsi (meet.jit.si). Volatio praeuolans data a seruitore petit.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck hunc nexum non agnoscit ut coetum ministerii adiuti.',
+  'Dit is geen geldige link.': 'Hic nexus ualidus non est.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Nexūs http(s) solum coetus esse possunt.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Nexus hic nomen usoris uel tessellam continet; non adhibetur.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Nexus hic non sponte agnoscitur. Quod ministerium coetūs hic seruitor adhibet?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Hunc seruitorem ut Jitsi institutionem retine',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Seruitor hic in reti meo proprio (interno) est — locus priuatus, solum signa si hunc seruitorem administras',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Seruitor hic in reti meo proprio (interno) est',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Seruitor attactus — aditus hospitis fungitur et pars coetūs inuenta est.',
+  'U verschijnt als': 'Appares ut',
+  'Media is end-to-end versleuteld.': 'Media fine ad finem cifrata est.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Media non fine ad finem cifrata est (per seruitorem transit).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Cifratio media fine ad finem ignota est.',
+  'Verkeer gaat naar': 'Commeatus it ad',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Seruitor hic ratiunculam postulat; hospites ignoti participare non possunt.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Aditus hospitis in hoc seruitore inhibitur.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Coetus hic approbationem moderatoris postulat.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Seruitor hic nullam formam coetūs offert quam OciDeck adiuvat.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Seruitor attingi non potest aut iunctionem recusauit.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Particeps esto conuentibus uideonicis et praesenta ex OciDeck interficie propria: participes iuxta imaginem tuam, non in fenestra alterius applicationis. Bring-your-own-server (Jitsi); OciDeck nihil hospitatur et data conloquiorum extra AI tenet. Participatio ipsa in uersione proxima ueniet; probatio nexi et uolatio praeuolans iam adsunt.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Proba num nexus coetūs Jitsi attingi possit et quid seruitor permittat, ante quam particeps fias. Participatio nondum fit.',
   'Systeemgeluid opnemen…': 'Sonum systematis excipere…',
   'Systeemgeluid opnemen': 'Sonum systematis excipere',
   'Tabgeluid opnemen…': 'Sonum schedae excipere…',
@@ -5066,8 +5120,6 @@ const _dutchSourceAddLa = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Instrumenta ad emendationem processuum (SIPOC, DMAIC, Kaizen et A3). Ex praedefinito inactiva; extensionem activa ut exemplaribus et dispositionibus diapositivarum adiunctis utaris.',
   'Videovergaderingen': 'Conventus visifici',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Conventibus visificis interesse potes et ex OciDeck interficie propria referre: participes iuxta paginam tuam, non in fenestra alterius programmatis. Bring-your-own-server (Jitsi); OciDeck nihil hospitatur et data colloquii extra IA servat. Coniunctio ad servitium conventuum in versione posteriore sequetur.',
   'Videovergadering': 'Conventus visificus',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Nullus conventus adhuc actuosus. Coniunctio ad servitium conventuum in versione posteriore addetur.',

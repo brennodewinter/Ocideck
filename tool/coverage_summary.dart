@@ -65,6 +65,10 @@ const Set<String> uncoveredBaseline = {
   // and no decision logic hides here. Keep this list to genuine such bindings,
   // not a hiding place for logic testable via a fake.
   'lib/meetings/meeting_media_core_webrtc.dart',
+  // NO EXECUTABLE LINES (#2533): `jitsi_config_platform.dart` is een kale
+  // conditional-export facade (io/web-seam); lcov emitteert geen record. De
+  // web-half faalt-dicht en dat contract is bewezen in jitsi_config_test.dart.
+  'lib/meetings/providers/jitsi/jitsi_config_platform.dart',
   // UNTESTABLE NATIVE BINDING (#2158): `mic_monitor_webrtc.dart` is de dunne
   // binding achter de MicMonitor-naad voor microfoon-doorvoer. Zelfde categorie
   // als meeting_media_core_webrtc hierboven: libwebrtc vraagt een echt

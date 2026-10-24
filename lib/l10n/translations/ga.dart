@@ -1635,6 +1635,61 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ainm-an-tseomra',
+  'Vergaderlink controleren': 'Seiceáil nasc an chruinnithe',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Greamaigh nasc chuig cruinniú. Seiceálann OciDeck ar dtús go háitiúil cén seirbhís é; ní dhéantar nasc leis an bhfreastalaí ach amháin nuair a iarraidh tú réamhsheiceáil.',
+  'Vergaderlink': 'Nasc an chruinnithe',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Tiocfaidh glacadh páirte i gcrinniú i leagan eile; ní cheadaíonn an seiceáil seo páirt a ghlacadh go fóil.',
+  'Preflight uitvoeren': 'Rith an réamhsheiceáil',
+  'Controleer': 'Seiceáil',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Bhí comhartha logála isteach ar an nasc; baineadh é agus ní stóráiltear é.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Aithníodh mar chruinniú Jitsi trí d\'fhreastalaí ceadaithe',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Aithníodh mar chruinniú Jitsi (meet.jit.si). Faigheann an réamhsheiceáil na sonraí ón bhfreastalaí.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'Ní aithníonn OciDeck an nasc seo mar chruinniú de sheirbhís a dtacaítear léi.',
+  'Dit is geen geldige link.': 'Ní nasc bailí é seo.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Ní féidir ach naisc http(s) a bheith ina gcruinniú.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Tá ainm úsáideora nó focal faire sa nasc seo; ní úsáidtear é.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Ní aithnítear an nasc seo go huathoibríoch. Cén seirbhís cruinnithe a úsáideann an freastalaí seo?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Cuimhnigh ar an bhfreastalaí seo mar imlonnú Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Tá an freastalaí seo ar mo líonra (inmheánach) féin — seoladh príobháideach, ná cuir tic ach amháin má riar tú an freastalaí seo',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Tá an freastalaí seo ar mo líonra (inmheánach) féin',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Freastalaí bainte amach — oibríonn rochtain aoi agus aimsíodh comhpháirt na gcruinnithe.',
+  'U verschijnt als': 'Leithéisithe tú mar',
+  'Media is end-to-end versleuteld.':
+      'Tá na meáin criptithe ó cheann go ceann.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Níl na meáin criptithe ó cheann go ceann (téann siad tríd an bhfreastalaí).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Tá criptiú na meán ó cheann go ceann anaithnid.',
+  'Verkeer gaat naar': 'Téann trácht go',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Éilíonn an freastalaí seo cuntas; ní féidir le haíonna gan ainm páirt a ghlacadh.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Tá rochtain aoi díchumasaithe ar an bhfreastalaí seo.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Éilíonn an cruinniú seo ceadú ó mhodhnóir.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Ní sholáthraíonn an freastalaí seo aon fhoirm chruinnithe a dtacaíonn OciDeck léi.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Níl an freastalaí sroichte nó dhiúltaigh sé an nasc.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Glac páirt i bhfíschruinnithe agus cuir i láthair ó OciDeck le d\'chomhéadan féin: rannpháirtithe in aice le do shleamhnán, ní i bhfuinneog aipe eile. Bring-your-own-server (Jitsi); ní óstálann OciDeck aon rud agus coinníonn sé sonraí na nglaonna lasmuigh den AI. Tiocfaidh an rannpháirtíocht féin i leagan eile; tá an tseiceáil nasc agus an réamhsheiceáil ann cheana.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Seiceáil an bhfuil nasc chruinnithe Jitsi sroichte agus céard a cheadaíonn an freastalaí, sula nglacfaidh tú páirt. Ní ghlactar páirt go fóil.',
   'Systeemgeluid opnemen…': 'Fuaim an chórais a thaifeadadh…',
   'Systeemgeluid opnemen': 'Fuaim an chórais a thaifeadadh',
   'Tabgeluid opnemen…': 'Fuaim na cluaisíne a thaifeadadh…',
@@ -5123,8 +5178,6 @@ const _dutchSourceAddGa = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Uirlisí le haghaidh feabhsú próiseas (SIPOC, DMAIC, Kaizen agus A3). Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na teimpléid agus leaganacha amach sleamhnán gaolmhara a úsáid.',
   'Videovergaderingen': 'Físchruinnithe',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Glac páirt i gcruinnithe físe agus déan cur i láthair ó OciDeck le comhéadan dá chuid féin: na rannpháirtithe in aice le do sleamhnán, ní i bhfuinneog feidhmchláir eile. Bring-your-own-server (Jitsi); ní óstálann OciDeck aon rud agus coinníonn sé sonraí an chomhrá amach ón IS. Leanfaidh an nasc le seirbhís chruinnithe i leagan sa todhchaí.',
   'Videovergadering': 'Físchruinniú',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Níl aon chruinniú gníomhach ann fós. Cuirfear an nasc le seirbhís chruinnithe leis i leagan sa todhchaí.',

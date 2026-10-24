@@ -1620,6 +1620,60 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nazva-kimnaty',
+  'Vergaderlink controleren': 'Перевірити посилання на нараду',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Вставте посилання на нараду. OciDeck спершу локально перевіряє, про який сервіс йдеться; з\'єднання із сервером встановлюється лише тоді, коли ви просите попередню перевірку.',
+  'Vergaderlink': 'Посилання на нараду',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Приєднання до наради з\'явиться в наступній версії; ця перевірка ще не дозволяє приєднатися.',
+  'Preflight uitvoeren': 'Виконати попередню перевірку',
+  'Controleer': 'Перевірити',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Посилання містило токен входу; його видалено і не зберігається.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Розпізнано як нарада Jitsi через ваш затверджений сервер',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Розпізнано як нарада Jitsi (meet.jit.si). Попередня перевірка отримує дані із сервера.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck не розпізнає це посилання як нараду підтримуваного сервісу.',
+  'Dit is geen geldige link.': 'Це не дійсне посилання.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Лише посилання http(s) можуть бути нарадою.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Це посилання містить ім\'я користувача або пароль; воно не використовується.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Це посилання не розпізнається автоматично. Який сервіс нарад використовує цей сервер?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Запам\'ятати цей сервер як розгортання Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Цей сервер у моїй власній (внутрішній) мережі — приватна адреса, позначайте лише якщо ви адмініструєте цей сервер',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Цей сервер у моїй власній (внутрішній) мережі',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Сервер досягнуто — гостьовий доступ працює, а компонент нарад знайдено.',
+  'U verschijnt als': 'Ви з\'являєтесь як',
+  'Media is end-to-end versleuteld.': 'Медіа зашифровані наскрізно.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Медіа не зашифровані наскрізно (проходять через сервер).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Наскрізне шифрування медіа невідоме.',
+  'Verkeer gaat naar': 'Трафік іде до',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Цей сервер вимагає обліковий запис; анонімні гості не можуть приєднатися.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Гостьовий доступ вимкнено на цьому сервері.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Ця нарада вимагає схвалення модератором.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Цей сервер не пропонує форми наради, яку підтримує OciDeck.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Сервер недоступний або відхилив з\'єднання.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Приєднуйтесь до відеонарад і презентуйте з OciDeck з власним інтерфейсом: учасники поруч із вашим слайдом, а не у вікні іншого застосунку. Bring-your-own-server (Jitsi); OciDeck нічого не хостить і тримає дані дзвінків поза AI. Саме приєднання з\'явиться в наступній версії; перевірка посилання та попередня перевірка вже є.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Перевірте, чи доступне посилання на нараду Jitsi і що дозволяє сервер, перш ніж приєднатися. Приєднання поки що немає.',
   'Systeemgeluid opnemen…': 'Записати системний звук…',
   'Systeemgeluid opnemen': 'Записати системний звук',
   'Tabgeluid opnemen…': 'Записати звук вкладки…',
@@ -5056,8 +5110,6 @@ const _dutchSourceAddUk = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Інструменти для вдосконалення процесів (SIPOC, DMAIC, Kaizen і A3). Вимкнено за замовчуванням; увімкніть розширення, щоб користуватися пов’язаними шаблонами й макетами слайдів.',
   'Videovergaderingen': 'Відеозустрічі',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Долучайтеся до відеозустрічей і презентуйте з OciDeck у власному інтерфейсі: учасники поруч зі слайдом, а не у вікні іншого застосунку. Bring-your-own-server (Jitsi); OciDeck нічого не розміщує і тримає дані розмов подалі від ШІ. Підключення до сервісу зустрічей з\'явиться в наступній версії.',
   'Videovergadering': 'Відеозустріч',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Активної зустрічі ще немає. Підключення до сервісу зустрічей буде додано в наступній версії.',

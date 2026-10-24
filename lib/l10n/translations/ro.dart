@@ -1621,6 +1621,60 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nume-camera',
+  'Vergaderlink controleren': 'Verifică linkul de întâlnire',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Lipiți un link către o întâlnire. OciDeck verifică mai întâi local despre ce serviciu este vorba; abia când cereți o verificare prealabilă se stabilește conexiunea cu serverul.',
+  'Vergaderlink': 'Link de întâlnire',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Participarea la o întâlnire vine într-o versiune următoare; această verificare nu permite încă participarea.',
+  'Preflight uitvoeren': 'Rulează verificarea prealabilă',
+  'Controleer': 'Verifică',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Linkul purta un token de autentificare; a fost eliminat și nu este păstrat.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Recunoscut ca întâlnire Jitsi prin serverul dvs. aprobat',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Recunoscut ca întâlnire Jitsi (meet.jit.si). Verificarea prealabilă obține datele de la server.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'OciDeck nu recunoaște acest link ca întâlnire a unui serviciu acceptat.',
+  'Dit is geen geldige link.': 'Acesta nu este un link valid.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Numai linkurile http(s) pot fi o întâlnire.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Acest link conține un nume de utilizator sau o parolă; nu este folosit.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Acest link nu este recunoscut automat. Ce serviciu de întâlniri folosește acest server?',
+  'Onthoud deze server als Jitsi-deployment':
+      'Memorează acest server ca implementare Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Acest server este în rețeaua mea proprie (internă) — adresă privată, bifați doar dacă administrați acest server',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Acest server este în rețeaua mea proprie (internă)',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Server atins — accesul de oaspete funcționează și componenta de întâlniri a fost găsită.',
+  'U verschijnt als': 'Apăreți ca',
+  'Media is end-to-end versleuteld.': 'Media este criptat end-to-end.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Media nu este criptat end-to-end (trece prin server).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Criptarea end-to-end a media este necunoscută.',
+  'Verkeer gaat naar': 'Traficul merge către',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Acest server necesită un cont; oaspeții anonimi nu pot participa.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Accesul de oaspete este dezactivat pe acest server.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Această întâlnire necesită aprobarea unui moderator.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Acest server nu oferă nicio formă de întâlnire acceptată de OciDeck.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Serverul este inaccesibil sau a refuzat conexiunea.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Participați la videoconferințe și prezentați din OciDeck cu propria interfață: participanții lângă diapozitiv, nu în fereastra altei aplicații. Bring-your-own-server (Jitsi); OciDeck nu găzduiește nimic și ține datele apelurilor în afara AI. Participarea în sine vine într-o versiune următoare; verificarea linkului și preflight există deja.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Verificați dacă un link de întâlnire Jitsi este accesibil și ce permite serverul, înainte de a participa. Încă nu se participă.',
   'Systeemgeluid opnemen…': 'Înregistrare sunet de sistem…',
   'Systeemgeluid opnemen': 'Înregistrare sunet de sistem',
   'Tabgeluid opnemen…': 'Înregistrare sunet filă…',
@@ -5102,8 +5156,6 @@ const _dutchSourceAddRo = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Instrumente pentru îmbunătățirea proceselor (SIPOC, DMAIC, Kaizen și A3). Dezactivate implicit; activați extensia pentru a utiliza șabloanele și aspectele de diapozitive asociate.',
   'Videovergaderingen': 'Întâlniri video',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Alătură-te întâlnirilor video și prezintă din OciDeck cu o interfață proprie: participanții lângă slide-ul tău, nu în fereastra altei aplicații. Bring-your-own-server (Jitsi); OciDeck nu găzduiește nimic și ține datele conversațiilor departe de IA. Conectarea la un serviciu de întâlniri va urma într-o versiune viitoare.',
   'Videovergadering': 'Întâlnire video',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Încă nu există nicio întâlnire activă. Conectarea la un serviciu de întâlniri va fi adăugată într-o versiune viitoare.',

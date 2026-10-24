@@ -1630,6 +1630,61 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Jitsi': 'Jitsi',
+  'https://meet.jit.si/kamernaam': 'https://meet.jit.si/onoma-domatiou',
+  'Vergaderlink controleren': 'Έλεγχος συνδέσμου σύσκεψης',
+  'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
+      'Επικολλήστε έναν σύνδεσμο για μια σύσκεψη. Το OciDeck ελέγχει πρώτα τοπικά ποια υπηρεσία είναι· σύνδεση με τον διακομιστή γίνεται μόνο όταν ζητήσετε προέλεγχο.',
+  'Vergaderlink': 'Σύνδεσμος σύσκεψης',
+  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
+      'Η συμμετοχή σε σύσκεψη έρχεται σε επόμενη έκδοση· αυτός ο έλεγχος δεν επιτρέπει ακόμη τη συμμετοχή.',
+  'Preflight uitvoeren': 'Εκτέλεση προελέγχου',
+  'Controleer': 'Έλεγχος',
+  'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
+      'Ο σύνδεσμος έφερε διακριτικό σύνδεσης· αφαιρέθηκε και δεν αποθηκεύεται.',
+  'Herkend als Jitsi-vergadering via uw goedgekeurde server':
+      'Αναγνωρίστηκε ως σύσκεψη Jitsi μέσω του εγκεκριμένου σας διακομιστή',
+  'Herkend als Jitsi-vergadering (meet.jit.si). Preflight haalt de gegevens van de server op.':
+      'Αναγνωρίστηκε ως σύσκεψη Jitsi (meet.jit.si). Ο προέλεγχος λαμβάνει τα δεδομένα από τον διακομιστή.',
+  'OciDeck herkent deze link niet als een vergadering van een ondersteunde dienst.':
+      'Το OciDeck δεν αναγνωρίζει αυτόν τον σύνδεσμο ως σύσκεψη υποστηριζόμενης υπηρεσίας.',
+  'Dit is geen geldige link.': 'Αυτός δεν είναι έγκυρος σύνδεσμος.',
+  'Alleen http(s)-links kunnen een vergadering zijn.':
+      'Μόνο σύνδεσμοι http(s) μπορούν να είναι σύσκεψη.',
+  'Deze link bevat een inlognaam of wachtwoord; dat wordt niet gebruikt.':
+      'Αυτός ο σύνδεσμος περιέχει όνομα χρήστη ή κωδικό· δεν χρησιμοποιείται.',
+  'Deze link wordt niet automatisch herkend. Welke vergaderdienst gebruikt deze server?':
+      'Αυτός ο σύνδεσμος δεν αναγνωρίζεται αυτόματα. Ποια υπηρεσία συσκέψεων χρησιμοποιεί αυτός ο διακομιστής;',
+  'Onthoud deze server als Jitsi-deployment':
+      'Απομνημόνευση αυτού του διακομιστή ως εγκατάσταση Jitsi',
+  'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert':
+      'Αυτός ο διακομιστής βρίσκεται στο δικό μου (εσωτερικό) δίκτυο — ιδιωτική διεύθυνση, επιλέξτε μόνο αν διαχειρίζεστε αυτόν τον διακομιστή',
+  'Deze server staat op mijn eigen (interne) netwerk':
+      'Αυτός ο διακομιστής βρίσκεται στο δικό μου (εσωτερικό) δίκτυο',
+  'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.':
+      'Ο διακομιστής επιτεύχθηκε — η πρόσβαση επισκεπτών λειτουργεί και το στοιχείο συσκέψεων βρέθηκε.',
+  'U verschijnt als': 'Εμφανίζεστε ως',
+  'Media is end-to-end versleuteld.':
+      'Τα μέσα είναι κρυπτογραφημένα άκρο-σε-άκρο.',
+  'Media is niet end-to-end versleuteld (verloopt via de server).':
+      'Τα μέσα δεν είναι κρυπτογραφημένα άκρο-σε-άκρο (περνούν μέσω του διακομιστή).',
+  'End-to-end-versleuteling van media is onbekend.':
+      'Η κρυπτογράφηση άκρο-σε-άκρο των μέσων είναι άγνωστη.',
+  'Verkeer gaat naar': 'Η κυκλοφορία πηγαίνει σε',
+  'Deze server vraagt een account; anonieme gasten kunnen niet deelnemen.':
+      'Αυτός ο διακομιστής απαιτεί λογαριασμό· ανώνυμοι επισκέπτες δεν μπορούν να συμμετάσχουν.',
+  'Gasttoegang is uitgeschakeld op deze server.':
+      'Η πρόσβαση επισκεπτών είναι απενεργοποιημένη σε αυτόν τον διακομιστή.',
+  'Deze vergadering vereist goedkeuring van een beheerder.':
+      'Αυτή η σύσκεψη απαιτεί έγκριση από συντονιστή.',
+  'Deze server biedt geen vergadervorm die OciDeck ondersteunt.':
+      'Αυτός ο διακομιστής δεν προσφέρει μορφή σύσκεψης που υποστηρίζει το OciDeck.',
+  'De server is niet bereikbaar of weigerde de verbinding.':
+      'Ο διακομιστής είναι μη προσβάσιμος ή απέρριψε τη σύνδεση.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
+      'Συμμετέχετε σε τηλεδιασκέψεις και παρουσιάζετε από το OciDeck με δική σας διεπαφή: οι συμμετέχοντες δίπλα στη διαφάνειά σας, όχι στο παράθυρο άλλης εφαρμογής. Bring-your-own-server (Jitsi)· το OciDeck δεν φιλοξενεί τίποτα και κρατά τα δεδομένα κλήσεων εκτός AI. Η ίδια η συμμετοχή έρχεται σε επόμενη έκδοση· ο έλεγχος συνδέσμου και ο προέλεγχος υπάρχουν ήδη.',
+  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
+      'Ελέγξτε αν ένας σύνδεσμος σύσκεψης Jitsi είναι προσβάσιμος και τι επιτρέπει ο διακομιστής, πριν συμμετάσχετε. Δεν γίνεται ακόμη συμμετοχή.',
   'Systeemgeluid opnemen…': 'Εγγραφή ήχου συστήματος…',
   'Systeemgeluid opnemen': 'Εγγραφή ήχου συστήματος',
   'Tabgeluid opnemen…': 'Εγγραφή ήχου καρτέλας…',
@@ -5130,8 +5185,6 @@ const _dutchSourceAddEl = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Εργαλεία για βελτίωση διαδικασιών (SIPOC, DMAIC, Kaizen και A3). Απενεργοποιημένα από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τα σχετικά πρότυπα και τις διατάξεις διαφανειών.',
   'Videovergaderingen': 'Βιντεοσυσκέψεις',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Συμμετέχετε σε βιντεοσυσκέψεις και παρουσιάζετε από το OciDeck με δικό του περιβάλλον: οι συμμετέχοντες δίπλα στη διαφάνειά σας, όχι στο παράθυρο μιας άλλης εφαρμογής. Bring-your-own-server (Jitsi)· το OciDeck δεν φιλοξενεί τίποτα και κρατά τα δεδομένα της συνομιλίας μακριά από την AI. Η σύνδεση με μια υπηρεσία συσκέψεων θα ακολουθήσει σε μελλοντική έκδοση.',
   'Videovergadering': 'Βιντεοσύσκεψη',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Δεν υπάρχει ακόμη ενεργή σύσκεψη. Η σύνδεση με μια υπηρεσία συσκέψεων θα προστεθεί σε μελλοντική έκδοση.',
