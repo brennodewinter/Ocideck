@@ -28,22 +28,22 @@ void _listenRecordingFinished(BuildContext context, WidgetRef ref) {
     final handle = next;
     handle.events.listen((event) {
       if (!context.mounted) return;
-      final reason = event.reason;
-      if (reason == null) return;
-      if (reason == RecordingEndReason.appQuit ||
-          reason == RecordingEndReason.moduleDisabled) {
+      final audio = handle.result;
+      if (!wantsFinishedRecordingDialog(
+        mounted: true,
+        reason: event.reason,
+        phase: event.phase,
+        hasDurableAudio: audio != null && audio.durablePath.isNotEmpty,
+      )) {
         return;
       }
-      if (event.phase != RecordingPhase.ended) return;
-      final audio = handle.result;
-      if (audio == null || audio.durablePath.isEmpty) return;
       unawaited(
         showRecordingFinishedDialog(
           context,
           ref,
-          audio: audio,
+          audio: audio!,
           sessionDir: handle.stagingDir,
-          reason: reason,
+          reason: event.reason!,
         ),
       );
     });

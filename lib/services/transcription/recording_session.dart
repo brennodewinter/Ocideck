@@ -54,6 +54,24 @@ enum RecordingPhase {
   failed,
 }
 
+/// Of de shell na afloop nog om een keuze vraagt. Afsluiten en de module
+/// uitzetten laten de staging liggen: het venster is weg, of de gebruiker
+/// koos al. Een lege of ontbrekende file heeft niets te kiezen.
+bool wantsFinishedRecordingDialog({
+  required bool mounted,
+  required RecordingEndReason? reason,
+  required RecordingPhase phase,
+  required bool hasDurableAudio,
+}) {
+  if (!mounted || reason == null) return false;
+  if (reason == RecordingEndReason.appQuit ||
+      reason == RecordingEndReason.moduleDisabled) {
+    return false;
+  }
+  if (phase != RecordingPhase.ended) return false;
+  return hasDurableAudio;
+}
+
 /// Eén overgang in het leven van een opname — wat de indicator en de
 /// toekomstige opslagflow opvolgen.
 class RecordingEvent {

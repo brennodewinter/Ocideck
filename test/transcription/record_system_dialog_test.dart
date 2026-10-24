@@ -127,4 +127,61 @@ void main() {
     expect(source.last!.consent.participantNoticeAcknowledged, isTrue);
     expect(source.last!.kinds, {CaptureSourceKind.systemAudio});
   });
+
+  testWidgets('labels en aanbod volgen de geregistreerde bronnen', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: Consumer(
+              builder: (context, ref, _) => Text(
+                '${systemRecordingOffered(ref)} '
+                '${combinationRecordingOffered(ref)} '
+                '${recordSystemLabel(context.l10n)} '
+                '${recordCombinationLabel(context.l10n)}',
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    expect(find.textContaining('true false'), findsOneWidget);
+    expect(find.textContaining('Systeemgeluid opnemen…'), findsOneWidget);
+    expect(
+      find.textContaining('Microfoon en systeemgeluid opnemen…'),
+      findsOneWidget,
+    );
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => TextButton(
+                onPressed: () => recordCombination(context),
+                child: const Text('combi'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('combi'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
+  });
 }

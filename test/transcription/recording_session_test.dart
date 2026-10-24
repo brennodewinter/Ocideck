@@ -192,6 +192,29 @@ void main() {
     },
   );
 
+  test('alleen een afgeronde file met audio vraagt om een keuze', () {
+    bool ask({
+      bool mounted = true,
+      RecordingEndReason? reason = RecordingEndReason.userStop,
+      RecordingPhase phase = RecordingPhase.ended,
+      bool hasDurableAudio = true,
+    }) => wantsFinishedRecordingDialog(
+      mounted: mounted,
+      reason: reason,
+      phase: phase,
+      hasDurableAudio: hasDurableAudio,
+    );
+
+    expect(ask(), isTrue);
+    expect(ask(mounted: false), isFalse);
+    expect(ask(reason: null), isFalse);
+    expect(ask(reason: RecordingEndReason.appQuit), isFalse);
+    expect(ask(reason: RecordingEndReason.moduleDisabled), isFalse);
+    expect(ask(reason: RecordingEndReason.sourceLost), isTrue);
+    expect(ask(phase: RecordingPhase.recording), isFalse);
+    expect(ask(hasDurableAudio: false), isFalse);
+  });
+
   test('de consent die de flow gaf bereikt de bron', () async {
     const geven = RecordingConsent(participantNoticeAcknowledged: true);
     await startMic(withConsent: geven);
