@@ -463,6 +463,7 @@ void main() {
         expect(script, contains('runtime=org.gnome.Platform/x86_64/50'));
         expect(script, contains('git --exec-path'));
         expect(script, contains('libayatana-appindicator3.so.1'));
+        expect(script, contains('libcurl-gnutls.so.4'));
         expect(script, contains('flatpak build-bundle'));
         expect(script, contains('flatpak_components.py'));
         expect(script, contains(r'licenses/$package.copyright'));

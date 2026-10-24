@@ -440,6 +440,7 @@ Map<String, String> flatpakGitEnvironment(Map<String, String> environment) =>
     ? const {
         'GIT_EXEC_PATH': '/app/libexec/git-core',
         'GIT_TEMPLATE_DIR': '/app/share/git-core/templates',
+        'LD_LIBRARY_PATH': '/app/lib/ocideck/lib',
       }
     : const {};
 

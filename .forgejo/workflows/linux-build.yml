@@ -275,7 +275,7 @@ jobs:
           flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
           flatpak --user install -y --noninteractive --bundle ./dist/ocideck-linux-x86_64-*.flatpak
           flatpak run --user --command=sh com.dewinter.ocideck -c \
-            'export GIT_EXEC_PATH=/app/libexec/git-core GIT_TEMPLATE_DIR=/app/share/git-core/templates; git --version && git init -q /tmp/ocideck-git-probe && git -C /tmp/ocideck-git-probe -c user.name=probe -c user.email=probe@example.invalid commit --allow-empty -qm probe && test -x /app/libexec/git-core/git-remote-https && ! ldd /app/libexec/git-core/git-remote-https | grep "not found" && ! ldd /app/lib/ocideck/ocideck | grep "not found" && ! ldd /app/lib/ocideck/lib/libcnativeapi.so | grep "not found"'
+            'export GIT_EXEC_PATH=/app/libexec/git-core GIT_TEMPLATE_DIR=/app/share/git-core/templates LD_LIBRARY_PATH=/app/lib/ocideck/lib; git --version && git init -q /tmp/ocideck-git-probe && git -C /tmp/ocideck-git-probe -c user.name=probe -c user.email=probe@example.invalid commit --allow-empty -qm probe && test -x /app/libexec/git-core/git-remote-https && ! ldd /app/libexec/git-core/git-remote-https | grep "not found" && ! ldd /app/lib/ocideck/ocideck | grep "not found" && ! ldd /app/lib/ocideck/lib/libcnativeapi.so | grep "not found"'
           set +e
           timeout 20 xvfb-run -a dbus-run-session -- flatpak run --user com.dewinter.ocideck
           rc=$?

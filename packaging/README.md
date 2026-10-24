@@ -43,7 +43,7 @@ which produces, into `dist/`:
 - `ocideck-linux-amd64-<version>.deb` — Debian / Ubuntu / Mint
 - `ocideck-linux-x86_64-<version>.rpm` — Fedora / openSUSE
 - `ocideck-linux-x86_64-<version>.flatpak` — direct Flatpak bundle, x86-64
-- `ocideck-linux-x86_64-<version>.flatpak.cdx.json` — bundled Git and tray-library versions and file hashes; license notices are inside the Flatpak
+- `ocideck-linux-x86_64-<version>.flatpak.cdx.json` — bundled Git, HTTPS and tray-library versions and file hashes; license notices are inside the Flatpak
 
 After the release assets have been published,
 `scripts/publish_debian_package.sh` uploads that same `.deb` to

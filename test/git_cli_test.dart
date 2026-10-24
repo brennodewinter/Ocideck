@@ -66,6 +66,7 @@ void main() {
     if (Platform.isLinux) {
       expect(paths['GIT_EXEC_PATH'], '/app/libexec/git-core');
       expect(paths['GIT_TEMPLATE_DIR'], '/app/share/git-core/templates');
+      expect(paths['LD_LIBRARY_PATH'], '/app/lib/ocideck/lib');
     } else {
       expect(paths, isEmpty);
     }

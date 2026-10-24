@@ -1123,7 +1123,7 @@ design and the remaining phases (an rpm repo; Snap) are in
   `ocideck-linux-x86_64-<v>.flatpak` and its
   `ocideck-linux-x86_64-<v>.flatpak.cdx.json` component inventory
   (each format's own arch label). The Flatpak embeds copyright notices for its
-  bundled Git and tray libraries under `/app/share/doc/ocideck-flatpak`.
+  bundled Git, HTTPS and tray libraries under `/app/share/doc/ocideck-flatpak`.
 - **Tools.** `dpkg-deb` (base system), `rpmbuild` (the `rpm` package, added by
   the job) and `appimagetool`. The `.rpm` lets rpmbuild derive soname `Requires`
   so it resolves on Fedora and openSUSE alike; the `.deb` declares

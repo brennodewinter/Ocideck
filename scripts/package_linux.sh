@@ -254,17 +254,20 @@ build_flatpak() {
   local out="$OUT/ocideck-linux-x86_64-$VERSION.flatpak"
   local notices="$root/files/share/doc/ocideck-flatpak"
   local packages=(git libayatana-appindicator3-1 libayatana-indicator3-7 \
-    libayatana-ido3-0.4-0 libdbusmenu-glib4 libdbusmenu-gtk3-4)
+    libayatana-ido3-0.4-0 libdbusmenu-glib4 libdbusmenu-gtk3-4 \
+    libcurl3t64-gnutls librtmp1 libssh-4 libldap2 libsasl2-2)
   install -d "$root/files/lib/ocideck" "$root/files/bin"
   cp -a "$BUNDLE_DIR/." "$root/files/lib/ocideck/"
   install -m0755 "$(command -v git)" "$root/files/bin/git"
   install -d "$root/files/libexec/git-core" "$root/files/share/git-core"
   cp -a "$(git --exec-path)/." "$root/files/libexec/git-core/"
   cp -a /usr/share/git-core/templates "$root/files/share/git-core/"
-  # GNOME's runtime provides GTK and libsecret, but not Ayatana's tray stack.
+  # GNOME's runtime provides GTK and libsecret, but not Ayatana or Git's curl variant.
   local soname library
   for soname in libayatana-appindicator3.so.1 libayatana-indicator3.so.7 \
-      libayatana-ido3-0.4.so.0 libdbusmenu-glib.so.4 libdbusmenu-gtk3.so.4; do
+      libayatana-ido3-0.4.so.0 libdbusmenu-glib.so.4 libdbusmenu-gtk3.so.4 \
+      libcurl-gnutls.so.4 librtmp.so.1 libssh.so.4 libldap.so.2 liblber.so.2 \
+      libsasl2.so.2; do
     library="$(ldconfig -p | awk -v name="$soname" '$1 == name { print $NF; exit }')"
     if [ -z "$library" ]; then
       echo "Required Flatpak library '$soname' not found." >&2
@@ -282,6 +285,9 @@ build_flatpak() {
   done
   (cd "$root/files" && find bin/git libexec/git-core share/git-core/templates \
     lib/ocideck/lib/libayatana*.so* lib/ocideck/lib/libdbusmenu*.so* \
+    lib/ocideck/lib/libcurl-gnutls.so* lib/ocideck/lib/librtmp.so* \
+    lib/ocideck/lib/libssh.so* lib/ocideck/lib/libldap.so* \
+    lib/ocideck/lib/liblber.so* lib/ocideck/lib/libsasl2.so* \
     -type f -print0 | sort -z | xargs -0 sha256sum) > "$notices/FILES.sha256"
   python3 "$SCRIPT_DIR/flatpak_components.py" \
     "$notices/PACKAGES.tsv" "$notices/FILES.sha256" "$VERSION" \

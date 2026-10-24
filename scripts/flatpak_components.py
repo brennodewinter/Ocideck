@@ -28,7 +28,7 @@ def main() -> None:
             "name": f"/app/{path}",
             "hashes": [{"alg": "SHA-256", "content": digest}],
         })
-    if len(packages) != 6 or not files:
+    if len(packages) != 11 or not files:
         raise ValueError("Flatpak component inventory is incomplete")
     document = {
         "bomFormat": "CycloneDX",

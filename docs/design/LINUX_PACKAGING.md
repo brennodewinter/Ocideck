@@ -147,7 +147,8 @@ bijzaak. De redenering staat in
 3. **Directe Flatpak-bundel — GEBOUWD.** De release levert een `.flatpak`-bestand
    via de eigen forge, met Git en zijn helpers in de bundel. De bestaande
    Git-versieproef toont de beperking wanneer Git toch niet beschikbaar is.
-   De bundel bevat de licentieteksten van de meegeleverde Linux-onderdelen;
+   De bundel bevat de licentieteksten van Git, de HTTPS-bibliotheek en de
+   tray-bibliotheken;
    hun exacte versies en bestands-hashes komen ook als apart CycloneDX-bestand
    mee. De GNOME-runtime wordt apart via een Flatpak-remote geïnstalleerd.
 4. **Andere confined kanalen — OPEN.** Een eigen Flatpak-remote, Flathub en
