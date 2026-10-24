@@ -98,13 +98,17 @@ Future<void> _match(
     ),
   );
   // De io-probe en modelstore doen echte dart:io-calls — die lopen in de
-  // echte event loop, niet in de fake-async zone.
+  // echte event loop, niet in de fake-async zone. Een pump van 50 ms is
+  // soms te krap: de kaart toont dan nog "detecteren…" en de gouden plaat
+  // wijkt af. De probes krijgen daarom eerst echte tijd, en daarna één
+  // frame, zodat de plaat de gelande status vastlegt.
   final ctx = tester.element(find.byType(TranscriptionModuleCard));
-  await tester.runAsync(
-    () => ProviderScope.containerOf(
+  await tester.runAsync(() async {
+    await ProviderScope.containerOf(
       ctx,
-    ).read(transcriptionModelManagerProvider.notifier).refresh(),
-  );
+    ).read(transcriptionModelManagerProvider.notifier).refresh();
+    await Future<void>.delayed(const Duration(milliseconds: 400));
+  });
   await tester.pump(const Duration(milliseconds: 50));
 
   await expectLater(
