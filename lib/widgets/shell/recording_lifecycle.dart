@@ -1,15 +1,22 @@
-// Part of the app_shell library — see ../app_shell.dart.
 // De opname-levenscyclus zoals de shell hem bewaakt (#2510, TRANSCRIPTION.md
 // §2.3/§3.2): verlopen staging vegen bij opstarten, en een lopende opname
-// netjes laten eindigen vóór het venster weg is. Als losse top-level-functies
-// omdat _AppShellState op zijn plafond zit; de calls zelf blijven zichtbaar
-// op de plek waar ze horen (initState, _destroy).
-part of '../app_shell.dart';
+// netjes laten eindigen vóór het venster weg is. Los van app_shell, omdat
+// die op zijn regelplafond zit; de aanroepen blijven op initState, build
+// en het sluiten.
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../services/transcription/recording_session.dart';
+import '../../state/transcription_provider.dart';
+import '../../utils/log.dart';
+import '../dialogs/recording_finished_dialog.dart';
 
 /// Veeg verlopen opname-staging: mappen jonger dan de herstelperiode (7
 /// dagen, §3.2) blijven liggen, oudere gaan weg. Best effort — een veegfout
 /// mag de start van de app niet blokkeren.
-void _sweepStaleRecordings(WidgetRef ref) {
+void sweepStaleRecordings(WidgetRef ref) {
   unawaited(
     ref
         .read(recordingStagingProvider)
@@ -22,7 +29,7 @@ void _sweepStaleRecordings(WidgetRef ref) {
 /// wat er met de file gebeurt. Afsluiten en de module uitzetten laten
 /// de staging liggen zonder nog een dialoog — het venster is dan weg
 /// of de gebruiker koos al.
-void _listenRecordingFinished(BuildContext context, WidgetRef ref) {
+void listenRecordingFinished(BuildContext context, WidgetRef ref) {
   ref.listen(recordingSessionProvider, (previous, next) {
     if (next == null) return;
     final handle = next;
@@ -54,7 +61,7 @@ void _listenRecordingFinished(BuildContext context, WidgetRef ref) {
 /// ná de keuze voor sluiten — bij "annuleren" komt deze code niet aan de
 /// beurt en loopt de opname gewoon door. De duurzame file wordt nog netjes
 /// afgerond en blijft in staging voor de herstelperiode (§3.2).
-Future<void> _stopRecordingBeforeQuit(WidgetRef ref) {
+Future<void> stopRecordingBeforeQuit(WidgetRef ref) {
   return ref
       .read(recordingSessionProvider.notifier)
       .stopAll(RecordingEndReason.appQuit);

@@ -78,7 +78,6 @@ import '../services/export_bundle.dart';
 import '../services/privacy/privacy_projection.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
-import '../services/transcription/recording_session.dart';
 import 'mermaid_render_host.dart';
 import '../models/git_settings.dart';
 import '../services/git/asset_index.dart';
@@ -196,9 +195,9 @@ import 'shell/openkat_import_action.dart';
 import 'shell/dropped_files.dart';
 import 'shell/presentation_import_action.dart';
 import 'shell/transcribe_file_action.dart';
-import 'dialogs/recording_finished_dialog.dart';
 import 'shell/record_microphone_action.dart';
 import 'shell/record_system_action.dart';
+import 'shell/recording_lifecycle.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/collab_chat_panel.dart';
@@ -219,7 +218,6 @@ part 'app_shell_menu.dart';
 
 // Shell sub-widgets and helpers, split into part files for navigability; the parts share this library's imports and private scope.
 part 'shell/provenance_actions.dart';
-part 'shell/recording_lifecycle.dart';
 part 'shell/shell_actions.dart';
 part 'shell/shell_actions_present.dart';
 part 'shell/shell_actions_export.dart';
@@ -307,8 +305,8 @@ class _AppShellState extends ConsumerState<AppShell> {
       (session) =>
           ref.read(ociServeProvider.notifier).closeLessonSession(session),
     );
-    // Verlopen opname-staging vegen — zie _sweepStaleRecordings.
-    _sweepStaleRecordings(ref);
+    // Verlopen opname-staging vegen — zie sweepStaleRecordings.
+    sweepStaleRecordings(ref);
     ref.read(ociServeProvider.notifier).closeLearningTabsLocally = () =>
         closeLearningTabsLocally(ref.read(tabsProvider.notifier));
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -524,8 +522,8 @@ class _AppShellState extends ConsumerState<AppShell> {
     for (final session in sessions) {
       await ref.read(ociServeProvider.notifier).closeLessonSession(session);
     }
-    // Lopende opname stoppen vóór de native quit — zie _stopRecordingBeforeQuit.
-    await _stopRecordingBeforeQuit(ref);
+    // Lopende opname stoppen vóór de native quit — zie stopRecordingBeforeQuit.
+    await stopRecordingBeforeQuit(ref);
     if (mounted) await settleUiBeforeNativeQuit(context);
     await quitApp();
   }
@@ -871,7 +869,7 @@ class _AppShellState extends ConsumerState<AppShell> {
     _listenSidecarSkipped(context, ref);
     _listenSealTamper(context, ref);
     _listenRecoveryWriteError(context, ref);
-    _listenRecordingFinished(context, ref);
+    listenRecordingFinished(context, ref);
 
     _listenUnsavedWork(context, ref);
 
