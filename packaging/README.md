@@ -7,12 +7,11 @@ the Windows installer and its optional WinGet catalog manifest
 ([issue #1208](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/1208)).
 
 Every format here wraps the **same** bundle `flutter build` produces and the
-release already ships as an archive. None of them is a store, a gatekeeper or a
-sandbox: the direct download from the forge stays canonical, and these are extra
-doors to the same house. The `.deb` is also published to the forge's own signed
-Debian registry so installations made through apt receive updates. The confined
-Linux formats (Flatpak, Snap) are a separate, later track — they need the
-capability feature-flag first; see the design doc.
+release already ships as an archive. The direct download from the forge stays
+canonical. Flatpak runs inside a sandbox; the other formats do not. The `.deb`
+is also published to the forge's own signed Debian registry so installations
+made through apt receive updates. Snap remains a later track; see the design
+doc.
 
 ## What is here
 
@@ -43,6 +42,8 @@ which produces, into `dist/`:
 - `ocideck-linux-x86_64-<version>.AppImage` — one runnable file, most distros
 - `ocideck-linux-amd64-<version>.deb` — Debian / Ubuntu / Mint
 - `ocideck-linux-x86_64-<version>.rpm` — Fedora / openSUSE
+- `ocideck-linux-x86_64-<version>.flatpak` — direct Flatpak bundle, x86-64
+- `ocideck-linux-x86_64-<version>.flatpak.cdx.json` — bundled Git and tray-library versions and file hashes; license notices are inside the Flatpak
 
 After the release assets have been published,
 `scripts/publish_debian_package.sh` uploads that same `.deb` to

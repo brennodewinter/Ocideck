@@ -4,6 +4,7 @@
 
 ## Contents
 
+- [Installing on Linux](#installing-on-linux)
 - [Creating and opening decks](#creating-and-opening-decks)
 - [Command palette](#command-palette)
 - [The menu bar (macOS)](#the-menu-bar-macos)
@@ -70,6 +71,16 @@ flowchart LR
     Edit --> Export[Export to Markdown, PDF, PPTX, ODP, Beamer, offline HTML or a package]
     Export --> Reuse[Reopen in OciDeck or another Marp tool]
 ```
+
+## Installing on Linux
+
+The release page offers a direct Flatpak download for x86-64 Linux. Install
+Flatpak and the GNOME 50 runtime from a Flatpak remote first, then run
+`flatpak install ./ocideck-linux-x86_64-<version>.flatpak` and
+`flatpak run com.dewinter.ocideck`. The OciDeck app is not listed on Flathub;
+only the runtime may come from there. Flatpak can access your home files,
+network, display, audio and Secret Service. For other Linux package choices,
+see the [release downloads](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases).
 
 ## Creating and opening decks
 

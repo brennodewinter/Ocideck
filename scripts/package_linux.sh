@@ -1,26 +1,24 @@
 #!/usr/bin/env bash
 # Packages the built Linux bundle into portable, self-hostable formats.
 #
-# Phase 1 of the Linux install route (issue #1227, docs/design/LINUX_PACKAGING.md):
-# alongside the raw tarball the release already ships, produce
+# Alongside the raw tarball the release already ships, produce
 #
 #   * an AppImage — one runnable file, the Linux counterpart of "the zip you open"
 #   * a .deb      — Debian / Ubuntu / Mint, the largest desktop-Linux group
 #   * an .rpm     — Fedora / openSUSE, essentially free next to the .deb
+#   * a Flatpak   — direct download with explicit sandbox permissions
 #
-# None of these is a gatekeeper or a sandbox: each just wraps the same bundle the
-# forge release publishes, so the direct download stays canonical. The confined
-# formats (Flatpak / Snap) are a separate, later track — they need the capability
-# feature-flag first (see the design doc).
+# Each wraps the same bundle the forge release publishes, so direct download
+# stays canonical. Flatpak needs the GNOME 50 runtime; Snap is a later track.
 #
 # Run this after `make build-linux`. The requested files land in $OUT.
 #
-#   scripts/package_linux.sh 0.3.2                 # all three formats into dist/
+#   scripts/package_linux.sh 0.3.2                 # all four formats into dist/
 #   FORMATS="deb" scripts/package_linux.sh 0.3.2   # just the .deb (local checks)
 #   OUT=. scripts/package_linux.sh v0.3.2          # leading v is stripped
 #
 # Each format needs its own tool on the machine: `dpkg-deb` for the .deb,
-# `rpmbuild` for the .rpm, and `appimagetool` for the AppImage. appimagetool is
+# `rpmbuild` for the .rpm, `flatpak` for Flatpak and `appimagetool` for AppImage. appimagetool is
 # not packaged by any distro, so it is fetched and sha256-verified (set
 # APPIMAGETOOL_URL + APPIMAGETOOL_SHA256, as the release workflow does) unless
 # one is already on PATH or named by $APPIMAGETOOL. A missing tool is a hard
@@ -42,7 +40,7 @@ fi
 
 BUNDLE_DIR="${BUNDLE_DIR:-$REPO_ROOT/build/linux/x64/release/bundle}"
 OUT="${OUT:-$REPO_ROOT/dist}"
-FORMATS="${FORMATS:-appimage deb rpm}"
+FORMATS="${FORMATS:-appimage deb rpm flatpak}"
 
 if [ ! -x "$BUNDLE_DIR/ocideck" ]; then
   echo "No Linux bundle at $BUNDLE_DIR — run 'make build-linux' first." >&2
@@ -245,6 +243,86 @@ build_appimage() {
   echo "  + $(basename "$out")"
 }
 
+# --- Flatpak ------------------------------------------------------------------
+
+build_flatpak() {
+  require flatpak "Flatpak bundle"
+  require git "Flatpak native Git support"
+  require dpkg-query "Flatpak component inventory"
+  require python3 "Flatpak component inventory"
+  local root="$TMPROOT/flatpak" repo="$TMPROOT/flatpak-repo"
+  local out="$OUT/ocideck-linux-x86_64-$VERSION.flatpak"
+  local notices="$root/files/share/doc/ocideck-flatpak"
+  local packages=(git libayatana-appindicator3-1 libayatana-indicator3-7 \
+    libayatana-ido3-0.4-0 libdbusmenu-glib4 libdbusmenu-gtk3-4)
+  install -d "$root/files/lib/ocideck" "$root/files/bin"
+  cp -a "$BUNDLE_DIR/." "$root/files/lib/ocideck/"
+  install -m0755 "$(command -v git)" "$root/files/bin/git"
+  install -d "$root/files/libexec/git-core" "$root/files/share/git-core"
+  cp -a "$(git --exec-path)/." "$root/files/libexec/git-core/"
+  cp -a /usr/share/git-core/templates "$root/files/share/git-core/"
+  # GNOME's runtime provides GTK and libsecret, but not Ayatana's tray stack.
+  local soname library
+  for soname in libayatana-appindicator3.so.1 libayatana-indicator3.so.7 \
+      libayatana-ido3-0.4.so.0 libdbusmenu-glib.so.4 libdbusmenu-gtk3.so.4; do
+    library="$(ldconfig -p | awk -v name="$soname" '$1 == name { print $NF; exit }')"
+    if [ -z "$library" ]; then
+      echo "Required Flatpak library '$soname' not found." >&2
+      exit 1
+    fi
+    install -m0644 "$library" "$root/files/lib/ocideck/lib/$soname"
+  done
+  install -d "$notices/licenses"
+  dpkg-query -W -f='${binary:Package}\t${Version}\t${Architecture}\n' \
+    "${packages[@]}" > "$notices/PACKAGES.tsv"
+  local package
+  for package in "${packages[@]}"; do
+    install -m0644 "/usr/share/doc/$package/copyright" \
+      "$notices/licenses/$package.copyright"
+  done
+  (cd "$root/files" && find bin/git libexec/git-core share/git-core/templates \
+    lib/ocideck/lib/libayatana*.so* lib/ocideck/lib/libdbusmenu*.so* \
+    -type f -print0 | sort -z | xargs -0 sha256sum) > "$notices/FILES.sha256"
+  python3 "$SCRIPT_DIR/flatpak_components.py" \
+    "$notices/PACKAGES.tsv" "$notices/FILES.sha256" "$VERSION" \
+    "$notices/components.cdx.json"
+  cat > "$root/files/bin/ocideck" <<'WRAP'
+#!/bin/sh
+export GIT_EXEC_PATH=/app/libexec/git-core
+export GIT_TEMPLATE_DIR=/app/share/git-core/templates
+export LD_LIBRARY_PATH=/app/lib/ocideck/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+exec /app/lib/ocideck/ocideck "$@"
+WRAP
+  chmod 0755 "$root/files/bin/ocideck"
+  install -Dm0644 "$DESKTOP" "$root/files/share/applications/$APP_ID.desktop"
+  install -Dm0644 "$ICON_SRC" \
+    "$root/files/share/icons/hicolor/512x512/apps/$APP_ID.png"
+  install -d "$root/var"
+  cat > "$root/metadata" <<EOF
+[Application]
+name=$APP_ID
+runtime=org.gnome.Platform/x86_64/50
+sdk=org.gnome.Sdk/x86_64/50
+command=ocideck
+EOF
+  # This wraps the already-built Flutter bundle; no Flatpak SDK build is needed.
+  # build-finish's icon validator starts bubblewrap, which nested CI containers
+  # cannot use; the same checked files are exported directly instead.
+  flatpak build-finish --no-exports "$root" \
+    --share=ipc --share=network --socket=x11 --socket=wayland \
+    --socket=pulseaudio --device=dri --filesystem=home \
+    --talk-name=org.freedesktop.secrets >/dev/null
+  install -Dm0644 "$DESKTOP" "$root/export/share/applications/$APP_ID.desktop"
+  install -Dm0644 "$ICON_SRC" \
+    "$root/export/share/icons/hicolor/512x512/apps/$APP_ID.png"
+  # Only the icon validator runs without bubblewrap; the shipped app retains
+  # the permissions above. Forgejo's Docker runner cannot nest namespaces.
+  flatpak build-export --disable-sandbox "$repo" "$root" stable >/dev/null
+  flatpak build-bundle "$repo" "$out" "$APP_ID" stable >/dev/null
+  cp "$notices/components.cdx.json" "$out.cdx.json"
+  echo "  + $(basename "$out")"
+}
+
 # --- Drive --------------------------------------------------------------------
 
 echo "== OciDeck package: Linux ($FORMATS) $VERSION -> $OUT =="
@@ -253,7 +331,8 @@ for fmt in $FORMATS; do
     appimage) build_appimage ;;
     deb)      build_deb ;;
     rpm)      build_rpm ;;
-    *) echo "Unknown format '$fmt' (want: appimage deb rpm)." >&2; exit 1 ;;
+    flatpak)  build_flatpak ;;
+    *) echo "Unknown format '$fmt' (want: appimage deb rpm flatpak)." >&2; exit 1 ;;
   esac
 done
 echo "== done =="

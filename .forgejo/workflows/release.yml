@@ -303,7 +303,7 @@ jobs:
       - name: Ontbrekende Linux-buildlibs
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev rpm file
+          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev rpm file flatpak python3
 
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -361,7 +361,7 @@ jobs:
             -czf "dist/ocideck-linux-x64-$VERSIE.tar.gz" bundle
           echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
 
-      - name: Linux-pakketten bouwen (AppImage/.deb/.rpm)
+      - name: Linux-pakketten bouwen (AppImage/.deb/.rpm/Flatpak)
         # Phase 1 van de Linux-installatieroute (#1227, docs/design/LINUX_PACKAGING.md):
         # naast de rauwe tarball een AppImage, een .deb en een .rpm — losse assets
         # aan de release, geen store en geen sandbox. appimagetool zit in geen
@@ -392,6 +392,8 @@ jobs:
             dist/ocideck-linux-amd64-${{ env.VERSIE }}.deb
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.rpm
             dist/ocideck-linux-x86_64-${{ env.VERSIE }}.AppImage
+            dist/ocideck-linux-x86_64-${{ env.VERSIE }}.flatpak
+            dist/ocideck-linux-x86_64-${{ env.VERSIE }}.flatpak.cdx.json
 
   linux-debian12:
     name: Linux bouwen op Debian 12
@@ -872,9 +874,39 @@ jobs:
             exit 1
           fi
 
+  consumer-flatpak:
+    name: Flatpak proef op een schone Ubuntu
+    needs: linux
+    runs-on: docker
+    timeout-minutes: 90
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Node voor de artefactactie
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux, path: dist }
+      - name: Installeren, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends flatpak xvfb fonts-dejavu-core
+          flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
+          flatpak --user install -y --noninteractive --bundle "dist/ocideck-linux-x86_64-${GITHUB_REF_NAME#v}.flatpak"
+          flatpak run --user --command=sh com.dewinter.ocideck -c \
+            'export GIT_EXEC_PATH=/app/libexec/git-core GIT_TEMPLATE_DIR=/app/share/git-core/templates; git --version && git init -q /tmp/ocideck-git-probe && git -C /tmp/ocideck-git-probe -c user.name=probe -c user.email=probe@example.invalid commit --allow-empty -qm probe && test -x /app/libexec/git-core/git-remote-https && ! ldd /app/libexec/git-core/git-remote-https | grep "not found" && ! ldd /app/lib/ocideck/ocideck | grep "not found" && ! ldd /app/lib/ocideck/lib/libcnativeapi.so | grep "not found"'
+          set +e
+          timeout 20 xvfb-run -a dbus-run-session -- flatpak run --user com.dewinter.ocideck
+          rc=$?
+          set -e
+          test "$rc" -eq 124
+
   publiceren:
     name: Release publiceren
-    needs: [web, linux, linux-debian12, macos, windows-ophalen, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage]
+    needs: [web, linux, linux-debian12, macos, windows-ophalen, consumer-deb, consumer-debian12, consumer-rpm, consumer-appimage, consumer-flatpak]
     runs-on: docker
     # Deze job muteeert buiten ons gebaande pad: elke call draagt daarom een
     # connect- én responstime-out (de curl-flags in de stappen; een endpoint dat
@@ -1047,6 +1079,8 @@ jobs:
             "ocideck-linux-amd64-$VERSIE.deb" \
             "ocideck-linux-x86_64-$VERSIE.rpm" \
             "ocideck-linux-x86_64-$VERSIE.AppImage" \
+            "ocideck-linux-x86_64-$VERSIE.flatpak" \
+            "ocideck-linux-x86_64-$VERSIE.flatpak.cdx.json" \
             "ocideck-macos-$VERSIE.zip" \
             "ocideck-windows-x64-$VERSIE.zip" \
             "ocideck-windows-x64-setup-$VERSIE.exe" \
@@ -1054,7 +1088,7 @@ jobs:
           find dist -maxdepth 1 -type f -exec basename {} \; \
             | LC_ALL=C sort > /tmp/werkelijke-assets
           if ! diff -u /tmp/verwachte-assets /tmp/werkelijke-assets; then
-            echo "dist/ bevat niet exact de elf verwachte release-assets; publicatie geweigerd." >&2
+            echo "dist/ bevat niet exact de twaalf verwachte release-assets; publicatie geweigerd." >&2
             exit 1
           fi
 

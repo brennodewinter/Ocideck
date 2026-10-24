@@ -1,14 +1,16 @@
 # Linux-packaging — plan en afweging
 
-> **Status:** fase 1 gebouwd · fase 2 (APT) gebouwd · opgesteld 2026-08-04 · onderdeel van #1227
+> **Status:** fase 1 gebouwd · fase 2 (APT) gebouwd · directe Flatpak-bundel gebouwd · opgesteld 2026-08-04 · onderdeel van #1227
 >
 > Dit was een ontwerp met een aanbeveling; **fase 1 (AppImage + `.deb` + `.rpm` +
 > AUR) is inmiddels geïmplementeerd** — zie `scripts/package_linux.sh`,
 > `packaging/`, de `linux`-job in `.forgejo/workflows/release.yml` en
 > `docs/BUILD.md` § "Linux packaging". Fase 2 publiceert de `.deb` inmiddels ook
 > naar de ondertekende Debian-registry van de eigen Forgejo, zodat `apt upgrade`
-> meeloopt. Een eigen rpm-repo en fase 3 (Flatpak/Snap achter de
-> capaciteits-feature-flag) staan nog open. Het stuk
+> meeloopt. De directe `.flatpak`-bundel komt nu ook uit dezelfde Linux-build;
+> Git en zijn helpers zijn meegebundeld en de bestaande Git-versieproef in de
+> app bepaalt of die functie beschikbaar is. Een eigen Flatpak-remote, Flathub,
+> Snap en een eigen rpm-repo staan nog open. Het stuk
 > hieronder legt de opties naast elkaar, weegt ze tegen de kernwaarden, en stelt
 > de fasering voor. De waardenlijn volgt
 > [`../../assurance/app-store-distributie-positie.md`](../../assurance/app-store-distributie-positie.md):
@@ -142,13 +144,15 @@ bijzaak. De redenering staat in
 2. **Daarna, gebruiksgemak zonder de forge te verlaten:** een eigen,
    ondertekende apt-repo (en desgewenst een dnf/rpm-repo) op de forge/website,
    zodat updates meelopen.
-3. **De confined kanalen — Flatpak en Snap, elk mét de capaciteits-feature-flag
-   als bouwvoorwaarde.** Flatpak langs een eigen remote of een `.flatpak`-bundel
-   (waardenzuiver) én Flathub (bereik + vindbaarheid); Snap voor de Ubuntu-markt.
-   Elk van deze draait in een sandbox, dus geen van drieën gaat live zonder dat
-   de feature-flag de subproces-afhankelijke functies netjes uitschakelt en
-   benoemt. De offline-buildhorde van Flathub is met `flatpak-flutter`/`flutpak`
-   te nemen.
+3. **Directe Flatpak-bundel — GEBOUWD.** De release levert een `.flatpak`-bestand
+   via de eigen forge, met Git en zijn helpers in de bundel. De bestaande
+   Git-versieproef toont de beperking wanneer Git toch niet beschikbaar is.
+   De bundel bevat de licentieteksten van de meegeleverde Linux-onderdelen;
+   hun exacte versies en bestands-hashes komen ook als apart CycloneDX-bestand
+   mee. De GNOME-runtime wordt apart via een Flatpak-remote geïnstalleerd.
+4. **Andere confined kanalen — OPEN.** Een eigen Flatpak-remote, Flathub en
+   Snap vragen aparte distributie- en functietoetsing. De offline-buildhorde
+   van Flathub is met `flatpak-flutter`/`flutpak` te nemen.
 
 Elke fase is op zichzelf compleet; niets hiervan maakt een kanaal canoniek. De
 onderbouwing waarom óók de laag-soevereine kanalen (Snap, Flathub) hier als
@@ -169,18 +173,18 @@ De installatie-uitleg op de site (librekat.nl, `nl` als brontaal, vertaald via
    `brew install --cask brennodewinter/ocideck/ocideck` als terugvaloptie);
    de "ongetekend, zo open je hem"-tekst blijft gelden zolang releases niet
    genotariseerd zijn. Ook deze wijziging → opnieuw vertalen.
-3. **Flatpak makkelijk maken** hangt aan de Flatpak-beslissing hierboven: bij
-   Flathub is de site-tekst één `flatpak install`-regel; bij een eigen remote
-   staat er eerst een `remote-add`.
+3. **Flatpak makkelijk maken — GEBOUWD voor directe download.** De site toont
+   de `.flatpak` alleen wanneer die echt bij de release staat, en noemt de
+   aparte GNOME-runtime. Een update-remote of Flathub-route vraagt later eigen
+   tekst en controle.
 
 Deze drie leven in de website-repo, niet hier; ze staan genoteerd zodat ze niet
 zoekraken.
 
 ## Open beslissingen (voor de bouwfase)
 
-- **Flatpak: eigen remote/`.flatpak`-bundel én Flathub?** De soevereiniteitstoets
-  wijst richting "allebei": de eigen route voor de waarde, Flathub voor het
-  bereik. Bevestiging gevraagd.
+- **Flatpak: eigen remote en Flathub?** De directe `.flatpak`-bundel is de eigen
+  route. Een update-remote en een Flathub-vermelding zijn nog niet besloten.
 - **Snap: als extra route erbij (aanbevolen na de ECSF-weging), en zo ja strict-
   of classic-confinement?** Strict houdt de sandbox intact (feature-flag doet het
   werk); classic vergt Canonicals per-app-goedkeuring.

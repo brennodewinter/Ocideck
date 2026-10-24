@@ -470,9 +470,8 @@ retried later. Anything unrecognised is shown raw, without a guessed cause.
   macOS regelt hetzelfde via `CFBundleDocumentTypes` in `Info.plist`
   (`.ocideck` = Owner, `.md` = Alternate) — dat zit al in de app-bundel.
 - Linux: distribute `build/linux/x64/release/bundle/` (shipped as a tarball), or
-  build an AppImage, a `.deb` and an `.rpm` from it with `make package-linux` —
-  see [Linux packaging](#linux-packaging). Flatpak/Snap are a separate, later
-  track (#1227).
+  build an AppImage, a `.deb`, an `.rpm` and a Flatpak bundle from it with
+  `make package-linux` — see [Linux packaging](#linux-packaging).
 
 ### Building the Windows installer
 
@@ -1110,18 +1109,21 @@ three portable formats — AppImage, `.deb` and `.rpm` — off every release, ne
 to the tarball — all wrapping the same bundle, none a store or a sandbox. Phase
 2 also publishes the `.deb` to the signed Debian registry of the same Forgejo,
 so an apt installation receives later versions through `apt upgrade`. The
-design and the later phases (an rpm repo; Flatpak/Snap behind the capability
-feature-flag) are in
+design and the remaining phases (an rpm repo; Snap) are in
 [`design/LINUX_PACKAGING.md`](design/LINUX_PACKAGING.md); the layout is in
 [`../packaging/README.md`](../packaging/README.md).
 
 - **Where it runs.** The `linux` job in `.forgejo/workflows/release.yml`, after
   `make build-linux`, runs `make package-linux` (→ `scripts/package_linux.sh`)
-  and uploads all four assets in one artifact. `publiceren` then folds them into
+  and uploads all five assets in one artifact. `publiceren` then folds them into
   `SHA256SUMS` like every other file.
 - **What it produces**, into `dist/`:
   `ocideck-linux-x86_64-<v>.AppImage`, `ocideck-linux-amd64-<v>.deb`,
-  `ocideck-linux-x86_64-<v>.rpm` (each format's own arch label).
+  `ocideck-linux-x86_64-<v>.rpm`,
+  `ocideck-linux-x86_64-<v>.flatpak` and its
+  `ocideck-linux-x86_64-<v>.flatpak.cdx.json` component inventory
+  (each format's own arch label). The Flatpak embeds copyright notices for its
+  bundled Git and tray libraries under `/app/share/doc/ocideck-flatpak`.
 - **Tools.** `dpkg-deb` (base system), `rpmbuild` (the `rpm` package, added by
   the job) and `appimagetool`. The `.rpm` lets rpmbuild derive soname `Requires`
   so it resolves on Fedora and openSUSE alike; the `.deb` declares
@@ -1142,8 +1144,8 @@ feature-flag) are in
   and already publishes the project's CI images. A missing or rejected token
   fails the release instead of leaving the apt source silently behind. Never
   replace it with a broad personal token.
-- **Consumer-verified before publication.** Three jobs (`consumer-deb`,
-  `consumer-rpm`, `consumer-appimage`) install the packages in pinned, bare
+- **Consumer-verified before publication.** Four jobs (`consumer-deb`,
+  `consumer-rpm`, `consumer-appimage`, `consumer-flatpak`) install the packages in pinned, bare
   distro images — Ubuntu 24.04 for the `.deb` and AppImage, Fedora 42 for the
   `.rpm` — link-check the binary with `ldd` and start it under Xvfb. The build
   image carries every `-dev` package, so only a clean image can expose a

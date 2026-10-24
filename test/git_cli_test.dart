@@ -57,6 +57,21 @@ Map<String, String>? _smokeEnv() {
 }
 
 void main() {
+  test('Flatpak Git uses fixed app-owned helpers, never caller paths', () {
+    final paths = flatpakGitEnvironment({
+      'FLATPAK_ID': 'com.dewinter.ocideck',
+      'GIT_EXEC_PATH': '/tmp/untrusted',
+      'GIT_TEMPLATE_DIR': '/tmp/untrusted',
+    });
+    if (Platform.isLinux) {
+      expect(paths['GIT_EXEC_PATH'], '/app/libexec/git-core');
+      expect(paths['GIT_TEMPLATE_DIR'], '/app/share/git-core/templates');
+    } else {
+      expect(paths, isEmpty);
+    }
+    expect(flatpakGitEnvironment({'FLATPAK_ID': 'other.app'}), isEmpty);
+  });
+
   group('GitVersion.parse', () {
     test('leest gangbare vormen', () {
       expect(GitVersion.parse('git version 2.54.0')!.display, '2.54.0');

@@ -63,7 +63,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq unzip zip rpm file \
+            nodejs make git curl ca-certificates xz-utils jq unzip zip rpm file flatpak python3 \
             clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
             libsecret-1-dev libayatana-appindicator3-dev \
             build-essential
@@ -248,6 +248,36 @@ jobs:
           ! ldd squashfs-root/ocideck | grep 'not found'
           set +e
           timeout 20 xvfb-run -a squashfs-root/AppRun
+          rc=$?
+          set -e
+          test "$rc" -eq 124
+
+  consumer-flatpak:
+    name: Flatpak proef op een schone Ubuntu
+    needs: build-linux
+    runs-on: docker
+    timeout-minutes: 90
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Artefactactie voorbereiden
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux, path: dist }
+      - name: Installeren, linken en starten
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends flatpak xvfb fonts-dejavu-core
+          flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
+          flatpak --user install -y --noninteractive --bundle ./dist/ocideck-linux-x86_64-*.flatpak
+          flatpak run --user --command=sh com.dewinter.ocideck -c \
+            'export GIT_EXEC_PATH=/app/libexec/git-core GIT_TEMPLATE_DIR=/app/share/git-core/templates; git --version && git init -q /tmp/ocideck-git-probe && git -C /tmp/ocideck-git-probe -c user.name=probe -c user.email=probe@example.invalid commit --allow-empty -qm probe && test -x /app/libexec/git-core/git-remote-https && ! ldd /app/libexec/git-core/git-remote-https | grep "not found" && ! ldd /app/lib/ocideck/ocideck | grep "not found" && ! ldd /app/lib/ocideck/lib/libcnativeapi.so | grep "not found"'
+          set +e
+          timeout 20 xvfb-run -a dbus-run-session -- flatpak run --user com.dewinter.ocideck
           rc=$?
           set -e
           test "$rc" -eq 124
