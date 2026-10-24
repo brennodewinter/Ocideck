@@ -22,6 +22,8 @@ import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/settings/transcription_module_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../support/pump_until.dart';
+
 const _surfaceKey = ValueKey('transcription-card-golden-surface');
 
 Future<void> _match(
@@ -98,18 +100,22 @@ Future<void> _match(
     ),
   );
   // De io-probe en modelstore doen echte dart:io-calls — die lopen in de
-  // echte event loop, niet in de fake-async zone. Een pump van 50 ms is
-  // soms te krap: de kaart toont dan nog "detecteren…" en de gouden plaat
-  // wijkt af. De probes krijgen daarom eerst echte tijd, en daarna één
-  // frame, zodat de plaat de gelande status vastlegt.
+  // echte event loop, niet in de fake-async zone. De plaat mag pas als de
+  // tussenstatus ("detecteren…", "controleren…") weg is; een vaste duur
+  // vangt die soms nog en wijkt dan af onder een volle suite.
   final ctx = tester.element(find.byType(TranscriptionModuleCard));
-  await tester.runAsync(() async {
-    await ProviderScope.containerOf(
+  await tester.runAsync(
+    () => ProviderScope.containerOf(
       ctx,
-    ).read(transcriptionModelManagerProvider.notifier).refresh();
-    await Future<void>.delayed(const Duration(milliseconds: 400));
-  });
-  await tester.pump(const Duration(milliseconds: 50));
+    ).read(transcriptionModelManagerProvider.notifier).refresh(),
+  );
+  await pumpUntil(
+    tester,
+    () =>
+        find.textContaining('detecteren').evaluate().isEmpty &&
+        find.textContaining('controleren').evaluate().isEmpty,
+    reason: 'de statusmatrix bleef op een tussenstatus hangen',
+  );
 
   await expectLater(
     find.byKey(_surfaceKey),
