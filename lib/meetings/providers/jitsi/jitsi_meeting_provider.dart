@@ -47,6 +47,7 @@ import '../../meeting_provider.dart';
 import 'jitsi_config.dart';
 import 'jitsi_config_platform.dart';
 import 'jitsi_meeting_session.dart';
+import 'jitsi_signaling.dart' show jitsiCallFeatures;
 
 /// Haalt de config.js-brontekst op — injecteerbaar zodat tests geen netwerk
 /// hoeven. De live implementatie is [fetchJitsiConfig].
@@ -290,6 +291,9 @@ class JitsiMeetingProvider implements MeetingProvider {
       settings: settings,
       reconnectTransportFactory: () => _transportOpener(settings),
       onRejoin: (_) => live?.rejoin() ?? Future.value(false),
+      // Jicofo ontdekt onze endpoint-features via disco#info — zonder dat
+      // antwoord komt de session-initiate zonder data-content (#2535).
+      discoFeatures: jitsiCallFeatures,
     );
     try {
       final connected = await session.connect();

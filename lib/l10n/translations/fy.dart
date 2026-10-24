@@ -652,6 +652,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Jo mikrofoan of kamera is wei; set de boarne wer oan as jo him wer hawwe.',
+  'Media is niet end-to-end versleuteld.':
+      'Media is net fan ein ta ein fersifere.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Ein-ta-ein-fersifering fan media ûnbekend.',
+  'Media gaat naar': 'Media giet nei',
+  'Audio-uitvoer kiezen': 'Audio-útfier kieze',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'By it meidwaan brûkt OciDeck jo mikrofoan en (opsjoneel) kamera; jo begjinne dempt.',
   'De mediaverbinding is weggevallen.': 'De mediaferbining is weifallen.',

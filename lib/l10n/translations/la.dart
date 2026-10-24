@@ -1620,6 +1620,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Microphonum aut machina photographemata tua evanuit; fontem denuo accende cum redierit.',
+  'Media is niet end-to-end versleuteld.':
+      'Media non ab extremo ad extremum cifrata est.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Cifratio mediorum ab extremo ad extremum ignota est.',
+  'Media gaat naar': 'Media it ad',
+  'Audio-uitvoer kiezen': 'Exitum soni elige',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Participando OciDeck microphono tuo et (pro arbitrio) camera utitur; tacitus incipis.',
   'De mediaverbinding is weggevallen.': 'Coniunctio mediorum excidit.',

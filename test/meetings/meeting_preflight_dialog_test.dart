@@ -11,6 +11,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/meeting_link_resolver.dart';
+import 'package:ocideck/meetings/meeting_media_core.dart'
+    show MeetingAudioOutput, MeetingVideoSurface;
 import 'package:ocideck/meetings/meeting_participant.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 import 'package:ocideck/meetings/meeting_provider_profile.dart';
@@ -231,6 +233,17 @@ class _FakeSession implements MeetingSession {
   MeetingRole get localRole => MeetingRole.attendee;
   @override
   List<MeetingParticipant> get participants => const [];
+  @override
+  MeetingE2eeStatus get mediaE2ee => MeetingE2eeStatus.unknown;
+  @override
+  List<String> get mediaEgressOrigins => const [];
+  @override
+  Future<MeetingVideoSurface?> videoSurfaceFor(String participantId) async =>
+      null;
+  @override
+  Future<List<MeetingAudioOutput>> audioOutputs() async => const [];
+  @override
+  Future<void> selectAudioOutput(String deviceId) async {}
 
   @override
   Future<void> setMicrophone({required bool enabled}) async {}

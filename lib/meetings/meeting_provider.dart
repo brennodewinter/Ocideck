@@ -14,6 +14,7 @@
 // a `CollabTransport` of another. Nothing here couples the two.
 
 import 'meeting_event.dart';
+import 'meeting_media_core.dart' show MeetingAudioOutput, MeetingVideoSurface;
 import 'meeting_participant.dart';
 import 'meeting_provider_profile.dart';
 
@@ -187,6 +188,31 @@ abstract interface class MeetingSession {
 
   /// A snapshot of the current roster, including the local participant.
   List<MeetingParticipant> get participants;
+
+  /// De media-E2EE-status van deze sessie zoals de medialaag die rapporteert —
+  /// `off`/`unknown`/`on`, nooit een claim die niet geverifieerd is (#2535).
+  MeetingE2eeStatus get mediaE2ee;
+
+  /// De werkelijke media-egress: de SFU/TURN-bestemmingen die de gevalideerde
+  /// signalling overdroeg (de JVB uit de Jingle-transport, eventuele ICE-
+  /// servers). Leeg zolang er geen mediapad is — de UI toont dit eerlijk
+  /// naast [mediaE2ee] (#2535).
+  List<String> get mediaEgressOrigins;
+
+  /// Render de videotrack van een deelnemer als Flutter-texture, of null als
+  /// er geen renderbaar beeld is (geen track, track geëindigd, platform
+  /// zonder video). Werkt ook voor de lokale participant (self-view). De UI
+  /// disposet het opgeleverde [MeetingVideoSurface] bij een track-wissel of
+  /// als de tegel verdwijnt (#2535).
+  Future<MeetingVideoSurface?> videoSurfaceFor(String participantId);
+
+  /// De audio-uitvoerbestemmingen die het apparaat nu kent — leeg zonder
+  /// mediapad of platformondersteuning; dan verbergt de UI de picker (#2535).
+  Future<List<MeetingAudioOutput>> audioOutputs();
+
+  /// Kies waar de call-audio heen gaat (best-effort; een verdwenen id faalt
+  /// stil en de OS-default geldt).
+  Future<void> selectAudioOutput(String deviceId);
 
   Future<void> setMicrophone({required bool enabled});
   Future<void> setCamera({required bool enabled});

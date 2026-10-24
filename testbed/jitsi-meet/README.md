@@ -67,6 +67,7 @@ maakt oud bewijs niet stilletjes actueel. De unittest
 browser ──ws──> web:8000 ──proxy──> prosody:5280   (XMPP-signalling)
 browser ──udp──> jvb:10000                        (RTP-media via SFU)
 ocideck ──ws──> prosody:15280                     (directe XMPP-WS, #2533+)
+ocideck ──udp──> relay:10000 ──tcp──> udp-relay:11000 ──udp──> jvb:10000
 jicofo/jvb ──xmpp──> prosody:5222 (intern netwerk meet.jitsi)
 ```
 
@@ -94,6 +95,43 @@ echte Jicofo-wire vastgelegd waarop `lib/meetings/providers/jitsi/` is gebouwd.
 Draai hem opnieuw bij een Jitsi-versiebump om het wire-contract opnieuw te
 verifiëren; twee bevindingen staan alleen hier zichtbaar (`machine-uid` is
 verplicht in de conference-IQ; MUC-resources mogen geen streepjes bevatten).
+
+`probe/solo.js` is één browser-tegenpartij mét echt media voor de
+OciDeck-mediaproef (#2535): Chrome-fake-device stuurt een bewegend
+testpatroon, dus de remote videostream is deterministisch herkenbaar. Twee
+wire-bevindingen uit de eerste proef staan hier geborgd: jitsi-meet joint
+**zonder media** als `prejoinConfig.enabled=false` via de URL komt (de probe
+unmuted daarom expliciet via de conference-API), en `localTracks` staat in
+de redux-store (`features/base/tracks`), niet op `APP.conference`.
+
+```sh
+DURATION_MS=1200000 ROOM=ocideck_media_it node probe/solo.js &
+OCIDECK_JITSI_MEDIA_ROOM=ocideck_media_it \
+  flutter test ../../integration_test/jitsi_real_media_test.dart -d macos
+```
+
+## Media-relay op lima/colima (#2535)
+
+Lima (achter colima) forwardt **geen UDP** van de guest naar de host — ook
+niet bij een `0.0.0.0`-bind en ook niet via `ssh -L`. Daarmee is het
+JVB-mediaadres `127.0.0.1:10000/udp` voor élke client op de host onbereikbaar:
+OciDeck én de browser-probe gebruiken daarom beide het relais.
+
+Het relais bestaat uit twee helften van één script (`probe/udp_relay.py`),
+met een eigen TCP-verbinding én eigen guest-UDP-socket per clientflow — de
+JVB ziet daardoor distincte peer-reflexive bronnen (NAT-gedrag) en
+STUN/DTLS/SRTP-bytes gaan ongemoeid door. Framing: 16-bit lengteprefix per
+datagram.
+
+- `udp-relay` (compose-service, altijd aan): luistert op TCP `11000`,
+  stuurt UDP naar `jvb:10000`.
+- `./run.sh media-relay` (host, per run): luistert op UDP `127.0.0.1:10000`
+  — precies het adres dat de JVB in zijn ICE-kandidaten adverteert — en
+  tunnelt naar TCP `127.0.0.1:11000`.
+
+Op Docker Desktop (wél UDP-forwarding) is het host-relais overbodig maar
+onschadelijk: het UDP-eindpunt bots dan met docker-proxy — de compose-bind
+wint, dus start `media-relay` alleen op lima/colima.
 
 ## Herhaalbaarheid
 

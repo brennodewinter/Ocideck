@@ -140,6 +140,26 @@ All notable changes to OciDeck are documented in this file.
   vertelt: de conference-IQ moet een `machine-uid` dragen, en de
   schuilnaam in de kamer mag geen streepjes bevatten.
 
+- **Echte audio en video in de Jitsi-call (#2535).** De call draait nu echt
+  media, geen signalling-simulatie: microfoon en camera van de gebruiker gaan
+  over de echte ICE/DTLS/SRTP-verbinding naar de videobrug, en de
+  tegenpartij verschijnt als bewegende videotegel. Achter de schermen
+  opende OciDeck daarvoor het Jitsi-endpointkanaal (een SCTP-datachannel
+  waar de brug zegt welke bronnen er forwarden), beantwoordt de XMPP-laag
+  nu server-pings en capaciteitsvragen zoals een echte client dat doet, en
+  vertelt de client de brug welke video-kwaliteit hij wil ontvangen. Wie in
+  de kamer geen beeld deelt, toont een gelabelde tegel — nooit een
+  verzonnen kader. De statusregel onder de knoppen meldt de echte
+  media-uitgang en of media-encryptie aan staat; een uitvoerkeuze schakelt
+  het geluid om naar koptelefoon of speaker. Bewezen op macOS tegen de
+  gepinde testomgeving met een echte browser als tegenpartij: de
+  schermfoto in de test toont Chrome's testsignaal — een bewegende groene
+  disc — als echte gerenderde pixels in de OciDeck-texture. Twee
+  deployment-geheimen dwong die proef af: jitsi-meet joint zonder media als
+  het voorkomens-scherm via de link uit staat, en lima/colima levert geen
+  UDP aan de host — daarvoor staat nu een vastgelijmd UDP↔TCP-relais in de
+  testomgeving. Scherm delen meldt nog steeds eerlijk dat het er niet is.
+
 ### Fixed
 
 - **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende

@@ -7,6 +7,8 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/meetings/meeting_participant.dart'
+    show MeetingTrackKind;
 import 'package:ocideck/meetings/providers/jitsi/jitsi_signaling.dart';
 import 'package:ocideck/xmpp/xmpp_stanza.dart';
 import 'package:xml/xml.dart';
@@ -324,6 +326,55 @@ void main() {
       final text = buildSourceInfo({'nick-a0': false, 'nick-v0': true});
       expect(text, '{"nick-a0":{"muted":false},"nick-v0":{"muted":true}}');
       expect(parseSourceInfo(text), {'nick-a0': false, 'nick-v0': true});
+    });
+  });
+
+  group('json-sources', () {
+    // De echte wire-vorm van de testbed (source-add json-message van de
+    // bridge): per endpoint een geneste array van {s,n,m}-paren.
+    const wire =
+        '{"sources":{"2d02ebba":['
+        '[{"s":4059687427,"n":"2d02ebba-v0","m":"st tr"},'
+        '{"s":2915792709,"n":"2d02ebba-v0","m":"st tr"}],'
+        '[["f",4059687427,2915792709]],'
+        '[{"s":1234995088,"n":"2d02ebba-a0","m":"st tr"}]]}}';
+
+    test('parseJsonSources: ssrc→(endpoint, naam, soort)', () {
+      final sources = parseJsonSources(wire);
+      expect(sources, hasLength(3));
+      expect(sources[0].ssrc, 4059687427);
+      expect(sources[0].endpoint, '2d02ebba');
+      expect(sources[0].sourceName, '2d02ebba-v0');
+      expect(sources[0].kind, MeetingTrackKind.video);
+      expect(sources[2].kind, MeetingTrackKind.audio);
+      // ssrc-groepen (["f",…]) zijn géén bronnen — die vallen weg.
+      expect(sources.where((s) => s.ssrc == 2915792709), hasLength(1));
+    });
+
+    test('parseJsonSources: kapot of vreemd → geen bronnen', () {
+      expect(parseJsonSources(null), isEmpty);
+      expect(parseJsonSources(''), isEmpty);
+      expect(parseJsonSources('not json'), isEmpty);
+      expect(parseJsonSources('{"a":1}'), isEmpty);
+      expect(parseJsonSources('{"sources":{"e":[{"s":"x"}]}}'), isEmpty);
+    });
+
+    test('parseForwardedSources: de echte berichten van de bridge', () {
+      expect(
+        parseForwardedSources(
+          '{"colibriClass":"ForwardedSources","forwardedSources":["e-v0"]}',
+        ),
+        ['e-v0'],
+      );
+      expect(
+        parseForwardedSources(
+          '{"colibriClass":"ForwardedSources","forwardedSources":[]}',
+        ),
+        isEmpty,
+      );
+      // Andere bridge-berichten zijn géén ForwardedSources → null.
+      expect(parseForwardedSources('{"colibriClass":"ServerHello"}'), isNull);
+      expect(parseForwardedSources('not json'), isNull);
     });
   });
 

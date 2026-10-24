@@ -1,6 +1,6 @@
 # OciDeck — Native Calls: one interface, Jitsi + Matrix backends (Design)
 
-> **Status:** design proposal — partially built (F1–F3.4a + Jitsi recognition/preflight + F3.4b signalling-join landed; real RTP on-device still open) · **Status last reviewed:** 2026-10-24 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — partially built (F1–F3.4c: Jitsi recognition/preflight, signalling-join and on-device media proven — real RTP renders a counterparty's video in a texture) · **Status last reviewed:** 2026-10-24 · **Published by:** Stichting LibreKAT
 
 > **A design proposal — not yet implemented.**
 > This document describes a *future* capability. It is kept separate from the
@@ -370,12 +370,13 @@ you control. LiveKit/MatrixRTC remains the cleaner backend for a *pure* own SFU
 ### 7.1 Build status — landed vs. remaining (2026-10-24)
 
 The table above is the plan; this is where it actually stands. **F1–F3.4a plus the
-Jitsi recognition/preflight slice (#2533) and the F3.4b signalling join (#2534) have
-landed on `main`; what remains is on-device RTP evidence plus everything after the
-join.** The `lib/xmpp/` core, the provider-neutral `lib/meetings/` interface and the
-full Jitsi signalling path exist and are tested — two OciDeck clients share a real
-room over real Jicofo in the integration test — and the companion channel carries
-nothing yet.
+Jitsi recognition/preflight slice (#2533), the F3.4b signalling join (#2534) and the
+F3.4c on-device media proof (#2535) have landed on `main`; what remains is
+everything after the join.** The `lib/xmpp/` core, the provider-neutral
+`lib/meetings/` interface and the full Jitsi signalling+media path exist and are
+proven — two OciDeck clients share a real room over real Jicofo, and real RTP
+renders a browser counterparty's video in a Flutter texture on macOS — while the
+companion channel carries nothing yet.
 
 **Landed (on `main`, behind the default-off Videovergaderingen module):**
 
@@ -427,6 +428,38 @@ nothing yet.
   real RTP through the same stack).
 - Plus later XMPP hardening (#1316–1320, #1366–1370): bounded stanza sizes/counts and
   resource-exhaustion limits.
+- **F3.4c — on-device media + remote video** (#2535). `MeetingMediaConnection`
+  gained the render/device/data surface: `attachVideo` → `MeetingVideoSurface`
+  (a `textureId`, nothing flutter_webrtc leaks into `lib/meetings/`),
+  `localTrackLost`, `audioOutputs`/`selectAudioOutput`, and `openDataChannel` →
+  `MeetingDataChannel`. `WebrtcMediaCore` binds it: one `RTCVideoRenderer` per
+  track, call-audio constraints, `track.onEnded` → source loss, libwebrtc log
+  pinned at `'error'` (`webrtc_media_pin_test` watches the pin). The session
+  exposes `videoSurfaceFor`, `mediaEgressOrigins` (the real JVB candidates out
+  of the last initiate) and `mediaE2ee`, opens the Jitsi endpoint channel
+  (`ClientHello` + `ReceiverVideoConstraints` on SCTP — graceful degradation:
+  a failed channel still joins, but never fakes a remote tile), consumes
+  `ForwardedSources` (the shared JVB stream is attributed to the participant
+  the bridge says is forwarded — the track's own msid is a random UUID) and the
+  `source-add`/`-remove` json-sources (`{s,n}` pairs per endpoint for audio
+  presence), and renegotiates on a fresh `session-initiate` (bridge failover).
+  Underneath, the XMPP layer learned to be a real endpoint: outgoing pings are
+  now genuine `jabber:client` stanzas `to` the service domain (prosody killed
+  the un-namespaced frame, #2535 root cause of the mid-join drops), incoming
+  `urn:xmpp:ping` gets a result, and disco#info answers advertise the actual
+  Jitsi feature set — without it Jicofo's offer omits the `data` content and
+  rtx (proven on the wire). `XmppSession` gained `discoFeatures`. The call
+  panel renders `Texture` tiles (a trackless participant keeps the labelled
+  placeholder), the E2EE/egress status line and an audio-output picker.
+  **Proven on macOS** (`integration_test/jitsi_real_media_test.dart`): ICE/DTLS
+  `live` to the pinned JVB, SCTP up, `ServerHello` back, `ForwardedSources`
+  `[ep-v0]`, a real texture whose screenshot shows Chrome's fake-device test
+  pattern — a moving disc, not a black frame. The browser counterparty is
+  `testbed/jitsi-meet/probe/solo.js` (unmutes explicitly — jitsi-meet joins
+  medialess under the `prejoinConfig` URL override); lima/colima's missing UDP
+  forwarding is bridged by `probe/udp_relay.py` + the pinned `udp-relay`
+  compose service + `./run.sh media-relay`. Screen share still reports the
+  honest absence. Covers **joining**.
 
 *(Heads-up for a cold reader: §9's "New files (proposed)" list predates this and is
 partly stale — e.g. `xmpp_connection.dart` was built and then removed in F3.1. The
@@ -434,28 +467,18 @@ files listed here are the truth on disk.)*
 
 **Remaining, as concrete buildable slices:**
 
-1. **F3.4c — the on-device media evidence** (#2534 landed the signalling join:
-   `join` returns a real `MeetingSession` whose negotiation, roster, mute, chat and
-   leave run over real Jicofo). What remains is proving real RTP on a device —
-   the `WebrtcMediaCore` binding is verified against the contract but cannot run
-   headless, so the tiles still draw no video frames and screen share reports the
-   honest absence. Carry-over musts from the F3.4a reviews: **pin the
-   `flutter_webrtc` log level** once the stack is driven for real. *(Done in #2533:
-   unique nicks via `meeting_nick.dart`; XEP-0030 MUC discovery via `xmpp_disco.dart`;
-   done in #2534: the whole signalling chain.)* Testbed: `testbed/jitsi-meet` + two
-   clients. Covers **joining**.
-2. **Companion data plane over XMPP — `XmppTransport implements CollabTransport`**
+1. **Companion data plane over XMPP — `XmppTransport implements CollabTransport`**
    (net-new; `CollabTransport` today has only loopback / WebDAV / Matrix-relay). Wire
    `xmpp_muc` + `companion_room` to actually carry ops/locks/presence/chat, so the
    collaboration data plane runs on the XMPP spine — the "immediately usable standalone
    channel" F2 promised but which is not yet connected to `CollabTransport`. This is also
    the swap-in that lets `MatrixRelayTransport` be parked: the two are interchangeable
    behind the seam. The chat-mode default (§5.2) is decided here.
-3. **F4 — presenting.** The slide as an own video track via `SlideRasterizer`
+2. **F4 — presenting.** The slide as an own video track via `SlideRasterizer`
    **through the projection boundary** (`AudienceDeck`; `tool/check_audience_boundary.dart`
    breaks the build until it does — §8). Presenter layout (slide large + tiles);
-   presenter-sync over the data plane (slice 2).
-4. **F5 — hosting + Matrix mode + media E2EE.** Host an XMPP/Jitsi-mode session on a
+   presenter-sync over the data plane (slice 1).
+3. **F5 — hosting + Matrix mode + media E2EE.** Host an XMPP/Jitsi-mode session on a
    Jitsi deployment you control (`meeting_provider_profile.dart`, bring-your-own-URL),
    *or* a wholly-Matrix-mode session (`lib/meetings/providers/matrixrtc/…` behind the
    same `MeetingSession`). **Media E2EE stays off until `flutter-webrtc#2135` is merged,

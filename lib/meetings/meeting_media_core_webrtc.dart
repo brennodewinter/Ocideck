@@ -19,6 +19,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:logger/logger.dart';
 
 import '../utils/log.dart';
 import 'meeting_media_core.dart';
@@ -29,7 +30,20 @@ import 'meeting_provider.dart' show MeetingE2eeStatus;
 /// calls the seam promises.
 class WebrtcMediaCore implements MeetingMediaCore {
   WebrtcMediaCore({TargetPlatform? platform})
-    : _platform = platform ?? defaultTargetPlatform;
+    : _platform = platform ?? defaultTargetPlatform {
+    // Pin het libwebrtc-logniveau (F3.4c-review, #2535): op 'error' komen SDP,
+    // adressen en sleutelmateriaal niet in logs terecht, en de meldingen die er
+    // wél zijn lopen via onze eigen logError — nooit via een default console
+    // printer. De severity is een constante zodat een test de pin kan bewaken.
+    Helper.setLogger(
+      Logger(printer: SimplePrinter(), output: _OciWebrtcLogOutput()),
+      webrtcLogSeverity,
+    );
+  }
+
+  /// Het vastgezette libwebrtc-logniveau. Niet instelbaar maken: 'verbose' of
+  /// 'info' zou volledige SDP en ICE-adressen in logs zetten.
+  static const webrtcLogSeverity = 'error';
 
   final TargetPlatform _platform;
 
@@ -105,8 +119,12 @@ class _WebrtcConnection implements MeetingMediaConnection {
   final RTCRtpTransceiver _videoTr;
   final _remote = StreamController<MeetingRemoteTrack>.broadcast();
   final _livenessOut = StreamController<MeetingMediaLiveness>.broadcast();
+  final _localLostOut = StreamController<String>.broadcast();
   var _liveness = MeetingMediaLiveness.connecting;
   final _localTracks = <String, MediaStreamTrack>{};
+  final _remoteStreams = <String, MediaStream>{};
+  final _renderers = <RTCVideoRenderer>[];
+  final _dataChannels = <_WebrtcDataChannel>[];
   MediaStream? _micStream;
   MediaStream? _camStream;
   var _closed = false;
@@ -121,30 +139,35 @@ class _WebrtcConnection implements MeetingMediaConnection {
   Stream<MeetingMediaLiveness> get liveness => _livenessOut.stream;
 
   @override
+  Stream<String> get localTrackLost => _localLostOut.stream;
+
+  @override
   MeetingMediaLiveness get currentLiveness => _liveness;
 
   void _onTrack(RTCTrackEvent event) {
     if (_closed) return;
     if (_remoteTrackCount >= _maxRemoteTracks) return;
     _remoteTrackCount++;
-    final streamId = event.streams.isNotEmpty
-        ? event.streams.first.id
-        : event.track.id;
-    _remote.add(_remoteTrackOf(event.track, streamId, active: true));
+    // De stream bewaren we voor de renderer — een track zonder stream kan de
+    // UI niet tonen (attachVideo geeft dan null, fail-closed).
+    if (event.streams.isNotEmpty && event.track.id != null) {
+      _remoteStreams[event.track.id!] = event.streams.first;
+    }
+    _remote.add(_remoteTrackOf(event.track, active: true));
     event.track.onEnded = () {
-      _remote.add(_remoteTrackOf(event.track, streamId, active: false));
+      _remote.add(_remoteTrackOf(event.track, active: false));
     };
   }
 
   void _onRemoveStream(MediaStream stream) {
     for (final track in stream.getTracks()) {
-      _remote.add(_remoteTrackOf(track, stream.id, active: false));
+      _remoteStreams.remove(track.id);
+      _remote.add(_remoteTrackOf(track, active: false));
     }
   }
 
   MeetingRemoteTrack _remoteTrackOf(
-    MediaStreamTrack track,
-    String? msid, {
+    MediaStreamTrack track, {
     required bool active,
   }) => MeetingRemoteTrack(
     track: MeetingTrack(
@@ -153,7 +176,6 @@ class _WebrtcConnection implements MeetingMediaConnection {
           ? MeetingTrackKind.audio
           : MeetingTrackKind.video,
     ),
-    msid: msid,
     active: active,
   );
 
@@ -210,6 +232,12 @@ class _WebrtcConnection implements MeetingMediaConnection {
       return null;
     }
     _localTracks[track.id ?? ''] = track;
+    // Bronverlies (mic/cam fysiek weg, permissie ingetrokken) meldt de track
+    // zelf — de adapter zet daarna SourceInfo en de participant bij (#2535).
+    track.onEnded = () {
+      _localTracks.remove(track.id);
+      if (!_localLostOut.isClosed) _localLostOut.add(track.id ?? '');
+    };
     return (trackId: track.id ?? '', ssrc: await _senderSsrc(kind));
   }
 
@@ -233,8 +261,14 @@ class _WebrtcConnection implements MeetingMediaConnection {
   @override
   Future<({String trackId, int? ssrc})?> addLocalAudio() =>
       _addLocal('audio', () async {
+        // Call-audio: echo-onderdrukking, ruisonderdrukking en gain-aansturing
+        // zijn de verwerkingsdefaults die een vergadering verwacht (#2535).
         final s = await navigator.mediaDevices.getUserMedia(const {
-          'audio': true,
+          'audio': {
+            'echoCancellation': true,
+            'noiseSuppression': true,
+            'autoGainControl': true,
+          },
           'video': false,
         });
         return _micStream = s;
@@ -257,6 +291,69 @@ class _WebrtcConnection implements MeetingMediaConnection {
   }) async {
     final track = _localTracks[trackId];
     if (track != null) track.enabled = enabled;
+  }
+
+  @override
+  Future<MeetingVideoSurface?> attachVideo(String trackId) async {
+    if (_closed) return null;
+    // Remote stream, of onze eigen camerastream voor de self-view — beide op
+    // track-id. Onbekend/eindig → null, nooit een nepvlak (#2535).
+    final stream =
+        _remoteStreams[trackId] ??
+        (_localTracks[trackId] != null && _localTracks[trackId]!.kind == 'video'
+            ? _camStream
+            : null);
+    if (stream == null) return null;
+    final renderer = RTCVideoRenderer();
+    try {
+      await renderer.initialize();
+      renderer.srcObject = stream;
+    } catch (e) {
+      logWarning('WebrtcConnection.attachVideo', e);
+      await renderer.dispose();
+      return null;
+    }
+    _renderers.add(renderer);
+    return _WebrtcVideoSurface(renderer);
+  }
+
+  @override
+  Future<List<MeetingAudioOutput>> audioOutputs() async {
+    try {
+      final devices = await Helper.audiooutputs;
+      return [
+        for (final d in devices)
+          MeetingAudioOutput(id: d.deviceId, label: d.label),
+      ];
+    } on Exception catch (e) {
+      logWarning('WebrtcConnection.audioOutputs', e);
+      return const [];
+    }
+  }
+
+  @override
+  Future<void> selectAudioOutput(String deviceId) async {
+    try {
+      await Helper.selectAudioOutput(deviceId);
+    } on Exception catch (e) {
+      // Best-effort: platform zonder audio-outputkeuze → OS-default geldt.
+      logWarning('WebrtcConnection.selectAudioOutput', e);
+    }
+  }
+
+  /// Het kanaal wordt aangemaakt zodra de pc bestaat; libwebrtc opent het
+  /// zodra DTLS/SCTP staat. De adapter mag dit dus vóór ICE-live aanroepen.
+  /// 15s begrensd — een channel die nooit opent betekent een kapot
+  /// mediapad, en de caller mag dan eerlijk falen i.p.v. eeuwig hangen.
+  @override
+  Future<MeetingDataChannel> openDataChannel(String label) async {
+    if (_closed) throw StateError('connection gesloten');
+    final channel = _WebrtcDataChannel(
+      await _pc.createDataChannel(label, RTCDataChannelInit()),
+    );
+    _dataChannels.add(channel);
+    await channel.opened.timeout(const Duration(seconds: 15));
+    return channel;
   }
 
   @override
@@ -297,6 +394,19 @@ class _WebrtcConnection implements MeetingMediaConnection {
     }
     _micStream = null;
     _camStream = null;
+    _remoteStreams.clear();
+    for (final renderer in _renderers) {
+      try {
+        await renderer.dispose();
+      } on Exception catch (e) {
+        logWarning('WebrtcConnection.close: renderer', e);
+      }
+    }
+    _renderers.clear();
+    for (final channel in _dataChannels) {
+      await channel.close();
+    }
+    _dataChannels.clear();
     try {
       await _pc.close();
     } on Exception catch (e) {
@@ -304,5 +414,90 @@ class _WebrtcConnection implements MeetingMediaConnection {
     }
     if (!_remote.isClosed) await _remote.close();
     if (!_livenessOut.isClosed) await _livenessOut.close();
+    if (!_localLostOut.isClosed) await _localLostOut.close();
+  }
+}
+
+/// De echte texture die [attachVideo] teruggeeft — beheert één
+/// `RTCVideoRenderer`; de UI rendert `Texture(textureId: …)`.
+class _WebrtcVideoSurface implements MeetingVideoSurface {
+  _WebrtcVideoSurface(this._renderer);
+
+  final RTCVideoRenderer _renderer;
+  var _disposed = false;
+
+  @override
+  int get textureId => _renderer.textureId ?? -1;
+
+  @override
+  Future<void> dispose() async {
+    if (_disposed) return;
+    _disposed = true;
+    try {
+      await _renderer.dispose();
+    } on Exception catch (e) {
+      logWarning('WebrtcVideoSurface.dispose', e);
+    }
+  }
+}
+
+/// Eén SCTP-datachannel — bij Jitsi de EndpointMessageTransport waarover
+/// de bridge-messages lopen. Alleen tekst: een binair frame is hier geen
+/// protocol en wordt genegeerd.
+class _WebrtcDataChannel implements MeetingDataChannel {
+  _WebrtcDataChannel(this._channel) {
+    _channel.onDataChannelState = (state) {
+      if (_opened.isCompleted) return;
+      switch (state) {
+        case RTCDataChannelState.RTCDataChannelOpen:
+          _opened.complete();
+        case RTCDataChannelState.RTCDataChannelClosing ||
+            RTCDataChannelState.RTCDataChannelClosed:
+          _opened.completeError(StateError('datachannel sloot voor open'));
+        default:
+          break;
+      }
+    };
+    _channel.onMessage = (msg) {
+      if (!msg.isBinary && !_messages.isClosed) _messages.add(msg.text);
+    };
+  }
+
+  final RTCDataChannel _channel;
+  final _messages = StreamController<String>.broadcast();
+  final _opened = Completer<void>();
+  var _closed = false;
+
+  /// Resolves zodra het kanaal echt open staat — [openDataChannel] wacht
+  /// hierop, begrensd.
+  Future<void> get opened => _opened.future;
+
+  @override
+  Stream<String> get messages => _messages.stream;
+
+  @override
+  Future<void> send(String text) => _channel.send(RTCDataChannelMessage(text));
+
+  @override
+  Future<void> close() async {
+    if (_closed) return;
+    _closed = true;
+    try {
+      await _channel.close();
+    } on Exception catch (e) {
+      logWarning('WebrtcDataChannel.close', e);
+    }
+    if (!_messages.isClosed) await _messages.close();
+  }
+}
+
+/// libwebrtc-meldingen (severity 'error') gaan via de eigen log-pipeline —
+/// nooit via een console-printer waar SDP of adressen kunnen belanden (#2535).
+class _OciWebrtcLogOutput extends LogOutput {
+  @override
+  void output(OutputEvent event) {
+    for (final line in event.lines) {
+      logWarning('libwebrtc', line);
+    }
   }
 }

@@ -34,21 +34,14 @@ MeetingE2eeStatus mediaE2eeFor(TargetPlatform platform) => switch (platform) {
   _ => MeetingE2eeStatus.unknown,
 };
 
-/// Wat de media-laag over één remote track meldt. [msid] is de `msid`-waarde
-/// uit het SDP — bij Jitsi bevat die de sourcenaam (`<nick>-a0`) die de sessie
-/// aan een participant koppelt. Een track zonder herleidbare msid krijgt geen
-/// eigenaar en wordt dus nooit verzonnen aan een participant toegeschreven.
+/// Wat de media-laag over één remote track meldt. De track zelf identificeert
+/// niet wíé hij is (bij Jitsi is de msid een willekeurige UUID) — de
+/// provider-signalering bepaalt welke participant hem toebehoort, en een
+/// track zónder die koppeling krijgt nooit een verzonnen eigenaar.
 class MeetingRemoteTrack {
-  const MeetingRemoteTrack({
-    required this.track,
-    this.msid,
-    this.active = true,
-  });
+  const MeetingRemoteTrack({required this.track, this.active = true});
 
   final MeetingTrack track;
-
-  /// De `msid` van de stream zoals de peer die stuurde, of null.
-  final String? msid;
 
   /// `false` = de track eindigde (onRemoveStream/track ended).
   final bool active;
@@ -59,6 +52,45 @@ class MeetingRemoteTrack {
 /// mediapad-bewijs (acceptatie: nooit een schijnbaar verbonden call zonder
 /// mediapad).
 enum MeetingMediaLiveness { connecting, live, disrupted, dead, closed }
+
+/// Een gerenderd videovlak als Flutter-texture — het enige wat de call-UI
+/// nodig heeft (`Texture(textureId: …)`), zodat `lib/meetings/` geen
+/// flutter_webrtc-type exposeert (#2535). [attachVideo] op de connection
+/// levert hem; de houder disposet hem bij track-einde of sluiten.
+abstract interface class MeetingVideoSurface {
+  /// De platform-texture die `Texture` rendert.
+  int get textureId;
+
+  /// Ruimt de renderer op. Idempotent.
+  Future<void> dispose();
+}
+
+/// Een SCTP-tekstkanaal naar de peer. Bij Jitsi is dit de
+/// EndpointMessageTransport: de bridge-messages (ClientHello,
+/// ReceiverVideoConstraints, DominantSpeakerMessage) lopen eroverheen als
+/// JSON — zonder dit kanaal forwardt de JVB geen video (#2535). De
+/// JSON-semantiek hoort bij de adapter; dit is alleen de pijp.
+abstract interface class MeetingDataChannel {
+  /// Binnenkomende tekstberichten, in volgorde. Binaire frames komen hier
+  /// niet uit — de bridge spreekt alleen tekst.
+  Stream<String> get messages;
+
+  /// Stuur een tekstbericht naar de peer.
+  Future<void> send(String text);
+
+  /// Sluit het kanaal. Idempotent.
+  Future<void> close();
+}
+
+/// Een uitvoerbestemming voor call-audio (koptelefoon, speakers, …), zoals
+/// `Helper.audiooutputs` die meldt. [id] gaat naar [selectAudioOutput];
+/// [label] is wat de gebruiker ziet.
+class MeetingAudioOutput {
+  const MeetingAudioOutput({required this.id, required this.label});
+
+  final String id;
+  final String label;
+}
 
 /// One ICE server the *vetted signalling session* handed us (extdisco/TURN).
 /// The adapter fills this — never a hardcoded public service (P1).
@@ -98,6 +130,31 @@ abstract interface class MeetingMediaConnection {
   /// Enable/disable a previously added local track (mute). The track keeps
   /// flowing; `enabled=false` is what jitsi's `muted` SourceInfo means.
   Future<void> setLocalTrackEnabled(String trackId, {required bool enabled});
+
+  /// De track-id van een lokale bron die wegvalt (mic/cam verdwenen,
+  /// permissie ingetrokken). De adapter zet daarna SourceInfo én de
+  /// participant bij — een weggevallen bron is geen gemuteerde bron meer.
+  Stream<String> get localTrackLost;
+
+  /// Render een video-track (remote óf lokaal, op [MeetingTrack.id]) als
+  /// texture. Null bij een onbekende of al geëindigde track — nooit een
+  /// nepvlak (#2535). De connection ruimt de onderliggende renderer op bij
+  /// [close]; de aanroeper disposet zijn eigen surface expliciet.
+  Future<MeetingVideoSurface?> attachVideo(String trackId);
+
+  /// De audio-uitvoerbestemmingen die het apparaat nu kent.
+  Future<List<MeetingAudioOutput>> audioOutputs();
+
+  /// Kies waar de call-audio heen gaat. Best-effort per platform — een
+  /// onbekende of verdwenen id faalt stil (de OS-default geldt dan).
+  Future<void> selectAudioOutput(String deviceId);
+
+  /// Open een betrouwbaar SCTP-datachannel met [label] en geef hem zodra
+  /// hij echt open staat (pas na DTLS/SCTP — daarom async). De offer moet
+  /// een `m=application`-sectie hebben; de adapter kiest [label] (de JVB
+  /// behandelt elk inkomend kanaal als endpoint-message transport).
+  /// Faalt begrensd als het kanaal nooit opent.
+  Future<MeetingDataChannel> openDataChannel(String label);
 
   /// The remote offer (the synthesised SDP from `session-initiate`).
   Future<void> applyRemoteOffer(String sdp);

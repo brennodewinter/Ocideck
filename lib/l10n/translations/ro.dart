@@ -1621,6 +1621,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Microfonul sau camera dvs. a dispărut; reporniți sursa când o recuperați.',
+  'Media is niet end-to-end versleuteld.': 'Media nu este criptat cap-coadă.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Criptarea cap-coadă a media necunoscută.',
+  'Media gaat naar': 'Media merge către',
+  'Audio-uitvoer kiezen': 'Alegeți ieșirea audio',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'La conectare, OciDeck vă folosește microfonul și (opțional) camera; începeți cu sunetul dezactivat.',
   'De mediaverbinding is weggevallen.': 'Conexiunea media s-a întrerupt.',

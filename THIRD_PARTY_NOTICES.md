@@ -134,6 +134,7 @@ same answer `make licenses` and the SBOM give.
 | `fl_chart` | Chart slides | MIT |
 | `cupertino_icons` | Icon set | MIT |
 | `desktop_multi_window` | The second (audience) window — vendored fork, see above | Apache-2.0 |
+| `logger` | Routing libwebrtc's pinned log output (`Helper.setLogger` at severity `error`) through the repo logging path — no console printer, no SDP/addresses in logs | MIT |
 
 > **This table is guarded, not trusted.** `third_party_notices_test.dart` fails
 > when a direct dependency, a vendored JS bundle or a bundled font is missing

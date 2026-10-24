@@ -11,6 +11,8 @@
 import 'dart:async';
 
 import 'package:ocideck/meetings/meeting_event.dart';
+import 'package:ocideck/meetings/meeting_media_core.dart'
+    show MeetingAudioOutput, MeetingVideoSurface;
 import 'package:ocideck/meetings/meeting_participant.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 
@@ -97,6 +99,23 @@ class FakeMeetingSession implements MeetingSession {
 
   @override
   List<MeetingParticipant> get participants => [_local, ..._remotes.values];
+
+  // The fake has no media stack: honest empty answers, never a fake surface.
+  @override
+  MeetingE2eeStatus get mediaE2ee => MeetingE2eeStatus.unknown;
+
+  @override
+  List<String> get mediaEgressOrigins => const [];
+
+  @override
+  Future<MeetingVideoSurface?> videoSurfaceFor(String participantId) async =>
+      null;
+
+  @override
+  Future<List<MeetingAudioOutput>> audioOutputs() async => const [];
+
+  @override
+  Future<void> selectAudioOutput(String deviceId) async {}
 
   @override
   Future<void> setMicrophone({required bool enabled}) async {

@@ -1608,6 +1608,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Ihres Mikrofon oder d Kamera isch weg; schalted d Quelle wieder ii, sobald se zrugg isch.',
+  'Media is niet end-to-end versleuteld.':
+      'Media isch nit End-zu-End-verschlüsslet.',
+  'End-to-end-versleuteling van media onbekend.':
+      'End-zu-End-Verschlüsslung vo de Media ubekannt.',
+  'Media gaat naar': 'Media gaht an',
+  'Audio-uitvoer kiezen': 'Audiousgab wähle',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Bim Mitmache bruucht OciDeck Ihres Mikrofon und (optional) d Kamera; Si fanged dumpt aa.',
   'De mediaverbinding is weggevallen.': 'D Medieverbindig isch abgrisse.',

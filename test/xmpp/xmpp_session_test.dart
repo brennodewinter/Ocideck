@@ -615,6 +615,105 @@ void main() {
     });
 
     test(
+      'de uitgaande ping is een client-stanza naar het servicedomain',
+      () async {
+        final t = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final session = XmppSession(
+          transport: t,
+          settings: account(),
+          password: 'pencil',
+          pingInterval: const Duration(milliseconds: 30),
+        );
+        await session.connect();
+
+        // Een ping zónder xmlns="jabber:client" of `to` wordt door prosody
+        // gezien als unhandled stream-element → de websocket sterft (echte
+        // wire stable-11248, #2535).
+        await Future<void>.delayed(const Duration(milliseconds: 80));
+        final ping = t.sent.firstWhere(
+          (f) => f.contains('urn:xmpp:ping'),
+          orElse: () => '',
+        );
+        expect(ping, contains('xmlns="jabber:client"'));
+        expect(ping, contains('to="example.org"'));
+        expect(ping, contains('type="get"'));
+
+        await session.close();
+      },
+    );
+
+    test('een inkomende XEP-0199 ping krijgt een result (geen kick)', () async {
+      final t = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+      final session = XmppSession(
+        transport: t,
+        settings: account(),
+        password: 'pencil',
+      );
+      await session.connect();
+
+      final inbound = <Stanza>[];
+      final sub = session.stanzas.listen(inbound.add);
+      t.inject(
+        "<iq type='get' id='srv-ping-1' from='example.org'>"
+        "<ping xmlns='urn:xmpp:ping'/></iq>",
+      );
+      await pumpEventQueue();
+
+      // De sessie antwoordt zelf; de stanza gaat niet naar consumers.
+      expect(inbound, isEmpty);
+      final reply = t.sent.firstWhere(
+        (f) => f.contains('srv-ping-1'),
+        orElse: () => '',
+      );
+      expect(reply, contains('type="result"'));
+      expect(reply, contains('to="example.org"'));
+
+      await sub.cancel();
+      await session.close();
+    });
+
+    test('disco#info krijgt de geconfigureerde features', () async {
+      final t = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+      final session = XmppSession(
+        transport: t,
+        settings: account(),
+        password: 'pencil',
+        discoFeatures: const {'urn:xmpp:jingle:1', 'urn:aap'},
+      );
+      await session.connect();
+
+      final inbound = <Stanza>[];
+      final sub = session.stanzas.listen(inbound.add);
+      t.inject(
+        "<iq type='get' id='disco-1' from='focus@auth.meet.jitsi'>"
+        "<query xmlns='http://jabber.org/protocol/disco#info'/></iq>",
+      );
+      await pumpEventQueue();
+
+      expect(inbound, isEmpty);
+      final reply = t.sent.firstWhere(
+        (f) => f.contains('disco-1'),
+        orElse: () => '',
+      );
+      expect(reply, contains('type="result"'));
+      expect(reply, contains('var="urn:xmpp:jingle:1"'));
+      expect(reply, contains('var="urn:aap"'));
+      expect(reply, contains('category="client"'));
+
+      await sub.cancel();
+      await session.close();
+    });
+
+    test(
       'a failed rejoin (nick-conflict) triggers backoff, not silent success (#1416)',
       () async {
         final firstTransport = happyServer(

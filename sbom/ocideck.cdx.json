@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:b9d15102-0934-5008-8190-5717f93d05d7",
+  "serialNumber": "urn:uuid:96f34179-7ae9-5594-83cb-df1588c5c208",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-23T12:43:25.354830Z",
+    "timestamp": "2026-10-24T19:32:28.717528Z",
     "tools": {
       "components": [
         {
@@ -4126,7 +4126,7 @@
         },
         {
           "name": "cdx:pub:scope",
-          "value": "transitive"
+          "value": "direct main"
         }
       ]
     },
@@ -9553,6 +9553,7 @@
         "pkg:pub/image@4.10.2",
         "pkg:pub/intl@0.20.3",
         "pkg:pub/jose@0.3.5+2",
+        "pkg:pub/logger@2.8.0",
         "pkg:pub/markdown@7.3.1",
         "pkg:pub/material_ui@1.6.0",
         "pkg:pub/openid_client@0.4.10+2",

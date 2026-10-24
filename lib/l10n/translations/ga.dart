@@ -1635,6 +1635,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Chuaigh do mhicreafón nó do cheamara ar iarraidh; cas an foinse ar ais nuair a fhaigheann tú ar ais é.',
+  'Media is niet end-to-end versleuteld.':
+      'Níl na meáin criptithe ó cheann go ceann.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Criptiú na meán ó cheann go ceann anaithnid.',
+  'Media gaat naar': 'Téann na meáin chuig',
+  'Audio-uitvoer kiezen': 'Roghnaigh aschur fuaime',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Nuair a ghlacann tú páirt, úsáideann OciDeck do mhicreafón agus (go roghnach) do chamara; tosaíonn tú balbhaithe.',
   'De mediaverbinding is weggevallen.': 'Bhí an nasc meán caillte.',

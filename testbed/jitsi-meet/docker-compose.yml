@@ -121,6 +121,25 @@ services:
     networks:
       meet.jitsi:
 
+  # UDP↔TCP relais naar de JVB: lima (colima) forwardt geen UDP naar de
+  # host — zonder deze brug is UDP:10000 voor géén client bereikbaar
+  # (#2535, zie probe/udp_relay.py en README §media-relay). Publiceert
+  # alleen de TCP-poot; het UDP-eindpunt op de host start `./run.sh
+  # media-relay` per run.
+  udp-relay:
+    image: python:3-alpine@sha256:d44b1254cb92329418d164b22b20d86bbd3869d48e80e09e476531a409a728bb
+    restart: unless-stopped
+    read_only: true
+    command: ['python3', '-u', '/relay/udp_relay.py', 'guest']
+    volumes:
+      - ./probe/udp_relay.py:/relay/udp_relay.py:ro
+    ports:
+      - '127.0.0.1:${JVB_RELAY_PORT:-11000}:11000'
+    depends_on:
+      - jvb
+    networks:
+      meet.jitsi:
+
 # Eigen netwerk zodat de services elkaar via xmpp.meet.jitsi bereiken.
 networks:
   meet.jitsi:
