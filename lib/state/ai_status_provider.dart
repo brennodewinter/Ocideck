@@ -118,6 +118,7 @@ class AiStatusNotifier extends Notifier<AiStatus> {
       // kan óók zonder sleutel antwoorden (lokale tier heeft er geen).
       logError('AiStatusNotifier._check: api-sleutel lezen', error, stack);
     }
+    if (!ref.mounted || generation != _generation) return;
     final client = AiClientService(
       settings: settings,
       hasOutboundConsent: ref.read(consentProvider).hasAccepted,
@@ -126,15 +127,15 @@ class AiStatusNotifier extends Notifier<AiStatus> {
     );
     try {
       await client.testConnection();
-      if (generation != _generation) return;
+      if (!ref.mounted || generation != _generation) return;
       state = const AiStatus(AiAvailability.reachable);
     } on AiGateException catch (e) {
       // De gate kan onderweg zijn veranderd (instellingen, toestemming).
-      if (generation != _generation) return;
+      if (!ref.mounted || generation != _generation) return;
       state = AiStatus(AiAvailability.denied, denial: e.reason);
     } catch (error, stack) {
       logError('AiStatusNotifier._check: endpoint ping', error, stack);
-      if (generation != _generation) return;
+      if (!ref.mounted || generation != _generation) return;
       state = const AiStatus(AiAvailability.unreachable);
     }
   }

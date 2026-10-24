@@ -42,6 +42,19 @@ class _FakeSecretStore extends SecretStore {
   Future<String?> readAiApiKey(String baseUrl) async => null;
 }
 
+class _DelayedSecretStore extends SecretStore {
+  _DelayedSecretStore() : super(canStore: false);
+
+  final started = Completer<void>();
+  final result = Completer<String?>();
+
+  @override
+  Future<String?> readAiApiKey(String baseUrl) {
+    if (!started.isCompleted) started.complete();
+    return result.future;
+  }
+}
+
 const _local = AiSettings(
   enabled: true,
   mode: AiBackendMode.local,
@@ -57,6 +70,7 @@ Future<ProviderContainer> _container({_FakeTransport? transport}) async {
   final c = ProviderContainer(
     overrides: [
       aiHttpTransportProvider.overrideWithValue(transport ?? _FakeTransport()),
+      secretStoreProvider.overrideWithValue(_FakeSecretStore()),
     ],
   );
   addTearDown(c.dispose);
@@ -142,6 +156,24 @@ void main() {
       await _settle(c);
       expect(c.read(aiStatusProvider).availability, AiAvailability.unreachable);
     });
+
+    test(
+      'een opgeruimde provider leest niets na een vertraagde sleutel',
+      () async {
+        SharedPreferences.setMockInitialValues({});
+        final secrets = _DelayedSecretStore();
+        final c = ProviderContainer(
+          overrides: [secretStoreProvider.overrideWithValue(secrets)],
+        );
+        final sub = c.listen(aiStatusProvider, (_, _) {});
+        await c.read(settingsProvider.notifier).setAiSettings(_local);
+        await secrets.started.future;
+        sub.close();
+        c.dispose();
+        secrets.result.complete(null);
+        await Future<void>.delayed(Duration.zero);
+      },
+    );
 
     test('aan maar niets ingesteld → geweigerd, geen netwerk', () async {
       final transport = _FakeTransport();
