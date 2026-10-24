@@ -63,7 +63,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq unzip zip rpm file \
+            nodejs make git curl ca-certificates xz-utils jq unzip zip rpm file flatpak python3 \
             clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
             libsecret-1-dev libayatana-appindicator3-dev \
             build-essential
@@ -251,3 +251,35 @@ jobs:
           rc=$?
           set -e
           test "$rc" -eq 124
+
+  consumer-flatpak:
+    name: Flatpak installatie en inhoud op een schone Ubuntu
+    needs: build-linux
+    runs-on: docker
+    timeout-minutes: 90
+    container:
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
+    steps:
+      - name: Artefactactie voorbereiden
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs ca-certificates
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        with: { name: ocideck-linux, path: dist }
+      - name: Installeren en inhoud controleren
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get install -y --no-install-recommends flatpak
+          flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak --user install -y --noninteractive flathub org.gnome.Platform//50
+          flatpak --user install -y --noninteractive --bundle ./dist/ocideck-linux-x86_64-*.flatpak
+          app="$(flatpak --user info --show-location com.dewinter.ocideck)"
+          flatpak --user info --show-metadata com.dewinter.ocideck | grep -Fx 'runtime=org.gnome.Platform/x86_64/50'
+          test -x "$app/files/bin/ocideck"
+          test -x "$app/files/bin/git"
+          test -x "$app/files/lib/ocideck/ocideck"
+          test -x "$app/files/libexec/git-core/git-remote-https"
+          sh -n "$app/files/bin/ocideck"
+          (cd "$app/files" && sha256sum -c share/doc/ocideck-flatpak/FILES.sha256)
+          cmp "$app/files/share/doc/ocideck-flatpak/components.cdx.json" ./dist/ocideck-linux-x86_64-*.flatpak.cdx.json

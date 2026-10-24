@@ -14,6 +14,8 @@ version in your browser. Your deck stays in the tab; nothing is uploaded.
 | Linux — AppImage (most distributions) | `ocideck-linux-x86_64-@VERSIE@.AppImage` |
 | Linux — Debian / Ubuntu / Mint | `ocideck-linux-amd64-@VERSIE@.deb` |
 | Linux — Fedora / openSUSE | `ocideck-linux-x86_64-@VERSIE@.rpm` |
+| Linux — Flatpak (x86-64) | `ocideck-linux-x86_64-@VERSIE@.flatpak` |
+| Linux — Flatpak component inventory (CycloneDX) | `ocideck-linux-x86_64-@VERSIE@.flatpak.cdx.json` |
 | Linux — portable tarball | `ocideck-linux-x64-@VERSIE@.tar.gz` |
 | Linux — Debian 12 compatible, x86-64 | `ocideck-linux-debian12-x86_64-@VERSIE@.tar.gz` |
 | Web bundle (self-hosting) | `ocideck-web-@VERSIE@.tar.gz` |
@@ -51,14 +53,22 @@ elevation as *Unknown publisher*. Check the download against `SHA256SUMS` (and
 `SHA256SUMS.minisig`) before you run either — that signature, not a certificate,
 is what attests where these files came from.
 
-**Linux.** Four packagings of the same build — pick what fits your distribution.
-None is sandboxed or store-signed; each wraps the same bundle listed above.
+**Linux.** Pick the package that fits your distribution. Flatpak runs in a
+sandbox; the other packages run as normal desktop applications.
 
 - **AppImage** — `chmod +x ocideck-linux-x86_64-@VERSIE@.AppImage`, then run it. One
   file, no installation, works on most distributions.
 - **Debian / Ubuntu / Mint** — `sudo apt install ./ocideck-linux-amd64-@VERSIE@.deb`.
 - **Fedora / openSUSE** — `sudo dnf install ./ocideck-linux-x86_64-@VERSIE@.rpm`
   (or `sudo zypper install ./ocideck-linux-x86_64-@VERSIE@.rpm`).
+- **Flatpak** — install Flatpak through your distribution, then add a remote
+  that provides GNOME 50 (for example,
+  `flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo`).
+  Run `flatpak install flathub org.gnome.Platform//50`,
+  `flatpak install ./ocideck-linux-x86_64-@VERSIE@.flatpak` and
+  `flatpak run com.dewinter.ocideck`. This direct bundle does not include its
+  runtime and is not a Flathub app listing. It grants access to your home files,
+  network, audio, display and Secret Service so OciDeck can work there.
 - **Any distribution** — unpack `ocideck-linux-x64-@VERSIE@.tar.gz` and run
   `./ocideck`.
 
@@ -68,7 +78,7 @@ commit compiled inside Debian 12 using the pinned Flutter SDK, and runs as a
 normal Linux desktop app after extraction. It is x86-64 only. You can also
 [build it yourself with Docker](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/tag/@TAG@/scripts/debian12_builder/README.md).
 
-All four need GTK 3, `libsecret-1` and `liblzma5`; the `.deb` and `.rpm` pull
+The non-Flatpak builds need GTK 3, `libsecret-1` and `liblzma5`; the `.deb` and `.rpm` pull
 them in, and any GTK desktop already has them. For the AppImage or tarball on a
 minimal system: `sudo apt install libgtk-3-0 libsecret-1-0` (Debian/Ubuntu).
 

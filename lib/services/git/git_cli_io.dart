@@ -226,6 +226,7 @@ class NativeGitCli implements GitCli {
       for (final entry in Platform.environment.entries)
         if (carried.contains(entry.key)) entry.key: entry.value,
       'PATH': gitPathFromEnvironment(Platform.environment),
+      ...flatpakGitEnvironment(Platform.environment),
       // Ook lokale git-opdrachten kunnen bij een partiële clone een blob
       // ophalen. Alleen de aanroeper die de netwerkpoort passeerde opent het
       // protocol voor die ene aanroep.
@@ -431,6 +432,17 @@ String safeGitPath(String path) => path
     .split(Platform.isWindows ? ';' : ':')
     .where((part) => part.isNotEmpty && p.isAbsolute(part))
     .join(Platform.isWindows ? ';' : ':');
+
+/// Only app-owned helper paths may cross the Git environment boundary.
+@visibleForTesting
+Map<String, String> flatpakGitEnvironment(Map<String, String> environment) =>
+    Platform.isLinux && environment['FLATPAK_ID'] == 'com.dewinter.ocideck'
+    ? const {
+        'GIT_EXEC_PATH': '/app/libexec/git-core',
+        'GIT_TEMPLATE_DIR': '/app/share/git-core/templates',
+        'LD_LIBRARY_PATH': '/app/lib/ocideck/lib',
+      }
+    : const {};
 
 @visibleForTesting
 String gitPathFromEnvironment(

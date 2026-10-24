@@ -88,6 +88,8 @@ void main() {
         r'dist/ocideck-linux-amd64-${{ env.VERSIE }}.deb',
         r'dist/ocideck-linux-x86_64-${{ env.VERSIE }}.rpm',
         r'dist/ocideck-linux-x86_64-${{ env.VERSIE }}.AppImage',
+        r'dist/ocideck-linux-x86_64-${{ env.VERSIE }}.flatpak',
+        r'dist/ocideck-linux-x86_64-${{ env.VERSIE }}.flatpak.cdx.json',
       ]) {
         expect(
           releaseYaml.contains(asset),
@@ -96,6 +98,19 @@ void main() {
         );
       }
     });
+
+    test(
+      'publication inventory includes both Linux variants and Flatpak inventory',
+      () {
+        for (final asset in [
+          r'"ocideck-linux-debian12-x86_64-$VERSIE.tar.gz"',
+          r'"ocideck-linux-x86_64-$VERSIE.flatpak"',
+          r'"ocideck-linux-x86_64-$VERSIE.flatpak.cdx.json"',
+        ]) {
+          expect(releaseYaml, contains(asset));
+        }
+      },
+    );
 
     test('the .deb is also published to the signed Forgejo registry', () {
       expect(
@@ -123,7 +138,12 @@ void main() {
     // a bare distro image, installs or extracts the package as a user would,
     // and only then proves the app links and starts. `publiceren` lists all
     // three in `needs`, so a failed probe can never reach the release.
-    for (final job in ['consumer-deb', 'consumer-rpm', 'consumer-appimage']) {
+    for (final job in [
+      'consumer-deb',
+      'consumer-rpm',
+      'consumer-appimage',
+      'consumer-flatpak',
+    ]) {
       test('$job exists after the Linux build', () {
         expect(
           RegExp(
@@ -145,7 +165,12 @@ void main() {
         reason:
             'A stuck pre-tag build must not occupy the release indefinitely.',
       );
-      for (final job in ['consumer-deb', 'consumer-rpm', 'consumer-appimage']) {
+      for (final job in [
+        'consumer-deb',
+        'consumer-rpm',
+        'consumer-appimage',
+        'consumer-flatpak',
+      ]) {
         expect(
           RegExp('^  $job:', multiLine: true).hasMatch(preTagYaml),
           isTrue,
@@ -252,7 +277,7 @@ void main() {
     test('the AppImage probe extracts, link-checks and starts it', () {
       final section = releaseYaml.substring(
         releaseYaml.indexOf('  consumer-appimage:'),
-        releaseYaml.indexOf('  publiceren:'),
+        releaseYaml.indexOf('  consumer-flatpak:'),
       );
       expect(section, contains('--appimage-extract'));
       expect(section, contains("ldd squashfs-root/ocideck | grep 'not found'"));
@@ -261,15 +286,13 @@ void main() {
 
     test('the AppImage consumer installs the GLES and EGL runtimes', () {
       for (final workflow in [
-        (releaseYaml, '  publiceren:'),
-        (preTagYaml, null),
+        (releaseYaml, '  consumer-flatpak:'),
+        (preTagYaml, '  consumer-flatpak:'),
       ]) {
         final start = workflow.$1.indexOf('  consumer-appimage:');
         final section = workflow.$1.substring(
           start,
-          workflow.$2 == null
-              ? workflow.$1.length
-              : workflow.$1.indexOf(workflow.$2!, start),
+          workflow.$1.indexOf(workflow.$2, start),
         );
         expect(
           RegExp(
@@ -290,7 +313,22 @@ void main() {
       }
     });
 
-    test('publiceren needs all three consumer probes', () {
+    test('the Flatpak consumer installs and verifies bundle contents', () {
+      for (final workflow in [releaseYaml, preTagYaml]) {
+        final section = workflow.substring(
+          workflow.indexOf('  consumer-flatpak:'),
+        );
+        expect(section, contains('org.gnome.Platform//50'));
+        expect(section, contains('flatpak --user install'));
+        expect(section, contains('flatpak --user info --show-location'));
+        expect(section, contains('runtime=org.gnome.Platform/x86_64/50'));
+        expect(section, contains('sha256sum -c'));
+        expect(section, contains('components.cdx.json'));
+        expect(section, isNot(contains('flatpak run')));
+      }
+    });
+
+    test('publiceren needs all four consumer probes', () {
       final needs = RegExp(
         r'  publiceren:\n    name: [^\n]+\n    needs: \[([^\]]+)\]',
       ).firstMatch(releaseYaml)?.group(1);
@@ -299,7 +337,12 @@ void main() {
         isNotNull,
         reason: 'Cannot read the publiceren needs line.',
       );
-      for (final job in ['consumer-deb', 'consumer-rpm', 'consumer-appimage']) {
+      for (final job in [
+        'consumer-deb',
+        'consumer-rpm',
+        'consumer-appimage',
+        'consumer-flatpak',
+      ]) {
         expect(
           needs,
           contains(job),
@@ -349,6 +392,7 @@ void main() {
         r'ocideck-linux-amd64-$VERSION.deb',
         r'ocideck-linux-x86_64-$VERSION.rpm',
         r'ocideck-linux-x86_64-$VERSION.AppImage',
+        r'ocideck-linux-x86_64-$VERSION.flatpak',
       ]) {
         expect(
           script.contains(name),
@@ -424,6 +468,24 @@ void main() {
             'check — the pin is only real if it is verified.',
       );
     });
+
+    test(
+      'Flatpak carries Git and the Ayatana libraries absent from GNOME 50',
+      () {
+        expect(script, contains('runtime=org.gnome.Platform/x86_64/50'));
+        expect(script, contains('git --exec-path'));
+        expect(script, contains('libayatana-appindicator3.so.1'));
+        expect(script, contains('libcurl-gnutls.so.4'));
+        expect(script, contains('flatpak build-bundle'));
+        expect(script, contains('flatpak_components.py'));
+        expect(script, contains(r'licenses/$package.copyright'));
+        expect(script, contains(r'"$out.cdx.json"'));
+        expect(script, contains('dpkg-query -S'));
+        expect(script, contains('-type l'));
+        expect(script, contains('--share=network'));
+        expect(script, contains('--filesystem=home'));
+      },
+    );
 
     test('it packages the desktop entry and bundled icon', () {
       // The script keys the desktop entry and themed icon off the application
@@ -502,6 +564,7 @@ void main() {
       'ocideck-linux-x86_64-@VERSIE@.AppImage',
       'ocideck-linux-amd64-@VERSIE@.deb',
       'ocideck-linux-x86_64-@VERSIE@.rpm',
+      'ocideck-linux-x86_64-@VERSIE@.flatpak',
     ]) {
       expect(
         releaseBody.contains(asset),

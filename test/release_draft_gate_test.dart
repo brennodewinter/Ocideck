@@ -94,6 +94,7 @@ void main() {
       ..writeAsStringSync('''
 <a href="https://forge.invalid/releases/download/v$seen/ocideck-linux-amd64-$seen.deb">deb</a>
 <a href="https://forge.invalid/releases/download/v$seen/ocideck-linux-x86_64-$seen.AppImage">AppImage</a>
+<a href="https://forge.invalid/releases/download/v$seen/ocideck-linux-x86_64-$seen.flatpak">Flatpak</a>
 <a href="https://forge.invalid/releases/download/v$seen/ocideck-linux-debian12-x86_64-$seen.tar.gz">Debian 12</a>
 <a href="https://forge.invalid/releases/download/v$seen/ocideck-macos-$seen.zip">macOS</a>
 <a href="https://forge.invalid/releases/download/v$seen/ocideck-windows-x64-setup-$seen.exe">Windows</a>
@@ -104,9 +105,9 @@ void main() {
         'SHA256SUMS.minisig.new.'
         'e5bc2c58bbb0a51702ebe17973eaa4a28668b47457854fb917aa6d2fc45a39bd';
     const normalAssets =
-        '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-linux-debian12-x86_64-9.9.9.tar.gz"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"id":90,"name":"SHA256SUMS.minisig","browser_download_url":"https://dl.invalid/x/SHA256SUMS.minisig"}]';
+        '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-linux-x86_64-9.9.9.flatpak"},{"name":"ocideck-linux-x86_64-9.9.9.flatpak.cdx.json"},{"name":"ocideck-linux-debian12-x86_64-9.9.9.tar.gz"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"id":90,"name":"SHA256SUMS.minisig","browser_download_url":"https://dl.invalid/x/SHA256SUMS.minisig"}]';
     const tempAssets =
-        '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-linux-debian12-x86_64-9.9.9.tar.gz"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"id":91,"name":"$tempName","browser_download_url":"https://dl.invalid/x/$tempName"}]';
+        '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-linux-x86_64-9.9.9.flatpak"},{"name":"ocideck-linux-x86_64-9.9.9.flatpak.cdx.json"},{"name":"ocideck-linux-debian12-x86_64-9.9.9.tar.gz"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS","browser_download_url":"https://dl.invalid/x/SHA256SUMS"},{"id":91,"name":"$tempName","browser_download_url":"https://dl.invalid/x/$tempName"}]';
     final harness = File('${dir.path}/harness.sh');
     harness.writeAsStringSync('''
 set -uo pipefail
