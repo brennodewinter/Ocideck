@@ -256,6 +256,9 @@ build_flatpak() {
   local packages=(git libayatana-appindicator3-1 libayatana-indicator3-7 \
     libayatana-ido3-0.4-0 libdbusmenu-glib4 libdbusmenu-gtk3-4 \
     libcurl3t64-gnutls librtmp1 libssh-4 libldap2 libsasl2-2)
+  local -a source_paths
+  mapfile -d '' -t source_paths < <(find "$(command -v git)" "$(git --exec-path)" \
+    /usr/share/git-core/templates \( -type f -o -type l \) -print0)
   install -d "$root/files/lib/ocideck" "$root/files/bin"
   cp -a "$BUNDLE_DIR/." "$root/files/lib/ocideck/"
   install -m0755 "$(command -v git)" "$root/files/bin/git"
@@ -274,11 +277,25 @@ build_flatpak() {
       exit 1
     fi
     install -m0644 "$library" "$root/files/lib/ocideck/lib/$soname"
+    source_paths+=("$(readlink -f "$library")")
+  done
+  local -A known_packages=()
+  local package source_file owner_line owner
+  for package in "${packages[@]}"; do known_packages["$package"]=1; done
+  for source_file in "${source_paths[@]}"; do
+    owner_line="$(dpkg-query -S -- "$source_file")" || {
+      echo "Flatpak source file has no package owner: $source_file" >&2
+      exit 1
+    }
+    owner="${owner_line%%: *}"
+    if [[ "$owner_line" == *$'\n'* || -z "${known_packages[${owner%%:*}]+x}" ]]; then
+      echo "Flatpak source file is outside the inventoried packages: $source_file ($owner)" >&2
+      exit 1
+    fi
   done
   install -d "$notices/licenses"
   dpkg-query -W -f='${binary:Package}\t${Version}\t${Architecture}\n' \
     "${packages[@]}" > "$notices/PACKAGES.tsv"
-  local package
   for package in "${packages[@]}"; do
     install -m0644 "/usr/share/doc/$package/copyright" \
       "$notices/licenses/$package.copyright"
@@ -288,7 +305,8 @@ build_flatpak() {
     lib/ocideck/lib/libcurl-gnutls.so* lib/ocideck/lib/librtmp.so* \
     lib/ocideck/lib/libssh.so* lib/ocideck/lib/libldap.so* \
     lib/ocideck/lib/liblber.so* lib/ocideck/lib/libsasl2.so* \
-    -type f -print0 | sort -z | xargs -0 sha256sum) > "$notices/FILES.sha256"
+    \( -type f -o -type l \) -print0 | sort -z | xargs -0 sha256sum) \
+    > "$notices/FILES.sha256"
   python3 "$SCRIPT_DIR/flatpak_components.py" \
     "$notices/PACKAGES.tsv" "$notices/FILES.sha256" "$VERSION" \
     "$notices/components.cdx.json"

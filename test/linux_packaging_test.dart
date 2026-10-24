@@ -481,6 +481,8 @@ void main() {
         expect(script, contains('flatpak_components.py'));
         expect(script, contains(r'licenses/$package.copyright'));
         expect(script, contains(r'"$out.cdx.json"'));
+        expect(script, contains('dpkg-query -S'));
+        expect(script, contains('-type l'));
         expect(script, contains('--share=network'));
         expect(script, contains('--filesystem=home'));
       },
