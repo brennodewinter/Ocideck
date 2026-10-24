@@ -652,14 +652,19 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'By it meidwaan brûkt OciDeck jo mikrofoan en (opsjoneel) kamera; jo begjinne dempt.',
+  'De mediaverbinding is weggevallen.': 'De mediaferbining is weifallen.',
+  'De verbinding is verbroken.': 'De ferbining is ferbrutsen.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'It apparaat jout gjin tagong ta dizze boarne.',
+  'Scherm delen is nog niet beschikbaar.': 'Skerm diele is noch net beskikber.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/keamer-namme',
   'Vergaderlink controleren': 'Gearkommelink kontrolearje',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Plak in keppeling nei in gearkomste. OciDeck kontrolearret earst lokaal hokker tsjinst dit is; allinne as jo om in preflight freegje wurdt ferbining makke mei de server.',
   'Vergaderlink': 'Gearkommelink',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Meidwaan oan in gearkomste komt yn in folgjende ferzje; dizze kontrole makket noch gjin dielname mooglik.',
   'Preflight uitvoeren': 'Preflight útfiere',
   'Controleer': 'Kontrolearje',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

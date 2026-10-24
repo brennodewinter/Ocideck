@@ -20,6 +20,11 @@ class FakeMediaCore implements MeetingMediaCore {
   Future<bool> selfTest() async => _stackOk;
 
   @override
+  Future<MeetingMediaConnection> openConnection({
+    List<MeetingIceServer> iceServers = const [],
+  }) => Future.error(UnimplementedError('de tile opent geen verbindingen'));
+
+  @override
   Future<void> dispose() async => disposed = true;
 }
 

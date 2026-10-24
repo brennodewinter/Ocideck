@@ -1621,14 +1621,20 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'La conectare, OciDeck vă folosește microfonul și (opțional) camera; începeți cu sunetul dezactivat.',
+  'De mediaverbinding is weggevallen.': 'Conexiunea media s-a întrerupt.',
+  'De verbinding is verbroken.': 'Conexiunea s-a întrerupt.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Dispozitivul nu permite accesul la această sursă.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Partajarea ecranului nu este încă disponibilă.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nume-camera',
   'Vergaderlink controleren': 'Verifică linkul de întâlnire',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Lipiți un link către o întâlnire. OciDeck verifică mai întâi local despre ce serviciu este vorba; abia când cereți o verificare prealabilă se stabilește conexiunea cu serverul.',
   'Vergaderlink': 'Link de întâlnire',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Participarea la o întâlnire vine într-o versiune următoare; această verificare nu permite încă participarea.',
   'Preflight uitvoeren': 'Rulează verificarea prealabilă',
   'Controleer': 'Verifică',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

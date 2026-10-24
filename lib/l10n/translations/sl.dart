@@ -1605,14 +1605,19 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Ob pridružitvi OciDeck uporablja vaš mikrofon in (izbirno) kamero; začnete utišani.',
+  'De mediaverbinding is weggevallen.': 'Medijska povezava se je prekinila.',
+  'De verbinding is verbroken.': 'Povezava se je prekinila.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Naprava ne dovoljuje dostopa do tega vira.',
+  'Scherm delen is nog niet beschikbaar.': 'Deljenje zaslona še ni na voljo.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ime-sobe',
   'Vergaderlink controleren': 'Preveri povezavo sestanka',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Prilepite povezavo do sestanka. OciDeck najprej lokalno preveri, za katero storitev gre; povezava s strežnikom se vzpostavi šele, ko zahtevate predhodno preverjanje.',
   'Vergaderlink': 'Povezava sestanka',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Pridružitev sestanku prihaja v naslednji različici; ta preverba še ne omogoča udeležbe.',
   'Preflight uitvoeren': 'Izvedi predhodno preverjanje',
   'Controleer': 'Preveri',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

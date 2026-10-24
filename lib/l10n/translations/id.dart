@@ -1605,14 +1605,19 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Saat bergabung, OciDeck menggunakan mikrofon dan (opsional) kamera Anda; Anda mulai dalam keadaan bisu.',
+  'De mediaverbinding is weggevallen.': 'Koneksi media terputus.',
+  'De verbinding is verbroken.': 'Koneksi terputus.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Perangkat tidak mengizinkan akses ke sumber ini.',
+  'Scherm delen is nog niet beschikbaar.': 'Berbagi layar belum tersedia.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nama-ruangan',
   'Vergaderlink controleren': 'Periksa tautan rapat',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Tempel tautan ke sebuah rapat. OciDeck lebih dulu memeriksa secara lokal layanan apa ini; koneksi ke server hanya dibuat saat Anda meminta prapemeriksaan.',
   'Vergaderlink': 'Tautan rapat',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Bergabung ke rapat akan hadir di versi berikutnya; pemeriksaan ini belum memungkinkan bergabung.',
   'Preflight uitvoeren': 'Jalankan prapemeriksaan',
   'Controleer': 'Periksa',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

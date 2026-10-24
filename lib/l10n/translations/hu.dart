@@ -1607,14 +1607,20 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Csatlakozáskor az OciDeck használja a mikrofonját és (opcionálisan) a kameráját; némítva kezd.',
+  'De mediaverbinding is weggevallen.': 'A médiakapcsolat megszakadt.',
+  'De verbinding is verbroken.': 'A kapcsolat megszakadt.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Az eszköz nem engedélyezi a hozzáférést ehhez a forráshoz.',
+  'Scherm delen is nog niet beschikbaar.':
+      'A képernyőmegosztás még nem érhető el.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/szobanev',
   'Vergaderlink controleren': 'Értekezlet-hivatkozás ellenőrzése',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Illessze be az értekezlet hivatkozását. Az OciDeck először helyben ellenőrzi, melyik szolgáltatásról van szó; a kiszolgálóhoz csak akkor kapcsolódik, ha előzetes ellenőrzést kér.',
   'Vergaderlink': 'Értekezlet-hivatkozás',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Az értekezlethez való csatlakozás a következő verzióban érkezik; ez az ellenőrzés még nem teszi lehetővé a csatlakozást.',
   'Preflight uitvoeren': 'Előzetes ellenőrzés futtatása',
   'Controleer': 'Ellenőrzés',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

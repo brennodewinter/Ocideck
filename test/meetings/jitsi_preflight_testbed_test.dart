@@ -65,7 +65,7 @@ void main() {
       // convention a hardcoded assumption would have produced.
       expect(pre.egressOrigins, contains('xmpp:muc.meet.jitsi'));
       expect(pre.e2ee, MeetingE2eeStatus.off);
-      expect(pre.identityLabel, startsWith('ocideck-'));
+      expect(pre.identityLabel, startsWith('ocideck_'));
     },
     timeout: const Timeout(Duration(minutes: 1)),
     tags: ['integration'],

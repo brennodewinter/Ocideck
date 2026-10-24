@@ -1623,14 +1623,20 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Meta tingħaqad, OciDeck juża l-mikrofonu tiegħek u (b\'mod fakultattiv) il-kamera; tibda mutat.',
+  'De mediaverbinding is weggevallen.': 'Il-konnessjoni tal-midja nqata\'t.',
+  'De verbinding is verbroken.': 'Il-konnessjoni nqata\'t.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'L-apparat ma jagħtix aċċess għal dan is-sors.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Il-qsim tal-iskrin għadu mhux disponibbli.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/isem-tal-kamra',
   'Vergaderlink controleren': 'Iċċekkja l-link tal-laqgħa',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Waħħal link għal laqgħa. OciDeck jiċċekkja l-ewwel lokalment liema servizz hu dan; konnessjoni mas-server issir biss meta titlob kontroll minn qabel.',
   'Vergaderlink': 'Link tal-laqgħa',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Parteċipazzjoni f\'laqgħa ġejja f\'versjoni oħra; dan il-kontroll għadu ma jippermetti l-parteċipazzjoni.',
   'Preflight uitvoeren': 'Mexxi l-kontroll minn qabel',
   'Controleer': 'Iċċekkja',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

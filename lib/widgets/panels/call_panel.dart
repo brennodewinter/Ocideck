@@ -3,11 +3,10 @@
 // participant tiles and capability-driven controls — and never learns which
 // backend produced it. A Jitsi or (later) MatrixRTC session looks identical here.
 //
-// F1 has no in-app join flow (that arrives with the first adapter in F3), so with
-// no active session the panel shows a plain placeholder; a widget test drives the
-// active-call layout with a fake session. Video frames are not rendered yet — a
-// tile is a labelled placeholder until `flutter_webrtc` lands and maps a real
-// track onto the tile.
+// With no active session the panel shows a plain placeholder; a live session
+// (#2534, adopted into `meetingSessionProvider` by the preflight dialog) fills
+// the tiles and controls for real. Video frames are not rendered yet — a tile
+// is a labelled placeholder until the media seam maps a native track onto it.
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

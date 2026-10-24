@@ -1620,14 +1620,19 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Під час приєднання OciDeck використовує ваш мікрофон і (необов\'язково) камеру; ви починаєте вимкненими.',
+  'De mediaverbinding is weggevallen.': 'Медіаз\'єднання перервано.',
+  'De verbinding is verbroken.': 'З\'єднання перервано.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Пристрій не надає доступ до цього джерела.',
+  'Scherm delen is nog niet beschikbaar.': 'Демонстрація екрана ще недоступна.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nazva-kimnaty',
   'Vergaderlink controleren': 'Перевірити посилання на нараду',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Вставте посилання на нараду. OciDeck спершу локально перевіряє, про який сервіс йдеться; з\'єднання із сервером встановлюється лише тоді, коли ви просите попередню перевірку.',
   'Vergaderlink': 'Посилання на нараду',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Приєднання до наради з\'явиться в наступній версії; ця перевірка ще не дозволяє приєднатися.',
   'Preflight uitvoeren': 'Виконати попередню перевірку',
   'Controleer': 'Перевірити',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

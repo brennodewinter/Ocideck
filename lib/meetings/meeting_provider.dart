@@ -109,6 +109,21 @@ class MeetingPreflight {
           support == MeetingSupport.embeddedOfficialClient);
 }
 
+/// Waarom `join` geen sessie kon leveren — getypeerd zodat de UI de reden in
+/// eigen woorden toont, nooit een generieke "mislukt". Elke adapter werpt dit;
+/// `detail` volgt de [MeetingPreflight.diagnosticsDetail]-contractregels
+/// (grof, geen credentials, geen volledige URL's).
+class MeetingJoinException implements Exception {
+  const MeetingJoinException(this.reason, [this.detail]);
+
+  final MeetingFailureReason reason;
+  final String? detail;
+
+  @override
+  String toString() =>
+      'join ${reason.name}${detail != null ? ': $detail' : ''}';
+}
+
 /// Everything an adapter needs to join. Defaults come from OciDeck, never from the
 /// invitation — the resolver strips fragment overrides so a crafted link cannot
 /// unmute the user or preset a camera (`NATIVE_CALLS.md` §7.1.6).

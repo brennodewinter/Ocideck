@@ -1620,14 +1620,20 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Participando OciDeck microphono tuo et (pro arbitrio) camera utitur; tacitus incipis.',
+  'De mediaverbinding is weggevallen.': 'Coniunctio mediorum excidit.',
+  'De verbinding is verbroken.': 'Coniunctio interrupta est.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Machina aditum ad hunc fontem non concedit.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Participatio scrini nondum praesto est.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nomen-conclavis',
   'Vergaderlink controleren': 'Videocoetūs nexum exscribe',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Glutina nexum ad coetum. OciDeck primum localiter probat quod ministerium sit; iunctio ad servitorem solum fit cum volationem praeuolans petis.',
   'Vergaderlink': 'Nexus coetūs',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Participatio in coetu in uersione proxima ueniet; haec probatio participationem nondum sinit.',
   'Preflight uitvoeren': 'Volatum praeuolans exerce',
   'Controleer': 'Proba',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

@@ -1617,14 +1617,21 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Po dołączeniu OciDeck używa Twojego mikrofonu i (opcjonalnie) kamery; zaczynasz wyciszony.',
+  'De mediaverbinding is weggevallen.':
+      'Połączenie multimedialne zostało przerwane.',
+  'De verbinding is verbroken.': 'Połączenie zostało przerwane.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Urządzenie nie zezwala na dostęp do tego źródła.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Udostępnianie ekranu nie jest jeszcze dostępne.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nazwa-pokoju',
   'Vergaderlink controleren': 'Sprawdź link do spotkania',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Wklej link do spotkania. OciDeck najpierw lokalnie sprawdza, jaka to usługa; połączenie z serwerem następuje dopiero, gdy poprosisz o kontrolę wstępną.',
   'Vergaderlink': 'Link do spotkania',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Dołączanie do spotkań pojawi się w kolejnej wersji; ta kontrola nie pozwala jeszcze dołączyć.',
   'Preflight uitvoeren': 'Wykonaj kontrolę wstępną',
   'Controleer': 'Sprawdź',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':
