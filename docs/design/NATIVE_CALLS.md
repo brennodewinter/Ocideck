@@ -557,7 +557,12 @@ host; run any crypto in an isolate with static helpers.
 ## 11. Verification
 
 - **Testbed:** a local `docker-jitsi-meet` stack (Prosody + Jicofo + JVB); never a
-  public service in the suite.
+  public service in the suite. Landed as `testbed/jitsi-meet/` (#2540): pinned at
+  `stable-11248`, loopback-only, hermetic (no STUN/TURN/AWS-harvest, P2P off so
+  media always crosses the JVB). Fixed procedure and evidence form in
+  `testbed/jitsi-meet/PROCEDURE.md` / `EVIDENCE_FORM.md`; note that
+  `testbed/docker-jitsi-meet/` is the older *plain-Prosody* collab testbed, not
+  this stack.
 - **Unit:** stanza / Jingle / Colibri2 parsers against stored vectors; `make
   mutate-parsers` to prove the tests catch changes.
 - **Integration:** F2 join + chat; F3 receive/send tracks; F4 slide track + presenter

@@ -91,6 +91,18 @@ All notable changes to OciDeck are documented in this file.
   de gedocumenteerde terugval is dat de ruimte daar stil verdwijnt en de
   tekst onafgebroken doorleest (#2464).
 
+- **Een gepinde Jitsi-testomgeving voor de komende callproeven (#2540).**
+  Onder `testbed/jitsi-meet/` staat een volledig lokale Jitsi-stack: web,
+  Prosody, Jicofo en de videobrug op release stable-11248, alleen bereikbaar
+  op loopback en hermetisch — geen externe STUN, geen derde-partij-verzoeken
+  en geen peer-to-peer, zodat elke proef over de videobrug loopt. Twee echte
+  deelnemers, een geregistreerd account en een anonieme gast, delen één
+  kamer; wie zonder rechten vóór de gastheer arriveert, wacht op een
+  moderator. De map bevat de vaste proefprocedure, een invulbaar
+  bewijsformulier en een script dat geredigeerde logs en image-digests
+  verzamelt. OciDeck zelf kan nog niet aan zo'n call deelnemen — dit is de
+  meetomgeving waartegen dat straks moet worden bewezen.
+
 ### Fixed
 
 - **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende
