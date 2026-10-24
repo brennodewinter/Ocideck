@@ -1,8 +1,12 @@
 // Unique anonymous MUC nicks for meeting joins. A reused nick collides in a
 // MUC (code 409 conflict) and — worse — makes a participant linkable across
 // rooms and sessions by any server that sees presence. Each join therefore
-// gets a fresh `ocideck-<random>` occupant name; nothing here is stable or
+// gets a fresh `ocideck_<random>` occupant name; nothing here is stable or
 // derived from identity.
+//
+// Underscore, not dash: Jitsi's `muc_resource_validate` (stock on
+// docker-jitsi-meet) allows only `^[a-zA-Z0-9][a-zA-Z0-9_]*$` — a dashed nick
+// is refused at MUC-join with `not-allowed` (the testbed rejected it).
 //
 // 8 hex chars from Random.secure: 32 bits of collision space is tight for a
 // cryptographic ID but right for a throwaway room nick — the MUC rejects a
@@ -11,10 +15,10 @@
 
 import 'dart:math';
 
-/// A fresh per-join MUC nickname like `ocideck-3f9a2b7c`. [random] is
+/// A fresh per-join MUC nickname like `ocideck_3f9a2b7c`. [random] is
 /// injectable so tests stay deterministic.
 String uniqueMeetingNick([Random? random]) {
   final r = random ?? Random.secure();
   final value = r.nextInt(0x100000000);
-  return 'ocideck-${value.toRadixString(16).padLeft(8, '0')}';
+  return 'ocideck_${value.toRadixString(16).padLeft(8, '0')}';
 }

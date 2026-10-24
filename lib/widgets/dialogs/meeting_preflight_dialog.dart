@@ -8,14 +8,12 @@
 //      gebruiker beslist, nooit de URL-vorm. Bij die keuze kan de gebruiker
 //      de herkomst als profiel onthouden, mét het expliciete vertrouwens-
 //      besluit "staat op mijn eigen netwerk" (trustedInternal).
-//   2. "Preflight" — het enige netwerkmoment, achter een knop die zegt welke
+//   2. "Preflight" — het eerste netwerkmoment, achter een knop die zegt welke
 //      oorsprong benaderd wordt. Resultaat: getypeerde support + redenen,
-//      identiteit, E2EE-status en de egress-lijst — de eerlijke feiten waar
-//      #2534 later een echte join-knop aan koppelt.
-//
-// De knop "Deelnemen" bestaat hier bewust NIET — de copy zegt dat
-// deelname in een volgende versie komt, het acceptatiecriterium is dat er
-// geen join-call vanuit de app gaat.
+//      identiteit, E2EE-status en de egress-lijst.
+//   3. "Deelnemen" (#2534) — alleen bij `canJoin`; start de echte sessie en
+//      draagt hem over aan `meetingSessionProvider` (root-scoped). Een
+//      mislukte join toont de getypeerde reden in hetzelfde dialoog.
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,7 +23,10 @@ import '../../state/meeting_providers.dart';
 import '../../theme/app_theme.dart';
 import '../../meetings/meeting_link_resolver.dart';
 import '../../meetings/meeting_provider.dart';
+import '../../meetings/meeting_nick.dart';
 import '../../meetings/meeting_provider_profile.dart';
+import '../../state/meeting_session_provider.dart';
+import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
 
 /// Injecteerbare preflight — tests hoeven geen XMPP-stack.
@@ -36,17 +37,22 @@ typedef MeetingPreflightFn =
 typedef MeetingProfileSaveFn =
     Future<void> Function(MeetingProviderProfile profile);
 
+/// Injecteerbare join — tests hoeven geen XMPP/WebRTC-stack.
+typedef MeetingJoinFn = Future<MeetingSession> Function(MeetingJoinRequest);
+
 class MeetingPreflightDialog extends ConsumerStatefulWidget {
   const MeetingPreflightDialog({
     super.key,
     this.resolver,
     this.preflight,
+    this.join,
     this.saveProfile,
   });
 
   /// Tests steken een eigen resolver in; null leest de provider-wiring.
   final MeetingLinkResolver? resolver;
   final MeetingPreflightFn? preflight;
+  final MeetingJoinFn? join;
   final MeetingProfileSaveFn? saveProfile;
 
   @override
@@ -64,6 +70,8 @@ class _MeetingPreflightDialogState
   bool _trustedInternal = false;
   bool _preflighting = false;
   MeetingPreflight? _preflight;
+  bool _joining = false;
+  MeetingFailureReason? _joinError;
 
   @override
   void dispose() {
@@ -138,7 +146,53 @@ class _MeetingPreflightDialogState
     setState(() {
       _preflighting = false;
       _preflight = result;
+      _joinError = null;
     });
+  }
+
+  Future<MeetingSession> _runJoin() => widget.join != null
+      ? widget.join!(
+          MeetingJoinRequest(
+            link: _match!,
+            displayName: _preflight!.identityLabel ?? uniqueMeetingNick(),
+          ),
+        )
+      : ref
+            .read(meetingProvidersProvider)
+            .firstWhere((p) => p.id == _match!.providerId)
+            .join(
+              MeetingJoinRequest(
+                link: _match!,
+                displayName: _preflight!.identityLabel ?? uniqueMeetingNick(),
+              ),
+            );
+
+  /// De echte deelname. Een sessie die terugkomt is live (het contract garan-
+  /// deert een mediapad); elke weigering komt terug als getypeerde reden.
+  Future<void> _joinNow() async {
+    setState(() {
+      _joining = true;
+      _joinError = null;
+    });
+    try {
+      final session = await _runJoin();
+      ref.read(meetingSessionProvider.notifier).adopt(session);
+      if (!mounted) return;
+      Navigator.of(context).pop();
+    } on MeetingJoinException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _joining = false;
+        _joinError = e.reason;
+      });
+    } on Object catch (e, st) {
+      logError('MeetingPreflightDialog: join', e, st);
+      if (!mounted) return;
+      setState(() {
+        _joining = false;
+        _joinError = MeetingFailureReason.providerUnavailable;
+      });
+    }
   }
 
   @override
@@ -186,10 +240,26 @@ class _MeetingPreflightDialogState
               const SizedBox(height: 14),
               _PreflightView(l10n: l10n, preflight: _preflight!),
             ],
+            if (_joinError != null) ...[
+              const SizedBox(height: 14),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.error_outline, size: 18, color: AppTheme.dangerFg),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      _PreflightView.failureText(l10n, _joinError!),
+                      style: TextStyle(fontSize: 12, color: AppTheme.dangerFg),
+                    ),
+                  ),
+                ],
+              ),
+            ],
             const SizedBox(height: 14),
             Text(
               l10n.d(
-                'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.',
+                'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.',
               ),
               style: TextStyle(fontSize: 11, color: AppTheme.slate600),
             ),
@@ -198,10 +268,17 @@ class _MeetingPreflightDialogState
       ),
       actions: [
         TextButton(
-          onPressed: _preflighting ? null : () => Navigator.of(context).pop(),
+          onPressed: _preflighting || _joining
+              ? null
+              : () => Navigator.of(context).pop(),
           child: Text(l10n.d('Sluiten')),
         ),
-        if (_match != null && _preflight == null)
+        if (_preflight?.canJoin ?? false)
+          FilledButton(
+            onPressed: _joining ? null : _joinNow,
+            child: Text(_joining ? l10n.d('Verbinden…') : l10n.d('Deelnemen')),
+          )
+        else if (_match != null && _preflight == null)
           FilledButton(
             onPressed: _preflighting ? null : _preflightNow,
             child: Text(
@@ -419,7 +496,7 @@ class _PreflightView extends StatelessWidget {
               ? l10n.d(
                   'Server bereikt — gasttoegang werkt en de vergadercomponent is gevonden.',
                 )
-              : _failureText(l10n, preflight.failureReason!),
+              : failureText(l10n, preflight.failureReason!),
         ),
         if (preflight.diagnosticsDetail != null)
           _line(
@@ -453,7 +530,7 @@ class _PreflightView extends StatelessWidget {
     );
   }
 
-  static String _failureText(
+  static String failureText(
     AppLocalizations l10n,
     MeetingFailureReason reason,
   ) => switch (reason) {

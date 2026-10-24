@@ -1635,14 +1635,20 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Nuair a ghlacann tú páirt, úsáideann OciDeck do mhicreafón agus (go roghnach) do chamara; tosaíonn tú balbhaithe.',
+  'De mediaverbinding is weggevallen.': 'Bhí an nasc meán caillte.',
+  'De verbinding is verbroken.': 'Bhí an nasc briste.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Ní thugann an gléas rochtain ar an bhfoinse seo.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Níl comhroinnt scáileáin ar fáil fós.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ainm-an-tseomra',
   'Vergaderlink controleren': 'Seiceáil nasc an chruinnithe',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Greamaigh nasc chuig cruinniú. Seiceálann OciDeck ar dtús go háitiúil cén seirbhís é; ní dhéantar nasc leis an bhfreastalaí ach amháin nuair a iarraidh tú réamhsheiceáil.',
   'Vergaderlink': 'Nasc an chruinnithe',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Tiocfaidh glacadh páirte i gcrinniú i leagan eile; ní cheadaíonn an seiceáil seo páirt a ghlacadh go fóil.',
   'Preflight uitvoeren': 'Rith an réamhsheiceáil',
   'Controleer': 'Seiceáil',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

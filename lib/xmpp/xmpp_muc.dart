@@ -37,6 +37,7 @@ class MucOccupant {
     required this.role,
     this.realJid,
     this.isSelf = false,
+    this.extensions = const [],
   });
 
   /// The room nick — the resource of the occupant's in-room JID.
@@ -50,6 +51,12 @@ class MucOccupant {
 
   /// True for our own occupant (self-presence, status code 110).
   final bool isSelf;
+
+  /// The presence children that are NOT the MUC `<x>` — provider extensions
+  /// like Jitsi's `SourceInfo`/`nick`/`stats-id` ride here for the consumer
+  /// that understands them (#2534). Bounded by the stanza layer; this layer
+  /// stays XEP-0045-pure and never interprets them.
+  final List<XmlElement> extensions;
 }
 
 /// Why entering a room did not succeed (XEP-0045 §7.2 error conditions).
@@ -252,6 +259,10 @@ class XmppMuc {
       role: _roleOf(item?.getAttribute('role')),
       realJid: realJid,
       isSelf: isSelf,
+      extensions: [
+        for (final e in stanza.children)
+          if (e != userX) e,
+      ],
     );
     _emit();
 

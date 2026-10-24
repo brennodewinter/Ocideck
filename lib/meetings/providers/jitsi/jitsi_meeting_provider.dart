@@ -39,11 +39,14 @@ import '../../../xmpp/xmpp_disco.dart';
 import '../../../xmpp/xmpp_frame_transport.dart';
 import '../../../xmpp/xmpp_frame_transport_platform.dart';
 import '../../../xmpp/xmpp_session.dart';
+import '../../meeting_media_core.dart';
+import '../../meeting_media_core_webrtc.dart';
 import '../../meeting_nick.dart';
 import '../../meeting_participant.dart';
 import '../../meeting_provider.dart';
 import 'jitsi_config.dart';
 import 'jitsi_config_platform.dart';
+import 'jitsi_meeting_session.dart';
 
 /// Haalt de config.js-brontekst op — injecteerbaar zodat tests geen netwerk
 /// hoeven. De live implementatie is [fetchJitsiConfig].
@@ -61,6 +64,11 @@ typedef JitsiSignallingProbe =
       XmppSettings settings,
       String xmppDomain,
     );
+
+/// De WebSocket-transport-opener voor join — injecteerbaar zodat tests de
+/// gepinde-socket-code niet hoeven te draaien.
+typedef JitsiTransportOpener =
+    Future<XmppFrameTransport> Function(XmppSettings settings);
 
 /// Uitkomst van de signalling-proef: het ontdekte MUC-component, of de
 /// getypeerde reden waarom niet — direct in contracttermen, zodat de provider
@@ -82,13 +90,19 @@ class JitsiMeetingProvider implements MeetingProvider {
   JitsiMeetingProvider({
     JitsiConfigFetcher? configFetcher,
     JitsiSignallingProbe? signallingProbe,
+    MeetingMediaCore Function()? mediaCoreFactory,
+    JitsiTransportOpener? transportOpener,
     String Function()? nickFactory,
   }) : _configFetcher = configFetcher ?? fetchJitsiConfig,
        _signallingProbe = signallingProbe ?? _liveSignallingProbe,
+       _mediaCoreFactory = mediaCoreFactory ?? WebrtcMediaCore.new,
+       _transportOpener = transportOpener ?? openXmppFrameTransport,
        _nickFactory = nickFactory ?? uniqueMeetingNick;
 
   final JitsiConfigFetcher _configFetcher;
   final JitsiSignallingProbe _signallingProbe;
+  final MeetingMediaCore Function() _mediaCoreFactory;
+  final JitsiTransportOpener _transportOpener;
   final String Function() _nickFactory;
 
   @override
@@ -196,11 +210,124 @@ class JitsiMeetingProvider implements MeetingProvider {
     );
   }
 
+  /// Echte deelname (#2534): dezelfde deploymentvertaling als [preflight] —
+  /// join vertrouwt nooit op een eerdere preflight-uitkomst (die kan verlopen
+  /// of nooit gedraaid zijn) — dan anonieme sessie, MUC-discovery, en de
+  /// [JitsiMeetingSession] die conference-IQ → MUC → Jingle → ICE orkestreert.
+  /// Elke mislukte stap werpt [MeetingJoinException] met een getypeerde reden.
   @override
-  Future<MeetingSession> join(MeetingJoinRequest request) =>
-      throw UnimplementedError(
-        'Jitsi-join landt in #2534; deze versie mag alleen preflighten',
+  Future<MeetingSession> join(MeetingJoinRequest request) async {
+    final invitation = request.link.invitation;
+    final profile = request.link.viaProfile;
+
+    final String source;
+    try {
+      source = await _configFetcher(
+        invitation.resolve('config.js'),
+        allowPrivate: profile?.trustedInternal ?? false,
+        pinnedCertSha256: profile?.pinnedCertSha256 ?? '',
       );
+    } on JitsiConfigFetchException catch (e) {
+      throw MeetingJoinException(
+        MeetingFailureReason.providerUnavailable,
+        e.toString(),
+      );
+    } on UnsupportedError catch (e) {
+      throw MeetingJoinException(
+        MeetingFailureReason.meetingTypeUnsupported,
+        e.message,
+      );
+    }
+
+    final config = parseJitsiConfig(source);
+    final websocket = config.websocket;
+    final domain = config.domain;
+    if (websocket == null ||
+        websocket.isEmpty ||
+        domain == null ||
+        domain.isEmpty) {
+      throw const MeetingJoinException(
+        MeetingFailureReason.meetingTypeUnsupported,
+        'deployment zonder websocket/xmpp-domain',
+      );
+    }
+    final anonymousDomain = config.anonymousDomain;
+    if (anonymousDomain == null || anonymousDomain.isEmpty) {
+      throw const MeetingJoinException(
+        MeetingFailureReason.accountRequired,
+        'geen gasttoegang',
+      );
+    }
+    // De kamer is het pad van de link — match() vereist al een non-root pad.
+    final room = invitation.path.replaceAll('/', '');
+    if (room.isEmpty) {
+      throw const MeetingJoinException(
+        MeetingFailureReason.meetingTypeUnsupported,
+        'link zonder kamer',
+      );
+    }
+
+    final settings = XmppSettings(
+      serverUrl: websocket,
+      domainOverride: anonymousDomain,
+      trustedInternal: profile?.trustedInternal ?? false,
+      pinnedCertSha256: profile?.pinnedCertSha256 ?? '',
+    );
+    final XmppFrameTransport transport;
+    try {
+      transport = await _transportOpener(settings);
+    } on XmppConnectException catch (e) {
+      throw MeetingJoinException(
+        MeetingFailureReason.providerUnavailable,
+        e.toString(),
+      );
+    }
+    // `live` wordt pas gevuld als de sessie staat; onRejoin vuurt alleen op
+    // een drop van een live sessie, dus de chicken-egg lost vanzelf op.
+    JitsiMeetingSession? live;
+    final session = XmppSession(
+      transport: transport,
+      settings: settings,
+      reconnectTransportFactory: () => _transportOpener(settings),
+      onRejoin: (_) => live?.rejoin() ?? Future.value(false),
+    );
+    try {
+      final connected = await session.connect();
+      if (!connected.ok) {
+        throw MeetingJoinException(switch (connected.failure!) {
+          XmppSessionFailure.noUsableMechanism ||
+          XmppSessionFailure.badCredentials =>
+            MeetingFailureReason.accountRequired,
+          _ => MeetingFailureReason.providerUnavailable,
+        }, connected.detail);
+      }
+      final disco = XmppDisco(channel: session);
+      final muc = await disco.findMucComponent(domain);
+      if (!muc.ok) {
+        throw MeetingJoinException(
+          muc.failure == DiscoFailure.notFound
+              ? MeetingFailureReason.meetingTypeUnsupported
+              : MeetingFailureReason.providerUnavailable,
+          'geen muc-component',
+        );
+      }
+      live = await JitsiMeetingSession.start(
+        channel: session,
+        mediaCore: _mediaCoreFactory(),
+        roomJid: '$room@${muc.value!}',
+        focusJid: 'focus.$domain',
+        displayName: request.displayName,
+        startMuted: request.startMuted,
+        startCameraOff: request.startCameraOff,
+        closeSession: session.close,
+        nickFactory: _nickFactory,
+      );
+      return live;
+    } on Object {
+      await session.close();
+      rethrow;
+    }
+  }
 
   /// De deployment kan alles — dit beschrijft wat de server biedt, niet wat
   /// er nu live is; echte sporen meldt de sessie pas als ze er zijn (#2534+).

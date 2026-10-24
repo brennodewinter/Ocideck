@@ -2513,14 +2513,20 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Katıldığınızda OciDeck mikrofonunuzu ve (isteğe bağlı olarak) kameranızı kullanır; sessizde başlarsınız.',
+  'De mediaverbinding is weggevallen.': 'Medya bağlantısı kesildi.',
+  'De verbinding is verbroken.': 'Bağlantı kesildi.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Cihaz bu kaynağa erişime izin vermiyor.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Ekran paylaşımı henüz kullanılamıyor.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/oda-adi',
   'Vergaderlink controleren': 'Toplantı bağlantısını denetle',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Bir toplantı bağlantısı yapıştırın. OciDeck önce yerel olarak hangi hizmet olduğunu denetler; sunucuya yalnızca siz ön denetim istediğinizde bağlanılır.',
   'Vergaderlink': 'Toplantı bağlantısı',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Toplantıya katılma sonraki bir sürümde gelecek; bu denetim henüz katılımı mümkün kılmıyor.',
   'Preflight uitvoeren': 'Ön denetimi çalıştır',
   'Controleer': 'Denetle',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

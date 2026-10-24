@@ -124,6 +124,22 @@ All notable changes to OciDeck are documented in this file.
   versie komt. Bewezen tegen de gepinde testomgeving: de anonieme
   preflight vond daar de echte conferentiecomponent `muc.meet.jitsi`.
 
+- **Echt deelnemen aan een Jitsi-vergadering (#2534).** De **Deelnemen**-knop
+  in de vergaderlink-check doet nu wat hij belooft: OciDeck betreedt de kamer
+  als anonieme gast over echte Jitsi-signalling — de focus-conference-IQ, de
+  MUC-join met displaynaam en mute-kaart, de Jingle-onderhandeling met Jicofo
+  en de videobrug, en de aankondiging van eigen bronnen. De call wordt pas
+  "verbonden" genoemd als het mediapad ook echt live is — nooit eerder. In de
+  kamer zie je wie er zit (de onzichtbare focus telt niet mee), wie zijn
+  microfoon dichtzet, en de groepschat werkt. De call overleeft een
+  tabwissel: hij hangt aan de app, niet aan het document. Scherm delen zegt
+  eerlijk dat het er nog niet is in plaats van te doen alsof. Bewezen tegen
+  de gepinde testomgeving: twee OciDeck-clients deelden één kamer over de
+  echte Jicofo — roster, chat, mute en weggaan allemaal over de echte
+  server. Twee details dwong de echte deployment af die documentatie niet
+  vertelt: de conference-IQ moet een `machine-uid` dragen, en de
+  schuilnaam in de kamer mag geen streepjes bevatten.
+
 ### Fixed
 
 - **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende

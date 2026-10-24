@@ -336,12 +336,15 @@ test-xmpp-integration:
 	OCIDECK_XMPP_INTEGRATION=1 flutter test test/xmpp/xmpp_docker_jitsi_integration_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 test-jitsi-integration:
-	@echo "== OciDeck integration: Jitsi preflight against the pinned testbed =="
-	@echo "Command: OCIDECK_JITSI_INTEGRATION=1 flutter test test/meetings/jitsi_preflight_testbed_test.dart"
-	@echo "Covers: config.js fetch + anonymous XMPP + XEP-0030 MUC discovery against the real stack."
-	@echo "Prerequisite: cd testbed/jitsi-meet && ./run.sh up"
-	@echo "Failure means: the full Jitsi stack is not running, or preflight broke against a real deployment."
-	OCIDECK_JITSI_INTEGRATION=1 flutter test test/meetings/jitsi_preflight_testbed_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+	@echo "== OciDeck integration: Jitsi preflight + join against the pinned testbed =="
+	@echo "Command: OCIDECK_JITSI_INTEGRATION=1 flutter test test/meetings/jitsi_preflight_testbed_test.dart test/meetings/jitsi_join_testbed_test.dart"
+	@echo "Covers: config.js fetch + anonymous XMPP + XEP-0030 MUC discovery, then two real"
+	@echo "clients sharing one room over real Jicofo signalling (conference-IQ, MUC, Jingle,"
+	@echo "roster, chat, SourceInfo mute, leave). Media is faked at the MeetingMediaCore seam —"
+	@echo "libwebrtc cannot run on a headless VM; real RTP is proven by testbed/jitsi-meet/probe."
+	@echo "Prerequisite: cd testbed/jitsi-meet && ./run.sh up && ./run.sh users"
+	@echo "Failure means: the full Jitsi stack is not running, or signalling broke against a real deployment."
+	OCIDECK_JITSI_INTEGRATION=1 flutter test test/meetings/jitsi_preflight_testbed_test.dart test/meetings/jitsi_join_testbed_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Advisory dependency freshness report; not part of normal check because it can
 # depend on network availability and does not imply the current code is broken.

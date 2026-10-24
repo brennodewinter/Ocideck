@@ -651,14 +651,20 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Ora bo participa OciDeck ta usa bo mikrofon i (opsionalmente) bo kamera; bo kuminsa mudo.',
+  'De mediaverbinding is weggevallen.': 'E konekshon di media a kai.',
+  'De verbinding is verbroken.': 'E konekshon a kibra.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'E aparato no ta duna akseso na e fuente aki.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Komparti pantaya ainda no ta disponibel.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nmber-di-kamber',
   'Vergaderlink controleren': 'Kontrolá e link di reunion',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Pega un link di reunion. OciDeck promé ta kontrolá lokalmente kua servicio ta esaki; solamente ora bo pidi un preflight ta hasi konekshon ku e servidor.',
   'Vergaderlink': 'Link di reunion',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Partisipá na un reunion ta bin den un versión próksimo; e kontrol aki ainda no ta permití partisipá.',
   'Preflight uitvoeren': 'Hasi preflight',
   'Controleer': 'Kontrolá',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

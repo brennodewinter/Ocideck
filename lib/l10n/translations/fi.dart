@@ -1605,14 +1605,20 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Liittyessäsi OciDeck käyttää mikrofoniasi ja (valinnaisesti) kameraasi; aloitat mykistettynä.',
+  'De mediaverbinding is weggevallen.': 'Mediayhteys katkesi.',
+  'De verbinding is verbroken.': 'Yhteys katkesi.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Laite ei salli tämän lähteen käyttöä.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Näytön jakaminen ei ole vielä käytettävissä.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/huoneen-nimi',
   'Vergaderlink controleren': 'Tarkista kokouslinkki',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Liitä linkki kokoukseen. OciDeck tarkistaa ensin paikallisesti, mikä palvelu on kyseessä; palvelimeen muodostetaan yhteys vain, kun pyydät esitarkistusta.',
   'Vergaderlink': 'Kokouslinkki',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Kokoukseen osallistuminen tulee seuraavassa versiossa; tämä tarkistus ei vielä mahdollista osallistumista.',
   'Preflight uitvoeren': 'Suorita esitarkistus',
   'Controleer': 'Tarkista',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

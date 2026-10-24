@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 import 'package:ocideck/meetings/providers/jitsi/jitsi_config.dart';
 import 'package:ocideck/meetings/providers/jitsi/jitsi_meeting_provider.dart';
+import 'package:ocideck/xmpp/xmpp_frame_transport.dart';
 
 const _config = '''
   var config = {
@@ -31,7 +32,7 @@ JitsiMeetingProvider _provider({
   signallingProbe: (settings, domain) => Future.value(
     signalling ?? const JitsiSignallingResult.ok('muc.meet.jitsi'),
   ),
-  nickFactory: () => 'ocideck-00000001',
+  nickFactory: () => 'ocideck_00000001',
 );
 
 MeetingLinkMatch _match(String url) =>
@@ -72,7 +73,7 @@ void main() {
         expect(pre.canJoin, isTrue);
         expect(pre.support, MeetingSupport.nativeClient);
         expect(pre.e2ee, MeetingE2eeStatus.off);
-        expect(pre.identityLabel, 'ocideck-00000001');
+        expect(pre.identityLabel, 'ocideck_00000001');
         expect(pre.failureReason, isNull);
         // config.js resolved against the room's parent path.
         expect(fetched.toString(), 'https://meet.jit.si/config.js');
@@ -137,16 +138,70 @@ void main() {
     });
   });
 
-  group('join', () {
-    test('is honestly not implemented — no fake session (#2534)', () {
+  group('join (#2534)', () {
+    MeetingJoinRequest req(String url) =>
+        MeetingJoinRequest(link: _match(url), displayName: 'x');
+
+    test('config.js onbereikbaar → providerUnavailable', () {
       expect(
-        () => _provider().join(
-          MeetingJoinRequest(
-            link: _match('https://meet.jit.si/r'),
-            displayName: 'x',
+        _provider(configSource: null).join(req('https://meet.jit.si/r')),
+        throwsA(
+          isA<MeetingJoinException>().having(
+            (e) => e.reason,
+            'reason',
+            MeetingFailureReason.providerUnavailable,
           ),
         ),
-        throwsA(isA<UnimplementedError>()),
+      );
+    });
+
+    test('deployment zonder websocket → meetingTypeUnsupported', () {
+      expect(
+        _provider(
+          configSource: "var config = { bosh: 'https://h/http-bind' };",
+        ).join(req('https://meet.jit.si/r')),
+        throwsA(
+          isA<MeetingJoinException>().having(
+            (e) => e.reason,
+            'reason',
+            MeetingFailureReason.meetingTypeUnsupported,
+          ),
+        ),
+      );
+    });
+
+    test('geen anonymousdomain → accountRequired', () {
+      expect(
+        _provider(
+          configSource:
+              "var config = { hosts: { domain: 'm' }, websocket: 'wss://h/ws' };",
+        ).join(req('https://meet.jit.si/r')),
+        throwsA(
+          isA<MeetingJoinException>().having(
+            (e) => e.reason,
+            'reason',
+            MeetingFailureReason.accountRequired,
+          ),
+        ),
+      );
+    });
+
+    test('transport-weigering → providerUnavailable', () {
+      expect(
+        JitsiMeetingProvider(
+          configFetcher:
+              (url, {required allowPrivate, pinnedCertSha256 = ''}) =>
+                  Future.value(_config),
+          transportOpener: (settings) =>
+              throw const XmppConnectException('refused'),
+        ).join(req('https://meet.jit.si/r')),
+        throwsA(
+          isA<MeetingJoinException>().having(
+            (e) => e.reason,
+            'reason',
+            MeetingFailureReason.providerUnavailable,
+          ),
+        ),
       );
     });
   });

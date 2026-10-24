@@ -811,14 +811,20 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'When you join, OciDeck uses your microphone and (optionally) camera; you start muted.',
+  'De mediaverbinding is weggevallen.': 'The media connection was lost.',
+  'De verbinding is verbroken.': 'The connection was lost.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'The device does not allow access to this source.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Screen sharing is not yet available.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/room-name',
   'Vergaderlink controleren': 'Check meeting link',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Paste a link to a meeting. OciDeck first checks locally which service this is; only when you ask for a preflight is a connection made to the server.',
   'Vergaderlink': 'Meeting link',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Joining a meeting comes in a next version; this check does not allow joining yet.',
   'Preflight uitvoeren': 'Run preflight',
   'Controleer': 'Check',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

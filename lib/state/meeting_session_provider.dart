@@ -8,11 +8,9 @@
 //      deck-tab switch (NATIVE_CALLS.md §9). This deliberately does NOT copy
 //      `collabSessionProvider`'s per-tab override — a meeting is app-global.
 //
-// There is no in-app join flow yet: a real [MeetingProvider] adapter (Jitsi over
-// lib/xmpp/ + flutter_webrtc) arrives in F3. Until then [meetingSessionProvider]
-// stays null in the running app, and the call panel it feeds is exercised by
-// tests with a fake session. This is the structural foundation, wired so it is
-// not dead code, not a user-operable feature yet.
+// The Jitsi adapter (#2534) fills [meetingSessionProvider] for real: the
+// preflight dialog's *Deelnemen* button adopts the joined session here, and the
+// call panel renders it. The null-state is simply "no call active".
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -88,6 +88,13 @@ set -a && . ./.env && set +a    # laadt TEST_HOST_PASSWORD
 node probe/join.js              # exit 0 als beide clients joinen
 ```
 
+`probe/wire-capture.js` (en variant `wire-mute.js`) is hetzelfde tweepersoonsspel
+plus CDP-logging van elke WebSocket-frame naar `/tmp/jitsi-wire*/` — zo is de
+echte Jicofo-wire vastgelegd waarop `lib/meetings/providers/jitsi/` is gebouwd.
+Draai hem opnieuw bij een Jitsi-versiebump om het wire-contract opnieuw te
+verifiëren; twee bevindingen staan alleen hier zichtbaar (`machine-uid` is
+verplicht in de conference-IQ; MUC-resources mogen geen streepjes bevatten).
+
 ## Herhaalbaarheid
 
 - `./run.sh down` / `up` houdt accounts en config; `./run.sh reset` maakt

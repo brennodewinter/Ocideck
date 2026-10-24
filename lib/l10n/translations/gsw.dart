@@ -1608,14 +1608,20 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Bim Mitmache bruucht OciDeck Ihres Mikrofon und (optional) d Kamera; Si fanged dumpt aa.',
+  'De mediaverbinding is weggevallen.': 'D Medieverbindig isch abgrisse.',
+  'De verbinding is verbroken.': 'D Verbindig isch abgrisse.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'S Gerät erlaubt kei Zuegriff uf die Quelle.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Bildschirmdaile isch noh nit verfüegbar.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/zimmer-name',
   'Vergaderlink controleren': 'Meeting-Link prüefe',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Füeg e Link zu ere Besprächig ii. OciDeck prüeft zerscht lokaal, um welle Dienscht es goot; e Verbindig zum Server wird erst gmacht, wenn Si en Preflight aaforderet.',
   'Vergaderlink': 'Meeting-Link',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Mitmache bi ere Besprächig chunnt in ere nächschte Version; die Prüefig ermöglicht nonig d\'Teilnahm.',
   'Preflight uitvoeren': 'Preflight uusfüere',
   'Controleer': 'Prüefe',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

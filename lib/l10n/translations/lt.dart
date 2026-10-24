@@ -1611,14 +1611,20 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
+      'Prisijungus OciDeck naudoja jūsų mikrofoną ir (neprivalomai) kamerą; pradedate nutildytas.',
+  'De mediaverbinding is weggevallen.': 'Medijos ryšys nutrūko.',
+  'De verbinding is verbroken.': 'Ryšys nutrūko.',
+  'Het apparaat geeft geen toegang tot deze bron.':
+      'Įrenginys nesuteikia prieigos prie šio šaltinio.',
+  'Scherm delen is nog niet beschikbaar.':
+      'Ekrano bendrinimas dar nepasiekiamas.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/kambario-pavadinimas',
   'Vergaderlink controleren': 'Tikrinti susitikimo nuorodą',
   'Plak een link naar een vergadering. OciDeck controleert eerst lokaal welke dienst dit is; alleen als u om een preflight vraagt wordt er verbinding gemaakt met de server.':
       'Įklijuokite nuorodą į susitikimą. OciDeck pirmiausia vietoje patikrina, kokia tai paslauga; su serveriu jungiamasi tik tada, kai paprašote išankstinio patikrinimo.',
   'Vergaderlink': 'Susitikimo nuoroda',
-  'Deelnemen aan een vergadering volgt in een volgende versie; deze controle maakt nog geen deelname mogelijk.':
-      'Prisijungimas prie susitikimo bus kitoje versijoje; šis patikrinimas dar neleidžia dalyvauti.',
   'Preflight uitvoeren': 'Vykdyti išankstinį patikrinimą',
   'Controleer': 'Tikrinti',
   'De link droeg een inlogtoken; die is verwijderd en wordt niet bewaard.':

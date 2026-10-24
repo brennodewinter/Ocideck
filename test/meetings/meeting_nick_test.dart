@@ -8,9 +8,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/meetings/meeting_nick.dart';
 
 void main() {
-  test('has the ocideck-xxxxxxxx shape', () {
+  test('has the muc_resource_validate-safe shape (geen streepje!)', () {
     final nick = uniqueMeetingNick(Random(7));
-    expect(nick, matches(RegExp(r'^ocideck-[0-9a-f]{8}$')));
+    expect(nick, matches(RegExp(r'^ocideck_[0-9a-f]{8}$')));
   });
 
   test('successive joins get different nicks', () {
