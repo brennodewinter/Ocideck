@@ -1687,6 +1687,35 @@ const _dutchSourceAddEl = <String, String>{
       'Η ακρόαση μικροφώνου δεν μπορεί να ξεκινήσει',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Τρέχει μια εγγραφή. Σταματήστε την πρώτα — δύο συνεδρίες μικροφώνου μαζί θα έκαναν μικροφωνισμό.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Εισαγάγετε το κενό πρότυπο {bestand} ξεχωριστά ως στυλ.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Εικόνες που δεν μπορούσαν να διαβαστούν',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Εισαγωγή προτύπου PowerPoint ως στυλ',
+  'Voorbeeld van de OciDeck-stijl': 'Παράδειγμα του στυλ OciDeck',
+  'Overgenomen:': 'Ανέλαβε:',
+  'Niet overgenomen:': 'Δεν εγκρίθηκε:',
+  'Dit beeld als vast logo gebruiken':
+      'Χρησιμοποιήστε αυτήν την εικόνα ως μόνιμο λογότυπο',
+  'Naam van stijl': 'Όνομα στυλ',
+  'Deze stijlnaam bestaat al.': 'Αυτό το όνομα στυλ υπάρχει ήδη.',
+  'Stijl bewaren': 'Αποθήκευση στυλ',
+  'Accentkleur': 'Χρώμα έμφασης',
+  'Tekstkleur': 'Χρώμα κειμένου',
+  'Dia-achtergrond': 'Φόντο διαφάνειας',
+  'Dianummers': 'Αριθμοί διαφανειών',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Αυτό το πρότυπο δεν περιέχει στυλ που μπορεί να υιοθετήσει το OciDeck.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Προσαρμοσμένη τοποθέτηση και διατάξεις PowerPoint',
+  'Animaties en overgangen': 'Κινούμενα σχέδια και μεταβάσεις',
+  'Extra diamasters; de eerste is gekozen':
+      'Πρόσθετα slide masters. επιλέγεται το πρώτο',
+  'Andere vaste afbeeldingen': 'Άλλες σταθερές εικόνες',
+  'De stijl kon niet worden bewaard.': 'Δεν ήταν δυνατή η αποθήκευση του στυλ.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Το στυλ αποθηκεύτηκε για νέες παρουσιάσεις.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'χωρίς αποκωδικοποιητή σε αυτό το σύστημα (λείπει afconvert) — μόνο το PCM-WAV διαβάζεται απευθείας',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

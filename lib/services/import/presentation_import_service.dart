@@ -223,6 +223,16 @@ class PresentationImportService {
     if (prepared == null) {
       return PresentationImportResult.failed(prep.failure!);
     }
+    if (filename.toLowerCase().endsWith('.potx') &&
+        prepared.sourceDeck.slides.isEmpty) {
+      return PresentationImportResult.failed(
+        ImportFailure(
+          'Een leeg PowerPoint-sjabloon moet afzonderlijk als stijl worden geïmporteerd.',
+          reason: ImportFailureReason.noSlides,
+          args: {'bestand': filename, 'formaat': 'potx'},
+        ),
+      );
+    }
     final BuiltDeck built;
     try {
       built = prepared.build(policies: policies);

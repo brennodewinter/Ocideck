@@ -707,6 +707,35 @@ const _dutchSourceAddPap = {
   'Microfoon-doorvoer kan niet starten': 'Paso di mikrofonu no por kuminsá',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Tin un grabashon kayendo. Stòp esei promé — dos seshonnan di mikrofonu huntu lo hasi feedback.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importá e plantilla blanku {bestand} separadamente komo un estilo.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Imágennan ku no por a wòrdu lesá',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importá e plantilla di PowerPoint komo estilo',
+  'Voorbeeld van de OciDeck-stijl': 'Ehèmpel di e estilo di OciDeck',
+  'Overgenomen:': 'A tuma over:',
+  'Niet overgenomen:': 'No a wòrdu adoptá:',
+  'Dit beeld als vast logo gebruiken':
+      'Usa e imágen aki komo un logo permanente',
+  'Naam van stijl': 'Nomber di estilo',
+  'Deze stijlnaam bestaat al.': 'E nòmber di estilo aki ta eksistí kaba.',
+  'Stijl bewaren': 'Warda estilo',
+  'Accentkleur': 'Koló di aksento',
+  'Tekstkleur': 'Koló di teksto',
+  'Dia-achtergrond': 'Fondo di slide',
+  'Dianummers': 'Numbernan di slide',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'E plantia aki no ta kontené un estilo ku OciDeck por adoptá.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Posishonamentu personalisá i diseñonan di PowerPoint',
+  'Animaties en overgangen': 'Animashonnan i transishonnan',
+  'Extra diamasters; de eerste is gekozen':
+      'Maestronan di slide adishonal; e promé ta wòrdu skohé',
+  'Andere vaste afbeeldingen': 'Otro imágennan fiho',
+  'De stijl kon niet worden bewaard.': 'E estilo no por a wòrdu wardá.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Estilo wardá pa presentashonnan nobo.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'no tin dekoder riba e sistema aki (afconvert ta falta) — solamente PCM-WAV por wòrdu leé direktemente',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

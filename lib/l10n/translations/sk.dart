@@ -1665,6 +1665,34 @@ const _dutchSourceAddSk = <String, String>{
   'Microfoon-doorvoer kan niet starten': 'Odpočúvanie mikrofónu nemôže začať',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Beží nahrávka. Najprv ju zastavte — dve mikrofónové relácie naraz by sa rozhučali.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importujte prázdnu šablónu {bestand} samostatne ako štýl.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Obrázky, ktoré sa nedali prečítať',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importujte šablónu PowerPoint ako štýl',
+  'Voorbeeld van de OciDeck-stijl': 'Príklad štýlu OciDeck',
+  'Overgenomen:': 'Prevzaté:',
+  'Niet overgenomen:': 'Neprevzaté:',
+  'Dit beeld als vast logo gebruiken': 'Použite tento obrázok ako trvalé logo',
+  'Naam van stijl': 'Názov štýlu',
+  'Deze stijlnaam bestaat al.': 'Tento názov štýlu už existuje.',
+  'Stijl bewaren': 'Uložiť štýl',
+  'Accentkleur': 'Farba akcentu',
+  'Tekstkleur': 'Farba textu',
+  'Dia-achtergrond': 'Pozadie snímky',
+  'Dianummers': 'Čísla snímok',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Táto šablóna neobsahuje štýl, ktorý môže OciDeck prijať.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Vlastné umiestnenie a rozloženia programu PowerPoint',
+  'Animaties en overgangen': 'Animácie a prechody',
+  'Extra diamasters; de eerste is gekozen':
+      'Ďalšie predlohy snímok; prvý je vybraný',
+  'Andere vaste afbeeldingen': 'Ďalšie fixné obrázky',
+  'De stijl kon niet worden bewaard.': 'Štýl sa nepodarilo uložiť.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Štýl uložený pre nové prezentácie.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'v tomto systéme nie je dekodér (afconvert chýba) — iba PCM-WAV možno čítať priamo',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

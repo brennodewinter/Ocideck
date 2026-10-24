@@ -708,6 +708,34 @@ const _dutchSourceAddFr = {
   'Microfoon-doorvoer kan niet starten': 'Le retour micro ne peut pas démarrer',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Un enregistrement est en cours. Arrêtez-le d\'abord — deux sessions de microphone à la fois produiraient un larsen.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importez le modèle vierge {bestand} séparément en tant que style.',
+  'Afbeeldingen die niet konden worden gelezen': 'Images impossibles à lire',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importer le modèle PowerPoint en tant que style',
+  'Voorbeeld van de OciDeck-stijl': 'Exemple du style OciDeck',
+  'Overgenomen:': 'Reprise :',
+  'Niet overgenomen:': 'Non adopté :',
+  'Dit beeld als vast logo gebruiken':
+      'Utilisez cette image comme logo permanent',
+  'Naam van stijl': 'Nom du modèle',
+  'Deze stijlnaam bestaat al.': 'Ce nom de style existe déjà.',
+  'Stijl bewaren': 'Enregistrer le style',
+  'Accentkleur': 'Couleur d\'accentuation',
+  'Tekstkleur': 'Couleur du texte',
+  'Dia-achtergrond': 'Arrière-plan de la diapositive',
+  'Dianummers': 'Numéros de diapositives',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Ce modèle ne contient pas de style qu\'OciDeck peut adopter.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Positionnement personnalisé et mises en page PowerPoint',
+  'Animaties en overgangen': 'Animations et transitions',
+  'Extra diamasters; de eerste is gekozen':
+      'Masques des diapositives supplémentaires ; le premier est choisi',
+  'Andere vaste afbeeldingen': 'Autres images fixes',
+  'De stijl kon niet worden bewaard.': 'Le style n\'a pas pu être enregistré.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Style enregistré pour les nouvelles présentations.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'aucun décodeur sur ce système (afconvert manquant) — seul le PCM-WAV peut être lu directement',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

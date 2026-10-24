@@ -1663,6 +1663,34 @@ const _dutchSourceAddHr = <String, String>{
   'Microfoon-doorvoer kan niet starten': 'Propuštanje mikrofona ne može početi',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Snimka je u tijeku. Zaustavite je prvo — dvije mikrofonske sesije odjednom bi zavijale.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Uvezite prazan predložak {bestand} zasebno kao stil.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Slike koje se ne mogu pročitati',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Uvezite PowerPoint predložak kao stil',
+  'Voorbeeld van de OciDeck-stijl': 'Primjer OciDeck stila',
+  'Overgenomen:': 'Preuzeto:',
+  'Niet overgenomen:': 'Nije usvojeno:',
+  'Dit beeld als vast logo gebruiken': 'Koristite ovu sliku kao trajni logo',
+  'Naam van stijl': 'Naziv stila',
+  'Deze stijlnaam bestaat al.': 'Ovaj naziv stila već postoji.',
+  'Stijl bewaren': 'Sačuvaj stil',
+  'Accentkleur': 'Boja akcenta',
+  'Tekstkleur': 'Boja teksta',
+  'Dia-achtergrond': 'Pozadina slajda',
+  'Dianummers': 'Brojevi slajdova',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Ovaj predložak ne sadrži stil koji OciDeck može usvojiti.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Prilagođeno pozicioniranje i PowerPoint izgledi',
+  'Animaties en overgangen': 'Animacije i prijelazi',
+  'Extra diamasters; de eerste is gekozen':
+      'Dodatni slajd masteri; bira se prvi',
+  'Andere vaste afbeeldingen': 'Ostale fiksne slike',
+  'De stijl kon niet worden bewaard.': 'Stil se nije mogao spremiti.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stil spremljen za nove prezentacije.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'u ovom sustavu nema dekodera (afconvert nedostaje) — samo PCM-WAV se može čitati izravno',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

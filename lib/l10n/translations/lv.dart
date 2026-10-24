@@ -1658,6 +1658,35 @@ const _dutchSourceAddLv = <String, String>{
   'Microfoon-doorvoer kan niet starten': 'Mikrofona monitorings nevar sākties',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Notiek ieraksts. Vispirms to apturiet — divas mikrofona sesijas vienlaikus radītu atgriezenisko saiti.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importējiet tukšo veidni {bestand} atsevišķi kā stilu.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Attēli, kurus nevarēja nolasīt',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importējiet PowerPoint veidni kā stilu',
+  'Voorbeeld van de OciDeck-stijl': 'OciDeck stila piemērs',
+  'Overgenomen:': 'Pārņemts:',
+  'Niet overgenomen:': 'Nav pieņemts:',
+  'Dit beeld als vast logo gebruiken':
+      'Izmantojiet šo attēlu kā pastāvīgu logotipu',
+  'Naam van stijl': 'Stila nosaukums',
+  'Deze stijlnaam bestaat al.': 'Šis stila nosaukums jau pastāv.',
+  'Stijl bewaren': 'Saglabājiet stilu',
+  'Accentkleur': 'Akcenta krāsa',
+  'Tekstkleur': 'Teksta krāsa',
+  'Dia-achtergrond': 'Slaida fons',
+  'Dianummers': 'Slaidu numuri',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Šajā veidnē nav stila, ko OciDeck varētu pieņemt.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Pielāgota pozicionēšana un PowerPoint izkārtojumi',
+  'Animaties en overgangen': 'Animācijas un pārejas',
+  'Extra diamasters; de eerste is gekozen':
+      'Papildu slaidu meistari; tiek izvēlēts pirmais',
+  'Andere vaste afbeeldingen': 'Citi fiksēti attēli',
+  'De stijl kon niet worden bewaard.': 'Stilu nevarēja saglabāt.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stils saglabāts jaunām prezentācijām.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'šajā sistēmā nav atkodētāja (afconvert trūkst) — tikai PCM-WAV var lasīt tieši',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

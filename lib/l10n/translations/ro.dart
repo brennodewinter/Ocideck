@@ -1678,6 +1678,35 @@ const _dutchSourceAddRo = <String, String>{
       'Monitorizarea microfonului nu poate porni',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Rulează o înregistrare. Opriți-o întâi — două sesiuni de microfon deodată ar fluiera.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Importați șablonul gol {bestand} separat ca stil.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Imagini care nu au putut fi citite',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Importați șablonul PowerPoint ca stil',
+  'Voorbeeld van de OciDeck-stijl': 'Exemplu de stil OciDeck',
+  'Overgenomen:': 'Preluat:',
+  'Niet overgenomen:': 'Neadoptată:',
+  'Dit beeld als vast logo gebruiken':
+      'Utilizați această imagine ca logo permanent',
+  'Naam van stijl': 'Nume stil',
+  'Deze stijlnaam bestaat al.': 'Acest nume de stil există deja.',
+  'Stijl bewaren': 'Salvați stilul',
+  'Accentkleur': 'Culoare de accent',
+  'Tekstkleur': 'Culoarea textului',
+  'Dia-achtergrond': 'Slide fundal',
+  'Dianummers': 'Numerele diapozitivelor',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Acest șablon nu conține un stil pe care OciDeck îl poate adopta.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Poziționare personalizată și machete PowerPoint',
+  'Animaties en overgangen': 'Animații și tranziții',
+  'Extra diamasters; de eerste is gekozen':
+      'Diapozitive master suplimentare; primul este ales',
+  'Andere vaste afbeeldingen': 'Alte imagini fixe',
+  'De stijl kon niet worden bewaard.': 'Stilul nu a putut fi salvat.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stil salvat pentru prezentări noi.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'fără decodor pe acest sistem (afconvert lipsește) — doar PCM-WAV poate fi citit direct',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

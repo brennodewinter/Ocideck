@@ -1692,6 +1692,34 @@ const _dutchSourceAddGa = <String, String>{
       'Ní féidir monatóireacht an mhicreafóin a thosú',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Tá taifead ar siúl. Stad é ar dtús — dhá sheisiún micreafóin le chéile, dhéanfaidís aisfhotha.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Iompórtáil an teimpléad bán {bestand} ar leithligh mar stíl.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Íomhánna nárbh fhéidir a léamh',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Iompórtáil teimpléad PowerPoint mar stíl',
+  'Voorbeeld van de OciDeck-stijl': 'Sampla den stíl OciDeck',
+  'Overgenomen:': 'Tógtha ar láimh:',
+  'Niet overgenomen:': 'Gan glacadh:',
+  'Dit beeld als vast logo gebruiken': 'Úsáid an íomhá seo mar lógó buan',
+  'Naam van stijl': 'Ainm stíl',
+  'Deze stijlnaam bestaat al.': 'Tá an t-ainm stíl seo ann cheana féin.',
+  'Stijl bewaren': 'Sábháil stíl',
+  'Accentkleur': 'Dath accent',
+  'Tekstkleur': 'Dath téacs',
+  'Dia-achtergrond': 'Cúlra sleamhnáin',
+  'Dianummers': 'Uimhreacha sleamhnáin',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Níl stíl sa teimpléad seo is féidir le OciDeck a ghlacadh.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Suíomh saincheaptha agus leagan amach PowerPoint',
+  'Animaties en overgangen': 'Beochan agus aistrithe',
+  'Extra diamasters; de eerste is gekozen':
+      'Máistrí sleamhnán breise; roghnaítear an chéad cheann',
+  'Andere vaste afbeeldingen': 'Íomhánna seasta eile',
+  'De stijl kon niet worden bewaard.': 'Níorbh fhéidir an stíl a shábháil.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Stíl shábháil le haghaidh cur i láthair nua.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'níl aon díchódóir ar an gcóras seo (afconvert in easnamh) — is féidir PCM-WAV amháin a léamh go díreach',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

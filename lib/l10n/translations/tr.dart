@@ -2566,6 +2566,32 @@ const _dutchSourceAddTr = <String, String>{
   'Microfoon-doorvoer kan niet starten': 'Mikrofon geçişi başlayamıyor',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Bir kayıt sürüyor. Önce onu durdurun — iki mikrofon oturumu birden geri besleme yapar.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Boş şablonu {bestand} ayrı olarak stil olarak içe aktarın.',
+  'Afbeeldingen die niet konden worden gelezen': 'Okunamayan resimler',
+  'PowerPoint-sjabloon als stijl importeren':
+      'PowerPoint şablonunu stil olarak içe aktar',
+  'Voorbeeld van de OciDeck-stijl': 'OciDeck stili örneği',
+  'Overgenomen:': 'Devralınan:',
+  'Niet overgenomen:': 'Kabul edilmedi:',
+  'Dit beeld als vast logo gebruiken': 'Bu görseli kalıcı logo olarak kullanın',
+  'Naam van stijl': 'Stil adı',
+  'Deze stijlnaam bestaat al.': 'Bu stil adı zaten mevcut.',
+  'Stijl bewaren': 'Stili kaydet',
+  'Accentkleur': 'Vurgu rengi',
+  'Tekstkleur': 'Metin rengi',
+  'Dia-achtergrond': 'Slayt arka planı',
+  'Dianummers': 'Slayt numaraları',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Bu şablon OciDeck\'in benimseyebileceği bir stil içermemektedir.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Özel konumlandırma ve PowerPoint düzenleri',
+  'Animaties en overgangen': 'Animasyonlar ve geçişler',
+  'Extra diamasters; de eerste is gekozen': 'Ek asıl slaytlar; ilki seçilir',
+  'Andere vaste afbeeldingen': 'Diğer sabit görüntüler',
+  'De stijl kon niet worden bewaard.': 'Stil kaydedilemedi.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Yeni sunumlar için stil kaydedildi.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'bu sistemde dekoder yok (afconvert eksik) — yalnızca PCM-WAV doğrudan okunabilir',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

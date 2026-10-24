@@ -2653,8 +2653,9 @@ bijwerking fail-closed en laat het bestaande deck ongewijzigd.
 
 *(Toegevoegd 2026-07-24.)*
 
-**… → Presentaties importeren…** maakt van een PowerPoint- (`.pptx`), LibreOffice
-Impress- (`.odp`) of Apple Keynote-bestand (`.key`) een echt OciDeck-deck:
+**… → Presentaties importeren…** maakt van een PowerPoint-bestand (`.pptx` of
+een `.potx`-sjabloon met voorbeelddia's), LibreOffice Impress-bestand (`.odp`)
+of Apple Keynote-bestand (`.key`) een echt OciDeck-deck:
 getypeerde dia's die je kunt bewerken, in gewone Marp-Markdown, geen stapel foto's
 van andermans dia's. Het zit achter de **Importeren**-module (**Instellingen →
 Uitbreidingen → Importeren**, standaard uit), dus het menu-item verschijnt zodra
@@ -2664,9 +2665,25 @@ hierboven beschreven.)* Anders dan de OpenKAT-import leest hij de bytes van het
 bestand dat je koos in plaats van een map op schijf, dus deze bestaat ook in de
 browserversie.
 
+**Een PowerPoint-sjabloon zonder dia's wordt een herbruikbare stijl.** Kies het
+`.potx` via dezelfde importactie. OciDeck toont eerst een voorbeeld van de
+titel-, inhouds- en sectiekleuren en vermeldt wat het wel en niet kon overnemen.
+Geef de stijl een vrije, nog niet gebruikte naam en bewaar hem; de actieve stijl
+van bestaande presentaties verandert niet. Beschikbaar zijn de kleuren en het
+lettertype uit de eerste diamaster, en waar aanwezig de achtergrond, voettekst
+en dianummers. Een vast hoeklogo of een merkstrook kun je na het bekijken zelf
+aanvinken. Vrij geplaatste objecten, PowerPoint-layouts, animaties, overgangen,
+extra diamasters en andere vaste afbeeldingen worden geen onderdeel van de
+stijl. Als er geen bruikbare stijlkenmerken zijn, meldt OciDeck dat zonder een
+leeg profiel op te slaan. Een `.potm` wordt niet ondersteund. Een `.potx` met
+voorbeelddia's volgt de gewone presentatie-import; controleer de dia's en hun
+opmaak na conversie. Een leeg `.potx` in een importwachtrij wordt niet als leeg
+deck opgeslagen: importeer dat bestand afzonderlijk om de stijl te beoordelen.
+
 **Als je in plaats daarvan naar "Openen…" grijpt, wijst OciDeck je de goede kant
 op.** *(Toegevoegd 2026-08-03, #1175.)* "Openen…" is voor Markdown- en
-`.ocideck`-bestanden, dus daar een `.pptx`/`.odp`/`.key` kiezen liep vroeger dood
+`.ocideck`-bestanden, dus daar een `.pptx`/`.potx`/`.odp`/`.key` kiezen liep
+vroeger dood
 op "dit bestand is geen leesbare tekst — OciDeck opent Markdown", zonder enige hint
 dat een import überhaupt bestaat. Nu herkent die melding de presentatie en biedt
 een uitweg: met de **Importeren**-module aan draagt de melding een
@@ -2676,7 +2693,7 @@ benoemt hij wat je koos en stuurt je naar **Instellingen** om de module aan te
 zetten, in plaats van hem stilletjes in te schakelen.
 
 **Je kunt presentaties ook rechtstreeks op het venster slepen.** *(Toegevoegd
-2026-08-03, #1175.)* Een of meer `.pptx`/`.odp`/`.key`-bestanden op OciDeck laten
+2026-08-03, #1175.)* Een of meer `.pptx`/`.potx`/`.odp`/`.key`-bestanden op OciDeck laten
 vallen stuurt ze naar dezelfde import — één bestand opent direct, meerdere gaan naar
 het wachtrijdialoog (volgorde en bestemming), precies als het menu-item. Een
 gemengde sleep is prima: Markdown, afbeeldingen en presentaties nemen elk hun eigen

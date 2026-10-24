@@ -1673,6 +1673,34 @@ const _dutchSourceAddPl = <String, String>{
       'Podsłuch mikrofonu nie może się uruchomić',
   'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
       'Trwa nagranie. Zatrzymaj je najpierw — dwie sesje mikrofonu naraz sprzęgałyby się.',
+  'Importeer het lege sjabloon {bestand} afzonderlijk als stijl.':
+      'Zaimportuj pusty szablon {bestand} oddzielnie jako styl.',
+  'Afbeeldingen die niet konden worden gelezen':
+      'Obrazy, których nie można odczytać',
+  'PowerPoint-sjabloon als stijl importeren':
+      'Zaimportuj szablon programu PowerPoint jako styl',
+  'Voorbeeld van de OciDeck-stijl': 'Przykład stylu OciDeck',
+  'Overgenomen:': 'Przejęty:',
+  'Niet overgenomen:': 'Nie adoptowane:',
+  'Dit beeld als vast logo gebruiken': 'Użyj tego obrazu jako stałego logo',
+  'Naam van stijl': 'Nazwa stylu',
+  'Deze stijlnaam bestaat al.': 'Ta nazwa stylu już istnieje.',
+  'Stijl bewaren': 'Zapisz styl',
+  'Accentkleur': 'Kolor akcentujący',
+  'Tekstkleur': 'Kolor tekstu',
+  'Dia-achtergrond': 'Przesuń tło',
+  'Dianummers': 'Numery slajdów',
+  'Dit sjabloon bevat geen stijl die OciDeck kan overnemen.':
+      'Ten szablon nie zawiera stylu, który może przyjąć OciDeck.',
+  'Vrije plaatsing en PowerPoint-layouts':
+      'Niestandardowe pozycjonowanie i układy PowerPoint',
+  'Animaties en overgangen': 'Animacje i przejścia',
+  'Extra diamasters; de eerste is gekozen':
+      'Dodatkowe wzorce slajdów; wybiera się pierwszy',
+  'Andere vaste afbeeldingen': 'Inne utrwalone obrazy',
+  'De stijl kon niet worden bewaard.': 'Nie można zapisać stylu.',
+  'Stijl bewaard voor nieuwe presentaties.':
+      'Styl zapisany dla nowych prezentacji.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'brak dekodera w tym systemie (brak afconvert) — tylko PCM-WAV można odczytać bezpośrednio',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

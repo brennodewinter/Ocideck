@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/pptx/pptx_importer.dart';
+import 'package:ocideck/services/import/logo_detection.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
 import 'package:ocideck/services/import/models/source_chart.dart';
 import 'package:ocideck/services/import/models/source_video.dart';
@@ -339,6 +340,59 @@ void main() {
 
     final result = await PptxImporter().importBytes(bytes, path: 'empty.pptx');
     expect(result.isErr, isTrue);
+  });
+
+  test('empty POTX keeps a selectable fixed master logo', () async {
+    final result = await PptxImporter().importBytes(
+      emptyPotxFixture(withLogo: true),
+      path: 'style.potx',
+    );
+    expect(result.isOk, isTrue);
+    final deck = result.okValue!;
+    expect(deck.slides, isEmpty);
+    expect(deck.templateMasterCount, 1);
+    expect(deck.templateImages, hasLength(1));
+    expect(deck.theme?.slideBackgroundColor, '#F6F7F8');
+    expect(deck.theme?.footerText, 'LibreKAT');
+    expect(deck.theme?.showPageNumbers, isTrue);
+    final logos = templateLogoCandidates(deck);
+    expect(logos, hasLength(1));
+    expect(logos.first.image.placement!.isLogoLikeAtVerticalEdge, isTrue);
+  });
+
+  test('empty POTX reports a missing master image', () async {
+    final result = await PptxImporter().importBytes(
+      emptyPotxFixture(withLogo: true, missingLogo: true),
+      path: 'broken-style.potx',
+    );
+    expect(result.isOk, isTrue);
+    expect(result.okValue!.templateImages, isEmpty);
+    expect(result.okValue!.issues, isNotEmpty);
+  });
+
+  test('reads the theme of a POTX with no sample slides', () async {
+    final bytes = _zip({
+      '[Content_Types].xml':
+          '<Types><Override PartName="/ppt/presentation.xml" '
+          'ContentType="application/vnd.openxmlformats-officedocument.presentationml.template.main+xml"/></Types>',
+      'ppt/presentation.xml': _presentationXml(0),
+      'ppt/_rels/presentation.xml.rels':
+          '<Relationships xmlns="$_pkg"><Relationship Id="rId1" '
+          'Type="$_r/slideMaster" Target="slideMasters/slideMaster1.xml"/></Relationships>',
+      'ppt/slideMasters/slideMaster1.xml': '<p:sldMaster xmlns:p="$_p"/>',
+      'ppt/slideMasters/_rels/slideMaster1.xml.rels':
+          '<Relationships xmlns="$_pkg"><Relationship Id="rId1" '
+          'Type="$_r/theme" Target="../theme/theme2.xml"/></Relationships>',
+      'ppt/theme/theme2.xml': _themeXml(),
+    });
+
+    final result = await PptxImporter().importBytes(bytes, path: 'merk.POTX');
+    expect(result.isOk, isTrue);
+    final deck = result.okValue!;
+    expect(deck.slides, isEmpty);
+    expect(deck.theme?.accentColor, '#2E7D64');
+    expect(deck.theme?.textColor, '#222222');
+    expect(deck.theme?.fontFamily, 'Georgia');
   });
 
   test('extracts images via blip r:embed relationships', () async {

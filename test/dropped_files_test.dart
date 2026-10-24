@@ -18,7 +18,13 @@ import 'package:ocideck/widgets/shell/dropped_files.dart';
 void main() {
   group('droppedKind', () {
     test('herkent presentaties van elders als importwerk', () {
-      for (final name in ['deck.pptx', 'Deck.PPTX', 'a.odp', 'b.key']) {
+      for (final name in [
+        'deck.pptx',
+        'Deck.PPTX',
+        'merk.POTX',
+        'a.odp',
+        'b.key',
+      ]) {
         expect(
           droppedKind(name),
           DroppedKind.presentation,

@@ -23,6 +23,19 @@ import 'helpers/pptx_fixture.dart';
 /// annuleer-, deadline- en foutpaden over de isolategrens.
 void main() {
   group('parseAndClassify — de gedeelde kern (web-pad)', () {
+    test('leest een potx met voorbeelddia als bewerkbaar deck', () async {
+      final result = await runImportTaskInline(
+        ImportRequest(
+          bytes: pptxFixture(titel: 'Sjabloon'),
+          filename: 'merk.potx',
+        ),
+      );
+      final parsed = (result as ImportTaskParsed).parsed;
+      expect(parsed.deck.slides, hasLength(1));
+      expect(parsed.deck.slides.single.title, 'Sjabloon');
+      expect(parsed.classified, hasLength(1));
+    });
+
     test(
       'leest en classificeert een pptx tot een ParsedPresentation',
       () async {

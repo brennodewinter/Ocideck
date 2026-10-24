@@ -55,6 +55,42 @@ void appendInheritedPictures({
   );
 }
 
+/// Read fixed pictures without inventing a slide in a slide-less template.
+({List<SourceImage> images, List<ConversionIssue> issues}) templatePictures(
+  PptxContext context,
+  String masterPath,
+) {
+  final images = <SourceImage>[];
+  final issues = <ConversionIssue>[];
+  final master = context.readXml(masterPath);
+  if (master == null) return (images: images, issues: issues);
+  final layoutPath = context.firstRelatedPart(masterPath, 'ppt/slideLayouts/');
+  final layout = layoutPath == null ? null : context.readXml(layoutPath);
+  if (layout != null) {
+    _appendPartPictures(
+      context: context,
+      document: layout,
+      partPath: layoutPath!,
+      slideIndex: 0,
+      images: images,
+      issues: issues,
+      layoutPart: true,
+    );
+  }
+  if (layout == null || _showsMasterShapes(layout.rootElement)) {
+    _appendPartPictures(
+      context: context,
+      document: master,
+      partPath: masterPath,
+      slideIndex: 0,
+      images: images,
+      issues: issues,
+      layoutPart: false,
+    );
+  }
+  return (images: images, issues: issues);
+}
+
 bool _showsMasterShapes(XmlElement root) {
   final value = root.getAttribute('showMasterSp');
   return value != '0' && value != 'false';
