@@ -40,6 +40,11 @@ target_arch="amd64"
 
 mkdir -p "${result_dir}" "${pub_cache_dir}"
 image="ocideck-debian12-builder:flutter-${flutter_version}"
+mkdir -p "${workspace_dir}/work"
+snapshot_dir="$(mktemp -d "${workspace_dir}/work/ocideck-snapshot.XXXXXX")"
+trap 'rm -rf -- "${snapshot_dir}"' EXIT
+# Export the selected commit without a host-only .git worktree pointer.
+git -C "${source_dir}" archive HEAD | tar -x -C "${snapshot_dir}"
 
 "${engine[@]}" build \
   --platform linux/amd64 \
@@ -52,7 +57,7 @@ image="ocideck-debian12-builder:flutter-${flutter_version}"
   --platform linux/amd64 \
   --user "$(id -u):$(id -g)" \
   --env HOME=/tmp/build-home \
-  --volume "${source_dir}:/src" \
+  --volume "${snapshot_dir}:/src" \
   --volume "${result_dir}:/out" \
   --volume "${pub_cache_dir}:/opt/pub-cache" \
   "${image}"

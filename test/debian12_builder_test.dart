@@ -29,11 +29,34 @@ void main() {
   test('Debian 12 builder accepts a Git worktree as its source', () async {
     final temp = await Directory.systemTemp.createTemp('ocideck-builder-');
     addTearDown(() => temp.delete(recursive: true));
-    final source = Directory('${temp.path}/source')..createSync();
-    File('${source.path}/.git').writeAsStringSync('gitdir: elsewhere\n');
+    final base = Directory('${temp.path}/base')..createSync();
     File(
-      '${source.path}/.tool-versions',
+      '${base.path}/.tool-versions',
     ).writeAsStringSync('flutter 3.47.7-stable\n');
+    File('${base.path}/pubspec.yaml').writeAsStringSync('version: 9.9.9\n');
+    await Process.run('git', ['init', '-q', base.path]);
+    await Process.run('git', ['-C', base.path, 'add', '.']);
+    await Process.run('git', [
+      '-C',
+      base.path,
+      '-c',
+      'user.name=Test',
+      '-c',
+      'user.email=test@example.invalid',
+      'commit',
+      '-qm',
+      'source',
+    ]);
+    final source = Directory('${temp.path}/source');
+    await Process.run('git', [
+      '-C',
+      base.path,
+      'worktree',
+      'add',
+      '-q',
+      source.path,
+    ]);
+    expect(File('${source.path}/.git').existsSync(), isTrue);
     final log = File('${temp.path}/engine.log');
     final engine = File('${temp.path}/docker')
       ..writeAsStringSync('#!/bin/sh\nprintf "%s\\n" "\$*" >> "${log.path}"\n');
@@ -51,7 +74,8 @@ void main() {
     );
 
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
-    expect(log.readAsStringSync(), contains('${source.path}:/src'));
+    expect(log.readAsStringSync(), contains('/work/ocideck-snapshot.'));
+    expect(log.readAsStringSync(), isNot(contains('${source.path}:/src')));
     expect(log.readAsStringSync(), contains('--platform linux/amd64'));
   });
 
@@ -66,6 +90,19 @@ void main() {
     ).writeAsStringSync('flutter 3.47.7-stable\n');
     final releaseScript = File('${scripts.path}/build_debian12_release.sh');
     File('scripts/build_debian12_release.sh').copySync(releaseScript.path);
+    await Process.run('git', ['init', '-q', temp.path]);
+    await Process.run('git', ['-C', temp.path, 'add', '.']);
+    await Process.run('git', [
+      '-C',
+      temp.path,
+      '-c',
+      'user.name=Test',
+      '-c',
+      'user.email=test@example.invalid',
+      'commit',
+      '-qm',
+      'source',
+    ]);
     final log = File('${temp.path}/docker.log');
     final docker = File('${temp.path}/docker')
       ..writeAsStringSync('''#!/bin/sh
@@ -73,7 +110,7 @@ printf '%s\\n' "\$*" >> "${log.path}"
 case "\$1" in
   create) echo test-container ;;
   inspect) echo 0 ;;
-  cp) case "\$2" in *:/out/*) echo archive > "\$3" ;; esac ;;
+  cp) case "\$2" in -) cat > "${temp.path}/source.tar" ;; *:/out/*) echo archive > "\$3" ;; esac ;;
 esac
 ''');
     await Process.run('chmod', ['+x', docker.path]);
@@ -91,9 +128,12 @@ esac
       ).existsSync(),
       isTrue,
     );
-    expect(
-      log.readAsStringSync(),
-      contains('${temp.path}/. test-container:/src'),
-    );
+    expect(log.readAsStringSync(), contains('cp - test-container:/src'));
+    final archive = await Process.run('tar', [
+      '-tf',
+      '${temp.path}/source.tar',
+    ]);
+    expect(archive.exitCode, 0);
+    expect(archive.stdout, isNot(contains('.git')));
   });
 }

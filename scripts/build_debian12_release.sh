@@ -23,7 +23,8 @@ IMAGE="ocideck-debian12-builder:flutter-$FLUTTER_VERSION"
 CID="$("${DOCKER[@]}" create --platform linux/amd64 \
   --env HOME=/tmp/build-home "$IMAGE")"
 trap '"${DOCKER[@]}" rm -f "$CID" >/dev/null 2>&1 || true' EXIT
-"${DOCKER[@]}" cp "$ROOT/." "$CID:/src"
+# A worktree's .git file points to a host path that does not exist in Docker.
+git -C "$ROOT" archive HEAD | "${DOCKER[@]}" cp - "$CID:/src"
 "${DOCKER[@]}" start -a "$CID"
 [[ "$("${DOCKER[@]}" inspect -f '{{.State.ExitCode}}' "$CID")" == 0 ]] || {
   echo 'Debian 12 build failed' >&2
