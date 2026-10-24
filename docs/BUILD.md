@@ -1144,14 +1144,14 @@ design and the remaining phases (an rpm repo; Snap) are in
   and already publishes the project's CI images. A missing or rejected token
   fails the release instead of leaving the apt source silently behind. Never
   replace it with a broad personal token.
-- **Consumer-verified before publication.** Four jobs (`consumer-deb`,
-  `consumer-rpm`, `consumer-appimage`, `consumer-flatpak`) install the packages in pinned, bare
-  distro images — Ubuntu 24.04 for the `.deb` and AppImage, Fedora 42 for the
-  `.rpm` — link-check the binary with `ldd` and start it under Xvfb. The build
-  image carries every `-dev` package, so only a clean image can expose a
-  missing runtime dependency (the v0.4.9 Ayatana miss). `publiceren` needs all
-  three, so a failed probe blocks the release. `test/linux_packaging_test.dart`
-  pins the wiring; the probes themselves only run on a real `v*` tag.
+- **Consumer-verified before publication.** The `.deb`, `.rpm`, and AppImage
+  jobs install the packages in pinned, bare distro images, link-check the binary
+  with `ldd`, and start it under Xvfb. The Flatpak job installs the GNOME runtime
+  and bundle, checks its metadata and installed files, verifies every bundled
+  Git/library file against its SHA-256 inventory, and compares the embedded and
+  external SBOM. Forgejo's Docker runner cannot start Flatpak's nested sandbox;
+  a native Linux desktop launch remains a manual release check. `publiceren`
+  needs all four jobs. `test/linux_packaging_test.dart` pins the wiring.
 
 ### AUR package
 

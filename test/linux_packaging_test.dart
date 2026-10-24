@@ -313,19 +313,18 @@ void main() {
       }
     });
 
-    test('the Flatpak consumer installs its runtime and starts the app', () {
+    test('the Flatpak consumer installs and verifies bundle contents', () {
       for (final workflow in [releaseYaml, preTagYaml]) {
         final section = workflow.substring(
           workflow.indexOf('  consumer-flatpak:'),
         );
         expect(section, contains('org.gnome.Platform//50'));
         expect(section, contains('flatpak --user install'));
-        expect(section, contains('git --version'));
-        expect(section, contains('ldd /app/lib/ocideck/ocideck'));
-        expect(
-          section,
-          contains('xvfb-run -a dbus-run-session -- flatpak run'),
-        );
+        expect(section, contains('flatpak --user info --show-location'));
+        expect(section, contains('runtime=org.gnome.Platform/x86_64/50'));
+        expect(section, contains('sha256sum -c'));
+        expect(section, contains('components.cdx.json'));
+        expect(section, isNot(contains('flatpak run')));
       }
     });
 
