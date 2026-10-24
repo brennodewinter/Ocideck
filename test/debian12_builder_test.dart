@@ -8,11 +8,16 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('Debian 12 archive gates publication and joins the signed release', () {
     final workflow = File('.forgejo/workflows/release.yml').readAsStringSync();
+    final buildWorkflow = File(
+      '.forgejo/workflows/debian12-build.yml',
+    ).readAsStringSync();
     final release = File('scripts/release_auto.sh').readAsStringSync();
     final dockerfile = File(
       'scripts/debian12_builder/Dockerfile',
     ).readAsStringSync();
     expect(workflow, contains('linux-debian12:'));
+    expect(workflow, contains('ca-certificates nodejs git docker.io'));
+    expect(buildWorkflow, contains('ca-certificates nodejs git docker.io'));
     expect(workflow, contains('scripts/build_debian12_release.sh'));
     expect(workflow, contains('consumer-debian12:'));
     expect(workflow, contains('needs: linux-debian12'));

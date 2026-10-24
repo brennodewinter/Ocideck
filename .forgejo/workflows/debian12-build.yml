@@ -20,7 +20,7 @@ jobs:
       - name: Docker-gereedschap installeren
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends nodejs git docker.io iproute2
+          apt-get install -y --no-install-recommends ca-certificates nodejs git docker.io iproute2
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
