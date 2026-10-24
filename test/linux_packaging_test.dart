@@ -279,9 +279,7 @@ void main() {
         final start = workflow.$1.indexOf('  consumer-appimage:');
         final section = workflow.$1.substring(
           start,
-          workflow.$2 == null
-              ? workflow.$1.length
-              : workflow.$1.indexOf(workflow.$2!, start),
+          workflow.$1.indexOf(workflow.$2, start),
         );
         expect(
           RegExp(
