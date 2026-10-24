@@ -84,7 +84,13 @@ void main() {
     await settle(tester);
 
     // De io-probe op de test-VM rapporteert een echt OS + architectuur.
-    expect(find.textContaining('macOS · '), findsOneWidget);
+    final platform = switch (Platform.operatingSystem) {
+      'macos' => 'macOS',
+      'linux' => 'Linux',
+      'windows' => 'Windows',
+      final other => other,
+    };
+    expect(find.textContaining('$platform · '), findsOneWidget);
     expect(
       find.text('Lokaal — er vertrekt geen audio van dit apparaat'),
       findsOneWidget,
