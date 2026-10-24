@@ -109,13 +109,22 @@ Future<void> _match(
       ctx,
     ).read(transcriptionModelManagerProvider.notifier).refresh(),
   );
-  await pumpUntil(
-    tester,
-    () =>
-        find.textContaining('detecteren').evaluate().isEmpty &&
-        find.textContaining('controleren').evaluate().isEmpty,
-    reason: 'de statusmatrix bleef op een tussenstatus hangen',
-  );
+  await pumpUntil(tester, () {
+    // De schakelaar start uitgeschakeld zolang de voorkeur nog laadt.
+    // Een plaat van dat moment heeft een grijzere titel en wijkt af
+    // zodra de voorkeur binnen is.
+    final tiles = find.byType(SwitchListTile);
+    if (tiles.evaluate().isEmpty) return false;
+    if (tester.widget<SwitchListTile>(tiles.first).onChanged == null) {
+      return false;
+    }
+    return find.textContaining('detecteren').evaluate().isEmpty &&
+        find.textContaining('controleren').evaluate().isEmpty;
+  }, reason: 'de statusmatrix of de moduleschakelaar bleef laden');
+  // De titel kleurt van grijs naar de gewone inkt zodra de schakelaar
+  // aangaat. Eén frame vangt die overgang soms halverwege; een seconde
+  // nep-tijd laat hem uitlopen.
+  await tester.pump(const Duration(seconds: 1));
 
   await expectLater(
     find.byKey(_surfaceKey),
