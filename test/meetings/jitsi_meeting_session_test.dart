@@ -209,6 +209,7 @@ class FakeMediaCore implements MeetingMediaCore {
 class FakeMediaConnection implements MeetingMediaConnection {
   final _remoteTracks = StreamController<MeetingRemoteTrack>.broadcast();
   final _liveness = StreamController<MeetingMediaLiveness>.broadcast();
+  final _lostTracks = StreamController<String>.broadcast();
   final enabledCalls = <(String, bool)>[];
   var audioSsrc = 4242;
   var videoSsrc = 4343;
@@ -225,6 +226,38 @@ class FakeMediaConnection implements MeetingMediaConnection {
 
   @override
   MeetingMediaLiveness currentLiveness = MeetingMediaLiveness.connecting;
+
+  final attachedTracks = <String>[];
+  String? selectedOutput;
+  final dataChannels = <FakeDataChannel>[];
+  var dataChannelFails = false;
+
+  @override
+  Future<MeetingDataChannel> openDataChannel(String label) async {
+    if (dataChannelFails) throw StateError('kanaal geweigerd');
+    final channel = FakeDataChannel();
+    dataChannels.add(channel);
+    return channel;
+  }
+
+  @override
+  Stream<String> get localTrackLost => _lostTracks.stream;
+
+  @override
+  Future<MeetingVideoSurface?> attachVideo(String trackId) async {
+    attachedTracks.add(trackId);
+    return _FakeVideoSurface();
+  }
+
+  @override
+  Future<List<MeetingAudioOutput>> audioOutputs() async => const [
+    MeetingAudioOutput(id: 'spk', label: 'Speakers'),
+    MeetingAudioOutput(id: 'hp', label: 'Koptelefoon'),
+  ];
+
+  @override
+  Future<void> selectAudioOutput(String deviceId) async =>
+      selectedOutput = deviceId;
 
   @override
   Future<({String trackId, int? ssrc})?> addLocalAudio() async =>
@@ -260,6 +293,38 @@ class FakeMediaConnection implements MeetingMediaConnection {
   }
 
   void emitTrack(MeetingRemoteTrack t) => _remoteTracks.add(t);
+
+  void loseLocalTrack(String trackId) => _lostTracks.add(trackId);
+}
+
+class FakeDataChannel implements MeetingDataChannel {
+  final _messages = StreamController<String>.broadcast();
+  final sent = <String>[];
+  var closed = false;
+
+  @override
+  Stream<String> get messages => _messages.stream;
+
+  @override
+  Future<void> send(String text) async => sent.add(text);
+
+  void emit(String text) => _messages.add(text);
+
+  @override
+  Future<void> close() async {
+    closed = true;
+    if (!_messages.isClosed) await _messages.close();
+  }
+}
+
+class _FakeVideoSurface implements MeetingVideoSurface {
+  var disposed = false;
+
+  @override
+  int get textureId => 1;
+
+  @override
+  Future<void> dispose() async => disposed = true;
 }
 
 /// Wacht tot [pred] op de verzonden stanzas uitkomt — de join is asynchroon
@@ -573,26 +638,74 @@ void main() {
       expect(session.participants.map((p) => p.id), isNot(contains('focus')));
     });
 
-    test('remote track met <nick>-a0 msid koppelt aan de participant', () async {
-      final session = await joinLive();
-      addTearDown(() => session.leave());
-      channel.inject(
-        Stanza.parse(
-          "<presence from='$_roomJid/bob'>"
-          "<x xmlns='$_mucUserNs'><item affiliation='none' role='participant'/></x></presence>",
-        ),
-      );
-      await pumpEventQueue();
-      mediaCore.conn.emitTrack(
-        const MeetingRemoteTrack(
-          track: MeetingTrack(id: 't1', kind: MeetingTrackKind.audio),
-          msid: 'bob-a0',
-        ),
-      );
-      await pumpEventQueue();
-      final bob = session.participants.singleWhere((p) => p.id == 'bob');
-      expect(bob.audio?.id, 't1');
-    });
+    test(
+      'source-add json + gedeelde audiotrack → audio-tegel aan de endpoint',
+      () async {
+        final session = await joinLive();
+        addTearDown(() => session.leave());
+        channel.inject(
+          Stanza.parse(
+            "<presence from='$_roomJid/bob'>"
+            "<x xmlns='$_mucUserNs'><item affiliation='none' role='participant'/></x></presence>",
+          ),
+        );
+        await pumpEventQueue();
+        // De JVB deelt één audiostream; de source-add json vertelt welke
+        // endpoint een bron heeft — de track zelf draagt geen naam.
+        channel.inject(
+          Stanza.parse(
+            "<iq type='set' from='$_roomJid/focus' to='x@y/1' id='sa1'>"
+            "<jingle xmlns='$jingleNs' action='source-add' sid='9h90l0o8t59ro'>"
+            "<json-message xmlns='http://jitsi.org/jitmeet'>"
+            '{"sources":{"bob":[[],[[]],[{"s":1234,"n":"bob-a0","m":"ms mt"}]]}}'
+            "</json-message></jingle></iq>",
+          ),
+        );
+        mediaCore.conn.emitTrack(
+          const MeetingRemoteTrack(
+            track: MeetingTrack(id: 't1', kind: MeetingTrackKind.audio),
+          ),
+        );
+        await pumpEventQueue();
+        final bob = session.participants.singleWhere((p) => p.id == 'bob');
+        expect(bob.audio?.id, 't1');
+      },
+    );
+
+    test(
+      'ForwardedSources + gedeelde videotrack → video-tegel aan de endpoint',
+      () async {
+        final session = await joinLive();
+        addTearDown(() => session.leave());
+        channel.inject(
+          Stanza.parse(
+            "<presence from='$_roomJid/bob'>"
+            "<x xmlns='$_mucUserNs'><item affiliation='none' role='participant'/></x></presence>",
+          ),
+        );
+        await pumpEventQueue();
+        mediaCore.conn.dataChannels.single.emit(
+          '{"colibriClass":"ForwardedSources","forwardedSources":["bob-v0"]}',
+        );
+        mediaCore.conn.emitTrack(
+          const MeetingRemoteTrack(
+            track: MeetingTrack(id: 'tv', kind: MeetingTrackKind.video),
+          ),
+        );
+        await pumpEventQueue();
+        final bob = session.participants.singleWhere((p) => p.id == 'bob');
+        expect(bob.video?.id, 'tv');
+        // De bron stopt met forwarden → de tegel leegt weer.
+        mediaCore.conn.dataChannels.single.emit(
+          '{"colibriClass":"ForwardedSources","forwardedSources":[]}',
+        );
+        await pumpEventQueue();
+        expect(
+          session.participants.singleWhere((p) => p.id == 'bob').video,
+          isNull,
+        );
+      },
+    );
 
     test('mute zet de track uit én meldt muted in SourceInfo', () async {
       final session = await joinLive(startMuted: false);
@@ -733,5 +846,138 @@ void main() {
       expect(sessionClosed, isTrue);
       await sub.cancel();
     });
+  });
+
+  group('#2535 media-exposure', () {
+    test('mediaEgressOrigins = de JVB-kandidaten uit de initiate', () async {
+      final session = await joinLive();
+      addTearDown(() => session.leave());
+      expect(session.mediaEgressOrigins.toSet(), {
+        '172.20.0.5:10000',
+        '127.0.0.1:10000',
+      });
+      expect(session.mediaE2ee, MeetingE2eeStatus.off);
+    });
+
+    test(
+      'videoSurfaceFor attach op de eigen track; zonder track → null',
+      () async {
+        // Camera aan bij de join — anders is er per ontwerp géén videotrack.
+        final session = await joinLive(startCameraOff: false);
+        addTearDown(() => session.leave());
+        final surface = await session.videoSurfaceFor(_nick);
+        expect(surface, isNotNull);
+        expect(mediaCore.conn.attachedTracks, ['tv']);
+        // Geen track → null, nooit een nepvlak.
+        expect(await session.videoSurfaceFor('onbekend'), isNull);
+      },
+    );
+
+    test('audio-uitvoer loopt via de sessie naar de connection', () async {
+      final session = await joinLive();
+      addTearDown(() => session.leave());
+      expect((await session.audioOutputs()).map((o) => o.id), ['spk', 'hp']);
+      await session.selectAudioOutput('hp');
+      expect(mediaCore.conn.selectedOutput, 'hp');
+    });
+
+    test(
+      'weggevallen lokale bron → uit SourceInfo, participant en melding',
+      () async {
+        final session = await joinLive(
+          startMuted: false,
+          startCameraOff: false,
+        );
+        addTearDown(() => session.leave());
+        final events = <MeetingEvent>[];
+        final sub = session.events.listen(events.add);
+
+        mediaCore.conn.loseLocalTrack('ta');
+        await pumpEventQueue();
+
+        final info = _sourceInfoOf(channel.lastPresence!);
+        expect(info?.innerText, isNot(contains('-a0')));
+        final local = session.participants.singleWhere((p) => p.isLocal);
+        expect(local.micMuted, isTrue);
+        expect(local.audio, isNull);
+        expect(local.video, isNotNull);
+        expect(events.whereType<MeetingErrorEvent>(), isNotEmpty);
+        await sub.cancel();
+      },
+    );
+
+    test(
+      'verse session-initiate tijdens connected → renegotiate, geen rejoin',
+      () async {
+        final session = await joinLive();
+        addTearDown(() => session.leave());
+        expect(mediaCore.openCount, 1);
+
+        channel.inject(
+          Stanza.parse(
+            _wireInitiateIq()
+                .replaceAll("sid='9h90l0o8t59ro'", "sid='reneg1'")
+                .replaceAll('init1', 'init2'),
+          ),
+        );
+        // De nieuwe onderhandeling loopt: tweede session-accept afwachten.
+        await _until(
+          channel,
+          (s) =>
+              s.kind == StanzaKind.iq &&
+              s.children.any(
+                (e) =>
+                    e.name.local == 'jingle' &&
+                    e.getAttribute('action') == 'session-accept' &&
+                    e.getAttribute('sid') == 'reneg1',
+              ),
+        );
+        mediaCore.conn.goLive();
+        await pumpEventQueue(times: 5);
+
+        expect(mediaCore.openCount, 2);
+        expect(session.connectionState, MeetingConnectionState.connected);
+        // Zelfde kamer, geen nieuwe MUC-join voor de renegotiate.
+        expect(
+          channel.sent.where(
+            (s) =>
+                s.kind == StanzaKind.presence &&
+                s.children.any(
+                  (e) =>
+                      e.name.local == 'x' &&
+                      (e.getAttribute('xmlns') ?? e.name.namespaceUri) ==
+                          _mucNs,
+                ),
+          ),
+          hasLength(1),
+        );
+      },
+    );
+
+    test('endpoint-kanaal: ClientHello + ReceiverVideoConstraints', () async {
+      final session = await joinLive();
+      addTearDown(() => session.leave());
+      await pumpEventQueue(times: 5);
+
+      final channel = mediaCore.conn.dataChannels.single;
+      expect(channel.sent, contains('{"colibriClass":"ClientHello"}'));
+      expect(
+        channel.sent.join(),
+        contains('"colibriClass":"ReceiverVideoConstraints"'),
+      );
+    });
+
+    test(
+      'endpoint-kanaal faalt → join slaagt toch (audio wel, geen veinen)',
+      () async {
+        mediaCore.conn.dataChannelFails = true;
+        final session = await joinLive();
+        addTearDown(() => session.leave());
+        await pumpEventQueue(times: 5);
+
+        expect(session.connectionState, MeetingConnectionState.connected);
+        expect(mediaCore.conn.dataChannels, isEmpty);
+      },
+    );
   });
 }

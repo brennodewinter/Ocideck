@@ -28,14 +28,18 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<!-- Microfoon: doorvoer tijdens presenteren (#2158) én, als de
-	     gebruiker dat zelf start, een opname op dit apparaat (#2516).
-	     Zonder deze key weigert TCC de microfoon. De tekst noemt beide,
-	     want een belofte "er wordt niets opgenomen" is onwaar zodra
-	     opnemen kan. Er gaat nog steeds niets het apparaat af tenzij de
-	     gebruiker apart een serverroute kiest voor transcriptie. -->
+	<!-- Microfoon: doorvoer tijdens presenteren (#2158), een lokale
+	     opname (#2516) én een vergadering die de gebruiker zelf joined
+	     (#2535) — in een call gaat de audio wél de gekozen vergaderserver
+	     op, dus de tekst mag geen "niets verstuurd" beloven. Zonder deze
+	     key weigert TCC de microfoon. -->
 	<key>NSMicrophoneUsageDescription</key>
-	<string>OciDeck gebruikt de microfoon voor doorvoer tijdens het presenteren en, als u dat zelf start, voor een opname die op dit apparaat blijft. Er wordt niets verstuurd.</string>
+	<string>OciDeck gebruikt de microfoon voor doorvoer tijdens het presenteren, voor een opname die op dit apparaat blijft, en voor een vergadering waaraan u zelf deelneemt — alleen dan gaat uw audio naar de vergaderserver.</string>
+	<!-- Camera: alleen voor een vergadering (#2535). Zonder deze key is
+	     cameratoegang per TCC onmogelijk — de join faalde dan stil op
+	     macOS. -->
+	<key>NSCameraUsageDescription</key>
+	<string>OciDeck gebruikt de camera alleen voor een vergadering waaraan u zelf deelneemt — alleen dan gaat uw beeld naar de vergaderserver.</string>
 	<key>NSScreenCaptureUsageDescription</key>
 	<string>OciDeck gebruikt systeemgeluid alleen als u dat zelf start, voor een opname die op dit apparaat blijft. Het beeld wordt niet bewaard en er wordt niets verstuurd.</string>
 	<key>FLTEnableMergedPlatformUIThread</key>

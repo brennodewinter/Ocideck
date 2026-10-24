@@ -1623,6 +1623,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Il-mikrofonu jew il-kamera tiegħek sparixxa; ixgħel is-sors mill-ġdid meta jkun għandek mill-ġdid.',
+  'Media is niet end-to-end versleuteld.':
+      'Il-midja mhijiex kkriptata minn tarf għal tarf.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Enkrizzjoni tal-midja minn tarf għal tarf mhux magħrufa.',
+  'Media gaat naar': 'Il-midja tmur lejn',
+  'Audio-uitvoer kiezen': 'Agħżel l-output tal-awdjo',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Meta tingħaqad, OciDeck juża l-mikrofonu tiegħek u (b\'mod fakultattiv) il-kamera; tibda mutat.',
   'De mediaverbinding is weggevallen.': 'Il-konnessjoni tal-midja nqata\'t.',

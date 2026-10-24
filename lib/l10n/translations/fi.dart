@@ -1605,6 +1605,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Mikrofonisi tai kamerasi katosi; laita lähde takaisin päälle, kun se palaa.',
+  'Media is niet end-to-end versleuteld.':
+      'Mediaa ei ole salattu päästä päähän.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Median päästä päähän -salaus tuntematon.',
+  'Media gaat naar': 'Media menee kohteeseen',
+  'Audio-uitvoer kiezen': 'Valitse äänilähtö',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Liittyessäsi OciDeck käyttää mikrofoniasi ja (valinnaisesti) kameraasi; aloitat mykistettynä.',
   'De mediaverbinding is weggevallen.': 'Mediayhteys katkesi.',

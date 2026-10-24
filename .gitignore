@@ -85,3 +85,7 @@ tool/marp-check/node_modules/
 packages/*/coverage/
 native/whisper_cli/bin/
 native/whisper_cli/build/
+
+# Screenshot-bewijs dat de macOS-mediaproof (integration_test/jitsi_real_media_test)
+# per run herschrijft — een artefact, geen bron.
+integration_test/jitsi_media_proof.png

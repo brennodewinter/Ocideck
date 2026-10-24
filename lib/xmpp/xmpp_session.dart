@@ -139,7 +139,15 @@ class XmppSession implements XmppStanzaChannel {
     this.maxReconnectAttempts = 5,
     this.reconnectDelay = xmppReconnectDelay,
     this.pingInterval = const Duration(seconds: 60),
+    this.discoFeatures = const {'http://jabber.org/protocol/disco#info'},
   }) : _nonce = nonceFactory ?? _defaultNonce;
+
+  /// De feature-URIs die de sessie in disco#info-antwoorden adverteert
+  /// (XEP-0030). Jicofo ontdekt hiermee per-endpoint wat een client kan —
+  /// wie niets adverteert krijgt een offer zonder de onderdelen die aan
+  /// features hangen (geen `data`-content, geen rtx, #2535). De default is
+  /// bewust kaal: de aanroeper (de meeting-provider) levert zijn eigen set.
+  final Set<String> discoFeatures;
 
   /// The active transport — replaced on each reconnect. Mutable because a
   /// reconnect swaps in a fresh [XmppFrameTransport] to the same host.
@@ -535,6 +543,13 @@ class XmppSession implements XmppStanzaChannel {
         _pingInFlight = null;
         return;
       }
+      // Inkomende protocol-queries beantwoorden we zelf: ping (XEP-0199 —
+      // prosody's mod_ping kickt wie niet antwoordt) en disco#info
+      // (XEP-0030 — jicofo ontdekt hiermee endpoint-features vóór de
+      // session-initiate). Beide zijn sessie-protocol, geen collab-stanza.
+      if (stanza.kind == StanzaKind.iq && stanza.type == 'get') {
+        if (_answerProtocolQuery(stanza)) return;
+      }
       if (!_inbound.isClosed) _inbound.add(stanza);
     }, onClosed: _onStreamDropped);
   }
@@ -556,11 +571,79 @@ class XmppSession implements XmppStanzaChannel {
       }
       final id = 'ping-${DateTime.now().microsecondsSinceEpoch}';
       _pingInFlight = id;
-      transport.send(
-        '<iq type="get" id="$id">'
-        '<ping xmlns="urn:xmpp:ping"/></iq>',
+      // Via sendStanza (niet transport.send): die route zet xmlns=
+      // "jabber:client" op het top-element — zonder die namespace ziet de
+      // server geen client-stanza maar een unhandled stream-element en
+      // sluit hij de websocket (echte wire: stable-11248 prosody, #2535).
+      // `to` = het servicedomain, zoals lib-jitsi-meet op de wire doet; een
+      // error-reply telt ook als antwoord — de watchdog eist alleen een iq
+      // met ons id terug.
+      sendStanza(
+        Stanza(
+          kind: StanzaKind.iq,
+          type: 'get',
+          id: id,
+          to: settings.domain,
+          children: [xmppElement('ping', namespace: 'urn:xmpp:ping')],
+        ),
       );
     });
+  }
+
+  /// Beantwoord een inkomende protocol-query die de sessie zelf afhandelt.
+  /// `true` = geconsumeerd (niet aan consumers doorgeven), `false` = geen
+  /// herkende query — de stanza gaat gewoon de stroom op.
+  bool _answerProtocolQuery(Stanza stanza) {
+    final query = stanza.children.isNotEmpty ? stanza.children.first : null;
+    if (query == null || stanza.from == null) return false;
+    switch (query.name.local) {
+      case 'ping'
+          when query.name.namespaceUri == 'urn:xmpp:ping' ||
+              query.getAttribute('xmlns') == 'urn:xmpp:ping':
+        sendStanza(
+          Stanza(
+            kind: StanzaKind.iq,
+            type: 'result',
+            id: stanza.id,
+            to: stanza.from,
+          ),
+        );
+        return true;
+      case 'query'
+          when query.name.namespaceUri ==
+                  'http://jabber.org/protocol/disco#info' ||
+              query.getAttribute('xmlns') ==
+                  'http://jabber.org/protocol/disco#info':
+        sendStanza(
+          Stanza(
+            kind: StanzaKind.iq,
+            type: 'result',
+            id: stanza.id,
+            to: stanza.from,
+            children: [
+              xmppElement(
+                'query',
+                namespace: 'http://jabber.org/protocol/disco#info',
+                children: [
+                  xmppElement(
+                    'identity',
+                    attributes: {
+                      'category': 'client',
+                      'type': 'pc',
+                      'name': 'OciDeck',
+                    },
+                  ),
+                  for (final f in discoFeatures)
+                    xmppElement('feature', attributes: {'var': f}),
+                ],
+              ),
+            ],
+          ),
+        );
+        return true;
+      default:
+        return false;
+    }
   }
 
   void _stopPing() {

@@ -652,6 +652,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Ihr Mikrofon oder Ihre Kamera ist weggefallen; schalten Sie die Quelle wieder ein, sobald sie zurück ist.',
+  'Media is niet end-to-end versleuteld.':
+      'Medien sind nicht Ende-zu-Ende-verschlüsselt.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Ende-zu-Ende-Verschlüsselung der Medien unbekannt.',
+  'Media gaat naar': 'Medien gehen an',
+  'Audio-uitvoer kiezen': 'Audioausgabe wählen',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Beim Beitritt verwendet OciDeck Ihr Mikrofon und (optional) Ihre Kamera; Sie starten stummgeschaltet.',
   'De mediaverbinding is weggevallen.':

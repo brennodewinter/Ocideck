@@ -2513,6 +2513,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Mikrofonunuz veya kameranız kayboldu; geri geldiğinde kaynağı yeniden açın.',
+  'Media is niet end-to-end versleuteld.': 'Medya uçtan uca şifreli değil.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Medyanın uçtan uca şifrelemesi bilinmiyor.',
+  'Media gaat naar': 'Medya şuraya gidiyor:',
+  'Audio-uitvoer kiezen': 'Ses çıkışını seçin',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Katıldığınızda OciDeck mikrofonunuzu ve (isteğe bağlı olarak) kameranızı kullanır; sessizde başlarsınız.',
   'De mediaverbinding is weggevallen.': 'Medya bağlantısı kesildi.',

@@ -1607,6 +1607,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'A mikrofonja vagy a kamerája eltűnt; kapcsolja vissza a forrást, amint visszatér.',
+  'Media is niet end-to-end versleuteld.':
+      'A média nem végponttól végpontig titkosított.',
+  'End-to-end-versleuteling van media onbekend.':
+      'A média végponttól végpontig történő titkosítása ismeretlen.',
+  'Media gaat naar': 'A média ide megy:',
+  'Audio-uitvoer kiezen': 'Válassza ki a hangkimenetet',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Csatlakozáskor az OciDeck használja a mikrofonját és (opcionálisan) a kameráját; némítva kezd.',
   'De mediaverbinding is weggevallen.': 'A médiakapcsolat megszakadt.',

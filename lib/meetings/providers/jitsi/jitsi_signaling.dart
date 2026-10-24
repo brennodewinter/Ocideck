@@ -28,10 +28,12 @@
 // never a "seemingly connected" session without a media path.
 
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:xml/xml.dart';
 
 import '../../../xmpp/xmpp_stanza.dart';
+import '../../meeting_participant.dart' show MeetingTrackKind;
 
 const jitsiFocusNs = 'http://jitsi.org/protocol/focus';
 const jitsiJitmeetNs = 'http://jitsi.org/jitmeet';
@@ -45,6 +47,35 @@ const jingleRtcpFbNs = 'urn:xmpp:jingle:apps:rtp:rtcp-fb:0';
 const jingleHdrextNs = 'urn:xmpp:jingle:apps:rtp:rtp-hdrext:0';
 const jingleSsmaNs = 'urn:xmpp:jingle:apps:rtp:ssma:0';
 const jitsiNickNs = 'http://jabber.org/protocol/nick';
+
+/// De endpoint-features die wij aan jicofo adverteren — via presence
+/// `<features>` én via disco#info (#2535). Jicofo beslist per-endpoint welke
+/// contents en payload-types de session-initiate krijgt: wie niets
+/// adverteert krijgt een offer zonder `data`-content (geen endpoint-
+/// datachannel → geen geforwarde video) en zonder rtx. Alles hier staat op
+/// wat wij echt ondersteunen — adverteren wat we niet doen is veinen op de
+/// wire. Namen volgen jicofo's eigen `Features`-enum.
+const jitsiCallFeatures = <String>{
+  'http://jabber.org/protocol/disco#info',
+  'urn:xmpp:ping',
+  jingleNs,
+  jingleRtpNs,
+  'urn:xmpp:jingle:apps:rtp:audio',
+  'urn:xmpp:jingle:apps:rtp:video',
+  jingleGroupNs,
+  jingleDtlsNs,
+  jingleIceNs,
+  jingleSctpNs,
+  jingleRtcpFbNs,
+  jingleHdrextNs,
+  jingleSsmaNs,
+  'urn:ietf:rfc:4588', // rtx — libwebrtc onderhandelt hem standaard mee
+  'http://jitsi.org/tcc', // transport-wide cc — zit al in het offer
+  'http://jitsi.org/remb',
+  'http://jitsi.org/source-name',
+  'http://jitsi.org/receive-multiple-video-streams',
+  'http://jitsi.org/json-encoded-sources',
+};
 
 /// Waarom een Jingle-/focus-contract niet aanvaard werd — elke waarde is een
 /// expliciete, diagnosticeerbare reden (acceptatie: "onbekend of gewijzigd
@@ -735,6 +766,96 @@ String buildSourceInfo(Map<String, bool> mutedBySource) => jsonEncode({
   for (final e in mutedBySource.entries) e.key: {'muted': e.value},
 });
 
+// ── json-sources: ssrc↔sourcenaam in source-add/-remove ─────────────────────
+
+/// Eén remote bron uit de `source-add`/`source-remove` json-message: de
+/// bridge meldt SSRC's met hun sourcenaam (`<endpoint>-a0`/`-v0`) — dat is dé
+/// koppelsleutel tussen binnenkomende RTP en een MUC-participant (de msid op
+/// de wire is een willekeurige UUID, niet de sourcenaam).
+typedef JitsiRemoteSource = ({
+  int ssrc,
+  String endpoint,
+  String sourceName,
+  MeetingTrackKind kind,
+});
+
+/// Parse de `{"sources":{…}}`-payload van een `source-add`/`source-remove`.
+/// De endpoint-waarde is een geneste array (video-ssrc's, ssrc-groepen,
+/// audio-ssrc's) waarvan de posities niet betrouwbaar zijn; we verzamelen álle
+/// `{"s":…,"n":…}`-paren en classificeren op het `-a`/`-v`-achtervoegsel van de
+/// naam. Onleesbare of onbegrensde invoer levert geen bronnen.
+List<JitsiRemoteSource> parseJsonSources(String? text) {
+  if (text == null || text.isEmpty || text.length > _maxSourcesJson) {
+    return const [];
+  }
+  final Object? decoded;
+  try {
+    decoded = jsonDecode(text);
+  } on FormatException {
+    return const [];
+  }
+  if (decoded is! Map || decoded['sources'] is! Map) return const [];
+  final out = <JitsiRemoteSource>[];
+  for (final e in (decoded['sources'] as Map).entries) {
+    if (out.length >= _maxSources) break;
+    if (e.key is! String) continue;
+    _collectSources(e.value, e.key as String, out);
+  }
+  return out;
+}
+
+void _collectSources(
+  Object? node,
+  String endpoint,
+  List<JitsiRemoteSource> out,
+) {
+  if (out.length >= _maxSources) return;
+  if (node is List) {
+    for (final item in node) {
+      _collectSources(item, endpoint, out);
+    }
+  } else if (node is Map) {
+    final ssrc = node['s'];
+    final name = node['n'];
+    if (ssrc is int && name is String && name.length <= _maxFieldLength) {
+      final dash = name.lastIndexOf('-');
+      final kind = dash >= 0 && dash + 1 < name.length
+          ? switch (name[dash + 1]) {
+              'a' => MeetingTrackKind.audio,
+              'v' => MeetingTrackKind.video,
+              _ => null,
+            }
+          : null;
+      if (kind != null) {
+        out.add((ssrc: ssrc, endpoint: endpoint, sourceName: name, kind: kind));
+      }
+    }
+  }
+}
+
+/// Eén `ForwardedSources`-bericht van de bridge: welke sourcenamen op dit
+/// moment op de gedeelde video-m-line liggen. Null als dit bericht géén
+/// ForwardedSources is. De wire-vorm is een lijst; oudere deployments sturen
+/// een map — beide worden gelezen.
+List<String>? parseForwardedSources(String? text) {
+  if (text == null || text.isEmpty || text.length > _maxSourcesJson) {
+    return null;
+  }
+  final Object? decoded;
+  try {
+    decoded = jsonDecode(text);
+  } on FormatException {
+    return null;
+  }
+  if (decoded is! Map || decoded['colibriClass'] != 'ForwardedSources') {
+    return null;
+  }
+  final raw = decoded['forwardedSources'];
+  if (raw is List) return raw.whereType<String>().toList();
+  if (raw is Map) return raw.keys.whereType<String>().toList();
+  return const [];
+}
+
 // ── begrenzingen ────────────────────────────────────────────────────────────
 
 const _maxContents = 8;
@@ -755,3 +876,70 @@ String? _bounded(String? v, int max) {
 
 String? _boundedAttr(XmlElement e, String name) =>
     _bounded(e.getAttribute(name), _maxFieldLength);
+
+/// De XMPP-error-condition uit een stanza-reply (`<error><not-authorized/>`
+/// → 'not-authorized') — grof, voor typed failure-mapping, nooit de vrije
+/// `<text>` (die mag server-tekst met gegevens bevatten).
+String jitsiStanzaErrorCondition(Stanza stanza) {
+  final error = stanza.child('error');
+  if (error == null) return 'unknown';
+  for (final e in error.childElements) {
+    if (e.name.local != 'text') return e.name.local;
+  }
+  return 'unknown';
+}
+
+/// De presence-extensies op een (her)join of update: displaynaam, de
+/// SourceInfo-kaart én de endpoint-features — jicofo leest die uit de
+/// presence (en via disco#info) om de session-initiate samen te stellen
+/// (#2535). `<x xmlns='…/muc'>` plaatst XmppMuc zelf vooraan.
+List<XmlElement> jitsiPresenceExtensions(
+  String displayName,
+  Map<String, bool> mutedBySource,
+) => [
+  xmppElement('nick', namespace: jitsiNickNs, text: displayName),
+  xmppElement('SourceInfo', text: buildSourceInfo(mutedBySource)),
+  xmppElement(
+    'features',
+    children: [
+      for (final f in jitsiCallFeatures)
+        xmppElement('feature', attributes: {'var': f}),
+    ],
+  ),
+];
+
+/// lib-jitsi-meet's device-id voor de conference-IQ — eenmalig per sessie.
+/// Een willekeurige 128-bit uid in de vorm die de wire toont (32 hex);
+/// jicofo eist hem in de conference-IQ. Per sessie, niet per device: er is
+/// geen hergebruik-voordeel dat het koppelen van calls aan één device
+/// rechtvaardigt.
+String jitsiNewMachineUid() {
+  final r = Random.secure();
+  return List.generate(32, (_) => r.nextInt(16).toRadixString(16)).join();
+}
+
+/// Een eigen bron aankondigen bij de focus als een source-add IQ — de
+/// stanza-bouw (niet de beslissing of/when; dat is sessie-orchestratie).
+Stanza jitsiSourceAnnounceIq({
+  required String focusInRoom,
+  required String iqId,
+  required String sid,
+  required String initiator,
+  required String sourceName,
+  required String ssrc,
+}) => Stanza(
+  kind: StanzaKind.iq,
+  to: focusInRoom,
+  id: iqId,
+  type: 'set',
+  children: [
+    buildSourceAdd(
+      sid: sid,
+      initiator: initiator,
+      contentName: sourceName.endsWith('-a0') ? 'audio' : 'video',
+      media: sourceName.endsWith('-a0') ? 'audio' : 'video',
+      sourceName: sourceName,
+      ssrc: ssrc,
+    ),
+  ],
+);

@@ -1603,6 +1603,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Jūsu mikrofons vai kamera pazuda; ieslēdziet avotu atkal, kad tas atgriezīsies.',
+  'Media is niet end-to-end versleuteld.':
+      'Mēdijs nav šifrēts no gala līdz galam.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Mēdiju šifrēšana no gala līdz galam nav zināma.',
+  'Media gaat naar': 'Mēdijs iet uz',
+  'Audio-uitvoer kiezen': 'Izvēlieties audio izvadi',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Pievienojoties OciDeck izmanto jūsu mikrofonu un (pēc izvēles) kameru; jūs sākat izslēgtā režīmā.',
   'De mediaverbinding is weggevallen.': 'Multivides savienojums pārtrūka.',

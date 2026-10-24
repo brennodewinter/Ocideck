@@ -1630,6 +1630,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Το μικρόφωνο ή η κάμερά σας χάθηκε· ενεργοποιήστε ξανά την πηγή όταν επιστρέψει.',
+  'Media is niet end-to-end versleuteld.':
+      'Τα μέσα δεν είναι κρυπτογραφημένα από άκρο σε άκρο.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Η κρυπτογράφηση μέσων από άκρο σε άκρο είναι άγνωστη.',
+  'Media gaat naar': 'Τα μέσα πηγαίνουν σε',
+  'Audio-uitvoer kiezen': 'Επιλέξτε έξοδο ήχου',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Κατά τη συμμετοχή το OciDeck χρησιμοποιεί το μικρόφωνό σας και (προαιρετικά) την κάμερα· ξεκινάτε σε σίγαση.',
   'De mediaverbinding is weggevallen.': 'Η σύνδεση πολυμέσων διακόπηκε.',

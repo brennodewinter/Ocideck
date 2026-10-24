@@ -117,6 +117,18 @@ class _FakeMediaConnection implements MeetingMediaConnection {
   MeetingMediaLiveness currentLiveness = MeetingMediaLiveness.connecting;
 
   @override
+  Stream<String> get localTrackLost => const Stream.empty();
+
+  @override
+  Future<MeetingVideoSurface?> attachVideo(String trackId) async => null;
+
+  @override
+  Future<List<MeetingAudioOutput>> audioOutputs() async => const [];
+
+  @override
+  Future<void> selectAudioOutput(String deviceId) async {}
+
+  @override
   Future<({String trackId, int? ssrc})?> addLocalAudio() async =>
       (trackId: 'ta', ssrc: _ssrcSeq++);
 
@@ -129,6 +141,10 @@ class _FakeMediaConnection implements MeetingMediaConnection {
     String trackId, {
     required bool enabled,
   }) async {}
+
+  @override
+  Future<MeetingDataChannel> openDataChannel(String label) async =>
+      _FakeDataChannel();
 
   @override
   Future<void> applyRemoteOffer(String sdp) async => offerSdp = sdp;
@@ -149,6 +165,17 @@ class _FakeMediaConnection implements MeetingMediaConnection {
     currentLiveness = MeetingMediaLiveness.closed;
     if (!_liveness.isClosed) unawaited(_liveness.close());
   }
+}
+
+class _FakeDataChannel implements MeetingDataChannel {
+  @override
+  Stream<String> get messages => const Stream.empty();
+
+  @override
+  Future<void> send(String text) async {}
+
+  @override
+  Future<void> close() async {}
 }
 
 MeetingLinkMatch _match(String room) => MeetingLinkMatch(

@@ -1620,6 +1620,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Ваш мікрофон або камера зникли; увімкніть джерело знову, коли воно повернеться.',
+  'Media is niet end-to-end versleuteld.': 'Медіа не зашифровано наскрізно.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Наскрізне шифрування медіа невідоме.',
+  'Media gaat naar': 'Медіа йде до',
+  'Audio-uitvoer kiezen': 'Виберіть вихід аудіо',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Під час приєднання OciDeck використовує ваш мікрофон і (необов\'язково) камеру; ви починаєте вимкненими.',
   'De mediaverbinding is weggevallen.': 'Медіаз\'єднання перервано.',

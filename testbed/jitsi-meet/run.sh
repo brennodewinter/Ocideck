@@ -6,6 +6,8 @@
 #   ./run.sh users    testaccounts host/guest registreren in Prosody
 #   ./run.sh status   containerstatus + gezondheidstonen
 #   ./run.sh verify   rookproef: web-UI, WebSocket, jicofo/jvb-verbinding
+#   ./run.sh media-relay  UDP→TCP media-relais op de host starten (media
+#                         vereist dit — lima forwardt geen UDP; README §relais)
 #   ./run.sh down     stack stoppen (config en accounts blijven staan)
 #   ./run.sh reset    alles weg: containers, config, accounts — daarna init+up
 set -euo pipefail
@@ -106,6 +108,17 @@ case "${1:-}" in
     echo "— jvb: in brewery-MUC aangemeld?"
     $COMPOSE logs jvb 2>&1 | grep -c "joined\|Connected" | \
       sed 's/^/  matches: /'
+    ;;
+  media-relay)
+    require_env
+    # De host-helft van het UDP↔TCP-relais (#2535): luistert op
+    # 127.0.0.1:10000/udp — het JVB-adres dat clients in de session-
+    # initiate krijgen — en tunneldt elke flow via TCP naar de guest-
+    # helft (compose-service udp-relay op :11000). lima forwardt zelf
+    # geen UDP; zonder dit relais komt er nooit een ICE-paar tot stand.
+    echo "media-relay op udp://127.0.0.1:10000 -> tcp://127.0.0.1:11000"
+    echo "houd dit venster open zolang de mediaproof loopt (Ctrl-C stopt)"
+    exec python3 probe/udp_relay.py host
     ;;
   down)
     $COMPOSE down

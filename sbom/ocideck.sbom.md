@@ -4,7 +4,7 @@
 
 This is **ocideck 0.7.0+42** (licence EUPL-1.2) and every third-party component it ships (228 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **802 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **803 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -121,7 +121,7 @@ The JSON documents carry **802 dependency relations** between these components: 
 | leak_tracker_testing _(transitive)_ | 3.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker_testing@3.0.2` |
 | lints _(transitive)_ | 6.1.0 | BSD-3-Clause | dart-lang | `pkg:pub/lints@6.1.0` |
 | listen _(transitive)_ | 1.0.1 | BSD-3-Clause | flutter | `pkg:pub/listen@1.0.1` |
-| logger _(transitive)_ | 2.8.0 | MIT | SourceHorizon | `pkg:pub/logger@2.8.0` |
+| logger _(direct main)_ | 2.8.0 | MIT | SourceHorizon | `pkg:pub/logger@2.8.0` |
 | logging _(transitive)_ | 1.3.0 | BSD-3-Clause | dart-lang | `pkg:pub/logging@1.3.0` |
 | markdown _(direct main)_ | 7.3.1 | BSD-3-Clause | dart-lang | `pkg:pub/markdown@7.3.1` |
 | matcher _(transitive)_ | 0.12.20 | BSD-3-Clause | dart-lang | `pkg:pub/matcher@0.12.20` |

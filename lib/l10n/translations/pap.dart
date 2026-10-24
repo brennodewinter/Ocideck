@@ -651,6 +651,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Bo mikrofon of kamera a desaparesé; hinka e fuente bèk ora bo tin\'é atrobe.',
+  'Media is niet end-to-end versleuteld.':
+      'E media no ta enkriptá di punta pa punta.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Enkripshon di e media di punta pa punta deskonosí.',
+  'Media gaat naar': 'E media ta bai na',
+  'Audio-uitvoer kiezen': 'Skohe salida di audio',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Ora bo participa OciDeck ta usa bo mikrofon i (opsionalmente) bo kamera; bo kuminsa mudo.',
   'De mediaverbinding is weggevallen.': 'E konekshon di media a kai.',

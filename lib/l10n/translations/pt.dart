@@ -1633,6 +1633,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'O seu microfone ou câmara desapareceu; volte a ligar a fonte quando a tiver de novo.',
+  'Media is niet end-to-end versleuteld.':
+      'O média não está encriptado de ponta a ponta.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Encriptação de ponta a ponta do média desconhecida.',
+  'Media gaat naar': 'O média vai para',
+  'Audio-uitvoer kiezen': 'Escolher saída de áudio',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Ao participar, o OciDeck usa o seu microfone e (opcionalmente) a câmara; começa com o som desativado.',
   'De mediaverbinding is weggevallen.': 'A ligação de multimédia foi perdida.',

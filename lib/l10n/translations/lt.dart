@@ -1611,6 +1611,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Jūsų mikrofonas arba kamera dingo; vėl įjunkite šaltinį, kai jis sugrįš.',
+  'Media is niet end-to-end versleuteld.':
+      'Medija nėra užšifruota nuo galo iki galo.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Medijos šifravimas nuo galo iki galo nežinomas.',
+  'Media gaat naar': 'Medija keliauja į',
+  'Audio-uitvoer kiezen': 'Pasirinkite garso išvestį',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Prisijungus OciDeck naudoja jūsų mikrofoną ir (neprivalomai) kamerą; pradedate nutildytas.',
   'De mediaverbinding is weggevallen.': 'Medijos ryšys nutrūko.',

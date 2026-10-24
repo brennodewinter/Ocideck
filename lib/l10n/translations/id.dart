@@ -1605,6 +1605,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
+      'Mikrofon atau kamera Anda hilang; nyalakan kembali sumbernya saat kembali.',
+  'Media is niet end-to-end versleuteld.':
+      'Media tidak dienkripsi ujung ke ujung.',
+  'End-to-end-versleuteling van media onbekend.':
+      'Enkripsi ujung ke ujung media tidak diketahui.',
+  'Media gaat naar': 'Media menuju ke',
+  'Audio-uitvoer kiezen': 'Pilih keluaran audio',
   'Bij deelname gebruikt OciDeck uw microfoon en (optioneel) camera; u start gedempt.':
       'Saat bergabung, OciDeck menggunakan mikrofon dan (opsional) kamera Anda; Anda mulai dalam keadaan bisu.',
   'De mediaverbinding is weggevallen.': 'Koneksi media terputus.',

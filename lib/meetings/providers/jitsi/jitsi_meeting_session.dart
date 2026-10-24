@@ -22,7 +22,6 @@
 // opnieuw op over hetzelfde kanaal).
 
 import 'dart:async';
-import 'dart:math';
 
 import 'package:xml/xml.dart';
 
@@ -30,11 +29,14 @@ import '../../../l10n/app_localizations.dart';
 import '../../../xmpp/xmpp_muc.dart';
 import '../../../xmpp/xmpp_session.dart' show XmppStanzaChannel;
 import '../../../xmpp/xmpp_stanza.dart';
+import '../../../utils/log.dart';
 import '../../meeting_event.dart';
 import '../../meeting_media_core.dart';
 import '../../meeting_nick.dart';
 import '../../meeting_participant.dart';
 import '../../meeting_provider.dart';
+import 'jitsi_remote_media.dart';
+import 'jitsi_roster.dart';
 import 'jitsi_sdp.dart';
 import 'jitsi_signaling.dart';
 
@@ -98,11 +100,12 @@ class JitsiMeetingSession implements MeetingSession {
     } on MeetingJoinException {
       await session._teardown(silent: true);
       rethrow;
-    } catch (e) {
+    } catch (e, st) {
+      logError('JitsiMeetingSession.join faalde', e, st);
       await session._teardown(silent: true);
       throw MeetingJoinException(
         MeetingFailureReason.providerUnavailable,
-        e.toString(),
+        '$e\n$st', // tijdelijke diagnose — weer e.toString() na fix
       );
     }
   }
@@ -130,6 +133,7 @@ class JitsiMeetingSession implements MeetingSession {
   StreamSubscription<MeetingMediaLiveness>? _livenessSub;
   XmppMuc? _muc;
   MeetingMediaConnection? _media;
+  StreamSubscription<String>? _lostSub;
   JingleSessionInitiate? _initiate;
   MeetingConnectionState _state = MeetingConnectionState.idle;
   var _left = false;
@@ -145,6 +149,11 @@ class JitsiMeetingSession implements MeetingSession {
   /// Een initiate die vóór [_awaitInitiate] binnenkwam — de focus hoeft niet
   /// te wachten tot wij luisteren; zonder deze buffer gaat hij verloren.
   JingleSessionInitiate? _pendingInitiate;
+
+  /// Remote-track→participant-eigendom: de gedeelde JVB-streams plus de
+  /// Jitsi-signaling (ForwardedSources/source-add) die zegt wie erop ligt
+  /// (#2535, uitgeleid naar `jitsi_remote_media.dart`).
+  late final _remoteMedia = JitsiRemoteMedia(onChanged: _remapRemoteTiles);
 
   /// Het room-occupant JID van de focus — op de wire gaan alle jingle-IQ's
   /// hierheen (`room@muc/focus`), niet naar `focus@auth.<domain>`.
@@ -168,6 +177,32 @@ class JitsiMeetingSession implements MeetingSession {
   @override
   List<MeetingParticipant> get participants =>
       List.unmodifiable(_participants.values);
+
+  @override
+  MeetingE2eeStatus get mediaE2ee => _mediaCore.mediaE2ee;
+
+  /// De JVB-adressen uit de laatste session-initiate — de werkelijke media-
+  /// egress, niet geraden. Leeg tot er een offer is geweest.
+  var _mediaEgress = const <String>[];
+
+  @override
+  List<String> get mediaEgressOrigins => _mediaEgress;
+
+  @override
+  Future<MeetingVideoSurface?> videoSurfaceFor(String participantId) async {
+    final track = _participants[participantId]?.video;
+    final media = _media;
+    if (media == null || track == null) return null;
+    return media.attachVideo(track.id);
+  }
+
+  @override
+  Future<List<MeetingAudioOutput>> audioOutputs() async =>
+      _media?.audioOutputs() ?? const [];
+
+  @override
+  Future<void> selectAudioOutput(String deviceId) =>
+      _media?.selectAudioOutput(deviceId) ?? Future.value();
 
   @override
   MeetingCapabilities get capabilities => const MeetingCapabilities(
@@ -240,25 +275,20 @@ class JitsiMeetingSession implements MeetingSession {
 
     // Stap 3+4: session-initiate → offer → antwoord → accept.
     _initiate = await _awaitInitiate();
-    await _negotiateMedia(_initiate!);
-
-    // Stap 5: eigen bronnen aankondigen (wire-volgorde: presence, dan
-    // source-add per bron).
-    await _sendPresenceUpdate();
-    await _announceNewSource('audio');
-    await _announceNewSource('video');
-
-    // Stap 6: mediapad-bewijs — pas live ICE betekent "connected".
-    await _awaitMediaLive();
+    await _negotiateMediaAndAnnounce(_initiate!);
 
     _roster = _muc!.occupants.listen(_onRoster);
-    _remoteTracks = _media!.remoteTracks.listen(_onRemoteTrack);
-    _livenessSub = _media!.liveness.listen(_onLiveness);
     _participants[_nick] = MeetingParticipant(
       id: _nick,
       displayName: displayName,
       role: _localRoleFromMuc(),
       isLocal: true,
+      audio: _audioTrackId == null
+          ? null
+          : MeetingTrack(id: _audioTrackId!, kind: MeetingTrackKind.audio),
+      video: _videoTrackId == null
+          ? null
+          : MeetingTrack(id: _videoTrackId!, kind: MeetingTrackKind.video),
       micMuted: _audioTrackId == null || startMuted,
       camOff: _videoTrackId == null || startCameraOff,
     );
@@ -267,7 +297,7 @@ class JitsiMeetingSession implements MeetingSession {
 
   /// lib-jitsi-meet's device-id voor de conference-IQ — eenmalig per sessie
   /// en hergebruikt bij een rejoin, zodat jicofo hetzelfde apparaat ziet.
-  final _machineUid = _newMachineUid();
+  final _machineUid = jitsiNewMachineUid();
 
   /// De conference-IQ: `<iq set to=focusJid><conference …/></iq>` →
   /// `<conference ready='true' …>` of een getypeerde weigering.
@@ -284,7 +314,7 @@ class JitsiMeetingSession implements MeetingSession {
     );
     final reply = await _awaitIq(id, conferenceTimeout);
     if (reply.type == 'error') {
-      final condition = _errorCondition(reply);
+      final condition = jitsiStanzaErrorCondition(reply);
       // Een anonieme gast mag op veel deployments geen kamer ALLOceren
       // (`not-authorized` — exact wat de testbed-gast op de wire kreeg), maar
       // mag een bestaande kamer wél binnen: de MUC-join en de focus-invite
@@ -331,18 +361,18 @@ class JitsiMeetingSession implements MeetingSession {
         continue;
       }
       throw MeetingJoinException(
-        _mapMucFailure(result.failure!),
+        jitsiMapMucFailure(result.failure!),
         'muc: ${result.failure!.name}',
       );
     }
   }
 
-  /// De presence-extensies op een (her)join of update: displaynaam + de
-  /// SourceInfo-kaart. `<x xmlns='…/muc'>` plaatst XmppMuc zelf vooraan.
-  List<XmlElement> _presenceExtensions(Map<String, bool> mutedBySource) => [
-    xmppElement('nick', namespace: jitsiNickNs, text: displayName),
-    xmppElement('SourceInfo', text: buildSourceInfo(mutedBySource)),
-  ];
+  /// De presence-extensies op een (her)join of update: displaynaam, de
+  /// SourceInfo-kaart én de endpoint-features — jicofo leest die uit de
+  /// presence (en via disco#info) om de session-initiate samen te stellen
+  /// (#2535). `<x xmlns='…/muc'>` plaatst XmppMuc zelf vooraan.
+  List<XmlElement> _presenceExtensions(Map<String, bool> mutedBySource) =>
+      jitsiPresenceExtensions(displayName, mutedBySource);
 
   Future<JingleSessionInitiate> _awaitInitiate() {
     final completer = _initiateCompleter = Completer<JingleSessionInitiate>();
@@ -365,6 +395,22 @@ class JitsiMeetingSession implements MeetingSession {
     return completer.future;
   }
 
+  /// Media-onderhandeling + bronnen aankondigen + liveness-bewijs — gedeeld
+  /// door de join, de [rejoin] én de renegotiate bij een verse
+  /// session-initiate van een draaiende sessie (bridge-failover, #2535).
+  Future<void> _negotiateMediaAndAnnounce(
+    JingleSessionInitiate initiate,
+  ) async {
+    _initiate = initiate;
+    await _negotiateMedia(initiate);
+    // Eigen bronnen aankondigen (wire-volgorde: presence, dan source-add).
+    await _sendPresenceUpdate();
+    await _announceNewSource('audio');
+    await _announceNewSource('video');
+    // Mediapad-bewijs — pas live ICE betekent "connected".
+    await _awaitMediaLive();
+  }
+
   Future<void> _negotiateMedia(JingleSessionInitiate initiate) async {
     try {
       _media = await _mediaCore.openConnection();
@@ -374,6 +420,25 @@ class JitsiMeetingSession implements MeetingSession {
         'media: $e',
       );
     }
+    // Per-connection streams: rejoin/renegotiate vervangt `_media`, dus
+    // ALLE subscriptions op de oude connection worden hier vervangen —
+    // niet verspreid over de call-sites (daar gingen remoteTracks/liveness
+    // anders dood na een heronderhandeling, #2535).
+    unawaited(_lostSub?.cancel());
+    _lostSub = _media!.localTrackLost.listen(_onLocalTrackLost);
+    unawaited(_remoteTracks?.cancel());
+    _remoteTracks = _media!.remoteTracks.listen(_remoteMedia.trackArrived);
+    unawaited(_livenessSub?.cancel());
+    _livenessSub = _media!.liveness.listen(_onLiveness);
+    // Nieuwe connectie = nieuwe SSRC-ruimte én nieuwe gedeelde streams: de
+    // oude koppeling geldt niet en remote-tegels van de dode connectie zijn
+    // eerlijk gezegd weg (de reset triggert zelf de remap die ze leegt).
+    _remoteMedia.reset();
+    _mediaEgress = {
+      for (final content in initiate.contents)
+        if (content.transport != null)
+          for (final c in content.transport!.candidates) '${c.ip}:${c.port}',
+    }.toList();
     // De echte client koppelt de mic ook bij een gemuteerde join — een
     // gemuteerde track met muted:true in SourceInfo. Geen device →
     // receive-only, en SourceInfo meldt dan eerlijk géén bron.
@@ -405,9 +470,18 @@ class JitsiMeetingSession implements MeetingSession {
       if (reply.type == 'error') {
         throw MeetingJoinException(
           MeetingFailureReason.providerUnavailable,
-          'accept: ${_errorCondition(reply)}',
+          'accept: ${jitsiStanzaErrorCondition(reply)}',
         );
       }
+      // Het endpoint-kanaal opent pas als DTLS/SCTP staat — parallel aan de
+      // ICE-wacht, nooit ervoor blokkerend.
+      final media = _media!;
+      unawaited(
+        _remoteMedia.openEndpointChannel(
+          media,
+          stillValid: () => !_left && identical(media, _media),
+        ),
+      );
     } on JitsiContractException catch (e) {
       throw MeetingJoinException(
         MeetingFailureReason.meetingTypeUnsupported,
@@ -464,21 +538,13 @@ class JitsiMeetingSession implements MeetingSession {
     final ssrc = kind == 'audio' ? _audioSsrc : _videoSsrc;
     if (initiate == null || ssrc == null) return;
     _channel.sendStanza(
-      Stanza(
-        kind: StanzaKind.iq,
-        to: _focusInRoom,
-        id: _nextIqId(),
-        type: 'set',
-        children: [
-          buildSourceAdd(
-            sid: initiate.sid,
-            initiator: initiate.initiator,
-            contentName: kind,
-            media: kind,
-            sourceName: '$_nick-${kind[0]}0',
-            ssrc: '$ssrc',
-          ),
-        ],
+      jitsiSourceAnnounceIq(
+        focusInRoom: _focusInRoom,
+        iqId: _nextIqId(),
+        sid: initiate.sid,
+        initiator: initiate.initiator,
+        sourceName: '$_nick-${kind[0]}0',
+        ssrc: '$ssrc',
       ),
     );
     // De ack is best-effort: de MUC reflecteert ons sowieso terug, en een
@@ -512,13 +578,8 @@ class JitsiMeetingSession implements MeetingSession {
       // De media-onderhandeling herhaalt vanzelf: Jicofo stuurt een nieuwe
       // session-initiate voor de nieuwe occupant.
       final initiate = await _awaitInitiate();
-      _initiate = initiate;
       await _media?.close();
-      await _negotiateMedia(initiate);
-      await _sendPresenceUpdate();
-      await _announceNewSource('audio');
-      await _announceNewSource('video');
-      await _awaitMediaLive();
+      await _negotiateMediaAndAnnounce(initiate);
       _setConnection(MeetingConnectionState.connected);
       return true;
     } on MeetingJoinException {
@@ -583,9 +644,18 @@ class JitsiMeetingSession implements MeetingSession {
             );
           }
         } else {
-          // Te vroeg voor de await — bewaren; [_awaitInitiate] pikt hem op.
           try {
-            _pendingInitiate = parseSessionInitiate(jingle);
+            final initiate = parseSessionInitiate(jingle);
+            if (_state == MeetingConnectionState.connected &&
+                _initiate != null &&
+                initiate.sid != _initiate!.sid) {
+              // Bridge-failover: geen nieuwe join — een renegotiate op de
+              // bestaande sessie (#2535).
+              unawaited(_renegotiate(initiate));
+            } else {
+              // Te vroeg voor de await — bewaren; [_awaitInitiate] pikt hem op.
+              _pendingInitiate = initiate;
+            }
           } on JitsiContractException {
             // Een kapot contract zonder wachter hoeven we niet te bewaren.
           }
@@ -593,13 +663,22 @@ class JitsiMeetingSession implements MeetingSession {
       case 'session-terminate':
         ack();
         unawaited(_remoteTerminated());
-      case 'source-add' ||
-          'source-remove' ||
-          'transport-info' ||
-          'session-info':
-        // Bronnen van anderen lopen in deze deployment via presence-
-        // SourceInfo, niet via jingle; transport-info dragen onze
-        // ICE-kandidaten niet (de JVB leert die peer-reflexive).
+      case 'source-add' || 'source-remove':
+        // De json-message mapt ssrc→sourcenaam per endpoint — dé koppeling
+        // tussen binnenkomende RTP en een participant (#2535). Verwijderen is
+        // symmetrisch: dezelfde payload, andere richting.
+        final json = jingle.childElements
+            .where((e) => e.name.local == 'json-message')
+            .firstOrNull
+            ?.innerText;
+        _remoteMedia.applySources(
+          parseJsonSources(json),
+          add: name == 'source-add',
+        );
+        ack();
+      case 'transport-info' || 'session-info':
+        // transport-info draagt onze ICE-kandidaten niet (de JVB leert die
+        // peer-reflexive).
         ack();
     }
   }
@@ -625,7 +704,7 @@ class JitsiMeetingSession implements MeetingSession {
       if (occ.isSelf) {
         final local = _participants[_nick];
         if (local == null) continue;
-        final role = _roleOf(occ);
+        final role = jitsiRoleOf(occ);
         if (role != local.role) {
           final next = local.copyWith(role: role);
           _participants[_nick] = next;
@@ -633,14 +712,14 @@ class JitsiMeetingSession implements MeetingSession {
         }
         continue;
       }
-      final parsed = _participantOf(occ);
+      final parsed = jitsiParticipantOf(occ);
       final existing = _participants[occ.nick];
       if (existing == null) {
         _participants[occ.nick] = parsed;
         _emit(ParticipantJoined(parsed));
-      } else if (_differs(existing, parsed)) {
+      } else if (jitsiParticipantDiffers(existing, parsed)) {
         // Tracks behouden: die komen via de media-laag, niet via presence.
-        _participants[occ.nick] = _participantWithTracks(
+        _participants[occ.nick] = jitsiParticipantWithTracks(
           parsed,
           audio: existing.audio,
           video: existing.video,
@@ -653,99 +732,86 @@ class JitsiMeetingSession implements MeetingSession {
       _participants.remove(id);
       _emit(ParticipantLeft(id));
     }
+    // Een verse roster kan tegels van net-gearriveerde streams uitdelen.
+    _remapRemoteTiles();
   }
-
-  MeetingParticipant _participantOf(MucOccupant occ) {
-    var display = occ.nick;
-    var micMuted = true;
-    var camOff = true;
-    for (final ext in occ.extensions) {
-      switch (ext.name.local) {
-        case 'nick':
-          if ((ext.getAttribute('xmlns') ?? ext.name.namespaceUri) ==
-              jitsiNickNs) {
-            final v = ext.innerText.trim();
-            if (v.isNotEmpty && v.length <= 128) display = v;
-          }
-        case 'SourceInfo':
-          final muted = parseSourceInfo(ext.innerText);
-          final a = muted['${occ.nick}-a0'];
-          final v = muted['${occ.nick}-v0'];
-          if (a != null) micMuted = a;
-          if (v != null) camOff = v;
-      }
-    }
-    return MeetingParticipant(
-      id: occ.nick,
-      displayName: display,
-      role: _roleOf(occ),
-      micMuted: micMuted,
-      camOff: camOff,
-    );
-  }
-
-  MeetingRole _roleOf(MucOccupant occ) => switch (occ.role) {
-    MucRole.moderator => MeetingRole.moderator,
-    MucRole.participant => MeetingRole.attendee,
-    MucRole.visitor => MeetingRole.guest,
-    MucRole.none => MeetingRole.unknown,
-  };
 
   MeetingRole _localRoleFromMuc() {
     for (final occ in _muc?.roster ?? const <MucOccupant>[]) {
-      if (occ.isSelf) return _roleOf(occ);
+      if (occ.isSelf) return jitsiRoleOf(occ);
     }
     return MeetingRole.attendee;
   }
 
-  bool _differs(MeetingParticipant a, MeetingParticipant b) =>
-      a.displayName != b.displayName ||
-      a.role != b.role ||
-      a.micMuted != b.micMuted ||
-      a.camOff != b.camOff;
-
-  /// Tracks zijn niet `copyWith`-baar (null betekent "houden") — bouw expliciet.
-  MeetingParticipant _participantWithTracks(
-    MeetingParticipant p, {
-    MeetingTrack? audio,
-    MeetingTrack? video,
-  }) => MeetingParticipant(
-    id: p.id,
-    displayName: p.displayName,
-    role: p.role,
-    isLocal: p.isLocal,
-    micMuted: p.micMuted,
-    camOff: p.camOff,
-    isDominantSpeaker: p.isDominantSpeaker,
-    isScreenShare: p.isScreenShare,
-    audio: audio,
-    video: video,
-  );
-
   // ── remote tracks → participant-tegels ────────────────────────────────────
 
-  void _onRemoteTrack(MeetingRemoteTrack remote) {
-    // Jitsi-sourcenamen: '<nick>-a0' / '<nick>-v0'. Zonder herleidbare naam
-    // schrijven we de track NOOIT aan een participant toe — eerder geen tegel
-    // dan een verzonnen eigenaar.
-    final msid = remote.msid ?? remote.track.id;
-    final dash = msid.indexOf('-');
-    if (dash <= 0) return; // jvb-* sources zijn geen participant
-    final nick = msid.substring(0, dash);
-    final participant = _participants[nick];
-    if (participant == null) return;
-    final isAudio = remote.track.kind == MeetingTrackKind.audio;
-    final next = remote.active ? remote.track : null;
-    if ((isAudio ? participant.audio : participant.video)?.id == next?.id) {
-      return;
+  /// Deel de gedeelde JVB-streams uit aan de participants die de signaling
+  /// als eigenaar aanwijst — welke track bij wie hoort beheert
+  /// [JitsiRemoteMedia]; hier zetten we dat om in participant-updates.
+  /// Nooit een tegel verzinnen — zonder feit geen track.
+  void _remapRemoteTiles() {
+    for (final entry in _participants.entries.toList()) {
+      final p = entry.value;
+      if (p.isLocal) continue;
+      final video = _remoteMedia.videoFor(p.id);
+      final audio = _remoteMedia.audioFor(p.id);
+      if (identical(video, p.video) && identical(audio, p.audio)) continue;
+      final updated = jitsiParticipantWithTracks(p, audio: audio, video: video);
+      _participants[entry.key] = updated;
+      _emit(ParticipantUpdated(updated));
     }
-    final updated = _participantWithTracks(
-      participant,
-      audio: isAudio ? next : participant.audio,
-      video: isAudio ? participant.video : next,
+  }
+
+  /// Een eigen bron valt weg (mic/cam verdwenen, permissie ingetrokken,
+  /// #2535): de track is écht weg — niet "gemuteerd". SourceInfo zakt die
+  /// bron dus af, de participant toont hem uit, en de gebruiker krijgt een
+  /// niet-terminale melding; opnieuw aanzetten haalt een verse track op.
+  void _onLocalTrackLost(String trackId) {
+    if (_left) return;
+    final isAudio = trackId == _audioTrackId;
+    if (!isAudio && trackId != _videoTrackId) return;
+    if (isAudio) {
+      _audioTrackId = null;
+      _audioSsrc = null;
+      _micEnabled = false;
+    } else {
+      _videoTrackId = null;
+      _videoSsrc = null;
+    }
+    _sendPresenceUpdate();
+    final local = _participants[_nick];
+    if (local != null) {
+      final next = _localParticipantNow(
+        isAudio ? local.copyWith(micMuted: true) : local.copyWith(camOff: true),
+      );
+      _participants[_nick] = next;
+      _emit(ParticipantUpdated(next));
+    }
+    _emit(
+      MeetingErrorEvent(
+        message: AppLocalizations.active.d(
+          'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.',
+        ),
+      ),
     );
-    _participants[nick] = updated;
-    _emit(ParticipantUpdated(updated));
+  }
+
+  /// Een verse session-initiate terwijl we verbonden zijn = de bridge is
+  /// vervangen (failover) en de sessie onderhandelt opnieuw (#2535). Dezelfde
+  /// kamer en roster blijven; het mediapad wordt opnieuw opgebouwd. Een
+  /// mislukte heronderhandeling is eerlijk fataal voor de call.
+  Future<void> _renegotiate(JingleSessionInitiate initiate) async {
+    if (_left) return;
+    _setConnection(MeetingConnectionState.reconnecting);
+    try {
+      await _media?.close();
+      await _negotiateMediaAndAnnounce(initiate);
+      _setConnection(MeetingConnectionState.connected);
+    } on MeetingJoinException {
+      await _terminalError(
+        AppLocalizations.active.d('De mediaverbinding is weggevallen.'),
+      );
+    }
   }
 
   // ── liveness / einde ──────────────────────────────────────────────────────
@@ -816,6 +882,8 @@ class JitsiMeetingSession implements MeetingSession {
     await _roster?.cancel();
     await _remoteTracks?.cancel();
     await _livenessSub?.cancel();
+    await _lostSub?.cancel();
+    await _remoteMedia.close();
     await _muc?.leave();
     await _media?.close();
     await _stanzas?.cancel();
@@ -864,13 +932,27 @@ class JitsiMeetingSession implements MeetingSession {
     await _sendPresenceUpdate();
     final local = _participants[_nick];
     if (local != null) {
-      final next = kind == 'audio'
-          ? local.copyWith(micMuted: !enabled)
-          : local.copyWith(camOff: !enabled);
+      // De (net heracquireerde) tracks vers opbouwen: copyWith kan een
+      // track niet wissen, dus reconstrueren uit de huidige ids (#2535).
+      final next = _localParticipantNow(
+        kind == 'audio'
+            ? local.copyWith(micMuted: !enabled)
+            : local.copyWith(camOff: !enabled),
+      );
       _participants[_nick] = next;
       _emit(ParticipantUpdated(next));
     }
   }
+
+  /// Herbouw vanuit de huidige track-ids — de mapping zelf staat in
+  /// `jitsi_roster.dart` (copyWith kan een track niet wissen, #2535).
+  MeetingParticipant _localParticipantNow(MeetingParticipant local) =>
+      jitsiLocalParticipant(
+        nick: _nick,
+        of: local,
+        audioTrackId: _audioTrackId,
+        videoTrackId: _videoTrackId,
+      );
 
   // ── helpers ───────────────────────────────────────────────────────────────
 
@@ -895,24 +977,6 @@ class JitsiMeetingSession implements MeetingSession {
     }
   }
 
-  String _errorCondition(Stanza stanza) {
-    final error = stanza.child('error');
-    if (error == null) return 'unknown';
-    for (final e in error.childElements) {
-      if (e.name.local != 'text') return e.name.local;
-    }
-    return 'unknown';
-  }
-
-  MeetingFailureReason _mapMucFailure(MucJoinFailure failure) =>
-      switch (failure) {
-        MucJoinFailure.banned ||
-        MucJoinFailure.membersOnly ||
-        MucJoinFailure.passwordRequired ||
-        MucJoinFailure.notAllowed => MeetingFailureReason.appApprovalRequired,
-        _ => MeetingFailureReason.providerUnavailable,
-      };
-
   void _setConnection(MeetingConnectionState next) {
     if (_state == next || _events.isClosed) return;
     _state = next;
@@ -924,15 +988,6 @@ class JitsiMeetingSession implements MeetingSession {
   }
 
   String _nextIqId() => 'ocideck-${++_iqSeq}';
-
-  /// Een willekeurige 128-bit uid in de vorm die de wire toont (32 hex) —
-  /// lib-jitsi-meet gebruikt het als device-id, jicofo eist hem in de
-  /// conference-IQ. Per sessie, niet per device: er is geen hergebruik-
-  /// voordeel dat het koppelen van calls aan één device rechtvaardigt.
-  static String _newMachineUid() {
-    final r = Random.secure();
-    return List.generate(32, (_) => r.nextInt(16).toRadixString(16)).join();
-  }
 
   static const _maxChatLength = 4096;
 }
