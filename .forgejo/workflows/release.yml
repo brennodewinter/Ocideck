@@ -1076,6 +1076,7 @@ jobs:
             "ocideck-$VERSIE.spdx.json" \
             "ocideck-web-$VERSIE.tar.gz" \
             "ocideck-linux-x64-$VERSIE.tar.gz" \
+            "ocideck-linux-debian12-x86_64-$VERSIE.tar.gz" \
             "ocideck-linux-amd64-$VERSIE.deb" \
             "ocideck-linux-x86_64-$VERSIE.rpm" \
             "ocideck-linux-x86_64-$VERSIE.AppImage" \
@@ -1088,7 +1089,7 @@ jobs:
           find dist -maxdepth 1 -type f -exec basename {} \; \
             | LC_ALL=C sort > /tmp/werkelijke-assets
           if ! diff -u /tmp/verwachte-assets /tmp/werkelijke-assets; then
-            echo "dist/ bevat niet exact de twaalf verwachte release-assets; publicatie geweigerd." >&2
+            echo "dist/ bevat niet exact de veertien verwachte release-assets; publicatie geweigerd." >&2
             exit 1
           fi
 

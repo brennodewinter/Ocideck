@@ -99,6 +99,19 @@ void main() {
       }
     });
 
+    test(
+      'publication inventory includes both Linux variants and Flatpak inventory',
+      () {
+        for (final asset in [
+          r'"ocideck-linux-debian12-x86_64-$VERSIE.tar.gz"',
+          r'"ocideck-linux-x86_64-$VERSIE.flatpak"',
+          r'"ocideck-linux-x86_64-$VERSIE.flatpak.cdx.json"',
+        ]) {
+          expect(releaseYaml, contains(asset));
+        }
+      },
+    );
+
     test('the .deb is also published to the signed Forgejo registry', () {
       expect(
         releaseYaml.contains('PACKAGE_TOKEN: \${{ secrets.CI_IMAGE_TOKEN }}'),
