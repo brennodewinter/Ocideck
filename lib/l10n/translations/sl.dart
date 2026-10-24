@@ -1605,6 +1605,61 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Systeemgeluid opnemen…': 'Snemaj sistemski zvok…',
+  'Systeemgeluid opnemen': 'Snemaj sistemski zvok',
+  'Tabgeluid opnemen…': 'Snemaj zvok zavihka…',
+  'Tabgeluid opnemen': 'Snemaj zvok zavihka',
+  'Microfoon en systeemgeluid opnemen…': 'Snemaj mikrofon in sistemski zvok…',
+  'Microfoon en systeemgeluid opnemen': 'Snemaj mikrofon in sistemski zvok',
+  'Voorlopige tekst': 'Začasno besedilo',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Besedilo zaostaja. Sam posnetek se nadaljuje.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Levo mikrofon, desno sistemski zvok.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'To posname zvok te naprave, ne pogovora v drugi aplikaciji.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Sistemski zvok na tej postavitvi ni na voljo.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Dajte OciDeck dostop do sistemskega zvoka v sistemskih nastavitvah.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Zavihek ni delil zvoka. Izberite zavihek in označite zvok.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Sistemskega zvoka ni bilo mogoče posneti',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Zvok zavihka v tem brskalniku ni na voljo.',
+  'Microfoon opnemen…': 'Snemaj mikrofon…',
+  'Microfoon opnemen': 'Snemaj mikrofon',
+  'Systeemstandaard': 'Sistemsko privzeto',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Snemanje drugih lahko zahteva njihovo privolitev.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. To je mikrofon v sobi, ne zvok druge aplikacije.',
+  'Niveau testen': 'Preizkusi raven',
+  'Opnemen': 'Snemaj',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Test se ustavi sam. Nič se še ne shrani.',
+  'Eerdere opnames': 'Prejšnji posnetki',
+  'Nu transcriberen': 'Prepiši zdaj',
+  'Opname weggooien': 'Zavrzi posnetek',
+  'ingebouwd': 'vgrajen',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Spremljanje predstavitve že uporablja mikrofon. Najprej ga izklopite — dve seji hkrati bi tulili.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Ni dovolj prostega prostora za začetek posnetka. Prej končani posnetki ostanejo.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Disk se je napolnil. Ta posnetek se ustavi; prej končani ostanejo.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofon je odpadel. Kar je že bilo, je ohranjeno.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Posnetek je na tej napravi. Prepišite ga zdaj ali ga hranite sedem dni in to storite pozneje.',
+  'Opname bewaard': 'Posnetek ohranjen',
+  'Bewaar voor later': 'Shrani za pozneje',
+  'Microfoonopname': 'Posnetek mikrofona',
+  'Microfoon-doorvoer kan niet starten':
+      'Spremljanje mikrofona se ne more začeti',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Posnetek teče. Najprej ga ustavite — dve mikrofonski seji hkrati bi tulili.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'v tem sistemu ni dekodirnika (afconvert manjka) — samo PCM-WAV se lahko bere neposredno',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

@@ -162,6 +162,24 @@ List<PickerOption<String>> importSourceOptions(
       icon: Icons.graphic_eq_outlined,
       label: transcribeFileLabel(l10n),
     ),
+  if (ref.read(transcriptionRevealProvider) && microphoneRecordingOffered)
+    (
+      value: 'record_mic',
+      icon: Icons.mic_none_outlined,
+      label: recordMicrophoneLabel(l10n),
+    ),
+  if (ref.read(transcriptionRevealProvider) && systemRecordingOffered(ref))
+    (
+      value: 'record_system',
+      icon: Icons.volume_up_outlined,
+      label: recordSystemLabel(l10n),
+    ),
+  if (ref.read(transcriptionRevealProvider) && combinationRecordingOffered(ref))
+    (
+      value: 'record_combination',
+      icon: Icons.graphic_eq,
+      label: recordCombinationLabel(l10n),
+    ),
   ...openKatImportChoices(ref, l10n),
 ];
 
@@ -320,6 +338,12 @@ extension _MainLayoutMenu on _MainLayoutState {
         await importPresentation(context, ref);
       case 'transcribe_file':
         await transcribeFile(context);
+      case 'record_mic':
+        await recordMicrophone(context);
+      case 'record_system':
+        await recordSystem(context);
+      case 'record_combination':
+        await recordCombination(context);
       default:
         await dispatchOpenKatShellAction(context, ref, action);
     }

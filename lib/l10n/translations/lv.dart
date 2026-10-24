@@ -1603,6 +1603,61 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Systeemgeluid opnemen…': 'Ierakstīt sistēmas skaņu…',
+  'Systeemgeluid opnemen': 'Ierakstīt sistēmas skaņu',
+  'Tabgeluid opnemen…': 'Ierakstīt cilnes skaņu…',
+  'Tabgeluid opnemen': 'Ierakstīt cilnes skaņu',
+  'Microfoon en systeemgeluid opnemen…':
+      'Ierakstīt mikrofonu un sistēmas skaņu…',
+  'Microfoon en systeemgeluid opnemen': 'Ierakstīt mikrofonu un sistēmas skaņu',
+  'Voorlopige tekst': 'Pagaidu teksts',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Teksts atpaliek. Pats ieraksts turpinās.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Pa kreisi mikrofons, pa labi sistēmas skaņa.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Tas ieraksta šīs ierīces skaņu, nevis sarunu citā lietotnē.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Sistēmas skaņa šajā iekārtojumā nav pieejama.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Dodiet OciDeck piekļuvi sistēmas skaņai sistēmas iestatījumos.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Cilne nedalījās ar skaņu. Izvēlieties cilni un atzīmējiet skaņu.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Sistēmas skaņu neizdevās ierakstīt',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Cilnes skaņa šajā pārlūkā nav pieejama.',
+  'Microfoon opnemen…': 'Ierakstīt mikrofonu…',
+  'Microfoon opnemen': 'Ierakstīt mikrofonu',
+  'Systeemstandaard': 'Sistēmas noklusējums',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Citu ierakstīšana var prasīt viņu piekrišanu.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Šis ir mikrofons telpā, ne citas lietotnes skaņa.',
+  'Niveau testen': 'Pārbaudīt līmeni',
+  'Opnemen': 'Ierakstīt',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Tests apstājas pats. Vēl nekas netiek glabāts.',
+  'Eerdere opnames': 'Iepriekšējie ieraksti',
+  'Nu transcriberen': 'Transkribet tagad',
+  'Opname weggooien': 'Izmest ierakstu',
+  'ingebouwd': 'iebūvēts',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Prezentācijas monitorings jau lieto mikrofonu. Vispirms to izslēdziet — divas sesijas vienlaikus radītu atgriezenisko saiti.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Nav pietiekami brīvas vietas, lai sāktu ierakstu. Agrāk pabeigtie ieraksti paliek.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Disks piepildījās. Šis ieraksts apstājas; agrāk pabeigtie paliek.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofons pazuda. Tas, kas jau bija, ir saglabāts.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Ieraksts ir šajā ierīcē. Transkribējiet to tagad vai glabājiet septiņas dienas, lai to izdarītu vēlāk.',
+  'Opname bewaard': 'Ieraksts saglabāts',
+  'Bewaar voor later': 'Glabāt vēlākam',
+  'Microfoonopname': 'Mikrofona ieraksts',
+  'Microfoon-doorvoer kan niet starten': 'Mikrofona monitorings nevar sākties',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Notiek ieraksts. Vispirms to apturiet — divas mikrofona sesijas vienlaikus radītu atgriezenisko saiti.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'šajā sistēmā nav atkodētāja (afconvert trūkst) — tikai PCM-WAV var lasīt tieši',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

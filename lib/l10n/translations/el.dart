@@ -1630,6 +1630,63 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Systeemgeluid opnemen…': 'Εγγραφή ήχου συστήματος…',
+  'Systeemgeluid opnemen': 'Εγγραφή ήχου συστήματος',
+  'Tabgeluid opnemen…': 'Εγγραφή ήχου καρτέλας…',
+  'Tabgeluid opnemen': 'Εγγραφή ήχου καρτέλας',
+  'Microfoon en systeemgeluid opnemen…':
+      'Εγγραφή μικροφώνου και ήχου συστήματος…',
+  'Microfoon en systeemgeluid opnemen':
+      'Εγγραφή μικροφώνου και ήχου συστήματος',
+  'Voorlopige tekst': 'Προσωρινό κείμενο',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Το κείμενο μένει πίσω. Η ίδια η εγγραφή συνεχίζεται.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, στερεοφωνικό. Αριστερά το μικρόφωνο, δεξιά ο ήχος συστήματος.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Αυτό καταγράφει τον ήχο αυτής της συσκευής, όχι μια κλήση σε άλλη εφαρμογή.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Ο ήχος συστήματος δεν είναι διαθέσιμος σε αυτή τη διάταξη.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Δώστε στο OciDeck πρόσβαση στον ήχο συστήματος στις ρυθμίσεις συστήματος.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Η καρτέλα δεν μοιράστηκε ήχο. Επιλέξτε καρτέλα και σημειώστε τον ήχο.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Ο ήχος συστήματος δεν μπόρεσε να εγγραφεί',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Ο ήχος καρτέλας δεν είναι διαθέσιμος σε αυτό το πρόγραμμα περιήγησης.',
+  'Microfoon opnemen…': 'Εγγραφή μικροφώνου…',
+  'Microfoon opnemen': 'Εγγραφή μικροφώνου',
+  'Systeemstandaard': 'Προεπιλογή συστήματος',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Η εγγραφή άλλων μπορεί να απαιτεί τη συγκατάθεσή τους.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Αυτό είναι το μικρόφωνο στο δωμάτιο, όχι ο ήχος άλλης εφαρμογής.',
+  'Niveau testen': 'Δοκιμή στάθμης',
+  'Opnemen': 'Εγγραφή',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Η δοκιμή σταματά μόνη της. Δεν φυλάσσεται ακόμα τίποτα.',
+  'Eerdere opnames': 'Προηγούμενες εγγραφές',
+  'Nu transcriberen': 'Μεταγραφή τώρα',
+  'Opname weggooien': 'Απόρριψη εγγραφής',
+  'ingebouwd': 'ενσωματωμένο',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Η ακρόαση της παρουσίασης χρησιμοποιεί ήδη το μικρόφωνο. Απενεργοποιήστε την πρώτα — δύο συνεδρίες μαζί θα έκαναν μικροφωνισμό.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Δεν υπάρχει αρκετός ελεύθερος χώρος για να ξεκινήσει μια εγγραφή. Οι ήδη ολοκληρωμένες εγγραφές μένουν.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Ο δίσκος γέμισε. Αυτή η εγγραφή σταματά· οι ήδη ολοκληρωμένες μένουν.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Το μικρόφωνο έπεσε. Ό,τι υπήρχε ήδη έχει φυλαχτεί.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Η εγγραφή είναι σε αυτή τη συσκευή. Κάντε μεταγραφή τώρα, ή φυλάξτε την επτά ημέρες για να το κάνετε αργότερα.',
+  'Opname bewaard': 'Η εγγραφή φυλάχτηκε',
+  'Bewaar voor later': 'Φύλαξη για αργότερα',
+  'Microfoonopname': 'Εγγραφή μικροφώνου',
+  'Microfoon-doorvoer kan niet starten':
+      'Η ακρόαση μικροφώνου δεν μπορεί να ξεκινήσει',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Τρέχει μια εγγραφή. Σταματήστε την πρώτα — δύο συνεδρίες μικροφώνου μαζί θα έκαναν μικροφωνισμό.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'χωρίς αποκωδικοποιητή σε αυτό το σύστημα (λείπει afconvert) — μόνο το PCM-WAV διαβάζεται απευθείας',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

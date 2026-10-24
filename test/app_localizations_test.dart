@@ -13,6 +13,8 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'USB',
+  'Bluetooth',
   'web',
   'MediaRecorder',
   'https://asr.uwdomein.nl',
@@ -313,6 +315,8 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'USB',
+  'Bluetooth',
   'web',
   'MediaRecorder',
   'https://asr.uwdomein.nl',

@@ -1611,6 +1611,61 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Systeemgeluid opnemen…': 'Įrašyti sistemos garsą…',
+  'Systeemgeluid opnemen': 'Įrašyti sistemos garsą',
+  'Tabgeluid opnemen…': 'Įrašyti kortelės garsą…',
+  'Tabgeluid opnemen': 'Įrašyti kortelės garsą',
+  'Microfoon en systeemgeluid opnemen…': 'Įrašyti mikrofoną ir sistemos garsą…',
+  'Microfoon en systeemgeluid opnemen': 'Įrašyti mikrofoną ir sistemos garsą',
+  'Voorlopige tekst': 'Laikinas tekstas',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Tekstas vėluoja. Pats įrašas tęsiasi.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Kairėje mikrofonas, dešinėje sistemos garsas.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Tai įrašo šio įrenginio garsą, ne pokalbį kitoje programoje.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Sistemos garsas šioje sąrankoje neprieinamas.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Suteikite OciDeck prieigą prie sistemos garso sistemos nustatymuose.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Kortelė nebendrino garso. Pasirinkite kortelę ir pažymėkite garsą.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Sistemos garso nepavyko įrašyti',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Kortelės garsas šioje naršyklėje neprieinamas.',
+  'Microfoon opnemen…': 'Įrašyti mikrofoną…',
+  'Microfoon opnemen': 'Įrašyti mikrofoną',
+  'Systeemstandaard': 'Sistemos numatytasis',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Kitų įrašymas gali pareikalauti jų sutikimo.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Tai mikrofonas kambaryje, ne kitos programos garsas.',
+  'Niveau testen': 'Išbandyti lygį',
+  'Opnemen': 'Įrašyti',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Testas sustoja pats. Dar niekas neišsaugoma.',
+  'Eerdere opnames': 'Ankstesni įrašai',
+  'Nu transcriberen': 'Transkribuoti dabar',
+  'Opname weggooien': 'Išmesti įrašą',
+  'ingebouwd': 'įmontuotas',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Pristatymo perdavimas jau naudoja mikrofoną. Pirmiausia jį išjunkite — dvi sesijos kartu sukeltų grįžtamąjį ryšį.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Per mažai laisvos vietos įrašui pradėti. Anksčiau baigti įrašai lieka.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Diskas prisipildė. Šis įrašas stoja; anksčiau baigti lieka.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofonas dingo. Kas jau buvo, išsaugota.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Įrašas yra šiame įrenginyje. Transkribuokite dabar arba saugokite septynias dienas ir padarykite vėliau.',
+  'Opname bewaard': 'Įrašas išsaugotas',
+  'Bewaar voor later': 'Saugoti vėlesniam',
+  'Microfoonopname': 'Mikrofono įrašas',
+  'Microfoon-doorvoer kan niet starten':
+      'Mikrofono perdavimas negali prasidėti',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Vyksta įrašas. Pirmiausia jį sustabdykite — dvi mikrofono sesijos kartu sukeltų grįžtamąjį ryšį.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'šioje sistemoje nėra dekoderio (afconvert trūksta) — tik PCM-WAV galima skaityti tiesiogiai',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

@@ -160,6 +160,9 @@ class _NoopStaging implements RecordingStaging {
 
   @override
   Future<void> sweep({required Duration maxAge}) async {}
+
+  @override
+  Future<List<String>> listSessionDirs() async => const [];
 }
 
 Widget app(Widget child, {required List<Override> overrides}) {

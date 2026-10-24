@@ -1605,6 +1605,62 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Systeemgeluid opnemen…': 'Tallenna järjestelmän ääni…',
+  'Systeemgeluid opnemen': 'Tallenna järjestelmän ääni',
+  'Tabgeluid opnemen…': 'Tallenna välilehden ääni…',
+  'Tabgeluid opnemen': 'Tallenna välilehden ääni',
+  'Microfoon en systeemgeluid opnemen…':
+      'Tallenna mikrofoni ja järjestelmän ääni…',
+  'Microfoon en systeemgeluid opnemen':
+      'Tallenna mikrofoni ja järjestelmän ääni',
+  'Voorlopige tekst': 'Alustava teksti',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Teksti on jäljessä. Tallenne itsessään jatkuu.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Vasemmalla mikrofoni, oikealla järjestelmän ääni.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Tämä tallentaa tämän laitteen äänen, ei puhelua toisessa sovelluksessa.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Järjestelmän ääni ei ole käytettävissä tässä kokoonpanossa.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Anna OciDeckille järjestelmän äänen käyttö järjestelmäasetuksissa.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Välilehti ei jakanut ääntä. Valitse välilehti ja rastita ääni.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Järjestelmän ääntä ei voitu tallentaa',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Välilehden ääni ei ole käytettävissä tässä selaimessa.',
+  'Microfoon opnemen…': 'Tallenna mikrofoni…',
+  'Microfoon opnemen': 'Tallenna mikrofoni',
+  'Systeemstandaard': 'Järjestelmän oletus',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Muiden tallentaminen voi edellyttää heidän suostumustaan.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Tämä on huoneen mikrofoni, ei toisen sovelluksen ääntä.',
+  'Niveau testen': 'Kokeile tasoa',
+  'Opnemen': 'Tallenna',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Testi pysähtyy itsestään. Mitään ei vielä säilytetä.',
+  'Eerdere opnames': 'Aiemmat tallenteet',
+  'Nu transcriberen': 'Litteroi nyt',
+  'Opname weggooien': 'Hylkää tallenne',
+  'ingebouwd': 'sisäänrakennettu',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Esityksen läpikuuntelu käyttää jo mikrofonia. Sammuta se ensin — kaksi istuntoa yhtä aikaa kiertäisi.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Vapaata levytilaa ei ole tarpeeksi tallennuksen aloittamiseen. Aiemmin valmistuneet tallenteet jäävät.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Levy täyttyi. Tämä tallennus päättyy; aiemmin valmistuneet jäävät.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofoni katosi. Se mikä jo oli, on tallessa.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Tallenne on tällä laitteella. Litteroi se nyt, tai säilytä se seitsemän päivää ja tee se myöhemmin.',
+  'Opname bewaard': 'Tallenne säilytetty',
+  'Bewaar voor later': 'Säilytä myöhemmäksi',
+  'Microfoonopname': 'Mikrofonitallenne',
+  'Microfoon-doorvoer kan niet starten': 'Mikrofonin läpikuuntelu ei voi alkaa',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Tallennus on käynnissä. Pysäytä se ensin — kaksi mikrofoni-istuntoa yhtä aikaa kiertäisi.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'ei dekooderia tässä järjestelmässä (afconvert puuttuu) — vain PCM-WAV voidaan lukea suoraan',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

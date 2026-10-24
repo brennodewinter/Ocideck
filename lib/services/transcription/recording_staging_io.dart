@@ -98,6 +98,17 @@ class IoRecordingStaging implements RecordingStaging {
   }
 
   @override
+  Future<List<String>> listSessionDirs() async {
+    final root = await _resolveRoot();
+    if (!root.existsSync()) return const [];
+    final dirs = <String>[];
+    await for (final entity in root.list()) {
+      if (entity is Directory) dirs.add(entity.path);
+    }
+    return dirs;
+  }
+
+  @override
   Future<void> discardAll() async {
     final root = await _resolveRoot();
     try {

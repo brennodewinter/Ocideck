@@ -1635,6 +1635,63 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Systeemgeluid opnemen…': 'Fuaim an chórais a thaifeadadh…',
+  'Systeemgeluid opnemen': 'Fuaim an chórais a thaifeadadh',
+  'Tabgeluid opnemen…': 'Fuaim na cluaisíne a thaifeadadh…',
+  'Tabgeluid opnemen': 'Fuaim na cluaisíne a thaifeadadh',
+  'Microfoon en systeemgeluid opnemen…':
+      'Micreafón agus fuaim an chórais a thaifeadadh…',
+  'Microfoon en systeemgeluid opnemen':
+      'Micreafón agus fuaim an chórais a thaifeadadh',
+  'Voorlopige tekst': 'Téacs sealadach',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Tá an téacs chun deiridh. Leanann an taifeadadh féin ar aghaidh.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, steirió. Ar chlé an micreafón, ar dheis fuaim an chórais.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Taifeadann sé seo fuaim an ghléis seo, ní glao in aip eile.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Níl fuaim an chórais ar fáil ar an socrú seo.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Tabhair rochtain ar fhuaim an chórais do OciDeck i socruithe an chórais.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Níor roinn an chluaisín aon fhuaim. Roghnaigh cluaisín agus tic an fhuaim.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Níorbh fhéidir fuaim an chórais a thaifeadadh',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Níl fuaim na cluaisíne ar fáil sa bhrabhsálaí seo.',
+  'Microfoon opnemen…': 'Micreafón a thaifeadadh…',
+  'Microfoon opnemen': 'Micreafón a thaifeadadh',
+  'Systeemstandaard': 'Réamhshocrú an chórais',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'D\'fhéadfadh taifeadadh daoine eile a gcead a iarraidh.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Seo an micreafón sa seomra, ní fuaim aipe eile é.',
+  'Niveau testen': 'Triail an leibhéil',
+  'Opnemen': 'Taifead',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Stopann an triail léi féin. Níl aon rud coinnithe fós.',
+  'Eerdere opnames': 'Taifeadtaí níos luaithe',
+  'Nu transcriberen': 'Tras-scríobh anois',
+  'Opname weggooien': 'Caith an taifead amach',
+  'ingebouwd': 'ionsuite',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Tá monatóireacht an chur i láthair ag úsáid an mhicreafóin cheana. Múch í ar dtús — dhá sheisiún le chéile, dhéanfaidís aisfhotha.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Níl go leor spáis saor chun taifead a thosú. Fanann taifeadtaí críochnaithe níos luaithe.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Líon an diosca. Stadann an taifead seo; fanann cinn críochnaithe níos luaithe.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Thit an micreafón ar lár. Tá an méid a bhí ann coinnithe.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Tá an taifead ar an ngléas seo. Tras-scríobh anois é, nó coinnigh é ar feadh seacht lá chun é a dhéanamh níos déanaí.',
+  'Opname bewaard': 'Taifead coinnithe',
+  'Bewaar voor later': 'Coinnigh ar ball',
+  'Microfoonopname': 'Taifead micreafóin',
+  'Microfoon-doorvoer kan niet starten':
+      'Ní féidir monatóireacht an mhicreafóin a thosú',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Tá taifead ar siúl. Stad é ar dtús — dhá sheisiún micreafóin le chéile, dhéanfaidís aisfhotha.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'níl aon díchódóir ar an gcóras seo (afconvert in easnamh) — is féidir PCM-WAV amháin a léamh go díreach',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

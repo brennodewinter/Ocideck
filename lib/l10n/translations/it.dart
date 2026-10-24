@@ -649,6 +649,62 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Systeemgeluid opnemen…': 'Registra audio di sistema…',
+  'Systeemgeluid opnemen': 'Registra audio di sistema',
+  'Tabgeluid opnemen…': 'Registra l\'audio della scheda…',
+  'Tabgeluid opnemen': 'Registra l\'audio della scheda',
+  'Microfoon en systeemgeluid opnemen…':
+      'Registra microfono e audio di sistema…',
+  'Microfoon en systeemgeluid opnemen': 'Registra microfono e audio di sistema',
+  'Voorlopige tekst': 'Testo provvisorio',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Il testo è in ritardo. La registrazione continua.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. A sinistra il microfono, a destra l\'audio di sistema.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Registra il suono di questo dispositivo, non una chiamata in un\'altra app.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'L\'audio di sistema non è disponibile su questa configurazione.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Consenti a OciDeck l\'audio di sistema nelle impostazioni di sistema.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'La scheda non ha condiviso audio. Scegli una scheda e attiva l\'audio.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'L\'audio di sistema non ha potuto essere registrato',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'L\'audio della scheda non è disponibile in questo browser.',
+  'Microfoon opnemen…': 'Registra microfono…',
+  'Microfoon opnemen': 'Registra microfono',
+  'Systeemstandaard': 'Predefinito di sistema',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Registrare altre persone può richiedere il loro consenso.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Questo è il microfono nella stanza, non il suono di un\'altra app.',
+  'Niveau testen': 'Prova il livello',
+  'Opnemen': 'Registra',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'La prova si ferma da sola. Non viene ancora conservato nulla.',
+  'Eerdere opnames': 'Registrazioni precedenti',
+  'Nu transcriberen': 'Trascrivi ora',
+  'Opname weggooien': 'Scarta la registrazione',
+  'ingebouwd': 'integrato',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Il monitoraggio della presentazione sta già usando il microfono. Spegnilo prima — due sessioni insieme genererebbero un rientro.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Non c\'è abbastanza spazio libero per avviare una registrazione. Le registrazioni già concluse restano.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Il disco si è riempito. Questa registrazione si ferma; quelle già concluse restano.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Il microfono è caduto. Quanto c\'era già è stato conservato.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'La registrazione è su questo dispositivo. Trascrivila ora, o conservala sette giorni per farlo dopo.',
+  'Opname bewaard': 'Registrazione conservata',
+  'Bewaar voor later': 'Conserva per dopo',
+  'Microfoonopname': 'Registrazione del microfono',
+  'Microfoon-doorvoer kan niet starten':
+      'Il monitoraggio del microfono non può avviarsi',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'C\'è una registrazione in corso. Fermala prima — due sessioni del microfono insieme genererebbero un rientro.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'nessun decoder su questo sistema (afconvert mancante) — solo PCM-WAV può essere letto direttamente',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

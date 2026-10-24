@@ -2513,6 +2513,59 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Systeemgeluid opnemen…': 'Sistem sesini kaydet…',
+  'Systeemgeluid opnemen': 'Sistem sesini kaydet',
+  'Tabgeluid opnemen…': 'Sekme sesini kaydet…',
+  'Tabgeluid opnemen': 'Sekme sesini kaydet',
+  'Microfoon en systeemgeluid opnemen…': 'Mikrofon ve sistem sesini kaydet…',
+  'Microfoon en systeemgeluid opnemen': 'Mikrofon ve sistem sesini kaydet',
+  'Voorlopige tekst': 'Geçici metin',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Metin geride. Kayıt kendisi sürüyor.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Solda mikrofon, sağda sistem sesi.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Bu, bu aygıtın sesini kaydeder, başka bir uygulamadaki görüşmeyi değil.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Sistem sesi bu kurulumda kullanılamıyor.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Sistem ayarlarında OciDeck\'e sistem sesi erişimi verin.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Sekme ses paylaşmadı. Bir sekme seçin ve sesi işaretleyin.',
+  'Het systeemgeluid kon niet worden opgenomen': 'Sistem sesi kaydedilemedi',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Sekme sesi bu tarayıcıda kullanılamıyor.',
+  'Microfoon opnemen…': 'Mikrofon kaydet…',
+  'Microfoon opnemen': 'Mikrofon kaydet',
+  'Systeemstandaard': 'Sistem varsayılanı',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Başkalarını kaydetmek onların iznini gerektirebilir.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Bu odadaki mikrofondur, başka bir uygulamanın sesi değil.',
+  'Niveau testen': 'Seviyeyi dene',
+  'Opnemen': 'Kaydet',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Deneme kendiliğinden durur. Henüz bir şey saklanmaz.',
+  'Eerdere opnames': 'Önceki kayıtlar',
+  'Nu transcriberen': 'Şimdi yazıya dök',
+  'Opname weggooien': 'Kaydı sil',
+  'ingebouwd': 'dahili',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Sunum geçişi mikrofonu zaten kullanıyor. Önce onu kapatın — iki oturum birden geri besleme yapar.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Kayıt başlatmak için yeterli boş disk yok. Daha önce biten kayıtlar duruyor.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Disk doldu. Bu kayıt duruyor; daha önce bitenler duruyor.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofon düştü. Orada olan duruyor.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Kayıt bu aygıtta. Şimdi yazıya dökün, ya da sonra yapmak için yedi gün saklayın.',
+  'Opname bewaard': 'Kayıt saklandı',
+  'Bewaar voor later': 'Sonra için sakla',
+  'Microfoonopname': 'Mikrofon kaydı',
+  'Microfoon-doorvoer kan niet starten': 'Mikrofon geçişi başlayamıyor',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Bir kayıt sürüyor. Önce onu durdurun — iki mikrofon oturumu birden geri besleme yapar.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'bu sistemde dekoder yok (afconvert eksik) — yalnızca PCM-WAV doğrudan okunabilir',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

@@ -109,4 +109,7 @@ class FakeCaptureSession implements CaptureSession {
 
   /// Het platform trekt de toestemming in terwijl de opname loopt.
   void revokePermission() => _ended.add(CaptureEndCause.permissionRevoked);
+
+  /// De schijf hield verdere audio tegen.
+  void failStorage() => _ended.add(CaptureEndCause.storageFailed);
 }

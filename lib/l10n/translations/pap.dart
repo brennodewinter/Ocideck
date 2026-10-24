@@ -651,6 +651,62 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Systeemgeluid opnemen…': 'Graba sonidonan di sistema…',
+  'Systeemgeluid opnemen': 'Graba sonidonan di sistema',
+  'Tabgeluid opnemen…': 'Graba sonidonan di e tab…',
+  'Tabgeluid opnemen': 'Graba sonidonan di e tab',
+  'Microfoon en systeemgeluid opnemen…':
+      'Graba mikrofonu i sonidonan di sistema…',
+  'Microfoon en systeemgeluid opnemen':
+      'Graba mikrofonu i sonidonan di sistema',
+  'Voorlopige tekst': 'Teksto provishonal',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'E teksto ta atrasá. E grabashon mes ta sigui.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Robes e mikrofonu, drechi e sonidonan di sistema.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Esaki ta graba e zonido di e aparato aki, no un yamada den un otro app.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Sonidonan di sistema no ta disponibel riba e konfigurashon aki.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Duna OciDeck akseso na sonidonan di sistema den e konfigurashon di sistema.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'E tab no a kompartí zonido. Skohe un tab i marka e zonido.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'E sonidonan di sistema no por a wòrdu grabá',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Sonidonan di tab no ta disponibel den e browser aki.',
+  'Microfoon opnemen…': 'Graba mikrofonu…',
+  'Microfoon opnemen': 'Graba mikrofonu',
+  'Systeemstandaard': 'Estándar di sistema',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Graba otro hende por pidí nan permiso.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Esaki ta e mikrofonu den e kamber, no e zonido di un otro app.',
+  'Niveau testen': 'Test e nivel',
+  'Opnemen': 'Graba',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'E test ta stòp di su mes. Ainda no tin nada wardá.',
+  'Eerdere opnames': 'Grabashonnan anterior',
+  'Nu transcriberen': 'Transkribí awor',
+  'Opname weggooien': 'Tira e grabashon',
+  'ingebouwd': 'integrá',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'E paso di presentashon ya ta usa e mikrofonu. Paga esei promé — dos seshonnan huntu lo hasi feedback.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'No tin sufisiente espasio liber pa kuminsá un grabashon. Grabashonnan kla keda para.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'E disko a yena. E grabashon aki ta stòp; grabashonnan kla keda para.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'E mikrofonu a kai afó. Loke tabata pará ya ta wardá.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'E grabashon ta riba e aparato aki. Transkribí awe, òf ward\'é shete dia pa hasi esei despues.',
+  'Opname bewaard': 'Grabashon wardá',
+  'Bewaar voor later': 'Warda pa despues',
+  'Microfoonopname': 'Grabashon di mikrofonu',
+  'Microfoon-doorvoer kan niet starten': 'Paso di mikrofonu no por kuminsá',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Tin un grabashon kayendo. Stòp esei promé — dos seshonnan di mikrofonu huntu lo hasi feedback.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'no tin dekoder riba e sistema aki (afconvert ta falta) — solamente PCM-WAV por wòrdu leé direktemente',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

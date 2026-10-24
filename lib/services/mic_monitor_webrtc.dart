@@ -23,6 +23,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 import '../utils/log.dart';
 import 'mic_monitor.dart';
+import 'transcription/mic_session_gate.dart';
 
 class WebrtcMicMonitor implements MicMonitor {
   MediaStream? _mic;
@@ -44,6 +45,12 @@ class WebrtcMicMonitor implements MicMonitor {
   @override
   Future<void> start() async {
     if (_running || _starting) return;
+    // Een lopende opname heeft de microfoon al. Een tweede greep zingt
+    // rond; de presentator legt dat uit vóór hij hier komt, en dit is de
+    // grendel voor het geval hij het niet deed.
+    if (!MicSessionGate.instance.tryAcquire(MicHolder.monitor)) {
+      throw MicMonitorException('een opname bezet de invoer');
+    }
     _starting = true;
     final generation = _generation;
     MediaStream? mic;
@@ -99,6 +106,7 @@ class WebrtcMicMonitor implements MicMonitor {
     } catch (e) {
       await _teardown(mic, send, recv);
       _starting = false;
+      MicSessionGate.instance.release(MicHolder.monitor);
       throw MicMonitorException(e);
     }
     _starting = false;
@@ -106,6 +114,7 @@ class WebrtcMicMonitor implements MicMonitor {
       // Gestopt terwijl de start liep (zie [_generation]): de spullen horen bij
       // deze start en gaan hier mee weg — niet in de velden.
       await _teardown(mic, send, recv);
+      MicSessionGate.instance.release(MicHolder.monitor);
       return;
     }
     _mic = mic;
@@ -125,6 +134,7 @@ class WebrtcMicMonitor implements MicMonitor {
     _sendPc = null;
     _recvPc = null;
     await _teardown(mic, send, recv);
+    MicSessionGate.instance.release(MicHolder.monitor);
   }
 
   /// Ruimt een (deels) opgebouwde loopback op. Best-effort: een track die niet

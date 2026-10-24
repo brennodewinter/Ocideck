@@ -1608,6 +1608,60 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Systeemgeluid opnemen…': 'Systemsound uufnäh…',
+  'Systeemgeluid opnemen': 'Systemsound uufnäh',
+  'Tabgeluid opnemen…': 'Tab-Sound uufnäh…',
+  'Tabgeluid opnemen': 'Tab-Sound uufnäh',
+  'Microfoon en systeemgeluid opnemen…': 'Mikrofon und Systemsound uufnäh…',
+  'Microfoon en systeemgeluid opnemen': 'Mikrofon und Systemsound uufnäh',
+  'Voorlopige tekst': 'Vorläufige Tegscht',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'De Tegscht hinkt hindenach. D Uufnahm sälber lauft wyter.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, Stereo. Links s Mikrofon, rächts de Systemsound.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Das nimmt de Sound vo däm Grät uf, nöd es Gspröch i nere andere App.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Systemsound isch uf dere Iistellig nöd verfüegbar.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Gib OciDeck i de Systemiistellige Zuegriff uf de Systemsound.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'De Tab het kei Sound teilt. Wähl en Tab und aktivier de Sound.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'De Systemsound het nöd chönne ufgno werde',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Tab-Sound isch i däm Browser nöd verfüegbar.',
+  'Microfoon opnemen…': 'Mikrofon uufnäh…',
+  'Microfoon opnemen': 'Mikrofon uufnäh',
+  'Systeemstandaard': 'Systemstandard',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Anderi ufznäh chan ihri Zuestimmig verlange.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Das isch s Mikrofon im Ruum, nöd de Ton von ere andere App.',
+  'Niveau testen': 'Pegel teschte',
+  'Opnemen': 'Uufnäh',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'De Tescht stoppt vo sälber. Es wird no nüt ufbewahrt.',
+  'Eerdere opnames': 'Früecheri Ufnaame',
+  'Nu transcriberen': 'Jetz transkribiere',
+  'Opname weggooien': 'Ufnahm wägwërfe',
+  'ingebouwd': 'iibaut',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'D Präsentations-Durchleitig bruucht s Mikrofon scho. Schalt die zersch us — zwei Sitzige uf eimol würde rückkopple.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Es het z wenig freie Spiicherruum, zum e Ufnahm starte. Scho fertigi Ufnaame bliibed stah.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'D Spiicher isch voll worde. Die Ufnahm stoppt; scho fertigi Ufnaame bliibed stah.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'S Mikrofon isch wäg. Was scho dagsii isch, isch ufbewahrt.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'D Ufnahm isch uf däm Grät. Transkribiere si jetz, oder behalt si sibe Täg, zum das spöter z mache.',
+  'Opname bewaard': 'Ufnahm ufbewahrt',
+  'Bewaar voor later': 'Für spöter ufbewahre',
+  'Microfoonopname': 'Mikrofonufnahm',
+  'Microfoon-doorvoer kan niet starten': 'Mikrofon-Durchleitig cha nöd starte',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Es lauft e Ufnahm. Stopp die zersch — zwei Mikrofonsitzige uf eimol würde rückkopple.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'kei Decoder uf dem System (afconvert fählt) — nur PCM-WAV cha direkt gläse werde',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

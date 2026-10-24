@@ -1609,6 +1609,60 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Systeemgeluid opnemen…': 'Snimi zvuk sustava…',
+  'Systeemgeluid opnemen': 'Snimi zvuk sustava',
+  'Tabgeluid opnemen…': 'Snimi zvuk kartice…',
+  'Tabgeluid opnemen': 'Snimi zvuk kartice',
+  'Microfoon en systeemgeluid opnemen…': 'Snimi mikrofon i zvuk sustava…',
+  'Microfoon en systeemgeluid opnemen': 'Snimi mikrofon i zvuk sustava',
+  'Voorlopige tekst': 'Privremeni tekst',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Tekst kasni. Sama snimka se nastavlja.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Lijevo mikrofon, desno zvuk sustava.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'Ovo snima zvuk ovog uređaja, ne razgovor u drugoj aplikaciji.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Zvuk sustava nije dostupan na ovoj postavi.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Dajte OciDecku pristup zvuku sustava u postavkama sustava.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Kartica nije podijelila zvuk. Odaberite karticu i označite zvuk.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Zvuk sustava nije mogao biti snimljen',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Zvuk kartice nije dostupan u ovom pregledniku.',
+  'Microfoon opnemen…': 'Snimi mikrofon…',
+  'Microfoon opnemen': 'Snimi mikrofon',
+  'Systeemstandaard': 'Zadano u sustavu',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Snimanje drugih može tražiti njihov pristanak.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. Ovo je mikrofon u prostoriji, ne zvuk druge aplikacije.',
+  'Niveau testen': 'Isprobaj razinu',
+  'Opnemen': 'Snimi',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Test se sam zaustavlja. Još se ništa ne čuva.',
+  'Eerdere opnames': 'Ranije snimke',
+  'Nu transcriberen': 'Transkribiraj sada',
+  'Opname weggooien': 'Odbaci snimku',
+  'ingebouwd': 'ugrađen',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Propuštanje prezentacije već koristi mikrofon. Isključite ga prvo — dvije sesije odjednom bi zavijale.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Nema dovoljno slobodnog prostora za početak snimke. Ranije dovršene snimke ostaju.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Disk se napunio. Ova snimka staje; ranije dovršene ostaju.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofon je otpao. Što je već stajalo, sačuvano je.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Snimka je na ovom uređaju. Transkribirajte je sada, ili je čuvajte sedam dana da to učinite kasnije.',
+  'Opname bewaard': 'Snimka sačuvana',
+  'Bewaar voor later': 'Sačuvaj za kasnije',
+  'Microfoonopname': 'Snimka mikrofona',
+  'Microfoon-doorvoer kan niet starten': 'Propuštanje mikrofona ne može početi',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Snimka je u tijeku. Zaustavite je prvo — dvije mikrofonske sesije odjednom bi zavijale.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'u ovom sustavu nema dekodera (afconvert nedostaje) — samo PCM-WAV se može čitati izravno',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

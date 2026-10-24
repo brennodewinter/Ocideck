@@ -811,6 +811,60 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Systeemgeluid opnemen…': 'Record system audio…',
+  'Systeemgeluid opnemen': 'Record system audio',
+  'Tabgeluid opnemen…': 'Record tab audio…',
+  'Tabgeluid opnemen': 'Record tab audio',
+  'Microfoon en systeemgeluid opnemen…': 'Record microphone and system audio…',
+  'Microfoon en systeemgeluid opnemen': 'Record microphone and system audio',
+  'Voorlopige tekst': 'Provisional text',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'The text is behind. The recording itself continues.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Microphone on the left, system audio on the right.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'This records the sound of this device, not a call in another app.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'System audio is not available on this setup.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Allow OciDeck to use system audio in the system settings.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'The tab shared no audio. Choose a tab and tick its audio.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'System audio could not be recorded',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Tab audio is not available in this browser.',
+  'Microfoon opnemen…': 'Record microphone…',
+  'Microfoon opnemen': 'Record microphone',
+  'Systeemstandaard': 'System default',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Recording other people may require their consent.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. This is the microphone in the room, not the sound of another app.',
+  'Niveau testen': 'Test level',
+  'Opnemen': 'Record',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'The test stops by itself. Nothing is kept yet.',
+  'Eerdere opnames': 'Earlier recordings',
+  'Nu transcriberen': 'Transcribe now',
+  'Opname weggooien': 'Discard recording',
+  'ingebouwd': 'built-in',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Presentation pass-through is already using the microphone. Turn that off first — two sessions at once would feed back.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'There is not enough free disk space to start a recording. Earlier finished recordings stay where they are.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'The disk filled up. This recording stops; earlier finished recordings stay where they are.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'The microphone dropped out. What was already there is kept.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'The recording is on this device. Transcribe it now, or keep it for seven days to do that later.',
+  'Opname bewaard': 'Recording kept',
+  'Bewaar voor later': 'Keep for later',
+  'Microfoonopname': 'Microphone recording',
+  'Microfoon-doorvoer kan niet starten': 'Microphone pass-through cannot start',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'A recording is running. Stop it first — two microphone sessions at once would feed back.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'no decoder on this system (afconvert missing) — only PCM-WAV can be read directly',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

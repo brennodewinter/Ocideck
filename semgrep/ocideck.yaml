@@ -54,6 +54,11 @@ rules:
         # systeemsubproces zonder netwerkcode, met een lege environment,
         # net als de whisper-cli. De bron wordt nooit aangeraakt.
         - "**/lib/services/transcription/file_capture_source_io.dart"
+        # Linux-opname (#2516, #2520) start parecord en pactl, plus which
+        # en df om ze te vinden en de vrije ruimte te meten. Argv-array,
+        # geen schil, geen geërfde omgeving: alleen de toelatingslijst
+        # (PATH voor which/df, de Pulse-variabelen voor de opname).
+        - "**/lib/services/transcription/linux_mic_recorder_io.dart"
 
   - id: ocideck-zwakke-random-voor-geheim
     languages: [dart]

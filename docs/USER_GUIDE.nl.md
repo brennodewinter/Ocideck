@@ -38,6 +38,7 @@
 - [LibrePlan-connector (optioneel)](#libreplan-connector-optioneel)
 - [Documenten](#documenten)
 - [Markdown-modus](#markdown-modus)
+- [Transcriptie en opname](#transcriptie-en-opname)
 - [Wat de browserversie niet kan](#wat-de-browserversie-niet-kan)
 - [Thema's en taal](#themas-en-taal)
 
@@ -6564,6 +6565,35 @@ Problemen worden gerapporteerd met een **regelnummer**, een **severity**, en een
 Implementatie: `lib/services/markdown_validator.dart` (unit-tests in
 `test/markdown_validator_test.dart`).
 
+## Transcriptie en opname
+
+De module staat uit tot je **Transcriptie en opname** aanzet onder
+Uitbreidingen. In de desktop-app kies je bij **Importeren → Microfoon
+opnemen…** een invoer of de systeemstandaard. Je leest dat opnemen van
+anderen hun toestemming kan vragen, en je kunt anderhalve seconde het niveau
+testen zonder dat er iets bewaard wordt. Opnemen schrijft 16 kHz mono PCM van
+de microfoon in de kamer — niet het geluid van een andere applicatie — naar
+een tijdelijke map. Een strook met Stop blijft zichtbaar, en toont het niveau
+zolang de microfoon de bron is.
+
+Na Stop, een weggevallen microfoon of een volle schijf kies je: nu
+transcriberen, het bestand zeven dagen bewaren, of weggooien.
+Presentatie-doorvoer en een opname delen één microfoon; de ander wacht.
+
+**Importeren → Systeemgeluid opnemen…** neemt op wat deze computer
+afspeelt, na dezelfde toestemmingsregel. **Importeren → Microfoon en
+systeemgeluid opnemen…** schrijft één stereobestand: links de microfoon,
+rechts het systeemgeluid. In de browser staat de microfoonknop er ook, en
+**Tabgeluid opnemen…** waar Chromium het geluid van een tabblad kan delen.
+Firefox en Safari doen dat niet; het venster zegt dat, in plaats van een
+stille video op te nemen. Een browseropname blijft in het tabblad; herladen
+is het bestand kwijt. Voorlopige tekst verschijnt alleen als de
+transcriptie-engine een live-route meldt. Het lokale whisper-programma en
+de batch-server doen dat niet, dus de tekst komt uit **Nu transcriberen**
+nadat je stopt. Ingebouwd, USB en Bluetooth, en systeemgeluid, op macOS,
+Windows en Linux is de bedoelde route; deze tekst beweert niet dat elk
+daarvan hier op hardware bewezen is.
+
 ## Wat de browserversie niet kan
 
 OciDeck draait ook volledig binnen een browsertabblad, zonder applicatiebackend
@@ -6594,6 +6624,7 @@ voordat je het deck van een klant erop opent. Dezelfde bundle zelf hosten is
 | Cloud-AI | Bewust geblokkeerd, niet door de browser. |
 | Een deck importeren vanuit een URL | **Werkt**, door dezelfde beveiligingspoort als op desktop. |
 | OpenKAT-rapporten importeren | Zichtbaar op Integraties maar **uitgeschakeld** — map-import en servertokens hebben desktop nodig (sleutelhanger en lokale mappen). |
+| Opnemen vanaf de microfoon | **Werkt** voor de microfoon in de kamer, en voor het geluid van een tabblad waar Chromium dat kan delen. Het bestand blijft in het tabblad (`mem:`) tot je het bewaart; herladen is het kwijt. Firefox en Safari delen geen tabgeluid. |
 | **Één** PowerPoint-, Keynote- of Impress-bestand importeren | **Werkt**. De conversie draait op de bytes die je koos en het resultaat opent in een tabblad. |
 | **Meerdere** presentaties tegelijk importeren | Afwezig. De wachtrij schrijft elk geconverteerd deck als een bestand naar een map die je kiest, en de browser heeft geen map om te kiezen. Het dialoog zegt dat in plaats van een knop aan te bieden die niet kan werken. |
 | Exporteren, verzegelen, versleutelde packages | **Werkt**, geleverd als downloads. Een export die uit meer dan één bestand bestaat (een geredigeerd rapport met zijn manifest, een sessie met een bestand per dia) komt aan als één ZIP, omdat een browser de tweede automatische download op rij tegenhoudt. En de bewoording is met opzet anders: de webversie zegt *aangeboden als download* in plaats van *geëxporteerd naar*, omdat een pagina niet kan zien of het bestand werkelijk in je downloadmap terechtkwam. |

@@ -1598,6 +1598,60 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Systeemgeluid opnemen…': 'Salvesta süsteemiheli…',
+  'Systeemgeluid opnemen': 'Salvesta süsteemiheli',
+  'Tabgeluid opnemen…': 'Salvesta vahekaardi heli…',
+  'Tabgeluid opnemen': 'Salvesta vahekaardi heli',
+  'Microfoon en systeemgeluid opnemen…': 'Salvesta mikrofon ja süsteemiheli…',
+  'Microfoon en systeemgeluid opnemen': 'Salvesta mikrofon ja süsteemiheli',
+  'Voorlopige tekst': 'Esialgne tekst',
+  'De tekst loopt achter. De opname zelf gaat door.':
+      'Tekst jääb maha. Salvestus ise jätkub.',
+  '16 kHz, stereo. Links de microfoon, rechts het systeemgeluid.':
+      '16 kHz, stereo. Vasakul mikrofon, paremal süsteemiheli.',
+  'Dit neemt het geluid van dit apparaat op, niet een gesprek in een andere app.':
+      'See salvestab selle seadme heli, mitte kõnet teises rakenduses.',
+  'Systeemgeluid is op deze opstelling niet beschikbaar.':
+      'Süsteemiheli pole sellel seadistusel saadaval.',
+  'Geef OciDeck toegang tot systeemgeluid in de systeeminstellingen.':
+      'Anna OciDeckile süsteemiseadetes juurdepääs süsteemihelile.',
+  'Het tabblad deelde geen geluid. Kies een tab en vink het geluid aan.':
+      'Vahekaart ei jaganud heli. Vali vahekaart ja märgi heli.',
+  'Het systeemgeluid kon niet worden opgenomen':
+      'Süsteemiheli ei saanud salvestada',
+  'Tabgeluid is in deze browser niet beschikbaar.':
+      'Vahekaardi heli pole selles brauseris saadaval.',
+  'Microfoon opnemen…': 'Salvesta mikrofon…',
+  'Microfoon opnemen': 'Salvesta mikrofon',
+  'Systeemstandaard': 'Süsteemi vaikimisi',
+  'Opnemen van anderen kan hun toestemming vragen.':
+      'Teiste salvestamine võib nõuda nende nõusolekut.',
+  '16 kHz, mono, PCM. Dit is de microfoon in de kamer, niet het geluid van een andere app.':
+      '16 kHz, mono, PCM. See on mikrofon ruumis, mitte teise rakenduse heli.',
+  'Niveau testen': 'Katseta taset',
+  'Opnemen': 'Salvesta',
+  'De test stopt vanzelf. Er wordt nog niets bewaard.':
+      'Test peatub ise. Midagi ei ole veel alles hoitud.',
+  'Eerdere opnames': 'Varasemad salvestused',
+  'Nu transcriberen': 'Transkribeeri kohe',
+  'Opname weggooien': 'Kustuta salvestus',
+  'ingebouwd': 'sisseehitatud',
+  'De presentatie-doorvoer gebruikt de microfoon al. Zet die eerst uit — twee sessies tegelijk zouden rondzingen.':
+      'Esitluse läbilask kasutab mikrofoni juba. Lülita see esmalt välja — kaks seanssi korraga tekitaksid tagasisidet.',
+  'Er is te weinig vrije schijfruimte om een opname te starten. Eerder afgeronde opnames blijven staan.':
+      'Vaba kettaruumi on liiga vähe, et salvestust alustada. Varem lõpetatud salvestused jäävad alles.',
+  'De schijf raakte vol. Deze opname stopt; eerder afgeronde opnames blijven staan.':
+      'Ketas sai täis. See salvestus peatub; varem lõpetatud jäävad alles.',
+  'De microfoon viel weg. Wat er al stond is bewaard.':
+      'Mikrofon kadus. See, mis juba oli, on alles.',
+  'De opname staat op dit apparaat. Transcribeer hem nu, of bewaar hem zeven dagen om dat later te doen.':
+      'Salvestus on sellel seadmel. Transkribeeri see kohe või hoia seitse päeva, et teha seda hiljem.',
+  'Opname bewaard': 'Salvestus alles',
+  'Bewaar voor later': 'Hoia hilisemaks',
+  'Microfoonopname': 'Mikrofonisalvestus',
+  'Microfoon-doorvoer kan niet starten': 'Mikrofoni läbilask ei saa alata',
+  'Er loopt een opname. Stop die eerst — twee microfoonsessies tegelijk zouden rondzingen.':
+      'Salvestus käib. Peata see esmalt — kaks mikrofoniseanssi korraga tekitaksid tagasisidet.',
   'geen decoder op dit systeem (afconvert ontbreekt) — alleen PCM-WAV kan direct':
       'selles süsteemis pole dekodeerijat (afconvert puudub) — ainult PCM-WAV saab otse lugeda',
   'geen decoder op dit systeem (ffmpeg ontbreekt) — alleen PCM-WAV kan direct':

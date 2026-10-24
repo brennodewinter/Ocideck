@@ -277,6 +277,9 @@ void main() {
         final service = makeService();
         expect(await service.scanForUnsafeMarkdown(path), isEmpty);
       },
+      // 32 MiB in 1 KiB writes. Under the coverage suite that exceeds the
+      // 30s default without the scan itself being stuck.
+      timeout: const Timeout(Duration(minutes: 2)),
     );
   });
 
