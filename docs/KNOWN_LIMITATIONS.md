@@ -272,6 +272,29 @@ served the app — so that host sees the address you typed. The first visit
 downloads a large bundle. → [HOSTING.md](HOSTING.md), section *Web build
 limitations to communicate*
 
+## Browse… shows what the system file dialog shows
+
+Open → Browse… hands the choice to the operating system's own file dialog.
+OciDeck suggests the library folder and sets no file filter; how the dialog sorts
+and groups that folder is up to the system. On two systems, a file another
+program has just written can seem to be missing:
+
+- **macOS.** The open and save dialogs of every app share one view setting. When
+  it groups by *Date Last Opened*, a file that has never been opened through
+  macOS has no such date. It lands in the *Earlier* group at the bottom, below
+  files that are months old. Switch grouping off in the dialog's grouping menu
+  (the grid button with the arrow), or sort by *Date Added*. The change applies
+  to every app.
+- **Linux.** The dialog comes from the desktop portal. Up to xdg-desktop-portal
+  1.16 (Debian 12, Ubuntu 22.04), the portal drops the suggested folder when
+  opening a file, so a GTK dialog starts in *Recent*. That list holds only files
+  the desktop has recorded as used: older files appear, a newly written one does
+  not. Go to the library folder in the dialog yourself. Version 1.18 and later
+  open the suggested folder.
+
+The list in the Open dialog itself reads the library folder and does show the
+new file. Full account: issue #2561. *(Added 2026-10-24.)*
+
 ## Marp CLI: the theme loads, with one documented caveat
 
 The saved `.md` is designed to be processed by the Marp CLI and the VS Code Marp

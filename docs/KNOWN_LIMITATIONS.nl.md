@@ -291,6 +291,32 @@ een proxy op de host die de app serveerde — dus die host ziet het adres dat je
 typte. Het eerste bezoek downloadt een grote bundel. → [HOSTING.md](HOSTING.md),
 sectie *Web build limitations to communicate*
 
+## Bladeren… toont wat het systeemvenster toont
+
+Openen → Bladeren… laat het kiezen over aan het bestandsvenster van het
+besturingssysteem. OciDeck stelt de bibliotheekmap voor en zet geen bestandsfilter;
+hoe het venster die map sorteert en groepeert, bepaalt het systeem. Op twee
+systemen kan een bestand dat een ander programma net heeft geschreven daardoor
+lijken te ontbreken:
+
+- **macOS.** De open- en bewaarvensters van alle apps delen één
+  weergave-instelling. Groepeert die op de datum van laatst openen (Engels: *Date
+  Last Opened*), dan heeft een bestand dat nooit via macOS is geopend die datum
+  niet. Het komt in de onderste groep (*Earlier*), onder bestanden van maanden
+  oud. Zet het groeperen uit in het groepeermenu van het venster (de rasterknop
+  met het pijltje), of sorteer op datum van toevoegen. Dat geldt dan voor alle
+  apps.
+- **Linux.** Het venster komt van de desktopportal. Tot en met
+  xdg-desktop-portal 1.16 (Debian 12, Ubuntu 22.04) laat de portal bij het openen
+  van een bestand de voorgestelde map weg, zodat een GTK-venster in *Recent*
+  begint. Die lijst bevat alleen bestanden die de desktop als gebruikt heeft
+  vastgelegd: oudere bestanden staan erin, een net geschreven bestand niet. Ga in
+  het venster zelf naar de bibliotheekmap. Vanaf versie 1.18 opent de voorgestelde
+  map wel.
+
+De lijst in het Openen-venster zelf leest de bibliotheekmap en toont het nieuwe
+bestand wel. Volledige toelichting: issue #2561. *(Toegevoegd 2026-10-24.)*
+
 ## Marp CLI: het thema laadt, met één gedocumenteerde kanttekening
 
 De opgeslagen `.md` is ontworpen om verwerkt te worden door de Marp CLI en de VS
