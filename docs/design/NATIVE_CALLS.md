@@ -427,6 +427,16 @@ companion channel carries nothing yet.
   MUC roster, groupchat, SourceInfo mute, leave — with the media seam faked at
   `MeetingMediaCore` (libwebrtc cannot run headless; the testbed probe proves
   real RTP through the same stack).
+- **Call-audio tap (#2527).** `call_audio_source.dart` is the provider-neutral
+  output behind `MeetingSession` and `MeetingMediaConnection`: local outbound
+  audio after mute and remote audio after decode, each with a timestamp and a
+  source identity. A `MeetingTrack` id does not start a recording, and
+  `RecordingIndicatorChanged` is a lamp, not byte access. flutter_webrtc 1.6
+  cannot supply per-participant decoded samples (`MediaRecorder` writes an
+  INPUT/OUTPUT mix), so `callAudioCaptureOfCurrentBinding()` reports
+  `noPerSourceTap` and `startCallAudioCapture` yields nothing. A mic-only fact
+  (`remoteMissing`) is not a whole call. The live two-person proof is still
+  open; this slice does not close #2527.
 - Plus later XMPP hardening (#1316–1320, #1366–1370): bounded stanza sizes/counts and
   resource-exhaustion limits.
 - **F3.4c — on-device media + remote video** (#2535). `MeetingMediaConnection`

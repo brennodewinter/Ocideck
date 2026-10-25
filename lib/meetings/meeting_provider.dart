@@ -13,6 +13,7 @@
 // entirely on one family, and no code pairs a [MeetingSession] of one family with
 // a `CollabTransport` of another. Nothing here couples the two.
 
+import 'call_audio_source.dart';
 import 'meeting_event.dart';
 import 'meeting_media_core.dart'
     show MeetingAudioOutput, MeetingScreenSource, MeetingVideoSurface;
@@ -234,6 +235,15 @@ abstract interface class MeetingSession {
 
   /// Stop het delen. Idempotent — zonder lopende share een no-op.
   Future<void> stopScreenShare();
+
+  /// De hele-call-audiotap (#2527). Leeg zolang [MeetingCapabilities.callAudio]
+  /// geen whole-call is — een track-id of een provider-lampje start hier
+  /// niets. Een capability die whole-call claimt zonder tap faalt hard.
+  Stream<CallAudioChunk> startCallAudioCapture();
+
+  /// Stop de tap. Idempotent — zonder lopende tap een no-op.
+  Future<void> stopCallAudioCapture();
+
   Future<void> sendChat(String text);
 
   /// Leave and release all resources. Idempotent; closes [events].

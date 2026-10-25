@@ -5,7 +5,10 @@
 // UI needs only its [MeetingTrack.id] to place and key a video tile; a later
 // native adapter (F3) maps a real `flutter_webrtc` `MediaStreamTrack` onto a
 // [MeetingTrack] behind this seam. Keeping the native object out of this type is
-// what lets `lib/meetings/` carry no media dependency (F1).
+// what lets `lib/meetings/` carry no media dependency (F1). The id is not an
+// audio tap: call-audio capture is a separate fact (`call_audio_source.dart`).
+
+import 'call_audio_source.dart';
 
 /// A provider-neutral role. Adapters translate their backend's role vocabulary
 /// onto this set and keep the original label only for diagnostics
@@ -103,6 +106,7 @@ class MeetingCapabilities {
     this.screenShare = false,
     this.chat = false,
     this.roster = false,
+    this.callAudio = unavailableCallAudio,
   });
 
   final bool audio;
@@ -110,4 +114,8 @@ class MeetingCapabilities {
   final bool screenShare;
   final bool chat;
   final bool roster;
+
+  /// Of deze sessie een hele-call-audiotap kan leveren, met de reden als dat
+  /// niet zo is (#2527). Los van [audio]: een microfoonknop is geen opname.
+  final CallAudioCaptureFact callAudio;
 }

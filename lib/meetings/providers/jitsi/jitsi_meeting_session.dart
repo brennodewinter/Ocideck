@@ -31,6 +31,7 @@ import '../../../xmpp/xmpp_muc.dart';
 import '../../../xmpp/xmpp_session.dart' show XmppStanzaChannel;
 import '../../../xmpp/xmpp_stanza.dart';
 import '../../../utils/log.dart';
+import '../../call_audio_source.dart';
 import '../../meeting_event.dart';
 import '../../meeting_media_core.dart';
 import '../../meeting_nick.dart';
@@ -220,6 +221,9 @@ class JitsiMeetingSession implements MeetingSession {
     screenShare: screenShareFor(defaultTargetPlatform),
     chat: true,
     roster: true,
+    // flutter_webrtc levert geen samples per deelnemer. De capability zegt
+    // dat, zodat een latere opnameknop de call niet als opgenomen bestempelt.
+    callAudio: callAudioCaptureOfCurrentBinding(),
   );
 
   @override
@@ -243,6 +247,13 @@ class JitsiMeetingSession implements MeetingSession {
 
   @override
   Future<void> stopScreenShare() => _localMedia.endShare(lost: false);
+
+  @override
+  Stream<CallAudioChunk> startCallAudioCapture() =>
+      openCallAudioCapture(capabilities.callAudio);
+
+  @override
+  Future<void> stopCallAudioCapture() async {}
 
   /// Eén meldpunt voor de lokale participant — de track-velden komen uit
   /// [_localParticipantNow] (copyWith kan een track niet wissen, #2535).

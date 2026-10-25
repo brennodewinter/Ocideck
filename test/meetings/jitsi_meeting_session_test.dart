@@ -9,6 +9,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/meetings/call_audio_source.dart';
 import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/meeting_media_core.dart';
 import 'package:ocideck/meetings/meeting_participant.dart';
@@ -259,6 +260,15 @@ class FakeMediaConnection implements MeetingMediaConnection {
   @override
   Future<void> selectAudioOutput(String deviceId) async =>
       selectedOutput = deviceId;
+
+  @override
+  CallAudioCaptureFact get callAudioCapture => unavailableCallAudio;
+
+  @override
+  Stream<CallAudioChunk> startCallAudioCapture() => const Stream.empty();
+
+  @override
+  Future<void> stopCallAudioCapture() async {}
 
   /// Wat `localSource` teruggeeft — de aankondiging leest de bron op het
   /// aankondig-moment, niet uit het attach-resultaat (#2541). Tijdens een

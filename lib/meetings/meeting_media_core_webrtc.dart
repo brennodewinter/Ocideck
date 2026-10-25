@@ -22,6 +22,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:logger/logger.dart';
 
 import '../utils/log.dart';
+import 'call_audio_source.dart';
 import 'meeting_media_core.dart';
 import 'meeting_participant.dart';
 import 'meeting_provider.dart' show MeetingE2eeStatus;
@@ -640,6 +641,17 @@ class _WebrtcConnection implements MeetingMediaConnection {
       logWarning('WebrtcConnection.selectAudioOutput', e);
     }
   }
+
+  @override
+  CallAudioCaptureFact get callAudioCapture =>
+      callAudioCaptureOfCurrentBinding();
+
+  @override
+  Stream<CallAudioChunk> startCallAudioCapture() =>
+      openCallAudioCapture(callAudioCapture);
+
+  @override
+  Future<void> stopCallAudioCapture() async {}
 
   /// Het kanaal wordt aangemaakt zodra de pc bestaat; libwebrtc opent het
   /// zodra DTLS/SCTP staat. De adapter mag dit dus vóór ICE-live aanroepen.
