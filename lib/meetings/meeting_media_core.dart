@@ -21,6 +21,7 @@
 
 import 'package:flutter/foundation.dart';
 
+import 'call_audio_source.dart';
 import 'meeting_participant.dart' show MeetingTrack;
 import 'meeting_provider.dart' show MeetingE2eeStatus;
 
@@ -246,6 +247,17 @@ abstract interface class MeetingMediaConnection {
   /// Kies waar de call-audio heen gaat. Best-effort per platform — een
   /// onbekende of verdwenen id faalt stil (de OS-default geldt dan).
   Future<void> selectAudioOutput(String deviceId);
+
+  /// Of deze binding gedecodeerde audiobronnen per deelnemer kan leveren
+  /// (#2527). De huidige flutter_webrtc-binding kan dat niet.
+  CallAudioCaptureFact get callAudioCapture;
+
+  /// Start de tap. Een track-id is geen argument: zonder whole-call-feit
+  /// komt er een lege stroom uit en wordt er niets opgenomen.
+  Stream<CallAudioChunk> startCallAudioCapture();
+
+  /// Stop de tap. Idempotent.
+  Future<void> stopCallAudioCapture();
 
   /// Open een betrouwbaar SCTP-datachannel met [label] en geef hem zodra
   /// hij echt open staat (pas na DTLS/SCTP — daarom async). De offer moet

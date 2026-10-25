@@ -9,6 +9,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/meetings/call_audio_source.dart';
 import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/meeting_link_resolver.dart';
 import 'package:ocideck/meetings/meeting_media_core.dart'
@@ -296,6 +297,10 @@ class _FakeSession implements MeetingSession {
   String? get screenShareLabel => null;
   @override
   Future<void> stopScreenShare() async {}
+  @override
+  Stream<CallAudioChunk> startCallAudioCapture() => const Stream.empty();
+  @override
+  Future<void> stopCallAudioCapture() async {}
   @override
   Future<void> sendChat(String text) async {}
   @override

@@ -11,6 +11,7 @@
 import 'dart:async';
 
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/meetings/call_audio_source.dart';
 import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/meeting_media_core.dart'
     show MeetingAudioOutput, MeetingScreenSource, MeetingVideoSurface;
@@ -168,6 +169,13 @@ class FakeMeetingSession implements MeetingSession {
     _screenShareLabel = null;
     _updateLocal(_local.copyWith(isScreenShare: false));
   }
+
+  @override
+  Stream<CallAudioChunk> startCallAudioCapture() =>
+      openCallAudioCapture(capabilities.callAudio);
+
+  @override
+  Future<void> stopCallAudioCapture() async {}
 
   @override
   Future<void> sendChat(String text) async {

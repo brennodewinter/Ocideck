@@ -19,6 +19,15 @@ All notable changes to OciDeck are documented in this file.
   zelf. Een echte tweepersoonscall op een uitgebrachte webbuild is hiermee
   niet bewezen; die proef staat nog open.
 
+- **Audiobron van een call, de naad (#2527).** Een opname van een
+  OciDeck-call vraagt lokale audio ná het dempen en de audio van de
+  ander ná decodering, apart, met een tijdstip en een bron. Die tap kan
+  de huidige WebRTC-binding niet leveren: die schrijft hooguit een mix
+  naar een bestand. De capability zegt daarom dat een hele-call-opname
+  er niet is. Een microfoon alleen krijgt die naam niet, en een
+  track-id of het opname-lampje van de provider start niets. De proef
+  op een echte tweepersoonscall staat nog open.
+
 - **Microfoon opnemen op de desktop (#2516).** Onder Uitbreidingen zet je
   Transcriptie en opname aan. Daarna staat bij Importeren **Microfoon
   opnemen…**: kies een invoer of de systeemstandaard, lees de regel over
