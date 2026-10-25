@@ -211,7 +211,7 @@ class JitsiMeetingSession implements MeetingSession {
     // feiten houden we strikt gescheiden (nooit een track veinzen).
     audio: true,
     video: true,
-    screenShare: false, // schermdelen komt in een volgende slice (#2535+)
+    screenShare: false, // schermdelen komt in een eigen slice (#2537)
     chat: true,
     roster: true,
   );

@@ -1630,6 +1630,19 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nog geen actieve vergadering.': 'Δεν υπάρχει ενεργή σύσκεψη ακόμη.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Επικολλήστε έναν σύνδεσμο σύσκεψης Jitsi για να συμμετάσχετε.',
+  'Deelnemen aan een vergadering…': 'Συμμετοχή σε σύσκεψη…',
+  'Opnieuw verbinden…': 'Επανασύνδεση…',
+  'De vergadering is beëindigd.': 'Η σύσκεψη τερματίστηκε.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Συμμετέχετε ήδη σε σύσκεψη· αυτή θα τερματιστεί εάν συμμετάσχετε τώρα.',
+  'Vergaderlink openen': 'Άνοιγμα συνδέσμου σύσκεψης',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Επικολλήστε έναν σύνδεσμο σύσκεψης Jitsi· το OciDeck ελέγχει τον διακομιστή και συμμετέχει μόλις επιβεβαιώσετε.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Συμμετέχετε σε βιντεοσυσκέψεις και παρουσιάζετε από το OciDeck με τη δική του διεπαφή: οι συμμετέχοντες δίπλα στη διαφάνειά σας, όχι στο παράθυρο άλλης εφαρμογής. Bring-your-own-server (Jitsi)· το OciDeck δεν φιλοξενεί τίποτα και κρατά τα δεδομένα κλήσεων εκτός AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Το μικρόφωνο ή η κάμερά σας χάθηκε· ενεργοποιήστε ξανά την πηγή όταν επιστρέψει.',
   'Media is niet end-to-end versleuteld.':
@@ -1695,10 +1708,6 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτός ο διακομιστής δεν προσφέρει μορφή σύσκεψης που υποστηρίζει το OciDeck.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Ο διακομιστής είναι μη προσβάσιμος ή απέρριψε τη σύνδεση.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Συμμετέχετε σε τηλεδιασκέψεις και παρουσιάζετε από το OciDeck με δική σας διεπαφή: οι συμμετέχοντες δίπλα στη διαφάνειά σας, όχι στο παράθυρο άλλης εφαρμογής. Bring-your-own-server (Jitsi)· το OciDeck δεν φιλοξενεί τίποτα και κρατά τα δεδομένα κλήσεων εκτός AI. Η ίδια η συμμετοχή έρχεται σε επόμενη έκδοση· ο έλεγχος συνδέσμου και ο προέλεγχος υπάρχουν ήδη.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Ελέγξτε αν ένας σύνδεσμος σύσκεψης Jitsi είναι προσβάσιμος και τι επιτρέπει ο διακομιστής, πριν συμμετάσχετε. Δεν γίνεται ακόμη συμμετοχή.',
   'Systeemgeluid opnemen…': 'Εγγραφή ήχου συστήματος…',
   'Systeemgeluid opnemen': 'Εγγραφή ήχου συστήματος',
   'Tabgeluid opnemen…': 'Εγγραφή ήχου καρτέλας…',
@@ -5200,8 +5209,6 @@ const _dutchSourceAddEl = <String, String>{
       'Εργαλεία για βελτίωση διαδικασιών (SIPOC, DMAIC, Kaizen και A3). Απενεργοποιημένα από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τα σχετικά πρότυπα και τις διατάξεις διαφανειών.',
   'Videovergaderingen': 'Βιντεοσυσκέψεις',
   'Videovergadering': 'Βιντεοσύσκεψη',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Δεν υπάρχει ακόμη ενεργή σύσκεψη. Η σύνδεση με μια υπηρεσία συσκέψεων θα προστεθεί σε μελλοντική έκδοση.',
   'Dempen opheffen': 'Κατάργηση σίγασης',
   'Dempen': 'Σίγαση',
   'Camera aan': 'Ενεργοποίηση κάμερας',

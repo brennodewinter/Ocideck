@@ -1598,6 +1598,19 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nog geen actieve vergadering.': 'Aktiivset koosolekut veel ei ole.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Liitumiseks kleepige Jitsi koosoleku link.',
+  'Deelnemen aan een vergadering…': 'Liitu koosolekuga…',
+  'Opnieuw verbinden…': 'Ühenduse taastamine…',
+  'De vergadering is beëindigd.': 'Koosolek on lõppenud.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Osalete juba koosolekul; kui liitute nüüd, lahkutakse sellest.',
+  'Vergaderlink openen': 'Ava koosoleku link',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Kleepige Jitsi koosoleku link; OciDeck kontrollib serverit ja liitub teie kinnituse järel.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Osalege videokoosolekutel ja esitage OciDeckist oma liidesega: osalejad teie slaidi kõrval, mitte teise rakenduse aknas. Bring-your-own-server (Jitsi); OciDeck ei võõrusta midagi ja hoiab kõneandmed tehisintellektist eemal.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Teie mikrofon või kaamera kadus; lülitage allikas uuesti sisse, kui see tagasi tuleb.',
   'Media is niet end-to-end versleuteld.':
@@ -1662,10 +1675,6 @@ const _dutchSourceAddEt = <String, String>{
       'See server ei paku koosolekuvormi, mida OciDeck toetab.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Server ei ole kättesaadav või keeldus ühendusest.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Liitu videokooseolekutega ja esitle OciDeckist oma liidesega: osalejad sinu slaidi kõrval, mitte teise rakenduse aknas. Bring-your-own-server (Jitsi); OciDeck ei hosti midagi ja hoiab kõneandmed tehisintellektist eemal. Ise liitumine tuleb järgmises versioonis; lingikontroll ja eelkontroll on juba olemas.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Kontrolli, kas Jitsi-koosoleku link on kättesaadav ja mida server lubab, enne kui liitud. Veel ei liituta.',
   'Systeemgeluid opnemen…': 'Salvesta süsteemiheli…',
   'Systeemgeluid opnemen': 'Salvesta süsteemiheli',
   'Tabgeluid opnemen…': 'Salvesta vahekaardi heli…',
@@ -5100,8 +5109,6 @@ const _dutchSourceAddEt = <String, String>{
       'Protsesside parendamise tööriistad (SIPOC, DMAIC, Kaizen ja A3). Vaikimisi välja lülitatud; seotud mallide ja slaidipaigutuste kasutamiseks lubage laiendus.',
   'Videovergaderingen': 'Videokoosolekud',
   'Videovergadering': 'Videokoosolek',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Aktiivset koosolekut veel pole. Ühendus koosolekuteenusega lisatakse tulevases versioonis.',
   'Dempen opheffen': 'Eemalda vaigistus',
   'Dempen': 'Vaigista',
   'Camera aan': 'Kaamera sisse',

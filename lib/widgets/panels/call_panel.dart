@@ -3,12 +3,14 @@
 // participant tiles and capability-driven controls — and never learns which
 // backend produced it. A Jitsi or (later) MatrixRTC session looks identical here.
 //
-// With no active session the panel shows a plain placeholder; a live session
-// (#2534, adopted into `meetingSessionProvider` by the preflight dialog) fills
-// the tiles and controls for real. A participant with a video track renders
-// it through `session.videoSurfaceFor` as a Flutter texture (#2535); a
-// participant without one keeps the labelled placeholder — never a fake
-// frame.
+// With no active session the panel offers the real join route (#2536): the
+// link-check/preflight/join dialog whose *Deelnemen* button adopts the session
+// into `meetingSessionProvider` (root-scoped, survives a deck-tab switch). A
+// participant with a video track renders it through `session.videoSurfaceFor`
+// as a Flutter texture (#2535); a participant without one keeps the labelled
+// placeholder — never a fake frame. The connection lifecycle is shown too:
+// (re)connecting as a status line, a terminal end as an ended-state the user
+// dismisses — a call never silently keeps running or silently disappears.
 
 import 'dart:async';
 
@@ -23,6 +25,7 @@ import '../../meetings/meeting_participant.dart';
 import '../../meetings/meeting_provider.dart';
 import '../../state/meeting_session_provider.dart';
 import '../../theme/app_theme.dart';
+import '../dialogs/meeting_preflight_dialog.dart';
 
 /// The call rail for the workspace row: a divider plus the panel while the module
 /// is revealed, otherwise nothing. Kept out of the shell so
@@ -67,6 +70,8 @@ class CallPanel extends ConsumerWidget {
   }
 }
 
+/// Geen actieve call: niet alleen een mededeling maar de echte ingang — de
+/// knop opent de linkcontrole/preflight/join-flow (#2536).
 class _CallPlaceholder extends StatelessWidget {
   const _CallPlaceholder({required this.l10n});
 
@@ -75,49 +80,238 @@ class _CallPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        l10n.d(
-          'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.',
-        ),
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 12, color: AppTheme.slate500),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            l10n.d('Nog geen actieve vergadering.'),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 12, color: AppTheme.slate500),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            l10n.d('Plak een Jitsi-vergaderlink om deel te nemen.'),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+          ),
+          const SizedBox(height: 10),
+          FilledButton.icon(
+            icon: const Icon(Icons.video_camera_front_outlined, size: 16),
+            label: Text(l10n.d('Deelnemen aan een vergadering…')),
+            onPressed: () => showDialog<void>(
+              context: context,
+              builder: (_) => const MeetingPreflightDialog(),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _ActiveCall extends ConsumerWidget {
+/// De actieve call. Stateful met een eigen event-subscriptie (niet
+/// StreamBuilder): een [MeetingErrorEvent] moet BLIJVEN staan tot de sessie het
+/// oplost of eindigt — laatste-event-rendering zou een fout verbergen zodra er
+/// óók maar één roster-update overheen komt (#2536).
+class _ActiveCall extends ConsumerStatefulWidget {
   const _ActiveCall({required this.session});
 
   final MeetingSession session;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // Rebuild on every session event, reading a fresh snapshot each time — the
-    // session object is stable across a call, so watching the provider alone
-    // would miss joins/mutes/role changes.
-    return StreamBuilder<MeetingEvent>(
-      stream: session.events,
-      builder: (context, _) {
-        final participants = session.participants;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+  ConsumerState<_ActiveCall> createState() => _ActiveCallState();
+}
+
+class _ActiveCallState extends ConsumerState<_ActiveCall> {
+  StreamSubscription<MeetingEvent>? _sub;
+  MeetingErrorEvent? _error;
+
+  MeetingSession get session => widget.session;
+
+  @override
+  void initState() {
+    super.initState();
+    _sub = session.events.listen(_onEvent);
+  }
+
+  void _onEvent(MeetingEvent event) {
+    if (event is MeetingErrorEvent) _error = event;
+    setState(() {});
+  }
+
+  @override
+  void didUpdateWidget(covariant _ActiveCall oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Een verse adopt() levert een andere sessie in dezelfde widgetplek —
+    // zonder hersubscribe luistert deze state naar de dode sessie.
+    if (!identical(oldWidget.session, widget.session)) {
+      unawaited(_sub?.cancel());
+      _error = null;
+      _sub = widget.session.events.listen(_onEvent);
+    }
+  }
+
+  @override
+  void dispose() {
+    unawaited(_sub?.cancel());
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final state = session.connectionState;
+    final ended =
+        state == MeetingConnectionState.disconnected ||
+        state == MeetingConnectionState.failed;
+    final participants = session.participants;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (!ended &&
+            (state == MeetingConnectionState.connecting ||
+                state == MeetingConnectionState.reconnecting))
+          _ConnectionStatusLine(l10n: l10n, state: state),
+        if (ended)
+          Expanded(
+            child: _EndedCall(l10n: l10n, error: _error),
+          )
+        else
+          Expanded(
+            child: ListView.separated(
+              itemCount: participants.length,
+              separatorBuilder: (_, _) => const SizedBox(height: 6),
+              itemBuilder: (_, i) =>
+                  _ParticipantTile(participants[i], session: session),
+            ),
+          ),
+        if (!ended && _error != null) _ErrorLine(message: _error!.message),
+        if (!ended) ...[
+          const SizedBox(height: 6),
+          _MediaStatusLine(session: session),
+        ],
+        const SizedBox(height: 8),
+        ended ? const _DismissEndedCall() : _CallControls(session: session),
+      ],
+    );
+  }
+}
+
+/// De verbindingsstand als statusregel — liveRegion zodat een schermlezer een
+/// wissel (bijv. opnieuw verbinden na een hik) aankondigt zonder focus.
+class _ConnectionStatusLine extends StatelessWidget {
+  const _ConnectionStatusLine({required this.l10n, required this.state});
+
+  final AppLocalizations l10n;
+  final MeetingConnectionState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      liveRegion: true,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: Row(
           children: [
-            Expanded(
-              child: ListView.separated(
-                itemCount: participants.length,
-                separatorBuilder: (_, _) => const SizedBox(height: 6),
-                itemBuilder: (_, i) =>
-                    _ParticipantTile(participants[i], session: session),
+            SizedBox(
+              width: 14,
+              height: 14,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: AppTheme.slate500,
               ),
             ),
-            const SizedBox(height: 6),
-            _MediaStatusLine(session: session),
-            const SizedBox(height: 8),
-            _CallControls(session: session),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                state == MeetingConnectionState.connecting
+                    ? l10n.d('Verbinden…')
+                    : l10n.d('Opnieuw verbinden…'),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+              ),
+            ),
           ],
-        );
-      },
+        ),
+      ),
+    );
+  }
+}
+
+/// De eindstand van een call: de remote hing op, de media stierf of de
+/// verbinding viel — zichtbaar tot de gebruiker hem wegklikt (#2536). De
+/// sessie is intern al afgebroken (leave() is idempotent); Sluiten ruimt de
+/// provider op en keert terug naar de placeholder.
+class _EndedCall extends StatelessWidget {
+  const _EndedCall({required this.l10n, required this.error});
+
+  final AppLocalizations l10n;
+  final MeetingErrorEvent? error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Semantics(
+        liveRegion: true,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.call_end_outlined, size: 18, color: AppTheme.dangerFg),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                error?.message ?? l10n.d('De vergadering is beëindigd.'),
+                style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Een niet-terminale fout (bijv. een weggevallen microfoon): blijft staan tot
+/// de sessie eindigt — stille fouten zijn hier een ontwerpfout.
+class _ErrorLine extends StatelessWidget {
+  const _ErrorLine({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.error_outline, size: 16, color: AppTheme.amber600),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              message,
+              style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// De enige actie op een beëindigde call: wegklikken. De notifier-leave is
+/// idempotent — de sessie zelf is al afgebroken.
+class _DismissEndedCall extends ConsumerWidget {
+  const _DismissEndedCall();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Center(
+      child: FilledButton.tonalIcon(
+        icon: const Icon(Icons.call_end_outlined, size: 16),
+        label: Text(context.l10n.d('Sluiten')),
+        onPressed: () => ref.read(meetingSessionProvider.notifier).leave(),
+      ),
     );
   }
 }

@@ -197,6 +197,7 @@ import 'shell/presentation_import_action.dart';
 import 'shell/transcribe_file_action.dart';
 import 'shell/record_microphone_action.dart';
 import 'shell/record_system_action.dart';
+import 'shell/meeting_lifecycle.dart';
 import 'shell/recording_lifecycle.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
@@ -522,8 +523,9 @@ class _AppShellState extends ConsumerState<AppShell> {
     for (final session in sessions) {
       await ref.read(ociServeProvider.notifier).closeLessonSession(session);
     }
-    // Lopende opname stoppen vóór de native quit — zie stopRecordingBeforeQuit.
+    // Opname en call stoppen vóór de native quit — zie de lifecycle-helpers.
     await stopRecordingBeforeQuit(ref);
+    await leaveMeetingBeforeQuit(ref);
     if (mounted) await settleUiBeforeNativeQuit(context);
     await quitApp();
   }

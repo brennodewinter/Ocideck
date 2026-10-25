@@ -17,6 +17,7 @@ import 'package:ocideck/meetings/meeting_participant.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 import 'package:ocideck/meetings/meeting_provider_profile.dart';
 import 'package:ocideck/meetings/providers/jitsi/jitsi_meeting_provider.dart';
+import 'package:ocideck/state/meeting_session_provider.dart';
 import 'package:ocideck/widgets/dialogs/meeting_preflight_dialog.dart';
 
 Future<void> _pump(
@@ -199,6 +200,40 @@ void main() {
     expect(find.textContaining('inlogtoken'), findsOneWidget);
   });
 
+  testWidgets('joining while a call is live says it will leave that call', (
+    tester,
+  ) async {
+    // Een bestaande sessie in de root-scoped provider: de adopt bij Deelnemen
+    // verlaat hem — dat moet de gebruiker vóóraf weten (#2536).
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    container.read(meetingSessionProvider.notifier).adopt(const _FakeSession());
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          locale: const Locale('nl'),
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+          ],
+          home: Scaffold(
+            body: MeetingPreflightDialog(
+              resolver: _resolver(),
+              preflight: (m) async => _ok(),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await _typeLink(tester, 'https://meet.jit.si/standup');
+    await tester.tap(find.widgetWithText(FilledButton, 'Preflight uitvoeren'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('wordt verlaten'), findsOneWidget);
+  });
+
   testWidgets('a failed preflight shows the typed reason', (tester) async {
     await _pump(
       tester,
@@ -220,6 +255,7 @@ void main() {
 /// Minimale sessie voor de join-flow: het dialoog adopteert hem via de
 /// root-scoped provider en sluit. De provider zelf leest hem pas.
 class _FakeSession implements MeetingSession {
+  const _FakeSession();
   @override
   String get providerId => 'jitsi';
   @override

@@ -1635,6 +1635,19 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nog geen actieve vergadering.': 'Níl aon chruinniú gníomhach fós.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Greamaigh nasc cruinnithe Jitsi le páirt a ghlacadh.',
+  'Deelnemen aan een vergadering…': 'Páirt a ghlacadh i gcruinniú…',
+  'Opnieuw verbinden…': 'Ag athnascadh…',
+  'De vergadering is beëindigd.': 'Tá an cruinniú thart.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Tá tú ag glacadh páirte i gcruinniú cheana féin; fágfar é má ghlacann tú páirt anois.',
+  'Vergaderlink openen': 'Oscail nasc cruinnithe',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Greamaigh nasc cruinnithe Jitsi; seiceálann OciDeck an freastalaí agus ghlacann sé páirt nuair a dhearbhaíonn tú.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Glac páirt i gcruinnithe físe agus cuir i láthair ó OciDeck lena chomhéadan féin: rannpháirtithe in aice le do shleamhnán, ní i bhfuinneog aipe eile. Bring-your-own-server (Jitsi); ní óstálann OciDeck aon rud agus coinníonn sé sonraí glaonna lasmuigh d’AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Chuaigh do mhicreafón nó do cheamara ar iarraidh; cas an foinse ar ais nuair a fhaigheann tú ar ais é.',
   'Media is niet end-to-end versleuteld.':
@@ -1700,10 +1713,6 @@ const _dutchSourceAddGa = <String, String>{
       'Ní sholáthraíonn an freastalaí seo aon fhoirm chruinnithe a dtacaíonn OciDeck léi.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Níl an freastalaí sroichte nó dhiúltaigh sé an nasc.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Glac páirt i bhfíschruinnithe agus cuir i láthair ó OciDeck le d\'chomhéadan féin: rannpháirtithe in aice le do shleamhnán, ní i bhfuinneog aipe eile. Bring-your-own-server (Jitsi); ní óstálann OciDeck aon rud agus coinníonn sé sonraí na nglaonna lasmuigh den AI. Tiocfaidh an rannpháirtíocht féin i leagan eile; tá an tseiceáil nasc agus an réamhsheiceáil ann cheana.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Seiceáil an bhfuil nasc chruinnithe Jitsi sroichte agus céard a cheadaíonn an freastalaí, sula nglacfaidh tú páirt. Ní ghlactar páirt go fóil.',
   'Systeemgeluid opnemen…': 'Fuaim an chórais a thaifeadadh…',
   'Systeemgeluid opnemen': 'Fuaim an chórais a thaifeadadh',
   'Tabgeluid opnemen…': 'Fuaim na cluaisíne a thaifeadadh…',
@@ -5193,8 +5202,6 @@ const _dutchSourceAddGa = <String, String>{
       'Uirlisí le haghaidh feabhsú próiseas (SIPOC, DMAIC, Kaizen agus A3). Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na teimpléid agus leaganacha amach sleamhnán gaolmhara a úsáid.',
   'Videovergaderingen': 'Físchruinnithe',
   'Videovergadering': 'Físchruinniú',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Níl aon chruinniú gníomhach ann fós. Cuirfear an nasc le seirbhís chruinnithe leis i leagan sa todhchaí.',
   'Dempen opheffen': 'Dí-bhalbhaigh',
   'Dempen': 'Balbhaigh',
   'Camera aan': 'Ceamara ar siúl',

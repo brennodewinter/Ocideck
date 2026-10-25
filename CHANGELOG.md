@@ -160,6 +160,19 @@ All notable changes to OciDeck are documented in this file.
   UDP aan de host — daarvoor staat nu een vastgelijmd UDP↔TCP-relais in de
   testomgeving. Scherm delen meldt nog steeds eerlijk dat het er niet is.
 
+- **De echte joinroute en de levenscyclus van een call (#2536).** Het
+  callpaneel bood eerst alleen een belofte dat deelnemen later zou komen;
+  nu staat daar **Deelnemen aan een vergadering…** die de echte
+  link-controle-op-de-server-route opent. Tijdens de call toont het paneel
+  wat er gebeurt: verbinden, opnieuw verbinden, een fout die naast de live
+  call blijft staan, en een einde met een eigen Sluiten-knop. Verder is de
+  levenscyclus deterministisch gemaakt: een tweede join terwijl een call
+  loopt verlaat die call eerst (en zegt dat vooraf), afsluiten van OciDeck
+  verlaat de call netjes in plaats van je als spook-deelnemer in de kamer
+  achter te laten, en een call die eindigt blijft leesbaar tot je hem zelf
+  wegklikt — nooit een onzichtbare call. De modulekaart zegt niet langer
+  dat deelnemen "nog niet" kan.
+
 ### Fixed
 
 - **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende

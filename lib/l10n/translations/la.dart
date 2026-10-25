@@ -1620,6 +1620,19 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nog geen actieve vergadering.': 'Nullus conventus actuosus adhuc.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Glutina nexum conventus Jitsi ut participes.',
+  'Deelnemen aan een vergadering…': 'Conventui adhibere…',
+  'Opnieuw verbinden…': 'Rursus conectens…',
+  'De vergadering is beëindigd.': 'Conventus finitus est.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Iam conventui ades; ille relinquetur si nunc adhibueris.',
+  'Vergaderlink openen': 'Nexum conventus aperire',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Glutina nexum conventus Jitsi; OciDeck servatorem probat et participat ubi confirmaveris.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Conventibus video adhibere et ex OciDeck praesentare propria interface: participes iuxta imaginem tuam, non in fenestra alterius applicationis. Bring-your-own-server (Jitsi); OciDeck nihil hospitat et data colloquiorum extra AI tenet.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Microphonum aut machina photographemata tua evanuit; fontem denuo accende cum redierit.',
   'Media is niet end-to-end versleuteld.':
@@ -1684,10 +1697,6 @@ const _dutchSourceAddLa = <String, String>{
       'Seruitor hic nullam formam coetūs offert quam OciDeck adiuvat.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Seruitor attingi non potest aut iunctionem recusauit.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Particeps esto conuentibus uideonicis et praesenta ex OciDeck interficie propria: participes iuxta imaginem tuam, non in fenestra alterius applicationis. Bring-your-own-server (Jitsi); OciDeck nihil hospitatur et data conloquiorum extra AI tenet. Participatio ipsa in uersione proxima ueniet; probatio nexi et uolatio praeuolans iam adsunt.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Proba num nexus coetūs Jitsi attingi possit et quid seruitor permittat, ante quam particeps fias. Participatio nondum fit.',
   'Systeemgeluid opnemen…': 'Sonum systematis excipere…',
   'Systeemgeluid opnemen': 'Sonum systematis excipere',
   'Tabgeluid opnemen…': 'Sonum schedae excipere…',
@@ -5135,8 +5144,6 @@ const _dutchSourceAddLa = <String, String>{
       'Instrumenta ad emendationem processuum (SIPOC, DMAIC, Kaizen et A3). Ex praedefinito inactiva; extensionem activa ut exemplaribus et dispositionibus diapositivarum adiunctis utaris.',
   'Videovergaderingen': 'Conventus visifici',
   'Videovergadering': 'Conventus visificus',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Nullus conventus adhuc actuosus. Coniunctio ad servitium conventuum in versione posteriore addetur.',
   'Dempen opheffen': 'Sonum reddere',
   'Dempen': 'Sonum supprimere',
   'Camera aan': 'Camera accensa',

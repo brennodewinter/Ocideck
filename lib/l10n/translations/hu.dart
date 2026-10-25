@@ -1607,6 +1607,19 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nog geen actieve vergadering.': 'Még nincs aktív megbeszélés.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Illesszen be egy Jitsi-értekezlethivatkozást a csatlakozáshoz.',
+  'Deelnemen aan een vergadering…': 'Csatlakozás megbeszéléshez…',
+  'Opnieuw verbinden…': 'Újrakapcsolódás…',
+  'De vergadering is beëindigd.': 'A megbeszélés véget ért.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Már részt vesz egy megbeszélésen; az elhagyásra kerül, ha most csatlakozik.',
+  'Vergaderlink openen': 'Értekezlethivatkozás megnyitása',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Illesszen be egy Jitsi-értekezlethivatkozást; az OciDeck ellenőrzi a kiszolgálót, és jóváhagyása után csatlakozik.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Vegyen részt videómegbeszéléseken és prezentáljon az OciDeckből a saját felületén: a résztvevők a diája mellett, nem egy másik alkalmazás ablakában. Bring-your-own-server (Jitsi); az OciDeck semmit nem üzemeltet, és a beszélgetésadatokat távol tartja a mesterséges intelligenciától.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'A mikrofonja vagy a kamerája eltűnt; kapcsolja vissza a forrást, amint visszatér.',
   'Media is niet end-to-end versleuteld.':
@@ -1671,10 +1684,6 @@ const _dutchSourceAddHu = <String, String>{
       'Ez a kiszolgáló nem kínál olyan értekezlet-formát, amelyet az OciDeck támogat.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'A kiszolgáló nem érhető el, vagy elutasította a kapcsolatot.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Csatlakozzon videoértekezletekhez, és mutasson be az OciDeckből saját felülettel: a résztvevők a diája mellett, nem egy másik alkalmazás ablakában. Bring-your-own-server (Jitsi); az OciDeck semmit sem üzemeltet, és a beszélgetésadatokat távol tartja az AI-tól. Maga a csatlakozás a következő verzióban érkezik; a hivatkozás-ellenőrzés és az előzetes ellenőrzés már megvan.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Ellenőrizze, hogy elérhető-e egy Jitsi-értekezlet hivatkozása, és mit enged a kiszolgáló, mielőtt csatlakozna. Csatlakozás még nem történik.',
   'Systeemgeluid opnemen…': 'Rendszerhang felvétele…',
   'Systeemgeluid opnemen': 'Rendszerhang felvétele',
   'Tabgeluid opnemen…': 'Lap hangjának felvétele…',
@@ -5129,8 +5138,6 @@ const _dutchSourceAddHu = <String, String>{
       'Eszközök folyamatfejlesztéshez (SIPOC, DMAIC, Kaizen és A3). Alapértelmezés szerint ki vannak kapcsolva; a kapcsolódó sablonok és diaelrendezések használatához engedélyezze a bővítményt.',
   'Videovergaderingen': 'Videokonferenciák',
   'Videovergadering': 'Videokonferencia',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Még nincs aktív megbeszélés. A megbeszélési szolgáltatáshoz való csatlakozás egy későbbi verzióban lesz elérhető.',
   'Dempen opheffen': 'Némítás feloldása',
   'Dempen': 'Némítás',
   'Camera aan': 'Kamera be',

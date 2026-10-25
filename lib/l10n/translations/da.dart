@@ -1605,6 +1605,19 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nog geen actieve vergadering.': 'Der er endnu ikke noget aktivt møde.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Indsæt et Jitsi-mødelink for at deltage.',
+  'Deelnemen aan een vergadering…': 'Deltag i et møde…',
+  'Opnieuw verbinden…': 'Forbinder igen…',
+  'De vergadering is beëindigd.': 'Mødet er afsluttet.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Du deltager allerede i et møde; det forlades, hvis du deltager nu.',
+  'Vergaderlink openen': 'Åbn mødelink',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Indsæt et Jitsi-mødelink; OciDeck kontrollerer serveren og deltager, når du bekræfter.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Deltag i videomøder og præsentér fra OciDeck med dens egen grænseflade: deltagerne ved siden af din slide, ikke i en anden apps vindue. Bring-your-own-server (Jitsi); OciDeck hoster intet og holder opkaldets data uden for AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Din mikrofon eller dit kamera forsvandt; slå kilden til igen, når den er tilbage.',
   'Media is niet end-to-end versleuteld.':
@@ -1669,10 +1682,6 @@ const _dutchSourceAddDa = <String, String>{
       'Denne server tilbyder ingen mødeform, som OciDeck understøtter.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Serveren kan ikke nås eller afviste forbindelsen.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Deltag i videomøder og præsentér fra OciDeck med din egen grænseflade: deltagere ved siden af dit slide, ikke i en anden apps vindue. Bring-your-own-server (Jitsi); OciDeck hoster intet og holder samtaledata uden for AI. Selve deltagelsen kommer i en næste version; linkkontrollen og preflight er der allerede.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Kontrollér om et Jitsi-mødelink kan nås, og hvad serveren tillader, før du deltager. Der deltages endnu ikke.',
   'Systeemgeluid opnemen…': 'Optag systemlyd…',
   'Systeemgeluid opnemen': 'Optag systemlyd',
   'Tabgeluid opnemen…': 'Optag fanebladets lyd…',
@@ -5110,8 +5119,6 @@ const _dutchSourceAddDa = <String, String>{
       'Værktøjer til procesforbedring (SIPOC, DMAIC, Kaizen og A3). Slået fra som standard; aktivér udvidelsen for at bruge de tilhørende skabeloner og diaslayouts.',
   'Videovergaderingen': 'Videomøder',
   'Videovergadering': 'Videomøde',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Der er endnu ikke noget aktivt møde. Forbindelsen til en mødetjeneste tilføjes i en fremtidig version.',
   'Dempen opheffen': 'Slå lyd til',
   'Dempen': 'Slå lyd fra',
   'Camera aan': 'Kamera til',

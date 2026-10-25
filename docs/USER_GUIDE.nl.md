@@ -40,6 +40,7 @@
 - [Documenten](#documenten)
 - [Markdown-modus](#markdown-modus)
 - [Transcriptie en opname](#transcriptie-en-opname)
+- [Videovergaderingen (Jitsi)](#videovergaderingen-jitsi)
 - [Wat de browserversie niet kan](#wat-de-browserversie-niet-kan)
 - [Thema's en taal](#themas-en-taal)
 
@@ -6625,6 +6626,40 @@ nadat je stopt. Ingebouwd, USB en Bluetooth, en systeemgeluid, op macOS,
 Windows en Linux is de bedoelde route; deze tekst beweert niet dat elk
 daarvan hier op hardware bewezen is.
 
+## Videovergaderingen (Jitsi)
+
+De module staat uit tot je **Videovergaderingen** aanzet onder
+*Instellingen → Uitbreidingen*. OciDeck draait zelf geen vergaderdienst —
+jij brengt de Jitsi-server, en er wordt niets benaderd voordat je daarom
+vraagt.
+
+Plak een vergaderlink op de modulekaart, of gebruik **Deelnemen aan een
+vergadering…** in de call-rail. De link herkennen gebeurt alleen op je
+eigen apparaat. De controleknop is het eerste netwerkcontact en vraagt
+het eerst: hij haalt de configuratie van de server op en rapporteert wat
+die server biedt — of deelnemen kan, welke mogelijkheden er zijn en waar
+het mediaverkeer heen zou gaan — voordat er iets joint. Een intern
+serveradres vraagt de expliciete bevestiging *vertrouwde interne server*.
+
+Zegt de controle dat de kamer betreden kan worden, dan opent **Deelnemen**
+de call. De call-rail toont de deelnemers en hun beeld, benoemt de
+verbindingsstand (verbinden, opnieuw verbinden, mislukt) en biedt dempen,
+camera en verlaten alleen voor wat de server echt toelaat. Een tweede link
+deelnemen terwijl een call loopt zegt eerst dat de lopende call verlaten
+wordt — twee calls overlappen nooit — en afsluiten van OciDeck verlaat de
+call netjes in plaats van je als spookdeelnemer in de kamer achter te
+laten. De module uitzetten verstopt een lopende call ook niet: de rail
+blijft zichtbaar tot je hem verlaat.
+
+Deelnemen start nooit een opname of transcriptie — dat zijn aparte,
+altijd expliciete acties. Scherm delen wordt nog niet aangeboden.
+Media-versleuteling wordt als feit gerapporteerd, niet als belofte: het
+paneel toont de geverifieerde status van de call en de echte
+uitgaansadressen, en claimt geen end-to-end-versleuteling waar die niet
+bewezen is. De browserversie weigert het deelnemen — een browsertabblad
+kan de vastgelijmde serveridentiteit niet bewijzen die de desktop-app
+verifieert — dus bellen is vandaag desktop-only.
+
 ## Wat de browserversie niet kan
 
 OciDeck draait ook volledig binnen een browsertabblad, zonder applicatiebackend
@@ -6656,6 +6691,7 @@ voordat je het deck van een klant erop opent. Dezelfde bundle zelf hosten is
 | Een deck importeren vanuit een URL | **Werkt**, door dezelfde beveiligingspoort als op desktop. |
 | OpenKAT-rapporten importeren | Zichtbaar op Integraties maar **uitgeschakeld** — map-import en servertokens hebben desktop nodig (sleutelhanger en lokale mappen). |
 | Opnemen vanaf de microfoon | **Werkt** voor de microfoon in de kamer, en voor het geluid van een tabblad waar Chromium dat kan delen. Het bestand blijft in het tabblad (`mem:`) tot je het bewaart; herladen is het kwijt. Firefox en Safari delen geen tabgeluid. |
+| Deelnemen aan een Jitsi-vergadering | Afwezig. De linkcontrole faalt dicht: een browsertabblad kan de vastgelijmde serveridentiteit niet bewijzen die de desktop-join verifieert — de weigering is dus bewust, geen ontbrekende knop. |
 | **Één** PowerPoint-, Keynote- of Impress-bestand importeren | **Werkt**. De conversie draait op de bytes die je koos en het resultaat opent in een tabblad. |
 | **Meerdere** presentaties tegelijk importeren | Afwezig. De wachtrij schrijft elk geconverteerd deck als een bestand naar een map die je kiest, en de browser heeft geen map om te kiezen. Het dialoog zegt dat in plaats van een knop aan te bieden die niet kan werken. |
 | Exporteren, verzegelen, versleutelde packages | **Werkt**, geleverd als downloads. Een export die uit meer dan één bestand bestaat (een geredigeerd rapport met zijn manifest, een sessie met een bestand per dia) komt aan als één ZIP, omdat een browser de tweede automatische download op rij tegenhoudt. En de bewoording is met opzet anders: de webversie zegt *aangeboden als download* in plaats van *geëxporteerd naar*, omdat een pagina niet kan zien of het bestand werkelijk in je downloadmap terechtkwam. |

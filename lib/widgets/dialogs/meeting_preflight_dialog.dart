@@ -240,6 +240,25 @@ class _MeetingPreflightDialogState
               const SizedBox(height: 14),
               _PreflightView(l10n: l10n, preflight: _preflight!),
             ],
+            if (ref.watch(meetingSessionProvider) != null &&
+                (_preflight?.canJoin ?? false)) ...[
+              const SizedBox(height: 14),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.info_outline, size: 18, color: AppTheme.slate600),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      l10n.d(
+                        'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.',
+                      ),
+                      style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+                    ),
+                  ),
+                ],
+              ),
+            ],
             if (_joinError != null) ...[
               const SizedBox(height: 14),
               Row(

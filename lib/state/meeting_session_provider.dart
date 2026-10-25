@@ -12,6 +12,8 @@
 // preflight dialog's *Deelnemen* button adopts the joined session here, and the
 // call panel renders it. The null-state is simply "no call active".
 
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -91,8 +93,18 @@ class MeetingSessionNotifier extends Notifier<MeetingSession?> {
   @override
   MeetingSession? build() => null;
 
-  /// Adopt a freshly joined session as the app's active call.
-  void adopt(MeetingSession session) => state = session;
+  /// Adopt a freshly joined session as the app's active call. A call that was
+  /// already live is left first — OciDeck runs at most one meeting, and an
+  /// adopted-away session must not keep its XMPP/MUC connection hanging
+  /// (#2536). The old session's leave runs unawaited: it is idempotent
+  /// teardown, not something the new call waits on.
+  void adopt(MeetingSession session) {
+    final previous = state;
+    state = session;
+    if (previous != null && !identical(previous, session)) {
+      unawaited(previous.leave());
+    }
+  }
 
   /// Leave the active call, if any, and clear it.
   Future<void> leave() async {

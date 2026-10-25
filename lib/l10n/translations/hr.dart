@@ -1609,6 +1609,19 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nog geen actieve vergadering.': 'Još nema aktivnog sastanka.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Zalijepite Jitsi poveznicu sastanka za sudjelovanje.',
+  'Deelnemen aan een vergadering…': 'Pridružite se sastanku…',
+  'Opnieuw verbinden…': 'Ponovno povezivanje…',
+  'De vergadering is beëindigd.': 'Sastanak je završio.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Već sudjelujete na sastanku; on će biti napušten ako se sada pridružite.',
+  'Vergaderlink openen': 'Otvori poveznicu sastanka',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Zalijepite Jitsi poveznicu sastanka; OciDeck provjerava poslužitelj i pridružuje se nakon vaše potvrde.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Sudjelujte u video sastancima i prezentirajte iz OciDecka vlastitim sučeljem: sudionici uz vaš slajd, a ne u prozoru druge aplikacije. Bring-your-own-server (Jitsi); OciDeck ništa ne hosta i drži podatke poziva izvan umjetne inteligencije.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Vaš mikrofon ili kamera je nestao; ponovno uključite izvor kad se vrati.',
   'Media is niet end-to-end versleuteld.':
@@ -1673,10 +1686,6 @@ const _dutchSourceAddHr = <String, String>{
       'Ovaj poslužitelj ne nudi oblik sastanka koji OciDeck podržava.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Poslužitelj je nedostupan ili je odbio vezu.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Pridružujte se videosastancima i prezentirajte iz OciDeck vlastitim sučeljem: sudionici pokraj vašeg slajda, a ne u prozoru druge aplikacije. Bring-your-own-server (Jitsi); OciDeck ništa ne hostira i drži podatke poziva izvan UI. Samo pridruživanje stiže u sljedećoj verziji; provjera poveznice i prethodna provjera već postoje.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Provjerite je li poveznica Jitsi sastanka dostupna i što poslužitelj dopušta, prije nego što se pridružite. Pridruživanje još nije moguće.',
   'Systeemgeluid opnemen…': 'Snimi zvuk sustava…',
   'Systeemgeluid opnemen': 'Snimi zvuk sustava',
   'Tabgeluid opnemen…': 'Snimi zvuk kartice…',
@@ -5115,8 +5124,6 @@ const _dutchSourceAddHr = <String, String>{
       'Alati za poboljšanje procesa (SIPOC, DMAIC, Kaizen i A3). Prema zadanim postavkama isključeni; uključite proširenje za korištenje povezanih predložaka i rasporeda slajdova.',
   'Videovergaderingen': 'Videosastanci',
   'Videovergadering': 'Videosastanak',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Još nema aktivnog sastanka. Povezivanje s uslugom za sastanke bit će dodano u budućoj verziji.',
   'Dempen opheffen': 'Uključi zvuk',
   'Dempen': 'Isključi zvuk',
   'Camera aan': 'Uključi kameru',

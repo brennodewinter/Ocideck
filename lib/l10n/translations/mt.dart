@@ -1623,6 +1623,19 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nog geen actieve vergadering.': 'Għad ma hemm l-ebda laqgħa attiva.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Waħħal link ta’ laqgħa Jitsi biex tissieħeb.',
+  'Deelnemen aan een vergadering…': 'Ingħaqad f’laqgħa…',
+  'Opnieuw verbinden…': 'Qed jerġa’ jgħaqqad…',
+  'De vergadering is beëindigd.': 'Il-laqgħa spiċċat.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Inti diġà qed tipparteċipa f’laqgħa; din titħalla jekk tissieħeb issa.',
+  'Vergaderlink openen': 'Iftaħ link tal-laqgħa',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Waħħal link ta’ laqgħa Jitsi; OciDeck jiċċekkja s-server u jissieħeb hekk kif tikkonferma.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Ħu sehem f’laqgħat bil-video u ppreżenta minn OciDeck b’interface tagħha stess: il-parteċipanti ħdejn is-slide tiegħek, mhux fit-tieqa ta’ app oħra. Bring-your-own-server (Jitsi); OciDeck ma tospita xejn u żżomm id-dejta tas-sejħiet barra mill-AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Il-mikrofonu jew il-kamera tiegħek sparixxa; ixgħel is-sors mill-ġdid meta jkun għandek mill-ġdid.',
   'Media is niet end-to-end versleuteld.':
@@ -1688,10 +1701,6 @@ const _dutchSourceAddMt = <String, String>{
       'Dan is-server ma joffri l-ebda forma ta\' laqgħa li OciDeck jappoġġja.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Is-server ma jistax jintlaħaq jew irrifjuta l-konnessjoni.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Ħu sehem f\'laqgħat bil-video u ppreżenta minn OciDeck b\'interface tiegħek stess: il-parteċipanti ħdejn is-slide tiegħek, mhux fit-tieqa ta\' app oħra. Bring-your-own-server (Jitsi); OciDeck ma jospitax xejn u iżomm id-dejta tal-telefonati barra mill-AI. Il-parteċipazzjoni nnifisha ġejja f\'versjoni oħra; il-kontroll tal-link u l-preflight diġà jeżistu.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Iċċekkja jekk link ta\' laqgħa Jitsi huwiex aċċessibbli u x\'jippermetti s-server, qabel ma tissieħeb. Għadu ma jiġi sseħħeb xejn.',
   'Systeemgeluid opnemen…': 'Irrekordja l-ħoss tas-sistema…',
   'Systeemgeluid opnemen': 'Irrekordja l-ħoss tas-sistema',
   'Tabgeluid opnemen…': 'Irrekordja l-ħoss tat-tab…',
@@ -5171,8 +5180,6 @@ const _dutchSourceAddMt = <String, String>{
       'Għodod għat-titjib tal-proċessi (SIPOC, DMAIC, Kaizen u A3). Mitfija b’mod awtomatiku; attiva l-estensjoni biex tuża l-mudelli u t-taqsimiet ta’ slides relatati.',
   'Videovergaderingen': 'Laqgħat bil-vidjo',
   'Videovergadering': 'Laqgħa bil-vidjo',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Għad m\'hemm l-ebda laqgħa attiva. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
   'Dempen opheffen': 'Neħħi s-silenzju',
   'Dempen': 'Silenzja',
   'Camera aan': 'Ixgħel il-kamera',
