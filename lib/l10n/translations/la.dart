@@ -1620,6 +1620,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Conventus sonum tuum transmittere non potuit — fontem iterum accendere tempta.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Conventus imaginem tuam transmittere non potuit — fontem iterum accendere tempta.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Participatio scrini non successit — fons recusatus est aut evanuit.',
   'De gedeelde bron viel weg; het delen is gestopt.':

@@ -36,6 +36,12 @@ final class JitsiLocalMedia {
   /// delen weg is (#2537).
   var shareLostInRenegotiate = false;
 
+  /// Media-kinds met een track maar nog géén geslaagde source-add — de
+  /// binding kende de verzend-ssrc toen nog niet (gemuteerde track, of ICE
+  /// stond nog niet live, #2541). [announcePendingSources] probeert opnieuw
+  /// zodra de sender daadwerkelijk pakketten stuurt.
+  final _unannounced = <String>{};
+
   /// De bronnen die dit platform aanbiedt om te delen — leeg waar de seam
   /// geen enumeratie heeft (de browser gebruikt zijn eigen kiezer).
   Future<List<MeetingScreenSource>> screenSources() async =>
@@ -91,6 +97,22 @@ final class JitsiLocalMedia {
       screenShareLabel = null;
       shareLostInRenegotiate = true;
     }
+    _unannounced.clear();
+  }
+
+  /// Bronnen opnieuw aankondigen waarvan de verzend-ssrc eerder onbekend
+  /// was (#2541: een gemuteerde of nog-niet-zendende track heeft op deze
+  /// binding nergens een ssrc). Wordt geprobeerd zodra ICE live staat en
+  /// bij elke bron die aangaat — dan kennen de stats hem wel.
+  Future<void> announcePendingSources() async {
+    for (final kind in List<String>.of(_unannounced)) {
+      await announceNewSource(
+        kind,
+        videoType: kind == 'video'
+            ? (screenTrackId != null ? 'desktop' : 'camera')
+            : null,
+      );
+    }
   }
 
   /// Mic/camera aan- of uitzetten — de eerste keer haalt dit de echte track
@@ -132,7 +154,10 @@ final class JitsiLocalMedia {
         }
       }
       if (kind == 'audio' || screenTrackId == null) {
-        await announceNewSource(kind);
+        await announceNewSource(
+          kind,
+          videoType: kind == 'video' ? 'camera' : null,
+        );
       }
     }
     if (trackId == null) return;
@@ -143,6 +168,10 @@ final class JitsiLocalMedia {
     }
     await media.setLocalTrackEnabled(trackId, enabled: enabled);
     await sendPresenceUpdate();
+    // Gaat een bron aan die nog nooit aangekondigd kon worden (geen ssrc
+    // toen hij nog niets zond), dan is dit het moment dat hij het wél kan
+    // (#2541).
+    if (enabled) await announcePendingSources();
     final local = _s._participants[_s._nick];
     if (local != null) {
       // De (net heracquireerde) tracks vers opbouwen: copyWith kan een
@@ -183,7 +212,7 @@ final class JitsiLocalMedia {
     videoTrackId = attached.trackId;
     if (announce) {
       videoSsrc = attached.ssrc;
-      await announceNewSource('video');
+      await announceNewSource('video', videoType: 'desktop');
     }
     // Presence zegt nu: -v0 bestaat, is niet gemuteerd, videoType 'desktop'.
     await sendPresenceUpdate();
@@ -284,23 +313,82 @@ final class JitsiLocalMedia {
     );
   }
 
-  /// Een bron aankondigen bij de focus, als de ssrc bekend is.
-  Future<void> announceNewSource(String kind) async {
+  /// Een bron aankondigen bij de focus. De ssrc leest de seam NU — meteen
+  /// na attach/replaceTrack kent de sender hem vaak nog niet (#2541: een
+  /// source-add die daardoor stilletjes niet uitging, liet de andere kant
+  /// ons nooit zien). Zonder bron na de begrensde lezing: een niet-
+  /// terminale melding, nooit een stille mislukking.
+  Future<void> announceNewSource(String kind, {String? videoType}) async {
     final initiate = _s._initiate;
-    final ssrc = kind == 'audio' ? audioSsrc : videoSsrc;
-    if (initiate == null || ssrc == null) return;
+    final media = _s._media;
+    if (initiate == null || media == null) return;
+    // Geen track = geen bron — de camera-uit-join meldt dus netjes niets.
+    final trackId = kind == 'audio' ? audioTrackId : videoTrackId;
+    if (trackId == null) return;
+    // Een gemuteerde bron zendt niets — op bindings die de ssrc pas bij
+    // het eerste pakket kennen is pollen dan zinloos; één lezing genoeg,
+    // de pending-herhaling doet de rest bij het aanzetten (#2541).
+    final enabled = kind == 'audio' ? micEnabled : camEnabled;
+    final source = await media.localSource(kind, singleAttempt: !enabled);
+    if (_s._left) return;
+    if (source == null || source.ssrcs.isEmpty) {
+      logWarning('JitsiLocalMedia.announceNewSource($kind): geen ssrc');
+      _unannounced.add(kind);
+      // Een gemuteerde bron zendt niets — zonder pakketten kent deze
+      // binding de verzend-ssrc nergens (#2541). Dat is geen fout maar
+      // uitstel: [announcePendingSources] probeert opnieuw zodra de bron
+      // echt zendt. Alleen een zéndende bron die zich niet meldt is een
+      // zichtbare mislukking.
+      final enabled = kind == 'audio' ? micEnabled : camEnabled;
+      if (enabled) {
+        _s._emit(
+          MeetingErrorEvent(
+            message: AppLocalizations.active.d(
+              kind == 'audio'
+                  ? 'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.'
+                  : 'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.',
+            ),
+          ),
+        );
+      }
+      return;
+    }
+    _unannounced.remove(kind);
+    if (kind == 'audio') {
+      audioSsrc = source.ssrcs.first;
+    } else {
+      videoSsrc = source.ssrcs.first;
+    }
+    final id = _s._nextIqId();
     _s._channel.sendStanza(
       jitsiSourceAnnounceIq(
         focusInRoom: _s._focusInRoom,
-        iqId: _s._nextIqId(),
+        iqId: id,
         sid: initiate.sid,
         initiator: initiate.initiator,
         sourceName: '${_s._nick}-${kind[0]}0',
-        ssrc: '$ssrc',
+        ssrcs: [for (final s in source.ssrcs) '$s'],
+        fidPairs: [for (final (m, r) in source.fidPairs) ('$m', '$r')],
+        msid: source.msid,
+        videoType: videoType,
       ),
     );
     // De ack is best-effort: de MUC reflecteert ons sowieso terug, en een
-    // verloren source-add herstelt via de volgende presence.
+    // verloren source-add herstelt via de volgende presence — maar een
+    // expliciete weigering van de focus is wél zichtbaar in logs.
+    unawaited(
+      _s
+          ._awaitIq(id, _s.initiateTimeout)
+          .then((reply) {
+            if (reply.type == 'error') {
+              logWarning(
+                'JitsiLocalMedia.announceNewSource($kind): focus weigerde',
+                jitsiStanzaErrorCondition(reply),
+              );
+            }
+          })
+          .onError((_, _) {}),
+    );
   }
 
   /// Een bron afmelden bij de focus — het spiegelbeeld van

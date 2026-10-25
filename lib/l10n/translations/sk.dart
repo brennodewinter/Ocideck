@@ -1611,6 +1611,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Stretnutie nedokázalo odoslať váš zvuk — skúste zdroj vypnúť a znova zapnúť.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Stretnutie nedokázalo odoslať váš obraz — skúste zdroj vypnúť a znova zapnúť.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Zdieľanie obrazovky sa nepodarilo — zdroj bol zamietnutý alebo zmizol.',
   'De gedeelde bron viel weg; het delen is gestopt.':

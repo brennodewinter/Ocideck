@@ -282,7 +282,7 @@ void main() {
         contentName: 'audio',
         media: 'audio',
         sourceName: 'nick1-a0',
-        ssrc: '42',
+        ssrcs: ['42'],
         msid: 'stream track',
       );
       expect(el.getAttribute('action'), 'source-add');
@@ -291,6 +291,29 @@ void main() {
       expect(xml, contains('nick1-a0'));
       expect(xml, contains('ssrc="42"'));
       expect(xml, contains('msid'));
+    });
+
+    // De echte wire (testbed-capture wire-camon, #2541): alle verzend-ssrc's
+    // elk als eigen <source> met naam+msid+videoType, FID-paren als
+    // ssrc-group.
+    test('buildSourceAdd: meerdere ssrcs + FID-groep + videoType', () {
+      final el = buildSourceAdd(
+        sid: 'sid1',
+        initiator: 'focus@auth.meet.jitsi/focus',
+        contentName: 'video',
+        media: 'video',
+        sourceName: 'nick1-v0',
+        ssrcs: ['10', '20'],
+        fidPairs: const [('10', '20')],
+        msid: 'ms tv',
+        videoType: 'desktop',
+      );
+      final xml = el.toXmlString();
+      expect(xml, contains('videoType="desktop"'));
+      expect(xml, contains('ssrc="10"'));
+      expect(xml, contains('ssrc="20"'));
+      expect(xml, contains('ssrc-group'));
+      expect(xml, contains('FID'));
     });
 
     test('buildSourceRemove: dezelfde source, actie remove, geen msid', () {

@@ -811,6 +811,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'The meeting could not send your audio — try turning the source off and on again.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'The meeting could not send your video — try turning the source off and on again.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Screen sharing failed — the source was denied or disappeared.',
   'De gedeelde bron viel weg; het delen is gestopt.':

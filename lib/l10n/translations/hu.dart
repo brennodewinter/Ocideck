@@ -1607,6 +1607,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'A megbeszélés nem tudta továbbítani a hangját — próbálja ki- és bekapcsolni a forrást.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'A megbeszélés nem tudta továbbítani a képét — próbálja ki- és bekapcsolni a forrást.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'A képernyőmegosztás nem sikerült — a forrást megtagadták vagy eltűnt.',
   'De gedeelde bron viel weg; het delen is gestopt.':

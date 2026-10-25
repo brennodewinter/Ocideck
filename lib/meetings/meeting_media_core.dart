@@ -24,6 +24,30 @@ import 'package:flutter/foundation.dart';
 import 'meeting_participant.dart' show MeetingTrack;
 import 'meeting_provider.dart' show MeetingE2eeStatus;
 
+/// Eén lokale verzend-bron zoals de adapter hem aan de focus meldt
+/// (#2541): de msid van de track op de sender, álle ssrc's die de sender
+/// werkelijk gebruikt (media én rtx) en de FID-paren daartussen. De echte
+/// wire (testbed-capture) toont per bron meerdere `<source>`-elementen
+/// plus `ssrc-group`s — een enkel kaal ssrc-veld is niet wat de focus
+/// consumeert.
+class MeetingLocalSource {
+  const MeetingLocalSource({
+    required this.msid,
+    required this.ssrcs,
+    this.fidPairs = const [],
+  });
+
+  /// `'<stream-id> <track-id>'` — de a=msid waarmee onze RTP zich
+  /// identificeert; de remote koppelt die aan de sourcenaam.
+  final String msid;
+
+  /// De media- én rtx-ssrc's van de sender, in encoding-volgorde.
+  final List<int> ssrcs;
+
+  /// `(media, rtx)`-paren voor `ssrc-group semantics='FID'`.
+  final List<(int, int)> fidPairs;
+}
+
 /// The known media-E2EE status for a platform, as a pure function — testable
 /// without any media stack. `flutter_webrtc`'s frame cryptor crashes on iOS and
 /// macOS (ketenkeuring Bevinding 6, flutter-webrtc#2135), so media E2EE is **off**
@@ -171,6 +195,19 @@ abstract interface class MeetingMediaConnection {
   /// Enable/disable a previously added local track (mute). The track keeps
   /// flowing; `enabled=false` is what jitsi's `muted` SourceInfo means.
   Future<void> setLocalTrackEnabled(String trackId, {required bool enabled});
+
+  /// De huidige verzend-bron van een richting (`'audio'`/`'video'`) zoals
+  /// de sender hem NU kent — voor de `source-add` bij de focus. Null zolang
+  /// er geen track of nog geen ssrc is: libwebrtc wijst de ssrc pas toe
+  /// zodra de track echt gaat zenden, dus meteen na `addLocal*` of
+  /// `replaceTrack` is hij vaak nog leeg — daarom is dit een aparte,
+  /// op-aankondigmoment lezing en géén veld op het attach-resultaat (#2541).
+  /// [singleAttempt]: één lezing zonder te pollen — voor een bron die
+  /// verder niets zendt (gemuteerd) is wachten op een ssrc zinloos.
+  Future<MeetingLocalSource?> localSource(
+    String kind, {
+    bool singleAttempt = false,
+  });
 
   /// De track-id van een lokale bron die wegvalt (mic/cam verdwenen,
   /// permissie ingetrokken). De adapter zet daarna SourceInfo én de

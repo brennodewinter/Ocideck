@@ -1608,6 +1608,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'D Sitzig het diin Ton nöd chöne übermitte — versuech d Quell uusz- und wider iizschalte.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'D Sitzig het dis Bild nöd chöne übermitte — versuech d Quell uusz- und wider iizschalte.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Screensharing isch gscheitert — d\'Quäll isch verweigered oder weggfalle.',
   'De gedeelde bron viel weg; het delen is gestopt.':

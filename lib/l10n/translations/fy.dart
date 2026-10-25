@@ -652,6 +652,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'De gearkomste koe jo lûd net trochjaan — probearje de boarne út en wer oan te setten.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'De gearkomste koe jo byld net trochjaan — probearje de boarne út en wer oan te setten.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Skerm diele is mislearre — de boarne is wegere of ferdwûn.',
   'De gedeelde bron viel weg; het delen is gestopt.':

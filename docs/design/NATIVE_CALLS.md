@@ -488,6 +488,52 @@ companion channel carries nothing yet.
   mobile where capture needs its own extension flow). The panel picks the
   source via `ScreenSharePickerDialog` where a list exists, shows which
   source is live, and the same button stops it.
+- **Callbewijs on macOS** (#2541). A release artifact (`OciDeck.app` v0.7.0,
+  `flutter build macos --release`, signature verified) ran a real two-person
+  call against the pinned testbed (`stable-11248`) with an independent
+  Chrome 156 participant: two-way live audio and video, muted-join +
+  unmute, camera on/off, window screen share seen by the browser as a
+  `desktop` source, reconnect after leave, a clean `session-terminate`
+  leave, a typed failure for an unreachable server, and the TCC chain
+  (mic, camera, screen-recording, Desktop access — own usage texts,
+  re-asked after `tccutil reset`). The probe instrument
+  (`testbed/jitsi-meet/probe/proof.js`) logs the browser's remote-track
+  view every 5 s; the filled evidence form lives in
+  `testbed/jitsi-meet/evidence/macos-2541/` (local only — `evidence/` is
+  gitignored, the issue carries the report). Three defects the proof
+  surfaced, all fixed in the same change: the remote offer's own
+  `recvonly` transceivers answered the m-lines while two pre-created
+  `SendRecv` transceivers sat orphaned — now the offer-created
+  transceivers are adopted and set to `SendRecv` before the answer (no
+  outgoing media was the symptom); `sender.parameters` turned out a
+  creation-time cache on the native binding, so `localSource()` reads
+  the send ssrc's from parameters → the answer SDP's `a=ssrc`/`FID`/`msid`
+  → `outbound-rtp`/legacy `ssrc` stats, bounded polling, pending
+  re-announce on enable/ICE-live, and a visible error only for a source
+  that actively fails; and the preflight dialog had no error boundary —
+  a dead server hung it on "Verbinden…" forever, now it renders the typed
+  `providerUnavailable` reason.
+
+#### Capability matrix — macOS (proven 2026-10-25, #2541)
+
+Statuses: **beschikbaar**, **na toestemming te proberen**, **niet
+beschikbaar**, **niet getest** — the vocabulary the issue mandates; a cell
+only leaves *niet getest* behind after the real proof.
+
+| Vermogen | Status | Onderbouwing |
+|---|---|---|
+| Gast-join Jitsi | beschikbaar | preflight → session-accept, anonieme nick |
+| Tweeweg-audio | beschikbaar | `audio:live:` remote + lokaal |
+| Tweeweg-video | beschikbaar | echte camera remote + lokaal |
+| Mute / camera-toggle | beschikbaar | muted↔live waargenomen aan beide kanten |
+| Schermdelen (venster) | na toestemming te proberen | `screenshare:live:desktop` remote na macOS-consent |
+| Leave / reconnect | beschikbaar | `Removed participant`; rejoin <10 s |
+| Mislukte join-melding | beschikbaar | getypeerde fout; geen hang (na fix) |
+| TCC-rechtenketen | beschikbaar | mic/cam/schermopname/bureaublad, her-vraag na reset |
+| Apparaatverlies mid-call | niet getest | pad aanwezig (`onEnded` → `localTrackLost`); geen los apparaat op de testmachine |
+| Netwerk weg/terug | niet getest | reconnect via leave+join, niet via echte uitval |
+| Media-E2EE | niet beschikbaar | gerapporteerd als uit; frame-cryptor ontbreekt |
+| Browserclient | niet getest | #2544 |
 
 *(Heads-up for a cold reader: §9's "New files (proposed)" list predates this and is
 partly stale — e.g. `xmpp_connection.dart` was built and then removed in F3.1. The

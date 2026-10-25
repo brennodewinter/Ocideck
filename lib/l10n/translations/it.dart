@@ -649,6 +649,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'La riunione non è riuscita a inviare il tuo audio — prova a riattivare la sorgente.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'La riunione non è riuscita a inviare la tua immagine — prova a riattivare la sorgente.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Condivisione dello schermo non riuscita: la sorgente è stata negata o è scomparsa.',
   'De gedeelde bron viel weg; het delen is gestopt.':

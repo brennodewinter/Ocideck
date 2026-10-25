@@ -1598,6 +1598,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Koosolek ei suutnud teie heli edastada — proovige allikas uuesti sisse lülitada.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Koosolek ei suutnud teie pilti edastada — proovige allikas uuesti sisse lülitada.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Ekraani jagamine ebaõnnestus — allikas keelati või kadus.',
   'De gedeelde bron viel weg; het delen is gestopt.':

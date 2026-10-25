@@ -1603,6 +1603,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Sapulce nevarēja nosūtīt jūsu skaņu — mēģiniet izslēgt un atkal ieslēgt avotu.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Sapulce nevarēja nosūtīt jūsu attēlu — mēģiniet izslēgt un atkal ieslēgt avotu.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Ekrāna kopīgošana neizdevās — avots tika noraidīts vai pazuda.',
   'De gedeelde bron viel weg; het delen is gestopt.':

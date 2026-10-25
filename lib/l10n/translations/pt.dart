@@ -1633,6 +1633,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'A reunião não conseguiu enviar o seu som — tente desligar e ligar a fonte novamente.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'A reunião não conseguiu enviar a sua imagem — tente desligar e ligar a fonte novamente.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'A partilha de ecrã falhou — a fonte foi recusada ou desapareceu.',
   'De gedeelde bron viel weg; het delen is gestopt.':

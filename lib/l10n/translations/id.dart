@@ -1605,6 +1605,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Rapat tidak dapat mengirim suara Anda — coba matikan dan nyalakan sumbernya lagi.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Rapat tidak dapat mengirim gambar Anda — coba matikan dan nyalakan sumbernya lagi.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Berbagi layar gagal — sumber ditolak atau hilang.',
   'De gedeelde bron viel weg; het delen is gestopt.':

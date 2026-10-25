@@ -209,20 +209,29 @@ List<XmlElement> jitsiPresenceExtensions(
 
 /// Een eigen bron aankondigen bij de focus als een source-add IQ — de
 /// stanza-bouw (niet de beslissing of/when; dat is sessie-orchestratie).
+/// [ssrcs] zijn alle verzend-ssrc's van de sender (media + rtx), [msid]
+/// koppelt de RTP aan de sourcenaam bij de remote, [videoType] markeert
+/// 'desktop' bij schermdelen (#2541: de echte wire-vorm).
 Stanza jitsiSourceAnnounceIq({
   required String focusInRoom,
   required String iqId,
   required String sid,
   required String initiator,
   required String sourceName,
-  required String ssrc,
+  required List<String> ssrcs,
+  List<(String, String)> fidPairs = const [],
+  String? msid,
+  String? videoType,
 }) => _jitsiSourceIq(
   focusInRoom: focusInRoom,
   iqId: iqId,
   sid: sid,
   initiator: initiator,
   sourceName: sourceName,
-  ssrc: ssrc,
+  ssrcs: ssrcs,
+  fidPairs: fidPairs,
+  msid: msid,
+  videoType: videoType,
   remove: false,
 );
 
@@ -241,7 +250,7 @@ Stanza jitsiSourceRemoveIq({
   sid: sid,
   initiator: initiator,
   sourceName: sourceName,
-  ssrc: ssrc,
+  ssrcs: [ssrc],
   remove: true,
 );
 
@@ -251,7 +260,10 @@ Stanza _jitsiSourceIq({
   required String sid,
   required String initiator,
   required String sourceName,
-  required String ssrc,
+  required List<String> ssrcs,
+  List<(String, String)> fidPairs = const [],
+  String? msid,
+  String? videoType,
   required bool remove,
 }) => Stanza(
   kind: StanzaKind.iq,
@@ -266,7 +278,7 @@ Stanza _jitsiSourceIq({
         contentName: sourceName.endsWith('-a0') ? 'audio' : 'video',
         media: sourceName.endsWith('-a0') ? 'audio' : 'video',
         sourceName: sourceName,
-        ssrc: ssrc,
+        ssrc: ssrcs.first,
       )
     else
       buildSourceAdd(
@@ -275,7 +287,10 @@ Stanza _jitsiSourceIq({
         contentName: sourceName.endsWith('-a0') ? 'audio' : 'video',
         media: sourceName.endsWith('-a0') ? 'audio' : 'video',
         sourceName: sourceName,
-        ssrc: ssrc,
+        ssrcs: ssrcs,
+        fidPairs: fidPairs,
+        msid: msid,
+        videoType: videoType,
       ),
   ],
 );
