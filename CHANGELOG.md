@@ -173,6 +173,16 @@ All notable changes to OciDeck are documented in this file.
   wegklikt — nooit een onzichtbare call. De modulekaart zegt niet langer
   dat deelnemen "nog niet" kan.
 
+- **Scherm delen in een call (#2537).** De deelknop in het callpaneel is nu
+  echt: op desktop opent hij een kiezer met de schermen en vensters die het
+  systeem meldt, mét miniatuur, en het paneel toont welke bron live is tot
+  je **Delen stoppen** kiest. Het beeld gaat over de bestaande videostroom —
+  dezelfde source, ander beeld, zoals Jitsi dat zelf neerlegt — en de andere
+  kant ziet het als gedeeld scherm. Een geweigerde of weggevallen bron eindigt
+  het delen met een melding, nooit met een dode knop. De knop is er alleen
+  waar het platform schermbeeld kan vastleggen: desktop en — zodra die route
+  open gaat — web; niet op mobiel.
+
 ### Fixed
 
 - **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende

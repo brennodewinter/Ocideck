@@ -651,6 +651,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'No a por kompartí e pantaya — e fuente a ser nenga òf a desaparesé.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'E fuente kompartí a desaparesé; e kompartishon a stop.',
+  'Delen stoppen': 'Stop di kompartí',
+  'Je deelt je scherm.': 'Bo ta kompartí bo pantaya.',
+  'Je deelt': 'Bo ta kompartí',
+  'Kies wat je deelt': 'Skohe loke bo ke kompartí',
+  'Scherm': 'Pantaya',
   'Nog geen actieve vergadering.': 'Ainda no tin ningun reunión aktivo.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Pega un link di reunión di Jitsi pa partisipá.',
@@ -678,8 +687,6 @@ const _dutchSourceAddPap = {
   'De verbinding is verbroken.': 'E konekshon a kibra.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'E aparato no ta duna akseso na e fuente aki.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Komparti pantaya ainda no ta disponibel.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nmber-di-kamber',
   'Vergaderlink controleren': 'Kontrolá e link di reunion',

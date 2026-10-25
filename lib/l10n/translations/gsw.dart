@@ -1608,6 +1608,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Screensharing isch gscheitert — d\'Quäll isch verweigered oder weggfalle.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'D\'gmeinsami Quäll isch weggfalle; s\'Dele isch gstopt.',
+  'Delen stoppen': 'Dele stoppe',
+  'Je deelt je scherm.': 'Du dealsch dis Display.',
+  'Je deelt': 'Du dealsch',
+  'Kies wat je deelt': 'Wähl, was du dealsch',
+  'Scherm': 'Display',
   'Nog geen actieve vergadering.': 'Noch kei aktivi Bsprächig.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Füg en Jitsi-Bsprächigs-Link ii zum mitmache.',
@@ -1635,8 +1644,6 @@ const _dutchSourceAddGsw = <String, String>{
   'De verbinding is verbroken.': 'D Verbindig isch abgrisse.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'S Gerät erlaubt kei Zuegriff uf die Quelle.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Bildschirmdaile isch noh nit verfüegbar.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/zimmer-name',
   'Vergaderlink controleren': 'Meeting-Link prüefe',

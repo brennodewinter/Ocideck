@@ -1605,6 +1605,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Berbagi layar gagal — sumber ditolak atau hilang.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Sumber yang dibagikan hilang; berbagi telah dihentikan.',
+  'Delen stoppen': 'Hentikan berbagi',
+  'Je deelt je scherm.': 'Anda sedang membagikan layar Anda.',
+  'Je deelt': 'Anda membagikan',
+  'Kies wat je deelt': 'Pilih yang Anda bagikan',
+  'Scherm': 'Layar',
   'Nog geen actieve vergadering.': 'Belum ada rapat yang aktif.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Tempel tautan rapat Jitsi untuk bergabung.',
@@ -1632,7 +1641,6 @@ const _dutchSourceAddId = <String, String>{
   'De verbinding is verbroken.': 'Koneksi terputus.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Perangkat tidak mengizinkan akses ke sumber ini.',
-  'Scherm delen is nog niet beschikbaar.': 'Berbagi layar belum tersedia.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nama-ruangan',
   'Vergaderlink controleren': 'Periksa tautan rapat',

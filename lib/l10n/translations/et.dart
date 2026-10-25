@@ -1598,6 +1598,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Ekraani jagamine ebaõnnestus — allikas keelati või kadus.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Jagatud allikas kadus; jagamine on peatatud.',
+  'Delen stoppen': 'Peata jagamine',
+  'Je deelt je scherm.': 'Jagate oma ekraani.',
+  'Je deelt': 'Jagate',
+  'Kies wat je deelt': 'Vali, mida jagada',
+  'Scherm': 'Ekraan',
   'Nog geen actieve vergadering.': 'Aktiivset koosolekut veel ei ole.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Liitumiseks kleepige Jitsi koosoleku link.',
@@ -1625,8 +1634,6 @@ const _dutchSourceAddEt = <String, String>{
   'De verbinding is verbroken.': 'Ühendus katkes.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Seade ei luba sellele allikale juurde pääseda.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Ekraani jagamine pole veel saadaval.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ruumi-nimi',
   'Vergaderlink controleren': 'Kontrolli koosoleku linki',

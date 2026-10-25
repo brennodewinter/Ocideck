@@ -1621,6 +1621,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Partajarea ecranului a eșuat — sursa a fost refuzată sau a dispărut.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Sursa partajată a dispărut; partajarea s-a oprit.',
+  'Delen stoppen': 'Oprește partajarea',
+  'Je deelt je scherm.': 'Partajați ecranul dumneavoastră.',
+  'Je deelt': 'Partajați',
+  'Kies wat je deelt': 'Alegeți ce partajați',
+  'Scherm': 'Ecran',
   'Nog geen actieve vergadering.': 'Încă nu există o întâlnire activă.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Lipiți un link de întâlnire Jitsi pentru a participa.',
@@ -1647,8 +1656,6 @@ const _dutchSourceAddRo = <String, String>{
   'De verbinding is verbroken.': 'Conexiunea s-a întrerupt.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Dispozitivul nu permite accesul la această sursă.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Partajarea ecranului nu este încă disponibilă.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nume-camera',
   'Vergaderlink controleren': 'Verifică linkul de întâlnire',

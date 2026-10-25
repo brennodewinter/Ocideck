@@ -652,6 +652,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Skerm diele is mislearre — de boarne is wegere of ferdwûn.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'De dielde boarne foel wei; it diele is stoppe.',
+  'Delen stoppen': 'Diele stopje',
+  'Je deelt je scherm.': 'Do dielest dyn skerm.',
+  'Je deelt': 'Do dielest',
+  'Kies wat je deelt': 'Kies watst dielest',
+  'Scherm': 'Skerm',
   'Nog geen actieve vergadering.': 'Noch gjin aktive gearkomste.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Plak in Jitsi-gearkestingkeppeling om mei te dwaan.',
@@ -679,7 +688,6 @@ const _dutchSourceAddFy = {
   'De verbinding is verbroken.': 'De ferbining is ferbrutsen.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'It apparaat jout gjin tagong ta dizze boarne.',
-  'Scherm delen is nog niet beschikbaar.': 'Skerm diele is noch net beskikber.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/keamer-namme',
   'Vergaderlink controleren': 'Gearkommelink kontrolearje',

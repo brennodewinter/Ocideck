@@ -652,6 +652,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Bildschirmfreigabe fehlgeschlagen — die Quelle wurde verweigert oder ist weggefallen.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Die geteilte Quelle ist weggefallen; die Freigabe wurde beendet.',
+  'Delen stoppen': 'Freigabe beenden',
+  'Je deelt je scherm.': 'Du teilst deinen Bildschirm.',
+  'Je deelt': 'Du teilst',
+  'Kies wat je deelt': 'Wähle, was du teilst',
+  'Scherm': 'Bildschirm',
   'Nog geen actieve vergadering.': 'Noch keine aktive Besprechung.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Fügen Sie einen Jitsi-Meeting-Link ein, um teilzunehmen.',
@@ -680,8 +689,6 @@ const _dutchSourceAddDe = {
   'De verbinding is verbroken.': 'Die Verbindung wurde unterbrochen.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Das Gerät erlaubt keinen Zugriff auf diese Quelle.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Bildschirmfreigabe ist noch nicht verfügbar.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/raumname',
   'Vergaderlink controleren': 'Meeting-Link prüfen',

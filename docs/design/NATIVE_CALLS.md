@@ -371,8 +371,9 @@ you control. LiveKit/MatrixRTC remains the cleaner backend for a *pure* own SFU
 
 The table above is the plan; this is where it actually stands. **F1–F3.4a plus the
 Jitsi recognition/preflight slice (#2533), the F3.4b signalling join (#2534), the
-F3.4c on-device media proof (#2535) and the real join route + session lifecycle
-(#2536) have landed on `main`; what remains is everything after the join.** The `lib/xmpp/` core, the provider-neutral
+F3.4c on-device media proof (#2535), the real join route + session lifecycle
+(#2536) and screen sharing (#2537) have landed on `main`; what remains is
+everything after the join.** The `lib/xmpp/` core, the provider-neutral
 `lib/meetings/` interface and the full Jitsi signalling+media path exist and are
 proven — two OciDeck clients share a real room over real Jicofo, and real RTP
 renders a browser counterparty's video in a Flutter texture on macOS — while the
@@ -458,8 +459,7 @@ companion channel carries nothing yet.
   `testbed/jitsi-meet/probe/solo.js` (unmutes explicitly — jitsi-meet joins
   medialess under the `prejoinConfig` URL override); lima/colima's missing UDP
   forwarding is bridged by `probe/udp_relay.py` + the pinned `udp-relay`
-  compose service + `./run.sh media-relay`. Screen share still reports the
-  honest absence. Covers **joining**.
+  compose service + `./run.sh media-relay`. Covers **joining**.
 - **The real join route + session lifecycle** (#2536). The call rail no longer
   promises joining "in a later version" — the placeholder carries the real
   entry (*Deelnemen aan een vergadering…* → `MeetingPreflightDialog`), and the
@@ -472,7 +472,22 @@ companion channel carries nothing yet.
   leaves the call before the window closes — no ghost occupant in the MUC.
   `didUpdateWidget` re-subscribes on the new session so no listener stays on a
   left call. The screen-share button only exists when the session advertises
-  the capability, and Jitsi reports `false` until #2537.
+  the capability.
+- **Screen sharing** (#2537). `MeetingMediaConnection` gained the share seam:
+  `screenSources` (the OS list with thumbnails — empty where the browser picks
+  itself), `addLocalScreen` (`getDisplayMedia` onto the *existing* video
+  sender — same m-line, same announced `<nick>-v0` source, only the picture
+  swaps; exactly how lib-jitsi-meet lays it down) and `stopScreenShare`
+  (camera back on the sender, or detached when the screen was the only
+  source). The session marks `-v0` as `videoType: 'desktop'` in `SourceInfo`
+  and adds/removes the source when the camera was off, restores the camera
+  state on stop (including `camOff` where the camera stayed off), reports a
+  refused/absent capture as a non-terminal `MeetingErrorEvent`, and ends a
+  share when the OS reports the source lost (`localTrackLost`). `screenShare`
+  capability is a platform fact (`screenShareFor` — desktop and web, not
+  mobile where capture needs its own extension flow). The panel picks the
+  source via `ScreenSharePickerDialog` where a list exists, shows which
+  source is live, and the same button stops it.
 
 *(Heads-up for a cold reader: §9's "New files (proposed)" list predates this and is
 partly stale — e.g. `xmpp_connection.dart` was built and then removed in F3.1. The

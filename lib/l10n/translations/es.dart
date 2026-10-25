@@ -649,6 +649,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'No se pudo compartir la pantalla: la fuente fue rechazada o desapareció.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'La fuente compartida desapareció; se ha detenido la compartición.',
+  'Delen stoppen': 'Dejar de compartir',
+  'Je deelt je scherm.': 'Estás compartiendo tu pantalla.',
+  'Je deelt': 'Estás compartiendo',
+  'Kies wat je deelt': 'Elige qué compartir',
+  'Scherm': 'Pantalla',
   'Nog geen actieve vergadering.': 'Aún no hay ninguna reunión activa.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Pega un enlace de reunión de Jitsi para unirte.',
@@ -676,8 +685,6 @@ const _dutchSourceAddEs = {
   'De verbinding is verbroken.': 'Se perdió la conexión.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'El dispositivo no permite el acceso a esta fuente.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Compartir pantalla aún no está disponible.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nombre-de-sala',
   'Vergaderlink controleren': 'Comprobar enlace de reunión',

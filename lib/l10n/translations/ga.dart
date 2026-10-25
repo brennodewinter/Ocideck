@@ -1635,6 +1635,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Theip ar roinnt an scáileáin — diúltaíodh an foinse nó imigh sí.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Imigh an foinse roinnte; tá an roinnt stoptha.',
+  'Delen stoppen': 'Stop a roinnt',
+  'Je deelt je scherm.': 'Tá tú ag roinnt do scáileáin.',
+  'Je deelt': 'Tá tú ag roinnt',
+  'Kies wat je deelt': 'Roghnaigh cad a roinnfidh tú',
+  'Scherm': 'Scáileán',
   'Nog geen actieve vergadering.': 'Níl aon chruinniú gníomhach fós.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Greamaigh nasc cruinnithe Jitsi le páirt a ghlacadh.',
@@ -1662,8 +1671,6 @@ const _dutchSourceAddGa = <String, String>{
   'De verbinding is verbroken.': 'Bhí an nasc briste.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Ní thugann an gléas rochtain ar an bhfoinse seo.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Níl comhroinnt scáileáin ar fáil fós.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ainm-an-tseomra',
   'Vergaderlink controleren': 'Seiceáil nasc an chruinnithe',

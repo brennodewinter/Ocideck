@@ -1620,6 +1620,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Не вдалося поділитися екраном — джерело відмовлено або воно зникло.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Спільне джерело зникло; демонстрацію припинено.',
+  'Delen stoppen': 'Зупинити демонстрацію',
+  'Je deelt je scherm.': 'Ви демонструєте свій екран.',
+  'Je deelt': 'Ви демонструєте',
+  'Kies wat je deelt': 'Виберіть, що демонструвати',
+  'Scherm': 'Екран',
   'Nog geen actieve vergadering.': 'Наразі немає активної наради.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Вставте посилання на нараду Jitsi, щоб долучитися.',
@@ -1646,7 +1655,6 @@ const _dutchSourceAddUk = <String, String>{
   'De verbinding is verbroken.': 'З\'єднання перервано.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Пристрій не надає доступ до цього джерела.',
-  'Scherm delen is nog niet beschikbaar.': 'Демонстрація екрана ще недоступна.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nazva-kimnaty',
   'Vergaderlink controleren': 'Перевірити посилання на нараду',

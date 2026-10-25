@@ -1611,6 +1611,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Zdieľanie obrazovky sa nepodarilo — zdroj bol zamietnutý alebo zmizol.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Zdieľaný zdroj zmizol; zdieľanie bolo zastavené.',
+  'Delen stoppen': 'Zastaviť zdieľanie',
+  'Je deelt je scherm.': 'Zdieľate svoju obrazovku.',
+  'Je deelt': 'Zdieľate',
+  'Kies wat je deelt': 'Vyberte, čo zdieľať',
+  'Scherm': 'Obrazovka',
   'Nog geen actieve vergadering.': 'Zatiaľ žiadne aktívne stretnutie.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Prilepte odkaz na stretnutie Jitsi a pripojte sa.',
@@ -1637,8 +1646,6 @@ const _dutchSourceAddSk = <String, String>{
   'De verbinding is verbroken.': 'Spojenie sa prerušilo.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Zariadenie nepovoľuje prístup k tomuto zdroju.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Zdieľanie obrazovky zatiaľ nie je k dispozícii.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nazov-miestnosti',
   'Vergaderlink controleren': 'Skontrolovať odkaz na schôdzku',

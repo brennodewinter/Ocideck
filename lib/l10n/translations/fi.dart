@@ -1605,6 +1605,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Näytön jakaminen epäonnistui — lähde evättiin tai katosi.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Jaettu lähde katosi; jakaminen on lopetettu.',
+  'Delen stoppen': 'Lopeta jakaminen',
+  'Je deelt je scherm.': 'Jaat näyttöäsi.',
+  'Je deelt': 'Jaat',
+  'Kies wat je deelt': 'Valitse mitä jaat',
+  'Scherm': 'Näyttö',
   'Nog geen actieve vergadering.': 'Ei vielä aktiivista kokousta.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Liitä Jitsi-kokouslinkki osallistuaksesi.',
@@ -1632,8 +1641,6 @@ const _dutchSourceAddFi = <String, String>{
   'De verbinding is verbroken.': 'Yhteys katkesi.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Laite ei salli tämän lähteen käyttöä.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Näytön jakaminen ei ole vielä käytettävissä.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/huoneen-nimi',
   'Vergaderlink controleren': 'Tarkista kokouslinkki',

@@ -1633,6 +1633,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'A partilha de ecrã falhou — a fonte foi recusada ou desapareceu.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'A fonte partilhada desapareceu; a partilha parou.',
+  'Delen stoppen': 'Parar de partilhar',
+  'Je deelt je scherm.': 'Está a partilhar o seu ecrã.',
+  'Je deelt': 'Está a partilhar',
+  'Kies wat je deelt': 'Escolha o que partilhar',
+  'Scherm': 'Ecrã',
   'Nog geen actieve vergadering.': 'Ainda não há nenhuma reunião ativa.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Cole uma ligação de reunião Jitsi para participar.',
@@ -1660,8 +1669,6 @@ const _dutchSourceAddPt = <String, String>{
   'De verbinding is verbroken.': 'A ligação foi interrompida.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'O dispositivo não permite o acesso a esta fonte.',
-  'Scherm delen is nog niet beschikbaar.':
-      'A partilha de ecrã ainda não está disponível.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nome-da-sala',
   'Vergaderlink controleren': 'Verificar ligação da reunião',

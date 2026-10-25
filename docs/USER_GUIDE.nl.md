@@ -6652,13 +6652,17 @@ laten. De module uitzetten verstopt een lopende call ook niet: de rail
 blijft zichtbaar tot je hem verlaat.
 
 Deelnemen start nooit een opname of transcriptie — dat zijn aparte,
-altijd expliciete acties. Scherm delen wordt nog niet aangeboden.
-Media-versleuteling wordt als feit gerapporteerd, niet als belofte: het
-paneel toont de geverifieerde status van de call en de echte
-uitgaansadressen, en claimt geen end-to-end-versleuteling waar die niet
-bewezen is. De browserversie weigert het deelnemen — een browsertabblad
-kan de vastgelijmde serveridentiteit niet bewijzen die de desktop-app
-verifieert — dus bellen is vandaag desktop-only.
+altijd expliciete acties. Scherm delen werkt waar het platform beeld kan
+vastleggen: op desktop opent de deelknop een kiezer met je schermen en
+vensters mét miniatuur, en het paneel toont welke bron live is tot je
+het delen stopt; een bron die geweigerd wordt of wegvalt beëindigt het
+delen met een melding, nooit met een dode knop. Media-versleuteling wordt
+als feit gerapporteerd, niet als belofte: het paneel toont de geverifieerde
+status van de call en de echte uitgaansadressen, en claimt geen
+end-to-end-versleuteling waar die niet bewezen is. De browserversie weigert
+het deelnemen — een browsertabblad kan de vastgelijmde serveridentiteit
+niet bewijzen die de desktop-app verifieert — dus bellen is vandaag
+desktop-only.
 
 ## Wat de browserversie niet kan
 

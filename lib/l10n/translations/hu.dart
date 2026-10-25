@@ -1607,6 +1607,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'A képernyőmegosztás nem sikerült — a forrást megtagadták vagy eltűnt.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'A megosztott forrás eltűnt; a megosztás leállt.',
+  'Delen stoppen': 'Megosztás leállítása',
+  'Je deelt je scherm.': 'Megosztja a képernyőjét.',
+  'Je deelt': 'Megosztja:',
+  'Kies wat je deelt': 'Válassza ki, mit oszt meg',
+  'Scherm': 'Képernyő',
   'Nog geen actieve vergadering.': 'Még nincs aktív megbeszélés.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Illesszen be egy Jitsi-értekezlethivatkozást a csatlakozáshoz.',
@@ -1634,8 +1643,6 @@ const _dutchSourceAddHu = <String, String>{
   'De verbinding is verbroken.': 'A kapcsolat megszakadt.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Az eszköz nem engedélyezi a hozzáférést ehhez a forráshoz.',
-  'Scherm delen is nog niet beschikbaar.':
-      'A képernyőmegosztás még nem érhető el.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/szobanev',
   'Vergaderlink controleren': 'Értekezlet-hivatkozás ellenőrzése',
