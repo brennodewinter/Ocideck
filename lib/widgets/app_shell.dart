@@ -217,7 +217,6 @@ part 'app_shell_main_layout.dart';
 part 'app_shell_menu.dart';
 
 // ── Shared helpers ──────────────────────────────────────────────────────────
-
 // Shell sub-widgets and helpers, split into part files for navigability; the parts share this library's imports and private scope.
 part 'shell/provenance_actions.dart';
 part 'shell/shell_actions.dart';
