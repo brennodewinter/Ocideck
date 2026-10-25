@@ -143,7 +143,7 @@ The web build is designed to pull **zero third-party origins** at runtime.
   / `unsafe-inline`; the wasm token is only for CanvasKit); `style-src 'self'
   'unsafe-inline'` (the Flutter engine injects styles); `img-src`/`media-src`/
   `font-src` first-party plus `data:`/`blob:` only; `connect-src 'self'
-  https: blob:`; `object-src 'none'`; `base-uri 'self'`; `frame-ancestors 'none'`
+  https: wss: blob:`; `object-src 'none'`; `base-uri 'self'`; `frame-ancestors 'none'`
   (in the `<head>`). Note a meta-delivered CSP cannot enforce
   `frame-ancestors` — serve it as a real HTTP header to control embedding (see
   [`HOSTING.md`](HOSTING.md)).
@@ -185,6 +185,17 @@ The web build is designed to pull **zero third-party origins** at runtime.
   is `script-src`, not `connect-src`; the latter only narrows the blast radius
   if the former ever fails. If URL import ever moves behind a fixed set of
   hosts, `connect-src` can name them instead of allowing `https:` wholesale.
+- **`connect-src` accepts `wss:` (not `ws:`) for a meeting the user chose.**
+  The videocalls module opens one XMPP WebSocket to that deployment. Same
+  posture as `https:` for URL import: TLS only, any host the user points at,
+  and the browser's origin policy is the gate because a tab cannot pin a
+  certificate. Plain `ws:` stays out of the policy; the app itself allows it
+  only to a literal loopback address, which a same-origin testbed covers via
+  `'self'`. Camera, microphone and display-capture in the companion
+  Permissions-Policy are `(self)` — that lifts the blanket ban, and the
+  browser still asks before any capture starts (#2544). A two-person call on
+  a released web build is not yet the evidence behind this; the policy is
+  what the seam needs in order to be tried.
 - **`child-src`/`frame-src` allow `blob:`/`data:` for the offscreen
   render/embed WebViews.** On desktop this covers both the Mermaid renderer and
   the video embed. On web the Mermaid renderer no longer needs a WebView — since

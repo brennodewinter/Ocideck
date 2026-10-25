@@ -80,7 +80,9 @@ until the user turns it on, and if signalling fails no media channel opens. Medi
 E2EE is off on iOS/macOS (a known `flutter_webrtc` crash) and OciDeck says so rather
 than claim it. And
 `web/index.html` ships a strict CSP (`default-src 'self'`; `connect-src 'self'
-https: blob:`) with no third-party scripts. The app never contacts an OciServe server
+https: wss: blob:`) with no third-party scripts. `wss:` is the videocalls
+module's signalling socket to a deployment the user chose (#2544); plain
+`ws:` is not in the policy. The app never contacts an OciServe server
 until the user configures, enables and uses that extension. (The only
 `tracking` strings in `lib/` belong to the *privacy detector*, which flags
 trackers found in the user's own slides — not tracking of the user.)

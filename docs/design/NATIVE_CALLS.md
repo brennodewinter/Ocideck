@@ -533,7 +533,7 @@ only leaves *niet getest* behind after the real proof.
 | Apparaatverlies mid-call | niet getest | pad aanwezig (`onEnded` → `localTrackLost`); geen los apparaat op de testmachine |
 | Netwerk weg/terug | niet getest | reconnect via leave+join, niet via echte uitval |
 | Media-E2EE | niet beschikbaar | gerapporteerd als uit; frame-cryptor ontbreekt |
-| Browserclient | niet getest | #2544 |
+| Browserclient | niet getest | naad open (CSP `wss:`, browser-WebSocket, geen pin); tweepersoonsproef nog open (#2544) |
 
 *(Heads-up for a cold reader: §9's "New files (proposed)" list predates this and is
 partly stale — e.g. `xmpp_connection.dart` was built and then removed in F3.1. The
@@ -597,8 +597,11 @@ interop-vs-E2E default is deferred to slice 2 (§5.2).
   come from OciDeck, not the sender — COLLABORATION.md §7.1.6).
 - **Native means no vendor iframe.** A benefit of the native route: the vendor-SDK
   isolation of §7.1.6 (sandboxed iframe / postMessage bridge) largely falls away — no
-  vendor JS runs in the page. On the **web build** a CSP `connect-src`/`media-src`
-  delta for the signalling origin still applies (`tool/check_web_hardening.dart`).
+  vendor JS runs in the page. On the **web build** the CSP decision for
+  signalling is `connect-src` adding `wss:` (not `ws:`) and Permissions-Policy
+  `camera`/`microphone`/`display-capture` as `(self)` — the browser still
+  prompts, and it cannot pin the certificate (`tool/check_web_hardening.dart`,
+  #2544). That opens the seam; it is not the two-person proof.
 - **Two consent domains.** Meeting media (audio/video/screen/roster) **never** enters
   AI Assist merely because AI is enabled; a meeting session **never** grants automatic
   access to a collaboration room (COLLABORATION.md §7.1.6). The meeting session is

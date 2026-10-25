@@ -1432,7 +1432,8 @@ also declares them, but see the [CI note](#continuous-integration).)
 
   *Hardening* — a strict CSP in `index.html` (`script-src 'self'
   'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`, `connect-src 'self'
-  https: blob:` — `blob:` is *required*, not tolerated: without it a dropped
+  https: wss: blob:` — `wss:` is the videocalls module's signalling
+  socket (#2544); `blob:` is *required*, not tolerated: without it a dropped
   file cannot be read back and drag-and-drop dies silently,
   `object-src 'none'`, `form-action 'none'` — that last one does *not* fall back
   to `default-src`, so it is asserted separately), CanvasKit **self-hosted**

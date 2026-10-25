@@ -148,9 +148,6 @@ class JitsiMeetingProvider implements MeetingProvider {
       );
     } on JitsiConfigFetchException catch (e) {
       return _unavailable(e.toString());
-    } on UnsupportedError catch (e) {
-      // De web-seam faalt dicht tot de CSP-/pinning-beslissing ligt.
-      return _unavailable(e.message);
     }
 
     // Stap 2: wat de deployment zélf declareert. Geen websocket → geen

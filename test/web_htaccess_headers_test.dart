@@ -144,13 +144,7 @@ void main() {
   test('Permissions-Policy zet de gevoelige features uit', () {
     final pp = headerValue('Permissions-Policy')!;
     // De features die de app nooit gebruikt horen op `()` (volledig uit).
-    for (final feature in [
-      'camera',
-      'microphone',
-      'geolocation',
-      'usb',
-      'payment',
-    ]) {
+    for (final feature in ['geolocation', 'usb', 'payment']) {
       expect(
         pp,
         contains('$feature=()'),
@@ -163,6 +157,16 @@ void main() {
       contains('fullscreen=(self)'),
       reason: 'de presenter gebruikt de Fullscreen-API',
     );
+    // De videocallsmodule gebruikt camera, microfoon en schermdeling —
+    // `(self)` tilt alleen het algemene verbod op; de browser vraagt alsnog
+    // per site om toestemming voordat er iets vastlegt.
+    for (final feature in ['camera', 'microphone', 'display-capture']) {
+      expect(
+        pp,
+        contains('$feature=(self)'),
+        reason: '$feature mag alleen de eigen origin gebruiken (#2544)',
+      );
+    }
   });
 
   test('cross-origin isolatie staat aan voor de WASM-transcriptie', () {
