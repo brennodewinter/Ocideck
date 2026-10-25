@@ -1605,6 +1605,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Mødet kunne ikke sende din lyd — prøv at slå kilden fra og til igen.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Mødet kunne ikke sende dit billede — prøv at slå kilden fra og til igen.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Skærmdeling mislykkedes — kilden blev nægtet eller forsvandt.',
   'De gedeelde bron viel weg; het delen is gestopt.':

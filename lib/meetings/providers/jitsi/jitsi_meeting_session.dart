@@ -422,13 +422,16 @@ class JitsiMeetingSession implements MeetingSession {
     // Eigen bronnen aankondigen (wire-volgorde: presence, dan source-add).
     await _localMedia.sendPresenceUpdate();
     await _localMedia.announceNewSource('audio');
-    await _localMedia.announceNewSource('video');
+    await _localMedia.announceNewSource('video', videoType: 'camera');
     if (_localMedia.shareLostInRenegotiate) {
       _localMedia.shareLostInRenegotiate = false;
       _refreshLocal((l) => l.copyWith(isScreenShare: false));
     }
     // Mediapad-bewijs — pas live ICE betekent "connected".
     await _awaitMediaLive();
+    // Bronnen die voor live ICE nog geen ssrc hadden (o.a. de gemuteerde
+    // mic op deze binding, #2541) kunnen nu wél gemeld worden.
+    await _localMedia.announcePendingSources();
   }
 
   Future<void> _negotiateMedia(JingleSessionInitiate initiate) async {
@@ -462,14 +465,15 @@ class JitsiMeetingSession implements MeetingSession {
         if (content.transport != null)
           for (final c in content.transport!.candidates) '${c.ip}:${c.port}',
     }.toList();
-    // De echte client koppelt de mic ook bij een gemuteerde join — een
-    // gemuteerde track met muted:true in SourceInfo. Geen device →
-    // receive-only, en SourceInfo meldt dan eerlijk géén bron.
-    await _localMedia.attachInitial('audio');
-    if (!startCameraOff) await _localMedia.attachInitial('video');
-
     try {
       await _media!.applyRemoteOffer(jingleOfferToSdp(initiate));
+      // De echte client koppelt de mic ook bij een gemuteerde join — een
+      // gemuteerde track met muted:true in SourceInfo. Geen device →
+      // receive-only, en SourceInfo meldt dan eerlijk géén bron. Pas ná
+      // de offer: de track moet op de transceiver van zijn m-line, niet
+      // op een wees die nooit de wire haalt (#2541).
+      await _localMedia.attachInitial('audio');
+      if (!startCameraOff) await _localMedia.attachInitial('video');
       final answerSdp = await _media!.completeAnswer();
       final answer = parseSdpAnswer(answerSdp);
       final accept = buildSessionAccept(

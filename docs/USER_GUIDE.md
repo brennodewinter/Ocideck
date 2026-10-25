@@ -6611,6 +6611,15 @@ not claim end-to-end encryption where none was proven. The browser version
 declines the join — a browser tab cannot prove the pinned server identity the
 desktop app verifies — so calling is desktop-only today.
 
+**Permissions on macOS.** macOS asks per source, with OciDeck's own
+explanation: the microphone when you join, the camera only when you turn it
+on, and *screen recording* when you share — the last one may open System
+Settings; grant it and share again. Declining keeps the call working without
+that source, and the next attempt asks again. A failed join or an
+unreachable server reports its typed reason in the same dialog — no hidden
+call or hanging media is left behind, and the call rail returns to its
+initial state.
+
 ## What the browser version cannot do
 
 OciDeck also runs entirely inside a browser tab, with no application backend

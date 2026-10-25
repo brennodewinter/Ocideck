@@ -652,6 +652,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Die Besprechung konnte Ihren Ton nicht übertragen — schalten Sie die Quelle aus und wieder ein.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Die Besprechung konnte Ihr Bild nicht übertragen — schalten Sie die Quelle aus und wieder ein.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Bildschirmfreigabe fehlgeschlagen — die Quelle wurde verweigert oder ist weggefallen.',
   'De gedeelde bron viel weg; het delen is gestopt.':

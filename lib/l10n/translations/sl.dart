@@ -1605,6 +1605,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Sestanek ni mogel poslati vašega zvoka — poskusite vir izklopiti in znova vklopiti.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Sestanek ni mogel poslati vaše slike — poskusite vir izklopiti in znova vklopiti.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Deljenje zaslona ni uspelo — vir je bil zavrnjen ali je izginil.',
   'De gedeelde bron viel weg; het delen is gestopt.':

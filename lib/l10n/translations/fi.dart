@@ -1605,6 +1605,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Kokous ei pystynyt lähettämään ääntäsi — yritä kytkeä lähde pois ja takaisin päälle.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Kokous ei pystynyt lähettämään kuvaasi — yritä kytkeä lähde pois ja takaisin päälle.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Näytön jakaminen epäonnistui — lähde evättiin tai katosi.',
   'De gedeelde bron viel weg; het delen is gestopt.':

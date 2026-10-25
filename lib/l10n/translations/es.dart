@@ -649,6 +649,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'La reunión no pudo enviar tu sonido — intenta apagar y encender la fuente de nuevo.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'La reunión no pudo enviar tu imagen — intenta apagar y encender la fuente de nuevo.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'No se pudo compartir la pantalla: la fuente fue rechazada o desapareció.',
   'De gedeelde bron viel weg; het delen is gestopt.':

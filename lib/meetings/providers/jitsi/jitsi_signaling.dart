@@ -584,15 +584,20 @@ XmlElement buildSessionAccept({
 );
 
 /// `<jingle action='source-add'>` — meldt één eigen bron (SSRC + msid) aan de
-/// focus, zoals de echte client na de accept doet.
+/// focus, zoals de echte client na de accept doet. [ssrcs] zijn álle
+/// verzend-ssrc's van de sender (media + rtx), elk een eigen `<source>`;
+/// [fidPairs] leveren de `ssrc-group semantics='FID'` — zo loopt de echte
+/// wire (testbed-capture, #2541). [videoType] is 'camera' of 'desktop'.
 XmlElement buildSourceAdd({
   required String sid,
   required String initiator,
   required String contentName,
   required String media,
   required String sourceName,
-  required String ssrc,
+  required List<String> ssrcs,
+  List<(String, String)> fidPairs = const [],
   String? msid,
+  String? videoType,
 }) => _buildSourceAction(
   'source-add',
   sid: sid,
@@ -600,8 +605,10 @@ XmlElement buildSourceAdd({
   contentName: contentName,
   media: media,
   sourceName: sourceName,
-  ssrc: ssrc,
+  ssrcs: ssrcs,
+  fidPairs: fidPairs,
   msid: msid,
+  videoType: videoType,
 );
 
 /// `<jingle action='source-remove'>` — dezelfde vorm als [buildSourceAdd],
@@ -621,7 +628,7 @@ XmlElement buildSourceRemove({
   contentName: contentName,
   media: media,
   sourceName: sourceName,
-  ssrc: ssrc,
+  ssrcs: [ssrc],
 );
 
 XmlElement _buildSourceAction(
@@ -631,8 +638,10 @@ XmlElement _buildSourceAction(
   required String contentName,
   required String media,
   required String sourceName,
-  required String ssrc,
+  required List<String> ssrcs,
+  List<(String, String)> fidPairs = const [],
   String? msid,
+  String? videoType,
 }) => xmppElement(
   'jingle',
   namespace: jingleNs,
@@ -647,18 +656,33 @@ XmlElement _buildSourceAction(
           namespace: jingleRtpNs,
           attributes: {'media': media},
           children: [
-            xmppElement(
-              'source',
-              namespace: jingleSsmaNs,
-              attributes: {'name': sourceName, 'ssrc': ssrc},
-              children: [
-                if (msid != null)
-                  xmppElement(
-                    'parameter',
-                    attributes: {'name': 'msid', 'value': msid},
-                  ),
-              ],
-            ),
+            for (final ssrc in ssrcs)
+              xmppElement(
+                'source',
+                namespace: jingleSsmaNs,
+                attributes: {
+                  'name': sourceName,
+                  'ssrc': ssrc,
+                  'videoType': ?videoType,
+                },
+                children: [
+                  if (msid != null)
+                    xmppElement(
+                      'parameter',
+                      attributes: {'name': 'msid', 'value': msid},
+                    ),
+                ],
+              ),
+            for (final (mediaSsrc, rtxSsrc) in fidPairs)
+              xmppElement(
+                'ssrc-group',
+                namespace: jingleSsmaNs,
+                attributes: {'semantics': 'FID'},
+                children: [
+                  xmppElement('source', attributes: {'ssrc': mediaSsrc}),
+                  xmppElement('source', attributes: {'ssrc': rtxSsrc}),
+                ],
+              ),
           ],
         ),
       ],

@@ -1630,6 +1630,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Η σύσκεψη δεν μπόρεσε να στείλει τον ήχο σας — δοκιμάστε να ενεργοποιήσετε ξανά την πηγή.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Η σύσκεψη δεν μπόρεσε να στείλει την εικόνα σας — δοκιμάστε να ενεργοποιήσετε ξανά την πηγή.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Η κοινοποίηση οθόνης απέτυχε — η πηγή απορρίφθηκε ή εξαφανίστηκε.',
   'De gedeelde bron viel weg; het delen is gestopt.':

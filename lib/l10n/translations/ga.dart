@@ -1635,6 +1635,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Níorbh fhéidir leis an gcruinniú do fhuaim a sheoladh — déan iarracht an foinse a mhúchadh agus a chasadh air arís.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Níorbh fhéidir leis an gcruinniú d\'íomhá a sheoladh — déan iarracht an foinse a mhúchadh agus a chasadh air arís.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Theip ar roinnt an scáileáin — diúltaíodh an foinse nó imigh sí.',
   'De gedeelde bron viel weg; het delen is gestopt.':

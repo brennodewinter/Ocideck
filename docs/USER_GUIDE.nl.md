@@ -6664,6 +6664,16 @@ het deelnemen — een browsertabblad kan de vastgelijmde serveridentiteit
 niet bewijzen die de desktop-app verifieert — dus bellen is vandaag
 desktop-only.
 
+**Rechten op macOS.** macOS vraagt per bron om toestemming, met de eigen
+toelichting van OciDeck: de microfoon bij de join, de camera pas als u hem
+aanzet, en *schermopname* als u iets deelt — bij die laatste opent het
+systeemeventueel de Systeeminstellingen; sta het toe en deel daarna
+opnieuw. Weigert u, dan blijft de call werken maar ontbreekt die bron,
+en de volgende poging vraagt opnieuw. Bij een mislukte deelname of een
+onbereikbare server toont dezelfde dialoog de getypeerde reden — er
+blijft geen verborgen call of hangende media achter, en de call-rail
+keert terug naar zijn beginstaat.
+
 ## Wat de browserversie niet kan
 
 OciDeck draait ook volledig binnen een browsertabblad, zonder applicatiebackend

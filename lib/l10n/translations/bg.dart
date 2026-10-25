@@ -1624,6 +1624,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Срещата не успя да изпрати вашия звук — опитайте да изключите и включите източника отново.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Срещата не успя да изпрати вашето изображение — опитайте да изключите и включите източника отново.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Споделянето на екрана не успя — източникът бе отказан или изчезна.',
   'De gedeelde bron viel weg; het delen is gestopt.':

@@ -1617,6 +1617,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Spotkanie nie mogło przesłać Twojego dźwięku — spróbuj wyłączyć i włączyć źródło ponownie.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Spotkanie nie mogło przesłać Twojego obrazu — spróbuj wyłączyć i włączyć źródło ponownie.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Udostępnianie ekranu się nie powiodło — źródło zostało odrzucone lub zniknęło.',
   'De gedeelde bron viel weg; het delen is gestopt.':

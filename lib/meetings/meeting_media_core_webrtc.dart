@@ -88,18 +88,11 @@ class WebrtcMediaCore implements MeetingMediaCore {
       'bundlePolicy': 'max-bundle',
       'rtcpMuxPolicy': 'require',
     });
-    // Twee sendrecv-transceivers vóór de remote offer: audio en video
-    // corresponderen dan met de eerste twee m-lines van de JVB. Een latere
-    // track koppelt aan de bestaande transceiver — geen heronderhandeling.
-    final audio = await pc.addTransceiver(
-      kind: RTCRtpMediaType.RTCRtpMediaTypeAudio,
-      init: RTCRtpTransceiverInit(direction: TransceiverDirection.SendRecv),
-    );
-    final video = await pc.addTransceiver(
-      kind: RTCRtpMediaType.RTCRtpMediaTypeVideo,
-      init: RTCRtpTransceiverInit(direction: TransceiverDirection.SendRecv),
-    );
-    return _WebrtcConnection(pc, audio, video);
+    // Géén eigen transceivers vóór de offer: op deze binding associeert de
+    // remote offer ze niet met de m-lines (die krijgen dan eigen recvonly-
+    // transceivers en de onze staan wees, #2541). De offer maakt ze zelf;
+    // `completeAnswer` zet hun richting op SendRecv vóór het antwoord.
+    return _WebrtcConnection(pc);
   }
 
   @override
@@ -107,7 +100,7 @@ class WebrtcMediaCore implements MeetingMediaCore {
 }
 
 class _WebrtcConnection implements MeetingMediaConnection {
-  _WebrtcConnection(this._pc, this._audioTr, this._videoTr) {
+  _WebrtcConnection(this._pc) {
     _pc
       ..onTrack = _onTrack
       ..onRemoveStream = _onRemoveStream
@@ -115,8 +108,10 @@ class _WebrtcConnection implements MeetingMediaConnection {
   }
 
   final RTCPeerConnection _pc;
-  final RTCRtpTransceiver _audioTr;
-  final RTCRtpTransceiver _videoTr;
+  // De transceivers die de remote offer aanmaakte — gevuld in
+  // `completeAnswer`, waar hun richting op SendRecv gaat (#2541).
+  RTCRtpTransceiver? _audioTr;
+  RTCRtpTransceiver? _videoTr;
   final _remote = StreamController<MeetingRemoteTrack>.broadcast();
   final _livenessOut = StreamController<MeetingMediaLiveness>.broadcast();
   final _localLostOut = StreamController<String>.broadcast();
@@ -224,16 +219,13 @@ class _WebrtcConnection implements MeetingMediaConnection {
     if (tracks.isEmpty) return null;
     final track = tracks.first;
     try {
-      if (_answered) {
-        // attachToSender=false: de camera aanzetten tijdens schermdelen mag
-        // het scherm niet van de sender wippen — de track bestaat dan al en
-        // komt bij het stoppen van delen vanzelf op de sender.
-        if (attachToSender) {
-          await (kind == 'audio' ? _audioTr : _videoTr).sender.replaceTrack(
-            track,
-          );
-        }
-      } else {
+      final tr = kind == 'audio' ? _audioTr : _videoTr;
+      // attachToSender=false: de camera aanzetten tijdens schermdelen mag
+      // het scherm niet van de sender wippen — de track bestaat dan al en
+      // komt bij het stoppen van delen vanzelf op de sender.
+      if (tr != null && attachToSender) {
+        await tr.sender.replaceTrack(track);
+      } else if (tr == null) {
         await _pc.addTrack(track, stream);
       }
     } catch (e) {
@@ -253,19 +245,196 @@ class _WebrtcConnection implements MeetingMediaConnection {
   /// De ssrc van de sender op onze transceiver — die meldt de adapter aan de
   /// focus via source-add.
   Future<int?> _senderSsrc(String kind) async {
+    final src = await _senderSource(kind);
+    return src == null ? null : (src.ssrcs.isEmpty ? null : src.ssrcs.first);
+  }
+
+  /// De verzend-bron op één lezing, uit drie bronnen van steeds levensechter
+  /// waarheid: `sender.parameters` (op web een live getter; in de native
+  /// binding een creatie-cache — #2541), dan de `a=ssrc:`-regels uit de
+  /// lokale SDP van het antwoord (de onderhandelde waarheid), dan de
+  /// `outbound-rtp`-stats (de wire-waarheid ná replaceTrack mid-call —
+  /// die ssrc staat in géén SDP). `sender.track` is de track die er NU op
+  /// ligt: tijdens schermdelen is dat het scherm, niet de camera (#2537).
+  Future<MeetingLocalSource?> _senderSource(String kind) async {
+    final tr = kind == 'audio' ? _audioTr : _videoTr;
+    final sender = tr?.sender;
+    final track = sender?.track;
+    // parameters is op web een live getter; de native binding bewaakt een
+    // creatie-cache, dus een lege lijst is daar geen teken van "geen ssrc".
+    if (sender != null && track != null) {
+      final paramSsrcs = <int>[];
+      try {
+        for (final enc
+            in sender.parameters.encodings ?? const <RTCRtpEncoding>[]) {
+          final ssrc = enc.ssrc;
+          if (ssrc != null && ssrc != 0) paramSsrcs.add(ssrc);
+        }
+      } on Exception catch (e) {
+        logWarning('WebrtcConnection.senderSsrc', e);
+      }
+      if (paramSsrcs.isNotEmpty) {
+        return MeetingLocalSource(
+          msid: '${_sendStream(kind)?.id ?? ''} ${track.id ?? ''}'.trim(),
+          ssrcs: paramSsrcs,
+        );
+      }
+    }
+    // addTrack op deze binding bindt niet altijd aan _audioTr/_videoTr —
+    // sender.track kan dus null zijn terwijl de m-sectie wél een verzend-
+    // ssrc kent. De a=ssrc-regels in het antwoord zijn de aankondig-waarheid.
+    final fromSdp = await _sdpSource(kind);
+    if (fromSdp != null) {
+      return MeetingLocalSource(
+        msid: fromSdp.msid.isNotEmpty ? fromSdp.msid : _localMsid(kind, track),
+        ssrcs: fromSdp.ssrcs,
+        fidPairs: fromSdp.fidPairs,
+      );
+    }
+    // Een post-onderhandeling-ssrc (camera aan via replaceTrack) staat in
+    // géén SDP — de wire-waarheid zit in de outbound-rtp stats.
+    return _statsSource(kind, _localMsid(kind, track));
+  }
+
+  String _localMsid(String kind, MediaStreamTrack? track) =>
+      '${_sendStream(kind)?.id ?? ''} ${track?.id ?? ''}'.trim();
+
+  /// De `a=ssrc:`-, `a=ssrc-group:FID`- en `a=msid:`-regels uit de m-sectie
+  /// van [kind] in de lokale SDP — de ssrc('s) die de andere kant in de
+  /// source-add verwacht. Null zolang er geen antwoord of geen verzend-
+  /// ssrc in die sectie staat (bijv. camera later pas gekoppeld).
+  Future<MeetingLocalSource?> _sdpSource(String kind) async {
+    final RTCSessionDescription? desc;
     try {
-      final sender = (kind == 'audio' ? _audioTr : _videoTr).sender;
-      for (final enc
-          in sender.parameters.encodings ?? const <RTCRtpEncoding>[]) {
-        if (enc.ssrc != null) return enc.ssrc;
+      desc = await _pc.getLocalDescription();
+    } on Exception catch (e) {
+      logWarning('WebrtcConnection.sdpSource', e);
+      return null;
+    }
+    return meetingLocalSourceFromSdp(desc?.sdp, kind);
+  }
+
+  /// De ssrc waarop libwebrtc NU echt RTP stuurt — de `outbound-rtp`-stats
+  /// van [kind]. Dit is de enige bron die een ssrc kent die pas ná de
+  /// onderhandeling ontstond (camera aan via `replaceTrack`, #2541).
+  Future<MeetingLocalSource?> _statsSource(String kind, String msid) async {
+    try {
+      for (final report in await _pc.getStats()) {
+        // Nieuwe bindings rapporteren 'outbound-rtp'; de Darwin-binding
+        // gebruikt het legacy `statisticsWithCompletionHandler` met type
+        // 'ssrc' voor beide richtingen — 'bytesSent' markeert de zendkant
+        // (#2541).
+        final outbound =
+            report.type == 'outbound-rtp' ||
+            (report.type == 'ssrc' &&
+                report.values.keys.any((k) => '$k'.endsWith('Sent')));
+        if (!outbound) continue;
+        final values = report.values;
+        final mediaKind = values['mediaType'] ?? values['kind'];
+        if (mediaKind != kind) continue;
+        final ssrc = int.tryParse('${values['ssrc']}');
+        if (ssrc != null && ssrc != 0) {
+          return MeetingLocalSource(msid: msid, ssrcs: [ssrc]);
+        }
       }
     } on Exception catch (e) {
-      logWarning('WebrtcConnection.senderSsrc', e);
+      logWarning('WebrtcConnection.statsSource', e);
     }
     return null;
   }
 
-  var _answered = false;
+  /// De stream die op de sender van [kind] ligt — tijdens schermdelen is
+  /// de video-sender het scherm, dus levert de msid dan de schermstream.
+  MediaStream? _sendStream(String kind) => kind == 'audio'
+      ? _micStream
+      : (_screenTrackId != null ? _screenStream : _camStream);
+
+  @override
+  Future<MeetingLocalSource?> localSource(
+    String kind, {
+    bool singleAttempt = false,
+  }) async {
+    if (_closed) return null;
+    // libwebrtc wijst de verzend-ssrc pas toe zodra de track echt gaat
+    // zenden — vlak na addTrack/replaceTrack kent geen van de drie
+    // bronnen hem nog (#2541). Begrensd pollen; nooit oneindig wachten.
+    for (var i = 0; i < (singleAttempt ? 1 : 40) && !_closed; i++) {
+      final src = await _senderSource(kind);
+      if (src != null) return src;
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    }
+    logWarning(
+      'WebrtcConnection.localSource($kind): geen ssrc na 4s',
+      await _sourceDiagnostics(kind),
+    );
+    return null;
+  }
+
+  /// Wat de drie bronroutes zagen toen ze allemaal leeg bleven — de binding
+  /// rapporteert ssrc's afwijkend per platform (#2541), dus de mislukking
+  /// moet zichzelf kunnen verklaren zonder debugger.
+  Future<String> _sourceDiagnostics(String kind) async {
+    final parts = <String>[];
+    try {
+      final sdp = (await _pc.getLocalDescription())?.sdp;
+      parts.add('sdp=${sdp == null ? 'null' : '${sdp.length}c'}');
+      if (sdp != null) {
+        var inSection = false;
+        var ssrcLines = 0;
+        final dirs = <String>[];
+        for (final raw in sdp.split('\n')) {
+          final line = raw.trim();
+          if (line.startsWith('m=')) {
+            inSection = line.startsWith('m=$kind ');
+          } else if (inSection && line.startsWith('a=ssrc:')) {
+            ssrcLines++;
+          }
+          if (line.startsWith('a=send') ||
+              line.startsWith('a=recv') ||
+              line.startsWith('a=inactive')) {
+            dirs.add(line.substring(2));
+          }
+        }
+        parts.add('ssrc-regels=$ssrcLines dir=[${dirs.join(',')}]');
+      }
+    } on Exception {
+      parts.add('sdp-fout');
+    }
+    try {
+      final tr = kind == 'audio' ? _audioTr : _videoTr;
+      TransceiverDirection? dir, cur;
+      try {
+        dir = await tr?.getDirection();
+        cur = await tr?.getCurrentDirection();
+      } on Exception {
+        // richting onleesbaar op deze binding — dan blijft null staan
+      }
+      parts.add('tr(mid=${tr?.mid} dir=$dir cur=$cur)');
+      final all = await _pc.getTransceivers();
+      parts.add(
+        'transceivers=[${all.map((t) => '${t.mid}:${t.sender.track != null}').join(',')}]',
+      );
+    } on Exception {
+      parts.add('tr-fout');
+    }
+    try {
+      final types = <String>{};
+      final mediaKeys = <String>{};
+      for (final r in await _pc.getStats()) {
+        types.add(r.type);
+        if (r.type == 'ssrc' || r.type == 'outbound-rtp') {
+          mediaKeys.addAll(r.values.keys.map((k) => '$k'));
+        }
+      }
+      parts.add('stats=[${types.join(',')}]');
+      if (mediaKeys.isNotEmpty) {
+        parts.add('media-keys=[${mediaKeys.join(',')}]');
+      }
+    } on Exception {
+      parts.add('stats-fout');
+    }
+    return parts.join(' ');
+  }
 
   @override
   Future<({String trackId, int? ssrc})?> addLocalAudio() =>
@@ -361,7 +530,7 @@ class _WebrtcConnection implements MeetingMediaConnection {
       // aangekondigde bron <nick>-v0 blijven gelijk, alleen de inhoud
       // wisselt. Dat is hoe lib-jitsi-meet delen neerlegt — geen extra
       // m-line, geen nieuwe bron.
-      await _videoTr.sender.replaceTrack(track);
+      await _videoTr?.sender.replaceTrack(track);
     } on Exception catch (e) {
       await track.stop();
       await stream.dispose();
@@ -393,7 +562,7 @@ class _WebrtcConnection implements MeetingMediaConnection {
     // loskoppelen — een sender zonder track stuurt niets.
     final cam = _cameraTrackId == null ? null : _localTracks[_cameraTrackId];
     try {
-      await _videoTr.sender.replaceTrack(cam);
+      await _videoTr?.sender.replaceTrack(cam);
     } on Exception catch (e) {
       logWarning('WebrtcConnection.stopScreenShare: terugzetten faalde', e);
     }
@@ -488,14 +657,29 @@ class _WebrtcConnection implements MeetingMediaConnection {
   }
 
   @override
-  Future<void> applyRemoteOffer(String sdp) =>
-      _pc.setRemoteDescription(RTCSessionDescription(sdp, 'offer'));
+  Future<void> applyRemoteOffer(String sdp) async {
+    await _pc.setRemoteDescription(RTCSessionDescription(sdp, 'offer'));
+    // De offer maakt zelf een transceiver per m-line — die staan standaard
+    // op recvonly. Onze kant wil óók kunnen zenden: pak die geassocieerde
+    // transceivers (niet-lege mid, de wezen raken nooit de wire) en zet
+    // hun richting vóór het antwoord op SendRecv (#2541).
+    for (final tr in await _pc.getTransceivers()) {
+      if (tr.mid.isEmpty) continue;
+      final kind = tr.receiver.track?.kind;
+      if (kind == 'audio' && _audioTr == null) {
+        _audioTr = tr;
+      } else if (kind == 'video' && _videoTr == null) {
+        _videoTr = tr;
+      }
+    }
+    await _audioTr?.setDirection(TransceiverDirection.SendRecv);
+    await _videoTr?.setDirection(TransceiverDirection.SendRecv);
+  }
 
   @override
   Future<String> completeAnswer() async {
     final answer = await _pc.createAnswer(const {});
     await _pc.setLocalDescription(answer);
-    _answered = true;
     final sdp = answer.sdp;
     if (sdp == null) {
       throw StateError('libwebrtc gaf een antwoord zonder sdp');
@@ -550,6 +734,48 @@ class _WebrtcConnection implements MeetingMediaConnection {
     if (!_livenessOut.isClosed) await _livenessOut.close();
     if (!_localLostOut.isClosed) await _localLostOut.close();
   }
+}
+
+/// De eigen verzend-ssrc's, FID-paren en msid uit de m-sectie van [kind]
+/// (`'audio'`/`'video'`) in een SDP — puur en dus los testbaar. Dit is de
+/// onderhandelde waarheid die `localSource` nodig heeft: de gecachete
+/// `sender.parameters` van de native binding kent die ssrc's niet (#2541).
+/// Null zonder SDP of zonder verzend-ssrc in die sectie.
+MeetingLocalSource? meetingLocalSourceFromSdp(String? sdp, String kind) {
+  if (sdp == null) return null;
+  var inSection = false;
+  final ssrcs = <int>{};
+  final fidPairs = <(int, int)>[];
+  String? msid;
+  for (final raw in sdp.split('\n')) {
+    final line = raw.trim();
+    if (line.startsWith('m=')) {
+      inSection = line.startsWith('m=$kind ');
+      continue;
+    }
+    if (!inSection) continue;
+    if (line.startsWith('a=ssrc-group:FID ')) {
+      final parts = line.substring('a=ssrc-group:FID '.length).split(' ');
+      if (parts.length >= 2) {
+        final media = int.tryParse(parts[0]);
+        final rtx = int.tryParse(parts[1]);
+        if (media != null && rtx != null) fidPairs.add((media, rtx));
+      }
+    } else if (line.startsWith('a=ssrc:')) {
+      final v = int.tryParse(
+        line.substring('a=ssrc:'.length).split(RegExp(r'\s')).first,
+      );
+      if (v != null && v != 0) ssrcs.add(v);
+    } else if (line.startsWith('a=msid:')) {
+      msid ??= line.substring('a=msid:'.length).trim();
+    }
+  }
+  if (ssrcs.isEmpty) return null;
+  return MeetingLocalSource(
+    msid: msid ?? '',
+    ssrcs: ssrcs.toList(),
+    fidPairs: fidPairs,
+  );
 }
 
 /// De echte texture die [attachVideo] teruggeeft — beheert één

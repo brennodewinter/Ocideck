@@ -260,6 +260,27 @@ class FakeMediaConnection implements MeetingMediaConnection {
   Future<void> selectAudioOutput(String deviceId) async =>
       selectedOutput = deviceId;
 
+  /// Wat `localSource` teruggeeft — de aankondiging leest de bron op het
+  /// aankondig-moment, niet uit het attach-resultaat (#2541). Tijdens een
+  /// share is de video-bron het scherm, zoals op de echte sender.
+  var localSourceReturnsNull = false;
+  var _screenOnSender = false;
+
+  @override
+  Future<MeetingLocalSource?> localSource(
+    String kind, {
+    bool singleAttempt = false,
+  }) async {
+    if (localSourceReturnsNull) return null;
+    if (kind == 'audio') {
+      return MeetingLocalSource(msid: 'ma ta', ssrcs: [audioSsrc]);
+    }
+    return MeetingLocalSource(
+      msid: _screenOnSender ? 'ms ts' : 'mv tv',
+      ssrcs: [_screenOnSender ? screenSsrc : videoSsrc],
+    );
+  }
+
   @override
   Future<({String trackId, int? ssrc})?> addLocalAudio() async =>
       allowAudio ? (trackId: 'ta', ssrc: audioSsrc) : null;
@@ -292,12 +313,14 @@ class FakeMediaConnection implements MeetingMediaConnection {
   }) async {
     if (!allowScreen) return null;
     lastScreenSourceId = sourceId;
+    _screenOnSender = true;
     return (trackId: 'ts', ssrc: screenSsrc);
   }
 
   @override
   Future<void> stopScreenShare() async {
     screenStopped = true;
+    _screenOnSender = false;
   }
 
   @override
@@ -776,6 +799,41 @@ void main() {
         isFalse,
       );
     });
+
+    // #2541: de ssrc is vlak na attach vaak nog niet toegewezen — de
+    // aankondiging leest hem daarom opnieuw via localSource. Meldt die
+    // alsnog niets, dan mag dat nooit stil blijven: een niet-terminale
+    // fout en géén source-add met een verzonnen ssrc.
+    test(
+      'geen ssrc op aankondigmoment → foutmelding, geen source-add',
+      () async {
+        final session = await joinLive(startCameraOff: true);
+        addTearDown(() => session.leave());
+        final events = <MeetingEvent>[];
+        final sub = session.events.listen(events.add);
+        mediaCore.conn.localSourceReturnsNull = true;
+        await session.setCamera(enabled: true);
+        await pumpEventQueue();
+        expect(
+          channel.sent.any(
+            (s) => s.children.any(
+              (e) =>
+                  e.name.local == 'jingle' &&
+                  e.getAttribute('action') == 'source-add' &&
+                  e.toXmlString().contains('-v0'),
+            ),
+          ),
+          isFalse,
+        );
+        expect(
+          events.whereType<MeetingErrorEvent>().any(
+            (e) => e.message.contains('beeld') && !e.terminal,
+          ),
+          isTrue,
+        );
+        await sub.cancel();
+      },
+    );
 
     test('chat in en uit', () async {
       final session = await joinLive();

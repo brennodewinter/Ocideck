@@ -651,6 +651,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'E reunión no por a mandá bo zonido — purba di paga i prende e fuente di nobo.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'E reunión no por a mandá bo imagen — purba di paga i prende e fuente di nobo.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'No a por kompartí e pantaya — e fuente a ser nenga òf a desaparesé.',
   'De gedeelde bron viel weg; het delen is gestopt.':

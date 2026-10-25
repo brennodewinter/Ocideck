@@ -2513,6 +2513,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Toplantı sesinizi iletemedi — kaynağı kapatıp yeniden açmayı deneyin.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Toplantı görüntünüzü iletemedi — kaynağı kapatıp yeniden açmayı deneyin.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Ekran paylaşımı başarısız oldu — kaynak reddedildi veya kayboldu.',
   'De gedeelde bron viel weg; het delen is gestopt.':

@@ -185,6 +185,27 @@ All notable changes to OciDeck are documented in this file.
 
 ### Fixed
 
+- **De andere kant van de call ziet en hoort u nu echt (#2541).** De echte
+  macOS-proef met een tweede deelnemer wees uit dat OciDeck wel ontving maar
+  nooit zond: het aangemaakte antwoord onderhandelde beide richtingen als
+  alleen-ontvangend, en de nummering waarmee eigen audio en beeld bij de
+  vergaderserver bekend gemaakt worden kon daardoor nergens vandaan komen.
+  De mediabinding gebruikt nu de transceivers die het aanbod zelf maakte en
+  zet ze vóór het antwoord op zendend-ontvangend; de bron-aankondiging leest
+  de zend-nummers op het moment van melden (uit de onderhandelde SDP of de
+  zend-statistieken, want de apparaatlaag kent ze pas zodra er echt pakketten
+  lopen), kondigt ze aan in de vorm die de server verwacht — alle nummers,
+  gekoppelde reparatiestromen en het type bron, zodat schermdelen aan de
+  andere kant óók als scherm arriveert — en probeert later opnieuw wat een
+  gedempte bron nog niet kon zeggen. Een bron die dan nog steeds niets
+  meldt krijgt een zichtbare melding in plaats van stil weggedrukt te
+  worden.
+- **De linkcontrole hing bij een onbereikbare of weigerende server.** De
+  vergaderlink-dialoog wachtte na **Preflight uitvoeren** eindeloos op een
+  antwoord dat nooit kwam, omdat een onverwachte fout de knop op
+  "Verbinden…" liet staan. De controle meldt nu de getypeerde reden —
+  bijvoorbeeld *de server is niet bereikbaar of weigerde de verbinding* —
+  en een eerdere foutregel verdwijnt zodra u een nieuwe link controleert.
 - **Het bedrijfslogo is op de document-PDF weer leesbaar.** De export rekende
   zijn breedte om via een eigen schaal (ingestelde maat × 0,5, afgekapt op
   72 pt) en negeerde de terugval op het presentatielogo — daardoor werd zelfs

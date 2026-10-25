@@ -128,14 +128,31 @@ class _FakeMediaConnection implements MeetingMediaConnection {
   @override
   Future<void> selectAudioOutput(String deviceId) async {}
 
+  /// De bron die `localSource` meldt — de aankondiging leest hem op het
+  /// aankondig-moment opnieuw (#2541).
+  final localSources = <String, MeetingLocalSource>{};
+
   @override
-  Future<({String trackId, int? ssrc})?> addLocalAudio() async =>
-      (trackId: 'ta', ssrc: _ssrcSeq++);
+  Future<MeetingLocalSource?> localSource(
+    String kind, {
+    bool singleAttempt = false,
+  }) async => localSources[kind];
+
+  @override
+  Future<({String trackId, int? ssrc})?> addLocalAudio() async {
+    final ssrc = _ssrcSeq++;
+    localSources['audio'] = MeetingLocalSource(msid: 'ma ta', ssrcs: [ssrc]);
+    return (trackId: 'ta', ssrc: ssrc);
+  }
 
   @override
   Future<({String trackId, int? ssrc})?> addLocalVideo({
     bool attachToSender = true,
-  }) async => (trackId: 'tv', ssrc: _ssrcSeq++);
+  }) async {
+    final ssrc = _ssrcSeq++;
+    localSources['video'] = MeetingLocalSource(msid: 'mv tv', ssrcs: [ssrc]);
+    return (trackId: 'tv', ssrc: ssrc);
+  }
 
   @override
   Future<List<MeetingScreenSource>> screenSources() async => const [];
@@ -143,7 +160,11 @@ class _FakeMediaConnection implements MeetingMediaConnection {
   @override
   Future<({String trackId, int? ssrc})?> addLocalScreen({
     String? sourceId,
-  }) async => (trackId: 'ts', ssrc: _ssrcSeq++);
+  }) async {
+    final ssrc = _ssrcSeq++;
+    localSources['video'] = MeetingLocalSource(msid: 'ms ts', ssrcs: [ssrc]);
+    return (trackId: 'ts', ssrc: ssrc);
+  }
 
   @override
   Future<void> stopScreenShare() async {}

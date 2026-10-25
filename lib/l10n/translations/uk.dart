@@ -1620,6 +1620,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Нарада не змогла передати ваш звук — спробуйте вимкнути та знову ввімкнути джерело.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Нарада не змогла передати ваше зображення — спробуйте вимкнути та знову ввімкнути джерело.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Не вдалося поділитися екраном — джерело відмовлено або воно зникло.',
   'De gedeelde bron viel weg; het delen is gestopt.':

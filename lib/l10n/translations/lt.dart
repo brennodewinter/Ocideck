@@ -1611,6 +1611,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Susitikimas negalėjo perduoti jūsų garso — pabandykite išjungti ir vėl įjungti šaltinį.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Susitikimas negalėjo perduoti jūsų vaizdo — pabandykite išjungti ir vėl įjungti šaltinį.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Ekrano bendrinimas nepavyko — šaltinis buvo atmestas arba dingo.',
   'De gedeelde bron viel weg; het delen is gestopt.':

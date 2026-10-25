@@ -101,6 +101,7 @@ class _MeetingPreflightDialogState
       _rememberProfile = false;
       _trustedInternal = false;
       _preflight = null;
+      _joinError = null;
     });
   }
 
@@ -141,13 +142,22 @@ class _MeetingPreflightDialogState
 
   Future<void> _preflightNow() async {
     setState(() => _preflighting = true);
-    final result = await _runPreflight(_match!);
-    if (!mounted) return;
-    setState(() {
-      _preflighting = false;
-      _preflight = result;
-      _joinError = null;
-    });
+    try {
+      final result = await _runPreflight(_match!);
+      if (!mounted) return;
+      setState(() {
+        _preflighting = false;
+        _preflight = result;
+        _joinError = null;
+      });
+    } on Object catch (e, st) {
+      logError('MeetingPreflightDialog: preflight', e, st);
+      if (!mounted) return;
+      setState(() {
+        _preflighting = false;
+        _joinError = MeetingFailureReason.providerUnavailable;
+      });
+    }
   }
 
   Future<MeetingSession> _runJoin() => widget.join != null

@@ -1621,6 +1621,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Întâlnirea nu a putut transmite sunetul dvs. — încercați să reporniți sursa.',
+  'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
+      'Întâlnirea nu a putut transmite imaginea dvs. — încercați să reporniți sursa.',
   'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
       'Partajarea ecranului a eșuat — sursa a fost refuzată sau a dispărut.',
   'De gedeelde bron viel weg; het delen is gestopt.':
