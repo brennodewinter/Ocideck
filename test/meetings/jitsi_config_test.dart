@@ -4,21 +4,8 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/meetings/providers/jitsi/jitsi_config.dart';
-import 'package:ocideck/meetings/providers/jitsi/jitsi_config_web.dart' as web;
 
 void main() {
-  test('the web half fails closed until the CSP/pinning decision lands', () {
-    // De web-seam mag geen ongepinde fetch doen: een preflight die "werkt
-    // maar niet gecontroleerd" is erger dan een eerlijke afwezigheid.
-    expect(
-      () => web.fetchJitsiConfig(
-        Uri.parse('https://meet.example/config.js'),
-        allowPrivate: false,
-      ),
-      throwsUnsupportedError,
-    );
-  });
-
   test('reads the upstream object form', () {
     final c = parseJitsiConfig('''
       var config = {

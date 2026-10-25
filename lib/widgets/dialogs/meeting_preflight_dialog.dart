@@ -15,8 +15,9 @@
 //      draagt hem over aan `meetingSessionProvider` (root-scoped). Een
 //      mislukte join toont de getypeerde reden in hetzelfde dialoog.
 
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../state/meeting_providers.dart';
@@ -26,6 +27,7 @@ import '../../meetings/meeting_provider.dart';
 import '../../meetings/meeting_nick.dart';
 import '../../meetings/meeting_provider_profile.dart';
 import '../../state/meeting_session_provider.dart';
+import '../../utils/literal_loopback.dart' show isLiteralInternalHost;
 import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
 
@@ -490,7 +492,12 @@ class _ProviderQuestion extends StatelessWidget {
           value: trustedInternal,
           onChanged: (v) => onTrustedChanged(v ?? false),
           title: Text(
-            NetGuard.isBlockedHost(origin.host)
+            // Op web gooit NetGuard.isBlockedHost (`InternetAddress.tryParse`).
+            // Dezelfde letterlijke classificatie, zonder dart:io. Een gewone
+            // naam blijft hier "publiek": die lost de browser op.
+            (kIsWeb
+                    ? isLiteralInternalHost(origin.host)
+                    : NetGuard.isBlockedHost(origin.host))
                 ? l10n.d(
                     'Deze server staat op mijn eigen (interne) netwerk — privé-adres, alleen aanvinken als u deze server beheert',
                   )

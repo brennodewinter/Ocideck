@@ -399,7 +399,10 @@ void main() {
         r'|package:dio/'
         r'|\bhttp\.(Client|get|post|put|patch|delete|head|read|readBytes)\('
         // Raw sockets: an SSRF path that never touches an HTTP client at all.
-        r'|\b(Socket|SecureSocket|WebSocket|RawDatagramSocket)\.(connect|bind)\(',
+        r'|\b(Socket|SecureSocket|WebSocket|RawDatagramSocket)\.(connect|bind)\('
+        // De browser-constructor (`web.WebSocket(`) is geen `.connect`, maar
+        // wél een socket. Zonder deze tak glipt hij langs de scan.
+        r'|\bWebSocket\(',
       ),
       allowedFiles: {
         // Houdt de `package:http`-import voor de part-bibliotheek eronder.
@@ -431,6 +434,11 @@ void main() {
         // plus de fail-closed schema-assert). Bewust WebSocket.connect en niet
         // IOWebSocketChannel, zodat deze scan de socket wél ziet.
         'lib/xmpp/xmpp_frame_transport_io.dart',
+        // XMPP-over-WebSocket egress (web, #2544): `web.WebSocket(`. Pinnen
+        // kan in een browser niet; de schemegrens (`allowsWebXmppSocket`:
+        // wss, of ws alleen naar letterlijk loopback) en de pagina-CSP
+        // (`connect-src` met `wss:`, geen `ws:`) zijn de grens.
+        'lib/xmpp/xmpp_frame_transport_web.dart',
         // Server-side deck index (WEB-tak). Zelfde redenering als
         // file_service_net.dart hierboven: op web bestaat de dart:io-pinning
         // niet en kan ze er niet draaien — de browser (CORS, mixed content) en

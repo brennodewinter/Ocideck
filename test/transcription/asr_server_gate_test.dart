@@ -162,6 +162,14 @@ void main() {
         deny(cloud.copyWith(baseUrl: 'https://127.0.0.1'), isWeb: true),
         AsrGateDenial.insecureHttpOnWeb,
       );
+      expect(
+        deny(cloud.copyWith(baseUrl: 'https://localhost'), isWeb: true),
+        AsrGateDenial.insecureHttpOnWeb,
+      );
+      expect(
+        deny(cloud.copyWith(baseUrl: 'https://[::ffff:10.0.0.1]'), isWeb: true),
+        AsrGateDenial.insecureHttpOnWeb,
+      );
     });
   });
 }

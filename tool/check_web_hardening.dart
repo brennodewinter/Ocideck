@@ -69,8 +69,10 @@ void main() {
       );
       // connect-src allows https: on top of 'self' for the user-initiated
       // URL-import (the browser's CORS policy still gates every cross-origin
-      // read). Anything broader (http:, *, data:) would reopen the holes this
-      // check exists to guard.
+      // read), and wss: for the videocalls module's XMPP signalling to a
+      // user-chosen deployment — the same BYO posture, TLS-only. Anything
+      // broader (http:, ws:, *, data:) would reopen the holes this check
+      // exists to guard.
       //
       // `blob:` is required, not merely tolerated: a file dropped on the
       // window arrives as a blob URL, and reading its bytes back is an XHR
@@ -81,10 +83,10 @@ void main() {
       // leaves the machine over it — strictly narrower than the https: that
       // already stands beside it.
       require(
-        _eq(directives['connect-src'], ["'self'", 'https:', 'blob:']),
-        "CSP connect-src must be exactly 'self' https: blob: "
-        '(first-party, TLS-only URL-import fetches, and reading back the '
-        'blob URLs that dropped files arrive as).',
+        _eq(directives['connect-src'], ["'self'", 'https:', 'wss:', 'blob:']),
+        "CSP connect-src must be exactly 'self' https: wss: blob: "
+        '(first-party, TLS-only URL-import fetches and meeting signalling, '
+        'and reading back the blob URLs that dropped files arrive as).',
       );
       require(
         _eq(directives['object-src'], ["'none'"]),

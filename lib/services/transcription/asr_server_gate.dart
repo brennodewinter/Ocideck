@@ -18,6 +18,8 @@
 import 'package:network_guard/network_guard.dart';
 
 import '../../models/asr_server_profile.dart';
+import '../../utils/literal_loopback.dart'
+    show isLiteralInternalHost, isLiteralLoopbackHost;
 
 export 'package:network_guard/network_guard.dart' show AiResolveStrategy;
 
@@ -112,7 +114,7 @@ final class AsrServerGate {
         if (uri.scheme != 'https') {
           return const AsrGateDeny(AsrGateDenial.cloudNeedsTls);
         }
-        if (isWeb && NetGuard.isBlockedHost(uri.host)) {
+        if (isWeb && _isInternalHost(uri.host)) {
           return const AsrGateDeny(AsrGateDenial.insecureHttpOnWeb);
         }
         if (!profile.cloudConfirmed) {
@@ -122,7 +124,12 @@ final class AsrServerGate {
     }
   }
 
-  static bool _isLoopback(String host) => NetGuard.isLiteralLoopbackHost(host);
+  static bool _isLoopback(String host) => isLiteralLoopbackHost(host);
+
+  /// Op web kan `NetGuard.isBlockedHost` niet draaien (`dart:io`); de browser
+  /// is daar de grens. Voor de cloud-modus volstaat de lexicale interne-adres
+  /// check — een cloud-server op een privé-literal is per definitie geen cloud.
+  static bool _isInternalHost(String host) => isLiteralInternalHost(host);
 
   /// Syntactische poort: geldige http(s)-URI met een host. `null` betekent:
   /// niet geconfigureerd, geen scherpe melding nodig.

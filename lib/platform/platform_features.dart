@@ -36,6 +36,6 @@ String? get osHomeDirectory => impl.osHomeDirectory;
 /// SSRF-pinning, en vanuit de browser vergt WebDAV bovendien CORS-instellingen
 /// op de server — een designkeuze die expliciet met de beheerder afgestemd
 /// moet worden. URL-import valt hier bewust NIET onder: die werkt op web via
-/// de browser (CORS + CSP `connect-src 'self' https:`) met dezelfde
+/// de browser (CORS + CSP `connect-src 'self' https: wss:`) met dezelfde
 /// security-gate als op desktop.
 bool get supportsNetworkDeckSources => impl.supportsNetworkDeckSources;

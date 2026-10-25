@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Vergaderen in de browser, de naad (#2544).** De webversie haalt
+  `config.js` op en opent de XMPP-websocket van een vergadering die je
+  zelf aanwijst. De browser is daar de netwerkgrens: geen certificaatpin,
+  wel `https`/`wss`, en platte `http`/`ws` alleen naar een letterlijk
+  loopback-adres. De pagina staat `wss:` toe, en camera, microfoon en
+  schermdeling alleen voor de eigen site — de browser vraagt nog steeds
+  zelf. Een echte tweepersoonscall op een uitgebrachte webbuild is hiermee
+  niet bewezen; die proef staat nog open.
+
 - **Microfoon opnemen op de desktop (#2516).** Onder Uitbreidingen zet je
   Transcriptie en opname aan. Daarna staat bij Importeren **Microfoon
   opnemen…**: kies een invoer of de systeemstandaard, lees de regel over

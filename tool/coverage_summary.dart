@@ -66,9 +66,15 @@ const Set<String> uncoveredBaseline = {
   // not a hiding place for logic testable via a fake.
   'lib/meetings/meeting_media_core_webrtc.dart',
   // NO EXECUTABLE LINES (#2533): `jitsi_config_platform.dart` is een kale
-  // conditional-export facade (io/web-seam); lcov emitteert geen record. De
-  // web-half faalt-dicht en dat contract is bewezen in jitsi_config_test.dart.
+  // conditional-export facade (io/web-seam); lcov emitteert geen record.
   'lib/meetings/providers/jitsi/jitsi_config_platform.dart',
+  // PLATFORM: `jitsi_config_web.dart` (#2544) is de webhelft van de
+  // config.js-fetch — `dart:js_interop`/`package:web` (fetch +
+  // AbortController + TextDecoder) laden niet in de VM-runner. Zijn enige
+  // toetsbare beslissing — de schemegrens met de lexicale loopback-check —
+  // staat in `literal_loopback.dart` en wordt daar gedekt; de browser-`fetch`
+  // zelf wordt live in het testbed bewezen.
+  'lib/meetings/providers/jitsi/jitsi_config_web.dart',
   // UNTESTABLE NATIVE BINDING (#2158): `mic_monitor_webrtc.dart` is de dunne
   // binding achter de MicMonitor-naad voor microfoon-doorvoer. Zelfde categorie
   // als meeting_media_core_webrtc hierboven: libwebrtc vraagt een echt
@@ -297,9 +303,15 @@ const Set<String> uncoveredBaseline = {
   'lib/services/git/native_git_mirror_stub.dart',
   // PLATFORM: de XMPP-transportfacade is eveneens één kale conditional export
   // zonder uitvoerbare regels. De io-helft wordt door de verbindingstests
-  // geraakt; de fail-closed webhelft wordt rechtstreeks getoetst in
-  // xmpp_frame_transport_web_test.dart.
+  // geraakt.
   'lib/xmpp/xmpp_frame_transport_platform.dart',
+  // PLATFORM: `xmpp_frame_transport_web.dart` (#2544) is de webhelft van de
+  // XMPP-egress — `dart:js_interop`/`package:web` (browser-WebSocket) laden
+  // niet in de VM-runner. Zijn toetsbare schemegrens deelt de lexicale
+  // loopback-check uit `literal_loopback.dart` (gedekt in
+  // literal_loopback_test.dart); de echte socket wordt live in het testbed
+  // bewezen.
+  'lib/xmpp/xmpp_frame_transport_web.dart',
   // PLATFORM: the git draft store's conditional-export facade. Both halves
   // (FileDraftStore, PrefsDraftStore) are exercised by the DeckMirror contract
   // in test/git_deck_mirror_contract_test.dart; only this one-line barrel has no

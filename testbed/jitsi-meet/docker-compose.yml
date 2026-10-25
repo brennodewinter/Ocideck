@@ -28,6 +28,12 @@ services:
       # Corrigeert de websocket-/bosh-URL die upstream bij DISABLE_HTTPS=1
       # foutief als wss://http://… opbouwt. Wordt achter config.js geplakt.
       - ./web/custom-config.js:/config/custom-config.js:ro
+      # OciDeck-webbundel voor de callproef (#2544): same-origin met de
+      # deployment onder /static/ocideck/ (nginx-alias dekt dat pad), zodat
+      # 'self' in de bundel-CSP config.js en de websocket meeneemt. Zonder
+      # OCIDECK_WEB valt de mount op dit testbed's eigen web-map — het pad
+      # bestaat dan wel maar bevat geen bundel.
+      - ${OCIDECK_WEB:-./web}:/usr/share/jitsi-meet/static/ocideck:ro
     environment:
       - AUTH_TYPE
       - DISABLE_HTTPS
