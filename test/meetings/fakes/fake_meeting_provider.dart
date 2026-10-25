@@ -155,6 +155,10 @@ class FakeMeetingSession implements MeetingSession {
 
   // ── test helpers ──────────────────────────────────────────────────────────
 
+  /// Whether [leave] ran — tests asserting "an adopted-away or quit call is
+  /// really torn down" read this (#2536).
+  bool get left => _closed;
+
   /// A remote participant joins.
   void addRemoteParticipant(MeetingParticipant participant) {
     _remotes[participant.id] = participant;

@@ -13,11 +13,9 @@ import 'module_card.dart';
 
 /// The Uitbreidingen-tab card for the optional video-calls module
 /// (`docs/design/NATIVE_CALLS.md` §7). Same toggle shape as the other module
-/// cards. Off by default; joining a meeting is added with the provider adapter in
-/// a later step, so the copy says so plainly rather than promising a working call.
-///
-/// When enabled, the card exposes the one thing the connection layer (F2) can
-/// already do: test that OciDeck reaches an XMPP server and authenticates.
+/// cards. Off by default. When enabled it exposes the join route (link check +
+/// preflight + deelname, #2533–#2536), the XMPP-connection test and the media
+/// preflight.
 class VideoCallsModuleCard extends ConsumerWidget {
   const VideoCallsModuleCard({super.key});
 
@@ -40,7 +38,7 @@ class VideoCallsModuleCard extends ConsumerWidget {
             ),
             subtitle: Text(
               l10n.d(
-                'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.',
+                'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
@@ -51,12 +49,12 @@ class VideoCallsModuleCard extends ConsumerWidget {
             ListTile(
               leading: const Icon(Icons.link_outlined),
               title: Text(
-                l10n.d('Vergaderlink controleren'),
+                l10n.d('Vergaderlink openen'),
                 style: const TextStyle(fontSize: 13),
               ),
               subtitle: Text(
                 l10n.d(
-                  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.',
+                  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.',
                 ),
                 style: TextStyle(fontSize: 12, color: AppTheme.slate600),
               ),

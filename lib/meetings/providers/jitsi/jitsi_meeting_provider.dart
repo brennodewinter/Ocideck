@@ -1,6 +1,6 @@
-// The Jitsi adapter — F3's first half (#2533): recognition, deployment
-// preflight, and the typed no-yet for join (#2534 lands the real
-// signalling/session).
+// The Jitsi adapter (#2533 recognition/preflight, #2534 join, #2535 media):
+// recognition, deployment preflight, and the real join that returns a live
+// [JitsiMeetingSession].
 //
 // What this provider does today, mapped onto the contract:
 //
@@ -19,9 +19,10 @@
 //     testbed calls it `muc.meet.jitsi`; hardcoding the convention is the bug
 //     this layer exists to prevent).
 //
-//   * [join] — not yet. It throws [UnimplementedError] (#2534): the issue's
-//     acceptance is "no join call reaching the app", so the button the UI
-//     shows is honest about that instead of pretending a call exists.
+//   * [join] — the real join (#2534): config.js again (never a cached
+//     preflight), anonymous XMPP, MUC discovery, then [JitsiMeetingSession]
+//     running conference-IQ → MUC → Jingle → ICE. Every failed step throws a
+//     typed [MeetingJoinException].
 //
 // Trust boundaries (unchangeable here, per NATIVE_CALLS.md §7):
 //   * every egress runs through NetGuard + socket pinning; a config.js that
