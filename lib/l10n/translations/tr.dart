@@ -2513,6 +2513,28 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Opnemen en transcriberen': 'Kaydet ve yazıya dök',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Bu toplantı ayrı bir ses kaynağı vermiyor. Tüm aramanın kaydı kullanılamıyor.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Yalnızca mikrofon tüm aramanın kaydı değildir.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Bu toplantı kayda izin vermiyor. Kayıt kapalı kalır.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Katılımcılara OciDeck\'in kaydettiğini söyle. OciDeck onların iznini kendisi sormaz.',
+  'Deelnemers zijn geïnformeerd': 'Katılımcılara bilgi verildi',
+  'Start opname': 'Kaydı başlat',
+  'Klaar om op te nemen.': 'Kayda hazır.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck bu toplantıyı kaydediyor.',
+  'Opname stopt…': 'Kayıt duruyor…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Kayıt başarısız oldu. Hâlâ toplantıdasın. Kaydetmek istersen yeniden başlat.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Toplantının kendisi bir kayıt bildiriyor. Bu OciDeck kaydı değildir.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Ses, bunu ayrıca izin verene kadar yazıya dökme sunucusuna gitmez.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Sesi seçilen yazıya dökme sunucusuna gönder',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Toplantı sesinizi iletemedi — kaynağı kapatıp yeniden açmayı deneyin.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

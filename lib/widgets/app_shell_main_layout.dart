@@ -205,6 +205,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               // CollabVerifyBanner) en de read-only finalized lock.
               return Column(
                 children: [
+                  const CallRecordingBanner(),
                   const RecordingIndicator(),
                   const CollabVerifyBanner(),
                   if (deck.finalized) _finalizedBanner(context, l10n),

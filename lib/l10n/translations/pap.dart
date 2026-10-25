@@ -651,6 +651,28 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Opnemen en transcriberen': 'Graba i transkribí',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'E reunion aki no ta duna un fuente di audio separá. Un grabashon di e yamada kompletu no ta disponibel.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Solamente e mikrofonu no ta un grabashon di e yamada kompletu.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'E reunion aki no ta permití grabashon. Grabashon ta keda pagá.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Bisa e partisipantenan ku OciDeck ta grabando. OciDeck no ta pidi nan pèrmit su mes.',
+  'Deelnemers zijn geïnformeerd': 'Partisipantenan ta informá',
+  'Start opname': 'Start grabashon',
+  'Klaar om op te nemen.': 'Kla pa graba.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck ta grabando e reunion aki.',
+  'Opname stopt…': 'Grabashon ta stòp…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'E grabashon a faya. Bo ta ainda den e reunion. Start di nobo si bo ke graba.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'E reunion mes ta mela un grabashon. Eso no ta e grabashon di OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Audio no ta bai na e server di transkripshon te ora bo permití esei apart.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Manda audio na e server di transkripshon skohe',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'E reunión no por a mandá bo zonido — purba di paga i prende e fuente di nobo.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

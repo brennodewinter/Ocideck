@@ -811,6 +811,28 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Opnemen en transcriberen': 'Record and transcribe',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'This meeting does not provide a separate audio source. A recording of the whole call is not available.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'The microphone alone is not a recording of the whole call.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'This meeting does not allow recording. Recording stays off.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Tell the participants that OciDeck is recording. OciDeck does not ask their permission itself.',
+  'Deelnemers zijn geïnformeerd': 'Participants have been told',
+  'Start opname': 'Start recording',
+  'Klaar om op te nemen.': 'Ready to record.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck is recording this meeting.',
+  'Opname stopt…': 'Recording is stopping…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'The recording failed. You are still in the meeting. Start again if you want to record.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'The meeting itself reports a recording. That is not OciDeck\'s recording.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Audio does not go to the transcription server until you allow that separately.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Send audio to the chosen transcription server',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'The meeting could not send your audio — try turning the source off and on again.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

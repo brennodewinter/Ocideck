@@ -1605,6 +1605,28 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Opnemen en transcriberen': 'Optag og transskribér',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Dette møde giver ikke en særskilt lydkilde. En optagelse af hele opkaldet er ikke tilgængelig.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Mikrofonen alene er ikke en optagelse af hele opkaldet.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Dette møde tillader ikke optagelse. Optagelsen forbliver slukket.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Sig til deltagerne, at OciDeck optager. OciDeck spørger ikke selv om deres samtykke.',
+  'Deelnemers zijn geïnformeerd': 'Deltagerne er informeret',
+  'Start opname': 'Start optagelse',
+  'Klaar om op te nemen.': 'Klar til at optage.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck optager dette møde.',
+  'Opname stopt…': 'Optagelsen stopper…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Optagelsen mislykkedes. Du er stadig i mødet. Start igen, hvis du vil optage.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Mødet melder selv en optagelse. Det er ikke OciDecks optagelse.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Lyden går ikke til transskriptionsserveren, før du tillader det særskilt.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Send lyd til den valgte transskriptionsserver',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Mødet kunne ikke sende din lyd — prøv at slå kilden fra og til igen.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

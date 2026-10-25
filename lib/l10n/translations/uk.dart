@@ -1620,6 +1620,28 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Opnemen en transcriberen': 'Записувати й транскрибувати',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Ця нарада не дає окремого джерела звуку. Запис усієї розмови недоступний.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Лише мікрофон не є записом усієї розмови.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Ця нарада не дозволяє запис. Запис лишається вимкненим.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Скажіть учасникам, що OciDeck записує. OciDeck сам не питає їхньої згоди.',
+  'Deelnemers zijn geïnformeerd': 'Учасників повідомлено',
+  'Start opname': 'Почати запис',
+  'Klaar om op te nemen.': 'Готово до запису.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck записує цю нараду.',
+  'Opname stopt…': 'Запис зупиняється…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Запис не вдався. Ти ще на нараді. Почни знову, якщо хочеш записувати.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Нарада сама повідомляє про запис. Це не запис OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Звук не йде на сервер транскрипції, доки ти окремо це не дозволиш.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Надіслати звук на обраний сервер транскрипції',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Нарада не змогла передати ваш звук — спробуйте вимкнути та знову ввімкнути джерело.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

@@ -1604,6 +1604,28 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Opnemen en transcriberen': 'Spela in och transkribera',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Det här mötet ger ingen separat ljudkälla. En inspelning av hela samtalet finns inte.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Bara mikrofonen är inte en inspelning av hela samtalet.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Det här mötet tillåter inte inspelning. Inspelningen förblir av.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Säg till deltagarna att OciDeck spelar in. OciDeck frågar inte själv om deras samtycke.',
+  'Deelnemers zijn geïnformeerd': 'Deltagarna är informerade',
+  'Start opname': 'Starta inspelning',
+  'Klaar om op te nemen.': 'Redo att spela in.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck spelar in det här mötet.',
+  'Opname stopt…': 'Inspelningen stoppar…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Inspelningen misslyckades. Du är kvar i mötet. Starta igen om du vill spela in.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Mötet meddelar själv en inspelning. Det är inte OciDecks inspelning.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Ljudet går inte till transkriptionsservern förrän du tillåter det separat.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Skicka ljud till den valda transkriptionsservern',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Mötet kunde inte skicka ditt ljud — försök att slå av och på källan igen.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

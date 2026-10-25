@@ -1605,6 +1605,28 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Opnemen en transcriberen': 'Rekam dan transkripsi',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Rapat ini tidak memberi sumber audio terpisah. Rekaman seluruh panggilan tidak tersedia.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Mikrofon saja bukan rekaman seluruh panggilan.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Rapat ini tidak mengizinkan rekaman. Rekaman tetap mati.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Beri tahu peserta bahwa OciDeck merekam. OciDeck tidak meminta izin mereka sendiri.',
+  'Deelnemers zijn geïnformeerd': 'Peserta sudah diberi tahu',
+  'Start opname': 'Mulai rekaman',
+  'Klaar om op te nemen.': 'Siap merekam.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck merekam rapat ini.',
+  'Opname stopt…': 'Rekaman berhenti…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Rekaman gagal. Kamu masih di dalam rapat. Mulai lagi jika kamu ingin merekam.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Rapat sendiri melaporkan ada rekaman. Itu bukan rekaman OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Audio tidak pergi ke server transkripsi sampai kamu mengizinkannya tersendiri.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Kirim audio ke server transkripsi yang dipilih',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Rapat tidak dapat mengirim suara Anda — coba matikan dan nyalakan sumbernya lagi.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

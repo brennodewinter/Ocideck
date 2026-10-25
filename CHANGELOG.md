@@ -19,6 +19,18 @@ All notable changes to OciDeck are documented in this file.
   zelf. Een echte tweepersoonscall op een uitgebrachte webbuild is hiermee
   niet bewezen; die proef staat nog open.
 
+- **Opnemen vanuit een call, de bediening (#2528).** In een verbonden
+  vergadering staat *Opnemen en transcriberen*. Zonder audiobron van de
+  hele call, of als de vergadering opnemen verbiedt, zie je de reden en
+  geen startknop. Met die bron bevestig je eerst dat je de deelnemers
+  zelf informeert — OciDeck vraagt hun toestemming niet — en daarna
+  Start. De strook *OciDeck neemt deze vergadering op* blijft staan als
+  het paneel weg is. Het lampje van de vergadering is een andere regel
+  en start niets. Een gekozen transcriptieserver telt pas mee na een
+  aparte toestemming, en intrekken stopt alleen die telling. Deze stap
+  schrijft de audio nergens weg en stuurt hem nergens heen. De huidige
+  call levert die audiobron nog niet, dus de knop blijft daar weg.
+
 - **Audiobron van een call, de naad (#2527).** Een opname van een
   OciDeck-call vraagt lokale audio ná het dempen en de audio van de
   ander ná decodering, apart, met een tijdstip en een bron. Die tap kan

@@ -1635,6 +1635,29 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Opnemen en transcriberen': 'Taifead agus tras-scríobh',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Ní fhoinse fuaime ar leith ag an gcruinniú seo. Níl taifead den ghlao iomlán ar fáil.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Ní taifead den ghlao iomlán é an micreafón amháin.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Ní cheadaíonn an cruinniú seo taifeadadh. Fanann an taifead as.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Abair leis na rannpháirtithe go bhfuil OciDeck ag taifeadadh. Ní iarrann OciDeck a gcead féin.',
+  'Deelnemers zijn geïnformeerd': 'Cuireadh ar an eolas na rannpháirtithe',
+  'Start opname': 'Tosaigh an taifead',
+  'Klaar om op te nemen.': 'Réidh le taifeadadh.',
+  'OciDeck neemt deze vergadering op.':
+      'Tá OciDeck ag taifeadadh an chruinnithe seo.',
+  'Opname stopt…': 'Tá an taifead ag stopadh…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Theip ar an taifead. Tá tú fós sa chruinniú. Tosaigh arís más mian leat taifeadadh.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Tuairiscíonn an cruinniú féin taifead. Ní hé sin taifead OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Ní théann an fhuaim chuig an bhfreastalaí tras-scríbhinne go dtí go gceadaíonn tú é ar leith.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Seol an fhuaim chuig an bhfreastalaí tras-scríbhinne roghnaithe',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Níorbh fhéidir leis an gcruinniú do fhuaim a sheoladh — déan iarracht an foinse a mhúchadh agus a chasadh air arís.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

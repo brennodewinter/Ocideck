@@ -1605,6 +1605,28 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Opnemen en transcriberen': 'Snemaj in prepiši',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Ta sestanek ne da ločenega vira zvoka. Posnetek celotnega klica ni na voljo.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Sam mikrofon ni posnetek celotnega klica.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Ta sestanek ne dovoli snemanja. Snemanje ostane izklopljeno.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Povej udeležencem, da OciDeck snema. OciDeck sam ne vpraša za njihovo privolitev.',
+  'Deelnemers zijn geïnformeerd': 'Udeleženci so obveščeni',
+  'Start opname': 'Začni snemanje',
+  'Klaar om op te nemen.': 'Pripravljeno na snemanje.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck snema ta sestanek.',
+  'Opname stopt…': 'Snemanje se ustavlja…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Snemanje ni uspelo. Še vedno si na sestanku. Začni znova, če želiš snemati.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Sestanek sam sporoči posnetek. To ni posnetek OciDecka.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Zvok ne gre na strežnik za prepis, dokler tega ne dovoliš posebej.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Pošlji zvok na izbrani strežnik za prepis',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Sestanek ni mogel poslati vašega zvoka — poskusite vir izklopiti in znova vklopiti.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
