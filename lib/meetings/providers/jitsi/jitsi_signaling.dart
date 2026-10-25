@@ -1,7 +1,9 @@
-// The Jitsi signalling wire layer (#2534): conference-IQ, Jingle
-// (session-initiate/accept/terminate, source-add) and the presence
-// `SourceInfo` extension — modelled from the real wire captured against the
-// pinned testbed (`testbed/jitsi-meet`, stable-11248), not from assumptions.
+// The Jitsi signalling wire layer (#2534): conference-IQ en Jingle
+// (session-initiate/accept/terminate, source-add/-remove bouwers) —
+// modelled from the real wire captured against the pinned testbed
+// (`testbed/jitsi-meet`, stable-11248), not from assumptions. Alles wat de
+// bron-levenscyclus op de wire zegt (SourceInfo, json-sources,
+// ForwardedSources, de source-IQ's) staat in `jitsi_source_wire.dart`.
 //
 // What the wire showed, and what this file therefore does:
 //
@@ -27,13 +29,11 @@
 // ([JitsiContractIssue]) so a changed/unknown contract fails closed —
 // never a "seemingly connected" session without a media path.
 
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:xml/xml.dart';
 
 import '../../../xmpp/xmpp_stanza.dart';
-import '../../meeting_participant.dart' show MeetingTrackKind;
 
 const jitsiFocusNs = 'http://jitsi.org/protocol/focus';
 const jitsiJitmeetNs = 'http://jitsi.org/jitmeet';
@@ -359,7 +359,7 @@ JingleSessionInitiate parseSessionInitiate(XmlElement jingle) {
         contents.add(_parseContent(child));
       case 'json-message':
         final text = child.innerText;
-        if (text.length <= _maxSourcesJson) sourcesJson = text;
+        if (text.length <= jitsiMaxSourcesJson) sourcesJson = text;
     }
   }
   if (contents.isEmpty) {
@@ -593,10 +593,50 @@ XmlElement buildSourceAdd({
   required String sourceName,
   required String ssrc,
   String? msid,
+}) => _buildSourceAction(
+  'source-add',
+  sid: sid,
+  initiator: initiator,
+  contentName: contentName,
+  media: media,
+  sourceName: sourceName,
+  ssrc: ssrc,
+  msid: msid,
+);
+
+/// `<jingle action='source-remove'>` — dezelfde vorm als [buildSourceAdd],
+/// zonder parameters: de focus haalt de bron op zijn ssrc weg (#2537 — het
+/// scherm was bijvoorbeeld de enige `-v0`-bron).
+XmlElement buildSourceRemove({
+  required String sid,
+  required String initiator,
+  required String contentName,
+  required String media,
+  required String sourceName,
+  required String ssrc,
+}) => _buildSourceAction(
+  'source-remove',
+  sid: sid,
+  initiator: initiator,
+  contentName: contentName,
+  media: media,
+  sourceName: sourceName,
+  ssrc: ssrc,
+);
+
+XmlElement _buildSourceAction(
+  String action, {
+  required String sid,
+  required String initiator,
+  required String contentName,
+  required String media,
+  required String sourceName,
+  required String ssrc,
+  String? msid,
 }) => xmppElement(
   'jingle',
   namespace: jingleNs,
-  attributes: {'action': 'source-add', 'initiator': initiator, 'sid': sid},
+  attributes: {'action': action, 'initiator': initiator, 'sid': sid},
   children: [
     xmppElement(
       'content',
@@ -733,140 +773,21 @@ XmlElement _transportElement(JingleTransport t) => xmppElement(
   ],
 );
 
-// ── SourceInfo: mute-state in MUC-presence ──────────────────────────────────
-
-/// De `SourceInfo`-JSON uit presence: `{ "<bron>": {"muted": true}, … }`.
-/// Geeft bron→muted terug; onleesbare of onbegrensde invoer levert {} —
-/// ontbrekende info is "onbekend", nooit "deelt niet mee".
-Map<String, bool> parseSourceInfo(String? text) {
-  if (text == null || text.isEmpty || text.length > _maxSourceInfoLength) {
-    return const {};
-  }
-  final Object? decoded;
-  try {
-    decoded = jsonDecode(text);
-  } on FormatException {
-    return const {};
-  }
-  if (decoded is! Map) return const {};
-  final out = <String, bool>{};
-  for (final e in decoded.entries) {
-    if (out.length >= _maxSources) break;
-    final key = e.key;
-    final value = e.value;
-    if (key is String && value is Map && value['muted'] is bool) {
-      out[key] = value['muted'] as bool;
-    }
-  }
-  return out;
-}
-
-/// Bouw onze eigen SourceInfo-tekst — `{"<nick>-a0":{"muted":false}}`.
-String buildSourceInfo(Map<String, bool> mutedBySource) => jsonEncode({
-  for (final e in mutedBySource.entries) e.key: {'muted': e.value},
-});
-
-// ── json-sources: ssrc↔sourcenaam in source-add/-remove ─────────────────────
-
-/// Eén remote bron uit de `source-add`/`source-remove` json-message: de
-/// bridge meldt SSRC's met hun sourcenaam (`<endpoint>-a0`/`-v0`) — dat is dé
-/// koppelsleutel tussen binnenkomende RTP en een MUC-participant (de msid op
-/// de wire is een willekeurige UUID, niet de sourcenaam).
-typedef JitsiRemoteSource = ({
-  int ssrc,
-  String endpoint,
-  String sourceName,
-  MeetingTrackKind kind,
-});
-
-/// Parse de `{"sources":{…}}`-payload van een `source-add`/`source-remove`.
-/// De endpoint-waarde is een geneste array (video-ssrc's, ssrc-groepen,
-/// audio-ssrc's) waarvan de posities niet betrouwbaar zijn; we verzamelen álle
-/// `{"s":…,"n":…}`-paren en classificeren op het `-a`/`-v`-achtervoegsel van de
-/// naam. Onleesbare of onbegrensde invoer levert geen bronnen.
-List<JitsiRemoteSource> parseJsonSources(String? text) {
-  if (text == null || text.isEmpty || text.length > _maxSourcesJson) {
-    return const [];
-  }
-  final Object? decoded;
-  try {
-    decoded = jsonDecode(text);
-  } on FormatException {
-    return const [];
-  }
-  if (decoded is! Map || decoded['sources'] is! Map) return const [];
-  final out = <JitsiRemoteSource>[];
-  for (final e in (decoded['sources'] as Map).entries) {
-    if (out.length >= _maxSources) break;
-    if (e.key is! String) continue;
-    _collectSources(e.value, e.key as String, out);
-  }
-  return out;
-}
-
-void _collectSources(
-  Object? node,
-  String endpoint,
-  List<JitsiRemoteSource> out,
-) {
-  if (out.length >= _maxSources) return;
-  if (node is List) {
-    for (final item in node) {
-      _collectSources(item, endpoint, out);
-    }
-  } else if (node is Map) {
-    final ssrc = node['s'];
-    final name = node['n'];
-    if (ssrc is int && name is String && name.length <= _maxFieldLength) {
-      final dash = name.lastIndexOf('-');
-      final kind = dash >= 0 && dash + 1 < name.length
-          ? switch (name[dash + 1]) {
-              'a' => MeetingTrackKind.audio,
-              'v' => MeetingTrackKind.video,
-              _ => null,
-            }
-          : null;
-      if (kind != null) {
-        out.add((ssrc: ssrc, endpoint: endpoint, sourceName: name, kind: kind));
-      }
-    }
-  }
-}
-
-/// Eén `ForwardedSources`-bericht van de bridge: welke sourcenamen op dit
-/// moment op de gedeelde video-m-line liggen. Null als dit bericht géén
-/// ForwardedSources is. De wire-vorm is een lijst; oudere deployments sturen
-/// een map — beide worden gelezen.
-List<String>? parseForwardedSources(String? text) {
-  if (text == null || text.isEmpty || text.length > _maxSourcesJson) {
-    return null;
-  }
-  final Object? decoded;
-  try {
-    decoded = jsonDecode(text);
-  } on FormatException {
-    return null;
-  }
-  if (decoded is! Map || decoded['colibriClass'] != 'ForwardedSources') {
-    return null;
-  }
-  final raw = decoded['forwardedSources'];
-  if (raw is List) return raw.whereType<String>().toList();
-  if (raw is Map) return raw.keys.whereType<String>().toList();
-  return const [];
-}
-
 // ── begrenzingen ────────────────────────────────────────────────────────────
 
 const _maxContents = 8;
 const _maxPayloads = 64;
 const _maxHeaderExtensions = 32;
 const _maxCandidates = 64;
-const _maxSources = 64;
-const _maxSourcesJson = 16384;
-const _maxSourceInfoLength = 8192;
 const _maxFingerprintLength = 256;
-const _maxFieldLength = 3071; // RFC 6120 §3 JID-cap, hergebruikt
+
+/// Cap op de `{"sources":{…}}`-payload in een json-message — gedeeld met de
+/// bron-parsers in `jitsi_source_wire.dart`.
+const jitsiMaxSourcesJson = 16384;
+
+/// Cap op één wire-veld (JID-, attribuut- en sourcenaam-lengtes) — RFC 6120
+/// §3 JID-cap, hergebruikt. Gedeeld met `jitsi_source_wire.dart`.
+const jitsiMaxFieldLength = 3071;
 
 String? _bounded(String? v, int max) {
   if (v == null) return null;
@@ -875,7 +796,7 @@ String? _bounded(String? v, int max) {
 }
 
 String? _boundedAttr(XmlElement e, String name) =>
-    _bounded(e.getAttribute(name), _maxFieldLength);
+    _bounded(e.getAttribute(name), jitsiMaxFieldLength);
 
 /// De XMPP-error-condition uit een stanza-reply (`<error><not-authorized/>`
 /// → 'not-authorized') — grof, voor typed failure-mapping, nooit de vrije
@@ -889,25 +810,6 @@ String jitsiStanzaErrorCondition(Stanza stanza) {
   return 'unknown';
 }
 
-/// De presence-extensies op een (her)join of update: displaynaam, de
-/// SourceInfo-kaart én de endpoint-features — jicofo leest die uit de
-/// presence (en via disco#info) om de session-initiate samen te stellen
-/// (#2535). `<x xmlns='…/muc'>` plaatst XmppMuc zelf vooraan.
-List<XmlElement> jitsiPresenceExtensions(
-  String displayName,
-  Map<String, bool> mutedBySource,
-) => [
-  xmppElement('nick', namespace: jitsiNickNs, text: displayName),
-  xmppElement('SourceInfo', text: buildSourceInfo(mutedBySource)),
-  xmppElement(
-    'features',
-    children: [
-      for (final f in jitsiCallFeatures)
-        xmppElement('feature', attributes: {'var': f}),
-    ],
-  ),
-];
-
 /// lib-jitsi-meet's device-id voor de conference-IQ — eenmalig per sessie.
 /// Een willekeurige 128-bit uid in de vorm die de wire toont (32 hex);
 /// jicofo eist hem in de conference-IQ. Per sessie, niet per device: er is
@@ -917,29 +819,3 @@ String jitsiNewMachineUid() {
   final r = Random.secure();
   return List.generate(32, (_) => r.nextInt(16).toRadixString(16)).join();
 }
-
-/// Een eigen bron aankondigen bij de focus als een source-add IQ — de
-/// stanza-bouw (niet de beslissing of/when; dat is sessie-orchestratie).
-Stanza jitsiSourceAnnounceIq({
-  required String focusInRoom,
-  required String iqId,
-  required String sid,
-  required String initiator,
-  required String sourceName,
-  required String ssrc,
-}) => Stanza(
-  kind: StanzaKind.iq,
-  to: focusInRoom,
-  id: iqId,
-  type: 'set',
-  children: [
-    buildSourceAdd(
-      sid: sid,
-      initiator: initiator,
-      contentName: sourceName.endsWith('-a0') ? 'audio' : 'video',
-      media: sourceName.endsWith('-a0') ? 'audio' : 'video',
-      sourceName: sourceName,
-      ssrc: ssrc,
-    ),
-  ],
-);

@@ -10,6 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/meetings/meeting_participant.dart'
     show MeetingTrackKind;
 import 'package:ocideck/meetings/providers/jitsi/jitsi_signaling.dart';
+import 'package:ocideck/meetings/providers/jitsi/jitsi_source_wire.dart';
 import 'package:ocideck/xmpp/xmpp_stanza.dart';
 import 'package:xml/xml.dart';
 
@@ -292,6 +293,22 @@ void main() {
       expect(xml, contains('msid'));
     });
 
+    test('buildSourceRemove: dezelfde source, actie remove, geen msid', () {
+      final el = buildSourceRemove(
+        sid: 'sid1',
+        initiator: 'focus@auth.meet.jitsi/focus',
+        contentName: 'video',
+        media: 'video',
+        sourceName: 'nick1-v0',
+        ssrc: '43',
+      );
+      expect(el.getAttribute('action'), 'source-remove');
+      final xml = el.toXmlString();
+      expect(xml, contains(jingleSsmaNs));
+      expect(xml, contains('nick1-v0'));
+      expect(xml, contains('ssrc="43"'));
+    });
+
     test('buildSessionTerminate draagt reason success', () {
       final el = buildSessionTerminate(sid: 'sid1');
       expect(el.getAttribute('action'), 'session-terminate');
@@ -327,6 +344,25 @@ void main() {
       expect(text, '{"nick-a0":{"muted":false},"nick-v0":{"muted":true}}');
       expect(parseSourceInfo(text), {'nick-a0': false, 'nick-v0': true});
     });
+
+    test(
+      'videoType markeert de schermdeel-bron; zonder is het camera (#2537)',
+      () {
+        final text = buildSourceInfo(
+          {'nick-a0': false, 'nick-v0': false},
+          videoType: {'nick-v0': 'desktop'},
+        );
+        expect(
+          text,
+          '{"nick-a0":{"muted":false},'
+          '"nick-v0":{"muted":false,"videoType":"desktop"}}',
+        );
+        expect(parseSourceVideoTypes(text), {'nick-v0': 'desktop'});
+        // Parse-fail-closed zoals bij muted: kapot of vreemd → {}.
+        expect(parseSourceVideoTypes(null), isEmpty);
+        expect(parseSourceVideoTypes('{"v":{"videoType":3}}'), isEmpty);
+      },
+    );
   });
 
   group('json-sources', () {

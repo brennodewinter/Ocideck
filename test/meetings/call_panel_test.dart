@@ -2,6 +2,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/meetings/meeting_event.dart';
+import 'package:ocideck/meetings/meeting_media_core.dart'
+    show MeetingScreenSource;
 import 'package:ocideck/meetings/meeting_participant.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 import 'package:ocideck/state/meeting_session_provider.dart';
@@ -281,5 +283,103 @@ void main() {
     );
     await tester.pump();
     await tester.pump();
+  });
+
+  testWidgets('screen share: picker → gedeelde bron → stop-knop', (
+    tester,
+  ) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final session = await _join(container);
+    session.screenSourcesToOffer = const [
+      MeetingScreenSource(id: 'screen:0', label: 'Scherm 1'),
+      MeetingScreenSource(id: 'window:3', label: 'Editor', isWindow: true),
+    ];
+    await tester.pumpWidget(_host(container));
+    await tester.pump();
+
+    await tester.tap(
+      find.widgetWithIcon(IconButton, Icons.screen_share_outlined),
+    );
+    await tester.pump();
+    await tester.pump();
+
+    // De bronlijst komt als kiezer — scherm én venster met hun soort.
+    expect(find.text('Kies wat je deelt'), findsOneWidget);
+    expect(find.text('Scherm 1'), findsOneWidget);
+    expect(find.text('Editor'), findsOneWidget);
+    expect(find.text('Venster'), findsOneWidget);
+
+    await tester.tap(find.text('Editor'));
+    await tester.pump();
+    await tester.pump();
+
+    // De juiste source-id en label gingen naar de sessie; het paneel toont
+    // wat er live gedeeld wordt en de knop wordt "stoppen".
+    expect(session.lastShareSourceId, 'window:3');
+    expect(find.textContaining('Je deelt'), findsOneWidget);
+    expect(find.textContaining('Editor'), findsOneWidget);
+    expect(
+      find.widgetWithIcon(IconButton, Icons.stop_screen_share_outlined),
+      findsOneWidget,
+    );
+
+    await tester.tap(
+      find.widgetWithIcon(IconButton, Icons.stop_screen_share_outlined),
+    );
+    await tester.pump();
+    await tester.pump();
+    expect(
+      find.widgetWithIcon(IconButton, Icons.screen_share_outlined),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('zonder eigen bronlijst deelt de knop meteen', (tester) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final session = await _join(container);
+    // Lege lijst = browser/OS-kiezer: geen eigen dialoog, direct delen.
+    await tester.pumpWidget(_host(container));
+    await tester.pump();
+
+    await tester.tap(
+      find.widgetWithIcon(IconButton, Icons.screen_share_outlined),
+    );
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('Kies wat je deelt'), findsNothing);
+    expect(session.lastShareSourceId, isNull);
+    expect(
+      find.widgetWithIcon(IconButton, Icons.stop_screen_share_outlined),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('annuleren in de kiezer start niets', (tester) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final session = await _join(container);
+    session.screenSourcesToOffer = const [
+      MeetingScreenSource(id: 'screen:0', label: 'Scherm 1'),
+    ];
+    await tester.pumpWidget(_host(container));
+    await tester.pump();
+
+    await tester.tap(
+      find.widgetWithIcon(IconButton, Icons.screen_share_outlined),
+    );
+    await tester.pump();
+    await tester.pump();
+    await tester.tap(find.text('Annuleren'));
+    await tester.pump();
+    await tester.pump();
+
+    expect(session.lastShareSourceId, isNull);
+    expect(
+      find.widgetWithIcon(IconButton, Icons.screen_share_outlined),
+      findsOneWidget,
+    );
   });
 }

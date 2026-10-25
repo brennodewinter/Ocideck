@@ -14,7 +14,8 @@
 // a `CollabTransport` of another. Nothing here couples the two.
 
 import 'meeting_event.dart';
-import 'meeting_media_core.dart' show MeetingAudioOutput, MeetingVideoSurface;
+import 'meeting_media_core.dart'
+    show MeetingAudioOutput, MeetingScreenSource, MeetingVideoSurface;
 import 'meeting_participant.dart';
 import 'meeting_provider_profile.dart';
 
@@ -216,7 +217,22 @@ abstract interface class MeetingSession {
 
   Future<void> setMicrophone({required bool enabled});
   Future<void> setCamera({required bool enabled});
-  Future<void> startScreenShare();
+
+  /// De deelbare schermbronnen voor de kiezer (#2537). Leeg waar de browser
+  /// of het OS zelf kiest — dan is [startScreenShare] zonder sourceId de
+  /// route.
+  Future<List<MeetingScreenSource>> screenShareSources();
+
+  /// Start het delen van [sourceId] (uit [screenShareSources]; null waar de
+  /// browser zelf kiest). Weigering, annuleren of bronverlies komt als een
+  /// [MeetingErrorEvent] op [events]; de call blijft intact.
+  Future<void> startScreenShare({String? sourceId, String? sourceLabel});
+
+  /// De label van de bron die nu live wordt gedeeld — null als er niets
+  /// deelt. De UI toont die naast de deelknop (#2537).
+  String? get screenShareLabel;
+
+  /// Stop het delen. Idempotent — zonder lopende share een no-op.
   Future<void> stopScreenShare();
   Future<void> sendChat(String text);
 
