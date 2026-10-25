@@ -6601,12 +6601,15 @@ participant. Switching the module off does not hide a running call either: the
 rail stays visible until you leave it.
 
 Joining never starts a recording or a transcription — those are separate,
-always explicit actions. Screen sharing is not offered yet. Media encryption is
-reported as a fact, not a promise: the panel shows the verified status for the
-call and the real egress origins, and does not claim end-to-end encryption
-where none was proven. The browser version declines the join — a browser tab
-cannot prove the pinned server identity the desktop app verifies — so calling
-is desktop-only today.
+always explicit actions. Screen sharing works where the platform can capture:
+on desktop the share button opens a picker listing your screens and windows
+with a thumbnail, and the panel shows which source is live until you stop it;
+a source that is refused or disappears ends the share with a notice, never a
+dead control. Media encryption is reported as a fact, not a promise: the panel
+shows the verified status for the call and the real egress origins, and does
+not claim end-to-end encryption where none was proven. The browser version
+declines the join — a browser tab cannot prove the pinned server identity the
+desktop app verifies — so calling is desktop-only today.
 
 ## What the browser version cannot do
 

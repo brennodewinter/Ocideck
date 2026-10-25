@@ -34,6 +34,42 @@ MeetingE2eeStatus mediaE2eeFor(TargetPlatform platform) => switch (platform) {
   _ => MeetingE2eeStatus.unknown,
 };
 
+/// Kan dit platform een schermbron vastleggen (#2537)? Desktop en web kunnen
+/// via `getDisplayMedia` (desktop met een eigen bronlijst, web via de kiezer
+/// van de browser); iOS en Android vragen een eigen broadcast-extensie-
+/// respectievelijk MediaProjection-flow die er bewust niet is — nooit
+/// claimen wat niet bewezen is.
+bool screenShareFor(TargetPlatform platform, {bool isWeb = kIsWeb}) =>
+    isWeb ||
+    platform == TargetPlatform.macOS ||
+    platform == TargetPlatform.windows ||
+    platform == TargetPlatform.linux;
+
+/// Eén deelbare schermbron uit de bronlijst van het systeem — een scherm of
+/// een venster, met een miniatuur voor de kiezer. De lijst is leeg op
+/// platforms waar de browser of het OS zélf kiest ([screenShareFor] zegt
+/// daar nog steeds waar; alleen de eigen kiezer valt weg).
+class MeetingScreenSource {
+  const MeetingScreenSource({
+    required this.id,
+    required this.label,
+    this.isWindow = false,
+    this.thumbnail,
+  });
+
+  /// De source-id zoals `getDisplayMedia` hem verwacht.
+  final String id;
+
+  /// De naam van het scherm of de titel van het venster.
+  final String label;
+
+  /// True voor een venster, false voor een heel scherm.
+  final bool isWindow;
+
+  /// Een miniatuur (png/jpeg-bytes) voor in de kiezer, als het OS die geeft.
+  final Uint8List? thumbnail;
+}
+
 /// Wat de media-laag over één remote track meldt. De track zelf identificeert
 /// niet wíé hij is (bij Jitsi is de msid een willekeurige UUID) — de
 /// provider-signalering bepaalt welke participant hem toebehoort, en een
@@ -125,7 +161,12 @@ abstract interface class MeetingMediaConnection {
   Future<({String trackId, int? ssrc})?> addLocalAudio();
 
   /// Attach a local camera track (same contract as [addLocalAudio]).
-  Future<({String trackId, int? ssrc})?> addLocalVideo();
+  /// [attachToSender] is alleen voor het delen (#2537): een camera die
+  /// aangaat terwijl het scherm op de video-sender ligt, wordt opgehaald
+  /// maar legt het scherm niet stil — die blijft op `-v0`.
+  Future<({String trackId, int? ssrc})?> addLocalVideo({
+    bool attachToSender = true,
+  });
 
   /// Enable/disable a previously added local track (mute). The track keeps
   /// flowing; `enabled=false` is what jitsi's `muted` SourceInfo means.
@@ -135,6 +176,26 @@ abstract interface class MeetingMediaConnection {
   /// permissie ingetrokken). De adapter zet daarna SourceInfo én de
   /// participant bij — een weggevallen bron is geen gemuteerde bron meer.
   Stream<String> get localTrackLost;
+
+  /// De deelbare schermbronnen die het systeem meldt (#2537): schermen en
+  /// vensters met een miniatuur voor de kiezer. Leeg op platforms waar de
+  /// browser zelf kiest (web) of waar opvragen niet kan — [addLocalScreen]
+  /// zonder sourceId is dan de route.
+  Future<List<MeetingScreenSource>> screenSources();
+
+  /// Leg een schermbron op de vaste video-sender (#2537): het camerabeeld
+  /// wordt vervangen, de m-line en de aangekondigde bron `<nick>-v0` blijven
+  /// gelijk — zo legt Jitsi delen neer (dezelfde bron krijgt videoType
+  /// 'desktop'). [sourceId] komt uit [screenSources]; null alleen waar de
+  /// browser zelf kiest. De adapter hoeft geen extra source-add te sturen
+  /// als er al een video-bron was, wél als -v0 er nog niet was.
+  /// Null bij weigering, annuleren of bronverlies — de call blijft intact.
+  Future<({String trackId, int? ssrc})?> addLocalScreen({String? sourceId});
+
+  /// Stop het schermdelen: de sender terug op de bestaande camera-track als
+  /// die er is, anders losgekoppeld; de display-capture wordt vrijgegeven.
+  /// Idempotent — zonder lopende share een no-op.
+  Future<void> stopScreenShare();
 
   /// Render een video-track (remote óf lokaal, op [MeetingTrack.id]) als
   /// texture. Null bij een onbekende of al geëindigde track — nooit een

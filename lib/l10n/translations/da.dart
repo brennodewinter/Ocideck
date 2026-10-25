@@ -1605,6 +1605,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Skærmdeling mislykkedes — kilden blev nægtet eller forsvandt.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Den delte kilde forsvandt; delingen er stoppet.',
+  'Delen stoppen': 'Stop deling',
+  'Je deelt je scherm.': 'Du deler din skærm.',
+  'Je deelt': 'Du deler',
+  'Kies wat je deelt': 'Vælg, hvad du deler',
+  'Scherm': 'Skærm',
   'Nog geen actieve vergadering.': 'Der er endnu ikke noget aktivt møde.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Indsæt et Jitsi-mødelink for at deltage.',
@@ -1632,8 +1641,6 @@ const _dutchSourceAddDa = <String, String>{
   'De verbinding is verbroken.': 'Forbindelsen blev afbrudt.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Enheden giver ikke adgang til denne kilde.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Skærmdeling er endnu ikke tilgængelig.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/rummets-navn',
   'Vergaderlink controleren': 'Kontrollér mødelink',

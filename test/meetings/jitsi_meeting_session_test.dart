@@ -15,6 +15,7 @@ import 'package:ocideck/meetings/meeting_participant.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 import 'package:ocideck/meetings/providers/jitsi/jitsi_meeting_session.dart';
 import 'package:ocideck/meetings/providers/jitsi/jitsi_signaling.dart';
+import 'package:ocideck/meetings/providers/jitsi/jitsi_source_wire.dart';
 import 'package:ocideck/xmpp/xmpp_session.dart';
 import 'package:ocideck/xmpp/xmpp_stanza.dart';
 import 'package:xml/xml.dart';
@@ -263,9 +264,41 @@ class FakeMediaConnection implements MeetingMediaConnection {
   Future<({String trackId, int? ssrc})?> addLocalAudio() async =>
       allowAudio ? (trackId: 'ta', ssrc: audioSsrc) : null;
 
+  bool? lastVideoAttachToSender;
+
   @override
-  Future<({String trackId, int? ssrc})?> addLocalVideo() async =>
-      allowVideo ? (trackId: 'tv', ssrc: videoSsrc) : null;
+  Future<({String trackId, int? ssrc})?> addLocalVideo({
+    bool attachToSender = true,
+  }) async {
+    lastVideoAttachToSender = attachToSender;
+    return allowVideo ? (trackId: 'tv', ssrc: videoSsrc) : null;
+  }
+
+  /// Schermdeel-fake (#2537): `allowScreen=false` simuleert de weigering,
+  /// `loseLocalTrack('ts')` het bronverlies aan de systeemkant.
+  var allowScreen = true;
+  var screenSsrc = 4545;
+  String? lastScreenSourceId;
+  var screenStopped = false;
+
+  @override
+  Future<List<MeetingScreenSource>> screenSources() async => const [
+    MeetingScreenSource(id: 'screen:0', label: 'Scherm 1'),
+  ];
+
+  @override
+  Future<({String trackId, int? ssrc})?> addLocalScreen({
+    String? sourceId,
+  }) async {
+    if (!allowScreen) return null;
+    lastScreenSourceId = sourceId;
+    return (trackId: 'ts', ssrc: screenSsrc);
+  }
+
+  @override
+  Future<void> stopScreenShare() async {
+    screenStopped = true;
+  }
 
   @override
   Future<void> setLocalTrackEnabled(
@@ -979,5 +1012,210 @@ void main() {
         expect(mediaCore.conn.dataChannels, isEmpty);
       },
     );
+  });
+
+  group('#2537 schermdelen', () {
+    test(
+      'delen met camera aan: -v0 blijft dezelfde bron, videoType desktop',
+      () async {
+        final session = await joinLive(
+          startMuted: false,
+          startCameraOff: false,
+        );
+        addTearDown(() => session.leave());
+
+        await session.startScreenShare(
+          sourceId: 'screen:0',
+          sourceLabel: 'Scherm 1',
+        );
+        await pumpEventQueue(times: 5);
+
+        // De video-bron bestond al → géén nieuwe source-add, wel een
+        // presence met videoType 'desktop' op -v0.
+        expect(
+          channel.sent.where(
+            (s) => s.children.any(
+              (e) =>
+                  e.name.local == 'jingle' &&
+                  e.getAttribute('action') == 'source-add' &&
+                  e.toXmlString().contains('-v0'),
+            ),
+          ),
+          hasLength(1), // alleen de aankondiging bij de join
+        );
+        final info = _sourceInfoOf(channel.lastPresence!);
+        expect(info, isNotNull);
+        expect(parseSourceVideoTypes(info!.innerText)['$_nick-v0'], 'desktop');
+        final local = session.participants.singleWhere((p) => p.isLocal);
+        expect(local.isScreenShare, isTrue);
+        expect(local.video?.id, 'ts'); // self-view toont het scherm
+        expect(session.screenShareLabel, 'Scherm 1');
+      },
+    );
+
+    test('delen met camera uit: nieuwe -v0-bron → source-add, en '
+        'stoppen → source-remove', () async {
+      final session = await joinLive(startMuted: false, startCameraOff: true);
+      addTearDown(() => session.leave());
+
+      await session.startScreenShare(
+        sourceId: 'screen:0',
+        sourceLabel: 'Scherm 1',
+      );
+      await pumpEventQueue(times: 5);
+
+      // -v0 bestond nog niet → de focus krijgt de bron via source-add met
+      // de ssrc die de media-laag voor de schermtrack meldde.
+      final add = channel.sent.where(
+        (s) => s.children.any(
+          (e) =>
+              e.name.local == 'jingle' &&
+              e.getAttribute('action') == 'source-add' &&
+              e.toXmlString().contains('-v0'),
+        ),
+      );
+      expect(add, isNotEmpty);
+      expect(add.last.children.first.toXmlString(), contains('ssrc="4545"'));
+      final info = _sourceInfoOf(channel.lastPresence!);
+      expect(parseSourceVideoTypes(info!.innerText)['$_nick-v0'], 'desktop');
+
+      await session.stopScreenShare();
+      await pumpEventQueue(times: 5);
+
+      expect(mediaCore.conn.screenStopped, isTrue);
+      // Zonder camera valt de bron weg — niet alleen het type.
+      expect(
+        channel.sent.any(
+          (s) => s.children.any(
+            (e) =>
+                e.name.local == 'jingle' &&
+                e.getAttribute('action') == 'source-remove' &&
+                e.toXmlString().contains('-v0'),
+          ),
+        ),
+        isTrue,
+      );
+      final after = _sourceInfoOf(channel.lastPresence!);
+      expect(after?.innerText ?? '', isNot(contains('-v0')));
+      expect(
+        session.participants.singleWhere((p) => p.isLocal).isScreenShare,
+        isFalse,
+      );
+      expect(session.screenShareLabel, isNull);
+    });
+
+    test('delen stoppen met camera aan: -v0 is weer de camera', () async {
+      final session = await joinLive(startMuted: false, startCameraOff: false);
+      addTearDown(() => session.leave());
+
+      await session.startScreenShare(sourceId: 'screen:0');
+      await session.stopScreenShare();
+      await pumpEventQueue(times: 5);
+
+      final info = _sourceInfoOf(channel.lastPresence!);
+      // Weer camera: geen videoType 'desktop', niet gemuteerd.
+      expect(info!.innerText, isNot(contains('desktop')));
+      expect(parseSourceInfo(info.innerText)['$_nick-v0'], isFalse);
+      // En nooit een source-remove — de bron bleef bestaan.
+      expect(
+        channel.sent.any(
+          (s) => s.children.any(
+            (e) => e.getAttribute('action') == 'source-remove',
+          ),
+        ),
+        isFalse,
+      );
+    });
+
+    test('weigering → getypeerde melding, de call blijft intact', () async {
+      mediaCore.conn.allowScreen = false;
+      final session = await joinLive();
+      addTearDown(() => session.leave());
+      final events = <MeetingEvent>[];
+      final sub = session.events.listen(events.add);
+
+      await session.startScreenShare(sourceId: 'screen:0');
+      await pumpEventQueue(times: 5);
+
+      expect(
+        events.whereType<MeetingErrorEvent>().map((e) => e.message),
+        contains(contains('Scherm delen is niet gelukt')),
+      );
+      expect(session.connectionState, MeetingConnectionState.connected);
+      expect(
+        channel.lastPresence!.children
+            .where((e) => e.name.local == 'SourceInfo')
+            .map((e) => e.innerText)
+            .join(),
+        isNot(contains('desktop')),
+      );
+      await sub.cancel();
+    });
+
+    test(
+      'bronverlies aan de systeemkant → delen eindigt met een melding',
+      () async {
+        final session = await joinLive(
+          startMuted: false,
+          startCameraOff: false,
+        );
+        addTearDown(() => session.leave());
+        final events = <MeetingEvent>[];
+        final sub = session.events.listen(events.add);
+
+        await session.startScreenShare(sourceId: 'screen:0');
+        await pumpEventQueue(times: 5);
+        mediaCore.conn.loseLocalTrack('ts');
+        await pumpEventQueue(times: 5);
+
+        expect(mediaCore.conn.screenStopped, isTrue);
+        expect(
+          events.whereType<MeetingErrorEvent>().map((e) => e.message),
+          contains(contains('gedeelde bron viel weg')),
+        );
+        final info = _sourceInfoOf(channel.lastPresence!);
+        expect(info!.innerText, isNot(contains('desktop')));
+        expect(
+          session.participants.singleWhere((p) => p.isLocal).isScreenShare,
+          isFalse,
+        );
+        await sub.cancel();
+      },
+    );
+
+    test(
+      'camera aanzetten tijdens delen wipt het scherm niet van de sender',
+      () async {
+        final session = await joinLive(startMuted: false, startCameraOff: true);
+        addTearDown(() => session.leave());
+
+        await session.startScreenShare(sourceId: 'screen:0');
+        await session.setCamera(enabled: true);
+        await pumpEventQueue(times: 5);
+
+        // De camera-track kwam erbij zónder de sender aan te raken; -v0
+        // blijft het scherm tot het delen stopt.
+        expect(mediaCore.conn.lastVideoAttachToSender, isFalse);
+        final info = _sourceInfoOf(channel.lastPresence!);
+        expect(parseSourceVideoTypes(info!.innerText)['$_nick-v0'], 'desktop');
+      },
+    );
+
+    test('remote met videoType desktop → participant isScreenShare', () async {
+      final session = await joinLive();
+      addTearDown(() => session.leave());
+      channel.inject(
+        Stanza.parse(
+          "<presence from='$_roomJid/carol'>"
+          "<x xmlns='$_mucUserNs'><item affiliation='none' role='participant'/></x>"
+          '<SourceInfo>{"carol-v0":{"muted":false,"videoType":"desktop"}}</SourceInfo>'
+          '</presence>',
+        ),
+      );
+      await pumpEventQueue();
+      final carol = session.participants.singleWhere((p) => p.id == 'carol');
+      expect(carol.isScreenShare, isTrue);
+      expect(carol.camOff, isFalse);
+    });
   });
 }

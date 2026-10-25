@@ -23,6 +23,7 @@
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:xml/xml.dart';
 
 import '../../../l10n/app_localizations.dart';
@@ -39,6 +40,9 @@ import 'jitsi_remote_media.dart';
 import 'jitsi_roster.dart';
 import 'jitsi_sdp.dart';
 import 'jitsi_signaling.dart';
+import 'jitsi_source_wire.dart';
+
+part 'jitsi_local_media.dart';
 
 /// Één actieve Jitsi-vergadering. Gemaakt via [JitsiMeetingSession.start];
 /// die werpt [MeetingJoinException] bij elke mislukte stap vóór `connected` —
@@ -137,12 +141,7 @@ class JitsiMeetingSession implements MeetingSession {
   JingleSessionInitiate? _initiate;
   MeetingConnectionState _state = MeetingConnectionState.idle;
   var _left = false;
-  var _micEnabled = true;
   var _iqSeq = 0;
-  String? _audioTrackId;
-  String? _videoTrackId;
-  int? _audioSsrc;
-  int? _videoSsrc;
   Completer<JingleSessionInitiate>? _initiateCompleter;
   Timer? _initiateTimer;
 
@@ -154,6 +153,11 @@ class JitsiMeetingSession implements MeetingSession {
   /// Jitsi-signaling (ForwardedSources/source-add) die zegt wie erop ligt
   /// (#2535, uitgeleid naar `jitsi_remote_media.dart`).
   late final _remoteMedia = JitsiRemoteMedia(onChanged: _remapRemoteTiles);
+
+  /// De lokale media-levenscyclus: onze track-ids/ssrc's, schermdelen en de
+  /// source-/presence-signalering daaromheen (#2535/#2537, uitgeleid naar
+  /// `jitsi_local_media.dart` — het spiegelbeeld van [JitsiRemoteMedia]).
+  late final _localMedia = JitsiLocalMedia(this);
 
   /// Het room-occupant JID van de focus — op de wire gaan alle jingle-IQ's
   /// hierheen (`room@muc/focus`), niet naar `focus@auth.<domain>`.
@@ -205,38 +209,50 @@ class JitsiMeetingSession implements MeetingSession {
       _media?.selectAudioOutput(deviceId) ?? Future.value();
 
   @override
-  MeetingCapabilities get capabilities => const MeetingCapabilities(
+  MeetingCapabilities get capabilities => MeetingCapabilities(
     // Controls die de gebruiker mag zien; of een track ook echt komt hangt aan
     // het apparaat en staat in micMuted/camOff/participant.tracks — die twee
     // feiten houden we strikt gescheiden (nooit een track veinzen).
     audio: true,
     video: true,
-    screenShare: false, // schermdelen komt in een eigen slice (#2537)
+    // Schermdelen is een platformfeit (getDisplayMedia), geen netwerkfeit —
+    // desktop en web kunnen het, mobiel niet zonder eigen capture-flow (#2537).
+    screenShare: screenShareFor(defaultTargetPlatform),
     chat: true,
     roster: true,
   );
 
   @override
   Future<void> setMicrophone({required bool enabled}) =>
-      _setLocalMedia(kind: 'audio', enabled: enabled);
+      _localMedia.setMedia(kind: 'audio', enabled: enabled);
 
   @override
   Future<void> setCamera({required bool enabled}) =>
-      _setLocalMedia(kind: 'video', enabled: enabled);
+      _localMedia.setMedia(kind: 'video', enabled: enabled);
 
   @override
-  Future<void> startScreenShare() async {
-    _emit(
-      MeetingErrorEvent(
-        message: AppLocalizations.active.d(
-          'Scherm delen is nog niet beschikbaar.',
-        ),
-      ),
-    );
+  Future<List<MeetingScreenSource>> screenShareSources() =>
+      _localMedia.screenSources();
+
+  @override
+  String? get screenShareLabel => _localMedia.screenShareLabel;
+
+  @override
+  Future<void> startScreenShare({String? sourceId, String? sourceLabel}) =>
+      _localMedia.startShare(sourceId: sourceId, sourceLabel: sourceLabel);
+
+  @override
+  Future<void> stopScreenShare() => _localMedia.endShare(lost: false);
+
+  /// Eén meldpunt voor de lokale participant — de track-velden komen uit
+  /// [_localParticipantNow] (copyWith kan een track niet wissen, #2535).
+  void _refreshLocal([MeetingParticipant Function(MeetingParticipant)? set]) {
+    final local = _participants[_nick];
+    if (local == null) return;
+    final next = _localParticipantNow(set?.call(local) ?? local);
+    _participants[_nick] = next;
+    _emit(ParticipantUpdated(next));
   }
-
-  @override
-  Future<void> stopScreenShare() async {}
 
   @override
   Future<void> sendChat(String text) async {
@@ -278,19 +294,26 @@ class JitsiMeetingSession implements MeetingSession {
     await _negotiateMediaAndAnnounce(_initiate!);
 
     _roster = _muc!.occupants.listen(_onRoster);
+    final localMedia = _localMedia;
     _participants[_nick] = MeetingParticipant(
       id: _nick,
       displayName: displayName,
       role: _localRoleFromMuc(),
       isLocal: true,
-      audio: _audioTrackId == null
+      audio: localMedia.audioTrackId == null
           ? null
-          : MeetingTrack(id: _audioTrackId!, kind: MeetingTrackKind.audio),
-      video: _videoTrackId == null
+          : MeetingTrack(
+              id: localMedia.audioTrackId!,
+              kind: MeetingTrackKind.audio,
+            ),
+      video: localMedia.videoTrackId == null
           ? null
-          : MeetingTrack(id: _videoTrackId!, kind: MeetingTrackKind.video),
-      micMuted: _audioTrackId == null || startMuted,
-      camOff: _videoTrackId == null || startCameraOff,
+          : MeetingTrack(
+              id: localMedia.videoTrackId!,
+              kind: MeetingTrackKind.video,
+            ),
+      micMuted: localMedia.audioTrackId == null || startMuted,
+      camOff: !localMedia.camEnabled,
     );
     _setConnection(MeetingConnectionState.connected);
   }
@@ -348,7 +371,7 @@ class JitsiMeetingSession implements MeetingSession {
         timeout: mucTimeout,
       );
       final result = await _muc!.join(
-        presenceExtensions: _presenceExtensions(const {}),
+        presenceExtensions: _localMedia.presenceExtensions(const {}),
       );
       if (result.ok) {
         _nick = nick;
@@ -366,13 +389,6 @@ class JitsiMeetingSession implements MeetingSession {
       );
     }
   }
-
-  /// De presence-extensies op een (her)join of update: displaynaam, de
-  /// SourceInfo-kaart én de endpoint-features — jicofo leest die uit de
-  /// presence (en via disco#info) om de session-initiate samen te stellen
-  /// (#2535). `<x xmlns='…/muc'>` plaatst XmppMuc zelf vooraan.
-  List<XmlElement> _presenceExtensions(Map<String, bool> mutedBySource) =>
-      jitsiPresenceExtensions(displayName, mutedBySource);
 
   Future<JingleSessionInitiate> _awaitInitiate() {
     final completer = _initiateCompleter = Completer<JingleSessionInitiate>();
@@ -404,9 +420,13 @@ class JitsiMeetingSession implements MeetingSession {
     _initiate = initiate;
     await _negotiateMedia(initiate);
     // Eigen bronnen aankondigen (wire-volgorde: presence, dan source-add).
-    await _sendPresenceUpdate();
-    await _announceNewSource('audio');
-    await _announceNewSource('video');
+    await _localMedia.sendPresenceUpdate();
+    await _localMedia.announceNewSource('audio');
+    await _localMedia.announceNewSource('video');
+    if (_localMedia.shareLostInRenegotiate) {
+      _localMedia.shareLostInRenegotiate = false;
+      _refreshLocal((l) => l.copyWith(isScreenShare: false));
+    }
     // Mediapad-bewijs — pas live ICE betekent "connected".
     await _awaitMediaLive();
   }
@@ -425,7 +445,7 @@ class JitsiMeetingSession implements MeetingSession {
     // niet verspreid over de call-sites (daar gingen remoteTracks/liveness
     // anders dood na een heronderhandeling, #2535).
     unawaited(_lostSub?.cancel());
-    _lostSub = _media!.localTrackLost.listen(_onLocalTrackLost);
+    _lostSub = _media!.localTrackLost.listen(_localMedia.onLocalTrackLost);
     unawaited(_remoteTracks?.cancel());
     _remoteTracks = _media!.remoteTracks.listen(_remoteMedia.trackArrived);
     unawaited(_livenessSub?.cancel());
@@ -434,6 +454,9 @@ class JitsiMeetingSession implements MeetingSession {
     // oude koppeling geldt niet en remote-tegels van de dode connectie zijn
     // eerlijk gezegd weg (de reset triggert zelf de remap die ze leegt).
     _remoteMedia.reset();
+    // Ook onze eigen track-ids zijn van de oude connectie — een share op de
+    // oude sender leeft niet verder; attachInitial zet camera/mic opnieuw.
+    _localMedia.resetForConnection();
     _mediaEgress = {
       for (final content in initiate.contents)
         if (content.transport != null)
@@ -442,8 +465,8 @@ class JitsiMeetingSession implements MeetingSession {
     // De echte client koppelt de mic ook bij een gemuteerde join — een
     // gemuteerde track met muted:true in SourceInfo. Geen device →
     // receive-only, en SourceInfo meldt dan eerlijk géén bron.
-    await _attachLocal('audio');
-    if (!startCameraOff) await _attachLocal('video');
+    await _localMedia.attachInitial('audio');
+    if (!startCameraOff) await _localMedia.attachInitial('video');
 
     try {
       await _media!.applyRemoteOffer(jingleOfferToSdp(initiate));
@@ -493,62 +516,6 @@ class JitsiMeetingSession implements MeetingSession {
         'sdp: ${e.message}',
       );
     }
-  }
-
-  /// Een lokale track koppelen (mic/camera). Null bij geen device = eerlijk
-  /// receive-only; de track-id/ssrc worden bewaard voor SourceInfo+source-add.
-  Future<void> _attachLocal(String kind) async {
-    final attached = kind == 'audio'
-        ? await _media!.addLocalAudio()
-        : await _media!.addLocalVideo();
-    if (attached == null) return;
-    if (kind == 'audio') {
-      _audioTrackId = attached.trackId;
-      _audioSsrc = attached.ssrc;
-      _micEnabled = !startMuted;
-      await _media!.setLocalTrackEnabled(
-        attached.trackId,
-        enabled: !startMuted,
-      );
-    } else {
-      _videoTrackId = attached.trackId;
-      _videoSsrc = attached.ssrc;
-    }
-  }
-
-  /// Presence met de actuele SourceInfo-kaart (onze mute-waarheid op de
-  /// wire) — verstuurd na de accept en na elke mute-wijziging.
-  Future<void> _sendPresenceUpdate() async {
-    final muted = <String, bool>{
-      if (_audioTrackId != null) '$_nick-a0': !_micEnabled,
-      if (_videoTrackId != null) '$_nick-v0': false,
-    };
-    _channel.sendStanza(
-      Stanza(
-        kind: StanzaKind.presence,
-        to: '$roomJid/$_nick',
-        children: _presenceExtensions(muted),
-      ),
-    );
-  }
-
-  /// Een bron aankondigen bij de focus, als de ssrc bekend is.
-  Future<void> _announceNewSource(String kind) async {
-    final initiate = _initiate;
-    final ssrc = kind == 'audio' ? _audioSsrc : _videoSsrc;
-    if (initiate == null || ssrc == null) return;
-    _channel.sendStanza(
-      jitsiSourceAnnounceIq(
-        focusInRoom: _focusInRoom,
-        iqId: _nextIqId(),
-        sid: initiate.sid,
-        initiator: initiate.initiator,
-        sourceName: '$_nick-${kind[0]}0',
-        ssrc: '$ssrc',
-      ),
-    );
-    // De ack is best-effort: de MUC reflecteert ons sowieso terug, en een
-    // verloren source-add herstelt via de volgende presence.
   }
 
   Future<void> _awaitMediaLive() async {
@@ -762,40 +729,6 @@ class JitsiMeetingSession implements MeetingSession {
     }
   }
 
-  /// Een eigen bron valt weg (mic/cam verdwenen, permissie ingetrokken,
-  /// #2535): de track is écht weg — niet "gemuteerd". SourceInfo zakt die
-  /// bron dus af, de participant toont hem uit, en de gebruiker krijgt een
-  /// niet-terminale melding; opnieuw aanzetten haalt een verse track op.
-  void _onLocalTrackLost(String trackId) {
-    if (_left) return;
-    final isAudio = trackId == _audioTrackId;
-    if (!isAudio && trackId != _videoTrackId) return;
-    if (isAudio) {
-      _audioTrackId = null;
-      _audioSsrc = null;
-      _micEnabled = false;
-    } else {
-      _videoTrackId = null;
-      _videoSsrc = null;
-    }
-    _sendPresenceUpdate();
-    final local = _participants[_nick];
-    if (local != null) {
-      final next = _localParticipantNow(
-        isAudio ? local.copyWith(micMuted: true) : local.copyWith(camOff: true),
-      );
-      _participants[_nick] = next;
-      _emit(ParticipantUpdated(next));
-    }
-    _emit(
-      MeetingErrorEvent(
-        message: AppLocalizations.active.d(
-          'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.',
-        ),
-      ),
-    );
-  }
-
   /// Een verse session-initiate terwijl we verbonden zijn = de bridge is
   /// vervangen (failover) en de sessie onderhandelt opnieuw (#2535). Dezelfde
   /// kamer en roster blijven; het mediapad wordt opnieuw opgebouwd. Een
@@ -892,66 +825,14 @@ class JitsiMeetingSession implements MeetingSession {
     if (!_events.isClosed) await _events.close();
   }
 
-  // ── lokale media aan/uit ──────────────────────────────────────────────────
-
-  Future<void> _setLocalMedia({
-    required String kind,
-    required bool enabled,
-  }) async {
-    if (_left || _media == null) return;
-    var trackId = kind == 'audio' ? _audioTrackId : _videoTrackId;
-    if (enabled && trackId == null) {
-      // Eerste keer aan: echte track ophalen — pas daarna adverteren we het
-      // vermogen (nooit audio/video veinzen vóór een track bestaat).
-      final attached = kind == 'audio'
-          ? await _media!.addLocalAudio()
-          : await _media!.addLocalVideo();
-      if (attached == null) {
-        _emit(
-          MeetingErrorEvent(
-            message: AppLocalizations.active.d(
-              'Het apparaat geeft geen toegang tot deze bron.',
-            ),
-          ),
-        );
-        return;
-      }
-      trackId = attached.trackId;
-      if (kind == 'audio') {
-        _audioTrackId = trackId;
-        _audioSsrc = attached.ssrc;
-      } else {
-        _videoTrackId = trackId;
-        _videoSsrc = attached.ssrc;
-      }
-      await _announceNewSource(kind);
-    }
-    if (trackId == null) return;
-    if (kind == 'audio') _micEnabled = enabled;
-    await _media!.setLocalTrackEnabled(trackId, enabled: enabled);
-    await _sendPresenceUpdate();
-    final local = _participants[_nick];
-    if (local != null) {
-      // De (net heracquireerde) tracks vers opbouwen: copyWith kan een
-      // track niet wissen, dus reconstrueren uit de huidige ids (#2535).
-      final next = _localParticipantNow(
-        kind == 'audio'
-            ? local.copyWith(micMuted: !enabled)
-            : local.copyWith(camOff: !enabled),
-      );
-      _participants[_nick] = next;
-      _emit(ParticipantUpdated(next));
-    }
-  }
-
   /// Herbouw vanuit de huidige track-ids — de mapping zelf staat in
   /// `jitsi_roster.dart` (copyWith kan een track niet wissen, #2535).
   MeetingParticipant _localParticipantNow(MeetingParticipant local) =>
       jitsiLocalParticipant(
         nick: _nick,
         of: local,
-        audioTrackId: _audioTrackId,
-        videoTrackId: _videoTrackId,
+        audioTrackId: _localMedia.audioTrackId,
+        videoTrackId: _localMedia.videoTrackId,
       );
 
   // ── helpers ───────────────────────────────────────────────────────────────

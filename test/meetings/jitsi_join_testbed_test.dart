@@ -133,8 +133,20 @@ class _FakeMediaConnection implements MeetingMediaConnection {
       (trackId: 'ta', ssrc: _ssrcSeq++);
 
   @override
-  Future<({String trackId, int? ssrc})?> addLocalVideo() async =>
-      (trackId: 'tv', ssrc: _ssrcSeq++);
+  Future<({String trackId, int? ssrc})?> addLocalVideo({
+    bool attachToSender = true,
+  }) async => (trackId: 'tv', ssrc: _ssrcSeq++);
+
+  @override
+  Future<List<MeetingScreenSource>> screenSources() async => const [];
+
+  @override
+  Future<({String trackId, int? ssrc})?> addLocalScreen({
+    String? sourceId,
+  }) async => (trackId: 'ts', ssrc: _ssrcSeq++);
+
+  @override
+  Future<void> stopScreenShare() async {}
 
   @override
   Future<void> setLocalTrackEnabled(

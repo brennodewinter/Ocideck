@@ -1603,6 +1603,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Ekrāna kopīgošana neizdevās — avots tika noraidīts vai pazuda.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Kopīgotais avots pazuda; kopīgošana ir apturēta.',
+  'Delen stoppen': 'Apturēt kopīgošanu',
+  'Je deelt je scherm.': 'Jūs kopīgojat savu ekrānu.',
+  'Je deelt': 'Jūs kopīgojat',
+  'Kies wat je deelt': 'Izvēlieties, ko kopīgot',
+  'Scherm': 'Ekrāns',
   'Nog geen actieve vergadering.': 'Vēl nav aktīvas tikšanās.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Ielīmējiet Jitsi sapulces saiti, lai pievienotos.',
@@ -1630,8 +1639,6 @@ const _dutchSourceAddLv = <String, String>{
   'De verbinding is verbroken.': 'Savienojums pārtrūka.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Ierīce nedod piekļuvi šim avotam.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Ekrāna kopīgošana vēl nav pieejama.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/telpas-nosaukums',
   'Vergaderlink controleren': 'Pārbaudīt sanāksmes saiti',

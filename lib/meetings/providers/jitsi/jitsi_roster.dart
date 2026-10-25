@@ -10,6 +10,7 @@ import '../../../xmpp/xmpp_muc.dart';
 import '../../meeting_participant.dart';
 import '../../meeting_provider.dart' show MeetingFailureReason;
 import 'jitsi_signaling.dart';
+import 'jitsi_source_wire.dart';
 
 /// Eén occupant → de provider-neutrale participant. Geen presence-gegevens
 /// = het veiligste antwoord (gemuteerd/camera uit), nooit rooskleuriger dan
@@ -18,6 +19,7 @@ MeetingParticipant jitsiParticipantOf(MucOccupant occ) {
   var display = occ.nick;
   var micMuted = true;
   var camOff = true;
+  var isScreenShare = false;
   for (final ext in occ.extensions) {
     switch (ext.name.local) {
       case 'nick':
@@ -27,11 +29,16 @@ MeetingParticipant jitsiParticipantOf(MucOccupant occ) {
           if (v.isNotEmpty && v.length <= 128) display = v;
         }
       case 'SourceInfo':
-        final muted = parseSourceInfo(ext.innerText);
+        final text = ext.innerText;
+        final muted = parseSourceInfo(text);
         final a = muted['${occ.nick}-a0'];
         final v = muted['${occ.nick}-v0'];
         if (a != null) micMuted = a;
         if (v != null) camOff = v;
+        // 'desktop' op de -v0-bron: de andere kant deelt zijn scherm op de
+        // bestaande video-source, niet op een aparte m-line (#2537).
+        isScreenShare =
+            parseSourceVideoTypes(text)['${occ.nick}-v0'] == 'desktop';
     }
   }
   return MeetingParticipant(
@@ -40,6 +47,7 @@ MeetingParticipant jitsiParticipantOf(MucOccupant occ) {
     role: jitsiRoleOf(occ),
     micMuted: micMuted,
     camOff: camOff,
+    isScreenShare: isScreenShare,
   );
 }
 
@@ -64,7 +72,8 @@ bool jitsiParticipantDiffers(MeetingParticipant a, MeetingParticipant b) =>
     a.displayName != b.displayName ||
     a.role != b.role ||
     a.micMuted != b.micMuted ||
-    a.camOff != b.camOff;
+    a.camOff != b.camOff ||
+    a.isScreenShare != b.isScreenShare;
 
 /// Tracks zijn niet `copyWith`-baar (null betekent "houden") — bouw
 /// expliciet, bijv. bij een presence-update die de media-tracks bewaart.

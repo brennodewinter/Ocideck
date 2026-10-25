@@ -1620,6 +1620,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Participatio scrini non successit — fons recusatus est aut evanuit.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Fons participatus evanuit; participatio cessavit.',
+  'Delen stoppen': 'Participationem finire',
+  'Je deelt je scherm.': 'Scrinium tuum participas.',
+  'Je deelt': 'Participas',
+  'Kies wat je deelt': 'Elige quid participes',
+  'Scherm': 'Scrinium',
   'Nog geen actieve vergadering.': 'Nullus conventus actuosus adhuc.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Glutina nexum conventus Jitsi ut participes.',
@@ -1647,8 +1656,6 @@ const _dutchSourceAddLa = <String, String>{
   'De verbinding is verbroken.': 'Coniunctio interrupta est.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Machina aditum ad hunc fontem non concedit.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Participatio scrini nondum praesto est.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nomen-conclavis',
   'Vergaderlink controleren': 'Videocoetūs nexum exscribe',

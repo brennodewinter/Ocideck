@@ -12,7 +12,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/meeting_link_resolver.dart';
 import 'package:ocideck/meetings/meeting_media_core.dart'
-    show MeetingAudioOutput, MeetingVideoSurface;
+    show MeetingAudioOutput, MeetingScreenSource, MeetingVideoSurface;
 import 'package:ocideck/meetings/meeting_participant.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 import 'package:ocideck/meetings/meeting_provider_profile.dart';
@@ -286,7 +286,14 @@ class _FakeSession implements MeetingSession {
   @override
   Future<void> setCamera({required bool enabled}) async {}
   @override
-  Future<void> startScreenShare() async {}
+  Future<List<MeetingScreenSource>> screenShareSources() async => const [];
+  @override
+  Future<void> startScreenShare({
+    String? sourceId,
+    String? sourceLabel,
+  }) async {}
+  @override
+  String? get screenShareLabel => null;
   @override
   Future<void> stopScreenShare() async {}
   @override

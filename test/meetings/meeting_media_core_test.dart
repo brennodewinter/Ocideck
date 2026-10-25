@@ -21,4 +21,33 @@ void main() {
     expect(mediaE2eeFor(TargetPlatform.windows), MeetingE2eeStatus.unknown);
     expect(mediaE2eeFor(TargetPlatform.fuchsia), MeetingE2eeStatus.unknown);
   });
+
+  test('schermdelen is een platformfeit: desktop en web, nooit mobiel', () {
+    // getDisplayMedia + een eigen bronlijst bestaan op desktop; de browser
+    // heeft zijn eigen kiezer; mobiel vraagt een capture-flow die er bewust
+    // niet is (#2537 — nooit claimen wat niet bewezen is).
+    expect(screenShareFor(TargetPlatform.macOS), isTrue);
+    expect(screenShareFor(TargetPlatform.windows), isTrue);
+    expect(screenShareFor(TargetPlatform.linux), isTrue);
+    expect(
+      screenShareFor(TargetPlatform.android, isWeb: true),
+      isTrue,
+    );
+    expect(screenShareFor(TargetPlatform.iOS), isFalse);
+    expect(screenShareFor(TargetPlatform.android), isFalse);
+    expect(screenShareFor(TargetPlatform.fuchsia), isFalse);
+  });
+
+  test('MeetingScreenSource draagt id, label, soort en miniatuur', () {
+    const src = MeetingScreenSource(
+      id: 'window:7',
+      label: 'Editor',
+      isWindow: true,
+      thumbnail: null,
+    );
+    expect(src.id, 'window:7');
+    expect(src.label, 'Editor');
+    expect(src.isWindow, isTrue);
+    expect(src.thumbnail, isNull);
+  });
 }

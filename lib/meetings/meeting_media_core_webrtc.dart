@@ -127,6 +127,9 @@ class _WebrtcConnection implements MeetingMediaConnection {
   final _dataChannels = <_WebrtcDataChannel>[];
   MediaStream? _micStream;
   MediaStream? _camStream;
+  String? _cameraTrackId;
+  MediaStream? _screenStream;
+  String? _screenTrackId;
   var _closed = false;
 
   static const _maxRemoteTracks = 64;
@@ -203,8 +206,9 @@ class _WebrtcConnection implements MeetingMediaConnection {
   /// kent vaste contents: audio/video/data).
   Future<({String trackId, int? ssrc})?> _addLocal(
     String kind,
-    Future<MediaStream> Function() acquire,
-  ) async {
+    Future<MediaStream> Function() acquire, {
+    bool attachToSender = true,
+  }) async {
     if (_closed) return null;
     final MediaStream stream;
     try {
@@ -221,9 +225,14 @@ class _WebrtcConnection implements MeetingMediaConnection {
     final track = tracks.first;
     try {
       if (_answered) {
-        await (kind == 'audio' ? _audioTr : _videoTr).sender.replaceTrack(
-          track,
-        );
+        // attachToSender=false: de camera aanzetten tijdens schermdelen mag
+        // het scherm niet van de sender wippen — de track bestaat dan al en
+        // komt bij het stoppen van delen vanzelf op de sender.
+        if (attachToSender) {
+          await (kind == 'audio' ? _audioTr : _videoTr).sender.replaceTrack(
+            track,
+          );
+        }
       } else {
         await _pc.addTrack(track, stream);
       }
@@ -275,14 +284,134 @@ class _WebrtcConnection implements MeetingMediaConnection {
       });
 
   @override
-  Future<({String trackId, int? ssrc})?> addLocalVideo() =>
-      _addLocal('video', () async {
+  Future<({String trackId, int? ssrc})?> addLocalVideo({
+    bool attachToSender = true,
+  }) =>
+      _addLocal('video', attachToSender: attachToSender, () async {
         final s = await navigator.mediaDevices.getUserMedia(const {
           'audio': false,
           'video': {'width': 1280, 'height': 720},
         });
         return _camStream = s;
+      }).then((attached) {
+        if (attached != null) _cameraTrackId = attached.trackId;
+        return attached;
       });
+
+  @override
+  Future<List<MeetingScreenSource>> screenSources() async {
+    // Web laat de browser zelf een kiezer zien — daar is geen eigen lijst.
+    if (kIsWeb) return const [];
+    try {
+      return [
+        for (final s in await desktopCapturer.getSources(
+          types: const [SourceType.Screen, SourceType.Window],
+          thumbnailSize: ThumbnailSize(240, 135),
+        ))
+          MeetingScreenSource(
+            id: s.id,
+            label: s.name,
+            isWindow: s.type == SourceType.Window,
+            thumbnail: s.thumbnail,
+          ),
+      ];
+    } on Exception catch (e) {
+      logWarning('WebrtcConnection.screenSources', e);
+      return const [];
+    }
+  }
+
+  @override
+  Future<({String trackId, int? ssrc})?> addLocalScreen({
+    String? sourceId,
+  }) async {
+    if (_closed) return null;
+    final MediaStream stream;
+    try {
+      stream = await navigator.mediaDevices.getDisplayMedia(<String, dynamic>{
+        'audio': false,
+        'video': sourceId == null
+            ? true // browser: de kiezer van de browser zelf
+            : <String, Object>{
+                // De bron uit onze eigen kiezer gaat mee als deviceId —
+                // geen deviceId zou hier het hele scherm pakken.
+                'deviceId': <String, Object>{'exact': sourceId},
+                'mandatory': <String, Object>{
+                  'frameRate': 15,
+                  // Scherm en venster verschillen in resolutie; laat het OS
+                  // de maat kiezen — een geforceerde 1280x720 levert een
+                  // uitgerekt beeld op.
+                },
+              },
+      });
+    } on Exception catch (e) {
+      // Geen toestemming, geen bron of de gebruiker annuleerde — allemaal
+      // dezelfde eerlijke afloop: er deelt niets, de call blijft intact.
+      logWarning('WebrtcConnection.addLocalScreen', e);
+      return null;
+    }
+    final tracks = stream.getVideoTracks();
+    if (tracks.isEmpty) {
+      await stream.dispose();
+      return null;
+    }
+    final track = tracks.first;
+    try {
+      // Altijd replaceTrack op de vaste video-transceiver: de m-line en de
+      // aangekondigde bron <nick>-v0 blijven gelijk, alleen de inhoud
+      // wisselt. Dat is hoe lib-jitsi-meet delen neerlegt — geen extra
+      // m-line, geen nieuwe bron.
+      await _videoTr.sender.replaceTrack(track);
+    } on Exception catch (e) {
+      await track.stop();
+      await stream.dispose();
+      logWarning('WebrtcConnection.addLocalScreen: koppelen faalde', e);
+      return null;
+    }
+    _screenStream = stream;
+    _screenTrackId = track.id;
+    _localTracks[track.id ?? ''] = track;
+    track.onEnded = () {
+      _localTracks.remove(track.id);
+      // De share-velden blijven staan tot [stopScreenShare] opruimt — de
+      // adapter hoort het verlies via localTrackLost en zet dan de camera
+      // terug op de sender; zelf opruimen zou die terugzet overslaan.
+      if (!_localLostOut.isClosed) _localLostOut.add(track.id ?? '');
+    };
+    return (trackId: track.id ?? '', ssrc: await _senderSsrc('video'));
+  }
+
+  @override
+  Future<void> stopScreenShare() async {
+    final trackId = _screenTrackId;
+    final stream = _screenStream;
+    if (trackId == null && stream == null) return;
+    _screenTrackId = null;
+    _screenStream = null;
+    _localTracks.remove(trackId);
+    // De camera terug op de sender als die track er nog is; anders
+    // loskoppelen — een sender zonder track stuurt niets.
+    final cam = _cameraTrackId == null ? null : _localTracks[_cameraTrackId];
+    try {
+      await _videoTr.sender.replaceTrack(cam);
+    } on Exception catch (e) {
+      logWarning('WebrtcConnection.stopScreenShare: terugzetten faalde', e);
+    }
+    final track = stream?.getVideoTracks().firstOrNull;
+    track?.onEnded = null;
+    if (track != null) {
+      try {
+        await track.stop();
+      } on Exception catch (e) {
+        logWarning('WebrtcConnection.stopScreenShare: track', e);
+      }
+    }
+    try {
+      await stream?.dispose();
+    } on Exception catch (e) {
+      logWarning('WebrtcConnection.stopScreenShare: stream', e);
+    }
+  }
 
   @override
   Future<void> setLocalTrackEnabled(
@@ -296,10 +425,12 @@ class _WebrtcConnection implements MeetingMediaConnection {
   @override
   Future<MeetingVideoSurface?> attachVideo(String trackId) async {
     if (_closed) return null;
-    // Remote stream, of onze eigen camerastream voor de self-view — beide op
-    // track-id. Onbekend/eindig → null, nooit een nepvlak (#2535).
+    // Remote stream, de schermdeel-stream voor de self-view, of de eigen
+    // camerastream — allemaal op track-id. Onbekend/eindig → null, nooit een
+    // nepvlak (#2535).
     final stream =
         _remoteStreams[trackId] ??
+        (trackId == _screenTrackId ? _screenStream : null) ??
         (_localTracks[trackId] != null && _localTracks[trackId]!.kind == 'video'
             ? _camStream
             : null);
@@ -385,7 +516,7 @@ class _WebrtcConnection implements MeetingMediaConnection {
       }
     }
     _localTracks.clear();
-    for (final stream in [_micStream, _camStream]) {
+    for (final stream in [_micStream, _camStream, _screenStream]) {
       try {
         await stream?.dispose();
       } on Exception catch (e) {
@@ -394,6 +525,9 @@ class _WebrtcConnection implements MeetingMediaConnection {
     }
     _micStream = null;
     _camStream = null;
+    _screenStream = null;
+    _cameraTrackId = null;
+    _screenTrackId = null;
     _remoteStreams.clear();
     for (final renderer in _renderers) {
       try {

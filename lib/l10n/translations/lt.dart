@@ -1611,6 +1611,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Ekrano bendrinimas nepavyko — šaltinis buvo atmestas arba dingo.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Bendrinamas šaltinis dingo; bendrinimas sustabdytas.',
+  'Delen stoppen': 'Stabdyti bendrinimą',
+  'Je deelt je scherm.': 'Bendrinate savo ekraną.',
+  'Je deelt': 'Bendrinate',
+  'Kies wat je deelt': 'Pasirinkite, ką bendrinti',
+  'Scherm': 'Ekranas',
   'Nog geen actieve vergadering.': 'Kol kas nėra aktyvaus susitikimo.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Įklijuokite „Jitsi“ susitikimo nuorodą, kad prisijungtumėte.',
@@ -1638,8 +1647,6 @@ const _dutchSourceAddLt = <String, String>{
   'De verbinding is verbroken.': 'Ryšys nutrūko.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Įrenginys nesuteikia prieigos prie šio šaltinio.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Ekrano bendrinimas dar nepasiekiamas.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/kambario-pavadinimas',
   'Vergaderlink controleren': 'Tikrinti susitikimo nuorodą',

@@ -2513,6 +2513,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Ekran paylaşımı başarısız oldu — kaynak reddedildi veya kayboldu.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Paylaşılan kaynak kayboldu; paylaşım durduruldu.',
+  'Delen stoppen': 'Paylaşımı durdur',
+  'Je deelt je scherm.': 'Ekranınızı paylaşıyorsunuz.',
+  'Je deelt': 'Paylaşıyorsunuz:',
+  'Kies wat je deelt': 'Neyi paylaşacağınızı seçin',
+  'Scherm': 'Ekran',
   'Nog geen actieve vergadering.': 'Henüz etkin bir toplantı yok.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Katılmak için bir Jitsi toplantı bağlantısı yapıştırın.',
@@ -2539,8 +2548,6 @@ const _dutchSourceAddTr = <String, String>{
   'De verbinding is verbroken.': 'Bağlantı kesildi.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Cihaz bu kaynağa erişime izin vermiyor.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Ekran paylaşımı henüz kullanılamıyor.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/oda-adi',
   'Vergaderlink controleren': 'Toplantı bağlantısını denetle',

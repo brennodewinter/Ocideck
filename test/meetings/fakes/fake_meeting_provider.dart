@@ -10,9 +10,10 @@
 
 import 'dart:async';
 
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/meeting_media_core.dart'
-    show MeetingAudioOutput, MeetingVideoSurface;
+    show MeetingAudioOutput, MeetingScreenSource, MeetingVideoSurface;
 import 'package:ocideck/meetings/meeting_participant.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 
@@ -127,13 +128,44 @@ class FakeMeetingSession implements MeetingSession {
     _updateLocal(_local.copyWith(camOff: !enabled));
   }
 
+  /// Wat [screenShareSources] teruggeeft — tests zetten de bronlijst (#2537).
+  List<MeetingScreenSource> screenSourcesToOffer = const [];
+
   @override
-  Future<void> startScreenShare() async {
+  Future<List<MeetingScreenSource>> screenShareSources() async =>
+      screenSourcesToOffer;
+
+  String? _screenShareLabel;
+
+  @override
+  String? get screenShareLabel => _screenShareLabel;
+
+  /// Welke source-id de laatste [startScreenShare] kreeg — tests lezen hem.
+  String? lastShareSourceId;
+
+  /// Laat [startScreenShare] falen als de echte weigering dat doet.
+  var shareRefused = false;
+
+  @override
+  Future<void> startScreenShare({String? sourceId, String? sourceLabel}) async {
+    lastShareSourceId = sourceId;
+    if (shareRefused) {
+      _emit(
+        MeetingErrorEvent(
+          message: AppLocalizations.active.d(
+            'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.',
+          ),
+        ),
+      );
+      return;
+    }
+    _screenShareLabel = sourceLabel;
     _updateLocal(_local.copyWith(isScreenShare: true));
   }
 
   @override
   Future<void> stopScreenShare() async {
+    _screenShareLabel = null;
     _updateLocal(_local.copyWith(isScreenShare: false));
   }
 

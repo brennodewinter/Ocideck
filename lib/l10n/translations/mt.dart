@@ -1623,6 +1623,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Il-qsim tal-iskrin ma rnexxiex — is-sors ġie miċħud jew sparixxa.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Is-sors kondiviż sparixxa; il-qsim waqaf.',
+  'Delen stoppen': 'Waqqaf il-qsim',
+  'Je deelt je scherm.': 'Qed taqsam l-iskrin tiegħek.',
+  'Je deelt': 'Qed taqsam',
+  'Kies wat je deelt': 'Agħżel x\'taqsam',
+  'Scherm': 'Skrin',
   'Nog geen actieve vergadering.': 'Għad ma hemm l-ebda laqgħa attiva.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Waħħal link ta’ laqgħa Jitsi biex tissieħeb.',
@@ -1650,8 +1659,6 @@ const _dutchSourceAddMt = <String, String>{
   'De verbinding is verbroken.': 'Il-konnessjoni nqata\'t.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'L-apparat ma jagħtix aċċess għal dan is-sors.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Il-qsim tal-iskrin għadu mhux disponibbli.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/isem-tal-kamra',
   'Vergaderlink controleren': 'Iċċekkja l-link tal-laqgħa',

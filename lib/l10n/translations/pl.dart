@@ -1617,6 +1617,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Udostępnianie ekranu się nie powiodło — źródło zostało odrzucone lub zniknęło.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Udostępniane źródło zniknęło; udostępnianie zostało zatrzymane.',
+  'Delen stoppen': 'Zatrzymaj udostępnianie',
+  'Je deelt je scherm.': 'Udostępniasz swój ekran.',
+  'Je deelt': 'Udostępniasz',
+  'Kies wat je deelt': 'Wybierz, co udostępnić',
+  'Scherm': 'Ekran',
   'Nog geen actieve vergadering.': 'Brak aktywnego spotkania.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Wklej link spotkania Jitsi, aby dołączyć.',
@@ -1645,8 +1654,6 @@ const _dutchSourceAddPl = <String, String>{
   'De verbinding is verbroken.': 'Połączenie zostało przerwane.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Urządzenie nie zezwala na dostęp do tego źródła.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Udostępnianie ekranu nie jest jeszcze dostępne.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/nazwa-pokoju',
   'Vergaderlink controleren': 'Sprawdź link do spotkania',

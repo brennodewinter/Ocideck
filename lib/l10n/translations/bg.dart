@@ -1624,6 +1624,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Споделянето на екрана не успя — източникът бе отказан или изчезна.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Споделеният източник изчезна; споделянето е спряно.',
+  'Delen stoppen': 'Спиране на споделянето',
+  'Je deelt je scherm.': 'Споделяте екрана си.',
+  'Je deelt': 'Споделяте',
+  'Kies wat je deelt': 'Изберете какво да споделяте',
+  'Scherm': 'Екран',
   'Nog geen actieve vergadering.': 'Все още няма активна среща.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Поставете връзка към среща в Jitsi, за да се присъедините.',
@@ -1651,8 +1660,6 @@ const _dutchSourceAddBg = <String, String>{
   'De verbinding is verbroken.': 'Връзката прекъсна.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Устройството не разрешава достъп до този източник.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Споделянето на екран все още не е налично.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ime-na-staya',
   'Vergaderlink controleren': 'Проверка на връзката за среща',

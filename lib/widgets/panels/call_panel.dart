@@ -20,12 +20,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../meetings/meeting_event.dart';
 import '../../meetings/meeting_media_core.dart'
-    show MeetingAudioOutput, MeetingVideoSurface;
+    show MeetingAudioOutput, MeetingScreenSource, MeetingVideoSurface;
 import '../../meetings/meeting_participant.dart';
 import '../../meetings/meeting_provider.dart';
 import '../../state/meeting_session_provider.dart';
 import '../../theme/app_theme.dart';
 import '../dialogs/meeting_preflight_dialog.dart';
+import '../dialogs/screen_share_picker.dart';
 
 /// The call rail for the workspace row: a divider plus the panel while the module
 /// is revealed, otherwise nothing. Kept out of the shell so
@@ -493,37 +494,90 @@ class _CallControls extends ConsumerWidget {
     }
     final muted = local?.micMuted ?? true;
     final camOff = local?.camOff ?? true;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    final sharing = local?.isScreenShare ?? false;
+    final shareLabel = session.screenShareLabel;
+    return Column(
       children: [
-        if (caps.audio)
-          IconButton(
-            tooltip: muted ? l10n.d('Dempen opheffen') : l10n.d('Dempen'),
-            icon: Icon(muted ? Icons.mic_off_outlined : Icons.mic_outlined),
-            onPressed: () => session.setMicrophone(enabled: muted),
-          ),
-        if (caps.video)
-          IconButton(
-            tooltip: camOff ? l10n.d('Camera aan') : l10n.d('Camera uit'),
-            icon: Icon(
-              camOff ? Icons.videocam_off_outlined : Icons.videocam_outlined,
+        // Welke bron live wordt verzonden (#2537) — geen naam bekend (de
+        // browser koos zelf) dan alleen "je deelt".
+        if (sharing)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Text(
+              shareLabel == null
+                  ? l10n.d('Je deelt je scherm.')
+                  : '${l10n.d('Je deelt')} $shareLabel',
+              style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+              overflow: TextOverflow.ellipsis,
             ),
-            onPressed: () => session.setCamera(enabled: camOff),
           ),
-        if (caps.screenShare)
-          IconButton(
-            tooltip: l10n.d('Scherm delen'),
-            icon: const Icon(Icons.screen_share_outlined),
-            onPressed: session.startScreenShare,
-          ),
-        _AudioOutputMenu(session: session),
-        IconButton(
-          tooltip: l10n.d('Vergadering verlaten'),
-          icon: Icon(Icons.call_end_outlined, color: AppTheme.dangerFg),
-          onPressed: () => ref.read(meetingSessionProvider.notifier).leave(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            if (caps.audio)
+              IconButton(
+                tooltip: muted ? l10n.d('Dempen opheffen') : l10n.d('Dempen'),
+                icon: Icon(muted ? Icons.mic_off_outlined : Icons.mic_outlined),
+                onPressed: () => session.setMicrophone(enabled: muted),
+              ),
+            if (caps.video)
+              IconButton(
+                tooltip: camOff ? l10n.d('Camera aan') : l10n.d('Camera uit'),
+                icon: Icon(
+                  camOff
+                      ? Icons.videocam_off_outlined
+                      : Icons.videocam_outlined,
+                ),
+                onPressed: () => session.setCamera(enabled: camOff),
+              ),
+            if (caps.screenShare)
+              IconButton(
+                tooltip: sharing
+                    ? l10n.d('Delen stoppen')
+                    : l10n.d('Scherm delen'),
+                icon: Icon(
+                  sharing
+                      ? Icons.stop_screen_share_outlined
+                      : Icons.screen_share_outlined,
+                ),
+                onPressed: sharing
+                    ? session.stopScreenShare
+                    : () => _pickShareSource(context),
+              ),
+            _AudioOutputMenu(session: session),
+            IconButton(
+              tooltip: l10n.d('Vergadering verlaten'),
+              icon: Icon(Icons.call_end_outlined, color: AppTheme.dangerFg),
+              onPressed: () =>
+                  ref.read(meetingSessionProvider.notifier).leave(),
+            ),
+          ],
         ),
       ],
     );
+  }
+
+  /// Deel-route (#2537): een eigen bronlijst als het platform die heeft
+  /// (desktop → kiezer met miniaturen), anders kiest de browser of het OS
+  /// zelf in `getDisplayMedia`. Annuleren of weigeren doet niets — de sessie
+  /// meldt een mislukte share zelf als MeetingErrorEvent.
+  Future<void> _pickShareSource(BuildContext context) async {
+    final sources = await session.screenShareSources();
+    if (!context.mounted) return;
+    if (sources.isEmpty) {
+      await session.startScreenShare();
+      return;
+    }
+    final source = await showDialog<MeetingScreenSource>(
+      context: context,
+      builder: (_) => ScreenSharePickerDialog(sources: sources),
+    );
+    if (source != null) {
+      await session.startScreenShare(
+        sourceId: source.id,
+        sourceLabel: source.label,
+      );
+    }
   }
 }
 

@@ -1605,6 +1605,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Deljenje zaslona ni uspelo — vir je bil zavrnjen ali je izginil.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Deljeni vir je izginil; deljenje je ustavljeno.',
+  'Delen stoppen': 'Ustavi deljenje',
+  'Je deelt je scherm.': 'Delite svoj zaslon.',
+  'Je deelt': 'Delite',
+  'Kies wat je deelt': 'Izberite, kaj delite',
+  'Scherm': 'Zaslon',
   'Nog geen actieve vergadering.': 'Trenutno ni aktivnega sestanka.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Prilepite povezavo do sestanka Jitsi za sodelovanje.',
@@ -1632,7 +1641,6 @@ const _dutchSourceAddSl = <String, String>{
   'De verbinding is verbroken.': 'Povezava se je prekinila.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Naprava ne dovoljuje dostopa do tega vira.',
-  'Scherm delen is nog niet beschikbaar.': 'Deljenje zaslona še ni na voljo.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/ime-sobe',
   'Vergaderlink controleren': 'Preveri povezavo sestanka',

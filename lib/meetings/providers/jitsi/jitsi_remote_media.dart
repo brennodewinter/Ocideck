@@ -15,7 +15,7 @@ import '../../../utils/log.dart';
 import '../../meeting_media_core.dart';
 import '../../meeting_participant.dart';
 import 'jitsi_roster.dart';
-import 'jitsi_signaling.dart';
+import 'jitsi_source_wire.dart';
 
 class JitsiRemoteMedia {
   /// [onChanged] vuurt telkens als de track-toewijzing kan zijn

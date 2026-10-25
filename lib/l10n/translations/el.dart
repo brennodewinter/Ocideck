@@ -1630,6 +1630,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Scherm delen is niet gelukt — de bron is geweigerd of weggevallen.':
+      'Η κοινοποίηση οθόνης απέτυχε — η πηγή απορρίφθηκε ή εξαφανίστηκε.',
+  'De gedeelde bron viel weg; het delen is gestopt.':
+      'Η κοινόχρηστη πηγή εξαφανίστηκε· η κοινοποίηση σταμάτησε.',
+  'Delen stoppen': 'Διακοπή κοινοποίησης',
+  'Je deelt je scherm.': 'Κοινοποιείτε την οθόνη σας.',
+  'Je deelt': 'Κοινοποιείτε',
+  'Kies wat je deelt': 'Επιλέξτε τι θα κοινοποιήσετε',
+  'Scherm': 'Οθόνη',
   'Nog geen actieve vergadering.': 'Δεν υπάρχει ενεργή σύσκεψη ακόμη.',
   'Plak een Jitsi-vergaderlink om deel te nemen.':
       'Επικολλήστε έναν σύνδεσμο σύσκεψης Jitsi για να συμμετάσχετε.',
@@ -1657,8 +1666,6 @@ const _dutchSourceAddEl = <String, String>{
   'De verbinding is verbroken.': 'Η σύνδεση διακόπηκε.',
   'Het apparaat geeft geen toegang tot deze bron.':
       'Η συσκευή δεν επιτρέπει την πρόσβαση σε αυτή την πηγή.',
-  'Scherm delen is nog niet beschikbaar.':
-      'Η κοινή χρήση οθόνης δεν είναι ακόμη διαθέσιμη.',
   'Jitsi': 'Jitsi',
   'https://meet.jit.si/kamernaam': 'https://meet.jit.si/onoma-domatiou',
   'Vergaderlink controleren': 'Έλεγχος συνδέσμου σύσκεψης',
