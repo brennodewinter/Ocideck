@@ -1607,6 +1607,29 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Opnemen en transcriberen': 'Felvétel és átírás',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Ez a megbeszélés nem ad külön hangforrást. A teljes hívás felvétele nem érhető el.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'A mikrofon önmagában nem a teljes hívás felvétele.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Ez a megbeszélés nem engedi a felvételt. A felvétel kikapcsolva marad.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Mondd el a résztvevőknek, hogy az OciDeck felvesz. Az OciDeck maga nem kéri a beleegyezésüket.',
+  'Deelnemers zijn geïnformeerd': 'A résztvevők értesültek',
+  'Start opname': 'Felvétel indítása',
+  'Klaar om op te nemen.': 'Készen áll a felvételre.',
+  'OciDeck neemt deze vergadering op.':
+      'Az OciDeck felveszi ezt a megbeszélést.',
+  'Opname stopt…': 'A felvétel leáll…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'A felvétel nem sikerült. Még a megbeszélésen vagy. Indítsd újra, ha fel akarsz venni.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'A megbeszélés maga jelez felvételt. Az nem az OciDeck felvétele.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'A hang nem megy az átíró kiszolgálóra, amíg ezt külön nem engedélyezed.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Küldd a hangot a választott átíró kiszolgálóra',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'A megbeszélés nem tudta továbbítani a hangját — próbálja ki- és bekapcsolni a forrást.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

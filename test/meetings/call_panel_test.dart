@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/meetings/meeting_event.dart';
@@ -30,6 +31,8 @@ Future<FakeMeetingSession> _join(ProviderContainer container) async {
 }
 
 void main() {
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
   testWidgets('no call shows the real join route, not a placeholder promise', (
     tester,
   ) async {

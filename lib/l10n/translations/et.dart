@@ -1598,6 +1598,28 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Opnemen en transcriberen': 'Salvesta ja transkribeeri',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'See koosolek ei anna eraldi heliallikat. Kogu kõne salvestust ei ole.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Ainult mikrofon ei ole kogu kõne salvestus.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'See koosolek ei luba salvestamist. Salvestus jääb välja.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Ütle osalejatele, et OciDeck salvestab. OciDeck ei küsi ise nende nõusolekut.',
+  'Deelnemers zijn geïnformeerd': 'Osalejatele on öeldud',
+  'Start opname': 'Alusta salvestust',
+  'Klaar om op te nemen.': 'Valmis salvestama.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck salvestab seda koosolekut.',
+  'Opname stopt…': 'Salvestus peatub…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Salvestus ebaõnnestus. Oled endiselt koosolekul. Alusta uuesti, kui tahad salvestada.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Koosolek teatab ise salvestusest. See ei ole OciDecki salvestus.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Heli ei lähe transkriptsiooniserverisse, kuni sa seda eraldi ei luba.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Saada heli valitud transkriptsiooniserverisse',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Koosolek ei suutnud teie heli edastada — proovige allikas uuesti sisse lülitada.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

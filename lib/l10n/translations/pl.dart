@@ -1617,6 +1617,28 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Opnemen en transcriberen': 'Nagrywaj i transkrybuj',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'To spotkanie nie daje osobnego źródła dźwięku. Nagranie całej rozmowy jest niedostępne.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Sam mikrofon nie jest nagraniem całej rozmowy.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'To spotkanie nie pozwala nagrywać. Nagranie pozostaje wyłączone.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Powiedz uczestnikom, że OciDeck nagrywa. OciDeck sam nie pyta o ich zgodę.',
+  'Deelnemers zijn geïnformeerd': 'Uczestnicy zostali poinformowani',
+  'Start opname': 'Zacznij nagrywanie',
+  'Klaar om op te nemen.': 'Gotowe do nagrywania.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck nagrywa to spotkanie.',
+  'Opname stopt…': 'Nagranie się zatrzymuje…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Nagranie nie powiodło się. Nadal jesteś na spotkaniu. Zacznij ponownie, jeśli chcesz nagrywać.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Spotkanie samo zgłasza nagranie. To nie jest nagranie OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Dźwięk nie idzie na serwer transkrypcji, dopóki osobno na to nie pozwolisz.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Wyślij dźwięk na wybrany serwer transkrypcji',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Spotkanie nie mogło przesłać Twojego dźwięku — spróbuj wyłączyć i włączyć źródło ponownie.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

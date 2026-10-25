@@ -23,10 +23,12 @@ import '../../meetings/meeting_media_core.dart'
     show MeetingAudioOutput, MeetingScreenSource, MeetingVideoSurface;
 import '../../meetings/meeting_participant.dart';
 import '../../meetings/meeting_provider.dart';
+import '../../state/call_recording_provider.dart';
 import '../../state/meeting_session_provider.dart';
 import '../../theme/app_theme.dart';
 import '../dialogs/meeting_preflight_dialog.dart';
 import '../dialogs/screen_share_picker.dart';
+import 'call_recording_controls.dart';
 
 /// The call rail for the workspace row: a divider plus the panel while the module
 /// is revealed, otherwise nothing. Kept out of the shell so
@@ -133,6 +135,14 @@ class _ActiveCallState extends ConsumerState<_ActiveCall> {
   void initState() {
     super.initState();
     _sub = session.events.listen(_onEvent);
+    // bind wijzigt een provider. Dat mag niet ín initState; na dit frame
+    // is de boom klaar en hangt de opnamefase aan deze sessie.
+    WidgetsBinding.instance.addPostFrameCallback((_) => bindRecording());
+  }
+
+  void bindRecording() {
+    if (!mounted) return;
+    ref.read(callRecordingProvider.notifier).bind(session);
   }
 
   void _onEvent(MeetingEvent event) {
@@ -149,6 +159,7 @@ class _ActiveCallState extends ConsumerState<_ActiveCall> {
       unawaited(_sub?.cancel());
       _error = null;
       _sub = widget.session.events.listen(_onEvent);
+      WidgetsBinding.instance.addPostFrameCallback((_) => bindRecording());
     }
   }
 
@@ -191,6 +202,7 @@ class _ActiveCallState extends ConsumerState<_ActiveCall> {
           const SizedBox(height: 6),
           _MediaStatusLine(session: session),
         ],
+        if (!ended) CallRecordingSection(session: session),
         const SizedBox(height: 8),
         ended ? const _DismissEndedCall() : _CallControls(session: session),
       ],

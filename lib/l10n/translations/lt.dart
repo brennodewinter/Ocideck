@@ -1611,6 +1611,28 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Opnemen en transcriberen': 'Įrašyti ir transkribuoti',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Šis susitikimas neduoda atskiro garso šaltinio. Viso skambučio įrašo nėra.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Vien mikrofonas nėra viso skambučio įrašas.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Šis susitikimas neleidžia įrašyti. Įrašas lieka išjungtas.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Pasakyk dalyviams, kad OciDeck įrašinėja. OciDeck pats neprašo jų sutikimo.',
+  'Deelnemers zijn geïnformeerd': 'Dalyviai informuoti',
+  'Start opname': 'Pradėti įrašą',
+  'Klaar om op te nemen.': 'Paruošta įrašyti.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck įrašinėja šį susitikimą.',
+  'Opname stopt…': 'Įrašas sustoja…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Įrašas nepavyko. Vis dar esi susitikime. Pradėk iš naujo, jei nori įrašyti.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Susitikimas pats praneša apie įrašą. Tai nėra OciDeck įrašas.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Garsas neina į transkripcijos serverį, kol to atskirai neleidžia.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Siųsk garsą į pasirinktą transkripcijos serverį',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Susitikimas negalėjo perduoti jūsų garso — pabandykite išjungti ir vėl įjungti šaltinį.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

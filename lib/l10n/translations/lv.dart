@@ -1603,6 +1603,28 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Opnemen en transcriberen': 'Ierakstīt un transkribēt',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Šī sapulce nedod atsevišķu skaņas avotu. Visa zvana ieraksts nav pieejams.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Tikai mikrofons nav visa zvana ieraksts.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Šī sapulce neļauj ierakstīt. Ieraksts paliek izslēgts.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Pasaki dalībniekiem, ka OciDeck ieraksta. OciDeck pats neprasa viņu piekrišanu.',
+  'Deelnemers zijn geïnformeerd': 'Dalībnieki ir informēti',
+  'Start opname': 'Sākt ierakstu',
+  'Klaar om op te nemen.': 'Gatavs ierakstīt.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck ieraksta šo sapulci.',
+  'Opname stopt…': 'Ieraksts apstājas…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Ieraksts neizdevās. Tu joprojām esi sapulcē. Sāc no jauna, ja gribi ierakstīt.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Sapulce pati ziņo par ierakstu. Tas nav OciDeck ieraksts.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Skaņa neiet uz transkripcijas serveri, kamēr tu to atsevišķi neļauj.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Sūti skaņu uz izvēlēto transkripcijas serveri',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Sapulce nevarēja nosūtīt jūsu skaņu — mēģiniet izslēgt un atkal ieslēgt avotu.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

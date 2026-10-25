@@ -649,6 +649,28 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Opnemen en transcriberen': 'Grabar y transcribir',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Esta reunión no ofrece una fuente de audio aparte. No hay una grabación de toda la llamada.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Solo el micrófono no es una grabación de toda la llamada.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Esta reunión no permite grabar. La grabación sigue apagada.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Di a los participantes que OciDeck está grabando. OciDeck no pide su permiso por sí mismo.',
+  'Deelnemers zijn geïnformeerd': 'Los participantes están informados',
+  'Start opname': 'Iniciar grabación',
+  'Klaar om op te nemen.': 'Listo para grabar.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck está grabando esta reunión.',
+  'Opname stopt…': 'La grabación se detiene…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'La grabación falló. Sigues en la reunión. Empieza de nuevo si quieres grabar.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'La reunión avisa por sí misma de una grabación. Esa no es la grabación de OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'El audio no va al servidor de transcripción hasta que lo permitas aparte.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Enviar audio al servidor de transcripción elegido',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'La reunión no pudo enviar tu sonido — intenta apagar y encender la fuente de nuevo.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

@@ -652,6 +652,28 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Opnemen en transcriberen': 'Enregistrer et transcrire',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Cette réunion ne fournit pas de source audio distincte. Un enregistrement de tout l\'appel n\'est pas disponible.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Le microphone seul n\'est pas un enregistrement de tout l\'appel.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Cette réunion n\'autorise pas l\'enregistrement. L\'enregistrement reste arrêté.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Dis aux participants qu\'OciDeck enregistre. OciDeck ne demande pas lui-même leur accord.',
+  'Deelnemers zijn geïnformeerd': 'Les participants sont informés',
+  'Start opname': 'Démarrer l\'enregistrement',
+  'Klaar om op te nemen.': 'Prêt à enregistrer.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck enregistre cette réunion.',
+  'Opname stopt…': 'L\'enregistrement s\'arrête…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'L\'enregistrement a échoué. Tu es encore dans la réunion. Recommence si tu veux enregistrer.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'La réunion signale elle-même un enregistrement. Ce n\'est pas l\'enregistrement d\'OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'L\'audio ne part pas vers le serveur de transcription tant que tu ne l\'autorises pas à part.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Envoyer l\'audio au serveur de transcription choisi',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'La réunion n\'a pas pu transmettre votre son — essayez de réactiver la source.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

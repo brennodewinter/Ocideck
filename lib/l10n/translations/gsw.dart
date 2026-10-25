@@ -1608,6 +1608,28 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Opnemen en transcriberen': 'Uufnäh und transkribiere',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Die Sitzig git kei eigeni Audioquäle. E Ufnahm vom ganze Gspröch isch nöd verfüegbar.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Nume s Mikrofon isch kei Ufnahm vom ganze Gspröch.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Die Sitzig laht kei Ufnahm zue. D Ufnahm bliibt us.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Säg de Teilnehmende, dass OciDeck ufnimmt. OciDeck fragt ihri Zuestimmig nöd sälber.',
+  'Deelnemers zijn geïnformeerd': 'Teilnehmendi sind informiert',
+  'Start opname': 'Ufnahm starte',
+  'Klaar om op te nemen.': 'Bereit zum Uufnäh.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck nimmt die Sitzig uf.',
+  'Opname stopt…': 'Ufnahm stopt…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'D Ufnahm isch fehlgschlage. Du bisch no i de Sitzig. Start nomal, wennd wotsch uufnäh.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'D Sitzig meldet sälber e Ufnahm. Das isch nöd d Ufnahm vo OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Audio gaat nöd zum Transkriptionsserver, bis du das separat erlaubsch.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Schick Audio an de gwählte Transkriptionsserver',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'D Sitzig het diin Ton nöd chöne übermitte — versuech d Quell uusz- und wider iizschalte.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

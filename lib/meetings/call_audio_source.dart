@@ -19,6 +19,9 @@ enum CallAudioDenial {
 
   /// Remote audio ontbreekt. Alleen de microfoon is geen hele call.
   remoteMissing,
+
+  /// Het vergaderbeleid verbiedt opnemen. De knop blijft weg.
+  providerForbids,
 }
 
 /// Wat een adapter echt kan leveren. [wholeCall] is alleen waar als zowel

@@ -927,6 +927,21 @@ Local captions are still meeting-derived personal data; on-device processing
 removes network egress but not the need for truthful notice and lifecycle rules.
 The shipped deck/image AI consumers remain unable to read `MeetingSession`.
 
+The call panel's *Opnemen en transcriberen* control (#2528) is that gate for a
+live OciDeck call. Start is offered only while the adapter reports a whole-call
+audio source (`CallAudioCaptureFact.wholeCall`) and the user has acknowledged
+that they themselves will tell the other participants — the checkbox is a
+notice, not a claim that those participants consented. A provider
+`RecordingIndicatorChanged` lamp stays a separate line and never starts the
+local recording. A chosen ASR server needs a second consent before any chunk
+may be counted as forwardable; revoking it stops that count and does not
+leave the call. The bytes are dropped either way: nothing is written and
+nothing is uploaded.
+The current binding has no per-source tap, so the panel shows that reason and
+no Start button. The phase (`uit`, `toestemming nodig`, `klaar`, `bezig`,
+`stoppen`, `fout`) lives in the root-scoped `callRecordingProvider`, and the
+banner keeps Stop visible when the panel is unmounted.
+
 ##### Operational ownership
 
 Add a maintained provider manifest containing adapter/SDK version, release

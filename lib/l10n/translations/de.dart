@@ -652,6 +652,28 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Opnemen en transcriberen': 'Aufnehmen und transkribieren',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Dieses Treffen liefert keine getrennte Audioquelle. Eine Aufnahme des ganzen Gesprächs ist nicht verfügbar.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Nur das Mikrofon ist keine Aufnahme des ganzen Gesprächs.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Dieses Treffen erlaubt keine Aufnahme. Die Aufnahme bleibt aus.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Sag den Teilnehmenden, dass OciDeck aufnimmt. OciDeck fragt ihre Einwilligung nicht selbst.',
+  'Deelnemers zijn geïnformeerd': 'Teilnehmende sind informiert',
+  'Start opname': 'Aufnahme starten',
+  'Klaar om op te nemen.': 'Bereit zur Aufnahme.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck nimmt dieses Treffen auf.',
+  'Opname stopt…': 'Aufnahme stoppt…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Die Aufnahme ist fehlgeschlagen. Du bist noch im Treffen. Starte neu, wenn du aufnehmen willst.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Das Treffen meldet selbst eine Aufnahme. Das ist nicht die Aufnahme von OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Audio geht nicht zum Transkriptionsserver, bis du das getrennt erlaubst.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Audio an den gewählten Transkriptionsserver senden',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Die Besprechung konnte Ihren Ton nicht übertragen — schalten Sie die Quelle aus und wieder ein.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

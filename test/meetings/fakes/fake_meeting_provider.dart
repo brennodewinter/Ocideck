@@ -170,12 +170,25 @@ class FakeMeetingSession implements MeetingSession {
     _updateLocal(_local.copyWith(isScreenShare: false));
   }
 
-  @override
-  Stream<CallAudioChunk> startCallAudioCapture() =>
-      openCallAudioCapture(capabilities.callAudio);
+  /// Zet de test een controller, dan is dát de tap. Zonder controller
+  /// geldt het echte capability-feit — een whole-call-claim zonder tap
+  /// faalt hard.
+  StreamController<CallAudioChunk>? captureController;
+  var captureStarts = 0;
+  var captureStops = 0;
 
   @override
-  Future<void> stopCallAudioCapture() async {}
+  Stream<CallAudioChunk> startCallAudioCapture() {
+    captureStarts++;
+    final controller = captureController;
+    if (controller != null) return controller.stream;
+    return openCallAudioCapture(capabilities.callAudio);
+  }
+
+  @override
+  Future<void> stopCallAudioCapture() async {
+    captureStops++;
+  }
 
   @override
   Future<void> sendChat(String text) async {

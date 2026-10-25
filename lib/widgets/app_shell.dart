@@ -203,6 +203,7 @@ import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/collab_chat_panel.dart';
 import 'panels/call_panel.dart';
+import 'panels/call_recording_controls.dart';
 import 'panels/recording_indicator.dart';
 import 'panels/slide_list_panel.dart';
 import 'privacy_badge.dart';
@@ -216,7 +217,6 @@ part 'app_shell_main_layout.dart';
 part 'app_shell_menu.dart';
 
 // ── Shared helpers ──────────────────────────────────────────────────────────
-
 // Shell sub-widgets and helpers, split into part files for navigability; the parts share this library's imports and private scope.
 part 'shell/provenance_actions.dart';
 part 'shell/shell_actions.dart';

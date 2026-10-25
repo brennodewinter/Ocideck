@@ -652,6 +652,28 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Opnemen en transcriberen': 'Opnimme en transkribearje',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Dizze gearkomste leveret gjin aparte audioboarne. In opname fan de hiele call is net beskikber.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Allinne de mikrofoan is gjin opname fan de hiele call.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Dizze gearkomste lit opnimme net ta. Opname bliuwt út.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Sis de dielnimmers dat OciDeck opnimt. OciDeck freget harren tastimming net sels.',
+  'Deelnemers zijn geïnformeerd': 'Dielnimmers binne ynformearre',
+  'Start opname': 'Begjin opname',
+  'Klaar om op te nemen.': 'Klear om op te nimmen.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck nimt dizze gearkomste op.',
+  'Opname stopt…': 'Opname stopet…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'De opname is mislearre. Do bist noch yn de gearkomste. Start op \'e nij assto opnimme wolst.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'De gearkomste meldt sels in opname. Dat is net de opname fan OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Audio giet net nei de transkripsjetsjinner oantsto dat apart tastiet.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Stjoer audio nei de keazen transkripsjetsjinner',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'De gearkomste koe jo lûd net trochjaan — probearje de boarne út en wer oan te setten.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

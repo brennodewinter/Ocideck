@@ -1621,6 +1621,29 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Opnemen en transcriberen': 'Înregistrează și transcrie',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Această întâlnire nu oferă o sursă audio separată. O înregistrare a întregului apel nu este disponibilă.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Doar microfonul nu este o înregistrare a întregului apel.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Această întâlnire nu permite înregistrarea. Înregistrarea rămâne oprită.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Spune participanților că OciDeck înregistrează. OciDeck nu le cere singur acordul.',
+  'Deelnemers zijn geïnformeerd': 'Participanții au fost informați',
+  'Start opname': 'Pornește înregistrarea',
+  'Klaar om op te nemen.': 'Gata de înregistrare.',
+  'OciDeck neemt deze vergadering op.':
+      'OciDeck înregistrează această întâlnire.',
+  'Opname stopt…': 'Înregistrarea se oprește…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Înregistrarea a eșuat. Ești încă în întâlnire. Pornește din nou dacă vrei să înregistrezi.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Întâlnirea anunță singură o înregistrare. Aceea nu este înregistrarea OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Audio nu merge la serverul de transcriere până nu permiți asta separat.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Trimite audio către serverul de transcriere ales',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Întâlnirea nu a putut transmite sunetul dvs. — încercați să reporniți sursa.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

@@ -649,6 +649,29 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Opnemen en transcriberen': 'Registra e trascrivi',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Questa riunione non fornisce una sorgente audio distinta. Una registrazione dell\'intera chiamata non è disponibile.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Il solo microfono non è una registrazione dell\'intera chiamata.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Questa riunione non consente la registrazione. La registrazione resta spenta.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Di\' ai partecipanti che OciDeck sta registrando. OciDeck non chiede da sé il loro consenso.',
+  'Deelnemers zijn geïnformeerd': 'I partecipanti sono informati',
+  'Start opname': 'Avvia registrazione',
+  'Klaar om op te nemen.': 'Pronto a registrare.',
+  'OciDeck neemt deze vergadering op.':
+      'OciDeck sta registrando questa riunione.',
+  'Opname stopt…': 'La registrazione si ferma…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'La registrazione non è riuscita. Sei ancora nella riunione. Ricomincia se vuoi registrare.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'La riunione segnala da sé una registrazione. Non è la registrazione di OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'L\'audio non va al server di trascrizione finché non lo consenti a parte.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Invia l\'audio al server di trascrizione scelto',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'La riunione non è riuscita a inviare il tuo audio — prova a riattivare la sorgente.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

@@ -1623,6 +1623,29 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Opnemen en transcriberen': 'Irrekordja u ttraskrivi',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Din il-laqgħa ma tagħtix sors tal-awdjo separat. Reġistrazzjoni tas-sejħa kollha mhix disponibbli.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Il-mikrofonu biss mhux reġistrazzjoni tas-sejħa kollha.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Din il-laqgħa ma tħallix reġistrazzjoni. Ir-reġistrazzjoni tibqa\' mitfija.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Għid lill-parteċipanti li OciDeck qed jirrekordja. OciDeck ma jitolbx il-kunsens tagħhom waħdu.',
+  'Deelnemers zijn geïnformeerd': 'Il-parteċipanti ġew infurmati',
+  'Start opname': 'Ibda r-reġistrazzjoni',
+  'Klaar om op te nemen.': 'Lest biex jirrekordja.',
+  'OciDeck neemt deze vergadering op.':
+      'OciDeck qed jirrekordja din il-laqgħa.',
+  'Opname stopt…': 'Ir-reġistrazzjoni qed tieqaf…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Ir-reġistrazzjoni falliet. Għadek fil-laqgħa. Ibda mill-ġdid jekk trid tirrekordja.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Il-laqgħa nnifisha tirrapporta reġistrazzjoni. Dik mhix ir-reġistrazzjoni ta\' OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'L-awdjo ma jmurx lejn is-server tat-traskrizzjoni sakemm ma tħallix dan separatament.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Ibgħat l-awdjo lis-server tat-traskrizzjoni magħżul',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Il-laqgħa ma setgħetx tibgħat il-ħoss tiegħek — ipprova tfi u tixgħel is-sors mill-ġdid.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

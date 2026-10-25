@@ -1624,6 +1624,28 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Opnemen en transcriberen': 'Запис и транскрипция',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Тази среща не дава отделен източник на звук. Запис на целия разговор не е наличен.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Само микрофонът не е запис на целия разговор.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Тази среща не позволява запис. Записът остава изключен.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Кажи на участниците, че OciDeck записва. OciDeck не иска сам тяхното съгласие.',
+  'Deelnemers zijn geïnformeerd': 'Участниците са информирани',
+  'Start opname': 'Започни записа',
+  'Klaar om op te nemen.': 'Готово за запис.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck записва тази среща.',
+  'Opname stopt…': 'Записът спира…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Записът не успя. Още си в срещата. Започни отново, ако искаш да записваш.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Срещата сама съобщава за запис. Това не е записът на OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Звукът не отива към сървъра за транскрипция, докато не го позволиш отделно.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Изпрати звука към избрания сървър за транскрипция',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Срещата не успя да изпрати вашия звук — опитайте да изключите и включите източника отново.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

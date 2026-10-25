@@ -1620,6 +1620,28 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Opnemen en transcriberen': 'Excipe et transcribe',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Hoc colloquium fontem soni separatum non praebet. Totius colloquii exceptio non praesto est.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Solum microphonum non est exceptio totius colloquii.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Hoc colloquium exceptionem non sinit. Exceptio exstincta manet.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Dic participibus OciDeck excipere. OciDeck ipse eorum consensum non rogat.',
+  'Deelnemers zijn geïnformeerd': 'Participes certiorem facti sunt',
+  'Start opname': 'Incipe exceptionem',
+  'Klaar om op te nemen.': 'Paratus ad excipiendum.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck hoc colloquium excipit.',
+  'Opname stopt…': 'Exceptio desinit…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Exceptio defecit. Adhuc in colloquio es. Iterum incipe si excipere vis.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Colloquium ipsum exceptionem nuntiat. Ea non est exceptio OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Sonus ad servatorem transcriptionis non it donec id separatim sinis.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Mitte sonum ad servatorem transcriptionis electum',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Conventus sonum tuum transmittere non potuit — fontem iterum accendere tempta.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

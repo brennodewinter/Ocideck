@@ -1633,6 +1633,28 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Opnemen en transcriberen': 'Gravar e transcrever',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Esta reunião não fornece uma fonte de áudio à parte. Uma gravação da chamada inteira não está disponível.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Só o microfone não é uma gravação da chamada inteira.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Esta reunião não permite gravar. A gravação fica desligada.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Diz aos participantes que o OciDeck está a gravar. O OciDeck não pede sozinho o consentimento deles.',
+  'Deelnemers zijn geïnformeerd': 'Os participantes foram informados',
+  'Start opname': 'Iniciar gravação',
+  'Klaar om op te nemen.': 'Pronto a gravar.',
+  'OciDeck neemt deze vergadering op.': 'O OciDeck está a gravar esta reunião.',
+  'Opname stopt…': 'A gravação está a parar…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'A gravação falhou. Ainda estás na reunião. Começa de novo se quiseres gravar.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'A reunião indica ela própria uma gravação. Essa não é a gravação do OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'O áudio não vai para o servidor de transcrição até o autorizares à parte.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Enviar áudio para o servidor de transcrição escolhido',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'A reunião não conseguiu enviar o seu som — tente desligar e ligar a fonte novamente.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

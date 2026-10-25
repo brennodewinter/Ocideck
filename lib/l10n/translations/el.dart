@@ -1630,6 +1630,28 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Opnemen en transcriberen': 'Εγγραφή και απομαγνητοφώνηση',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Αυτή η σύσκεψη δεν δίνει ξεχωριστή πηγή ήχου. Η εγγραφή όλης της κλήσης δεν είναι διαθέσιμη.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Μόνο το μικρόφωνο δεν είναι εγγραφή όλης της κλήσης.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Αυτή η σύσκεψη δεν επιτρέπει εγγραφή. Η εγγραφή μένει κλειστή.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Πες στους συμμετέχοντες ότι το OciDeck εγγράφει. Το OciDeck δεν ζητά μόνο του τη συγκατάθεσή τους.',
+  'Deelnemers zijn geïnformeerd': 'Οι συμμετέχοντες ενημερώθηκαν',
+  'Start opname': 'Έναρξη εγγραφής',
+  'Klaar om op te nemen.': 'Έτοιμο για εγγραφή.',
+  'OciDeck neemt deze vergadering op.': 'Το OciDeck εγγράφει αυτή τη σύσκεψη.',
+  'Opname stopt…': 'Η εγγραφή σταματά…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Η εγγραφή απέτυχε. Είσαι ακόμα στη σύσκεψη. Ξεκίνα ξανά αν θέλεις να εγγράψεις.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Η σύσκεψη αναφέρει η ίδια μια εγγραφή. Αυτή δεν είναι η εγγραφή του OciDeck.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Ο ήχος δεν πηγαίνει στον διακομιστή απομαγνητοφώνησης μέχρι να το επιτρέψεις χωριστά.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Στείλε ήχο στον επιλεγμένο διακομιστή απομαγνητοφώνησης',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Η σύσκεψη δεν μπόρεσε να στείλει τον ήχο σας — δοκιμάστε να ενεργοποιήσετε ξανά την πηγή.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

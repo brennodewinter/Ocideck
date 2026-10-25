@@ -1605,6 +1605,28 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Opnemen en transcriberen': 'Tallenna ja litteroi',
+  'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
+      'Tämä kokous ei anna erillistä äänilähdettä. Koko puhelun tallenne ei ole saatavilla.',
+  'Alleen de microfoon is geen opname van de hele call.':
+      'Pelkkä mikrofoni ei ole koko puhelun tallenne.',
+  'Deze vergadering staat opnemen niet toe. Opname blijft uit.':
+      'Tämä kokous ei salli tallennusta. Tallennus pysyy pois päältä.',
+  'Zeg de deelnemers dat OciDeck opneemt. OciDeck vraagt hun toestemming niet zelf.':
+      'Kerro osallistujille, että OciDeck tallentaa. OciDeck ei itse kysy heidän lupaansa.',
+  'Deelnemers zijn geïnformeerd': 'Osallistujille on kerrottu',
+  'Start opname': 'Aloita tallennus',
+  'Klaar om op te nemen.': 'Valmis tallentamaan.',
+  'OciDeck neemt deze vergadering op.': 'OciDeck tallentaa tämän kokouksen.',
+  'Opname stopt…': 'Tallennus pysähtyy…',
+  'De opname is mislukt. Je zit nog in de vergadering. Start opnieuw als je wilt opnemen.':
+      'Tallennus epäonnistui. Olet yhä kokouksessa. Aloita uudelleen, jos haluat tallentaa.',
+  'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
+      'Kokous itse ilmoittaa tallennuksesta. Se ei ole OciDeckin tallenne.',
+  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
+      'Ääni ei mene litterointipalvelimelle, ennen kuin sallit sen erikseen.',
+  'Stuur audio naar de gekozen transcriptieserver':
+      'Lähetä ääni valitulle litterointipalvelimelle',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Kokous ei pystynyt lähettämään ääntäsi — yritä kytkeä lähde pois ja takaisin päälle.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
