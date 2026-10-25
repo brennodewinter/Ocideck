@@ -1608,6 +1608,19 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nog geen actieve vergadering.': 'Noch kei aktivi Bsprächig.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Füg en Jitsi-Bsprächigs-Link ii zum mitmache.',
+  'Deelnemen aan een vergadering…': 'A de Bsprächig deilnäh…',
+  'Opnieuw verbinden…': 'Weder verbinde…',
+  'De vergadering is beëindigd.': 'D Bsprächig isch beändet.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Du nimsch scho a de Bsprächig deil; die wird verlah, wennsch jetz deilnimsch.',
+  'Vergaderlink openen': 'Bsprächigs-Link ufmache',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Füg en Jitsi-Bsprächigs-Link ii; OciDeck prüeft de Server un macht mit, sobald du das bestätigsch.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Nimm a Videobsprächige deil un presäntier us OciDeck mit ere eigene Oberflächi: d Deilnehmer näbe diner Folie, nit im Fänschter vun ere andere App. Bring-your-own-Server (Jitsi); OciDeck hostet nüt un hält d Gsprööchsdatte weg vun de KI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Ihres Mikrofon oder d Kamera isch weg; schalted d Quelle wieder ii, sobald se zrugg isch.',
   'Media is niet end-to-end versleuteld.':
@@ -1672,10 +1685,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Dä Server bietet kei Besprächigsform, wo OciDeck unterstützt.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'De Server isch nit erreichbar oder het d\'Verbindig abglehnt.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Nämet Teil ah Video-Besprächige und präsentieret us OciDeck mit ere eigene Oberflächi: d\'Teilnehmende näben Eurer Folia, nit im Fänschter vun ere andere App. Bring-your-own-server (Jitsi); OciDeck hostet nüüt und haldt d\'Gsprööchsdaten us de KI use. S\'Mitmache sälber chunnt in ere nächschte Version; d\'Link-Prüefig und Preflight git\'s scho.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Prüefed, öb e Jitsi-Meeting-Link erreichbar isch und was de Server erloubt, bevor Si mitmachet. Es wird nonig mitgmacht.',
   'Systeemgeluid opnemen…': 'Systemsound uufnäh…',
   'Systeemgeluid opnemen': 'Systemsound uufnäh',
   'Tabgeluid opnemen…': 'Tab-Sound uufnäh…',
@@ -5135,8 +5144,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Hilfsmittel zur Prozessverbesserig (SIPOC, DMAIC, Kaizen und A3). Standardmässig us; aktivier d’Erweiterig, um d’zugehörige Vorlage und Folielayouts z’bruuche.',
   'Videovergaderingen': 'Videokonferänze',
   'Videovergadering': 'Videokonferänz',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Na kei aktivi Sitzig. D Aabindig an e Sitzigsdienscht chunt inere spöötere Version dezue.',
   'Dempen opheffen': 'Stummschaltig ufhäbe',
   'Dempen': 'Stumm schalte',
   'Camera aan': 'Kamera aa',

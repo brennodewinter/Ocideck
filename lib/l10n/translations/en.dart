@@ -811,6 +811,19 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nog geen actieve vergadering.': 'No active meeting yet.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Paste a Jitsi meeting link to join.',
+  'Deelnemen aan een vergadering…': 'Join a meeting…',
+  'Opnieuw verbinden…': 'Reconnecting…',
+  'De vergadering is beëindigd.': 'The meeting has ended.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'You are already in a meeting; it will be left when you join now.',
+  'Vergaderlink openen': 'Open meeting link',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Paste a Jitsi meeting link; OciDeck checks the server and joins once you confirm.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Join video meetings and present from OciDeck with its own interface: participants next to your slide, not in another app’s window. Bring-your-own-server (Jitsi); OciDeck hosts nothing and keeps call data out of AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Your microphone or camera disappeared; turn the source back on once you have it again.',
   'Media is niet end-to-end versleuteld.': 'Media is not end-to-end encrypted.',
@@ -874,10 +887,6 @@ const _dutchSourceAddEn = {
       'This server offers no meeting form that OciDeck supports.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'The server is unreachable or refused the connection.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Join video meetings and present from OciDeck with your own interface: participants next to your slide, not in another app\'s window. Bring-your-own-server (Jitsi); OciDeck hosts nothing and keeps call data out of AI. Joining itself comes in a next version; the link check and preflight are already here.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Check whether a Jitsi meeting link is reachable and what the server allows, before you join. Nothing is joined yet.',
   'Systeemgeluid opnemen…': 'Record system audio…',
   'Systeemgeluid opnemen': 'Record system audio',
   'Tabgeluid opnemen…': 'Record tab audio…',
@@ -4317,8 +4326,6 @@ const _dutchSourceAddEn = {
       'Tools for process improvement (SIPOC, DMAIC, Kaizen and A3). Off by default; enable the extension to use the related templates and slide layouts.',
   'Videovergaderingen': 'Video meetings',
   'Videovergadering': 'Video meeting',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'No active meeting yet. Connecting to a meeting service will be added in a future version.',
   'Dempen opheffen': 'Unmute',
   'Dempen': 'Mute',
   'Camera aan': 'Camera on',

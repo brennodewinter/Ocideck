@@ -1605,6 +1605,19 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nog geen actieve vergadering.': 'Belum ada rapat yang aktif.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Tempel tautan rapat Jitsi untuk bergabung.',
+  'Deelnemen aan een vergadering…': 'Ikuti rapat…',
+  'Opnieuw verbinden…': 'Menyambung ulang…',
+  'De vergadering is beëindigd.': 'Rapat telah berakhir.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Anda sudah mengikuti rapat; rapat itu akan ditinggalkan jika Anda bergabung sekarang.',
+  'Vergaderlink openen': 'Buka tautan rapat',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Tempel tautan rapat Jitsi; OciDeck memeriksa server dan bergabung setelah Anda mengonfirmasi.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Ikuti rapat video dan presentasikan dari OciDeck dengan antarmuka sendiri: peserta di samping slide Anda, bukan di jendela aplikasi lain. Bring-your-own-server (Jitsi); OciDeck tidak menghosting apa pun dan menjauhkan data panggilan dari AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Mikrofon atau kamera Anda hilang; nyalakan kembali sumbernya saat kembali.',
   'Media is niet end-to-end versleuteld.':
@@ -1668,10 +1681,6 @@ const _dutchSourceAddId = <String, String>{
       'Server ini tidak menawarkan bentuk rapat yang didukung OciDeck.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Server tidak dapat dijangkau atau menolak koneksi.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Ikuti rapat video dan presentasikan dari OciDeck dengan antarmuka sendiri: peserta di samping slide Anda, bukan di jendela aplikasi lain. Bring-your-own-server (Jitsi); OciDeck tidak menghosting apa pun dan menjaga data panggilan di luar AI. Bergabung sendiri akan hadir di versi berikutnya; pemeriksaan tautan dan prapemeriksaan sudah ada.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Periksa apakah tautan rapat Jitsi dapat dijangkau dan apa yang diizinkan server, sebelum Anda bergabung. Belum ada yang bergabung.',
   'Systeemgeluid opnemen…': 'Rekam audio sistem…',
   'Systeemgeluid opnemen': 'Rekam audio sistem',
   'Tabgeluid opnemen…': 'Rekam audio tab…',
@@ -5108,8 +5117,6 @@ const _dutchSourceAddId = <String, String>{
       'Perkakas untuk peningkatan proses (SIPOC, DMAIC, Kaizen, dan A3). Nonaktif secara default; aktifkan ekstensi untuk menggunakan templat dan tata letak slide terkait.',
   'Videovergaderingen': 'Rapat video',
   'Videovergadering': 'Rapat video',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Belum ada rapat aktif. Koneksi ke layanan rapat akan ditambahkan pada versi mendatang.',
   'Dempen opheffen': 'Bunyikan',
   'Dempen': 'Bisukan',
   'Camera aan': 'Nyalakan kamera',

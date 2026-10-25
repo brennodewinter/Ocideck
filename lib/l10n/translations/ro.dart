@@ -1621,6 +1621,19 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nog geen actieve vergadering.': 'Încă nu există o întâlnire activă.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Lipiți un link de întâlnire Jitsi pentru a participa.',
+  'Deelnemen aan een vergadering…': 'Participați la o întâlnire…',
+  'Opnieuw verbinden…': 'Se reconectează…',
+  'De vergadering is beëindigd.': 'Întâlnirea s-a încheiat.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Participați deja la o întâlnire; aceasta va fi părăsită dacă vă alăturați acum.',
+  'Vergaderlink openen': 'Deschideți linkul de întâlnire',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Lipiți un link de întâlnire Jitsi; OciDeck verifică serverul și participă după ce confirmați.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Participați la întâlniri video și prezentați din OciDeck cu interfața proprie: participanții alături de diapozitivul dvs., nu în fereastra altei aplicații. Bring-your-own-server (Jitsi); OciDeck nu găzduiește nimic și ține datele apelurilor departe de AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Microfonul sau camera dvs. a dispărut; reporniți sursa când o recuperați.',
   'Media is niet end-to-end versleuteld.': 'Media nu este criptat cap-coadă.',
@@ -1684,10 +1697,6 @@ const _dutchSourceAddRo = <String, String>{
       'Acest server nu oferă nicio formă de întâlnire acceptată de OciDeck.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Serverul este inaccesibil sau a refuzat conexiunea.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Participați la videoconferințe și prezentați din OciDeck cu propria interfață: participanții lângă diapozitiv, nu în fereastra altei aplicații. Bring-your-own-server (Jitsi); OciDeck nu găzduiește nimic și ține datele apelurilor în afara AI. Participarea în sine vine într-o versiune următoare; verificarea linkului și preflight există deja.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Verificați dacă un link de întâlnire Jitsi este accesibil și ce permite serverul, înainte de a participa. Încă nu se participă.',
   'Systeemgeluid opnemen…': 'Înregistrare sunet de sistem…',
   'Systeemgeluid opnemen': 'Înregistrare sunet de sistem',
   'Tabgeluid opnemen…': 'Înregistrare sunet filă…',
@@ -5170,8 +5179,6 @@ const _dutchSourceAddRo = <String, String>{
       'Instrumente pentru îmbunătățirea proceselor (SIPOC, DMAIC, Kaizen și A3). Dezactivate implicit; activați extensia pentru a utiliza șabloanele și aspectele de diapozitive asociate.',
   'Videovergaderingen': 'Întâlniri video',
   'Videovergadering': 'Întâlnire video',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Încă nu există nicio întâlnire activă. Conectarea la un serviciu de întâlniri va fi adăugată într-o versiune viitoare.',
   'Dempen opheffen': 'Reactivează sunetul',
   'Dempen': 'Dezactivează sunetul',
   'Camera aan': 'Pornește camera',

@@ -36,6 +36,7 @@
 - [Documents](#documents)
 - [Markdown mode](#markdown-mode)
 - [Transcription and recording](#transcription-and-recording)
+- [Video meetings (Jitsi)](#video-meetings-jitsi)
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
 
@@ -6575,6 +6576,38 @@ whisper tool and the batch server do not, so you still get the text from
 system audio, on macOS, Windows and Linux are the intended route; this text
 does not claim they were each proven on hardware here.
 
+## Video meetings (Jitsi)
+
+The module is off until you turn **Video meetings** on under
+*Settings → Uitbreidingen (Extensions)*. OciDeck runs no meeting service of its
+own — you bring the Jitsi server, and nothing is contacted before you ask for
+it.
+
+Paste a meeting link on the module card, or use **Join a meeting…** in the call
+rail. Recognising the link happens on your device only. The check button is the
+first network contact and asks first: it fetches the deployment's configuration
+and reports what the server offers — whether joining is possible, which
+capabilities exist and where media traffic would go — before anything joins. An
+internal server address needs the explicit *trusted internal server*
+confirmation.
+
+When the check says the room can be joined, **Join** opens the call. The call
+rail shows the participants and their video, names the connection state
+(joining, reconnecting, failed), and offers mute, camera and leave only for
+what the server actually allows. Joining a second link while a call runs says
+first that the current call will be left — two calls never overlap — and
+quitting OciDeck leaves the call properly rather than stranding you as a ghost
+participant. Switching the module off does not hide a running call either: the
+rail stays visible until you leave it.
+
+Joining never starts a recording or a transcription — those are separate,
+always explicit actions. Screen sharing is not offered yet. Media encryption is
+reported as a fact, not a promise: the panel shows the verified status for the
+call and the real egress origins, and does not claim end-to-end encryption
+where none was proven. The browser version declines the join — a browser tab
+cannot prove the pinned server identity the desktop app verifies — so calling
+is desktop-only today.
+
 ## What the browser version cannot do
 
 OciDeck also runs entirely inside a browser tab, with no application backend
@@ -6606,6 +6639,7 @@ before you open a client's deck on it. Hosting the same bundle yourself is
 | Importing a deck from a URL | **Works**, through the same security gate as on desktop. |
 | Importing OpenKAT reports | Visible on Integraties but **disabled** — folder import and server tokens need desktop (keychain and local folders). |
 | Recording from the microphone | **Works** for the microphone in the room, and for a browser tab's audio where Chromium can share it. The file stays in the tab (`mem:`) until you save; a reload loses it. Firefox and Safari do not share tab audio. |
+| Joining a Jitsi meeting | Absent. The link check fails closed: a browser tab cannot prove the pinned server identity the desktop join verifies, so the decline is by design, not a missing button. |
 | Dragging a file onto the window | **Works** — a deck, a package, an image or a presentation to import. The browser hands over the file's contents rather than a path, so the same content gate applies as everywhere else. *(Fixed 21-09-2026; until then the page's own security policy refused to read a dropped file back, so a drop did nothing at all and said nothing either.)* |
 | Importing **one** PowerPoint, Keynote or Impress file | **Works**. The conversion runs on the bytes you picked and the result opens in a tab. |
 | Importing **several** presentations at once | Absent. The queue writes each converted deck as a file into a folder you choose, and the browser has no folder to choose. The dialog says so rather than offering a button that cannot work. |

@@ -2513,6 +2513,19 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nog geen actieve vergadering.': 'Henüz etkin bir toplantı yok.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Katılmak için bir Jitsi toplantı bağlantısı yapıştırın.',
+  'Deelnemen aan een vergadering…': 'Bir toplantıya katıl…',
+  'Opnieuw verbinden…': 'Yeniden bağlanılıyor…',
+  'De vergadering is beëindigd.': 'Toplantı sona erdi.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Zaten bir toplantıya katılıyorsunuz; şimdi katılırsanız o toplantı terk edilir.',
+  'Vergaderlink openen': 'Toplantı bağlantısını aç',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Bir Jitsi toplantı bağlantısı yapıştırın; OciDeck sunucuyu kontrol eder ve onayladığınızda katılır.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Video toplantılara katılın ve OciDeck’in kendi arayüzüyle sunum yapın: katılımcılar slaydınızın yanında, başka bir uygulamanın penceresinde değil. Bring-your-own-server (Jitsi); OciDeck hiçbir şey barındırmaz ve çağrı verilerini yapay zekâdan uzak tutar.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Mikrofonunuz veya kameranız kayboldu; geri geldiğinde kaynağı yeniden açın.',
   'Media is niet end-to-end versleuteld.': 'Medya uçtan uca şifreli değil.',
@@ -2576,10 +2589,6 @@ const _dutchSourceAddTr = <String, String>{
       'Bu sunucu OciDeck\'in desteklediği bir toplantı biçimi sunmuyor.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Sunucuya ulaşılamıyor veya bağlantıyı reddetti.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Video toplantılara katılın ve OciDeck\'ten kendi arayüzünüzle sunun: katılımcılar slaytınızın yanında, başka bir uygulamanın penceresinde değil. Bring-your-own-server (Jitsi); OciDeck hiçbir şey barındırmaz ve görüşme verilerini AI\'dan uzak tutar. Katılımın kendisi sonraki bir sürümde gelecek; bağlantı denetimi ve ön denetim zaten mevcut.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Katılmadan önce bir Jitsi toplantı bağlantısının erişilebilir olup olmadığını ve sunucunun neye izin verdiğini denetleyin. Henüz katılım yok.',
   'Systeemgeluid opnemen…': 'Sistem sesini kaydet…',
   'Systeemgeluid opnemen': 'Sistem sesini kaydet',
   'Tabgeluid opnemen…': 'Sekme sesini kaydet…',
@@ -5990,8 +5999,6 @@ const _dutchSourceAddTr = <String, String>{
       'Süreç iyileştirme araçları (SIPOC, DMAIC, Kaizen ve A3). Varsayılan olarak kapalıdır; ilgili şablonları ve slayt düzenlerini kullanmak için uzantıyı etkinleştirin.',
   'Videovergaderingen': 'Görüntülü toplantılar',
   'Videovergadering': 'Görüntülü toplantı',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Henüz etkin bir toplantı yok. Bir toplantı hizmetine bağlanma özelliği ileriki bir sürümde eklenecek.',
   'Dempen opheffen': 'Sesi aç',
   'Dempen': 'Sesi kapat',
   'Camera aan': 'Kamerayı aç',

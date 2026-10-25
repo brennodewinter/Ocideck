@@ -1633,6 +1633,19 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nog geen actieve vergadering.': 'Ainda não há nenhuma reunião ativa.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Cole uma ligação de reunião Jitsi para participar.',
+  'Deelnemen aan een vergadering…': 'Participar numa reunião…',
+  'Opnieuw verbinden…': 'A restabelecer a ligação…',
+  'De vergadering is beëindigd.': 'A reunião terminou.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Já está a participar numa reunião; esta será abandonada se participar agora.',
+  'Vergaderlink openen': 'Abrir ligação de reunião',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Cole uma ligação de reunião Jitsi; o OciDeck verifica o servidor e participa assim que confirmar.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Participe em reuniões por vídeo e apresente a partir do OciDeck com a sua própria interface: os participantes ao lado do seu diapositivo, não na janela de outra aplicação. Bring-your-own-server (Jitsi); o OciDeck não aloja nada e mantém os dados das chamadas fora da IA.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'O seu microfone ou câmara desapareceu; volte a ligar a fonte quando a tiver de novo.',
   'Media is niet end-to-end versleuteld.':
@@ -1698,10 +1711,6 @@ const _dutchSourceAddPt = <String, String>{
       'Este servidor não oferece nenhuma forma de reunião suportada pelo OciDeck.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'O servidor está inacessível ou recusou a ligação.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Participe em videorreuniões e apresente a partir do OciDeck com a sua própria interface: participantes ao lado do seu slide, não na janela de outra aplicação. Bring-your-own-server (Jitsi); o OciDeck não aloja nada e mantém os dados das chamadas fora da IA. A participação em si chega numa próxima versão; a verificação de ligação e o preflight já existem.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Verifique se uma ligação de reunião Jitsi está acessível e o que o servidor permite, antes de participar. Ainda não se participa.',
   'Systeemgeluid opnemen…': 'Gravar o áudio do sistema…',
   'Systeemgeluid opnemen': 'Gravar o áudio do sistema',
   'Tabgeluid opnemen…': 'Gravar o áudio do separador…',
@@ -5169,8 +5178,6 @@ const _dutchSourceAddPt = <String, String>{
       'Ferramentas para melhoria de processos (SIPOC, DMAIC, Kaizen e A3). Desativadas por predefinição; ative a extensão para utilizar os modelos e esquemas de diapositivos associados.',
   'Videovergaderingen': 'Videoconferências',
   'Videovergadering': 'Videoconferência',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Ainda não há nenhuma reunião ativa. A ligação a um serviço de reuniões será adicionada numa versão futura.',
   'Dempen opheffen': 'Reativar áudio',
   'Dempen': 'Silenciar',
   'Camera aan': 'Ativar câmara',

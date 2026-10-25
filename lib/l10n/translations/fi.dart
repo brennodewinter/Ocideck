@@ -1605,6 +1605,19 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nog geen actieve vergadering.': 'Ei vielä aktiivista kokousta.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Liitä Jitsi-kokouslinkki osallistuaksesi.',
+  'Deelnemen aan een vergadering…': 'Osallistu kokoukseen…',
+  'Opnieuw verbinden…': 'Yhdistetään uudelleen…',
+  'De vergadering is beëindigd.': 'Kokous on päättynyt.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Osallistut jo kokoukseen; se päätetään, jos liityt nyt.',
+  'Vergaderlink openen': 'Avaa kokouslinkki',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Liitä Jitsi-kokouslinkki; OciDeck tarkistaa palvelimen ja liittyy vahvistuksesi jälkeen.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Osallistu videokokouksiin ja esitä OciDeckistä omalla käyttöliittymällä: osallistujat diasi vieressä, eivät toisen sovelluksen ikkunassa. Bring-your-own-server (Jitsi); OciDeck ei isännöi mitään ja pitää puhelutiedot poissa tekoälystä.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Mikrofonisi tai kamerasi katosi; laita lähde takaisin päälle, kun se palaa.',
   'Media is niet end-to-end versleuteld.':
@@ -1669,10 +1682,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tämä palvelin ei tarjoa kokousmuotoa, jota OciDeck tukee.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Palvelin ei ole tavoitettavissa tai hylkäsi yhteyden.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Osallistu videokokouksiin ja esitä OciDeckistä omalla käyttöliittymällä: osallistujat diasi vieressä, ei toisen sovelluksen ikkunassa. Bring-your-own-server (Jitsi); OciDeck ei isännöi mitään ja pitää puhelutiedot tekoälyn ulkopuolella. Itse osallistuminen tulee seuraavassa versiossa; linkkitarkistus ja esitarkistus ovat jo olemassa.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Tarkista, onko Jitsi-kokouslinkki tavoitettavissa ja mitä palvelin sallii, ennen kuin osallistut. Ei vielä osallistuta.',
   'Systeemgeluid opnemen…': 'Tallenna järjestelmän ääni…',
   'Systeemgeluid opnemen': 'Tallenna järjestelmän ääni',
   'Tabgeluid opnemen…': 'Tallenna välilehden ääni…',
@@ -5110,8 +5119,6 @@ const _dutchSourceAddFi = <String, String>{
       'Työkalut prosessien parantamiseen (SIPOC, DMAIC, Kaizen ja A3). Oletusarvoisesti pois päältä; ota laajennus käyttöön käyttääksesi siihen liittyviä malleja ja diojen asetteluja.',
   'Videovergaderingen': 'Videokokoukset',
   'Videovergadering': 'Videokokous',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Ei aktiivista kokousta vielä. Yhteys kokouspalveluun lisätään tulevassa versiossa.',
   'Dempen opheffen': 'Poista mykistys',
   'Dempen': 'Mykistä',
   'Camera aan': 'Kamera päälle',

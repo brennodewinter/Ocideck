@@ -651,6 +651,19 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nog geen actieve vergadering.': 'Ainda no tin ningun reunión aktivo.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Pega un link di reunión di Jitsi pa partisipá.',
+  'Deelnemen aan een vergadering…': 'Partisipá den un reunión…',
+  'Opnieuw verbinden…': 'Rekonectando…',
+  'De vergadering is beëindigd.': 'E reunión a terminá.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Bo ta partisipá den un reunión kaba; esaki ta wòrdu abandoná si bo partisipá awor.',
+  'Vergaderlink openen': 'Habri link di reunión',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Pega un link di reunión di Jitsi; OciDeck ta kontrolá e server i ta partisipá ora bo konfirmá.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Partisipá den videoreunión i presentá for di OciDeck ku un interface propio: partisipanten banda di bo slide, no den bentana di otro app. Bring-your-own-server (Jitsi); OciDeck no ta hostiá nada i ta tene e datonan di e konversashon for di AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Bo mikrofon of kamera a desaparesé; hinka e fuente bèk ora bo tin\'é atrobe.',
   'Media is niet end-to-end versleuteld.':
@@ -715,10 +728,6 @@ const _dutchSourceAddPap = {
       'E servidor aki no ta ofresé un forma di reunion ku OciDeck ta soportá.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'E servidor no ta alkansabel òf a nenga e konekshon.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Partisipá na reunionnan di video i presentá for di OciDeck ku bo propio interfas: partisipantenan banda di bo slide, no den bentana di otro app. Bring-your-own-server (Jitsi); OciDeck no ta hostia nada i ta tene e datonan di yamada for di AI. Partisipá mes ta bin den un versión próksimo; e kontrol di link i preflight ya ta eksistí.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Kontrolá si un link di reunion Jitsi ta alkansabel i loke e servidor ta permití, promé ku bo partisipá. Ainda no ta partisipá.',
   'Systeemgeluid opnemen…': 'Graba sonidonan di sistema…',
   'Systeemgeluid opnemen': 'Graba sonidonan di sistema',
   'Tabgeluid opnemen…': 'Graba sonidonan di e tab…',
@@ -4166,8 +4175,6 @@ const _dutchSourceAddPap = {
       'Hulpmidinan pa mehoramentu di proseso (SIPOC, DMAIC, Kaizen i A3). Standardmente apagá; aktivá e ekstensión pa usa e plantianan i diseñonan di diapositiva relashoná.',
   'Videovergaderingen': 'Reunionnan di video',
   'Videovergadering': 'Reunion di video',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Ainda no tin un reunion aktivo. E koneksion ku un servisio di reunion lo wòrdu añadí den un versión futuro.',
   'Dempen opheffen': 'Kita silensio',
   'Dempen': 'Silensia',
   'Camera aan': 'Sende kámera',

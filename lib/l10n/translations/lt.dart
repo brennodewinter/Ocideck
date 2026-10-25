@@ -1611,6 +1611,19 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nog geen actieve vergadering.': 'Kol kas nėra aktyvaus susitikimo.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Įklijuokite „Jitsi“ susitikimo nuorodą, kad prisijungtumėte.',
+  'Deelnemen aan een vergadering…': 'Prisijungti prie susitikimo…',
+  'Opnieuw verbinden…': 'Jungiamasi iš naujo…',
+  'De vergadering is beëindigd.': 'Susitikimas baigėsi.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Jau dalyvaujate susitikime; jei prisijungsite dabar, jis bus paliktas.',
+  'Vergaderlink openen': 'Atidaryti susitikimo nuorodą',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Įklijuokite „Jitsi“ susitikimo nuorodą; OciDeck patikrina serverį ir prisijungia, kai patvirtinate.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Dalyvaukite vaizdo susitikimuose ir pristatykite iš OciDeck su savo sąsaja: dalyviai šalia skaidrės, o ne kitos programos lange. Bring-your-own-server (Jitsi); OciDeck nieko netalipina ir laiko pokalbių duomenis atokiau nuo DI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Jūsų mikrofonas arba kamera dingo; vėl įjunkite šaltinį, kai jis sugrįš.',
   'Media is niet end-to-end versleuteld.':
@@ -1675,10 +1688,6 @@ const _dutchSourceAddLt = <String, String>{
       'Šis serveris nesiūlo susitikimo formos, kurią OciDeck palaikytų.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Serveris nepasiekiamas arba atmetė ryšį.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Dalyvaukite vaizdo susitikimuose ir pristatykite iš OciDeck su savo sąsaja: dalyviai šalia jūsų skaidrės, o ne kitos programos lange. Bring-your-own-server (Jitsi); OciDeck nieko netalpina ir laiko pokalbių duomenis toliau nuo AI. Pats prisijungimas bus kitoje versijoje; nuorodos patikra ir išankstinis patikrinimas jau yra.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Patikrinkite, ar Jitsi susitikimo nuoroda pasiekiama ir ką leidžia serveris, prieš prisijungdami. Kol kas neprisijungiama.',
   'Systeemgeluid opnemen…': 'Įrašyti sistemos garsą…',
   'Systeemgeluid opnemen': 'Įrašyti sistemos garsą',
   'Tabgeluid opnemen…': 'Įrašyti kortelės garsą…',
@@ -5115,8 +5124,6 @@ const _dutchSourceAddLt = <String, String>{
       'Procesų tobulinimo įrankiai (SIPOC, DMAIC, Kaizen ir A3). Pagal numatytuosius nustatymus išjungti; įjunkite plėtinį, kad galėtumėte naudoti susijusius šablonus ir skaidrių išdėstymus.',
   'Videovergaderingen': 'Vaizdo susitikimai',
   'Videovergadering': 'Vaizdo susitikimas',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Aktyvaus susitikimo dar nėra. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
   'Dempen opheffen': 'Įjungti garsą',
   'Dempen': 'Nutildyti',
   'Camera aan': 'Įjungti kamerą',

@@ -1624,6 +1624,19 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nog geen actieve vergadering.': 'Все още няма активна среща.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Поставете връзка към среща в Jitsi, за да се присъедините.',
+  'Deelnemen aan een vergadering…': 'Присъединяване към среща…',
+  'Opnieuw verbinden…': 'Повторно свързване…',
+  'De vergadering is beëindigd.': 'Срещата приключи.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Вече участвате в среща; тя ще бъде напусната, ако се присъедините сега.',
+  'Vergaderlink openen': 'Отваряне на връзка към среща',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Поставете връзка към среща в Jitsi; OciDeck проверява сървъра и се присъединява след ваше потвърждение.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Участвайте във видеосрещи и представяйте от OciDeck със собствен интерфейс: участниците до слайда ви, а не в прозорец на друго приложение. Bring-your-own-server (Jitsi); OciDeck не хоства нищо и пази данните на разговорите извън ИИ.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Вашият микрофон или камера изчезна; включете източника отново, когато се върне.',
   'Media is niet end-to-end versleuteld.':
@@ -1688,10 +1701,6 @@ const _dutchSourceAddBg = <String, String>{
       'Този сървър не предлага форма на среща, която OciDeck поддържа.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Сървърът е недостъпен или отказа връзката.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Участвайте във видеосрещи и представяйте от OciDeck със собствен интерфейс: участниците до вашия слайд, а не в прозореца на друго приложение. Bring-your-own-server (Jitsi); OciDeck не хоства нищо и пази данните от разговори извън AI. Самото участие идва в следваща версия; проверката на връзка и предварителната проверка вече съществуват.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Проверете дали връзката за Jitsi среща е достъпна и какво позволява сървърът, преди да се присъедините. Все още не се участва.',
   'Systeemgeluid opnemen…': 'Запис на системен звук…',
   'Systeemgeluid opnemen': 'Запис на системен звук',
   'Tabgeluid opnemen…': 'Запис на звука от раздела…',
@@ -5151,8 +5160,6 @@ const _dutchSourceAddBg = <String, String>{
       'Инструменти за подобряване на процесите (SIPOC, DMAIC, Kaizen и A3). Изключени по подразбиране; включете разширението, за да използвате свързаните шаблони и оформления на слайдове.',
   'Videovergaderingen': 'Видеосрещи',
   'Videovergadering': 'Видеосреща',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Все още няма активна среща. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
   'Dempen opheffen': 'Включи звука',
   'Dempen': 'Изключи звука',
   'Camera aan': 'Включи камерата',

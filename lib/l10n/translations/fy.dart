@@ -652,6 +652,19 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nog geen actieve vergadering.': 'Noch gjin aktive gearkomste.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Plak in Jitsi-gearkestingkeppeling om mei te dwaan.',
+  'Deelnemen aan een vergadering…': 'Meidwaan oan in gearkomste…',
+  'Opnieuw verbinden…': 'Opnij ferbine…',
+  'De vergadering is beëindigd.': 'De gearkomste is beëindige.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Do nimst al diel oan in gearkomste; dy wurdt ferlitten as do no meidoost.',
+  'Vergaderlink openen': 'Gearkestingkeppeling iepenje',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Plak in Jitsi-gearkestingkeppeling; OciDeck kontrolearret de server en docht mei sadree’t jo dat befêstige.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Nim diel oan fideogearkestingen en presintearje fanuit OciDeck mei in eigen ynterface: dielnimmers njonken jo dia, net yn it finster fan in oare app. Bring-your-own-server (Jitsi); OciDeck hostet neat en hâldt de peteargegevens bûten AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Jo mikrofoan of kamera is wei; set de boarne wer oan as jo him wer hawwe.',
   'Media is niet end-to-end versleuteld.':
@@ -715,10 +728,6 @@ const _dutchSourceAddFy = {
       'Dizze server biedt gjin gearkomstfoarm dy\'t OciDeck stipet.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'De server is net berikber of wegere de ferbining.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Doch mei oan fideogearkomsten en presintearje fan OciDeck út mei in eigen ynterface: dielnimmers njonken jo dia, net yn it finster fan in oare app. Bring-your-own-server (Jitsi); OciDeck hostet neat en hâldt de peteergegevens bûten AI. Meidwaan sels folget yn in folgjende ferzje; de linkkontrôle en preflight binne der al.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Kontrolearje oft in Jitsi-gear kommelink berikber is en wat de server tastiet, eardat jo meidogge. Der wurdt noch net meidien.',
   'Systeemgeluid opnemen…': 'Systeemlûd opnimme…',
   'Systeemgeluid opnemen': 'Systeemlûd opnimme',
   'Tabgeluid opnemen…': 'Ljepblêdlûd opnimme…',
@@ -4165,8 +4174,6 @@ const _dutchSourceAddFy = {
       'Helpmiddels foar prosesferbettering (SIPOC, DMAIC, Kaizen en A3). Standert út; skeakelje de útwreiding yn om de byhearrende sjabloanen en dia-yndielingen te brûken.',
   'Videovergaderingen': 'Fideofergaderingen',
   'Videovergadering': 'Fideofergadering',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Noch gjin aktive gearkomste. It ferbinen mei in gearkomstetsjinst wurdt yn in folgjende ferzje tafoege.',
   'Dempen opheffen': 'Lûd oansette',
   'Dempen': 'Lûd útsette',
   'Camera aan': 'Kamera oan',

@@ -1603,6 +1603,19 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nog geen actieve vergadering.': 'Vēl nav aktīvas tikšanās.',
+  'Plak een Jitsi-vergaderlink om deel te nemen.':
+      'Ielīmējiet Jitsi sapulces saiti, lai pievienotos.',
+  'Deelnemen aan een vergadering…': 'Pievienoties sapulcei…',
+  'Opnieuw verbinden…': 'Atkārtoti izveido savienojumu…',
+  'De vergadering is beëindigd.': 'Sapulce ir beigusies.',
+  'U neemt al deel aan een vergadering; die wordt verlaten als u nu deelneemt.':
+      'Jūs jau piedalāties sapulcē; ja pievienosieties tagad, tā tiks pamesta.',
+  'Vergaderlink openen': 'Atvērt sapulces saiti',
+  'Plak een Jitsi-vergaderlink; OciDeck controleert de server en neemt deel zodra u dat bevestigt.':
+      'Ielīmējiet Jitsi sapulces saiti; OciDeck pārbauda serveri un pievienojas pēc jūsu apstiprinājuma.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI.':
+      'Piedalieties video sapulcēs un prezentējiet no OciDeck ar tā paša saskarni: dalībnieki blakus slaidam, nevis citas lietotnes logā. Bring-your-own-server (Jitsi); OciDeck neko neizmitina un tur sarunu datus ārpus AI.',
   'Je microfoon of camera viel weg; zet de bron opnieuw aan als je die terug hebt.':
       'Jūsu mikrofons vai kamera pazuda; ieslēdziet avotu atkal, kad tas atgriezīsies.',
   'Media is niet end-to-end versleuteld.':
@@ -1667,10 +1680,6 @@ const _dutchSourceAddLv = <String, String>{
       'Šis serveris nepiedāvā sanāksmju formu, ko OciDeck atbalsta.',
   'De server is niet bereikbaar of weigerde de verbinding.':
       'Serveris nav sasniedzams vai atteica savienojumu.',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. Deelnemen zelf volgt in een volgende versie; de linkcontrole en preflight zijn er al.':
-      'Piedalieties videokonferencēs un prezentējiet no OciDeck ar savu saskarni: dalībnieki blakus slaidam, nevis citas lietotnes logā. Bring-your-own-server (Jitsi); OciDeck neko nehosto un tur sarunu datus ārpus AI. Pati pievienošanās būs nākamajā versijā; saites pārbaude un iepriekšējā pārbaude jau ir.',
-  'Controleer of een Jitsi-vergaderlink bereikbaar is en wat de server toelaat, voordat u deelt neemt. Er wordt nog niet deelgenomen.':
-      'Pārbaudiet, vai Jitsi sanāksmes saite ir sasniedzama un ko serveris atļauj, pirms pievienojaties. Pievienošanās vēl nenotiek.',
   'Systeemgeluid opnemen…': 'Ierakstīt sistēmas skaņu…',
   'Systeemgeluid opnemen': 'Ierakstīt sistēmas skaņu',
   'Tabgeluid opnemen…': 'Ierakstīt cilnes skaņu…',
@@ -5107,8 +5116,6 @@ const _dutchSourceAddLv = <String, String>{
       'Rīki procesu uzlabošanai (SIPOC, DMAIC, Kaizen un A3). Pēc noklusējuma izslēgti; iespējojiet paplašinājumu, lai izmantotu saistītās veidnes un slaidu izkārtojumus.',
   'Videovergaderingen': 'Videosanāksmes',
   'Videovergadering': 'Videosanāksme',
-  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
-      'Vēl nav aktīvas sanāksmes. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
   'Dempen opheffen': 'Ieslēgt skaņu',
   'Dempen': 'Izslēgt skaņu',
   'Camera aan': 'Ieslēgt kameru',
