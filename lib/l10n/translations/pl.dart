@@ -1617,6 +1617,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Ontvangen brokken:': 'Odebrane fragmenty:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'dźwięk systemowy',
   'Live-server wordt getest…': 'Testowanie serwera na żywo…',

@@ -1635,6 +1635,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Ontvangen brokken:': 'Blúireanna faighte:',
   'de microfoon': 'an micreafón',
   'het systeemgeluid': 'fuaim an chórais',
   'Live-server wordt getest…': 'Ag tástáil an fhreastalaí bheo…',

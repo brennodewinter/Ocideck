@@ -249,8 +249,32 @@ class JitsiMeetingSession implements MeetingSession {
   Future<void> stopScreenShare() => _localMedia.endShare(lost: false);
 
   @override
-  Stream<CallAudioChunk> startCallAudioCapture() =>
-      openCallAudioCapture(capabilities.callAudio);
+  /// De hele-call-tap (#2527): de connection levert PCM per track, wij
+  /// stempelen de eigenaar via de roster (track zelf kent zijn deelnemer
+  /// niet — die koppeling is signalering, geen media).
+  Stream<CallAudioChunk> startCallAudioCapture() {
+    final media = _media;
+    if (media == null) return const Stream.empty();
+    return media.startCallAudioCapture().map(_stampCallParticipant);
+  }
+
+  CallAudioChunk _stampCallParticipant(CallAudioChunk c) => CallAudioChunk(
+    participantId: c.role == CallAudioRole.localOutbound
+        ? _nick
+        : _participantOfAudioTrack(c.trackId) ?? '',
+    role: c.role,
+    trackId: c.trackId,
+    at: c.at,
+    pcm: c.pcm,
+    sampleRateHz: c.sampleRateHz,
+  );
+
+  String? _participantOfAudioTrack(String trackId) {
+    for (final p in _participants.values) {
+      if (p.audio?.id == trackId) return p.id;
+    }
+    return null;
+  }
 
   @override
   Future<void> stopCallAudioCapture() async {}

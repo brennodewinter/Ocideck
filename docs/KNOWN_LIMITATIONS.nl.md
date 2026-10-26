@@ -303,10 +303,11 @@ call het tegendeel zegt. Browsergrenzen: de pagina kan het servercertificaat
 niet pinnen, kale `http`-vergaderlinks werken alleen naar een letterlijk
 loopback-adres (`127.0.0.1`, niet de naam `localhost`), en de browser vraagt
 zelf per site om camera, microfoon en schermdelen. Een audiobron van de hele
-call voor transcriptie is op **geen** platform beschikbaar — de mediabinding
-levert geen gedecodeerde audiotaps per deelnemer, dus het callpaneel biedt
-eerlijk géén opnameknop in plaats van een kapotte. *(Toegevoegd 2026-10-26,
-issue #2538.)*
+call voor transcriptie is alleen op **macOS en web** beschikbaar — de geforkte
+mediabinding levert daar gedecodeerde PCM per track (bewezen in een echte
+call), terwijl Windows, Linux, iOS en Android eerlijk geen per-bron-tap
+melden, dus het callpaneel biedt géén opnameknop in plaats van een kapotte.
+*(Toegevoegd 2026-10-26, issues #2538 en #2527.)*
 
 ## Bladeren… toont wat het systeemvenster toont
 

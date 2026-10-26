@@ -1611,6 +1611,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Ontvangen brokken:': 'Prijaté úseky:',
   'de microfoon': 'mikrofón',
   'het systeemgeluid': 'systémový zvuk',
   'Live-server wordt getest…': 'Server pre živý prenos sa testuje…',

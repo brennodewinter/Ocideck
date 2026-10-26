@@ -4,12 +4,16 @@
 // [MeetingTrack] blijft een opaak id: dat id is geen tap, en het lampje
 // waarmee een provider "er wordt opgenomen" toont is evenmin byte-toegang.
 //
-// flutter_webrtc 1.6 kan dit niet leveren. `MediaRecorder` schrijft een
-// bestand van het INPUT- of OUTPUT-kanaal — een mix, geen samples per
-// deelnemer na de mute. Zolang die tap er niet is, is een hele-call-opname
-// niet beschikbaar. Een microfoon alleen mag die naam niet dragen.
+// De binding (eigen flutter_webrtc-fork, `audioTrackFrames`) levert per
+// track een stroom gedecodeerde PCM: remote via het RTCAudioRenderer-
+// protocol (decode-pad), lokaal via de APM-renderer van LocalAudioTrack
+// (capture-pad), op web via Web Audio. Dat is wat een INPUT/OUTPUT-
+// bestandsmix nooit kan: aparte samples per bron. Dit bestand spreekt
+// alleen over het CONTRACT; de stroom zelf maakt de adapter aan.
 
-import 'dart:typed_data';
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 
 /// Waarom een hele-call-tap er niet is. De UI (#2528) toont de reden en
 /// biedt de knop niet aan.
@@ -41,7 +45,7 @@ class CallAudioCaptureFact {
   bool get wholeCall => localOutbound && remote && denial == null;
 }
 
-/// Het eerlijke feit voor de huidige `flutter_webrtc`-binding (#2527).
+/// Het eerlijke feit voor een binding zonder per-bron-tap.
 const unavailableCallAudio = CallAudioCaptureFact(
   localOutbound: false,
   remote: false,
@@ -50,9 +54,77 @@ const unavailableCallAudio = CallAudioCaptureFact(
 
 /// De binding van nu. Eén plek, zodat de sessie en de media-core hetzelfde
 /// zeggen en een test die uitspraak kan vastzetten.
-CallAudioCaptureFact callAudioCaptureOfCurrentBinding() => unavailableCallAudio;
+///
+/// Bewezen: macOS (darwin-sink) en web (Web Audio op het jsTrack-object).
+/// Windows en Linux hebben dezelfde C++-route in de binding maar zijn
+/// nóóit in een echte call getest — geen claim. iOS/Android: niet bewezen.
+CallAudioCaptureFact callAudioCaptureOfCurrentBinding() {
+  if (kIsWeb || defaultTargetPlatform == TargetPlatform.macOS) {
+    return const CallAudioCaptureFact(localOutbound: true, remote: true);
+  }
+  return unavailableCallAudio;
+}
 
 enum CallAudioRole { localOutbound, remote }
+
+/// Eén brok PCM zoals één track hem levert: s16le, mono na downmix.
+class CallPcmFrame {
+  const CallPcmFrame({required this.pcm, required this.sampleRateHz});
+
+  final Uint8List pcm;
+  final int sampleRateHz;
+}
+
+/// Eén opengegaande tap op één audiotrack van de call. [participantId] mag
+/// '' zijn als de binding de eigenaar niet kent — de sessie stempelt hem
+/// dan via de roster. [frames] is wat de binding écht levert.
+class CallAudioTrackTap {
+  const CallAudioTrackTap({
+    required this.trackId,
+    required this.role,
+    this.participantId = '',
+    required this.frames,
+  });
+
+  final String trackId;
+  final String participantId;
+  final CallAudioRole role;
+  final Stream<CallPcmFrame> frames;
+}
+
+/// Resampled interleaved s16le naar mono 16 kHz — de rate die de
+/// opname- en ASR-pijplijn spreekt. `channels` > 1 wordt gemiddeld
+/// (downmix). Lineaire interpolatie is voldoende voor spraak; het is
+/// bewust geen polyfase — bronnen zijn bandbeperkte telefoonaudio.
+CallPcmFrame callPcmFrame16k(Uint8List pcm, int sampleRateHz, int channels) {
+  if (channels <= 0 || pcm.isEmpty) {
+    return CallPcmFrame(pcm: Uint8List(0), sampleRateHz: 16000);
+  }
+  final src = ByteData.sublistView(pcm);
+  final srcFrames = pcm.lengthInBytes ~/ (2 * channels);
+  final mono = Int32List(srcFrames);
+  for (var i = 0; i < srcFrames; i++) {
+    var acc = 0;
+    for (var c = 0; c < channels; c++) {
+      acc += src.getInt16((i * channels + c) * 2, Endian.little);
+    }
+    mono[i] = acc ~/ channels;
+  }
+  final outLen = sampleRateHz == 16000
+      ? srcFrames
+      : (srcFrames * 16000 / sampleRateHz).round();
+  final out = Uint8List(outLen * 2);
+  final od = out.buffer.asByteData();
+  for (var i = 0; i < outLen; i++) {
+    final pos = i * (srcFrames - 1) / (outLen > 1 ? outLen - 1 : 1);
+    final lo = pos.floor();
+    final hi = lo + 1 < srcFrames ? lo + 1 : lo;
+    final frac = pos - lo;
+    final v = (mono[lo] * (1 - frac) + mono[hi] * frac).round();
+    od.setInt16(i * 2, v.clamp(-32768, 32767), Endian.little);
+  }
+  return CallPcmFrame(pcm: out, sampleRateHz: 16000);
+}
 
 /// Eén brok gedecodeerde audio van precies één bron. PCM is 16-bit
 /// little-endian, mono. Lege bytes zijn stilte en horen niet in de opname.
@@ -74,13 +146,70 @@ class CallAudioChunk {
   final int sampleRateHz;
 }
 
-/// Opent de tap. Een niet-beschikbare capability geeft een lege stroom —
-/// er wordt niets opgenomen. Een capability die wél whole-call claimt
-/// terwijl er geen tap is, faalt hard: stil niets teruggeven zou de leugen
-/// verbergen.
-Stream<CallAudioChunk> openCallAudioCapture(CallAudioCaptureFact fact) {
+/// Opent de tap: per aangeboden [CallAudioTrackTap] worden diens frames
+/// chunks met een tijdstip. De stroom van taps mag oneindig open blijven —
+/// een remote track die ná het begin van de opname join tapt gewoon mee.
+/// Een niet-beschikbare capability geeft een lege stroom.
+Stream<CallAudioChunk> openCallAudioCapture(
+  CallAudioCaptureFact fact,
+  Stream<CallAudioTrackTap> taps,
+) {
   if (!fact.wholeCall) return const Stream.empty();
-  throw StateError('call-audiotap ontbreekt terwijl wholeCall waar is');
+  // Geen asyncExpand: die pauzeert de taps-bron zolang een tap-framestroom
+  // loopt, en die loopt hier bewust eindeloos — een tweede tap (remote)
+  // zou dan nooit openen. Eigen merge: iedere tap krijgt een eigen
+  // subscription die chunks doorzet; cancel ruimt ze allemaal op.
+  late final StreamController<CallAudioChunk> out;
+  StreamSubscription<CallAudioTrackTap>? tapsSub;
+  final frameSubs = <StreamSubscription<CallAudioChunk>>{};
+  var tapsDone = false;
+
+  void maybeClose() {
+    if (tapsDone && frameSubs.isEmpty) unawaited(out.close());
+  }
+
+  out = StreamController<CallAudioChunk>(
+    onListen: () {
+      tapsSub = taps.listen(
+        (tap) {
+          late StreamSubscription<CallAudioChunk> frameSub;
+          frameSub = tap.frames
+              .map(
+                (f) => CallAudioChunk(
+                  participantId: tap.participantId,
+                  role: tap.role,
+                  trackId: tap.trackId,
+                  at: DateTime.now(),
+                  pcm: f.pcm,
+                  sampleRateHz: f.sampleRateHz,
+                ),
+              )
+              .listen(
+                out.add,
+                onError: out.addError,
+                onDone: () {
+                  frameSubs.remove(frameSub);
+                  maybeClose();
+                },
+              );
+          frameSubs.add(frameSub);
+        },
+        onError: out.addError,
+        onDone: () {
+          tapsDone = true;
+          maybeClose();
+        },
+      );
+    },
+    onCancel: () async {
+      await tapsSub?.cancel();
+      for (final s in frameSubs.toList()) {
+        await s.cancel();
+      }
+      frameSubs.clear();
+    },
+  );
+  return out.stream;
 }
 
 /// Filtert een aangeboden brok. Niet-beschikbaar, gemute lokaal, lege

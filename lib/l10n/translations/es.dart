@@ -649,6 +649,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Ontvangen brokken:': 'Bloques recibidos:',
   'de microfoon': 'el micrófono',
   'het systeemgeluid': 'el audio del sistema',
   'Live-server wordt getest…': 'Probando el servidor en vivo…',

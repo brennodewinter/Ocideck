@@ -43,6 +43,7 @@
 ^testbed/jitsi-meet/evidence/
 ^testbed/jitsi-meet/probe/node_modules/
 ^testbed/jitsi-meet/probe/probe-out/
+^testbed/jitsi-meet/probe-out/
 
 # Vosk-testbed (#2525): het gedownloade model en proefuitvoer zijn lokale
 # artefacten — binaire modelgewichten trippen op entropie, geen bron, geen

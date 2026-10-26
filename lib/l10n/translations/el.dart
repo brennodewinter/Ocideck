@@ -1630,6 +1630,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Ontvangen brokken:': 'Ληφθέντα τμήματα:',
   'de microfoon': 'το μικρόφωνο',
   'het systeemgeluid': 'ο ήχος του συστήματος',
   'Live-server wordt getest…': 'Έλεγχος του διακομιστή ζωντανά…',

@@ -284,9 +284,11 @@ Browser-specific boundaries: the page cannot pin the server certificate, plain
 `http` meeting links work only to a literal loopback address (`127.0.0.1`, not
 the name `localhost`), and the browser asks its own per-site permissions for
 camera, microphone and screen share. A whole-call audio source for
-transcription is **not** available on any platform — the media binding exposes
-no per-participant decoded audio taps, so the call panel honestly offers no
-record button rather than a broken one. *(Added 2026-10-26, issue #2538.)*
+transcription is available on **macOS and web only** — the forked media
+binding delivers per-track decoded PCM there (proven in a real call), while
+Windows, Linux, iOS and Android honestly report no per-source tap, so the
+call panel offers no record button rather than a broken one. *(Added
+2026-10-26, issues #2538 and #2527.)*
 
 ## Browse… shows what the system file dialog shows
 

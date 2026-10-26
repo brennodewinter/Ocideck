@@ -1,0 +1,37 @@
+{
+  "additions": {
+    "Ontvangen brokken:": {
+      "en": "Chunks received:",
+      "it": "Blocchi ricevuti:",
+      "de": "Empfangene Datenblöcke:",
+      "fr": "Paquets reçus :",
+      "es": "Bloques recibidos:",
+      "fy": "Untfongen brokken:",
+      "pap": "Bloke risibí:",
+      "la": "Frusta accepta:",
+      "id": "Bagian diterima:",
+      "pl": "Odebrane fragmenty:",
+      "uk": "Отримано фрагментів:",
+      "gsw": "Empfange Päckli:",
+      "el": "Ληφθέντα τμήματα:",
+      "da": "Modtagne dele:",
+      "sv": "Mottagna delar:",
+      "hr": "Primljeni dijelovi:",
+      "cs": "Přijaté úseky:",
+      "fi": "Vastaanotetut palat:",
+      "bg": "Получени фрагменти:",
+      "lv": "Saņemtie fragmenti:",
+      "lt": "Gautos dalys:",
+      "mt": "Biċċiet riċevuti:",
+      "et": "Vastuvõetud osad:",
+      "hu": "Fogadott darabok:",
+      "ga": "Blúireanna faighte:",
+      "pt": "Fragmentos recebidos:",
+      "ro": "Fragmente primite:",
+      "sl": "Prejeti delčki:",
+      "sk": "Prijaté úseky:",
+      "tr": "Alınan parçalar:"
+    }
+  },
+  "unchanged": []
+}

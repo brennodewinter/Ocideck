@@ -1623,6 +1623,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Ontvangen brokken:': 'Biċċiet riċevuti:',
   'de microfoon': 'il-mikrofonu',
   'het systeemgeluid': 'il-ħoss tas-sistema',
   'Live-server wordt getest…': 'Is-server dirett qed jiġi ttestjat…',

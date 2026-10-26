@@ -1609,6 +1609,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Ontvangen brokken:': 'Primljeni dijelovi:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'sistemski zvuk',
   'Live-server wordt getest…': 'Testiranje poslužitelja uživo…',

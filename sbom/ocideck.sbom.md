@@ -4,7 +4,7 @@
 
 This is **ocideck 0.7.0+42** (licence EUPL-1.2) and every third-party component it ships (228 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **803 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **804 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -52,7 +52,7 @@ The JSON documents carry **803 dependency relations** between these components: 
 | cupertino_icons _(direct main)_ | 2.0.0 | MIT | flutter | `pkg:pub/cupertino_icons@2.0.0` |
 | cupertino_ui _(transitive)_ | 1.1.2 | BSD-3-Clause | flutter | `pkg:pub/cupertino_ui@1.1.2` |
 | dart_quill_delta _(transitive)_ | 10.8.3 | MIT | FlutterQuill | `pkg:pub/dart_quill_delta@10.8.3` |
-| dart_webrtc _(transitive)_ | 1.8.2 | MIT | flutter-webrtc | `pkg:pub/dart_webrtc@1.8.2` |
+| dart_webrtc _(direct dev)_ | 1.8.2 | MIT | flutter-webrtc | `pkg:pub/dart_webrtc@1.8.2` |
 | dartage _(transitive)_ | 0.3.0 | MIT | tinyrack-net | `pkg:pub/dartage@0.3.0` |
 | dartcv4 _(direct main)_ | 2.3.1 | Apache-2.0 | rainyl | `pkg:pub/dartcv4@2.3.1` |
 | dbus _(transitive)_ | 0.7.15 | MPL-2.0 | canonical | `pkg:pub/dbus@0.7.15` |
@@ -101,7 +101,7 @@ The JSON documents carry **803 dependency relations** between these components: 
 | flutter_svg _(direct main)_ | 2.3.0 | MIT | flutter | `pkg:pub/flutter_svg@2.3.0` |
 | flutter_test _(direct dev)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | flutter_web_plugins _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
-| flutter_webrtc _(direct main)_ | 1.6.2+hotfix.4 | MIT | cloudwebrtc | `pkg:pub/flutter_webrtc@1.6.2+hotfix.4` |
+| flutter_webrtc _(direct main)_ | 1.6.2+hotfix.4 | MIT | pawprint.vigilis.online | https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git @ `b82f0db567e10aecd152c4039336d09e48f295a8` (.) |
 | fuchsia_remote_debug_protocol _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | glob _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.2.0` |
 | hooks _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/hooks@2.2.0` |

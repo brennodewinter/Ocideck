@@ -172,7 +172,7 @@ class FakeMeetingSession implements MeetingSession {
 
   /// Zet de test een controller, dan is dát de tap. Zonder controller
   /// geldt het echte capability-feit — een whole-call-claim zonder tap
-  /// faalt hard.
+  /// faalt hard, zoals de binding op een onondersteund platform doet.
   StreamController<CallAudioChunk>? captureController;
   var captureStarts = 0;
   var captureStops = 0;
@@ -182,7 +182,13 @@ class FakeMeetingSession implements MeetingSession {
     captureStarts++;
     final controller = captureController;
     if (controller != null) return controller.stream;
-    return openCallAudioCapture(capabilities.callAudio);
+    if (capabilities.callAudio.wholeCall) {
+      throw StateError('whole-call geclaimd zonder tap');
+    }
+    return openCallAudioCapture(
+      capabilities.callAudio,
+      const Stream<CallAudioTrackTap>.empty(),
+    );
   }
 
   @override

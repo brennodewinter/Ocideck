@@ -133,6 +133,11 @@ class CallRecordingSection extends ConsumerWidget {
                     child: Text(l10n.d('Start opname')),
                   ),
                 ),
+              if (recorded.phase == CallRecordingPhase.bezig)
+                Text(
+                  '${l10n.d('Ontvangen brokken:')} ${recorded.capturedChunks}',
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+                ),
               if (offer.showStop) const _StopButton(),
               if (offer.showRetry)
                 Align(

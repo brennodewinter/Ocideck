@@ -1598,6 +1598,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Ontvangen brokken:': 'Vastuvõetud osad:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'süsteemi heli',
   'Live-server wordt getest…': 'Reaalajas serverit testitakse…',

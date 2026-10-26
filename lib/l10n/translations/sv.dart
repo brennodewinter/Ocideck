@@ -1604,6 +1604,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Ontvangen brokken:': 'Mottagna delar:',
   'de microfoon': 'mikrofonen',
   'het systeemgeluid': 'systemljudet',
   'Live-server wordt getest…': 'Live-servern testas…',

@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:96f34179-7ae9-5594-83cb-df1588c5c208",
+  "serialNumber": "urn:uuid:8cd65c94-42f9-519a-8a78-65a2430fd96c",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-24T19:32:28.717528Z",
+    "timestamp": "2026-10-26T19:41:09.517068Z",
     "tools": {
       "components": [
         {
@@ -1291,7 +1291,7 @@
         },
         {
           "name": "cdx:pub:scope",
-          "value": "transitive"
+          "value": "direct dev"
         }
       ]
     },
@@ -3267,17 +3267,16 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_webrtc@1.6.2+hotfix.4",
+      "bom-ref": "git:flutter_webrtc@1.6.2+hotfix.4",
       "type": "library",
       "supplier": {
-        "name": "cloudwebrtc",
+        "name": "pawprint.vigilis.online",
         "url": [
-          "https://github.com/cloudwebrtc"
+          "https://pawprint.vigilis.online"
         ]
       },
       "name": "flutter_webrtc",
       "version": "1.6.2+hotfix.4",
-      "purl": "pkg:pub/flutter_webrtc@1.6.2+hotfix.4",
       "licenses": [
         {
           "license": {
@@ -3285,16 +3284,10 @@
           }
         }
       ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "ebf5ceef2897caae425ed65a38b2961c29d9d9a626159418ed460e1a65038c00"
-        }
-      ],
       "externalReferences": [
         {
-          "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_webrtc/versions/1.6.2+hotfix.4"
+          "type": "vcs",
+          "url": "https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git"
         }
       ],
       "properties": [
@@ -3305,6 +3298,18 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct main"
+        },
+        {
+          "name": "ocideck:resolved-revision",
+          "value": "b82f0db567e10aecd152c4039336d09e48f295a8"
+        },
+        {
+          "name": "ocideck:package-subpath",
+          "value": "."
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: git."
         }
       ]
     },
@@ -9520,6 +9525,7 @@
         "git:app_appearance@0.1.0",
         "git:app_localizations@0.1.0",
         "git:cnativeapi@0.1.4",
+        "git:flutter_webrtc@1.6.2+hotfix.4",
         "git:nativeapi@0.1.4",
         "git:network_guard@0.1.0",
         "git:secret_storage@0.1.0",
@@ -9534,6 +9540,7 @@
         "pkg:pub/crypto@3.0.7",
         "pkg:pub/cryptography@2.9.0",
         "pkg:pub/cupertino_icons@2.0.0",
+        "pkg:pub/dart_webrtc@1.8.2",
         "pkg:pub/dartcv4@2.3.1",
         "pkg:pub/desktop_drop@0.8.4",
         "pkg:pub/fake_async@1.3.3",
@@ -9547,7 +9554,6 @@
         "pkg:pub/flutter_riverpod@3.4.3",
         "pkg:pub/flutter_secure_storage@11.2.0",
         "pkg:pub/flutter_svg@2.3.0",
-        "pkg:pub/flutter_webrtc@1.6.2+hotfix.4",
         "pkg:pub/html@0.15.7",
         "pkg:pub/http@1.6.0",
         "pkg:pub/image@4.10.2",
@@ -10227,7 +10233,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_webrtc@1.6.2+hotfix.4",
+      "ref": "git:flutter_webrtc@1.6.2+hotfix.4",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/dart_webrtc@1.8.2",

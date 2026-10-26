@@ -1607,6 +1607,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Ontvangen brokken:': 'Fogadott darabok:',
   'de microfoon': 'a mikrofon',
   'het systeemgeluid': 'a rendszerhang',
   'Live-server wordt getest…': 'Az élő kiszolgáló tesztelése…',

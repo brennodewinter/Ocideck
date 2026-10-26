@@ -1605,6 +1605,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Ontvangen brokken:': 'Vastaanotetut palat:',
   'de microfoon': 'mikrofoni',
   'het systeemgeluid': 'järjestelmän ääni',
   'Live-server wordt getest…': 'Reaaliaikaista palvelinta testataan…',

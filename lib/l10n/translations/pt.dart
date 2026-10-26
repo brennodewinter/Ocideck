@@ -1633,6 +1633,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Ontvangen brokken:': 'Fragmentos recebidos:',
   'de microfoon': 'o microfone',
   'het systeemgeluid': 'o áudio do sistema',
   'Live-server wordt getest…': 'A testar o servidor ao vivo…',

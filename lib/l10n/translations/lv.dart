@@ -1603,6 +1603,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Ontvangen brokken:': 'Saņemtie fragmenti:',
   'de microfoon': 'mikrofons',
   'het systeemgeluid': 'sistēmas skaņa',
   'Live-server wordt getest…': 'Tiek pārbaudīts tiešraides serveris…',
