@@ -416,7 +416,12 @@ class _CallAudioSession implements CaptureSession {
           _wavBytes(_mixMem.takeBytes()),
           name: 'call.wav',
         );
-        WebAssetStore.put(utf8.encode(_manifestJson()), name: 'sources.json');
+        // De naam koppelt het manifest aan díe wav-sleutel, zodat de
+        // transcriptiepass het bij `readCallSources(wavPad)` terugvindt.
+        WebAssetStore.put(
+          utf8.encode(_manifestJson()),
+          name: '$_storedPath.sources.json',
+        );
       } on WebAssetBudgetExceeded {
         throw const CapacityExceeded(
           'de opname past niet in het browsergeheugen',

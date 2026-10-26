@@ -6687,6 +6687,38 @@ pinnen zoals de desktop-app dat doet, en een kale `http`-vergaderlink
 wordt alleen geaccepteerd naar een letterlijk loopback-adres
 (`127.0.0.1`, niet de naam `localhost`).
 
+**Een call opnemen.** Op een verbonden call waarvan het platform de
+audiobron per deelnemer blootlegt — de uitgebrachte macOS-build en de
+browserbuild, elk bewezen in een echte call — biedt de call-rail
+*Opnemen en transcriberen*. Ontbreekt die bron, dan toont de rail de
+reden en geen knop, in plaats van een kapotte. Starten vraagt twee
+bewuste stappen: de deelnemersmelding (opnemen van anderen kan hun
+toestemming vragen — het beleid van de deployment beslist), daarna
+*Start opname*. Deelnemen, scherm delen of de module aanzetten start
+nooit iets, en de eigen opname-indicator van de vergaderprovider is een
+aparte zin, niet deze opname.
+
+Zolang hij loopt schrijft OciDeck één 16 kHz-monomix van je uitgaande en
+het ontvangen callgeluid naar dezelfde stagingmap als een
+microfoonopname, plus een `sources.json`-manifest dat vastlegt welke
+callbronnen — track-id, rol, deelnemer-id — hem voedden en hoeveel van
+elk binnenkwam. Stop blijft in de strook zichtbaar, ook als de call-rail
+verborgen is; het einde van de call beëindigt de opname mee. Heeft je
+ASR-profiel een live-endpoint, dan verschijnt dezelfde opt-in als in de
+microfoondialoog na zijn proef — aanvinken stroomt het geluid van díe
+sessie naar de benoemde host en nergens anders; zonder dat blijft de
+voorlopige tekst op je apparaat. Een weggevallen live-verbinding stopt
+de opname nooit, en niets herstelt zichzelf stil.
+
+Stop, de call verlaten of de audiobron verliezen eindigt de opname en
+biedt dezelfde drie keuzes als een microfoonopname: nu transcriberen,
+zeven dagen bewaren, of weggooien — een bewaarde opname kan later vanuit
+de lijst met opnames alsnog worden getranscribeerd. Het resultaat opent
+als een gewoon bewerkbaar document, gemarkeerd als vergaderingsopname;
+bronaudio die aantoonbaar wegviel — een gedropte track of een
+netwerkbreuk — wordt benoemd in een *Ontbrekend*-regel, en sprekersnamen
+worden nooit verzonnen uit de deelnemerslijst.
+
 **Rechten op macOS.** macOS vraagt per bron om toestemming, met de eigen
 toelichting van OciDeck: de microfoon bij de join, de camera pas als u hem
 aanzet, en *schermopname* als u iets deelt — bij die laatste opent het

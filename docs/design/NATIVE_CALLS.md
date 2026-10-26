@@ -427,6 +427,18 @@ companion channel carries nothing yet.
   MUC roster, groupchat, SourceInfo mute, leave — with the media seam faked at
   `MeetingMediaCore` (libwebrtc cannot run headless; the testbed probe proves
   real RTP through the same stack).
+- **Call recording + transcript (#2528–#2530) — geland.** The call rail's
+  *Opnemen en transcriberen* starts a `CallAudioCaptureSource` in the same
+  durable `RecordingManager`/`CaptureSource` pipeline as the microphone:
+  a tick-mixed 16 kHz mono `recording.wav` plus a `sources.json` manifest
+  (per-source track id, role, participant id, frames, silence ticks) in the
+  seven-day staging window. Live provisional text rides `liveChunks`
+  through the generic `LivePass` — local by default, the proven
+  `vosk-ws-1` server only behind the `LiveServerOptIn` session consent;
+  a dropped live link is `lost`, never a stopped recording. The finished
+  dialog and `TranscribeFileDialog` read the manifest into honest
+  provenance (`Bron: vergadering`, an `Ontbrekend:` line for provable
+  gaps) — speaker names are never inferred from the roster.
 - **Call-audio tap (#2527) — geland.** `call_audio_source.dart` is the
   provider-neutral output behind `MeetingSession` and `MeetingMediaConnection`:
   local outbound audio after mute and remote audio after decode, each with a

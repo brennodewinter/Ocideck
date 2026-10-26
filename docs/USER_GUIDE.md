@@ -6633,6 +6633,37 @@ differences: the browser cannot pin the server certificate the way the desktop
 app does, and a plain `http` meeting link is accepted only when it points at a
 literal loopback address (`127.0.0.1`, not the name `localhost`).
 
+**Recording a call.** On a connected call whose platform exposes the
+per-source call audio — the released macOS build and the browser build,
+each proven in a real call — the call rail offers *Opnemen en
+transcriberen*. Where that source is missing the rail shows the reason
+and no button rather than a broken one. Starting takes two deliberate
+steps: the participant-notice line (recording other people can need
+their consent — the deployment's policy decides), then *Start opname*.
+Joining, screen sharing or switching the module on never starts it, and
+the meeting provider's own recording indicator is a separate sentence,
+not this recording.
+
+While it runs, OciDeck writes one 16 kHz mono mix of your outgoing and
+the received call audio to the same staging folder a microphone
+recording uses, plus a `sources.json` manifest naming which call
+sources — track id, role, participant id — fed it and how much of each
+arrived. Stop stays visible in the banner even when the call rail is
+hidden; ending the call ends the recording too. With a live endpoint on
+your ASR profile, the same opt-in as the microphone dialog appears after
+its probe — ticking it streams this session's audio to the named host
+and nothing else; without it provisional text stays on your device. A
+dropped live connection never stops the recording, and nothing
+reconnects by itself.
+
+Stop, leaving the call or losing the audio source ends the recording and
+offers the same three choices as a microphone take: transcribe now, keep
+for seven days, or discard — a kept recording can be transcribed later
+from the staged list. The result opens as an ordinary editable document
+marked as a meeting recording; source audio that provably went missing —
+a dropped track or a network gap — is named in an *Ontbrekend* line,
+and speaker labels are never invented from the participant list.
+
 **Permissions on macOS.** macOS asks per source, with OciDeck's own
 explanation: the microphone when you join, the camera only when you turn it
 on, and *screen recording* when you share — the last one may open System

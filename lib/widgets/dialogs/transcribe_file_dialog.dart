@@ -20,8 +20,6 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:path/path.dart' as p;
-
 import '../../l10n/app_localizations.dart';
 import '../../meetings/call_audio_manifest.dart';
 import '../../meetings/call_recording.dart';
@@ -104,8 +102,9 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
     final source = _fileSource();
     try {
       // Synchroon: het manifest is hooguit enkele honderden bytes en een
-      // async lees keert in een widgettest-zone nooit terug.
-      _callManifest = readCallSources(p.dirname(widget.sourcePath));
+      // async lees keert in een widgettest-zone nooit terug. Op web is dit
+      // de `mem:`-sidecar die de sessie naast de wav-sleutel zette.
+      _callManifest = readCallSources(widget.sourcePath);
       final info = await source.describe(widget.sourcePath);
       if (mounted) setState(() => _info = info);
     } on Object catch (e) {

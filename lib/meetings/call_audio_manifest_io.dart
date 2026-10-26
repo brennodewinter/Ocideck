@@ -13,13 +13,15 @@ Future<void> writeCallSources(String stagingDir, String json) =>
 
 /// De bronnenprovenance van een bewaarde callopname teruglezen (#2530) —
 /// de bewaarflow en de transcriptiepass noemen daarmee welke bronstukken
-/// ontbraken. Synchroon opzet: het bestand is hooguit enkele honderden
-/// bytes, en een async lees zou in een widgettest-zone nooit terugkomen.
-/// Null bij geen manifest, stuk JSON of een vreemde vorm: een provenance
-/// die we niet zeker weten claimen we niet.
-Map<String, Object?>? readCallSources(String sessionDir) {
+/// ontbraken. [wavPath] is de duurzame wav van de sessie; het manifest
+/// ligt als `sources.json` ernaast. Synchroon opzet: het bestand is
+/// hooguit enkele honderden bytes, en een async lees zou in een
+/// widgettest-zone nooit terugkomen. Null bij geen manifest, stuk JSON
+/// of een vreemde vorm: een provenance die we niet zeker weten claimen
+/// we niet.
+Map<String, Object?>? readCallSources(String wavPath) {
   try {
-    final file = File(p.join(sessionDir, 'sources.json'));
+    final file = File(p.join(p.dirname(wavPath), 'sources.json'));
     if (!file.existsSync()) return null;
     final decoded = jsonDecode(file.readAsStringSync());
     // Alleen de vorm die de sessie zelf schreef tellen we mee — een

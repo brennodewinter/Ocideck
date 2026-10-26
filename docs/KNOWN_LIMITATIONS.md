@@ -287,8 +287,15 @@ camera, microphone and screen share. A whole-call audio source for
 transcription is available on **macOS and web only** — the forked media
 binding delivers per-track decoded PCM there (proven in a real call), while
 Windows, Linux, iOS and Android honestly report no per-source tap, so the
-call panel offers no record button rather than a broken one. *(Added
-2026-10-26, issues #2538 and #2527.)*
+call panel offers no record button rather than a broken one. The recording,
+the live-server opt-in and the transcript then follow the same contract as
+a microphone take — per-session consent, no silent upload, and a dropped
+live link never stops the take. What a call adds is provenance:
+`sources.json` records track ids, roles, frame counts and silence ticks
+per source, so a transcript can name missing source audio in an
+*Ontbrekend* line — but it never labels speakers from the participant
+roster, and a missing or malformed manifest claims nothing. *(Added
+2026-10-26, issues #2538 and #2527; recording contract #2528–#2530.)*
 
 ## Browse… shows what the system file dialog shows
 
