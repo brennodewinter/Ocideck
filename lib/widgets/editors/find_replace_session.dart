@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 
 import '../../utils/text_search.dart';
@@ -46,6 +48,10 @@ class FindReplaceSession {
   bool _caseSensitive = false;
   int _matchIndex = -1;
   List<TextMatchRange> _matches = const [];
+  Timer? _refreshTimer;
+  bool _resetMatchAfterTyping = false;
+
+  void dispose() => _refreshTimer?.cancel();
 
   /// Of de zoekbalk getoond wordt.
   bool get visible => _visible;
@@ -80,6 +86,7 @@ class FindReplaceSession {
   /// Sluit de balk en haal de markering weg. De vraag zelf blijft staan: wie
   /// hem per ongeluk sluit, vindt hem bij heropenen terug.
   void close() {
+    _refreshTimer?.cancel();
     _visible = false;
     _matchIndex = -1;
     _matches = const [];
@@ -93,6 +100,7 @@ class FindReplaceSession {
   /// slaan dan nergens meer op. Opnieuw tellen doet dit bewust níet — dat zou de
   /// weergave naar een treffer trekken in tekst die de lezer nog moet zien.
   void clearMatches() {
+    _refreshTimer?.cancel();
     _matches = const [];
     _matchIndex = -1;
     onChanged();
@@ -103,6 +111,31 @@ class FindReplaceSession {
   void setQuery(String value) {
     _query = value;
     recount(selectFirst: true);
+  }
+
+  void _scheduleRefresh({required bool resetMatch}) {
+    _resetMatchAfterTyping = _refreshTimer?.isActive == true
+        ? _resetMatchAfterTyping || resetMatch
+        : resetMatch;
+    _refreshTimer?.cancel();
+    _refreshTimer = Timer(const Duration(milliseconds: 150), _refreshMatches);
+  }
+
+  void _refreshMatches() {
+    _refreshTimer?.cancel();
+    _matches = _proseMatches();
+    _matchIndex = _matches.isEmpty
+        ? -1
+        : _resetMatchAfterTyping
+        ? 0
+        : _matchIndex.clamp(0, _matches.length - 1);
+    _resetMatchAfterTyping = false;
+    onChanged();
+    syncHighlights();
+  }
+
+  void _flushPendingRefresh() {
+    if (_refreshTimer?.isActive == true) _refreshMatches();
   }
 
   /// Treffers in de lopende tekst van [controller.text]: machinesyntax
@@ -121,17 +154,12 @@ class FindReplaceSession {
   /// zoekterm niet invullen (#1760).
   void onQueryFieldChanged(String value) {
     _query = value;
-    _matches = _proseMatches();
-    _matchIndex = _matches.isEmpty ? -1 : 0;
-    onChanged();
-    syncHighlights();
+    _scheduleRefresh(resetMatch: true);
   }
 
-  /// De vervangtekst. Verandert niets aan de treffers, dus alleen opnieuw
-  /// opbouwen.
+  /// De vervangtekst verandert niets aan de treffers of de zoekbalk.
   void setReplacement(String value) {
     _replacement = value;
-    onChanged();
   }
 
   /// Hoofdlettergevoeligheid aan of uit: opnieuw tellen, maar blijf staan waar
@@ -153,6 +181,8 @@ class FindReplaceSession {
   /// de treffer waar hij stond, tenzij die door de nieuwe telling niet meer
   /// bestaat.
   void recount({bool selectFirst = false}) {
+    _refreshTimer?.cancel();
+    _resetMatchAfterTyping = false;
     final matches = _proseMatches();
     _matches = matches;
     int? jumpIndex;
@@ -180,16 +210,12 @@ class FindReplaceSession {
   /// waar je bezig bent.
   void refreshWhileTyping() {
     if (!_visible || _query.isEmpty) return;
-    final matches = _proseMatches();
-    _matches = matches;
-    _matchIndex = matches.isEmpty
-        ? -1
-        : _matchIndex.clamp(0, matches.length - 1);
-    syncHighlights();
+    _scheduleRefresh(resetMatch: false);
   }
 
   /// Naar de volgende treffer, rondlopend aan het eind.
   void next() {
+    _flushPendingRefresh();
     if (_matches.isEmpty) return;
     _matchIndex = nextMatchIndex(_matchIndex, _matches.length);
     onChanged();
@@ -199,6 +225,7 @@ class FindReplaceSession {
 
   /// Naar de vorige treffer, rondlopend aan het begin.
   void previous() {
+    _flushPendingRefresh();
     if (_matches.isEmpty) return;
     _matchIndex = previousMatchIndex(_matchIndex, _matches.length);
     onChanged();
@@ -210,6 +237,7 @@ class FindReplaceSession {
   /// blijft op dezelfde plek in de rij staan, zodat herhaald vervangen door de
   /// tekst heen loopt in plaats van steeds terug naar het begin te gaan.
   void replaceCurrent() {
+    _flushPendingRefresh();
     if (_matchIndex < 0 || _matchIndex >= _matches.length) return;
     final match = _matches[_matchIndex];
     final next = replaceRange(controller.text, match, _replacement);
@@ -230,6 +258,7 @@ class FindReplaceSession {
   /// de oude posities slaan nergens meer op en een nieuwe telling zou de cursor
   /// door het hele document laten springen.
   void replaceAll() {
+    _flushPendingRefresh();
     if (_query.isEmpty) return;
     final before = controller.selection;
     final result = replaceAllInText(

@@ -231,6 +231,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   @override
   void dispose() {
     _validationTimer?.cancel();
+    _find.dispose();
     _ctrl.removeListener(_onDocumentChanged);
     _ctrl.dispose();
     _scrollController.dispose();
