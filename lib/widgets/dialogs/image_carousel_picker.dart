@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pasteboard/pasteboard.dart';
 import '../../theme/image_picker_palette.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/gestures.dart';
 import 'package:path/path.dart' as p;
 import '../../services/ai_client_service.dart';
 import '../../services/caption_service.dart';
