@@ -811,6 +811,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'vergadering': 'meeting',
+  'de vergadering': 'the meeting',
+  'Vergaderingsopname': 'Meeting recording',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'The meeting or the audio source dropped out. What was already recorded is saved.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'About {s} s of source audio was missing across {n} source(s) — track or network loss during the recording.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s of source audio across {n} source(s) — track or network loss during the recording.',
   'Vergadering': 'Meeting',
   'Vergaderingsaudio': 'Meeting audio',
   'Ontvangen brokken:': 'Chunks received:',
@@ -858,10 +867,6 @@ const _dutchSourceAddEn = {
       'The recording failed. You are still in the meeting. Start again if you want to record.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'The meeting itself reports a recording. That is not OciDeck\'s recording.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Audio does not go to the transcription server until you allow that separately.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Send audio to the chosen transcription server',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'The meeting could not send your audio — try turning the source off and on again.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

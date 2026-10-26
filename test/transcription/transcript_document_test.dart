@@ -53,6 +53,29 @@ void main() {
       expect(md, isNot(contains('media/')));
       expect(detectTranscript(md), isA<ValidTranscript>());
     });
+
+    test('een callopname met gaten schrijft de ontbrekend-regel (#2530)', () {
+      final md = buildTranscriptMarkdown(
+        const TranscriptProvenance(
+          title: 'vergadering 22 oktober',
+          sourceLabel: 'Vergaderingsopname',
+          recordedAt: '2026-10-22 14:03',
+          sourceKindLabel: 'vergadering',
+          gapsLabel:
+              '~4 s bronaudio over 1 bron(nen) — track- of netwerkverlies '
+              'tijdens de opname.',
+        ),
+        'Tekst.\n',
+      );
+      expect(
+        md,
+        contains(
+          'Ontbrekend: ~4 s bronaudio over 1 bron(nen) — track- of '
+          'netwerkverlies tijdens de opname.\n',
+        ),
+      );
+      expect(detectTranscript(md), isA<ValidTranscript>());
+    });
   });
 
   group('formatTranscriptBody', () {

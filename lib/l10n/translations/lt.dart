@@ -1611,6 +1611,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'vergadering': 'susitikimas',
+  'de vergadering': 'susitikimas',
+  'Vergaderingsopname': 'Susitikimo įrašas',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Susitikimas arba garso šaltinis dingo. Kas jau buvo, išsaugota.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Trūko apie {s} s šaltinio garso per {n} šaltinį(-ius) — takelio arba tinklo praradimas įrašymo metu.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s šaltinio garso per {n} šaltinį(-ius) — takelio arba tinklo praradimas įrašymo metu.',
   'Vergadering': 'Susitikimas',
   'Vergaderingsaudio': 'Susitikimo garsas',
   'Ontvangen brokken:': 'Gautos dalys:',
@@ -1658,10 +1667,6 @@ const _dutchSourceAddLt = <String, String>{
       'Įrašas nepavyko. Vis dar esi susitikime. Pradėk iš naujo, jei nori įrašyti.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Susitikimas pats praneša apie įrašą. Tai nėra OciDeck įrašas.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Garsas neina į transkripcijos serverį, kol to atskirai neleidžia.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Siųsk garsą į pasirinktą transkripcijos serverį',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Susitikimas negalėjo perduoti jūsų garso — pabandykite išjungti ir vėl įjungti šaltinį.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

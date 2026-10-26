@@ -1608,6 +1608,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'vergadering': 'Sitzig',
+  'de vergadering': 'd\'Sitzig',
+  'Vergaderingsopname': 'Ufnahm vo de Sitzig',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'D Sitzig oder d Audioquäll isch weggheit. Was scho da isch, isch gspicheret.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Öppe {s} s Quäll-Audio hei gfehlt uf {n} Quäll(e) — Track- oder Netzverluscht während de Ufnahm.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s Quäll-Audio uf {n} Quäll(e) — Track- oder Netzverluscht während de Ufnahm.',
   'Vergadering': 'Bsprächig',
   'Vergaderingsaudio': 'Bsprächigsaudio',
   'Ontvangen brokken:': 'Empfange Päckli:',
@@ -1655,10 +1664,6 @@ const _dutchSourceAddGsw = <String, String>{
       'D Ufnahm isch fehlgschlage. Du bisch no i de Sitzig. Start nomal, wennd wotsch uufnäh.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'D Sitzig meldet sälber e Ufnahm. Das isch nöd d Ufnahm vo OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Audio gaat nöd zum Transkriptionsserver, bis du das separat erlaubsch.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Schick Audio an de gwählte Transkriptionsserver',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'D Sitzig het diin Ton nöd chöne übermitte — versuech d Quell uusz- und wider iizschalte.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

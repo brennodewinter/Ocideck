@@ -1603,6 +1603,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'vergadering': 'sapulce',
+  'de vergadering': 'sapulce',
+  'Vergaderingsopname': 'Sapulces ieraksts',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Sapulce vai audio avots pazuda. Kas jau bija, ir saglabāts.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Trūka apmēram {s} s avota audio pa {n} avotu(-iem) — ieraksta vai tīkla zudums ieraksta laikā.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s avota audio uz {n} avotu(-iem) — ieraksta vai tīkla zudums ieraksta laikā.',
   'Vergadering': 'Tikšanās',
   'Vergaderingsaudio': 'Tikšanās audio',
   'Ontvangen brokken:': 'Saņemtie fragmenti:',
@@ -1650,10 +1659,6 @@ const _dutchSourceAddLv = <String, String>{
       'Ieraksts neizdevās. Tu joprojām esi sapulcē. Sāc no jauna, ja gribi ierakstīt.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Sapulce pati ziņo par ierakstu. Tas nav OciDeck ieraksts.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Skaņa neiet uz transkripcijas serveri, kamēr tu to atsevišķi neļauj.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Sūti skaņu uz izvēlēto transkripcijas serveri',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Sapulce nevarēja nosūtīt jūsu skaņu — mēģiniet izslēgt un atkal ieslēgt avotu.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

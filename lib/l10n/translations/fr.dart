@@ -652,6 +652,15 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'vergadering': 'réunion',
+  'de vergadering': 'la réunion',
+  'Vergaderingsopname': 'Enregistrement de la réunion',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'La réunion ou la source audio a disparu. Ce qui était déjà enregistré est sauvegardé.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Environ {s} s d\'audio source manquaient sur {n} source(s) — perte de piste ou de réseau pendant l\'enregistrement.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s d\'audio source sur {n} source(s) — perte de piste ou de réseau pendant l\'enregistrement.',
   'Vergadering': 'Réunion',
   'Vergaderingsaudio': 'Audio de la réunion',
   'Ontvangen brokken:': 'Paquets reçus :',
@@ -699,10 +708,6 @@ const _dutchSourceAddFr = {
       'L\'enregistrement a échoué. Tu es encore dans la réunion. Recommence si tu veux enregistrer.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'La réunion signale elle-même un enregistrement. Ce n\'est pas l\'enregistrement d\'OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'L\'audio ne part pas vers le serveur de transcription tant que tu ne l\'autorises pas à part.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Envoyer l\'audio au serveur de transcription choisi',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'La réunion n\'a pas pu transmettre votre son — essayez de réactiver la source.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

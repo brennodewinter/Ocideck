@@ -1620,6 +1620,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'vergadering': 'нарада',
+  'de vergadering': 'нарада',
+  'Vergaderingsopname': 'Запис наради',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Нарада або джерело звуку зникло. Те, що вже було, збережено.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Бракувало приблизно {s} с аудіо джерела в {n} джерелі(ах) — втрата доріжки або мережі під час запису.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} с аудіо джерела на {n} джерелі(ах) — втрата доріжки або мережі під час запису.',
   'Vergadering': 'Нарада',
   'Vergaderingsaudio': 'Звук наради',
   'Ontvangen brokken:': 'Отримано фрагментів:',
@@ -1667,10 +1676,6 @@ const _dutchSourceAddUk = <String, String>{
       'Запис не вдався. Ти ще на нараді. Почни знову, якщо хочеш записувати.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Нарада сама повідомляє про запис. Це не запис OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Звук не йде на сервер транскрипції, доки ти окремо це не дозволиш.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Надіслати звук на обраний сервер транскрипції',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Нарада не змогла передати ваш звук — спробуйте вимкнути та знову ввімкнути джерело.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

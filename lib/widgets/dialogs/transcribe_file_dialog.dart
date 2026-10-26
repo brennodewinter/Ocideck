@@ -20,7 +20,11 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:path/path.dart' as p;
+
 import '../../l10n/app_localizations.dart';
+import '../../meetings/call_audio_manifest.dart';
+import '../../meetings/call_recording.dart';
 import '../../services/transcription/capture_source.dart';
 import '../../services/transcription/file_capture_source.dart';
 import '../../services/transcription/local_whisper_engine.dart';
@@ -81,6 +85,11 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   TranscriptionEngine? _engine;
   String? _stagingDir;
 
+  /// Herkomst van een callopname (#2530): ligt de duurzame wav in een
+  /// sessiemap met `sources.json`, dan is dit geen "bestand" maar een
+  /// vergadering — en het manifest zegt welke bronstukken ontbraken.
+  Map<String, Object?>? _callManifest;
+
   /// De talen waar de lokale engine voor staat — hetzelfde lijstje als
   /// zijn `capabilities()`, auto voorop.
   static const _languages = ['auto', 'nl', 'en', 'de', 'fr', 'es'];
@@ -94,6 +103,9 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   Future<void> _describe() async {
     final source = _fileSource();
     try {
+      // Synchroon: het manifest is hooguit enkele honderden bytes en een
+      // async lees keert in een widgettest-zone nooit terug.
+      _callManifest = readCallSources(p.dirname(widget.sourcePath));
       final info = await source.describe(widget.sourcePath);
       if (mounted) setState(() => _info = info);
     } on Object catch (e) {
@@ -211,16 +223,26 @@ class _TranscribeFileDialogState extends ConsumerState<TranscribeFileDialog> {
   ) async {
     final l10n = context.l10n;
     final title = stemOfFileName(widget.displayName);
+    final call = _callManifest != null;
+    final gaps = call ? missingCallAudio(_callManifest) : null;
     final provenance = TranscriptProvenance(
       title: title,
       sourceLabel: widget.displayName,
       recordedAt: _formatNow(),
-      sourceKindLabel: l10n.d('bestand'),
+      sourceKindLabel: call ? l10n.d('vergadering') : l10n.d('bestand'),
       durationLabel: duration > Duration.zero
           ? _formatDuration(duration)
           : null,
       engineLabel: _engineLabel(engine, l10n),
       languageCode: _language == 'auto' ? null : _language,
+      gapsLabel: gaps == null
+          ? null
+          : l10n
+                .d(
+                  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.',
+                )
+                .replaceAll('{s}', '${(gaps.$2.inMilliseconds / 1000).round()}')
+                .replaceAll('{n}', '${gaps.$1}'),
       audioRelPath: null, // de bewaarkeuze landt bij Opslaan (§3.2)
     );
     final markdown = buildTranscriptMarkdown(
