@@ -272,6 +272,22 @@ served the app — so that host sees the address you typed. The first visit
 downloads a large bundle. → [HOSTING.md](HOSTING.md), section *Web build
 limitations to communicate*
 
+## Video calls are proven on macOS and web — not yet on Windows or Linux
+
+A real two-person Jitsi call was proven on the released macOS build and on the
+released web bundle (preflight, join, two-way audio/video, mute, camera, screen
+share, leave and rejoin — full matrix in
+[design/NATIVE_CALLS.md](design/NATIVE_CALLS.md)). The Windows and Linux builds
+share the same code path but were **not** proven on hardware, so they are not
+claimed; treat a call there as untested until a real call says otherwise.
+Browser-specific boundaries: the page cannot pin the server certificate, plain
+`http` meeting links work only to a literal loopback address (`127.0.0.1`, not
+the name `localhost`), and the browser asks its own per-site permissions for
+camera, microphone and screen share. A whole-call audio source for
+transcription is **not** available on any platform — the media binding exposes
+no per-participant decoded audio taps, so the call panel honestly offers no
+record button rather than a broken one. *(Added 2026-10-26, issue #2538.)*
+
 ## Browse… shows what the system file dialog shows
 
 Open → Browse… hands the choice to the operating system's own file dialog.

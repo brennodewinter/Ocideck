@@ -1,6 +1,6 @@
 # OciDeck — Native Calls: one interface, Jitsi + Matrix backends (Design)
 
-> **Status:** design proposal — partially built (F1–F3.4c: Jitsi recognition/preflight, signalling-join and on-device media proven — real RTP renders a counterparty's video in a texture) · **Status last reviewed:** 2026-10-24 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — partially built (F1–F3.4c plus join/lifecycle/screenshare: two-person calls proven on the released macOS build and on the released web bundle — real RTP renders a counterparty's video in a texture; Windows and Linux remain untested) · **Status last reviewed:** 2026-10-26 · **Published by:** Stichting LibreKAT
 
 > **A design proposal — not yet implemented.**
 > This document describes a *future* capability. It is kept separate from the
@@ -543,7 +543,45 @@ only leaves *niet getest* behind after the real proof.
 | Apparaatverlies mid-call | niet getest | pad aanwezig (`onEnded` → `localTrackLost`); geen los apparaat op de testmachine |
 | Netwerk weg/terug | niet getest | reconnect via leave+join, niet via echte uitval |
 | Media-E2EE | niet beschikbaar | gerapporteerd als uit; frame-cryptor ontbreekt |
-| Browserclient | niet getest | naad open (CSP `wss:`, browser-WebSocket, geen pin); tweepersoonsproef nog open (#2544) |
+| Browserclient | beschikbaar | tweepersoonsproef geslaagd op de releasebundel (#2538, matrix hieronder) |
+
+#### Capability matrix — web (proven 2026-10-26, #2538)
+
+Same vocabulary. The proof ran the hardened release bundle (`make build-web`,
+`--csp --no-web-resources-cdn`) served same-origin from the pinned testbed at
+`stable-11248`, driven in real Chrome via `probe/webcall.js`, against two
+independent browser clients (`probe/solo.js`, fake devices). Screenshots and the
+semantics/console log live in the gitignored `probe/probe-out/webcall/`.
+
+| Vermogen | Status | Onderbouwing |
+|---|---|---|
+| Gast-join Jitsi | beschikbaar | preflight → join, anonieme nick `ocideck_…`, roster van drie |
+| Tweeweg-audio | beschikbaar | twee remote audiostreams `readyState 4`; eigen track zichtbaar bij de tegenpartij (`remoteAudios` 1→2) |
+| Tweeweg-video | beschikbaar | remote 1280×720 gedecodeerd (`readyState 4`); eigen camera aan → `remoteVideos` 3→4 bij de tegenpartij |
+| Mute / camera-toggle | beschikbaar | mute-, camera- en deelstatus wisselen in de UI; JVB houdt de gemute track vast (count blijft, bron stopt) |
+| Schermdelen | beschikbaar | `getDisplayMedia` via browserpermissie; "Je deelt je scherm." live, share vervangt de camerabron zoals Jitsi dat doet |
+| Leave / rejoin | beschikbaar | "De vergadering is beëindigd." na leave; rejoin in een verse kamer leverde meteen weer remote media |
+| Mislukte join-melding | beschikbaar | `localhost` geweigerd — `http` mag alleen naar een *letterlijk* loopback-adres; en "Deze vergadering vereist goedkeuring van een beheerder" toen de kamer een moderator had, met het join-verzoek zichtbaar maar niet toegelaten bij Jicofo |
+| Apparaatverlies mid-call | niet getest | geen los apparaat in de headless proef |
+| Netwerk weg/terug | niet getest | geen echte uitval gesimuleerd |
+| Media-E2EE | niet beschikbaar | paneel meldt het eerlijk als uit; egress-adressen zichtbaar |
+| Certificaatpinning | niet beschikbaar | een browsertab kan de serveridentiteit niet pinnen zoals de desktop; de pagina-CSP en `wss`/`https`-only (loopback-uitzondering) zijn de grens — dit is bewust, geen bug |
+
+#### Platformdekking en de call-audiobron (#2527)
+
+- **macOS** — bewezen op het release-artefact (matrix hierboven).
+- **web** — bewezen op de releasebundel (matrix hierboven).
+- **Windows, Linux** — **niet getest.** Er stond geen Windows- of Linux-machine
+  voor een echte tweepersoonsproef; beide builds delen dezelfde codepaden en
+  bindingen als macOS, maar de proef is niet gedaan en wordt dus ook niet
+  geclaimd. Een claim volgt pas na een echte call per platform.
+- **Call-audiobron voor transcriptie (#2527) — niet vrijgegeven.** De huidige
+  `flutter_webrtc`-binding levert geen aparte, gedecodeerde audiotaps per bron:
+  de lokale uitgaande stroom na mute en de remote gedecodeerde stroom zijn niet
+  als afzonderlijke sample-bronnen bereikbaar. `call_audio_source.dart` meldt
+  dat eerlijk; het callpaneel zegt "Deze vergadering levert geen aparte
+  audiobron" in plaats van een dode opnameknop. Vrijgave vraagt een binding met
+  per-bron audio-access, niet meer UI.
 
 *(Heads-up for a cold reader: §9's "New files (proposed)" list predates this and is
 partly stale — e.g. `xmpp_connection.dart` was built and then removed in F3.1. The

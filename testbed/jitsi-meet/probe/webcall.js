@@ -191,7 +191,12 @@ async function run(line) {
   const ctx = await browser.newContext({
     permissions: ['microphone', 'camera', 'clipboard-read'],
     ignoreHTTPSErrors: true,
-    viewport: { width: 1440, height: 900 },
+    // Grote viewports leggen lange instellingenlijsten helemaal bloot —
+    // scrollen via de semantics-laag is niet betrouwbaar, zichtbaar zijn wel.
+    viewport: {
+      width: Number(process.env.VIEWPORT_W || 1440),
+      height: Number(process.env.VIEWPORT_H || 900),
+    },
   });
   // De module is default-uit; dezelfde prefs-vlag als de instellingenkaart
   // schrijft — maar dan deterministisch vóór de eerste frame.

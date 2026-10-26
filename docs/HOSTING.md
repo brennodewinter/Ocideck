@@ -343,6 +343,7 @@ services named below.
 | "Missing media" slide-quality check | ✗ | It resolves paths on disk. |
 | Cloud AI | ✗ | Blocked by design, not by platform — see [SECURITY_DESIGN.md](SECURITY_DESIGN.md) §7. |
 | URL import of decks | ✓ | Works on web through the fetch-proxy, under the same security gate as desktop (§4). |
+| Video meetings (Jitsi) | ✓ | Proven in a real two-person call on the released bundle. Needs `wss:` in `connect-src` (§3) plus the browser's own per-site camera/microphone/display-capture permission. A browser cannot pin the server certificate — `https`/`wss` and the user's server choice are the boundary; plain `http`/`ws` is accepted only to a literal loopback address. |
 | Export (PDF, PPTX, HTML), sealing, encrypted packages | ✓ | Delivered as browser downloads. |
 
 Also: the web build is more memory-constrained than desktop, and very large

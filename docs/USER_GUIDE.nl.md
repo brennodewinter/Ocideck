@@ -6675,10 +6675,12 @@ het delen stopt; een bron die geweigerd wordt of wegvalt beëindigt het
 delen met een melding, nooit met een dode knop. Media-versleuteling wordt
 als feit gerapporteerd, niet als belofte: het paneel toont de geverifieerde
 status van de call en de echte uitgaansadressen, en claimt geen
-end-to-end-versleuteling waar die niet bewezen is. De browserversie weigert
-het deelnemen — een browsertabblad kan de vastgelijmde serveridentiteit
-niet bewijzen die de desktop-app verifieert — dus bellen is vandaag
-desktop-only.
+end-to-end-versleuteling waar die niet bewezen is. Deelnemen werkt ook
+vanuit de browserversie — bewezen in een echte tweepersoonscall — met
+twee eerlijke verschillen: de browser kan het servercertificaat niet
+pinnen zoals de desktop-app dat doet, en een kale `http`-vergaderlink
+wordt alleen geaccepteerd naar een letterlijk loopback-adres
+(`127.0.0.1`, niet de naam `localhost`).
 
 **Rechten op macOS.** macOS vraagt per bron om toestemming, met de eigen
 toelichting van OciDeck: de microfoon bij de join, de camera pas als u hem
@@ -6721,7 +6723,7 @@ voordat je het deck van een klant erop opent. Dezelfde bundle zelf hosten is
 | Een deck importeren vanuit een URL | **Werkt**, door dezelfde beveiligingspoort als op desktop. |
 | OpenKAT-rapporten importeren | Zichtbaar op Integraties maar **uitgeschakeld** — map-import en servertokens hebben desktop nodig (sleutelhanger en lokale mappen). |
 | Opnemen vanaf de microfoon | **Werkt** voor de microfoon in de kamer, en voor het geluid van een tabblad waar Chromium dat kan delen. Het bestand blijft in het tabblad (`mem:`) tot je het bewaart; herladen is het kwijt. Firefox en Safari delen geen tabgeluid. |
-| Deelnemen aan een Jitsi-vergadering | Afwezig. De linkcontrole faalt dicht: een browsertabblad kan de vastgelijmde serveridentiteit niet bewijzen die de desktop-join verifieert — de weigering is dus bewust, geen ontbrekende knop. |
+| Deelnemen aan een Jitsi-vergadering | **Werkt — bewezen** in een echte tweepersoonscall op de uitgebrachte bundel (preflight, join, tweeweg audio en video, dempen, camera, schermdelen, verlaten en opnieuw deelnemen). De pagina staat een beveiligde WebSocket toe naar de vergadering die je koos — platte tekst alleen naar een letterlijk loopback-adres — en, nadat de browser vraagt, camera, microfoon en schermdelen alleen voor deze site. De browser kan het servercertificaat niet pinnen zoals de desktop-app; vertrouwen in de server rust dus op `https`/`wss` en je eigen serverkeuze. |
 | **Één** PowerPoint-, Keynote- of Impress-bestand importeren | **Werkt**. De conversie draait op de bytes die je koos en het resultaat opent in een tabblad. |
 | **Meerdere** presentaties tegelijk importeren | Afwezig. De wachtrij schrijft elk geconverteerd deck als een bestand naar een map die je kiest, en de browser heeft geen map om te kiezen. Het dialoog zegt dat in plaats van een knop aan te bieden die niet kan werken. |
 | Exporteren, verzegelen, versleutelde packages | **Werkt**, geleverd als downloads. Een export die uit meer dan één bestand bestaat (een geredigeerd rapport met zijn manifest, een sessie met een bestand per dia) komt aan als één ZIP, omdat een browser de tweede automatische download op rij tegenhoudt. En de bewoording is met opzet anders: de webversie zegt *aangeboden als download* in plaats van *geëxporteerd naar*, omdat een pagina niet kan zien of het bestand werkelijk in je downloadmap terechtkwam. |

@@ -64,18 +64,22 @@ Prosody or a Matrix bridge), opened via `dart:io`'s `WebSocket`/`HttpClient` —
 the `http` package — and reached only when that module is on and the user connects.
 It is NetGuard-guarded like every other egress (TLS pinned to the validated
 address, internal targets refused unless the user opts in per server as for WebDAV,
-stream redirects rejected) and is desktop-only —
-the web build fails closed, so it never touches the CSP below. The same module's
+stream redirects rejected). On the web build the same module uses a browser-only
+seam instead (`jitsi_config_web.dart`, `xmpp_frame_transport_web.dart`): `https`/
+`wss` only, with plain `http`/`ws` allowed solely to a *literal* loopback address —
+`localhost` the name is refused, `127.0.0.1` is not. A browser cannot pin the
+certificate, so the page CSP plus the user's server choice is the boundary there.
+The same module's
 **media plane** — WebRTC via `flutter_webrtc` (libwebrtc), added for native calls
 (`docs/design/NATIVE_CALLS.md` §3, `assurance/ketenkeuring-flutter-webrtc.md`) — is
 a further outbound stack, and the **one class of traffic that does not pass through
 NetGuard**: ICE/STUN/TURN over UDP and the SRTP media streams are opened by
 libwebrtc, not by an `http` client, so they are neither resolve-guarded nor pinned.
 This is a real, acknowledged gap (documented in `SECURITY.md`). The design bounds
-it — media is to follow the NetGuard-validated signalling origin and reach only the
-TURN/SFU origins that signalling hands it, never an arbitrary host — but that
-enforcement lands with the Jitsi media join (a later step); this slice opens no
-media at all. What already holds: the module is default-off, so no media code runs
+it — media follows the NetGuard-validated signalling origin and reaches only the
+TURN/SFU origins that signalling hands it, never an arbitrary host — and the call
+panel lists the actual media egress addresses during a call. What already holds:
+the module is default-off, so no media code runs
 until the user turns it on, and if signalling fails no media channel opens. Media
 E2EE is off on iOS/macOS (a known `flutter_webrtc` crash) and OciDeck says so rather
 than claim it. And
