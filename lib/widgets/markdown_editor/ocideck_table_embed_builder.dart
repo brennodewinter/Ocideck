@@ -94,6 +94,12 @@ class _EditableOciMarkedTable extends StatefulWidget {
 class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
   late TableEmbedBinding _binding;
   final GlobalKey _boundsKey = GlobalKey();
+  String? _renderedSource;
+  String? _scannedSource;
+  OciMarkedTableScan? _renderedScan;
+  ThemeProfile? _renderedProfile;
+  TableEditController? _renderedEditor;
+  DocumentMarkdownView? _tableView;
 
   TableEditController get _editor => _binding.editor;
 
@@ -604,7 +610,12 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final scan = scanOciMarkedTables(_source);
+    final source = _source;
+    if (_scannedSource != source) {
+      _scannedSource = source;
+      _renderedScan = scanOciMarkedTables(source);
+    }
+    final scan = _renderedScan!;
     final table = scan.tables.firstOrNull;
     final carrier = table?.marker;
     final isView = carrier?.kind == OciMarkerKinds.view;
@@ -730,20 +741,31 @@ class _EditableOciMarkedTableState extends State<_EditableOciMarkedTable> {
             table != null)
           _bowtieDiagramView(context, table)
         else
-          DocumentMarkdownView(
-            _binding.tableSource,
-            maxTextWidth: null,
-            themeProfile: widget.profile,
-            chartTheme: widget.profile,
-            // Een gekoppelde weergave is lees-only in de editor: de cellen
-            // zijn afschriften van de bron en zouden bij de volgende
-            // verversing toch verdwijnen (D2). Bron- en registertabellen
-            // bewerk je wel.
-            tableEditController: isView ? null : _editor,
-            onSortTableColumn: isView ? null : _sort,
-          ),
+          _cachedTableView(source, isView),
       ],
     );
+  }
+
+  Widget _cachedTableView(String source, bool isView) {
+    final editor = isView ? null : _editor;
+    if (_tableView == null ||
+        _renderedSource != source ||
+        _renderedProfile != widget.profile ||
+        _renderedEditor != editor) {
+      _renderedSource = source;
+      _renderedProfile = widget.profile;
+      _renderedEditor = editor;
+      _tableView = DocumentMarkdownView(
+        _binding.tableSource,
+        maxTextWidth: null,
+        themeProfile: widget.profile,
+        chartTheme: widget.profile,
+        // Gekoppelde weergaven zijn afschriften; alleen de bron is bewerkbaar.
+        tableEditController: editor,
+        onSortTableColumn: isView ? null : _sort,
+      );
+    }
+    return _tableView!;
   }
 
   /// De diagram-stand van #2496: het afgeleide Mermaid-plaatje boven de

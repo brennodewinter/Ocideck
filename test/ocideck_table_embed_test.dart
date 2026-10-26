@@ -9,6 +9,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor_theme.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
+import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 
 void main() {
   const source = '''
@@ -73,6 +74,29 @@ Een alinea vooraf.
     // De marker is drager, geen inhoud.
     expect(find.textContaining('<!-- ocideck:risks'), findsNothing);
   });
+
+  testWidgets(
+    'ongewijzigde risicotabel behoudt haar weergave bij tekst erboven',
+    (tester) async {
+      final controller = await pumpEditor(tester);
+      final table = find.byType(DocumentMarkdownView);
+      final before = tester.widget<DocumentMarkdownView>(table);
+
+      controller.replaceText(
+        0,
+        0,
+        'Extra tekst. ',
+        const TextSelection.collapsed(offset: 0),
+      );
+      await tester.pump();
+
+      expect(
+        identical(tester.widget<DocumentMarkdownView>(table), before),
+        isTrue,
+      );
+      expect(find.textContaining('Sensor valt uit'), findsWidgets);
+    },
+  );
 
   testWidgets('loskoppelen maakt een gewone tabel van de momentopname', (
     tester,

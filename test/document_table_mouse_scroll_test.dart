@@ -10,6 +10,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
+import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 
 void main() {
   testWidgets(
@@ -71,6 +72,15 @@ void main() {
       expect(quill.controller.selection, selection);
       expect(
         tester.widget<TextField>(second).focusNode!.hasPrimaryFocus,
+        isTrue,
+      );
+
+      final tableView = find.byType(DocumentMarkdownView);
+      final beforeView = tester.widget<DocumentMarkdownView>(tableView);
+      quill.controller.replaceText(0, 0, 'Extra ', quill.controller.selection);
+      await tester.pump();
+      expect(
+        identical(tester.widget<DocumentMarkdownView>(tableView), beforeView),
         isTrue,
       );
 
