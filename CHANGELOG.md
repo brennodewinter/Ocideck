@@ -10,14 +10,19 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
-- **Vergaderen in de browser, de naad (#2544).** De webversie haalt
-  `config.js` op en opent de XMPP-websocket van een vergadering die je
-  zelf aanwijst. De browser is daar de netwerkgrens: geen certificaatpin,
-  wel `https`/`wss`, en platte `http`/`ws` alleen naar een letterlijk
-  loopback-adres. De pagina staat `wss:` toe, en camera, microfoon en
+- **Vergaderen in de browser, de naad (#2544) én de proef (#2538).** De
+  webversie haalt `config.js` op en opent de XMPP-websocket van een
+  vergadering die je zelf aanwijst. De browser is daar de netwerkgrens:
+  geen certificaatpin, wel `https`/`wss`, en platte `http`/`ws` alleen
+  naar een letterlijk loopback-adres (`127.0.0.1`; de naam `localhost`
+  wordt geweigerd). De pagina staat `wss:` toe, en camera, microfoon en
   schermdeling alleen voor de eigen site — de browser vraagt nog steeds
-  zelf. Een echte tweepersoonscall op een uitgebrachte webbuild is hiermee
-  niet bewezen; die proef staat nog open.
+  zelf. De echte tweepersoonsproef op de uitgebrachte bundel is inmiddels
+  geslaagd: preflight, join, tweeweg audio en video, dempen, camera,
+  schermdelen, verlaten en opnieuw deelnemen — de volledige
+  platformmatrix met bewijs staat in `docs/design/NATIVE_CALLS.md`.
+  Windows en Linux delen hetzelfde codepad maar zijn **niet getest** op
+  hardware en worden dus niet geclaimd.
 
 - **Opnemen vanuit een call, de bediening (#2528).** In een verbonden
   vergadering staat *Opnemen en transcriberen*. Zonder audiobron van de
@@ -31,14 +36,17 @@ All notable changes to OciDeck are documented in this file.
   schrijft de audio nergens weg en stuurt hem nergens heen. De huidige
   call levert die audiobron nog niet, dus de knop blijft daar weg.
 
-- **Audiobron van een call, de naad (#2527).** Een opname van een
-  OciDeck-call vraagt lokale audio ná het dempen en de audio van de
-  ander ná decodering, apart, met een tijdstip en een bron. Die tap kan
-  de huidige WebRTC-binding niet leveren: die schrijft hooguit een mix
-  naar een bestand. De capability zegt daarom dat een hele-call-opname
-  er niet is. Een microfoon alleen krijgt die naam niet, en een
-  track-id of het opname-lampje van de provider start niets. De proef
-  op een echte tweepersoonscall staat nog open.
+- **Audiobron van een call, de naad (#2527) en het vonnis (#2538).** Een
+  opname van een OciDeck-call vraagt lokale audio ná het dempen en de
+  audio van de ander ná decodering, apart, met een tijdstip en een bron.
+  Die tap kan de huidige WebRTC-binding niet leveren: die schrijft
+  hooguit een mix naar een bestand. De capability zegt daarom dat een
+  hele-call-opname er niet is. Een microfoon alleen krijgt die naam niet,
+  en een track-id of het opname-lampje van de provider start niets. De
+  proef op de echte tweepersoonscalls bevestigt dit: geen platform
+  levert de per-bron gedecodeerde taps, dus de bron blijft niet
+  vrijgegeven — vrijgave vraagt een binding met per-bron audio-access,
+  niet meer UI.
 
 - **Microfoon opnemen op de desktop (#2516).** Onder Uitbreidingen zet je
   Transcriptie en opname aan. Daarna staat bij Importeren **Microfoon

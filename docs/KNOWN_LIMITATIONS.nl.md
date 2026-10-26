@@ -291,6 +291,23 @@ een proxy op de host die de app serveerde — dus die host ziet het adres dat je
 typte. Het eerste bezoek downloadt een grote bundel. → [HOSTING.md](HOSTING.md),
 sectie *Web build limitations to communicate*
 
+## Videocalls zijn bewezen op macOS en web — nog niet op Windows of Linux
+
+Een echte tweepersoons-Jitsi-call is bewezen op de uitgebrachte macOS-build en
+op de uitgebrachte webbundel (preflight, join, tweeweg audio/video, dempen,
+camera, schermdelen, verlaten en opnieuw deelnemen — de volledige matrix staat
+in [design/NATIVE_CALLS.md](design/NATIVE_CALLS.md)). De Windows- en
+Linux-builds delen hetzelfde codepad maar zijn **niet** bewezen op hardware,
+dus worden ze niet geclaimd; behandel een call daar als ongetest tot een echte
+call het tegendeel zegt. Browsergrenzen: de pagina kan het servercertificaat
+niet pinnen, kale `http`-vergaderlinks werken alleen naar een letterlijk
+loopback-adres (`127.0.0.1`, niet de naam `localhost`), en de browser vraagt
+zelf per site om camera, microfoon en schermdelen. Een audiobron van de hele
+call voor transcriptie is op **geen** platform beschikbaar — de mediabinding
+levert geen gedecodeerde audiotaps per deelnemer, dus het callpaneel biedt
+eerlijk géén opnameknop in plaats van een kapotte. *(Toegevoegd 2026-10-26,
+issue #2538.)*
+
 ## Bladeren… toont wat het systeemvenster toont
 
 Openen → Bladeren… laat het kiezen over aan het bestandsvenster van het

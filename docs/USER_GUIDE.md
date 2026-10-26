@@ -6623,9 +6623,11 @@ with a thumbnail, and the panel shows which source is live until you stop it;
 a source that is refused or disappears ends the share with a notice, never a
 dead control. Media encryption is reported as a fact, not a promise: the panel
 shows the verified status for the call and the real egress origins, and does
-not claim end-to-end encryption where none was proven. The browser version
-declines the join — a browser tab cannot prove the pinned server identity the
-desktop app verifies — so calling is desktop-only today.
+not claim end-to-end encryption where none was proven. Joining also works from
+the browser build — proven in a real two-person call — with two honest
+differences: the browser cannot pin the server certificate the way the desktop
+app does, and a plain `http` meeting link is accepted only when it points at a
+literal loopback address (`127.0.0.1`, not the name `localhost`).
 
 **Permissions on macOS.** macOS asks per source, with OciDeck's own
 explanation: the microphone when you join, the camera only when you turn it
@@ -6667,7 +6669,7 @@ before you open a client's deck on it. Hosting the same bundle yourself is
 | Importing a deck from a URL | **Works**, through the same security gate as on desktop. |
 | Importing OpenKAT reports | Visible on Integraties but **disabled** — folder import and server tokens need desktop (keychain and local folders). |
 | Recording from the microphone | **Works** for the microphone in the room, and for a browser tab's audio where Chromium can share it. The file stays in the tab (`mem:`) until you save; a reload loses it. Firefox and Safari do not share tab audio. |
-| Joining a Jitsi meeting | **Can be tried.** The page allows a secure WebSocket to the meeting you chose — plain text only to a literal loopback address — and, after the browser asks, camera, microphone and screen share for this site only. The browser cannot pin the server certificate the way the desktop app does. A two-person call on a released web build has not been proven yet. |
+| Joining a Jitsi meeting | **Works — proven** in a real two-person call on the released bundle (preflight, join, two-way audio and video, mute, camera, screen share, leave and rejoin). The page allows a secure WebSocket to the meeting you chose — plain text only to a literal loopback address — and, after the browser asks, camera, microphone and screen share for this site only. The browser cannot pin the server certificate the way the desktop app does, so trust in the deployment rests on `https`/`wss` and your own choice of server. |
 | Dragging a file onto the window | **Works** — a deck, a package, an image or a presentation to import. The browser hands over the file's contents rather than a path, so the same content gate applies as everywhere else. *(Fixed 21-09-2026; until then the page's own security policy refused to read a dropped file back, so a drop did nothing at all and said nothing either.)* |
 | Importing **one** PowerPoint, Keynote or Impress file | **Works**. The conversion runs on the bytes you picked and the result opens in a tab. |
 | Importing **several** presentations at once | Absent. The queue writes each converted deck as a file into a folder you choose, and the browser has no folder to choose. The dialog says so rather than offering a button that cannot work. |
