@@ -178,6 +178,8 @@ void main() {
     await tester.pumpAndSettle();
     await fillLoopback(tester);
 
+    await tester.ensureVisible(find.text('Test met echte audio'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Test met echte audio'));
     await tester.pumpAndSettle();
 
@@ -197,6 +199,8 @@ void main() {
     await tester.pumpAndSettle();
     await fillLoopback(tester);
 
+    await tester.ensureVisible(find.text('Test met echte audio'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Test met echte audio'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Versturen'));

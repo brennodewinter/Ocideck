@@ -811,6 +811,32 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'de microfoon': 'the microphone',
+  'het systeemgeluid': 'the system audio',
+  'Live-server wordt getest…': 'Testing live server…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Provisional text live via {host} is not available — the server is unreachable or does not speak the live protocol.',
+  'Voorlopige tekst live via {host}': 'Provisional text live via {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'During recording, {bron} goes live to this server. The recording stays entirely on this device; what the server retains is its own policy.',
+  'Live-verbinding wordt opgezet…': 'Setting up live connection…',
+  'Live tekst via {host}': 'Live text via {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Live connection lost — the recording continues locally.',
+  'Opnieuw verbinden met {host}': 'Reconnect to {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Live endpoint for provisional text (ws/wss, optional)',
+  'Live-poort staat toe: de socket mag openen':
+      'Live gate allows it: the socket may open',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Live endpoint missing or invalid — use a bare ws(s) URL without credentials, query or fragment',
+  'Live-protocol testen': 'Test live protocol',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Live server reachable and speaks the streaming protocol — the live option can appear',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Live server reachable but requires authentication — check the API key',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Live server unreachable or does not speak the live protocol',
   'Opnemen en transcriberen': 'Record and transcribe',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'This meeting does not provide a separate audio source. A recording of the whole call is not available.',

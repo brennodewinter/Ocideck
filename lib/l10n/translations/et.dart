@@ -1598,6 +1598,33 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'de microfoon': 'mikrofon',
+  'het systeemgeluid': 'süsteemi heli',
+  'Live-server wordt getest…': 'Reaalajas serverit testitakse…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Esialgne tekst reaalajas hosti {host} kaudu pole saadaval — server pole kättesaadav või ei toeta reaalajas protokolli.',
+  'Voorlopige tekst live via {host}':
+      'Esialgne tekst reaalajas hosti {host} kaudu',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Salvestuse ajal saadetakse {bron} reaalajas sellele serverile. Salvestus jääb täielikult sellesse seadmesse; mida server säilitab, on tema enda poliitika.',
+  'Live-verbinding wordt opgezet…': 'Reaalajas ühendust luuakse…',
+  'Live tekst via {host}': 'Tekst reaalajas hosti {host} kaudu',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Reaalajas ühendus katkes — salvestus jätkub lokaalselt.',
+  'Opnieuw verbinden met {host}': 'Ühenda uuesti hostiga {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Reaalajas lõpp-punkt esialgse teksti jaoks (ws/wss, valikuline)',
+  'Live-poort staat toe: de socket mag openen':
+      'Reaalajas värav lubab: pesa võib avaneda',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Reaalajas lõpp-punkt puudub või on vigane — kasutage paljast ws(s) URL-i ilma mandaatide, päringu või fragmendita',
+  'Live-protocol testen': 'Testi reaalajas protokolli',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Reaalajas server on kättesaadav ja toetab voogedastusprotokolli — reaalajas valik võib ilmuda',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Reaalajas server on kättesaadav, kuid nõuab autentimist — kontrollige API-võtit',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Reaalajas server pole kättesaadav või ei toeta reaalajas protokolli',
   'Opnemen en transcriberen': 'Salvesta ja transkribeeri',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'See koosolek ei anna eraldi heliallikat. Kogu kõne salvestust ei ole.',

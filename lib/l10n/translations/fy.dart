@@ -652,6 +652,32 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'de microfoon': 'de mikrofoan',
+  'het systeemgeluid': 'it systeemlûd',
+  'Live-server wordt getest…': 'Live-server wurdt teste…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Foarige tekst live fia {host} is net beskikber — de server is ûnberikber of sprekt it live-protokol net.',
+  'Voorlopige tekst live via {host}': 'Foarige tekst live fia {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Under de opname giet {bron} live nei dizze server. De opname bliuwt hielendal op dit apparaat; wat de server bewarret is syn eigen belied.',
+  'Live-verbinding wordt opgezet…': 'Live-ferbining wurdt opset…',
+  'Live tekst via {host}': 'Live tekst fia {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Live-ferbining ferbrutsen — de opname rint lokaal troch.',
+  'Opnieuw verbinden met {host}': 'Opnij ferbine mei {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Live-einpunt foar foarige tekst (ws/wss, opsjoneel)',
+  'Live-poort staat toe: de socket mag openen':
+      'Live-poarte tastiet ta: de socket mechtie iepenje',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Live-einpunt ûntbrekt of is ûnjildich — brûk in keale ws(s)-URL sûnder credentials, query of fragmint',
+  'Live-protocol testen': 'Live-protokol teste',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Live-server berikber en sprekt it streaming-protokol — de live-opsje kin ferskine',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Live-server berikber mar easket autentikaasje — kontrolearje de API-kaai',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Live-server ûnberikber of sprekt it live-protokol net',
   'Opnemen en transcriberen': 'Opnimme en transkribearje',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Dizze gearkomste leveret gjin aparte audioboarne. In opname fan de hiele call is net beskikber.',

@@ -1623,6 +1623,34 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'de microfoon': 'il-mikrofonu',
+  'het systeemgeluid': 'il-ħoss tas-sistema',
+  'Live-server wordt getest…': 'Is-server dirett qed jiġi ttestjat…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'It-test proviżorju dirett permezz ta\' {host} mhux disponibbli — is-server ma jistax jintlaħaq jew ma jitkellimx il-protokoll dirett.',
+  'Voorlopige tekst live via {host}':
+      'Test proviżorju dirett permezz ta\' {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Waqt ir-reġistrazzjoni, {bron} jmur dirett lejn dan is-server. Ir-reġistrazzjoni tibqa\' kompletament fuq dan l-apparat; dak li żżomm is-server huwa l-politika tiegħu.',
+  'Live-verbinding wordt opgezet…':
+      'Il-konnessjoni diretta qed tiġi stabbilita…',
+  'Live tekst via {host}': 'Test dirett permezz ta\' {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Il-konnessjoni diretta nqata\' — ir-reġistrazzjoni tkompli lokalment.',
+  'Opnieuw verbinden met {host}': 'Erġa\' qabbad ma\' {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Endpoint dirett għat-test proviżorju (ws/wss, fakultattiv)',
+  'Live-poort staat toe: de socket mag openen':
+      'Il-gate dirett jippermetti: is-socket jista\' jinfetaħ',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'L-endpoint dirett huwa nieqes jew invalidu — uża URL ws(s) sempliċi mingħajr kredenzjali, query jew framment',
+  'Live-protocol testen': 'Ittestja l-protokoll dirett',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Is-server dirett huwa jista\' jintlaħaq u jitkellim il-protokoll tal-istreaming — l-għażla diretta tista\' tidher',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Is-server dirett jista\' jintlaħaq iżda jeħtieġ awtentikazzjoni — iċċekkja l-API key',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Is-server dirett ma jistax jintlaħaq jew ma jitkellimx il-protokoll dirett',
   'Opnemen en transcriberen': 'Irrekordja u ttraskrivi',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Din il-laqgħa ma tagħtix sors tal-awdjo separat. Reġistrazzjoni tas-sejħa kollha mhix disponibbli.',

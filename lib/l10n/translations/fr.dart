@@ -652,6 +652,32 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'de microfoon': 'le microphone',
+  'het systeemgeluid': 'le son du système',
+  'Live-server wordt getest…': 'Test du serveur en direct…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Le texte provisoire en direct via {host} n\'est pas disponible — le serveur est injoignable ou ne parle pas le protocole en direct.',
+  'Voorlopige tekst live via {host}': 'Texte provisoire en direct via {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Pendant l\'enregistrement, {bron} est envoyé en direct vers ce serveur. L\'enregistrement reste entièrement sur cet appareil ; ce que le serveur conserve relève de sa propre politique.',
+  'Live-verbinding wordt opgezet…': 'Établissement de la connexion en direct…',
+  'Live tekst via {host}': 'Texte en direct via {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Connexion en direct interrompue — l\'enregistrement continue localement.',
+  'Opnieuw verbinden met {host}': 'Se reconnecter à {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Point de terminaison en direct pour le texte provisoire (ws/wss, facultatif)',
+  'Live-poort staat toe: de socket mag openen':
+      'La porte en direct l\'autorise : le socket peut s\'ouvrir',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Point de terminaison en direct manquant ou invalide — utilisez une URL ws(s) nue, sans identifiants, requête ni fragment',
+  'Live-protocol testen': 'Tester le protocole en direct',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Serveur en direct joignable et parlant le protocole de streaming — l\'option en direct peut apparaître',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Serveur en direct joignable mais exigeant une authentification — vérifiez la clé API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Serveur en direct injoignable ou ne parlant pas le protocole en direct',
   'Opnemen en transcriberen': 'Enregistrer et transcrire',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Cette réunion ne fournit pas de source audio distincte. Un enregistrement de tout l\'appel n\'est pas disponible.',

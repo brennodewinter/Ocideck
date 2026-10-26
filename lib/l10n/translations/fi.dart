@@ -1605,6 +1605,33 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'de microfoon': 'mikrofoni',
+  'het systeemgeluid': 'järjestelmän ääni',
+  'Live-server wordt getest…': 'Reaaliaikaista palvelinta testataan…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Alustava teksti livenä kohteen {host} kautta ei ole käytettävissä — palvelin ei ole tavoitettavissa tai ei puhu live-protokollaa.',
+  'Voorlopige tekst live via {host}':
+      'Alustava teksti livenä kohteen {host} kautta',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Tallennuksen aikana {bron} lähetetään livenä tälle palvelimelle. Tallenne pysyy kokonaan tällä laitteella; se, mitä palvelin säilyttää, on sen oma käytäntö.',
+  'Live-verbinding wordt opgezet…': 'Live-yhteyttä muodostetaan…',
+  'Live tekst via {host}': 'Live-teksti kohteen {host} kautta',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Live-yhteys katkesi — tallennus jatkuu paikallisesti.',
+  'Opnieuw verbinden met {host}': 'Yhdistä uudelleen kohteeseen {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Live-päätepiste alustavalle tekstille (ws/wss, valinnainen)',
+  'Live-poort staat toe: de socket mag openen':
+      'Live-portti sallii: socket saa avautua',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Live-päätepiste puuttuu tai on virheellinen — käytä pelkkää ws(s)-URL-osoitetta ilman tunnistetietoja, kyselyä tai fragmenttia',
+  'Live-protocol testen': 'Testaa live-protokolla',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Live-palvelin on tavoitettavissa ja puhuu suoratoistoprotokollaa — live-vaihtoehto voi näkyä',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Live-palvelin on tavoitettavissa, mutta vaatii todentamisen — tarkista API-avain',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Live-palvelin ei ole tavoitettavissa tai ei puhu live-protokollaa',
   'Opnemen en transcriberen': 'Tallenna ja litteroi',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Tämä kokous ei anna erillistä äänilähdettä. Koko puhelun tallenne ei ole saatavilla.',

@@ -1604,6 +1604,32 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'de microfoon': 'mikrofonen',
+  'het systeemgeluid': 'systemljudet',
+  'Live-server wordt getest…': 'Live-servern testas…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Preliminär text live via {host} är inte tillgänglig — servern är onåbar eller talar inte live-protokollet.',
+  'Voorlopige tekst live via {host}': 'Preliminär text live via {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Under inspelningen skickas {bron} live till den här servern. Inspelningen stannar helt på den här enheten; vad servern sparar är dess egen policy.',
+  'Live-verbinding wordt opgezet…': 'Live-anslutningen upprättas…',
+  'Live tekst via {host}': 'Live-text via {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Live-anslutningen bröts — inspelningen fortsätter lokalt.',
+  'Opnieuw verbinden met {host}': 'Återanslut till {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Live-ändpunkt för preliminär text (ws/wss, valfri)',
+  'Live-poort staat toe: de socket mag openen':
+      'Live-grinden tillåter det: socketen får öppna',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Live-ändpunkt saknas eller är ogiltig — använd en ren ws(s)-URL utan inloggningsuppgifter, fråga eller fragment',
+  'Live-protocol testen': 'Testa live-protokollet',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Live-servern är nåbar och talar streamingprotokollet — live-alternativet kan visas',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Live-servern är nåbar men kräver autentisering — kontrollera API-nyckeln',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Live-servern är onåbar eller talar inte live-protokollet',
   'Opnemen en transcriberen': 'Spela in och transkribera',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Det här mötet ger ingen separat ljudkälla. En inspelning av hela samtalet finns inte.',

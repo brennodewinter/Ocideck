@@ -1611,6 +1611,32 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'de microfoon': 'mikrofonas',
+  'het systeemgeluid': 'sistemos garsas',
+  'Live-server wordt getest…': 'Tiesioginis serveris tikrinamas…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Laikinas tekstas tiesiogiai per {host} neprieinamas — serveris nepasiekiamas arba nepalaiko tiesioginio protokolo.',
+  'Voorlopige tekst live via {host}': 'Laikinas tekstas tiesiogiai per {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Įrašymo metu {bron} tiesiogiai siunčiamas į šį serverį. Įrašas lieka visiškai šiame įrenginyje; ką serveris saugo, yra jo paties politika.',
+  'Live-verbinding wordt opgezet…': 'Užmezgamas tiesioginis ryšys…',
+  'Live tekst via {host}': 'Tekstas tiesiogiai per {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Tiesioginis ryšys nutrūko — įrašymas tęsiasi vietoje.',
+  'Opnieuw verbinden met {host}': 'Vėl prisijungti prie {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Tiesioginis galinis taškas laikinam tekstui (ws/wss, pasirenkama)',
+  'Live-poort staat toe: de socket mag openen':
+      'Tiesioginiai vartai leidžia: lizdas gali atsidaryti',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Tiesioginio galinio taško nėra arba jis neteisingas — naudokite gryną ws(s) URL be prisijungimo duomenų, užklausos ar fragmento',
+  'Live-protocol testen': 'Išbandyti tiesioginį protokolą',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Tiesioginis serveris pasiekiamas ir palaiko srautinio perdavimo protokolą — tiesioginė parinktis gali pasirodyti',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Tiesioginis serveris pasiekiamas, bet reikalauja autentifikavimo — patikrinkite API raktą',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Tiesioginis serveris nepasiekiamas arba nepalaiko tiesioginio protokolo',
   'Opnemen en transcriberen': 'Įrašyti ir transkribuoti',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Šis susitikimas neduoda atskiro garso šaltinio. Viso skambučio įrašo nėra.',

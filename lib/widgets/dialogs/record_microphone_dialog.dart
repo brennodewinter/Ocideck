@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/transcription/capture_source.dart';
+import '../../services/transcription/transcription_engine.dart';
 import '../../services/transcription/mic_capture_port.dart';
 import '../../services/transcription/mic_session_gate.dart';
 import '../../services/transcription/pcm_resample.dart';
@@ -16,6 +17,7 @@ import '../../services/transcription/staged_recordings.dart';
 import '../../services/transcription/transcription_errors.dart';
 import '../../state/transcription_provider.dart';
 import '../../theme/app_theme.dart';
+import 'live_server_opt_in.dart';
 import 'transcribe_file_dialog.dart';
 
 class RecordMicrophoneDialog extends ConsumerStatefulWidget {
@@ -37,6 +39,7 @@ class _RecordMicrophoneDialogState
   MicSessionGate? _heldGate;
   MicCaptureLive? _testLive;
   Timer? _testTimer;
+  LiveOptInState _live = const LiveOptInState();
 
   @override
   void initState() {
@@ -174,6 +177,11 @@ class _RecordMicrophoneDialogState
               participantNoticeAcknowledged: true,
             ),
             inputDeviceId: _deviceId,
+            // De checkbox hierboven benoemde host én stroom; zijn vinkje
+            // ís de sessieconsent (§4.3).
+            liveConsent: _live.chosen
+                ? ServerConsent.liveSession(_live.host)
+                : null,
           );
       if (mounted) Navigator.of(context).pop();
     } on TranscriptionError catch (e) {
@@ -270,6 +278,10 @@ class _RecordMicrophoneDialogState
                 style: TextStyle(color: AppTheme.dangerFg),
               ),
             ],
+            LiveServerOptIn(
+              sourcesLabel: l10n.d('de microfoon'),
+              onChanged: (state) => _live = state,
+            ),
             if (_earlier.isNotEmpty) ...[
               const SizedBox(height: 16),
               Text(

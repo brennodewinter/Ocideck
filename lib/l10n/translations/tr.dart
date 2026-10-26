@@ -2513,6 +2513,32 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'de microfoon': 'mikrofon',
+  'het systeemgeluid': 'sistem sesi',
+  'Live-server wordt getest…': 'Canlı sunucu test ediliyor…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      '{host} üzerinden canlı geçici metin kullanılamıyor — sunucuya ulaşılamıyor veya canlı protokolü desteklemiyor.',
+  'Voorlopige tekst live via {host}': '{host} üzerinden canlı geçici metin',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Kayıt sırasında {bron} canlı olarak bu sunucuya gider. Kayıt tamamen bu cihazda kalır; sunucunun neyi saklayacağı kendi politikasıdır.',
+  'Live-verbinding wordt opgezet…': 'Canlı bağlantı kuruluyor…',
+  'Live tekst via {host}': '{host} üzerinden canlı metin',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Canlı bağlantı kesildi — kayıt yerel olarak devam ediyor.',
+  'Opnieuw verbinden met {host}': '{host} ile yeniden bağlan',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Geçici metin için canlı uç nokta (ws/wss, isteğe bağlı)',
+  'Live-poort staat toe: de socket mag openen':
+      'Canlı geçit izin veriyor: soket açılabilir',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Canlı uç nokta eksik veya geçersiz — kimlik bilgisi, sorgu veya parça içermeyen sade bir ws(s) URL\'si kullanın',
+  'Live-protocol testen': 'Canlı protokolü test et',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Canlı sunucu erişilebilir ve akış protokolünü konuşuyor — canlı seçenek görünebilir',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Canlı sunucuya erişilebiliyor ancak kimlik doğrulama gerekiyor — API anahtarını kontrol edin',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Canlı sunucuya ulaşılamıyor veya canlı protokolü desteklemiyor',
   'Opnemen en transcriberen': 'Kaydet ve yazıya dök',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Bu toplantı ayrı bir ses kaynağı vermiyor. Tüm aramanın kaydı kullanılamıyor.',

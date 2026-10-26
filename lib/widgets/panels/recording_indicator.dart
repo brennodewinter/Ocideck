@@ -13,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/transcription/capture_source.dart';
+import '../../services/transcription/transcription_engine.dart';
 import '../../state/transcription_provider.dart';
 import '../../theme/app_theme.dart';
 
@@ -104,6 +105,7 @@ class _RecordingIndicatorState extends ConsumerState<RecordingIndicator> {
                   ),
                 ],
               ),
+              _liveStatusRow(ref, l10n),
               if (caption.text.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
@@ -125,6 +127,62 @@ class _RecordingIndicatorState extends ConsumerState<RecordingIndicator> {
       ),
     );
   }
+}
+
+/// De verzendstatus van de live-serversessie (#2525). Zonder
+/// sessieconsent staat de provider op `off` en is deze rij er niet;
+/// `lost` betekent "de serverroute is voorbij, de opname niet" — met
+/// een herstelknop die de host opnieuw benoemt (die druk ís de nieuwe
+/// sessieconsent; stil reconnecten bestaat niet).
+Widget _liveStatusRow(WidgetRef ref, AppLocalizations l10n) {
+  final status = ref.watch(liveServerStatusProvider);
+  if (status == LiveServerStatus.off) return const SizedBox.shrink();
+  final host =
+      ref.read(recordingSessionProvider.notifier).liveSessionHost ?? '?';
+  return switch (status) {
+    LiveServerStatus.off => const SizedBox.shrink(),
+    LiveServerStatus.connecting => Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Text(
+        l10n.d('Live-verbinding wordt opgezet…'),
+        style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+      ),
+    ),
+    LiveServerStatus.live => Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Text(
+        l10n.d('Live tekst via {host}').replaceAll('{host}', host),
+        style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+      ),
+    ),
+    LiveServerStatus.lost => Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              l10n.d(
+                'Live-verbinding verbroken — de opname loopt lokaal door.',
+              ),
+              style: TextStyle(fontSize: 12, color: AppTheme.amber700),
+            ),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
+            onPressed: () => unawaited(
+              ref
+                  .read(recordingSessionProvider.notifier)
+                  .reconnectLive(ServerConsent.liveSession(host)),
+            ),
+            child: Text(
+              l10n.d('Opnieuw verbinden met {host}').replaceAll('{host}', host),
+              style: const TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
+      ),
+    ),
+  };
 }
 
 /// De bronlabel(s) voor de strook. `combinatie` is geen eigen naam maar de

@@ -1617,6 +1617,32 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'de microfoon': 'mikrofon',
+  'het systeemgeluid': 'dźwięk systemowy',
+  'Live-server wordt getest…': 'Testowanie serwera na żywo…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Tekst tymczasowy na żywo przez {host} jest niedostępny — serwer jest nieosiągalny lub nie obsługuje protokołu na żywo.',
+  'Voorlopige tekst live via {host}': 'Tekst tymczasowy na żywo przez {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Podczas nagrywania {bron} jest wysyłany na żywo do tego serwera. Nagranie pozostaje w całości na tym urządzeniu; to, co serwer przechowuje, to jego własna polityka.',
+  'Live-verbinding wordt opgezet…': 'Nawiązywanie połączenia na żywo…',
+  'Live tekst via {host}': 'Tekst na żywo przez {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Połączenie na żywo przerwane — nagranie trwa lokalnie dalej.',
+  'Opnieuw verbinden met {host}': 'Połącz ponownie z {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Punkt końcowy na żywo dla tekstu tymczasowego (ws/wss, opcjonalny)',
+  'Live-poort staat toe: de socket mag openen':
+      'Bramka na żywo zezwala: socket może się otworzyć',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Punkt końcowy na żywo jest nieobecny lub nieprawidłowy — użyj czystego adresu URL ws(s) bez poświadczeń, zapytania ani fragmentu',
+  'Live-protocol testen': 'Przetestuj protokół na żywo',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Serwer na żywo osiągalny i obsługuje protokół strumieniowy — opcja na żywo może się pojawić',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Serwer na żywo osiągalny, ale wymaga uwierzytelnienia — sprawdź klucz API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Serwer na żywo nieosiągalny lub nie obsługuje protokołu na żywo',
   'Opnemen en transcriberen': 'Nagrywaj i transkrybuj',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'To spotkanie nie daje osobnego źródła dźwięku. Nagranie całej rozmowy jest niedostępne.',

@@ -652,6 +652,32 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'de microfoon': 'das Mikrofon',
+  'het systeemgeluid': 'der Systemton',
+  'Live-server wordt getest…': 'Live-Server wird getestet…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Vorläufiger Text live über {host} ist nicht verfügbar — der Server ist nicht erreichbar oder spricht das Live-Protokoll nicht.',
+  'Voorlopige tekst live via {host}': 'Vorläufiger Text live über {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Während der Aufnahme geht {bron} live an diesen Server. Die Aufnahme bleibt vollständig auf diesem Gerät; was der Server speichert, ist seine eigene Richtlinie.',
+  'Live-verbinding wordt opgezet…': 'Live-Verbindung wird aufgebaut…',
+  'Live tekst via {host}': 'Live-Text über {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Live-Verbindung unterbrochen — die Aufnahme läuft lokal weiter.',
+  'Opnieuw verbinden met {host}': 'Erneut mit {host} verbinden',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Live-Endpunkt für vorläufigen Text (ws/wss, optional)',
+  'Live-poort staat toe: de socket mag openen':
+      'Live-Gate erlaubt es: der Socket darf sich öffnen',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Live-Endpunkt fehlt oder ist ungültig — verwende eine reine ws(s)-URL ohne Zugangsdaten, Abfrage oder Fragment',
+  'Live-protocol testen': 'Live-Protokoll testen',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Live-Server erreichbar und spricht das Streaming-Protokoll — die Live-Option kann erscheinen',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Live-Server erreichbar, verlangt aber Authentifizierung — prüfe den API-Schlüssel',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Live-Server nicht erreichbar oder spricht das Live-Protokoll nicht',
   'Opnemen en transcriberen': 'Aufnehmen und transkribieren',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Dieses Treffen liefert keine getrennte Audioquelle. Eine Aufnahme des ganzen Gesprächs ist nicht verfügbar.',

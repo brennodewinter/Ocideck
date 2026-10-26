@@ -11,10 +11,12 @@ import '../../l10n/app_localizations.dart';
 import '../../services/transcription/capture_source.dart';
 import '../../services/transcription/desktop_mic_source.dart';
 import '../../services/transcription/mic_capture_port.dart';
+import '../../services/transcription/transcription_engine.dart';
 import '../../services/transcription/transcription_errors.dart';
 import '../../services/transcription/web_media_source.dart';
 import '../../state/transcription_provider.dart';
 import '../../theme/app_theme.dart';
+import 'live_server_opt_in.dart';
 
 enum RecordTarget { system, combination }
 
@@ -43,6 +45,8 @@ class _RecordSystemDialogState extends ConsumerState<RecordSystemDialog> {
   CaptureSourceKind get _kind => widget.target == RecordTarget.combination
       ? CaptureSourceKind.combination
       : CaptureSourceKind.systemAudio;
+
+  LiveOptInState _live = const LiveOptInState();
 
   Future<void> _load() async {
     final source = ref.read(captureSourcesProvider)[_kind];
@@ -95,6 +99,9 @@ class _RecordSystemDialogState extends ConsumerState<RecordSystemDialog> {
               participantNoticeAcknowledged: true,
             ),
             inputDeviceId: _deviceId,
+            liveConsent: _live.chosen
+                ? ServerConsent.liveSession(_live.host)
+                : null,
           );
       if (mounted) Navigator.of(context).pop();
     } on TranscriptionError catch (error) {
@@ -180,6 +187,12 @@ class _RecordSystemDialogState extends ConsumerState<RecordSystemDialog> {
                   style: TextStyle(color: AppTheme.dangerFg),
                 ),
               ),
+            LiveServerOptIn(
+              sourcesLabel: widget.target == RecordTarget.combination
+                  ? '${l10n.d('de microfoon')} + ${l10n.d('het systeemgeluid')}'
+                  : l10n.d('het systeemgeluid'),
+              onChanged: (state) => _live = state,
+            ),
           ],
         ),
       ),

@@ -1606,6 +1606,32 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'de microfoon': 'mikrofon',
+  'het systeemgeluid': 'systémový zvuk',
+  'Live-server wordt getest…': 'Server pro živý přenos se testuje…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Předběžný text živě přes {host} není dostupný — server je nedostupný nebo nemluví živým protokolem.',
+  'Voorlopige tekst live via {host}': 'Předběžný text živě přes {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Během nahrávání se {bron} posílá živě na tento server. Nahrávka zůstává zcela na tomto zařízení; co server uchovává, je jeho vlastní zásada.',
+  'Live-verbinding wordt opgezet…': 'Navazuje se živé připojení…',
+  'Live tekst via {host}': 'Živý text přes {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Živé připojení bylo přerušeno — nahrávání pokračuje lokálně.',
+  'Opnieuw verbinden met {host}': 'Znovu připojit k {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Živý koncový bod pro předběžný text (ws/wss, volitelný)',
+  'Live-poort staat toe: de socket mag openen':
+      'Živá brána to povoluje: socket se může otevřít',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Živý koncový bod chybí nebo je neplatný — použijte holou URL ws(s) bez přihlašovacích údajů, dotazu či fragmentu',
+  'Live-protocol testen': 'Otestovat živý protokol',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Server pro živý přenos je dostupný a mluví streamovacím protokolem — možnost živě se může objevit',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Server pro živý přenos je dostupný, ale vyžaduje ověření — zkontrolujte klíč API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Server pro živý přenos je nedostupný nebo nemluví živým protokolem',
   'Opnemen en transcriberen': 'Nahrávat a přepisovat',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Tato schůzka nedává oddělený zdroj zvuku. Záznam celého hovoru není k dispozici.',

@@ -1621,6 +1621,32 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'de microfoon': 'microfonul',
+  'het systeemgeluid': 'sunetul sistemului',
+  'Live-server wordt getest…': 'Serverul live este testat…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Textul provizoriu live prin {host} nu este disponibil — serverul este inaccesibil sau nu vorbește protocolul live.',
+  'Voorlopige tekst live via {host}': 'Text provizoriu live prin {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'În timpul înregistrării, {bron} este trimis live către acest server. Înregistrarea rămâne integral pe acest dispozitiv; ce păstrează serverul este politica sa proprie.',
+  'Live-verbinding wordt opgezet…': 'Se stabilește conexiunea live…',
+  'Live tekst via {host}': 'Text live prin {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Conexiunea live s-a întrerupt — înregistrarea continuă local.',
+  'Opnieuw verbinden met {host}': 'Reconectare la {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Endpoint live pentru textul provizoriu (ws/wss, opțional)',
+  'Live-poort staat toe: de socket mag openen':
+      'Poarta live permite: socketul se poate deschide',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Endpointul live lipsește sau este invalid — folosiți un URL ws(s) simplu fără credențiale, interogare sau fragment',
+  'Live-protocol testen': 'Testează protocolul live',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Serverul live este accesibil și vorbește protocolul de streaming — opțiunea live poate apărea',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Serverul live este accesibil, dar necesită autentificare — verificați cheia API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Serverul live este inaccesibil sau nu vorbește protocolul live',
   'Opnemen en transcriberen': 'Înregistrează și transcrie',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Această întâlnire nu oferă o sursă audio separată. O înregistrare a întregului apel nu este disponibilă.',

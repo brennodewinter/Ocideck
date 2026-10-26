@@ -1608,6 +1608,32 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'de microfoon': 's Mikrofon',
+  'het systeemgeluid': 'de Systemtoon',
+  'Live-server wordt getest…': 'Live-Server wird téschtet…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Provisorische Teggst live über {host} isch nid verfüegbar — de Server isch nid erreichbar oder redt s Live-Protokoll nid.',
+  'Voorlopige tekst live via {host}': 'Provisorische Teggst live über {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Während de Ufnahm gaht {bron} live an dä Server. D Ufnahm blibt ganz uff däm Gerät; was de Server uffbewahrt isch sini eigeni Richtlinie.',
+  'Live-verbinding wordt opgezet…': 'Live-Verbindig wird uffgsetzt…',
+  'Live tekst via {host}': 'Live-Teggst über {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Live-Verbindig abbroche — d Ufnahm lauft lokal wyter.',
+  'Opnieuw verbinden met {host}': 'Wieder mit {host} verbinde',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Live-Endpunkt für provisorische Teggst (ws/wss, optional)',
+  'Live-poort staat toe: de socket mag openen':
+      'Live-Gate erlaubts: de Socket derf uffgah',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Live-Endpunkt fäält oder isch ungültig — bruuk e bluuti ws(s)-URL ohni Zuegangsdaten, Abfrog oder Fragment',
+  'Live-protocol testen': 'Live-Protokoll téschte',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Live-Server erreichbar und redt s Streaming-Protokoll — d Live-Option chan erschiine',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Live-Server erreichbar, verlangt aber Authentifizierig — prüef de API-Schlüssel',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Live-Server nid erreichbar oder redt s Live-Protokoll nid',
   'Opnemen en transcriberen': 'Uufnäh und transkribiere',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Die Sitzig git kei eigeni Audioquäle. E Ufnahm vom ganze Gspröch isch nöd verfüegbar.',
