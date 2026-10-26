@@ -261,6 +261,15 @@ const Set<String> uncoveredBaseline = {
   // NIET: die gebruikt geen js_interop en wordt rechtstreeks gedekt door
   // asr_server_profile_test.
   'lib/services/transcription/asr_transport_web.dart',
+  // PLATFORM: `asr_live_transport_web.dart` (#2525) is de webhelft van het
+  // live-WS-transport — `dart:js_interop`/`package:web` laden niet in de
+  // VM-runner. De io-helft staat onder echte loopback-sockets
+  // (asr_live_transport_io_test: handshake-headers, binaire en tekst-
+  // frames heen én terug, weigering op een dode poort); de stub-weigering
+  // staat in dezelfde toets. De web-beperking (geen handshake-headers,
+  // dus geen sleutel-eisende endpoint) is een contractregel in
+  // asr_live_transport.dart zelf.
+  'lib/services/transcription/asr_live_transport_web.dart',
   // PLATFORM: `environment_probe_web.dart` (#2514) is de webhelft van de
   // passieve platformprobe — `dart:js_interop`/`package:web` laden niet in
   // de VM-runner. De io- en stub-helft staan wél onder

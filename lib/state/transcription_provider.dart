@@ -18,6 +18,7 @@ import 'dart:convert';
 
 import '../models/asr_server_profile.dart';
 import '../services/transcription/asr_engine_factory.dart';
+import '../services/transcription/asr_live_engine_factory.dart';
 import '../services/transcription/capture_source.dart';
 import '../services/transcription/combination_source.dart';
 import '../services/transcription/desktop_mic_source.dart';
@@ -377,6 +378,25 @@ final provisionalCaptionProvider =
       ProvisionalCaptionNotifier.new,
     );
 
+/// De verzendstaat van een live-serversessie tijdens de opname
+/// (#2525). `off` zolang er geen sessieconsent is; `connecting` tot de
+/// eerste tekst terugkomt; `lost` als de socket onder de opname vandaan
+/// breekt — de opname zelf gaat dan gewoon door (§4.2: de server heeft
+/// nooit het enige exemplaar).
+enum LiveServerStatus { off, connecting, live, lost }
+
+class LiveServerStatusNotifier extends Notifier<LiveServerStatus> {
+  @override
+  LiveServerStatus build() => LiveServerStatus.off;
+
+  void set(LiveServerStatus status) => state = status;
+}
+
+final liveServerStatusProvider =
+    NotifierProvider<LiveServerStatusNotifier, LiveServerStatus>(
+      LiveServerStatusNotifier.new,
+    );
+
 /// Houdt de lopende [RecordingHandle]. `start()` is de enige weg naar een
 /// sessie — met de bron en het toestemmingsbewijs die de manager eist.
 /// `stopAll` is de enige weg eraf, voor elke eindreden.
@@ -387,24 +407,47 @@ class RecordingSessionNotifier extends Notifier<RecordingHandle?> {
   LivePass? _live;
   StreamSubscription<PartialTranscript>? _partials;
 
+  /// De sessieconsent voor de liveroute van deze opname (#2525). Blijft
+  /// staan zolang de sessie loopt — de indicator leest er de host uit
+  /// voor zijn herstelknop.
+  ServerConsent? _liveConsent;
+
+  /// De host die deze sessie live bedient, of null. Alleen lezen voor
+  /// de indicator — een nieuwe stream vraagt altijd een nieuwe consent
+  /// van de knop die hem startte.
+  String? get liveSessionHost => _liveConsent?.host;
+
   /// Start een opname via de sessiegrens. Gooit de getypte fouten van
   /// [RecordingManager.start] door naar de aanroepende flow.
+  ///
+  /// [liveConsent] is de sessieconsent uit de opnameflow (§4.3): als
+  /// die er is, loopt `transcribeLive` via het live-endpoint van het
+  /// serverprofiel in plaats van de definitieve engine — die bewijst
+  /// zijn eigen live-route niet.
   Future<RecordingHandle> start(
     CaptureSource source, {
     required Set<CaptureSourceKind> kinds,
     required RecordingConsent consent,
     String? sourcePath,
     String? inputDeviceId,
+    ServerConsent? liveConsent,
   }) async {
-    final handle = await ref
-        .read(recordingManagerProvider)
-        .start(
-          source,
-          kinds: kinds,
-          consent: consent,
-          sourcePath: sourcePath,
-          inputDeviceId: inputDeviceId,
-        );
+    final RecordingHandle handle;
+    try {
+      handle = await ref
+          .read(recordingManagerProvider)
+          .start(
+            source,
+            kinds: kinds,
+            consent: consent,
+            sourcePath: sourcePath,
+            inputDeviceId: inputDeviceId,
+          );
+    } on Object {
+      _liveConsent = null;
+      rethrow;
+    }
+    _liveConsent = liveConsent;
     state = handle;
     _attachLive(handle);
     handle.events.listen((event) {
@@ -415,6 +458,7 @@ class RecordingSessionNotifier extends Notifier<RecordingHandle?> {
       // nog een gebeurtenis aflevert.
       if (!ref.mounted) return;
       if (state == handle && event.phase != RecordingPhase.recording) {
+        _liveConsent = null;
         unawaited(_dropLive());
         state = null;
       }
@@ -423,7 +467,19 @@ class RecordingSessionNotifier extends Notifier<RecordingHandle?> {
   }
 
   void _attachLive(RecordingHandle handle) {
-    final engine = ref.read(transcriptionEngineProvider);
+    final consent = _liveConsent;
+    final TranscriptionEngine? engine;
+    final TranscriptionOptions? options;
+    if (consent != null) {
+      // Sessieconsent: de serverroute loopt via zijn eigen live-engine,
+      // de gekozen definitieve engine blijft onaangeroerd.
+      engine = createAsrLiveServerEngine(ref.read(asrServerProfileProvider));
+      options = TranscriptionOptions(serverConsent: consent);
+      _setLiveStatus(LiveServerStatus.connecting);
+    } else {
+      engine = ref.read(transcriptionEngineProvider);
+      options = null;
+    }
     if (engine == null || handle.liveChunks == null) return;
     final pass = LivePass();
     _live = pass;
@@ -431,6 +487,7 @@ class RecordingSessionNotifier extends Notifier<RecordingHandle?> {
       final partials = pass.attach(
         engine: engine,
         chunks: handle.liveChunks,
+        options: options,
         onLag: (lagging) {
           if (!ref.mounted) return;
           final current = ref.read(provisionalCaptionProvider);
@@ -439,17 +496,54 @@ class RecordingSessionNotifier extends Notifier<RecordingHandle?> {
               .show(current.text, lagging: lagging);
         },
       );
-      if (partials == null) return;
-      _partials = partials.listen((part) {
-        if (!ref.mounted) return;
-        ref
-            .read(provisionalCaptionProvider.notifier)
-            .show(part.text, lagging: pass.lagging);
-      });
+      if (partials == null) {
+        _setLiveStatus(LiveServerStatus.off);
+        return;
+      }
+      _partials = partials.listen(
+        (part) {
+          if (!ref.mounted) return;
+          if (consent != null) _setLiveStatus(LiveServerStatus.live);
+          ref
+              .read(provisionalCaptionProvider.notifier)
+              .show(part.text, lagging: pass.lagging);
+        },
+        onError: (Object e) {
+          // Een streamfout (server weg, consent verlopen, protocolkapot)
+          // betekent: remote live is voorbij, de opname niet.
+          if (!ref.mounted || consent == null) return;
+          _setLiveStatus(LiveServerStatus.lost);
+        },
+        onDone: () {
+          // De socket sloot vóór de opname eindigde — zelfde betekenis.
+          if (!ref.mounted || consent == null) return;
+          if (ref.read(liveServerStatusProvider) != LiveServerStatus.off) {
+            _setLiveStatus(LiveServerStatus.lost);
+          }
+        },
+      );
     } on Object {
       unawaited(pass.close());
       _live = null;
+      _setLiveStatus(LiveServerStatus.off);
     }
+  }
+
+  void _setLiveStatus(LiveServerStatus status) {
+    if (!ref.mounted) return;
+    ref.read(liveServerStatusProvider.notifier).set(status);
+  }
+
+  /// Verbind de live-server opnieuw ná een verbroken sessie (#2525).
+  /// Bewust een methode die een vers consentobject eist: de aanroepende
+  /// knop benoemde de host opnieuw, en die druk ís de nieuwe
+  /// sessieconsent — dit is nooit een stille reconnect.
+  Future<void> reconnectLive(ServerConsent consent) async {
+    final handle = state;
+    if (handle == null) return;
+    await _dropLive();
+    _liveConsent = consent;
+    _attachLive(handle);
   }
 
   Future<void> _dropLive() async {
@@ -457,13 +551,16 @@ class RecordingSessionNotifier extends Notifier<RecordingHandle?> {
     _partials = null;
     await _live?.close();
     _live = null;
-    if (ref.mounted) ref.read(provisionalCaptionProvider.notifier).clear();
+    if (!ref.mounted) return;
+    ref.read(provisionalCaptionProvider.notifier).clear();
+    _setLiveStatus(LiveServerStatus.off);
   }
 
   /// Stop de lopende opname om [reason] — elke eindweg uit #2510 loopt
   /// hier doorheen.
   Future<void> stopAll(RecordingEndReason reason) async {
     await ref.read(recordingManagerProvider).stop(reason);
+    _liveConsent = null;
     await _dropLive();
     state = null;
   }

@@ -1605,6 +1605,32 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'de microfoon': 'mikrofon',
+  'het systeemgeluid': 'sistemski zvok',
+  'Live-server wordt getest…': 'Strežnik v živo se preizkuša…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Začasno besedilo v živo prek {host} ni na voljo — strežnik je nedosegljiv ali ne govori protokola v živo.',
+  'Voorlopige tekst live via {host}': 'Začasno besedilo v živo prek {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Med snemanjem gre {bron} v živo na ta strežnik. Posnetek ostane v celoti na tej napravi; kar strežnik hrani, je njegova lastna politika.',
+  'Live-verbinding wordt opgezet…': 'Vzpostavlja se povezava v živo…',
+  'Live tekst via {host}': 'Besedilo v živo prek {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Povezava v živo je prekinjena — snemanje se nadaljuje lokalno.',
+  'Opnieuw verbinden met {host}': 'Znova poveži z {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Končna točka v živo za začasno besedilo (ws/wss, izbirno)',
+  'Live-poort staat toe: de socket mag openen':
+      'Dovoljeni prehod v živo: vtičnica se sme odpreti',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Končna točka v živo manjka ali je neveljavna — uporabite golo ws(s) URL brez poverilnic, poizvedbe ali fragmenta',
+  'Live-protocol testen': 'Preizkusi protokol v živo',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Strežnik v živo je dosegljiv in govori pretakalni protokol — možnost v živo se lahko prikaže',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Strežnik v živo je dosegljiv, a zahteva preverjanje pristnosti — preverite ključ API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Strežnik v živo je nedosegljiv ali ne govori protokola v živo',
   'Opnemen en transcriberen': 'Snemaj in prepiši',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Ta sestanek ne da ločenega vira zvoka. Posnetek celotnega klica ni na voljo.',

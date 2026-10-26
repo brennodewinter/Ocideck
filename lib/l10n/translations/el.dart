@@ -1630,6 +1630,32 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'de microfoon': 'το μικρόφωνο',
+  'het systeemgeluid': 'ο ήχος του συστήματος',
+  'Live-server wordt getest…': 'Έλεγχος του διακομιστή ζωντανά…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Το προσωρινό κείμενο ζωντανά μέσω {host} δεν είναι διαθέσιμο — ο διακομιστής είναι απρόσιτος ή δεν μιλά το πρωτόκολλο ζωντανής μετάδοσης.',
+  'Voorlopige tekst live via {host}': 'Προσωρινό κείμενο ζωντανά μέσω {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Κατά την εγγραφή, {bron} στέλνεται ζωντανά σε αυτόν τον διακομιστή. Η εγγραφή παραμένει εξ ολοκλήρου σε αυτή τη συσκευή· ό,τι διατηρεί ο διακομιστής είναι δική του πολιτική.',
+  'Live-verbinding wordt opgezet…': 'Δημιουργία σύνδεσης ζωντανά…',
+  'Live tekst via {host}': 'Κείμενο ζωντανά μέσω {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Η σύνδεση ζωντανά διακόπηκε — η εγγραφή συνεχίζεται τοπικά.',
+  'Opnieuw verbinden met {host}': 'Επανασύνδεση με {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Τελικό σημείο ζωντανά για προσωρινό κείμενο (ws/wss, προαιρετικό)',
+  'Live-poort staat toe: de socket mag openen':
+      'Η πύλη ζωντανά το επιτρέπει: το socket μπορεί να ανοίξει',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Το τελικό σημείο ζωντανά λείπει ή δεν είναι έγκυρο — χρησιμοποιήστε ένα απλό URL ws(s) χωρίς διαπιστευτήρια, ερώτημα ή τμήμα',
+  'Live-protocol testen': 'Δοκιμή πρωτοκόλλου ζωντανά',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Ο διακομιστής ζωντανά είναι προσβάσιμος και μιλά το πρωτόκολλο ροής — η επιλογή ζωντανά μπορεί να εμφανιστεί',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Ο διακομιστής ζωντανά είναι προσβάσιμος αλλά απαιτεί έλεγχο ταυτότητας — ελέγξτε το κλειδί API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Ο διακομιστής ζωντανά είναι απρόσιτος ή δεν μιλά το πρωτόκολλο ζωντανής μετάδοσης',
   'Opnemen en transcriberen': 'Εγγραφή και απομαγνητοφώνηση',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Αυτή η σύσκεψη δεν δίνει ξεχωριστή πηγή ήχου. Η εγγραφή όλης της κλήσης δεν είναι διαθέσιμη.',

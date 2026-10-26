@@ -1624,6 +1624,32 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'de microfoon': 'микрофона',
+  'het systeemgeluid': 'системният звук',
+  'Live-server wordt getest…': 'Сървърът на живо се тества…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Предварителният текст на живо чрез {host} не е наличен — сървърът е недостъпен или не поддържа протокола на живо.',
+  'Voorlopige tekst live via {host}': 'Предварителен текст на живо чрез {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'По време на записа {bron} се изпраща на живо към този сървър. Записът остава изцяло на това устройство; каквото съхранява сървърът е негова собствена политика.',
+  'Live-verbinding wordt opgezet…': 'Установява се връзка на живо…',
+  'Live tekst via {host}': 'Текст на живо чрез {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Връзката на живо е прекъсната — записът продължава локално.',
+  'Opnieuw verbinden met {host}': 'Свързване отново с {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Крайна точка на живо за предварителен текст (ws/wss, по избор)',
+  'Live-poort staat toe: de socket mag openen':
+      'Шлюзът на живо позволява: сокетът може да се отвори',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Крайната точка на живо липсва или е невалидна — използвайте чист ws(s) URL адрес без идентификационни данни, заявка или фрагмент',
+  'Live-protocol testen': 'Тествай протокола на живо',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Сървърът на живо е достъпен и поддържа протокола за стрийминг — опцията на живо може да се появи',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Сървърът на живо е достъпен, но изисква удостоверяване — проверете API ключа',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Сървърът на живо е недостъпен или не поддържа протокола на живо',
   'Opnemen en transcriberen': 'Запис и транскрипция',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Тази среща не дава отделен източник на звук. Запис на целия разговор не е наличен.',

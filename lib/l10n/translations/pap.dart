@@ -651,6 +651,32 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'de microfoon': 'e mikrofòn',
+  'het systeemgeluid': 'e zonido di sistema',
+  'Live-server wordt getest…': 'Ta probando e servidor en vivo…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Teksto provisional en vivo via {host} no ta disponibel — e servidor no ta aksesibel òf no ta papia e protokolo en vivo.',
+  'Voorlopige tekst live via {host}': 'Teksto provisional en vivo via {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Durante e grabashon, {bron} ta bai en vivo pa e servidor aki. E grabashon ta keda kompletamente riba e aparato aki; loke e servidor ta konservá ta su propio polítika.',
+  'Live-verbinding wordt opgezet…': 'Ta establesiendo e konekshon en vivo…',
+  'Live tekst via {host}': 'Teksto en vivo via {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Konekshon en vivo kortá — e grabashon ta sigui lokalmente.',
+  'Opnieuw verbinden met {host}': 'Konektá di nobo ku {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Punto di konexión en vivo pa teksto provisional (ws/wss, opshonal)',
+  'Live-poort staat toe: de socket mag openen':
+      'E poorta en vivo ta permití: e socket por habrí',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'E punto di konexión en vivo ta falta òf no ta bálido — usa un URL ws(s) simpel sin kredenshal, query ni fragmento',
+  'Live-protocol testen': 'Proba e protokolo en vivo',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Servidor en vivo aksesibel i ta papia e protokolo di streaming — e opshon en vivo por parse',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Servidor en vivo aksesibel pero ta eksigi outentikashon — kontrolá e klave API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Servidor en vivo inaksesibel òf no ta papia e protokolo en vivo',
   'Opnemen en transcriberen': 'Graba i transkribí',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'E reunion aki no ta duna un fuente di audio separá. Un grabashon di e yamada kompletu no ta disponibel.',

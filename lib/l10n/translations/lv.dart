@@ -1603,6 +1603,32 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'de microfoon': 'mikrofons',
+  'het systeemgeluid': 'sistēmas skaņa',
+  'Live-server wordt getest…': 'Tiek pārbaudīts tiešraides serveris…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Pagaidu teksts tiešraidē caur {host} nav pieejams — serveris nav sasniedzams vai neatbalsta tiešraides protokolu.',
+  'Voorlopige tekst live via {host}': 'Pagaidu teksts tiešraidē caur {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Ieraksta laikā {bron} tiešraidē tiek nosūtīts uz šo serveri. Ieraksts paliek pilnībā šajā ierīcē; to, ko serveris saglabā, nosaka tā paša politika.',
+  'Live-verbinding wordt opgezet…': 'Tiek izveidots tiešraides savienojums…',
+  'Live tekst via {host}': 'Teksts tiešraidē caur {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Tiešraides savienojums pārtraukts — ieraksts turpinās lokāli.',
+  'Opnieuw verbinden met {host}': 'Savienoties vēlreiz ar {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Tiešraides galapunkts pagaidu tekstam (ws/wss, pēc izvēles)',
+  'Live-poort staat toe: de socket mag openen':
+      'Tiešraides vārti atļauj: ligzda drīkst atvērties',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Tiešraides galapunkts trūkst vai nav derīgs — izmantojiet tīru ws(s) URL bez akreditācijas datiem, vaicājuma vai fragmenta',
+  'Live-protocol testen': 'Pārbaudīt tiešraides protokolu',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Tiešraides serveris ir sasniedzams un atbalsta straumēšanas protokolu — tiešraides opcija var parādīties',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Tiešraides serveris ir sasniedzams, bet pieprasa autentifikāciju — pārbaudiet API atslēgu',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Tiešraides serveris nav sasniedzams vai neatbalsta tiešraides protokolu',
   'Opnemen en transcriberen': 'Ierakstīt un transkribēt',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Šī sapulce nedod atsevišķu skaņas avotu. Visa zvana ieraksts nav pieejams.',

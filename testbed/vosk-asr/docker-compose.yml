@@ -1,0 +1,18 @@
+# Lokale Vosk-WebSocket-server voor de live-ASR-proef (#2525).
+# Alleen loopback: de proef is clientgedrag, niet een productie-
+# deployment — echte TLS/auth hoort bij de gids (README.md).
+services:
+  vosk:
+    image: alphacep/kaldi-vosk-server@sha256:381024347b954835c9c20adea2041377e7b55f50d4c5887eb42101bbf6e750a1
+    platform: linux/amd64
+    command: ["python3", "/opt/vosk-server/websocket/asr_server.py"]
+    environment:
+      VOSK_MODEL_PATH: /opt/vosk-model
+      VOSK_SAMPLE_RATE: "16000"
+      VOSK_SHOW_WORDS: "1"
+    volumes:
+      - ./model/vosk-model-small-en-us-0.15:/opt/vosk-model:ro
+      - ./fixtures:/opt/fixtures:ro
+    ports:
+      - "127.0.0.1:2700:2700"
+    restart: unless-stopped

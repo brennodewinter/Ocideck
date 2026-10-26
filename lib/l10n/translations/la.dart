@@ -1620,6 +1620,32 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'de microfoon': 'microphonum',
+  'het systeemgeluid': 'sonus systematis',
+  'Live-server wordt getest…': 'Servitor vivus probatur…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Textus provisorius vivus per {host} non praesto est — servitor inaccessibilis est aut protocolum vivum non loquitur.',
+  'Voorlopige tekst live via {host}': 'Textus provisorius vivus per {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Inter recordationem, {bron} vive ad hunc servitorem it. Recordatio omnino in hoc instrumento manet; quid servitor retineat eius propria politica est.',
+  'Live-verbinding wordt opgezet…': 'Conexus vivus instauratur…',
+  'Live tekst via {host}': 'Textus vivus per {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Conexus vivus interruptus — recordatio localiter pergit.',
+  'Opnieuw verbinden met {host}': 'Iterum conecte cum {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Terminus vivus pro textu provisorio (ws/wss, facultativum)',
+  'Live-poort staat toe: de socket mag openen':
+      'Porta viva permittit: socket aperiri potest',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Terminus vivus deest vel invalidus est — URL ws(s) nudus sine credentialibus, quaestione vel fragmento adhibe',
+  'Live-protocol testen': 'Protocolum vivum proba',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Servitor vivus accessibilis est et protocolum fluxus loquitur — optio viva apparere potest',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Servitor vivus accessibilis sed authenticationem exigit — clavem API verifica',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Servitor vivus inaccessibilis aut protocolum vivum non loquitur',
   'Opnemen en transcriberen': 'Excipe et transcribe',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Hoc colloquium fontem soni separatum non praebet. Totius colloquii exceptio non praesto est.',

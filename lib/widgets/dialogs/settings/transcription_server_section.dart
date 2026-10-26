@@ -24,6 +24,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../models/asr_server_profile.dart';
 import '../../../services/secret_store.dart';
 import '../../../services/transcription/asr_engine_factory.dart';
+import '../../../services/transcription/asr_live_engine_factory.dart';
 import '../../../services/transcription/asr_server_engine.dart';
 import '../../../services/transcription/asr_server_gate.dart';
 import '../../../services/transcription/transcription_engine.dart';
@@ -59,6 +60,7 @@ class _TranscriptionServerSectionState
   final _urlCtl = TextEditingController();
   final _nameCtl = TextEditingController();
   final _keyCtl = TextEditingController();
+  final _liveCtl = TextEditingController();
 
   AsrServerMode _mode = AsrServerMode.none;
   bool _enabled = false;
@@ -70,19 +72,21 @@ class _TranscriptionServerSectionState
   AsrServerProbe? _probe;
   bool _audioTesting = false;
   ({bool ok, String text})? _audioResult;
+  bool _liveProbing = false;
+  AsrServerProbe? _liveProbe;
 
   @override
   void initState() {
     super.initState();
     _loadFromSaved(ref.read(asrServerProfileProvider));
-    for (final ctl in [_urlCtl, _nameCtl, _keyCtl]) {
+    for (final ctl in [_urlCtl, _nameCtl, _keyCtl, _liveCtl]) {
       ctl.addListener(_onField);
     }
   }
 
   @override
   void dispose() {
-    for (final ctl in [_urlCtl, _nameCtl, _keyCtl]) {
+    for (final ctl in [_urlCtl, _nameCtl, _keyCtl, _liveCtl]) {
       ctl.dispose();
     }
     super.dispose();
@@ -95,6 +99,7 @@ class _TranscriptionServerSectionState
     _cloudConfirmed = p.cloudConfirmed;
     _urlCtl.text = p.baseUrl;
     _nameCtl.text = p.name;
+    _liveCtl.text = p.liveUrl;
     _refreshStoredKey();
   }
 
@@ -103,6 +108,7 @@ class _TranscriptionServerSectionState
       // Een gewijzigd veld maakt eerdere uitslagen ongeldig.
       _probe = null;
       _audioResult = null;
+      _liveProbe = null;
     });
     unawaited(_refreshStoredKey());
   }
@@ -126,6 +132,7 @@ class _TranscriptionServerSectionState
     name: _nameCtl.text.trim(),
     trustedInternal: _trustedInternal,
     cloudConfirmed: _cloudConfirmed,
+    liveUrl: _liveCtl.text.trim(),
   );
 
   AsrServerEngine _engine() {
@@ -202,6 +209,14 @@ class _TranscriptionServerSectionState
                       ? l10n.d('opgeslagen — leeg laten houdt hem')
                       : null,
                 ),
+                SettingsTextField(
+                  _liveCtl,
+                  l10n.d(
+                    'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)',
+                  ),
+                  hint: l10n.d('ws://127.0.0.1:2700'),
+                  icon: Icons.stream_outlined,
+                ),
               ],
             ),
           ),
@@ -232,6 +247,7 @@ class _TranscriptionServerSectionState
             onChanged: (v) => setState(() => _enabled = v),
           ),
           _gateLine(l10n),
+          _liveGateLine(l10n),
           _actions(l10n, dirty),
           _results(l10n),
         ] else ...[
@@ -345,6 +361,44 @@ class _TranscriptionServerSectionState
     );
   }
 
+  /// De poortuitslag over het live-endpoint — alleen zichtbaar als er
+  /// een ws(s)-adres is ingevuld. Zelfde tiers als de batch-poort; de
+  /// `ws`-variant van `insecureHttpOnWeb` is mixed content op een
+  /// https-pagina en mag alleen naar loopback.
+  Widget _liveGateLine(AppLocalizations l10n) {
+    if (_liveCtl.text.trim().isEmpty) return const SizedBox.shrink();
+    final decision = AsrServerGate.evaluateLive(_draft(), isWeb: kIsWeb);
+    final (icon, color, text) = switch (decision) {
+      AsrGateAllow() => (
+        Icons.check_circle_outline,
+        AppTheme.tealFg,
+        l10n.d('Live-poort staat toe: de socket mag openen'),
+      ),
+      AsrGateDeny(:final reason) => (
+        Icons.block_outlined,
+        AppTheme.amber700,
+        reason == AsrGateDenial.notConfigured
+            ? l10n.d(
+                'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment',
+              )
+            : _denialText(l10n, reason),
+      ),
+    };
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 15, color: color),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(text, style: TextStyle(fontSize: 12, color: color)),
+          ),
+        ],
+      ),
+    );
+  }
+
   String _denialText(AppLocalizations l10n, AsrGateDenial reason) {
     return switch (reason) {
       AsrGateDenial.disabled => l10n.d(
@@ -373,7 +427,7 @@ class _TranscriptionServerSectionState
   }
 
   Widget _actions(AppLocalizations l10n, bool dirty) {
-    final busy = _probing || _audioTesting;
+    final busy = _probing || _audioTesting || _liveProbing;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 6),
       child: Wrap(
@@ -407,6 +461,18 @@ class _TranscriptionServerSectionState
                 : const Icon(Icons.upload_file_outlined, size: 16),
             label: Text(l10n.d('Test met echte audio')),
           ),
+          if (_liveCtl.text.trim().isNotEmpty)
+            OutlinedButton.icon(
+              onPressed: busy ? null : _testLive,
+              icon: _liveProbing
+                  ? const SizedBox(
+                      width: 14,
+                      height: 14,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.stream_outlined, size: 16),
+              label: Text(l10n.d('Live-protocol testen')),
+            ),
           if (ref.read(asrServerProfileProvider).hasEndpoint)
             TextButton.icon(
               onPressed: busy ? null : _remove,
@@ -428,6 +494,11 @@ class _TranscriptionServerSectionState
           _resultLine(
             ok: probe.status == AsrProbeStatus.reachable,
             text: _probeText(l10n, probe),
+          ),
+        if (_liveProbe != null)
+          _resultLine(
+            ok: _liveProbe!.status == AsrProbeStatus.reachable,
+            text: _liveProbeText(l10n, _liveProbe!),
           ),
         if (audio != null) _resultLine(ok: audio.ok, text: audio.text),
       ],
@@ -471,6 +542,49 @@ class _TranscriptionServerSectionState
             AsrGateDenial.notConfigured,
       ),
     };
+  }
+
+  String _liveProbeText(AppLocalizations l10n, AsrServerProbe probe) {
+    return switch (probe.status) {
+      AsrProbeStatus.reachable => l10n.d(
+        'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen',
+      ),
+      AsrProbeStatus.authRequired => l10n.d(
+        'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel',
+      ),
+      AsrProbeStatus.unreachable =>
+        '${l10n.d('Live-server onbereikbaar of spreekt het live-protocol niet')} (${probe.detail})',
+      AsrProbeStatus.refused => _denialText(
+        l10n,
+        AsrGateDenial.values.asNameMap()[probe.detail] ??
+            AsrGateDenial.notConfigured,
+      ),
+    };
+  }
+
+  /// De live-proto­colproef: opent de socket, stuurt config + eof en
+  /// bewijst dat het antwoord de `vosk-ws-1`-vorm heeft. Er gaat géén
+  /// audio mee — precies wat "capability-probe" hier betekent.
+  Future<void> _testLive() async {
+    setState(() {
+      _liveProbing = true;
+      _liveProbe = null;
+    });
+    try {
+      final result = await createAsrLiveServerEngine(
+        _draft(),
+        apiKeyReader: () async {
+          final typed = _keyCtl.text.trim();
+          if (typed.isNotEmpty) return typed;
+          final secrets = SecretStore();
+          if (!secrets.canStore) return null;
+          return secrets.readAsrApiKey(_urlCtl.text.trim());
+        },
+      ).probeLive();
+      if (mounted) setState(() => _liveProbe = result);
+    } finally {
+      if (mounted) setState(() => _liveProbing = false);
+    }
   }
 
   Future<void> _save() async {

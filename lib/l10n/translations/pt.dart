@@ -1633,6 +1633,32 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'de microfoon': 'o microfone',
+  'het systeemgeluid': 'o áudio do sistema',
+  'Live-server wordt getest…': 'A testar o servidor ao vivo…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'O texto provisório ao vivo via {host} não está disponível — o servidor está inacessível ou não fala o protocolo ao vivo.',
+  'Voorlopige tekst live via {host}': 'Texto provisório ao vivo via {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Durante a gravação, {bron} é enviado ao vivo para este servidor. A gravação permanece inteiramente neste dispositivo; o que o servidor retém é a sua própria política.',
+  'Live-verbinding wordt opgezet…': 'A estabelecer a ligação ao vivo…',
+  'Live tekst via {host}': 'Texto ao vivo via {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Ligação ao vivo interrompida — a gravação continua localmente.',
+  'Opnieuw verbinden met {host}': 'Voltar a ligar a {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Endpoint ao vivo para texto provisório (ws/wss, opcional)',
+  'Live-poort staat toe: de socket mag openen':
+      'A porta ao vivo permite: o socket pode abrir',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Endpoint ao vivo em falta ou inválido — utilize um URL ws(s) simples, sem credenciais, query ou fragmento',
+  'Live-protocol testen': 'Testar o protocolo ao vivo',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Servidor ao vivo acessível e fala o protocolo de streaming — a opção ao vivo pode aparecer',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Servidor ao vivo acessível mas exige autenticação — verifique a chave API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Servidor ao vivo inacessível ou não fala o protocolo ao vivo',
   'Opnemen en transcriberen': 'Gravar e transcrever',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Esta reunião não fornece uma fonte de áudio à parte. Uma gravação da chamada inteira não está disponível.',

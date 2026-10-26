@@ -13,6 +13,7 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'ws://127.0.0.1:2700',
   'USB',
   // Eigennaam van de vergaderdienst; identiek in het Engels én in vrijwel
   // alle andere talen (alleen hier en op unchangedInAllLanguages witgelijst).
@@ -318,6 +319,7 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'ws://127.0.0.1:2700',
   'USB',
   'Bluetooth',
   'web',

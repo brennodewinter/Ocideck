@@ -69,6 +69,25 @@ All notable changes to OciDeck are documented in this file.
   hier op echte hardware bewezen. De Windows-build is op deze machine
   niet gecompileerd.
 
+- **Live voorlopige tekst via een ASR-server (#2525).** Het
+  transcriptieserver-profiel kent nu ook een *live-endpoint* (`ws://` of
+  `wss://`) naast het batch-adres — OciDeck spreekt het zelf-hostbare
+  Vosk-WebSocket-protocol, dat wél partiële hypothesen teruggeeft. De
+  instellingen proeven het protocol (config + einde, geen audio) voordat de
+  optie überhaupt verschijnt. Zie je in het opnamevenster dan het extra
+  vinkje, dan noemt het de host die je audio ontvangt: aanvinken is
+  toestemming voor díe sessie, los van de aparte upload-toestemming per
+  taak. De voorlopige tekst loopt mee in de opnamestrook met een
+  verbindingsstatus; valt de verbinding weg dan loopt de opname door en is
+  alleen *opnieuw verbinden* — die vraagt opnieuw — de weg terug, nooit een
+  stille reconnect. De bewaarde tekst komt nog steeds uit de definitieve
+  pass over de voltooide opname. In de browser kan een WebSocket de
+  API-sleutel niet meesturen, dus een live-server die een sleutel eist is
+  daar onbereikbaar; de optie verschijnt er niet. Bewezen tegen de gepinde
+  Vosk-referentieserver in `testbed/vosk-asr` (`make test-asr-integration`):
+  protocolproef, echte hypothesen tijdens de stroom, definitieve tekst en
+  een schoon einde.
+
 - **Afbeeldingen wisselen bij twee indelingen (#2502).** Bij twee afbeeldingen
   verwisselt één knop de linker- en rechterafbeelding met hun bijschrift,
   alternatieve tekst, bijsnijbrandpunt en paneelbreedte. Bij bullets met afbeelding zet **Afbeelding

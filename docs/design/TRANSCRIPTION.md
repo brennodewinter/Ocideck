@@ -475,6 +475,49 @@ header. Uploads cap at 400 MB, responses at 16 MB, cancel aborts the request
 as `Cancelled`, and a failed upload leaves the source audio untouched —
 retrying is a new user choice, never automatic.
 
+**Implemented (#2525) — the live server route.** A second, optional endpoint
+on the same profile (`liveUrl`, `ws://`/`wss://`) carries provisional text
+*while* the recording runs. The wire protocol is the proven, self-hostable
+Vosk WebSocket contract (`vosk-ws-1`): a JSON config frame, then the same
+16 kHz mono s16le PCM frames the capture already produces, a byte-exact
+`{"eof" : 1}` to close (the reference server compares the literal string,
+not the JSON — `{"eof":1}` kills the session silently); the server answers
+`{"partial":…}` hypotheses and `{"result":[…]}` sentences. The *tested*
+implementation is the Vosk reference server, pinned in `testbed/vosk-asr/`
+— `make test-asr-integration` proves probe, partials, definitive result
+and a clean eof against it; its README is the setup guide. A batch `POST
+/inference` was deliberately rejected as "live" — it cannot emit partials,
+and a provisional route that cannot provisional is a lie in the UI. Consent is *session*-scoped (`ServerConsent.liveSession`,
+`audioPath == null`, `sessionScope == true`) and strictly separate from the
+per-task upload consent of §4.3: the recording dialog only offers the live
+checkbox after a successful protocol probe, and ticking it names the
+receiving host and says the microphone audio leaves the device for the
+session's duration. The gate (`evaluateLive`) reuses the same trust tiers
+but applies the WebSocket rules: `wss://` for cloud, `ws://` only where
+plain `http` would be allowed, and live URLs reject query strings and
+fragments outright so a token can never ride the URL into logs and
+proxies. On IO the socket is pinned to the gate-resolved address
+(`asr_resolve_io` shared with the batch transport) and the API key — still
+keyed on `baseUrl` in `SecretStore` — travels only as a handshake header.
+On web the browser is the boundary; browser WebSockets cannot set headers,
+so a key-requiring live endpoint is honestly unreachable there rather than
+silently unauthenticated. One capture serves both outputs: `LivePass`
+forwards the existing chunks to `AsrLiveServerEngine.transcribeLive`, the
+local recording never pauses for it, and a lost socket flips the strip's
+live status to *connection lost* without touching the recording. There is
+**no silent reconnect**: the transport throws, the provider marks `lost`,
+and only the retry control — which names the host again and requires a
+fresh `ServerConsent.liveSession` — opens a new socket, because a new
+socket *is* a new session. The provisional text remains provisional; the
+definitive transcript still comes from the later pass over the completed
+recording (§4.2), so a flaky live route degrades to "no preview", never to
+"no transcript". The definitive pass (`transcribe`) on this engine opens a
+*new* socket and replays the stored recording through the same protocol —
+the server sees a fresh session and returns its `result` sentences as the
+final segments. That pass accepts either per-task consent (host + audio
+path) or the still-running session consent, because both name the same
+host.
+
 ### 4.4 Error taxonomy (typed, before platform code)
 
 ```dart
@@ -681,7 +724,7 @@ with the honest label "room capture may include speaker output".
 | Local desktop engine (whisper.cpp `whisper-cli` subprocess, #2512) | beschikbaar on macOS arm64/x86_64 (measured, §4.5); Linux/Windows build from the same pinned source — real-hardware proof pending there |
 | Local web engine (WASM, #2513) | beschikbaar onder voorwaarde — gemeten op de echte artifacten in Chrome, Firefox en Safari/WebKit (§4.6); vereist COOP/COEP-headers van de host (de bundel levert ze via `.htaccess`), anders meldt de engine `noIsolation`. Aanbod: `small` en `base`; `large-v3-turbo` past niet in 2 GB WASM-geheugen. |
 | Batch server (#2524) | beschikbaar — geïmplementeerd achter de egresspoort (§4.3): loopback/LAN/cloud-tiers met eigen opt-ins, whisper.cpp-`whisper-server`-protocol; compatibiliteit met andere ASR-servers wordt niet geclaimd |
-| Live server (#2525) | afwezig. Het bewezen whisper-server-contract is alleen `POST /inference` (batch, #2524). `transcribeLive` geeft null terug en `streaming` blijft false tot een engine een streaming-protocol zelf meldt. Er is geen verzonnen live-client. De pass in `live_pass.dart` (#2522) staat klaar en doet niets zolang die melding uitblijft. |
+| Live server (#2525) | beschikbaar — geïmplementeerd achter dezelfde egresspoort (§4.3): eigen `liveUrl` op het ASR-profiel, Vosk-WebSocket-protocol (`vosk-ws-1`) voor partiële hypothesen, sessieconsent via de opnamedialoog na een geslaagde protocolprobe. Bewezen tegen de gepinde Vosk-referentieserver (`testbed/vosk-asr`, `make test-asr-integration`); compatibiliteit met andere streaming-ASR-servers wordt niet geclaimd. Alleen op bronnen die `liveChunks` leveren (desktop-opnames); web-bronnen en bestand doen niet mee, en een sleutel-eisend live-endpoint is op web onbereikbaar (geen WS-headers). |
 
 ---
 

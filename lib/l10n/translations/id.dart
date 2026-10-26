@@ -1605,6 +1605,32 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'de microfoon': 'mikrofon',
+  'het systeemgeluid': 'audio sistem',
+  'Live-server wordt getest…': 'Server live sedang diuji…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Teks sementara live via {host} tidak tersedia — server tidak dapat dijangkau atau tidak mendukung protokol live.',
+  'Voorlopige tekst live via {host}': 'Teks sementara live via {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Selama perekaman, {bron} dikirim live ke server ini. Rekaman tetap sepenuhnya di perangkat ini; apa yang disimpan server adalah kebijakannya sendiri.',
+  'Live-verbinding wordt opgezet…': 'Koneksi live sedang dibuat…',
+  'Live tekst via {host}': 'Teks live via {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Koneksi live terputus — perekaman berlanjut secara lokal.',
+  'Opnieuw verbinden met {host}': 'Hubungkan ulang ke {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Endpoint live untuk teks sementara (ws/wss, opsional)',
+  'Live-poort staat toe: de socket mag openen':
+      'Gerbang live mengizinkan: socket boleh dibuka',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Endpoint live tidak ada atau tidak valid — gunakan URL ws(s) polos tanpa kredensial, query, atau fragment',
+  'Live-protocol testen': 'Uji protokol live',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Server live dapat dijangkau dan mendukung protokol streaming — opsi live dapat muncul',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Server live dapat dijangkau tetapi memerlukan autentikasi — periksa kunci API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Server live tidak dapat dijangkau atau tidak mendukung protokol live',
   'Opnemen en transcriberen': 'Rekam dan transkripsi',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Rapat ini tidak memberi sumber audio terpisah. Rekaman seluruh panggilan tidak tersedia.',

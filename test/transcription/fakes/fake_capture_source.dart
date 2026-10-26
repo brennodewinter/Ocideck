@@ -7,6 +7,7 @@
 // Hij woont onder test/ bewust: een test-double, geen geleverde bron —
 // er kan dus nooit "per ongeluk" een nepopname in productie starten.
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:ocideck/services/transcription/capture_source.dart';
 
@@ -103,6 +104,12 @@ class FakeCaptureSession implements CaptureSession {
   );
 
   // ── test helpers ──────────────────────────────────────────────────────
+
+  /// Lever een live-blok af — wat een echte bron tijdens de opname zou
+  /// uitsturen voor de provisionele route.
+  void emitChunk(List<int> bytes, Duration offset) {
+    _live.add(AudioChunk(bytes: Uint8List.fromList(bytes), offset: offset));
+  }
 
   /// De bron verdwijnt van buitenaf (apparaat weg, tab dicht).
   void loseSource() => _ended.add(CaptureEndCause.sourceLost);

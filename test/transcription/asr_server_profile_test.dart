@@ -29,9 +29,31 @@ void main() {
         name: 'werkasr',
         trustedInternal: true,
         cloudConfirmed: true,
+        liveUrl: 'wss://asr.example.nl/live',
       );
       final back = AsrServerProfile.fromJson(p.toJson());
       expect(back, p);
+    });
+
+    test('een profiel van vóór #2525 leest liveUrl als leeg', () {
+      final p = AsrServerProfile.fromJson({
+        'enabled': true,
+        'mode': 'loopback',
+        'baseUrl': 'http://127.0.0.1:8080',
+      });
+      expect(p.liveUrl, '');
+      expect(p.hasLiveEndpoint, isFalse);
+      expect(p.liveHost, '');
+    });
+
+    test('liveHost en hasLiveEndpoint lezen het live-endpoint', () {
+      const p = AsrServerProfile(
+        mode: AsrServerMode.loopback,
+        baseUrl: 'http://127.0.0.1:8080',
+        liveUrl: 'ws://127.0.0.1:2700',
+      );
+      expect(p.hasLiveEndpoint, isTrue);
+      expect(p.liveHost, '127.0.0.1');
     });
 
     test('defaults zijn uit, geen modus, geen bevestigingen', () {

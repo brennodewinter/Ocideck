@@ -1620,6 +1620,32 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'de microfoon': 'мікрофон',
+  'het systeemgeluid': 'системний звук',
+  'Live-server wordt getest…': 'Сервер наживо перевіряється…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Попередній текст наживо через {host} недоступний — сервер недоступний або не підтримує протокол наживо.',
+  'Voorlopige tekst live via {host}': 'Попередній текст наживо через {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Під час запису {bron} надсилається наживо на цей сервер. Запис залишається повністю на цьому пристрої; те, що зберігає сервер, — його власна політика.',
+  'Live-verbinding wordt opgezet…': 'Встановлюється з\'єднання наживо…',
+  'Live tekst via {host}': 'Текст наживо через {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'З\'єднання наживо перервано — запис триває локально.',
+  'Opnieuw verbinden met {host}': 'Повторно підключитися до {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Кінцева точка наживо для попереднього тексту (ws/wss, необов\'язково)',
+  'Live-poort staat toe: de socket mag openen':
+      'Шлюз наживо дозволяє: сокет може відкритися',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Кінцева точка наживо відсутня або недійсна — використовуйте чистий URL ws(s) без облікових даних, запиту чи фрагмента',
+  'Live-protocol testen': 'Перевірити протокол наживо',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Сервер наживо доступний і підтримує протокол потокової передачі — опція наживо може з\'явитися',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Сервер наживо доступний, але вимагає автентифікації — перевірте ключ API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Сервер наживо недоступний або не підтримує протокол наживо',
   'Opnemen en transcriberen': 'Записувати й транскрибувати',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Ця нарада не дає окремого джерела звуку. Запис усієї розмови недоступний.',

@@ -93,20 +93,36 @@ class PartialTranscript {
   final Duration offset;
 }
 
-/// De bewuste toestemming voor één servertaak (§4.3: per taak, met host én
-/// bestand benoemd). De consentdialoog is de enige eerlijke maker; de
-/// engine toetst of de bevestigde waarden exact overeenkomen met wat hij
-/// gaat versturen — alles anders is [ConsentRequired].
+/// De bewuste toestemming voor één servertaak of -sessie (§4.3). Twee
+/// bereiken, bewust gescheiden: **per taak** benoemt de bevestiging host
+/// én bestand ([audioPath]); **per sessie** ([liveSession]) benoemt hij
+/// alleen de host — er is bij een lopende opname nog geen bestand om te
+/// benoemen. De consentdialoog en de opname-acties zijn de enige
+/// eerlijke makers; de engine toetst of de bevestigde waarden exact
+/// overeenkomen met wat hij gaat versturen — alles anders is
+/// [ConsentRequired]. Een taakconsent dekt geen sessie en andersom.
 class ServerConsent {
-  const ServerConsent({required this.host, required this.audioPath});
+  const ServerConsent({required this.host, required this.audioPath})
+    : sessionScope = false;
+
+  /// De sessieconsent voor de liveroute (#2525): de opname-flow noemde
+  /// de host én wat er live heen gaat, en de Start was de bevestiging.
+  /// `audioPath` is bewust null — er is nog geen afgerond bestand.
+  const ServerConsent.liveSession(this.host)
+    : audioPath = null,
+      sessionScope = true;
 
   /// De host die in de bevestiging stond — moet gelijk zijn aan de host
-  /// van het serverprofiel.
+  /// van het serverprofiel (batch) of van het live-endpoint (sessie).
   final String host;
 
-  /// De audioverwijzing die in de bevestiging stond — moet gelijk zijn aan
-  /// de `AudioRef.path` van deze taak.
-  final String audioPath;
+  /// De audioverwijzing die in de bevestiging stond — moet gelijk zijn
+  /// aan de `AudioRef.path` van deze taak. Null bij [liveSession].
+  final String? audioPath;
+
+  /// `true` = per-sessie consent voor de liveroute; `false` = per-taak
+  /// consent voor een upload.
+  final bool sessionScope;
 }
 
 /// Keuzes voor één transcriptietaak. Klein gehouden: wat elke engine
@@ -158,8 +174,13 @@ abstract class TranscriptionEngine {
   );
 
   /// Provisionele tekst over live blokken — alleen `liveServer` en lokale
-  /// engines met `streaming`. Null betekent "geen live route".
-  Stream<PartialTranscript>? transcribeLive(Stream<AudioChunk> chunks);
+  /// engines met `streaming`. Null betekent "geen live route". [options]
+  /// draagt de sessieconsent voor de serverroute; engines die die niet
+  /// nodig hebben negeren hem.
+  Stream<PartialTranscript>? transcribeLive(
+    Stream<AudioChunk> chunks, {
+    TranscriptionOptions? options,
+  });
 
   /// Breekt een lopende [transcribe] af; de toekomst voltooit met
   /// [Cancelled]. Niets aan de hand als er niets liep.

@@ -20,9 +20,12 @@ class LivePass {
   StreamController<AudioChunk>? _outgoing;
 
   /// Null als [chunks] of [TranscriptionEngine.transcribeLive] null is.
+  /// [options] gaat ongemoeid door naar de engine — de serverroute
+  /// vraagt daar zijn sessieconsent uit.
   Stream<PartialTranscript>? attach({
     required TranscriptionEngine engine,
     required Stream<AudioChunk>? chunks,
+    TranscriptionOptions? options,
     void Function(bool lagging)? onLag,
     int lagAfter = livePassLagAfter,
   }) {
@@ -30,7 +33,7 @@ class LivePass {
     if (input == null) return null;
     final outgoing = StreamController<AudioChunk>();
     _outgoing = outgoing;
-    final partials = engine.transcribeLive(outgoing.stream);
+    final partials = engine.transcribeLive(outgoing.stream, options: options);
     if (partials == null) {
       // Sluiten zonder luisteraar voltooit nooit. Er is niets te leveren.
       _outgoing = null;

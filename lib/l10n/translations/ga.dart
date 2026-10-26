@@ -1635,6 +1635,32 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'de microfoon': 'an micreafón',
+  'het systeemgeluid': 'fuaim an chórais',
+  'Live-server wordt getest…': 'Ag tástáil an fhreastalaí bheo…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Níl an téacs sealadach beo trí {host} ar fáil — níl an freastalaí sroichte nó ní labhraíonn sé an prótacal beo.',
+  'Voorlopige tekst live via {host}': 'Téacs sealadach beo trí {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Le linn an taifid, téann {bron} beo chuig an bhfreastalaí seo. Fanann an taifead go hiomlán ar an bhfreastalaí seo; is é a pholasaí féin a choimeádann an freastalaí.',
+  'Live-verbinding wordt opgezet…': 'Ag bunú an naisc bheo…',
+  'Live tekst via {host}': 'Téacs beo trí {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Nasc beo briste — leanann an taifeadadh ar aghaidh go háitiúil.',
+  'Opnieuw verbinden met {host}': 'Ceangail arís le {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Críochphointe beo don téacs sealadach (ws/wss, roghnach)',
+  'Live-poort staat toe: de socket mag openen':
+      'Ceadaíonn an geata beo é: féadfaidh an soicéad oscailt',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Críochphointe beo ar iarraidh nó neamhbhailí — bain úsáid as URL ws(s) lom gan dintiúir, iarratas nó fragment',
+  'Live-protocol testen': 'Tástáil an prótacal beo',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Tá an freastalaí beo sroichte agus labhraíonn sé an prótacal sruthú — féadfaidh an rogha bheo a bheith le feiceáil',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Tá an freastalaí beo sroichte ach éilíonn sé fíordheimhniú — seiceáil an eochair API',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Níl an freastalaí beo sroichte nó ní labhraíonn sé an prótacal beo',
   'Opnemen en transcriberen': 'Taifead agus tras-scríobh',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Ní fhoinse fuaime ar leith ag an gcruinniú seo. Níl taifead den ghlao iomlán ar fáil.',

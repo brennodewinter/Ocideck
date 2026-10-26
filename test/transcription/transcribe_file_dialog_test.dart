@@ -141,7 +141,10 @@ class _FakeEngine implements TranscriptionEngine {
   }
 
   @override
-  Stream<PartialTranscript>? transcribeLive(Stream<AudioChunk> audio) => null;
+  Stream<PartialTranscript>? transcribeLive(
+    Stream<AudioChunk> audio, {
+    TranscriptionOptions? options,
+  }) => null;
 
   @override
   void cancel() {}

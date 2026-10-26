@@ -1607,6 +1607,33 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'de microfoon': 'a mikrofon',
+  'het systeemgeluid': 'a rendszerhang',
+  'Live-server wordt getest…': 'Az élő kiszolgáló tesztelése…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Az ideiglenes szöveg élőben a(z) {host} kiszolgálón keresztül nem érhető el — a kiszolgáló nem elérhető vagy nem beszéli az élő protokollt.',
+  'Voorlopige tekst live via {host}':
+      'Ideiglenes szöveg élőben a(z) {host} kiszolgálón keresztül',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'A felvétel alatt a(z) {bron} élőben erre a kiszolgálóra kerül. A felvétel teljesen ezen az eszközön marad; amit a kiszolgáló megőriz, az a saját szabályzata.',
+  'Live-verbinding wordt opgezet…': 'Az élő kapcsolat létrehozása…',
+  'Live tekst via {host}': 'Élő szöveg a(z) {host} kiszolgálón keresztül',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Az élő kapcsolat megszakadt — a felvétel helyben folytatódik.',
+  'Opnieuw verbinden met {host}': 'Újracsatlakozás a(z) {host} kiszolgálóhoz',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Élő végpont az ideiglenes szöveghez (ws/wss, opcionális)',
+  'Live-poort staat toe: de socket mag openen':
+      'Az élő kapu engedélyezi: a socket megnyílhat',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Az élő végpont hiányzik vagy érvénytelen — használjon tiszta ws(s) URL-t hitelesítő adatok, lekérdezés vagy töredék nélkül',
+  'Live-protocol testen': 'Élő protokoll tesztelése',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Az élő kiszolgáló elérhető és beszéli a streaming-protokollt — az élő opció megjelenhet',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Az élő kiszolgáló elérhető, de hitelesítést igényel — ellenőrizze az API-kulcsot',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Az élő kiszolgáló nem érhető el, vagy nem beszéli az élő protokollt',
   'Opnemen en transcriberen': 'Felvétel és átírás',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Ez a megbeszélés nem ad külön hangforrást. A teljes hívás felvétele nem érhető el.',

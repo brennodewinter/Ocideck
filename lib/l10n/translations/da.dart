@@ -1605,6 +1605,32 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'de microfoon': 'mikrofonen',
+  'het systeemgeluid': 'systemlyden',
+  'Live-server wordt getest…': 'Live-serveren testes…',
+  'Voorlopige tekst live via {host} is niet beschikbaar — de server is onbereikbaar of spreekt het live-protocol niet.':
+      'Foreløbig tekst live via {host} er ikke tilgængelig — serveren er ikke tilgængelig eller taler ikke live-protokollen.',
+  'Voorlopige tekst live via {host}': 'Foreløbig tekst live via {host}',
+  'Tijdens de opname gaat {bron} live naar deze server. De opname blijft volledig op dit apparaat; wat de server bewaart is zijn beleid.':
+      'Under optagelsen sendes {bron} live til denne server. Optagelsen bliver helt på denne enhed; hvad serveren opbevarer, er dens egen politik.',
+  'Live-verbinding wordt opgezet…': 'Live-forbindelsen oprettes…',
+  'Live tekst via {host}': 'Live-tekst via {host}',
+  'Live-verbinding verbroken — de opname loopt lokaal door.':
+      'Live-forbindelsen blev afbrudt — optagelsen fortsætter lokalt.',
+  'Opnieuw verbinden met {host}': 'Forbind igen til {host}',
+  'Live-endpoint voor voorlopige tekst (ws/wss, optioneel)':
+      'Live-endpunkt til foreløbig tekst (ws/wss, valgfrit)',
+  'Live-poort staat toe: de socket mag openen':
+      'Live-porten tillader det: soklen må åbne',
+  'Live-endpoint ontbreekt of is ongeldig — gebruik een kale ws(s)-URL zonder credentials, query of fragment':
+      'Live-endpunkt mangler eller er ugyldigt — brug en ren ws(s)-URL uden legitimationsoplysninger, forespørgsel eller fragment',
+  'Live-protocol testen': 'Test live-protokollen',
+  'Live-server bereikbaar en spreekt het streaming-protocol — de live-optie kan verschijnen':
+      'Live-serveren er tilgængelig og taler streaming-protokollen — live-muligheden kan vises',
+  'Live-server bereikbaar maar eist authenticatie — controleer de API-sleutel':
+      'Live-serveren er tilgængelig, men kræver godkendelse — kontroller API-nøglen',
+  'Live-server onbereikbaar of spreekt het live-protocol niet':
+      'Live-serveren er ikke tilgængelig eller taler ikke live-protokollen',
   'Opnemen en transcriberen': 'Optag og transskribér',
   'Deze vergadering levert geen aparte audiobron. Een opname van de hele call is niet beschikbaar.':
       'Dette møde giver ikke en særskilt lydkilde. En optagelse af hele opkaldet er ikke tilgængelig.',
