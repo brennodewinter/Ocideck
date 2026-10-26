@@ -649,6 +649,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Schermvullend bekijken': 'Ver en pantalla completa',
   'vergadering': 'reunión',
   'de vergadering': 'la reunión',
   'Vergaderingsopname': 'Grabación de la reunión',

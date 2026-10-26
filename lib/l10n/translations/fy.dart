@@ -652,6 +652,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Schermvullend bekijken': 'Skermfol besjen',
   'vergadering': 'gearkomste',
   'de vergadering': 'de gearkomste',
   'Vergaderingsopname': 'Gearkomste-opname',

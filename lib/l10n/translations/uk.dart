@@ -1620,6 +1620,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Schermvullend bekijken': 'Переглянути на весь екран',
   'vergadering': 'нарада',
   'de vergadering': 'нарада',
   'Vergaderingsopname': 'Запис наради',

@@ -1606,6 +1606,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Schermvullend bekijken': 'Zobrazit na celou obrazovku',
   'vergadering': 'schůzka',
   'de vergadering': 'schůzka',
   'Vergaderingsopname': 'Záznam schůzky',

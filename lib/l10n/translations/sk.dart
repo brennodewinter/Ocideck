@@ -1611,6 +1611,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Schermvullend bekijken': 'Zobraziť na celú obrazovku',
   'vergadering': 'stretnutie',
   'de vergadering': 'stretnutie',
   'Vergaderingsopname': 'Záznam stretnutia',

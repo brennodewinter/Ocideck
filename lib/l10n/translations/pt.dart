@@ -1633,6 +1633,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Schermvullend bekijken': 'Ver em ecrã inteiro',
   'vergadering': 'reunião',
   'de vergadering': 'a reunião',
   'Vergaderingsopname': 'Gravação da reunião',

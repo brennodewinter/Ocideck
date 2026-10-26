@@ -652,6 +652,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Schermvullend bekijken': 'Afficher en plein écran',
   'vergadering': 'réunion',
   'de vergadering': 'la réunion',
   'Vergaderingsopname': 'Enregistrement de la réunion',

@@ -811,6 +811,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Schermvullend bekijken': 'View full screen',
   'vergadering': 'meeting',
   'de vergadering': 'the meeting',
   'Vergaderingsopname': 'Meeting recording',

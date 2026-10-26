@@ -1624,6 +1624,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Schermvullend bekijken': 'Преглед на цял екран',
   'vergadering': 'среща',
   'de vergadering': 'срещата',
   'Vergaderingsopname': 'Запис на срещата',
