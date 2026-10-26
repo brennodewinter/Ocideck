@@ -6569,12 +6569,28 @@ stereo file: the microphone on the left, system audio on the right. In the
 browser the microphone row is there too, and **Record tab audio…** is offered
 where the browser can actually share a tab's sound (Chromium). Firefox and
 Safari do not, and the dialog says so instead of recording a silent video.
-A browser recording stays in the tab; reloading loses it. Provisional text
-appears only when the transcription engine reports a live route. The local
-whisper tool and the batch server do not, so you still get the text from
-**Transcribe now** after you stop. Built-in, USB and Bluetooth inputs, and
-system audio, on macOS, Windows and Linux are the intended route; this text
-does not claim they were each proven on hardware here.
+A browser recording stays in the tab; reloading loses it. Built-in, USB and
+Bluetooth inputs, and system audio, on macOS, Windows and Linux are the
+intended route; this text does not claim they were each proven on hardware
+here.
+
+**Live provisional text.** If your ASR server profile also has a *live
+endpoint* (a `ws://` or `wss://` address — OciDeck speaks the self-hostable
+Vosk WebSocket protocol, proven against the pinned reference server in
+`testbed/vosk-asr`), the recording dialog offers one extra checkbox
+after a successful connection probe. The box names the receiving host and
+says the audio leaves this device for as long as the recording runs —
+ticking it is your consent for that one session, never a standing
+permission. While connected, provisional text scrolls in the recording
+strip and a small badge shows the link state. If the connection drops, the
+recording keeps going and only the preview is gone; the strip offers a
+retry button that asks again — nothing reconnects by itself. The text
+always stays provisional: the transcript you keep still comes from
+**Transcribe now** over the finished recording, which on a live-server
+route replays the stored audio through the same endpoint. In the browser a
+WebSocket cannot carry the API-key header, so a key-protected live server
+is honestly unreachable there — the opt-in does not appear rather than
+offer a dead choice.
 
 ## Video meetings (Jitsi)
 

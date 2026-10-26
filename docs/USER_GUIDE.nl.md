@@ -6619,12 +6619,28 @@ rechts het systeemgeluid. In de browser staat de microfoonknop er ook, en
 **Tabgeluid opnemen…** waar Chromium het geluid van een tabblad kan delen.
 Firefox en Safari doen dat niet; het venster zegt dat, in plaats van een
 stille video op te nemen. Een browseropname blijft in het tabblad; herladen
-is het bestand kwijt. Voorlopige tekst verschijnt alleen als de
-transcriptie-engine een live-route meldt. Het lokale whisper-programma en
-de batch-server doen dat niet, dus de tekst komt uit **Nu transcriberen**
-nadat je stopt. Ingebouwd, USB en Bluetooth, en systeemgeluid, op macOS,
-Windows en Linux is de bedoelde route; deze tekst beweert niet dat elk
-daarvan hier op hardware bewezen is.
+is het bestand kwijt. Ingebouwd, USB en Bluetooth, en systeemgeluid, op
+macOS, Windows en Linux is de bedoelde route; deze tekst beweert niet dat
+elk daarvan hier op hardware bewezen is.
+
+**Voorlopige tekst live.** Heeft je ASR-serverprofiel ook een *live-
+endpoint* (een `ws://`- of `wss://`-adres — OciDeck spreekt het
+zelf-hostbare Vosk-WebSocket-protocol, bewezen tegen de gepinde
+referentieserver in `testbed/vosk-asr`), dan biedt het opnamevenster na een
+geslaagde verbindingsproef één extra vinkje. Het vinkje noemt de host die
+je audio ontvangt en zegt dat het geluid dit apparaat verlaat zolang de
+opname loopt — aanvinken is je toestemming voor díe sessie, nooit een
+blijvende toestemming. Zolang de verbinding staat loopt er voorlopige tekst
+mee in de opnamestrook, met een kleine status voor de verbinding. Valt de
+verbinding weg, dan loopt de opname gewoon door en is alleen het
+meekijken weg; de strook biedt een knop *opnieuw verbinden* die opnieuw
+vraagt — niets herstelt zichzelf stil. De tekst blijft altijd voorlopig:
+het transcript dat je bewaart komt nog steeds uit **Nu transcriberen** over
+de voltooide opname, die op een live-serverroute de bewaarde audio via
+hetzelfde endpoint opnieuw aanbiedt. In de browser kan een WebSocket de
+API-sleutel niet als header meesturen, dus een live-server die een sleutel
+eist is daar eerlijk onbereikbaar — de optie verschijnt niet in plaats van
+een dode keuze aan te bieden.
 
 ## Videovergaderingen (Jitsi)
 

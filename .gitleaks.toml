@@ -57,6 +57,12 @@ paths = [
   '''^testbed/jitsi-meet/probe/node_modules/''',
   '''^testbed/jitsi-meet/probe/probe-out/''',
 
+  # Het Vosk-testbed (#2525): het gedownloade ASR-model en proefuitvoer zijn
+  # gitignored artefacten; modelbestanden dragen binaire gewichten die op
+  # geheim-vormige entropie trippen.
+  '''^testbed/vosk-asr/model/''',
+  '''^testbed/vosk-asr/proof-out/''',
+
   # ── Het detectiecorpus van OciWacht ────────────────────────────────────────
   # Dit is de kern van de afweging. De privacyscanner moet geheimen kúnnen
   # herkennen, en dat bewijs je alleen met strings die er echt uitzien. Deze

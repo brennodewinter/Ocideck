@@ -439,6 +439,19 @@ void main() {
         // wss, of ws alleen naar letterlijk loopback) en de pagina-CSP
         // (`connect-src` met `wss:`, geen `ws:`) zijn de grens.
         'lib/xmpp/xmpp_frame_transport_web.dart',
+        // Live-ASR WebSocket egress (desktop, #2525): WebSocket.connect met
+        // een buildPinnedClient-customClient — de upgrade-GET en elke
+        // 3xx-sprong pinnen op het door `resolveAsrPinned` (gate-strategie)
+        // goedgekeurde adres, zoals bij xmpp_frame_transport_io. De gate
+        // (AsrServerGate.evaluateLive) weigert bovendien query/fragment in de
+        // URL, dus een token kan de draad niet op.
+        'lib/services/transcription/asr_live_transport_io.dart',
+        // Live-ASR WebSocket egress (web, #2525): `web.WebSocket(`. Pinnen
+        // kan in een browser niet; de schemegrens van de gate (wss, of ws
+        // alleen waar platte http ook mag) en de pagina-CSP zijn de grens.
+        // Browser-WebSockets kunnen geen headers zetten, dus een sleutel-
+        // eisend endpoint is daar bewust onbereikbaar.
+        'lib/services/transcription/asr_live_transport_web.dart',
         // Server-side deck index (WEB-tak). Zelfde redenering als
         // file_service_net.dart hierboven: op web bestaat de dart:io-pinning
         // niet en kan ze er niet draaien — de browser (CORS, mixed content) en

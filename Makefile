@@ -70,6 +70,7 @@ help:
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
 	@echo "  make test-xmpp-integration  XMPP collab over real Prosody (needs Docker; not in check)."
 	@echo "  make test-jitsi-integration Jitsi preflight over the pinned testbed (needs Docker; not in check)."
+	@echo "  make test-asr-integration   Live ASR over real Vosk WebSocket (needs Docker + model; not in check)."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make dast            Advisory ZAP baseline over a served build (DAST_URL=… for a real host)."
@@ -345,6 +346,18 @@ test-jitsi-integration:
 	@echo "Prerequisite: cd testbed/jitsi-meet && ./run.sh up && ./run.sh users"
 	@echo "Failure means: the full Jitsi stack is not running, or signalling broke against a real deployment."
 	OCIDECK_JITSI_INTEGRATION=1 flutter test test/meetings/jitsi_preflight_testbed_test.dart test/meetings/jitsi_join_testbed_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+
+# Live-ASR integration test against a local Vosk WebSocket server
+# (testbed/vosk-asr, #2525). NOT part of `make check` — requires a running
+# Docker stack plus the pinned model (fetch-model.sh) and the env var.
+test-asr-integration:
+	@echo "== OciDeck integration: live ASR over real Vosk WebSocket =="
+	@echo "Command: OCIDECK_ASR_INTEGRATION=1 flutter test test/transcription/asr_live_vosk_testbed_test.dart"
+	@echo "Covers: protocol probe, real partial hypotheses during the stream,"
+	@echo "definitive transcript over the same WAV, clean eof — over a real socket."
+	@echo "Prerequisite: cd testbed/vosk-asr && ./fetch-model.sh && docker compose up -d"
+	@echo "Failure means: the Vosk stack is not running, or the vosk-ws-1 route broke against a real server."
+	OCIDECK_ASR_INTEGRATION=1 flutter test test/transcription/asr_live_vosk_testbed_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Advisory dependency freshness report; not part of normal check because it can
 # depend on network availability and does not imply the current code is broken.

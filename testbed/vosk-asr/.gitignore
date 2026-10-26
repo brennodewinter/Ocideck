@@ -1,0 +1,4 @@
+# Het gepinde model (41 MB) en proefuitvoer zijn lokale artefacten,
+# geen bron — fetch-model.sh en de integratietoets maken ze opnieuw.
+model/
+proof-out/
