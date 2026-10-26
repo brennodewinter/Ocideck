@@ -103,7 +103,13 @@ class TranscriptionStatusSection extends ConsumerWidget {
               '${selected.sha256.substring(0, 12)}… · '
               '${_installLabel(l10n, selectedState)}',
         ),
-        for (final kind in CaptureSourceKind.values)
+        // callAudio is geen platformbron maar sessie-scoped (#2529): zijn
+        // probe leest de capability van de lopende call en heeft in deze
+        // matrix geen betekenis — de rij zou alleen een valse "nog niet"
+        // tonen.
+        for (final kind in CaptureSourceKind.values.where(
+          (k) => k != CaptureSourceKind.callAudio,
+        ))
           _sourceRow(l10n, kind, sources[kind]),
         _FactRow(
           icon: Icons.mic_none_outlined,
@@ -249,6 +255,7 @@ class TranscriptionStatusSection extends ConsumerWidget {
       CaptureSourceKind.microphone => l10n.d('Microfoon'),
       CaptureSourceKind.systemAudio => l10n.d('Systeem-/appgeluid'),
       CaptureSourceKind.combination => l10n.d('Microfoon + systeemgeluid'),
+      CaptureSourceKind.callAudio => l10n.d('Vergaderingsaudio'),
     };
     if (source == null) {
       return _FactRow(

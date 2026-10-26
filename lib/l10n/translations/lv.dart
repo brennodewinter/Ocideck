@@ -1603,6 +1603,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Vergadering': 'Tikšanās',
+  'Vergaderingsaudio': 'Tikšanās audio',
   'Ontvangen brokken:': 'Saņemtie fragmenti:',
   'de microfoon': 'mikrofons',
   'het systeemgeluid': 'sistēmas skaņa',

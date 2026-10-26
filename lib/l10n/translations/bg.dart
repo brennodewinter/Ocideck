@@ -1624,6 +1624,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Vergadering': 'Среща',
+  'Vergaderingsaudio': 'Аудио от срещата',
   'Ontvangen brokken:': 'Получени фрагменти:',
   'de microfoon': 'микрофона',
   'het systeemgeluid': 'системният звук',

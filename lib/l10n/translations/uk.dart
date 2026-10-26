@@ -1620,6 +1620,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Vergadering': 'Нарада',
+  'Vergaderingsaudio': 'Звук наради',
   'Ontvangen brokken:': 'Отримано фрагментів:',
   'de microfoon': 'мікрофон',
   'het systeemgeluid': 'системний звук',

@@ -17,6 +17,9 @@ CaptureSource? createWebMicrophoneSource({MicSessionGate? gate}) => null;
 
 CaptureSource? createWebDisplaySource() => null;
 
+/// Geen bestandssysteem-staging op web, dus ook geen vrije-ruimtemeting.
+Future<int?> recordingFreeBytes(String directory) async => null;
+
 class _NoMicPort extends MicCapturePort {
   const _NoMicPort();
 

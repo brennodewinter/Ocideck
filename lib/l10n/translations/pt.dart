@@ -1633,6 +1633,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Vergadering': 'Reunião',
+  'Vergaderingsaudio': 'Áudio da reunião',
   'Ontvangen brokken:': 'Fragmentos recebidos:',
   'de microfoon': 'o microfone',
   'het systeemgeluid': 'o áudio do sistema',

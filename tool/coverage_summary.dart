@@ -75,6 +75,15 @@ const Set<String> uncoveredBaseline = {
   // staat in `literal_loopback.dart` en wordt daar gedekt; de browser-`fetch`
   // zelf wordt live in het testbed bewezen.
   'lib/meetings/providers/jitsi/jitsi_config_web.dart',
+  // NO EXECUTABLE LINES (#2529): `call_audio_manifest.dart` is een kale
+  // conditional-export facade (io/web-seam); lcov emitteert geen record.
+  // PLATFORM: `call_audio_manifest_stub.dart` is de webhelft — de manifest-
+  // JSON gaat daar als `mem:`-asset in de WebAssetStore, dus er valt geen
+  // bestandsschrijf te pinnen in de VM-runner. De io-helft, die `sources.json`
+  // atomair naast de wav's zet, wordt wél getest
+  // (call_audio_capture_source_test.dart).
+  'lib/meetings/call_audio_manifest.dart',
+  'lib/meetings/call_audio_manifest_stub.dart',
   // UNTESTABLE NATIVE BINDING (#2158): `mic_monitor_webrtc.dart` is de dunne
   // binding achter de MicMonitor-naad voor microfoon-doorvoer. Zelfde categorie
   // als meeting_media_core_webrtc hierboven: libwebrtc vraagt een echt

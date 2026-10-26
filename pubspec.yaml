@@ -19,6 +19,9 @@ dependencies:
   path_provider: ^2.1.5
   path: ^1.9.1
   uuid: ^4.5.1
+  # Klok-injectie voor testbare timers/pacing (call-audiomixer, #2529) —
+  # productie gedraagt zich identiek aan DateTime.now().
+  clock: ^1.1.2
   # nativeapi vervangt screen_retriever + window_manager (uitfasering aangekondigd
   # in Flutter 3.47). Git-dep naar onze fork op GitHub met de willClose-hook die
   # OciDeck nodig heeft voor setPreventClose-equivalent. Zie issue #1741.

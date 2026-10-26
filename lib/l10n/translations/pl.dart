@@ -1617,6 +1617,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Vergadering': 'Spotkanie',
+  'Vergaderingsaudio': 'Dźwięk spotkania',
   'Ontvangen brokken:': 'Odebrane fragmenty:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'dźwięk systemowy',

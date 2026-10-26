@@ -1620,6 +1620,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Vergadering': 'Conventus',
+  'Vergaderingsaudio': 'Sonus conventus',
   'Ontvangen brokken:': 'Frusta accepta:',
   'de microfoon': 'microphonum',
   'het systeemgeluid': 'sonus systematis',

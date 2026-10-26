@@ -649,6 +649,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Vergadering': 'Riunione',
+  'Vergaderingsaudio': 'Audio della riunione',
   'Ontvangen brokken:': 'Blocchi ricevuti:',
   'de microfoon': 'il microfono',
   'het systeemgeluid': 'l\'audio di sistema',

@@ -205,6 +205,7 @@ String _sourceLabel(Set<CaptureSourceKind> kinds, AppLocalizations l10n) {
     CaptureSourceKind.systemAudio => l10n.d('Systeemgeluid'),
     CaptureSourceKind.combination =>
       '${l10n.d('Microfoon')} + ${l10n.d('Systeemgeluid')}',
+    CaptureSourceKind.callAudio => l10n.d('Vergadering'),
   };
   if (kinds.length == 1) return label(kinds.first);
   return kinds.map(label).join(' + ');

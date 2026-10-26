@@ -1630,6 +1630,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Vergadering': 'Σύσκεψη',
+  'Vergaderingsaudio': 'Ήχος σύσκεψης',
   'Ontvangen brokken:': 'Ληφθέντα τμήματα:',
   'de microfoon': 'το μικρόφωνο',
   'het systeemgeluid': 'ο ήχος του συστήματος',

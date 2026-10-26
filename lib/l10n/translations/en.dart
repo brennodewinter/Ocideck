@@ -811,6 +811,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Vergadering': 'Meeting',
+  'Vergaderingsaudio': 'Meeting audio',
   'Ontvangen brokken:': 'Chunks received:',
   'de microfoon': 'the microphone',
   'het systeemgeluid': 'the system audio',
