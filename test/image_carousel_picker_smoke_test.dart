@@ -126,7 +126,7 @@ void main() {
   ) async {
     await pumpPicker(tester);
     await tester.tap(find.byTooltip('Schermvullend bekijken'));
-    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.byType(Dialog), findsNWidgets(2));
     final pageView = tester.widget<PageView>(find.byType(PageView));
@@ -134,11 +134,12 @@ void main() {
     expect(controller.page, 0);
 
     await tester.sendEventToBinding(
-      const PointerScrollEvent(
-        position: Offset(700, 450),
-        scrollDelta: Offset(0, 120),
+      PointerScrollEvent(
+        position: tester.getCenter(find.byType(PageView)),
+        scrollDelta: const Offset(0, 120),
       ),
     );
+    await tester.pump(const Duration(milliseconds: 250));
     await tester.pump(const Duration(milliseconds: 250));
     expect(controller.page, 1);
 
