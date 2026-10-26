@@ -209,7 +209,10 @@ class AsrServerEngine implements TranscriptionEngine {
   }
 
   @override
-  Stream<PartialTranscript>? transcribeLive(Stream<AudioChunk> chunks) => null;
+  Stream<PartialTranscript>? transcribeLive(
+    Stream<AudioChunk> chunks, {
+    TranscriptionOptions? options,
+  }) => null;
 
   /// Breekt een lopende upload af; `transcribe` voltooit met [Cancelled].
   @override

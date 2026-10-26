@@ -124,6 +124,54 @@ final class AsrServerGate {
     }
   }
 
+  /// Beslist of een *live*-verbinding naar `profile.liveUrl` mag
+  /// vertrekken (§4.3, #2525). Dezelfde tiers als [evaluate], maar de
+  /// draad is WebSocket: `ws` mag alleen waar `http` mocht, `wss` alleen
+  /// waar `https` moest. Extra eis boven de batch-URL: query en fragment
+  /// zijn ongeldig — een token in een URL is een token in elke proxy- en
+  /// serverlog, en de sleutel hoort in de handshake-header.
+  static AsrGateDecision evaluateLive(
+    AsrServerProfile profile, {
+    bool isWeb = false,
+  }) {
+    if (!profile.enabled) return const AsrGateDeny(AsrGateDenial.disabled);
+    final uri = _parseLiveEndpoint(profile.liveUrl);
+    if (profile.mode == AsrServerMode.none) {
+      return const AsrGateDeny(AsrGateDenial.modeNone);
+    }
+    if (uri == null || uri.userInfo.isNotEmpty) {
+      return const AsrGateDeny(AsrGateDenial.notConfigured);
+    }
+    switch (profile.mode) {
+      case AsrServerMode.none:
+        return const AsrGateDeny(AsrGateDenial.modeNone);
+      case AsrServerMode.loopback:
+        if (!AiEgressGate.isLoopbackHost(uri.host)) {
+          return const AsrGateDeny(AsrGateDenial.loopbackRequired);
+        }
+        return AsrGateAllow(uri, AiResolveStrategy.loopbackDirect);
+      case AsrServerMode.lan:
+        if (!profile.trustedInternal) {
+          return const AsrGateDeny(AsrGateDenial.lanNotTrusted);
+        }
+        if (isWeb && uri.scheme == 'ws' && !_isLoopback(uri.host)) {
+          return const AsrGateDeny(AsrGateDenial.insecureHttpOnWeb);
+        }
+        return AsrGateAllow(uri, AiResolveStrategy.trustedPrivate);
+      case AsrServerMode.cloud:
+        if (uri.scheme != 'wss') {
+          return const AsrGateDeny(AsrGateDenial.cloudNeedsTls);
+        }
+        if (isWeb && _isInternalHost(uri.host)) {
+          return const AsrGateDeny(AsrGateDenial.insecureHttpOnWeb);
+        }
+        if (!profile.cloudConfirmed) {
+          return const AsrGateDeny(AsrGateDenial.cloudNotConfirmed);
+        }
+        return AsrGateAllow(uri, AiResolveStrategy.publicGuarded);
+    }
+  }
+
   static bool _isLoopback(String host) => isLiteralLoopbackHost(host);
 
   /// Op web kan `NetGuard.isBlockedHost` niet draaien (`dart:io`); de browser
@@ -140,6 +188,19 @@ final class AsrServerGate {
     final scheme = uri.scheme.toLowerCase();
     if (scheme != 'http' && scheme != 'https') return null;
     if (uri.host.isEmpty) return null;
+    return uri;
+  }
+
+  /// De live-variant: alleen `ws`/`wss`, met host, en zonder query of
+  /// fragment — zie [evaluateLive] voor waarom die ongeldig zijn.
+  static Uri? _parseLiveEndpoint(String? raw) {
+    if (raw == null) return null;
+    final uri = Uri.tryParse(raw.trim());
+    if (uri == null) return null;
+    final scheme = uri.scheme.toLowerCase();
+    if (scheme != 'ws' && scheme != 'wss') return null;
+    if (uri.host.isEmpty) return null;
+    if (uri.hasQuery || uri.hasFragment) return null;
     return uri;
   }
 }

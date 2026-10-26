@@ -146,7 +146,10 @@ class IoLocalWhisperEngine implements LocalWhisperEngine {
   );
 
   @override
-  Stream<PartialTranscript>? transcribeLive(Stream<AudioChunk> chunks) => null; // whisper-cli is batch; live is een aparte route (§4.2)
+  Stream<PartialTranscript>? transcribeLive(
+    Stream<AudioChunk> chunks, {
+    TranscriptionOptions? options,
+  }) => null; // whisper-cli is batch; live is een aparte route (§4.2)
 
   /// Breekt de lopende run af; het `done`-antwoord vertaalt dat naar
   /// [Cancelled], zodat de aanroeper geen "crash" te zien krijgt.

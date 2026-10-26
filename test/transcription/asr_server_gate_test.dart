@@ -172,4 +172,106 @@ void main() {
       );
     });
   });
+
+  group('live-endpoint (#2525)', () {
+    AsrGateDenial? denyLive(AsrServerProfile p, {bool isWeb = false}) {
+      final d = AsrServerGate.evaluateLive(p, isWeb: isWeb);
+      return d is AsrGateDeny ? d.reason : null;
+    }
+
+    AsrGateAllow? allowLive(AsrServerProfile p, {bool isWeb = false}) {
+      final d = AsrServerGate.evaluateLive(p, isWeb: isWeb);
+      return d is AsrGateAllow ? d : null;
+    }
+
+    test('zelfde basisweigeringen als de batchroute', () {
+      expect(
+        denyLive(loopback.copyWith(enabled: false, liveUrl: 'ws://127.0.0.1')),
+        AsrGateDenial.disabled,
+      );
+      expect(
+        denyLive(
+          const AsrServerProfile(enabled: true, liveUrl: 'ws://127.0.0.1'),
+        ),
+        AsrGateDenial.modeNone,
+      );
+      expect(denyLive(loopback), AsrGateDenial.notConfigured); // geen liveUrl
+    });
+
+    test('alleen ws/wss, zonder query, fragment of credentials', () {
+      final p = loopback.copyWith(liveUrl: 'ws://127.0.0.1:2700');
+      expect(allowLive(p), isNotNull);
+      // Een token in de URL is een token in elke log — daarom is de
+      // query hier ongeldig, net als credentials dat al waren.
+      expect(
+        denyLive(loopback.copyWith(liveUrl: 'ws://127.0.0.1:2700?token=x')),
+        AsrGateDenial.notConfigured,
+      );
+      expect(
+        denyLive(loopback.copyWith(liveUrl: 'ws://127.0.0.1:2700#f')),
+        AsrGateDenial.notConfigured,
+      );
+      const u = 'user', w = 'geheim';
+      expect(
+        denyLive(loopback.copyWith(liveUrl: 'ws://$u:$w@127.0.0.1:2700')),
+        AsrGateDenial.notConfigured,
+      );
+      expect(
+        denyLive(loopback.copyWith(liveUrl: 'http://127.0.0.1:2700')),
+        AsrGateDenial.notConfigured,
+      );
+    });
+
+    test('loopback: ws naar loopback mag, daarbuiten niet', () {
+      expect(
+        allowLive(loopback.copyWith(liveUrl: 'ws://127.0.0.1:2700'))!.strategy,
+        AiResolveStrategy.loopbackDirect,
+      );
+      expect(
+        denyLive(loopback.copyWith(liveUrl: 'ws://192.168.1.20:2700')),
+        AsrGateDenial.loopbackRequired,
+      );
+    });
+
+    test('lan: opt-in nodig; op web is ws-LAN mixed content', () {
+      expect(
+        denyLive(
+          lan.copyWith(
+            liveUrl: 'ws://192.168.1.20:2700',
+            trustedInternal: false,
+          ),
+        ),
+        AsrGateDenial.lanNotTrusted,
+      );
+      expect(
+        denyLive(lan.copyWith(liveUrl: 'ws://192.168.1.20:2700'), isWeb: true),
+        AsrGateDenial.insecureHttpOnWeb,
+      );
+      expect(
+        allowLive(
+          lan.copyWith(liveUrl: 'wss://192.168.1.20:2700'),
+          isWeb: true,
+        ),
+        isNotNull,
+      );
+    });
+
+    test('cloud: alleen wss, alleen bevestigd', () {
+      expect(
+        denyLive(cloud.copyWith(liveUrl: 'ws://asr.example.nl')),
+        AsrGateDenial.cloudNeedsTls,
+      );
+      expect(
+        denyLive(
+          cloud.copyWith(
+            liveUrl: 'wss://asr.example.nl',
+            cloudConfirmed: false,
+          ),
+        ),
+        AsrGateDenial.cloudNotConfirmed,
+      );
+      final a = allowLive(cloud.copyWith(liveUrl: 'wss://asr.example.nl'));
+      expect(a!.strategy, AiResolveStrategy.publicGuarded);
+    });
+  });
 }

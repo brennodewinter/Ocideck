@@ -221,7 +221,10 @@ class WebWhisperEngine implements LocalWhisperEngine {
   }
 
   @override
-  Stream<PartialTranscript>? transcribeLive(Stream<AudioChunk> chunks) => null;
+  Stream<PartialTranscript>? transcribeLive(
+    Stream<AudioChunk> chunks, {
+    TranscriptionOptions? options,
+  }) => null;
 }
 
 LocalWhisperEngine createLocalWhisperEngine({WhisperModel? model}) =>

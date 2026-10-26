@@ -57,6 +57,13 @@ class AsrServerProfile {
   /// audio naar díe specifieke externe dienst mag.
   final bool cloudConfirmed;
 
+  /// Het live-endpoint (`ws://` of `wss://`) voor voorlopige tekst
+  /// tijdens de opname (#2525, §4.3). Leeg = geen live route; de
+  /// opt-in verschijnt pas na een geslaagde protocolproef. Zelfde
+  /// serverklasse als [baseUrl] — het is één profiel, één
+  /// vertrouwensbeslissing.
+  final String liveUrl;
+
   const AsrServerProfile({
     this.enabled = false,
     this.mode = AsrServerMode.none,
@@ -64,6 +71,7 @@ class AsrServerProfile {
     this.name = '',
     this.trustedInternal = false,
     this.cloudConfirmed = false,
+    this.liveUrl = '',
   });
 
   /// Standaard-basis-URL voor de loopback-tier (whisper.cpp's
@@ -82,6 +90,14 @@ class AsrServerProfile {
   /// De host van [baseUrl], of leeg wanneer onparseerbaar.
   String get host => Uri.tryParse(baseUrl.trim())?.host ?? '';
 
+  /// De host van [liveUrl], of leeg wanneer onparseerbaar of niet
+  /// ingesteld — de consent-vergelijking van de liveroute vergelijkt
+  /// hiertegen.
+  String get liveHost => Uri.tryParse(liveUrl.trim())?.host ?? '';
+
+  /// Of er een live-endpoint is ingevuld — los van de schakelaar.
+  bool get hasLiveEndpoint => liveUrl.trim().isNotEmpty;
+
   /// Wat in de provenienceregel komt: de eigen naam, of de host.
   String get provenanceName => name.trim().isNotEmpty ? name.trim() : host;
 
@@ -92,6 +108,7 @@ class AsrServerProfile {
     String? name,
     bool? trustedInternal,
     bool? cloudConfirmed,
+    String? liveUrl,
   }) {
     return AsrServerProfile(
       enabled: enabled ?? this.enabled,
@@ -100,6 +117,7 @@ class AsrServerProfile {
       name: name ?? this.name,
       trustedInternal: trustedInternal ?? this.trustedInternal,
       cloudConfirmed: cloudConfirmed ?? this.cloudConfirmed,
+      liveUrl: liveUrl ?? this.liveUrl,
     );
   }
 
@@ -110,6 +128,7 @@ class AsrServerProfile {
     'name': name,
     'trustedInternal': trustedInternal,
     'cloudConfirmed': cloudConfirmed,
+    'liveUrl': liveUrl,
   };
 
   factory AsrServerProfile.fromJson(Map<String, Object?> json) {
@@ -120,6 +139,7 @@ class AsrServerProfile {
       name: (json['name'] as String?) ?? '',
       trustedInternal: (json['trustedInternal'] as bool?) ?? false,
       cloudConfirmed: (json['cloudConfirmed'] as bool?) ?? false,
+      liveUrl: (json['liveUrl'] as String?) ?? '',
     );
   }
 
@@ -138,7 +158,8 @@ class AsrServerProfile {
       other.baseUrl == baseUrl &&
       other.name == name &&
       other.trustedInternal == trustedInternal &&
-      other.cloudConfirmed == cloudConfirmed;
+      other.cloudConfirmed == cloudConfirmed &&
+      other.liveUrl == liveUrl;
 
   @override
   int get hashCode => Object.hash(
@@ -148,5 +169,6 @@ class AsrServerProfile {
     name,
     trustedInternal,
     cloudConfirmed,
+    liveUrl,
   );
 }

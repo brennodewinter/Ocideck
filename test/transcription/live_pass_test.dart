@@ -16,6 +16,7 @@ class _Engine implements TranscriptionEngine {
   final received = <AudioChunk>[];
   StreamSubscription<AudioChunk>? sub;
   var pauseOnListen = false;
+  TranscriptionOptions? seenOptions;
 
   @override
   EngineKind get kind => EngineKind.local;
@@ -34,7 +35,11 @@ class _Engine implements TranscriptionEngine {
   void cancel() {}
 
   @override
-  Stream<PartialTranscript>? transcribeLive(Stream<AudioChunk> chunks) {
+  Stream<PartialTranscript>? transcribeLive(
+    Stream<AudioChunk> chunks, {
+    TranscriptionOptions? options,
+  }) {
+    seenOptions = options;
     if (!streaming) return null;
     final out = StreamController<PartialTranscript>();
     late StreamSubscription<AudioChunk> subscription;
@@ -59,6 +64,22 @@ void main() {
     );
     expect(partials, isNull);
     expect(pass.lagging, isFalse);
+    await pass.close();
+  });
+
+  test('opties gaan ongemoeid door naar de engine', () async {
+    final engine = _Engine(streaming: true);
+    final pass = LivePass();
+    const options = TranscriptionOptions(
+      serverConsent: ServerConsent.liveSession('127.0.0.1'),
+    );
+    final partials = pass.attach(
+      engine: engine,
+      chunks: const Stream<AudioChunk>.empty(),
+      options: options,
+    );
+    expect(partials, isNotNull);
+    expect(engine.seenOptions, same(options));
     await pass.close();
   });
 
