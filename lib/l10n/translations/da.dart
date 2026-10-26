@@ -1605,6 +1605,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'vergadering': 'møde',
+  'de vergadering': 'mødet',
+  'Vergaderingsopname': 'Mødeoptagelse',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Mødet eller lydkilden forsvandt. Det, der allerede var optaget, er gemt.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Der manglede ca. {s} s kilde-lyd fordelt på {n} kilde(r) — spor- eller netværkstab under optagelsen.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s kilde-lyd på {n} kilde(r) — spor- eller netværkstab under optagelsen.',
   'Vergadering': 'Møde',
   'Vergaderingsaudio': 'Mødelyd',
   'Ontvangen brokken:': 'Modtagne dele:',
@@ -1652,10 +1661,6 @@ const _dutchSourceAddDa = <String, String>{
       'Optagelsen mislykkedes. Du er stadig i mødet. Start igen, hvis du vil optage.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Mødet melder selv en optagelse. Det er ikke OciDecks optagelse.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Lyden går ikke til transskriptionsserveren, før du tillader det særskilt.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Send lyd til den valgte transskriptionsserver',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Mødet kunne ikke sende din lyd — prøv at slå kilden fra og til igen.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

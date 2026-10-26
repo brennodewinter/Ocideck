@@ -6,6 +6,7 @@
 // er draait geen whisper-cli. Wat getoetst wordt is de flow zelf: wat de
 // gebruiker ziet vóór, tijdens en na.
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -14,13 +15,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/services/transcription/capture_source.dart';
 import 'package:ocideck/services/transcription/file_capture_source.dart';
 import 'package:ocideck/services/transcription/media_sniff.dart';
 import 'package:ocideck/services/transcription/recording_staging.dart';
 import 'package:ocideck/services/transcription/transcription_engine.dart';
 import 'package:ocideck/services/transcription/transcription_errors.dart';
+import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/state/transcription_provider.dart';
+import 'package:path/path.dart' as p;
 import 'package:ocideck/widgets/dialogs/transcribe_file_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -310,5 +314,110 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('model ontbreekt'), findsOneWidget);
+  });
+
+  testWidgets(
+    'een callopname krijgt vergaderingsprovenance en een ontbrekend-regel '
+    '(#2530)',
+    (tester) async {
+      // De callsessie van #2529 schreef `sources.json` naast de mix-wav;
+      // de pass herkent dat — bronsoort én gaten komen in het document.
+      // Synchroon geschreven: de testbody zit in de fake-zone waar een
+      // dart:io-future nooit terugkomt.
+      File(p.join(tmp.path, 'sources.json')).writeAsStringSync(
+        jsonEncode({
+          'version': 1,
+          'sources': [
+            {'silenceTicks': 50},
+            {'silenceTicks': 0},
+          ],
+        }),
+      );
+      final overrides = [
+        captureSourcesProvider.overrideWithValue({
+          CaptureSourceKind.file: _FakeFileSource(wavPath),
+        }),
+        transcriptionEngineProvider.overrideWithValue(
+          _FakeEngine(const [
+            TranscriptSegment(text: 'Hallo wereld', start: Duration.zero),
+          ]),
+        ),
+        recordingStagingProvider.overrideWithValue(_NoopStaging()),
+        recoveryServiceProvider.overrideWithValue(
+          RecoveryService(baseDir: tmp),
+        ),
+      ];
+      await tester.pumpWidget(
+        app(
+          TranscribeFileDialog(
+            sourcePath: wavPath,
+            displayName: 'Vergaderingsopname',
+          ),
+          overrides: overrides,
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(TranscribeFileDialog)),
+      );
+      await tester.tap(find.text('Transcriberen'));
+      await tester.pumpAndSettle();
+
+      final doc = container
+          .read(tabsProvider)
+          .current!
+          .documentNotifier!
+          .state
+          .document!;
+      expect(doc.source, contains('Bron: vergadering'));
+      expect(
+        doc.source,
+        contains(
+          'Ontbrekend: ~1 s bronaudio over 1 bron(nen) — track- of '
+          'netwerkverlies tijdens de opname.',
+        ),
+      );
+    },
+  );
+
+  testWidgets('een los bestand zonder manifest claimt geen vergadering', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      app(
+        TranscribeFileDialog(sourcePath: wavPath, displayName: 'clip.wav'),
+        overrides: [
+          captureSourcesProvider.overrideWithValue({
+            CaptureSourceKind.file: _FakeFileSource(wavPath),
+          }),
+          transcriptionEngineProvider.overrideWithValue(
+            _FakeEngine(const [
+              TranscriptSegment(text: 'Hallo wereld', start: Duration.zero),
+            ]),
+          ),
+          recordingStagingProvider.overrideWithValue(_NoopStaging()),
+          recoveryServiceProvider.overrideWithValue(
+            RecoveryService(baseDir: tmp),
+          ),
+        ],
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(TranscribeFileDialog)),
+    );
+    await tester.tap(find.text('Transcriberen'));
+    await tester.pumpAndSettle();
+
+    final doc = container
+        .read(tabsProvider)
+        .current!
+        .documentNotifier!
+        .state
+        .document!;
+    expect(doc.source, contains('Bron: bestand'));
+    expect(doc.source, isNot(contains('Ontbrekend')));
   });
 }

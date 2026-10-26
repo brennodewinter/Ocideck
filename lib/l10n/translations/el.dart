@@ -1630,6 +1630,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'vergadering': 'σύσκεψη',
+  'de vergadering': 'η σύσκεψη',
+  'Vergaderingsopname': 'Εγγραφή σύσκεψης',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Η σύσκεψη ή η πηγή ήχου χάθηκε. Ό,τι υπήρχε ήδη είναι αποθηκευμένο.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Έλειψαν περίπου {s} s ήχου πηγής σε {n} πηγή(ές) — απώλεια κομματιού ή δικτύου κατά την εγγραφή.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s ήχου πηγής σε {n} πηγή(ές) — απώλεια κομματιού ή δικτύου κατά την εγγραφή.',
   'Vergadering': 'Σύσκεψη',
   'Vergaderingsaudio': 'Ήχος σύσκεψης',
   'Ontvangen brokken:': 'Ληφθέντα τμήματα:',
@@ -1677,10 +1686,6 @@ const _dutchSourceAddEl = <String, String>{
       'Η εγγραφή απέτυχε. Είσαι ακόμα στη σύσκεψη. Ξεκίνα ξανά αν θέλεις να εγγράψεις.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Η σύσκεψη αναφέρει η ίδια μια εγγραφή. Αυτή δεν είναι η εγγραφή του OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Ο ήχος δεν πηγαίνει στον διακομιστή απομαγνητοφώνησης μέχρι να το επιτρέψεις χωριστά.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Στείλε ήχο στον επιλεγμένο διακομιστή απομαγνητοφώνησης',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Η σύσκεψη δεν μπόρεσε να στείλει τον ήχο σας — δοκιμάστε να ενεργοποιήσετε ξανά την πηγή.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

@@ -1635,6 +1635,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'vergadering': 'cruinniú',
+  'de vergadering': 'an cruinniú',
+  'Vergaderingsopname': 'Taifead cruinnithe',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Thit an cruinniú nó an foinse fuaime as. Tá an méid a bhí ann cheana sábháilte.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Bhí thart ar {s} s fuaime foinse in easnamh ar {n} foinse(í) — cailliúint rianta nó líonra le linn an taifid.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s fuaime foinse ar {n} foinse(í) — cailliúint rianta nó líonra le linn an taifid.',
   'Vergadering': 'Cruinniú',
   'Vergaderingsaudio': 'Fuaime an chruinnithe',
   'Ontvangen brokken:': 'Blúireanna faighte:',
@@ -1683,10 +1692,6 @@ const _dutchSourceAddGa = <String, String>{
       'Theip ar an taifead. Tá tú fós sa chruinniú. Tosaigh arís más mian leat taifeadadh.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Tuairiscíonn an cruinniú féin taifead. Ní hé sin taifead OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Ní théann an fhuaim chuig an bhfreastalaí tras-scríbhinne go dtí go gceadaíonn tú é ar leith.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Seol an fhuaim chuig an bhfreastalaí tras-scríbhinne roghnaithe',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Níorbh fhéidir leis an gcruinniú do fhuaim a sheoladh — déan iarracht an foinse a mhúchadh agus a chasadh air arís.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

@@ -1624,6 +1624,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'vergadering': 'среща',
+  'de vergadering': 'срещата',
+  'Vergaderingsopname': 'Запис на срещата',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Срещата или аудио източникът отпадна. Това, което вече имаше, е запазено.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Липсваха около {s} s аудио от източника, разпределени в {n} източник(и) — загуба на трак или мрежа по време на записа.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s аудио от източника в {n} източник(и) — загуба на трак или мрежа по време на записа.',
   'Vergadering': 'Среща',
   'Vergaderingsaudio': 'Аудио от срещата',
   'Ontvangen brokken:': 'Получени фрагменти:',
@@ -1671,10 +1680,6 @@ const _dutchSourceAddBg = <String, String>{
       'Записът не успя. Още си в срещата. Започни отново, ако искаш да записваш.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Срещата сама съобщава за запис. Това не е записът на OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Звукът не отива към сървъра за транскрипция, докато не го позволиш отделно.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Изпрати звука към избрания сървър за транскрипция',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Срещата не успя да изпрати вашия звук — опитайте да изключите и включите източника отново.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

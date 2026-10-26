@@ -1605,6 +1605,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'vergadering': 'rapat',
+  'de vergadering': 'rapat ini',
+  'Vergaderingsopname': 'Rekaman rapat',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Rapat atau sumber audio terputus. Yang sudah terekam tersimpan.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Sekitar {s} s audio sumber hilang tersebar di {n} sumber — kehilangan track atau jaringan selama perekaman.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s audio sumber di {n} sumber — kehilangan track atau jaringan selama perekaman.',
   'Vergadering': 'Rapat',
   'Vergaderingsaudio': 'Audio rapat',
   'Ontvangen brokken:': 'Bagian diterima:',
@@ -1652,10 +1661,6 @@ const _dutchSourceAddId = <String, String>{
       'Rekaman gagal. Kamu masih di dalam rapat. Mulai lagi jika kamu ingin merekam.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Rapat sendiri melaporkan ada rekaman. Itu bukan rekaman OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Audio tidak pergi ke server transkripsi sampai kamu mengizinkannya tersendiri.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Kirim audio ke server transkripsi yang dipilih',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Rapat tidak dapat mengirim suara Anda — coba matikan dan nyalakan sumbernya lagi.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

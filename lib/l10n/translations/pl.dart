@@ -1617,6 +1617,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'vergadering': 'spotkanie',
+  'de vergadering': 'spotkanie',
+  'Vergaderingsopname': 'Nagranie spotkania',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Spotkanie lub źródło audio zniknęło. To, co już było, jest zapisane.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Brakowało ok. {s} s dźwięku źródła w {n} źródle(ach) — utrata ścieżki lub sieci podczas nagrania.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s dźwięku źródła na {n} źródle(ach) — utrata ścieżki lub sieci podczas nagrania.',
   'Vergadering': 'Spotkanie',
   'Vergaderingsaudio': 'Dźwięk spotkania',
   'Ontvangen brokken:': 'Odebrane fragmenty:',
@@ -1664,10 +1673,6 @@ const _dutchSourceAddPl = <String, String>{
       'Nagranie nie powiodło się. Nadal jesteś na spotkaniu. Zacznij ponownie, jeśli chcesz nagrywać.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Spotkanie samo zgłasza nagranie. To nie jest nagranie OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Dźwięk nie idzie na serwer transkrypcji, dopóki osobno na to nie pozwolisz.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Wyślij dźwięk na wybrany serwer transkrypcji',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Spotkanie nie mogło przesłać Twojego dźwięku — spróbuj wyłączyć i włączyć źródło ponownie.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

@@ -8,6 +8,7 @@
 // eerlijk niet beschikbaar in plaats van een ontbrekende plugin.
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show FlutterError;
 import 'package:flutter/services.dart';
 
 import 'capture_source.dart';
@@ -73,6 +74,10 @@ class ChannelMicPort extends MicCapturePort {
     } on MissingPluginException {
       return null;
     } on PlatformException {
+      return null;
+    } on FlutterError {
+      // Geen binding (een test zonder widgetlaag) — onmeetbaar is het
+      // zelfde antwoord als een afwezige plugin.
       return null;
     }
   }

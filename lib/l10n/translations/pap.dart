@@ -651,6 +651,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'vergadering': 'reunion',
+  'de vergadering': 'e reunion',
+  'Vergaderingsopname': 'Grabashon di reunion',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'E reunion òf e fuente di audio a cay. Loke ya tabata graba ta warda.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'A falta ~{s} s di audio di fuente parti riba {n} fuente(s) — pèrdida di track òf ret durante e grabashon.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s di audio di fuente riba {n} fuente(s) — pèrdida di track òf ret durante e grabashon.',
   'Vergadering': 'Reunion',
   'Vergaderingsaudio': 'Audio di e reunion',
   'Ontvangen brokken:': 'Bloke risibí:',
@@ -698,10 +707,6 @@ const _dutchSourceAddPap = {
       'E grabashon a faya. Bo ta ainda den e reunion. Start di nobo si bo ke graba.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'E reunion mes ta mela un grabashon. Eso no ta e grabashon di OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Audio no ta bai na e server di transkripshon te ora bo permití esei apart.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Manda audio na e server di transkripshon skohe',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'E reunión no por a mandá bo zonido — purba di paga i prende e fuente di nobo.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

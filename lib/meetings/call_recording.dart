@@ -9,6 +9,29 @@
 
 import 'call_audio_source.dart';
 
+/// Het aantal bronnen dat stilte bijdroeg in een callopname én hoeveel —
+/// uit `sources.json` van de sessie (#2530). `silenceTicks` is in
+/// 20 ms-ticks (de mix-tick); de UI maakt er seconden van. Null als er
+/// geen manifest is, de vorm vreemd is, of niets ontbrak: een gat dat we
+/// niet kunnen onderbouwen claimen we niet.
+(int sources, Duration silence)? missingCallAudio(
+  Map<String, Object?>? manifest,
+) {
+  final list = manifest?['sources'];
+  if (list is! List) return null;
+  var silenced = 0;
+  var ticks = 0;
+  for (final entry in list) {
+    if (entry is! Map) continue;
+    final n = entry['silenceTicks'];
+    if (n is! int || n <= 0) continue;
+    silenced++;
+    ticks += n;
+  }
+  if (ticks == 0) return null;
+  return (silenced, Duration(milliseconds: ticks * 20));
+}
+
 /// `uit / toestemming nodig / klaar / bezig / stoppen / fout`.
 enum CallRecordingPhase { uit, toestemmingNodig, klaar, bezig, stoppen, fout }
 
@@ -33,8 +56,6 @@ class CallRecordingOffer {
     required this.showStop,
     required this.showRetry,
     required this.showNotice,
-    required this.showAsrConsent,
-    required this.forwardToServer,
     required this.message,
   });
 
@@ -44,8 +65,6 @@ class CallRecordingOffer {
       showStop = false,
       showRetry = false,
       showNotice = false,
-      showAsrConsent = false,
-      forwardToServer = false,
       message = CallRecordingMessage.none;
 
   final bool showSection;
@@ -53,11 +72,6 @@ class CallRecordingOffer {
   final bool showStop;
   final bool showRetry;
   final bool showNotice;
-  final bool showAsrConsent;
-
-  /// Alleen waar als er een gekozen server is én een aparte upload-
-  /// toestemming. Intrekken maakt dit direct onwaar; de call blijft.
-  final bool forwardToServer;
   final CallRecordingMessage message;
 }
 
@@ -85,8 +99,6 @@ CallRecordingOffer offerCallRecording({
   required bool connected,
   required CallAudioCaptureFact audio,
   required bool noticeAcknowledged,
-  required bool asrServerChosen,
-  required bool asrUploadAllowed,
   required bool providerIndicatesRecording,
   required CallRecordingPhase phase,
 }) {
@@ -111,34 +123,12 @@ CallRecordingOffer offerCallRecording({
         audio.wholeCall &&
         (phase == CallRecordingPhase.toestemmingNodig ||
             phase == CallRecordingPhase.klaar),
-    showAsrConsent: audio.wholeCall && asrServerChosen && !blocked,
-    forwardToServer: mayForwardCallAudioToServer(
-      phase: phase,
-      asrServerChosen: asrServerChosen,
-      asrUploadAllowed: asrUploadAllowed,
-      wholeCall: audio.wholeCall,
-    ),
     message: _message(
       audio: audio,
       noticeAcknowledged: noticeAcknowledged,
       phase: phase,
     ),
   );
-}
-
-/// Bytes mogen de gekozen server pas op als de opname loopt, de server
-/// gekozen is en de uploadtoestemming er apart bij staat. Zonder die
-/// toestemming blijft de teller op nul; de call wordt niet verlaten.
-bool mayForwardCallAudioToServer({
-  required CallRecordingPhase phase,
-  required bool asrServerChosen,
-  required bool asrUploadAllowed,
-  required bool wholeCall,
-}) {
-  return phase == CallRecordingPhase.bezig &&
-      asrServerChosen &&
-      asrUploadAllowed &&
-      wholeCall;
 }
 
 CallRecordingMessage _message({

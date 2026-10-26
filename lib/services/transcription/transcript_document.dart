@@ -32,6 +32,7 @@ class TranscriptLabels {
     this.duration = 'Duur:',
     this.engine = 'Engine:',
     this.language = 'Taal:',
+    this.missing = 'Ontbrekend:',
   });
 
   final String heading;
@@ -40,6 +41,10 @@ class TranscriptLabels {
   final String duration;
   final String engine;
   final String language;
+
+  /// Voorlabel van de gatenregel — alleen geschreven als de bron die
+  /// eerlijk meldde (#2530, callopname met stilte-ticks).
+  final String missing;
 }
 
 /// Wat het provenanceblok zegt. Alles is al opgemaakte tekst: de aanroeper
@@ -56,6 +61,7 @@ class TranscriptProvenance {
     this.durationLabel,
     this.engineLabel,
     this.languageCode,
+    this.gapsLabel,
   });
 
   /// De naam achter de kop ("Transcript — vergadering 22 oktober").
@@ -82,6 +88,10 @@ class TranscriptProvenance {
 
   /// Taalcode ("nl"), of null als de engine geen taal rapporteerde.
   final String? languageCode;
+
+  /// Eerlijk gemelde gaten in de bronaudio ("~4 s over 1 bron"), of null.
+  /// Staat los van de segmenten: een gat is herkomst, geen spraak.
+  final String? gapsLabel;
 }
 
 /// Schrijft een transcriptdocument in de vorm van §3.1: marker, kop,
@@ -118,6 +128,9 @@ String buildTranscriptMarkdown(
       '${labels.language} ${provenance.languageCode}',
   ];
   if (engineLine.isNotEmpty) buf.writeln(engineLine.join(' · '));
+  if (provenance.gapsLabel != null) {
+    buf.writeln('${labels.missing} ${provenance.gapsLabel}');
+  }
   return '$buf\n---\n\n${body.trimRight()}\n';
 }
 

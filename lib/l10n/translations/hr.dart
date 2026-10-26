@@ -1609,6 +1609,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'vergadering': 'sastanak',
+  'de vergadering': 'sastanak',
+  'Vergaderingsopname': 'Snimka sastanka',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Sastanak ili izvor zvuka je nestao. Ono što je već bilo je spremljeno.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Nedostajalo je otprilike {s} s zvuka izvora raspodijeljeno na {n} izvor(a) — gubitak zapisa ili mreže tijekom snimanja.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s zvuka izvora na {n} izvor(a) — gubitak zapisa ili mreže tijekom snimanja.',
   'Vergadering': 'Sastanak',
   'Vergaderingsaudio': 'Zvuk sastanka',
   'Ontvangen brokken:': 'Primljeni dijelovi:',
@@ -1656,10 +1665,6 @@ const _dutchSourceAddHr = <String, String>{
       'Snimanje nije uspjelo. Još si na sastanku. Pokreni ponovo ako želiš snimati.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Sastanak sam javlja snimanje. To nije snimka OciDecka.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Zvuk ne ide na poslužitelj za transkripciju dok to zasebno ne dopustiš.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Šalji zvuk na odabrani poslužitelj za transkripciju',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Sastanak nije mogao poslati vaš zvuk — pokušajte isključiti i ponovno uključiti izvor.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

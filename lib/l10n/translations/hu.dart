@@ -1607,6 +1607,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'vergadering': 'megbeszélés',
+  'de vergadering': 'a megbeszélés',
+  'Vergaderingsopname': 'Megbeszélés-felvétel',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'A megbeszélés vagy a hangforrás megszűnt. Ami már ott volt, mentve van.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Kb. {s} s forráshang hiányzott {n} forráson — sáv- vagy hálózatvesztés a felvétel alatt.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s forráshang {n} forráson — sáv- vagy hálózatvesztés a felvétel alatt.',
   'Vergadering': 'Megbeszélés',
   'Vergaderingsaudio': 'Megbeszélés hangja',
   'Ontvangen brokken:': 'Fogadott darabok:',
@@ -1656,10 +1665,6 @@ const _dutchSourceAddHu = <String, String>{
       'A felvétel nem sikerült. Még a megbeszélésen vagy. Indítsd újra, ha fel akarsz venni.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'A megbeszélés maga jelez felvételt. Az nem az OciDeck felvétele.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'A hang nem megy az átíró kiszolgálóra, amíg ezt külön nem engedélyezed.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Küldd a hangot a választott átíró kiszolgálóra',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'A megbeszélés nem tudta továbbítani a hangját — próbálja ki- és bekapcsolni a forrást.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

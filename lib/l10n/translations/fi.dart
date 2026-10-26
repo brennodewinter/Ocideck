@@ -1605,6 +1605,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'vergadering': 'kokous',
+  'de vergadering': 'kokous',
+  'Vergaderingsopname': 'Kokoustallenne',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Kokous tai äänilähde katosi. Se, mitä jo oli, on tallennettu.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Noin {s} s lähteen ääntä puuttui {n} lähteeltä — raidon tai verkon häviö tallennuksen aikana.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s lähteen ääntä {n} lähteeltä — raidan tai verkon häviö tallennuksen aikana.',
   'Vergadering': 'Kokous',
   'Vergaderingsaudio': 'Kokouksen ääni',
   'Ontvangen brokken:': 'Vastaanotetut palat:',
@@ -1653,10 +1662,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tallennus epäonnistui. Olet yhä kokouksessa. Aloita uudelleen, jos haluat tallentaa.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Kokous itse ilmoittaa tallennuksesta. Se ei ole OciDeckin tallenne.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Ääni ei mene litterointipalvelimelle, ennen kuin sallit sen erikseen.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Lähetä ääni valitulle litterointipalvelimelle',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Kokous ei pystynyt lähettämään ääntäsi — yritä kytkeä lähde pois ja takaisin päälle.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

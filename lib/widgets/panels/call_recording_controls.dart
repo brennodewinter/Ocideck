@@ -4,6 +4,11 @@
 // startknop. Het lampje van de provider is een eigen regel: het start
 // niets en het is niet de opname van OciDeck.
 //
+// De live-route (#2530) is dezelfde als bij de microfoon: de opt-in bewijst
+// de streaming-capability van de gekozen server zelf, zijn vinkje ís de
+// sessieconsent. Zonder vinkje blijft de voorlopige tekst lokaal — audio
+// gaat nooit stil weg.
+//
 // De fase leeft in [callRecordingProvider], niet in deze widget. Het
 // paneel kan verdwijnen bij een presentatiewissel; de strook erboven
 // blijft de Stop tonen zolang de fase `bezig` is.
@@ -15,19 +20,47 @@ import '../../l10n/app_localizations.dart';
 import '../../meetings/call_recording.dart';
 import '../../meetings/meeting_event.dart';
 import '../../meetings/meeting_provider.dart';
+import '../../services/transcription/transcription_engine.dart';
 import '../../state/call_recording_provider.dart';
-import '../../state/transcription_provider.dart';
 import '../../theme/app_theme.dart';
+import '../dialogs/live_server_opt_in.dart';
 
-class CallRecordingSection extends ConsumerWidget {
-  const CallRecordingSection({super.key, required this.session});
+class CallRecordingSection extends ConsumerStatefulWidget {
+  const CallRecordingSection({
+    super.key,
+    required this.session,
+    this.probeRunner,
+  });
 
   final MeetingSession session;
 
+  /// Testhaak voor de live-serverproef — productie bouwt de echte.
+  final LiveProbeRunner? probeRunner;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CallRecordingSection> createState() =>
+      _CallRecordingSectionState();
+}
+
+class _CallRecordingSectionState extends ConsumerState<CallRecordingSection> {
+  /// De keuze van de live-opt-in — de Start-knop maakt er de
+  /// `ServerConsent.liveSession` van (zelfde patroon als de mic-dialoog).
+  LiveOptInState _live = const LiveOptInState();
+
+  void _start() {
+    ref
+        .read(callRecordingProvider.notifier)
+        .start(
+          liveConsent: _live.chosen
+              ? ServerConsent.liveSession(_live.host)
+              : null,
+        );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final session = widget.session;
     final recorded = ref.watch(callRecordingProvider);
-    final asr = ref.watch(asrServerProfileProvider).isConfigured;
     final connected =
         session.connectionState == MeetingConnectionState.connected;
     final stored = recorded.phase;
@@ -45,8 +78,6 @@ class CallRecordingSection extends ConsumerWidget {
       connected: connected,
       audio: session.capabilities.callAudio,
       noticeAcknowledged: recorded.noticeAcknowledged,
-      asrServerChosen: asr,
-      asrUploadAllowed: recorded.asrUploadAllowed,
       providerIndicatesRecording: recorded.providerIndicatesRecording,
       phase: phase,
     );
@@ -104,32 +135,18 @@ class CallRecordingSection extends ConsumerWidget {
                     style: const TextStyle(fontSize: 11),
                   ),
                 ),
-              if (offer.showAsrConsent) ...[
-                if (!recorded.asrUploadAllowed)
-                  Text(
-                    l10n.d(
-                      'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.',
-                    ),
-                    style: TextStyle(fontSize: 11, color: AppTheme.slate600),
-                  ),
-                CheckboxListTile(
-                  contentPadding: EdgeInsets.zero,
-                  dense: true,
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: recorded.asrUploadAllowed,
-                  onChanged: (value) =>
-                      notifier.setAsrUploadAllowed(value ?? false),
-                  title: Text(
-                    l10n.d('Stuur audio naar de gekozen transcriptieserver'),
-                    style: const TextStyle(fontSize: 12),
-                  ),
+              if (phase == CallRecordingPhase.klaar ||
+                  phase == CallRecordingPhase.toestemmingNodig)
+                LiveServerOptIn(
+                  sourcesLabel: l10n.d('de vergadering'),
+                  onChanged: (s) => _live = s,
+                  probeRunner: widget.probeRunner,
                 ),
-              ],
               if (offer.showStart)
                 Align(
                   alignment: Alignment.centerLeft,
                   child: FilledButton(
-                    onPressed: notifier.start,
+                    onPressed: _start,
                     child: Text(l10n.d('Start opname')),
                   ),
                 ),

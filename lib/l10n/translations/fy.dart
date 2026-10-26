@@ -652,6 +652,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'vergadering': 'gearkomste',
+  'de vergadering': 'de gearkomste',
+  'Vergaderingsopname': 'Gearkomste-opname',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'De gearkomste of de audioboarne foel wei. Wat der al stie is bewarre.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Der ûntbrak ±{s} s boarne-audio ferdield oer {n} boarne(n) — track- of netwurkferlies ûnder de opname.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s boarne-audio oer {n} boarne(n) — track- of netwurkferlies ûnder de opname.',
   'Vergadering': 'Gearkomste',
   'Vergaderingsaudio': 'Gearkomste-audio',
   'Ontvangen brokken:': 'Untfongen brokken:',
@@ -699,10 +708,6 @@ const _dutchSourceAddFy = {
       'De opname is mislearre. Do bist noch yn de gearkomste. Start op \'e nij assto opnimme wolst.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'De gearkomste meldt sels in opname. Dat is net de opname fan OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Audio giet net nei de transkripsjetsjinner oantsto dat apart tastiet.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Stjoer audio nei de keazen transkripsjetsjinner',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'De gearkomste koe jo lûd net trochjaan — probearje de boarne út en wer oan te setten.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

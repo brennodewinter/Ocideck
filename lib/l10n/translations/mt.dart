@@ -1623,6 +1623,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'vergadering': 'laqgħa',
+  'de vergadering': 'il-laqgħa',
+  'Vergaderingsopname': 'Reġistrazzjoni tal-laqgħa',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Il-laqgħa jew s-sors tal-awdio spicċa. Li kien hemm diġà huwa salvat.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Naqas madwar {s} s ta\' awdjo tas-sors fuq {n} sors(i) — telf ta\' track jew netwerk waqt ir-reġistrazzjoni.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s ta\' awdjo tas-sors fuq {n} sors(i) — telf ta\' track jew netwerk waqt ir-reġistrazzjoni.',
   'Vergadering': 'Laqgħa',
   'Vergaderingsaudio': 'Awdjo tal-laqgħa',
   'Ontvangen brokken:': 'Biċċiet riċevuti:',
@@ -1673,10 +1682,6 @@ const _dutchSourceAddMt = <String, String>{
       'Ir-reġistrazzjoni falliet. Għadek fil-laqgħa. Ibda mill-ġdid jekk trid tirrekordja.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Il-laqgħa nnifisha tirrapporta reġistrazzjoni. Dik mhix ir-reġistrazzjoni ta\' OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'L-awdjo ma jmurx lejn is-server tat-traskrizzjoni sakemm ma tħallix dan separatament.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Ibgħat l-awdjo lis-server tat-traskrizzjoni magħżul',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Il-laqgħa ma setgħetx tibgħat il-ħoss tiegħek — ipprova tfi u tixgħel is-sors mill-ġdid.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

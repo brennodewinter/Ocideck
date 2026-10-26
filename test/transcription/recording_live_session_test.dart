@@ -4,16 +4,23 @@
 // expliciete herstelknop zijn dan aantoonbaar zonder een echt apparaat.
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/meetings/call_audio_capture_source.dart';
+import 'package:ocideck/meetings/call_audio_source.dart';
+import 'package:ocideck/meetings/meeting_participant.dart';
+import 'package:ocideck/meetings/meeting_provider.dart';
 import 'package:ocideck/models/asr_server_profile.dart';
 import 'package:ocideck/services/transcription/capture_source.dart';
 import 'package:ocideck/services/transcription/recording_session.dart';
 import 'package:ocideck/services/transcription/recording_staging.dart';
 import 'package:ocideck/services/transcription/transcription_engine.dart';
+import 'package:ocideck/state/call_recording_provider.dart';
 import 'package:ocideck/state/transcription_provider.dart';
 
+import '../meetings/fakes/fake_meeting_provider.dart';
 import 'fakes/fake_capture_source.dart';
 
 class _Staging implements RecordingStaging {
@@ -95,6 +102,74 @@ ProviderContainer containerFor(AsrServerProfile profile) => ProviderContainer(
   ],
 );
 
+/// De callopname schrijft écht naar schijf (#2529) — zijn staging moet
+/// dus een echte map zijn, anders zou de wav-open de test op iets anders
+/// laten falen dan wat hij bewijst.
+class _DirStaging implements RecordingStaging {
+  _DirStaging() {
+    _root = Directory.systemTemp.createTempSync('calllive-test');
+    addTearDown(() async {
+      if (await _root.exists()) await _root.delete(recursive: true);
+    });
+  }
+
+  late final Directory _root;
+  var _n = 0;
+
+  @override
+  Future<String?> createSessionDir() async {
+    final dir = Directory('${_root.path}/s${_n++}');
+    await dir.create(recursive: true);
+    return dir.path;
+  }
+
+  @override
+  Future<void> discardDir(String? dir) async {
+    if (dir == null) return;
+    final d = Directory(dir);
+    if (await d.exists()) await d.delete(recursive: true);
+  }
+
+  @override
+  Future<void> sweep({required Duration maxAge}) async {}
+
+  @override
+  Future<void> discardAll() async {}
+
+  @override
+  Future<List<String>> listSessionDirs() async => const [];
+}
+
+/// Een verbonden fake-call met een whole-call-claim én de tap die hem
+/// waarmaakt — de bron van `CallAudioCaptureSource`.
+Future<FakeMeetingSession> _joinFakeCall() async {
+  const provider = FakeMeetingProvider();
+  final match = provider.match(Uri.parse('https://fake.local/r'))!;
+  final session =
+      await provider.join(MeetingJoinRequest(link: match, displayName: 'Me'))
+          as FakeMeetingSession;
+  session.captureController = StreamController<CallAudioChunk>.broadcast();
+  session.setCapabilities(
+    const MeetingCapabilities(
+      audio: true,
+      callAudio: CallAudioCaptureFact(localOutbound: true, remote: true),
+    ),
+  );
+  return session;
+}
+
+var _callSeq = 0;
+
+/// Eén remote brok van precies één mix-tick (640 B 16 kHz mono).
+CallAudioChunk _callChunk() => CallAudioChunk(
+  participantId: 'zij',
+  role: CallAudioRole.remote,
+  trackId: 'zij-audio',
+  at: DateTime.now().add(Duration(seconds: _callSeq++)),
+  pcm: Uint8List(callAudioTickBytes),
+  sampleRateHz: 16000,
+);
+
 /// Wacht tot [condition] waar is — events lopen over echte sockets en
 /// microtasks, dus poll i.p.v. één pump.
 Future<void> until(bool Function() condition) async {
@@ -171,6 +246,86 @@ void main() {
         .read(recordingSessionProvider.notifier)
         .stopAll(RecordingEndReason.userStop);
     expect(c.read(liveServerStatusProvider), LiveServerStatus.off);
+  });
+
+  test('callaudio met consent: de mix-tick bereikt de socket, de partial komt '
+      'terug (#2530)', () async {
+    final server = LiveStubServer();
+    await server.start();
+    addTearDown(server.close);
+    final c = ProviderContainer(
+      overrides: [
+        recordingStagingProvider.overrideWithValue(_DirStaging()),
+        asrServerProfileProvider.overrideWith(
+          () => _Profile(liveProfile(server.port)),
+        ),
+      ],
+    );
+    addTearDown(c.dispose);
+
+    // De echte call-flow: de opt-in benoemde de host, de Start-knop gaf
+    // die als sessieconsent door aan de call-notifier.
+    final session = await _joinFakeCall();
+    final notifier = c.read(callRecordingProvider.notifier)..bind(session);
+    notifier.setNotice(true);
+    await notifier.start(
+      liveConsent: const ServerConsent.liveSession('127.0.0.1'),
+    );
+    await until(
+      () => c.read(liveServerStatusProvider) == LiveServerStatus.live,
+    );
+    expect(session.captureStarts, 1);
+
+    // Eén remote brok → de mixer emiteert een 20 ms-tick → die gaat als
+    // binair frame de socket op, zijn echo komt als voorlopige tekst terug.
+    session.captureController!.add(_callChunk());
+    await until(
+      () =>
+          server.frames.any((f) => f is List<int> && f.isNotEmpty) &&
+          c.read(callRecordingProvider).capturedChunks > 0,
+    );
+    await until(() => c.read(provisionalCaptionProvider).text.isNotEmpty);
+
+    await notifier.stop();
+    expect(c.read(liveServerStatusProvider), LiveServerStatus.off);
+  });
+
+  test('callaudio zonder consent: geen socket en geen bytes — wel een duurzame '
+      'wav (#2530)', () async {
+    final server = LiveStubServer();
+    await server.start();
+    addTearDown(server.close);
+    // Het profiel hééft een live-endpoint — zonder sessieconsent mag het
+    // toch nooit benaderd worden. "Opnemen en later transcriberen" blijft
+    // werken.
+    final c = ProviderContainer(
+      overrides: [
+        recordingStagingProvider.overrideWithValue(_DirStaging()),
+        asrServerProfileProvider.overrideWith(
+          () => _Profile(liveProfile(server.port)),
+        ),
+      ],
+    );
+    addTearDown(c.dispose);
+
+    final session = await _joinFakeCall();
+    final notifier = c.read(callRecordingProvider.notifier)..bind(session);
+    notifier.setNotice(true);
+    await notifier.start();
+
+    session.captureController!.add(_callChunk());
+    await until(() => c.read(callRecordingProvider).capturedChunks > 0);
+    expect(server.wsConnections, isEmpty);
+    expect(c.read(liveServerStatusProvider), LiveServerStatus.off);
+    expect(c.read(recordingSessionProvider.notifier).liveSessionHost, isNull);
+
+    // De duurzame mix staat op schijf — later transcriberen kan.
+    final stagingDir = c.read(recordingSessionProvider)!.stagingDir!;
+    await notifier.stop();
+    final wav = File('$stagingDir/recording.wav');
+    expect(await wav.exists(), isTrue);
+    expect(await wav.length(), greaterThan(44));
+    expect(await File('$stagingDir/sources.json').exists(), isTrue);
   });
 
   test(

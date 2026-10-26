@@ -1621,6 +1621,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'vergadering': 'întâlnire',
+  'de vergadering': 'întâlnirea',
+  'Vergaderingsopname': 'Înregistrarea întâlnirii',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Întâlnirea sau sursa audio a dispărut. Ce era deja acolo este salvat.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Au lipsit aproximativ {s} s audio de sursă pe {n} sursă(e) — pierdere de pistă sau de rețea în timpul înregistrării.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s audio de sursă pe {n} sursă(e) — pierdere de pistă sau de rețea în timpul înregistrării.',
   'Vergadering': 'Întâlnire',
   'Vergaderingsaudio': 'Sunetul întâlnirii',
   'Ontvangen brokken:': 'Fragmente primite:',
@@ -1669,10 +1678,6 @@ const _dutchSourceAddRo = <String, String>{
       'Înregistrarea a eșuat. Ești încă în întâlnire. Pornește din nou dacă vrei să înregistrezi.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Întâlnirea anunță singură o înregistrare. Aceea nu este înregistrarea OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Audio nu merge la serverul de transcriere până nu permiți asta separat.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Trimite audio către serverul de transcriere ales',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Întâlnirea nu a putut transmite sunetul dvs. — încercați să reporniți sursa.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

@@ -1606,6 +1606,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'vergadering': 'schůzka',
+  'de vergadering': 'schůzka',
+  'Vergaderingsopname': 'Záznam schůzky',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Schůzka nebo zdroj zvuku vypadl. Co už tam bylo, je uloženo.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Chybělo přibližně {s} s zvuku zdroje rozdělených na {n} zdroj(ů) — ztráta stopy nebo sítě během nahrávání.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s zvuku zdroje na {n} zdroj(ů) — ztráta stopy nebo sítě během nahrávání.',
   'Vergadering': 'Schůzka',
   'Vergaderingsaudio': 'Zvuk schůzky',
   'Ontvangen brokken:': 'Přijaté úseky:',
@@ -1653,10 +1662,6 @@ const _dutchSourceAddCs = <String, String>{
       'Záznam se nezdařil. Pořád jsi na schůzce. Spusť znovu, pokud chceš nahrávat.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Schůzka sama hlásí záznam. To není záznam OciDecku.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Zvuk nejde na přepisový server, dokud to zvlášť nepovolíš.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Posílat zvuk na zvolený přepisový server',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Schůzka nemohla přenést váš zvuk — zkuste zdroj vypnout a znovu zapnout.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

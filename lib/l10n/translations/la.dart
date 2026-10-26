@@ -1620,6 +1620,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'vergadering': 'colloquium',
+  'de vergadering': 'colloquium',
+  'Vergaderingsopname': 'Colloquii exceptio',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Colloquium vel fons soni discessit. Quod iam erat conservatum est.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Aberant fere {s} s soni fontis in {n} fonte(s) — amissio orbitae vel retis in exceptione.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s soni fontis in {n} fonte(s) — amissio orbitae vel retis in exceptione.',
   'Vergadering': 'Conventus',
   'Vergaderingsaudio': 'Sonus conventus',
   'Ontvangen brokken:': 'Frusta accepta:',
@@ -1667,10 +1676,6 @@ const _dutchSourceAddLa = <String, String>{
       'Exceptio defecit. Adhuc in colloquio es. Iterum incipe si excipere vis.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Colloquium ipsum exceptionem nuntiat. Ea non est exceptio OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Sonus ad servatorem transcriptionis non it donec id separatim sinis.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Mitte sonum ad servatorem transcriptionis electum',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Conventus sonum tuum transmittere non potuit — fontem iterum accendere tempta.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

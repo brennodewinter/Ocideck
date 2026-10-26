@@ -1598,6 +1598,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'vergadering': 'koosolek',
+  'de vergadering': 'koosolek',
+  'Vergaderingsopname': 'Koosoleku salvestus',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Koosolek või heliallikas kadus. Mis juba oli, on salvestatud.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Umbes {s} s allikaheli jäi puudu {n} allikal — raja või võrgu kadu salvestuse ajal.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s allikaheli {n} allikal — raja või võrgu kadu salvestuse ajal.',
   'Vergadering': 'Koosolek',
   'Vergaderingsaudio': 'Koosoleku heli',
   'Ontvangen brokken:': 'Vastuvõetud osad:',
@@ -1646,10 +1655,6 @@ const _dutchSourceAddEt = <String, String>{
       'Salvestus ebaõnnestus. Oled endiselt koosolekul. Alusta uuesti, kui tahad salvestada.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Koosolek teatab ise salvestusest. See ei ole OciDecki salvestus.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Heli ei lähe transkriptsiooniserverisse, kuni sa seda eraldi ei luba.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Saada heli valitud transkriptsiooniserverisse',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Koosolek ei suutnud teie heli edastada — proovige allikas uuesti sisse lülitada.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

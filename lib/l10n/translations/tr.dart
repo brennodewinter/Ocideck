@@ -2513,6 +2513,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'vergadering': 'toplantı',
+  'de vergadering': 'toplantı',
+  'Vergaderingsopname': 'Toplantı kaydı',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'Toplantı veya ses kaynağı kesildi. Olanlar kaydedildi.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '{n} kaynakta yaklaşık {s} s kaynak sesi eksikti — kayıt sırasında iz veya ağ kaybı.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '{n} kaynakta ~{s} s kaynak sesi — kayıt sırasında iz veya ağ kaybı.',
   'Vergadering': 'Toplantı',
   'Vergaderingsaudio': 'Toplantı sesi',
   'Ontvangen brokken:': 'Alınan parçalar:',
@@ -2560,10 +2569,6 @@ const _dutchSourceAddTr = <String, String>{
       'Kayıt başarısız oldu. Hâlâ toplantıdasın. Kaydetmek istersen yeniden başlat.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'Toplantının kendisi bir kayıt bildiriyor. Bu OciDeck kaydı değildir.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'Ses, bunu ayrıca izin verene kadar yazıya dökme sunucusuna gitmez.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Sesi seçilen yazıya dökme sunucusuna gönder',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'Toplantı sesinizi iletemedi — kaynağı kapatıp yeniden açmayı deneyin.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':

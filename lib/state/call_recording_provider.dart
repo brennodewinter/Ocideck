@@ -16,6 +16,7 @@ import '../meetings/meeting_event.dart';
 import '../meetings/meeting_provider.dart';
 import '../services/transcription/capture_source.dart';
 import '../services/transcription/recording_session.dart';
+import '../services/transcription/transcription_engine.dart';
 import '../utils/log.dart';
 import 'meeting_session_provider.dart';
 import 'transcription_provider.dart';
@@ -29,42 +30,31 @@ class CallRecordingState {
   const CallRecordingState({
     this.phase = CallRecordingPhase.uit,
     this.noticeAcknowledged = false,
-    this.asrUploadAllowed = false,
     this.providerIndicatesRecording = false,
     this.capturedChunks = 0,
-    this.forwardedChunks = 0,
   });
 
   final CallRecordingPhase phase;
   final bool noticeAcknowledged;
-  final bool asrUploadAllowed;
   final bool providerIndicatesRecording;
 
-  /// Brokken die de tap leverde ná een bewuste start. Niet bewaard: de
-  /// bytes zelf gaan nergens heen. De teller bewijst alleen dát de tap
-  /// liep.
+  /// Brokken die de mix leverde ná een bewuste start. De bytes zelf
+  /// staan al duurzaam in de staging; de teller bewijst alleen dát de
+  /// tap liep.
   final int capturedChunks;
-
-  /// Brokken die naar een gekozen transcriptieserver móchten. Blijft 0
-  /// zolang de aparte uploadtoestemming ontbreekt.
-  final int forwardedChunks;
 
   CallRecordingState copyWith({
     CallRecordingPhase? phase,
     bool? noticeAcknowledged,
-    bool? asrUploadAllowed,
     bool? providerIndicatesRecording,
     int? capturedChunks,
-    int? forwardedChunks,
   }) {
     return CallRecordingState(
       phase: phase ?? this.phase,
       noticeAcknowledged: noticeAcknowledged ?? this.noticeAcknowledged,
-      asrUploadAllowed: asrUploadAllowed ?? this.asrUploadAllowed,
       providerIndicatesRecording:
           providerIndicatesRecording ?? this.providerIndicatesRecording,
       capturedChunks: capturedChunks ?? this.capturedChunks,
-      forwardedChunks: forwardedChunks ?? this.forwardedChunks,
     );
   }
 }
@@ -114,14 +104,11 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     _applyResting();
   }
 
-  /// De uploadtoestemming intrekken stopt de telling en laat de call
-  /// met rust. Een lopende opname wordt daar niet door verlaten, en de
-  /// bytes gaan nog steeds nergens heen.
-  void setAsrUploadAllowed(bool allowed) {
-    state = state.copyWith(asrUploadAllowed: allowed);
-  }
-
-  Future<void> start() async {
+  /// [liveConsent] is de sessieconsent uit de opnamesectie (#2530,
+  /// §4.3): de opt-in van de live-server benoemde de host, en de Start
+  /// die de gebruiker drukte geeft hem hier door — zonder dat blijft de
+  /// voorlopige tekst lokaal.
+  Future<void> start({ServerConsent? liveConsent}) async {
     final session = _session;
     if (session == null || _starting) return;
     final next = phaseAfterCallRecordingStart(state.phase);
@@ -140,6 +127,7 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
             consent: RecordingConsent(
               participantNoticeAcknowledged: state.noticeAcknowledged,
             ),
+            liveConsent: liveConsent,
           );
       _audio = handle.liveChunks?.listen(_onLiveTick, onError: _onAudioError);
       _recordingEvents = handle.events.listen(_onRecordingEvent);
@@ -232,24 +220,12 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
   }
 
   /// Eén event per mix-tick (20 ms, zie `CallAudioCaptureSource`). De
-  /// bytes zijn al duurzaam weggeschreven; hier telt alleen wat de
-  /// gebruiker mag volgen.
+  /// bytes zijn al duurzaam weggeschreven; de live-route (lokaal of de
+  /// bewezen server) hangt aan `handle.liveChunks` via de sessie-
+  /// provider — hier telt alleen wat de gebruiker mag volgen.
   void _onLiveTick(AudioChunk tick) {
     if (!ref.mounted) return;
-    final session = _session;
-    final forward = mayForwardCallAudioToServer(
-      phase: state.phase,
-      asrServerChosen: _asrChosen(),
-      asrUploadAllowed: state.asrUploadAllowed,
-      wholeCall: session?.capabilities.callAudio.wholeCall ?? false,
-    );
-    // De bytes worden hier losgelaten, mét of zonder uploadtoestemming.
-    // [forwardedChunks] is alleen het hek: zonder toestemming telt een
-    // brok niet mee, en er wordt niets weggeschreven of verstuurd.
-    state = state.copyWith(
-      capturedChunks: state.capturedChunks + 1,
-      forwardedChunks: state.forwardedChunks + (forward ? 1 : 0),
-    );
+    state = state.copyWith(capturedChunks: state.capturedChunks + 1);
   }
 
   void _onRecordingEvent(RecordingEvent event) {
@@ -305,6 +281,4 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
 
   bool _connected(MeetingSession session) =>
       session.connectionState == MeetingConnectionState.connected;
-
-  bool _asrChosen() => ref.read(asrServerProfileProvider).isConfigured;
 }

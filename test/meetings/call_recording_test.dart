@@ -11,8 +11,8 @@ import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/call_recording.dart';
 import 'package:ocideck/meetings/meeting_participant.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
-import 'package:ocideck/models/asr_server_profile.dart';
 import 'package:ocideck/services/transcription/recording_staging.dart';
+import 'package:ocideck/services/transcription/transcription_engine.dart';
 import 'package:ocideck/state/call_recording_provider.dart';
 import 'package:ocideck/state/meeting_session_provider.dart';
 import 'package:ocideck/state/transcription_provider.dart';
@@ -118,34 +118,32 @@ void main() {
     },
   );
 
-  test('een server krijgt pas bytes als de upload apart is toegestaan', () {
+  test('het manifest telt eerlijk welke bronnen stilte bijdroegen', () {
+    // Geen manifest of een vreemde vorm is geen claim over gaten.
+    expect(missingCallAudio(null), isNull);
+    expect(missingCallAudio(const {}), isNull);
+    expect(missingCallAudio(const {'sources': 'x'}), isNull);
     expect(
-      mayForwardCallAudioToServer(
-        phase: CallRecordingPhase.bezig,
-        asrServerChosen: true,
-        asrUploadAllowed: false,
-        wholeCall: true,
-      ),
-      isFalse,
+      missingCallAudio(const {
+        'version': 1,
+        'sources': [
+          {'silenceTicks': 0},
+        ],
+      }),
+      isNull,
     );
-    expect(
-      mayForwardCallAudioToServer(
-        phase: CallRecordingPhase.bezig,
-        asrServerChosen: true,
-        asrUploadAllowed: true,
-        wholeCall: true,
-      ),
-      isTrue,
-    );
-    expect(
-      mayForwardCallAudioToServer(
-        phase: CallRecordingPhase.klaar,
-        asrServerChosen: true,
-        asrUploadAllowed: true,
-        wholeCall: true,
-      ),
-      isFalse,
-    );
+    // Twee bronnen met gaten — geteld én gesommeerd (een tick is 20 ms).
+    final gaps = missingCallAudio(const {
+      'version': 1,
+      'sources': [
+        {'silenceTicks': 50},
+        {'silenceTicks': 100},
+        {'silenceTicks': 0},
+      ],
+    });
+    expect(gaps, isNotNull);
+    expect(gaps!.$1, 2);
+    expect(gaps.$2, const Duration(milliseconds: 3000));
   });
 
   testWidgets('een actieve call zonder audiobron toont de reden, geen start', (
@@ -253,7 +251,7 @@ void main() {
     },
   );
 
-  testWidgets('zonder uploadtoestemming verlaat geen brok de server', (
+  testWidgets('zonder sessieconsent is er geen live-route en gaat niets weg', (
     tester,
   ) async {
     final container = _container();
@@ -262,21 +260,10 @@ void main() {
     session.setCapabilities(
       const MeetingCapabilities(audio: true, callAudio: _wholeCall),
     );
-    await container
-        .read(asrServerProfileProvider.notifier)
-        .set(
-          const AsrServerProfile(
-            enabled: true,
-            mode: AsrServerMode.loopback,
-            baseUrl: 'http://127.0.0.1:8080',
-          ),
-        );
     await tester.pumpWidget(_panel(container));
     await tester.pump();
     await tester.tap(find.text('Deelnemers zijn geïnformeerd'));
     await tester.pump();
-    // De start gaat hier via de notifier: het knoppad is elders bewezen,
-    // deze toets gaat om het uploadhek.
     session.captureController = StreamController<CallAudioChunk>.broadcast();
     unawaited(container.read(callRecordingProvider.notifier).start());
     await pumpUntil(
@@ -294,29 +281,13 @@ void main() {
       () => container.read(callRecordingProvider).capturedChunks == 1,
       reason: 'de mixer emiteerde geen tick',
     );
-    expect(container.read(callRecordingProvider).forwardedChunks, 0);
-    await tester.pump();
-    expect(find.textContaining('tot je dat apart toestaat'), findsOneWidget);
-
-    container.read(callRecordingProvider.notifier).setAsrUploadAllowed(true);
-    await tester.pump();
-    session.captureController!.add(_chunk());
-    await pumpUntil(
-      tester,
-      () => container.read(callRecordingProvider).capturedChunks == 2,
-      reason: 'de mixer emiteerde geen tweede tick',
+    // Geen host gebonden, geen live-serverstatus — de voorlopige route
+    // staat uit terwijl de duurzame opname gewoon doortelt.
+    expect(
+      container.read(recordingSessionProvider.notifier).liveSessionHost,
+      isNull,
     );
-    expect(container.read(callRecordingProvider).forwardedChunks, 1);
-
-    container.read(callRecordingProvider.notifier).setAsrUploadAllowed(false);
-    await tester.pump();
-    session.captureController!.add(_chunk());
-    await pumpUntil(
-      tester,
-      () => container.read(callRecordingProvider).capturedChunks == 3,
-      reason: 'de mixer emiteerde geen derde tick',
-    );
-    expect(container.read(callRecordingProvider).forwardedChunks, 1);
+    expect(container.read(liveServerStatusProvider), LiveServerStatus.off);
     expect(session.connectionState, MeetingConnectionState.connected);
 
     unawaited(container.read(recordingSessionProvider)?.stop());
@@ -326,6 +297,67 @@ void main() {
       reason: 'de opname stopte niet',
     );
   });
+
+  testWidgets(
+    'met sessieconsent benoemt de sessie de host; zonder endpoint wordt '
+    'de route eerlijk lost en loopt de opname door',
+    (tester) async {
+      final container = _container();
+      _tear(container);
+      final session = await _join(container);
+      session.setCapabilities(
+        const MeetingCapabilities(audio: true, callAudio: _wholeCall),
+      );
+      await tester.pumpWidget(_panel(container));
+      await tester.pump();
+      await tester.tap(find.text('Deelnemers zijn geïnformeerd'));
+      await tester.pump();
+      session.captureController = StreamController<CallAudioChunk>.broadcast();
+      // De consent van een opt-in die "127.0.0.1" benoemde — zónder live-
+      // endpoint in het profiel faalt de stream op de consent-check; dat
+      // is de eerlijke `lost`, geen socket en geen stille afwezigheid.
+      unawaited(
+        container
+            .read(callRecordingProvider.notifier)
+            .start(liveConsent: const ServerConsent.liveSession('127.0.0.1')),
+      );
+      await pumpUntil(
+        tester,
+        () => session.captureStarts == 1,
+        reason: 'de opname startte niet',
+      );
+
+      // De consent bereikte de sessieprovider: de host is gebonden.
+      expect(
+        container.read(recordingSessionProvider.notifier).liveSessionHost,
+        '127.0.0.1',
+      );
+      // De route faalde op de consent-check — `lost`, en de opname telt
+      // door: de live-route is los van de duurzame pipeline.
+      await pumpUntil(
+        tester,
+        () => container.read(liveServerStatusProvider) == LiveServerStatus.lost,
+        reason: 'de live-route werd niet als verloren gemeld',
+      );
+      session.captureController!.add(_chunk());
+      await pumpUntil(
+        tester,
+        () => container.read(callRecordingProvider).capturedChunks == 1,
+        reason: 'de mixer emiteerde geen tick na de live-breuk',
+      );
+      expect(
+        container.read(callRecordingProvider).phase,
+        CallRecordingPhase.bezig,
+      );
+
+      unawaited(container.read(recordingSessionProvider)?.stop());
+      await pumpUntil(
+        tester,
+        () => container.read(recordingSessionProvider) == null,
+        reason: 'de opname stopte niet',
+      );
+    },
+  );
 
   testWidgets('de module aanzetten start niets; uitzetten stopt de opname', (
     tester,
@@ -436,7 +468,7 @@ void main() {
         find.textContaining('Je zit nog in de vergadering'),
         findsOneWidget,
       );
-      expect(container.read(callRecordingProvider).forwardedChunks, 0);
+      expect(container.read(callRecordingProvider).capturedChunks, 0);
       expect(session.left, isFalse);
       expect(
         find.bySemanticsLabel(RegExp('Je zit nog in de vergadering')),

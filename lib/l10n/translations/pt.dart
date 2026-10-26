@@ -1633,6 +1633,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'vergadering': 'reunião',
+  'de vergadering': 'a reunião',
+  'Vergaderingsopname': 'Gravação da reunião',
+  'De vergadering of de audiobron viel weg. Wat er al stond is bewaard.':
+      'A reunião ou a fonte de áudio desapareceu. O que já existia está guardado.',
+  'Er ontbrak ~{s} s bronaudio verdeeld over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      'Faltaram cerca de {s} s de áudio da fonte em {n} fonte(s) — perda de faixa ou de rede durante a gravação.',
+  '~{s} s bronaudio over {n} bron(nen) — track- of netwerkverlies tijdens de opname.':
+      '~{s} s de áudio da fonte em {n} fonte(s) — perda de faixa ou de rede durante a gravação.',
   'Vergadering': 'Reunião',
   'Vergaderingsaudio': 'Áudio da reunião',
   'Ontvangen brokken:': 'Fragmentos recebidos:',
@@ -1680,10 +1689,6 @@ const _dutchSourceAddPt = <String, String>{
       'A gravação falhou. Ainda estás na reunião. Começa de novo se quiseres gravar.',
   'De vergadering meldt zelf een opname. Dat is niet de opname van OciDeck.':
       'A reunião indica ela própria uma gravação. Essa não é a gravação do OciDeck.',
-  'Audio gaat niet naar de transcriptieserver tot je dat apart toestaat.':
-      'O áudio não vai para o servidor de transcrição até o autorizares à parte.',
-  'Stuur audio naar de gekozen transcriptieserver':
-      'Enviar áudio para o servidor de transcrição escolhido',
   'De vergadering kon je geluid niet doorgeven — probeer de bron opnieuw aan te zetten.':
       'A reunião não conseguiu enviar o seu som — tente desligar e ligar a fonte novamente.',
   'De vergadering kon je beeld niet doorgeven — probeer de bron opnieuw aan te zetten.':
