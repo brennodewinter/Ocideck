@@ -652,6 +652,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Vergadering': 'Gearkomste',
+  'Vergaderingsaudio': 'Gearkomste-audio',
   'Ontvangen brokken:': 'Untfongen brokken:',
   'de microfoon': 'de mikrofoan',
   'het systeemgeluid': 'it systeemlûd',

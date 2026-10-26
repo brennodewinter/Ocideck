@@ -31,6 +31,11 @@ enum CaptureSourceKind {
   /// Microfoon én systeemgeluid samen, waar het platform de kanalen
   /// gescheiden levert (§2.2).
   combination,
+
+  /// De gedecodeerde audio van een OciDeck-call (#2529): per-bron taps
+  /// gemixt tot één opname, met losse bronbestanden ernaast. Legt per
+  /// constructie andermans stemmen vast — de melding is verplicht.
+  callAudio,
 }
 
 /// Hoe eerlijk een bron op dit apparaat, op dit moment, aangeboden kan

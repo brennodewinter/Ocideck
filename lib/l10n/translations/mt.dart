@@ -1623,6 +1623,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Vergadering': 'Laqgħa',
+  'Vergaderingsaudio': 'Awdjo tal-laqgħa',
   'Ontvangen brokken:': 'Biċċiet riċevuti:',
   'de microfoon': 'il-mikrofonu',
   'het systeemgeluid': 'il-ħoss tas-sistema',

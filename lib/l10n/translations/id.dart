@@ -1605,6 +1605,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Vergadering': 'Rapat',
+  'Vergaderingsaudio': 'Audio rapat',
   'Ontvangen brokken:': 'Bagian diterima:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'audio sistem',

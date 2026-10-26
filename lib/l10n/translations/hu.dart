@@ -1607,6 +1607,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Vergadering': 'Megbeszélés',
+  'Vergaderingsaudio': 'Megbeszélés hangja',
   'Ontvangen brokken:': 'Fogadott darabok:',
   'de microfoon': 'a mikrofon',
   'het systeemgeluid': 'a rendszerhang',

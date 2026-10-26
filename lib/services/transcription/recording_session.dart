@@ -180,6 +180,7 @@ class RecordingManager {
     const othersVoices = {
       CaptureSourceKind.systemAudio,
       CaptureSourceKind.combination,
+      CaptureSourceKind.callAudio,
     };
     if (kinds.any(othersVoices.contains) &&
         !consent.participantNoticeAcknowledged) {

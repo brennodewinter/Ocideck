@@ -1611,6 +1611,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Vergadering': 'Stretnutie',
+  'Vergaderingsaudio': 'Zvuk stretnutia',
   'Ontvangen brokken:': 'Prijaté úseky:',
   'de microfoon': 'mikrofón',
   'het systeemgeluid': 'systémový zvuk',

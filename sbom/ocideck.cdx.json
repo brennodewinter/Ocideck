@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:8cd65c94-42f9-519a-8a78-65a2430fd96c",
+  "serialNumber": "urn:uuid:4fe527b5-cbb5-5e13-8b9d-5e0fce43cec4",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-26T19:41:09.517068Z",
+    "timestamp": "2026-10-26T21:12:24.667676Z",
     "tools": {
       "components": [
         {
@@ -740,7 +740,7 @@
         },
         {
           "name": "cdx:pub:scope",
-          "value": "transitive"
+          "value": "direct main"
         }
       ]
     },
@@ -9537,6 +9537,7 @@
         "pkg:pub/analyzer@14.5.0",
         "pkg:pub/archive@4.3.0",
         "pkg:pub/characters@1.4.1",
+        "pkg:pub/clock@1.1.3",
         "pkg:pub/crypto@3.0.7",
         "pkg:pub/cryptography@2.9.0",
         "pkg:pub/cupertino_icons@2.0.0",

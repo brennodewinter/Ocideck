@@ -1598,6 +1598,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Vergadering': 'Koosolek',
+  'Vergaderingsaudio': 'Koosoleku heli',
   'Ontvangen brokken:': 'Vastuvõetud osad:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'süsteemi heli',

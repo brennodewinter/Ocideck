@@ -113,9 +113,15 @@ void main() {
     ]) {
       expect(find.text(label), findsOneWidget);
     }
+    // callAudio staat bewust buiten de matrix: hij is sessie-scoped,
+    // geen platformbron (#2529).
     expect(
       find.text('nog niet beschikbaar op dit platform'),
-      findsNWidgets(CaptureSourceKind.values.length),
+      findsNWidgets(
+        CaptureSourceKind.values
+            .where((k) => k != CaptureSourceKind.callAudio)
+            .length,
+      ),
     );
     // De permissierij claimt niets dat nog niet bewezen is.
     expect(
@@ -142,10 +148,11 @@ void main() {
       find.text('waarschijnlijk — toestemming volgt bij eerste gebruik'),
       findsOneWidget,
     );
-    // De drie ongeregistreerde soorten blijven eerlijk "nog niet".
+    // De overige platformsoorten blijven eerlijk "nog niet" (callAudio
+    // staat buiten de matrix — hij is sessie-scoped, #2529).
     expect(
       find.text('nog niet beschikbaar op dit platform'),
-      findsNWidgets(CaptureSourceKind.values.length - 1),
+      findsNWidgets(CaptureSourceKind.values.length - 2),
     );
   });
 

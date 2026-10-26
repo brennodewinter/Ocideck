@@ -1621,6 +1621,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Vergadering': 'Întâlnire',
+  'Vergaderingsaudio': 'Sunetul întâlnirii',
   'Ontvangen brokken:': 'Fragmente primite:',
   'de microfoon': 'microfonul',
   'het systeemgeluid': 'sunetul sistemului',

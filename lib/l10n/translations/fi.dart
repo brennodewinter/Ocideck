@@ -1605,6 +1605,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Vergadering': 'Kokous',
+  'Vergaderingsaudio': 'Kokouksen ääni',
   'Ontvangen brokken:': 'Vastaanotetut palat:',
   'de microfoon': 'mikrofoni',
   'het systeemgeluid': 'järjestelmän ääni',

@@ -39,7 +39,12 @@ CaptureSource? createWebMicrophoneSource({MicSessionGate? gate}) => null;
 /// Tab- of schermgeluid is een webroute (#2521).
 CaptureSource? createWebDisplaySource() => null;
 
-Future<int?> _freeBytes(String directory) {
+Future<int?> _freeBytes(String directory) => recordingFreeBytes(directory);
+
+/// Vrije ruimte op het volume van [directory], of null als het platform
+/// dat niet zegt. Ook de call-audiobron (#2529) gebruikt dit voor zijn
+/// pre-start schijfcontrole — één implementatie, niet per bron een.
+Future<int?> recordingFreeBytes(String directory) {
   if (Platform.isLinux) return dfFreeBytes(directory);
   return ChannelMicPort().freeBytes(directory);
 }

@@ -1604,6 +1604,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Vergadering': 'Möte',
+  'Vergaderingsaudio': 'Mötesljud',
   'Ontvangen brokken:': 'Mottagna delar:',
   'de microfoon': 'mikrofonen',
   'het systeemgeluid': 'systemljudet',

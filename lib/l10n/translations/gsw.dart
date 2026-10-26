@@ -1608,6 +1608,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Vergadering': 'Bsprächig',
+  'Vergaderingsaudio': 'Bsprächigsaudio',
   'Ontvangen brokken:': 'Empfange Päckli:',
   'de microfoon': 's Mikrofon',
   'het systeemgeluid': 'de Systemtoon',

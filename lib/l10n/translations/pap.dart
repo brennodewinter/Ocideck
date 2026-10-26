@@ -651,6 +651,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Vergadering': 'Reunion',
+  'Vergaderingsaudio': 'Audio di e reunion',
   'Ontvangen brokken:': 'Bloke risibí:',
   'de microfoon': 'e mikrofòn',
   'het systeemgeluid': 'e zonido di sistema',

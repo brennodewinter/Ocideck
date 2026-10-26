@@ -1609,6 +1609,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Vergadering': 'Sastanak',
+  'Vergaderingsaudio': 'Zvuk sastanka',
   'Ontvangen brokken:': 'Primljeni dijelovi:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'sistemski zvuk',

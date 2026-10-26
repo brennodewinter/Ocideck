@@ -1611,6 +1611,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Vergadering': 'Susitikimas',
+  'Vergaderingsaudio': 'Susitikimo garsas',
   'Ontvangen brokken:': 'Gautos dalys:',
   'de microfoon': 'mikrofonas',
   'het systeemgeluid': 'sistemos garsas',

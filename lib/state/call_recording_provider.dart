@@ -10,10 +10,12 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../meetings/call_audio_source.dart';
+import '../meetings/call_audio_capture_source.dart';
 import '../meetings/call_recording.dart';
 import '../meetings/meeting_event.dart';
 import '../meetings/meeting_provider.dart';
+import '../services/transcription/capture_source.dart';
+import '../services/transcription/recording_session.dart';
 import '../utils/log.dart';
 import 'meeting_session_provider.dart';
 import 'transcription_provider.dart';
@@ -70,17 +72,21 @@ class CallRecordingState {
 class CallRecordingNotifier extends Notifier<CallRecordingState> {
   MeetingSession? _session;
   StreamSubscription<MeetingEvent>? _events;
-  StreamSubscription<CallAudioChunk>? _audio;
-  CallAudioGate? _gate;
+  StreamSubscription<AudioChunk>? _audio;
+  StreamSubscription<RecordingEvent>? _recordingEvents;
   var _starting = false;
 
   @override
   CallRecordingState build() {
     ref.listen(transcriptionEnabledProvider, (prev, next) {
-      if (prev == true && !next) unawaited(stop());
+      if (prev == true && !next) {
+        unawaited(stop(reason: RecordingEndReason.moduleDisabled));
+      }
     });
     ref.listen(videoCallsEnabledProvider, (prev, next) {
-      if (prev == true && !next) unawaited(stop());
+      if (prev == true && !next) {
+        unawaited(stop(reason: RecordingEndReason.sourceLost));
+      }
     });
     ref.listen(meetingSessionProvider, (prev, next) {
       if (next == null) unawaited(stop(callEnded: true));
@@ -88,6 +94,7 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     ref.onDispose(() {
       unawaited(_events?.cancel());
       unawaited(_audio?.cancel());
+      unawaited(_recordingEvents?.cancel());
     });
     return const CallRecordingState();
   }
@@ -121,14 +128,21 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     if (next == state.phase) return;
     _starting = true;
     state = state.copyWith(phase: next);
-    _gate = CallAudioGate(session.capabilities.callAudio);
     try {
-      final stream = session.startCallAudioCapture();
-      _audio = stream.listen(
-        _onChunk,
-        onError: _onAudioError,
-        onDone: _onAudioDone,
-      );
+      // Dezelfde duurzame, begrensde pipeline als de microfoonopname
+      // (#2529): staging, schijfcontrole, crashherstel en de live-route
+      // komen mee; hieronder tellen we alleen wat er écht binnenkomt.
+      final handle = await ref
+          .read(recordingSessionProvider.notifier)
+          .start(
+            CallAudioCaptureSource(session: session),
+            kinds: {CaptureSourceKind.callAudio},
+            consent: RecordingConsent(
+              participantNoticeAcknowledged: state.noticeAcknowledged,
+            ),
+          );
+      _audio = handle.liveChunks?.listen(_onLiveTick, onError: _onAudioError);
+      _recordingEvents = handle.events.listen(_onRecordingEvent);
     } catch (e) {
       logWarning('callRecording.start', e);
       if (ref.mounted) state = state.copyWith(phase: CallRecordingPhase.fout);
@@ -148,7 +162,10 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     _applyResting();
   }
 
-  Future<void> stop({bool callEnded = false}) async {
+  Future<void> stop({
+    bool callEnded = false,
+    RecordingEndReason? reason,
+  }) async {
     final live =
         state.phase == CallRecordingPhase.bezig ||
         state.phase == CallRecordingPhase.stoppen ||
@@ -162,6 +179,20 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     final audio = _audio;
     _audio = null;
     if (audio != null) unawaited(audio.cancel());
+    final events = _recordingEvents;
+    _recordingEvents = null;
+    if (events != null) unawaited(events.cancel());
+    // De duurzame file wordt netjes afgerond — ook als de call eindigt:
+    // "wat er stond is bewaard" is het eerlijke eindbeeld (sourceLost),
+    // niet een stil afgekapte staart.
+    await ref
+        .read(recordingSessionProvider.notifier)
+        .stopAll(
+          reason ??
+              (callEnded
+                  ? RecordingEndReason.sourceLost
+                  : RecordingEndReason.userStop),
+        );
     final session = _session;
     if (session != null) {
       try {
@@ -200,16 +231,12 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     }
   }
 
-  void _onChunk(CallAudioChunk chunk) {
+  /// Eén event per mix-tick (20 ms, zie `CallAudioCaptureSource`). De
+  /// bytes zijn al duurzaam weggeschreven; hier telt alleen wat de
+  /// gebruiker mag volgen.
+  void _onLiveTick(AudioChunk tick) {
     if (!ref.mounted) return;
     final session = _session;
-    // Gemute lokale mic levert ná mute geen opname — dat is het on-wire-
-    // contract van #2527, geen filter op stilte (stilte is een geldige
-    // opname).
-    final localMuted =
-        session?.participants.any((p) => p.isLocal && p.micMuted) ?? false;
-    final kept = _gate?.consider(chunk, localMuted: localMuted);
-    if (kept == null) return;
     final forward = mayForwardCallAudioToServer(
       phase: state.phase,
       asrServerChosen: _asrChosen(),
@@ -225,17 +252,29 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     );
   }
 
+  void _onRecordingEvent(RecordingEvent event) {
+    if (!ref.mounted) return;
+    switch (event.phase) {
+      case RecordingPhase.failed:
+        logWarning('callRecording.failed', event.error);
+        if (state.phase == CallRecordingPhase.bezig ||
+            state.phase == CallRecordingPhase.stoppen) {
+          state = state.copyWith(phase: CallRecordingPhase.fout);
+        }
+      case RecordingPhase.ended:
+        // Viel de bron spontaan weg (sourceLost), dan bereikte onze
+        // stop() de fase niet meer — toch eerlijk terug naar rust.
+        if (state.phase == CallRecordingPhase.bezig) _applyResting();
+      case RecordingPhase.starting ||
+          RecordingPhase.recording ||
+          RecordingPhase.stopping:
+        break;
+    }
+  }
+
   void _onAudioError(Object error) {
     logWarning('callRecording.audio', error);
     if (!ref.mounted) return;
-    state = state.copyWith(phase: CallRecordingPhase.fout);
-  }
-
-  /// Een tap die tijdens `bezig` stopt is geen nette afronding maar een
-  /// weggevallen bron — de opnameclaim moet dan eerlijk op fout, anders
-  /// blijft de teller op een dode stroom staan.
-  void _onAudioDone() {
-    if (!ref.mounted || state.phase != CallRecordingPhase.bezig) return;
     state = state.copyWith(phase: CallRecordingPhase.fout);
   }
 
@@ -244,7 +283,9 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     final session = _session;
     final connected = session != null && _connected(session);
     if (!connected) {
-      if (state.phase == CallRecordingPhase.bezig) unawaited(stop());
+      if (state.phase == CallRecordingPhase.bezig) {
+        unawaited(stop(reason: RecordingEndReason.sourceLost));
+      }
       return;
     }
     final phase = state.phase;

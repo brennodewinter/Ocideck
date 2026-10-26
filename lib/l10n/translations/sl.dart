@@ -1605,6 +1605,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Vergadering': 'Sestanek',
+  'Vergaderingsaudio': 'Zvok sestanka',
   'Ontvangen brokken:': 'Prejeti delčki:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'sistemski zvok',

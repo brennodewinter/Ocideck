@@ -4,7 +4,7 @@
 
 This is **ocideck 0.7.0+42** (licence EUPL-1.2) and every third-party component it ships (228 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **804 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **805 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -39,7 +39,7 @@ The JSON documents carry **804 dependency relations** between these components: 
 | change_case _(transitive)_ | 2.2.0 | MIT | mrgnhnt96 | `pkg:pub/change_case@2.2.0` |
 | characters _(direct main)_ | 1.4.1 | BSD-3-Clause | dart-lang | `pkg:pub/characters@1.4.1` |
 | charcode _(transitive)_ | 1.4.0 | BSD-3-Clause | lrhn | `pkg:pub/charcode@1.4.0` |
-| clock _(transitive)_ | 1.1.3 | Apache-2.0 | dart-lang | `pkg:pub/clock@1.1.3` |
+| clock _(direct main)_ | 1.1.3 | Apache-2.0 | dart-lang | `pkg:pub/clock@1.1.3` |
 | cnativeapi _(direct overridden)_ | 0.1.4 | MIT | brennodewinter | https://github.com/brennodewinter/nativeapi-flutter.git @ `0b3aafa797dafd3012a4fdb74f403d6cb20288b1` (packages/cnativeapi) |
 | code_assets _(transitive)_ | 2.1.0 | BSD-3-Clause | dart-lang | `pkg:pub/code_assets@2.1.0` |
 | collection _(transitive)_ | 1.19.1 | BSD-3-Clause | dart-lang | `pkg:pub/collection@1.19.1` |
