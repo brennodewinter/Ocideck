@@ -87,4 +87,51 @@ void main() {
     expect(notifier.currentState.document!.body, startsWith('xVoorwoord.'));
     expect(notifier.currentState.document!.body, isNot(startsWith('xx')));
   });
+
+  testWidgets('cursor achter laatste Quill-regel wordt voor typen begrensd', (
+    tester,
+  ) async {
+    final notifier = await pumpLargeDocument(tester);
+    final quill = tester
+        .widget<WysiwygNotesField>(find.byType(WysiwygNotesField))
+        .controller;
+    final raw = tester.state<QuillRawEditorState>(find.byType(QuillRawEditor));
+    raw.requestKeyboard();
+    await tester.pump();
+    final current = raw.currentTextEditingValue!;
+    raw.updateEditingValue(
+      TextEditingValue(
+        text: '${current.text}x',
+        selection: TextSelection.collapsed(offset: current.text.length + 1),
+      ),
+    );
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(quill.document.toPlainText(), endsWith('x\n'));
+    expect(notifier.currentState.document!.body.trimRight(), endsWith('x'));
+  });
+
+  testWidgets('verouderde invoer na documentwissel overschrijft de bron niet', (
+    tester,
+  ) async {
+    final notifier = await pumpLargeDocument(tester);
+    final raw = tester.state<QuillRawEditorState>(find.byType(QuillRawEditor));
+    raw.requestKeyboard();
+    await tester.pump();
+    final oldValue = raw.currentTextEditingValue!;
+
+    notifier.loadDocument(MarkdownDocument.parse('Kort'));
+    await tester.pump();
+    raw.updateEditingValue(
+      TextEditingValue(
+        text: '${oldValue.text}x',
+        selection: TextSelection.collapsed(offset: oldValue.text.length + 1),
+      ),
+    );
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(notifier.currentState.document!.body, 'Kort');
+  });
 }

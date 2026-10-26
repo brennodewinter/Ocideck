@@ -462,6 +462,26 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
         offset: _visualCaretFromSource(document),
       ),
     );
+    final quill = _quillController!;
+    quill.onReplaceText = (index, length, data) {
+      if (index < 0 ||
+          length < 0 ||
+          index > quill.document.length ||
+          (length > 0 && index + length >= quill.document.length)) {
+        return false;
+      }
+      if (index < quill.document.length) return true;
+      if (index == quill.document.length && length == 0 && data is String) {
+        // macOS can put the native caret behind Quill's mandatory final newline.
+        quill.replaceText(
+          index - 1,
+          0,
+          data,
+          TextSelection.collapsed(offset: index - 1 + data.length),
+        );
+      }
+      return false;
+    };
     _markdownSnapshot = widget.controller.text;
     _lastQuillDelta = _quillController!.document.toDelta();
     _visualEdited = false;
