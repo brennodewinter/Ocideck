@@ -33,20 +33,22 @@ All notable changes to OciDeck are documented in this file.
   het paneel weg is. Het lampje van de vergadering is een andere regel
   en start niets. Een gekozen transcriptieserver telt pas mee na een
   aparte toestemming, en intrekken stopt alleen die telling. Deze stap
-  schrijft de audio nergens weg en stuurt hem nergens heen. De huidige
-  call levert die audiobron nog niet, dus de knop blijft daar weg.
+  schrijft de audio nergens weg en stuurt hem nergens heen. De bron bestaat
+  op macOS en web; waar die er niet is, blijft de knop weg.
 
-- **Audiobron van een call, de naad (#2527) en het vonnis (#2538).** Een
-  opname van een OciDeck-call vraagt lokale audio ná het dempen en de
-  audio van de ander ná decodering, apart, met een tijdstip en een bron.
-  Die tap kan de huidige WebRTC-binding niet leveren: die schrijft
-  hooguit een mix naar een bestand. De capability zegt daarom dat een
-  hele-call-opname er niet is. Een microfoon alleen krijgt die naam niet,
-  en een track-id of het opname-lampje van de provider start niets. De
-  proef op de echte tweepersoonscalls bevestigt dit: geen platform
-  levert de per-bron gedecodeerde taps, dus de bron blijft niet
-  vrijgegeven — vrijgave vraagt een binding met per-bron audio-access,
-  niet meer UI.
+- **Audiobron van een call (#2527) — nu echt, op macOS en web.** De
+  OciDeck-binding is een eigen fork van `flutter_webrtc` en levert per
+  track gedecodeerde PCM als stroom: remote loopt die via de publieke
+  `RTCAudioRenderer`-renderer, lokaal via de capture-side renderer die de
+  SDK zelf aanbiedt, en op web via Web Audio op elk JS-track. Daarbovenop
+  telt het opnamepaneel zichtbaar mee (*Ontvangen brokken: n*) zonder dat
+  er één byte audio wordt weggeschreven — een gekozen transcriptieserver
+  telt apart en alleen met eigen toestemming. Bewezen in een echte
+  tweepersoonscall: op macOS leverde de integratietest remote PCM met
+  amplitude, lokale frames die stopten bij dempen en hervatten daarna; op
+  web in echte Chrome groeide de teller remote-only gedempt en dubbelde
+  na het dempen opheffen. Windows, Linux, iOS en Android claimen niets
+  tot een echte proef het tegendeel zegt.
 
 - **Microfoon opnemen op de desktop (#2516).** Onder Uitbreidingen zet je
   Transcriptie en opname aan. Daarna staat bij Importeren **Microfoon

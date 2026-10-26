@@ -1620,6 +1620,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Ontvangen brokken:': 'Отримано фрагментів:',
   'de microfoon': 'мікрофон',
   'het systeemgeluid': 'системний звук',
   'Live-server wordt getest…': 'Сервер наживо перевіряється…',

@@ -1605,6 +1605,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Ontvangen brokken:': 'Modtagne dele:',
   'de microfoon': 'mikrofonen',
   'het systeemgeluid': 'systemlyden',
   'Live-server wordt getest…': 'Live-serveren testes…',

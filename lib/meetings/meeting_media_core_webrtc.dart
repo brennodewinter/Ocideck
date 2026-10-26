@@ -119,6 +119,10 @@ class _WebrtcConnection implements MeetingMediaConnection {
   var _liveness = MeetingMediaLiveness.connecting;
   final _localTracks = <String, MediaStreamTrack>{};
   final _remoteStreams = <String, MediaStream>{};
+  // Remote audiotracks voor de call-tap (#2527): de map is de snapshot bij
+  // start; [_audioTapOut] meldt tracks die later bijkomen.
+  final _remoteAudioTracks = <String, MediaStreamTrack>{};
+  final _audioTapOut = StreamController<MediaStreamTrack>.broadcast();
   final _renderers = <RTCVideoRenderer>[];
   final _dataChannels = <_WebrtcDataChannel>[];
   MediaStream? _micStream;
@@ -153,7 +157,12 @@ class _WebrtcConnection implements MeetingMediaConnection {
       _remoteStreams[event.track.id!] = event.streams.first;
     }
     _remote.add(_remoteTrackOf(event.track, active: true));
+    if (event.track.kind == 'audio' && event.track.id != null) {
+      _remoteAudioTracks[event.track.id!] = event.track;
+      _audioTapOut.add(event.track);
+    }
     event.track.onEnded = () {
+      _remoteAudioTracks.remove(event.track.id);
       _remote.add(_remoteTrackOf(event.track, active: false));
     };
   }
@@ -161,6 +170,7 @@ class _WebrtcConnection implements MeetingMediaConnection {
   void _onRemoveStream(MediaStream stream) {
     for (final track in stream.getTracks()) {
       _remoteStreams.remove(track.id);
+      _remoteAudioTracks.remove(track.id);
       _remote.add(_remoteTrackOf(track, active: false));
     }
   }
@@ -646,9 +656,50 @@ class _WebrtcConnection implements MeetingMediaConnection {
   CallAudioCaptureFact get callAudioCapture =>
       callAudioCaptureOfCurrentBinding();
 
+  /// De hele-call-tap (#2527): een stroom taps — eerst de snapshot van de
+  /// tracks die er nu zijn, daarna iedere remote audiotrack die later
+  /// bijkomt. `openCallAudioCapture` voegt alleen tijdstip en bron toe.
   @override
   Stream<CallAudioChunk> startCallAudioCapture() =>
-      openCallAudioCapture(callAudioCapture);
+      openCallAudioCapture(callAudioCapture, _audioTaps());
+
+  Stream<CallAudioTrackTap> _audioTaps() {
+    // `seen` dedupt snapshot en live-stroom: een track die tijdens het
+    // openen arriveert zit in allebei en mag maar één tap krijgen. De
+    // broadcast-subscription staat synchroon in de multi-executor, dus er
+    // is geen raam tussen snapshot en live waarin een track verloren gaat.
+    final seen = <String>{};
+    return Stream.multi((controller) async {
+      for (final t in _localTracks.values) {
+        if (t.kind == 'audio' && seen.add(t.id ?? '')) {
+          controller.addSync(_tapOf(t, CallAudioRole.localOutbound));
+        }
+      }
+      for (final t in _remoteAudioTracks.values) {
+        if (seen.add(t.id ?? '')) {
+          controller.addSync(_tapOf(t, CallAudioRole.remote));
+        }
+      }
+      await controller.addStream(
+        _audioTapOut.stream
+            .where((t) => seen.add(t.id ?? ''))
+            .map((t) => _tapOf(t, CallAudioRole.remote)),
+      );
+    });
+  }
+
+  /// Post-mute-contract van #2527: een uitgezette track levert géén frames.
+  /// libwebrtc/Webaudio kan na `enabled=false` nog stilte sturen — die is
+  /// opname-waardeloos en hoort niet in de stroom; de gebruiker ziet in de
+  /// provider nog steeds `localMuted` als extra hek.
+  CallAudioTrackTap _tapOf(MediaStreamTrack t, CallAudioRole role) =>
+      CallAudioTrackTap(
+        trackId: t.id ?? '',
+        role: role,
+        frames: audioTrackFrames(t)
+            .where((f) => t.enabled)
+            .map((f) => callPcmFrame16k(f.pcm, f.sampleRate, f.channels)),
+      );
 
   @override
   Future<void> stopCallAudioCapture() async {}

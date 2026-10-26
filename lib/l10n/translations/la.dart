@@ -1620,6 +1620,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Ontvangen brokken:': 'Frusta accepta:',
   'de microfoon': 'microphonum',
   'het systeemgeluid': 'sonus systematis',
   'Live-server wordt getest…': 'Servitor vivus probatur…',

@@ -229,7 +229,7 @@ packages:
     source: hosted
     version: "10.8.3"
   dart_webrtc:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: dart_webrtc
       sha256: "078e3c431500147e5cc52b3c6ea41ed538f30c7720cc2467d2186c9251e62716"
@@ -615,10 +615,11 @@ packages:
   flutter_webrtc:
     dependency: "direct main"
     description:
-      name: flutter_webrtc
-      sha256: ebf5ceef2897caae425ed65a38b2961c29d9d9a626159418ed460e1a65038c00
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: b82f0db567e10aecd152c4039336d09e48f295a8
+      resolved-ref: b82f0db567e10aecd152c4039336d09e48f295a8
+      url: "https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git"
+    source: git
     version: "1.6.2+hotfix.4"
   fuchsia_remote_debug_protocol:
     dependency: transitive

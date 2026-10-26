@@ -652,6 +652,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Ontvangen brokken:': 'Paquets reçus :',
   'de microfoon': 'le microphone',
   'het systeemgeluid': 'le son du système',
   'Live-server wordt getest…': 'Test du serveur en direct…',

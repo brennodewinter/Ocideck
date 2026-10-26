@@ -181,6 +181,10 @@ dev_dependencies:
   plugin_platform_interface: ^2.1.8
   # A fake file picker exercises dossier journeys without native dialogs.
   file_selector_platform_interface: ^2.7.0
+  # The web tap-proef (test/call_audio_tap_web_test.dart) maakt de JS-track
+  # wrappers rechtstreeks aan — transitief via flutter_webrtc, maar de test
+  # refereert de typen expliciet.
+  dart_webrtc: ^1.8.2
   # Parses pubspec.lock / pubspec.yaml in the SBOM generator (tool/sbom_build.dart)
   # and its test. Already resolved transitively; declared here so the tooling can
   # depend on it directly.
@@ -192,6 +196,14 @@ dev_dependencies:
 # cnativeapi moet ook uit de fork komen — nativeapi dependt op ^0.1.4 en pub
 # zou de gepubliceerde versie kiezen, die de willClose-hook niet heeft.
 dependency_overrides:
+  # Per-track gedecodeerde audiosink voor de call-audiobron (#2527). Onze
+  # fork voegt `audioTrackFrames` toe bovenop v1.6.2+hotfix.4; upstream-
+  # patch: flutter-webrtc/flutter-webrtc#2250 — landt die, dan kan deze
+  # override weer weg.
+  flutter_webrtc:
+    git:
+      url: https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git
+      ref: b82f0db567e10aecd152c4039336d09e48f295a8
   cnativeapi:
     git:
       url: https://github.com/brennodewinter/nativeapi-flutter.git

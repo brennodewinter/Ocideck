@@ -1605,6 +1605,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Ontvangen brokken:': 'Bagian diterima:',
   'de microfoon': 'mikrofon',
   'het systeemgeluid': 'audio sistem',
   'Live-server wordt getest…': 'Server live sedang diuji…',

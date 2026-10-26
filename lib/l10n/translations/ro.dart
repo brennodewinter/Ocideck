@@ -1621,6 +1621,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Ontvangen brokken:': 'Fragmente primite:',
   'de microfoon': 'microfonul',
   'het systeemgeluid': 'sunetul sistemului',
   'Live-server wordt getest…': 'Serverul live este testat…',

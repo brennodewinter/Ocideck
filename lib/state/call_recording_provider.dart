@@ -71,6 +71,7 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
   MeetingSession? _session;
   StreamSubscription<MeetingEvent>? _events;
   StreamSubscription<CallAudioChunk>? _audio;
+  CallAudioGate? _gate;
   var _starting = false;
 
   @override
@@ -120,9 +121,14 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
     if (next == state.phase) return;
     _starting = true;
     state = state.copyWith(phase: next);
+    _gate = CallAudioGate(session.capabilities.callAudio);
     try {
       final stream = session.startCallAudioCapture();
-      _audio = stream.listen(_onChunk, onError: _onAudioError);
+      _audio = stream.listen(
+        _onChunk,
+        onError: _onAudioError,
+        onDone: _onAudioDone,
+      );
     } catch (e) {
       logWarning('callRecording.start', e);
       if (ref.mounted) state = state.copyWith(phase: CallRecordingPhase.fout);
@@ -195,8 +201,15 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
   }
 
   void _onChunk(CallAudioChunk chunk) {
-    if (!ref.mounted || chunk.pcm.isEmpty) return;
+    if (!ref.mounted) return;
     final session = _session;
+    // Gemute lokale mic levert ná mute geen opname — dat is het on-wire-
+    // contract van #2527, geen filter op stilte (stilte is een geldige
+    // opname).
+    final localMuted =
+        session?.participants.any((p) => p.isLocal && p.micMuted) ?? false;
+    final kept = _gate?.consider(chunk, localMuted: localMuted);
+    if (kept == null) return;
     final forward = mayForwardCallAudioToServer(
       phase: state.phase,
       asrServerChosen: _asrChosen(),
@@ -215,6 +228,14 @@ class CallRecordingNotifier extends Notifier<CallRecordingState> {
   void _onAudioError(Object error) {
     logWarning('callRecording.audio', error);
     if (!ref.mounted) return;
+    state = state.copyWith(phase: CallRecordingPhase.fout);
+  }
+
+  /// Een tap die tijdens `bezig` stopt is geen nette afronding maar een
+  /// weggevallen bron — de opnameclaim moet dan eerlijk op fout, anders
+  /// blijft de teller op een dode stroom staan.
+  void _onAudioDone() {
+    if (!ref.mounted || state.phase != CallRecordingPhase.bezig) return;
     state = state.copyWith(phase: CallRecordingPhase.fout);
   }
 

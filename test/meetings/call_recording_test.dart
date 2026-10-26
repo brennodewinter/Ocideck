@@ -352,11 +352,15 @@ Future<FakeMeetingSession> _ready(ProviderContainer container) async {
   return session;
 }
 
+var _chunkSeq = 0;
+
 CallAudioChunk _chunk() => CallAudioChunk(
   participantId: 'zij',
   role: CallAudioRole.remote,
   trackId: 'zij-audio',
-  at: DateTime.utc(2026, 10, 25, 22),
+  // De poort dedupt één bron op hetzelfde tijdstip — elk brok moet dus
+  // een echt later tijdstip hebben, zoals een echte tap die levert.
+  at: DateTime.utc(2026, 10, 25, 22).add(Duration(seconds: _chunkSeq++)),
   pcm: Uint8List.fromList(const [1, 0]),
   sampleRateHz: 16000,
 );

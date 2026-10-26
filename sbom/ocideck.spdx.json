@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.7.0+42",
-  "documentNamespace": "https://ocideck.app/spdx/1ebe6f13-088e-5fbb-8f93-94aecb05f6bd",
+  "documentNamespace": "https://ocideck.app/spdx/53de02ea-5046-5682-875c-717737a657d0",
   "creationInfo": {
-    "created": "2026-10-24T19:32:28.717528Z",
+    "created": "2026-10-26T19:41:09.517068Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -1712,24 +1712,13 @@
       "SPDXID": "SPDXRef-78-flutter-webrtc",
       "name": "flutter_webrtc",
       "versionInfo": "1.6.2+hotfix.4",
-      "supplier": "Organization: cloudwebrtc",
-      "downloadLocation": "https://pub.dev/packages/flutter_webrtc/versions/1.6.2+hotfix.4",
+      "supplier": "Organization: pawprint.vigilis.online",
+      "downloadLocation": "https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "ebf5ceef2897caae425ed65a38b2961c29d9d9a626159418ed460e1a65038c00"
-        }
-      ],
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:pub/flutter_webrtc@1.6.2+hotfix.4"
-        }
-      ]
+      "sourceInfo": "Resolved from https://pawprint.vigilis.online/LibreKAT/flutter_webrtc.git at commit b82f0db567e10aecd152c4039336d09e48f295a8; package subpath ..",
+      "comment": "Source: git."
     },
     {
       "SPDXID": "SPDXRef-79-fuchsia-remote-debug-protocol",
@@ -5134,6 +5123,11 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-78-flutter-webrtc"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-106-nativeapi"
     },
     {
@@ -5204,6 +5198,11 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-29-dart-webrtc"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-31-dartcv4"
     },
     {
@@ -5265,11 +5264,6 @@
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-75-flutter-svg"
-    },
-    {
-      "spdxElementId": "SPDXRef-0-ocideck",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-78-flutter-webrtc"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",

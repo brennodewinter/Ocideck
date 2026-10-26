@@ -427,16 +427,23 @@ companion channel carries nothing yet.
   MUC roster, groupchat, SourceInfo mute, leave — with the media seam faked at
   `MeetingMediaCore` (libwebrtc cannot run headless; the testbed probe proves
   real RTP through the same stack).
-- **Call-audio tap (#2527).** `call_audio_source.dart` is the provider-neutral
-  output behind `MeetingSession` and `MeetingMediaConnection`: local outbound
-  audio after mute and remote audio after decode, each with a timestamp and a
-  source identity. A `MeetingTrack` id does not start a recording, and
-  `RecordingIndicatorChanged` is a lamp, not byte access. flutter_webrtc 1.6
-  cannot supply per-participant decoded samples (`MediaRecorder` writes an
-  INPUT/OUTPUT mix), so `callAudioCaptureOfCurrentBinding()` reports
-  `noPerSourceTap` and `startCallAudioCapture` yields nothing. A mic-only fact
-  (`remoteMissing`) is not a whole call. The live two-person proof is still
-  open; this slice does not close #2527.
+- **Call-audio tap (#2527) — geland.** `call_audio_source.dart` is the
+  provider-neutral output behind `MeetingSession` and `MeetingMediaConnection`:
+  local outbound audio after mute and remote audio after decode, each with a
+  timestamp and a source identity. The tap lives in the LibreKAT fork of
+  `flutter_webrtc` (`audioTrackFrames(track)` → per-track s16le PCM over an
+  event channel): on Darwin remote tracks ride the public `RTCAudioRenderer`
+  protocol while local tracks ride `LocalAudioTrack`'s capture
+  post-processing renderer (the SDK drives track renderers only from the
+  remote decode path); on web each JS track feeds a `ScriptProcessorNode`
+  through a zero-gain node (AudioWorklet is the marked upgrade). The merge
+  must be a *concurrent* fan-in — `asyncExpand` pauses the tap source while a
+  frame stream runs, so a second tap would never open; `openCallAudioCapture`
+  owns one subscription per tap instead. Proven live: macOS integration test
+  shows remote decoded PCM with amplitude, local frames that stop on mute
+  and resume on unmute; the web proof shows the shared capture counter
+  growing remote-only while muted and roughly doubling after unmute. Other
+  platforms stay `noPerSourceTap` until proven.
 - Plus later XMPP hardening (#1316–1320, #1366–1370): bounded stanza sizes/counts and
   resource-exhaustion limits.
 - **F3.4c — on-device media + remote video** (#2535). `MeetingMediaConnection`
@@ -575,13 +582,13 @@ semantics/console log live in the gitignored `probe/probe-out/webcall/`.
   voor een echte tweepersoonsproef; beide builds delen dezelfde codepaden en
   bindingen als macOS, maar de proef is niet gedaan en wordt dus ook niet
   geclaimd. Een claim volgt pas na een echte call per platform.
-- **Call-audiobron voor transcriptie (#2527) — niet vrijgegeven.** De huidige
-  `flutter_webrtc`-binding levert geen aparte, gedecodeerde audiotaps per bron:
-  de lokale uitgaande stroom na mute en de remote gedecodeerde stroom zijn niet
-  als afzonderlijke sample-bronnen bereikbaar. `call_audio_source.dart` meldt
-  dat eerlijk; het callpaneel zegt "Deze vergadering levert geen aparte
-  audiobron" in plaats van een dode opnameknop. Vrijgave vraagt een binding met
-  per-bron audio-access, niet meer UI.
+- **Call-audiobron voor transcriptie (#2527) — vrijgegeven op macOS en web.**
+  De LibreKAT-fork van `flutter_webrtc` levert nu per-track gedecodeerde PCM
+  (`audioTrackFrames`): remote via `RTCAudioRenderer`, lokaal via de
+  capture-side APM-renderer op `LocalAudioTrack`, op web via Web Audio per
+  JS-track. `callAudioCaptureOfCurrentBinding()` claimt `wholeCall` alleen
+  waar dat bewezen is (macOS, web); andere platforms melden eerlijk
+  `noPerSourceTap` tot een echte proef het tegendeel zegt.
 
 *(Heads-up for a cold reader: §9's "New files (proposed)" list predates this and is
 partly stale — e.g. `xmpp_connection.dart` was built and then removed in F3.1. The

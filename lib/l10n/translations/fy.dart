@@ -652,6 +652,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Ontvangen brokken:': 'Untfongen brokken:',
   'de microfoon': 'de mikrofoan',
   'het systeemgeluid': 'it systeemlûd',
   'Live-server wordt getest…': 'Live-server wurdt teste…',

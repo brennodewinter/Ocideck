@@ -56,6 +56,7 @@ paths = [
   '''^testbed/jitsi-meet/evidence/''',
   '''^testbed/jitsi-meet/probe/node_modules/''',
   '''^testbed/jitsi-meet/probe/probe-out/''',
+  '''^testbed/jitsi-meet/probe-out/''',
 
   # Het Vosk-testbed (#2525): het gedownloade ASR-model en proefuitvoer zijn
   # gitignored artefacten; modelbestanden dragen binaire gewichten die op

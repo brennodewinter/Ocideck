@@ -1608,6 +1608,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Ontvangen brokken:': 'Empfange Päckli:',
   'de microfoon': 's Mikrofon',
   'het systeemgeluid': 'de Systemtoon',
   'Live-server wordt getest…': 'Live-Server wird téschtet…',

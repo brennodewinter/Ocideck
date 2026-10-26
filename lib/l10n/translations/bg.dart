@@ -1624,6 +1624,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Ontvangen brokken:': 'Получени фрагменти:',
   'de microfoon': 'микрофона',
   'het systeemgeluid': 'системният звук',
   'Live-server wordt getest…': 'Сървърът на живо се тества…',

@@ -811,6 +811,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Ontvangen brokken:': 'Chunks received:',
   'de microfoon': 'the microphone',
   'het systeemgeluid': 'the system audio',
   'Live-server wordt getest…': 'Testing live server…',
