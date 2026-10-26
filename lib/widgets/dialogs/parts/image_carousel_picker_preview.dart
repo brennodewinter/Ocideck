@@ -41,38 +41,10 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(16),
-                        child: Stack(
-                          children: [
-                            Positioned.fill(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image(
-                                  image: boundedFileImage(
-                                    File(_selected!),
-                                    720,
-                                  ),
-                                  fit: BoxFit.contain,
-                                  errorBuilder: (context, error, stackTrace) =>
-                                      Center(
-                                        child: Icon(
-                                          Icons.broken_image,
-                                          color: ImagePickerPalette.border,
-                                          size: 48,
-                                        ),
-                                      ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: IconButton.filledTonal(
-                                tooltip: l10n.d('Schermvullend bekijken'),
-                                onPressed: _showFullscreen,
-                                icon: const Icon(Icons.open_in_full),
-                              ),
-                            ),
-                          ],
+                        child: _fullscreenPreviewImage(
+                          _selected!,
+                          l10n.d('Schermvullend bekijken'),
+                          _showFullscreen,
                         ),
                       ),
                     ),
@@ -98,80 +70,14 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     if (_selected == null || paths.isEmpty) return;
     var index = paths.indexOf(_selected!);
     if (index < 0) return;
-    final controller = PageController(initialPage: index);
     await showDialog<void>(
       context: context,
-      builder: (dialogContext) => StatefulBuilder(
-        builder: (dialogContext, update) => Dialog.fullscreen(
-          backgroundColor: ImagePickerPalette.bgDeepest,
-          child: CallbackShortcuts(
-            bindings: {
-              const SingleActivator(LogicalKeyboardKey.arrowLeft): () =>
-                  controller.animateToPage(
-                    math.max(0, index - 1),
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeOut,
-                  ),
-              const SingleActivator(LogicalKeyboardKey.arrowRight): () =>
-                  controller.animateToPage(
-                    math.min(paths.length - 1, index + 1),
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeOut,
-                  ),
-            },
-            child: Focus(
-              autofocus: true,
-              child: Stack(
-                children: [
-                  Listener(
-                    onPointerSignal: (event) {
-                      if (event is PointerScrollEvent &&
-                          event.scrollDelta.dy != 0) {
-                        controller.animateToPage(
-                          (index + event.scrollDelta.dy.sign.toInt()).clamp(
-                            0,
-                            paths.length - 1,
-                          ),
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.easeOut,
-                        );
-                      }
-                    },
-                    child: PageView.builder(
-                      controller: controller,
-                      itemCount: paths.length,
-                      onPageChanged: (page) => update(() => index = page),
-                      itemBuilder: (_, page) => Padding(
-                        padding: const EdgeInsets.all(48),
-                        child: Image(
-                          image: boundedFileImage(File(paths[page]), 2560),
-                          fit: BoxFit.contain,
-                          errorBuilder: (_, _, _) => Icon(
-                            Icons.broken_image,
-                            color: ImagePickerPalette.border,
-                            size: 48,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 16,
-                    right: 16,
-                    child: IconButton.filledTonal(
-                      tooltip: context.l10n.d('Sluiten (Esc)'),
-                      onPressed: () => Navigator.pop(dialogContext),
-                      icon: const Icon(Icons.close),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+      builder: (_) => _FullscreenCarousel(
+        paths: paths,
+        initialIndex: index,
+        onPageChanged: (page) => index = page,
       ),
     );
-    controller.dispose();
     if (!mounted) return;
     await _select(paths[index]);
     _scrollToIndex(index);
@@ -419,6 +325,130 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     }
     return path;
   }
+}
+
+Widget _fullscreenPreviewImage(
+  String path,
+  String tooltip,
+  VoidCallback onOpen,
+) => Stack(
+  children: [
+    Positioned.fill(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image(
+          image: boundedFileImage(File(path), 720),
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) => Center(
+            child: Icon(
+              Icons.broken_image,
+              color: ImagePickerPalette.border,
+              size: 48,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Positioned(
+      top: 8,
+      right: 8,
+      child: IconButton.filledTonal(
+        tooltip: tooltip,
+        onPressed: onOpen,
+        icon: const Icon(Icons.open_in_full),
+      ),
+    ),
+  ],
+);
+
+class _FullscreenCarousel extends StatefulWidget {
+  const _FullscreenCarousel({
+    required this.paths,
+    required this.initialIndex,
+    required this.onPageChanged,
+  });
+
+  final List<String> paths;
+  final int initialIndex;
+  final ValueChanged<int> onPageChanged;
+
+  @override
+  State<_FullscreenCarousel> createState() => _FullscreenCarouselState();
+}
+
+class _FullscreenCarouselState extends State<_FullscreenCarousel> {
+  late final PageController _controller = PageController(
+    initialPage: widget.initialIndex,
+  );
+  late int _index = widget.initialIndex;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _move(int delta) {
+    _controller.animateToPage(
+      (_index + delta).clamp(0, widget.paths.length - 1),
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => Dialog.fullscreen(
+    backgroundColor: ImagePickerPalette.bgDeepest,
+    child: CallbackShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.arrowLeft): () => _move(-1),
+        const SingleActivator(LogicalKeyboardKey.arrowRight): () => _move(1),
+      },
+      child: Focus(
+        autofocus: true,
+        child: Stack(
+          children: [
+            Listener(
+              onPointerSignal: (event) {
+                if (event is PointerScrollEvent && event.scrollDelta.dy != 0) {
+                  _move(event.scrollDelta.dy.sign.toInt());
+                }
+              },
+              child: PageView.builder(
+                controller: _controller,
+                itemCount: widget.paths.length,
+                onPageChanged: (page) {
+                  _index = page;
+                  widget.onPageChanged(page);
+                },
+                itemBuilder: (_, page) => Padding(
+                  padding: const EdgeInsets.all(48),
+                  child: Image(
+                    image: boundedFileImage(File(widget.paths[page]), 2560),
+                    fit: BoxFit.contain,
+                    errorBuilder: (_, _, _) => Icon(
+                      Icons.broken_image,
+                      color: ImagePickerPalette.border,
+                      size: 48,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 16,
+              right: 16,
+              child: IconButton.filledTonal(
+                tooltip: context.l10n.d('Sluiten (Esc)'),
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.close),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
 
 /// De actieknoppen onder de metadatavelden: klembord, download, hernoemen en
