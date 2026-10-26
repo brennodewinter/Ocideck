@@ -97,6 +97,10 @@ class _EditableTableEmbed extends StatefulWidget {
 class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   late TableEmbedBinding _binding;
   final GlobalKey _boundsKey = GlobalKey();
+  String? _renderedGfm;
+  ThemeProfile? _renderedProfile;
+  TableEditController? _renderedEditor;
+  DocumentMarkdownView? _tableView;
 
   TableEditController get _editor => _binding.editor;
 
@@ -295,16 +299,29 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
             ],
           ),
         ),
-      DocumentMarkdownView(
+      _cachedTableView(),
+    ],
+  );
+
+  Widget _cachedTableView() {
+    if (_tableView == null ||
+        _renderedGfm != widget.gfm ||
+        _renderedProfile != widget.profile ||
+        _renderedEditor != _editor) {
+      _renderedGfm = widget.gfm;
+      _renderedProfile = widget.profile;
+      _renderedEditor = _editor;
+      _tableView = DocumentMarkdownView(
         widget.gfm,
         maxTextWidth: null,
         themeProfile: widget.profile,
         chartTheme: widget.profile,
         tableEditController: _editor,
         onSortTableColumn: _sort,
-      ),
-    ],
-  );
+      );
+    }
+    return _tableView!;
+  }
 }
 
 String _identity(String source) => source;
