@@ -1,3 +1,4 @@
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/text_search.dart';
@@ -36,6 +37,60 @@ void main() {
     expect(find.matchCount, 3);
     expect(find.matchIndex, 0);
     expect(revealed.single.start, 4);
+  });
+
+  test('snel typen rekent en tekent pas eenmaal na een korte pauze', () {
+    fakeAsync((clock) {
+      final find = sessionFor('kat kat');
+      find.open(showReplace: false);
+      final before = rebuilds;
+      var highlights = 0;
+      controller.addListener(() => highlights++);
+
+      find.onQueryFieldChanged('k');
+      find.onQueryFieldChanged('ka');
+      find.onQueryFieldChanged('kat');
+
+      expect(find.query, 'kat');
+      expect(rebuilds, before);
+      expect(highlights, 0);
+      clock.elapse(const Duration(milliseconds: 160));
+      expect(find.matchCount, 2);
+      expect(rebuilds, before + 1);
+      expect(highlights, 1);
+    });
+  });
+
+  test('vervangtekst typen bouwt het hele scherm niet opnieuw', () {
+    final find = sessionFor('kat');
+    find.open(showReplace: true);
+    final before = rebuilds;
+
+    find.setReplacement('h');
+    find.setReplacement('hond');
+
+    expect(find.replacement, 'hond');
+    expect(rebuilds, before);
+  });
+
+  test('direct navigeren gebruikt de nog wachtende zoekvraag', () {
+    fakeAsync((clock) {
+      final find = sessionFor('kat kat');
+      find.open(showReplace: false);
+      find.onQueryFieldChanged('kat');
+
+      find.next();
+
+      expect(find.matchCount, 2);
+      expect(find.matchIndex, 1);
+      expect(revealed.last.start, 4);
+      clock.elapse(const Duration(milliseconds: 160));
+      expect(
+        find.matchIndex,
+        1,
+        reason: 'de oude timer mag niet terugspringen',
+      );
+    });
   });
 
   test('een dichte balk sleept de weergave nergens heen', () {
@@ -133,23 +188,26 @@ void main() {
   });
 
   test('typen werkt de teller bij zonder de cursor te verslepen', () {
-    final find = sessionFor('kat kat');
-    find.open(showReplace: false);
-    find.setQuery('kat');
-    find.next();
-    expect(find.matchIndex, 1);
-    final revealsBefore = revealed.length;
+    fakeAsync((clock) {
+      final find = sessionFor('kat kat');
+      find.open(showReplace: false);
+      find.setQuery('kat');
+      find.next();
+      expect(find.matchIndex, 1);
+      final revealsBefore = revealed.length;
 
-    controller.text = 'kat kat kat';
-    find.refreshWhileTyping();
+      controller.text = 'kat kat kat';
+      find.refreshWhileTyping();
+      clock.elapse(const Duration(milliseconds: 160));
 
-    expect(find.matchCount, 3);
-    expect(find.matchIndex, 1, reason: 'blijft staan waar je was');
-    expect(
-      revealed.length,
-      revealsBefore,
-      reason: 'typen mag de weergave niet naar een treffer trekken',
-    );
+      expect(find.matchCount, 3);
+      expect(find.matchIndex, 1, reason: 'blijft staan waar je was');
+      expect(
+        revealed.length,
+        revealsBefore,
+        reason: 'typen mag de weergave niet naar een treffer trekken',
+      );
+    });
   });
 
   test('een gesloten balk telt niet mee tijdens het typen', () {
@@ -165,18 +223,21 @@ void main() {
   });
 
   test('een treffer die verdwijnt laat de cursor niet buiten de rij staan', () {
-    final find = sessionFor('kat kat kat');
-    find.open(showReplace: false);
-    find.setQuery('kat');
-    find.next();
-    find.next();
-    expect(find.matchIndex, 2);
+    fakeAsync((clock) {
+      final find = sessionFor('kat kat kat');
+      find.open(showReplace: false);
+      find.setQuery('kat');
+      find.next();
+      find.next();
+      expect(find.matchIndex, 2);
 
-    controller.text = 'kat';
-    find.refreshWhileTyping();
+      controller.text = 'kat';
+      find.refreshWhileTyping();
+      clock.elapse(const Duration(milliseconds: 160));
 
-    expect(find.matchCount, 1);
-    expect(find.matchIndex, 0);
+      expect(find.matchCount, 1);
+      expect(find.matchIndex, 0);
+    });
   });
 
   test('inhoud van buitenaf wist de treffers maar laat de balk staan', () {
@@ -205,14 +266,14 @@ void main() {
     expect(rebuilds, greaterThan(beforeClose));
   });
 
-  test(
-    'typen in het zoekveld telt mee zonder naar een treffer te springen',
-    () {
+  test('typen in het zoekveld telt mee zonder naar een treffer te springen', () {
+    fakeAsync((clock) {
       final find = sessionFor('een kat, twee kat, drie kat');
       find.open(showReplace: false);
       final revealsBefore = revealed.length;
 
       find.onQueryFieldChanged('kat');
+      clock.elapse(const Duration(milliseconds: 160));
 
       expect(find.matchCount, 3);
       expect(find.matchIndex, 0);
@@ -222,18 +283,22 @@ void main() {
         reason:
             'typen in het zoekveld mag de focus niet naar het document trekken',
       );
-    },
-  );
+    });
+  });
 
   test('typen in het zoekveld met lege vraag geeft geen treffers', () {
-    final find = sessionFor('kat kat');
-    find.open(showReplace: false);
-    find.onQueryFieldChanged('kat');
-    expect(find.matchCount, 2);
+    fakeAsync((clock) {
+      final find = sessionFor('kat kat');
+      find.open(showReplace: false);
+      find.onQueryFieldChanged('kat');
+      clock.elapse(const Duration(milliseconds: 160));
+      expect(find.matchCount, 2);
 
-    find.onQueryFieldChanged('');
-    expect(find.matchCount, 0);
-    expect(find.matchIndex, -1);
+      find.onQueryFieldChanged('');
+      clock.elapse(const Duration(milliseconds: 160));
+      expect(find.matchCount, 0);
+      expect(find.matchIndex, -1);
+    });
   });
 
   test('zoeken telt alleen proza — geen links, comments of code (#2137)', () {

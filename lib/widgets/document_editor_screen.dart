@@ -266,6 +266,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   @override
   void dispose() {
     _chrome.dispose();
+    _find.dispose();
     _controller.removeListener(_onControllerChanged);
     _controller.dispose();
     _editorFocus.dispose();
