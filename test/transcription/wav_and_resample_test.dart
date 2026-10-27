@@ -90,10 +90,11 @@ void main() {
     final wav = IncrementalWav('${dir.path}/$recordingWavName', maxBytes: 8);
     await wav.open();
     await wav.add(Uint8List(4));
-    expect(() => wav.add(Uint8List(8)), throwsA(isA<IoFailed>()));
+    await expectLater(wav.add(Uint8List(8)), throwsA(isA<IoFailed>()));
     expect(await sibling.readAsBytes(), [1, 2, 3]);
     expect(File(wav.path).existsSync(), isTrue);
     expect(wav.dataBytes, 4);
+    await wav.close();
   });
 
   test('48 kHz stereo wordt 16 kHz mono, een afgekapte staart wacht', () {

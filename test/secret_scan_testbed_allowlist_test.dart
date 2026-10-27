@@ -47,7 +47,7 @@ void main() {
         .listSync()
         .whereType<Directory>()
         .where((d) => File('${d.path}/.gitignore').existsSync())
-        .map((d) => d.path)
+        .map((d) => d.path.replaceAll('\\', '/'))
         .toList();
     expect(
       testbedDirs,

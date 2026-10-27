@@ -82,7 +82,7 @@ void main() {
     expect(log.readAsStringSync(), contains('/work/ocideck-snapshot.'));
     expect(log.readAsStringSync(), isNot(contains('${source.path}:/src')));
     expect(log.readAsStringSync(), contains('--platform linux/amd64'));
-  });
+  }, skip: Platform.isWindows);
 
   test('release builder exports the tagged Debian 12 archive', () async {
     final temp = await Directory.systemTemp.createTemp('ocideck-release-');
@@ -140,5 +140,5 @@ esac
     ]);
     expect(archive.exitCode, 0);
     expect(archive.stdout, isNot(contains('.git')));
-  });
+  }, skip: Platform.isWindows);
 }
