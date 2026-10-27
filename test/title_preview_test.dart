@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/rich_text_layout.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 Widget _host(Slide slide, ThemeProfile profile) {
@@ -37,6 +38,34 @@ int _titleScrimCount(WidgetTester tester, ThemeProfile profile) {
 }
 
 void main() {
+  testWidgets('bottom-left logo stays below title details', (tester) async {
+    const profile = ThemeProfile(
+      logoPath: 'asset:assets/images/vigilis-logo.png',
+      logoPosition: 'bottom-left',
+      logoSize: 240,
+    );
+    final slide = Slide.create(SlideType.title).copyWith(
+      title: 'Titel',
+      subtitle: 'Ondertitel',
+      customMarkdown: 'Trainer en datum',
+      showLogo: true,
+    );
+
+    await tester.pumpWidget(_host(slide, profile));
+    await tester.pump();
+
+    expect(find.byType(Image), findsOneWidget);
+    final slideRect = tester.getRect(find.byType(SlidePreviewWidget));
+    expect(tester.getRect(find.byType(Image)).top, greaterThan(slideRect.center.dy));
+    final details = tester.getRect(find.textContaining('Trainer en datum'));
+    expect(
+      details.bottom,
+      lessThanOrEqualTo(
+        slideRect.bottom - logoSafeReserve(slideRect.width, profile),
+      ),
+    );
+  });
+
   testWidgets('title slide can hide the image scrim', (tester) async {
     const profile = ThemeProfile(titleBackgroundColor: '#112233');
     final slide = Slide.create(SlideType.title).copyWith(

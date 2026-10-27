@@ -128,15 +128,13 @@ void main() {
       logoPosition: 'bottom-right',
       logoSize: 160,
     );
-    // #1932: groot logo waarvan de gereduceerde reserve de default-padding
-    // overstijgt — zo blijft het effect op de body-hoogte zichtbaar.
+    // Groot logo dat de body-hoogte zichtbaar verkleint.
     const bigBottomLogo = ThemeProfile(
       logoPath: 'logo.png',
       logoPosition: 'bottom-right',
       logoSize: 480,
     );
-    // Top-logo heeft een grotere edge inset (0.42 vs 0.12), dus de gereduceerde
-    // reserve is groot genoeg om paginering te beïnvloeden.
+    // Top-logo heeft een grotere edge inset (0.42 vs 0.12).
     const bigTopLogo = ThemeProfile(
       logoPath: 'logo.png',
       logoPosition: 'top-right',
@@ -145,11 +143,11 @@ void main() {
 
     test('logoSafeReserve clears the logo far edge, zero without a logo', () {
       expect(logoSafeReserve(w, noLogo), 0);
-      // Bottom logo: size*0.12 + w*0.014 (#1932: reduced from size*1.12).
+      // Bottom logo: the complete logo box and a gap must be clear.
       const size = w * (160 / 1280);
       expect(
         logoSafeReserve(w, bottomLogo),
-        closeTo(size * 0.12 + w * 0.014, 1e-6),
+        closeTo(size * 1.12 + w * 0.014, 1e-6),
       );
       // Corner mode (panel slides that overlay): no vertical reserve.
       expect(logoSafeReserve(w, bottomLogo, corner: true), 0);
@@ -168,8 +166,7 @@ void main() {
 
     test('a shown logo shrinks the rich-text body height', () {
       final slide = richSlide(6);
-      // #1932: de gereduceerde reserve is voor een klein logo kleiner dan de
-      // default-padding, dus pas een groot logo (480px) verkleint de body.
+      // Een groot logo verkleint de beschikbare teksthoogte.
       final withLogo = richTextBodyAvailH(
         w,
         slide,
@@ -199,8 +196,7 @@ void main() {
       final borderline = slide(paras - 1); // fits on one page, no logo
       expect(richTextPageCountForSlide(slide: borderline, profile: noLogo), 1);
       // The same slide with a large logo needs the reserved strip → 2 pages.
-      // #1932: gebruikt bigTopLogo (480px, top) want de gereduceerde reserve
-      // van een klein of bottom-logo is kleiner dan de default-padding.
+      // Een groot top-logo duwt de inhoud over de paginagrens.
       expect(
         richTextPageCountForSlide(slide: borderline, profile: bigTopLogo),
         greaterThan(1),

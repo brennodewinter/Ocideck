@@ -84,7 +84,7 @@ void main() {
     // het uit.
     expect(html, contains('<section class="slide logo-safe">'));
     // 96*0.12 + 1280*0.014 = 11.52 + 17.92 ≈ 29px.
-    expect(html, contains('.slide.logo-safe{padding-bottom:29px}'));
+    expect(html, contains('.slide.logo-safe{padding-bottom:125px}'));
     // Tabel/grafiek vullen de resthoogte: hele logo-vak (96*1.12 + 17.92).
     expect(
       html,
@@ -105,7 +105,7 @@ void main() {
     // 96·0.42 vanaf boven, 96·0.28 vanaf links; de strook staat nu bovenaan.
     // #1932: gereduceerd tot size*edgeInset + gap = 96*0.42 + 1280*0.014 ≈ 58px.
     expect(html, contains('top:40px;left:27px'));
-    expect(html, contains('.slide.logo-safe{padding-top:58px}'));
+    expect(html, contains('.slide.logo-safe{padding-top:154px}'));
     expect(html, contains('.slide.logo-safe.logo-occupy{padding-top:154px}'));
   });
 
@@ -125,11 +125,11 @@ void main() {
       final withoutFooter = await _service().build(_md, theme: bottomLeft);
 
       expect(withFooter, contains('top:40px;left:27px'));
-      expect(withFooter, contains('.slide.logo-safe{padding-top:58px}'));
+      expect(withFooter, contains('.slide.logo-safe{padding-top:154px}'));
       expect(withFooter, isNot(contains('bottom:12px;left:27px')));
 
       expect(withoutFooter, contains('bottom:12px;left:27px'));
-      expect(withoutFooter, contains('.slide.logo-safe{padding-bottom:29px}'));
+      expect(withoutFooter, contains('.slide.logo-safe{padding-bottom:125px}'));
     },
   );
 
