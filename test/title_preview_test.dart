@@ -56,7 +56,10 @@ void main() {
 
     expect(find.byType(Image), findsOneWidget);
     final slideRect = tester.getRect(find.byType(SlidePreviewWidget));
-    expect(tester.getRect(find.byType(Image)).top, greaterThan(slideRect.center.dy));
+    expect(
+      tester.getRect(find.byType(Image)).top,
+      greaterThan(slideRect.center.dy),
+    );
     final details = tester.getRect(find.textContaining('Trainer en datum'));
     expect(
       details.bottom,
