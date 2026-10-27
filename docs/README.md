@@ -26,6 +26,7 @@ documentation. Start here and jump to what you need.
 | [PRIVACY.md](PRIVACY.md) | What data stays local, what leaves only on your action, and how. |
 | [ACCESSIBILITY.md](ACCESSIBILITY.md) | What is accessible, and — the longer half — what is not. |
 | [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) | Fixes for common problems. |
+| [TRANSCRIPTION_SETUP.md](TRANSCRIPTION_SETUP.md) | Recording and transcription per platform: permissions, models, server routes, and the evidence behind each claim. |
 | [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md) | What is not there yet, in one list, so you do not meet it one surprise at a time. |
 | [FILE_FORMAT.md](FILE_FORMAT.md) | The on-disk Markdown/Marp format — the stable contract. |
 

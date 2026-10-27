@@ -1604,6 +1604,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Transcriptie instellen': 'Transkriptionsinställning',
   'Schermvullend bekijken': 'Visa i helskärm',
   'vergadering': 'möte',
   'de vergadering': 'mötet',

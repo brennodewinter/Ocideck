@@ -1598,6 +1598,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Transcriptie instellen': 'Transkriptsiooni seadistus',
   'Schermvullend bekijken': 'Vaata täisekraanil',
   'vergadering': 'koosolek',
   'de vergadering': 'koosolek',

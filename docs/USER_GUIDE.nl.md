@@ -6647,6 +6647,10 @@ API-sleutel niet als header meesturen, dus een live-server die een sleutel
 eist is daar eerlijk onbereikbaar — de optie verschijnt niet in plaats van
 een dode keuze aan te bieden.
 
+Setup per platform, rechten, modelgroottes, serverinrichting en het bewijs
+achter elke claim staan in
+[TRANSCRIPTION_SETUP.nl.md](TRANSCRIPTION_SETUP.nl.md).
+
 ## Videovergaderingen (Jitsi)
 
 De module staat uit tot je **Videovergaderingen** aanzet onder

@@ -651,6 +651,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Transcriptie instellen': 'Konfigurashon di transkripshon',
   'Schermvullend bekijken': 'Mira na pantaya kompletu',
   'vergadering': 'reunion',
   'de vergadering': 'e reunion',

@@ -1608,6 +1608,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Transcriptie instellen': 'Transkriptionsiirichtig',
   'Schermvullend bekijken': 'Im Vollbild aluege',
   'vergadering': 'Sitzig',
   'de vergadering': 'd\'Sitzig',

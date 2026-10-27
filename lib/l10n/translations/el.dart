@@ -1630,6 +1630,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Transcriptie instellen': 'Ρύθμιση μεταγραφής',
   'Schermvullend bekijken': 'Προβολή σε πλήρη οθόνη',
   'vergadering': 'σύσκεψη',
   'de vergadering': 'η σύσκεψη',

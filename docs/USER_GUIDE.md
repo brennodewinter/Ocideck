@@ -6596,6 +6596,10 @@ WebSocket cannot carry the API-key header, so a key-protected live server
 is honestly unreachable there — the opt-in does not appear rather than
 offer a dead choice.
 
+Per-platform setup, permissions, model sizes, server configuration and
+the evidence each claim rests on are in
+[TRANSCRIPTION_SETUP.md](TRANSCRIPTION_SETUP.md).
+
 ## Video meetings (Jitsi)
 
 The module is off until you turn **Video meetings** on under

@@ -297,6 +297,18 @@ per source, so a transcript can name missing source audio in an
 roster, and a missing or malformed manifest claims nothing. *(Added
 2026-10-26, issues #2538 and #2527; recording contract #2528–#2530.)*
 
+## Local transcription is measured on macOS and web only
+
+The local whisper.cpp engine was measured on the released macOS build and
+on the shipped web bundle (Chrome, Firefox and WebKit; `small` and `base`
+models — `large-v3-turbo` does not fit the 2 GB WASM memory). Windows and
+Linux run the same pinned source but have **no real-hardware proof on
+file**: the module is offered there, it is just not claimed as measured.
+The per-platform matrix — which sources exist, which routes were proven
+where, and what each claim's evidence is — lives in
+[TRANSCRIPTION_SETUP.md](TRANSCRIPTION_SETUP.md). *(Added 2026-10-26,
+#2523.)*
+
 ## Browse… shows what the system file dialog shows
 
 Open → Browse… hands the choice to the operating system's own file dialog.
