@@ -489,10 +489,12 @@ companion channel carries nothing yet.
   medialess under the `prejoinConfig` URL override); lima/colima's missing UDP
   forwarding is bridged by `probe/udp_relay.py` + the pinned `udp-relay`
   compose service + `./run.sh media-relay`. Covers **joining**.
-- **The real join route + session lifecycle** (#2536). The call rail no longer
-  promises joining "in a later version" — the placeholder carries the real
-  entry (*Deelnemen aan een vergadering…* → `MeetingPreflightDialog`), and the
-  panel follows the session's event stream: (re)connecting as a status line, a
+- **The real join route + session lifecycle** (#2536, ingang verplaatst in
+  #2603). De join-ingang is sinds #2603 een knop in de appbalk
+  (*Deelnemen aan een vergadering…* → `MeetingPreflightDialog`) — de rail
+  bestaat alleen nog terwijl een sessie loopt of net eindigde, zodat de
+  module geen vaste kolom claimt voor een functie die je af en toe gebruikt.
+  Het paneel volgt de sessie's event-stream: (re)connecting as a status line, a
   non-terminal `MeetingErrorEvent` stays visible next to the live call, and a
   terminal end becomes a dismissible ended state — a call is never invisible.
   The lifecycle is deterministic: `adopt` leaves a still-running call before

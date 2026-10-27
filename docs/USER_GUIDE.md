@@ -6607,8 +6607,9 @@ The module is off until you turn **Video meetings** on under
 own — you bring the Jitsi server, and nothing is contacted before you ask for
 it.
 
-Paste a meeting link on the module card, or use **Join a meeting…** in the call
-rail. Recognising the link happens on your device only. The check button is the
+Paste a meeting link on the module card, or use the camera button in the app's
+top bar (**Join a meeting…**) — the call rail itself only appears once a call
+is live. Recognising the link happens on your device only. The check button is the
 first network contact and asks first: it fetches the deployment's configuration
 and reports what the server offers — whether joining is possible, which
 capabilities exist and where media traffic would go — before anything joins. An
