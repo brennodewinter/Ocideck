@@ -1611,6 +1611,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bezig met installeren': 'Diegiama',
+  'Gevonden op schijf: {pad}': 'Rasta diske: {pad}',
+  'Van schijf installeren': 'Diegti iš disko',
   'Transcriptie instellen': 'Transkripcijos nustatymas',
   'Schermvullend bekijken': 'Žiūrėti visame ekrane',
   'vergadering': 'susitikimas',

@@ -60,6 +60,16 @@ storage pressure — that reports as absent, never as corruption, and you
 download again). The settings card deletes them again; there is no other
 removal path to find.
 
+**Already have the file?** On desktop the settings card also scans a few
+well-known locations — `~/Downloads`, a `~/whisper.cpp` checkout, the
+huggingface-cli cache of the pinned model repository, and pywhispercpp's
+data folder — for `ggml-*.bin` files with a catalog model's exact size.
+A match shows as "Found on disk: <path>" with an **Install from disk**
+button: the file is SHA-256-verified and copied into the model folder,
+and your original stays where it is. A file that fails the hash is
+refused, never installed. This is a fresh look every time the card
+opens, so a model you drop in later shows up without a restart.
+
 ## Platform matrix
 
 | | macOS | Windows | Linux | Web |

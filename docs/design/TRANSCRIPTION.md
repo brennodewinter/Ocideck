@@ -579,6 +579,21 @@ after size + SHA-256 verification. Storage lives in the app-support
 directory with path containment (`../../` cannot escape) and symlink
 refusal; `delete` is the only removal path.
 
+**Already-on-disk models (#2601).** A user who fetched the same
+`ggml-*.bin` elsewhere first — a manual download, a whisper.cpp checkout,
+the huggingface-cli cache, pywhispercpp's data dir — must not pay the
+download again. The store therefore scans a **fixed, deterministic list**
+of known locations (one directory deep, no recursive crawl) for
+`ggml*.bin` files matching a catalog entry's size; such a *candidate* is
+offered as "install from disk", which `adopt` admits only after the same
+SHA-256 check as a download, copies via `.part`+rename, and leaves the
+original in place. The scan reruns each time the settings card opens —
+the filesystem is the source of truth, not a once-per-process mirror.
+Web has no filesystem scan: `externalCandidates` returns `[]` and
+`adopt` is `UnsupportedSource`. On macOS the `~/Downloads` read can
+raise the system's folder-access prompt once; a refusal simply yields an
+empty scan.
+
 **Measured** on Apple Silicon (arm64, Metal), `whisper-cli` v1.9.5 static
 binary, Dutch spoken-Wikipedia WAV (CC BY-SA, 29.2 s, 16 kHz mono):
 

@@ -1604,6 +1604,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bezig met installeren': 'Installerar',
+  'Gevonden op schijf: {pad}': 'Hittad på disk: {pad}',
+  'Van schijf installeren': 'Installera från disk',
   'Transcriptie instellen': 'Transkriptionsinställning',
   'Schermvullend bekijken': 'Visa i helskärm',
   'vergadering': 'möte',

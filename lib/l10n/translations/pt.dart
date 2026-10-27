@@ -1633,6 +1633,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bezig met installeren': 'A instalar',
+  'Gevonden op schijf: {pad}': 'Encontrado no disco: {pad}',
+  'Van schijf installeren': 'Instalar a partir do disco',
   'Transcriptie instellen': 'Configuração da transcrição',
   'Schermvullend bekijken': 'Ver em ecrã inteiro',
   'vergadering': 'reunião',

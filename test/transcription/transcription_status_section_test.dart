@@ -47,7 +47,7 @@ void main() {
   }) => ProviderScope(
     overrides: [
       transcriptionModelStoreProvider.overrideWithValue(
-        IoModelStore(root: temp),
+        IoModelStore(root: temp, candidateRoots: const []),
       ),
       whisperModelCatalogProvider.overrideWithValue([model]),
       if (!realEngine) transcriptionEngineProvider.overrideWith((ref) => null),

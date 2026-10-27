@@ -1605,6 +1605,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bezig met installeren': 'Nameščam',
+  'Gevonden op schijf: {pad}': 'Najdeno na disku: {pad}',
+  'Van schijf installeren': 'Namesti z diska',
   'Transcriptie instellen': 'Nastavitev prepisovanja',
   'Schermvullend bekijken': 'Prikaži v celozaslonskem načinu',
   'vergadering': 'sestanek',

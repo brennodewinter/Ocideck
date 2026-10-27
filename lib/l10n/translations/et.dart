@@ -1598,6 +1598,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bezig met installeren': 'Installin',
+  'Gevonden op schijf: {pad}': 'Kettalt leitud: {pad}',
+  'Van schijf installeren': 'Installi kettalt',
   'Transcriptie instellen': 'Transkriptsiooni seadistus',
   'Schermvullend bekijken': 'Vaata täisekraanil',
   'vergadering': 'koosolek',

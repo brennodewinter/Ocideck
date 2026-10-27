@@ -1630,6 +1630,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bezig met installeren': 'Γίνεται εγκατάσταση',
+  'Gevonden op schijf: {pad}': 'Βρέθηκε στον δίσκο: {pad}',
+  'Van schijf installeren': 'Εγκατάσταση από τον δίσκο',
   'Transcriptie instellen': 'Ρύθμιση μεταγραφής',
   'Schermvullend bekijken': 'Προβολή σε πλήρη οθόνη',
   'vergadering': 'σύσκεψη',

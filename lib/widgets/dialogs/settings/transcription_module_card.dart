@@ -18,7 +18,10 @@ import 'transcription_status_section.dart';
 /// statusmatrix, modelbeheer (opruimen mag altijd) en het serverprofiel
 /// zijn juist dan de plek om te zien wát aan- of wegklikken betekent.
 /// De schakelaar zet alleen de werkzame kant aan — detectie hieronder
-/// vraagt nooit een permissie, opent geen apparaat en raakt geen netwerk.
+/// opent geen apparaat en raakt geen netwerk. De modelscan (#2601) leest
+/// een vaste lijst gangbare plekken op schijf; op macOS kan dat de eerste
+/// keer de maptoegang-vraag van het systeem geven — een afwijzing laat
+/// de scan gewoon leeg.
 class TranscriptionModuleCard extends ConsumerWidget {
   const TranscriptionModuleCard({super.key});
 

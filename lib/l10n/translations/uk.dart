@@ -1620,6 +1620,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bezig met installeren': 'Встановлюю',
+  'Gevonden op schijf: {pad}': 'Знайдено на диску: {pad}',
+  'Van schijf installeren': 'Встановити з диска',
   'Transcriptie instellen': 'Налаштування транскрипції',
   'Schermvullend bekijken': 'Переглянути на весь екран',
   'vergadering': 'нарада',

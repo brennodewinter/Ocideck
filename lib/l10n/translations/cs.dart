@@ -1606,6 +1606,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bezig met installeren': 'Instaluji',
+  'Gevonden op schijf: {pad}': 'Nalezeno na disku: {pad}',
+  'Van schijf installeren': 'Instalovat z disku',
   'Transcriptie instellen': 'Nastavení přepisu',
   'Schermvullend bekijken': 'Zobrazit na celou obrazovku',
   'vergadering': 'schůzka',

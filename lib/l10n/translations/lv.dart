@@ -1603,6 +1603,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bezig met installeren': 'Instalē',
+  'Gevonden op schijf: {pad}': 'Atrasts diskā: {pad}',
+  'Van schijf installeren': 'Instalēt no diska',
   'Transcriptie instellen': 'Transkripcijas iestatīšana',
   'Schermvullend bekijken': 'Skatīt pilnekrānā',
   'vergadering': 'sapulce',

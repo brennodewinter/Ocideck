@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,7 +18,7 @@ import '../../../theme/app_theme.dart';
 /// Elke rij toont wat de gebruiker wil weten vóór hij honderden megabytes
 /// binnenhaalt: naam, omvang, licentie en bron — plus de toestand en de
 /// knop die erbij hoort. Niets hier start een download vanzelf.
-class TranscriptionModelsSection extends ConsumerWidget {
+class TranscriptionModelsSection extends ConsumerStatefulWidget {
   const TranscriptionModelsSection({super.key, required this.moduleEnabled});
 
   /// Binnenhalen van een model mag pas als de module aan staat — de sectie
@@ -25,7 +27,25 @@ class TranscriptionModelsSection extends ConsumerWidget {
   final bool moduleEnabled;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<TranscriptionModelsSection> createState() =>
+      _TranscriptionModelsSectionState();
+}
+
+class _TranscriptionModelsSectionState
+    extends ConsumerState<TranscriptionModelsSection> {
+  @override
+  void initState() {
+    super.initState();
+    // De schijf is de bron van waarheid en verandert ook buiten de app
+    // om — handmatig gekopieerde modellen, downloads van andere tools,
+    // net weggegooide bestanden (#2601). De provider scant daarom niet
+    // alleen bij zijn eerste build maar opnieuw bij elke open van de
+    // kaart: de spiegel mag nooit verleren.
+    unawaited(ref.read(transcriptionModelManagerProvider.notifier).refresh());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     final states = ref.watch(transcriptionModelManagerProvider);
     final selected = ref.watch(selectedTranscriptionModelProvider);
@@ -59,7 +79,7 @@ class TranscriptionModelsSection extends ConsumerWidget {
                 _ModelRow(
                   model: model,
                   status: states[model.id] ?? const TranscriptionModelStatus(),
-                  moduleEnabled: moduleEnabled,
+                  moduleEnabled: widget.moduleEnabled,
                   l10n: l10n,
                 ),
             ],
@@ -147,6 +167,9 @@ class _ModelRow extends ConsumerWidget {
     if (status.downloading) {
       return l10n.d('Bezig met binnenhalen');
     }
+    if (status.installing) {
+      return l10n.d('Bezig met installeren');
+    }
     return switch (status.install) {
       ModelInstallState.verified => l10n.d('Geïnstalleerd en getoetst'),
       ModelInstallState.present => l10n.d('Geïnstalleerd'),
@@ -182,10 +205,26 @@ class _ModelRow extends ConsumerWidget {
                     : ''),
             style: TextStyle(fontSize: 11, color: AppTheme.slate600),
           ),
+          // Een gelijkend bestand elders op schijf is de kortste route
+          // naar geïnstalleerd (#2601): de rij noemt waar het ligt, zodat
+          // de knop eronder leesbaar blijft als bewijs, geen stille magie.
+          if (!installed && status.externalCandidate != null)
+            Text(
+              l10n
+                  .d('Gevonden op schijf: {pad}')
+                  .replaceAll('{pad}', status.externalCandidate!.path),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+              overflow: TextOverflow.ellipsis,
+            ),
           if (status.downloading)
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: LinearProgressIndicator(value: status.progress),
+            ),
+          if (status.installing)
+            const Padding(
+              padding: EdgeInsets.only(top: 4),
+              child: LinearProgressIndicator(),
             ),
           // De actie staat ónder de tekst, niet als trailing-kolom: bij
           // tekstschaal 200% heeft een knop in de trailing-positie geen
@@ -207,11 +246,45 @@ class _ModelRow extends ConsumerWidget {
         onPressed: () => manager.cancel(model),
       );
     }
+    // Overnemen loopt te kort voor een afbreekknop; de voortgangsstrook
+    // en het label tonen dat er iets staat te lopen.
+    if (status.installing) return const SizedBox.shrink();
     if (installed) {
       return IconButton(
         tooltip: l10n.d('Verwijderen'),
         icon: const Icon(Icons.delete_outline, size: 18),
         onPressed: () => manager.delete(model),
+      );
+    }
+    final candidate = status.externalCandidate;
+    if (candidate != null) {
+      // Adopteren staat voorop: een bewezen gelijkend bestand halen we
+      // niet nog eens over de lijn. Binnenhalen blijft ernaast staan —
+      // het gevonden bestand hoeft niet degene te zijn die de gebruiker
+      // bedoelde.
+      return Wrap(
+        alignment: WrapAlignment.end,
+        spacing: 4,
+        children: [
+          TextButton.icon(
+            icon: const Icon(Icons.drive_file_move_outlined, size: 16),
+            label: Text(
+              l10n.d('Van schijf installeren'),
+              style: const TextStyle(fontSize: 12),
+            ),
+            onPressed: moduleEnabled
+                ? () => manager.adopt(model, candidate)
+                : null,
+          ),
+          TextButton.icon(
+            icon: const Icon(Icons.download_outlined, size: 16),
+            label: Text(
+              l10n.d('Binnenhalen'),
+              style: const TextStyle(fontSize: 12),
+            ),
+            onPressed: moduleEnabled ? () => manager.download(model) : null,
+          ),
+        ],
       );
     }
     return TextButton.icon(

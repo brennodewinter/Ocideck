@@ -651,6 +651,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bezig met installeren': 'Ta instalando',
+  'Gevonden op schijf: {pad}': 'Ha é den disk: {pad}',
+  'Van schijf installeren': 'Instala for di disk',
   'Transcriptie instellen': 'Konfigurashon di transkripshon',
   'Schermvullend bekijken': 'Mira na pantaya kompletu',
   'vergadering': 'reunion',

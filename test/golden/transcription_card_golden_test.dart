@@ -68,7 +68,9 @@ Future<void> _match(
     ProviderScope(
       overrides: [
         transcriptionModelStoreProvider.overrideWithValue(
-          IoModelStore(root: temp),
+          // Lege kandidaatlijst: de echte scan zou `~` van de bouwmachine
+          // lezen en de plaat omgevingsafhankelijk maken (#2601).
+          IoModelStore(root: temp, candidateRoots: const []),
         ),
         whisperModelCatalogProvider.overrideWithValue([model]),
       ],

@@ -10,6 +10,17 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Whisper-model van schijf adopteren (#2601).** Heb je een
+  `ggml-*.bin` uit de modelcatalogus al ergens op schijf staan — een
+  handmatige download, een whisper.cpp-checkout, de huggingface-cache of
+  pywhispercpp — dan hoef je de honderden MB niet opnieuw binnen te
+  halen. De modelbeheerkaart scant die vaste plekken en laat bij een
+  treffer "Gevonden op schijf" zien met *Van schijf installeren*: de
+  SHA-256 wordt eerst getoetst, daarna wordt het bestand naar de
+  modelmap gekopieerd (jouw origineel blijft liggen). De kaart kijkt bij
+  elke opening opnieuw naar de schijf, dus een later neergezet model
+  verschijnt vanzelf. Op web is er geen schijfscan — alleen desktop.
+
 - **Vergaderen in de browser, de naad (#2544) én de proef (#2538).** De
   webversie haalt `config.js` op en opent de XMPP-websocket van een
   vergadering die je zelf aanwijst. De browser is daar de netwerkgrens:

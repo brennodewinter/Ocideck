@@ -1635,6 +1635,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bezig met installeren': 'Á shuiteáil',
+  'Gevonden op schijf: {pad}': 'Aimsithe ar dhiosca: {pad}',
+  'Van schijf installeren': 'Suiteáil ó dhiosca',
   'Transcriptie instellen': 'Socrú tras-scríofa',
   'Schermvullend bekijken': 'Amharc ar lánscáileán',
   'vergadering': 'cruinniú',

@@ -1608,6 +1608,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bezig met installeren': 'Wird installiert',
+  'Gevonden op schijf: {pad}': 'Uf Disk gfunde: {pad}',
+  'Van schijf installeren': 'Von Disk installiere',
   'Transcriptie instellen': 'Transkriptionsiirichtig',
   'Schermvullend bekijken': 'Im Vollbild aluege',
   'vergadering': 'Sitzig',

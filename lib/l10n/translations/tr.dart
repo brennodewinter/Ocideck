@@ -2513,6 +2513,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bezig met installeren': 'Kuruluyor',
+  'Gevonden op schijf: {pad}': 'Diskte bulundu: {pad}',
+  'Van schijf installeren': 'Diskten kur',
   'Transcriptie instellen': 'Transkripsiyon kurulumu',
   'Schermvullend bekijken': 'Tam ekranda görüntüle',
   'vergadering': 'toplantı',
