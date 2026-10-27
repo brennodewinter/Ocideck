@@ -189,7 +189,7 @@ class _CallAudioSession implements CaptureSession {
       onDone: () => _emit(CaptureEndCause.sourceLost),
     );
     _ticker = Timer.periodic(_drainInterval, (_) {
-      if (!_draining) unawaited(_drain());
+      if (!_draining) _drainFuture = _drain();
     });
     if (stagingDir != null) {
       // Alleen de file aanmaken — het openen gebeurt lazily bij de eerste
@@ -219,6 +219,7 @@ class _CallAudioSession implements CaptureSession {
   final _startedAt = clock.now();
   var _emitted = Duration.zero;
   var _draining = false;
+  Future<void>? _drainFuture;
   var _stopping = false;
   var _dead = false;
   String _storedPath = '';
@@ -254,7 +255,7 @@ class _CallAudioSession implements CaptureSession {
     if (f.pcm.isEmpty) return;
     final src = _srcs.putIfAbsent(kept.trackId, () => _Src(_nextIndex++, kept));
     src.feed(kept, f.pcm);
-    if (!_draining) unawaited(_drain());
+    if (!_draining) _drainFuture = _drain();
   }
 
   /// Emit ticks zolang elke bekende bron óf een tick heeft óf starving
@@ -378,6 +379,8 @@ class _CallAudioSession implements CaptureSession {
     _stopping = true;
     _ticker.cancel();
     await _sub.cancel();
+    final drain = _drainFuture;
+    if (drain != null) await drain;
     // De rest van elke buffer als één slot-tick: de langste bepaalt de
     // lengte, kortere bronnen vullen met stilte — alle files even lang.
     // Ook bij een dode bron: wat er staat hoort in de file, niet weg.
