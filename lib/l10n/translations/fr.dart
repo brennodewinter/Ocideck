@@ -652,6 +652,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bezig met installeren': 'Installation en cours',
+  'Gevonden op schijf: {pad}': 'Trouvé sur le disque : {pad}',
+  'Van schijf installeren': 'Installer depuis le disque',
   'Transcriptie instellen': 'Configuration de la transcription',
   'Schermvullend bekijken': 'Afficher en plein écran',
   'vergadering': 'réunion',

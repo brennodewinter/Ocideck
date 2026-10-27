@@ -1605,6 +1605,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bezig met installeren': 'Menginstal',
+  'Gevonden op schijf: {pad}': 'Ditemukan di disk: {pad}',
+  'Van schijf installeren': 'Instal dari disk',
   'Transcriptie instellen': 'Pengaturan transkripsi',
   'Schermvullend bekijken': 'Lihat layar penuh',
   'vergadering': 'rapat',

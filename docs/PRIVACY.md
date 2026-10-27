@@ -126,7 +126,12 @@ machine (desktop) or in your browser tab (web). This includes:
   The speech models the local engine runs are files on this device: the app
   shows which are installed and fetches one only when you ask it to (see the
   *Transcription speech model* row of the egress table below). Deleting a
-  model in Settings deletes the file; nothing else removes it. In the
+  model in Settings deletes the file; nothing else removes it. On desktop
+  the same screen reads a fixed list of well-known locations (`~/Downloads`,
+  a `~/whisper.cpp` checkout, the huggingface-cli cache, pywhispercpp's data
+  folder) for `ggml*.bin` files matching a catalog size — file names and
+  sizes are the only things read, and a file you adopt is verified by
+  SHA-256 and copied in while your original stays put (#2601). In the
   browser build a downloaded model lives in IndexedDB — browser storage that
   the browser itself may evict under disk pressure — and the download runs
   through an ordinary CORS `fetch`, so the browser's own cross-origin rules

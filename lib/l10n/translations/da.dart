@@ -1605,6 +1605,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bezig met installeren': 'Installerer',
+  'Gevonden op schijf: {pad}': 'Fundet på disken: {pad}',
+  'Van schijf installeren': 'Installér fra disk',
   'Transcriptie instellen': 'Transskriptionsopsætning',
   'Schermvullend bekijken': 'Vis i fuld skærm',
   'vergadering': 'møde',

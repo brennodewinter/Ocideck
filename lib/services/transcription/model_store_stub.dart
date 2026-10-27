@@ -31,6 +31,14 @@ class StubModelStore implements TranscriptionModelStore {
 
   @override
   Future<void> sweepPartials() async {}
+
+  @override
+  Future<List<ModelStorePath>> externalCandidates(WhisperModel model) =>
+      Future.value(const []);
+
+  @override
+  Future<ModelStorePath> adopt(WhisperModel model, ModelStorePath source) =>
+      throw _unsupported;
 }
 
 TranscriptionModelStore createModelStore() => const StubModelStore();

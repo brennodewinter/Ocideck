@@ -1623,6 +1623,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bezig met installeren': 'Qed ninstalla',
+  'Gevonden op schijf: {pad}': 'Misjub fuq id-disk: {pad}',
+  'Van schijf installeren': 'Installa mid-disk',
   'Transcriptie instellen': 'Setup tat-transkrizzjoni',
   'Schermvullend bekijken': 'Ara fuq skrin sħiħ',
   'vergadering': 'laqgħa',

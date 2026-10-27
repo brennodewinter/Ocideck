@@ -1624,6 +1624,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bezig met installeren': 'Инсталиране',
+  'Gevonden op schijf: {pad}': 'Намерено на диска: {pad}',
+  'Van schijf installeren': 'Инсталиране от диска',
   'Transcriptie instellen': 'Настройка на транскрипция',
   'Schermvullend bekijken': 'Преглед на цял екран',
   'vergadering': 'среща',

@@ -9,7 +9,10 @@
 //
 // De store kent de catalogus, controleert grootte en SHA-256 en ruimt
 // `.part`-resten van afgebroken downloads op. Hij downloadt zelf niets —
-// dat is de downloader, die hier alleen zijn eindbestand parkeert.
+// dat is de downloader, die hier alleen zijn eindbestand parkeert. Wel
+// wijst hij kandidaten buiten de map aan (§4.4, #2601): een gelijkend
+// `ggml*.bin` op een gangbare plek mag de gebruiker adopteren in plaats
+// van opnieuw te downloaden.
 import 'model_store_stub.dart'
     if (dart.library.io) 'model_store_io.dart'
     if (dart.library.js_interop) 'model_store_web.dart'
@@ -58,6 +61,24 @@ abstract class TranscriptionModelStore {
   /// Verwijdert `.part`-resten van afgebroken downloads. Een deels bestand
   /// mag nooit als "aanwezig" meetellen, en evenmin eeuwig blijven liggen.
   Future<void> sweepPartials();
+
+  /// Kandidaten buiten de modelmap die op [model] lijken — een
+  /// `ggml*.bin`-bestand met precies de catalogusomvang (#2601). Desktop
+  /// scant een vaste lijst gangbare plekken (Downloads, de huggingface-
+  /// hubcache van de modelrepository, een whisper.cpp-checkout,
+  /// pywhispercpp); web en stub leveren `[]` — een browser kan de schijf
+  /// niet doorzoeken. De modelmap zelf doet niet mee; `stateOf` dekt hem.
+  ///
+  /// Het resultaat is een vermoeden, geen bewijs: omvang zegt "lijkend",
+  /// pas de SHA-256 in [adopt] zegt "hetzelfde".
+  Future<List<ModelStorePath>> externalCandidates(WhisperModel model);
+
+  /// Neemt [source] over in de modelmap als [model]. De SHA-256-toets
+  /// loopt vóór het kopiëren — een bestand dat niet is wat de catalogus
+  /// belooft, wordt geweigerd (`ModelDownloadException`, `invalidHash`)
+  /// en landt nooit in de map. Het origineel blijft waar het ligt:
+  /// weggooien van iemands eigen bestand is niet aan ons.
+  Future<ModelStorePath> adopt(WhisperModel model, ModelStorePath source);
 }
 
 /// Een pad dat de store heeft afgegeven. Het type bestaat om in UI en tests

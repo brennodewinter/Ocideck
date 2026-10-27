@@ -1609,6 +1609,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bezig met installeren': 'Instaliram',
+  'Gevonden op schijf: {pad}': 'Pronađeno na disku: {pad}',
+  'Van schijf installeren': 'Instaliraj s diska',
   'Transcriptie instellen': 'Postavljanje transkripcije',
   'Schermvullend bekijken': 'Prikaži preko cijelog zaslona',
   'vergadering': 'sastanak',

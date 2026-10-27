@@ -652,6 +652,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bezig met installeren': 'Wird installiert',
+  'Gevonden op schijf: {pad}': 'Auf Datenträger gefunden: {pad}',
+  'Van schijf installeren': 'Von Datenträger installieren',
   'Transcriptie instellen': 'Transkriptionseinrichtung',
   'Schermvullend bekijken': 'Im Vollbild ansehen',
   'vergadering': 'Treffen',

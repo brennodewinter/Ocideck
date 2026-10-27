@@ -64,6 +64,17 @@ browser onder opslagdruk mag opruimen — dat rapporteert als afwezig,
 nooit als corruptie, en je downloadt opnieuw). De instellingenkaart
 verwijdert ze weer; er is geen andere verwijderroute te vinden.
 
+**Heb je het bestand al?** Op desktop scant de instellingenkaart ook een
+paar bekende plekken — `~/Downloads`, een `~/whisper.cpp`-checkout, de
+huggingface-cli-cache van de gepinde modelrepository en de datamap van
+pywhispercpp — naar `ggml-*.bin`-bestanden met precies de catalogusomvang.
+Een treffer verschijnt als "Gevonden op schijf: <pad>" met een knop
+**Van schijf installeren**: het bestand wordt op SHA-256 getoetst en naar
+de modelmap gekopieerd; jouw origineel blijft waar het ligt. Een bestand
+dat de hash niet haalt, wordt geweigerd — nooit geïnstalleerd. De kaart
+kijkt bij elke opening opnieuw, dus een model dat je later neerzet
+verschijnt zonder herstart.
+
 ## Platformmatrix
 
 | | macOS | Windows | Linux | Web |

@@ -1620,6 +1620,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bezig met installeren': 'Instauratur',
+  'Gevonden op schijf: {pad}': 'In disco inventum: {pad}',
+  'Van schijf installeren': 'Ex disco instaura',
   'Transcriptie instellen': 'Transcriptionis institutio',
   'Schermvullend bekijken': 'In pleno scrinio videre',
   'vergadering': 'colloquium',

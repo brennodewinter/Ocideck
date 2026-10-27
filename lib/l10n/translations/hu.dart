@@ -1607,6 +1607,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bezig met installeren': 'Telepítés folyamatban',
+  'Gevonden op schijf: {pad}': 'Lemezén található: {pad}',
+  'Van schijf installeren': 'Telepítés lemezről',
   'Transcriptie instellen': 'Átirat beállítása',
   'Schermvullend bekijken': 'Megtekintés teljes képernyőn',
   'vergadering': 'megbeszélés',

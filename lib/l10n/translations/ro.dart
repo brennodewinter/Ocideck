@@ -1621,6 +1621,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bezig met installeren': 'Se instalează',
+  'Gevonden op schijf: {pad}': 'Găsit pe disc: {pad}',
+  'Van schijf installeren': 'Instalați de pe disc',
   'Transcriptie instellen': 'Configurare transcriere',
   'Schermvullend bekijken': 'Vizualizează pe ecran complet',
   'vergadering': 'întâlnire',

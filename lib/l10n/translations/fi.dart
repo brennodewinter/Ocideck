@@ -1605,6 +1605,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bezig met installeren': 'Asennetaan',
+  'Gevonden op schijf: {pad}': 'Löydetty levyltä: {pad}',
+  'Van schijf installeren': 'Asenna levyltä',
   'Transcriptie instellen': 'Litteroinnin asetukset',
   'Schermvullend bekijken': 'Näytä koko näytöllä',
   'vergadering': 'kokous',

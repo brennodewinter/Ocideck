@@ -248,6 +248,18 @@ class WebModelStore implements TranscriptionModelStore {
       }
     }
   }
+
+  /// Een browser kan de schijf niet doorzoeken — er is nooit een externe
+  /// kandidaat en dus ook geen adoptie om af te wijzen met een knop.
+  @override
+  Future<List<ModelStorePath>> externalCandidates(WhisperModel model) =>
+      Future.value(const []);
+
+  @override
+  Future<ModelStorePath> adopt(WhisperModel model, ModelStorePath source) =>
+      throw const UnsupportedSource(
+        'modelbeheer op schijf vraagt een bestandssysteem',
+      );
 }
 
 TranscriptionModelStore createModelStore() => const WebModelStore();

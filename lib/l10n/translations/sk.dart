@@ -1611,6 +1611,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bezig met installeren': 'Inštalujem',
+  'Gevonden op schijf: {pad}': 'Nájdené na disku: {pad}',
+  'Van schijf installeren': 'Inštalovať z disku',
   'Transcriptie instellen': 'Nastavenie prepisu',
   'Schermvullend bekijken': 'Zobraziť na celú obrazovku',
   'vergadering': 'stretnutie',

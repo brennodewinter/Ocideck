@@ -62,7 +62,7 @@ void main() {
       ProviderScope(
         overrides: [
           transcriptionModelStoreProvider.overrideWithValue(
-            IoModelStore(root: modelsDir),
+            IoModelStore(root: modelsDir, candidateRoots: const []),
           ),
           transcriptionEngineProvider.overrideWith((ref) => null),
           captureSourcesProvider.overrideWithValue(const {}),

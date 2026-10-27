@@ -40,7 +40,7 @@ void main() {
     AppLocalizations.setActiveLanguageCode('nl');
     SharedPreferences.setMockInitialValues({});
     temp = Directory.systemTemp.createTempSync('models_section_');
-    store = _SpyStore(root: temp);
+    store = _SpyStore(root: temp, candidateRoots: const []);
   });
 
   tearDown(() => temp.deleteSync(recursive: true));
@@ -150,12 +150,43 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Geïnstalleerd'), findsOneWidget);
   });
+
+  testWidgets('een schijfkandidaat biedt adopteren naast Binnenhalen', (
+    tester,
+  ) async {
+    // De sectie scant bij openen én de manager bij zijn eerste build —
+    // de kandidaatuit een eigen map komt zo al voor de hand-refresh op.
+    final elsewhere = Directory.systemTemp.createTempSync('candidate_');
+    addTearDown(() => elsewhere.deleteSync(recursive: true));
+    File('${elsewhere.path}/ggml-test.bin').writeAsBytesSync(bytes);
+    store = _SpyStore(root: temp, candidateRoots: [elsewhere]);
+    await tester.pumpWidget(app());
+    await refresh(tester);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Gevonden op schijf'), findsOneWidget);
+    expect(find.text('Van schijf installeren'), findsOneWidget);
+    expect(find.text('Binnenhalen'), findsOneWidget);
+
+    // De knop voert de echte adoptie uit: bestand → modelmap → verified.
+    await tester.runAsync(
+      () => manager(tester).adopt(
+        model,
+        ProviderScope.containerOf(
+          tester.element(find.byType(TranscriptionModelsSection)),
+        ).read(transcriptionModelManagerProvider)[model.id]!.externalCandidate!,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Geïnstalleerd en getoetst'), findsOneWidget);
+    expect(File('${temp.path}/ggml-test.bin').existsSync(), isTrue);
+    expect(find.text('Binnenhalen'), findsNothing);
+  });
 }
 
 /// Telt `modelPath`-aanroepen zodat de knop→manager→store-keten bewijsbaar
 /// is zonder dat de (fake-zone-)download zelf hoeft door te lopen.
 class _SpyStore extends IoModelStore {
-  _SpyStore({super.root});
+  _SpyStore({super.root, super.candidateRoots});
 
   var modelPathCalls = 0;
 

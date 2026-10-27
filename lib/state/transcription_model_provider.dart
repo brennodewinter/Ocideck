@@ -40,30 +40,49 @@ class TranscriptionModelStatus {
   const TranscriptionModelStatus({
     this.install = ModelInstallState.absent,
     this.downloading = false,
+    this.installing = false,
     this.progress = 0.0,
     this.failure,
+    this.externalCandidate,
   });
 
   final ModelInstallState install;
 
   /// Een transfer loopt — [progress] is dan 0..1.
   final bool downloading;
+
+  /// Een adoptie van schijf loopt (hashen + kopiëren — #2601). Kan niet
+  /// afgebroken worden; de overname is te kort om een eigen annuleerpad
+  /// te rechtvaardigen.
+  final bool installing;
   final double progress;
 
-  /// De laatste downloadfout (voor de meldingsstrook), of null.
+  /// De laatste download- of adoptiefout (voor de meldingsstrook), of null.
   final ModelDownloadFailure? failure;
+
+  /// Een gelijkend bestand buiten de modelmap (#2601) — alleen gezet
+  /// terwijl [install] `absent` is; de store toetst zijn echte identiteit
+  /// pas bij adoptie.
+  final ModelStorePath? externalCandidate;
 
   TranscriptionModelStatus copyWith({
     ModelInstallState? install,
     bool? downloading,
+    bool? installing,
     double? progress,
     ModelDownloadFailure? failure,
+    ModelStorePath? externalCandidate,
     bool clearFailure = false,
+    bool clearCandidate = false,
   }) => TranscriptionModelStatus(
     install: install ?? this.install,
     downloading: downloading ?? this.downloading,
+    installing: installing ?? this.installing,
     progress: progress ?? this.progress,
     failure: clearFailure ? null : (failure ?? this.failure),
+    externalCandidate: clearCandidate
+        ? null
+        : (externalCandidate ?? this.externalCandidate),
   );
 }
 
@@ -151,10 +170,24 @@ class TranscriptionModelManager
       logError('ModelManager: .part-resten vegen', e, s);
     }
     for (final model in ref.read(whisperModelCatalogProvider)) {
-      if (_statusOf(model.id).downloading) continue;
+      final status = _statusOf(model.id);
+      if (status.downloading || status.installing) continue;
       final install = await _stateOf(model);
+      // Alleen bij `absent` is een kandidaat ergens anders op schijf nog
+      // nieuws; bij present/verified is hij ingeruild en moet hij weg uit
+      // de spiegel.
+      final candidate = install == ModelInstallState.absent
+          ? await _externalCandidate(model)
+          : null;
       if (!ref.mounted) return;
-      _set(model.id, _statusOf(model.id).copyWith(install: install));
+      _set(
+        model.id,
+        _statusOf(model.id).copyWith(
+          install: install,
+          externalCandidate: candidate,
+          clearCandidate: candidate == null,
+        ),
+      );
     }
   }
 
@@ -167,14 +200,32 @@ class TranscriptionModelManager
     }
   }
 
+  /// De eerste schijfkandidaat van [model] — meerdere hits zijn zeldzaam
+  /// en de eerste volstaat: de hash bij `adopt` maakt de echte toets, de
+  /// volgorde van de kandidaatlijst (Downloads vóór caches) is al de
+  /// meest waarschijnlijke.
+  Future<ModelStorePath?> _externalCandidate(WhisperModel model) async {
+    try {
+      final found = await ref
+          .read(transcriptionModelStoreProvider)
+          .externalCandidates(model);
+      return found.firstOrNull;
+    } catch (e, s) {
+      logError('ModelManager: schijfkandidaten van ${model.id}', e, s);
+      return null;
+    }
+  }
+
   /// Start de download die de gebruiker koos. Serialiseert: een tweede
   /// `download` terwijl er één loopt is een no-op — de UI biedt die knop
   /// dan ook niet aan.
   Future<void> download(WhisperModel model) async {
-    // De poort kijkt naar de `downloading`-vlag, niet alleen naar _active:
-    // die map vult pas na de eerste awaits, dus wie hem alleen bewaakt laat
-    // een tweede download in het opstartvenster toch door.
-    if (_active.isNotEmpty || state.values.any((s) => s.downloading)) {
+    // De poort kijkt naar de `downloading`-/`installing`-vlaggen, niet
+    // alleen naar _active: die map vult pas na de eerste awaits, dus wie
+    // hem alleen bewaakt laat een tweede schrijver op `.part` in het
+    // opstartvenster toch door.
+    if (_active.isNotEmpty ||
+        state.values.any((s) => s.downloading || s.installing)) {
       return;
     }
     final store = ref.read(transcriptionModelStoreProvider);
@@ -239,6 +290,53 @@ class TranscriptionModelManager
   /// Breekt de lopende download van [model] af. Het `.part`-bestand ruimt
   /// de downloader zelf op; hier verandert alleen de spiegel.
   void cancel(WhisperModel model) => _active[model.id]?.cancel();
+
+  /// Neemt het op schijf gevonden [source] over als [model] — de actie
+  /// die de sectie bij een `externalCandidate` biedt (#2601). Zelfde
+  /// serialisatie als `download`: hooguit één schrijver op `.part`
+  /// tegelijk. Een geslaagde overname eindigt `verified` — zijn hash is
+  /// net getoetst, er valt niets meer te raden.
+  Future<void> adopt(WhisperModel model, ModelStorePath source) async {
+    if (_active.isNotEmpty ||
+        state.values.any((s) => s.downloading || s.installing)) {
+      return;
+    }
+    _set(
+      model.id,
+      _statusOf(
+        model.id,
+      ).copyWith(installing: true, clearFailure: true, clearCandidate: true),
+    );
+    try {
+      final store = ref.read(transcriptionModelStoreProvider);
+      await store.adopt(model, source);
+      if (!ref.mounted) return;
+      _set(
+        model.id,
+        const TranscriptionModelStatus(install: ModelInstallState.verified),
+      );
+    } on ModelDownloadException catch (e) {
+      if (!ref.mounted) return;
+      // De kandidaat blijft uit de spiegel: een hash-afwijzing bewees
+      // net dat hij níét het model is, en opnieuw aanbieden zou alleen
+      // dezelfde weigering opleveren. De volgende refresh scant hem
+      // eventueel weer — dan is de knop de keuze van de gebruiker zelf.
+      _set(
+        model.id,
+        _statusOf(model.id).copyWith(
+          installing: false,
+          install: await _stateOf(model),
+          failure: e.failure,
+        ),
+      );
+    } on Object catch (e, s) {
+      logError('ModelManager: adopt van ${model.id}', e, s);
+      if (ref.mounted) {
+        _set(model.id, _statusOf(model.id).copyWith(installing: false));
+      }
+      rethrow;
+    }
+  }
 
   /// Verwijdert een geïnstalleerd model — expliciet, nooit als bijvangst
   /// van een mislukte download of een enginefout.

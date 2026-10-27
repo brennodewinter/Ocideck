@@ -652,6 +652,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bezig met installeren': 'Oan it ynstallearjen',
+  'Gevonden op schijf: {pad}': 'Fûn op skiif: {pad}',
+  'Van schijf installeren': 'Fan skiif ynstallearje',
   'Transcriptie instellen': 'Transkripsje-ynstelling',
   'Schermvullend bekijken': 'Skermfol besjen',
   'vergadering': 'gearkomste',

@@ -53,7 +53,7 @@ void main() {
     temp = Directory.systemTemp.createTempSync('engine_test_');
     storeRoot = Directory('${temp.path}/models')..createSync();
     workDir = Directory('${temp.path}/work')..createSync();
-    store = IoModelStore(root: storeRoot);
+    store = IoModelStore(root: storeRoot, candidateRoots: const []);
     modelBytes = [7, 7, 7, 7];
     model = WhisperModel(
       id: 'testmodel',
