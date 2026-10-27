@@ -1611,6 +1611,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Transcriptie instellen': 'Nastavenie prepisu',
   'Schermvullend bekijken': 'Zobraziť na celú obrazovku',
   'vergadering': 'stretnutie',
   'de vergadering': 'stretnutie',

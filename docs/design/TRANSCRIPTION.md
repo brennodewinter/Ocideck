@@ -667,13 +667,13 @@ universal capture anywhere.
 
 ### 5.1 Per release platform
 
-| Platform | `bestand` | `microfoon` | `app-/systeemgeluid` | `combinatie` |
-|---|---|---|---|---|
-| **macOS** | beschikbaar¹ | na toestemming te proberen (TCC mic prompt; usage string must stop promising "no recording", §2.3) | na toestemming te proberen² | na toestemming te proberen (mic + screen-audio; channel separation niet getest) |
-| **Windows** | beschikbaar¹ | na toestemming te proberen (mic privacy toggle) | na toestemming te proberen³ | na toestemming te proberen (niet getest) |
-| **Linux** | beschikbaar¹·⁴ | na toestemming te proberen (no OS prompt on most setups; hardware presence decides) | niet getest⁵ | niet getest |
-| **Web** | beschikbaar¹·⁶ | na toestemming te proberen (browser mic prompt; MediaRecorder support⁷) | browser-dependent — see 5.2 | niet getest |
-| **Android / iOS** | niet ondersteund — not a release platform; separate product decision (§1.2) | | | |
+| Platform | `bestand` | `microfoon` | `app-/systeemgeluid` | `combinatie` | `callaudio` |
+|---|---|---|---|---|---|
+| **macOS** | beschikbaar¹ | na toestemming te proberen (TCC mic prompt; usage string must stop promising "no recording", §2.3) | na toestemming te proberen² | na toestemming te proberen (mic + screen-audio; channel separation niet getest) | beschikbaar⁸ |
+| **Windows** | beschikbaar¹ | na toestemming te proberen (mic privacy toggle) | na toestemming te proberen³ | na toestemming te proberen (niet getest) | niet beschikbaar⁸ |
+| **Linux** | beschikbaar¹·⁴ | na toestemming te proberen (no OS prompt on most setups; hardware presence decides) | niet getest⁵ | niet getest | niet beschikbaar⁸ |
+| **Web** | beschikbaar¹·⁶ | na toestemming te proberen (browser mic prompt; MediaRecorder support⁷) | browser-dependent — see 5.2 | niet getest | beschikbaar⁸ |
+| **Android / iOS** | niet ondersteund — not a release platform; separate product decision (§1.2) | | | | |
 
 ¹ File decode is the engine's problem, not the OS's: WAV/PCM everywhere;
 compressed formats need a decoder the ticket must prove (#2515). Formats a
@@ -700,6 +700,15 @@ cannot decode are `DecodeFailed`.
 yields a different container/codec — the definitive pass runs on whatever the
 browser produced, so the engine must accept it or the route is
 `UnsupportedSource` on that browser.
+⁸ The `callAudio` source kind (#2527–#2530) exists only during a connected
+in-app call. Proven in a real two-person call on the released macOS build and
+the released web bundle (#2545, #2548): the forked media binding delivers
+per-source decoded PCM there. Windows and Linux report `noPerSourceTap`
+honestly — the call panel shows the reason rather than a button that writes
+silence — so they stay *niet beschikbaar*, not *niet getest*: the binding
+itself says it cannot. The session writes `recording.wav` plus a `sources.json`
+manifest; a transcript names provably missing source audio and never invents
+speaker labels.
 
 ### 5.2 Web, per browser family — app-/systeemgeluid
 

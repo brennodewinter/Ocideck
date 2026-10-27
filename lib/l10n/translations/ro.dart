@@ -1621,6 +1621,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Transcriptie instellen': 'Configurare transcriere',
   'Schermvullend bekijken': 'Vizualizează pe ecran complet',
   'vergadering': 'întâlnire',
   'de vergadering': 'întâlnirea',

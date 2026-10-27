@@ -1609,6 +1609,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Transcriptie instellen': 'Postavljanje transkripcije',
   'Schermvullend bekijken': 'Prikaži preko cijelog zaslona',
   'vergadering': 'sastanak',
   'de vergadering': 'sastanak',

@@ -55,6 +55,11 @@ DocSection _userDocs(AppLocalizations l10n) => DocSection(
       assetBase: 'docs/USER_GUIDE.md',
     ),
     DocEntry(
+      icon: Icons.mic_none_outlined,
+      title: l10n.d('Transcriptie instellen'),
+      assetBase: 'docs/TRANSCRIPTION_SETUP.md',
+    ),
+    DocEntry(
       icon: Icons.keyboard_outlined,
       title: l10n.d('Sneltoetsen'),
       assetBase: 'docs/SHORTCUTS.md',

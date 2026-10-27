@@ -1620,6 +1620,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Transcriptie instellen': 'Transcriptionis institutio',
   'Schermvullend bekijken': 'In pleno scrinio videre',
   'vergadering': 'colloquium',
   'de vergadering': 'colloquium',

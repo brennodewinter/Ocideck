@@ -649,6 +649,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Transcriptie instellen': 'Configuración de la transcripción',
   'Schermvullend bekijken': 'Ver en pantalla completa',
   'vergadering': 'reunión',
   'de vergadering': 'la reunión',

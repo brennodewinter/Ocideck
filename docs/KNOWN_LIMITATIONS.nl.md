@@ -317,6 +317,18 @@ nooit uit de deelnemerslijst, en een ontbrekend of stuk manifest claimt
 niets. *(Toegevoegd 2026-10-26, issues #2538 en #2527; opnamecontract
 #2528–#2530.)*
 
+## Lokale transcriptie is alleen op macOS en web gemeten
+
+De lokale whisper.cpp-engine is gemeten op de vrijgegeven macOS-build en
+op de verscheepte webbundel (Chrome, Firefox en WebKit; modellen `small`
+en `base` — `large-v3-turbo` past niet in het 2 GB-WASM-geheugen). Windows
+en Linux draaien dezelfde gepinde bron maar hebben **geen hardwarebewijs
+op zak**: de module wordt daar aangeboden, maar niet als gemeten geclaimd.
+De matrix per platform — welke bronnen er zijn, welke routes waar bewezen
+zijn en wat het bewijs van elke claim is — staat in
+[TRANSCRIPTION_SETUP.nl.md](TRANSCRIPTION_SETUP.nl.md). *(Toegevoegd
+2026-10-26, #2523.)*
+
 ## Bladeren… toont wat het systeemvenster toont
 
 Openen → Bladeren… laat het kiezen over aan het bestandsvenster van het

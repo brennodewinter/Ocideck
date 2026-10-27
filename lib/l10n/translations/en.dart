@@ -811,6 +811,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Transcriptie instellen': 'Transcription setup',
   'Schermvullend bekijken': 'View full screen',
   'vergadering': 'meeting',
   'de vergadering': 'the meeting',

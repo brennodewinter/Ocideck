@@ -1611,6 +1611,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Transcriptie instellen': 'Transkripcijos nustatymas',
   'Schermvullend bekijken': 'Žiūrėti visame ekrane',
   'vergadering': 'susitikimas',
   'de vergadering': 'susitikimas',

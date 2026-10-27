@@ -59,6 +59,7 @@ import 'package:ocideck/l10n/language_registry.dart';
 /// (see [excludedDocs]); the technical/developer docs stay English.
 const List<String> translatableDocs = [
   'docs/USER_GUIDE.md',
+  'docs/TRANSCRIPTION_SETUP.md',
   'docs/SHORTCUTS.md',
   'docs/FILE_FORMAT.md',
   'docs/README.md',
@@ -77,7 +78,10 @@ const Set<String> excludedDocs = {'docs/PRIVACY.md', 'docs/SECURITY_DESIGN.md'};
 /// by the machine translator. The consistency checker ([docVariantProblems])
 /// still validates them, so a reviewed variant that falls behind its source is
 /// caught — only the banner and the machine rendering are skipped (#1965).
-const Set<String> humanReviewedVariants = {'docs/SHORTCUTS.md:nl'};
+const Set<String> humanReviewedVariants = {
+  'docs/SHORTCUTS.md:nl',
+  'docs/TRANSCRIPTION_SETUP.md:nl',
+};
 
 /// The canonical banner prepended to every generated variant, before it is run
 /// through the translator so the reader sees it in their own language. The

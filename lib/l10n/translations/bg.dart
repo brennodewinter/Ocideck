@@ -1624,6 +1624,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Transcriptie instellen': 'Настройка на транскрипция',
   'Schermvullend bekijken': 'Преглед на цял екран',
   'vergadering': 'среща',
   'de vergadering': 'срещата',

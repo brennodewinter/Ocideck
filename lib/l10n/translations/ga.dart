@@ -1635,6 +1635,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Transcriptie instellen': 'Socrú tras-scríofa',
   'Schermvullend bekijken': 'Amharc ar lánscáileán',
   'vergadering': 'cruinniú',
   'de vergadering': 'an cruinniú',

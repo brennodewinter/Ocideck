@@ -294,6 +294,8 @@ flutter:
     # once declared here.
     - docs/USER_GUIDE.md
     - docs/USER_GUIDE.nl.md
+    - docs/TRANSCRIPTION_SETUP.md
+    - docs/TRANSCRIPTION_SETUP.nl.md
     - docs/SHORTCUTS.md
     - docs/SHORTCUTS.nl.md
     - docs/FILE_FORMAT.md

@@ -1605,6 +1605,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Transcriptie instellen': 'Nastavitev prepisovanja',
   'Schermvullend bekijken': 'Prikaži v celozaslonskem načinu',
   'vergadering': 'sestanek',
   'de vergadering': 'sestanek',

@@ -30,6 +30,7 @@ Begin hier en spring naar wat je nodig hebt.
 | [PRIVACY.md](PRIVACY.md) | Welke data lokaal blijft, wat alleen op jouw actie vertrekt, en hoe. |
 | [ACCESSIBILITY.md](ACCESSIBILITY.md) | Wat toegankelijk is, en — de langere helft — wat niet. |
 | [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) | Oplossingen voor veelvoorkomende problemen. |
+| [TRANSCRIPTION_SETUP.md](TRANSCRIPTION_SETUP.md) | Opname en transcriptie per platform: rechten, modellen, serverroutes en het bewijs achter elke claim. |
 | [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md) | Wat er nog niet is, in één lijst, zodat je het niet één verrassing per keer tegenkomt. |
 | [FILE_FORMAT.md](FILE_FORMAT.md) | Het Markdown/Marp-formaat op schijf — het stabiele contract. |
 

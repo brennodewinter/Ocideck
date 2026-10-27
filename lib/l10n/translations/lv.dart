@@ -1603,6 +1603,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Transcriptie instellen': 'Transkripcijas iestatīšana',
   'Schermvullend bekijken': 'Skatīt pilnekrānā',
   'vergadering': 'sapulce',
   'de vergadering': 'sapulce',
