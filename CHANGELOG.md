@@ -8,6 +8,9 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.1] — 2026-10-27
+
+
 ### Added
 
 - **Plakken zonder opmaak (`Shift+Cmd/Ctrl+V`, #2608).** In de
