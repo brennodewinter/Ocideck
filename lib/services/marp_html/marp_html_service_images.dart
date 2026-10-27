@@ -103,9 +103,7 @@ Future<String> _presentationLogoCss(
           .round();
   final horizontal = theme.logoPosition.endsWith('left') ? 'left' : 'right';
   final hInset = (size * kLogoHorizontalInsetFraction).round();
-  // De dia is 1280px breed; op die breedte reserveert de app dezelfde strook
-  // voor tekstslides. Tabel- en grafiekdia's vullen de resthoogte en hebben
-  // het hele logo-vak nodig (#2091).
+  // De dia is 1280px breed; tekst en volle panelen houden het hele logo-vak vrij.
   final reserve = logoSafeReserve(_kSlidePxWidth, theme).round();
   final occupy = logoSafeReserve(
     _kSlidePxWidth,

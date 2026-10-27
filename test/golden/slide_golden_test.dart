@@ -30,6 +30,7 @@ Future<void> _match(
   TlpLevel tlp = TlpLevel.none,
   bool watermark = false,
   bool settleImages = false,
+  bool fullFrame = false,
   int? slideNumber,
   int? slideCount,
   double slideAspect = kScreenSlideAspect,
@@ -40,6 +41,11 @@ Future<void> _match(
   // viewport die het vel werkelijk past. De standaardtests houden hun
   // bestaande strakke 1280x720-box zodat hun goldens ongewijzigd blijven.
   final loose = slideAspect != kScreenSlideAspect;
+  if (fullFrame) {
+    tester.view.physicalSize = const Size(1280, 720);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+  }
   if (loose) {
     tester.view.physicalSize = Size(1400, (1400 / slideAspect).ceilToDouble());
     tester.view.devicePixelRatio = 1.0;
@@ -75,7 +81,16 @@ Future<void> _match(
     ),
   );
   await tester.pump(const Duration(milliseconds: 50));
-  if (settleImages) await tester.pumpAndSettle();
+  if (settleImages) {
+    await tester.pumpAndSettle();
+    final images = tester.widgetList<Image>(find.byType(Image)).toList();
+    await tester.runAsync(() async {
+      for (final image in images) {
+        await precacheImage(image.image, tester.element(find.byWidget(image)));
+      }
+    });
+    await tester.pumpAndSettle();
+  }
   await expectLater(
     find.byType(SlidePreviewWidget),
     matchesGoldenFile('goldens/$name.png'),
@@ -112,6 +127,28 @@ void main() {
     );
   });
 
+  testWidgets('title details clear a bottom-left logo', (tester) async {
+    await _match(
+      tester,
+      'title_bottom_left_logo',
+      Slide.create(SlideType.title).copyWith(
+        title: 'Informatieveiligheid is chefsache',
+        subtitle: 'Cyberbeveiligingswet voor bestuurders',
+        customMarkdown: 'Gemeente en datum\nTrainer: Albert en Brenno',
+        showLogo: true,
+      ),
+      profile: const ThemeProfile(
+        logoPath: 'asset:assets/images/vigilis-logo.png',
+        logoPosition: 'bottom-left',
+        logoSize: 190,
+        titleBackgroundColor: '#FFFFFF',
+        titleTextColor: '#003399',
+      ),
+      settleImages: true,
+      fullFrame: true,
+    );
+  });
+
   testWidgets('section', (tester) async {
     await _match(
       tester,
@@ -130,6 +167,31 @@ void main() {
         title: 'Agenda',
         bullets: ['Eerste punt', '\tSubpunt', 'Tweede punt', 'Derde punt'],
       ),
+    );
+  });
+
+  testWidgets('full bullets beside an image clear the logo', (tester) async {
+    await _match(
+      tester,
+      'bullets_image_bottom_left_logo',
+      Slide.create(SlideType.bulletsImage).copyWith(
+        title: 'Leerdoelen: wat kunt u straks?',
+        bullets: [
+          'Uitleggen wat de Cyberbeveiligingswet vraagt en waarom informatiebeveiliging chefsache is',
+          'Aangeven wat u mag verwachten van de gemeentesecretaris, de CISO en uzelf',
+          'De belangrijkste soorten cyberrisico’s herkennen',
+          'Aanwijzen wat u daarna van de organisatie vraagt',
+        ],
+        imagePath: 'asset:assets/images/cat-branie.jpg',
+        showLogo: true,
+      ),
+      profile: const ThemeProfile(
+        logoPath: 'asset:assets/images/vigilis-logo.png',
+        logoPosition: 'bottom-left',
+        logoSize: 190,
+      ),
+      settleImages: true,
+      fullFrame: true,
     );
   });
 

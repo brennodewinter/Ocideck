@@ -402,10 +402,8 @@ const double kLogoHorizontalInsetFraction = 0.28;
 const double kLogoTopInsetFraction = 0.42;
 const double kLogoBottomInsetFraction = 0.12;
 
-/// Dia's waarvan de inhoud de volle 16:9-doos vult. Een gereduceerde
-/// logostrook (`size * edgeInset`) houdt alleen de spleet *achter* het logo
-/// vrij; deze types tekenen tot in het logo-vak zelf. Zij reserveren daarom
-/// het hele vak ([logoSafeReserve] met `occupancy: true`).
+/// Dia's waarvan de inhoud de volle 16:9-doos vult en dus het hele logo-vak
+/// moeten vrijhouden.
 bool logoRequiresOccupancyReserve(SlideType type) =>
     type == SlideType.table ||
     type == SlideType.chart ||
@@ -414,18 +412,14 @@ bool logoRequiresOccupancyReserve(SlideType type) =>
 
 /// Vertical space a shown logo reserves from its slide edge.
 ///
-/// When [occupancy] is true the reserve is the full logo box: size plus the
-/// edge inset the overlay uses, plus a small gap. Tables and charts need this
-/// — they fill the remaining height, so the reduced strip lets them draw
-/// through the logo.
+/// The reserve is the full logo box: size plus the edge inset the overlay uses,
+/// plus a small gap. [occupancy] is retained for callers that mark full panels.
 ///
 /// When [corner] is true and [occupancy] is false (cockpit, finding, …) the
 /// reserve is 0: the panel extends to full height and the logo sits on top in
 /// the corner (#1932). For a circular gauge that corner is empty anyway.
 ///
-/// Otherwise (text slides: bullets, freeMarkdown) the reserve is the logo's
-/// edge inset plus a small gap. Wrapping text can stop short of the corner;
-/// that is the #1932 space gain, not a claim that filled panels stay clear.
+/// Text must clear the full logo box, including on bullets and freeMarkdown.
 double logoSafeReserve(
   double w,
   ThemeProfile profile, {
@@ -444,11 +438,7 @@ double logoSafeReserve(
       ? kLogoTopInsetFraction
       : kLogoBottomInsetFraction;
   final gap = w * 0.014;
-  // Occupancy = size*(1+edgeInset)+gap, the overlay's far edge from the slide
-  // edge. The reduced strip is size*edgeInset+gap: only the inset behind the
-  // logo, which is why a table that fills availH ran through the mark (#2091).
-  if (occupancy) return size * (1 + edgeInset) + gap;
-  return size * edgeInset + gap;
+  return size * (1 + edgeInset) + gap;
 }
 
 /// Waar de logostrook aan de boven- en onderkant ruimte opeist, als `(boven,

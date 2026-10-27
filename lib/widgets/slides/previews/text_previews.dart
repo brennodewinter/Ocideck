@@ -147,8 +147,11 @@ class _TitlePreview extends StatelessWidget {
   /// the content is too tall.
   Widget _lockup(BuildContext context) {
     final pad = w * 0.08;
+    final bottomPad = slide.showLogo && profile.logoPosition == 'bottom-left'
+        ? math.max(pad, logoSafeReserve(w, profile))
+        : pad;
     return Padding(
-      padding: EdgeInsets.all(pad),
+      padding: EdgeInsets.fromLTRB(pad, pad, pad, bottomPad),
       child: Align(
         alignment: Alignment.bottomLeft,
         child: FittedBox(

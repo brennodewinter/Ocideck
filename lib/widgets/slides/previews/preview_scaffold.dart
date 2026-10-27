@@ -74,9 +74,7 @@ class _PreviewScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Text slides keep the reduced strip (#1932). Panels that fill the frame
-    // (gantt via this scaffold, and others that call occupancy themselves)
-    // reserve the whole logo box so content cannot draw through it (#2091).
+    // Text and filled panels reserve the logo box so content cannot cross it.
     final occupancy = logoRequiresOccupancyReserve(slide.type);
     final isPanel = !slideUsesRichText(slide);
     final safe = slide.showLogo
