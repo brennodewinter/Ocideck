@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart' as p;
 import 'package:ocideck/services/transcription/model_download.dart';
 import 'package:ocideck/services/transcription/model_download_io.dart';
 import 'package:ocideck/services/transcription/model_store.dart';
@@ -120,7 +121,7 @@ void main() {
     test(
       'refresh toont de kandidaat; adopt maakt er een verified install van',
       () async {
-        final source = File('${elsewhere.path}/ggml-test.bin')
+        final source = File(p.join(elsewhere.path, 'ggml-test.bin'))
           ..writeAsBytesSync(bytes);
         final c = container(downloaderServing(bytes));
         addTearDown(c.dispose);

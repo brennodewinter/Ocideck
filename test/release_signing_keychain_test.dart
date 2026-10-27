@@ -1,4 +1,4 @@
-@TestOn('vm')
+@TestOn('vm && !windows')
 library;
 
 import 'dart:io';

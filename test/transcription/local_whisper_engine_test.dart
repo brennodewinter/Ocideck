@@ -110,7 +110,7 @@ void main() {
   IoLocalWhisperEngine engine(WhisperRunner runner) => IoLocalWhisperEngine(
     store: store,
     runner: runner,
-    executable: '/usr/bin/true',
+    executable: Platform.resolvedExecutable,
     model: model,
     workDir: workDir,
   );
