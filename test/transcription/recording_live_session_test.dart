@@ -173,7 +173,8 @@ CallAudioChunk _callChunk() => CallAudioChunk(
 /// Wacht tot [condition] waar is — events lopen over echte sockets en
 /// microtasks, dus poll i.p.v. één pump.
 Future<void> until(bool Function() condition) async {
-  for (var i = 0; i < 500 && !condition(); i++) {
+  // Een belaste CI-run kan socket, mixer en WAV-schrijver meer dan 1 s kosten.
+  for (var i = 0; i < 5000 && !condition(); i++) {
     await Future<void>.delayed(const Duration(milliseconds: 2));
   }
   expect(condition(), isTrue, reason: 'voorwaarde niet bereikt');
