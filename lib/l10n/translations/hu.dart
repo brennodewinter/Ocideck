@@ -1607,6 +1607,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Schermvullend bekijken': 'Megtekintés teljes képernyőn',
   'vergadering': 'megbeszélés',
   'de vergadering': 'a megbeszélés',
   'Vergaderingsopname': 'Megbeszélés-felvétel',

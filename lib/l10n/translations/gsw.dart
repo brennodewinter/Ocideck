@@ -1608,6 +1608,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Schermvullend bekijken': 'Im Vollbild aluege',
   'vergadering': 'Sitzig',
   'de vergadering': 'd\'Sitzig',
   'Vergaderingsopname': 'Ufnahm vo de Sitzig',

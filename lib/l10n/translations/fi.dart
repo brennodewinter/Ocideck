@@ -1605,6 +1605,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Schermvullend bekijken': 'Näytä koko näytöllä',
   'vergadering': 'kokous',
   'de vergadering': 'kokous',
   'Vergaderingsopname': 'Kokoustallenne',

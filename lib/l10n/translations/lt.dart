@@ -1611,6 +1611,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Schermvullend bekijken': 'Žiūrėti visame ekrane',
   'vergadering': 'susitikimas',
   'de vergadering': 'susitikimas',
   'Vergaderingsopname': 'Susitikimo įrašas',

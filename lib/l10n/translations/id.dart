@@ -1605,6 +1605,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Schermvullend bekijken': 'Lihat layar penuh',
   'vergadering': 'rapat',
   'de vergadering': 'rapat ini',
   'Vergaderingsopname': 'Rekaman rapat',

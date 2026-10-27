@@ -1605,6 +1605,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Schermvullend bekijken': 'Vis i fuld skærm',
   'vergadering': 'møde',
   'de vergadering': 'mødet',
   'Vergaderingsopname': 'Mødeoptagelse',

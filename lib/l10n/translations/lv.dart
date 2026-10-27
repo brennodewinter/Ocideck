@@ -1603,6 +1603,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Schermvullend bekijken': 'Skatīt pilnekrānā',
   'vergadering': 'sapulce',
   'de vergadering': 'sapulce',
   'Vergaderingsopname': 'Sapulces ieraksts',

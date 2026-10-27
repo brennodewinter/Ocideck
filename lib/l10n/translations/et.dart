@@ -1598,6 +1598,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Schermvullend bekijken': 'Vaata täisekraanil',
   'vergadering': 'koosolek',
   'de vergadering': 'koosolek',
   'Vergaderingsopname': 'Koosoleku salvestus',

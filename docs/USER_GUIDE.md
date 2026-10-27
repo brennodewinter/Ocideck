@@ -1831,6 +1831,10 @@ image you can store a **caption** (source/credit line, shown on the slide) and a
 searchable **description** — in practice your tags. The search box matches file
 names and descriptions.
 
+Use the expand button on the selected image in the right preview pane to view
+it fullscreen. Scroll or use the arrow keys to browse the filtered images;
+closing the view returns to the library with the current image selected.
+
 You can also open the library **without any presentation open**, straight from
 the start screen: once you have one or more library folders configured, a
 desktop-only **Manage images** button appears there. Opened this way it runs in a

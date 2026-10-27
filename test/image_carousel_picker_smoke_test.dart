@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
@@ -118,6 +119,35 @@ void main() {
     // Three files were scanned; the grid built decodable thumbnails plus the
     // large preview, so several Image widgets are on screen.
     expect(find.byType(Image), findsWidgets);
+  });
+
+  testWidgets('fullscreen preview scrolls images and returns to the picker', (
+    tester,
+  ) async {
+    await pumpPicker(tester);
+    await tester.tap(find.byTooltip('Schermvullend bekijken'));
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.byType(Dialog), findsNWidgets(2));
+    final pageView = tester.widget<PageView>(find.byType(PageView));
+    final controller = pageView.controller!;
+    expect(controller.page, 0);
+
+    await tester.sendEventToBinding(
+      PointerScrollEvent(
+        position: tester.getCenter(find.byType(PageView)),
+        scrollDelta: const Offset(0, 120),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 250));
+    await tester.pump(const Duration(milliseconds: 250));
+    expect(controller.page, 1);
+
+    await tester.tap(find.byTooltip('Sluiten (Esc)').last);
+    await settle(tester);
+    expect(find.byType(PageView), findsNothing);
+    expect(find.byType(ImageCarouselPicker), findsOneWidget);
+    expect(find.byType(ErrorWidget), findsNothing);
   });
 
   testWidgets('toggles between grid and cover view', (tester) async {

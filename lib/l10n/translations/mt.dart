@@ -1623,6 +1623,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Schermvullend bekijken': 'Ara fuq skrin sħiħ',
   'vergadering': 'laqgħa',
   'de vergadering': 'il-laqgħa',
   'Vergaderingsopname': 'Reġistrazzjoni tal-laqgħa',

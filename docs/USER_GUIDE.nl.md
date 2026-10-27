@@ -1889,6 +1889,11 @@ afbeelding kun je een **bijschrift** (bron-/creditregel, getoond op de slide) en
 doorzoekbare **beschrijving** opslaan — in de praktijk je tags. Het zoekvak zoekt op bestands-
 namen en beschrijvingen.
 
+Gebruik de uitklapknop op de geselecteerde afbeelding rechts om haar
+schermvullend te bekijken. Scroll of gebruik de pijltjestoetsen om door de
+gefilterde afbeeldingen te bladeren; na sluiten blijft de huidige afbeelding
+geselecteerd in de bibliotheek.
+
 Je kunt de bibliotheek ook **zonder een presentatie open** openen, rechtstreeks vanuit
 het startscherm: zodra je een of meer bibliotheekmappen hebt geconfigureerd, verschijnt daar een
 alleen-desktop **Afbeeldingen beheren**-knop. Zo geopend draait hij in een
