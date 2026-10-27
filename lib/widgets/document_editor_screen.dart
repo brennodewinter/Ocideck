@@ -73,6 +73,7 @@ import '../utils/table_row_permutation.dart';
 import 'keyword_chips_editor.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
+import '../utils/markdown_paste_cleanup.dart';
 import '../utils/visual_paste_delta.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
@@ -1098,7 +1099,3 @@ TlpLevel _documentTlp(WidgetRef ref) => ref.watch(
 /// de pagina-einden erin. Een eigen tekenaar voor pagina's zou precies de
 /// afwijking opleveren die §2.1 verbiedt.
 enum _DocViewMode { visual, source, pages, fill }
-
-class _DocSmartPasteIntent extends Intent {
-  const _DocSmartPasteIntent();
-}

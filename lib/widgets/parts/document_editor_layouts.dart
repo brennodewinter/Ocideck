@@ -79,6 +79,12 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   /// zit op haar klasseplafond.
   Future<bool> _smartPaste() => _smartPasteDocument(this);
 
+  /// Plakken zónder opmaak (Shift+Ctrl/Cmd+V): alleen de platte-tekstvariant
+  /// van het klembord — geen afbeeldingsimport, geen tabelherkenning, geen
+  /// HTML→Markdown. Zelfde atomaire route als [_smartPaste], anders plakt de
+  /// Shift-variant anders dan Cmd/Ctrl+V beweert.
+  Future<bool> _plainPaste() => _smartPasteDocument(this, plainOnly: true);
+
   /// Zet [text] op de cursor in de bron, het bestaande pad voor platte tekst.
   /// In de visuele stand landt geplakte tekst op de Quill-caret — het blokpad
   /// van [_insertBlock] zoekt bewust het einde van de regel, wat voor een
@@ -282,6 +288,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     controller: _controller,
     focusNode: _editorFocus,
     onSmartPaste: _smartPaste,
+    onPlainPaste: _plainPaste,
   );
 
   Widget _preview(
@@ -313,7 +320,10 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
 ///
 /// Top-level omdat de staat op zijn klasseplafond zit; private leden van
 /// [_DocumentEditorScreenState] zijn binnen dezelfde library bereikbaar.
-Future<bool> _smartPasteDocument(_DocumentEditorScreenState s) async {
+Future<bool> _smartPasteDocument(
+  _DocumentEditorScreenState s, {
+  bool plainOnly = false,
+}) async {
   final mode = s._viewMode;
   final sourceController = s._controller;
   final sourceText = sourceController.text;
@@ -357,48 +367,68 @@ Future<bool> _smartPasteDocument(_DocumentEditorScreenState s) async {
     return true;
   }
 
-  final state = s.ref.read(documentProvider);
-  final projectPath = state.filePath == null
-      ? null
-      : p.dirname(state.filePath!);
-  final imageService = s.ref.read(imageServiceProvider);
-  final outcome = await imageService.pasteImageDetailed(
-    projectPath: projectPath,
-  );
-  if (!s.mounted) {
-    unawaited(visualWatch?.cancel() ?? Future<void>.value());
-    return false;
-  }
-  if (outcome.path != null) {
-    if (bailIfStale()) {
+  if (!plainOnly) {
+    final state = s.ref.read(documentProvider);
+    final projectPath = state.filePath == null
+        ? null
+        : p.dirname(state.filePath!);
+    final imageService = s.ref.read(imageServiceProvider);
+    final outcome = await imageService.pasteImageDetailed(
+      projectPath: projectPath,
+    );
+    if (!s.mounted) {
+      unawaited(visualWatch?.cancel() ?? Future<void>.value());
+      return false;
+    }
+    if (outcome.path != null) {
+      if (bailIfStale()) {
+        unawaited(visualWatch?.cancel() ?? Future<void>.value());
+        return true;
+      }
+      unawaited(visualWatch?.cancel() ?? Future<void>.value());
+      s._insertBlock(
+        '![](${outcome.path})',
+        at: mode == _DocViewMode.visual ? visualCaret : sourceCaret,
+      );
+      if (s.mounted) {
+        ScaffoldMessenger.of(s.context).showSnackBar(
+          SnackBar(content: Text(s.context.l10n.d('Afbeelding geplakt'))),
+        );
+      }
+      return true;
+    }
+    // Geen afbeelding: stil als "geen klembordbeeld", anders de echte fout.
+    if (outcome.failure != null &&
+        outcome.failure != ImageImportFailure.noClipboardImage &&
+        s.mounted) {
+      reportImageImportFailure(s.context, outcome.failure);
       unawaited(visualWatch?.cancel() ?? Future<void>.value());
       return true;
     }
-    unawaited(visualWatch?.cancel() ?? Future<void>.value());
-    s._insertBlock(
-      '![](${outcome.path})',
-      at: mode == _DocViewMode.visual ? visualCaret : sourceCaret,
-    );
-    if (s.mounted) {
-      ScaffoldMessenger.of(s.context).showSnackBar(
-        SnackBar(content: Text(s.context.l10n.d('Afbeelding geplakt'))),
-      );
-    }
-    return true;
-  }
-  // Geen afbeelding: stil als "geen klembordbeeld", anders de echte fout.
-  if (outcome.failure != null &&
-      outcome.failure != ImageImportFailure.noClipboardImage &&
-      s.mounted) {
-    reportImageImportFailure(s.context, outcome.failure);
-    unawaited(visualWatch?.cancel() ?? Future<void>.value());
-    return true;
   }
 
   final data = await Clipboard.getData(Clipboard.kTextPlain);
-  final html = await readClipboardHtml();
+  final html = plainOnly ? null : await readClipboardHtml();
   unawaited(visualWatch?.cancel() ?? Future<void>.value());
   if (!s.mounted) return false;
+
+  // Shift+Ctrl/Cmd+V: bewust géén tabel- of HTML-route, ook niet als de
+  // platte tekst er als TSV uitziet — de gebruiker vroeg letterlijk wat er
+  // op `text/plain` staat.
+  if (plainOnly) {
+    final raw = data?.text;
+    if (raw == null || raw.isEmpty) return false;
+    final text = sanitizeMarkdownPaste(raw);
+    if (text.isEmpty) return false;
+    if (bailIfStale()) return true;
+    s._insertPastedMarkdown(
+      text,
+      visualCaret: visualCaret,
+      sourceCaret: sourceCaret,
+    );
+    return true;
+  }
+
   final resolved = resolveClipboardMarkdown(plain: data?.text, html: html);
   if (resolved == null) return false;
 
@@ -754,11 +784,13 @@ Widget _documentSourceField(
   required TextEditingController controller,
   required FocusNode focusNode,
   required Future<bool> Function() onSmartPaste,
+  required Future<bool> Function() onPlainPaste,
 }) => _DocumentSourceField(
   theme: theme,
   controller: controller,
   focusNode: focusNode,
   onSmartPaste: onSmartPaste,
+  onPlainPaste: onPlainPaste,
 );
 
 /// Pagina-modus: het document op echte vellen, met de paginamaat, de marges en

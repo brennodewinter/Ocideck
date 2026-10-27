@@ -709,6 +709,10 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
             _NotesSmartPasteIntent(),
         SingleActivator(LogicalKeyboardKey.keyV, meta: true):
             _NotesSmartPasteIntent(),
+        SingleActivator(LogicalKeyboardKey.keyV, control: true, shift: true):
+            _NotesPlainPasteIntent(),
+        SingleActivator(LogicalKeyboardKey.keyV, meta: true, shift: true):
+            _NotesPlainPasteIntent(),
       },
       child: Actions(
         actions: {
@@ -718,14 +722,24 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
               return null;
             },
           ),
+          _NotesPlainPasteIntent: CallbackAction<_NotesPlainPasteIntent>(
+            onInvoke: (_) {
+              unawaited(_pasteMarkdownSmart(plainOnly: true));
+              return null;
+            },
+          ),
         },
         child: field,
       ),
     );
   }
 
-  Future<void> _pasteMarkdownSmart() async {
-    if (widget.tryConsumePaste != null && await widget.tryConsumePaste!()) {
+  /// [plainOnly] is de Shift+Ctrl/Cmd+V-variant: altijd de platte-tekst-
+  /// variant, nooit de slimme plak van de eigenaar.
+  Future<void> _pasteMarkdownSmart({bool plainOnly = false}) async {
+    if (!plainOnly &&
+        widget.tryConsumePaste != null &&
+        await widget.tryConsumePaste!()) {
       return;
     }
     final data = await Clipboard.getData(Clipboard.kTextPlain);
@@ -897,4 +911,8 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
 
 class _NotesSmartPasteIntent extends Intent {
   const _NotesSmartPasteIntent();
+}
+
+class _NotesPlainPasteIntent extends Intent {
+  const _NotesPlainPasteIntent();
 }

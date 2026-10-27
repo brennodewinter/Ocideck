@@ -5478,6 +5478,12 @@ stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
   niets bruikbaars, dan geldt de platte-tekstvariant, opgeschoond van de
   gebruikelijke sitereis. Stijlen, kleuren en klassen uit Word gaan niet mee —
   alleen de documentstructuur. *(Toegevoegd 2026-08-20, #1595.)*
+- **Plakken zonder opmaak is `Shift` + `Cmd/Ctrl` + `V`.** Dezelfde
+  plakpositie, maar alleen de `text/plain`-variant van het klembord landt:
+  geen afbeeldingsimport, geen tabelherkenning, geen HTML-omzetting, en in
+  Visueel worden de geplakte letters niet als Markdown gelezen. Dat is de
+  "Plakken en stijl aanpassen"-toets van macOS. *(Toegevoegd 2026-10-27,
+  #2608.)*
 - **Pagina's** legt het document op echte vellen: de
   [paginamaat en de marges](#paginamaat-marges-afloop-en-schrijfbreedte) die je
   hebt gekozen, en — als het document een stijl draagt — de herhalende kop- en

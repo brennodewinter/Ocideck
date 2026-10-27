@@ -42,11 +42,16 @@ class _DocumentSourceField extends StatefulWidget {
   final FocusNode focusNode;
   final Future<bool> Function() onSmartPaste;
 
+  /// Shift+Ctrl/Cmd+V: alleen de platte-tekstvariant plakken, zonder de
+  /// afbeeldings-, tabel- en HTML-route van [onSmartPaste].
+  final Future<bool> Function() onPlainPaste;
+
   const _DocumentSourceField({
     required this.theme,
     required this.controller,
     required this.focusNode,
     required this.onSmartPaste,
+    required this.onPlainPaste,
   });
 
   @override
@@ -99,12 +104,22 @@ class _DocumentSourceFieldState extends State<_DocumentSourceField> {
             _DocSmartPasteIntent(),
         SingleActivator(LogicalKeyboardKey.keyV, meta: true):
             _DocSmartPasteIntent(),
+        SingleActivator(LogicalKeyboardKey.keyV, control: true, shift: true):
+            _DocPlainPasteIntent(),
+        SingleActivator(LogicalKeyboardKey.keyV, meta: true, shift: true):
+            _DocPlainPasteIntent(),
       },
       child: Actions(
         actions: {
           _DocSmartPasteIntent: CallbackAction<_DocSmartPasteIntent>(
             onInvoke: (_) {
               unawaited(widget.onSmartPaste());
+              return null;
+            },
+          ),
+          _DocPlainPasteIntent: CallbackAction<_DocPlainPasteIntent>(
+            onInvoke: (_) {
+              unawaited(widget.onPlainPaste());
               return null;
             },
           ),
@@ -158,6 +173,14 @@ class _DocumentSourceFieldState extends State<_DocumentSourceField> {
       ),
     );
   }
+}
+
+class _DocSmartPasteIntent extends Intent {
+  const _DocSmartPasteIntent();
+}
+
+class _DocPlainPasteIntent extends Intent {
+  const _DocPlainPasteIntent();
 }
 
 /// De nummerkolom zelf. `IgnorePointer` in de ouder houdt de bytes buiten

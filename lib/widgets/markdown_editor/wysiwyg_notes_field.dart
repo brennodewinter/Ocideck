@@ -388,7 +388,10 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
     );
   }
 
-  Future<void> _pasteSanitized() async {
+  /// [plainOnly] is de Shift+Ctrl/Cmd+V-variant: alleen de platte-tekst-
+  /// variant van het klembord, nooit de slimme plak van de eigenaar
+  /// (afbeelding, tabel, HTML→Markdown).
+  Future<void> _pasteSanitized({bool plainOnly = false}) async {
     // Plakken is één atomaire handeling op de positie van het moment van
     // de opdracht: de caret én de revisie liggen vóór de eerste await vast.
     // Verandert de inhoud tijdens de klembordlezing, dan gokken we niet
@@ -400,7 +403,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
       (_) => changed = true,
     );
     var consumed = false;
-    if (widget.tryConsumePaste != null) {
+    if (!plainOnly && widget.tryConsumePaste != null) {
       consumed = await widget.tryConsumePaste!();
     }
     final data = consumed
@@ -458,6 +461,10 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               _SanitizedPasteIntent(),
           SingleActivator(LogicalKeyboardKey.keyV, meta: true):
               _SanitizedPasteIntent(),
+          SingleActivator(LogicalKeyboardKey.keyV, control: true, shift: true):
+              _PlainPasteIntent(),
+          SingleActivator(LogicalKeyboardKey.keyV, meta: true, shift: true):
+              _PlainPasteIntent(),
           SingleActivator(LogicalKeyboardKey.keyC, control: true):
               _CopyMarkdownIntent(),
           SingleActivator(LogicalKeyboardKey.keyC, meta: true):
@@ -472,6 +479,12 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
             _SanitizedPasteIntent: CallbackAction<_SanitizedPasteIntent>(
               onInvoke: (_) {
                 _pasteSanitized();
+                return null;
+              },
+            ),
+            _PlainPasteIntent: CallbackAction<_PlainPasteIntent>(
+              onInvoke: (_) {
+                _pasteSanitized(plainOnly: true);
                 return null;
               },
             ),
@@ -578,6 +591,10 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
 
 class _SanitizedPasteIntent extends Intent {
   const _SanitizedPasteIntent();
+}
+
+class _PlainPasteIntent extends Intent {
+  const _PlainPasteIntent();
 }
 
 class _CopyMarkdownIntent extends Intent {
