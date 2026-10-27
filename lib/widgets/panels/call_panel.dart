@@ -30,16 +30,52 @@ import '../dialogs/meeting_preflight_dialog.dart';
 import '../dialogs/screen_share_picker.dart';
 import 'call_recording_controls.dart';
 
-/// The call rail for the workspace row: a divider plus the panel while the module
-/// is revealed, otherwise nothing. Kept out of the shell so
-/// `app_shell_main_layout.dart` stays under its size ceiling — the shell spreads
-/// the result into its row (mirrors `collabChatRail`).
+/// Breedte die de callrail in de workspacerij inneemt (320 paneel + 1
+/// divider), of 0 wanneer er geen sessie is. De layout trekt dit van de
+/// beschikbare breedte af vóórdat hij sliderail en editor verdeelt — zonder
+/// die aftrek kreeg de editor bij een actieve call in een smaller venster
+/// minder dan zijn minimum en liep zijn inhoud over (#2603).
+double callRailWidth(WidgetRef ref) =>
+    ref.watch(meetingSessionProvider) != null ? 321 : 0;
+
+/// The call rail for the workspace row: a divider plus the panel while a
+/// call exists (live or just ended — a call is never invisible), otherwise
+/// nothing. Kept out of the shell so `app_shell_main_layout.dart` stays
+/// under its size ceiling — the shell spreads the result into its row
+/// (mirrors `collabChatRail`). De join-ingang zit hier níet meer: zonder
+/// call bestaat de rail niet, en de appbalkknop opent dezelfde
+/// preflight/join-flow (#2603) — de module vreet geen vaste 320px meer
+/// voor een functie die je maar af en toe gebruikt.
 List<Widget> callRail(WidgetRef ref) {
-  if (!ref.watch(videoCallsRevealProvider)) return const [];
+  if (callRailWidth(ref) == 0) return const [];
   return const [
     VerticalDivider(width: 1),
     SizedBox(width: 320, child: CallPanel()),
   ];
+}
+
+/// De vergadering-ingang als appbalkknop — de rail hierboven verschijnt
+/// pas zodra er daadwerkelijk een sessie loopt (#2603). Zelfde reveal-
+/// regel als voorheen: module aan óf een call live, zodat een actieve
+/// vergadering nooit onbereikbaar is. De knop opent dezelfde
+/// preflight/join-flow als de rail voorheen deed.
+class MeetingJoinButton extends ConsumerWidget {
+  const MeetingJoinButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (!ref.watch(videoCallsRevealProvider)) {
+      return const SizedBox.shrink();
+    }
+    return IconButton(
+      tooltip: context.l10n.d('Deelnemen aan een vergadering…'),
+      icon: const Icon(Icons.video_camera_front_outlined, size: 18),
+      onPressed: () => showDialog<void>(
+        context: context,
+        builder: (_) => const MeetingPreflightDialog(),
+      ),
+    );
+  }
 }
 
 /// The call panel. Renders the active [MeetingSession] (participants + controls),

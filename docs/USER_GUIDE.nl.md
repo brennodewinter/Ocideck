@@ -6658,8 +6658,9 @@ De module staat uit tot je **Videovergaderingen** aanzet onder
 jij brengt de Jitsi-server, en er wordt niets benaderd voordat je daarom
 vraagt.
 
-Plak een vergaderlink op de modulekaart, of gebruik **Deelnemen aan een
-vergadering…** in de call-rail. De link herkennen gebeurt alleen op je
+Plak een vergaderlink op de modulekaart, of gebruik de cameraknop in de
+bovenbalk (**Deelnemen aan een vergadering…**) — de call-rail verschijnt pas
+zodra er een gesprek loopt. De link herkennen gebeurt alleen op je
 eigen apparaat. De controleknop is het eerste netwerkcontact en vraagt
 het eerst: hij haalt de configuratie van de server op en rapporteert wat
 die server biedt — of deelnemen kan, welke mogelijkheden er zijn en waar

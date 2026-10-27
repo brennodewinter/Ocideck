@@ -335,6 +335,17 @@ All notable changes to OciDeck are documented in this file.
   document met `theme:` sprong een interne koplink een frontmatter-lengte te
   ver en kon de railmarkering wegvallen. Navigatie, actieve kop en
   editorselectie delen nu één coördinatenstelsel.
+- **Geen vaste vergaderkolom meer, en geen layoutfout bij een smal venster
+  (#2603).** De callrail stond er permanent zodra de videovergadering-module
+  aan stond — 320px werkruimte voor een functie die je maar af en toe gebruikt.
+  Deelnemen is nu een knop in de bovenbalk; de rail verschijnt pas zodra er een
+  gesprek loopt en blijft dan ook zichtbaar — een call is nooit onzichtbaar.
+  Diezelfde rail was óók de reden dat de preview-sectie bij een smaller
+  venster of een breder gesleepte sliderail een opmaakfout gaf: de verdeling
+  tussen sliderail en editor telde de vaste zijrails niet mee. Die aftrek is
+  nu gecorrigeerd, en past de rij nergens meer dan scrollt hij horizontaal in
+  plaats van de editor onder zijn minimum te drukken; de statusbalk en de
+  Opmaak-knop krimpen op hun beurt mee in plaats van over te lopen.
 ### Added
 
 - **Een geïmporteerd document heet meteen naar zijn bron.** Bij het importeren

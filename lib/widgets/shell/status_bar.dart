@@ -103,15 +103,17 @@ class _DeckStatusBar extends StatelessWidget {
                   ],
                   const _GitQueueBadge(),
                   const _StatusDivider(),
-                  _StatusItem(
-                    icon: Icons.slideshow_outlined,
-                    label: skipped == 0
-                        ? '${deck.slides.length} ${l10n.t('slides')}'
-                        : '${deck.slides.length} ${l10n.t('slides')} · $skipped ${l10n.t('skipped')}',
-                    tooltip: skipped == 0
-                        ? l10n.t('allSlidesIncluded')
-                        : '$skipped ${l10n.t('skippedSlidesExcluded')}',
-                    color: skipped == 0 ? null : AppTheme.goldDark,
+                  Flexible(
+                    child: _StatusItem(
+                      icon: Icons.slideshow_outlined,
+                      label: skipped == 0
+                          ? '${deck.slides.length} ${l10n.t('slides')}'
+                          : '${deck.slides.length} ${l10n.t('slides')} · $skipped ${l10n.t('skipped')}',
+                      tooltip: skipped == 0
+                          ? l10n.t('allSlidesIncluded')
+                          : '$skipped ${l10n.t('skippedSlidesExcluded')}',
+                      color: skipped == 0 ? null : AppTheme.goldDark,
+                    ),
                   ),
                   const _StatusDivider(),
                   Flexible(
@@ -139,13 +141,20 @@ class _DeckStatusBar extends StatelessWidget {
                     const _StatusDivider(),
                     _ProvenanceBadge(deck),
                   ],
+                  // De exportbestemming staat óók in de flexibele groep:
+                  // vast rechts kon hij tot 231px innemen en de balk bij
+                  // een smal venster doen overlopen (#2603). Visueel staat
+                  // hij op dezelfde plek — laatste item vóór de scheiding.
+                  const _StatusDivider(),
+                  Flexible(
+                    child: _StatusItem(
+                      icon: Icons.folder_outlined,
+                      label: exportLabel,
+                      tooltip: exportDirectory ?? l10n.t('exportsNextToDeck'),
+                    ),
+                  ),
                 ],
               ),
-            ),
-            _StatusItem(
-              icon: Icons.folder_outlined,
-              label: exportLabel,
-              tooltip: exportDirectory ?? l10n.t('exportsNextToDeck'),
             ),
             const _StatusDivider(),
             _ExportReadinessChip(

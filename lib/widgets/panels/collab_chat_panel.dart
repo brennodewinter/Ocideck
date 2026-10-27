@@ -13,14 +13,21 @@ import '../../state/collab_session_provider.dart';
 import '../../theme/app_theme.dart';
 import 'slide_presence_dots.dart' show SlidePresenceDots;
 
+/// Breedte die de chatrail in de workspacerij inneemt (300 paneel + 1
+/// divider), of 0 wanneer de rail niet zichtbaar is. De layout trekt dit
+/// van de beschikbare breedte af zodat de editor zijn minimum houdt (#2603).
+double collabChatRailWidth(WidgetRef ref) {
+  final session = ref.watch(collabSessionProvider);
+  final open = ref.watch(collabChatOpenProvider) && session.isActive;
+  return open ? 301 : 0;
+}
+
 /// The chat rail for the workspace row: a divider plus the panel while a
 /// session runs and the user has it open, otherwise nothing. Lives here rather
 /// than inline in the shell so `app_shell_main_layout.dart` stays under its size
 /// ceiling — the shell just spreads the result into its row.
 List<Widget> collabChatRail(WidgetRef ref) {
-  final session = ref.watch(collabSessionProvider);
-  final open = ref.watch(collabChatOpenProvider) && session.isActive;
-  if (!open) return const [];
+  if (collabChatRailWidth(ref) == 0) return const [];
   return const [
     VerticalDivider(width: 1),
     SizedBox(width: 300, child: CollabChatPanel()),

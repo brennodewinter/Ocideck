@@ -437,6 +437,13 @@ const Set<String> uncoveredBaseline = {
   'lib/widgets/collab_verify_banner.dart',
   'lib/widgets/panels/collab_chat_panel.dart',
   'lib/widgets/panels/slide_presence_dots.dart',
+  // OS-DRAG ONLY (#2603): `shell_overlays.dart` bevat sinds de verhuizing van
+  // `_ResizableDivider` naar `workspace_body.dart` alleen nog `_DropOverlay`.
+  // Die bestaat uitsluitend terwijl `_dragging` aan staat — gezet door de
+  // hover-callbacks van `DropTarget` op een echte OS-sleep, niet te drijven
+  // in een headless widgettest — en is private in de app_shell-library, dus
+  // ook niet los te mounten. Er zit geen beslislogica in: alleen tekenen.
+  'lib/widgets/shell/shell_overlays.dart',
 };
 
 /// The per-file coverage floor: a lib/ file below this fraction of executed

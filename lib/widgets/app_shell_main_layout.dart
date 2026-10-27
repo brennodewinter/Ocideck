@@ -11,11 +11,10 @@ class _MainLayout extends ConsumerStatefulWidget {
 }
 
 class _MainLayoutState extends ConsumerState<_MainLayout> {
-  static const _minSlideRailWidth = 210.0;
-  static const _defaultSlideRailWidth = 320.0;
-  static const _minEditorWidth = 420.0;
-
-  double _slideRailWidth = _defaultSlideRailWidth;
+  // De breedte-math zelf zit in WorkspaceBody (shell/workspace_body.dart):
+  // hier blijft alleen de actuele railbreedte, zodat een handmatige resize
+  // een rebuild overleeft.
+  double _slideRailWidth = defaultSlideRailWidth;
 
   /// De menubalk-doorgeefluik, in [initState] opgehaald zodat [dispose] hem nog
   /// kan leegmaken — `ref` mag daar niet meer.
@@ -125,127 +124,18 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             remoteOrigin: deckState.remoteOrigin,
             onJumpToFindings: () => _jumpToFirstFinding(quality),
           ),
-          body: Builder(
-            builder: (ctx) {
-              if (deckState.error != null) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  showActionSnackBar(
-                    ScaffoldMessenger.of(ctx),
-                    deckState.error!,
-                    ctx.l10n.d('OK'),
-                    () => ref.read(deckProvider.notifier).clearError(),
-                    duration: const Duration(seconds: 10),
-                    backgroundColor: Colors.red[700],
-                    actionTextColor: Colors.white,
-                  );
-                  ref.read(deckProvider.notifier).clearError();
-                });
-              }
-
-              // The available width comes from MediaQuery, NOT a
-              // LayoutBuilder: a LayoutBuilder rebuilds this subtree during
-              // the layout phase, and when the slide list's keyed
-              // ReorderableListView items get reparented in that pass their
-              // overlay children are activated outside an active layout —
-              // "A _RenderLayoutBuilder was mutated in performLayout". The
-              // body row spans the window, so the window width is equivalent.
-              final bodyWidth = MediaQuery.sizeOf(ctx).width;
-              // Op smal web kan het venster onder rail-plus-editor komen; de
-              // rail valt dan weg (#1881) — anders gooit clamp ArgumentError.
-              final showRail =
-                  bodyWidth >= _minSlideRailWidth + _minEditorWidth;
-              final maxRailWidth = showRail
-                  ? (bodyWidth - _minEditorWidth)
-                        .clamp(_minSlideRailWidth, bodyWidth)
-                        .toDouble()
-                  : 0.0;
-              final railWidth = showRail
-                  ? _slideRailWidth
-                        .clamp(_minSlideRailWidth, maxRailWidth)
-                        .toDouble()
-                  : 0.0;
-              if (railWidth != _slideRailWidth) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  if (mounted) setState(() => _slideRailWidth = railWidth);
-                });
-              }
-
-              // Chat stays beside the editor during Matrix (§6), so editing
-              // continues; `collabChatRail` is empty otherwise.
-              final workspace = Row(
-                children: [
-                  if (showRail) ...[
-                    SizedBox(
-                      width: railWidth,
-                      child: SlideListPanel(
-                        railWidth: railWidth,
-                        onPresentFromHere: (i) =>
-                            _presentFromSlide(context, ref, i),
-                        onOpenOverview: _openFullDeckPreview,
-                      ),
-                    ),
-                    _ResizableDivider(
-                      onDrag: (delta) {
-                        setState(() {
-                          _slideRailWidth = (_slideRailWidth + delta)
-                              .clamp(_minSlideRailWidth, maxRailWidth)
-                              .toDouble();
-                        });
-                      },
-                    ),
-                  ],
-                  const Expanded(child: EditorPanel()),
-                  ...collabChatRail(ref),
-                  ...callRail(ref),
-                ],
-              );
-              // Banners stack above the workspace: de opname-indicator (alleen
-              // zichtbaar tijdens een sessie, maar dan boven élke tab), de
-              // collab verification prompt (self-hiding — see
-              // CollabVerifyBanner) en de read-only finalized lock.
-              return Column(
-                children: [
-                  const CallRecordingBanner(),
-                  const RecordingIndicator(),
-                  const CollabVerifyBanner(),
-                  if (deck.finalized) _finalizedBanner(context, l10n),
-                  Expanded(child: workspace),
-                ],
-              );
+          // De workspacerij plus de banners erboven zitten in WorkspaceBody
+          // (#2603): de smalle-breedte-math staat daar naast de rij die hij
+          // maat geeft. `mounted` omheen de terugschrijving omdat de clamp
+          // post-frame kan landen terwijl dit tabblad al weg is.
+          body: WorkspaceBody(
+            slideRailWidth: _slideRailWidth,
+            onSlideRailResize: (w) {
+              if (mounted) setState(() => _slideRailWidth = w);
             },
+            onPresentFromSlide: (i) => _presentFromSlide(context, ref, i),
+            onOpenOverview: _openFullDeckPreview,
           ),
-        ),
-      ),
-    );
-  }
-
-  /// Read-only-banner voor een afgerond & verzegeld deck (§8 A1). Slank, boven
-  /// de werkruimte; bekijken/exporteren blijft mogelijk, bewerken niet.
-  Widget _finalizedBanner(BuildContext context, AppLocalizations l10n) {
-    final theme = Theme.of(context);
-    return Material(
-      color: AppTheme.amber600.withValues(alpha: 0.14),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(color: theme.colorScheme.outlineVariant),
-          ),
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.lock_outline, size: 16, color: AppTheme.amber600),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                l10n.d(
-                  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.',
-                ),
-                style: const TextStyle(fontSize: 12.5),
-              ),
-            ),
-          ],
         ),
       ),
     );
@@ -304,31 +194,50 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     ExportDecision classificationDecision,
   ) {
     return AppBar(
-      title: Row(
-        children: [
-          Flexible(child: Text(deck.title, overflow: TextOverflow.ellipsis)),
-          if (deckState.isDirty) ...[
-            const SizedBox(width: 6),
-            Container(
-              width: 6,
-              height: 6,
-              decoration: const BoxDecoration(
-                color: Colors.orangeAccent,
-                shape: BoxShape.circle,
+      // De titelbalk wordt gemeten: onder ~240px restbreedte valt de Opmaak-
+      // knop terug op zijn icoon — zonder dat liep de rij over in een smal
+      // venster (#2603). De LayoutBuilder kijkt naar de echte restbreedte,
+      // niet naar het venster: de actieknoppen rechts kunnen veranderen.
+      title: LayoutBuilder(
+        builder: (context, constraints) => Row(
+          children: [
+            Flexible(child: Text(deck.title, overflow: TextOverflow.ellipsis)),
+            if (deckState.isDirty) ...[
+              const SizedBox(width: 6),
+              Container(
+                width: 6,
+                height: 6,
+                decoration: const BoxDecoration(
+                  color: Colors.orangeAccent,
+                  shape: BoxShape.circle,
+                ),
               ),
+            ],
+            const SizedBox(width: 16),
+            _TlpChip(
+              tlp: deck.tlp,
+              warnUnset:
+                  !classificationDecision.allowed && deck.tlp == TlpLevel.none,
+              onSelected: (level) =>
+                  unawaited(applyPresentationTlp(context, ref, level)),
             ),
+            const SizedBox(width: 6),
+            if (constraints.maxWidth < 240)
+              IconButton(
+                tooltip: l10n.d('Presentatie-eigenschappen'),
+                icon: Icon(Icons.settings, size: 16, color: _onAppBar(context)),
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints.tightFor(
+                  width: 28,
+                  height: 28,
+                ),
+                onPressed: _openProperties,
+              )
+            else
+              _PresentationPropertiesButton(onPressed: _openProperties),
           ],
-          const SizedBox(width: 16),
-          _TlpChip(
-            tlp: deck.tlp,
-            warnUnset:
-                !classificationDecision.allowed && deck.tlp == TlpLevel.none,
-            onSelected: (level) =>
-                unawaited(applyPresentationTlp(context, ref, level)),
-          ),
-          const SizedBox(width: 6),
-          _PresentationPropertiesButton(onPressed: _openProperties),
-        ],
+        ),
       ),
       actions: _appBarActions(deckState, editor, l10n, isMarkdownMode),
     );
@@ -386,6 +295,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       ),
       const _ActionsDivider(),
       // ── Overig (minder vaak gebruikt) ───────────────────────────
+      // De vergadering-ingang is een knop, geen permanent paneel: de
+      // callrail verschijnt pas zodra er daadwerkelijk een sessie is
+      // (#2603). MeetingJoinButton verbergt zichzelf als de module uit
+      // staat én er geen call live is.
+      const MeetingJoinButton(),
       PopupMenuButton<String>(
         tooltip: l10n.t('more'),
         icon: const Icon(Icons.more_vert, size: 20),
