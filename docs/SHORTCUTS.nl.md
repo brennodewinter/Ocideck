@@ -18,6 +18,7 @@
 | `Ctrl/Cmd + F` | Zoeken (presentatie: dialoogvenster in visuele modus, balk in de editor in markdown-modus; document: balk in de editor, ongeacht waar het tabblad focus heeft) |
 | `Ctrl/Cmd + H` | Zoeken en vervangen (presentatie: dialoogvenster in visuele modus, balk in de editor in markdown-modus; document: balk in de editor, ongeacht waar het tabblad focus heeft) |
 | `Ctrl/Cmd + V` (in een tabelcel) | Plak een selectie uit een spreadsheet/CSV/markdown als tabel (ook `Shift + Insert`) |
+| `Ctrl/Cmd + Shift + V` (in een document) | Plak zonder opmaak: alleen de platte-tekstvariant van het klembord, geen afbeelding-, tabel- of HTML-omzetting |
 | `Ctrl/Cmd + C` (in een tabelcel, zonder selectie) | Kopieer het hele raster als TSV |
 | `Tab` / `Shift + Tab` (in een tabelcel) | Volgende / vorige cel; `Tab` op de laatste cel maakt een rij bij |
 | `Enter` / `Shift + Enter` of `Cmd + Enter` (in een tabelcel) | Cel eronder (onderaan groeit de tabel) / regeleinde in de cel |

@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Plakken zonder opmaak (`Shift+Cmd/Ctrl+V`, #2608).** In de
+  documenteditor — Visueel én Bron — en overal waar `Cmd/Ctrl+V` de slimme
+  plak afvangt, plakt de Shift-variant nu alleen de `text/plain`-variant
+  van het klembord: geen afbeeldingsimport, geen tabelherkenning uit een
+  spreadsheetselectie, geen HTML→Markdown-omzetting, en in Visueel geen
+  Markdown-lezing van de geplakte letters. Dat is de
+  "Plakken en stijl aanpassen"-toets die macOS kent en die er miste.
+
 - **Whisper-model van schijf adopteren (#2601).** Heb je een
   `ggml-*.bin` uit de modelcatalogus al ergens op schijf staan — een
   handmatige download, een whisper.cpp-checkout, de huggingface-cache of
