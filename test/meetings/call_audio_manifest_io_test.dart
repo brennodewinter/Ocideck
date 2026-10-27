@@ -11,9 +11,11 @@ import 'package:path/path.dart' as p;
 
 void main() {
   late Directory dir;
+  late String wavPath;
 
   setUp(() async {
     dir = await Directory.systemTemp.createTemp('call_sources_test_');
+    wavPath = p.join(dir.path, 'recording.wav');
   });
 
   tearDown(() async {
@@ -25,16 +27,16 @@ void main() {
   }
 
   test('geen bestand, stuk JSON of vreemde vorm leveren null', () {
-    expect(readCallSources(dir.path), isNull);
+    expect(readCallSources(wavPath), isNull);
 
     write('not json{');
-    expect(readCallSources(dir.path), isNull);
+    expect(readCallSources(wavPath), isNull);
 
     write(jsonEncode(<String>['sources']));
-    expect(readCallSources(dir.path), isNull);
+    expect(readCallSources(wavPath), isNull);
 
     write(jsonEncode({'version': 2, 'sources': <Object?>[]}));
-    expect(readCallSources(dir.path), isNull);
+    expect(readCallSources(wavPath), isNull);
   });
 
   test('een v1-manifest van de sessie komt terug', () {
@@ -45,6 +47,6 @@ void main() {
       ],
     };
     write(jsonEncode(manifest));
-    expect(readCallSources(dir.path), manifest);
+    expect(readCallSources(wavPath), manifest);
   });
 }

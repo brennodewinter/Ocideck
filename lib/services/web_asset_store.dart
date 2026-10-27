@@ -207,6 +207,18 @@ class WebAssetStore {
   /// De oorspronkelijke bestandsnaam achter een `mem:`-pad.
   static String? nameFor(String path) => _names[path];
 
+  /// Het `mem:`-pad van het asset met precies deze naam — de omgekeerde
+  /// kant van [nameFor], voor sidecars die hun naam aan hun bron ontlenen
+  /// (#2530: `sources.json` heet `<wav-sleutel>.sources.json`). Lineaire
+  /// scan; namen hoeven niet uniek te zijn maar deze aanroepers zorgen
+  /// daarvoor zelf.
+  static String? pathForName(String name) {
+    for (final entry in _names.entries) {
+      if (entry.value == name) return entry.key;
+    }
+    return null;
+  }
+
   /// Alles wissen — alleen voor tests.
   static void clear() {
     _bytes.clear();

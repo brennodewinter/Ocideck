@@ -24,9 +24,7 @@ Future<void> showRecordingFinishedDialog(
   final l10n = context.l10n;
   final call = audio.kinds.contains(CaptureSourceKind.callAudio);
   final gaps = call
-      ? missingCallAudio(
-          sessionDir == null ? null : readCallSources(sessionDir),
-        )
+      ? missingCallAudio(readCallSources(audio.durablePath))
       : null;
   if (!context.mounted) return;
   var body = switch (reason) {

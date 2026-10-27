@@ -307,7 +307,15 @@ call voor transcriptie is alleen op **macOS en web** beschikbaar — de geforkte
 mediabinding levert daar gedecodeerde PCM per track (bewezen in een echte
 call), terwijl Windows, Linux, iOS en Android eerlijk geen per-bron-tap
 melden, dus het callpaneel biedt géén opnameknop in plaats van een kapotte.
-*(Toegevoegd 2026-10-26, issues #2538 en #2527.)*
+De opname, de live-server-opt-in en het transcript volgen daarna hetzelfde
+contract als een microfoonopname — toestemming per sessie, geen stille
+upload, en een weggevallen live-verbinding stopt de opname nooit. Wat een
+call toevoegt is herkomst: `sources.json` legt per bron track-id's, rollen,
+frame-aantallen en stilte-ticks vast, dus een transcript kan ontbrekende
+bronaudio benoemen in een *Ontbrekend*-regel — maar het labelt sprekers
+nooit uit de deelnemerslijst, en een ontbrekend of stuk manifest claimt
+niets. *(Toegevoegd 2026-10-26, issues #2538 en #2527; opnamecontract
+#2528–#2530.)*
 
 ## Bladeren… toont wat het systeemvenster toont
 
