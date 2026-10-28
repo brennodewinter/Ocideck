@@ -17,6 +17,7 @@ lifeblood of open source, and we do not take a single one of them for granted.
 - Jeroen Baten
 - Bas Eenhoorn
 - Mischa van Geelen
+- Heleen van de Groep
 - Edward Hazekamp
 - Jeroen Hermans
 - Youetta de Jager
