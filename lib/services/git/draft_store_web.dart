@@ -122,7 +122,7 @@ class PrefsDraftStore implements DraftStore {
       // dan haalt de sync-motor de wachtende commit stil weg en meldt "niets te
       // synchroniseren", terwijl er juist offline werk verloren dreigt te gaan.
       // Meld corruptie apart, zodat de aanroeper er een échte fout van maakt.
-      logError('PrefsDraftStore: concept onleesbaar ($deckDir)', e);
+      logError('PrefsDraftStore: concept onleesbaar (${logName(deckDir)})', e);
       throw DraftStoreCorrupt(deckDir, e);
     }
   }

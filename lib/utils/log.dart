@@ -187,11 +187,20 @@ final _shortExtension = RegExp(r'\.[A-Za-z0-9]{1,5}$');
 String redactPaths(String text) => text.replaceAllMapped(_absolutePath, (m) {
   final match = m[0]!;
   final path = match.trimRight();
-  final tail = match.substring(path.length);
-  final name = path.split(RegExp(r'[\\/]')).last;
-  final ext = _shortExtension.stringMatch(name) ?? '';
-  return '<pad#${sha256HexOfText(path).substring(0, 8)}$ext>$tail';
+  return '${_hashed('pad', path)}${match.substring(path.length)}';
 });
+
+/// Een bestandsnaam of relatief pad in een melding, zonder dat de naam zelf
+/// in het log belandt: `<naam#xxxxxxxx.ext>`. Voor wat [redactPaths] niet kan
+/// herkennen — een naam zonder map ervoor is voor een patroon gewoon een woord.
+/// `log_no_content_test.dart` houdt bij welke variabelen hierdoor moeten.
+String logName(String name) => _hashed('naam', name);
+
+String _hashed(String kind, String value) {
+  final last = value.split(RegExp(r'[\\/]')).last;
+  final ext = _shortExtension.stringMatch(last) ?? '';
+  return '<$kind#${sha256HexOfText(value).substring(0, 8)}$ext>';
+}
 
 /// Milliseconden sinds dit bestand voor het eerst werd geraakt; `main` doet
 /// dat als eerste, dus in de praktijk: sinds de start.

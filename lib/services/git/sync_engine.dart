@@ -237,7 +237,7 @@ class SyncEngine {
         message: e.message,
       );
     } on GitForgeException catch (e) {
-      logWarning('SyncEngine: ${commit.deckDir} niet gesynct', e);
+      logWarning('SyncEngine: ${logName(commit.deckDir)} niet gesynct', e);
       return SyncOutcome(
         deckDir: commit.deckDir,
         status: SyncStatus.failed,

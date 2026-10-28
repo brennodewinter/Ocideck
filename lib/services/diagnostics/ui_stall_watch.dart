@@ -60,10 +60,11 @@ class UiStallWatch {
     // timertijd (App Nap op macOS); dat is geen vastloper. Wisselde de toestand
     // in dit venster, dan is de gemeten tijd evenmin te vertrouwen.
     if (stateChanged || !_isActive(state)) return;
-    final work = workSince(since);
+    // Vaste labels uit [noteWork], geen inhoud.
+    final work = workSince(since).join(', ');
     logWarning(
       'UI-isolate $gap ms onbereikbaar'
-      '${work.isEmpty ? '' : ' — werk: ${work.join(', ')}'}'
+      '${work.isEmpty ? '' : ' — werk: $work'}'
       '${gap > 30000 ? ' (of de computer sliep)' : ''}',
     );
   }
