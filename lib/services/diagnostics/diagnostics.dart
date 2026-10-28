@@ -5,6 +5,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../../utils/log.dart';
+import '../disk_traces.dart';
 import '../export_metadata.dart' show kOciDeckVersion;
 import 'log_file.dart';
 import 'ui_stall_watch.dart';
@@ -18,7 +19,7 @@ import 'ui_stall_watch.dart';
 /// Instellingen → Over OciDeck.
 abstract final class Diagnostics {
   /// De submap van de app-supportmap waarin de logbestanden staan.
-  static const logDirName = 'logs';
+  static const logDirName = DiskTraces.logsDirName;
 
   /// Hoeveel regels "Diagnose kopiëren" meeneemt.
   static const reportLines = 200;

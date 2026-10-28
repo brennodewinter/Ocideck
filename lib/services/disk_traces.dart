@@ -44,6 +44,9 @@ class DiskTraces {
   /// De submap waarin logo's van geïmporteerde stijlprofielen belanden.
   static const styleLogosDirName = 'style_logos';
 
+  /// De submap met de logbestanden (zie `services/diagnostics/log_file.dart`).
+  static const logsDirName = 'logs';
+
   /// De lege map die `git` als HOME krijgt (zie `GitCli`). Staat in de
   /// tijdelijke map van het OS, niet onder app-support.
   static const gitSandboxDirName = 'ocideck_git_sandbox';
@@ -334,6 +337,33 @@ class DiskTraces {
     final support = await _support();
     if (support == null) return false;
     return _deleteDir(Directory(p.join(support.path, styleLogosDirName)));
+  }
+
+  /// Gooi de logbestanden weg. Voor de terugzetknop: het log zegt wanneer de
+  /// app draaide en wat er misging, en "alles terug" hoort dat mee te nemen.
+  ///
+  /// Alleen de `.log`-bestanden. De sessiemarkering van de lopende sessie blijft
+  /// staan: deze sessie loopt nog, en een crash straks moet de volgende start
+  /// nog steeds kunnen melden. De logregels die hierna komen, beginnen een
+  /// nieuw bestand.
+  Future<int> clearLogs() async {
+    if (kIsWeb) return 0;
+    final support = await _support();
+    if (support == null) return 0;
+    final dir = Directory(p.join(support.path, logsDirName));
+    var removed = 0;
+    try {
+      if (!await dir.exists()) return 0;
+      await for (final entity in dir.list()) {
+        if (entity is File && entity.path.endsWith('.log')) {
+          await entity.delete();
+          removed++;
+        }
+      }
+    } catch (e) {
+      logWarning('DiskTraces: logbestanden niet (allemaal) verwijderd', e);
+    }
+    return removed;
   }
 
   /// Gooi élke git-werkkopie weg, van welke verbinding ook, plus de hele

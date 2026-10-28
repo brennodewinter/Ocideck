@@ -189,6 +189,7 @@ extension SettingsTraces on SettingsNotifier {
     await _diskTraces.clearAllGitWorkingCopies();
     await _diskTraces.clearStyleLogos();
     await _diskTraces.clearGitSandbox();
+    await _diskTraces.clearLogs();
     await RecoveryService().clearAll();
 
     await _persist('resetToInitialState', (prefs) => prefs.clear());
