@@ -11,6 +11,7 @@ import 'package:ocideck/utils/log.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/pump_until.dart';
 import 'support/temp_dir.dart';
 
 /// De kaart "Diagnose" in Over OciDeck (#2618): de route waarlangs een
@@ -84,15 +85,13 @@ void main() {
     await openAbout(tester);
 
     await tester.tap(find.text('Diagnose kopiëren'));
-    // Het rapport leest het logbestand: echte schijf-IO in een paar stappen,
-    // en elke stap wil echte tijd én een pump voor zijn vervolg.
-    for (var i = 0; i < 50 && clipboard == null; i++) {
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 20)),
-      );
-      await tester.pump();
-    }
-    await tester.pump();
+    // Het rapport leest het logbestand: echte schijf-IO, buiten de nepklok.
+    final done = find.text('Diagnose gekopieerd naar het klembord.');
+    await pumpUntil(
+      tester,
+      () => clipboard != null && done.evaluate().isNotEmpty,
+      reason: 'het rapport kwam niet op het klembord',
+    );
 
     expect(clipboard, startsWith('**OciDeck-diagnose**'));
     expect(clipboard, contains('WARN Outbox: wachtende commit onleesbaar'));

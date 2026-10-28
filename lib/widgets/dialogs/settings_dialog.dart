@@ -8,7 +8,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart' show launchUrl;
 import '../../models/deck.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/page_size.dart';

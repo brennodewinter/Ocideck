@@ -816,7 +816,7 @@ class _DiagnosticsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final dir = Diagnostics.logDirectory?.path;
+    final hasLog = Diagnostics.logDirectory != null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -842,9 +842,9 @@ class _DiagnosticsCard extends StatelessWidget {
                     label: Text(l10n.d('Diagnose kopiëren')),
                   ),
                   OutlinedButton.icon(
-                    onPressed: dir == null
-                        ? null
-                        : () => unawaited(_openLogFolder(context, dir)),
+                    onPressed: hasLog
+                        ? () => unawaited(_openLogFolder(context))
+                        : null,
                     icon: const Icon(Icons.folder_open_outlined, size: 18),
                     label: Text(l10n.d('Logmap openen')),
                   ),
@@ -865,16 +865,12 @@ Future<void> _copyDiagnostics(BuildContext context) async {
   messenger.showSnackBar(SnackBar(content: Text(done)));
 }
 
-Future<void> _openLogFolder(BuildContext context, String dir) async {
+Future<void> _openLogFolder(BuildContext context) async {
   final messenger = ScaffoldMessenger.of(context);
   final failed = context.l10n.d('De logmap kon niet worden geopend.');
-  var opened = false;
-  try {
-    opened = await launchUrl(Uri.directory(dir));
-  } catch (e) {
-    logWarning('Diagnose: logmap niet geopend', e);
+  if (!await Diagnostics.openLogDirectory()) {
+    messenger.showSnackBar(SnackBar(content: Text(failed)));
   }
-  if (!opened) messenger.showSnackBar(SnackBar(content: Text(failed)));
 }
 
 /// De statusregel naast "Controleer nu": spinner-tekst tijdens de check,

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart' show launchUrl;
 
 import '../../utils/log.dart';
 import '../disk_traces.dart';
@@ -75,6 +76,21 @@ abstract final class Diagnostics {
   /// De map met de logbestanden, of `null` zonder logbestand (web, of een
   /// app-supportmap die niet beschikbaar was).
   static Directory? get logDirectory => _log?.directory;
+
+  /// Open de logmap in de bestandsbeheerder van het OS. `false` als er geen
+  /// logmap is of het OS hem niet wilde openen. Een `file:`-URI van onze eigen
+  /// map, dus niet door de deklinkpoort van `openExternalUrl`, die `file:`
+  /// terecht weigert voor wat er in een deck staat.
+  static Future<bool> openLogDirectory() async {
+    final dir = logDirectory;
+    if (dir == null) return false;
+    try {
+      return await launchUrl(Uri.directory(dir.path));
+    } catch (e) {
+      logWarning('Diagnostics: logmap niet geopend', e);
+      return false;
+    }
+  }
 
   /// De tekst voor "Diagnose kopiëren": versie, systeem en de laatste
   /// [reportLines] regels van het log.

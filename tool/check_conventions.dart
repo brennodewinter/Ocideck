@@ -318,7 +318,9 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#2429): import van ociserve_org_themes voor de themaregister-knop
   // in het profielonderdeel.
   // +1 (#2510): import van de transcriptie-modulekaart.
-  'lib/widgets/dialogs/settings_dialog.dart': 1048,
+  // +1 (#2618): import van Diagnostics voor de kaart Diagnose; één regel lucht
+  // zodat een parallelle tak met één import niet meteen over het plafond gaat.
+  'lib/widgets/dialogs/settings_dialog.dart': 1050,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
       1018, // +1 (#2515): transcriptAudioPath-parameter op
