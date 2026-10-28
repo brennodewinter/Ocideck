@@ -268,6 +268,7 @@ class _AppShellState extends ConsumerState<AppShell> {
   @override
   void initState() {
     super.initState();
+    logMilestone('shell');
     setWillCloseCallback(_onWillClose);
     _nativeShortcuts = NativeShortcutChannel(
       () => _requestDocumentFind(showReplace: true),

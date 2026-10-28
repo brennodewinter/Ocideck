@@ -68,6 +68,7 @@ class ConsentNotifier extends Notifier<ConsentState> {
   Future<void> _initialize() async {
     try {
       final hasAccepted = await ref.read(consentStoreProvider).read();
+      logMilestone(hasAccepted ? 'toestemming gelezen' : 'toestemmingspoort');
       state = state.copyWith(hasAccepted: hasAccepted, isLoading: false);
     } catch (e, s) {
       // Can't read the flag: fail closed (gate stays up) but don't hang loading.
