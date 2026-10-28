@@ -8,6 +8,12 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.2] — 2026-10-28
+
+### Changed
+
+- Fix Windows mic capture header order
+
 ## [0.7.1] — 2026-10-27
 
 
