@@ -1617,6 +1617,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Diagnose': 'Diagnostyka',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck prowadzi na tym komputerze dziennik błędów, zawieszeń i uruchamiania. Nie zawiera on treści prezentacji ani dokumentów, a nazwy plików są nierozpoznawalne. Dziennik nigdy sam nie opuszcza tego komputera: udostępnij go tylko wtedy, gdy zgłaszasz problem.',
+  'Logmap openen': 'Otwórz folder dziennika',
+  'Diagnose kopiëren': 'Kopiuj diagnostykę',
+  'Diagnose gekopieerd naar het klembord.':
+      'Skopiowano diagnostykę do schowka.',
+  'De logmap kon niet worden geopend.': 'Nie można otworzyć folderu dziennika.',
   'Bezig met installeren': 'Trwa instalowanie',
   'Gevonden op schijf: {pad}': 'Znaleziono na dysku: {pad}',
   'Van schijf installeren': 'Zainstaluj z dysku',

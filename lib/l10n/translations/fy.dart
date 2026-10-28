@@ -652,6 +652,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Diagnose': 'Diagnoaze',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck hâldt op dizze kompjûter in logboek by fan flaters, fêstrinners en it opstarten. Der stiet gjin ynhâld fan presintaasjes of dokuminten yn, en triemnammen binne ûnkenber makke. It logboek ferlit dizze kompjûter nea fansels: diel it allinnich as jo in probleem melde.',
+  'Logmap openen': 'Logmap iepenje',
+  'Diagnose kopiëren': 'Diagnoaze kopiearje',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnoaze nei it klamboerd kopiearre.',
+  'De logmap kon niet worden geopend.': 'De logmap koe net iepene wurde.',
   'Bezig met installeren': 'Oan it ynstallearjen',
   'Gevonden op schijf: {pad}': 'Fûn op skiif: {pad}',
   'Van schijf installeren': 'Fan skiif ynstallearje',

@@ -1605,6 +1605,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Diagnose': 'Diagnostika',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck na tem računalniku vodi dnevnik napak, zamrznitev in zagona. V njem ni vsebine predstavitev ali dokumentov, imena datotek pa so neprepoznavna. Dnevnik nikoli sam ne zapusti tega računalnika: delite ga samo, ko prijavite težavo.',
+  'Logmap openen': 'Odpri mapo dnevnika',
+  'Diagnose kopiëren': 'Kopiraj diagnostiko',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnostika je kopirana v odložišče.',
+  'De logmap kon niet worden geopend.': 'Mape dnevnika ni bilo mogoče odpreti.',
   'Bezig met installeren': 'Nameščam',
   'Gevonden op schijf: {pad}': 'Najdeno na disku: {pad}',
   'Van schijf installeren': 'Namesti z diska',

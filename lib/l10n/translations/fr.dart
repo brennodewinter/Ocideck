@@ -652,6 +652,15 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Diagnose': 'Diagnostic',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck tient sur cet ordinateur un journal des erreurs, des blocages et du démarrage. Il ne contient aucun contenu de présentations ou de documents, et les noms de fichiers sont rendus méconnaissables. Le journal ne quitte jamais cet ordinateur de lui-même : ne le partagez que lorsque vous signalez un problème.',
+  'Logmap openen': 'Ouvrir le dossier des journaux',
+  'Diagnose kopiëren': 'Copier le diagnostic',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnostic copié dans le presse-papiers.',
+  'De logmap kon niet worden geopend.':
+      'Impossible d\'ouvrir le dossier des journaux.',
   'Bezig met installeren': 'Installation en cours',
   'Gevonden op schijf: {pad}': 'Trouvé sur le disque : {pad}',
   'Van schijf installeren': 'Installer depuis le disque',

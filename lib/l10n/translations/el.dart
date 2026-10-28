@@ -1630,6 +1630,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Diagnose': 'Διαγνωστικά',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'Το OciDeck τηρεί σε αυτόν τον υπολογιστή ένα αρχείο καταγραφής σφαλμάτων, παγωμάτων και εκκίνησης. Δεν περιέχει περιεχόμενο από παρουσιάσεις ή έγγραφα, και τα ονόματα αρχείων γίνονται μη αναγνωρίσιμα. Το αρχείο καταγραφής δεν φεύγει ποτέ μόνο του από αυτόν τον υπολογιστή: κοινοποιήστε το μόνο όταν αναφέρετε ένα πρόβλημα.',
+  'Logmap openen': 'Άνοιγμα φακέλου καταγραφής',
+  'Diagnose kopiëren': 'Αντιγραφή διαγνωστικών',
+  'Diagnose gekopieerd naar het klembord.':
+      'Τα διαγνωστικά αντιγράφηκαν στο πρόχειρο.',
+  'De logmap kon niet worden geopend.':
+      'Δεν ήταν δυνατό το άνοιγμα του φακέλου καταγραφής.',
   'Bezig met installeren': 'Γίνεται εγκατάσταση',
   'Gevonden op schijf: {pad}': 'Βρέθηκε στον δίσκο: {pad}',
   'Van schijf installeren': 'Εγκατάσταση από τον δίσκο',

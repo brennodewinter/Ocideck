@@ -755,6 +755,23 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.about,
+    label: 'Diagnose kopiëren',
+    section: null,
+    keywords: [
+      'diagnose',
+      'logboek',
+      'logbestand',
+      'log',
+      'probleem',
+      'melden',
+      'issue',
+      'vastlopen',
+      'crash',
+      'fout',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.about,
     label: 'Licenties van derden',
     section: null,
     keywords: [

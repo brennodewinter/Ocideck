@@ -1635,6 +1635,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Diagnose': 'Diagnóisic',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'Coinníonn OciDeck logchomhad ar an ríomhaire seo d’earráidí, de reonna agus den tosú. Níl aon ábhar ó chur i láthair ná ó dhoiciméid ann, agus déantar ainmneacha comhad do-aitheanta. Ní fhágann an logchomhad an ríomhaire seo riamh as a stuaim féin: ná roinn é ach amháin nuair a thuairiscíonn tú fadhb.',
+  'Logmap openen': 'Oscail fillteán na logchomhad',
+  'Diagnose kopiëren': 'Cóipeáil an diagnóisic',
+  'Diagnose gekopieerd naar het klembord.':
+      'Cóipeáladh an diagnóisic chuig an ngearrthaisce.',
+  'De logmap kon niet worden geopend.':
+      'Níorbh fhéidir fillteán na logchomhad a oscailt.',
   'Bezig met installeren': 'Á shuiteáil',
   'Gevonden op schijf: {pad}': 'Aimsithe ar dhiosca: {pad}',
   'Van schijf installeren': 'Suiteáil ó dhiosca',

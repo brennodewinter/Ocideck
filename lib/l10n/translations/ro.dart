@@ -1621,6 +1621,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Diagnose': 'Diagnosticare',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck ține pe acest computer un jurnal al erorilor, blocajelor și pornirii. Nu conține conținut din prezentări sau documente, iar numele fișierelor sunt făcute de nerecunoscut. Jurnalul nu părăsește niciodată de la sine acest computer: partajați-l doar când raportați o problemă.',
+  'Logmap openen': 'Deschide dosarul de jurnale',
+  'Diagnose kopiëren': 'Copiază diagnosticarea',
+  'Diagnose gekopieerd naar het klembord.':
+      'Diagnosticarea a fost copiată în clipboard.',
+  'De logmap kon niet worden geopend.':
+      'Dosarul de jurnale nu a putut fi deschis.',
   'Bezig met installeren': 'Se instalează',
   'Gevonden op schijf: {pad}': 'Găsit pe disc: {pad}',
   'Van schijf installeren': 'Instalați de pe disc',

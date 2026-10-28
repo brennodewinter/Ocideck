@@ -298,6 +298,9 @@ extension _SettingsAbout on _SettingsDialogState {
         // de gedeployde versie, dus daar staat deze kaart niet) ──────────────
         if (!isWebPlatform) ...const [_UpdateCheckCard(), SizedBox(height: 18)],
 
+        // ── Diagnose: het lokale logbestand, om bij een melding te delen ─────
+        if (!isWebPlatform) ...const [_DiagnosticsCard(), SizedBox(height: 18)],
+
         // ── Origin: the Pilot Informatieautonomie ────────────────────────────
         _aboutOrigin(l10n),
         const SizedBox(height: 18),
@@ -801,6 +804,77 @@ class _UpdateCheckCard extends ConsumerWidget {
       ],
     );
   }
+}
+
+/// Het logbestand dat OciDeck op deze computer bijhoudt (#2618), en de twee
+/// routes om het bij een melding te voegen: de map openen om het bestand mee
+/// te sturen, of de samenvatting kopiëren om in een issue te plakken. Er gaat
+/// niets vanzelf de deur uit; de gebruiker ziet wat hij deelt.
+class _DiagnosticsCard extends StatelessWidget {
+  const _DiagnosticsCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final dir = Diagnostics.logDirectory?.path;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _aboutHeading(Icons.monitor_heart_outlined, l10n.d('Diagnose')),
+        _aboutCard(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.d(
+                  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.',
+                ),
+                style: _SettingsAbout._aboutBodyStyle,
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 10,
+                runSpacing: 6,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: () => unawaited(_copyDiagnostics(context)),
+                    icon: const Icon(Icons.copy_outlined, size: 18),
+                    label: Text(l10n.d('Diagnose kopiëren')),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: dir == null
+                        ? null
+                        : () => unawaited(_openLogFolder(context, dir)),
+                    icon: const Icon(Icons.folder_open_outlined, size: 18),
+                    label: Text(l10n.d('Logmap openen')),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+Future<void> _copyDiagnostics(BuildContext context) async {
+  final messenger = ScaffoldMessenger.of(context);
+  final done = context.l10n.d('Diagnose gekopieerd naar het klembord.');
+  await Clipboard.setData(ClipboardData(text: await Diagnostics.report()));
+  messenger.showSnackBar(SnackBar(content: Text(done)));
+}
+
+Future<void> _openLogFolder(BuildContext context, String dir) async {
+  final messenger = ScaffoldMessenger.of(context);
+  final failed = context.l10n.d('De logmap kon niet worden geopend.');
+  var opened = false;
+  try {
+    opened = await launchUrl(Uri.directory(dir));
+  } catch (e) {
+    logWarning('Diagnose: logmap niet geopend', e);
+  }
+  if (!opened) messenger.showSnackBar(SnackBar(content: Text(failed)));
 }
 
 /// De statusregel naast "Controleer nu": spinner-tekst tijdens de check,

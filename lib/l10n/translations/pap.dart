@@ -651,6 +651,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Diagnose': 'Diagnóstiko',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck ta warda riba e kompiuter aki un registro di eror, blokeo i di arankamentu. E no ta kontené ningun kontenido di presentashon òf dokumento, i nòmbernan di archivo ta hasí inrekonosibel. E registro nunka ta sali di e kompiuter aki di su mes: kompartié solamente ora bo ta reportá un problema.',
+  'Logmap openen': 'Habri e mapa di log',
+  'Diagnose kopiëren': 'Kopia diagnóstiko',
+  'Diagnose gekopieerd naar het klembord.': 'Diagnóstiko kopiá na klipbord.',
+  'De logmap kon niet worden geopend.': 'No por a habri e mapa di log.',
   'Bezig met installeren': 'Ta instalando',
   'Gevonden op schijf: {pad}': 'Ha é den disk: {pad}',
   'Van schijf installeren': 'Instala for di disk',

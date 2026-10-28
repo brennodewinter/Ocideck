@@ -1620,6 +1620,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Diagnose': 'Діагностика',
+  'OciDeck houdt op deze computer een logboek bij van fouten, vastlopers en het opstarten. Er staat geen inhoud van presentaties of documenten in, en bestandsnamen zijn onherkenbaar gemaakt. Het logboek verlaat deze computer nooit vanzelf: deel het alleen als u een probleem meldt.':
+      'OciDeck веде на цьому комп’ютері журнал помилок, зависань і запуску. У ньому немає вмісту презентацій чи документів, а назви файлів зроблено невпізнанними. Журнал ніколи не залишає цей комп’ютер сам: діліться ним лише тоді, коли повідомляєте про проблему.',
+  'Logmap openen': 'Відкрити папку журналу',
+  'Diagnose kopiëren': 'Копіювати діагностику',
+  'Diagnose gekopieerd naar het klembord.':
+      'Діагностику скопійовано в буфер обміну.',
+  'De logmap kon niet worden geopend.': 'Не вдалося відкрити папку журналу.',
   'Bezig met installeren': 'Встановлюю',
   'Gevonden op schijf: {pad}': 'Знайдено на диску: {pad}',
   'Van schijf installeren': 'Встановити з диска',
