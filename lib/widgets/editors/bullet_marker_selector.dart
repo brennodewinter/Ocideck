@@ -48,9 +48,15 @@ class BulletMarkerSelector extends StatelessWidget {
                 icon: const Icon(Icons.pets, size: 18),
                 label: Text(l10n.d('Pootje')),
               ),
+              ButtonSegment(
+                value: BulletMarker.customSvg.name,
+                icon: const Icon(Icons.image_outlined, size: 18),
+                label: const Text('SVG'),
+              ),
             ],
             selected: {value?.name ?? _inherit},
             showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
             onSelectionChanged: (selection) {
               final picked = selection.first;
               onChanged(

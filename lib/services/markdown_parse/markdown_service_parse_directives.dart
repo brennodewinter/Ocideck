@@ -365,9 +365,7 @@ extension _MarkdownParseDirectives on MarkdownService {
   /// De bulletmarkering uit een `ocideck_bullet_marker:`-directive, of `null`
   /// als de naam onbekend is — dan blijft de themastandaard staan.
   BulletMarker? _bulletMarkerFrom(String raw) {
-    final name = raw.trim();
-    final match = BulletMarker.values.where((m) => m.name == name);
-    return match.isEmpty ? null : match.first;
+    return bulletMarkerFromToken(raw.trim());
   }
 }
 

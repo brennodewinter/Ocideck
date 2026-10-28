@@ -587,6 +587,37 @@ void main() {
     expect(legacy.bulletMarker, BulletMarker.dot);
   });
 
+  test('custom SVG bullet marker round-trips through theme and Markdown', () {
+    const svg = '<svg viewBox="0 0 10 10"><path d="M0 0h10v10z"/></svg>';
+    final profile = ThemeProfile.fromJson({
+      'bulletMarker': 'custom_svg',
+      'customBulletSvg': svg,
+    });
+    expect(profile.bulletMarker, BulletMarker.customSvg);
+    expect(profile.customBulletSvg, contains('<path'));
+    expect(profile.toJson()['bulletMarker'], 'custom_svg');
+
+    final deck = Deck(
+      title: 'Demo',
+      themeProfile: profile,
+      slides: [
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Punten', bullets: const ['Een']),
+      ],
+    );
+    final exported = MarkdownService().generateDeck(deck, forExport: true);
+    expect(exported, contains('ocideck_bullet_marker: custom_svg'));
+    expect(
+      MarkdownService()
+          .parseDeck(exported)!
+          .slides
+          .single
+          .bulletMarkerOverride,
+      BulletMarker.customSvg,
+    );
+  });
+
   test('a `---` line inside a fenced code block does not split the slide', () {
     // A code sample, diff hunk or embedded YAML can legitimately contain a
     // `---` line; fence-aware splitting keeps it as code instead of tearing the

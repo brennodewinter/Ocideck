@@ -15,6 +15,7 @@ import 'storage_connection.dart';
 import 'git_settings.dart';
 import 's3_settings.dart';
 import 'webdav_settings.dart';
+import '../utils/sanitize_svg.dart';
 
 export 'ai_settings.dart';
 export 'libreplan_settings.dart';
@@ -30,10 +31,25 @@ part 'parts/cockpit_color_scheme.dart';
 part 'parts/app_settings.dart';
 
 /// Glyph used for unordered (bullet) list markers. [dot] is the classic
-/// typographic bullet; [paw] swaps in a small cat-paw drawn in the accent
-/// colour (OciDeck's mascot). The theme picks a default; a slide may override
-/// it (see `Slide.bulletMarkerOverride`).
-enum BulletMarker { dot, paw }
+/// typographic bullet, [paw] is OciDeck's mascot, and [customSvg] uses the
+/// sanitised SVG embedded in [ThemeProfile.customBulletSvg]. The theme picks a
+/// default; a slide may override it (see `Slide.bulletMarkerOverride`).
+enum BulletMarker { dot, paw, customSvg }
+
+/// Stable spelling used in JSON and Markdown. Dart enum values use lower
+/// camel-case, while the portable file format uses snake_case.
+String bulletMarkerToken(BulletMarker marker) => switch (marker) {
+  BulletMarker.dot => 'dot',
+  BulletMarker.paw => 'paw',
+  BulletMarker.customSvg => 'custom_svg',
+};
+
+BulletMarker? bulletMarkerFromToken(Object? raw) => switch (raw) {
+  'dot' => BulletMarker.dot,
+  'paw' => BulletMarker.paw,
+  'custom_svg' || 'customSvg' => BulletMarker.customSvg,
+  _ => null,
+};
 
 /// Shared activation/animation duration (ms) that animated slide types
 /// (timeline, cockpit) inherit from the theme when a slide sets no own value.
@@ -116,6 +132,11 @@ class ThemeProfile {
 
   /// Default marker glyph; a slide can override it.
   final BulletMarker bulletMarker;
+
+  /// Sanitised, self-contained SVG used when [bulletMarker] (or a slide
+  /// override) is [BulletMarker.customSvg]. Stored inline so a style profile
+  /// remains portable and does not retain a machine-local file path.
+  final String? customBulletSvg;
   final String tableTextColor;
   final String tableHeaderTextColor;
   final String tableHeaderBackgroundColor;
@@ -233,6 +254,7 @@ class ThemeProfile {
     this.checklistUncheckedColor = '#64748B',
     this.checklistStrikeThrough = true,
     this.bulletMarker = BulletMarker.dot,
+    this.customBulletSvg,
     String? tableTextColor,
     this.tableHeaderTextColor = '#FFFFFF',
     String? tableHeaderBackgroundColor,
@@ -405,6 +427,7 @@ class ThemeProfile {
     String? checklistUncheckedColor,
     bool? checklistStrikeThrough,
     BulletMarker? bulletMarker,
+    String? customBulletSvg,
     String? tableTextColor,
     String? tableHeaderTextColor,
     String? tableHeaderBackgroundColor,
@@ -460,6 +483,7 @@ class ThemeProfile {
     bool clearDocumentHeadingFontFamily = false,
     bool clearPreferredFontFamily = false,
     bool clearPreferredDocumentHeadingFontFamily = false,
+    bool clearCustomBulletSvg = false,
   }) {
     return ThemeProfile(
       name: name ?? this.name,
@@ -473,6 +497,9 @@ class ThemeProfile {
       checklistStrikeThrough:
           checklistStrikeThrough ?? this.checklistStrikeThrough,
       bulletMarker: bulletMarker ?? this.bulletMarker,
+      customBulletSvg: clearCustomBulletSvg
+          ? null
+          : (customBulletSvg ?? this.customBulletSvg),
       tableTextColor: tableTextColor ?? this.tableTextColor,
       tableHeaderTextColor: tableHeaderTextColor ?? this.tableHeaderTextColor,
       tableHeaderBackgroundColor:
@@ -554,7 +581,8 @@ class ThemeProfile {
       'checklistCheckedColor': checklistCheckedColor,
       'checklistUncheckedColor': checklistUncheckedColor,
       'checklistStrikeThrough': checklistStrikeThrough,
-      'bulletMarker': bulletMarker.name,
+      'bulletMarker': bulletMarkerToken(bulletMarker),
+      'customBulletSvg': customBulletSvg,
       'tableTextColor': tableTextColor,
       'tableHeaderTextColor': tableHeaderTextColor,
       'tableHeaderBackgroundColor': tableHeaderBackgroundColor,
@@ -638,6 +666,8 @@ class ThemeProfile {
     bool boolValue(String key, bool fallback) =>
         json[key] is bool ? json[key] as bool : fallback;
 
+    final customBulletSvg = stringValue('customBulletSvg');
+
     return ThemeProfile(
       slideBackgroundColor: _color(json['slideBackgroundColor'], '#FFFFFF'),
       name: stringValue('name') ?? 'Standaard',
@@ -652,10 +682,11 @@ class ThemeProfile {
         '#64748B',
       ),
       checklistStrikeThrough: boolValue('checklistStrikeThrough', true),
-      bulletMarker: BulletMarker.values.firstWhere(
-        (m) => m.name == json['bulletMarker'],
-        orElse: () => BulletMarker.dot,
-      ),
+      bulletMarker:
+          bulletMarkerFromToken(json['bulletMarker']) ?? BulletMarker.dot,
+      customBulletSvg: customBulletSvg == null
+          ? null
+          : sanitizeCustomBulletSvg(customBulletSvg),
       tableTextColor: _color(
         json['tableTextColor'] ?? json['textColor'],
         '#222222',

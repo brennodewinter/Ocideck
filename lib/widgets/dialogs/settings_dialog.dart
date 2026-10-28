@@ -30,6 +30,7 @@ import '../../services/file_service.dart';
 import '../../services/git/outbox.dart';
 import '../../services/recovery_service.dart';
 import '../../utils/net_guard.dart';
+import '../../utils/sanitize_svg.dart';
 import 'certificate_trust_dialog.dart';
 import '../../models/local_cve_status.dart';
 import '../../services/cve/local_cve_database.dart';

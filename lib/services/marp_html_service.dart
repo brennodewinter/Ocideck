@@ -916,6 +916,7 @@ class MarpHtmlService {
         '.slide.paw-bullets ul li::before{content:"";position:absolute;'
         'left:-1.4em;top:.5em;width:.78em;height:.78em;'
         'background:url("${_pawDataUri(t.accentColor)}") center/contain no-repeat}'
+        '${_customBulletSvgCss(t)}'
         '.slide pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
         'border:1px solid ${t.codeTextColor}38;border-radius:6px;'
         'padding:16px;overflow:auto;font-size:18px;font-family:$codeFamily}'

@@ -598,7 +598,8 @@ these fields (with defaults):
 | `slideBackgroundColor` | `#FFFFFF` | Background for normal slides. |
 | `textColor` | `#222222` | Text color. |
 | `accentColor` | `#2E7D64` | Accent (bullet marker, table borders/header). |
-| `bulletMarker` | `dot` | Default bullet-list marker: `dot` or `paw` (a cat-paw drawn in the accent colour). A slide may override it (see §8). |
+| `bulletMarker` | `dot` | Default bullet-list marker: `dot`, `paw` (a cat-paw drawn in the accent colour), or `custom_svg`. A slide may override it (see §8). |
+| `customBulletSvg` | `null` | Sanitised inline SVG used by the `custom_svg` marker. It is embedded in the style profile so the marker remains portable; scripts, event handlers, animation and external URLs are removed on import. |
 | `checklistCheckedColor` | `#2E7D64` | Tick colour of a checked checklist item. |
 | `checklistUncheckedColor` | `#64748B` | Box colour of an unchecked checklist item. Reaches 4.8:1 on the default white background and stays above 3:1 on a dark one, so the box is visible whichever way the author sets the slide. *(Was `#CBD5E1` until 2026-08-27; at 1.5:1 it failed OciDeck's own 3:1 floor, so every deck with a checklist opened on a warning the author could not act on — #1818.)* |
 | `checklistStrikeThrough` | `true` | Strike through the text of a checked item. |
@@ -3212,7 +3213,7 @@ are listed below in the same order the serializer writes them.)*
 | `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout of a `split` slide. |
 | `<!-- ocideck_split_image_side: left -->` | Put the side image of a `split` slide on the left. Absent = image on the right (§5). |
 | `<!-- ocideck_two_bullets_left/right[_title]: <base64url> -->` | **Retired (0.1.0).** Was the canonical storage for the two bullet columns; the visible `<ul><li>` now carries them (§5). Still read from older files, dropped on save. |
-| `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). |
+| `<!-- ocideck_bullet_marker: dot\|paw\|custom_svg -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). `custom_svg` uses the SVG stored in the theme. |
 | `<!-- ocideck_image_focus: x,y -->` | Image crop focal point (0..1 per axis, `0.5,0.5` = centre) for the slide's image. Decides which part stays in view when the picture is cropped (fill/zoom, or a fixed image panel). Written only when not centred. |
 | `<!-- ocideck_image_focus2: x,y -->` | Same, for the **second** image of a two-images slide. Written only when not centred. |
 | `<!-- ocideck_image_alt: text -->` | Per-usage WCAG alt-text (accessibility description) for the slide's image. Preferred over the visible caption as the screen-reader label. Written only when set; `-->` inside is escaped like presenter notes. |
