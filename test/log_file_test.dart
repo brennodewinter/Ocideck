@@ -145,9 +145,12 @@ void main() {
       addTearDown(() => Diagnostics.debugUse(null));
       logWarning('Outbox: iets');
       final report = await Diagnostics.report();
-      expect(report, startsWith('OciDeck-diagnose\nOciDeck '));
+      expect(report, startsWith('**OciDeck-diagnose**\n\n- OciDeck '));
       expect(report, contains(Platform.operatingSystem));
-      expect(report, contains('WARN Outbox: iets'));
+      // Plakklaar voor een issue: de regels staan in een codeblok.
+      final block = RegExp(r'````text\n([\s\S]*)\n````\n$').firstMatch(report);
+      expect(block, isNotNull, reason: report);
+      expect(block![1], contains('WARN Outbox: iets'));
     },
   );
 }

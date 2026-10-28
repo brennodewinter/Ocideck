@@ -77,18 +77,28 @@ abstract final class Diagnostics {
 
   /// De tekst voor "Diagnose kopiëren": versie, systeem en de laatste
   /// [reportLines] regels van het log.
+  ///
+  /// Markdown, omdat hij bedoeld is om in een issue te plakken: de logregels in
+  /// een codeblok, zodat de tracker ze niet als opmaak leest. Via het klembord
+  /// en niet via een vooringevulde issue-URL — dan zou het log over het netwerk
+  /// gaan voordat de gebruiker het heeft gezien.
   static Future<String> report() async {
     final out = StringBuffer()
-      ..writeln('OciDeck-diagnose')
-      ..writeln(_systemLine())
-      ..writeln('Dart ${Platform.version}')
+      ..writeln('**OciDeck-diagnose**')
+      ..writeln()
+      ..writeln('- ${_systemLine()}')
+      ..writeln('- Dart ${Platform.version}')
       ..writeln();
     final log = _log;
     if (log == null) {
       out.writeln('(geen logbestand)');
-    } else {
-      out.writeAll(await log.tail(reportLines), '\n');
+      return out.toString();
     }
+    out
+      ..writeln('````text')
+      ..writeAll(await log.tail(reportLines), '\n')
+      ..writeln()
+      ..writeln('````');
     return out.toString();
   }
 
