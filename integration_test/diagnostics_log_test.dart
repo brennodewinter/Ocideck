@@ -16,7 +16,6 @@
 //   flutter test integration_test/diagnostics_log_test.dart -d linux
 
 import 'dart:io';
-import 'dart:ui' show AppLifecycleState;
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
