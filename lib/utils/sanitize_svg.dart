@@ -29,11 +29,7 @@ String? sanitizeCustomBulletSvg(String svg) {
     logWarning('sanitizeCustomBulletSvg: SVG exceeds the size limit');
     return null;
   }
-  return _sanitizeSvg(
-    svg,
-    'sanitizeCustomBulletSvg',
-    allowExternalUrls: false,
-  );
+  return _sanitizeSvg(svg, 'sanitizeCustomBulletSvg', allowExternalUrls: false);
 }
 
 String? _sanitizeSvg(
@@ -164,11 +160,7 @@ void _keepOnlyAllowed(
       child.remove();
       continue;
     }
-    _keepOnlyAllowed(
-      child,
-      dropped,
-      allowExternalUrls: allowExternalUrls,
-    );
+    _keepOnlyAllowed(child, dropped, allowExternalUrls: allowExternalUrls);
     if (_isEmptyDefs(child)) child.remove();
   }
   _keepOnlyAllowedAttributes(

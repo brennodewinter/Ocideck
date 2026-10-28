@@ -722,10 +722,9 @@ void main() {}
             '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>',
       );
       final html = await exportHtml([
-        Slide.create(SlideType.bullets).copyWith(
-          title: 'Punten',
-          bullets: const ['Een'],
-        ),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Punten', bullets: const ['Een']),
       ], customTheme);
 
       expect(html, contains('<section class="slide custom-svg-bullets">'));

@@ -609,11 +609,7 @@ void main() {
     final exported = MarkdownService().generateDeck(deck, forExport: true);
     expect(exported, contains('ocideck_bullet_marker: custom_svg'));
     expect(
-      MarkdownService()
-          .parseDeck(exported)!
-          .slides
-          .single
-          .bulletMarkerOverride,
+      MarkdownService().parseDeck(exported)!.slides.single.bulletMarkerOverride,
       BulletMarker.customSvg,
     );
   });
