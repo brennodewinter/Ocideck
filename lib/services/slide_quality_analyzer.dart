@@ -28,6 +28,7 @@ import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
 import 'web_asset_store.dart';
+import '../utils/log.dart';
 
 part 'slide_quality/slide_quality_analyzer_callouts.dart';
 part 'slide_quality/slide_quality_analyzer_content.dart';
@@ -190,13 +191,16 @@ class SlideQualityAnalyzer {
 
   const SlideQualityAnalyzer({this.minContrastRatio = kWcagAaNormalText});
 
-  SlideQualityResult analyze(Deck deck) => analyzeSlides(
-    slides: deck.slides,
-    theme: deck.themeProfile,
-    font: deck.themeProfile.fontFamily,
-    projectPath: deck.projectPath,
-    slideAspect: slideAspectRatio(deck.slideSize),
-  );
+  SlideQualityResult analyze(Deck deck) {
+    noteWork('kwaliteitscontrole');
+    return analyzeSlides(
+      slides: deck.slides,
+      theme: deck.themeProfile,
+      font: deck.themeProfile.fontFamily,
+      projectPath: deck.projectPath,
+      slideAspect: slideAspectRatio(deck.slideSize),
+    );
+  }
 
   SlideQualityResult analyzeSlides({
     required List<Slide> slides,

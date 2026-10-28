@@ -4,6 +4,7 @@ import '../models/slide_format.dart';
 import '../utils/lru_cache.dart';
 import 'rich_text_layout.dart';
 import 'slide_layout_metrics.dart';
+import '../utils/log.dart';
 
 /// De *split-run*: de groep opeenvolgende bulletslides die samen één gesplitste
 /// lijst vormen en daarom op één gedeelde tekstgrootte renderen.
@@ -200,6 +201,7 @@ SplitRunLayoutIndex splitRunLayoutIndex(
   final key = (profile, font, slideAspect);
   final cached = memo.indexes[key];
   if (cached != null) return cached;
+  noteWork('split-runindex');
   final index = buildSplitRunLayoutIndex(
     slides,
     profile,

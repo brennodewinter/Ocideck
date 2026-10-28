@@ -192,6 +192,7 @@ class _OpenCvImageFaceScanner implements ImageFaceScanner {
       return ImageFaceScanResult.unreadable;
     }
 
+    noteWork('gezichtsscan');
     cv.Mat? source;
     try {
       source = cv.imdecode(imageBytes, cv.IMREAD_COLOR);

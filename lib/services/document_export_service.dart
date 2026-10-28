@@ -36,6 +36,7 @@ import 'privacy/privacy_own_identity.dart';
 import 'privacy/privacy_export_policy.dart';
 import 'risk_bowtie_diagram.dart';
 import '../utils/document_front_matter.dart';
+import '../utils/log.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
 /// §11.2): het geprojecteerde `.md` zelf, één doorlopend HTML-document, een
@@ -245,6 +246,7 @@ Future<Uint8List> buildDocumentExportBytes(
   String? sourcePath,
   String? outputPath,
 }) async {
+  noteWork('documentexport ${format.name}');
   final theme = bundle.audience.deck.themeProfile;
   // Mermaid-diagrammen volgen de stijlkleuren van het deck, net als de rest
   // van het document — de resolver krijgt de bron al met themeVariables, zodat

@@ -8,7 +8,10 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/services/slide_quality_analyzer.dart';
 import 'package:ocideck/utils/log.dart';
+import 'package:ocideck/utils/markdown_quill_codec.dart';
 
 class _Lines implements LogSink {
   final lines = <String>[];
@@ -202,6 +205,19 @@ void main() {
       noteWork('documentsync');
       noteWork('gezichtsscan');
       expect(workSince(since), ['gezichtsscan', 'documentsync']);
+    });
+
+    test('de zware paden zetten hun label', () {
+      final since = logClockMs;
+      MarkdownQuillCodec.markdownFromDocument(
+        MarkdownQuillCodec.documentFromMarkdown('# Kop\n\ntekst'),
+      );
+      const SlideQualityAnalyzer().analyze(const Deck(title: 'x'));
+      expect(workSince(since), [
+        'Markdown → visuele editor',
+        'visuele editor → Markdown',
+        'kwaliteitscontrole',
+      ]);
     });
 
     test('de ring vergeet de oudste', () {

@@ -17,6 +17,7 @@ import 'spacer_embed_syntax.dart';
 import 'transcript_embed_syntax.dart';
 import 'ocideck_table_embed_syntax.dart';
 import 'timeline_table_embed_syntax.dart';
+import 'log.dart';
 
 /// Round-trip conversion between stored markdown and a Quill document.
 ///
@@ -145,6 +146,7 @@ class MarkdownQuillCodec {
     if (markdown.isEmpty) {
       return Document();
     }
+    noteWork('Markdown → visuele editor');
     // Wat de rijke-tekstlaag niet verliesvrij kan dragen (HTML-commentaar,
     // ontsnapte leestekens, losse tabelregels) wordt vóór de parse in een
     // sentinelpaar gewikkeld; `SourceFragmentSyntax` claimt dat bereik als één
@@ -156,6 +158,7 @@ class MarkdownQuillCodec {
   }
 
   static String markdownFromDocument(Document document) {
+    noteWork('visuele editor → Markdown');
     final raw = _deltaToMd.convert(document.toDelta()).trimRight();
     return _normalizeQuillOutput(raw).replaceAll(_writtenOutRule, '---');
   }

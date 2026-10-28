@@ -3,6 +3,7 @@ import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import '../../utils/lru_cache.dart';
 import 'privacy_scanner.dart';
+import '../../utils/log.dart';
 
 /// Per-slide memoisatie van de privacyscan.
 ///
@@ -55,6 +56,7 @@ PrivacyScanResult memoizedSlideScan(
 /// de twee op willekeurige decks, zodat de snelle weg niet stilletjes van de
 /// trage kan gaan afwijken.
 PrivacyScanResult memoizedDeckScan(PrivacyScanner scanner, Deck deck) {
+  noteWork('privacyscan');
   final findings = [
     ...scanner.scanDeckFields(deck).findings,
     for (var i = 0; i < deck.slides.length; i++)

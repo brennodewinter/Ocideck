@@ -293,6 +293,7 @@ _readAndScanMarkdown(String filePath, String? content) async {
   // Fail-closed: never open content that carries executable markup. Scanning
   // `raw` — the very bytes the caller parses next — closes any
   // time-of-check/time-of-use gap.
+  noteWork('presentatie openen');
   final findings = MarkdownSafetyScanner.scan(raw);
   if (findings.isNotEmpty) {
     logWarning(
