@@ -246,7 +246,6 @@ Future<Uint8List> buildDocumentExportBytes(
   String? sourcePath,
   String? outputPath,
 }) async {
-  noteWork('documentexport ${format.name}');
   final theme = bundle.audience.deck.themeProfile;
   // Mermaid-diagrammen volgen de stijlkleuren van het deck, net als de rest
   // van het document — de resolver krijgt de bron al met themeVariables, zodat
@@ -625,6 +624,7 @@ Future<DocumentExportOutcome> writeDocumentExport(
   // De bouwwaarschuwingen verzamelen we hier, zodat ze blijvend in het
   // resultaat kunnen landen in plaats van onderweg te vervliegen (#2467).
   final warnings = <DocumentExportWarning>[];
+  noteWork('documentexport ${format.name}');
   final bytes = await buildDocumentExportBytes(
     bundle,
     format,
