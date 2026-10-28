@@ -8,6 +8,12 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.3] — 2026-10-28
+
+### Fixed
+
+- fix(linux): declare PulseAudio runtime for release packages
+
 ## [0.7.2] — 2026-10-28
 
 ### Changed
