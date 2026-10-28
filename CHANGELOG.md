@@ -8,6 +8,24 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Added
+
+- **Logboek en diagnose op desktop (#2618).** Een release-build liet tot nu
+  toe geen enkel spoor achter: alle foutmeldingen gingen naar een
+  ontwikkelaarsconsole die daar niet bestaat, dus "start niet" en "loopt vast"
+  waren niet te onderzoeken. OciDeck houdt nu een lokaal logboek bij in de
+  app-supportmap (`logs/`, hooguit twee bestanden van 1 MiB) met fouten,
+  opstartmijlpalen, vastlopers van meer dan een halve seconde met het werk dat
+  toen liep, en een melding wanneer de vorige sessie niet netjes werd
+  afgesloten. Paden en bestandsnamen worden vóór het wegschrijven vervangen
+  door een korte hash; inhoud van decks of documenten komt er niet in.
+  *Instellingen → Over OciDeck → Diagnose* kopieert versie, systeem en de
+  laatste 200 regels plakklaar voor een issue, of opent de logmap. Er gaat
+  niets vanzelf het netwerk op. *Alles terugzetten* wist het logboek mee.
+- **Windows-rookproef eist een venster.** De releaseproef keek alleen of het
+  proces na 15 s nog leefde; hij wacht nu op de mijlpaal "eerste frame" in het
+  logboek, en zet dat logboek bij een fout in het releaselog.
+
 ## [0.7.3] — 2026-10-28
 
 ### Fixed

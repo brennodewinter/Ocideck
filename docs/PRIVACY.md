@@ -1,6 +1,6 @@
 # OciDeck — Privacy & Data Handling
 
-> **Status:** current-state description of what stays local and what leaves · **Status last reviewed:** 2026-09-08 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of what stays local and what leaves · **Status last reviewed:** 2026-10-29 · **Published by:** Stichting LibreKAT
 
 A plain-language guide to what happens to your data in OciDeck: what stays on your
 device, what leaves it and only when you ask, and the controls you have. For the
@@ -58,6 +58,19 @@ machine (desktop) or in your browser tab (web). This includes:
   slides, so everything you would want back after a crash is in there —
   including the parts that live beside the `.md` rather than in it. In the
   browser no snapshot is written at all, because there is no such folder.
+- The log file (desktop only, since #2618) — warnings, errors, start-up
+  milestones and freezes, in `logs/` in the same application-support folder:
+  at most two files of 1 MiB, the oldest overwritten. Before a line is written,
+  every absolute path and file name is replaced by a short hash such as
+  `<pad#1a2b3c4d.md>`, and an error that would quote the text it failed to parse
+  keeps only its message and position. What remains is the name of the
+  operation that failed, the error message, timestamps, the OciDeck and
+  operating-system version, and the names of storage connections and server
+  addresses you configured yourself. It never leaves the device by itself:
+  Settings → About OciDeck → Diagnostics copies the last 200 lines to the
+  clipboard or opens the folder, and you decide whether to share it. A second
+  file, `ocideck.sessie`, exists only while the app runs; finding it at start-up
+  is how OciDeck knows the previous run did not end cleanly.
   Settings → Security has a button that wipes them immediately.
 
   *Why not encrypt them?* A snapshot almost always holds a deck that also exists
@@ -177,7 +190,7 @@ machine (desktop) or in your browser tab (web). This includes:
 
 - **Everything at once.** Settings → Security has *Reset everything to its
   initial state*: all settings, the recent list, the recovery snapshots, every
-  git working copy and the passwords in your keychain. Your presentations are
+  git working copy, the log files and the passwords in your keychain. Your presentations are
   not touched — those are yours, not OciDeck's. If unpushed commits are waiting,
   the confirmation says how many before you go ahead.
 
