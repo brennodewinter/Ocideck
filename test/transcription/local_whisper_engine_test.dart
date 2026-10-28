@@ -181,7 +181,7 @@ void main() {
             onStderrLine: onStderrLine,
           );
         },
-        executable: '/usr/bin/true',
+        executable: Platform.resolvedExecutable,
         model: model,
         workDir: workDir,
       );
