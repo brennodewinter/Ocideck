@@ -36,10 +36,10 @@ Widget _bulletMarkerField(
               icon: const Icon(Icons.pets, size: 16),
               label: Text(l10n.d('Pootje')),
             ),
-            const ButtonSegment(
+            ButtonSegment(
               value: BulletMarker.customSvg,
-              icon: Icon(Icons.image_outlined, size: 16),
-              label: Text('SVG'),
+              icon: const Icon(Icons.image_outlined, size: 16),
+              label: Text(l10n.d('SVG')),
             ),
           ],
           selected: {profile.bulletMarker},
