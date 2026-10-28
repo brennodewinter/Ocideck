@@ -259,14 +259,39 @@ jobs:
             throw '.md mist de "Openen met"-vermelding voor OciDeck.Package.'
           }
 
-          # 3. Startproef: de app moet opkomen en draaien blijven. Een exe die
-          #    direct wegvalt (mismatched dll, ontbrekende payload) mag de
-          #    release nooit bereiken.
+          # 3. Startproef: de app moet opkomen, een venster tekenen en draaien
+          #    blijven. Een exe die direct wegvalt (mismatched dll, ontbrekende
+          #    payload) mag de release nooit bereiken — en een proces dat leeft
+          #    maar nooit een frame tekent evenmin: op Windows verschijnt het
+          #    venster pas bij het eerste frame, dus voor de gebruiker is dat
+          #    "de app start niet". Het logbestand (#2618) zegt welke mijlpaal
+          #    er wel kwam; bij een fout staat het hieronder in het releaselog.
           $app = Start-Process -FilePath "$doel\ocideck.exe" -PassThru
-          Start-Sleep -Seconds 15
+          $log = $null; $frame = $false; $wacht = 0
+          while (-not $frame -and $wacht -lt 60) {
+            Start-Sleep -Seconds 2; $wacht += 2
+            $app.Refresh()
+            if ($app.HasExited) { break }
+            if (-not $log) {
+              $log = Get-ChildItem -Path $env:APPDATA -Filter 'ocideck.log' -Recurse -ErrorAction SilentlyContinue |
+                Where-Object { $_.Directory.Name -eq 'logs' } | Select-Object -First 1
+            }
+            if ($log) { $frame = Select-String -Path $log.FullName -Pattern 'opstart: eerste frame' -Quiet }
+          }
+          $app.Refresh()
+          if ($log) {
+            Write-Host "--- $($log.FullName) ---"
+            Get-Content $log.FullName | Write-Host
+          }
+          if ($app.HasExited) {
+            throw "ocideck.exe is binnen $wacht s gestopt (exit $($app.ExitCode))."
+          }
+          if (-not $log) { throw "ocideck.exe draait, maar schreef binnen $wacht s geen logbestand." }
+          if (-not $frame) { throw "ocideck.exe draait, maar tekende binnen $wacht s geen eerste frame." }
+          Start-Sleep -Seconds 5
           $app.Refresh()
           if ($app.HasExited) {
-            throw "ocideck.exe is binnen 15 s gestopt (exit $($app.ExitCode))."
+            throw "ocideck.exe stopte kort na het eerste frame (exit $($app.ExitCode))."
           }
           Stop-Process -Id $app.Id -Force
 
