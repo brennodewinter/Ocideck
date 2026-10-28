@@ -61,7 +61,7 @@ Each needs its own tool: `dpkg-deb` (base system), `rpmbuild` (the `rpm`
 package, installed by the job) and `appimagetool`. The `.rpm` deliberately lets
 rpmbuild derive its `Requires` from the ELF's sonames, so it resolves on both
 Fedora and openSUSE without hardcoded package names; the `.deb` lists
-`libgtk-3-0t64 | libgtk-3-0, libsecret-1-0, liblzma5`, with alternatives that
+`libgtk-3-0t64 | libgtk-3-0, libsecret-1-0, liblzma5, libpulse0`, with alternatives that
 bridge Debian and Ubuntu 24.04's `t64` renames.
 
 ## The appimagetool pin
