@@ -111,6 +111,7 @@ part 'parts/settings_dialog_document_fonts.dart';
 part 'parts/settings_dialog_style_preview.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
+part 'parts/settings_dialog_bullet_marker.dart';
 part 'parts/settings_dialog_table_style.dart';
 part 'parts/settings_dialog_profile.dart';
 part 'parts/settings_dialog_privacy.dart';

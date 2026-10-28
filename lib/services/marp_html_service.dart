@@ -908,15 +908,9 @@ class MarpHtmlService {
         '.slide h2{font-size:34px;margin:.15em 0;color:${t.accentColor}}'
         '.slide a{color:${t.accentColor}}'
         '.slide p,.slide li{font-size:24px;line-height:1.45}'
-        // Cat-paw bullet markers (only on slides tagged .paw-bullets). The dot
-        // is removed and an inline-SVG paw is absolutely positioned in the gutter
-        // so it scales with the text and never disturbs the line box.
-        '.slide.paw-bullets ul{list-style:none;padding-left:1.5em}'
-        '.slide.paw-bullets ul li{position:relative}'
-        '.slide.paw-bullets ul li::before{content:"";position:absolute;'
-        'left:-1.4em;top:.5em;width:.78em;height:.78em;'
-        'background:url("${_pawDataUri(t.accentColor)}") center/contain no-repeat}'
-        '${_customBulletSvgCss(t)}'
+        // Paw and custom-SVG bullet markers (see _bulletMarkerCss in
+        // marp_html_service_markup.dart).
+        '${_bulletMarkerCss(t)}'
         '.slide pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
         'border:1px solid ${t.codeTextColor}38;border-radius:6px;'
         'padding:16px;overflow:auto;font-size:18px;font-family:$codeFamily}'

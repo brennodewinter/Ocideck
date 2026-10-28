@@ -56,129 +56,19 @@ extension _SettingsColors on _SettingsDialogState {
         ),
       ),
       const SizedBox(height: 12),
-      _settingFieldRow(
+      _bulletMarkerField(
         context,
-        label: Text(
-          l10n.d('Opsommingsteken'),
-          style: const TextStyle(fontSize: 13),
-        ),
-        control: SegmentedButton<BulletMarker>(
-          segments: [
-            ButtonSegment(
-              value: BulletMarker.dot,
-              icon: const Icon(Icons.fiber_manual_record, size: 12),
-              label: Text(l10n.d('Stip')),
-            ),
-            ButtonSegment(
-              value: BulletMarker.paw,
-              icon: const Icon(Icons.pets, size: 16),
-              label: Text(l10n.d('Pootje')),
-            ),
-            ButtonSegment(
-              value: BulletMarker.customSvg,
-              icon: const Icon(Icons.image_outlined, size: 16),
-              label: const Text('SVG'),
-            ),
-          ],
-          selected: {_themeProfile.bulletMarker},
-          showSelectedIcon: false,
-          style: const ButtonStyle(visualDensity: VisualDensity.compact),
-          onSelectionChanged: (selection) => _rebuild(() {
-            _themeProfile = _themeProfile.copyWith(
-              bulletMarker: selection.first,
-            );
-            _profileTouched = true;
-          }),
-        ),
+        profile: _themeProfile,
+        onChanged: (p) => _rebuild(() {
+          _themeProfile = p;
+          _profileTouched = true;
+        }),
       ),
-      if (_themeProfile.bulletMarker == BulletMarker.customSvg) ...[
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            OutlinedButton.icon(
-              key: const Key('custom-bullet-svg-picker'),
-              onPressed: _pickCustomBulletSvg,
-              icon: const Icon(Icons.upload_file, size: 18),
-              label: Text(
-                l10n.d(
-                  _themeProfile.customBulletSvg == null
-                      ? 'Bestand kiezen'
-                      : 'Vervangen',
-                ),
-              ),
-            ),
-            if (_themeProfile.customBulletSvg != null) ...[
-              const SizedBox(width: 8),
-              TextButton(
-                onPressed: () => _rebuild(() {
-                  _themeProfile = _themeProfile.copyWith(
-                    clearCustomBulletSvg: true,
-                  );
-                  _profileTouched = true;
-                }),
-                child: Text(l10n.d('Verwijder')),
-              ),
-            ],
-          ],
-        ),
-      ],
       ..._checklistColorSettings(contrast),
       ..._tableColorSettings(contrast),
       ..._codeColorSettings(contrast),
       ..._severityColorSettings(),
     ];
-  }
-
-  Future<void> _pickCustomBulletSvg() async {
-    final file = await FilePicker.pickFile(
-      dialogTitle: context.l10n.d('Bestand kiezen'),
-      type: FileType.custom,
-      allowedExtensions: const ['svg'],
-    );
-    if (file == null || !mounted) return;
-
-    final length = file.lengthSync() ?? await file.length();
-    if (length == null || length > kMaxCustomBulletSvgChars) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            context.l10n.d('Dit bestand is te groot om te openen.'),
-          ),
-        ),
-      );
-      return;
-    }
-
-    String source;
-    try {
-      source = utf8.decode(await file.readAsBytes());
-    } on FormatException {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.d('Het bestand kon niet worden gelezen.')),
-        ),
-      );
-      return;
-    }
-    final sanitised = sanitizeCustomBulletSvg(source);
-    if (!mounted) return;
-    if (sanitised == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.d('Het bestand kon niet worden gelezen.')),
-        ),
-      );
-      return;
-    }
-    _rebuild(() {
-      _themeProfile = _themeProfile.copyWith(
-        bulletMarker: BulletMarker.customSvg,
-        customBulletSvg: sanitised,
-      );
-      _profileTouched = true;
-    });
   }
 
   /// De kleuren die alléén een dia raakt: de titelbalk en de sectieachtergrond.

@@ -215,6 +215,18 @@ String _pawDataUri(String accent) {
   return 'data:image/svg+xml,${Uri.encodeComponent(svg)}';
 }
 
+/// De CSS voor de niet-stip-bullets: het pootje (alleen op slides met de
+/// sectieklasse `paw-bullets`) en de eigen SVG (`custom-svg-bullets`). De stip
+/// wordt weggehaald en de marker absoluut in de goot gezet, zodat hij met de
+/// tekst meeschaalt en de regelafstand nooit verstoort.
+String _bulletMarkerCss(ThemeProfile t) =>
+    '.slide.paw-bullets ul{list-style:none;padding-left:1.5em}'
+    '.slide.paw-bullets ul li{position:relative}'
+    '.slide.paw-bullets ul li::before{content:"";position:absolute;'
+    'left:-1.4em;top:.5em;width:.78em;height:.78em;'
+    'background:url("${_pawDataUri(t.accentColor)}") center/contain no-repeat}'
+    '${_customBulletSvgCss(t)}';
+
 String _customBulletSvgDataUri(String svg) =>
     'data:image/svg+xml,${Uri.encodeComponent(svg)}';
 
