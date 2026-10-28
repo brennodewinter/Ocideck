@@ -35,7 +35,7 @@ release levert de bundel al als `ocideck-linux-x64-<versie>.tar.gz` — dat blij
 de rauwe basis.
 
 Runtime-afhankelijkheden (uit de gelinkte libs): `libgtk-3-0`, `libsecret-1-0`
-(sleutelopslag via `flutter_secure_storage`) en `liblzma5`. Een native pakket
+(sleutelopslag via `flutter_secure_storage`), `liblzma5` en `libpulse0`. Een native pakket
 moet die als dependencies benoemen; een AppImage/Flatpak bundelt of levert ze
 mee.
 

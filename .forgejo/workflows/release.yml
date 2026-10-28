@@ -778,8 +778,8 @@ jobs:
           set -eu
           export DEBIAN_FRONTEND=noninteractive
           apt-get install -y --no-install-recommends \
-            xvfb fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
-            libayatana-appindicator3-1 libgles2 libegl1
+            xvfb xauth fonts-dejavu-core libgtk-3-0 libsecret-1-0 liblzma5 \
+            libayatana-appindicator3-1 libgles2 libegl1 libpulse0
           mkdir -p /tmp/ocideck-test
           tar -xzf "dist/ocideck-linux-debian12-x86_64-${GITHUB_REF_NAME#v}.tar.gz" -C /tmp/ocideck-test
           cd /tmp/ocideck-test/ocideck-linux-debian12-*

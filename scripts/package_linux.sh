@@ -113,7 +113,7 @@ Version: $VERSION
 Architecture: amd64
 Maintainer: $MAINTAINER
 Installed-Size: $size_kb
-Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libayatana-appindicator3-1, libgles2, libegl1
+Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libayatana-appindicator3-1, libgles2, libegl1, libpulse0
 Section: office
 Priority: optional
 Homepage: $HOMEPAGE

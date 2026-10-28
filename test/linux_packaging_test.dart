@@ -62,6 +62,14 @@ void main() {
       );
     });
 
+    test('the Debian 12 smoke test installs the linked PulseAudio runtime', () {
+      final job = releaseYaml
+          .split('  consumer-debian12:')[1]
+          .split('  consumer-rpm:')[0];
+      expect(job, contains('libpulse0'));
+      expect(job, contains('xauth'));
+    });
+
     test('appimagetool is pinned by a 64-hex sha256, not floated', () {
       final match = RegExp(
         r'APPIMAGETOOL_SHA256:\s*([0-9a-f]{64})',
@@ -415,6 +423,7 @@ void main() {
         'liblzma5',
         'libgles2',
         'libegl1',
+        'libpulse0',
         // cnativeapi links the tray library since the nativeapi migration
         // (#1741); it is a system lib the bundle does not carry.
         'libayatana-appindicator3-1',
@@ -553,6 +562,7 @@ void main() {
         'libsecret',
         'xz',
         'libayatana-appindicator',
+        'libpulse',
       ]) {
         expect(depends, contains(dep));
       }

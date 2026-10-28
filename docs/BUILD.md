@@ -1127,7 +1127,7 @@ design and the remaining phases (an rpm repo; Snap) are in
 - **Tools.** `dpkg-deb` (base system), `rpmbuild` (the `rpm` package, added by
   the job) and `appimagetool`. The `.rpm` lets rpmbuild derive soname `Requires`
   so it resolves on Fedora and openSUSE alike; the `.deb` declares
-  `libgtk-3-0t64 | libgtk-3-0, libsecret-1-0, liblzma5`.
+  `libgtk-3-0t64 | libgtk-3-0, libsecret-1-0, liblzma5, libpulse0`.
 - **appimagetool is sha256-pinned** (`APPIMAGETOOL_SHA256` in the job), because it
   only ships a rolling `continuous` tag — there is no version to monitor, so the
   hash is the pin. A drift fails the build loudly; to re-pin, fetch the new digest
