@@ -22,7 +22,7 @@ The documentation reader has its own **A− / A+** control on top of that, becau
 reading a guide and operating an editor want different sizes.
 
 **Screen-reader labels where the interface is not text.** Slide thumbnails carry
-a composed label ("Slide 3/12: <title>", plus skipped state, whether the slide is
+a composed label (`Slide 3/12: <title>`, plus skipped state, whether the slide is
 withheld by its TLP classification and at which level, and whether it has notes)
 rather than being announced as an unnamed image. Both reasons a slide will not
 reach the audience are spoken, and spoken separately, because the dimming and the

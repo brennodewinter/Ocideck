@@ -5775,7 +5775,7 @@ document aan huisstijl draagt, en als er iets te vinden is toont één dialoog �
 De stijl overnemen is optioneel, want hij kan al bestaan of bewust losgelaten
 worden. **Alleen tekst** opent het document zonder stijl. **Stijl overnemen**
 bewaart een nieuw stijlprofiel onder de naam in het veld (standaard *Stijl van
-<titel>*, met als titel wat het document zichzelf noemt in zijn eigenschappen,
+`<titel>`*, met als titel wat het document zichzelf noemt in zijn eigenschappen,
 anders de eerste kop, anders de bestandsnaam) en zet `theme: <naam>` in de front matter van het document, precies
 zoals de Stijl-knop dat doet. Is er al een profiel dat deze huisstijl *is* —
 dezelfde letters, kleuren, kop-/voettekst en dezelfde logobytes — dan zegt de

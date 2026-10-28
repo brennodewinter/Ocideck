@@ -27,7 +27,7 @@ De documentatielezer heeft daarbovenop zijn eigen **A− / A+**-knop, omdat het
 lezen van een gids en het bedienen van een editor om verschillende maten vragen.
 
 **Schermlezerlabels waar de interface geen tekst is.** Diaminiaturen dragen een
-samengesteld label ("Dia 3/12: <titel>", plus de overgeslagen-staat, of de dia
+samengesteld label (`Dia 3/12: <titel>`, plus de overgeslagen-staat, of de dia
 wordt achtergehouden door zijn TLP-classificatie en op welk niveau, en of hij
 notities heeft) in plaats van als naamloze afbeelding te worden aangekondigd.
 Beide redenen waarom een dia het publiek niet bereikt worden uitgesproken, en

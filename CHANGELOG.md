@@ -8,6 +8,18 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- **Gebruikershandleiding brak halverwege af op de forge (#2612).** Een
+  plaatshouder `<title>` in lopende tekst las Forgejo als echte HTML-tag,
+  waardoor alles erna als titeltekst wegviel: in USER_GUIDE ruim 1.400 regels,
+  waaronder *Theming and language* waar de inhoudsopgave naar wees, en in
+  ACCESSIBILITY alles na de eerste alinea. In de ingebouwde lezer was het
+  zichtbaar, op de repositorypagina niet. De plaatshouders staan nu tussen
+  backticks (ook in de Nederlandse versies), en `check-conventions` weigert
+  voortaan zo'n rauwe-teksttag (`<title>`, `<script>`, `<style>`, …) buiten
+  code in elk Markdownbestand. Met dank aan Jeroen Hermans voor de melding.
+
 ## [0.7.3] — 2026-10-28
 
 ### Fixed
