@@ -56,35 +56,13 @@ extension _SettingsColors on _SettingsDialogState {
         ),
       ),
       const SizedBox(height: 12),
-      _settingFieldRow(
+      _bulletMarkerField(
         context,
-        label: Text(
-          l10n.d('Opsommingsteken'),
-          style: const TextStyle(fontSize: 13),
-        ),
-        control: SegmentedButton<BulletMarker>(
-          segments: [
-            ButtonSegment(
-              value: BulletMarker.dot,
-              icon: const Icon(Icons.fiber_manual_record, size: 12),
-              label: Text(l10n.d('Stip')),
-            ),
-            ButtonSegment(
-              value: BulletMarker.paw,
-              icon: const Icon(Icons.pets, size: 16),
-              label: Text(l10n.d('Pootje')),
-            ),
-          ],
-          selected: {_themeProfile.bulletMarker},
-          showSelectedIcon: false,
-          style: const ButtonStyle(visualDensity: VisualDensity.compact),
-          onSelectionChanged: (selection) => _rebuild(() {
-            _themeProfile = _themeProfile.copyWith(
-              bulletMarker: selection.first,
-            );
-            _profileTouched = true;
-          }),
-        ),
+        profile: _themeProfile,
+        onChanged: (p) => _rebuild(() {
+          _themeProfile = p;
+          _profileTouched = true;
+        }),
       ),
       ..._checklistColorSettings(contrast),
       ..._tableColorSettings(contrast),

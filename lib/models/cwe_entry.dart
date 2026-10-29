@@ -11,6 +11,7 @@ class CweEntry {
     required this.name,
     required this.description,
     required this.recommendation,
+    this.aliases = const [],
   });
 
   /// The numeric CWE id (e.g. `89` for CWE-89).
@@ -25,6 +26,11 @@ class CweEntry {
   /// A remediation skeleton the tester tailors to the concrete finding.
   final String recommendation;
 
+  /// MITRE's Alternate Terms ("SQL Injection", "XSS"). Searched, not shown:
+  /// CWE 5.0 dropped these common names from the titles, and a tester still
+  /// types them.
+  final List<String> aliases;
+
   /// The canonical MITRE definition page for this weakness.
   String get url => 'https://cwe.mitre.org/data/definitions/$id.html';
 
@@ -32,8 +38,10 @@ class CweEntry {
   String get label => 'CWE-$id — $name';
 
   /// Lower-cased haystack for [CweCatalog.search]: the id in both bare (`89`)
-  /// and prefixed (`cwe-89`) form plus the name and description, so a tester can
-  /// find an entry by number or by keyword ("sql", "xss", "traversal").
+  /// and prefixed (`cwe-89`) form plus the name, description and aliases, so a
+  /// tester can find an entry by number or by keyword ("sql", "xss",
+  /// "traversal").
   String get searchText =>
-      'cwe-$id $id ${name.toLowerCase()} ${description.toLowerCase()}';
+      'cwe-$id $id ${name.toLowerCase()} ${description.toLowerCase()} '
+      '${aliases.join(' ').toLowerCase()}';
 }

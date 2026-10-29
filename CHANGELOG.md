@@ -8,6 +8,18 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- **MITRE CWE bijgewerkt van 4.20 naar 5.0.** De volledige lijst telt nu 984
+  zwakheden (15 nieuw, geen enkele verdwenen). CWE 5.0 haalde de gangbare
+  namen uit de titels (`('SQL Injection')`, `('Path Traversal')`) en zette ze
+  alleen nog bij de Alternate Terms; de bouwer neemt die nu als zoektermen mee,
+  zodat "race condition" of "xss" in de CWE-kiezer nog steeds vindt wat het
+  vond. De eigen kern volgt de nieuwe MITRE-namen, en CWE-613 (Insufficient
+  Session Expiration), in 5.0 vervallen, is vervangen door CWE-1463 (time-out)
+  en CWE-1464 (sessie-invalidatie). De verouderingspoort telde een standaard
+  die zowel verouderd als onvolledig was dubbel; dat is één.
+
 ### Fixed
 
 - **Logo en stijl reizen met het pakket, niet in de markdown (#2640–#2645, #2648–#2651).** Op de webversie kun je een presentatie-, donker en documentlogo kiezen; de bytes blijven in deze sessie en gaan mee in een pakket of een `.ocideckstyle`. Een kale download waarschuwt. Een opgeslagen project kopieert die logo's naast elkaar, ook als ze dezelfde bestandsnaam hebben. Een `.ocideck` legt de stijl in `ocideck-style.json` naast de markdown: OciDeck past hem toe op dat deck en laat het globale profiel staan. Oudere pakketten zonder dat bestand houden het lokale profiel. Annuleren in de instellingen gooit een nieuw of verwijderd stijlprofiel en een gewijzigde documentlay-out weer weg. De documentlettermaat geldt ook in DOCX en ODT. De Marp-CSS van een pakket neemt letter en tabelstijl van het profiel over.

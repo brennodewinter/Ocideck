@@ -318,7 +318,10 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#2429): import van ociserve_org_themes voor de themaregister-knop
   // in het profielonderdeel.
   // +1 (#2510): import van de transcriptie-modulekaart.
-  'lib/widgets/dialogs/settings_dialog.dart': 1048,
+  // +2 (#2616): de sanitize_svg-import voor de eigen-SVG-bulletkiezer en de
+  // part-directive voor settings_dialog_bullet_marker — de rij zelf staat daar
+  // als top-level hulp, niet in de klasse.
+  'lib/widgets/dialogs/settings_dialog.dart': 1050,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
       1018, // +1 (#2515): transcriptAudioPath-parameter op

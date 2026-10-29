@@ -1,7 +1,7 @@
 // ── THIRD-PARTY CONTENT — NOT EUPL-1.2 ──────────────────────────────────────
 //
 // The weakness ids, names and descriptions in this file and in the bundled
-// asset `assets/cwe/cwe_full.json` are **MITRE CWE** content (CWE 4.20). CWE is
+// asset `assets/cwe/cwe_full.json` are **MITRE CWE** content (CWE 5.0). CWE is
 // © The MITRE Corporation; use is governed by MITRE's Terms of Use, which
 // require attribution to MITRE. The remediation snippets in the curated floor
 // below are OciDeck's own text under EUPL-1.2.
@@ -74,6 +74,7 @@ class CweCatalog {
             name: (m['name'] as String?) ?? '',
             description: (m['description'] as String?) ?? '',
             recommendation: '',
+            aliases: [...?(m['aliases'] as List?)?.cast<String>()],
           ),
       };
       for (final floor in _entries) {
@@ -119,8 +120,16 @@ class CweCatalog {
 const List<CweEntry> _entries = [
   CweEntry(
     id: 79,
-    name:
-        "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    name: 'Improper Neutralization of Input During Web Page Generation',
+    aliases: [
+      'Cross-site Scripting',
+      'XSS',
+      'HTML Injection',
+      'Reflected XSS / Non-Persistent XSS / Type 1 XSS',
+      'Stored XSS / Persistent XSS / Type 2 XSS',
+      'DOM-Based XSS / Type 0 XSS',
+      'CSS',
+    ],
     description:
         'The application places untrusted input into web page output without '
         'proper neutralization, so an attacker can inject script that runs in '
@@ -132,8 +141,8 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 89,
-    name:
-        "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    name: 'Improper Neutralization of Special Elements used in an SQL Command',
+    aliases: ['SQL Injection', 'SQLi'],
     description:
         'User-controllable input is concatenated into an SQL query without '
         'proper neutralization, letting an attacker alter the query logic to '
@@ -145,8 +154,12 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 78,
-    name:
-        "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    name: 'Improper Neutralization of Special Elements used in an OS Command',
+    aliases: [
+      'Shell injection',
+      'Shell metacharacters',
+      'OS Command Injection',
+    ],
     description:
         'The application builds an operating-system command from untrusted '
         'input without neutralization, so an attacker can execute arbitrary '
@@ -158,7 +171,8 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 94,
-    name: "Improper Control of Generation of Code ('Code Injection')",
+    name: 'Improper Control of Generation of Code',
+    aliases: ['Code Injection'],
     description:
         'Untrusted input is incorporated into code that the application then '
         'evaluates or executes, allowing an attacker to run arbitrary code in '
@@ -170,8 +184,8 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 90,
-    name:
-        "Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')",
+    name: 'Improper Neutralization of Special Elements used in an LDAP Query',
+    aliases: ['LDAP Injection'],
     description:
         'Untrusted input is placed into an LDAP query without neutralization, '
         'letting an attacker modify the query to bypass authentication or read '
@@ -183,8 +197,8 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 22,
-    name:
-        "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    name: 'Improper Limitation of a Pathname to a Restricted Directory',
+    aliases: ['Path traversal', 'Directory traversal', 'Path transversal'],
     description:
         'The application uses untrusted input to build a file path without '
         "neutralizing sequences such as '../', so an attacker can read or write "
@@ -197,6 +211,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 434,
     name: 'Unrestricted Upload of File with Dangerous Type',
+    aliases: ['Unrestricted File Upload'],
     description:
         'The application lets users upload files without adequately restricting '
         'the type or content, so an attacker can upload executable or malicious '
@@ -208,7 +223,8 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 352,
-    name: "Cross-Site Request Forgery (CSRF)",
+    name: 'Cross-Site Request Forgery',
+    aliases: ['Session Riding', 'Cross Site Reference Forgery', 'XSRF', 'CSRF'],
     description:
         'The application cannot distinguish a deliberate user request from one '
         "forged by a malicious site, so an attacker can cause state-changing "
@@ -220,7 +236,14 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 601,
-    name: "URL Redirection to Untrusted Site ('Open Redirect')",
+    name: 'URL Redirection to Untrusted Site',
+    aliases: [
+      'Open Redirect',
+      'Cross-site Redirect',
+      'Cross-domain Redirect',
+      'Unvalidated Redirect',
+      'Drive-by download',
+    ],
     description:
         'The application redirects to a URL taken from untrusted input without '
         'validation, so an attacker can send victims to a malicious site under '
@@ -233,6 +256,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 611,
     name: 'Improper Restriction of XML External Entity Reference',
+    aliases: ['XXE'],
     description:
         'The XML parser resolves external entities defined in untrusted input '
         '(XXE), letting an attacker read local files, reach internal services '
@@ -244,7 +268,8 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 918,
-    name: 'Server-Side Request Forgery (SSRF)',
+    name: 'Server-Side Request Forgery',
+    aliases: ['XSPA', 'SSRF'],
     description:
         'The application fetches a URL supplied by the user without sufficient '
         'validation, so an attacker can make the server issue requests to '
@@ -257,6 +282,11 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 502,
     name: 'Deserialization of Untrusted Data',
+    aliases: [
+      'Marshaling/Marshalling, Unmarshaling/Unmarshalling',
+      'Pickling, Unpickling',
+      'PHP Object Injection',
+    ],
     description:
         'The application deserializes untrusted data without sufficient '
         'verification, allowing an attacker to tamper with object state or, '
@@ -281,6 +311,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 116,
     name: 'Improper Encoding or Escaping of Output',
+    aliases: ['Output Sanitization', 'Output Validation', 'Output Encoding'],
     description:
         'The application does not correctly encode or escape output for the '
         'consuming context, so special characters are interpreted as control '
@@ -293,6 +324,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 287,
     name: 'Improper Authentication',
+    aliases: ['authentification', 'AuthN', 'AuthC'],
     description:
         'The application does not correctly verify a claimed identity, so an '
         'attacker can authenticate as another user or bypass authentication '
@@ -304,7 +336,7 @@ const List<CweEntry> _entries = [
   ),
   CweEntry(
     id: 306,
-    name: 'Missing Authentication for Critical Function',
+    name: 'Missing Authentication for Critical Functionality',
     description:
         'A function that performs a sensitive action does not require '
         'authentication, so any actor who can reach it can invoke it.',
@@ -316,6 +348,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 862,
     name: 'Missing Authorization',
+    aliases: ['AuthZ'],
     description:
         'The application does not check whether the authenticated user is '
         'permitted to perform the requested action, allowing unauthorized '
@@ -328,6 +361,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 863,
     name: 'Incorrect Authorization',
+    aliases: ['AuthZ'],
     description:
         'The application performs an authorization check but does so '
         'incorrectly, so a user can access resources or actions beyond their '
@@ -340,6 +374,11 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 639,
     name: 'Authorization Bypass Through User-Controlled Key',
+    aliases: [
+      'Insecure Direct Object Reference / IDOR',
+      'Broken Object Level Authorization / BOLA',
+      'Horizontal Authorization',
+    ],
     description:
         'The application exposes a direct reference to an object (an id in the '
         'request) and authorizes on that key without checking ownership, '
@@ -352,6 +391,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 284,
     name: 'Improper Access Control',
+    aliases: ['Authorization'],
     description:
         'The application does not restrict, or incorrectly restricts, access to '
         'a resource from an unauthorized actor.',
@@ -485,6 +525,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 200,
     name: 'Exposure of Sensitive Information to an Unauthorized Actor',
+    aliases: ['Information Disclosure', 'Information Leak'],
     description:
         'The application discloses sensitive information to actors who are not '
         'explicitly authorized to access it.',
@@ -515,16 +556,31 @@ const List<CweEntry> _entries = [
         '(especially login), invalidate the old one, and bind sessions to '
         'secure, HttpOnly cookies.',
   ),
+  // CWE-613 (Insufficient Session Expiration) stood here until CWE 5.0
+  // deprecated it and split it into CWE-1462 and its descendants; its two
+  // halves are the next two entries.
   CweEntry(
-    id: 613,
-    name: 'Insufficient Session Expiration',
+    id: 1463,
+    name: 'Insufficient Session Timeout Value',
     description:
-        'Sessions remain valid too long or are not invalidated on logout, '
-        'widening the window in which a captured session can be reused.',
+        'Sessions stay valid too long because the idle or absolute timeout is '
+        'excessive or missing, widening the window in which a captured '
+        'session can be reused.',
     recommendation:
-        'Enforce absolute and idle session timeouts, invalidate sessions '
-        'server-side on logout and password change, and keep lifetimes '
-        'proportionate to the risk.',
+        'Enforce both an idle and an absolute session timeout, server-side, '
+        'and keep lifetimes proportionate to the risk.',
+  ),
+  CweEntry(
+    id: 1464,
+    name: 'Improper Session Invalidation',
+    description:
+        'Sessions are not invalidated when they should end — on logout, '
+        'password change or privilege change — so a captured session keeps '
+        'working.',
+    recommendation:
+        'Invalidate the session server-side on logout, password change and '
+        'other credential or privilege changes, not only by clearing the '
+        'client cookie.',
   ),
   CweEntry(
     id: 614,
@@ -551,6 +607,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 1021,
     name: 'Improper Restriction of Rendered UI Layers or Frames',
+    aliases: ['Clickjacking', 'UI Redress Attack', 'Tapjacking'],
     description:
         'The application can be framed by another site, enabling clickjacking '
         "where a victim's clicks are hijacked over a hidden overlay.",
@@ -561,6 +618,7 @@ const List<CweEntry> _entries = [
   CweEntry(
     id: 400,
     name: 'Uncontrolled Resource Consumption',
+    aliases: ['Resource Exhaustion'],
     description:
         'The application does not control the amount of a resource an actor can '
         'consume, allowing denial of service by exhausting CPU, memory, '

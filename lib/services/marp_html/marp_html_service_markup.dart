@@ -177,8 +177,8 @@ String _logoOccupySectionClass(Slide? slide, String logoClass) {
   return logoRequiresOccupancyReserve(slide.type) ? ' logo-occupy' : '';
 }
 
-/// Extra `<section>` class that turns this slide's plain bullets into cat-paw
-/// markers (` paw-bullets`), or `''`. The decision is taken entirely from the
+/// Extra `<section>` class that selects a non-dot marker for this slide's plain
+/// bullets, or `''`. The decision is taken entirely from the
 /// `ocideck_bullet_marker` comment that the *export* markdown carries for
 /// every paw-rendering bullet slide (see `MarkdownService`, `forExport`). A
 /// free-markdown slide that merely contains a `-` list never carries that
@@ -190,7 +190,11 @@ String _bulletMarkerSectionClass(String slideMarkdown) {
     return '';
   }
   final marker = _bulletMarkerComment.firstMatch(slideMarkdown)?.group(1);
-  return marker == BulletMarker.paw.name ? ' paw-bullets' : '';
+  return switch (bulletMarkerFromToken(marker)) {
+    BulletMarker.paw => ' paw-bullets',
+    BulletMarker.customSvg => ' custom-svg-bullets',
+    _ => '',
+  };
 }
 
 /// A self-contained cat-paw as an inline SVG `data:` URI, with [accent] baked
@@ -209,6 +213,31 @@ String _pawDataUri(String accent) {
       "<ellipse cx='13.44' cy='6.88' rx='1.76' ry='2.4' fill='$accent' transform='rotate(31.5 13.44 6.88)'/>"
       "</svg>";
   return 'data:image/svg+xml,${Uri.encodeComponent(svg)}';
+}
+
+/// De CSS voor de niet-stip-bullets: het pootje (alleen op slides met de
+/// sectieklasse `paw-bullets`) en de eigen SVG (`custom-svg-bullets`). De stip
+/// wordt weggehaald en de marker absoluut in de goot gezet, zodat hij met de
+/// tekst meeschaalt en de regelafstand nooit verstoort.
+String _bulletMarkerCss(ThemeProfile t) =>
+    '.slide.paw-bullets ul{list-style:none;padding-left:1.5em}'
+    '.slide.paw-bullets ul li{position:relative}'
+    '.slide.paw-bullets ul li::before{content:"";position:absolute;'
+    'left:-1.4em;top:.5em;width:.78em;height:.78em;'
+    'background:url("${_pawDataUri(t.accentColor)}") center/contain no-repeat}'
+    '${_customBulletSvgCss(t)}';
+
+String _customBulletSvgDataUri(String svg) =>
+    'data:image/svg+xml,${Uri.encodeComponent(svg)}';
+
+String _customBulletSvgCss(ThemeProfile theme) {
+  final svg = theme.customBulletSvg;
+  if (svg == null || svg.isEmpty) return '';
+  return '.slide.custom-svg-bullets ul{list-style:none;padding-left:1.5em}'
+      '.slide.custom-svg-bullets ul li{position:relative}'
+      '.slide.custom-svg-bullets ul li::before{content:"";position:absolute;'
+      'left:-1.4em;top:.5em;width:.78em;height:.78em;'
+      'background:url("${_customBulletSvgDataUri(svg)}") center/contain no-repeat}';
 }
 
 /// Neutralise any `</script` inside inlined content so it can't break out of

@@ -178,7 +178,9 @@ Future<GateOutcome> evaluate(List<Standard> standards, Prober prober) async {
       rows.add([s.name, s.version, result.latest!, 'actueel']);
     }
     if (result.integrityProblem.isNotEmpty) {
-      outdated++;
+      // Eén standaard telt één keer: een verouderde CWE-bundel is meestal óók
+      // te kort, en die stond op 29-10-2026 als "2 standaard(en) verouderd".
+      if (!result.stale || s.advisory) outdated++;
       notes.add(result.integrityProblem);
     }
   }
