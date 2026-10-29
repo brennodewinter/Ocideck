@@ -366,9 +366,12 @@ Future<({bool applied, DateTime? fingerprint})> _compareLocalDeckConflict(
   if (theirs == null) {
     // Dezelfde afhandeling als herladen: onveilig → alarm, anders → melding.
     if (result.failure == OpenFailure.unsafe) {
-      final findings = await files.scanForUnsafeMarkdown(path);
-      ref.read(importSecurityAlarmProvider.notifier).state =
-          ImportSecurityAlarm(path: path, findings: findings);
+      ref
+          .read(importSecurityAlarmProvider.notifier)
+          .state = ImportSecurityAlarm(
+        path: path,
+        findings: result.safetyFindings ?? const [],
+      );
     } else {
       showErrorSnackBar(
         ScaffoldMessenger.of(context),

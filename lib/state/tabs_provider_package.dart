@@ -361,6 +361,8 @@ Future<OpenResult> _openPackageFromBytes(
   final initialIndex = initialAnchor == null
       ? 0
       : deck.slides.indexWhere((slide) => slide.anchor == initialAnchor);
+  await warmDeckAnalysisBeforePlace(notifier, deck);
+  if (!notifier.mounted) return OpenResult.unreadable;
   _placeDeckInTab(
     notifier,
     deck,

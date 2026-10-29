@@ -749,7 +749,10 @@ class FileService {
     // (the scan runs on the exact bytes each path parses next).
     final read = await _readAndScanMarkdown(filePath, content);
     if (read.failure != null) {
-      return DeckOpenResult.failed(read.failure!);
+      return DeckOpenResult.failed(
+        read.failure!,
+        safetyFindings: read.safetyFindings,
+      );
     }
     final raw = read.raw!;
     // Only open Marp/OciDeck presentations. Every deck declares `marp: true` in
@@ -1016,19 +1019,28 @@ class FileService {
   /// labelt alleen de logregels.
   ///
   /// Zonder BOM-vlag: wie bytes heeft, gebruikt [openDecodedDeck].
-  ({Deck? deck, OpenFailure? failure}) openDeckFromContent(
-    String raw, {
-    String? sourceName,
-  }) => openDecodedDeck((text: raw, hasBom: false), sourceName: sourceName);
+  ({
+    Deck? deck,
+    OpenFailure? failure,
+    List<MarkdownSafetyFinding>? safetyFindings,
+  })
+  openDeckFromContent(String raw, {String? sourceName}) =>
+      openDecodedDeck((text: raw, hasBom: false), sourceName: sourceName);
 
   /// Als [openDeckFromContent], voor tekst die uit bytes gedecodeerd is. De BOM
   /// reist mee in [decoded]: [Deck.fileHash] gaat over de bytes van het bestand,
   /// en zonder die vlag leest een verzegeld deck waar een ander programma een BOM
   /// voor zette ten onrechte als intact.
-  ({Deck? deck, OpenFailure? failure}) openDecodedDeck(
-    DecodedUtf8 decoded, {
-    String? sourceName,
-  }) {
+  ///
+  /// `safetyFindings` draagt de scanbevindingen bij `unsafe` mee terug, zodat
+  /// de aanroeper het alarm uit dezelfde scan voedt in plaats van de tekst
+  /// nog eens te scannen (#2634).
+  ({
+    Deck? deck,
+    OpenFailure? failure,
+    List<MarkdownSafetyFinding>? safetyFindings,
+  })
+  openDecodedDeck(DecodedUtf8 decoded, {String? sourceName}) {
     final raw = decoded.text;
     final findings = MarkdownSafetyScanner.scan(raw);
     if (findings.isNotEmpty) {
@@ -1037,7 +1049,11 @@ class FileService {
         '(${findings.length} finding(s))',
         sourceName,
       );
-      return (deck: null, failure: OpenFailure.unsafe);
+      return (
+        deck: null,
+        failure: OpenFailure.unsafe,
+        safetyFindings: findings,
+      );
     }
     if (!_md.sniffFrontmatter(raw).marp) {
       logWarning(
@@ -1045,10 +1061,16 @@ class FileService {
         '(no `marp: true` front matter)',
         sourceName,
       );
-      return (deck: null, failure: OpenFailure.notPresentation);
+      return (
+        deck: null,
+        failure: OpenFailure.notPresentation,
+        safetyFindings: null,
+      );
     }
     final parsed = _md.parseDeck(raw, hasBom: decoded.hasBom);
-    if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
+    if (parsed == null) {
+      return (deck: null, failure: OpenFailure.corrupt, safetyFindings: null);
+    }
     // Geen truncatie-check meer, om dezelfde reden als op het schijf-pad: een
     // lege body is een lege presentatie (#1909). Dit pad opende ook decks die
     // uit git of WebDAV terugkomen — dáár trof de weigering de gebruiker in
@@ -1057,6 +1079,7 @@ class FileService {
     return (
       deck: parsed.copyWith(themeProfile: activeProfileFor(projectPath: null)),
       failure: null,
+      safetyFindings: null,
     );
   }
 

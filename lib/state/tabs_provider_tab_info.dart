@@ -53,6 +53,35 @@ void _placeDeckInTab(
   notifier._maybePromptImprovementModule(deck);
 }
 
+/// Meet de koude kwaliteits- en privacycontroles van [deck] vooruit, vóór
+/// [_placeDeckInTab] het deck toont (#2634).
+///
+/// Anders leest de eerste provider-lezing een koude memo: [analyze] meet dan
+/// álle dia's met TextPainter in één synchrone blok op de UI-isolate, en de
+/// tekstscan telt daar honderden milliseconden bovenop — de app bevriest aan
+/// het eind van "openen". De privacytekstscan draait in een werk-isolate; de
+/// kwaliteitsmeting moet op de UI-isolate (TextPainter) maar loopt in
+/// idle-plakken van ~20 dia's, zodat het opstartscherm tussen de plakken
+/// doorschiet. Beide overlappen: de isolate werkt terwijl de plakken lopen.
+///
+/// `openDeckCopyInTab` roept dit bewust níét aan: die kopie deelt de
+/// dia-instanties met een deck dat al warm is, dus de memo's raken al.
+Future<void> warmDeckAnalysisBeforePlace(
+  TabsNotifier notifier,
+  Deck deck,
+) async {
+  final ref = notifier._ref;
+  var privacyWarm = Future<void>.value();
+  if (ref.read(settingsProvider.select((s) => s.privacyChecksEnabled))) {
+    privacyWarm = warmPrivacyScanMemo(
+      ref.read(privacyScannerProvider),
+      deck.slides,
+    );
+  }
+  await ref.read(slideQualityAnalyzerProvider).analyzeWarmed(deck);
+  await privacyWarm;
+}
+
 /// Open [deck] als onopgeslagen kopie in een nieuw tabblad — bijvoorbeeld een
 /// AI-vertaling van het actieve deck. Er is bewust géén `filePath` of
 /// `remoteOrigin`: het eerste opslaan wordt een 'Opslaan als', zodat de kopie

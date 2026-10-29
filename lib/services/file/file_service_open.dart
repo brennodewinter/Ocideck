@@ -19,6 +19,7 @@ class DeckOpenResult {
     this.skippedSidecars = const <String>[],
     this.integrity,
     this.carriesPackagedProfile = false,
+    this.safetyFindings,
   });
 
   /// Het geopende deck, of null bij een weigering.
@@ -44,8 +45,13 @@ class DeckOpenResult {
   /// actieve profiel van de ontvanger er niet overheen zetten.
   final bool carriesPackagedProfile;
 
+  /// Bij [OpenFailure.unsafe]: wat de veiligheidsscan vond, op exact de bytes
+  /// die de open weigerde. De aanroeper hoeft het bestand niet opnieuw te
+  /// lezen om het alarm te voeden — de TOCTOU-scan is al gedaan (#2634).
+  final List<MarkdownSafetyFinding>? safetyFindings;
+
   /// Een weigering, met de reden.
-  const DeckOpenResult.failed(OpenFailure reason)
+  const DeckOpenResult.failed(OpenFailure reason, {this.safetyFindings})
     : deck = null,
       failure = reason,
       warnings = const <String>[],
@@ -62,7 +68,7 @@ class DeckOpenResult {
 /// deconstrueren tot slides. Geen `warnings`/`skippedSidecars`: die horen bij de
 /// deck-hydratie (grafiekdata, sidecars) die een document nog niet kent.
 class DocumentOpenResult {
-  const DocumentOpenResult({this.document, this.failure});
+  const DocumentOpenResult({this.document, this.failure, this.safetyFindings});
 
   /// Het geopende document, of null bij een weigering.
   final MarkdownDocument? document;
@@ -70,8 +76,12 @@ class DocumentOpenResult {
   /// Waarom er geweigerd is, of null wanneer het gelukt is.
   final OpenFailure? failure;
 
+  /// Bij [OpenFailure.unsafe]: wat de veiligheidsscan vond — zie
+  /// [DeckOpenResult.safetyFindings].
+  final List<MarkdownSafetyFinding>? safetyFindings;
+
   /// Een weigering, met de reden.
-  const DocumentOpenResult.failed(OpenFailure reason)
+  const DocumentOpenResult.failed(OpenFailure reason, {this.safetyFindings})
     : document = null,
       failure = reason;
 }
@@ -91,7 +101,10 @@ extension FileServiceDocumentOpen on FileService {
   }) async {
     final read = await _readAndScanMarkdown(filePath, content);
     if (read.failure != null) {
-      return DocumentOpenResult.failed(read.failure!);
+      return DocumentOpenResult.failed(
+        read.failure!,
+        safetyFindings: read.safetyFindings,
+      );
     }
     return DocumentOpenResult(
       document: MarkdownDocument.parse(read.raw!, hasUtf8Bom: read.hasUtf8Bom),
@@ -258,20 +271,37 @@ bool _providedContentOverCap(String content) {
 ///
 /// Top-level en niet op [FileService]: hij raakt geen enkel veld van die klasse
 /// aan, en de klasse zit tegen haar plafond.
-Future<({String? raw, OpenFailure? failure, bool hasUtf8Bom})>
+Future<
+  ({
+    String? raw,
+    OpenFailure? failure,
+    bool hasUtf8Bom,
+    List<MarkdownSafetyFinding>? safetyFindings,
+  })
+>
 _readAndScanMarkdown(String filePath, String? content) async {
   String raw;
   var hasUtf8Bom = false;
   if (content != null) {
     // Provided content bypasses the on-disk stat, so apply an equivalent cap.
     if (_providedContentOverCap(content)) {
-      return (raw: null, failure: OpenFailure.tooLarge, hasUtf8Bom: false);
+      return (
+        raw: null,
+        failure: OpenFailure.tooLarge,
+        hasUtf8Bom: false,
+        safetyFindings: null,
+      );
     }
     raw = content;
   } else {
     final file = File(filePath);
     if (!await file.exists()) {
-      return (raw: null, failure: OpenFailure.notFound, hasUtf8Bom: false);
+      return (
+        raw: null,
+        failure: OpenFailure.notFound,
+        hasUtf8Bom: false,
+        safetyFindings: null,
+      );
     }
     // Plain text (images/media are sidecar files), so a huge .md is
     // pathological. Cap it to avoid loading/parsing an attacker-sized file.
@@ -281,11 +311,21 @@ _readAndScanMarkdown(String filePath, String? content) async {
           'FileService.open: file exceeds '
           '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
         );
-        return (raw: null, failure: OpenFailure.tooLarge, hasUtf8Bom: false);
+        return (
+          raw: null,
+          failure: OpenFailure.tooLarge,
+          hasUtf8Bom: false,
+          safetyFindings: null,
+        );
       }
     } catch (e) {
       logWarning('FileService.open: cannot stat file', e);
-      return (raw: null, failure: OpenFailure.unreadable, hasUtf8Bom: false);
+      return (
+        raw: null,
+        failure: OpenFailure.unreadable,
+        hasUtf8Bom: false,
+        safetyFindings: null,
+      );
     }
     try {
       final decoded = decodeUtf8KeepingBomFlag(await file.readAsBytes());
@@ -294,7 +334,12 @@ _readAndScanMarkdown(String filePath, String? content) async {
     } catch (e) {
       // Non-UTF8 / unreadable bytes must not crash the open flow.
       logWarning('FileService.open: file not readable as UTF-8', e);
-      return (raw: null, failure: OpenFailure.unreadable, hasUtf8Bom: false);
+      return (
+        raw: null,
+        failure: OpenFailure.unreadable,
+        hasUtf8Bom: false,
+        safetyFindings: null,
+      );
     }
   }
   // Fail-closed: never open content that carries executable markup. Scanning
@@ -307,9 +352,19 @@ _readAndScanMarkdown(String filePath, String? content) async {
       '(${findings.length} finding(s))',
       filePath,
     );
-    return (raw: null, failure: OpenFailure.unsafe, hasUtf8Bom: false);
+    return (
+      raw: null,
+      failure: OpenFailure.unsafe,
+      hasUtf8Bom: false,
+      safetyFindings: findings,
+    );
   }
-  return (raw: raw, failure: null, hasUtf8Bom: hasUtf8Bom);
+  return (
+    raw: raw,
+    failure: null,
+    hasUtf8Bom: hasUtf8Bom,
+    safetyFindings: null,
+  );
 }
 
 extension _FileServiceOpen on FileService {

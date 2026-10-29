@@ -34,6 +34,7 @@ import '../services/git/native_git_mirror_api.dart';
 import '../services/git/outbox.dart';
 import '../services/git/repo_asset_resolver.dart';
 import '../services/package_asset_resolver.dart';
+import '../services/privacy/privacy_scan_memo.dart';
 import 'git_provider.dart';
 import '../services/git/sync_engine.dart';
 import '../services/image_service.dart';
@@ -54,8 +55,10 @@ import '../utils/bundled_asset.dart';
 import '../utils/utf8_bom.dart';
 import '../utils/zip_encryption.dart';
 import 'deck_provider.dart';
+import 'deck_quality_provider.dart';
 import 'document_provider.dart';
 import 'editor_provider.dart';
+import 'privacy_provider.dart';
 import 'settings_provider.dart';
 import 'asset_rights_module_provider.dart';
 import 'slide_clipboard_provider.dart';
@@ -500,21 +503,23 @@ class TabsNotifier extends StateNotifier<TabsState> {
       return OpenResult.opened;
     }
     // Security gate: every file that enters the app (open, recent, drag-drop,
-    // URL/package import) is scanned first. A presentation is data only — if the
-    // file carries anything executable we refuse it and raise the alarm instead
-    // of parsing/opening it. Fail-closed.
-    final findings = await _file.scanForUnsafeMarkdown(path);
-    if (findings.isNotEmpty) {
+    // URL/package import) is scanned before it is parsed. A presentation is
+    // data only — if the file carries anything executable we refuse it and
+    // raise the alarm. De scan zit ín [openDeckDetailed], op exact de bytes
+    // die er geparseerd worden (fail-closed TOCTOU); de bevindingen reizen
+    // mee in het resultaat, dus dit pad leest en scant maar één keer (#2634).
+    final outcome = await _file.openDeckDetailed(path);
+    if (outcome.failure == OpenFailure.unsafe) {
       if (mounted) {
-        _ref.read(importSecurityAlarmProvider.notifier).state =
-            ImportSecurityAlarm(path: path, findings: findings);
+        _ref
+            .read(importSecurityAlarmProvider.notifier)
+            .state = ImportSecurityAlarm(
+          path: path,
+          findings: outcome.safetyFindings ?? const [],
+        );
       }
       return OpenResult.blocked;
     }
-    // The scan above only drives the alarm; openDeck re-reads and re-scans the
-    // exact bytes it parses, so a file swapped after this point is still caught
-    // (it simply returns null here rather than loading unsafe content).
-    final outcome = await _file.openDeckDetailed(path);
     final deck = outcome.deck;
     if (deck == null) {
       // Geen Marp-deck? Router, geen muur (DOCUMENT_MODE.md §2): open als document.
@@ -527,6 +532,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (!mounted) return OpenResult.unreadable;
     _reportOpenOutcome(_ref, outcome);
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
+    await warmDeckAnalysisBeforePlace(this, deck);
+    if (!mounted) return OpenResult.unreadable;
     _placeDeckInTab(
       this,
       deck,
@@ -748,6 +755,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     if (!mounted) return OpenResult.unreadable;
     _warnUnfilledChartData(deck);
+    await warmDeckAnalysisBeforePlace(this, deck);
+    if (!mounted) return OpenResult.unreadable;
     _placeDeckInTab(this, deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
   }
@@ -760,30 +769,25 @@ class TabsNotifier extends StateNotifier<TabsState> {
     DecodedUtf8 decoded, {
     required String sourceName,
   }) {
-    final findings = MarkdownSafetyScanner.scan(decoded.text);
-    if (findings.isNotEmpty) {
-      // Ook vastleggen, niet alleen tonen. De twee andere poorten op deze
-      // scanner (`FileService.openDeck` en `openDeckFromContent`) loggen hun
-      // weigering wél; deze deed dat niet, terwijl het juist de weg is waarlangs
-      // een deck van buiten binnenkomt. Een alarm dat de gebruiker wegklikt,
-      // laat niets na — en "dit deck tripte de poort" is precies wat je
-      // achteraf wilt kunnen navertellen bij een gereedschap dat verzegelde
-      // rapporten uitgeeft. Alleen de telling — net als de twee zusterpoorten
-      // in `FileService`. De bevinding zelf draagt deckinhoud, en zelfs de
-      // soorten opsommen zou een waardenlijst in de log zetten; welke regel
-      // aansloeg leest de gebruiker in zijn eigen bestand.
-      logWarning(
-        'TabsProvider: geopend deck geweigerd — uitvoerbare inhoud '
-        '(${findings.length} bevinding(en))',
-        sourceName,
-      );
+    // De veiligheidsscan zit in [openDecodedDeck] zelf, op exact de tekst die
+    // er geparseerd wordt; de bevindingen reizen mee in het resultaat, dus dit
+    // pad scant maar één keer (#2634).
+    final outcome = _file.openDecodedDeck(decoded, sourceName: sourceName);
+    if (outcome.failure == OpenFailure.unsafe) {
+      // Ook vastleggen, niet alleen tonen — "dit deck tripte de poort" is
+      // precies wat je achteraf wilt kunnen navertellen bij een gereedschap
+      // dat verzegelde rapporten uitgeeft. Alleen de telling — net als de
+      // zusterpoorten in `FileService`; de bevinding zelf draagt deckinhoud.
       if (mounted) {
-        _ref.read(importSecurityAlarmProvider.notifier).state =
-            ImportSecurityAlarm(path: sourceName, findings: findings);
+        _ref
+            .read(importSecurityAlarmProvider.notifier)
+            .state = ImportSecurityAlarm(
+          path: sourceName,
+          findings: outcome.safetyFindings ?? const [],
+        );
       }
       return (deck: null, failure: OpenResult.blocked);
     }
-    final outcome = _file.openDecodedDeck(decoded, sourceName: sourceName);
     final deck = outcome.deck;
     if (deck == null) {
       return (

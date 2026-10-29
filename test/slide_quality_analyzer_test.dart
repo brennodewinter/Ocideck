@@ -10,6 +10,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/services/slide_layout_metrics.dart';
 import 'package:ocideck/services/slide_quality_analyzer.dart';
+import 'package:ocideck/services/split_run.dart';
 import 'package:ocideck/utils/color_contrast.dart';
 
 void main() {
@@ -1468,6 +1469,86 @@ void main() {
           finding('## Bijlage\n\nextra bewijs', role: FindingRole.detail),
         ),
         isEmpty,
+      );
+    });
+  });
+
+  group('analyzeWarmed (#2634)', () {
+    // Een dia-inhoud die op álle meetpaden wat doet: dichtheid op de lijst,
+    // een split-run van drie pagina's en een tabel.
+    List<Slide> warmableSlides() => [
+      Slide.create(SlideType.bullets).copyWith(bullets: const ['korte regel']),
+      Slide.create(SlideType.bullets).copyWith(
+        bullets: [
+          for (var i = 0; i < 30; i++)
+            'regel $i met een behoorlijke hoeveelheid tekst eromheen',
+        ],
+      ),
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(bullets: const ['vervolg'], continuesSplit: true),
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(bullets: const ['slot'], continuesSplit: true),
+      Slide.create(SlideType.table).copyWith(
+        tableRows: const [
+          ['kop', 'waarde'],
+          ['a', '1'],
+        ],
+      ),
+    ];
+
+    test(
+      'warme uitslag is identiek aan een onafhankelijk koude analyze',
+      () async {
+        final deck = Deck(title: 'D', slides: warmableSlides());
+        await const SlideQualityAnalyzer().analyzeWarmed(deck, batchSize: 2);
+        final warm = const SlideQualityAnalyzer().analyze(deck);
+
+        // Referentie: identieke inhoud als n-i-e-u-w-e dia-objecten — de memo's
+        // zijn op identiteit, dus deze analyze meet echt opnieuw in plaats van
+        // uit de net gewarmde cache te lezen.
+        final reference = const SlideQualityAnalyzer().analyze(
+          Deck(title: 'D', slides: warmableSlides()),
+        );
+
+        String sig(SlideQualityIssue i) =>
+            '${i.slideIndex}:${i.kind}:${i.severity}:${i.field}';
+        expect(
+          [for (final i in warm.issues) sig(i)],
+          [for (final i in reference.issues) sig(i)],
+        );
+        expect(reference.issues, isNotEmpty, reason: 'anders toetst dit niets');
+      },
+    );
+
+    test('warmt ook de split-run lidmeting voor de layout-index', () async {
+      final slides = [
+        Slide.create(SlideType.bullets).copyWith(bullets: const ['pagina 0']),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(bullets: const ['pagina 1'], continuesSplit: true),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(bullets: const ['pagina 2'], continuesSplit: true),
+      ];
+      final deck = Deck(title: 'D', slides: slides);
+      await const SlideQualityAnalyzer().analyzeWarmed(deck);
+
+      var measurements = 0;
+      buildSplitRunLayoutIndex(
+        slides,
+        deck.themeProfile,
+        deck.themeProfile.fontFamily,
+        measureMember: (_, _, _) {
+          measurements++;
+          return 1.0;
+        },
+      );
+      expect(
+        measurements,
+        0,
+        reason: 'de koude pas heeft de leden al via de gedeelde memo gemeten',
       );
     });
   });

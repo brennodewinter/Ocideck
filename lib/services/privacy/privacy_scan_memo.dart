@@ -1,6 +1,12 @@
+import 'dart:isolate';
+
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart';
+
 import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
+import 'privacy_bulk_lexicon.dart';
 import 'privacy_scanner.dart';
 
 /// Stempel voor bevindingen die pas bij het uitlezen hun echte dia-index
@@ -76,3 +82,57 @@ PrivacyScanResult memoizedDeckScan(PrivacyScanner scanner, Deck deck) {
 /// op met de dia's zelf.
 void clearPrivacyScanMemo() =>
     _slideScanCache = Expando<_SlideScanMemo>('privacyScan');
+
+/// Meet de koude dia's van [slides] vooruit in een werk-isolate en legt de
+/// uitslag in dezelfde memo's die [memoizedSlideScan] leest (#2634).
+///
+/// Bedoeld voor het openen: zonder deze pas scant de eerste provider-lezing
+/// een groot deck synchroon op de UI-isolate — honderden milliseconden
+/// stilte. De isolate krijgt een kopie van [scanner] en van de dia's; de
+/// memo wordt hier met de UI-kant-instantie gevuld, want
+/// [memoizedSlideScan] vergelijkt de scanner op identiteit. De uitkomst is
+/// identiek: [PrivacyScanner.scanSlide] is een pure functie van dia plus
+/// configuratie.
+///
+/// Het bulklexicon is een singleton **per isolate**: de werkkopie laadt hij
+/// zelf via de root-token, en kon dat niet (geen binding, geen token), dan
+/// valt deze pas terug op de synchrone scan — een memo die de bulktermen
+/// mist is erger dan geen memo.
+///
+/// Op web bestaat geen isolate; daar loopt de scan zoals altijd synchroon.
+Future<void> warmPrivacyScanMemo(
+  PrivacyScanner scanner,
+  List<Slide> slides,
+) async {
+  final cold = [
+    for (final slide in slides)
+      if (_slideScanCache[slide] == null ||
+          !identical(_slideScanCache[slide]!.scanner, scanner))
+        slide,
+  ];
+  if (cold.isEmpty) return;
+  List<PrivacyScanResult> scanSync() => [
+    for (final slide in cold) scanner.scanSlide(slide, _unindexedSlide),
+  ];
+  // `ServicesBinding.rootIsolateToken` is een nullable static — `null` zolang
+  // er geen binding staat (headless test), en dan valt de pas op sync terug.
+  final token = ServicesBinding.rootIsolateToken;
+  final List<PrivacyScanResult> results;
+  if (kIsWeb || token == null) {
+    results = scanSync();
+  } else {
+    final scanned = await Isolate.run<(bool, List<PrivacyScanResult>)>(
+      () async {
+        BackgroundIsolateBinaryMessenger.ensureInitialized(token);
+        await PrivacyBulkLexicon.instance.ensureLoaded();
+        return (PrivacyBulkLexicon.instance.isLoaded, scanSync());
+      },
+    );
+    // Kon het lexicon in de worker niet laden, dan missen diens uitslagen de
+    // bulktermen — liever hier hermeten dan een incompleet warme memo.
+    results = scanned.$1 ? scanned.$2 : scanSync();
+  }
+  for (var i = 0; i < cold.length; i++) {
+    _slideScanCache[cold[i]] = _SlideScanMemo(scanner, results[i]);
+  }
+}
