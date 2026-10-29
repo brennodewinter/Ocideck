@@ -179,6 +179,19 @@ void main() {
       expect(outcome.notes, contains('pad bestaat niet meer'));
       expect(outcome.exitCode(advisory: false), 1);
     });
+
+    test('verouderd én onvolledig telt als één standaard', () async {
+      // CWE 4.20 → 5.0: de versie liep achter en de bundel was te kort. Dat
+      // is één standaard, geen twee.
+      final outcome = await evaluate(
+        standards,
+        (s) async => s.id == 'cwe'
+            ? ProbeResult('99.0', stale: true, integrityProblem: 'te kort')
+            : echo(s),
+      );
+      expect(outcome.outdated, 1);
+      expect(outcome.notes, contains('te kort'));
+    });
   });
 
   group('de CWE XML-release als bron (#2292)', () {
