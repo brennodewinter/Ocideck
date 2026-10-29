@@ -77,15 +77,26 @@ class DeltaToMarkdown extends Converter<Delta, String>
   final CustomContentHandler customContentHandler;
 
   @override
-  String convert(Delta input) {
-    final newDelta = transform(input);
+  String convert(Delta input) =>
+      convertDocument(Document.fromDelta(transform(input)));
 
-    final quillDocument = Document.fromDelta(newDelta);
-
-    final outBuffer = quillDocument.root.accept(this);
-
-    return outBuffer.toString();
+  /// Zet een bestaande [Document]-boom direct om (#2621): de aanroeper heeft
+  /// de boom al, en [convert] bouwde er per toetsaanslag een tweede via
+  /// `Document.fromDelta`.
+  ///
+  /// `transform` repareert delta's waar een blok-embed (horizontale streep,
+  /// tabel) midden op een tekstregel staat. In een echte Document-boom staat
+  /// zo'n embed altijd op een eigen regel, dus die reparatie is hier een
+  /// no-op die we bewust overslaan.
+  String convertDocument(Document document) {
+    _listNumbers = _indexListNumbers(document.root);
+    return document.root.accept(this).toString();
   }
+
+  /// Regel → genummerd-lijst-cijfer, één keer per omzetting berekend in
+  /// [_indexListNumbers]. De oude `_prefixNumber` liep per lijstitem het
+  /// hele document terug — O(lijstitems × documentlengte) per toetsaanslag.
+  Map<Node, int> _listNumbers = const {};
 
   final Map<String, _AttributeHandler> _blockAttrsHandlers = {
     Attribute.codeBlock.key: _AttributeHandler(
@@ -114,7 +125,8 @@ class DeltaToMarkdown extends Converter<Delta, String>
     ),
   };
 
-  final Map<String, _AttributeHandler> _lineAttrsHandlers = {
+  // late: de handlers lezen [_listNumbers], dat per convert wordt gezet.
+  late final Map<String, _AttributeHandler> _lineAttrsHandlers = {
     Attribute.header.key: _AttributeHandler(
       beforeContent: (attribute, node, output) {
         output
@@ -135,7 +147,7 @@ class DeltaToMarkdown extends Converter<Delta, String>
         final indent = '    ' * indentLevel;
         final String prefix;
         if (isNumbered) {
-          prefix = '${_prefixNumber(node, indentLevel)} ';
+          prefix = '${_listNumbers[node] ?? 1}. ';
         } else if (isChecked) {
           prefix = '- [x] ';
         } else if (isUnchecked) {
@@ -453,43 +465,33 @@ class CustomAttributeHandler {
   )? afterContent;
 }
 
-String _prefixNumber(Node node, int indentLevel) {
-  var itemsBeforeAtMyIndentLevel = 0;
-
-  final root = _findRoot(node);
-  if (root == null) {
-    return '1.';
-  }
-  final document = _toDocumentList(root);
-  final nodeIndex = document.indexOf(node);
-
-  for (var i = nodeIndex - 1; i >= 0; i--) {
-    final nodeBefore = document[i];
-
-    final nodeBeforeIndentLevel =
-        nodeBefore.getAttrValueOr(Attribute.indent.key, 0);
-    final nodeBeforeListType =
-        nodeBefore.getAttrValueOr<String?>(Attribute.list.key, null);
-    final isOrdered = nodeBeforeListType == 'ordered';
-
-    if (nodeBeforeListType == null) {
-      // Een regel zonder lijst-attribuut maar mét inspringing hoort bij de
-      // inhoud van een lijstitem (bijv. een x-embed-list-block). Tel door
-      // in plaats van de nummering te verbreken. (#1925)
-      if (nodeBeforeIndentLevel > 0) continue;
-      break;
+/// Eén gang door het document die per genummerd item zijn cijfer berekent —
+/// de voorwaartse equivalent van de oude terugwaartse scan in `_prefixNumber`
+/// (#2621). Zelfde semantiek: een item op niveau m breekt de telling van
+/// diepere niveaus; een niet-lijstregel op niveau 0 breekt álle tellingen; en
+/// een niet-lijstregel mét inspringing is lijstitem-inhoud en breekt niets
+/// (#1925). Opsommingstekens op het eigen niveau tellen niet mee maar
+/// verbreken de nummering óók niet.
+Map<Node, int> _indexListNumbers(Root root) {
+  final numbers = <Node, int>{};
+  final counters = <int, int>{};
+  for (final node in _toDocumentList(root)) {
+    final indent = node.getAttrValueOr(Attribute.indent.key, 0);
+    final listType = node.getAttrValueOr<String?>(Attribute.list.key, null);
+    if (listType == null) {
+      if (indent == 0) counters.clear();
+      continue;
     }
-    if (nodeBeforeIndentLevel < indentLevel) {
-      break;
-    }
-    if (nodeBeforeIndentLevel == indentLevel && isOrdered) {
-      itemsBeforeAtMyIndentLevel++;
+    counters.removeWhere((level, _) => level > indent);
+    if (listType == 'ordered') {
+      numbers[node] = (counters[indent] ?? 0) + 1;
+      counters[indent] = numbers[node]!;
     }
   }
-
-  return '${itemsBeforeAtMyIndentLevel + 1}.';
+  return numbers;
 }
 
+/// Platte documentlijst in leesvolgorde; de basis van [_indexListNumbers].
 List<Node> _toDocumentList(Node node, {List<Node>? input}) {
   final output = input ?? <Node>[];
   List<Node>? children;
@@ -507,11 +509,4 @@ List<Node> _toDocumentList(Node node, {List<Node>? input}) {
     }
   }
   return output;
-}
-
-Root? _findRoot(Node? parent) {
-  if (parent is Root || parent == null) {
-    return parent as Root?;
-  }
-  return _findRoot(parent.parent);
 }

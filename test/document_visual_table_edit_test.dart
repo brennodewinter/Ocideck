@@ -6,6 +6,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
+import 'package:ocideck/widgets/editors/markdown_source_controller.dart';
 
 /// De visuele stand blijft staan als je in een tabel typt (#1565).
 ///
@@ -37,7 +38,9 @@ Een alinea vooraf.
     WidgetTester tester, [
     String source = bron,
   ]) async {
-    final controller = TextEditingController(text: source);
+    // De echte broncontroller: zijn `text`-lezing flust de vertraagde
+    // visuele terugschrijf (#2621) zoals het documentscherm dat ook ziet.
+    final controller = MarkdownSourceController(text: source);
     addTearDown(controller.dispose);
     await tester.pumpWidget(
       MaterialApp(
@@ -60,6 +63,7 @@ Een alinea vooraf.
                 ),
                 hintText: '',
                 expand: true,
+                surfaceStyle: NotesSurfaceStyle.document,
               ),
             ),
           ),

@@ -11,6 +11,7 @@ import '../../utils/markdown_caret_map.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/markdown_typing_shortcuts.dart';
 import '../../utils/markdown_paste_cleanup.dart';
+import '../editors/markdown_source_controller.dart';
 import 'markdown_editor_theme.dart';
 import 'markdown_editor_toolbar.dart';
 import 'notes_editor_mode.dart';
@@ -238,6 +239,13 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// wijzigt, houdt nu letterlijk wat er stond.
   bool _visualEdited = false;
 
+  /// De rustpauze waarna een uitstaande Quill→Markdown-omzetting alsnog
+  /// loopt. Per toetsaanslag omzetten was superlineair (#2621); 350 ms is
+  /// lang genoeg om een typsalvo samen te voegen en kort genoeg om de bron
+  /// vrijwel altijd bij te zijn vóór een handeling hem leest.
+  static const _visualSyncSettle = Duration(milliseconds: 350);
+  Timer? _visualSyncTimer;
+
   NotesEditorMode get _requestedMode => widget.mode ?? _mode;
 
   FocusNode get _focusNode => widget.focusNode ?? _ownedFocusNode!;
@@ -256,14 +264,33 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (widget.focusNode == null) {
       _ownedFocusNode = FocusNode();
     }
+    _syncFlushHook(null);
     if (_requestedMode == NotesEditorMode.visual) {
       _openVisualEditor();
+    }
+  }
+
+  /// Laat de broncontroller elke lezing van zijn `value`/`text` eerst de
+  /// uitstaande visuele terugschrijf flushen (#2621). Zo dekt één haak álle
+  /// lezers — opslaan, autosave, export, zoeken — zonder per aanroep een
+  /// verplicht flush-punt te hoeven onthouden.
+  void _syncFlushHook(TextEditingController? oldController) {
+    if (oldController is MarkdownSourceController &&
+        oldController.onBeforeRead == flushPendingVisualEdit) {
+      oldController.onBeforeRead = null;
+    }
+    final controller = widget.controller;
+    if (controller is MarkdownSourceController) {
+      controller.onBeforeRead = flushPendingVisualEdit;
     }
   }
 
   @override
   void didUpdateWidget(MarkdownNotesEditor oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (!identical(widget.controller, oldWidget.controller)) {
+      _syncFlushHook(oldWidget.controller);
+    }
     final target = _requestedMode;
     if (target == NotesEditorMode.visual && _quillController == null) {
       _openVisualEditor();
@@ -332,6 +359,8 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       ),
       ChangeSource.local,
     );
+    // Een invoeging is een discrete handeling — direct in de bron (#2621).
+    flushPendingVisualEdit();
   }
 
   /// Voeg een voetnoot met [label] in: het merkteken op de cursor, de lege
@@ -361,6 +390,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       TextSelection.collapsed(offset: caret + 1),
       ChangeSource.local,
     );
+    flushPendingVisualEdit();
   }
 
   /// Waar een nieuw blok mag landen, en of het zelf nog een regel moet openen.
@@ -442,10 +472,29 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }
 
   @override
+  void deactivate() {
+    // De rustpauze van #2621 kan ná de verdwijning van dit widget aflopen;
+    // wat dan nog uitstaat zou verloren gaan. Flushen terwijl de bronlezer
+    // nog leeft.
+    flushPendingVisualEdit();
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
+    _visualSyncTimer?.cancel();
+    _syncFlushHookDispose();
     _closeVisualEditor(flush: false);
     _ownedFocusNode?.dispose();
     super.dispose();
+  }
+
+  void _syncFlushHookDispose() {
+    final controller = widget.controller;
+    if (controller is MarkdownSourceController &&
+        controller.onBeforeRead == flushPendingVisualEdit) {
+      controller.onBeforeRead = null;
+    }
   }
 
   void _openVisualEditor() {
@@ -518,7 +567,13 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (quill == null) return;
     _quillSyncScheduled = false;
     if (flush) {
+      // Eerst de vertraagde terugschrijf (#2621), dan de rest van de
+      // sluiting — beide zetten dezelfde omzetting, de tweede is dan een
+      // no-op.
+      flushPendingVisualEdit();
       _flushQuillToController(quill);
+    } else {
+      _visualSyncTimer?.cancel();
     }
     quill.removeListener(_onQuillChanged);
     quill.dispose();
@@ -592,6 +647,15 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       _lastQuillDelta = delta;
       _visualEdited = true;
       _quillContentSyncPending = true;
+      // De omzetting naar Markdown is superlineair in documentlengte
+      // (#2621). Niet per aanslag, maar na een rustpauze — en áltijd vóór
+      // een lezer van de bron, via de controller-haak. Alleen het
+      // documentoppervlak stelt uit: notities zijn klein genoeg om per
+      // aanslag te syncen, en niets flust ze onderweg.
+      if (_document) {
+        _visualSyncTimer?.cancel();
+        _visualSyncTimer = Timer(_visualSyncSettle, flushPendingVisualEdit);
+      }
     }
     // Verlaat eerst de native tekstcallback. Vooral op macOS moet de volgende
     // composing-update niet wachten op serialisatie van het hele document.
@@ -609,8 +673,22 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     final plain = quill.document.toPlainText();
     final caret = quill.selection.isValid ? quill.selection.baseOffset : 0;
     widget.onVisualCaret?.call(plain, caret.clamp(0, plain.length));
-    if (!_quillContentSyncPending) return;
+    // Kleine vlakken (notities) syncen per aanslag zoals voorheen; het
+    // documentoppervlak houdt zijn uitgestelde timer aan (#2621).
+    if (!_document) flushPendingVisualEdit();
+  }
+
+  /// Zet een uitstaande inhoudelijke wijziging van de visuele stand terug
+  /// naar de Markdown-bron. Loopt zelf na de rustpauze, maar élke lezer van
+  /// `widget.controller` — opslaan, autosave, export, zoeken, standwissel —
+  /// moet kunnen afdwingen dat de bron vers is vóór hij leest (#2621). De
+  /// [MarkdownSourceController] roept hem daarom bij elke `value`-lezing aan.
+  void flushPendingVisualEdit() {
+    _visualSyncTimer?.cancel();
+    if (!mounted || _syncingMarkdown || !_quillContentSyncPending) return;
     _quillContentSyncPending = false;
+    final quill = _quillController;
+    if (quill == null) return;
     final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
     if (markdown == _markdownSnapshot) return;
     _syncingMarkdown = true;
@@ -773,7 +851,13 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       bordered: _fieldBordered,
       tryConsumePaste: widget.tryConsumePaste,
       editorKey: widget.editorKey,
-      onDiscreteVisualEdit: widget.onDiscreteVisualEdit,
+      onDiscreteVisualEdit: () {
+        widget.onDiscreteVisualEdit?.call();
+        // Een discrete bewerking (invoegen, knippen, werkbalk-knop) is meteen
+        // deel van de bron — de rustpauze is alleen voor doorlopend typen
+        // (#2621).
+        flushPendingVisualEdit();
+      },
       onTapLink: widget.onTapLink,
     );
   }
