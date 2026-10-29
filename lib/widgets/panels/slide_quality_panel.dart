@@ -469,33 +469,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
               ),
             ),
             if (imageScan case final progress?)
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 12,
-                      height: 12,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: iconColor,
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        '${l10n.d('Afbeeldingen nakijken op herkenbare gezichten')}: '
-                        '${progress.done}/${progress.total}',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
-                          color: iconColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              _imageScanProgressRow(progress, iconColor, l10n),
             for (final check in slideQualityPerformedChecks(
               l10n,
               privacyEnabled: privacyEnabled,
@@ -554,33 +528,17 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
             // dit paneel kan doen: de balk is groen, de lijst erboven ziet er
             // compleet uit, en "niets gevonden" leest als "er zit niets in".
             // Terwijl er niet eens gekeken is.
-            if (!privacyEnabled)
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.remove_circle_outline,
-                      size: 12,
-                      color: AppTheme.warningFg,
-                    ),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        l10n.d(
-                          'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.',
-                        ),
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.warningFg,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            // Staat de privacycontrole uit, dan zwijgen is het gevaarlijkste wat
+            // dit paneel kan doen: de balk is groen, de lijst erboven ziet er
+            // compleet uit, en "niets gevonden" leest als "er zit niets in".
+            // Terwijl er niet eens gekeken is.
+            if (!privacyEnabled) _privacyDisabledRow(l10n),
+            // Draait de controle wél, maar is er voor de taal van dit deck geen
+            // trefwoordenlijst, dan is de stilte over bijzondere gegevens net zo
+            // misleidend. `Deck.language` valt voor meldingsteksten terug op
+            // Engels — daar is dat goed — maar een lexicon dat terugvalt is
+            // erger dan geen lexicon: Poolse tekst scannen met Engelse
+            // triggerwoorden geeft bijna nul recall, en niemand merkt het.
             // Draait de controle wél, maar is er voor de taal van dit deck geen
             // trefwoordenlijst, dan is de stilte over bijzondere gegevens net zo
             // misleidend. `Deck.language` valt voor meldingsteksten terug op
@@ -588,36 +546,103 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
             // erger dan geen lexicon: Poolse tekst scannen met Engelse
             // triggerwoorden geeft bijna nul recall, en niemand merkt het.
             if (coverage != PrivacyLexiconCoverage.covered)
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(Icons.translate, size: 12, color: AppTheme.warningFg),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        coverage == PrivacyLexiconCoverage.none
-                            ? l10n.d(
-                                'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.',
-                              )
-                            : l10n.d(
-                                'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.',
-                              ),
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.warningFg,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              _lexiconCoverageRow(coverage, l10n),
           ],
         ),
       ),
     ];
+  }
+
+  Widget _imageScanProgressRow(
+    ({int done, int total}) progress,
+    Color iconColor,
+    AppLocalizations l10n,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 12,
+            height: 12,
+            child: CircularProgressIndicator(strokeWidth: 2, color: iconColor),
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              '${l10n.d('Afbeeldingen nakijken op herkenbare gezichten')}: '
+              '${progress.done}/${progress.total}',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: iconColor,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _privacyDisabledRow(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.remove_circle_outline,
+            size: 12,
+            color: AppTheme.warningFg,
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              l10n.d(
+                'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.',
+              ),
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.warningFg,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _lexiconCoverageRow(
+    PrivacyLexiconCoverage coverage,
+    AppLocalizations l10n,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.translate, size: 12, color: AppTheme.warningFg),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              coverage == PrivacyLexiconCoverage.none
+                  ? l10n.d(
+                      'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.',
+                    )
+                  : l10n.d(
+                      'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.',
+                    ),
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.warningFg,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

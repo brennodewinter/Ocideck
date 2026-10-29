@@ -72,7 +72,10 @@ const Map<String, int> methodLengthBaseline = {
   // +1 (#2433): de deckverhouding afleiden (slideAspect + logicalSizeFor)
   // zodat het raster en het exportbudget het vel volgen. De methode stond
   // al op de limiet.
-  'lib/services/slide_rasterizer.dart::SlideRasterizer.rasterize': 151,
+  // +9 (#2625, #2629): decodeMaxEdge-resolutie per dia en de
+  // TransferableTypedData-overdracht richting de isolate — pure plumbing
+  // in de per-dia-lus, geen logica om uit te tillen.
+  'lib/services/slide_rasterizer.dart::SlideRasterizer.rasterize': 160,
   'lib/widgets/editors/title_editor.dart::_TitleEditorState.build': 278,
   // -113 (#1859): build is opgeknipt in helpers _buildSlideSettings,
   // _buildBulletList en _buildWorkSurface; de vorige 154-regels versie is
@@ -82,14 +85,19 @@ const Map<String, int> methodLengthBaseline = {
   // +1 (#1931): themeLogoDarkMissing case in formatSlideQualityIssue.
   'lib/l10n/slide_quality_localization.dart::formatSlideQualityIssue': 151,
   // +3 (#1931): logoDarkRel in _buildPackageArchive.
+  // +22 (#2644, #2645): theme.json-lid (stijl reist mee) plus de
+  // botsingsvrije logo-benaming — de leden-assembly hoort bij de
+  // archiefopbouw, niet in een losse helper.
   'lib/services/file/file_service_package.dart::FileServicePackage._buildPackageArchive':
-      153,
+      175,
   // +1 (#1931): donkere logo-import in importStyleProfileBytes.
   'lib/services/file/file_service_style_profile.dart::FileServiceStyleProfile.importStyleProfileBytes':
       151,
   // +12 (#1931): donkere-logo-UI in _slideLogoChildren.
+  // +18 (#2640): op web het eigen logo kiezen/bekijken/vervangen/verwijderen
+  // via mem:-assets — vier acties in dezelfde logo-rij.
   'lib/widgets/dialogs/parts/settings_dialog_colors.dart::_SettingsColors._slideLogoChildren':
-      162,
+      180,
   // Procesverbetering VSM/swimlane scene builder — extract lane packing next.
   'lib/services/improvement/flow_layout.dart::buildFlowScene': 163,
   // Procesverbetering block directives (matrix/canvas/tree/flow/phaseGate).
@@ -160,6 +168,16 @@ const Map<String, int> methodLengthBaseline = {
   // +9 (#1824): callouts, calloutPresentation, calloutReveal — drie nieuwe
   // cases in de exhaustive switch, zelfde vorm, niet uit te tillen.
   'lib/collab/deck_op.dart::_slideWithField': 200,
+  // +8 (#2628): prefs-lezing fail-closed afvangen + quarantaine-herstel van
+  // de atomische store; de decode-stappen zelf blijven één lineair blok.
+  'lib/state/settings_provider.dart::SettingsNotifier._load': 165,
+  // +7 (#2633): de doorspeelvoortgangsbalk als Positioned+IgnorePointer met
+  // eigen ValueNotifier-listener in de Stack — layoutplumbing, geen logica.
+  'lib/widgets/presentation/parts/presenter_views.dart::_PresenterViews._buildPresenterView':
+      165,
+  // +7 (#2636): de pathExists-naad die de import laat afvragen of een
+  // bestemmingspad bezet is zonder dart:io in de servicelaag.
+  'lib/widgets/shell/presentation_import_action.dart::importPresentation': 165,
 };
 
 bool _isTranslationData(String path) =>
