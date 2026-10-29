@@ -32,7 +32,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
     var deleted = false;
     try {
       final file = File(path);
-      if (file.existsSync()) await file.delete();
+      if (await file.exists()) await file.delete();
       deleted = true;
     } catch (e) {
       logWarning('ImageCarouselPicker: kon afbeelding niet verwijderen', e);

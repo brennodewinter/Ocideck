@@ -649,6 +649,18 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Afsluiten duurt lang': 'La chiusura sta impiegando molto',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Un passaggio di pulizia risponde lentamente. Il tuo lavoro salvato è già al sicuro; uscire ora salta i passaggi rimanenti.',
+  'Wachten': 'Attendi',
+  'Toch afsluiten': 'Esci comunque',
+  'Gekozen afbeelding': 'Immagine scelta',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Questo logo vive in questa sessione del browser e scompare alla ricarica. Esporta come pacchetto per portarlo con te.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Le tue impostazioni erano danneggiate e sono state ripristinate.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Le tue impostazioni erano danneggiate e sono state ripristinate; una copia è in {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'Il logo non è un\'immagine, oppure supera 8 MB. Scegli un PNG, JPEG, GIF o WebP più piccolo.',
   'Bezig met installeren': 'Installazione in corso',

@@ -1635,6 +1635,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afsluiten duurt lang': 'Tá an dúnadh ag tógáil i bhfad',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Tá céim ghlanadh mall. Tá d\'obair shábháilte cheana féin slán; má dhúnann tú anois, scipeáiltear na céimeanna eile.',
+  'Wachten': 'Fan',
+  'Toch afsluiten': 'Dún mar sin féin',
+  'Gekozen afbeelding': 'Íomhá roghnaithe',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Mhaireann an lógó seo sa seisiún brabhsálaí seo agus imíonn sé tar éis athlódála. Easpórtáil mar phacáiste chun é a thabhairt leat.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Bhí do shocruithe truaillithe agus athshocraíodh iad.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Bhí do shocruithe truaillithe agus athshocraíodh iad; tá cóip in {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'Ní íomhá an lógó, nó tá sé níos mó ná 8 MB. Roghnaigh PNG, JPEG, GIF nó WebP níos lú.',
   'Bezig met installeren': 'Á shuiteáil',

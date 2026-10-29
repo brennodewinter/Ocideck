@@ -13,6 +13,7 @@ import '../models/settings.dart';
 import '../models/page_size.dart';
 import '../models/storage_connection.dart';
 import '../services/disk_traces.dart';
+import '../services/shared_preferences_atomic.dart';
 import '../services/privacy/privacy_regions.dart';
 import '../services/recovery_service.dart';
 import '../services/secret_store.dart';
@@ -187,7 +188,18 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   }
 
   Future<void> _load() async {
-    final prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs;
+    try {
+      prefs = await SharedPreferences.getInstance();
+    } catch (e, s) {
+      // Zonder prefs werken de standaardwaarden; de toestemmingspoort blijft
+      // fail-closed (#2628). Was het bestand onleesbaar, dan heeft de
+      // AtomicFilePreferencesStore het al in quarantaine gezet en geldt dit
+      // voor een ander soort fout — alsnog zichtbaar in de log in plaats van
+      // alleen in de zone-handler.
+      logError('SettingsNotifier._load: prefs lezen mislukt', e, s);
+      return;
+    }
     final themeJson = prefs.getString('themeProfile');
     final profilesJson = prefs.getString('themeProfiles');
     // Verse installatie (geen opgeslagen profielen): de ingebouwde profielen
@@ -770,6 +782,26 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     return created;
   }
 
+  /// Vervangt de profielverzameling als geheel — de bewerkkopie van het
+  /// instellingenvenster die bij Opslaan in één keer landt (#2648). Net als
+  /// bij [setAppAppearanceProfiles] is dit de laatste poort voor de schijf:
+  /// namen worden hier nog eens uniek gemaakt, en een [selectedName] die er
+  /// niet bij hoort valt terug op het eerste profiel.
+  Future<void> setThemeProfiles(
+    List<ThemeProfile> profiles, {
+    required String selectedName,
+  }) async {
+    final unique = _uniqueProfiles(profiles);
+    final selected = unique.any((profile) => profile.name == selectedName)
+        ? selectedName
+        : unique.first.name;
+    state = state.copyWith(
+      themeProfiles: unique,
+      selectedThemeProfileName: selected,
+    );
+    await persistThemeProfiles();
+  }
+
   Future<void> deleteThemeProfile(String name) async {
     if (state.themeProfiles.length <= 1) return;
     final profiles = state.themeProfiles.where((p) => p.name != name).toList();
@@ -1055,9 +1087,23 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   }
 }
 
-final settingsProvider = StateNotifierProvider<SettingsNotifier, AppSettings>(
-  (_) => SettingsNotifier(),
-);
+final settingsProvider = StateNotifierProvider<SettingsNotifier, AppSettings>((
+  ref,
+) {
+  // De quarantaine-melding van de atomaire prefs-store (#2628) naar de UI
+  // brengen. Statische haak, hier gezet omdat dit de enige eigenaar van de
+  // notice-provider is; de store blijft zelf Riverpod-vrij.
+  AtomicFilePreferencesStore.onCorruption = (path) {
+    ref.read(settingsCorruptionNoticeProvider.notifier).state = path ?? '';
+  };
+  return SettingsNotifier();
+});
+
+/// Pad van het in quarantaine gezette corrupte instellingenbestand, of `null`.
+/// Blijft staan tot de shell de melding heeft getoond — het bestand is
+/// beschadigd vóórdat de UI kan luisteren, dus een gewone stream zou het
+/// moment missen.
+final settingsCorruptionNoticeProvider = StateProvider<String?>((_) => null);
 
 /// Zendt een oplopend volgnummer uit telkens als een prefs-schrijf in
 /// [SettingsNotifier] faalt. De app-shell luistert hierop en meldt het

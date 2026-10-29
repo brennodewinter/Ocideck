@@ -10,9 +10,11 @@ import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/utils/image_limits.dart';
+import 'package:ocideck/utils/project_path.dart';
 import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
 import 'package:ocideck/widgets/slides/previews/retrying_image.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
+import 'package:path/path.dart' as p;
 
 import 'support/pump_until.dart';
 import 'support/temp_dir.dart';
@@ -270,6 +272,140 @@ void main() {
         () => find.text('A').evaluate().isNotEmpty,
         reason: 'de markering verscheen niet nadat het bestand arriveerde',
       );
+    });
+  });
+
+  group('projectgrens bij de byte-lezing (#2624)', () {
+    /// Een projectmap met één ontsnappende symlink `images/link.png` → een
+    /// bestand búiten de map. Geeft het projectpad terug.
+    Future<String> projectWithEscapeSymlink() async {
+      final tmp = await Directory.systemTemp.createTemp('ocideck-2624');
+      addTearDown(() => deleteTempDir(tmp));
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+      Directory(p.join(project.path, 'images')).createSync();
+      File(p.join(tmp.path, 'geheim.png')).writeAsBytesSync(_png());
+      Link(
+        p.join(project.path, 'images', 'link.png'),
+      ).createSync(p.join(tmp.path, 'geheim.png'));
+      // Realpath: macOS legt temp onder /private/var — de loader vergelijkt
+      // echte paden, dus de test moet dat ook.
+      return project.resolveSymbolicLinksSync();
+    }
+
+    Widget slideHost(String projectPath) => MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(
+        body: SizedBox(
+          width: 800,
+          height: 450,
+          child: SlidePreviewWidget(
+            slide: Slide(
+              id: 'x',
+              type: SlideType.image,
+              title: 'Titel',
+              imagePath: 'images/link.png',
+            ),
+            projectPath: projectPath,
+          ),
+        ),
+      ),
+    );
+
+    testWidgets(
+      'een ontsnappende symlink toont de outsideDeck-placeholder — via de '
+      'laadgrens, niet bij de build',
+      (tester) async {
+        final projectPath = await tester.runAsync(projectWithEscapeSymlink);
+        if (projectPath == null) return;
+
+        // Tien builds van dezelfde dia: elke `pumpWidget` vervangt de
+        // root-widget en dwingt een echte rebuild af. Nep-tijd: echte
+        // bestandssysteem-IO kan hier nooit afronden, dus géén enkele build kan
+        // een async controle-uitslag tonen — stond de symlink-check nog ín de
+        // build (de oude synchrone realpath), dan stond de placeholder er bij
+        // de eerste build al (#2624: twee resolveSymbolicLinksSync per
+        // afbeelding per build).
+        for (var i = 0; i < 10; i++) {
+          await tester.pumpWidget(slideHost(projectPath));
+          expect(
+            find.byIcon(Icons.link_off),
+            findsNothing,
+            reason:
+                'de outsideDeck-placeholder verscheen al in build $i — '
+                'de containment staat weer op het buildpad',
+          );
+        }
+
+        // …maar de grens moet wél sluiten zodra de bytes worden gelezen.
+        await pumpUntil(
+          tester,
+          () => find.byIcon(Icons.link_off).evaluate().isNotEmpty,
+          reason:
+              'de outsideDeck-placeholder kwam niet na de laad-grens: '
+              'een ontsnappende symlink werd mogelijk toch gelezen',
+        );
+      },
+    );
+
+    group('readContainedImageBytes', () {
+      late Directory tmp;
+      late Directory project;
+      late File inside;
+
+      setUp(() {
+        tmp = Directory.systemTemp.createTempSync('ocideck-2624-bytes');
+        addTearDown(() => deleteTempDir(tmp));
+        project = Directory(p.join(tmp.path, 'project'))..createSync();
+        Directory(p.join(project.path, 'images')).createSync();
+        inside = File(p.join(project.path, 'images', 'binnen.png'))
+          ..writeAsBytesSync(_png());
+      });
+
+      test('leest een bestand binnen het project', () async {
+        expect(
+          await readContainedImageBytes(
+            inside,
+            project.resolveSymbolicLinksSync(),
+          ),
+          _png(),
+        );
+      });
+
+      test(
+        'weigert een ontsnappende symlink met ProjectEscapeException',
+        () async {
+          File(p.join(tmp.path, 'geheim.png')).writeAsBytesSync(_png());
+          final link = Link(p.join(project.path, 'images', 'link.png'))
+            ..createSync(p.join(tmp.path, 'geheim.png'));
+          expect(
+            () => readContainedImageBytes(
+              File(link.path),
+              project.resolveSymbolicLinksSync(),
+            ),
+            throwsA(isA<ProjectEscapeException>()),
+          );
+        },
+      );
+
+      test('een missend bestand blijft een gewone leesfout', () async {
+        expect(
+          () => readContainedImageBytes(
+            File(p.join(project.path, 'images', 'nope.png')),
+            project.resolveSymbolicLinksSync(),
+          ),
+          throwsA(isA<FileSystemException>()),
+        );
+      });
+
+      test('zonder projectgrens leest hij elke map', () async {
+        final anywhere = File(p.join(tmp.path, 'elders.png'))
+          ..writeAsBytesSync(_png());
+        expect(await readContainedImageBytes(anywhere, null), _png());
+      });
     });
   });
 }

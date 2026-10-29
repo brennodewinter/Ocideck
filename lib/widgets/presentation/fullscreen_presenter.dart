@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:clock/clock.dart';
+
 import '../../platform/platform_features.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -674,7 +676,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   Timer? _advanceTimer;
   Timer? _clockTimer;
   Timer? _fullscreenGuard;
-  double _progress = 0; // 0..1 voor de voortgangsbalk
+
+  /// Voortgang 0..1 voor de balk onder de huidige dia. Een tik verandert
+  /// alleen de balk — niet de dia — dus de waarde leeft in een notifier in
+  /// plaats van in de widgetstaat (#2633).
+  final _progress = ValueNotifier<double>(0);
 
   /// Of het venster in volledig scherm stond toen de presentatie begon. Op
   /// macOS en in de browser onderschept het platform Escape om het volledig
@@ -984,6 +990,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   @override
   void dispose() {
     _advanceTimer?.cancel();
+    _progress.dispose();
     _timedSession.dispose();
     _clockTimer?.cancel();
     _fullscreenGuard?.cancel();

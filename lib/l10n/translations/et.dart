@@ -1598,6 +1598,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afsluiten duurt lang': 'Sulgemine võtab kaua aega',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Koristusetapp reageerib aeglaselt. Sinu salvestatud töö on juba turvaline; kohe sulgemine jätab ülejäänud sammud vahele.',
+  'Wachten': 'Oota',
+  'Toch afsluiten': 'Sulge ikkagi',
+  'Gekozen afbeelding': 'Valitud pilt',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'See logo elab selles brauseriseansis ja kaob uuesti laadimisel. Ekspordi paketina, et see kaasa võtta.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Sinu seaded olid rikutud ja need on lähtestatud.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Sinu seaded olid rikutud ja need on lähtestatud; koopia asub kohas {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'Logo ei ole pilt või on suurem kui 8 MB. Valige väiksem PNG, JPEG, GIF või WebP.',
   'Bezig met installeren': 'Installin',

@@ -156,6 +156,7 @@ class MarkdownQuillCodec {
   }
 
   static String markdownFromDocument(Document document) {
+    // convertDocument: de boom bestaat al — de delta-weg bouwde hem opnieuw.
     final raw = _deltaToMd.convertDocument(document).trimRight();
     return _normalizeQuillOutput(raw).replaceAll(_writtenOutRule, '---');
   }

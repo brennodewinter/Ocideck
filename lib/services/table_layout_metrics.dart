@@ -297,6 +297,10 @@ double tableBlockHeight({
   );
   final hPad = tableCellHPad(cellSize, hPadOverride);
   final vPad = cellSize * kTableCellVPadFactor + extraVPad;
+  // Binnen één meetronde herhalen veel cellen zich ('OK', 'Hoog'). De
+  // meting is een TextPainter-layout — relatief duur — dus per
+  // (kop, tekst, binnenbreedte) onthouden wat we al maten (#2632).
+  final measured = <String, double>{};
   var height = 0.0;
   for (var i = 0; i < rows.length; i++) {
     final row = rows[i];
@@ -305,7 +309,8 @@ double tableBlockHeight({
     for (var c = 0; c < colCount; c++) {
       final text = c < row.length ? row[c] : '';
       final innerW = math.max(1.0, colW[c] - hPad * 2);
-      final h = measureTextHeight(
+      final key = '$header|$innerW|${text.isEmpty ? ' ' : text}';
+      final h = measured[key] ??= measureTextHeight(
         text.isEmpty ? ' ' : text,
         cellSize,
         innerW,

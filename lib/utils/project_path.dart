@@ -49,56 +49,71 @@ bool _isInsideRealBase(String resolved, String projectPath) {
   return real == realBase || p.isWithin(realBase, real);
 }
 
-final Set<String> _renderBlockedPaths = {};
+/// Een afbeeldingspad dat de projectgrens ontsnapt — door de beeld- en
+/// medialader gegooid zodat de renderlaag de `outsideDeck`-placeholder kan
+/// kiezen zonder zelf bestandssysteem-statistieken te hoeven doen.
+class ProjectEscapeException implements Exception {
+  const ProjectEscapeException(this.path);
 
-/// Symlink-containment check for the hot render path: blocks a project-internal
-/// symlink that points outside the project.
-///
-/// Only blocked paths are cached. A positive result must be revalidated because
-/// a regular/missing path can be replaced by an escaping symlink while the app
-/// is running. A stale negative is deliberately fail-closed until the session
-/// or project cache is reset. Missing paths return `true` but are never cached;
-/// the normal load path renders their placeholder.
-bool isRenderPathContained(String resolved, String projectPath) {
-  final cacheKey = '$projectPath\u0000$resolved';
-  if (_renderBlockedPaths.contains(cacheKey)) return false;
-  bool ok;
-  try {
-    ok = _isInsideRealBase(resolved, projectPath);
-  } on FileSystemException {
-    ok = _missingPathInsideRealBase(resolved, projectPath);
-  }
-  if (!ok) {
-    if (_renderBlockedPaths.length >= 1024) {
-      _renderBlockedPaths.remove(_renderBlockedPaths.first);
-    }
-    _renderBlockedPaths.add(cacheKey);
-  }
-  return ok;
+  final String path;
+
+  @override
+  String toString() => 'ProjectEscapeException: $path';
 }
 
-bool _missingPathInsideRealBase(String resolved, String projectPath) {
+/// De async variant van de project-containment voor de *laadgrens* (#2624):
+/// resolveert het echte, symlink-gevolgde pad en levert dát doelpad terug —
+/// de aanroeper leest de gecontroleerde locatie in plaats van het lexicale
+/// pad, wat de TOCTOU tussen controle en open dichtmaakt. `null` betekent:
+/// ontsnapt het project (een symlink in het project die buiten wijst, of een
+/// pad wiens bestaande voorouder al buiten ligt).
+///
+/// Een ontbrekend bestand mag door wanneer zijn bestaande voorouder binnen
+/// het project ligt: de `readAsBytes` daarna faalt dan als gewone
+/// missend-bestand-fout en de aanroeper tekent de placeholder.
+///
+/// Doet `resolveSymbolicLinks` *async* — bedoeld voor de één-keer-per-decode
+/// laadgrens, zodat de build zelf geen synchrone realpath meer doet (zwaar
+/// op Windows: Defender, OneDrive en netwerk-mappen maken elke stat duur).
+Future<String?> containedRealPathOrNull(
+  String resolved,
+  String projectPath,
+) async {
   try {
-    if (!Directory(projectPath).existsSync()) {
-      return p.isWithin(p.normalize(projectPath), p.normalize(resolved));
+    if (!await Directory(projectPath).exists()) {
+      return p.isWithin(p.normalize(projectPath), p.normalize(resolved))
+          ? resolved
+          : null;
     }
-    final realBase = Directory(projectPath).resolveSymbolicLinksSync();
-    var ancestor = resolved;
-    while (FileSystemEntity.typeSync(ancestor, followLinks: false) ==
-        FileSystemEntityType.notFound) {
-      final parent = p.dirname(ancestor);
-      if (parent == ancestor) return false;
-      ancestor = parent;
+    final realBase = await Directory(projectPath).resolveSymbolicLinks();
+    try {
+      final real = await File(resolved).resolveSymbolicLinks();
+      return real == realBase || p.isWithin(realBase, real) ? real : null;
+    } on FileSystemException {
+      // Ontbrekend bestand: alleen doorlaten als de bestaande voorouder
+      // binnen de echte projectroot ligt.
+      return _existingAncestorInside(resolved, realBase) ? resolved : null;
     }
+  } on FileSystemException {
+    return null;
+  }
+}
+
+bool _existingAncestorInside(String resolved, String realBase) {
+  var ancestor = resolved;
+  while (FileSystemEntity.typeSync(ancestor, followLinks: false) ==
+      FileSystemEntityType.notFound) {
+    final parent = p.dirname(ancestor);
+    if (parent == ancestor) return false;
+    ancestor = parent;
+  }
+  try {
     final realAncestor = File(ancestor).resolveSymbolicLinksSync();
     return realAncestor == realBase || p.isWithin(realBase, realAncestor);
   } on FileSystemException {
     return false;
   }
 }
-
-/// Clears the [isRenderPathContained] cache (tests).
-void resetRenderContainedCache() => _renderBlockedPaths.clear();
 
 /// Resolve a project-relative [path] to an absolute path strictly inside
 /// [basePath], or null for absolute paths, empty paths, or `../` escapes.

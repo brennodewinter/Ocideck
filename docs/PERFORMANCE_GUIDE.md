@@ -191,6 +191,30 @@ project folders reasonably shallow.
 | Max file length | **1000 lines** | `tool/check_conventions.dart`, `maxFileLines` |
 | Max method/function length | **150 lines** | `tool/check_method_length.dart:26` |
 | Coverage floor | **80 %** line coverage | `Makefile`, the `coverage` target |
+| `*Sync` dart:io calls in `lib/widgets/` + `lib/state/` | **0** (allowlist `syncIoBaseline`) | `tool/check_conventions.dart`, `syncIoCallsIn` — one blocking call on the UI isolate is a felt stutter; two deliberate entries are documented there (#1854, `writeBytesAtomicSyncRetrying`) |
+
+### Performance gates in the test suite (#2636)
+
+These exist so a quadratic regression is caught by a test, not by a user
+report. They all compare **equal work** (N small runs vs one big run) or
+**call counts**, never wall-clock thresholds — absolute timing breaks on a
+loaded runner.
+
+| Gate | Where |
+|---|---|
+| Parse scales linearly in slides (200 vs 4×50) and in document blocks | `test/large_deck_performance_test.dart` |
+| `markdownFromDocument` on 300 pages vs 2×150 | same file, group `#2636` |
+| Per-keystroke work (`reparse` + `inspectMarkdownWriting`) on 300 pages vs 4×75 | same file, group `#2636` |
+| Split-run: one replaced slide in a 150-page run costs exactly one measurement | `test/shared_split_fit_scale_test.dart` (#2620) |
+| `memoizedDeckScan` on a 1000-slide deck rescans nothing on the second call | `test/privacy_scan_memo_test.dart` |
+| Cold quality/privacy scans distribute over idle frames, not the first frame | `test/slide_quality_analyzer_test.dart`, `test/privacy_scan_memo_test.dart` (#2634) |
+
+**Still missing:** a Windows first-frame measurement (#2636). The dev
+machines are macOS; there is no harness on the Windows runner to log time to
+first frame, and no baseline figure exists to put a ceiling on. Until a
+Windows run produces baseline data this stays a documented gap rather than a
+pretended budget — add the milestone logging and measure on real hardware
+first, then set the ratchet.
 
 ## Measured figures
 

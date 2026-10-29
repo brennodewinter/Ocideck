@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
 // `requestHost` plant een post-frame callback. Bewust `scheduler` en niet
@@ -431,14 +430,4 @@ class _PendingRender {
   final Completer<String?> completer;
 
   _PendingRender(this.source, this.kind, this.completer);
-}
-
-bool get isFlutterTest {
-  if (kIsWeb) return false;
-  try {
-    return Platform.environment.containsKey('FLUTTER_TEST');
-  } catch (e) {
-    logWarning('isFlutterTest: Platform.environment unavailable', e);
-    return false;
-  }
 }

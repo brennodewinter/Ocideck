@@ -1611,6 +1611,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afsluiten duurt lang': 'Uždarymas trunka ilgai',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Valymo žingsnis reaguoja lėtai. Jūsų išsaugotas darbas jau saugus; uždarymas dabar praleis likusius žingsnius.',
+  'Wachten': 'Palauk',
+  'Toch afsluiten': 'Vis tiek uždaryti',
+  'Gekozen afbeelding': 'Pasirinktas paveikslas',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Šis logotipas gyvena šioje naršyklės sesijoje ir dingsta po perkrovimo. Eksportuok kaip paketą, kad jį pasiimtum.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Jūsų nustatymai buvo sugadinti ir atstatyti.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Jūsų nustatymai buvo sugadinti ir atstatyti; kopija yra {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'Logotipas nėra paveikslėlis arba yra didesnis nei 8 MB. Pasirinkite mažesnį PNG, JPEG, GIF arba WebP.',
   'Bezig met installeren': 'Diegiama',

@@ -49,18 +49,19 @@ void main() {
     tester,
   ) async {
     final notifier = await pumpLargeDocument(tester);
-    final before = tester.widget<MarkdownNotesEditor>(
-      find.byType(MarkdownNotesEditor),
-    );
+    final before = tester.state(find.byType(MarkdownNotesEditor));
     final quill = tester
         .widget<WysiwygNotesField>(find.byType(WysiwygNotesField))
         .controller;
 
     quill.replaceText(0, 0, 'x', const TextSelection.collapsed(offset: 1));
     await tester.pump();
+    // De Quill→Markdown-terugschrijf is vertraagd (#2621): laat de rustpauze
+    // aflopen zodat de bron de aanslag bevat.
+    await tester.pump(const Duration(milliseconds: 400));
 
     expect(
-      tester.widget<MarkdownNotesEditor>(find.byType(MarkdownNotesEditor)),
+      tester.state(find.byType(MarkdownNotesEditor)),
       same(before),
       reason: 'een aanslag mag het schrijfvlak niet meteen herbouwen',
     );

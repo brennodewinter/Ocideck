@@ -27,9 +27,10 @@ Future<void> showImageZoomDialog(
   if (memBytes != null) {
     provider = cappedMemoryImage(memBytes);
   } else {
-    final resolved = resolveContainedRealPath(imagePath, projectPath);
+    final resolved = resolveSlideAssetPath(imagePath, projectPath);
     if (resolved == null) return Future<void>.value();
-    provider = cappedFileImage(File(resolved));
+    // De symlink-containment zit in de byte-lezing van de provider (#2624).
+    provider = cappedFileImage(File(resolved), projectPath: projectPath);
   }
   return showImageProviderZoomDialog(
     context,

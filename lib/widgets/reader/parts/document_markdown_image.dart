@@ -67,10 +67,13 @@ ImageProvider? documentImageProvider(String source, String? projectPath) {
   if (kIsWeb) return null;
   final resolved = resolveSlideAssetPath(source, projectPath);
   if (resolved == null) return null;
-  if (projectPath != null && !isRenderPathContained(resolved, projectPath)) {
-    return null;
-  }
-  return cappedFileImage(File(resolved), version: imageVersionOf(resolved));
+  // De symlink-containment zit in de byte-lezing van de provider (#2624): een
+  // ontsnappende symlink werpt daar in plaats van hier per build te staan.
+  return cappedFileImage(
+    File(resolved),
+    version: imageVersionOf(resolved),
+    projectPath: projectPath,
+  );
 }
 
 /// Tekent één afbeelding in de documentstroom, of het merkteken als het pad

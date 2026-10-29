@@ -34,7 +34,8 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (_, _) async => const DocumentExportCancelled(),
+                onExport: (_, _, {required isCancelled}) async =>
+                    const DocumentExportCancelled(),
               ),
               child: const Text('open'),
             ),
@@ -66,7 +67,7 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (_, format) async {
+                onExport: (_, format, {required isCancelled}) async {
                   gotFormat = format;
                   return const DocumentExportWritten(
                     '/tmp/rapport-volledig.pdf',
@@ -103,7 +104,7 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (profile, format) async {
+                onExport: (profile, format, {required isCancelled}) async {
                   gotProfile = profile;
                   gotFormat = format;
                   return const DocumentExportWritten(
@@ -147,7 +148,7 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (_, _) async =>
+                onExport: (_, _, {required isCancelled}) async =>
                     throw ArgumentError('bytes zijn vereist'),
               ),
               child: const Text('open'),
@@ -177,7 +178,7 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (profile, format) async =>
+                onExport: (profile, format, {required isCancelled}) async =>
                     const DocumentExportWritten('/tmp/doc.md'),
               ),
               child: const Text('open'),
@@ -200,13 +201,14 @@ void main() {
                 onPressed: () => DocumentExportDialog.show(
                   context,
                   privacyChecksEnabled: true,
-                  onExport: (_, _) async => const DocumentExportWritten(
-                    '/tmp/rapport.pdf',
-                    warnings: [
-                      DocumentExportUnsupportedCharacters({0x65E5}),
-                      DocumentExportTablesTooWide(2),
-                    ],
-                  ),
+                  onExport: (_, _, {required isCancelled}) async =>
+                      const DocumentExportWritten(
+                        '/tmp/rapport.pdf',
+                        warnings: [
+                          DocumentExportUnsupportedCharacters({0x65E5}),
+                          DocumentExportTablesTooWide(2),
+                        ],
+                      ),
                 ),
                 child: const Text('open'),
               ),
@@ -240,9 +242,10 @@ void main() {
                 onPressed: () => DocumentExportDialog.show(
                   context,
                   privacyChecksEnabled: true,
-                  onExport: (_, _) async => const DocumentExportRefused(
-                    DocumentExportRefusal.sourceIsTarget,
-                  ),
+                  onExport: (_, _, {required isCancelled}) async =>
+                      const DocumentExportRefused(
+                        DocumentExportRefusal.sourceIsTarget,
+                      ),
                 ),
                 child: const Text('open'),
               ),
@@ -272,7 +275,8 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (_, _) async => const DocumentExportCancelled(),
+                onExport: (_, _, {required isCancelled}) async =>
+                    const DocumentExportCancelled(),
               ),
               child: const Text('open'),
             ),

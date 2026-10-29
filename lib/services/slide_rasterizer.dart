@@ -226,6 +226,10 @@ class SlideRasterizer {
       showClassificationWatermark: showClassificationWatermark,
       slideAspect: aspect,
       logicalSize: logical,
+      // De export rastert op [targetWidth] px — déárom is dat de decodegrens
+      // (#2625): een bronfoto van 24 MP hoeft voor een 1920 px-pagina niet op
+      // 4096 px gedecodeerd te worden.
+      decodeMaxEdge: kExportImageDecodeEdge,
     );
 
     final results = <Uint8List>[];
@@ -328,6 +332,7 @@ class SlideRasterizer {
     required bool showClassificationWatermark,
     required double slideAspect,
     required Size logicalSize,
+    required int decodeMaxEdge,
   }) {
     final deck = audience.deck;
     final slides = audience.slides;
@@ -359,6 +364,7 @@ class SlideRasterizer {
           improvementY01: deck.improvementY01Metric,
           slideAspect: slideAspect,
           logicalSize: logicalSize,
+          decodeMaxEdge: decodeMaxEdge,
         ),
       ),
     );
@@ -603,6 +609,7 @@ class _RasterSlideHost extends StatefulWidget {
   final ImprovementY01Metric improvementY01;
   final double slideAspect;
   final Size logicalSize;
+  final int decodeMaxEdge;
 
   const _RasterSlideHost({
     super.key,
@@ -624,6 +631,7 @@ class _RasterSlideHost extends StatefulWidget {
     this.improvementY01 = ImprovementY01Metric.empty,
     this.slideAspect = kScreenSlideAspect,
     this.logicalSize = SlideRasterizer.logicalSize,
+    this.decodeMaxEdge = kMaxImageDecodeDimension,
   });
 
   @override
@@ -702,8 +710,8 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           organization: widget.organization,
           scopeCia: widget.scopeCia,
           reportLanguage: widget.reportLanguage,
+          decodeMaxEdge: widget.decodeMaxEdge,
           improvementY01: widget.improvementY01,
-          decodeMaxEdge: kExportImageDecodeEdge,
         ),
       ),
     );

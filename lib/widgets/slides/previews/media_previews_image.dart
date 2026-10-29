@@ -214,17 +214,12 @@ Widget _resolvedImage(
               : ImagePlaceholderReason.outsideDeck,
         );
   }
-  // Block a project-internal symlink that points outside the project (cached,
-  // so the per-frame cost is O(1) after the first render of each image).
-  if (!trustedAsset &&
-      projectPath != null &&
-      !isRenderPathContained(resolved, projectPath)) {
-    return _imagePlaceholder(context, ImagePlaceholderReason.outsideDeck);
-  }
-
   return _localFileImage(
     context,
     resolved,
+    // Een vertrouwd asset (thema-logo) is app-config en kan bewust búiten het
+    // project liggen; voor de rest dwingt de loader de deckgrens af.
+    projectPath: trustedAsset ? null : projectPath,
     fit: fit,
     alignment: alignment,
     semanticLabel: semanticLabel,
@@ -243,9 +238,16 @@ Widget _resolvedImage(
 /// De version-teller forceert een cache-miss nadat een afbeelding op schijf
 /// is herschreven (bv. na rotatie in de crop-dialoog) — zonder dit blijft de
 /// Image-widget de oude decode tonen omdat de provider `==` niet verandert.
+///
+/// De symlink-containment zit *in* de byte-lezing van de provider
+/// ([readContainedImageBytes]): één async realpath per decode in plaats van
+/// twee synchrone per build (#2624). Een pad dat het project ontsnapt werpt
+/// daar [ProjectEscapeException], die hier de `outsideDeck`-placeholder kiest
+/// — hetzelfde zichtbare antwoord als de oude build-tijd-controle.
 Widget _localFileImage(
   BuildContext context,
   String resolved, {
+  String? projectPath,
   required BoxFit fit,
   required Alignment alignment,
   required String? semanticLabel,
@@ -256,8 +258,18 @@ Widget _localFileImage(
   return ResolvedDecodeImage(
     explicitEdge: SlideLinkScope.decodeMaxEdgeOf(context),
     imageFor: (plan) => plan.hardResize
-        ? boundedFileImage(File(resolved), plan.edge, version: version)
-        : cappedFileImage(File(resolved), version: version, maxEdge: plan.edge),
+        ? boundedFileImage(
+            File(resolved),
+            plan.edge,
+            version: version,
+            projectPath: projectPath,
+          )
+        : cappedFileImage(
+            File(resolved),
+            version: version,
+            projectPath: projectPath,
+            maxEdge: plan.edge,
+          ),
     child: (image) => styled(
       RetryingImage(
         image: image,
@@ -270,8 +282,11 @@ Widget _localFileImage(
         // this the widget paints nothing for a frame on a source change, which
         // shows up as a black flash between slides — fatal when recording video.
         gaplessPlayback: true,
-        errorBuilder: (context, error, stackTrace) =>
-            failed(ImagePlaceholderReason.missing),
+        errorBuilder: (context, error, stackTrace) => failed(
+          error is ProjectEscapeException
+              ? ImagePlaceholderReason.outsideDeck
+              : ImagePlaceholderReason.missing,
+        ),
       ),
     ),
   );

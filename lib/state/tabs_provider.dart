@@ -34,6 +34,7 @@ import '../services/git/native_git_mirror_api.dart';
 import '../services/git/outbox.dart';
 import '../services/git/repo_asset_resolver.dart';
 import '../services/package_asset_resolver.dart';
+import '../services/privacy/privacy_scan_memo.dart';
 import 'git_provider.dart';
 import '../services/git/sync_engine.dart';
 import '../services/image_service.dart';
@@ -47,6 +48,7 @@ import '../services/web_asset_store.dart';
 import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 import '../platform/platform_features.dart';
+import '../utils/is_flutter_test.dart';
 import '../utils/log.dart';
 import '../utils/archive_limits.dart';
 import '../utils/project_path.dart';
@@ -54,8 +56,10 @@ import '../utils/bundled_asset.dart';
 import '../utils/utf8_bom.dart';
 import '../utils/zip_encryption.dart';
 import 'deck_provider.dart';
+import 'deck_quality_provider.dart';
 import 'document_provider.dart';
 import 'editor_provider.dart';
+import 'privacy_provider.dart';
 import 'settings_provider.dart';
 import 'asset_rights_module_provider.dart';
 import 'slide_clipboard_provider.dart';
@@ -98,6 +102,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final SettingsNotifier _settings;
   final RecoveryService _recovery;
   final Map<int, StreamSubscription<Object?>> _subs = {};
+
+  /// Het laatst uitgezonden tabfeit per tabblad (label, vuil-stip, open,
+  /// pad) — de deck-luisteraar zendt alleen uit als dit verandert (#2623).
+  final Map<int, Object> _lastTabFacts = {};
 
   /// Laatst ge-autosavede deck per tab (op identiteit): het deck is immutable,
   /// dus zolang het object hetzelfde is, is er niets gewijzigd en kan de tick
@@ -218,6 +226,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// simply garbage-collected on close.
   void _disposeTab(TabInfo tab) {
     _subs.remove(tab.id)?.cancel();
+    _lastTabFacts.remove(tab.id);
     _lastAutosavedDeck.remove(tab.id);
     _lastAutosavedMarkdownDraft.remove(tab.id);
     _lastAutosavedDocument.remove(tab.id);
@@ -255,6 +264,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
       if (!(st.isOpen && (st.isDirty || _markdownDraftFor(tab) != null))) {
         _recovery.discard(key);
       }
+      // Alleen uitzenden wanneer een tabfeit verandert — label, vuil-stip,
+      // open-status of bestandspad (#2623). De deck-stroom emittteert bij
+      // élke toetsaanslag, en elke emissie herbouwde voorheen de hele
+      // schil; wie de dia-inhoud nodig heeft, watcht het deck van zijn
+      // eigen tabblad al.
+      final fact = (tab.label, tab.isDirty, st.isOpen, st.filePath);
+      if (fact == _lastTabFacts[id]) return;
+      _lastTabFacts[id] = fact;
       state = state.copyWith(tabs: List.from(state.tabs));
     });
     return tab;
@@ -478,21 +495,23 @@ class TabsNotifier extends StateNotifier<TabsState> {
       return OpenResult.opened;
     }
     // Security gate: every file that enters the app (open, recent, drag-drop,
-    // URL/package import) is scanned first. A presentation is data only — if the
-    // file carries anything executable we refuse it and raise the alarm instead
-    // of parsing/opening it. Fail-closed.
-    final findings = await _file.scanForUnsafeMarkdown(path);
-    if (findings.isNotEmpty) {
+    // URL/package import) is scanned before it is parsed. A presentation is
+    // data only — if the file carries anything executable we refuse it and
+    // raise the alarm. The scan lives inside [openDeckDetailed], on the exact
+    // bytes being parsed (fail-closed TOCTOU); the findings ride along in the
+    // result, so this path reads and scans only once (#2634).
+    final outcome = await _file.openDeckDetailed(path);
+    if (outcome.failure == OpenFailure.unsafe) {
       if (mounted) {
-        _ref.read(importSecurityAlarmProvider.notifier).state =
-            ImportSecurityAlarm(path: path, findings: findings);
+        _ref
+            .read(importSecurityAlarmProvider.notifier)
+            .state = ImportSecurityAlarm(
+          path: path,
+          findings: outcome.safetyFindings ?? const [],
+        );
       }
       return OpenResult.blocked;
     }
-    // The scan above only drives the alarm; openDeck re-reads and re-scans the
-    // exact bytes it parses, so a file swapped after this point is still caught
-    // (it simply returns null here rather than loading unsafe content).
-    final outcome = await _file.openDeckDetailed(path);
     final deck = outcome.deck;
     if (deck == null) {
       // Geen Marp-deck? Router, geen muur (DOCUMENT_MODE.md §2): open als document.
@@ -505,7 +524,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (!mounted) return OpenResult.unreadable;
     _reportOpenOutcome(_ref, outcome);
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
-    _placeDeckInTab(this, deck, filePath: path, index: index);
+    await warmDeckAnalysisBeforePlace(this, deck);
+    if (!mounted) return OpenResult.unreadable;
+    _placeDeckInTab(
+      this,
+      deck,
+      filePath: path,
+      index: index,
+      preserveThemeProfile: outcome.carriesPackagedProfile,
+    );
     await _settings.addRecentFile(
       path,
       slideCount: deck.slides.length,
@@ -603,16 +630,21 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Een kopie met een voorgestelde naam bestaat nog nergens op schijf —
     // precies wat de dirty-stip en de herstelkopie zichtbaar maken (#2468).
     if (suggestedName != null) notifier.markDirty();
-    _subs[id] = notifier.stream.listen((st) {
-      if (!mounted) return;
-      if (!(st.isOpen && st.isDirty)) _recovery.discard(key);
-      state = state.copyWith(tabs: List.from(state.tabs));
-    });
-    return TabInfo(
+    final tab = TabInfo(
       id: id,
       recoveryId: key,
       content: DocumentTabContent(notifier),
     );
+    _subs[id] = notifier.stream.listen((st) {
+      if (!mounted) return;
+      if (!(st.isOpen && st.isDirty)) _recovery.discard(key);
+      // Zelfde tabfeit-poort als de deck-luisteraar hierboven (#2623).
+      final fact = (tab.label, tab.isDirty, st.isOpen, st.filePath);
+      if (fact == _lastTabFacts[id]) return;
+      _lastTabFacts[id] = fact;
+      state = state.copyWith(tabs: List.from(state.tabs));
+    });
+    return tab;
   }
 
   /// Zoek een byte-identieke kopie van het zojuist geopende bestand in de
@@ -715,6 +747,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     if (!mounted) return OpenResult.unreadable;
     _warnUnfilledChartData(deck);
+    await warmDeckAnalysisBeforePlace(this, deck);
+    if (!mounted) return OpenResult.unreadable;
     _placeDeckInTab(this, deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
   }
@@ -727,30 +761,25 @@ class TabsNotifier extends StateNotifier<TabsState> {
     DecodedUtf8 decoded, {
     required String sourceName,
   }) {
-    final findings = MarkdownSafetyScanner.scan(decoded.text);
-    if (findings.isNotEmpty) {
-      // Ook vastleggen, niet alleen tonen. De twee andere poorten op deze
-      // scanner (`FileService.openDeck` en `openDeckFromContent`) loggen hun
-      // weigering wél; deze deed dat niet, terwijl het juist de weg is waarlangs
-      // een deck van buiten binnenkomt. Een alarm dat de gebruiker wegklikt,
-      // laat niets na — en "dit deck tripte de poort" is precies wat je
-      // achteraf wilt kunnen navertellen bij een gereedschap dat verzegelde
-      // rapporten uitgeeft. Alleen de telling — net als de twee zusterpoorten
-      // in `FileService`. De bevinding zelf draagt deckinhoud, en zelfs de
-      // soorten opsommen zou een waardenlijst in de log zetten; welke regel
-      // aansloeg leest de gebruiker in zijn eigen bestand.
-      logWarning(
-        'TabsProvider: geopend deck geweigerd — uitvoerbare inhoud '
-        '(${findings.length} bevinding(en))',
-        sourceName,
-      );
+    // De veiligheidsscan zit in [openDecodedDeck] zelf, op exact de tekst die
+    // er geparseerd wordt; de bevindingen reizen mee in het resultaat, dus dit
+    // pad scant maar één keer (#2634).
+    final outcome = _file.openDecodedDeck(decoded, sourceName: sourceName);
+    if (outcome.failure == OpenFailure.unsafe) {
+      // Ook vastleggen, niet alleen tonen — "dit deck tripte de poort" is
+      // precies wat je achteraf wilt kunnen navertellen bij een gereedschap
+      // dat verzegelde rapporten uitgeeft. Alleen de telling — net als de
+      // zusterpoorten in `FileService`; de bevinding zelf draagt deckinhoud.
       if (mounted) {
-        _ref.read(importSecurityAlarmProvider.notifier).state =
-            ImportSecurityAlarm(path: sourceName, findings: findings);
+        _ref
+            .read(importSecurityAlarmProvider.notifier)
+            .state = ImportSecurityAlarm(
+          path: sourceName,
+          findings: outcome.safetyFindings ?? const [],
+        );
       }
       return (deck: null, failure: OpenResult.blocked);
     }
-    final outcome = _file.openDecodedDeck(decoded, sourceName: sourceName);
     final deck = outcome.deck;
     if (deck == null) {
       return (

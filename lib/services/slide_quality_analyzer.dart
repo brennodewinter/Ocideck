@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../models/asset_origin.dart';
 import '../models/chart.dart';
@@ -224,6 +225,62 @@ class SlideQualityAnalyzer {
     // ergens uitkomt hangt af van de ándere dia's.
     _checkDanglingJumps(slides, issues);
     return SlideQualityResult(issues);
+  }
+
+  /// Meet het hele deck vooruit in plakken van ~[batchSize] dia's, met na elk
+  /// plakje een teruggave aan de scheduler (#2634).
+  ///
+  /// TextPainter mag alleen op de UI-isolate leven, dus de meting kan niet de
+  /// werk-isolate van de privacytekstscan op. Wél kan hij gefaseerd: met deze
+  /// pas vóóraf aan het tonen van een vers geopend deck serveert de eerste
+  /// [analyze]-lezing daarna compleet uit de per-dia-memo's, in plaats van het
+  /// hele deck in één synchrone blok te meten — honderden milliseconden stilte
+  /// bij een groot deck. De lege [scheduleTask]-taken zorgen dat frames tussen
+  /// de plakken blijven renderen (het opstartscherm schiet door), ook al is
+  /// `Priority.idle` zelf niet rendabeler dan direct doorgaan.
+  ///
+  /// Zonder scheduler — in een headless test, of op een plek zonder binding —
+  /// is dit gewoon [analyze] op een andere volgorde: de memo's eindigen hetzelfde.
+  Future<void> analyzeWarmed(Deck deck, {int batchSize = 20}) async {
+    final slides = deck.slides;
+    final theme = deck.themeProfile;
+    final font = theme.fontFamily;
+    final aspect = slideAspectRatio(deck.slideSize);
+    var i = 0;
+    while (i < slides.length) {
+      final end = math.min(i + batchSize, slides.length);
+      for (; i < end; i++) {
+        final slide = slides[i];
+        if (!slide.skipped) {
+          _memoizedSlideIssues(slide, i, theme, font, deck.projectPath, aspect);
+        }
+        // Alleen échte runleden laten een dure schaalmeting achter: een
+        // vervolgdia of de pagina vlak vóór een vervolgdia — precies de set
+        // waar `_checkSplitRuns` straks `memoizedSplitRunMemberScale` op vraagt.
+        if (slide.continuesSplit ||
+            (i + 1 < slides.length && slides[i + 1].continuesSplit)) {
+          memoizedSplitRunMemberScale(slide, theme, font, slideAspect: aspect);
+        }
+      }
+      if (i < slides.length) {
+        // `SchedulerBinding` heeft geen `maybeInstance`; `instance` gooit in
+        // debug als er geen binding is en levert `null` in release. Beide
+        // betekenen hetzelfde: headless, dus de plakken lopen direct door.
+        SchedulerBinding? binding;
+        try {
+          binding = SchedulerBinding.instance;
+        } on Object {
+          binding = null;
+        }
+        if (binding != null) {
+          await binding.scheduleTask<void>(() {}, Priority.idle);
+        }
+      }
+    }
+    // Deckbreed slot: met warme per-dia-memo's zijn ook `_checkSplitRuns` en
+    // `_checkDanglingJumps` goedkoop, dus dit kost praktisch niets en de eerste
+    // echte `analyze` serveert daarna zuiver uit de memo's.
+    analyze(deck);
   }
 
   List<SlideQualityIssue> _memoizedSlideIssues(
@@ -726,24 +783,6 @@ class _FitMemo {
   final double scale;
 
   const _FitMemo(this.font, this.slideAspect, this.scale);
-}
-
-/// Gememoiseerde split-run-schaal per slide. Een aparte cache naast
-/// [_fitScaleCache] omdat dit een ándere meting van dezelfde slide is: deze
-/// reserveert de logostrook, net als de live layout. Eén cache delen zou de twee
-/// waarden door elkaar halen, want slide en lettertype zijn voor beide gelijk.
-/// Het thema hoort daarom wél bij de sleutel — het bepaalt de logostrook.
-final Expando<_RunScaleMemo> _runScaleCache = Expando<_RunScaleMemo>(
-  'splitRunMemberScale',
-);
-
-class _RunScaleMemo {
-  final String font;
-  final ThemeProfile theme;
-  final double slideAspect;
-  final double scale;
-
-  const _RunScaleMemo(this.font, this.theme, this.slideAspect, this.scale);
 }
 
 /// Gememoiseerde per-slide issues plus alles waarvan de analyse afhangt, zodat

@@ -99,7 +99,9 @@ void main() {
     expect(find.byType(SettingsDialog), findsOneWidget);
   });
 
-  testWidgets('"Nieuw profiel" maakt een profiel aan', (tester) async {
+  testWidgets('"Nieuw profiel" maakt pas bij Opslaan een profiel aan (#2648)', (
+    tester,
+  ) async {
     final container = await openAppearanceTab(tester);
     addTearDown(container.dispose);
 

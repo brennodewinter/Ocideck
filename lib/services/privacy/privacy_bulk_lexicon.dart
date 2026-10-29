@@ -33,8 +33,9 @@
 // van het bereik tot de hele mededeling.
 
 import 'dart:convert';
+import 'dart:isolate';
 
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 import '../../utils/log.dart';
@@ -116,38 +117,23 @@ class PrivacyBulkLexicon {
     for (final key in assetKeys) {
       try {
         final raw = await (bundle ?? rootBundle).loadString(key);
-        final map = jsonDecode(raw) as Map<String, dynamic>;
-        final payload = (map['terms'] as Map).cast<String, dynamic>();
-        // Twee vormen: één categorie met talen eronder (Orphanet), of
-        // categorieën met elk hun eigen talen (EuroVoc). De kop zegt welke.
-        final fallback = map['category'] as String?;
-        final blocks = fallback != null
-            ? {fallback: payload}
-            : payload.map(
-                (k, v) => MapEntry(k, (v as Map).cast<String, dynamic>()),
-              );
-
-        for (final block in blocks.entries) {
-          for (final byLang in (block.value as Map).entries) {
-            (byCategory[block.key] ??= <String>{}).add(byLang.key as String);
-            for (final label in (byLang.value as List).cast<String>()) {
-              final term = label.toLowerCase();
-              final head = _firstToken(term);
-              if (head.isEmpty) continue;
-              (index[head] ??= <BulkTerm>[]).add((
-                term: term,
-                category: block.key,
-              ));
-              count++;
-            }
-          }
+        // Ontleden en indexeren in een eigen isolate: het gezondheidsbestand
+        // is ~2 MB met ruim zestigduizend termen — op een trage laptop zijn
+        // dat honderden milliseconden op de UI-isolate, vóór het eerste frame
+        // en dus vóór het venster op Windows (#2626). Web kent geen isolates;
+        // daar draait de parse op de main thread zoals voorheen.
+        final parsed = kIsWeb
+            ? _parseLexiconAsset(raw)
+            : await Isolate.run(() => _parseLexiconAsset(raw));
+        for (final entry in parsed.index.entries) {
+          (index[entry.key] ??= <BulkTerm>[]).addAll(entry.value);
         }
-        final attribution = map['attribution'] as String?;
-        if (attribution != null && attribution.isNotEmpty) {
-          attributions.add(attribution);
+        for (final entry in parsed.byCategory.entries) {
+          (byCategory[entry.key] ??= <String>{}).addAll(entry.value);
         }
-        final v = map['version'] as String?;
-        if (v != null && v.isNotEmpty) version = v;
+        count += parsed.count;
+        if (parsed.attribution != null) attributions.add(parsed.attribution!);
+        if (parsed.version != null) version = parsed.version!;
       } catch (e) {
         // Ontbrekend of stuk asset: de vloer blijft staan, en de dekkingsmeter
         // meldt dan gewoon wat de vloer dekt. Stil doorgaan mag hier, zwijgen
@@ -158,7 +144,10 @@ class PrivacyBulkLexicon {
 
     // Langste eerst, zodat "ziekte van crohn" wint van een kortere term die
     // toevallig hetzelfde begint. Anders meldt de scanner het deel in plaats
-    // van het geheel, en redigeert hij dus te krap.
+    // van het geheel, en redigeert hij dus te krap. De sortering per asset is
+    // al gebeurd; samengevoegde emmers vragen alleen een hersortering als
+    // twee assets hetzelfde starttoken delen — zelden, maar de volgorde is
+    // het contract dus de goedkope sort staat er gewoon.
     for (final bucket in index.values) {
       bucket.sort((a, b) => b.term.length.compareTo(a.term.length));
     }
@@ -241,6 +230,62 @@ class PrivacyBulkLexicon {
     _languagesByCategory = {category: terms.keys.toSet()};
     _termCount = count;
   }
+}
+
+/// Ontleedt en indexeert één lexicon-asset. Top-level en puur: [Isolate.run]
+/// draait dit op een eigen isolate (#2626), dus het resultaat bestaat alleen
+/// uit verzendbare structuren (maps, lijsten, records — geen closures).
+///
+/// De sortering-per-emmer (langste eerst) gebeurt hier al; de aanroeper
+/// voegt de assets samen.
+({
+  Map<String, List<BulkTerm>> index,
+  Map<String, Set<String>> byCategory,
+  int count,
+  String? attribution,
+  String? version,
+})
+_parseLexiconAsset(String raw) {
+  final index = <String, List<BulkTerm>>{};
+  final byCategory = <String, Set<String>>{};
+  var count = 0;
+  final map = jsonDecode(raw) as Map<String, dynamic>;
+  final payload = (map['terms'] as Map).cast<String, dynamic>();
+  // Twee vormen: één categorie met talen eronder (Orphanet), of
+  // categorieën met elk hun eigen talen (EuroVoc). De kop zegt welke.
+  final fallback = map['category'] as String?;
+  final blocks = fallback != null
+      ? {fallback: payload}
+      : payload.map((k, v) => MapEntry(k, (v as Map).cast<String, dynamic>()));
+
+  for (final block in blocks.entries) {
+    for (final byLang in (block.value as Map).entries) {
+      (byCategory[block.key] ??= <String>{}).add(byLang.key as String);
+      for (final label in (byLang.value as List).cast<String>()) {
+        final term = label.toLowerCase();
+        final head = _firstToken(term);
+        if (head.isEmpty) continue;
+        (index[head] ??= <BulkTerm>[]).add((term: term, category: block.key));
+        count++;
+      }
+    }
+  }
+  // Langste eerst: zie de toelichting in [ensureLoaded].
+  for (final bucket in index.values) {
+    bucket.sort((a, b) => b.term.length.compareTo(a.term.length));
+  }
+
+  final attribution = map['attribution'] as String?;
+  final v = map['version'] as String?;
+  return (
+    index: index,
+    byCategory: byCategory,
+    count: count,
+    attribution: attribution != null && attribution.isNotEmpty
+        ? attribution
+        : null,
+    version: v != null && v.isNotEmpty ? v : null,
+  );
 }
 
 /// Het eerste woord van een term, in kleine letters.

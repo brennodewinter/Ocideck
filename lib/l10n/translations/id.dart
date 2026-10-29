@@ -1605,6 +1605,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afsluiten duurt lang': 'Keluar memakan waktu lama',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Langkah pembersihan merespons dengan lambat. Pekerjaanmu yang tersimpan sudah aman; keluar sekarang melewati langkah yang tersisa.',
+  'Wachten': 'Tunggu',
+  'Toch afsluiten': 'Tetap keluar',
+  'Gekozen afbeelding': 'Gambar terpilih',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Logo ini hidup di sesi browser ini dan hilang setelah dimuat ulang. Ekspor sebagai paket untuk membawanya.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Pengaturanmu rusak dan telah dipulihkan.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Pengaturanmu rusak dan telah dipulihkan; salinan ada di {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'Logo ini bukan gambar atau lebih besar dari 8 MB. Pilih PNG, JPEG, GIF, atau WebP yang lebih kecil.',
   'Bezig met installeren': 'Menginstal',

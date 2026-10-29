@@ -1620,6 +1620,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afsluiten duurt lang': 'Закриття триває довго',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Крок очищення реагує повільно. Ваша збережена робота вже в безпеці; вихід зараз пропустить решту кроків.',
+  'Wachten': 'Зачекати',
+  'Toch afsluiten': 'Вийти все одно',
+  'Gekozen afbeelding': 'Вибране зображення',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Цей логотип живе в цій сесії браузера й зникає після перезавантаження. Експортуйте як пакет, щоб узяти його з собою.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Ваші налаштування були пошкоджені та скинуті.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Ваші налаштування були пошкоджені та скинуті; копія є в {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'Логотип не є зображенням або більший за 8 МБ. Оберіть менший PNG, JPEG, GIF чи WebP.',
   'Bezig met installeren': 'Встановлюю',

@@ -93,13 +93,19 @@ class AssetStaging {
     var removed = 0;
     try {
       final dir = Directory(root);
-      if (!dir.existsSync()) return 0;
+      if (!await dir.exists()) return 0;
       final now = DateTime.now();
-      for (final entry in dir.listSync()) {
+      // Elke stap is async: de oude synchrone variant blokkeerde de
+      // UI-isolate één ononderbroken stuk lang — per bewaarde sessiemap een
+      // recursieve `listSync` plus een `statSync` per bestand (#2626).
+      // Huishouding als deze mag nooit tussen de gebruiker en het eerste
+      // frame staan; async schijftoegang laat de event loop tussendoor
+      // tekenen.
+      await for (final entry in dir.list()) {
         if (entry is! Directory) continue;
         if (keep != null && p.equals(entry.path, keep)) continue;
         try {
-          final touched = _newestModified(entry);
+          final touched = await _newestModified(entry);
           if (touched == null || now.difference(touched) <= limit) continue;
           await entry.delete(recursive: true);
           removed++;
@@ -125,15 +131,15 @@ class AssetStaging {
   /// dan is de map zelf de enige aanwijzing die er is. Null als er niets te
   /// lezen viel; dan blijft de map staan, want opruimen op grond van iets wat
   /// je niet hebt kunnen lezen is geen opruimen maar gokken.
-  static DateTime? _newestModified(Directory dir) {
+  static Future<DateTime?> _newestModified(Directory dir) async {
     DateTime? newest;
     try {
-      for (final entry in dir.listSync(recursive: true, followLinks: false)) {
+      await for (final entry in dir.list(recursive: true, followLinks: false)) {
         if (entry is! File) continue;
-        final modified = entry.statSync().modified;
+        final modified = (await entry.stat()).modified;
         if (newest == null || modified.isAfter(newest)) newest = modified;
       }
-      return newest ?? dir.statSync().modified;
+      return newest ?? (await dir.stat()).modified;
     } catch (e) {
       logWarning('AssetStaging._newestModified: stat', e);
       return null;

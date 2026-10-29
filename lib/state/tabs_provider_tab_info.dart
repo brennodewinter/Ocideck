@@ -13,6 +13,7 @@ void _placeDeckInTab(
   int index = 0,
   String? remoteOrigin,
   LearningSessionRef? learningSession,
+  bool preserveThemeProfile = false,
 }) {
   final state = notifier.currentState;
   final current = state.current;
@@ -32,9 +33,10 @@ void _placeDeckInTab(
     deck.copyWith(remoteAssetBase: remoteDeckUrlOrNull(remoteOrigin)),
     filePath: filePath,
     remoteOrigin: remoteOrigin,
-    // Het serverpakket bevat de bij publicatie bevroren huisstijl; de gewone
-    // openroute blijft de actieve gebruikersinstelling volgen.
-    preserveThemeProfile: learningSession != null,
+    // Het server- of `.ocideck`-pakket bevat de bij publicatie bevroren
+    // huisstijl; de gewone openroute blijft de actieve gebruikersinstelling
+    // volgen.
+    preserveThemeProfile: preserveThemeProfile || learningSession != null,
   );
   tab.learningSession = learningSession;
   tab.editorNotifier.select(index);
@@ -49,6 +51,47 @@ void _placeDeckInTab(
   }
   notifier._maybePromptSecurityModule(deck);
   notifier._maybePromptImprovementModule(deck);
+}
+
+/// Meet de koude kwaliteits- en privacycontroles van [deck] vooruit, vóór
+/// [_placeDeckInTab] het deck toont (#2634).
+///
+/// Anders leest de eerste provider-lezing een koude memo: [analyze] meet dan
+/// álle dia's met TextPainter in één synchrone blok op de UI-isolate, en de
+/// tekstscan telt daar honderden milliseconden bovenop — de app bevriest aan
+/// het eind van "openen". De privacytekstscan draait in een werk-isolate; de
+/// kwaliteitsmeting moet op de UI-isolate (TextPainter) maar loopt in
+/// idle-plakken van ~20 dia's, zodat het opstartscherm tussen de plakken
+/// doorschiet. Beide overlappen: de isolate werkt terwijl de plakken lopen.
+///
+/// `openDeckCopyInTab` roept dit bewust níét aan: die kopie deelt de
+/// dia-instanties met een deck dat al warm is, dus de memo's raken al.
+Future<void> warmDeckAnalysisBeforePlace(
+  TabsNotifier notifier,
+  Deck deck,
+) async {
+  final ref = notifier._ref;
+  // Onder `flutter test` landen `Isolate.run` en `scheduleTask` nooit: de
+  // nep-async-klok voert geen echte event loop uit terwijl de aanroeper
+  // await. Synchroon warmen geeft dezelfde memo's en eindstaat, zonder
+  // deadlock. [isFlutterTest] dekt web-tests af — daar geldt `kIsWeb` en
+  // is `Platform` onleesbaar.
+  if (isFlutterTest) {
+    if (ref.read(settingsProvider.select((s) => s.privacyChecksEnabled))) {
+      memoizedDeckScan(ref.read(privacyScannerProvider), deck);
+    }
+    ref.read(slideQualityAnalyzerProvider).analyze(deck);
+    return;
+  }
+  var privacyWarm = Future<void>.value();
+  if (ref.read(settingsProvider.select((s) => s.privacyChecksEnabled))) {
+    privacyWarm = warmPrivacyScanMemo(
+      ref.read(privacyScannerProvider),
+      deck.slides,
+    );
+  }
+  await ref.read(slideQualityAnalyzerProvider).analyzeWarmed(deck);
+  await privacyWarm;
 }
 
 /// Open [deck] als onopgeslagen kopie in een nieuw tabblad — bijvoorbeeld een

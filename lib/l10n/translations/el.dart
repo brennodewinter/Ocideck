@@ -1630,6 +1630,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afsluiten duurt lang': 'Η έξοδος καθυστερεί',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Ένα βήμα εκκαθάρισης ανταποκρίνεται αργά. Η αποθηκευμένη σου δουλειά είναι ήδη ασφαλής· η έξοδος τώρα παραλείπει τα υπόλοιπα βήματα.',
+  'Wachten': 'Περίμενε',
+  'Toch afsluiten': 'Έξοδος ούτως ή άλλως',
+  'Gekozen afbeelding': 'Επιλεγμένη εικόνα',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Αυτό το λογότυπο ζει σε αυτή τη συνεδρία του προγράμματος περιήγησης και εξαφανίζεται μετά την επαναφόρτωση. Εξαγωγή ως πακέτο για να το πάρεις μαζί σου.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Οι ρυθμίσεις σου ήταν κατεστραμμένες και επαναφέρθηκαν.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Οι ρυθμίσεις σου ήταν κατεστραμμένες και επαναφέρθηκαν· ένα αντίγραφο βρίσκεται στο {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'Το λογότυπο δεν είναι εικόνα ή είναι μεγαλύτερο από 8 MB. Επιλέξτε μικρότερο PNG, JPEG, GIF ή WebP.',
   'Bezig met installeren': 'Γίνεται εγκατάσταση',

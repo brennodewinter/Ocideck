@@ -423,7 +423,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
         await widget.onReplaceUsages?.call(path, entry.keeper);
         try {
           final file = File(path);
-          if (file.existsSync()) await file.delete();
+          if (await file.exists()) await file.delete();
         } catch (e) {
           logWarning('_ImageCarouselPickerState._dedupe: delete file', e);
         }

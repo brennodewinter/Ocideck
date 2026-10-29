@@ -652,6 +652,18 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afsluiten duurt lang': 'Ofsluten duorret lang',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'In oprimstap reägearret traach. Jo bewarre wurk is al feilich; no ofslute slat de restearjende stappen oer.',
+  'Wachten': 'Wachtsje',
+  'Toch afsluiten': 'Dochs ofslute',
+  'Gekozen afbeelding': 'Keazen ôfbylding',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Dit logo libbet yn dizze browsersesje en ferdwynt nei ferversing. Eksportearje as pakket om it mei te nimmen.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Jo ynstellingen wiene skansearre en binne weromset.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Jo ynstellingen wiene skansearre en binne weromset; in kopy stiet yn {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'It logo is gjin ôfbylding of grutter as 8 MB. Kies in lytser PNG, JPEG, GIF of WebP.',
   'Bezig met installeren': 'Oan it ynstallearjen',

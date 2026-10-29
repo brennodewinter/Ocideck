@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -65,16 +66,27 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
   /// lijst en geen derde knop in de actiebalk.
   bool _noSave = false;
 
+  /// Het doelpad waar de laatste "bestaat al"-probe op liep, en — zodra die
+  /// afrondde — het pad dat al bezet bleek. De FormField-validator is per
+  /// contract synchroon en `autovalidateMode` vuurt per toetsaanslag, dus de
+  /// schijfcontrole zelf staat in [_checkTargetExists] en deze twee velden
+  /// dragen de uitkomst naar de validator (#2636).
+  String? _probedPath;
+  String? _takenPath;
+
   @override
   void initState() {
     super.initState();
     _dir = widget.libraries.isEmpty ? null : widget.libraries.first.path;
     _noSave = widget.libraries.isEmpty;
+    _nameCtrl.addListener(_probeTargetPath);
   }
 
   @override
   void dispose() {
-    _nameCtrl.dispose();
+    _nameCtrl
+      ..removeListener(_probeTargetPath)
+      ..dispose();
     super.dispose();
   }
 
@@ -99,6 +111,35 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
     return p.join(dir, _fileName(l10n));
   }
 
+  /// Vraagt async of het huidige doelpad al bestaat. Alleen een probe voor
+  /// het pad dat er nóg staat mag schrijven: een laat terugkerende uitkomst
+  /// van een eerdere toetsaanslag overschrijft de verse staat niet.
+  void _probeTargetPath() {
+    final path = _targetPath(context.l10n);
+    if (path == null || path == _probedPath) return;
+    _probedPath = path;
+    _takenPath = null;
+    unawaited(_checkTargetExists(path));
+  }
+
+  Future<void> _checkTargetExists(String path) async {
+    bool exists;
+    try {
+      exists = await File(path).exists();
+    } on Object {
+      // De voormelding is een dienst, geen grens: mislukt de probe, dan meldt
+      // de aanmaak zelf zijn eigen fout. Stil falen hoort hier dus.
+      return;
+    }
+    if (!mounted || _probedPath != path) return;
+    setState(() {
+      _takenPath = exists ? path : null;
+      // De probe was nodig omdat de validator hem niet mag doen; nu de
+      // uitkomst er is, revalideren toont of wist de melding meteen.
+      _formKey.currentState?.validate();
+    });
+  }
+
   Future<void> _pickCustom() async {
     // Zelfde poort als elders: op web bestaat getDirectoryPath niet en geeft
     // het stil null terug — dan doet de knop niets zonder uitleg (#150).
@@ -112,6 +153,7 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
       _customDir = result;
       _dir = result;
       _noSave = false;
+      _probeTargetPath();
     });
   }
 
@@ -225,8 +267,10 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
     // Bestaat de naam al, dan mag de gebruiker een andere kiezen — een nieuw
     // (leeg) document over een bestaand bestand heen is dataverlies. De
     // aanmaak zelf claimt het pad later nog exclusief; dit is de
-    // gebruiksvriendelijke voormelding, geen veiligheidsgrens.
-    if (path != null && File(path).existsSync()) {
+    // gebruiksvriendelijke voormelding, geen veiligheidsgrens. De schijfprobe
+    // loopt async in [_checkTargetExists]; deze validator leest alleen de
+    // uitkomst, want een validator mag niet op schijf (#2636).
+    if (path != null && path == _takenPath) {
       return l10n.d('Er bestaat al een bestand met deze naam in deze map.');
     }
     return null;
@@ -255,6 +299,7 @@ class _NewDocumentDialogState extends State<NewDocumentDialog> {
             _noSave = false;
             _dir = path;
           }
+          _probeTargetPath();
         }),
         borderRadius: BorderRadius.circular(6),
         child: Padding(

@@ -284,7 +284,9 @@ void main() {
         (await docx(18)).findFile('word/styles.xml')!.content as List<int>,
       );
       expect(larger, contains('<w:sz w:val="36"/>'));
-      expect(larger, contains('<w:sz w:val="32"/>'));
+      // Koppen blijven relatief: h1 is 32 halve punten bij een 11-pt-body en
+      // schaalt met 18/11 mee naar 52.
+      expect(larger, contains('<w:sz w:val="52"/>'));
 
       expect(await odt(11), contains('fo:font-size="11pt"'));
       final scaled = await odt(18);

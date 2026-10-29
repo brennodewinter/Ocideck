@@ -1,17 +1,22 @@
+import 'dart:isolate';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
+import 'privacy_bulk_lexicon.dart';
 import 'privacy_scanner.dart';
 
-/// Per-slide memoisatie van de privacyscan.
+/// Per-slide memoisatie van de privacyscan op dia-identiteit.
 ///
-/// [PrivacyScanner.scanSlide] bestond hier al voor — het doc-commentaar noemt
-/// letterlijk "voor de per-slide memoisatie in de provider" — maar werd nergens
-/// aangeroepen. De provider draaide `scan(deck)`, dus élke aanslag scande het
-/// hele deck opnieuw: gemeten ~1,07 ms per dia, en dus 208 ms bij 200 dia's en
-/// 519 ms bij 500. Er verandert bij een aanslag precies één dia.
+/// `Slide` is onveranderlijk en elke bewerking levert een nieuw exemplaar op,
+/// dus identiteit is een geldige wijzigingsstempel — een gewijzigde dia mist,
+/// alle andere raken. De dia-**index** zit bewust níét in de sleutel: hij
+/// staat alleen op elke bevinding gestempeld en wordt bij het samenvoegen
+/// geschreven via [PrivacyFinding.reindexed]. Een dia die bovenaan wordt
+/// ingevoegd ongeldigt daardoor geen enkele scan achter hem (#2622).
 ///
 /// De sleutel is waterdicht doordat alles wat de uitkomst bepaalt erin zit:
 ///
@@ -124,4 +129,63 @@ PrivacyScanResult memoizedDeckScan(PrivacyScanner scanner, Deck deck) {
 void clearPrivacyScanMemo() {
   _scanEpoch++;
   privacyScanMemoMisses = 0;
+}
+
+/// Meet de koude dia's van [slides] vooruit in een werk-isolate en legt de
+/// uitslag in dezelfde memo's die [memoizedSlideScan] leest (#2634).
+///
+/// Bedoeld voor het openen: zonder deze pas scant de eerste provider-lezing
+/// een groot deck synchroon op de UI-isolate — honderden milliseconden
+/// stilte. De isolate krijgt een kopie van [scanner] en van de dia's; de
+/// memo wordt hier met de UI-kant-instantie gevuld, want
+/// [memoizedSlideScan] vergelijkt de scanner op identiteit. De uitkomst is
+/// identiek: [PrivacyScanner.scanSlide] is een pure functie van dia plus
+/// configuratie.
+///
+/// Het bulklexicon is een singleton **per isolate**: de werkkopie laadt hij
+/// zelf via de root-token, en kon dat niet (geen binding, geen token), dan
+/// valt deze pas terug op de synchrone scan — een memo die de bulktermen
+/// mist is erger dan geen memo.
+///
+/// Op web bestaat geen isolate; daar loopt de scan zoals altijd synchroon.
+Future<void> warmPrivacyScanMemo(
+  PrivacyScanner scanner,
+  List<Slide> slides,
+) async {
+  final cold = [
+    for (final slide in slides)
+      if (_slideScanCache[slide] == null ||
+          _slideScanCache[slide]!.epoch != _scanEpoch ||
+          !identical(_slideScanCache[slide]!.scanner, scanner))
+        slide,
+  ];
+  if (cold.isEmpty) return;
+  // Dezelfde index-0-meting als [memoizedSlideScan]: de echte dia-index
+  // komt er pas bij het samenvoegen op via [_atIndex].
+  List<PrivacyFinding> scanFindings(Slide slide) =>
+      scanner.scanSlide(slide, 0).findings;
+  List<List<PrivacyFinding>> scanSync() => [
+    for (final slide in cold) scanFindings(slide),
+  ];
+  // `ServicesBinding.rootIsolateToken` is een nullable static — `null` zolang
+  // er geen binding staat (headless test), en dan valt de pas op sync terug.
+  final token = ServicesBinding.rootIsolateToken;
+  final List<List<PrivacyFinding>> results;
+  if (kIsWeb || token == null) {
+    results = scanSync();
+  } else {
+    final scanned = await Isolate.run<(bool, List<List<PrivacyFinding>>)>(
+      () async {
+        BackgroundIsolateBinaryMessenger.ensureInitialized(token);
+        await PrivacyBulkLexicon.instance.ensureLoaded();
+        return (PrivacyBulkLexicon.instance.isLoaded, scanSync());
+      },
+    );
+    // Kon het lexicon in de worker niet laden, dan missen diens uitslagen de
+    // bulktermen — liever hier hermeten dan een incompleet warme memo.
+    results = scanned.$1 ? scanned.$2 : scanSync();
+  }
+  for (var i = 0; i < cold.length; i++) {
+    _slideScanCache[cold[i]] = _SlideScanMemo(_scanEpoch, scanner, results[i]);
+  }
 }

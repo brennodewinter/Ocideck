@@ -3073,13 +3073,33 @@ nog niet is opgeslagen.
 ├── images/...                # all used images
 ├── data/...                  # linked chart data files (§6.4)
 ├── media/...                 # used video/audio
-├── logos/...                 # logo from the style profile
+├── logos/...                 # beelden uit het stijlprofiel (logo, donkere
+│                             #   variant, documentlogo, merkstrook)
+├── theme.json                # het stijlprofiel waarmee het deck is geëxporteerd
 └── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
 ```
 
 Het pakket draagt dezelfde `.marprc.yml` aan zijn root mee als een opgeslagen
 projectmap (§1.1), dus uitpakken en `marp <title>.md` draaien vanuit de
 uitgepakte map laadt het thema op dezelfde manier. *(Toegevoegd 2026-08-27, #1804.)*
+
+`theme.json` draagt het **stijlprofiel** mee waarmee de presentatie is
+geëxporteerd, zodat de stijl met het deck verhuist in plaats van dat het profiel
+van de ontvanger er stilletjes overheen gaat. Het lid bevat één object met een
+`definition`-sleutel met daarin dezelfde profiel-JSON als §3.2/§3.3. Beelden
+waar het profiel naar verwijst (dialo-go, diens donkere variant, een afwijkend
+documentlogo, de merkstrook) reizen als gewone assets onder `logos/` mee, en de
+bijbehorende `…Path`-velden in `definition` wijzen naar die pakketrelatieve
+leden; verwijzingen die niet meegepakt kunnen worden (gebundelde `asset:`-namen
+behouden hun vorm) blijven staan zoals ze waren.
+
+Bij het openen past OciDeck het meegepakte profiel op het deck toe — de
+ontvanger ziet de presentatie zoals de verzender die stijlde. Een pakket zonder
+`theme.json`, of met een die niet tot een bruikbaar profiel ontleedt, opent met
+het actieve profiel van de ontvanger, precies zoals voorheen; het lid wordt dan
+genegeerd in plaats van half toegepast. OciServe-lespakketten (§7.2) zijn
+strenger: hun profiel mag alleen naar gebundelde `asset:`-beelden verwijzen,
+nooit naar pakketlokale bestanden. *(Toegevoegd 2026-02-19, #2644.)*
 
 Bij het importeren:
 

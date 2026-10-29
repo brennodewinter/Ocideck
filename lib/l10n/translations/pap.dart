@@ -651,6 +651,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afsluiten duurt lang': 'Serkando ta tarda hopi',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'Un stap di limpiesa ta respondé poko a poko. Bo trabou wardá ya ta seif; serka awo ta salta e staps restante.',
+  'Wachten': 'Spera',
+  'Toch afsluiten': 'Serka tog',
+  'Gekozen afbeelding': 'Imágen skohe',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'E logo aki ta biba den e sesion di browser aki i ta desaparesé despues di rekarga. Eksportá komo pakete pa hib\'é ku bo.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Bo instashonnan tabata korupto i a ser restablesé.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Bo instashonnan tabata korupto i a ser restablesé; un kopia ta den {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'E logo no ta un imágen òf e ta mas grandi ku 8 MB. Skohe un PNG, JPEG, GIF òf WebP mas chikí.',
   'Bezig met installeren': 'Ta instalando',

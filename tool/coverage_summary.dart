@@ -444,6 +444,13 @@ const Set<String> uncoveredBaseline = {
   // in een headless widgettest — en is private in de app_shell-library, dus
   // ook niet los te mounten. Er zit geen beslislogica in: alleen tekenen.
   'lib/widgets/shell/shell_overlays.dart',
+  // NO EXECUTABLE LINES (#2628): `shared_preferences_atomic.dart` is een kale
+  // conditional-export facade (io/web-seam, patroon call_audio_manifest).
+  // PLATFORM: `shared_preferences_atomic_stub.dart` is de webhelft — op web is
+  // localStorage de prefs-opslag en bestaat het bestandsprobleem niet; de
+  // io-helft wordt wél getest (shared_preferences_atomic_test.dart).
+  'lib/services/shared_preferences_atomic.dart',
+  'lib/services/shared_preferences_atomic_stub.dart',
 };
 
 /// The per-file coverage floor: a lib/ file below this fraction of executed

@@ -61,8 +61,19 @@ void listenRecordingFinished(BuildContext context, WidgetRef ref) {
 /// ná de keuze voor sluiten — bij "annuleren" komt deze code niet aan de
 /// beurt en loopt de opname gewoon door. De duurzame file wordt nog netjes
 /// afgerond en blijft in staging voor de herstelperiode (§3.2).
-Future<void> stopRecordingBeforeQuit(WidgetRef ref) {
-  return ref
-      .read(recordingSessionProvider.notifier)
-      .stopAll(RecordingEndReason.appQuit);
+///
+/// Begrensd en foutdovend (#2631): een stop die blijft hangen of gooit mag
+/// `quitApp` niet meer blokkeren — de staging blijft gewoon liggen en wordt
+/// bij de volgende start geveegd.
+Future<void> stopRecordingBeforeQuit(WidgetRef ref) async {
+  try {
+    await ref
+        .read(recordingSessionProvider.notifier)
+        .stopAll(RecordingEndReason.appQuit)
+        .timeout(const Duration(seconds: 5));
+  } on TimeoutException {
+    logWarning('opname stoppen vóór afsluiten', 'stop duurde langer dan 5 s');
+  } on Object catch (error, stack) {
+    logError('opname stoppen vóór afsluiten', error, stack);
+  }
 }

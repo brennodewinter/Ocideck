@@ -4,12 +4,14 @@ import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/state/image_contrast_provider.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/slide_clipboard_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -276,6 +278,37 @@ void main() {
         reason: 'sluiten geeft het laatste gebruik automatisch vrij',
       );
     });
+
+    test(
+      'een mem:-logo van een opgeslagen stijlprofiel blijft staan (#2640)',
+      () async {
+        final container = _container();
+        final logo = putMem();
+        final orphan = putMem();
+
+        await container
+            .read(settingsProvider.notifier)
+            .saveThemeProfile(
+              const ThemeProfile(name: 'Webhuisstijl').copyWith(logoPath: logo),
+              previousName: 'Webhuisstijl',
+            );
+
+        container.read(tabsProvider.notifier).sweepWebAssets();
+
+        expect(
+          WebAssetStore.bytesFor(logo),
+          isNotNull,
+          reason:
+              'alleen het profiel haalt dit beeld aan; zonder de '
+              'profielstap veegt de sweep het logo van de huisstijl weg',
+        );
+        expect(
+          WebAssetStore.bytesFor(orphan),
+          isNull,
+          reason: 'nog steeds weg wat nergens aanhangt',
+        );
+      },
+    );
 
     test('een asset op het klembord wordt niet weggeveegd', () {
       final container = _container();

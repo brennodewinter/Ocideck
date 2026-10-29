@@ -31,6 +31,7 @@ class PresentationImportQueueDialog extends StatefulWidget {
     required this.files,
     required this.fileService,
     this.initialDirectory,
+    this.pathExists,
   });
 
   final List<BulkImportItem> files;
@@ -46,12 +47,18 @@ class PresentationImportQueueDialog extends StatefulWidget {
   /// `directoryOverride` van de OpenKAT-actie.
   final String? initialDirectory;
 
+  /// De botsingsprobe voor doelpaden. `null` gebruikt de schijf; een test
+  /// levert een in-memory probe omdat echte `dart:io`-futures onder de klok
+  /// van `flutter test` niet aflopen — dezelfde reden als [initialDirectory].
+  final PathExistsProbe? pathExists;
+
   /// Geeft de uitkomst terug, of null wanneer de gebruiker afzag van de import.
   static Future<BulkImportSummary?> show(
     BuildContext context, {
     required List<BulkImportItem> files,
     required FileService fileService,
     String? initialDirectory,
+    PathExistsProbe? pathExists,
   }) {
     return showDialog<BulkImportSummary>(
       context: context,
@@ -62,6 +69,7 @@ class PresentationImportQueueDialog extends StatefulWidget {
         files: files,
         fileService: fileService,
         initialDirectory: initialDirectory,
+        pathExists: pathExists,
       ),
     );
   }
@@ -136,7 +144,7 @@ class _PresentationImportQueueDialogState
     // gebruiker (#806); de service geeft de naad door aan zijn `DeckBuilder`.
     final runner = BulkImportRunner(
       writeDeck: widget.fileService.saveDeck,
-      pathExists: (path) => File(path).existsSync(),
+      pathExists: widget.pathExists ?? (path) => File(path).exists(),
       service: PresentationImportService(
         builder: DeckBuilder(translate: translate),
       ),

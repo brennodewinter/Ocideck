@@ -14,11 +14,13 @@ part of '../slide_preview.dart';
 /// breed, en de meting loopt door (#782).
 double _progressBarThickness(double w) => math.max(0.5, w * 0.014);
 
-String? _resolvePath(String path, String? projectPath) {
-  final resolved = resolveSlideAssetPath(path, projectPath);
-  if (resolved == null || projectPath == null) return resolved;
-  return isRenderPathContained(resolved, projectPath) ? resolved : null;
-}
+/// Media-pad (audio/video) binnen het project, inclusief de symlink-grens.
+/// Dit loopt één keer per controller-init in [_MediaPlaybackHost.initMedia] —
+/// de koude kant van [resolveContainedRealPath], niet het per-frame renderpad
+/// waar de synchrone realpath uit is (#2624). Het reële doelpad komt terug,
+/// dus de controller opent de gecontroleerde locatie (check-tot-open dicht).
+String? _resolvePath(String path, String? projectPath) =>
+    resolveContainedRealPath(path, projectPath);
 
 /// De buitenste stellage die de inhoudspreviews delen: een vlak in
 /// [background], met de inhoud opgemaakt op de vaste slidebreedte [width] en

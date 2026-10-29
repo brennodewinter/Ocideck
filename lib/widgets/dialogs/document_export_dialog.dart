@@ -152,10 +152,14 @@ class DocumentExportDialog extends StatefulWidget {
   /// Bouwt en schrijft de export voor het gekozen profiel en formaat, en
   /// geeft de uitkomst terug — geschreven mét waarschuwingen, geannuleerd,
   /// geweigerd mét reden, of mislukt (#2467).
+  ///
+  /// [isCancelled] rapporteert of de gebruiker tijdens de bouw op Annuleren
+  /// drukte; de aanroeper toetst die vóór het wegschrijven.
   final Future<DocumentExportOutcome> Function(
     PrivacyExportProfile,
-    DocumentExportFormat,
-  )
+    DocumentExportFormat, {
+    required bool Function() isCancelled,
+  })
   onExport;
 
   /// Of de privacycontrole tijdens het bewerken aanstaat. Documentexport
@@ -172,8 +176,9 @@ class DocumentExportDialog extends StatefulWidget {
     BuildContext context, {
     required Future<DocumentExportOutcome> Function(
       PrivacyExportProfile,
-      DocumentExportFormat,
-    )
+      DocumentExportFormat, {
+      required bool Function() isCancelled,
+    })
     onExport,
     required bool privacyChecksEnabled,
   }) => showDialog(
@@ -195,18 +200,24 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
   DocumentExportFormat _format = DocumentExportFormat.md;
 
   bool _busy = false;
+  bool _cancelRequested = false;
   DocumentExportOutcome? _outcome;
   String? _failure;
 
   Future<void> _run() async {
     setState(() {
       _busy = true;
+      _cancelRequested = false;
       _failure = null;
     });
     DocumentExportOutcome? outcome;
     String? failure;
     try {
-      outcome = await widget.onExport(_profile, _format);
+      outcome = await widget.onExport(
+        _profile,
+        _format,
+        isCancelled: () => _cancelRequested,
+      );
     } catch (error) {
       // Benoemd en niet kaal, en breder dan `on Exception`: de bestandskiezer
       // op web gooit een `ArgumentError`, en dat is een `Error` — een vangst op
@@ -264,8 +275,22 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
               ]
             : [
                 TextButton(
-                  onPressed: _busy ? null : () => Navigator.pop(context),
-                  child: Text(l10n.t('cancel')),
+                  // Tijdens de bouw blijft Annuleren klikbaar — dat is het
+                  // hele punt van een lange export. De aanroeper toetst de
+                  // vlag vóór hij wegschrijft; een export die al klaar is
+                  // komt dan gewoon als resultaat terug.
+                  onPressed: _busy && _cancelRequested
+                      ? null
+                      : () {
+                          if (_busy) {
+                            setState(() => _cancelRequested = true);
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        },
+                  child: Text(
+                    _cancelRequested ? l10n.d('Annuleren…') : l10n.t('cancel'),
+                  ),
                 ),
                 FilledButton.icon(
                   onPressed: _busy ? null : _run,

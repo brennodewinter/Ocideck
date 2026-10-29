@@ -1608,6 +1608,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afsluiten duurt lang': 'S Beende duurt lang',
+  'Een opruimstap reageert traag. Je opgeslagen werk is al veilig; nu afsluiten slaat de resterende stappen over.':
+      'En Ufruumschritt reagiert trööge. Dis gspicherets Werk isch scho sicher; jetz beende überspringt die übrige Schritt.',
+  'Wachten': 'Warte',
+  'Toch afsluiten': 'Trotzdem beende',
+  'Gekozen afbeelding': 'Gwählts Bild',
+  'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.':
+      'Das Logo läbt i dere Browser-Sitzig und verschwindet bim Nöölade. Als Paket exportiere, zum\'s mitznee.',
+  'Je instellingen waren beschadigd en zijn teruggezet.':
+      'Dini Istellige sind korrupt gsii und zruggsetzt worde.',
+  'Je instellingen waren beschadigd en zijn teruggezet; een kopie staat in {pad}.':
+      'Dini Istellige sind korrupt gsii und zruggsetzt worde; e Kopie lit in {pad}.',
   'Het logo is geen afbeelding of groter dan 8 MB. Kies een kleiner PNG, JPEG, GIF of WebP.':
       'S Logo isch keis Bild oder grösser als 8 MB. Nimm es chliners PNG, JPEG, GIF oder WebP.',
   'Bezig met installeren': 'Wird installiert',

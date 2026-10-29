@@ -464,6 +464,9 @@ extension FileServicePackage on FileService {
     // eigen leden mee, zodat de `.md` in het pakket pure Marp blijft.
     _addSidecarMembers(archive, packDeck, _safeName(deck.title));
 
+    // Het stijlrecord van de maker reist mee als `ocideck-style.json`
+    // (`_addCarriedStyleMember` hieronder); Marp leest dat lid niet —
+    // daarvoor is de thema-CSS.
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
     await _addThemeCssArchiveMembers(
       this,

@@ -6,6 +6,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'project_path.dart';
+
 /// Upper bound on the decoded dimensions of a slide/background image.
 ///
 /// `ui.instantiateImageCodec` allocates ~`width × height × 4` bytes regardless
@@ -264,17 +266,50 @@ void bumpImageVersion(String path) =>
 /// een andere cache-key krijgt na [bumpImageVersion] en opnieuw decodeert.
 class _VersionedFileImage extends FileImage {
   final int version;
-  const _VersionedFileImage(super.file, {this.version = 0});
+
+  /// Deckgrens voor de byte-lezing; `null` buiten een deck (#2624). De
+  /// containment zit in [_loadContained], waar [loadImage] doorheen loopt —
+  /// het enige decodepad dat de beeldcache nog bevraagt.
+  final String? projectPath;
+
+  const _VersionedFileImage(super.file, {this.version = 0, this.projectPath});
+
+  @override
+  ImageStreamCompleter loadImage(FileImage key, ImageDecoderCallback decode) {
+    if (projectPath == null) return super.loadImage(key, decode);
+    return MultiFrameImageStreamCompleter(
+      codec: _loadContained(key, decode),
+      scale: key.scale,
+      debugLabel: key.file.path,
+      informationCollector: () => <DiagnosticsNode>[
+        ErrorDescription('Path: ${file.path}'),
+      ],
+    );
+  }
+
+  Future<ui.Codec> _loadContained(
+    FileImage key,
+    Future<ui.Codec> Function(ui.ImmutableBuffer buffer) decode,
+  ) async {
+    final bytes = await readContainedImageBytes(file, projectPath);
+    if (bytes.isEmpty) {
+      // Zelfde terugval als FileImage: het bestand kan later alsnog groeien.
+      PaintingBinding.instance.imageCache.evict(key);
+      throw StateError('$file is empty and cannot be loaded as an image.');
+    }
+    return decode(await ui.ImmutableBuffer.fromUint8List(bytes));
+  }
 
   @override
   bool operator ==(Object other) =>
       other is _VersionedFileImage &&
       other.file.path == file.path &&
       other.version == version &&
+      other.projectPath == projectPath &&
       other.scale == scale;
 
   @override
-  int get hashCode => Object.hash(file.path, version, scale);
+  int get hashCode => Object.hash(file.path, version, projectPath, scale);
 }
 
 /// Een miniatuur-provider die op béide assen begrensd is.
@@ -291,28 +326,53 @@ class _VersionedFileImage extends FileImage {
 ///
 /// [version] komt van [imageVersionOf] en forceert een cache-miss na
 /// [bumpImageVersion], zodat de miniatuur de nieuwe bytes toont.
-ImageProvider boundedFileImage(File file, int maxEdge, {int version = 0}) =>
-    ResizeImage(
-      _VersionedFileImage(file, version: version),
-      width: maxEdge,
-      height: maxEdge,
-      policy: ResizeImagePolicy.fit,
-      allowUpscaling: false,
-    );
+ImageProvider boundedFileImage(
+  File file,
+  int maxEdge, {
+  int version = 0,
+  String? projectPath,
+}) => ResizeImage(
+  _VersionedFileImage(file, version: version, projectPath: projectPath),
+  width: maxEdge,
+  height: maxEdge,
+  policy: ResizeImagePolicy.fit,
+  allowUpscaling: false,
+);
+
+/// Leest de bytes van [file], met deck-containment wanneer [projectPath] gezet
+/// is: de realpath van het bestand moet binnen de projectmap vallen — dit is de
+/// laad-tijd-helft van #2624, één async realpath per decode in plaats van twee
+/// synchrone per build. Een ontsnappende symlink werpt [ProjectEscapeException],
+/// dat de errorBuilder als `outsideDeck`-placeholder tekent; een gewone
+/// leesfout (missend bestand) blijft een `FileSystemException`.
+///
+/// Bij [projectPath] `null` — editor- of vertrouwde paden buiten een
+/// deckgrens — is er geen grens om af te dwingen en leest dit gewoon [file].
+Future<Uint8List> readContainedImageBytes(
+  File file,
+  String? projectPath,
+) async {
+  if (projectPath == null) return file.readAsBytes();
+  final real = await containedRealPathOrNull(file.path, projectPath);
+  if (real == null) throw ProjectEscapeException(file.path);
+  return File(real).readAsBytes();
+}
 
 /// A capped-decode provider for a deck-supplied image **file**. Decodes at
 /// native resolution within [kMaxImageDecodeDimension] (so an animated GIF keeps
 /// animating) and only scales huge images down. Keyed by path like [FileImage].
 ///
 /// [version] komt van [imageVersionOf] en forceert een cache-miss na
-/// [bumpImageVersion].
+/// [bumpImageVersion]. [projectPath] dwingt de deck-containment af *bij de
+/// byte-lezing* — zie [readContainedImageBytes] (#2624).
 ImageProvider cappedFileImage(
   File file, {
   int version = 0,
+  String? projectPath,
   int maxEdge = kMaxImageDecodeDimension,
 }) => CappedImage(
   version == 0 ? file.path : '${file.path}#$version',
-  () => file.readAsBytes(),
+  () => readContainedImageBytes(file, projectPath),
   maxEdge: maxEdge,
 );
 

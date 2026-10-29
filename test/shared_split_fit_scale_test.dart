@@ -298,5 +298,33 @@ void main() {
         reason: 'alle oppervlakken lezen alleen de index',
       );
     });
+
+    test('a replaced slide in a 150-page run is the only remeasure (#2620)', () {
+      // Een toetsaanslag levert een nieuwe dialijst met dezelfde dia-objecten;
+      // de per-dia-memo betaalt dan alleen de gewijzigde dia opnieuw.
+      final slides = [
+        bullets(['pagina 0']),
+        for (var i = 1; i < 150; i++)
+          bullets(['pagina $i'], continuesSplit: true),
+      ];
+      var measurements = 0;
+      double measure(Slide s, ThemeProfile p, String f) {
+        measurements++;
+        return 0.5;
+      }
+
+      buildSplitRunLayoutIndex(slides, profile, font, measureMember: measure);
+      expect(measurements, 150);
+
+      measurements = 0;
+      final changed = [...slides]
+        ..[42] = bullets(['ander'], continuesSplit: true);
+      buildSplitRunLayoutIndex(changed, profile, font, measureMember: measure);
+      expect(
+        measurements,
+        1,
+        reason: 'ongewijzigde dia\'s hergebruiken hun gemeten schaal',
+      );
+    });
   });
 }

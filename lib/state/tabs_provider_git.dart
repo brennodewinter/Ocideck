@@ -86,6 +86,8 @@ extension TabsNotifierGit on TabsNotifier {
     if (!mounted) return OpenResult.unreadable;
     _reportMissingChartData(_ref, sidecars.missingChartData);
 
+    await warmDeckAnalysisBeforePlace(this, deck);
+    if (!mounted) return OpenResult.unreadable;
     _placeDeckInTab(this, deck, remoteOrigin: label);
     currentState.current?.gitOrigin = GitOrigin(
       config: config,
@@ -119,6 +121,8 @@ extension TabsNotifierGit on TabsNotifier {
     if (deck == null) return read.failure;
     if (!mounted) return OpenResult.unreadable;
 
+    await warmDeckAnalysisBeforePlace(this, deck);
+    if (!mounted) return OpenResult.unreadable;
     _placeDeckInTab(this, deck, remoteOrigin: read.label);
     refreshTabs();
     return OpenResult.opened;

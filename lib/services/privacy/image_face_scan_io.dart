@@ -4,6 +4,8 @@
 // daarom geen biometrische verwerking is. Die redenering is de reden dat dit
 // bestand zo klein is, en dat hoort zo te blijven.
 
+import 'dart:async';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:image/image.dart' as img;
@@ -76,18 +78,44 @@ const int kFaceScanMaxPixels = 40 * 1000 * 1000;
 /// Staat los van de klasse zodat de poort toetsbaar is zónder native laag: die
 /// laadt niet onder `flutter test` (zie de kop van `image_face_scan_test.dart`),
 /// en dan zou een test via `countFaces` vacuüm groen staan.
-bool faceScanDimensionsWithinBudget(Uint8List imageBytes) {
+///
+/// Geeft de afmetingen en geen bool: de decode-vlagkeuze in `countFaces` heeft
+/// de bronbreedte nodig, en de pixelpoort is een afleiding daarvan.
+({int width, int height})? faceScanHeaderDimensions(Uint8List imageBytes) {
   try {
     final info = img.findDecoderForData(imageBytes)?.startDecode(imageBytes);
-    if (info == null) return false;
-    final pixels = info.width * info.height;
-    return pixels > 0 && pixels <= kFaceScanMaxPixels;
+    if (info == null || info.width <= 0 || info.height <= 0) return null;
+    return (width: info.width, height: info.height);
   } catch (e, s) {
     // Bewust zonder pad of dianummer: zie de toelichting bij de catch in
     // [ImageFaceScanner.countFaces] — dit gaat over beeld mét personen erop.
-    logError('faceScanDimensionsWithinBudget', e, s);
-    return false;
+    logError('faceScanHeaderDimensions', e, s);
+    return null;
   }
+}
+
+/// Binnen [kFaceScanMaxPixels]? De kop-lezing van voorheen, nu bovenop
+/// [faceScanHeaderDimensions].
+bool faceScanDimensionsWithinBudget(Uint8List imageBytes) {
+  final dims = faceScanHeaderDimensions(imageBytes);
+  if (dims == null) return false;
+  return dims.width * dims.height <= kFaceScanMaxPixels;
+}
+
+/// De `IMREAD_REDUCED_*`-vlag voor een bron van [sourceWidth] breed.
+///
+/// De grootste detectieschaal is 1920 breed (zie [kFaceScanWidths]), dus een
+/// 24 MP-foto (6000×4000) hoeft nooit volledig gedecodeerd in het geheugen te
+/// staan: `IMREAD_REDUCED_COLOR_2` laat de decoder bij JPEG al tijdens de DCT
+/// de helft weg. Gekozen wordt de sterkste reductie die het gedecodeerde beeld
+/// nog op of boven de 1920-schaal houdt — verder reduceren zou de fijnste
+/// schaal stil kleiner maken, en daarmee precies de kleine gezichten kosten.
+int faceScanDecodeFlag(int sourceWidth) {
+  const finest = 1920;
+  if (sourceWidth >= finest * 8) return cv.IMREAD_REDUCED_COLOR_8;
+  if (sourceWidth >= finest * 4) return cv.IMREAD_REDUCED_COLOR_4;
+  if (sourceWidth >= finest * 2) return cv.IMREAD_REDUCED_COLOR_2;
+  return cv.IMREAD_COLOR;
 }
 
 /// De scoredrempel waarboven een treffer als gezicht telt.
@@ -148,6 +176,32 @@ bool faceScanDimensionsWithinBudget(Uint8List imageBytes) {
 /// plateau is geruststellend, maar dit is geen benchmark.
 const double kFaceScanScoreThreshold = 0.80;
 
+/// Of de native laag werkelijk laadt.
+///
+/// Dit wordt actief getoetst en niet aangenomen. De aanleiding is concreet:
+/// onder `flutter test` laadt `libdartcv.dylib` niet, elke aanroep viel in de
+/// foutafhandeling, en de scanner meldde vrolijk nul gezichten terwijl er
+/// níéts gedetecteerd was. Dat is precies de stille nul waar deze hele
+/// controle niet in mag trappen: "wij vonden niets" en "hier is niet gekeken"
+/// zijn verschillende uitspraken.
+///
+/// Staat top-level omdat zowel de directe scanner als de isolate-wrapper hem
+/// gebruikt: de UI-isolate proeft één keer, de werk-isolate proeft nog eens in
+/// zijn eigen context.
+bool _probeNative() {
+  try {
+    // Eén triviale aanroep die door de native laag moet. Slaagt hij, dan
+    // staat de bibliotheek; faalt hij, dan is er geen detector op deze machine.
+    final probe = cv.Mat.zeros(1, 1, cv.MatType.CV_8UC1);
+    final ok = probe.rows == 1;
+    probe.dispose();
+    return ok;
+  } catch (e, s) {
+    logError('ImageFaceScanner.probe', e, s);
+    return false;
+  }
+}
+
 class _OpenCvImageFaceScanner implements ImageFaceScanner {
   final Uint8List _modelBytes;
   cv.FaceDetectorYN? _detector;
@@ -166,20 +220,6 @@ class _OpenCvImageFaceScanner implements ImageFaceScanner {
   @override
   bool get isSupported => _nativeAvailable ??= _probeNative();
 
-  bool _probeNative() {
-    try {
-      // Eén triviale aanroep die door de native laag moet. Slaagt hij, dan
-      // staat de bibliotheek; faalt hij, dan is er geen detector op deze machine.
-      final probe = cv.Mat.zeros(1, 1, cv.MatType.CV_8UC1);
-      final ok = probe.rows == 1;
-      probe.dispose();
-      return ok;
-    } catch (e, s) {
-      logError('ImageFaceScanner.probe', e, s);
-      return false;
-    }
-  }
-
   @override
   Future<ImageFaceScanResult> countFaces(Uint8List imageBytes) async {
     if (!isSupported || imageBytes.isEmpty) {
@@ -188,13 +228,14 @@ class _OpenCvImageFaceScanner implements ImageFaceScanner {
     if (imageBytes.lengthInBytes > kFaceScanMaxBytes) {
       return ImageFaceScanResult.unreadable;
     }
-    if (!faceScanDimensionsWithinBudget(imageBytes)) {
+    final dims = faceScanHeaderDimensions(imageBytes);
+    if (dims == null || dims.width * dims.height > kFaceScanMaxPixels) {
       return ImageFaceScanResult.unreadable;
     }
 
     cv.Mat? source;
     try {
-      source = cv.imdecode(imageBytes, cv.IMREAD_COLOR);
+      source = cv.imdecode(imageBytes, faceScanDecodeFlag(dims.width));
       // Een formaat dat OpenCV niet kent geeft een lege matrix. Dat is géén
       // "nul gezichten" — HEIC valt hier bijvoorbeeld in, en iPhone-foto's zijn
       // standaard HEIC. Een deck vol iPhone-portretten meldde daardoor niets.
@@ -287,5 +328,132 @@ class _OpenCvImageFaceScanner implements ImageFaceScanner {
   }
 }
 
+/// De scanner zoals de app hem gebruikt: het echte detectiewerk draait in een
+/// eigen, lang levende isolate.
+///
+/// `countFaces` op de UI-isolate is één synchrone OpenCV-keten (decode + YuNet
+/// op drie schalen) die bij een gewone foto al snel honderden milliseconden
+/// vasthoudt — en hij draait als achtergrondcontrole terwijl iemand typt. In
+/// een eigen isolate kost elke afbeelding de renderer hooguit de korte
+/// `TransferableTypedData`-overdracht; de UI-thread decodeert en detecteert
+/// nooit.
+///
+/// De worker is lang levend en geen `Isolate.run` per foto: het ONNX-model
+/// laden en de detector opzetten kost meer dan een gemiddelde detectie, en die
+/// investering wil je één keer doen. Verzoeken gaan serieel — één
+/// detector-instantie, één scan tegelijk, precies zoals de oude aanroep-lus
+/// al deed.
+class _IsolateImageFaceScanner implements ImageFaceScanner {
+  _IsolateImageFaceScanner(this._modelBytes);
+
+  final Uint8List _modelBytes;
+  bool? _nativeAvailable;
+  Isolate? _isolate;
+  SendPort? _toWorker;
+  Future<SendPort>? _starting;
+  // Serieel afhandelen: de worker bewaart één detector-instantie.
+  Future<void> _tail = Future<void>.value();
+  var _disposed = false;
+
+  /// De probe draait op de UI-isolate: `cv.Mat.zeros` kost microseconden en
+  /// bewijst dat de native bibliotheek in dit proces laadt. Laadt hij hier,
+  /// dan laadt hij ook in de werk-isolate; faalt hij, dan wordt die isolate
+  /// nooit gestart.
+  @override
+  bool get isSupported => _nativeAvailable ??= _probeNative();
+
+  @override
+  Future<ImageFaceScanResult> countFaces(Uint8List imageBytes) {
+    final run = _tail.then((_) => _scanInWorker(imageBytes));
+    _tail = run.then((_) {}, onError: (_) {});
+    return run;
+  }
+
+  Future<ImageFaceScanResult> _scanInWorker(Uint8List imageBytes) async {
+    if (!isSupported || _disposed) return ImageFaceScanResult.unreadable;
+    try {
+      final toWorker = await _ensureWorker();
+      final replies = ReceivePort();
+      toWorker.send((
+        replies.sendPort,
+        TransferableTypedData.fromList([imageBytes]),
+      ));
+      try {
+        // Eén afbeelding mag de serieële rij niet voor eeuwig blokkeren —
+        // hangt de worker in een decode of is hij weggevallen, dan wacht
+        // `replies.first` letterlijk nooit. Na de grens laten we de worker
+        // vallen; de volgende afbeelding start een nieuwe.
+        final answer =
+            await replies.first.timeout(const Duration(seconds: 90)) as List;
+        return ImageFaceScanResult(
+          faces: answer[0] as int,
+          readable: answer[1] as bool,
+        );
+      } on TimeoutException {
+        _dropWorker();
+        return ImageFaceScanResult.unreadable;
+      } finally {
+        replies.close();
+      }
+    } catch (e, s) {
+      // De worker start niet of is weggevallen: dan is de controle op deze
+      // machine niet bruikbaar en zeggen we dat — geen stille nul, en zeker
+      // geen terugval naar "maar dan draait de UI-thread het toch maar".
+      _nativeAvailable = false;
+      logError('ImageFaceScanner.worker', e, s);
+      return ImageFaceScanResult.unreadable;
+    }
+  }
+
+  /// Laat de huidige worker los zodat de volgende scan opnieuw spawnt. Voor
+  /// een worker die een antwoord niet meer terugstuurt is killen de enige
+  /// eerlijke actie — een hangend bericht "beantwoorden" kan niet.
+  void _dropWorker() {
+    _isolate?.kill();
+    _isolate = null;
+    _toWorker = null;
+    _starting = null;
+  }
+
+  Future<SendPort> _ensureWorker() {
+    final existing = _toWorker;
+    if (existing != null) return Future.value(existing);
+    return _starting ??= () async {
+      final handshake = ReceivePort();
+      _isolate = await Isolate.spawn(_faceScanWorkerMain, (
+        handshake.sendPort,
+        _modelBytes,
+      ));
+      final sendPort = await handshake.first as SendPort;
+      handshake.close();
+      return _toWorker = sendPort;
+    }();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    _dropWorker();
+  }
+}
+
+/// Inkomende berichten: (antwoordpoort, beeldbytes als [TransferableTypedData]).
+/// Uitgaande: `[faces, readable]`. De scanner loopt hier synchroon door — zijn
+/// `countFaces` heeft geen awaits — dus berichten worden vanzelf serieel
+/// verwerkt.
+void _faceScanWorkerMain((SendPort, Uint8List) init) {
+  final (reply, modelBytes) = init;
+  final scanner = _OpenCvImageFaceScanner(modelBytes);
+  final requests = ReceivePort();
+  reply.send(requests.sendPort);
+  requests.listen((message) async {
+    final (replyTo, payload) = message as (SendPort, TransferableTypedData);
+    final result = await scanner.countFaces(
+      payload.materialize().asUint8List(),
+    );
+    replyTo.send([result.faces, result.readable]);
+  });
+}
+
 ImageFaceScanner createPlatformImageFaceScanner(Uint8List modelBytes) =>
-    _OpenCvImageFaceScanner(modelBytes);
+    _IsolateImageFaceScanner(modelBytes);

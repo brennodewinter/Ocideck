@@ -431,6 +431,13 @@ extension _SettingsColors on _SettingsDialogState {
     ];
   }
 
+  /// Wat er in de pad-box staat als het profielbeeld een `mem:`-pad is: de
+  /// kale uuid zegt de gebruiker niets, de gekozen bestandsnaam wel.
+  String _profileImageLabel(String raw) {
+    if (!WebAssetStore.isMemPath(raw)) return raw;
+    return WebAssetStore.nameFor(raw) ?? context.l10n.d('Gekozen afbeelding');
+  }
+
   /// Het logo op een *dia*. Het documentlogo staat los (het mag afwijken) en
   /// wordt in het documentvlak van de stijlbouwer gezet.
   List<Widget> _slideLogoChildren() {
@@ -462,7 +469,9 @@ extension _SettingsColors on _SettingsDialogState {
             const SizedBox(width: 10),
             Expanded(
               child: _pathBox(
-                _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
+                _themeProfile.logoPath == null
+                    ? l10n.d('Geen logo ingesteld')
+                    : _profileImageLabel(_themeProfile.logoPath!),
                 muted: _themeProfile.logoPath == null,
               ),
             ),
@@ -547,8 +556,9 @@ extension _SettingsColors on _SettingsDialogState {
               const SizedBox(width: 10),
               Expanded(
                 child: _pathBox(
-                  _themeProfile.logoDarkPath ??
-                      l10n.d('Geen donker logo ingesteld'),
+                  _themeProfile.logoDarkPath == null
+                      ? l10n.d('Geen donker logo ingesteld')
+                      : _profileImageLabel(_themeProfile.logoDarkPath!),
                   muted: _themeProfile.logoDarkPath == null,
                 ),
               ),
@@ -585,6 +595,16 @@ extension _SettingsColors on _SettingsDialogState {
           onChanged: (_) => _rebuild(() => _profileTouched = true),
         ),
       ),
+      if (!supportsLocalProjectFolders && _themeProfile.logoPath != null)
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Text(
+            l10n.d(
+              'Dit logo leeft in deze browsersessie en verdwijnt na herladen. Exporteer als pakket om het mee te nemen.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+        ),
     ];
   }
 

@@ -329,6 +329,25 @@ zijn en wat het bewijs van elke claim is — staat in
 [TRANSCRIPTION_SETUP.nl.md](TRANSCRIPTION_SETUP.nl.md). *(Toegevoegd
 2026-10-26, #2523.)*
 
+## De Windows single-instance en runtime-verpakking zijn niet op hardware bewezen
+
+Twee wijzigingen uit #2627 en #2630 raken Windows-code die de
+ontwikkelmachines niet kunnen uitvoeren: de named-mutex
+single-instance-controle met `WM_COPYDATA`-argumentdoorvoer (een tweede
+`ocideck.exe report.md` geeft het bestand door aan het draaiende venster in
+plaats van een tweede app te openen), en de app-lokale Microsoft Visual C++
+runtime-DLL's (`msvcp140.dll`, `vcruntime140.dll`, `vcruntime140_1.dll`)
+die CMake nu naast de executable installeert voor zowel de ZIP als de
+Inno-installer. Beide zijn geschreven tegen de gedocumenteerde
+Win32-contracten en statisch nagekeken; de release-rookproef controleert
+dat de runtimebestanden in de geïnstalleerde payload landen. Wat geen
+enkele machine hier kon doen is het runtimegedrag op echte
+Windows-hardware bewijzen — beschouw beide als ongetest tot een
+Windows-run het tegendeel zegt, in lijn met de call- en
+transcriptievermeldingen hierboven. De tijd-tot-eerste-frame-grens voor
+Windows is eveneens open (#2657): er is nog geen mijlpaallogging of
+baseline-getal. *(Toegevoegd 2026-10-29.)*
+
 ## Bladeren… toont wat het systeemvenster toont
 
 Openen → Bladeren… laat het kiezen over aan het bestandsvenster van het

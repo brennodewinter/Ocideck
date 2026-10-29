@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import '../../l10n/export_block_localization.dart';
+import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/library_folder.dart';
 import '../../models/slide.dart';
@@ -76,6 +78,24 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   final _scrollController = ScrollController();
   final _focusNode = FocusNode(debugLabel: 'SlideListPanel');
   final Map<String, GlobalKey> _slideKeys = {};
+
+  /// #2623: miniatuur-instanties per dia, geparaat met hun invoer-signatuur.
+  /// Een identieke widget-instantie laat Flutter de herbouw van de hele
+  /// kaart-subboom overslaan; bij een toetsaanslag in één dia wijzigt voor de
+  /// overige dia's geen enkele invoer.
+  final Map<String, (Object, SlideThumbnail)> _thumbCache = {};
+
+  /// Deckbrede CIA-index, hergebruikt bij gelijke inhoud zodat hij stabiel
+  /// genoeg is om in de miniatuur-signatuur mee te wegen (#2623).
+  Map<String, CiaRating>? _scopeCia;
+
+  Map<String, CiaRating> _deckScopeCia(Deck deck) {
+    final next = deckScopeCiaIndex(deck.slides);
+    final prev = _scopeCia;
+    if (prev != null && mapEquals(prev, next)) return prev;
+    return _scopeCia = next;
+  }
+
   Timer? _resizeSettleTimer;
   @override
   void dispose() {
@@ -149,6 +169,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   void _pruneSlideKeys(Deck deck) {
     final ids = deck.slides.map((slide) => slide.id).toSet();
     _slideKeys.removeWhere((id, _) => !ids.contains(id));
+    _thumbCache.removeWhere((id, _) => !ids.contains(id));
   }
 
   void _scrollSlideToTop(int index, {int attempts = 2}) {
@@ -490,6 +511,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     }
 
     final numberStarts = numberedListStarts(deck.slides);
+    final scopeCia = _deckScopeCia(deck);
     return ListView.builder(
       controller: _scrollController,
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -500,6 +522,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         notifier,
         editorNotifier,
         numberStarts,
+        scopeCia,
       ),
     );
   }
@@ -515,53 +538,84 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     DeckNotifier notifier,
     EditorNotifier editorNotifier,
     List<int> numberStarts,
+    Map<String, CiaRating> scopeCia,
   ) {
     final slide = deck.slides[index];
     // Co-authors' positions (§6 presence, Matrix only). Empty outside a live
     // session, so the list — and its goldens — are unchanged the rest of the time.
     final presence = ref.watch(collabSessionProvider).presence;
-    final thumb = SlideThumbnail(
-      slide: slide,
-      index: index,
-      hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
-      projectPath: deck.projectPath,
-      themeProfile: deck.themeProfile,
-      deckMarpStyle: deck.marpStyle,
-      slideCount: deck.slides.length,
-      tlp: deck.tlp,
-      organization: deck.organization,
-      slideAspect: slideAspectRatio(deck.slideSize),
-      fitScaleOverride: sharedSplitFitScale(
+    // #2623: cache de widget-instantie per dia — een identieke widget laat
+    // Flutter de herbouw van de hele miniatuur-subboom overslaan, en bij een
+    // toetsaanslag in één dia verandert voor de rest geen enkele invoer. De
+    // signatuur dekt álle invoer mee (inclusief index en numberStart, die bij
+    // een herschikking per dia verschillen), dus een stale kaart kan niet.
+    final aspect = slideAspectRatio(deck.slideSize);
+    final sig = (
+      slide,
+      index,
+      slideHasUserNotes(deck.userNotes, slide.id),
+      deck.projectPath,
+      deck.themeProfile,
+      deck.marpStyle,
+      deck.slides.length,
+      deck.tlp,
+      deck.organization,
+      aspect,
+      sharedSplitFitScale(
         deck.slides,
         index,
         deck.themeProfile,
         deck.themeProfile.fontFamily,
-        slideAspect: slideAspectRatio(deck.slideSize),
+        slideAspect: aspect,
       ),
-      splitRunPosition: splitRunPositionFor(deck.slides, index),
-      numberStart: numberStarts[index],
-      scopeCia: deckScopeCiaIndex(deck.slides),
-      reportLanguage: deck.language,
-      onTap: () => _onSlideTap(index),
-      onPresentFromHere: widget.onPresentFromHere,
-      onToggleSkip: () => notifier.toggleSkip(index),
-      onCopyImage: () => _copySlideAsImage(slide),
-      onDuplicate: () {
-        notifier.duplicateSlide(index);
-        editorNotifier.select(index + 1);
-      },
-      onSplit: () {
-        notifier.splitSlide(index);
-        editorNotifier.select(index + 1);
-      },
-      onDelete: () {
-        if (deck.slides.length <= 1) return;
-        notifier.removeSlide(index);
-        // Focus naar de slide bóven de verwijderde (of de eerste als de eerste
-        // is verwijderd), niet terug naar het begin.
-        editorNotifier.select((index - 1).clamp(0, deck.slides.length - 2));
-      },
+      splitRunPositionFor(deck.slides, index),
+      numberStarts[index],
+      scopeCia,
+      deck.language,
     );
+    final cached = _thumbCache[slide.id];
+    late final SlideThumbnail thumb;
+    if (cached != null && cached.$1 == sig) {
+      thumb = cached.$2;
+    } else {
+      thumb = SlideThumbnail(
+        slide: slide,
+        index: index,
+        hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
+        projectPath: deck.projectPath,
+        themeProfile: deck.themeProfile,
+        deckMarpStyle: deck.marpStyle,
+        slideCount: deck.slides.length,
+        tlp: deck.tlp,
+        organization: deck.organization,
+        slideAspect: aspect,
+        fitScaleOverride: sig.$11,
+        splitRunPosition: sig.$12,
+        numberStart: numberStarts[index],
+        scopeCia: scopeCia,
+        reportLanguage: deck.language,
+        onTap: () => _onSlideTap(index),
+        onPresentFromHere: widget.onPresentFromHere,
+        onToggleSkip: () => notifier.toggleSkip(index),
+        onCopyImage: () => _copySlideAsImage(slide),
+        onDuplicate: () {
+          notifier.duplicateSlide(index);
+          editorNotifier.select(index + 1);
+        },
+        onSplit: () {
+          notifier.splitSlide(index);
+          editorNotifier.select(index + 1);
+        },
+        onDelete: () {
+          if (deck.slides.length <= 1) return;
+          notifier.removeSlide(index);
+          // Focus naar de slide bóven de verwijderde (of de eerste als de eerste
+          // is verwijderd), niet terug naar het begin.
+          editorNotifier.select((index - 1).clamp(0, deck.slides.length - 2));
+        },
+      );
+      _thumbCache[slide.id] = (sig, thumb);
+    }
     // The GlobalKey (scroll-to + reorder identity) moves to the wrapper so the
     // presence dots can overlay without a second key in the subtree.
     return slideWithPresence(
@@ -583,6 +637,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       return _buildFilteredList(deck, query, notifier, editorNotifier);
     }
     final numberStarts = numberedListStarts(deck.slides);
+    // Eén keer per build berekenen — voorheen liep dit per zichtbare miniatuur
+    // opnieuw over álle dia's, dus O(dia's × zichtbaar) per toetsaanslag.
+    final scopeCia = _deckScopeCia(deck);
     return ReorderableListView.builder(
       // Rebuild when slides are bulk-added/removed — the list's internal
       // bookkeeping can otherwise keep showing the old item count until restart.
@@ -603,8 +660,14 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       ),
       proxyDecorator: (child, index, animation) =>
           Material(color: Colors.transparent, child: child),
-      itemBuilder: (_, i) =>
-          _slideThumbnail(deck, i, notifier, editorNotifier, numberStarts),
+      itemBuilder: (_, i) => _slideThumbnail(
+        deck,
+        i,
+        notifier,
+        editorNotifier,
+        numberStarts,
+        scopeCia,
+      ),
     );
   }
 

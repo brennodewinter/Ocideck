@@ -105,6 +105,10 @@ Future<String?> saveMacFile({
 /// `.ocideck` file via Finder (double-click / "Open With"). See
 /// `macos/Runner/AppDelegate.swift` for the native side.
 ///
+/// Op Windows levert hetzelfde kanaal de paden die een tweede starter via
+/// `WM_COPYDATA` naar het draaiende exemplaar stuurt — zie `main.cpp` en
+/// `flutter_window.cpp` in `windows/runner` (#2627).
+///
 /// On [start] it drains any files the app was launched with (cold start) and
 /// then listens for files opened while the app is already running (warm start).
 class OpenFileChannel {
@@ -116,7 +120,8 @@ class OpenFileChannel {
 
   Future<void> start() async {
     // kIsWeb eerst: Platform.isMacOS is op web een dart:io-stub die gooit.
-    if (kIsWeb || !Platform.isMacOS) return;
+    // macOS: Finder-open-events; Windows: WM_COPYDATA van een tweede starter.
+    if (kIsWeb || !(Platform.isMacOS || Platform.isWindows)) return;
     await activate();
   }
 

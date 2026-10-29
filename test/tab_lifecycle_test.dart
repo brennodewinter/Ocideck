@@ -232,4 +232,54 @@ void main() {
     expect(container.read(tabsProvider).current?.isOpen, isFalse);
     expect(container.read(tabsProvider).current?.isDirty, isFalse);
   });
+
+  // #2623: de deck-luisteraar van TabsNotifier zendt alleen uit als een
+  // tabfeit verandert — niet bij elke emissie van de deck-stroom. Voor de
+  // poort herbouwde elke toetsaanslag in een dia de hele AppShell (en op
+  // macOS het native menu).
+  testWidgets('tabbladtoestand verandert alleen bij een tabfeit', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+    var emissions = 0;
+    final sub = container.listen(
+      tabsProvider,
+      (_, _) => emissions++,
+      fireImmediately: false,
+    );
+    addTearDown(sub.close);
+
+    final deckNotifier = container.read(tabsProvider).current!.deckNotifier;
+    deckNotifier.loadDeck(
+      Deck(
+        title: 'Deck',
+        slides: [Slide.create(SlideType.title).copyWith(title: 'Dia')],
+      ),
+    );
+    await tester.pump();
+    // openen (en de vuil-stip van de eerste bewerking) mogen wél uitzenden.
+    final baseline = emissions + 1;
+
+    // Tien 'toetsaanslagen': dezelfde dia steeds anders — geen enkel tabfeit
+    // (label, vuil-stip, open, pad) wijzigt na de eerste.
+    for (var i = 0; i < 10; i++) {
+      final slide = deckNotifier.currentState.deck!.slides.first;
+      deckNotifier.updateSlide(0, slide.copyWith(title: 'a' * (i + 1)));
+      await tester.pump();
+    }
+    expect(emissions, lessThanOrEqualTo(baseline));
+
+    // Een écht tabfeit — de titel van het deck is het tablabel als er geen
+    // bestandspad is — moet wél uitzenden.
+    deckNotifier.updateMeta(title: 'Hernoemd');
+    await tester.pump();
+    expect(emissions, greaterThan(baseline));
+  });
 }

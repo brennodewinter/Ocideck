@@ -106,3 +106,20 @@ install(DIRECTORY "${PROJECT_BUILD_DIR}/${FLUTTER_ASSET_DIR_NAME}"
 install(FILES "${AOT_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
   CONFIGURATIONS Profile;Release
   COMPONENT Runtime)
+
+# De Visual C++-runtime meeleveren naast ocideck.exe (#2630): de app en haar
+# native plugins (OpenCV, PDFium, webrtc) zijn met MSVC gebouwd en vragen
+# msvcp140/vcruntime140 — op een schone Windows-installatie ontbreekt die en
+# de app start dan niet, zonder melding die ergens heen wijst. De bundel mag
+# de redistributable meeleveren; THIRD_PARTY_NOTICES.md vermeldt het.
+#
+# SKIP zodat de bestemming hier zelf staat (naast de exe, zoals de rest van
+# de bundel — de Inno-installer en de zip pakken die map integraal in, dus
+# één regel dekt beide distributievormen).
+if(MSVC)
+  set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
+  include(InstallRequiredSystemLibraries)
+  install(PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
+    DESTINATION "${CMAKE_INSTALL_PREFIX}"
+    COMPONENT Runtime)
+endif()

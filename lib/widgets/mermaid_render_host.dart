@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../services/mermaid_render_service.dart';
+import '../utils/is_flutter_test.dart';
 
 /// De widgetkant van [MermaidRenderService]: de verborgen WebView waarin de
 /// diagrammen worden getekend. Die woont hier en niet bij de dienst, zodat de

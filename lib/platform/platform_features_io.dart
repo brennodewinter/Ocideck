@@ -7,6 +7,9 @@ bool get isDesktopNative =>
 
 bool get isLinuxDesktop => !kIsWeb && Platform.isLinux;
 
+bool get isFilePrefsDesktop =>
+    !kIsWeb && (Platform.isWindows || Platform.isLinux);
+
 bool get supportsNativeGit => isDesktopNative;
 
 bool get supportsDualScreenPresenter => isDesktopNative;

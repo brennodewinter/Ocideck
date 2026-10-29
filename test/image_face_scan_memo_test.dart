@@ -13,6 +13,7 @@
 // scanner zijn aanroepen. Dat is precies genoeg: getoetst wordt of de memo de
 // scan overslaat, niet of de detectie deugt.
 
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -39,6 +40,26 @@ class _CountingFace implements ImageFaceScanner {
   @override
   Future<ImageFaceScanResult> countFaces(Uint8List bytes) async {
     calls++;
+    return const ImageFaceScanResult(faces: 1, readable: true);
+  }
+
+  @override
+  void dispose() {}
+}
+
+/// Een scanner die wacht tot de test hem vrijgeeft — zodat de voortgangs-
+/// provider terwijl de scan loopt bevraagd kan worden.
+class _GatedFace implements ImageFaceScanner {
+  _GatedFace(this.gate);
+
+  final Completer<void> gate;
+
+  @override
+  bool get isSupported => true;
+
+  @override
+  Future<ImageFaceScanResult> countFaces(Uint8List bytes) async {
+    await gate.future;
     return const ImageFaceScanResult(faces: 1, readable: true);
   }
 
@@ -149,6 +170,44 @@ void main() {
       scanner.calls,
       2,
       reason: 'het bestand veranderde, dus opnieuw scannen',
+    );
+  });
+
+  test('de voortgang staat zichtbaar zolang de scan loopt', () async {
+    final (dir, path) = await tempImage(const [1, 2, 3, 4]);
+    addTearDown(() => dir.delete(recursive: true));
+    final gate = Completer<void>();
+    final scanner = _GatedFace(gate);
+
+    final notifier = _deckNotifier(
+      Deck(
+        title: 'proef',
+        projectPath: dir.path,
+        slides: [Slide.create(SlideType.image).copyWith(imagePath: path)],
+      ),
+    );
+    final container = _container(notifier, scanner);
+    addTearDown(container.dispose);
+
+    // Start de scan maar wacht hem nog niet af: de voortgang hoort nu al
+    // zichtbaar te zijn, met de afbeelding die nog onderweg is.
+    final running = container.read(imagePrivacyRawIssuesProvider.future);
+    for (var attempt = 0; attempt < 100; attempt++) {
+      if (container.read(imageFaceScanProgressProvider) != null) break;
+      await Future<void>.delayed(const Duration(milliseconds: 5));
+    }
+    expect(
+      container.read(imageFaceScanProgressProvider),
+      isNotNull,
+      reason: 'zolang de scan loopt zegt de provider dat er gewerkt wordt',
+    );
+
+    gate.complete();
+    await running;
+    expect(
+      container.read(imageFaceScanProgressProvider),
+      isNull,
+      reason: 'na de laatste afbeelding is er geen lopende scan meer',
     );
   });
 }

@@ -48,15 +48,30 @@ extension _PresenterPlayback on _FullscreenPresenterState {
       return;
     }
     if (kIsWeb) return;
+    // Zelfde lexicale resolutie + cachesleutel als de render, en dezelfde
+    // projectgrens-parameter: de containment zit sinds #2624 in de byte-lezing
+    // van de provider, dus precache moet die sleutel én die grens delen om de
+    // getoonde decode echt te warmen (het reële pad van
+    // resolveContainedRealPath zou een dode tweede sleutel warmen).
     final resolved = trusted
         ? resolveTrustedAssetPath(path, widget.projectPath)
-        : resolveContainedRealPath(path, widget.projectPath);
+        : resolveSlideAssetPath(path, widget.projectPath);
     if (resolved == null) return;
-    // Capped provider met dezelfde versie-key als de render, zodat het
-    // voorlezen ook echt de getoonde decode warmt — een gedraaide of
-    // bijgesneden afbeelding kreeg voorheen een dode versie-0 sleutel.
     precache(
-      cappedFileImage(File(resolved), version: imageVersionOf(resolved)),
+      cappedFileImage(
+        File(resolved),
+        version: imageVersionOf(resolved),
+        projectPath: trusted ? null : widget.projectPath,
+        // Dezelfde weergave-grens als de render zelf (#2625): een andere
+        // maxEdge is een andere cachesleutel, en dan warmt de voorlezing
+        // een entry die de getoonde decode nooit raakt. De presentator vult
+        // het venster, dus de venstermaat is hier de weergavemaat.
+        maxEdge: decodeEdgeForBox(
+          MediaQuery.sizeOf(context).width,
+          MediaQuery.sizeOf(context).height,
+          MediaQuery.devicePixelRatioOf(context),
+        ),
+      ),
     );
   }
 
@@ -74,7 +89,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     _onSlideShown();
     _advanceTimer?.cancel();
     _advanceTimer = null;
-    _rebuild(() => _progress = 0);
+    _progress.value = 0;
 
     // Auto-modus uit: nooit vanzelf wisselen.
     if (!_autoPlay || _tableEditMode) return;
@@ -89,7 +104,10 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     if (_index >= widget.slides.length - 1 && !_loop) return;
 
     final totalMs = (dur * 1000).round();
-    final startTime = DateTime.now();
+    // clock.now() in plaats van DateTime.now(): in productie identiek, in
+    // tests loopt de waarde mee met de fake klok zodat timer en verstreken
+    // tijd elkaar blijven volgen.
+    final startTime = clock.now();
 
     // Tick elke 50ms voor een vloeiende voortgangsbalk
     _advanceTimer = Timer.periodic(const Duration(milliseconds: 50), (t) {
@@ -97,9 +115,9 @@ extension _PresenterPlayback on _FullscreenPresenterState {
         t.cancel();
         return;
       }
-      final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+      final elapsed = clock.now().difference(startTime).inMilliseconds;
       final p = (elapsed / totalMs).clamp(0.0, 1.0);
-      _rebuild(() => _progress = p);
+      _progress.value = p;
       if (elapsed >= totalMs) {
         t.cancel();
         _autoAdvance();
