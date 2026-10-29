@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
@@ -14,6 +15,7 @@ import 'services/privacy/privacy_bulk_lexicon.dart';
 import 'services/shared_preferences_atomic.dart';
 import 'services/asset_staging.dart';
 import 'services/disk_traces.dart';
+import 'services/single_instance.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
 
@@ -53,6 +55,21 @@ void main(List<String> args) {
     // levert open-events via het ocideck/open_file-kanaal, niet via args).
     if (!kIsWeb) {
       pendingLaunchFiles.addAll(args.where(looksLikeDeckLaunchArg));
+    }
+
+    // Linux enkel-exemplaar (#2656): een tweede starter stuurt zijn paden via
+    // de Unix-socket naar de primaire en stopt hier, vóór elk zwaar werk —
+    // het venster verschijnt pas bij het eerste frame, dus vroeg genoeg is
+    // dit helemaal onzichtbaar. (Windows doet dit natief in de runner; macOS
+    // regelt exemplaren via het besturingssysteem.)
+    if (!kIsWeb && Platform.isLinux) {
+      final guard = SingleInstanceGuard();
+      if (await guard.forwardToPrimary(pendingLaunchFiles)) {
+        // De primaire opent de paden; dit proces bezit niets om op te ruimen.
+        exit(0);
+      }
+      await guard.becomePrimary();
+      activeSingleInstance = guard;
     }
 
     // De opstartwaakhond (#2626): op Windows toont het venster pas bij het

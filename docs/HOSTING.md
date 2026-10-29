@@ -57,6 +57,12 @@ cd build/web && python3 -m http.server 8080
 That one-liner is for a **local check only**. It serves nothing compressed, and
 this bundle is large enough that the difference is the whole first impression.
 
+The bundle **cannot run from `file://`** (opening `index.html` straight from
+disk). Browsers refuse the wasm/module fetches and the service worker without
+an http(s) origin; the page detects this since #2661 and explains it instead of
+failing with a console full of CORS errors. Always serve the directory, even
+locally.
+
 The bundle is **location-independent**: `<base href="./">` makes every asset
 resolve relative to the directory it was served from, so you may install it in
 a subdirectory (e.g. `https://example.org/ocideck/`) or behind a symlinked

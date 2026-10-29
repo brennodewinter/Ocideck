@@ -72,6 +72,9 @@
        (whisper/libmain.js) is lazy-loaded by the bridge on first transcription
        use, so this tag costs one small script fetch, not the engine. #2513 -->
   <script src="whisper/bridge.js" defer></script>
-  <script src="flutter_bootstrap.js" async></script>
+  <!-- boot.js loads flutter_bootstrap.js itself, but only over http(s):
+       opened via file:// it explains why the app cannot start instead of
+       drowning the console in CORS/service-worker errors (#2661). -->
+  <script src="boot.js"></script>
 </body>
 </html>

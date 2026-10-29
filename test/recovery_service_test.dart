@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -370,6 +371,95 @@ void main() {
         File(blocked.path).writeAsStringSync('not a dir');
         await svc.save(snap('a'));
         expect(calls, 2, reason: 'failure after success fires again');
+      },
+    );
+  });
+
+  // #2656: een momentopname van een nóg-draaiend exemplaar is geen crash-rest.
+  // Het sessielock naast de .json-bestanden vertelt welke eigenaar leeft.
+  group('sessie-eigenaarschap (#2656)', () {
+    File foreignSnapshot(String id, String session) {
+      final file = File(p.join(tempDir.path, '$id.json'));
+      file.writeAsStringSync(
+        jsonEncode(snap(id).toJson()..['session'] = session),
+      );
+      return file;
+    }
+
+    File foreignLock(String session) {
+      final file = File(
+        p.join(tempDir.path, RecoveryService.sessionLockName(session)),
+      );
+      file.writeAsStringSync(
+        jsonEncode({'pid': 424242, 'startedAt': '2026-11-01T10:00:00.000'}),
+      );
+      return file;
+    }
+
+    test(
+      'een tweede exemplaar ziet de momentopnames van de eerste niet',
+      () async {
+        // De eerste instantie schreef met een vers sessielock: voor een
+        // tweede instantie is die eigenaar gewoon "levend".
+        await service.save(snap('van-eerste'));
+
+        final other = RecoveryService(
+          baseDir: tempDir,
+          isLockLive: (_) => true,
+        );
+        expect(await other.loadAll(), isEmpty);
+      },
+    );
+
+    test('resten van een gestorven eigenaar worden wél aangeboden', () async {
+      foreignLock('vreemd');
+      foreignSnapshot('vreemd', 'vreemd');
+
+      final other = RecoveryService(baseDir: tempDir, isLockLive: (_) => false);
+      final all = await other.loadAll();
+      expect(all.map((s) => s.id), ['vreemd']);
+    });
+
+    test('een dood sessielock wordt bij het laden opgeruimd', () async {
+      final lock = foreignLock('vreemd');
+      foreignSnapshot('vreemd', 'vreemd');
+
+      final other = RecoveryService(baseDir: tempDir, isLockLive: (_) => false);
+      await other.loadAll();
+      expect(lock.existsSync(), isFalse);
+    });
+
+    test('een levend sessielock blijft staan', () async {
+      final lock = foreignLock('vreemd');
+      foreignSnapshot('vreemd', 'vreemd');
+
+      final other = RecoveryService(baseDir: tempDir, isLockLive: (_) => true);
+      await other.loadAll();
+      expect(lock.existsSync(), isTrue);
+    });
+
+    test('endSession ontregistreert de eigen sessie', () async {
+      await service.save(snap('eigen'));
+      Iterable<File> locks() => tempDir.listSync().whereType<File>().where(
+        (f) => f.path.endsWith('.lock'),
+      );
+      expect(locks(), hasLength(1));
+
+      await service.endSession();
+      expect(locks(), isEmpty);
+    });
+
+    test(
+      'momentopnames zonder sessie (oud formaat) worden altijd geboden',
+      () async {
+        File(
+          '${tempDir.path}/oud.json',
+        ).writeAsStringSync(jsonEncode(snap('oud').toJson()));
+        final other = RecoveryService(
+          baseDir: tempDir,
+          isLockLive: (_) => true,
+        );
+        expect((await other.loadAll()).map((s) => s.id), ['oud']);
       },
     );
   });

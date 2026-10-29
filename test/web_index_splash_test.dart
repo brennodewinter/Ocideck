@@ -53,6 +53,31 @@ void main() {
     }
   });
 
+  test('de loader weigert file:// met een uitleg in plaats van fouten', () {
+    // #2661: index.html via Bestand → Openen gaf een scherm vol CORS- en
+    // service-worker-fouten en een dood scherm. boot.js mag de bootstrap
+    // alleen over http(s) laden en moet anders zelf de uitleg tonen.
+    expect(
+      html,
+      contains('src="boot.js"'),
+      reason: 'index.html laadt boot.js — die bewaakt de file://-grens',
+    );
+    final boot = File('web/boot.js').readAsStringSync();
+    expect(
+      boot,
+      contains("location.protocol !== 'http:'"),
+      reason: 'zonder protocolwacht start de bootstrap ook op file://',
+    );
+    expect(
+      boot,
+      contains('flutter_bootstrap.js'),
+      reason: 'de http-tak moet de echte Flutter-bootstrap nog steeds laden',
+    );
+    // De melding mag geen script nodig hebben dat pas ná de boot draait:
+    // hij moet het bestaande laadscherm hergebruiken of zelf iets tonen.
+    expect(boot, contains('getElementById'));
+  });
+
   test('de bundel is installeerbaar in een submap (relatieve base href)', () {
     // `<base href="/">` — wat `$FLUTTER_BASE_HREF` wordt als --base-href niet
     // wordt meegegeven — laadt flutter_bootstrap.js vanaf de documentroot en

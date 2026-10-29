@@ -509,9 +509,14 @@ class _AppShellState extends ConsumerState<AppShell> {
   /// Nette afsluiting: herstelbestanden opruimen (alles is opgeslagen) en sluiten.
   Future<void> _destroy() async {
     // Alleen de tabbladen van dít venster. Zie [RecoveryService.discardEach].
-    await ref
-        .read(recoveryServiceProvider)
-        .discardEach(ref.read(tabsProvider).tabs.map((t) => t.recoveryId));
+    final recovery = ref.read(recoveryServiceProvider);
+    await recovery.discardEach(
+      ref.read(tabsProvider).tabs.map((t) => t.recoveryId),
+    );
+    // Het eigen sessielock weg: onze resterende momentopnames (bewust
+    // "nu niet"-weggelaten) zijn daarmee niet meer "van een levende eigenaar"
+    // en mogen de volgende start gewoon aangeboden worden (#2656).
+    await recovery.endSession();
     // Wis lesinhoud en web-assets eerst lokaal. De rest is best-effort:
     // elke stap is begrensd en foutdovend, en duurt de keten toch lang dan
     // mag de gebruiker zelf kiezen om de rest over te slaan (#2631).
