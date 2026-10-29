@@ -37,6 +37,9 @@ All notable changes to OciDeck are documented in this file.
   `SafeSvgImage`, dat de opschoning opnieuw uitvoert — ook voor bestanden
   die handmatig in een bibliotheekmap zijn gezet. Onopgeslagen decks mogen
   alleen beelden uit OciDecks eigen stagingmap tonen.
+- **Eigen SVG-bullets.** Een stijlprofiel kan een opgeschoond SVG-teken als
+  bullet gebruiken; per dia blijft de keuze tussen stip, pootje en eigen teken
+  beschikbaar. De keuze reist mee met het stijlprofiel en werkt ook in Marp-export.
 
 ### Changed
 
@@ -74,16 +77,6 @@ All notable changes to OciDeck are documented in this file.
   klikbaar maar deed hij niets; hij gaat nu uit bij één opgeslagen profiel
   én bij een gekozen ingebouwd profiel.
 
-- **`.ocideck`-pakketten dragen hun stijl mee (#2644, #2641–#2645).** Een
-  geëxporteerd pakket bevat nu `theme.json` met het volledige stijlprofiel;
-  wie het pakket opent krijgt de stijl van de maker terug in plaats van zijn
-  eigen standaard. Logo's die dezelfde bestandsnaam dragen botsen niet meer
-  onderling, `logoDarkPath` materialiseert ook als het alleen als bestand
-  bestond, en het documentlogo reist door zowel het project- als het
-  pakketpad. Op web kun je bovendien zelf een logo kiezen, bekijken,
-  vervangen en verwijderen — de keuze landt als `mem:`-asset, want een
-  bestandspad bestaat daar niet. Zie `docs/FILE_FORMAT.md` voor het lid.
-
 - **Instellingen → Annuleren schrijft niets meer weg (#2648).** De
   stijlprofielen en de documentopmaak-sectie bewerken nu een kopie; pas
   Opslaan committeert. Tot nu toe leefden die twee secties direct op de
@@ -103,6 +96,9 @@ All notable changes to OciDeck are documented in this file.
   eigen backend op Windows en Linux schrijft voortaan atomair en herstelt
   bij een beschadigd bestand vanuit de bewaarde kopie, in plaats van stil
   alle voorkeuren terug te zetten.
+- **Linux-pakketten missen PulseAudio niet meer.** De runtime-afhankelijkheid
+  staat nu in de releasepakketten; v0.7.3 was hiervoor voorbereid maar is niet
+  gepubliceerd.
 
 - **Windows: één exemplaar en meegeleverde VC++-runtime (#2627, #2630).**
   Een tweede `ocideck.exe`-aanroep — bijvoorbeeld dubbelklik op een `.md` —
@@ -131,12 +127,6 @@ All notable changes to OciDeck are documented in this file.
   backticks (ook in de Nederlandse versies), en `check-conventions` weigert
   voortaan zo'n rauwe-teksttag (`<title>`, `<script>`, `<style>`, …) buiten
   code in elk Markdownbestand. Met dank aan Jeroen Hermans voor de melding.
-
-## [0.7.3] — 2026-10-28
-
-### Fixed
-
-- fix(linux): declare PulseAudio runtime for release packages
 
 ## [0.7.2] — 2026-10-28
 

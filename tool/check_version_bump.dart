@@ -101,7 +101,11 @@ bool isLegalTransition(SemVer from, String to) =>
 ///     abandoned; the project deliberately returns below 1.0 and continues its
 ///     0.x line at 0.3.0. A one-time downgrade past a version that briefly
 ///     existed. From 0.3.0 onward the canonical rule applies again unaided.
-const Set<String> sanctionedTransitions = {'1.2.1->0.3.0'};
+const Set<String> sanctionedTransitions = {
+  '1.2.1->0.3.0',
+  // v0.7.3 was merged but never tagged; v0.7.4 replaces that unpublished build.
+  '0.7.2->0.7.4',
+};
 
 /// Reads the `version:` line from pubspec.yaml at [path], returning the raw
 /// value (with any `+build` suffix). Throws when the field is missing.
