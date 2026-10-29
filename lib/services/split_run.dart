@@ -219,6 +219,64 @@ void invalidateSplitRunLayout(List<Slide> slides) {
   _splitRunLayoutCache[slides] = null;
 }
 
+class _MemberScaleMemo {
+  final ThemeProfile theme;
+  final String font;
+  final double slideAspect;
+  final double scale;
+
+  const _MemberScaleMemo(this.theme, this.font, this.slideAspect, this.scale);
+}
+
+/// Gememoiseerde lidmeting per dia (immutable, op identiteit). [ThemeProfile]
+/// is immutable en wordt op identiteit vergeleken; [font] en de diaverhouding
+/// gaan mee in de sleutel zodat een thema- of formaatwissel vanzelf mist.
+/// Een nieuwe deckrevisie betaalt daardoor alleen de gewijzigde dia's opnieuw;
+/// de rest van de index herbouwt via hits (#2620). De kwaliteitsanalyse deelt
+/// deze cache — zij meet exact dezelfde waarde en hoeft geen eigen Expando te
+/// houden.
+final Expando<_MemberScaleMemo> _memberScaleCache = Expando<_MemberScaleMemo>(
+  'splitRunMemberScale',
+);
+
+double _memoizedMemberScale(
+  Slide slide,
+  ThemeProfile profile,
+  String font,
+  double slideAspect,
+  double Function(Slide slide, ThemeProfile profile, String font) measure,
+) {
+  final cached = _memberScaleCache[slide];
+  if (cached != null &&
+      identical(cached.theme, profile) &&
+      cached.font == font &&
+      cached.slideAspect == slideAspect) {
+    return cached.scale;
+  }
+  final scale = measure(slide, profile, font);
+  _memberScaleCache[slide] = _MemberScaleMemo(
+    profile,
+    font,
+    slideAspect,
+    scale,
+  );
+  return scale;
+}
+
+/// [splitRunMemberScale] gememoiseerd per dia — zie [_memberScaleCache].
+double memoizedSplitRunMemberScale(
+  Slide slide,
+  ThemeProfile profile,
+  String font, {
+  double slideAspect = kScreenSlideAspect,
+}) => _memoizedMemberScale(
+  slide,
+  profile,
+  font,
+  slideAspect,
+  (s, p, f) => splitRunMemberScale(s, p, f, slideAspect: slideAspect),
+);
+
 /// Bouwt grenzen en gedeelde schalen in één lineaire gang door [slides].
 ///
 /// [measureMember] is injecteerbaar zodat de prestatietest het exacte aantal
@@ -231,10 +289,14 @@ SplitRunLayoutIndex buildSplitRunLayoutIndex(
   measureMember,
   double slideAspect = kScreenSlideAspect,
 }) {
-  final measure =
-      measureMember ??
-      (slide, profile, font) =>
-          splitRunMemberScale(slide, profile, font, slideAspect: slideAspect);
+  double measure(Slide slide, ThemeProfile p, String f) => _memoizedMemberScale(
+    slide,
+    p,
+    f,
+    slideAspect,
+    measureMember ??
+        (s, p2, f2) => splitRunMemberScale(s, p2, f2, slideAspect: slideAspect),
+  );
   final ranges = <(int, int)>[for (var i = 0; i < slides.length; i++) (i, i)];
   final fitScales = List<double?>.filled(slides.length, null);
 

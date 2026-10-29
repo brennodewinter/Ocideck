@@ -728,24 +728,6 @@ class _FitMemo {
   const _FitMemo(this.font, this.slideAspect, this.scale);
 }
 
-/// Gememoiseerde split-run-schaal per slide. Een aparte cache naast
-/// [_fitScaleCache] omdat dit een ándere meting van dezelfde slide is: deze
-/// reserveert de logostrook, net als de live layout. Eén cache delen zou de twee
-/// waarden door elkaar halen, want slide en lettertype zijn voor beide gelijk.
-/// Het thema hoort daarom wél bij de sleutel — het bepaalt de logostrook.
-final Expando<_RunScaleMemo> _runScaleCache = Expando<_RunScaleMemo>(
-  'splitRunMemberScale',
-);
-
-class _RunScaleMemo {
-  final String font;
-  final ThemeProfile theme;
-  final double slideAspect;
-  final double scale;
-
-  const _RunScaleMemo(this.font, this.theme, this.slideAspect, this.scale);
-}
-
 /// Gememoiseerde per-slide issues plus alles waarvan de analyse afhangt, zodat
 /// een gewijzigd thema, lettertype, projectpad of contrastdrempel de cache
 /// laat missen. [theme] wordt op identiteit vergeleken (immutable model).
