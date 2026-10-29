@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:xml/xml.dart';
 
 import 'log.dart';
@@ -12,6 +15,31 @@ import 'log.dart';
 /// hier wegvalt, viel bij de renderer óók al weg.
 String? sanitizeMermaidSvg(String svg) {
   return _sanitizeSvg(svg, 'sanitizeMermaidSvg');
+}
+
+/// Validate and sanitise an SVG selected as a slide or Library image.
+///
+/// Unlike raster formats, SVG has no useful magic-byte signature: it is XML
+/// and may start with whitespace, a BOM or an XML declaration. Parsing the
+/// complete, size-bounded document is therefore its content check. The output
+/// contains only the root `<svg>` tree, so processing instructions, comments
+/// and a possible doctype do not travel into the deck.
+Uint8List? sanitizeImportedSvgBytes(List<int> bytes) {
+  if (bytes.isEmpty) return null;
+  final String source;
+  try {
+    source = utf8.decode(bytes);
+  } on FormatException catch (e) {
+    logWarning('sanitizeImportedSvgBytes: SVG is not UTF-8', e);
+    return null;
+  }
+  final safe = _sanitizeSvg(
+    source,
+    'sanitizeImportedSvgBytes',
+    allowExternalUrls: false,
+    allowEmbeddedPng: true,
+  );
+  return safe == null ? null : Uint8List.fromList(utf8.encode(safe));
 }
 
 /// Maximum stored size for a custom bullet SVG. Bullet artwork is deliberately
@@ -36,6 +64,7 @@ String? _sanitizeSvg(
   String svg,
   String logName, {
   bool allowExternalUrls = true,
+  bool allowEmbeddedPng = false,
 }) {
   if (svg.trim().isEmpty || !svg.contains('<svg')) return null;
 
@@ -54,7 +83,12 @@ String? _sanitizeSvg(
   }
 
   final dropped = _Dropped();
-  _keepOnlyAllowed(root, dropped, allowExternalUrls: allowExternalUrls);
+  _keepOnlyAllowed(
+    root,
+    dropped,
+    allowExternalUrls: allowExternalUrls,
+    allowEmbeddedPng: allowEmbeddedPng,
+  );
   if (!dropped.isEmpty) {
     // Geweigerd, niet stil verdwenen. Een allow-list die zwijgt is niet te
     // onderhouden: gaat Mermaid ooit iets uitsturen dat hier niet in staat, dan
@@ -150,6 +184,7 @@ void _keepOnlyAllowed(
   XmlElement element,
   _Dropped dropped, {
   required bool allowExternalUrls,
+  required bool allowEmbeddedPng,
 }) {
   for (final child in element.childElements.toList()) {
     if (!_allowedElements.contains(child.name.local)) {
@@ -160,13 +195,19 @@ void _keepOnlyAllowed(
       child.remove();
       continue;
     }
-    _keepOnlyAllowed(child, dropped, allowExternalUrls: allowExternalUrls);
+    _keepOnlyAllowed(
+      child,
+      dropped,
+      allowExternalUrls: allowExternalUrls,
+      allowEmbeddedPng: allowEmbeddedPng,
+    );
     if (_isEmptyDefs(child)) child.remove();
   }
   _keepOnlyAllowedAttributes(
     element,
     dropped,
     allowExternalUrls: allowExternalUrls,
+    allowEmbeddedPng: allowEmbeddedPng,
   );
 }
 
@@ -194,6 +235,7 @@ void _keepOnlyAllowedAttributes(
   XmlElement element,
   _Dropped dropped, {
   required bool allowExternalUrls,
+  required bool allowEmbeddedPng,
 }) {
   for (final attr in element.attributes.toList()) {
     if (_isNamespaceDeclaration(attr)) continue;
@@ -206,9 +248,16 @@ void _keepOnlyAllowedAttributes(
     // gelezen worden, niet wat erin staat, en `href` en `style` dragen allebei
     // iets wat op een URL lijkt.
     final value = attr.value.trim();
-    if (_hasUnsafeUrl(value) ||
+    final safeEmbeddedPng =
+        allowEmbeddedPng &&
+        element.name.local == 'image' &&
+        attr.name.local == 'href' &&
+        _isSafeEmbeddedPngDataUrl(value);
+    if ((!safeEmbeddedPng && _hasUnsafeUrl(value)) ||
         (!allowExternalUrls &&
-            ((attr.name.local == 'href' && !value.startsWith('#')) ||
+            ((attr.name.local == 'href' &&
+                    !value.startsWith('#') &&
+                    !safeEmbeddedPng) ||
                 _hasExternalUrlReference(value)))) {
       dropped.attributes++;
       element.attributes.remove(attr);
@@ -220,6 +269,121 @@ void _keepOnlyAllowedAttributes(
       if (cleaned != attr.value) attr.value = cleaned;
     }
   }
+}
+
+/// Whether [value] is a small, dimension-bounded PNG embedded in an SVG
+/// `<image>` element.
+///
+/// Inkscape and LibreOffice commonly save a raster logo inside an SVG wrapper.
+/// Rejecting every `data:` URL made those otherwise valid files import as an
+/// empty canvas. Keep this exception deliberately narrow: PNG only, base64
+/// only, at most 8 MiB decoded, and no dimension above 8192 pixels. Nested SVG,
+/// HTML and all other data URL types remain blocked by [_hasUnsafeUrl].
+bool _isSafeEmbeddedPngDataUrl(String value) {
+  return _decodeSafeEmbeddedPngDataUrl(value) != null;
+}
+
+Uint8List? _decodeSafeEmbeddedPngDataUrl(String value) {
+  final match = RegExp(
+    r'^data:image/png;base64,([A-Za-z0-9+/=\s]+)$',
+    caseSensitive: false,
+    dotAll: true,
+  ).firstMatch(value);
+  if (match == null) return null;
+  final payload = match.group(1)!.replaceAll(RegExp(r'\s'), '');
+  // Base64 expands input by roughly 4/3. Check before decoding so a very large
+  // attribute never needs a second equally large allocation.
+  const maxDecodedBytes = 8 * 1024 * 1024;
+  if (payload.length > ((maxDecodedBytes + 2) ~/ 3) * 4) return null;
+
+  final List<int> png;
+  try {
+    png = base64.decode(payload);
+  } on FormatException {
+    return null;
+  }
+  if (png.length < 24 || png.length > maxDecodedBytes) return null;
+  const signature = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
+  for (var i = 0; i < signature.length; i++) {
+    if (png[i] != signature[i]) return null;
+  }
+  // The first PNG chunk must be IHDR; its first eight bytes are width/height.
+  if (png[12] != 0x49 ||
+      png[13] != 0x48 ||
+      png[14] != 0x44 ||
+      png[15] != 0x52) {
+    return null;
+  }
+  int uint32(int offset) =>
+      (png[offset] << 24) |
+      (png[offset + 1] << 16) |
+      (png[offset + 2] << 8) |
+      png[offset + 3];
+  final width = uint32(16);
+  final height = uint32(20);
+  if (width <= 0 || width > 8192 || height <= 0 || height > 8192) {
+    return null;
+  }
+  return Uint8List.fromList(png);
+}
+
+/// Extract the image bytes when a sanitised SVG is only a wrapper around one
+/// embedded PNG.
+///
+/// Some Inkscape/LibreOffice exports use SVG purely as a positioned container
+/// for a base64 PNG. Feeding that wrapper to the vector compiler makes image
+/// decoding part of vector compilation and can leave the widget unresolved.
+/// Rendering the already validated PNG through Flutter's normal bounded raster
+/// path is both more reliable and visually equivalent. Mixed vector/raster SVGs
+/// return null and remain on the vector renderer.
+Uint8List? extractSoleEmbeddedPng(String sanitizedSvg) {
+  final XmlDocument document;
+  try {
+    document = XmlDocument.parse(sanitizedSvg);
+  } on XmlParserException {
+    return null;
+  }
+
+  XmlElement? image;
+  var hasOtherPaint = false;
+  const paintedElements = {
+    'circle',
+    'ellipse',
+    'line',
+    'path',
+    'polygon',
+    'polyline',
+    'rect',
+    'text',
+    'use',
+  };
+
+  void visit(XmlElement element) {
+    if (element.name.local == 'defs') return;
+    if (element.name.local == 'image') {
+      if (image != null) {
+        hasOtherPaint = true;
+      } else {
+        image = element;
+      }
+    } else if (paintedElements.contains(element.name.local)) {
+      hasOtherPaint = true;
+    }
+    for (final child in element.childElements) {
+      visit(child);
+    }
+  }
+
+  visit(document.rootElement);
+  if (image == null || hasOtherPaint) return null;
+  String? href;
+  for (final attribute in image!.attributes) {
+    if (attribute.name.local == 'href') {
+      href = attribute.value.trim();
+      break;
+    }
+  }
+  return href == null ? null : _decodeSafeEmbeddedPngDataUrl(href);
 }
 
 bool _hasExternalUrlReference(String value) {

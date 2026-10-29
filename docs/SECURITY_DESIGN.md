@@ -424,9 +424,15 @@ The HTML export is defence-in-depth against script injection in deck content:
   directives, HTML-comment and fence balance, unclosed images/`<video>`/`<audio>`,
   table separators, and embedded chart/cockpit JSON — flagging content that the
   parser would otherwise silently drop.
-- **Magic-byte image validation.** `ImageService.imageMimeFromBytes` sniffs
-  PNG/JPEG/GIF/BMP/WebP by signature bytes, not by file extension, and import is
-  size-capped (64 MiB image / 1 GiB media).
+- **Image content validation.** `ImageService.imageMimeFromBytes` sniffs
+  PNG/JPEG/GIF/BMP/WebP by signature bytes, not by file extension. SVG has no
+  fixed signature, so it is accepted only with an `.svg` name and a complete,
+  size-bounded XML parse; the same renderer-derived allow-list used for Mermaid
+  strips scripts, event handlers, animation and external URLs before the bytes
+  enter a deck or Library. A base64 PNG embedded by Inkscape/LibreOffice is the
+  sole `data:` exception: its signature, decoded size (at most 8 MiB) and pixel
+  dimensions (at most 8192 per edge) are validated first. Other `data:` payloads
+  remain blocked. Import is size-capped (64 MiB image / 1 GiB media).
 
 ### 6.1 The one non-memory-safe surface
 

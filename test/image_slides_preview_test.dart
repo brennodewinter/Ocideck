@@ -8,7 +8,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/asset_staging.dart';
+import 'package:ocideck/widgets/safe_svg_image.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
+import 'package:path/path.dart' as p;
 
 Future<File> _writeSolidPng(String dir, String name, Color color) async {
   final recorder = ui.PictureRecorder();
@@ -92,6 +95,45 @@ Future<void> _waitForImages(WidgetTester tester) async {
 }
 
 void main() {
+  testWidgets(
+    'een gestagede SVG rendert op een niet-opgeslagen Large Image-slide',
+    (tester) async {
+      final tmp = Directory.systemTemp.createTempSync('ocideck_staged_svg');
+      final stagingRoot = p.join(tmp.path, AssetStaging.rootDirName);
+      AssetStaging.overrideRootForTest(stagingRoot);
+      addTearDown(() {
+        AssetStaging.overrideRootForTest(null);
+        tmp.deleteSync(recursive: true);
+      });
+      final svg = File(p.join(stagingRoot, 'deck_1', 'images', 'vector.svg'));
+      svg.parent.createSync(recursive: true);
+      svg.writeAsStringSync(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">'
+        '<rect width="10" height="10" fill="#ff6600"/></svg>',
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 800,
+              height: 450,
+              child: SlidePreviewWidget(
+                slide: Slide.create(
+                  SlideType.image,
+                ).copyWith(imagePath: svg.path, imageSize: 100),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(SafeSvgImage), findsOneWidget);
+      expect(find.text('Buiten de presentatie'), findsNothing);
+    },
+  );
+
   // #1162 (beeldkeuring): de plaatshouder voor een ontbrekende afbeelding stond
   // op vaste lichtgrijze kleuren. Op een donkere dia was dat een fel blok midden
   // in het beeld — de zesde ontsnappingsroute langs de themaregel. Hij hoort met

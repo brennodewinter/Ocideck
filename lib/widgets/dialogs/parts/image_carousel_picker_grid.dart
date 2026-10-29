@@ -86,10 +86,11 @@ extension _CarouselGrid on _ImageCarouselPickerState {
               fit: StackFit.expand,
               children: [
                 // Thumbnail
-                Image(
-                  image: boundedFileImage(File(path), 360),
+                _libraryImage(
+                  path,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(
+                  maxEdge: 360,
+                  errorBuilder: (context) => Container(
                     color: ImagePickerPalette.surface1,
                     child: Icon(
                       Icons.broken_image_outlined,
@@ -326,10 +327,11 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image(
-                      image: boundedFileImage(File(path), 1000),
+                    _libraryImage(
+                      path,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
+                      maxEdge: 1000,
+                      errorBuilder: (context) => Container(
                         color: ImagePickerPalette.surface1,
                         child: Icon(
                           Icons.broken_image_outlined,

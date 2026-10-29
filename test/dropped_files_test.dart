@@ -40,7 +40,12 @@ void main() {
     });
 
     test('herkent afbeeldingen, ongeacht schrijfwijze', () {
-      for (final name in ['foto.PNG', 'plaat.jpeg', 'scan.tiff']) {
+      for (final name in [
+        'foto.PNG',
+        'plaat.jpeg',
+        'scan.tiff',
+        'vector.svg',
+      ]) {
         expect(droppedKind(name), DroppedKind.image, reason: name);
       }
     });

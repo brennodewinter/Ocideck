@@ -106,6 +106,7 @@ import '../reader/table_edit_controller.dart';
 import '../reader/table_editable_cell.dart';
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
 import '../privacy_badge.dart' show privacyKatSvg;
+import '../safe_svg_image.dart';
 import '../../utils/inline_markdown.dart';
 import 'inline_markdown.dart';
 import 'image_zoom_dialog.dart';

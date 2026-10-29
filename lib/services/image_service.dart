@@ -14,6 +14,7 @@ import '../utils/atomic_file.dart';
 import '../utils/image_signature.dart' as image_signature;
 import '../utils/log.dart';
 import '../utils/project_path.dart';
+import '../utils/sanitize_svg.dart';
 import 'asset_staging.dart';
 import 'caption_service.dart';
 import 'description_service.dart';
@@ -21,6 +22,8 @@ import 'image_sidecar_store.dart';
 import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 import '../utils/content_hash.dart';
+
+part 'image_service_svg.dart';
 
 /// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de overige redenen
@@ -93,10 +96,12 @@ class ImageService {
       final raf = await file.open();
       try {
         final head = await raf.read(16);
-        return _looksLikeImage(head);
+        if (_looksLikeImage(head)) return true;
       } finally {
         await raf.close();
       }
+      if (p.extension(path).toLowerCase() != '.svg') return false;
+      return await _sanitizedSvgBytesFromFile(file) != null;
     } catch (e) {
       logWarning('ImageService: image signature probe failed', e);
       return false;
@@ -233,25 +238,26 @@ class ImageService {
     // slide een mem:-pad (zie WebAssetStore).
     if (kIsWeb) {
       final file = await FilePicker.pickFile(
-        type: FileType.image,
+        type: FileType.custom,
+        allowedExtensions: supportedImageExtensions,
         dialogTitle: _d('Kies een afbeelding'),
       );
       if (file == null) {
         return const ImageImportOutcome.failed(ImageImportFailure.cancelled);
       }
       final bytes = await file.readAsBytes();
-      if (bytes.isEmpty ||
-          bytes.length > maxImageBytes ||
-          !_looksLikeImage(bytes)) {
+      final acceptedBytes = prepareImportedImageBytes(bytes, name: file.name);
+      if (acceptedBytes == null) {
         logWarning(
           'ImageService.pickImage: rejected (too large or not an image)',
         );
         return const ImageImportOutcome.failed(ImageImportFailure.rejected);
       }
-      return storeWebImage(bytes, name: file.name);
+      return storeWebImage(acceptedBytes, name: file.name);
     }
     final file = await FilePicker.pickFile(
-      type: FileType.image,
+      type: FileType.custom,
+      allowedExtensions: supportedImageExtensions,
       dialogTitle: _d('Kies een afbeelding'),
     );
     final path = file?.path;
@@ -264,10 +270,14 @@ class ImageService {
       );
       return const ImageImportOutcome.failed(ImageImportFailure.rejected);
     }
+    final safeSvg = p.extension(path).toLowerCase() == '.svg'
+        ? await sanitizedSvgFileBytes(path)
+        : null;
     final imported = await _importIntoProject(
       path,
       projectPath,
       subdir: 'images',
+      replacementBytes: safeSvg,
     );
     if (imported == null) {
       return const ImageImportOutcome.failed(ImageImportFailure.writeFailed);
@@ -469,9 +479,21 @@ class ImageService {
     String sourcePath, {
     String? projectPath,
     String subdir = 'images',
-  }) async =>
-      await _importIntoProject(sourcePath, projectPath, subdir: subdir) ??
-      sourcePath;
+  }) async {
+    final isSvg = p.extension(sourcePath).toLowerCase() == '.svg';
+    final safeSvg = isSvg ? await sanitizedSvgFileBytes(sourcePath) : null;
+    if (isSvg && safeSvg == null) {
+      logWarning('ImageService.importIntoDeck: invalid SVG rejected');
+      return sourcePath;
+    }
+    return await _importIntoProject(
+          sourcePath,
+          projectPath,
+          subdir: subdir,
+          replacementBytes: safeSvg,
+        ) ??
+        sourcePath;
+  }
 
   /// Of [path] binnen de importlimiet valt en werkelijk een rasterafbeelding
   /// is. De extensie zegt niets — een hernoemd script heet net zo makkelijk
@@ -483,14 +505,21 @@ class ImageService {
     String sourcePath,
     String? projectPath, {
     required String subdir,
+    Uint8List? replacementBytes,
   }) async {
     // Nog geen map op schijf: niet het bronpad onthouden (dat breekt zodra
     // iemand het bestand verplaatst), maar kopiëren naar de stagingmap, die
     // dezelfde indeling heeft als een echt project. Lukt zelfs dat niet, dan
     // is het bronpad nog altijd beter dan niets.
     if (projectPath == null || projectPath.isEmpty) {
-      final staged =
-          await AssetStaging.stage(sourcePath, subdir: subdir) ?? sourcePath;
+      final staged = replacementBytes == null
+          ? await AssetStaging.stage(sourcePath, subdir: subdir) ?? sourcePath
+          : await AssetStaging.stageBytes(
+                  replacementBytes,
+                  subdir: subdir,
+                  filename: p.basename(sourcePath),
+                ) ??
+                sourcePath;
       // De stagingmap heeft de indeling van een project — en dus ook zijn
       // sidecars. Tags meenemen voorkomt dat een getagde afbeelding die vóór de
       // eerste opslag wordt ingevoegd haar beschrijving onderweg verliest.
@@ -501,20 +530,26 @@ class ImageService {
     }
     final destDir = await createContainedProjectDirectory(projectPath, subdir);
     final normalized = p.normalize(sourcePath);
-    if (p.isWithin(projectPath, normalized)) {
+    if (replacementBytes == null && p.isWithin(projectPath, normalized)) {
       // Met '/' de deck in — zie de toelichting bij pasteImage hierboven.
       return p.relative(normalized, from: projectPath).replaceAll(r'\', '/');
     }
     final src = File(sourcePath);
     if (!await src.exists()) return null;
-    final dest = await resolveAssetDestination(
-      destDir,
-      p.basename(sourcePath),
-      src,
-    );
+    final dest = replacementBytes == null
+        ? await resolveAssetDestination(destDir, p.basename(sourcePath), src)
+        : await resolveAssetDestinationForBytes(
+            destDir,
+            p.basename(sourcePath),
+            replacementBytes,
+          );
     if (dest == null) return null;
     if (!dest.alreadyPresent) {
-      await src.copy(dest.file.path);
+      if (replacementBytes == null) {
+        await src.copy(dest.file.path);
+      } else {
+        await writeBytesAtomic(dest.file, replacementBytes);
+      }
     }
     if (subdir == 'images') {
       await migrateImageSidecars(src.path, dest.file.path);
@@ -708,8 +743,13 @@ class ImageService {
             entry.path,
             projectPath: p.dirname(imagesDir.path),
           );
-          if (bytes == null || !looksLikeImage(bytes)) continue;
-          final hash = sha256Hex(bytes);
+          if (bytes == null) continue;
+          final isSvg = p.extension(entry.path).toLowerCase() == '.svg';
+          final accepted = isSvg ? sanitizeImportedSvgBytes(bytes) : bytes;
+          if (accepted == null || (!isSvg && !looksLikeImage(accepted))) {
+            continue;
+          }
+          final hash = sha256Hex(accepted);
           final rel = 'images/${p.basename(entry.path)}';
           map.putIfAbsent(hash, () => rel);
         } on Object {
@@ -827,6 +867,19 @@ class ImageService {
         ? null
         : resolveContainedRealPath(sourcePath, sourceProjectPath);
     if (trustedSource == null) return null;
+    if (p.extension(trustedSource).toLowerCase() == '.svg') {
+      final safeBytes = await sanitizedSvgFileBytes(trustedSource);
+      if (safeBytes == null) return null;
+      final dest = await resolveAssetDestinationForBytes(
+        imagesDir,
+        p.basename(trustedSource),
+        safeBytes,
+      );
+      if (dest == null) return null;
+      if (!dest.alreadyPresent) await writeBytesAtomic(dest.file, safeBytes);
+      await migrateImageSidecars(trustedSource, dest.file.path);
+      return 'images/${p.basename(dest.file.path)}';
+    }
     return _copyInto(trustedSource, imagesDir, 'images');
   }
 
@@ -842,14 +895,24 @@ class ImageService {
     String memPath,
     Directory imagesDir, {
     Map<String, String>? existingByHash,
-  }) => _materializeMemAsset(
-    memPath,
-    imagesDir,
-    subdir: 'images',
-    fallbackName: 'afbeelding.png',
-    fallbackExtension: '.png',
-    existingByHash: existingByHash,
-  );
+  }) async {
+    final name = WebAssetStore.nameFor(memPath) ?? 'afbeelding.png';
+    final isSvg = p.extension(name).toLowerCase() == '.svg';
+    final rawBytes = WebAssetStore.bytesFor(memPath);
+    final safeBytes = isSvg && rawBytes != null
+        ? sanitizeImportedSvgBytes(rawBytes)
+        : null;
+    if (isSvg && safeBytes == null) return null;
+    return _materializeMemAsset(
+      memPath,
+      imagesDir,
+      subdir: 'images',
+      fallbackName: 'afbeelding.png',
+      fallbackExtension: '.png',
+      existingByHash: existingByHash,
+      replacementBytes: safeBytes,
+    );
+  }
 
   /// Schrijf een in-geheugen `mem:`-asset als echt bestand in [destDir] en geef
   /// het projectrelatieve pad terug.
@@ -866,8 +929,9 @@ class ImageService {
     required String fallbackName,
     required String fallbackExtension,
     Map<String, String>? existingByHash,
+    Uint8List? replacementBytes,
   }) async {
-    final bytes = WebAssetStore.bytesFor(memPath);
+    final bytes = replacementBytes ?? WebAssetStore.bytesFor(memPath);
     if (bytes == null) return null;
     // Cross-import dedup: als er al een bestand met dezelfde inhoud in de
     // projectmap staat (onder een andere naam), hergebruik het dan.

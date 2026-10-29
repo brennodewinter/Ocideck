@@ -1904,7 +1904,12 @@ zodat je ze tussen klussen door kunt opruimen zonder eerst een wegwerpdeck te op
 decks die in andere tabbladen open zijn worden nog steeds gerespecteerd, zodat een opschoning nooit hun
 verwijzingen breekt. *(Toegevoegd 2026-08-02.)*
 
-Ondersteunde formaten zijn PNG, JPEG, **GIF (inclusief geanimeerd)**, BMP en WebP.
+Ondersteunde formaten zijn PNG, JPEG, **GIF (inclusief geanimeerd)**, BMP, WebP en
+**SVG-vectorafbeeldingen**. SVG wordt bij import geparseerd en opgeschoond:
+scripts, eventhandlers, animatie en externe/data-URL's verdwijnen voordat het
+beeld het deck of de bibliotheek in gaat. SVG blijft vectorscherp in voorbeeld,
+presentatie en exports; de rastergebonden draai-/bijsnijknoppen worden daarom
+niet voor SVG getoond.
 Geanimeerde GIF's (en geanimeerde WebP) spelen af in het voorbeeld, de presentatie en het publieks-
 venster. Zeer grote afbeeldingen worden op een begrensd formaat gedecodeerd om geheugen te beschermen; een
 afbeelding binnen die grens — wat vrijwel alle animaties dekt — speelt op

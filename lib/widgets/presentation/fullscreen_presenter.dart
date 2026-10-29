@@ -59,6 +59,7 @@ import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
 import '../slides/previews/slide_preview_support.dart';
 import '../slides/slide_preview.dart';
+import '../safe_svg_image.dart';
 import '../dialogs/settings_dialog.dart';
 import '../markdown_editor/markdown_editor.dart';
 import 'annotation_overlay.dart';

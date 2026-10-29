@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/services/asset_staging.dart';
 import 'package:ocideck/utils/project_path.dart';
 import 'package:path/path.dart' as p;
 
@@ -39,8 +42,35 @@ void main() {
       expect(resolveSlideAssetPath(inside, project), p.normalize(inside));
     });
 
-    test('allows absolute paths when the deck is unsaved', () {
+    test('blocks arbitrary absolute paths when the deck is unsaved', () {
       expect(resolveSlideAssetPath('/tmp/pasted.png', null), isNull);
+    });
+
+    test('allows OciDeck-staged assets when the deck is unsaved', () {
+      final tmp = Directory.systemTemp.createTempSync('ocideck_resolve_stage');
+      addTearDown(() {
+        AssetStaging.overrideRootForTest(null);
+        tmp.deleteSync(recursive: true);
+      });
+      final stagingRoot = p.join(tmp.path, AssetStaging.rootDirName);
+      AssetStaging.overrideRootForTest(stagingRoot);
+      final staged = p.join(stagingRoot, 'deck_1', 'images', 'vector.svg');
+
+      expect(resolveSlideAssetPath(staged, null), p.normalize(staged));
+      expect(resolveSlideAssetPath(staged, ''), p.normalize(staged));
+    });
+
+    test('does not let a saved deck escape through the staging root', () {
+      final tmp = Directory.systemTemp.createTempSync('ocideck_saved_stage');
+      addTearDown(() {
+        AssetStaging.overrideRootForTest(null);
+        tmp.deleteSync(recursive: true);
+      });
+      final stagingRoot = p.join(tmp.path, AssetStaging.rootDirName);
+      AssetStaging.overrideRootForTest(stagingRoot);
+      final staged = p.join(stagingRoot, 'deck_1', 'images', 'vector.svg');
+
+      expect(resolveSlideAssetPath(staged, p.join(tmp.path, 'deck')), isNull);
     });
 
     test('blocks relative traversal for saved decks', () {

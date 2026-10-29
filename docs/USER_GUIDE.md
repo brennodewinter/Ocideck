@@ -1845,7 +1845,11 @@ so you can tidy them between jobs without first opening a throwaway deck. Any
 decks open in other tabs are still respected, so a clean-up never breaks their
 references. *(Added 2026-08-02.)*
 
-Supported formats are PNG, JPEG, **GIF (including animated)**, BMP and WebP.
+Supported formats are PNG, JPEG, **GIF (including animated)**, BMP, WebP and
+**SVG vector images**. SVG is parsed and sanitised on import: scripts, event
+handlers, animation and external/data URLs are removed before the image enters
+the deck or Library. SVG remains vector-sharp in previews, presenting and
+exports; raster-only rotation/crop controls are therefore not shown for it.
 Animated GIFs (and animated WebP) play in the preview, presentation and audience
 window. Very large images are decoded at a capped size to protect memory; a
 picture within that limit — which covers virtually all animations — plays at

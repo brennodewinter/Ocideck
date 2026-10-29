@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
+import '../services/asset_staging.dart';
+
 /// [resolveSlideAssetPath] plus a symlink check: resolves the real (symlink-
 /// followed) path and returns null if it escapes the project. This catches a
 /// symlink *inside* the project that points outside it — which the lexical
@@ -149,11 +151,12 @@ String? resolveSlideAssetPath(String path, String? projectPath) {
   if (kIsWeb) return null;
   if (path.trim().isEmpty) return null;
 
-  if (projectPath == null) {
-    // An unsaved deck has no trust boundary for local file reads. URL-backed
-    // relative assets are handled separately by resolveDeckAssetUrl; local
-    // absolute paths stay blocked until a project root is established.
-    return null;
+  if (projectPath == null || projectPath.isEmpty) {
+    // An unsaved deck may render only assets that OciDeck itself copied into
+    // its private staging root. Arbitrary absolute paths remain blocked: a
+    // recovered/untrusted deck must not turn the preview into a file reader.
+    // The staging path is replaced by a project-relative path on first save.
+    return AssetStaging.isStagedPath(path) ? p.normalize(path) : null;
   }
 
   if (p.isAbsolute(path)) {

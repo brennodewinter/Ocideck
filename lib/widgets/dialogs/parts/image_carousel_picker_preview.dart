@@ -336,10 +336,11 @@ Widget _fullscreenPreviewImage(
     Positioned.fill(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-        child: Image(
-          image: boundedFileImage(File(path), 720),
+        child: _libraryImage(
+          path,
           fit: BoxFit.contain,
-          errorBuilder: (context, error, stackTrace) => Center(
+          maxEdge: 720,
+          errorBuilder: (context) => Center(
             child: Icon(
               Icons.broken_image,
               color: ImagePickerPalette.border,
@@ -423,10 +424,11 @@ class _FullscreenCarouselState extends State<_FullscreenCarousel> {
                 },
                 itemBuilder: (_, page) => Padding(
                   padding: const EdgeInsets.all(48),
-                  child: Image(
-                    image: boundedFileImage(File(widget.paths[page]), 2560),
+                  child: _libraryImage(
+                    widget.paths[page],
                     fit: BoxFit.contain,
-                    errorBuilder: (_, _, _) => Icon(
+                    maxEdge: 2560,
+                    errorBuilder: (_) => Icon(
                       Icons.broken_image,
                       color: ImagePickerPalette.border,
                       size: 48,

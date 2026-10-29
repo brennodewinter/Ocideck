@@ -254,6 +254,25 @@ Widget _localFileImage(
   required Widget Function(Widget child) styled,
   required Widget Function(ImagePlaceholderReason reason) failed,
 }) {
+  if (isSvgImagePath(resolved)) {
+    return styled(
+      SafeSvgImage.file(
+        resolved,
+        projectPath: projectPath,
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        semanticLabel: semanticLabel,
+        errorBuilder: (_) => failed(ImagePlaceholderReason.missing),
+        errorBuilderWithCause: (_, error) => failed(
+          error is ProjectEscapeException
+              ? ImagePlaceholderReason.outsideDeck
+              : ImagePlaceholderReason.missing,
+        ),
+      ),
+    );
+  }
   final version = imageVersionOf(resolved);
   return ResolvedDecodeImage(
     explicitEdge: SlideLinkScope.decodeMaxEdgeOf(context),
@@ -307,6 +326,19 @@ Widget? _memoryImage(
   if (!WebAssetStore.isMemPath(imagePath)) return null;
   final memBytes = WebAssetStore.bytesFor(imagePath);
   if (memBytes == null) return failed(ImagePlaceholderReason.memoryGone);
+  if (isSvgImagePath(imagePath)) {
+    return styled(
+      SafeSvgImage.memory(
+        memBytes,
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        semanticLabel: semanticLabel,
+        errorBuilder: (_) => failed(ImagePlaceholderReason.missing),
+      ),
+    );
+  }
   return ResolvedDecodeImage(
     explicitEdge: SlideLinkScope.decodeMaxEdgeOf(context),
     imageFor: (plan) => cappedMemoryImage(memBytes, maxEdge: plan.edge),

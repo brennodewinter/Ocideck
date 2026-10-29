@@ -692,14 +692,14 @@ extension _CarouselActions on _ImageCarouselPickerState {
       return;
     }
     final picked = await FilePicker.pickFile(
-      type: FileType.image,
+      type: FileType.custom,
+      allowedExtensions: supportedImageExtensions,
       dialogTitle: l10n.d('Kies een afbeelding'),
     );
     final source = picked?.path;
     if (source == null || !mounted) return;
-    // De extensiefilter van de kiezer is ruimer dan wat de carousel toont
-    // (svg hoort daar niet bij); de magic-byte-controle dekt hernoemde
-    // niet-afbeeldingen. Beide grenzen zijn van de slide-import bekend.
+    // De inhoudscontrole dekt ook hernoemde niet-afbeeldingen. SVG heeft geen
+    // magic bytes en wordt daarom volledig geparseerd en opgeschoond.
     if (!_ImageCarouselPickerState._exts.contains(
           p.extension(source).toLowerCase(),
         ) ||
@@ -832,15 +832,30 @@ Future<String?> adoptImageFileIntoArchive(
   DescriptionService? descriptions,
   CaptionService? captions,
 }) async {
-  if (archiveRoots.any((r) => p.isWithin(r, src.path))) return src.path;
   try {
-    final resolved = await resolveAssetDestination(
-      dest,
-      p.basename(src.path),
-      src,
-    );
+    final isSvg = p.extension(src.path).toLowerCase() == '.svg';
+    final safeSvg = isSvg
+        ? await ImageService().sanitizedSvgFileBytes(src.path)
+        : null;
+    if (isSvg && safeSvg == null) return null;
+    if (!isSvg && archiveRoots.any((r) => p.isWithin(r, src.path))) {
+      return src.path;
+    }
+    final resolved = safeSvg == null
+        ? await resolveAssetDestination(dest, p.basename(src.path), src)
+        : await resolveAssetDestinationForBytes(
+            dest,
+            p.basename(src.path),
+            safeSvg,
+          );
     if (resolved == null) return null;
-    if (!resolved.alreadyPresent) await src.copy(resolved.file.path);
+    if (!resolved.alreadyPresent) {
+      if (safeSvg == null) {
+        await src.copy(resolved.file.path);
+      } else {
+        await writeBytesAtomic(resolved.file, safeSvg);
+      }
+    }
     await ImageService.migrateImageSidecars(
       src.path,
       resolved.file.path,
