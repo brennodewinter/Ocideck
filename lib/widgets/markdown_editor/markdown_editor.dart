@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import '../../theme/app_theme.dart';
 import 'package:flutter_quill/flutter_quill.dart';
@@ -295,7 +296,13 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (target == NotesEditorMode.visual && _quillController == null) {
       _openVisualEditor();
     } else if (target == NotesEditorMode.markdown && _quillController != null) {
-      _closeVisualEditor(flush: true);
+      // Sluiten flust uitstaande inhoud terug naar de controller; die notify
+      // mag niet binnen didUpdateWidget landen (een providerwijziging tijdens
+      // build). Eén frame later is het veilig (#2621).
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || _requestedMode != NotesEditorMode.markdown) return;
+        _closeVisualEditor(flush: true);
+      });
     }
     if (widget.controller.text != _markdownSnapshot &&
         !_syncingMarkdown &&
@@ -469,15 +476,6 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     );
     _focusNode.requestFocus();
     widget.onVisualCaret?.call(plain, vStart);
-  }
-
-  @override
-  void deactivate() {
-    // De rustpauze van #2621 kan ná de verdwijning van dit widget aflopen;
-    // wat dan nog uitstaat zou verloren gaan. Flushen terwijl de bronlezer
-    // nog leeft.
-    flushPendingVisualEdit();
-    super.deactivate();
   }
 
   @override
@@ -684,8 +682,17 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// moet kunnen afdwingen dat de bron vers is vóór hij leest (#2621). De
   /// [MarkdownSourceController] roept hem daarom bij elke `value`-lezing aan.
   void flushPendingVisualEdit() {
-    _visualSyncTimer?.cancel();
     if (!mounted || _syncingMarkdown || !_quillContentSyncPending) return;
+    // Een terugschrijf notificeert de controller, en luisteraars werken dan
+    // providers bij — dat mag niet terwijl de widgetboom bouwt (#2621).
+    // Lezers in een build (preview, EditableText) krijgen dan de vorige
+    // bronstand; de rustpauze-timer schrijft het echte verschil alsnog weg.
+    final phase = SchedulerBinding.instance.schedulerPhase;
+    if (phase == SchedulerPhase.persistentCallbacks ||
+        phase == SchedulerPhase.midFrameMicrotasks) {
+      return;
+    }
+    _visualSyncTimer?.cancel();
     _quillContentSyncPending = false;
     final quill = _quillController;
     if (quill == null) return;

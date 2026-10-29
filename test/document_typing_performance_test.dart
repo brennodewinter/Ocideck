@@ -48,21 +48,24 @@ void main() {
     tester,
   ) async {
     final notifier = await pumpLargeDocument(tester);
-    final before = tester.widget<MarkdownNotesEditor>(
-      find.byType(MarkdownNotesEditor),
-    );
+    final before = tester.state(find.byType(MarkdownNotesEditor));
     final quill = tester
         .widget<WysiwygNotesField>(find.byType(WysiwygNotesField))
         .controller;
 
     quill.replaceText(0, 0, 'x', const TextSelection.collapsed(offset: 1));
     await tester.pump();
+    // De Quill→Markdown-terugschrijf is vertraagd (#2621): laat de rustpauze
+    // aflopen zodat de bron de aanslag bevat.
+    await tester.pump(const Duration(milliseconds: 400));
 
     expect(notifier.currentState.document!.body, startsWith('xVoorwoord.'));
     expect(
-      tester.widget<MarkdownNotesEditor>(find.byType(MarkdownNotesEditor)),
+      tester.state(find.byType(MarkdownNotesEditor)),
       same(before),
-      reason: 'de providerupdate mag het hele schrijfvlak niet herbouwen',
+      reason:
+          'de providerupdate mag het schrijfvlak niet weggooien '
+          '(een nieuwe State zou inhoud, scroll en focus verliezen)',
     );
   });
 
@@ -83,6 +86,7 @@ void main() {
     raw.updateEditingValue(composing);
     raw.updateEditingValue(composing.copyWith(composing: TextRange.empty));
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
 
     expect(notifier.currentState.document!.body, startsWith('xVoorwoord.'));
     expect(notifier.currentState.document!.body, isNot(startsWith('xx')));
@@ -106,6 +110,7 @@ void main() {
       ),
     );
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
 
     expect(tester.takeException(), isNull);
     expect(quill.document.toPlainText(), endsWith('x\n'));
