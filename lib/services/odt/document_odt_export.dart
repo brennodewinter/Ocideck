@@ -16,10 +16,11 @@
 //   Pictures/image-N.ext  (afbeeldingen)
 
 import 'dart:convert';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 
 import '../../models/deck.dart' show TlpLevelX;
 import '../../models/settings.dart';
@@ -116,7 +117,11 @@ Future<Uint8List> buildDocumentExportOdt(
     archive.add(ArchiveFile.bytes('Pictures/${image.name}', image.bytes));
   }
 
-  return ZipEncoder().encodeBytes(archive);
+  // Dart-deflate over alle XML en afbeeldingen is CPU-werk van seconden op
+  // een groot document — niet op de UI-isolate. Het archief bouwen mag
+  // blijven waar het is: dat is geheugenwerk, geen compressie.
+  if (kIsWeb) return ZipEncoder().encodeBytes(archive);
+  return Isolate.run(() => ZipEncoder().encodeBytes(archive));
 }
 
 /// Eén afbeelding in de ODT-ZIP.

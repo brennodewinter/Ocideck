@@ -742,8 +742,9 @@ Future<DocumentExportOutcome> _writeDocumentExport(
   WidgetRef ref,
   BuildContext context,
   PrivacyExportProfile profile,
-  DocumentExportFormat format,
-) async {
+  DocumentExportFormat format, {
+  bool Function()? isCancelled,
+}) async {
   final state = ref.read(documentProvider);
   final document = state.document;
   if (document == null) return const DocumentExportCancelled();
@@ -873,6 +874,7 @@ Future<DocumentExportOutcome> _writeDocumentExport(
     outputPath: outputPath,
     sourcePath: filePath,
     webFileName: webFileName,
+    isCancelled: isCancelled,
   );
   return delivered;
 }

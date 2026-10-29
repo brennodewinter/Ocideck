@@ -25,10 +25,11 @@
 //   docProps/app.xml           (app-naam)
 
 import 'dart:convert';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 
 import '../../models/settings.dart';
 import '../document_export_service.dart' show projectedDocumentBodyForRendering;
@@ -160,7 +161,11 @@ Future<Uint8List> buildDocumentExportDocx(
     );
   }
 
-  return ZipEncoder().encodeBytes(archive);
+  // Dart-deflate over alle XML en media is CPU-werk van seconden op een groot
+  // document — niet op de UI-isolate. Het archief bouwen mag blijven waar het
+  // is: dat is geheugenwerk, geen compressie.
+  if (kIsWeb) return ZipEncoder().encodeBytes(archive);
+  return Isolate.run(() => ZipEncoder().encodeBytes(archive));
 }
 
 /// Het resultaat van de media-voorbereiding: de body met opgeloste sentinels,

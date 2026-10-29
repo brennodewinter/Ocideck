@@ -589,8 +589,14 @@ Future<void> _exportDocument(_DocumentEditorScreenState s) async {
   await DocumentExportDialog.show(
     s.context,
     privacyChecksEnabled: settings.privacyChecksEnabled,
-    onExport: (profile, format) =>
-        _writeDocumentExport(s.ref, s.context, profile, format),
+    onExport: (profile, format, {required isCancelled}) =>
+        _writeDocumentExport(
+          s.ref,
+          s.context,
+          profile,
+          format,
+          isCancelled: isCancelled,
+        ),
   );
 }
 

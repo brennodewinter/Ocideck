@@ -29,6 +29,30 @@ List<String>? _altTextsOf(ExportBundle? audience) => audience == null
               : calloutAltText(s.imageAltText, s.callouts),
       ];
 
+/// Draagt de gerasterde beelden over aan de werk-isolate **zonder te kopiëren**
+///
+/// `Isolate.run` kopieert de vastgelegde omgeving; een `List<Uint8List>` met
+/// 150 dia-foto's is dan honderden MB extra piekgeheugen bovenop de renders
+/// zelf. `TransferableTypedData.fromList` verhuist de buffer in plaats van te
+/// dupliceren — met de bijwerking dat de bron-lijst daarna leeg is. Dat is
+/// hier juist: [images] is één keer bruikbaar en de aanroeper gebruikt hem
+/// nergens anders meer.
+///
+/// Op web (geen isolates, `_offload` is `Future.sync`) blijft de lijst
+/// ongemoeid — daar geldt `null` en valt de kant op de originele lijst terug.
+List<TransferableTypedData>? _movedImages(List<Uint8List> images) => kIsWeb
+    ? null
+    : [
+        for (final png in images) TransferableTypedData.fromList([png]),
+      ];
+
+List<Uint8List> _receivedImages(
+  List<TransferableTypedData>? transfer,
+  List<Uint8List> fallback,
+) => transfer == null
+    ? fallback
+    : [for (final t in transfer) t.materialize().asUint8List()];
+
 /// De PPTX-bouw, van de switch afgehaald zodat [export] onder het
 /// methodeplafond blijft. Spreektekst en alt-tekst komen uit hetzelfde
 /// geprojecteerde deck.
@@ -37,16 +61,19 @@ Future<Uint8List> _buildPptx(
   required ExportDocumentMetadata metadata,
   required String fallbackTitle,
   required ExportBundle? audience,
-}) => ExportService._offload(
-  () => buildDeckExportPptx(
-    images,
-    metadata: metadata,
-    fallbackTitle: fallbackTitle,
-    notes: _notesOf(audience),
-    altTexts: _altTextsOf(audience),
-    slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
-  ),
-);
+}) {
+  final moved = _movedImages(images);
+  return ExportService._offload(
+    () => buildDeckExportPptx(
+      _receivedImages(moved, images),
+      metadata: metadata,
+      fallbackTitle: fallbackTitle,
+      notes: _notesOf(audience),
+      altTexts: _altTextsOf(audience),
+      slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
+    ),
+  );
+}
 
 /// De ODP-bouw. ODP kent geen notitieblad in deze export; alleen de
 /// alt-tekstsleuf reist mee.
@@ -55,15 +82,18 @@ Future<Uint8List> _buildOdp(
   required ExportDocumentMetadata metadata,
   required String fallbackTitle,
   required ExportBundle? audience,
-}) => ExportService._offload(
-  () => buildDeckExportOdp(
-    images: images,
-    metadata: metadata,
-    fallbackTitle: fallbackTitle,
-    altTexts: _altTextsOf(audience),
-    slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
-  ),
-);
+}) {
+  final moved = _movedImages(images);
+  return ExportService._offload(
+    () => buildDeckExportOdp(
+      images: _receivedImages(moved, images),
+      metadata: metadata,
+      fallbackTitle: fallbackTitle,
+      altTexts: _altTextsOf(audience),
+      slideAspect: slideAspectRatio(audience?.audience.deck.slideSize),
+    ),
+  );
+}
 
 Future<Uint8List> _buildPdf(
   List<Uint8List> images, {
@@ -72,6 +102,7 @@ Future<Uint8List> _buildPdf(
   bool compress = false,
   double slideAspect = kScreenSlideAspect,
 }) {
+  final moved = _movedImages(images);
   return ExportService._offload(() async {
     final doc = pw.Document(
       title: metadata.displayTitle(fallbackTitle),
@@ -83,7 +114,7 @@ Future<Uint8List> _buildPdf(
     );
     // Page size in points; only the ratio matters for a full-bleed image.
     final format = PdfPageFormat(1280, 1280 / slideAspect, marginAll: 0);
-    for (final png in images) {
+    for (final png in _receivedImages(moved, images)) {
       // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
       // compressed (JPEG) slide embeds just like the lossless one.
       final image = pw.MemoryImage(compress ? _toJpeg(png) : png);
