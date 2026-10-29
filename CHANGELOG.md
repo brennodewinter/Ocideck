@@ -8,6 +8,9 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.4] — 2026-10-29
+
+
 ### Added
 
 - **Logboek en diagnose op desktop (#2618).** Een release-build liet tot nu
